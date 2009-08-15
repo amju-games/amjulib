@@ -1,0 +1,4 @@
+CODE_DIR = ../..
+include ../../makefile_defs.mac
+include makefile.gen
+

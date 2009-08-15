@@ -1,0 +1,6 @@
+# Makefile for XML library
+CODE_DIR = ../..
+include $(CODE_DIR)/makefile_defs.w32
+include makefile.gen
+
+
