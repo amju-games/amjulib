@@ -1,5 +1,0 @@
-CODE_DIR = ../..
-include ../../makefile_defs.mac.ppc
-include makefile.gen 
-
-

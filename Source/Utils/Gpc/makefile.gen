@@ -1,9 +1,0 @@
-GPC_OBJECTS = \
-	Gpc$(DOT_O)
-
-libgpc$(DOT_A): $(GPC_OBJECTS)
-	$(BUILDSTATICLIB) $(GPC_OBJECTS)
-
-clean:
-	rm *$(DOT_O)
-
