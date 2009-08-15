@@ -40,7 +40,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../../amju/Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
 				Optimization="0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="false"
@@ -81,8 +81,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\Build\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Build\$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -104,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../../amju/Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
