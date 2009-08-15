@@ -70,6 +70,7 @@ bool SoundManager::PlaySong(const std::string& songFile)
   {
     return m_pImpl->PlaySong(songFile);
   }
+  return true;
 }
 
 void SoundManager::StopSong()
