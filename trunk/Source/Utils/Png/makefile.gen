@@ -1,0 +1,27 @@
+PNG_OBJECTS = \
+	png$(DOT_O) \
+	pngerror$(DOT_O) \
+	pnggccrd$(DOT_O) \
+	pngget$(DOT_O) \
+	pngmem$(DOT_O) \
+	pngpread$(DOT_O) \
+	pngread$(DOT_O) \
+	pngrio$(DOT_O) \
+	pngrtran$(DOT_O) \
+	pngrutil$(DOT_O) \
+	pngset$(DOT_O) \
+	pngtrans$(DOT_O) \
+	pngvcrd$(DOT_O) \
+	pngwio$(DOT_O) \
+	pngwrite$(DOT_O) \
+	pngwtran$(DOT_O) \
+	pngwutil$(DOT_O)
+	
+
+libpng$(DOT_A): $(PNG_OBJECTS)
+	$(BUILDSTATICLIB) $(PNG_OBJECTS)
+
+clean:
+	rm *$(DOT_O)
+
+

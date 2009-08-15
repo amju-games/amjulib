@@ -1,0 +1,4 @@
+CODE_DIR = ../..
+include ../../makefile_defs.w32
+include makefile.gen
+

@@ -1,0 +1,9 @@
+# Makefile for Utils
+CODE_DIR = ../..
+include $(CODE_DIR)/makefile_defs.mac
+include makefile.gen
+
+XmlTest:	XmlTestMain.o libxml.a
+	$(BUILDEXE) XmlTestMain.o libxml.a -lstdc++
+
+
