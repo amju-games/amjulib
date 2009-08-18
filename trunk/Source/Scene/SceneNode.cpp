@@ -168,6 +168,11 @@ bool SceneNode::Load(File* f)
   return true;
 }
 
+void SceneNode::MultLocalTransform(const Matrix& mat)
+{
+  m_local *= mat;
+}
+
 void SceneNode::SetLocalTransform(const Matrix& mat)
 {
   m_local = mat;
