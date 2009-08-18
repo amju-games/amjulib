@@ -68,6 +68,8 @@ bool SoundManager::PlaySong(const std::string& songFile)
 {
   if (m_song != songFile)
   {
+    StopSong();
+    m_song = songFile;
     return m_pImpl->PlaySong(songFile);
   }
   return true;
