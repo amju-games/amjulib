@@ -39,7 +39,12 @@ public:
   void SetParent(SceneNode*);
   SceneNode* GetParent();
 
+  // Overwrite existing transformation
   void SetLocalTransform(const Matrix& mat);
+
+  // Concatenate transform
+  void MultLocalTransform(const Matrix& mat);
+
   const Matrix& GetLocalTransform() const;
   const Matrix& GetCombinedTransform() const;
 
