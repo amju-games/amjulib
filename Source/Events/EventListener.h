@@ -83,7 +83,8 @@ struct RotationEvent
 // TODO other members - needs calibration, mass ?
 struct BalanceBoardEvent
 {
-  int x, y;
+  // Coords are -1..1 in x and y axes
+  float x, y;
 };
 
 class EventListener
