@@ -138,9 +138,25 @@ void EventPollerImplWii::Update(Listeners* pListeners)
         prevwby = wby;
 
         isBalanceEvent = true;
-        // coords are -1..1 ..?
-        bbe.x = (wbx + 30) * 10;
-        bbe.y = (wby + 30) * 8;
+        // get coords between -1..1 
+        bbe.x = (float)wbx / 30.0f; //(wbx + 30) * 10;
+        bbe.y = (float)wby / 30.0f; //(wby + 30) * 8;
+        if (bbe.x > 1.0f)
+        {
+          bbe.x = 1.0f;
+        }
+        if (bbe.x < -1.0f)
+        {
+          bbe.x = -1.0f;
+        }
+        if (bbe.y > 1.0f)
+        {
+          bbe.y = 1.0f;
+        }
+        if (bbe.y < -1.0f)
+        {
+          bbe.y = -1.0f;
+        }
       }
     }
 
