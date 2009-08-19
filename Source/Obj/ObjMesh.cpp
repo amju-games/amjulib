@@ -183,7 +183,13 @@ void ObjMesh::BuildGroup(Group& g)
         const Vec2f& vUV = m_uvs[uv];
 
         t.m_verts[j].m_u = vUV.x;
+        
+        // TODO!! UVs are upside-down - fix this!
+#ifdef GEKKO
+        t.m_verts[j].m_v = 1.0f - vUV.y;
+#else
         t.m_verts[j].m_v = vUV.y;
+#endif 
       }
 
       Assert(!m_points.empty());
