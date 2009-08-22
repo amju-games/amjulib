@@ -9,7 +9,7 @@ Added to repository
 #if ! defined(SCHMICKEN_SHARED_PTR_H_INCLUDED)
 #define SCHMICKEN_SHARED_PTR_H_INCLUDED
 
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 
 namespace Amju 
 {
