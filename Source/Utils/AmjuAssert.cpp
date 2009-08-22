@@ -60,4 +60,26 @@ void wiiAssert(const void* exp, const char* file, unsigned int line)
   }
 }
 #endif // GEKKO
+
+#if defined(_DEBUG) && defined(WIN32)
+
+void winAssert(const void* exp, const void* file, unsigned line)
+{
+  std::cout 
+    << "Assertion failed: "
+    << (const char *)exp
+    << std::endl
+    << "File: "
+    << (const char *)file
+    << " line: "
+    << line
+    << std::endl;
+
+  __asm
+  {
+    int 3 // break
+  }
+}
+#endif // _DEBUG & WIN32
+
 }

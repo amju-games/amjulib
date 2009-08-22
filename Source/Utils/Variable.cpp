@@ -18,7 +18,7 @@ Added to repository
 #include "AmjuFirst.h"
 #include "Variable.h"
 #include "StringUtils.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
