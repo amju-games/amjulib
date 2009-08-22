@@ -10,7 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <iostream>
 #include "OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
-#include "../Utils/SchAssert.h"
+#include "../Utils/AmjuAssert.h"
 #include "AmjuFinal.h"
 
 //#define SHADER_DEBUG
