@@ -26,7 +26,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "Endian.h"
 #include "StringUtils.h"
 #include "Vec3.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #ifdef USE_GL_COMMANDS
 #include "OpenGL.h"
 #endif
