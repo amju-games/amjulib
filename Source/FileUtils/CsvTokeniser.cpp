@@ -18,7 +18,7 @@ Added to repository
 #endif
 
 #include "CsvTokeniser.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "StringUtils.h"
 #include "AmjuFinal.h"
 

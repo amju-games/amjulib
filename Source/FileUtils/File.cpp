@@ -19,7 +19,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "Endian.h"
 #include "StringUtils.h"
 #include "Localise.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 using namespace std;

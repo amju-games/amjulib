@@ -21,7 +21,7 @@ Added to repository
 #endif
 
 #include "FileImplGlue.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju

@@ -19,7 +19,7 @@ Added to repository
 
 #include "Tokeniser.h"
 #include "File.h" 
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "StringUtils.h"
 #include "AmjuFinal.h"
 
