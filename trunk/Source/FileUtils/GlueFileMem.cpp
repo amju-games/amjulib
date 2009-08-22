@@ -29,7 +29,7 @@ Added to repository
 #include <iostream>
 #include "GlueFileMem.h"
 #include "FileSize.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 using namespace std;
