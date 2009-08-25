@@ -702,6 +702,14 @@
 			Name="Scene"
 			>
 			<File
+				RelativePath="..\..\..\Source\Scene\Billboard.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Scene\Billboard.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\Scene\SceneGameObject.cpp"
 				>
 			</File>
