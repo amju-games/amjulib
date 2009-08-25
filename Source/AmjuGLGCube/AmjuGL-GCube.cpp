@@ -609,19 +609,43 @@ void AmjuGLGCube::GetMatrix(AmjuGL::MatrixMode m, float result[16])
     return;
   }
 
-  // TODO memcpy s_mstack[m]
-
   switch (m)
   {
   case AmjuGL::AMJU_MODELVIEW_MATRIX:
-    //glGetFloatv(GL_MODELVIEW_MATRIX, result);
+    // This should be equivalent to glGetFloatv(GL_MODELVIEW_MATRIX, result);
+    result[0] = s_modelviewMatrix[0][0];
+    result[1] = s_modelviewMatrix[1][0];
+    result[2] = s_modelviewMatrix[2][0];
+    result[3] = 0;
+
+    result[4] = s_modelviewMatrix[0][1];
+    result[5] = s_modelviewMatrix[1][1];
+    result[6] = s_modelviewMatrix[2][1];
+    result[7] = 0;
+
+    result[8] = s_modelviewMatrix[0][2];
+    result[9] = s_modelviewMatrix[1][2];
+    result[10]= s_modelviewMatrix[2][2];
+    result[11]= 0;
+
+    result[12]= s_modelviewMatrix[0][3];    
+    result[13]= s_modelviewMatrix[1][3];
+    result[14]= s_modelviewMatrix[2][3];
+    result[15]= 1.0f;
+
     return;
+
   case AmjuGL::AMJU_PROJECTION_MATRIX:
-    //glGetFloatv(GL_PROJECTION_MATRIX, result);
+    // This should be equivalent to glGetFloatv(GL_PROJECTION_MATRIX, result);
+
+    // memcpy(dest, src, size)
+    memcpy(result, s_projMatrix, 16*sizeof(float));
     return;
+
   case AmjuGL::AMJU_TEXTURE_MATRIX:
-    // Allowed ?
+    // TODO 
     //glGetFloatv(GL_TEXTURE_MATRIX, result);
+    Assert(0);
     return;
   }
 }
