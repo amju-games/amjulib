@@ -14,7 +14,9 @@ class File;
 class SceneNode;
 typedef RCPtr<SceneNode> PSceneNode;
 
-// This base class has children - so not really Composite pattern here.
+// This Scene Graph is based on the design in "Game Coding Complete".
+// This base class has children - not Composite pattern.
+// We can instantiate the base class to use as a container of children.
 class SceneNode : public RefCounted
 {
 public:
