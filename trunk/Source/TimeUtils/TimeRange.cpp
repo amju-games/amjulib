@@ -30,7 +30,7 @@ Added to Uptime Overlord project
 #include "AmjuFirst.h"
 #include "TimeRange.h"
 #include "AmjuTime.h"
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
