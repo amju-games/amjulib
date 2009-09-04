@@ -87,16 +87,21 @@ void EventPollerImplWii::Update(Listeners* pListeners)
       ce.y = ir.y;
     }
 
-    RotationEvent re;
-    re.controller = ctr;
-    bool isRotationEvent = false;
-
-    // Rotation Event ?
-    // TODO Only when values change
-    isRotationEvent = true;
-    re.axis = AMJU_AXIS_Z;
-    re.degs = -orient.roll;
-    
+    RotationEvent re[3];
+    bool isRotEvent[3] = { false, false, false };
+    static float oldDegs[3] = { 0, 0, 0 };
+    for (int i = 0; i < 3; i++)
+    {
+      float degs = (i == 0) ? orient.pitch : ((i == 1) ? orient.yaw : -orient.roll);
+      if (degs != oldDegs[i])
+      {
+        oldDegs[i] = degs;
+        re[i].controller = ctr;
+        isRotEvent[i] = true;
+        re[i].axis = (Axis)i;
+        re[i].degs = degs;
+      }
+    }
     
     BalanceBoardEvent bbe;
     bool isBalanceEvent = false;
@@ -209,11 +214,14 @@ void EventPollerImplWii::Update(Listeners* pListeners)
         e->OnCursorEvent(ce);
       }
       
-      if (isRotationEvent)
+      for (int i = 0; i < 3; i++)
       {
-        e->OnRotationEvent(re);
+        if (isRotEvent[i])
+        {
+          e->OnRotationEvent(re[i]);
+        }
       }
-      
+
       if (isJoyEvent)
       {
         e->OnJoyAxisEvent(je);
