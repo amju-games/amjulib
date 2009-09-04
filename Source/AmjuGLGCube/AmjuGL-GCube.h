@@ -127,11 +127,12 @@ private:
   // Store texture data, free it when we are done with texture object
   struct TexData
   {
-    GXTexObj* gxTexObj;
-    uint32* data; // free when texture object destroyed
+    TexData() : m_texObj(0), m_data(0) {}
+    TexData(GXTexObj* texObj, unsigned char* data) : m_texObj(texObj), m_data(data) {} 
+    GXTexObj* m_texObj;
+    unsigned char* m_data; // free when texture object destroyed
   };
-  // TODO use above struct
-  typedef std::map<int, GXTexObj*> Textures;
+  typedef std::map<int, TexData> Textures;
   Textures m_textures;
 
 }; // class AmjuGLGCube
