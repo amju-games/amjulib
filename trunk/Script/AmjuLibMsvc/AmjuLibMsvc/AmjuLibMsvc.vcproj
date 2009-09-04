@@ -710,14 +710,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Source\Scene\SceneGameObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\Source\Scene\SceneGameObject.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\Source\Scene\SceneGraph.cpp"
 				>
 			</File>
@@ -759,6 +751,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\Resource\AlphaBmpLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Resource\BinaryResource.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Resource\BinaryResource.h"
 				>
 			</File>
 			<File
