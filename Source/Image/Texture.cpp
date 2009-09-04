@@ -44,10 +44,6 @@ bool Texture::Load(const std::string& filename)
     return false;
   }
 
-  // Need to flip upside-down for Wii, but not windows (Why?)
-  // So do this in graphics-platform-specific texture code
-  //FlipBmp(data, w, h);
-
   Create(data, w, h, 3); // 3 bytes per pixel
   delete [] data;
   return true;
