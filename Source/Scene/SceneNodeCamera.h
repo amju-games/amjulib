@@ -10,7 +10,10 @@ class SceneNodeCamera : public SceneNode
 public:
   SceneNodeCamera();
   virtual void Draw();
-  virtual void Update() = 0;
+
+  void SetEyePos(const Vec3f&);
+  void SetLookAtPos(const Vec3f&);
+  void SetUpVec(const Vec3f&);
 
 protected:
   Vec3f m_eye;
