@@ -368,6 +368,7 @@ bool Md2Model::Load(File* pfile)
 
   unsigned int i = 0;
 
+#ifdef LOAD_TRIANGLES
   // Read triangles.
   // (We only need them if we create our own normals.)
   // We need these to save this object back to a file, too.
@@ -393,6 +394,7 @@ bool Md2Model::Load(File* pfile)
     tri.Endianize();
     m_triangles.push_back(tri);
   }
+#endif // LOAD_TRIANGLES
 
 #if defined(USE_GL_COMMANDS) || defined(USE_MODIFIED_GL_COMMANDS)
   // Read OpenGL commands
@@ -438,11 +440,11 @@ bool Md2Model::Load(File* pfile)
     frame2_t fileframe;
 
     unsigned int bytes = f.GetBinary(sizeof(frame2_t), (unsigned char*)&fileframe);
-	Assert(bytes == sizeof(frame2_t));
-	fileframe.Endianize();
+    Assert(bytes == sizeof(frame2_t));
+    fileframe.Endianize();
 
     name = fileframe.name;
-	
+
     // Strip off any numbers. These can change with every frame, e.g. "stand01",
     // "stand02". We just want to know when the name changes (e.g. "stand").
     name.erase(std::remove_if(name.begin(), name.end(), myisdigit), name.end());
@@ -512,11 +514,8 @@ bool Md2Model::Load(File* pfile)
       z = -temp;
      
       // Scale coordinates to fit.
-      // POOL: It seems that the simplest way to fix the scale mismatch between
-      // the characters and the balls/table, is to make the characters
-      // A LOT BIGGER.
-		static const float SCALE = 1.0f; //Engine::Instance()->GetConfigFloat("pool_char_scale");
-		static const float FLOOR = 0; //Engine::Instance()->GetConfigFloat("pool_char_floor"); 
+      static const float SCALE = 1.0f; 
+      static const float FLOOR = 0; 
       x = x * SCALE;
       y = y * SCALE;
       z = z * -SCALE;
@@ -749,8 +748,6 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
   const Frame& nextFrame = m_frames[frame2]; 
   uint32* glcs = (uint32*)m_glCommands;
 
-  AmjuGL::Tris tris;
-  
   while (1)
   {
     // Get the command. The sign is used to flag FAN or STRIP. The abs value
@@ -775,8 +772,8 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
     }
 
     // Create a list of tris for the current command 
-    tris.reserve(numTris);
-    tris.clear();
+    m_tris.reserve(numTris);
+    m_tris.clear();
 
     glcs++;
 
@@ -798,12 +795,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
       Md2Vertex vm3;
       Interpolate(vm1, vm2, between, &vm3);
 
-      // TODO Don't do this!
-#ifdef GEKKO
-      AmjuGL::Vert av(vm3.m_pos[0], vm3.m_pos[1], vm3.m_pos[2], vert->s, -vert->t,  0, 1, 0); 
-#else
       AmjuGL::Vert av(vm3.m_pos[0], vm3.m_pos[1], vm3.m_pos[2], vert->s, vert->t,  0, 1, 0); 
-#endif
 
       if (isStrip)
       {
@@ -815,7 +807,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[even ? 0 : 1]; 
           t.m_verts[1] = prevVerts[even ? 1 : 0]; 
           t.m_verts[2] = av; 
-          tris.push_back(t);
+          m_tris.push_back(t);
         }
 
         // Shift previous values
@@ -836,7 +828,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[0]; 
           t.m_verts[1] = prevVerts[1]; 
           t.m_verts[2] = av; 
-          tris.push_back(t);
+          m_tris.push_back(t);
         }
         prevVerts[1] = av;
       }
@@ -863,7 +855,7 @@ for (int i = 0; i < numTris; i++)
 }
 */
 
-    AmjuGL::DrawTriList(tris);
+    AmjuGL::DrawTriList(m_tris);
   } // while (1)
 #endif // USE_MODIFIED_GL_COMMANDS
 
@@ -892,7 +884,6 @@ for (int i = 0; i < numTris; i++)
   }  
 
   // Draw the triangles, looking up each vertex in interpVerts.
-  AmjuGL::Tris tris;
 
   int numTris = m_triangles.size();
   for (int j = 0; j < numTris; j++)
@@ -1001,8 +992,8 @@ void Md2Model::EndianizeGlCommands()
 
       // NB We must invert the t- texture coord. Are .BMP files upside down 
       // compared to .RAW files ?? Yark.
-      vert->s = Endian(vert->s); // ENDIAN FIX
-      vert->t = -Endian(vert->t); // ENDIAN FIX
+      vert->s = Endian(vert->s); 
+      vert->t = 1.0f - Endian(vert->t); 
     }
   }
 }
