@@ -7,6 +7,7 @@ namespace Amju
 Billboard::Billboard()
 {
   m_size = 0;
+  SetBlended(true);
 }
 
 bool Billboard::Load(File* f)
@@ -37,19 +38,27 @@ void Billboard::Draw()
   }
 
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::PushMatrix();
+  AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
   AmjuGL::DrawTriList(m_tris);
+  AmjuGL::PopMatrix();
 }
 
 void Billboard::Update()
 {
   Matrix mat;
   mat.ModelView(); // Get Modelview matrix
+  mat *= m_combined;
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
 
   m_tris.resize(2);
-  Vec3f pos(m_local[12], m_local[13], m_local[14]); // not combined, right ?
+
+  // TODO check this
+  Vec3f pos(0, 0, 0); // -- we mult by m_combined in Draw()
+   // NOT: m_local[12], m_local[13], m_local[14]); // not combined, right ?
+
   Vec3f v0 = pos + ( up + right) * m_size;
   Vec3f v1 = pos + ( up - right) * m_size;
   Vec3f v2 = pos + (-up - right) * m_size;
