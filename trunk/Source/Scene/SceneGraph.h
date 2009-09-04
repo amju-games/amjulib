@@ -1,7 +1,6 @@
 #ifndef SCENE_GRAPH_H
 #define SCENE_GRAPH_H
 
-#include "Singleton.h"
 #include "SceneNode.h"
 
 namespace Amju
@@ -13,9 +12,8 @@ public:
 
   enum GraphType 
   { 
-    AMJU_CAMERA, 
+//    AMJU_CAMERA, 
     AMJU_OPAQUE,
-//    AMJU_BLENDED, 
     AMJU_SKYBOX,
     AMJU_MAX_GT
   };
@@ -23,15 +21,25 @@ public:
   void SetRootNode(GraphType, PSceneNode root);
   PSceneNode GetRootNode(GraphType);
 
+  void SetCamera(PSceneNode cameraNode);
+  PSceneNode GetCamera();
+
   void Clear();  
 
   void Draw();
-  void Update(); // ???
+  void Update();
 
   void AddBlendNode(PSceneNode);
 
 private:
-  // TODO array of nodes, for multiple passes ?
+  void DrawNode(SceneNode* p);
+  void DrawChildren(SceneNode* p);
+
+  void UpdateNode(SceneNode* p);
+  void UpdateChildren(SceneNode* p);
+
+private:
+  // Array of nodes, for multiple passes ?
   PSceneNode m_root[AMJU_MAX_GT];
 
   // Pointer to the camera node
@@ -41,19 +49,13 @@ private:
   struct BlendNode
   {
     PSceneNode m_sceneNode;
-    // Matrix m_combined; // in scene node
     float m_screenZ;
 
-    bool operator<(const BlendNode& bn) const
-    {
-      return m_screenZ < bn.m_screenZ;
-    }
+    bool operator<(const BlendNode& bn) const;
   };
   typedef std::vector<BlendNode> BlendNodes;
   BlendNodes m_blendNodes;
 };
-
-typedef Singleton<SceneGraph> TheSceneGraph;
 }
 
 #endif
