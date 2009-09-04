@@ -5,7 +5,21 @@ namespace Amju
 {
 SceneNodeCamera::SceneNodeCamera()
 {
+}
 
+void SceneNodeCamera::SetEyePos(const Vec3f& eye)
+{
+  m_eye = eye;
+}
+
+void SceneNodeCamera::SetLookAtPos(const Vec3f& lookat)
+{
+  m_lookat = lookat;
+}
+
+void SceneNodeCamera::SetUpVec(const Vec3f& up)
+{
+  m_up = up;
 }
 
 void SceneNodeCamera::Draw()
