@@ -9,6 +9,8 @@ namespace Amju
 {
 const char* SceneNode::NAME = "comp";
 
+SceneNode* SceneNode::Create() { return new SceneNode; }
+
 PSceneNode LoadScene(const std::string& filename)
 {
   File f;
@@ -47,6 +49,16 @@ SceneNode::SceneNode()
   SetCollidable(true);
 }
 
+void SceneNode::SetColour(const Colour& colour)
+{
+  m_colour = colour;
+}
+
+AABB* SceneNode::GetAABB()
+{
+  return &m_aabb;
+}
+
 SceneNode* SceneNode::GetParent()
 {
   return m_parent;
@@ -55,59 +67,6 @@ SceneNode* SceneNode::GetParent()
 void SceneNode::SetParent(SceneNode* p)
 {
   m_parent = p;
-}
-
-void SceneNode::UpdateChildren()
-{
-  unsigned int s = m_children.size();
-  for (unsigned int i = 0; i < s; i++)
-  {
-    PSceneNode& p = m_children[i];
-    p->Update();
-    p->UpdateChildren();
-  }  
-}
-
-void SceneNode::DrawChildren()
-{
-  /*
-  // If this node is a camera, set the SceneGraph current camera to this..?
-  if (IsCamera())
-  {
-    TheSceneGraph::Instance()->SetCurrentCamera(this);
-  }
-  */
-
-  BeforeDraw(); // ??
-
-  AmjuGL::PushMatrix();
-  AmjuGL::MultMatrix(m_local);
-
-  unsigned int s = m_children.size();
-  for (unsigned int i = 0; i < s; i++)
-  {
-    PSceneNode& p = m_children[i];
-    if (p->IsBlended())
-    {
-      // Add to blend list
-      TheSceneGraph::Instance()->AddBlendNode(p);
-    }
-    //else if (p->IsCamera())
-    //{
-    //  // Do nothing, we draw it first, right ?
-    //  // TODO What about multiple cameras ?
-    //}
-    else
-    {
-      p->Draw();
-    }
-    
-    p->DrawChildren();
-  }  
-
-  AmjuGL::PopMatrix();
-
-  AfterDraw();
 }
 
 void SceneNode::UpdateBoundingVol()
@@ -123,6 +82,7 @@ void SceneNode::UpdateBoundingVol()
 
 void SceneNode::AddChild(PSceneNode node)
 {
+  Assert(node);
   node->SetParent(this);
   m_children.push_back(node);
 }

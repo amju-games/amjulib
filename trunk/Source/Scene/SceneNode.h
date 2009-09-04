@@ -7,12 +7,14 @@
 #include "Factory.h"
 #include "Singleton.h"
 #include "AABB.h"
+#include "Colour.h"
 
 namespace Amju
 {
 class File;
 class SceneNode;
 typedef RCPtr<SceneNode> PSceneNode;
+class SceneGraph;
 
 // This Scene Graph is based on the design in "Game Coding Complete".
 // This base class has children - not Composite pattern.
@@ -21,20 +23,16 @@ class SceneNode : public RefCounted
 {
 public:
   static const char* NAME;
+  static SceneNode* Create();
 
   SceneNode();
   virtual ~SceneNode() {}
   virtual void Update() {}
-  virtual void Draw() {};
+  virtual void Draw() {}
   virtual bool Load(File*);
   virtual void CombineTransform();
   virtual void UpdateBoundingVol();
 
-  // Called from SceneGraph::Draw()
-  virtual void DrawChildren();
-  virtual void UpdateChildren();
-
-  // Called from DrawChildren()
   virtual void BeforeDraw() {}
   virtual void AfterDraw() {}
 
@@ -63,6 +61,10 @@ public:
 
   void AddChild(PSceneNode node);
 
+  AABB* GetAABB();
+
+  void SetColour(const Colour& colour);
+
 protected:
   // Subclasses call this
   bool LoadMatrix(File* f);
@@ -71,11 +73,14 @@ protected:
   bool LoadChildren(File* f);
 
 protected:
+  friend class SceneGraph; // ???
+
   Matrix m_local;
   Matrix m_combined;
   SceneNode* m_parent;
   AABB m_aabb;
   uint32 m_flags;
+  Colour m_colour;
 
   typedef std::vector<PSceneNode> Nodes;
   Nodes m_children;
