@@ -23,7 +23,7 @@ void Game::Draw()
 {
 	// TODO We need to be able to get the preferred/allowed viewport dimensions ?!
 	// x, y, w, h -- w and h are full screen if zero
-	AmjuGL::Viewport(0, 0, 0, 0);
+  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
     
   // Set perspective 
   // TODO We need to be able to get the viewport dimensions ?!
@@ -80,14 +80,6 @@ void Game::Run()
     Update();
 
     AmjuGL::Flip(); 
-  }
-}
-
-void Game::DrawGameObjects()
-{
-  for (GameObjects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
-  {
-    it->second->Draw();
   }
 }
 

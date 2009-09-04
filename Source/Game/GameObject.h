@@ -20,8 +20,10 @@ public:
 
   virtual void Update();
 
-  virtual void Draw();
-  virtual void DrawBlended();
+  // TODO
+  // Now we don't do this, we just draw the SceneGraph
+//  virtual void Draw();
+//  virtual void DrawBlended();
 
   virtual bool Load(File*); // Loads ID
   virtual void Reset() {}
@@ -37,14 +39,15 @@ public:
   const Vec3f& GetVel() const;
   const Vec3f& GetAcc() const;
 
-  const AABB& GetAABB() const; 
+  // GameObjects may have a bounding box
+  virtual AABB* GetAABB() { return 0; } 
 
 protected:
   int m_id;
   Vec3f m_pos;
   Vec3f m_vel;
   Vec3f m_acc;
-  AABB m_aabb; // all Game Objects have a bounding box
+//  AABB m_aabb; // all Game Objects have a bounding box
 };
 typedef RCPtr<GameObject> PGameObject;
 }

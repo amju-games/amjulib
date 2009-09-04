@@ -16,8 +16,6 @@ void GameObject::Update()
   m_vel += m_acc * dt;
   Vec3f tr = (old + m_vel) * (dt * 0.5f); 
   m_pos += tr;
-
-  m_aabb.Translate(tr);
 }
 
 void GameObject::SetPos(const Vec3f& v)
@@ -48,19 +46,6 @@ const Vec3f& GameObject::GetVel() const
 const Vec3f& GameObject::GetAcc() const
 {
   return m_acc;
-}
-
-const AABB& GameObject::GetAABB() const
-{
-  return m_aabb;
-}
-
-void GameObject::Draw()
-{
-}
-
-void GameObject::DrawBlended()
-{
 }
 
 bool GameObject::Load(File* f)
