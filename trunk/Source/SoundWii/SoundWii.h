@@ -2,7 +2,7 @@
 #define SOUND_WII_H
 
 #include "SoundPlayerImpl.h"
-#include "ResourceFile.h"
+#include "BinaryResource.h"
 
 namespace Amju
 {
@@ -19,7 +19,7 @@ public:
   virtual void SetSongMaxVolume(float f);
   
 private:
-  RCPtr<ResourceFile> m_songData;  
+  RCPtr<BinaryResource> m_songData;  
 };
 }
 
