@@ -1,3 +1,4 @@
+#include <iostream>
 #include <gcmodplay.h>
 #include <asndlib.h> 
 #include "SoundWii.h"
@@ -19,17 +20,20 @@ SoundWii::~SoundWii()
 
 bool SoundWii::PlayWav(const std::string& wavFile, float volume)
 {
-  // TODO Free old buffer
+  // TODO 
+  // Buffers are kept in memory until Resource Manager trashes them - so we
+  // should inc the ref count here, then dec the count when we finish playing
+  // the sound.
+  // OR Have a resource group for wavs so we know that won't happen.
 
   // Use raw sound data file, ending .snd
   // Save data as 16 bit signed big endian stereo
   // (Use GoldWave, www.goldwave.com)
-  std::string filename = File::GetRoot() + "sound/" + wavFile + ".snd";
+  std::string filename = "sound/" + wavFile + ".snd";
 
   // TODO The resource could go away while still be played.
-  // Have a resource group for wavs so we know that won't happen.
-  ResourceFile* res = (ResourceFile*)TheResourceManager::Instance()->
-    GetRes(filename, &ResourceFileLoader);
+  BinaryResource* res = (BinaryResource*)TheResourceManager::Instance()->
+    GetRes(filename);
 
   s32 voice1 = SND_GetFirstUnusedVoice();
 
@@ -50,21 +54,26 @@ bool SoundWii::PlayWav(const std::string& wavFile, float volume)
 
 bool SoundWii::PlaySong(const std::string& songFile)
 {
-  std::string filename = File::GetRoot() + "sound/" + songFile;
+  std::string filename = "sound/" + songFile;
 
-  m_songData = (ResourceFile*)TheResourceManager::Instance()->
-    GetRes(filename, &ResourceFileLoader);
+  m_songData = (BinaryResource*)TheResourceManager::Instance()->
+    GetRes(filename);
+
+  if (!m_songData)
+  {
+    return false;
+  }
 
   MODPlay_SetMOD(&play, m_songData->GetData()); 
   MODPlay_Start(&play);
-  
+
   return true;
 }
 
 void SoundWii::StopSong()
 {
   MODPlay_Stop(&play);
-  
+
   // Soung data is resource, managed by ResourceManager
   // TODO Give ResourceManager a hint that we have finished with data
 }
