@@ -3,10 +3,6 @@ Amju Games source code (c) Copyright Jason Colman 2004
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
-
 #include "Matrix.h"
 #include "Common.h"
 #include "AmjuGL.h"

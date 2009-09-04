@@ -6,7 +6,6 @@ Amju Games source code (c) Copyright Jason Colman 2004-2009
 #define MATRIX_H_INCLUDED
 
 #include "Vec3.h"
-#include <iostream>
 
 namespace Amju
 {
@@ -51,20 +50,12 @@ public:
     friend Matrix operator*(const Matrix& m, const Matrix& n);
     Matrix& operator*=(const Matrix& n);
 
-    //friend Matrix operator-(const Matrix& m, const Matrix& n);
-
     friend Vec3f operator*(const Vec3f& p, const Matrix& m);
 
-//    float at(int row, int col) const { return m_e[row * 4 + col]; }
- 
     float operator[](int index) const { return m_e[index]; }
     float& operator[](int index) { return m_e[index]; }
 
-//    void set(int row, int col, float t) { m_e[row * 4 + col] = t; } 
-
     bool operator==(const Matrix& rhs) const;
-
-//    friend std::ostream& operator<<(std::ostream& os, const Matrix& m);
 
     friend Matrix Transpose(const Matrix& m);
 
