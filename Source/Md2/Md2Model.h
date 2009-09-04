@@ -1,35 +1,20 @@
 /*
 Amju Games source code (c) Copyright Jason Colman 2004
-$Log: Md2Model.h,v $
-Revision 1.5  2007/11/13 21:33:42  jay
-Remove OpenGL calls
-
-Revision 1.4  2007/10/07 20:43:46  jay
-Tidy up; new functions so you can interpolate between any two frames
-
-Revision 1.3  2004/10/17 19:15:21  jay
-Change so cel-shade version compiles
-
-Revision 1.2  2004/09/28 21:38:24  jay
-Adding Save() - not finished!
-
-Revision 1.1  2004/09/08 15:43:09  jay
-Added to repository
-  
 */
 
 // The MD2 loading and drawing code is a rewrite of a demo 
 // found on www.flipcode.com.
 
-#if !defined(MD2_MODEL_H_INCLUDED)
+#ifndef MD2_MODEL_H_INCLUDED
 #define MD2_MODEL_H_INCLUDED
 
-#include "RCPtr.h"
-#include "Endian.h"
 #include <map>
 #include <utility>
 #include <string>
 #include <vector>
+#include "RCPtr.h"
+#include "Endian.h"
+#include "AmjuGL.h"
 
 namespace Amju
 {
@@ -253,6 +238,9 @@ protected:
   // Store freeze flags
   std::vector<bool> m_freezeFlags;
 
+  // Mesh data sent to AmjuGL
+  // This changes every frame but by making it a member we don't keep reallocating.
+  AmjuGL::Tris m_tris;
 };
 
 typedef RCPtr<Md2Model> PMd2Model;
