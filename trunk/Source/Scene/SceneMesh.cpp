@@ -7,6 +7,8 @@ namespace Amju
 {
 const char* SceneMesh::NAME = "mesh";
 
+SceneNode* SceneMesh::Create() { return new SceneMesh; }
+
 void SceneMesh::SetMesh(PObjMesh mesh)
 {
   m_mesh = mesh;
@@ -18,6 +20,8 @@ void SceneMesh::Draw()
   AmjuGL::MultMatrix(m_local);
   m_mesh->Draw();
   AmjuGL::PopMatrix();
+
+  GetAABB()->Draw();
 }
 
 void SceneMesh::Update()

@@ -10,6 +10,7 @@ class SceneMesh : public SceneNode
 {
 public:
   static const char* NAME;
+  static SceneNode* Create();
 
   virtual void Draw();
   virtual void Update();
