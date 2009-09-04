@@ -38,7 +38,6 @@ public:
   GameObjects* GetGameObjects();
 
   // Functions commonly used by Game States
-  void DrawGameObjects();
   void UpdateGameObjects();
 
 private:
