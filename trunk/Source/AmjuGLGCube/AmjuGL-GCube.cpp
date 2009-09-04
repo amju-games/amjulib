@@ -18,6 +18,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include "TextureUtils.h"
 #include "Pause.h" // TODO TEMP TEST
 #include "Colour.h"
+#include "Screen.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -75,6 +76,10 @@ AmjuGLGCube::AmjuGLGCube(bool console)
 {
   s_isConsole = console;
   m_texId = 0;
+
+  static const int WIDTH = 640;
+  static const int HEIGHT = 480; 
+  Screen::SetSize(WIDTH, HEIGHT);
 }
 
 void AmjuGLGCube::BeginScene()
@@ -321,10 +326,7 @@ void AmjuGLGCube::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
+  /*
   if (w == 0)
   {
       w = rmode->fbWidth;
@@ -334,6 +336,7 @@ void AmjuGLGCube::Viewport(int x, int y, int w, int h)
   {
     h = rmode->efbHeight;
   }
+  */
 
   GX_SetViewport(0,0,w,h,0,1);
 }
@@ -483,10 +486,6 @@ void AmjuGLGCube::DrawTriList(const AmjuGL::Tris& tris)
   u8 b = (u8)(s_colour.m_b * 255.0);
   u8 a = (u8)(s_colour.m_a * 255.0);
 
-  // When proj matrix is Identity, 1 is down instead of up! 
-  // So top and bottom are reversed in guOrtho, and we must also reverse v coords  
-  bool reverseV = (s_isOrtho);
- 
   // Start drawing triangles
   unsigned int numTris = tris.size();
   GX_Begin(GX_TRIANGLES, GX_VTXFMT0, numTris * 3);		
@@ -502,14 +501,7 @@ void AmjuGLGCube::DrawTriList(const AmjuGL::Tris& tris)
         GX_Position3f32(v.m_x, v.m_y, v.m_z);		
         GX_Normal3f32(v.m_nx, v.m_ny, v.m_nz);
         GX_Color4u8(r, g, b, a); // TODO Do we have to specify this for every vertex ?
-        if (reverseV)
-        {
-          GX_TexCoord2f32(v.m_u, 1.0f - v.m_v);
-        }
-        else
-        {
-          GX_TexCoord2f32(v.m_u, v.m_v);
-        }
+        GX_TexCoord2f32(v.m_u, v.m_v);
       }
     }
   
@@ -717,8 +709,6 @@ void AmjuGLGCube::SetIdentity()
     {
       // For orthographic projection (2D HUD etc)
       // It seems that y = -1 is the top of the viewport, and y = 1 is the bottom ?
-      // So reverse these - this means we must also reverse V texture coord
-      // ...There must be a nice fix for this
       guOrtho(s_projMatrix,  1, -1, -1, 1, -1, 1); // t, b, l, r, n, f
       // Not: guOrtho(s_projMatrix, -1, 1, -1, 1, -1, 1); 
       s_isOrtho = true;
@@ -779,11 +769,6 @@ void AmjuGLGCube::PopMatrix()
   default:
     Assert(0);
   }
-
-/* gl2gx code:
-  _mtxcurrentelement--;
-  guMtxCopy(_mtxelements[_mtxcurrentelement], model);
-*/
 }
 
 void AmjuGLGCube::Translate(float x, float y, float z)
@@ -795,15 +780,10 @@ void AmjuGLGCube::Translate(float x, float y, float z)
   return;
   }
 
-  // No good, trashes existing transform ?! 
-  //  guMtxTransApply(s_modelviewMatrix, s_modelviewMatrix, x, y, z);
-
-  // Do this: (from gl2gx):  
   Mtx temp;
   guMtxIdentity(temp);
   guMtxTrans(temp, x, y, z);	
   guMtxConcat(s_modelviewMatrix,temp,s_modelviewMatrix);
-
 }
 
 void AmjuGLGCube::Scale(float x, float y, float z)
@@ -829,8 +809,6 @@ void AmjuGLGCube::RotateX(float degs)
   {
   return;
   }
-
-  //glRotatef(degs, 1, 0, 0);
   
   Vector axis = {1, 0, 0};
   
@@ -838,8 +816,6 @@ void AmjuGLGCube::RotateX(float degs)
   guMtxIdentity(m);
   guMtxRotAxisDeg(m, &axis, degs);
   guMtxConcat(s_modelviewMatrix,m,s_modelviewMatrix);
- 
-//  guMtxRotAxisDeg(s_modelviewMatrix, &axis, degs);  
 }
 
 void AmjuGLGCube::RotateY(float degs)
@@ -851,7 +827,6 @@ void AmjuGLGCube::RotateY(float degs)
   return;
   }
 
-  //glRotatef(degs, 0, 1, 0);
   Vector axis = {0, 1, 0};
   Mtx m; // model matrix.
   guMtxIdentity(m);
@@ -868,7 +843,6 @@ void AmjuGLGCube::RotateZ(float degs)
   return;
   }
 
-  //glRotatef(degs, 0, 0, 1);
   Vector axis = {0, 0, 1};
   Mtx m; // model matrix.
   guMtxIdentity(m);
@@ -888,8 +862,6 @@ void AmjuGLGCube::PushAttrib(uint32 attrib)
 void AmjuGLGCube::PopAttrib()
 {
   AMJU_CALL_STACK;
-
-  //glPopAttrib();
 }
 
 void AmjuGLGCube::Enable(uint32 flag)
@@ -960,7 +932,10 @@ void AmjuGLGCube::DestroyTextureHandle(AmjuGL::TextureHandle* th)
   }
 //#endif
 
-  GXTexObj* g = m_textures[texId];
+  TexData& td = m_textures[texId];
+  unsigned char* data = td.m_data;
+  free(data); // not delete; allocated with memalign
+  GXTexObj* g = td.m_texObj;
   delete g;
   m_textures.erase(texId);
 }
@@ -1089,56 +1064,29 @@ void AmjuGLGCube::SetTexture(
 
   GXTexObj* g = new GXTexObj;  
 
+  // Convert to correct format
+  unsigned char* convertedData = 
+    (unsigned char*)memalign(32, width*height*4);
+    // NOT: new unsigned char[width * height * 4];
+    //  -- must be aigned to 32byte boundary
+      
   if (d == AmjuGL::AMJU_RGB)
   {
-    // Flip upside-down  
-    FlipBmp(data, width, height, 3);
-        
-    // Convert to correct format
-    unsigned char* convertedData = 
-      (unsigned char*)memalign(32, width*height*4);
-      // NOT: new unsigned char[width * height * 4];
-      //  -- must be aigned to 32byte boundary
-      
-    Raw24To4x4RGBA(data, convertedData, width, height);
-          
-    GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE); 
-    
-    // This is needed - what does it do ?
-    DCFlushRange(convertedData, width * height * 4);
-
-    // Can we now free the data ??
-    // Apparently NOT 
-//    free(convertedData);
-//    delete [] resizedData; // right ??
+    // Convert to strange format
+    Raw24To4x4RGBA(data, convertedData, width, height);          
   }
   else // d == AmjuGL::RGBA
   {
-    // Flip upside-down  
-    FlipBmp(data, width, height, 4);
-
-    // Convert to correct format
-    unsigned char* convertedData = 
-      (unsigned char*)memalign(32, width*height*4);
-      // NOT: new unsigned char[width * height * 4];
-      //  -- must be aigned to 32byte boundary
-
     // Convert to strange format
     Raw32To4x4RGBA(data, convertedData, width, height);
-          
-    // TODO Need to convert to GX format
-    GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE); 
-
-    // This is needed - what does it do ?
-    DCFlushRange(convertedData, width * height * 4);
-    
-    // No delete until we kill texture object
   }
 
-  // TODO only needed when we use the texture ?
-//  GX_LoadTexObj(g, GX_TEXMAP0);
+  GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE); 
   
-  m_textures[m_texId] = g;
+  // This is needed - what does it do ?
+  DCFlushRange(convertedData, width * height * 4);
+
+  m_textures[m_texId] = TexData(g, convertedData);
   *th = m_texId;
   ++m_texId;
 }
@@ -1154,7 +1102,7 @@ void AmjuGLGCube::UseTexture(AmjuGL::TextureHandle th)
   
   int texId = (int)th;
   Assert(m_textures.find(texId) != m_textures.end());
-  GXTexObj* g = m_textures[texId];
+  GXTexObj* g = m_textures[texId].m_texObj;
   GX_LoadTexObj(g, GX_TEXMAP0);  
 }
 
