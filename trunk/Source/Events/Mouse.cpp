@@ -1,29 +1,6 @@
 /*
 Amju Games source code (c) Copyright Jason Colman 2004
-$Log: Mouse.cpp,v $
-Revision 1.4  2008/05/18 16:04:28  jay
-MSVC update
-
-Revision 1.3  2008/05/08 10:58:05  jay
-New memory management code
-
-Revision 1.2  2006/01/16 14:26:56  jay
-Added flags for Right and middle buttons
-
-Revision 1.1.10.2  2005/07/30 12:31:26  jay
-Now holds state for Right- and middle-buttons
-
-Revision 1.1.10.1  2005/07/05 09:45:47  jay
-Initially set mouse coords to off-screen. This is so GUI elements start
-off unselected.
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
 */
-
-// This source code originally written by JASON COLMAN 2000-2003. 
-// You may use it as you wish, at your own risk!  jason@amju.com.
 
 #ifdef WIN32
 #pragma warning(disable: 4786)
@@ -39,7 +16,7 @@ Added to repository
 // This is a bit nasty :-(
 #include "../WinMain/resource.h"
 #endif
-#include "SchAssert.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
