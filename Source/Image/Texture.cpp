@@ -20,6 +20,11 @@ Texture::~Texture()
   AmjuGL::DestroyTextureHandle(&m_texId);
 }
 
+AmjuGL::TextureHandle Texture::GetId() const
+{
+  return m_texId;
+}
+
 int Texture::GetWidth() const
 {
   return m_width;
