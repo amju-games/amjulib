@@ -10,7 +10,9 @@ class Sphere
 public:
   Sphere();
   Sphere(const Vec3f& centre, float radius) : m_centre(centre), m_radius(radius) {}
-  void Draw();
+ 
+  const Vec3f& GetCentre() const;
+  float GetRadius() const;
 
 private:
   Vec3f m_centre;
