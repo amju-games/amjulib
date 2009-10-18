@@ -5,16 +5,31 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #ifndef AMJU_GL_DX9_H_INCLUDED
 #define AMJU_GL_DX9_H_INCLUDED
 
+#include "AmjuGL-Impl.h"
+#include "Colour.h"
 #include <d3d9.h>
 #include <D3DX9Effect.h>
-#include "AmjuGL-Impl.h"
+
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
 
 namespace Amju
 {
 class AmjuGLDX9 : public AmjuGLImpl
 {
 public:
-  AmjuGLDX9(LPDIRECT3DDEVICE9 d3dDevice);
+  // Ideally private but we access this in some non-member functions in 
+  //  CreateWindowDX9.cpp
+  static LPDIRECT3DDEVICE9 dd;
+
+  AmjuGLDX9(WNDPROC wndproc);
+
+  // Call once at app startup
+  virtual void Init();
+
+  // Call to create window
+  virtual bool CreateWindow(AmjuGLWindowInfo*);
 
   // Call before drawing anything
   virtual void BeginScene();
@@ -22,21 +37,19 @@ public:
   // Call when all drawing finished: Impl must swap buffers
   virtual void EndScene();
 
+  // Call to flip back/front buffers
+  virtual void Flip();
+
   // Set viewport as screen coords
   virtual void Viewport(int x, int y, int w, int h);
-
-  // Call once at app startup
-  virtual void Init();
 
   // Call at start of drawing every frame.
   // Specify clear colour
   virtual void InitFrame(float clearR, float clearG, float clearB);
 
-  // Set up projection matrix, by specifying field-of-view and aspect ratio.
-  // Near and far planes are currently hardcoded.
-  virtual void SetPerspectiveProjection(float fov, float aspectRatio);
-
-  virtual void SetOrthoProjection();
+  // Set up projection matrix
+  virtual void SetPerspectiveProjection(float fov, float aspectRatio, 
+    float nearDist, float farDist);
 
   // Set 'camera': give position of eye, target position and Up vector
   virtual void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ);
@@ -46,9 +59,6 @@ public:
 
   // Draw line in current colour between 2 absolute coords
   virtual void DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2);
-
-  // Draw sphere (for debugging) at absolute coord v with radius r
-  virtual void DrawSphere(const AmjuGL::Vec3& v, float r);
 
   // Draw quad with the 4 vertices
   virtual void DrawQuad(AmjuGL::Vert* verts);
@@ -82,20 +92,13 @@ public:
   // Get the current value of the given matrix
   virtual void GetMatrix(AmjuGL::MatrixMode, float result[16]);
 
+  virtual void MultMatrix(const float matrix[16]);
+
   virtual void PushAttrib(uint32 attrib);
   virtual void PopAttrib();
 
   virtual void Enable(uint32 flags);
   virtual void Disable(uint32 flags);
-
-  virtual void BlendFunc();
-
-  // Set Depth Mask: i.e. whether we should write to the z buffer.
-  virtual void EnableZWrite(bool);
-
-
-  // Call to set up a new Texture handle
-  //virtual void CreateTextureHandle(AmjuGL::TextureHandle*);
 
   // Call to delete Texture handle
   virtual void DestroyTextureHandle(AmjuGL::TextureHandle*);
@@ -113,9 +116,6 @@ public:
 
   virtual void SetTextureMode(AmjuGL::TextureType tt);
 
-  // Get point int world coords from mouse cursor pos.
-  virtual AmjuGL::Vec3 MouseToWorld(int mouseX, int mouseY);
-
   // Copy screen into buffer  - which should be allocated by caller.
   virtual void GetScreenshot(unsigned char* buffer, int w, int h);
 
@@ -127,6 +127,8 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos);
 
+private:
+  WNDPROC m_wndproc;
 }; // class 
 
 class DX9Shader
@@ -140,7 +142,7 @@ public:
   std::string GetErrorString();
 
   // Start using the shader. Use Begin before any pass
-  void Begin();
+  void Begin(const std::string& techniqueName);
 
   // Finish using the shader: call after all passes are finished
   void End();
@@ -152,9 +154,16 @@ public:
   void BeginPass(int passNum);
   void EndPass();
 
+  void Set(const std::string& effectParamName, const float matrix[16]);
+  void Set(const std::string& effectParamName, float f);
+  void Set(const std::string& effectParamName, const AmjuGL::Vec3&);
+  void Set(const std::string& effectParamName, const Colour&);
+  void Set(const std::string& effectParamName, AmjuGL::TextureHandle);
+
 private:
   ID3DXEffect* m_pEffect;
   unsigned int m_numPasses;
+  std::string m_errorStr;
 };
 
 } // namespace Amju
