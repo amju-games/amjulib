@@ -20,6 +20,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuFinal.h"
 
 #define SHADER_DEBUG
+//#define USE_IMMEDIATE_MODE
 
 namespace Amju
 {
@@ -166,16 +167,6 @@ void OglShader::End()
 
 bool AmjuGLOpenGL::s_shaderSupport = false;
 
-void AmjuGLOpenGL::BeginScene()
-{
-  AMJU_CALL_STACK;
-}
-
-void AmjuGLOpenGL::EndScene()
-{
-  AMJU_CALL_STACK;
-}
-
 void AmjuGLOpenGL::Flip()
 {
   AMJU_CALL_STACK;
@@ -183,29 +174,6 @@ void AmjuGLOpenGL::Flip()
 #ifdef WIN32
   SwapBuffers(wglGetCurrentDC());
 #endif
-}
-
-void AmjuGLOpenGL::DrawLighting(
-  const AmjuGL::LightColour& globalAmbient, 
-  const AmjuGL::LightColour& lightAmbient,
-  const AmjuGL::LightColour& lightDiffuse,
-  const AmjuGL::LightColour& lightSpecular,
-  const AmjuGL::Vec3& lightPos)
-{
-  AMJU_CALL_STACK;
-
-  float gAmbient[4] = { globalAmbient.m_r, globalAmbient.m_g, globalAmbient.m_b, 1.0f };
-  float ambient[4] = { lightAmbient.m_r, lightAmbient.m_g, lightAmbient.m_b, 1.0f };
-  float diffuse[4] = { lightDiffuse.m_r, lightDiffuse.m_g, lightDiffuse.m_b, 1.0f };
-  float specular[4] = { lightSpecular.m_r, lightSpecular.m_g, lightSpecular.m_b, 1.0f };
-  float pos[4] = { lightPos.m_x, lightPos.m_y, lightPos.m_z, 0 };
-
-  glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);	
-  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-  glEnable(GL_LIGHT0);
-  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient);
-  glLightfv(GL_LIGHT0, GL_POSITION, pos);
 }
 
 void AmjuGLOpenGL::Init()
@@ -263,14 +231,13 @@ std::cout << "GLSL is NOT SUPPORTED :-(\n";
 #endif
   }
 
-  // Set the modelview matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
   glEnable(GL_CULL_FACE);
   glCullFace(GL_BACK);
 
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   glEnable(GL_COLOR_MATERIAL);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -278,7 +245,6 @@ std::cout << "GLSL is NOT SUPPORTED :-(\n";
   glDisable(GL_BLEND);
 
   // We can rely on default values for everything else.
-  // NB Lighting is set up for each room when player enters.
 }
 
 void AmjuGLOpenGL::InitFrame(float clearR, float clearG, float clearB)
@@ -286,7 +252,7 @@ void AmjuGLOpenGL::InitFrame(float clearR, float clearG, float clearB)
   AMJU_CALL_STACK;
 
   // Do GL initialisation before we draw the frame.
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   glClearColor(clearR, clearG, clearB, 1.0f);
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -298,7 +264,7 @@ void AmjuGLOpenGL::InitFrame(float clearR, float clearG, float clearB)
   // NB Must use AmjuGL::Disable so flags are set consistently!
 
   //glEnable(GL_BLEND); // TODO some things (day night sky etc) must enable this.
-  glEnable(GL_TEXTURE_2D);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
   // Set the modelview matrix
   glMatrixMode(GL_MODELVIEW);
@@ -313,26 +279,6 @@ void AmjuGLOpenGL::SetPerspectiveProjection(
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(fov, aspectRatio, nearDist, farDist);
-
-// ???
-//  glMatrixMode(GL_MODELVIEW);
-}
-
-void AmjuGLOpenGL::SetOrthoProjection()
-{
-  AMJU_CALL_STACK;
-
-  // TODO
-}
-
-void AmjuGLOpenGL::Viewport(int x, int y, int w, int h)
-{
-  AMJU_CALL_STACK;
-
-  if (w != 0 && h != 0)
-  {
-    glViewport(x, y, w, h);
-  }
 }
 
 void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
@@ -344,21 +290,16 @@ void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, 
             upX, upY, upZ /* 'Up' vector */);
 }
 
-void AmjuGLOpenGL::SetColour(float r, float g, float b, float a)
-{
-  AMJU_CALL_STACK;
-
-  glColor4f(r, g, b, a);
-}
-
 void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 {
   AMJU_CALL_STACK;
 
   int numTris = tris.size();
 
-  // Argh, format is different for DX9 verts and OpenGL verts :-(
-  // So it looks like we can't do
+#ifndef USE_IMMEDIATE_MODE
+
+  // Format is different for DX9 verts and OpenGL verts 
+  // So we can't do
   //glInterleavedArrays(GL_T2F_N3F_V3F, sizeof(AmjuGL::Vert), &tris[0]);
   //glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
 
@@ -380,8 +321,8 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
   glDisableClientState(GL_NORMAL_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
 
+#else // USE_IMMEDIATE_MODE
 
-#ifdef USE_IMMEDIATE_MODE
   glBegin(GL_TRIANGLES);
   for (int i = 0; i < numTris; i++)
   {
@@ -412,31 +353,13 @@ void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 {
   AMJU_CALL_STACK;
 
-#ifdef _DEBUG
-  // Disable texturing while drawing line
-  glDisable(GL_TEXTURE_2D);
+  // Disable texturing while drawing line ?
+  //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   glBegin(GL_LINES);
   glVertex3f(v1.m_x, v1.m_y, v1.m_z);
   glVertex3f(v2.m_x, v2.m_y, v2.m_z);
   glEnd();
-  glEnable(GL_TEXTURE_2D);
-#endif // _DEBUG
-}
-
-void AmjuGLOpenGL::DrawSphere(const AmjuGL::Vec3& v, float r)
-{
-  AMJU_CALL_STACK;
-
-#if defined(USE_GLUT)
-    // Use glut wire sphere function.
-    //glPushMatrix();
-    //glLoadIdentity();
-    //glTranslatef(v.m_x, v.m_y, v.m_z);
-    glutWireSphere(r, 8, 8); // radius, slices, stacks
-    //glPopMatrix();
-#else
-    // TODO non-GLUT sphere
-#endif
+  //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 }
 
 void AmjuGLOpenGL::DrawQuadList(const AmjuGL::Quads& quads)
@@ -444,11 +367,6 @@ void AmjuGLOpenGL::DrawQuadList(const AmjuGL::Quads& quads)
   AMJU_CALL_STACK;
 
   int numQuads = quads.size();
-
-  // Argh, format is different for DX9 verts and OpenGL verts :-(
-  // So it looks like we can't do
-  //glInterleavedArrays(GL_T2F_N3F_V3F, sizeof(AmjuGL::Vert), &quads[0]);
-  //glDrawArrays(GL_QUADS, 0, numQuads * 4);
 
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);
@@ -509,174 +427,6 @@ void AmjuGLOpenGL::DrawIndexedTriList(
   // TODO
 }
 
-void AmjuGLOpenGL::MultMatrix(const float matrix[16])
-{
-  AMJU_CALL_STACK;
-
-  glMultMatrixf(matrix); 
-}
-
-void AmjuGLOpenGL::GetMatrix(AmjuGL::MatrixMode m, float result[16])
-{
-  AMJU_CALL_STACK;
-
-  switch (m)
-  {
-  case AmjuGL::AMJU_MODELVIEW_MATRIX:
-    glGetFloatv(GL_MODELVIEW_MATRIX, result);
-    return;
-  case AmjuGL::AMJU_PROJECTION_MATRIX:
-    glGetFloatv(GL_PROJECTION_MATRIX, result);
-    return;
-  case AmjuGL::AMJU_TEXTURE_MATRIX:
-    // Allowed ?
-    glGetFloatv(GL_TEXTURE_MATRIX, result);
-    return;
-  }
-}
-
-void AmjuGLOpenGL::SetMatrixMode(AmjuGL::MatrixMode m)
-{
-  AMJU_CALL_STACK;
-
-  switch (m)
-  {
-  case AmjuGL::AMJU_MODELVIEW_MATRIX:
-    glMatrixMode(GL_MODELVIEW);
-    return;    
-
-  case AmjuGL::AMJU_PROJECTION_MATRIX:
-    glMatrixMode(GL_PROJECTION);
-    return;
-
-  case AmjuGL::AMJU_TEXTURE_MATRIX:
-    glMatrixMode(GL_TEXTURE);
-    return;
-
-  default:
-    // TODO Assert/print error
-    break;
-  }
-}
-
-void AmjuGLOpenGL::SetIdentity()
-{
-  AMJU_CALL_STACK;
-
-  glLoadIdentity();
-}
-
-void AmjuGLOpenGL::PushMatrix()
-{
-  AMJU_CALL_STACK;
-
-  glPushMatrix();
-}
-
-void AmjuGLOpenGL::PopMatrix()
-{
-  AMJU_CALL_STACK;
-
-  glPopMatrix();
-}
-
-void AmjuGLOpenGL::Translate(float x, float y, float z)
-{
-  AMJU_CALL_STACK;
-
-  glTranslatef(x, y, z);
-}
-
-void AmjuGLOpenGL::Scale(float x, float y, float z)
-{
-  AMJU_CALL_STACK;
-
-  glScalef(x, y, z);
-}
-
-void AmjuGLOpenGL::RotateX(float degs)
-{
-  AMJU_CALL_STACK;
-
-  glRotatef(degs, 1, 0, 0);
-}
-
-void AmjuGLOpenGL::RotateY(float degs)
-{
-  AMJU_CALL_STACK;
-
-  glRotatef(degs, 0, 1, 0);
-}
-
-void AmjuGLOpenGL::RotateZ(float degs)
-{
-  AMJU_CALL_STACK;
-
-  glRotatef(degs, 0, 0, 1);
-}
-
-void AmjuGLOpenGL::PushAttrib(uint32 attrib)
-{
-  AMJU_CALL_STACK;
-
-  // Push/Pop Attrib is emulated in AmjuGL -- Enable/Disable is called, 
-  //  no need to use glPushAttrib/glPopAttrib.
-  // This is for consistency and also is good for OpenGL ES.
-}
-
-void AmjuGLOpenGL::PopAttrib()
-{
-  AMJU_CALL_STACK;
-
-  //glPopAttrib();
-}
-
-static uint32 ConvertToGLFlag(uint32 flag)
-{
-  AMJU_CALL_STACK;
-
-  switch (flag)
-  {
-  case AmjuGL::AMJU_LIGHTING:
-    return GL_LIGHTING;
-  case AmjuGL::AMJU_BLEND:
-    return GL_BLEND;
-  case AmjuGL::AMJU_DEPTH_TEST:
-    return GL_DEPTH_TEST;
-  }
-  return 0;
-}
-
-void AmjuGLOpenGL::Enable(uint32 flag)
-{
-  AMJU_CALL_STACK;
-
-  uint32 glFlag = ConvertToGLFlag(flag);
-  glEnable(glFlag);
-}
-
-void AmjuGLOpenGL::Disable(uint32 flag)
-{
-  AMJU_CALL_STACK;
-
-  uint32 glFlag = ConvertToGLFlag(flag);
-  glDisable(glFlag);
-}
-
-void AmjuGLOpenGL::BlendFunc()
-{
-  AMJU_CALL_STACK;
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-
-void AmjuGLOpenGL::EnableZWrite(bool b)
-{
-  AMJU_CALL_STACK;
-
-  glDepthMask(b ? GL_TRUE : GL_FALSE);
-}
-
 void AmjuGLOpenGL::DestroyTextureHandle(AmjuGL::TextureHandle* th)
 {
   AMJU_CALL_STACK;
@@ -688,8 +438,7 @@ void AmjuGLOpenGL::DestroyTextureHandle(AmjuGL::TextureHandle* th)
     Assert(0);
   }
 
-  // This crashes in release mode ?!
-//  glDeleteTextures(1, (GLuint*)th);
+  glDeleteTextures(1, (GLuint*)th);
 }
 
 void AmjuGLOpenGL::SetTextureMode(AmjuGL::TextureType tt)
@@ -822,30 +571,6 @@ void AmjuGLOpenGL::UseTexture(AmjuGL::TextureHandle t)
   AMJU_CALL_STACK;
 
   glBindTexture(GL_TEXTURE_2D, t);
-}
-
-AmjuGL::Vec3 AmjuGLOpenGL::MouseToWorld(int x, int y)
-{
-  GLint viewport[4];
-  GLdouble modelview[16],projection[16];
-  GLfloat wx=(float)x,wy = 0;
-  GLfloat wz = 0;
-
-  // NB Order: get the viewport, then invert y, then get depth value :-)
-  glGetIntegerv(GL_VIEWPORT,viewport);
-  y=viewport[3]-y;
-
-  glReadPixels(x,y,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz);
-
-  wy = (float)y;
-
-  glGetDoublev(GL_MODELVIEW_MATRIX,modelview);
-  glGetDoublev(GL_PROJECTION_MATRIX,projection);
-  double ox, oy, oz;
-  gluUnProject(wx, wy, wz,
-    modelview,projection,viewport,&ox,&oy,&oz);
-
-  return AmjuGL::Vec3((float)ox, (float)oy, (float)oz);
 }
 
 void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int w, int h)

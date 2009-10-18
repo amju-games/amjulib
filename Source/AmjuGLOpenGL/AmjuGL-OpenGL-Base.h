@@ -33,9 +33,6 @@ public:
   // Set the current colour
   virtual void SetColour(float r, float g, float b, float a = 1.0f);
 
-  // Draw sphere (for debugging) at absolute coord v with radius r
-  virtual void DrawSphere(const AmjuGL::Vec3& v, float r);
-
   virtual void DrawTriList(const AmjuGL::Tris& tris);
 
   virtual void DrawIndexedTriList(
@@ -62,17 +59,13 @@ public:
   // Get the current value of the given matrix
   virtual void GetMatrix(AmjuGL::MatrixMode, float result[16]);
 
+  virtual void MultMatrix(const float matrix[16]);
+
   virtual void PushAttrib(uint32 attrib);
   virtual void PopAttrib();
 
   virtual void Enable(uint32 flags);
   virtual void Disable(uint32 flags);
-
-  virtual void BlendFunc();
-
-  // Set Depth Mask: i.e. whether we should write to the z buffer.
-  virtual void EnableZWrite(bool);
-
 
   // Call to delete Texture handle
   virtual void DestroyTextureHandle(AmjuGL::TextureHandle*);
@@ -87,10 +80,6 @@ public:
     const AmjuGL::LightColour& lightDiffuse,
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos);
-
-//private:
-  // True if shaders are supported on this machine
-  static bool s_shaderSupport;
 
 }; // class 
 
