@@ -2,6 +2,7 @@
 #include "File.h"
 #include "AmjuGL.h"
 #include "CollisionMesh.h"
+#include "DrawAABB.h"
 
 namespace Amju
 {
@@ -21,7 +22,7 @@ void SceneMesh::Draw()
   m_mesh->Draw();
   AmjuGL::PopMatrix();
 
-  GetAABB()->Draw();
+  DrawAABB(*(GetAABB()));
 }
 
 void SceneMesh::Update()
