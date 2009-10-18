@@ -31,11 +31,20 @@ public:
 
   bool Intersects(const AABB&) const;
 
-  void Draw() const;
-
   float GetXSize() const;
   float GetYSize() const;
   float GetZSize() const;
+
+  // Get min and max for axis 0..2
+  float GetMin(int axis) const;
+  float GetMax(int axis) const;
+
+  void SetMin(int axis, float min);
+  void SetMax(int axis, float max);
+
+  // Enlarge this box as required, so that it encloses its original
+  //  volume and the new box.
+  void Union(const AABB&);
 
 private:
   float m_xmin, m_xmax, m_ymin, m_ymax, m_zmin, m_zmax;
