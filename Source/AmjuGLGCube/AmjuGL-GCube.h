@@ -8,6 +8,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include <map>
 #include <gccore.h>
 #include "AmjuGL-Impl.h"
+#include "AmjuGLWindowInfo.h"
 
 namespace Amju
 {
@@ -16,6 +17,8 @@ class AmjuGLGCube : public AmjuGLImpl
 public:
   // Create console or GX window
   AmjuGLGCube(bool console = false);
+
+  virtual bool CreateWindow(AmjuGLWindowInfo*);
 
   // Call before drawing anything
   virtual void BeginScene();

@@ -238,6 +238,11 @@ void SetUpConsole()
   console_init(xfb[0],20,20,rmode->fbWidth,rmode->xfbHeight,rmode->fbWidth*2);
 }
 
+bool AmjuGLGCube::CreateWindow(AmjuGLWindowInfo*)
+{
+  return true;
+}
+
 #define DEFAULT_FIFO_SIZE	(256*1024)		//GX_FIFO_MINSIZE
 
 void AmjuGLGCube::Init()
@@ -868,7 +873,7 @@ void AmjuGLGCube::Enable(uint32 flag)
 {
   AMJU_CALL_STACK;
 
-  if (flag & AmjuGL::AMJU_DEPTH_TEST)
+  if (flag & AmjuGL::AMJU_DEPTH_READ)
   {
     // Enable Z test  
     GX_SetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
@@ -883,7 +888,7 @@ void AmjuGLGCube::Disable(uint32 flag)
 {
   AMJU_CALL_STACK;
 
-  if (flag & AmjuGL::AMJU_DEPTH_TEST)
+  if (flag & AmjuGL::AMJU_DEPTH_READ)
   {
     // Disable Z test... seems to do what we want..  
     GX_SetZMode (GX_FALSE, GX_NEVER, GX_TRUE); 
