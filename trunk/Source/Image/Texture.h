@@ -17,6 +17,8 @@ public:
   int GetWidth() const;
   int GetHeight() const;
   
+  AmjuGL::TextureHandle GetId() const;
+
 private:
   AmjuGL::TextureHandle m_texId;
   int m_width;
