@@ -21,9 +21,14 @@ void Game::Update()
 
 void Game::Draw()
 {
+  AmjuGL::InitFrame(0, 0, 0);
+
+  AmjuGL::BeginScene();
+
 	// TODO We need to be able to get the preferred/allowed viewport dimensions ?!
 	// x, y, w, h -- w and h are full screen if zero
-  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
+  // TODO Fix DX9 so we can have multple viewports
+//  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
     
   // Set perspective 
   // TODO We need to be able to get the viewport dimensions ?!
@@ -31,17 +36,14 @@ void Game::Draw()
   // No need to set identity, this call overwrites proj matrix
   const float FOVY = 60.0f;
   const float aspect = (float)Screen::X() / (float)Screen::Y();
-  const float NEAR = 10.0f; 
+  const float NEAR = 1.0f; 
   const float FAR = 3000.0f;
   AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
-
-  AmjuGL::InitFrame(0, 0, 0);
-	AmjuGL::BeginScene(); 		// do this before drawing
 
   // Draw 3D Scene
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   GetState()->Draw();
 
   // Draw 2D Elements
@@ -54,10 +56,9 @@ void Game::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-  AmjuGL::BlendFunc(); // TODO remove this function or make it useful
 
   GetState()->Draw2d();
 
@@ -75,9 +76,9 @@ void Game::Run()
   while (!s_quit)
   {
     UpdateState();
+    Update();
 
     Draw();
-    Update();
 
     AmjuGL::Flip(); 
   }
@@ -91,13 +92,13 @@ void Game::UpdateGameObjects()
   }
 }
 
-PGameState Game::GetState()
+GameState* Game::GetState()
 {
   Assert(m_currentState);
   return m_currentState;
 }
 
-PGameState Game::GetState(const char* stateName)
+GameState* Game::GetState(const char* stateName)
 {
   return m_states[stateName];
 }
