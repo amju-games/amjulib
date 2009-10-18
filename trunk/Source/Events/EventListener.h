@@ -3,6 +3,16 @@
 
 #include <set>
 
+/*
+  Coords for cursor events etc use this coord system:
+
+    (-1, 1) +--------------+ (1, 1)
+            |              |
+            |              |
+            |              |
+   (-1, -1) +--------------+ (1, -1)
+*/
+
 namespace Amju
 {
 
@@ -13,6 +23,8 @@ enum KeyType
   AMJU_KEY_DOWN,
   AMJU_KEY_LEFT,
   AMJU_KEY_RIGHT,
+  AMJU_KEY_ENTER,
+  AMJU_KEY_SPACE,
 
   AMJU_KEY_MAX
 };
@@ -26,7 +38,8 @@ struct KeyEvent
 
 struct CursorEvent
 {
-  int x, y;
+  // Cursor coords are -1..1 in x and y
+  float x, y;
   short controller;
 };
 
