@@ -8,9 +8,14 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <vector>
 #include "AmjuTypes.h"
 
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
+
 namespace Amju
 {
 class AmjuGLImpl;
+class AmjuGLWindowInfo;
 
 struct AmjuGL
 {
@@ -19,9 +24,11 @@ public:
 
   enum Flags
   {
-    AMJU_DEPTH_TEST = 0x0001,
-    AMJU_LIGHTING   = 0x0002,
-    AMJU_BLEND      = 0x0004
+    AMJU_DEPTH_READ  = 0x0001,
+    AMJU_LIGHTING    = 0x0002,
+    AMJU_BLEND       = 0x0004,
+    AMJU_TEXTURE_2D  = 0x0008,
+    AMJU_DEPTH_WRITE = 0x0010
   };
 
   // Vertex: (x, y, z) abs coord, (u, v) texture coord and normal.
@@ -80,6 +87,12 @@ public:
 
   typedef std::vector<Quad> Quads;
 
+  // Call once at app startup
+  static void Init();
+
+  // Call to create window
+  static bool CreateWindow(AmjuGLWindowInfo*);
+
   // Call before drawing anything
   static void BeginScene();
 
@@ -91,9 +104,6 @@ public:
 
   // Set viewport as screen coords
   static void Viewport(int x, int y, int w, int h);
-
-  // Call once at app startup
-  static void Init();
 
   // Call at start of drawing every frame.
   // Specify clear colour
@@ -166,10 +176,6 @@ public:
   static void Enable(uint32 flags);
   static void Disable(uint32 flags);
 
-  static void BlendFunc();
-
-  // Set Depth Mask: i.e. whether we should write to the z buffer.
-  static void EnableZWrite(bool);
 
   // Texture management
 

@@ -9,6 +9,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <stack>
 #include "AmjuGL.h"
 #include "AmjuGL-Impl.h"
+#include "AmjuGLWindowInfo.h"
+#include "Screen.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -91,9 +93,17 @@ void AmjuGL::Init()
 {
   AMJU_CALL_STACK;
 
-  currentFlags = 0;
-
+  currentFlags = AMJU_DEPTH_WRITE; // on at startup, right ?
+ 
   impl->Init();
+}
+
+bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
+{
+  AMJU_CALL_STACK;
+
+  Screen::SetSize(w->GetWidth(), w->GetHeight());
+  return impl->CreateWindow(w);
 }
 
 void AmjuGL::InitFrame(float clearR, float clearG, float clearB)
@@ -311,9 +321,11 @@ void AmjuGL::PopAttrib()
 
   static uint32 flagsToCheck[] = 
   {
-    AmjuGL::AMJU_DEPTH_TEST,
+    AmjuGL::AMJU_DEPTH_READ,
     AmjuGL::AMJU_LIGHTING,
-    AmjuGL::AMJU_BLEND
+    AmjuGL::AMJU_BLEND,
+    AmjuGL::AMJU_TEXTURE_2D,
+    AmjuGL::AMJU_DEPTH_WRITE
   };
   
   for (unsigned int i = 0; i < sizeof(flagsToCheck) / sizeof(uint32); i++)
@@ -354,20 +366,6 @@ void AmjuGL::Disable(uint32 flags)
   }
   currentFlags &= ~flags;
   impl->Disable(flags);
-}
-
-void AmjuGL::BlendFunc()
-{
-  AMJU_CALL_STACK;
-
-  impl->BlendFunc();
-}
-
-void AmjuGL::EnableZWrite(bool b)
-{
-  AMJU_CALL_STACK;
-
-  impl->EnableZWrite(b);
 }
 
 void AmjuGL::DestroyTextureHandle(TextureHandle* th)
@@ -411,5 +409,3 @@ void AmjuGL::GetScreenshot(unsigned char* buffer, int w, int h)
   impl->GetScreenshot(buffer, w, h);
 }
 }
-
-

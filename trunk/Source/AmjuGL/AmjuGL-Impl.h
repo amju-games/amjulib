@@ -16,6 +16,12 @@ class AmjuGLImpl : public Shareable
 public:
   virtual ~AmjuGLImpl() {}
 
+  // Call once at app startup
+  virtual void Init() = 0;
+
+  // Call to create window
+  virtual bool CreateWindow(AmjuGLWindowInfo*) = 0;
+
   // Call before drawing anything
   virtual void BeginScene() = 0;
 
@@ -27,9 +33,6 @@ public:
 
   // Set viewport as screen coords
   virtual void Viewport(int x, int y, int w, int h) = 0;
-
-  // Call once at app startup
-  virtual void Init() = 0;
 
   // Call at start of drawing every frame.
   // Specify clear colour
@@ -89,10 +92,6 @@ public:
   virtual void Enable(uint32 flags) = 0;
   virtual void Disable(uint32 flags) = 0;
 
-  virtual void BlendFunc() = 0;
-
-  // Set Depth Mask: i.e. whether we should write to the z buffer.
-  virtual void EnableZWrite(bool) = 0;
 
   // Call to delete Texture handle
   virtual void DestroyTextureHandle(AmjuGL::TextureHandle*) = 0;
