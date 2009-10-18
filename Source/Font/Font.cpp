@@ -192,10 +192,10 @@ void Font::Print(float x, float y, const char* text)
       return;
   }
 
-  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_READ);
 
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_TEST);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND); 
 
   AmjuGL::PushMatrix();
@@ -233,7 +233,7 @@ void Font::PrintWorld(
     return;
   }
 
-  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_TEST | AmjuGL::AMJU_BLEND);
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_BLEND);
 
   // TODO ?? glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
@@ -241,11 +241,11 @@ void Font::PrintWorld(
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   if (depthTest)
   {
-    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_TEST);
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   }
   else
   { 
-    AmjuGL::Disable(AmjuGL::AMJU_DEPTH_TEST);
+    AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
   }
 
   AmjuGL::PushMatrix();
