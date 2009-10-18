@@ -40,7 +40,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
 				Optimization="0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="false"
@@ -104,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
@@ -306,6 +306,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\AmjuGL\Colour.cpp"
 				>
 			</File>
@@ -319,6 +327,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\AmjuGL\Screen.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGL\WinScreen.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGL\WinScreen.h"
 				>
 			</File>
 		</Filter>
@@ -339,6 +355,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLWin.cpp"
 				>
 			</File>
 			<File
@@ -551,6 +571,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\Geom\Capsule.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\Frustum.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\Frustum.h"
 				>
 			</File>
 			<File
@@ -874,6 +902,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\Source\Gui\GuiMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Gui\GuiMenu.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\Gui\GuiText.cpp"
 				>
 			</File>
@@ -962,11 +998,55 @@
 			Name="GeomDraw"
 			>
 			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawAABB.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawAABB.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawRect.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawRect.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\GeomDraw\DrawSphere.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\Source\GeomDraw\DrawSphere.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="AmjuGLDX9"
+			>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLDX9\CreateWindowDX9.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="EventsSDL"
+			>
+			<File
+				RelativePath="..\..\..\Source\EventsSDL\EventPollerImplSDL.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\EventsSDL\EventPollerImplSDL.h"
 				>
 			</File>
 		</Filter>
