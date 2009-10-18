@@ -23,8 +23,8 @@ public:
   virtual void OnQuitEvent();
 
   // Game States
-  PGameState GetState(); // Get current state
-  PGameState GetState(const char* stateName); // Get named state
+  GameState* GetState(); // Get current state
+  GameState* GetState(const char* stateName); // Get named state
   void SetCurrentState(const char* stateName);
   bool AddState(const char* stateName, PGameState state);
 
@@ -40,7 +40,7 @@ public:
   // Functions commonly used by Game States
   void UpdateGameObjects();
 
-private:
+//private:
   void UpdateState(); // go to new state if set
 
 private:
