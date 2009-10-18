@@ -4,7 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2009
 
 #include "AmjuFirst.h"
 #include "AABB.h"
-#include "AmjuGL.h"
+#include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -38,48 +38,30 @@ float AABB::GetZSize() const
   return m_zmax - m_zmin;
 }
 
-void AABB::Draw() const
+float AABB::GetMin(int axis) const
 {
-#ifdef _DEBUG
-  AMJU_CALL_STACK;
+  Assert(axis < 3);
+  const float* const f = &m_xmin;
+  return f[axis * 2];
+}
 
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymin, m_zmin), 
-                   AmjuGL::Vec3(m_xmax, m_ymin, m_zmin));
+float AABB::GetMax(int axis) const
+{
+  Assert(axis < 3);
+  const float* const f = &m_xmin;
+  return f[axis * 2 + 1];
+}
 
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymin, m_zmin), 
-                   AmjuGL::Vec3(m_xmax, m_ymin, m_zmax));
+void AABB::SetMin(int axis, float min)
+{
+  float* const f = &m_xmin;
+  f[axis * 2] = min;
+}
 
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymin, m_zmax), 
-                   AmjuGL::Vec3(m_xmin, m_ymin, m_zmax));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymin, m_zmax), 
-                   AmjuGL::Vec3(m_xmin, m_ymin, m_zmin));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymax, m_zmin), 
-                   AmjuGL::Vec3(m_xmax, m_ymax, m_zmin));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymax, m_zmin), 
-                   AmjuGL::Vec3(m_xmax, m_ymax, m_zmax));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymax, m_zmax), 
-                   AmjuGL::Vec3(m_xmin, m_ymax, m_zmax));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymax, m_zmax), 
-                   AmjuGL::Vec3(m_xmin, m_ymax, m_zmin));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymin, m_zmin), 
-                   AmjuGL::Vec3(m_xmin, m_ymax, m_zmin));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymin, m_zmin), 
-                   AmjuGL::Vec3(m_xmax, m_ymax, m_zmin));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmax, m_ymin, m_zmax), 
-                   AmjuGL::Vec3(m_xmax, m_ymax, m_zmax));
-
-  AmjuGL::DrawLine(AmjuGL::Vec3(m_xmin, m_ymin, m_zmax), 
-                   AmjuGL::Vec3(m_xmin, m_ymax, m_zmax));
-
-#endif
+void AABB::SetMax(int axis, float max)
+{
+  float* const f = &m_xmin;
+  f[axis * 2 + 1] = max;
 }
 
 void AABB::Set(float xmin, float xmax, float ymin, float ymax, float zmin, float zmax)
@@ -103,7 +85,22 @@ void AABB::SetIf(float x, float y, float z)
   if (y > m_ymax) m_ymax = y;
 
   if (z < m_zmin) m_zmin = z;
-  if (z > m_zmax) m_zmax = z;}
+  if (z > m_zmax) m_zmax = z;
+}
+
+void AABB::Union(const AABB& b)
+{
+  AMJU_CALL_STACK;
+
+  if (b.m_xmin < m_xmin) m_xmin = b.m_xmin;
+  if (b.m_xmax > m_xmax) m_xmax = b.m_xmax;
+
+  if (b.m_ymin < m_ymin) m_ymin = b.m_ymin;
+  if (b.m_ymax > m_ymax) m_ymax = b.m_ymax;
+
+  if (b.m_zmin < m_zmin) m_zmin = b.m_zmin;
+  if (b.m_zmax > m_zmax) m_zmax = b.m_zmax;
+}
 
 bool AABB::Intersects(const AABB& b) const
 {
