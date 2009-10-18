@@ -201,6 +201,11 @@ void ObjMesh::BuildGroup(Group& g)
 
 void ObjMesh::DrawGroup(Group& g)
 {
+  if (g.m_tris.empty())
+  {
+    return;
+  }
+
   // TODO Hash, not string
   Materials::iterator it = m_materials.find(g.m_materialName);
   if (it != m_materials.end())
