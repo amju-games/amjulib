@@ -2,6 +2,7 @@
 #define SCENE_GRAPH_H
 
 #include "SceneNode.h"
+#include "Frustum.h"
 
 namespace Amju
 {
@@ -31,9 +32,16 @@ public:
 
   void AddBlendNode(PSceneNode);
 
+  Frustum* GetFrustum();
+
 private:
   void DrawNode(SceneNode* p);
-  void DrawChildren(SceneNode* p);
+  // Draw children of this node - which is either in or half-in the
+  //  frustum. If fully in, no need to test children
+  void DrawChildren(SceneNode* p, Frustum::FrustumResult fr);
+
+  // Recursively draw AABBs - for debugging
+  void DrawAABBs(SceneNode* node);
 
   void UpdateNode(SceneNode* p);
   void UpdateChildren(SceneNode* p);
@@ -55,6 +63,10 @@ private:
   };
   typedef std::vector<BlendNode> BlendNodes;
   BlendNodes m_blendNodes;
+
+  Frustum m_frustum;
+  int m_nodesInFrustum;
+  int m_nodesTotal; // total number of nodes 
 };
 }
 
