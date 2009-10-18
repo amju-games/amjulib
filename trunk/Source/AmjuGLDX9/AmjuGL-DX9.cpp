@@ -5,10 +5,9 @@
 // Alpha in SetColour
 // Lighting: can see difference between lit and unlit sides
 // But light position moves with camera!??
-// Mouse pos: don't use z buffer -- then not an AmjuGL function.
 // Get screenshot
 // Create mipmap data
-// Draw line, sphere
+// Draw line
 // Vertex buffers
 // Improve API to batch quads/tris; use vertex buffers 
 
@@ -18,21 +17,14 @@
 #include "AmjuFirst.h"
 #include <d3dx9math.h>
 #include "AmjuGL-DX9.h"
+#include <WinScreen.h>
 #include "AmjuFinal.h"
-
-extern "C"
-{
-int 
-gluUnProject(double winx, double winy, double winz,
-	     const double model[16], const double proj[16],
-	     const int viewport[4],
-	     double * objx, double * objy, double * objz);
-}
 
 namespace Amju
 {
-static LPDIRECT3DDEVICE9 dd = 0;
+LPDIRECT3DDEVICE9 AmjuGLDX9::dd = 0;
 
+// Modelview matrix stack
 static LPD3DXMATRIXSTACK g_matrixStack = NULL;
 
 // Projection matrix
@@ -40,11 +32,13 @@ static D3DXMATRIX matProj;
 
 static D3DVIEWPORT9 s_viewPort;
 
-AmjuGLDX9::AmjuGLDX9(LPDIRECT3DDEVICE9 d3dDevice)
+static AmjuGL::MatrixMode s_matrixMode = AmjuGL::AMJU_MODELVIEW_MATRIX;
+
+AmjuGLDX9::AmjuGLDX9(WNDPROC wndproc)
 {
   AMJU_CALL_STACK;
 
-  dd = d3dDevice;
+  m_wndproc = wndproc;
 }
 
 /*
@@ -74,8 +68,14 @@ void AmjuGLDX9::EndScene()
   dd->Present( NULL, NULL, NULL, NULL );
 }
 
+void AmjuGLDX9::Flip()
+{
+  //ValidateRect((HWND)GetHWnd(), 0);
+}
+
 void AmjuGLDX9::Viewport(int x, int y, int w, int h)
 {
+  /*
   AMJU_CALL_STACK;
 
   s_viewPort.X      = x;
@@ -86,17 +86,18 @@ void AmjuGLDX9::Viewport(int x, int y, int w, int h)
   s_viewPort.MaxZ   = 1.0f;
 
   dd->SetViewport(&s_viewPort);
+  */
 }
 
 void AmjuGLDX9::Init()
 {
   AMJU_CALL_STACK;
 
-  // Set cullmode to match Open GL
+  // Set cullmode 
 	dd->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 
-  Enable(AmjuGL::DEPTH_TEST);
-  Disable(AmjuGL::LIGHTING);
+  Enable(AmjuGL::AMJU_DEPTH_READ);
+  Disable(AmjuGL::AMJU_LIGHTING);
 
   D3DXCreateMatrixStack( 0, &g_matrixStack );
 
@@ -128,48 +129,43 @@ void AmjuGLDX9::InitFrame(float clearR, float clearG, float clearB)
 {
   AMJU_CALL_STACK;
 
-    dd->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-                         D3DCOLOR_COLORVALUE(clearR, clearG, clearB, 1.0f ), 1.0f, 0 );
+  dd->BeginScene();
 
-    dd->BeginScene();
 
-    g_matrixStack->LoadIdentity();
+  dd->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
+    D3DCOLOR_COLORVALUE(clearR, clearG, clearB, 1.0f ), 1.0f, 0 );
+
+  g_matrixStack->LoadIdentity();
 }
 
-void AmjuGLDX9::SetPerspectiveProjection(float fov, float aspectRatio)
+void AmjuGLDX9::SetPerspectiveProjection(
+  float fov, float aspectRatio, float nearDist, float farDist)
 {
   AMJU_CALL_STACK;
 
   // Use RH version for compatibility with gluPerspective() etc
-    D3DXMatrixPerspectiveFovRH(
-      &matProj, 
-      D3DXToRadian(fov), 
-      aspectRatio, 
-      0.1f,  // near
-      100.0f); // far
+  D3DXMatrixPerspectiveFovRH(
+    &matProj, 
+    D3DXToRadian(fov), 
+    aspectRatio, 
+    nearDist,  
+    farDist); 
 
-    dd->SetTransform(D3DTS_PROJECTION, &matProj);
-}
-
-void AmjuGLDX9::SetOrthoProjection()
-{
-  AMJU_CALL_STACK;
-
-  // TODO
+  dd->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 void AmjuGLDX9::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
 {
   AMJU_CALL_STACK;
 
-    D3DXVECTOR3 vEyePt(eyeX, eyeY, eyeZ);
-    D3DXVECTOR3 vLookatPt(x, y, z);
-    D3DXVECTOR3 vUpVec(upX, upY, upZ);
-    D3DXMATRIX matLookAt;
-    D3DXMatrixLookAtRH( &matLookAt, &vEyePt, &vLookatPt, &vUpVec );
+  D3DXVECTOR3 vEyePt(eyeX, eyeY, eyeZ);
+  D3DXVECTOR3 vLookatPt(x, y, z);
+  D3DXVECTOR3 vUpVec(upX, upY, upZ);
+  D3DXMATRIX matLookAt;
+  D3DXMatrixLookAtRH( &matLookAt, &vEyePt, &vLookatPt, &vUpVec );
 
-    g_matrixStack->LoadIdentity();
-    g_matrixStack->LoadMatrix( &matLookAt );
+  g_matrixStack->LoadIdentity();
+  g_matrixStack->LoadMatrix( &matLookAt );
 }
 
 void AmjuGLDX9::SetColour(float r, float g, float b, float a)
@@ -231,12 +227,6 @@ void AmjuGLDX9::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 
 }
 
-void AmjuGLDX9::DrawSphere(const AmjuGL::Vec3& v, float r)
-{
-  AMJU_CALL_STACK;
-
-}
-
 void AmjuGLDX9::DrawQuad(AmjuGL::Vert* verts)
 {
   AMJU_CALL_STACK;
@@ -286,38 +276,86 @@ void AmjuGLDX9::DrawIndexedTriList(
   // TODO
 }
 
-void AmjuGLDX9::SetMatrixMode(AmjuGL::MatrixMode)
+void AmjuGLDX9::SetMatrixMode(AmjuGL::MatrixMode m) 
 {
   AMJU_CALL_STACK;
 
-  // TODO Remove this from AmjuGL ??????
+  s_matrixMode = m;
 }
 
 void AmjuGLDX9::SetIdentity()
 {
   AMJU_CALL_STACK;
 
-  // TODO Do we need this in AmjuGL ??
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
     g_matrixStack->LoadIdentity();
+    dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
+  }
+  else if (s_matrixMode == AmjuGL::AMJU_PROJECTION_MATRIX)
+  {
+    D3DXMATRIX mat;
+    D3DXMatrixIdentity(&mat);
+    dd->SetTransform(D3DTS_PROJECTION, &mat);
+  }
+}
+
+void AmjuGLDX9::MultMatrix(const float m[16])
+{
+  D3DXMATRIX d3dm(
+    m[0], m[1], m[2],  m[3],
+    m[4], m[5], m[6],  m[7],
+    m[8], m[9], m[10], m[11],
+    m[12], m[13], m[14], m[15]);
+
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
+    g_matrixStack->MultMatrixLocal(&d3dm);
+    dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
+  }
+  else if (s_matrixMode == AmjuGL::AMJU_PROJECTION_MATRIX)
+  {
+    Assert(0);
+  }
 }
 
 void AmjuGLDX9::PushMatrix()
 {
   AMJU_CALL_STACK;
 
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
     g_matrixStack->Push();
+  }
+  else
+  {
+    Assert(0);
+  }
 }
 
 void AmjuGLDX9::PopMatrix()
 {
   AMJU_CALL_STACK;
 
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
     g_matrixStack->Pop();
+    D3DXMATRIX* m = g_matrixStack->GetTop();
+    // We always load Identity before Pushing, right ?
+    Assert(m);
+    dd->SetTransform(D3DTS_WORLD,  m);
+  }
+  else
+  {
+    Assert(0);
+  }
 }
 
 void AmjuGLDX9::Translate(float x, float y, float z)
 {
   AMJU_CALL_STACK;
+
+  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
 
   // TODO Use current matrix mode, or scrap the idea of 
   // manipulating proj and tex mats
@@ -334,18 +372,24 @@ void AmjuGLDX9::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
 
-  // TODO Use current matrix
+  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
+
+  D3DXMATRIX m;
+  D3DXMatrixIdentity(&m);
+  D3DXMatrixScaling(&m, x, y, z); 
+  g_matrixStack->MultMatrixLocal(&m);
+  dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
 }
 
 void AmjuGLDX9::RotateX(float degs)
 {
   AMJU_CALL_STACK;
 
+  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
+
   D3DXMATRIX m;
   D3DXMatrixIdentity(&m);
-
   D3DXMatrixRotationX(&m, D3DXToRadian(degs)); 
-
   g_matrixStack->MultMatrixLocal( &m);
   dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
 }
@@ -354,11 +398,11 @@ void AmjuGLDX9::RotateY(float degs)
 {
   AMJU_CALL_STACK;
 
+  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
+
   D3DXMATRIX m;
   D3DXMatrixIdentity(&m);
-
   D3DXMatrixRotationY(&m, D3DXToRadian(degs)); 
-
   g_matrixStack->MultMatrixLocal( &m);
   dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
 }
@@ -367,11 +411,11 @@ void AmjuGLDX9::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
 
+  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
+
   D3DXMATRIX m;
   D3DXMatrixIdentity(&m);
-
   D3DXMatrixRotationZ(&m, D3DXToRadian(degs)); 
-
   g_matrixStack->MultMatrixLocal( &m);
   dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
 }
@@ -382,18 +426,18 @@ void AmjuGLDX9::GetMatrix(AmjuGL::MatrixMode mm, float result[16])
 
   switch (mm)
   {
-  case AmjuGL::MODELVIEW:
+  case AmjuGL::AMJU_MODELVIEW_MATRIX:
     {
     const D3DXMATRIX* pm = g_matrixStack->GetTop();
     memcpy(result, pm, 16 * sizeof(float)); 
     }
     break;
 
-  case AmjuGL::PROJECTION:
+  case AmjuGL::AMJU_PROJECTION_MATRIX:
     memcpy(result, &matProj, 16 * sizeof(float));     
     break;
   
-  case AmjuGL::TEXTURE:
+  case AmjuGL::AMJU_TEXTURE_MATRIX:
     // Not supported
     break;
   }
@@ -411,17 +455,29 @@ void AmjuGLDX9::PopAttrib()
 
 }
 
+static void EnableZWrite(bool writeToZ)
+{
+  AMJU_CALL_STACK;
+
+  // TODO Better function name
+  AmjuGLDX9::dd->SetRenderState(D3DRS_ZENABLE, writeToZ ? D3DZB_TRUE : D3DZB_FALSE);
+}
+
 void AmjuGLDX9::Enable(uint32 flag)
 {
   AMJU_CALL_STACK;
 
   switch (flag)
   {
-  case AmjuGL::DEPTH_TEST:
+  case AmjuGL::AMJU_DEPTH_WRITE:
+    EnableZWrite(true);
+    break;
+
+  case AmjuGL::AMJU_DEPTH_READ:
     dd->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
     break;
 
-  case AmjuGL::LIGHTING:
+  case AmjuGL::AMJU_LIGHTING:
     dd->SetRenderState(D3DRS_LIGHTING, TRUE);
     dd->LightEnable( 0, TRUE );
     {
@@ -430,7 +486,7 @@ void AmjuGLDX9::Enable(uint32 flag)
     }
     break;
 
-  case AmjuGL::BLEND:
+  case AmjuGL::AMJU_BLEND:
     break;
   }
 }
@@ -441,11 +497,15 @@ void AmjuGLDX9::Disable(uint32 flag)
 
   switch (flag)
   {
-  case AmjuGL::DEPTH_TEST:
+  case AmjuGL::AMJU_DEPTH_WRITE:
+    EnableZWrite(false);
+    break;
+
+  case AmjuGL::AMJU_DEPTH_READ:
     dd->SetRenderState(D3DRS_ZENABLE, D3DZB_FALSE);
     break;
 
-  case AmjuGL::LIGHTING:
+  case AmjuGL::AMJU_LIGHTING:
     // TODO TEMP TEST
     // If lighting is disabled, set the ambient colour to white.
     // Then the material colour's ambient value will be used.
@@ -455,24 +515,9 @@ void AmjuGLDX9::Disable(uint32 flag)
 //    dd->LightEnable( 0, FALSE);
     break;
 
-  case AmjuGL::BLEND:
+  case AmjuGL::AMJU_BLEND:
     break;
   }
-}
-
-void AmjuGLDX9::BlendFunc()
-{
-  AMJU_CALL_STACK;
-
-  // TODO Remove from AmjuGL
-}
-
-void AmjuGLDX9::EnableZWrite(bool writeToZ)
-{
-  AMJU_CALL_STACK;
-
-  // TODO Better function name
-  dd->SetRenderState(D3DRS_ZENABLE, writeToZ ? D3DZB_TRUE : D3DZB_FALSE);
 }
 
 void AmjuGLDX9::DestroyTextureHandle(AmjuGL::TextureHandle*)
@@ -541,7 +586,7 @@ void AmjuGLDX9::SetTexture(
     height, //UINT Height,
     0, //  Mip Levels: 0 means create all
     D3DUSAGE_DYNAMIC, //DWORD Usage,
-    (td == AmjuGL::RGB ? D3DFMT_R8G8B8 : D3DFMT_A8R8G8B8), //D3DFORMAT Format,
+    (td == AmjuGL::AMJU_RGB ? D3DFMT_R8G8B8 : D3DFMT_A8R8G8B8), //D3DFORMAT Format,
     D3DPOOL_DEFAULT, // Pool,
     reinterpret_cast<LPDIRECT3DTEXTURE9*>(th) //LPDIRECT3DTEXTURE9 * ppTexture
   );
@@ -553,10 +598,10 @@ void AmjuGLDX9::SetTexture(
 
   switch (td)
   {
-  case AmjuGL::RGB:
+  case AmjuGL::AMJU_RGB:
     CopyRGBTexture((uint8*)lockedRect.pBits, lockedRect.Pitch, data, width, height); 
     break;
-  case AmjuGL::RGBA:
+  case AmjuGL::AMJU_RGBA:
     CopyRGBATexture((uint8*)lockedRect.pBits, lockedRect.Pitch, data, width, height); 
     break;
   }
@@ -566,7 +611,7 @@ void AmjuGLDX9::SetTexture(
   // TODO Create data for each mipmap level.
   // NB We want the same functionality as screenshot shrinking.
   IDirect3DSurface9 * pSurfaceLevel;
-  for (int iLevel = 0; iLevel < pTex->GetLevelCount(); iLevel++)
+  for (unsigned int iLevel = 0; iLevel < pTex->GetLevelCount(); iLevel++)
   {
     pTex->GetSurfaceLevel(iLevel, &pSurfaceLevel);
 
@@ -599,93 +644,6 @@ void AmjuGLDX9::SetTextureMode(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
 
-}
-
-// Is this necessary ? -- I think so, can't just cast away this difference.
-static void ConvertFloatToDoubleArray(const float src[16], double dest[16])
-{
-  AMJU_CALL_STACK;
-
-  for (int i = 0; i < 16; i++)
-  {
-    dest[i] = (double)src[i];
-  }
-}
-
-AmjuGL::Vec3 AmjuGLDX9::MouseToWorld(int x, int y)
-{
-/*
-
-  GLint viewport[4];
-  GLdouble modelview[16],projection[16];
-  GLfloat wx=x,wy;
-  GLfloat wz = 0;
-
-  // NB Order: get the viewport, then invert y, then get depth value :-)
-  glGetIntegerv(GL_VIEWPORT,viewport);
-  y=viewport[3]-y;
-
-  glReadPixels(x,y,1,1,GL_DEPTH_COMPONENT,GL_FLOAT,&wz);
-
-  wy = y;
-
-  glGetDoublev(GL_MODELVIEW_MATRIX,modelview);
-  glGetDoublev(GL_PROJECTION_MATRIX,projection);
-  double ox, oy, oz;
-  gluUnProject(wx, wy, wz,
-    modelview,projection,viewport,&ox,&oy,&oz);
-
-  return AmjuGL::Vec3(ox, oy, oz);
-
-*/
-
-  // We stored the viewport when it was set
-  // NB This should be the window size, explains why mouse is wrong in letterbox..?
-  y = s_viewPort.Height - y;
-  /*
-  // Get Z buffer at mouse coord
-  IDirect3DSurface9* pSurface;
-  if (GetDepthStencilSurface(&pSurface) != D3D_OK)
-  {
-    // Failed
-    return AmjuGL::Vec3(0, 0, 0);
-  }
-  D3DLOCKED_RECT lockedRect;
-  RECT r;
-  r.left = x;
-  r.right = x;
-  r.top = y;
-  r.bottom = y;
-  pSurface->LockRect(&lockedRect, r, D3DLOCK_READONLY);
-
-
-  pSurface->Release();
-  */
-  float wx = x;
-  float wy = y;
-  float wz = 0.5; // TODO depth
-  float modelview[16];
-  float proj[16];
-  GetMatrix(AmjuGL::MODELVIEW, modelview);
-  GetMatrix(AmjuGL::PROJECTION, proj);
-
-  double ox, oy, oz;
-
-  // Convert flat matrixes to double for gluUnproject -- I think we
-  // must convert (or change gluUnproject) - we can't just cast.
-  double modelviewD[16];
-  double projD[16];
-  ConvertFloatToDoubleArray(modelview, modelviewD);
-  ConvertFloatToDoubleArray(proj, projD);
-
-  gluUnProject(
-    wx, wy, wz,
-    modelviewD,
-    projD,
-    (int*)&s_viewPort.X,
-    &ox,&oy,&oz);
-
-  return AmjuGL::Vec3(ox, oy, oz);
 }
 
 void AmjuGLDX9::GetScreenshot(unsigned char* buffer, int w, int h)
@@ -744,7 +702,8 @@ void AmjuGLDX9::DrawLighting(
   D3DLIGHT9         g_pLight0;
 
   g_pLight0.Type = D3DLIGHT_DIRECTIONAL;
-  D3DXVECTOR3 vecDir = D3DXVECTOR3( 1.0f, -1.0f, -1.0f );
+  //D3DXVECTOR3 vecDir = D3DXVECTOR3( 1.0f, -1.0f, -1.0f );
+  D3DXVECTOR3 vecDir = D3DXVECTOR3(lightPos.m_x, lightPos.m_y, lightPos.m_z);
   D3DXVec3Normalize( (D3DXVECTOR3*)&g_pLight0.Direction, &vecDir);
 
   // We can set global ambient with SetRenderState, OR set it here
@@ -797,8 +756,10 @@ bool DX9Shader::Load(const std::string& fxFileName)
 {
   AMJU_CALL_STACK;
 
+  Assert(AmjuGLDX9::dd);
+
 /*
-  // Load FX file
+  // Load FX file using Amju File classes
   // TODO
   File fxFile(false); // no version info
   if (!fxFile.OpenRead("BasicHLSL.fx.txt", true // binary 
@@ -849,10 +810,19 @@ bool DX9Shader::Load(const std::string& fxFileName)
 
   // If this fails, there should be debug output as to 
   // why the .fx file failed to compile
-  HRESULT r = D3DXCreateEffectFromFile(dd, fxFileName.c_str(), 
-    NULL, NULL, dwShaderFlags, NULL, &m_pEffect, NULL );
+  ID3DXBuffer* errors = 0;
+  HRESULT r = D3DXCreateEffectFromFileA(AmjuGLDX9::dd, fxFileName.c_str(), 
+    NULL, NULL, dwShaderFlags, NULL, &m_pEffect, &errors);
+
+  if (errors)
+  {
+    m_errorStr = (char*)errors->GetBufferPointer();
+    MessageBoxA(0, m_errorStr.c_str(), "Oh no", MB_ICONSTOP);
+  }
   if (!SUCCEEDED(r))
   {
+    Assert(0);
+    // If !errors, file does not exist ?
     return false;
   }
   return true;
@@ -860,7 +830,7 @@ bool DX9Shader::Load(const std::string& fxFileName)
 
 std::string DX9Shader::GetErrorString()
 {
-  return "TODO";
+  return m_errorStr;
 }
 
 int DX9Shader::GetNumPasses() const
@@ -870,7 +840,7 @@ int DX9Shader::GetNumPasses() const
   return m_numPasses;
 }
 
-void DX9Shader::Begin()
+void DX9Shader::Begin(const std::string& techniqueName)
 {
   AMJU_CALL_STACK;
 
@@ -907,8 +877,8 @@ void DX9Shader::Begin()
   }
   */
 
-  m_pEffect->SetTechnique( "RenderSceneWithTexture1Light" );
-  m_pEffect->Begin(&m_numPasses, 0);
+  m_pEffect->SetTechnique(techniqueName.c_str()); // "RenderSceneWithTexture1Light" );
+  m_pEffect->Begin(&m_numPasses, 0); // sets num passes
 
 }
 
@@ -943,6 +913,59 @@ void DX9Shader::EndPass()
     return;
   }
   m_pEffect->EndPass();
+}
+
+void DX9Shader::Set(const std::string& name, const float matrix[16])
+{
+  D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
+  Assert(h);
+  D3DXMATRIX m(matrix);
+  if (FAILED(m_pEffect->SetMatrix(h, &m)))
+  {
+    Assert(0);
+  }
+}
+
+void DX9Shader::Set(const std::string& name, float f)
+{
+  D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
+  Assert(h);
+  if (FAILED(m_pEffect->SetFloat(h, f)))
+  {
+    Assert(0);
+  }
+}
+
+void DX9Shader::Set(const std::string& name, const AmjuGL::Vec3& v)
+{
+  D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
+  Assert(h);
+  if (FAILED(m_pEffect->SetValue(h, &v, sizeof(AmjuGL::Vec3))))
+  {
+    Assert(0);
+  }
+}
+
+void DX9Shader::Set(const std::string& name, const Colour& c)
+{
+  D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
+  Assert(h);
+  if (FAILED(m_pEffect->SetValue(h, &c, sizeof(Colour))))
+  {
+    Assert(0);
+  }
+}
+
+void DX9Shader::Set(const std::string& name, AmjuGL::TextureHandle texId)
+{
+  D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
+  Assert(h);
+  LPDIRECT3DTEXTURE9 t = reinterpret_cast<LPDIRECT3DTEXTURE9>(texId);
+
+  if (FAILED(m_pEffect->SetTexture(h, t)))
+  {
+    Assert(0);
+  }
 }
 
 } // namespace
