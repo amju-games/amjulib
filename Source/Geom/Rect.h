@@ -16,6 +16,11 @@ public:
   bool Intersects(const Rect& rect);
   Rect CalcIntersectRegion(const Rect& rect);
 
+  void Translate(float x, float y);
+
+  float GetMin(int axis) const;
+  float GetMax(int axis) const;
+
 private:
   float m_xmin, m_xmax, m_ymin, m_ymax;
 };
