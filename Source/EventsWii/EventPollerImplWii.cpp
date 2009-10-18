@@ -2,6 +2,7 @@
 #include "EventPollerImplWii.h"
 #include <wiiuse/wpad.h>
 #include "Pause.h"  
+#include <Screen.h>
 
 namespace Amju
 {
@@ -80,11 +81,12 @@ void EventPollerImplWii::Update(Listeners* pListeners)
     // Cursor event ?
     if (ir.x != ir_x[ctr] || ir.y != ir_y[ctr])
     {
+      // Convert to -1..1
       ir_x[ctr] = ir.x;
       ir_y[ctr] = ir.y;
       isCursorEvent = true;
-      ce.x = ir.x;
-      ce.y = ir.y;
+      ce.x = (float)ir.x / (float)Screen::X() * 2.0f - 1.0f;
+      ce.y = 1.0f - (float)ir.y / (float)Screen::Y() * 2.0f;
     }
 
     RotationEvent re[3];
