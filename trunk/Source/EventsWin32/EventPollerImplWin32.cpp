@@ -1,185 +1,207 @@
 #include "EventPollerImplWin32.h"
-#include <SDL.h> // TODO TEMP TEST
+#include <windows.h>
+#include <WinScreen.h>
+#include <Screen.h>
 
 namespace Amju
 {
-void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
+static  bool active = true;
+
+EventPollerImplWin32* EventPollerImplWin32::s_instance = 0;
+
+EventPollerImplWin32::EventPollerImplWin32()
 {
-  pKe->keyDown = (ske.state == SDL_PRESSED);
-  switch (ske.keysym.sym)
+  m_listeners = 0;
+  Assert(!s_instance);
+  s_instance = this;
+}
+
+EventPollerImplWin32::~EventPollerImplWin32()
+{
+  s_instance = 0;
+}
+
+void EventPollerImplWin32::OnKey(WPARAM c, bool down)
+{
+  KeyEvent ke;
+  ke.keyDown = down;
+  switch (c)
   {
-  case SDLK_UP:
-    pKe->keyType = AMJU_KEY_UP;
+  case VK_UP:
+    ke.keyType = AMJU_KEY_UP;
     break;
-  case SDLK_DOWN:
-    pKe->keyType = AMJU_KEY_DOWN;
+  case VK_DOWN:
+    ke.keyType = AMJU_KEY_DOWN;
     break;
-  case SDLK_LEFT:
-    pKe->keyType = AMJU_KEY_LEFT;
+  case VK_LEFT:
+    ke.keyType = AMJU_KEY_LEFT;
     break;
-  case SDLK_RIGHT:
-    pKe->keyType = AMJU_KEY_RIGHT;
+  case VK_RIGHT:
+    ke.keyType = AMJU_KEY_RIGHT;
     break;
+  case VK_SPACE:
+    ke.keyType = AMJU_KEY_SPACE;
+    break;
+  case VK_RETURN:
+    ke.keyType = AMJU_KEY_ENTER;
+    break;
+  /*
+  case VK_ESCAPE:
+    ke.keyType = AMJU_KEY_ESC;
+    break;
+  */
   default:
-    pKe->keyType = AMJU_KEY_CHAR;
-    break;
+    // TODO character
+    ke.keyType = AMJU_KEY_CHAR;
   }
+
+  if (m_listeners)
+  {
+    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
+    {
+      EventListener* e = *it;
+      Assert(e);
+      e->OnKeyEvent(ke);
+    }
+  }
+}
+
+void EventPollerImplWin32::LMouseButton(bool down)
+{
+  MouseButtonEvent mbe;
+  mbe.button = AMJU_BUTTON_MOUSE_LEFT;
+  mbe.isDown = down;
+
+  if (m_listeners)
+  {
+    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
+    {
+      EventListener* e = *it;
+      Assert(e);
+      e->OnMouseButtonEvent(mbe);
+    }
+  }
+}
+
+void EventPollerImplWin32::MouseMove(int x, int y)
+{
+  if (m_listeners)
+  {
+    CursorEvent ce;
+    ce.controller = 0;
+    ce.x = (float)x / (float)Screen::X() * 2.0f - 1.0f;
+    ce.y = 1.0f - (float)y / (float)Screen::Y() * 2.0f;
+
+    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
+    {
+      EventListener* e = *it;
+      Assert(e);
+      e->OnCursorEvent(ce);
+    }
+  }
+}
+
+LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+  switch(uMsg) 
+  {
+  case WM_MOUSEMOVE:
+    if (s_instance)
+    {
+      int x = LOWORD(lParam); 
+      int y = HIWORD(lParam); 
+      s_instance->MouseMove(x, y);
+    }
+    break;
+ 
+  case WM_LBUTTONDOWN:
+    if (s_instance)
+    {
+      // SetCapture() means we still get mouse events when the
+      // mouse leaves the client area.
+      SetCapture((HWND)GetHWnd());
+      s_instance->LMouseButton(true);
+    }
+    break;
+
+  case WM_LBUTTONUP:
+    if (s_instance)
+    {
+      // We must now release the mouse - end of SetCapture()
+      // mouse ownership.
+      ReleaseCapture();
+      s_instance->LMouseButton(false);
+    }
+    break;
+
+  case WM_KEYDOWN:
+    if (s_instance)
+    {
+      s_instance->OnKey(wParam, true);
+    }
+    break;
+
+  case WM_KEYUP:
+    if (s_instance)
+    {
+      s_instance->OnKey(wParam, false);
+    }
+    break;
+
+  case WM_CLOSE:
+    exit(0); // TODO
+    //PostQuitMessage(0);
+    return 0;
+
+  case WM_QUIT:
+    exit(0); // TODO
+    return 0;
+
+  case WM_SYSCOMMAND:
+    if (wParam == SC_SCREENSAVE || wParam == SC_MONITORPOWER)
+    {
+      return 0;
+    }
+    // Fall through
+
+  default:
+    return DefWindowProc( hWnd, uMsg, wParam, lParam );
+  }
+
+  return 0;
 }
 
 void EventPollerImplWin32::Update(Listeners* pListeners)
 {
-  // Init joysticks - TODO check for extra joysticks plugged in
-  static bool first = true;
-  if (first)
+  m_listeners = pListeners;
+
+  int bGotMsg;
+  MSG  msg;
+
+  PeekMessage( &msg, NULL, 0U, 0U, PM_NOREMOVE );
+//  while (msg.message != WM_QUIT) 
   {
-    first = false;
-    int numJs = SDL_NumJoysticks();
-    for (int i = 0; i < numJs; i++)
+    // Use PeekMessage() if the app is active, so we can use idle time to
+    // render the scene. Else, use GetMessage() to avoid eating CPU time.
+    bGotMsg = PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE );
+
+    if (bGotMsg) 
     {
-      SDL_JoystickOpen(i);  
-    }
-    SDL_JoystickEventState(SDL_ENABLE);
-  }
-
-  SDL_Event e;
-  while (SDL_PollEvent(&e))
-  {
-    KeyEvent ke;
-    bool isKeyEvent = false;
-
-    // Remember x and y axis values for each joystick
-    static const int MAX_NUM_JOYSTICKS = 4;
-    static JoyAxisEvent je[MAX_NUM_JOYSTICKS];
-    int joyNum = 0;
-    bool isJoyEvent = false;
-
-    CursorEvent ce;
-    bool isCursorEvent = false;
-
-    ButtonEvent be;
-    bool isButtonEvent = false;
-
-    MouseButtonEvent mbe;
-    bool isMouseButtonEvent = false;
-
-    bool isQuit = false;
-
-    switch (e.type)
+      // Translate and dispatch the message
+      TranslateMessage( &msg );
+      DispatchMessage( &msg );
+    } 
+    else 
     {
-    case SDL_QUIT:
-      isQuit = true;
-      break;
-    case SDL_ACTIVEEVENT:			/* Application loses/gains visibility */
-      break;
-    case SDL_KEYDOWN:			/* Keys pressed */
-    case SDL_KEYUP:			/* Keys released */
+      // Not necessary, as we are in the Game main loop
+      /*
+      if (active) // TODO TEMP TEST
       {
-        SDL_KeyboardEvent ske = e.key;
-        SetKeyType(ske, &ke);
-        isKeyEvent = true;
-        break;
+        HWND hWnd = (HWND)GetHWnd();
+        Assert(hWnd);
+        InvalidateRect(hWnd, 0, FALSE);
       }
-
-    case SDL_MOUSEMOTION:			/* Mouse moved */
-      {
-        SDL_MouseMotionEvent sme = e.motion;
-        ce.controller = 0;
-        ce.x = sme.x;
-        ce.y = sme.y;
-        isCursorEvent = true;
-        break;
-      }
-
-    case SDL_MOUSEBUTTONDOWN:		/* Mouse button pressed */
-    case SDL_MOUSEBUTTONUP:		/* Mouse button released */
-      {
-        SDL_MouseButtonEvent sme = e.button;
-        /*
-        if (sme.button == 1)
-        {
-          mbe.button = AMJU_BUTTON_MOUSE_LEFT;
-        }
-        else if (sme.button == 2)
-        {
-          mbe.button = AMJU_BUTTON_MOUSE_MIDDLE;
-        }
-        else if (sme.button == 3)
-        {
-          mbe.button = AMJU_BUTTON_MOUSE_RIGHT;
-        }
-        else
-        {
-          Assert(0);
-        }
-        */
-        mbe.button = AMJU_BUTTON_MOUSE_LEFT;
-        mbe.isDown = (sme.state == SDL_PRESSED);
-        isMouseButtonEvent = true;
-        break;
-      }
-
-    case SDL_JOYAXISMOTION:		/* Joystick axis motion */
-      {
-        SDL_JoyAxisEvent sje = e.jaxis;
-        joyNum = sje.which;
-        je[joyNum].controller = joyNum;
-        if (sje.axis == 0)
-        {
-          je[joyNum].x = (float)(sje.value) * (1.0f/32768.0f);
-          isJoyEvent = true;
-        }
-        else if (sje.axis == 1)
-        {
-          je[joyNum].y = (float)(sje.value) * (1.0f/32768.0f);
-          isJoyEvent = true;
-        }
-        break;
-      }
-
-    case SDL_JOYBALLMOTION:		/* Joystick trackball motion */
-    case SDL_JOYHATMOTION:		/* Joystick hat position change */
-    case SDL_JOYBUTTONDOWN:		/* Joystick button pressed */
-    case SDL_JOYBUTTONUP:			/* Joystick button released */
-    case SDL_SYSWMEVENT:			/* System specific event */
-    case SDL_VIDEORESIZE:			/* User resized video mode */
-    case SDL_VIDEOEXPOSE:			/* Screen needs to be redrawn */
-      break;
-    }
-
-    for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
-    {
-      EventListener* e = *it;
-      Assert(e);
-
-      if (isQuit)
-      {
-        e->OnQuitEvent();
-      }
-
-	    if (isKeyEvent)
-      {
-        e->OnKeyEvent(ke);
-      }
-
-      if (isCursorEvent)
-      {
-        e->OnCursorEvent(ce);
-      }
-
-      if (isJoyEvent)
-      {
-        e->OnJoyAxisEvent(je[joyNum]);
-      }
-
-      if (isButtonEvent)
-      {
-        e->OnButtonEvent(be);
-      }
-
-      if (isMouseButtonEvent)
-      {
-        e->OnMouseButtonEvent(mbe);
-      }
+      */
     }
   }
 }
