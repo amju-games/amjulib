@@ -106,6 +106,16 @@ int m4_inverse( MATRIX4 mr, const MATRIX4 ma )
     return( 1 );
 }
 
+bool Matrix::Inverse()
+{
+  Matrix m;
+  if (Inverse(&m))
+  {
+    *this = m;
+    return true;
+  }
+  return false;
+}
 
 bool Matrix::Inverse(Matrix* pResult) const
 {

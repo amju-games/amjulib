@@ -46,6 +46,8 @@ public:
     // (Inverse A' of matrix A is defined as
     //    A x A' = I (the identity matrix) and also A' x A = I.)
     bool Inverse(Matrix* pResult) const;
+    // Attempt to make this matrix its inverse
+    bool Inverse();
 
     friend Matrix operator*(const Matrix& m, const Matrix& n);
     Matrix& operator*=(const Matrix& n);
