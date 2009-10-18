@@ -20,11 +20,6 @@ public:
 
   virtual void Update();
 
-  // TODO
-  // Now we don't do this, we just draw the SceneGraph
-//  virtual void Draw();
-//  virtual void DrawBlended();
-
   virtual bool Load(File*); // Loads ID
   virtual void Reset() {}
 
