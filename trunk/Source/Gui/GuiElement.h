@@ -7,6 +7,7 @@
 #include "Vec2.h"
 #include "File.h"
 #include "GuiCommandHandler.h"
+#include "Rect.h"
 
 namespace Amju
 {
@@ -51,6 +52,9 @@ typedef RCPtr<GuiElement> PGuiElement;
 typedef std::vector<PGuiElement> GuiElements;
 
 PGuiElement LoadGui(const std::string& filename);
+
+// Convenience function - get rectangle from pos and size of element
+Rect GetRect(GuiElement*);
 }
 
 #endif
