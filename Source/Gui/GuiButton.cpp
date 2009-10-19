@@ -1,7 +1,6 @@
 #include "GuiButton.h"
 #include "Font.h"
 #include "Screen.h"
-#include "Rect.h"
 #include "EventPoller.h"
 #include "SoundManager.h"
 #include "StringUtils.h"
@@ -69,6 +68,7 @@ void GuiButton::Draw()
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
+
   GuiImage::Draw();
 
   // Draw text
@@ -85,14 +85,11 @@ void GuiButton::Draw()
 
 void GuiButton::OnCursorEvent(const CursorEvent& ce)
 {
-  float x = (float)ce.x / (float)Screen::X() * 2.0f - 1.0f;
-  float y = (1.0f - (float)ce.y / (float)Screen::Y()) * 2.0f - 1.0f;
-
   // TODO Adjust for cursor hot spot - dependency on Cursor Manager ??
 
   // Point in button rectangle ?
-  Rect r(m_pos.x, m_pos.x + m_size.x, m_pos.y - m_size.y, m_pos.y);
-  m_isMouseOver = (r.IsPointIn(Vec2f(x, y)));
+  Rect r = GetRect(this);//(m_pos.x, m_pos.x + m_size.x, m_pos.y - m_size.y, m_pos.y);
+  m_isMouseOver = (r.IsPointIn(Vec2f(ce.x, ce.y)));
 }
 
 void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
