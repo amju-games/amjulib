@@ -6,6 +6,15 @@
 
 namespace Amju
 {
+Rect GetRect(GuiElement* elem)
+{
+  return Rect(
+    elem->GetPos().x, 
+    elem->GetPos().x + elem->GetSize().x, 
+    elem->GetPos().y - elem->GetSize().y,
+    elem->GetPos().y);
+}
+
 PGuiElement LoadGui(const std::string& filename)
 {
   File f;
