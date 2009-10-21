@@ -16,6 +16,7 @@ namespace Amju
 {
 class AmjuGLImpl;
 class AmjuGLWindowInfo;
+class Shader;
 
 struct AmjuGL
 {
@@ -224,6 +225,8 @@ public:
     const LightColour& lightDiffuse,
     const LightColour& lightSpecular,
     const Vec3& lightPos);
+
+  static Shader* LoadShader(const std::string& shaderFileName);
 
 }; // struct AmjuGL
 } // namespace Amju

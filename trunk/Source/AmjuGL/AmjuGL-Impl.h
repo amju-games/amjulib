@@ -120,6 +120,7 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos) = 0;
 
+  virtual Shader* LoadShader(const std::string& shaderFileName) = 0;
 }; // class 
 } // namespace Amju
 

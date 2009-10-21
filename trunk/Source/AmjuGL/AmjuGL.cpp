@@ -408,4 +408,10 @@ void AmjuGL::GetScreenshot(unsigned char* buffer, int w, int h)
 
   impl->GetScreenshot(buffer, w, h);
 }
+
+Shader* AmjuGL::LoadShader(const std::string& shaderFileName)
+{
+  AMJU_CALL_STACK;
+  return impl->LoadShader(shaderFileName);
+}
 }
