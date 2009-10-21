@@ -124,6 +124,8 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos);
 
+  virtual Shader* LoadShader(const std::string& shaderFileName);
+
 private:
   int m_texId; // to get unique texture IDs
 
