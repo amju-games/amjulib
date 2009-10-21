@@ -8,13 +8,15 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #pragma comment(lib, "glu32.lib")
 #endif
 #include "AmjuFirst.h"
-#ifdef WIN32
-#include <windows.h>
-#endif
+//#ifdef WIN32
+//#include <windows.h>
+//#endif
 
 #include <iostream>
 #include "GL/glew.h"
 #include "AmjuGL-OpenGL.h"
+#include "GLShader.h"
+#include "ShaderNull.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
 #include "AmjuFinal.h"
@@ -27,143 +29,6 @@ namespace Amju
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
-
-
-OglShader::OglShader()
-{
-  AMJU_CALL_STACK;
-
-  m_vertexShaderHandle = 0;
-  m_fragmentShaderHandle = 0;
-  m_programHandle = 0;
-} 
-
-OglShader::~OglShader()
-{
-  AMJU_CALL_STACK;
-
-}
-
-bool OglShader::Load(const std::string& vertexSource, const std::string& fragmentSource)
-{
-  AMJU_CALL_STACK;
-
-  if (!AmjuGLOpenGL::s_shaderSupport)
-  {
-    m_errorStr = "GLSL not supported";
-    return false;
-  }
-
-#ifdef SHADER_DEBUG
-std::cout << "Loading shader..\nVertex Shader source:\n" << vertexSource.c_str()
-  << "\nFragment Shader source:\n" << fragmentSource.c_str() << "\n";
-#endif
-
-  m_vertexShaderHandle = glCreateShaderObjectARB(GL_VERTEX_SHADER);
-  m_fragmentShaderHandle = glCreateShaderObjectARB(GL_FRAGMENT_SHADER);
-
-#ifdef SHADER_DEBUG
-std::cout << "Created shader handles\n";
-#endif
-
-  const GLint vlength = vertexSource.size();
-  const GLint flength = fragmentSource.size();
-  const char* vStr = vertexSource.c_str();
-  const char* fStr = fragmentSource.c_str();
-  glShaderSourceARB(m_vertexShaderHandle, 1, &vStr, &vlength);
-  glShaderSourceARB(m_fragmentShaderHandle, 1, &fStr, &flength);
-
-#ifdef SHADER_DEBUG
-std::cout << "Set shader source\n";
-#endif
-
-  GLint compiled = 0;
-  GLcharARB buf[2000]; // error string buffer
-
-  glCompileShaderARB(m_vertexShaderHandle);
-
-  glGetObjectParameterivARB(m_vertexShaderHandle, GL_COMPILE_STATUS, &compiled);
-  if (!compiled)
-  {
-    glGetInfoLogARB(m_vertexShaderHandle, 2000, 0, buf);
-    m_errorStr = buf;
-
-    return false;
-  }        
-#ifdef SHADER_DEBUG
-std::cout << "Compiled vertex shader\n";
-#endif
-
-  glCompileShaderARB(m_fragmentShaderHandle);
-  
-  glGetObjectParameterivARB(m_fragmentShaderHandle, GL_COMPILE_STATUS, &compiled);
-  if (!compiled)
-  {
-    glGetInfoLogARB(m_fragmentShaderHandle, 2000, 0, buf);
-    m_errorStr = buf;
-
-    return false;
-  }        
-
-#ifdef SHADER_DEBUG
-std::cout << "Compiled fragment shader\n";
-#endif
-
-  m_programHandle = glCreateProgramObjectARB();
-
-#ifdef SHADER_DEBUG
-std::cout << "Created program\n";
-#endif
-
-  glAttachObjectARB(m_programHandle, m_vertexShaderHandle);
-  glAttachObjectARB(m_programHandle, m_fragmentShaderHandle);
-
-#ifdef SHADER_DEBUG
-std::cout << "Attached shaders to program\n";
-#endif
-
-  glLinkProgramARB(m_programHandle);
-
-#ifdef SHADER_DEBUG
-std::cout << "Link called\n";
-#endif
-
-  GLint linked;
-  glGetObjectParameterivARB(m_programHandle, GL_OBJECT_LINK_STATUS_ARB, &linked);
-  if (!linked)
-  {
-    glGetInfoLogARB(m_programHandle, 2000, 0, buf);
-    m_errorStr = buf;
-    
-    return false; 
-  }        
-
-#ifdef SHADER_DEBUG
-std::cout << "Shader program linked OK!\n";
-#endif
-
-  return true;
-}
-
-std::string OglShader::GetErrorString()
-{
-  return m_errorStr; 
-}
-
-void OglShader::Begin()
-{
-  AMJU_CALL_STACK;
-
-  glUseProgramObjectARB(m_programHandle);
-}
-
-void OglShader::End()
-{
-  AMJU_CALL_STACK;
-
-  glUseProgramObjectARB(0);
-}
-
 
 bool AmjuGLOpenGL::s_shaderSupport = false;
 
@@ -578,6 +443,23 @@ void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int w, int h)
   AMJU_CALL_STACK;
 
   glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, buffer);
+}
+
+Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
+{
+  AMJU_CALL_STACK;
+
+  GLShader* s = new GLShader;
+  // TODO Add "ogl" to shader file name
+  // TODO Two separate files for frag and vertex
+  if (!s->Load(shaderFileName))
+  {
+    delete s;
+    return new ShaderNull;
+  }
+  return s;
+
+  return 0;
 }
 }
 
