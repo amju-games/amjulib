@@ -14,6 +14,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include <map>
 
 #include "AmjuGL.h"
+#include <ShaderNull.h>
 #include "AmjuGL-GCube.h"
 #include "TextureUtils.h"
 #include "Pause.h" // TODO TEMP TEST
@@ -1115,6 +1116,11 @@ void AmjuGLGCube::GetScreenshot(unsigned char* buffer, int w, int h)
 {
   AMJU_CALL_STACK;
   Assert(0);
+}
+
+Shader* AmjuGLGCube::LoadShader(const std::string& )
+{
+  return new ShaderNull;
 }
 }
 
