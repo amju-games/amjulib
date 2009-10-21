@@ -330,6 +330,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\Source\AmjuGL\Shader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGL\ShaderNull.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\AmjuGL\WinScreen.cpp"
 				>
 			</File>
@@ -372,6 +380,14 @@
 						AdditionalOptions="/I &quot;../../Mem&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLOpenGL\GLShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLOpenGL\GLShader.h"
+				>
 			</File>
 			<File
 				RelativePath="..\..\..\Source\AmjuGLOpenGL\OpenGL.h"
@@ -1035,6 +1051,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\AmjuGLDX9\CreateWindowDX9.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLDX9\DX9Shader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\AmjuGLDX9\DX9Shader.h"
 				>
 			</File>
 		</Filter>
