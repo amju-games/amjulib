@@ -70,33 +70,13 @@ public:
   // Copy screen into buffer  - which should be allocated by caller.
   virtual void GetScreenshot(unsigned char* buffer, int w, int h);
 
+  virtual Shader* LoadShader(const std::string& shaderFileName);
 
 //private:
   // True if shaders are supported on this machine
   static bool s_shaderSupport;
 
 }; // class 
-
-class OglShader
-{
-public:
-  OglShader();
-  ~OglShader();
-
-  bool Load(const std::string& vertexSource, const std::string& fragmentSource);
-  std::string GetErrorString();
-
-  // Start using the shader
-  void Begin();
-  // Finish using the shader
-  void End();
-
-private:
-  uint32 m_vertexShaderHandle;
-  uint32 m_fragmentShaderHandle;
-  uint32 m_programHandle;
-  std::string m_errorStr;
-};
 
 } // namespace Amju
 
