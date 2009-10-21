@@ -8,7 +8,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuGL-Impl.h"
 #include "Colour.h"
 #include <d3d9.h>
-#include <D3DX9Effect.h>
 
 #ifdef CreateWindow
 #undef CreateWindow
@@ -127,44 +126,11 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos);
 
+  virtual Shader* LoadShader(const std::string& shaderFileName);
+
 private:
   WNDPROC m_wndproc;
 }; // class 
-
-class DX9Shader
-{
-public:
-  DX9Shader();
-  ~DX9Shader();
-
-  bool Load(const std::string& fxFileName);
-
-  std::string GetErrorString();
-
-  // Start using the shader. Use Begin before any pass
-  void Begin(const std::string& techniqueName);
-
-  // Finish using the shader: call after all passes are finished
-  void End();
-
-  // After calling begin, you can get the number of passes for this effect
-  int GetNumPasses() const;
-
-  // Use BeginPass/EndPass around each render pass
-  void BeginPass(int passNum);
-  void EndPass();
-
-  void Set(const std::string& effectParamName, const float matrix[16]);
-  void Set(const std::string& effectParamName, float f);
-  void Set(const std::string& effectParamName, const AmjuGL::Vec3&);
-  void Set(const std::string& effectParamName, const Colour&);
-  void Set(const std::string& effectParamName, AmjuGL::TextureHandle);
-
-private:
-  ID3DXEffect* m_pEffect;
-  unsigned int m_numPasses;
-  std::string m_errorStr;
-};
 
 } // namespace Amju
 
