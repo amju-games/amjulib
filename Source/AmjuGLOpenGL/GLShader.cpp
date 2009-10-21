@@ -112,8 +112,11 @@ std::cout << "Set shader source\n";
     glGetInfoLogARB(m_vertexShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
+#ifdef SHADER_DEBUG
+std::cout << "Vertex Shader Compile error: " << buf << "\n";
+#endif
     return false;
-  }        
+  }
 #ifdef SHADER_DEBUG
 std::cout << "Compiled vertex shader\n";
 #endif
@@ -126,6 +129,9 @@ std::cout << "Compiled vertex shader\n";
     glGetInfoLogARB(m_fragmentShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
+#ifdef SHADER_DEBUG
+std::cout << "Fragment Shader Compile error: " << buf << "\n";
+#endif
     return false;
   }        
 
