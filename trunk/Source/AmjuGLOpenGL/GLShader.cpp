@@ -51,6 +51,7 @@ bool GLShader::Load(const std::string& shadername)
   while (fragFile.GetDataLine(&s))
   {
     fragText += s;
+    fragText += "\n";
   }
 
   File vertFile(File::NO_VERSION);
@@ -63,6 +64,7 @@ bool GLShader::Load(const std::string& shadername)
   while (vertFile.GetDataLine(&s))
   {
     vertText += s;
+    vertText += "\n";
   }
 
   return Create(vertText, fragText);
@@ -165,6 +167,9 @@ std::cout << "Link called\n";
     glGetInfoLogARB(m_programHandle, 2000, 0, buf);
     m_errorStr = buf;
     
+#ifdef SHADER_DEBUG
+std::cout << "Shader Link error: " << buf << "\n";
+#endif
     return false; 
   }        
 
@@ -196,18 +201,46 @@ void GLShader::End()
 
 void GLShader::Set(const std::string& name, const float matrix[16])
 {
+    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    if (loc == -1)
+    {
+        return;
+    }
+
+    glUniformMatrix4fvARB(loc, 16, false, matrix);
 }
 
 void GLShader::Set(const std::string& name, float f)
 {
+    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    if (loc == -1)
+    {
+        return;
+    }
+
+    glUniform1fARB(loc, f);
 }
 
-void GLShader::Set(const std::string& name, const AmjuGL::Vec3&)
+void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 {
+    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    if (loc == -1)
+    {
+        return;
+    }
+
+    glUniform3fARB(loc, v.m_x, v.m_y, v.m_z);
 }
 
-void GLShader::Set(const std::string& name, const Colour&)
+void GLShader::Set(const std::string& name, const Colour& c)
 {
+    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    if (loc == -1)
+    {
+        return;
+    }
+
+    glUniform4fvARB(loc, 4, (float*)(&c));
 }
 
 void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
