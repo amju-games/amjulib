@@ -198,7 +198,11 @@ void DX9Shader::EndPass()
 void DX9Shader::Set(const std::string& name, const float matrix[16])
 {
   D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
-  Assert(h);
+  if (!h)
+  {
+      return;
+  }
+
   D3DXMATRIX m(matrix);
   if (FAILED(m_pEffect->SetMatrix(h, &m)))
   {
@@ -209,7 +213,11 @@ void DX9Shader::Set(const std::string& name, const float matrix[16])
 void DX9Shader::Set(const std::string& name, float f)
 {
   D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
-  Assert(h);
+  if (!h)
+  {
+      return;
+  }
+
   if (FAILED(m_pEffect->SetFloat(h, f)))
   {
     Assert(0);
@@ -219,7 +227,11 @@ void DX9Shader::Set(const std::string& name, float f)
 void DX9Shader::Set(const std::string& name, const AmjuGL::Vec3& v)
 {
   D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
-  Assert(h);
+  if (!h)
+  {
+      return;
+  }
+
   if (FAILED(m_pEffect->SetValue(h, &v, sizeof(AmjuGL::Vec3))))
   {
     Assert(0);
@@ -229,7 +241,11 @@ void DX9Shader::Set(const std::string& name, const AmjuGL::Vec3& v)
 void DX9Shader::Set(const std::string& name, const Colour& c)
 {
   D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
-  Assert(h);
+  if (!h)
+  {
+      return;
+  }
+
   if (FAILED(m_pEffect->SetValue(h, &c, sizeof(Colour))))
   {
     Assert(0);
@@ -239,7 +255,11 @@ void DX9Shader::Set(const std::string& name, const Colour& c)
 void DX9Shader::Set(const std::string& name, AmjuGL::TextureHandle texId)
 {
   D3DXHANDLE h = m_pEffect->GetParameterByName(0, name.c_str());
-  Assert(h);
+  if (!h)
+  {
+      return;
+  }
+
   LPDIRECT3DTEXTURE9 t = reinterpret_cast<LPDIRECT3DTEXTURE9>(texId);
 
   if (FAILED(m_pEffect->SetTexture(h, t)))
