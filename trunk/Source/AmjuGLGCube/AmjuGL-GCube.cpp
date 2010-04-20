@@ -248,6 +248,8 @@ bool AmjuGLGCube::CreateWindow(AmjuGLWindowInfo*)
 
 void AmjuGLGCube::Init()
 {
+  // See explanation at http://gxr.brickmii.com/Tutorial/Setup/
+
   AMJU_CALL_STACK;
   
   if (s_isConsole)
@@ -332,19 +334,9 @@ void AmjuGLGCube::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
-  /*
-  if (w == 0)
-  {
-      w = rmode->fbWidth;
-  }
-  
-  if (h == 0)
-  {
-    h = rmode->efbHeight;
-  }
-  */
-
-  GX_SetViewport(0,0,w,h,0,1);
+  // Need to do both of these to get the expected effect
+  GX_SetViewport(x, y, w, h, 0, 1);
+  GX_SetScissor(x, y, w, h);
 }
 
 void AmjuGLGCube::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)

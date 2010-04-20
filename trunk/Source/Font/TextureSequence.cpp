@@ -155,12 +155,13 @@ void TextureSequence::Draw(int element, float size)
   float sizeX = m_sizex * size;
   float sizeY = m_sizey * size;        
 
+  const float Z = 0.5f;
   AmjuGL::Vert v[4] =
   {
-    AmjuGL::Vert(0,     0,     0,  x,      1.0f - y - dy,     0, 1.0f, 0),
-    AmjuGL::Vert(sizeX, 0,     0,  x + dx, 1.0f - y - dy,     0, 1.0f, 0),
-    AmjuGL::Vert(sizeX, sizeY, 0,  x + dx, 1.0f - y,          0, 1.0f, 0),
-    AmjuGL::Vert(0,     sizeY, 0,  x,      1.0f - y,          0, 1.0f, 0)
+    AmjuGL::Vert(0,     0,     Z,  x,      1.0f - y - dy,     0, 1.0f, 0),
+    AmjuGL::Vert(sizeX, 0,     Z,  x + dx, 1.0f - y - dy,     0, 1.0f, 0),
+    AmjuGL::Vert(sizeX, sizeY, Z,  x + dx, 1.0f - y,          0, 1.0f, 0),
+    AmjuGL::Vert(0,     sizeY, Z,  x,      1.0f - y,          0, 1.0f, 0)
   };
 
   AmjuGL::SetTextureMode(AmjuGL::AMJU_TEXTURE_REGULAR);

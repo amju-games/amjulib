@@ -27,12 +27,12 @@ void SceneGraph::SetRootNode(GraphType gt, PSceneNode root)
   m_root[gt] = root;
 }
 
-void SceneGraph::SetCamera(PSceneNode cameraNode)
+void SceneGraph::SetCamera(PSceneNodeCamera cameraNode)
 {
   m_camera = cameraNode;
 }
 
-PSceneNode SceneGraph::GetCamera()
+PSceneNodeCamera SceneGraph::GetCamera()
 {
   return m_camera;
 }
@@ -53,10 +53,15 @@ void SceneGraph::AddBlendNode(PSceneNode p)
   bn.m_sceneNode = p;
 
   // Get dist to camera
-  const Matrix& camMat = GetCamera()->m_combined;
-  Vec3f camPos(camMat[12], camMat[13], camMat[14]);
+  // TODO Is this correct ?? Isn't it distance from pos to origin ?
+
+  //const Matrix& camMat = GetCamera()->m_combined;
+  //Vec3f camPos(camMat[12], camMat[13], camMat[14]);
+
   const Matrix& mat = p->m_combined;
   Vec3f pos(mat[12], mat[13], mat[14]);
+
+  Vec3f camPos = GetCamera()->GetEyePos(); 
 
   bn.m_screenZ = (camPos - pos).SqLen(); // ..??
   m_blendNodes.push_back(bn);
@@ -113,7 +118,8 @@ void SceneGraph::DrawChildren(SceneNode* node, Frustum::FrustumResult fr)
   // If this node is a camera, set the SceneGraph current camera to this..?
   if (node->IsCamera())
   {
-    SetCamera(node);
+    Assert(dynamic_cast<SceneNodeCamera*>(node));
+    SetCamera((SceneNodeCamera*)node);
   }
 
   node->BeforeDraw(); 
@@ -217,8 +223,10 @@ void SceneGraph::Draw()
     // Centre on camera
     if (m_camera)
     {
-      // Translate to camera eye pos ?     
-      //m_camera->Draw(); // ??????
+      // Translate to camera eye pos 
+      // (We pop matrix after drawing skybox, no additional push/pop required)
+      Vec3f pos = m_camera->GetEyePos();
+      AmjuGL::Translate(pos.x, pos.y, pos.z);
     }
 
     DrawNode(m_root[AMJU_SKYBOX]);
@@ -229,6 +237,8 @@ void SceneGraph::Draw()
   AmjuGL::PushMatrix();
 
   // Do camera transformation again for blended nodes
+  // TODO Better to remember the transformation we got the first time, in case
+  //  there are multiple cameras ?
   if (m_camera)
   {
     m_camera->Draw();

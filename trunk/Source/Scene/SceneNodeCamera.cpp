@@ -7,6 +7,11 @@ SceneNodeCamera::SceneNodeCamera()
 {
 }
 
+const Vec3f& SceneNodeCamera::GetEyePos() const
+{
+  return m_eye;
+}
+
 void SceneNodeCamera::SetEyePos(const Vec3f& eye)
 {
   m_eye = eye;

@@ -15,6 +15,8 @@ public:
   void SetLookAtPos(const Vec3f&);
   void SetUpVec(const Vec3f&);
 
+  const Vec3f& GetEyePos() const;
+
 protected:
   Vec3f m_eye;
   Vec3f m_lookat;

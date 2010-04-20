@@ -136,5 +136,16 @@ void AABB::Translate(const Vec3f& v)
   m_zmax += v.z;
   m_zmin += v.z;
 }
+
+AABB AABB::Intersection(const AABB& r) const
+{
+  return AABB(
+    std::max(m_xmin, r.m_xmin),
+    std::min(m_xmax, r.m_xmax),
+    std::max(m_ymin, r.m_ymin),
+    std::min(m_ymax, r.m_ymax),
+    std::max(m_zmin, r.m_zmin),
+    std::min(m_zmax, r.m_zmax));
+}
 }
 

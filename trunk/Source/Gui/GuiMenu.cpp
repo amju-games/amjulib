@@ -8,6 +8,14 @@ namespace Amju
 GuiMenuItem::GuiMenuItem(const std::string& text)
 {
   SetText(text);
+  m_size.x = m_textWidth;
+  m_size.y = 0.1f; // TODO TEMP TEST
+}
+
+GuiMenuItem::GuiMenuItem(const std::string& text, const Vec2f& size)
+{
+  SetText(text);
+  SetSize(size);
 }
 
 void GuiMenuItem::Draw()
@@ -23,6 +31,8 @@ GuiMenu::GuiMenu()
 
 void GuiMenu::Draw()
 {
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+
   AmjuGL::PushMatrix();
   AmjuGL::Translate(m_pos.x, m_pos.y, 0);
   for (unsigned int i = 0; i < m_items.size(); i++)

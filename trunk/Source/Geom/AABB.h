@@ -46,6 +46,9 @@ public:
   //  volume and the new box.
   void Union(const AABB&);
 
+  // Calc intersection between two boxes
+  AABB Intersection(const AABB&) const;
+
 private:
   float m_xmin, m_xmax, m_ymin, m_ymax, m_zmin, m_zmax;
 };
