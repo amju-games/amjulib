@@ -10,7 +10,14 @@ namespace Amju
 class GuiMenuItem : public GuiText // ?????
 {
 public:
+  // Size not specified - defaults to width of text when all displayed
+  //  in one line
   GuiMenuItem(const std::string& text);
+
+  // Specify size, which is the bounding box for the text. This is used
+  //  for right/centre justification
+  GuiMenuItem(const std::string& text, const Vec2f& size);
+
   virtual void Draw();
 };
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;

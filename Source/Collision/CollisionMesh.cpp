@@ -81,13 +81,13 @@ void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
   }
 }
 
-bool CollisionMesh::GetY(const Vec3f& v, float* pY) const
+bool CollisionMesh::GetY(const Vec2f& v, float* pY) const
 {
   //bool found = false;
   for (Tris::const_iterator it = m_tris.begin(); it != m_tris.end(); ++it)
   {
     const Tri& t = *it;
-    if (PointXZInTri(t, v.x, v.z))
+    if (PointXZInTri(t, v.x, v.y))
     {
       // TODO Use GetY() above
       // TODO find best
@@ -98,7 +98,7 @@ bool CollisionMesh::GetY(const Vec3f& v, float* pY) const
       {
         // Plane eq: Ax + By + Cz = D
         // =>        y = (Ax + Cz + D) / -B;        
-        *pY = (p.A() * v.x + p.C() * v.z - p.D()) / -p.B();
+        *pY = (p.A() * v.x + p.C() * v.y - p.D()) / -p.B();
         return true;
       }
     }

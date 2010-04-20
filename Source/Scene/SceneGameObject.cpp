@@ -22,11 +22,6 @@ SceneGameObjectOpaque::SceneGameObjectOpaque(PGameObject pGo) :
 void SceneGameObjectOpaque::Draw()
 {
   Assert(m_pGo);
-
-//  AmjuGL::PushMatrix();
-//  AmjuGL::MultMatrix(m_local);
-  m_pGo->Draw();
-//  AmjuGL::PopMatrix();
 }
 
 SceneGameObjectBlended::SceneGameObjectBlended(PGameObject pGo) :
@@ -38,10 +33,5 @@ SceneGameObjectBlended::SceneGameObjectBlended(PGameObject pGo) :
 void SceneGameObjectBlended::Draw()
 {
   Assert(m_pGo);
-
-//  AmjuGL::PushMatrix();
-//  AmjuGL::MultMatrix(m_local);
-  m_pGo->DrawBlended();
-//  AmjuGL::PopMatrix();
 }
 }

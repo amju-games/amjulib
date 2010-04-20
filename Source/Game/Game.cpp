@@ -129,10 +129,10 @@ void Game::UpdateState()
 
   m_currentState = m_newState;
   Assert(m_currentState);
-
-  m_currentState->OnActive();
-
   m_newState = 0;
+
+  // This next line may set m_newState, so zero it first
+  m_currentState->OnActive();
 }
 
 bool Game::AddState(const char* stateName, PGameState state)

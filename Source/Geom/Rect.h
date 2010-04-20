@@ -12,9 +12,9 @@ public:
   Rect(float xmin, float xmax, float ymin, float ymax);
   void Set(float xmin, float xmax, float ymin, float ymax);
 
-  bool IsPointIn(const Vec2f& point);
-  bool Intersects(const Rect& rect);
-  Rect CalcIntersectRegion(const Rect& rect);
+  bool IsPointIn(const Vec2f& point) const;
+  bool Intersects(const Rect& rect) const;
+  Rect CalcIntersectRegion(const Rect& rect) const;
 
   void Translate(float x, float y);
 

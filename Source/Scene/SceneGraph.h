@@ -2,6 +2,7 @@
 #define SCENE_GRAPH_H
 
 #include "SceneNode.h"
+#include "SceneNodeCamera.h"
 #include "Frustum.h"
 
 namespace Amju
@@ -22,8 +23,8 @@ public:
   void SetRootNode(GraphType, PSceneNode root);
   PSceneNode GetRootNode(GraphType);
 
-  void SetCamera(PSceneNode cameraNode);
-  PSceneNode GetCamera();
+  void SetCamera(PSceneNodeCamera cameraNode);
+  PSceneNodeCamera GetCamera();
 
   void Clear();  
 
@@ -51,7 +52,7 @@ private:
   PSceneNode m_root[AMJU_MAX_GT];
 
   // Pointer to the camera node
-  PSceneNode m_camera;
+  PSceneNodeCamera m_camera;
 
   // Collection of alpha blended nodes
   struct BlendNode

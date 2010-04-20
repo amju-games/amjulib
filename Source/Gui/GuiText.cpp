@@ -28,7 +28,9 @@ void GuiText::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::SetIdentity();
   Rect r = GetRect(this);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   DrawRect(r);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::PopMatrix();
 #endif // _DEBUG
 
