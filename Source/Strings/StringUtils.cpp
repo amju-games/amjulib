@@ -45,6 +45,8 @@ Added to repository
 #include <algorithm> // remove()
 #include <functional> // for MSVC
 #include <iostream>
+#include <string.h> // strlen()
+#include <stdio.h> // sprintf()
 #include "StringUtils.h"
 #include "AmjuAssert.h"
 #include "AmjuFinal.h"

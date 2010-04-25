@@ -27,6 +27,7 @@ Added to repository
 #endif
 
 #include <iostream>
+#include <string.h> // memcpy
 #include "GlueFileMem.h"
 #include "FileSize.h"
 #include "AmjuAssert.h"

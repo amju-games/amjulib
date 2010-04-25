@@ -5,6 +5,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #ifndef AMJU_GL_H_INCLUDED
 #define AMJU_GL_H_INCLUDED
 
+#include <string>
 #include <vector>
 #include "AmjuTypes.h"
 

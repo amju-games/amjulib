@@ -12,6 +12,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <typeinfo>
 #endif
 #include "NonCopyable.h"
+#include <stdlib.h> // atexit
 #include "AmjuFinal.h"
 
 namespace Amju

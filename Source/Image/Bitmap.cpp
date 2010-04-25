@@ -34,6 +34,7 @@ Added to repository
 #include "Endian.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> // memset
 #include <iostream>
 #include <string>
 #include "AmjuFinal.h"
@@ -104,6 +105,7 @@ unsigned char* LoadDIBitmap(const char *filename, unsigned int* pWidth, unsigned
   }
 
   // Treat bytes 10-13 of header as a uint32.
+  // TODO Getting gcc warning here
   uint32 offbits = (uint32)(*(uint32*)(&header.bytes[10]));
   unsigned int infosize = Endian(offbits) - sizeof(BitmapFileHeader);
   /*
