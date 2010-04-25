@@ -5,6 +5,7 @@
 
 #if defined(GEKKO) 
 #include <wiiuse/wpad.h>
+#include <stdlib.h> // exit 
 #endif // GEKKO
 
 

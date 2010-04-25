@@ -6,6 +6,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 
 #include <iostream>
 #include <stack>
+#include <string.h> // for memset()
 #include <malloc.h> // for memalign()
 #include <math.h>
 #include <gccore.h>
@@ -133,7 +134,7 @@ void AmjuGLGCube::Flip()
 // Taken from 	nehe lesson 8 port to GX by shagkur
 void setlight(Mtx view,u32 theta,u32 phi,GXColor litcol, GXColor ambcol,GXColor matcol)
 {
-	Vector lpos;
+	guVector lpos;
 	f32 _theta,_phi;
 	GXLightObj lobj;
 
@@ -190,12 +191,12 @@ void AmjuGLGCube::DrawLighting(
   setlight(s_modelviewMatrix, theta, phi, litcolors[0],litcolors[1],litcolors[2]);
   */
 
-	Vector lpos;
+	guVector lpos;
 	GXLightObj lobj;
 
-	lpos.x = lightPos.m_x; // * cosf(_phi) * sinf(_theta);
-	lpos.y = lightPos.m_y; // * sinf(_phi);
-	lpos.z = lightPos.m_z; // * cosf(_phi) * cosf(_theta);
+	lpos.x = lightPos.m_x; 
+	lpos.y = -lightPos.m_y; // looks like this is reversed - or is it all three ?? 
+	lpos.z = lightPos.m_z; 
 
   // No good
 	//guVecMultiply(s_modelviewMatrix,&lpos,&lpos);
@@ -351,7 +352,7 @@ void AmjuGLGCube::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, f
   
   // setup our camera at the origin
   // looking down the -z axis with y up
-  Vector cam = { eyeX, eyeY, eyeZ },  //{0.0F, 0.0F, 0.0F},
+  guVector cam = { eyeX, eyeY, eyeZ },  //{0.0F, 0.0F, 0.0F},
       up = { upX, upY, upZ },     //{0.0F, 1.0F, 0.0F},
       look = { x, y, z };           //{0.0F, 0.0F, -1.0F};
   guLookAt(s_modelviewMatrix, &cam, &up, &look);
@@ -808,7 +809,7 @@ void AmjuGLGCube::RotateX(float degs)
   return;
   }
   
-  Vector axis = {1, 0, 0};
+  guVector axis = {1, 0, 0};
   
   Mtx m; // model matrix.
   guMtxIdentity(m);
@@ -825,7 +826,7 @@ void AmjuGLGCube::RotateY(float degs)
   return;
   }
 
-  Vector axis = {0, 1, 0};
+  guVector axis = {0, 1, 0};
   Mtx m; // model matrix.
   guMtxIdentity(m);
   guMtxRotAxisDeg(m, &axis, degs);
@@ -841,7 +842,7 @@ void AmjuGLGCube::RotateZ(float degs)
   return;
   }
 
-  Vector axis = {0, 0, 1};
+  guVector axis = {0, 0, 1};
   Mtx m; // model matrix.
   guMtxIdentity(m);
   guMtxRotAxisDeg(m, &axis, degs);
