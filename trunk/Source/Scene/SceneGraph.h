@@ -38,7 +38,9 @@ public:
 private:
   void DrawNode(SceneNode* p);
   // Draw children of this node - which is either in or half-in the
-  //  frustum. If fully in, no need to test children
+  //  frustum. If fully in, no need to test children, so long as the
+  //  bounding volumes are fully heirarchical. If not, all children are
+  //  tested against the frustum.
   void DrawChildren(SceneNode* p, Frustum::FrustumResult fr);
 
   // Recursively draw AABBs - for debugging
@@ -68,6 +70,9 @@ private:
   Frustum m_frustum;
   int m_nodesInFrustum;
   int m_nodesTotal; // total number of nodes 
+
+  // True if all nodes' bounding vols enclose all children
+  bool m_isHeirarchy;
 };
 }
 

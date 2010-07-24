@@ -3,6 +3,7 @@
 #include <DrawAABB.h>
 
 //#define VFC_DEBUG
+//#define HIERARCHY_DEBUG
 
 namespace Amju
 {
@@ -15,6 +16,7 @@ SceneGraph::SceneGraph()
 {
   m_nodesInFrustum = 0;
   m_nodesTotal = 0;
+  m_isHeirarchy = false;
 }
 
 PSceneNode SceneGraph::GetRootNode(GraphType gt)
@@ -94,11 +96,11 @@ void SceneGraph::DrawAABBs(SceneNode* node)
 
 void SceneGraph::DrawNode(SceneNode* p)
 {
-#ifdef _DEBUG
+#ifdef HIERARCHY_DEBUG
   const AABB& aabb = *(p->GetAABB());
   Frustum::FrustumResult fr = m_frustum.Intersects(aabb);
   Assert(fr != Frustum::AMJU_OUTSIDE);
-#endif // _DEBUG
+#endif // HIERARCHY_DEBUG
 
   m_nodesInFrustum++;
 
@@ -111,9 +113,10 @@ void SceneGraph::DrawNode(SceneNode* p)
   }
 }
 
-void SceneGraph::DrawChildren(SceneNode* node, Frustum::FrustumResult fr)
+void SceneGraph::DrawChildren(
+  SceneNode* node, Frustum::FrustumResult fr)
 {
-  Assert(fr != Frustum::AMJU_OUTSIDE);
+  Assert(!m_isHeirarchy || fr != Frustum::AMJU_OUTSIDE);
 
   // If this node is a camera, set the SceneGraph current camera to this..?
   if (node->IsCamera())
@@ -137,12 +140,12 @@ void SceneGraph::DrawChildren(SceneNode* node, Frustum::FrustumResult fr)
 
     // Get frustum result for child. If child nodes are always contained
     //  within their parents, we only need to recalc if the parent node
-    //  is partly in and partly outside the frustum. This breaks if the
-    //  nodes are not hierarchically contained.
+    //  is partly in and partly outside the frustum (heirarchical).
+    // If not heirarchical, do the frustum test every time.
     Frustum::FrustumResult childFr = fr;
-    if (fr == Frustum::AMJU_PART_INSIDE)
+    if (!m_isHeirarchy || fr == Frustum::AMJU_PART_INSIDE)
     {
-      // Get result for child
+      // Need to do frustum test for child
       childFr = m_frustum.Intersects(*(child->GetAABB()));
     }
 
@@ -195,7 +198,9 @@ void SceneGraph::Draw()
   {
     m_camera->Draw();
     // TODO This should go in CameraNode::Draw
-    //m_frustum.Create(); 
+
+    // TODO! This is broken! Test and fix VFC!!!
+    m_frustum.Create(); 
   }
 
   Assert(m_root[AMJU_OPAQUE]);
@@ -205,9 +210,15 @@ void SceneGraph::Draw()
 
   SceneNode* node = m_root[AMJU_OPAQUE];
   Frustum::FrustumResult fr = m_frustum.Intersects(*(node->GetAABB()));
+
   if (fr != Frustum::AMJU_OUTSIDE)
   {
     DrawNode(node);
+    DrawChildren(node, fr);  
+  }
+  else if (!m_isHeirarchy)
+  {
+    // Children may still be in
     DrawChildren(node, fr);  
   }
 
