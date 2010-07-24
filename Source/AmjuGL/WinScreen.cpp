@@ -1,7 +1,7 @@
+#ifdef WIN32
+
 #include "WinScreen.h"
 #include <windows.h>
-
-#ifdef WIN32
 
 namespace Amju
 {
