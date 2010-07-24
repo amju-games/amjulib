@@ -24,7 +24,8 @@ GuiButton::~GuiButton()
 
 void GuiButton::ClickSound() const
 { 
-  TheSoundManager::Instance()->PlayWav("click"); // NB no file ext
+  // TODO Get resource from ResourceManager ??
+//  TheSoundManager::Instance()->PlayWav("click"); // NB no file ext
 }
 
 bool GuiButton::Load(File* f)
@@ -57,6 +58,11 @@ bool GuiButton::Load(File* f)
 
 void GuiButton::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   AmjuGL::PushMatrix();
   if (m_isPressed)
   {
@@ -65,6 +71,8 @@ void GuiButton::Draw()
   }
   if (m_isMouseOver)
   {
+    // TODO This is no good, the size change depends on the position of the button.
+    // Should instead rebuild tri list.
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
@@ -73,18 +81,26 @@ void GuiButton::Draw()
 
   // Draw text
   // TODO Get font name, point size - use a GuiText object
-
+  PushColour();
+  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
   float w = m_font->GetTextWidth(m_text);
   float x = m_pos.x + m_size.x * 0.5f - w * 0.5f * m_fontSize;
+  float y = m_pos.y - m_size.y; // + 0.5f * heighOfChar ??
   float origSize = m_font->GetSize();
   m_font->SetSize(m_fontSize);
-  m_font->Print(x, m_pos.y, m_text.c_str());
+  m_font->Print(x, y, m_text.c_str());
   m_font->SetSize(origSize);
+  PopColour();
   AmjuGL::PopMatrix();
 }
 
 void GuiButton::OnCursorEvent(const CursorEvent& ce)
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   // TODO Adjust for cursor hot spot - dependency on Cursor Manager ??
 
   // Point in button rectangle ?
@@ -94,6 +110,11 @@ void GuiButton::OnCursorEvent(const CursorEvent& ce)
 
 void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   // If event is mouse button up, and button is pressed, and mouse is over button,
   // then trigger command.
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
@@ -113,6 +134,7 @@ void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
         // Execute command for this button
         ClickSound();
         ExecuteCommand();
+        m_isMouseOver = false; // once clicked, revert to unselected.. OK??
       }
       m_isPressed = false;
     }
@@ -121,6 +143,11 @@ void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 void GuiButton::OnButtonEvent(const ButtonEvent& be)
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   if (be.button == AMJU_BUTTON_A)
   {
     if (be.isDown)
@@ -135,5 +162,25 @@ void GuiButton::OnButtonEvent(const ButtonEvent& be)
       m_isPressed = false;
     }
   }
+}
+
+void GuiButton::SetText(const std::string& text)
+{
+  m_text = text;
+}
+
+void GuiButton::SetTextColour(const Colour& col)
+{
+  m_textColour = col;
+}
+
+bool GuiButton::IsMouseOver() const
+{
+  return m_isMouseOver;
+}
+
+bool GuiButton::IsPressed() const
+{
+  return m_isPressed;
 }
 }
