@@ -21,8 +21,8 @@ Added to repository
   
 */
 
-#if !defined(SCHMICKEN_GLUE_FILE_H_INCLUDED)
-#define SCHMICKEN_GLUE_FILE_H_INCLUDED
+#ifndef AMJU_GLUE_FILE_H_INCLUDED
+#define AMJU_GLUE_FILE_H_INCLUDED
 
 #include "Common.h"
 #include "SharedPtr.h"

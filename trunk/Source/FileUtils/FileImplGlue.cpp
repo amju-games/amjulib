@@ -99,6 +99,20 @@ bool FileImplGlue::GetLine(std::string* pResult)
 {
   AMJU_CALL_STACK;
 
+  uint32 base = 0;
+  if (!s_pGlueFile->GetSeekBase(m_subfilename, &base))
+  {
+    // Failed to look up file size
+    return false;
+  }
+  unsigned int pos = s_pGlueFile->GetPos() - base;
+  unsigned int size = s_pGlueFile->GetSize(m_subfilename);
+  if (pos >= size)
+  {
+    // EOF reached
+    return false;
+  }
+
   // Only called if the current sub-file is text.
   // Get characters until we hit end-of-line char.
   // Strip off any MS-DOS ^M char preceding it.

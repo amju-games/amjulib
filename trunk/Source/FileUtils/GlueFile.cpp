@@ -336,6 +336,11 @@ bool GlueFile::AddItem(const std::string& filename)
 
   string lowname = ToLower(filename);
 
+  // Convert \ to /
+  // So we can add files in subdirs in DOS, which uses "\", and use "/" to 
+  //  retrieve the subdirs 
+  lowname = Replace(lowname, "\\", "/"); 
+
   // Check for sub-file already existing.
   if (m_table.find(lowname) != m_table.end())
   {
