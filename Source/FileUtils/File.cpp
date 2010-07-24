@@ -222,7 +222,11 @@ bool File::WriteBinary(const char* c, unsigned int length)
 {
   AMJU_CALL_STACK;
 
-  return m_pImpl->WriteBinary(c, length);
+  if (length > 0)
+  {
+    return m_pImpl->WriteBinary(c, length);
+  }
+  return true;
 }
 
 bool File::WriteComment(const std::string& comment)
