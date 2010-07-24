@@ -5,6 +5,8 @@
 #include "ReportError.h"
 #include "StringUtils.h"
 
+#define RESOURCE_GROUP_DEBUG
+
 namespace Amju
 {
 // Loader for bmp files
@@ -68,6 +70,10 @@ bool ResourceManager::LoadResourceGroup(const std::string& rgName)
     return true;
   }
 
+#ifdef RESOURCE_GROUP_DEBUG
+  std::cout << "Loading resource group " << rgName << "... ";
+#endif // RESOURCE_GROUP_DEBUG
+
   ResGroup rg;
   rg.m_name = rgName;
   File f;
@@ -88,6 +94,10 @@ bool ResourceManager::LoadResourceGroup(const std::string& rgName)
     PResource res = LoadRes(s);
     rgRef->m_map[s] = res;
   }
+ 
+#ifdef RESOURCE_GROUP_DEBUG
+  std::cout << "done\n"; // TODO Time
+#endif
 
   return true;
 }
@@ -128,7 +138,11 @@ Resource* ResourceManager::GetRes(const std::string& resName)
     }
   }
 #ifdef _DEBUG
-  ReportError("Couldn't find resource " + resName + " in any group");
+  // This could fail for command-line tools, where we don't want to specify
+  //  all resources up front.
+  // TODO Make ResourceManager more flexible
+  // TODO Make ReportError more flexible
+//  ReportError("Couldn't find resource " + resName + " in any group");
 #endif
   return 0;
 }
