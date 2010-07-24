@@ -107,6 +107,11 @@ public:
   // Set viewport as screen coords
   static void Viewport(int x, int y, int w, int h);
 
+  // Set rotation, e.g. when rotating iPhone from landscape to portrait.
+  // You will also need to adjust aspect ratio and probably the controls!!
+  static void SetScreenRotation(float degs);
+  static float GetScreenRotation();
+
   // Call at start of drawing every frame.
   // Specify clear colour
   static void InitFrame(float clearR, float clearG, float clearB);
@@ -145,6 +150,7 @@ public:
   // TODO Can we use Texture matrix in GL ES/D3D ?
   enum MatrixMode { AMJU_MODELVIEW_MATRIX, AMJU_PROJECTION_MATRIX, AMJU_TEXTURE_MATRIX };
   static void SetMatrixMode(MatrixMode);
+  static MatrixMode GetMatrixMode();
 
   // Set the current Matrix to the identity
   static void SetIdentity();
