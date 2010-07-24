@@ -30,9 +30,15 @@ public:
 	
 	virtual void SetTextureMode(AmjuGL::TextureType tt);
 	
-	virtual AmjuGL::Vec3 MouseToWorld(int mouseX, int mouseY);
+	//virtual AmjuGL::Vec3 MouseToWorld(int mouseX, int mouseY);
 	
 	virtual void GetScreenshot(unsigned char* buffer, int w, int h);
-		
+	
+	virtual bool CreateWindow(AmjuGLWindowInfo*);
+	virtual void Flip();
+	virtual void SetPerspectiveProjection(
+        float fov, float aspectRatio, float nearDist, float farDist);
+	virtual Shader* LoadShader(const std::string& shaderFileName);
+	
 };
 }

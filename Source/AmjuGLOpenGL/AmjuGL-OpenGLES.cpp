@@ -3,6 +3,7 @@
 
 #include "AmjuFirst.h"
 #include <math.h>
+#include <AmjuGL.h>
 #include "AmjuGL-OpenGLES.h"
 #include "OpenGL.h"
 #include "AmjuFinal.h"
@@ -22,7 +23,7 @@ namespace Amju
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
-static AmjuGL::TextureType s_tt = AmjuGL::REGULAR;
+static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
 	
 	
 static void __gluMakeIdentityd(GLdouble m[16])
@@ -125,17 +126,27 @@ static void  gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble cen
     glTranslatef(-eyex, -eyey, -eyez);
 }
 
+bool AmjuGLOpenGLES::CreateWindow(AmjuGLWindowInfo*)
+{
+}
+	
 
-void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio)
+void AmjuGLOpenGLES::Flip()
+{
+}	
+
+Shader* AmjuGLOpenGLES::LoadShader(const std::string& shaderFileName)
+{
+	return 0;
+}
+	
+void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
 {
 	AMJU_CALL_STACK;
 	
-	static const float NEAR_PLANE = 2.0f;
-	static const float FAR_PLANE = 1500.0f;
-	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(fov, aspectRatio, NEAR_PLANE, FAR_PLANE);
+	gluPerspective(fov, aspectRatio, nearDist, farDist);
 	
 	// TODO restore previous matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -176,14 +187,14 @@ void AmjuGLOpenGLES::SetTextureMode(AmjuGL::TextureType tt)
 	
 	s_tt = tt;
 	
-	if (tt == AmjuGL::REGULAR)
+	if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
 	{
 		/*
 		glDisable(GL_TEXTURE_GEN_S);
 		glDisable(GL_TEXTURE_GEN_T);
 		 */
 	}
-	else if (tt == AmjuGL::SPHERE_MAP)
+	else if (tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
 	{
 		Assert(0); // Not supported for ES
 	}
@@ -244,7 +255,7 @@ void AmjuGLOpenGLES::SetTexture(
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	// Different depending on RGB or RGBA.
-	if (d == AmjuGL::RGB)
+	if (d == AmjuGL::AMJU_RGB)
 	{
 		glTexImage2D(GL_TEXTURE_2D,
 					 0,
@@ -297,13 +308,6 @@ void AmjuGLOpenGLES::SetTexture(
 						  data);
 	}
 	 */
-}
-
-AmjuGL::Vec3 AmjuGLOpenGLES::MouseToWorld(int mouseX, int mouseY)
-{
-	AMJU_CALL_STACK;
-
-	return AmjuGL::Vec3();
 }
 
 void AmjuGLOpenGLES::GetScreenshot(unsigned char* buffer, int w, int h)
