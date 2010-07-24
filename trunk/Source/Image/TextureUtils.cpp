@@ -2,6 +2,9 @@
 #include "TextureUtils.h"
 #include "AmjuAssert.h"
 #include <malloc.h> // memalign
+#ifdef GEKKO
+#include <string.h> // memcpy ??!
+#endif
 #include <iostream>
 #include "AmjuFinal.h"
 
