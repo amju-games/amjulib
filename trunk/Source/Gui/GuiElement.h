@@ -14,6 +14,7 @@ namespace Amju
 class GuiElement : public RefCounted, public EventListener
 {
 public:
+  GuiElement();
   virtual ~GuiElement();
   virtual void Draw() = 0;
   virtual void Update() {} // ?
@@ -31,6 +32,9 @@ public:
   void SetSize(const Vec2f&);
   const Vec2f& GetSize() const;
 
+  void SetVisible(bool isVis);
+  bool IsVisible() const;
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -44,6 +48,7 @@ protected:
   Vec2f m_pos;
   Vec2f m_size;
   std::string m_name;
+  bool m_isVisible; // TODO Use flags if more 
 
   PGuiCommand m_pCommand;
 };
