@@ -34,7 +34,8 @@ bool Material::Load(const std::string& mtlfilename)
     if (strs[0] == "map_Kd")
     {
       Assert(strs.size() == 2);
-      m_texture = (Texture*)TheResourceManager::Instance()->GetRes(strs[1]);
+      m_texfilename = strs[1];
+      m_texture = (Texture*)TheResourceManager::Instance()->GetRes(m_texfilename);
     }
     else if (strs[0] == "newmtl")
     {
