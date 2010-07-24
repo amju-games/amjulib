@@ -5,7 +5,9 @@
 //#endif
 
 #include <iostream>
+#ifdef WIN32
 #include "GL/glew.h"
+#endif
 #include "AmjuGL-OpenGL.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
