@@ -13,8 +13,8 @@ class CollisionMesh;
 class ObjMesh : public Resource
 {
 public:
-  bool Load(const std::string& filename);
-  bool Save(const std::string& filename);
+  bool Load(const std::string& filename, bool binary = false);
+  bool Save(const std::string& filename, bool binary = false);
 
   // Transform all vertices by the given matrix
   void Transform(const Matrix& m);
@@ -27,8 +27,13 @@ public:
   void Merge(const ObjMesh& om);
 
 
-
 private:
+  bool LoadBinary(const std::string& filename);
+  bool SaveBinary(const std::string& filename);
+
+  // Build groups, clean up temp data etc
+  void MungeData();
+
   // TODO Dump this data once loaded ?
   Vecs m_points;
   Vecs m_normals;

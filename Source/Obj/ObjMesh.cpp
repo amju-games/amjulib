@@ -10,7 +10,7 @@ namespace Amju
 Resource* ObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
-  if (!obj->Load(resName))
+  if (!obj->Load(resName, true /* binary */ ))
   {
     Assert(0);
     return 0;
@@ -51,8 +51,139 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
   }
 }
 
-bool ObjMesh::Load(const std::string& filename)
+bool ObjMesh::SaveBinary(const std::string& filename)
 {
+  return true;
+}
+
+bool ObjMesh::LoadBinary(const std::string& filename)
+{
+  File f(File::NO_VERSION);
+  if (!f.OpenRead(filename, true /* is binary */))
+  {
+    return false;
+  }
+
+  int n = 0;
+  // Points
+  f.GetInteger(&n);
+  m_points.reserve(n);
+  for (int i = 0; i < n; i++)
+  {
+    Vec3f v;
+    f.GetFloat(&v.x);
+    f.GetFloat(&v.y);
+    f.GetFloat(&v.z);
+    m_points.push_back(v);
+  }
+  std::cout << "Loaded " << n << " points\n";
+
+  // UVs
+  f.GetInteger(&n);
+  m_uvs.reserve(n);
+  for (int i = 0; i < n; i++)
+  {
+    Vec2f v;
+    f.GetFloat(&v.x);
+    f.GetFloat(&v.y);
+    m_uvs.push_back(v);
+  }
+  std::cout << "Loaded " << n << " UVs\n";
+
+  // Normals
+  f.GetInteger(&n);
+  m_normals.reserve(n);
+  for (int i = 0; i < n; i++)
+  {
+    Vec3f v;
+    f.GetFloat(&v.x);
+    f.GetFloat(&v.y);
+    f.GetFloat(&v.z);
+    m_normals.push_back(v);
+  }
+  std::cout << "Loaded " << n << " normals\n";
+
+  // Load materials
+  int numMats = 0;
+  f.GetInteger(&numMats);
+  std::cout << "Loading " << numMats << " materials..\n";
+  for (int i = 0; i < numMats; i++)
+  {
+    std::string matName;
+    f.GetDataLine(&matName);
+    Material& mat = m_materials[matName];
+    mat.m_name = matName;
+
+    std::string filename;
+    f.GetDataLine(&filename);
+    mat.m_filename = filename;
+
+    std::string tex;
+    f.GetDataLine(&tex);
+    mat.m_texfilename = tex;
+
+    mat.m_texture = (Texture*)TheResourceManager::Instance()->GetRes(tex);
+    std::cout << "  Loaded texture " << tex << "\n";
+  }
+
+  int numGroups = 0;
+  f.GetInteger(&numGroups); 
+  for (int ig = 0; ig < numGroups; ig++)
+  {
+    std::string groupName;
+    f.GetDataLine(&groupName);
+    std::cout << "Group: " << groupName << "\n";
+
+    Group& g = m_groups[groupName];
+    g.m_name = groupName;
+
+    // Get flag - 1 if we have material 
+    int matFlag = 0;
+    f.GetInteger(&matFlag);
+    if (matFlag)
+    {
+      std::string matFilename;
+      f.GetDataLine(&matFilename);
+      std::cout << "Material file: " << matFilename << "\n";
+      // TODO Do we need this ?
+
+      std::string matName;
+      f.GetDataLine(&matName);
+      std::cout << "Material name: " << matName << "\n";
+
+      g.m_materialName = matName;
+    }
+
+    // Load face info
+    int numFaces = 0;
+    f.GetInteger(&numFaces);
+
+    m_facemap[g.m_name].reserve(numFaces);
+    for (int i = 0; i < numFaces; i++)
+    {
+      Face face;
+      for (int j = 0; j < 3; j++)
+      {
+        f.GetInteger(&face.m_pointIndex[j]);
+        f.GetInteger(&face.m_uvIndex[j]);
+        f.GetInteger(&face.m_normalIndex[j]);
+      }
+      m_facemap[g.m_name].push_back(face);
+    }
+    std::cout << "Loaded " << numFaces << " faces\n";
+  }
+
+  MungeData();
+  return true;
+}
+
+bool ObjMesh::Load(const std::string& filename, bool binary)
+{
+  if (binary)
+  {
+    return LoadBinary(filename);
+  }
+
   File f(File::NO_VERSION);
   if (!f.OpenRead(filename))
   {
@@ -65,8 +196,9 @@ bool ObjMesh::Load(const std::string& filename)
 
   // Set name for default group..?
   // Bad idea, as we can end up with an empty group
-  //  Group& g = m_groups[currentGroup];
-  //  g.m_name = currentGroup;
+  // TODO Remove any empty groups
+  Group& g = m_groups[currentGroup];
+  g.m_name = currentGroup;
 
   while (true)
   {
@@ -99,6 +231,7 @@ bool ObjMesh::Load(const std::string& filename)
     else if (strs[0] == "f")
     {
       Group& g = m_groups[currentGroup];
+      Assert(!g.m_name.empty());
       Face face = ToFace(strs);
       m_facemap[g.m_name].push_back(face);
     }
@@ -113,11 +246,21 @@ bool ObjMesh::Load(const std::string& filename)
     else if (strs[0] == "mtllib")
     {
       // TODO One material is specified in one .mtl file, right ?
+      // This may be wrong!
       std::string mtlfilename = strs[1];
       Material mat;
       mat.Load(mtlfilename);
+      mat.m_filename = mtlfilename;
       Assert(!mat.m_name.empty());
-      m_materials[mat.m_name] = mat;
+      // Only add if texture specified 
+      if (!mat.m_texfilename.empty())
+      {
+        m_materials[mat.m_name] = mat;
+      }
+      else
+      {
+        std::cout << "Discarding material " << mat.m_name << " as no texture\n";
+      }
     }
     else if (strs[0] == "usemtl")
     {
@@ -127,15 +270,38 @@ bool ObjMesh::Load(const std::string& filename)
     }
   }
 
+  MungeData();
+  return true;
+}
+
+void ObjMesh::MungeData()
+{
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
-    ++it)
+    /* increment in body */)
   {
     Group& g = it->second;
     BuildGroup(g);
+
+    // Erase empty groups
+    if (g.m_tris.empty())
+    {
+      std::cout << "Removing empty group " << g.m_name << "\n";
+      it = m_groups.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
   }
 
-  return true;
+  // Remove data no longer needed (only used to create group data)
+  m_points.clear();
+  m_normals.clear();
+  m_uvs.clear();
+  m_facemap.clear();
+
+  std::cout << "Finished\n";
 }
 
 void ObjMesh::Draw()
@@ -164,7 +330,8 @@ void ObjMesh::BuildGroup(Group& g)
     {
       if (!m_normals.empty())
       {
-        int n = f.m_normalIndex[j];
+        unsigned int n = f.m_normalIndex[j];
+        Assert(n < m_normals.size());
         const Vec3f& vN = m_normals[n];
 
         t.m_verts[j].m_nx = vN.x;
@@ -179,7 +346,8 @@ void ObjMesh::BuildGroup(Group& g)
       }
       else
       {
-        int uv = f.m_uvIndex[j];
+        unsigned int uv = f.m_uvIndex[j];
+        Assert(uv < m_uvs.size());
         const Vec2f& vUV = m_uvs[uv];
 
         t.m_verts[j].m_u = vUV.x;
@@ -188,7 +356,8 @@ void ObjMesh::BuildGroup(Group& g)
 
       Assert(!m_points.empty());
 
-      int p = f.m_pointIndex[j];
+      unsigned int p = f.m_pointIndex[j];
+      Assert(p < m_points.size());
       const Vec3f vP = m_points[p];
 
       t.m_verts[j].m_x = vP.x;
@@ -246,7 +415,7 @@ void ObjMesh::Transform(const Matrix& m)
   }
 }
 
-bool ObjMesh::Save(const std::string& filename)
+bool ObjMesh::Save(const std::string& filename, bool binary)
 {
   typedef std::map<Vec3f, int> Vec3Map;
   Vec3Map pointMap;
@@ -264,7 +433,10 @@ bool ObjMesh::Save(const std::string& filename)
     it != m_groups.end();
     ++it)
   {
+    Assert(!it->first.empty()); // no group name ?!
+
     Group& g = it->second;
+    Assert(!g.m_name.empty());
     SaveGroup& sg = groupMap[g.m_name];
 
     for (unsigned int i = 0; i < g.m_tris.size(); i++)
@@ -303,52 +475,159 @@ bool ObjMesh::Save(const std::string& filename)
     }
   }
 
-  File of(File::NO_VERSION);
-  of.OpenWrite(filename);
-  of.Write("# j.c. saved from ObjMesh class");
+  if (binary)
+  {
+    File of(File::NO_VERSION);
+    of.OpenWrite(filename, 0, true /* is binary */);
 
-  // Write all points
-  of.Write("# points");
-  for (unsigned int i = 0; i < points.size(); i++)
-  {
-    of.Write("v " + ToString(points[i].x) + " " + ToString(points[i].y) + " " + ToString(points[i].z));
-  }
-  of.Write("# UVs");
-  for (unsigned int i = 0; i < uvs.size(); i++)
-  {
-    of.Write("vt " + ToString(uvs[i].x) + " " + ToString(uvs[i].y));
-  }
-  of.Write("# Normals");
-  for (unsigned int i = 0; i < normals.size(); i++)
-  {
-    of.Write("vn " + ToString(normals[i].x) + " " + ToString(normals[i].y) + " " + ToString(normals[i].z));
-  }
-  for (SaveGroupMap::iterator it = groupMap.begin();
-    it != groupMap.end();
-    ++it)
-  {
-    SaveGroup& sg = it->second;
-    of.Write("g " + it->first);
-
-    // TODO Use Material for this group!
-    of.Write("mtllib default.mtl");
-    of.Write("usemtl default");
-
-    of.Write("# Faces");
-    for (unsigned int i = 0; i < sg.m_faces.size(); i++)
+    // Save points
+    std::cout << "Saving " << points.size() << " points\n";
+    of.WriteInteger(points.size());
+    for (unsigned int i = 0; i < points.size(); i++)
     {
-      Face& face = sg.m_faces[i];
-      std::string s = "f ";
-      for (int j = 0; j < 3; j++)
+      const Vec3f& v = points[i];
+      of.WriteFloat(v.x);
+      of.WriteFloat(v.y);
+      of.WriteFloat(v.z);
+    }
+
+    // Save UVs
+    std::cout << "Saving " << uvs.size() << " UVs\n";
+    of.WriteInteger(uvs.size());
+    for (unsigned int i = 0; i < uvs.size(); i++)
+    {
+      const Vec2f& v = uvs[i];
+      of.WriteFloat(v.x);
+      of.WriteFloat(v.y);
+    }
+
+    // Save normals
+    std::cout << "Saving " << normals.size() << " normals\n";
+    of.WriteInteger(normals.size());
+    for (unsigned int i = 0; i < normals.size(); i++)
+    {
+      const Vec3f& v = normals[i];
+      of.WriteFloat(v.x);
+      of.WriteFloat(v.y);
+      of.WriteFloat(v.z);
+    }
+
+    // Save materials
+    std::cout << "Saving " << m_materials.size() << " materials\n";
+    of.WriteInteger(m_materials.size());
+    for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); ++it)
+    {
+      Material& mat = it->second;
+      of.Write(mat.m_name);
+      of.Write(mat.m_filename);
+      of.Write(mat.m_texfilename);
+    }
+
+    // Save groups
+    std::cout << "Saving " << groupMap.size() << " groups\n";
+    of.WriteInteger(groupMap.size());
+    for (SaveGroupMap::iterator it = groupMap.begin();
+      it != groupMap.end();
+      ++it)
+    {
+      SaveGroup& sg = it->second;
+      std::string groupName = it->first;
+      Group& g = m_groups[groupName];
+      std::string mtlName = g.m_materialName;
+      Material& m = m_materials[mtlName];
+
+      // TODO Use ID for groups, just need to be unique
+      // TODO Write all materials to this file. Use IDs instead of names.
+
+      // Save group info
+      // NB If we use names, we can go back from binary to text
+      of.Write(groupName);
+
+      if (!mtlName.empty() && !m.m_filename.empty())
       {
-        s += ToString(face.m_pointIndex[j]) 
-          + "/" 
-          + (face.m_uvIndex[j] ? ToString(face.m_uvIndex[j]) : "")
-          + "/"
-          + (face.m_normalIndex[j] ? ToString(face.m_normalIndex[j]) : "")
-          + " ";
+        of.WriteInteger(1); // means there is material for this group
+        of.Write(m.m_filename);
+        of.Write(mtlName); 
       }
-      of.Write(s);
+      else
+      {
+        of.WriteInteger(0); // means no material for this group
+      }
+
+      // Save face info
+      of.WriteInteger(sg.m_faces.size());
+      std::cout << "Saving " << sg.m_faces.size() << " faces\n";
+      for (unsigned int i = 0; i < sg.m_faces.size(); i++)
+      {
+        Face& face = sg.m_faces[i];
+        for (int j = 0; j < 3; j++)
+        {
+          Assert(face.m_pointIndex[j] > 0);
+          Assert(face.m_uvIndex[j] > 0);
+          Assert(face.m_normalIndex[j] > 0);
+
+          // Indices are one-based, save as zero-based in binary format
+          of.WriteInteger(face.m_pointIndex[j] - 1);
+          of.WriteInteger(face.m_uvIndex[j] - 1);
+          of.WriteInteger(face.m_normalIndex[j] - 1);
+        }
+      }
+    }
+  }
+  else
+  {
+    File of(File::NO_VERSION);
+    of.OpenWrite(filename);
+    of.Write("# j.c. saved from ObjMesh class");
+
+    // Write all points
+    of.Write("# points");
+    for (unsigned int i = 0; i < points.size(); i++)
+    {
+      of.Write("v " + ToString(points[i].x) + " " + ToString(points[i].y) + " " + ToString(points[i].z));
+    }
+    of.Write("# UVs");
+    for (unsigned int i = 0; i < uvs.size(); i++)
+    {
+      of.Write("vt " + ToString(uvs[i].x) + " " + ToString(uvs[i].y));
+    }
+    of.Write("# Normals");
+    for (unsigned int i = 0; i < normals.size(); i++)
+    {
+      of.Write("vn " + ToString(normals[i].x) + " " + ToString(normals[i].y) + " " + ToString(normals[i].z));
+    }
+    for (SaveGroupMap::iterator it = groupMap.begin();
+      it != groupMap.end();
+      ++it)
+    {
+      SaveGroup& sg = it->second;
+      std::string groupName = it->first;
+      Group& g = m_groups[groupName];
+      std::string mtlName = g.m_materialName;
+      Material& m = m_materials[mtlName];
+
+      of.Write("g " + groupName);
+
+      // TODO This works up to a point, but only if materials are one per file.
+      of.Write("mtllib " + m.m_filename);
+      of.Write("usemtl " + mtlName);
+
+      of.Write("# Faces");
+      for (unsigned int i = 0; i < sg.m_faces.size(); i++)
+      {
+        Face& face = sg.m_faces[i];
+        std::string s = "f ";
+        for (int j = 0; j < 3; j++)
+        {
+          s += ToString(face.m_pointIndex[j]) 
+            + "/" 
+            + (face.m_uvIndex[j] ? ToString(face.m_uvIndex[j]) : "")
+            + "/"
+            + (face.m_normalIndex[j] ? ToString(face.m_normalIndex[j]) : "")
+            + " ";
+        }
+        of.Write(s);
+      }
     }
   }
 
