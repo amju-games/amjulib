@@ -18,6 +18,9 @@ namespace Amju
 struct Material
 {
   std::string m_name;
+  std::string m_filename;
+
+  std::string m_texfilename;
   PTexture m_texture;
   // TODO Other properties
 
