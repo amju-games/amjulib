@@ -75,13 +75,18 @@ void Game::Run()
 {
   while (!s_quit)
   {
-    UpdateState();
-    Update();
-
-    Draw();
-
-    AmjuGL::Flip(); 
+    RunOneLoop();
   }
+}
+
+void Game::RunOneLoop()
+{
+  UpdateState();
+  Update();
+
+  Draw();
+
+  AmjuGL::Flip(); 
 }
 
 void Game::UpdateGameObjects()
@@ -132,6 +137,7 @@ void Game::UpdateState()
   m_newState = 0;
 
   // This next line may set m_newState, so zero it first
+  // TODO Not sure why, is this old ??
   m_currentState->OnActive();
 }
 

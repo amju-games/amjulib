@@ -17,7 +17,12 @@ private:
 public:
   void Update();
   void Draw();
+
+  // Loop forever until quit event received
   void Run();
+
+  // Execute one game loop, use if Run() not suitable for platform
+  void RunOneLoop();
 
   // Event Listener
   virtual void OnQuitEvent();
@@ -40,7 +45,7 @@ public:
   // Functions commonly used by Game States
   void UpdateGameObjects();
 
-//private:
+private:
   void UpdateState(); // go to new state if set
 
 private:
