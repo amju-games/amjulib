@@ -15,6 +15,11 @@ Rect GetRect(GuiElement* elem)
     elem->GetPos().y);
 }
 
+GuiElement::GuiElement()
+{
+  m_isVisible = true;
+}
+
 PGuiElement LoadGui(const std::string& filename)
 {
   File f;
@@ -119,5 +124,15 @@ void GuiElement::SetSize(const Vec2f& v)
 const Vec2f& GuiElement::GetSize() const
 {
   return m_size;
+}
+
+void GuiElement::SetVisible(bool isVis)
+{
+  m_isVisible = isVis;
+}
+
+bool GuiElement::IsVisible() const
+{
+  return m_isVisible;
 }
 }
