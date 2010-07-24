@@ -27,10 +27,13 @@ AmjuGLImpl* impl = 0;
 // Store the size of the matrix stack for each matrix mode.
 // Then we can check that the stacks are empty when we start and end drawing.
 static int s_matrixStackSize[3] = { 0, 0, 0 };
-
-// Store the current matrix mode so we know which count to increment/decrement
-static int s_currentMatrix = 0;
 #endif // _DEBUG
+
+// Store the current matrix mode so we know which count to increment/decrement,
+//  and for queries
+static AmjuGL::MatrixMode s_currentMatrix = AmjuGL::AMJU_MODELVIEW_MATRIX;
+
+static float s_screenRotation = 0;
 
 AmjuGL::Vert::Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz)
   : m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v) {}
@@ -207,31 +210,30 @@ void AmjuGL::MultMatrix(const float matrix[16])
   impl->MultMatrix(matrix);
 }
 
+AmjuGL::MatrixMode AmjuGL::GetMatrixMode()
+{
+  return s_currentMatrix;
+}
+
 void AmjuGL::SetMatrixMode(MatrixMode m)
 {
   AMJU_CALL_STACK;
 
-#ifdef _DEBUG
-  switch (m)
-  {
-  case AmjuGL::AMJU_MODELVIEW_MATRIX:
-    s_currentMatrix = 0;
-    break;    
-
-  case AmjuGL::AMJU_PROJECTION_MATRIX:
-    s_currentMatrix = 1;
-    break;
-
-  case AmjuGL::AMJU_TEXTURE_MATRIX:
-    s_currentMatrix = 2;
-    break;
-
-  default:
-    Assert(0);
-  }
-#endif // _DEBUG
+  s_currentMatrix = m;
 
   impl->SetMatrixMode(m);
+}
+
+void AmjuGL::SetScreenRotation(float degs)
+{
+  AMJU_CALL_STACK;
+  s_screenRotation = degs;
+}
+
+float AmjuGL::GetScreenRotation()
+{
+  AMJU_CALL_STACK;
+  return s_screenRotation;
 }
 
 void AmjuGL::SetIdentity()
