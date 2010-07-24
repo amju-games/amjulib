@@ -199,7 +199,7 @@ void Font::Print(float x, float y, const char* text)
   AmjuGL::Enable(AmjuGL::AMJU_BLEND); 
 
   AmjuGL::PushMatrix();
-  AmjuGL::Translate(x, y - CHAR_SIZE, 0);
+  AmjuGL::Translate(x, y, 0); //y - CHAR_SIZE, 0);
   // ..so top of character is at y-coord, not the bottom
 
   m_textureSequence.Bind();
