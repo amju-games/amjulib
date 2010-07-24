@@ -24,7 +24,12 @@ Font* GuiText::GetFont()
 
 void GuiText::Draw()
 {
-#ifdef _DEBUG
+  if (!IsVisible())
+  {
+    return;
+  }
+
+#ifdef TEXT_RECT_DEBUG
   AmjuGL::PushMatrix();
   AmjuGL::SetIdentity();
   Rect r = GetRect(this);
@@ -34,16 +39,19 @@ void GuiText::Draw()
   AmjuGL::PopMatrix();
 #endif // _DEBUG
 
+  // Centre the text vertically
+  //float ysize = m_size.y - 0.1f; // TODO Why 0.1, depends on font size ?
+  float y = m_pos.y - m_size.y * 0.5f - 0.05f;
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    GetFont()->Print(m_pos.x, m_pos.y, m_text.c_str());
+    GetFont()->Print(m_pos.x, y, m_text.c_str());
     break;
   case AMJU_JUST_RIGHT:
-    GetFont()->Print(m_pos.x + m_size.x - m_textWidth, m_pos.y, m_text.c_str());
+    GetFont()->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.c_str());
     break;
   case AMJU_JUST_CENTRE:
-    GetFont()->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), m_pos.y, m_text.c_str());
+    GetFont()->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.c_str());
     break;
   default:
     Assert(0);
