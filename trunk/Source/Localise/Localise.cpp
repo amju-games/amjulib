@@ -100,6 +100,7 @@ std::string Localise::GetString(int id)
   StringTable::iterator it = s_strings.find(id);
   if (it == s_strings.end())
   {
+    Assert(0);
     return "Localise error: string ID " + ToString(id) + " not found";
   }
   return it->second;
