@@ -29,6 +29,7 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
     break;
   default:
     pKe->keyType = AMJU_KEY_CHAR;
+    pKe->key = ske.keysym.sym; 
     break;
   }
 }
@@ -118,7 +119,7 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
         else
         {
           // Don't know why, but sometimes we get here
-          Assert(0);
+          //Assert(0);
           break;
         }
         
