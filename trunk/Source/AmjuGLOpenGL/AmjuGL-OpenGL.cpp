@@ -142,7 +142,7 @@ void AmjuGLOpenGL::SetPerspectiveProjection(
   AMJU_CALL_STACK;
 
   glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+  SetIdentity();
   gluPerspective(fov, aspectRatio, nearDist, farDist);
 }
 

@@ -228,6 +228,12 @@ void AmjuGLOpenGLBase::SetIdentity()
   AMJU_CALL_STACK;
 
   glLoadIdentity();
+
+  // Whole screen rotation
+  if (AmjuGL::GetMatrixMode() == AmjuGL::AMJU_PROJECTION_MATRIX)
+  {
+    glRotatef(AmjuGL::GetScreenRotation(), 0, 0, 1);
+  }
 }
 
 void AmjuGLOpenGLBase::PushMatrix()
