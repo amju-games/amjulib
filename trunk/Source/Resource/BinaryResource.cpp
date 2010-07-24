@@ -27,7 +27,6 @@ bool BinaryResource::Load(const std::string& filename)
 
   if (!f) 
   {
-    fclose(f);
     return false;
   }
 
