@@ -7,6 +7,11 @@ const char* GuiImage::NAME = "gui-image";
 
 void GuiImage::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   if (m_pos != m_oldPos || m_size != m_oldSize)
   {
     BuildTris();

@@ -20,6 +20,11 @@ GuiMenuItem::GuiMenuItem(const std::string& text, const Vec2f& size)
 
 void GuiMenuItem::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   // If selected, reverse colours
   GuiText::Draw();
 }
@@ -31,6 +36,11 @@ GuiMenu::GuiMenu()
 
 void GuiMenu::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
   AmjuGL::PushMatrix();
