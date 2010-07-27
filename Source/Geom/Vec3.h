@@ -80,6 +80,14 @@ Vec3<T> operator*(const Vec3<T>& v1, T f)
 }
 
 template <class T>
+Vec3<T> operator*(T f, const Vec3<T>& v1)
+{
+  Vec3<T> v = v1;
+  v *= f;
+  return v;
+}
+
+template <class T>
 Vec3<T> CrossProduct(const Vec3<T>& v1, const Vec3<T>& v2)
 {
   return Vec3<T>(
