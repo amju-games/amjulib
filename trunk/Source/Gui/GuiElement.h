@@ -11,6 +11,8 @@
 
 namespace Amju
 {
+typedef void (*CommandFunc)();
+
 class GuiElement : public RefCounted, public EventListener
 {
 public:
@@ -23,7 +25,10 @@ public:
 
   virtual GuiElement* GetElementByName(const std::string& name);
 
+  // Set command as an object for Undo, or a function for simple, 
+  //  non-undoable action
   void SetCommand(PGuiCommand pCommand);
+  void SetCommand(CommandFunc commandFunc);
   void ExecuteCommand();
 
   void SetPos(const Vec2f&);
@@ -50,7 +55,9 @@ protected:
   std::string m_name;
   bool m_isVisible; // TODO Use flags if more 
 
+  // Only one of these is activated
   PGuiCommand m_pCommand;
+  CommandFunc m_commandFunc;
 };
 
 typedef RCPtr<GuiElement> PGuiElement;
