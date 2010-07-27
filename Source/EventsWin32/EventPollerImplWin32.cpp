@@ -45,14 +45,13 @@ void EventPollerImplWin32::OnKey(WPARAM c, bool down)
   case VK_RETURN:
     ke.keyType = AMJU_KEY_ENTER;
     break;
-  /*
   case VK_ESCAPE:
     ke.keyType = AMJU_KEY_ESC;
     break;
-  */
   default:
     // TODO character
     ke.keyType = AMJU_KEY_CHAR;
+    //ke.key = ???
   }
 
   if (m_listeners)
