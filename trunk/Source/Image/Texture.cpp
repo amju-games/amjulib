@@ -69,6 +69,7 @@ void Texture::Create(unsigned char* data, int w, int h, int bytesPerPixel)
 void Texture::UseThisTexture()
 {
   Assert(m_texId != -1);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::UseTexture(m_texId);
 }
 }
