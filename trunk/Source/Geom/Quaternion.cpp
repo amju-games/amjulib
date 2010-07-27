@@ -43,14 +43,11 @@ Quaternion::Quaternion(float w, float x, float y, float z)
   m_z = z;
 }
 
-Quaternion::Quaternion(float w, const Vec3f& v)
+Quaternion::Quaternion(const Vec3f& axis, float rads)
 {
   AMJU_CALL_STACK;
 
-  m_w = w;
-  m_x = v.x;
-  m_y = v.y;
-  m_z = v.z;
+  SetAxisAngle(rads, axis);
 }
 
 void Quaternion::SetIdentity()
@@ -116,22 +113,21 @@ bool Quaternion::Save(File* pf)
 }
 #endif
 
-void Quaternion::CreateFromAxisAngle(float x, float y, float z, float degrees)
+void Quaternion::SetAxisAngle(float radians, const Vec3f& axis)
 {
-  AMJU_CALL_STACK;
+  SetAxisAngle(radians, axis.x, axis.y, axis.z);
+}
 
-    // First we want to convert the degrees to radians 
-    // since the angle is assumed to be in radians
-    float angle = float((degrees / 180.0f) * pi);
-    // Here we calculate the sin( theta / 2) once for optimization
-    float result = (float)sin( angle / 2.0f );
+void Quaternion::SetAxisAngle(float radians, float x, float y, float z)
+{
+    AMJU_CALL_STACK;
 		
-    // Calcualte the w value by cos( theta / 2 )
-    m_w = (float)cos( angle / 2.0f );
-    // Calculate the x, y and z of the quaternion
-    m_x = float(x * result);
-    m_y = float(y * result);
-    m_z = float(z * result);
+    m_w = (float)cos(radians * 0.5f);
+
+    float s = (float)sin(radians * 0.5f);
+    m_x = float(x * s);
+    m_y = float(y * s);
+    m_z = float(z * s);
 }
 
 void Quaternion::CreateFromMatrix(const Matrix& m)
@@ -344,7 +340,7 @@ Quaternion Quaternion::Conjugate() const
 Vec3f Quaternion::RotateVec(const Vec3f& v) const
 {
   // v' = q v q*
-  Quaternion qv(0, v);
+  Quaternion qv(0, v.x, v.y, v.z);
   Quaternion result((*this) * qv * Conjugate());
   result.Normalize();
   return Vec3f(result.m_x, result.m_y, result.m_z);

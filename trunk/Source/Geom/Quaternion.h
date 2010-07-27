@@ -18,7 +18,7 @@ class Quaternion
 public:
   Quaternion();
   Quaternion(float w, float x, float y, float z);
-  Quaternion(float w, const Vec3f&);
+  Quaternion(const Vec3f& axis, float radians);
 
   void SetIdentity();
 
@@ -27,7 +27,9 @@ public:
   void CreateMatrix(Matrix* pMatrix) const;
   void CreateMatrix(float* pMatrix) const;
 
-  void CreateFromAxisAngle(float x, float y, float z, float degrees);
+  void SetAxisAngle(float radians, const Vec3f& axis);
+  void SetAxisAngle(float radians, float x, float y, float z);
+
   void CreateFromMatrix(const Matrix& m);
 
   static Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float between);
@@ -47,7 +49,6 @@ public:
   // Return result of rotating vector by this quaternion
   Vec3f RotateVec(const Vec3f& v) const;
 
-  // Return conjugate of this quaternion
   Quaternion Conjugate() const;
 
 private:
