@@ -27,6 +27,9 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
   case SDLK_RIGHT:
     pKe->keyType = AMJU_KEY_RIGHT;
     break;
+  case SDLK_ESCAPE:
+    pKe->keyType = AMJU_KEY_ESC;
+    break;
   default:
     pKe->keyType = AMJU_KEY_CHAR;
     pKe->key = ske.keysym.sym; 
