@@ -18,6 +18,7 @@ Rect GetRect(GuiElement* elem)
 GuiElement::GuiElement()
 {
   m_isVisible = true;
+  m_commandFunc = 0;
 }
 
 PGuiElement LoadGui(const std::string& filename)
@@ -89,12 +90,27 @@ bool GuiElement::OpenAndLoad(const std::string& filename)
 
 void GuiElement::SetCommand(PGuiCommand pCommand)
 {
+  Assert(!m_commandFunc);
   m_pCommand = pCommand;
+}
+
+void GuiElement::SetCommand(CommandFunc commandFunc)
+{
+  Assert(!m_pCommand);
+  m_commandFunc = commandFunc;
 }
 
 void GuiElement::ExecuteCommand()
 {
-  TheGuiCommandHandler::Instance()->DoNewCommand(m_pCommand);
+  if (m_commandFunc)
+  {
+    Assert(!m_pCommand);
+    m_commandFunc();
+  }
+  else
+  {
+    TheGuiCommandHandler::Instance()->DoNewCommand(m_pCommand);
+  }
 }
 
 GuiElement* GuiElement::GetElementByName(const std::string& name)
