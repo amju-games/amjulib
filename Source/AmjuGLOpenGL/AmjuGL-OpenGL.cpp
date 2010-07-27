@@ -23,6 +23,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #define SHADER_DEBUG
 //#define USE_IMMEDIATE_MODE
+//#define OPENGL_SHOW_INFO
 
 namespace Amju
 {
@@ -53,6 +54,9 @@ void AmjuGLOpenGL::Init()
 
 #ifdef _DEBUG
 std::cout << "OpenGL Version: " << version << "\n";
+#endif
+
+#ifdef OPENGL_SHOW_INFO
 std::cout << "OpenGL Vendor: " << vendor << "\n";
 std::cout << "OpenGL Renderer: " << renderer << "\n";
 std::cout << "OpenGL Extensions: " << extensions << "\n";
