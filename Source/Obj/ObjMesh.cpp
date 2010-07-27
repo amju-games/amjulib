@@ -5,6 +5,8 @@
 #include "AmjuGL.h"
 #include "CollisionMesh.h"
 
+//#define OBJ_DEBUG
+
 namespace Amju
 {
 Resource* ObjLoader(const std::string& resName)
@@ -76,7 +78,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     f.GetFloat(&v.z);
     m_points.push_back(v);
   }
+#ifdef OBJ_DEBUG
   std::cout << "Loaded " << n << " points\n";
+#endif
 
   // UVs
   f.GetInteger(&n);
@@ -88,7 +92,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     f.GetFloat(&v.y);
     m_uvs.push_back(v);
   }
+#ifdef OBJ_DEBUG
   std::cout << "Loaded " << n << " UVs\n";
+#endif
 
   // Normals
   f.GetInteger(&n);
@@ -101,12 +107,17 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     f.GetFloat(&v.z);
     m_normals.push_back(v);
   }
+#ifdef OBJ_DEBUG
   std::cout << "Loaded " << n << " normals\n";
+#endif
 
   // Load materials
   int numMats = 0;
   f.GetInteger(&numMats);
+#ifdef OBJ_DEBUG
   std::cout << "Loading " << numMats << " materials..\n";
+#endif
+
   for (int i = 0; i < numMats; i++)
   {
     std::string matName;
@@ -123,7 +134,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     mat.m_texfilename = tex;
 
     mat.m_texture = (Texture*)TheResourceManager::Instance()->GetRes(tex);
+#ifdef OBJ_DEBUG
     std::cout << "  Loaded texture " << tex << "\n";
+#endif
   }
 
   int numGroups = 0;
@@ -132,7 +145,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
   {
     std::string groupName;
     f.GetDataLine(&groupName);
+#ifdef OBJ_DEBUG
     std::cout << "Group: " << groupName << "\n";
+#endif
 
     Group& g = m_groups[groupName];
     g.m_name = groupName;
@@ -144,13 +159,16 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     {
       std::string matFilename;
       f.GetDataLine(&matFilename);
+#ifdef OBJ_DEBUG
       std::cout << "Material file: " << matFilename << "\n";
+#endif
       // TODO Do we need this ?
 
       std::string matName;
       f.GetDataLine(&matName);
+#ifdef OBJ_DEBUG
       std::cout << "Material name: " << matName << "\n";
-
+#endif
       g.m_materialName = matName;
     }
 
@@ -170,7 +188,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
       }
       m_facemap[g.m_name].push_back(face);
     }
+#ifdef OBJ_DEBUG
     std::cout << "Loaded " << numFaces << " faces\n";
+#endif
   }
 
   MungeData();
@@ -259,7 +279,9 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
       }
       else
       {
+#ifdef OBJ_DEBUG
         std::cout << "Discarding material " << mat.m_name << " as no texture\n";
+#endif
       }
     }
     else if (strs[0] == "usemtl")
@@ -286,7 +308,9 @@ void ObjMesh::MungeData()
     // Erase empty groups
     if (g.m_tris.empty())
     {
+#ifdef OBJ_DEBUG
       std::cout << "Removing empty group " << g.m_name << "\n";
+#endif
       it = m_groups.erase(it);
     }
     else
@@ -301,7 +325,9 @@ void ObjMesh::MungeData()
   m_uvs.clear();
   m_facemap.clear();
 
+#ifdef OBJ_DEBUG
   std::cout << "Finished\n";
+#endif
 }
 
 void ObjMesh::Draw()
@@ -481,7 +507,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     of.OpenWrite(filename, 0, true /* is binary */);
 
     // Save points
+#ifdef OBJ_DEBUG
     std::cout << "Saving " << points.size() << " points\n";
+#endif
     of.WriteInteger(points.size());
     for (unsigned int i = 0; i < points.size(); i++)
     {
@@ -492,7 +520,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save UVs
+#ifdef OBJ_DEBUG
     std::cout << "Saving " << uvs.size() << " UVs\n";
+#endif
     of.WriteInteger(uvs.size());
     for (unsigned int i = 0; i < uvs.size(); i++)
     {
@@ -502,7 +532,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save normals
+#ifdef OBJ_DEBUG
     std::cout << "Saving " << normals.size() << " normals\n";
+#endif
     of.WriteInteger(normals.size());
     for (unsigned int i = 0; i < normals.size(); i++)
     {
@@ -513,7 +545,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save materials
+#ifdef OBJ_DEBUG
     std::cout << "Saving " << m_materials.size() << " materials\n";
+#endif
     of.WriteInteger(m_materials.size());
     for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); ++it)
     {
@@ -524,7 +558,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save groups
+#ifdef OBJ_DEBUG
     std::cout << "Saving " << groupMap.size() << " groups\n";
+#endif
     of.WriteInteger(groupMap.size());
     for (SaveGroupMap::iterator it = groupMap.begin();
       it != groupMap.end();
@@ -556,7 +592,9 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
 
       // Save face info
       of.WriteInteger(sg.m_faces.size());
+#ifdef OBJ_DEBUG
       std::cout << "Saving " << sg.m_faces.size() << " faces\n";
+#endif
       for (unsigned int i = 0; i < sg.m_faces.size(); i++)
       {
         Face& face = sg.m_faces[i];
