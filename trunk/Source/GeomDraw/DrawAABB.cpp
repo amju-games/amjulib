@@ -1,7 +1,7 @@
 #include "AmjuFirst.h"
 #include "DrawAABB.h"
 #include "AABB.h"
-#include "AmjuGL.h"
+#include <AmjuGL.h>
 #include "AmjuFinal.h"
 
 namespace Amju
