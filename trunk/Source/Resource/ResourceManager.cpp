@@ -4,6 +4,7 @@
 #include "File.h"
 #include "ReportError.h"
 #include "StringUtils.h"
+#include <iostream>
 
 #define RESOURCE_GROUP_DEBUG
 
@@ -40,16 +41,6 @@ Resource* Md2Loader(const std::string& resName)
   return (Resource*)pModel;
 }
 
-Resource* ResourceManager::ResGroup::GetRes(const std::string& resName)
-{
-  ResMap::iterator it = m_map.find(resName);
-  if (it == m_map.end())
-  {
-    return 0;
-  }
-  return it->second;
-}
-
 ResourceManager::ResourceManager()
 {
   AddLoader("bmp", BmpLoader);
@@ -83,7 +74,6 @@ bool ResourceManager::LoadResourceGroup(const std::string& rgName)
     return false;
   }
 
-  // Add group to map now so it exists if a resource needs it 
   m_groups[rgName] = rg; 
 
   ResGroup* rgRef = &m_groups[rgName];
@@ -91,8 +81,7 @@ bool ResourceManager::LoadResourceGroup(const std::string& rgName)
   std::string s;
   while (f.GetDataLine(&s))
   {
-    PResource res = LoadRes(s);
-    rgRef->m_map[s] = res;
+    rgRef->m_resNames.insert(s);
   }
  
 #ifdef RESOURCE_GROUP_DEBUG
@@ -107,44 +96,43 @@ void ResourceManager::FreeResourceGroup(const std::string& rg)
   ResGroupMap::iterator it = m_groups.find(rg);
   Assert(it != m_groups.end());
   m_groups.erase(it);
+
+  // TODO Could now purge resources which are not referenced by any group
+  //  -- have a separate Purge() function
 }
-
-/*
-Resource* ResourceManager::GetRes(const std::string& resName, Loader loader)
-{
-  ResMap::iterator it = m_map.find(resName);
-  if (it != m_map.end())
-  {
-    return it->second.GetPtr();
-  }
-
-  Resource* r = loader(resName);
-
-  m_map[resName] = r;
-  return r;
-}
-*/
 
 Resource* ResourceManager::GetRes(const std::string& resName)
 {
+  // Only check if resource is in a group in debug builds
+#ifdef _DEBUG
+  bool found = false;
   for (ResGroupMap::iterator it = m_groups.begin();
        it != m_groups.end();
        ++it)
   {
-    Resource* res = it->second.GetRes(resName);
-    if (res)
+    ResGroup& rg = it->second;
+    ResGroup::ResourceNames::iterator jt = rg.m_resNames.find(resName);
+    if (jt != rg.m_resNames.end())
     {
-      return res;
+      found = true;
+      break;
     }
   }
-#ifdef _DEBUG
-  // This could fail for command-line tools, where we don't want to specify
-  //  all resources up front.
-  // TODO Make ResourceManager more flexible
-  // TODO Make ReportError more flexible
-//  ReportError("Couldn't find resource " + resName + " in any group");
+  if (!found)
+  {
+    ReportError("Couldn't find resource " + resName + " in any group");
+    Assert(0);
+  }
 #endif
-  return 0;
+
+  PResource res = m_resources[resName];
+  if (res == 0)
+  {
+    // Not loaded yet, so load now
+    res = LoadRes(resName);
+    m_resources[resName] = res;
+  }
+  return res;
 }
 
 
@@ -164,5 +152,31 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   Assert(r);
 
   return r;
+}
+
+void ResourceManager::Dump()
+{
+  std::cout << "======================================================================"
+    "\nResource Manager: Groups: " << m_groups.size() << "\n";
+
+  for (ResGroupMap::iterator it = m_groups.begin();
+       it != m_groups.end();
+       ++it)
+  {
+    ResGroup& rg = it->second;
+    std::cout << "Group: " << it->first << "\n";
+    for (ResGroup::ResourceNames::iterator jt = rg.m_resNames.begin();
+         jt != rg.m_resNames.end();
+         ++jt)
+    {
+      PResource& res = m_resources[*jt];
+      std::cout << " " << *jt << "......." << res.GetPtr();
+      if (res.GetPtr())
+      {
+        std::cout << " RC: " << res->GetRefCount();
+      }
+      std::cout << "\n";
+    }
+  }
 }
 }
