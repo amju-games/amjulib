@@ -12,7 +12,7 @@ bool LoadVec3(File* f, Vec3f* v)
     Assert(0);
     return false;
   }
-  std::vector<std::string> strs = Split(s, ',');
+  Strings strs = Split(s, ',');
   Assert(strs.size() == 3);
   v->x = (float)atof(strs[0].c_str());
   v->y = (float)atof(strs[1].c_str());
