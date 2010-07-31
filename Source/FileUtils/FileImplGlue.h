@@ -9,8 +9,8 @@ Added to repository
   
 */
 
-#if !defined(SCHMICKEN_FILE_IMPL_GLUE_H_INCLUDED)
-#define SCHMICKEN_FILE_IMPL_GLUE_H_INCLUDED
+#ifndef AMJU_FILE_IMPL_GLUE_H_INCLUDED
+#define AMJU_FILE_IMPL_GLUE_H_INCLUDED
 
 #include "FileImpl.h"
 #include "GlueFile.h"
@@ -24,10 +24,9 @@ namespace Amju
 /*
 There can be many instances of FileImplGlue, as each File creates a new
 impl. But they all read from the same GlueFile. So each FileImplGlue
-refers to one Singleton GlueFile. Every time a new sub-file is opened in
-the GlueFile, the current file pos should be stored. Then when the sub-file
-is closed (the FileImplGlue goes away) the old position should be restored.
-This lets us have a stack of open sub-files, but is totally NOT THREAD SAFE.
+refers to one Singleton GlueFile. Each FileImplGlue stores its position in 
+the main Glue file.
+This lets us have multiple open sub-files, but is totally NOT THREAD SAFE.
 I.e. file access using FileImplGlue CANNOT be concurrent!
 */
 class FileImplGlue : public FileImpl
@@ -74,10 +73,12 @@ protected:
   static SharedPtr<GlueFile> s_pGlueFile;
 
   // Store the current file position of the GlueFile.
-  // This is so we can have a stack of FileImplGlues, pointing to different
+  // This is so we can have multiple FileImplGlues, pointing to different
   // places in the same Glue file.
-  // The position is stored in the ctor, and restored in the dtor.
-  uint32 m_oldPos;
+  uint32 m_pos;
+
+  // Base pos for this subfile in the glue file
+  uint32 m_base; 
  
   // Set when a glue file is successfully opened.
   static bool s_isReady;
