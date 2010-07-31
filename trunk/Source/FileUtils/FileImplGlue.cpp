@@ -1,28 +1,11 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: FileImplGlue.cpp,v $
-Revision 1.4  2008/05/08 10:58:03  jay
-New memory management code
-
-Revision 1.3  2006/12/01 23:28:03  jay
-New FileImplMem, unfortunately causing many small changes
-
-Revision 1.2  2006/06/27 18:13:09  jay
-Useful error msg when file not in glue file
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
+Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
-
+#include <AmjuFirst.h>
 #include "FileImplGlue.h"
-#include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuAssert.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -36,8 +19,9 @@ FileImplGlue::FileImplGlue()
   AMJU_CALL_STACK;
 
   Assert(s_pGlueFile.GetPtr());
-  // Store the old file position
-  m_oldPos = s_pGlueFile->GetPos();
+
+  m_base = 0;
+  m_pos = 0;
 }
 
 FileImplGlue::~FileImplGlue()
@@ -45,8 +29,6 @@ FileImplGlue::~FileImplGlue()
   AMJU_CALL_STACK;
 
   Assert(s_pGlueFile.GetPtr());
-  // Restore the stored file pos
-  s_pGlueFile->SetPos(m_oldPos);
 }
 
 bool FileImplGlue::OpenWrite(
@@ -58,6 +40,7 @@ bool FileImplGlue::OpenWrite(
   AMJU_CALL_STACK;
 
   // TODO can't write to a Glue file
+  Assert(0);
   return false;
 }
 
@@ -66,6 +49,7 @@ bool FileImplGlue::WriteBinary(const char*, int numBytes)
   AMJU_CALL_STACK;
 
   // TODO can't write to a Glue file
+  Assert(0);
   return false;
 }
 
@@ -82,15 +66,17 @@ bool FileImplGlue::OpenRead(const std::string& path, const std::string& filename
 
   // Ignore the path.
   // Get the start pos of the sub-file we want and seek to there.
-  uint32 base = 0;
-  if (!s_pGlueFile->GetSeekBase(filename, &base))
+  if (!s_pGlueFile->GetSeekBase(filename, &m_base))
   {
     std::string s = "No such file: " + filename + " in glue file: " 
       + s_pGlueFile->GetFilename();
     ReportError(s);
     return false;
   }
-  s_pGlueFile->SetPos(base);
+
+  s_pGlueFile->SetPos(m_base);
+  m_pos = s_pGlueFile->GetPos();
+
   m_subfilename = filename;
   return true;
 }
@@ -99,13 +85,9 @@ bool FileImplGlue::GetLine(std::string* pResult)
 {
   AMJU_CALL_STACK;
 
-  uint32 base = 0;
-  if (!s_pGlueFile->GetSeekBase(m_subfilename, &base))
-  {
-    // Failed to look up file size
-    return false;
-  }
-  unsigned int pos = s_pGlueFile->GetPos() - base;
+  s_pGlueFile->SetPos(m_pos);
+
+  unsigned int pos = m_pos - m_base; // position within subfile
   unsigned int size = s_pGlueFile->GetSize(m_subfilename);
   if (pos >= size)
   {
@@ -130,24 +112,24 @@ bool FileImplGlue::GetLine(std::string* pResult)
       (*pResult) += c;
     }
   }
+  m_pos = s_pGlueFile->GetPos();
   return true;
 }
 
 unsigned int FileImplGlue::GetBinary(unsigned int bytes, unsigned char* pBuffer)
 {
-  return s_pGlueFile->GetBinary(bytes, pBuffer);
+  s_pGlueFile->SetPos(m_pos);
+  unsigned int r =  s_pGlueFile->GetBinary(bytes, pBuffer);
+  m_pos = s_pGlueFile->GetPos();
+  return r;
 }
 
 void FileImplGlue::BinarySeek(unsigned int pos)
 {
   AMJU_CALL_STACK;
 
-  uint32 base = 0;
-  if (!s_pGlueFile->GetSeekBase(m_subfilename, &base))
-  {
-    return;
-  }
-  s_pGlueFile->SetPos(base + pos);
+  s_pGlueFile->SetPos(m_base + pos);
+  m_pos = s_pGlueFile->GetPos();
 }
 
 unsigned int FileImplGlue::GetBinaryFileSize()
