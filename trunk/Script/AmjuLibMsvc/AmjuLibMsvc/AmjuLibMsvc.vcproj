@@ -142,6 +142,132 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="DebugAssetTest|Win32"
+			OutputDirectory="..\..\..\Build\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Build\$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
+				Optimization="0"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;NO_COMPILED_ASSETS"
+				MinimalRebuild="false"
+				ExceptionHandling="1"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseAssetTest|Win32"
+			OutputDirectory="..\..\..\Build\$(ConfigurationName)"
+			IntermediateDirectory="..\..\..\Build\$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
+				Optimization="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;NO_COMPILED_ASSETS"
+				MinimalRebuild="false"
+				ExceptionHandling="1"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -298,6 +424,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\Source\AmjuGL\AmjuGL-Null.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\AmjuGL\AmjuGL.cpp"
 				>
 			</File>
@@ -374,6 +504,22 @@
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/I &quot;../../Mem&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DebugAssetTest|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/I &quot;../../Mem&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="ReleaseAssetTest|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -619,6 +765,22 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\Geom\Matrix.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\OBB2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\OBB2.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\OBB3.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Geom\OBB3.h"
 				>
 			</File>
 			<File
@@ -1019,6 +1181,22 @@
 			</File>
 			<File
 				RelativePath="..\..\..\Source\GeomDraw\DrawAABB.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawOBB2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawOBB2.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawOBB3.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomDraw\DrawOBB3.h"
 				>
 			</File>
 			<File
