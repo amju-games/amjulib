@@ -71,7 +71,8 @@ bool SoundSDLMixer::PlaySong(const std::string& filename)
         return false;
     }
 
-    if(Mix_PlayMusic(music, 0) == -1) 
+    // Max loops
+    if(Mix_PlayMusic(music, -1) == -1) 
     {
         ReportError(std::string("Unable to play music file: ") + std::string(Mix_GetError()));
         return false;
