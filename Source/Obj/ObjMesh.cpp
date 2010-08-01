@@ -12,7 +12,12 @@ namespace Amju
 Resource* ObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
-  if (!obj->Load(resName, true /* binary */ ))
+  if (!obj->Load(resName, 
+#ifdef NO_COMPILED_ASSETS
+    false /* text */ ))
+#else
+    true /* binary */ ))
+#endif // NO_COMPILED_ASSETS
   {
     Assert(0);
     return 0;
