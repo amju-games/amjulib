@@ -82,13 +82,18 @@ void GuiButton::Draw()
   // Draw text
   // TODO Get font name, point size - use a GuiText object
   PushColour();
-  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
   float w = m_font->GetTextWidth(m_text);
   float x = m_pos.x + m_size.x * 0.5f - w * 0.5f * m_fontSize;
   float y = m_pos.y - m_size.y; // + 0.5f * heighOfChar ??
   float origSize = m_font->GetSize();
   m_font->SetSize(m_fontSize);
+  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
   m_font->Print(x, y, m_text.c_str());
+  // TODO Flag
+  // Drop shadow
+  AmjuGL::SetColour(0, 0, 0, 1);
+  m_font->Print(x, y + 0.01f, m_text.c_str());
+
   m_font->SetSize(origSize);
   PopColour();
   AmjuGL::PopMatrix();
