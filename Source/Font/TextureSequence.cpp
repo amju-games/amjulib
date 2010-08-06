@@ -140,6 +140,39 @@ int TextureSequence::GetNumElements() const
   return m_numElements;
 }
 
+void TextureSequence::MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff)
+{
+  AMJU_CALL_STACK;
+
+  Assert(m_pTexture);
+
+  float dx = 1.0f / (float)m_numElementsX;
+  float dy = 1.0f / (float)m_numElementsY;
+    
+  float x = float(element % m_numElementsX) * dx;
+  float y = float(element / m_numElementsX) * dy; // yes this is correct
+
+  float sizeX = m_sizex * size;
+  float sizeY = m_sizey * size;        
+
+  const float Z = 0.5f;
+  AmjuGL::Vert v[4] =
+  {
+    AmjuGL::Vert(xOff,         yOff,         Z,  x,      1.0f - y - dy,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + sizeX, yOff,         Z,  x + dx, 1.0f - y - dy,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + sizeX, yOff + sizeY, Z,  x + dx, 1.0f - y,          0, 1.0f, 0),
+    AmjuGL::Vert(xOff,         yOff + sizeY, Z,  x,      1.0f - y,          0, 1.0f, 0)
+  };
+
+  tris[0].m_verts[0] = v[0];
+  tris[0].m_verts[1] = v[1];
+  tris[0].m_verts[2] = v[2];
+
+  tris[1].m_verts[0] = v[0];
+  tris[1].m_verts[1] = v[2];
+  tris[1].m_verts[2] = v[3];
+}
+
 void TextureSequence::Draw(int element, float size)
 {
   AMJU_CALL_STACK;

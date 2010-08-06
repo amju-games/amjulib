@@ -27,6 +27,7 @@ Added to repository
 #include <string>
 #include "RCPtr.h"
 #include "Texture.h"
+#include <AmjuGL.h>
 
 namespace Amju
 {
@@ -52,6 +53,8 @@ public:
     float sizeX, float sizeY);
 
   int GetNumElements() const;
+
+  void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff);
 
   // Draw the given element, with optional scale factor.
   // This lets us accurately position quads of any size.

@@ -187,36 +187,30 @@ void Font::Print(float x, float y, const char* text)
 {
   AMJU_CALL_STACK;
 
-  if (!text)
-  {
-      return;
-  }
-
-  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_READ);
-
-  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
-  AmjuGL::Enable(AmjuGL::AMJU_BLEND); 
+  Assert(text);
 
   AmjuGL::PushMatrix();
-  AmjuGL::Translate(x, y, 0); //y - CHAR_SIZE, 0);
+  AmjuGL::Translate(x, y, 0); 
   // ..so top of character is at y-coord, not the bottom
 
   m_textureSequence.Bind();
 
+  AmjuGL::Tris tris;
+
+  float xOff = 0;
+  float yOff = 0;
   int i = 0;
-  while (unsigned char c = text[i])
+  while (unsigned char c = text[i++])
   {
-      i++;
-
-      m_textureSequence.Draw(c - (char)m_startChar, m_size);
-
-      float f = GetCharacterWidth(c);
-      AmjuGL::Translate(f, 0.0f, 0.0f);
+	  AmjuGL::Tri t[2];
+	  m_textureSequence.MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
+      tris.push_back(t[0]);
+      tris.push_back(t[1]);
+	  xOff += GetCharacterWidth(c);
   }
+  AmjuGL::DrawTriList(tris);
 
   AmjuGL::PopMatrix();
-  AmjuGL::PopAttrib();
 }
 
 void Font::PrintWorld(
