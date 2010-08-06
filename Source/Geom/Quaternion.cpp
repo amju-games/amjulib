@@ -342,7 +342,7 @@ Vec3f Quaternion::RotateVec(const Vec3f& v) const
   // v' = q v q*
   Quaternion qv(0, v.x, v.y, v.z);
   Quaternion result((*this) * qv * Conjugate());
-  result.Normalize();
+  // TODO result.w should be zero, but may be off due to inaccuracy ?
   return Vec3f(result.m_x, result.m_y, result.m_z);
 }
 }
