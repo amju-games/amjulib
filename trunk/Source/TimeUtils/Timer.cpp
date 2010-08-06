@@ -85,6 +85,10 @@ void Timer::Update()
 	// ticks now holds the number of milliseconds since the start of your app/loop.
 #endif // GEKKO
 
+#ifdef IPHONE
+  dt = 1.0f / 60.0f; // TODO TEMP TEST
+#endif
+
   static const float MAX_DT = 0.02f;
   if (dt > MAX_DT)
   {
