@@ -22,7 +22,9 @@ void SceneMesh::Draw()
   m_mesh->Draw();
   AmjuGL::PopMatrix();
 
+#ifdef DEBUG_DRAW_AABB
   DrawAABB(*(GetAABB()));
+#endif  
 }
 
 void SceneMesh::Update()
