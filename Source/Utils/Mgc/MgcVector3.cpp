@@ -26,9 +26,9 @@
 #include "MgcVector3.h"
 #include "AmjuFinal.h"
 
-using namespace Mgc;
-
-
+//using namespace Mgc; // j.c.
+namespace Mgc // j.c.
+{
 
 const Vector3 Vector3::ZERO(0.0f,0.0f,0.0f);
 
@@ -538,7 +538,7 @@ Vector3 Vector3::operator- () const
 
 //----------------------------------------------------------------------------
 
-Vector3 Mgc::operator* (Real fScalar, const Vector3& rkVector)
+Vector3 operator* (Real fScalar, const Vector3& rkVector)
 
 {
   AMJU_CALL_STACK;
@@ -852,5 +852,5 @@ void Vector3::GenerateOrthonormalBasis (Vector3& rkU, Vector3& rkV,
 
 //----------------------------------------------------------------------------
 
-
+} // j.c. namespace
 
