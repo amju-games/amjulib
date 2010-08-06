@@ -14,6 +14,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuFinal.h"
 
 //#define SHADER_DEBUG
+#define OPENGL_SHOW_INFO
 
 namespace Amju
 {
@@ -60,6 +61,22 @@ void AmjuGLOpenGLBase::Init()
 {
   AMJU_CALL_STACK;
 
+  // OpenGL version
+  const unsigned char* version = glGetString(GL_VERSION);
+  const unsigned char* vendor = glGetString(GL_VENDOR);
+  const unsigned char* renderer = glGetString(GL_RENDERER);
+  const unsigned char* extensions = glGetString(GL_EXTENSIONS);
+  
+#ifdef _DEBUG
+  std::cout << "OpenGL Version: " << version << "\n";
+#endif
+  
+#ifdef OPENGL_SHOW_INFO
+  std::cout << "OpenGL Vendor: " << vendor << "\n";
+  std::cout << "OpenGL Renderer: " << renderer << "\n";
+  std::cout << "OpenGL Extensions: " << extensions << "\n";
+#endif
+  
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
