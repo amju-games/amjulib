@@ -13,6 +13,8 @@ Game::Game()
 
 void Game::Update()
 {
+  UpdateState();
+
   TheTimer::Instance()->Update();
   TheEventPoller::Instance()->Update();
 
@@ -81,7 +83,6 @@ void Game::Run()
 
 void Game::RunOneLoop()
 {
-  UpdateState();
   Update();
 
   Draw();
