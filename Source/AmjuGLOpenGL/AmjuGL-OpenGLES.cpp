@@ -1,5 +1,6 @@
 /*
- */
+Amju Games source code (c) Copyright Jason Colman 2010
+*/
 
 #include "AmjuFirst.h"
 #include <math.h>
@@ -128,6 +129,7 @@ static void  gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble cen
 
 bool AmjuGLOpenGLES::CreateWindow(AmjuGLWindowInfo*)
 {
+  return true;
 }
 	
 
@@ -144,12 +146,9 @@ void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio, floa
 {
 	AMJU_CALL_STACK;
 	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+  glMatrixMode(GL_PROJECTION);
+  SetIdentity();
 	gluPerspective(fov, aspectRatio, nearDist, farDist);
-	
-	// TODO restore previous matrix mode
-	glMatrixMode(GL_MODELVIEW);
 }
 
 void AmjuGLOpenGLES::SetOrthoProjection()
@@ -171,7 +170,7 @@ void AmjuGLOpenGLES::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y
 void AmjuGLOpenGLES::DrawQuad(AmjuGL::Vert* verts)
 {
 	AMJU_CALL_STACK;
-	Assert(0); // not supported
+	//TODO Assert(0); // not supported
 }
 	
 	
@@ -212,9 +211,7 @@ void AmjuGLOpenGLES::SetTexture(
 {
 	AMJU_CALL_STACK;
 	
-#ifndef AMJU_GL_NONE
 	glGenTextures(1, (GLuint*)th);
-#endif
 	
 	glBindTexture(GL_TEXTURE_2D, *th);
 	
