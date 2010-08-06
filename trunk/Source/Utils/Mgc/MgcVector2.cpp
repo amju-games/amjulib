@@ -31,7 +31,8 @@
 #include "AmjuFinal.h"
 
 using namespace Mgc;
-
+namespace Mgc // j.c.
+{
 
 
 const Vector2 Vector2::ZERO(0.0f,0.0f);
@@ -168,7 +169,7 @@ Vector2 Vector2::operator- () const
 
 //----------------------------------------------------------------------------
 
-Vector2 Mgc::operator* (float fScalar, const Vector2& rkVector)
+Vector2 operator* (float fScalar, const Vector2& rkVector)
 
 {
   AMJU_CALL_STACK;
@@ -420,3 +421,4 @@ void Vector2::Orthonormalize (Vector2 akVector[2])
 
 //----------------------------------------------------------------------------
 
+} // j.c. namespace
