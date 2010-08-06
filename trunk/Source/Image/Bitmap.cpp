@@ -117,6 +117,15 @@ unsigned char* LoadDIBitmap(const char *filename, unsigned int* pWidth, unsigned
     return (0);
   }
   */
+  if (infosize > sizeof(BitmapInfo))
+  {
+    string s = "Unexpected info size, wrong type ? ";
+    s += filename;
+    ReportError(s);
+
+    return (0);
+  }
+
   if (f.GetBinary(infosize, (unsigned char *)(&info)) != infosize)
   {
    /*
