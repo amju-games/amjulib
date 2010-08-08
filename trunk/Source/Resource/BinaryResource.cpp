@@ -22,7 +22,25 @@ Resource* BinaryResourceLoader(const std::string& resName)
 bool BinaryResource::Load(const std::string& filename)
 {
   // TODO Use File class
+  File f(false);
+  if (!f.OpenRead(filename, true))
+  {
+    return false;
+  }
+  size_t size = f.GetFileSize();
+  // allocate memory to contain the whole file:
+  m_data.resize(size);
 
+  // copy the file into the buffer:
+  size_t result = f.GetBinary(size, &m_data[0]);
+  if (result != size) 
+  { 
+    perror ("Error reading file"); 
+    Assert(0);
+  }
+  return true;
+
+  /*
   FILE *f = fopen(filename.c_str(), "rb");
 
   if (!f) 
@@ -48,6 +66,7 @@ bool BinaryResource::Load(const std::string& filename)
   fclose(f);
 
   return true;
+  */
 }
 
 const unsigned char* BinaryResource::GetData() const
