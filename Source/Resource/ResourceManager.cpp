@@ -6,7 +6,7 @@
 #include "StringUtils.h"
 #include <iostream>
 
-#define RESOURCE_GROUP_DEBUG
+//#define RESOURCE_GROUP_DEBUG
 
 namespace Amju
 {
@@ -25,7 +25,7 @@ Resource* BmpLoader(const std::string& resName)
 Resource* Md2Loader(const std::string& resName)
 {
   // MD2 model file
-  File f(false, File::STD);
+  File f(false);
   if (!f.OpenRead(resName, true))
   {
     ReportError("Failed to open md2 file :-(\n");
