@@ -1,13 +1,15 @@
 #include "AmjuFirst.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
 #include <iostream>
 #include <fstream>
 
 #if defined(GEKKO) 
-#include <wiiuse/wpad.h>
-#include <stdlib.h> // exit 
+#include <Pause.h>
+#include <AmjuTime.h>
+#include <StringUtils.h>
 #endif // GEKKO
+
+#include "AmjuFinal.h"
 
 namespace Amju
 {
@@ -28,17 +30,18 @@ void wiiAssert(const void* exp, const char* file, unsigned int line)
     << std::endl;
 
   std::ofstream of;
-  of.open("/assertlog.txt", std::ios::app);
+  of.open("/assertlog.txt", std::ios::out | std::ios::app);
   if (of.good()) 
   {
     of
+      << Time::Now().ToString() << ": expr: \""
       << (const char *)exp
-      << std::endl
-      << "File: "
-      << file
-      << "\nLine: "
+      << "\" File: "
+      << StripPath(file)
+      << " Line: "
       << line
-      << std::endl
+      << "\r\n";
+    /*
       << "Callstack: ";
     const CallStack::FunctionNames& fn = CallStack::Instance()->GetFunctionNames();
     for (unsigned int i = 0; i < fn.size(); i++)
@@ -46,8 +49,15 @@ void wiiAssert(const void* exp, const char* file, unsigned int line)
       of << fn[i] << " ";
     }
     of << std::endl;
+    */
   }
+  else
+  {
+    std::cout << "Failed to open log file for writing :-(\n";
+  }
+  PAUSE
 
+  /*
   WPAD_Init();
   // Wait forever, but repond to home/power/reset
   while (true)
@@ -59,6 +69,7 @@ void wiiAssert(const void* exp, const char* file, unsigned int line)
       exit(0);
     }
   }
+  */
 }
 #endif // GEKKO
 
