@@ -53,13 +53,6 @@ Added to repository
 #include <sys/stat.h>   // chmod
 #endif
 
-#ifdef GEKKO
-// To initialise SD card file system 
-#include <fat.h>
-#include "ReportError.h"
-#include "Pause.h"
-#endif // GEKKO
-
 #include "FileImplStd.h"
 #include "AmjuFinal.h"
 
@@ -68,28 +61,6 @@ namespace Amju
 {
 FileImplStd::FileImplStd()
 {
-#ifdef GEKKO
-  static bool first = true;
-  if (first)
-  {
-    first= false;
-
-#ifdef _DEBUG
-    std::cout << "Initialising file system...\n";
-#endif
-
-    if (!fatInitDefault()) 
-    {
-      ReportError("fatInitDefault failed!");
-    }
-    else
-    {
-#ifdef _DEBUG
-      std::cout << "Successfully initialised file system!\n";
-#endif
-    }
-  }
-#endif // GEKKO
 }
 
 FileImplStd::~FileImplStd()

@@ -3,15 +3,20 @@ Amju Games source code (c) Copyright Jason Colman 2004
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
-
 #include <iostream>
+
 #ifdef MACOSX
 #include <sys/types.h>  // chmod
 #include <sys/stat.h>   // chmod
 #endif
+
+#ifdef GEKKO
+// To initialise SD card file system 
+#include <fat.h>
+#include "ReportError.h"
+#include "Pause.h"
+#endif // GEKKO
+
 #include "File.h"
 #include "FileImplStd.h"
 #include "FileImplGlue.h"
@@ -71,6 +76,31 @@ File::~File()
 void File::SetRoot(const std::string& root, const std::string& sep)
 {
   AMJU_CALL_STACK;
+
+#ifdef GEKKO
+  // Probably a better place than FileImplStd ctor, as we must call 
+  //  this early in main to open any files...
+  static bool first = true;
+  if (first)
+  {
+    first= false;
+
+#ifdef _DEBUG
+    std::cout << "Initialising file system...\n";
+#endif
+
+    if (!fatInitDefault()) 
+    {
+      Amju::ReportError("fatInitDefault failed!");
+    }
+    else
+    {
+#ifdef _DEBUG
+      std::cout << "Successfully initialised file system!\n";
+#endif
+    }
+  }
+#endif // GEKKO
 
   s_root = root;
   if (root.empty())
