@@ -6,7 +6,7 @@ void EventPollerImplIPhone::Update(Listeners* pListeners)
 {
   while (!m_q.empty())
   {
-    Event* event = m_q.top(); // Events on heap
+    Event* event = m_q.front(); // Events on heap
     m_q.pop();
 
     for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
@@ -20,11 +20,9 @@ void EventPollerImplIPhone::Update(Listeners* pListeners)
   }
 }
 
-  void EventPollerImplIPhone::QueueCursorEvent(const CursorEvent&);
-  void EventPollerImplIPhone::QueueRotationEvent(const RotationEvent&);
-  void EventPollerImplIPhone::OnMouseButtonEvent(const MouseButtonEvent&);
-  void EventPollerImplIPhone::OnBalanceBoardEvent(const BalanceBoardEvent&);
-  void EventPollerImplIPhone::OnQuitEvent();
-
+void EventPollerImplIPhone::QueueEvent(Event* event)
+{
+	m_q.push(event);
+}
 }
 
