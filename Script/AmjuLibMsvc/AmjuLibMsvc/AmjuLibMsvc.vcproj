@@ -559,6 +559,14 @@
 				RelativePath="..\..\..\Source\Events\EventPoller.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\Source\Events\EventTypes.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\Events\EventTypes.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Localise"
