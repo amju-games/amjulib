@@ -30,7 +30,7 @@ void Game::Draw()
 	// TODO We need to be able to get the preferred/allowed viewport dimensions ?!
 	// x, y, w, h -- w and h are full screen if zero
   // TODO Fix DX9 so we can have multple viewports
-//  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
+  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
     
   // Set perspective 
   // TODO We need to be able to get the viewport dimensions ?!
