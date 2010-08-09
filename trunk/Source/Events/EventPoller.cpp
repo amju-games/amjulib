@@ -3,6 +3,12 @@
 
 namespace Amju
 {
+EventPollerImpl* EventPoller::GetImpl()
+{
+  Assert(m_pImpl.GetPtr());
+  return m_pImpl;
+}
+
 void EventPoller::AddListener(EventListener* pListener)
 {
   Assert(pListener);

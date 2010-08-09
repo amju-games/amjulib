@@ -24,6 +24,8 @@ public:
   bool HasListener(EventListener*) const;
 
   void SetImpl(EventPollerImpl*);
+  EventPollerImpl* GetImpl();
+
   void Update();
   
 private:
