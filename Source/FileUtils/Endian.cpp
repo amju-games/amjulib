@@ -26,7 +26,7 @@ Added to repository
 namespace Amju
 {
 // If Mac on Intel, no swapping is required.
-#if defined(WIN32) || defined(__i386__)
+#if defined(WIN32) || defined(__i386__) || defined(IPHONE)
 int16 Endian(int16 i) { return i; }
 uint16 Endian(uint16 u) { return u; }
 int32 Endian(int32 i) { return i; }
