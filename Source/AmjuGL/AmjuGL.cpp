@@ -128,7 +128,11 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
+#ifdef LANDSCAPE
+  impl->Viewport(y, x, h, w);
+#else
   impl->Viewport(x, y, w, h);
+#endif
 }
 
 void AmjuGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
