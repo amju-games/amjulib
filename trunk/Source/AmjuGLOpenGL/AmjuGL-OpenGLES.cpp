@@ -320,7 +320,7 @@ void AmjuGLOpenGLES::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 	AMJU_CALL_STACK;
 
 	// TODO
-	Assert(0);
+	//Assert(0);
 }
 	
 } // namespace Amju
