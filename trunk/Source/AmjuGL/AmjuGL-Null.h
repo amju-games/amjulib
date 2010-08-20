@@ -44,12 +44,15 @@ public:
   virtual void Disable(uint32 flags) {}
   virtual void DestroyTextureHandle(AmjuGL::TextureHandle*) {}
   virtual void SetTexture(
-    AmjuGL::TextureHandle*, 
+    AmjuGL::TextureHandle* th, 
     AmjuGL::TextureType, 
     AmjuGL::TextureDepth, 
     int width, 
     int height, 
-    uint8* data) {}
+    uint8* data) 
+  { 
+    *th = 1; // Give texture handle a valid value, it is checked
+  }
   virtual void UseTexture(AmjuGL::TextureHandle) {}
   virtual void SetTextureMode(AmjuGL::TextureType tt) {}
   virtual void GetScreenshot(unsigned char* buffer, int w, int h) {}
