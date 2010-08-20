@@ -14,9 +14,10 @@ struct Vec2
   Vec2(T mx, T my) : x(mx), y(my) {}
   T x, y;
 
+  // Only safe for int T!
   bool operator==(const Vec2& v) const
   {
-    return (fabs(x - v.x) < EPSILON && fabs(y - v.y) < EPSILON);
+    return x == v.x && y == v.y;
   }
 
   bool operator!=(const Vec2& v) const
