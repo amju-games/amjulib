@@ -221,7 +221,7 @@ Md2Model::Animation Md2Model::GetAnimationFromName(const std::string& s)
   ReportError(err);
   Assert(0);
 #endif
-  return (Animation)0;
+  return (Animation)-1;
 }
 
 bool Md2Model::IsValidName(const std::string& s) const
