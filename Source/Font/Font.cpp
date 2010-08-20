@@ -188,6 +188,11 @@ void Font::Print(float x, float y, const char* text)
   AMJU_CALL_STACK;
 
   Assert(text);
+  if (*text == 0)
+  {
+    // Empty string
+    return;
+  }
 
   AmjuGL::PushMatrix();
   AmjuGL::Translate(x, y, 0); 
