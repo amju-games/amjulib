@@ -1260,6 +1260,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="SoundBass"
+			>
+			<File
+				RelativePath="..\..\..\Source\SoundBass\BassSoundPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\SoundBass\BassSoundPlayer.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
