@@ -1,40 +1,5 @@
 /*
 Amju Games source code (c) Copyright Jason Colman 2004
-$Log: GlueFile.cpp,v $
-Revision 1.9  2008/05/08 10:58:04  jay
-New memory management code
-
-Revision 1.8  2007/08/29 22:22:47  jay
-Fix return value error
-
-Revision 1.7  2007/07/04 18:40:44  jay
-Merge ref-counting from AMJU_POOL branch.
-We must ref count GlueFileBinaryData so we only delete allocated data when
- there are no more copies.
-
-Revision 1.6  2006/09/15 12:48:25  Administrator
-Fixes to get PetZoo+SceneEditor to build on Windows/MSVC
-
-Revision 1.5  2006/06/27 18:16:01  jay
-Store filename, as there may now be multiple glue files.
-Del unused files: create sh script as well as .bat script
-
-Revision 1.4  2006/02/17 18:59:08  jay
-Added new GetBinary() overload. This returns an _object_ containing a
-pointer to a buffer. The buffer can be allocated by the object, which then
-owns the buffer; or, the pointer can point to memory allocated by
-something else.
-
-Revision 1.3  2006/02/16 13:25:18  jay
-Fixed endian issue so Glue now works on Mac + Win.
-Added lots of debug output - turn on with GLUE_FILE_DEBUG
-
-Revision 1.2  2006/01/16 14:10:15  jay
-Fix warnings
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
 */
 
 #include "AmjuFirst.h"
@@ -48,8 +13,11 @@ Added to repository
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <iostream>
+#include <time.h>
 #include "File.h"
 #include "AmjuFinal.h"
+
+//#define GLUE_FILE_DEBUG
 
 using namespace std;
 namespace Amju
@@ -415,6 +383,36 @@ std::cout << "GLUE FILE: Writing file " << filename.c_str() << " starting at pos
   WriteTable();
 
   return true;
+}
+
+bool GlueFile::PatchItem(const std::string& filename)
+{
+  string lowname = ToLower(filename);
+  lowname = Replace(lowname, "\\", "/"); 
+
+  FileList::iterator it = std::find(m_filenames.begin(), m_filenames.end(), lowname);
+  if (it == m_filenames.end())
+  {
+    std::string s = "GLUE FILE: no existing file to patch: ";
+    s += filename;
+    s += ", just adding";
+    ReportError(s);
+    return AddItem(filename);
+  }
+
+  FileTable::iterator tableIt = m_table.find(lowname);
+  // In list, so should be in map too
+  Assert(tableIt != m_table.end());
+
+  // Replace name in both these containers, name must be unique
+  std::string repName = lowname + "PATCHED" + ToString((unsigned int)time(0)); 
+  *it = repName;
+  // Replace pair in map
+  SizePos sp(tableIt->second);
+  m_table.erase(tableIt);
+  m_table[repName] = sp;
+
+  return AddItem(filename);
 }
 
 uint32 GlueFile::GetPos()
