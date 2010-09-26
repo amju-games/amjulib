@@ -121,6 +121,8 @@ public:
   // NB Could the filename have a path prepended ?
   bool AddItem(const std::string& filename);
 
+  bool PatchItem(const std::string& filename);
+
   // Gets listing of sub-files in the GlueFile.
   // Inserts the sub-file names into the given vector.
   bool Dir(std::vector<std::string>* pResult);
