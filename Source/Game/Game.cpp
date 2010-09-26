@@ -23,28 +23,14 @@ void Game::Update()
 
 void Game::Draw()
 {
-  AmjuGL::InitFrame(0, 0, 0);
+  AmjuGL::InitFrame(m_clearColour.m_r, m_clearColour.m_g, m_clearColour.m_b);
 
   AmjuGL::BeginScene();
 
-	// TODO We need to be able to get the preferred/allowed viewport dimensions ?!
-	// x, y, w, h -- w and h are full screen if zero
   // TODO Fix DX9 so we can have multple viewports
   AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
     
-  // Set perspective 
-  // TODO We need to be able to get the viewport dimensions ?!
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-  // No need to set identity, this call overwrites proj matrix
-  const float FOVY = 60.0f;
-  const float aspect = (float)Screen::X() / (float)Screen::Y();
-  const float NEAR = 1.0f; 
-  const float FAR = 3000.0f;
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
-
   // Draw 3D Scene
-
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   GetState()->Draw();
 
@@ -176,4 +162,10 @@ Game::GameObjects* Game::GetGameObjects()
 {
   return &m_objects;
 }
+
+void Game::SetClearColour(const Colour& c)
+{
+  m_clearColour = c;
+}
+
 }
