@@ -225,6 +225,9 @@ void SceneGraph::Draw()
   // Don't want lighting for sky, shadows or HUD, right ?
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
 
+  // Don't want this either, right ?
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+
 #ifdef VFC_DEBUG
   DrawAABBs(m_root[AMJU_OPAQUE]);
 #endif 
@@ -277,6 +280,8 @@ void SceneGraph::Draw()
 #ifdef VFC_DEBUG
   std::cout << "Nodes: " << m_nodesTotal << " in frustum: " << m_nodesInFrustum  << "\n";
 #endif 
+
+  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);
 }
 
 void SceneGraph::UpdateNode(SceneNode* node)
