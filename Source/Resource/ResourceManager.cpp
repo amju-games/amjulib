@@ -104,7 +104,7 @@ void ResourceManager::FreeResourceGroup(const std::string& rg)
 Resource* ResourceManager::GetRes(const std::string& resName)
 {
   // Only check if resource is in a group in debug builds
-#ifdef _DEBUG
+#ifdef RES_DEBUG
   bool found = false;
   for (ResGroupMap::iterator it = m_groups.begin();
        it != m_groups.end();
