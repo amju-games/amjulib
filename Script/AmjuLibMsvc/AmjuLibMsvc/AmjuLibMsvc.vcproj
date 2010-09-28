@@ -1144,6 +1144,14 @@
 			Name="GeomLoad"
 			>
 			<File
+				RelativePath="..\..\..\Source\GeomLoad\LoadAABB.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\Source\GeomLoad\LoadAABB.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\Source\GeomLoad\LoadMatrix.cpp"
 				>
 			</File>
