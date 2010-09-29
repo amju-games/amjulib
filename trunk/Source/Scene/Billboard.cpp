@@ -33,37 +33,18 @@ bool Billboard::Load(File* f)
 
 void Billboard::Draw()
 {
-  if (m_tris.empty())
-  {
-    return;
-  }
-
-  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  AmjuGL::PushMatrix();
-  AmjuGL::MultMatrix(m_combined); // NB combined
-  m_texture->UseThisTexture();
-  AmjuGL::DrawTriList(m_tris);
-  AmjuGL::PopMatrix();
-}
-
-void Billboard::Update()
-{
   Matrix mat;
   mat.ModelView(); // Get Modelview matrix
-  mat *= m_combined;
+  mat = m_combined * mat;
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
 
   m_tris.resize(2);
 
-  // TODO check this
-  Vec3f pos(0, 0, 0); // -- we mult by m_combined in Draw()
-   // NOT: m_local[12], m_local[13], m_local[14]); // not combined, right ?
-
-  Vec3f v0 = pos + ( up + right) * m_size;
-  Vec3f v1 = pos + ( up - right) * m_size;
-  Vec3f v2 = pos + (-up - right) * m_size;
-  Vec3f v3 = pos + (-up + right) * m_size;
+  Vec3f v0 = ( up + right) * m_size;
+  Vec3f v1 = ( up - right) * m_size;
+  Vec3f v2 = (-up - right) * m_size;
+  Vec3f v3 = (-up + right) * m_size;
 
   AmjuGL::Vert verts[4] = 
   {
@@ -82,6 +63,17 @@ void Billboard::Update()
   tri->m_verts[0] = verts[0];
   tri->m_verts[1] = verts[2];
   tri->m_verts[2] = verts[3];
+
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::PushMatrix();
+  AmjuGL::MultMatrix(m_combined); // NB combined
+  m_texture->UseThisTexture();
+  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::PopMatrix();
+}
+
+void Billboard::Update()
+{
 }
 }
 
