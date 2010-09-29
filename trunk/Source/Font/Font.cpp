@@ -234,7 +234,6 @@ void Font::PrintWorld(
 
   AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_BLEND);
 
-  // TODO ?? glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
@@ -251,8 +250,6 @@ void Font::PrintWorld(
   AmjuGL::Translate(v.x, v.y, v.z);
 
   m_textureSequence.Bind();
-//  AmjuGL::Disable(GL_TEXTURE_GEN_S);
-//  AmjuGL::Disable(GL_TEXTURE_GEN_T);
 
   int i = 0;
   while (unsigned char c = text[i])
@@ -270,65 +267,6 @@ void Font::PrintWorld(
   AmjuGL::PopMatrix();
   AmjuGL::PopAttrib();
 }
-
-/*
-bool FontManager::Init()
-{
-  AMJU_CALL_STACK;
-
-  // Get font info filename. This file contains info for all fonts.
-  std::string fontInfo = "fonts.txt"; //Engine::Instance()->GetConfigValue("fonts");
-  File f;
-  if (!f.OpenRead(fontInfo))
-  {
-    return false;
-  }
-  int numFonts = 0;
-  if (!f.GetInteger(&numFonts))
-  {
-    f.ReportError("Expected number of fonts.");
-    return false;
-  }
-  SharedPtr<Font> pDefault;
-  for (int i = 0; i < numFonts; i++)
-  {
-    std::string fontName;
-    if (!f.GetDataLine(&fontName))
-    {
-      f.ReportError("Expected font name.");
-      return false;
-    }
-
-    SharedPtr<Font> pFont = new Font(fontName);
-    if (!pFont->Load(&f))
-    {
-      f.ReportError("Failed to load font info.");
-      return false;
-    }
-    
-    m_fonts[fontName] = pFont;
-
-    if (i == 0)
-    {
-      pDefault = m_fonts.begin()->second;
-    }
-  }
-  if (m_fonts.empty())
-  {
-std::cout << "FONT MANAGER: no fonts found!\n";
-    return false;
-  }
-
-  return true;
-}
-
-Font* FontManager::GetFont(const std::string& fontName)
-{
-  AMJU_CALL_STACK;
-
-  return m_fonts[fontName].GetPtr();
-}
-*/
 
 struct FontWidthFinder
 {
