@@ -30,9 +30,7 @@ public:
 
   // Game States
   GameState* GetState(); // Get current state
-  GameState* GetState(const char* stateName); // Get named state
-  void SetCurrentState(const char* stateName);
-  bool AddState(const char* stateName, PGameState state);
+  void SetCurrentState(GameState* gs);
 
   // Game Objects
   typedef std::map<int, PGameObject> GameObjects;
@@ -52,10 +50,8 @@ private:
   void UpdateState(); // go to new state if set
 
 private:
-  typedef std::map<std::string, PGameState> GameStates;
-  GameStates m_states;
-  PGameState m_currentState;
-  PGameState m_newState;
+  GameState* m_currentState;
+  GameState* m_newState;
 
   GameObjects m_objects;
 

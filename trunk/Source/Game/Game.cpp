@@ -9,6 +9,8 @@ namespace Amju
 Game::Game()
 {
   TheEventPoller::Instance()->AddListener(this);
+  m_currentState = 0;
+  m_newState = 0;
 }
 
 void Game::Update()
@@ -90,16 +92,9 @@ GameState* Game::GetState()
   return m_currentState;
 }
 
-GameState* Game::GetState(const char* stateName)
+void Game::SetCurrentState(GameState* gs)
 {
-  return m_states[stateName];
-}
-
-void Game::SetCurrentState(const char* stateName)
-{
-  GameStates::iterator it = m_states.find(stateName);
-  Assert(it != m_states.end());
-  m_newState = it->second;
+  m_newState = gs;
 }
 
 void Game::UpdateState()
@@ -111,6 +106,7 @@ void Game::UpdateState()
 
   if (m_currentState == m_newState)
   {
+    m_newState = 0;
     return;
   }
 
@@ -128,12 +124,6 @@ void Game::UpdateState()
   // TODO Not sure why, is this old ??
   m_currentState->OnActive();
   TheEventPoller::Instance()->AddListener(m_currentState);
-}
-
-bool Game::AddState(const char* stateName, PGameState state)
-{
-  m_states[stateName] = state;
-  return true;
 }
 
 PGameObject Game::GetGameObject(int id)
@@ -167,5 +157,4 @@ void Game::SetClearColour(const Colour& c)
 {
   m_clearColour = c;
 }
-
 }
