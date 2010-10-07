@@ -235,22 +235,22 @@ void Quaternion::CreateMatrix(float *pMatrix) const
 
     // Make sure the matrix has allocated memory to store the rotation data
     if(!pMatrix) return;
-    // First row
+    // First col
     pMatrix[ 0] = 1.0f - 2.0f * ( m_y * m_y + m_z * m_z ); 
     pMatrix[ 1] = 2.0f * (m_x * m_y + m_z * m_w);
     pMatrix[ 2] = 2.0f * (m_x * m_z - m_y * m_w);
     pMatrix[ 3] = 0.0f;  
-    // Second row
+    // Second col
     pMatrix[ 4] = 2.0f * ( m_x * m_y - m_z * m_w );  
     pMatrix[ 5] = 1.0f - 2.0f * ( m_x * m_x + m_z * m_z ); 
     pMatrix[ 6] = 2.0f * (m_z * m_y + m_x * m_w );  
     pMatrix[ 7] = 0.0f;  
-    // Third row
+    // Third col
     pMatrix[ 8] = 2.0f * ( m_x * m_z + m_y * m_w );
     pMatrix[ 9] = 2.0f * ( m_y * m_z - m_x * m_w );
     pMatrix[10] = 1.0f - 2.0f * ( m_x * m_x + m_y * m_y );  
     pMatrix[11] = 0.0f;  
-    // Fourth row
+    // Fourth col
     pMatrix[12] = 0;  
     pMatrix[13] = 0;  
     pMatrix[14] = 0;  
