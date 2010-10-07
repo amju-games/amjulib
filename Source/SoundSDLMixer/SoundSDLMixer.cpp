@@ -35,7 +35,7 @@ SoundSDLMixer::~SoundSDLMixer()
 
 bool SoundSDLMixer::PlayWav(const std::string& wavFile, float volume)
 {
-    Mix_Chunk *sound = Mix_LoadWAV((std::string("sound/") + wavFile).c_str());
+    Mix_Chunk *sound = Mix_LoadWAV((std::string("sound/") + wavFile + std::string(".wav")).c_str());
     if(sound == NULL) 
     {
         ReportError(std::string("Unable to load wav file: ") + std::string(Mix_GetError()));
