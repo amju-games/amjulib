@@ -4,6 +4,8 @@
 #include "TextureUtils.h"
 #include "Bitmap.h"
 #include "ReportError.h"
+#include <StringUtils.h>
+#include <Png/LoadPng.h>
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -40,16 +42,28 @@ bool Texture::Load(const std::string& filename)
   // TODO Support png
   unsigned int w = 0;
   unsigned int h = 0;
-  
-  unsigned char* data = LoadDIBitmap(filename.c_str(), &w, &h);
-  
+  unsigned char* data = 0;
+  unsigned int bpp = 3; // bytes per pixel
+
+  std::string ext = ToLower(GetFileExt(filename));
+  if (ext == "bmp")
+  {
+    data = LoadDIBitmap(filename.c_str(), &w, &h);
+  }
+  else if (ext == "png")
+  {
+    data = LoadPng(filename.c_str(), &w, &h, &bpp);
+    // TODO I think bmps are upside down, but the rest of the code compensates.. sigh
+    FlipBmp(data, w, h, bpp);
+  }
+
   if (!data)
   {
     ReportError("Failed to load texture " + filename);
     return false;
   }
 
-  Create(data, w, h, 3); // 3 bytes per pixel
+  Create(data, w, h, bpp); 
   delete [] data;
   return true;
 }

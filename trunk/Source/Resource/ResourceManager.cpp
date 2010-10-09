@@ -10,8 +10,8 @@
 
 namespace Amju
 {
-// Loader for bmp files
-Resource* BmpLoader(const std::string& resName)
+// Loader for image files
+Resource* ImageLoader(const std::string& resName)
 {
   Texture* pTex = new Texture;
   if (!pTex->Load(resName))
@@ -43,7 +43,8 @@ Resource* Md2Loader(const std::string& resName)
 
 ResourceManager::ResourceManager()
 {
-  AddLoader("bmp", BmpLoader);
+  AddLoader("png", ImageLoader);
+  AddLoader("bmp", ImageLoader);
   AddLoader("md2", Md2Loader);
 }
 
