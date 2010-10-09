@@ -40,7 +40,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/Utils/Zlib&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot;  /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot;  /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
 				Optimization="0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="false"
@@ -104,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; /I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
+				AdditionalOptions="/D &quot;MSVC&quot; /D &quot;GLEW_STATIC&quot; /I &quot;../../../Source/Mem&quot; /I &quot;../../../Source/Utils&quot; &#x0D;&#x0A;/I &quot;../../../Source/Utils/Zlib&quot;&#x0D;&#x0A;/I &quot;../../../Source/AmjuGL&quot; /I &quot;../../../Source/FileUtils&quot; /I &quot;../../../Source/Strings&quot;  /I &quot;../../../Source/Localise&quot; /I &quot;../../../Source/Events&quot; /I &quot;../../../Source/Geom&quot; /I &quot;../../../Source/TimeUtils&quot; /I &quot;../../../Source/Game&quot; /I &quot;../../../Source/Resource&quot; /I &quot;../../../Source/Scene&quot; /I &quot;../../../Source/Md2&quot; /I &quot;../../../Source/Image&quot; /I &quot;../../../Source/Obj&quot;  /I &quot;../../../Source/Collision&quot; /I &quot;../../../Source/Sound&quot; /I &quot;../../../Source/SoundSDLMixer&quot; /I &quot;../../../Source/Font&quot; /I &quot;../../../Source/GeomLoad&quot; /I &quot;../../../Source/GeomDraw&quot;"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
@@ -675,6 +675,110 @@
 				RelativePath="..\..\..\Source\Utils\Variable.h"
 				>
 			</File>
+			<Filter
+				Name="Zlib"
+				>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\adler32.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\compress.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\crc32.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\crc32.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\deflate.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\deflate.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\example.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\gzio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\infback.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inffast.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inffast.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inffixed.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inflate.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inflate.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inftrees.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\inftrees.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\minigzip.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\trees.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\trees.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\uncompr.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\zconf.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\zconf.in.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\zlib.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\zutil.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Utils\Zlib\zutil.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Mem"
@@ -867,6 +971,114 @@
 				RelativePath="..\..\..\Source\Image\TextureUtils.h"
 				>
 			</File>
+			<Filter
+				Name="Png"
+				>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\example.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\LoadPng.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\LoadPng.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\png.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\png.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngconf.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngerror.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pnggccrd.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngget.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngmem.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngpread.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngread.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngrio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngrtran.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngrutil.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngset.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngtest.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngtrans.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngvcrd.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngwio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngwrite.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngwtran.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\pngwutil.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\SavePng.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Source\Image\Png\SavePng.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="TimeUtils"
