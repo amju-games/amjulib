@@ -1,3 +1,6 @@
+#if 0
+// j.c.
+
 /* minigzip.c -- simulate gzip using the zlib compression library
  * Copyright (C) 1995-2005 Jean-loup Gailly.
  * For conditions of distribution and use, see copyright notice in zlib.h
@@ -14,6 +17,11 @@
  */
 
 /* @(#) $Id: minigzip.c,v 1.1 2006/12/30 16:18:17 jay Exp $ */
+
+// j.c. MSVC 9 warnings
+#ifdef WIN32
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include <stdio.h>
 #include "zlib.h"
@@ -68,6 +76,15 @@
 #else
 #  define local
 #endif
+
+// j.c. MSVC 9 warnings
+#ifdef WIN32
+#define unlink _unlink
+#define setmode _setmode
+#define fileno _fileno
+#endif
+
+
 
 char *prog;
 
@@ -320,3 +337,5 @@ int main(argc, argv)
     }
     return 0;
 }
+
+#endif // 0, j.c.
