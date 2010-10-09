@@ -215,37 +215,37 @@ int writepng_init(mainprog_info *mainprog_ptr)
 
         if (mainprog_ptr->have_text & TEXT_TITLE) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "Title";
+            text[num_text].key = (char*)"Title";
             text[num_text].text = mainprog_ptr->title;
             ++num_text;
         }
         if (mainprog_ptr->have_text & TEXT_AUTHOR) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "Author";
+            text[num_text].key = (char*)"Author";
             text[num_text].text = mainprog_ptr->author;
             ++num_text;
         }
         if (mainprog_ptr->have_text & TEXT_DESC) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "Description";
+            text[num_text].key = (char*)"Description";
             text[num_text].text = mainprog_ptr->desc;
             ++num_text;
         }
         if (mainprog_ptr->have_text & TEXT_COPY) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "Copyright";
+            text[num_text].key = (char*)"Copyright";
             text[num_text].text = mainprog_ptr->copyright;
             ++num_text;
         }
         if (mainprog_ptr->have_text & TEXT_EMAIL) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "E-mail";
+            text[num_text].key = (char*)"E-mail";
             text[num_text].text = mainprog_ptr->email;
             ++num_text;
         }
         if (mainprog_ptr->have_text & TEXT_URL) {
             text[num_text].compression = PNG_TEXT_COMPRESSION_NONE;
-            text[num_text].key = "URL";
+            text[num_text].key = (char*)"URL";
             text[num_text].text = mainprog_ptr->url;
             ++num_text;
         }
