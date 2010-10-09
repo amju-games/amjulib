@@ -25,7 +25,7 @@ bool SoundWii::PlayWav(const std::string& wavFile, float volume)
   // Use raw sound data file, ending .snd
   // Save data as 16 bit signed big endian stereo
   // (Use GoldWave, www.goldwave.com)
-  std::string filename = "sound/wii/" + wavFile + ".snd";
+  std::string filename = wavFile; 
 
   s32 voice1 = SND_GetFirstUnusedVoice();
 
@@ -64,7 +64,7 @@ bool SoundWii::PlayWav(const std::string& wavFile, float volume)
 
 bool SoundWii::PlaySong(const std::string& songFile)
 {
-  std::string filename = "sound/" + songFile;
+  std::string filename = songFile;
 
   if (GetGlueFile())
   {
