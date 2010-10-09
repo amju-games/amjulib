@@ -111,7 +111,7 @@ void AmjuGLGCube::Flip()
   if (s_isConsole)
   {
     VIDEO_WaitVSync();
-  return;
+    return;
   }
 
   GX_SetColorUpdate(GX_TRUE);
@@ -262,7 +262,6 @@ void AmjuGLGCube::Init()
  
   f32 yscale;
   u32 xfbHeight;
-  GXColor background = {0, 0, 0, 0xff};
  
   // init the vi. setup frame buffer and set the retrace callback
   // to copy the efb to xfb
@@ -296,6 +295,7 @@ void AmjuGLGCube::Init()
   GX_Init(gp_fifo,DEFAULT_FIFO_SIZE);
  
   // clears the bg to color and clears the z buffer
+  GXColor background = {0, 0, 0, 0xff};
   GX_SetCopyClear(background, 0x00ffffff);
  
   // other gx setup
@@ -316,6 +316,9 @@ void AmjuGLGCube::Init()
 void AmjuGLGCube::InitFrame(float clearR, float clearG, float clearB)
 {
   AMJU_CALL_STACK;
+
+  GXColor background = { clearR * 0xff, clearG * 0xff, clearB * 0xff, 0xff};
+  GX_SetCopyClear(background, 0x00ffffff);
 
   // TODO Enable/disable blending
   //GX_SetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
