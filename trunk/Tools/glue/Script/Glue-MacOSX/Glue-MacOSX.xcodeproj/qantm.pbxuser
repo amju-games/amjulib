@@ -1,0 +1,331 @@
+// !$*UTF8*$!
+{
+	08FB7793FE84155DC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 6DCA371C1265BD2300691BC1 /* Glue-MacOSX */;
+		activeTarget = 8DD76F620486A84900D96B5E /* Glue-MacOSX */;
+		addToTargets = (
+			8DD76F620486A84900D96B5E /* Glue-MacOSX */,
+		);
+		codeSenseManager = 6DCA37211265BD3200691BC1 /* Code sense */;
+		executables = (
+			6DCA371C1265BD2300691BC1 /* Glue-MacOSX */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					754,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					714,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 308657443;
+			PBXWorkspaceStateSaveDate = 308657443;
+		};
+		perUserProjectItems = {
+			6DCA37631265BFC100691BC1 /* XCBuildMessageTextBookmark */ = 6DCA37631265BFC100691BC1 /* XCBuildMessageTextBookmark */;
+			6DCA37641265BFC100691BC1 /* PBXTextBookmark */ = 6DCA37641265BFC100691BC1 /* PBXTextBookmark */;
+			6DCA378A1265C14300691BC1 /* PBXTextBookmark */ = 6DCA378A1265C14300691BC1 /* PBXTextBookmark */;
+			6DCA378B1265C14300691BC1 /* PBXTextBookmark */ = 6DCA378B1265C14300691BC1 /* PBXTextBookmark */;
+			6DCA378C1265C14300691BC1 /* PBXBookmark */ = 6DCA378C1265C14300691BC1 /* PBXBookmark */;
+			6DCA378D1265C14300691BC1 /* PBXTextBookmark */ = 6DCA378D1265C14300691BC1 /* PBXTextBookmark */;
+			6DCA37D61265C51300691BC1 /* PBXTextBookmark */ = 6DCA37D61265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37D71265C51300691BC1 /* PBXTextBookmark */ = 6DCA37D71265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37D81265C51300691BC1 /* PBXTextBookmark */ = 6DCA37D81265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37D91265C51300691BC1 /* PBXTextBookmark */ = 6DCA37D91265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37DA1265C51300691BC1 /* PBXTextBookmark */ = 6DCA37DA1265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37DB1265C51300691BC1 /* PBXTextBookmark */ = 6DCA37DB1265C51300691BC1 /* PBXTextBookmark */;
+			6DCA37DC1265C51300691BC1 /* PBXTextBookmark */ = 6DCA37DC1265C51300691BC1 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 6DCA37201265BD3200691BC1 /* Source Control */;
+		userBuildSettings = {
+			OBJROOT = "$(SYMROOT)";
+			SYMROOT = "/Users/qantm/Desktop/jason-pleaseDontDelete/amjulib/Build/Glue-MacOSX";
+		};
+	};
+	6DCA371C1265BD2300691BC1 /* Glue-MacOSX */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "Glue-MacOSX";
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	6DCA37201265BD3200691BC1 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	6DCA37211265BD3200691BC1 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	6DCA37231265BD5100691BC1 /* GlueMain.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 2210}}";
+			sepNavSelRange = "{384, 0}";
+			sepNavVisRange = "{0, 1168}";
+		};
+	};
+	6DCA372D1265BDD400691BC1 /* CsvTokeniser.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1005, 1001}}";
+			sepNavSelRange = "{352, 0}";
+			sepNavVisRange = "{0, 661}";
+		};
+	};
+	6DCA372F1265BDD400691BC1 /* Directory.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 4758}}";
+			sepNavSelRange = "{5810, 26}";
+			sepNavVisRange = "{5742, 1030}";
+		};
+	};
+	6DCA37301265BDD400691BC1 /* Directory.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 832}}";
+			sepNavSelRange = "{1304, 0}";
+			sepNavVisRange = "{418, 1384}";
+			sepNavWindowFrame = "{{15, 495}, {750, 558}}";
+		};
+	};
+	6DCA37331265BDD400691BC1 /* File.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 7293}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 926}";
+		};
+	};
+	6DCA37371265BDD400691BC1 /* FileImplGlue.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1005, 2145}}";
+			sepNavSelRange = "{145, 0}";
+			sepNavVisRange = "{0, 501}";
+		};
+	};
+	6DCA37401265BDD400691BC1 /* GlueFile.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1005, 2678}}";
+			sepNavSelRange = "{820, 0}";
+			sepNavVisRange = "{0, 931}";
+		};
+	};
+	6DCA37631265BFC100691BC1 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "GlueFile.h: No such file or directory";
+		fRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 13;
+		rType = 1;
+	};
+	6DCA37641265BFC100691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */;
+		name = "GlueMain.cpp: 14";
+		rLen = 0;
+		rLoc = 295;
+		rType = 0;
+		vrLen = 0;
+		vrLoc = 0;
+	};
+	6DCA37701265C0A200691BC1 /* AmjuAssert.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 1196}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 859}";
+		};
+	};
+	6DCA37711265C0A200691BC1 /* AmjuAssert.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {932, 780}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{284, 1292}";
+		};
+	};
+	6DCA377C1265C0A200691BC1 /* SharedPtr.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1005, 1378}}";
+			sepNavSelRange = "{244, 10}";
+			sepNavVisRange = "{0, 889}";
+		};
+	};
+	6DCA378A1265C14300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37401265BDD400691BC1 /* GlueFile.h */;
+		name = "GlueFile.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1199;
+		vrLoc = 0;
+	};
+	6DCA378B1265C14300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */;
+		name = "GlueMain.cpp: 14";
+		rLen = 0;
+		rLoc = 316;
+		rType = 0;
+		vrLen = 1059;
+		vrLoc = 295;
+	};
+	6DCA378C1265C14300691BC1 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 6DCA37711265C0A200691BC1 /* AmjuAssert.h */;
+	};
+	6DCA378D1265C14300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37711265C0A200691BC1 /* AmjuAssert.h */;
+		name = "AmjuAssert.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1265;
+		vrLoc = 311;
+	};
+	6DCA37A21265C1A700691BC1 /* StringUtils.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1005, 4316}}";
+			sepNavSelRange = "{3967, 0}";
+			sepNavVisRange = "{3678, 634}";
+		};
+	};
+	6DCA37D61265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37701265C0A200691BC1 /* AmjuAssert.cpp */;
+		name = "AmjuAssert.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 859;
+		vrLoc = 0;
+	};
+	6DCA37D71265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37711265C0A200691BC1 /* AmjuAssert.h */;
+		name = "AmjuAssert.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 284;
+	};
+	6DCA37D81265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37331265BDD400691BC1 /* File.cpp */;
+		name = "File.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 926;
+		vrLoc = 0;
+	};
+	6DCA37D91265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA372F1265BDD400691BC1 /* Directory.cpp */;
+		name = "Directory.cpp: 285";
+		rLen = 26;
+		rLoc = 5810;
+		rType = 0;
+		vrLen = 1030;
+		vrLoc = 5742;
+	};
+	6DCA37DA1265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37301265BDD400691BC1 /* Directory.h */;
+		name = "Directory.h: 45";
+		rLen = 0;
+		rLoc = 1304;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 418;
+	};
+	6DCA37DB1265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */;
+		name = "GlueMain.cpp: 21";
+		rLen = 0;
+		rLoc = 384;
+		rType = 0;
+		vrLen = 1132;
+		vrLoc = 0;
+	};
+	6DCA37DC1265C51300691BC1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */;
+		name = "GlueMain.cpp: 20";
+		rLen = 0;
+		rLoc = 384;
+		rType = 0;
+		vrLen = 1168;
+		vrLoc = 0;
+	};
+	8DD76F620486A84900D96B5E /* Glue-MacOSX */ = {
+		activeExec = 0;
+		executables = (
+			6DCA371C1265BD2300691BC1 /* Glue-MacOSX */,
+		);
+	};
+}
