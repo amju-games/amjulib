@@ -42,7 +42,7 @@ bool Dir(
 // For Windows, we try to get something similar. If this fails (Win 98/NT)
 // we use the File::Root directory. The reason is that users do not expect
 // a new high-level  directory to be created on their disk, and don't like it.
-std::string GetSaveDir();
+std::string GetSaveDir(const std::string& appName);
 
 // Get user desktop directory.
 // This is for saving fles that we want the user to be able to
