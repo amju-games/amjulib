@@ -11,13 +11,13 @@ Amju Games source code (c) Copyright Jason Colman 2010
 #endif // WIN32
 
 #include <iostream>
-#include <GlueFile.h>
+#include "GlueFile.h"
 
 using namespace Amju;
 using namespace std;
 
 namespace Amju
-{
+{	
 void ReportError(const std::string& s)
 {
   std::cout << s.c_str() << "\n";
