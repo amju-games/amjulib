@@ -282,7 +282,7 @@ std::string GetDesktopDir()
 #endif // GEKKO
 }
 
-std::string GetSaveDir()
+std::string GetSaveDir(const std::string& appName)
 {
   // Get directory for saving preferences, etc.
   // Not in the application directory, so the app can be upgraded without losing
@@ -310,7 +310,7 @@ std::string GetSaveDir()
     if (success)
     {
       s += "\\";
-      s += APPLICATION_NAME;
+      s += appName;
       s += "\\";
      
       MkDir(s);
@@ -337,7 +337,7 @@ std::string GetSaveDir()
     first = false;
  
     s = "/Users/Shared/";
-    s += APPLICATION_NAME;
+    s += appName;
     s += "/";
 
     MkDir(s);
