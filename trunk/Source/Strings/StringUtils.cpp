@@ -94,14 +94,14 @@ bool StringContains(const std::string& container, const std::string& substr)
 {
   AMJU_CALL_STACK;
 
-  unsigned int f = container.find(substr);
+  size_t f = container.find(substr);
   return (f != std::string::npos);
 }
 
 std::string StripPath(const std::string& s, const std::string& slashChar)
 {
   std::string ret = s;
-  unsigned int f = ret.find_last_of(slashChar);
+  size_t f = ret.find_last_of(slashChar);
   if (f != std::string::npos)
   {
     ret = ret.substr(f + 1);
@@ -139,7 +139,7 @@ std::string GetFilePath(const std::string& filename)
 std::string GetFilePath(const std::string& s, const std::string& slashChar)
 {
   std::string ret = s;
-  unsigned int f = ret.find_last_of(slashChar);
+  size_t f = ret.find_last_of(slashChar);
   if (f != std::string::npos)
   {
     ret = ret.substr(0, f);
@@ -164,7 +164,7 @@ void Trim(std::string* ps)
 
 std::string GetFileExt(const std::string& f)
 {
-  unsigned int pos = f.rfind(".");
+  size_t pos = f.rfind(".");
 
   if (pos != std::string::npos)
   {
@@ -176,7 +176,7 @@ std::string GetFileExt(const std::string& f)
 std::string GetFileNoExt(const std::string& f)
 {
   // Return all up to but not including the final dot.
-  unsigned int pos = f.rfind(".");
+  size_t pos = f.rfind(".");
 
   if (pos != std::string::npos)
   {
@@ -258,7 +258,7 @@ std::string Replace(
   const std::string& replaceWithThis)
 {
   std::string r(s);
-  unsigned int j;
+  size_t j;
   int length = replaceThis.length();
 
   while ((j = r.find(replaceThis)) != std::string::npos)
@@ -274,7 +274,7 @@ Strings Split(const std::string& cs, char c)
   std::string s(cs);
   while (true) 
   {
-    unsigned int i = s.find(c);
+    size_t i = s.find(c);
     if (i == std::string::npos)
     {
       // No special character found, so push back the entire string and finish.
