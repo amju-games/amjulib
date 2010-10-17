@@ -25,10 +25,6 @@ public:
   // Call when all drawing finished
   virtual void Flip();
 
-  // Call at start of drawing every frame.
-  // Specify clear colour
-  virtual void InitFrame(float clearR, float clearG, float clearB);
-
   // Set up projection matrix, by specifying field-of-view and aspect ratio.
   // Near and far planes are currently hardcoded.
   virtual void SetPerspectiveProjection(
@@ -51,9 +47,6 @@ public:
     const AmjuGL::Verts& verts,
     const AmjuGL::IndexedTriList& indexes);
 
-  // Call to delete Texture handle
-  virtual void DestroyTextureHandle(AmjuGL::TextureHandle*);
-
   virtual void SetTexture(
     AmjuGL::TextureHandle*, 
     AmjuGL::TextureType, 
@@ -61,9 +54,6 @@ public:
     int width, 
     int height, 
     uint8* data);
-
-  // Call to use a Texture once set up
-  virtual void UseTexture(AmjuGL::TextureHandle);
 
   virtual void SetTextureMode(AmjuGL::TextureType tt);
 

@@ -3,15 +3,11 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
 #ifdef WIN32
-#pragma warning(disable: 4786)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 #endif
-#include "AmjuFirst.h"
-//#ifdef WIN32
-//#include <windows.h>
-//#endif
 
+#include "AmjuFirst.h"
 #include <iostream>
 #include "GL/glew.h"
 #include "AmjuGL-OpenGL.h"
@@ -46,22 +42,9 @@ void AmjuGLOpenGL::Init()
 {
   AMJU_CALL_STACK;
 
-  // OpenGL version
-  const unsigned char* version = glGetString(GL_VERSION);
-  const unsigned char* vendor = glGetString(GL_VENDOR);
-  const unsigned char* renderer = glGetString(GL_RENDERER);
-  const unsigned char* extensions = glGetString(GL_EXTENSIONS);
+  AmjuGLOpenGLBase::Init();
 
-#ifdef _DEBUG
-std::cout << "OpenGL Version: " << version << "\n";
-#endif
-
-#ifdef OPENGL_SHOW_INFO
-std::cout << "OpenGL Vendor: " << vendor << "\n";
-std::cout << "OpenGL Renderer: " << renderer << "\n";
-std::cout << "OpenGL Extensions: " << extensions << "\n";
-#endif
-
+  // TODO Does glew work with GLES ?
   GLenum err = glewInit();
   if (GLEW_OK != err)
   {
@@ -99,45 +82,6 @@ std::cout << "GLSL " << sVersion << " is supported.\n";
 std::cout << "GLSL is NOT SUPPORTED :-(\n";
 #endif
   }
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  glEnable(GL_CULL_FACE);
-  glCullFace(GL_BACK);
-
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-  glEnable(GL_COLOR_MATERIAL);
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  // Try to disable blending unless expicitly required
-  glDisable(GL_BLEND);
-
-  // We can rely on default values for everything else.
-}
-
-void AmjuGLOpenGL::InitFrame(float clearR, float clearG, float clearB)
-{
-  AMJU_CALL_STACK;
-
-  // Do GL initialisation before we draw the frame.
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-  glClearColor(clearR, clearG, clearB, 1.0f);
-
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  glCullFace(GL_BACK);
-  glEnable(GL_CULL_FACE);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  AmjuGL::Disable(GL_BLEND); // only enabled where necessary
-  // NB Must use AmjuGL::Disable so flags are set consistently!
-
-  //glEnable(GL_BLEND); // TODO some things (day night sky etc) must enable this.
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-
-  // Set the modelview matrix
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
 }
 
 void AmjuGLOpenGL::SetPerspectiveProjection(
@@ -145,7 +89,7 @@ void AmjuGLOpenGL::SetPerspectiveProjection(
 {
   AMJU_CALL_STACK;
 
-  glMatrixMode(GL_PROJECTION);
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   SetIdentity();
   gluPerspective(fov, aspectRatio, nearDist, farDist);
 }
@@ -296,20 +240,6 @@ void AmjuGLOpenGL::DrawIndexedTriList(
   // TODO
 }
 
-void AmjuGLOpenGL::DestroyTextureHandle(AmjuGL::TextureHandle* th)
-{
-  AMJU_CALL_STACK;
-
-  int texId = (int)(*th);
-  if (texId < 0)
-  {
-    std::cout << "\n*** Texture handle not found: " << texId << "\n";
-    Assert(0);
-  }
-
-  glDeleteTextures(1, (GLuint*)th);
-}
-
 void AmjuGLOpenGL::SetTextureMode(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
@@ -340,10 +270,7 @@ void AmjuGLOpenGL::SetTexture(
 {
   AMJU_CALL_STACK;
 
-#ifndef AMJU_GL_NONE
   glGenTextures(1, (GLuint*)th);
-#endif
-
   glBindTexture(GL_TEXTURE_2D, *th);
 
   bool wrap = true; // TODO
@@ -433,13 +360,6 @@ void AmjuGLOpenGL::SetTexture(
       GL_UNSIGNED_BYTE,
       data);
   }
-}
-
-void AmjuGLOpenGL::UseTexture(AmjuGL::TextureHandle t)
-{
-  AMJU_CALL_STACK;
-
-  glBindTexture(GL_TEXTURE_2D, t);
 }
 
 void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int w, int h)
