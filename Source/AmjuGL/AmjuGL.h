@@ -148,7 +148,12 @@ public:
 
   // Set current matrix stack
   // TODO Can we use Texture matrix in GL ES/D3D ?
-  enum MatrixMode { AMJU_MODELVIEW_MATRIX, AMJU_PROJECTION_MATRIX, AMJU_TEXTURE_MATRIX };
+  enum MatrixMode { 
+    AMJU_MATRIX_NOTSETYET  = -1, 
+    AMJU_MODELVIEW_MATRIX  =  0, 
+    AMJU_PROJECTION_MATRIX =  1, 
+    AMJU_TEXTURE_MATRIX    =  2};
+
   static void SetMatrixMode(MatrixMode);
   static MatrixMode GetMatrixMode();
 

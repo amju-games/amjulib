@@ -2,9 +2,6 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "AmjuFirst.h"
 #include <stack>
 #include "AmjuGL.h"
@@ -31,7 +28,7 @@ static int s_matrixStackSize[3] = { 0, 0, 0 };
 
 // Store the current matrix mode so we know which count to increment/decrement,
 //  and for queries
-static AmjuGL::MatrixMode s_currentMatrix = AmjuGL::AMJU_MODELVIEW_MATRIX;
+static AmjuGL::MatrixMode s_currentMatrix = AmjuGL::AMJU_MATRIX_NOTSETYET;
 
 static float s_screenRotation = 0;
 
@@ -223,6 +220,11 @@ void AmjuGL::SetMatrixMode(MatrixMode m)
 {
   AMJU_CALL_STACK;
 
+  if (s_currentMatrix == m)
+  {
+    return;
+  }
+
   s_currentMatrix = m;
 
   impl->SetMatrixMode(m);
@@ -404,6 +406,12 @@ void AmjuGL::SetTexture(
 void AmjuGL::UseTexture(TextureHandle t)
 {
   AMJU_CALL_STACK;
+
+  static TextureHandle prev = -1;
+  if (prev == t)
+  {
+    return;
+  }
 
   impl->UseTexture(t);
 }
