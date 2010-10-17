@@ -31,9 +31,6 @@ Added to repository
 #define fabs fabsf
 #endif
 
-// Wrapper around graphics API
-#include "../AmjuGL/AmjuGL.h"
-
 namespace Amju
 {
 const double pi =  3.14159265359;
