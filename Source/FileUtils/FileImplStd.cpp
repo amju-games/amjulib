@@ -203,7 +203,7 @@ unsigned int FileImplStd::GetBinary(unsigned int bytes, unsigned char* pBuffer)
   m_file.read((char*)pBuffer, bytes);
 
   // Return number of bytes read
-  return m_file.gcount();
+  return (unsigned int)m_file.gcount();
 }
 
 void FileImplStd::BinarySeek(unsigned int pos)
@@ -230,11 +230,11 @@ unsigned int FileImplStd::GetBinaryFileSize()
   if (!m_file.good()) return 0;
 
   m_file.seekg(0,ios::end);
-  unsigned long len = m_file.tellg();
+  std::streamoff len = m_file.tellg();
   m_file.seekg(ios::beg);
-  unsigned long pos = m_file.tellg();
+  std::streamoff pos = m_file.tellg();
 
-  return len - pos;
+  return (unsigned int)(len - pos);
 #endif
 
 #ifdef GEKKO
