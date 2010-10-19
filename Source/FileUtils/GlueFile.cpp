@@ -419,7 +419,7 @@ uint32 GlueFile::GetPos()
 {
   AMJU_CALL_STACK;
 
-  return m_gluefile.tellg();
+  return (uint32)m_gluefile.tellg();
 }
 
 void GlueFile::SetPos(uint32 pos)
