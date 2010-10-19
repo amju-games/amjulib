@@ -145,6 +145,7 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   if (jt == m_loaders.end())
   {
     std::cout << "Unexpected resource! " << resName << "\n";
+    return 0;
   }
 
   Assert(jt != m_loaders.end());
