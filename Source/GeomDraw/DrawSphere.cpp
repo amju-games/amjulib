@@ -7,7 +7,9 @@
 #include <AmjuGL.h>
 #ifdef WIN32
 #ifdef _DEBUG
+#ifdef USE_GLUT
 #include <GL/glut.h>
+#endif // USE_GLUT
 #endif
 #endif
 
@@ -25,10 +27,12 @@ void DrawSphere(const Sphere& s)
 {
 #ifdef WIN32
 #ifdef _DEBUG
+#ifdef USE_GLUT
   AmjuGL::PushMatrix();
   AmjuGL::Translate(s.GetCentre().x, s.GetCentre().y, s.GetCentre().z);
   glutWireSphere(s.GetRadius(), 5, 5);
   AmjuGL::PopMatrix();
+#endif
 #endif
 #endif
 }
