@@ -446,7 +446,14 @@ bool SavePng(int w, int h, unsigned char* rgb, const char* filename)
   m.height = h;
   m.modtime = 0; // TODO
   m.infile = 0; // TODO use Amju::File
+#ifdef WIN32
+  if (fopen_s(&m.outfile, filename, "wb") != 0)
+  {
+    return false;
+  }
+#else
   m.outfile = fopen(filename, "wb"); 
+#endif
   m.png_ptr = 0; // ?
   m.info_ptr = 0;
   m.image_data = rgb;
