@@ -40,6 +40,9 @@ public:
   void SetVisible(bool isVis);
   bool IsVisible() const;
 
+  void SetName(const std::string& name);
+  const std::string& GetName() const;
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)

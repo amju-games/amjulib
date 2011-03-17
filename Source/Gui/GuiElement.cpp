@@ -100,6 +100,16 @@ void GuiElement::SetCommand(CommandFunc commandFunc)
   m_commandFunc = commandFunc;
 }
 
+void GuiElement::SetName(const std::string& name)
+{
+  m_name = name;
+}
+
+const std::string& GuiElement::GetName() const
+{
+  return m_name;
+}
+
 void GuiElement::ExecuteCommand()
 {
   if (m_commandFunc)
