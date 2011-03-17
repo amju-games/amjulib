@@ -20,12 +20,20 @@ public:
 
   Font* GetFont();
 
+  void SetInverse(bool inv);
+  void SetDrawBg(bool drawBg);
+
+  enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
+
+  void SetJust(Just j);
+
 protected:
   std::string m_text;
   std::string m_fontName;
-  enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
   Just m_just;
   float m_textWidth;
+  bool m_inverse;
+  bool m_drawBg;
 };
 }
 

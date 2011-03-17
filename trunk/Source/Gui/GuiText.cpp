@@ -1,6 +1,9 @@
 #include "GuiText.h"
 #include "Font.h"
 #include "DrawRect.h"
+#include "Colour.h"
+
+//#define TEXT_RECT_DEBUG
 
 namespace Amju
 {
@@ -11,6 +14,23 @@ GuiText::GuiText()
   m_fontName = "font2d/arial-font.font";
   m_just = AMJU_JUST_CENTRE;
   m_textWidth = 0;
+  m_inverse = false;
+  m_drawBg = false;
+}
+
+void GuiText::SetJust(Just j)
+{
+  m_just = j;
+}
+
+void GuiText::SetInverse(bool inv)
+{
+  m_inverse = inv;
+}
+
+void GuiText::SetDrawBg(bool drawBg)
+{
+  m_drawBg = drawBg;
 }
 
 Font* GuiText::GetFont()
@@ -39,6 +59,23 @@ void GuiText::Draw()
   AmjuGL::PopMatrix();
 #endif // _DEBUG
 
+  PushColour();
+  static const Colour WHITE(1, 1, 1, 1);
+  static const Colour BLACK(0, 0, 0, 1);
+
+  if (m_drawBg)
+  {
+    // TODO Mult colour
+    AmjuGL::SetColour(m_inverse ? BLACK : WHITE);
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    Rect r = GetRect(this);
+    DrawSolidRect(r);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+
+    // Set text colour to contrast with BG, but only if BG is drawn
+    AmjuGL::SetColour(m_inverse ? WHITE: BLACK);
+  }
+
   // Centre the text vertically
   //float ysize = m_size.y - 0.1f; // TODO Why 0.1, depends on font size ?
   float y = m_pos.y - m_size.y * 0.5f - 0.05f;
@@ -56,6 +93,8 @@ void GuiText::Draw()
   default:
     Assert(0);
   }
+
+  PopColour();
 }
 
 void GuiText::SetText(const std::string& text)
