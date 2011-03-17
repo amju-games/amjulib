@@ -120,8 +120,11 @@ void GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     }
 
     // Clicked on an item
-    // TODO Should reacct on mouse up when up item == down item.
-    m_items[m_selected]->ExecuteCommand();
+    if (m_selected != -1)
+    {
+      // TODO Should react on mouse up when up item == down item.
+      m_items[m_selected]->ExecuteCommand();
+    }
   }
 }
 
