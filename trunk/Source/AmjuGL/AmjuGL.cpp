@@ -8,6 +8,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuGL-Impl.h"
 #include "AmjuGLWindowInfo.h"
 #include "Screen.h"
+#include "Colour.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -146,6 +147,11 @@ void AmjuGL::SetColour(float r, float g, float b, float a)
   AMJU_CALL_STACK;
 
   impl->SetColour(r, g, b, a);
+}
+
+void AmjuGL::SetColour(const Colour& c)
+{
+  SetColour(c.m_r, c.m_g, c.m_b, c.m_a);
 }
 
 void AmjuGL::DrawIndexedTriList(

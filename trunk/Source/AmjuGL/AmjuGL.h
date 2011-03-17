@@ -18,6 +18,7 @@ namespace Amju
 class AmjuGLImpl;
 class AmjuGLWindowInfo;
 class Shader;
+struct Colour;
 
 struct AmjuGL
 {
@@ -126,6 +127,7 @@ public:
 
   // Set the current colour
   static void SetColour(float r, float g, float b, float a = 1.0f);
+  static void SetColour(const Colour& colour);
 
   // Draw line in current colour between 2 absolute coords
   static void DrawLine(const Vec3& v1, const Vec3& v2);
