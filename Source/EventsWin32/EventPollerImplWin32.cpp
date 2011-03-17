@@ -65,10 +65,10 @@ void EventPollerImplWin32::OnKey(WPARAM c, bool down)
   }
 }
 
-void EventPollerImplWin32::LMouseButton(bool down)
+void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
 {
   MouseButtonEvent mbe;
-  mbe.button = AMJU_BUTTON_MOUSE_LEFT;
+  mbe.button = button;
   mbe.isDown = down;
 
   if (m_listeners)
@@ -80,6 +80,16 @@ void EventPollerImplWin32::LMouseButton(bool down)
       e->OnMouseButtonEvent(mbe);
     }
   }
+}
+
+void EventPollerImplWin32::LMouseButton(bool down)
+{
+  MouseButton(AMJU_BUTTON_MOUSE_LEFT, down);
+}
+
+void EventPollerImplWin32::RMouseButton(bool down)
+{
+  MouseButton(AMJU_BUTTON_MOUSE_RIGHT, down);
 }
 
 void EventPollerImplWin32::MouseMove(int x, int y)
@@ -130,6 +140,22 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
       // mouse ownership.
       ReleaseCapture();
       s_instance->LMouseButton(false);
+    }
+    break;
+
+  case WM_RBUTTONDOWN:
+    if (s_instance)
+    {
+      SetCapture((HWND)GetHWnd());
+      s_instance->RMouseButton(true);
+    }
+    break;
+
+  case WM_RBUTTONUP:
+    if (s_instance)
+    {
+      ReleaseCapture();
+      s_instance->RMouseButton(false);
     }
     break;
 
