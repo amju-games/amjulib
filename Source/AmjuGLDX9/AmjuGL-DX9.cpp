@@ -486,6 +486,11 @@ void AmjuGLDX9::Enable(uint32 flag)
     break;
 
   case AmjuGL::AMJU_BLEND:
+    dd->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+    break;
+
+  case AmjuGL::AMJU_TEXTURE_2D:
+//    dd->SetTexture(0, mostRecentlyUsedTexture); // TODO
     break;
   }
 }
@@ -515,6 +520,11 @@ void AmjuGLDX9::Disable(uint32 flag)
     break;
 
   case AmjuGL::AMJU_BLEND:
+    dd->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+    break;
+
+  case AmjuGL::AMJU_TEXTURE_2D:
+    dd->SetTexture(0, 0); 
     break;
   }
 }
