@@ -701,8 +701,10 @@ void AmjuGLDX9::DrawLighting(
   D3DLIGHT9         g_pLight0;
 
   g_pLight0.Type = D3DLIGHT_DIRECTIONAL;
-  //D3DXVECTOR3 vecDir = D3DXVECTOR3( 1.0f, -1.0f, -1.0f );
-  D3DXVECTOR3 vecDir = D3DXVECTOR3(lightPos.m_x, lightPos.m_y, lightPos.m_z);
+
+  // Light direction seems to be backwards compared to OpenGL/Wii 
+  D3DXVECTOR3 vecDir = D3DXVECTOR3(-lightPos.m_x, lightPos.m_y, -lightPos.m_z);
+
   D3DXVec3Normalize( (D3DXVECTOR3*)&g_pLight0.Direction, &vecDir);
 
   // We can set global ambient with SetRenderState, OR set it here
