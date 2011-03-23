@@ -97,6 +97,8 @@ struct MouseButtonEvent : public Event
 {
   MouseButton button;
   bool isDown;
+  // Useful to give coords. Cursor coords are -1..1 in x and y
+  float x, y;
 
   virtual void UpdateListener(EventListener*);
 };
