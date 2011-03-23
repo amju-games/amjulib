@@ -167,4 +167,9 @@ void GuiMenu::AddItem(GuiMenuItem* pItem)
 
   m_size.y += size.y;
 }
+
+void GuiMenu::Clear()
+{
+   m_items.clear();
+}
 }

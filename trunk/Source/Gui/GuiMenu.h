@@ -47,6 +47,7 @@ public:
   virtual void Draw();  
 
   void AddItem(GuiMenuItem* pItem);
+  void Clear();
   // TODO Insert, Remove items
 
   // Adjust selected item when cursor moves
