@@ -1,16 +1,20 @@
-class LineSeg
+#ifndef AMJU_LINE3_INCLUDED
+#define AMJU_LINE3_INCLUDED
+
+#include "Vec3.h"
+
+namespace Amju
 {
-public:
+struct LineSeg
+{
   LineSeg() {}
-  LineSeg(const Vec3f& p0, const Vec3f& p1) : m_p0(p0), m_p1(p1) {}
+  LineSeg(const Vec3f& p0_, const Vec3f& p1_) : p0(p0_), p1(p1_) {}
   void Draw();
+  // Point to LineSeg
   float SqDist(const Vec3f& p);
-};
 
-class Line
-{
+  Vec3f p0, p1; // endpoints, not start+dir
 };
+}
 
-class Ray
-{
-};
+#endif
