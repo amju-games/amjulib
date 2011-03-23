@@ -70,6 +70,8 @@ void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
   MouseButtonEvent mbe;
   mbe.button = button;
   mbe.isDown = down;
+  mbe.x = m_ce.x;
+  mbe.y = m_ce.y;
 
   if (m_listeners)
   {
@@ -82,30 +84,19 @@ void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
   }
 }
 
-void EventPollerImplWin32::LMouseButton(bool down)
-{
-  MouseButton(AMJU_BUTTON_MOUSE_LEFT, down);
-}
-
-void EventPollerImplWin32::RMouseButton(bool down)
-{
-  MouseButton(AMJU_BUTTON_MOUSE_RIGHT, down);
-}
-
 void EventPollerImplWin32::MouseMove(int x, int y)
 {
   if (m_listeners)
   {
-    CursorEvent ce;
-    ce.controller = 0;
-    ce.x = (float)x / (float)Screen::X() * 2.0f - 1.0f;
-    ce.y = 1.0f - (float)y / (float)Screen::Y() * 2.0f;
+    m_ce.controller = 0;
+    m_ce.x = (float)x / (float)Screen::X() * 2.0f - 1.0f;
+    m_ce.y = 1.0f - (float)y / (float)Screen::Y() * 2.0f;
 
     for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
     {
       EventListener* e = *it;
       Assert(e);
-      e->OnCursorEvent(ce);
+      e->OnCursorEvent(m_ce);
     }
   }
 }
@@ -129,7 +120,7 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
       // SetCapture() means we still get mouse events when the
       // mouse leaves the client area.
       SetCapture((HWND)GetHWnd());
-      s_instance->LMouseButton(true);
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_LEFT, true);
     }
     break;
 
@@ -139,7 +130,7 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
       // We must now release the mouse - end of SetCapture()
       // mouse ownership.
       ReleaseCapture();
-      s_instance->LMouseButton(false);
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_LEFT, false);
     }
     break;
 
@@ -147,7 +138,7 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
     if (s_instance)
     {
       SetCapture((HWND)GetHWnd());
-      s_instance->RMouseButton(true);
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_RIGHT, true);
     }
     break;
 
@@ -155,7 +146,23 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
     if (s_instance)
     {
       ReleaseCapture();
-      s_instance->RMouseButton(false);
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_RIGHT, false);
+    }
+    break;
+
+  case WM_MBUTTONDOWN:
+    if (s_instance)
+    {
+      SetCapture((HWND)GetHWnd());
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_MIDDLE, true);
+    }
+    break;
+
+  case WM_MBUTTONUP:
+    if (s_instance)
+    {
+      ReleaseCapture();
+      s_instance->MouseButton(AMJU_BUTTON_MOUSE_MIDDLE, false);
     }
     break;
 

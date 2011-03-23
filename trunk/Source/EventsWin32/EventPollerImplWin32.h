@@ -17,13 +17,12 @@ public:
 
 private:
   void MouseMove(int x, int y);
-  void LMouseButton(bool down);
-  void RMouseButton(bool down);
   void MouseButton(Amju::MouseButton button, bool down);
   void OnKey(WPARAM c, bool down);
 
 private:
   Listeners* m_listeners;
+  CursorEvent m_ce; // store last coords
 
   // Pointer to one and only instance
   static EventPollerImplWin32* s_instance;

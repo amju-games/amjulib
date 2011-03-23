@@ -106,6 +106,8 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
     case SDL_MOUSEBUTTONUP:		/* Mouse button released */
       {
         SDL_MouseButtonEvent sme = e.button;
+        mbe.x = ((float)sme.x / (float)Screen::X()) * 2.0f - 1.0f;
+        mbe.y = (1.0f - (float)sme.y / (float)Screen::Y()) * 2.0f - 1.0f;
         
         if ((Uint32)sme.button == 1)
         {
