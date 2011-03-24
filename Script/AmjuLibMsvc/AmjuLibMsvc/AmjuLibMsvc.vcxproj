@@ -158,6 +158,7 @@
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\StringUtils.cpp" />
