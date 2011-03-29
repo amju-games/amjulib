@@ -91,6 +91,9 @@
     <Filter Include="SoundBass">
       <UniqueIdentifier>{a3ecd12a-3812-4d41-8895-5cd80246da7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Anim">
+      <UniqueIdentifier>{4a72438f-8e76-433d-99b1-0e2feef8f496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -500,6 +503,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Geom\Line3.cpp">
       <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Anim.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Bone.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\BoneWeight.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\IndexedMesh.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Skin.cpp">
+      <Filter>Anim</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -911,5 +941,37 @@
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h">
       <Filter>Geom</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Skin.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Anim.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\AnimManager.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Bone.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\BoneWeight.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\IndexedMesh.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Skeleton.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\Anim\anim-notes.txt">
+      <Filter>Anim</Filter>
+    </None>
   </ItemGroup>
 </Project>

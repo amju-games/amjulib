@@ -144,6 +144,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Bone.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\BoneWeight.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\IndexedMesh.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Skin.cpp" />
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
@@ -286,6 +295,15 @@
     <ClCompile Include="..\..\..\Source\SoundBass\BassSoundPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
+    <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />
+    <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Bone.h" />
+    <ClInclude Include="..\..\..\Source\Anim\BoneWeight.h" />
+    <ClInclude Include="..\..\..\Source\Anim\IndexedMesh.h" />
+    <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Skeleton.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Skin.h" />
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h" />
@@ -422,6 +440,9 @@
     <ClInclude Include="..\..\..\Source\AmjuGLDX9\DX9Shader.h" />
     <ClInclude Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.h" />
     <ClInclude Include="..\..\..\Source\SoundBass\BassSoundPlayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\Anim\anim-notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
