@@ -6,7 +6,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 #define AMJU_ANIM_PLAYER_H_INCLUDED
 
 #include "KeyFrame.h"
-#include "Mesh.h"
 #include "IndexedMesh.h"
 #include "Anim.h"
 
