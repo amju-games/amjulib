@@ -1,0 +1,7609 @@
+// j.c. export. Ver:
+11
+// Num verts
+845
+// Vertex 0
+// Num weights:
+3
+head
+0.8298540387
+left_hair1
+0.01135566918
+right_hair1
+0.1587902921
+// Vertex 1
+// Num weights:
+3
+neck1
+0.0005753245783
+neck2
+0.9809490206
+head
+0.01847565487
+// Vertex 2
+// Num weights:
+3
+head
+0.8529136158
+right_hair1
+0.01816180664
+fringe2
+0.1289245775
+// Vertex 3
+// Num weights:
+3
+head
+0.9663863408
+left_hair1
+0.005886068833
+fringe2
+0.02772759037
+// Vertex 4
+// Num weights:
+3
+head
+0.2777092088
+fringe1
+0.6683029138
+fringe2
+0.05398787744
+// Vertex 5
+// Num weights:
+3
+head
+0.8658556467
+left_hair1
+0.1225842624
+right_hair1
+0.01156009094
+// Vertex 6
+// Num weights:
+3
+head
+0.4137420382
+fringe1
+0.5603121168
+fringe2
+0.02594584493
+// Vertex 7
+// Num weights:
+3
+head
+0.001277258764
+fringe1
+0.4993613706
+fringe2
+0.4993613706
+// Vertex 8
+// Num weights:
+3
+head
+0.00112200119
+fringe1
+0.4994389994
+fringe2
+0.4994389994
+// Vertex 9
+// Num weights:
+3
+head
+0.0008398007778
+fringe1
+0.4995800996
+fringe2
+0.4995800996
+// Vertex 10
+// Num weights:
+3
+head
+0.6965063116
+right_hair1
+0.1068491997
+fringe2
+0.1966444887
+// Vertex 11
+// Num weights:
+3
+head
+0.7572951164
+left_hair1
+0.03685978834
+right_hair1
+0.2058450953
+// Vertex 12
+// Num weights:
+3
+head
+0.9051837303
+right_hair1
+0.05068825719
+fringe2
+0.04412801254
+// Vertex 13
+// Num weights:
+3
+head
+0.8578774638
+left_hair1
+0.02445806413
+right_hair1
+0.1176644721
+// Vertex 14
+// Num weights:
+3
+head
+0.770971618
+left_hair1
+0.1179478481
+right_hair1
+0.1110805339
+// Vertex 15
+// Num weights:
+3
+head
+0.9628460796
+left_hair1
+0.01910222205
+right_hair1
+0.01805169836
+// Vertex 16
+// Num weights:
+3
+head
+0.995723254
+left_hair1
+0.001302433911
+fringe2
+0.002974312106
+// Vertex 17
+// Num weights:
+3
+head
+0.8567337517
+left_hair1
+0.1224684296
+right_hair1
+0.02079781868
+// Vertex 18
+// Num weights:
+3
+head
+0.835590163
+left_hair1
+0.1159882742
+fringe2
+0.04842156279
+// Vertex 19
+// Num weights:
+3
+head
+0.05766957123
+fringe1
+0.8969450985
+fringe2
+0.04538533025
+// Vertex 20
+// Num weights:
+3
+head
+0.296672963
+left_hair1
+0.5358334385
+fringe2
+0.1674935985
+// Vertex 21
+// Num weights:
+3
+left_hair1
+0.651902802
+left_hair2
+0.2881599565
+fringe2
+0.05993724154
+// Vertex 22
+// Num weights:
+3
+head
+0.04199081605
+fringe1
+0.479004592
+fringe2
+0.479004592
+// Vertex 23
+// Num weights:
+3
+head
+0.5448169819
+left_hair1
+0.4519166975
+right_hair1
+0.00326632067
+// Vertex 24
+// Num weights:
+3
+head
+0.3258263519
+left_hair1
+0.6728049145
+left_hair2
+0.001368733561
+// Vertex 25
+// Num weights:
+3
+head
+0.0002318017804
+left_hair1
+0.9996736135
+left_hair2
+9.458469264e-005
+// Vertex 26
+// Num weights:
+3
+head
+0.5619079175
+left_hair1
+0.4168756599
+right_hair1
+0.0212164226
+// Vertex 27
+// Num weights:
+3
+head
+0.5393322545
+left_hair1
+0.01496203371
+right_hair1
+0.4457057118
+// Vertex 28
+// Num weights:
+3
+head
+0.3403058947
+right_hair1
+0.6592761813
+right_hair2
+0.0004179239355
+// Vertex 29
+// Num weights:
+3
+head
+0.4950924772
+right_hair1
+0.4956919942
+right_hair2
+0.009215528585
+// Vertex 30
+// Num weights:
+3
+head
+0.1530266571
+right_hair1
+0.7826609196
+right_hair2
+0.06431242326
+// Vertex 31
+// Num weights:
+3
+spine4
+0.1413594728
+neck1
+0.4293202636
+neck2
+0.4293202636
+// Vertex 32
+// Num weights:
+3
+head
+0.2236397023
+left_hair1
+0.6964616296
+left_hair2
+0.07989866814
+// Vertex 33
+// Num weights:
+3
+head
+0.0005394318181
+left_hair1
+0.9708394621
+left_hair2
+0.02862110609
+// Vertex 34
+// Num weights:
+3
+left_hair1
+0.4682784389
+left_hair2
+0.4616675092
+right_hair2
+0.07005405192
+// Vertex 35
+// Num weights:
+3
+left_hair1
+0.4807412123
+left_hair2
+0.4637646683
+right_hair2
+0.05549411942
+// Vertex 36
+// Num weights:
+3
+left_hair1
+0.4745199286
+left_hair2
+0.468588609
+right_hair2
+0.05689146239
+// Vertex 37
+// Num weights:
+3
+spine4
+0.01827935581
+neck1
+0.862887131
+neck2
+0.1188335132
+// Vertex 38
+// Num weights:
+3
+spine4
+0.03790601365
+neck1
+0.9425704701
+neck2
+0.01952351622
+// Vertex 39
+// Num weights:
+3
+spine4
+0.3386059654
+neck1
+0.408585957
+neck2
+0.2528080776
+// Vertex 40
+// Num weights:
+3
+left_clavicle
+0.238875674
+left_shoulder
+0.5919508059
+left_hair2
+0.16917352
+// Vertex 41
+// Num weights:
+3
+left_clavicle
+0.2729927212
+left_shoulder
+0.6574838214
+left_hair2
+0.06952345741
+// Vertex 42
+// Num weights:
+3
+left_hair1
+0.4998480609
+left_hair2
+0.4998480609
+right_hair2
+0.0003038781113
+// Vertex 43
+// Num weights:
+3
+head
+0.001758713196
+right_hair1
+0.8773568367
+right_hair2
+0.1208844501
+// Vertex 44
+// Num weights:
+3
+head
+0.07841376069
+right_hair1
+0.6230180703
+right_hair2
+0.298568169
+// Vertex 45
+// Num weights:
+3
+head
+0.01814233271
+right_hair1
+0.7915161921
+right_hair2
+0.1903414752
+// Vertex 46
+// Num weights:
+3
+right_clavicle
+0.4233223799
+right_shoulder
+0.488093141
+right_hair2
+0.08858447911
+// Vertex 47
+// Num weights:
+3
+right_clavicle
+0.411620394
+right_shoulder
+0.5150779336
+right_hair2
+0.07330167242
+// Vertex 48
+// Num weights:
+3
+right_clavicle
+0.4163116298
+right_shoulder
+0.49305466
+right_hair2
+0.09063371022
+// Vertex 49
+// Num weights:
+3
+head
+0.2360611083
+fringe1
+0.3819694458
+fringe2
+0.3819694458
+// Vertex 50
+// Num weights:
+3
+neck1
+0.2647163877
+neck2
+0.7161410808
+head
+0.01914253147
+// Vertex 51
+// Num weights:
+3
+neck1
+0.2559962213
+neck2
+0.7309848424
+head
+0.01301893635
+// Vertex 52
+// Num weights:
+3
+left_clavicle
+0.4323475486
+left_shoulder
+0.4348478891
+left_hair2
+0.1328045624
+// Vertex 53
+// Num weights:
+3
+left_clavicle
+0.4372908141
+left_shoulder
+0.4402042139
+left_hair2
+0.122504972
+// Vertex 54
+// Num weights:
+3
+left_clavicle
+0.4499665364
+left_shoulder
+0.4551769125
+left_hair2
+0.09485655108
+// Vertex 55
+// Num weights:
+3
+head
+0.425006844
+right_hair1
+0.4542083476
+right_hair2
+0.1207848085
+// Vertex 56
+// Num weights:
+3
+head
+0.5626697036
+left_hair1
+0.007170802821
+right_hair1
+0.4301594936
+// Vertex 57
+// Num weights:
+3
+head
+0.02692412292
+right_hair1
+0.9629928676
+right_hair2
+0.01008300947
+// Vertex 58
+// Num weights:
+3
+head
+0.007154063182
+right_hair1
+0.4964229684
+right_hair2
+0.4964229684
+// Vertex 59
+// Num weights:
+3
+head
+0.004824822378
+right_hair1
+0.4975875888
+right_hair2
+0.4975875888
+// Vertex 60
+// Num weights:
+3
+head
+0.00663631843
+right_hair1
+0.4966818408
+right_hair2
+0.4966818408
+// Vertex 61
+// Num weights:
+3
+right_clavicle
+0.2804983213
+right_shoulder
+0.7184547707
+right_hair2
+0.001046907984
+// Vertex 62
+// Num weights:
+3
+right_clavicle
+0.278322898
+right_shoulder
+0.7133166159
+right_hair2
+0.008360486025
+// Vertex 63
+// Num weights:
+3
+right_clavicle
+0.4966606772
+right_shoulder
+0.5019222202
+right_hair2
+0.001417102589
+// Vertex 64
+// Num weights:
+3
+spine2
+0.3016739382
+spine3
+0.3622407175
+fringe2
+0.3360853443
+// Vertex 65
+// Num weights:
+3
+spine4
+0.4004598964
+left_clavicle
+0.2998314405
+left_hair2
+0.2997086631
+// Vertex 66
+// Num weights:
+3
+spine3
+0.4298146343
+spine4
+0.3987283164
+left_hair2
+0.1714570493
+// Vertex 67
+// Num weights:
+3
+spine4
+0.1644883754
+left_clavicle
+0.4177558123
+left_shoulder
+0.4177558123
+// Vertex 68
+// Num weights:
+3
+left_clavicle
+0.4344065293
+left_shoulder
+0.4344065293
+left_hair2
+0.1311869414
+// Vertex 69
+// Num weights:
+3
+spine4
+0.1113125902
+left_clavicle
+0.4449167803
+left_shoulder
+0.4437706296
+// Vertex 70
+// Num weights:
+3
+left_clavicle
+0.4425971291
+left_shoulder
+0.4425971291
+left_hair2
+0.1148057419
+// Vertex 71
+// Num weights:
+3
+left_clavicle
+0.4440162807
+left_shoulder
+0.4440162807
+left_hair2
+0.1119674386
+// Vertex 72
+// Num weights:
+3
+left_clavicle
+0.4605127063
+left_shoulder
+0.4605127063
+left_hair2
+0.07897458742
+// Vertex 73
+// Num weights:
+3
+spine4
+0.4897720881
+left_clavicle
+0.1475989468
+left_hair2
+0.3626289651
+// Vertex 74
+// Num weights:
+3
+left_hair1
+0.5583790672
+left_hair2
+0.4406514656
+right_hair2
+0.0009694672117
+// Vertex 75
+// Num weights:
+3
+left_hair1
+0.5414646913
+left_hair2
+0.4367497926
+right_hair2
+0.02178551607
+// Vertex 76
+// Num weights:
+3
+left_hair1
+0.4993056445
+left_hair2
+0.4993056445
+right_hair2
+0.001388710998
+// Vertex 77
+// Num weights:
+3
+left_hair1
+0.4998728711
+left_hair2
+0.4998728711
+right_hair2
+0.0002542578297
+// Vertex 78
+// Num weights:
+3
+left_hair1
+0.4986882734
+left_hair2
+0.4986882734
+right_hair2
+0.002623453293
+// Vertex 79
+// Num weights:
+3
+left_hair1
+0.4998297762
+left_hair2
+0.4998297762
+right_hair2
+0.0003404476293
+// Vertex 80
+// Num weights:
+3
+left_hair1
+0.4999334015
+left_hair2
+0.4999334015
+right_hair2
+0.0001331970979
+// Vertex 81
+// Num weights:
+3
+left_hair1
+0.4998320716
+left_hair2
+0.4998320716
+right_hair2
+0.0003358568794
+// Vertex 82
+// Num weights:
+3
+left_clavicle
+0.2729927212
+left_shoulder
+0.6574838214
+left_hair2
+0.06952345741
+// Vertex 83
+// Num weights:
+3
+left_clavicle
+0.238875674
+left_shoulder
+0.5919508059
+left_hair2
+0.16917352
+// Vertex 84
+// Num weights:
+3
+left_hair1
+0.4998480609
+left_hair2
+0.4998480609
+right_hair2
+0.0003038781113
+// Vertex 85
+// Num weights:
+3
+left_hair1
+0.6841034011
+left_hair2
+0.3091525963
+right_hair2
+0.006744002585
+// Vertex 86
+// Num weights:
+3
+spine4
+0.227889055
+neck1
+0.394350916
+neck2
+0.3777600289
+// Vertex 87
+// Num weights:
+3
+spine4
+0.4180707622
+neck1
+0.5681265881
+neck2
+0.01380264966
+// Vertex 88
+// Num weights:
+3
+left_hair1
+0.5225538325
+left_hair2
+0.4536826027
+right_hair2
+0.02376356479
+// Vertex 89
+// Num weights:
+3
+spine4
+0.4868064493
+left_hair2
+0.3905477209
+right_hair2
+0.1226458298
+// Vertex 90
+// Num weights:
+3
+spine4
+0.8938948988
+left_hair2
+0.03610713898
+right_hair2
+0.0699979622
+// Vertex 91
+// Num weights:
+3
+left_hair1
+0.470859568
+left_hair2
+0.470859568
+right_hair2
+0.05828086392
+// Vertex 92
+// Num weights:
+3
+spine4
+0.4918055001
+left_hair2
+0.341359494
+right_hair2
+0.1668350059
+// Vertex 93
+// Num weights:
+3
+spine4
+0.5176185505
+left_clavicle
+0.1702385734
+left_hair2
+0.3121428761
+// Vertex 94
+// Num weights:
+3
+left_hair1
+0.4641613664
+left_hair2
+0.4641613664
+right_hair2
+0.07167726729
+// Vertex 95
+// Num weights:
+3
+left_hair1
+0.4397100071
+left_hair2
+0.4397100071
+right_hair2
+0.1205799858
+// Vertex 96
+// Num weights:
+3
+left_hair1
+0.4437674358
+left_hair2
+0.4437674358
+right_hair2
+0.1124651283
+// Vertex 97
+// Num weights:
+3
+spine4
+0.5216725183
+right_clavicle
+0.2904767213
+right_hair2
+0.1878507603
+// Vertex 98
+// Num weights:
+3
+spine4
+0.3092901132
+right_clavicle
+0.3453549434
+right_shoulder
+0.3453549434
+// Vertex 99
+// Num weights:
+3
+spine2
+0.3760928015
+spine3
+0.404127022
+spine4
+0.2197801765
+// Vertex 100
+// Num weights:
+3
+spine4
+0.08732835649
+right_clavicle
+0.4563358218
+right_shoulder
+0.4563358218
+// Vertex 101
+// Num weights:
+3
+spine4
+0.1084063912
+right_clavicle
+0.4457968044
+right_shoulder
+0.4457968044
+// Vertex 102
+// Num weights:
+3
+spine4
+0.1650023281
+right_clavicle
+0.4174988359
+right_shoulder
+0.4174988359
+// Vertex 103
+// Num weights:
+3
+right_clavicle
+0.4801793801
+right_shoulder
+0.4802013786
+right_hair2
+0.0396192413
+// Vertex 104
+// Num weights:
+3
+spine4
+0.07470242689
+right_clavicle
+0.4626487866
+right_shoulder
+0.4626487866
+// Vertex 105
+// Num weights:
+3
+spine4
+0.1211874722
+right_clavicle
+0.4394062639
+right_shoulder
+0.4394062639
+// Vertex 106
+// Num weights:
+3
+right_clavicle
+0.4461645911
+right_shoulder
+0.5017987227
+right_hair2
+0.05203668623
+// Vertex 107
+// Num weights:
+3
+right_clavicle
+0.45313307
+right_shoulder
+0.4799165208
+right_hair2
+0.06695040917
+// Vertex 108
+// Num weights:
+3
+right_clavicle
+0.4430738773
+right_shoulder
+0.4736478682
+right_hair2
+0.08327825444
+// Vertex 109
+// Num weights:
+3
+head
+0.0004283947053
+right_hair1
+0.5081136874
+right_hair2
+0.4914579179
+// Vertex 110
+// Num weights:
+3
+head
+0.006196412192
+right_hair1
+0.4983495158
+right_hair2
+0.495454072
+// Vertex 111
+// Num weights:
+3
+left_hair2
+0.001284211852
+right_hair1
+0.4993578941
+right_hair2
+0.4993578941
+// Vertex 112
+// Num weights:
+3
+right_clavicle
+0.4800550609
+right_shoulder
+0.4800550609
+right_hair2
+0.03988987811
+// Vertex 113
+// Num weights:
+3
+right_clavicle
+0.4926979344
+right_shoulder
+0.4926979344
+right_hair2
+0.01460413125
+// Vertex 114
+// Num weights:
+3
+right_clavicle
+0.506491226
+right_shoulder
+0.4508015688
+right_hair2
+0.04270720527
+// Vertex 115
+// Num weights:
+3
+head
+6.577163455e-008
+right_hair1
+0.997939344
+right_hair2
+0.002060590183
+// Vertex 116
+// Num weights:
+3
+left_hair2
+0.05727454335
+right_hair1
+0.4884383551
+right_hair2
+0.4542871015
+// Vertex 117
+// Num weights:
+3
+head
+0.00106436007
+right_hair1
+0.832226064
+right_hair2
+0.1667095759
+// Vertex 118
+// Num weights:
+3
+head
+2.275862266e-005
+right_hair1
+0.4999886207
+right_hair2
+0.4999886207
+// Vertex 119
+// Num weights:
+3
+left_hair2
+0.006101129745
+right_hair1
+0.4969494351
+right_hair2
+0.4969494351
+// Vertex 120
+// Num weights:
+3
+left_hair2
+0.0004868238594
+right_hair1
+0.4997565881
+right_hair2
+0.4997565881
+// Vertex 121
+// Num weights:
+3
+left_hair2
+0.001021952186
+right_hair1
+0.4994890239
+right_hair2
+0.4994890239
+// Vertex 122
+// Num weights:
+3
+left_hair2
+0.002593149494
+right_hair1
+0.4987034253
+right_hair2
+0.4987034253
+// Vertex 123
+// Num weights:
+3
+head
+0.0008267464434
+right_hair1
+0.4995866268
+right_hair2
+0.4995866268
+// Vertex 124
+// Num weights:
+3
+head
+0.07574810083
+fringe1
+0.921489376
+fringe2
+0.002762523198
+// Vertex 125
+// Num weights:
+3
+head
+0.07686397469
+fringe1
+0.8568135413
+fringe2
+0.06632248396
+// Vertex 126
+// Num weights:
+3
+head
+0.1029184638
+fringe1
+0.8360243451
+fringe2
+0.06105719115
+// Vertex 127
+// Num weights:
+3
+head
+8.260042344e-005
+fringe1
+0.9986689977
+fringe2
+0.001248401922
+// Vertex 128
+// Num weights:
+3
+head
+0.0002802369534
+fringe1
+0.9904102845
+fringe2
+0.009309478497
+// Vertex 129
+// Num weights:
+3
+head
+0.0008451111204
+fringe1
+0.943098965
+fringe2
+0.05605592392
+// Vertex 130
+// Num weights:
+3
+head
+0.0001494709365
+fringe1
+0.5125458503
+fringe2
+0.4873046787
+// Vertex 131
+// Num weights:
+3
+head
+0.0003870867409
+fringe1
+0.5068441201
+fringe2
+0.4927687931
+// Vertex 132
+// Num weights:
+3
+head
+9.992380429e-005
+fringe1
+0.5114482714
+fringe2
+0.4884518048
+// Vertex 133
+// Num weights:
+3
+left_hair2
+0.04500565924
+fringe1
+0.4774971704
+fringe2
+0.4774971704
+// Vertex 134
+// Num weights:
+3
+spine4
+0.3606742959
+neck1
+0.3708250301
+neck2
+0.268500674
+// Vertex 135
+// Num weights:
+3
+left_hair1
+0.6809879632
+left_hair2
+0.2225150964
+fringe2
+0.09649694042
+// Vertex 136
+// Num weights:
+3
+head
+0.03707596726
+fringe1
+0.4814620164
+fringe2
+0.4814620164
+// Vertex 137
+// Num weights:
+3
+head
+0.009383842753
+fringe1
+0.4953080786
+fringe2
+0.4953080786
+// Vertex 138
+// Num weights:
+3
+head
+0.03047513455
+fringe1
+0.4847624327
+fringe2
+0.4847624327
+// Vertex 139
+// Num weights:
+3
+head
+0.003260401576
+fringe1
+0.5297813087
+fringe2
+0.4669582898
+// Vertex 140
+// Num weights:
+3
+neck1
+0.2639864069
+neck2
+0.532325991
+head
+0.2036876021
+// Vertex 141
+// Num weights:
+3
+head
+0.01318184425
+fringe1
+0.9294871763
+fringe2
+0.05733097949
+// Vertex 142
+// Num weights:
+3
+head
+0.1359900683
+fringe1
+0.7429500234
+fringe2
+0.1210599083
+// Vertex 143
+// Num weights:
+3
+head
+0.006185117155
+fringe1
+0.9846776831
+fringe2
+0.009137199744
+// Vertex 144
+// Num weights:
+3
+head
+0.0109470109
+fringe1
+0.9387250032
+fringe2
+0.05032798592
+// Vertex 145
+// Num weights:
+3
+head
+0.6223484865
+left_hair1
+0.2895599034
+fringe2
+0.08809161009
+// Vertex 146
+// Num weights:
+3
+head
+0.9975578878
+left_hair1
+0.0003947782331
+fringe2
+0.00204733401
+// Vertex 147
+// Num weights:
+3
+head
+0.9990337219
+left_hair1
+5.947806116e-005
+fringe2
+0.0009067999918
+// Vertex 148
+// Num weights:
+3
+head
+0.9232067199
+left_hair1
+0.05832104761
+fringe2
+0.01847223252
+// Vertex 149
+// Num weights:
+3
+head
+0.9819154036
+right_hair1
+0.003181770388
+fringe2
+0.01490282603
+// Vertex 150
+// Num weights:
+3
+head
+0.9382416571
+left_hair1
+0.00455870768
+fringe2
+0.05719963524
+// Vertex 151
+// Num weights:
+3
+head
+0.978712736
+left_hair1
+0.001222977781
+fringe2
+0.02006428623
+// Vertex 152
+// Num weights:
+3
+head
+0.9949735046
+left_hair1
+0.0008279611445
+fringe2
+0.004198534297
+// Vertex 153
+// Num weights:
+3
+neck1
+0.4988552449
+neck2
+0.5011347127
+right_hair2
+1.004241795e-005
+// Vertex 154
+// Num weights:
+3
+neck1
+0.482085756
+neck2
+0.504579196
+left_hair2
+0.01333504792
+// Vertex 155
+// Num weights:
+3
+spine4
+0.1414500544
+neck1
+0.7525724764
+neck2
+0.1059774691
+// Vertex 156
+// Num weights:
+3
+spine4
+0.6280290544
+left_clavicle
+0.05843665322
+fringe2
+0.3135342924
+// Vertex 157
+// Num weights:
+3
+spine4
+0.8005667175
+left_clavicle
+0.03966454789
+fringe2
+0.1597687346
+// Vertex 158
+// Num weights:
+3
+spine4
+0.9682862493
+right_hair2
+0.01287410079
+fringe2
+0.01883964995
+// Vertex 159
+// Num weights:
+3
+spine4
+0.2302062579
+neck1
+0.3927404102
+neck2
+0.3770533318
+// Vertex 160
+// Num weights:
+3
+spine4
+0.4074310552
+neck1
+0.4087933422
+neck2
+0.1837756026
+// Vertex 161
+// Num weights:
+3
+spine4
+0.9381580026
+left_hair2
+0.02231352485
+fringe2
+0.03952847259
+// Vertex 162
+// Num weights:
+3
+head
+0.02897728534
+fringe1
+0.4857737611
+fringe2
+0.4852489536
+// Vertex 163
+// Num weights:
+3
+head
+0.02160663468
+fringe1
+0.4899555282
+fringe2
+0.4884378372
+// Vertex 164
+// Num weights:
+3
+head
+0.02470890641
+fringe1
+0.4958380044
+fringe2
+0.4794530892
+// Vertex 165
+// Num weights:
+3
+head
+0.03372969487
+fringe1
+0.4882047086
+fringe2
+0.4780655965
+// Vertex 166
+// Num weights:
+3
+head
+0.1355168266
+fringe1
+0.5388978241
+fringe2
+0.3255853493
+// Vertex 167
+// Num weights:
+3
+head
+0.1249182516
+fringe1
+0.556664002
+fringe2
+0.3184177464
+// Vertex 168
+// Num weights:
+3
+head
+0.1366029621
+fringe1
+0.6282384963
+fringe2
+0.2351585415
+// Vertex 169
+// Num weights:
+3
+head
+0.1789189577
+fringe1
+0.5557346664
+fringe2
+0.265346376
+// Vertex 170
+// Num weights:
+3
+head
+0.008366118414
+fringe1
+0.9189096016
+fringe2
+0.07272428002
+// Vertex 171
+// Num weights:
+3
+head
+0.04075100497
+fringe1
+0.479829327
+fringe2
+0.479419668
+// Vertex 172
+// Num weights:
+3
+head
+0.04671992331
+fringe1
+0.4804640482
+fringe2
+0.4728160284
+// Vertex 173
+// Num weights:
+3
+head
+0.0337180465
+fringe1
+0.4884129071
+fringe2
+0.4778690464
+// Vertex 174
+// Num weights:
+3
+head
+0.04672879252
+fringe1
+0.4806159663
+fringe2
+0.4726552412
+// Vertex 175
+// Num weights:
+3
+head
+0.1141397722
+fringe1
+0.5761155398
+fringe2
+0.309744688
+// Vertex 176
+// Num weights:
+3
+head
+0.03638763922
+fringe1
+0.5022650688
+fringe2
+0.461347292
+// Vertex 177
+// Num weights:
+3
+head
+0.2071367526
+fringe1
+0.5579346039
+fringe2
+0.2349286435
+// Vertex 178
+// Num weights:
+3
+head
+0.1148868823
+fringe1
+0.731786712
+fringe2
+0.1533264057
+// Vertex 179
+// Num weights:
+3
+head
+0.1208305136
+fringe1
+0.6163148237
+fringe2
+0.2628546627
+// Vertex 180
+// Num weights:
+3
+head
+0.02743443853
+fringe1
+0.4862827807
+fringe2
+0.4862827807
+// Vertex 181
+// Num weights:
+3
+head
+0.01491335382
+fringe1
+0.4925433231
+fringe2
+0.4925433231
+// Vertex 182
+// Num weights:
+3
+head
+0.02398634581
+fringe1
+0.4880068271
+fringe2
+0.4880068271
+// Vertex 183
+// Num weights:
+3
+head
+0.02617659664
+fringe1
+0.4869117017
+fringe2
+0.4869117017
+// Vertex 184
+// Num weights:
+3
+spine2
+0.4012107224
+spine3
+0.4102390105
+fringe2
+0.1885502672
+// Vertex 185
+// Num weights:
+3
+spine2
+0.3775591117
+spine3
+0.3905267451
+fringe2
+0.2319141432
+// Vertex 186
+// Num weights:
+3
+head
+0.02906137546
+fringe1
+0.4854693123
+fringe2
+0.4854693123
+// Vertex 187
+// Num weights:
+3
+head
+0.04033601654
+fringe1
+0.4798319917
+fringe2
+0.4798319917
+// Vertex 188
+// Num weights:
+3
+head
+0.0255962949
+fringe1
+0.4872018526
+fringe2
+0.4872018526
+// Vertex 189
+// Num weights:
+3
+head
+0.03397623414
+fringe1
+0.4830118829
+fringe2
+0.4830118829
+// Vertex 190
+// Num weights:
+3
+spine2
+0.3520097653
+spine3
+0.4000446492
+spine4
+0.2479455855
+// Vertex 191
+// Num weights:
+3
+head
+0.02680532
+fringe1
+0.48659734
+fringe2
+0.48659734
+// Vertex 192
+// Num weights:
+3
+head
+0.9993773884
+left_hair1
+0.0001149485753
+fringe2
+0.0005076630337
+// Vertex 193
+// Num weights:
+3
+head
+0.997968993
+left_hair1
+0.0007382290961
+fringe2
+0.001292777911
+// Vertex 194
+// Num weights:
+3
+head
+0.1078807296
+fringe1
+0.6921296617
+fringe2
+0.1999896086
+// Vertex 195
+// Num weights:
+3
+head
+0.0497475455
+fringe1
+0.8422082819
+fringe2
+0.1080441726
+// Vertex 196
+// Num weights:
+3
+head
+0.06123184772
+fringe1
+0.8536514281
+fringe2
+0.08511672414
+// Vertex 197
+// Num weights:
+3
+head
+0.03813102766
+fringe1
+0.4809344862
+fringe2
+0.4809344862
+// Vertex 198
+// Num weights:
+3
+head
+0.03284709698
+fringe1
+0.4835764515
+fringe2
+0.4835764515
+// Vertex 199
+// Num weights:
+3
+head
+0.03587165629
+fringe1
+0.4820641719
+fringe2
+0.4820641719
+// Vertex 200
+// Num weights:
+3
+spine2
+0.3536583494
+spine3
+0.4041604981
+spine4
+0.2421811525
+// Vertex 201
+// Num weights:
+3
+spine4
+0.7393322772
+right_clavicle
+0.1051563851
+fringe2
+0.1555113377
+// Vertex 202
+// Num weights:
+3
+spine4
+0.6834850737
+right_clavicle
+0.1355940527
+fringe2
+0.1809208736
+// Vertex 203
+// Num weights:
+3
+neck1
+0.4354170582
+neck2
+0.4696602441
+right_hair2
+0.0949226977
+// Vertex 204
+// Num weights:
+3
+spine4
+0.3609255744
+neck1
+0.3722789113
+neck2
+0.2667955143
+// Vertex 205
+// Num weights:
+3
+head
+0.1241834819
+fringe1
+0.4379082591
+fringe2
+0.4379082591
+// Vertex 206
+// Num weights:
+3
+head
+0.1863743081
+fringe1
+0.4085890601
+fringe2
+0.4050366318
+// Vertex 207
+// Num weights:
+3
+neck1
+0.3927239308
+neck2
+0.4262019191
+head
+0.18107415
+// Vertex 208
+// Num weights:
+3
+neck1
+0.2611551783
+neck2
+0.5355690908
+head
+0.2032757309
+// Vertex 209
+// Num weights:
+3
+head
+0.3511771994
+fringe1
+0.3635635893
+fringe2
+0.2852592113
+// Vertex 210
+// Num weights:
+3
+head
+0.3511771994
+fringe1
+0.3635635893
+fringe2
+0.2852592113
+// Vertex 211
+// Num weights:
+3
+head
+0.5667446417
+right_hair1
+0.04777328437
+fringe2
+0.385482074
+// Vertex 212
+// Num weights:
+3
+neck1
+0.1363505344
+neck2
+0.453058421
+head
+0.4105910446
+// Vertex 213
+// Num weights:
+3
+neck1
+0.08871921263
+neck2
+0.4627708758
+head
+0.4485099116
+// Vertex 214
+// Num weights:
+3
+head
+0.8577924643
+right_hair1
+0.03031937696
+fringe2
+0.1118881587
+// Vertex 215
+// Num weights:
+3
+head
+0.8758275038
+right_hair1
+0.06256215051
+fringe2
+0.06161034573
+// Vertex 216
+// Num weights:
+3
+head
+0.8864362771
+left_hair1
+0.01821979794
+right_hair1
+0.09534392496
+// Vertex 217
+// Num weights:
+3
+head
+0.9611336032
+right_hair1
+0.009245536377
+fringe2
+0.02962086045
+// Vertex 218
+// Num weights:
+3
+head
+0.8835150859
+right_hair1
+0.01347976724
+fringe2
+0.1030051468
+// Vertex 219
+// Num weights:
+3
+neck1
+0.4794175145
+neck2
+0.5103140427
+right_hair2
+0.01026844283
+// Vertex 220
+// Num weights:
+3
+spine4
+0.8182869272
+right_clavicle
+0.06760352046
+fringe2
+0.1141095524
+// Vertex 221
+// Num weights:
+3
+spine4
+0.2157783899
+neck1
+0.4011550868
+neck2
+0.3830665233
+// Vertex 222
+// Num weights:
+3
+spine4
+0.953908608
+right_hair2
+0.02207082961
+fringe2
+0.02402056242
+// Vertex 223
+// Num weights:
+3
+spine4
+0.4115659379
+neck1
+0.4127103533
+neck2
+0.1757237088
+// Vertex 224
+// Num weights:
+3
+head
+0.05434313524
+fringe1
+0.4729917887
+fringe2
+0.4726650761
+// Vertex 225
+// Num weights:
+3
+head
+0.06149597566
+fringe1
+0.4724427072
+fringe2
+0.4660613172
+// Vertex 226
+// Num weights:
+3
+head
+0.0860142064
+fringe1
+0.4601885605
+fringe2
+0.4537972331
+// Vertex 227
+// Num weights:
+3
+head
+0.06905255543
+fringe1
+0.4658008794
+fringe2
+0.4651465652
+// Vertex 228
+// Num weights:
+3
+head
+0.2164550334
+fringe1
+0.5010418838
+fringe2
+0.2825030828
+// Vertex 229
+// Num weights:
+3
+head
+0.1520750761
+fringe1
+0.5198983259
+fringe2
+0.328026598
+// Vertex 230
+// Num weights:
+3
+head
+0.32269967
+fringe1
+0.3709176882
+fringe2
+0.3063826417
+// Vertex 231
+// Num weights:
+3
+head
+0.05418328404
+fringe1
+0.4765974334
+fringe2
+0.4692192825
+// Vertex 232
+// Num weights:
+3
+head
+0.0881260559
+fringe1
+0.4660936832
+fringe2
+0.4457802609
+// Vertex 233
+// Num weights:
+3
+head
+0.1693954506
+fringe1
+0.501654
+fringe2
+0.3289505494
+// Vertex 234
+// Num weights:
+3
+head
+0.2780594515
+fringe1
+0.457097214
+fringe2
+0.2648433345
+// Vertex 235
+// Num weights:
+3
+head
+0.2069840843
+fringe1
+0.4907780874
+fringe2
+0.3022378283
+// Vertex 236
+// Num weights:
+3
+head
+0.04287222284
+fringe1
+0.4785638886
+fringe2
+0.4785638886
+// Vertex 237
+// Num weights:
+3
+head
+0.04527370386
+fringe1
+0.4773631481
+fringe2
+0.4773631481
+// Vertex 238
+// Num weights:
+3
+head
+0.07594300026
+fringe1
+0.4620284999
+fringe2
+0.4620284999
+// Vertex 239
+// Num weights:
+3
+spine2
+0.3308857522
+spine3
+0.3482616497
+spine4
+0.3208525981
+// Vertex 240
+// Num weights:
+3
+head
+0.06900825442
+fringe1
+0.4654958728
+fringe2
+0.4654958728
+// Vertex 241
+// Num weights:
+3
+spine2
+0.3959877405
+spine3
+0.4090977541
+spine4
+0.1949145054
+// Vertex 242
+// Num weights:
+3
+head
+0.04386744503
+fringe1
+0.4780662775
+fringe2
+0.4780662775
+// Vertex 243
+// Num weights:
+3
+spine2
+0.3542400118
+spine3
+0.4012934572
+spine4
+0.244466531
+// Vertex 244
+// Num weights:
+3
+head
+0.05140610338
+fringe1
+0.4742969483
+fringe2
+0.4742969483
+// Vertex 245
+// Num weights:
+3
+head
+0.9498464555
+right_hair1
+0.01717991282
+fringe2
+0.03297363167
+// Vertex 246
+// Num weights:
+3
+head
+0.92665538
+right_hair1
+0.04574476149
+fringe2
+0.02759985847
+// Vertex 247
+// Num weights:
+3
+head
+0.3206995696
+fringe1
+0.4152746183
+fringe2
+0.2640258121
+// Vertex 248
+// Num weights:
+3
+head
+0.3104666324
+fringe1
+0.4097123709
+fringe2
+0.2798209967
+// Vertex 249
+// Num weights:
+3
+head
+0.2520642224
+fringe1
+0.4656945438
+fringe2
+0.2822412338
+// Vertex 250
+// Num weights:
+3
+neck1
+0.2738424848
+neck2
+0.7260541121
+head
+0.0001034030495
+// Vertex 251
+// Num weights:
+3
+spine4
+0.9976237675
+left_hair2
+0.0007672439777
+right_hair2
+0.001608988546
+// Vertex 252
+// Num weights:
+3
+neck1
+0.03467558387
+neck2
+0.9652757701
+head
+4.864601456e-005
+// Vertex 253
+// Num weights:
+3
+spine2
+0.006153103597
+spine3
+0.7530598546
+spine4
+0.2407870418
+// Vertex 254
+// Num weights:
+3
+spine4
+0.9852915921
+right_clavicle
+0.006030847668
+right_hair2
+0.008677560198
+// Vertex 255
+// Num weights:
+3
+spine2
+0.2962602378
+spine3
+0.6823240518
+spine4
+0.02141571046
+// Vertex 256
+// Num weights:
+3
+spine4
+0.8352161523
+left_clavicle
+0.08224818618
+right_clavicle
+0.08253566152
+// Vertex 257
+// Num weights:
+3
+spine1
+0.0008774986663
+spine2
+0.5893917066
+spine3
+0.4097307948
+// Vertex 258
+// Num weights:
+3
+spine4
+0.3757562552
+left_clavicle
+0.3113396908
+right_clavicle
+0.312904054
+// Vertex 259
+// Num weights:
+3
+spine1
+0.01759412871
+spine2
+0.9614038907
+spine3
+0.02100198059
+// Vertex 260
+// Num weights:
+3
+spine4
+0.3336598212
+left_clavicle
+0.3326803575
+right_clavicle
+0.3336598212
+// Vertex 261
+// Num weights:
+3
+spine1
+0.1588210113
+spine2
+0.8392630801
+spine3
+0.001915908537
+// Vertex 262
+// Num weights:
+3
+root
+0.1845925477
+spine1
+0.7086807027
+spine2
+0.1067267495
+// Vertex 263
+// Num weights:
+3
+root
+0.0001753426744
+spine1
+0.5005817488
+spine2
+0.4992429085
+// Vertex 264
+// Num weights:
+3
+root
+0.4234286118
+spine1
+0.5572132102
+spine2
+0.019358178
+// Vertex 265
+// Num weights:
+3
+root
+0.006824055442
+spine1
+0.7736422798
+spine2
+0.2195336648
+// Vertex 266
+// Num weights:
+3
+root
+0.9581808655
+left_hip
+0.0210390828
+right_hip
+0.0207800517
+// Vertex 267
+// Num weights:
+3
+root
+0.3920061272
+spine1
+0.5266706357
+spine2
+0.08132323708
+// Vertex 268
+// Num weights:
+3
+root
+0.8240920494
+left_hip
+0.08863627305
+right_hip
+0.08727167759
+// Vertex 269
+// Num weights:
+3
+root
+0.7197187166
+left_hip
+0.1409013995
+right_hip
+0.139379884
+// Vertex 270
+// Num weights:
+3
+root
+0.6806744064
+left_hip
+0.1610204267
+right_hip
+0.158305167
+// Vertex 271
+// Num weights:
+3
+root
+0.7156835881
+left_hip
+0.1435135581
+right_hip
+0.1408028538
+// Vertex 272
+// Num weights:
+3
+root
+0.3663368947
+left_hip
+0.326920512
+skirt3
+0.3067425932
+// Vertex 273
+// Num weights:
+3
+root
+0.2661851563
+left_hip
+0.5045758078
+skirt1
+0.2292390358
+// Vertex 274
+// Num weights:
+3
+root
+0.3865480567
+left_hip
+0.6064914696
+skirt1
+0.006960473688
+// Vertex 275
+// Num weights:
+3
+neck1
+0.2698587795
+neck2
+0.7300144059
+head
+0.0001268146176
+// Vertex 276
+// Num weights:
+3
+spine4
+0.9954246316
+left_hair2
+0.002470179443
+right_hair2
+0.002105188928
+// Vertex 277
+// Num weights:
+3
+neck1
+0.2317129908
+neck2
+0.7681396737
+head
+0.00014733548
+// Vertex 278
+// Num weights:
+3
+spine4
+0.9951627593
+left_clavicle
+0.002140153744
+left_hair2
+0.002697086991
+// Vertex 279
+// Num weights:
+3
+neck1
+0.1567055705
+neck2
+0.8431861983
+head
+0.0001082312524
+// Vertex 280
+// Num weights:
+3
+spine4
+0.992634184
+left_clavicle
+0.003466903909
+left_hair2
+0.003898912072
+// Vertex 281
+// Num weights:
+3
+neck1
+0.1142402697
+neck2
+0.8856338802
+head
+0.0001258500942
+// Vertex 282
+// Num weights:
+3
+spine4
+0.993915214
+left_clavicle
+0.003212659626
+left_hair2
+0.002872126386
+// Vertex 283
+// Num weights:
+3
+neck1
+0.0650615125
+neck2
+0.9348537252
+head
+8.476232684e-005
+// Vertex 284
+// Num weights:
+3
+spine2
+0.003367509423
+spine3
+0.6514750667
+spine4
+0.3451574239
+// Vertex 285
+// Num weights:
+3
+spine4
+0.8043819655
+left_clavicle
+0.08421981996
+left_hair2
+0.1113982145
+// Vertex 286
+// Num weights:
+3
+left_hair1
+0.4987000432
+left_hair2
+0.4987000432
+right_hair2
+0.002599913612
+// Vertex 287
+// Num weights:
+3
+left_clavicle
+0.3847157745
+left_shoulder
+0.3841962434
+left_hair2
+0.2310879821
+// Vertex 288
+// Num weights:
+3
+spine4
+0.2412855851
+left_clavicle
+0.3900933714
+left_shoulder
+0.3686210435
+// Vertex 289
+// Num weights:
+3
+spine2
+0.3125430464
+spine3
+0.5893243377
+spine4
+0.09813261597
+// Vertex 290
+// Num weights:
+3
+spine4
+0.6266116312
+left_clavicle
+0.3607570149
+left_hair2
+0.0126313539
+// Vertex 291
+// Num weights:
+3
+left_clavicle
+0.6538059862
+left_shoulder
+0.2698733437
+left_hair2
+0.07632067016
+// Vertex 292
+// Num weights:
+3
+left_clavicle
+0.4908004254
+left_shoulder
+0.4908004254
+left_hair2
+0.01839914925
+// Vertex 293
+// Num weights:
+3
+left_clavicle
+0.4476880436
+left_shoulder
+0.4476880436
+left_hair2
+0.1046239128
+// Vertex 294
+// Num weights:
+3
+spine4
+0.2192890319
+left_clavicle
+0.4446235147
+left_shoulder
+0.3360874533
+// Vertex 295
+// Num weights:
+3
+spine1
+0.02364176867
+spine2
+0.4982884603
+spine3
+0.4780697711
+// Vertex 296
+// Num weights:
+3
+spine4
+0.4998017677
+left_clavicle
+0.4998017677
+right_clavicle
+0.0003964646154
+// Vertex 297
+// Num weights:
+3
+spine4
+0.02614692098
+left_clavicle
+0.8021004931
+left_shoulder
+0.171752586
+// Vertex 298
+// Num weights:
+3
+spine4
+0.2978362876
+left_clavicle
+0.5169317043
+left_shoulder
+0.1852320081
+// Vertex 299
+// Num weights:
+3
+spine1
+0.2111395294
+spine2
+0.5080676639
+spine3
+0.2807928067
+// Vertex 300
+// Num weights:
+3
+spine1
+0.13104736
+spine2
+0.7038406087
+spine3
+0.1651120313
+// Vertex 301
+// Num weights:
+3
+spine4
+0.4854608
+left_clavicle
+0.4854608
+right_clavicle
+0.02907839993
+// Vertex 302
+// Num weights:
+3
+spine4
+0.3578600431
+left_clavicle
+0.6196533323
+left_shoulder
+0.0224866246
+// Vertex 303
+// Num weights:
+3
+spine4
+0.4925968708
+left_clavicle
+0.4925968708
+right_clavicle
+0.01480625846
+// Vertex 304
+// Num weights:
+3
+spine4
+0.485172238
+left_clavicle
+0.485172238
+right_clavicle
+0.02965552408
+// Vertex 305
+// Num weights:
+3
+spine1
+0.3912565769
+spine2
+0.5227599701
+spine3
+0.085983453
+// Vertex 306
+// Num weights:
+3
+spine1
+0.341238396
+spine2
+0.6398210434
+spine3
+0.01894056062
+// Vertex 307
+// Num weights:
+3
+root
+0.1749420628
+spine1
+0.6816578629
+spine2
+0.1434000743
+// Vertex 308
+// Num weights:
+3
+root
+0.1625083937
+spine1
+0.6191278619
+spine2
+0.2183637444
+// Vertex 309
+// Num weights:
+3
+root
+0.09395556834
+spine1
+0.5850998457
+spine2
+0.320944586
+// Vertex 310
+// Num weights:
+3
+root
+0.03050678722
+spine1
+0.5542044994
+spine2
+0.4152887134
+// Vertex 311
+// Num weights:
+3
+root
+0.003562033597
+spine1
+0.5048339191
+spine2
+0.4916040473
+// Vertex 312
+// Num weights:
+3
+root
+0.3987777537
+spine1
+0.5702680551
+spine2
+0.03095419123
+// Vertex 313
+// Num weights:
+3
+root
+0.3132659592
+spine1
+0.6135971863
+spine2
+0.07313685455
+// Vertex 314
+// Num weights:
+3
+root
+0.2057035382
+spine1
+0.6417785677
+spine2
+0.1525178941
+// Vertex 315
+// Num weights:
+3
+root
+0.09532374447
+spine1
+0.6697469998
+spine2
+0.2349292558
+// Vertex 316
+// Num weights:
+3
+root
+0.01831212429
+spine1
+0.6709079302
+spine2
+0.3107799455
+// Vertex 317
+// Num weights:
+3
+root
+0.8588726208
+left_hip
+0.1150087352
+right_hip
+0.02611864398
+// Vertex 318
+// Num weights:
+3
+root
+0.6684778196
+left_hip
+0.2976554881
+right_hip
+0.03386669232
+// Vertex 319
+// Num weights:
+3
+root
+0.4608484612
+spine1
+0.4611886656
+spine2
+0.07796287311
+// Vertex 320
+// Num weights:
+3
+root
+0.4381781661
+spine1
+0.4662723777
+spine2
+0.09554945623
+// Vertex 321
+// Num weights:
+3
+root
+0.4061668226
+spine1
+0.5049793413
+spine2
+0.08885383607
+// Vertex 322
+// Num weights:
+3
+root
+0.7556794049
+left_hip
+0.224742057
+right_hip
+0.01957853816
+// Vertex 323
+// Num weights:
+3
+root
+0.5048538447
+left_hip
+0.4814003292
+right_hip
+0.01374582609
+// Vertex 324
+// Num weights:
+3
+root
+0.492662087
+left_hip
+0.492662087
+right_hip
+0.01467582608
+// Vertex 325
+// Num weights:
+3
+root
+0.6470297988
+left_hip
+0.3344775813
+right_hip
+0.01849261985
+// Vertex 326
+// Num weights:
+3
+root
+0.8246344534
+left_hip
+0.147559052
+right_hip
+0.02780649464
+// Vertex 327
+// Num weights:
+3
+root
+0.8542066589
+left_hip
+0.1382604695
+right_hip
+0.007532871571
+// Vertex 328
+// Num weights:
+3
+root
+0.5840088166
+left_hip
+0.4079925242
+skirt3
+0.007998659233
+// Vertex 329
+// Num weights:
+3
+root
+0.4504750174
+left_hip
+0.536683093
+skirt2
+0.01284188965
+// Vertex 330
+// Num weights:
+3
+root
+0.8321460249
+left_hip
+0.156785918
+skirt2
+0.01106805708
+// Vertex 331
+// Num weights:
+3
+root
+0.9728732203
+left_hip
+0.0234799682
+skirt2
+0.003646811519
+// Vertex 332
+// Num weights:
+3
+root
+0.9783444935
+left_hip
+0.01636696139
+skirt3
+0.005288545082
+// Vertex 333
+// Num weights:
+3
+root
+0.2682693692
+left_hip
+0.6982880503
+skirt3
+0.03344258053
+// Vertex 334
+// Num weights:
+3
+root
+0.4538383943
+left_hip
+0.09274413094
+skirt3
+0.4534174748
+// Vertex 335
+// Num weights:
+3
+root
+0.1379256762
+left_hip
+0.7241486476
+skirt2
+0.1379256762
+// Vertex 336
+// Num weights:
+3
+root
+0.9633845599
+left_hip
+0.02211652568
+skirt2
+0.01449891443
+// Vertex 337
+// Num weights:
+3
+left_elbow
+0.001829236852
+left_wrist
+0.9829438445
+left_hand
+0.01522691861
+// Vertex 338
+// Num weights:
+3
+left_elbow
+0.01001682971
+left_wrist
+0.9460821109
+left_hand
+0.04390105943
+// Vertex 339
+// Num weights:
+3
+left_elbow
+0.08430023891
+left_wrist
+0.8923391919
+left_hand
+0.02336056921
+// Vertex 340
+// Num weights:
+3
+left_elbow
+0.0294538093
+left_wrist
+0.9594259633
+left_hand
+0.01112022739
+// Vertex 341
+// Num weights:
+3
+left_elbow
+0.002591641326
+left_wrist
+0.9870317412
+left_hand
+0.0103766175
+// Vertex 342
+// Num weights:
+3
+left_elbow
+0.009265129066
+left_wrist
+0.9671166411
+left_hand
+0.02361822983
+// Vertex 343
+// Num weights:
+3
+left_elbow
+0.05467796974
+left_wrist
+0.9388649017
+left_hand
+0.006457128575
+// Vertex 344
+// Num weights:
+3
+left_elbow
+0.04004458758
+left_wrist
+0.9242861464
+left_hand
+0.03566926598
+// Vertex 345
+// Num weights:
+3
+left_elbow
+0.1500245768
+left_wrist
+0.7766514695
+left_hand
+0.07332395376
+// Vertex 346
+// Num weights:
+3
+left_elbow
+0.2131278528
+left_wrist
+0.7577185683
+left_hand
+0.02915357888
+// Vertex 347
+// Num weights:
+3
+left_elbow
+0.09641261956
+left_wrist
+0.8119100475
+left_hand
+0.09167733291
+// Vertex 348
+// Num weights:
+3
+left_elbow
+0.1427298205
+left_wrist
+0.8311357166
+left_hand
+0.02613446293
+// Vertex 349
+// Num weights:
+3
+left_elbow
+0.02394065557
+left_wrist
+0.9315509148
+left_hand
+0.04450842961
+// Vertex 350
+// Num weights:
+3
+left_elbow
+0.001502650636
+left_wrist
+0.9936814867
+left_hand
+0.004815862617
+// Vertex 351
+// Num weights:
+3
+left_elbow
+0.001994286641
+left_wrist
+0.9976752363
+left_hand
+0.0003304770513
+// Vertex 352
+// Num weights:
+3
+left_elbow
+1.323176038e-008
+left_wrist
+0.999999877
+left_hand
+1.097471027e-007
+// Vertex 353
+// Num weights:
+3
+left_elbow
+0.0008962222431
+left_wrist
+0.9989964605
+left_hand
+0.0001073172769
+// Vertex 354
+// Num weights:
+3
+left_elbow
+0.1059342035
+left_wrist
+0.6528168397
+left_hand
+0.2412489567
+// Vertex 355
+// Num weights:
+3
+left_elbow
+0.1293100889
+left_wrist
+0.6449470185
+left_hand
+0.2257428926
+// Vertex 356
+// Num weights:
+3
+left_elbow
+0.1811424733
+left_wrist
+0.5887645571
+left_hand
+0.2300929696
+// Vertex 357
+// Num weights:
+3
+left_elbow
+0.143830631
+left_wrist
+0.6254631914
+left_hand
+0.2307061776
+// Vertex 358
+// Num weights:
+3
+left_elbow
+0.2143478272
+left_wrist
+0.783430558
+left_hand
+0.002221614788
+// Vertex 359
+// Num weights:
+3
+left_elbow
+0.2727605652
+left_wrist
+0.7159632755
+left_hand
+0.01127615931
+// Vertex 360
+// Num weights:
+3
+left_elbow
+0.2428558698
+left_wrist
+0.747387839
+left_hand
+0.009756291187
+// Vertex 361
+// Num weights:
+3
+left_elbow
+0.005291790198
+left_wrist
+0.9946436997
+left_hand
+6.45100702e-005
+// Vertex 362
+// Num weights:
+3
+left_elbow
+0.2625530187
+left_wrist
+0.7116935959
+left_hand
+0.02575338541
+// Vertex 363
+// Num weights:
+3
+left_shoulder
+0.0001420322742
+left_elbow
+0.5013015171
+left_wrist
+0.4985564506
+// Vertex 364
+// Num weights:
+3
+left_elbow
+0.4969442974
+left_wrist
+0.5030300297
+left_hand
+2.567291273e-005
+// Vertex 365
+// Num weights:
+3
+left_elbow
+0.1861230899
+left_wrist
+0.7879548006
+left_hand
+0.02592210946
+// Vertex 366
+// Num weights:
+3
+left_elbow
+0.2625530187
+left_wrist
+0.7116935959
+left_hand
+0.02575338541
+// Vertex 367
+// Num weights:
+3
+left_shoulder
+0.0001116450867
+left_elbow
+0.4999441775
+left_wrist
+0.4999441775
+// Vertex 368
+// Num weights:
+3
+left_shoulder
+0.0001745923274
+left_elbow
+0.5021347119
+left_wrist
+0.4976906958
+// Vertex 369
+// Num weights:
+3
+left_shoulder
+0.0001961150093
+left_elbow
+0.5173614214
+left_wrist
+0.4824424636
+// Vertex 370
+// Num weights:
+3
+left_shoulder
+1.025910447e-006
+left_elbow
+0.6687404077
+left_wrist
+0.3312585664
+// Vertex 371
+// Num weights:
+3
+left_elbow
+0.4988789314
+left_wrist
+0.5011071402
+left_hand
+1.39284222e-005
+// Vertex 372
+// Num weights:
+3
+left_elbow
+0.04400590621
+left_wrist
+0.9547282418
+left_hand
+0.001265851959
+// Vertex 373
+// Num weights:
+3
+left_shoulder
+0.4651527941
+left_elbow
+0.5267333165
+left_wrist
+0.008113889431
+// Vertex 374
+// Num weights:
+3
+left_shoulder
+0.4446901058
+left_elbow
+0.5468804754
+left_wrist
+0.008429418842
+// Vertex 375
+// Num weights:
+3
+left_shoulder
+0.4907621987
+left_elbow
+0.507973024
+left_wrist
+0.001264777262
+// Vertex 376
+// Num weights:
+3
+left_shoulder
+0.4653765555
+left_elbow
+0.5345713675
+left_wrist
+5.207701016e-005
+// Vertex 377
+// Num weights:
+3
+left_shoulder
+0.4262543177
+left_elbow
+0.573625402
+left_wrist
+0.0001202802762
+// Vertex 378
+// Num weights:
+3
+left_shoulder
+0.4444536288
+left_elbow
+0.5538412207
+left_wrist
+0.001705150451
+// Vertex 379
+// Num weights:
+3
+left_elbow
+0.4988789314
+left_wrist
+0.5011071402
+left_hand
+1.39284222e-005
+// Vertex 380
+// Num weights:
+3
+left_clavicle
+0.001925945388
+left_shoulder
+0.528610459
+left_elbow
+0.4694635956
+// Vertex 381
+// Num weights:
+3
+left_clavicle
+0.00148914244
+left_shoulder
+0.5132249307
+left_elbow
+0.4852859269
+// Vertex 382
+// Num weights:
+3
+left_clavicle
+0.0004388736604
+left_shoulder
+0.5816023456
+left_elbow
+0.4179587808
+// Vertex 383
+// Num weights:
+3
+left_clavicle
+7.557314223e-006
+left_shoulder
+0.7915974255
+left_elbow
+0.2083950172
+// Vertex 384
+// Num weights:
+3
+left_clavicle
+5.078649728e-005
+left_shoulder
+0.6327261369
+left_elbow
+0.3672230766
+// Vertex 385
+// Num weights:
+3
+left_clavicle
+0.0004449027655
+left_shoulder
+0.5092679043
+left_elbow
+0.490287193
+// Vertex 386
+// Num weights:
+3
+left_clavicle
+0.002765565761
+left_shoulder
+0.6376795302
+left_elbow
+0.359554904
+// Vertex 387
+// Num weights:
+3
+left_clavicle
+0.002192025798
+left_shoulder
+0.6087217478
+left_elbow
+0.3890862264
+// Vertex 388
+// Num weights:
+3
+left_clavicle
+0.0007480020674
+left_shoulder
+0.7651923802
+left_elbow
+0.2340596178
+// Vertex 389
+// Num weights:
+3
+left_clavicle
+2.317659873e-006
+left_shoulder
+0.9973313486
+left_elbow
+0.002666333742
+// Vertex 390
+// Num weights:
+3
+left_clavicle
+0.0001238483911
+left_shoulder
+0.8707301343
+left_elbow
+0.1291460173
+// Vertex 391
+// Num weights:
+3
+left_clavicle
+0.001057189708
+left_shoulder
+0.6679963113
+left_elbow
+0.330946499
+// Vertex 392
+// Num weights:
+3
+left_clavicle
+0.04786422428
+left_shoulder
+0.9269585216
+left_elbow
+0.02517725408
+// Vertex 393
+// Num weights:
+3
+left_clavicle
+0.05968585253
+left_shoulder
+0.8974494332
+left_elbow
+0.04286471422
+// Vertex 394
+// Num weights:
+3
+left_clavicle
+0.009524060771
+left_shoulder
+0.9873662104
+left_elbow
+0.003109728782
+// Vertex 395
+// Num weights:
+3
+left_clavicle
+0.0009922930861
+left_shoulder
+0.9985459594
+left_elbow
+0.0004617475535
+// Vertex 396
+// Num weights:
+3
+left_clavicle
+0.006045304415
+left_shoulder
+0.9909074332
+left_elbow
+0.003047262347
+// Vertex 397
+// Num weights:
+3
+left_clavicle
+0.0243648966
+left_shoulder
+0.9607781665
+left_elbow
+0.0148569369
+// Vertex 398
+// Num weights:
+3
+left_clavicle
+0.141539894
+left_shoulder
+0.8356838859
+left_elbow
+0.02277622014
+// Vertex 399
+// Num weights:
+3
+left_clavicle
+0.1356751425
+left_shoulder
+0.8418487403
+left_hair2
+0.02247611716
+// Vertex 400
+// Num weights:
+3
+left_clavicle
+0.3565543014
+left_shoulder
+0.6144459823
+left_hair2
+0.02899971631
+// Vertex 401
+// Num weights:
+3
+left_clavicle
+0.3316623187
+left_shoulder
+0.646214241
+left_hair2
+0.02212344025
+// Vertex 402
+// Num weights:
+3
+left_clavicle
+0.03353695923
+left_shoulder
+0.9602365177
+left_hair2
+0.00622652305
+// Vertex 403
+// Num weights:
+3
+left_clavicle
+0.3171472348
+left_shoulder
+0.6409316086
+left_hair2
+0.04192115657
+// Vertex 404
+// Num weights:
+3
+left_clavicle
+0.001938648431
+left_shoulder
+0.9977613255
+left_hair2
+0.0003000261012
+// Vertex 405
+// Num weights:
+3
+left_clavicle
+0.01841504226
+left_shoulder
+0.9813692547
+left_hair2
+0.0002157030818
+// Vertex 406
+// Num weights:
+3
+left_clavicle
+0.02057896363
+left_shoulder
+0.9773084586
+left_hair2
+0.002112577805
+// Vertex 407
+// Num weights:
+3
+left_clavicle
+0.1887457665
+left_shoulder
+0.8055163439
+left_hair2
+0.005737889628
+// Vertex 408
+// Num weights:
+3
+left_clavicle
+0.07609143416
+left_shoulder
+0.9135200226
+left_elbow
+0.01038854321
+// Vertex 409
+// Num weights:
+3
+left_clavicle
+0.2478885095
+left_shoulder
+0.7398910299
+left_hair2
+0.01222046061
+// Vertex 410
+// Num weights:
+3
+left_clavicle
+0.460197041
+left_shoulder
+0.496133085
+left_hair2
+0.04366987399
+// Vertex 411
+// Num weights:
+3
+left_clavicle
+0.484492671
+left_shoulder
+0.4869583976
+left_hair2
+0.02854893138
+// Vertex 412
+// Num weights:
+3
+left_clavicle
+0.4180914229
+left_shoulder
+0.5129590264
+left_hair2
+0.06894955063
+// Vertex 413
+// Num weights:
+3
+left_clavicle
+0.2035900905
+left_shoulder
+0.7953453849
+left_hair2
+0.001064524566
+// Vertex 414
+// Num weights:
+3
+spine4
+0.01369213736
+left_clavicle
+0.675278521
+left_shoulder
+0.3110293417
+// Vertex 415
+// Num weights:
+3
+spine4
+0.05675264885
+left_clavicle
+0.4944923016
+left_shoulder
+0.4487550496
+// Vertex 416
+// Num weights:
+3
+left_clavicle
+0.4714679972
+left_shoulder
+0.4714679972
+left_hair2
+0.05706400565
+// Vertex 417
+// Num weights:
+3
+spine4
+0.08776835485
+left_clavicle
+0.4723817697
+left_shoulder
+0.4398498755
+// Vertex 418
+// Num weights:
+3
+spine4
+0.1075567148
+left_clavicle
+0.5657060655
+left_shoulder
+0.3267372197
+// Vertex 419
+// Num weights:
+3
+spine4
+0.02614692098
+left_clavicle
+0.8021004931
+left_shoulder
+0.171752586
+// Vertex 420
+// Num weights:
+3
+left_elbow
+0.02747005196
+left_wrist
+0.5148475485
+left_hand
+0.4576823995
+// Vertex 421
+// Num weights:
+3
+left_elbow
+0.02645030772
+left_wrist
+0.5020769263
+left_hand
+0.4714727659
+// Vertex 422
+// Num weights:
+3
+left_elbow
+0.0173022735
+left_wrist
+0.5039324515
+left_hand
+0.478765275
+// Vertex 423
+// Num weights:
+3
+left_elbow
+0.01877383339
+left_wrist
+0.5038354287
+left_hand
+0.4773907379
+// Vertex 424
+// Num weights:
+3
+left_elbow
+0.0008874262636
+left_wrist
+0.4995562869
+left_hand
+0.4995562869
+// Vertex 425
+// Num weights:
+3
+left_elbow
+0.001475079784
+left_wrist
+0.4992624601
+left_hand
+0.4992624601
+// Vertex 426
+// Num weights:
+3
+left_elbow
+0.001595008742
+left_wrist
+0.4992024956
+left_hand
+0.4992024956
+// Vertex 427
+// Num weights:
+3
+left_elbow
+0.001020610251
+left_wrist
+0.4994896949
+left_hand
+0.4994896949
+// Vertex 428
+// Num weights:
+3
+left_elbow
+0.0003956702563
+left_wrist
+0.4998021649
+left_hand
+0.4998021649
+// Vertex 429
+// Num weights:
+3
+left_elbow
+0.0001818612439
+left_wrist
+0.4999090694
+left_hand
+0.4999090694
+// Vertex 430
+// Num weights:
+3
+left_elbow
+0.0004913947051
+left_wrist
+0.4997543026
+left_hand
+0.4997543026
+// Vertex 431
+// Num weights:
+3
+left_elbow
+0.0006124800926
+left_wrist
+0.49969376
+left_hand
+0.49969376
+// Vertex 432
+// Num weights:
+3
+left_elbow
+0.004817543964
+left_wrist
+0.497591228
+left_hand
+0.497591228
+// Vertex 433
+// Num weights:
+3
+left_elbow
+0.002520196598
+left_wrist
+0.4987399017
+left_hand
+0.4987399017
+// Vertex 434
+// Num weights:
+3
+left_elbow
+0.002350104668
+left_wrist
+0.4988249477
+left_hand
+0.4988249477
+// Vertex 435
+// Num weights:
+3
+left_elbow
+0.004299207454
+left_wrist
+0.4978503963
+left_hand
+0.4978503963
+// Vertex 436
+// Num weights:
+3
+left_elbow
+8.483998146e-008
+left_wrist
+0.9999896804
+left_hand
+1.023471599e-005
+// Vertex 437
+// Num weights:
+3
+left_elbow
+0.0003334572886
+left_wrist
+0.9764064349
+left_hand
+0.02326010779
+// Vertex 438
+// Num weights:
+3
+left_elbow
+0.0005278851563
+left_wrist
+0.9686133648
+left_hand
+0.03085875005
+// Vertex 439
+// Num weights:
+3
+left_elbow
+0.001270448395
+left_wrist
+0.9270174632
+left_hand
+0.07171208839
+// Vertex 440
+// Num weights:
+3
+left_elbow
+0.001049192492
+left_wrist
+0.9542839772
+left_hand
+0.04466683035
+// Vertex 441
+// Num weights:
+3
+left_elbow
+7.911810604e-005
+left_wrist
+0.9870318195
+left_hand
+0.01288906236
+// Vertex 442
+// Num weights:
+3
+left_elbow
+0.003452174409
+left_wrist
+0.8269343359
+left_hand
+0.1696134897
+// Vertex 443
+// Num weights:
+3
+left_elbow
+0.0005646096266
+left_wrist
+0.9255993173
+left_hand
+0.07383607303
+// Vertex 444
+// Num weights:
+3
+left_elbow
+0.007804261078
+left_wrist
+0.8609782735
+left_hand
+0.1312174655
+// Vertex 445
+// Num weights:
+3
+left_elbow
+0.02081210905
+left_wrist
+0.810799224
+left_hand
+0.1683886669
+// Vertex 446
+// Num weights:
+3
+left_elbow
+0.003432847239
+left_wrist
+0.9034227273
+left_hand
+0.09314442547
+// Vertex 447
+// Num weights:
+3
+left_elbow
+0.01535170357
+left_wrist
+0.8501114355
+left_hand
+0.1345368609
+// Vertex 448
+// Num weights:
+3
+left_elbow
+0.08408747994
+left_wrist
+0.7450251094
+left_hand
+0.1708874107
+// Vertex 449
+// Num weights:
+3
+left_elbow
+0.06501410663
+left_wrist
+0.7414330801
+left_hand
+0.1935528132
+// Vertex 450
+// Num weights:
+3
+left_elbow
+0.04162944416
+left_wrist
+0.8282668575
+left_hand
+0.1301036984
+// Vertex 451
+// Num weights:
+3
+left_elbow
+0.03827311831
+left_wrist
+0.8121594215
+left_hand
+0.1495674602
+// Vertex 452
+// Num weights:
+3
+left_elbow
+0.2625530187
+left_wrist
+0.7116935959
+left_hand
+0.02575338541
+// Vertex 453
+// Num weights:
+3
+left_elbow
+0.1091943848
+left_wrist
+0.833570198
+left_hand
+0.05723541725
+// Vertex 454
+// Num weights:
+3
+left_elbow
+0.057768581
+left_wrist
+0.9002131909
+left_hand
+0.04201822809
+// Vertex 455
+// Num weights:
+3
+left_elbow
+0.2062869763
+left_wrist
+0.759804745
+left_hand
+0.03390827863
+// Vertex 456
+// Num weights:
+3
+left_elbow
+0.1743741544
+left_wrist
+0.7600947199
+left_hand
+0.06553112567
+// Vertex 457
+// Num weights:
+3
+left_elbow
+0.1828686498
+left_wrist
+0.7337799869
+left_hand
+0.08335136329
+// Vertex 458
+// Num weights:
+3
+left_elbow
+0.09353010453
+left_wrist
+0.7360166973
+left_hand
+0.1704531982
+// Vertex 459
+// Num weights:
+3
+left_elbow
+0.07313823676
+left_wrist
+0.7670437345
+left_hand
+0.1598180287
+// Vertex 460
+// Num weights:
+3
+left_elbow
+0.1716074488
+left_wrist
+0.6310289427
+left_hand
+0.1973636085
+// Vertex 461
+// Num weights:
+3
+left_elbow
+0.1607964448
+left_wrist
+0.6700511539
+left_hand
+0.1691524013
+// Vertex 462
+// Num weights:
+3
+left_elbow
+2.714170918e-005
+left_wrist
+0.5129845722
+left_hand
+0.4869882861
+// Vertex 463
+// Num weights:
+3
+left_elbow
+1.546240719e-005
+left_wrist
+0.5121709043
+left_hand
+0.4878136332
+// Vertex 464
+// Num weights:
+3
+left_elbow
+1.227352372e-006
+left_wrist
+0.5640439581
+left_hand
+0.4359548145
+// Vertex 465
+// Num weights:
+3
+left_elbow
+2.292714702e-005
+left_wrist
+0.4999885364
+left_hand
+0.4999885364
+// Vertex 466
+// Num weights:
+3
+left_elbow
+0.0007782125629
+left_wrist
+0.4996108937
+left_hand
+0.4996108937
+// Vertex 467
+// Num weights:
+3
+left_elbow
+7.786857932e-005
+left_wrist
+0.4999610657
+left_hand
+0.4999610657
+// Vertex 468
+// Num weights:
+3
+left_elbow
+0.0006569850141
+left_wrist
+0.5010060247
+left_hand
+0.4983369903
+// Vertex 469
+// Num weights:
+3
+left_elbow
+7.076899462e-005
+left_wrist
+0.4999646155
+left_hand
+0.4999646155
+// Vertex 470
+// Num weights:
+3
+left_elbow
+0.00245430525
+left_wrist
+0.550946403
+left_hand
+0.4465992918
+// Vertex 471
+// Num weights:
+3
+left_elbow
+0.006692690043
+left_wrist
+0.5563766569
+left_hand
+0.436930653
+// Vertex 472
+// Num weights:
+3
+left_elbow
+0.002697710317
+left_wrist
+0.642553381
+left_hand
+0.3547489087
+// Vertex 473
+// Num weights:
+3
+left_elbow
+0.004841460224
+left_wrist
+0.568556339
+left_hand
+0.4266022008
+// Vertex 474
+// Num weights:
+3
+left_elbow
+0.04084237586
+left_wrist
+0.5759460685
+left_hand
+0.3832115556
+// Vertex 475
+// Num weights:
+3
+left_elbow
+0.0417507754
+left_wrist
+0.6144029263
+left_hand
+0.3438462983
+// Vertex 476
+// Num weights:
+3
+left_elbow
+0.02193208754
+left_wrist
+0.607970065
+left_hand
+0.3700978475
+// Vertex 477
+// Num weights:
+3
+left_elbow
+0.02294699886
+left_wrist
+0.6150249722
+left_hand
+0.362028029
+// Vertex 478
+// Num weights:
+3
+neck1
+0.2709244129
+neck2
+0.7289234743
+head
+0.000152112768
+// Vertex 479
+// Num weights:
+3
+spine4
+0.9926143782
+right_clavicle
+0.001916875811
+right_hair2
+0.005468746028
+// Vertex 480
+// Num weights:
+3
+neck1
+0.2332325883
+neck2
+0.7665776501
+head
+0.0001897615303
+// Vertex 481
+// Num weights:
+3
+spine4
+0.9926811628
+right_clavicle
+0.002165649835
+right_hair2
+0.005153187392
+// Vertex 482
+// Num weights:
+3
+neck1
+0.1584635095
+neck2
+0.8413982181
+head
+0.0001382723341
+// Vertex 483
+// Num weights:
+3
+spine4
+0.9902460436
+right_clavicle
+0.003507924243
+right_hair2
+0.006246032118
+// Vertex 484
+// Num weights:
+3
+neck1
+0.1156961704
+neck2
+0.884146698
+head
+0.0001571315977
+// Vertex 485
+// Num weights:
+3
+spine4
+0.9927841851
+right_clavicle
+0.003246906246
+right_hair2
+0.00396890866
+// Vertex 486
+// Num weights:
+3
+neck1
+0.06594694218
+neck2
+0.9339544738
+head
+9.858398772e-005
+// Vertex 487
+// Num weights:
+3
+spine2
+0.003382883705
+spine3
+0.651128743
+spine4
+0.3454883733
+// Vertex 488
+// Num weights:
+3
+spine4
+0.6548014834
+right_clavicle
+0.06901272083
+right_hair2
+0.2761857958
+// Vertex 489
+// Num weights:
+3
+left_hair2
+0.001483098372
+right_hair1
+0.4992584508
+right_hair2
+0.4992584508
+// Vertex 490
+// Num weights:
+3
+right_clavicle
+0.4426775563
+right_shoulder
+0.4421296904
+right_hair2
+0.1151927532
+// Vertex 491
+// Num weights:
+3
+spine4
+0.2404796086
+right_clavicle
+0.3904148355
+right_shoulder
+0.369105556
+// Vertex 492
+// Num weights:
+3
+spine2
+0.3127311262
+spine3
+0.5889299465
+spine4
+0.09833892723
+// Vertex 493
+// Num weights:
+3
+spine4
+0.6208495813
+right_clavicle
+0.3600061869
+right_hair2
+0.01914423186
+// Vertex 494
+// Num weights:
+3
+right_clavicle
+0.6599377684
+right_shoulder
+0.2730663197
+right_hair2
+0.06699591198
+// Vertex 495
+// Num weights:
+3
+right_clavicle
+0.4973529318
+right_shoulder
+0.4973529318
+right_hair2
+0.005294136476
+// Vertex 496
+// Num weights:
+3
+right_clavicle
+0.4863504706
+right_shoulder
+0.4863504706
+right_hair2
+0.02729905888
+// Vertex 497
+// Num weights:
+3
+spine4
+0.2189274857
+right_clavicle
+0.4446355841
+right_shoulder
+0.3364369302
+// Vertex 498
+// Num weights:
+3
+spine1
+0.02373232747
+spine2
+0.4982169066
+spine3
+0.4780507659
+// Vertex 499
+// Num weights:
+3
+spine4
+0.4998028513
+left_clavicle
+0.0003942974479
+right_clavicle
+0.4998028513
+// Vertex 500
+// Num weights:
+3
+spine4
+0.02615927058
+right_clavicle
+0.8009110114
+right_shoulder
+0.172929718
+// Vertex 501
+// Num weights:
+3
+spine4
+0.297416923
+right_clavicle
+0.5168724549
+right_shoulder
+0.1857106221
+// Vertex 502
+// Num weights:
+3
+spine1
+0.2112864047
+spine2
+0.5078181391
+spine3
+0.2808954562
+// Vertex 503
+// Num weights:
+3
+spine1
+0.1313367557
+spine2
+0.7032338156
+spine3
+0.1654294288
+// Vertex 504
+// Num weights:
+3
+spine4
+0.4855170817
+left_clavicle
+0.02896583662
+right_clavicle
+0.4855170817
+// Vertex 505
+// Num weights:
+3
+spine4
+0.3573510442
+right_clavicle
+0.6199829828
+right_shoulder
+0.02266597292
+// Vertex 506
+// Num weights:
+3
+spine4
+0.4925999239
+left_clavicle
+0.0148001521
+right_clavicle
+0.4925999239
+// Vertex 507
+// Num weights:
+3
+spine4
+0.4851756491
+left_clavicle
+0.02964870177
+right_clavicle
+0.4851756491
+// Vertex 508
+// Num weights:
+3
+spine1
+0.3913049526
+spine2
+0.5225426743
+spine3
+0.08615237316
+// Vertex 509
+// Num weights:
+3
+spine1
+0.3416214741
+spine2
+0.6393430893
+spine3
+0.01903543668
+// Vertex 510
+// Num weights:
+3
+root
+0.175127026
+spine1
+0.6812991951
+spine2
+0.1435737788
+// Vertex 511
+// Num weights:
+3
+root
+0.1627214754
+spine1
+0.6187015769
+spine2
+0.2185769477
+// Vertex 512
+// Num weights:
+3
+root
+0.09416527699
+spine1
+0.5847038093
+spine2
+0.3211309137
+// Vertex 513
+// Num weights:
+3
+root
+0.03063627306
+spine1
+0.5539338232
+spine2
+0.4154299037
+// Vertex 514
+// Num weights:
+3
+root
+0.00359111533
+spine1
+0.5047897695
+spine2
+0.4916191152
+// Vertex 515
+// Num weights:
+3
+root
+0.3988902139
+spine1
+0.570076196
+spine2
+0.03103359004
+// Vertex 516
+// Num weights:
+3
+root
+0.3135017221
+spine1
+0.6131687874
+spine2
+0.07332949049
+// Vertex 517
+// Num weights:
+3
+root
+0.2059948554
+spine1
+0.6412073569
+spine2
+0.1527977878
+// Vertex 518
+// Num weights:
+3
+root
+0.09557784788
+spine1
+0.6691550468
+spine2
+0.2352671054
+// Vertex 519
+// Num weights:
+3
+root
+0.01838779033
+spine1
+0.6704680134
+spine2
+0.3111441963
+// Vertex 520
+// Num weights:
+3
+root
+0.8627452426
+left_hip
+0.0257770254
+right_hip
+0.111477732
+// Vertex 521
+// Num weights:
+3
+root
+0.6727610724
+left_hip
+0.0336614948
+right_hip
+0.2935774327
+// Vertex 522
+// Num weights:
+3
+root
+0.4607771832
+spine1
+0.4611167602
+spine2
+0.07810605657
+// Vertex 523
+// Num weights:
+3
+root
+0.4381282324
+spine1
+0.466173024
+spine2
+0.09569874357
+// Vertex 524
+// Num weights:
+3
+root
+0.4061773608
+spine1
+0.5048520509
+spine2
+0.08897058835
+// Vertex 525
+// Num weights:
+3
+root
+0.7736013974
+left_hip
+0.0184842133
+right_hip
+0.2079143893
+// Vertex 526
+// Num weights:
+3
+root
+0.5061830869
+left_hip
+0.01359371666
+right_hip
+0.4802231964
+// Vertex 527
+// Num weights:
+3
+root
+0.4927537117
+left_hip
+0.01449257652
+right_hip
+0.4927537117
+// Vertex 528
+// Num weights:
+3
+root
+0.6344827979
+left_hip
+0.01913884352
+right_hip
+0.3463783586
+// Vertex 529
+// Num weights:
+3
+root
+0.8138523713
+left_hip
+0.02988881239
+right_hip
+0.1562588164
+// Vertex 530
+// Num weights:
+3
+root
+0.8661351173
+left_hip
+0.007021806558
+right_hip
+0.1268430762
+// Vertex 531
+// Num weights:
+3
+root
+0.645805164
+right_hip
+0.3477964216
+skirt4
+0.006398414368
+// Vertex 532
+// Num weights:
+3
+root
+0.4356854886
+right_hip
+0.5526218182
+skirt1
+0.01169269323
+// Vertex 533
+// Num weights:
+3
+root
+0.8087102391
+right_hip
+0.1804432869
+skirt1
+0.01084647401
+// Vertex 534
+// Num weights:
+3
+root
+0.9659835075
+right_hip
+0.02982610214
+skirt1
+0.004190390321
+// Vertex 535
+// Num weights:
+3
+root
+0.968262871
+right_hip
+0.02465133493
+skirt4
+0.007085794102
+// Vertex 536
+// Num weights:
+3
+root
+0.2458235525
+right_hip
+0.7278708384
+skirt1
+0.02630560909
+// Vertex 537
+// Num weights:
+3
+root
+0.4093517371
+right_hip
+0.2167095671
+skirt4
+0.3739386958
+// Vertex 538
+// Num weights:
+3
+root
+0.2060105408
+right_hip
+0.5879789184
+skirt1
+0.2060105408
+// Vertex 539
+// Num weights:
+3
+root
+0.9596639606
+right_hip
+0.02569289418
+skirt1
+0.01464314519
+// Vertex 540
+// Num weights:
+3
+right_elbow
+0.006677162736
+right_wrist
+0.918042635
+right_hand
+0.0752802023
+// Vertex 541
+// Num weights:
+3
+right_elbow
+0.01810232104
+right_wrist
+0.884405482
+right_hand
+0.09749219697
+// Vertex 542
+// Num weights:
+3
+right_elbow
+0.07862639915
+right_wrist
+0.8903859526
+right_hand
+0.03098764827
+// Vertex 543
+// Num weights:
+3
+right_elbow
+0.03338559767
+right_wrist
+0.9454548811
+right_hand
+0.02115952125
+// Vertex 544
+// Num weights:
+3
+right_elbow
+0.003097405883
+right_wrist
+0.9690884707
+right_hand
+0.02781412339
+// Vertex 545
+// Num weights:
+3
+right_elbow
+0.003806414803
+right_wrist
+0.9663646157
+right_hand
+0.02982896953
+// Vertex 546
+// Num weights:
+3
+right_elbow
+0.02125779592
+right_wrist
+0.970970262
+right_hand
+0.007771942117
+// Vertex 547
+// Num weights:
+3
+right_elbow
+0.01092126389
+right_wrist
+0.9506999891
+right_hand
+0.03837874698
+// Vertex 548
+// Num weights:
+3
+right_elbow
+0.05413704429
+right_wrist
+0.8406681919
+right_hand
+0.1051947638
+// Vertex 549
+// Num weights:
+3
+right_elbow
+0.08553770011
+right_wrist
+0.8688925732
+right_hand
+0.04556972668
+// Vertex 550
+// Num weights:
+3
+right_elbow
+0.02533385573
+right_wrist
+0.8533862687
+right_hand
+0.1212798755
+// Vertex 551
+// Num weights:
+3
+right_elbow
+0.04241636799
+right_wrist
+0.9203516504
+right_hand
+0.0372319816
+// Vertex 552
+// Num weights:
+3
+right_elbow
+0.00319826469
+right_wrist
+0.9630303698
+right_hand
+0.03377136551
+// Vertex 553
+// Num weights:
+3
+right_elbow
+2.599517487e-005
+right_wrist
+0.9996007231
+right_hand
+0.0003732816994
+// Vertex 554
+// Num weights:
+3
+right_elbow
+9.925940056e-005
+right_wrist
+0.9998296588
+right_hand
+7.10818442e-005
+// Vertex 555
+// Num weights:
+3
+right_elbow
+0.0001237887709
+right_wrist
+0.9970165395
+right_hand
+0.002859671775
+// Vertex 556
+// Num weights:
+3
+right_elbow
+0.001314816245
+right_wrist
+0.9982165843
+right_hand
+0.0004685994564
+// Vertex 557
+// Num weights:
+3
+right_elbow
+0.137598213
+right_wrist
+0.6291076135
+right_hand
+0.2332941735
+// Vertex 558
+// Num weights:
+3
+right_elbow
+0.1631681625
+right_wrist
+0.6247362792
+right_hand
+0.2120955583
+// Vertex 559
+// Num weights:
+3
+right_elbow
+0.220790746
+right_wrist
+0.5770187529
+right_hand
+0.2021905011
+// Vertex 560
+// Num weights:
+3
+right_elbow
+0.178110221
+right_wrist
+0.607954974
+right_hand
+0.213934805
+// Vertex 561
+// Num weights:
+3
+right_elbow
+0.08138384471
+right_wrist
+0.9159843055
+right_hand
+0.00263184974
+// Vertex 562
+// Num weights:
+3
+right_elbow
+0.113551935
+right_wrist
+0.8663944337
+right_hand
+0.02005363121
+// Vertex 563
+// Num weights:
+3
+right_elbow
+0.08854301525
+right_wrist
+0.8935550918
+right_hand
+0.01790189294
+// Vertex 564
+// Num weights:
+3
+right_elbow
+0.001057816943
+right_wrist
+0.998859976
+right_hand
+8.220709862e-005
+// Vertex 565
+// Num weights:
+3
+right_elbow
+0.2334840698
+right_wrist
+0.7414262669
+right_hand
+0.02508966332
+// Vertex 566
+// Num weights:
+3
+right_elbow
+0.2335041885
+right_wrist
+0.7664791555
+right_hand
+1.66559957e-005
+// Vertex 567
+// Num weights:
+3
+right_elbow
+0.04011369891
+right_wrist
+0.9598794401
+right_hand
+6.86100012e-006
+// Vertex 568
+// Num weights:
+3
+right_elbow
+0.1650849444
+right_wrist
+0.8055682737
+right_hand
+0.02934678189
+// Vertex 569
+// Num weights:
+3
+right_elbow
+0.2334840698
+right_wrist
+0.7414262669
+right_hand
+0.02508966332
+// Vertex 570
+// Num weights:
+3
+right_elbow
+0.2989754427
+right_wrist
+0.7009422422
+right_hand
+8.231515655e-005
+// Vertex 571
+// Num weights:
+3
+right_elbow
+0.3450197027
+right_wrist
+0.6544009916
+right_hand
+0.0005793056703
+// Vertex 572
+// Num weights:
+3
+right_elbow
+0.3355247121
+right_wrist
+0.6635524397
+right_hand
+0.0009228482329
+// Vertex 573
+// Num weights:
+3
+right_elbow
+0.1454854752
+right_wrist
+0.8544688421
+right_hand
+4.568263807e-005
+// Vertex 574
+// Num weights:
+3
+right_elbow
+0.01857668238
+right_wrist
+0.9814207258
+right_hand
+2.591787376e-006
+// Vertex 575
+// Num weights:
+3
+right_elbow
+0.02417835087
+right_wrist
+0.9739462863
+right_hand
+0.001875362804
+// Vertex 576
+// Num weights:
+3
+right_shoulder
+0.3611484116
+right_elbow
+0.6306355017
+right_wrist
+0.008216086675
+// Vertex 577
+// Num weights:
+3
+right_shoulder
+0.3432452719
+right_elbow
+0.6471092287
+right_wrist
+0.009645499367
+// Vertex 578
+// Num weights:
+3
+right_shoulder
+0.349680796
+right_elbow
+0.6492650533
+right_wrist
+0.001054150651
+// Vertex 579
+// Num weights:
+3
+right_shoulder
+0.2449972158
+right_elbow
+0.7548143223
+right_wrist
+0.0001884618708
+// Vertex 580
+// Num weights:
+3
+right_shoulder
+0.3189826824
+right_elbow
+0.680256541
+right_wrist
+0.000760776576
+// Vertex 581
+// Num weights:
+3
+right_shoulder
+0.3390570361
+right_elbow
+0.6580935319
+right_wrist
+0.00284943205
+// Vertex 582
+// Num weights:
+3
+right_elbow
+0.01857668238
+right_wrist
+0.9814207258
+right_hand
+2.591787376e-006
+// Vertex 583
+// Num weights:
+3
+right_shoulder
+0.4916001585
+right_elbow
+0.5044406285
+right_wrist
+0.003959212933
+// Vertex 584
+// Num weights:
+3
+right_shoulder
+0.4855977043
+right_elbow
+0.5104005603
+right_wrist
+0.004001735391
+// Vertex 585
+// Num weights:
+3
+right_clavicle
+0.0001957347976
+right_shoulder
+0.501805463
+right_elbow
+0.4979988022
+// Vertex 586
+// Num weights:
+3
+right_shoulder
+0.4999880329
+right_elbow
+0.4999911989
+right_wrist
+2.076821299e-005
+// Vertex 587
+// Num weights:
+3
+right_clavicle
+8.948665672e-005
+right_shoulder
+0.4999552567
+right_elbow
+0.4999552567
+// Vertex 588
+// Num weights:
+3
+right_shoulder
+0.4852613323
+right_elbow
+0.5129994099
+right_wrist
+0.001739257862
+// Vertex 589
+// Num weights:
+3
+right_clavicle
+0.001540270981
+right_shoulder
+0.5586665783
+right_elbow
+0.4397931508
+// Vertex 590
+// Num weights:
+3
+right_clavicle
+0.001371993771
+right_shoulder
+0.5333339099
+right_elbow
+0.4652940964
+// Vertex 591
+// Num weights:
+3
+right_clavicle
+0.0003404529577
+right_shoulder
+0.6577592696
+right_elbow
+0.3419002774
+// Vertex 592
+// Num weights:
+3
+right_clavicle
+4.316551989e-006
+right_shoulder
+0.9753093236
+right_elbow
+0.02468635983
+// Vertex 593
+// Num weights:
+3
+right_clavicle
+0.0001663785572
+right_shoulder
+0.66255985
+right_elbow
+0.3372737714
+// Vertex 594
+// Num weights:
+3
+right_clavicle
+0.0008498400517
+right_shoulder
+0.5584353757
+right_elbow
+0.4407147842
+// Vertex 595
+// Num weights:
+3
+right_clavicle
+0.03895061631
+right_shoulder
+0.9299257477
+right_elbow
+0.03112363597
+// Vertex 596
+// Num weights:
+3
+right_clavicle
+0.05186902289
+right_shoulder
+0.8929137065
+right_elbow
+0.05521727065
+// Vertex 597
+// Num weights:
+3
+right_clavicle
+0.006966140497
+right_shoulder
+0.9896017879
+right_elbow
+0.003432071619
+// Vertex 598
+// Num weights:
+3
+right_clavicle
+0.001567742145
+right_shoulder
+0.9973731144
+right_elbow
+0.001059143416
+// Vertex 599
+// Num weights:
+3
+right_clavicle
+0.008174262902
+right_shoulder
+0.9860282614
+right_elbow
+0.005797475651
+// Vertex 600
+// Num weights:
+3
+right_clavicle
+0.02409361624
+right_shoulder
+0.9547585
+right_elbow
+0.02114788373
+// Vertex 601
+// Num weights:
+3
+right_clavicle
+0.1293921032
+right_shoulder
+0.8416457768
+right_elbow
+0.02896212
+// Vertex 602
+// Num weights:
+3
+right_clavicle
+0.1207711794
+right_shoulder
+0.8598979514
+right_elbow
+0.01933086914
+// Vertex 603
+// Num weights:
+3
+right_clavicle
+0.3483005731
+right_shoulder
+0.6406527795
+right_hair2
+0.01104664743
+// Vertex 604
+// Num weights:
+3
+right_clavicle
+0.3252286007
+right_shoulder
+0.6643943455
+right_hair2
+0.01037705377
+// Vertex 605
+// Num weights:
+3
+right_clavicle
+0.02702061827
+right_shoulder
+0.9712263168
+right_elbow
+0.001753064974
+// Vertex 606
+// Num weights:
+3
+right_clavicle
+0.3120483793
+right_shoulder
+0.6779296569
+right_hair2
+0.01002196375
+// Vertex 607
+// Num weights:
+3
+right_clavicle
+0.002854359764
+right_shoulder
+0.9969194367
+right_elbow
+0.0002262035787
+// Vertex 608
+// Num weights:
+3
+right_clavicle
+0.02387129921
+right_shoulder
+0.9760231373
+right_hair2
+0.0001055635281
+// Vertex 609
+// Num weights:
+3
+right_clavicle
+0.02540390557
+right_shoulder
+0.9721870626
+right_elbow
+0.002409031822
+// Vertex 610
+// Num weights:
+3
+right_clavicle
+0.2013418889
+right_shoulder
+0.7956065966
+right_hair2
+0.003051514419
+// Vertex 611
+// Num weights:
+3
+right_clavicle
+0.0764138128
+right_shoulder
+0.9094772378
+right_elbow
+0.01410894944
+// Vertex 612
+// Num weights:
+3
+right_clavicle
+0.2492913847
+right_shoulder
+0.7437452036
+right_elbow
+0.006963411777
+// Vertex 613
+// Num weights:
+3
+right_clavicle
+0.4664843128
+right_shoulder
+0.5149913509
+right_hair2
+0.01852433625
+// Vertex 614
+// Num weights:
+3
+right_clavicle
+0.488954556
+right_shoulder
+0.4957848309
+right_hair2
+0.01526061315
+// Vertex 615
+// Num weights:
+3
+right_clavicle
+0.4324215489
+right_shoulder
+0.5510296438
+right_hair2
+0.01654880732
+// Vertex 616
+// Num weights:
+3
+right_clavicle
+0.2153028274
+right_shoulder
+0.7843244429
+right_hair2
+0.0003727297278
+// Vertex 617
+// Num weights:
+3
+spine4
+0.0137345185
+right_clavicle
+0.6756778969
+right_shoulder
+0.3105875846
+// Vertex 618
+// Num weights:
+3
+spine4
+0.0565276389
+right_clavicle
+0.4929654033
+right_shoulder
+0.4505069578
+// Vertex 619
+// Num weights:
+3
+spine4
+0.03554683262
+right_clavicle
+0.4822265837
+right_shoulder
+0.4822265837
+// Vertex 620
+// Num weights:
+3
+spine4
+0.08759571466
+right_clavicle
+0.4723054051
+right_shoulder
+0.4400988802
+// Vertex 621
+// Num weights:
+3
+spine4
+0.1073348261
+right_clavicle
+0.5653107658
+right_shoulder
+0.3273544081
+// Vertex 622
+// Num weights:
+3
+spine4
+0.02615927058
+right_clavicle
+0.8009110114
+right_shoulder
+0.172929718
+// Vertex 623
+// Num weights:
+3
+right_elbow
+0.004700908051
+right_wrist
+0.497649546
+right_hand
+0.497649546
+// Vertex 624
+// Num weights:
+3
+right_elbow
+0.005137220197
+right_wrist
+0.4974313899
+right_hand
+0.4974313899
+// Vertex 625
+// Num weights:
+3
+right_elbow
+0.002865550415
+right_wrist
+0.4985672248
+right_hand
+0.4985672248
+// Vertex 626
+// Num weights:
+3
+right_elbow
+0.002905902937
+right_wrist
+0.4985470485
+right_hand
+0.4985470485
+// Vertex 627
+// Num weights:
+3
+right_elbow
+0.000705073658
+right_wrist
+0.4996474632
+right_hand
+0.4996474632
+// Vertex 628
+// Num weights:
+3
+right_elbow
+0.0006707469281
+right_wrist
+0.4996646265
+right_hand
+0.4996646265
+// Vertex 629
+// Num weights:
+3
+right_elbow
+0.001112749759
+right_wrist
+0.4994436251
+right_hand
+0.4994436251
+// Vertex 630
+// Num weights:
+3
+right_elbow
+0.001159663707
+right_wrist
+0.4994201681
+right_hand
+0.4994201681
+// Vertex 631
+// Num weights:
+3
+right_elbow
+0.00153312421
+right_wrist
+0.4992334379
+right_hand
+0.4992334379
+// Vertex 632
+// Num weights:
+3
+right_elbow
+0.0006805376404
+right_wrist
+0.4996597312
+right_hand
+0.4996597312
+// Vertex 633
+// Num weights:
+3
+right_elbow
+0.00122994473
+right_wrist
+0.4993850276
+right_hand
+0.4993850276
+// Vertex 634
+// Num weights:
+3
+right_elbow
+0.001990781101
+right_wrist
+0.4990046094
+right_hand
+0.4990046094
+// Vertex 635
+// Num weights:
+3
+right_elbow
+0.001112891821
+right_wrist
+0.4994435541
+right_hand
+0.4994435541
+// Vertex 636
+// Num weights:
+3
+right_elbow
+0.0007907958393
+right_wrist
+0.4996046021
+right_hand
+0.4996046021
+// Vertex 637
+// Num weights:
+3
+right_elbow
+0.0004110026906
+right_wrist
+0.4997944987
+right_hand
+0.4997944987
+// Vertex 638
+// Num weights:
+3
+right_elbow
+0.0005352307246
+right_wrist
+0.4997323846
+right_hand
+0.4997323846
+// Vertex 639
+// Num weights:
+3
+right_elbow
+0.0001742714332
+right_wrist
+0.9501438887
+right_hand
+0.0496818399
+// Vertex 640
+// Num weights:
+3
+right_elbow
+0.002803166161
+right_wrist
+0.8154487072
+right_hand
+0.1817481266
+// Vertex 641
+// Num weights:
+3
+right_elbow
+0.001790785173
+right_wrist
+0.8496061775
+right_hand
+0.1486030373
+// Vertex 642
+// Num weights:
+3
+right_elbow
+0.00532386173
+right_wrist
+0.7639609481
+right_hand
+0.2307151902
+// Vertex 643
+// Num weights:
+3
+right_elbow
+2.612630069e-005
+right_wrist
+0.9913528005
+right_hand
+0.008621073179
+// Vertex 644
+// Num weights:
+3
+right_elbow
+2.630281155e-005
+right_wrist
+0.9777102647
+right_hand
+0.02226343246
+// Vertex 645
+// Num weights:
+3
+right_elbow
+0.001173517202
+right_wrist
+0.7695871934
+right_hand
+0.2292392894
+// Vertex 646
+// Num weights:
+3
+right_elbow
+0.0008154058879
+right_wrist
+0.7915436017
+right_hand
+0.2076409924
+// Vertex 647
+// Num weights:
+3
+right_elbow
+0.002544388939
+right_wrist
+0.8327064633
+right_hand
+0.1647491478
+// Vertex 648
+// Num weights:
+3
+right_elbow
+0.005103287559
+right_wrist
+0.7958308426
+right_hand
+0.1990658698
+// Vertex 649
+// Num weights:
+3
+right_elbow
+0.0002091397376
+right_wrist
+0.9513955444
+right_hand
+0.04839531582
+// Vertex 650
+// Num weights:
+3
+right_elbow
+0.002041336966
+right_wrist
+0.8705186156
+right_hand
+0.1274400474
+// Vertex 651
+// Num weights:
+3
+right_elbow
+0.02589049331
+right_wrist
+0.7474836221
+right_hand
+0.2266258845
+// Vertex 652
+// Num weights:
+3
+right_elbow
+0.0151482457
+right_wrist
+0.7328768569
+right_hand
+0.2519748974
+// Vertex 653
+// Num weights:
+3
+right_elbow
+0.01064228467
+right_wrist
+0.8337978775
+right_hand
+0.1555598379
+// Vertex 654
+// Num weights:
+3
+right_elbow
+0.007382530592
+right_wrist
+0.8188163663
+right_hand
+0.1738011031
+// Vertex 655
+// Num weights:
+3
+right_elbow
+0.2334840698
+right_wrist
+0.7414262669
+right_hand
+0.02508966332
+// Vertex 656
+// Num weights:
+3
+right_elbow
+0.1151984117
+right_wrist
+0.8169116004
+right_hand
+0.06788998793
+// Vertex 657
+// Num weights:
+3
+right_elbow
+0.06740100371
+right_wrist
+0.8708863329
+right_hand
+0.06171266337
+// Vertex 658
+// Num weights:
+3
+right_elbow
+0.1910637177
+right_wrist
+0.7735458076
+right_hand
+0.03539047479
+// Vertex 659
+// Num weights:
+3
+right_elbow
+0.1785755504
+right_wrist
+0.7515432385
+right_hand
+0.06988121107
+// Vertex 660
+// Num weights:
+3
+right_elbow
+0.1929919827
+right_wrist
+0.7232248444
+right_hand
+0.08378317299
+// Vertex 661
+// Num weights:
+3
+right_elbow
+0.1181252732
+right_wrist
+0.7033076998
+right_hand
+0.1785670269
+// Vertex 662
+// Num weights:
+3
+right_elbow
+0.09468790075
+right_wrist
+0.7249412529
+right_hand
+0.1803708463
+// Vertex 663
+// Num weights:
+3
+right_elbow
+0.2051025674
+right_wrist
+0.6156432256
+right_hand
+0.179254207
+// Vertex 664
+// Num weights:
+3
+right_elbow
+0.1867574872
+right_wrist
+0.6505263164
+right_hand
+0.1627161965
+// Vertex 665
+// Num weights:
+3
+right_elbow
+0.0001252099006
+right_wrist
+0.499937395
+right_hand
+0.499937395
+// Vertex 666
+// Num weights:
+3
+right_elbow
+0.0006779886972
+right_wrist
+0.4996610057
+right_hand
+0.4996610057
+// Vertex 667
+// Num weights:
+3
+right_elbow
+0.0001415223341
+right_wrist
+0.4999292388
+right_hand
+0.4999292388
+// Vertex 668
+// Num weights:
+3
+right_elbow
+0.00110026003
+right_wrist
+0.49944987
+right_hand
+0.49944987
+// Vertex 669
+// Num weights:
+3
+right_elbow
+4.064964446e-005
+right_wrist
+0.4999796752
+right_hand
+0.4999796752
+// Vertex 670
+// Num weights:
+3
+right_elbow
+1.609832765e-005
+right_wrist
+0.4999919508
+right_hand
+0.4999919508
+// Vertex 671
+// Num weights:
+3
+right_elbow
+0.0001234319807
+right_wrist
+0.499938284
+right_hand
+0.499938284
+// Vertex 672
+// Num weights:
+3
+right_elbow
+0.0001028979629
+right_wrist
+0.499948551
+right_hand
+0.499948551
+// Vertex 673
+// Num weights:
+3
+right_elbow
+0.0002991481429
+right_wrist
+0.5001972166
+right_hand
+0.4995036353
+// Vertex 674
+// Num weights:
+3
+right_elbow
+0.0007896097439
+right_wrist
+0.5035077369
+right_hand
+0.4957026533
+// Vertex 675
+// Num weights:
+3
+right_elbow
+5.920541987e-005
+right_wrist
+0.5968383062
+right_hand
+0.4031024883
+// Vertex 676
+// Num weights:
+3
+right_elbow
+0.0002573581056
+right_wrist
+0.5047635842
+right_hand
+0.4949790577
+// Vertex 677
+// Num weights:
+3
+right_elbow
+0.009024327768
+right_wrist
+0.5291726446
+right_hand
+0.4618030276
+// Vertex 678
+// Num weights:
+3
+right_elbow
+0.008016579179
+right_wrist
+0.5629717347
+right_hand
+0.4290116861
+// Vertex 679
+// Num weights:
+3
+right_elbow
+0.003632494289
+right_wrist
+0.5497311816
+right_hand
+0.4466363241
+// Vertex 680
+// Num weights:
+3
+right_elbow
+0.003268529706
+right_wrist
+0.555420842
+right_hand
+0.4413106283
+// Vertex 681
+// Num weights:
+3
+root
+0.009112918784
+left_hip
+0.9828770728
+skirt2
+0.008010008415
+// Vertex 682
+// Num weights:
+3
+root
+0.00873106937
+left_hip
+0.9827651724
+skirt2
+0.008503758189
+// Vertex 683
+// Num weights:
+3
+root
+0.8185808122
+left_hip
+0.1808887541
+skirt2
+0.0005304337248
+// Vertex 684
+// Num weights:
+3
+root
+0.5815871694
+left_hip
+0.4074541288
+right_hip
+0.01095870175
+// Vertex 685
+// Num weights:
+3
+root
+0.01842047927
+left_hip
+0.9660719111
+skirt3
+0.01550760961
+// Vertex 686
+// Num weights:
+3
+root
+0.350366498
+left_hip
+0.6452039008
+skirt3
+0.004429601152
+// Vertex 687
+// Num weights:
+3
+root
+0.06522012557
+left_hip
+0.8771925734
+skirt3
+0.05758730104
+// Vertex 688
+// Num weights:
+3
+root
+0.935289548
+left_hip
+0.06264908059
+right_hip
+0.002061371367
+// Vertex 689
+// Num weights:
+3
+root
+0.1442793023
+left_hip
+0.711628505
+skirt3
+0.1440921927
+// Vertex 690
+// Num weights:
+3
+root
+0.9843163177
+left_hip
+0.01554901094
+skirt3
+0.0001346713142
+// Vertex 691
+// Num weights:
+3
+root
+0.08601652261
+left_hip
+0.9126741279
+skirt3
+0.001309349507
+// Vertex 692
+// Num weights:
+3
+root
+0.02477629588
+left_hip
+0.9510091861
+skirt2
+0.02421451801
+// Vertex 693
+// Num weights:
+3
+root
+1.235467132e-005
+left_hip
+0.9800092017
+left_knee
+0.01997844363
+// Vertex 694
+// Num weights:
+3
+root
+2.565874254e-005
+left_hip
+0.95850479
+left_knee
+0.04146955124
+// Vertex 695
+// Num weights:
+3
+root
+0.0002036251289
+left_hip
+0.8473413493
+left_knee
+0.1524550256
+// Vertex 696
+// Num weights:
+3
+root
+0.0004400824667
+left_hip
+0.6954696585
+left_knee
+0.304090259
+// Vertex 697
+// Num weights:
+3
+root
+0.001097164517
+left_hip
+0.7319591316
+left_knee
+0.2669437039
+// Vertex 698
+// Num weights:
+3
+root
+0.0007575926227
+left_hip
+0.7653365962
+left_knee
+0.2339058111
+// Vertex 699
+// Num weights:
+3
+left_hip
+0.49185964
+left_knee
+0.5081292248
+skirt2
+1.1135151e-005
+// Vertex 700
+// Num weights:
+3
+root
+1.088328534e-005
+left_hip
+0.4999945584
+left_knee
+0.4999945584
+// Vertex 701
+// Num weights:
+3
+root
+7.355353755e-005
+left_hip
+0.5070737657
+left_knee
+0.4928526808
+// Vertex 702
+// Num weights:
+3
+root
+0.000293534107
+left_hip
+0.5278621943
+left_knee
+0.4718442716
+// Vertex 703
+// Num weights:
+3
+root
+0.0005527427073
+left_hip
+0.5065637628
+left_knee
+0.4928834945
+// Vertex 704
+// Num weights:
+3
+root
+0.0003700922006
+left_hip
+0.5102005765
+left_knee
+0.4894293313
+// Vertex 705
+// Num weights:
+3
+left_hip
+0.06756103067
+left_knee
+0.9324203281
+skirt2
+1.864122225e-005
+// Vertex 706
+// Num weights:
+3
+left_hip
+0.04645135534
+left_knee
+0.9535395678
+skirt2
+9.076818428e-006
+// Vertex 707
+// Num weights:
+3
+left_hip
+0.2056710487
+left_knee
+0.7941679281
+skirt2
+0.0001610232505
+// Vertex 708
+// Num weights:
+3
+left_hip
+0.2575634454
+left_knee
+0.7419156701
+skirt3
+0.0005208844904
+// Vertex 709
+// Num weights:
+3
+left_hip
+0.2867822403
+left_knee
+0.7126599102
+skirt3
+0.0005578495647
+// Vertex 710
+// Num weights:
+3
+left_hip
+0.2199380517
+left_knee
+0.7798607354
+skirt2
+0.0002012128727
+// Vertex 711
+// Num weights:
+3
+left_hip
+0.001713684124
+left_knee
+0.9982425121
+left_ankle
+4.380372743e-005
+// Vertex 712
+// Num weights:
+3
+left_hip
+0.0003760253966
+left_knee
+0.999612934
+left_ankle
+1.104057544e-005
+// Vertex 713
+// Num weights:
+3
+left_hip
+0.01276951134
+left_knee
+0.9867986487
+left_ankle
+0.0004318399245
+// Vertex 714
+// Num weights:
+3
+left_hip
+0.03358788444
+left_knee
+0.9651656617
+left_ankle
+0.001246453906
+// Vertex 715
+// Num weights:
+3
+left_hip
+0.03212453668
+left_knee
+0.9668482934
+left_ankle
+0.001027169889
+// Vertex 716
+// Num weights:
+3
+left_hip
+0.01230146785
+left_knee
+0.9872966569
+left_ankle
+0.0004018752567
+// Vertex 717
+// Num weights:
+3
+left_knee
+0.982642878
+left_ankle
+0.01724979741
+left_toe
+0.0001073245494
+// Vertex 718
+// Num weights:
+3
+left_knee
+0.9842588263
+left_ankle
+0.0156068358
+left_toe
+0.0001343378814
+// Vertex 719
+// Num weights:
+3
+left_knee
+0.9899141811
+left_ankle
+0.01005127795
+left_toe
+3.454094581e-005
+// Vertex 720
+// Num weights:
+3
+left_knee
+0.9998415031
+left_ankle
+0.0001581172625
+left_toe
+3.796338516e-007
+// Vertex 721
+// Num weights:
+3
+left_knee
+0.9971182027
+left_ankle
+0.002874869655
+left_toe
+6.927645751e-006
+// Vertex 722
+// Num weights:
+3
+left_knee
+0.9919954218
+left_ankle
+0.007952762652
+left_toe
+5.181553016e-005
+// Vertex 723
+// Num weights:
+3
+root
+0.0301753012
+right_hip
+0.9396493976
+skirt1
+0.0301753012
+// Vertex 724
+// Num weights:
+3
+root
+0.0246089516
+right_hip
+0.9507820968
+skirt1
+0.0246089516
+// Vertex 725
+// Num weights:
+3
+root
+0.9969221472
+right_hip
+0.003039589762
+skirt1
+3.826301828e-005
+// Vertex 726
+// Num weights:
+3
+root
+0.4536689515
+right_hip
+0.5421354884
+skirt1
+0.004195560128
+// Vertex 727
+// Num weights:
+3
+root
+0.02849360106
+right_hip
+0.9430127979
+skirt4
+0.02849360106
+// Vertex 728
+// Num weights:
+3
+root
+0.3085193492
+right_hip
+0.6880764154
+skirt4
+0.003404235445
+// Vertex 729
+// Num weights:
+3
+root
+0.02378153798
+right_hip
+0.9538958247
+skirt4
+0.02232263735
+// Vertex 730
+// Num weights:
+3
+root
+0.6587191558
+left_hip
+0.003224988331
+right_hip
+0.3380558558
+// Vertex 731
+// Num weights:
+3
+root
+0.01697379193
+right_hip
+0.9673176725
+skirt1
+0.01570853557
+// Vertex 732
+// Num weights:
+3
+root
+0.2392012637
+right_hip
+0.7555145543
+skirt4
+0.005284181974
+// Vertex 733
+// Num weights:
+3
+root
+0.5218379012
+left_hip
+0.04068897118
+right_hip
+0.4374731276
+// Vertex 734
+// Num weights:
+3
+root
+0.02037832807
+right_hip
+0.9603194316
+skirt1
+0.01930224031
+// Vertex 735
+// Num weights:
+3
+root
+0.0001487519697
+right_hip
+0.7598035966
+right_knee
+0.2400476514
+// Vertex 736
+// Num weights:
+3
+root
+3.404677569e-005
+right_hip
+0.8647097589
+right_knee
+0.1352561943
+// Vertex 737
+// Num weights:
+3
+root
+0.0001409013259
+right_hip
+0.5809939084
+right_knee
+0.4188651903
+// Vertex 738
+// Num weights:
+3
+root
+0.0001284331951
+right_hip
+0.5859354096
+right_knee
+0.4139361572
+// Vertex 739
+// Num weights:
+3
+root
+0.0002667736208
+right_hip
+0.6087958114
+right_knee
+0.390937415
+// Vertex 740
+// Num weights:
+3
+root
+0.0001834861624
+right_hip
+0.7111395359
+right_knee
+0.2886769779
+// Vertex 741
+// Num weights:
+3
+right_hip
+0.4213767909
+right_knee
+0.5785910128
+skirt1
+3.219623289e-005
+// Vertex 742
+// Num weights:
+3
+right_hip
+0.4557838292
+right_knee
+0.5442027785
+skirt1
+1.339226439e-005
+// Vertex 743
+// Num weights:
+3
+right_hip
+0.351189006
+right_knee
+0.6487559208
+skirt1
+5.507322677e-005
+// Vertex 744
+// Num weights:
+3
+right_hip
+0.3453265248
+right_knee
+0.6545698329
+skirt1
+0.0001036423134
+// Vertex 745
+// Num weights:
+3
+right_hip
+0.4189916829
+right_knee
+0.5808330317
+skirt1
+0.0001752853247
+// Vertex 746
+// Num weights:
+3
+right_hip
+0.461954766
+right_knee
+0.5379206423
+skirt1
+0.0001245916962
+// Vertex 747
+// Num weights:
+3
+right_hip
+0.04684544194
+right_knee
+0.953117781
+skirt1
+3.677704238e-005
+// Vertex 748
+// Num weights:
+3
+right_hip
+0.04649860839
+right_knee
+0.9534777789
+skirt1
+2.361266883e-005
+// Vertex 749
+// Num weights:
+3
+right_hip
+0.06516249061
+right_knee
+0.9347270402
+skirt1
+0.0001104691917
+// Vertex 750
+// Num weights:
+3
+right_hip
+0.09149890604
+right_knee
+0.9083063345
+skirt1
+0.000194759418
+// Vertex 751
+// Num weights:
+3
+right_hip
+0.1222648008
+right_knee
+0.877484054
+skirt1
+0.0002511452257
+// Vertex 752
+// Num weights:
+3
+right_hip
+0.1244854616
+right_knee
+0.8753915204
+skirt1
+0.000123017989
+// Vertex 753
+// Num weights:
+3
+right_hip
+0.002880312767
+right_knee
+0.9969967426
+right_ankle
+0.0001229446035
+// Vertex 754
+// Num weights:
+3
+right_hip
+0.0007665584864
+right_knee
+0.9991990697
+right_ankle
+3.437182088e-005
+// Vertex 755
+// Num weights:
+3
+right_hip
+0.003522828741
+right_knee
+0.996237464
+right_ankle
+0.0002397072218
+// Vertex 756
+// Num weights:
+3
+right_hip
+0.009620162419
+right_knee
+0.9897816488
+right_ankle
+0.0005981888199
+// Vertex 757
+// Num weights:
+3
+right_hip
+0.01175423107
+right_knee
+0.9873947148
+right_ankle
+0.0008510540992
+// Vertex 758
+// Num weights:
+3
+right_hip
+0.00509790263
+right_knee
+0.9946925671
+right_ankle
+0.0002095302217
+// Vertex 759
+// Num weights:
+3
+right_knee
+0.8855587213
+right_ankle
+0.1139609696
+right_toe
+0.000480309095
+// Vertex 760
+// Num weights:
+3
+right_knee
+0.8142738421
+right_ankle
+0.184712277
+right_toe
+0.001013880848
+// Vertex 761
+// Num weights:
+3
+right_knee
+0.9337825796
+right_ankle
+0.06609069484
+right_toe
+0.0001267256046
+// Vertex 762
+// Num weights:
+3
+right_knee
+0.9986838096
+right_ankle
+0.001315254982
+right_toe
+9.354385216e-007
+// Vertex 763
+// Num weights:
+3
+right_knee
+0.8982636254
+right_ankle
+0.1015711954
+right_toe
+0.0001651791546
+// Vertex 764
+// Num weights:
+3
+right_knee
+0.8459706366
+right_ankle
+0.1533652856
+right_toe
+0.0006640778112
+// Vertex 765
+// Num weights:
+3
+left_knee
+0.3487513601
+left_ankle
+0.6345061425
+left_ball
+0.01674249734
+// Vertex 766
+// Num weights:
+3
+left_knee
+0.04559872675
+left_ankle
+0.7347782267
+left_ball
+0.2196230466
+// Vertex 767
+// Num weights:
+3
+left_knee
+0.02171782589
+left_ankle
+0.5926702997
+left_ball
+0.3856118744
+// Vertex 768
+// Num weights:
+3
+left_knee
+0.3033942037
+left_ankle
+0.5951495885
+left_ball
+0.1014562078
+// Vertex 769
+// Num weights:
+3
+left_knee
+0.4748233136
+left_ankle
+0.4758263291
+left_ball
+0.04935035724
+// Vertex 770
+// Num weights:
+3
+left_knee
+0.4999889764
+left_ankle
+0.4999889764
+left_toe
+2.204714658e-005
+// Vertex 771
+// Num weights:
+3
+left_knee
+0.499959555
+left_ankle
+0.499959555
+left_toe
+8.088998161e-005
+// Vertex 772
+// Num weights:
+3
+left_knee
+0.4684379769
+left_ankle
+0.4716730855
+left_ball
+0.05988893765
+// Vertex 773
+// Num weights:
+3
+left_knee
+0.3112010677
+left_ankle
+0.6525704222
+left_ball
+0.03622851014
+// Vertex 774
+// Num weights:
+3
+left_knee
+0.2747303201
+left_ankle
+0.5758687481
+left_ball
+0.1494009318
+// Vertex 775
+// Num weights:
+3
+left_knee
+0.02597359255
+left_ankle
+0.5597818015
+left_ball
+0.414244606
+// Vertex 776
+// Num weights:
+3
+left_knee
+0.04336796394
+left_ankle
+0.6952741418
+left_ball
+0.2613578943
+// Vertex 777
+// Num weights:
+3
+left_ankle
+0.01056438907
+left_ball
+0.4947178055
+left_toe
+0.4947178055
+// Vertex 778
+// Num weights:
+3
+left_ankle
+0.00727950609
+left_ball
+0.496360247
+left_toe
+0.496360247
+// Vertex 779
+// Num weights:
+3
+left_ankle
+0.007541319429
+left_ball
+0.4962293403
+left_toe
+0.4962293403
+// Vertex 780
+// Num weights:
+3
+left_ankle
+0.0100457341
+left_ball
+0.4949771329
+left_toe
+0.4949771329
+// Vertex 781
+// Num weights:
+3
+left_knee
+0.9420516038
+left_ankle
+0.05791049406
+left_toe
+3.790217166e-005
+// Vertex 782
+// Num weights:
+3
+left_knee
+0.7037410949
+left_ankle
+0.2955510943
+left_toe
+0.0007078107971
+// Vertex 783
+// Num weights:
+3
+left_knee
+0.9520642387
+left_ankle
+0.0479161767
+left_toe
+1.958458132e-005
+// Vertex 784
+// Num weights:
+3
+left_knee
+0.9795608993
+left_ankle
+0.02042579867
+left_toe
+1.330203198e-005
+// Vertex 785
+// Num weights:
+3
+left_knee
+0.8965641948
+left_ankle
+0.1033608384
+left_toe
+7.496674204e-005
+// Vertex 786
+// Num weights:
+3
+left_knee
+0.6812449385
+left_ankle
+0.3180141643
+left_toe
+0.0007408972223
+// Vertex 787
+// Num weights:
+3
+left_knee
+0.860469453
+left_ankle
+0.138651218
+left_toe
+0.0008793290502
+// Vertex 788
+// Num weights:
+3
+left_knee
+0.8704432493
+left_ankle
+0.1214145547
+left_toe
+0.008142195977
+// Vertex 789
+// Num weights:
+3
+left_knee
+0.7802431957
+left_ankle
+0.2185763248
+left_toe
+0.001180479488
+// Vertex 790
+// Num weights:
+3
+left_knee
+0.8878787954
+left_ankle
+0.1113730562
+left_toe
+0.000748148393
+// Vertex 791
+// Num weights:
+3
+left_knee
+0.8844875983
+left_ankle
+0.1075089743
+left_toe
+0.008003427445
+// Vertex 792
+// Num weights:
+3
+left_knee
+0.8947396478
+left_ankle
+0.09878095029
+left_toe
+0.00647940194
+// Vertex 793
+// Num weights:
+3
+left_ankle
+0.006210172874
+left_ball
+0.975713565
+left_toe
+0.01807626214
+// Vertex 794
+// Num weights:
+3
+left_ankle
+0.03122259473
+left_ball
+0.9337183318
+left_toe
+0.03505907344
+// Vertex 795
+// Num weights:
+3
+left_ankle
+0.07363000093
+left_ball
+0.8496240755
+left_toe
+0.07674592358
+// Vertex 796
+// Num weights:
+3
+left_ankle
+0.1219763047
+left_ball
+0.8305847549
+left_toe
+0.04743894039
+// Vertex 797
+// Num weights:
+3
+left_ankle
+0.0003588721241
+left_ball
+0.6171987411
+left_toe
+0.3824423868
+// Vertex 798
+// Num weights:
+3
+left_ankle
+0.0001069712915
+left_ball
+0.7428794055
+left_toe
+0.2570136232
+// Vertex 799
+// Num weights:
+3
+left_ankle
+0.002428534493
+left_ball
+0.5109441605
+left_toe
+0.486627305
+// Vertex 800
+// Num weights:
+3
+left_ankle
+0.001881796442
+left_ball
+0.5200758661
+left_toe
+0.4780423375
+// Vertex 801
+// Num weights:
+3
+left_ankle
+0.0007339151388
+left_ball
+0.4996330424
+left_toe
+0.4996330424
+// Vertex 802
+// Num weights:
+3
+left_ankle
+0.0004552046045
+left_ball
+0.4997723977
+left_toe
+0.4997723977
+// Vertex 803
+// Num weights:
+3
+left_ankle
+0.004240899542
+left_ball
+0.4978795502
+left_toe
+0.4978795502
+// Vertex 804
+// Num weights:
+3
+left_ankle
+0.001875069674
+left_ball
+0.4990624652
+left_toe
+0.4990624652
+// Vertex 805
+// Num weights:
+3
+right_knee
+0.3833582322
+right_ankle
+0.5805875221
+right_ball
+0.03605424567
+// Vertex 806
+// Num weights:
+3
+right_knee
+0.02684588387
+right_ankle
+0.7418338555
+right_ball
+0.2313202607
+// Vertex 807
+// Num weights:
+3
+right_knee
+0.04935582199
+right_ankle
+0.5944032995
+right_ball
+0.3562408785
+// Vertex 808
+// Num weights:
+3
+right_knee
+0.3504343032
+right_ankle
+0.5253568385
+right_ball
+0.1242088583
+// Vertex 809
+// Num weights:
+3
+right_knee
+0.4652147986
+right_ankle
+0.465562118
+right_ball
+0.06922308341
+// Vertex 810
+// Num weights:
+3
+right_knee
+0.4999470717
+right_ankle
+0.4999470717
+right_toe
+0.0001058565481
+// Vertex 811
+// Num weights:
+3
+right_knee
+0.4999790874
+right_ankle
+0.4999790874
+right_toe
+4.182516402e-005
+// Vertex 812
+// Num weights:
+3
+right_knee
+0.4981142934
+right_ankle
+0.4981142934
+right_toe
+0.003771413117
+// Vertex 813
+// Num weights:
+3
+right_knee
+0.389141696
+right_ankle
+0.5848542644
+right_ball
+0.02600403959
+// Vertex 814
+// Num weights:
+3
+right_knee
+0.3607206308
+right_ankle
+0.5296177694
+right_ball
+0.1096615997
+// Vertex 815
+// Num weights:
+3
+right_knee
+0.05104803581
+right_ankle
+0.5422305507
+right_ball
+0.4067214135
+// Vertex 816
+// Num weights:
+3
+right_knee
+0.03562761971
+right_ankle
+0.7413299569
+right_ball
+0.2230424234
+// Vertex 817
+// Num weights:
+3
+right_ankle
+0.004303569693
+right_ball
+0.4978482152
+right_toe
+0.4978482152
+// Vertex 818
+// Num weights:
+3
+right_ankle
+0.005297501807
+right_ball
+0.4973512491
+right_toe
+0.4973512491
+// Vertex 819
+// Num weights:
+3
+right_ankle
+0.003822061227
+right_ball
+0.4980889694
+right_toe
+0.4980889694
+// Vertex 820
+// Num weights:
+3
+right_ankle
+0.004568539644
+right_ball
+0.4977157302
+right_toe
+0.4977157302
+// Vertex 821
+// Num weights:
+3
+right_knee
+0.8502738159
+right_ankle
+0.1496362664
+right_toe
+8.991762944e-005
+// Vertex 822
+// Num weights:
+3
+right_knee
+0.5408654392
+right_ankle
+0.4584336889
+right_toe
+0.0007008719187
+// Vertex 823
+// Num weights:
+3
+right_knee
+0.9756535026
+right_ankle
+0.02432992663
+right_toe
+1.657073651e-005
+// Vertex 824
+// Num weights:
+3
+right_knee
+0.9959937725
+right_ankle
+0.004004213422
+right_toe
+2.014100106e-006
+// Vertex 825
+// Num weights:
+3
+right_knee
+0.862125965
+right_ankle
+0.1378246943
+right_toe
+4.934077901e-005
+// Vertex 826
+// Num weights:
+3
+right_knee
+0.5102986212
+right_ankle
+0.4890590347
+right_toe
+0.000642344106
+// Vertex 827
+// Num weights:
+3
+right_knee
+0.8403740735
+right_ankle
+0.1585066006
+right_toe
+0.001119325881
+// Vertex 828
+// Num weights:
+3
+right_knee
+0.7480659265
+right_ankle
+0.2345189474
+right_toe
+0.01741512611
+// Vertex 829
+// Num weights:
+3
+right_knee
+0.8036957733
+right_ankle
+0.1954277053
+right_toe
+0.0008765214178
+// Vertex 830
+// Num weights:
+3
+right_knee
+0.8920571933
+right_ankle
+0.1073707005
+right_toe
+0.0005721062205
+// Vertex 831
+// Num weights:
+3
+right_knee
+0.7802518059
+right_ankle
+0.2073919236
+right_toe
+0.01235627045
+// Vertex 832
+// Num weights:
+3
+right_knee
+0.8141951208
+right_ankle
+0.173837666
+right_toe
+0.01196721312
+// Vertex 833
+// Num weights:
+3
+right_ankle
+0.03171607008
+right_ball
+0.9412016275
+right_toe
+0.02708230241
+// Vertex 834
+// Num weights:
+3
+right_ankle
+0.1510717948
+right_ball
+0.7687516777
+right_toe
+0.08017652743
+// Vertex 835
+// Num weights:
+3
+right_ankle
+0.01205813974
+right_ball
+0.9760965691
+right_toe
+0.01184529113
+// Vertex 836
+// Num weights:
+3
+right_ankle
+0.05232641925
+right_ball
+0.9288512738
+right_toe
+0.01882230696
+// Vertex 837
+// Num weights:
+3
+right_ankle
+0.002160017727
+right_ball
+0.6835668623
+right_toe
+0.31427312
+// Vertex 838
+// Num weights:
+3
+right_ankle
+0.003409820083
+right_ball
+0.6602008004
+right_toe
+0.3363893795
+// Vertex 839
+// Num weights:
+3
+right_ankle
+0.0002457772153
+right_ball
+0.6900872925
+right_toe
+0.3096669303
+// Vertex 840
+// Num weights:
+3
+right_ankle
+0.0004520205926
+right_ball
+0.6641580721
+right_toe
+0.3353899073
+// Vertex 841
+// Num weights:
+3
+right_ankle
+0.0006826865143
+right_ball
+0.4997140052
+right_toe
+0.4996033083
+// Vertex 842
+// Num weights:
+3
+right_ankle
+0.0005634411891
+right_ball
+0.4997182794
+right_toe
+0.4997182794
+// Vertex 843
+// Num weights:
+3
+right_ankle
+0.0001838104075
+right_ball
+0.4999080948
+right_toe
+0.4999080948
+// Vertex 844
+// Num weights:
+3
+right_ankle
+0.0002507548608
+right_ball
+0.4998746226
+right_toe
+0.4998746226
