@@ -9,6 +9,7 @@ float LineSeg::SqDist(const Vec3f& q)
   const float EPSILON = 0.000001f;
   if (fabs(mDotM) < EPSILON)
   {
+    // Line seg is very short 
     return (q - p0).SqLen();
   }
   float t = DotProduct(m, (q - p0)) / mDotM;
