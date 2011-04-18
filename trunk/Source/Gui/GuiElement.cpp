@@ -51,7 +51,8 @@ GuiElement::~GuiElement()
 {
   // TODO Subclasses should remove themselves - just make sure we are deleted here
   //TheEventPoller::Instance()->RemoveListener(this); 
-  Assert(!TheEventPoller::Instance()->HasListener(this));
+  //Assert(!TheEventPoller::Instance()->HasListener(this));
+  // removed in EventListener dtor, so not removed yet.
 }
 
 bool GuiElement::Load(File* f)
