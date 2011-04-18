@@ -218,56 +218,6 @@ void Font::Print(float x, float y, const char* text)
   AmjuGL::PopMatrix();
 }
 
-void Font::PrintWorld(
-  const Vec3f& v, 
-  float size,
-  const char* text, 
-  bool up,
-  bool depthTest)
-{
-  AMJU_CALL_STACK;
-
-  if (!text)
-  {
-    return;
-  }
-
-  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_BLEND);
-
-  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-
-  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  if (depthTest)
-  {
-    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-  }
-  else
-  { 
-    AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
-  }
-
-  AmjuGL::PushMatrix();
-  AmjuGL::Translate(v.x, v.y, v.z);
-
-  m_textureSequence.Bind();
-
-  int i = 0;
-  while (unsigned char c = text[i])
-  {
-    i++;
-
-    m_textureSequence.DrawBillboard(c - (char)m_startChar, size, up);
-
-    float f = GetCharacterWidth(c);
-    f *= size * 8.0f; // TODO TEMP TEST
-    // ??? TODO
-    AmjuGL::Translate(f, 0.0f, 0.0f);
-  }
-
-  AmjuGL::PopMatrix();
-  AmjuGL::PopAttrib();
-}
-
 struct FontWidthFinder
 {
   FontWidthFinder(Font* pFont) : m_pFont(pFont) {}
