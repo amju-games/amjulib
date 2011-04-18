@@ -43,6 +43,7 @@ public:
   virtual ~GuiMenu();
 
   void SetParent(GuiElement* parent) { m_parent = parent; }
+  void SetIsVertical(bool isVertical) { m_isVertical = isVertical; } 
 
   virtual void Draw();  
 
@@ -62,6 +63,7 @@ protected:
 
   PGuiMenu m_childMenu; // ?
   GuiElement* m_parent; // parent element, may be 0
+  bool m_isVertical;
 };
 }
 

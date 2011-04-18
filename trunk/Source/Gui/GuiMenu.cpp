@@ -35,6 +35,8 @@ struct NestedMenuCommand : public GuiCommand
   {
     Assert(dynamic_cast<GuiNestMenuItem*>(m_pGui));
     ((GuiNestMenuItem*)m_pGui)->GetChild()->SetVisible(true);
+    // Pos of nested menu may be to right, or below this item
+    // (Ignore to left for now, TODO)
     ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(m_pGui->GetSize().x, 0));
     return false;
   }
@@ -65,12 +67,14 @@ GuiMenu::GuiMenu()
 {
   m_parent = 0;
   m_selected = -1;
+  m_isVertical = true;
   TheEventPoller::Instance()->AddListener(this);
 }
 
 GuiMenu::~GuiMenu()
 {
-  TheEventPoller::Instance()->RemoveListener(this); 
+  // Done in ~EventListener
+  //TheEventPoller::Instance()->RemoveListener(this); 
 }
 
 void GuiMenu::Draw()
@@ -92,14 +96,29 @@ void GuiMenu::Draw()
     // Highlight selected item
     ((GuiText*)item)->SetInverse(isSel); // TODO what if Items are not Text ?
 
-    // Set width of all items to width of menu
     Vec2f size = item->GetSize();
-    size.x = GetSize().x;
+    if (m_isVertical)
+    {
+      // Set width of all items to width of menu
+      size.x = GetSize().x;
+    }
+    else
+    {
+      // Set height of all items to height of menu
+      size.y = GetSize().y;
+    }
     item->SetSize(size); 
 
     // Set position of item
     item->SetPos(pos);
-    pos.y -= size.y; // -ve = down the screen
+    if (m_isVertical)
+    {
+      pos.y -= size.y; // -ve = down the screen
+    }
+    else
+    {
+      pos.x += size.x;
+    }
 
     item->Draw();
   }
@@ -160,12 +179,23 @@ void GuiMenu::AddItem(GuiMenuItem* pItem)
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();
-  if (size.x > m_size.x)
-  {
-    m_size.x = size.x;
-  }
 
-  m_size.y += size.y;
+  if (m_isVertical)
+  {
+    if (size.x > m_size.x)
+    {
+      m_size.x = size.x;
+    }
+    m_size.y += size.y;
+  }
+  else
+  {
+    if (size.y > m_size.y)
+    {
+      m_size.y = size.y;
+    }
+    m_size.x += size.x;
+  }
 }
 
 void GuiMenu::Clear()
