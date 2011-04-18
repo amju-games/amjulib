@@ -158,6 +158,8 @@ void AmjuGL::DrawIndexedTriList(
   const Verts& verts,
   const IndexedTriList& indexes)
 {
+  Assert(0); // use tris
+
   AMJU_CALL_STACK;
 
   // TODO Dummy implementation
@@ -194,13 +196,6 @@ void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
   AMJU_CALL_STACK;
 
   impl->DrawLine(v1, v2);
-}
-
-void AmjuGL::DrawQuad(Vert* verts)
-{
-  AMJU_CALL_STACK;
-
-  impl->DrawQuad(verts);
 }
 
 void AmjuGL::GetMatrix(MatrixMode m, float result[16])
