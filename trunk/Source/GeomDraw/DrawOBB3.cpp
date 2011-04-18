@@ -5,6 +5,10 @@ namespace Amju
 {
 void DrawOBB3(const OBB3& b)
 {
+  AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D | AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+
   Vec3f c[8];
   b.GetCorners(c);
 
@@ -25,6 +29,7 @@ void DrawOBB3(const OBB3& b)
     AmjuGL::DrawLine(AmjuGL::Vec3(c[i].x,  c[i].y,  c[i].z), 
                      AmjuGL::Vec3(c[i4].x, c[i4].y, c[i4].z));
   }
+  AmjuGL::PopAttrib();
 }
 
 void DrawSolidOBB3(const OBB3& b)
