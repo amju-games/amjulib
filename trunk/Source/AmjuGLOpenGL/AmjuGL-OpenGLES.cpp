@@ -26,7 +26,7 @@ namespace Amju
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
 	
-	
+/*	
 static void __gluMakeIdentityd(GLdouble m[16])
 {
     m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
@@ -34,6 +34,7 @@ static void __gluMakeIdentityd(GLdouble m[16])
     m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
     m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
 }
+*/
 
 static void __gluMakeIdentityf(GLfloat m[16])
 {
