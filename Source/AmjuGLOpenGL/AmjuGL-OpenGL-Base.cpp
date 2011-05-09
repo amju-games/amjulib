@@ -2,10 +2,6 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
-
 #include "AmjuFirst.h"
 #include <iostream>
 #include "OpenGL.h"
@@ -61,17 +57,16 @@ void AmjuGLOpenGLBase::Init()
 {
   AMJU_CALL_STACK;
 
-  // OpenGL version
-  const unsigned char* version = glGetString(GL_VERSION);
-  const unsigned char* vendor = glGetString(GL_VENDOR);
-  const unsigned char* renderer = glGetString(GL_RENDERER);
-  const unsigned char* extensions = glGetString(GL_EXTENSIONS);
   
 #ifdef _DEBUG
+  const unsigned char* version = glGetString(GL_VERSION);
   std::cout << "OpenGL Version: " << version << "\n";
 #endif
   
 #ifdef OPENGL_SHOW_INFO
+  const unsigned char* vendor = glGetString(GL_VENDOR);
+  const unsigned char* renderer = glGetString(GL_RENDERER);
+  const unsigned char* extensions = glGetString(GL_EXTENSIONS);
   std::cout << "OpenGL Vendor: " << vendor << "\n";
   std::cout << "OpenGL Renderer: " << renderer << "\n";
   std::cout << "OpenGL Extensions: " << extensions << "\n";
@@ -213,6 +208,8 @@ void AmjuGLOpenGLBase::GetMatrix(AmjuGL::MatrixMode m, float result[16])
     // Allowed ?
     glGetFloatv(GL_TEXTURE_MATRIX, result);
     return;
+  default:
+    Assert(0);
   }
 }
 
