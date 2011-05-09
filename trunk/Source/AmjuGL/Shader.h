@@ -3,7 +3,7 @@
 
 #include "AmjuGL.h"
 #include "Colour.h"
-#include <RCPtr.h>
+#include "RCPtr.h"
 
 namespace Amju
 {
