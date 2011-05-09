@@ -32,6 +32,7 @@ TARGET		:=	$(BUILD)/amjulib.a
 AMJU      := ../../../amjulib/Source
 AMJU_LIB_DIRS := \
   $(AMJU)/AmjuGL \
+  $(AMJU)/AmjuGLOpenGL \
   $(AMJU)/Clip \
   $(AMJU)/Collision \
   $(AMJU)/Events \
