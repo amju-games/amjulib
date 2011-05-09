@@ -129,7 +129,7 @@ GlueFile::~GlueFile()
   AMJU_CALL_STACK;
 
 #if defined(_DEBUG)
-  PrintUnused();
+  //PrintUnused();
 #endif
 }
 
