@@ -1,7 +1,12 @@
 #include "Timer.h"
-#ifdef WIN32
+
+#if defined(WIN32) && defined(AMJU_USE_SDL)
 #include <SDL.h>
-#endif // WIN32
+#endif // WIN32 + SDL
+
+#if defined(MACOSX) && defined(AMJU_USE_GLUT)
+#include <Glut/Glut.h>
+#endif
 
 #ifdef GEKKO
 #include <gccore.h>
@@ -66,13 +71,19 @@ static float elapsed = 0;
 
 void Timer::Update()
 {
-#ifdef WIN32
+#if defined(MACOSX) && defined(AMJU_USE_GLUT)
+  int millisecs = glutGet(GLUT_ELAPSED_TIME);
+  double d = double(millisecs) / 1000.0;
+  dt = (float)d;
+#endif
+
+#if defined(WIN32) && defined(AMJU_USE_SDL)
   static unsigned int oldt = 0;
   unsigned int t = SDL_GetTicks();
   unsigned int diff = t - oldt;
   oldt = t;
   dt = (float)diff / 1000.0f;
-#endif // WIN32
+#endif // WIN32 + SDL
 
 #ifdef GEKKO
 // Usage before a main loop...
