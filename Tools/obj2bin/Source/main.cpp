@@ -1,5 +1,6 @@
-#include <ObjMesh.h>
-#include <AmjuGL-Null.h>
+#include "ObjMesh.h"
+#include "AmjuGL-Null.h"
+#include <iostream>
 
 #ifdef WIN32
 #ifdef _DEBUG
@@ -19,7 +20,7 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  AmjuGL::SetImpl(new AmjuGLNull);
+  AmjuGL::SetImpl(new Amju::AmjuGLNull);
 
   // Resource manager was changed so we don't have to create a group for
   //  every obj we want to load.
