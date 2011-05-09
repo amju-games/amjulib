@@ -1,13 +1,16 @@
+#if defined(WIN32) && defined(AMJU_USE_SDL)
+
 #include "AmjuGL-OpenGL.h"
 // Use SDL for now
 #include <SDL.h>
 #include "ReportError.h"
+#include "AmjuAssert.h"
 
 namespace Amju
 {
-#ifdef WIN32
 bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* w)
 {
+  Assert(w);
   const SDL_VideoInfo* video;
  
   if ( SDL_Init(SDL_INIT_EVERYTHING) < 0 ) 
@@ -50,5 +53,7 @@ bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* w)
 
   return true;
 }
-#endif // WIN32
 }
+
+#endif // WIN32
+
