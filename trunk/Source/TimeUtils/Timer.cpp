@@ -4,9 +4,9 @@
 #include <SDL.h>
 #endif // WIN32 + SDL
 
-#if defined(MACOSX) && defined(AMJU_USE_GLUT)
-#include <Glut/Glut.h>
-#endif
+#if defined(MACOSX) 
+#include <sys/time.h>
+#endif // MACOSX
 
 #ifdef GEKKO
 #include <gccore.h>
@@ -71,10 +71,24 @@ static float elapsed = 0;
 
 void Timer::Update()
 {
-#if defined(MACOSX) && defined(AMJU_USE_GLUT)
-  int millisecs = glutGet(GLUT_ELAPSED_TIME);
-  double d = double(millisecs) / 1000.0;
-  dt = (float)d;
+//#if defined(MACOSX) && defined(AMJU_USE_GLUT_TIMER)
+//  int millisecs = glutGet(GLUT_ELAPSED_TIME);
+//  double d = double(millisecs) / 1000.0;
+//  dt = (float)d;
+//#endif
+
+#ifdef MACOSX
+  timeval tv;
+  gettimeofday(&tv, 0);
+  static timeval old = tv;
+  double diff = tv.tv_sec - old.tv_sec + (tv.tv_usec - old.tv_usec) * 1e-6;
+  dt = (float)diff;
+  old = tv;
+
+#endif // MACOSX
+
+#ifdef IPHONE
+  dt = 1.0f / 60.0f; // TODO TEMP TEST
 #endif
 
 #if defined(WIN32) && defined(AMJU_USE_SDL)
@@ -86,19 +100,13 @@ void Timer::Update()
 #endif // WIN32 + SDL
 
 #ifdef GEKKO
-// Usage before a main loop...
-	static MillisecondTimer oldt;
-	static MillisecondTimer t;
-	t.Update();
-	u32 diff = t - oldt;
+  static MillisecondTimer oldt;
+  static MillisecondTimer t;
+  t.Update();
+  u32 diff = t - oldt;
   oldt = t;
   dt = (float)diff / 1000.0f;
-	// ticks now holds the number of milliseconds since the start of your app/loop.
 #endif // GEKKO
-
-#ifdef IPHONE
-  dt = 1.0f / 60.0f; // TODO TEMP TEST
-#endif
 
   static const float MAX_DT = 0.02f;
   if (dt > MAX_DT)
