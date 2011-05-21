@@ -52,7 +52,7 @@ void Game::Draw()
 
   GetState()->Draw2d();
 
-	AmjuGL::EndScene();		
+  AmjuGL::EndScene();		
 }
 
 static bool s_quit = false;
