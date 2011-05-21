@@ -4,7 +4,7 @@
 #include <SDL.h>
 #endif // WIN32 + SDL
 
-#if defined(MACOSX) 
+#if defined(MACOSX) || defined (IPHONE)
 #include <sys/time.h>
 #endif // MACOSX
 
@@ -77,7 +77,7 @@ void Timer::Update()
 //  dt = (float)d;
 //#endif
 
-#ifdef MACOSX
+#if defined(MACOSX) || defined(IPHONE) 
   timeval tv;
   gettimeofday(&tv, 0);
   static timeval old = tv;
@@ -87,9 +87,9 @@ void Timer::Update()
 
 #endif // MACOSX
 
-#ifdef IPHONE
-  dt = 1.0f / 60.0f; // TODO TEMP TEST
-#endif
+//#ifdef IPHONE
+//  dt = 1.0f / 60.0f; // TODO TEMP TEST
+//#endif
 
 #if defined(WIN32) && defined(AMJU_USE_SDL)
   static unsigned int oldt = 0;
