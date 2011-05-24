@@ -52,6 +52,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Resource \
   $(AMJU)/Scene \
   $(AMJU)/Sound \
+  $(AMJU)/SoundBass \
   $(AMJU)/Strings \
   $(AMJU)/TimeUtils \
   $(AMJU)/Utils \
