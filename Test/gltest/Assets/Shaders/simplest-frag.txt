@@ -1,0 +1,14 @@
+// simplest-frag.txt
+
+// OpenGL fragment shader
+
+void main()
+{
+  gl_FragColor.r = 1.0f;
+  gl_FragColor.g = 0.1f;
+  gl_FragColor.b = 0.5f;
+  gl_FragColor.a = 1.0f;
+  
+  // Or gl_FragColor = vec4(1, 0, 0, 1); etc
+}
+
