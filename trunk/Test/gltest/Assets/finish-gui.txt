@@ -1,0 +1,20 @@
+// GUI for final state
+// version
+1
+
+// element type
+gui-comp
+// Num children
+1
+
+gui-text
+// Name of element
+elementName
+// Pos
+-1, 0
+// Size
+1, 1
+// Localised text
+Hello, I am localised.\nThat's the end!
+
+
