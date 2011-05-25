@@ -8,9 +8,9 @@ Amju Games source code (c) Copyright Jason Colman 2006
 #include "BassSoundPlayer.h"
 #include <SoundManager.h>
 #include "StringUtils.h"
-#ifdef MACOSX
-#include "Bass2.3/Macosx/bass.h"
-#include "Bass2.3/Macosx/bassmidi.h"
+#if defined(MACOSX)|| defined(IPHONE) 
+#include "Bass2.4/Macosx/bass.h"
+#include "Bass2.4/Macosx/bassmidi.h"
 #endif
 #ifdef WIN32
 #include "Bass2.3/Win/bass.h"
@@ -59,6 +59,10 @@ bool BassSoundPlayer::PlayWav(const std::string& wavFile, float volume)
 {
   if (TheSoundManager::Instance()->GetWavMaxVolume() <= 0)
   {
+#ifdef BASS_DEBUG
+std::cout << "WAV volume is zero.\n";
+#endif
+
     return true; // ok, not an error
   }
 
@@ -68,6 +72,10 @@ bool BassSoundPlayer::PlayWav(const std::string& wavFile, float volume)
   HSAMPLE hs = 0;
   if (GetGlueFile())
   {
+#ifdef BASS_DEBUG
+std::cout << "Playing wav in glue file\n";
+#endif
+
     // Find the start of the wav in the glue file; and find the length
     uint32 wavPos = 0;
     if (!GetGlueFile()->GetSeekBase(wavFile, &wavPos))
@@ -77,6 +85,10 @@ bool BassSoundPlayer::PlayWav(const std::string& wavFile, float volume)
       ReportError(s);
     }
     uint32 wavLength = GetGlueFile()->GetSize(wavFile);
+
+#ifdef BASS_DEBUG
+std::cout << "WAV length is " << wavLength << "\n";
+#endif
 
     // Use GlueFileBinaryData to get the data without copying it
     GlueFileBinaryData data = GetGlueFile()->GetBinary(wavPos, wavLength);
@@ -118,8 +130,12 @@ bool BassSoundPlayer::PlayWav(const std::string& wavFile, float volume)
   BASS_ChannelPlay(hc, FALSE);
 
   // Set vol
-  int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
-  BASS_ChannelSetAttributes(hc, -1, vol, -1);
+  //int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
+// TODO  BASS_ChannelSetAttribute(hc, -1, vol, -1);
+
+#ifdef BASS_DEBUG
+std::cout << "Apparently played wav ok!\n";
+#endif
 
   return true;
 }
@@ -183,8 +199,8 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
   }
 
   // Set vol
-  int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
-  BASS_ChannelSetAttributes(m_chan, -1, vol, -1);
+  //int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
+// TODO  BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
 
   BASS_ChannelPlay(m_chan,FALSE);
 
@@ -197,7 +213,7 @@ std::cout << "BASS: new song: " << songFile.c_str() << " chan: " << m_chan << "\
 
 void BassSoundPlayer::StopSong()
 {
-  if (m_chan == -1)
+  if (m_chan == (unsigned int)-1)
   {
     return;
   }
@@ -216,13 +232,13 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 {
   SoundPlayerImpl::SetSongMaxVolume(f); 
 
-  if (m_chan == -1)
+  if (m_chan == (unsigned int)-1)
   {
     return;
   }
 
-  int newVol = (int)(f * 100.0f);
-  BASS_ChannelSetAttributes(m_chan, -1, newVol, -1);
+  //int newVol = (int)(f * 100.0f);
+// TODO  BASS_ChannelSetAttribute(m_chan, -1, newVol, -1);
 }
 
 
@@ -230,7 +246,8 @@ static HSTREAM str = 0;
 void BassSoundPlayer::MidiSetSoundFont(const char* soundfont)
 {
   BASS_MIDI_FONT font;
-  if (font.font=BASS_MIDI_FontInit(soundfont,0)) 
+  font.font=BASS_MIDI_FontInit(soundfont,0);
+  if (font.font) 
   { 
     font.preset=-1; // all presets
     font.bank=0; // default bank(s)
