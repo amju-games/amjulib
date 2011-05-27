@@ -30,3 +30,5 @@ include $(AMJULIB_MAC_SCRIPT_PATH)/base_rules
 # j.c.
 BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
 
+BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
+
