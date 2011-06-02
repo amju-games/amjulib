@@ -51,7 +51,7 @@ void AmjuGLOpenGL::Init()
     // failed to initialize GLEW!
     std::cout << "Failed to initialise GLEW!\n";
   }
-#ifdef _DEBUG
+#ifdef SHADER_DEBUG
   std::cout << "Using GLEW Version: " << glewGetString(GLEW_VERSION) << "\n";
 #endif
 
@@ -63,14 +63,14 @@ void AmjuGLOpenGL::Init()
     if (glGetError() == GL_INVALID_ENUM)
     {
       major = 1; minor = 0; revision=51;
-#ifdef _DEBUG
+#ifdef SHADER_DEBUG
 std::cout << "GLSL v.1.0.51 is supported.\n";
 #endif
     }
     else
     {
       // parse string sVersion to get major, minor, revision
-#ifdef _DEBUG
+#ifdef SHADER_DEBUG
 std::cout << "GLSL " << sVersion << " is supported.\n";
 #endif
     }
@@ -78,7 +78,7 @@ std::cout << "GLSL " << sVersion << " is supported.\n";
   }
   else
   {
-#ifdef _DEBUG
+#ifdef SHADER_DEBUG
 std::cout << "GLSL is NOT SUPPORTED :-(\n";
 #endif
   }
