@@ -35,6 +35,10 @@ GLShader::~GLShader()
 
 bool GLShader::Load(const std::string& shadername)
 {
+#ifdef SHADER_DEBUG
+std::cout << "Loading shader: " << shadername << "\n";
+#endif
+
   if (!AmjuGLOpenGL::s_shaderSupport)
   {
     m_errorStr = "GLSL not supported";
@@ -50,7 +54,8 @@ bool GLShader::Load(const std::string& shadername)
   }
   std::string fragText;
   std::string s;
-  while (fragFile.GetDataLine(&s))
+  const bool NO_TRIM = false;
+  while (fragFile.GetDataLine(&s, NO_TRIM))
   {
     fragText += s;
     fragText += "\n";
@@ -63,7 +68,7 @@ bool GLShader::Load(const std::string& shadername)
     return false;
   }
   std::string vertText;
-  while (vertFile.GetDataLine(&s))
+  while (vertFile.GetDataLine(&s, NO_TRIM))
   {
     vertText += s;
     vertText += "\n";
@@ -83,7 +88,7 @@ bool GLShader::Create(const std::string& vertexSource, const std::string& fragme
   }
 
 #ifdef SHADER_DEBUG
-std::cout << "Loading shader..\nVertex Shader source:\n" << vertexSource.c_str()
+std::cout << "Vertex Shader source:\n" << vertexSource.c_str()
   << "\nFragment Shader source:\n" << fragmentSource.c_str() << "\n";
 #endif
 
