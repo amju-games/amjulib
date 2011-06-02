@@ -1,9 +1,9 @@
 // wavedemo-vert.txt
 
-static float a[2] = { 0.8, 0.2 };
-static float k[2] = { 1.0, 8.0 };
-static float w[2] = { 1.0, 8.0 };
-static float p[2] = { 0.0, 1.0 };
+float a[2] = { 0.8, 0.2 };
+float k[2] = { 1.0, 8.0 };
+float w[2] = { 1.0, 8.0 };
+float p[2] = { 0.0, 1.0 };
 
 uniform float gTime; // don't initialise!
 varying float gY;
