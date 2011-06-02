@@ -3,15 +3,16 @@
 
 #include <GameState.h>
 #include <Texture.h>
+#include <Singleton.h>
 
 namespace Amju
 {
 class GSMain : public GameState
 {
-public:
-  static const char* NAME;
-
   GSMain();
+  friend class Singleton<GSMain>;
+
+public:
 
   // GameState overrides
   virtual void Update();
@@ -24,6 +25,8 @@ public:
 protected:
   Texture* m_tex;
 };
+
+typedef Singleton<GSMain> TheGSMain;
 }
 
 #endif

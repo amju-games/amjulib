@@ -1,6 +1,7 @@
 #ifndef GS_BASE_H
 #define GS_BASE_H
 
+#include <string>
 #include <GameState.h>
 
 namespace Amju
@@ -14,7 +15,7 @@ public:
 protected:
   float m_time;
   float m_maxTime;
-  std::string m_nextStateName;
+  GameState* m_nextState;
 };
 }
 

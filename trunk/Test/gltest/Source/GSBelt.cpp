@@ -12,9 +12,6 @@
 
 namespace Amju
 {
-const char* GSBelt::NAME = "belt";
-static bool b = TheGame::Instance()->AddState(GSBelt::NAME, new GSBelt);
-
 GSBelt::GSBelt()
 {
   m_isMouseDown = false;
@@ -107,12 +104,27 @@ void GSBelt::Update()
 
 void GSBelt::Draw()
 {
+  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+  AmjuGL::SetIdentity();
+  const float FOVY = 60.0f;
+  const float NEAR = 1.0f;
+  const float FAR = 3000.0f;
+  float aspect = 1.3f;
+  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  AmjuGL::SetIdentity();
+
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
   AmjuGL::LookAt(0, 20, 20,  0, 0, 0,  0, 1, 0);
-//  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
 
-  /*
+//  AmjuGL::SetColour(0, 0, 0);
+
+  /* 
   AmjuGL::DrawLine(AmjuGL::Vec3(0, 0, 0), AmjuGL::Vec3(100, 0, 0));
   AmjuGL::DrawLine(AmjuGL::Vec3(0, 0, 0), AmjuGL::Vec3(0, 100, 0));
   AmjuGL::DrawLine(AmjuGL::Vec3(0, 0, 0), AmjuGL::Vec3(0, 0, 100));
@@ -133,6 +145,7 @@ void GSBelt::Draw()
 
 void GSBelt::Draw2d()
 {
+/*
   static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
   Assert(font);
 
@@ -140,6 +153,7 @@ void GSBelt::Draw2d()
   std::string s = "X: " + ToString(p.x, 2) + " Y: " + ToString(p.y, 2) + " Z: " + ToString(p.z, 2);
 
   font->Print(-1, -0.8f, s.c_str());
+*/
 }
 
 void GSBelt::Set2DSystem2()
@@ -287,6 +301,6 @@ void GSBelt::OnActive()
 
   //SetSimpleSystem();
   //Set1DSystem();
-  Set2DSystem2();
+  Set2DSystem();
 }
 }

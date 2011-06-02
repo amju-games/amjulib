@@ -16,10 +16,6 @@
 
 namespace Amju
 {
-const char* GSMain::NAME = "gsmain";
-
-static bool b = TheGame::Instance()->AddState(GSMain::NAME, new GSMain);
-
 static Shader* shader = 0;
 
 Grid grid;
@@ -35,7 +31,20 @@ void GSMain::Update()
 
 void GSMain::Draw()
 {
+
+  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
+  const float FOVY = 60.0f;
+  const float NEAR = 1.0f;
+  const float FAR = 3000.0f;
+  float aspect = 1.3f;
+  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  AmjuGL::SetIdentity();
+
   AmjuGL::LookAt(0, 5, 10,  0, 0, 0,  0, 1, 0);
 
   AmjuGL::SetColour(1, 1, 1, 1);
@@ -189,8 +198,8 @@ void GSMain::OnActive()
 
 //  TheGame::Instance()->SetCurrentState(GSFinish::NAME); 
 
-//  shader = AmjuGL::LoadShader("Shaders/simplest");
-  shader = AmjuGL::LoadShader("Shaders/wavedemo");
+  shader = AmjuGL::LoadShader("Shaders/simplest");
+//  shader = AmjuGL::LoadShader("Shaders/wavedemo");
 
   // TODO Lighting - specular doesn't seem to be controllable
   // Textures - bad bits, mipmap issue ?

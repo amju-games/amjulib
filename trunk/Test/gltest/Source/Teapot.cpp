@@ -87,7 +87,7 @@ namespace Amju
 /* 530 vertices */
 
 const int numVertices = 530;
-const float vertices[530][3] =  {
+const float vertices[530*3] =  {
 2.1f, 3.6f, 0.0f, 
 2.071f, 3.711f, 0.0f, 
 2.105f, 3.748f, 0.0f, 
@@ -623,7 +623,7 @@ const float vertices[530][3] =  {
 
 /* 530 normals */
 const int numNormals = 530;
-const float normals[530][3] = {
+const float normals[530*3] = {
 0.0486f, -0.9986f, 0.0168f, 
 0.9976f, -0.0678f, -0.0008f, 
 -0.233f, 0.8502f, -0.4719f, 
@@ -1346,14 +1346,14 @@ Teapot::Teapot(float scale)
           }
           // Scale/translate verts here
           t.m_verts[c] = AmjuGL::Vert(
-            vertices[vidx][0] * 0.5f * scale,
-            vertices[vidx][1] * 0.5f * scale - 1.0f * scale,
-            vertices[vidx][2] * 0.5f * scale, 
+            vertices[vidx*3+0] * 0.5f * scale,
+            vertices[vidx*3+1] * 0.5f * scale - 1.0f * scale,
+            vertices[vidx*3+2] * 0.5f * scale, 
             0, 
             0,  
-            normals[nidx][0], 
-            normals[nidx][1], 
-            normals[nidx][2]);
+            normals[nidx*3+0], 
+            normals[nidx*3+1], 
+            normals[nidx*3+2]);
 
           if (count > 1)
           {
