@@ -26,8 +26,8 @@ int main(int argc, char** argv)
   //  every obj we want to load.
 //	TheResourceManager::Instance()->LoadResourceGroup("crate2-group");
 
-  std::string inFilename = argv[1]; //"crate2.obj"; // TODO TEMP TEST
-  std::string outFilename = argv[2]; //"out-crate2.obj"; // TODO TEMP TEST
+  std::string inFilename = argv[1]; 
+  std::string outFilename = argv[2]; 
 
   if (inFilename == outFilename)
   {
