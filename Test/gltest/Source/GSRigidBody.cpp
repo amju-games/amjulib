@@ -7,11 +7,6 @@
 
 namespace Amju
 {
-const char* GSRigidBody::NAME = "gs-rigidbody";
-
-static bool b = TheGame::Instance()->AddState(
-  GSRigidBody::NAME, new GSRigidBody);
-
 GSRigidBody::GSRigidBody()
 {
 }

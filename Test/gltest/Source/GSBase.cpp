@@ -15,7 +15,7 @@ void GSBase::Update()
   if (m_time >= m_maxTime)
   {
     m_time = 0;
-    TheGame::Instance()->SetCurrentState(m_nextStateName.c_str());
+    TheGame::Instance()->SetCurrentState(m_nextState);
   }
 }
 

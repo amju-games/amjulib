@@ -21,7 +21,7 @@ public:
   void SetPos(const Vec3f& pos);
   const Vec3f& GetPos() const;
   // Move this much if not immovable
-  void Particle::Move(const Vec3f& v);
+  void Move(const Vec3f& v);
 
   void SetInvMass(float invMass);
 

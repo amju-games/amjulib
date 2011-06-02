@@ -3,10 +3,6 @@
 
 namespace Amju
 {
-const char* GSFinish::NAME = "finish";
-
-static bool b = TheGame::Instance()->AddState(GSFinish::NAME, new GSFinish);
-
 void GSFinish::Update()
 {
 }

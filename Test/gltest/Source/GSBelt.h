@@ -2,16 +2,17 @@
 #define GS_BELT_H
 
 #include <GameState.h>
+#include <Singleton.h>
 #include "SpringSystem.h"
 
 namespace Amju
 {
 class GSBelt : public GameState
 {
-public:
-  static const char* NAME;
-
   GSBelt();
+  friend class Singleton<GSBelt>;
+
+public:
   virtual void Update();
   virtual void Draw();
   virtual void Draw2d();
@@ -30,6 +31,8 @@ private:
   SpringSystem m_ss;
   bool m_isMouseDown;
 };
+
+typedef Singleton<GSBelt> TheGSBelt;
 }
 
 #endif

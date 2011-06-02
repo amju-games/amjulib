@@ -7,9 +7,6 @@
 
 namespace Amju
 {
-const char* GSObb2Test::NAME = "obb2test";
-static bool b = TheGame::Instance()->AddState(GSObb2Test::NAME, new GSObb2Test);
-
 void GSObb2Test::Update()
 {
   Vec2f v = m_obbs[1].GetCentre();

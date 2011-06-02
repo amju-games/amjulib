@@ -1,3 +1,5 @@
+#ifndef MACOSX
+
 #include <AmjuFirst.h>
 #include <iostream>
 
@@ -25,6 +27,7 @@
 #include <AlphaBmpLoader.h>
 #include <ResourceManager.h>
 #include <SoundManager.h>
+#include <AmjuGLWindowInfo.h>
 #include <AmjuFinal.h>
 
 #ifdef WIN32
@@ -73,11 +76,12 @@ int main(int argc, char **argv)
 
   TheResourceManager::Instance()->LoadResourceGroup("2dtext-group");
 
-  TheGame::Instance()->SetCurrentState(GSBelt::NAME); 
+  TheGame::Instance()->SetCurrentState(TheGSBelt::Instance()); 
 
   TheGame::Instance()->Run();
 
   return 0;
 }
  
+#endif
  
