@@ -101,7 +101,7 @@ public:
   
   // GetDataLine gets the next line, ignoring comment lines.
   // (In binary mode, comments do not exist.)
-  bool GetDataLine(std::string* pResult);
+  bool GetDataLine(std::string* pResult, bool trim = true);
  
   // Get the next non-comment line and treat as a localisable string.
   // Strings beginning @@@ are to be localised.
