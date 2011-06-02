@@ -395,7 +395,7 @@ bool File::GetLocalisedString(std::string* pResult)
   return true;
 }
 
-bool File::GetDataLine(string* pResult)
+bool File::GetDataLine(string* pResult, bool trim)
 {
   AMJU_CALL_STACK;
 
@@ -407,8 +407,10 @@ bool File::GetDataLine(string* pResult)
       return false;
     }
     // Strip whitespace from beginning and end of the string.
-    Trim(&str);
-
+    if (trim)
+    {
+      Trim(&str);
+    }
   } while (IsComment(str) && More());
     
   *pResult = str;
