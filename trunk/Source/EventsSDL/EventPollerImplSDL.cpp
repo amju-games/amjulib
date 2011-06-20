@@ -161,39 +161,25 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
       break;
     }
 
+    int eaten = AMJU_MAX_PRIORITY + 1;
     for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
     {
-      EventListener* e = *it;
+      if (it->first > eaten)
+      {
+        break;
+      }
+
+      EventListener* e = it->second;
       Assert(e);
 
-      if (isQuit)
+      if (isQuit && e->OnQuitEvent() ||
+          isKeyEvent && e->OnKeyEvent(ke) ||
+          isCursorEvent && e->OnCursorEvent(ce) ||
+          isJoyEvent && e->OnJoyAxisEvent(je[joyNum]) ||
+          isButtonEvent && e->OnButtonEvent(be) ||
+          isMouseButtonEvent && e->OnMouseButtonEvent(mbe))
       {
-        e->OnQuitEvent();
-      }
-
-	    if (isKeyEvent)
-      {
-        e->OnKeyEvent(ke);
-      }
-
-      if (isCursorEvent)
-      {
-        e->OnCursorEvent(ce);
-      }
-
-      if (isJoyEvent)
-      {
-        e->OnJoyAxisEvent(je[joyNum]);
-      }
-
-      if (isButtonEvent)
-      {
-        e->OnButtonEvent(be);
-      }
-
-      if (isMouseButtonEvent)
-      {
-        e->OnMouseButtonEvent(mbe);
+        eaten = it->first;
       }
     }
   }
