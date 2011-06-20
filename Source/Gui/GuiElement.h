@@ -43,6 +43,9 @@ public:
   void SetName(const std::string& name);
   const std::string& GetName() const;
 
+  void SetParent(GuiElement* parent) { m_parent = parent; }
+  GuiElement* GetParent() { return m_parent; }
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -61,6 +64,8 @@ protected:
   // Only one of these is activated
   PGuiCommand m_pCommand;
   CommandFunc m_commandFunc;
+
+  GuiElement* m_parent; // parent element, may be 0
 };
 
 typedef RCPtr<GuiElement> PGuiElement;
