@@ -19,7 +19,7 @@ GuiButton::GuiButton()
 
 GuiButton::~GuiButton()
 {
-  TheEventPoller::Instance()->RemoveListener(this); 
+  // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
 }
 
 void GuiButton::ClickSound() const
@@ -99,11 +99,11 @@ void GuiButton::Draw()
   AmjuGL::PopMatrix();
 }
 
-void GuiButton::OnCursorEvent(const CursorEvent& ce)
+bool GuiButton::OnCursorEvent(const CursorEvent& ce)
 {
   if (!IsVisible())
   {
-    return;
+    return false;
   }
 
   // TODO Adjust for cursor hot spot - dependency on Cursor Manager ??
@@ -111,13 +111,14 @@ void GuiButton::OnCursorEvent(const CursorEvent& ce)
   // Point in button rectangle ?
   Rect r = GetRect(this);//(m_pos.x, m_pos.x + m_size.x, m_pos.y - m_size.y, m_pos.y);
   m_isMouseOver = (r.IsPointIn(Vec2f(ce.x, ce.y)));
+  return m_isMouseOver; // handled if over this button
 }
 
-void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (!IsVisible())
   {
-    return;
+    return false;;
   }
 
   // If event is mouse button up, and button is pressed, and mouse is over button,
@@ -130,27 +131,30 @@ void GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (m_isPressed)
       {
         ClickSound();
+        return true; // handled
       }
     }
     else 
     {
+      m_isPressed = false; // mouse is released whether command executed or not
       if (m_isMouseOver) // Only execute if we are on button when we release
       {
         // Execute command for this button
         ClickSound();
         ExecuteCommand();
         m_isMouseOver = false; // once clicked, revert to unselected.. OK??
+        return true; // handled
       }
-      m_isPressed = false;
     }
   }
+  return false; // not handled
 }
 
-void GuiButton::OnButtonEvent(const ButtonEvent& be)
+bool GuiButton::OnButtonEvent(const ButtonEvent& be)
 {
   if (!IsVisible())
   {
-    return;
+    return false;
   }
 
   if (be.button == AMJU_BUTTON_A)
@@ -158,6 +162,7 @@ void GuiButton::OnButtonEvent(const ButtonEvent& be)
     if (be.isDown)
     {
       m_isPressed = m_isMouseOver;
+      return m_isPressed;
     }
     else if (m_isMouseOver)
     {
@@ -165,8 +170,10 @@ void GuiButton::OnButtonEvent(const ButtonEvent& be)
       ClickSound();
       ExecuteCommand();
       m_isPressed = false;
+      return true; // handled
     }
   }
+  return false; // not handled
 }
 
 void GuiButton::SetText(const std::string& text)

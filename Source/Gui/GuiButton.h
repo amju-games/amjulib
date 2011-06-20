@@ -21,9 +21,9 @@ public:
 
   // EventListener overrides - respond to mouse/cursor movement
   //  and button presses
-  virtual void OnCursorEvent(const CursorEvent&);
-  virtual void OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual void OnButtonEvent(const ButtonEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnButtonEvent(const ButtonEvent&);
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);
