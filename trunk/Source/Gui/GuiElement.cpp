@@ -17,6 +17,7 @@ Rect GetRect(GuiElement* elem)
 
 GuiElement::GuiElement()
 {
+  m_parent = 0;
   m_isVisible = true;
   m_commandFunc = 0;
 }
