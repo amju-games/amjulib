@@ -16,6 +16,12 @@ GuiText::GuiText()
   m_textWidth = 0;
   m_inverse = false;
   m_drawBg = false;
+  m_textSize = 1.0f;
+}
+
+void GuiText::SetTextSize(float textSize)
+{
+  m_textSize = textSize;
 }
 
 void GuiText::SetJust(Just j)
@@ -35,11 +41,13 @@ void GuiText::SetDrawBg(bool drawBg)
 
 Font* GuiText::GetFont()
 {
-  static Font* font = 
-    (Font*)TheResourceManager::Instance()->GetRes(m_fontName);
-  Assert(font);
+  if (!m_font)
+  {
+    m_font = (Font*)TheResourceManager::Instance()->GetRes(m_fontName);
+  }
 
-  return font;
+  Assert(m_font);
+  return m_font;
 }
 
 void GuiText::Draw()
@@ -58,6 +66,8 @@ void GuiText::Draw()
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::PopMatrix();
 #endif // _DEBUG
+
+  Font* font = GetFont();
 
   PushColour();
   static const Colour WHITE(1, 1, 1, 1);
@@ -79,20 +89,24 @@ void GuiText::Draw()
   // Centre the text vertically
   //float ysize = m_size.y - 0.1f; // TODO Why 0.1, depends on font size ?
   float y = m_pos.y - m_size.y * 0.5f - 0.05f;
+
+  float oldSize = font->GetSize();
+  font->SetSize(m_textSize * oldSize);
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    GetFont()->Print(m_pos.x, y, m_text.c_str());
+    font->Print(m_pos.x, y, m_text.c_str());
     break;
   case AMJU_JUST_RIGHT:
-    GetFont()->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.c_str());
+    font->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.c_str());
     break;
   case AMJU_JUST_CENTRE:
-    GetFont()->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.c_str());
+    font->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.c_str());
     break;
   default:
     Assert(0);
   }
+  font->SetSize(oldSize);
 
   PopColour();
 }
@@ -101,6 +115,8 @@ void GuiText::SetText(const std::string& text)
 {
   m_text = text;
   m_textWidth = GetFont()->GetTextWidth(text);
+  m_textWidth *= m_textSize;
+
   //m_size.y = 0.08f; // Size of one line of text - TODO
   // TODO Multi lines; other GuiElement types
 }
