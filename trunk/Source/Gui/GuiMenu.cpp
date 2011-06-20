@@ -6,14 +6,16 @@
 
 namespace Amju
 {
+static const int MENU_PRIORITY = -1; // higher priority
+
 GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
 {
   SetText(text);
   SetDrawBg(true);
   SetJust(AMJU_JUST_LEFT);
 
-  m_size.x = m_textWidth;
-  m_size.y = 0.1f; // TODO TEMP TEST
+  m_size.x = m_textWidth * m_textSize;
+  m_size.y = 0.1f * m_textSize; // TODO TEMP TEST
 
   SetCommand(commandFunc);
 }
@@ -34,10 +36,26 @@ struct NestedMenuCommand : public GuiCommand
   virtual bool Do()
   {
     Assert(dynamic_cast<GuiNestMenuItem*>(m_pGui));
-    ((GuiNestMenuItem*)m_pGui)->GetChild()->SetVisible(true);
-    // Pos of nested menu may be to right, or below this item
+    GuiNestMenuItem* menuItem = (GuiNestMenuItem*)m_pGui;
+
+    // Make sub menu visible
+    menuItem->GetChild()->SetVisible(true);
+
+    // Set Pos of nested menu: may be to right, or below this item
     // (Ignore to left for now, TODO)
-    ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(m_pGui->GetSize().x, 0));
+
+    // Parent of this menu item may be the menu root, in which case it may be horiz or vertical.
+    GuiMenu* topMenu = dynamic_cast<GuiMenu*>(menuItem->GetParent());
+    if (topMenu && !topMenu->IsVertical())
+    {
+      // Draw below
+      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(0, -m_pGui->GetSize().y));
+    }
+    else
+    {
+      // Draw to right
+      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(m_pGui->GetSize().x, 0));
+    }
     return false;
   }
 };
@@ -65,10 +83,9 @@ void GuiNestMenuItem::Draw()
 
 GuiMenu::GuiMenu()
 {
-  m_parent = 0;
   m_selected = -1;
   m_isVertical = true;
-  TheEventPoller::Instance()->AddListener(this);
+  TheEventPoller::Instance()->AddListener(this, MENU_PRIORITY);
 }
 
 GuiMenu::~GuiMenu()
@@ -124,7 +141,7 @@ void GuiMenu::Draw()
   }
 }
 
-void GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (IsVisible() &&
       mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
@@ -135,7 +152,7 @@ void GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // Click outside menu area => hide menu
       SetVisible(false);
-      return;
+      return false; // not handled
     }
 
     // Clicked on an item
@@ -143,19 +160,26 @@ void GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // TODO Should react on mouse up when up item == down item.
       m_items[m_selected]->ExecuteCommand();
+      return true; // handled
     }
   }
+  return false; // not handled
 }
 
-void GuiMenu::OnCursorEvent(const CursorEvent& ce)
+bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
 {
   m_cursorPos.x = ce.x;
   m_cursorPos.y = ce.y;
 
+  if (!IsVisible())
+  {
+    return false; // not handled
+  }
+
   m_selected = -1;
   if (m_items.empty())
   {
-    return;
+    return false;
   }
 
   // Check each item
@@ -168,14 +192,16 @@ void GuiMenu::OnCursorEvent(const CursorEvent& ce)
     if (r.IsPointIn(Vec2f(ce.x, ce.y)))
     {
       m_selected = i;
-      return;
+      return true; // handled
     }
   }
+  return false;
 }
 
 void GuiMenu::AddItem(GuiMenuItem* pItem)
 {
   m_items.push_back(pItem);
+  pItem->SetParent(this);
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();
