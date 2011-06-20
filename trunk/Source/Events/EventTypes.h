@@ -18,7 +18,8 @@ class EventListener;
 struct Event
 {
   virtual ~Event() {}
-  virtual void UpdateListener(EventListener*) = 0;
+  // Return true if listener eats event
+  virtual bool UpdateListener(EventListener*) = 0;
 };
 
 enum KeyType
@@ -41,7 +42,7 @@ struct KeyEvent : public Event
   char key; // character if key is printable character
   bool keyDown;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 struct CursorEvent : public Event
@@ -50,7 +51,7 @@ struct CursorEvent : public Event
   float x, y;
   short controller;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 struct JoyAxisEvent : public Event
@@ -60,7 +61,7 @@ struct JoyAxisEvent : public Event
   float x, y; // -1.0 .. 1.0
   short controller;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 enum Button
@@ -83,7 +84,7 @@ struct ButtonEvent : public Event
   bool isDown;
   short controller;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 enum MouseButton
@@ -100,7 +101,7 @@ struct MouseButtonEvent : public Event
   // Useful to give coords. Cursor coords are -1..1 in x and y
   float x, y;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 enum Axis { AMJU_AXIS_X, AMJU_AXIS_Y, AMJU_AXIS_Z };
@@ -110,7 +111,7 @@ struct RotationEvent : public Event
   Axis axis;
   float degs;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 
 // TODO other members - needs calibration, mass ?
@@ -119,7 +120,7 @@ struct BalanceBoardEvent : public Event
   // Coords are -1..1 in x and y axes
   float x, y;
 
-  virtual void UpdateListener(EventListener*);
+  virtual bool UpdateListener(EventListener*);
 };
 }
 
