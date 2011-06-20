@@ -186,6 +186,7 @@ else
 # TODO This depends if target is a lib or exe
 
 $(OUTPUT): $(OFILES)
+	@echo "Linking " $(OUTPUT)
 	$(BUILDEXE) 
 
 # TODO These rules are not required
