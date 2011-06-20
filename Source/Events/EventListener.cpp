@@ -6,6 +6,9 @@ namespace Amju
 EventListener::~EventListener()
 {
   // Make sure this Listener is removed from the Poller's list!
-  TheEventPoller::Instance()->RemoveListener(this);
+  if (TheEventPoller::Instance()->HasListener(this))
+  {
+    TheEventPoller::Instance()->RemoveListener(this);
+  }
 }
 }

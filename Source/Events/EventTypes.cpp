@@ -3,38 +3,38 @@
 
 namespace Amju
 {
-void CursorEvent::UpdateListener(EventListener* el)
+bool CursorEvent::UpdateListener(EventListener* el)
 {
-  el->OnCursorEvent(*this);
+  return el->OnCursorEvent(*this);
 }
 
-void KeyEvent::UpdateListener(EventListener* el)
+bool KeyEvent::UpdateListener(EventListener* el)
 {
-  el->OnKeyEvent(*this);
+  return el->OnKeyEvent(*this);
 }
 
-void JoyAxisEvent::UpdateListener(EventListener* el)
+bool JoyAxisEvent::UpdateListener(EventListener* el)
 {
-  el->OnJoyAxisEvent(*this);
+  return el->OnJoyAxisEvent(*this);
 }
 
-void ButtonEvent::UpdateListener(EventListener* el)
+bool ButtonEvent::UpdateListener(EventListener* el)
 {
-  el->OnButtonEvent(*this);
+  return el->OnButtonEvent(*this);
 }
 
-void MouseButtonEvent::UpdateListener(EventListener* el)
+bool MouseButtonEvent::UpdateListener(EventListener* el)
 {
-  el->OnMouseButtonEvent(*this);
+  return el->OnMouseButtonEvent(*this);
 }
 
-void RotationEvent::UpdateListener(EventListener* el)
+bool RotationEvent::UpdateListener(EventListener* el)
 {
-  el->OnRotationEvent(*this);
+  return el->OnRotationEvent(*this);
 }
 
-void BalanceBoardEvent::UpdateListener(EventListener* el)
+bool BalanceBoardEvent::UpdateListener(EventListener* el)
 {
-  el->OnBalanceBoardEvent(*this);
+  return el->OnBalanceBoardEvent(*this);
 }
 }

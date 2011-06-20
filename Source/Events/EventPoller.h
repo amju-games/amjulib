@@ -16,12 +16,17 @@ public:
 
 typedef RCPtr<EventPollerImpl> PEventPollerImpl;
 
+enum { AMJU_MIN_PRIORITY = -999, AMJU_MAX_PRIORITY = 999 };
+
 class EventPoller
 {
 public:
-  void AddListener(EventListener*);
+  // Listeners have a priority. They are notified in ascending order.
+  // If a listener eats the event, listeners with a lower priority are not notified.
+  void AddListener(EventListener*, int priority = 0);
   void RemoveListener(EventListener*);
   bool HasListener(EventListener*) const;
+  void SetListenerPriority(EventListener*, int priority);
 
   void SetImpl(EventPollerImpl*);
   EventPollerImpl* GetImpl();
