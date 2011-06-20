@@ -42,8 +42,8 @@ public:
   GuiMenu();
   virtual ~GuiMenu();
 
-  void SetParent(GuiElement* parent) { m_parent = parent; }
   void SetIsVertical(bool isVertical) { m_isVertical = isVertical; } 
+  bool IsVertical() const { return m_isVertical; }
 
   virtual void Draw();  
 
@@ -52,8 +52,8 @@ public:
   // TODO Insert, Remove items
 
   // Adjust selected item when cursor moves
-  virtual void OnCursorEvent(const CursorEvent&);
-  virtual void OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 protected:
   typedef std::vector<PGuiMenuItem> Items;
@@ -62,7 +62,6 @@ protected:
   Vec2f m_cursorPos; // last position passed into OnCursorEvent
 
   PGuiMenu m_childMenu; // ?
-  GuiElement* m_parent; // parent element, may be 0
   bool m_isVertical;
 };
 }
