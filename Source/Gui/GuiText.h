@@ -17,6 +17,7 @@ public:
   virtual bool Load(File*); 
 
   void SetText(const std::string& text);
+  void SetTextSize(float textSize);
 
   Font* GetFont();
 
@@ -34,6 +35,8 @@ protected:
   float m_textWidth;
   bool m_inverse;
   bool m_drawBg;
+  PFont m_font;
+  float m_textSize;
 };
 }
 
