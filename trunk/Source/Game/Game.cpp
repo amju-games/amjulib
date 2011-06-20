@@ -56,9 +56,10 @@ void Game::Draw()
 }
 
 static bool s_quit = false;
-void Game::OnQuitEvent()
+bool Game::OnQuitEvent()
 {
   s_quit = true;
+  return false; // allow game states to override
 }
 
 void Game::Run()

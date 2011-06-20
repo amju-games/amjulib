@@ -26,7 +26,7 @@ public:
   void RunOneLoop();
 
   // Event Listener
-  virtual void OnQuitEvent();
+  virtual bool OnQuitEvent();
 
   // Game States
   GameState* GetState(); // Get current state
