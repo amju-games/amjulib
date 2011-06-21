@@ -9,6 +9,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2009
 
 namespace Amju
 {
+class Matrix;
+
 class AABB
 {
 public:
@@ -28,6 +30,7 @@ public:
   void SetIf(float x, float y, float z);
 
   void Translate(const Vec3f&);
+  void Transform(const Matrix& m);
 
   bool Intersects(const AABB&) const;
 

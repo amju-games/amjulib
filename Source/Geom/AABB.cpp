@@ -3,12 +3,23 @@ Amju Games source code (c) Copyright Jason Colman 2000-2009
 */
 
 #include "AmjuFirst.h"
+#ifdef _DEBUG
+#include <iostream>
+#endif
 #include "AABB.h"
+#include "Matrix.h"
 #include "AmjuAssert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
 {
+#ifdef _DEBUG
+void Output(AABB* a)
+{
+  std::cout << a.m_xmin << " " << a.m_xmax << " " << a.m_ymin << " " << a.m_ymax << " " << a.m_zmin << " " << a.m_zmax; 
+}
+#endif
+
 AABB::AABB() : m_xmin(0), m_xmax(0), m_ymin(0), m_ymax(0), m_zmin(0), m_zmax(0)
 {
   AMJU_CALL_STACK;
@@ -135,6 +146,31 @@ void AABB::Translate(const Vec3f& v)
 
   m_zmax += v.z;
   m_zmin += v.z;
+}
+
+void AABB::Transform(const Matrix& m)
+{
+#ifdef _DEBUG
+std::cout << "AABB transform from : ";
+Output(this);
+#endif
+
+  Vec3f min(m_xmin, m_ymin, m_zmin);
+  Vec3f max(m_xmax, m_ymax, m_zmax);
+  Vec3f newMin = min * m;
+  Vec3f newMax = max * m;
+  m_xmin = std::min(newMin.x, newMax.x);
+  m_ymin = std::min(newMin.y, newMax.y);
+  m_zmin = std::min(newMin.z, newMax.z);
+  m_xmax = std::max(newMin.x, newMax.x);
+  m_ymax = std::max(newMin.y, newMax.y);
+  m_zmax = std::max(newMin.z, newMax.z);
+
+#ifdef _DEBUG
+std::cout << " to: ";
+Output(this);
+std::cout << "\n";
+#endif
 }
 
 AABB AABB::Intersection(const AABB& r) const
