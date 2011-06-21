@@ -4,6 +4,8 @@
 #include "CollisionMesh.h"
 #include "DrawAABB.h"
 
+//#define DEBUG_DRAW_AABB
+
 namespace Amju
 {
 const char* SceneMesh::NAME = "mesh";
