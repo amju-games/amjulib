@@ -2,7 +2,9 @@
 #include "SceneMesh.h"
 #include <DrawAABB.h>
 
-//#define VFC_DEBUG
+#define USE_VFC
+#define VFC_DEBUG
+//#define VFC_DEBUG_TEXT
 //#define HIERARCHY_DEBUG
 
 namespace Amju
@@ -151,7 +153,11 @@ void SceneGraph::DrawChildren(
 
     // TODO If a node is not visible, are all children automatically
     //  invisible too ?
+#ifdef USE_VFC
     if (childFr != Frustum::AMJU_OUTSIDE && child->IsVisible())
+#else
+    if (child->IsVisible())
+#endif
     {
       if (child->IsBlended())
       {
@@ -166,8 +172,11 @@ void SceneGraph::DrawChildren(
 
     // Draw children of the child node (even if child is invisible)
     // Only do this if the child node has children of course!
-    if (childFr != Frustum::AMJU_OUTSIDE &&
-        !child->m_children.empty())
+#ifdef USE_VFC
+    if (childFr != Frustum::AMJU_OUTSIDE && !child->m_children.empty())
+#else
+    if (!child->m_children.empty())
+#endif
     {
       DrawChildren(child, childFr);
     }
@@ -277,7 +286,7 @@ void SceneGraph::Draw()
   }
   AmjuGL::PopMatrix();
 
-#ifdef VFC_DEBUG
+#ifdef VFC_DEBUG_TEXT
   std::cout << "Nodes: " << m_nodesTotal << " in frustum: " << m_nodesInFrustum  << "\n";
 #endif 
 
