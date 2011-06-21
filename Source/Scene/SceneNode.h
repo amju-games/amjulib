@@ -31,7 +31,12 @@ public:
   virtual void Draw() {}
   virtual bool Load(File*);
   virtual void CombineTransform();
+
+  // TODO Rename this. Currently makes this node' AABB the union of its child AABBs.
   virtual void UpdateBoundingVol();
+
+  // Transform this node's AABB by matrix m, then all children, recursively
+  void RecursivelyTransformAABB(const Matrix& m);
 
   virtual void BeforeDraw() {}
   virtual void AfterDraw() {}

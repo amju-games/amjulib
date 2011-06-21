@@ -68,6 +68,29 @@ void SceneNode::SetParent(SceneNode* p)
 {
   m_parent = p;
 }
+  
+void SceneNode::RecursivelyTransformAABB(const Matrix& m)
+{
+#ifdef _DEBUG
+std::cout << "Scene node transform AABB... ";
+#endif
+
+  GetAABB()->Transform(m);
+  unsigned int s = m_children.size();
+
+#ifdef _DEBUG
+std::cout << s << " children... ";
+#endif
+
+  for (unsigned int i = 0; i < s; i++)
+  {
+#ifdef _DEBUG
+std::cout " child " << i << "... ";
+#endif
+    
+    m_children[i]->RecursivelyTransformAABB(m);
+  } 
+}
 
 void SceneNode::UpdateBoundingVol()
 {
