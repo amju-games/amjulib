@@ -64,12 +64,14 @@ void Billboard::Draw()
   tri->m_verts[1] = verts[2];
   tri->m_verts[2] = verts[3];
 
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ); // TODO have a member flag
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
   AmjuGL::DrawTriList(m_tris);
   AmjuGL::PopMatrix();
+  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
 }
 
 void Billboard::Update()
