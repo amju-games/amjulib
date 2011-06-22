@@ -1,6 +1,7 @@
+#include <iostream>
 #include <ObjMesh.h>
 #include <AmjuGL-Null.h>
-#include "LeafLoader.h"
+#include "Loader.h"
 
 #ifdef WIN32
 #ifdef _DEBUG
@@ -16,7 +17,7 @@ int main(int argc, char** argv)
 {
   if (argc != 2)
   {
-    std::cout << "Leaf2Obj converts .leaf file to .obj\nUsage: leaf2obj <input file>\n";
+    std::cout << "Leaf2Obj converts .leaf and .comp files to .obj\nUsage: leaf2obj <input file>\n";
     return 1;
   }
 
@@ -28,7 +29,11 @@ int main(int argc, char** argv)
 
   std::string inFilename = argv[1]; 
 
-  LeafLoad(inFilename);
+  if (!Load(inFilename))
+  {
+    std::cout << "Error loading file " << inFilename << "\n";
+    return 0; 
+  }
 
   return 0;
 }
