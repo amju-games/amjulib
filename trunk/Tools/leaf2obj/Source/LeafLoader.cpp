@@ -163,7 +163,9 @@ ObjMesh* LeafLoad(const std::string& filename)
   }
 
   File of(File::NO_VERSION);
-  of.OpenWrite(GetFileNoExt(filename) + ".obj");
+  std::string outFilename = GetFileNoExt(filename) + ".obj";
+  of.OpenWrite(outFilename);
+
   of.Write("# j.c. convert leaf file to obj");
   of.Write("# Verts");
   for (unsigned int i = 0; i < vecs.size(); i++)
@@ -212,6 +214,12 @@ ObjMesh* LeafLoad(const std::string& filename)
     }
     of.Write(s);
   }
-  return 0;
+
+  ObjMesh* mesh = new ObjMesh;
+  if (!mesh->Load(outFilename, false))
+  {
+    return 0;
+  }
+  return mesh;
 }
 }
