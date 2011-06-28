@@ -85,7 +85,7 @@ std::cout << s << " children... ";
   for (unsigned int i = 0; i < s; i++)
   {
 #ifdef _DEBUG
-std::cout " child " << i << "... ";
+std::cout << " child " << i << "... ";
 #endif
     
     m_children[i]->RecursivelyTransformAABB(m);
