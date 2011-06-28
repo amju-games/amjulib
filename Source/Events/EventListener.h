@@ -24,7 +24,7 @@ public:
 };
 
 // Map of priority to EventListener. Listeners are notified in ascending priority order.
-// If a listener eats an event, no more listeners are notified.
+// If a listener eats an event, no listeners with a lower priority are notified.
 typedef std::multimap<int, EventListener*> Listeners;  
 }
 
