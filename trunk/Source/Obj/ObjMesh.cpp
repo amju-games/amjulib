@@ -426,8 +426,12 @@ void ObjMesh::Merge(const ObjMesh& om)
   m_groups.insert(om.m_groups.begin(), om.m_groups.end());
 }
 
-void ObjMesh::Transform(const Matrix& m)
+void ObjMesh::Transform(const Matrix& mat)
 {
+  // Rotate normals but don't translate
+  Matrix rotMat = mat;
+  rotMat.TranslateKeepRotation(Vec3f(0, 0, 0)); // overwrites any translation
+
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
     ++it)
@@ -443,7 +447,16 @@ void ObjMesh::Transform(const Matrix& m)
 
         Vec3f p(v.m_x, v.m_y, v.m_z);
         Vec3f vn(v.m_nx, v.m_ny, v.m_nz);
-        // TODO transform verts; write back to Tri
+        // transform verts; write back to Tri
+        p = p * mat; // sigh, TODO
+        vn = vn * rotMat;
+        vn.Normalise();
+        v.m_x = p.x;
+        v.m_y = p.y;
+        v.m_z = p.z;
+        v.m_nx = vn.x;
+        v.m_ny = vn.y;
+        v.m_nz = vn.z;
       }
     }
   }
