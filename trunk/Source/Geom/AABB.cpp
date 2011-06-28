@@ -13,13 +13,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2009
 
 namespace Amju
 {
-#ifdef _DEBUG
-void Output(AABB* a)
-{
-  std::cout << a.m_xmin << " " << a.m_xmax << " " << a.m_ymin << " " << a.m_ymax << " " << a.m_zmin << " " << a.m_zmax; 
-}
-#endif
-
 AABB::AABB() : m_xmin(0), m_xmax(0), m_ymin(0), m_ymax(0), m_zmin(0), m_zmax(0)
 {
   AMJU_CALL_STACK;
@@ -150,11 +143,6 @@ void AABB::Translate(const Vec3f& v)
 
 void AABB::Transform(const Matrix& m)
 {
-#ifdef _DEBUG
-std::cout << "AABB transform from : ";
-Output(this);
-#endif
-
   Vec3f min(m_xmin, m_ymin, m_zmin);
   Vec3f max(m_xmax, m_ymax, m_zmax);
   Vec3f newMin = min * m;
@@ -165,12 +153,6 @@ Output(this);
   m_xmax = std::max(newMin.x, newMax.x);
   m_ymax = std::max(newMin.y, newMax.y);
   m_zmax = std::max(newMin.z, newMax.z);
-
-#ifdef _DEBUG
-std::cout << " to: ";
-Output(this);
-std::cout << "\n";
-#endif
 }
 
 AABB AABB::Intersection(const AABB& r) const
