@@ -2,6 +2,7 @@
 #include "Loader.h"
 #include <ObjMesh.h>
 #include <File.h>
+#include <DegRad.h>
 
 namespace Amju
 {
@@ -57,7 +58,14 @@ ObjMesh* CompLoad(const std::string& compFile)
     Matrix mat;
     mat.SetIdentity();
     mat.Translate(Vec3f(x, y, z));
-    // TODO Rotations
+    // Rotations -- correct order ??
+    Matrix matR;
+    matR.RotateX(DegToRad(rx));
+    mat *= matR;
+    matR.RotateY(DegToRad(ry));
+    mat *= matR;
+    matR.RotateZ(DegToRad(rz));
+    mat *= matR;
 
     mesh->Transform(mat);
 
