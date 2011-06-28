@@ -1,12 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "..\..\..\..\Script\AmjuLibMsvc\AmjuLibMsvc\AmjuLibMsvc.vcproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "..\..\..\..\Script\AmjuLibMsvc\AmjuLibMsvc\AmjuLibMsvc.vcxproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Obj2Bin-MsvcProj", "Leaf2Obj-MsvcProj\Leaf2Obj-MsvcProj.vcproj", "{744A324D-0B9E-4713-B28A-933E9986071B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leaf2Obj-MsvcProj", "Leaf2Obj-MsvcProj\Leaf2Obj-MsvcProj.vcxproj", "{744A324D-0B9E-4713-B28A-933E9986071B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
