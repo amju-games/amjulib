@@ -162,58 +162,61 @@ ObjMesh* LeafLoad(const std::string& filename)
     }
   }
 
-  File of(File::NO_VERSION);
   std::string outFilename = GetFileNoExt(filename) + ".obj";
-  of.OpenWrite(outFilename);
+  { // Make sure file flushes
+    File of(File::NO_VERSION);
+    of.OpenWrite(outFilename);
 
-  of.Write("# j.c. convert leaf file to obj");
-  of.Write("# Verts");
-  for (unsigned int i = 0; i < vecs.size(); i++)
-  {
-    of.Write("v " + ToString(vecs[i].x) + " " + ToString(vecs[i].y) + " " + ToString(vecs[i].z));
-  }
-  of.Write("# UVs");
-  for (unsigned int i = 0; i < uvs.size(); i++)
-  {
-    of.Write("vt " + ToString(uvs[i].x) + " " + ToString(uvs[i].y));
-  }
-  of.Write("# Normals");
-  for (unsigned int i = 0; i < normals.size(); i++)
-  {
-    of.Write("vn " + ToString(normals[i].x) + " " + ToString(normals[i].y) + " " + ToString(normals[i].z));
-  }
-  if (texMethod != 4) // not null tex method
-  {
-    // Write group name and material
-    std::string matName = StripPath(GetFileNoExt(filename));
-    of.Write("# Material");
-    of.Write("mtllib " + matName + ".mtl");
-    of.Write("usemtl " + matName);
-
-    // Write material file - consisting only of texture name
-    File mat(File::NO_VERSION);
-    mat.OpenWrite(matName + ".mtl");
-    mat.Write("# j.c. convert leaf file to obj");
-    mat.Write("newmtl " + matName);
-    mat.Write("map_Kd " + texFilename);
-  }
-
-  of.Write("# Faces");
-  for (unsigned int i = 0; i < faces.size(); i++)
-  {
-    Face& face = faces[i];
-    std::string s = "f ";
-    for (int j = 0; j < 3; j++)
+    of.Write("# j.c. convert leaf file to obj");
+    of.Write("# Verts");
+    for (unsigned int i = 0; i < vecs.size(); i++)
     {
-      s += ToString(face.m_pointIndex[j]) 
-        + "/" 
-        + (face.m_uvIndex[j] ? ToString(face.m_uvIndex[j]) : "")
-        + "/"
-        + (face.m_normalIndex[j] ? ToString(face.m_normalIndex[j]) : "")
-        + " ";
+      of.Write("v " + ToString(vecs[i].x) + " " + ToString(vecs[i].y) + " " + ToString(vecs[i].z));
     }
-    of.Write(s);
-  }
+    of.Write("# UVs");
+    for (unsigned int i = 0; i < uvs.size(); i++)
+    {
+      of.Write("vt " + ToString(uvs[i].x) + " " + ToString(uvs[i].y));
+    }
+    of.Write("# Normals");
+    for (unsigned int i = 0; i < normals.size(); i++)
+    {
+      of.Write("vn " + ToString(normals[i].x) + " " + ToString(normals[i].y) + " " + ToString(normals[i].z));
+    }
+    if (texMethod != 4) // not null tex method
+    {
+      // Write group name and material
+      std::string matName = StripPath(GetFileNoExt(filename));
+      of.Write("# Material");
+      of.Write("mtllib " + matName + ".mtl");
+      of.Write("usemtl " + matName);
+
+      // Write material file - consisting only of texture name
+      File mat(File::NO_VERSION);
+      mat.OpenWrite(matName + ".mtl");
+      mat.Write("# j.c. convert leaf file to obj");
+      mat.Write("newmtl " + matName);
+      mat.Write("map_Kd " + texFilename);
+    }
+
+    of.Write("# Faces");
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+      Face& face = faces[i];
+      std::string s = "f ";
+      for (int j = 0; j < 3; j++)
+      {
+        s += ToString(face.m_pointIndex[j]) 
+          + "/" 
+          + (face.m_uvIndex[j] ? ToString(face.m_uvIndex[j]) : "")
+          + "/"
+          + (face.m_normalIndex[j] ? ToString(face.m_normalIndex[j]) : "")
+          + " ";
+      }
+      of.Write(s);
+    }
+    of.Write("# eof");
+  } // make sure file flushes
 
   ObjMesh* mesh = new ObjMesh;
   if (!mesh->Load(outFilename, false))
