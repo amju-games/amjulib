@@ -16,6 +16,8 @@ public:
   static LRESULT WndProc(HWND, UINT, WPARAM, LPARAM);
 
 private:
+  void UpdateListeners(Event* e);
+
   void MouseMove(int x, int y);
   void MouseButton(Amju::MouseButton button, bool down);
   void OnKey(WPARAM c, bool down);
