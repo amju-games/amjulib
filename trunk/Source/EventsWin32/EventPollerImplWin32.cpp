@@ -21,6 +21,31 @@ EventPollerImplWin32::~EventPollerImplWin32()
   s_instance = 0;
 }
 
+void EventPollerImplWin32::UpdateListeners(Event* e)
+{
+  if (m_listeners)
+  {
+    int eaten = AMJU_MAX_PRIORITY + 1;
+    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
+    {
+      if (it->first > eaten)
+      {
+        // This listener has a lower priority than a listener which ate the event
+        break; 
+      }
+
+      EventListener* listener = it->second;
+      Assert(listener);
+
+      if (e->UpdateListener(listener))
+      {
+        // Eaten
+        eaten = it->first; 
+      }
+    }
+  }
+}
+
 void EventPollerImplWin32::OnKey(WPARAM c, bool down)
 {
   KeyEvent ke;
@@ -54,15 +79,7 @@ void EventPollerImplWin32::OnKey(WPARAM c, bool down)
     //ke.key = ???
   }
 
-  if (m_listeners)
-  {
-    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
-    {
-      EventListener* e = *it;
-      Assert(e);
-      e->OnKeyEvent(ke);
-    }
-  }
+  UpdateListeners(&ke);
 }
 
 void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
@@ -73,15 +90,7 @@ void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
   mbe.x = m_ce.x;
   mbe.y = m_ce.y;
 
-  if (m_listeners)
-  {
-    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
-    {
-      EventListener* e = *it;
-      Assert(e);
-      e->OnMouseButtonEvent(mbe);
-    }
-  }
+  UpdateListeners(&mbe);
 }
 
 void EventPollerImplWin32::MouseMove(int x, int y)
@@ -92,12 +101,7 @@ void EventPollerImplWin32::MouseMove(int x, int y)
     m_ce.x = (float)x / (float)Screen::X() * 2.0f - 1.0f;
     m_ce.y = 1.0f - (float)y / (float)Screen::Y() * 2.0f;
 
-    for (Listeners::iterator it = m_listeners->begin(); it != m_listeners->end(); ++it)
-    {
-      EventListener* e = *it;
-      Assert(e);
-      e->OnCursorEvent(m_ce);
-    }
+    UpdateListeners(&m_ce);
   }
 }
 
