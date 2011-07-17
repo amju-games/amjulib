@@ -18,8 +18,8 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual void OnCursorEvent(const CursorEvent&);
-  virtual void OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 private:
   void SetSimpleSystem();

@@ -1,13 +1,14 @@
 #ifndef GS_RIGID_BODY_H
 #define GS_RIGID_BODY_H
 
-#include <GameState.h>
 #include "RigidBody.h"
 #include <Vec2.h>
+#include <Singleton.h>
+#include "GSBase.h"
 
 namespace Amju
 {
-class GSRigidBody : public GameState
+class GSRigidBody : public GSBase
 {
 public:
   static const char* NAME;
@@ -18,13 +19,15 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual void OnCursorEvent(const CursorEvent&);
-  virtual void OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 private:
   PRigidBody m_rb;
   Vec2f m_point; // cursor pos
 };
+
+typedef Singleton<GSRigidBody> TheGSRigidBody;
 }
 
 #endif

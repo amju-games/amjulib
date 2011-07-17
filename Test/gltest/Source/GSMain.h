@@ -1,13 +1,13 @@
 #ifndef GS_MAIN_H
 #define GS_MAIN_H
 
-#include <GameState.h>
 #include <Texture.h>
 #include <Singleton.h>
+#include "GSBase.h"
 
 namespace Amju
 {
-class GSMain : public GameState
+class GSMain : public GSBase
 {
   GSMain();
   friend class Singleton<GSMain>;

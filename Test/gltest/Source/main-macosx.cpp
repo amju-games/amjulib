@@ -10,8 +10,14 @@
 #include <AmjuGLWindowInfo.h>
 #include <EventPollerImplGeneric.h>
 #include <File.h>
+#include <ResourceManager.h>
+#include <Font.h>
 #include "GSBelt.h"
 #include "GSMain.h"
+#include "GSObb2Test.h"
+#include "GSRigidBody.h"
+#include "GSLighting.h"
+#include "GSShaderWave.h"
 
 #ifdef AMJU_USE_GLUT
 #include <GLUT/glut.h>
@@ -153,7 +159,7 @@ int main(int argc, char **argv)
   glutPassiveMotionFunc(mousemove);
 #endif
   
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
 
   TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric); 
 
@@ -164,6 +170,8 @@ int main(int argc, char **argv)
   Amju::AmjuGL::Init();
 
 ////  TheSoundManager::Instance()->SetImpl(new BassSoundPlayer); 
+
+  TheResourceManager::Instance()->AddLoader("font", FontLoader);
 
 #ifdef AMJU_USE_GLUT
   // Can't do this, glutMainLoop is in charge

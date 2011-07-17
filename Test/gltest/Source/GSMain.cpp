@@ -31,21 +31,9 @@ void GSMain::Update()
 
 void GSMain::Draw()
 {
+  GSBase::Draw();
 
   TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
-
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-  AmjuGL::SetIdentity();
-  const float FOVY = 60.0f;
-  const float NEAR = 1.0f;
-  const float FAR = 3000.0f;
-  float aspect = 1.3f;
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
-
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-  AmjuGL::SetIdentity();
-
-  AmjuGL::LookAt(0, 5, 10,  0, 0, 0,  0, 1, 0);
 
   AmjuGL::SetColour(1, 1, 1, 1);
 
