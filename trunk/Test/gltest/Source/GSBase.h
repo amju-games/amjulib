@@ -11,11 +11,12 @@ class GSBase : public GameState
 public:
   GSBase();
   virtual void Update();
+  virtual void Draw(); // Set up proj and mview matrices
 
 protected:
   float m_time;
   float m_maxTime;
-  GameState* m_nextState;
+  GSBase* m_nextState;
 };
 }
 

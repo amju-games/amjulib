@@ -17,7 +17,7 @@ GSBelt::GSBelt()
   m_isMouseDown = false;
 }
 
-void GSBelt::OnCursorEvent(const CursorEvent& ce)
+bool GSBelt::OnCursorEvent(const CursorEvent& ce)
 {
   static float oldx = ce.x;
   static float oldy = ce.y;
@@ -33,14 +33,18 @@ void GSBelt::OnCursorEvent(const CursorEvent& ce)
   }
   oldx = ce.x;
   oldy = ce.y;
+
+  return false;
 }
 
-void GSBelt::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GSBelt::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {
     m_isMouseDown = mbe.isDown;
   }
+
+  return false;
 }
 
 void GSBelt::Update()
