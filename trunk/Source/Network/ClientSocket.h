@@ -6,8 +6,8 @@ Added to repository
   
 */
 
-#if !defined(SCHMICKEN_CLIENT_SOCKET_H_INCLUDED)
-#define SCHMICKEN_CLIENT_SOCKET_H_INCLUDED
+#if !defined(AMJU_CLIENT_SOCKET_H_INCLUDED)
+#define AMJU_CLIENT_SOCKET_H_INCLUDED
 
 #include "Socket.h"
 

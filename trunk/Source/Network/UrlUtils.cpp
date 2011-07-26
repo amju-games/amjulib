@@ -64,7 +64,7 @@ bool IsUrlPrintable(char c)
 std::string ToUrlFormat(const std::string& s)
 {
   std::string r;
-  for (int i = 0; i < s.length(); i++)
+  for (unsigned int i = 0; i < s.length(); i++)
   {
     char c = s[i];
 
