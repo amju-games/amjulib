@@ -1,5 +1,7 @@
-
+namespace Amju
+{
 void StartUp();
+}
 
 #ifdef IPHONE
 #include "iPhone/Classes/EAGLView.mm"
