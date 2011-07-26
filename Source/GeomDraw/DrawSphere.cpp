@@ -5,13 +5,15 @@
 #include "DrawSphere.h"
 #include <Sphere.h>
 #include <AmjuGL.h>
+
+#ifdef AMJU_USE_GLUT
 #ifdef WIN32
-#ifdef _DEBUG
-#ifdef USE_GLUT
 #include <GL/glut.h>
-#endif // USE_GLUT
-#endif
-#endif
+#endif // WIN32
+#ifdef MACOSX
+#include <GLUT/glut.h>
+#endif // MACOSX
+#endif // AMJU_USE_GLUT
 
 namespace Amju
 {
@@ -25,15 +27,11 @@ void DrawCircleXY(float r)
 
 void DrawSphere(const Sphere& s)
 {
-#ifdef WIN32
-#ifdef _DEBUG
-#ifdef USE_GLUT
+#ifdef AMJU_USE_GLUT
   AmjuGL::PushMatrix();
   AmjuGL::Translate(s.GetCentre().x, s.GetCentre().y, s.GetCentre().z);
-  glutWireSphere(s.GetRadius(), 5, 5);
+  glutWireSphere(s.GetRadius(), 20, 20);
   AmjuGL::PopMatrix();
-#endif
-#endif
 #endif
 }
 }
