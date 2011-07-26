@@ -25,12 +25,14 @@ SOURCES := ../../Source \
   $(AMJU)/Localise \
   $(AMJU)/Md2 \
   $(AMJU)/Mem \
+  $(AMJU)/Network \
   $(AMJU)/Obj \
   $(AMJU)/Resource \
   $(AMJU)/Scene \
   $(AMJU)/Sound \
   $(AMJU)/SoundBass \
   $(AMJU)/Strings \
+  $(AMJU)/Thread \
   $(AMJU)/TimeUtils \
   $(AMJU)/Utils \
   $(AMJU)/Utils/Zlib
