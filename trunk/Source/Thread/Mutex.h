@@ -17,7 +17,7 @@ Added to repository
 #else
 #include <pthread.h>
 #endif
-#include "Locker.h"
+#include <Locker.h>
 
 namespace Amju
 {

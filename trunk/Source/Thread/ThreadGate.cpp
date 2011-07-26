@@ -1,5 +1,8 @@
 #include "AmjuFirst.h"
 #include <iostream>
+#ifndef WIN32
+#include <errno.h>
+#endif
 #include "ThreadGate.h"
 #include "AmjuFinal.h"
 
@@ -43,6 +46,7 @@ void ThreadGate::Wait(unsigned int timeoutSecs)
   if (r != 0)
   {
 std::cout << "THREADGATE - error calling pthread_cond_timedwait\n";
+
     if (r == EINVAL)
     {
 std::cout << "THREADGATE - bad values for args.\n";
