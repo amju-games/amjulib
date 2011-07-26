@@ -5,6 +5,7 @@
 #include <Game.h>
 #include <Colour.h>
 #include <Font.h>
+#include "Teapot.h"
 
 namespace Amju
 {
@@ -15,7 +16,7 @@ GSLighting::GSLighting()
 
 void GSLighting::Update()
 {
-  GSBase::Update();
+//  GSBase::Update();
 
 }
 
@@ -35,19 +36,33 @@ void GSLighting::Draw()
 
   static float f = 0;
   f += 0.2f;
+
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+
+  static AABB aabb(-1, 1, -1, 1, -1, 1);
+
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(-2.0f, 0, 0);
   AmjuGL::RotateY(f);
-
-  AABB aabb(-1, 1, -1, 1, -1, 1);
-  //m_tex->UseThisTexture(); // not required, we set texture in shader
-
   DrawSolidAABB(aabb);
+  AmjuGL::PopMatrix();
+
+  static Teapot tp;
+
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(2.0f, 0, 0);
+  AmjuGL::RotateY(f);
+  tp.Draw();
+  AmjuGL::PopMatrix();
 }
 
 void GSLighting::Draw2d()
 {
-  //static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  //Assert(font);
-  //font->Print(-1, -0.8f, "Lighting");
+  AmjuGL::SetColour(0, 0, 0, 1);
+  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  Assert(font);
+  font->Print(-1, -0.8f, "Lighting");
+  AmjuGL::SetColour(1, 1, 1, 1);
 }
 
 void GSLighting::OnActive()
