@@ -4,6 +4,7 @@
 #include "File.h"
 #include "ReportError.h"
 #include "StringUtils.h"
+#include <Font.h>
 #include <iostream>
 
 //#define RESOURCE_GROUP_DEBUG
@@ -46,6 +47,7 @@ ResourceManager::ResourceManager()
   AddLoader("png", ImageLoader);
   AddLoader("bmp", ImageLoader);
   AddLoader("md2", Md2Loader);
+  AddLoader("font", FontLoader);
 }
 
 bool ResourceManager::AddLoader(const std::string& fileExt, Loader loader)
