@@ -16,8 +16,8 @@ Added HttpReq to repository
 #ifndef HTTP_REQ_H_INCLUDED
 #define HTTP_REQ_H_INCLUDED
 
-#include "Thread.h"
-#include "Mutex.h"
+#include <Thread.h>
+#include <Mutex.h>
 #include "HttpClient.h"
 
 namespace Amju

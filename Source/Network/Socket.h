@@ -6,8 +6,8 @@ Added to repository
   
 */
 
-#if !defined(SCHMICKEN_SOCKET_H_INCLUDED)
-#define SCHMICKEN_SOCKET_H_INCLUDED
+#if !defined(AMJU_SOCKET_H_INCLUDED)
+#define AMJU_SOCKET_H_INCLUDED
 
 #if defined(WIN32)
 #include <winsock2.h>
@@ -24,7 +24,6 @@ Added to repository
 #include <netdb.h>
 #endif
 
-#include "SerialInterface.h" 
 #include <string>
 
 #if !defined(SOCKET)
@@ -33,7 +32,7 @@ Added to repository
 
 namespace Amju
 {
-class Socket : public SerialInterface
+class Socket 
 {
 public:
   Socket();

@@ -220,7 +220,7 @@ std::cout << "NOT CHUNKED\n";
 
   // Find the first blank line, so we know we have found the start
   // of the message body.
-  int i = 0;
+  unsigned int i = 0;
   while (i < v.size())
   {
     std::string s = v[i];
