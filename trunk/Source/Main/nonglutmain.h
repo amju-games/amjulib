@@ -25,7 +25,6 @@
 #endif // MACOSX
 
 #include <Game.h>
-#include "StartUp.h"
 #include <SoundManager.h>
 #include <AmjuGLWindowInfo.h>
 #include <AmjuFinal.h>
