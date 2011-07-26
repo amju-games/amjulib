@@ -1,16 +1,19 @@
 #ifndef AMJU_RIGID_BODY_H
 #define AMJU_RIGID_BODY_H
 
+#include <RCPtr.h>
 #include "Vec3.h"
 #include "Quaternion.h"
 
 namespace Amju
 {
-class RigidBody
+class RigidBody : public RefCounted
 {
 public:
   RigidBody();
   virtual ~RigidBody() {}
+
+  virtual void Draw() = 0;
   virtual void Update();
 
   void AddForce(const Vec3f& force);
@@ -33,6 +36,8 @@ protected:
   Quaternion m_rot;
   Vec3f m_angVel; // dir is axis of rotation, magnitude is rot speed
 };
+
+typedef RCPtr<RigidBody> PRigidBody;
 }
 
 #endif
