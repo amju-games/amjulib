@@ -2,8 +2,10 @@ ifeq ($(strip $(AMJULIB_MAC_SCRIPT_PATH)),)
 $(error "Please set AMJULIB_MAC_SCRIPT_PATH in your environment.")
 endif
 
-BUILD		:=	../../../../Build/gltest/Mac
-TARGET		:=	$(BUILD)/gltest
+APP		:=	gltest
+
+BUILD		:=	../../../../Build/$(APP)/Mac
+TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
 RUNDIR 		:=	../../Assets
@@ -19,5 +21,5 @@ include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 run:
 	cp $(TARGET) $(RUNDIR); \
 	cd $(RUNDIR); \
-	./gltest
+	./$(APP)
 
