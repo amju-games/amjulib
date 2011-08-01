@@ -184,60 +184,56 @@ void EventPollerImplWii::Update(Listeners* pListeners)
       isReleased[i] = (buttonsRel & WII_AMJU_BUTTON[i][0]);
     }
     
-    for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
+    ButtonEvent be;
+    be.controller = ctr;
+    for (int i = 0; i < NUM_BUTTONS; i++)
     {
-      EventListener* e = *it;
-    
-      ButtonEvent be;
-      be.controller = ctr;
-      for (int i = 0; i < NUM_BUTTONS; i++)
+      if (isPressed[i])
       {
-        if (isPressed[i])
-        {
-          be.isDown = true;
-          be.button = (Button)WII_AMJU_BUTTON[i][1];
+        be.isDown = true;
+        be.button = (Button)WII_AMJU_BUTTON[i][1];
 //std::cout << "Button event! - pressed!\n";
 //PAUSE;
           
-          e->OnButtonEvent(be);
-        }
-        else if (isReleased[i])
-        {
-          be.isDown = false;
-          be.button = (Button)WII_AMJU_BUTTON[i][1];
+        NotifyListenersWithPriority(&be, pListeners);  
+      }
+      else if (isReleased[i])
+      {
+        be.isDown = false;
+        be.button = (Button)WII_AMJU_BUTTON[i][1];
 //std::cout << "Button event! - released!\n";
 //PAUSE;
-          e->OnButtonEvent(be);
-        }
+        NotifyListenersWithPriority(&be, pListeners);  
       }
+    }
       
-      if (isCursorEvent)
-      {
-        e->OnCursorEvent(ce);
-      }
+    if (isCursorEvent)
+    {
+      NotifyListenersWithPriority(&ce, pListeners);  
+    }
       
-      for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)
+    {
+      if (isRotEvent[i])
       {
-        if (isRotEvent[i])
-        {
-          e->OnRotationEvent(re[i]);
-        }
+        NotifyListenersWithPriority(&re[i], pListeners);  
       }
+    }
 
-      if (isJoyEvent)
-      {
-        e->OnJoyAxisEvent(je);
-      }
+    if (isJoyEvent)
+    {
+      NotifyListenersWithPriority(&je, pListeners);  
+    }
   
-      if (isBalanceEvent)
-      {
-        e->OnBalanceBoardEvent(bbe);
-      }
+    if (isBalanceEvent)
+    {
+      NotifyListenersWithPriority(&bbe, pListeners);  
+    }
   
-      if (isQuit)
-      {
-        e->OnQuitEvent();
-      }
+    if (isQuit)
+    {
+      QuitEvent q;
+      NotifyListenersWithPriority(&q, pListeners);  
     }
   }
 }
