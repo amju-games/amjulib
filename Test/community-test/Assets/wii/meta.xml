@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <app version="1">
+    <name>Amju Community Test</name>
+    <coder>Jason Colman</coder>
+    <version>0.1</version>
+    <release_date>4/7/2009</release_date>
+    <short_description>Test</short_description>
+    <long_description>Upload screenshot to server</long_description>
+  </app>
