@@ -12,6 +12,7 @@ SOURCES := ../../Source \
   $(AMJU)/AmjuGLOpenGL \
   $(AMJU)/Clip \
   $(AMJU)/Collision \
+  $(AMJU)/Community \
   $(AMJU)/Events \
   $(AMJU)/FileUtils \
   $(AMJU)/Font \
