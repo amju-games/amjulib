@@ -68,7 +68,12 @@ struct RecursionDepthIncrementer
 
 // Dummy versions of functions so we don't have to change anything else
 void SetBreakID(unsigned int ID);
+#ifdef GEKKO
+// gcc says size_t no good now, use std::size_t..!?
+void SetBreakSize(std::size_t size);
+#else
 void SetBreakSize(size_t size);
+#endif
 
 #endif //  USE_AMJU_DEBUG_NEW
 #endif //  AMJU_MEM_H_INCLUDED
