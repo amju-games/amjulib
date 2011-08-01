@@ -79,9 +79,6 @@ Added to repository
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
 
 //#define HTTP_DEBUG
 
@@ -96,13 +93,20 @@ Added to repository
 #include <sys/socket.h>
 #include <netdb.h>
 #include <netinet/in.h>
-#else
+#endif // MACOSX
+
 #if defined(WIN32)
 #include <winsock2.h>
 #include <windows.h>
+#endif // WIN32
+
+#ifdef GEKKO
+#include <network.h>
+#include <stdlib.h>
+#include <string.h>
 #endif
-#endif
-#endif
+
+#endif // USE_METALSHELL_CODE
 
 #include <iostream>
 #include "HttpClient.h"
@@ -177,7 +181,11 @@ std::string MakeHeader(
   }
   else if (m == HttpClient::POST)
   {
-    std::string data = GetDataFromUrl(path).substr(1); // lose first '?' character
+    std::string data = GetDataFromUrl(path).substr(1);
+    if (!data.empty())
+    {
+      data = data.substr(1); // lose '?'
+    }
     std::string noDataPath = StripDataFromUrl(path); 
 
     getReqStr = "POST " + noDataPath + " HTTP/1.0\r\nHost: " + host + "\r\n";
@@ -309,16 +317,20 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
  char buffer[32768]; //1024];
  struct sockaddr_in socketaddr;
  struct hostent *hostaddr;
- struct servent *servaddr;
- struct protoent *protocol;
+ //struct servent *servaddr;
+ //struct protoent *protocol;
 
  /* Resolve the host name */
- if (!(hostaddr = gethostbyname(host.c_str()))) {
+#ifdef GEKKO
+ if (!(hostaddr = net_gethostbyname(host.c_str()))) 
+#else
+ if (!(hostaddr = gethostbyname(host.c_str()))) 
+#endif
+ {
     //fprintf(stderr, "Error resolving host.");
     HttpResult r; 
     r.SetSuccess(false);
-    std::string s = "Failed to find server " + host + ":" +
-      ToString(port);
+    std::string s = "Failed to find server " + host;
     r.SetErrorString(s);
     return r;
  }
@@ -328,16 +340,29 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
  socketaddr.sin_family = AF_INET;
 
  /* setup the servent struct using getservbyname */
- servaddr = getservbyname(SERVICE, PROTOCOL);
- socketaddr.sin_port = servaddr->s_port;
+//#ifdef GEKKO
+// servaddr = net_getservbyname(SERVICE, PROTOCOL);
+//#else
+// servaddr = getservbyname(SERVICE, PROTOCOL);
+//#endif
+
+ unsigned short usport = port;
+
+ // Hmm, not sure if this used to work properly, it just seemed to look up the port number
+ // for the http service, instead of using the port parameter.. yikes
+ socketaddr.sin_port = htons(usport); //servaddr->s_port;
 
  memcpy(&socketaddr.sin_addr, hostaddr->h_addr, hostaddr->h_length);
 
  /* protocol must be a number when used with socket()
     since we are using tcp protocol->p_proto will be 0 */
- protocol = getprotobyname(PROTOCOL);
+// protocol = getprotobyname(PROTOCOL);
 
- sockid = socket(AF_INET, SOCK_STREAM, protocol->p_proto);
+#ifdef GEKKO
+ sockid = net_socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
+#else
+ sockid = socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
+#endif
  if (sockid < 0) {
     //fprintf(stderr, "Error creating socket.");
     HttpResult r; 
@@ -349,7 +374,12 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
  }
 
  /* everything is setup, now we connect */
- if(connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) {
+#ifdef GEKKO
+ if(net_connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
+#else
+ if(connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
+#endif
+ {
     //fprintf(stderr, "Error connecting.");
     HttpResult r; 
     r.SetSuccess(false);
@@ -366,7 +396,12 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
 #endif
 
- if (send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) {
+#ifdef GEKKO
+ if (net_send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
+#else
+ if (send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
+#endif
+ {
     //fprintf(stderr, "Error sending data.");
     HttpResult r; 
     r.SetSuccess(false);
@@ -383,6 +418,8 @@ std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
  /* read the socket until its clear then exit */
 #if defined(WIN32)
  while ( (bufsize = recv(sockid, buffer, sizeof(buffer) - 1, 0))) 
+#elif defined(GEKKO)
+ while ( (bufsize = net_read(sockid, buffer, sizeof(buffer) - 1))) 
 #else
  while ( (bufsize = read(sockid, buffer, sizeof(buffer) - 1))) 
 #endif
@@ -400,8 +437,10 @@ std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
 
   r.SetString(result);
 
-#ifdef WIN32
+#if defined(WIN32)
   closesocket(sockid);
+#elif defined (GEKKO)
+  net_close(sockid);
 #else
   close(sockid);
 #endif
@@ -515,6 +554,10 @@ HttpResult HttpClient::Get(
   std::string path = GetPathFromUrl(url);
   std::string host = GetServerNameFromUrl(url);
   int port = GetPortFromUrl(url);
+
+std::cout << "Path: " << path << "\n";
+std::cout << "Server: " << host << "\n";
+std::cout << "Port: " << port << "\n";
 
 #ifdef USE_METALSHELL_CODE
   return MetalshellGet(m, path, host, port);

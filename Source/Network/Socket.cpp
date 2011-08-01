@@ -18,15 +18,18 @@ Added to repository
 // Sockets code based on sample code in BSD Sockets Primer by Jim Frost
 // http://world.std.com/~jimf/papers/sockets/sockets.html
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "AmjuFirst.h"
 #include "Socket.h"
 #if defined(WIN32)
 #include <winsock2.h>
 #include <windows.h>
 #endif
+
+#ifdef GEKKO
+#include <network.h>
+#include <string.h>
+#endif
+
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -37,6 +40,8 @@ Socket::Socket()
 
 #if defined(WIN32)
   m_socket = socket(AF_INET, SOCK_STREAM, 0);
+#elif defined (GEKKO)
+  m_socket = net_socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 #else
   m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 #endif
@@ -74,6 +79,8 @@ void Socket::Close()
 
 #if defined(WIN32)
   closesocket(m_socket);
+#elif defined (GEKKO)
+  net_close(m_socket);
 #else
   close(m_socket);
 #endif
@@ -181,6 +188,8 @@ bool Socket::GetRawString(std::string* p)
   int br = 0;
 #if defined(WIN32)
   br = recv(m_socket,buf,n, 0);
+#elif defined (GEKKO)
+  br = net_read(m_socket,buf,n);
 #else
   br = read(m_socket,buf,n);
 #endif
@@ -189,61 +198,37 @@ bool Socket::GetRawString(std::string* p)
   return true;
 }
 
-bool Socket::WriteChar(char c)
-{
-  AMJU_CALL_STACK;
-
-  // Don't use WriteData(), because if the other end of the socket goes away, it
-  // will go into a 100% CPU loop! 
-
-  int br = 0;
-
-#if defined(WIN32)
-  br = send(m_socket, &c, 1, 0);
-#else
-  br = send(m_socket, &c, 1, 0);
-#endif
-
-  return (br == 1);
-}
-
-bool Socket::GetChar(char* buf)
-{
-  AMJU_CALL_STACK;
-
-  // As for WriteChar(), don't use ReadData(). It will screw up if the socket closes.
-
-  int br = 0;
-
-#if defined(WIN32)
-  br = recv(m_socket, buf, 1, 0);
-#else
-  br = read(m_socket, buf, 1);
-#endif
-
-  return (br == 1);
-}
-
 bool Socket::Bind(int  portnum)
 {
   AMJU_CALL_STACK;
 
-  const int maxnamelength = 255;
-  char  myname[maxnamelength + 1];
+//  const int maxnamelength = 255;
+//  char  myname[maxnamelength + 1];
   struct sockaddr_in sa;
-  struct hostent *hp;
+//  struct hostent *hp;
 
   memset(&sa, 0, sizeof(struct sockaddr_in)); /* clear our address */
-  gethostname(myname, maxnamelength);           /* who are we? */
-  hp= gethostbyname(myname);                  /* get our address info */
-  if (!hp)                             /* we don't exist !? */
-  {
-    return false;
-  }
-  sa.sin_family= hp->h_addrtype;              /* this is our host address */
-  sa.sin_port= htons(portnum);                /* this is our port number */
 
+//#ifdef GEKKO
+//  net_gethostname(myname, maxnamelength);          
+//  hp = net_gethostbyname(myname);                  
+//#else 
+//  gethostname(myname, maxnamelength);          
+//  hp= gethostbyname(myname);
+//#endif
+//  if (!hp)                 
+//  {
+//    return false;
+//  }
+  sa.sin_family= AF_INET; //hp->h_addrtype;
+  unsigned short usport(portnum);
+  sa.sin_port= htons(usport);           
+
+#ifdef GEKKO
+  if (net_bind(m_socket,(struct sockaddr *)&sa,sizeof(struct sockaddr_in)) < 0) 
+#else
   if (bind(m_socket,(struct sockaddr *)&sa,sizeof(struct sockaddr_in)) < 0) 
+#endif
   {
     return false;
   }
@@ -261,6 +246,8 @@ int Socket::ReadData(char* buf, int n)
   {
 #if defined(WIN32)
     br = recv(m_socket,buf,n-bcount, 0);
+#elif defined (GEKKO)
+    br = net_read(m_socket,buf,n-bcount);
 #else
     br = read(m_socket,buf,n-bcount);
 #endif
@@ -289,6 +276,8 @@ int Socket::WriteData(const char* buf, int n)
   {
 #if defined(WIN32)
     br = send(m_socket,buf+bcount,n-bcount, 0);
+#elif defined (GEKKO)
+    br = net_send(m_socket,buf+bcount,n-bcount, 0);
 #else
     br = send(m_socket,buf+bcount,n-bcount, 0);
 #endif
