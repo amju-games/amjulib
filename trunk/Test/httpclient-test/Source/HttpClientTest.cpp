@@ -35,6 +35,17 @@ Added to repository
 #include "OnlineReqManager.h"
 #include "SocketService.h"
 #include "UrlUtils.h"
+
+#ifdef GEKKO
+#include <AmjuGL-GCube.h>
+#include <EventPollerImplWii.h>
+#include <Pause.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <network.h> // TODO TEMP TEST
+#include <errno.h> // "
+#endif
+
 #include "AmjuFinal.h"
 
 #define TEST_HTTP_CLIENT_GET
@@ -67,28 +78,12 @@ public:
     {
       std::cout << "FAILED: " << GetResult().GetErrorString().c_str() << "\n";
     }
-    exit(0);
   }
 };
 
-int main(int argc, char** argv)
+
+void TestGet(const std::string& url)
 {
-  AMJU_CALL_STACK;
-
-  if (argc != 2)
-  {
-    std::cout << "Usage: HttpClientTest <url> \n";
-    return 1;
-  }
-
-  SocketService ss;
-
-  std::string url = argv[1];
-
-  std::cout << "Raw URL: " << url.c_str() << "\n";
-  std::cout << "URL format: " << ToUrlFormat(url).c_str() << "\n";
-
-#ifdef TEST_HTTP_CLIENT_GET
   HttpClient hc;
 
   std::cout << "Testing GET..\n";
@@ -103,21 +98,34 @@ int main(int argc, char** argv)
   {
     std::cout << "Failed. Error: " << res.GetErrorString().c_str() << "\n";
   }
+}
 
-#endif
-
-#ifdef TEST_HTTP_CLIENT_POST
+void TestPost(const std::string& url)
+{
   HttpClient hc;
 
   std::cout << "Testing POST..\n";
   
   HttpResult res = hc.Get(url, HttpClient::POST);
-  std::cout << res.GetString().c_str() << "\n";
-#endif
+  
+  if (res.GetSuccess())
+  {
+    std::cout << res.GetString().c_str() << "\n";
+  }
+  else
+  {
+    std::cout << "Failed. Error: " << res.GetErrorString().c_str() << "\n";
+  }
+}
 
-#ifdef TEST_HTTP_REQ
+void TestHttpReq(const std::string& url)
+{
+  std::cout << "Testing HttpReq..\n";
+
   HttpReq req(url, HttpClient::GET);
   std::cout << "waiting";
+ 
+  // Uhh.. WTF, this isn't a separate thread ?!
   while (!req.IsFinished())
   {
     std::cout << ".";
@@ -126,9 +134,10 @@ int main(int argc, char** argv)
   std::cout << "FINISHED";
   std::cout << "\n";
   std::cout << req.GetResult().GetString().c_str() << "\n";
-#endif
+}
 
-#ifdef TEST_ONLINE_REQ_MAN
+void TestOnlineReq(const std::string& url)
+{
   OnlineReqManager rm;
   TestReq* pReq = new TestReq(url, HttpClient::GET, "test-request");
   rm.AddReq(pReq);
@@ -137,14 +146,49 @@ int main(int argc, char** argv)
     rm.Update();
     std::cout << ".";
     std::cout.flush();
-#ifdef MACOSX
+#if defined (MACOSX) || defined (GEKKO)
     sleep(1);
 #else
     Sleep(1000);
 #endif
   }
+}
+
+int main(int argc, char** argv)
+{
+  AMJU_CALL_STACK;
+
+#ifdef GEKKO
+  AmjuGL::SetImpl(new AmjuGLGCubeConsole);
+  AmjuGL::Init();
+  TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
+
+  // Initialise network -- TODO put somewhere sensible
+  while(net_init() == -EAGAIN);
 #endif
 
+  std::cout << "\n\n\n\n\nHello! I R HttpClientTest\n\n";
+
+  if (argc != 2)
+  {
+    std::cout << "Usage: HttpClientTest <url> \n";
+    PAUSE;
+    return 1;
+  }
+
+  SocketService ss;
+
+  std::string url = argv[1];
+
+  std::cout << "Raw URL: " << url.c_str() << "\n";
+  std::cout << "URL format: " << ToUrlFormat(url).c_str() << "\n";
+
+//  TestGet(url);
+  TestPost(url);
+//  TestHttpReq(url);
+//  TestOnlineReq(url);
+
+  PAUSE;
   return 0;
 }
 
