@@ -65,8 +65,6 @@ static int s_currentMatrix = 0;
 // Current colour
 Colour s_colour;
 
-static bool s_isConsole = false; // TODO remove this, bad idea
-
 static bool s_lighting = false;
 // Current lighting colours
 Colour s_ambient;
@@ -74,9 +72,43 @@ Colour s_material;
 
 //#define NO_LIGHTING
 
-AmjuGLGCube::AmjuGLGCube(bool console)
+AmjuGLGCubeConsole::AmjuGLGCubeConsole()
 {
-  s_isConsole = console;
+}
+
+void AmjuGLGCubeConsole::Init()
+{
+  // From console example - set up a console window for debugging/testing
+
+  VIDEO_Init();
+  
+  rmode = VIDEO_GetPreferredMode(NULL);
+  
+  PAD_Init();
+  
+  xfb[0] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
+    
+  VIDEO_Configure(rmode);
+    
+  VIDEO_SetNextFramebuffer(xfb[0]);
+  
+  VIDEO_SetBlack(FALSE);
+  VIDEO_Flush();
+  VIDEO_WaitVSync();
+  if(rmode->viTVMode&VI_NON_INTERLACE) VIDEO_WaitVSync();
+    
+  console_init(xfb[0],20,20,rmode->fbWidth,rmode->xfbHeight,rmode->fbWidth*2);
+}
+
+void AmjuGLGCubeConsole::Flip()
+{
+  // TODO I don't think we need this at all..?!
+  VIDEO_WaitVSync(); // TODO does this just wait, or does it do something ?
+  VIDEO_Flush();
+}
+
+AmjuGLGCube::AmjuGLGCube()
+{
   m_texId = 0;
 
   static const int WIDTH = 640;
@@ -108,11 +140,11 @@ void AmjuGLGCube::Flip()
 {
   AMJU_CALL_STACK;
   
-  if (s_isConsole)
-  {
-    VIDEO_WaitVSync();
-    return;
-  }
+//  if (s_isConsole)
+//  {
+//    VIDEO_WaitVSync();
+//    return;
+//  }
 
   GX_SetColorUpdate(GX_TRUE);
   GX_CopyDisp(xfb[curr_fb],GX_TRUE);
@@ -171,11 +203,6 @@ void AmjuGLGCube::DrawLighting(
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-
 #ifndef NO_LIGHTING
   /*
   // Example from nehe #8 sample
@@ -217,29 +244,6 @@ void AmjuGLGCube::DrawLighting(
 #endif // NO_LIGHTING
 }
 
-// From console example - set up a console window for debugging/testing
-void SetUpConsole()
-{
-  VIDEO_Init();
-  
-  rmode = VIDEO_GetPreferredMode(NULL);
-  
-  PAD_Init();
-  
-  xfb[0] = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
-    
-  VIDEO_Configure(rmode);
-    
-  VIDEO_SetNextFramebuffer(xfb[0]);
-  
-  VIDEO_SetBlack(FALSE);
-  VIDEO_Flush();
-  VIDEO_WaitVSync();
-  if(rmode->viTVMode&VI_NON_INTERLACE) VIDEO_WaitVSync();
-    
-  console_init(xfb[0],20,20,rmode->fbWidth,rmode->xfbHeight,rmode->fbWidth*2);
-}
-
 bool AmjuGLGCube::CreateWindow(AmjuGLWindowInfo*)
 {
   return true;
@@ -253,13 +257,6 @@ void AmjuGLGCube::Init()
 
   AMJU_CALL_STACK;
   
-  if (s_isConsole)
-  {
-    SetUpConsole();
-  return;
-  }
-  
- 
   f32 yscale;
   u32 xfbHeight;
  
@@ -347,12 +344,6 @@ void AmjuGLGCube::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, f
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-  //Mtx v; // view matrix
-  
   // setup our camera at the origin
   // looking down the -z axis with y up
   guVector cam = { eyeX, eyeY, eyeZ },  //{0.0F, 0.0F, 0.0F},
@@ -545,10 +536,6 @@ void AmjuGLGCube::DrawQuadList(const AmjuGL::Quads& quads)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  { 
-    return;
-  }
 
   // Can use GX_QUADS
 }
@@ -556,11 +543,6 @@ void AmjuGLGCube::DrawQuadList(const AmjuGL::Quads& quads)
 void AmjuGLGCube::DrawQuad(AmjuGL::Vert* verts)
 {
   AMJU_CALL_STACK;
-
-  if (s_isConsole)
-  {
-    return;
-  }
 
   // Or Can use GX_QUADS
 
@@ -586,11 +568,6 @@ void AmjuGLGCube::DrawIndexedTriList(
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-    return;
-  }
-
   // TODO
 }
 
@@ -598,11 +575,6 @@ void AmjuGLGCube::GetMatrix(AmjuGL::MatrixMode m, float result[16])
 {
   AMJU_CALL_STACK;
   
-  if (s_isConsole)
-  {
-    return;
-  }
-
   switch (m)
   {
   case AmjuGL::AMJU_MODELVIEW_MATRIX:
@@ -641,6 +613,9 @@ void AmjuGLGCube::GetMatrix(AmjuGL::MatrixMode m, float result[16])
     //glGetFloatv(GL_TEXTURE_MATRIX, result);
     Assert(0);
     return;
+
+  default:
+    Assert(0);
   }
 }
 
@@ -697,11 +672,6 @@ void AmjuGLGCube::SetIdentity()
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-  
   switch (s_currentMatrix)
   {
   case 0:
@@ -777,11 +747,6 @@ void AmjuGLGCube::Translate(float x, float y, float z)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-
   Mtx temp;
   guMtxIdentity(temp);
   guMtxTrans(temp, x, y, z);	
@@ -791,11 +756,6 @@ void AmjuGLGCube::Translate(float x, float y, float z)
 void AmjuGLGCube::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
-
-  if (s_isConsole)
-  {
-  return;
-  }
 
   Mtx temp;
   guMtxIdentity(temp);
@@ -807,11 +767,6 @@ void AmjuGLGCube::RotateX(float degs)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-  
   guVector axis = {1, 0, 0};
   
   Mtx m; // model matrix.
@@ -824,11 +779,6 @@ void AmjuGLGCube::RotateY(float degs)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-  return;
-  }
-
   guVector axis = {0, 1, 0};
   Mtx m; // model matrix.
   guMtxIdentity(m);
@@ -839,11 +789,6 @@ void AmjuGLGCube::RotateY(float degs)
 void AmjuGLGCube::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
-
-  if (s_isConsole)
-  {
-  return;
-  }
 
   guVector axis = {0, 0, 1};
   Mtx m; // model matrix.
@@ -900,21 +845,11 @@ void AmjuGLGCube::Disable(uint32 flag)
 void AmjuGLGCube::BlendFunc()
 {
   AMJU_CALL_STACK;
-
-  if (s_isConsole)
-  {
-  return;
-  }
 }
 
 void AmjuGLGCube::EnableZWrite(bool b)
 {
   AMJU_CALL_STACK;
-
-  if (s_isConsole)
-  {
-  return;
-  }
 }
 
 void AmjuGLGCube::DestroyTextureHandle(AmjuGL::TextureHandle* th)
@@ -946,10 +881,6 @@ void AmjuGLGCube::SetTextureMode(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {
-    return;
-  }
   s_tt = tt;
 }
 
@@ -1059,11 +990,6 @@ void AmjuGLGCube::SetTexture(
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  {  
-    return;
-  }
-
   GXTexObj* g = new GXTexObj;  
 
   // Convert to correct format
@@ -1097,11 +1023,6 @@ void AmjuGLGCube::UseTexture(AmjuGL::TextureHandle th)
 {
   AMJU_CALL_STACK;
 
-  if (s_isConsole)
-  { 
-    return;
-  }
-  
   int texId = (int)th;
   Assert(m_textures.find(texId) != m_textures.end());
   GXTexObj* g = m_textures[texId].m_texObj;
@@ -1111,7 +1032,6 @@ void AmjuGLGCube::UseTexture(AmjuGL::TextureHandle th)
 void AmjuGLGCube::GetScreenshot(unsigned char* buffer, int w, int h)
 {
   AMJU_CALL_STACK;
-  Assert(0);
 }
 
 Shader* AmjuGLGCube::LoadShader(const std::string& )
