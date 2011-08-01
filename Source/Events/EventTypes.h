@@ -22,6 +22,11 @@ struct Event
   virtual bool UpdateListener(EventListener*) = 0;
 };
 
+struct QuitEvent : public Event
+{
+  virtual bool UpdateListener(EventListener*);
+};
+
 enum KeyType
 {
   AMJU_KEY_CHAR,  // printable character

@@ -3,6 +3,11 @@
 
 namespace Amju
 {
+bool QuitEvent::UpdateListener(EventListener* el)
+{
+  return el->OnQuitEvent();
+}
+
 bool CursorEvent::UpdateListener(EventListener* el)
 {
   return el->OnCursorEvent(*this);
