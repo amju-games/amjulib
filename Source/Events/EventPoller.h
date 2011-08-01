@@ -12,6 +12,11 @@ class EventPollerImpl : public RefCounted
 public:
   virtual ~EventPollerImpl() {}
   virtual void Update(Listeners* pListeners) = 0;
+
+protected:
+  // Notify all listeners of the event until the event is handled
+  //  and only lower priority listeners have not been notified.
+  void NotifyListenersWithPriority(Event* evemt, Listeners* pListeners);
 };
 
 typedef RCPtr<EventPollerImpl> PEventPollerImpl;

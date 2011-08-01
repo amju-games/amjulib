@@ -9,6 +9,28 @@ EventPollerImpl* EventPoller::GetImpl()
   return m_pImpl;
 }
 
+void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pListeners)
+{
+  int eaten = AMJU_MAX_PRIORITY + 1;
+  for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
+  {
+    if (it->first > eaten)
+    {
+      // This listener has a lower priority than a listener which ate the event
+      break;
+    }
+
+    EventListener* listener = it->second;
+    Assert(listener);
+
+    if (event->UpdateListener(listener))
+    {
+      // Eaten
+      eaten = it->first;
+    }
+  }
+}
+
 void EventPoller::AddListener(EventListener* pListener, int priority)
 {
   Assert(pListener);
@@ -50,6 +72,8 @@ void EventPoller::SetImpl(EventPollerImpl* pImpl)
 void EventPoller::Update()
 {
   Assert(m_pImpl.GetPtr());
-  m_pImpl->Update(&m_listeners);
+  // Copy listeners so we can add or remove listeners in response to an event
+  Listeners copyListeners = m_listeners;
+  m_pImpl->Update(&copyListeners);
 }
 }
