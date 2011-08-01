@@ -59,10 +59,6 @@ public:
 
   virtual bool WriteFloat(float);
 
-  virtual bool WriteChar(char c);
-
-  virtual bool GetChar(char *);
-
 protected:
   bool Bind(int  portnum);
 
