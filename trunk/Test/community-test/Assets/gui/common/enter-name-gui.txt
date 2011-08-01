@@ -1,0 +1,22 @@
+// enter name gui
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+1
+
+// Element type
+gui-text
+// Element name
+objective-text
+// pos (coords are -1..1)
+-1, 0.9
+// size
+2.0, 0.1
+// Text (temp - overwritten by each level objective)
+Hello, I am GUI
+
