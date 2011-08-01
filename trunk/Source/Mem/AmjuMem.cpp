@@ -418,6 +418,10 @@ void ReportMem()
 
 // Dummy functions
 void SetBreakID(unsigned int ID) {}
+#ifdef GEKKO
+void SetBreakSize(std::size_t size) {}
+#else
 void SetBreakSize(size_t size) {}
+#endif
 
 #endif // USE_AMJU_DEBUG_NEW
