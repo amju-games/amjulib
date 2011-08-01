@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 
   // Initialise window etc
   //Amju::AmjuGLWindowInfo w(480, 320, false);
-  Amju::AmjuGLWindowInfo w(640, 480, false);
+  //Amju::AmjuGLWindowInfo w(640, 480, false);
   Amju::AmjuGL::CreateWindow(&w);
   Amju::AmjuGL::Init();
 //  Amju::AmjuGL::SetScreenRotation(10.0f);
