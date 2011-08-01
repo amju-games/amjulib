@@ -28,7 +28,7 @@ Added to repository
 
 #include <map>
 #include "Thread.h"
-#include "SharedPtr.h"
+#include "RCPtr.h"
 #include "Mutex.h"
 #include "Singleton.h"
 
@@ -42,7 +42,7 @@ public:
   // Called by the Thread ctor.
   // This ensures that a Thread object exists for the lifetime of 
   // the thread execution.
-  void AddThread(SharedPtr<Thread> pThread);
+  void AddThread(RCPtr<Thread> pThread);
 
   // Called by a thread function after Work() and Finish() have completed.
   // This decrements the ref count so the Thread object can be destroyed.
