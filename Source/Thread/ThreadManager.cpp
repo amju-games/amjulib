@@ -24,16 +24,12 @@ Added to repository
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
-
 #include "ThreadManager.h"
 #include "AmjuFinal.h"
 
 namespace Amju
 {
-void SingleThreadManager::AddThread(SharedPtr<Thread> pThread)
+void SingleThreadManager::AddThread(RCPtr<Thread> pThread)
 {
   AMJU_CALL_STACK;
 

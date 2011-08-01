@@ -1,3 +1,6 @@
+
+#ifndef GEKKO
+
 #include "AmjuFirst.h"
 #include <iostream>
 #ifndef WIN32
@@ -99,4 +102,6 @@ void ThreadGate::Open()
   pthread_mutex_unlock(&m_mutex);
 }
 }
+
+#endif // GEKKO
 

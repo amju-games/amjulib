@@ -19,6 +19,8 @@ by another thread.
 #ifndef THREAD_GATE_H_INCLUDED
 #define THREAD_GATE_H_INCLUDED
 
+#ifndef GEKKO // no Wii support 
+
 #ifdef MACOSX
 #include <pthread.h>
 #endif
@@ -61,4 +63,5 @@ protected:
 };
 
 }
-#endif
+#endif // GEKKO
+#endif // include guard

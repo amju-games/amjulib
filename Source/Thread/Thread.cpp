@@ -28,9 +28,6 @@ Added to repository
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
 
 #include <iostream>
 #include "Thread.h"
@@ -45,8 +42,7 @@ namespace Amju
 {
 #if defined(WIN32)
 void ThreadFunction(void *p)
-#endif
-#if defined(MACOSX)
+#else
 void* ThreadFunction(void* p)
 #endif
 {
@@ -57,7 +53,7 @@ void* ThreadFunction(void* p)
   // This thread has finished. Tell the ThreadManager to delete it.
   ThreadManager::Instance()->DeleteThread(pThread->GetThreadId());
   
-#if defined(MACOSX)
+#if !defined(WIN32)
   return (void*)0;
 #endif
 }
@@ -85,6 +81,21 @@ void Thread::Start()
   m_threadHandle = _beginthread(&ThreadFunction, 0, this);
   m_threadId = m_threadHandle;
 
+#elif defined (GEKKO)
+
+  pthread_t thrHandle;
+  if (!pthread_create(&thrHandle, 0, &ThreadFunction, this)) 
+  {
+      m_threadId = (int) thrHandle;
+      m_threadHandle = thrHandle;
+  }
+  else
+  {
+std::cout << "FAILED TO CREATE THREAD\n";
+    Assert(0);
+    return;
+  }
+
 #else
 
   pthread_t thrHandle;
@@ -101,14 +112,16 @@ void Thread::Start()
   else
   {
 std::cout << "FAILED TO CREATE THREAD\n";
+    Assert(0);
+    return;
   }
+#endif
 
   // Add this Thread to the ThreadManager.
   ThreadManager::Instance()->AddThread(this);
 
 int c = ThreadManager::Instance()->GetThreadCount();
 std::cout << "STARTED THREAD " << m_threadId << "  COUNT IS NOW " << c << "\n";
-#endif
 
 }
 

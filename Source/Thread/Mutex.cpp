@@ -64,11 +64,16 @@ void Mutex::Lock()
 
 #if defined(WIN32)
   EnterCriticalSection(&m_crit);
+
+#elif defined (GEKKO)
+  pthread_mutex_lock(&m_crit);               
+
 #else
   switch (pthread_mutex_trylock(&m_crit)) 
   {
   case 0:                                        
     break;
+
   case EBUSY:                                    
     if (m_nestCount > 0) 
     {                     
@@ -83,7 +88,8 @@ void Mutex::Lock()
   }
   m_owner = pthread_self();                      
   m_nestCount = 1;
-#endif
+
+#endif 
 }
 
 void Mutex::Unlock() 
@@ -92,6 +98,8 @@ void Mutex::Unlock()
 
 #if defined(WIN32)
   LeaveCriticalSection(&m_crit);
+#elif defined (GEKKO)
+    pthread_mutex_unlock(&m_crit);
 #else
   Assert(m_owner == pthread_self());
   Assert(m_nestCount > 0);
