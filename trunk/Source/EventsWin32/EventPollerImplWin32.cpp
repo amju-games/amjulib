@@ -21,6 +21,7 @@ EventPollerImplWin32::~EventPollerImplWin32()
   s_instance = 0;
 }
 
+/*
 void EventPollerImplWin32::UpdateListeners(Event* e)
 {
   if (m_listeners)
@@ -45,6 +46,7 @@ void EventPollerImplWin32::UpdateListeners(Event* e)
     }
   }
 }
+*/
 
 void EventPollerImplWin32::OnKey(WPARAM c, bool down)
 {
@@ -79,7 +81,7 @@ void EventPollerImplWin32::OnKey(WPARAM c, bool down)
     //ke.key = ???
   }
 
-  UpdateListeners(&ke);
+  NotifyListenersWithPriority(&ke, m_listeners);
 }
 
 void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
@@ -90,7 +92,7 @@ void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
   mbe.x = m_ce.x;
   mbe.y = m_ce.y;
 
-  UpdateListeners(&mbe);
+  NotifyListenersWithPriority(&mbe, m_listeners);
 }
 
 void EventPollerImplWin32::MouseMove(int x, int y)
@@ -101,7 +103,7 @@ void EventPollerImplWin32::MouseMove(int x, int y)
     m_ce.x = (float)x / (float)Screen::X() * 2.0f - 1.0f;
     m_ce.y = 1.0f - (float)y / (float)Screen::Y() * 2.0f;
 
-    UpdateListeners(&m_ce);
+    NotifyListenersWithPriority(&m_ce, m_listeners);
   }
 }
 
