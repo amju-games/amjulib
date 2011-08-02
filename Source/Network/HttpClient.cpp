@@ -185,7 +185,7 @@ std::string MakeHeader(
     std::string data = GetDataFromUrl(path).substr(1);
     if (!data.empty())
     {
-      data = data.substr(1); // lose '?'
+      data = data.substr(0); // lose '?'
     }
     std::string noDataPath = StripDataFromUrl(path); 
 
@@ -197,6 +197,7 @@ std::string MakeHeader(
     getReqStr += "\r\n\r\n";
     getReqStr += data;
   }
+
   return getReqStr;
 }
 
