@@ -110,6 +110,7 @@ Added to repository
 
 #include <iostream>
 #include "HttpClient.h"
+#include "SocketService.h"
 #include "ClientSocket.h"
 #include "StringUtils.h"
 #include "UrlUtils.h"
@@ -550,6 +551,8 @@ HttpResult HttpClient::Get(
   HttpClient::HttpMethod m)
 {
   AMJU_CALL_STACK;
+
+  TheSocketService::Instance(); // make sure we are initialised
 
   std::string path = GetPathFromUrl(url);
   std::string host = GetServerNameFromUrl(url);

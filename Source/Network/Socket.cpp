@@ -20,6 +20,8 @@ Added to repository
 
 #include "AmjuFirst.h"
 #include "Socket.h"
+#include "SocketService.h"
+
 #if defined(WIN32)
 #include <winsock2.h>
 #include <windows.h>
@@ -37,6 +39,8 @@ namespace Amju
 Socket::Socket() 
 {
   AMJU_CALL_STACK;
+
+  TheSocketService::Instance(); // make sure we are initialised
 
 #if defined(WIN32)
   m_socket = socket(AF_INET, SOCK_STREAM, 0);

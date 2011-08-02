@@ -12,15 +12,18 @@ Added to repository
   
 */
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "AmjuFirst.h"
 #include "SocketService.h"
 
 #if defined(WIN32)
 #include <winsock2.h>
 #endif
+
+#ifdef GEKKO
+#include <network.h>
+#include <errno.h>
+#endif
+
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -33,6 +36,13 @@ SocketService::SocketService()
   WSADATA wsaData;
   WSAStartup(MAKEWORD(2, 0), &wsaData);
 #endif
+
+#ifdef GEKKO
+  while (net_init() == -EAGAIN)
+  {
+    // TODO Yield
+  }
+#endif
 }
 
 SocketService::~SocketService()
@@ -42,5 +52,7 @@ SocketService::~SocketService()
 #if defined(WIN32)
   WSACleanup();
 #endif
+
+// TODO GEKKO cleanup ?
 }
 }
