@@ -41,9 +41,7 @@ Added to repository
 #include <EventPollerImplWii.h>
 #include <Pause.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <network.h> // TODO TEMP TEST
-#include <errno.h> // "
+#include <unistd.h> // sleep()
 #endif
 
 #include "AmjuFinal.h"
@@ -162,9 +160,6 @@ int main(int argc, char** argv)
   AmjuGL::SetImpl(new AmjuGLGCubeConsole);
   AmjuGL::Init();
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
-
-  // Initialise network -- TODO put somewhere sensible
-  while(net_init() == -EAGAIN);
 #endif
 
   std::cout << "\n\n\n\n\nHello! I R HttpClientTest\n\n";
@@ -175,8 +170,6 @@ int main(int argc, char** argv)
     PAUSE;
     return 1;
   }
-
-  SocketService ss;
 
   std::string url = argv[1];
 
