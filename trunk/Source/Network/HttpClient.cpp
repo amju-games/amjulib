@@ -182,10 +182,10 @@ std::string MakeHeader(
   }
   else if (m == HttpClient::POST)
   {
-    std::string data = GetDataFromUrl(path).substr(1);
+    std::string data = GetDataFromUrl(path);
     if (!data.empty())
     {
-      data = data.substr(0); // lose '?'
+      data = data.substr(1); // lose '?'
     }
     std::string noDataPath = StripDataFromUrl(path); 
 
