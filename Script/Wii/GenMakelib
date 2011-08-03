@@ -34,6 +34,40 @@ include $(DEVKITPPC)/wii_rules
 #BUILD		:=	../../../../Build/obj2bin/Mac
 #TARGET		:=	$(BUILD)/obj2bin
 #AMJU      := ../../../../Source
+
+AMJU_LIB_DIRS := \
+  $(AMJU)/AmjuGL \
+  $(AMJU)/AmjuGLGCube \
+  $(AMJU)/Clip \
+  $(AMJU)/Collision \
+  $(AMJU)/Community \
+  $(AMJU)/Events \
+  $(AMJU)/EventsWii \
+  $(AMJU)/FileUtils \
+  $(AMJU)/Font \
+  $(AMJU)/Game \
+  $(AMJU)/Geom \
+  $(AMJU)/GeomDraw \
+  $(AMJU)/GeomLoad \
+  $(AMJU)/Gui \
+  $(AMJU)/Image \
+  $(AMJU)/Image/Png \
+  $(AMJU)/Localise \
+  $(AMJU)/Main \
+  $(AMJU)/Md2 \
+  $(AMJU)/Mem \
+  $(AMJU)/Network \
+  $(AMJU)/Obj \
+  $(AMJU)/Resource \
+  $(AMJU)/Scene \
+  $(AMJU)/Sound \
+  $(AMJU)/SoundWii \
+  $(AMJU)/Strings \
+  $(AMJU)/Thread \
+  $(AMJU)/TimeUtils \
+  $(AMJU)/Utils \
+  $(AMJU)/Utils/Zlib
+  
 INCLUDES	:=	$(AMJU_LIB_DIRS) $(AMJU)/Main
 
 # Defined in including Makefile
@@ -51,16 +85,14 @@ LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-AMJULIB = $(AMJULIB_WII_SCRIPT_PATH)/../../Build/WiiBuild/
-
-LIBS	:=	-lamju -lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
+LIBS	:=	-lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
 # j.c. extra for SoundGekko
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= 
+LIBDIRS	:=
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -122,8 +154,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 # build a list of library paths
 #---------------------------------------------------------------------------------
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
-				-L$(LIBOGC_LIB) \
-				-L$(AMJULIB)
+				-L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) clean
@@ -152,8 +183,7 @@ else
 # main targets
 #---------------------------------------------------------------------------------
 
-$(OUTPUT).dol: $(OUTPUT).elf
-$(OUTPUT).elf: $(OFILES)
+$(OUTPUT).a: $(OFILES)
 
 -include $(DEPSDIR)/*.d
 
