@@ -35,11 +35,11 @@ Added to repository
 #include "OnlineReqManager.h"
 #include "SocketService.h"
 #include "UrlUtils.h"
+#include <Pause.h>
 
 #ifdef GEKKO
 #include <AmjuGL-GCube.h>
 #include <EventPollerImplWii.h>
-#include <Pause.h>
 #include <stdlib.h>
 #include <unistd.h> // sleep()
 #endif
