@@ -12,8 +12,6 @@ RUNDIR 		:=	../../Assets
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
-	-framework OpenGL \
-	-framework GLUT \
 	-lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
