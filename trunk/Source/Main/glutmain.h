@@ -20,12 +20,12 @@
 static const int WINDOW_W = 640;
 static const int WINDOW_H = 480;
 
-extern Amju::AmjuGLWindowInfo w;
-
 using namespace Amju;
 
 namespace Amju
 {
+extern AmjuGLWindowInfo w;
+
 // TODO Make this a GLUT version in AmjuGLOpenGL
 bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo*)
 {

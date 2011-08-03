@@ -31,6 +31,11 @@
 
 using namespace Amju;
 
+namespace Amju
+{
+extern Amju::AmjuGLWindowInfo w;
+}
+
 // Windows: use OpenGL or Direct 3D 
 #define USE_OPENGL_NOT_D3D
 
@@ -39,7 +44,7 @@ int main(int argc, char **argv)
   std::cout << "Hello, in main!\n";
 
 #ifdef GEKKO
-	AmjuGL::SetImpl(new AmjuGLGCube(false /* console */));
+  AmjuGL::SetImpl(new AmjuGLGCube);
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
   TheSoundManager::Instance()->SetImpl(new SoundWii);
   // TODO Any way we can get the directory where the executable lives ?
