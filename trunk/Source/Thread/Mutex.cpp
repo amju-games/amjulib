@@ -25,7 +25,7 @@ Added to repository
 #pragma warning(disable: 4786)
 #endif
 #include "AmjuFirst.h"
-#ifdef MACOSX
+#if defined(MACOSX) || defined(IPHONE)
 #include "sys/errno.h"
 #endif
 
