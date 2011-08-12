@@ -1032,6 +1032,11 @@ void AmjuGLGCube::UseTexture(AmjuGL::TextureHandle th)
 void AmjuGLGCube::GetScreenshot(unsigned char* buffer, int w, int h)
 {
   AMJU_CALL_STACK;
+
+  Assert(w == rmode->fbWidth);
+  Assert(h == rmode->xfbHeight);
+  int bytes = w * h * 3;
+  memcpy(buffer, xfb[curr_fb], bytes); 
 }
 
 Shader* AmjuGLGCube::LoadShader(const std::string& )
