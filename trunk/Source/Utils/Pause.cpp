@@ -1,6 +1,5 @@
 #include "AmjuFirst.h"
 #include "Pause.h"
-#include "AmjuFinal.h"
 #include <iostream>
 
 #if defined(GEKKO) 
@@ -8,6 +7,11 @@
 #include <stdlib.h> // exit 
 #endif // GEKKO
 
+#ifdef MACOSX
+#include <curses.h>
+#endif
+
+#include "AmjuFinal.h"
 
 namespace Amju
 {
@@ -15,6 +19,11 @@ void Pause(const char* funcName, const char* fileName, unsigned int line)
 {
   AMJU_CALL_STACK;
   std::cout << "Paused in " << funcName << " (" << fileName << ":" << line << ")...\n";
+
+#ifdef MACOSX
+  std::cout << "Press enter to continue..."; 
+  getch();
+#endif
 
 #ifdef WIN32
   system("pause");
