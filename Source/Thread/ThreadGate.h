@@ -21,7 +21,7 @@ by another thread.
 
 #ifndef GEKKO // no Wii support 
 
-#ifdef MACOSX
+#if defined(MACOSX) || defined (IPHONE)
 #include <pthread.h>
 #endif
 #include "Mutex.h"
@@ -54,7 +54,7 @@ public:
   void Open();
 
 protected:
-#ifdef MACOSX
+#if defined(MACOSX) || defined(IPHONE)
   // Condition variable
   pthread_cond_t m_cond;
   // Mutex, which function pthread_cond_wait requires.
