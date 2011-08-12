@@ -71,20 +71,20 @@ void SceneNode::SetParent(SceneNode* p)
   
 void SceneNode::RecursivelyTransformAABB(const Matrix& m)
 {
-#ifdef _DEBUG
+#ifdef AABB_TRANSFORM_DEBUG
 std::cout << "Scene node transform AABB... ";
 #endif
 
   GetAABB()->Transform(m);
   unsigned int s = m_children.size();
 
-#ifdef _DEBUG
+#ifdef AABB_TRANSFORM_DEBUG
 std::cout << s << " children... ";
 #endif
 
   for (unsigned int i = 0; i < s; i++)
   {
-#ifdef _DEBUG
+#ifdef AABB_TRANSFORM_DEBUG
 std::cout << " child " << i << "... ";
 #endif
     
