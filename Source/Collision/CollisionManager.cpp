@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include <iostream>
 
 namespace Amju
 {
@@ -18,6 +19,8 @@ bool CollisionManager::HandleCollision(GameObject* pGo1, GameObject* pGo2)
   CollisionMap::iterator it = m_map.find(tnp);
   if (it != m_map.end())
   {
+std::cout << "COLL_MGR: Calling collision handler for " << tnp.first << " and " << tnp.second << "\n";
+
     CollisionHandler ch = it->second;
     ch(pGo1, pGo2);
     return true;
@@ -27,6 +30,8 @@ bool CollisionManager::HandleCollision(GameObject* pGo1, GameObject* pGo2)
   it = m_map.find(tnp);
   if (it != m_map.end())
   {
+std::cout << "COLL_MGR: Calling collision handler for " << tnp.first << " and " << tnp.second << "\n";
+
     CollisionHandler ch = it->second;
     ch(pGo2, pGo1); // swapped
     return true;
