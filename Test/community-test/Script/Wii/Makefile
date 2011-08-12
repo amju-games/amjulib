@@ -12,7 +12,7 @@ AMJU      	:= 	../../../../Source
 
 include $(AMJULIB_WII_SCRIPT_PATH)/AmjuLibDirs
 
-SOURCES         :=      ../../Source $(AMJU_LIB_DIRS)
+SOURCES         :=      ../../Source 
 
 include $(AMJULIB_WII_SCRIPT_PATH)/GenMakefile
 
