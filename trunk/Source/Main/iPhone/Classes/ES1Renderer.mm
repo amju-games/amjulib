@@ -4,7 +4,6 @@
 #import "ES1Renderer.h"
 
 #include <sys/time.h> // gettimeofday, for FPS count
-#include "StartUp.h"
 #include <Game.h>
 #include <AmjuGL.h>
 #include <AmjuGL-OpenGLES.h>
