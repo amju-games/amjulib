@@ -44,7 +44,11 @@ protected:
   Vec3f m_acc;
 //  AABB m_aabb; // all Game Objects have a bounding box
 };
+
 typedef RCPtr<GameObject> PGameObject;
+  
+typedef std::map<int, PGameObject> GameObjects;
+
 }
 
 #endif
