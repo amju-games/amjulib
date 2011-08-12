@@ -81,8 +81,10 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos);
 
-}; // class 
+  // True if shaders are supported on this machine
+  static bool s_shaderSupport;
 
+}; // class 
 } // namespace Amju
 
 #endif

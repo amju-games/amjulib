@@ -14,6 +14,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
+bool AmjuGLOpenGLBase::s_shaderSupport = false;
+
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;

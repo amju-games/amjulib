@@ -1,14 +1,13 @@
+#ifndef IPHONE // TODO TEMP TEST
+
 #include "AmjuFirst.h"
 #include "GLShader.h"
-//#ifdef WIN32
-//#include <windows.h>
-//#endif
 
 #include <iostream>
-#ifdef WIN32
-#include "GL/glew.h"
-#endif
-#include "AmjuGL-OpenGL.h"
+//#ifdef WIN32
+//#include "GL/glew.h"
+//#endif
+#include "AmjuGL-OpenGL-Base.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
 #include <File.h>
@@ -39,7 +38,7 @@ bool GLShader::Load(const std::string& shadername)
 std::cout << "Loading shader: " << shadername << "\n";
 #endif
 
-  if (!AmjuGLOpenGL::s_shaderSupport)
+  if (!AmjuGLOpenGLBase::s_shaderSupport)
   {
     m_errorStr = "GLSL not supported";
     return false;
@@ -81,7 +80,7 @@ bool GLShader::Create(const std::string& vertexSource, const std::string& fragme
 {
   AMJU_CALL_STACK;
 
-  if (!AmjuGLOpenGL::s_shaderSupport)
+  if (!AmjuGLOpenGLBase::s_shaderSupport)
   {
     m_errorStr = "GLSL not supported";
     return false;
@@ -254,3 +253,6 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
 {
 }
 }
+
+#endif //  IPHONE // TODO TEMP TEST
+

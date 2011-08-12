@@ -62,10 +62,6 @@ public:
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
 
-//private:
-  // True if shaders are supported on this machine
-  static bool s_shaderSupport;
-
 }; // class 
 
 } // namespace Amju
