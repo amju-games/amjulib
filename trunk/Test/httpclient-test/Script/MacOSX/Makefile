@@ -12,7 +12,7 @@ RUNDIR 		:=	../../Assets
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
-	-lstdc++ -lm 
+	-lcurses -lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
