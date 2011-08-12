@@ -10,7 +10,22 @@ Game::Game()
 {
   TheEventPoller::Instance()->AddListener(this);
   m_currentState = 0;
+  m_pauseState = 0;
   m_newState = 0;
+}
+
+
+void Game::PauseGame()
+{
+  if (m_pauseState)
+  {
+    SetCurrentState(m_pauseState);
+  }
+}
+
+void Game::RegisterPauseState(GameState* pauseState)
+{
+  m_pauseState = pauseState;
 }
 
 void Game::Update()
@@ -149,7 +164,7 @@ void Game::ClearGameObjects()
   m_objects.clear();
 }
 
-Game::GameObjects* Game::GetGameObjects()
+GameObjects* Game::GetGameObjects()
 {
   return &m_objects;
 }

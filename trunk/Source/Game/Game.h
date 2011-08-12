@@ -28,13 +28,18 @@ public:
   // Event Listener
   virtual bool OnQuitEvent();
 
+  // Called by device/OS when this app is interrupted. E.g. on phone, a call is received.
+  // Go to game state registered as the Pause state, if any.
+  void PauseGame(); 
+
+  // Register the state which we should go to if paused by function above.
+  void RegisterPauseState(GameState*);
+
   // Game States
   GameState* GetState(); // Get current state
   void SetCurrentState(GameState* gs);
 
   // Game Objects
-  typedef std::map<int, PGameObject> GameObjects;
-
   PGameObject GetGameObject(int id);
   void AddGameObject(PGameObject object);
   void EraseGameObject(int id);
@@ -51,6 +56,7 @@ private:
 
 private:
   GameState* m_currentState;
+  GameState* m_pauseState;
   GameState* m_newState;
 
   GameObjects m_objects;
