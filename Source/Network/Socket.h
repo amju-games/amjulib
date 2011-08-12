@@ -13,7 +13,7 @@ Added to repository
 #include <winsock2.h>
 #endif
 
-#if defined(MACOSX)
+#if defined(MACOSX) || defined (IPHONE)
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
