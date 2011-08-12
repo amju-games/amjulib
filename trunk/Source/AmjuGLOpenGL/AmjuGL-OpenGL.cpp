@@ -2,6 +2,8 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
+#if defined (WIN32) || defined (MACOSX)
+
 #ifdef WIN32
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
@@ -9,7 +11,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #include "AmjuFirst.h"
 #include <iostream>
-#include "GL/glew.h"
+//#include "GL/glew.h"
 #include "AmjuGL-OpenGL.h"
 #include "GLShader.h"
 #include "ShaderNull.h"
@@ -26,8 +28,6 @@ namespace Amju
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
-
-bool AmjuGLOpenGL::s_shaderSupport = false;
 
 void AmjuGLOpenGL::Flip()
 {
@@ -387,4 +387,5 @@ Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
 }
 }
 
+#endif // defined (WIN32) || defined (MACOSX)
 

@@ -58,7 +58,7 @@
 
 */
 
-
+#ifndef IPHONE // j.c.
 
 #include "./GL/glew.h"
 
@@ -21484,3 +21484,4 @@ GLboolean glxewIsSupported (const char* name)
 
 #endif /* _WIN32 */
 
+#endif // IPHONE j.c.
