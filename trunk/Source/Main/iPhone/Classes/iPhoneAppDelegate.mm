@@ -8,8 +8,6 @@
 
 #import "iPhoneAppDelegate.h"
 #import "EAGLView.h"
-#include "GSPaused.h"
-#include "GSMain.h"
 #include <Game.h>
 
 @implementation iPhoneAppDelegate
@@ -40,15 +38,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  // TODO This is game-specific -- call a game-specific function
- 
-	// Pause if we are currently playing
-	if (Amju::TheGame::Instance()->GetState() == Amju::TheGSMain::Instance())
-	{
-	  Amju::TheGame::Instance()->SetCurrentState(Amju::TheGSPaused::Instance());
-	  // Force change - doesn't work :-( 
-      Amju::TheGame::Instance()->Update();
-	}
+  Amju::TheGame::Instance()->PauseGame();
 }
 
 
