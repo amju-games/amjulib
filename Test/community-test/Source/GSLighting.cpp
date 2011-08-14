@@ -6,6 +6,7 @@
 #include <Colour.h>
 #include <Font.h>
 #include <Screenshot.h>
+#include <Teapot.h>
 
 namespace Amju
 {
@@ -33,7 +34,7 @@ void GSLighting::Draw()
   AmjuGL::LookAt(0, 5, 10,  0, 0, 0,  0, 1, 0);
 
   TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
-/*
+
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::DrawLighting(
     AmjuGL::LightColour(0, 0, 0),
@@ -41,7 +42,7 @@ void GSLighting::Draw()
     AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(1, 1, 1)); // Light direction
-*/
+
 
   static float f = 0;
   f += 0.2f;
@@ -49,10 +50,14 @@ void GSLighting::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
   static AABB aabb(-1, 1, -1, 1, -1, 1);
+  static Teapot tp;
 
   AmjuGL::PushMatrix();
   AmjuGL::RotateY(f);
-  DrawSolidAABB(aabb);
+  AmjuGL::Scale(2, 2, 2);
+  //DrawSolidAABB(aabb);
+  tp.Draw();
+
   AmjuGL::PopMatrix();
 }
 
