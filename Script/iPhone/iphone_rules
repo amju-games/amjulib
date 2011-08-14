@@ -1,0 +1,11 @@
+
+MACHDEP =  -arch armv6 -DIPHONE -fmessage-length=0 -pipe -fpascal-strings -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -miphoneos-version-min=4.0
+
+include $(AMJULIB_IPHONE_SCRIPT_PATH)/base_rules
+
+
+# j.c.
+BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
+
+BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
+
