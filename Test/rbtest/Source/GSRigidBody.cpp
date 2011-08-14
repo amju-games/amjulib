@@ -3,7 +3,9 @@
 #include <AmjuGL.h>
 #include <Font.h>
 #include <StringUtils.h>
+#include <AmjuGL.h>
 #include "RBBox.h"
+#include "RBSphere.h"
 
 namespace Amju
 {
@@ -18,6 +20,9 @@ void GSRigidBody::Update()
 
 void GSRigidBody::Draw()
 {
+  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+
+  GSBase::Draw();
 
   m_rb->Draw();
 }
@@ -28,7 +33,7 @@ void GSRigidBody::Draw2d()
 
 void GSRigidBody::OnActive()
 {
-  GameState::OnActive();
+  GSBase::OnActive();
   m_rb = new RBBox;
 }
 

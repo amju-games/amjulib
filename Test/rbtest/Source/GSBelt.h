@@ -1,13 +1,13 @@
 #ifndef GS_BELT_H
 #define GS_BELT_H
 
-#include <GameState.h>
+#include "GSBase.h"
 #include <Singleton.h>
 #include "SpringSystem.h"
 
 namespace Amju
 {
-class GSBelt : public GameState
+class GSBelt : public GSBase
 {
   GSBelt();
   friend class Singleton<GSBelt>;
