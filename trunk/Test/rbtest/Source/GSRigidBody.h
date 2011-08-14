@@ -4,11 +4,11 @@
 #include "RigidBody.h"
 #include <Vec2.h>
 #include <Singleton.h>
-#include <GameState.h>
+#include "GSBase.h"
 
 namespace Amju
 {
-class GSRigidBody : public GameState
+class GSRigidBody : public GSBase
 {
 public:
   GSRigidBody();
