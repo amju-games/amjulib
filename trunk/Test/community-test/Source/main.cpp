@@ -4,11 +4,11 @@
 //#include "GSEnterName.h"
 #include "GSLighting.h"
 
-// Create global variable window info 
-Amju::AmjuGLWindowInfo w(640, 480, false);
-
 namespace Amju
 {
+// Create global variable window info 
+AmjuGLWindowInfo w(640, 480, false);
+
 void StartUp()
 {
 #ifdef GEKKO
