@@ -122,8 +122,8 @@ void TestHttpReq(const std::string& url)
 
   HttpReq req(url, HttpClient::GET);
   std::cout << "waiting";
- 
-  // Uhh.. WTF, this isn't a separate thread ?!
+
+  // TODO This won't work, as we are not calling CreateWorker() 
   while (!req.IsFinished())
   {
     std::cout << ".";
@@ -177,9 +177,9 @@ int main(int argc, char** argv)
   std::cout << "URL format: " << ToUrlFormat(url).c_str() << "\n";
 
 //  TestGet(url);
-  TestPost(url);
+//  TestPost(url);
 //  TestHttpReq(url);
-//  TestOnlineReq(url);
+  TestOnlineReq(url);
 
   PAUSE;
   return 0;
