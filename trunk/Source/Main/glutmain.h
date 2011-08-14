@@ -138,8 +138,11 @@ int main(int argc, char **argv)
   // TODO Have a CreateWindow for GLUT.. but events are tangled up with creating windows :-(
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
-  glutInitWindowSize(WINDOW_W, WINDOW_H);
-  glutCreateWindow("Hello");
+
+  // w is global defined in game-specific code
+  glutInitWindowSize(w.GetWidth(), w.GetHeight()); //WINDOW_W, WINDOW_H);
+
+  glutCreateWindow("Hello"); // TODO App name
   glutDisplayFunc(draw);
   glutKeyboardFunc(keydown);
   glutKeyboardUpFunc(keyup);
@@ -158,10 +161,7 @@ int main(int argc, char **argv)
   Amju::AmjuGL::CreateWindow(&w);
   Amju::AmjuGL::Init();
 
-  // TODO Do this in game-specific code
-  //TheSoundManager::Instance()->SetImpl(new BassSoundPlayer); 
-
-  // TODO This game-specific function must be defined for each project
+  // This game-specific function must be defined for each project
   StartUp();
 
   // Can't do this, glutMainLoop is in charge

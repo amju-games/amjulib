@@ -48,7 +48,7 @@ int main(int argc, char **argv)
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
   TheSoundManager::Instance()->SetImpl(new SoundWii);
   // TODO Any way we can get the directory where the executable lives ?
-  File::SetRoot("/apps/amju_ww/data/", "/");
+  //File::SetRoot("/apps/amju_ww/data/", "/");
 #endif // GEKKO
 
 #ifdef WIN32
@@ -68,8 +68,6 @@ int main(int argc, char **argv)
 #endif // WIN32
 
   // Initialise window etc
-  //Amju::AmjuGLWindowInfo w(480, 320, false);
-  //Amju::AmjuGLWindowInfo w(640, 480, false);
   Amju::AmjuGL::CreateWindow(&w);
   Amju::AmjuGL::Init();
 //  Amju::AmjuGL::SetScreenRotation(10.0f);

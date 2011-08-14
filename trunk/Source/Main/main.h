@@ -7,7 +7,7 @@ void StartUp();
 #include "iPhone/Classes/EAGLView.mm"
 #include "iPhone/Classes/ES1Renderer.mm"
 #include "iPhone/Classes/iPhoneAppDelegate.mm"
-#include "iPhone/main.m"
+#include "iPhone/main.mm"
 #else // IPHONE
 
 #ifdef AMJU_USE_GLUT
