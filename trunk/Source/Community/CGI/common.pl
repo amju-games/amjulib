@@ -9,7 +9,12 @@ use CGI qw(:standard);
 use DBI;
 use CGI::Carp qw(fatalsToBrowser);
 
+our $dsn;
+our $username;
+our $pass;
+
 require "credentials.pl";
+
 
 # Global database connection
 # OUR - not MY - so we can access it from files which "require" this one
