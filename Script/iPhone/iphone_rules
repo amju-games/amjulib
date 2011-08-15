@@ -1,5 +1,5 @@
 
-MACHDEP =  -arch armv6 -DIPHONE -fmessage-length=0 -pipe -fpascal-strings -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -miphoneos-version-min=4.0
+MACHDEP =  -arch armv6 -DLANDSCAPE -DIPHONE -fmessage-length=0 -pipe -fpascal-strings -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk -miphoneos-version-min=4.0
 
 include $(AMJULIB_IPHONE_SCRIPT_PATH)/base_rules
 
