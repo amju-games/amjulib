@@ -14,8 +14,8 @@
 // Assume we always use OpenGL for now
 #include <AmjuGL-OpenGL.h>
 #include <EventPollerImplSDL.h>
-//#include <AmjuGL-OpenGLES.h> // TODO TEMP TEST
 #include <AmjuGL-DX9.h>
+#include <AmjuGL-DX11.h>
 #include <EventPollerImplWin32.h>
 #include <BassSoundPlayer.h>
 #endif // WIN32
@@ -36,9 +36,6 @@ namespace Amju
 extern Amju::AmjuGLWindowInfo w;
 }
 
-// Windows: use OpenGL or Direct 3D 
-#define USE_OPENGL_NOT_D3D
-
 int main(int argc, char **argv)
 {
   std::cout << "Hello, in main!\n";
@@ -52,23 +49,36 @@ int main(int argc, char **argv)
 #endif // GEKKO
 
 #ifdef WIN32
-//	AmjuGL::SetImpl(new AmjuGLOpenGLES);
-#ifdef USE_OPENGL_NOT_D3D
+
+#if !defined(AMJU_USE_OPENGL) && !defined(AMJU_USE_DX9) && !defined(AMJU_USE_DX11)
+#error Dude, ATM you must define one of AMJU_USE_OPENGL, AMJU_USE_DX9 or AMJU_USE_DX11 in your main.cpp
+#endif
+
+#ifdef AMJU_USE_OPENGL
   std::cout << "Using OpenGL\n";
   AmjuGL::SetImpl(new AmjuGLOpenGL);
   TheEventPoller::Instance()->SetImpl(new EventPollerImplSDL);
-#else // USE_OPENGL_NOT_D3D
+#endif // AMJU_USE_OPENGL
+
+#ifdef AMJU_USE_DX9
   std::cout << "Using DX9\n";
   // Must use Win32 event poller with D3D
   AmjuGL::SetImpl(new AmjuGLDX9((WNDPROC)&EventPollerImplWin32::WndProc));
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWin32);
-#endif // USE_OPENGL_NOT_D3D
+#endif // AMJU_USE_DX9
+
+#ifdef AMJU_USE_DX11
+  std::cout << "Using DX11, woohoo\n";
+  // Must use Win32 event poller with D3D
+  AmjuGL::SetImpl(new AmjuGLDX11((WNDPROC)&EventPollerImplWin32::WndProc));
+  TheEventPoller::Instance()->SetImpl(new EventPollerImplWin32);
+#endif // AMJU_USE_DX11
 
   TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
 #endif // WIN32
 
   // Initialise window etc
-  Amju::AmjuGL::CreateWindow(&w);
+  Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
   Amju::AmjuGL::Init();
 //  Amju::AmjuGL::SetScreenRotation(10.0f);
 
