@@ -49,8 +49,6 @@ public:
   // Functions commonly used by Game States
   void UpdateGameObjects();
 
-  void SetClearColour(const Colour&);
-
 private:
   void UpdateState(); // go to new state if set
 
@@ -60,8 +58,6 @@ private:
   GameState* m_newState;
 
   GameObjects m_objects;
-
-  Colour m_clearColour;
 };
 typedef Singleton<Game> TheGame;
 }
