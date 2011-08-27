@@ -8,6 +8,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <string>
 #include <vector>
 #include "AmjuTypes.h"
+#include "Colour.h"
 
 #ifdef CreateWindow
 #undef CreateWindow
@@ -18,7 +19,6 @@ namespace Amju
 class AmjuGLImpl;
 class AmjuGLWindowInfo;
 class Shader;
-struct Colour;
 
 struct AmjuGL
 {
@@ -88,7 +88,7 @@ public:
     Vert m_verts[4];
   };
 
-  typedef std::vector<Quad> Quads;
+  //typedef std::vector<Quad> Quads;
 
   // Call once at app startup
   static void Init();
@@ -115,7 +115,9 @@ public:
 
   // Call at start of drawing every frame.
   // Specify clear colour
-  static void InitFrame(float clearR, float clearG, float clearB);
+  static void SetClearColour(const Colour& col);
+
+  static void InitFrame();
 
   // Set up perspective projection matrix, by specifying field-of-view 
   //  and aspect ratio, and distances to the near and far planes (> 0).

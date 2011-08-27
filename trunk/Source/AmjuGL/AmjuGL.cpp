@@ -107,11 +107,17 @@ bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
   return impl->CreateWindow(w);
 }
 
-void AmjuGL::InitFrame(float clearR, float clearG, float clearB)
+static Colour clearCol;
+void AmjuGL::SetClearColour(const Colour& col)
+{
+  clearCol = col;
+}
+
+void AmjuGL::InitFrame()
 {
   AMJU_CALL_STACK;
 
-  impl->InitFrame(clearR, clearG, clearB);
+  impl->InitFrame(clearCol.m_r, clearCol.m_g, clearCol.m_b);
 }
 
 void AmjuGL::SetPerspectiveProjection(
