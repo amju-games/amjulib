@@ -12,8 +12,6 @@ class Shader : public RefCounted
 public:
   virtual ~Shader() {}
 
-  virtual bool Load(const std::string&) = 0;
-
   // TODO Allow multiple techniques ?
   virtual void Begin() = 0;
   virtual void End() = 0;
