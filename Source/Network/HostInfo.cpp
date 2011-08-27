@@ -87,6 +87,10 @@ bool GetHostInfo(InfoVec* v)
   freeifaddrs(interfaces); // Free memory
   return (success == 0);
 #endif // MACOSX/IPHONE
+
+#ifdef WIN32
+  return false; // TODO
+#endif // WIN32
 }
 }
 
