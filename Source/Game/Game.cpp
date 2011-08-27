@@ -40,7 +40,7 @@ void Game::Update()
 
 void Game::Draw()
 {
-  AmjuGL::InitFrame(m_clearColour.m_r, m_clearColour.m_g, m_clearColour.m_b);
+  AmjuGL::InitFrame();
 
   AmjuGL::BeginScene();
 
@@ -167,10 +167,5 @@ void Game::ClearGameObjects()
 GameObjects* Game::GetGameObjects()
 {
   return &m_objects;
-}
-
-void Game::SetClearColour(const Colour& c)
-{
-  m_clearColour = c;
 }
 }
