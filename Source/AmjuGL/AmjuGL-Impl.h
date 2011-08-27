@@ -51,12 +51,6 @@ public:
   // Draw line in current colour between 2 absolute coords
   virtual void DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2) = 0;
 
-  // Draw quad with the 4 vertices
-  virtual void DrawQuad(AmjuGL::Vert* verts) = 0;
-
-  // Draw list of quads
-  virtual void DrawQuadList(const AmjuGL::Quads& quads) = 0;
-
   // Draw list of triangles
   virtual void DrawTriList(const AmjuGL::Tris& tris) = 0;
 
