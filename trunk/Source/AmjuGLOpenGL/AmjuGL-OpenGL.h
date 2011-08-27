@@ -36,11 +36,6 @@ public:
   // Draw line in current colour between 2 absolute coords
   virtual void DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2);
 
-  // Draw quad with the 4 vertices
-  virtual void DrawQuad(AmjuGL::Vert* verts);
-
-  virtual void DrawQuadList(const AmjuGL::Quads& quads);
-
   virtual void DrawTriList(const AmjuGL::Tris& tris);
 
   virtual void DrawIndexedTriList(

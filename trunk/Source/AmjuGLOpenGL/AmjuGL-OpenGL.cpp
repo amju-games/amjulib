@@ -175,6 +175,7 @@ void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
   //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 }
 
+/*
 void AmjuGLOpenGL::DrawQuadList(const AmjuGL::Quads& quads)
 {
   AMJU_CALL_STACK;
@@ -230,6 +231,7 @@ void AmjuGLOpenGL::DrawQuad(AmjuGL::Vert* verts)
   glEnd();
 #endif // USE_IMMEDIATE_MODE
 }
+*/
 
 void AmjuGLOpenGL::DrawIndexedTriList(
   const AmjuGL::Verts& verts,

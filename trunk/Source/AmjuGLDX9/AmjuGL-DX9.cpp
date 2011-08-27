@@ -226,6 +226,7 @@ void AmjuGLDX9::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 
 }
 
+/*
 void AmjuGLDX9::DrawQuad(AmjuGL::Vert* verts)
 {
   AMJU_CALL_STACK;
@@ -251,6 +252,7 @@ void AmjuGLDX9::DrawQuadList(const AmjuGL::Quads& quads)
   // TODO Quad List doesn't exist in DX9. Nor in GL ES, so we need a reusable
   //  function to convert to Tri list. 
 }
+*/
 
 void AmjuGLDX9::DrawTriList(const AmjuGL::Tris& tris)
 {
