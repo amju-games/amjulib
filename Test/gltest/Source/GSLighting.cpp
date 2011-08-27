@@ -2,7 +2,6 @@
 #include <AmjuGL.h>
 #include <AABB.h>
 #include <DrawAABB.h>
-#include <Game.h>
 #include <Colour.h>
 #include <Font.h>
 #include "Teapot.h"
@@ -24,7 +23,7 @@ void GSLighting::Draw()
 {
   GSBase::Draw();
 
-  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::DrawLighting(
@@ -35,7 +34,7 @@ void GSLighting::Draw()
     AmjuGL::Vec3(1, 1, 1)); // Light direction
 
   static float f = 0;
-  f += 0.2f;
+  f += 0.01f;
 
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 

@@ -1,5 +1,4 @@
 #include "GsMain.h"
-#include <Game.h>
 #include <AmjuGL.h>
 #include <AABB.h>
 #include <DrawAABB.h>
@@ -33,7 +32,7 @@ void GSMain::Draw()
 {
   GSBase::Draw();
 
-  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   AmjuGL::SetColour(1, 1, 1, 1);
 
