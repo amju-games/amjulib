@@ -15,22 +15,27 @@ ThreadGate::ThreadGate()
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   int r = pthread_cond_init(&m_cond, 0);
   r = pthread_mutex_init(&m_mutex, 0);
+#endif
 }
 
 ThreadGate::~ThreadGate()
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   pthread_cond_destroy(&m_cond);
   pthread_mutex_destroy(&m_mutex);
+#endif
 }
 
 void ThreadGate::Wait(unsigned int timeoutSecs)
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   // Get absolute timeout time, i.e. the time now plus the timeout.
   timespec abstime;
   time_t now;
@@ -60,21 +65,25 @@ std::cout << "THREADGATE - failed because time already expired.\n";
     }
   }
 //std::cout << "THREADGATE - opened or timed out.\n";
+#endif
 }
 
 void ThreadGate::Wait()
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   pthread_mutex_lock(&m_mutex);
   pthread_cond_wait(&m_cond, &m_mutex);
   pthread_mutex_unlock(&m_mutex);
+#endif
 }
 
 void ThreadGate::UnlockAndWait(MutexLocker& m)
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   // First get the lock on our mutex. This prevents Open() being called
   // until we unlock at the end of this function.
   pthread_mutex_lock(&m_mutex);
@@ -90,16 +99,19 @@ void ThreadGate::UnlockAndWait(MutexLocker& m)
   // but not before we have startd to wait.
   pthread_cond_wait(&m_cond, &m_mutex);
   pthread_mutex_unlock(&m_mutex);
+#endif
 }
 
 void ThreadGate::Open()
 {
   AMJU_CALL_STACK;
 
+#if defined(MACOSX) || defined(IPHONE)
   // Get a lock on the mutex before signalling the condition variable.
   pthread_mutex_lock(&m_mutex);
   pthread_cond_signal(&m_cond);
   pthread_mutex_unlock(&m_mutex);
+#endif
 }
 }
 
