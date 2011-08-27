@@ -94,6 +94,18 @@
     <Filter Include="Anim">
       <UniqueIdentifier>{4a72438f-8e76-433d-99b1-0e2feef8f496}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{60693a78-3ef5-478a-a21a-19c30b7f93b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Community">
+      <UniqueIdentifier>{61fd7171-097d-4966-858f-be0e3e7d29b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{05d3a416-a62f-47f8-bb04-71ee236399d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGLDX11">
+      <UniqueIdentifier>{9642f302-3c23-4bd4-b596-75151880585f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -193,12 +205,6 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\ReportError.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\SafeUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\SchAssert.cpp">
@@ -531,6 +537,60 @@
     <ClCompile Include="..\..\..\Source\Anim\Skin.cpp">
       <Filter>Anim</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HttpReq.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\OnlineReqManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\ServerSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\Socket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\SocketService.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp">
+      <Filter>Community</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\Mutex.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\Thread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\ThreadGate.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\ThreadManager.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\SAP.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp">
+      <Filter>AmjuGLDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp">
+      <Filter>AmjuGLDX11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -657,12 +717,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Utils\ReportError.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Utils\SafeUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\schassert.h">
@@ -967,6 +1021,63 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Anim\Skeleton.h">
       <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\ClientSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HostInfo.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HttpClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HttpReq.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\OnlineReqManager.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\ServerSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\Socket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\SocketService.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\UrlUtils.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Community\Screenshot.h">
+      <Filter>Community</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Locker.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Mutex.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Thread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\ThreadGate.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\ThreadManager.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\SAP.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h">
+      <Filter>AmjuGLDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h">
+      <Filter>AmjuGLDX11</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

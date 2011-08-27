@@ -79,12 +79,12 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\Microsoft DirectX SDK %28August 2009%29\Include;$(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\Microsoft DirectX SDK %28August 2009%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image"  /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -101,7 +101,7 @@
     <ClCompile>
       <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" 
 /I "../../../Source/Utils/Zlib"
-/I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene" /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw" %(AdditionalOptions)</AdditionalOptions>
+/I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene" /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community" /I "../../../Source/Image/Png"   %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
@@ -144,6 +144,8 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp" />
@@ -153,6 +155,8 @@
     <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Skin.cpp" />
+    <ClCompile Include="..\..\..\Source\Collision\SAP.cpp" />
+    <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
@@ -166,8 +170,18 @@
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HttpReq.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\OnlineReqManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\ServerSocket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\Socket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\SocketService.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\StringUtils.cpp" />
@@ -189,11 +203,13 @@
     <ClCompile Include="..\..\..\Source\Events\EventPoller.cpp" />
     <ClCompile Include="..\..\..\Source\Events\EventTypes.cpp" />
     <ClCompile Include="..\..\..\Source\Localise\Localise.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\Mutex.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\Thread.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\ThreadGate.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\ThreadManager.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
-    <ClCompile Include="..\..\..\Source\Utils\ReportError.cpp" />
-    <ClCompile Include="..\..\..\Source\Utils\SafeUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\SchAssert.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Sign.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Variable.cpp" />
@@ -295,6 +311,8 @@
     <ClCompile Include="..\..\..\Source\SoundBass\BassSoundPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
     <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h" />
@@ -304,6 +322,8 @@
     <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h" />
     <ClInclude Include="..\..\..\Source\Anim\Skeleton.h" />
     <ClInclude Include="..\..\..\Source\Anim\Skin.h" />
+    <ClInclude Include="..\..\..\Source\Collision\SAP.h" />
+    <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h" />
@@ -318,7 +338,17 @@
     <ClInclude Include="..\..\..\Source\FileUtils\GlueFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\GlueFileMem.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
+    <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
+    <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
+    <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />
+    <ClInclude Include="..\..\..\Source\Network\HttpReq.h" />
+    <ClInclude Include="..\..\..\Source\Network\OnlineReqManager.h" />
+    <ClInclude Include="..\..\..\Source\Network\ServerSocket.h" />
+    <ClInclude Include="..\..\..\Source\Network\Socket.h" />
+    <ClInclude Include="..\..\..\Source\Network\SocketService.h" />
+    <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
     <ClInclude Include="..\..\..\Source\Strings\ReportError.h" />
     <ClInclude Include="..\..\..\Source\Strings\SafeUtils.h" />
     <ClInclude Include="..\..\..\Source\Strings\StringUtils.h" />
@@ -339,6 +369,11 @@
     <ClInclude Include="..\..\..\Source\Events\EventPoller.h" />
     <ClInclude Include="..\..\..\Source\Events\EventTypes.h" />
     <ClInclude Include="..\..\..\Source\Localise\Localise.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Locker.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Mutex.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Thread.h" />
+    <ClInclude Include="..\..\..\Source\Thread\ThreadGate.h" />
+    <ClInclude Include="..\..\..\Source\Thread\ThreadManager.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
     <ClInclude Include="..\..\..\Source\Utils\Common.h" />
@@ -347,8 +382,6 @@
     <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h" />
     <ClInclude Include="..\..\..\Source\Utils\Pause.h" />
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h" />
-    <ClInclude Include="..\..\..\Source\Utils\ReportError.h" />
-    <ClInclude Include="..\..\..\Source\Utils\SafeUtils.h" />
     <ClInclude Include="..\..\..\Source\Utils\schassert.h" />
     <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h" />
     <ClInclude Include="..\..\..\Source\Utils\Sign.h" />
