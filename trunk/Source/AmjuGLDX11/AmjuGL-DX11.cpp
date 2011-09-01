@@ -1,6 +1,7 @@
 
 #include "AmjuFirst.h"
 #include "AmjuGL-DX11.h"
+#include <xnamath.h>
 #include <D3DX11tex.h>
 #include <AmjuGLWindowInfo.h>
 #include <WinScreen.h>
@@ -479,7 +480,7 @@ void AmjuGLDX11::MultMatrix(const float m[16])
 {
   if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
   {
-    g_View = (XMMATRIX&)m * g_View;  // TODO Check this
+    g_View = XMMATRIX(m) * g_View;  // TODO Check this
   }
   else if (s_matrixMode == AmjuGL::AMJU_PROJECTION_MATRIX)
   {
