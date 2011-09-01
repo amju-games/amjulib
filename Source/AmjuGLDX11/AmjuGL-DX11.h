@@ -9,7 +9,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "Colour.h"
 #include <d3d11.h>
 #include <D3Dcommon.h>
-#include <xnamath.h>
 #include <Windows.h>
 
 #ifdef CreateWindow
