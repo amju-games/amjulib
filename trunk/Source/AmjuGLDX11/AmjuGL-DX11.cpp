@@ -390,7 +390,7 @@ void AmjuGLDX11::DrawTriList(const AmjuGL::Tris& tris)
   {
       { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
       { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-      { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+      { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 }
   };
 
   UINT numElements = ARRAYSIZE( layout );
@@ -699,9 +699,9 @@ static void CopyRGBTexture(uint8* texels, int pitch, const uint8* data, int widt
     for (int x = 0; x < width; x++)
     {
         // RGB -> BGR
-      row[0] = data[2];
+      row[0] = data[0];
       row[1] = data[1];
-      row[2] = data[0];
+      row[2] = data[2];
       // RGB texture still has 16 bytes per pixel apprently.
       row[3] = 0;
       row += 4;
@@ -720,11 +720,51 @@ void AmjuGLDX11::SetTexture(
 {
   AMJU_CALL_STACK;
 
-  // Load the Texture
-  HRESULT hr = D3DX11CreateShaderResourceViewFromFile( g_pd3dDevice, L"bw.bmp", NULL, NULL, &g_pTextureRV, NULL );
-  if( FAILED( hr ) )
-      return; // hr;
+  D3D11_TEXTURE2D_DESC desc;
+  ZeroMemory(&desc, sizeof(desc));
+  desc.Width = width;
+  desc.Height = height;
+  desc.MipLevels = desc.ArraySize = 1;
+  desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+  desc.SampleDesc.Count = 1;
+  desc.Usage = D3D11_USAGE_DYNAMIC;
+  desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+  desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+  ID3D11Texture2D *pTexture = NULL;
 
+  // TODO If RGB, bulk data out to 32 bits
+  uint8* padded = 0;
+  if (td == AmjuGL::AMJU_RGB)
+  {
+    padded = new uint8[4 * width * height];
+    CopyRGBTexture(padded, width * 4, data, width, height);
+  }
+
+  D3D11_SUBRESOURCE_DATA subr;
+  subr.pSysMem = padded ? padded : data;
+  subr.SysMemPitch = width * 4;
+  subr.SysMemSlicePitch = 0;
+  HRESULT hr = g_pd3dDevice->CreateTexture2D(&desc, &subr, &pTexture);
+
+  // Ok to del padded data here ?
+  delete [] padded;
+
+  D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+  D3D11_RESOURCE_DIMENSION type;
+  pTexture->GetType(&type);
+  Assert(type == D3D11_RESOURCE_DIMENSION_TEXTURE2D);
+		
+  srvDesc.Format = desc.Format;
+  srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+  srvDesc.Texture2D.MipLevels = desc.MipLevels;
+  srvDesc.Texture2D.MostDetailedMip = desc.MipLevels - 1;
+
+  hr = g_pd3dDevice->CreateShaderResourceView(pTexture, &srvDesc, &g_pTextureRV);
+
+  if( FAILED( hr ) )
+      return; 
+
+  // TODO only need one of these, right ?
   // Create the sample state
   D3D11_SAMPLER_DESC sampDesc;
   ZeroMemory( &sampDesc, sizeof(sampDesc) );
@@ -736,10 +776,6 @@ void AmjuGLDX11::SetTexture(
   sampDesc.MinLOD = 0;
   sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
   hr = g_pd3dDevice->CreateSamplerState( &sampDesc, &g_pSamplerLinear );
-  if( FAILED( hr ) )
-      return; // hr;
-
-
 }
 
 void AmjuGLDX11::UseTexture(AmjuGL::TextureHandle th)
