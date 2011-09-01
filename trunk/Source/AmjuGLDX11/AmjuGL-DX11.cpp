@@ -157,7 +157,21 @@ HRESULT AmjuGLDX11::InitDevice()
   bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
   bd.CPUAccessFlags = 0;
   hr = g_pd3dDevice->CreateBuffer( &bd, NULL, &g_pConstantBuffer );
-  if( FAILED( hr ) )
+  if (FAILED(hr))
+    return hr;
+
+  // Create the sample state
+  D3D11_SAMPLER_DESC sampDesc;
+  ZeroMemory(&sampDesc, sizeof(sampDesc));
+  sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+  sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+  sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+  sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+  sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+  sampDesc.MinLOD = 0;
+  sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+  hr = g_pd3dDevice->CreateSamplerState(&sampDesc, &g_pSamplerLinear);
+  if (FAILED(hr))
     return hr;
 
   return S_OK;
@@ -761,30 +775,14 @@ void AmjuGLDX11::SetTexture(
 
   hr = g_pd3dDevice->CreateShaderResourceView(pTexture, &srvDesc, &g_pTextureRV);
 
-  if( FAILED( hr ) )
-      return; 
-
-  // TODO only need one of these, right ?
-  // Create the sample state
-  D3D11_SAMPLER_DESC sampDesc;
-  ZeroMemory( &sampDesc, sizeof(sampDesc) );
-  sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-  sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-  sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-  sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-  sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-  sampDesc.MinLOD = 0;
-  sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-  hr = g_pd3dDevice->CreateSamplerState( &sampDesc, &g_pSamplerLinear );
+  *th = reinterpret_cast<int>(g_pTextureRV); // echh...
 }
 
 void AmjuGLDX11::UseTexture(AmjuGL::TextureHandle th)
 {
   AMJU_CALL_STACK;
 
-  //LPDIRECT3DTEXTURE9 pTex = reinterpret_cast<LPDIRECT3DTEXTURE9>(th);
-  //dd->SetTexture(0, pTex);
-
+  g_pTextureRV = reinterpret_cast<ID3D11ShaderResourceView*>(th);
 }
 
 void AmjuGLDX11::SetTextureMode(AmjuGL::TextureType tt)
