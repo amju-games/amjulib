@@ -368,7 +368,7 @@ std::cout << "GLUE FILE: Writing file " << filename.c_str() << " starting at pos
   unsigned char* filebuf = new unsigned char[subfilesize];
   subfile.read((char*)filebuf, subfilesize);
   m_gluefile.write((char*)filebuf, subfilesize);
-  delete filebuf;
+  delete [] filebuf;
 
   // Add the new sub-file to the table.
   m_table[lowname] = make_pair(subfilesize, newpos);

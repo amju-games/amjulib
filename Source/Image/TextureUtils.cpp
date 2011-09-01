@@ -32,7 +32,7 @@ void FlipBmp(uint8* data, int w, int h, int bytesPerPixel)
     // Swap row i and h - i
     SwapRow(data, w, i, h - i - 1, row, bytesPerPixel);
   }
-  delete row;
+  delete [] row;
 }
 
 uint8* AddAlpha(uint8* source, int w, int h)
