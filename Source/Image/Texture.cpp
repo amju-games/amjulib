@@ -39,7 +39,6 @@ int Texture::GetHeight() const
 
 bool Texture::Load(const std::string& filename)
 {
-  // TODO Support png
   unsigned int w = 0;
   unsigned int h = 0;
   unsigned char* data = 0;
