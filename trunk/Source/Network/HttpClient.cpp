@@ -316,7 +316,7 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 
  int sockid;
  int bufsize;
- char buffer[32768]; //1024];
+ char buffer[4096]; // was too big
  struct sockaddr_in socketaddr;
  struct hostent *hostaddr;
  //struct servent *servaddr;

@@ -187,7 +187,7 @@ bool Socket::GetRawString(std::string* p)
 {
   AMJU_CALL_STACK;
 
-  static const int n = 32768;
+  static const int n = 4096; // was too big
   char buf[n+1];
   int br = 0;
 #if defined(WIN32)
