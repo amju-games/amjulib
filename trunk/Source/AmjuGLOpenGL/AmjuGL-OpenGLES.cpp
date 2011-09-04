@@ -168,19 +168,6 @@ void AmjuGLOpenGLES::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y
 			  upX, upY, upZ /* 'Up' vector */);
 }
 
-void AmjuGLOpenGLES::DrawQuad(AmjuGL::Vert* verts)
-{
-	AMJU_CALL_STACK;
-	//TODO Assert(0); // not supported
-}
-	
-	
-void AmjuGLOpenGLES::DrawQuadList(const AmjuGL::Quads& quads)
-{
-	AMJU_CALL_STACK;
-	Assert(0); // not supported
-}
-
 void AmjuGLOpenGLES::SetTextureMode(AmjuGL::TextureType tt)
 {
 	AMJU_CALL_STACK;
@@ -312,8 +299,47 @@ void AmjuGLOpenGLES::GetScreenshot(unsigned char* buffer, int w, int h)
 {
 	AMJU_CALL_STACK;
 
-	// TODO
-	Assert(0);
+	unsigned char* myBuf = new unsigned char[4 * w * h];
+	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, myBuf);
+	
+#ifdef LANDSCAPE
+	// Convert RGBA to RGB and rotate 90 degs - But TODO How to make sure it's the right way up ?
+/*
+	for (int i = 0; i < w; i++)
+	{
+		for (int j = 0; j < h; j++)
+		{
+			// TODO
+			buffer[(i + ((h - 1 - j) * w)) * 3 + 0] = myBuf[((w - 1 - i) * h + j) * 4 + 3];
+			buffer[(i + ((h - 1 - j) * w)) * 3 + 1] = myBuf[((w - 1 - i) * h + j) * 4 + 2];
+			buffer[(i + ((h - 1 - j) * w)) * 3 + 2] = myBuf[((w - 1 - i) * h + j) * 4 + 1];
+		}
+	}
+*/
+
+	// Rotate
+	unsigned char* myBuf2 = new unsigned char[4 * w * h];
+	for (int i = 0; i < w * h; i++)
+	{
+		int src = i;
+		int dst = (i % 320) * 480 - (i / 320) + 479;
+		
+		memcpy(myBuf2 + dst * 4, myBuf + src * 4, 4);
+	}	
+	
+	delete [] myBuf;
+	myBuf = myBuf2;
+#endif
+
+	// Convert RGBA to RGB
+	for (int i = 0; i < w * h; i++)
+	{
+		buffer[i * 3 + 0] = myBuf[i * 4 + 0];
+		buffer[i * 3 + 1] = myBuf[i * 4 + 1];
+		buffer[i * 3 + 2] = myBuf[i * 4 + 2];
+	}	
+	
+	delete [] myBuf;
 }
 
 void AmjuGLOpenGLES::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
