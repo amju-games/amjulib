@@ -90,7 +90,8 @@
 	// TODO swap, may speed up ?
     Amju::TheGame::Instance()->Update();
     Amju::TheGame::Instance()->Draw();
-	
+
+#ifdef AMJU_SHOW_FRAME_TIME	
 	timeval tafter;
 	gettimeofday(&tafter, 0);
 	double t = tafter.tv_sec - tbefore.tv_sec + (tafter.tv_usec - tbefore.tv_usec) * 1e-6;
@@ -101,6 +102,7 @@
 	std::string s = Amju::ToString((int)(t * 1000.0f));
 	s += "ms";
 	font->Print(-0.9f, 0.8f, s.c_str());
+#endif //  AMJU_SHOW_FRAME_TIME	
 	
     Amju::AmjuGL::Flip();     
 	
