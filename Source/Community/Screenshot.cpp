@@ -100,11 +100,11 @@ void SaveScreenshot(const std::string& filename, int s)
   delete [] c;
 
 #ifdef _DEBUG
-std::cout << "Saving png image: " << filename.c_str() << "\n";
+std::cout << "Saving png image: " << filename.c_str() << " width: " << w2 << " height: " << h2 << "\n";
 #endif
 
 //  bool savedPngOk = SavePng(w, h, mem, filename.c_str());
-  bool savedPngOk = SavePng(w2, h2, smallerImage, filename.c_str());
+  bool savedPngOk = SavePng(w2, h2, smallerImage, filename.c_str(), BYTES_PER_PIXEL);
 
   if (savedPngOk)
   {
