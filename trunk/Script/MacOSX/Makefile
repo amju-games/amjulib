@@ -18,6 +18,7 @@ SOURCES := ../../Source \
   $(AMJU)/Font \
   $(AMJU)/Game \
   $(AMJU)/Geom \
+  $(AMJU)/Geom/Mgc \
   $(AMJU)/GeomDraw \
   $(AMJU)/GeomLoad \
   $(AMJU)/Gui \
@@ -36,7 +37,10 @@ SOURCES := ../../Source \
   $(AMJU)/Thread \
   $(AMJU)/TimeUtils \
   $(AMJU)/Utils \
+  $(AMJU)/Utils/Xml \
   $(AMJU)/Utils/Zlib
+
+EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
   
