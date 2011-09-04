@@ -435,12 +435,25 @@ static void writepng_error_handler(png_structp png_ptr, png_const_charp msg)
 
 void ReportError(const std::string&);
 
-bool SavePng(int w, int h, unsigned char* rgb, const char* filename)
+bool SavePng(int w, int h, unsigned char* rgb, const char* filename, int bytesPerPixel)
 {
   AMJU_CALL_STACK;
 
   mainprog_info m;
-  m.pnmtype = 6;
+
+  if (bytesPerPixel == 3)
+  {
+    m.pnmtype = 6;
+  }
+  else if (bytesPerPixel == 4)
+  {
+    m.pnmtype = 8;
+  }
+  else
+  {
+    ReportError("Bad number of bytes per pixel in SavePng()");
+    return false;
+  }
   m.gamma = 0;
   m.width = w;
   m.height = h;
