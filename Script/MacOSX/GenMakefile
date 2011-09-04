@@ -75,8 +75,8 @@ INCLUDES	:=	$(AMJU_LIB_DIRS)
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-
-CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
+# In EXTRA_CFLAGS specify -g -O0 or -O2
+CFLAGS	=  -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
 CXXFLAGS	=	$(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -Wl
@@ -190,7 +190,7 @@ else
 # TODO This depends if target is a lib or exe
 
 $(OUTPUT): $(OFILES)
-	@echo "Linking " $(OUTPUT)
+	@echo "Compiled " $(OFILES) "...Linking " $(OUTPUT)
 	$(BUILDEXE) 
 
 
