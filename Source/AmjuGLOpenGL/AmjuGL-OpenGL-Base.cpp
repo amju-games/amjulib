@@ -10,7 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuFinal.h"
 
 //#define SHADER_DEBUG
-#define OPENGL_SHOW_INFO
+//#define OPENGL_SHOW_INFO
 
 namespace Amju
 {
@@ -85,9 +85,10 @@ void AmjuGLOpenGLBase::Init()
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   // Try to disable blending unless expicitly required
-  glDisable(GL_BLEND);
-
-  // We can rely on default values for everything else.
+  AmjuGL::Disable(AmjuGL::AMJU_BLEND); // So flag is reset
+  
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING); 
+  glDisable(GL_LIGHTING); // now it is
 }
 
 void AmjuGLOpenGLBase::InitFrame(float clearR, float clearG, float clearB)
@@ -103,7 +104,7 @@ void AmjuGLOpenGLBase::InitFrame(float clearR, float clearG, float clearB)
   glCullFace(GL_BACK);
   glEnable(GL_CULL_FACE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  AmjuGL::Disable(GL_BLEND); // only enabled where necessary
+  AmjuGL::Disable(AmjuGL::AMJU_BLEND); // only enabled where necessary
   // NB Must use AmjuGL::Disable so flags are set consistently!
 
   //glEnable(GL_BLEND); // TODO some things (day night sky etc) must enable this.
