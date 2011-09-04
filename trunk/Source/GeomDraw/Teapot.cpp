@@ -1327,7 +1327,7 @@ const int strip_normals[] = {
 
 Teapot::Teapot(float scale)
 {
-    int i, numV=sizeof(strip_vertices)/sizeof(float), numI=sizeof(strip_normals)/sizeof(float);
+    int i, numV=sizeof(strip_vertices)/sizeof(float); // numI=sizeof(strip_normals)/sizeof(float);
 
     AmjuGL::Tri t;
     int count = 0;
