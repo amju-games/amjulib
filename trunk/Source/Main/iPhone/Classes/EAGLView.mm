@@ -32,12 +32,17 @@
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
 
         eaglLayer.opaque = TRUE;
-		// 16-bit frame buffer, from "iPhone Games Projects" p. 112 - doesn't give a speedup :-(
+        // 16-bit frame buffer, from "iPhone Games Projects" p. 112 - doesn't give a speedup :-(
+
         eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithBool:FALSE], 
-										kEAGLDrawablePropertyRetainedBacking, 
-										kEAGLColorFormatRGB565, // was: kEAGLColorFormatRGBA8, 
-										kEAGLDrawablePropertyColorFormat, nil];
+          [NSNumber numberWithBool:FALSE], 
+          kEAGLDrawablePropertyRetainedBacking, 
+#ifdef AMJU_FRAMEBUFFER_RGB565
+          kEAGLColorFormatRGB565,
+#else
+          kEAGLColorFormatRGBA8, 
+#endif
+          kEAGLDrawablePropertyColorFormat, nil];
 
         renderer = [[ES1Renderer alloc] init];
 
