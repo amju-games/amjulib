@@ -5,6 +5,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #ifndef AMJU_GL_H_INCLUDED
 #define AMJU_GL_H_INCLUDED
 
+#include <ostream>
 #include <string>
 #include <vector>
 #include "AmjuTypes.h"
@@ -24,6 +25,8 @@ struct AmjuGL
 {
 public:
   static void SetImpl(AmjuGLImpl*);
+
+  static std::ostream& ReportState(std::ostream&);
 
   enum Flags
   {
@@ -82,13 +85,6 @@ public:
     float m_u, m_v;
   };
   typedef std::vector<UV> UVs;
-
-  struct Quad
-  {
-    Vert m_verts[4];
-  };
-
-  //typedef std::vector<Quad> Quads;
 
   // Call once at app startup
   static void Init();
