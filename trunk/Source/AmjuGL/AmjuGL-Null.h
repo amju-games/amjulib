@@ -21,8 +21,6 @@ public:
   virtual void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ) {}
   virtual void SetColour(float r, float g, float b, float a = 1.0f) {}
   virtual void DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2) {}
-  virtual void DrawQuad(AmjuGL::Vert* verts) {}
-  virtual void DrawQuadList(const AmjuGL::Quads& quads) {}
   virtual void DrawTriList(const AmjuGL::Tris& tris) {}
   virtual void DrawIndexedTriList(
     const AmjuGL::Verts& verts,
