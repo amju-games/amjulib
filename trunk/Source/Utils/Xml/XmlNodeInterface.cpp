@@ -35,7 +35,7 @@ Added to repository
 
 #include <iostream>
 #include "XmlNodeInterface.h"
-#include "../SchAssert.h"
+#include <AmjuAssert.h>
 #include "AmjuFinal.h"
 
 namespace Amju
