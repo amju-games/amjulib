@@ -861,8 +861,10 @@ for (int i = 0; i < numTris; i++)
 
 #ifdef USE_TRI_LIST
   // 0 <= between <= 1: sets the interpolation.
-  Assert(between >= 0);
-  Assert(between <= 1.0f);
+  //Assert(between >= 0);
+  //Assert(between <= 1.0f);
+
+  m_tris.clear();
 
   const Frame& frame = m_frames[frame1];
   const Frame& nextFrame = m_frames[frame2]; 
@@ -874,7 +876,7 @@ for (int i = 0; i < numTris; i++)
   // Or, interp. the vertices, then get the tris.
   Md2Vertex* iv = new Md2Vertex[numVerts];
   // Interpolate each vert
-  for (int i = 0; i < numVerts; i++)
+  for (unsigned int i = 0; i < numVerts; i++)
   {
     const Md2Vertex& vm1 = frame[i];
     const Md2Vertex& vm2 = nextFrame[i];
@@ -901,11 +903,11 @@ for (int i = 0; i < numTris; i++)
     t.m_verts[0] = AmjuGL::Vert(v1.m_pos[0], v1.m_pos[1], v1.m_pos[2], uv1.m_uv[0], uv1.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); 
     t.m_verts[1] = AmjuGL::Vert(v2.m_pos[0], v2.m_pos[1], v2.m_pos[2], uv2.m_uv[0], uv2.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); // TODO
     t.m_verts[2] = AmjuGL::Vert(v3.m_pos[0], v3.m_pos[1], v3.m_pos[2], uv3.m_uv[0], uv3.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); 
-    tris.push_back(t);
+    m_tris.push_back(t);
   }
 
   AmjuGL::SetTextureMode(AmjuGL::AMJU_TEXTURE_REGULAR);
-  AmjuGL::DrawTriList(tris);
+  AmjuGL::DrawTriList(m_tris);
 
   delete [] iv; // clean up newed array
 #endif // USE_TRI_LIST
