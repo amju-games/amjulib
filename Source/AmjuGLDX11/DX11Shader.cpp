@@ -4,13 +4,14 @@
 #include <d3dx11.h>
 #include <d3dcompiler.h>
 #include <xnamath.h>
+#include <File.h>
 #include "Assert.h"
 #include "AmjuFinal.h"
 
 namespace Amju
 {
 // From DXSDK tutorial
-HRESULT CompileShaderFromFile( WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut )
+HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut )
 {
   HRESULT hr = S_OK;
 
@@ -24,8 +25,28 @@ HRESULT CompileShaderFromFile( WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR sz
 #endif
 
   ID3DBlob* pErrorBlob;
-  hr = D3DX11CompileFromFile( szFileName, NULL, NULL, szEntryPoint, szShaderModel, 
-    dwShaderFlags, 0, NULL, ppBlobOut, &pErrorBlob, NULL );
+
+  // Read text from file
+  File shFile(File::NO_VERSION);
+  if (!shFile.OpenRead(szFileName))
+  {
+    shFile.ReportError("Failed to open fragment shader file");
+    return false;
+  }
+  std::string text;
+  std::string s;
+  const bool NO_TRIM = false;
+  while (shFile.GetDataLine(&s, NO_TRIM))
+  {
+    text += s;
+    text += "\n";
+  }
+
+  hr = D3DX11CompileFromMemory(
+    text.c_str(), text.size(), 
+    szFileName, // path
+    0, 0, szEntryPoint, szShaderModel, dwShaderFlags, 0, 0, ppBlobOut, &pErrorBlob, 0);
+
   if( FAILED(hr) )
   {
     if (pErrorBlob)
@@ -58,10 +79,8 @@ bool DX11Shader::Load(const std::string& fxFileName, ID3D11Device* dd)
 {
   AMJU_CALL_STACK;
 
-  std::wstring wFileName(fxFileName.begin(), fxFileName.end());
-
   // Compile the vertex shader
-  HRESULT hr = CompileShaderFromFile((WCHAR*)wFileName.c_str() /*L"Tutorial02.fx"*/, "VS", "vs_4_0", &pVSBlob );
+  HRESULT hr = CompileShaderFromFile(fxFileName.c_str() /*L"Tutorial02.fx"*/, "VS", "vs_4_0", &pVSBlob );
   if( FAILED( hr ) )
   {
       MessageBox( NULL,
@@ -79,7 +98,7 @@ bool DX11Shader::Load(const std::string& fxFileName, ID3D11Device* dd)
 
 	// Compile the pixel shader
 	ID3DBlob* pPSBlob = NULL;
-  hr = CompileShaderFromFile((WCHAR*)wFileName.c_str(), "PS", "ps_4_0", &pPSBlob );
+  hr = CompileShaderFromFile(fxFileName.c_str(), "PS", "ps_4_0", &pPSBlob );
   if( FAILED( hr ) )
   {
       MessageBox( NULL,
@@ -133,7 +152,6 @@ void DX11Shader::Begin()
 void DX11Shader::Begin(const std::string& techniqueName)
 {
   AMJU_CALL_STACK;
-
 
 }
 
