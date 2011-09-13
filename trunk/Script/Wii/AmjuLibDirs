@@ -10,6 +10,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/FileUtils \
   $(AMJU)/Font \
   $(AMJU)/Game \
+  $(AMJU)/Geom/Mgc \
   $(AMJU)/Geom \
   $(AMJU)/GeomDraw \
   $(AMJU)/GeomLoad \

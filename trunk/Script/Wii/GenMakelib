@@ -28,50 +28,9 @@ include $(DEVKITPPC)/wii_rules
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
 
-# define these in Makefile then include this file
-
-# j.c. we want the Build dir to not be in here - this needed a change further down.
-#BUILD		:=	../../../../Build/obj2bin/Mac
-#TARGET		:=	$(BUILD)/obj2bin
-#AMJU      := ../../../../Source
-
-AMJU_LIB_DIRS := \
-  $(AMJU)/AmjuGL \
-  $(AMJU)/AmjuGLGCube \
-  $(AMJU)/Clip \
-  $(AMJU)/Collision \
-  $(AMJU)/Community \
-  $(AMJU)/Events \
-  $(AMJU)/EventsWii \
-  $(AMJU)/FileUtils \
-  $(AMJU)/Font \
-  $(AMJU)/Game \
-  $(AMJU)/Geom \
-  $(AMJU)/GeomDraw \
-  $(AMJU)/GeomLoad \
-  $(AMJU)/Gui \
-  $(AMJU)/Image \
-  $(AMJU)/Image/Png \
-  $(AMJU)/Localise \
-  $(AMJU)/Main \
-  $(AMJU)/Md2 \
-  $(AMJU)/Mem \
-  $(AMJU)/Network \
-  $(AMJU)/Obj \
-  $(AMJU)/Resource \
-  $(AMJU)/Scene \
-  $(AMJU)/Sound \
-  $(AMJU)/SoundWii \
-  $(AMJU)/Strings \
-  $(AMJU)/Thread \
-  $(AMJU)/TimeUtils \
-  $(AMJU)/Utils \
-  $(AMJU)/Utils/Zlib
   
 INCLUDES	:=	$(AMJU_LIB_DIRS) $(AMJU)/Main
 
-# Defined in including Makefile
-#SOURCES		:=	../../Source
 
 #---------------------------------------------------------------------------------
 # options for code generation
