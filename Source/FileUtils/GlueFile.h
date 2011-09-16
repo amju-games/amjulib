@@ -154,8 +154,9 @@ public:
   virtual GlueFileBinaryData GetBinary(uint32 seekPos, uint32 numbytes);
 
   // Print out sub-files whose names are not passed to GetSeekBase().
-  // This was supposed to happen in dtor but this doesn't seem to get called.
+  // This is called in dtor if flag is set, so on shutdown we get list of unused files. 
   void PrintUnused();
+  void SetPrintUnusedInDtor(bool);
 
 protected:
 
@@ -192,6 +193,8 @@ protected:
   // used. This is so old, unused data can be easily identified.
   // The dtor writes out this list.
   FileList m_unusedFiles;
+
+  bool m_printUnusedInDtor;
 };
 }
 

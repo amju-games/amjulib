@@ -122,15 +122,22 @@ GlueFile::GlueFile()
   AMJU_CALL_STACK;
 
   m_tablePos = 0;
+  m_printUnusedInDtor = false;
 }
 
 GlueFile::~GlueFile()
 {
   AMJU_CALL_STACK;
 
-#if defined(_DEBUG)
-  //PrintUnused();
-#endif
+  if (m_printUnusedInDtor)
+  {
+    PrintUnused();
+  }
+}
+
+void GlueFile::SetPrintUnusedInDtor(bool b)
+{
+  m_printUnusedInDtor = b;
 }
 
 void GlueFile::PrintUnused()
