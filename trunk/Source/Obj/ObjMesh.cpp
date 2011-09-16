@@ -4,6 +4,7 @@
 #include "StringUtils.h"
 #include "AmjuGL.h"
 #include "CollisionMesh.h"
+#include <Matrix.h>
 
 //#define OBJ_DEBUG
 
@@ -29,13 +30,19 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
 {
   // Iterate over groups once to count how many faces there are;
   // then iterate again to convert each one to a tri.
+  // Don't add tris for groups whose material has 'no collide' flag set.
+
   int numFaces = 0;
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
     ++it)
   {
     Group& g = it->second;
-    numFaces += g.m_tris.size();
+    Material& mat = m_materials[g.m_materialName];
+    if (!mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE)
+    {
+      numFaces += g.m_tris.size();
+    }
   }
   pCollMesh->m_tris.reserve(numFaces);
 
@@ -44,6 +51,13 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
     ++it)
   {
     Group& g = it->second;
+   
+    Material& mat = m_materials[g.m_materialName];
+    if (mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE)
+    {
+      continue;
+    }
+    
     unsigned int numTris = g.m_tris.size();
     for (unsigned int i = 0; i < numTris; i++)
     {
@@ -142,6 +156,10 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
     std::cout << "  Loaded texture " << tex << "\n";
 #endif
+
+    int flags = 0;
+    f.GetInteger(&flags);
+    mat.m_flags = (uint32)flags;
   }
 
   int numGroups = 0;
@@ -576,6 +594,7 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
       of.Write(mat.m_name);
       of.Write(mat.m_filename);
       of.Write(mat.m_texfilename);
+      of.WriteInteger((int)mat.m_flags);
     }
 
     // Save groups

@@ -6,6 +6,10 @@
 
 namespace Amju
 {
+Material::Material() : m_flags(0)
+{
+}
+
 bool Material::Load(const std::string& mtlfilename)
 {
   File f(File::NO_VERSION);
@@ -43,6 +47,11 @@ bool Material::Load(const std::string& mtlfilename)
       Assert(m_name.empty()); // more than one mat name in file!?
       m_name = strs[1];
     }
+    else if (strs[0] == "flags")
+    {
+      Assert(strs.size() == 2);
+      m_flags = ToInt(strs[1]); 
+    }
   }
   return true;
 }
@@ -54,55 +63,6 @@ void Material::UseThisMaterial()
     m_texture->UseThisTexture();
   }
 }
-
-/*
-// Strip whitespace from beginning and end of string
-void Trim(std::string* ps)
-{
-    assert(ps);
-    while (!ps->empty() && (ps->at(0) == ' ' || ps->at(0) == '\r' || ps->at(0) == '\n' ) )
-    {
-        *ps = ps->substr(1);
-    }
-    while (!ps->empty() && (ps->at(ps->size() - 1) == ' ' || ps->at(ps->size() - 1) == '\r' || ps->at(ps->size() - 1) == '\n') )
-    {
-        *ps = ps->substr(0, ps->size() - 1);
-    }
-}
-
-// Split string cs into a vector of strings.
-// Character c is used to split the strings.
-// Strings in the result vector do not include the c character.
-Strings Split(const std::string& cs, char c)
-{
-  Strings r;
-  std::string s(cs);
-  while (true) 
-  {
-    int i = s.find(c);
-    if (i == std::string::npos)
-    {
-      // No special character found, so push back the entire string and finish.
-      r.push_back(s);
-      break; 
-    }    
-    else
-    {
-      // Found the special character. 
-      // Push back whatever is before the character, then work on the remainder
-      // of the string.
-      r.push_back(s.substr(0, i));
-      s = s.substr(i + 1);
-      Trim(&s);
-      if (s.empty())
-      {
-          break;
-      }
-    }
-  }
-  return r;
-}
-*/
 
 // Convert a vector of four strings to a Vec3. 
 // The zeroth string is ignored. Strings 1, 2 & 3 are
