@@ -13,6 +13,8 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include <gcmodplay.h>
 #include <ogcsys.h>
 #include <map>
+#include <fstream>
+#include <stdlib.h>
 
 #include "AmjuGL.h"
 #include <ShaderNull.h>
@@ -254,7 +256,6 @@ bool AmjuGLGCube::CreateWindow(AmjuGLWindowInfo*)
 void AmjuGLGCube::Init()
 {
   // See explanation at http://gxr.brickmii.com/Tutorial/Setup/
-
   AMJU_CALL_STACK;
   
   f32 yscale;
@@ -263,10 +264,10 @@ void AmjuGLGCube::Init()
   // init the vi. setup frame buffer and set the retrace callback
   // to copy the efb to xfb
   VIDEO_Init();
+
   PAD_Init();
  
   rmode = VIDEO_GetPreferredMode(NULL);
- 
  
   curr_fb = 0;
   first_frame = 0;
@@ -288,7 +289,7 @@ void AmjuGLGCube::Init()
   console_init(xfb[curr_fb],20,20,rmode->fbWidth,rmode->xfbHeight,rmode->fbWidth*VI_DISPLAY_PIX_SZ);
  
   //curr_fb ^= 1;
- 
+
   GX_Init(gp_fifo,DEFAULT_FIFO_SIZE);
  
   // clears the bg to color and clears the z buffer
@@ -530,36 +531,6 @@ void AmjuGLGCube::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
     GX_TexCoord2f32(0, 0);//v.m_u, v.m_v);
   
   GX_End();
-}
-
-void AmjuGLGCube::DrawQuadList(const AmjuGL::Quads& quads)
-{
-  AMJU_CALL_STACK;
-
-
-  // Can use GX_QUADS
-}
-
-void AmjuGLGCube::DrawQuad(AmjuGL::Vert* verts)
-{
-  AMJU_CALL_STACK;
-
-  // Or Can use GX_QUADS
-
-  AmjuGL::Tris tris;
-	tris.reserve(2);
-	AmjuGL::Tri tri;
-	tri.m_verts[0] = verts[0];
-	tri.m_verts[1] = verts[1];
-	tri.m_verts[2] = verts[2];
-	tris.push_back(tri);
-
-	tri.m_verts[0] = verts[0];
-	tri.m_verts[1] = verts[2];
-	tri.m_verts[2] = verts[3];
-	tris.push_back(tri);
-
-  DrawTriList(tris);
 }
 
 void AmjuGLGCube::DrawIndexedTriList(
