@@ -189,6 +189,8 @@ void AmjuGL::Init()
 bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
 {
   AMJU_CALL_STACK;
+  
+  Assert(initCalled == 1);
 
   Screen::SetSize(w->GetWidth(), w->GetHeight());
   bool b = impl->CreateWindow(w);
@@ -369,6 +371,12 @@ void AmjuGL::PushMatrix()
   AMJU_CALL_STACK;
 
 #ifdef _DEBUG
+  if (s_currentMatrix != AMJU_MODELVIEW_MATRIX)
+  {
+    std::cout << "PushMatrix called for " 
+      << (s_currentMatrix == AMJU_PROJECTION_MATRIX ? "PROJ" : "TEXTURE") << " matrix\n";
+  }
+
   s_matrixStackSize[s_currentMatrix]++;
 #endif
 
@@ -380,6 +388,12 @@ void AmjuGL::PopMatrix()
   AMJU_CALL_STACK;
 
 #ifdef _DEBUG
+  if (s_currentMatrix != AMJU_MODELVIEW_MATRIX)
+  {
+    std::cout << "PopMatrix called for " 
+      << (s_currentMatrix == AMJU_PROJECTION_MATRIX ? "PROJ" : "TEXTURE") << " matrix\n";
+  }
+
   Assert(s_matrixStackSize[s_currentMatrix] > 0);
   s_matrixStackSize[s_currentMatrix]--;
 #endif
