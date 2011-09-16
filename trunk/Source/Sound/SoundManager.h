@@ -1,9 +1,10 @@
 #ifndef SOUND_MANAGER_H
 #define SOUND_MANAGER_H
 
-#include "Singleton.h"
+#include <Singleton.h>
+#include <NonCopyable.h>
 #include "SoundPlayerImpl.h"
-#include "GlueFile.h"
+#include <GlueFile.h>
 
 namespace Amju
 {
