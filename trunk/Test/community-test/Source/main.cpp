@@ -1,7 +1,8 @@
+#ifndef IPHONE
+
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
-//#include "GSEnterName.h"
 #include "GSLighting.h"
 
 namespace Amju
@@ -19,3 +20,4 @@ void StartUp()
 }
 }
 
+#endif // IPHONE
