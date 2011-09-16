@@ -4,11 +4,11 @@
 #include <map>
 #include "ObjUsefulFunctions.h"
 #include "ResourceManager.h"
-#include "Matrix.h"
 
 namespace Amju
 {
 class CollisionMesh;
+class Matrix;
 
 class ObjMesh : public Resource
 {

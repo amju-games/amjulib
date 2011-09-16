@@ -22,8 +22,14 @@ struct Material
 
   std::string m_texfilename;
   PTexture m_texture;
-  // TODO Other properties
+  uint32 m_flags;
+  // Flags comprised of these values
+  enum
+  {
+    AMJU_MATERIAL_NO_COLLIDE = 1
+  };
 
+  Material();
   void UseThisMaterial();
   bool Load(const std::string& mtlfilename);
 };
@@ -32,12 +38,12 @@ struct Material
 //  so is most efficient.
 struct Face
 {
-	Face();
+  Face();
 
-	// only triangles are allowed!
-	int m_pointIndex[3];
-	int m_normalIndex[3];
-	int m_uvIndex[3];
+  // only triangles are allowed!
+  int m_pointIndex[3];
+  int m_normalIndex[3];
+  int m_uvIndex[3];
 };
 
 typedef std::vector<Face> Faces;
