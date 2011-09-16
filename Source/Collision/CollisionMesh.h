@@ -40,6 +40,8 @@ public:
 
   void CalcAABB(AABB* aabb);
 
+  const Tris& GetAllTris() const;
+
 private:
   Tris m_tris;
 };

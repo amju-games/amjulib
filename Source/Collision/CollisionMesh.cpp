@@ -81,6 +81,11 @@ void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
   }
 }
 
+const CollisionMesh::Tris& CollisionMesh::GetAllTris() const
+{
+  return m_tris;
+}
+
 bool CollisionMesh::GetY(const Vec2f& v, float* pY) const
 {
   //bool found = false;
