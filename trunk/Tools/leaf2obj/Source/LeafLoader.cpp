@@ -30,9 +30,13 @@ ObjMesh* LeafLoad(const std::string& filename)
   // 3: Auto generated UVs - env mapped 
   // 4: Null Texture method -- DON'T get texture filename
   // 5: UVs are specified in file, clamped  
+  // 6: Null (no texture) BUT still give UVs! (For ASCP pool balls)
 
   std::string texFilename;
-  if (texMethod != 4) // not null tex method
+
+  bool hasTextureName = (texMethod != 4 && texMethod != 6);
+
+  if (hasTextureName)
   {
     f.GetDataLine(&texFilename); 
     int alpha = 0;
@@ -41,7 +45,8 @@ ObjMesh* LeafLoad(const std::string& filename)
     {
       std::string s;
       f.GetDataLine(&s); // alpha name, discarded
-      texFilename += "a"; // add alpha, e.g. "red.bmp" -> "red.bmpa"
+      // Not doing this any more as we are using pngs. You must manually add alpha channel :-(
+      //texFilename += "a"; // add alpha, e.g. "red.bmp" -> "red.bmpa"
     }
   }
 
@@ -54,6 +59,8 @@ ObjMesh* LeafLoad(const std::string& filename)
       f.GetFloat(&a);
     }
   }
+
+  bool hasUVs = (texMethod == 1 || texMethod == 6);
 
   int normalFlag = 0;
   f.GetInteger(&normalFlag);
@@ -96,7 +103,7 @@ ObjMesh* LeafLoad(const std::string& filename)
        }
        face.m_pointIndex[j] = vecmap[v];
 
-       if (texMethod == 1) // TODO check this is the right value
+       if (hasUVs)
        {
          // UVs are listed in file
          Vec2f uv;
@@ -183,7 +190,7 @@ ObjMesh* LeafLoad(const std::string& filename)
     {
       of.Write("vn " + ToString(normals[i].x) + " " + ToString(normals[i].y) + " " + ToString(normals[i].z));
     }
-    if (texMethod != 4) // not null tex method
+    if (hasTextureName)
     {
       // Write group name and material
       std::string matName = StripPath(GetFileNoExt(filename));
