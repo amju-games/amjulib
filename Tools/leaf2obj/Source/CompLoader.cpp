@@ -3,6 +3,7 @@
 #include <ObjMesh.h>
 #include <File.h>
 #include <DegRad.h>
+#include <Matrix.h>
 
 namespace Amju
 {
