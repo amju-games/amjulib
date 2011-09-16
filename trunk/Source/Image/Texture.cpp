@@ -81,7 +81,8 @@ void Texture::Create(unsigned char* data, int w, int h, int bytesPerPixel)
 
 void Texture::UseThisTexture()
 {
-  Assert(m_texId != (AmjuGL::TextureHandle)-1);
+  // Will be false if using console only for debugging
+//  Assert(m_texId != (AmjuGL::TextureHandle)-1);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::UseTexture(m_texId);
 }

@@ -39,19 +39,34 @@ uint8* AddAlpha(uint8* source, int w, int h)
 {
   int size = w * h;
   Assert(size > 0);
-  uint8* pData = new uint8[4 * size];
-  Assert(pData);
+  uint8* dest = new uint8[4 * size];
+  Assert(dest);
 
+  for (int i = 0; i < h; i++)
+  {
+    for (int j = 0; j < w; j++)
+    {
+      int n = i * w + j;
+
+      dest[n * 4 + 0] = source[n * 3 + 0]; 
+      dest[n * 4 + 1] = source[n * 3 + 1]; 
+      dest[n * 4 + 2] = source[n * 3 + 2]; 
+      dest[n * 4 + 3] = 0xff; 
+    }
+  }
+
+/*
   int BytePerPixel = 3;
   for(int i = 0; i < size; i++)
   {
-    pData[4*i+0] = source[BytePerPixel*i+0];
-    pData[4*i+1] = source[BytePerPixel*i+1];
-    pData[4*i+2] = source[BytePerPixel*i+2];
-    pData[4*i+3] = 0xff;
+    dest[4*i+0] = source[BytePerPixel*i+0];
+    dest[4*i+1] = source[BytePerPixel*i+1];
+    dest[4*i+2] = source[BytePerPixel*i+2];
+    dest[4*i+3] = 0xff;
   }
+*/
 
-  return pData;
+  return dest;
 }
 
 void CopyAlpha(const uint8* source, uint8* dest, int w, int h)
