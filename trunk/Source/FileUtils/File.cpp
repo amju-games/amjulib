@@ -85,7 +85,7 @@ void File::SetRoot(const std::string& root, const std::string& sep)
   {
     first= false;
 
-#ifdef _DEBUG
+#ifdef FAT_INIT_DEBUG
     std::cout << "Initialising file system...\n";
 #endif
 
@@ -95,7 +95,7 @@ void File::SetRoot(const std::string& root, const std::string& sep)
     }
     else
     {
-#ifdef _DEBUG
+#ifdef FAT_INIT_DEBUG
       std::cout << "Successfully initialised file system!\n";
 #endif
     }
