@@ -199,8 +199,6 @@ std::cout << "CHMOD: " << dir.c_str() << "\n";
   return (r == 0);
 }
 
-extern const char * APPLICATION_NAME;
-
 #ifdef WIN32
 bool ShGetFolderPath(uint32 pathType, std::string* pResult)
 {
@@ -278,13 +276,17 @@ std::string GetDesktopDir()
 #endif
 
 #ifdef GEKKO
-  return "";
+  return "/";
 #endif // GEKKO
 }
 
 std::string GetSaveDir(const std::string& appName)
 {
   // Get directory for saving preferences, etc.
+#ifdef GEKKO
+  return File::GetRoot();
+#endif
+
   // Not in the application directory, so the app can be upgraded without losing
   // preferences etc.
   // NB This should be in a shared area, not specific to the user that 
@@ -345,10 +347,6 @@ std::string GetSaveDir(const std::string& appName)
 
   return s;
 #endif
-
-#ifdef GEKKO
-  return "";
-#endif // GEKKO
 }
 
 bool FileExists(const std::string& filename)
