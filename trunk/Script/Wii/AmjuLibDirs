@@ -5,6 +5,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Clip \
   $(AMJU)/Collision \
   $(AMJU)/Community \
+  $(AMJU)/Cursor \
   $(AMJU)/Events \
   $(AMJU)/EventsWii \
   $(AMJU)/FileUtils \
