@@ -79,6 +79,10 @@ bool ObjMesh::SaveBinary(const std::string& filename)
 
 bool ObjMesh::LoadBinary(const std::string& filename)
 {
+#ifdef OBJ_DEBUG
+  std::cout << "Loading binary obj file: " << filename << "\n";
+#endif
+
   File f(File::NO_VERSION);
   if (!f.OpenRead(filename, true /* is binary */))
   {
@@ -88,6 +92,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
   int n = 0;
   // Points
   f.GetInteger(&n);
+
+#ifdef OBJ_DEBUG
+  std::cout << "File supposedly contains " << n << " points\n";
+#endif
+
   m_points.reserve(n);
   for (int i = 0; i < n; i++)
   {
@@ -97,12 +106,18 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     f.GetFloat(&v.z);
     m_points.push_back(v);
   }
+
 #ifdef OBJ_DEBUG
   std::cout << "Loaded " << n << " points\n";
 #endif
 
   // UVs
   f.GetInteger(&n);
+
+#ifdef OBJ_DEBUG
+  std::cout << "Contains " << n << " UVs\n";
+#endif
+
   m_uvs.reserve(n);
   for (int i = 0; i < n; i++)
   {
@@ -117,6 +132,9 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 
   // Normals
   f.GetInteger(&n);
+#ifdef OBJ_DEBUG
+  std::cout << "Contains " << n << " normals\n";
+#endif
   m_normals.reserve(n);
   for (int i = 0; i < n; i++)
   {
@@ -151,25 +169,45 @@ bool ObjMesh::LoadBinary(const std::string& filename)
     std::string tex;
     f.GetDataLine(&tex);
     mat.m_texfilename = tex;
+#ifdef OBJ_DEBUG
+    std::cout << "Material " << i << ": matName: " << matName << " filename: " << filename << " tex: " << tex << "\n";
+#endif
 
     mat.m_texture = (Texture*)TheResourceManager::Instance()->GetRes(tex);
+
+    if (!mat.m_texture)  
+    {
 #ifdef OBJ_DEBUG
-    std::cout << "  Loaded texture " << tex << "\n";
+    std::cout << "FAILED TO LOAD texture " << tex << "!\n";
+#endif
+      return false;
+    }
+
+#ifdef OBJ_DEBUG
+    std::cout << "Loaded texture " << tex << " OK!\n";
 #endif
 
     int flags = 0;
     f.GetInteger(&flags);
     mat.m_flags = (uint32)flags;
+
+#ifdef OBJ_DEBUG
+    std::cout << "Flags: " << flags << "\n";
+#endif
   }
 
   int numGroups = 0;
   f.GetInteger(&numGroups); 
+#ifdef OBJ_DEBUG
+  std::cout << "Supposedly " << numGroups << " groups...\n";
+#endif
+
   for (int ig = 0; ig < numGroups; ig++)
   {
     std::string groupName;
     f.GetDataLine(&groupName);
 #ifdef OBJ_DEBUG
-    std::cout << "Group: " << groupName << "\n";
+    std::cout << "Group " << ig << " name: " << groupName << "\n";
 #endif
 
     Group& g = m_groups[groupName];
@@ -193,6 +231,12 @@ bool ObjMesh::LoadBinary(const std::string& filename)
       std::cout << "Material name: " << matName << "\n";
 #endif
       g.m_materialName = matName;
+    }
+    else
+    {
+#ifdef OBJ_DEBUG
+      std::cout << "No material for this group.\n";
+#endif
     }
 
     // Load face info
@@ -226,6 +270,10 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
   {
     return LoadBinary(filename);
   }
+
+#ifdef OBJ_DEBUG
+  std::cout << "Loading file " << filename << " - not binary\n";
+#endif
 
   File f(File::NO_VERSION);
   if (!f.OpenRead(filename))
@@ -315,6 +363,24 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     }
   }
 
+  if (m_points.empty())
+  {
+#ifdef OBJ_DEBUG
+    std::cout << "No point data - failed!\n";
+#endif
+
+    return false;
+  }
+
+#ifdef OBJ_DEBUG
+  std::cout << "Points: " << m_points.size()
+    << " UVs: " << m_uvs.size() 
+    << " Norms: " << m_normals.size()
+    << " Groups: " << m_groups.size()
+    << " Mats: " << m_materials.size()
+    << "\n";
+#endif
+
   MungeData();
   return true;
 }
@@ -373,6 +439,11 @@ void ObjMesh::BuildGroup(Group& g)
   Faces& faces = m_facemap[g.m_name];
 
   unsigned int numfaces = faces.size();
+
+#ifdef OBJ_DEBUG
+std::cout << "Group " << g.m_name << " has " << numfaces << " faces.\n";
+#endif
+
   g.m_tris.reserve(numfaces);
   for (unsigned int i = 0; i < numfaces; i++)
   {
