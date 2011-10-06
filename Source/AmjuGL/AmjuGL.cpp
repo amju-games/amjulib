@@ -229,8 +229,16 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
   Assert(w > 0);
   Assert(h > 0);
 
-  // TODO should be settable state
+  // TODO "LANDSCAPE" should be settable at run time..?
+  // Currently it's defined for devices that have a portrait orientation by default, i.e. phones.
+  // (So why is it called LANDSCAPE, sigh....)
+
 #ifdef LANDSCAPE
+  if (viewport[0] == y && viewport[1] == x && viewport[2] == h && viewport[3] == w)
+  {
+    return;
+  }
+
   impl->Viewport(y, x, h, w);
 
   viewport[0] = y;
@@ -239,6 +247,11 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
   viewport[3] = w;
 
 #else
+  if (viewport[0] == x && viewport[1] == y && viewport[2] == w && viewport[3] == h)
+  {
+    return;
+  }
+
   impl->Viewport(x, y, w, h);
 
   viewport[0] = x;
@@ -246,6 +259,16 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
   viewport[2] = w;
   viewport[3] = h;
 #endif
+ 
+#ifdef VIEWPORT_DEBUG 
+  std::cout << "AmjuGL::Viewport called: x: " << x << " y: " << y << " w: " << w << " h: " << h << ".. "
+#ifdef LANDSCAPE
+    << " LANDSCAPE "
+#else
+    << " not landscape "
+#endif
+    << " mode, so viewport is: " << viewport[0] << " " << viewport[1] << " " << viewport[2] << " " << viewport[3] << "\n";
+#endif // VIEWPORT_DEBUG
 }
 
 void AmjuGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
@@ -364,6 +387,12 @@ void AmjuGL::SetIdentity()
   AMJU_CALL_STACK;
 
   impl->SetIdentity();
+
+  // Whole screen rotation
+  if (GetMatrixMode() == AMJU_PROJECTION_MATRIX)
+  {
+    RotateZ(GetScreenRotation());
+  }
 }
 
 void AmjuGL::PushMatrix()
