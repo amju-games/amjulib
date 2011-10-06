@@ -2,7 +2,6 @@
 //  ES1Renderer.m
 
 #import "ES1Renderer.h"
-
 #include <sys/time.h> // gettimeofday, for FPS count
 #include <Game.h>
 #include <AmjuGL.h>
@@ -16,6 +15,7 @@
 #include <StringUtils.h>
 #include <Font.h>
 #include <ResourceManager.h>
+#include <iostream>
 
 @implementation ES1Renderer
 
@@ -38,25 +38,35 @@
         glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
         glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
         glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+
+std::cout << "In init()...\n";
                 
         Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES);
+
+std::cout << "Set AmjuGL impl...\n";
+
         Amju::AmjuGL::Init();
+
+std::cout << "Called AmjuGL::Init()...\n";
+	
+	// Get path to data files
+	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
 		
-		// Get path to data files
-		NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+	// From http://forums.macrumors.com/showthread.php?t=494103
+	//NSString *foo = @"your text here";
+	//const char *bar = [foo UTF8String];
 		
-		// From http://forums.macrumors.com/showthread.php?t=494103
-		//NSString *foo = @"your text here";
-		//const char *bar = [foo UTF8String];
+	const char* cFilePath = [filePath UTF8String];
+	Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
 		
-		const char* cFilePath = [filePath UTF8String];
-		Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
-		
-		Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
-		Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
-				
+	Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
+	Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
+			
+std::cout << "About to call StartUp...\n";
+	
         Amju::StartUp();
         
+std::cout << "Called StartUp...\n";
     }
 
     return self;
@@ -64,6 +74,8 @@
 
 - (void)render
 {
+std::cout << "In render!\n";
+
     // This application only creates a single context which is already set current at this point.
     // This call is redundant, but needed if dealing with multiple contexts.
     [EAGLContext setCurrentContext:context];
@@ -72,15 +84,13 @@
     // This call is redundant, but needed if dealing with multiple framebuffers.
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
 	
-	// Temporarily disable, confusing mouse coords! 
-	// Landscape mode
 #ifdef LANDSCAPE
 	Amju::Screen::SetSize(backingHeight, backingWidth);
 	Amju::AmjuGL::SetScreenRotation(90.0f);
 #else
 	Amju::Screen::SetSize(backingWidth, backingHeight);		
 #endif
-	
+		
     //glViewport(0, 0, backingWidth, backingHeight);
 	
 	// Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
