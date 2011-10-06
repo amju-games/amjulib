@@ -2,7 +2,12 @@
 
 namespace Amju
 {
-float LineSeg::SqDist(const Vec3f& q)
+Vec3f LineSeg::GetPoint(float t)
+{
+  return p0 + t * (p1 - p0);
+}
+
+float LineSeg::SqDist(const Vec3f& q) const
 {
   Vec3f m(p1 - p0);
   float mDotM = DotProduct(m, m);
