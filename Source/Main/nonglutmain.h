@@ -11,7 +11,6 @@
 #endif // GEKKO
 
 #ifdef WIN32
-// Assume we always use OpenGL for now
 #include <AmjuGL-OpenGL.h>
 #include <EventPollerImplSDL.h>
 #include <AmjuGL-DX9.h>
@@ -23,6 +22,12 @@
 #ifdef MACOSX
 #include <AmjuGL-OpenGL.h>
 #endif // MACOSX
+
+#ifdef IPHONE
+#include <AmjuGL-Null.h>
+#include <EventPollerImplGeneric.h>
+#include <BassSoundPlayer.h>
+#endif
 
 #include <Game.h>
 #include <SoundManager.h>
@@ -44,8 +49,6 @@ int main(int argc, char **argv)
   AmjuGL::SetImpl(new AmjuGLGCube);
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
   TheSoundManager::Instance()->SetImpl(new SoundWii);
-  // TODO Any way we can get the directory where the executable lives ?
-  //File::SetRoot("/apps/amju_ww/data/", "/");
 #endif // GEKKO
 
 #ifdef WIN32
@@ -77,13 +80,31 @@ int main(int argc, char **argv)
   TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
 #endif // WIN32
 
+#ifdef IPHONE
+#ifdef AMJU_CONSOLE
+  std::cout << "iPhone console build\n";
+  AmjuGL::SetImpl(new AmjuGLNull);
+  TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric);
+  TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
+#else
+#error Non-console iphone build should be using the objective-C framework
+#endif // AMJU_CONSOLE
+#endif // IPHONE
+
   // Initialise window etc
-  Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
+std::cout << "Just before init...\n";
+
   Amju::AmjuGL::Init();
+
+std::cout << "Just before create window...\n";
+
+  Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
 //  Amju::AmjuGL::SetScreenRotation(10.0f);
 
+std::cout << "Just before startup...\n";
   StartUp();
 
+std::cout << "Just before run...\n";
   TheGame::Instance()->Run();
 
   return 0;
