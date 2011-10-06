@@ -278,12 +278,22 @@ std::string GetDesktopDir()
 #ifdef GEKKO
   return "/";
 #endif // GEKKO
+
+#ifdef IPHONE
+  std::cout << "Trying to get Desktop dir, help!\n";
+  return "./";
+#endif // IPHONE
 }
 
 std::string GetSaveDir(const std::string& appName)
 {
   // Get directory for saving preferences, etc.
 #ifdef GEKKO
+  return File::GetRoot();
+#endif
+
+#ifdef IPHONE
+  std::cout << "Save dir: " << File::GetRoot() << "\n";
   return File::GetRoot();
 #endif
 
