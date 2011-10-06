@@ -10,6 +10,8 @@ namespace Amju
 //  button is pressed or released
 static const int NUM_BUTTONS = 13;
 //static bool s_wasPressed[NUM_BUTTONS];
+
+// Map libogc/wpad button codes to corresponding amjulib button code
 static const int WII_AMJU_BUTTON[NUM_BUTTONS][2] = 
 {
   { WPAD_BUTTON_2,         AMJU_BUTTON_MAX   },
@@ -48,8 +50,8 @@ void EventPollerImplWii::Update(Listeners* pListeners)
   static float ir_x[WPAD_MAX_WIIMOTES] = { 0, 0, 0, 0, 0 };
   static float ir_y[WPAD_MAX_WIIMOTES] = { 0, 0, 0, 0, 0 };
 
-  // TODO TEMP TEST
-  // Remote 0 can quit with Home button
+  // TODO quit on Power button - how to get this event ? 
+  // Generate a quit event with Home button, don't just exit..?
   if (WPAD_ButtonsDown(0) & WPAD_BUTTON_HOME) 
   {
     exit(0);
