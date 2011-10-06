@@ -980,7 +980,9 @@ void AmjuGLGCube::SetTexture(
     Raw32To4x4RGBA(data, convertedData, width, height);
   }
 
-  GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE); 
+  //GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE); 
+  // Hmm, try WRAP
+  GX_InitTexObj(g, convertedData, width, height, GX_TF_RGBA8, GX_REPEAT, GX_REPEAT, GX_FALSE); 
   
   // This is needed - what does it do ?
   DCFlushRange(convertedData, width * height * 4);
