@@ -26,7 +26,7 @@ Added to repository
 
 #include <string>
 #include "RCPtr.h"
-#include "Texture.h"
+#include <Texture.h>
 #include <AmjuGL.h>
 
 namespace Amju

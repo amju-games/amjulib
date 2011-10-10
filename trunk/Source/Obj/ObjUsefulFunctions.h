@@ -7,7 +7,7 @@
 #include "Vec3.h"
 #include "Vec2.h"
 #include "AmjuGL.h"
-#include "Texture.h"
+#include <Texture.h>
 
 namespace Amju
 {

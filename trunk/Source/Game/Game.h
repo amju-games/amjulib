@@ -1,7 +1,8 @@
 #ifndef AMJU_GAME_H
 #define AMJU_GAME_H
 
-#include "Singleton.h"
+#include <Singleton.h>
+#include <NonCopyable.h>
 #include "GameState.h"
 #include "GameObject.h"
 #include "EventListener.h"
