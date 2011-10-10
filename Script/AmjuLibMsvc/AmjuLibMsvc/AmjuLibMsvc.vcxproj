@@ -173,6 +173,17 @@
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
@@ -207,6 +218,9 @@
     <ClCompile Include="..\..\..\Source\Thread\Thread.cpp" />
     <ClCompile Include="..\..\..\Source\Thread\ThreadGate.cpp" />
     <ClCompile Include="..\..\..\Source\Thread\ThreadManager.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\AmjuTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
@@ -340,6 +354,24 @@
     <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
     <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcLine3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcMath.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRay3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRTLib.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSegment3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSphere.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
     <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
     <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
     <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />
@@ -374,6 +406,9 @@
     <ClInclude Include="..\..\..\Source\Thread\Thread.h" />
     <ClInclude Include="..\..\..\Source\Thread\ThreadGate.h" />
     <ClInclude Include="..\..\..\Source\Thread\ThreadManager.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\AmjuTime.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
     <ClInclude Include="..\..\..\Source\Utils\Common.h" />
@@ -476,6 +511,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcLine3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcMath.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcRay3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSegment3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSphere.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector2.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
