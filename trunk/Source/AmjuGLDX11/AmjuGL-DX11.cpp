@@ -15,18 +15,6 @@ namespace Amju
 {
 // Lots of this code is pasted from DXSDK tutorials
 
-ID3D11Texture2D*        g_pDepthStencil = NULL;
-ID3D11DepthStencilView* g_pDepthStencilView = NULL;
-
-ID3D11ShaderResourceView*           g_pTextureRV = NULL;
-ID3D11SamplerState*                 g_pSamplerLinear = NULL;
-
-XMMATRIX g_View;
-XMMATRIX g_Projection;
-
-std::stack<XMMATRIX> mtxStack[3];
-static AmjuGL::MatrixMode s_matrixMode = AmjuGL::AMJU_MATRIX_NOTSETYET;
-
 struct ConstantBuffer
 {
   XMMATRIX mView;
@@ -210,6 +198,15 @@ AmjuGLDX11::AmjuGLDX11(WNDPROC wndproc)
   m_wndproc = wndproc;
   m_defaultShader = 0;
   m_currentShader = 0;
+
+  g_pDepthStencil = NULL;
+  g_pDepthStencilView = NULL;
+
+  g_pTextureRV = NULL;
+  g_pSamplerLinear = NULL;
+
+  s_matrixMode = AmjuGL::AMJU_MATRIX_NOTSETYET;
+
 }
 
 AmjuGLDX11::~AmjuGLDX11()
@@ -518,6 +515,7 @@ void AmjuGLDX11::PopMatrix()
   AMJU_CALL_STACK;
 
   Assert(s_matrixMode != AmjuGL::AMJU_MATRIX_NOTSETYET);
+  Assert(!mtxStack[(int)s_matrixMode].empty());
 
   if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
   {

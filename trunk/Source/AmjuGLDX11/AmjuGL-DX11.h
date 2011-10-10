@@ -9,7 +9,10 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "Colour.h"
 #include <d3d11.h>
 #include <D3Dcommon.h>
+#define _XM_X86_
+#include <xnamath.h>
 #include <Windows.h>
+#include <stack>
 
 #ifdef CreateWindow
 #undef CreateWindow
@@ -143,6 +146,19 @@ private:
   IDXGISwapChain*         g_pSwapChain;
   ID3D11RenderTargetView* g_pRenderTargetView;
   ID3D11Buffer*           g_pConstantBuffer;
+
+  XMMATRIX g_View;
+  XMMATRIX g_Projection;
+
+  ID3D11Texture2D*        g_pDepthStencil;
+  ID3D11DepthStencilView* g_pDepthStencilView;
+
+  ID3D11ShaderResourceView*           g_pTextureRV;
+  ID3D11SamplerState*                 g_pSamplerLinear;
+
+  std::stack<XMMATRIX> mtxStack[3];
+  AmjuGL::MatrixMode s_matrixMode;
+
 }; // class 
 
 } // namespace Amju
