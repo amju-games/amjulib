@@ -106,6 +106,9 @@
     <Filter Include="AmjuGLDX11">
       <UniqueIdentifier>{9642f302-3c23-4bd4-b596-75151880585f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Geom\Mgc">
+      <UniqueIdentifier>{7bd90580-ff3b-49b6-9072-5090981af2d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -590,6 +593,48 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp">
       <Filter>AmjuGLDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\AmjuTime.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp">
+      <Filter>TimeUtils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1079,10 +1124,97 @@
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h">
       <Filter>AmjuGLDX11</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcLine3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcMath.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRay3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRTLib.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSegment3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSphere.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\AmjuTime.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">
       <Filter>Anim</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcLine3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcMath.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcRay3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSegment3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSphere.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector2.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl">
+      <Filter>Geom\Mgc</Filter>
     </None>
   </ItemGroup>
 </Project>
