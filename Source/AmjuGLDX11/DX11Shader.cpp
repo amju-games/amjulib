@@ -5,6 +5,7 @@
 #include <d3dcompiler.h>
 #include <xnamath.h>
 #include <File.h>
+#include <ReportError.h>
 #include "Assert.h"
 #include "AmjuFinal.h"
 
@@ -30,8 +31,8 @@ HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCST
   File shFile(File::NO_VERSION);
   if (!shFile.OpenRead(szFileName))
   {
-    shFile.ReportError("Failed to open fragment shader file");
-    return false;
+    shFile.ReportError("Failed to open DX11 shader file");
+    return ~S_OK;
   }
   std::string text;
   std::string s;
@@ -47,17 +48,20 @@ HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCST
     szFileName, // path
     0, 0, szEntryPoint, szShaderModel, dwShaderFlags, 0, 0, ppBlobOut, &pErrorBlob, 0);
 
-  if( FAILED(hr) )
+  if (FAILED(hr))
   {
     if (pErrorBlob)
     {
-      std::cout << (char*)pErrorBlob->GetBufferPointer() << "\n";
-
+      ReportError((char*)pErrorBlob->GetBufferPointer());
       pErrorBlob->Release();
     }
     return hr;
   }
-  if( pErrorBlob ) pErrorBlob->Release();
+
+  if (pErrorBlob) 
+  {
+    pErrorBlob->Release();
+  }
 
   return S_OK;
 }
@@ -65,14 +69,19 @@ HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCST
 DX11Shader::DX11Shader()
 {
   AMJU_CALL_STACK;
+
+  m_pVertexShader = 0;
+  m_pPixelShader = 0;
+  pVSBlob = 0;
+  m_numPasses = 0; // ?
 }
 
 DX11Shader::~DX11Shader()
 {
   AMJU_CALL_STACK;
 
-  if(m_pVertexShader) m_pVertexShader->Release();
-  if(m_pPixelShader) m_pPixelShader->Release();
+  if (m_pVertexShader) m_pVertexShader->Release();
+  if (m_pPixelShader) m_pPixelShader->Release();
 }
 
 bool DX11Shader::Load(const std::string& fxFileName, ID3D11Device* dd)
@@ -80,37 +89,39 @@ bool DX11Shader::Load(const std::string& fxFileName, ID3D11Device* dd)
   AMJU_CALL_STACK;
 
   // Compile the vertex shader
-  HRESULT hr = CompileShaderFromFile(fxFileName.c_str() /*L"Tutorial02.fx"*/, "VS", "vs_4_0", &pVSBlob );
-  if( FAILED( hr ) )
+  HRESULT hr = CompileShaderFromFile(fxFileName.c_str(), "VS", "vs_4_0", &pVSBlob );
+  if (FAILED(hr))
   {
-      MessageBox( NULL,
-                  L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK );
-      return false;
+    ReportError("Failed to compile vertex shader for " + fxFileName);
+    return false;
   }
 
 	// Create the vertex shader
-	hr = dd->CreateVertexShader( pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, &m_pVertexShader );
-	if( FAILED( hr ) )
+	hr = dd->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), NULL, &m_pVertexShader);
+	if (FAILED(hr))
 	{	
-		pVSBlob->Release();
-        return false;
+    ReportError("Failed to create vertex shader for " + fxFileName);
+    pVSBlob->Release();
+    return false;
 	}
 
 	// Compile the pixel shader
 	ID3DBlob* pPSBlob = NULL;
   hr = CompileShaderFromFile(fxFileName.c_str(), "PS", "ps_4_0", &pPSBlob );
-  if( FAILED( hr ) )
+	if (FAILED(hr))  
   {
-      MessageBox( NULL,
-                  L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK );
-      return false;
+    ReportError("Failed to compile pixel shader for " + fxFileName);
+    return false;
   }
 
 	// Create the pixel shader
 	hr = dd->CreatePixelShader( pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), NULL, &m_pPixelShader );
 	pPSBlob->Release();
-    if( FAILED( hr ) )
-        return false;
+  if (FAILED(hr))
+  {
+    return false;
+    ReportError("Failed to create pixel shader for " + fxFileName);
+  }
 
   return true;
 }
@@ -127,8 +138,8 @@ size_t DX11Shader::GetBufferSize()
 
 void DX11Shader::SetShader(ID3D11DeviceContext* ddc)
 {
-	ddc->VSSetShader( m_pVertexShader, NULL, 0 );
-	ddc->PSSetShader( m_pPixelShader, NULL, 0 );
+	ddc->VSSetShader(m_pVertexShader, NULL, 0);
+	ddc->PSSetShader(m_pPixelShader, NULL, 0);
 }
 
 std::string DX11Shader::GetErrorString()
