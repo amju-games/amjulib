@@ -10,6 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <d3d11.h>
 #include <D3Dcommon.h>
 #define _XM_X86_
+#define _XM_NO_INTRINSICS_
 #include <xnamath.h>
 #include <Windows.h>
 #include <stack>

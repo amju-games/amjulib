@@ -1,7 +1,6 @@
 
 #include "AmjuFirst.h"
 #include "AmjuGL-DX11.h"
-#include <xnamath.h>
 #include <D3DX11tex.h>
 #include <AmjuGLWindowInfo.h>
 #include <WinScreen.h>
@@ -297,7 +296,8 @@ void AmjuGLDX11::Init()
 {
   AMJU_CALL_STACK;
 
-  m_defaultShader = (DX11Shader*)LoadShader("Shaders/tutorial2.fx");
+  m_defaultShader = (DX11Shader*)LoadShader("dx11default.fx");
+  Assert(m_defaultShader);
   m_currentShader = m_defaultShader;
 }
 
@@ -570,8 +570,14 @@ void AmjuGLDX11::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
 
-  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
-  g_View = XMMatrixRotationZ(DegToRad(degs)) * g_View;
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
+    g_View = XMMatrixRotationZ(DegToRad(degs)) * g_View;
+  }
+  else
+  {
+    g_Projection = XMMatrixRotationZ(DegToRad(degs)) * g_Projection;
+  }
 }
 
 void AmjuGLDX11::GetMatrix(AmjuGL::MatrixMode mm, float result[16])

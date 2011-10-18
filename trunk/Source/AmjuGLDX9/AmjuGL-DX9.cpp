@@ -412,13 +412,20 @@ void AmjuGLDX9::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
 
-  Assert(s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX);
-
   D3DXMATRIX m;
   D3DXMatrixIdentity(&m);
   D3DXMatrixRotationZ(&m, D3DXToRadian(degs)); 
-  g_matrixStack->MultMatrixLocal( &m);
-  dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
+
+  if (s_matrixMode == AmjuGL::AMJU_MODELVIEW_MATRIX)
+  {
+    g_matrixStack->MultMatrixLocal( &m);
+    dd->SetTransform(D3DTS_WORLD, g_matrixStack->GetTop());
+  }
+  else
+  {
+    matProj *= m;
+    dd->SetTransform(D3DTS_PROJECTION, &matProj);  
+  }
 }
 
 void AmjuGLDX9::GetMatrix(AmjuGL::MatrixMode mm, float result[16])
@@ -461,7 +468,7 @@ static void EnableZWrite(bool writeToZ)
   AMJU_CALL_STACK;
 
   // TODO Better function name
-  AmjuGLDX9::dd->SetRenderState(D3DRS_ZENABLE, writeToZ ? D3DZB_TRUE : D3DZB_FALSE);
+  AmjuGLDX9::dd->SetRenderState(D3DRS_ZWRITEENABLE, writeToZ ? D3DZB_TRUE : D3DZB_FALSE);
 }
 
 void AmjuGLDX9::Enable(uint32 flag)
