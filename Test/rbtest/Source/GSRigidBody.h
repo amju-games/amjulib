@@ -19,10 +19,12 @@ public:
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnKeyEvent(const KeyEvent&);
 
 private:
   PRigidBody m_rb;
   Vec2f m_point; // cursor pos
+  bool m_paused; 
 };
 
 typedef Singleton<GSRigidBody> TheGSRigidBody;

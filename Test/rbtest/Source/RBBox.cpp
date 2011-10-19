@@ -46,21 +46,37 @@ void RBBox::Update()
 
   if (penetratingVert > -1)
   {
-    // Got penetration. Move away in dir of plane normal.
+    // Got penetration. Move away in dir of contact normal.
+    Vec3f contactNormal(0, 1, 0); // TODO just this case
 
-    // Don't call SetPos, this will zero pos diff for Verlet.
-    m_pos.y += bestPd; // plane normal * bestPd
+    // "Resolve" penetration: bodge it by moving away in direction of
+    //  contact normal, by distance <penetration depth>
+    // Don't call SetPos, this will zero pos diff for Verlet???
+    m_pos += contactNormal * bestPd; 
 
     // vel gets velChange added. If other object is immovable, v gets 2*velChange
     // and we get the reflection vector.
-    Vec3f contactNormal(0, 1, 0); // TODO just this case
-    Vec3f velChange = DotProduct(m_vel, contactNormal) * contactNormal;
+    float velChangeMult = DotProduct(m_vel, contactNormal);
+    Vec3f velChange = velChangeMult * contactNormal;
     // Immovable in this case TODO
     m_vel -= 2.0f * velChange;
 
+    // TODO TEMP TEST
+    // Dampen the response - this happens once per collision, so not multiplied by dt etc
+    m_vel *= 0.5f;
+
     // Torque to apply? We know point of application. F = ma, a = vel change ? 
-    float mag = 2.0f; // force magnitude
+    // Surely mag of torque should depend on vel of impact.
+    float mag = 1.5f; // TODO TEMP TEST
+      //sqrt(m_vel.SqLen()) - crazy
+      //velChangeMult - crazy; 
+      // * some fudge factor == force magnitude
     AddTorque(mag * contactNormal, corners[penetratingVert]);
+
+    // This seems useless, as we are explicitly changing vel above, it doesn't
+    //  make any difference -- except that it seems to have an effect on how
+    //  things settle down.
+    //AddForce(mag * contactNormal);
   }
 }
 

@@ -53,10 +53,8 @@ void RigidBody::AddForce(const Vec3f& force)
 
 void RigidBody::AddTorque(const Vec3f& force, const Vec3f& pointOfApplication)
 {
-  Vec3f t = CrossProduct(force, pointOfApplication - m_pos);
+  Vec3f t = -CrossProduct(force, pointOfApplication - m_pos);
   m_torques += t;
-
-//  m_forces += force; // right ??
 }
 
 void RigidBody::SetPos(const Vec3f& pos)

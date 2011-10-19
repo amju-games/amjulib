@@ -12,11 +12,15 @@ namespace Amju
 {
 GSRigidBody::GSRigidBody()
 {
+  m_paused = false;
 }
 
 void GSRigidBody::Update()
 {
-  m_rb->Update();
+  if (!m_paused)
+  {
+    m_rb->Update();
+  }
 }
 
 void GSRigidBody::Draw()
@@ -38,8 +42,23 @@ void GSRigidBody::OnActive()
   m_rb = new RBBox;
   m_rb->SetPos(Vec3f(0, 5.0f, 0));
   Quaternion q;
-  q.SetAxisAngle(DegToRad(30.0f), Vec3f(0, 0, 1.0f));
+  q.SetAxisAngle(DegToRad(50.0f), Vec3f(0, 0, 1.0f));
   m_rb->SetRot(q);
+}
+
+bool GSRigidBody::OnKeyEvent(const KeyEvent& ke)
+{
+  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'r')
+  {
+    // Reset sim
+    OnActive();
+  }
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
+  {
+    m_paused = !m_paused;
+  }
+
+  return true; // handled
 }
 
 bool GSRigidBody::OnCursorEvent(const CursorEvent& ce)
