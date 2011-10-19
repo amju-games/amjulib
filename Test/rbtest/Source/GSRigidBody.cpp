@@ -3,6 +3,7 @@
 #include <AmjuGL.h>
 #include <Font.h>
 #include <StringUtils.h>
+#include <DegRad.h>
 #include <AmjuGL.h>
 #include "RBBox.h"
 #include "RBSphere.h"
@@ -20,7 +21,7 @@ void GSRigidBody::Update()
 
 void GSRigidBody::Draw()
 {
-  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   GSBase::Draw();
 
@@ -35,6 +36,10 @@ void GSRigidBody::OnActive()
 {
   GSBase::OnActive();
   m_rb = new RBBox;
+  m_rb->SetPos(Vec3f(0, 5.0f, 0));
+  Quaternion q;
+  q.SetAxisAngle(DegToRad(30.0f), Vec3f(0, 0, 1.0f));
+  m_rb->SetRot(q);
 }
 
 bool GSRigidBody::OnCursorEvent(const CursorEvent& ce)

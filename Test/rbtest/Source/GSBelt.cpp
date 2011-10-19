@@ -54,7 +54,7 @@ void GSBelt::Update()
 
 void GSBelt::Draw()
 {
-  TheGame::Instance()->SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   GSBase::Draw();
 

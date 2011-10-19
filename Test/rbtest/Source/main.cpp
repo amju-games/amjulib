@@ -13,8 +13,8 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 void StartUp()
 {
   TheGame::Instance()->SetCurrentState(
-    TheGSSpringMesh::Instance()
-//    TheGSRigidBody::Instance()
+//    TheGSSpringMesh::Instance()
+    TheGSRigidBody::Instance()
 //    TheGSBelt::Instance()
   );
 }

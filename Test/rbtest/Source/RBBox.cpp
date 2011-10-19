@@ -1,6 +1,9 @@
 #include "RBBox.h"
 #include "DrawOBB3.h"
 #include "Timer.h"
+#include <Sphere.h>
+#include <DrawSphere.h>
+#include <AmjuGL.h>
 
 namespace Amju
 {
@@ -64,6 +67,24 @@ void RBBox::Update()
 void RBBox::Draw()
 {
   DrawOBB3(m_obb3);
+
+  Vec3f corners[8];
+  m_obb3.GetCorners(corners);
+
+  const float RADIUS = 0.1f;
+
+  for (int i = 0; i < 8; i++)
+  { 
+    PushColour();
+    if (0)
+    {
+      MultColour(Colour(1, 0, 0, 1));
+    }
+    Sphere s(corners[i], RADIUS);
+    DrawSphere(s);
+    PopColour();
+  }
+
   //std::cout << "Pos: " << m_pos.x << ", " << m_pos.y << ", " << m_pos.z << "\n";
 }
 

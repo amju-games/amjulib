@@ -14,6 +14,10 @@ void RigidBody::Update()
   float t2 = dt * dt;
 
   Vec3f acc = m_forces * m_invMass;
+
+  const Vec3f GRAVITY(0, -5.0f, 0); // TODO TEMP TEST
+  acc += GRAVITY;
+
   m_forces = Vec3f();
 
   /*
@@ -61,4 +65,8 @@ void RigidBody::SetPos(const Vec3f& pos)
   m_oldPos = pos; // ?
 }
 
+void RigidBody::SetRot(const Quaternion& q)
+{
+  m_rot = q;
+}
 }

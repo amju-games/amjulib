@@ -61,7 +61,7 @@ void GSSpringMesh::Update()
 
 void GSSpringMesh::Draw()
 {
-  TheGame::Instance()->SetClearColour(Colour(1, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(1, 0, 0, 1));
   GSBase::Draw();
 
   m_ss.Draw();
