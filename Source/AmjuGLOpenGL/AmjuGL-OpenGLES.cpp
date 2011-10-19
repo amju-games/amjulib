@@ -140,16 +140,18 @@ void AmjuGLOpenGLES::Flip()
 
 Shader* AmjuGLOpenGLES::LoadShader(const std::string& shaderFileName)
 {
-	return 0;
+  return 0;
 }
 	
 void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
 {
-	AMJU_CALL_STACK;
+  AMJU_CALL_STACK;
 	
-  glMatrixMode(GL_PROJECTION);
-  SetIdentity();
-	gluPerspective(fov, aspectRatio, nearDist, farDist);
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+  // not: glMatrixMode(GL_PROJECTION);
+
+  AmjuGL::SetIdentity();
+  gluPerspective(fov, aspectRatio, nearDist, farDist);
 }
 
 void AmjuGLOpenGLES::SetOrthoProjection()
