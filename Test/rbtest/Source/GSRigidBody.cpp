@@ -7,6 +7,7 @@
 #include <AmjuGL.h>
 #include "RBBox.h"
 #include "RBSphere.h"
+#include "RBManager.h"
 
 namespace Amju
 {
@@ -19,7 +20,7 @@ void GSRigidBody::Update()
 {
   if (!m_paused)
   {
-    m_rb->Update();
+    TheRBManager::Instance()->Update();
   }
 }
 
@@ -29,21 +30,48 @@ void GSRigidBody::Draw()
 
   GSBase::Draw();
 
-  m_rb->Draw();
+  TheRBManager::Instance()->Draw();
 }
 
 void GSRigidBody::Draw2d()
 {
 }
 
+void MakeBox(const Vec3f& pos)
+{
+  RBBox* rb = new RBBox;
+  rb->SetPos(pos);
+  rb->SetSize(Vec3f(
+    (float)(rand() % 2 + 1), 
+    (float)(rand() % 3 + 1),
+    (float)(rand() % 4 + 1)));
+  // Work out mass from volume ?
+
+  Quaternion q;
+  float angle = (float)(rand() % 360);
+  std::cout << "Angle :" << angle << " degs\n";
+  q.SetAxisAngle(DegToRad(angle), Vec3f(0, 0, 1.0f));
+  rb->SetRot(q);
+  TheRBManager::Instance()->AddRB(rb);
+}
+
 void GSRigidBody::OnActive()
 {
+  TheRBManager::Instance()->Clear();
+
   GSBase::OnActive();
-  m_rb = new RBBox;
-  m_rb->SetPos(Vec3f(0, 5.0f, 0));
-  Quaternion q;
-  q.SetAxisAngle(DegToRad(50.0f), Vec3f(0, 0, 1.0f));
-  m_rb->SetRot(q);
+
+  MakeBox(Vec3f(0, 10.0f, 0));
+//  MakeBox(Vec3f(0, 20.0f, 0));
+
+  // Big base
+  const float S = 20.0f;
+  RBBox* rb = new RBBox;
+  rb->SetPos(Vec3f(0, -S, 0));
+  rb->SetSize(Vec3f(S, S, S));
+  rb->SetInvMass(0); // immovable
+  TheRBManager::Instance()->AddRB(rb);
+
 }
 
 bool GSRigidBody::OnKeyEvent(const KeyEvent& ke)

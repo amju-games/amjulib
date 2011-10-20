@@ -9,6 +9,8 @@ namespace Amju
 {
 class RigidBody : public RefCounted
 {
+  friend class RBManager;
+
 public:
   RigidBody();
   virtual ~RigidBody() {}
@@ -24,6 +26,8 @@ public:
 
   void SetPos(const Vec3f& pos);
   void SetRot(const Quaternion&);
+
+  void SetInvMass(float im);
 
 protected:
   float m_invMass;

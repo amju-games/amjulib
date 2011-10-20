@@ -9,9 +9,13 @@ namespace Amju
 {
 RBBox::RBBox()
 {
-  m_obb3.SetExtents(Vec3f(2, 1, 1));
+  SetSize(Vec3f(1, 1, 1));
 }
 
+void RBBox::SetSize(const Vec3f& s)
+{
+  m_obb3.SetExtents(s);
+}
 
 bool RBBox::FindContact(const RBBox& b, Contact* c) const
 {
@@ -25,8 +29,10 @@ bool RBBox::FindContact(const RBBox& b, Contact* c) const
   // For each vert, check if it intersects other box (behind all planes).
   Vec3f corners[8];
   m_obb3.GetCorners(corners);
-  float bestPd = 0;
-  int penetratingVert = -1;
+
+  float avgPd = 0;
+  Vec3f avgPos;
+  int numPenetratingVerts = 0;
   Vec3f contactNormal;
   for (int i = 0; i < 8; i++)
   {
@@ -35,6 +41,12 @@ bool RBBox::FindContact(const RBBox& b, Contact* c) const
     // Intersection test, also gets contact normal and penetration depth (i.e. dist behind plane) 
     if (b.m_obb3.Intersects(corners[i], &cn, &pd))
     {
+      numPenetratingVerts++;
+      avgPd += pd;
+      contactNormal += cn;
+      avgPos += corners[i];
+
+      /*
       // Get most penetrating vert
       if (pd > bestPd)
       {
@@ -42,13 +54,21 @@ bool RBBox::FindContact(const RBBox& b, Contact* c) const
         penetratingVert = i;
         contactNormal = cn;
       }
+      */
     }
   }
 
-  if (penetratingVert > -1)
+  avgPd /= (float)numPenetratingVerts;
+  // Get average of positions of penetrating verts, i.e. the centre of the points
+  avgPos *= (1.0f / (float)numPenetratingVerts);
+  contactNormal.Normalise();
+
+  if (numPenetratingVerts > 0)
   {
-    c->m_pos = corners[penetratingVert];
+    c->m_pos = avgPos;
     c->m_contactNormal = contactNormal;
+    c->m_penetrationDepth = avgPd;
+    return true;
   }
   
   return false;
@@ -62,6 +82,7 @@ void RBBox::Update()
   m_obb3.SetCentre(m_pos);
   m_obb3.SetOrientation(m_rot);
 
+  /*
   // TODO TEMP TEST
   // Test box corners to see if we have gone through the floor. 
   // TODO Generalise to box-plane collision 
@@ -120,6 +141,7 @@ void RBBox::Update()
     //  things settle down.
     //AddForce(mag * contactNormal);
   }
+  */
 }
 
 void RBBox::Draw()

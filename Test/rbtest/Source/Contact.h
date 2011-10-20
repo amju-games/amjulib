@@ -10,6 +10,7 @@ struct Contact
   float m_time;
   Vec3f m_contactNormal;
   Vec3f m_pos;
+  float m_penetrationDepth; 
 };
 }
 

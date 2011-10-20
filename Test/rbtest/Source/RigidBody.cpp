@@ -1,11 +1,18 @@
 #include "RigidBody.h"
 #include "Timer.h"
 
+//#define USE_VERLET
+
 namespace Amju
 {
 RigidBody::RigidBody()
 {
   m_invMass = 1.0f;
+}
+
+void RigidBody::SetInvMass(float im)
+{
+  m_invMass = im;
 }
 
 void RigidBody::Update()
@@ -15,22 +22,27 @@ void RigidBody::Update()
 
   Vec3f acc = m_forces * m_invMass;
 
-  const Vec3f GRAVITY(0, -5.0f, 0); // TODO TEMP TEST
-  acc += GRAVITY;
+  const Vec3f GRAVITY(0, -50.0f, 0); // TODO TEMP TEST
+  if (m_invMass > 0)
+  {
+    acc += GRAVITY;
+  }
 
   m_forces = Vec3f();
 
-  /*
-  // Verlet
+#ifdef USE_VERLET
+
   Vec3f diff = m_pos - m_oldPos + acc * t2;
   m_oldPos = m_pos;
   m_pos += diff;
-  */
 
-  // Euler
+#else
+
   Vec3f oldVel = m_vel;
   m_vel += acc * dt;
   m_pos += (oldVel + m_vel) * (0.5f * dt); 
+
+#endif
 
   Vec3f angAcc = m_torques; //  * momInertia
   m_torques = Vec3f();
@@ -53,7 +65,7 @@ void RigidBody::AddForce(const Vec3f& force)
 
 void RigidBody::AddTorque(const Vec3f& force, const Vec3f& pointOfApplication)
 {
-  Vec3f t = -CrossProduct(force, pointOfApplication - m_pos);
+  Vec3f t = CrossProduct(force, pointOfApplication - m_pos);
   m_torques += t;
 }
 
