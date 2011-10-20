@@ -17,6 +17,9 @@ public:
   float C() const { return m_c; }
   float D() const { return m_d; }
 
+  Vec3f Normal() const { return Vec3f(m_a, m_b, m_c); }
+  float Dist(const Vec3f& p) const;
+
 private:
   void Init(const Vec3f& v0, const Vec3f& v1, const Vec3f& v2);
   float m_a, m_b, m_c, m_d;
