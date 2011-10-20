@@ -30,4 +30,10 @@ void Plane::Init(const Vec3f& v0, const Vec3f& v1, const Vec3f& v2)
   m_c = n.z;
   m_d = DotProduct(v0, n);
 }
+
+float Plane::Dist(const Vec3f& p) const
+{
+  // dist = p.N - D
+  return DotProduct(p, Normal()) - m_d;
+}
 }
