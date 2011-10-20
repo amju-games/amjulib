@@ -25,6 +25,8 @@ public:
 
   void GetCorners(Vec3f[8]) const;
 
+  bool Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDepth) const;
+
 private:
   Vec3f m_centre;
   Vec3f m_axes[3];
