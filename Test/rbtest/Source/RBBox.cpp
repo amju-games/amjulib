@@ -12,6 +12,48 @@ RBBox::RBBox()
   m_obb3.SetExtents(Vec3f(2, 1, 1));
 }
 
+
+bool RBBox::FindContact(const RBBox& b, Contact* c) const
+{
+  // Check for collision: ignore "tunnelling" for now
+  if (!Intersects(m_obb3, b.m_obb3))
+  {
+    return false;
+  }
+
+  // Find vertex-face contacts
+  // For each vert, check if it intersects other box (behind all planes).
+  Vec3f corners[8];
+  m_obb3.GetCorners(corners);
+  float bestPd = 0;
+  int penetratingVert = -1;
+  Vec3f contactNormal;
+  for (int i = 0; i < 8; i++)
+  {
+    float pd = 0;
+    Vec3f cn;
+    // Intersection test, also gets contact normal and penetration depth (i.e. dist behind plane) 
+    if (b.m_obb3.Intersects(corners[i], &cn, &pd))
+    {
+      // Get most penetrating vert
+      if (pd > bestPd)
+      {
+        bestPd = pd;
+        penetratingVert = i;
+        contactNormal = cn;
+      }
+    }
+  }
+
+  if (penetratingVert > -1)
+  {
+    c->m_pos = corners[penetratingVert];
+    c->m_contactNormal = contactNormal;
+  }
+  
+  return false;
+}
+
 void RBBox::Update()
 {
   RigidBody::Update();
@@ -67,7 +109,7 @@ void RBBox::Update()
 
     // Torque to apply? We know point of application. F = ma, a = vel change ? 
     // Surely mag of torque should depend on vel of impact.
-    float mag = 1.5f; // TODO TEMP TEST
+    float mag = 4.0f; //1.5f; // TODO TEMP TEST
       //sqrt(m_vel.SqLen()) - crazy
       //velChangeMult - crazy; 
       // * some fudge factor == force magnitude
