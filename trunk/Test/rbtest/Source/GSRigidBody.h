@@ -22,7 +22,6 @@ public:
   virtual bool OnKeyEvent(const KeyEvent&);
 
 private:
-  PRigidBody m_rb;
   Vec2f m_point; // cursor pos
   bool m_paused; 
 };

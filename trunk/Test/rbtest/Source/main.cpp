@@ -14,6 +14,7 @@
 #include "GSBelt.h"
 #include "GSRigidBody.h"
 #include "GSSpringMesh.h"
+#include <OBB3.h>
 
 namespace Amju
 {

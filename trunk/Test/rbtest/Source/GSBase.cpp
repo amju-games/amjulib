@@ -23,7 +23,7 @@ void GSBase::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 5, 10,  0, 0, 0,  0, 1, 0);
+  AmjuGL::LookAt(0, 0, 20,  0, 0, 0,  0, 1, 0);
 }
 
 void GSBase::Update()

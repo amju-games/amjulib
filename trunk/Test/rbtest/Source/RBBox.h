@@ -11,6 +11,8 @@ class RBBox : public RigidBody
 {
 public:
   RBBox();
+  void SetSize(const Vec3f&);
+
   virtual void Update();
   virtual void Draw();
 
