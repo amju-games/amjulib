@@ -36,7 +36,7 @@ void RigidBody::Update()
   m_torques = Vec3f();
 
   m_angVel += angAcc * dt;
-  if (m_angVel.SqLen() > 0.001f)
+  if (m_angVel.SqLen() > 0.00001f)
   {
     Vec3f axis = m_angVel;
     axis.Normalise();

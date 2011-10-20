@@ -3,6 +3,7 @@
 
 #include "RigidBody.h"
 #include "OBB3.h"
+#include "Contact.h"
 
 namespace Amju
 {
@@ -12,6 +13,8 @@ public:
   RBBox();
   virtual void Update();
   virtual void Draw();
+
+  bool FindContact(const RBBox& b, Contact* c) const;
 
 protected:
   OBB3 m_obb3;
