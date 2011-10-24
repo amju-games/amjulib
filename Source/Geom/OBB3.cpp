@@ -1,5 +1,4 @@
 #include "OBB3.h"
-#include "Plane.h"
 
 namespace Amju
 {
@@ -67,21 +66,11 @@ const Vec3f& OBB3::GetExtents() const
 
 bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDepth) const
 {
-  Vec3f c[8];
-  GetCorners(c);
-
   // Make 6 planes. Check if point is behind each one. 
-  Plane planes[6] =
-  {
-    Plane(c[0], c[1], c[5]),
-    Plane(c[3], c[7], c[6]),
-    Plane(c[3], c[2], c[0]),
-    Plane(c[4], c[5], c[6]),
-    Plane(c[3], c[0], c[4]),
-    Plane(c[5], c[1], c[2])
-  };
-
-  float bestPd = -99999.9f;
+  Plane planes[6];
+  GetPlanes(planes);
+  
+  float bestPd = -999999.9f;
   Vec3f cn;
   for (int i = 0; i < 6; i++)
   {
@@ -90,7 +79,7 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
     {
       return false; // in front of this plane, so not intersecting   
     }
-    if (pd < bestPd)
+    if (pd > bestPd)
     {
       // Choose plane with min pen depth
       bestPd = pd;
@@ -98,8 +87,21 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
     }
   }
   *contactNormal = cn;
-  *penetrationDepth = bestPd;
+  *penetrationDepth = -bestPd;
   return true;
+}
+
+void OBB3::GetPlanes(Plane planes[6]) const
+{
+  Vec3f c[8];
+  GetCorners(c);
+
+  planes[0] = Plane(c[4], c[1], c[0]);
+  planes[1] = Plane(c[3], c[6], c[7]);
+  planes[2] = Plane(c[3], c[0], c[2]);
+  planes[3] = Plane(c[4], c[7], c[5]);
+  planes[4] = Plane(c[3], c[4], c[0]);
+  planes[5] = Plane(c[5], c[2], c[1]);
 }
 
 void OBB3::GetCorners(Vec3f corners[8]) const
