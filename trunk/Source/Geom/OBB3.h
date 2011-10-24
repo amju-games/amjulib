@@ -3,6 +3,7 @@
 
 #include <Vec3.h>
 #include <Quaternion.h>
+#include <Plane.h>
 
 namespace Amju
 {
@@ -24,6 +25,7 @@ public:
   const Vec3f& GetExtents() const;
 
   void GetCorners(Vec3f[8]) const;
+  void GetPlanes(Plane planes[6]) const;
 
   bool Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDepth) const;
 
