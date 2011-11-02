@@ -8,8 +8,8 @@
 #include "Font.h"
 #include "SceneMesh.h"
 #include "File.h"
-#include "RBBox.h"
-#include "RBSphere.h"
+#include "RBBox3.h"
+#include "RBSphere3.h"
 #include "Screen.h"
 
 namespace Amju
@@ -36,8 +36,8 @@ void TestState::Draw()
   AmjuGL::SetIdentity();
   AmjuGL::LookAt(0, 0, 20,   0, 0, 0.0f,  0, 1.0f, 0);
 
-  static RBBox rb;
-  static RBSphere rs;
+  static RBBox3 rb;
+  static RBSphere3 rs;
   static bool first = true;
   if (first)
   {

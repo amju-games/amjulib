@@ -1,10 +1,10 @@
 #include "RBIntersect.h"
-#include "RBSphere.h"
+#include "RBSphere3.h"
 #include "AmjuAssert.h"
 
 namespace Amju
 {
-bool Intersects(const RBSphere& s1, const RBSphere s2, float* timeFirstContact)
+bool Intersects(const RBSphere3& s1, const RBSphere3 s2, float* timeFirstContact)
 {
   // Calc rel vel, treat one s1 as stationary
   Vec3f m = s2.GetVel() - s1.GetVel(); // rel vel; dir of capsule ray

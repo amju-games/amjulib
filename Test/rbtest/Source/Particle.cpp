@@ -1,8 +1,8 @@
 #include "Particle.h"
 #include <Sphere.h>
 #include <DrawSphere.h>
-#include <Timer.h>
 #include <Colour.h>
+#include "RBManager.h"
 
 namespace Amju
 {
@@ -48,7 +48,7 @@ void Particle::Update()
     m_acc += Vec3f(0, GRAVITY, 0);
   }
 
-  float dt = TheTimer::Instance()->GetDt();
+  float dt = TheRBManager::Instance()->GetDt();
   Vec3f oldVel = m_vel;
   m_vel += m_acc * dt;
 

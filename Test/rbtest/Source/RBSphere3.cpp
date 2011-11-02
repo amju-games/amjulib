@@ -1,14 +1,16 @@
-#include "RBSphere.h"
+#include "RBSphere3.h"
 #include "DrawSphere.h"
 
 namespace Amju
 {
-RBSphere::RBSphere()
+const RBSphere3::TypeName RBSphere3::TYPENAME = "rbsphere3";
+
+RBSphere3::RBSphere3()
 {
   m_sphere.SetRadius(1.0f); // TODO TEMP TEST
 }
 
-void RBSphere::Update()
+void RBSphere3::Update()
 {
   RigidBody::Update();
   m_sphere.SetCentre(m_pos);
@@ -30,7 +32,7 @@ void RBSphere::Update()
   }
 }
 
-void RBSphere::Draw()
+void RBSphere3::Draw()
 {
   DrawSphere(m_sphere);
 }
