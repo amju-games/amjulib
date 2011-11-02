@@ -51,7 +51,7 @@ void key(char k, bool down)
   KeyEvent* ke = new KeyEvent;  
   ke->keyType = AMJU_KEY_CHAR;
   ke->key = k;
-  ke->keyDown = true;
+  ke->keyDown = down;
   QueueEvent(ke);
 }
 
