@@ -75,12 +75,38 @@ Vec2<T> operator-(const Vec2<T>& v1, const Vec2<T>& v2)
   return v;
 }
 
+// Unary -
+template <class T>
+Vec2<T> operator-(const Vec2<T>& v1)
+{
+  Vec2<T> v;
+  v -= v1;
+  return v;
+}
+
 template <class T>
 Vec2<T> operator*(const Vec2<T>& v1, T f)
 {
   Vec2<T> v = v1;
   v *= f;
   return v;
+}
+
+// Reverse order of params
+template <class T>
+Vec2<T> operator*(T f, const Vec2<T>& v1)
+{
+  Vec2<T> v = v1;
+  v *= f;
+  return v;
+}
+
+template <class T>
+Vec2<T> Normalise(const Vec2<T>& v)
+{
+  Vec2<T> v1(v);
+  v1.Normalise();
+  return v1;
 }
 
 template <class T>

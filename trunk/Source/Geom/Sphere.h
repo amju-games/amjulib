@@ -21,6 +21,8 @@ private:
   Vec3f m_centre;
   float m_radius;
 };
+
+bool Intersects(const Sphere& s1, const Vec3f& vel1, const Sphere& s2, const Vec3f& vel2, float* timeFirstContact);
 }
 
 #endif
