@@ -1,13 +1,13 @@
 #ifndef AMJU_RIGID_BODY_H
 #define AMJU_RIGID_BODY_H
 
-#include <RCPtr.h>
+#include "RB.h"
 #include "Vec3.h"
 #include "Quaternion.h"
 
 namespace Amju
 {
-class RigidBody : public RefCounted
+class RigidBody : public RB
 {
   friend class RBManager;
 
@@ -40,8 +40,6 @@ protected:
   Quaternion m_rot;
   Vec3f m_angVel; // dir is axis of rotation, magnitude is rot speed
 };
-
-typedef RCPtr<RigidBody> PRigidBody;
 }
 
 #endif

@@ -1,5 +1,5 @@
-#include "RigidBody.h"
-#include "Timer.h"
+#include "RigidBody3.h"
+#include "RBManager.h"
 
 //#define USE_VERLET
 
@@ -17,8 +17,7 @@ void RigidBody::SetInvMass(float im)
 
 void RigidBody::Update()
 {
-  float dt = TheTimer::Instance()->GetDt();
-  float t2 = dt * dt;
+  float dt = TheRBManager::Instance()->GetDt();
 
   Vec3f acc = m_forces * m_invMass;
 
@@ -32,6 +31,7 @@ void RigidBody::Update()
 
 #ifdef USE_VERLET
 
+  float t2 = dt * dt;
   Vec3f diff = m_pos - m_oldPos + acc * t2;
   m_oldPos = m_pos;
   m_pos += diff;
