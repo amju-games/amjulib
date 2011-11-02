@@ -14,12 +14,15 @@ public:
   void SetCentre(const Vec2f& centre);
   void SetXAxis(const Vec2f& axis);
   void SetExtents(const Vec2f& extents);
+  void SetRotation(float rads);
 
   const Vec2f& GetCentre() const;
   const Vec2f& GetAxis(int n) const;
   const Vec2f& GetExtents() const;
 
   void GetCorners(Vec2f[4]) const;
+
+  bool Intersects(const Vec2f& p, Vec2f* contactNormal, float* penetrationDepth) const;
 
 private:
   Vec2f m_centre;
