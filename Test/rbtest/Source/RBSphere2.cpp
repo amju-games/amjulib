@@ -1,6 +1,10 @@
 #include "RBSphere2.h"
 #include <AmjuGL.h>
 #include "RBManager.h"
+#ifdef WIN32
+#define _USE_MATH_DEFINES
+#include <math.h>
+#endif
 
 namespace Amju
 {
@@ -22,7 +26,7 @@ void RBSphere2::Draw()
   for (int i = 0; i < SEGS; i++)
   {
     a0 = a1;
-    a1 += 2.0 * M_PI / (float)SEGS;
+    a1 += (float)(2.0 * M_PI) / (float)SEGS;
     AmjuGL::DrawLine(
       AmjuGL::Vec3(cos(a0) + m_pos.x, sin(a0) + m_pos.y, 0), 
       AmjuGL::Vec3(cos(a1) + m_pos.x, sin(a1) + m_pos.y, 0));
