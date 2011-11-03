@@ -81,10 +81,12 @@ bool Intersects(const OBB2& b1, const OBB2& b2)
   Vec2f c[2][4];
   b1.GetCorners(&c[0][0]);
   b2.GetCorners(&c[1][0]);
-  float minmax[2][2] = { { 999999.9f, -999999.9f }, { 999999.9f, -999999.9f } };
 
   for (int i = 0; i < 4; i++) // 4 axes
   {
+    // Min and max extents for each box for the current axis
+    float minmax[2][2] = { { 999999.9f, -999999.9f }, { 999999.9f, -999999.9f } };
+
     for (int k = 0; k < 4; k++)  // 4 corners per box
     {
       float projected[2] = { 
