@@ -75,7 +75,7 @@ void RigidBody2::AddTorque(const Vec2f& force, const Vec2f& poa) // pointOfAppli
   Vec3f t = CrossProduct(force3, poa3);
   m_torques += t.z; 
 
-std::cout << "Adding torque: x: " << t.x << " y: " << t.y << " z: " << t.z << "\n";
+//std::cout << "Adding torque: x: " << t.x << " y: " << t.y << " z: " << t.z << "\n";
 }
 
 void RigidBody2::SetPos(const Vec2f& pos)
