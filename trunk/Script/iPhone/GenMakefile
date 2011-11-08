@@ -76,8 +76,8 @@ INCLUDES	:=	$(AMJU_LIB_DIRS)
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
-OBJCFLAGS	= -x objective-c++ -g -O2 -Wall $(MACHDEP) $(INCLUDE) 
+CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
+OBJCFLAGS	= -x objective-c++ $(CFLAGS)
 CXXFLAGS	=	$(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -Wl

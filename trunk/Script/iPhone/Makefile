@@ -3,6 +3,7 @@ ifeq ($(strip $(AMJULIB_IPHONE_SCRIPT_PATH)),)
 $(error "Please set AMJULIB_IPHONE_SCRIPT_PATH in your environment. ")
 endif
 
+EXTRA_CFLAGS    :=       -g -O0 -D_DEBUG 
 
 BUILD		:=	../../Build/iPhoneBuild
 TARGET		:=	$(BUILD)/amjulib.a
