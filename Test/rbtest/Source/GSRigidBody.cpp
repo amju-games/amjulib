@@ -12,6 +12,9 @@
 #include "RBSphere2.h"
 #include "RBManager.h"
 
+#define MAKE_BOX3_DEMO
+//#define MAKE_BOX2_DEMO
+
 namespace Amju
 {
 GSRigidBody::GSRigidBody()
@@ -67,11 +70,10 @@ void MakeBox3(const Vec3f& pos)
   std::cout << "Angle :" << angle << " degs\n";
   q.SetAxisAngle(DegToRad(angle), Vec3f(0, 0, 1.0f));
   rb->SetRot(q);
+
   TheRBManager::Instance()->AddRB(rb);
 }
 
-//#define MAKE_BOX3_DEMO
-#define MAKE_BOX2_DEMO
 
 void GSRigidBody::OnActive()
 {
@@ -81,7 +83,7 @@ void GSRigidBody::OnActive()
 
 #ifdef MAKE_BOX3_DEMO
   MakeBox3(Vec3f(0, 10.0f, 0));
-//  MakeBox3(Vec3f(0, 20.0f, 0));
+  MakeBox3(Vec3f(0, 20.0f, 0));
 
   // Big base
   const float S = 20.0f;
@@ -123,6 +125,10 @@ bool GSRigidBody::OnKeyEvent(const KeyEvent& ke)
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
   {
     m_paused = !m_paused;
+  }
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '2')
+  {
+    MakeBox2(Vec2f(3.0f, 20.0), 0.3f);
   }
 
   return true; // handled

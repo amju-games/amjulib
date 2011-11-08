@@ -55,15 +55,16 @@ bool FindContact(const RBBox2& box1, const RBBox2& box2, Contact2* c)
     return true;
   }
 
-// TODO Come back to this. SAT is giving false positives (all the frickin' time??!?)
-//std::cout << "SAT: box2 collision! But no contact info!?\n";
+std::cout << "SAT: box2 collision! But no contact info!?\n";
+//  Assert(0);
+
   return false;
 }
 
 bool RBBox2::FindContact(const RBBox2& b, Contact2* c) const
 {
   // Find vertex-face contacts
-  // For each vert, check if it intersects other box (behind all planes).
+  // For each of our verts, check if it intersects other box (behind all planes).
   Vec2f corners[4];
   m_obb2.GetCorners(corners);
 

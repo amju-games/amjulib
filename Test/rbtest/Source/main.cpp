@@ -14,6 +14,7 @@
 #include "GSBelt.h"
 #include "GSRigidBody.h"
 #include "GSSpringMesh.h"
+#include "GSClipTest.h"
 #include <OBB3.h>
 
 namespace Amju
@@ -26,6 +27,7 @@ void StartUp()
   TheGame::Instance()->SetCurrentState(
 //    TheGSSpringMesh::Instance()
     TheGSRigidBody::Instance()
+//    TheGSClipTest::Instance()
 //    TheGSBelt::Instance()
   );
 }
