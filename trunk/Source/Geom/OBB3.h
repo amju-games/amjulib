@@ -4,6 +4,7 @@
 #include <Vec3.h>
 #include <Quaternion.h>
 #include <Plane.h>
+#include <Line3.h>
 
 namespace Amju
 {
@@ -26,8 +27,18 @@ public:
 
   void GetCorners(Vec3f[8]) const;
   void GetPlanes(Plane planes[6]) const;
+  void GetEdges(LineSeg edges[12]) const;
 
+  // Checks if point p intersects this obb. 
+  // If so, returns true. Sets contactNormal to normal of nearest face to p. Sets pentration depth to
+  //  positive distance from point to that nearest face.
   bool Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDepth) const;
+
+  // Checks if edge e intersects this obb.
+  // If so, returns true. Sets clip to segment of e that intersects box. Sets contactNormal to normal 
+  //  of face nearest midpoint of clip segment. Sets penetration depth to positive dist from that face 
+  //  to mid point of clip.
+  bool Intersects(const LineSeg& e, LineSeg* clip, Vec3f* contactNormal, float* penDepth) const; 
 
 private:
   Vec3f m_centre;

@@ -1,4 +1,7 @@
+#include <iostream>
 #include "OBB3.h"
+#include "ClipLineSegBox.h"
+#include <AmjuAssert.h>
 
 namespace Amju
 {
@@ -64,6 +67,33 @@ const Vec3f& OBB3::GetExtents() const
   return m_extents;
 }
 
+bool OBB3::Intersects(const LineSeg& e, LineSeg* clip, Vec3f* contactNormal, float* penDepth) const
+{
+  LineSeg c;
+  // Call lineseg-box clip function
+  if (!Clip(e, *this, &c))
+  {
+    return false;
+  }
+  *clip = c;
+  Vec3f mid = (c.p0 + c.p1) * 0.5f;
+  // Find nearest face to mid, giving contact normal and pen depth
+std::cout << "Edge-box test, finding contact normal and pen depth but it asserts...\n";
+std::cout << " This box size: x: " << m_extents.x << " y: " << m_extents.y << " z: " << m_extents.z << "\n";
+std::cout << " Orig line seg: " 
+  << " p0.x: " << e.p0.x << " y: " << e.p0.y << " z: " << e.p0.z 
+  << " p1.x: " << e.p1.x << " y: " << e.p1.y << " z: " << e.p1.z << "\n"; 
+
+std::cout << " Clipped line seg in box: " 
+  << " p0.x: " << c.p0.x << " y: " << c.p0.y << " z: " << c.p0.z 
+  << " p1.x: " << c.p1.x << " y: " << c.p1.y << " z: " << c.p1.z << "\n"; 
+std::cout << " expecting this mid point to be in box: x " << mid.x << " y: " << mid.y << " z: " << mid.z << "\n";
+
+  bool b = Intersects(mid, contactNormal, penDepth);
+  Assert(b); // clipped line seg is supposed to be within this obb
+  return true;
+}
+
 bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDepth) const
 {
   // Make 6 planes. Check if point is behind each one. 
@@ -75,6 +105,8 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
   for (int i = 0; i < 6; i++)
   {
     float pd = planes[i].Dist(p);
+std::cout << " point-box intersection test: pd for plane " << i << " is " << pd << "\n";
+
     if (pd > 0)
     {
       return false; // in front of this plane, so not intersecting   
@@ -89,6 +121,27 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
   *contactNormal = cn;
   *penetrationDepth = -bestPd;
   return true;
+}
+
+void OBB3::GetEdges(LineSeg edges[12]) const
+{
+  Vec3f c[8];
+  GetCorners(c);
+
+  edges[0]  = LineSeg(c[0], c[1]);
+  edges[1]  = LineSeg(c[1], c[2]);
+  edges[2]  = LineSeg(c[2], c[3]);
+  edges[3]  = LineSeg(c[3], c[0]);
+
+  edges[4]  = LineSeg(c[4], c[5]);
+  edges[5]  = LineSeg(c[5], c[6]);
+  edges[6]  = LineSeg(c[6], c[7]);
+  edges[7]  = LineSeg(c[7], c[4]);
+
+  edges[8]  = LineSeg(c[0], c[4]);
+  edges[9]  = LineSeg(c[1], c[5]);
+  edges[10] = LineSeg(c[2], c[6]);
+  edges[11] = LineSeg(c[3], c[7]);
 }
 
 void OBB3::GetPlanes(Plane planes[6]) const
