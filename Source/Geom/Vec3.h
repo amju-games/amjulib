@@ -88,6 +88,14 @@ Vec3<T> operator*(T f, const Vec3<T>& v1)
 }
 
 template <class T>
+Vec3<T> Normalise(const Vec3<T> v)
+{
+  Vec3<T> v1(v);
+  v1.Normalise();
+  return v1;
+}
+
+template <class T>
 Vec3<T> CrossProduct(const Vec3<T>& v1, const Vec3<T>& v2)
 {
   return Vec3<T>(
