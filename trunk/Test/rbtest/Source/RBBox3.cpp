@@ -29,19 +29,50 @@ bool FindContact(const RBBox3& box1, const RBBox3& box2, Contact3* c)
     return false;
   }
 
+std::cout << "Got intersection, looking for contact info...\n";
+
   // Vertex of box1 may intersect a face of box2, or vice versa. So we call FindContact
   //  twice, swapping the parameters.
-  if (box1.FindContact(box2, c))
+  Contact3 c1, c2;
+  // Vert(s) from box1 inside box2 ?
+  bool box1InBox2 = box1.FindContact(box2, &c1);
+
+if (box1InBox2)
+{
+  std::cout << "C1 Contact normal: x: " << c1.m_contactNormal.x << " y: " << c1.m_contactNormal.y << " z: " << c1.m_contactNormal.z << "\n";
+}
+
+  // Vert(s) from box2 inside box1 ?
+  bool box2InBox1 = box2.FindContact(box1, &c2);
+
+if (box2InBox1)
+{
+  std::cout << "C2 Contact normal: x: " << c2.m_contactNormal.x << " y: " << c2.m_contactNormal.y << " z: " << c2.m_contactNormal.z << "\n";
+}
+
+  if (box1InBox2 && box2InBox1)
   {
+    // Intersecting each other. Get avg contact point. Make contact normal always w.r.t. box2
+    *c = c1;
+    c->m_penetrationDepth = std::max(c1.m_penetrationDepth, c2.m_penetrationDepth); // so we detach fully
+    c->m_pos = (c1.m_pos + c2.m_pos) * 0.5f; // mid point of contact points
+    return true;
+  }
+  else if (box1InBox2)
+  {
+    *c = c1;
+    return true;
+  }
+  else if (box2InBox1)
+  {
+    *c = c2;
+    c->m_contactNormal = -c->m_contactNormal;
     return true;
   }
 
-  if (box2.FindContact(box1, c))
-  {
-    return true;
-  }
+std::cout << "SAT: box3 collision! But no contact info!?\n";
+//  Assert(0);
 
-std::cout << "SAT says intersection between box3s, but no contact info!?!?!\n";
   return false;
 }
 
@@ -87,6 +118,43 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
     return true;
   }
   
+  // No vertex-face intersection. Check for edge-edge intersection.
+  // Get each edge of this box. Test against box b 
+  //bool Intersects(const LineSeg& e, LineSeg* clip, Vec3f* contactNormal, float* penDepth) const;
+
+  LineSeg e[12];
+  m_obb3.GetEdges(e);
+  int numPenEdges = 0;
+  for (int i = 0; i < 12; i++)
+  {
+    float pd = 0;
+    Vec3f cn;
+    LineSeg clip;
+
+std::cout << "Edge-box: checking edge " << i << "\n";
+    if (b.m_obb3.Intersects(e[i], &clip, &cn, &pd))
+    {
+      numPenEdges++;
+      avgPd += pd;
+      contactNormal += cn;
+      Vec3f mid = (clip.p0 + clip.p1) * 0.5f;
+      avgPos += mid;
+    }
+  }
+
+  if (numPenEdges > 0)
+  {
+    float oneOver = 1.0f / (float)numPenEdges;
+    avgPd *= oneOver;
+    avgPos *= oneOver; 
+    contactNormal.Normalise();
+
+    c->m_pos = avgPos;
+    c->m_contactNormal = contactNormal;
+    c->m_penetrationDepth = avgPd;
+    return true;
+  }
+
   return false;
 }
 
@@ -130,6 +198,9 @@ std::cout << "Box3-box3 Contact!\n";
 
     // Got penetration. Move away in dir of contact normal.
     Vec3f contactNormal = c.m_contactNormal;
+std::cout << "Contact normal: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
+std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " << c.m_pos.z << "\n";
+
 
     // "Resolve" penetration: bodge it by moving away in direction of
     //  contact normal, by distance <penetration depth>
@@ -149,26 +220,40 @@ std::cout << "Box3-box3 Contact!\n";
     Vec3f relvel = box1->m_vel - box2->m_vel;
     float relSpeed = sqrt(relvel.SqLen());
 
-    float velChangeMult = DotProduct(box1->m_vel, contactNormal);
-    Vec3f velChange = velChangeMult * contactNormal;
-    // Immovable in this case TODO
-    box1->m_vel -= 2.0f * velChange;
+    // Each box has proj of rel velocity onto contact normal added to vel.
+    // This gives reflect vector if one box is immovable
+    float dp = DotProduct(relvel, contactNormal);
+//std::cout << "dp = " << dp << "\n";
+    box1->m_vel -= frac1 * 2.0f * dp * contactNormal;
+    box2->m_vel += frac2 * 2.0f * dp * contactNormal;
+std::cout << "Box 1 NEW vel: " << box1->m_vel.x << ", " << box1->m_vel.y << "\n";
+std::cout << "Box 2 NEW vel: " << box2->m_vel.x << ", " << box2->m_vel.y << "\n";
+
 
     // TODO TEMP TEST
     // Dampen the response - this happens once per collision, so not multiplied by dt etc
     box1->m_vel *= 0.5f;
+    box2->m_vel *= 0.5f;
 
-    // Torque to apply? We know point of application. F = ma, a = vel change ?
-    // Surely mag of torque should depend on vel of impact.
-
+    // Apply Torque
     // Mag of torque depends on how fast the contact point was moving
     //  relative to the face it penetrated.
     // i.e. Linear vel + rotational vel
-    float mag = relSpeed * 0.4f; // TODO TEMP TEST
-      //sqrt(m_vel.SqLen()) - crazy
-      //velChangeMult - crazy;
-      // * some fudge factor == force magnitude
-    box1->AddTorque(mag * -contactNormal, c.m_pos);
+
+    // Relative rotational vel: in 2D, rotation is only CW or CCW.
+
+//std::cout << "Contact point: " << c.m_pos.x << ", " << c.m_pos.y << "\n";
+//std::cout << "Box 1 pos: " << box1->m_pos.x << ", " << box1->m_pos.y << "\n";
+//std::cout << "Box 2 pos: " << box2->m_pos.x << ", " << box2->m_pos.y << "\n";
+
+    float relSpeedMult = 0.1f; // 0.08f; // was ok before fixig dt
+    float angVelMult = 0.02f; // 0.01f;
+    float mag = relSpeed * relSpeedMult; // TODO + totalAngVel * angVelMult;
+//std::cout << "Mag: " << mag << "\n";
+
+    box1->AddTorque(-mag * contactNormal, c.m_pos);
+    box2->AddTorque( mag * contactNormal, c.m_pos);
+
 
     // This seems useless, as we are explicitly changing vel above, it doesn't
     //  make any difference -- except that it seems to have an effect on how

@@ -13,6 +13,10 @@ public:
   virtual void Update();
   virtual void Draw(); // Set up proj and mview matrices
 
+  // Drag to rotate etc
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+
 protected:
   float m_time;
   float m_maxTime;

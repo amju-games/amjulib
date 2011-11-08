@@ -52,7 +52,8 @@ void RigidBody2::Update()
   }
 */
 
-  float angAcc = m_torques * m_invMass; // TODO HACK!!! 
+  // TODO Separate moment of inertia
+  float angAcc = m_torques * m_invMass; 
   m_torques = 0; 
 
   m_angVel += angAcc; // don;t depend on  dt : this is a one-off occurrence when a torque is applied
