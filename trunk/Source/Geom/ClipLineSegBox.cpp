@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ClipLineSegBox.h"
 
 // Valid points on the line seg are m_start + t * m_direction for
@@ -129,4 +130,94 @@ bool Clip(const LineSeg& ls, const AABB& box, LineSeg* clipped)
 
     return true;
 }
+
+// Clip line seg against oriented box. Same idea as for axis aligned box, but we clip against the 
+//  box planes.
+bool Clip(const LineSeg& lineSeg, const OBB3& box, LineSeg* clipped)
+{
+  Plane planes[6];
+  box.GetPlanes(planes);
+
+  // Get value of t in line equation for intersection of all 6 planes. 
+/*
+  Lines seg: p = p0 + t (p1 - p0)
+  Point on Plane; p . N - D = 0
+  Intersection, solve for t. 
+  [ p0 + t (p1 - P0) ] . N - D = 0
+  p0 . N + [t (p1 - p0)] . N - D = 0
+  p0 . N + t (p1 - p0) . N - D = 0
+  t = (D - p0 . N) / [(p1 - p0) . N]
+  => no lineseg-plane intersection if (p1 - p0) . N == 0. We go on to next slab.
+  For each slab, get two t values. t1 is set to max if less than t1, t0 is set to min if more than t0..?
+*/
+
+  // Planes are in three groups of 2. Each pair of planes are parallel. The Normals are opposite.
+  Vec3f dir(lineSeg.p1 - lineSeg.p0);
+
+  const float VERY_SMALL = 0.001f;
+  float t1 = 1.0f;
+  float t0 = 0;
+
+std::cout << "CLIPPING....\n";
+
+  for (int i = 0; i < 6; i+= 2)
+  {
+    float dp = DotProduct(planes[i].Normal(), dir);
+    if (fabs(dp) < VERY_SMALL)
+    {
+      // Parallel - no intersection
+//std::cout << "Clip: line seg is parallel to plane " << i << "\n";
+      // If in front of either plane, line seg does not intersect box
+      if (planes[i].Dist(lineSeg.p0) > 0  || planes[i + 1].Dist(lineSeg.p0) > 0)
+      {
+std::cout << "Clip: line seg is parallel and in front of plane, so no intersection\n";
+        return false;
+      }
+      continue; //return false;
+    }
+//std::cout << "Plane " << i << " dp: " << dp << "\n";  
+//std::cout << "Plane " << i << " D: " << planes[i].D() << "\n";
+//std::cout << "Plane " << i+1 << " D: " << planes[i+1].D() << "\n";
+
+    float minmax[2] = 
+    {
+      (planes[i].D() - DotProduct(lineSeg.p0, planes[i].Normal())) /  dp,
+      (planes[i + 1].D() - DotProduct(lineSeg.p0, planes[i + 1].Normal())) / -dp,
+    }; 
+
+    if (minmax[0] > minmax[1]) 
+    {
+      std::swap(minmax[0], minmax[1]);
+    }
+//std::cout << "Clip: plane " << i << " min: " << minmax[0] << " max: " << minmax[1] << "\n";
+
+    if (minmax[0] > t0)
+    {
+      t0 = minmax[0];
+    }
+
+    if (minmax[1] < t1)
+    {
+      t1 = minmax[1];
+    }
+
+    if (t0 > t1 || t1 - t0 < VERY_SMALL)
+    {
+std::cout << "Clip: no intersection, t0 >= t1\n";
+      return false;
+    }
+  }
+  
+  if (clipped)
+  {
+    *clipped = LineSeg(
+        lineSeg.p0 + dir * t0,
+        lineSeg.p0 + dir * t1);
+  }
+
+std::cout << "Clip: t0: " << t0 << " t1: " << t1 << "\n";
+std::cout << "Clip: found intersection!\n";
+  return true;
+}
+
 }
