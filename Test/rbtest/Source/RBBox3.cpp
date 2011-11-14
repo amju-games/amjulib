@@ -29,7 +29,7 @@ bool FindContact(const RBBox3& box1, const RBBox3& box2, Contact3* c)
     return false;
   }
 
-std::cout << "Got intersection, looking for contact info...\n";
+//std::cout << "Got intersection, looking for contact info...\n";
 
   // Vertex of box1 may intersect a face of box2, or vice versa. So we call FindContact
   //  twice, swapping the parameters.
@@ -37,18 +37,22 @@ std::cout << "Got intersection, looking for contact info...\n";
   // Vert(s) from box1 inside box2 ?
   bool box1InBox2 = box1.FindContact(box2, &c1);
 
+/*
 if (box1InBox2)
 {
   std::cout << "C1 Contact normal: x: " << c1.m_contactNormal.x << " y: " << c1.m_contactNormal.y << " z: " << c1.m_contactNormal.z << "\n";
 }
+*/
 
   // Vert(s) from box2 inside box1 ?
   bool box2InBox1 = box2.FindContact(box1, &c2);
 
+/*
 if (box2InBox1)
 {
   std::cout << "C2 Contact normal: x: " << c2.m_contactNormal.x << " y: " << c2.m_contactNormal.y << " z: " << c2.m_contactNormal.z << "\n";
 }
+*/
 
   if (box1InBox2 && box2InBox1)
   {
@@ -131,7 +135,7 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
     Vec3f cn;
     LineSeg clip;
 
-std::cout << "Edge-box: checking edge " << i << "\n";
+//std::cout << "Edge-box: checking edge " << i << "\n";
     if (b.m_obb3.Intersects(e[i], &clip, &cn, &pd))
     {
       numPenEdges++;
@@ -171,6 +175,9 @@ void RBBox3::Draw()
 {
   DrawOBB3(m_obb3);
 
+  DrawSolidOBB3(m_obb3);
+
+/*
   Vec3f corners[8];
   m_obb3.GetCorners(corners);
 
@@ -187,6 +194,7 @@ void RBBox3::Draw()
     DrawSphere(s);
     PopColour();
   }
+*/
 }
 
 void RBBox3Collision(RBBox3* box1, RBBox3* box2)
@@ -194,13 +202,14 @@ void RBBox3Collision(RBBox3* box1, RBBox3* box2)
   Contact3 c;
   if (FindContact(*box1, *box2, &c))
   {
-std::cout << "Box3-box3 Contact!\n";
+//std::cout << "Box3-box3 Contact!\n";
 
     // Got penetration. Move away in dir of contact normal.
     Vec3f contactNormal = c.m_contactNormal;
+/*
 std::cout << "Contact normal: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
 std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " << c.m_pos.z << "\n";
-
+*/
 
     // "Resolve" penetration: bodge it by moving away in direction of
     //  contact normal, by distance <penetration depth>
@@ -226,8 +235,9 @@ std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " 
 //std::cout << "dp = " << dp << "\n";
     box1->m_vel -= frac1 * 2.0f * dp * contactNormal;
     box2->m_vel += frac2 * 2.0f * dp * contactNormal;
-std::cout << "Box 1 NEW vel: " << box1->m_vel.x << ", " << box1->m_vel.y << "\n";
-std::cout << "Box 2 NEW vel: " << box2->m_vel.x << ", " << box2->m_vel.y << "\n";
+
+//std::cout << "Box 1 NEW vel: " << box1->m_vel.x << ", " << box1->m_vel.y << "\n";
+//std::cout << "Box 2 NEW vel: " << box2->m_vel.x << ", " << box2->m_vel.y << "\n";
 
 
     // TODO TEMP TEST
