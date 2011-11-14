@@ -40,9 +40,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,6 +113,7 @@
     <ClInclude Include="..\..\..\..\Source\Contact.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSBelt.h" />
+    <ClInclude Include="..\..\..\..\Source\GSClipTest.h" />
     <ClInclude Include="..\..\..\..\Source\GSRigidBody.h" />
     <ClInclude Include="..\..\..\..\Source\GSSpringMesh.h" />
     <ClInclude Include="..\..\..\..\Source\Particle.h" />
@@ -128,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBelt.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSClipTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSRigidBody.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSSpringMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
