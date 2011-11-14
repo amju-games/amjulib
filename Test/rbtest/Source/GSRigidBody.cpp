@@ -11,12 +11,31 @@
 #include "RBSphere3.h"
 #include "RBSphere2.h"
 #include "RBManager.h"
+#include "RBSceneNode.h"
+#include <SceneGraph.h>
+#include <OpenGL.h>
 
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
 
 namespace Amju
 {
+SceneGraph* GetRBSceneGraph()
+{
+  static SceneGraph* sg = 0;
+  if (!sg)
+  {
+    sg = new SceneGraph;
+  }
+  return sg;
+}
+
+void AddToSceneGraph(RB* rb)
+{
+  SceneNode* root = GetRBSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  root->AddChild(new RBSceneNode(rb));
+}
+
 GSRigidBody::GSRigidBody()
 {
   m_paused = false;
@@ -33,10 +52,20 @@ void GSRigidBody::Update()
 void GSRigidBody::Draw()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
-
+  
   GSBase::Draw();
 
-  TheRBManager::Instance()->Draw();
+  // TODO Do lighting in shader
+  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+
+  AmjuGL::DrawLighting(
+    AmjuGL::LightColour(0, 0, 0),
+    AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
+    AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
+    AmjuGL::LightColour(1, 1, 1),
+    AmjuGL::Vec3(1, 1, 1)); // Light direction
+
+  GetRBSceneGraph()->Draw();
 }
 
 void GSRigidBody::Draw2d()
@@ -53,6 +82,8 @@ void MakeBox2(const Vec2f& pos, float rads)
 //  float angle = (float)rand() / (float)RAND_MAX * M_PI;
   rb->SetRot(rads);
   TheRBManager::Instance()->AddRB(rb);
+
+  AddToSceneGraph(rb);
 }
 
 void MakeBox3(const Vec3f& pos)
@@ -72,6 +103,8 @@ void MakeBox3(const Vec3f& pos)
   rb->SetRot(q);
 
   TheRBManager::Instance()->AddRB(rb);
+
+  AddToSceneGraph(rb);
 }
 
 
@@ -80,6 +113,9 @@ void GSRigidBody::OnActive()
   TheRBManager::Instance()->Clear();
 
   GSBase::OnActive();
+   
+  GetRBSceneGraph()->Clear(); 
+  GetRBSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
 #ifdef MAKE_BOX3_DEMO
   MakeBox3(Vec3f(0, 10.0f, 0));
@@ -92,6 +128,7 @@ void GSRigidBody::OnActive()
   rb->SetSize(Vec3f(S, S, S));
   rb->SetInvMass(0); // immovable
   TheRBManager::Instance()->AddRB(rb);
+  AddToSceneGraph(rb);
 #endif
 
 #ifdef MAKE_BOX2_DEMO
@@ -112,6 +149,7 @@ void GSRigidBody::OnActive()
   rb->SetSize(Vec2f(S, S));
   rb->SetInvMass(0); // immovable
   TheRBManager::Instance()->AddRB(rb);
+  AddToSceneGraph(rb);
 #endif
 }
 
@@ -130,18 +168,24 @@ bool GSRigidBody::OnKeyEvent(const KeyEvent& ke)
   {
     MakeBox2(Vec2f(3.0f, 20.0), 0.3f);
   }
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '3')
+  {
+    MakeBox3(Vec3f(3.0f, 20.0, 0));
+  }
 
   return true; // handled
 }
 
 bool GSRigidBody::OnCursorEvent(const CursorEvent& ce)
 {
+  GSBase::OnCursorEvent(ce);
   m_point = Vec2f(ce.x, ce.y);
   return false;
 }
 
 bool GSRigidBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  GSBase::OnMouseButtonEvent(mbe);
   if (mbe.isDown)
   {
     // Apply force to body
