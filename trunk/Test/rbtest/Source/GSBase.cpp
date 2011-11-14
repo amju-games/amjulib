@@ -26,7 +26,7 @@ void GSBase::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 0, 20,  0, 0, 0,  0, 1, 0);
+  AmjuGL::LookAt(0, 5, 20,  0, 0, 0,  0, 1, 0);
 
   AmjuGL::RotateY(yrot);
 }
@@ -55,7 +55,7 @@ bool GSBase::OnCursorEvent(const CursorEvent& ce)
   if (drag)
   {
     float xdiff = ce.x - oldx;
-    yrot += xdiff * 20.0f;
+    yrot += xdiff * 100.0f;
   }
   oldx = ce.x;
   return false;
