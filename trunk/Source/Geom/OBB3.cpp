@@ -78,6 +78,7 @@ bool OBB3::Intersects(const LineSeg& e, LineSeg* clip, Vec3f* contactNormal, flo
   *clip = c;
   Vec3f mid = (c.p0 + c.p1) * 0.5f;
   // Find nearest face to mid, giving contact normal and pen depth
+/*
 std::cout << "Edge-box test, finding contact normal and pen depth but it asserts...\n";
 std::cout << " This box size: x: " << m_extents.x << " y: " << m_extents.y << " z: " << m_extents.z << "\n";
 std::cout << " Orig line seg: " 
@@ -88,9 +89,15 @@ std::cout << " Clipped line seg in box: "
   << " p0.x: " << c.p0.x << " y: " << c.p0.y << " z: " << c.p0.z 
   << " p1.x: " << c.p1.x << " y: " << c.p1.y << " z: " << c.p1.z << "\n"; 
 std::cout << " expecting this mid point to be in box: x " << mid.x << " y: " << mid.y << " z: " << mid.z << "\n";
+*/
 
   bool b = Intersects(mid, contactNormal, penDepth);
-  Assert(b); // clipped line seg is supposed to be within this obb
+  //Assert(b); // clipped line seg is supposed to be within this obb
+  if (!b)
+  {
+std::cout << "Unexpected: mid point of clipped line not in box! WTF?!\n";
+    return false;
+  }
   return true;
 }
 
@@ -105,7 +112,7 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
   for (int i = 0; i < 6; i++)
   {
     float pd = planes[i].Dist(p);
-std::cout << " point-box intersection test: pd for plane " << i << " is " << pd << "\n";
+//std::cout << " point-box intersection test: pd for plane " << i << " is " << pd << "\n";
 
     if (pd > 0)
     {
