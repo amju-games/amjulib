@@ -70,6 +70,9 @@ void GSRigidBody::Draw()
 
 void GSRigidBody::Draw2d()
 {
+  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  Assert(font);
+  //font->Print(-1, -0.8f, "Hello?");
 }
 
 void MakeBox2(const Vec2f& pos, float rads)
