@@ -122,6 +122,7 @@
     <ClInclude Include="..\..\..\..\Source\RBBox3.h" />
     <ClInclude Include="..\..\..\..\Source\RBIntersect.h" />
     <ClInclude Include="..\..\..\..\Source\RBManager.h" />
+    <ClInclude Include="..\..\..\..\Source\RBSceneNode.h" />
     <ClInclude Include="..\..\..\..\Source\RBSphere2.h" />
     <ClInclude Include="..\..\..\..\Source\RBSphere3.h" />
     <ClInclude Include="..\..\..\..\Source\RigidBody2.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\..\..\..\Source\RBBox3.cpp" />
     <ClCompile Include="..\..\..\..\Source\RBIntersect.cpp" />
     <ClCompile Include="..\..\..\..\Source\RBManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\RBSceneNode.cpp" />
     <ClCompile Include="..\..\..\..\Source\RBSphere2.cpp" />
     <ClCompile Include="..\..\..\..\Source\RBSphere3.cpp" />
     <ClCompile Include="..\..\..\..\Source\RBSphereBox2.cpp" />
