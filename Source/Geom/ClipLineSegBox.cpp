@@ -158,7 +158,7 @@ bool Clip(const LineSeg& lineSeg, const OBB3& box, LineSeg* clipped)
   float t1 = 1.0f;
   float t0 = 0;
 
-std::cout << "CLIPPING....\n";
+//std::cout << "CLIPPING....\n";
 
   for (int i = 0; i < 6; i+= 2)
   {
@@ -170,7 +170,7 @@ std::cout << "CLIPPING....\n";
       // If in front of either plane, line seg does not intersect box
       if (planes[i].Dist(lineSeg.p0) > 0  || planes[i + 1].Dist(lineSeg.p0) > 0)
       {
-std::cout << "Clip: line seg is parallel and in front of plane, so no intersection\n";
+//std::cout << "Clip: line seg is parallel and in front of plane, so no intersection\n";
         return false;
       }
       continue; //return false;
@@ -203,7 +203,7 @@ std::cout << "Clip: line seg is parallel and in front of plane, so no intersecti
 
     if (t0 > t1 || t1 - t0 < VERY_SMALL)
     {
-std::cout << "Clip: no intersection, t0 >= t1\n";
+//std::cout << "Clip: no intersection, t0 >= t1\n";
       return false;
     }
   }
@@ -215,8 +215,8 @@ std::cout << "Clip: no intersection, t0 >= t1\n";
         lineSeg.p0 + dir * t1);
   }
 
-std::cout << "Clip: t0: " << t0 << " t1: " << t1 << "\n";
-std::cout << "Clip: found intersection!\n";
+//std::cout << "Clip: t0: " << t0 << " t1: " << t1 << "\n";
+//std::cout << "Clip: found intersection!\n";
   return true;
 }
 
