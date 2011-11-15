@@ -13,7 +13,6 @@
 #include "RBManager.h"
 #include "RBSceneNode.h"
 #include <SceneGraph.h>
-#include <OpenGL.h>
 
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
