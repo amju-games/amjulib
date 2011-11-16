@@ -1,5 +1,6 @@
 #include "RBManager.h"
 #include <iostream>
+#include <Timer.h>
 
 namespace Amju
 {
@@ -15,7 +16,10 @@ void RBManager::Clear()
 
 float RBManager::GetDt() const
 {
+  return TheTimer::Instance()->GetDt();
+/*
   return 0.0002f; // TODO TEMP TEST
+*/
 }
 
 bool RBManager::AddRBFunc(RB::TypeName tn1, RB::TypeName tn2, RBFunc f)
