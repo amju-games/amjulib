@@ -13,12 +13,16 @@
 #include "RBManager.h"
 #include "RBSceneNode.h"
 #include <SceneGraph.h>
+#include <StringUtils.h>
+#include <Timer.h>
 
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
 
 namespace Amju
 {
+RBBox3* camTarget = 0;
+
 SceneGraph* GetRBSceneGraph()
 {
   static SceneGraph* sg = 0;
@@ -54,6 +58,9 @@ void GSRigidBody::Draw()
   
   GSBase::Draw();
 
+  //Vec3f v = camTarget->GetPos();
+  //AmjuGL::LookAt(0, 10, 20,  v.x, v.y, v.z, 0, 1, 0);
+
   // TODO Do lighting in shader
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
 
@@ -67,11 +74,28 @@ void GSRigidBody::Draw()
   GetRBSceneGraph()->Draw();
 }
 
+int Fps()
+{
+  static float f = 0;
+  static int oldfps = 0;
+  static int fps = 0;
+  f += TheTimer::Instance()->GetDt();
+  fps++;
+  if (f > 1.0f)
+  {
+    f -= 1.0f;
+    oldfps = fps;
+    fps = 0;
+  }
+  return oldfps;
+}
+
 void GSRigidBody::Draw2d()
 {
   static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
   Assert(font);
-  //font->Print(-1, -0.8f, "Hello?");
+  std::string fps = ToString(Fps());
+  font->Print(-1, 0.9f, fps.c_str());
 }
 
 void MakeBox2(const Vec2f& pos, float rads)
@@ -88,10 +112,12 @@ void MakeBox2(const Vec2f& pos, float rads)
   AddToSceneGraph(rb);
 }
 
-void MakeBox3(const Vec3f& pos)
+RBBox3* MakeBox3(const Vec3f& pos)
 {
   RBBox3* rb = new RBBox3;
   rb->SetPos(pos);
+  //rb->SetSize(Vec3f(2, 2, 2));
+
   rb->SetSize(Vec3f(
     (float)(rand() % 2 + 1), 
     (float)(rand() % 3 + 1),
@@ -107,6 +133,8 @@ void MakeBox3(const Vec3f& pos)
   TheRBManager::Instance()->AddRB(rb);
 
   AddToSceneGraph(rb);
+
+  return rb;
 }
 
 
@@ -120,8 +148,11 @@ void GSRigidBody::OnActive()
   GetRBSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
 #ifdef MAKE_BOX3_DEMO
-  MakeBox3(Vec3f(0, 10.0f, 0));
-  MakeBox3(Vec3f(0, 20.0f, 0));
+  RBBox3* rb0 = MakeBox3(Vec3f(0, 10.0f, 0));
+//  rb0->SetInvMass(0);
+  camTarget = rb0;
+
+  RBBox3* rb1 = MakeBox3(Vec3f(0, 20.0f, 0));
 
   // Big base
   const float S = 20.0f;
@@ -131,6 +162,7 @@ void GSRigidBody::OnActive()
   rb->SetInvMass(0); // immovable
   TheRBManager::Instance()->AddRB(rb);
   AddToSceneGraph(rb);
+
 #endif
 
 #ifdef MAKE_BOX2_DEMO
