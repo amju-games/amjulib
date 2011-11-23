@@ -12,7 +12,9 @@ public:
   GLShader();
   ~GLShader();
 
-  virtual bool Load(const std::string&);
+  virtual bool Load(const std::string& filenamePrefix);
+  
+  bool Create(const std::string& vertexSource, const std::string& fragmentSource);
 
   std::string GetErrorString();
 
@@ -26,9 +28,6 @@ public:
   virtual void Set(const std::string& name, const AmjuGL::Vec3&);
   virtual void Set(const std::string& name, const Colour&);
   virtual void Set(const std::string& name, AmjuGL::TextureHandle);
-
-private:
-  bool Create(const std::string& vertexSource, const std::string& fragmentSource);
 
 private:
   uint32 m_vertexShaderHandle;
