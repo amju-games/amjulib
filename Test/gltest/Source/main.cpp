@@ -17,6 +17,8 @@
 #include <Font.h>
 #include "GSLighting.h"
 #include "GSTexture.h"
+#include "GSShaderWave.h"
+#include "GSShadow.h"
 
 namespace Amju
 {
@@ -25,7 +27,10 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
-  TheGame::Instance()->SetCurrentState(TheGSTexture::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSTexture::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSShadow::Instance());
+
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
 }
 }
