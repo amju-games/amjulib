@@ -33,6 +33,11 @@ static int s_matrixStackSize[3] = { 0, 0, 0 };
 //  and for queries
 static AmjuGL::MatrixMode s_currentMatrix = AmjuGL::AMJU_MATRIX_NOTSETYET;
 
+static const char* AMJU_MTX_NAME[] = 
+{
+  "MODVIEW", "PROJ", "TEXTURE"
+};
+
 static float s_screenRotation = 0;
 
 static Colour clearCol;
@@ -399,15 +404,23 @@ void AmjuGL::PushMatrix()
 {
   AMJU_CALL_STACK;
 
+  Assert(s_currentMatrix != AMJU_MATRIX_NOTSETYET);
+
 #ifdef _DEBUG
+  s_matrixStackSize[s_currentMatrix]++;
+
+#ifdef AMJU_PUSH_POP_CHECK
   if (s_currentMatrix != AMJU_MODELVIEW_MATRIX)
   {
     std::cout << "PushMatrix called for " 
       << (s_currentMatrix == AMJU_PROJECTION_MATRIX ? "PROJ" : "TEXTURE") << " matrix\n";
   }
 
-  s_matrixStackSize[s_currentMatrix]++;
-#endif
+  std::cout << "Push: Stack size for " << AMJU_MTX_NAME[s_currentMatrix] << ": " << 
+    s_matrixStackSize[s_currentMatrix] << "\n";
+
+#endif // AMJU_PUSH_POP_CHECK
+#endif // _DEBUG
 
   impl->PushMatrix();
 }
@@ -416,16 +429,24 @@ void AmjuGL::PopMatrix()
 {
   AMJU_CALL_STACK;
 
+  Assert(s_currentMatrix != AMJU_MATRIX_NOTSETYET);
+
 #ifdef _DEBUG
+  Assert(s_matrixStackSize[s_currentMatrix] > 0);
+  s_matrixStackSize[s_currentMatrix]--;
+
+#ifdef AMJU_PUSH_POP_CHECK
   if (s_currentMatrix != AMJU_MODELVIEW_MATRIX)
   {
     std::cout << "PopMatrix called for " 
       << (s_currentMatrix == AMJU_PROJECTION_MATRIX ? "PROJ" : "TEXTURE") << " matrix\n";
   }
 
-  Assert(s_matrixStackSize[s_currentMatrix] > 0);
-  s_matrixStackSize[s_currentMatrix]--;
-#endif
+  std::cout << "Pop: Stack size for " << AMJU_MTX_NAME[s_currentMatrix] << ": " << 
+    s_matrixStackSize[s_currentMatrix] << "\n";
+
+#endif // AMJU_PUSH_POP_CHECK
+#endif // _DEBUG
 
   impl->PopMatrix();
 }
