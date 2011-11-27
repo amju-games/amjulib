@@ -232,7 +232,7 @@ void drawObjects(void)
 void renderScene(ShadowMap::DrawFunc drawFunc)
 {
   // TODO TEMP TEST
-        update();
+//        update();
 
         //First step: Render from the light POV to a FBO, story depth values only
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,fboId); //Rendering offscreen
@@ -348,28 +348,7 @@ bool ShadowMapOpenGL2::Init()
 
 void ShadowMapOpenGL2::Draw()
 {
-  static int i = 0;
-  i++;
-  if (i < 1000)
-  {
-    m_drawFunc();
-  }
-  else if (i < 2000)
-  {
-
-  /*
-  // TODO TEMP TEST
-        // This is important, if not here, FBO's depthbuffer won't be populated.
-        glEnable(GL_DEPTH_TEST);
-        glClearColor(0,0,0,1.0f);
-  */
-
-    renderScene(m_drawFunc);
-  }
-  else
-  {
-    i = 0;
-  }
+  renderScene(m_drawFunc);
 }
 
 }
