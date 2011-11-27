@@ -8,7 +8,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <ostream>
 #include <string>
 #include <vector>
-#include "AmjuTypes.h"
+#include <AmjuTypes.h>
 #include "Colour.h"
 
 #ifdef CreateWindow
@@ -20,6 +20,7 @@ namespace Amju
 class AmjuGLImpl;
 class AmjuGLWindowInfo;
 class Shader;
+class ShadowMap;
 
 struct AmjuGL
 {
@@ -239,6 +240,9 @@ public:
     const Vec3& lightPos);
 
   static Shader* LoadShader(const std::string& shaderFileName);
+
+  // Create a ShadowMap (ref counted, on heap).
+  static ShadowMap* CreateShadowMap();
 
 }; // struct AmjuGL
 } // namespace Amju

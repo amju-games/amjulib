@@ -115,6 +115,9 @@ public:
     const AmjuGL::Vec3& lightPos) = 0;
 
   virtual Shader* LoadShader(const std::string& shaderFileName) = 0;
+
+  virtual ShadowMap* CreateShadowMap() = 0;
+
 }; // class 
 } // namespace Amju
 

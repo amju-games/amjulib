@@ -620,4 +620,11 @@ Shader* AmjuGL::LoadShader(const std::string& shaderFileName)
   AMJU_CALL_STACK;
   return impl->LoadShader(shaderFileName);
 }
+
+ShadowMap* AmjuGL::CreateShadowMap()
+{
+  AMJU_CALL_STACK;
+  return impl->CreateShadowMap();
+}
+
 }
