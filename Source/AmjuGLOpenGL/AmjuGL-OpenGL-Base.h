@@ -84,6 +84,8 @@ public:
   // True if shaders are supported on this machine
   static bool s_shaderSupport;
 
+  virtual ShadowMap* CreateShadowMap();
+
 }; // class 
 } // namespace Amju
 
