@@ -6,7 +6,10 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <iostream>
 #include "OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
-#include "../Utils/AmjuAssert.h"
+#include "ShadowMapOpenGL1.h"
+#include "ShadowMapOpenGL2.h"
+#include "ShadowMapOpenGL3.h"
+#include <AmjuAssert.h>
 #include "AmjuFinal.h"
 
 //#define SHADER_DEBUG
@@ -387,6 +390,13 @@ void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
 
   glBindTexture(GL_TEXTURE_2D, t);
 }
+
+ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
+{
+  // TODO: create best quality impl depending on hardware capability
+  return new ShadowMapOpenGL3;
+}
+
 }
 
 
