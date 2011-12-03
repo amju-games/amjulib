@@ -14,7 +14,7 @@ struct LineSeg
   float SqDist(const Vec3f& p) const;
 
   // Linear interpolation, get point along Line, t=0 gives p0, t=1 gives p1
-  Vec3f GetPoint(float t);
+  Vec3f GetPoint(float t) const;
 
   Vec3f p0, p1; // endpoints, not start+dir
 };
