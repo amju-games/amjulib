@@ -60,7 +60,9 @@ void GSMain::Update()
   GSBase::Update();
 
   // TODO Update all GOs
-  GetLocalPlayer()->Update();
+  //GetLocalPlayer()->Update();
+
+  TheGame::Instance()->UpdateGameObjects();
 }
 
 void GSMain::DoMoveRequest()
@@ -111,7 +113,7 @@ void GSMain::DoMoveRequest()
     else
     {
       std::cout << "Ground clicked...\n";
-      Vec3f pos = GetTerrain()->GetMousePos(lineSeg);
+      Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
       std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
       TheOnlineReqManager::Instance()->AddReq(new MoveReq(MakeUrl(MOVE_REQ), pos), 1);
@@ -143,9 +145,8 @@ void GSMain::OnActive()
   GetVe1SceneGraph()->Clear();
   GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
-  // Add Terrain to Scene Graph
-  GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, GetTerrain());
- 
+  // Objects are loaded by ObjectManager and added to scene graph.
+
   // Load Player, add to scene graph 
   GetLocalPlayer()->Init();
 }
