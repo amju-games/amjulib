@@ -2,14 +2,49 @@
 #include <iostream>
 #include <DrawOBB3.h>
 #include <AmjuGL.h>
-
+#include "Ve1SceneGraph.h"
+#include <SceneMesh.h>
+ 
 namespace Amju
 {
-Terrain* GetTerrain()
+static Terrain* terrain = 0;
+
+Terrain* Terrain::GetTerrain()
 {
   // TODO
-  static Terrain* t = new Terrain;
-  return t;
+  return terrain;
+}
+
+class TerrainSceneNode : public SceneMesh
+{
+public:
+  TerrainSceneNode(Terrain* t) : m_terrain(t) {}
+
+private:
+  Terrain* m_terrain;
+};
+
+Terrain::Terrain()
+{
+  terrain = this; // for easy access to the current Terrain
+}
+
+bool Terrain::Load(File* f)
+{
+  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("terrain.obj");
+  if (!mesh)
+  {
+std::cout << "Failed to load terrain mesh!\n";
+    return false; 
+  }
+
+  TerrainSceneNode* tsn = new TerrainSceneNode(this);
+  tsn->SetMesh(mesh);
+
+  // Add Terrain to Scene Graph
+  GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, tsn);
+
+  return true;
 }
 
 void Terrain::Draw()
@@ -20,6 +55,17 @@ void Terrain::Draw()
   AmjuGL::SetColour(Colour(1, 0, 0, 1));
   DrawSolidOBB3(obb);
   PopColour();
+}
+
+void Terrain::Update()
+{
+}
+
+const char* Terrain::TYPE_NAME = "terrain";
+
+const char* Terrain::GetTypeName() const
+{
+  return TYPE_NAME;
 }
 
 Vec3f Terrain::GetMousePos(const LineSeg& seg)
