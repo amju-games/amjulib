@@ -24,3 +24,8 @@ run:
 	cd $(RUNDIR); \
 	./$(APP)
 
+runclean:
+	rm $(RUNDIR)/* ; cp $(TARGET) $(RUNDIR); \
+	cd $(RUNDIR); \
+	./$(APP)
+
