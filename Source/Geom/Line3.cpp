@@ -2,7 +2,7 @@
 
 namespace Amju
 {
-Vec3f LineSeg::GetPoint(float t)
+Vec3f LineSeg::GetPoint(float t) const
 {
   return p0 + t * (p1 - p0);
 }
