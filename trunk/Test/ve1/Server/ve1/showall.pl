@@ -25,7 +25,7 @@ sub showplayers()
   my $findplayersql = "select * from player";
 
   print "Query: $findplayersql\n\n";
-  if (not $dbh) { print "Oh shit, dbh is undefined!?!?!\n"; }
+  if (not $dbh) { print "Oh no, dbh is undefined!?!?!\n"; }
 
   my $query = $dbh->prepare($findplayersql) or die
     "Query prepare failed for this query: $findplayersql\n";
@@ -56,12 +56,12 @@ sub showobjects()
   $query->execute;
 
   print "<table border=1>";
-  print "<tr><td>ID</td> <td>Type</td> <td>Assetfile</td> <td>Owner ID</td> <td>Create time</td></tr>\n";
+  print "<tr><td>ID</td> <td>Type</td> <td>Assetfile</td> <td>Datafile</td> <td>Owner ID</td> <td>Create time</td></tr>\n";
 
-  while (my ($id, $type, $assetfile, $owner, $lasttime) = $query->fetchrow_array)
+  while (my ($id, $type, $assetfile, $datafile, $owner, $lasttime) = $query->fetchrow_array)
   {
     print "<tr>";
-    print "<td>$id</td> <td>$type</td> <td>$assetfile</td> <td>$owner</td> <td>$lasttime</td>\n";
+    print "<td>$id</td> <td>$type</td> <td>$assetfile</td> <td>$datafile</td> <td>$owner</td> <td>$lasttime</td>\n";
     print "</tr>";
   }
   print "</table>";
