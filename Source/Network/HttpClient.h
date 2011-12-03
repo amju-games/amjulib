@@ -27,27 +27,31 @@ Added to repository
 #define HTTP_CLIENT_H_INCLUDED
 
 #include <string>
+#include <vector>
 
 namespace Amju
 {
 class HttpResult
 {
 public:
-  void SetString(const std::string& str);
+  void AppendData(const unsigned char* data, int numbytes);
   void SetSuccess(bool);
   void SetErrorString(const std::string& errorStr);
 
-  std::string GetString() const;
+  std::string GetString() const; // convenience, treat data as a string for text resources
+
+  const unsigned char* GetData() const;
+  unsigned int Size() const;
+
   bool GetSuccess() const;
   std::string GetErrorString() const;
 
 private:
-  std::string m_str;
+  std::vector<unsigned char> m_data;
   bool m_success;
   std::string m_errorStr;
 };
 
-//typedef std::string HttpResult;
 
 class HttpClient
 {
