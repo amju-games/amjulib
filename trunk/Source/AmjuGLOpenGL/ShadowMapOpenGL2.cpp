@@ -5,9 +5,12 @@
 #include <stdlib.h>
 #include <GLShader.h>
 #include <math.h>
+#include <Screen.h>
 
 // This implementation is adapted from http://fabiensanglard.net/shadowmapping/
- 
+
+//#define SHOW_MAP
+
 namespace Amju
 {
 GLShader* shader;
@@ -42,28 +45,7 @@ void loadShader()
     "} ");
 }
 
-
-// Expressed as float so gluPerspective division returns a float and not 0 (640/480 != 640.0/480.0).
-#define RENDER_WIDTH 640.0
-#define RENDER_HEIGHT 480.0
 #define SHADOW_MAP_RATIO 4 
-
-
-//Camera position
-float p_camera[3] = {32,20,0};
-
-//Camera lookAt
-float l_camera[3] = {2,0,-10};
-
-//Light position
-float p_light[3] = {3,20,0};
-
-//Light lookAt
-float l_light[3] = {0,0,-5};
-
-
-//Light mouvement circle radius
-float light_mvnt = 30.0f;
 
 // Hold id of the framebuffer for light POV rendering
 GLuint fboId;
@@ -74,11 +56,10 @@ GLuint depthTextureId;
 // Use to activate/disable shadowShader
 GLhandleARB shadowShaderId;
 GLuint shadowMapUniform;
+        
 
 void generateShadowFBO()
 {
-        int shadowMapWidth = RENDER_WIDTH * SHADOW_MAP_RATIO;
-        int shadowMapHeight = RENDER_HEIGHT * SHADOW_MAP_RATIO;
 
         //GLfloat borderColor[4] = {0,0,0,0};
 
@@ -98,6 +79,8 @@ void generateShadowFBO()
 
         //glTexParameterfv( GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor );
 
+  int shadowMapWidth = Screen::X() * SHADOW_MAP_RATIO;
+  int shadowMapHeight = Screen::Y() * SHADOW_MAP_RATIO;
 
 
         // No need to force GL_DEPTH_COMPONENT24, drivers usually give you the max precision if available
@@ -130,23 +113,10 @@ void setupMatrices(float position_x,float position_y,float position_z,float look
 {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(45,RENDER_WIDTH/RENDER_HEIGHT,10,40000);
+        gluPerspective(45, 1.0, 10, 40000); //0.1, 1000.0);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(position_x,position_y,position_z,lookAt_x,lookAt_y,lookAt_z,0,1,0);
-}
-
-
-// This update only change the position of the light.
-//int elapsedTimeCounter = 0;
-void update(void)
-{
-
-        p_light[0] = light_mvnt * cos(glutGet(GLUT_ELAPSED_TIME)/1000.0);
-        p_light[2] = light_mvnt * sin(glutGet(GLUT_ELAPSED_TIME)/1000.0);
-
-        //p_light[0] = light_mvnt * cos(3652/1000.0);
-        //p_light[2] = light_mvnt * sin(3652/1000.0);
 }
 
 void setTextureMatrix(void)
@@ -184,6 +154,7 @@ void setTextureMatrix(void)
         glMatrixMode(GL_MODELVIEW);
 }
 
+/*
 // During translation, we also have to maintain the GL_TEXTURE8, used in the shadow shader
 // to determine if a vertex is in the shadow.
 void startTranslate(float x,float y,float z)
@@ -227,21 +198,21 @@ void drawObjects(void)
         glutSolidCube(4);
         endTranslate();
 }
+*/
 
-
-void renderScene(ShadowMap::DrawFunc drawFunc)
+void ShadowMapOpenGL2::Draw()
 {
-  // TODO TEMP TEST
-//        update();
-
         //First step: Render from the light POV to a FBO, story depth values only
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,fboId); //Rendering offscreen
 
         //Using the fixed pipeline to render to the depthbuffer
         glUseProgramObjectARB(0);
 
+  int shadowMapWidth = Screen::X() * SHADOW_MAP_RATIO;
+  int shadowMapHeight = Screen::Y() * SHADOW_MAP_RATIO;
+
         // In the case we render the shadowmap to a higher resolution, the viewport must be modified accordingly.
-        glViewport(0,0,RENDER_WIDTH * SHADOW_MAP_RATIO,RENDER_HEIGHT* SHADOW_MAP_RATIO);
+        glViewport(0,0, shadowMapWidth, shadowMapHeight) ;
 
         // Clear previous frame values
         glClear( GL_DEPTH_BUFFER_BIT);
@@ -255,12 +226,17 @@ void renderScene(ShadowMap::DrawFunc drawFunc)
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
 
+  //Light position
+  float p_light[3] = { m_lightPos.m_x, m_lightPos.m_y, m_lightPos.m_z };
+
+  //Light lookAt
+  float l_light[3] = {0,0,0};
 
         setupMatrices(p_light[0],p_light[1],p_light[2],l_light[0],l_light[1],l_light[2]);
 
         // Culling switching, rendering only backface, this is done to avoid self-shadowing
         glCullFace(GL_FRONT);
-        drawFunc();
+        m_drawFunc();
 
         //Save modelview/projection matrice into texture7, also add a biais
         setTextureMatrix();
@@ -269,7 +245,7 @@ void renderScene(ShadowMap::DrawFunc drawFunc)
         // Now rendering from the camera POV, using the FBO to generate shadows
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,0);
 
-        glViewport(0,0,RENDER_WIDTH,RENDER_HEIGHT);
+        glViewport(0,0, Screen::X(), Screen::Y()); //RENDER_WIDTH,RENDER_HEIGHT);
 
         //Enabling color write (previously disabled for light POV z-buffer rendering)
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -297,7 +273,7 @@ void renderScene(ShadowMap::DrawFunc drawFunc)
   glMatrixMode(GL_MODELVIEW);
 
         glCullFace(GL_BACK);
-        drawFunc();
+        m_drawFunc();
         shader->End();
 
         // j.c. we also need to do this
@@ -309,7 +285,7 @@ void renderScene(ShadowMap::DrawFunc drawFunc)
          glUseProgramObjectARB(0);
          glMatrixMode(GL_PROJECTION);
          glLoadIdentity();
-         glOrtho(-RENDER_WIDTH/2,RENDER_WIDTH/2,-RENDER_HEIGHT/2,RENDER_HEIGHT/2,1,20);
+         glOrtho(-Screen::X()/2, Screen::X()/2, -Screen::Y()/2, Screen::Y()/2,1,20);
          glMatrixMode(GL_MODELVIEW);
          glLoadIdentity();
          glColor4f(1,1,1,1);
@@ -319,9 +295,9 @@ void renderScene(ShadowMap::DrawFunc drawFunc)
          glTranslated(0,0,-1);
          glBegin(GL_QUADS);
          glTexCoord2d(0,0);glVertex3f(0,0,0);
-         glTexCoord2d(1,0);glVertex3f(RENDER_WIDTH/2,0,0);
-         glTexCoord2d(1,1);glVertex3f(RENDER_WIDTH/2,RENDER_HEIGHT/2,0);
-         glTexCoord2d(0,1);glVertex3f(0,RENDER_HEIGHT/2,0);
+         glTexCoord2d(1,0);glVertex3f(Screen::X()/2,0,0);
+         glTexCoord2d(1,1);glVertex3f(Screen::X()/2,Screen::Y()/2,0);
+         glTexCoord2d(0,1);glVertex3f(0,Screen::Y()/2,0);
          glEnd();
          glDisable(GL_TEXTURE_2D);
 #endif
@@ -344,11 +320,6 @@ bool ShadowMapOpenGL2::Init()
         glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 
   return true;
-}
-
-void ShadowMapOpenGL2::Draw()
-{
-  renderScene(m_drawFunc);
 }
 
 }
