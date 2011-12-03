@@ -8,11 +8,16 @@
 #include <DownloadReq.h>
 #include <Directory.h>
 #include <File.h>
+#include <Game.h>
+#include <GameObjectFactory.h>
 
 #define XML_DEBUG
 
 namespace Amju
 {
+static const int MAX_CONCURRENT_DOWNLOADS = 16; // ???
+
+
 std::ostream& operator<<(std::ostream& os, const Object& obj)
 {
   return os << obj.m_id << " (" << obj.m_type << ")";
@@ -22,6 +27,32 @@ void Object::Load()
 {
   std::cout << "TODO Loading object " << *this << "\n";
   // TODO
+
+  // Create new object, load it, add to Game
+  GameObject* go = TheGameObjectFactory::Instance()->Create(m_type);
+  if (go)
+  {
+    go->SetId(m_id);
+    // TODO This is a bit of a problem. With Level files, there is a nice File* to give the object.
+    File f;
+    //if (!f.OpenRead())
+    //{
+    //}
+
+    if (go->Load(&f))
+    {
+      TheGame::Instance()->AddGameObject(go);
+std::cout << "Successfully added object to game! " << *this << "\n";
+    }
+    else
+    {
+std::cout << "Failed to load game object " << *this << "\n";
+    }
+  }
+  else
+  {
+std::cout << "Object Load: Unexpected game object type: " << m_type << "\n";
+  }
 }
 
 class ObjectCheckReq : public Ve1Req
@@ -145,24 +176,38 @@ bool AssetList::Load()
 
 std::cout << "Opening asset list " << m_name << "\n";
 
-  File f(File::STD); // OS file, not glue file
+  File f(File::NO_VERSION, File::STD); // OS file, not glue file
   if (!f.OpenRead(m_name))
   {
+std::cout << "Failed to open asset list file " << m_name << "\n";
      return false;
   }
   
   m_state = AMJU_AL_LOADING;
 
+  int lines = 0;
   std::string s;
   while (f.GetDataLine(&s))
   {
+    lines++;
+std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
     TheObjectManager::Instance()->AddAsset(s, this);    
   }
+
+std::cout << "Apparently there are " << lines << " data lines in " << m_name << "\n";
 
   // Now check how many assets need to download. If zero, we can load the object now.
   if (m_numAssetsDownloading == 0)
   {
     m_state = AMJU_AL_ALL_ASSETS_LOADED;
+  
+std::cout << "All assets loaded for " << m_name << " so loading all waiting objects...";
+    for (WaitingObjs::iterator it = m_waitingObjs.begin(); it != m_waitingObjs.end(); ++it)
+    {
+      Object* obj = *it;
+      std::cout << " ..loading " << *obj << "\n";
+      obj->Load();
+    }
   }
 
   return true;
@@ -191,8 +236,15 @@ std::cout << " - All assets are local too, so loading object " << *obj << "...\n
     {
 std::cout << "Asset list " << m_name << " is not local, downloading it...\n";
       OnlineReq* assetlistdownloadreq = new AssetListDownloadReq(this, MakeDownloadUrl(this->m_name));
-      TheOnlineReqManager::Instance()->AddReq(assetlistdownloadreq);
-      m_state = AMJU_AL_DOWNLOADING;
+      if (TheOnlineReqManager::Instance()->AddReq(assetlistdownloadreq, MAX_CONCURRENT_DOWNLOADS))
+      {
+        m_state = AMJU_AL_DOWNLOADING;
+      }
+      else
+      {
+std::cout << "Too many concurrent downloads, failed to request asset list " << m_name << " :-(\n";
+        return;
+      }
     }
     break;
 
