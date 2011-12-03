@@ -41,6 +41,7 @@ CREATE TABLE `object`
 (`id` INT NOT NULL AUTO_INCREMENT,
 `type` VARCHAR(30) NOT NULL,
 `assetfile` VARCHAR(30) NOT NULL,
+`datafile` VARCHAR(30) NOT NULL,
 `owner` INT NOT NULL,
 `createtime` TIMESTAMP,
 PRIMARY KEY (`id`)
@@ -87,11 +88,14 @@ sub create_tables()
 
   my $sql;
   
-  $sql = "insert into object (type, assetfile, owner, createtime) values ('player', 'player.txt', 1, now());";
-  update_or_insert($sql);
+  $sql = "insert into object (type, assetfile, datafile, owner, createtime) values ('player', 'player-assets.txt', 'player-data.txt', 1, now());";
+  insert($sql);
+
+  $sql = "insert into object (type, assetfile, datafile, owner, createtime) values ('terrain', 'terrain-1-assets.txt', 'terrain-data.txt', 0, now());";
+  insert($sql);
 
   $sql = "insert into player (playername, email, hashpw, thumbnail, lasttime, obj_id) values ('jay', 'jason\@amju.com', 'HASH', '', now(), 1);";
-  update_or_insert($sql);
+  insert($sql);
 }
 
 
