@@ -1,22 +1,32 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
+#include <GameObject.h>
 #include <SceneNode.h>
 #include <Line3.h>
 
 namespace Amju
 {
 // Region has a Terrain. In a tree structure for drawing, collisions. Tile based.
-// Terrain is a SceneNode, as it is drawn, but also a Resource..?
-// No, it loads resources though, i.e. textures. 
-class Terrain : public SceneNode
+// Terrain has a SceneNode, as it is drawn, but is itself a game object (allowing it to be downloadable).
+class Terrain : public GameObject
 {
 public:
+  Terrain();
+
+  // Get location clicked on, for user navigation
   Vec3f GetMousePos(const LineSeg& mouseLine);
 
-  virtual void Draw();
+  virtual void Draw(); //?
+  virtual void Update();
+  virtual bool Load(File*);
 
+  static const char* TYPE_NAME;
+  virtual const char* GetTypeName() const;
   // Load() ..??
+
+// Get the Terrain (for the current region?)
+  static Terrain* GetTerrain();
 
 protected:
   // (Octree of) triangles ??
@@ -25,8 +35,6 @@ protected:
   // If a regular grid, we don't need anything fancy, you can just divide the coord to get the triangle.
 };
 
-// Get the Terrain (for the current region?)
-Terrain* GetTerrain();
 }
 
 #endif
