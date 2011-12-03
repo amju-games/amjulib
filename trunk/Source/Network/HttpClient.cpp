@@ -133,11 +133,9 @@ Added to repository
 
 namespace Amju
 {
-void HttpResult::SetString(const std::string& str)
+void HttpResult::AppendData(const unsigned char* data, int numbytes)
 {
-  AMJU_CALL_STACK;
-
-  m_str = str;
+  m_data.insert(m_data.end(), data, data + numbytes);
 }
 
 void HttpResult::SetSuccess(bool b)
@@ -154,9 +152,19 @@ void HttpResult::SetErrorString(const std::string& errorStr)
   m_errorStr = errorStr;
 }
 
+unsigned int HttpResult::Size() const
+{
+  return m_data.size();
+}
+
+const unsigned char* HttpResult::GetData() const
+{
+  return &m_data[0];
+}
+
 std::string HttpResult::GetString() const
 {
-  return m_str;
+  return std::string((const char*)GetData());
 }
 
 bool HttpResult::GetSuccess() const
@@ -221,7 +229,7 @@ std::cout << "NOT CHUNKED\n";
 #ifdef HTTP_DEBUG
   {
     std::cout << "Stripping chunks: " << v.size() << " lines:\n";
-    for (int i = 0; i < v.size(); i++)
+    for (unsigned int i = 0; i < v.size(); i++)
     {
       std::cout << "\"" << v[i] << "\"\n";
     } 
@@ -314,32 +322,32 @@ HttpResult MetalshellGet(
 std::cout << "METALSHELL IMPLEMENTATION\n";
 #endif
 
- int sockid;
- int bufsize;
- char buffer[4096]; // was too big
- struct sockaddr_in socketaddr;
- struct hostent *hostaddr;
- //struct servent *servaddr;
- //struct protoent *protocol;
+  int sockid;
+  int bufsize;
+  static const int BUF_SIZE = 4000;
+  unsigned char buffer[BUF_SIZE];
 
- /* Resolve the host name */
+  struct sockaddr_in socketaddr;
+  struct hostent *hostaddr;
+
+  /* Resolve the host name */
 #ifdef GEKKO
- if (!(hostaddr = net_gethostbyname(host.c_str()))) 
+  if (!(hostaddr = net_gethostbyname(host.c_str()))) 
 #else
- if (!(hostaddr = gethostbyname(host.c_str()))) 
+  if (!(hostaddr = gethostbyname(host.c_str()))) 
 #endif
- {
+  {
     //fprintf(stderr, "Error resolving host.");
     HttpResult r; 
     r.SetSuccess(false);
     std::string s = "Failed to find server " + host;
     r.SetErrorString(s);
     return r;
- }
+  }
 
- /* clear and initialize socketaddr */
- memset(&socketaddr, 0, sizeof(socketaddr));
- socketaddr.sin_family = AF_INET;
+  /* clear and initialize socketaddr */
+  memset(&socketaddr, 0, sizeof(socketaddr));
+  socketaddr.sin_family = AF_INET;
 
  /* setup the servent struct using getservbyname */
 //#ifdef GEKKO
@@ -348,24 +356,25 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 // servaddr = getservbyname(SERVICE, PROTOCOL);
 //#endif
 
- unsigned short usport = port;
+  unsigned short usport = port;
 
- // Hmm, not sure if this used to work properly, it just seemed to look up the port number
- // for the http service, instead of using the port parameter.. yikes
- socketaddr.sin_port = htons(usport); //servaddr->s_port;
+  // Hmm, not sure if this used to work properly, it just seemed to look up the port number
+  // for the http service, instead of using the port parameter.. yikes
+  socketaddr.sin_port = htons(usport); //servaddr->s_port;
 
- memcpy(&socketaddr.sin_addr, hostaddr->h_addr, hostaddr->h_length);
+  memcpy(&socketaddr.sin_addr, hostaddr->h_addr, hostaddr->h_length);
 
- /* protocol must be a number when used with socket()
+  /* protocol must be a number when used with socket()
     since we are using tcp protocol->p_proto will be 0 */
 // protocol = getprotobyname(PROTOCOL);
 
 #ifdef GEKKO
- sockid = net_socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
+  sockid = net_socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
 #else
- sockid = socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
+  sockid = socket(AF_INET, SOCK_STREAM, 0); //protocol->p_proto);
 #endif
- if (sockid < 0) {
+  if (sockid < 0) 
+  {
     //fprintf(stderr, "Error creating socket.");
     HttpResult r; 
     r.SetSuccess(false);
@@ -373,15 +382,15 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
       ToString(port);
     r.SetErrorString(s);
     return r;
- }
+  }
 
- /* everything is setup, now we connect */
+  /* everything is setup, now we connect */
 #ifdef GEKKO
- if(net_connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
+  if(net_connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
 #else
- if(connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
+  if(connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
 #endif
- {
+  {
     //fprintf(stderr, "Error connecting.");
     HttpResult r; 
     r.SetSuccess(false);
@@ -389,21 +398,21 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
       ToString(port);
     r.SetErrorString(s);
     return r;
- }
+  }
 
- /* send our get request for http */
- std::string getReqStr = MakeHeader(m, path, host);
+  /* send our get request for http */
+  std::string getReqStr = MakeHeader(m, path, host);
 
 #ifdef HTTP_DEBUG
-std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
+  std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
 #endif
 
 #ifdef GEKKO
- if (net_send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
+  if (net_send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
 #else
- if (send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
+  if (send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
 #endif
- {
+  {
     //fprintf(stderr, "Error sending data.");
     HttpResult r; 
     r.SetSuccess(false);
@@ -411,33 +420,40 @@ std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
       ToString(port);
     r.SetErrorString(s);
     return r;
- }
+  }
 
   HttpResult r; 
   r.SetSuccess(true);
-  std::string result;
+  int numBytes = 0;
 
  /* read the socket until its clear then exit */
 #if defined(WIN32)
- while ( (bufsize = recv(sockid, buffer, sizeof(buffer) - 1, 0))) 
+  while ( (bufsize = recv(sockid, buffer, BUF_SIZE - 1, 0))) 
 #elif defined(GEKKO)
- while ( (bufsize = net_read(sockid, buffer, sizeof(buffer) - 1))) 
+  while ( (bufsize = net_read(sockid, buffer, BUF_SIZE - 1))) 
 #else
- while ( (bufsize = read(sockid, buffer, sizeof(buffer) - 1))) 
+  while ( (bufsize = read(sockid, buffer, BUF_SIZE - 1))) 
 #endif
- {
-//   write(1, buffer, bufsize);
+  {
 #ifdef HTTP_DEBUG
- std::cout << "Got this: " << buffer << "\n";
+    std::cout << "Got this: " << buffer << "\n";
 #endif
 
-  buffer[bufsize] = '\0';
-  result += buffer;  
- }
+    buffer[bufsize] = '\0';
 
- StripChunkInfo(&result);
+#ifdef HTTP_DEBUG
+    std::cout << "Appending " << bufsize << " bytes..\n";
+#endif
+    r.AppendData(buffer, bufsize);
 
-  r.SetString(result);
+    numBytes += bufsize;
+  }
+
+ //StripChunkInfo(&result);
+
+#ifdef HTTP_DEBUG
+std::cout << "\n\n\n***** Total bytes Read: " << numBytes <<  "\n";
+#endif
 
 #if defined(WIN32)
   closesocket(sockid);
@@ -447,7 +463,7 @@ std::cout << "Req str: '" << getReqStr.c_str() << "'\n";
   close(sockid);
 #endif
 
-  return r;
+  return r; // Say what, surely could be more efficient?!!
 }
 #endif
 
