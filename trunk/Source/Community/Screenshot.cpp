@@ -205,7 +205,8 @@ std::cout << "UPLOAD IMAGE:  ..read " << bytesRead << " bytes, total: "
 std::cout << "Here is the complete url:\n" << m_url << "\n";
 
   HttpClient hc;
-  HttpResult res = hc.Get(m_url, HttpClient::POST); // POST for big data, right ?
+  HttpResult res;
+  hc.Get(m_url, HttpClient::POST, &res); // POST for big data, right ?
   if (res.GetSuccess())
   {
     std::cout << res.GetString().c_str() << "\n";
