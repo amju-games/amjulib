@@ -52,7 +52,8 @@ private:
 
 typedef RCPtr<ObjMesh> PObjMesh;
 
-Resource* ObjLoader(const std::string& resName);
+Resource* TextObjLoader(const std::string& resName);
+Resource* BinaryObjLoader(const std::string& resName);
 
 } // namespace
 

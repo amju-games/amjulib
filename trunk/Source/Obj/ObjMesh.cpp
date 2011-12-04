@@ -6,21 +6,29 @@
 #include "CollisionMesh.h"
 #include <Matrix.h>
 
-//#define OBJ_DEBUG
+#define OBJ_DEBUG
 
 namespace Amju
 {
-Resource* ObjLoader(const std::string& resName)
+Resource* TextObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
-  if (!obj->Load("obj/" + resName, 
-#ifdef NO_COMPILED_ASSETS
+  if (!obj->Load(resName, 
     false /* text */ ))
-#else
-    true /* binary */ ))
-#endif // NO_COMPILED_ASSETS
   {
-    Assert(0);
+    //Assert(0);
+    return 0;
+  }
+  return obj;
+}
+
+Resource* BinaryObjLoader(const std::string& resName)
+{
+  ObjMesh* obj = new ObjMesh;
+  if (!obj->Load(resName, 
+    true /* binary */ ))
+  {
+    //Assert(0);
     return 0;
   }
   return obj;
