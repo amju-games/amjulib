@@ -60,7 +60,7 @@ public:
 
   // NB This url is NOT formatted i.e. characters changed to %<hex number>
   // Do this yourself if required, using UrlUtils functions.
-  HttpResult Get(const std::string& url, HttpMethod m);
+  bool Get(const std::string& url, HttpMethod m, HttpResult* result);
 };
 }
 

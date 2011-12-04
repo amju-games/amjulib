@@ -159,7 +159,7 @@ unsigned int HttpResult::Size() const
 
 const unsigned char* HttpResult::GetData() const
 {
-  return &m_data[0];
+  return m_data.data();
 }
 
 std::string HttpResult::GetString() const
@@ -310,11 +310,12 @@ std::cout << "  Skipping line \"" << line.c_str() << "\" chars now: "
 }
 
 #ifdef USE_METALSHELL_CODE
-HttpResult MetalshellGet(
+bool MetalshellGet(
   HttpClient::HttpMethod m,
   const std::string& path,
   const std::string& host,
-  int port)
+  int port,
+  HttpResult* result)
 {
   AMJU_CALL_STACK;
 
@@ -337,12 +338,10 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
   if (!(hostaddr = gethostbyname(host.c_str()))) 
 #endif
   {
-    //fprintf(stderr, "Error resolving host.");
-    HttpResult r; 
-    r.SetSuccess(false);
+    result->SetSuccess(false);
     std::string s = "Failed to find server " + host;
-    r.SetErrorString(s);
-    return r;
+    result->SetErrorString(s);
+    return false;
   }
 
   /* clear and initialize socketaddr */
@@ -375,13 +374,11 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 #endif
   if (sockid < 0) 
   {
-    //fprintf(stderr, "Error creating socket.");
-    HttpResult r; 
-    r.SetSuccess(false);
+    result->SetSuccess(false);
     std::string s = "Failed to create socket, connecting to server " + host + ":" +
       ToString(port);
-    r.SetErrorString(s);
-    return r;
+    result->SetErrorString(s);
+    return false;
   }
 
   /* everything is setup, now we connect */
@@ -391,13 +388,10 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
   if(connect(sockid, (sockaddr*)&socketaddr, sizeof(socketaddr)) == -1) 
 #endif
   {
-    //fprintf(stderr, "Error connecting.");
-    HttpResult r; 
-    r.SetSuccess(false);
-    std::string s = "Failed to connect to server " + host + ":" +
-      ToString(port);
-    r.SetErrorString(s);
-    return r;
+    result->SetSuccess(false);
+    std::string s = "Failed to connect to server " + host + ":" + ToString(port);
+    result->SetErrorString(s);
+    return false;
   }
 
   /* send our get request for http */
@@ -413,17 +407,13 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
   if (send(sockid, getReqStr.c_str(), getReqStr.size(), 0) == -1) 
 #endif
   {
-    //fprintf(stderr, "Error sending data.");
-    HttpResult r; 
-    r.SetSuccess(false);
-    std::string s = "Failed to send request to server " + host + ":" +
-      ToString(port);
-    r.SetErrorString(s);
-    return r;
+    result->SetSuccess(false);
+    std::string s = "Failed to send request to server " + host + ":" + ToString(port);
+    result->SetErrorString(s);
+    return false;
   }
 
-  HttpResult r; 
-  r.SetSuccess(true);
+  result->SetSuccess(true);
   int numBytes = 0;
 
  /* read the socket until its clear then exit */
@@ -432,7 +422,9 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 #elif defined(GEKKO)
   while ( (bufsize = net_read(sockid, buffer, BUF_SIZE - 1))) 
 #else
-  while ( (bufsize = read(sockid, buffer, BUF_SIZE - 1))) 
+  // TODO Try recv
+  //while ( (bufsize = read(sockid, buffer, BUF_SIZE - 1))) 
+  while ( (bufsize = recv(sockid, buffer, BUF_SIZE - 1, 0))) 
 #endif
   {
 #ifdef HTTP_DEBUG
@@ -444,7 +436,7 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 #ifdef HTTP_DEBUG
     std::cout << "Appending " << bufsize << " bytes..\n";
 #endif
-    r.AppendData(buffer, bufsize);
+    result->AppendData(buffer, bufsize);
 
     numBytes += bufsize;
   }
@@ -463,7 +455,7 @@ std::cout << "\n\n\n***** Total bytes Read: " << numBytes <<  "\n";
   close(sockid);
 #endif
 
-  return r; // Say what, surely could be more efficient?!!
+  return true;
 }
 #endif
 
@@ -563,9 +555,10 @@ std::cout << "Sending request:\n" << request << "\n";
 }
 #endif
 
-HttpResult HttpClient::Get(
+bool HttpClient::Get(
   const std::string& url, 
-  HttpClient::HttpMethod m)
+  HttpClient::HttpMethod m,
+  HttpResult* result)
 {
   AMJU_CALL_STACK;
 
@@ -580,11 +573,11 @@ std::cout << "Server: " << host << "\n";
 std::cout << "Port: " << port << "\n";
 
 #ifdef USE_METALSHELL_CODE
-  return MetalshellGet(m, path, host, port);
+  return MetalshellGet(m, path, host, port, result);
 #endif
 
 #ifdef USE_AMJU_CODE
-  return AmjuGet(m, path, host, port);
+  return AmjuGet(m, path, host, port, result);
 #endif
 }
  
