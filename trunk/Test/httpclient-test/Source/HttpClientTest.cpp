@@ -44,12 +44,16 @@ Added to repository
 #include <unistd.h> // sleep()
 #endif
 
+#include <HostInfo.h>
+#include <DownloadReq.h>
+#include <StringUtils.h>
 #include "AmjuFinal.h"
 
 #define TEST_HTTP_CLIENT_GET
 //#define TEST_HTTP_CLIENT_POST
 //#define TEST_HTTP_REQ
 //#define TEST_ONLINE_REQ_MAN
+#define TEST_DOWNLOAD_REQ
 
 using namespace Amju;
 
@@ -152,9 +156,40 @@ void TestOnlineReq(const std::string& url)
   }
 }
 
+void TestDownloadReq(const std::string& url, const std::string& filename)
+{
+  OnlineReqManager rm;
+  DownloadReq* pReq = new DownloadReq(filename, url, HttpClient::GET, "download req");
+  rm.AddReq(pReq);
+  while (true)
+  {
+    rm.Update();
+    std::cout << ".";
+    std::cout.flush();
+#if defined (MACOSX) || defined (GEKKO)
+    sleep(1);
+#else
+    Sleep(1000);
+#endif
+  }
+}
+
 int main(int argc, char** argv)
 {
   AMJU_CALL_STACK;
+
+  InfoVec vec;
+  if (GetHostInfo(&vec))
+  {
+    for (unsigned int i = 0; i < vec.size(); i++)
+    {
+      std::cout << ToString(vec[i]) << "\n";
+    }
+  }
+  else
+  {
+    std::cout << "Failed to get host info.\n";
+  }
 
 #ifdef GEKKO
   AmjuGL::SetImpl(new AmjuGLGCubeConsole);
@@ -179,7 +214,8 @@ int main(int argc, char** argv)
 //  TestGet(url);
 //  TestPost(url);
 //  TestHttpReq(url);
-  TestOnlineReq(url);
+//  TestOnlineReq(url);
+  TestDownloadReq(url, StripPath(url));
 
   PAUSE;
   return 0;
