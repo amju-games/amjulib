@@ -166,7 +166,8 @@ void HttpReq::HttpReqWorker::Work()
 std::cout << "**WORK** Before Get, url: " << m_url.c_str() << "\n";
 #endif
 
-  HttpResult res = hc.Get(m_url, m_method);
+  HttpResult res;
+  hc.Get(m_url, m_method, &res);
 
 #ifdef HTTP_REQ_DEBUG
 std::cout << "**WORK** After Get\n";
