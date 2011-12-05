@@ -75,6 +75,9 @@
 #pragma warning(disable: 4786)
 #endif
 
+// j.c.
+#define _XMLPARSER_NO_MESSAGEBOX_
+
 #include "AmjuFirst.h"
 #ifndef _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_DEPRECATE
@@ -220,7 +223,6 @@ char myIsTextUnicode(const void *b, int len) { return FALSE; }
     }
     #else
     char myIsTextUnicode(const void *b,int l) { return (char)IsTextUnicode((CONST LPVOID)b,l,NULL); };
-  AMJU_CALL_STACK;
 
     #endif
 #endif
@@ -323,12 +325,20 @@ char myIsTextUnicode(const void *b, int len) { return FALSE; }
     #else
         FILE *_tfopen(XMLCSTR filename,XMLCSTR mode) { return fopen(filename,mode); }
         int _tcslen(XMLCSTR c)   { return strlen(c); }
+
+#ifdef WIN32 // j.c.
+        int _tcsnicmp(XMLCSTR c1, XMLCSTR c2, int l) { return _strnicmp(c1,c2,l);}
+        int _tcsicmp(XMLCSTR c1, XMLCSTR c2) { return _stricmp(c1,c2); }
+#else // j.c.
         int _tcsnicmp(XMLCSTR c1, XMLCSTR c2, int l) { return strncasecmp(c1,c2,l);}
         int _tcsicmp(XMLCSTR c1, XMLCSTR c2) { return strcasecmp(c1,c2); }
+#endif // j.c.
         XMLSTR _tcsstr(XMLCSTR c1, XMLCSTR c2) { return (XMLSTR)strstr(c1,c2); }
         XMLSTR _tcscpy(XMLSTR c1, XMLCSTR c2) { return (XMLSTR)strcpy(c1,c2); }
     #endif
+#ifndef WIN32 // j.c.
     int _strnicmp(const char *c1,const char *c2, int l) { return strncasecmp(c1,c2,l);}
+#endif // j.c.
 #endif
 
 /////////////////////////////////////////////////////////////////////////
