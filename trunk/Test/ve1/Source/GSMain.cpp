@@ -132,10 +132,10 @@ void GSMain::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
-  const float NEAR = 1.0f;
-  const float FAR = 3000.0f;
+  const float NEAR_PLANE = 1.0f;
+  const float FAR_PLANE = 3000.0f;
   float aspect = 1.3f;
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
+  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
