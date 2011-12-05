@@ -13,6 +13,9 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/glext.h>
+#ifdef AMJU_USE_GLUT
+#include <GLUT/glut.h>
+#endif
 #endif // MACOSX
 
 #ifdef WIN32
@@ -23,6 +26,9 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #include "GL/glew.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
+#ifdef AMJU_USE_GLUT
+#include <gl/glut.h>
+#endif
 #endif // WIN32
 
 #ifdef IPHONE
