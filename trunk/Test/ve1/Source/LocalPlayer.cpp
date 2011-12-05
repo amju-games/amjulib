@@ -3,12 +3,17 @@
 namespace Amju
 {
 const char* LocalPlayer::TYPENAME = "local-player";
+  
+static LocalPlayer* localplayer = 0;
 
 LocalPlayer* GetLocalPlayer()
 {
-  // TODO
-  static LocalPlayer* lp = new LocalPlayer;
-  return lp;
+  return localplayer;
+}
+
+LocalPlayer::LocalPlayer()
+{
+  localplayer = this;
 }
 
 }
