@@ -28,6 +28,7 @@ std::string MakeUrl(Task t)
 
 
   // TODO Authentication, player ID, session ID, etc.
+  s += "?session=1";
 
   return s;
 }
