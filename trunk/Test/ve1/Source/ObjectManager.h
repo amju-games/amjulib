@@ -17,13 +17,19 @@ struct Object : public RefCounted
   int m_owner;
   std::string m_type;
   std::string m_assetlist;
-// ??  bool m_created; // true if this object has now been created
+  std::string m_datafile;
+ 
+  bool m_datafileLocal;
+  bool m_assetsLocal;
 
-  Object(int id, int owner, const std::string& type, const std::string& assetlist) :
-    m_id(id), m_owner(owner), m_type(type), m_assetlist(assetlist)
+  Object(int id, int owner, const std::string& type, const std::string& assetlist, const std::string& datafile) :
+    m_id(id), m_owner(owner), m_type(type), m_assetlist(assetlist), m_datafile(datafile), 
+    m_datafileLocal(false), m_assetsLocal(false)
   {}  
 
   void Load();
+  void GetDatafile();
+  void OnDatafileDownloaded();
 };
 
 typedef RCPtr<Object> PObject;
