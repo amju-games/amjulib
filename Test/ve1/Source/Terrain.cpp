@@ -4,10 +4,19 @@
 #include <AmjuGL.h>
 #include "Ve1SceneGraph.h"
 #include <SceneMesh.h>
+#include <GameObjectFactory.h>
+#include <File.h>
  
 namespace Amju
 {
 static Terrain* terrain = 0;
+
+GameObject* CreateTerrain()
+{
+  return new Terrain;
+}
+
+static bool registered = TheGameObjectFactory::Instance()->Add(Terrain::TYPENAME, CreateTerrain);
 
 Terrain* Terrain::GetTerrain()
 {
@@ -31,10 +40,19 @@ Terrain::Terrain()
 
 bool Terrain::Load(File* f)
 {
-  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("terrain.obj");
+  std::string s;
+  if (!f->GetDataLine(&s))
+  {
+std::cout << "Expected obj name";
+    return false;  
+  }
+
+std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
+
+  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(s);
   if (!mesh)
   {
-std::cout << "Failed to load terrain mesh!\n";
+std::cout << "Terrain load: Failed to load terrain mesh " << s << "\n";
     return false; 
   }
 
@@ -42,7 +60,10 @@ std::cout << "Failed to load terrain mesh!\n";
   tsn->SetMesh(mesh);
 
   // Add Terrain to Scene Graph
-  GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, tsn);
+  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  root->AddChild(tsn);
+
+std::cout << "Terrain load: NICE! Created terrain object\n";
 
   return true;
 }
@@ -61,11 +82,11 @@ void Terrain::Update()
 {
 }
 
-const char* Terrain::TYPE_NAME = "terrain";
+const char* Terrain::TYPENAME = "terrain";
 
 const char* Terrain::GetTypeName() const
 {
-  return TYPE_NAME;
+  return TYPENAME;
 }
 
 Vec3f Terrain::GetMousePos(const LineSeg& seg)
