@@ -21,7 +21,7 @@ public:
   virtual void Update();
   virtual bool Load(File*);
 
-  static const char* TYPE_NAME;
+  static const char* TYPENAME;
   virtual const char* GetTypeName() const;
   // Load() ..??
 
