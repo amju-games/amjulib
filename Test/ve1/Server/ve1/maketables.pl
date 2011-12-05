@@ -71,6 +71,25 @@ END
   print "Created object table! $sql\n<br>\n";
 }
 
+sub create_table_objectpos()
+{
+  my $sql = <<END;
+
+CREATE TABLE `objectpos`
+(`id` INT NOT NULL,
+`x` FLOAT NOT NULL, 
+`y` FLOAT NOT NULL, 
+`z` FLOAT NOT NULL, 
+PRIMARY KEY (`id`),
+FOREIGN KEY (`id`) REFERENCES object(`id`) 
+) ENGINE = MYISAM;
+END
+
+  update_or_insert($sql);
+
+  print "Created object table! $sql\n<br>\n";
+}
+
 sub create_tables()
 {
   print "Creating tables for VE1!\n";
@@ -83,6 +102,9 @@ sub create_tables()
 
   drop_table("objectstate");
   create_table_objectstate();
+
+  drop_table("objectpos");
+  create_table_objectpos();
 
   print "<br><br>Creating initial data...<br>\n";
 
