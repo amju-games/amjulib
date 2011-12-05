@@ -36,10 +36,44 @@ typedef RCPtr<Object> PObject;
 
 inline bool operator<(const PObject& o1, const PObject& o2)
 {
-  if (o1->m_id < o2->m_id) return true;
-  if (o1->m_owner < o2->m_owner) return true;
-  if (o1->m_type < o2->m_type) return true;
-  if (o1->m_assetlist < o2->m_assetlist) return true;
+  if (o1->m_id < o2->m_id)
+  {
+    return true;
+  }
+  else if (o1->m_id > o2->m_id)
+  {
+    return false;
+  }
+
+  if (o1->m_owner < o2->m_owner)
+  {
+    return true;
+  }
+  else if (o1->m_owner > o2->m_owner)
+  {
+    return false;
+  }
+
+  if (o1->m_type < o2->m_type)
+  {
+    return true;
+  }
+  else if (o1->m_type > o2->m_type)
+  {
+    return false;
+  }
+
+  if (o1->m_assetlist < o2->m_assetlist)
+  {
+    return true;
+  }
+  /*
+  else if (o1->m_assetlist > o2->m_assetlist)
+  {
+    return false;
+  }
+  */
+
   return false;
 }
 
@@ -115,7 +149,16 @@ typedef RCPtr<Asset> PAsset;
 
 inline bool operator<(const PAsset& a1, const PAsset& a2)
 {
-  if (a1->m_name < a2->m_name) return true;
+  if (a1->m_name < a2->m_name)
+  {
+    return true;
+  }
+  /*
+  else if (a1->m_name > a2->m_name)
+  {
+    return false;
+  }
+  */
   return false;
 }
 
