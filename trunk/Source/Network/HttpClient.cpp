@@ -164,7 +164,8 @@ const unsigned char* HttpResult::GetData() const
 
 std::string HttpResult::GetString() const
 {
-  return std::string((const char*)GetData());
+  return std::string((const char*)m_data.data(), 
+    (const char*)m_data.data() + m_data.size());
 }
 
 bool HttpResult::GetSuccess() const
@@ -418,7 +419,7 @@ std::cout << "METALSHELL IMPLEMENTATION\n";
 
  /* read the socket until its clear then exit */
 #if defined(WIN32)
-  while ( (bufsize = recv(sockid, buffer, BUF_SIZE - 1, 0))) 
+  while ( (bufsize = recv(sockid, (char*)buffer, BUF_SIZE - 1, 0))) 
 #elif defined(GEKKO)
   while ( (bufsize = net_read(sockid, buffer, BUF_SIZE - 1))) 
 #else
