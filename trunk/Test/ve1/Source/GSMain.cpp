@@ -8,6 +8,7 @@
 #include "Ve1SceneGraph.h"
 #include "LocalPlayer.h"
 #include "Ve1OnlineReqManager.h"
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -41,7 +42,10 @@ public:
 
     // TODO Check for success/failure of request
 std::cout << "Got response from server, moving local player to requested pos...\n";
-    GetLocalPlayer()->MoveTo(m_requestedPos);
+    if (GetLocalPlayer())
+    {
+      GetLocalPlayer()->MoveTo(m_requestedPos);
+    }
   }
 
 private:
@@ -51,23 +55,17 @@ private:
 GSMain::GSMain()
 {
   m_moveRequest = false;
-
-
 }
 
 void GSMain::Update()
 {
   GSBase::Update();
 
-  // TODO Update all GOs
-  //GetLocalPlayer()->Update();
-
   TheGame::Instance()->UpdateGameObjects();
 }
 
 void GSMain::DoMoveRequest()
 {
-
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
 
@@ -110,19 +108,47 @@ void GSMain::DoMoveRequest()
       const std::string name = selectedObj->GetTypeName();
       std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
     }
-    else
+    else if (GetLocalPlayer())
     {
-      std::cout << "Ground clicked...\n";
+std::cout << "Ground clicked...\n";
       Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
-      std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-      TheOnlineReqManager::Instance()->AddReq(new MoveReq(MakeUrl(MOVE_REQ), pos), 1);
+      std::string url = MakeUrl(MOVE_REQ);
+      url += "&obj_id=";
+      url += ToString(GetLocalPlayer()->GetId());
+      url += "&x=" + ToString(pos.x); 
+      url += "&y=" + ToString(pos.y); 
+      url += "&z=" + ToString(pos.z); 
+      TheOnlineReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
     }
 }
 
 void GSMain::Draw()
 {
-  GSBase::Draw();
+/////  GSBase::Draw();
+  AmjuGL::SetClearColour(Colour(1, 1, 0, 1));
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+  AmjuGL::SetIdentity();
+  const float FOVY = 60.0f;
+  const float NEAR = 1.0f;
+  const float FAR = 3000.0f;
+  float aspect = 1.3f;
+  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  AmjuGL::SetIdentity();
+
+  // TODO Super simple camera
+  if (GetLocalPlayer())
+  {
+    const Vec3f& pos = GetLocalPlayer()->GetPos();
+
+//std::cout << "Player pos: " << pos.x << " " << pos.y << " " << pos.z << "\n";
+
+    AmjuGL::LookAt(pos.x, pos.y + 200.0f, pos.z + 200.0f,  pos.x, pos.y, pos.z,  0, 1, 0);
+  }
 
   GetVe1SceneGraph()->Draw();
 
@@ -147,8 +173,6 @@ void GSMain::OnActive()
 
   // Objects are loaded by ObjectManager and added to scene graph.
 
-  // Load Player, add to scene graph 
-  GetLocalPlayer()->Init();
 }
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
