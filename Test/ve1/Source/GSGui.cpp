@@ -1,5 +1,6 @@
 #include "GSGui.h"
 #include <AmjuGL.h>
+//#include <CursorManager.h>
 
 namespace Amju
 {
@@ -27,7 +28,7 @@ void GSGui::Draw2d()
     m_gui->Draw();
   }
 
-  TheCursorManager::Instance()->Draw();
+//  TheCursorManager::Instance()->Draw();
 }
 
 void GSGui::OnActive()

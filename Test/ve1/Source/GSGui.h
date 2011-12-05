@@ -1,7 +1,6 @@
 #ifndef GS_GUI_H_INCLUDED
 #define GS_GUI_H_INCLUDED
 
-#include <Singleton.h>
 #include "GSBase.h"
 #include <GuiElement.h>
 
@@ -9,9 +8,8 @@ namespace Amju
 {
 class GSGui : public GSBase
 {
+protected:
   GSGui();
-  friend class Singleton<GSGui>;
-
 public:
   virtual void Update();
   virtual void Draw();
@@ -24,6 +22,5 @@ public:
 protected:
   PGuiElement m_gui;
 };
-typedef Singleton<GSGui> TheGSGui;
 } // namespace
 #endif
