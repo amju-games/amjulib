@@ -146,6 +146,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp" />
@@ -156,6 +163,7 @@
     <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Skin.cpp" />
     <ClCompile Include="..\..\..\Source\Collision\SAP.cpp" />
+    <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp" />
     <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
@@ -224,9 +232,12 @@
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
-    <ClCompile Include="..\..\..\Source\Utils\SchAssert.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Sign.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Unproject.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Variable.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlParser2.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\adler32.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\compress.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\crc32.c" />
@@ -327,6 +338,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h" />
     <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h" />
@@ -337,6 +355,7 @@
     <ClInclude Include="..\..\..\Source\Anim\Skeleton.h" />
     <ClInclude Include="..\..\..\Source\Anim\Skin.h" />
     <ClInclude Include="..\..\..\Source\Collision\SAP.h" />
+    <ClInclude Include="..\..\..\Source\Community\DownloadReq.h" />
     <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
@@ -417,11 +436,14 @@
     <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h" />
     <ClInclude Include="..\..\..\Source\Utils\Pause.h" />
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h" />
-    <ClInclude Include="..\..\..\Source\Utils\schassert.h" />
     <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h" />
     <ClInclude Include="..\..\..\Source\Utils\Sign.h" />
     <ClInclude Include="..\..\..\Source\Utils\Singleton.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Unproject.h" />
     <ClInclude Include="..\..\..\Source\Utils\Variable.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlParser2.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlUtils.h" />
     <ClInclude Include="..\..\..\Source\Utils\Zlib\crc32.h" />
     <ClInclude Include="..\..\..\Source\Utils\Zlib\deflate.h" />
     <ClInclude Include="..\..\..\Source\Utils\Zlib\inffast.h" />

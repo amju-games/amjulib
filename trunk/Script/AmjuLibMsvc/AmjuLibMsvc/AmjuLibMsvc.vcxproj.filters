@@ -109,6 +109,9 @@
     <Filter Include="Geom\Mgc">
       <UniqueIdentifier>{7bd90580-ff3b-49b6-9072-5090981af2d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Xml">
+      <UniqueIdentifier>{e71a5a40-f948-4867-8609-04c9b442503e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -208,9 +211,6 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\SchAssert.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Sign.cpp">
@@ -636,6 +636,42 @@
     <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp">
       <Filter>TimeUtils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp">
+      <Filter>Community</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlParser2.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlUtils.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Unproject.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -762,9 +798,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Utils\schassert.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h">
@@ -1186,6 +1219,42 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h">
       <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Community\DownloadReq.h">
+      <Filter>Community</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlParser2.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlUtils.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Unproject.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
