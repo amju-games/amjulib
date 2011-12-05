@@ -10,6 +10,8 @@
 #include <File.h>
 #include <Game.h>
 #include <GameObjectFactory.h>
+#include "Player.h"
+#include "LocalPlayer.h"
 
 #define XML_DEBUG
 
@@ -23,30 +25,114 @@ std::ostream& operator<<(std::ostream& os, const Object& obj)
   return os << obj.m_id << " (" << obj.m_type << ")";
 }
 
-void Object::Load()
+class DatafileDownloadReq : public DownloadReq
 {
-  std::cout << "TODO Loading object " << *this << "\n";
-  // TODO
+public:
+  DatafileDownloadReq(Object* obj, const std::string& url) : 
+    DownloadReq(obj->m_datafile, url, HttpClient::GET, "data file download req"), 
+    m_obj(obj) {}
 
-  // Create new object, load it, add to Game
-  GameObject* go = TheGameObjectFactory::Instance()->Create(m_type);
-  if (go)
+  virtual void OnDownloaded()
   {
-    go->SetId(m_id);
-    // TODO This is a bit of a problem. With Level files, there is a nice File* to give the object.
-    File f;
-    //if (!f.OpenRead())
-    //{
-    //}
+    m_obj->OnDatafileDownloaded();
+  }
 
-    if (go->Load(&f))
+private:
+  Object* m_obj;
+};
+
+void Object::OnDatafileDownloaded()
+{
+std::cout << "Object " << *this << ":  data file downloaded, trying Load...\n";
+
+  m_datafileLocal = true;
+  Load(); // ok if assets not downloaded yet
+}
+
+void Object::GetDatafile()
+{
+std::cout << "Object checking for data file " << m_datafile << "...\n";
+  if (FileExists(m_datafile))
+  {
+std::cout << " data file is local, yay!\n";
+    m_datafileLocal = true;
+  }
+  else
+  {
+std::cout << " need to download it...\n";
+    OnlineReq* datafiledownloadreq = new DatafileDownloadReq(this, MakeDownloadUrl(m_datafile));
+    if (TheOnlineReqManager::Instance()->AddReq(datafiledownloadreq, MAX_CONCURRENT_DOWNLOADS))
     {
-      TheGame::Instance()->AddGameObject(go);
-std::cout << "Successfully added object to game! " << *this << "\n";
     }
     else
     {
-std::cout << "Failed to load game object " << *this << "\n";
+std::cout << " failed to create download req\n";
+    }
+  }
+}
+
+void Object::Load()
+{
+  std::cout << "Loading object " << *this << "\n";
+
+  if (!m_datafileLocal)
+  {
+    std::cout << "Object load: waiting for data file " << m_datafile << "\n";
+    return;
+  }
+
+  if (!m_assetsLocal)
+  {
+    std::cout << "Object load: " << *this << " got data file, waiting for assets\n";
+    return;
+  }
+
+  // Create new object, load it, add to Game
+  PGameObject go;
+
+  // Check if we are creating a player - could be local or non-local
+  if (m_type == Player::TYPENAME)
+  {
+    // If owner ID matches logged in user ID, create a LocalPlayer, else a Player.
+    // TODO
+    go = new LocalPlayer;
+  }
+  else
+  {
+    go = TheGameObjectFactory::Instance()->Create(m_type);
+  }
+
+  if (go)
+  {
+    go->SetId(m_id);
+
+    if (m_datafile.empty())
+    {
+std::cout << "Object load: no data file needed for " << *this << "\n";
+      TheGame::Instance()->AddGameObject(go);
+    }
+    else
+    {
+      File f(true, File::STD); // not a glue file 
+    
+      if (f.OpenRead(m_datafile))
+      {
+std::cout << "Object load: Opened file " << m_datafile << " ok...\n";
+
+        if (go->Load(&f))
+        {
+          TheGame::Instance()->AddGameObject(go);
+std::cout << "Object load: Successfully added object to game! " << *this << "\n";
+        }
+        else
+        {
+std::cout << "Object load: Failed to load game object " << *this << "\n";
+        }
+      }
+      else
+      {
+std::cout << "Object load: no data file " << m_datafile << "\n";
+      }
     }
   }
   else
@@ -69,17 +155,19 @@ public:
     //  then create the new object locally.
 
 std::cout << "Got response to object check request!\n";
+    HttpResult res = GetResult();
 
-    if (!GetResult().GetSuccess())
+    if (!res.GetSuccess())
     {
-std::cout << "OH NO FAIL! " << GetResult().GetErrorString() << "\n";
+std::cout << "OH NO FAIL! " << res.GetErrorString() << "\n";
       return; // TODO Error state
     }
 
-//std::cout << GetResult().GetString() << "\n";
+    std::string str = res.GetString();
+std::cout << "Object check req result: " << str << "\n";
 
     // Parse XML, create Object and add to ObjectManager
-    PXml xml = ParseXml(GetResult().GetString().c_str());
+    PXml xml = ParseXml(str.c_str());
 
     // Format of XML:
     // <objs>            <- Child(0)
@@ -112,14 +200,15 @@ std::cout << "Obj " << i << ": ";
         int id = atoi(obj.getChildNode(0).getText());
         std::string type = obj.getChildNode(1).getText();
         std::string assetfile = obj.getChildNode(2).getText();
-        int owner = atoi(obj.getChildNode(3).getText());
+        std::string datafile = obj.getChildNode(3).getText();
+        int owner = atoi(obj.getChildNode(4).getText());
 
 #ifdef XML_DEBUG
 std::cout << " ID: " << id << ": ";
 std::cout << " Type: " << type << "\n";
 #endif
 
-        TheObjectManager::Instance()->AddObject(new Object(id, owner, type, assetfile));
+        TheObjectManager::Instance()->AddObject(new Object(id, owner, type, assetfile, datafile));
       }
     }
     else
@@ -205,6 +294,7 @@ std::cout << "All assets loaded for " << m_name << " so loading all waiting obje
     for (WaitingObjs::iterator it = m_waitingObjs.begin(); it != m_waitingObjs.end(); ++it)
     {
       Object* obj = *it;
+      obj->m_assetsLocal = true;
       std::cout << " ..loading " << *obj << "\n";
       obj->Load();
     }
@@ -229,6 +319,7 @@ std::cout << "Asset list " << m_name << " exists locally! Loading it...\n";
       {
         Assert(m_waitingObjs.empty());
 std::cout << " - All assets are local too, so loading object " << *obj << "...\n";
+        obj->m_assetsLocal = true;
         obj->Load();
       }
     }
@@ -258,6 +349,7 @@ std::cout << "Asset list " << m_name << " is loaded, waiting for all assets...\n
 
   case AMJU_AL_ALL_ASSETS_LOADED:
 std::cout << "All assets loaded for " << m_name << " so loading object " << *obj << "\n";
+    obj->m_assetsLocal = true;
     obj->Load();
     return;
   }
@@ -287,6 +379,7 @@ std::cout << "All assets loaded for " << m_name << " so loading all waiting obje
     for (WaitingObjs::iterator it = m_waitingObjs.begin(); it != m_waitingObjs.end(); ++it)
     {
       Object* obj = *it;
+      obj->m_assetsLocal = true;
       std::cout << " ..loading " << *obj << "\n";
       obj->Load();
     }
@@ -314,8 +407,16 @@ void Asset::AddList(AssetList* assetlist)
     else
     {
       // Create download req
-      OnlineReq* assetdownloadreq = new AssetDownloadReq(this, MakeDownloadUrl(this->m_name));
-      TheOnlineReqManager::Instance()->AddReq(assetdownloadreq);
+std::cout << "Creating request to download this file: " << m_name << "\n";
+      OnlineReq* assetdownloadreq = new AssetDownloadReq(this, MakeDownloadUrl(m_name));
+      if (TheOnlineReqManager::Instance()->AddReq(assetdownloadreq, MAX_CONCURRENT_DOWNLOADS))
+      {
+std::cout << "..request is pending...\n";
+      }
+      else
+      {
+std::cout << "..oh no, the request failed :-(\n";
+      }
       m_state = AMJU_ASSET_DOWNLOADING;
     }
     break;
@@ -393,12 +494,15 @@ std::cout << "Creating new asset list " << filename << "\n";
   }
   Assert(assetlist);
 
+  // Object checks for data file, downloading if necessary.
+  obj->GetDatafile();
+
   assetlist->AddObject(obj);
 }
 
 void ObjectManager::Update()
 {
-  static const float OBJECT_CHECK_PERIOD = 5.0f; // seconds, TODO CONFIG
+  static const float OBJECT_CHECK_PERIOD = 1.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
   // TODO Get list of all objects deleted since last check.
@@ -412,7 +516,7 @@ void ObjectManager::Update()
 std::cout << "It's time to create a new object check req...\n";
 
   // TODO TEMP TEST
-  m_elapsed = -999990;
+  m_elapsed = -9999999.0f;
   // Create request, add to OnlineReqManager
   std::string url = MakeUrl(OBJECT_CHECK_REQ);
 std::cout << "URL: " << url << "\n";
