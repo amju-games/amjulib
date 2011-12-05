@@ -1,0 +1,7 @@
+// VE1 downloadable object data
+// version
+1
+// No obj ID
+// mesh data
+floor-plane1.obj
+
