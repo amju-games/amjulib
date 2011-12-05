@@ -3,6 +3,7 @@
 
 #include <Singleton.h>
 #include "GSBase.h"
+#include "GSGui.h"
 
 namespace Amju 
 {
