@@ -1,9 +1,8 @@
 #include <iostream>
 #include "ShadowMapOpenGL2.h"
-#include <OpenGL.h>
-#include <GLUT/glut.h> // TODO
+#include "OpenGL.h"
 #include <stdlib.h>
-#include <GLShader.h>
+#include "GLShader.h"
 #include <math.h>
 #include <Screen.h>
 
