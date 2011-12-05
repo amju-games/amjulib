@@ -26,10 +26,10 @@ sub showobjects()
   $query->execute;
 
   print "<objs>\n";
-  while (my ($id, $type, $assetfile, $owner, $createtime) = $query->fetchrow_array)
+  while (my ($id, $type, $assetfile, $datafile, $owner, $createtime) = $query->fetchrow_array)
   {
     print "<obj>";
-    print "<id>$id</id> <type>$type</type> <assetfile>$assetfile</assetfile> <owner>$owner</owner> <createtime>$createtime</createtime>";
+    print "<id>$id</id> <type>$type</type> <assetfile>$assetfile</assetfile> <datafile>$datafile</datafile> <owner>$owner</owner> <createtime>$createtime</createtime>";
     print "</obj>\n";
   }
   print "</objs>\n";
