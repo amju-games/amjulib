@@ -8,10 +8,11 @@ namespace Amju
 class LocalPlayer : public Player
 {
 public:
+  LocalPlayer();
+ 
   static const char* TYPENAME;
 
   virtual const char* GetTypeName() const { return TYPENAME; }
-
  
 };
 
