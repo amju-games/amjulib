@@ -13,7 +13,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include <OpenGL/gl.h>
+#include "OpenGL.h"
 #include "showbuffer.h"
 
 
@@ -49,7 +49,7 @@ ShowDepthBuffer( GLsizei winWidth, GLsizei winHeight,
    /* Map Z values from [zBlack, zWhite] to gray levels in [0, 1] */
    /* Not using glPixelTransfer() because it's broke on some systems! */
    if (zBlack != 0.0 || zWhite != 1.0) {
-      GLfloat scale = 1.0 / (zWhite - zBlack);
+      GLfloat scale = 1.0f / (zWhite - zBlack);
       GLfloat bias = -zBlack * scale;
       int n = winWidth * winHeight;
       int i;

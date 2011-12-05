@@ -16,6 +16,9 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
+#ifdef WIN32
+#define _USE_MATH_DEFINES
+#endif
 #include <math.h>
 
 class VECTOR3D

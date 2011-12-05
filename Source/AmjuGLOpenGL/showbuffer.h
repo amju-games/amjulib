@@ -14,7 +14,7 @@
 #define SHOWBUFFER_H
 
 
-#include <OpenGL/gl.h>
+#include "OpenGL.h"
 
 
 

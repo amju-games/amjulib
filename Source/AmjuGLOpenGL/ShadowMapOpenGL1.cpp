@@ -1,8 +1,8 @@
 #include "ShadowMapOpenGL1.h"
+#define AMJU_USE_GLUT
 #include <AmjuGL.h> // TODO Can merrily use raw OpenGL here
 #include <Screen.h>
-#include <OpenGL.h>
-#include <GLUT/glut.h> // TODO TEMP TEST
+#include "OpenGL.h"
 #include <AmjuAssert.h>
 #include <iostream>
 #include <math.h>
