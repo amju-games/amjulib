@@ -409,9 +409,13 @@ void ObjMesh::MungeData()
       std::cout << "Removing empty group " << g.m_name << "\n";
 #endif
 		
+#ifdef WIN32
+      it = m_groups.erase(it);
+#else
       // See http://stackoverflow.com/questions/52714/stl-vector-vs-map-erase
       m_groups.erase(it);
       ++it;
+#endif
     }
     else
     {
