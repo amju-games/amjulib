@@ -1,0 +1,3 @@
+pz-ground21.png
+floor-plane1.obj
+floor-plane1.mtl
