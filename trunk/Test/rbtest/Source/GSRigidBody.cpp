@@ -15,7 +15,9 @@
 #include <SceneGraph.h>
 #include <StringUtils.h>
 #include <Timer.h>
-
+#include <ShadowMap.h>
+#include <ShadowMapOpenGL2.h> // TODO TEMP TEST
+ 
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
 
@@ -31,6 +33,11 @@ SceneGraph* GetRBSceneGraph()
     sg = new SceneGraph;
   }
   return sg;
+}
+
+void ShadowDraw()
+{
+  GetRBSceneGraph()->Draw();
 }
 
 void AddToSceneGraph(RB* rb)
@@ -71,7 +78,17 @@ void GSRigidBody::Draw()
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(1, 1, 1)); // Light direction
 
-  GetRBSceneGraph()->Draw();
+  static PShadowMap sm = 0;
+  if (!sm)
+  {
+    sm = new ShadowMapOpenGL2; //AmjuGL::CreateShadowMap();
+    sm->SetLightPos(AmjuGL::Vec3(20, 20, 20));
+    sm->Init();
+    sm->SetDrawFunc(ShadowDraw);
+  }
+  sm->Draw();
+
+//  GetRBSceneGraph()->Draw();
 }
 
 int Fps()
