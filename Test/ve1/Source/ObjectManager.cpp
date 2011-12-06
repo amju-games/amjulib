@@ -5,13 +5,12 @@
 #include <iostream>
 #include <Xml/XmlNodeInterface.h>
 #include <SafeUtils.h>
-#include <DownloadReq.h>
-#include <Directory.h>
 #include <File.h>
 #include <Game.h>
 #include <GameObjectFactory.h>
 #include "Player.h"
 #include "LocalPlayer.h"
+#include <StringUtils.h>
 
 #define XML_DEBUG
 
@@ -25,67 +24,9 @@ std::ostream& operator<<(std::ostream& os, const Object& obj)
   return os << obj.m_id << " (" << obj.m_type << ")";
 }
 
-class DatafileDownloadReq : public DownloadReq
-{
-public:
-  DatafileDownloadReq(Object* obj, const std::string& url) : 
-    DownloadReq(obj->m_datafile, url, HttpClient::GET, "data file download req"), 
-    m_obj(obj) {}
-
-  virtual void OnDownloaded()
-  {
-    m_obj->OnDatafileDownloaded();
-  }
-
-private:
-  Object* m_obj;
-};
-
-void Object::OnDatafileDownloaded()
-{
-std::cout << "Object " << *this << ":  data file downloaded, trying Load...\n";
-
-  m_datafileLocal = true;
-  Load(); // ok if assets not downloaded yet
-}
-
-void Object::GetDatafile()
-{
-std::cout << "Object checking for data file " << m_datafile << "...\n";
-  if (FileExists(m_datafile))
-  {
-std::cout << " data file is local, yay!\n";
-    m_datafileLocal = true;
-  }
-  else
-  {
-std::cout << " need to download it...\n";
-    OnlineReq* datafiledownloadreq = new DatafileDownloadReq(this, MakeDownloadUrl(m_datafile));
-    if (TheOnlineReqManager::Instance()->AddReq(datafiledownloadreq, MAX_CONCURRENT_DOWNLOADS))
-    {
-    }
-    else
-    {
-std::cout << " failed to create download req\n";
-    }
-  }
-}
-
 void Object::Load()
 {
   std::cout << "Loading object " << *this << "\n";
-
-  if (!m_datafileLocal)
-  {
-    std::cout << "Object load: waiting for data file " << m_datafile << "\n";
-    return;
-  }
-
-  if (!m_assetsLocal)
-  {
-    std::cout << "Object load: " << *this << " got data file, waiting for assets\n";
-    return;
-  }
 
   // Create new object, load it, add to Game
   PGameObject go;
@@ -139,6 +80,7 @@ std::cout << "Object load: no data file " << m_datafile << "\n";
   {
 std::cout << "Object Load: Unexpected game object type: " << m_type << "\n";
   }
+  m_loaded = true;
 }
 
 class ObjectCheckReq : public Ve1Req
@@ -220,49 +162,9 @@ std::cout << "Didn't find \"objs\" tag..\n";
   } 
 };
 
-class AssetListDownloadReq : public DownloadReq
-{
-public:
-  AssetListDownloadReq(AssetList* assetlist, const std::string& url) : 
-    DownloadReq(assetlist->m_name, url, HttpClient::GET, "asset list download req"), 
-    m_assetlist(assetlist) {}
-
-  virtual void OnDownloaded()
-  {
-    // Now can load 
-    m_assetlist->Load();
-  }
-
-private:
-  AssetList* m_assetlist;
-};
-
-class AssetDownloadReq : public DownloadReq
-{
-public:
-  AssetDownloadReq(Asset* asset, const std::string& url) : 
-    DownloadReq(asset->m_name, url, HttpClient::GET, "asset download req"), 
-    m_asset(asset) {}
-
-  virtual void OnDownloaded()
-  {
-    // Now can load 
-    m_asset->OnDownloaded();
-  }
-
-private:
-  Asset* m_asset;
-};
 
 bool AssetList::Load()
 {
-  if (!FileExists(m_name))
-  {
-    // Downloaded to wrong dir ??
-    std::cout << "Asset list: trying to Load, but file doesn't exist?!\n";
-    return false;
-  }
-
 std::cout << "Opening asset list " << m_name << "\n";
 
   File f(File::NO_VERSION, File::STD); // OS file, not glue file
@@ -274,191 +176,54 @@ std::cout << "Failed to open asset list file " << m_name << "\n";
   
   m_state = AMJU_AL_LOADING;
 
-  int lines = 0;
   std::string s;
   while (f.GetDataLine(&s))
   {
-    lines++;
-std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
-    TheObjectManager::Instance()->AddAsset(s, this);    
+    m_assetNames.push_back(s);
   }
+  int size = m_assetNames.size();
 
-std::cout << "Apparently there are " << lines << " data lines in " << m_name << "\n";
-
-  // Now check how many assets need to download. If zero, we can load the object now.
-  if (m_numAssetsDownloading == 0)
+  for (int i = 0; i < size; i++)
   {
-    m_state = AMJU_AL_ALL_ASSETS_LOADED;
-  
-std::cout << "All assets loaded for " << m_name << " so loading all waiting objects...";
-    for (WaitingObjs::iterator it = m_waitingObjs.begin(); it != m_waitingObjs.end(); ++it)
-    {
-      Object* obj = *it;
-      obj->m_assetsLocal = true;
-      std::cout << " ..loading " << *obj << "\n";
-      obj->Load();
-    }
+std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
+    const std::string s = m_assetNames[i];
+    TheObjectManager::Instance()->GetFile(s);
   }
 
   return true;
 }
 
-void AssetList::AddObject(Object* obj)
+void AssetList::Update()
 {
   switch (m_state)
   {
-  case AMJU_AL_UNKNOWN:
-    // File exists locally ?
-    if (FileExists(m_name))
-    {
-std::cout << "Asset list " << m_name << " exists locally! Loading it...\n";
-      bool loadok = Load();
-      // Not sure what to do if we fail to load asset list. Maybe re-download it. So delete local copy.
-      // TODO
-      if (m_state == AMJU_AL_ALL_ASSETS_LOADED)
-      {
-        Assert(m_waitingObjs.empty());
-std::cout << " - All assets are local too, so loading object " << *obj << "...\n";
-        obj->m_assetsLocal = true;
-        obj->Load();
-      }
-    }
-    else
-    {
-std::cout << "Asset list " << m_name << " is not local, downloading it...\n";
-      OnlineReq* assetlistdownloadreq = new AssetListDownloadReq(this, MakeDownloadUrl(this->m_name));
-      if (TheOnlineReqManager::Instance()->AddReq(assetlistdownloadreq, MAX_CONCURRENT_DOWNLOADS))
-      {
-        m_state = AMJU_AL_DOWNLOADING;
-      }
-      else
-      {
-std::cout << "Too many concurrent downloads, failed to request asset list " << m_name << " :-(\n";
-        return;
-      }
-    }
-    break;
+  case AMJU_AL_ALL_ASSETS_LOADED:
+    return;
 
-  case AMJU_AL_DOWNLOADING:
-std::cout << "Asset list " << m_name << " is downloading...\n";
+  case AMJU_AL_UNKNOWN:
+    if (TheObjectManager::Instance()->IsLocal(m_name))
+    {
+      m_state = AMJU_AL_LOADING;
+      Load();
+    }
     break;
 
   case AMJU_AL_LOADING:
-std::cout << "Asset list " << m_name << " is loaded, waiting for all assets...\n";
-    break;
-
-  case AMJU_AL_ALL_ASSETS_LOADED:
-std::cout << "All assets loaded for " << m_name << " so loading object " << *obj << "\n";
-    obj->m_assetsLocal = true;
-    obj->Load();
-    return;
+    for (AssetNames::iterator it = m_assetNames.begin(); it != m_assetNames.end(); ++it)
+    {
+      if (!TheObjectManager::Instance()->IsLocal(*it))
+      {
+        return;
+      }
+    }
+    m_state = AMJU_AL_ALL_ASSETS_LOADED;
   }
-  
-  // If we get here, we did not immediately load the object. So add object to list of waiting objs.
-  m_waitingObjs.push_back(obj);
 }
   
-void AssetList::Inc(const std::string& assetname)
-{
-  m_numAssetsDownloading++;
-
-std::cout << "AssetList " << m_name << " is waiting for " << assetname << ", count is now " << m_numAssetsDownloading << "\n";
-}
-
-void AssetList::Dec(const std::string& assetname)
-{
-  Assert(m_numAssetsDownloading > 0);
-
-  m_numAssetsDownloading--;
-
-std::cout << "AssetList " << m_name << " was waiting for " << assetname << ", has now downloaded! Count is now " << m_numAssetsDownloading << "\n";
-
-  if (m_numAssetsDownloading == 0)
-  {
-std::cout << "All assets loaded for " << m_name << " so loading all waiting objects...";
-    for (WaitingObjs::iterator it = m_waitingObjs.begin(); it != m_waitingObjs.end(); ++it)
-    {
-      Object* obj = *it;
-      obj->m_assetsLocal = true;
-      std::cout << " ..loading " << *obj << "\n";
-      obj->Load();
-    }
-  }
-}
-
-void Asset::OnDownloaded()
-{
-  for (WaitingLists::iterator it = m_waitingLists.begin(); it != m_waitingLists.end(); ++it)
-  {
-    (*it)->Dec(m_name);
-  }
-}
-
-void Asset::AddList(AssetList* assetlist)
-{
-  switch (m_state)
-  {
-  case AMJU_ASSET_UNKNOWN:
-    if (FileExists(m_name))
-    {
-      m_state = AMJU_ASSET_LOCAL;
-      return;
-    }
-    else
-    {
-      // Create download req
-std::cout << "Creating request to download this file: " << m_name << "\n";
-      OnlineReq* assetdownloadreq = new AssetDownloadReq(this, MakeDownloadUrl(m_name));
-      if (TheOnlineReqManager::Instance()->AddReq(assetdownloadreq, MAX_CONCURRENT_DOWNLOADS))
-      {
-std::cout << "..request is pending...\n";
-      }
-      else
-      {
-std::cout << "..oh no, the request failed :-(\n";
-      }
-      m_state = AMJU_ASSET_DOWNLOADING;
-    }
-    break;
-
-  case AMJU_ASSET_DOWNLOADING:
-std::cout << "Asset " << m_name << " is downloading...\n";
-    break;
-
-  case AMJU_ASSET_LOCAL:
-    // If this asset is local, do nothing. The assetlist will not have to wait for this asset.
-    return;
-
-  }
-
-  Assert(m_state == AMJU_ASSET_DOWNLOADING);
-  m_waitingLists.push_back(assetlist);
-  assetlist->Inc(m_name); // increment count of assets to wait for, name is just for debugging
-}
 
 ObjectManager::ObjectManager()
 {
   m_elapsed = 0;
-}
-
-void ObjectManager::AddAsset(const std::string& assetname, AssetList* assetlist)
-{
-  Assets::iterator it = m_assets.find(assetname);
-
-  Asset* asset = 0;
-  if (it != m_assets.end())
-  {
-    // This can happen as different asset lists can contain the same asset.
-    asset = it->second;
-  }
-  else
-  {
-    asset = new Asset(assetname);
-    m_assets[assetname] = asset;
-  }
-
-  Assert(asset);
-  asset->AddList(assetlist);
 }
 
 void ObjectManager::AddObject(PObject obj)
@@ -473,35 +238,55 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
 
   m_objects.insert(obj);
 
+  // Get the asset list and data file if we haven't already
+  GetFile(obj->m_datafile);
+
   // See if we have already got the asset list (because we already found another object of the same type, etc.)
-  const std::string& filename = obj->m_assetlist;
-  AssetLists::iterator it = m_assetLists.find(filename);
-  AssetList* assetlist = 0;
-  if (it == m_assetLists.end())
+  const std::string& assetlistname = obj->m_assetlist;
+  if (m_assetLists.find(assetlistname) == m_assetLists.end())
   {
     // Asset List not yet created
-    assetlist = new AssetList(filename);
-
-    // Add to map
-    m_assetLists[filename] = assetlist;
-
-std::cout << "Creating new asset list " << filename << "\n";
+    AssetList* assetlist = new AssetList(assetlistname);
+    m_assetLists[assetlistname] = assetlist;
+    GetFile(assetlistname);
   }
-  else
-  {
-    assetlist = it->second;
-    // File is either loaded or being downloaded
-  }
-  Assert(assetlist);
 
-  // Object checks for data file, downloading if necessary.
-  obj->GetDatafile();
-
-  assetlist->AddObject(obj);
+  // Later we check state of asset list and datafile...
 }
 
 void ObjectManager::Update()
 {
+  // Check state of files 
+  // TODO should be periodic, not every frame
+
+  for (Objects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+  {
+    Object* obj = *it;
+    if (obj->m_loaded)
+    {
+      continue;
+    }
+    const std::string& assetlistname = obj->m_assetlist;   
+    const std::string& datafilename = obj->m_datafile;
+    if (IsLocal(assetlistname) &&
+        IsLocal(datafilename))
+    {
+      AssetList* assetlist = m_assetLists[assetlistname];
+      if (assetlist->AllAssetsLoaded())
+      {
+        obj->Load();
+      }
+    }
+  }
+
+  for (AssetLists::iterator it = m_assetLists.begin(); it != m_assetLists.end(); ++it)
+  {
+    AssetList* assetlist = it->second;
+    assetlist->Update();
+  }
+
+
+
   static const float OBJECT_CHECK_PERIOD = 1.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
@@ -513,15 +298,18 @@ void ObjectManager::Update()
     return;
   }
 
-std::cout << "It's time to create a new object check req...\n";
+  m_elapsed = -9999999.0f;
+
+  std::cout << "It's time to create a new object check req...\n";
 
   // TODO TEMP TEST
-  m_elapsed = -9999999.0f;
+  
   // Create request, add to OnlineReqManager
   std::string url = MakeUrl(OBJECT_CHECK_REQ);
-std::cout << "URL: " << url << "\n";
+  std::cout << "URL: " << url << "\n";
 
-  TheOnlineReqManager::Instance()->AddReq(new ObjectCheckReq(url));
+  TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));
+
 }
 }
 
