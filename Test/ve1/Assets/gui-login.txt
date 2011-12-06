@@ -9,7 +9,7 @@ hud-comp
 2
 
 // Element type
-gui-text
+gui-text-edit
 // Element name
 text1
 // pos (coords are -1..1)
