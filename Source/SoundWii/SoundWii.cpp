@@ -35,10 +35,12 @@ bool SoundWii::PlayWav(const std::string& wavFile, float volume)
     uint32 songPos = 0;
     if (!GetGlueFile()->GetSeekBase(filename, &songPos))
     {
+#ifdef AMJU_WII_REPORT_SND
       std::string s = "SND: not in Glue File: ";
       s += filename;
       ReportError(s);
       PAUSE
+#endif
       return false;
     }
     uint32 length = GetGlueFile()->GetSize(filename);
@@ -72,10 +74,12 @@ bool SoundWii::PlaySong(const std::string& songFile)
     uint32 songPos = 0;
     if (!GetGlueFile()->GetSeekBase(filename, &songPos))
     {
+#ifdef AMJU_WII_REPORT_SND
       std::string s = "Music: not in Glue File: ";
       s += filename;
       ReportError(s);
       PAUSE
+#endif
       return false;
     }
     uint32 length = GetGlueFile()->GetSize(filename);
