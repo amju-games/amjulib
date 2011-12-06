@@ -95,7 +95,7 @@ std::cout << " expecting this mid point to be in box: x " << mid.x << " y: " << 
   //Assert(b); // clipped line seg is supposed to be within this obb
   if (!b)
   {
-std::cout << "Unexpected: mid point of clipped line not in box! WTF?!\n";
+std::cout << "Unexpected: mid point of clipped line not in box!\n";
     return false;
   }
   return true;
@@ -114,7 +114,7 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
     float pd = planes[i].Dist(p);
 //std::cout << " point-box intersection test: pd for plane " << i << " is " << pd << "\n";
 
-    if (pd > 0)
+    if (pd >= 0)
     {
       return false; // in front of this plane, so not intersecting   
     }
@@ -122,11 +122,21 @@ bool OBB3::Intersects(const Vec3f& p, Vec3f* contactNormal, float* penetrationDe
     {
       // Choose plane with min pen depth
       bestPd = pd;
-      cn = planes[i].Normal();
+      //cn = planes[i].Normal();
     }
+    // All normals contribute to overall contact normal, but if a point is very close to a plane
+    //  it contributes more. This is an idea to try to get a more realistic overall contact normal.
+    float nm = 1.0f / -pd; // or pd squared perhaps, etc., so the further we are from a plane, the
+    // less it contributes. -pd because pd is negative
+    cn += planes[i].Normal() * nm;
   }
-  *contactNormal = cn;
+
+  // Make sure penetration depth is correct now that normal is not perpendicular to any face
+  
   *penetrationDepth = -bestPd;
+  cn.Normalise();  
+
+  *contactNormal = cn;
   return true;
 }
 
