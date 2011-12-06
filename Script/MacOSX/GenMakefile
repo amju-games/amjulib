@@ -52,6 +52,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Image \
   $(AMJU)/Image/Png \
   $(AMJU)/Localise \
+  $(AMJU)/Lua \
   $(AMJU)/Main \
   $(AMJU)/Md2 \
   $(AMJU)/Mem \
