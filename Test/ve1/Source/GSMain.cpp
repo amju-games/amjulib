@@ -120,7 +120,7 @@ std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
       url += "&x=" + ToString(pos.x); 
       url += "&y=" + ToString(pos.y); 
       url += "&z=" + ToString(pos.z); 
-      TheOnlineReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
+      TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
     }
 }
 
@@ -149,6 +149,10 @@ void GSMain::Draw()
 
     AmjuGL::LookAt(pos.x, pos.y + 200.0f, pos.z + 200.0f,  pos.x, pos.y, pos.z,  0, 1, 0);
   }
+  else
+  {
+    AmjuGL::LookAt(0, 200.0f, 200.0f,  0, 0, 0,  0, 1, 0);
+  }
 
   GetVe1SceneGraph()->Draw();
 
@@ -170,10 +174,6 @@ void GSMain::OnActive()
 
   // We only want to do this if we decide to reload the world
 //  GetVe1SceneGraph()->Clear();
-
-  GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
-
-  // Objects are loaded by ObjectManager and added to scene graph.
 
 }
 

@@ -33,5 +33,12 @@ std::string MakeUrl(Task t)
   return s;
 }
 
+//bool Ve1ReqManager::AddReq(RCPtr<OnlineReq> req, int)
+//{
+//  // No-threads version
+//  req->Work();
+//  return true;
+//}
+
 }
 
