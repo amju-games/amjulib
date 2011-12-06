@@ -192,6 +192,8 @@
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
@@ -391,6 +393,8 @@
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
+    <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
+    <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
     <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
     <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />
