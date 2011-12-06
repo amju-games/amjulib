@@ -50,11 +50,11 @@ Added HttpReq to repository
 // For isolating threading issues, etc.
 //#define NO_THREAD
 
-// To be on the safe side we should use a mutex to sunch. access to
+// To be on the safe side we should use a mutex to synch. access to
 // the results.
 // But if HttpReqs are always used correctly, we shouldn't actually
 // need to lock the data.
-// The correct way to access the data is t first check IsFinished(),
+// The correct way to access the data is to first check IsFinished(),
 // and only access the other data if this returns true.
 #define HTTP_REQ_USE_MUTEX
 
@@ -86,6 +86,16 @@ HttpReq::~HttpReq()
   }
 }
 
+void HttpReq::Work()
+{
+  HttpClient hc;
+
+  HttpResult res;
+  hc.Get(m_url, m_method, &m_httpResult);
+
+  m_isFinished = true;
+}
+
 void HttpReq::CreateWorker()
 {
   AMJU_CALL_STACK;
@@ -97,7 +107,8 @@ std::cout << "NO THREAD, requesting URL: " << m_url.c_str() << "\n";
 #endif
 
   HttpClient hc;
-  HttpResult res = hc.Get(m_url, m_method);
+  HttpResult res;
+  hc.Get(m_url, m_method);
   SetResult(res);
 
 #ifdef HTTP_REQ_DEBUG
