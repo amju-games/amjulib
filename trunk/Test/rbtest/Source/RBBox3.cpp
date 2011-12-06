@@ -29,7 +29,7 @@ bool FindContact(const RBBox3& box1, const RBBox3& box2, Contact3* c)
     return false;
   }
 
-//std::cout << "Got intersection, looking for contact info...\n";
+std::cout << "Got intersection, box " << box1.GetId() << " and " << box2.GetId() << " - looking for contact info...\n";
 
   // Vertex of box1 may intersect a face of box2, or vice versa. So we call FindContact
   //  twice, swapping the parameters.
@@ -37,22 +37,18 @@ bool FindContact(const RBBox3& box1, const RBBox3& box2, Contact3* c)
   // Vert(s) from box1 inside box2 ?
   bool box1InBox2 = box1.FindContact(box2, &c1);
 
-/*
 if (box1InBox2)
 {
   std::cout << "C1 Contact normal: x: " << c1.m_contactNormal.x << " y: " << c1.m_contactNormal.y << " z: " << c1.m_contactNormal.z << "\n";
 }
-*/
 
   // Vert(s) from box2 inside box1 ?
   bool box2InBox1 = box2.FindContact(box1, &c2);
 
-/*
 if (box2InBox1)
 {
   std::cout << "C2 Contact normal: x: " << c2.m_contactNormal.x << " y: " << c2.m_contactNormal.y << " z: " << c2.m_contactNormal.z << "\n";
 }
-*/
 
   if (box1InBox2 && box2InBox1)
   {
@@ -95,8 +91,10 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
   Vec3f avgPos;
   int numPenetratingVerts = 0;
   Vec3f contactNormal;
+
   for (int i = 0; i < 8; i++)
   {
+std::cout << "Checking vert " << i << "\n";
     float pd = 0;
     Vec3f cn;
     // Intersection test, also gets contact normal and penetration depth (i.e. dist behind plane) 
@@ -104,25 +102,43 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
     {
       numPenetratingVerts++;
       avgPd += pd;
+std::cout << " yes, cn: x: " << cn.x << " y: " << cn.y << " z: " << cn.z << "\n";
+
+      // If we average the contact normal we can end up with the Zero vector.
+      // TODO How do we choose the contact normal ??
       contactNormal += cn;
+std::cout << "CN: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
       avgPos += corners[i];
     }
   }
 
+  static const float NO_NORMAL = 0.00010f;
+  // Ignore if contact normal is too small
   if (numPenetratingVerts > 0)
   {
-    avgPd /= (float)numPenetratingVerts;
-    // Get average of positions of penetrating verts, i.e. the centre of the points
-    avgPos *= (1.0f / (float)numPenetratingVerts);
-    contactNormal.Normalise();
+    if (contactNormal.SqLen() > NO_NORMAL)
+    {
+      avgPd /= (float)numPenetratingVerts;
+      // Get average of positions of penetrating verts, i.e. the centre of the points
+      avgPos *= (1.0f / (float)numPenetratingVerts);
+      contactNormal.Normalise();
 
-    c->m_pos = avgPos;
-    c->m_contactNormal = contactNormal;
-    c->m_penetrationDepth = avgPd;
-    return true;
+      c->m_pos = avgPos;
+      c->m_contactNormal = contactNormal;
+      c->m_penetrationDepth = avgPd;
+      return true;
+    }
+    else
+    {
+std::cout << "BAD CONTACT NORMAL! (Vertex in box)\n";
+std::cout << "CN: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
+    }
   }
   
   // No vertex-face intersection. Check for edge-edge intersection.
+
+std::cout << "No vertex-face intersection. Check for edge-edge intersection.\n";
+
   // Get each edge of this box. Test against box b 
   //bool Intersects(const LineSeg& e, LineSeg* clip, Vec3f* contactNormal, float* penDepth) const;
 
@@ -135,12 +151,19 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
     Vec3f cn;
     LineSeg clip;
 
-//std::cout << "Edge-box: checking edge " << i << "\n";
+std::cout << "Edge-box: checking edge " << i << "\n";
     if (b.m_obb3.Intersects(e[i], &clip, &cn, &pd))
     {
       numPenEdges++;
       avgPd += pd;
+std::cout << " yes, cn: x: " << cn.x << " y: " << cn.y << " z: " << cn.z << "\n";
+
+      // If we average the contact normal we can end up with the Zero vector.
+      // TODO How do we choose the contact normal ??
       contactNormal += cn;
+
+std::cout << "CN: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
+
       Vec3f mid = (clip.p0 + clip.p1) * 0.5f;
       avgPos += mid;
     }
@@ -148,16 +171,25 @@ bool RBBox3::FindContact(const RBBox3& b, Contact3* c) const
 
   if (numPenEdges > 0)
   {
-    float oneOver = 1.0f / (float)numPenEdges;
-    avgPd *= oneOver;
-    avgPos *= oneOver; 
-    contactNormal.Normalise();
+    if (contactNormal.SqLen() > NO_NORMAL)
+    {
+      float oneOver = 1.0f / (float)numPenEdges;
+      avgPd *= oneOver;
+      avgPos *= oneOver; 
+      contactNormal.Normalise();
 
-    c->m_pos = avgPos;
-    c->m_contactNormal = contactNormal;
-    c->m_penetrationDepth = avgPd;
-    return true;
+      c->m_pos = avgPos;
+      c->m_contactNormal = contactNormal;
+      c->m_penetrationDepth = avgPd;
+      return true;
+    }
+    else
+    {
+std::cout << "BAD CONTACT NORMAL! (edge in box)\n";
+std::cout << "CN: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
+    }
   }
+std::cout << "Nope, no edge intersections!\n";
 
   return false;
 }
@@ -200,16 +232,18 @@ void RBBox3::Draw()
 void RBBox3Collision(RBBox3* box1, RBBox3* box2)
 {
   Contact3 c;
+
   if (FindContact(*box1, *box2, &c))
   {
-//std::cout << "Box3-box3 Contact!\n";
+std::cout << "Checking boxes: " << box1->GetId() << " and " << box2->GetId() << "\n";
+std::cout << "Box3-box3 Contact!\n";
 
     // Got penetration. Move away in dir of contact normal.
     Vec3f contactNormal = c.m_contactNormal;
-/*
+
 std::cout << "Contact normal: x: " << contactNormal.x << " y: " << contactNormal.y << " z: " << contactNormal.z << "\n";
 std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " << c.m_pos.z << "\n";
-*/
+
 
     // "Resolve" penetration: bodge it by moving away in direction of
     //  contact normal, by distance <penetration depth>
