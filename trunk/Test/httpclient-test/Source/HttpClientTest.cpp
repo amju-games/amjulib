@@ -90,7 +90,8 @@ void TestGet(const std::string& url)
 
   std::cout << "Testing GET..\n";
 
-  HttpResult res = hc.Get(url, HttpClient::GET);
+  HttpResult res;
+  hc.Get(url, HttpClient::GET, &res);
 
   if (res.GetSuccess())
   {
@@ -108,7 +109,8 @@ void TestPost(const std::string& url)
 
   std::cout << "Testing POST..\n";
   
-  HttpResult res = hc.Get(url, HttpClient::POST);
+  HttpResult res;
+  hc.Get(url, HttpClient::POST, &res);
   
   if (res.GetSuccess())
   {
