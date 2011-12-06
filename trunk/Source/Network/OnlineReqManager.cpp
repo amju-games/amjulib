@@ -64,6 +64,12 @@ std::cout << "Creating new OnlineReq: " << name.c_str() << "\n";
 #endif
 }
 
+void OnlineReq::Work()
+{
+  HttpReq::Work();
+  HandleResult();
+}
+
 const char* OnlineReq::GetName() const
 {
   AMJU_CALL_STACK;

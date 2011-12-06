@@ -44,6 +44,8 @@ public:
     HttpClient::HttpMethod method, 
     const std::string& name);
 
+  virtual void Work();
+
   virtual void HandleResult() = 0;
 
   const char* GetName() const;
