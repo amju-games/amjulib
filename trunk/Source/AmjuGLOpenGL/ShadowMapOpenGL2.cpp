@@ -27,7 +27,7 @@ void loadShader()
     "    ShadowCoord = gl_TextureMatrix[7] * gl_Vertex; \n" 
     "    gl_Position = ftransform(); gl_FrontColor = gl_Color; \n"
     "} ",
- 
+
     // Fragment shader
     "uniform sampler2D ShadowMap; \n"
     "varying vec4 ShadowCoord; \n"
@@ -39,7 +39,7 @@ void loadShader()
     "    float distanceFromLight = texture2D(ShadowMap,shadowCoordinateWdivide.st).z; \n"
     "    float shadow = 1.0; \n"
     "    if (ShadowCoord.w > 0.0) \n"
-    "            shadow = distanceFromLight < shadowCoordinateWdivide.z ? 0.5 : 1.0 ; \n"
+    "            shadow = distanceFromLight < shadowCoordinateWdivide.z ? 0.2 : 1.0 ; \n"
     "    gl_FragColor =   shadow * gl_Color; \n"
     "} ");
 }
@@ -55,169 +55,122 @@ GLuint depthTextureId;
 // Use to activate/disable shadowShader
 GLhandleARB shadowShaderId;
 GLuint shadowMapUniform;
-        
+
 
 void generateShadowFBO()
 {
+  GLenum FBOstatus;
 
-        //GLfloat borderColor[4] = {0,0,0,0};
+  // Try to use a texture depth component
+  glGenTextures(1, &depthTextureId);
+  glBindTexture(GL_TEXTURE_2D, depthTextureId);
 
-        GLenum FBOstatus;
+  // GL_LINEAR does not make sense for depth texture. However, next tutorial shows usage of GL_LINEAR and PCF
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-        // Try to use a texture depth component
-        glGenTextures(1, &depthTextureId);
-        glBindTexture(GL_TEXTURE_2D, depthTextureId);
+  // Remove artefact on the edges of the shadowmap
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+  glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
-        // GL_LINEAR does not make sense for depth texture. However, next tutorial shows usage of GL_LINEAR and PCF
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-        // Remove artefact on the edges of the shadowmap
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-
-        //glTexParameterfv( GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor );
+  //glTexParameterfv( GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor );
 
   int shadowMapWidth = Screen::X() * SHADOW_MAP_RATIO;
   int shadowMapHeight = Screen::Y() * SHADOW_MAP_RATIO;
 
 
-        // No need to force GL_DEPTH_COMPONENT24, drivers usually give you the max precision if available
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapWidth, shadowMapHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
-        glBindTexture(GL_TEXTURE_2D, 0);
+  // No need to force GL_DEPTH_COMPONENT24, drivers usually give you the max precision if available
+  glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapWidth, shadowMapHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
+  glBindTexture(GL_TEXTURE_2D, 0);
 
-        // create a framebuffer object
-        glGenFramebuffersEXT(1, &fboId);
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
+  // create a framebuffer object
+  glGenFramebuffersEXT(1, &fboId);
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
 
-        // Instruct openGL that we won't bind a color texture with the currently binded FBO
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
+  // Instruct openGL that we won't bind a color texture with the currently binded FBO
+  glDrawBuffer(GL_NONE);
+  glReadBuffer(GL_NONE);
 
-        // attach the texture to FBO depth attachment point
-        glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,GL_TEXTURE_2D, depthTextureId, 0);
+  // attach the texture to FBO depth attachment point
+  glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,GL_TEXTURE_2D, depthTextureId, 0);
 
-        // check FBO status
-        FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
-        if(FBOstatus != GL_FRAMEBUFFER_COMPLETE_EXT)
-                printf("GL_FRAMEBUFFER_COMPLETE_EXT failed, CANNOT use FBO\n");
+  // check FBO status
+  FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+  if(FBOstatus != GL_FRAMEBUFFER_COMPLETE_EXT)
+    printf("GL_FRAMEBUFFER_COMPLETE_EXT failed, CANNOT use FBO\n");
 
-std::cout << "Created FBO ok\n";
+  std::cout << "Created FBO ok\n";
 
-        // switch back to window-system-provided framebuffer
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+  // switch back to window-system-provided framebuffer
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
 void setupMatrices(float position_x,float position_y,float position_z,float lookAt_x,float lookAt_y,float lookAt_z)
 {
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(45, 1.0, 10, 40000); //0.1, 1000.0);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(position_x,position_y,position_z,lookAt_x,lookAt_y,lookAt_z,0,1,0);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(45, 1.0, 10, 40000); //0.1, 1000.0);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  gluLookAt(position_x,position_y,position_z,lookAt_x,lookAt_y,lookAt_z,0,1,0);
 }
 
 void setTextureMatrix(void)
 {
-        static double modelView[16];
-        static double projection[16];
+  static double modelView[16];
+  static double projection[16];
 
-        // This is matrix transform every coordinate x,y,z
-        // x = x* 0.5 + 0.5
-        // y = y* 0.5 + 0.5
-        // z = z* 0.5 + 0.5
-        // Moving from unit cube [-1,1] to [0,1]
-        const GLdouble bias[16] = {
-                0.5, 0.0, 0.0, 0.0,
-                0.0, 0.5, 0.0, 0.0,
-                0.0, 0.0, 0.5, 0.0,
-        0.5, 0.5, 0.5, 1.0};
+  // This is matrix transform every coordinate x,y,z
+  // x = x* 0.5 + 0.5
+  // y = y* 0.5 + 0.5
+  // z = z* 0.5 + 0.5
+  // Moving from unit cube [-1,1] to [0,1]
+  const GLdouble bias[16] = 
+  {
+    0.5, 0.0, 0.0, 0.0,
+    0.0, 0.5, 0.0, 0.0,
+    0.0, 0.0, 0.5, 0.0,
+    0.5, 0.5, 0.5, 1.0
+  };
 
-        // Grab modelview and transformation matrices
-        glGetDoublev(GL_MODELVIEW_MATRIX, modelView);
-        glGetDoublev(GL_PROJECTION_MATRIX, projection);
+  // Grab modelview and transformation matrices
+  glGetDoublev(GL_MODELVIEW_MATRIX, modelView);
+  glGetDoublev(GL_PROJECTION_MATRIX, projection);
 
 
-        glMatrixMode(GL_TEXTURE);
-        glActiveTextureARB(GL_TEXTURE7);
+  glMatrixMode(GL_TEXTURE);
+  glActiveTextureARB(GL_TEXTURE7);
 
-        glLoadIdentity();
-        glLoadMatrixd(bias);
+  glLoadIdentity();
+  glLoadMatrixd(bias);
 
-        // concatating all matrice into one.
-        glMultMatrixd (projection);
-        glMultMatrixd (modelView);
+  // concatating all matrice into one.
+  glMultMatrixd (projection);
+  glMultMatrixd (modelView);
 
-        // Go back to normal matrix mode
-        glMatrixMode(GL_MODELVIEW);
+  // Go back to normal matrix mode
+  glMatrixMode(GL_MODELVIEW);
 }
-
-/*
-// During translation, we also have to maintain the GL_TEXTURE8, used in the shadow shader
-// to determine if a vertex is in the shadow.
-void startTranslate(float x,float y,float z)
-{
-        glPushMatrix();
-        glTranslatef(x,y,z);
-
-        glMatrixMode(GL_TEXTURE);
-        glActiveTextureARB(GL_TEXTURE7);
-        glPushMatrix();
-        glTranslatef(x,y,z);
-}
-
-void endTranslate()
-{
-        glPopMatrix();
-        glMatrixMode(GL_MODELVIEW);
-        glPopMatrix();
-}
-
-
-void drawObjects(void)
-{
-        // Ground
-        glColor4f(0.3f,0.3f,0.3f,1);
-        glBegin(GL_QUADS);
-        glVertex3f(-35,2,-35);
-        glVertex3f(-35,2, 15);
-        glVertex3f( 15,2, 15);
-        glVertex3f( 15,2,-35);
-        glEnd();
-
-        glColor4f(0.9f,0.9f,0.9f,1);
-
-        // Instead of calling glTranslatef, we need a custom function that also maintain the light matrix
-        startTranslate(0,4,-16);
-        glutSolidTeapot(4);
-        endTranslate();
-
-        startTranslate(0,4,-5);
-        glutSolidCube(4);
-        endTranslate();
-}
-*/
 
 void ShadowMapOpenGL2::Draw()
 {
-        //First step: Render from the light POV to a FBO, story depth values only
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,fboId); //Rendering offscreen
+  //First step: Render from the light POV to a FBO, story depth values only
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,fboId); //Rendering offscreen
 
-        //Using the fixed pipeline to render to the depthbuffer
-        glUseProgramObjectARB(0);
+  //Using the fixed pipeline to render to the depthbuffer
+  glUseProgramObjectARB(0);
 
   int shadowMapWidth = Screen::X() * SHADOW_MAP_RATIO;
   int shadowMapHeight = Screen::Y() * SHADOW_MAP_RATIO;
 
-        // In the case we render the shadowmap to a higher resolution, the viewport must be modified accordingly.
-        glViewport(0,0, shadowMapWidth, shadowMapHeight) ;
+  // In the case we render the shadowmap to a higher resolution, the viewport must be modified accordingly.
+  glViewport(0,0, shadowMapWidth, shadowMapHeight) ;
 
-        // Clear previous frame values
-        glClear( GL_DEPTH_BUFFER_BIT);
+  // Clear previous frame values
+  glClear( GL_DEPTH_BUFFER_BIT);
 
-        //Disable color rendering, we only want to write to the Z-Buffer
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+  //Disable color rendering, we only want to write to the Z-Buffer
+  glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
   // j.c. store old matrices
   glMatrixMode(GL_PROJECTION);
@@ -231,39 +184,35 @@ void ShadowMapOpenGL2::Draw()
   //Light lookAt
   float l_light[3] = {0,0,0};
 
-        setupMatrices(p_light[0],p_light[1],p_light[2],l_light[0],l_light[1],l_light[2]);
+  setupMatrices(p_light[0],p_light[1],p_light[2],l_light[0],l_light[1],l_light[2]);
 
-        // Culling switching, rendering only backface, this is done to avoid self-shadowing
-        glCullFace(GL_FRONT);
-        m_drawFunc();
+  // Culling switching, rendering only backface, this is done to avoid self-shadowing
+  glCullFace(GL_FRONT);
+  m_drawFunc();
 
-        //Save modelview/projection matrice into texture7, also add a biais
-        setTextureMatrix();
+  //Save modelview/projection matrice into texture7, also add a biais
+  setTextureMatrix();
 
 
-        // Now rendering from the camera POV, using the FBO to generate shadows
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,0);
+  // Now rendering from the camera POV, using the FBO to generate shadows
+  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,0);
 
-        glViewport(0,0, Screen::X(), Screen::Y()); //RENDER_WIDTH,RENDER_HEIGHT);
+  glViewport(0,0, Screen::X(), Screen::Y()); //RENDER_WIDTH,RENDER_HEIGHT);
 
-        //Enabling color write (previously disabled for light POV z-buffer rendering)
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+  //Enabling color write (previously disabled for light POV z-buffer rendering)
+  glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-        // Clear previous frame values
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  // Clear previous frame values
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //Using the shadow shader
-        Assert(shader);
-        shader->Begin();
-//        glUseProgramObjectARB(shadowShaderId);
-//        glUniform1iARB(shadowMapUniform,7);
+  //Using the shadow shader
+  Assert(shader);
+  shader->Begin();
 
-        shader->Set(std::string("ShadowMap"), (unsigned int)7);
+  shader->Set(std::string("ShadowMap"), (unsigned int)7);
 
-        glActiveTextureARB(GL_TEXTURE7);
-        glBindTexture(GL_TEXTURE_2D,depthTextureId);
-
-      //  setupMatrices(p_camera[0],p_camera[1],p_camera[2],l_camera[0],l_camera[1],l_camera[2]);
+  glActiveTextureARB(GL_TEXTURE7);
+  glBindTexture(GL_TEXTURE_2D,depthTextureId);
 
   glMatrixMode(GL_MODELVIEW);
   glPopMatrix();
@@ -271,34 +220,34 @@ void ShadowMapOpenGL2::Draw()
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
 
-        glCullFace(GL_BACK);
-        m_drawFunc();
-        shader->End();
+  glCullFace(GL_BACK);
+  m_drawFunc();
+  shader->End();
 
-        // j.c. we also need to do this
-         glActiveTextureARB(GL_TEXTURE0);
-         glBindTexture(GL_TEXTURE_2D,depthTextureId);
+  // j.c. we also need to do this
+  glActiveTextureARB(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D,depthTextureId);
 
-        // DEBUG only. this piece of code draw the depth buffer onscreen
+  // DEBUG only. this piece of code draw the depth buffer onscreen
 #ifdef SHOW_MAP
-         glUseProgramObjectARB(0);
-         glMatrixMode(GL_PROJECTION);
-         glLoadIdentity();
-         glOrtho(-Screen::X()/2, Screen::X()/2, -Screen::Y()/2, Screen::Y()/2,1,20);
-         glMatrixMode(GL_MODELVIEW);
-         glLoadIdentity();
-         glColor4f(1,1,1,1);
-         glActiveTextureARB(GL_TEXTURE0);
-         glBindTexture(GL_TEXTURE_2D,depthTextureId);
-         glEnable(GL_TEXTURE_2D);
-         glTranslated(0,0,-1);
-         glBegin(GL_QUADS);
-         glTexCoord2d(0,0);glVertex3f(0,0,0);
-         glTexCoord2d(1,0);glVertex3f(Screen::X()/2,0,0);
-         glTexCoord2d(1,1);glVertex3f(Screen::X()/2,Screen::Y()/2,0);
-         glTexCoord2d(0,1);glVertex3f(0,Screen::Y()/2,0);
-         glEnd();
-         glDisable(GL_TEXTURE_2D);
+  glUseProgramObjectARB(0);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(-Screen::X()/2, Screen::X()/2, -Screen::Y()/2, Screen::Y()/2,1,20);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  glColor4f(1,1,1,1);
+  glActiveTextureARB(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D,depthTextureId);
+  glEnable(GL_TEXTURE_2D);
+  glTranslated(0,0,-1);
+  glBegin(GL_QUADS);
+  glTexCoord2d(0,0);glVertex3f(0,0,0);
+  glTexCoord2d(1,0);glVertex3f(Screen::X()/2,0,0);
+  glTexCoord2d(1,1);glVertex3f(Screen::X()/2,Screen::Y()/2,0);
+  glTexCoord2d(0,1);glVertex3f(0,Screen::Y()/2,0);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
 #endif
 
 }
@@ -310,13 +259,13 @@ bool ShadowMapOpenGL2::Init()
 
   loadShader();
 
-        // This is important, if not here, FBO's depthbuffer won't be populated.
-        glEnable(GL_DEPTH_TEST);
-        glClearColor(0,0,0,1.0f);
+  // This is important, if not here, FBO's depthbuffer won't be populated.
+  glEnable(GL_DEPTH_TEST);
+  glClearColor(0,0,0,1.0f);
 
-        glEnable(GL_CULL_FACE);
+  glEnable(GL_CULL_FACE);
 
-        glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 
   return true;
 }
