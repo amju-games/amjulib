@@ -36,7 +36,7 @@ void GSBase::Draw()
 
 void GSBase::Update()
 {
-  TheOnlineReqManager::Instance()->Update();
+  TheVe1ReqManager::Instance()->Update();
 
   TheObjectManager::Instance()->Update();
 
