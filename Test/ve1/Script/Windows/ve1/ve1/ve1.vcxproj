@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0F0D3BA9-521E-44E1-8518-EFDE33AE4CCD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ve1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
+    <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
+    <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/I "../../../../../../Source/Events" 
+/I "../../../../../../Source/EventsWin32" 
+/I "../../../../../../Source/EventsSDL" 
+/I "../../../../../../Source/Utils" 
+/I "../../../../../../Source/FileUtils" 
+/I "../../../../../../Source/AmjuGL"  /I "../../../../../../Source/Network"  /I "../../../../../../Source/Thread"  /I "../../../../../../Source/Community"   
+/I "../../../../../../Source/AmjuGLOpenGL" 
+/I "../../../../../../Source/AmjuGLDX9" 
+/I "../../../../../../Source/AmjuGLDX11" 
+/I "../../../../../../Source/Mem" 
+/I "../../../../../../Source/Md2" 
+/I "../../../../../../Source/Image" 
+/I "../../../../../../Source/Geom" 
+/I "../../../../../../Source/Strings" 
+/I "../../../../../../Source/TimeUtils" 
+/I "../../../../../../Source/Game" 
+/I "../../../../../../Source/Resource" 
+/I "../../../../../../Source/Scene" 
+/I "../../../../../../Source/Obj"  
+/I "../../../../../../Source/Collision" 
+/I "../../../../../../Source/Gui" 
+/I "../../../../../../Source/Font" 
+/I "../../../../../../Source/Sound" 
+/I "../../../../../../Source/SoundSDLMixer" 
+/I "../../../../../../Source/GeomLoad" 
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Run</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy assets to run directory</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/I "../../../../../../Source/Events" 
+/I "../../../../../../Source/EventsWin32" 
+/I "../../../../../../Source/EventsSDL" 
+/I "../../../../../../Source/Utils" 
+/I "../../../../../../Source/FileUtils" 
+/I "../../../../../../Source/AmjuGL"  /I "../../../../../../Source/Network"  /I "../../../../../../Source/Thread"  /I "../../../../../../Source/Community"   
+/I "../../../../../../Source/AmjuGLOpenGL" 
+/I "../../../../../../Source/AmjuGLDX9" 
+/I "../../../../../../Source/AmjuGLDX11" 
+/I "../../../../../../Source/Mem" 
+/I "../../../../../../Source/Md2" 
+/I "../../../../../../Source/Image" 
+/I "../../../../../../Source/Geom" 
+/I "../../../../../../Source/Strings" 
+/I "../../../../../../Source/TimeUtils" 
+/I "../../../../../../Source/Game" 
+/I "../../../../../../Source/Resource" 
+/I "../../../../../../Source/Scene" 
+/I "../../../../../../Source/Obj"  
+/I "../../../../../../Source/Collision" 
+/I "../../../../../../Source/Gui" 
+/I "../../../../../../Source/Font" 
+/I "../../../../../../Source/Sound" 
+/I "../../../../../../Source/SoundSDLMixer" 
+/I "../../../../../../Source/GeomLoad" 
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Player.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1OnlineReqManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1SceneGraph.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\Animated.h" />
+    <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
+    <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
+    <ClInclude Include="..\..\..\..\Source\GSBase.h" />
+    <ClInclude Include="..\..\..\..\Source\GSGui.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
+    <ClInclude Include="..\..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Player.h" />
+    <ClInclude Include="..\..\..\..\Source\Terrain.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1OnlineReqManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft SDKs\Windows\v7.0A\Lib\WS2_32.Lib" />
+    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
+    <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
+    <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
