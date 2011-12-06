@@ -34,6 +34,9 @@ public:
 
   virtual ~HttpReq();
 
+  // Create HttpClient, get response
+  virtual void Work();
+
   // Call this to find out if the request has finished yet.
   // THREAD SAFE
   bool IsFinished();
