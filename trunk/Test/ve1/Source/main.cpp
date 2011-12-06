@@ -15,6 +15,8 @@
 #include <ObjMesh.h>
 #include <Font.h>
 #include "GSMain.h"
+#include "GSLogin.h"
+#include <CursorManager.h>
 
 namespace Amju
 {
@@ -32,9 +34,10 @@ void StartUp()
   // Use Text obj loader for now
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
-  TheGame::Instance()->SetCurrentState(
-    TheGSMain::Instance()
-  );
+  TheCursorManager::Instance()->Load();
+
+  //TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
 }
 }
 

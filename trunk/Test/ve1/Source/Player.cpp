@@ -42,6 +42,8 @@ Player::Player() : m_sceneNode(0)
 bool Player::Load(File* f)
 {
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  Assert(root);
+
   PlayerSceneNode* psn = new PlayerSceneNode(this);
   m_sceneNode = psn;
   

@@ -168,7 +168,9 @@ void GSMain::OnActive()
 {
   GSBase::OnActive();
 
-  GetVe1SceneGraph()->Clear();
+  // We only want to do this if we decide to reload the world
+//  GetVe1SceneGraph()->Clear();
+
   GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
   // Objects are loaded by ObjectManager and added to scene graph.
