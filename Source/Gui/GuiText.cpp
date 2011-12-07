@@ -92,16 +92,26 @@ void GuiText::Draw()
 
   float oldSize = font->GetSize();
   font->SetSize(m_textSize * oldSize);
+
+  // NB This is single line only, need another path for multi-line.
+  // Decide on first character to draw
+  // TODO This might only make sense for left-justified text..?
+  int first = 0;
+  while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
+  {
+    first++;
+  }
+
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    font->Print(m_pos.x, y, m_text.c_str());
+    font->Print(m_pos.x, y, m_text.substr(first).c_str());
     break;
   case AMJU_JUST_RIGHT:
-    font->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.c_str());
+    font->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.substr(first).c_str());
     break;
   case AMJU_JUST_CENTRE:
-    font->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.c_str());
+    font->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.substr(first).c_str());
     break;
   default:
     Assert(0);
