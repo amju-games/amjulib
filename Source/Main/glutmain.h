@@ -49,9 +49,29 @@ void QueueEvent(Amju::Event* e)
 void key(char k, bool down)
 {
   KeyEvent* ke = new KeyEvent;  
-  ke->keyType = AMJU_KEY_CHAR;
-  ke->key = k;
   ke->keyDown = down;
+
+  if (k == 127) // backspace
+  {
+    ke->keyType = AMJU_KEY_BACKSPACE;
+  }
+  else if (k == 8) // delete
+  {
+    ke->keyType = AMJU_KEY_DELETE;
+  }
+  else if (k == 13)
+  {
+    ke->keyType = AMJU_KEY_ENTER;
+  }
+  else
+  {
+// TODO Just temporarily until we sort out all the control keys
+//std::cout << "Got key event, char code is : " << (int)k << "\n";
+
+    ke->keyType = AMJU_KEY_CHAR;
+    ke->key = k;
+  }
+
   QueueEvent(ke);
 }
 
