@@ -18,9 +18,11 @@ public:
 
   std::string GetText() const;
 
-protected:
+  void Insert(char);
 
+protected:
   int m_caret; // index of caret: 0 means at left
+  float m_caretTimer;
   std::string m_myText;
 };
 }
