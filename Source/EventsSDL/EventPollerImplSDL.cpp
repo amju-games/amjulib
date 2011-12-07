@@ -30,9 +30,17 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
   case SDLK_ESCAPE:
     pKe->keyType = AMJU_KEY_ESC;
     break;
+  case SDLK_BACKSPACE:
+    pKe->keyType = AMJU_KEY_BACKSPACE;
+    break;
+  case SDLK_DELETE:
+    pKe->keyType = AMJU_KEY_DELETE;
+    break;
   default:
     pKe->keyType = AMJU_KEY_CHAR;
-    pKe->key = ske.keysym.sym; 
+    // Must do this to get e.g. '!' rather than '1'.
+    // sym is just the 'lower case' symbol on the key.
+    pKe->key = ske.keysym.unicode & 0x7f;
     break;
   }
 }
@@ -44,6 +52,9 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
   if (first)
   {
     first = false;
+
+    SDL_EnableUNICODE(1); // For getting chars from KB
+
     int numJs = SDL_NumJoysticks();
     for (int i = 0; i < numJs; i++)
     {
@@ -86,8 +97,11 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
     case SDL_KEYUP:			/* Keys released */
       {
         SDL_KeyboardEvent ske = e.key;
-        SetKeyType(ske, &ke);
-        isKeyEvent = true;
+        if (ske.keysym.sym < SDLK_NUMLOCK) // i.e. is not a modifier
+        {
+          SetKeyType(ske, &ke);
+          isKeyEvent = true;
+        }
         break;
       }
 
