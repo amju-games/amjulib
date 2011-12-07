@@ -27,6 +27,13 @@ protected:
 };
 
 typedef RCPtr<ShadowMap> PShadowMap;
+
+class ShadowMapNull : public ShadowMap
+{
+public:
+  virtual bool Init() { return true; }
+  virtual void Draw() { m_drawFunc(); }
+};
 }
 
 #endif
