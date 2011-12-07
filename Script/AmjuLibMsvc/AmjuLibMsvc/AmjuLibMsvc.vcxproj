@@ -348,6 +348,7 @@
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h" />
     <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h" />

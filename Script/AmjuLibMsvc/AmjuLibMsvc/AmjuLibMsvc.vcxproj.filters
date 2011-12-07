@@ -1274,6 +1274,9 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h">
       <Filter>Gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">
