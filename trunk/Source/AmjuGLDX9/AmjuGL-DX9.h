@@ -123,6 +123,8 @@ public:
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
 
+  virtual ShadowMap* CreateShadowMap();
+
 private:
   WNDPROC m_wndproc;
 }; // class 

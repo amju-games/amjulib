@@ -17,6 +17,7 @@
 #include <WinScreen.h>
 #include "DX9Shader.h"
 #include <ShaderNull.h>
+#include "ShadowMap.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -768,6 +769,11 @@ Shader* AmjuGLDX9::LoadShader(const std::string& shaderFileName)
     return new ShaderNull;
   }
   return s;
+}
+
+ShadowMap* AmjuGLDX9::CreateShadowMap()
+{
+  return new ShadowMapNull;
 }
 
 } // namespace
