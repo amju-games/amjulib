@@ -16,7 +16,6 @@
 #include <StringUtils.h>
 #include <Timer.h>
 #include <ShadowMap.h>
-#include <ShadowMapOpenGL2.h> // TODO TEMP TEST
  
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
@@ -81,7 +80,7 @@ void GSRigidBody::Draw()
   static PShadowMap sm = 0;
   if (!sm)
   {
-    sm = new ShadowMapOpenGL2; //AmjuGL::CreateShadowMap();
+    sm = AmjuGL::CreateShadowMap();
     sm->SetLightPos(AmjuGL::Vec3(20, 20, 20));
     sm->Init();
     sm->SetDrawFunc(ShadowDraw);
