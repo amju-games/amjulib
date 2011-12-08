@@ -48,7 +48,26 @@ void EventPollerImplWin32::UpdateListeners(Event* e)
 }
 */
 
-void EventPollerImplWin32::OnKey(WPARAM c, bool down)
+static char lastCh;
+
+void EventPollerImplWin32::OnCh(WPARAM c, bool down)
+{
+  KeyEvent ke;
+  ke.keyDown = down;
+  ke.keyType = AMJU_KEY_CHAR;
+  ke.key = (char)c; // TODO UNICODE
+
+  lastCh = ke.key;
+
+  NotifyListenersWithPriority(&ke, m_listeners);
+}
+
+void EventPollerImplWin32::OnChUp()
+{
+  OnCh(lastCh, false);
+}
+
+bool EventPollerImplWin32::OnKey(WPARAM c, bool down)
 {
   KeyEvent ke;
   ke.keyDown = down;
@@ -75,13 +94,28 @@ void EventPollerImplWin32::OnKey(WPARAM c, bool down)
   case VK_ESCAPE:
     ke.keyType = AMJU_KEY_ESC;
     break;
+  case VK_BACK:
+    ke.keyType = AMJU_KEY_BACKSPACE;
+    break;
+  case VK_DELETE:
+    ke.keyType = AMJU_KEY_DELETE;
+    break;
+
   default:
-    // TODO character
-    ke.keyType = AMJU_KEY_CHAR;
-    //ke.key = ???
+    if (down)
+    {
+      return false; // create a WM_CHAR message
+    }
+    else
+    {
+      // Create a character up event
+      OnChUp();
+      return true;
+    }
   }
 
   NotifyListenersWithPriority(&ke, m_listeners);
+  return true;
 }
 
 void EventPollerImplWin32::MouseButton(Amju::MouseButton button, bool down)
@@ -175,9 +209,18 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
   case WM_KEYDOWN:
     if (s_instance)
     {
-      s_instance->OnKey(wParam, true);
+      if (!s_instance->OnKey(wParam, true))
+      {
+        return DefWindowProc( hWnd, uMsg, wParam, lParam );
+      }
     }
     break;
+
+  case WM_CHAR:
+    if (s_instance)
+    {
+      s_instance->OnCh(wParam, true);
+    }
 
   case WM_KEYUP:
     if (s_instance)

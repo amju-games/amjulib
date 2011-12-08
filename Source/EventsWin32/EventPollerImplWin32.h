@@ -20,7 +20,9 @@ private:
 
   void MouseMove(int x, int y);
   void MouseButton(Amju::MouseButton button, bool down);
-  void OnKey(WPARAM c, bool down);
+  bool OnKey(WPARAM c, bool down);
+  void OnCh(WPARAM c, bool down);
+  void OnChUp();
 
 private:
   Listeners* m_listeners;
