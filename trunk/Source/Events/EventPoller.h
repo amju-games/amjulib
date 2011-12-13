@@ -23,7 +23,7 @@ typedef RCPtr<EventPollerImpl> PEventPollerImpl;
 
 enum { AMJU_MIN_PRIORITY = -999, AMJU_MAX_PRIORITY = 999 };
 
-class EventPoller
+class EventPoller : public NonCopyable
 {
 public:
   // Listeners have a priority. They are notified in ascending order.
@@ -43,7 +43,7 @@ private:
   Listeners m_listeners;
 };
 
-typedef Singleton<EventPoller> TheEventPoller;
+typedef SingletonNoDestroy<EventPoller> TheEventPoller;
 }
 
 #endif // AMJU_EVENT_POLLER_H_INCLUDED
