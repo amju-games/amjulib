@@ -9,7 +9,7 @@ TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
 ASSETSDIR 	:=	../../Assets
-RUNDIR		:=	$(BUILD)/Run
+RUNDIR		:=	/Users/Shared/ve1
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
