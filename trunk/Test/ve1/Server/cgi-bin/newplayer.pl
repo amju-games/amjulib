@@ -53,7 +53,7 @@ sub request_id()
 
   print "Player ID=$playerid<br>\n";
 
-  $insertsql = "insert into object (type, assetfile, owner, createtime) values ('player', 'player.txt', $playerid, now())";
+  $insertsql = "insert into object (type, assetfile, datafile, owner, createtime) values ('player', 'player-assets.txt', 'player-data.txt', $playerid, now())";
   print "<br>$insertsql<br>\n";
 
 
