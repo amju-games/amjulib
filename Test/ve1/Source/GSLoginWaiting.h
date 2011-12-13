@@ -2,11 +2,11 @@
 #define GS_LOGINWAITING_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSBase.h"
+#include "GSGui.h"
 
 namespace Amju 
 {
-class GSLoginWaiting : public GSBase
+class GSLoginWaiting : public GSGui
 {
   GSLoginWaiting();
   friend class Singleton<GSLoginWaiting>;
