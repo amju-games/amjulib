@@ -1,0 +1,23 @@
+// Charlist
+// ver
+1
+// Num chars
+4
+pz-cat.md2
+pz-pet1a.png
+pz-pet1.png
+
+pz-dog.md2
+pz-pet2a.png
+pz-pet2.png
+
+pz-rabbit.md2
+pz-pet3a.png
+pz-pet3.png
+
+pz-squirrel.md2
+pz-pet4a.png
+pz-pet4.png
+
+
+
