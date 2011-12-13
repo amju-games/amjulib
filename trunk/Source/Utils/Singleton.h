@@ -46,11 +46,27 @@ std::cout << "Creating singleton: " << typeid(T).name() << "\n";
     }
     return t;
   }
+};
 
-private:
-  Singleton<T>();
-  Singleton<T>(const Singleton<T>&);
-  Singleton<T>& operator=(const Singleton<T>&);
+template <class T>
+class SingletonNoDestroy : public NonCopyable
+{
+public:
+  static T* Instance()
+  {
+    AMJU_CALL_STACK;
+
+    static T* t = 0;
+    if (!t)
+    {
+#ifdef _DEBUG
+std::cout << "Creating singleton: " << typeid(T).name() << "\n";
+#endif
+
+      t = new T;
+    }
+    return t;
+  }
 };
 }
 #endif
