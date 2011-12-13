@@ -30,6 +30,9 @@ public:
   virtual void Update() {}
   virtual void Draw() {}
   virtual bool Load(File*);
+
+  bool OpenAndLoad(const std::string& filename);
+
   virtual void CombineTransform();
 
   // TODO Rename this. Currently makes this node' AABB the union of its child AABBs.
@@ -65,6 +68,7 @@ public:
   void SetIsCamera(bool);
 
   void AddChild(PSceneNode node);
+  void DelChild(PSceneNode node);
 
   AABB* GetAABB();
 
