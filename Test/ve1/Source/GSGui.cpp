@@ -6,7 +6,6 @@ namespace Amju
 {
 GSGui::GSGui()
 {
-  //m_nextState=...
 }
 
 void GSGui::Update()

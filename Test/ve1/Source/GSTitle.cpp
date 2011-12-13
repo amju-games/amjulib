@@ -23,7 +23,6 @@ void GSTitle::Update()
 void GSTitle::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSTitle::Draw2d()
