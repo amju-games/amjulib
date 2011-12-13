@@ -144,7 +144,14 @@ void Game::UpdateState()
 
 PGameObject Game::GetGameObject(int id)
 {
-  return m_objects[id];
+  // Allow IDs for non-existent game objects, but don't insert null ptr into map
+  GameObjects::iterator it = m_objects.find(id);
+  if (it == m_objects.end())
+  {
+    return 0;
+  }  
+
+  return it->second;
 }
 
 void Game::AddGameObject(PGameObject object)
