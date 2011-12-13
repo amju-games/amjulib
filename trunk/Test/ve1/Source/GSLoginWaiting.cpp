@@ -1,32 +1,44 @@
 #include "GSLoginWaiting.h"
 #include <AmjuGL.h>
+#include <Game.h>
+#include "GSLogin.h"
 
 namespace Amju
 {
+static void OnCancelButton()
+{
+  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
+}
+
 GSLoginWaiting::GSLoginWaiting()
 {
-  //m_nextState=...
 }
 
 void GSLoginWaiting::Update()
 {
-  GSBase::Update();
+  GSGui::Update();
 
 }
 
 void GSLoginWaiting::Draw()
 {
-  GSBase::Draw();
+  GSGui::Draw();
 
 }
 
 void GSLoginWaiting::Draw2d()
 {
+  GSGui::Draw2d();
 }
 
 void GSLoginWaiting::OnActive()
 {
-  GSBase::OnActive();
+  GSGui::OnActive();
+
+  m_gui = LoadGui("gui-login-wait.txt");
+  Assert(m_gui);
+
+  m_gui->GetElementByName("cancel-button")->SetCommand(Amju::OnCancelButton);
 }
 
 bool GSLoginWaiting::OnCursorEvent(const CursorEvent& ce)
