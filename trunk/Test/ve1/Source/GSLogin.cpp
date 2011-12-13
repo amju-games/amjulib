@@ -4,7 +4,6 @@
 #include <Game.h>
 #include "GSLoginWaiting.h"
 #include <GuiTextEdit.h>
-#include "ReqLogin.h"
 
 namespace Amju
 {
@@ -51,15 +50,19 @@ void GSLogin::OnActive()
 
 void GSLogin::OnLoginButton()
 {
-  GuiElement* elem = m_gui->GetElementByName("email");
-  if (elem && dynamic_cast<GuiTextEdit*>(elem))
+  GuiTextEdit* elem = dynamic_cast<GuiTextEdit*>(m_gui->GetElementByName("email"));
+  Assert(elem);
+  if (elem)
   {
-    std::string email = ((GuiTextEdit*)elem)->GetText();
+    std::string email = elem->GetText();
     // TODO password; use https
 
-    SendLoginReq(email);
-
+    // Get the next state to fire off the request. This avoids the race condition where the request
+    //  could complete before we load up the next state.
+    TheGSLoginWaiting::Instance()->SetEmail(email);
     TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+    // Oh no, race condition, wait till state changed 
+    //SendLoginReq(email);
   }
 }
 

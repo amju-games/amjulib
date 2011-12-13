@@ -6,6 +6,7 @@
 #include <SafeUtils.h>
 #include <Game.h>
 #include "GSStartGame.h"
+#include "GSLoginWaiting.h"
 
 namespace Amju
 {
@@ -47,12 +48,14 @@ std::cout << "found session element\n";
     else
     {
 std::cout << "Didn't get sesssion ID from server :-(\n";
+      TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
     }
   }
   else  
   {
 std::cout << "Failed to log in! Error: " << res.GetErrorString() << "\n";
     // TODO show error page
+    TheGSLoginWaiting::Instance()->SetErrorString(res.GetErrorString());
   }
 
 }
