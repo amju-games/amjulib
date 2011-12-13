@@ -6,13 +6,18 @@
 #include <Xml/XmlParser2.h>
 #include <Xml/XmlNodeInterface.h>
 #include <SafeUtils.h>
+#include <Timer.h>
+#include "Ve1OnlineReqManager.h"
+#include "Ve1Object.h"
 
 namespace Amju
 {
-class GetPosReq : public Ve1Req
+static std::string timestamp = "1";
+
+class PosUpdateReq : public Ve1Req
 {
 public:
-  GetPosReq(const std::string& url) : Ve1Req(url, "get pos req") {}
+  PosUpdateReq(const std::string& url) : Ve1Req(url, "pos update req") {}
 
   virtual void HandleResult()
   {
@@ -26,11 +31,20 @@ std::cout << "OH NO FAIL! for get pos req: " << res.GetErrorString() << "\n";
     }
 
     std::string str = res.GetString();
+std::cout << "Pos update req result: " << str << "\n";
 
     // Parse XML, create Object and add to ObjectManager
     PXml xml = ParseXml(str.c_str());
 
+    // Child 0 is timestamp
     PXml p = xml.getChildNode(0);
+    if (SafeStrCmp(p.getName(), "now"))
+    {
+      timestamp = p.getText();
+std::cout << "Got new pos update timestamp: " << timestamp << "\n";
+    }
+
+    p = xml.getChildNode(1);
     if (SafeStrCmp(p.getName(), "objs"))
     {
 #ifdef XML_DEBUG
@@ -57,11 +71,22 @@ std::cout << "Updating pos for object " << id << " x: " << x << " y: " << y << "
         GameObject* go = TheGame::Instance()->GetGameObject(id);
         if (go)
         {
-          go->SetPos(Vec3f(x, y, z));
+          Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
+          if (ve1Obj)
+          {
+            ve1Obj->MoveTo(Vec3f(x, y, z));
+          }
+          else
+          {
+            go->SetPos(Vec3f(x, y, z));
+          }
         }
         else
         {
+          // This could happen if a new object has just appeared in the world and we haven't 
+          //  created it yet (e.g. haven't downloaded all assets).
 std::cout << "Unexpected game object ID " << id << " returned from get pos req.\n";
+          // Don't update timestamp, so we can get the pos again when the object has been created
         }
       }
     }
@@ -69,20 +94,34 @@ std::cout << "Unexpected game object ID " << id << " returned from get pos req.\
     {
       // Unexpected response from server. Is server reachable ?
       // TODO LOG this error
-std::cout << "Didn't find \"objs\" tag..\n";
+std::cout << "Pos update: Didn't find \"objs\" tag..\n";
     }
-
   }
-
 };
 
 void PosUpdate()
 {
-  // Iterate over GOs. Get update period, work out if it's time to query for pos change.
-  // (New objects should update pos ASAP.)
- 
   // Get pos updates periodically.
-   
+  // TODO Only get objects whose position has changed since last check ? 
+  static float elapsed = 0;
+  elapsed += TheTimer::Instance()->GetDt();
+
+  // TODO These poll periods should depend on network latency/bandwidth
+  static const float POS_UPDATE_PERIOD = 10.0f; // TODO CONFIG
+  if (elapsed > POS_UPDATE_PERIOD)
+  {
+std::cout << "Creating new pos update req...\n";
+
+    elapsed = 0;
+
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(POS_UPDATE_REQ);
+    url += "&time=" + timestamp;
+
+    // TODO Timestamp in query
+    std::cout << "URL: " << url << "\n";
+
+    TheVe1ReqManager::Instance()->AddReq(new PosUpdateReq(url));
+  }
 }
 
 }

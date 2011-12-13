@@ -9,6 +9,8 @@
 #include "LocalPlayer.h"
 #include "Ve1OnlineReqManager.h"
 #include <StringUtils.h>
+#include "ObjectManager.h"
+#include "PosUpdate.h"
 
 namespace Amju
 {
@@ -60,6 +62,13 @@ GSMain::GSMain()
 void GSMain::Update()
 {
   GSBase::Update();
+
+  // Make periodic checks for newly created objects
+  TheObjectManager::Instance()->Update();
+
+  // Make period checks for new positions for objects
+  PosUpdate();
+
 
   TheGame::Instance()->UpdateGameObjects();
 }
@@ -114,7 +123,7 @@ std::cout << "Ground clicked...\n";
       Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-      std::string url = MakeUrl(MOVE_REQ);
+      std::string url = TheVe1ReqManager::Instance()->MakeUrl(MOVE_REQ);
       url += "&obj_id=";
       url += ToString(GetLocalPlayer()->GetId());
       url += "&x=" + ToString(pos.x); 

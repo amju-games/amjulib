@@ -1,13 +1,13 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include <GameObject.h>
+#include "Ve1Object.h"
 
 namespace Amju
 {
 class Animated;
 
-class Player : public GameObject
+class Player : public Ve1Object
 {
 public:
   static const char* TYPENAME;
@@ -20,10 +20,13 @@ public:
  
   bool Init();
 
-  void MoveTo(const Vec3f& newPos) { m_newPos = newPos; }
+  // Ve1Object overrides
+  virtual void MoveTo(const Vec3f& newPos);
+  virtual bool UpdateState(PXml xml);
 
 protected:
-  Vec3f m_newPos;
+  bool m_posHasBeenSet; // first pos request we set pos immediately, then move to it subsequently
+  Vec3f m_newPos; // pos we are aiming for
   Animated* m_sceneNode;
 };
 
