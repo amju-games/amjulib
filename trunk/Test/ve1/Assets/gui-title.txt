@@ -1,0 +1,28 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+1
+
+
+// Button  
+// element type
+gui-button
+// Element name
+start-button
+
+// pos (coords are -1..1)
+-0.4, -0.72
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+start
+// Font name, size
+arial, 1.0 
+
