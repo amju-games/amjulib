@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-2
+3
 
 
 // Element type
@@ -19,9 +19,23 @@ text1
 2.0, 0.1
 // Text
 Waiting...
+// Font name, size
+arial, 1.0
 
+// Element type
+gui-text
+// Element name
+error-string
+// pos (coords are -1..1)
+-1.0, 0.0
+// size
+2.0, 0.1
+// Text
+error
+// Font name, size
+arial, 2.0 
 
-// Button  -login 
+// Cancel button
 // element type
 gui-button
 // Element name

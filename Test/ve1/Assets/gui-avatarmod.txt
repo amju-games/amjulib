@@ -19,7 +19,8 @@ text1
 2.0, 0.1
 // Text
 Modify your avatar... 
-
+// Font name, size
+arial, 1.0
 
 // Buttons for avatar type 
 // element type

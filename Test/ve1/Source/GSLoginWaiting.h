@@ -19,6 +19,12 @@ public:
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+
+  void SetErrorString(const std::string& error);
+  void SetEmail(const std::string& email) { m_email = email; }
+
+private:
+  std::string m_email; // used to create login request
 };
 typedef Singleton<GSLoginWaiting> TheGSLoginWaiting;
 } // namespace
