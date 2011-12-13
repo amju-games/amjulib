@@ -394,7 +394,7 @@ void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
 ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
 {
   // TODO: create best quality impl depending on hardware capability
-  return new ShadowMapOpenGL3;
+  return new ShadowMapOpenGL2;
 }
 
 }
