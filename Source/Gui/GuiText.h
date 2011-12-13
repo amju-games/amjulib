@@ -29,10 +29,15 @@ public:
   void SetJust(Just j);
 
 protected:
+  virtual int GetFirst(int line); // calc first char to draw in line
+  virtual int GetLast(int line); // calc last char to draw
+
+  float GetTextWidth(const std::string& text);
+
+protected:
   std::string m_text;
   std::string m_fontName;
   Just m_just;
-  float m_textWidth;
   bool m_inverse;
   bool m_drawBg;
   PFont m_font;

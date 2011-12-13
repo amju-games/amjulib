@@ -21,6 +21,10 @@ public:
   void Insert(char);
 
 protected:
+  virtual int GetFirst(int line); 
+  virtual int GetLast(int line); 
+
+protected:
   int m_caret; // index of caret: 0 means at left
   float m_caretTimer;
   std::string m_myText;

@@ -2,8 +2,9 @@
 #include "Font.h"
 #include "DrawRect.h"
 #include "Colour.h"
+#include <StringUtils.h>
 
-//#define TEXT_RECT_DEBUG
+#define TEXT_RECT_DEBUG
 
 namespace Amju
 {
@@ -13,7 +14,6 @@ GuiText::GuiText()
 {
   m_fontName = "font2d/arial-font.font";
   m_just = AMJU_JUST_CENTRE;
-  m_textWidth = 0;
   m_inverse = false;
   m_drawBg = false;
   m_textSize = 1.0f;
@@ -88,30 +88,29 @@ void GuiText::Draw()
 
   // Centre the text vertically
   //float ysize = m_size.y - 0.1f; // TODO Why 0.1, depends on font size ?
-  float y = m_pos.y - m_size.y * 0.5f - 0.05f;
+  float y = m_pos.y - m_size.y * 0.5f - m_textSize * 0.05f;
 
   float oldSize = font->GetSize();
   font->SetSize(m_textSize * oldSize);
 
   // NB This is single line only, need another path for multi-line.
   // Decide on first character to draw
-  // TODO This only makes sense for left-justified text..?
-  int first = 0;
-  while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
-  {
-    first++;
-  }
+  int first = GetFirst(0);
+  int last = GetLast(0);
+  last -= first;
+  std::string str = m_text.substr(first, last);
+  Trim(&str);
 
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    font->Print(m_pos.x, y, m_text.substr(first).c_str());
+    font->Print(m_pos.x, y, str.c_str());
     break;
   case AMJU_JUST_RIGHT:
-    font->Print(m_pos.x + m_size.x - m_textWidth, y, m_text.c_str());
+    font->Print(m_pos.x + m_size.x - GetTextWidth(str), y, str.c_str());
     break;
   case AMJU_JUST_CENTRE:
-    font->Print(m_pos.x + 0.5f * (m_size.x - m_textWidth), y, m_text.c_str());
+    font->Print(m_pos.x + 0.5f * (m_size.x - GetTextWidth(str)), y, str.c_str());
     break;
   default:
     Assert(0);
@@ -121,12 +120,78 @@ void GuiText::Draw()
   PopColour();
 }
 
+int GuiText::GetFirst(int line)
+{
+  int first = 0;
+  int last = m_text.size();
+
+  switch (m_just)
+  {
+  case AMJU_JUST_LEFT:
+    return first;
+
+  case AMJU_JUST_RIGHT:
+    while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
+    {
+      first++;
+    }
+    return first;
+
+  case AMJU_JUST_CENTRE:
+    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
+    {
+      first++;
+      last--;
+    }
+    return first;
+
+  default:
+    Assert(0);
+  }
+  return 0;
+}
+
+int GuiText::GetLast(int line)
+{
+  int first = 0;
+  int last = m_text.size();
+
+  switch (m_just)
+  {
+  case AMJU_JUST_LEFT:
+    while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
+    {
+      last--;
+    }
+    return last;
+
+  case AMJU_JUST_RIGHT:
+    return last;
+
+  case AMJU_JUST_CENTRE:
+    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
+    {
+      first++;
+      last--;
+    }
+    return last;
+
+  default:
+    Assert(0);
+  }
+
+  return 0;
+}
+
 void GuiText::SetText(const std::string& text)
 {
   m_text = text;
-  m_textWidth = GetFont()->GetTextWidth(text);
-  m_textWidth *= m_textSize;
+}
 
+float GuiText::GetTextWidth(const std::string& text)
+{
+  float textWidth = GetFont()->GetTextWidth(text);
+  return textWidth;
   //m_size.y = 0.08f; // Size of one line of text - TODO
   // TODO Multi lines; other GuiElement types
 }
@@ -147,6 +212,17 @@ bool GuiText::Load(File* f)
 
   // TODO Flags for multiline/word wrap
   // font name, font size, etc
+  // Get font name and size
+  if (!f->GetDataLine(&s))
+  {
+    f->ReportError("Expected font info");
+    return false;
+  }
+  Strings strs = Split(s, ',');
+  Assert(strs.size() == 2);
+  std::string fontName = "font2d/" + strs[0] + "-font.font";
+  m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
+  m_textSize = ToFloat(strs[1]);
 
   return true;
 }

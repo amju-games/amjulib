@@ -8,6 +8,8 @@ const char* GuiTextEdit::NAME = "gui-text-edit";
 
 GuiTextEdit::GuiTextEdit() : m_caret(0)
 {
+  m_just = AMJU_JUST_LEFT;
+
   m_drawBg = true;
   m_caretTimer = 0;
 
@@ -139,4 +141,33 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
 
   return true; // handled
 }
+
+int GuiTextEdit::GetFirst(int line)
+{
+  // TODO m_caret should always be within first, last
+  int first = 0;
+  int last = m_text.size();
+
+  while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
+  {
+    first++;
+  }
+
+  return first;
+}
+
+int GuiTextEdit::GetLast(int line)
+{
+  // TODO m_caret should always be within first, last
+  int first = 0;
+  int last = m_text.size();
+
+  while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
+  {
+    last--;
+  }
+
+  return last;
+}
+
 }
