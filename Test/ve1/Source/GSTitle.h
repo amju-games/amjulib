@@ -1,16 +1,15 @@
-#ifndef GS_LOGIN_H_INCLUDED
-#define GS_LOGIN_H_INCLUDED
+#ifndef GS_TITLE_H_INCLUDED
+#define GS_TITLE_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSBase.h"
 #include "GSGui.h"
 
 namespace Amju 
 {
-class GSLogin : public GSGui
+class GSTitle : public GSGui
 {
-  GSLogin();
-  friend class Singleton<GSLogin>;
+  GSTitle();
+  friend class Singleton<GSTitle>;
 
 public:
   virtual void Update();
@@ -18,11 +17,9 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  void OnLoginButton();
-
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 };
-typedef Singleton<GSLogin> TheGSLogin;
+typedef Singleton<GSTitle> TheGSTitle;
 } // namespace
 #endif

@@ -36,6 +36,13 @@ void GSGui::OnActive()
   GSBase::OnActive();
 }
 
+void GSGui::OnDeactive()
+{
+  // Reload GUI every time we activate. 
+  // (This makes it reasonable to add gui elements as listeners when they are created)
+  m_gui = 0;
+}
+
 bool GSGui::OnCursorEvent(const CursorEvent& ce)
 {
   return false;

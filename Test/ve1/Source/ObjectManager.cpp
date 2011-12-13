@@ -47,6 +47,8 @@ void Object::Load()
   {
     go->SetId(m_id);
 
+    // TODO Set owner
+
     if (m_datafile.empty())
     {
 std::cout << "Object load: no data file needed for " << *this << "\n";
@@ -83,6 +85,8 @@ std::cout << "Object Load: Unexpected game object type: " << m_type << "\n";
   m_loaded = true;
 }
 
+static std::string timestamp = "1";
+
 class ObjectCheckReq : public Ve1Req
 {
 public:
@@ -112,9 +116,10 @@ std::cout << "Object check req result: " << str << "\n";
     PXml xml = ParseXml(str.c_str());
 
     // Format of XML:
-    // <objs>            <- Child(0)
-    //  <obj>            <- Child(0)->Child(n)
-    //   <id/>           <- Child(0)->Child(n)->Child(0)
+    // <time/>           <- Child(0)
+    // <objs>            <- Child(1)
+    //  <obj>            <- Child(1)->Child(n)
+    //   <id/>           <- Child(1)->Child(n)->Child(0) etc
     //   <type/>
     //   <assetfile/>
     //   <owner/>
@@ -123,6 +128,16 @@ std::cout << "Object check req result: " << str << "\n";
     // <objs>
 
     PXml p = xml.getChildNode(0);
+    if (SafeStrCmp(p.getName(), "now"))
+    {
+      timestamp = p.getText();
+    }
+    else
+    {
+std::cout << "Object check: Didn't get time stamp in result\n";
+    }
+
+    p = xml.getChildNode(1);
     if (SafeStrCmp(p.getName(), "objs"))
     {
 #ifdef XML_DEBUG
@@ -256,60 +271,66 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
 
 void ObjectManager::Update()
 {
-  // Check state of files 
-  // TODO should be periodic, not every frame
+  float dt = TheTimer::Instance()->GetDt();
 
-  for (Objects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+  // Check state of files 
+  // should be periodic, not every frame
+  // TODO Only need to do this if there are oustanding requests ?
+
+  static const float FILE_CHECK_TIME = 1.0f; // secs  TODO CONFIG
+  static float fileCheckTime = 0;
+  fileCheckTime += dt;
+  if (fileCheckTime > FILE_CHECK_TIME)
   {
-    Object* obj = *it;
-    if (obj->m_loaded)
+    fileCheckTime = 0;
+
+    for (Objects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
     {
-      continue;
-    }
-    const std::string& assetlistname = obj->m_assetlist;   
-    const std::string& datafilename = obj->m_datafile;
-    if (IsLocal(assetlistname) &&
-        IsLocal(datafilename))
-    {
-      AssetList* assetlist = m_assetLists[assetlistname];
-      if (assetlist->AllAssetsLoaded())
+      Object* obj = *it;
+      if (obj->m_loaded)
       {
-        obj->Load();
+        continue;
+      }
+      const std::string& assetlistname = obj->m_assetlist;   
+      const std::string& datafilename = obj->m_datafile;
+      if (IsLocal(assetlistname) &&
+          IsLocal(datafilename))
+      {
+        AssetList* assetlist = m_assetLists[assetlistname];
+        if (assetlist->AllAssetsLoaded())
+        {
+          obj->Load();
+        }
       }
     }
+
+    for (AssetLists::iterator it = m_assetLists.begin(); it != m_assetLists.end(); ++it)
+    {
+      AssetList* assetlist = it->second;
+      assetlist->Update();
+    }
   }
 
-  for (AssetLists::iterator it = m_assetLists.begin(); it != m_assetLists.end(); ++it)
-  {
-    AssetList* assetlist = it->second;
-    assetlist->Update();
-  }
 
-
-
-  static const float OBJECT_CHECK_PERIOD = 1.0f; // seconds, TODO CONFIG
+  static const float OBJECT_CHECK_PERIOD = 3.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
-  // TODO Get list of all objects deleted since last check.
+  // TODO Get list of all objects *deleted* since last check.
 
-  m_elapsed += TheTimer::Instance()->GetDt();
-  if (m_elapsed < OBJECT_CHECK_PERIOD)
+  m_elapsed += dt;
+  if (m_elapsed > OBJECT_CHECK_PERIOD)
   {
-    return;
+    m_elapsed = 0;
+
+    std::cout << "It's time to create a new object check req...\n";
+
+    // Create request, add to OnlineReqManager
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(OBJECT_CHECK_REQ);
+    url += "&time=" + timestamp;
+    std::cout << "URL: " << url << "\n";
+
+    TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));
   }
-
-  m_elapsed = -9999999.0f;
-
-  std::cout << "It's time to create a new object check req...\n";
-
-  // TODO TEMP TEST
-  
-  // Create request, add to OnlineReqManager
-  std::string url = MakeUrl(OBJECT_CHECK_REQ);
-  std::cout << "URL: " << url << "\n";
-
-  TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));
-
 }
 }
 

@@ -14,12 +14,18 @@
 #include <ResourceManager.h>
 #include <ObjMesh.h>
 #include <Font.h>
+#include "GSTitle.h"
 #include "GSMain.h"
 #include "GSLogin.h"
+#include "GSAvatarMod.h"
 #include <CursorManager.h>
+#include <File.h>
+#include <Directory.h>
 
 namespace Amju
 {
+static const char* APP_NAME = "ve1";
+
 void ReportError(const std::string& str)
 {
   std::cout << "ERROR: " << str << "\n";
@@ -30,14 +36,16 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
+  File::SetRoot(GetSaveDir(APP_NAME), "/");
+
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for now
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
   TheCursorManager::Instance()->Load();
 
-  //TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
 }
 }
 

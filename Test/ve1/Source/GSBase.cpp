@@ -4,14 +4,15 @@
 #include <AmjuGL.h>
 #include <iostream>
 #include "ObjectManager.h"
+#include "PosUpdate.h"
 
 namespace Amju
 {
-static float yrot = 0;
-
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 {
   m_nextState = 0;
+  m_drag = false;
+  m_yrot = 0;
 }
 
 void GSBase::Draw()
@@ -31,14 +32,13 @@ void GSBase::Draw()
 
   AmjuGL::LookAt(0, 5, 20,  0, 0, 0,  0, 1, 0);
 
-  AmjuGL::RotateY(yrot);
+  AmjuGL::RotateY(m_yrot);
 }
 
 void GSBase::Update()
 {
+  // Handle any completed requests
   TheVe1ReqManager::Instance()->Update();
-
-  TheObjectManager::Instance()->Update();
 
   float dt = TheTimer::Instance()->GetDt();
   m_time += dt;
@@ -57,15 +57,13 @@ void GSBase::Update()
 */
 }
 
-bool drag = false;
-
 bool GSBase::OnCursorEvent(const CursorEvent& ce)
 {
   static float oldx = ce.x;
-  if (drag)
+  if (m_drag)
   {
     float xdiff = ce.x - oldx;
-    yrot += xdiff * 100.0f;
+    m_yrot += xdiff * 100.0f;
   }
   oldx = ce.x;
   return false;
@@ -75,7 +73,7 @@ bool GSBase::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {
-    drag = mbe.isDown;  
+    m_drag = mbe.isDown;  
   }
   return false;
 }

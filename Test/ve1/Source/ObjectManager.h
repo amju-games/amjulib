@@ -85,7 +85,6 @@ struct AssetList : public RefCounted
   enum State
   {
     AMJU_AL_UNKNOWN,
-    AMJU_AL_DOWNLOADING,
     AMJU_AL_LOADING,
     AMJU_AL_ALL_ASSETS_LOADED
   };

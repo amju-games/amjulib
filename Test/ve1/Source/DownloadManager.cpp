@@ -43,7 +43,7 @@ bool DownloadManager::GetFile(const std::string& filename)
     else
     {
       OnlineReq* filedownloadreq = new FileDownloadReq(
-        this, filename, MakeDownloadUrl(filename));
+        this, filename, TheVe1ReqManager::Instance()->MakeDownloadUrl(filename));
 
       m_map[filename] = AMJU_DL_DOWNLOADING;
       if (TheVe1ReqManager::Instance()->AddReq(
