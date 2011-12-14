@@ -48,5 +48,5 @@ gui-button-4.png
 // Text
 login
 // Font name, size
-arial, 1.0 
+arial, 2.0 
 

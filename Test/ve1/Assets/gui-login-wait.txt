@@ -33,7 +33,7 @@ error-string
 // Text
 error
 // Font name, size
-arial, 2.0 
+arial, 1.0 
 
 // Cancel button
 // element type
@@ -49,5 +49,5 @@ gui-button-4.png
 // Text
 cancel
 // Font name, size
-arial, 0.5 
+arial, 2.0 
 
