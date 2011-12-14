@@ -142,32 +142,50 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   return true; // handled
 }
 
-int GuiTextEdit::GetFirst(int line)
+void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
 {
-  // TODO m_caret should always be within first, last
-  int first = 0;
-  int last = m_text.size();
+  *first = 0;
+  *last = m_text.size();
 
-  while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
+  switch (m_just)
   {
-    first++;
+  case AMJU_JUST_LEFT:
+    // Make sure caret visible
+    //while (m_caret > *last)
+    //{
+    //  (*last)++;
+    //  (*first)++;
+    //}
+
+    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > m_size.x)
+    {
+      if (m_caret > *last)
+      {
+        (*last)++;
+      }
+      else if (m_caret == *last)
+      {
+        (*first)++;
+      }
+      else if (m_caret < *first)
+      {
+        (*first)--;
+      }
+      else
+      {
+        (*last)--;
+      }
+    }
+
+    Assert(*last <= m_text.size());
+    Assert(*first >= 0);
+    Assert(m_caret >= *first);
+    Assert(m_caret <= *last);
+
+    return;
+
+  default:
+    Assert(0);
   }
-
-  return first;
 }
-
-int GuiTextEdit::GetLast(int line)
-{
-  // TODO m_caret should always be within first, last
-  int first = 0;
-  int last = m_text.size();
-
-  while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
-  {
-    last--;
-  }
-
-  return last;
-}
-
 }
