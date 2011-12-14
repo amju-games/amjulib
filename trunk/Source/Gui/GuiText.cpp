@@ -94,9 +94,9 @@ void GuiText::Draw()
   font->SetSize(m_textSize * oldSize);
 
   // NB This is single line only, need another path for multi-line.
-  // Decide on first character to draw
-  int first = GetFirst(0);
-  int last = GetLast(0);
+  // Decide on character range to draw
+  int first, last;
+  GetFirstLast(0, &first, &last);
   last -= first;
   std::string str = m_text.substr(first, last);
   Trim(&str);
@@ -120,68 +120,71 @@ void GuiText::Draw()
   PopColour();
 }
 
-int GuiText::GetFirst(int line)
+void GuiText::GetFirstLast(int line, int* first, int* last)
 {
-  int first = 0;
-  int last = m_text.size();
+  *first = 0;
+  *last = m_text.size();
 
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    return first;
+    while (GetFont()->GetTextWidth(m_text.substr(0, *last)) > m_size.x)
+    {
+      (*last)--;
+    }
+    return;
 
   case AMJU_JUST_RIGHT:
-    while (GetFont()->GetTextWidth(m_text.substr(first)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(*first)) > m_size.x)
     {
-      first++;
+      (*first)++;
     }
-    return first;
+    return;
 
   case AMJU_JUST_CENTRE:
-    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > m_size.x)
     {
-      first++;
-      last--;
+      (*first)++;
+      (*last)--;
     }
-    return first;
+    return;
 
   default:
     Assert(0);
   }
-  return 0;
 }
 
-int GuiText::GetLast(int line)
-{
-  int first = 0;
-  int last = m_text.size();
-
-  switch (m_just)
-  {
-  case AMJU_JUST_LEFT:
-    while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
-    {
-      last--;
-    }
-    return last;
-
-  case AMJU_JUST_RIGHT:
-    return last;
-
-  case AMJU_JUST_CENTRE:
-    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
-    {
-      first++;
-      last--;
-    }
-    return last;
-
-  default:
-    Assert(0);
-  }
-
-  return 0;
-}
+//int GuiText::GetLast(int line)
+//{
+//  int first = 0;
+//  int last = m_text.size();
+//
+//  switch (m_just)
+//  {
+//  case AMJU_JUST_LEFT:
+//    while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
+//    {
+//      last--;
+//    }
+//    return last;
+//
+//  case AMJU_JUST_RIGHT:
+//    return last;
+//
+//  case AMJU_JUST_CENTRE:
+//    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
+//    {
+//      first++;
+//      last--;
+//    }
+//    return last;
+//
+//  default:
+//    Assert(0);
+//  }
+//
+//  return 0;
+//}
 
 void GuiText::SetText(const std::string& text)
 {

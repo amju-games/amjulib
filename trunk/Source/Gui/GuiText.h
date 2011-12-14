@@ -32,8 +32,8 @@ public:
   void SetJust(Just j);
 
 protected:
-  virtual int GetFirst(int line); // calc first char to draw in line
-  virtual int GetLast(int line); // calc last char to draw
+  // calc first and last char to draw in line
+  virtual void GetFirstLast(int line, int* first, int* last); 
 
   float GetTextWidth(const std::string& text);
 

@@ -21,8 +21,7 @@ public:
   void Insert(char);
 
 protected:
-  virtual int GetFirst(int line); 
-  virtual int GetLast(int line); 
+  virtual void GetFirstLast(int line, int* first, int* last); 
 
 protected:
   int m_caret; // index of caret: 0 means at left
