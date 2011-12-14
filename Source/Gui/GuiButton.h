@@ -2,6 +2,7 @@
 #define GUI_BUTTON_H
 
 #include "GuiImage.h"
+#include "GuiText.h"
 #include "Font.h"
 #include "Colour.h"
 
@@ -35,10 +36,13 @@ private:
   void ClickSound() const; // TODO in GuiElement ?
 
 protected:
+  GuiText m_guiText;
+/*
   // Text - use GUI Text ?
   std::string m_text;
   PFont m_font;
   float m_fontSize;
+*/
   Colour m_textColour;
 
   bool m_isMouseOver; // Draw bigger

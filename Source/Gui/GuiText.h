@@ -16,6 +16,9 @@ public:
   virtual void Draw();  
   virtual bool Load(File*); 
 
+  // Load just the text info (not name, size, etc)
+  bool LoadText(File*);
+
   void SetText(const std::string& text);
   void SetTextSize(float textSize);
 
