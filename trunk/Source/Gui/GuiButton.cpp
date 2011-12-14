@@ -35,6 +35,14 @@ bool GuiButton::Load(File* f)
     return false;
   }
   // Load text
+  if (!m_guiText.LoadText(f))
+  {
+    return false;
+  }
+  m_guiText.SetPos(GetPos());
+  m_guiText.SetSize(GetSize());
+
+/*
   if (!f->GetDataLine(&m_text))
   {
     f->ReportError("Expected button text");
@@ -52,6 +60,7 @@ bool GuiButton::Load(File* f)
   std::string fontName = "font2d/" + strs[0] + "-font.font";
   m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
   m_fontSize = ToFloat(strs[1]);
+*/
 
   return true;
 }
@@ -69,6 +78,7 @@ void GuiButton::Draw()
     static const float PRESSED_OFFSET = 0.02f;
     AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
   }
+/*
   if (m_isMouseOver)
   {
     // TODO This is no good, the size change depends on the position of the button.
@@ -76,9 +86,21 @@ void GuiButton::Draw()
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
+*/
 
   GuiImage::Draw();
 
+  PushColour();
+  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
+  m_guiText.Draw();
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(0, 0.01f, 0);
+  AmjuGL::SetColour(0, 0, 0, 1);
+  m_guiText.Draw();
+  AmjuGL::PopMatrix();
+  PopColour();
+
+/*
   // Draw text
   // TODO Get font name, point size - use a GuiText object
   PushColour();
@@ -96,6 +118,8 @@ void GuiButton::Draw()
 
   m_font->SetSize(origSize);
   PopColour();
+*/
+
   AmjuGL::PopMatrix();
 }
 
@@ -178,7 +202,8 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
 
 void GuiButton::SetText(const std::string& text)
 {
-  m_text = text;
+  //m_text = text;
+  m_guiText.SetText(text);
 }
 
 void GuiButton::SetTextColour(const Colour& col)

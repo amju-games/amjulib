@@ -202,6 +202,11 @@ bool GuiText::Load(File* f)
   {
     return false;
   }
+  return LoadText(f);
+}
+
+bool GuiText::LoadText(File* f)
+{
   std::string s;
   if (!f->GetLocalisedString(&s))
   {
