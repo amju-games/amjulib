@@ -7,7 +7,9 @@
 #include <Screen.h>
 
 // This implementation is adapted from http://fabiensanglard.net/shadowmapping/
+// TODO: Add lighting, get this to work with textures
 
+// Shows shadow map but Breaks textures :-(
 //#define SHOW_MAP
 
 namespace Amju
@@ -25,7 +27,13 @@ void loadShader()
     "void main() \n"
     "{ \n"
     "    ShadowCoord = gl_TextureMatrix[7] * gl_Vertex; \n" 
-    "    gl_Position = ftransform(); gl_FrontColor = gl_Color; \n"
+    "    gl_Position = ftransform(); "
+    "    vec3 normal = normalize(gl_NormalMatrix * gl_Normal); \n"
+    "    vec3 lightDir = normalize(vec3(gl_LightSource[0].position)); \n"
+    "    float NdotL = max(dot(normal, lightDir), 0.0); \n"
+    "    vec4 diffuse = gl_FrontMaterial.diffuse * gl_LightSource[0].diffuse; \n"
+    "    vec4 AMBIENT = vec4(0.3, 0.3, 0.3, 1); \n"
+    "    gl_FrontColor = gl_Color * NdotL * diffuse + AMBIENT; \n"
     "} ",
 
     // Fragment shader
@@ -40,7 +48,7 @@ void loadShader()
     "    float shadow = 1.0; \n"
     "    if (ShadowCoord.w > 0.0) \n"
     "            shadow = distanceFromLight < shadowCoordinateWdivide.z ? 0.2 : 1.0 ; \n"
-    "    gl_FragColor =   shadow * gl_Color; \n"
+    "    gl_FragColor = shadow * gl_Color; \n"
     "} ");
 }
 
@@ -154,6 +162,9 @@ void setTextureMatrix(void)
 
 void ShadowMapOpenGL2::Draw()
 {
+  // j.c. we also need this
+  glBindTexture(GL_TEXTURE_2D,depthTextureId);
+
   //First step: Render from the light POV to a FBO, story depth values only
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,fboId); //Rendering offscreen
 
@@ -179,7 +190,10 @@ void ShadowMapOpenGL2::Draw()
   glPushMatrix();
 
   //Light position
-  float p_light[3] = { m_lightPos.m_x, m_lightPos.m_y, m_lightPos.m_z };
+  float p_light[4] = { m_lightPos.m_x, m_lightPos.m_y, m_lightPos.m_z, 0 };
+  glLightfv(GL_LIGHT0, GL_POSITION, p_light);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
 
   //Light lookAt
   float l_light[3] = {0,0,0};
@@ -190,7 +204,7 @@ void ShadowMapOpenGL2::Draw()
   glCullFace(GL_FRONT);
   m_drawFunc();
 
-  //Save modelview/projection matrice into texture7, also add a biais
+  //Save modelview/projection matrice into texture7, also add a bias
   setTextureMatrix();
 
 
@@ -224,10 +238,6 @@ void ShadowMapOpenGL2::Draw()
   m_drawFunc();
   shader->End();
 
-  // j.c. we also need to do this
-  glActiveTextureARB(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D,depthTextureId);
-
   // DEBUG only. this piece of code draw the depth buffer onscreen
 #ifdef SHOW_MAP
   glUseProgramObjectARB(0);
@@ -250,6 +260,9 @@ void ShadowMapOpenGL2::Draw()
   glDisable(GL_TEXTURE_2D);
 #endif
 
+  // Force textures to re-bind
+  glActiveTextureARB(GL_TEXTURE0);
+  AmjuGL::UseTexture(0);
 }
 
 
