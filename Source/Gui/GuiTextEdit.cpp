@@ -12,6 +12,7 @@ GuiTextEdit::GuiTextEdit() : m_caret(0)
 
   m_drawBg = true;
   m_caretTimer = 0;
+  m_drawCaret = true;
 
   // Obviously wrong :-(
   TheEventPoller::Instance()->AddListener(this); 
@@ -23,18 +24,18 @@ void GuiTextEdit::Draw()
   static const float BLINK_TIME_HALF = BLINK_TIME_END * 0.5f;
 
   m_caretTimer += TheTimer::Instance()->GetDt();
-  bool drawCaret = true;
+  m_drawCaret = true;
   if (m_caretTimer > BLINK_TIME_END)
   {
     m_caretTimer = 0;
   }
   else if (m_caretTimer > BLINK_TIME_HALF)
   {
-    drawCaret = false;
+    m_drawCaret = false;
   }
 
   // Works best if caret width is zero, (change widths file for char 124)
-  if (drawCaret)
+  if (m_drawCaret)
   {
     std::string left = m_myText.substr(0, m_caret);
     std::string right = m_myText.substr(m_caret);
@@ -146,28 +147,26 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
 {
   *first = 0;
   *last = m_text.size();
+  int caret = m_caret;
+  if (m_drawCaret)
+  {
+    caret++;
+  }
 
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    // Make sure caret visible
-    //while (m_caret > *last)
-    //{
-    //  (*last)++;
-    //  (*first)++;
-    //}
-
     while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > m_size.x)
     {
-      if (m_caret > *last)
+      if (caret > *last)
       {
         (*last)++;
       }
-      else if (m_caret == *last)
+      else if (caret == *last)
       {
         (*first)++;
       }
-      else if (m_caret < *first)
+      else if (caret < *first)
       {
         (*first)--;
       }

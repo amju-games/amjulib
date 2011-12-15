@@ -26,6 +26,7 @@ protected:
 protected:
   int m_caret; // index of caret: 0 means at left
   float m_caretTimer;
+  bool m_drawCaret;
   std::string m_myText;
 };
 }
