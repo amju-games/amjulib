@@ -1,12 +1,9 @@
-#ifndef IPHONE // TODO TEMP TEST
+//#ifndef IPHONE // TODO TEMP TEST
 
 #include "AmjuFirst.h"
 #include "GLShader.h"
 
 #include <iostream>
-//#ifdef WIN32
-//#include "GL/glew.h"
-//#endif
 #include "AmjuGL-OpenGL-Base.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
@@ -91,8 +88,8 @@ std::cout << "Vertex Shader source:\n" << vertexSource.c_str()
   << "\nFragment Shader source:\n" << fragmentSource.c_str() << "\n";
 #endif
 
-  m_vertexShaderHandle = glCreateShaderObjectARB(GL_VERTEX_SHADER);
-  m_fragmentShaderHandle = glCreateShaderObjectARB(GL_FRAGMENT_SHADER);
+  m_vertexShaderHandle = glCreateShader(GL_VERTEX_SHADER);
+  m_fragmentShaderHandle = glCreateShader(GL_FRAGMENT_SHADER);
 
 #ifdef SHADER_DEBUG
 std::cout << "Created shader handles\n";
@@ -102,22 +99,22 @@ std::cout << "Created shader handles\n";
   const GLint flength = fragmentSource.size();
   const char* vStr = vertexSource.c_str();
   const char* fStr = fragmentSource.c_str();
-  glShaderSourceARB(m_vertexShaderHandle, 1, &vStr, &vlength);
-  glShaderSourceARB(m_fragmentShaderHandle, 1, &fStr, &flength);
+  glShaderSource(m_vertexShaderHandle, 1, &vStr, &vlength);
+  glShaderSource(m_fragmentShaderHandle, 1, &fStr, &flength);
 
 #ifdef SHADER_DEBUG
 std::cout << "Set shader source\n";
 #endif
 
   GLint compiled = 0;
-  GLcharARB buf[2000]; // error string buffer
+  GLchar buf[2000]; // error string buffer
 
-  glCompileShaderARB(m_vertexShaderHandle);
+  glCompileShader(m_vertexShaderHandle);
 
-  glGetObjectParameterivARB(m_vertexShaderHandle, GL_COMPILE_STATUS, &compiled);
+  glGetShaderiv(m_vertexShaderHandle, GL_COMPILE_STATUS, &compiled);
   if (!compiled)
   {
-    glGetInfoLogARB(m_vertexShaderHandle, 2000, 0, buf);
+    glGetShaderInfoLog(m_vertexShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
 #ifdef SHADER_DEBUG
@@ -129,12 +126,12 @@ std::cout << "Vertex Shader Compile error: " << buf << "\n";
 std::cout << "Compiled vertex shader\n";
 #endif
 
-  glCompileShaderARB(m_fragmentShaderHandle);
+  glCompileShader(m_fragmentShaderHandle);
   
-  glGetObjectParameterivARB(m_fragmentShaderHandle, GL_COMPILE_STATUS, &compiled);
+  glGetShaderiv(m_fragmentShaderHandle, GL_COMPILE_STATUS, &compiled);
   if (!compiled)
   {
-    glGetInfoLogARB(m_fragmentShaderHandle, 2000, 0, buf);
+    glGetShaderInfoLog(m_fragmentShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
 #ifdef SHADER_DEBUG
@@ -147,30 +144,30 @@ std::cout << "Fragment Shader Compile error: " << buf << "\n";
 std::cout << "Compiled fragment shader\n";
 #endif
 
-  m_programHandle = glCreateProgramObjectARB();
+  m_programHandle = glCreateProgram();
 
 #ifdef SHADER_DEBUG
 std::cout << "Created program\n";
 #endif
 
-  glAttachObjectARB(m_programHandle, m_vertexShaderHandle);
-  glAttachObjectARB(m_programHandle, m_fragmentShaderHandle);
+  glAttachShader(m_programHandle, m_vertexShaderHandle);
+  glAttachShader(m_programHandle, m_fragmentShaderHandle);
 
 #ifdef SHADER_DEBUG
 std::cout << "Attached shaders to program\n";
 #endif
 
-  glLinkProgramARB(m_programHandle);
+  glLinkProgram(m_programHandle);
 
 #ifdef SHADER_DEBUG
 std::cout << "Link called\n";
 #endif
 
   GLint linked;
-  glGetObjectParameterivARB(m_programHandle, GL_OBJECT_LINK_STATUS_ARB, &linked);
+  glGetShaderiv(m_programHandle, GL_LINK_STATUS, &linked);
   if (!linked)
   {
-    glGetInfoLogARB(m_programHandle, 2000, 0, buf);
+    glGetShaderInfoLog(m_programHandle, 2000, 0, buf);
     m_errorStr = buf;
     
 #ifdef SHADER_DEBUG
@@ -195,58 +192,58 @@ void GLShader::Begin()
 {
   AMJU_CALL_STACK;
 
-  glUseProgramObjectARB(m_programHandle);
+  glUseProgram(m_programHandle);
 }
 
 void GLShader::End()
 {
   AMJU_CALL_STACK;
 
-  glUseProgramObjectARB(0);
+  glUseProgram(0);
 }
 
 void GLShader::Set(const std::string& name, const float matrix[16])
 {
-    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
         return;
     }
 
-    glUniformMatrix4fvARB(loc, 16, false, matrix);
+    glUniformMatrix4fv(loc, 16, false, matrix);
 }
 
 void GLShader::Set(const std::string& name, float f)
 {
-    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
         return;
     }
 
-    glUniform1fARB(loc, f);
+    glUniform1f(loc, f);
 }
 
 void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 {
-    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
         return;
     }
 
-    glUniform3fARB(loc, v.m_x, v.m_y, v.m_z);
+    glUniform3f(loc, v.m_x, v.m_y, v.m_z);
 }
 
 void GLShader::Set(const std::string& name, const Colour& c)
 {
-    GLint loc = glGetUniformLocationARB(m_programHandle, name.c_str());
+    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
         return;
     }
 
-    glUniform4fvARB(loc, 4, (float*)(&c));
+    glUniform4fv(loc, 4, (float*)(&c));
 }
 
 void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
@@ -254,5 +251,5 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
 }
 }
 
-#endif //  IPHONE // TODO TEMP TEST
+//#endif //  IPHONE // TODO TEMP TEST
 
