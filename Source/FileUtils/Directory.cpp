@@ -150,7 +150,7 @@ bool MkDir(const std::string& dir)
 {
   AMJU_CALL_STACK;
 
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
   std::cout << "Creating directory " << dir.c_str() << "\n";
 #endif
 
@@ -164,12 +164,12 @@ bool MkDir(const std::string& dir)
   chmod(dir.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 #endif  
   
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
 std::cout << "CHMOD: " << dir.c_str() << "\n";
 #endif
 #endif
 
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
 #ifdef MACOSX
   if (r != 0)
   {
@@ -194,7 +194,7 @@ std::cout << "CHMOD: " << dir.c_str() << "\n";
     }
   }
 #endif // MACOSX
-#endif // _DEBUG
+#endif // DIRECTORY_DEBUG
 
   return (r == 0);
 }
@@ -211,13 +211,13 @@ bool ShGetFolderPath(uint32 pathType, std::string* pResult)
   HINSTANCE hdll = LoadLibraryA("shell32.dll");
   if (hdll)
   {
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
     std::cout << "Loaded shell32.dll\n";
 #endif
     FuncPtr funcPtr = (FuncPtr)GetProcAddress(hdll, "SHGetFolderPathA");
     if (funcPtr)
     {
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
       std::cout << "Got address for SHGetFolderPathA\n";
 #endif
       HRESULT hr = (funcPtr)(0, pathType, 0, 0, path); 
@@ -243,7 +243,7 @@ std::string GetDesktopDir()
     bool success = ShGetFolderPath(CSIDL_DESKTOPDIRECTORY, &s);
     if (!success)
     {
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
       std::cout << "Failed to get SHGetFolderPathA\n";    
 #endif
       s = "/";
@@ -329,7 +329,7 @@ std::string GetSaveDir(const std::string& appName)
     }
     else
     {
-#ifdef _DEBUG
+#ifdef DIRECTORY_DEBUG
       std::cout << "Failed to get SHGetFolderPathA\n";    
 #endif
       // Use the Data directory. 
@@ -337,7 +337,7 @@ std::string GetSaveDir(const std::string& appName)
     }
   }
   return s;
-#endif // _DEBUG
+#endif // DIRECTORY_DEBUG
 
 #endif // WIN32
 
@@ -366,8 +366,11 @@ bool FileExists(const std::string& filename)
   struct stat buf;
   bool exists = (stat(filename.c_str(), &buf) != -1);
 
+#ifdef DIRECTORY_DEBUG
 std::cout << "**FILE EXISTS: " << filename.c_str() << ": "
   << (exists ? "YES" : "NO" ) << "**\n";
+#endif
+
   return exists; 
 }
 
