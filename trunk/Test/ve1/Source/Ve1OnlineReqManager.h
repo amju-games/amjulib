@@ -9,10 +9,15 @@ namespace Amju
 {
 enum Task
 {
-  LOGIN_REQ,
-  MOVE_REQ,
-  OBJECT_CHECK_REQ,
-  POS_UPDATE_REQ
+  LOGIN,
+
+  GET_NEW_OBJECTS,
+
+  SET_POSITION,
+  GET_POSITION_UPDATES,
+
+  SET_STATE,  // send a key/val to store in DB
+  GET_STATE_UPDATES  // get all key/val updates since last check
 };
 
 class Ve1ReqManager : public OnlineReqManager
