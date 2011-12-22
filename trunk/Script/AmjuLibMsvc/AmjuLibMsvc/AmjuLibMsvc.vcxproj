@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
@@ -214,7 +215,6 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\WinScreen.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.cpp" />
-    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLWin.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
