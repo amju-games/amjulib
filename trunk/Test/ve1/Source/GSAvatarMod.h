@@ -25,14 +25,19 @@ public:
 
   void OnNextType();
   void OnPrevType();
+  void OnNextColour();
+  void OnPrevColour();
   void OnCancel();
   void OnOk();
 
 private:
-  typedef std::vector<RCPtr<Ve1Character> > Characters;
-  Characters m_chars;
+  //typedef std::vector<RCPtr<Ve1Character> > Characters;
+  //Characters m_chars;
+
+  Ve1Character* m_char;
 
   int m_currentChar;
+  int m_currentTex;
 };
 typedef Singleton<GSAvatarMod> TheGSAvatarMod;
 } // namespace

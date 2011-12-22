@@ -4,6 +4,13 @@
 #include <ReportError.h>
 #include <StringUtils.h>
 #include "Ve1SceneGraph.h"
+#include <Game.h>
+#include "GSStartGame.h"
+#include "PlayerInfo.h"
+#include "ObjectUpdater.h"
+#include "GSStartMenu.h"
+#include "AvatarManager.h"
+#include "Ve1Object.h"
 
 namespace Amju
 {
@@ -15,6 +22,16 @@ void OnOkButton()
 void OnCancelButton()
 {
   TheGSAvatarMod::Instance()->OnCancel();
+}
+
+void OnColourPrevButton()
+{
+  TheGSAvatarMod::Instance()->OnPrevColour();
+}
+
+void OnColourNextButton()
+{
+  TheGSAvatarMod::Instance()->OnNextColour();
 }
 
 void OnTypePrevButton()
@@ -31,78 +48,59 @@ void OnTypeNextButton()
 GSAvatarMod::GSAvatarMod()
 {
   m_currentChar = 0;
+  m_currentTex = 0;
+  m_char = 0;
+}
+
+void GSAvatarMod::OnNextColour()
+{
+  m_currentTex++;
+  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
+}
+
+void GSAvatarMod::OnPrevColour()
+{
+  m_currentTex--;
+  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 void GSAvatarMod::OnNextType()
 {
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->DelChild(m_chars[m_currentChar].GetPtr());
   m_currentChar++;
-  if (m_currentChar >= (int)m_chars.size()) 
-  {
-    m_currentChar = 0;
-  }
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_chars[m_currentChar].GetPtr());
+  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
 }
 
 void GSAvatarMod::OnPrevType()
 {
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->DelChild(m_chars[m_currentChar].GetPtr());
   m_currentChar--;
-  if (m_currentChar == -1)
-  {  
-    m_currentChar = m_chars.size() - 1;
-  }
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_chars[m_currentChar].GetPtr());
+  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
 }
 
 void GSAvatarMod::OnCancel()
 {
   // Go to previous state, or main state, or title state ?
+  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 }
 
 void GSAvatarMod::OnOk()
 {
-  // TODO Write file, change local player ..?
+  PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+  pi->PISetBool(PI_KEY("has set up"), true);
+
+  // This may not be necessary except as an optimisation and so we display the correct type next time
+  //  we are in this game state...?
+  // TODO Not using this info yet
+  pi->PISetInt(PI_KEY("type"), m_currentChar);
+  pi->PISetInt(PI_KEY("tex"), m_currentTex);
+
+  // Send update req so all clients show correct avatar settings
+  int objId = pi->PIGetInt(PI_KEY("player obj id"));
+  TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("type"), ToString(m_currentChar)); // TODO use int, not string
+  TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("tex"), ToString(m_currentTex)); // TODO use int, not string
+  // TODO more avatar settings
 
   // Go to Main state 
-  
-}
-
-bool GSAvatarMod::LoadCharList()
-{
-  // Load character types - NB we want this to be downloadable. 
-  // Add a new object with asset list to server, which this client will then download...?
-
-  m_chars.clear();
-
-  File f;
-  if (!f.OpenRead("charlist.txt"))
-  {
-    ReportError("Failed to load character list");
-    return false;
-  }
-
-  int numChars = 0;
-  if (!f.GetInteger(&numChars))
-  {
-    ReportError("Expected number of characters!");
-    return false;
-  }
-
-  m_chars.reserve(numChars);
-  
-  for (int i = 0; i < numChars; i++)
-  {
-    Ve1Character* ch = new Ve1Character;
-    if (!ch->Load(&f))
-    {
-      f.ReportError("Failed to load character " + ToString(i));
-      return false;
-    }
-    m_chars.push_back(ch);
-  }
-
-  return true; 
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());  
 }
 
 void GSAvatarMod::Update()
@@ -150,11 +148,25 @@ void GSAvatarMod::OnActive()
   m_gui->GetElementByName("cancel-button")->SetCommand(Amju::OnCancelButton);
   m_gui->GetElementByName("type-prev-button")->SetCommand(Amju::OnTypePrevButton);
   m_gui->GetElementByName("type-next-button")->SetCommand(Amju::OnTypeNextButton);
+  m_gui->GetElementByName("colour-prev-button")->SetCommand(Amju::OnColourPrevButton);
+  m_gui->GetElementByName("colour-next-button")->SetCommand(Amju::OnColourNextButton);
 
-//  GetGuiSceneGraph()->Clear() // ???
+  GetGuiSceneGraph()->Clear();
+  GetGuiSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
-  LoadCharList();
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_chars[m_currentChar].GetPtr());
+  m_char = new Ve1Character;
+  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char); 
+
+  PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+  if (pi->PIGetBool(PI_KEY("has set up")))
+  {
+    // Has set up, so we can get previous settings
+    m_currentChar = pi->PIGetInt(PI_KEY("type")); 
+    m_currentTex = pi->PIGetInt(PI_KEY("tex"));
+  }
+
+  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 bool GSAvatarMod::OnCursorEvent(const CursorEvent& ce)
