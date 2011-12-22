@@ -138,6 +138,8 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     }
     break;
 
+  default:
+    Assert(0); // handle this key ?
   }
 
   return true; // handled
@@ -176,7 +178,7 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
       }
     }
 
-    Assert(*last <= m_text.size());
+    Assert(*last <= (int)m_text.size());
     Assert(*first >= 0);
     Assert(m_caret >= *first);
     Assert(m_caret <= *last);
