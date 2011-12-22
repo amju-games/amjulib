@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+2
 
 
 // Button  
@@ -25,18 +25,6 @@ start
 // Font name, size
 arial, 2.0 
 
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.0
-// size
-2.0, 0.2
-// Text
-This is the title page.
-// Font name, size
-arial, 3.0 
 
 // Element type
 gui-text
@@ -51,28 +39,3 @@ This is the title page.
 // Font name, size
 arial, 2.0 
 
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.4
-// size
-2.0, 0.2
-// Text
-This is the title page.
-// Font name, size
-arial, 1.0 
-
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.6
-// size
-2.0, 0.2
-// Text
-This is the title page.
-// Font name, size
-arial, 0.5 

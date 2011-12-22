@@ -6,20 +6,8 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+4
 
-// Element type
-gui-text-edit
-// Element name
-email
-// pos (coords are -1..1)
--0.5, 0.1
-// size
-1.0, 0.1
-// Text
-jason@amju.com
-// Font name, size
-arial, 1.0
 
 // Element type
 gui-text
@@ -30,23 +18,52 @@ text1
 // size
 2.0, 0.1
 // Text
-Please enter your email address...
+Paused
 // Font name, size
 arial, 1.0
 
-// Button  -login 
 // element type
 gui-button
 // Element name
-login-button
+resume-button
 // pos (coords are -1..1)
--0.4, -0.72
+-0.4, -0.2
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-login
+resume >
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+options-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+options...
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+-0.4, -0.8
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit...
 // Font name, size
 arial, 2.0 
 
