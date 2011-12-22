@@ -9,6 +9,15 @@ BlinkCharacter::BlinkCharacter()
   m_blinkTime = 0;
 }
 
+void BlinkCharacter::SetTex(Texture* t1, Texture* t2)
+{
+  Assert(t1);
+  Assert(t2);
+
+  m_pTex[0] = t1;
+  m_pTex[1] = t2;
+}
+
 bool BlinkCharacter::LoadTextures(const std::string& tex1, const std::string& tex2)
 {
   m_pTex[0] = (Texture*)TheResourceManager::Instance()->GetRes(tex1);

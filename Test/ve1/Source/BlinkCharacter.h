@@ -15,6 +15,8 @@ public:
 
   bool LoadTextures(const std::string& texture1, const std::string& texture2);
 
+  void SetTex(Texture* t1, Texture* t2);
+
 protected:
   // 2 textures for blinking 
   PTexture m_pTex[2];
