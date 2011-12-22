@@ -1,3 +1,5 @@
+#ifndef IPHONE
+
 #include <iostream>
 #include "ShadowMapOpenGL2.h"
 #include "OpenGL.h"
@@ -60,11 +62,6 @@ GLuint fboId;
 // Z values will be rendered to this texture when using fboId framebuffer
 GLuint depthTextureId;
 
-// Use to activate/disable shadowShader
-GLhandleARB shadowShaderId;
-GLuint shadowMapUniform;
-
-
 void generateShadowFBO()
 {
   GLenum FBOstatus;
@@ -125,15 +122,15 @@ void setupMatrices(float position_x,float position_y,float position_z,float look
 
 void setTextureMatrix(void)
 {
-  static double modelView[16];
-  static double projection[16];
+  static float modelView[16];
+  static float projection[16];
 
   // This is matrix transform every coordinate x,y,z
   // x = x* 0.5 + 0.5
   // y = y* 0.5 + 0.5
   // z = z* 0.5 + 0.5
   // Moving from unit cube [-1,1] to [0,1]
-  const GLdouble bias[16] = 
+  const GLfloat bias[16] = 
   {
     0.5, 0.0, 0.0, 0.0,
     0.0, 0.5, 0.0, 0.0,
@@ -142,19 +139,19 @@ void setTextureMatrix(void)
   };
 
   // Grab modelview and transformation matrices
-  glGetDoublev(GL_MODELVIEW_MATRIX, modelView);
-  glGetDoublev(GL_PROJECTION_MATRIX, projection);
+  glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
+  glGetFloatv(GL_PROJECTION_MATRIX, projection);
 
 
   glMatrixMode(GL_TEXTURE);
   glActiveTextureARB(GL_TEXTURE7);
 
   glLoadIdentity();
-  glLoadMatrixd(bias);
+  glLoadMatrixf(bias);
 
   // concatating all matrice into one.
-  glMultMatrixd (projection);
-  glMultMatrixd (modelView);
+  glMultMatrixf(projection);
+  glMultMatrixf(modelView);
 
   // Go back to normal matrix mode
   glMatrixMode(GL_MODELVIEW);
@@ -285,4 +282,5 @@ bool ShadowMapOpenGL2::Init()
 
 }
 
+#endif 
 
