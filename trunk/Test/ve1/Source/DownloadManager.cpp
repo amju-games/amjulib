@@ -1,6 +1,7 @@
 #include "DownloadManager.h"
 #include <DownloadReq.h>
 #include <Directory.h>
+#include <File.h>
 #include "Ve1OnlineReqManager.h"
 
 namespace Amju
@@ -35,7 +36,7 @@ bool DownloadManager::GetFile(const std::string& filename)
     return false;
 
   case AMJU_DL_UNKNOWN:
-    if (FileExists(filename))
+    if (FileExists(File::GetRoot() + filename))
     {
       m_map[filename] = AMJU_DL_LOCAL;
       return true;
