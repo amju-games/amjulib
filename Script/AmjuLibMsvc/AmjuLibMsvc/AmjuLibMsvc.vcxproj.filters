@@ -183,9 +183,6 @@
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLWin.cpp">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
@@ -680,6 +677,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp">
       <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
