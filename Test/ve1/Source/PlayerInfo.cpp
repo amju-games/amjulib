@@ -69,7 +69,7 @@ float PlayerInfo::PIGetFloat(const std::string& key) const
 
 bool PlayerInfo::Load()
 {
-  if (!FileExists(m_filename))
+  if (!FileExists(File::GetRoot() + m_filename))
   {
 std::cout << "Loading player info " << m_filename << " - it's a new file\n";
 
