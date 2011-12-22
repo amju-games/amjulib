@@ -81,6 +81,7 @@ CREATE TABLE `objectstate`
 `key` VARCHAR(30) NOT NULL,
 `val` VARCHAR(30) NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
+PRIMARY KEY (`id`, `key`),
 FOREIGN KEY (`id`) REFERENCES object(`id`) 
 ) ENGINE = MYISAM;
 END
