@@ -68,8 +68,10 @@ Thread::~Thread()
 {
   AMJU_CALL_STACK;
 
+#ifdef THREAD_DEBUG
 int c = ThreadManager::Instance()->GetThreadCount();
 std::cout << "DESTROYING THREAD " << m_threadId << " COUNT IS NOW: "  << c << "\n";
+#endif
 }
 
 void Thread::Start()
@@ -120,8 +122,10 @@ std::cout << "FAILED TO CREATE THREAD\n";
   // Add this Thread to the ThreadManager.
   ThreadManager::Instance()->AddThread(this);
 
+#ifdef THREAD_DEBUG
 int c = ThreadManager::Instance()->GetThreadCount();
 std::cout << "STARTED THREAD " << m_threadId << "  COUNT IS NOW " << c << "\n";
+#endif
 
 }
 
