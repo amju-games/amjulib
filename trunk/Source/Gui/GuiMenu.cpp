@@ -8,7 +8,12 @@ namespace Amju
 {
 static const int MENU_PRIORITY = -1; // higher priority
 
-GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
+GuiMenuItem::GuiMenuItem(const std::string& text)
+{
+  Init(text);
+}
+
+void GuiMenuItem::Init(const std::string& text)
 {
   SetText(text);
   SetDrawBg(true);
@@ -16,10 +21,20 @@ GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
 
   m_size.x = GetTextWidth(m_text) * m_textSize;
   m_size.y = 0.1f * m_textSize; // TODO TEMP TEST
+}
 
+GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
+{
+  Init(text);
   SetCommand(commandFunc);
 }
 
+GuiMenuItem::GuiMenuItem(const std::string& text, PGuiCommand command)
+{
+  Init(text);
+  SetCommand(command);
+}
+  
 void GuiMenuItem::Draw()
 {
   if (!IsVisible())

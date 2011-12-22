@@ -16,9 +16,14 @@ class GuiMenuItem : public GuiText // ?????
 public:
   // Size not specified - defaults to width of text when all displayed
   //  in one line
-  GuiMenuItem(const std::string& text, CommandFunc commandFunc = 0);
+  GuiMenuItem(const std::string& text);
+  GuiMenuItem(const std::string& text, CommandFunc commandFunc);
+  GuiMenuItem(const std::string& text, PGuiCommand commandFunc);
 
   virtual void Draw();
+
+protected:
+  void Init(const std::string&);
 };
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;
 
