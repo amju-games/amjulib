@@ -154,38 +154,6 @@ void GuiText::GetFirstLast(int line, int* first, int* last)
   }
 }
 
-//int GuiText::GetLast(int line)
-//{
-//  int first = 0;
-//  int last = m_text.size();
-//
-//  switch (m_just)
-//  {
-//  case AMJU_JUST_LEFT:
-//    while (GetFont()->GetTextWidth(m_text.substr(0, last)) > m_size.x)
-//    {
-//      last--;
-//    }
-//    return last;
-//
-//  case AMJU_JUST_RIGHT:
-//    return last;
-//
-//  case AMJU_JUST_CENTRE:
-//    while (GetFont()->GetTextWidth(m_text.substr(first, last - first)) > m_size.x)
-//    {
-//      first++;
-//      last--;
-//    }
-//    return last;
-//
-//  default:
-//    Assert(0);
-//  }
-//
-//  return 0;
-//}
-
 void GuiText::SetText(const std::string& text)
 {
   m_text = text;
