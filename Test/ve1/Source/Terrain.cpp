@@ -43,16 +43,16 @@ bool Terrain::Load(File* f)
   std::string s;
   if (!f->GetDataLine(&s))
   {
-std::cout << "Expected obj name";
+    f->ReportError("Expected .obj filename for terrain");
     return false;  
   }
 
-std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
+//std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
 
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(s);
   if (!mesh)
   {
-std::cout << "Terrain load: Failed to load terrain mesh " << s << "\n";
+    f->ReportError("Terrain load: Failed to load terrain mesh " + s);
     return false; 
   }
 
@@ -63,7 +63,7 @@ std::cout << "Terrain load: Failed to load terrain mesh " << s << "\n";
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   root->AddChild(tsn);
 
-std::cout << "Terrain load: NICE! Created terrain object\n";
+//std::cout << "Terrain load: NICE! Created terrain object\n";
 
   return true;
 }
