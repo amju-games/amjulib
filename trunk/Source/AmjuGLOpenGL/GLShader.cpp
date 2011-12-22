@@ -1,4 +1,4 @@
-//#ifndef IPHONE // TODO TEMP TEST
+#if !defined(IPHONE) || defined(AMJU_USE_ES2)
 
 #include "AmjuFirst.h"
 #include "GLShader.h"
@@ -251,5 +251,5 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
 }
 }
 
-//#endif //  IPHONE // TODO TEMP TEST
+#endif //  !IPHONE || AMJU_USE_ES2
 
