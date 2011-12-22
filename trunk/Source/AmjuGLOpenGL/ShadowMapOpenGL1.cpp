@@ -1,3 +1,5 @@
+#if defined(MACOSX) || defined(WIN32)
+
 #include "ShadowMapOpenGL1.h"
 #define AMJU_USE_GLUT
 #include <AmjuGL.h> // TODO Can merrily use raw OpenGL here
@@ -489,4 +491,5 @@ void ShadowMapOpenGL1::Draw()
 }
 }
 
+#endif
 

@@ -1,3 +1,5 @@
+#if defined(MACOSX) || defined(WIN32)
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //	Shadow Mapping Tutorial
 //	Accompanies a tutorial found on my site
@@ -383,4 +385,5 @@ int main(int argc, char** argv)
 
 }
 
+#endif
 

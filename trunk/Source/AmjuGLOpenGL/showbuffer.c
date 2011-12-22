@@ -1,3 +1,5 @@
+#ifndef IPHONE
+
 /* showbuffer.c */
 
 
@@ -190,3 +192,6 @@ ShowStencilBuffer( GLsizei winWidth, GLsizei winHeight,
 
    glPopAttrib();
 }
+
+#endif
+
