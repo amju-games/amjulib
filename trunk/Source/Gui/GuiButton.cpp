@@ -9,9 +9,11 @@ namespace Amju
 {
 const char* GuiButton::NAME = "gui-button";
 
+static const int BUTTON_PRIORITY = -100; // a pressed button takes priority over most stuff
+
 GuiButton::GuiButton()
 {
-  TheEventPoller::Instance()->AddListener(this); 
+  TheEventPoller::Instance()->AddListener(this, BUTTON_PRIORITY); 
 
   m_isMouseOver = false;
   m_isPressed = false;
@@ -135,14 +137,18 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   // Point in button rectangle ?
   Rect r = GetRect(this);//(m_pos.x, m_pos.x + m_size.x, m_pos.y - m_size.y, m_pos.y);
   m_isMouseOver = (r.IsPointIn(Vec2f(ce.x, ce.y)));
-  return m_isMouseOver; // handled if over this button
+
+  // This isn't right - only handled if we click the button
+  ////  return m_isMouseOver; // handled if over this button 
+
+  return false;
 }
 
 bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (!IsVisible())
   {
-    return false;;
+    return false;
   }
 
   // If event is mouse button up, and button is pressed, and mouse is over button,
