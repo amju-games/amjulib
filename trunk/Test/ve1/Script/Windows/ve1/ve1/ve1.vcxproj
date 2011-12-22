@@ -139,24 +139,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ObjectUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\Player.cpp" />
     <ClCompile Include="..\..\..\..\Source\PlayerInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Postbox.cpp" />
     <ClCompile Include="..\..\..\..\Source\PosUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Object.cpp" />
@@ -166,23 +175,32 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h" />
+    <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
+    <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
+    <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
+    <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\Player.h" />
     <ClInclude Include="..\..\..\..\Source\PlayerInfo.h" />
+    <ClInclude Include="..\..\..\..\Source\Postbox.h" />
     <ClInclude Include="..\..\..\..\Source\PosUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
+    <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
+    <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Character.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Object.h" />
