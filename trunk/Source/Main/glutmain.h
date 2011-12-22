@@ -178,8 +178,8 @@ int main(int argc, char **argv)
 
   // Defined in game-specific code
   //Amju::AmjuGLWindowInfo w(WINDOW_W, WINDOW_H, false);
-  Amju::AmjuGL::Init();
   Amju::AmjuGL::CreateWindow(&w);
+  Amju::AmjuGL::Init();
 
   // This game-specific function must be defined for each project
   StartUp();
