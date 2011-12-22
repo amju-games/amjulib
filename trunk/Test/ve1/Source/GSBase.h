@@ -19,6 +19,9 @@ public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
+  void SetPrevState(GameState*);
+  void GoBack();  // return to prev state - must have been set!
+
 protected:
 
 protected:
@@ -27,6 +30,7 @@ protected:
   GSBase* m_nextState;
   float m_yrot; 
   bool m_drag;
+  GameState* m_prevState;
 };
 }
 

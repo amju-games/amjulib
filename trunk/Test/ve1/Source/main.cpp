@@ -21,6 +21,7 @@
 #include <CursorManager.h>
 #include <File.h>
 #include <Directory.h>
+#include "AvatarManager.h"
 
 namespace Amju
 {
@@ -43,6 +44,7 @@ void StartUp()
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
   TheCursorManager::Instance()->Load();
+  TheAvatarManager::Instance()->Load();
 
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());

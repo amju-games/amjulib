@@ -10,53 +10,56 @@
 #include "Ve1OnlineReqManager.h"
 #include <StringUtils.h>
 #include "ObjectManager.h"
-#include "PosUpdate.h"
+#include "ObjectUpdater.h"
+#include <CursorManager.h>
+#include "GSPaused.h"
+#include <EventPoller.h>
 
 namespace Amju
 {
-// TODO TEMP TEST
-class MoveReq : public Ve1Req
+void OnPauseButton()
 {
-public:
-  MoveReq(const std::string& url, const Vec3f& pos) : Ve1Req(url, "Move req"), m_requestedPos(pos)
-  {
-  }
+  TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
+}
 
-  virtual void HandleResult()
-  {
-    if (GetResult().GetSuccess())
-    {
-      std::cout << "Move req success! " << GetResult().GetString() << "\n";
-    }
-    else
-    {
-      // TODO Log those errors ?
-      std::cout << "Move req failure! " << GetResult().GetErrorString() << "\n";
-      //return;
-    }
-
-    // TODO Check for login timeout
-
-    // Either wait till we get this, then send the local human player to the desired location;
-    // OR, immediately move, (reducing lag) but go back if the request is then denied.
-
-    // For now, wait till successful response then move
-
-    // TODO Check for success/failure of request
-std::cout << "Got response from server, moving local player to requested pos...\n";
-    if (GetLocalPlayer())
-    {
-      GetLocalPlayer()->MoveTo(m_requestedPos);
-    }
-  }
-
-private:
-  Vec3f m_requestedPos;
-};
+void OnBuildButton()
+{
+  // Enable build GUI
+}
 
 GSMain::GSMain()
 {
   m_moveRequest = false;
+}
+
+void GSMain::ShowObjectMenu(GameObject* obj)
+{
+  m_menu = new GuiMenu;
+
+  m_menu->SetPos(m_mouseScreen);
+
+  Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
+  if (v)
+  {
+    v->SetMenu(m_menu);
+  }
+
+/*
+  GuiMenu* childMenu = new GuiMenu;
+  childMenu->SetName("Child menu");
+  childMenu->AddItem(new GuiMenuItem("good"));
+  childMenu->AddItem(new GuiMenuItem("Lord"));
+  childMenu->AddItem(new GuiMenuItem("this"));
+  childMenu->AddItem(new GuiMenuItem("seems"));
+  childMenu->AddItem(new GuiMenuItem("to"));
+  childMenu->AddItem(new GuiMenuItem("work"));
+
+  m_menu = new GuiMenu;
+  
+  m_menu->AddItem(new GuiMenuItem("I am"));
+  m_menu->AddItem(new GuiMenuItem("some text"));
+  m_menu->AddItem(new GuiNestMenuItem("I R Nested!", childMenu));
+*/
 }
 
 void GSMain::Update()
@@ -66,9 +69,7 @@ void GSMain::Update()
   // Make periodic checks for newly created objects
   TheObjectManager::Instance()->Update();
 
-  // Make period checks for new positions for objects
-  PosUpdate();
-
+  TheObjectUpdater::Instance()->Update();
 
   TheGame::Instance()->UpdateGameObjects();
 }
@@ -82,7 +83,7 @@ void GSMain::DoMoveRequest()
     Unproject(m_mouseScreen, 1, &mouseWorldFar);
     LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
 
-
+/*
     // Draw for debugging
     std::cout << "Selecting, mouse: x: " << m_mouseScreen.x << " y: " << m_mouseScreen.y << "\n";
     AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
@@ -90,6 +91,7 @@ void GSMain::DoMoveRequest()
     AmjuGL::DrawLine(AmjuGL::Vec3(mouseWorldNear.x + 0.1f, mouseWorldNear.y + 0.1f, mouseWorldNear.z),
       AmjuGL::Vec3(mouseWorldFar.x, mouseWorldFar.y, mouseWorldFar.z));
     AmjuGL::PopAttrib();
+*/
 
     GameObject* selectedObj = 0;
     GameObjects* objs = TheGame::Instance()->GetGameObjects();
@@ -116,6 +118,8 @@ void GSMain::DoMoveRequest()
     {
       const std::string name = selectedObj->GetTypeName();
       std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
+
+      ShowObjectMenu(selectedObj);
     }
     else if (GetLocalPlayer())
     {
@@ -123,13 +127,7 @@ std::cout << "Ground clicked...\n";
       Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-      std::string url = TheVe1ReqManager::Instance()->MakeUrl(MOVE_REQ);
-      url += "&obj_id=";
-      url += ToString(GetLocalPlayer()->GetId());
-      url += "&x=" + ToString(pos.x); 
-      url += "&y=" + ToString(pos.y); 
-      url += "&z=" + ToString(pos.z); 
-      TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
+      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos);
     }
 }
 
@@ -150,17 +148,20 @@ void GSMain::Draw()
   AmjuGL::SetIdentity();
 
   // TODO Super simple camera
+  static const float CAM_Y = 100.0f;
+  static const float CAM_Z = 150.0f;
+
   if (GetLocalPlayer())
   {
     const Vec3f& pos = GetLocalPlayer()->GetPos();
 
 //std::cout << "Player pos: " << pos.x << " " << pos.y << " " << pos.z << "\n";
 
-    AmjuGL::LookAt(pos.x, pos.y + 200.0f, pos.z + 200.0f,  pos.x, pos.y, pos.z,  0, 1, 0);
+    AmjuGL::LookAt(pos.x, pos.y + CAM_Y, pos.z + CAM_Z,  pos.x, pos.y, pos.z,  0, 1, 0);
   }
   else
   {
-    AmjuGL::LookAt(0, 200.0f, 200.0f,  0, 0, 0,  0, 1, 0);
+    AmjuGL::LookAt(0, CAM_Y, CAM_Z,  0, 0, 0,  0, 1, 0);
   }
 
   GetVe1SceneGraph()->Draw();
@@ -175,6 +176,20 @@ void GSMain::Draw()
 
 void GSMain::Draw2d()
 {
+  m_gui->Draw();
+
+  if (m_menu)
+  {
+    m_menu->Draw();
+  }
+
+  TheCursorManager::Instance()->Draw();
+}
+
+void GSMain::OnDeactive()
+{
+  m_gui = 0;
+  m_menu = 0;
 }
 
 void GSMain::OnActive()
@@ -184,6 +199,15 @@ void GSMain::OnActive()
   // We only want to do this if we decide to reload the world
 //  GetVe1SceneGraph()->Clear();
 
+  // Load HUD GUI
+  m_gui = LoadGui("gui-hud.txt");
+  Assert(m_gui);
+  GuiElement* pauseButton = m_gui->GetElementByName("pause-button");
+  Assert(pauseButton); // bad gui file..?
+  pauseButton->SetCommand(Amju::OnPauseButton);
+  //TheEventPoller::Instance()->SetListenerPriority(pauseButton, -1); // so we don't move to the button pos
+
+  m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
 }
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
@@ -196,6 +220,8 @@ bool GSMain::OnCursorEvent(const CursorEvent& ce)
 
 bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+std::cout << "Mouse button event!! ";
+
   // Player has clicked somewhere on screen.
   // Response will depend on whether an object was clicked, or a GUI element.
   // If the ground was clicked, make a request to move to that location.
@@ -205,13 +231,39 @@ bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
   if (!mbe.isDown)
   {
-
-    // Check for GOs: use code in amjuWW
-
-    // Move to location:
     m_moveRequest = true;
   }
+  
+/*
+    if (m_menu && GetRect(m_menu).IsPointIn(m_mouseScreen))
+    {
+std::cout << "Click event - Get rid of menu\n";
+      TheEventPoller::Instance()->RemoveListener(m_menu);
+      m_menu = 0;
+    }
+  }
+  else
+  {
+    if (!m_menu)
+    {
+std::cout << "Click event - move to new pos\n";
+      // Move to location:
+      m_moveRequest = true;
+    }
+  }
+*/
 
   return false;
 }
+
+bool GSMain::OnKeyEvent(const KeyEvent& ke)
+{
+  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'u')
+  {
+    TheObjectUpdater::Instance()->Update();
+    return true;
+  }
+  return false;
+}
+
 } // namespace

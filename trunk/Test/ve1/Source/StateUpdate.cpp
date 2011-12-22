@@ -1,21 +1,17 @@
-#include "PosUpdate.h"
-#include <Game.h>
-#include <GameObject.h>
-#include "Ve1Req.h"
+#include "StateUpdate.h"
 #include <iostream>
-#include <Xml/XmlParser2.h>
 #include <Xml/XmlNodeInterface.h>
-#include <SafeUtils.h>
-#include <Timer.h>
-#include "Ve1OnlineReqManager.h"
-#include "Ve1Object.h"
+#include <Xml/XmlParser2.h>
 #include "ObjectUpdater.h"
+#include <SafeUtils.h>
 
 namespace Amju
 {
-PosUpdateReq::PosUpdateReq(const std::string& url) : Ve1Req(url, "pos update req") {}
+GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get pos updates")
+{
+}
 
-void PosUpdateReq::HandleResult()
+void GetStateUpdatesReq::HandleResult()
 {
   HttpResult res = GetResult();
 
@@ -26,7 +22,8 @@ std::cout << "OH NO FAIL! for get pos req: " << res.GetErrorString() << "\n";
   }
 
   std::string str = res.GetString();
-//std::cout << "Pos update req result: " << str << "\n";
+
+//std::cout << "STATE update req result: " << str << "\n";
 
   // Parse XML, create Object and add to ObjectManager
   PXml xml = ParseXml(str.c_str());
@@ -36,15 +33,15 @@ std::cout << "OH NO FAIL! for get pos req: " << res.GetErrorString() << "\n";
   if (SafeStrCmp(p.getName(), "now"))
   {
     std::string timestamp = p.getText();
-std::cout << "Got new pos update timestamp: " << timestamp << "\n";
-    TheObjectUpdater::Instance()->SetTimestampPos(timestamp);
+std::cout << "Got new pos update timestamp (from server): " << timestamp << "\n";
+    TheObjectUpdater::Instance()->SetTimestampUpdate(timestamp);
   }
 
   p = xml.getChildNode(1);
-  if (SafeStrCmp(p.getName(), "objs"))
+  if (SafeStrCmp(p.getName(), "states"))
   {
 #ifdef XML_DEBUG
-std::cout << "found objs element\n";
+std::cout << "found states element\n";
 #endif
 
     int numObjs = p.nChildNode();
@@ -58,23 +55,21 @@ std::cout << "Obj " << i << ": ";
 #endif
 
       int id = atoi(obj.getChildNode(0).getText());
-      int x = atof(obj.getChildNode(1).getText());
-      int y = atof(obj.getChildNode(2).getText());
-      int z = atof(obj.getChildNode(3).getText());
+      std::string key = obj.getChildNode(1).getText();
+      std::string val = obj.getChildNode(2).getText();
 
 //std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
 
-      TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z));
+      TheObjectUpdater::Instance()->QueueUpdate(id, key, val);
     }
   }
   else
   {
     // Unexpected response from server. Is server reachable ?
     // TODO LOG this error
-std::cout << "Pos update: Didn't find \"objs\" tag..\n";
+std::cout << "States update: Didn't find \"states\" tag..\n";
   }
 }
-
 }
 

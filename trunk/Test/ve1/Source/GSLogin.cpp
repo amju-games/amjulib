@@ -42,10 +42,6 @@ void GSLogin::OnActive()
   Assert(m_gui);
 
   m_gui->GetElementByName("login-button")->SetCommand(Amju::OnLoginButton);
-
-//  m_gui->GetElementByName("start-button-2p")->SetCommand(new CommandStartGame2p);
-//  m_gui->GetElementByName("editor-button")->SetCommand(new CommandEditor);
-
 }
 
 void GSLogin::OnLoginButton()

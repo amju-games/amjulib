@@ -4,11 +4,16 @@
 #include <Singleton.h>
 #include "GSBase.h"
 #include <Vec2.h>
+#include <GuiElement.h>
+#include <GuiMenu.h>
 
 namespace Amju 
 {
+class GameObject;
+
 class GSMain : public GSBase
 {
+protected:
   GSMain();
   friend class Singleton<GSMain>;
 
@@ -17,16 +22,21 @@ public:
   virtual void Draw();
   virtual void Draw2d();
   virtual void OnActive();
+  virtual void OnDeactive();
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnKeyEvent(const KeyEvent&);
 
 private:
   void DoMoveRequest();
+  void ShowObjectMenu(GameObject*);
 
 private:
   Vec2f m_mouseScreen;
   bool m_moveRequest;
+  PGuiElement m_gui;
+  RCPtr<GuiMenu> m_menu;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
