@@ -393,8 +393,12 @@ void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
 
 ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
 {
+#ifdef IPHONE
+  return new ShadowMapNull; // TODO
+#else
   // TODO: create best quality impl depending on hardware capability
   return new ShadowMapOpenGL2;
+#endif
 }
 
 }
