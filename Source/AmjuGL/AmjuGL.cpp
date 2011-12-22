@@ -195,7 +195,7 @@ bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
 {
   AMJU_CALL_STACK;
   
-  Assert(initCalled == 1);
+  Assert(initCalled == 0);
 
   Screen::SetSize(w->GetWidth(), w->GetHeight());
   bool b = impl->CreateWindow(w);
