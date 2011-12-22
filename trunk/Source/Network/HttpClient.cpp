@@ -569,9 +569,11 @@ bool HttpClient::Get(
   std::string host = GetServerNameFromUrl(url);
   int port = GetPortFromUrl(url);
 
+#ifdef HTTP_DEBUG
 std::cout << "Path: " << path << "\n";
 std::cout << "Server: " << host << "\n";
 std::cout << "Port: " << port << "\n";
+#endif
 
 #ifdef USE_METALSHELL_CODE
   return MetalshellGet(m, path, host, port, result);
