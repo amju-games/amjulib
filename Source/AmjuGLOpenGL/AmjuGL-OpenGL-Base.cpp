@@ -397,6 +397,12 @@ ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
   return new ShadowMapNull; // TODO
 #else
   // TODO: create best quality impl depending on hardware capability
+  if (!glBindFramebufferEXT)
+  {
+    // Required extension not supported
+    return new ShadowMapNull;
+  }
+
   return new ShadowMapOpenGL2;
 #endif
 }
