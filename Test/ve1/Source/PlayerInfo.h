@@ -4,17 +4,28 @@
 #include <map>
 #include <string>
 #include <RCPtr.h>
+#include <Singleton.h>
 
 namespace Amju
 {
 class PlayerInfo : public RefCounted
 {
 public:
+  ~PlayerInfo();
+
   void SetFilename(const std::string& filename);
 
-  void Set(const std::string& key, const std::string& val);
-  const std::string& Get(const std::string& key);
+  void PISetString(const std::string& key, const std::string& val);
+  void PISetBool(const std::string& key, bool val);
+  void PISetInt(const std::string& key, int val);
+  void PISetFloat(const std::string& key, float val);
 
+  const std::string& PIGetString(const std::string& key) const;
+  bool PIGetBool(const std::string& key) const;
+  int PIGetInt(const std::string& key) const;
+  float PIGetFloat(const std::string& key) const;
+
+  // Load file -- succeeds if file does not exist, assume not created yet
   bool Load();
   bool Save();
 
@@ -23,6 +34,29 @@ private:
   typedef std::map<std::string, std::string> PIMap;
   PIMap m_map;
 };
+
+typedef RCPtr<PlayerInfo> PPlayerInfo;
+
+
+class PlayerInfoManager : public NonCopyable
+{
+public:
+  void SetCurrentPlayer(const std::string& playerName);
+  PlayerInfo* GetPI(); // gets current player, must be set first
+
+private:
+  PlayerInfoManager();
+  friend class Singleton<PlayerInfoManager>;
+
+  typedef std::map<const std::string, PPlayerInfo> PIMap;
+  PIMap m_map;
+  PlayerInfo* m_currentPI;
+};
+
+// Easy to identify keys -- maybe hash later ? TODO
+#define PI_KEY(str) str
+
+typedef Singleton<PlayerInfoManager> ThePlayerInfoManager;
 }
 
 #endif

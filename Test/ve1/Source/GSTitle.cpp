@@ -1,13 +1,17 @@
 #include "GSTitle.h"
 #include <AmjuGL.h>
 #include <Game.h>
+#include "GSStartMenu.h"
 #include "GSLogin.h"
 
 namespace Amju
 {
 static void OnStartButton()
 {
-  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance()); 
+  // For now, no start menu as there is only the multi player option
+  //TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+ 
+  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
 }
 
 GSTitle::GSTitle()

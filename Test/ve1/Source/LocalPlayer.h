@@ -13,7 +13,7 @@ public:
   static const char* TYPENAME;
 
   virtual const char* GetTypeName() const { return TYPENAME; }
- 
+  virtual void SetMenu(GuiMenu*); 
 };
 
 LocalPlayer* GetLocalPlayer();

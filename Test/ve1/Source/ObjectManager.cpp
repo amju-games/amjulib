@@ -11,8 +11,9 @@
 #include "Player.h"
 #include "LocalPlayer.h"
 #include <StringUtils.h>
+#include "PlayerInfo.h"
 
-#define XML_DEBUG
+//#define XML_DEBUG
 
 namespace Amju
 {
@@ -26,7 +27,7 @@ std::ostream& operator<<(std::ostream& os, const Object& obj)
 
 void Object::Load()
 {
-  std::cout << "Loading object " << *this << "\n";
+//  std::cout << "Loading object " << *this << "\n";
 
   // Create new object, load it, add to Game
   PGameObject go;
@@ -36,7 +37,16 @@ void Object::Load()
   {
     // If owner ID matches logged in user ID, create a LocalPlayer, else a Player.
     // TODO
-    go = new LocalPlayer;
+
+    PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+    if (pi->PIGetInt(PI_KEY("player obj id")) == m_id)
+    {
+      go = new LocalPlayer;
+    }
+    else
+    {
+      go = new Player;
+    }
   }
   else
   {
@@ -51,7 +61,7 @@ void Object::Load()
 
     if (m_datafile.empty())
     {
-std::cout << "Object load: no data file needed for " << *this << "\n";
+//std::cout << "Object load: no data file needed for " << *this << "\n";
       TheGame::Instance()->AddGameObject(go);
     }
     else
@@ -60,7 +70,7 @@ std::cout << "Object load: no data file needed for " << *this << "\n";
     
       if (f.OpenRead(m_datafile))
       {
-std::cout << "Object load: Opened file " << m_datafile << " ok...\n";
+//std::cout << "Object load: Opened file " << m_datafile << " ok...\n";
 
         if (go->Load(&f))
         {
@@ -110,7 +120,7 @@ std::cout << "OH NO FAIL! " << res.GetErrorString() << "\n";
     }
 
     std::string str = res.GetString();
-std::cout << "Object check req result: " << str << "\n";
+//std::cout << "Object check req result: " << str << "\n";
 
     // Parse XML, create Object and add to ObjectManager
     PXml xml = ParseXml(str.c_str());
@@ -180,7 +190,9 @@ std::cout << "Didn't find \"objs\" tag..\n";
 
 bool AssetList::Load()
 {
+#ifdef ASSET_DEBUG
 std::cout << "Opening asset list " << m_name << "\n";
+#endif
 
   File f(File::NO_VERSION, File::STD); // OS file, not glue file
   if (!f.OpenRead(m_name))
@@ -200,7 +212,10 @@ std::cout << "Failed to open asset list file " << m_name << "\n";
 
   for (int i = 0; i < size; i++)
   {
+#ifdef ASSET_DEBUG
 std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
+#endif
+
     const std::string s = m_assetNames[i];
     TheObjectManager::Instance()->GetFile(s);
   }
@@ -238,7 +253,7 @@ void AssetList::Update()
 
 ObjectManager::ObjectManager()
 {
-  m_elapsed = 0;
+  m_elapsed = 999999.9f;
 }
 
 void ObjectManager::AddObject(PObject obj)
@@ -312,7 +327,7 @@ void ObjectManager::Update()
   }
 
 
-  static const float OBJECT_CHECK_PERIOD = 3.0f; // seconds, TODO CONFIG
+  static const float OBJECT_CHECK_PERIOD = 60.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
   // TODO Get list of all objects *deleted* since last check.
@@ -325,8 +340,9 @@ void ObjectManager::Update()
     std::cout << "It's time to create a new object check req...\n";
 
     // Create request, add to OnlineReqManager
-    std::string url = TheVe1ReqManager::Instance()->MakeUrl(OBJECT_CHECK_REQ);
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECTS);
     url += "&time=" + timestamp;
+
     std::cout << "URL: " << url << "\n";
 
     TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));

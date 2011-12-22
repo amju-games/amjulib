@@ -17,7 +17,7 @@ public:
 
   virtual void HandleResponse()
   {
-    // TODO Check for timeout
+    // TODO Check for timeout, end of session, etc.
   }
 };
 }

@@ -13,6 +13,20 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
   m_nextState = 0;
   m_drag = false;
   m_yrot = 0;
+  m_prevState = 0;
+}
+
+void GSBase::SetPrevState(GameState* prevState)
+{
+  m_prevState = prevState;
+}
+
+void GSBase::GoBack()
+{
+  Assert(m_prevState);
+std::cout << "GO BACK to previous state...\n";
+
+  TheGame::Instance()->SetCurrentState(m_prevState);
 }
 
 void GSBase::Draw()
