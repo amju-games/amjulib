@@ -32,21 +32,29 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   // Add Task-specific CGI script name
   switch (t)
   {
-  case LOGIN_REQ:
+  case LOGIN:
     s += "login.pl";
     // ** NB return ** -- we don't have a session yet!
     return s;
 
-  case MOVE_REQ:
+  case SET_POSITION:
     s += "movereq.pl"; // Calling code adds object ID, new location req
     break;
 
-  case OBJECT_CHECK_REQ:
+  case GET_NEW_OBJECTS:
     s += "getobjects.pl"; // Calling code adds time of last check, (region)
     break;
 
-  case POS_UPDATE_REQ:
+  case GET_POSITION_UPDATES:
     s += "getpos.pl"; // Calling code adds time of last check, (region)
+    break;
+
+  case GET_STATE_UPDATES:
+    s += "getstates.pl"; // calling code add time of last check
+    break;
+
+  case SET_STATE:
+    s += "updatereq.pl"; // calling code adds object ID, key, val
     break;
   }
 
