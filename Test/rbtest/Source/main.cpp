@@ -1,3 +1,5 @@
+#ifndef IPHONE
+
 #ifdef WIN32
 #if defined(_DEBUG)
 #pragma comment(lib, "../../../../../../Build/Debug/AmjuLibMsvc.lib")
@@ -32,4 +34,6 @@ void StartUp()
   );
 }
 }
+
+#endif // IPHONE
 
