@@ -26,6 +26,7 @@ New Time class - but calling the file Time.h causes problems.
 namespace Amju
 {
 class TimePeriod;
+class File;
 
 class Time
 {
@@ -43,6 +44,14 @@ public:
   // Construct from unix timestamp in secs.
   Time(unsigned int secs);
 
+  // Construct from string representation of unix timestamp in secs.
+  // Prefer this one as it is upgradeable to 64-bit..? 
+  Time(const std::string&);
+
+  // Convert back to unix timestamp
+  unsigned int ToSeconds() const;
+
+
   // Get constituent parts of a Time.
   int GetSecs() const;
   int GetMins() const;
@@ -56,7 +65,6 @@ public:
   
   std::string ToString() const;
 
-  unsigned int ToSeconds() const;
 
   // Time arithmetic: you can add or subtract TimePeriods from Times.
   Time& operator+=(const TimePeriod&);
@@ -74,6 +82,10 @@ public:
 
   // Round up to the next whole multiple of the given period.
   Time& RoundUp(const TimePeriod&);
+
+  // Save and load timestamp
+  bool Save(File*);
+  bool Load(File*);
  
 protected:
   unsigned int m_secs;

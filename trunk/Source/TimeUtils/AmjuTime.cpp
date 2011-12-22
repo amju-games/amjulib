@@ -30,19 +30,18 @@ New Time class - but calling the file Time.h causes problems.
 
 */
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "AmjuFirst.h"
 #ifdef WIN32
 #define _USE_32BIT_TIME_T
 #endif
 
 #include <iostream>
+#include <sstream>
 #include <time.h>
 #include "AmjuTime.h"
 #include "StringUtils.h"
 #include "TimePeriod.h"
+#include <File.h>
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -82,6 +81,13 @@ std::cout << "Failed to create time.\n";
 std::cout << "Successfully generated time: " << Time((unsigned int)t).ToString().c_str() << "\n";
   }
   return Time((unsigned int)t);
+}
+
+Time::Time(const std::string& s)
+{
+  // Convert string to unsigned int
+  std::stringstream ss(s);
+  ss >> m_secs;
 }
 
 Time::Time(unsigned int secs) : m_secs(secs)
@@ -254,6 +260,25 @@ Time& Time::RoundDown(const TimePeriod& tp)
 //std::cout << ToString().c_str() << "\n";
 
   return *this; 
+}
+
+bool Time::Load(File* f)
+{
+  std::string s;
+  if (!f->GetDataLine(&s))
+  {
+    return false;
+  }
+  Time t(s); // construct from string
+  *this = t;
+  return true;
+}
+
+bool Time::Save(File* f)
+{
+  std::stringstream ss;
+  ss << m_secs;
+  return f->Write(ss.str());  
 }
 }
 
