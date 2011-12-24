@@ -124,7 +124,7 @@ sub create_table_chat()
   my $sql = <<END;
 
 CREATE TABLE `chat`
-(`id` INT NOT NULL AUTO INCREMENT,
+(`id` INT NOT NULL AUTO_INCREMENT,
 `recip` INT NOT NULL, 
 `sender` INT NOT NULL, 
 `candelete` TINYINT NOT NULL, 
