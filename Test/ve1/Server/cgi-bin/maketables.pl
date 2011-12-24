@@ -43,7 +43,9 @@ CREATE TABLE `session`
 `start` TIMESTAMP NOT NULL,
 `expires` TIMESTAMP NOT NULL,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`player_id`) REFERENCES player(`id`)
+FOREIGN KEY (`player_id`) REFERENCES player(`id`),
+
+INDEX (`id`, `expires`)
 ) ENGINE = MYISAM;
 END
 
@@ -63,7 +65,9 @@ CREATE TABLE `object`
 `datafile` VARCHAR(30) NOT NULL,
 `owner` INT NOT NULL,
 `createtime` TIMESTAMP,
-PRIMARY KEY (`id`)
+PRIMARY KEY (`id`),
+
+INDEX (`createtime`)
 ) ENGINE = MYISAM;
 END
 
@@ -82,7 +86,9 @@ CREATE TABLE `objectstate`
 `val` VARCHAR(30) NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
 PRIMARY KEY (`id`, `key`),
-FOREIGN KEY (`id`) REFERENCES object(`id`) 
+FOREIGN KEY (`id`) REFERENCES object(`id`),
+
+INDEX (`whenchanged`)
 ) ENGINE = MYISAM;
 END
 
@@ -102,7 +108,33 @@ CREATE TABLE `objectpos`
 `z` FLOAT NOT NULL, 
 `whenchanged` TIMESTAMP NOT NULL,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`id`) REFERENCES object(`id`) 
+FOREIGN KEY (`id`) REFERENCES object(`id`),
+
+INDEX (`whenchanged`)
+) ENGINE = MYISAM;
+END
+
+  update_or_insert($sql);
+
+  print "Created object table! $sql\n<br>\n";
+}
+
+sub create_table_chat()
+{
+  my $sql = <<END;
+
+CREATE TABLE `chat`
+(`id` INT NOT NULL AUTO INCREMENT,
+`recip` INT NOT NULL, 
+`sender` INT NOT NULL, 
+`candelete` TINYINT NOT NULL, 
+`whensent` TIMESTAMP NOT NULL,
+`msg` TEXT NOT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`recip`) REFERENCES object(`id`),
+FOREIGN KEY (`sender`) REFERENCES object(`id`),
+
+INDEX (`recip`, `whensent`) 
 ) ENGINE = MYISAM;
 END
 
@@ -129,6 +161,9 @@ sub create_tables()
 
   drop_table("objectpos");
   create_table_objectpos();
+
+  drop_table("chat");
+  create_table_chat();
 
   print "<br><br>Creating initial data...<br>\n";
 

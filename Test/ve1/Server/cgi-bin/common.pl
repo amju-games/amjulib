@@ -90,7 +90,7 @@ sub check_session()
 {
   my $session_id = param('session_id') or die "No session id";
 
-  my $sql = "select id, UNIX_TIMESTAMP(now()) from session where id=$session_id and expires > now()";
+  my $sql = "select id, UNIX_TIMESTAMP(now()) from session where id=$session_id and expires >= now()";
   my $query = $dbh->prepare($sql) or die "Prepare failed for: '$sql'";
   $query->execute or die "Failed to execute '$sql'";
   
