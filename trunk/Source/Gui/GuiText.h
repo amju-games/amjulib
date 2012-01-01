@@ -4,6 +4,7 @@
 #include <string>
 #include "GuiElement.h"
 #include "Font.h"
+#include <Colour.h>
 
 namespace Amju
 {
@@ -45,6 +46,8 @@ protected:
   bool m_drawBg;
   PFont m_font;
   float m_textSize;
+  Colour m_bgCol;
+  Colour m_fgCol;
 };
 }
 
