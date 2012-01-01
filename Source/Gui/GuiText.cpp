@@ -17,6 +17,10 @@ GuiText::GuiText()
   m_inverse = false;
   m_drawBg = false;
   m_textSize = 1.0f;
+  static const Colour WHITE(1, 1, 1, 1);
+  static const Colour BLACK(0, 0, 0, 1);
+  m_bgCol = WHITE;
+  m_fgCol = BLACK;
 }
 
 void GuiText::SetTextSize(float textSize)
@@ -70,20 +74,18 @@ void GuiText::Draw()
   Font* font = GetFont();
 
   PushColour();
-  static const Colour WHITE(1, 1, 1, 1);
-  static const Colour BLACK(0, 0, 0, 1);
 
   if (m_drawBg)
   {
-    // TODO Mult colour
-    AmjuGL::SetColour(m_inverse ? BLACK : WHITE);
+    // TODO Mult colour ?
+    AmjuGL::SetColour(m_inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     Rect r = GetRect(this);
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
     // Set text colour to contrast with BG, but only if BG is drawn
-    AmjuGL::SetColour(m_inverse ? WHITE: BLACK);
+    AmjuGL::SetColour(m_inverse ? m_bgCol: m_fgCol);
   }
 
   // Centre the text vertically
@@ -195,10 +197,49 @@ bool GuiText::LoadText(File* f)
     return false;
   }
   Strings strs = Split(s, ',');
-  Assert(strs.size() == 2);
+  int size = strs.size();
+  Assert(size >= 2);
   std::string fontName = "font2d/" + strs[0] + "-font.font";
   m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
   m_textSize = ToFloat(strs[1]);
+
+  // TODO optional flags etc
+  for (int i = 2; i < size; i++)
+  {
+    const std::string& s = strs[i];
+    if (s == "inv")
+    {
+      m_inverse = true;
+    }
+    else if (s == "left")
+    {
+      m_just = AMJU_JUST_LEFT;
+    }
+    else if (s == "right")
+    {
+      m_just = AMJU_JUST_RIGHT;
+    }
+    else if (s == "centre")
+    {
+      m_just = AMJU_JUST_CENTRE;
+    }
+    else if (StringContains(s, "bgcol="))
+    {
+      std::string c = s.substr(6); // colour code should start at 6th char
+      m_bgCol = FromHexString(c);
+      m_drawBg = true;
+    }
+    else if (StringContains(s, "fgcol="))
+    {
+      std::string c = s.substr(6); // colour code should start at 6th char
+      m_fgCol = FromHexString(c);
+    }
+    else
+    {
+      f->ReportError("Unexpected option: " + s);
+      return false;
+    }
+  }
 
   return true;
 }
