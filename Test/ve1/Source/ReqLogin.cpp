@@ -17,22 +17,27 @@ ReqLogin::ReqLogin(const std::string& url) : Ve1Req(url, "login")
 {
 }
 
-void ReqLogin::HandleResult()
+void ReqLogin::OnFailure()
+{
+  // TODO Login failed state
+}
+
+void ReqLogin::OnSuccess()
 {
   // Check for session ID or login failure
   TheVe1ReqManager::Instance()->SetLoggedIn(false);
-  HttpResult res = GetResult();
-  if (res.GetSuccess())
-  {
+
+//  if (res.GetSuccess())
+//  {
 //std::cout << "Login result: " << res.GetString() << "\n";
 
     // Parse XML, create Object and add to ObjectManager
-    PXml xml = ParseXml(res.GetString().c_str());
+//    PXml xml = ParseXml(res.GetString().c_str());
 
     // Format of XML:
     // <session/>           <- Child(0)
 
-    PXml p = xml.getChildNode(0);
+    PXml p = m_xml.getChildNode(1);
     if (SafeStrCmp(p.getName(), "session"))
     {
 #ifdef XML_DEBUG
@@ -43,7 +48,7 @@ std::cout << "found session element\n";
       int objId = -1; // object ID for local player
 
       // Get player name and object ID for local player
-      p = xml.getChildNode(1);
+      p = m_xml.getChildNode(2);
       if (SafeStrCmp(p.getName(), "playername"))
       {
         playername = p.getText();
@@ -52,9 +57,10 @@ std::cout << "**Got player name! \"" << playername << "\"\n";
       else
       {
         // Got session ID but no player name, WTF ?
+std::cout << "Got session ID but no player name, WTF??\n";
       }
 
-      p = xml.getChildNode(2);
+      p = m_xml.getChildNode(3);
       if (SafeStrCmp(p.getName(), "objid"))
       {
         objId = atoi(p.getText());
@@ -63,6 +69,7 @@ std::cout << "**Got local player object ID: " << objId << "\n";
       else
       {
         // Got session ID but we don't know the object ID for the local player. WTF ?
+std::cout << "Got session ID but we don't know the object ID for the local player. WTF?\n";
       }
 
       std::cout << "Got session ID! " << sessionId << "\n"; 
@@ -99,14 +106,8 @@ std::cout << "**Got local player object ID: " << objId << "\n";
 std::cout << "Didn't get sesssion ID from server :-(\n";
       TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
     }
-  }
-  else  
-  {
-std::cout << "Failed to log in! Error: " << res.GetErrorString() << "\n";
-    // TODO show error page
-    TheGSLoginWaiting::Instance()->SetErrorString(res.GetErrorString());
-  }
 
+  ////}
 }
 
 void SendLoginReq(const std::string& email)

@@ -3,7 +3,6 @@
 #include "Ve1Req.h"
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
-#include <Xml/XmlNodeInterface.h>
 #include <SafeUtils.h>
 #include <File.h>
 #include <Game.h>
@@ -104,29 +103,15 @@ public:
   {
   }
 
-  virtual void HandleResult()
+  virtual void OnSuccess()
   {
-    // Parse XML list of objects
     // Add each new object to ObjectManager, as it now needs to download all associated assets, 
     //  then create the new object locally.
 
-std::cout << "Got response to object check request!\n";
-    HttpResult res = GetResult();
-
-    if (!res.GetSuccess())
-    {
-std::cout << "OH NO FAIL! " << res.GetErrorString() << "\n";
-      return; // TODO Error state
-    }
-
-    std::string str = res.GetString();
-//std::cout << "Object check req result: " << str << "\n";
-
-    // Parse XML, create Object and add to ObjectManager
-    PXml xml = ParseXml(str.c_str());
+std::cout << "Got successful response to object check request!\n";
 
     // Format of XML:
-    // <time/>           <- Child(0)
+    // <now/>           <- Child(0)
     // <objs>            <- Child(1)
     //  <obj>            <- Child(1)->Child(n)
     //   <id/>           <- Child(1)->Child(n)->Child(0) etc
@@ -137,17 +122,11 @@ std::cout << "OH NO FAIL! " << res.GetErrorString() << "\n";
     //  </obj>
     // <objs>
 
-    PXml p = xml.getChildNode(0);
-    if (SafeStrCmp(p.getName(), "now"))
-    {
-      timestamp = p.getText();
-    }
-    else
-    {
-std::cout << "Object check: Didn't get time stamp in result\n";
-    }
+    PXml p = m_xml.getChildNode(0);
+    Assert(SafeStrCmp(p.getName(), "now"));
+    timestamp = p.getText();
 
-    p = xml.getChildNode(1);
+    p = m_xml.getChildNode(1);
     if (SafeStrCmp(p.getName(), "objs"))
     {
 #ifdef XML_DEBUG

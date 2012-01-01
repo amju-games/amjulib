@@ -56,6 +56,14 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case SET_STATE:
     s += "updatereq.pl"; // calling code adds object ID, key, val
     break;
+
+  case SEND_MSG:
+    s += "sendmsg.pl"; // calling code adds recip ID, msg
+    break;
+
+  case GET_NEW_MSGS:
+    s += "getmsgs.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.

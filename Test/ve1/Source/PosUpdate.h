@@ -10,7 +10,7 @@ class PosUpdateReq : public Ve1Req
 public:
   PosUpdateReq(const std::string& url);
 
-  virtual void HandleResult();
+  virtual void OnSuccess();
 };
 }
 

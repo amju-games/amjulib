@@ -10,7 +10,8 @@ class ReqLogin : public Ve1Req
 public:
   ReqLogin(const std::string& url);
 
-  virtual void HandleResult();
+  virtual void OnSuccess();
+  virtual void OnFailure();
 };
 
 void SendLoginReq(const std::string& email);
