@@ -1,6 +1,8 @@
 #ifndef AMJU_COLOUR_H
 #define AMJU_COLOUR_H
 
+#include <string>
+
 namespace Amju
 {
 struct Colour
@@ -20,6 +22,8 @@ Colour operator*(const Colour& c1, const Colour& c2);
 void PushColour();
 void PopColour();
 void MultColour(const Colour& c);
+
+Colour FromHexString(const std::string&);
 }
 
 #endif
