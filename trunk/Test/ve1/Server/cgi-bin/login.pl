@@ -44,7 +44,7 @@ print "Query: $sql\n";
     insert($sql);
 
     # Get session ID for this player
-    $sql = "select a.id, b.playername, b.obj_id from session as a, player as b where a.player_id=$player_id and a.player_id=b.id";
+    $sql = "select now(), a.id, b.playername, b.obj_id from session as a, player as b where a.player_id=$player_id and a.player_id=b.id";
 
 print "Query: $sql\n";
 
@@ -52,11 +52,11 @@ print "Query: $sql\n";
     $query = $dbh->prepare($sql) or die
       "Query prepare failed for this query: $sql\n";
     $query->execute;
-    if (my ($session_id, $playername, $objid) = $query->fetchrow_array)
+    if (my ($now, $session_id, $playername, $objid) = $query->fetchrow_array)
     {
 print "Your new session ID: $session_id\n";
 
-      print "<session>$session_id</session><playername>$playername</playername><objid>$objid</objid>\n";
+      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid>\n";
     }
     else
     {
