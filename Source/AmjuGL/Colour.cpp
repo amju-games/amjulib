@@ -1,7 +1,7 @@
 #include "Colour.h"
 #include "AmjuGL.h"
 #include "AmjuAssert.h"
-
+#include <iostream> // TEST
 namespace Amju
 {
 Colour::Colour() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f)
@@ -67,4 +67,17 @@ void MultColour(const Colour& c)
   s_colour *= c;
   s_colour.Use();
 }
+
+Colour FromHexString(const std::string& s) 
+{
+  int r[4] = { 0xff, 0xff, 0xff, 0xff };
+  int size = s.size();
+  Assert(size == 6 || size == 8); 
+  for (int i = size - 2, j = size / 2 - 1; i >= 0; i -= 2, j--)
+  {
+    sscanf(s.substr(i, 2).c_str(), "%X", &r[j]);
+  } 
+  return Colour((float)r[0]/255.0f, (float)r[1]/255.0f, (float)r[2]/255.0f, (float)r[3]/255.0f);
+}
+
 }
