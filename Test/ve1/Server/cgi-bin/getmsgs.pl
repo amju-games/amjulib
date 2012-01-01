@@ -24,7 +24,7 @@ sub showmsgs()
   my $time = param('time') or die "Expected time since last check";
   my $recip = param('recip') or die "Expected recip";
 
-  my $sql = "SELECT id, sender, whensent, msg FROM chat WHERE recip = $recip and whensent >= FROM_UNIXTIME($time)";
+  my $sql = "SELECT id, sender, UNIX_TIMESTAMP(whensent), msg FROM chat WHERE recip = $recip and whensent >= FROM_UNIXTIME($time)";
 
   print "Query: $sql\n\n";
 
