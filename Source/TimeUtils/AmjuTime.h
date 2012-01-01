@@ -86,6 +86,8 @@ public:
   // Save and load timestamp
   bool Save(File*);
   bool Load(File*);
+
+  bool operator<(const Time& t) const;
  
 protected:
   unsigned int m_secs;

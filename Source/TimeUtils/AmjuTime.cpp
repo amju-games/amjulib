@@ -280,6 +280,11 @@ bool Time::Save(File* f)
   ss << m_secs;
   return f->Write(ss.str());  
 }
+
+bool Time::operator<(const Time& t) const
+{
+  return m_secs < t.m_secs;
+}
 }
 
 
