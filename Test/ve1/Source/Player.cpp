@@ -12,6 +12,8 @@
 #include <Timer.h>
 #include <GuiText.h>
 #include <DrawAABB.h>
+#include "LocalPlayer.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -22,12 +24,23 @@ public:
   {
   }
 
+  virtual void Update()
+  {
+    if (GetMd2())
+    {
+      Ve1Character::Update();
+    }
+  }
+
   virtual void Draw()
   {
-    Ve1Character::Draw();
+    if (GetMd2())
+    {
+      Ve1Character::Draw();
 
-    Assert(m_player->GetAABB());
-    DrawAABB(*(m_player->GetAABB()));
+      Assert(m_player->GetAABB());
+      DrawAABB(*(m_player->GetAABB()));
+    }
 
     // TODO Print name 
     /*
@@ -61,7 +74,10 @@ bool Player::Load(File* f)
 
   PlayerSceneNode* psn = new PlayerSceneNode(this);
   m_sceneNode = psn;
-  
+
+/*  
+  // Avatar set using Set() below
+
   std::string meshName;
   if (!f->GetDataLine(&meshName))
   {
@@ -86,6 +102,7 @@ bool Player::Load(File* f)
   {
     return false;
   }
+*/
 
   root->AddChild(psn);
 
@@ -175,23 +192,26 @@ void Player::Update()
 
   TurnToFaceDir();
 
-  float speed = m_vel.SqLen();
+  if (m_sceneNode->GetMd2())
+  {
+    float speed = m_vel.SqLen();
 
-  static const float MAX_SPEED = 100.0f; // TODO CONFIG
-  static const float RUN_SPEED = MAX_SPEED * 0.5f;
-  static const float WALK_SPEED = RUN_SPEED * 0.5f;
+    static const float MAX_SPEED = 100.0f; // TODO CONFIG
+    static const float RUN_SPEED = MAX_SPEED * 0.5f;
+    static const float WALK_SPEED = RUN_SPEED * 0.5f;
   
-  if (speed > RUN_SPEED)
-  {
-    m_sceneNode->SetAnim("walk"); //"run");
-  }
-  else if (speed > WALK_SPEED)
-  {
-    m_sceneNode->SetAnim("walk");
-  }
-  else
-  {
-    m_sceneNode->SetAnim("stand");
+    if (speed > RUN_SPEED)
+    {
+      m_sceneNode->SetAnim("walk"); //"run");
+    }
+    else if (speed > WALK_SPEED)
+    {
+      m_sceneNode->SetAnim("walk");
+    }
+    else
+    {
+      m_sceneNode->SetAnim("stand");
+    }
   }
 }
 
@@ -251,6 +271,12 @@ public:
 
   virtual bool Do()
   {
+    TheGSMain::Instance()->ActivateChat(true, m_player->GetId());
+
+    // TODO TEMP TEST
+//    int senderId = GetLocalPlayer()->GetId(); 
+//    TheMsgManager::Instance()->SendMsg(senderId, m_player->GetId(), "Hello! I R Msg");
+
     return false;
   }
 
@@ -260,7 +286,7 @@ private:
 
 void Player::SetMenu(GuiMenu* menu)
 {
-  menu->AddItem(new GuiMenuItem("Talk to this sucka", new CommandTalk(this)));
+  menu->AddItem(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
 }
 }
 

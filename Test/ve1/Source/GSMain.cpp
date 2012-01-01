@@ -14,6 +14,8 @@
 #include <CursorManager.h>
 #include "GSPaused.h"
 #include <EventPoller.h>
+#include "MsgManager.h"
+#include <GuiTextEdit.h>
 
 namespace Amju
 {
@@ -27,9 +29,60 @@ void OnBuildButton()
   // Enable build GUI
 }
 
+void OnChatSendButton()
+{
+  TheGSMain::Instance()->OnChatSend();
+}
+
+void GSMain::OnChatSend()
+{
+  Assert(m_lastRecipId != -1);
+
+  ActivateChat(false, -1); // ??
+
+  int senderId = GetLocalPlayer()->GetId();
+  std::string text = 
+    ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->GetText();
+  TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
+
+}
+
 GSMain::GSMain()
 {
   m_moveRequest = false;
+  m_lastRecipId = -1;
+}
+
+bool GSMain::CanShowMsg() const
+{
+  return true;
+}
+
+void GSMain::ShowMsg(const MsgManager::Msg& msg)
+{
+  m_gui->GetElementByName("msg-recv-comp")->SetVisible(true);
+  ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText("TODO Get sender name");
+  ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg.m_text);
+  
+}
+
+void GSMain::ActivateChat(bool active, int recipId)
+{
+  // TODO polish -- jump onto screen
+  m_lastRecipId = recipId;
+
+  if (active)
+  {
+    m_gui->GetElementByName("chat-comp")->SetVisible(true);
+    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText("TODO Get recip name");
+    ((GuiText*)m_gui->GetElementByName("chat-text-edit"))->SetText("type something here");
+     
+  }
+  else
+  {
+    m_gui->GetElementByName("chat-comp")->SetVisible(false);
+  }
+  
 }
 
 void GSMain::ShowObjectMenu(GameObject* obj)
@@ -70,6 +123,8 @@ void GSMain::Update()
   TheObjectManager::Instance()->Update();
 
   TheObjectUpdater::Instance()->Update();
+
+  TheMsgManager::Instance()->Update();
 
   TheGame::Instance()->UpdateGameObjects();
 }
@@ -208,6 +263,11 @@ void GSMain::OnActive()
   //TheEventPoller::Instance()->SetListenerPriority(pauseButton, -1); // so we don't move to the button pos
 
   m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
+
+  m_gui->GetElementByName("chat-send-button")->SetCommand(Amju::OnChatSendButton);
+  ActivateChat(false, -1);
+
+  m_gui->GetElementByName("msg-recv-comp")->SetVisible(false);
 }
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
@@ -258,11 +318,6 @@ std::cout << "Click event - move to new pos\n";
 
 bool GSMain::OnKeyEvent(const KeyEvent& ke)
 {
-  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'u')
-  {
-    TheObjectUpdater::Instance()->Update();
-    return true;
-  }
   return false;
 }
 
