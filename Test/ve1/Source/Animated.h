@@ -18,6 +18,7 @@ public:
 
   bool LoadMd2(const std::string& md2name);
   void SetMd2(Md2Model* model);
+  Md2Model* GetMd2();
 
 protected:
   // No texture data here - we don't know how many textures 

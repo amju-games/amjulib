@@ -38,6 +38,11 @@ void Animated::SetAnim(int anim)
   m_nextFrame = m_pModel->GetStartFrame(m_anim);
 }
 
+Md2Model* Animated::GetMd2()
+{
+  return m_pModel;
+}
+
 void Animated::SetMd2(Md2Model* model)
 {
   m_pModel = model;
