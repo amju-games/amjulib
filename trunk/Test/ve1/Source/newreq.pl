@@ -29,7 +29,7 @@ class $class : public Ve1Req\
 public:\
   $class(const std::string& url);\
 \
-  virtual void HandleResult();\
+  virtual void OnSuccess();\
 };\
 } // namespace\
 #endif\n";
@@ -45,7 +45,7 @@ namespace Amju\
 {\
 }\
 \
-void " . $scope . "HandleResult()\
+void " . $scope . "OnSuccess()\
 {\
 \
 }\

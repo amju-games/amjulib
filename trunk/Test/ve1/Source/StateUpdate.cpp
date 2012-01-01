@@ -11,33 +11,16 @@ GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "ge
 {
 }
 
-void GetStateUpdatesReq::HandleResult()
+void GetStateUpdatesReq::OnSuccess()
 {
-  HttpResult res = GetResult();
-
-  if (!res.GetSuccess())
-  {
-std::cout << "OH NO FAIL! for get pos req: " << res.GetErrorString() << "\n";
-    return; // TODO Error state
-  }
-
-  std::string str = res.GetString();
-
-//std::cout << "STATE update req result: " << str << "\n";
-
-  // Parse XML, create Object and add to ObjectManager
-  PXml xml = ParseXml(str.c_str());
-
   // Child 0 is timestamp
-  PXml p = xml.getChildNode(0);
-  if (SafeStrCmp(p.getName(), "now"))
-  {
-    std::string timestamp = p.getText();
+  PXml p = m_xml.getChildNode(0);
+  Assert(SafeStrCmp(p.getName(), "now"));
+  std::string timestamp = p.getText();
 std::cout << "Got new pos update timestamp (from server): " << timestamp << "\n";
-    TheObjectUpdater::Instance()->SetTimestampUpdate(timestamp);
-  }
+  TheObjectUpdater::Instance()->SetTimestampUpdate(timestamp);
 
-  p = xml.getChildNode(1);
+  p = m_xml.getChildNode(1);
   if (SafeStrCmp(p.getName(), "states"))
   {
 #ifdef XML_DEBUG

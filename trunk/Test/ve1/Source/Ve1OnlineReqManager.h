@@ -17,7 +17,10 @@ enum Task
   GET_POSITION_UPDATES,
 
   SET_STATE,  // send a key/val to store in DB
-  GET_STATE_UPDATES  // get all key/val updates since last check
+  GET_STATE_UPDATES,  // get all key/val updates since last check
+
+  SEND_MSG,
+  GET_NEW_MSGS,
 };
 
 class Ve1ReqManager : public OnlineReqManager

@@ -321,7 +321,7 @@ class ObjUpdateReq : public Ve1Req
 public:
   ObjUpdateReq(const std::string& url) : Ve1Req(url, "obj update req") {}
 
-  virtual void HandleResult()
+  virtual void OnSuccess()
   {
     TheObjectUpdater::Instance()->HintCheckForUpdates();   
   }
@@ -351,20 +351,13 @@ public:
   {
   }
 
-  virtual void HandleResult()
+  virtual void OnSuccess()
   {
-    if (GetResult().GetSuccess())
-    {
-      std::cout << "Move req success!\n";
-    }
-    else
-    {
-      // TODO Log those errors ?
-      std::cout << "Move req failure! " << GetResult().GetErrorString() << "\n";
-      //return;
-    }
+std::cout << "Move req success!\n";
 
     // Do nothing for now, we will download the new position and cache it
+    // TODO Prediction
+
     // It would be good to tell the Pos Updater to check now.
     TheObjectUpdater::Instance()->HintCheckForPosUpdates();   
   }

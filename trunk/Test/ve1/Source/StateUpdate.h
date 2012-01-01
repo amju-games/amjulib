@@ -10,7 +10,7 @@ class GetStateUpdatesReq : public Ve1Req
 public:
   GetStateUpdatesReq(const std::string& url);
 
-  virtual void HandleResult();
+  virtual void OnSuccess();
 };
 }
 
