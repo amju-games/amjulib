@@ -6,6 +6,7 @@
 #include <Vec2.h>
 #include <GuiElement.h>
 #include <GuiMenu.h>
+#include "MsgManager.h"
 
 namespace Amju 
 {
@@ -28,6 +29,11 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnKeyEvent(const KeyEvent&);
 
+  bool CanShowMsg() const;
+  void ShowMsg(const MsgManager::Msg& msg);
+  void OnChatSend();
+  void ActivateChat(bool active, int recipId);
+
 private:
   void DoMoveRequest();
   void ShowObjectMenu(GameObject*);
@@ -37,6 +43,9 @@ private:
   bool m_moveRequest;
   PGuiElement m_gui;
   RCPtr<GuiMenu> m_menu;
+
+  // Chat recipient
+  int m_lastRecipId;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
