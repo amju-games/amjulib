@@ -4,6 +4,7 @@
 #include <Xml/XmlParser2.h>
 #include "ObjectUpdater.h"
 #include <SafeUtils.h>
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -51,7 +52,7 @@ std::cout << "Obj " << i << ": ";
   {
     // Unexpected response from server. Is server reachable ?
     // TODO LOG this error
-std::cout << "States update: Didn't find \"states\" tag..\n";
+    ShowError("States update: Didn't find \"states\" tag in response");
   }
 }
 }

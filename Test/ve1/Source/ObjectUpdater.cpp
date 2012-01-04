@@ -10,6 +10,7 @@
 #include "PosUpdate.h"
 #include "StateUpdate.h"
 #include <Timer.h>
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -197,14 +198,14 @@ void ObjectUpdater::Update()
   static const float POS_UPDATE_PERIOD = 10.0f; // TODO CONFIG
   if (m_posElapsed > POS_UPDATE_PERIOD)
   {
-std::cout << "Creating new pos update req...\n";
+//std::cout << "Creating new pos update req...\n";
 
     m_posElapsed = 0;
 
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_POSITION_UPDATES);
     url += "&time=" + TimestampToString(m_timestampPos); 
 
-std::cout << "URL: " << url << "\n";
+//std::cout << "URL: " << url << "\n";
 
     TheVe1ReqManager::Instance()->AddReq(new PosUpdateReq(url));
   }
@@ -217,7 +218,7 @@ std::cout << "URL: " << url << "\n";
 
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_STATE_UPDATES);
     url += "&time=" + TimestampToString(m_timestampUpdate); 
-std::cout << "URL: " << url << "\n";
+//std::cout << "URL: " << url << "\n";
   
     TheVe1ReqManager::Instance()->AddReq(new GetStateUpdatesReq(url));
   }
@@ -230,7 +231,7 @@ std::cout << "URL: " << url << "\n";
     {
       const Vec3f& pos = it->second;
 
-std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "\n";
+//std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "\n";
 
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)

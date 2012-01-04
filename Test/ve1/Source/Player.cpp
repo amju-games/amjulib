@@ -271,7 +271,7 @@ public:
 
   virtual bool Do()
   {
-    TheGSMain::Instance()->ActivateChat(true, m_player->GetId());
+    TheGSMain::Instance()->ActivateChatSend(true, m_player->GetId());
 
     // TODO TEMP TEST
 //    int senderId = GetLocalPlayer()->GetId(); 

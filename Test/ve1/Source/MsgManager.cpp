@@ -63,6 +63,10 @@ void MsgManager::Update()
 
 void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 {
+  // replace spaces in msg 
+  // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
+  std::string newmsg = Replace(msg, " ", "_");
+
 std::cout << "Sending msg: to: " << recipId << " msg: " << msg << "\n";
 
   static const int MAX_CONCURRENT_MSGS = 1; // ?
@@ -73,7 +77,7 @@ std::cout << "Sending msg: to: " << recipId << " msg: " << msg << "\n";
   url += "&sender=";
   url += ToString(senderId);
   url += "&msg='";
-  url += msg;
+  url += newmsg;
   url += "'";
   TheVe1ReqManager::Instance()->AddReq(new ReqSendMsg(ToUrlFormat(url)), MAX_CONCURRENT_MSGS);
 }

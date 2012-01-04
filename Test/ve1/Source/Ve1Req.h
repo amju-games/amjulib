@@ -26,6 +26,7 @@ public:
 
 protected:
   PXml m_xml;
+  std::string m_errorStr;
 };
 }
 

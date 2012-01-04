@@ -10,6 +10,8 @@
 #include "PlayerInfo.h"
 #include "GSAvatarMod.h"
 #include "GSLogin.h"
+#include "GSNetError.h"
+#include "GSTitle.h"
 
 namespace Amju
 {
@@ -19,7 +21,7 @@ ReqLogin::ReqLogin(const std::string& url) : Ve1Req(url, "login")
 
 void ReqLogin::OnFailure()
 {
-  // TODO Login failed state
+  ShowError("Couldn't log in. " + m_errorStr, TheGSTitle::Instance());
 }
 
 void ReqLogin::OnSuccess()

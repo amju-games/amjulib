@@ -14,6 +14,7 @@ public:
   GSBase();
   virtual void Update();
   virtual void Draw(); // Set up proj and mview matrices
+  virtual void OnActive();
 
   // Drag to rotate etc
   virtual bool OnCursorEvent(const CursorEvent&);

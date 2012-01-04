@@ -2,11 +2,14 @@
 #include <Xml/XmlParser2.h>
 #include <SafeUtils.h>
 #include <iostream>
+#include "GSNetError.h"
 
 namespace Amju
 {
 void Ve1Req::HandleResult()
 {
+  m_errorStr.clear();
+
   bool success = false;
 
   const HttpResult& res = GetResult();
@@ -25,9 +28,14 @@ void Ve1Req::HandleResult()
     }
     else
     {
-std::cout << m_name << ": Didn't get time stamp in result\n";
+      // TODO Get HTTP code
+      m_errorStr = m_name + ": Didn't get time stamp in result\n";
     }
 
+  }
+  else
+  {
+    m_errorStr = res.GetErrorString();
   }
 
   if (success)
@@ -45,5 +53,7 @@ void Ve1Req::OnFailure()
     // TODO  Log error msg
     // TODO  Check for timeout etc
   // TODO Display error msg
+
+  ShowError(m_errorStr);
 }
 }
