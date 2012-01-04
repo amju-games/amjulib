@@ -1,0 +1,67 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+4
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.1
+// Text
+Oh dear...
+// Font name, size
+arial, 1.0
+
+// Element type
+gui-text
+// Element name
+error
+// pos (coords are -1..1)
+-0.8, 0.0
+// size
+1.6, 0.4
+// Text
+error
+// Font name, size
+arial, 1.0, left, multi
+
+// element type
+gui-button
+// Element name
+error-ok-button
+// pos (coords are -1..1)
+-0.8, -0.72
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+retry
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+error-quit-button
+// pos (coords are -1..1)
+0, -0.72
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit
+// Font name, size
+arial, 2.0 
+
