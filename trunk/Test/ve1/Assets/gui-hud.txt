@@ -11,14 +11,14 @@ hud-comp
 // ---------------------------------------------------
 gui-comp
 msg-recv-comp
-2
+3
 // Child
 gui-text
 msg-recv-text
 -0.8, -0.2
 1.6, 0.3
 msg text goes here
-arial,1.0,left,bgcol=ffc0c0,fgcol=ff00ff
+arial,1.0,left,multi,bgcol=ffc0c0,fgcol=ff00ff
 
 // Child
 gui-text
@@ -26,7 +26,16 @@ msg-recv-sender
 -0.8, -0.1
 0.8, 0.1
 sender name
-arial,1.0,left,fgcol=ffc0c0,bgcol=ff00ff
+arial,0.75,left,fgcol=ffc0c0,bgcol=ff00ff
+
+// Child
+gui-button
+recv-close-button
+0.4, -0.5
+0.4, 0.1
+gui-button-4.png
+close
+arial, 1.0
 
 // ---------------------------------------------------
 gui-comp
