@@ -5,6 +5,7 @@
 #include "GuiElement.h"
 #include "Font.h"
 #include <Colour.h>
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -31,12 +32,21 @@ public:
   enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
 
   void SetJust(Just j);
+  void SetIsMulti(bool); // Multi line ?
+
+  void SetCharTime(float secs);
 
 protected:
   // calc first and last char to draw in line
   virtual void GetFirstLast(int line, int* first, int* last); 
 
+  friend struct WidthFinder;
   float GetTextWidth(const std::string& text);
+
+  void DrawSingleLine();
+  void DrawMultiLine();
+
+  void PrintLine(const std::string&, float y);
 
 protected:
   std::string m_text;
@@ -48,6 +58,14 @@ protected:
   float m_textSize;
   Colour m_bgCol;
   Colour m_fgCol;
+
+  float m_charTime; // time to wait between drawing chars
+  float m_currentCharTime; // show one more char when we reach m_charTime
+  int m_currentChar; // index of final char to draw
+
+  bool m_isMulti;
+  Strings m_lines; // for multi-line text boxes, split the text into lines
+  int m_topLine; // first line displayed
 };
 }
 
