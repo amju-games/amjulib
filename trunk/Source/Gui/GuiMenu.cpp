@@ -167,7 +167,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // Click outside menu area => hide menu
       SetVisible(false);
-      return false; // not handled
+      return true; //  handled (for last time until made visible again)
     }
 
     // Clicked on an item
@@ -175,6 +175,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // TODO Should react on mouse up when up item == down item.
       m_items[m_selected]->ExecuteCommand();
+      SetVisible(false); // TODO flag for this behaviour
       return true; // handled
     }
   }

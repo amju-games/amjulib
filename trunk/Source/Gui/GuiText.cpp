@@ -3,6 +3,7 @@
 #include "DrawRect.h"
 #include "Colour.h"
 #include <StringUtils.h>
+#include <Timer.h>
 
 #define TEXT_RECT_DEBUG
 
@@ -21,6 +22,16 @@ GuiText::GuiText()
   static const Colour BLACK(0, 0, 0, 1);
   m_bgCol = WHITE;
   m_fgCol = BLACK;
+  SetCharTime(0);
+  m_isMulti = false;
+  m_topLine = 0;
+}
+
+void GuiText::SetCharTime(float secs)
+{
+  m_charTime = secs;
+  m_currentCharTime = 0;
+  m_currentChar = 0;
 }
 
 void GuiText::SetTextSize(float textSize)
@@ -88,21 +99,78 @@ void GuiText::Draw()
     AmjuGL::SetColour(m_inverse ? m_bgCol: m_fgCol);
   }
 
-  // Centre the text vertically
-  //float ysize = m_size.y - 0.1f; // TODO Why 0.1, depends on font size ?
-  float y = m_pos.y - m_size.y * 0.5f - m_textSize * 0.05f;
-
   float oldSize = font->GetSize();
   font->SetSize(m_textSize * oldSize);
+
+  if (m_isMulti)
+  {
+    DrawMultiLine();
+  }
+  else
+  {
+    DrawSingleLine();
+  }
+
+  font->SetSize(oldSize);
+  PopColour();
+}
+
+void GuiText::DrawMultiLine()
+{
+  float y = m_pos.y - m_textSize * 0.1f;
+  float minY = m_pos.y - m_size.y;
+
+  int lines = m_lines.size();
+  for (int i = m_topLine; i < lines; i++)
+  {
+    // TODO
+    std::string str = m_lines[i];
+
+    PrintLine(str, y); 
+    y -= m_textSize * 0.1f; // 0.1 is height of text at size 1.0
+    if (y < minY)
+    {
+      break;
+    }
+  }
+}
+
+void GuiText::DrawSingleLine()
+{
+  // Centre the text vertically
+  // TODO Why 0.1, depends on font size ?
+  float y = m_pos.y - m_size.y * 0.5f - m_textSize * 0.05f;
 
   // NB This is single line only, need another path for multi-line.
   // Decide on character range to draw
   int first, last;
   GetFirstLast(0, &first, &last);
-  last -= first;
+  last -= first; // convert from index to number of chars to draw
   std::string str = m_text.substr(first, last);
   Trim(&str);
 
+  if (m_charTime > 0)
+  {
+    // Gradually reveal text
+    if (m_currentChar < last)
+    {
+      str = str.substr(0, m_currentChar);
+
+      m_currentCharTime += TheTimer::Instance()->GetDt();
+      if (m_currentCharTime >= m_charTime)
+      {
+        m_currentChar++;
+        m_currentCharTime = 0;
+      }
+    }
+  }
+
+  PrintLine(str, y);
+}
+
+void GuiText::PrintLine(const std::string& str, float y)
+{
+  Font* font = GetFont();
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
@@ -117,9 +185,6 @@ void GuiText::Draw()
   default:
     Assert(0);
   }
-  font->SetSize(oldSize);
-
-  PopColour();
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
@@ -156,17 +221,39 @@ void GuiText::GetFirstLast(int line, int* first, int* last)
   }
 }
 
+struct WidthFinder
+{
+  WidthFinder(GuiText* g) : m_guiText(g) {}
+  float operator()(const std::string& s)
+  {
+    return m_guiText->GetTextWidth(s);
+  }
+  GuiText* m_guiText;
+};
+
 void GuiText::SetText(const std::string& text)
 {
   m_text = text;
+
+  if (m_isMulti)
+  {
+    m_lines = WordWrap(m_text, m_size.x / m_textSize, WidthFinder(this));
+  }
+
+  m_currentChar = 0;
+  m_currentCharTime = 0;
+}
+
+void GuiText::SetIsMulti(bool multi)
+{
+  m_isMulti = multi;
+  SetText(m_text);
 }
 
 float GuiText::GetTextWidth(const std::string& text)
 {
   float textWidth = GetFont()->GetTextWidth(text);
   return textWidth;
-  //m_size.y = 0.08f; // Size of one line of text - TODO
-  // TODO Multi lines; other GuiElement types
 }
 
 bool GuiText::Load(File* f)
@@ -206,7 +293,9 @@ bool GuiText::LoadText(File* f)
   // TODO optional flags etc
   for (int i = 2; i < size; i++)
   {
-    const std::string& s = strs[i];
+    std::string s = strs[i];
+    Trim(&s);
+
     if (s == "inv")
     {
       m_inverse = true;
@@ -222,6 +311,10 @@ bool GuiText::LoadText(File* f)
     else if (s == "centre")
     {
       m_just = AMJU_JUST_CENTRE;
+    }
+    else if (s == "multi")
+    {
+      SetIsMulti(true);
     }
     else if (StringContains(s, "bgcol="))
     {

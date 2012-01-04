@@ -139,7 +139,9 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     break;
 
   default:
-    Assert(0); // handle this key ?
+std::cout << "Unexpected key type: " << ke.keyType << " key: '" << ke.key << "' (int: " << (int)ke.key << ")\n"; 
+//    Assert(0); // handle this key ?
+    break;
   }
 
   return true; // handled
