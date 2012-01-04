@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ObjectManager.h"
 #include "PosUpdate.h"
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -16,8 +17,16 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
   m_prevState = 0;
 }
 
+void GSBase::OnActive()
+{
+  GameState::OnActive();
+
+//  TheGSNetError::Instance()->SetPrevState(this);
+}
+
 void GSBase::SetPrevState(GameState* prevState)
 {
+  Assert(prevState != this);
   m_prevState = prevState;
 }
 

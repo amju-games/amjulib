@@ -6,6 +6,7 @@
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include <StringUtils.h>
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -42,7 +43,7 @@ std::cout << "GOT NEW MSG!! ID: " << id << " sender: " << senderId << " sent: " 
   }
   else
   {
-std::cout << "Unexpected format for msgs\n";
+    ShowError("Unexpected format for msgs response");
   }
 }
 

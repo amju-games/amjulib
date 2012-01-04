@@ -16,6 +16,7 @@
 #include <EventPoller.h>
 #include "MsgManager.h"
 #include <GuiTextEdit.h>
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -34,23 +35,40 @@ void OnChatSendButton()
   TheGSMain::Instance()->OnChatSend();
 }
 
+void OnChatCancelButton()
+{
+  TheGSMain::Instance()->OnChatCancel();
+}
+
+void OnRecvCloseButton()
+{
+  TheGSMain::Instance()->OnRecvClose();
+}
+
+
 void GSMain::OnChatSend()
 {
   Assert(m_lastRecipId != -1);
 
-  ActivateChat(false, -1); // ??
+  ActivateChatSend(false, -1); // ??
 
   int senderId = GetLocalPlayer()->GetId();
   std::string text = 
     ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->GetText();
   TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
+}
 
+void GSMain::OnChatCancel()
+{
+  ActivateChatSend(false, -1); 
 }
 
 GSMain::GSMain()
 {
   m_moveRequest = false;
   m_lastRecipId = -1;
+  m_chatSendIsActive = false;
+  m_chatRecvIsActive = false;
 }
 
 bool GSMain::CanShowMsg() const
@@ -60,16 +78,21 @@ bool GSMain::CanShowMsg() const
 
 void GSMain::ShowMsg(const MsgManager::Msg& msg)
 {
-  m_gui->GetElementByName("msg-recv-comp")->SetVisible(true);
+  ActivateChatRecv(true);
   ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText("TODO Get sender name");
   ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg.m_text);
-  
 }
 
-void GSMain::ActivateChat(bool active, int recipId)
+void GSMain::OnRecvClose()
+{
+  ActivateChatRecv(false);
+}
+
+void GSMain::ActivateChatSend(bool active, int recipId)
 {
   // TODO polish -- jump onto screen
   m_lastRecipId = recipId;
+std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
   if (active)
   {
@@ -82,7 +105,13 @@ void GSMain::ActivateChat(bool active, int recipId)
   {
     m_gui->GetElementByName("chat-comp")->SetVisible(false);
   }
-  
+  m_chatSendIsActive = active;
+}
+
+void GSMain::ActivateChatRecv(bool active)
+{
+  m_gui->GetElementByName("msg-recv-comp")->SetVisible(active);
+  m_chatRecvIsActive = active;
 }
 
 void GSMain::ShowObjectMenu(GameObject* obj)
@@ -172,7 +201,7 @@ void GSMain::DoMoveRequest()
     if (selectedObj)
     {
       const std::string name = selectedObj->GetTypeName();
-      std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
+std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
 
       ShowObjectMenu(selectedObj);
     }
@@ -251,6 +280,8 @@ void GSMain::OnActive()
 {
   GSBase::OnActive();
 
+  TheGSNetError::Instance()->SetPrevState(this);
+
   // We only want to do this if we decide to reload the world
 //  GetVe1SceneGraph()->Clear();
 
@@ -265,9 +296,10 @@ void GSMain::OnActive()
   m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
 
   m_gui->GetElementByName("chat-send-button")->SetCommand(Amju::OnChatSendButton);
-  ActivateChat(false, -1);
-
-  m_gui->GetElementByName("msg-recv-comp")->SetVisible(false);
+  m_gui->GetElementByName("chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
+  m_gui->GetElementByName("recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
+  ActivateChatSend(false, -1);
+  ActivateChatRecv(false);
 }
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
@@ -288,6 +320,11 @@ std::cout << "Mouse button event!! ";
 
   // GUI Elements: these have higher priority so if we get here we have clicked on a 
   // GameObject or the ground
+  if (m_chatSendIsActive || m_chatRecvIsActive)
+  {
+std::cout << "Chat active so discarding mouse click\n";
+    return false; 
+  }
 
   if (!mbe.isDown)
   {

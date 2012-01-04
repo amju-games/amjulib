@@ -10,6 +10,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "Ve1Object.h"
 #include "ObjectUpdater.h"
+#include "GSNetError.h"
 
 namespace Amju
 {
@@ -56,7 +57,7 @@ std::cout << "Obj " << i << ": ";
   {
     // Unexpected response from server. Is server reachable ?
     // TODO LOG this error
-std::cout << "Pos update: Didn't find \"objs\" tag..\n";
+    ShowError("Pos update: Didn't find \"objs\" tag in response");
   }
 }
 

@@ -11,6 +11,7 @@
 #include "LocalPlayer.h"
 #include <StringUtils.h>
 #include "PlayerInfo.h"
+#include "GSNetError.h"
 
 //#define XML_DEBUG
 
@@ -161,7 +162,7 @@ std::cout << " Type: " << type << "\n";
     {
       // Unexpected response from server. Is server reachable ?
       // TODO LOG this error
-std::cout << "Didn't find \"objs\" tag..\n";
+      ShowError("Didn't find \"objs\" tag in response");
     }
   } 
 };
@@ -316,13 +317,13 @@ void ObjectManager::Update()
   {
     m_elapsed = 0;
 
-    std::cout << "It's time to create a new object check req...\n";
+//std::cout << "It's time to create a new object check req...\n";
 
     // Create request, add to OnlineReqManager
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECTS);
     url += "&time=" + timestamp;
 
-    std::cout << "URL: " << url << "\n";
+//std::cout << "URL: " << url << "\n";
 
     TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));
   }

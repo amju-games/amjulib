@@ -32,7 +32,10 @@ public:
   bool CanShowMsg() const;
   void ShowMsg(const MsgManager::Msg& msg);
   void OnChatSend();
-  void ActivateChat(bool active, int recipId);
+  void OnChatCancel();
+  void ActivateChatSend(bool active, int recipId);
+  void ActivateChatRecv(bool active);
+  void OnRecvClose();
 
 private:
   void DoMoveRequest();
@@ -46,6 +49,8 @@ private:
 
   // Chat recipient
   int m_lastRecipId;
+  bool m_chatSendIsActive;
+  bool m_chatRecvIsActive;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
