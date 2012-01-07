@@ -10,7 +10,7 @@ pz-squirrel.md2
 
 
 // Num texture pairs
-4
+6
 
 pz-pet1a.png
 pz-pet1.png
@@ -24,5 +24,10 @@ pz-pet3.png
 pz-pet4a.png
 pz-pet4.png
 
+pz-pet5a.png
+pz-pet5.png
+
+pz-pet9a.png
+pz-pet9.png
 
 
