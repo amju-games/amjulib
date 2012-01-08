@@ -56,7 +56,7 @@ public:
   }
 
 protected:
-  Player* m_player;
+  RCPtr<Player> m_player;
 };
 
 const char* Player::TYPENAME = "player";
@@ -65,6 +65,27 @@ Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
 {
   m_dir = 0;
   m_dirCurrent = m_dir;
+  m_isLocal = false;
+}
+
+const std::string& Player::GetName() const
+{
+  return m_name;
+}
+
+void Player::SetName(const std::string& name)
+{
+  m_name = name;
+}
+
+bool Player::IsLocalPlayer() const
+{
+  return m_isLocal;
+}
+     
+void Player::SetIsLocalPlayer(bool isLocal)
+{
+  m_isLocal = isLocal;
 }
 
 bool Player::Load(File* f)
@@ -272,11 +293,6 @@ public:
   virtual bool Do()
   {
     TheGSMain::Instance()->ActivateChatSend(true, m_player->GetId());
-
-    // TODO TEMP TEST
-//    int senderId = GetLocalPlayer()->GetId(); 
-//    TheMsgManager::Instance()->SendMsg(senderId, m_player->GetId(), "Hello! I R Msg");
-
     return false;
   }
 
@@ -286,7 +302,13 @@ private:
 
 void Player::SetMenu(GuiMenu* menu)
 {
-  menu->AddItem(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
+  if (IsLocalPlayer())
+  {
+  }
+  else
+  {
+    menu->AddItem(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
+  }
 }
 }
 

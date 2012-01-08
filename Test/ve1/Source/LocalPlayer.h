@@ -5,6 +5,7 @@
 
 namespace Amju
 {
+/*
 class LocalPlayer : public Player
 {
 public:
@@ -15,8 +16,11 @@ public:
   virtual const char* GetTypeName() const { return TYPENAME; }
   virtual void SetMenu(GuiMenu*); 
 };
+*/
 
-LocalPlayer* GetLocalPlayer();
+void SetLocalPlayerId(int localPlayerId);
+
+Player* GetLocalPlayer();
 
 }
 
