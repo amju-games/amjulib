@@ -3,6 +3,7 @@
 #include <Game.h>
 #include "GSStartMenu.h"
 #include "GSLogin.h"
+#include "GSChoosePlayer.h"
 
 namespace Amju
 {
@@ -10,8 +11,16 @@ static void OnStartButton()
 {
   // For now, no start menu as there is only the multi player option
   //TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
- 
-  TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
+
+  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+}
+
+static void OnQuitButton()
+{
+  // Confirm ?
+
+//  AmjuExit();
+  exit(0);
 }
 
 GSTitle::GSTitle()
@@ -42,6 +51,15 @@ void GSTitle::OnActive()
   Assert(m_gui);
 
   m_gui->GetElementByName("start-button")->SetCommand(Amju::OnStartButton);
+  m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
+
+  CreateText("my game");
+}
+
+void GSTitle::OnDeactive()
+{
+  GSGui::OnDeactive();
+  CreateText("");
 }
 
 bool GSTitle::OnCursorEvent(const CursorEvent& ce)
