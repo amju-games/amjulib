@@ -3,10 +3,11 @@
 
 #include "GSBase.h"
 #include <GuiElement.h>
+#include "TextDraw.h"
 
 namespace Amju 
 {
-class GSGui : public GSBase
+class GSGui : public GSBase, public TextDraw
 {
 protected:
   GSGui();
