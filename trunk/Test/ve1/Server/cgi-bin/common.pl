@@ -21,24 +21,28 @@ require "credentials.pl";
 # OUR - not MY - so we can access it from files which "require" this one
 our $dbh;
 
-print "Content-type:text/html\n\n";
-print "<?xml version=\"1.0\">\n";
-
-# Clean user input
-# From: http://advosys.ca/papers/web/61-web-security.html
-#
-#my $ok_chars = 'a-zA-Z0-9 ,-';
-my $ok_chars = 'a-zA-Z0-9\.@_';
-foreach my $param_name ( param() ) 
+sub starthere()
 {
+  print "Content-type:text/html\n\n";
+  print "<?xml version=\"1.0\">\n";
+
+  # Clean user input
+  # From: http://advosys.ca/papers/web/61-web-security.html
+  #
+  #my $ok_chars = 'a-zA-Z0-9 ,-';
+  my $ok_chars = 'a-zA-Z0-9\.@_';
+  foreach my $param_name ( param() ) 
+  {
     $_ = HTML::Entities::decode( param($param_name) );
-#    print "Here is a param: \"$_\"....  ";
+    #    print "Here is a param: \"$_\"....  ";
     $_ =~ s/[^$ok_chars]//go;
 
-#    print "Here is param now: \"$_\"\n";
+    #    print "Here is param now: \"$_\"\n";
 
     param($param_name,$_);
+  }
 }
+
 
 #
 # Useful DB functions
@@ -77,6 +81,8 @@ END
 
 sub my_connect()
 {  
+  starthere(); # print header
+
   $dbh = DBI->connect($dsn, $username, $pass);
 
   if (not $dbh)
