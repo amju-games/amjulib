@@ -11,13 +11,13 @@ GSGui::GSGui()
 void GSGui::Update()
 {
   GSBase::Update();
-
+  TextDraw::Update();
 }
 
 void GSGui::Draw()
 {
   GSBase::Draw();
-
+  TextDraw::Draw();
 }
 
 void GSGui::Draw2d()
