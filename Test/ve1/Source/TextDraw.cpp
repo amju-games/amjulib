@@ -32,7 +32,8 @@ void TextDraw::Draw()
   static float a = 0; 
   // TODO CONFIG!!
   a += TheTimer::Instance()->GetDt(); 
-  AmjuGL::LookAt(cos(a), 10.0f + sin(a), 6.0f,   0, 0, 0.0f,  0, 1.0f, 0);
+  // TODO z distance
+  AmjuGL::LookAt(cos(a), 2.0f + sin(a), 8.0f,   0, 0, 0.0f,  0, 1.0f, 0);
 
   // TODO Lighting node
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
