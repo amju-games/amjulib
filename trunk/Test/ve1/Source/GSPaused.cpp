@@ -3,6 +3,7 @@
 #include <Game.h>
 #include "GSMain.h"
 #include "GSOptions.h"
+#include "GSTitle.h"
 
 namespace Amju
 {
@@ -19,7 +20,8 @@ void OnOptionsButton()
 void OnQuitButton()
 {
   // TODO Quit confirm -- use generic yes/no state
-  exit(0); // TODO Check dtors called -> state saved
+  //exit(0); // TODO Check dtors called -> state saved
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
 
 GSPaused::GSPaused()
