@@ -5,6 +5,7 @@
 #include <string>
 #include <RCPtr.h>
 #include <Singleton.h>
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -41,12 +42,18 @@ typedef RCPtr<PlayerInfo> PPlayerInfo;
 class PlayerInfoManager : public NonCopyable
 {
 public:
+  ~PlayerInfoManager();
+
   void SetCurrentPlayer(const std::string& playerName);
   PlayerInfo* GetPI(); // gets current player, must be set first
+  Strings GetPlayerNames() const; // returns list of player filenames
 
 private:
   PlayerInfoManager();
   friend class Singleton<PlayerInfoManager>;
+
+  bool Load();
+  bool Save();
 
   typedef std::map<const std::string, PPlayerInfo> PIMap;
   PIMap m_map;
