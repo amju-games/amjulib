@@ -23,7 +23,6 @@ public:
   virtual void SetMenu(GuiMenu*) { }
 
 protected:
-  std::string m_name;  
 };
 
 // Keep track of keys used to set object properties
