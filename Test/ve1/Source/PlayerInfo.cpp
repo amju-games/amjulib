@@ -39,6 +39,12 @@ void PlayerInfo::PISetFloat(const std::string& key, float val)
 const std::string& PlayerInfo::PIGetString(const std::string& key) const
 {
   PIMap::const_iterator it = m_map.find(key);
+#ifdef _DEBUG
+  if (it == m_map.end())
+  {
+    std::cout << "Player info: no key '" << key << "'\n";
+  }
+#endif
   Assert(it != m_map.end());
   return it->second;
 }
@@ -56,6 +62,12 @@ bool PlayerInfo::PIGetBool(const std::string& key) const
 int PlayerInfo::PIGetInt(const std::string& key) const
 {
   PIMap::const_iterator it = m_map.find(key);
+#ifdef _DEBUG
+  if (it == m_map.end())
+  {
+    std::cout << "Player info: no key '" << key << "'\n";
+  }
+#endif
   Assert(it != m_map.end());
   return ToInt(it->second);
 }
@@ -63,6 +75,12 @@ int PlayerInfo::PIGetInt(const std::string& key) const
 float PlayerInfo::PIGetFloat(const std::string& key) const
 {
   PIMap::const_iterator it = m_map.find(key);
+#ifdef _DEBUG
+  if (it == m_map.end())
+  {
+    std::cout << "Player info: no key '" << key << "'\n";
+  }
+#endif
   Assert(it != m_map.end());
   return ToFloat(it->second);
 }
@@ -133,7 +151,13 @@ std::cout << "SAVING PLAYER INFO FILE " << m_filename << "\n";
 
 PlayerInfoManager::PlayerInfoManager()
 {
+  Load();
   m_currentPI = 0;
+}
+
+PlayerInfoManager::~PlayerInfoManager()
+{
+  Save();
 }
 
 PlayerInfo* PlayerInfoManager::GetPI()
@@ -142,10 +166,58 @@ PlayerInfo* PlayerInfoManager::GetPI()
   return m_currentPI;
 }
 
+static const char* PIM_FILENAME = "playerinfo.txt"; 
+
+bool PlayerInfoManager::Load()
+{
+  if (!FileExists(PIM_FILENAME))
+  {
+    return true;
+  } 
+  File f;
+  if (!f.OpenRead(PIM_FILENAME))
+  {
+    return false;
+  }
+  int numPlayers = 0;
+  if (!f.GetInteger(&numPlayers))
+  {
+    f.ReportError("Expected num players"); 
+    return false; 
+  }
+  for (int i = 0; i < numPlayers; i++)
+  {
+    std::string s;
+    if (!f.GetDataLine(&s))
+    {
+      f.ReportError("Expected player name " + ToString(i) + " of " + ToString(numPlayers));
+      return false;
+    }
+    m_map[s] = 0; 
+  }
+  return true;
+}
+
+bool PlayerInfoManager::Save()
+{
+  File f;
+  if (!f.OpenWrite(PIM_FILENAME))
+  {
+    return false;
+  }
+  int size = m_map.size();
+  f.WriteInteger(size);
+  for (PIMap::iterator it = m_map.begin(); it != m_map.end(); ++it)
+  {
+    f.Write(it->first); 
+  }
+  return true;
+}
+
 void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
 {
   PIMap::iterator it = m_map.find(filename);
-  if (it == m_map.end())
+  if (it == m_map.end() || !it->second)
   {
     PlayerInfo* pi = new PlayerInfo;
     pi->SetFilename(filename);
@@ -160,6 +232,16 @@ void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
   {
     m_currentPI = it->second;
   }
+}
+
+Strings PlayerInfoManager::GetPlayerNames() const
+{
+  Strings s;
+  for (PIMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
+  {
+    s.push_back(it->first);
+  }
+  return s;
 }
 }
 
