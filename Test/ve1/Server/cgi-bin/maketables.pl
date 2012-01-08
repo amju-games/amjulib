@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
 require "common.pl";
+require "newplayer_impl.pl";
 
 my_connect();
 print "Making tables...\n";
@@ -169,14 +170,15 @@ sub create_tables()
 
   my $sql;
   
-  $sql = "insert into object (type, assetfile, datafile, owner, createtime) values ('player', 'player-assets.txt', 'player-data.txt', 1, now());";
-  insert($sql);
 
   $sql = "insert into object (type, assetfile, datafile, owner, createtime) values ('terrain', 'terrain-1-assets.txt', 'terrain-data.txt', 0, now());";
   insert($sql);
 
-  $sql = "insert into player (playername, email, hashpw, thumbnail, lasttime, obj_id) values ('jay', 'jason\@amju.com', 'HASH', '', now(), 1);";
-  insert($sql);
+
+  new_player_impl('jay', 'jason@amju.com', '123');
+  new_player_impl('ella', 'ella@amju.com', '123');
+  new_player_impl('josh', 'josh@amju.com', '123');
+
 }
 
 
