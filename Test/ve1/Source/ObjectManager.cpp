@@ -39,14 +39,15 @@ void Object::Load()
     // TODO
 
     PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+    /*
     if (pi->PIGetInt(PI_KEY("player obj id")) == m_id)
     {
-      go = new LocalPlayer;
+   
     }
-    else
-    {
-      go = new Player;
-    }
+    */
+    go = new Player;
+    
+    ((Player*)go.GetPtr())->SetName(pi->PIGetString(PI_KEY("playername")));
   }
   else
   {
