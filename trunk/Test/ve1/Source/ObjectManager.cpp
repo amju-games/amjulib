@@ -30,29 +30,7 @@ void Object::Load()
 //  std::cout << "Loading object " << *this << "\n";
 
   // Create new object, load it, add to Game
-  PGameObject go;
-
-  // Check if we are creating a player - could be local or non-local
-  if (m_type == Player::TYPENAME)
-  {
-    // If owner ID matches logged in user ID, create a LocalPlayer, else a Player.
-    // TODO
-
-    PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
-    /*
-    if (pi->PIGetInt(PI_KEY("player obj id")) == m_id)
-    {
-   
-    }
-    */
-    go = new Player;
-    
-    ((Player*)go.GetPtr())->SetName(pi->PIGetString(PI_KEY("playername")));
-  }
-  else
-  {
-    go = TheGameObjectFactory::Instance()->Create(m_type);
-  }
+  PGameObject go = TheGameObjectFactory::Instance()->Create(m_type);
 
   if (go)
   {

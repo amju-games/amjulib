@@ -14,6 +14,7 @@
 #include <DrawAABB.h>
 #include "LocalPlayer.h"
 #include "GSMain.h"
+#include <GameObjectFactory.h>
 
 namespace Amju
 {
@@ -60,6 +61,14 @@ protected:
 };
 
 const char* Player::TYPENAME = "player";
+
+
+GameObject* CreatePlayer()
+{
+  return new Player;
+}
+
+static bool registered = TheGameObjectFactory::Instance()->Add(Player::TYPENAME, CreatePlayer);
 
 Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
 {
@@ -152,6 +161,10 @@ void Player::Set(const std::string& key, const std::string& val)
   {
     int texNum = ToInt(val);
     TheAvatarManager::Instance()->SetTexture(texNum, m_sceneNode);
+  }
+  else if (key == "name")
+  {
+    SetName(val);
   }
 }
 
