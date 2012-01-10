@@ -8,10 +8,13 @@ namespace Amju
 class ReqLogin : public Ve1Req
 {
 public:
-  ReqLogin(const std::string& url);
+  ReqLogin(const std::string& url, const std::string& email);
 
   virtual void OnSuccess();
   virtual void OnFailure();
+
+private:
+  std::string m_email;
 };
 
 void SendLoginReq(const std::string& email);
