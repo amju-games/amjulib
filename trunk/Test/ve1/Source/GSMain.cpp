@@ -49,13 +49,14 @@ void OnRecvCloseButton()
 void GSMain::OnChatSend()
 {
   Assert(m_lastRecipId != -1);
-
-  ActivateChatSend(false, -1); // ??
+  Assert(GetLocalPlayer()); // or couldn't send, right ?
 
   int senderId = GetLocalPlayer()->GetId();
   std::string text = 
     ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->GetText();
   TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
+
+  ActivateChatSend(false, -1); // ??
 }
 
 void GSMain::OnChatCancel()
@@ -92,14 +93,22 @@ void GSMain::ActivateChatSend(bool active, int recipId)
 {
   // TODO polish -- jump onto screen
   m_lastRecipId = recipId;
-std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
   if (active)
   {
+std::cout << "Activate chat -- recip ID = " << recipId << "\n";
+
+    std::string recipName;
+    Player* recip = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr());
+    Assert(recip);
+    if (recip)
+    {
+      recipName = recip->GetName();
+    }
+
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
-    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText("TODO Get recip name");
-    ((GuiText*)m_gui->GetElementByName("chat-text-edit"))->SetText("type something here");
-     
+    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
+    ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->SetText("");
   }
   else
   {
@@ -212,6 +221,9 @@ std::cout << "Ground clicked...\n";
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos);
+
+      // Move towards point, but server will send back actual destination
+      GetLocalPlayer()->MoveTo(pos);
     }
 }
 
