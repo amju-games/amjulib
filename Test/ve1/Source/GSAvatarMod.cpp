@@ -112,7 +112,7 @@ void GSAvatarMod::Update()
 
 void GSAvatarMod::Draw()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
+//  AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
