@@ -35,6 +35,7 @@ void ReqGetNewMsgs::OnSuccess()
       timestamp = msg.getChildNode(2).getText();
       Timestamp whenSent = atoi(timestamp.c_str());
       std::string text = msg.getChildNode(3).getText();
+      text = Replace(text, "_", " "); // replace underscores with spaces -- TODO punctuation 
 
 std::cout << "GOT NEW MSG!! ID: " << id << " sender: " << senderId << " sent: " << whenSent.ToString() << " text: " << text << "\n";
 
@@ -49,6 +50,13 @@ std::cout << "GOT NEW MSG!! ID: " << id << " sender: " << senderId << " sent: " 
 
 void SendGetNewMsgsReq()
 {
+  if (!GetLocalPlayer())
+  {
+std::cout << "No local player yet, can't send get new msgs request\n";
+
+    return;
+  }
+
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_MSGS);
   // TODO Add ID of last msg recved
   url += "&time=" + timestamp;
