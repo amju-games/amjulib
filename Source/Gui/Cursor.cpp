@@ -44,9 +44,11 @@ const Vec2f& Cursor::GetPos() const
   return m_pos;
 }
 
-bool Cursor::Load(int id)
+bool Cursor::Load(int id, const Vec2f& hotspot)
 {
   m_id = id;
+  m_hotspot = hotspot;
+
   // TODO CONFIG
   m_pTex = (Texture*)TheResourceManager::Instance()->GetRes("hand.png");
   Assert(m_pTex);
@@ -88,7 +90,7 @@ void Cursor::Draw()
 
     AmjuGL::PushMatrix();
     // Convert coords from 0..1 to -1..1
-    AmjuGL::Translate(m_pos.x, m_pos.y, 0);
+    AmjuGL::Translate(m_pos.x + m_hotspot.x, m_pos.y + m_hotspot.y, 0);
     // Rotate cursor
     AmjuGL::RotateZ(m_rot);
     AmjuGL::DrawTriList(m_tris);

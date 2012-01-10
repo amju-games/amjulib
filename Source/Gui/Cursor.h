@@ -15,7 +15,7 @@ public:
   virtual bool OnCursorEvent(const CursorEvent& ce);  
   virtual bool OnRotationEvent(const RotationEvent&);
   
-  bool Load(int id);
+  bool Load(int id, const Vec2f& hotspot);
   void Draw();
 
   const Vec2f& GetPos() const;
@@ -24,7 +24,8 @@ private:
   PTexture m_pTex;
   float m_rot; // rotation about z
   Vec2f m_pos;
-	AmjuGL::Tris m_tris;
+  Vec2f m_hotspot; // offset to m_pos so image hotspot is under mouse cursor. We rotate about this point.
+  AmjuGL::Tris m_tris;
   int m_id;
   bool m_isActive;
 };

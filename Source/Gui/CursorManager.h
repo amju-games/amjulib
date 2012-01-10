@@ -13,7 +13,7 @@ private:
   friend class Singleton<CursorManager>;
 
 public:
-  bool Load();
+  bool Load(const Vec2f& hotspot);
   void Draw();
   void Update();
   Cursor* GetCursor(int i);
