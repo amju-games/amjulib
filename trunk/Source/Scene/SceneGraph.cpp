@@ -3,7 +3,7 @@
 #include <DrawAABB.h>
 
 #define USE_VFC
-#define VFC_DEBUG
+//#define VFC_DEBUG
 //#define VFC_DEBUG_TEXT
 //#define HIERARCHY_DEBUG
 
