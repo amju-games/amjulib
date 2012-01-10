@@ -40,7 +40,7 @@ std::cout << "GO BACK to previous state...\n";
 
 void GSBase::Draw()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
