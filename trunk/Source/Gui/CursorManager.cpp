@@ -3,11 +3,11 @@
 
 namespace Amju
 {
-bool CursorManager::Load()
+bool CursorManager::Load(const Vec2f& hotspot)
 {
   for (int i = 0; i < NUM_CURSORS; i++)
   {
-    if (!m_cursors[i].Load(i))
+    if (!m_cursors[i].Load(i, hotspot))
     {
       return false;
     }
