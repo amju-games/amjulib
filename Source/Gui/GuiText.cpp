@@ -231,6 +231,11 @@ struct WidthFinder
   GuiText* m_guiText;
 };
 
+const std::string& GuiText::GetText() const
+{
+  return m_text;
+}
+
 void GuiText::SetText(const std::string& text)
 {
   m_text = text;

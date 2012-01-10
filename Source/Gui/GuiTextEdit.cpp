@@ -61,9 +61,14 @@ bool GuiTextEdit::Load(File* f)
   return true;
 }
 
-std::string GuiTextEdit::GetText() const
+const std::string& GuiTextEdit::GetText() const
 {
   return m_myText;
+}
+
+void GuiTextEdit::SetText(const std::string& text)
+{
+  m_myText = text;
 }
 
 void GuiTextEdit::Insert(char c)
