@@ -16,7 +16,8 @@ public:
   virtual bool Load(File*); 
   virtual bool OnKeyEvent(const KeyEvent&); 
 
-  std::string GetText() const;
+  virtual void SetText(const std::string&);
+  virtual const std::string& GetText() const;
 
   void Insert(char);
 

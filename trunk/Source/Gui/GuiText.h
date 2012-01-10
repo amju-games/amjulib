@@ -21,7 +21,9 @@ public:
   // Load just the text info (not name, size, etc)
   bool LoadText(File*);
 
-  void SetText(const std::string& text);
+  virtual void SetText(const std::string& text);
+  virtual const std::string& GetText() const;
+ 
   void SetTextSize(float textSize);
 
   Font* GetFont();
