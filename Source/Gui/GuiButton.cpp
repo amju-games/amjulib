@@ -77,7 +77,7 @@ void GuiButton::Draw()
   AmjuGL::PushMatrix();
   if (m_isPressed)
   {
-    static const float PRESSED_OFFSET = 0.02f;
+    static const float PRESSED_OFFSET = 0.01f;
     AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
   }
 /*
@@ -172,7 +172,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
         // Execute command for this button
         ClickSound();
         ExecuteCommand();
-        m_isMouseOver = false; // once clicked, revert to unselected.. OK??
+        //m_isMouseOver = false; // once clicked, revert to unselected.. OK?? No, is very annoying
         return true; // handled
       }
     }
