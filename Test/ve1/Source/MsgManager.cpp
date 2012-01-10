@@ -7,6 +7,8 @@
 #include "GSMain.h"
 #include <Timer.h>
 #include <UrlUtils.h>
+#include "Player.h"
+#include <Game.h>
 
 namespace Amju
 {
@@ -63,11 +65,17 @@ void MsgManager::Update()
 
 void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 {
-  // replace spaces in msg 
+  Assert(senderId != -1);
+  Assert(recipId != -1);
+  // For now, assume senders and recips are Players
+  Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(senderId).GetPtr()));
+  Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
+
+  // Replace spaces in msg 
   // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
   std::string newmsg = Replace(msg, " ", "_");
 
-std::cout << "Sending msg: to: " << recipId << " msg: " << msg << "\n";
+std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: " << msg << "\n";
 
   static const int MAX_CONCURRENT_MSGS = 1; // ?
 
