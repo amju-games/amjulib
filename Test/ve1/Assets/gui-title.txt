@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-2
+3
 
 
 // Button  
@@ -15,7 +15,7 @@ gui-button
 // Element name
 start-button
 // pos (coords are -1..1)
--0.4, -0.72
+-0.4, -0.4
 // size
 0.8, 0.2
 // Image
@@ -25,17 +25,25 @@ start
 // Font name, size
 arial, 2.0 
 
+gui-button
+quit-button
+-0.4, -0.7
+0.8, 0.2
+gui-button-4.png
+quit
+arial, 2.0 
+
 
 // Element type
 gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 0.2
+-1.0, 0.7
 // size
-2.0, 0.2
+2.0, 0.3
 // Text
-This is the title page.
+This is the title page. I am a long string that ought to be split up into multiple lines.
 // Font name, size
-arial, 2.0 
+arial, 0.75, multi, left
 
