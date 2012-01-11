@@ -73,13 +73,10 @@ void GuiText::Draw()
   }
 
 #ifdef TEXT_RECT_DEBUG
-  AmjuGL::PushMatrix();
-  AmjuGL::SetIdentity();
   Rect r = GetRect(this);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   DrawRect(r);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::PopMatrix();
 #endif // _DEBUG
 
   Font* font = GetFont();
