@@ -64,6 +64,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case GET_NEW_MSGS:
     s += "getmsgs.pl";
     break;
+
+  case MARK_MSG_READ:
+    s += "markread.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.
