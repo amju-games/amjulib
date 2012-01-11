@@ -46,6 +46,23 @@ Md2Model* Animated::GetMd2()
 void Animated::SetMd2(Md2Model* model)
 {
   m_pModel = model;
+
+  // Look out! Old frame values won't be valid anymore!
+  if (m_pModel->GetAnimationSize(m_anim) == 0)
+  {
+    // Current anim doesn't exist in new model, reset
+    m_frame = 0;
+    m_nextFrame = 1;
+    m_t = 0;
+    m_anim = 0;
+  }
+  else
+  {
+    // Keep anim, but get new frame values
+    m_frame = m_pModel->GetStartFrame(m_anim);
+    m_nextFrame = m_frame + 1;
+    m_t = 0;
+  }
 }
 
 bool Animated::LoadMd2(const std::string& md2name)
