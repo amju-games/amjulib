@@ -81,14 +81,18 @@
 /I "../../../../../../Source/Sound" 
 /I "../../../../../../Source/SoundSDLMixer" 
 /I "../../../../../../Source/GeomLoad" 
-/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"  /I "../../../../../../Source/Localise" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /S  ..\..\..\..\Assets\*.*  c:\programdata\ve1\</Command>
+      <Command>xcopy /Y /S  ..\..\..\..\Assets\*.*  c:\programdata\ve1\
+xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*.*  c:\programdata\ve1\font2d\
+xcopy /Y /S  ..\..\..\..\..\..\Assets\font3d\*.*  c:\programdata\ve1\font3d\
+
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copy assets to run directory</Message>
@@ -128,7 +132,7 @@
 /I "../../../../../../Source/Sound" 
 /I "../../../../../../Source/SoundSDLMixer" 
 /I "../../../../../../Source/GeomLoad" 
-/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"   /I "../../../../../../Source/Localise" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,10 +149,12 @@
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSNetError.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
@@ -156,15 +162,21 @@
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\Player.cpp" />
     <ClCompile Include="..\..\..\..\Source\PlayerInfo.cpp" />
     <ClCompile Include="..\..\..\..\Source\Postbox.cpp" />
     <ClCompile Include="..\..\..\..\Source\PosUpdate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqGetNewMsgs.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Character.cpp" />
@@ -181,25 +193,33 @@
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\..\Source\GSNetError.h" />
     <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
     <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
+    <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\Player.h" />
     <ClInclude Include="..\..\..\..\Source\PlayerInfo.h" />
     <ClInclude Include="..\..\..\..\Source\Postbox.h" />
     <ClInclude Include="..\..\..\..\Source\PosUpdate.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqGetNewMsgs.h" />
     <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
+    <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Character.h" />
@@ -213,6 +233,11 @@
     <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\newgui.pl" />
+    <None Include="..\..\..\..\Source\newreq.pl" />
+    <None Include="..\..\..\..\Source\newstate.pl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
