@@ -41,21 +41,38 @@ public:
 
       Assert(m_player->GetAABB());
       DrawAABB(*(m_player->GetAABB()));
+ 
+      // Print name 
+      // TODO Do all these in one go, to minimise state changes
+      AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+      AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+
+      GuiText text;
+      text.SetTextSize(10.0f);
+      text.SetText(m_player->GetName());
+      text.SetSize(Vec2f(10.0f, 1.0f));
+      text.SetJust(GuiText::AMJU_JUST_LEFT);
+      //text.SetInverse(true);
+      //text.SetDrawBg(true);
+
+      AmjuGL::PushMatrix();
+    
+      Matrix m;
+      m.SetIdentity();
+      Vec3f tr(m_local[12], m_local[13], m_local[14]);
+      m.Translate(tr);
+      AmjuGL::MultMatrix(m);
+      AmjuGL::Translate(0, 70.0f, 0);
+    
+      AmjuGL::Scale(20, 20, 10);  
+
+      text.Draw();
+      AmjuGL::PopMatrix();
+
+      AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
+      AmjuGL::Disable(AmjuGL::AMJU_BLEND);
     }
-
-    // TODO Print name 
-    /*
-    GuiText text;
-    text.SetText(m_player->GetName());
-    text.SetSize(Vec2f(20.0f, 20.0f));
-    AmjuGL::PushMatrix();
-//    AmjuGL::Translate(0, 10, 0);
-//    AmjuGL::Scale(20, 20, 20);
-    text.Draw();
-    AmjuGL::PopMatrix();
-    */
   }
-
 protected:
   RCPtr<Player> m_player;
 };
