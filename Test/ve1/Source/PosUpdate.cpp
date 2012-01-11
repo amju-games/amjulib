@@ -43,9 +43,9 @@ std::cout << "Obj " << i << ": ";
 #endif
 
       int id = atoi(obj.getChildNode(0).getText());
-      int x = atof(obj.getChildNode(1).getText());
-      int y = atof(obj.getChildNode(2).getText());
-      int z = atof(obj.getChildNode(3).getText());
+      float x = atof(obj.getChildNode(1).getText());
+      float y = atof(obj.getChildNode(2).getText());
+      float z = atof(obj.getChildNode(3).getText());
 
 //std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
