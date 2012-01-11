@@ -68,7 +68,9 @@ const std::string& GuiTextEdit::GetText() const
 
 void GuiTextEdit::SetText(const std::string& text)
 {
+  m_text = text;
   m_myText = text;
+  m_caret = m_text.size();
 }
 
 void GuiTextEdit::Insert(char c)
