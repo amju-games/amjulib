@@ -147,6 +147,11 @@ public:
     const Verts& verts,
     const IndexedTriList& indexes);
 
+#ifdef _DEBUG
+  static bool IsWireFrameMode();
+  static void SetIsWireFrameMode(bool);
+#endif
+
   // Set current matrix stack
   // TODO Can we use Texture matrix in GL ES/D3D ?
   enum MatrixMode { 

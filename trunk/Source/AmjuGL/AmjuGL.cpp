@@ -298,6 +298,19 @@ void AmjuGL::SetColour(const Colour& c)
   SetColour(c.m_r, c.m_g, c.m_b, c.m_a);
 }
 
+#ifdef _DEBUG
+static bool s_isWireFrame = false;
+bool AmjuGL::IsWireFrameMode()
+{
+  return s_isWireFrame;
+}
+
+void AmjuGL::SetIsWireFrameMode(bool wf)
+{
+  s_isWireFrame = wf;
+}
+#endif
+
 void AmjuGL::DrawIndexedTriList(
   const Verts& verts,
   const IndexedTriList& indexes)
@@ -331,6 +344,24 @@ void AmjuGL::DrawIndexedTriList(
 void AmjuGL::DrawTriList(const Tris& tris)
 {
   AMJU_CALL_STACK;
+
+#ifdef _DEBUG
+  if (IsWireFrameMode())
+  {
+    for (unsigned int i = 0; i < tris.size(); i++)
+    {
+      const Tri& t = tris[i];
+      Vec3 v0(t.m_verts[0].m_x, t.m_verts[0].m_y, t.m_verts[0].m_z);
+      Vec3 v1(t.m_verts[1].m_x, t.m_verts[1].m_y, t.m_verts[1].m_z);
+      Vec3 v2(t.m_verts[2].m_x, t.m_verts[2].m_y, t.m_verts[2].m_z);
+
+      DrawLine(v0, v1);
+      DrawLine(v1, v2);
+      DrawLine(v2, v0);
+    }
+  }
+  else
+#endif
 
   impl->DrawTriList(tris);
 }
