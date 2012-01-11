@@ -43,7 +43,7 @@ void StartUp()
   // Use Text obj loader for now
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
-  TheCursorManager::Instance()->Load();
+  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheAvatarManager::Instance()->Load();
 
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
