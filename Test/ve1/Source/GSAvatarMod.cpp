@@ -107,7 +107,8 @@ void GSAvatarMod::Update()
 {
   GSGui::Update();
 
-  GetGuiSceneGraph()->Update();
+  // Don't do this, it will update characters twice
+  //GetGuiSceneGraph()->Update();
 }
 
 void GSAvatarMod::Draw()
