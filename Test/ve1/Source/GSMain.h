@@ -51,6 +51,9 @@ private:
   int m_lastRecipId;
   bool m_chatSendIsActive;
   bool m_chatRecvIsActive;
+
+  // Debug camera
+  float m_yRot;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
