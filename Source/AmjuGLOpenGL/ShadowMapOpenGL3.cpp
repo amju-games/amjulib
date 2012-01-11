@@ -57,7 +57,7 @@ MATRIX4X4 lightProjectionMatrix, lightViewMatrix;
         
 static const float white[] = { 1, 1, 1, 1 };
 static const float black[] = { 0, 0, 0, 1 };
-static const float darkgrey[] = { 0.2, 0.2, 0.2, 1 };
+static const float darkgrey[] = { 0.2f, 0.2f, 0.2f, 1 };
 
 bool ShadowMapOpenGL3::Init()
 {
