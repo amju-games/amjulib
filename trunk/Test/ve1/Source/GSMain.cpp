@@ -70,6 +70,7 @@ GSMain::GSMain()
   m_lastRecipId = -1;
   m_chatSendIsActive = false;
   m_chatRecvIsActive = false;
+  m_yRot = 0;
 }
 
 bool GSMain::CanShowMsg() const
@@ -260,6 +261,11 @@ void GSMain::Draw()
     AmjuGL::LookAt(0, CAM_Y, CAM_Z,  0, 0, 0,  0, 1, 0);
   }
 
+  Matrix m;
+  m.RotateY(m_yRot);
+  AmjuGL::MultMatrix(m);
+
+
   GetVe1SceneGraph()->Draw();
 
   if (m_moveRequest)
@@ -314,8 +320,22 @@ void GSMain::OnActive()
   ActivateChatRecv(false);
 }
 
+static bool rightButtonDown = false;
+
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
 {
+  static float oldx = ce.x;
+  static float oldy = ce.y;
+  float diffx = ce.x - oldx;
+  float diffy = ce.y - oldy;
+  oldx = ce.x;
+  oldy = ce.y;
+
+  if (rightButtonDown)
+  {
+    m_yRot += diffx * 10.0f;
+  }
+
   m_mouseScreen.x = ce.x;
   m_mouseScreen.y = ce.y;
 
@@ -332,6 +352,13 @@ std::cout << "Mouse button event!! ";
 
   // GUI Elements: these have higher priority so if we get here we have clicked on a 
   // GameObject or the ground
+  // TODO Only ignore if cursor is in chat gui region
+  if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
+  {
+    rightButtonDown = mbe.isDown;
+    return true;
+  }
+
   if (m_chatSendIsActive || m_chatRecvIsActive)
   {
 std::cout << "Chat active so discarding mouse click\n";
