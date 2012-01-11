@@ -93,7 +93,6 @@ int main(int argc, char **argv)
 
 
 
-std::cout << "Just before create window...\n";
 
   Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
 //  Amju::AmjuGL::SetScreenRotation(10.0f);
