@@ -71,5 +71,9 @@ private:
     float m_e[16];
 };
 
+Matrix Transpose(const Matrix& m);
+
+Matrix TransposeRot(const Matrix& m);
+
 }
 #endif
