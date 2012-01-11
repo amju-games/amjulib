@@ -21,6 +21,7 @@ enum Task
 
   SEND_MSG,
   GET_NEW_MSGS,
+  MARK_MSG_READ,
 };
 
 class Ve1ReqManager : public OnlineReqManager

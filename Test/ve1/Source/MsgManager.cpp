@@ -9,6 +9,7 @@
 #include <UrlUtils.h>
 #include "Player.h"
 #include <Game.h>
+#include "ReqMsgRead.h"
 
 namespace Amju
 {
@@ -59,8 +60,20 @@ void MsgManager::Update()
     Assert(it != m_map.end());
     Msg& msg = it->second;
     gsm->ShowMsg(msg);
+
+    // Mark message as read -- TODO only after player clicks OK in gui..?
+    MarkRead(msg);
+
     m_map.erase(it);
   }
+}
+
+void MsgManager::MarkRead(const Msg& msg)
+{
+  std::string url = TheVe1ReqManager::Instance()->MakeUrl(MARK_MSG_READ);
+  url += "&id=";
+  url += ToString(msg.m_id);
+  TheVe1ReqManager::Instance()->AddReq(new ReqMsgRead(url), 1); // TODO only need 1 ??
 }
 
 void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
@@ -74,6 +87,9 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   // Replace spaces in msg 
   // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
   std::string newmsg = Replace(msg, " ", "_");
+
+  // Strip out characters which are not allowed - use boost reg exp
+  // Replace punctuation chars with ascii code.
 
 std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: " << msg << "\n";
 

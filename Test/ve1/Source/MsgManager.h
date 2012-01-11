@@ -36,6 +36,8 @@ private:
   friend class ReqGetNewMsgs;
   void QueueMsg(const Msg& msg);
 
+  void MarkRead(const Msg& msg); // flag as read on server
+
 private:
 
   typedef std::map<Timestamp, Msg> Msgs;
