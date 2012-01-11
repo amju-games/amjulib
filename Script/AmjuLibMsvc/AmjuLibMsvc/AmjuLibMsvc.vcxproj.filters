@@ -681,6 +681,9 @@
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1276,6 +1279,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h">
       <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\TextMaker.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
