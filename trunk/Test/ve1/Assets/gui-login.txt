@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+4
 
 // Element type
 gui-text-edit
@@ -34,19 +34,23 @@ Please enter your email address...
 // Font name, size
 arial, 1.0
 
-// Button  -login 
-// element type
 gui-button
-// Element name
 login-button
 // pos (coords are -1..1)
 -0.4, -0.25
 // size
 0.8, 0.2
-// Image
 gui-button-4.png
-// Text
 login
-// Font name, size
+arial, 2.0 
+
+gui-button
+login-cancel-button
+// pos (coords are -1..1)
+-0.6, -0.25
+// size
+0.8, 0.2
+gui-button-4.png
+cancel
 arial, 2.0 
 
