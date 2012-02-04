@@ -15,7 +15,7 @@ namespace Amju
 // ------------
 
 // TODO Own header - Image dir ?
-struct Material
+struct Material : public RefCounted
 {
   std::string m_name;
   std::string m_filename;
@@ -31,8 +31,11 @@ struct Material
 
   Material();
   void UseThisMaterial();
-  bool Load(const std::string& mtlfilename);
 };
+  
+typedef std::vector<RCPtr<Material> > MaterialVec;
+
+bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats);
 
 // Face type - assumes all faces are triangles,
 //  so is most efficient.
