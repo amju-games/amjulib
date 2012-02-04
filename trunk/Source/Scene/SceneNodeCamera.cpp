@@ -5,6 +5,7 @@ namespace Amju
 {
 SceneNodeCamera::SceneNodeCamera()
 {
+  m_up = Vec3f(0, 1, 0);
 }
 
 const Vec3f& SceneNodeCamera::GetEyePos() const
