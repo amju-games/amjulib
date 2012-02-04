@@ -43,11 +43,20 @@ enum KeyType
   AMJU_KEY_MAX
 };
 
+enum KeyModifier
+{  
+  AMJU_KEY_MOD_NONE = 0,
+  AMJU_KEY_MOD_SHIFT = 1,
+  AMJU_KEY_MOD_CTRL = 2,
+  AMJU_KEY_MOD_ALT = 4
+};
+
 struct KeyEvent : public Event
 {
   KeyType keyType; // If AMJU_KEY_CHAR, key is a printable character
-  char key; // character if key is printable character
+  char key; // character if key is printable character, TODO UNICODE
   bool keyDown;
+  unsigned int  modifier; // bitwise combo of KeyModifiers
 
   virtual bool UpdateListener(EventListener*);
 };
