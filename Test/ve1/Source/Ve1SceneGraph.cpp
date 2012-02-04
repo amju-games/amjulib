@@ -7,6 +7,7 @@ void ClearVe1SceneGraph()
   SceneGraph* sg = GetVe1SceneGraph();
   sg->Clear();
   sg->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
+  sg->SetCamera(new SceneNodeCamera);
 }
 
 SceneGraph* GetVe1SceneGraph()

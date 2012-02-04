@@ -268,22 +268,26 @@ void GSMain::Draw()
   static const float CAM_Y = 100.0f;
   static const float CAM_Z = 150.0f;
 
+  PSceneNodeCamera cam = GetVe1SceneGraph()->GetCamera();
+
   if (GetLocalPlayer())
   {
     const Vec3f& pos = GetLocalPlayer()->GetPos();
 
 //std::cout << "Player pos: " << pos.x << " " << pos.y << " " << pos.z << "\n";
 
-    AmjuGL::LookAt(pos.x, pos.y + CAM_Y, pos.z + CAM_Z,  pos.x, pos.y, pos.z,  0, 1, 0);
+    cam->SetEyePos(Vec3f(pos.x, pos.y + CAM_Y, pos.z + CAM_Z));
+    cam->SetLookAtPos(pos);
   }
   else
   {
-    AmjuGL::LookAt(0, CAM_Y, CAM_Z,  0, 0, 0,  0, 1, 0);
+    cam->SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
+    cam->SetLookAtPos(Vec3f(0, 0, 0));
   }
 
-  Matrix m;
-  m.RotateY(m_yRot);
-  AmjuGL::MultMatrix(m);
+//  Matrix m;
+//  m.RotateY(m_yRot);
+//  AmjuGL::MultMatrix(m);
 
 
   GetVe1SceneGraph()->Draw();
@@ -291,8 +295,12 @@ void GSMain::Draw()
   if (m_moveRequest)
   {
     // Find point on ground clicked; create request and send to server
+    AmjuGL::PushMatrix();
+    // Camera has been popped
+    cam->Draw();
     DoMoveRequest();
     m_moveRequest = false;
+    AmjuGL::PopMatrix();
   }
 }
 
