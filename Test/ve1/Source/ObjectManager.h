@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include "DownloadManager.h"
+#include <GameObject.h>
 
 namespace Amju
 {
@@ -112,6 +113,7 @@ typedef RCPtr<AssetList> PAssetList;
 // (If first time this process, timestamp is set so we get all objects.)
 // For new objects, download the asset list. Then download any assets not on local disk.
 // When all assets are downloaded, create the object locally.
+// Looks after all game objects; only GOs in current room are stored in Game.
 class ObjectManager : public DownloadManager
 {
 public:
@@ -121,6 +123,9 @@ public:
   void Update();
 
   void AddObject(PObject);
+
+  void AddGameObject(PGameObject);
+  void SetLocation(int newLocation);
 
 private:
   float m_elapsed;
@@ -135,6 +140,13 @@ private:
 
   typedef std::map<std::string, PAssetList> AssetLists;
   AssetLists m_assetLists;
+
+  // All game objects, whatever their location
+  GameObjects m_allGameObjects;
+
+  // Active Location: only objects in this location are drawn by SceneGraph or updated by Game.
+  // (GameObjects with no location ID count as being in all locations)
+  int m_location;
 };
 
 typedef Singleton<ObjectManager> TheObjectManager;

@@ -18,10 +18,10 @@ public:
 
   void SendUpdateReq(int objId, const std::string& key, const std::string& val);
 
-  void SendPosUpdateReq(int objId, const Vec3f& val);
+  void SendPosUpdateReq(int objId, const Vec3f& val, int location);
 
   // Queue a position update for a game object. Called from position update successful response.
-  void QueueUpdatePos(int id, const Vec3f& pos);
+  void QueueUpdatePos(int id, const Vec3f& pos, int location);
 
   void QueueUpdate(int id, const std::string& key, const std::string& value);
 
@@ -40,7 +40,16 @@ private:
   bool Load();
 
 private:
-  typedef std::map<int, Vec3f> PosMap;
+  struct PosLocation
+  {
+    PosLocation() : location(-1) { }
+    PosLocation(const Vec3f& p, int loc) : pos(p), location(loc) { }
+
+    Vec3f pos;
+    int location;
+  };
+
+  typedef std::map<int, PosLocation> PosMap;
   PosMap m_posMap; 
   PosMap m_posMapCache;
 

@@ -46,11 +46,12 @@ std::cout << "Obj " << i << ": ";
       float x = atof(obj.getChildNode(1).getText());
       float y = atof(obj.getChildNode(2).getText());
       float z = atof(obj.getChildNode(3).getText());
+      int location = atoi(obj.getChildNode(4).getText());
 
 //std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
 
-      TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z));
+      TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z), location);
     }
   }
   else

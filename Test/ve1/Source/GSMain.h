@@ -30,11 +30,11 @@ public:
   virtual bool OnKeyEvent(const KeyEvent&);
 
   bool CanShowMsg() const;
-  void ShowMsg(const MsgManager::Msg& msg);
+//  void ShowMsg(const MsgManager::Msg& msg);
   void OnChatSend();
   void OnChatCancel();
   void ActivateChatSend(bool active, int recipId);
-  void ActivateChatRecv(bool active);
+  void ActivateChatRecv(bool active, const MsgManager::Msg* = 0);
   void OnRecvClose();
 
 private:

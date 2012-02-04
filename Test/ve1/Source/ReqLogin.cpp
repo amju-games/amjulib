@@ -112,9 +112,13 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
     }
     */
 
-    // Always go to avatar page
-    TheGSAvatarMod::Instance()->SetPrevState(TheGSChoosePlayer::Instance());
-    TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+    // Always go to avatar page..????
+    // Problems here - we don't yet have the player's avatar state from the server, so 
+    //  display the default (white cat). 
+    //TheGSAvatarMod::Instance()->SetPrevState(TheGSChoosePlayer::Instance());
+    //TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+
+    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 
   }
   else

@@ -75,19 +75,29 @@ GSMain::GSMain()
 
 bool GSMain::CanShowMsg() const
 {
-  return true;
+  return !m_chatRecvIsActive; // && !m_chatSendIsActive ??
 }
 
-void GSMain::ShowMsg(const MsgManager::Msg& msg)
-{
-  ActivateChatRecv(true);
-  ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText("TODO Get sender name");
-  ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg.m_text);
-}
+//void GSMain::ShowMsg(const MsgManager::Msg& msg)
+//{
+//  ActivateChatRecv(true);
+//  ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText("TODO Get sender name");
+//  ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg.m_text);
+//}
 
 void GSMain::OnRecvClose()
 {
   ActivateChatRecv(false);
+}
+
+void GetNameForPlayer(int objId, std::string* r)
+{
+  Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
+  Assert(p);
+  if (p)
+  {
+    *r = p->GetName();
+  }
 }
 
 void GSMain::ActivateChatSend(bool active, int recipId)
@@ -100,12 +110,7 @@ void GSMain::ActivateChatSend(bool active, int recipId)
 std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
     std::string recipName;
-    Player* recip = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr());
-    Assert(recip);
-    if (recip)
-    {
-      recipName = recip->GetName();
-    }
+    GetNameForPlayer(recipId, &recipName);
 
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
     ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
@@ -118,8 +123,17 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
   m_chatSendIsActive = active;
 }
 
-void GSMain::ActivateChatRecv(bool active)
+void GSMain::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
 {
+  if (active)
+  {
+    std::string senderName;
+    GetNameForPlayer(msg->m_senderId, &senderName);
+    
+    ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
+    ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
+  }
+
   m_gui->GetElementByName("msg-recv-comp")->SetVisible(active);
   m_chatRecvIsActive = active;
 }
@@ -166,6 +180,8 @@ void GSMain::Update()
   TheMsgManager::Instance()->Update();
 
   TheGame::Instance()->UpdateGameObjects();
+
+//  TheSAP::Instance()->Update(); // sweep & prune
 }
 
 void GSMain::DoMoveRequest()
@@ -221,7 +237,11 @@ std::cout << "Ground clicked...\n";
       Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos);
+      int location = 0; // TODO It's the current location, unless we hit a portal.
+       // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
+       // Maybe don't send location, but send it as a separate kind of request ?
+
+      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
 
       // Move towards point, but server will send back actual destination
       GetLocalPlayer()->MoveTo(pos);
@@ -327,7 +347,7 @@ bool GSMain::OnCursorEvent(const CursorEvent& ce)
   static float oldx = ce.x;
   static float oldy = ce.y;
   float diffx = ce.x - oldx;
-  float diffy = ce.y - oldy;
+  //float diffy = ce.y - oldy; // not used yet
   oldx = ce.x;
   oldy = ce.y;
 

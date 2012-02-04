@@ -6,10 +6,11 @@
 #include <SceneMesh.h>
 #include <GameObjectFactory.h>
 #include <File.h>
+#include <ReportError.h>
  
 namespace Amju
 {
-static Terrain* terrain = 0;
+static Terrain* currentTerrain = 0;
 
 GameObject* CreateTerrain()
 {
@@ -21,7 +22,7 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Terrain::TYPENAME
 Terrain* Terrain::GetTerrain()
 {
   // TODO
-  return terrain;
+  return currentTerrain;
 }
 
 class TerrainSceneNode : public SceneMesh
@@ -35,25 +36,16 @@ private:
 
 Terrain::Terrain()
 {
-  terrain = this; // for easy access to the current Terrain
 }
 
-bool Terrain::Load(File* f)
+void Terrain::OnLocationEntry()
 {
-  std::string s;
-  if (!f->GetDataLine(&s))
-  {
-    f->ReportError("Expected .obj filename for terrain");
-    return false;  
-  }
-
-//std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
-
-  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(s);
+  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(m_objFilename);
   if (!mesh)
   {
-    f->ReportError("Terrain load: Failed to load terrain mesh " + s);
-    return false; 
+    ReportError("Terrain load: Failed to load terrain mesh " + m_objFilename);
+    Assert(0);
+    return; 
   }
 
   TerrainSceneNode* tsn = new TerrainSceneNode(this);
@@ -64,6 +56,19 @@ bool Terrain::Load(File* f)
   root->AddChild(tsn);
 
 //std::cout << "Terrain load: NICE! Created terrain object\n";
+
+  currentTerrain = this; // for easy access to the current Terrain
+}
+
+bool Terrain::Load(File* f)
+{
+  if (!f->GetDataLine(&m_objFilename))
+  {
+    f->ReportError("Expected .obj filename for terrain");
+    return false;  
+  }
+
+//std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
 
   return true;
 }

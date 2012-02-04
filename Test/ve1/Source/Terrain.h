@@ -1,7 +1,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include <GameObject.h>
+#include "Ve1Object.h"
 #include <SceneNode.h>
 #include <Line3.h>
 
@@ -9,7 +9,7 @@ namespace Amju
 {
 // Region has a Terrain. In a tree structure for drawing, collisions. Tile based.
 // Terrain has a SceneNode, as it is drawn, but is itself a game object (allowing it to be downloadable).
-class Terrain : public GameObject
+class Terrain : public Ve1Object
 {
 public:
   Terrain();
@@ -28,7 +28,11 @@ public:
 // Get the Terrain (for the current region?)
   static Terrain* GetTerrain();
 
+  virtual void OnLocationEntry();
+
 protected:
+  std::string m_objFilename;
+
   // (Octree of) triangles ??
   // Use Obj Mesh, so we can have different materials for different parts of the terrain..?
 
