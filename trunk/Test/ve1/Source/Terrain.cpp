@@ -7,6 +7,7 @@
 #include <GameObjectFactory.h>
 #include <File.h>
 #include <ReportError.h>
+#include <CollisionMesh.h>
  
 namespace Amju
 {
@@ -29,9 +30,12 @@ class TerrainSceneNode : public SceneMesh
 {
 public:
   TerrainSceneNode(Terrain* t) : m_terrain(t) {}
+  CollisionMesh* GetCollisionMesh() { return & m_collMesh; }
+  void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(&m_collMesh); }
 
 private:
   Terrain* m_terrain;
+  CollisionMesh m_collMesh;
 };
 
 Terrain::Terrain()
@@ -50,14 +54,23 @@ void Terrain::OnLocationEntry()
 
   TerrainSceneNode* tsn = new TerrainSceneNode(this);
   tsn->SetMesh(mesh);
+  tsn->UpdateBoundingVol(); // TODO just set a huge AABB
+  tsn->CalcCollisionMesh(mesh);
 
   // Add Terrain to Scene Graph
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   root->AddChild(tsn);
 
+  m_sceneNode = tsn;
+
 //std::cout << "Terrain load: NICE! Created terrain object\n";
 
   currentTerrain = this; // for easy access to the current Terrain
+}
+
+CollisionMesh* Terrain::GetCollisionMesh()
+{
+  return m_sceneNode->GetCollisionMesh();
 }
 
 bool Terrain::Load(File* f)

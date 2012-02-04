@@ -7,6 +7,10 @@
 
 namespace Amju
 {
+class CollisionMesh;
+
+class TerrainSceneNode;
+
 // Region has a Terrain. In a tree structure for drawing, collisions. Tile based.
 // Terrain has a SceneNode, as it is drawn, but is itself a game object (allowing it to be downloadable).
 class Terrain : public Ve1Object
@@ -30,6 +34,9 @@ public:
 
   virtual void OnLocationEntry();
 
+  // For collision tests/shadows -- TODO Octree
+  CollisionMesh* GetCollisionMesh();
+
 protected:
   std::string m_objFilename;
 
@@ -37,6 +44,8 @@ protected:
   // Use Obj Mesh, so we can have different materials for different parts of the terrain..?
 
   // If a regular grid, we don't need anything fancy, you can just divide the coord to get the triangle.
+
+  TerrainSceneNode* m_sceneNode;
 };
 
 }

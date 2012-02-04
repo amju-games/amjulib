@@ -2,6 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 #include "Ve1Object.h"
+#include <Shadow.h>
 
 namespace Amju
 {
@@ -56,6 +57,8 @@ protected:
    // between m_dirCurrent and m_dir until we face the direction of movement.
 
   bool m_isLocal;
+
+  RCPtr<Shadow> m_shadow;
 };
 
 }

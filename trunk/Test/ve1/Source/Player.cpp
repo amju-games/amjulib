@@ -15,6 +15,9 @@
 #include "LocalPlayer.h"
 #include "GSMain.h"
 #include <GameObjectFactory.h>
+#include <Shadow.h>
+#include "Terrain.h"
+#include <CollisionMesh.h>
 
 namespace Amju
 {
@@ -92,10 +95,6 @@ Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
   m_dir = 0;
   m_dirCurrent = m_dir;
   m_isLocal = false;
-
-  // Create Scene Node, but don't attach to SceneGraph until needed  
-  PlayerSceneNode* psn = new PlayerSceneNode(this);
-  m_sceneNode = psn;
 }
 
 const std::string& Player::GetName() const
@@ -120,6 +119,17 @@ void Player::SetIsLocalPlayer(bool isLocal)
 
 bool Player::Load(File* f)
 {
+  // Create Scene Node, but don't attach to SceneGraph until needed  
+  PlayerSceneNode* psn = new PlayerSceneNode(this);
+  m_sceneNode = psn;
+
+  m_shadow = new Shadow;
+  if (!m_shadow->Load(f))
+  {
+    return false;
+  }
+  m_sceneNode->AddChild(m_shadow.GetPtr());
+
   return true;
 }
 
@@ -131,6 +141,10 @@ void Player::OnLocationEntry()
 std::cout << "Adding scene node to SceneGraph for player\n";
 
   root->AddChild(m_sceneNode);
+
+  // Tell shadow the collision mesh it is casting onto
+  // TODO Use octree etc
+  m_shadow->AddCollisionMesh(Terrain::GetTerrain()->GetCollisionMesh());
 }
 
 // Scene Graph
@@ -194,6 +208,13 @@ void Player::Update()
 {
   GameObject::Update();
 
+  // Get height for (x, z);
+  float y = 0;
+  if (Terrain::GetTerrain()->GetCollisionMesh()->GetY(Vec2f(m_pos.x, m_pos.z), &y))
+  {
+    m_pos.y = y;
+  }
+
   Vec3f dir = GetPos() - m_newPos;
   if (dir.SqLen() < 1.0f) // TODO CONFIG
   {
@@ -207,6 +228,9 @@ void Player::Update()
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
     m_sceneNode->Update();
+
+    // Set shadow AABB to same as Scene Node so we don't cull it by mistake
+    *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
 
     static const float XSIZE = 15.0f;
     static const float YSIZE = 60.0f;
