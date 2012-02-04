@@ -344,30 +344,52 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     }
     else if (strs[0] == "mtllib")
     {
-      // TODO One material is specified in one .mtl file, right ?
-      // This may be wrong!
       std::string mtlfilename = strs[1];
-      Material mat;
-      mat.Load(mtlfilename);
-      mat.m_filename = mtlfilename;
-      Assert(!mat.m_name.empty());
-      // Only add if texture specified 
-      if (!mat.m_texfilename.empty())
+      MaterialVec mats;
+      if (!LoadMtlFile(mtlfilename, &mats))
       {
-        m_materials[mat.m_name] = mat;
+        f.ReportError("Failed to load mtl file " + mtlfilename);
+        return false;
       }
-      else
+      //mat.m_filename = mtlfilename;
+
+      for (unsigned int i = 0; i < mats.size(); i++)
       {
+        Material& mat = *mats[i];
+
+        Assert(!mat.m_name.empty());
+        // Only add if texture specified 
+        if (!mat.m_texfilename.empty())
+        {
+          m_materials[mat.m_name] = mat;
+        }
+        else
+        {
 #ifdef OBJ_DEBUG
-        std::cout << "Discarding material " << mat.m_name << " as no texture\n";
+          std::cout << "Discarding material " << mat.m_name << " as no texture\n";
 #endif
+        }
       }
     }
     else if (strs[0] == "usemtl")
     {
       std::string matname = strs[1];
       Group& g = m_groups[currentGroup];
-      g.m_materialName = matname;
+      if (g.m_materialName.empty())
+      {
+        g.m_materialName = matname;
+      }
+      else
+      {
+#ifdef OBJ_DEBUG
+        std::cout << "Changing material within the same group - sigh, making new group.\n";
+#endif
+        // Make name for group
+        currentGroup = matname + "_group"; // OK if group name exists
+        Group& g = m_groups[currentGroup];
+        g.m_name = currentGroup;
+        g.m_materialName = matname;
+      }
     }
   }
 
@@ -454,6 +476,10 @@ void ObjMesh::BuildGroup(Group& g)
 
 #ifdef OBJ_DEBUG
 std::cout << "Group " << g.m_name << " has " << numfaces << " faces.\n";
+if (m_uvs.empty())
+{
+  std::cout << "No UVs in this obj mesh!\n";
+}
 #endif
 
   g.m_tris.reserve(numfaces);

@@ -6,11 +6,7 @@
 
 namespace Amju
 {
-Material::Material() : m_flags(0)
-{
-}
-
-bool Material::Load(const std::string& mtlfilename)
+bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 {
   File f(File::NO_VERSION);
   if (!f.OpenRead(mtlfilename))
@@ -18,6 +14,8 @@ bool Material::Load(const std::string& mtlfilename)
     Assert(0);
     return false;
   }
+
+  Material* current = 0;
 
   while (true)
   {
@@ -35,25 +33,36 @@ bool Material::Load(const std::string& mtlfilename)
     Strings strs = Split(s, ' ');
     Assert(!strs.empty());
 
-    if (strs[0] == "map_Kd")
+    if (strs[0] == "map_Kd" || strs[0] == "map_Ka")
     {
       Assert(strs.size() == 2);
-      m_texfilename = strs[1];
-      m_texture = (Texture*)TheResourceManager::Instance()->GetRes(m_texfilename);
+
+std::cout << "Found texture name " << strs[1] << "\n";
+
+      Assert(current);
+      current->m_texfilename = strs[1];
+      current->m_texture = (Texture*)TheResourceManager::Instance()->GetRes(current->m_texfilename);
     }
     else if (strs[0] == "newmtl")
     {
       Assert(strs.size() == 2);
-      Assert(m_name.empty()); // more than one mat name in file!?
-      m_name = strs[1];
+      Material* mat = new Material;
+      mats->push_back(mat);
+      current = mat;
+
+      current->m_name = strs[1];
     }
     else if (strs[0] == "flags")
     {
       Assert(strs.size() == 2);
-      m_flags = ToInt(strs[1]); 
+      current->m_flags = ToInt(strs[1]); 
     }
   }
   return true;
+}
+
+Material::Material() : m_flags(0)
+{
 }
 
 void Material::UseThisMaterial()
