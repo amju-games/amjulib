@@ -14,7 +14,7 @@ gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 0.2
+-1.0, 0.9
 // size
 2.0, 0.1
 // Text
@@ -27,13 +27,13 @@ gui-text
 // Element name
 error
 // pos (coords are -1..1)
--0.8, 0.0
+-0.8, 0.8
 // size
-1.6, 0.4
+1.6, 1.4
 // Text
 error
 // Font name, size
-arial, 1.0, left, multi
+arial, 0.5, left, multi
 
 // element type
 gui-button
