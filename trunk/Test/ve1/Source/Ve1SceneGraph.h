@@ -6,6 +6,7 @@
 namespace Amju
 {
 SceneGraph* GetVe1SceneGraph();
+void ClearVe1SceneGraph();
 
 SceneGraph* GetGuiSceneGraph();
 

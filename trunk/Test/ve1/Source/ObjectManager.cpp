@@ -12,6 +12,8 @@
 #include <StringUtils.h>
 #include "PlayerInfo.h"
 #include "GSNetError.h"
+#include <SAP.h>
+#include "Ve1SceneGraph.h"
 
 //#define XML_DEBUG
 
@@ -41,7 +43,8 @@ void Object::Load()
     if (m_datafile.empty())
     {
 //std::cout << "Object load: no data file needed for " << *this << "\n";
-      TheGame::Instance()->AddGameObject(go);
+      //TheGame::Instance()->AddGameObject(go);
+      TheObjectManager::Instance()->AddGameObject(go);
     }
     else
     {
@@ -53,8 +56,9 @@ void Object::Load()
 
         if (go->Load(&f))
         {
-          TheGame::Instance()->AddGameObject(go);
-std::cout << "Object load: Successfully added object to game! " << *this << "\n";
+          //TheGame::Instance()->AddGameObject(go);
+std::cout << "Object load: Successfully loaded game object " << *this << "... ";
+          TheObjectManager::Instance()->AddGameObject(go);
         }
         else
         {
@@ -213,6 +217,7 @@ void AssetList::Update()
 ObjectManager::ObjectManager()
 {
   m_elapsed = 999999.9f;
+  m_location = -1;
 }
 
 void ObjectManager::AddObject(PObject obj)
@@ -307,6 +312,66 @@ void ObjectManager::Update()
     TheVe1ReqManager::Instance()->AddReq(new ObjectCheckReq(url));
   }
 }
+
+void ObjectManager::AddGameObject(PGameObject go)
+{
+  m_allGameObjects[go->GetId()] = go;
+  Ve1Object* v = dynamic_cast<Ve1Object*>(go.GetPtr());
+  if (v)
+  {
+    if (v->GetLocation() == m_location)
+    {
+      TheGame::Instance()->AddGameObject(go);
+std::cout << "Added game object to our location (" << m_location << ")\n"; 
+
+      v->OnLocationEntry();
+    }
+    else
+    {
+std::cout << "Created game object but it's not in our location (" << m_location << ")\n"; 
+    }
+  }
+  else
+  {
+    TheGame::Instance()->AddGameObject(go);
+  }
+}
+
+void ObjectManager::SetLocation(int newLocation)
+{
+  if (m_location == newLocation)
+  {
+std::cout << "Er, setting location to current value!\n";
+    return;
+  }
+
+  m_location = newLocation;
+  TheGame::Instance()->ClearGameObjects();
+  // If using Sweep and Prune for collisions, clear list of objects
+  TheSAP::Instance()->Clear();
+
+  ClearVe1SceneGraph();
+
+  for (GameObjects::iterator it = m_allGameObjects.begin(); it != m_allGameObjects.end(); ++it)
+  {
+    PGameObject go = it->second;
+    Ve1Object* v = dynamic_cast<Ve1Object*>(go.GetPtr());
+    if (v)
+    {
+      if (v->GetLocation() == m_location)
+      {
+        TheGame::Instance()->AddGameObject(go);
+        v->OnLocationEntry();
+      }
+    }
+    else
+    {
+std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
+      TheGame::Instance()->AddGameObject(go);
+    } 
+  }
+}
+
 }
 
 

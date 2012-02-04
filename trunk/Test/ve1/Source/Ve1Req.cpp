@@ -29,7 +29,7 @@ void Ve1Req::HandleResult()
     else
     {
       // TODO Get HTTP code
-      m_errorStr = m_name + ": Didn't get time stamp in result\n";
+      m_errorStr = m_name + ": Didn't get time stamp in result: " + str;
     }
 
   }

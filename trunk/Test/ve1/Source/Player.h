@@ -15,8 +15,9 @@ public:
   Player();
   virtual const char* GetTypeName() const { return TYPENAME; }
   virtual void Update();
-  virtual void Draw();
   virtual bool Load(File*);
+
+  virtual void OnLocationEntry();
  
   bool Init(); // TODO why ?
 

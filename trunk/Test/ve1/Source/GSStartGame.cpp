@@ -2,6 +2,7 @@
 #include "GSMain.h"
 #include <AmjuGL.h>
 #include <Game.h>
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -35,6 +36,9 @@ void GSStartGame::OnActive()
 
   // Once loaded..
   TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+
+  // Clear scene graph and initialise empty root node
+  ClearVe1SceneGraph();
 }
 
 bool GSStartGame::OnCursorEvent(const CursorEvent& ce)

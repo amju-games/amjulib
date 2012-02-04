@@ -32,12 +32,13 @@ ObjectUpdater::~ObjectUpdater()
 
 bool ObjectUpdater::Load()
 {
+#ifdef OU_DEBUG
 std::cout << "Loading " << FILENAME << "...\n";
+#endif
+
   File f;
   if (!f.OpenRead(FILENAME))
   {
-std::cout << "...failed to open\n";
-
     return false;
   }
   if (!m_timestampPos.Load(&f))
@@ -80,7 +81,9 @@ std::cout << "...failed to open\n";
     QueueUpdate(id, strs[1], strs[2]);
   }
 
+#ifdef OU_DEBUG
 std::cout << "...Loaded " << num << " update items...\n";
+#endif
 
   // Load positions
   if (!f.GetInteger(&num))
@@ -98,7 +101,7 @@ std::cout << "...Loaded " << num << " update items...\n";
     }
     // Format is id,x, y, z
     Strings strs = Split(s, ',');
-    if (strs.size() != 4)
+    if (strs.size() != 5)
     {
       f.ReportError("Object state cache: bad position: " + s);
       continue;
@@ -107,10 +110,14 @@ std::cout << "...Loaded " << num << " update items...\n";
     float x = ToFloat(strs[1]);
     float y = ToFloat(strs[2]);
     float z = ToFloat(strs[3]);
-    QueueUpdatePos(id, Vec3f(x, y, z));
+    int location = ToInt(strs[4]);
+
+    QueueUpdatePos(id, Vec3f(x, y, z), location);
   }
 
+#ifdef OU_DEBUG
 std::cout << "...Loaded " << num << " positions, OK, done!\n";
+#endif
   
   return true;
 }
@@ -151,7 +158,9 @@ std::cout << "Saving " << FILENAME << "...\n";
 
     f.Write(s);
 
+#ifdef OU_DEBUG
 std::cout << "  - Saving " << s << "\n";
+#endif
   }
 
   // Save positions
@@ -159,7 +168,9 @@ std::cout << "  - Saving " << s << "\n";
   f.WriteInteger(m_posMapCache.size());
   for (PosMap::iterator it = m_posMapCache.begin(); it != m_posMapCache.end(); ++it)
   {
-    const Vec3f& v = it->second;
+    const Vec3f& v = it->second.pos;
+    int location = it->second.location;
+
     std::string s = ToString(it->first);
     s += ",";
     s += ToString(v.x);
@@ -167,13 +178,19 @@ std::cout << "  - Saving " << s << "\n";
     s += ToString(v.y);
     s += ",";
     s += ToString(v.z);
+    s += ",";
+    s += ToString(location);
 
     f.Write(s);
 
+#ifdef OU_DEBUG
 std::cout << "  - Saving " << s << "\n";
+#endif
   }
 
+#ifdef OU_DEBUG
 std::cout << "...saved ok!\n";
+#endif
 
   return true;
 }
@@ -229,14 +246,15 @@ void ObjectUpdater::Update()
     GameObject* go = TheGame::Instance()->GetGameObject(id);
     if (go)
     {
-      const Vec3f& pos = it->second;
+      const Vec3f& pos = it->second.pos;
+      int location = it->second.location;
 
 //std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "\n";
 
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)
       {
-        ve1Obj->MoveTo(pos);
+        ve1Obj->MoveTo(pos, location);
       }
       else
       {
@@ -289,12 +307,12 @@ std::cout << "Object Updater: updating object " << id << " key: " << key << " va
   }
 }
 
-void ObjectUpdater::QueueUpdatePos(int id, const Vec3f& pos)
+void ObjectUpdater::QueueUpdatePos(int id, const Vec3f& pos, int location)
 {
-std::cout << "Queueing update pos: id: " << id << " pos: " << pos << "\n";
+std::cout << "Queueing update pos: id: " << id << " pos: " << pos << " location: " << location << "\n";
 
-  m_posMap[id] = pos;
-  m_posMapCache[id] = pos;
+  m_posMap[id] = PosLocation(pos, location);
+  m_posMapCache[id] = PosLocation(pos, location);
 }
 
 void ObjectUpdater::QueueUpdate(int id, const std::string& key, const std::string& val)
@@ -368,7 +386,7 @@ private:
 };
 
 
-void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos)
+void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_POSITION);
   url += "&obj_id=";
@@ -376,6 +394,7 @@ void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos)
   url += "&x=" + ToString(pos.x);
   url += "&y=" + ToString(pos.y);
   url += "&z=" + ToString(pos.z);
+  url += "&loc=" + ToString(location);
 
   // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
   // Need to kill any existing pos update req then add this new one. TODO

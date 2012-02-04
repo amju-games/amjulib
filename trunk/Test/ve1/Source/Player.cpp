@@ -92,6 +92,10 @@ Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
   m_dir = 0;
   m_dirCurrent = m_dir;
   m_isLocal = false;
+
+  // Create Scene Node, but don't attach to SceneGraph until needed  
+  PlayerSceneNode* psn = new PlayerSceneNode(this);
+  m_sceneNode = psn;
 }
 
 const std::string& Player::GetName() const
@@ -116,55 +120,26 @@ void Player::SetIsLocalPlayer(bool isLocal)
 
 bool Player::Load(File* f)
 {
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-
-  PlayerSceneNode* psn = new PlayerSceneNode(this);
-  m_sceneNode = psn;
-
-/*  
-  // Avatar set using Set() below
-
-  std::string meshName;
-  if (!f->GetDataLine(&meshName))
-  {
-    f->ReportError("No mesh name for player");
-    return false;
-  }
-
-  // Load mesh and textures from file
-  if (!psn->LoadMd2(meshName))
-  {
-    return false;
-  }
-
-  std::string tex1Name, tex2Name;
-  if (!f->GetDataLine(&tex1Name) || !f->GetDataLine(&tex2Name))
-  {
-    f->ReportError("Failed to get 2 textures for player");
-    return false;
-  }
-
-  if (!psn->LoadTextures(tex1Name, tex2Name))
-  {
-    return false;
-  }
-*/
-
-  root->AddChild(psn);
-
-#ifdef PLAYER_LOAD_DEBUG
-std::cout << "Loaded player ok!\n";
-#endif
-
   return true;
 }
 
-void Player::Draw()
+void Player::OnLocationEntry()
 {
-  Assert(GetAABB());
-  DrawAABB(*GetAABB());
+  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  Assert(root);
+
+std::cout << "Adding scene node to SceneGraph for player\n";
+
+  root->AddChild(m_sceneNode);
 }
+
+// Scene Graph
+
+//void Player::Draw()
+//{
+//  Assert(GetAABB());
+//  DrawAABB(*GetAABB());
+//}
 
 void Player::Set(const std::string& key, const std::string& val)
 {
@@ -217,23 +192,8 @@ std::cout << "Player: got new pos to move to: " << newpos << ", current pos is "
 
 void Player::Update()
 {
-  if (m_sceneNode)
-  {
-    Matrix m;
-    m.Translate(m_pos);
-    m_sceneNode->SetLocalTransform(m);
-    m_sceneNode->Update();
-  }
-
-  static const float XSIZE = 15.0f;
-  static const float YSIZE = 60.0f;
-  GetAABB()->Set(
-    m_pos.x - XSIZE, m_pos.x + XSIZE,
-    m_pos.y, m_pos.y + YSIZE,
-    m_pos.z - XSIZE, m_pos.z + XSIZE);
-
   GameObject::Update();
-    
+
   Vec3f dir = GetPos() - m_newPos;
   if (dir.SqLen() < 1.0f) // TODO CONFIG
   {
@@ -241,27 +201,45 @@ void Player::Update()
     m_newPos = GetPos();
   }
 
-  TurnToFaceDir();
-
-  if (m_sceneNode->GetMd2())
+  if (m_sceneNode)
   {
-    float speed = m_vel.SqLen();
+    Matrix m;
+    m.Translate(m_pos);
+    m_sceneNode->SetLocalTransform(m);
+    m_sceneNode->Update();
 
-    static const float MAX_SPEED = 100.0f; // TODO CONFIG
-    static const float RUN_SPEED = MAX_SPEED * 0.5f;
-    static const float WALK_SPEED = RUN_SPEED * 0.5f;
+    static const float XSIZE = 15.0f;
+    static const float YSIZE = 60.0f;
+    GetAABB()->Set(
+      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.y, m_pos.y + YSIZE,
+      m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+    TurnToFaceDir();
+
+    if (m_sceneNode->GetMd2())
+    {
+      float speed = m_vel.SqLen();
+
+      // TODO Simplify -- either moving or idle. 
+      // NB Speeds should be an avatar variable and level up
+
+      static const float MAX_SPEED = 100.0f; // TODO CONFIG
+      static const float RUN_SPEED = MAX_SPEED * 0.5f;
+      static const float WALK_SPEED = RUN_SPEED * 0.5f;
   
-    if (speed > RUN_SPEED)
-    {
-      m_sceneNode->SetAnim("walk"); //"run");
-    }
-    else if (speed > WALK_SPEED)
-    {
-      m_sceneNode->SetAnim("walk");
-    }
-    else
-    {
-      m_sceneNode->SetAnim("stand");
+      if (speed > RUN_SPEED)
+      {
+        m_sceneNode->SetAnim("walk"); //"run");
+      }
+      else if (speed > WALK_SPEED)
+      {
+        m_sceneNode->SetAnim("walk");
+      }
+      else
+      {
+        m_sceneNode->SetAnim("stand");
+      }
     }
   }
 }

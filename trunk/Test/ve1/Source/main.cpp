@@ -21,7 +21,9 @@
 #include <CursorManager.h>
 #include <File.h>
 #include <Directory.h>
+#include <ConfigFile.h>
 #include "AvatarManager.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -38,6 +40,10 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 void StartUp()
 {
   File::SetRoot(GetSaveDir(APP_NAME), "/");
+  
+  TheGameConfigFile::Instance()->Load("game.cfg");
+
+  // TODO Need to set SAP collide func
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for now
@@ -45,6 +51,9 @@ void StartUp()
 
   TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheAvatarManager::Instance()->Load();
+
+  // Create empty root node
+  ClearVe1SceneGraph();
 
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());

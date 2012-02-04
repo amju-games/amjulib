@@ -59,7 +59,9 @@ void MsgManager::Update()
     Msgs::iterator it = m_map.begin();
     Assert(it != m_map.end());
     Msg& msg = it->second;
-    gsm->ShowMsg(msg);
+    //gsm->ShowMsg(msg);
+    gsm->ActivateChatRecv(true, &msg);
+    gsm->ActivateChatSend(true, msg.m_senderId);
 
     // Mark message as read -- TODO only after player clicks OK in gui..?
     MarkRead(msg);
