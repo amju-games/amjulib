@@ -107,11 +107,12 @@ CREATE TABLE `objectpos`
 `x` FLOAT NOT NULL, 
 `y` FLOAT NOT NULL, 
 `z` FLOAT NOT NULL, 
+`loc` INT NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
 PRIMARY KEY (`id`),
 FOREIGN KEY (`id`) REFERENCES object(`id`),
 
-INDEX (`whenchanged`)
+INDEX (`whenchanged`, `loc`)
 ) ENGINE = MYISAM;
 END
 
