@@ -24,12 +24,13 @@ sub move()
   my $x = param('x');
   my $y = param('y');
   my $z = param('z');
+  my $loc = param('loc');
   my $obj_id = param('obj_id');
 
 
   # TODO Check LOS to new requested location
 
-  my $sql = "insert into objectpos (id, x, y, z, whenchanged) values ($obj_id, $x, $y, $z, now()) on duplicate key update x=$x, y=$y, z=$z, whenchanged=now() ";
+  my $sql = "insert into objectpos (id, x, y, z, loc, whenchanged) values ($obj_id, $x, $y, $z, $loc, now()) on duplicate key update x=$x, y=$y, z=$z, loc=$loc, whenchanged=now() ";
 
   print "Query: $sql\n\n";
 
@@ -38,6 +39,10 @@ sub move()
 
   $query->execute;
 
+
+  # Update "research" table - log all data for analysis
+  $sql = "insert into research_objectpos (id, x, y, z, loc, whenchanged) values ($obj_id, $x, $y, $z, $loc, now())";
+  insert($sql);
 }
 
 

@@ -23,7 +23,7 @@ sub getpos()
 
   my $time = param('time') or die "Expected time since last check";
 
-  my $sql = "SELECT id, x, y, z FROM objectpos WHERE whenchanged >= FROM_UNIXTIME($time)";
+  my $sql = "SELECT id, x, y, z, loc FROM objectpos WHERE whenchanged >= FROM_UNIXTIME($time)";
 
 #  print "Query: $sql\n\n";
 
@@ -33,10 +33,10 @@ sub getpos()
   $query->execute;
 
   print "<objs>\n";
-  while (my ($id, $x, $y, $z) = $query->fetchrow_array)
+  while (my ($id, $x, $y, $z, $loc) = $query->fetchrow_array)
   {
     print "<obj>";
-    print "<id>$id</id> <x>$x</x> <y>$y</y> <z>$z</z>";
+    print "<id>$id</id> <x>$x</x> <y>$y</y> <z>$z</z> <loc>$loc</loc>";
     print "</obj>\n";
   }
   print "</objs>\n";
