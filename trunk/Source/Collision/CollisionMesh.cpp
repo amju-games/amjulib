@@ -1,6 +1,14 @@
 #include "CollisionMesh.h"
 #include "Vec2.h"
 #include "Plane.h"
+// Magic Software triangle-sphere intersect test
+#include "Mgc/MgcIntr3DTriSphr.h"
+// Mgc point-in-poly test
+#include "Mgc/MgcCont2DPointInPolygon.h"
+// Mgc distance from line to triangle
+#include "Mgc/MgcDist3DLinTri.h"
+// Mgc dist from point to triangle
+#include "Mgc/MgcDist3DVecTri.h"
 
 namespace Amju
 {
@@ -79,6 +87,49 @@ void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
       pTris->push_back(t);
     }
   }
+}
+
+bool CollisionMesh::Intersects(const Capsule& cap, Tris* tris) const
+{
+std::cout << "In CollisionMesh::Intersects...\n";
+
+  const Vec3f& p0 = cap.m_lineseg.p0;
+  Vec3f dir = cap.m_lineseg.p1 - cap.m_lineseg.p0;
+
+  Mgc::Segment3 seg;
+  seg.Origin() = Mgc::Vector3(p0.x, p0.y, p0.z);
+  seg.Direction() = Mgc::Vector3(dir.x, dir.y, dir.z);
+
+  float r2 = cap.m_radius * cap.m_radius;
+
+  // For each tri, get dist from capsule line seg to tri, compare with capsule radius.
+  bool ret = false;
+  for (Tris::const_iterator it = m_tris.begin(); it != m_tris.end(); ++it)
+  {
+    const Tri& t = *it;
+
+    const Vec3f& a = t.m_verts[0];
+    const Vec3f& b = t.m_verts[1];
+    const Vec3f& c = t.m_verts[2];
+
+    Mgc::Triangle3 tri;
+    tri.Origin() = Mgc::Vector3(a.x, a.y, a.z);
+    tri.Edge0() = Mgc::Vector3(b.x - a.x, b.y - a.y, b.z - a.z);
+    tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
+
+    float squareDist = Mgc::SqrDistance(seg, tri);
+std::cout << " - sq dist for tri: " << squareDist << "\n";
+
+    if (squareDist <= r2)
+    {
+std::cout << " - Found intersecting tri!\n";
+
+      tris->push_back(t);
+      ret = true;
+    }
+  }
+std::cout << "Finished\n";
+  return ret;
 }
 
 const CollisionMesh::Tris& CollisionMesh::GetAllTris() const
