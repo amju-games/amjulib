@@ -18,18 +18,17 @@ class Terrain : public Ve1Object
 public:
   Terrain();
 
-  // Get location clicked on, for user navigation
-  Vec3f GetMousePos(const LineSeg& mouseLine);
+  // Get location clicked on, for user navigation. Returns false if not a point on ground
+  bool GetMousePos(const LineSeg& mouseLine, Vec3f* pos);
 
-  virtual void Draw(); //?
+////  virtual void Draw(); //?
   virtual void Update();
   virtual bool Load(File*);
 
   static const char* TYPENAME;
   virtual const char* GetTypeName() const;
-  // Load() ..??
 
-// Get the Terrain (for the current region?)
+  // Get the Terrain for the current location for this client
   static Terrain* GetTerrain();
 
   virtual void OnLocationEntry();
