@@ -18,6 +18,7 @@
 #include <Shadow.h>
 #include "Terrain.h"
 #include <CollisionMesh.h>
+#include "Useful.h"
 
 namespace Amju
 {
@@ -95,6 +96,7 @@ Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
   m_dir = 0;
   m_dirCurrent = m_dir;
   m_isLocal = false;
+  m_isMoving = false;
 }
 
 const std::string& Player::GetName() const
@@ -130,6 +132,14 @@ bool Player::Load(File* f)
   }
   m_sceneNode->AddChild(m_shadow.GetPtr());
 
+  // Load arrow scene node
+  ObjMesh* arrowMesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("arrow.obj"); 
+  Assert(arrowMesh);
+  m_arrow = new SceneMesh;
+  m_arrow->SetMesh(arrowMesh);
+//  m_arrow->UpdateBoundingVol();
+//  m_sceneNode->AddChild(m_arrow.GetPtr()); // TODO TEMP TEST
+
   return true;
 }
 
@@ -140,11 +150,15 @@ void Player::OnLocationEntry()
 
 std::cout << "Adding scene node to SceneGraph for player\n";
 
-  root->AddChild(m_sceneNode);
+  root->AddChild(m_sceneNode.GetPtr());
+  root->AddChild(m_arrow.GetPtr());
+  SetArrowVis(false);
 
   // Tell shadow the collision mesh it is casting onto
   // TODO Use octree etc
+  // NB This only works if Terrain is activated before player!!
   m_shadow->AddCollisionMesh(Terrain::GetTerrain()->GetCollisionMesh());
+  m_isMoving = false;
 }
 
 // Scene Graph
@@ -174,19 +188,50 @@ void Player::Set(const std::string& key, const std::string& val)
   }
 }
 
-void Player::MoveTo(const Vec3f& newpos)
+void Player::SetArrowVis(bool visible)
 {
+std::cout << "Setting arrow vis to " << (visible ? "true" : "false") << "\n";
+
+  m_arrow->SetVisible(visible);
+}
+
+void Player::SetArrowPos(const Vec3f& newpos)
+{
+std::cout << " Setting arrow pos to " << newpos << "\n";
+
+  Matrix m;
+  m.Translate(newpos);
+  m_arrow->SetLocalTransform(m);
+
+  static const float XSIZE = 15.0f;
+  static const float YSIZE = 60.0f;
+  m_arrow->GetAABB()->Set(
+    newpos.x - XSIZE, newpos.x + XSIZE,
+    newpos.y, newpos.y + YSIZE,
+    newpos.z - XSIZE, newpos.z + XSIZE);
+}
+
+void Player::MoveTo(const Vec3f& newpos, int location)
+{
+  m_location = location;
   m_newPos = newpos;
+  m_isMoving = true;
+
   if (m_posHasBeenSet)
   {
 std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
 
     Vec3f dir = GetPos() - newpos;
+
+    /*
     if (dir.SqLen() < 1.0f) // TODO CONFIG
     {
       SetVel(Vec3f(0, 0, 0));
+      SetArrowVis(false);
     }
     else
+    */
+
     {
       dir.Normalise();
       static const float SPEED = 50.0f; // TODO CONFIG
@@ -198,9 +243,12 @@ std::cout << "Player: got new pos to move to: " << newpos << ", current pos is "
   }
   else  
   {
+std::cout << "Player: first pos update, so set immediately\n";
+
     // First pos update, so immediately set pos
     m_posHasBeenSet = true;
     SetPos(newpos); 
+    m_isMoving = false;
   }
 }
 
@@ -215,11 +263,19 @@ void Player::Update()
     m_pos.y = y;
   }
 
-  Vec3f dir = GetPos() - m_newPos;
-  if (dir.SqLen() < 1.0f) // TODO CONFIG
+  // Stop moving if we are close enough to the destination
+  // TODO This ends up happening every frame, only do it if we are moving
+  if (m_isMoving)
   {
-    SetVel(Vec3f(0, 0, 0));
-    m_newPos = GetPos();
+    Vec3f dir = GetPos() - m_newPos;
+    dir.y = 0; // ignore y coord for now
+    if (dir.SqLen() < 1.0f) // TODO CONFIG
+    {
+      SetVel(Vec3f(0, 0, 0));
+      m_newPos = GetPos();
+      SetArrowVis(false);
+      m_isMoving = false;
+    }
   }
 
   if (m_sceneNode)
@@ -231,6 +287,9 @@ void Player::Update()
 
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
     *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
+
+    // TODO TEMP TEST
+////    *(m_arrow->GetAABB()) = *(m_sceneNode->GetAABB());
 
     static const float XSIZE = 15.0f;
     static const float YSIZE = 60.0f;

@@ -249,15 +249,17 @@ void ObjectUpdater::Update()
       const Vec3f& pos = it->second.pos;
       int location = it->second.location;
 
-//std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "\n";
+std::cout << "Object Updater: updating object " << id << " to pos: " << pos;
 
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)
       {
+std::cout << "..using MoveTo\n";
         ve1Obj->MoveTo(pos, location);
       }
       else
       {
+std::cout << "..using SetPos, not a Ve1Object\n";
         go->SetPos(pos);
       }
 

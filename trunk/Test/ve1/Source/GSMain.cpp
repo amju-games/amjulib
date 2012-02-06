@@ -234,17 +234,26 @@ std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
     else if (GetLocalPlayer())
     {
 std::cout << "Ground clicked...\n";
-      Vec3f pos = Terrain::GetTerrain()->GetMousePos(lineSeg);
+      Vec3f pos;
+      if (Terrain::GetTerrain()->GetMousePos(lineSeg, &pos))
+      {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-      int location = 0; // TODO It's the current location, unless we hit a portal.
-       // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
-       // Maybe don't send location, but send it as a separate kind of request ?
+        int location = 0; // TODO It's the current location, unless we hit a portal.
+         // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
+         // Maybe don't send location, but send it as a separate kind of request ?
 
-      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+        TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
 
-      // Move towards point, but server will send back actual destination
-      GetLocalPlayer()->MoveTo(pos);
+        // TODO We want to respond immediately but we get out of sync with server
+        // Move towards point, but server will send back actual destination
+        GetLocalPlayer()->SetArrowPos(pos); //MoveTo(pos);
+        GetLocalPlayer()->SetArrowVis(true);
+      }
+      else
+      {
+std::cout << "...not a point on the ground, apparently..?\n";
+      }
     }
 }
 

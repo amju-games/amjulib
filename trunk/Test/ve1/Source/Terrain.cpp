@@ -8,7 +8,15 @@
 #include <File.h>
 #include <ReportError.h>
 #include <CollisionMesh.h>
- 
+// Magic Software triangle-sphere intersect test
+#include "Mgc/MgcIntr3DTriSphr.h"
+// Mgc point-in-poly test
+#include "Mgc/MgcCont2DPointInPolygon.h"
+// Mgc distance from line to triangle
+#include "Mgc/MgcDist3DLinTri.h"
+// Mgc dist from point to triangle
+#include "Mgc/MgcDist3DVecTri.h"
+
 namespace Amju
 {
 static Terrain* currentTerrain = 0;
@@ -54,6 +62,8 @@ void Terrain::OnLocationEntry()
 
   TerrainSceneNode* tsn = new TerrainSceneNode(this);
   tsn->SetMesh(mesh);
+
+  // TODO Not sure this actually does anything. What we want is to work out the AABB for the mesh.
   tsn->UpdateBoundingVol(); // TODO just set a huge AABB
   tsn->CalcCollisionMesh(mesh);
 
@@ -86,6 +96,7 @@ bool Terrain::Load(File* f)
   return true;
 }
 
+/*
 void Terrain::Draw()
 {
   static OBB3 obb;
@@ -95,6 +106,7 @@ void Terrain::Draw()
   DrawSolidOBB3(obb);
   PopColour();
 }
+*/
 
 void Terrain::Update()
 {
@@ -107,8 +119,64 @@ const char* Terrain::GetTypeName() const
   return TYPENAME;
 }
 
-Vec3f Terrain::GetMousePos(const LineSeg& seg)
+bool Terrain::GetMousePos(const LineSeg& seg, Vec3f* pos)
 {
+  // Find all intersecting floor tris
+  CollisionMesh::Tris tris;
+  Capsule cap(seg, 0); // TODO Radius ?
+
+  if (!GetCollisionMesh()->Intersects(cap, &tris))
+  {
+std::cout << "Line seg didn't intersect any tris\n";
+    return false;
+  }
+
+  if (tris.empty())
+  {
+    // So Intersects() above should have returned false!?
+    Assert(0);
+    return false;
+  }
+
+  Mgc::Vector3 pt1(seg.p0.x, seg.p0.y, seg.p0.z);
+  Mgc::Vector3 pt2(seg.p1.x - seg.p0.x, seg.p1.y - seg.p0.y, seg.p1.z - seg.p0.z);
+  Mgc::Segment3 s;
+  s.Origin() = pt1;
+  s.Direction() = pt2;
+
+  // Iterate over tris - find intersection points. Keep track of the closest point to p0.
+  Vec3f closest = seg.p1;
+  float closestSqDist = (seg.p1 - seg.p0).SqLen();
+
+  int size = tris.size();
+std::cout << "Found " << size << " tris....\n";
+
+  for (int i = 0; i < size; i++)
+  {
+    const Tri& t = tris[i];
+      
+    const Vec3f& a = t.m_verts[0];
+    const Vec3f& b = t.m_verts[1];
+    const Vec3f& c = t.m_verts[2];
+
+    Mgc::Triangle3 tri;
+    tri.Origin() = Mgc::Vector3(a.x, a.y, a.z);
+    tri.Edge0() = Mgc::Vector3(b.x - a.x, b.y - a.y, b.z - a.z);
+    tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
+
+    Vec3f p;
+    float squareDist = Mgc::SqrDistance(s, tri, &p.x, &p.y, &p.z);
+    if (squareDist < closestSqDist)
+    {
+      closestSqDist = squareDist;
+      closest = p;
+    }
+  }
+
+  *pos = closest;
+  return true;
+
+/*
   // Find intersection of line seg and terrain triangles - Octree would make this efficient
   // TODO
   // Assume ground plane at y=0. Find (x, z) at this y value.
@@ -131,6 +199,7 @@ std::cout << "Unexpected value for t! " << t << "\n";
 std::cout << "t: " << t << "\n";
     return seg.GetPoint(t);
   }
+*/
 }
 }
 
