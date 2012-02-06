@@ -6,6 +6,7 @@
 #include "Matrix.h"
 #include "ObjMesh.h"
 #include "AABB.h"
+#include <Capsule.h>
 
 namespace Amju
 {
@@ -13,6 +14,8 @@ namespace Amju
 // Returns false if the triangle is not facing upwards.
 // Returns false if there is no (x, z) coord on the triangle.
 bool GetY(const Tri& tri, const Vec2f& xz, float* y);
+
+// TODO SimpleCollisionMesh and OctreeCollisionMesh ?
 
 class CollisionMesh
 {
@@ -23,6 +26,10 @@ public:
   typedef std::vector<Tri> Tris;
 
   void Clear();
+
+  // Return true if capsule intersects mesh.
+  // Populates vector with intersecting tris. 
+  bool Intersects(const Capsule& capsule, Tris* tris) const;
 
   // Get height on mesh for (x, z), nearest to given y.
   bool GetY(const Vec2f& v, float* pY) const;
