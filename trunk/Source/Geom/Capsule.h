@@ -1,16 +1,16 @@
 #ifndef CAPSULE_H
 #define CAPSULE_H
 
-#include "Line.h"
+#include "Line3.h"
 
 namespace Amju
 {
-class Capsule
+struct Capsule
 {
-public:
+  Capsule(const LineSeg& seg, float radius) : m_lineseg(seg), m_radius(radius) { }
 
-private:
   LineSeg m_lineseg;
+  float m_radius;
 };
 }
 
