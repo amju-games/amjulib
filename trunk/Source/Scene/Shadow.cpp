@@ -18,7 +18,7 @@ extern "C"
 }
 #include "AmjuFinal.h"
 
-#define SHADOW_DEBUG
+//#define SHADOW_DEBUG
 
 namespace Amju
 {
