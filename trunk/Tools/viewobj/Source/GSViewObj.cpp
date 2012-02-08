@@ -10,9 +10,13 @@ static ObjMesh* mesh = 0;
 
 static float xrot = 0;
 static float yrot = 0;
-static bool drag = false;
+static bool Ldrag = false;
+static bool Mdrag = false;
+static bool Rdrag = false;
 static Vec3f pos;
 static Vec3f vel;
+static bool lighting = false;
+static bool texturing = true;
 
 GSViewObj::GSViewObj()
 {
@@ -39,13 +43,28 @@ void GSViewObj::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
+  AmjuGL::LookAt(0, 0, 20,  0, 0, 0,  0, 1, 0);
   AmjuGL::Translate(pos.x, pos.y, pos.z);
   AmjuGL::RotateX(xrot);
   AmjuGL::RotateY(yrot);
 
-  AmjuGL::LookAt(0, 0, 0,   0, 100, 2000,  0, 1, 0);
+  if (texturing)
+  {
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  }
+  else
+  {
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  }
 
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  if (lighting)
+  {
+    AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+  }
+  else
+  {
+    AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  }
   mesh->Draw();
 }
 
@@ -76,12 +95,25 @@ bool GSViewObj::OnCursorEvent(const CursorEvent& ce)
   oldx = ce.x;
   oldy = ce.y;
 
-  if (drag)
+  if (Ldrag)
   {
     static const float SENSITIVITY = 100.0f;
 
     xrot += diffy * SENSITIVITY;
     yrot += diffx * SENSITIVITY;
+  }
+  else if (Mdrag)
+  {
+    static const float SENSITIVITY = 100.0f;
+
+    pos.y += diffy * SENSITIVITY;
+    pos.x += diffx * SENSITIVITY;
+  }
+  else if (Rdrag)
+  {
+    static const float SENSITIVITY = 100.0f;
+
+    pos.z += diffy * SENSITIVITY;
   }
 
   return false;
@@ -89,7 +121,19 @@ bool GSViewObj::OnCursorEvent(const CursorEvent& ce)
 
 bool GSViewObj::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-  drag = mbe.isDown;
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  {
+    Ldrag = mbe.isDown;
+  }
+  else if (mbe.button == AMJU_BUTTON_MOUSE_MIDDLE)
+  {
+    Mdrag = mbe.isDown;
+  }
+  else if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
+  {
+    Rdrag = mbe.isDown;
+  }
+
   return false;
 }
 
