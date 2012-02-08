@@ -37,7 +37,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
     {
       Assert(strs.size() == 2);
 
-std::cout << "Found texture name " << strs[1] << "\n";
+//std::cout << "Found texture name " << strs[1] << "\n";
 
       Assert(current);
       current->m_texfilename = strs[1];
