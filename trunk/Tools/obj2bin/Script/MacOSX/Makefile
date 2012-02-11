@@ -14,4 +14,6 @@ LIBS	:= \
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
+test:	
+	$(TARGET) _1_.obj _1_output.obj
 
