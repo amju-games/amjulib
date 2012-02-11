@@ -23,6 +23,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include "Pause.h" // TODO TEMP TEST
 #include "Colour.h"
 #include "Screen.h"
+#include <ShadowMap.h>
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -1015,6 +1016,11 @@ void AmjuGLGCube::GetScreenshot(unsigned char* buffer, int w, int h)
 Shader* AmjuGLGCube::LoadShader(const std::string& )
 {
   return new ShaderNull;
+}
+
+ShadowMap* AmjuGLGCube::CreateShadowMap()
+{
+  return new ShadowMapNull;
 }
 }
 
