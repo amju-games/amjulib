@@ -17,6 +17,7 @@ public:
   virtual void HandleResult(); 
 
   virtual void OnDownloaded() {}
+  virtual void OnDownloadFailed() {}
 
 protected:
   std::string m_filename;
