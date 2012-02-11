@@ -65,6 +65,7 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos) {}
   virtual Shader* LoadShader(const std::string& shaderFileName) { return 0; }
+  virtual ShadowMap* CreateShadowMap() { return 0; }
 };
 
 class AmjuGLGCube : public AmjuGLImpl
@@ -174,6 +175,7 @@ public:
     const AmjuGL::Vec3& lightPos);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
+  virtual ShadowMap* CreateShadowMap(); 
 
 private:
   int m_texId; // to get unique texture IDs
