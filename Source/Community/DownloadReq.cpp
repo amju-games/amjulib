@@ -33,14 +33,14 @@ std::cout << "Download req succeeded! GetString returns this: \"" << res.GetStri
 std::cout << "Download req: HTTP response too short\n";
 #endif
       // TODO LOG bad response
+      OnDownloadFailed();
       return;
     } 
 
     unsigned int i = 0;
 
-    // TODO Check HTTP response code
 #ifdef CHECK_HTTP_RESPONSE
-    // This doesn't work, TODO 
+    // Check HTTP response code
     while (i < size && s[i] != '\r') i++;
     std::string firstline(s, s + i);
 std::cout << "First line: \"" << firstline << "\"\n";
@@ -48,6 +48,7 @@ std::cout << "First line: \"" << firstline << "\"\n";
     {
 std::cout << " - I don't see 200, response not OK :-( \n";
       // TODO LOG bad response
+      OnDownloadFailed();
       return; 
     }
 #endif // CHECK_HTTP_RESPONSE
@@ -105,10 +106,15 @@ std::cout << "Data looks like this:\n" << std::string((const char*)(s + i)) << "
     {  
       OnDownloaded();
     }
+    else
+    {
+      OnDownloadFailed();
+    }
   }
   else
   {
     std::cout << "Download req failed! " << res.GetErrorString() << "\n";
+    OnDownloadFailed();
   }
 }
 }
