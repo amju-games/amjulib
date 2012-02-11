@@ -49,7 +49,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
       Material* mat = new Material;
       mats->push_back(mat);
       current = mat;
-
+      current->m_filename = mtlfilename;
       current->m_name = strs[1];
     }
     else if (strs[0] == "flags")
