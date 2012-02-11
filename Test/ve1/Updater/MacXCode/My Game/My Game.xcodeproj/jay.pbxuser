@@ -1,0 +1,169 @@
+// !$*UTF8*$!
+{
+	256AC3D80F4B6AC300CF3369 /* My_GameAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1129, 349}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 311}";
+		};
+	};
+	256AC3D90F4B6AC300CF3369 /* My_GameAppDelegate.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1129, 349}}";
+			sepNavSelRange = "{194, 0}";
+			sepNavVisRange = "{0, 389}";
+		};
+	};
+	256AC3F00F4B6AF500CF3369 /* My_Game_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 326}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 145}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeArchitecturePreference = i386;
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 69BC976614E53660009FE20C /* My Game */;
+		activeTarget = 8D1107260486CEB800E47090 /* My Game */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* My Game */,
+		);
+		codeSenseManager = 69BC977514E53681009FE20C /* Code sense */;
+		executables = (
+			69BC976614E53660009FE20C /* My Game */,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 350565984;
+			PBXWorkspaceStateSaveDate = 350565984;
+		};
+		perUserProjectItems = {
+			69BC979A14E540FF009FE20C /* PBXTextBookmark */ = 69BC979A14E540FF009FE20C /* PBXTextBookmark */;
+			69BC979B14E540FF009FE20C /* PBXTextBookmark */ = 69BC979B14E540FF009FE20C /* PBXTextBookmark */;
+			69BC979D14E540FF009FE20C /* PBXTextBookmark */ = 69BC979D14E540FF009FE20C /* PBXTextBookmark */;
+		};
+		sourceControlManager = 69BC977414E53681009FE20C /* Source Control */;
+		userBuildSettings = {
+			OBJROOT = "$(SYMROOT)";
+			SYMROOT = /Users/jay/projects/amjulib/Build/Updater/MacXCode/;
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 326}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 249}";
+		};
+	};
+	69BC976614E53660009FE20C /* My Game */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "My Game";
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	69BC977414E53681009FE20C /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	69BC977514E53681009FE20C /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	69BC979214E53D80009FE20C /* HttpReq.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = HttpReq.h;
+		path = /Users/jay/projects/amjulib/Source/Network/HttpReq.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1129, 1261}}";
+			sepNavSelRange = "{502, 0}";
+			sepNavVisRange = "{0, 761}";
+			sepNavWindowFrame = "{{15, 163}, {968, 710}}";
+		};
+	};
+	69BC979A14E540FF009FE20C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 69BC979214E53D80009FE20C /* HttpReq.h */;
+		name = "HttpReq.h: 27";
+		rLen = 33;
+		rLoc = 728;
+		rType = 0;
+		vrLen = 394;
+		vrLoc = 369;
+	};
+	69BC979B14E540FF009FE20C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 69BC979C14E540FF009FE20C /* HttpReq.cpp */;
+		name = "HttpReq.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 436;
+		vrLoc = 0;
+	};
+	69BC979C14E540FF009FE20C /* HttpReq.cpp */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = HttpReq.cpp;
+		path = /Users/jay/projects/amjulib/Source/Network/HttpReq.cpp;
+		sourceTree = "<absolute>";
+	};
+	69BC979D14E540FF009FE20C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 69BC979E14E540FF009FE20C /* HttpReq.cpp */;
+		name = "HttpReq.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 436;
+		vrLoc = 0;
+	};
+	69BC979E14E540FF009FE20C /* HttpReq.cpp */ = {
+		isa = PBXFileReference;
+		name = HttpReq.cpp;
+		path = /Users/jay/projects/amjulib/Source/Network/HttpReq.cpp;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {978, 2730}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 436}";
+		};
+	};
+	8D1107260486CEB800E47090 /* My Game */ = {
+		activeExec = 0;
+		executables = (
+			69BC976614E53660009FE20C /* My Game */,
+		);
+	};
+}
