@@ -6,7 +6,7 @@
 #include "CollisionMesh.h"
 #include <Matrix.h>
 
-//#define OBJ_DEBUG
+#define OBJ_DEBUG
 
 namespace Amju
 {
@@ -321,7 +321,9 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     }
     else if (strs[0] == "vn")
     {
-      m_normals.push_back(ToVec3(strs));
+      Vec3f n = ToVec3(strs);
+      n.Normalise();
+      m_normals.push_back(n);
     }
     else if (strs[0] == "vt")
     {
