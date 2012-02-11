@@ -7,6 +7,9 @@
 #include "GSTitle.h"
 #include "GSLogin.h"
 #include "GSLoginWaiting.h"
+#include "GameMode.h"
+#include "GSMain.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -44,19 +47,34 @@ void GSChoosePlayer::Draw2d()
 class ChoosePlayerCommand : public GuiCommand
 {
 public:
-  ChoosePlayerCommand(int playerNum, const std::string& email) : m_playerNum(playerNum), m_email(email) {}
+  ChoosePlayerCommand(int playerNum, const std::string& email, const std::string& playername) :
+    m_playerNum(playerNum), m_email(email), m_playername(playername) { }
 
   virtual bool Do()
   {
-    TheGSLoginWaiting::Instance()->SetEmail(m_email);
-    TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+    if (IsOnline())
+    {
+      TheGSLoginWaiting::Instance()->SetEmail(m_email);
+      TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+    }
+    else
+    {
+      // TODO This duplicates code in ReqLogin::OnSuccess()
 
+      ThePlayerInfoManager::Instance()->SetCurrentPlayer(m_playername + ".txt");
+      PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+      int objId = pi->PIGetInt(PI_KEY("player obj id"));
+      SetLocalPlayerId(objId);
+
+      TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    }
     return false;
   }
 
 private:
   int m_playerNum;
   std::string m_email;
+  std::string m_playername;
 };
 
 void GSChoosePlayer::OnActive()
@@ -94,13 +112,13 @@ std::cout << "Num players: " << numPlayers << "\n";
       std::string email = pi->PIGetString(PI_KEY("email"));
 
       b->SetText(playername);
-      b->SetCommand(new ChoosePlayerCommand(i, email));
+      b->SetCommand(new ChoosePlayerCommand(i, email, playername));
     }
-    else if (i == numPlayers)
+    else if (i == numPlayers && IsOnline())
     {
       b->SetText("new...");
       b->SetCommand(OnNewPlayer);
-    }
+    } 
     else
     {
       elem->SetVisible(false);
