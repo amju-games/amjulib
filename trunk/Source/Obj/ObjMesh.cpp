@@ -6,7 +6,7 @@
 #include "CollisionMesh.h"
 #include <Matrix.h>
 
-#define OBJ_DEBUG
+//#define OBJ_DEBUG
 
 namespace Amju
 {
