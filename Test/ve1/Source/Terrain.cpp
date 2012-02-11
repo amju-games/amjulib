@@ -16,6 +16,7 @@
 #include "Mgc/MgcDist3DLinTri.h"
 // Mgc dist from point to triangle
 #include "Mgc/MgcDist3DVecTri.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -123,11 +124,11 @@ bool Terrain::GetMousePos(const LineSeg& seg, Vec3f* pos)
 {
   // Find all intersecting floor tris
   CollisionMesh::Tris tris;
-  Capsule cap(seg, 0); // TODO Radius ?
+  Capsule cap(seg, 1.0f); // TODO Radius ?
 
   if (!GetCollisionMesh()->Intersects(cap, &tris))
   {
-std::cout << "Line seg didn't intersect any tris\n";
+std::cout << "Terrain: Line seg didn't intersect any tris\n";
     return false;
   }
 
@@ -149,7 +150,10 @@ std::cout << "Line seg didn't intersect any tris\n";
   float closestSqDist = (seg.p1 - seg.p0).SqLen();
 
   int size = tris.size();
+
+#ifdef TERRAIN_DEBUG
 std::cout << "Found " << size << " tris....\n";
+#endif
 
   for (int i = 0; i < size; i++)
   {
@@ -159,13 +163,34 @@ std::cout << "Found " << size << " tris....\n";
     const Vec3f& b = t.m_verts[1];
     const Vec3f& c = t.m_verts[2];
 
+#ifdef TERRAIN_DEBUG
+std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
+std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
+#endif
+
     Mgc::Triangle3 tri;
     tri.Origin() = Mgc::Vector3(a.x, a.y, a.z);
     tri.Edge0() = Mgc::Vector3(b.x - a.x, b.y - a.y, b.z - a.z);
     tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
 
-    Vec3f p;
-    float squareDist = Mgc::SqrDistance(s, tri, &p.x, &p.y, &p.z);
+    float q = 0; // parameter along line seg 0..1
+
+#ifdef TERRAIN_DEBUG
+    float d = 
+#endif
+    Mgc::SqrDistance(s, tri, &q);
+    Vec3f p = seg.p0 + q * (seg.p1 - seg.p0);
+
+#ifdef TERRAIN_DEBUG
+std::cout << "SqrDistance intersect: " << p << "\n";
+
+    // Dist d should be zero - the line seg intersects the tri.
+std::cout << "d=" << d << "... expecting zero.\n";
+#endif
+ 
+    // Get dist from p0 to p so we get closest tri along line seg.
+    float squareDist = (seg.p0 - p).SqLen(); // TODO or should that be p1 ?
+
     if (squareDist < closestSqDist)
     {
       closestSqDist = squareDist;
