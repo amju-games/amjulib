@@ -189,6 +189,7 @@ void AmjuGL::Init()
   currentFlags = AMJU_DEPTH_WRITE; // on at startup, right ?
  
   impl->Init();
+  Viewport(0, 0, Screen::X(), Screen::Y());
 }
 
 bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
@@ -199,7 +200,6 @@ bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
 
   Screen::SetSize(w->GetWidth(), w->GetHeight());
   bool b = impl->CreateWindow(w);
-  Viewport(0, 0, w->GetWidth(), w->GetHeight());
   return b;
 }
 
