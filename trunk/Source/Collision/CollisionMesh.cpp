@@ -91,8 +91,6 @@ void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
 
 bool CollisionMesh::Intersects(const Capsule& cap, Tris* tris) const
 {
-std::cout << "In CollisionMesh::Intersects...\n";
-
   const Vec3f& p0 = cap.m_lineseg.p0;
   Vec3f dir = cap.m_lineseg.p1 - cap.m_lineseg.p0;
 
@@ -101,7 +99,6 @@ std::cout << "In CollisionMesh::Intersects...\n";
   seg.Direction() = Mgc::Vector3(dir.x, dir.y, dir.z);
 
   float r2 = cap.m_radius * cap.m_radius;
-
   // For each tri, get dist from capsule line seg to tri, compare with capsule radius.
   bool ret = false;
   for (Tris::const_iterator it = m_tris.begin(); it != m_tris.end(); ++it)
@@ -118,17 +115,13 @@ std::cout << "In CollisionMesh::Intersects...\n";
     tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
 
     float squareDist = Mgc::SqrDistance(seg, tri);
-std::cout << " - sq dist for tri: " << squareDist << "\n";
 
     if (squareDist <= r2)
     {
-std::cout << " - Found intersecting tri!\n";
-
       tris->push_back(t);
       ret = true;
     }
   }
-std::cout << "Finished\n";
   return ret;
 }
 
