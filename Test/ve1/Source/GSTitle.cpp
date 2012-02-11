@@ -9,10 +9,10 @@ namespace Amju
 {
 static void OnStartButton()
 {
-  // For now, no start menu as there is only the multi player option
-  //TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+  // For now, no start menu as there is only the multi player option
+  //TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
 static void OnQuitButton()
