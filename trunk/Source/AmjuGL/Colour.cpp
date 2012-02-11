@@ -2,6 +2,8 @@
 #include "AmjuGL.h"
 #include "AmjuAssert.h"
 #include <iostream> // TEST
+#include <stdio.h>
+
 namespace Amju
 {
 Colour::Colour() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f)
