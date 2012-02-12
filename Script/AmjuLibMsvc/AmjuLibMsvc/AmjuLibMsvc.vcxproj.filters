@@ -684,6 +684,18 @@
     <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1282,6 +1294,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Scene\TextMaker.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\ConfigFile.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\Shadow.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuSleep.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Launcher.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
