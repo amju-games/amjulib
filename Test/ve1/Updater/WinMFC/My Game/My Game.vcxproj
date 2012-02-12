@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\jay\amjulib\Test\ve1\Updater\Generic\Source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -108,6 +109,9 @@
     <None Include="res\MyGame.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Generic\Source\ClientDownloader.h" />
+    <ClInclude Include="..\..\Generic\Source\Updater.h" />
+    <ClInclude Include="..\..\Generic\Source\VersionChecker.h" />
     <ClInclude Include="My Game.h" />
     <ClInclude Include="My GameDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -115,6 +119,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Generic\Source\ClientDownloader.cpp" />
+    <ClCompile Include="..\..\Generic\Source\Updater.cpp" />
+    <ClCompile Include="..\..\Generic\Source\VersionChecker.cpp" />
     <ClCompile Include="My Game.cpp" />
     <ClCompile Include="My GameDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

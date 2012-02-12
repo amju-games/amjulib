@@ -26,16 +26,21 @@ static const char* CLIENT_SUFFIX =
 "";
 #endif
 
-Updater::Updater() : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false)
+Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false), m_report(r)
 {
   if (m_cf.Load(CONFIG_FILE_NAME))
   {
-std::cout << "Loaded config file.\n";
+    Report("Loaded config file.\n");
   }
   else
   {
-std::cout << "No config file.\n";
+    Report("No config file.\n");
   }
+}
+
+void Updater::Report(const char* c)
+{
+	m_report(c);
 }
 
 std::string Updater::ExeName()
@@ -49,7 +54,8 @@ void Updater::Download()
 
   std::string url = GetServer() + SERVER_EXE_PATH + clientExeName;
 
-std::cout << "Downloading \"" << clientExeName << "\"...\n"; 
+  Report(std::string("Downloading \"" + clientExeName + "\"...\n").c_str()); 
+
 std::cout << "URL: " << url << "\n";
 
   ClientDownloader* cd = new ClientDownloader(this, clientExeName, url);
@@ -59,6 +65,7 @@ std::cout << "URL: " << url << "\n";
     
   // TODO Check download result. Display error msg to user if download failed.
 }
+
 
 void Updater::OnDownloadSuccess()
 {
@@ -75,7 +82,8 @@ void Updater::OnServerResponse(const std::string& latest)
   Unwait();
 
   m_latestVersion = latest;
-std::cout << "Local version: " << m_currentVersion << ", latest version on server: " << m_latestVersion << "\n";
+
+  Report(std::string("Local version: " + m_currentVersion + ", latest version on server: " + m_latestVersion + "\n").c_str());
 
   Strings strs[2] = { Split(m_currentVersion, '.'), Split(latest, '.') };
   if (strs[0].size() == strs[1].size())
@@ -97,11 +105,11 @@ std::cout << "Local version: " << m_currentVersion << ", latest version on serve
 
   if (m_downloadNewClient)
   {
-std::cout << "So I will download new client...\n";
+    Report("So I will download new client...\n");
   }
   else
   {
-std::cout << "So no need to download new client.\n";
+    Report("So no need to download new client.\n");
   }
 }
 
@@ -126,12 +134,12 @@ void Updater::Work()
   if (m_cf.Exists(VERSION_KEY))
   {
     m_currentVersion = m_cf.GetValue(VERSION_KEY);
-std::cout << "Got current client version: " << m_currentVersion << "\n";
+    Report(std::string("Got current client version: " + m_currentVersion + "\n").c_str());
   }
   else
   {
     m_downloadNewClient = true;
-std::cout << "I don't know the current client version, so will download.\n";
+    Report("I don't know the current client version, so will download.\n");
   }
 
 std::cout << "Getting latest version info from server...\n";

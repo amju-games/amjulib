@@ -1,21 +1,14 @@
-
-// My GameDlg.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "My Game.h"
 #include "My GameDlg.h"
 #include "afxdialogex.h"
+#include "Updater.h"
 
 #ifdef _DEBUG
 //#define new DEBUG_NEW
 #endif
 
-
-// CMyGameDlg dialog
-
-
-
+using namespace Amju;
 
 CMyGameDlg::CMyGameDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMyGameDlg::IDD, pParent)
@@ -38,6 +31,21 @@ END_MESSAGE_MAP()
 
 
 // CMyGameDlg message handlers
+static CMyGameDlg* theDlg = 0;
+bool more = false;
+
+void AddText(const char* s)
+{
+	theDlg->AddText(s);
+}
+
+void CMyGameDlg::AddText(const char* s)
+{
+	Invalidate();
+
+	more = true;
+	m_text += s;
+}
 
 BOOL CMyGameDlg::OnInitDialog()
 {
@@ -50,7 +58,9 @@ BOOL CMyGameDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
     // Start update thread
-
+//	theDlg = this;
+//	Updater* u = new Updater(::AddText);
+//	u->Start();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -81,6 +91,22 @@ void CMyGameDlg::OnPaint()
 	else
 	{
 		CDialogEx::OnPaint();
+
+		if (more)
+		{
+			UpdateData(FALSE);
+			more = false;
+		}
+
+		static bool first = true;
+		if (first)
+		{
+			first = false;
+
+			theDlg = this;
+			Updater* u = new Updater(::AddText);
+			u->Start();
+		}
 	}
 }
 
