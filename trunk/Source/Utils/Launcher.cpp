@@ -52,7 +52,7 @@ bool LaunchURL(const char* url)
   AMJU_CALL_STACK;
 
 #ifdef WIN32
-  int r =  (int)ShellExecute(0, "open", url, "", "", 1);
+  int r =  (int)ShellExecuteA(0, "open", url, "", "", 1);
   return (r > 32);
 
 #else 
