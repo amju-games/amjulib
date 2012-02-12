@@ -30,7 +30,8 @@ private:
   std::string ExeName();
 
 private:
-  std::string m_version;
+  std::string m_currentVersion;
+  std::string m_latestVersion;
   bool m_downloadNewClient;
   ConfigFile m_cf;
   // Condition variable -- wait until signalled

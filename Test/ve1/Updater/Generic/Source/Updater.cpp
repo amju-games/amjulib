@@ -6,7 +6,6 @@
 #include <iostream>
 #include "ClientDownloader.h"
 #include <Launcher.h>
-#include <unistd.h>
 
 namespace Amju
 {
@@ -26,7 +25,7 @@ static const char* CLIENT_SUFFIX =
 "";
 #endif
 
-Updater::Updater() : m_version("0.0.0"), m_downloadNewClient(false), m_waiting(false)
+Updater::Updater() : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false)
 {
   if (m_cf.Load(CONFIG_FILE_NAME))
   {
@@ -40,7 +39,7 @@ std::cout << "No config file.\n";
 
 std::string Updater::ExeName()
 {
-  return CLIENT_PREFIX + m_version + CLIENT_SUFFIX;
+  return CLIENT_PREFIX + m_currentVersion + CLIENT_SUFFIX;
 }
 
 void Updater::Download()
@@ -64,8 +63,9 @@ void Updater::OnDownloadSuccess()
 {
   // TODO Set success flag
 
+  m_currentVersion = m_latestVersion;
   // Update version in config file once downloaded
-  m_cf.Set(VERSION_KEY, m_version);
+  m_cf.Set(VERSION_KEY, m_currentVersion);
   m_cf.Save(CONFIG_FILE_NAME);
 }
 
@@ -73,9 +73,10 @@ void Updater::OnServerResponse(const std::string& latest)
 {
   Unwait();
 
-std::cout << "Local version: " << m_version << ", latest version on server: " << latest << "\n";
+  m_latestVersion = latest;
+std::cout << "Local version: " << m_currentVersion << ", latest version on server: " << m_latestVersion << "\n";
 
-  Strings strs[2] = { Split(m_version, '.'), Split(latest, '.') };
+  Strings strs[2] = { Split(m_currentVersion, '.'), Split(latest, '.') };
   if (strs[0].size() == strs[1].size())
   {
     int size = strs[0].size();
@@ -101,8 +102,6 @@ std::cout << "So I will download new client...\n";
   {
 std::cout << "So no need to download new client.\n";
   }
-
-  m_version = latest; // after comparison
 }
 
 std::string Updater::GetServer()
@@ -125,8 +124,8 @@ void Updater::Start()
   std::string version;
   if (m_cf.Exists(VERSION_KEY))
   {
-    m_version = m_cf.GetValue(VERSION_KEY);
-std::cout << "Got current client version: " << m_version << "\n";
+    m_currentVersion = m_cf.GetValue(VERSION_KEY);
+std::cout << "Got current client version: " << m_currentVersion << "\n";
   }
   else
   {
@@ -153,9 +152,18 @@ std::cout << "Getting latest version info from server...\n";
 std::cout << "Now it's time to start the client and exit this process.\n";
   std::string exe = File::GetRoot() + ExeName();
 std::cout << "Exe: " << exe << "\n";
-//  Launch(exe.c_str());
 
-  execv(exe.c_str(), 0); //exe.c_str());
+  if (FileExists(exe))
+  {
+    if (!LaunchProcess(exe.c_str()))
+    {
+std::cout << "File exists but can't run it. Try to download it again, so reset current version..?\n";
+    }
+  }
+  else
+  {
+std::cout << "The current version of the exe doesn't exist!? Can't run it :-(\n";
+  }
 }
 
 void Updater::Wait()
