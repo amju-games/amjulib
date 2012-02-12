@@ -38,14 +38,14 @@ std::cout << "Found version element\n";
       std::string version = p.getText();
 
       // Only if we get valid version, else just Unwait
-      TheUpdater::Instance()->OnServerResponse(version);
+      m_updater->OnServerResponse(version);
     }
     else
     {
 std::cout << "Version check got response but no version element! Got this: \"" << str << "\"\n";
 
       // So don't download if we can't get version info from server...?
-      TheUpdater::Instance()->Unwait();
+      m_updater->Unwait();
     }
   }
   else
@@ -53,7 +53,7 @@ std::cout << "Version check got response but no version element! Got this: \"" <
 std::cout << "Version check failed! Got this: \"" << res.GetErrorString() << "\"\n";
 
     // So don't download if we can't get version info from server...?
-    TheUpdater::Instance()->Unwait();
+    m_updater->Unwait();
   }
 }
 }
