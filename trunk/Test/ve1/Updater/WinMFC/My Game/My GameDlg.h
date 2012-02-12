@@ -12,6 +12,8 @@ class CMyGameDlg : public CDialogEx
 public:
 	CMyGameDlg(CWnd* pParent = NULL);	// standard constructor
 
+	void AddText(const char*);
+
 // Dialog Data
 	enum { IDD = IDD_MYGAME_DIALOG };
 

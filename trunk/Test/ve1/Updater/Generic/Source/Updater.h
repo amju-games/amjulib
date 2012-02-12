@@ -8,10 +8,12 @@
 
 namespace Amju
 {
+typedef void (*ReportFunc)(const char*);
+
 class Updater : public Thread
 {
 public:
-  Updater();
+  Updater(ReportFunc);
 
   virtual void Work();
 
@@ -23,6 +25,8 @@ public:
 
   void Wait();  
   void Unwait();
+
+  void Report(const char*);
 
 private:
   std::string GetServer();
@@ -36,6 +40,7 @@ private:
   // Condition variable -- wait until signalled
   // TODO 
   bool m_waiting;
+  ReportFunc m_report;
 };
 
 typedef Singleton<Updater> TheUpdater;
