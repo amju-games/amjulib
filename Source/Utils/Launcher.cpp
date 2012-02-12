@@ -23,6 +23,7 @@ Added to repository
 #include <windows.h>
 #endif
 #ifdef MACOSX
+#include <unistd.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFUrl.h>
 #include <Carbon/Carbon.h>
@@ -31,7 +32,22 @@ Added to repository
 
 namespace Amju
 {
-bool Launch(const char* url)
+bool LaunchProcess(const char* url)
+{
+#if defined(MACOSX) || defined(IPHONE)
+  int ret = execv(url, 0);  // TODO args
+  return ret != -1;
+#endif
+
+#ifdef WIN32
+  return LaunchURL(url);
+#endif
+
+ // TODO GEKKO
+  return false;
+}
+
+bool LaunchURL(const char* url)
 {
   AMJU_CALL_STACK;
 

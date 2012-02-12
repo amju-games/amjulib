@@ -11,7 +11,9 @@ Added to repository
 
 namespace Amju
 {
-bool Launch(const char* url);
+bool LaunchProcess(const char* url);
+
+bool LaunchURL(const char* url);
 }
 
 #endif
