@@ -1,9 +1,14 @@
 #include "AmjuSleep.h"
+#ifdef WIN32
+#include <Windows.h>
+#endif
 
 #ifdef MACOSX
 #include <unistd.h>
 #endif
 
+namespace Amju
+{
 void SleepMs(int ms)
 {
 #ifdef MACOSX
@@ -12,8 +17,8 @@ void SleepMs(int ms)
 #endif
 
 #ifdef WIN32
-  
+  ::Sleep(ms);
 #endif
 }
-
+}
 
