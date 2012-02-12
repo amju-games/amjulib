@@ -91,7 +91,7 @@
       <Command>xcopy /Y /S  ..\..\..\..\Assets\*.*  c:\programdata\ve1\
 xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*.*  c:\programdata\ve1\font2d\
 xcopy /Y /S  ..\..\..\..\..\..\Assets\font3d\*.*  c:\programdata\ve1\font3d\
-
+xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\ve1\
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
@@ -146,6 +146,7 @@ xcopy /Y /S  ..\..\..\..\..\..\Assets\font3d\*.*  c:\programdata\ve1\font3d\
     <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
@@ -190,6 +191,7 @@ xcopy /Y /S  ..\..\..\..\..\..\Assets\font3d\*.*  c:\programdata\ve1\font3d\
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
+    <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />

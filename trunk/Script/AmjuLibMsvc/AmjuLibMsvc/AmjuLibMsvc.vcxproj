@@ -90,7 +90,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -167,6 +167,7 @@
     <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp" />
     <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Endian.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="..\..\..\Source\Network\Socket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\SocketService.cpp" />
     <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp" />
@@ -234,6 +236,8 @@
     <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp" />
     <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Sign.cpp" />
@@ -364,6 +368,7 @@
     <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\ConfigFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Directory.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Endian.h" />
@@ -408,6 +413,7 @@
     <ClInclude Include="..\..\..\Source\Network\Socket.h" />
     <ClInclude Include="..\..\..\Source\Network\SocketService.h" />
     <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
+    <ClInclude Include="..\..\..\Source\Scene\Shadow.h" />
     <ClInclude Include="..\..\..\Source\Scene\TextMaker.h" />
     <ClInclude Include="..\..\..\Source\Strings\ReportError.h" />
     <ClInclude Include="..\..\..\Source\Strings\SafeUtils.h" />
@@ -438,10 +444,12 @@
     <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h" />
     <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h" />
+    <ClInclude Include="..\..\..\Source\Utils\AmjuSleep.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
     <ClInclude Include="..\..\..\Source\Utils\Common.h" />
     <ClInclude Include="..\..\..\Source\Utils\DegRad.h" />
     <ClInclude Include="..\..\..\Source\Utils\Factory.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Launcher.h" />
     <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h" />
     <ClInclude Include="..\..\..\Source\Utils\Pause.h" />
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h" />
