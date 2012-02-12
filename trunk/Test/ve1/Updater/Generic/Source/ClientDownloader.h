@@ -5,12 +5,17 @@
 
 namespace Amju
 {
+class Updater;
+
 class ClientDownloader : public DownloadReq
 {
 public:
-  ClientDownloader(const std::string& filename, const std::string& url);
+  ClientDownloader(Updater* u, const std::string& filename, const std::string& url);
   virtual void OnDownloaded();
   virtual void OnDownloadFailed();
+
+private:
+  Updater* m_updater;
 };
 }
 

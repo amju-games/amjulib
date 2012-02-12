@@ -6,6 +6,7 @@
 #include <iostream>
 #include "ClientDownloader.h"
 #include <Launcher.h>
+#include <AmjuSleep.h>
 
 namespace Amju
 {
@@ -51,7 +52,7 @@ void Updater::Download()
 std::cout << "Downloading \"" << clientExeName << "\"...\n"; 
 std::cout << "URL: " << url << "\n";
 
-  ClientDownloader* cd = new ClientDownloader(clientExeName, url);
+  ClientDownloader* cd = new ClientDownloader(this, clientExeName, url);
   m_waiting = true;
   cd->Work();
   Wait();
@@ -114,7 +115,7 @@ std::string Updater::GetServer()
   return server;
 }
 
-void Updater::Start()
+void Updater::Work()
 {
   File::SetRoot(GetSaveDir(APPLICATION), "/"); // all assets, downloaded files etc live in save dir
 
@@ -137,7 +138,7 @@ std::cout << "Getting latest version info from server...\n";
 
   // Create downloader to get latest version on server
   std::string url = GetServer() + VERSION_SCRIPT;
-  VersionChecker* v = new VersionChecker(url);
+  VersionChecker* v = new VersionChecker(this, url);
   m_waiting = true;
   v->Work();
   Wait();
@@ -173,7 +174,7 @@ std::cout << "Waiting... ";
   while (m_waiting)
   {
 //    std::cout << ".";
-    // TODO Sleep
+    SleepMs(1000);
   }
   std::cout << "\n";
 }

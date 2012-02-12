@@ -4,14 +4,16 @@
 #include <Singleton.h>
 #include "VersionChecker.h"
 #include <ConfigFile.h>
-#include <ThreadGate.h>
+#include <Thread.h>
 
 namespace Amju
 {
-class Updater
+class Updater : public Thread
 {
 public:
-  void Start();
+  Updater();
+
+  virtual void Work();
 
   void Download();
   
@@ -23,9 +25,6 @@ public:
   void Unwait();
 
 private:
-  Updater();
-  friend class Singleton<Updater>;
-
   std::string GetServer();
   std::string ExeName();
 

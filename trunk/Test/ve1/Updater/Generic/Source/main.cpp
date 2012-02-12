@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 {
   std::cout << "My Game... checking for client updates...";
 
-  TheUpdater::Instance()->Start();
+  TheUpdater::Instance()->Work();
 
 
   return 0;

@@ -4,8 +4,8 @@
 
 namespace Amju
 {
-ClientDownloader::ClientDownloader(const std::string& filename, const std::string& url) : 
-  DownloadReq(filename, url, HttpClient::GET, "client download")
+ClientDownloader::ClientDownloader(Updater* u, const std::string& filename, const std::string& url) : 
+  DownloadReq(filename, url, HttpClient::GET, "client download"), m_updater(u)
 { 
 }
 
@@ -13,14 +13,14 @@ void ClientDownloader::OnDownloaded()
 {
 std::cout << "Download succeeded!\n";
 
-  TheUpdater::Instance()->OnDownloadSuccess();
+  m_updater->OnDownloadSuccess();
 }
 
 void ClientDownloader::OnDownloadFailed()
 {
 std::cout << "Download failed!\n";
 
-  TheUpdater::Instance()->Unwait();
+  m_updater->Unwait();
 }
 
 }
