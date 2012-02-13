@@ -7,13 +7,13 @@
 
 namespace Amju
 {
- void VersionChecker::HandleResult()
+void VersionChecker::HandleResult()
 {
   HttpResult res = GetResult(); // Copy it
 
   if (res.GetSuccess())
   {
-std::cout << "Version check got response...\n";
+    m_updater->Report("Version check got response...\n");
 
     const std::string& str = res.GetString();
     PXml xml = ParseXml(str.c_str());
@@ -22,18 +22,17 @@ std::cout << "Version check got response...\n";
 
     if (p.getName())
     {
-std::cout << " XML: Got child 0, name is " << p.getName() << "\n";
+      m_updater->Report(std::string("XML: Got child 0, name is " +
+        std::string(p.getName()) + "\n").c_str());
     }
     else
     {
-std::cout << " XML: No child 0\n";
+      m_updater->Report("XML: No child 0\n");
     }
 
     if (SafeStrCmp(p.getName(), "version"))
     {
-//#ifdef XML_DEBUG
-std::cout << "Found version element\n";
-//#endif
+      m_updater->Report("Found version element\n");
 
       std::string version = p.getText();
 
@@ -42,7 +41,8 @@ std::cout << "Found version element\n";
     }
     else
     {
-std::cout << "Version check got response but no version element! Got this: \"" << str << "\"\n";
+      m_updater->Report(std::string("Version check got response but no version element! Got this: \"" +
+        str + "\"\n").c_str());
 
       // So don't download if we can't get version info from server...?
       m_updater->Unwait();
@@ -50,7 +50,8 @@ std::cout << "Version check got response but no version element! Got this: \"" <
   }
   else
   {
-std::cout << "Version check failed! Got this: \"" << res.GetErrorString() << "\"\n";
+    m_updater->Report(std::string("Version check failed! Got this error: \"" + 
+      res.GetErrorString() + "\"\n").c_str());
 
     // So don't download if we can't get version info from server...?
     m_updater->Unwait();
