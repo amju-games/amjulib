@@ -11,14 +11,14 @@ ClientDownloader::ClientDownloader(Updater* u, const std::string& filename, cons
 
 void ClientDownloader::OnDownloaded()
 {
-std::cout << "Download succeeded!\n";
+  m_updater->Report("Download succeeded!\n");
 
   m_updater->OnDownloadSuccess();
 }
 
 void ClientDownloader::OnDownloadFailed()
 {
-std::cout << "Download failed!\n";
+  m_updater->Report("Download failed!\n");
 
   m_updater->Unwait();
 }

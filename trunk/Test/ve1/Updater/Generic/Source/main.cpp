@@ -5,12 +5,18 @@
 #include "Updater.h"
 
 using namespace Amju;
- 
+
+void Report(const char* s)
+{
+  std::cout << s;
+}
+
 int main(int argc, char** argv)
 {
   std::cout << "My Game... checking for client updates...";
 
-  TheUpdater::Instance()->Work();
+  Updater u(Report);
+  u.Work(); // not Start(), no need to create another thread
 
 
   return 0;

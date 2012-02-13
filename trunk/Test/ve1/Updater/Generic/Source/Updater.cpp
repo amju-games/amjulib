@@ -40,7 +40,7 @@ Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(
 
 void Updater::Report(const char* c)
 {
-	m_report(c);
+  m_report(c);
 }
 
 std::string Updater::ExeName()
@@ -54,16 +54,13 @@ void Updater::Download()
 
   std::string url = GetServer() + SERVER_EXE_PATH + clientExeName;
 
-  Report(std::string("Downloading \"" + clientExeName + "\"...\n").c_str()); 
-
-std::cout << "URL: " << url << "\n";
+  Report(std::string("Downloading \"" + clientExeName + "\"...\n" +
+    "URL: " + url + "\n").c_str()); 
 
   ClientDownloader* cd = new ClientDownloader(this, clientExeName, url);
   m_waiting = true;
   cd->Work();
   Wait();
-    
-  // TODO Check download result. Display error msg to user if download failed.
 }
 
 
@@ -83,7 +80,10 @@ void Updater::OnServerResponse(const std::string& latest)
 
   m_latestVersion = latest;
 
-  Report(std::string("Local version: " + m_currentVersion + ", latest version on server: " + m_latestVersion + "\n").c_str());
+  Report(std::string("Local version: " + m_currentVersion + ", latest version on server: " + 
+    m_latestVersion + "\n").c_str());
+
+  // TODO This is overkill, really we just check if the strings are different
 
   Strings strs[2] = { Split(m_currentVersion, '.'), Split(latest, '.') };
   if (strs[0].size() == strs[1].size())
@@ -142,7 +142,7 @@ void Updater::Work()
     Report("I don't know the current client version, so will download.\n");
   }
 
-std::cout << "Getting latest version info from server...\n";
+  Report("Getting latest version info from server...\n");
 
   // Create downloader to get latest version on server
   std::string url = GetServer() + VERSION_SCRIPT;
@@ -151,40 +151,44 @@ std::cout << "Getting latest version info from server...\n";
   v->Work();
   Wait();
 
-//std::cout << "Got latest version info from client.\n";
+  Report("Got latest version info from client.\n");
 
   if (m_downloadNewClient)
   {
     Download();
   }
 
-std::cout << "Now it's time to start the client and exit this process.\n";
+  Report("Now it's time to start the client and exit this process.\n");
+
   std::string exe = File::GetRoot() + ExeName();
-std::cout << "Exe: " << exe << "\n";
+
+  Report(std::string("Exe: " + exe + "\n").c_str());
 
   if (FileExists(exe))
   {
     if (!LaunchProcess(exe.c_str()))
     {
-std::cout << "File exists but can't run it. Try to download it again, so reset current version..?\n";
+      Report("Executable file exists but can't run it.\n"); // TODO Error msg
+
+      // Try to download it again, so reset current version..?
     }
   }
   else
   {
-std::cout << "The current version of the exe doesn't exist!? Can't run it :-(\n";
+    Report("The current version of the exe doesn't exist!? Can't run it :-(\n");
   }
 }
 
 void Updater::Wait()
 {
-std::cout << "Waiting... ";
+//std::cout << "Waiting... ";
   // TODO Wait until signalled -- but watch out for race conditions --- could the signal alreay have happened ?!?
   while (m_waiting)
   {
 //    std::cout << ".";
     SleepMs(1000);
   }
-  std::cout << "\n";
+//  std::cout << "\n";
 }
 
 void Updater::Unwait()
