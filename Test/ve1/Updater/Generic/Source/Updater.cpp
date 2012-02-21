@@ -11,12 +11,13 @@
 namespace Amju
 {
 static const char* DEFAULT_SERVER = "www.amju.com";
-static const char* VERSION_SCRIPT = "/ve1/cgi-bin/version.pl"; 
-static const char* SERVER_EXE_PATH = "/ve1/assets/";
+static const char* DEFAULT_ENV = "ve1";
+static const char* VERSION_SCRIPT = "/cgi-bin/version.pl"; 
+static const char* SERVER_EXE_PATH = "/bin/";
 static const char* CONFIG_FILE_NAME = "client_version.txt";
-static const char* APPLICATION = "ve1";
 static const char* VERSION_KEY = "version";
 static const char* SERVER_KEY = "server";
+static const char* ENV_KEY = "env";
 static const char* CLIENT_PREFIX = "ve1-client-";
 static const char* CLIENT_SUFFIX = 
 #ifdef WIN32
@@ -43,16 +44,16 @@ void Updater::Report(const char* c)
   m_report(c);
 }
 
-std::string Updater::ExeName()
+std::string Updater::ExeName(const std::string& version)
 {
-  return CLIENT_PREFIX + m_currentVersion + CLIENT_SUFFIX;
+  return CLIENT_PREFIX + version + CLIENT_SUFFIX;
 }
 
 void Updater::Download()
 {
-  std::string clientExeName = ExeName();
+  std::string clientExeName = ExeName(m_latestVersion);
 
-  std::string url = GetServer() + SERVER_EXE_PATH + clientExeName;
+  std::string url = GetServer() + "/" + GetEnv() + SERVER_EXE_PATH + clientExeName;
 
   Report(std::string("Downloading \"" + clientExeName + "\"...\n" +
     "URL: " + url + "\n").c_str()); 
@@ -63,10 +64,11 @@ void Updater::Download()
   Wait();
 }
 
-
 void Updater::OnDownloadSuccess()
 {
   // TODO Set success flag
+
+  Report("Successfully downloaded - saving new version info in config file.");
 
   m_currentVersion = m_latestVersion;
   // Update version in config file once downloaded
@@ -83,22 +85,7 @@ void Updater::OnServerResponse(const std::string& latest)
   Report(std::string("Local version: " + m_currentVersion + ", latest version on server: " + 
     m_latestVersion + "\n").c_str());
 
-  // TODO This is overkill, really we just check if the strings are different
-
-  Strings strs[2] = { Split(m_currentVersion, '.'), Split(latest, '.') };
-  if (strs[0].size() == strs[1].size())
-  {
-    int size = strs[0].size();
-    for (int i = 0; i < size; i++)
-    {
-      if (strs[0][i] != strs[1][i])
-      {
-        m_downloadNewClient = true; 
-        break;
-      }
-    }
-   }
-  else
+  if (m_latestVersion != m_currentVersion)
   {
     m_downloadNewClient = true; 
   }
@@ -123,9 +110,19 @@ std::string Updater::GetServer()
   return server;
 }
 
+std::string Updater::GetEnv()
+{
+  std::string env = DEFAULT_ENV;
+  if (m_cf.Exists(ENV_KEY))
+  {
+    env = m_cf.GetValue(ENV_KEY);
+  }
+  return env;
+}
+
 void Updater::Work()
 {
-  File::SetRoot(GetSaveDir(APPLICATION), "/"); // all assets, downloaded files etc live in save dir
+  File::SetRoot(GetSaveDir(GetEnv()), "/"); // all assets, downloaded files etc live in save dir
 
   m_downloadNewClient = false;
 
@@ -145,7 +142,7 @@ void Updater::Work()
   Report("Getting latest version info from server...\n");
 
   // Create downloader to get latest version on server
-  std::string url = GetServer() + VERSION_SCRIPT;
+  std::string url = GetServer() + "/" + GetEnv() + VERSION_SCRIPT;
   VersionChecker* v = new VersionChecker(this, url);
   m_waiting = true;
   v->Work();
@@ -160,7 +157,7 @@ void Updater::Work()
 
   Report("Now it's time to start the client and exit this process.\n");
 
-  std::string exe = File::GetRoot() + ExeName();
+  std::string exe = File::GetRoot() + ExeName(m_currentVersion);
 
   Report(std::string("Exe: " + exe + "\n").c_str());
 
