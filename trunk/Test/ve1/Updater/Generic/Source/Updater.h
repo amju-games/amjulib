@@ -30,7 +30,8 @@ public:
 
 private:
   std::string GetServer();
-  std::string ExeName();
+  std::string GetEnv();
+  std::string ExeName(const std::string& version);
 
 private:
   std::string m_currentVersion;
