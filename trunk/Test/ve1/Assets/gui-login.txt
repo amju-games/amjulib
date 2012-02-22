@@ -47,7 +47,7 @@ arial, 2.0
 gui-button
 login-cancel-button
 // pos (coords are -1..1)
--0.6, -0.25
+-0.4, -0.55
 // size
 0.8, 0.2
 gui-button-4.png
