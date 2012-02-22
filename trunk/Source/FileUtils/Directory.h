@@ -49,6 +49,11 @@ std::string GetSaveDir(const std::string& appName);
 // find easily.
 std::string GetDesktopDir();
 
+// Get the directory where the process lives.
+// For Mac Bundles, it is the directory where the bundle (*.app) lives.
+// For other executables, it is the directory where this executable lives.
+std::string GetProcessDir();
+
 // Make a directory in OS filesystem - glue file not used.
 bool MkDir(const std::string& dir);
 

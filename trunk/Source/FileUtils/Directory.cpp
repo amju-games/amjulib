@@ -232,6 +232,77 @@ bool ShGetFolderPath(uint32 pathType, std::string* pResult)
 }
 #endif
 
+#ifdef MACOSX
+// From https://developer.apple.com/carbon/tipsandtricks.html
+Boolean AmIBundled()
+{
+        FSRef processRef;
+        FSCatalogInfo processInfo;
+        int isBundled;
+        ProcessSerialNumber psn = {0, kCurrentProcess};
+
+        GetProcessBundleLocation (&psn, &processRef);
+        FSGetCatalogInfo (&processRef, kFSCatInfoNodeFlags,
+                                                &processInfo, NULL, NULL, NULL);
+        isBundled = processInfo.nodeFlags & kFSNodeIsDirectoryMask;
+
+        return( isBundled );
+}
+#endif
+
+std::string GetProcessDir()
+{
+#ifdef MACOSX
+  // This works for exes which are not bundles!
+  CFBundleRef mainBundle = CFBundleGetMainBundle();
+
+  // Find the executable URL - this works even for non-bundles!
+  CFURLRef fileUrl = CFBundleCopyExecutableURL(mainBundle);
+
+  // Convert URL to path
+  CFStringRef filePath = CFURLCopyFileSystemPath (fileUrl, kCFURLPOSIXPathStyle);
+
+  // Convert (unicode ?) CFStringRef to a const char *
+  static const int MAX_STR = 1024;
+  char bytes[MAX_STR];
+
+  std::string fileName;
+  if (CFStringGetCString(filePath, bytes, MAX_STR, CFStringGetSystemEncoding()))
+  {
+    fileName = bytes;
+  }
+  else
+  {
+    // TODO
+std::cout << "Unexpected: didn't get exe file name: " << bytes << "\n";
+  }
+  std::string root = Amju::GetFilePath(fileName); // strip exe name from end
+
+  if (AmIBundled())
+  {
+#ifdef _DEBUG
+std::cout << "This really is an app bundle.\n";
+#endif
+    // This really is a bundle. So we want to go from <dir>/Bundle.app/Contents/MacOS/<exe> to <dir>
+    root += "/../../../";
+  }
+  else
+  {
+#ifdef _DEBUG
+std::cout << "This  is not an app bundle.\n";
+#endif
+  }
+
+#ifdef _DEBUG
+std::cout << "GetProcessDir() result: " << root.c_str() << "\n";
+#endif
+
+  return root; 
+#endif // MACOSX
+
+}
+
+
 std::string GetDesktopDir()
 {
 #ifdef WIN32
