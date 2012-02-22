@@ -14,7 +14,7 @@ CMyGameDlg::CMyGameDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMyGameDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m_text = _T("Checking for updates...");  // TODO Localisation
+	m_text = _T("");  // TODO Localisation
 }
 
 void CMyGameDlg::DoDataExchange(CDataExchange* pDX)
@@ -26,9 +26,15 @@ void CMyGameDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMyGameDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CMyGameDlg::OnClickedButton1)
 END_MESSAGE_MAP()
 
+namespace Amju
+{
+  // Silence file not found error
+  void ReportError(const std::string& error)
+  {
+  }
+}
 
 // CMyGameDlg message handlers
 static CMyGameDlg* theDlg = 0;
@@ -45,6 +51,7 @@ void CMyGameDlg::AddText(const char* s)
 
 	more = true;
 	m_text += s;
+  m_text += "\r\n";
 }
 
 BOOL CMyGameDlg::OnInitDialog()
@@ -117,8 +124,4 @@ HCURSOR CMyGameDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CMyGameDlg::OnClickedButton1()
-{
-	// TODO: Add your control notification handler code here
-}
 
