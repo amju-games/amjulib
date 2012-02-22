@@ -65,7 +65,11 @@ void Updater::Download()
   Report(std::string("Downloading \"" + clientExeName + "\"...\n" +
     "URL: " + url + "\n").c_str()); 
 
-  ClientDownloader* cd = new ClientDownloader(this, clientExeName, url);
+  std::string dest = GetSaveDir(GetEnv()) + "/" + clientExeName;
+
+  Report(std::string("Destination: " + dest + "\n").c_str());
+
+  ClientDownloader* cd = new ClientDownloader(this, dest, url);
   m_waiting = true;
   cd->Work(); // So this is also in the current thread
   //Wait();
@@ -85,7 +89,7 @@ void Updater::OnDownloadSuccess()
 
 void Updater::OnDownloadFail()
 {
-  Report("Download failed.");
+  //Report("Download failed."); // Calling code said this already
 }
 
 void Updater::OnServerResponse(const std::string& latest)
@@ -167,7 +171,7 @@ void Updater::Work()
   VersionChecker* v = new VersionChecker(this, url);
   m_waiting = true;
   v->Work(); // So in this thread, not a new thread
-  //Wait();
+ 
 std::cout << "VersionChecker has finished.\n";
 
   // We may have got latest version number from server, or may have got no response.
@@ -198,22 +202,5 @@ std::cout << "VersionChecker has finished.\n";
     Report("The current version of the exe doesn't exist!? Can't run it :-(\n");
   }
 }
-
-//void Updater::Wait()
-//{
-//std::cout << "Waiting... ";
-//  // TODO Wait until signalled -- but watch out for race conditions --- could the signal alreay have happened ?!?
-//  while (m_waiting)
-//  {
-////    std::cout << ".";
-//    SleepMs(1000);
-//  }
-////  std::cout << "\n";
-//}
-
-//void Updater::Unwait()
-//{
-//  m_waiting = false;
-//}
 }
 
