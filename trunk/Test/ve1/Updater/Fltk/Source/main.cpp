@@ -31,9 +31,9 @@ int main(int argc, char **argv)
 
   textdisp = new Fl_Text_Display(0, 0, WIDTH, HEIGHT);
   textdisp->buffer(textbuf);
-  textdisp->wrap_mode(Fl_Text_Display::WRAP_AT_PIXEL, WIDTH - 10); // TODO width ok ?
+  textdisp->wrap_mode(Fl_Text_Display::WRAP_AT_PIXEL, WIDTH - 50); // TODO width ok ?
 
-  textbuf->append("Checking for updated client.\n");
+//  textbuf->append("Checking for updated client.\n");
 
   // Hmm, link error. Need to configure fltk with png support ?
   // (Tried -lfltk_png)
