@@ -27,7 +27,7 @@ void VersionChecker::HandleResult()
     }
     else
     {
-      m_updater->Report("XML: No child 0\n");
+      m_updater->Report("XML: Unexpected format (No child 0)\n");
     }
 
     if (SafeStrCmp(p.getName(), "version"))
@@ -45,7 +45,7 @@ void VersionChecker::HandleResult()
         str + "\"\n").c_str());
 
       // So don't download if we can't get version info from server...?
-      m_updater->Unwait();
+      m_updater->OnBadServerResponse();
     }
   }
   else
@@ -54,7 +54,7 @@ void VersionChecker::HandleResult()
       res.GetErrorString() + "\"\n").c_str());
 
     // So don't download if we can't get version info from server...?
-    m_updater->Unwait();
+    m_updater->OnBadServerResponse();
   }
 }
 }
