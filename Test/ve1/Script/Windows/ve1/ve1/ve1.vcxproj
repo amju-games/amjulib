@@ -82,6 +82,7 @@
 /I "../../../../../../Source/SoundSDLMixer" 
 /I "../../../../../../Source/GeomLoad" 
 /I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"  /I "../../../../../../Source/Localise" %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +134,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
 /I "../../../../../../Source/SoundSDLMixer" 
 /I "../../../../../../Source/GeomLoad" 
 /I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"   /I "../../../../../../Source/Localise" %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
