@@ -29,7 +29,7 @@ Added to repository
 #include <pthread.h>
 #endif
 
-#include "SharedPtr.h"
+#include "RCPtr.h"
 
 namespace Amju
 {
