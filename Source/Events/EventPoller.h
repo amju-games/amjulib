@@ -3,7 +3,7 @@
 
 #include "EventListener.h"
 #include "RCPtr.h"
-#include "Singleton.h"
+#include <Singleton.h>
 
 namespace Amju
 {
