@@ -300,6 +300,19 @@ std::cout << "GetProcessDir() result: " << root.c_str() << "\n";
   return root; 
 #endif // MACOSX
 
+#ifdef WIN32
+
+  char fileName[MAX_PATH];
+
+  if(!GetModuleFileNameA(0, fileName, MAX_PATH))
+  {
+    return "./";
+  }
+  std::string root = Amju::GetFilePath(fileName); // strip exe name from end
+
+  return root;
+
+#endif
 }
 
 
