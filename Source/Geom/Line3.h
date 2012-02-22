@@ -1,7 +1,7 @@
 #ifndef AMJU_LINE3_INCLUDED
 #define AMJU_LINE3_INCLUDED
 
-#include "Vec3.h"
+#include <Vec3.h>
 
 namespace Amju
 {
