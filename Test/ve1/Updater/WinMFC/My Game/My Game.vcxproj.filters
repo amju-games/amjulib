@@ -15,17 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="res\MyGame.rc2">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\My Game.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\Server\www\mygame.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\mygame.bmp">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

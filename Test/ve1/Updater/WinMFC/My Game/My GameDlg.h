@@ -31,10 +31,6 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnClickedButton1();
-//	afx_msg void OnUpdateStatic(CCmdUI *pCmdUI);
-//	afx_msg void OnStatic();
-//	afx_msg void OnIdbPng1();
-//	afx_msg void OnUpdateIdbPng1(CCmdUI *pCmdUI);
+	
 	CString m_text;
 };
