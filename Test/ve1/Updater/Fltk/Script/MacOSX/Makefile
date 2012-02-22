@@ -22,4 +22,19 @@ run:
 	cd $(RUNDIR); \
 	./$(APP)
 
+release:
+	rm -rf $(BUILD)/"My Game.app"; \
+	cp -R "My Game.app" $(BUILD)/; \
+        cp $(TARGET) $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; \
+        strip $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; \
+	cd $(BUILD); \
+	rm "My Game.zip"; \
+	zip -9 "My Game.zip" "My Game.app"; \
+	zip -9 "My Game.zip" "My Game.app/Contents"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/Info.plist"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/MacOS/My Game"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/Resources"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/Resources/MyGame.icns"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/Resources/English.lproj"; \
+	zip -9 "My Game.zip" "My Game.app/Contents/Resources/English.lproj/InfoPlist.strings"; 
 
