@@ -38,6 +38,8 @@ Added to repository
 #endif
 #include "AmjuFinal.h"
 
+//#define THREAD_DEBUG
+
 namespace Amju
 {
 #if defined(WIN32)
