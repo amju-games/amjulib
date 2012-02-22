@@ -1,0 +1,25 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+1
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.1
+// Text
+Waiting for new location...
+// Font name, size
+arial, 1.0
+
+
