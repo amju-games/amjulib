@@ -20,8 +20,10 @@ public:
   void Download();
   
   void OnServerResponse(const std::string& latestVersion);
+  void OnBadServerResponse();
 
   void OnDownloadSuccess();
+  void OnDownloadFail();
 
   void Wait();  
   void Unwait();

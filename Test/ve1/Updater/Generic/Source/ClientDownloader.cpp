@@ -20,7 +20,7 @@ void ClientDownloader::OnDownloadFailed()
 {
   m_updater->Report("Download failed!\n");
 
-  m_updater->Unwait();
+  m_updater->OnDownloadFail();
 }
 
 }

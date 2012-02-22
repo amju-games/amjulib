@@ -29,13 +29,19 @@ static const char* CLIENT_SUFFIX =
 
 Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false), m_report(r)
 {
-  if (m_cf.Load(CONFIG_FILE_NAME))
+  // The config file should be loaded from the directory this program lives in, so we can change the env.
+  // This is called before we set the File root.
+  std::string configFileName = GetProcessDir() + "/" + CONFIG_FILE_NAME;
+
+std::cout << "Config file: " << configFileName << "\n";
+
+  if (m_cf.Load(configFileName))
   {
-    Report("Loaded config file.\n");
+    Report(std::string("Loaded config file: " + configFileName + "\n").c_str());
   }
   else
   {
-    Report("No config file.\n");
+    Report(std::string("No config file: " + configFileName + "\n").c_str());
   }
 }
 
@@ -46,6 +52,7 @@ void Updater::Report(const char* c)
 
 std::string Updater::ExeName(const std::string& version)
 {
+  Assert(!version.empty());
   return CLIENT_PREFIX + version + CLIENT_SUFFIX;
 }
 
@@ -60,8 +67,8 @@ void Updater::Download()
 
   ClientDownloader* cd = new ClientDownloader(this, clientExeName, url);
   m_waiting = true;
-  cd->Work();
-  Wait();
+  cd->Work(); // So this is also in the current thread
+  //Wait();
 }
 
 void Updater::OnDownloadSuccess()
@@ -76,10 +83,13 @@ void Updater::OnDownloadSuccess()
   m_cf.Save(CONFIG_FILE_NAME);
 }
 
+void Updater::OnDownloadFail()
+{
+  Report("Download failed.");
+}
+
 void Updater::OnServerResponse(const std::string& latest)
 {
-  Unwait();
-
   m_latestVersion = latest;
 
   Report(std::string("Local version: " + m_currentVersion + ", latest version on server: " + 
@@ -98,6 +108,14 @@ void Updater::OnServerResponse(const std::string& latest)
   {
     Report("So no need to download new client.\n");
   }
+  //Unwait();
+}
+
+void Updater::OnBadServerResponse()
+{
+  m_downloadNewClient = false;
+  Report("Bad server response, so will not try to download client.\n");
+  //Unwait();
 }
 
 std::string Updater::GetServer()
@@ -143,12 +161,17 @@ void Updater::Work()
 
   // Create downloader to get latest version on server
   std::string url = GetServer() + "/" + GetEnv() + VERSION_SCRIPT;
+  
+  Report(std::string("URL: " + url + "\n").c_str());
+
   VersionChecker* v = new VersionChecker(this, url);
   m_waiting = true;
-  v->Work();
-  Wait();
+  v->Work(); // So in this thread, not a new thread
+  //Wait();
+std::cout << "VersionChecker has finished.\n";
 
-  Report("Got latest version info from client.\n");
+  // We may have got latest version number from server, or may have got no response.
+  //Report("Got latest version info from client.\n");
 
   if (m_downloadNewClient)
   {
@@ -176,21 +199,21 @@ void Updater::Work()
   }
 }
 
-void Updater::Wait()
-{
+//void Updater::Wait()
+//{
 //std::cout << "Waiting... ";
-  // TODO Wait until signalled -- but watch out for race conditions --- could the signal alreay have happened ?!?
-  while (m_waiting)
-  {
-//    std::cout << ".";
-    SleepMs(1000);
-  }
-//  std::cout << "\n";
-}
+//  // TODO Wait until signalled -- but watch out for race conditions --- could the signal alreay have happened ?!?
+//  while (m_waiting)
+//  {
+////    std::cout << ".";
+//    SleepMs(1000);
+//  }
+////  std::cout << "\n";
+//}
 
-void Updater::Unwait()
-{
-  m_waiting = false;
-}
+//void Updater::Unwait()
+//{
+//  m_waiting = false;
+//}
 }
 
