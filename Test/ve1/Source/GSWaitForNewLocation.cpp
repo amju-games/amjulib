@@ -2,6 +2,7 @@
 #include <AmjuGL.h>
 #include "Terrain.h"
 #include "ObjectManager.h"
+#include "ObjectUpdater.h" // TODO This is stupid, just have one object
 #include <Game.h>
 #include "GSMain.h"
 
@@ -17,7 +18,9 @@ void GSWaitForNewLocation::Update()
 
   // Check for objects we are dependent on. When they are all present, we can go to main state.
   TheObjectManager::Instance()->Update();
-  if (Terrain::GetTerrain())
+  TheObjectUpdater::Instance()->Update();
+
+  if (TerrainReady()) //Terrain::GetTerrain())
   {
 //    TheObjectManager::Instance()->GoToNewLocation();
     TheGame::Instance()->SetCurrentState(TheGSMain::Instance());

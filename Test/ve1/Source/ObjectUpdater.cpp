@@ -11,10 +11,13 @@
 #include "StateUpdate.h"
 #include <Timer.h>
 #include "GSNetError.h"
+#include "ObjectManager.h"
+
+#define OU_DEBUG
 
 namespace Amju
 {
-static const char* FILENAME = "object_cache.txt";
+static const char* FILENAME = "object_state_cache.txt";
 
 ObjectUpdater::ObjectUpdater() : m_timestampPos(1), m_timestampUpdate(1)
 {
@@ -240,25 +243,33 @@ void ObjectUpdater::Update()
     TheVe1ReqManager::Instance()->AddReq(new GetStateUpdatesReq(url));
   }
 
+//std::cout << "Updating position/locations: " << m_posMap.size() << " elements in map.\n";
+
   for (PosMap::iterator it = m_posMap.begin(); it != m_posMap.end();   )
   {
     int id = it->first;
-    GameObject* go = TheGame::Instance()->GetGameObject(id);
+    // The object may exist in ObjectManager but not in Game, as it may not be in local player
+    // location!
+    GameObject* go = TheObjectManager::Instance()->GetGameObject(id);
     if (go)
     {
       const Vec3f& pos = it->second.pos;
       int location = it->second.location;
 
-std::cout << "Object Updater: updating object " << id << " to pos: " << pos;
+std::cout << "Object Updater: updating object " << id << " to pos: " << pos << " loc: " << location << "\n";
 
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)
       {
 std::cout << "..using MoveTo\n";
-        ve1Obj->MoveTo(pos, location);
+        // Set location (ignores if no change)
+        ve1Obj->SetLocation(location);
+        ve1Obj->MoveTo(pos);
       }
       else
       {
+        // TODO what to do, can't set location
+        Assert(0);
 std::cout << "..using SetPos, not a Ve1Object\n";
         go->SetPos(pos);
       }
@@ -272,6 +283,7 @@ std::cout << "..using SetPos, not a Ve1Object\n";
     }
     else
     {
+//std::cout << "No GameObject with ID " << id << "\n";
       ++it;
     }
   }

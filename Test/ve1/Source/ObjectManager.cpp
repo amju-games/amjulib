@@ -14,6 +14,8 @@
 #include "GSNetError.h"
 #include <SAP.h>
 #include "Ve1SceneGraph.h"
+#include "GSWaitForNewLocation.h"
+#include "Terrain.h"
 
 //#define XML_DEBUG
 
@@ -27,7 +29,48 @@ std::ostream& operator<<(std::ostream& os, const Object& obj)
   return os << obj.m_id << " (" << obj.m_type << ")";
 }
 
-void Object::Load()
+bool Object::Save(File* f)
+{
+  return (
+    f->WriteComment("// Object id, owner, type, assetlist, datafile") &&
+    f->WriteInteger(m_id) &&
+    f->WriteInteger(m_owner) &&
+    f->Write(m_type) &&
+    f->Write(m_assetlist) &&
+    f->Write(m_datafile) );
+}
+
+bool Object::Load(File* f)
+{
+  if (!f->GetInteger(&m_id)) 
+  {
+    f->ReportError("Object create cache: Expected object id");
+    return false;
+  } 
+  if (!f->GetInteger(&m_owner))
+  {
+    f->ReportError("Object create cache: Expected object owner");
+    return false;
+  }
+  if (!f->GetDataLine(&m_type))
+  {
+    f->ReportError("Object create cache: Expected object type");
+    return false;
+  }
+  if (!f->GetDataLine(&m_assetlist))
+  {
+    f->ReportError("Object create cache: Expected object assetlist");
+    return false;
+  }
+  if (!f->GetDataLine(&m_datafile))
+  {
+    f->ReportError("Object create cache: Expected object datafile");
+    return false;
+  }
+  return true;
+}
+
+void Object::Create()
 {
 //  std::cout << "Loading object " << *this << "\n";
 
@@ -78,7 +121,6 @@ std::cout << "Object Load: Unexpected game object type: " << m_type << "\n";
   m_loaded = true;
 }
 
-static std::string timestamp = "1";
 
 class ObjectCheckReq : public Ve1Req
 {
@@ -108,7 +150,9 @@ std::cout << "Got successful response to object check request!\n";
 
     PXml p = m_xml.getChildNode(0);
     Assert(SafeStrCmp(p.getName(), "now"));
-    timestamp = p.getText();
+    std::string timestamp = p.getText();
+
+    TheObjectManager::Instance()->SetTimestamp(timestamp);
 
     p = m_xml.getChildNode(1);
     if (SafeStrCmp(p.getName(), "objs"))
@@ -213,11 +257,94 @@ void AssetList::Update()
   }
 }
   
+static const char* FILENAME = "objects_created_cache.txt";
 
 ObjectManager::ObjectManager()
 {
+  m_timestamp = "1";
+
   m_elapsed = 999999.9f;
   m_location = -1;
+
+  if (!Load())
+  {
+std::cout << "ObjectManager cache load failed\n";
+    m_objects.clear();
+    m_timestamp = "1";
+  }
+}
+
+ObjectManager::~ObjectManager()
+{
+  Save();
+}
+
+void ObjectManager::SetTimestamp(const std::string& t)
+{
+  m_timestamp = t;
+}
+
+bool ObjectManager::Load()
+{
+  File f;
+  if (!f.OpenRead(FILENAME))
+  {
+    return false;
+  }
+  if (!f.GetDataLine(&m_timestamp))
+  {
+    f.ReportError("Object create cache: expected timestamp");
+  }
+  int numObjs = 0;
+  if (!f.GetInteger(&numObjs))
+  {
+    f.ReportError("Object create cache: Expected num objects");
+    return false;
+  }
+std::cout << "Object create cache: got " << numObjs << " objs!\n";
+
+  for (int i = 0; i < numObjs; i++)
+  {
+    PObject obj = new Object;
+    if (!obj->Load(&f))
+    {
+      return false;
+    }
+std::cout << " - Adding object " << *obj << "\n";
+
+    AddObject(obj);
+  }
+std::cout << "Loaded object create cache ok!\n";
+  return true;
+}
+
+bool ObjectManager::Save()
+{
+std::cout << "Saving object create cache... ";
+
+  // Write contents of object cache to file
+  File f;
+  if (!f.OpenWrite(FILENAME))
+  {
+    return false;
+  }
+
+  f.WriteComment("// Timestamp");
+  f.Write(m_timestamp);
+
+  int num = m_objects.size(); // no need for separate Cache container, right ?
+  f.WriteInteger(num);
+  // Iterate over objects, save members for each 
+  for (Objects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+  {
+    if (!(*it)->Save(&f))
+    {
+std::cout << "FAILED to save object create cache!!\n";
+      return false;
+    }
+  }
+std::cout << "Saved object create cache ok!\n";
+  return true;
 }
 
 void ObjectManager::AddObject(PObject obj)
@@ -229,6 +356,10 @@ void ObjectManager::AddObject(PObject obj)
 std::cout << "Trying to add duplicate object to object manager list!\n";
     return;
   }
+
+  // Add this object to cache -- contains all objects ever created
+  // TODO Is this necessary ?
+////  m_objectCache.insert(obj);
 
   m_objects.insert(obj);
 
@@ -278,7 +409,7 @@ void ObjectManager::Update()
         AssetList* assetlist = m_assetLists[assetlistname];
         if (assetlist->AllAssetsLoaded())
         {
-          obj->Load();
+          obj->Create();
         }
       }
     }
@@ -305,7 +436,7 @@ void ObjectManager::Update()
 
     // Create request, add to OnlineReqManager
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECTS);
-    url += "&time=" + timestamp;
+    url += "&time=" + m_timestamp;
 
 //std::cout << "URL: " << url << "\n";
 
@@ -315,7 +446,20 @@ void ObjectManager::Update()
 
 void ObjectManager::AddGameObject(PGameObject go)
 {
+  // Already added ?
+  Assert(m_allGameObjects.find(go->GetId()) == m_allGameObjects.end());
+
   m_allGameObjects[go->GetId()] = go;
+std::cout << "Created game object " << go->GetId() << " " << go->GetTypeName() << " but don't know its location yet\n"; 
+}
+
+void ObjectManager::OnObjectChangeLocation(int objId)
+{
+  // TODO Handle objects leaving the local player location
+
+  Assert(m_allGameObjects.find(objId) != m_allGameObjects.end());
+  PGameObject go = m_allGameObjects[objId];
+
   Ve1Object* v = dynamic_cast<Ve1Object*>(go.GetPtr());
   if (v)
   {
@@ -337,7 +481,7 @@ std::cout << "Created game object but it's not in our location (" << m_location 
   }
 }
 
-void ObjectManager::SetLocation(int newLocation)
+void ObjectManager::SetLocalPlayerLocation(int newLocation)
 {
   if (m_location == newLocation)
   {
@@ -346,11 +490,18 @@ std::cout << "Er, setting location to current value!\n";
   }
 
   m_location = newLocation;
+
+  // Tell existing game objects to exit
+  // TODO, although trashing the SceneGraph probably covers most of it.
+
   TheGame::Instance()->ClearGameObjects();
   // If using Sweep and Prune for collisions, clear list of objects
   TheSAP::Instance()->Clear();
 
   ClearVe1SceneGraph();
+
+  // Clear the current terrain, which is the important thing the new location must have!
+  ClearTerrain();
 
   for (GameObjects::iterator it = m_allGameObjects.begin(); it != m_allGameObjects.end(); ++it)
   {
@@ -370,8 +521,20 @@ std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << "
       TheGame::Instance()->AddGameObject(go);
     } 
   }
+
+  // Change to waiting state: some objects required for this new location might not exist yet
+ TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
+PGameObject ObjectManager::GetGameObject(int id)
+{
+  GameObjects::iterator it = m_allGameObjects.find(id);
+  if (it == m_allGameObjects.end())
+  {
+    return 0; // assume this is allowed, to check if an object exists or not
+  }
+  return it->second;
+}
 }
 
 

@@ -16,14 +16,19 @@ public:
   Portal();
   virtual const char* GetTypeName() const;
   virtual void Update();
-
+  virtual bool Load(File*);
   virtual void OnLocationEntry();
+
   void OnPlayerCollision(Player* player);
+
+  // For collision testing (should use SAP)
+  AABB* GetAABB();
 
 private:
   int m_destLocation;
   Vec3f m_destPos;
   bool m_isOpen;
+  AABB m_aabb;
 };
 }
 
