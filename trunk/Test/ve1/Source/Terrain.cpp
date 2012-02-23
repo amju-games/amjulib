@@ -29,10 +29,20 @@ GameObject* CreateTerrain()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Terrain::TYPENAME, CreateTerrain);
 
-Terrain* Terrain::GetTerrain()
+Terrain* GetTerrain()
 {
-  // TODO
+  Assert(currentTerrain);
   return currentTerrain;
+}
+
+void ClearTerrain()
+{
+  currentTerrain = 0;
+}
+
+bool TerrainReady()
+{
+  return (currentTerrain != 0);
 }
 
 class TerrainSceneNode : public SceneMesh
@@ -51,8 +61,27 @@ Terrain::Terrain()
 {
 }
 
+bool Terrain::Load(File* f)
+{
+  if (!f->GetDataLine(&m_objFilename))
+  {
+    f->ReportError("Expected .obj filename for terrain");
+    return false;  
+  }
+
+std::cout << "Terrain load: got obj mesh name: \"" << m_objFilename << "\"\n";
+
+  return true;
+}
+
 void Terrain::OnLocationEntry()
 {
+  // Here we should already be loaded and ready to go.
+  // Problem is other objects can have their OnLocationEntry() func called first.
+  // It shouldn't matter what order this happens.
+
+  currentTerrain = this;
+
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(m_objFilename);
   if (!mesh)
   {
@@ -75,8 +104,6 @@ void Terrain::OnLocationEntry()
   m_sceneNode = tsn;
 
 //std::cout << "Terrain load: NICE! Created terrain object\n";
-
-  currentTerrain = this; // for easy access to the current Terrain
 }
 
 CollisionMesh* Terrain::GetCollisionMesh()
@@ -84,18 +111,6 @@ CollisionMesh* Terrain::GetCollisionMesh()
   return m_sceneNode->GetCollisionMesh();
 }
 
-bool Terrain::Load(File* f)
-{
-  if (!f->GetDataLine(&m_objFilename))
-  {
-    f->ReportError("Expected .obj filename for terrain");
-    return false;  
-  }
-
-//std::cout << "Terrain load: got obj mesh name: \"" << s << "\"\n";
-
-  return true;
-}
 
 /*
 void Terrain::Draw()

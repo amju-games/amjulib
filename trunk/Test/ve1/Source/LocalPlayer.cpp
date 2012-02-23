@@ -1,18 +1,39 @@
 #include "LocalPlayer.h"
-#include <Game.h>
+//#include <Game.h>
+#include "ObjectManager.h"
 
 namespace Amju
 {
 static int localPlayerId = -1;
+static int localPlayerLocation = -1;
 
+int GetLocalPlayerLocation()
+{
+  Assert(localPlayerLocation != -1);
+  return localPlayerLocation; 
+}
+
+void SetLocalPlayerLocation(int lpl)
+{
+  localPlayerLocation = lpl;
+  TheObjectManager::Instance()->SetLocalPlayerLocation(lpl);
+}
+
+bool Player::IsLocalPlayer() const
+{
+  return (m_id == localPlayerId);
+}
+    
 Player* GetLocalPlayer()
 {
-  GameObject* p = TheGame::Instance()->GetGameObject(localPlayerId);
-  if (p)
+  if (localPlayerId == -1)
   {
-    Assert(dynamic_cast<Player*>(p));
-    ((Player*)p)->SetIsLocalPlayer(true);
+    return 0;
   }
+
+  GameObject* p = TheObjectManager::Instance()->GetGameObject(localPlayerId);
+
+  // May return 0
   return (Player*)p;
 }
 
@@ -20,6 +41,9 @@ void SetLocalPlayerId(int id)
 {
   localPlayerId = id;
 }
+
+
+
 
 /*
 void OnNewObject()

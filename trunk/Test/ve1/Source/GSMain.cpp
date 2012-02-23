@@ -17,6 +17,7 @@
 #include "MsgManager.h"
 #include <GuiTextEdit.h>
 #include "GSNetError.h"
+#include "GameMode.h"
 
 namespace Amju
 {
@@ -186,6 +187,8 @@ void GSMain::Update()
 
 void GSMain::DoMoveRequest()
 {
+std::cout << "In DoMoveRequest...\n";
+
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
 
@@ -235,7 +238,7 @@ std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
     {
 std::cout << "Ground clicked...\n";
       Vec3f pos;
-      if (Terrain::GetTerrain()->GetMousePos(lineSeg, &pos))
+      if (GetTerrain()->GetMousePos(lineSeg, &pos))
       {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
@@ -243,12 +246,21 @@ std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
          // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
          // Maybe don't send location, but send it as a separate kind of request ?
 
-        TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
-
         // TODO We want to respond immediately but we get out of sync with server
         // Move towards point, but server will send back actual destination
-        GetLocalPlayer()->SetArrowPos(pos); //MoveTo(pos);
+        GetLocalPlayer()->SetArrowPos(pos); 
         GetLocalPlayer()->SetArrowVis(true);
+
+        if (IsOnline())
+        {
+          TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+        }
+        else
+        {
+          // Offline - send msg to move (will be cached) 
+          ///////GetLocalPlayer()->MoveTo(pos, location);
+          TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
+        }
       }
       else
       {
@@ -381,7 +393,7 @@ bool GSMain::OnCursorEvent(const CursorEvent& ce)
 
 bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-std::cout << "Mouse button event!! ";
+std::cout << "Mouse button event!!\n";
 
   // Player has clicked somewhere on screen.
   // Response will depend on whether an object was clicked, or a GUI element.
@@ -398,7 +410,7 @@ std::cout << "Mouse button event!! ";
 
   if (m_chatSendIsActive || m_chatRecvIsActive)
   {
-std::cout << "Chat active so discarding mouse click\n";
+std::cout << " - Chat active so discarding mouse click\n";
     return false; 
   }
 

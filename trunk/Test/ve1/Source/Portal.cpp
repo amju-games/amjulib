@@ -1,6 +1,6 @@
 #include "Portal.h"
 #include <GameObjectFactory.h>
-#include "Player.h"
+#include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "ObjectManager.h"
 
@@ -26,6 +26,20 @@ Portal::Portal()
   m_isOpen = false;
 }
 
+bool Portal::Load(File* f)
+{
+  // Load position, size of bounding box.
+  // Load dest location.
+  // NB All Ve1Objects know their own location
+
+  return true;
+}
+
+AABB* Portal::GetAABB()
+{
+  return &m_aabb;
+}
+
 void Portal::Update()
 {
 }
@@ -49,11 +63,12 @@ void Portal::OnPlayerCollision(Player* player)
 
   // Change location
 
-  player->SetPos(m_destPos);
+//  player->SetPos(m_destPos);
 
   TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), m_destPos, m_destLocation);
 
-  TheObjectManager::Instance()->SetLocation(m_destLocation);
+  // Should Player do this ?
+  SetLocalPlayerLocation(m_destLocation); // LocalPlayer
 }
 }
 

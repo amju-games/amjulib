@@ -87,12 +87,6 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
     pi->PISetString(PI_KEY("email"), m_email);
     // TODO Do we need to set this via ObjectUpdater too, so it gets sent to all clients ?
 
-    // Switch off local flag on any previous local player
-    Player* local = GetLocalPlayer();
-    if (local)
-    {
-      local->SetIsLocalPlayer(false);
-    }
     // Set ID of this player object as the local player ID
     SetLocalPlayerId(objId);
 

@@ -20,6 +20,7 @@ public:
   virtual bool Load(File*);
 
   virtual void OnLocationEntry();
+  virtual void OnLocationExit();
  
   bool Init(); // TODO why ?
 
@@ -27,13 +28,13 @@ public:
   //  types of the players will be wrong. With a flag it's much easier to change who the local
   //  player is.
   bool IsLocalPlayer() const; 
-  void SetIsLocalPlayer(bool);
+//  void SetIsLocalPlayer(bool);
 
   const std::string& GetName() const;
   void SetName(const std::string& name);
 
   // Ve1Object overrides
-  virtual void MoveTo(const Vec3f& newPos, int location);
+  virtual void MoveTo(const Vec3f& newPos);
   virtual void Set(const std::string& key, const std::string& val);
   virtual void SetMenu(GuiMenu*);
 
@@ -67,6 +68,9 @@ protected:
 
   RCPtr<Shadow> m_shadow;
   RCPtr<SceneMesh> m_arrow; // destination arrow
+
+  // Set when we enter a new location 
+  bool m_inNewLocation;
 };
 
 }

@@ -28,9 +28,6 @@ public:
   static const char* TYPENAME;
   virtual const char* GetTypeName() const;
 
-  // Get the Terrain for the current location for this client
-  static Terrain* GetTerrain();
-
   virtual void OnLocationEntry();
 
   // For collision tests/shadows -- TODO Octree
@@ -46,6 +43,11 @@ protected:
 
   TerrainSceneNode* m_sceneNode;
 };
+
+// Get the Terrain for the current location for this client
+Terrain* GetTerrain();
+void ClearTerrain(); // when we leave current location
+bool TerrainReady(); // returns true when a Terrain exists (i.e. GetTerrain() is valid)
 
 }
 

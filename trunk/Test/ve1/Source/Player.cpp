@@ -97,6 +97,7 @@ Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
   m_dirCurrent = m_dir;
   m_isLocal = false;
   m_isMoving = false;
+  m_inNewLocation = false;
 }
 
 const std::string& Player::GetName() const
@@ -109,15 +110,15 @@ void Player::SetName(const std::string& name)
   m_name = name;
 }
 
-bool Player::IsLocalPlayer() const
-{
-  return m_isLocal;
-}
+//bool Player::IsLocalPlayer() const
+//{
+//  return m_isLocal;
+//}
      
-void Player::SetIsLocalPlayer(bool isLocal)
-{
-  m_isLocal = isLocal;
-}
+//void Player::SetIsLocalPlayer(bool isLocal)
+//{
+//  m_isLocal = isLocal;
+//}
 
 bool Player::Load(File* f)
 {
@@ -143,6 +144,19 @@ bool Player::Load(File* f)
   return true;
 }
 
+void Player::OnLocationExit()
+{
+  // We can't be the Local Player - this function is called when an object leaves the location
+  //  where the local player is :-)
+  Assert(!IsLocalPlayer());
+
+  // Remove from SceneGraph
+  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  Assert(root);
+  root->DelChild(m_sceneNode.GetPtr());
+  root->DelChild(m_arrow.GetPtr());
+}
+
 void Player::OnLocationEntry()
 {
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
@@ -154,11 +168,8 @@ std::cout << "Adding scene node to SceneGraph for player\n";
   root->AddChild(m_arrow.GetPtr());
   SetArrowVis(false);
 
-  // Tell shadow the collision mesh it is casting onto
-  // TODO Use octree etc
-  // NB This only works if Terrain is activated before player!!
-  m_shadow->AddCollisionMesh(Terrain::GetTerrain()->GetCollisionMesh());
   m_isMoving = false;
+  m_inNewLocation = true;
 }
 
 // Scene Graph
@@ -211,11 +222,13 @@ std::cout << " Setting arrow pos to " << newpos << "\n";
     newpos.z - XSIZE, newpos.z + XSIZE);
 }
 
-void Player::MoveTo(const Vec3f& newpos, int location)
+void Player::MoveTo(const Vec3f& newpos)
 {
-  m_location = location;
   m_newPos = newpos;
   m_isMoving = true;
+
+  // TODO Change position immediately if this is first MoveTo() for this location.
+  // Otherwise we should walk to the new pos.
 
   if (m_posHasBeenSet)
   {
@@ -254,11 +267,35 @@ std::cout << "Player: first pos update, so set immediately\n";
 
 void Player::Update()
 {
+  // Not safe to do anything if the Terrain has not been created yet 
+  if (!TerrainReady())
+  {
+    return; // Don't do nuffink 
+  }
+
   GameObject::Update();
+  
+  // Tell shadow the collision mesh it is casting onto
+  // TODO Use octree etc
+  // NB This only works if Terrain is activated before player!!
+  // Also this crashes if Terrain not created at all yet!!
+  // -> General problem of relying on another object already being in existence: you can't!!
+  // When you start, and when you change locations, you must wait for the Terrain to be set up.
+  // Otherwise we will be falling through floor, etc. if not crashing.
+
+  // Just do once per location, but only when Terrain is valid.
+  // I.e. have a flag, set it in OnLocationEntry. It's not complicated.
+
+  if (m_inNewLocation)
+  {
+    m_shadow->ClearCollisionMeshes(); 
+    m_shadow->AddCollisionMesh(GetTerrain()->GetCollisionMesh());
+    m_inNewLocation = false;
+  }
 
   // Get height for (x, z);
   float y = 0;
-  if (Terrain::GetTerrain()->GetCollisionMesh()->GetY(Vec2f(m_pos.x, m_pos.z), &y))
+  if (GetTerrain()->GetCollisionMesh()->GetY(Vec2f(m_pos.x, m_pos.z), &y))
   {
     m_pos.y = y;
   }

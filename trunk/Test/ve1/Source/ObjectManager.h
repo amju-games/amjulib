@@ -27,9 +27,16 @@ struct Object : public RefCounted
     m_id(id), m_owner(owner), m_type(type), m_assetlist(assetlist), m_datafile(datafile), 
     //m_datafileLocal(false), m_assetsLocal(false),
     m_loaded(false)
-  {}  
+  { } 
 
-  void Load();
+  Object() : m_id(-1), m_owner(-1), m_loaded(false) { } 
+
+  // Create object, load it, add to game (if in current location, else just hold onto it)
+  void Create();
+
+  // Load/Save the members of this Object, for caching
+  bool Load(File*);
+  bool Save(File*);
 };
 
 typedef RCPtr<Object> PObject;
@@ -118,6 +125,7 @@ class ObjectManager : public DownloadManager
 {
 public:
   ObjectManager();
+  ~ObjectManager();
 
   // Called every frame
   void Update();
@@ -125,10 +133,31 @@ public:
   void AddObject(PObject);
 
   void AddGameObject(PGameObject);
-  void SetLocation(int newLocation);
+
+  // Use this in preference to the Game when the object may not be in the local player's location
+  PGameObject GetGameObject(int id); 
+
+  // Call to change local player to new location: 
+  //  objects might not be created so we wait before continuing.
+  void SetLocalPlayerLocation(int newLocation);
+
+  // Called when an object (which can't be the local player) changes its location (into or out of 
+  //  the local player's location)
+  // TODO params etc
+  void OnObjectChangeLocation(int objId);
+
+  void SetTimestamp(const std::string& timestamp);
+
+private:
+  // Local cache of objects successfully created
+  bool Load();
+  bool Save(); 
 
 private:
   float m_elapsed;
+
+  // Timestamp of last server request
+  std::string m_timestamp;
 
   // Asset list:
   // Objects point to asset lists.

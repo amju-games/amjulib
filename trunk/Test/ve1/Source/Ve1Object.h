@@ -17,7 +17,12 @@ public:
 
   // Called when object is 'activated' because the local player changes location to 
   //  where this object is. 
+  // ONLY CALL WHEN SAFE TO DO SO, I.E. ALL OBJECTS IN NEW LOCATION ARE CREATED....
   virtual void OnLocationEntry() = 0;
+
+  // Called when this object leaves the location of the local player. 
+  // This only applies to objects which can move autonomously, i.e. non-local players.
+  virtual void OnLocationExit() { } 
 
   // Set a state (key, val) pair
   virtual void Set(const std::string& key, const std::string& val);
@@ -25,13 +30,18 @@ public:
 //  virtual void Set(const std::string& key, int val);
 
   // Set the position - if a character, move to this pos over time, don't instantly set.
-  virtual void MoveTo(const Vec3f& pos, int location);
+  // NB If location changes, we must call SetLocation().
+  virtual void MoveTo(const Vec3f& pos);
 
   // Set menu items appropriate to this object type
   virtual void SetMenu(GuiMenu*) { }
 
-  // This kind of object live in one location 
+  // Rets true if location has been set for this object
+  bool LocationReady() const;
+
   int GetLocation() const;
+
+  // This updates the game state as we may enter or leave the same location as the local player.
   void SetLocation(int loc);
 
 protected:
