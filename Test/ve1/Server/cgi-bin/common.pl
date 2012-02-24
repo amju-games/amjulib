@@ -30,7 +30,7 @@ sub starthere()
   # From: http://advosys.ca/papers/web/61-web-security.html
   #
   #my $ok_chars = 'a-zA-Z0-9 ,-';
-  my $ok_chars = 'a-zA-Z0-9\.@_';
+  my $ok_chars = 'a-zA-Z0-9\.@_-';
   foreach my $param_name ( param() ) 
   {
     $_ = HTML::Entities::decode( param($param_name) );
