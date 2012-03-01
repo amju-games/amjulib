@@ -112,6 +112,9 @@
     <Filter Include="Utils\Xml">
       <UniqueIdentifier>{e71a5a40-f948-4867-8609-04c9b442503e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4c00bbb9-066c-4927-9363-6e749a98ea90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -1306,6 +1309,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\Launcher.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\glutmain.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\nonglutmain.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

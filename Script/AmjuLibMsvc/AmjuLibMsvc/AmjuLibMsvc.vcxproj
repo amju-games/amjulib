@@ -404,6 +404,9 @@
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
+    <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
+    <ClInclude Include="..\..\..\Source\Main\main.h" />
+    <ClInclude Include="..\..\..\Source\Main\nonglutmain.h" />
     <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
     <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
     <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />
