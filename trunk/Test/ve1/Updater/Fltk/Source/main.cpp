@@ -1,5 +1,6 @@
 // Client updater using FLTK for GUI
 
+#include <iostream>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
@@ -14,6 +15,8 @@ Fl_Text_Buffer* textbuf = 0;
 
 void Report(const char* s)
 {
+std::cout << s; // for easy command-line debugging
+
   Fl::lock();
   textbuf->append(s);
   Fl::unlock();
