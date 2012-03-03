@@ -1,3 +1,4 @@
+#include <cerrno>
 #include "Updater.h"
 #include <StringUtils.h>
 #include <File.h>
@@ -15,16 +16,23 @@ static const char* DEFAULT_ENV = "ve1";
 static const char* VERSION_SCRIPT = "/cgi-bin/version.pl"; 
 static const char* SERVER_EXE_PATH = "/bin/";
 static const char* CONFIG_FILE_NAME = "client_version.txt";
+
+// Keys in config file
 static const char* VERSION_KEY = "version";
 static const char* SERVER_KEY = "server";
 static const char* ENV_KEY = "env";
+static const char* COPIED_BASE_RESOURCES_KEY = "copied_resources";
+
 static const char* CLIENT_PREFIX = "ve1-client-";
-static const char* CLIENT_SUFFIX = 
+
 #ifdef WIN32
-".exe";
+static const char* CLIENT_SUFFIX = ".exe";
+static const char* SHELL_COPY_CMD = "xcopy /S ";
 #endif
+
 #ifdef MACOSX
-"";
+static const char* CLIENT_SUFFIX = "";
+static const char* SHELL_COPY_CMD = "cp -R ";
 #endif
 
 Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false), m_report(r)
@@ -35,13 +43,30 @@ Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(
 
 std::cout << "Config file: " << configFileName << "\n";
 
-  if (m_cf.Load(configFileName))
+  if (m_cf.Load(configFileName, false))
   {
     Report(std::string("Loaded config file: " + configFileName + "\n").c_str());
   }
   else
   {
     Report(std::string("No config file: " + configFileName + "\n").c_str());
+  }
+}
+
+Updater::~Updater()
+{
+  std::string configFileName = GetProcessDir() + "/" + CONFIG_FILE_NAME;
+
+std::cout << "Saving Config file: " << configFileName << "...\n";
+
+  if (m_cf.Save(configFileName, false))
+  {
+std::cout << "Saved config file OK, apparently.\n";
+  }
+  else
+  {
+    Report(std::string(
+      std::string("Failed to save config file! Error is: \"") + std::strerror(errno) + ", dude\" (I added the dude bit)\n").c_str());
   }
 }
 
@@ -84,7 +109,6 @@ void Updater::OnDownloadSuccess()
   m_currentVersion = m_latestVersion;
   // Update version in config file once downloaded
   m_cf.Set(VERSION_KEY, m_currentVersion);
-  m_cf.Save(CONFIG_FILE_NAME);
 }
 
 void Updater::OnDownloadFail()
@@ -142,6 +166,43 @@ std::string Updater::GetEnv()
   return env;
 }
 
+void Updater::CopyBaseResources()
+{
+  if (m_cf.Exists(COPIED_BASE_RESOURCES_KEY))
+  {
+    Report("Already copied base resources, skipping this step.\n");
+    return;
+  }
+
+  m_cf.Set(COPIED_BASE_RESOURCES_KEY, "yes");
+
+  Report("Copying base resources, not done before...\n");
+
+  // Copy resource files from Data directory to Save directory.
+  // This is so we don't have to look in two locations for assets.
+  // The Data dir on Windows is the Data dir below the Process Dir.
+  // The Data dir in a Mac bundle is the bundle Resources/Data dir.
+  std::string dataDir = GetProcessDir();
+#ifdef WIN32
+  dataDir += "/Data/";
+#endif
+
+#ifdef MACOSX
+  dataDir += "/My Game.app/Contents/Resources/Data/";
+#endif
+
+  std::string saveDir = GetSaveDir(GetEnv());
+
+  // We want to do this kind of thing: "cp dataDir/* saveDir/"
+  // Can we just use system() ? 
+
+  std::string cmd = std::string(SHELL_COPY_CMD) + " \"" + dataDir + "\"/* \"" + saveDir + "\"/";
+  Report((cmd + "\n").c_str());
+  system(cmd.c_str());
+
+  Report("Finished copying base resources...\n");
+}
+
 void Updater::Work()
 {
   File::SetRoot(GetSaveDir(GetEnv()), "/"); // all assets, downloaded files etc live in save dir
@@ -181,6 +242,8 @@ std::cout << "VersionChecker has finished.\n";
   {
     Download();
   }
+
+  CopyBaseResources();
 
   Report("Now it's time to start the client and exit this process.\n");
 
