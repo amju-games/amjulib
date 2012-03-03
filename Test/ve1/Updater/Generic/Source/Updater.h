@@ -14,6 +14,7 @@ class Updater : public Thread
 {
 public:
   Updater(ReportFunc);
+  ~Updater();
 
   virtual void Work();
 
@@ -25,15 +26,13 @@ public:
   void OnDownloadSuccess();
   void OnDownloadFail();
 
-  void Wait();  
-  void Unwait();
-
   void Report(const char*);
 
 private:
   std::string GetServer();
   std::string GetEnv();
   std::string ExeName(const std::string& version);
+  void CopyBaseResources();
 
 private:
   std::string m_currentVersion;
