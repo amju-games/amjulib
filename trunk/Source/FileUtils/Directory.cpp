@@ -280,7 +280,7 @@ std::cout << "Unexpected: didn't get exe file name: " << bytes << "\n";
 
   if (AmIBundled())
   {
-#ifdef _DEBUG
+#ifdef BUNDLE_CHECK_DEBUG
 std::cout << "This really is an app bundle.\n";
 #endif
     // This really is a bundle. So we want to go from <dir>/Bundle.app/Contents/MacOS/<exe> to <dir>
@@ -288,12 +288,12 @@ std::cout << "This really is an app bundle.\n";
   }
   else
   {
-#ifdef _DEBUG
+#ifdef BUNDLE_CHECK_DEBUG
 std::cout << "This  is not an app bundle.\n";
 #endif
   }
 
-#ifdef _DEBUG
+#ifdef PROCESS_DIR_DEBUG
 std::cout << "GetProcessDir() result: " << root.c_str() << "\n";
 #endif
 
@@ -421,7 +421,7 @@ std::string GetSaveDir(const std::string& appName)
     }
   }
   return s;
-#endif // DIRECTORY_DEBUG
+#endif // !JUST_USE_DATA_DIR
 
 #endif // WIN32
 
