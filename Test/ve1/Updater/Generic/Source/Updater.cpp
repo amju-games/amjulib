@@ -174,8 +174,6 @@ void Updater::CopyBaseResources()
     return;
   }
 
-  m_cf.Set(COPIED_BASE_RESOURCES_KEY, "yes");
-
   Report("Copying base resources, not done before...\n");
 
   // Copy resource files from Data directory to Save directory.
@@ -191,14 +189,29 @@ void Updater::CopyBaseResources()
   dataDir += "/My Game.app/Contents/Resources/Data/";
 #endif
 
-  std::string saveDir = GetSaveDir(GetEnv());
+  std::string saveDir = GetSaveDir(GetEnv()) + "/Data";
 
-  // We want to do this kind of thing: "cp dataDir/* saveDir/"
+  MkDir(saveDir);
+
+  // We want to do this kind of thing: "cp dataDir/* saveDir/Data/"
   // Can we just use system() ? 
 
   std::string cmd = std::string(SHELL_COPY_CMD) + " \"" + dataDir + "\"/* \"" + saveDir + "\"/";
   Report((cmd + "\n").c_str());
-  system(cmd.c_str());
+  
+  int retval = system(cmd.c_str());
+
+  // TODO TEMP TEST
+  // Hmm, it seems the problem is that using system() we don't know if the copy succeeded or not.
+  std::string s = "System() returned: " + ToString(retval) + ": " + std::strerror(errno) + "\n";
+  Report(s.c_str());
+
+  // TODO Only do this on success!
+  // TODO We should check for likely things that could go wrong, e.g. permissions, missing dir, etc.
+  m_cf.Set(COPIED_BASE_RESOURCES_KEY, "yes");
+
+  // Also copy dynamic libraries to the directory where the client binary will live.
+  // TODO
 
   Report("Finished copying base resources...\n");
 }
