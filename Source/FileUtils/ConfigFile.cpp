@@ -9,6 +9,8 @@ using namespace std;
 
 namespace Amju
 {
+static const bool NOT_BINARY = false;
+
 ConfigFile::ConfigFile()
 {
   AMJU_CALL_STACK;
@@ -29,12 +31,12 @@ void ConfigFile::Clear()
   m_values.clear();
 }
 
-bool ConfigFile::Save(const std::string& filename)
+bool ConfigFile::Save(const std::string& filename, bool useRoot)
 {
   AMJU_CALL_STACK;
 
   File f(true, File::STD); // No glue, TODO MEM ?
-  if (!f.OpenWrite(filename))
+  if (!f.OpenWrite(filename, File::CURRENT_VERSION, NOT_BINARY, useRoot))
   {
     f.ReportError("Couldn't open config file for writing.");
     return false;
@@ -53,7 +55,7 @@ bool ConfigFile::Save(const std::string& filename)
   return true;
 }
 
-bool ConfigFile::Load(const std::string& filename)
+bool ConfigFile::Load(const std::string& filename, bool useRoot)
 {
   AMJU_CALL_STACK;
 
@@ -61,7 +63,7 @@ bool ConfigFile::Load(const std::string& filename)
   // arg2 (false) => don't use Glue File implementation.
   File f(true, File::STD);
 
-  if (!f.OpenRead(filename))
+  if (!f.OpenRead(filename, NOT_BINARY, useRoot))
   {
 #ifdef _DEBUG
     // This is ok for a clean install, so don't complain in a release build.
