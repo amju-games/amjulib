@@ -10,9 +10,9 @@ namespace Amju
 class DownloadReq : public OnlineReq
 {
 public:
-  DownloadReq(const std::string& filename, const std::string& url, HttpClient::HttpMethod method, const char* name) : 
+  DownloadReq(const std::string& filename, const std::string& url, HttpClient::HttpMethod method, const char* name, bool useRoot) : 
     OnlineReq(url, method, name),
-    m_filename(filename) {}
+    m_filename(filename), m_useRoot(useRoot) {}
 
   virtual void HandleResult(); 
 
@@ -21,6 +21,7 @@ public:
 
 protected:
   std::string m_filename;
+  bool m_useRoot;
 };
 }
 

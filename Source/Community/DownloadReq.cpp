@@ -3,7 +3,7 @@
 #include <File.h>
 #include <StringUtils.h>
 
-//#define DOWNLOAD_REQ_DEBUG
+#define DOWNLOAD_REQ_DEBUG
 
 #define CHECK_HTTP_RESPONSE
 
@@ -15,12 +15,12 @@ void DownloadReq::HandleResult()
   // What seemed to be happening was that the vector had gone away by the time we saved the file???
   // Copying the result seems to fix the problem.
   // This makes no sense to me :-(
-  HttpResult res = GetResult(); // Copy it
+  HttpResult res = GetResult(); 
 
   if (res.GetSuccess())
   {
 #ifdef DOWNLOAD_REQ_DEBUG
-std::cout << "Download req succeeded! GetString returns this: \"" << res.GetString() << "\"\n";
+std::cout << "Download req succeeded!\n"; // GetString returns this: \"" << res.GetString() << "\"\n";
 #endif
 
     const unsigned char* s = res.GetData();
@@ -61,7 +61,7 @@ std::cout << " - I don't see 200, response not OK :-( \n";
 #ifdef DOWNLOAD_REQ_DEBUG
 std::cout << "Download req: Found start of data: " << i << "\n";
 std::cout << "Download req: Size of data: " << size - i << "\n";
-std::cout << "Data looks like this:\n" << std::string((const char*)(s + i)) << "\n";
+//std::cout << "Data looks like this:\n" << std::string((const char*)(s + i)) << "\n";
 #endif
 
     // Save response to file
@@ -84,7 +84,8 @@ std::cout << "Data looks like this:\n" << std::string((const char*)(s + i)) << "
 
       File f(File::NO_VERSION, File::STD);
       if (!f.OpenWrite(m_filename, File::CURRENT_VERSION, 
-        true // binary 
+        true, // binary
+        m_useRoot 
       ))
       {
         ok = false;
