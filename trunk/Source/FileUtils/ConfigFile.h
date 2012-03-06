@@ -13,8 +13,8 @@ class ConfigFile : public NonCopyable
 public:
   ConfigFile();
 
-  bool Load(const std::string& filename);
-  bool Save(const std::string& filename);
+  bool Load(const std::string& filename, bool useRoot = true);
+  bool Save(const std::string& filename, bool useRoot = true);
 
   std::string GetValue(const std::string& key) const;
   float GetFloat(const std::string& key) const;
