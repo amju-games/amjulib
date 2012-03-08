@@ -1,8 +1,29 @@
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
+#include <ConfigFile.h>
 
 namespace Amju
 {
+static const char* SERVER_KEY = "server";
+static const char* ENV_KEY = "env";
+
+std::string UrlRoot()
+{
+  GameConfigFile* config = TheGameConfigFile::Instance();
+
+  std::string server = "www.amju.com";
+  if (config->Exists(SERVER_KEY))
+  {
+    server = config->GetValue(SERVER_KEY);
+  }
+  std::string env = "ve1";
+  if (config->Exists(ENV_KEY))
+  {
+    server = config->GetValue(ENV_KEY);
+  }
+  return server + "/" + env + "/";
+}
+
 Ve1ReqManager::Ve1ReqManager()
 {
   m_isLoggedIn = false;
@@ -20,14 +41,14 @@ bool Ve1ReqManager::IsLoggedIn() const
 
 std::string Ve1ReqManager::MakeDownloadUrl(const std::string& filename)
 {
-  std::string s = "www.amju.com/ve1/assets/" + filename;
+  std::string s = UrlRoot() + "assets/" + filename;
   return s;
 }
 
 std::string Ve1ReqManager::MakeUrl(Task t)
 {
   // TODO CONFIG
-  std::string s =  "www.amju.com/ve1/cgi-bin/";
+  std::string s =  UrlRoot() + "cgi-bin/";
   
   // Add Task-specific CGI script name
   switch (t)
