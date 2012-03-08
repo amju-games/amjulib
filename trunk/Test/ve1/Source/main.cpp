@@ -39,7 +39,7 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
-  File::SetRoot(GetSaveDir(APP_NAME), "/");
+  File::SetRoot(GetSaveDir(APP_NAME) + "/Data/", "/");
   
   TheGameConfigFile::Instance()->Load("game.cfg");
 
