@@ -14,7 +14,7 @@ class FileDownloadReq : public DownloadReq
 {
 public:
   FileDownloadReq(DownloadManager* dl, const std::string& filename, const std::string& url) : 
-    DownloadReq(filename, url, HttpClient::GET, "file download req"), 
+    DownloadReq(filename, url, HttpClient::GET, "file download req", true /* use root */), 
     m_dl(dl) {}
 
   virtual void OnDownloaded()
