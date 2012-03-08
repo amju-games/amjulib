@@ -22,7 +22,7 @@ LIBS	:= \
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
-run:
+run_old:
 	mkdir $(RUNDIR); \
 	mkdir $(RUNDIR)/font2d; \
 	mkdir $(RUNDIR)/font3d; \
@@ -30,6 +30,11 @@ run:
 	cp -R $(ASSETSDIR)/* $(RUNDIR); \
 	cp $(FONT2D)/* $(RUNDIR)/font2d/; \
 	cp $(FONT3D)/* $(RUNDIR)/font3d/; \
+	cd $(RUNDIR); \
+	./$(APP)
+
+run:
+	cp $(TARGET) $(RUNDIR); \
 	cd $(RUNDIR); \
 	./$(APP)
 
