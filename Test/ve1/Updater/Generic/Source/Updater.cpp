@@ -28,11 +28,13 @@ static const char* CLIENT_PREFIX = "ve1-client-";
 #ifdef WIN32
 static const char* CLIENT_SUFFIX = ".exe";
 static const char* SHELL_COPY_CMD = "xcopy /S ";
+static const std::string SLASH = "\\";
 #endif
 
 #ifdef MACOSX
 static const char* CLIENT_SUFFIX = "";
 static const char* SHELL_COPY_CMD = "cp -R ";
+static const std::string SLASH = "/";
 #endif
 
 Updater::Updater(ReportFunc r) : m_currentVersion("0.0.0"), m_downloadNewClient(false), m_waiting(false), m_report(r)
@@ -182,24 +184,26 @@ void Updater::CopyBaseResources()
   // The Data dir in a Mac bundle is the bundle Resources/Data dir.
   std::string dataDir = GetProcessDir();
 #ifdef WIN32
-  dataDir += "/Data/";
+  dataDir += SLASH + "Data";
 #endif
 
 #ifdef MACOSX
   dataDir += "/My Game.app/Contents/Resources/Data/";
 #endif
 
-  std::string saveDir = GetSaveDir(GetEnv()) + "/Data";
+  std::string saveDir = GetSaveDir(GetEnv()) + SLASH + "Data";
 
   MkDir(saveDir);
 
   // We want to do this kind of thing: "cp dataDir/* saveDir/Data/"
   // Can we just use system() ? 
 
-  std::string cmd = std::string(SHELL_COPY_CMD) + " \"" + dataDir + "\"/* \"" + saveDir + "\"/";
+  std::string cmd = std::string(SHELL_COPY_CMD) + " \"" + dataDir + "\"" + SLASH + "* \"" + saveDir + "\"" + SLASH;
   Report((cmd + "\n").c_str());
   
   int retval = system(cmd.c_str());
+
+  // TODO it works but you see a horrible DOS box pop up in windows
 
   // TODO TEMP TEST
   // Hmm, it seems the problem is that using system() we don't know if the copy succeeded or not.
