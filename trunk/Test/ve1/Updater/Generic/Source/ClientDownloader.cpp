@@ -15,7 +15,7 @@ void ClientDownloader::OnDownloaded()
 {
   m_updater->Report("Download succeeded!\n");
 
-#ifndef GEKKO
+#ifdef MACOSX
   // Set permission: rwxr-xr-x
   chmod(m_filename.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 #endif
