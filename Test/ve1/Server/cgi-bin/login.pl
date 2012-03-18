@@ -39,8 +39,8 @@ print "Query: $sql\n";
     $query->execute;
 
     # Create new session
-    # Session lasts 1 hour..?
-    $sql = "insert into session (player_id, start, expires) values ($player_id, now(), FROM_UNIXTIME(UNIX_TIMESTAMP(now()) + 3600)) on duplicate key update id=id+1";
+    # Session lasts 24 hours..?
+    $sql = "insert into session (player_id, start, expires) values ($player_id, now(), FROM_UNIXTIME(UNIX_TIMESTAMP(now()) + 3600*24)) on duplicate key update id=id+1";
     insert($sql);
 
     # Get session ID for this player
