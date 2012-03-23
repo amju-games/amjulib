@@ -152,7 +152,17 @@ bool File::OpenRead(const std::string& filename, bool isBinary, bool useRoot)
 
   if (!m_pImpl->OpenRead(root, filename, isBinary))
   {
-    ReportError("Failed to open file for reading: " + filename);
+    std::string err = "Failed to open file for reading: " + filename;
+    if (useRoot)
+    {
+      err += " (prepending root)";
+    }
+    else
+    {
+      err += " (NOT prepending root)";
+    }
+
+    ReportError(err);
     m_bEOFReached = true; 
     return false;
   }
