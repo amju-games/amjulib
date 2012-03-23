@@ -47,6 +47,7 @@ std::cout << "First line: \"" << firstline << "\"\n";
     if (!StringContains(firstline, "200"))
     {
 std::cout << " - I don't see 200, response not OK :-( \n";
+std::cout << "  Request was: " << m_url << "\n";
       // TODO LOG bad response
       OnDownloadFailed();
       return; 
