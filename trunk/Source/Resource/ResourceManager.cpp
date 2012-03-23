@@ -153,7 +153,13 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   Assert(jt != m_loaders.end());
   Loader myLoader = jt->second;
   Resource* r = myLoader(resName);
-  Assert(r);
+  //Assert(r);
+#ifdef _DEBUG
+  if (!r)
+  {
+    std::cout << "Failed to load resource: " << resName << "\n";
+  }
+#endif
 
   return r;
 }
