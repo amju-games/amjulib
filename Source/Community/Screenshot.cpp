@@ -155,6 +155,16 @@ void UploadScreenshot(const std::string& filename, const std::string& url)
 
 void UploadThread::Work()
 {
+  // Factored out this useful code to UrlUtils - please test!
+  m_url += "&image=";
+  if (!FileContentToUrl(m_filename, &m_url))
+  {
+    return;
+  }
+
+/*
+  .. then delete this old version...
+
   if (!FileExists(m_filename))
   {
 #ifdef _DEBUG
@@ -201,8 +211,11 @@ std::cout << "UPLOAD IMAGE:  ..read " << bytesRead << " bytes, total: "
     }
   }
   delete [] data;
+*/
 
+#ifdef SHOW_WHOLE_URL
 std::cout << "Here is the complete url:\n" << m_url << "\n";
+#endif
 
   HttpClient hc;
   HttpResult res;
