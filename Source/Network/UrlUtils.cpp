@@ -39,7 +39,9 @@ Added to Uptime Overlord project
 #include "AmjuFirst.h"
 #include <iostream>
 #include "UrlUtils.h"
-#include "StringUtils.h"
+#include <StringUtils.h>
+#include <Directory.h>
+#include <File.h>
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -56,7 +58,7 @@ bool IsUrlPrintable(char c)
         c == '&'   ||
         c == '?'   ||
         c == '+'   ||
-        c == '-'   ||
+////        c == '-'   ||
         c == '_');
 }
 
@@ -217,6 +219,59 @@ std::string StripDataFromUrl(const std::string& url)
     return url; // no data
   }
   return url.substr(0, f); 
+}
+
+bool FileContentToUrl(const std::string& filename, std::string* result)
+{
+  if (!FileExists(filename))
+  {
+#ifdef _DEBUG
+std::cout << "FileContentToUrl: Apparently there is no file '"
+  << filename.c_str() << "'\n";
+#endif
+    return false;
+  }
+
+  File file(false, File::STD);
+  if (!file.OpenRead(filename, true, false))
+  {
+#ifdef _DEBUG
+std::cout << "FileContentToUrl: failed to open file '"
+  << filename.c_str() << "'\n";
+#endif
+    return false;
+  }
+
+#ifdef _DEBUG
+std::cout << "FileContentToUrl: Opened file '" << filename.c_str() << "'...\n";
+#endif
+
+  static const unsigned int BUF_SIZE = 4096; // TODO CONFIG
+
+  unsigned char data[BUF_SIZE];
+  // Read file until we get to the end.
+  unsigned int total = 0;
+  while (true)
+  {
+    unsigned int bytesRead = file.GetBinary(BUF_SIZE, data);
+    total += bytesRead;
+
+#ifdef _DEBUG
+std::cout << "FileContentToUrl:  ..read " << bytesRead << " bytes, total: "
+  << total << "\n";
+#endif
+
+    *result += ToUrlFormat(data, bytesRead);
+    if (bytesRead < BUF_SIZE)
+    {
+      break;
+    }
+  }
+
+#ifdef _DEBUG
+std::cout << "FileContentToUrl:  success!\n";
+#endif
+  return true;
 }
 }
 

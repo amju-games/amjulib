@@ -49,6 +49,9 @@ std::string GetDataFromUrl(const std::string& url);
 
 std::string StripDataFromUrl(const std::string& url);
 
+// Load contents of file, convert to string to append to URL for a POST.
+// NB File path is absolute, no file root is prepended.
+bool FileContentToUrl(const std::string& filename, std::string* result);
 }
 
 #endif
