@@ -47,7 +47,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
   {
     Group& g = it->second;
     Material& mat = m_materials[g.m_materialName];
-    if (!mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE)
+    if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
     {
       numFaces += g.m_tris.size();
     }
@@ -61,7 +61,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
     Group& g = it->second;
    
     Material& mat = m_materials[g.m_materialName];
-    if (mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE)
+    if ((mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
     {
       continue;
     }
@@ -469,6 +469,24 @@ void ObjMesh::Draw()
   }
 }
 
+void ObjMesh::GetMaterials(MaterialVec* vec)
+{
+  for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); ++it)
+  {
+    vec->push_back(new Material(it->second));
+  } 
+}
+
+Group* ObjMesh::GetGroup(const std::string& groupName)
+{
+  Groups::iterator it = m_groups.find(groupName);
+  if (it == m_groups.end())
+  {
+    return 0;
+  } 
+  return &it->second;
+}
+
 void ObjMesh::BuildGroup(Group& g)
 {
   // Only need to build Tris once - this kind of mesh is not animated!
@@ -533,7 +551,7 @@ if (m_uvs.empty())
 
 void ObjMesh::DrawGroup(Group& g)
 {
-  if (g.m_tris.empty())
+  if (g.m_tris.empty() || !g.IsVisible())
   {
     return;
   }
