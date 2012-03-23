@@ -55,10 +55,18 @@ typedef std::map<std::string, Faces> FaceMap;
 // Group - has name, material name and collection of faces.
 struct Group
 {
+  Group() : m_visible(true), m_collidable(true) {}
+
+  bool IsVisible() const { return m_visible; }
+  bool IsCollidable() const { return m_collidable; }
+  void SetVisible(bool visible) { m_visible = visible; }
+  void SetCollidable(bool collidable) { m_collidable = collidable; }
+
+  bool m_visible;
+  bool m_collidable;
   std::string m_name;
   std::string m_materialName; // TODO int index
   AmjuGL::Tris m_tris;
-////    Material m_material;
 };
 
 // Group with extra info for saving

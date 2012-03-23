@@ -26,6 +26,11 @@ public:
   // Add groups in om to collection of groups in this mesh
   void Merge(const ObjMesh& om);
 
+  // Get group - so special group names can be used for game-related data.
+  // (Do we need to get vec of group names ?)
+  Group* GetGroup(const std::string& groupName);
+
+  void GetMaterials(MaterialVec* vec);
 
 private:
   bool LoadBinary(const std::string& filename);
