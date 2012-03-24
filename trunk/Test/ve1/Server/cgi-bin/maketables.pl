@@ -162,6 +162,25 @@ END
   print "Created fileupdate table! $sql\n<br>\n";
 }
 
+sub create_table_location()
+{
+  my $sql = <<END;
+
+CREATE TABLE `location`
+(`id` INT NOT NULL AUTO_INCREMENT,
+`obj_id` INT NOT NULL,
+`whenchanged` TIMESTAMP NOT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`obj_id`) REFERENCES object(`id`),
+INDEX (`whenchanged`)
+) ENGINE = MYISAM;
+END
+
+  update_or_insert($sql);
+
+  print "Created location table! $sql\n<br>\n";
+}
+
 sub create_tables()
 {
   print "Creating tables for VE1!\n";
@@ -186,6 +205,9 @@ sub create_tables()
 
   drop_table("fileupdate");
   create_table_fileupdate();
+
+  drop_table("location");
+  create_table_location();
 
   print "<br><br>Creating initial data...<br>\n";
 
