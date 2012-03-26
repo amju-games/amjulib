@@ -66,7 +66,9 @@ PXml ParseXml(const char* xmlInput)
     const char* xmlTag = strstr(xmlInput, "<?xml");
     if (!xmlTag)
     {
+#ifdef XML_DEBUG
       std::cout << "XML has no <xml> declaration: " << xmlInput << "\n";
+#endif
       //Assert(0); 
       xmlTag = xmlInput;
     }
