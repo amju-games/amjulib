@@ -114,25 +114,14 @@ std::string StripPath(const std::string& s)
   // Return string, but minus any path info. 
   // To do this, we search from the end of the string for the path separator
   // character. If we find this character, we strip it and anything before it.
-/*
-#if defined(WIN32)
-  const std::string slash = "\\"; 
-#else
-  const std::string slash = "/"; 
-#endif
-  return StripPath(s, slash);
-*/
+
   // Strip backslash and forward slash characters.
   return StripPath(StripPath(s, "/"), "\\");
 }
 
 std::string GetFilePath(const std::string& filename)
 {
-#if defined(WIN32)
-  const std::string slash = "\\"; 
-#else
   const std::string slash = "/"; 
-#endif
   return GetFilePath(filename, slash);
 }
 
@@ -144,7 +133,7 @@ std::string GetFilePath(const std::string& s, const std::string& slashChar)
   {
     ret = ret.substr(0, f);
   }
-  return ret;
+  return ""; // No slash: only filename, no path. So return empty string for path.
 }
 
 void Trim(std::string* ps)
