@@ -20,7 +20,7 @@ void DownloadReq::HandleResult()
   if (res.GetSuccess())
   {
 #ifdef DOWNLOAD_REQ_DEBUG
-std::cout << "Download req succeeded!\n"; // GetString returns this: \"" << res.GetString() << "\"\n";
+std::cout << "Download req succeeded for " << m_filename << "\n"; // GetString returns this: \"" << res.GetString() << "\"\n";
 #endif
 
     const unsigned char* s = res.GetData();
@@ -30,7 +30,7 @@ std::cout << "Download req succeeded!\n"; // GetString returns this: \"" << res.
     if (size < 15)
     {
 #ifdef DOWNLOAD_REQ_DEBUG
-std::cout << "Download req: HTTP response too short\n";
+std::cout << "Download req: HTTP response too short for " << m_filename << "\n";
 #endif
       // TODO LOG bad response
       OnDownloadFailed();
@@ -46,7 +46,7 @@ std::cout << "Download req: HTTP response too short\n";
 std::cout << "First line: \"" << firstline << "\"\n";
     if (!StringContains(firstline, "200"))
     {
-std::cout << " - I don't see 200, response not OK :-( \n";
+std::cout << " - I don't see 200, response not OK for " << m_filename << " \n";
 std::cout << "  Request was: " << m_url << "\n";
       // TODO LOG bad response
       OnDownloadFailed();
@@ -60,8 +60,8 @@ std::cout << "  Request was: " << m_url << "\n";
     i += 4;
 
 #ifdef DOWNLOAD_REQ_DEBUG
-std::cout << "Download req: Found start of data: " << i << "\n";
-std::cout << "Download req: Size of data: " << size - i << "\n";
+std::cout << "Download req " << m_filename << ": Found start of data: " << i << "\n";
+std::cout << "Download req " << m_filename << ": Size of data: " << size - i << "\n";
 //std::cout << "Data looks like this:\n" << std::string((const char*)(s + i)) << "\n";
 #endif
 
@@ -91,14 +91,14 @@ std::cout << "Download req: Size of data: " << size - i << "\n";
       {
         ok = false;
 #ifdef DOWNLOAD_REQ_DEBUG
-        std::cout << "Download req: Oh no, can't open file for writing :-(\n";
+        std::cout << "Download req " << m_filename << ": Oh no, can't open file for writing :-(\n";
 #endif
       }
       if (ok && !f.WriteBinary((const char*)(s + i), size - i))
       {
         ok = false;
 #ifdef DOWNLOAD_REQ_DEBUG
-        std::cout << "Download req: WriteBinary failed :-(\n";
+        std::cout << "Download req " << m_filename << ": WriteBinary failed :-(\n";
 #endif
       }
 
@@ -115,7 +115,7 @@ std::cout << "Download req: Size of data: " << size - i << "\n";
   }
   else
   {
-    std::cout << "Download req failed! " << res.GetErrorString() << "\n";
+    std::cout << "Download req for " << m_filename << " failed! " << res.GetErrorString() << "\n";
     OnDownloadFailed();
   }
 }
