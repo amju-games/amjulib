@@ -8,6 +8,7 @@
 #include <File.h>
 #include <ReportError.h>
 #include <CollisionMesh.h>
+#include <StringUtils.h>
 // Magic Software triangle-sphere intersect test
 #include "Mgc/MgcIntr3DTriSphr.h"
 // Mgc point-in-poly test
@@ -82,7 +83,18 @@ void Terrain::OnLocationEntry()
 
   currentTerrain = this;
 
-  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(m_objFilename);
+  std::string path = GetFilePath(m_objFilename);
+  std::string file = StripPath(m_objFilename);
+
+std::cout << "Terrain OnLocationEntry: Path: " << path << " Filename: " << file << "\n";
+
+  std::string oldRoot = File::GetRoot();
+  File::SetRoot(oldRoot + path, "/");
+
+  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(file);
+
+  File::SetRoot(oldRoot, "/");
+
   if (!mesh)
   {
     ReportError("Terrain load: Failed to load terrain mesh " + m_objFilename);
