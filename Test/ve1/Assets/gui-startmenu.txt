@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -70,5 +70,14 @@ local-button
 0.4, 0.1
 gui-button-4.png
 local
+arial, 1.0 
+
+// Button for editing content
+gui-button
+edit-button
+-0.2, -0.75
+0.4, 0.1
+gui-button-4.png
+edit mode
 arial, 1.0 
 
