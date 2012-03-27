@@ -5,6 +5,8 @@
 #include "ObjectUpdater.h" // TODO This is stupid, just have one object
 #include <Game.h>
 #include "GSMain.h"
+#include "GSEdit.h"
+#include "GameMode.h"
 
 namespace Amju
 {
@@ -20,10 +22,16 @@ void GSWaitForNewLocation::Update()
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
 
-  if (TerrainReady()) //Terrain::GetTerrain())
+  if (TerrainReady()) 
   {
-//    TheObjectManager::Instance()->GoToNewLocation();
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    if (GetGameMode() == AMJU_MODE_EDIT)
+    {
+      TheGame::Instance()->SetCurrentState(TheGSEdit::Instance());
+    }
+    else
+    {
+      TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    }
   }
 }
 
