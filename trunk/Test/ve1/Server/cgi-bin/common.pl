@@ -79,17 +79,25 @@ END
   update_or_insert($sql);
 }
 
-sub my_connect()
-{  
-  starthere(); # print header
-
+sub my_connect2()
+{
   $dbh = DBI->connect($dsn, $username, $pass);
 
   if (not $dbh)
   {
-    die "Failed to connect to DB.\n";
+    die "Failed to connect to DB: $DBI::errstr\n";
   }
-#  print "Connected to DB!\n";
+}
+
+sub my_connect()
+{  
+  starthere(); # print header
+  my_connect2();
+}
+
+sub disconnect()
+{
+  $dbh->disconnect;
 }
 
 sub check_session()
