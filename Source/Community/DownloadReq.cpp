@@ -2,6 +2,7 @@
 #include <iostream>
 #include <File.h>
 #include <StringUtils.h>
+#include <Directory.h>
 
 #define DOWNLOAD_REQ_DEBUG
 
@@ -82,6 +83,22 @@ std::cout << "Download req " << m_filename << ": Size of data: " << size - i << 
         ok = false;
       }
 */
+
+      // Do we need to create destination directory ?
+      std::string dir;
+      if (m_useRoot)
+      {
+        dir = File::GetRoot();
+      }
+      std::string relpath = GetFilePath(m_filename);
+      if (!relpath.empty())
+      {
+        dir += relpath;
+        // Exists ?
+
+        // No: create
+        MkDir(dir);
+      }
 
       File f(File::NO_VERSION, File::STD);
       if (!f.OpenWrite(m_filename, File::CURRENT_VERSION, 
