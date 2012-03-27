@@ -38,6 +38,12 @@ void OnMultiButton()
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
+void OnEditButton()
+{
+  SetGameMode(AMJU_MODE_EDIT);
+  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+}
+
 GSStartMenu::GSStartMenu()
 {
 }
@@ -68,6 +74,7 @@ void GSStartMenu::OnActive()
   m_gui->GetElementByName("multi-button")->SetCommand(Amju::OnMultiButton);
   m_gui->GetElementByName("nogame-button")->SetCommand(Amju::OnNoGameButton);
   m_gui->GetElementByName("local-button")->SetCommand(Amju::OnLocalButton);
+  m_gui->GetElementByName("edit-button")->SetCommand(Amju::OnEditButton);
 }
 
 bool GSStartMenu::OnCursorEvent(const CursorEvent& ce)
