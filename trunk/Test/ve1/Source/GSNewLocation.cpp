@@ -175,7 +175,8 @@ std::cout << "Got new location ID from server!! -> " << id << "\n";
   // Directory for this location. Every location has a unique dir to avoid overwriting files.
   std::string dir = "Loc_" + m_locId;
 
-  MkDir(File::GetRoot() + "/" + dir);
+  // No good for other clients who didn't create this location!
+  //MkDir(File::GetRoot() + "/" + dir);
 
   // Need unique location ID for asset file name and data file name
   m_assetFilename = "assets_loc_" + id + ".txt";
