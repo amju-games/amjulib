@@ -1,5 +1,6 @@
 #include "GSMain.h"
 #include <AmjuGL.h>
+#include <SAP.h>
 #include <Unproject.h>
 #include <ClipLineSegBox.h>
 #include <iostream>
@@ -18,6 +19,8 @@
 #include <GuiTextEdit.h>
 #include "GSNetError.h"
 #include "GameMode.h"
+#include "Camera.h"
+#include "PickObject.h"
 
 namespace Amju
 {
@@ -173,6 +176,8 @@ void GSMain::Update()
 {
   GSBase::Update();
 
+  GetVe1SceneGraph()->Update();
+
   // Make periodic checks for newly created objects
   TheObjectManager::Instance()->Update();
 
@@ -182,29 +187,20 @@ void GSMain::Update()
 
   TheGame::Instance()->UpdateGameObjects();
 
-//  TheSAP::Instance()->Update(); // sweep & prune
+  // TODO Need to set collision test function
+  //TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
 }
 
 void GSMain::DoMoveRequest()
 {
 std::cout << "In DoMoveRequest...\n";
 
+/*
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
-
     Unproject(m_mouseScreen, 0, &mouseWorldNear);
     Unproject(m_mouseScreen, 1, &mouseWorldFar);
     LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
-
-/*
-    // Draw for debugging
-    std::cout << "Selecting, mouse: x: " << m_mouseScreen.x << " y: " << m_mouseScreen.y << "\n";
-    AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
-    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    AmjuGL::DrawLine(AmjuGL::Vec3(mouseWorldNear.x + 0.1f, mouseWorldNear.y + 0.1f, mouseWorldNear.z),
-      AmjuGL::Vec3(mouseWorldFar.x, mouseWorldFar.y, mouseWorldFar.z));
-    AmjuGL::PopAttrib();
-*/
 
     GameObject* selectedObj = 0;
     GameObjects* objs = TheGame::Instance()->GetGameObjects();
@@ -227,6 +223,10 @@ std::cout << "In DoMoveRequest...\n";
         }
       }
     }
+*/
+
+    GameObject* selectedObj = PickObject(m_mouseScreen);
+
     if (selectedObj)
     {
       const std::string name = selectedObj->GetTypeName();
@@ -238,6 +238,12 @@ std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
     {
 std::cout << "Ground clicked...\n";
       Vec3f pos;
+      Vec3f mouseWorldNear;
+      Vec3f mouseWorldFar;
+      Unproject(m_mouseScreen, 0, &mouseWorldNear);
+      Unproject(m_mouseScreen, 1, &mouseWorldFar);
+      LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
+
       if (GetTerrain()->GetMousePos(lineSeg, &pos))
       {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
@@ -254,6 +260,7 @@ std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
         if (IsOnline())
         {
           TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+          GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
         }
         else
         {
@@ -286,11 +293,13 @@ void GSMain::Draw()
   AmjuGL::SetIdentity();
 
   // TODO Super simple camera
-  static const float CAM_Y = 100.0f;
-  static const float CAM_Z = 150.0f;
+  //static const float CAM_Y = 100.0f;
+  //static const float CAM_Z = 150.0f;
 
-  PSceneNodeCamera cam = GetVe1SceneGraph()->GetCamera();
+  Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
+  cam->SetTarget(GetLocalPlayer()); // could be 0
 
+/*
   if (GetLocalPlayer())
   {
     const Vec3f& pos = GetLocalPlayer()->GetPos();
@@ -305,6 +314,7 @@ void GSMain::Draw()
     cam->SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
     cam->SetLookAtPos(Vec3f(0, 0, 0));
   }
+*/
 
 //  Matrix m;
 //  m.RotateY(m_yRot);
@@ -339,6 +349,8 @@ void GSMain::Draw2d()
 
 void GSMain::OnDeactive()
 {
+  GSBase::OnDeactive();
+
   m_gui = 0;
   m_menu = 0;
 }
@@ -393,7 +405,7 @@ bool GSMain::OnCursorEvent(const CursorEvent& ce)
 
 bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-std::cout << "Mouse button event!!\n";
+//std::cout << "Mouse button event!!\n";
 
   // Player has clicked somewhere on screen.
   // Response will depend on whether an object was clicked, or a GUI element.
