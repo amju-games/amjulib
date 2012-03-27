@@ -13,7 +13,8 @@ namespace Amju
 class Ve1Req : public OnlineReq
 {
 public:
-  Ve1Req(const std::string url, const char* name) : OnlineReq(url, HttpClient::GET, name)
+  Ve1Req(const std::string url, const char* name, HttpClient::HttpMethod method = HttpClient::GET) : 
+    OnlineReq(url, method, name)
   {
   }
 
