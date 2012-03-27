@@ -1,4 +1,5 @@
 #include "Ve1SceneGraph.h"
+#include "Camera.h"
 
 namespace Amju
 {
@@ -7,7 +8,7 @@ void ClearVe1SceneGraph()
   SceneGraph* sg = GetVe1SceneGraph();
   sg->Clear();
   sg->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
-  sg->SetCamera(new SceneNodeCamera);
+  sg->SetCamera(new Camera);
 }
 
 SceneGraph* GetVe1SceneGraph()
