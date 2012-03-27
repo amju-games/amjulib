@@ -18,6 +18,7 @@
 #include "Terrain.h"
 
 //#define XML_DEBUG
+#define ASSET_DEBUG
 
 namespace Amju
 {
@@ -182,6 +183,8 @@ std::cout << " ID: " << id << ": ";
 std::cout << " Type: " << type << "\n";
 #endif
 
+std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " << assetfile << " Data file: " << datafile << " Owner: " << owner << "\n";
+
         TheObjectManager::Instance()->AddObject(new Object(id, owner, type, assetfile, datafile));
       }
     }
@@ -201,7 +204,7 @@ bool AssetList::Load()
 std::cout << "Opening asset list " << m_name << "\n";
 #endif
 
-  File f(File::NO_VERSION, File::STD); // OS file, not glue file
+  File f(true, File::STD); // OS file, not glue file
   if (!f.OpenRead(m_name))
   {
 std::cout << "Failed to open asset list file " << m_name << "\n";
@@ -219,11 +222,12 @@ std::cout << "Failed to open asset list file " << m_name << "\n";
 
   for (int i = 0; i < size; i++)
   {
+    const std::string s = m_assetNames[i];
+
 #ifdef ASSET_DEBUG
 std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
 #endif
 
-    const std::string s = m_assetNames[i];
     TheObjectManager::Instance()->GetFile(s);
   }
 
@@ -422,7 +426,7 @@ void ObjectManager::Update()
   }
 
 
-  static const float OBJECT_CHECK_PERIOD = 60.0f; // seconds, TODO CONFIG
+  static const float OBJECT_CHECK_PERIOD = 3.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
   // TODO Get list of all objects *deleted* since last check.
@@ -483,6 +487,8 @@ std::cout << "Created game object but it's not in our location (" << m_location 
 
 void ObjectManager::SetLocalPlayerLocation(int newLocation)
 {
+std::cout << "In ObjectManager::SetLocalPlayerLocation...\n";
+
   if (m_location == newLocation)
   {
 std::cout << "Er, setting location to current value!\n";
@@ -503,12 +509,16 @@ std::cout << "Er, setting location to current value!\n";
   // Clear the current terrain, which is the important thing the new location must have!
   ClearTerrain();
 
+std::cout << " ..old location trashed, adding game objects in new location...\n";
+
   for (GameObjects::iterator it = m_allGameObjects.begin(); it != m_allGameObjects.end(); ++it)
   {
     PGameObject go = it->second;
     Ve1Object* v = dynamic_cast<Ve1Object*>(go.GetPtr());
     if (v)
     {
+std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
+
       if (v->GetLocation() == m_location)
       {
         TheGame::Instance()->AddGameObject(go);
