@@ -57,7 +57,7 @@ void GSEdit::Update()
   // From GSMain: probably DON'T do these:
   TheObjectManager::Instance()->Update(); 
   TheObjectUpdater::Instance()->Update();
-  TheMsgManager::Instance()->Update();
+  //TheMsgManager::Instance()->Update();
   //TheGame::Instance()->UpdateGameObjects();
   //TheSAP::Instance()->Update(); // sweep & prune
 
