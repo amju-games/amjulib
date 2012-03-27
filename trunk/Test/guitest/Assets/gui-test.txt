@@ -1,0 +1,71 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0 
+// size
+2.0, 0.1
+// Text
+I am some centred text, size 1
+// Font name, size
+arial, 1.0, bgcol=ffc0c0, fgcol=ffff00
+
+// Element type
+gui-text
+// Element name
+multi-text1
+// pos (coords are -1..1)
+-0.8, 0.8
+// size
+0.8, 0.5 
+// Text
+I am some multi-line text. This should go on separate lines.
+// Font name, size
+arial, 0.75, left, multi
+
+// Element type
+gui-text-edit
+// Element name
+edit1
+// pos (coords are -1..1)
+-0.8, 0.2
+// size
+1.6, 0.075
+// Text
+I am editable! Try editing me and moving the caret around! Wheeee!
+// Font name, size
+arial, 0.75, left
+
+gui-list-box
+listbox
+// num children 
+0
+
+// element type
+gui-button
+// Element name
+ok-button
+// pos (coords are -1..1)
+-0.8, -0.72
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+OK
+// Font name, size
+arial, 1.0 
+
+
