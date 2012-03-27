@@ -84,6 +84,8 @@ void GSChoosePlayer::OnActive()
 
   if (numPlayers == 0)
   {
+std::cout << "GSChoosePlayer: no existing player names.\n";
+
     OnNewPlayer();
     return;
   }
@@ -95,7 +97,7 @@ void GSChoosePlayer::OnActive()
 
   m_gui->GetElementByName("cancel-button")->SetCommand(OnCancelButton);
 
-std::cout << "Num players: " << numPlayers << "\n";
+std::cout << "GSChoosePlayer: Num players: " << numPlayers << "\n";
 
   for (int i = 0; i < 4; i++)
   {
