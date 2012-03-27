@@ -127,11 +127,10 @@ std::string GetFilePath(const std::string& filename)
 
 std::string GetFilePath(const std::string& s, const std::string& slashChar)
 {
-  std::string ret = s;
-  size_t f = ret.find_last_of(slashChar);
+  size_t f = s.find_last_of(slashChar);
   if (f != std::string::npos)
   {
-    ret = ret.substr(0, f);
+    return s.substr(0, f);
   }
   return ""; // No slash: only filename, no path. So return empty string for path.
 }
