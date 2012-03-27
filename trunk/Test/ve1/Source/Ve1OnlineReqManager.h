@@ -22,6 +22,11 @@ enum Task
   SEND_MSG,
   GET_NEW_MSGS,
   MARK_MSG_READ,
+
+  FILE_UPLOAD, // for admin game editing
+  GET_NEW_LOCATION_ID, // for creating new location
+  CREATE_LOCATION,
+  GET_NEW_OBJECT_ID,  // for creating new object
 };
 
 class Ve1ReqManager : public OnlineReqManager
