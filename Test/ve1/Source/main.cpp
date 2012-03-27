@@ -46,8 +46,9 @@ void StartUp()
   // TODO Need to set SAP collide func
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
-  // Use Text obj loader for now
+  // Use Text obj loader for .obj files, binary loader for .objb 
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
+  TheResourceManager::Instance()->AddLoader("objb", BinaryObjLoader);
 
   TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheAvatarManager::Instance()->Load();
