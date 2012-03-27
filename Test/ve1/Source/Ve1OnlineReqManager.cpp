@@ -89,6 +89,22 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case MARK_MSG_READ:
     s += "markread.pl";
     break;
+
+  case FILE_UPLOAD:
+    s += "myfileup.pl";
+    break;
+
+  case GET_NEW_LOCATION_ID:
+    s += "newlocation_id.pl";
+    break;
+
+  case CREATE_LOCATION:
+    s += "newlocation_row.pl";
+    break;
+
+  case GET_NEW_OBJECT_ID:
+    s += "newobject_id.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.
