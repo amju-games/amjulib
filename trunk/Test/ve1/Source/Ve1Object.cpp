@@ -10,7 +10,15 @@ Ve1Object::Ve1Object() : m_location(-1)
 
 int Ve1Object::GetLocation() const
 {
-  Assert(m_location != -1);
+#ifdef _DEBUG
+  if (m_location == -1)
+  {
+    std::cout << "Warning, object " << GetId() << " has location -1.\n"; 
+  }
+#endif
+
+  //Assert(m_location != -1);
+
   return m_location;
 }
 
