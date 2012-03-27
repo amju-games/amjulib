@@ -87,9 +87,14 @@ float PlayerInfo::PIGetFloat(const std::string& key) const
 
 bool PlayerInfo::Load()
 {
-  if (!FileExists(File::GetRoot() + m_filename))
+  // FileExists doesn't append File::Root
+  if (FileExists(File::GetRoot() + m_filename))
   {
-std::cout << "Loading player info " << m_filename << " - it's a new file\n";
+std::cout << "Loading player info " << m_filename << "...\n";
+  }
+  else
+  {
+std::cout << "Loading player info " << m_filename << " doesn't exist! - - it's a new file\n";
 
     // We assume the player is new and has not saved any player info yet - this is OK.
     return true;
@@ -170,13 +175,17 @@ static const char* PIM_FILENAME = "playerinfo.txt";
 
 bool PlayerInfoManager::Load()
 {
-  if (!FileExists(PIM_FILENAME))
+std::cout << "PlayerInfoManager: loading players...\n";
+
+  if (!FileExists(File::GetRoot() + PIM_FILENAME))
   {
+std::cout << "No playerinfo file exists to load.\n";
     return true;
   } 
   File f;
   if (!f.OpenRead(PIM_FILENAME))
   {
+std::cout << "Player info file does exist but we couldn't open it for reading!\n";
     return false;
   }
   int numPlayers = 0;
@@ -185,6 +194,9 @@ bool PlayerInfoManager::Load()
     f.ReportError("Expected num players"); 
     return false; 
   }
+
+std::cout << "PlayerInfoManager: opened file, got " << numPlayers << " as number of players.\n";
+
   for (int i = 0; i < numPlayers; i++)
   {
     std::string s;
@@ -193,6 +205,9 @@ bool PlayerInfoManager::Load()
       f.ReportError("Expected player name " + ToString(i) + " of " + ToString(numPlayers));
       return false;
     }
+
+std::cout << "PlayerInfoManager: player " << i << " name: \"" << s << "\"\n";
+
     m_map[s] = 0; 
   }
   return true;
