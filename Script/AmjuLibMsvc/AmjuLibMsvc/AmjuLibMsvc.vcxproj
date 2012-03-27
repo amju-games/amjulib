@@ -196,6 +196,7 @@
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
@@ -403,6 +404,7 @@
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
     <ClInclude Include="..\..\..\Source\Main\main.h" />

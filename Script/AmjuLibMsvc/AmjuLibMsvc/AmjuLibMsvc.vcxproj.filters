@@ -699,6 +699,9 @@
     <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1318,6 +1321,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Main\nonglutmain.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
