@@ -8,7 +8,8 @@ enum GameMode
   AMJU_MODE_LOCAL,
   AMJU_MODE_NO_GAME, // non-game mode, to establish baseline
   AMJU_MODE_SINGLE,  
-  AMJU_MODE_MULTI
+  AMJU_MODE_MULTI,
+  AMJU_MODE_EDIT     // edit locations/game objects 
 };
 
 void SetGameMode(GameMode gm);
