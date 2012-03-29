@@ -1,6 +1,7 @@
 #include "GSGuiTest.h"
 #include <iostream>
 #include <AmjuGL.h>
+#include <GuiListBox.h>
 
 namespace Amju
 {
@@ -43,6 +44,15 @@ void GSGuiTest::OnActive()
   Assert(m_gui);
 
   m_gui->GetElementByName("ok-button")->SetCommand(OnOK);
+  GuiListBox* listbox = dynamic_cast<GuiListBox*>(m_gui->GetElementByName("listbox"));
+  Assert(listbox);
+  for (int i = 0; i < 10; i++)
+  {
+    GuiText* t = new GuiText;
+    t->SetText("List item " + ToString(i));
+   
+    listbox->AddItem(t);
+  }
 }
 
 bool GSGuiTest::OnCursorEvent(const CursorEvent& ce)
