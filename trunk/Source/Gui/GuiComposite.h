@@ -15,6 +15,9 @@ public:
   virtual bool Load(File*); 
   virtual GuiElement* GetElementByName(const std::string& name);
 
+  int GetNumChildren() const;
+  GuiElement* GetChild(int i);
+
 protected:
   GuiElements m_children;
 };

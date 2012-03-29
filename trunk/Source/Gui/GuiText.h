@@ -26,6 +26,8 @@ public:
  
   void SetTextSize(float textSize);
 
+  void SizeToText(); // changes size to accomodate text
+
   Font* GetFont();
 
   void SetInverse(bool inv);

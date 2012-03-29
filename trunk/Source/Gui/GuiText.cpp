@@ -27,6 +27,12 @@ GuiText::GuiText()
   m_topLine = 0;
 }
 
+void GuiText::SizeToText()
+{
+  m_size.x = GetTextWidth(m_text) * m_textSize;
+  m_size.y = 0.1f * m_textSize; // font size of 1 needs height 0.1
+}
+
 void GuiText::SetCharTime(float secs)
 {
   m_charTime = secs;
