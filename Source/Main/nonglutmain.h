@@ -95,10 +95,11 @@ int main(int argc, char **argv)
 
 
   Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
-//  Amju::AmjuGL::SetScreenRotation(10.0f);
 
 std::cout << "Just before init...\n";
   Amju::AmjuGL::Init();
+
+  //Amju::AmjuGL::SetScreenRotation(10.0f);
 
 std::cout << "Just before startup...\n";
   StartUp();
