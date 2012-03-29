@@ -113,6 +113,9 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
 
   m_objFile = StripPath(pathFile);
 
+  // TODO Bypass Res Manager so we don't cache the file, we want to reload it.
+  // Also, no path is given here so files with the same name in different dirs
+  //  won't work!!!!
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(m_objFile);
 
   // After loading, revert to original file root
