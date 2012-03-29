@@ -5,6 +5,17 @@ namespace Amju
 {
 const char* GuiComposite::NAME = "gui-comp";
 
+int GuiComposite::GetNumChildren() const
+{
+  return m_children.size();
+}
+
+GuiElement* GuiComposite::GetChild(int i)
+{
+  Assert(i < GetNumChildren());
+  return m_children[(unsigned int)i];
+}
+
 void GuiComposite::Draw()
 {
   if (!IsVisible())

@@ -19,8 +19,9 @@ void GuiMenuItem::Init(const std::string& text)
   SetDrawBg(true);
   SetJust(AMJU_JUST_LEFT);
 
-  m_size.x = GetTextWidth(m_text) * m_textSize;
-  m_size.y = 0.1f * m_textSize; // TODO TEMP TEST
+  SizeToText();
+  //m_size.x = GetTextWidth(m_text) * m_textSize;
+  //m_size.y = 0.1f * m_textSize; // TODO TEMP TEST
 }
 
 GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
