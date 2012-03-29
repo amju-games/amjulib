@@ -259,11 +259,6 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\Source\newgui.pl" />
-    <None Include="..\..\..\..\Source\newreq.pl" />
-    <None Include="..\..\..\..\Source\newstate.pl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
