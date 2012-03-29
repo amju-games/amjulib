@@ -227,6 +227,14 @@ void AmjuGL::SetPerspectiveProjection(
   impl->SetPerspectiveProjection(fov, aspectRatio, nearDist, farDist);
 }
 
+void AmjuGL::GetViewport(int* x, int* y, int* w, int* h)
+{
+  *x = viewport[0];
+  *y = viewport[1];
+  *w = viewport[2];
+  *h = viewport[3];
+}
+
 void AmjuGL::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;

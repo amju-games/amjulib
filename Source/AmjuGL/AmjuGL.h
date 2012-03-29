@@ -105,6 +105,9 @@ public:
   // Set viewport as screen coords
   static void Viewport(int x, int y, int w, int h);
 
+  // Get last viewport settings
+  static void GetViewport(int* x, int* y, int* w, int* h);
+
   // Set rotation, e.g. when rotating iPhone from landscape to portrait.
   // You will also need to adjust aspect ratio and probably the controls!!
   static void SetScreenRotation(float degs);
