@@ -50,8 +50,12 @@ arial, 0.75, left
 
 gui-list-box
 listbox
-// num children 
-0
+// pos
+-0.8, 0.0
+// size
+0.4, 0.4
+
+
 
 // element type
 gui-button
