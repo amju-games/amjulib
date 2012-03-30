@@ -26,6 +26,9 @@ public:
  
   void SetError(const std::string&);
 
+  enum Mode { AMJU_ADD_NEW, AMJU_EDIT };
+  void SetMode(Mode mode);
+
 protected:
   void RestoreLastPath();
   virtual void RequestNewId();
@@ -43,6 +46,8 @@ protected:
   std::string m_dataFilename;
   std::string m_objFile;
   std::string m_locId; // ID for the new location (unique, from server)
+
+  Mode m_mode;
 };
 
 typedef Singleton<GSNewLocation> TheGSNewLocation;

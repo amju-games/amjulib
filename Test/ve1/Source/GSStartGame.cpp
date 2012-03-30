@@ -6,6 +6,15 @@
 
 namespace Amju
 {
+int GetStartLocation()
+{
+  // TODO Query server ?
+  // For now, always start in the "hub" location ("plaza") - Location 1.
+  // TODO We should set our position to a safe start position too.
+  int loc = 1;
+  SetLocalPlayerLocation(loc);
+}
+
 GSStartGame::GSStartGame()
 {
 }
@@ -44,8 +53,7 @@ void GSStartGame::OnActive()
 
   // What is the starting location ? Do players always start at "home" location ?
   // Let's say they do always start at location 0
-  int loc = 0;
-  SetLocalPlayerLocation(loc);
+  GetStartLocation();
 }
 
 bool GSStartGame::OnCursorEvent(const CursorEvent& ce)
