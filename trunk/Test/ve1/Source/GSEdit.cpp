@@ -10,7 +10,6 @@
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include "GSNewLocation.h"
-#include "GSEditLocation.h"
 #include "GSStartMenu.h"
 #include "Portal.h" // TODO hopefully we can query GameObjectFactory
 
@@ -186,12 +185,14 @@ std::cout << "Left Mouse button event! " << (m_mouseDownLeft ? "DOWN" : "UP") <<
 
 void OnNewLocation()
 {
+  TheGSNewLocation::Instance()->SetMode(GSNewLocation::AMJU_ADD_NEW);
   TheGame::Instance()->SetCurrentState(TheGSNewLocation::Instance());
 }
 
 void OnEditLocation()
 {
-  TheGame::Instance()->SetCurrentState(TheGSEditLocation::Instance());
+  TheGSNewLocation::Instance()->SetMode(GSNewLocation::AMJU_EDIT);
+  TheGame::Instance()->SetCurrentState(TheGSNewLocation::Instance());
 }
 
 class NewObjectCommand : public GuiCommand

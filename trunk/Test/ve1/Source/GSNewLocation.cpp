@@ -87,6 +87,12 @@ GSNewLocation::GSNewLocation()
 {
   m_uploadedFiles = 0;
   m_totalFiles = 0;
+  m_mode = AMJU_ADD_NEW;
+}
+
+void GSNewLocation::SetMode(GSNewLocation::Mode mode)
+{
+  m_mode = mode;
 }
 
 void GSNewLocation::SetError(const std::string& str)
@@ -116,7 +122,9 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
   // TODO Bypass Res Manager so we don't cache the file, we want to reload it.
   // Also, no path is given here so files with the same name in different dirs
   //  won't work!!!!
-  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(m_objFile);
+  bool binary = (GetFileExt(m_objFile) == "objb");
+  ObjMesh* mesh = new ObjMesh;
+  mesh->Load(m_objFile, binary); 
 
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
@@ -159,9 +167,17 @@ std::cout << "Material: " << m->m_name << ", " << m->m_filename << " tex: " << m
 
 void GSNewLocation::RequestNewId()
 {
-  // Request a new location ID. Use this for asset file and data file.
-  std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_LOCATION_ID);
-  TheVe1ReqManager::Instance()->AddReq(new ReqNewLocId(url));
+  if (m_mode == AMJU_EDIT)
+  {
+    // No need to request a new ID. Use the current ID and go straight to the next bit.
+    OnNewIdResponse(m_locId);
+  }
+  else
+  {
+    // Request a new location ID. Use this for asset file and data file.
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_LOCATION_ID);
+    TheVe1ReqManager::Instance()->AddReq(new ReqNewLocId(url));
+  }
 }
 
 void GSNewLocation::OnNewIdResponse(const std::string& id)
@@ -295,6 +311,11 @@ static void OnCancelButton()
 void GSNewLocation::OnActive()
 {
   GSGui::OnActive();
+
+  if (m_mode == AMJU_EDIT)
+  {
+    m_locId = ToString(GetLocalPlayerLocation());
+  }
 
   m_gui = LoadGui("gui-newlocation.txt");
   Assert(m_gui);

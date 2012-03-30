@@ -11,7 +11,7 @@ class CollisionMesh;
 
 class TerrainSceneNode;
 
-// Region has a Terrain. In a tree structure for drawing, collisions. Tile based.
+// Location has a Terrain. In a tree structure for drawing, collisions. 
 // Terrain has a SceneNode, as it is drawn, but is itself a game object (allowing it to be downloadable).
 class Terrain : public Ve1Object
 {
