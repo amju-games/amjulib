@@ -6,39 +6,60 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+6
 
+
+gui-list-box
+location-list
+-0.5, 0.5
+1.0, 1.0
+
+gui-button
+location-ok
+-0.5, -0.6
+0.4, 0.1
+gui-button-4.png
+go
+arial, 1.0
+
+gui-button
+location-cancel
+0.1, -0.6
+0.4, 0.1
+gui-button-4.png
+cancel
+arial, 1.0
 
 // Element type
 gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, -0.8
+-1.0, -0.9
 // size
-2.0, 0.2
+2.0, 0.1
 // Text
 **Edit mode**
 // Font name, size
-arial, 1.0 
+arial, 1.0,bgcol=000000,fgcol=ffffff
 
 gui-text
 location_info
 // pos (coords are -1..1)
--1.0, 0.8
+-1.0, 1.0
 // size
 2.0, 0.1
 // Text
 **Location ID**
 // Font name, size
-arial, 1.0, right
+arial, 1.0, right,bgcol=000000,fgcol=ffffff
 
 // element type
 gui-button
 // Element name
 done-button
 // pos (coords are -1..1)
--1, 0.9
+-1, 1.0
 // size
 0.4, 0.1
 // Image
