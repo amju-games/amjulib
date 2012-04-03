@@ -91,12 +91,8 @@ int main(int argc, char **argv)
 #endif // AMJU_CONSOLE
 #endif // IPHONE
 
+  Amju::AmjuGL::CreateWindow(&w);  // Before Init() for all impls
 
-
-
-  Amju::AmjuGL::CreateWindow(&w); // TODO Check ret val
-
-std::cout << "Just before init...\n";
   Amju::AmjuGL::Init();
 
   //Amju::AmjuGL::SetScreenRotation(10.0f);
