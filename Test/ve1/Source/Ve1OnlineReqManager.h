@@ -11,7 +11,8 @@ enum Task
 {
   LOGIN,
 
-  GET_NEW_OBJECTS,
+  GET_NEW_OBJECTS,  // get list of new objects
+  FILE_UPDATE_CHECK, // get list of files which have been changed since last check
 
   SET_POSITION,
   GET_POSITION_UPDATES,
@@ -26,6 +27,7 @@ enum Task
   FILE_UPLOAD, // for admin game editing
   GET_NEW_LOCATION_ID, // for creating new location
   CREATE_LOCATION,
+  GET_ALL_LOCATIONS,
   GET_NEW_OBJECT_ID,  // for creating new object
 };
 

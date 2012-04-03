@@ -9,7 +9,7 @@ static int localPlayerLocation = -1;
 
 int GetLocalPlayerLocation()
 {
-  Assert(localPlayerLocation != -1);
+  Assert(localPlayerLocation > 0);
   return localPlayerLocation; 
 }
 

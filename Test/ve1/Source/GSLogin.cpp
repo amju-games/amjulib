@@ -41,7 +41,8 @@ void GSLogin::OnActive()
   m_gui = LoadGui("gui-login.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("login-button")->SetCommand(Amju::OnLoginButton);
+  GetElementByName(m_gui, "login-button")->SetCommand(Amju::OnLoginButton);
+  GetElementByName(m_gui, "email")->SetHasFocus(true);
 }
 
 void GSLogin::OnLoginButton()

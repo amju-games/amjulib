@@ -11,6 +11,7 @@ static float yRot = 0;
 static bool leftDrag = false;
 static bool rightDrag = false;
 static bool midDrag = false;
+static bool camKey = false;
 
 static Vec3f posNoTarget;
 
@@ -18,7 +19,7 @@ Camera::Camera() : m_target(0)
 {
   // Load settings
 
-  TheEventPoller::Instance()->AddListener(this);
+  TheEventPoller::Instance()->AddListener(this, -100); // High priority, right ?
 }
 
 void Camera::Update()
@@ -43,6 +44,10 @@ void Camera::Update()
 bool Camera::OnKeyEvent(const KeyEvent& kb)
 {
   // TODO Only alter camera if ALT or some other key is held down
+  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') // TODO S/b command
+  {
+    camKey = kb.keyDown;
+  }
 
   return false;
 }
@@ -56,24 +61,30 @@ bool Camera::OnCursorEvent(const CursorEvent& ce)
   oldx = ce.x;
   oldy = ce.y;
 
+  if (!camKey)
+  {
+    return false; 
+  }
+
+  bool b = false;
   if (leftDrag)
   {
     zDist -= dy * 100.0f;
-//std::cout << "Camera: zDist: " << zDist << "\n";
-
-//    return true;
+    b = true;
   }
   if (rightDrag)
   {
     yRot += dx;
+    b = true;
   }
   if (midDrag)
   {
-    posNoTarget.x += dx * 100.0f;
-    posNoTarget.y += dy * 100.0f;
+    posNoTarget.x -= dx * 100.0f;
+    posNoTarget.y -= dy * 100.0f;
+    b = true;
   }
 
-  return false;
+  return b;
 }
 
 bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
@@ -81,14 +92,26 @@ bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {
     leftDrag = mbe.isDown;
+    if (camKey)
+    {
+      return true;
+    }
   }
   else if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
   {
     rightDrag = mbe.isDown;
+    if (camKey)
+    {
+      return true;
+    }
   }
   else
   {
     midDrag = mbe.isDown;
+    if (camKey)
+    {
+      return true;
+    }
   }
 
   return false;

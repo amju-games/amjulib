@@ -176,6 +176,7 @@ void GSNewLocation::RequestNewId()
   {
     // Request a new location ID. Use this for asset file and data file.
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_LOCATION_ID);
+    url += "&name=nameTODO";
     TheVe1ReqManager::Instance()->AddReq(new ReqNewLocId(url));
   }
 }

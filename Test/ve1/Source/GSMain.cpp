@@ -248,7 +248,7 @@ std::cout << "Ground clicked...\n";
       {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-        int location = 0; // TODO It's the current location, unless we hit a portal.
+        int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
          // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
          // Maybe don't send location, but send it as a separate kind of request ?
 
