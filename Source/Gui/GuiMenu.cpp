@@ -127,7 +127,8 @@ void GuiMenu::Draw()
     GuiElement* item = m_items[i];
 
     // Highlight selected item
-    ((GuiText*)item)->SetInverse(isSel); // TODO what if Items are not Text ?
+////    ((GuiText*)item)->SetInverse(isSel); // TODO what if Items are not Text ?
+    item->SetSelected(isSel);
 
     Vec2f size = item->GetSize();
     if (m_isVertical)

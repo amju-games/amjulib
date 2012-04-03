@@ -89,17 +89,18 @@ void GuiText::Draw()
 
   PushColour();
 
+  bool inverse = (m_inverse || IsSelected());
   if (m_drawBg)
   {
     // TODO Mult colour ?
-    AmjuGL::SetColour(m_inverse ? m_fgCol : m_bgCol);
+    AmjuGL::SetColour(inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     Rect r = GetRect(this);
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
     // Set text colour to contrast with BG, but only if BG is drawn
-    AmjuGL::SetColour(m_inverse ? m_bgCol: m_fgCol);
+    AmjuGL::SetColour(inverse ? m_bgCol: m_fgCol);
   }
 
   float oldSize = font->GetSize();

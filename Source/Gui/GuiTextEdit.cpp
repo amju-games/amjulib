@@ -1,6 +1,7 @@
 #include "GuiTextEdit.h"
 #include <EventPoller.h>
 #include <Timer.h>
+#include <DrawRect.h>
 
 namespace Amju
 {
@@ -46,6 +47,25 @@ void GuiTextEdit::Draw()
     m_text = m_myText;
   }
 
+  if (HasFocus())
+  {
+    // Draw border
+    // TODO Could be image - allow flexible way to give GUIs themes
+    AmjuGL::SetColour(m_bgCol); //inverse ? m_fgCol : m_bgCol);
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+
+    Rect r = GetRect(this);
+    const float BORDER = 0.01f;
+    float xmin = r.GetMin(0) - BORDER;
+    float xmax = r.GetMax(0) + BORDER;
+    float ymin = r.GetMin(1) - BORDER;
+    float ymax = r.GetMax(1) + BORDER;
+    r.Set(xmin, xmax, ymin, ymax);
+    
+    DrawSolidRect(r);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  }
+
   GuiText::Draw();
 }
 
@@ -84,6 +104,11 @@ void GuiTextEdit::Insert(char c)
 
 bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
 {
+  if (!HasFocus())
+  {
+    return false;
+  }
+
   if (!ke.keyDown)
   {
     return true;

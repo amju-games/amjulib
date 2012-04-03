@@ -10,6 +10,11 @@ int GuiComposite::GetNumChildren() const
   return m_children.size();
 }
 
+void GuiComposite::Clear()
+{
+  m_children.clear();
+}
+
 GuiElement* GuiComposite::GetChild(int i)
 {
   Assert(i < GetNumChildren());
@@ -73,6 +78,11 @@ bool GuiComposite::Load(File* f)
       return false;
     }
     PGuiElement e = TheGuiFactory::Instance()->Create(s);
+    if (!e)
+    {
+      f->ReportError("Failed to create GUI element of type " + s);
+      return false;
+    }
     Assert(e);
     if (!e->Load(f))
     {

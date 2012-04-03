@@ -15,10 +15,22 @@ Rect GetRect(GuiElement* elem)
     elem->GetPos().y);
 }
 
+GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName)
+{
+  GuiElement* elem = root->GetElementByName(nodeName);
+  if (!elem)
+  {
+std::cout << "Unexpected: no node named \"" << nodeName << "\" in GUI tree with root \"" << root->GetName() << "\"\n";
+  }
+  return elem;
+}
+
 GuiElement::GuiElement()
 {
   m_parent = 0;
   m_isVisible = true;
+  m_isSelected = false;
+  m_hasFocus = false;
   m_commandFunc = 0;
 }
 

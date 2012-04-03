@@ -17,6 +17,7 @@ public:
 
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
+  void Clear();
 
 protected:
   GuiElements m_children;
