@@ -2,6 +2,7 @@
 #include <EventPoller.h>
 #include <AmjuGL.h>
 #include <Screen.h>
+#include <DrawRect.h>
 
 namespace Amju
 {
@@ -17,10 +18,23 @@ GuiListBox::GuiListBox()
 
 void GuiListBox::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
+  // Draw bg - TODO just the parts not covered by child items
+  PushColour();
+  AmjuGL::SetColour(0, 0, 1, 1);
+  Rect r = GetRect(this);
+  DrawSolidRect(r);
+  PopColour();
+
   int vp[4];
   AmjuGL::GetViewport(&vp[0], &vp[1], &vp[2], &vp[3]);
 
   SetViewportN(m_pos.x, m_pos.y -  m_size.y, m_size.x, m_size.y);
+
   // LB should fill whole viewport
   AmjuGL::PushMatrix();
   AmjuGL::Translate(m_pos.x * -2.0f / m_size.x - 1.0f, 1.0f - m_pos.y * 2.0f / m_size.y, 0);
@@ -35,7 +49,8 @@ void GuiListBox::SetSelected(int child, bool selected)
 {
   Assert(child < GetNumChildren());
 
-  ((GuiText*)GetChild(child))->SetInverse(selected); // TODO what if Items are not Text ?
+////  ((GuiText*)GetChild(child))->SetInverse(selected); // TODO what if Items are not Text ?
+  GetChild(child)->SetSelected(selected);
 
   if (selected)
   {
@@ -65,6 +80,7 @@ void GuiListBox::AddItem(GuiText* text)
 
   Vec2f pos = GetPos();
   // NB subtract => go down the screen
+  // TODO This should be accumulated height
   pos.y -= 0.1f * (float)m_children.size(); // TODO
   text->SetPos(pos);
 

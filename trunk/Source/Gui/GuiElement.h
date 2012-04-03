@@ -25,6 +25,14 @@ public:
 
   virtual GuiElement* GetElementByName(const std::string& name);
 
+  // Selected items should look different to non-selected.
+  void SetSelected(bool sel) { m_isSelected = sel; }
+  bool IsSelected() const { return m_isSelected; }
+
+  // Item with focus responds to keyboard events etc.
+  void SetHasFocus(bool f) { m_hasFocus = f; }
+  bool HasFocus() const { return m_hasFocus; } 
+
   // Set command as an object for Undo, or a function for simple, 
   //  non-undoable action
   void SetCommand(PGuiCommand pCommand);
@@ -60,6 +68,8 @@ protected:
   Vec2f m_size;
   std::string m_name;
   bool m_isVisible; // TODO Use flags if more 
+  bool m_isSelected;
+  bool m_hasFocus;
 
   // Only one of these is activated
   PGuiCommand m_pCommand;
@@ -75,6 +85,9 @@ PGuiElement LoadGui(const std::string& filename);
 
 // Convenience function - get rectangle from pos and size of element
 Rect GetRect(GuiElement*);
+
+// Prefer this function, as it can alert when no such element exists
+GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName);
 }
 
 #endif
