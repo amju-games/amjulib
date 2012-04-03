@@ -162,7 +162,7 @@ void Player::OnLocationEntry()
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
 
-std::cout << "Adding scene node to SceneGraph for player\n";
+//std::cout << "Adding scene node to SceneGraph for player\n";
 
   root->AddChild(m_sceneNode.GetPtr());
   root->AddChild(m_arrow.GetPtr());
@@ -201,14 +201,14 @@ void Player::Set(const std::string& key, const std::string& val)
 
 void Player::SetArrowVis(bool visible)
 {
-std::cout << "Setting arrow vis to " << (visible ? "true" : "false") << "\n";
+//std::cout << "Setting arrow vis to " << (visible ? "true" : "false") << "\n";
 
   m_arrow->SetVisible(visible);
 }
 
 void Player::SetArrowPos(const Vec3f& newpos)
 {
-std::cout << " Setting arrow pos to " << newpos << "\n";
+//std::cout << " Setting arrow pos to " << newpos << "\n";
 
   Matrix m;
   m.Translate(newpos);
@@ -295,7 +295,8 @@ void Player::Update()
 
   // Get height for (x, z);
   float y = 0;
-  if (GetTerrain()->GetCollisionMesh()->GetY(Vec2f(m_pos.x, m_pos.z), &y))
+  // Get closest Y value to current, not the highest or lowest
+  if (GetTerrain()->GetCollisionMesh()->GetClosestY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y))
   {
     m_pos.y = y;
   }

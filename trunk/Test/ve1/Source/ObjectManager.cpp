@@ -14,8 +14,10 @@
 #include "GSNetError.h"
 #include <SAP.h>
 #include "Ve1SceneGraph.h"
+#include "GSFileUpdateCheck.h"
 #include "GSWaitForNewLocation.h"
 #include "Terrain.h"
+#include "ObjectUpdater.h"
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
@@ -228,7 +230,15 @@ std::cout << "Failed to open asset list file " << m_name << "\n";
 std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
 #endif
 
-    TheObjectManager::Instance()->GetFile(s);
+    if (TheObjectManager::Instance()->GetFile(s))
+    {
+std::cout << " GetFile returned true\n";
+    }
+    else
+    {
+std::cout << " GetFile returned false\n";
+Assert(0);
+    }
   }
 
   return true;
@@ -414,6 +424,9 @@ void ObjectManager::Update()
         if (assetlist->AllAssetsLoaded())
         {
           obj->Create();
+          // Hint to get pos/state for this object
+          TheObjectUpdater::Instance()->HintCheckForUpdates();
+          TheObjectUpdater::Instance()->HintCheckForPosUpdates();
         }
       }
     }
@@ -424,7 +437,6 @@ void ObjectManager::Update()
       assetlist->Update();
     }
   }
-
 
   static const float OBJECT_CHECK_PERIOD = 3.0f; // seconds, TODO CONFIG
 
@@ -492,7 +504,8 @@ std::cout << "In ObjectManager::SetLocalPlayerLocation...\n";
   if (m_location == newLocation)
   {
 std::cout << "Er, setting location to current value!\n";
-    return;
+    // TODO Commenting this out doesn't fix problem :-(
+    ////return;
   }
 
   m_location = newLocation;
@@ -533,7 +546,9 @@ std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << "
   }
 
   // Change to waiting state: some objects required for this new location might not exist yet
- TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
+  // First though, check if any files have been updated.
+  TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+  // was: GSWaitForNewLocation::Instance());
 }
 
 PGameObject ObjectManager::GetGameObject(int id)

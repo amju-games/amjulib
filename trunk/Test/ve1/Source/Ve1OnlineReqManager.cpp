@@ -102,8 +102,16 @@ std::string Ve1ReqManager::MakeUrl(Task t)
     s += "newlocation_row.pl";
     break;
 
+  case GET_ALL_LOCATIONS:
+    s += "getlocations.pl";
+    break;
+
   case GET_NEW_OBJECT_ID:
     s += "newobject_id.pl";
+    break;
+
+  case FILE_UPDATE_CHECK:
+    s += "getupdatedfiles.pl";
     break;
   }
 

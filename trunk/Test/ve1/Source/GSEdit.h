@@ -2,6 +2,8 @@
 #define GS_EDIT_H_INCLUDED
 
 #include <set>
+#include <string>
+#include <vector>
 #include <GuiElement.h>
 #include <GuiMenu.h>
 #include "GSBase.h"
@@ -9,6 +11,17 @@
 
 namespace Amju
 {
+// Location type, representing one Location on server
+struct Loc
+{
+  Loc(int id, const std::string& name) : m_id(id), m_name(name) { } 
+
+  int m_id;
+  std::string m_name;
+};
+typedef std::vector<Loc> Locs;
+
+
 class GSEdit : public GSBase
 {
 private:
@@ -26,6 +39,15 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnKeyEvent(const KeyEvent&);
 
+  // Called when server responds with new object ID
+  void OnNewObjectId(int id);
+
+  // Set list of locations - called when we get response from server
+  void SetLocs(const Locs& locs);
+  void ChooseLocation();
+  void ShowLocationList(bool);
+  void GoToSelectedLocation();
+
 private:
   int GetUniqueId();
   void OnNextLocation();
@@ -40,6 +62,15 @@ private:
   bool m_mouseDownRight;
   Vec2f m_mouseScreen;
   int m_location; 
+  bool m_isPicking;
+  int m_newObjectId;
+  // Vectors for dragging
+  Vec3f m_right;
+  Vec3f m_up;
+  bool m_getDragVec; // if true get new values for m_up and m_right
+
+  // All locations, so we can jump from one to another
+  Locs m_locs;
 };
 
 typedef Singleton<GSEdit> TheGSEdit;

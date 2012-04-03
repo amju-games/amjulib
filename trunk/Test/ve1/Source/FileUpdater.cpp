@@ -1,0 +1,75 @@
+#include "FileUpdater.h"
+#include <iostream>
+#include <SafeUtils.h>
+#include "Timestamp.h"
+#include "MsgManager.h"
+#include "LocalPlayer.h"
+#include <StringUtils.h>
+#include "GSNetError.h"
+#include "GSFileUpdateCheck.h"
+
+#define XML_DEBUG
+
+namespace Amju
+{
+FileUpdater::FileUpdater(const std::string& url) : Ve1Req(url, "file-update")
+{
+}
+
+void FileUpdater::OnSuccess()
+{
+  PXml p = m_xml.getChildNode(1);
+  if (SafeStrCmp(p.getName(), "files"))
+  {
+#ifdef XML_DEBUG
+std::cout << "Found files element\n";
+#endif
+
+    // Get children - each child is of form <file>$filename</file>. Delete each file(!)
+    int num = p.nChildNode();
+std::cout << num << "children\n";
+    for (int i = 0; i < num; i++)
+    {
+      PXml child = p.getChildNode(i);
+      if (!SafeStrCmp(child.getName(), "file"))
+      {
+std::cout << "Got 'files' but no 'file' child\n";
+        OnFailure();
+      }
+      std::string f = child.getText();
+std::cout << "DELETE THIS FILE: " << f << "\n";
+
+      // TODO and tell ObjectManager/ObjectUpdater to remove info about this file from their caches!
+
+    } 
+    // Done - now prod ObjectManager to get new files
+std::cout << "Have finished deleting updated files, now need to download new versions!\n";
+
+    TheGSFileUpdateCheck::Instance()->OnFinishedChecking();
+  }
+  else
+  {
+    OnFailure();
+  }
+
+}
+
+void FileUpdater::OnFailure()
+{
+std::cout << "FAILED to get updated file list from server.\n";
+  const HttpResult& res = GetResult();
+
+std::cout << "RESULT: " << res.GetString() << "\n";
+
+std::cout << "ERROR: " << res.GetErrorString() << "\n";
+
+std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
+
+std::cout << "URL was: \"" << m_url << "\"\n";
+
+  TheGSFileUpdateCheck::Instance()->OnFinishedChecking();
+}
+
+}
+
+

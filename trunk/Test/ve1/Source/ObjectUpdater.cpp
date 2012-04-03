@@ -356,6 +356,7 @@ public:
 
   virtual void OnSuccess()
   {
+    // We have successfully updated the server. 
     TheObjectUpdater::Instance()->HintCheckForUpdates();   
   }
 };

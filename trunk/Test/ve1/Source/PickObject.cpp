@@ -1,3 +1,4 @@
+#include <iostream>
 #include "PickObject.h"
 #include <GameObject.h>
 #include <Game.h>
@@ -26,12 +27,15 @@ GameObject* PickObject(const Vec2f& mouseScreen)
     AABB* aabb = pgo->GetAABB();
     if (aabb && Clip(lineSeg, *aabb, 0))
     {
+std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
+
       // Line seg intersects this box
       // Choose object whose centre (position) is closest to line seg..?
       float dist = LineSeg(mouseWorldNear, mouseWorldFar).SqDist(pgo->GetPos());
       //float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
       if (dist < bestDist)
       {
+std::cout << " Obj " << pgo->GetId() << " AND IS CLOSEST!\n";
         bestDist = dist;
         selectedObj = pgo;
       }

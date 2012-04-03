@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-int GetStartLocation()
+void SetStartLocation()
 {
   // TODO Query server ?
   // For now, always start in the "hub" location ("plaza") - Location 1.
@@ -51,9 +51,7 @@ void GSStartGame::OnActive()
   // Clear scene graph and initialise empty root node
   //ClearVe1SceneGraph();
 
-  // What is the starting location ? Do players always start at "home" location ?
-  // Let's say they do always start at location 0
-  GetStartLocation();
+  SetStartLocation();
 }
 
 bool GSStartGame::OnCursorEvent(const CursorEvent& ce)

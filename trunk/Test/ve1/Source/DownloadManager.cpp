@@ -1,3 +1,4 @@
+#include <iostream>
 #include "DownloadManager.h"
 #include <DownloadReq.h>
 #include <Directory.h>
@@ -29,20 +30,25 @@ private:
 
 bool DownloadManager::GetFile(const std::string& filename)
 {
+std::cout << "GetFile: " << filename << "\n";
+
   State s = m_map[filename];
   switch (s)
   {
   case AMJU_DL_FAILED:
+std::cout << " - DL Failed, so no!??\n";
     return false;
 
   case AMJU_DL_UNKNOWN:
     if (FileExists(File::GetRoot() + filename))
     {
+std::cout << " - File exists.\n";
       m_map[filename] = AMJU_DL_LOCAL;
       return true;
     }
     else
     {
+std::cout << " - File not local, downloading...\n";
       OnlineReq* filedownloadreq = new FileDownloadReq(
         this, filename, TheVe1ReqManager::Instance()->MakeDownloadUrl(filename));
 
@@ -54,6 +60,7 @@ bool DownloadManager::GetFile(const std::string& filename)
       }
       else
       {
+std::cout << " - File not local, download failed (too many requests ?)\n";
         m_map[filename] = AMJU_DL_FAILED;
         Assert(0);
         return false;
@@ -61,9 +68,11 @@ bool DownloadManager::GetFile(const std::string& filename)
     }
 
   case AMJU_DL_LOCAL:
+std::cout << " - Should be local.\n";
     return true;
 
   case AMJU_DL_DOWNLOADING:
+std::cout << " - is still downloading.\n";
     return true;
 
   }
