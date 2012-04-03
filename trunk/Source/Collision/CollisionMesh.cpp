@@ -155,6 +155,38 @@ bool CollisionMesh::GetY(const Vec2f& v, float* pY) const
   return false;
 }
 
+bool CollisionMesh::GetClosestY(const Vec2f& v, float y, float* pClosestY) const
+{
+  float bestDist = 99999.9f;
+  float bestY = y;
+  bool ok = false;
+  for (Tris::const_iterator it = m_tris.begin(); it != m_tris.end(); ++it)
+  {
+    const Tri& t = *it;
+    if (PointXZInTri(t, v.x, v.y))
+    {
+      Plane p(t);
+      // Is tri facing upwards ?
+      if (p.B() > 0.1f) // ?
+      {
+        ok = true;
+        // Plane eq: Ax + By + Cz = D
+        // =>        y = (Ax + Cz + D) / -B;
+        float thisY = (p.A() * v.x + p.C() * v.y - p.D()) / -p.B();
+        float dist = fabs(thisY - y);
+        if (dist < bestDist)
+        {
+          bestDist = dist;
+          bestY = thisY;
+        } 
+      }
+    }
+  }
+  *pClosestY = bestY;
+  return ok;
+}
+
+
 void CollisionMesh::Transform(const Matrix& m)
 {
   for (Tris::iterator it = m_tris.begin(); it != m_tris.end(); ++it)

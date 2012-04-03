@@ -31,8 +31,11 @@ public:
   // Populates vector with intersecting tris. 
   bool Intersects(const Capsule& capsule, Tris* tris) const;
 
-  // Get height on mesh for (x, z), nearest to given y.
+  // Get a height on mesh for (x, z) -- just the first we find.
   bool GetY(const Vec2f& v, float* pY) const;
+
+  // Get height on mesh for (x, z), nearest to given y.
+  bool GetClosestY(const Vec2f& v, float y, float* pClosestY) const;
 
   // Get all the triangles in the mesh which intersect the given AABB.
   void GetAllTrisInBox(const AABB& aabb, Tris* pTris) const;
