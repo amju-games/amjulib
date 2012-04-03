@@ -23,8 +23,10 @@ sub newid()
     return;
   }
 
+  my $name = param('name');
+
   # No object ID yet, and early timestamp, so we don't recognise it as new until we populate it.
-  my $sql = "insert into location (obj_id, whenchanged) values (-1, 1) on duplicate key update id=id+1";
+  my $sql = "insert into location (obj_id, whenchanged, name) values (-1, 1, $name) on duplicate key update id=id+1";
 
 #  print "Query: $sql\n\n";
 

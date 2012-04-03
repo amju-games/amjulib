@@ -170,6 +170,7 @@ CREATE TABLE `location`
 (`id` INT NOT NULL AUTO_INCREMENT,
 `obj_id` INT NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
+`name` VARCHAR(50),
 PRIMARY KEY (`id`),
 FOREIGN KEY (`obj_id`) REFERENCES object(`id`),
 INDEX (`whenchanged`)
