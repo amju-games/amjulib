@@ -225,7 +225,7 @@ bool FileContentToUrl(const std::string& filename, std::string* result)
 {
   if (!FileExists(filename))
   {
-#ifdef _DEBUG
+#ifdef FC_DEBUG
 std::cout << "FileContentToUrl: Apparently there is no file '"
   << filename.c_str() << "'\n";
 #endif
@@ -235,14 +235,14 @@ std::cout << "FileContentToUrl: Apparently there is no file '"
   File file(false, File::STD);
   if (!file.OpenRead(filename, true, false))
   {
-#ifdef _DEBUG
+#ifdef FC_DEBUG
 std::cout << "FileContentToUrl: failed to open file '"
   << filename.c_str() << "'\n";
 #endif
     return false;
   }
 
-#ifdef _DEBUG
+#ifdef FC_DEBUG
 std::cout << "FileContentToUrl: Opened file '" << filename.c_str() << "'...\n";
 #endif
 
@@ -256,7 +256,7 @@ std::cout << "FileContentToUrl: Opened file '" << filename.c_str() << "'...\n";
     unsigned int bytesRead = file.GetBinary(BUF_SIZE, data);
     total += bytesRead;
 
-#ifdef _DEBUG
+#ifdef FC_DEBUG
 std::cout << "FileContentToUrl:  ..read " << bytesRead << " bytes, total: "
   << total << "\n";
 #endif
@@ -268,7 +268,7 @@ std::cout << "FileContentToUrl:  ..read " << bytesRead << " bytes, total: "
     }
   }
 
-#ifdef _DEBUG
+#ifdef FC_DEBUG
 std::cout << "FileContentToUrl:  success!\n";
 #endif
   return true;
