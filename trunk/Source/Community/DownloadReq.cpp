@@ -44,11 +44,13 @@ std::cout << "Download req: HTTP response too short for " << m_filename << "\n";
     // Check HTTP response code
     while (i < size && s[i] != '\r') i++;
     std::string firstline(s, s + i);
-std::cout << "First line: \"" << firstline << "\"\n";
     if (!StringContains(firstline, "200"))
     {
+#ifdef DOWNLOAD_REQ_DEBUG
+std::cout << "First line: \"" << firstline << "\"\n";
 std::cout << " - I don't see 200, response not OK for " << m_filename << " \n";
 std::cout << "  Request was: " << m_url << "\n";
+#endif
       // TODO LOG bad response
       OnDownloadFailed();
       return; 
