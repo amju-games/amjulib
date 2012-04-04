@@ -11,6 +11,7 @@
 #include "GSEdit.h"
 #include "Ve1OnlineReqManager.h"
 #include "LocalPlayer.h"
+#include "SaveConfig.h"
 
 namespace Amju
 {
@@ -140,6 +141,7 @@ std::cout << "Loaded obj file ok!!\n";
   // Remember this path
   static GameConfigFile* config = TheGameConfigFile::Instance();
   config->Set(LOCATION_PATH_KEY, pathFile);
+  SaveConfig();
 
   // Make list of .mtl files and textures to upload.
   m_strs.clear(); 
@@ -278,16 +280,23 @@ std::cout << " ...num files uploaded now: " << m_uploadedFiles << "\n";
 
   if (m_uploadedFiles == m_totalFiles)
   {
-    SetError("Finished uploading, creating new location on server...");
+    if (m_mode == AMJU_EDIT)
+    {
+std::cout << "All uploaded, we are done here!\n";
+      OnLocationCreated();
+    }
+    else
+    {
+      SetError("Finished uploading, creating new location on server...");
   
-    std::string dir = "Loc_" + m_locId; // TODO comon func
+      std::string dir = "Loc_" + m_locId; // TODO comon func
 
-    // Send req to make new Location game object.
-    std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
-    url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
-    url = ToUrlFormat(url);
-
-    TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
+      // Send req to make new Location game object.
+      std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
+      url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
+      url = ToUrlFormat(url);
+      TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
+    }
   }
   else 
   {
@@ -321,8 +330,11 @@ void GSNewLocation::OnActive()
   m_gui = LoadGui("gui-newlocation.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("ok-button")->SetCommand(OnOKNew);
-  m_gui->GetElementByName("cancel-button")->SetCommand(OnCancelButton);
+  GetElementByName(m_gui, "ok-button")->SetCommand(OnOKNew);
+  GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancelButton);
+  // Text edit control needs focus to accept kb input
+  GetElementByName(m_gui, "obj_file")->SetHasFocus(true);
+
   // TODO "test" and "commit" buttons
 
   // Get last path, set path/file browser to it
