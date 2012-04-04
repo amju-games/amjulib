@@ -1,6 +1,7 @@
 #include "FileUpdater.h"
 #include <iostream>
 #include <SafeUtils.h>
+#include <Directory.h>
 #include "Timestamp.h"
 #include "MsgManager.h"
 #include "LocalPlayer.h"
@@ -37,8 +38,17 @@ std::cout << "Got 'files' but no 'file' child\n";
         OnFailure();
       }
       std::string f = child.getText();
-std::cout << "DELETE THIS FILE: " << f << "\n";
+      std::string full = File::GetRoot() + f;
 
+std::cout << "DELETE THIS FILE: \"" << full << "\"\n";
+      if (AmjuDeleteFile(full))
+      {
+std::cout << " -- succeeded!\n";
+      }
+      else
+      {
+std::cout << " -- failed!\n"; 
+      }
       // TODO and tell ObjectManager/ObjectUpdater to remove info about this file from their caches!
 
     } 
