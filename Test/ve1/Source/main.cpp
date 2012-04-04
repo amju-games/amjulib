@@ -24,10 +24,13 @@
 #include <ConfigFile.h>
 #include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
+#include "SaveConfig.h"
 
 namespace Amju
 {
-static const char* APP_NAME = "ve1";
+static const char* APP_NAME = "ve1"; // default name for App data dir
+
+static const char* APP_NAME_CONFIG_KEY = "appname";
 
 void ReportError(const std::string& str)
 {
@@ -39,10 +42,16 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
-  File::SetRoot(GetSaveDir(APP_NAME) + "/Data/", "/");
-  
-  TheGameConfigFile::Instance()->Load("game.cfg");
+  LoadConfig();
 
+  std::string appname = APP_NAME;
+  if (TheGameConfigFile::Instance()->Exists(APP_NAME_CONFIG_KEY))
+  {
+    appname = TheGameConfigFile::Instance()->GetValue(APP_NAME_CONFIG_KEY);
+  }
+  // TODO Get SaveDir from config or workding dir of executable
+  File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
+  
   // TODO Need to set SAP collide func
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
