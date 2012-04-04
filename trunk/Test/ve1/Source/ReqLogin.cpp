@@ -14,6 +14,7 @@
 #include "GSTitle.h"
 #include "LocalPlayer.h"
 #include "GSChoosePlayer.h"
+#include "GSFileUpdateCheck.h"
 
 namespace Amju
 {
@@ -112,8 +113,10 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
     //TheGSAvatarMod::Instance()->SetPrevState(TheGSChoosePlayer::Instance());
     //TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
 
-    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-
+    // Logged in: check for updated files before starting game.
+    //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+    // TODO TheGSFileUpdateCheck::Instance()->SetNext(TheGSStartGame::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
   }
   else
   {
