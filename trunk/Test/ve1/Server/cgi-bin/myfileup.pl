@@ -54,7 +54,7 @@ sub myfileup_impl()
   {
     # Only need to connect to DB in this case -- assume connected ?
     my_connect2();
-    my $sql = "insert into fileupdate (filename, whenchanged) values ('$filename', now()) on duplicate key update whenchanged=now()";
+    my $sql = "insert into fileupdate (filename, whenchanged) values ('$directory/$filename', now()) on duplicate key update whenchanged=now()";
     update_or_insert($sql);
     # Disconnect ASAP, to avoid running out of connections
     disconnect();
