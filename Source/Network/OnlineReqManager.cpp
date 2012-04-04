@@ -35,10 +35,8 @@ Added OnlineReqManager to repository
 
 */
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "AmjuFirst.h"
+#include <set>
 #include <iostream>
 #include "OnlineReqManager.h"
 #include "AmjuFinal.h"
@@ -87,6 +85,9 @@ void OnlineReqManager::Update()
 
   OnlineReqs reqs(m_reqs);
   OnlineReqs::iterator it;
+
+  std::set<OnlineReq*> canDelete; // list requests we have handled
+
   for (it = reqs.begin(); it != reqs.end(); ++it)
   {
 #ifdef DEBUG_ONLINE_UPDATE
@@ -100,21 +101,25 @@ else
 }
 #endif
 
-    if ((*it)->IsFinished())
+    OnlineReq* req = *it;
+    if (req->IsFinished())
     {
 #ifdef DEBUG_ONLINE
 std::cout << "OnlineReq: " << (*it)->GetName() << " has finished, calling HandleResult..\n";
 #endif
-      (*it)->HandleResult();
+      req->HandleResult();
+      canDelete.insert(req);
     }
   }
 
-  // Iterate over m_reqs deleting any reqs which have had HandleResult()
-  // called by the above loop. This will work because although we copied the
-  // vector, the elements are SharedPtrs.
+  // Now we can get rid of handled requests.
+  // NB This had a race condition, as a request could be added by a call to
+  //  HandleResult() above. If this request Finished, it would be erased without
+  //  handling it.
   for (it = m_reqs.begin(); it != m_reqs.end();   )
   {
-    if ((*it)->IsFinished())
+    OnlineReq* req = *it;
+    if (canDelete.count(req))
     {
       it = m_reqs.erase(it);
     }
