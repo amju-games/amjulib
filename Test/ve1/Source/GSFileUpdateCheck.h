@@ -28,7 +28,6 @@ public:
 
 private:
   std::string m_timestamp;
-  GameState* m_next;
 };
 typedef Singleton<GSFileUpdateCheck> TheGSFileUpdateCheck;
 } // namespace

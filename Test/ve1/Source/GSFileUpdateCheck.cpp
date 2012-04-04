@@ -4,6 +4,7 @@
 #include <ConfigFile.h>
 #include "GSWaitForNewLocation.h"
 #include "FileUpdater.h"
+#include "GSStartGame.h"
 
 namespace Amju
 {
@@ -21,7 +22,7 @@ GSFileUpdateCheck::GSFileUpdateCheck()
   {
     m_timestamp = "1";
   }
-  m_next = TheGSWaitForNewLocation::Instance();
+//  m_next = TheGSWaitForNewLocation::Instance();
 }
 
 void GSFileUpdateCheck::Update()
@@ -31,7 +32,7 @@ void GSFileUpdateCheck::Update()
 
 void GSFileUpdateCheck::OnFinishedChecking()
 {
-  TheGame::Instance()->SetCurrentState(m_next);
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
 void GSFileUpdateCheck::OnSkip()
