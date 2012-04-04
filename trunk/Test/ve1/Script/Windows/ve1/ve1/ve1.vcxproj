@@ -148,6 +148,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
@@ -155,6 +156,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEdit.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
@@ -179,10 +181,12 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\Portal.cpp" />
     <ClCompile Include="..\..\..\..\Source\Postbox.cpp" />
     <ClCompile Include="..\..\..\..\Source\PosUpdate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ProtoObject.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqGetNewMsgs.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
@@ -201,6 +205,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
+    <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
@@ -208,6 +213,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSEdit.h" />
     <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
@@ -231,10 +237,12 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\Portal.h" />
     <ClInclude Include="..\..\..\..\Source\Postbox.h" />
     <ClInclude Include="..\..\..\..\Source\PosUpdate.h" />
+    <ClInclude Include="..\..\..\..\Source\ProtoObject.h" />
     <ClInclude Include="..\..\..\..\Source\ReqGetNewMsgs.h" />
     <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
