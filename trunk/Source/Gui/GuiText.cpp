@@ -5,7 +5,7 @@
 #include <StringUtils.h>
 #include <Timer.h>
 
-#define TEXT_RECT_DEBUG
+//#define TEXT_RECT_DEBUG
 
 namespace Amju
 {
