@@ -6,6 +6,25 @@
 
 namespace Amju
 {
+static GuiElement* focusElement = 0;
+
+void GuiElement::SetHasFocus(bool f)
+{
+  if (f)
+  {
+    focusElement = this;
+  }
+  else
+  {
+    focusElement = 0;
+  }
+}
+
+bool GuiElement::HasFocus() const
+{
+  return (focusElement == this);
+}
+
 Rect GetRect(GuiElement* elem)
 {
   return Rect(
@@ -30,7 +49,6 @@ GuiElement::GuiElement()
   m_parent = 0;
   m_isVisible = true;
   m_isSelected = false;
-  m_hasFocus = false;
   m_commandFunc = 0;
 }
 
