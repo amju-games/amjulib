@@ -21,6 +21,11 @@ GuiElement* GuiComposite::GetChild(int i)
   return m_children[(unsigned int)i];
 }
 
+void GuiComposite::AddChild(GuiElement* elem)
+{
+  m_children.push_back(elem);
+}
+
 void GuiComposite::Draw()
 {
   if (!IsVisible())
@@ -61,7 +66,12 @@ bool GuiComposite::Load(File* f)
     Assert(0);
     return false;
   }
+  // No pos and size, so not using base class impl
+  return LoadChildren(f);
+}
 
+bool GuiComposite::LoadChildren(File* f)
+{
   int num = 0;
   if (!f->GetInteger(&num))
   {

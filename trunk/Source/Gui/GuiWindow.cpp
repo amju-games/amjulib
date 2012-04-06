@@ -1,11 +1,31 @@
 #include "GuiWindow.h"
 #include <AmjuGL.h>
 #include <Screen.h>
+#include <DrawRect.h>
 
 namespace Amju
 {
+const char* GuiWindow::NAME = "gui-window";
+
+bool GuiWindow::Load(File* f)
+{
+  // Load name, pos, size
+  if (!GuiElement::Load(f))
+  {
+    return false;
+  }
+  return LoadChildren(f);
+}
+
 void GuiWindow::Draw()
 {
+#ifdef WINDOW_DEBUG
+  Rect r = GetRect(this);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  DrawRect(r);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+#endif
+
   int vp[4];
   AmjuGL::GetViewport(&vp[0], &vp[1], &vp[2], &vp[3]);
 

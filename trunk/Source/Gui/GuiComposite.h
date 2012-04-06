@@ -17,9 +17,12 @@ public:
 
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
+  void AddChild(GuiElement*);
   void Clear();
 
 protected:
+  bool LoadChildren(File*);
+
   GuiElements m_children;
 };
 }
