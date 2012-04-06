@@ -9,7 +9,10 @@ namespace Amju
 class GuiWindow : public GuiComposite
 {
 public:
+  static const char* NAME;
+
   virtual void Draw();
+  virtual bool Load(File*); 
 
 protected:
 };

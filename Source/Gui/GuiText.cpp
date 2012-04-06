@@ -60,6 +60,16 @@ void GuiText::SetDrawBg(bool drawBg)
   m_drawBg = drawBg;
 }
 
+void GuiText::SetFgCol(const Colour& col)
+{
+  m_fgCol = col;
+}
+
+void GuiText::SetBgCol(const Colour& col)
+{
+  m_bgCol = col;
+}
+
 Font* GuiText::GetFont()
 {
   if (!m_font)
@@ -87,20 +97,20 @@ void GuiText::Draw()
 
   Font* font = GetFont();
 
-  PushColour();
-
   bool inverse = (m_inverse || IsSelected());
   if (m_drawBg)
   {
-    // TODO Mult colour ?
-    AmjuGL::SetColour(inverse ? m_fgCol : m_bgCol);
+    PushColour();
+    MultColour(inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     Rect r = GetRect(this);
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+    PopColour();
 
+    PushColour();
     // Set text colour to contrast with BG, but only if BG is drawn
-    AmjuGL::SetColour(inverse ? m_bgCol: m_fgCol);
+    MultColour(inverse ? m_bgCol: m_fgCol);
   }
 
   float oldSize = font->GetSize();
@@ -116,7 +126,11 @@ void GuiText::Draw()
   }
 
   font->SetSize(oldSize);
-  PopColour();
+
+  if (m_drawBg)
+  {
+    PopColour();
+  }
 }
 
 void GuiText::DrawMultiLine()
