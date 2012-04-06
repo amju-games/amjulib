@@ -702,6 +702,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1323,6 +1326,9 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

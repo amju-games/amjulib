@@ -146,6 +146,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
@@ -204,6 +205,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
+    <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
