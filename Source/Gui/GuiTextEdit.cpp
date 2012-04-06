@@ -24,7 +24,8 @@ void GuiTextEdit::Draw()
   static const float BLINK_TIME_END = 0.5f;
   static const float BLINK_TIME_HALF = BLINK_TIME_END * 0.5f;
 
-  m_caretTimer += TheTimer::Instance()->GetDt();
+  float dt = TheTimer::Instance()->GetDt();
+  m_caretTimer += dt;
   m_drawCaret = true;
   if (m_caretTimer > BLINK_TIME_END)
   {
@@ -51,7 +52,12 @@ void GuiTextEdit::Draw()
   {
     // Draw border
     // TODO Could be image - allow flexible way to give GUIs themes
-    AmjuGL::SetColour(m_bgCol); //inverse ? m_fgCol : m_bgCol);
+    static float t = 0;
+    t += dt;
+    PushColour();
+    float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
+    Colour c(s, s, 1, 1);
+    AmjuGL::SetColour(c); //inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
     Rect r = GetRect(this);
@@ -64,6 +70,7 @@ void GuiTextEdit::Draw()
     
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+    PopColour();
   }
 
   GuiText::Draw();
