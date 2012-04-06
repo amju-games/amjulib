@@ -118,7 +118,9 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
     ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
-    ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->SetText("");
+    GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
+    textedit->SetHasFocus(true);
+    textedit->SetText("");
   }
   else
   {
