@@ -198,6 +198,7 @@
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
@@ -406,6 +407,7 @@
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
     <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
     <ClInclude Include="..\..\..\Source\Main\main.h" />
     <ClInclude Include="..\..\..\Source\Main\nonglutmain.h" />
