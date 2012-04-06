@@ -10,6 +10,8 @@
 namespace Amju
 {
 bool Unproject(const Vec2f& screenPos, float z, Vec3f* result);
+
+bool Project(const Vec3f& pos, Vec2f* result);
 }
 
 #endif
