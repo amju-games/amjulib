@@ -1,9 +1,11 @@
 #ifndef CHAT_CONSOLE_H_INCLUDED
 #define CHAT_CONSOLE_H_INCLUDED
 
+#include <map>
+#include <vector>
 #include <Singleton.h>
 #include <EventListener.h>
-#include <GuiElement.h>
+#include <GuiText.h>
 #include "MsgManager.h"
 
 namespace Amju
@@ -44,6 +46,17 @@ private:
   bool m_chatSendIsActive;
   bool m_chatRecvIsActive;
 
+  // One conversation is between two players, comprised of messages
+  struct Conversation 
+  {
+    std::vector<RCPtr<GuiText> > m_texts;
+
+    void Draw();
+    void AddText(bool sentNotRecv, const std::string& msg);
+  };
+
+  typedef std::map<int, Conversation> Convs;
+  Convs m_convs;
 };
 
 typedef Singleton<ChatConsole> TheChatConsole;
