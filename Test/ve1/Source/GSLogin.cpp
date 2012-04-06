@@ -2,16 +2,21 @@
 #include <AmjuGL.h>
 #include "GSMain.h"
 #include <Game.h>
-#include "GSLoginWaiting.h"
 #include <GuiTextEdit.h>
+#include "GSLoginWaiting.h"
+#include "GSTitle.h"
 
 namespace Amju
 {
-void OnLoginButton()
+static void OnLoginButton()
 {
   TheGSLogin::Instance()->OnLoginButton();
 }
 
+static void OnCancelButton()
+{
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+}
 
 GSLogin::GSLogin()
 {
@@ -42,6 +47,7 @@ void GSLogin::OnActive()
   Assert(m_gui);
 
   GetElementByName(m_gui, "login-button")->SetCommand(Amju::OnLoginButton);
+  GetElementByName(m_gui, "cancel-button")->SetCommand(Amju::OnCancelButton);
   GetElementByName(m_gui, "email")->SetHasFocus(true);
 }
 
