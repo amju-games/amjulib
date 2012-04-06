@@ -1,16 +1,17 @@
 #include "MsgManager.h"
 #include <iostream>
-#include "Ve1OnlineReqManager.h"
+#include <StringUtils.h>
+#include <Timer.h>
+#include <UrlUtils.h>
+#include <Game.h>
 #include <StringUtils.h>
 #include "ReqSendMsg.h"
 #include "ReqGetNewMsgs.h"
 #include "GSMain.h"
-#include <Timer.h>
-#include <UrlUtils.h>
 #include "Player.h"
-#include <Game.h>
 #include "ReqMsgRead.h"
 #include "ChatConsole.h"
+#include "Ve1OnlineReqManager.h"
 
 namespace Amju
 {
@@ -87,7 +88,7 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 
   // Replace spaces in msg 
   // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
-  std::string newmsg = Replace(msg, " ", "_");
+  std::string newmsg = EncodeMsg(msg); ////Replace(msg, " ", "_");
 
   // Strip out characters which are not allowed - use boost reg exp
   // Replace punctuation chars with ascii code.
@@ -106,5 +107,35 @@ std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: "
   url += "'";
   TheVe1ReqManager::Instance()->AddReq(new ReqSendMsg(ToUrlFormat(url)), MAX_CONCURRENT_MSGS);
 }
+
+std::string EncodeMsg(const std::string& plainMsg)
+{
+  std::string result;
+
+  int s = plainMsg.size();
+  for (int i = 0; i < s; i++)
+  {
+    char c = plainMsg[i];
+    result += ToHexString(c);
+  }
+
+  return result;
+}
+
+std::string DecodeMsg(const std::string& encodedMsg)
+{
+  std::string result;
+
+  int s = encodedMsg.size();
+  for (int i = 0; i < s; i += 2)
+  {
+    std::string hex = encodedMsg.substr(i, 2);
+    int n = UIntFromHexString(hex);
+    result += std::string(1, (char)n);
+  }
+
+  return result;
+}
+
 }
 

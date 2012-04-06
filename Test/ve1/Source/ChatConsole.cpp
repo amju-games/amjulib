@@ -73,7 +73,7 @@ void ChatConsole::Draw()
   {
     m_gui->Draw();
 
-    if (m_lastRecipId != -1)
+    if (m_chatRecvIsActive && m_lastRecipId != -1)
     {
       m_convs[m_lastRecipId].Draw();
     }
@@ -169,6 +169,9 @@ void ChatConsole::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
 
     //((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
     //((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
+    
+    // TODO TEMP TEST
+    m_lastRecipId = msg->m_senderId;
 
     m_convs[m_lastRecipId].AddText(false, msg->m_text);
 

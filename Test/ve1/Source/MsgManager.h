@@ -46,6 +46,9 @@ private:
   float m_checkPeriod;
 };
 
+std::string EncodeMsg(const std::string& plainMsg);
+std::string DecodeMsg(const std::string& encodedMsg);
+
 typedef Singleton<MsgManager> TheMsgManager;
 }
 
