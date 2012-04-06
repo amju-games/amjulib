@@ -2,12 +2,12 @@
 #define GUI_LIST_BOX_H_INCLUDED
 
 #include <set>
-#include "GuiComposite.h"
+#include "GuiWindow.h"
 #include "GuiText.h"
 
 namespace Amju
 {
-class GuiListBox : public GuiComposite
+class GuiListBox : public GuiWindow
 {
 public:
   static const char* NAME;
@@ -22,6 +22,9 @@ public:
 
   void SetSelected(int child, bool selected);
   bool IsSelected(int child) const;
+
+  void SetIsMultiSel(bool isMulti);
+  bool IsMultiSel() const;
 
 protected:
   bool m_isMultiSelect;

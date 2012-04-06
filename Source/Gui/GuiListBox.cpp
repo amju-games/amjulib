@@ -12,8 +12,18 @@ static const int LB_PRIORITY = -1; // higher priority
 
 GuiListBox::GuiListBox()
 {
-  m_isMultiSelect = true;
+  m_isMultiSelect = false;
   TheEventPoller::Instance()->AddListener(this, LB_PRIORITY);
+}
+
+void GuiListBox::SetIsMultiSel(bool isMulti)
+{
+  m_isMultiSelect = isMulti;
+}
+
+bool GuiListBox::IsMultiSel() const
+{
+  return m_isMultiSelect;
 }
 
 void GuiListBox::Draw()
@@ -30,6 +40,10 @@ void GuiListBox::Draw()
   DrawSolidRect(r);
   PopColour();
 
+  GuiWindow::Draw();
+
+/*
+  // Moved to GuiWindow:
   int vp[4];
   AmjuGL::GetViewport(&vp[0], &vp[1], &vp[2], &vp[3]);
 
@@ -43,6 +57,7 @@ void GuiListBox::Draw()
   GuiComposite::Draw();
   AmjuGL::PopMatrix();
   AmjuGL::Viewport(vp[0], vp[1], vp[2], vp[3]);
+*/
 }
 
 void GuiListBox::SetSelected(int child, bool selected)
@@ -51,6 +66,12 @@ void GuiListBox::SetSelected(int child, bool selected)
 
 ////  ((GuiText*)GetChild(child))->SetInverse(selected); // TODO what if Items are not Text ?
   GetChild(child)->SetSelected(selected);
+
+  if (!IsMultiSel())
+  {
+    // Not multi select, so at most one member in set.
+    m_selset.clear();
+  }
 
   if (selected)
   {
