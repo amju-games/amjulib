@@ -15,6 +15,11 @@ extern CComModule _Module;
 
 #endif // WIN32
 
+#ifdef MACOSX
+
+#include <ApplicationServices/ApplicationServices.h>
+
+#endif // MACOSX
 
 namespace Amju
 {
@@ -56,9 +61,26 @@ struct SpeechInit
     HRESULT hr = pVoice->Speak(ws.c_str(), 0, NULL);
 #endif
 
+#ifdef MACOSX
+
+  // From my old code, TODO
+
+  // Make a "pascal-style" string. By trial and error I found that this means with an 8-bit
+  // string length at the start.
+  static char buf[500];
+  short len = s.size(); //strlen(s.size);
+  buf[0] = len & 0x00ff;
+  //buf[1] = (len & 0xff00) >> 8;
+  strcpy(&buf[1], &s[0]);
+  OSErr res = SpeakString((const unsigned char*)buf);
+
+#endif
+
   }
 
+#ifdef WIN32
   ISpVoice * pVoice;
+#endif
 };
 
 void TextToSpeech(const std::string& text)
