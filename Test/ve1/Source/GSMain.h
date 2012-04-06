@@ -29,6 +29,7 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnKeyEvent(const KeyEvent&);
 
+/*
   bool CanShowMsg() const;
 //  void ShowMsg(const MsgManager::Msg& msg);
   void OnChatSend();
@@ -36,6 +37,7 @@ public:
   void ActivateChatSend(bool active, int recipId);
   void ActivateChatRecv(bool active, const MsgManager::Msg* = 0);
   void OnRecvClose();
+*/
 
 private:
   void DoMoveRequest();
@@ -47,10 +49,12 @@ private:
   PGuiElement m_gui;
   RCPtr<GuiMenu> m_menu;
 
+/*
   // Chat recipient
   int m_lastRecipId;
   bool m_chatSendIsActive;
   bool m_chatRecvIsActive;
+*/
 
   // Debug camera
   float m_yRot;

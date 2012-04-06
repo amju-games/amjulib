@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <Game.h>
 #include <AmjuGL.h>
 #include <Teapot.h>
 #include "Ve1SceneGraph.h"
@@ -19,6 +20,7 @@
 #include "Terrain.h"
 #include <CollisionMesh.h>
 #include "Useful.h"
+#include "ChatConsole.h"
 
 namespace Amju
 {
@@ -421,7 +423,7 @@ public:
 
   virtual bool Do()
   {
-    TheGSMain::Instance()->ActivateChatSend(true, m_player->GetId());
+    TheChatConsole::Instance()->ActivateChatSend(true, m_player->GetId());
     return false;
   }
 
@@ -438,6 +440,18 @@ void Player::SetMenu(GuiMenu* menu)
   {
     menu->AddItem(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
   }
+}
+
+bool GetNameForPlayer(int objId, std::string* r)
+{
+  Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
+  Assert(p);
+  if (p)
+  {
+    *r = p->GetName();
+    return true;
+  }
+  return false;
 }
 }
 

@@ -73,6 +73,8 @@ protected:
   bool m_inNewLocation;
 };
 
+bool GetNameForPlayer(int objId, std::string* r);
+
 }
 
 #endif
