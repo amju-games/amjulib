@@ -10,6 +10,7 @@
 #include "GameMode.h"
 #include "GSMain.h"
 #include "LocalPlayer.h"
+#include "GSStartGame.h"
 
 namespace Amju
 {
@@ -66,7 +67,9 @@ public:
       int objId = pi->PIGetInt(PI_KEY("player obj id"));
       SetLocalPlayerId(objId);
 
-      TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+      // TODO Set location ?
+
+      TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
     }
     return false;
   }
