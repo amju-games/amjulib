@@ -12,6 +12,7 @@
 #include "ReqMsgRead.h"
 #include "ChatConsole.h"
 #include "Ve1OnlineReqManager.h"
+#include "TextToSpeech.h"
 
 namespace Amju
 {
@@ -62,6 +63,9 @@ void MsgManager::Update()
     //gsm->ShowMsg(msg);
     cc->ActivateChatRecv(true, &msg);
     cc->ActivateChatSend(true, msg.m_senderId);
+
+    // Text to speech -- NB is here the best place ?
+    TextToSpeech(msg.m_text);
 
     // Mark message as read -- TODO only after player clicks OK in gui..?
     MarkRead(msg);
