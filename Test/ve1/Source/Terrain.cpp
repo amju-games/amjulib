@@ -18,6 +18,7 @@
 // Mgc dist from point to triangle
 #include "Mgc/MgcDist3DVecTri.h"
 #include "Useful.h"
+#include <Plane.h>
 
 namespace Amju
 {
@@ -182,6 +183,7 @@ std::cout << "Terrain: Line seg didn't intersect any tris\n";
 std::cout << "Found " << size << " tris....\n";
 #endif
 
+  bool foundOne = false;
   for (int i = 0; i < size; i++)
   {
     const Tri& t = tris[i];
@@ -189,6 +191,13 @@ std::cout << "Found " << size << " tris....\n";
     const Vec3f& a = t.m_verts[0];
     const Vec3f& b = t.m_verts[1];
     const Vec3f& c = t.m_verts[2];
+
+    // Skip vertical tris
+    Plane plane(a, b, c);
+    if (plane.B() < 0.5f)
+    {
+      continue;
+    }
 
 #ifdef TERRAIN_DEBUG
 std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
@@ -222,11 +231,12 @@ std::cout << "d=" << d << "... expecting zero.\n";
     {
       closestSqDist = squareDist;
       closest = p;
+      foundOne = true;
     }
   }
 
   *pos = closest;
-  return true;
+  return foundOne;
 
 /*
   // Find intersection of line seg and terrain triangles - Octree would make this efficient
