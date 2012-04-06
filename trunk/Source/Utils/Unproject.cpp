@@ -59,7 +59,7 @@ int glhProjectf(float objx, float objy, float objz,
   //The result normalizes between -1 and 1
   if(fTempo[7]==0.0)	//The w value
      return 0;
-  fTempo[7]=1.0/fTempo[7];
+  fTempo[7]=1.0f/fTempo[7];
   //Perspective division
   fTempo[4]*=fTempo[7];
   fTempo[5]*=fTempo[7];
