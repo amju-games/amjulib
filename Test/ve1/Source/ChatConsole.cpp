@@ -169,8 +169,8 @@ void ChatConsole::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
     std::string senderName;
     GetNameForPlayer(msg->m_senderId, &senderName);
 
-    ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
-    ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
+    //((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
+    //((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
 
     m_convs[m_lastRecipId].AddText(false, msg->m_text);
 
