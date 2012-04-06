@@ -189,4 +189,10 @@ void ResourceManager::Dump()
     }
   }
 }
+
+void ResourceManager::Clear()
+{
+  m_groups.clear();
+  m_resources.clear();
+}
 }

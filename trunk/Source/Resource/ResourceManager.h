@@ -46,6 +46,9 @@ public:
   // Dump info
   void Dump();
 
+  // Clear all cached resources
+  void Clear();
+
 private:
   Resource* LoadRes(const std::string& resName);
 
