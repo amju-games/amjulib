@@ -321,7 +321,7 @@ void Player::Update()
     Matrix m;
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
-    m_sceneNode->Update();
+    //m_sceneNode->Update(); // done for whole scene graph elsewhere
 
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
     *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
