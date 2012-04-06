@@ -12,6 +12,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "LocalPlayer.h"
 #include "SaveConfig.h"
+#include "Terrain.h"
 
 namespace Amju
 {
@@ -91,6 +92,11 @@ GSNewLocation::GSNewLocation()
   m_mode = AMJU_ADD_NEW;
 }
 
+std::string GSNewLocation::MakeLocDir() const
+{
+  return "Loc_" + m_locId;
+}
+
 void GSNewLocation::SetMode(GSNewLocation::Mode mode)
 {
   m_mode = mode;
@@ -124,19 +130,25 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
   // Also, no path is given here so files with the same name in different dirs
   //  won't work!!!!
   bool binary = (GetFileExt(m_objFile) == "objb");
-  ObjMesh* mesh = new ObjMesh;
-  mesh->Load(m_objFile, binary); 
+  RCPtr<ObjMesh> mesh = new ObjMesh;
+  bool loaded = mesh->Load(m_objFile, binary); 
 
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
 
-  if (!mesh)
+  if (!loaded)
   {
     SetError("Failed to load obj file " + m_objFile);
     return;
   }
 
 std::cout << "Loaded obj file ok!!\n";
+
+  // TODO Create path + filename
+  GetTerrain()->SetMeshFilename(MakeLocDir() + "/" + m_objFile);
+  // When we re-enter location, we should load the new file.
+  // Make sure file is not cached by ResourceManager
+  TheResourceManager::Instance()->Clear(); 
 
   // Remember this path
   static GameConfigFile* config = TheGameConfigFile::Instance();
@@ -195,7 +207,7 @@ std::cout << "Got new location ID from server!! -> " << id << "\n";
   m_locId = id;
 
   // Directory for this location. Every location has a unique dir to avoid overwriting files.
-  std::string dir = "Loc_" + m_locId;
+  std::string dir = MakeLocDir(); //"Loc_" + m_locId;
 
   // No good for other clients who didn't create this location!
   //MkDir(File::GetRoot() + "/" + dir);
@@ -289,7 +301,7 @@ std::cout << "All uploaded, we are done here!\n";
     {
       SetError("Finished uploading, creating new location on server...");
   
-      std::string dir = "Loc_" + m_locId; // TODO comon func
+      std::string dir = MakeLocDir(); //"Loc_" + m_locId; // TODO comon func
 
       // Send req to make new Location game object.
       std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);

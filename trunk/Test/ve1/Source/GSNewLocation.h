@@ -31,7 +31,8 @@ public:
 
 protected:
   void RestoreLastPath();
-  virtual void RequestNewId();
+  void RequestNewId();
+  std::string MakeLocDir() const;
 
 protected:
   // We upload files to the server - track total and how many so far
