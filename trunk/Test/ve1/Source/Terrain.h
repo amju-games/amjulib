@@ -33,6 +33,8 @@ public:
   // For collision tests/shadows -- TODO Octree
   CollisionMesh* GetCollisionMesh();
 
+  void SetMeshFilename(const std::string& filename) { m_objFilename = filename; }
+
 protected:
   std::string m_objFilename;
 
