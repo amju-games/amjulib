@@ -18,6 +18,7 @@
 #include "GSWaitForNewLocation.h"
 #include "Terrain.h"
 #include "ObjectUpdater.h"
+#include "GameMode.h"
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
@@ -283,6 +284,13 @@ ObjectManager::ObjectManager()
   if (!Load())
   {
 std::cout << "ObjectManager cache load failed\n";
+
+    if (!IsOnline())
+    {
+std::cout << "CAN'T CONTINUE, NO CACHE AND NOT ONLINE!!\n";
+      // TODO Go to error state ?
+    }
+
     m_objects.clear();
     m_timestamp = "1";
   }
@@ -308,6 +316,7 @@ bool ObjectManager::Load()
   if (!f.GetDataLine(&m_timestamp))
   {
     f.ReportError("Object create cache: expected timestamp");
+    return false;
   }
   int numObjs = 0;
   if (!f.GetInteger(&numObjs))
