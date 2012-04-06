@@ -15,6 +15,8 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <stdlib.h> // atexit
 #include "AmjuFinal.h"
 
+//#define SINGLETON_DEBUG
+
 namespace Amju
 {
 template <class T>
@@ -23,7 +25,7 @@ class Singleton : public NonCopyable
 public:
   static void Destroy()
   {
-#ifdef _DEBUG
+#ifdef SINGLETON_DEBUG
 std::cout << "Destroying singleton: " << typeid(T).name() << "\n";
 #endif
 
@@ -37,7 +39,7 @@ std::cout << "Destroying singleton: " << typeid(T).name() << "\n";
     static T* t = 0;
     if (!t)
     {
-#ifdef _DEBUG
+#ifdef SINGLETON_DEBUG
 std::cout << "Creating singleton: " << typeid(T).name() << "\n";
 #endif
 
@@ -59,7 +61,7 @@ public:
     static T* t = 0;
     if (!t)
     {
-#ifdef _DEBUG
+#ifdef SINGLETON_DEBUG
 std::cout << "Creating singleton: " << typeid(T).name() << "\n";
 #endif
 
