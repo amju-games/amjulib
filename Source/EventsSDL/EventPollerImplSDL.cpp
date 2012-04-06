@@ -40,7 +40,14 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
     pKe->keyType = AMJU_KEY_CHAR;
     // Must do this to get e.g. '!' rather than '1'.
     // sym is just the 'lower case' symbol on the key.
-    pKe->key = ske.keysym.unicode & 0x7f;
+    if (ske.keysym.unicode != 0)
+    {
+      pKe->key = ske.keysym.unicode & 0x7f;
+    }
+    else
+    {
+      pKe->key = ske.keysym.sym; // no unicode code.. 
+    }
     break;
   }
 }
@@ -100,6 +107,25 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
         if (ske.keysym.sym < SDLK_NUMLOCK) // i.e. is not a modifier
         {
           SetKeyType(ske, &ke);
+
+#ifdef _DEBUG
+static const char* TYPE[] = 
+{
+  "char",        //AMJU_KEY_CHAR,  // printable character
+  "up arrow",    //AMJU_KEY_UP,    // up arrow
+  "down arrow",  //AMJU_KEY_DOWN,
+  "let arrow",   //AMJU_KEY_LEFT,
+  "right arrow", //AMJU_KEY_RIGHT,
+  "enter",       //AMJU_KEY_ENTER,
+  "space",       //AMJU_KEY_SPACE,
+  "esc",         //AMJU_KEY_ESC,
+  "backspace",   //AMJU_KEY_BACKSPACE,
+  "delete",      //AMJU_KEY_DELETE,
+};
+std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key << 
+  (ke.keyDown ? " DOWN" : " UP") << "\n";
+#endif
+
           isKeyEvent = true;
         }
         break;
