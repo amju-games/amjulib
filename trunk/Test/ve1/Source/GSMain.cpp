@@ -35,112 +35,11 @@ void OnBuildButton()
   // Enable build GUI
 }
 
-/*
-void OnChatSendButton()
-{
-  TheGSMain::Instance()->OnChatSend();
-}
-
-void OnChatCancelButton()
-{
-  TheGSMain::Instance()->OnChatCancel();
-}
-
-void OnRecvCloseButton()
-{
-  TheGSMain::Instance()->OnRecvClose();
-}
-
-
-void GSMain::OnChatSend()
-{
-  Assert(m_lastRecipId != -1);
-  Assert(GetLocalPlayer()); // or couldn't send, right ?
-
-  int senderId = GetLocalPlayer()->GetId();
-  std::string text = 
-    ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->GetText();
-  TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
-
-  ActivateChatSend(false, -1); // ??
-}
-
-void GSMain::OnChatCancel()
-{
-  ActivateChatSend(false, -1); 
-}
-
-bool GSMain::CanShowMsg() const
-{
-  return !m_chatRecvIsActive; // && !m_chatSendIsActive ??
-}
-
-void GSMain::OnRecvClose()
-{
-  ActivateChatRecv(false);
-}
-*/
-
 GSMain::GSMain()
 {
   m_moveRequest = false;
-  //m_lastRecipId = -1;
-  //m_chatSendIsActive = false;
-  //m_chatRecvIsActive = false;
   m_yRot = 0;
 }
-
-/*
-void GetNameForPlayer(int objId, std::string* r)
-{
-  Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
-  Assert(p);
-  if (p)
-  {
-    *r = p->GetName();
-  }
-}
-
-void GSMain::ActivateChatSend(bool active, int recipId)
-{
-  // TODO polish -- jump onto screen
-  m_lastRecipId = recipId;
-
-  if (active)
-  {
-std::cout << "Activate chat -- recip ID = " << recipId << "\n";
-
-    std::string recipName;
-    GetNameForPlayer(recipId, &recipName);
-
-    m_gui->GetElementByName("chat-comp")->SetVisible(true);
-    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
-    GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
-    textedit->SetHasFocus(true);
-    textedit->SetText("");
-  }
-  else
-  {
-    m_gui->GetElementByName("chat-comp")->SetVisible(false);
-  }
-  m_chatSendIsActive = active;
-}
-
-void GSMain::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
-{
-  if (active)
-  {
-    std::string senderName;
-    GetNameForPlayer(msg->m_senderId, &senderName);
-    
-    ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
-    ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
-  }
-
-  m_gui->GetElementByName("msg-recv-comp")->SetVisible(active);
-  m_chatRecvIsActive = active;
-}
-*/
 
 void GSMain::ShowObjectMenu(GameObject* obj)
 {
