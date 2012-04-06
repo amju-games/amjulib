@@ -42,10 +42,10 @@ std::cout << "found objs element\n";
 std::cout << "Obj " << i << ": ";
 #endif
 
-      int id = atoi(obj.getChildNode(0).getText());
-      float x = atof(obj.getChildNode(1).getText());
-      float y = atof(obj.getChildNode(2).getText());
-      float z = atof(obj.getChildNode(3).getText());
+      int id = ToInt(obj.getChildNode(0).getText());
+      float x = ToFloat(obj.getChildNode(1).getText());
+      float y = ToFloat(obj.getChildNode(2).getText());
+      float z = ToFloat(obj.getChildNode(3).getText());
       int location = atoi(obj.getChildNode(4).getText());
 
 //std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
