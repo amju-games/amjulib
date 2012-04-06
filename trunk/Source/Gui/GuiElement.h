@@ -30,8 +30,8 @@ public:
   bool IsSelected() const { return m_isSelected; }
 
   // Item with focus responds to keyboard events etc.
-  void SetHasFocus(bool f) { m_hasFocus = f; }
-  bool HasFocus() const { return m_hasFocus; } 
+  void SetHasFocus(bool f);
+  bool HasFocus() const;  
 
   // Set command as an object for Undo, or a function for simple, 
   //  non-undoable action
@@ -69,7 +69,6 @@ protected:
   std::string m_name;
   bool m_isVisible; // TODO Use flags if more 
   bool m_isSelected;
-  bool m_hasFocus;
 
   // Only one of these is activated
   PGuiCommand m_pCommand;
