@@ -47,6 +47,7 @@ Added to repository
 #include <iostream>
 #include <string.h> // strlen()
 #include <stdio.h> // sprintf()
+#include <sstream>
 #include "StringUtils.h"
 #include "AmjuAssert.h"
 #include "AmjuFinal.h"
@@ -199,6 +200,16 @@ std::string ToHexString(unsigned int i)
   char buf[50];
   sprintf(buf, "%02x", i);
   return buf;
+}
+
+unsigned int UIntFromHexString(const std::string& s)
+{
+  // From http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer
+  unsigned int x;   
+  std::stringstream ss;
+  ss << std::hex << s;
+  ss >> x;
+  return x;
 }
 
 std::string ToString(unsigned int i)
