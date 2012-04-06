@@ -27,9 +27,17 @@ ChatConsole::ChatConsole()
   m_chatRecvIsActive = false;
 }
 
+void ChatConsole::Draw()
+{
+  if (m_gui)
+  {
+    m_gui->Draw();
+  }
+}
+
 bool ChatConsole::IsActive() const
 {
-  return (m_gui != 0);
+  return (m_gui != 0 && m_chatSendIsActive);
 }
 
 void ChatConsole::OnDeactive()
@@ -48,7 +56,6 @@ void ChatConsole::OnActive()
   ActivateChatSend(false, -1);
   ActivateChatRecv(false);
 }
-
 
 void ChatConsole::OnChatSend()
 {

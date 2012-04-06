@@ -271,6 +271,8 @@ void GSMain::Draw2d()
     m_menu->Draw();
   }
 
+  TheChatConsole::Instance()->Draw();
+
   TheCursorManager::Instance()->Draw();
 }
 
