@@ -1,5 +1,6 @@
 #include <GuiText.h>
 #include <GuiTextEdit.h>
+#include <GuiWindow.h>
 #include "ChatConsole.h"
 #include "LocalPlayer.h"
 
@@ -20,6 +21,47 @@ static void OnRecvCloseButton()
   TheChatConsole::Instance()->OnRecvClose();
 }
 
+void ChatConsole::Conversation::Draw()
+{
+  PushColour();
+
+  int s = m_texts.size();
+  float pos = -0.5f;
+  for (int i = m_texts.size() - 1; i >= 0; i--)
+  {
+    GuiText* text = m_texts[i];
+    pos += text->GetSize().y;
+    text->SetPos(Vec2f(-0.8f, pos));
+    m_texts[i]->Draw();
+
+    MultColour(Colour(1, 1, 1, 0.6f)); // fade
+  }
+
+  PopColour();
+}
+
+void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg)
+{
+  GuiText* text = new GuiText;
+  text->SetTextSize(1.0f);
+  text->SetText(msg);
+  text->SizeToText(); 
+  text->SetSize(Vec2f(1.6f, text->GetSize().y)); // TODO multi line msgs
+  text->SetDrawBg(true);
+  text->SetJust(GuiText::AMJU_JUST_LEFT);
+  if (sentNotRecv)
+  {
+    text->SetJust(GuiText::AMJU_JUST_RIGHT);
+    //text->SetFgCol(Colour(0, 0, 0, 1));
+    text->SetInverse(true);
+  }
+
+  text->SetInverse(true);
+
+  m_texts.push_back(text);
+}
+
+
 ChatConsole::ChatConsole()
 {
   m_lastRecipId = -1;
@@ -32,6 +74,11 @@ void ChatConsole::Draw()
   if (m_gui)
   {
     m_gui->Draw();
+
+    if (m_lastRecipId != -1)
+    {
+      m_convs[m_lastRecipId].Draw();
+    }
   }
 }
 
@@ -52,7 +99,7 @@ void ChatConsole::OnActive()
 
   GetElementByName(m_gui, "chat-send-button")->SetCommand(Amju::OnChatSendButton);
   GetElementByName(m_gui, "chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
-  GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
+  ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
   ActivateChatSend(false, -1);
   ActivateChatRecv(false);
 }
@@ -63,11 +110,16 @@ void ChatConsole::OnChatSend()
   Assert(GetLocalPlayer()); // or couldn't send, right ?
 
   int senderId = GetLocalPlayer()->GetId();
-  std::string text =
-    ((GuiTextEdit*)m_gui->GetElementByName("chat-text-edit"))->GetText();
+  GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
+  std::string text = textedit->GetText();
   TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
 
-  ActivateChatSend(false, -1); // ??
+  m_convs[m_lastRecipId].AddText(true, text);
+
+  //ActivateChatSend(false, -1); // ??
+  textedit->SetText("");
+
+  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(true);
 }
 
 void ChatConsole::OnChatCancel()
@@ -112,16 +164,19 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
 void ChatConsole::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
 {
-  if (active)
+  if (active && msg)
   {
     std::string senderName;
     GetNameForPlayer(msg->m_senderId, &senderName);
 
     ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
     ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
+
+    m_convs[m_lastRecipId].AddText(false, msg->m_text);
+
   }
 
-  m_gui->GetElementByName("msg-recv-comp")->SetVisible(active);
+  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(active);
   m_chatRecvIsActive = active;
 }
 
