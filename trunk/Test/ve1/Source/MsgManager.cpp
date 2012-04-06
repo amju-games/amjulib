@@ -10,6 +10,7 @@
 #include "Player.h"
 #include <Game.h>
 #include "ReqMsgRead.h"
+#include "ChatConsole.h"
 
 namespace Amju
 {
@@ -43,25 +44,23 @@ void MsgManager::Update()
     // Queue new msgs  -- in OnSuccess() in ReqGetNewMsgs
   }
 
-
-
   // Check if any new msgs in queue
   if (m_map.empty())
   {
     return;
   }
 
-  GSMain* gsm = TheGSMain::Instance();
+  static ChatConsole* cc = TheChatConsole::Instance();
   // Can we display the new msg ?
-  if (gsm->CanShowMsg())
+  if (cc->CanShowMsg())
   {
     // Tell the main game state that we have a new msg 
     Msgs::iterator it = m_map.begin();
     Assert(it != m_map.end());
     Msg& msg = it->second;
     //gsm->ShowMsg(msg);
-    gsm->ActivateChatRecv(true, &msg);
-    gsm->ActivateChatSend(true, msg.m_senderId);
+    cc->ActivateChatRecv(true, &msg);
+    cc->ActivateChatSend(true, msg.m_senderId);
 
     // Mark message as read -- TODO only after player clicks OK in gui..?
     MarkRead(msg);

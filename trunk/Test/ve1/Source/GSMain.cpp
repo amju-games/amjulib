@@ -21,6 +21,7 @@
 #include "GameMode.h"
 #include "Camera.h"
 #include "PickObject.h"
+#include "ChatConsole.h"
 
 namespace Amju
 {
@@ -34,6 +35,7 @@ void OnBuildButton()
   // Enable build GUI
 }
 
+/*
 void OnChatSendButton()
 {
   TheGSMain::Instance()->OnChatSend();
@@ -68,32 +70,27 @@ void GSMain::OnChatCancel()
   ActivateChatSend(false, -1); 
 }
 
-GSMain::GSMain()
-{
-  m_moveRequest = false;
-  m_lastRecipId = -1;
-  m_chatSendIsActive = false;
-  m_chatRecvIsActive = false;
-  m_yRot = 0;
-}
-
 bool GSMain::CanShowMsg() const
 {
   return !m_chatRecvIsActive; // && !m_chatSendIsActive ??
 }
 
-//void GSMain::ShowMsg(const MsgManager::Msg& msg)
-//{
-//  ActivateChatRecv(true);
-//  ((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText("TODO Get sender name");
-//  ((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg.m_text);
-//}
-
 void GSMain::OnRecvClose()
 {
   ActivateChatRecv(false);
 }
+*/
 
+GSMain::GSMain()
+{
+  m_moveRequest = false;
+  //m_lastRecipId = -1;
+  //m_chatSendIsActive = false;
+  //m_chatRecvIsActive = false;
+  m_yRot = 0;
+}
+
+/*
 void GetNameForPlayer(int objId, std::string* r)
 {
   Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
@@ -143,6 +140,7 @@ void GSMain::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
   m_gui->GetElementByName("msg-recv-comp")->SetVisible(active);
   m_chatRecvIsActive = active;
 }
+*/
 
 void GSMain::ShowObjectMenu(GameObject* obj)
 {
@@ -155,23 +153,6 @@ void GSMain::ShowObjectMenu(GameObject* obj)
   {
     v->SetMenu(m_menu);
   }
-
-/*
-  GuiMenu* childMenu = new GuiMenu;
-  childMenu->SetName("Child menu");
-  childMenu->AddItem(new GuiMenuItem("good"));
-  childMenu->AddItem(new GuiMenuItem("Lord"));
-  childMenu->AddItem(new GuiMenuItem("this"));
-  childMenu->AddItem(new GuiMenuItem("seems"));
-  childMenu->AddItem(new GuiMenuItem("to"));
-  childMenu->AddItem(new GuiMenuItem("work"));
-
-  m_menu = new GuiMenu;
-  
-  m_menu->AddItem(new GuiMenuItem("I am"));
-  m_menu->AddItem(new GuiMenuItem("some text"));
-  m_menu->AddItem(new GuiNestMenuItem("I R Nested!", childMenu));
-*/
 }
 
 void GSMain::Update()
@@ -197,85 +178,55 @@ void GSMain::DoMoveRequest()
 {
 std::cout << "In DoMoveRequest...\n";
 
-/*
+  GameObject* selectedObj = PickObject(m_mouseScreen);
+
+  if (selectedObj)
+  {
+    const std::string name = selectedObj->GetTypeName();
+std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
+
+    ShowObjectMenu(selectedObj);
+  }
+  else if (GetLocalPlayer())
+  {
+std::cout << "Ground clicked...\n";
+    Vec3f pos;
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
     Unproject(m_mouseScreen, 0, &mouseWorldNear);
     Unproject(m_mouseScreen, 1, &mouseWorldFar);
     LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
 
-    GameObject* selectedObj = 0;
-    GameObjects* objs = TheGame::Instance()->GetGameObjects();
-    float bestDist = 999999.9f;
-    for (GameObjects::iterator it = objs->begin(); it != objs->end(); ++it)
+    if (GetTerrain()->GetMousePos(lineSeg, &pos))
     {
-      GameObject* pgo = it->second;
-      Assert(pgo);
-      AABB* aabb = pgo->GetAABB();
-      if (aabb && Clip(lineSeg, *aabb, 0))
-      {
-        // Line seg intersects this box
-        // Choose object whose centre (position) is closest to line seg..?
-        float dist = LineSeg(mouseWorldNear, mouseWorldFar).SqDist(pgo->GetPos());
-        //float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
-        if (dist < bestDist)
-        {
-          bestDist = dist;
-          selectedObj = pgo;
-        }
-      }
-    }
-*/
-
-    GameObject* selectedObj = PickObject(m_mouseScreen);
-
-    if (selectedObj)
-    {
-      const std::string name = selectedObj->GetTypeName();
-std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
-
-      ShowObjectMenu(selectedObj);
-    }
-    else if (GetLocalPlayer())
-    {
-std::cout << "Ground clicked...\n";
-      Vec3f pos;
-      Vec3f mouseWorldNear;
-      Vec3f mouseWorldFar;
-      Unproject(m_mouseScreen, 0, &mouseWorldNear);
-      Unproject(m_mouseScreen, 1, &mouseWorldFar);
-      LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
-
-      if (GetTerrain()->GetMousePos(lineSeg, &pos))
-      {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
-        int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
-         // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
-         // Maybe don't send location, but send it as a separate kind of request ?
+      int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
+       // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
+       // Maybe don't send location, but send it as a separate kind of request ?
 
-        // TODO We want to respond immediately but we get out of sync with server
-        // Move towards point, but server will send back actual destination
-        GetLocalPlayer()->SetArrowPos(pos); 
-        GetLocalPlayer()->SetArrowVis(true);
+      // TODO We want to respond immediately but we get out of sync with server
+      // Move towards point, but server will send back actual destination
+      GetLocalPlayer()->SetArrowPos(pos); 
+      GetLocalPlayer()->SetArrowVis(true);
 
-        if (IsOnline())
-        {
-          TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
-          GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
-        }
-        else
-        {
-          // Offline - send msg to move (will be cached) 
-          ///////GetLocalPlayer()->MoveTo(pos, location);
-          TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
-        }
+      if (IsOnline())
+      {
+        TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+        GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
       }
       else
       {
-std::cout << "...not a point on the ground, apparently..?\n";
+        // Offline - send msg to move (will be cached) 
+        ///////GetLocalPlayer()->MoveTo(pos, location);
+        TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
       }
     }
+    else
+    {
+std::cout << "...not a point on the ground, apparently..?\n";
+    }
+  }
 }
 
 void GSMain::Draw()
@@ -294,34 +245,8 @@ void GSMain::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  // TODO Super simple camera
-  //static const float CAM_Y = 100.0f;
-  //static const float CAM_Z = 150.0f;
-
   Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
   cam->SetTarget(GetLocalPlayer()); // could be 0
-
-/*
-  if (GetLocalPlayer())
-  {
-    const Vec3f& pos = GetLocalPlayer()->GetPos();
-
-//std::cout << "Player pos: " << pos.x << " " << pos.y << " " << pos.z << "\n";
-
-    cam->SetEyePos(Vec3f(pos.x, pos.y + CAM_Y, pos.z + CAM_Z));
-    cam->SetLookAtPos(pos);
-  }
-  else
-  {
-    cam->SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
-    cam->SetLookAtPos(Vec3f(0, 0, 0));
-  }
-*/
-
-//  Matrix m;
-//  m.RotateY(m_yRot);
-//  AmjuGL::MultMatrix(m);
-
 
   GetVe1SceneGraph()->Draw();
 
@@ -355,6 +280,8 @@ void GSMain::OnDeactive()
 
   m_gui = 0;
   m_menu = 0;
+
+  TheChatConsole::Instance()->OnDeactive();
 }
 
 void GSMain::OnActive()
@@ -376,11 +303,7 @@ void GSMain::OnActive()
 
   m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
 
-  m_gui->GetElementByName("chat-send-button")->SetCommand(Amju::OnChatSendButton);
-  m_gui->GetElementByName("chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
-  m_gui->GetElementByName("recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
-  ActivateChatSend(false, -1);
-  ActivateChatRecv(false);
+  TheChatConsole::Instance()->OnActive();
 }
 
 static bool rightButtonDown = false;
@@ -422,7 +345,7 @@ bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     return true;
   }
 
-  if (m_chatSendIsActive || m_chatRecvIsActive)
+  if (TheChatConsole::Instance()->IsActive())
   {
 std::cout << " - Chat active so discarding mouse click\n";
     return false; 
