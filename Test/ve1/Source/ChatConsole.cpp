@@ -48,15 +48,13 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   text->SizeToText(); 
   text->SetSize(Vec2f(1.6f, text->GetSize().y)); // TODO multi line msgs
   text->SetDrawBg(true);
+  text->SetInverse(sentNotRecv);
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   if (sentNotRecv)
   {
     text->SetJust(GuiText::AMJU_JUST_RIGHT);
     //text->SetFgCol(Colour(0, 0, 0, 1));
-    text->SetInverse(true);
   }
-
-  text->SetInverse(true);
 
   m_texts.push_back(text);
 }
@@ -134,7 +132,7 @@ void ChatConsole::OnRecvClose()
 
 bool ChatConsole::CanShowMsg() const
 {
-  return !m_chatRecvIsActive; // && !m_chatSendIsActive ??
+  return true; // TODO !m_chatRecvIsActive; // && !m_chatSendIsActive ??
 }
 
 void ChatConsole::ActivateChatSend(bool active, int recipId)
