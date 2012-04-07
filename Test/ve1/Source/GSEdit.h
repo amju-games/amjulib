@@ -42,6 +42,7 @@ public:
   // Called when server responds with new object ID
   void OnNewObjectId(int id);
   void ShowPropsForObj(int id);
+  void ShowPropertyList(bool);
 
   // Set list of locations - called when we get response from server
   void SetLocs(const Locs& locs);

@@ -59,7 +59,6 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   m_texts.push_back(text);
 }
 
-
 ChatConsole::ChatConsole()
 {
   m_lastRecipId = -1;

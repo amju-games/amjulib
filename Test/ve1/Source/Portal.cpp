@@ -3,6 +3,8 @@
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "ObjectManager.h"
+#include "Ve1Node.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -56,11 +58,28 @@ AABB* Portal::GetAABB()
 
 void Portal::Update()
 {
+  static const float XSIZE = 10.0f;
+  static const float YSIZE = 20.0f;
+  m_aabb.Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+  if (m_sceneNode)
+  {
+    *(m_sceneNode->GetAABB()) = m_aabb;
+  }
 }
 
 void Portal::OnLocationEntry()
 {
   // TODO
+
+  // Add node to Scene Graph
+  m_sceneNode = new Ve1Node(this);
+  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  Assert(root);
+  root->AddChild(m_sceneNode);
 }
 
 void Portal::OnPlayerCollision(Player* player)
