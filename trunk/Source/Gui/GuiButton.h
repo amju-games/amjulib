@@ -36,6 +36,9 @@ public:
   bool IsFocusButton() const;
   void SetIsFocusButton(bool isFocusButton);
 
+  bool IsCancelButton() const;
+  void SetIsCancelButton(bool isCancelButton);
+
 private:
   void ClickSound() const; // TODO in GuiElement ?
 
