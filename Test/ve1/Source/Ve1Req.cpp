@@ -23,6 +23,8 @@ void Ve1Req::HandleResult()
     PXml p = m_xml.getChildNode(0);
     if (SafeStrCmp(p.getName(), "now"))
     {
+      m_timestamp = p.getText();
+
       // TODO More checking
       success = true;
     }

@@ -18,7 +18,14 @@ public:
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
     PushColour();
-    MultColour(Colour(1, 0, 0, 1));
+    if (m_obj->IsSelected())
+    {
+      MultColour(Colour(1, 0, 0, 1));
+    }
+    else
+    {
+      MultColour(Colour(0.6, 0.6, 0.6, 1));
+    }
 
     Vec2f screenpos;
     Vec3f pos = m_obj->GetPos();

@@ -1,13 +1,16 @@
 #ifndef VE1_OBJECT_H
 #define VE1_OBJECT_H
 
+#include <map>
+#include <string>
 #include <GameObject.h>
 #include <Xml/XmlNodeInterface.h>
-#include <string>
 #include <GuiMenu.h>
 
 namespace Amju
 {
+typedef std::map<std::string, std::string> ValMap;
+
 class Ve1Object : public GameObject
 {
 public:
@@ -29,6 +32,9 @@ public:
   // TODO Or use Variable ?
 //  virtual void Set(const std::string& key, int val);
 
+  ValMap* GetValMap();
+
+
   // Set the position - if a character, move to this pos over time, don't instantly set.
   // NB If location changes, we must call SetLocation().
   virtual void MoveTo(const Vec3f& pos);
@@ -44,10 +50,19 @@ public:
   // This updates the game state as we may enter or leave the same location as the local player.
   void SetLocation(int loc);
 
+  bool IsSelected() const;
+  void SetSelected(bool selected);
+
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
   //  i.e. it's in whatever the current location is.
   int m_location;
+
+  // For edit mode
+  // Values set by Set()
+  ValMap m_valmap; 
+
+  bool m_isSelected;
 };
 
 // Keep track of keys used to set object properties

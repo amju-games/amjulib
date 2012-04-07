@@ -7,6 +7,7 @@
 namespace Amju
 {
 const char* Portal::TYPENAME = "portal";
+static const char* DEST_KEY = "dest_portal_id";
 
 GameObject* CreatePortal()
 {
@@ -24,6 +25,19 @@ Portal::Portal()
 {
   m_destLocation = 0;
   m_isOpen = false;
+
+  Set(DEST_KEY, "1");
+}
+
+void Portal::Set(const std::string& key, const std::string& val)
+{
+  Ve1Object::Set(key, val);
+  
+  if (key == DEST_KEY)
+  {
+    // Set up reverse link TODO
+//    PGameObject dest
+  }
 }
 
 bool Portal::Load(File* f)

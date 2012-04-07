@@ -1,6 +1,7 @@
 #include <GuiText.h>
 #include <GuiTextEdit.h>
 #include <GuiWindow.h>
+#include <GuiButton.h>
 #include "ChatConsole.h"
 #include "LocalPlayer.h"
 
@@ -16,17 +17,16 @@ static void OnChatCancelButton()
   TheChatConsole::Instance()->OnChatCancel();
 }
 
-static void OnRecvCloseButton()
-{
-  TheChatConsole::Instance()->OnRecvClose();
-}
+//static void OnRecvCloseButton()
+//{
+//  TheChatConsole::Instance()->OnRecvClose();
+//}
 
 void ChatConsole::Conversation::Draw()
 {
   PushColour();
 
-  int s = m_texts.size();
-  float pos = -0.5f;
+  float pos = -0.6f; // TODO CONFIG
   for (int i = m_texts.size() - 1; i >= 0; i--)
   {
     GuiText* text = m_texts[i];
@@ -73,7 +73,7 @@ void ChatConsole::Draw()
   {
     m_gui->Draw();
 
-    if (m_chatRecvIsActive && m_lastRecipId != -1)
+    if (m_lastRecipId != -1)
     {
       m_convs[m_lastRecipId].Draw();
     }
@@ -95,7 +95,10 @@ void ChatConsole::OnActive()
   m_gui = LoadGui("gui-chat.txt");
   Assert(m_gui);
 
-  GetElementByName(m_gui, "chat-send-button")->SetCommand(Amju::OnChatSendButton);
+  GuiButton* send = (GuiButton*)GetElementByName(m_gui, "chat-send-button");
+  send->SetCommand(Amju::OnChatSendButton);
+  send->SetIsFocusButton(true);
+
   GetElementByName(m_gui, "chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
   ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
   ActivateChatSend(false, -1);
@@ -110,6 +113,14 @@ void ChatConsole::OnChatSend()
   int senderId = GetLocalPlayer()->GetId();
   GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
   std::string text = textedit->GetText();
+
+  if (text == "")
+  {
+    // TODO Fail sound effect etc
+std::cout << "Blank msg, not sending.\n";
+    return;
+  }
+
   TheMsgManager::Instance()->SendMsg(senderId, m_lastRecipId, text);
 
   m_convs[m_lastRecipId].AddText(true, text);
