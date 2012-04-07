@@ -25,12 +25,16 @@ public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnButtonEvent(const ButtonEvent&);
+  virtual bool OnKeyEvent(const KeyEvent&); // Enter triggers if this is the focus button
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);
 
   bool IsMouseOver() const;
   bool IsPressed() const;
+
+  bool IsFocusButton() const;
+  void SetIsFocusButton(bool isFocusButton);
 
 private:
   void ClickSound() const; // TODO in GuiElement ?

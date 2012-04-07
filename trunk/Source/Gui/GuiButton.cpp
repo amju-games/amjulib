@@ -11,6 +11,8 @@ const char* GuiButton::NAME = "gui-button";
 
 static const int BUTTON_PRIORITY = -100; // a pressed button takes priority over most stuff
 
+static GuiButton* focusButton = 0;
+
 GuiButton::GuiButton()
 {
   TheEventPoller::Instance()->AddListener(this, BUTTON_PRIORITY); 
@@ -22,6 +24,23 @@ GuiButton::GuiButton()
 GuiButton::~GuiButton()
 {
   // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
+}
+
+bool GuiButton::IsFocusButton() const
+{
+  return (focusButton == this);
+}
+
+void GuiButton::SetIsFocusButton(bool isFocusButton)
+{
+  if (isFocusButton)
+  {
+    focusButton = this;
+  }
+  else
+  {
+    focusButton = 0;
+  }
 }
 
 void GuiButton::ClickSound() const
@@ -141,6 +160,21 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   // This isn't right - only handled if we click the button
   ////  return m_isMouseOver; // handled if over this button 
 
+  return false;
+}
+
+bool GuiButton::OnKeyEvent(const KeyEvent& ke)
+{
+  if (IsFocusButton() && ke.keyType == AMJU_KEY_ENTER)
+  {
+    m_isPressed = ke.keyDown;
+    ClickSound();
+    if (!ke.keyDown)
+    {
+      ExecuteCommand();
+    }
+    return true; // handled
+  }
   return false;
 }
 
