@@ -63,6 +63,10 @@ void key(char k, bool down)
   {
     ke->keyType = AMJU_KEY_ENTER;
   }
+  else if (k == 27) // esc
+  {
+    ke->keyType = AMJU_KEY_ESC;
+  }
   else
   {
 // TODO Just temporarily until we sort out all the control keys
