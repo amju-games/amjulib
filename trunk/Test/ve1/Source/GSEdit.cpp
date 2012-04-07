@@ -96,7 +96,12 @@ std::cout << "Found id element\n";
       std::string id = p.getText();
 std::cout << "Got new object ID from server! " << id << "\n";
 
-      ProtoObject* go = new ProtoObject; //TheGameObjectFactory::Instance()->Create(m_typename);
+#ifdef USE_PROTO_OBJS
+      Ve1Object* go = new ProtoObject; 
+#else
+      Ve1Object* go = (Ve1Object*)TheGameObjectFactory::Instance()->Create(m_typename);
+#endif
+
       Assert(go); // Typename should be from Factory, so Create should always succeed, right ?
       if (go)
       {
@@ -104,12 +109,13 @@ std::cout << "Success! Created object of type " << m_typename << "\n";
         go->SetId(ToInt(id));
 
         // TODO Set location and pos
-        go->SetProtoLocation(GetLocalPlayerLocation());
+        go->SetLocation(GetLocalPlayerLocation());
 
         // Assets & Data file ??
         // Add to local game ? Or send req to server to create ?
         // Just add to the local game, NOT the DB or the local cache
         TheGame::Instance()->AddGameObject(go);
+        go->OnLocationEntry(); 
       }
       else
       {
@@ -342,6 +348,13 @@ void GSEdit::OnActive()
   elem->SetCommand(OnChooseLocCancel); 
 
   ShowLocationList(false);
+  ShowPropertyList(false);
+}
+
+void GSEdit::ShowPropertyList(bool b)
+{
+  GuiElement* props = GetElementByName(m_gui, "property-list");
+  props->SetVisible(b);
 }
 
 void GSEdit::ShowLocationList(bool b)
@@ -387,6 +400,8 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
       pos += m_right * dx * 100.0f;
       pos += m_up * dy * 100.0f;
       obj->SetPos(pos);
+
+      TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
     }
   }
 
@@ -486,6 +501,7 @@ std::cout << "Create new object of type " << m_typeName << "\n";
     // Create request to get new ID. Make obj when we get response.
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECT_ID);
     url += "&type=" + m_typeName;
+    url += "&assetfile=none&datafile=none"; // TODO depends on type of object we want to create 
     TheVe1ReqManager::Instance()->AddReq(new ReqNewObjId(url, m_typeName)); 
 
     return false;
@@ -511,6 +527,9 @@ private:
 
 void GSEdit::ShowPropsForObj(int id)
 {
+  GuiListBox* props = (GuiListBox*)GetElementByName(m_gui, "property-list");
+  props->Clear();
+
   Ve1Object* obj = (Ve1Object*)TheGame::Instance()->GetGameObject(id).GetPtr();
   ValMap* valmap = obj->GetValMap();
 
@@ -519,7 +538,12 @@ std::cout << "Here are the properties for the selected object (" << obj->GetId()
   for (ValMap::iterator it = valmap->begin(); it != valmap->end(); ++it)
   {
 std::cout << "Property for obj: " << it->first << "=" << it->second << "\n";
+    GuiText* t = new GuiText;
+    t->SetText(it->first + " = " + it->second);
+    props->AddItem(t);
   }
+
+  ShowPropertyList(true);
 }
 
 void GSEdit::CreateContextMenu()

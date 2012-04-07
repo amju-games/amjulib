@@ -1,6 +1,7 @@
 #include "GSTitle.h"
 #include <AmjuGL.h>
 #include <Game.h>
+#include <GuiButton.h>
 #include "GSStartMenu.h"
 #include "GSLogin.h"
 #include "GSChoosePlayer.h"
@@ -50,8 +51,13 @@ void GSTitle::OnActive()
   m_gui = LoadGui("gui-title.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("start-button")->SetCommand(Amju::OnStartButton);
-  m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
+  GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
+  start->SetCommand(Amju::OnStartButton);
+  start->SetIsFocusButton(true);
+
+  GuiButton* quit = (GuiButton*)GetElementByName(m_gui, "quit-button");
+  quit->SetCommand(Amju::OnQuitButton);
+  quit->SetIsCancelButton(true);
 
   CreateText("my game");
 }

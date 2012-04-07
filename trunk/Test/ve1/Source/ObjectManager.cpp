@@ -87,7 +87,7 @@ void Object::Create()
 
     // TODO Set owner
 
-    if (m_datafile.empty())
+    if (m_datafile.empty() || m_datafile == "none")
     {
 //std::cout << "Object load: no data file needed for " << *this << "\n";
       //TheGame::Instance()->AddGameObject(go);
@@ -203,6 +203,12 @@ std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " <<
 
 bool AssetList::Load()
 {
+  if (m_name.empty() || m_name == "none")
+  {
+    m_state = AMJU_AL_ALL_ASSETS_LOADED;
+    return true;
+  }
+
 #ifdef ASSET_DEBUG
 std::cout << "Opening asset list " << m_name << "\n";
 #endif
@@ -387,16 +393,22 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
   m_objects.insert(obj);
 
   // Get the asset list and data file if we haven't already
-  GetFile(obj->m_datafile);
+  if (!obj->m_datafile.empty() && obj->m_datafile != "none")
+  {
+    GetFile(obj->m_datafile);
+  }
 
   // See if we have already got the asset list (because we already found another object of the same type, etc.)
   const std::string& assetlistname = obj->m_assetlist;
-  if (m_assetLists.find(assetlistname) == m_assetLists.end())
+  if (!assetlistname.empty() && assetlistname != "none")
   {
-    // Asset List not yet created
-    AssetList* assetlist = new AssetList(assetlistname);
-    m_assetLists[assetlistname] = assetlist;
-    GetFile(assetlistname);
+    if (m_assetLists.find(assetlistname) == m_assetLists.end())
+    {
+      // Asset List not yet created
+      AssetList* assetlist = new AssetList(assetlistname);
+      m_assetLists[assetlistname] = assetlist;
+      GetFile(assetlistname);
+    }
   }
 
   // Later we check state of asset list and datafile...
@@ -424,16 +436,26 @@ void ObjectManager::Update()
       {
         continue;
       }
+
       const std::string& assetlistname = obj->m_assetlist;   
       const std::string& datafilename = obj->m_datafile;
-      if (IsLocal(assetlistname) &&
-          IsLocal(datafilename))
+
+      if ((assetlistname.empty() || assetlistname == "none") &&
+          (datafilename.empty() || datafilename == "none"))
+      {
+        obj->Create();
+        TheObjectUpdater::Instance()->HintCheckForUpdates();
+        TheObjectUpdater::Instance()->HintCheckForPosUpdates();
+      }
+      else if (IsLocal(assetlistname) && IsLocal(datafilename))
       {
         AssetList* assetlist = m_assetLists[assetlistname];
+        Assert(assetlist);
         if (assetlist->AllAssetsLoaded())
         {
           obj->Create();
           // Hint to get pos/state for this object
+          // Doesn't seem to help speed up Waiting screen
           TheObjectUpdater::Instance()->HintCheckForUpdates();
           TheObjectUpdater::Instance()->HintCheckForPosUpdates();
         }
@@ -480,6 +502,12 @@ std::cout << "Created game object " << go->GetId() << " " << go->GetTypeName() <
 
 void ObjectManager::OnObjectChangeLocation(int objId)
 {
+  // No such object - OK if we are in edit mode and have just created it
+  if (m_allGameObjects.find(objId) == m_allGameObjects.end())
+  {
+    return;
+  }
+
   // TODO Handle objects leaving the local player location
 
   Assert(m_allGameObjects.find(objId) != m_allGameObjects.end());
@@ -497,7 +525,9 @@ std::cout << "Added game object to our location (" << m_location << ")\n";
     }
     else
     {
-std::cout << "Created game object but it's not in our location (" << m_location << ")\n"; 
+std::cout << "Game object " << objId << " not in our location (" << m_location << ")\n"; 
+      TheGame::Instance()->EraseGameObject(objId);
+      v->OnLocationExit();
     }
   }
   else

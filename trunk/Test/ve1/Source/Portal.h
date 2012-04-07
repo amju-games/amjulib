@@ -1,6 +1,7 @@
 #ifndef PORTAL_H_INCLUDED
 #define PORTAL_H_INCLUDED
 
+#include <SceneNode.h>
 #include "Ve1Object.h"
 
 namespace Amju
@@ -29,6 +30,7 @@ private:
   Vec3f m_destPos;
   bool m_isOpen;
   AABB m_aabb;
+  RCPtr<SceneNode> m_sceneNode;
 };
 }
 
