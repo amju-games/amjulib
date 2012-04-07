@@ -12,6 +12,7 @@ const char* GuiButton::NAME = "gui-button";
 static const int BUTTON_PRIORITY = -100; // a pressed button takes priority over most stuff
 
 static GuiButton* focusButton = 0;
+static GuiButton* cancelButton = 0;
 
 GuiButton::GuiButton()
 {
@@ -24,6 +25,23 @@ GuiButton::GuiButton()
 GuiButton::~GuiButton()
 {
   // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
+}
+
+bool GuiButton::IsCancelButton() const
+{
+  return (cancelButton == this);
+}
+
+void GuiButton::SetIsCancelButton(bool isCancelButton)
+{
+  if (isCancelButton)
+  {
+    cancelButton = this;
+  }
+  else
+  {
+    cancelButton = 0;
+  }
 }
 
 bool GuiButton::IsFocusButton() const
@@ -165,7 +183,8 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
 
 bool GuiButton::OnKeyEvent(const KeyEvent& ke)
 {
-  if (IsFocusButton() && ke.keyType == AMJU_KEY_ENTER)
+  if ((IsFocusButton()  && ke.keyType == AMJU_KEY_ENTER)  ||
+      (IsCancelButton() && ke.keyType == AMJU_KEY_ESC))
   {
     m_isPressed = ke.keyDown;
     ClickSound();
