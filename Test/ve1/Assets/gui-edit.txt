@@ -6,11 +6,16 @@ gui-comp
 // Name
 hud-comp
 // Num children
-6
+7
 
 
 gui-list-box
 location-list
+-0.5, 0.5
+1.0, 1.0
+
+gui-list-box
+property-list
 -0.5, 0.5
 1.0, 1.0
 
