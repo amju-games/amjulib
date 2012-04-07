@@ -161,13 +161,13 @@ int GSEdit::GetUniqueId()
   return 0;
 }
 
-void GSEdit::OnNextLocation()
-{
-  m_location++;
-  SetLocalPlayerLocation(m_location);
-  // Will wait in GSWaitForNewLocation. Need to add a cancel button there, so we can come back here.
-  // But need to reset to old location in this case..???
-}
+//void GSEdit::OnNextLocation()
+//{
+//  m_location++;
+//  SetLocalPlayerLocation(m_location);
+//  // Will wait in GSWaitForNewLocation. Need to add a cancel button there, so we can come back here.
+//  // But need to reset to old location in this case..???
+//}
 
 void GSEdit::Update()
 {
@@ -243,19 +243,31 @@ void GSEdit::Draw()
     // Check for selected object
 std::cout << "PICKING!\n";
     GameObject* obj = PickObject(m_mouseScreen);
+
+    // Unselect objects -- TODO not if in multi mode
+    for (SelObjects::iterator it = m_selectedObjects.begin(); it != m_selectedObjects.end(); ++it)
+    {
+      Ve1Object* obj = *it;
+      obj->SetSelected(false);
+    }
+    m_selectedObjects.clear();
+ 
     if (obj)
     {
 std::cout << " - GOT AN OBJECT! " << obj->GetId() << "\n";
 
       // TODO Multi-select - use Shift and Ctrl like Maya
-      m_selectedObjects.clear();
       if (obj)
       {
         Ve1Object* vobj = dynamic_cast<Ve1Object*>(obj);
         Assert(vobj);
         m_selectedObjects.insert(vobj);
+        vobj->SetSelected(true);
       }
     }
+
+    // when we right click: CreateContextMenu();
+
     // Change text
     std::string selText;
     if (m_selectedObjects.empty())
@@ -486,12 +498,29 @@ private:
 class SetPropsCommand : public GuiCommand
 {
 public:
-  SetPropsCommand() {}
+  SetPropsCommand(int objId) : m_id(objId)  {}
   virtual bool Do()
   {
-    return false;
+    TheGSEdit::Instance()->ShowPropsForObj(m_id);
+    return false; // no undo
   }
+
+private:
+  int m_id;
 };
+
+void GSEdit::ShowPropsForObj(int id)
+{
+  Ve1Object* obj = (Ve1Object*)TheGame::Instance()->GetGameObject(id).GetPtr();
+  ValMap* valmap = obj->GetValMap();
+
+std::cout << "Here are the properties for the selected object (" << obj->GetId() << "):\n";
+
+  for (ValMap::iterator it = valmap->begin(); it != valmap->end(); ++it)
+  {
+std::cout << "Property for obj: " << it->first << "=" << it->second << "\n";
+  }
+}
 
 void GSEdit::CreateContextMenu()
 {
@@ -515,9 +544,11 @@ void GSEdit::CreateContextMenu()
   }
   else if (m_selectedObjects.size() == 1)
   {
-std::cout << "Create context menu for one object...\n";
+    Ve1Object* obj = *(m_selectedObjects.begin());
+
+std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
     m_menu->Clear(); 
-    m_menu->AddItem(new GuiMenuItem("Set properties...", new SetPropsCommand()));
+    m_menu->AddItem(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
 //    m_menu->AddItem(new GuiMenuItem("Save changes to object", new SaveObjectCommand()));
   }
   else

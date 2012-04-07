@@ -6,6 +6,17 @@ namespace Amju
 {
 Ve1Object::Ve1Object() : m_location(-1)
 {
+  m_isSelected = false;
+}
+
+bool Ve1Object::IsSelected() const
+{
+  return m_isSelected;
+}
+
+void Ve1Object::SetSelected(bool selected)
+{
+  m_isSelected = selected;
 }
 
 int Ve1Object::GetLocation() const
@@ -67,7 +78,12 @@ void Ve1Object::MoveTo(const Vec3f& pos)
 
 void Ve1Object::Set(const std::string& key, const std::string& val)
 {
-  // TODO
+  m_valmap[key] = val; 
+}
+
+ValMap* Ve1Object::GetValMap()
+{
+  return &m_valmap;
 }
 
 }

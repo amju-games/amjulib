@@ -55,7 +55,7 @@ std::cout << " -- failed!\n";
     // Done - now prod ObjectManager to get new files
 std::cout << "Have finished deleting updated files, now need to download new versions!\n";
 
-    TheGSFileUpdateCheck::Instance()->OnFinishedChecking();
+    TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp);
   }
   else
   {
@@ -77,7 +77,7 @@ std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
 
 std::cout << "URL was: \"" << m_url << "\"\n";
 
-  TheGSFileUpdateCheck::Instance()->OnFinishedChecking();
+  TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp); // ??
 }
 
 }

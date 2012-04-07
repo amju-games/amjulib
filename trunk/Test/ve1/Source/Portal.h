@@ -18,7 +18,7 @@ public:
   virtual void Update();
   virtual bool Load(File*);
   virtual void OnLocationEntry();
-
+  virtual void Set(const std::string&, const std::string&);
   void OnPlayerCollision(Player* player);
 
   // For collision testing (should use SAP)

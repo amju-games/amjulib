@@ -22,7 +22,7 @@ public:
 
   void OnSkip(); // just go to next state..?
 
-  void OnFinishedChecking(); // called when we have got response from server 
+  void OnFinishedChecking(const std::string& timestamp); // called when we have got response from server 
 
   void SetNextState(GameState* next);
 

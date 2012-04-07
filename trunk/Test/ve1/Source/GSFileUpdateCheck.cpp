@@ -30,8 +30,10 @@ void GSFileUpdateCheck::Update()
   GSGui::Update();
 }
 
-void GSFileUpdateCheck::OnFinishedChecking()
+void GSFileUpdateCheck::OnFinishedChecking(const std::string& timestamp)
 {
+  m_timestamp = timestamp;
+  TheGameConfigFile::Instance()->Set(FILE_UPDATE_TIMESTAMP, m_timestamp);
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 

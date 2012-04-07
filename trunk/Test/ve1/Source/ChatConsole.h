@@ -26,6 +26,7 @@ public:
   void OnActive();
   void OnDeactive(); 
 
+  // Treat enter as Send button
   //virtual bool OnKeyEvent(const KeyEvent&);
   //virtual bool OnCursorEvent(const CursorEvent&);
   //virtual bool OnMouseButtonEvent(const MouseButtonEvent&);

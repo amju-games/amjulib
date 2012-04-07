@@ -28,6 +28,7 @@ public:
 protected:
   PXml m_xml;
   std::string m_errorStr;
+  std::string m_timestamp;
 };
 }
 
