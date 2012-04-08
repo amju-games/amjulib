@@ -574,6 +574,7 @@ std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() 
       if (v->GetLocation() == m_location)
       {
         TheGame::Instance()->AddGameObject(go);
+        TheSAP::Instance()->AddBox(go);
         v->OnLocationEntry();
       }
     }

@@ -21,7 +21,10 @@ bool SAPCollideFunc(GameObject* go1, GameObject* go2)
   }
   bool b = aabb1->Intersects(*aabb2);
 #ifdef _DEBUG
-std::cout << "COLLISION! " << go1->GetId() << " and " << go2->GetId() << "\n";
+  if (b)
+  {
+    std::cout << "COLLISION! " << go1->GetId() << " and " << go2->GetId() << "\n";
+  }
 #endif
 
   return b;
