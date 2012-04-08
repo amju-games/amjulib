@@ -144,7 +144,9 @@ void SweepAndPrune::ResolveEncounters()
     // Iterate through your encounter list and trigger collision resolution code
     // for each pair of objects in there
 
-    for (EncounterSet::iterator it = m_encounters.begin(); it != m_encounters.end(); ++it)
+    // Copy the container so iterator won't be invalidated
+    EncounterSet encs = m_encounters;
+    for (EncounterSet::iterator it = encs.begin(); it != encs.end(); ++it)
     {
         const Encounter& enc = *it;
         bool b = TheCollisionManager::Instance()->HandleCollision(enc.first, enc.second);
