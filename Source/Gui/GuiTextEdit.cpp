@@ -25,6 +25,11 @@ void GuiTextEdit::Draw()
   static const float BLINK_TIME_END = 0.5f;
   static const float BLINK_TIME_HALF = BLINK_TIME_END * 0.5f;
 
+  if (!IsVisible())
+  {
+    return;
+  }
+
   float dt = TheTimer::Instance()->GetDt();
   m_caretTimer += dt;
   m_drawCaret = false;
@@ -118,6 +123,11 @@ bool GuiTextEdit::OnCursorEvent(const CursorEvent& ce)
 
 bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  if (!IsVisible())
+  {
+    return false;
+  }
+
   Rect r = GetRect(this);
   if (!r.IsPointIn(Vec2f(mbe.x, mbe.y)))
   {
@@ -156,6 +166,11 @@ std::cout << "FOUND POS!\n";
 
 bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
 {
+  if (!IsVisible())
+  {
+    return false;
+  }
+
   if (!HasFocus())
   {
     return false;

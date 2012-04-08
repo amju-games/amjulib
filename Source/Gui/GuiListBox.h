@@ -22,6 +22,7 @@ public:
 
   void SetSelected(int child, bool selected);
   bool IsSelected(int child) const;
+  int GetSelectedItem() const; // only for non-multi-select lists
 
   void SetIsMultiSel(bool isMulti);
   bool IsMultiSel() const;
