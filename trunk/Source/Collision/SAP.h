@@ -26,14 +26,19 @@ public:
   void Clear();
   void SetCollideFunc(CollideFunc cf);
 
+  // For dynamically adding/removing game objects
+  int AddBox(GameObject* go); 
+  // TODO
+  //void RemoveBox(GameObject* go); 
+
 private:
-  typedef std::pair<GameObject*, GameObject*> Encounter;
+  typedef std::pair<PGameObject, PGameObject> Encounter;
 
   struct Endpoint
   {
     enum Type { AMJU_SAP_MIN, AMJU_SAP_MAX };
     Type m_type;
-    GameObject* m_go;
+    PGameObject m_go;
   };
 
   typedef std::set<Encounter> EncounterSet;
@@ -53,11 +58,6 @@ private:
 
   void AddEncounter(GameObject* go1, GameObject* go2);
   void RemoveEncounter(GameObject* go1, GameObject* go2);
-
-  int AddBox(GameObject* go); 
-
-  // TODO
-  //void RemoveBox(GameObject* go); 
 
 }; // class SAP
 
