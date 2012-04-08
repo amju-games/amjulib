@@ -98,6 +98,9 @@ void ChatConsole::OnActive()
   send->SetCommand(Amju::OnChatSendButton);
   send->SetIsFocusButton(true);
 
+  GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
+  textedit->SetText("");
+
   GetElementByName(m_gui, "chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
   ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
   ActivateChatSend(false, -1);
@@ -161,7 +164,7 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
     ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
     GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
     textedit->SetHasFocus(true);
-    textedit->SetText("");
+    //textedit->SetText("");
   }
   else
   {
