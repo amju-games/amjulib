@@ -8,14 +8,63 @@ hud-comp
 // Num children
 7
 
+// Change object property
 
-gui-list-box
-location-list
--0.5, 0.5
-1.0, 1.0
+gui-comp
+property-comp
+6
 
 gui-list-box
 property-list
+-0.5, 0.5
+1.0, 1.0
+
+gui-button
+property-change
+-0.5, -0.6
+0.4, 0.1
+gui-button-4.png
+change
+arial, 1.0
+
+gui-button
+property-cancel
+-0.1, -0.6
+0.4, 0.1
+gui-button-4.png
+cancel
+arial, 1.0
+
+gui-text-edit
+property-value
+-0.4, 0.2
+0.8, 0.1
+Enter val
+arial, 1.0
+
+gui-button
+property-set
+-0.4, 0.1 
+0.4, 0.1
+gui-button-4.png
+set
+arial, 1.0
+
+gui-button
+property-set-cancel
+0.0, 0.1 
+0.4, 0.1
+gui-button-4.png
+cancel
+arial, 1.0
+
+// -----------------------------------------------
+
+// List locations
+// TODO Make this a comp
+
+gui-list-box
+location-list
 -0.5, 0.5
 1.0, 1.0
 
