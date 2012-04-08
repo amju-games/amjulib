@@ -88,6 +88,22 @@ bool GuiListBox::IsSelected(int child) const
   return (m_selset.count(child) != 0);
 }
 
+int GuiListBox::GetSelectedItem() const
+{
+  // only for non-multi-select lists
+  Assert(!IsMultiSel());
+
+  int c = GetNumChildren(); 
+  for (int i = 0; i < c; i++)
+  {
+    if (IsSelected(i))
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+
 void GuiListBox::AddItem(GuiText* text)
 {
   text->SetDrawBg(true); // TODO TEMP TEST
