@@ -20,14 +20,13 @@ public:
   virtual bool Load(File*);
   virtual void OnLocationEntry();
   virtual void Set(const std::string&, const std::string&);
+
   void OnPlayerCollision(Player* player);
 
   // For collision testing (should use SAP)
   AABB* GetAABB();
 
 private:
-  int m_destLocation;
-  Vec3f m_destPos;
   bool m_isOpen;
   AABB m_aabb;
   RCPtr<SceneNode> m_sceneNode;

@@ -7,6 +7,17 @@ namespace Amju
 Ve1Object::Ve1Object() : m_location(-1)
 {
   m_isSelected = false;
+  m_ignorePortalId = -1;
+}
+
+void Ve1Object::IgnorePortalId(int portalId)
+{
+  m_ignorePortalId = portalId;
+}
+
+int Ve1Object::GetIgnorePortalId() const
+{
+  return m_ignorePortalId;
 }
 
 bool Ve1Object::IsSelected() const
@@ -79,6 +90,19 @@ void Ve1Object::MoveTo(const Vec3f& pos)
 void Ve1Object::Set(const std::string& key, const std::string& val)
 {
   m_valmap[key] = val; 
+}
+
+bool Ve1Object::Exists(const std::string& key) const
+{
+  return (m_valmap.find(key) != m_valmap.end());
+}
+
+const std::string& Ve1Object::GetVal(const std::string& key) const
+{
+  Assert(Exists(key));
+  ValMap::const_iterator it = m_valmap.find(key);
+  Assert(it != m_valmap.end());
+  return it->second;
 }
 
 ValMap* Ve1Object::GetValMap()

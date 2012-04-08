@@ -70,11 +70,8 @@ std::cout << "FAILED to get updated file list from server.\n";
   const HttpResult& res = GetResult();
 
 std::cout << "RESULT: " << res.GetString() << "\n";
-
 std::cout << "ERROR: " << res.GetErrorString() << "\n";
-
 std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
-
 std::cout << "URL was: \"" << m_url << "\"\n";
 
   TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp); // ??

@@ -6,6 +6,7 @@
 #include <SafeUtils.h>
 #include <GameObjectFactory.h>
 #include <GuiListBox.h>
+#include <GuiTextEdit.h>
 #include "GSNetError.h"
 #include "PickObject.h"
 #include "ObjectManager.h"
@@ -147,6 +148,7 @@ GSEdit::GSEdit()
   m_isPicking = false;
   m_newObjectId = -1;
   m_getDragVec = false;
+  m_selObj = 0;
 }
 
 void GSEdit::SetLocs(const Locs& locs)
@@ -223,18 +225,17 @@ void GSEdit::Draw()
   }
 
   // Draw axes for selected object
-  if (!m_selectedObjects.empty())
+  if (m_selObj)
   {
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
     PushColour();
     AmjuGL::SetColour(0, 0, 0, 1);
 
-    GameObject* go = *(m_selectedObjects.begin());
-    Vec3f p0 = go->GetPos();
+    Vec3f p0 = m_selObj->GetPos();
     Vec3f p1 = p0 + m_right * 1000.0f;
     AmjuGL::DrawLine(AmjuGL::Vec3(p0.x, p0.y, p0.z), AmjuGL::Vec3(p1.x, p1.y, p1.z));
-    p0 = go->GetPos();
+    p0 = m_selObj->GetPos();
     p1 = p0 + m_up * 1000.0f;
     AmjuGL::DrawLine(AmjuGL::Vec3(p0.x, p0.y, p0.z), AmjuGL::Vec3(p1.x, p1.y, p1.z));
 
@@ -257,7 +258,8 @@ std::cout << "PICKING!\n";
       obj->SetSelected(false);
     }
     m_selectedObjects.clear();
- 
+    // DON'T set m_selObj to 0 -- remember the last selected obj
+
     if (obj)
     {
 std::cout << " - GOT AN OBJECT! " << obj->GetId() << "\n";
@@ -269,6 +271,8 @@ std::cout << " - GOT AN OBJECT! " << obj->GetId() << "\n";
         Assert(vobj);
         m_selectedObjects.insert(vobj);
         vobj->SetSelected(true);
+        m_selObj = dynamic_cast<Ve1Object*>(obj);
+        Assert(m_selObj);
       }
     }
 
@@ -282,7 +286,8 @@ std::cout << " - GOT AN OBJECT! " << obj->GetId() << "\n";
     }
     else if (m_selectedObjects.size() == 1)
     {
-      selText = "one object selected";
+      Assert(m_selObj);
+      selText = "one object selected (" + ToString(m_selObj->GetId()) + ") " + m_selObj->GetTypeName();
     }
     else
     {
@@ -302,7 +307,6 @@ void GSEdit::Draw2d()
   }
 
   TheCursorManager::Instance()->Draw();
-
 }
 
 void OnChooseLocOk()
@@ -313,6 +317,100 @@ void OnChooseLocOk()
 void OnChooseLocCancel()
 {
   TheGSEdit::Instance()->ShowLocationList(false);
+}
+
+void OnChangeProperty()
+{
+  TheGSEdit::Instance()->ShowChangeProperty(true);
+}
+
+void OnCancelProperty()
+{
+  TheGSEdit::Instance()->ShowPropertyList(false);
+}
+
+void OnPropertySet()
+{
+  TheGSEdit::Instance()->OnPropertySet();
+}
+
+void OnPropertySetCancel()
+{
+  TheGSEdit::Instance()->ShowChangeProperty(false);
+}
+
+void GSEdit::OnPropertySet()
+{
+  // Change value, update GUI, send change to server
+  ShowChangeProperty(false); // Hide change GUI
+
+  // Get new value
+  GuiElement* elem = GetElementByName(m_gui, "property-value");
+  std::string newVal = ((GuiTextEdit*)elem)->GetText();
+  
+  // Get the object to update
+  Assert(m_selObj);
+
+  // Get the property to change
+  elem = GetElementByName(m_gui, "property-list");
+  GuiListBox* lb = ((GuiListBox*)elem);
+  int sel = lb->GetSelectedItem();
+  if (sel < 0)
+  {
+std::cout << "Nothing selected in list box?\n";
+    Assert(0);
+    return;
+  }
+std::cout << "Selected child: " << sel << "\n";
+  elem = lb->GetChild(sel);
+  Assert(elem);
+   
+  ValMap* valmap = m_selObj->GetValMap();
+  Assert(valmap);
+  ValMap::iterator it = valmap->begin();
+  std::advance(it, sel);
+ 
+  std::string key = it->first;
+std::cout << "Old Property for obj: " << it->first << "=" << it->second << "\n";
+
+  // Send update 
+  TheObjectUpdater::Instance()->SendUpdateReq(m_selObj->GetId(), key, newVal);
+
+  // Set locally (or wait for server ?)
+  m_selObj->Set(key, newVal);
+
+  // Refresh list
+  ShowPropsForObj(m_selObj->GetId());
+}
+
+void GSEdit::ShowChangeProperty(bool b)
+{
+  if (b)
+  {
+    // Check that an item is selected in list box
+    GuiElement* elem = GetElementByName(m_gui, "property-list");
+    GuiListBox* lb = ((GuiListBox*)elem);
+    int sel = lb->GetSelectedItem();
+    if (sel < 0)
+    {
+std::cout << "Nothing selected, can't change!\n";
+      return;
+    }
+    else
+    {
+      // Get current value, populate text edit box
+      ValMap* valmap = m_selObj->GetValMap();
+      ValMap::iterator it = valmap->begin();
+      std::advance(it, sel);
+      std::string val = it->second;
+      GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "property-value");
+      edit->SetText(val); 
+    }
+  }
+
+  GetElementByName(m_gui, "property-value")->SetVisible(b);
+  GetElementByName(m_gui, "property-set")->SetVisible(b);
+  GetElementByName(m_gui, "property-set-cancel")->SetVisible(b);
 }
 
 void GSEdit::OnActive()
@@ -349,12 +447,24 @@ void GSEdit::OnActive()
 
   ShowLocationList(false);
   ShowPropertyList(false);
+  GetElementByName(m_gui, "property-change")->SetCommand(OnChangeProperty);
+  GetElementByName(m_gui, "property-cancel")->SetCommand(OnCancelProperty);
+  GetElementByName(m_gui, "property-set")->SetCommand(Amju::OnPropertySet);
+  GetElementByName(m_gui, "property-set-cancel")->SetCommand(OnPropertySetCancel);
 }
 
 void GSEdit::ShowPropertyList(bool b)
 {
-  GuiElement* props = GetElementByName(m_gui, "property-list");
+  GuiElement* props = GetElementByName(m_gui, "property-comp");
   props->SetVisible(b);
+  if (b)
+  {
+    GetElementByName(m_gui, "property-list")->SetVisible(true);
+    GetElementByName(m_gui, "property-change")->SetVisible(true);
+    GetElementByName(m_gui, "property-value")->SetVisible(false);
+  }
+
+  ShowChangeProperty(false);
 }
 
 void GSEdit::ShowLocationList(bool b)
@@ -569,6 +679,7 @@ void GSEdit::CreateContextMenu()
   else if (m_selectedObjects.size() == 1)
   {
     Ve1Object* obj = *(m_selectedObjects.begin());
+    Assert(obj == m_selObj);
 
 std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
     m_menu->Clear(); 
