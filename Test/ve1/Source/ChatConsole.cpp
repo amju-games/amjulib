@@ -175,7 +175,10 @@ void ChatConsole::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
   if (active && msg)
   {
     std::string senderName;
-    GetNameForPlayer(msg->m_senderId, &senderName);
+    if (!GetNameForPlayer(msg->m_senderId, &senderName))
+    {
+      return;
+    }
 
     //((GuiText*)m_gui->GetElementByName("msg-recv-sender"))->SetText(senderName);
     //((GuiText*)m_gui->GetElementByName("msg-recv-text"))->SetText(msg->m_text);
