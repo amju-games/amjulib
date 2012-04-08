@@ -1,0 +1,21 @@
+Tab and shift-tab: elements must be in a doubly-linked list.
+
+All elements should have border which can be drawn ?
+
+Table/grid type
+
+
+Text Edit
+---------
+
+Change caret pos with mouse
+
+Horiz text scrolling when caret moves from is wrong moving from right edge to left - caret should move, not the text
+
+Selection - with shift. 
+
+Movement: by word: Left + ctrl (win) or option [alt](mac)  
+
+Multi-line text edit
+
+

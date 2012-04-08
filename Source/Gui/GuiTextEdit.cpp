@@ -14,8 +14,9 @@ GuiTextEdit::GuiTextEdit() : m_caret(0)
   m_drawBg = true;
   m_caretTimer = 0;
   m_drawCaret = true;
+  m_first = 0;
+  m_last = 0;
 
-  // Obviously wrong :-(
   TheEventPoller::Instance()->AddListener(this); 
 }
 
@@ -26,14 +27,14 @@ void GuiTextEdit::Draw()
 
   float dt = TheTimer::Instance()->GetDt();
   m_caretTimer += dt;
-  m_drawCaret = true;
+  m_drawCaret = false;
   if (m_caretTimer > BLINK_TIME_END)
   {
     m_caretTimer = 0;
   }
-  else if (m_caretTimer > BLINK_TIME_HALF)
+  else if (HasFocus() && m_caretTimer < BLINK_TIME_HALF)
   {
-    m_drawCaret = false;
+    m_drawCaret = true;
   }
 
   // Works best if caret width is zero, (change widths file for char 124)
@@ -107,6 +108,50 @@ void GuiTextEdit::Insert(char c)
 
   m_myText = left + c + right;
   m_caret++;
+}
+
+bool GuiTextEdit::OnCursorEvent(const CursorEvent& ce)
+{
+  // TODO In drag mode, select part of the text
+  return false;
+}
+
+bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  Rect r = GetRect(this);
+  if (!r.IsPointIn(Vec2f(mbe.x, mbe.y)))
+  {
+    return false; // not handled - cursor not in edit box
+  }
+
+  // If clicked in bounding rect, this element gets focus
+  SetHasFocus(true);
+
+  if (!mbe.isDown)
+  {
+    return true;  
+  }
+
+  // When L button clicked, find new caret position
+  float startX = GetPos().x;
+std::cout << "Mouse X: " << mbe.x << " text start X: " << startX << "\n";
+std::cout << "Displayed String: \"" << m_text.substr(m_first, m_last - m_first) << "\"\n";
+
+  for (int i = m_first; i < m_last; i++)
+  {
+    float x = GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) + startX;
+
+std::cout << "String: \"" << m_text.substr(m_first, i - m_first) << "\" X " << x << "\n";
+
+    if (x > mbe.x)
+    {
+std::cout << "FOUND POS!\n";
+      m_caret = i;
+      break;
+    }
+  }
+  
+  return false;
 }
 
 bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
@@ -225,6 +270,9 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
     Assert(*first >= 0);
     Assert(m_caret >= *first);
     Assert(m_caret <= *last);
+
+    m_first = *first;
+    m_last = *last;
 
     return;
 
