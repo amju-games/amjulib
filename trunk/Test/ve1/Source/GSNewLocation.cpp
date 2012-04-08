@@ -50,7 +50,14 @@ std::cout << "Got new location ID from server! " << id << "\n";
 
   virtual void OnFailure()
   {
+    const HttpResult& res = GetResult();
+
 std::cout << "FAILED to get new location ID.\n";
+std::cout << "RESULT: " << res.GetString() << "\n";
+std::cout << "ERROR: " << res.GetErrorString() << "\n";
+std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
+std::cout << "URL was: \"" << m_url << "\"\n";
+
     TheGSNewLocation::Instance()->OnNewIdResponse("");
   }
 };

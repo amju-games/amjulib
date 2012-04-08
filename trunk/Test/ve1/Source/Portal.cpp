@@ -5,6 +5,7 @@
 #include "ObjectManager.h"
 #include "Ve1Node.h"
 #include "Ve1SceneGraph.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -25,10 +26,9 @@ const char* Portal::GetTypeName() const
 
 Portal::Portal()
 {
-  m_destLocation = 0;
-  m_isOpen = false;
+  m_isOpen = true;
 
-  Set(DEST_KEY, "1");
+  Set(DEST_KEY, "1"); // value is game object ID for destination portal
 }
 
 void Portal::Set(const std::string& key, const std::string& val)
@@ -37,8 +37,23 @@ void Portal::Set(const std::string& key, const std::string& val)
   
   if (key == DEST_KEY)
   {
-    // Set up reverse link TODO
-//    PGameObject dest
+    // Set up reverse link 
+    int destId = ToInt(val);
+    Ve1Object* destObj = dynamic_cast<Ve1Object*>(TheObjectManager::Instance()->GetGameObject(destId).GetPtr());
+    if (!destObj)
+    {
+std::cout << "* Portal: dest portal doesn't exist [yet]..\n";
+      return ;
+    }
+    
+    std::string thisId = ToString(GetId());
+    if (destObj->GetVal(DEST_KEY) != thisId)
+    {
+std::cout << "Setting dest ID " << thisId << " for portal " << destId << "\n";
+      destObj->Set(DEST_KEY, thisId);
+      // TODO Should we send this update to server ? Or just always set it in client!?
+      TheObjectUpdater::Instance()->SendUpdateReq(destObj->GetId(), DEST_KEY, thisId);
+    }
   }
 }
 
@@ -58,8 +73,8 @@ AABB* Portal::GetAABB()
 
 void Portal::Update()
 {
-  static const float XSIZE = 10.0f;
-  static const float YSIZE = 20.0f;
+  static const float XSIZE = 20.0f; // TODO CONFIG
+  static const float YSIZE = 40.0f;
   m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,
@@ -89,19 +104,49 @@ void Portal::OnPlayerCollision(Player* player)
     return;
   }
 
+  // TODO Carried objects
+
   if (!player->IsLocalPlayer())
   {
     return;
   }
 
   // Change location
+  if (!Exists(DEST_KEY))
+  {
+std::cout << "* Portal: Dest key doesn't exist!\n";
+    return; 
+  }
 
-//  player->SetPos(m_destPos);
+  if (player->GetIgnorePortalId() == this->GetId())
+  {
+std::cout << "* Portal: Set to ignore this one.\n";
+    return;
+  }
 
-  TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), m_destPos, m_destLocation);
+  std::string strId = GetVal(DEST_KEY);
+  int destId = ToInt(strId);
+
+std::cout << "* Entered portal! Destination portal ID is " << destId << "...\n";
+  Ve1Object* destObj = dynamic_cast<Ve1Object*>(TheObjectManager::Instance()->GetGameObject(destId).GetPtr());
+  if (!destObj)
+  {
+std::cout << "* Portal: dest portal doesn't exist [yet]..\n";
+    return ;
+  }
+  int destLocation = destObj->GetLocation();
+  const Vec3f& destPos = destObj->GetPos();
+std::cout << "* Dest location: " << destLocation << " dest pos: " << destPos << "\n";
+
+  TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), destPos, destLocation);
 
   // Should Player do this ?
-  SetLocalPlayerLocation(m_destLocation); // LocalPlayer
+  SetLocalPlayerLocation(destLocation); // LocalPlayer
+
+  // Set dest portal so we don't flip back and forth
+  Portal* destPortal = dynamic_cast<Portal*>(destObj);
+  Assert(destPortal);
+  player->IgnorePortalId(destId);
 }
 }
 

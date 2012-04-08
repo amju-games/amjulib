@@ -43,6 +43,8 @@ public:
   void OnNewObjectId(int id);
   void ShowPropsForObj(int id);
   void ShowPropertyList(bool);
+  void ShowChangeProperty(bool);
+  void OnPropertySet();
 
   // Set list of locations - called when we get response from server
   void SetLocs(const Locs& locs);
@@ -58,6 +60,7 @@ private:
 private:
   typedef std::set<Ve1Object*> SelObjects;
   SelObjects m_selectedObjects;
+  Ve1Object* m_selObj; // last selected object
   PGuiElement m_gui;
   RCPtr<GuiMenu> m_menu;
   bool m_mouseDownLeft;

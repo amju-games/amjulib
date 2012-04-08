@@ -22,9 +22,11 @@
 #include <File.h>
 #include <Directory.h>
 #include <ConfigFile.h>
+#include <SAP.h>
 #include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
+#include "SAPCollideFunc.h"
 
 namespace Amju
 {
@@ -52,7 +54,8 @@ void StartUp()
   // TODO Get SaveDir from config or workding dir of executable
   File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
   
-  // TODO Need to set SAP collide func
+  // Set SAP collide func
+  TheSAP::Instance()->SetCollideFunc(SAPCollideFunc);
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for .obj files, binary loader for .objb 

@@ -70,7 +70,7 @@ void GSMain::Update()
   TheGame::Instance()->UpdateGameObjects();
 
   // TODO Need to set collision test function
-  //TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
+  TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
 }
 
 void GSMain::DoMoveRequest()

@@ -29,11 +29,9 @@ public:
 
   // Set a state (key, val) pair
   virtual void Set(const std::string& key, const std::string& val);
-  // TODO Or use Variable ?
-//  virtual void Set(const std::string& key, int val);
-
+  bool Exists(const std::string& key) const;
+  const std::string& GetVal(const std::string& key) const;
   ValMap* GetValMap();
-
 
   // Set the position - if a character, move to this pos over time, don't instantly set.
   // NB If location changes, we must call SetLocation().
@@ -53,6 +51,9 @@ public:
   bool IsSelected() const;
   void SetSelected(bool selected);
 
+  void IgnorePortalId(int portalId);
+  int GetIgnorePortalId() const;
+ 
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
   //  i.e. it's in whatever the current location is.
@@ -63,6 +64,8 @@ protected:
   ValMap m_valmap; 
 
   bool m_isSelected;
+
+  int m_ignorePortalId;
 };
 
 // Keep track of keys used to set object properties
