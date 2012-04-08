@@ -143,6 +143,14 @@ std::cout << "* Dest location: " << destLocation << " dest pos: " << destPos << 
   // Should Player do this ?
   SetLocalPlayerLocation(destLocation); // LocalPlayer
 
+  // Set new position immediately
+  player->SetPos(destPos);
+  // Move in current direction a little bit ?
+  Vec3f vel = player->GetVel();
+  vel.Normalise();
+  vel *= 100.0f;
+  player->MoveTo(destPos + vel);
+
   // Set dest portal so we don't flip back and forth
   Portal* destPortal = dynamic_cast<Portal*>(destObj);
   Assert(destPortal);
