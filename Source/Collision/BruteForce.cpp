@@ -3,15 +3,18 @@
 
 namespace Amju
 {
-void BruteForce(GameObjects* gos)
+void BruteForce(GameObjects* gameobjs)
 {
-  for (GameObjects::iterator it = gos->begin(); it != gos->end(); ++it)
+  // Copy so iterator not invalidated
+  GameObjects gos(*gameobjs);
+
+  for (GameObjects::iterator it = gos.begin(); it != gos.end(); ++it)
   {
     PGameObject go1 = it->second;
 
     GameObjects::iterator jt = it;
     ++jt;
-    for ( ; jt != gos->end(); ++jt)
+    for ( ; jt != gos.end(); ++jt)
     {
       PGameObject go2 = jt->second;
 
