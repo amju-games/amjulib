@@ -445,7 +445,7 @@ void Player::SetMenu(GuiMenu* menu)
 bool GetNameForPlayer(int objId, std::string* r)
 {
   Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
-  Assert(p);
+  //Assert(p);
   if (p)
   {
     *r = p->GetName();
