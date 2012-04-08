@@ -1,6 +1,7 @@
 #include "GSMain.h"
 #include <AmjuGL.h>
-#include <SAP.h>
+#include <SAP.h> 
+#include <BruteForce.h> // test against SAP
 #include <Unproject.h>
 #include <ClipLineSegBox.h>
 #include <iostream>
@@ -70,7 +71,9 @@ void GSMain::Update()
   TheGame::Instance()->UpdateGameObjects();
 
   // TODO Need to set collision test function
-  TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
+//  TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
+  // TODO TEMP TEST
+  BruteForce(TheGame::Instance()->GetGameObjects());
 }
 
 void GSMain::DoMoveRequest()
