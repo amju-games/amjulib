@@ -7,6 +7,7 @@
 #include "GSMain.h"
 #include "GSEdit.h"
 #include "GameMode.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -22,7 +23,7 @@ void GSWaitForNewLocation::Update()
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
 
-  if (TerrainReady()) 
+  if (TerrainReady() && GetLocalPlayer()) 
   {
     if (GetGameMode() == AMJU_MODE_EDIT)
     {
