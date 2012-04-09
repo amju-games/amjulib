@@ -68,6 +68,8 @@ protected:
 
   PGuiMenu m_childMenu; // ?
   bool m_isVertical;
+  // If true, hide menu when an item is selected
+  bool m_hideOnSelection;
 };
 }
 
