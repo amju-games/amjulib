@@ -1,6 +1,7 @@
 #include "GSGui.h"
 #include <AmjuGL.h>
 #include <CursorManager.h>
+#include <Timer.h>
 
 namespace Amju
 {
@@ -16,6 +17,8 @@ void GSGui::Update()
 
 void GSGui::Draw()
 {
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+
   GSBase::Draw();
   TextDraw::Draw();
 }
