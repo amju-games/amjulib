@@ -163,6 +163,7 @@
     <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Skin.cpp" />
+    <ClCompile Include="..\..\..\Source\Collision\BruteForce.cpp" />
     <ClCompile Include="..\..\..\Source\Collision\SAP.cpp" />
     <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp" />
     <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
@@ -365,6 +366,7 @@
     <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h" />
     <ClInclude Include="..\..\..\Source\Anim\Skeleton.h" />
     <ClInclude Include="..\..\..\Source\Anim\Skin.h" />
+    <ClInclude Include="..\..\..\Source\Collision\BruteForce.h" />
     <ClInclude Include="..\..\..\Source\Collision\SAP.h" />
     <ClInclude Include="..\..\..\Source\Community\DownloadReq.h" />
     <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
