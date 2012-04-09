@@ -19,6 +19,11 @@ public:
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+
+  void SetStartLoc(int loc) { m_startLoc = loc; }
+
+private:
+  int m_startLoc;
 };
 typedef Singleton<GSStartGame> TheGSStartGame;
 } // namespace
