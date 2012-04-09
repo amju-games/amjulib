@@ -238,15 +238,13 @@ std::cout << "Player: got new pos to move to: " << newpos << ", current pos is "
 
     Vec3f dir = GetPos() - newpos;
 
-    /*
+    // Why TF was this commented out??!?!?!
     if (dir.SqLen() < 1.0f) // TODO CONFIG
     {
       SetVel(Vec3f(0, 0, 0));
       SetArrowVis(false);
     }
     else
-    */
-
     {
       dir.Normalise();
       static const float SPEED = 50.0f; // TODO CONFIG
@@ -272,7 +270,7 @@ void Player::Update()
   // Not safe to do anything if the Terrain has not been created yet 
   if (!TerrainReady())
   {
-    return; // Don't do nuffink 
+    return; 
   }
 
   GameObject::Update();
@@ -364,6 +362,32 @@ void Player::Update()
         m_sceneNode->SetAnim("stand");
       }
     }
+  }
+
+  if (m_ignorePortalId != -1)
+  {
+    GameObject* g = TheGame::Instance()->GetGameObject(m_ignorePortalId);
+    if (g)
+    {
+      AABB* aabb = g->GetAABB();
+      if (aabb)
+      {
+        if (!GetAABB()->Intersects(*aabb))
+        {
+          // No longer intersecting portal
+          m_ignorePortalId = -1;
+        }
+      }
+      else
+      {
+        m_ignorePortalId = -1; // why ?
+      }
+    }
+    else
+    {
+      m_ignorePortalId = -1; // ?
+    }
+
   }
 }
 
