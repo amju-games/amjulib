@@ -187,6 +187,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
@@ -196,6 +197,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Character.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Node.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Object.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1OnlineReqManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
@@ -245,6 +247,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
@@ -254,6 +257,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Character.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Node.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Object.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1OnlineReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />

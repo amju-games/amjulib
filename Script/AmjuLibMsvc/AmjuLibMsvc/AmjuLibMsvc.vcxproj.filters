@@ -705,6 +705,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\BruteForce.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1330,6 +1333,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\BruteForce.h">
+      <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
