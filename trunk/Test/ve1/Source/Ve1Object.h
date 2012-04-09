@@ -53,6 +53,8 @@ public:
 
   void IgnorePortalId(int portalId);
   int GetIgnorePortalId() const;
+
+  bool IsPickable() const;
  
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
@@ -66,6 +68,8 @@ protected:
   bool m_isSelected;
 
   int m_ignorePortalId;
+
+  bool m_isPickable;
 };
 
 // Keep track of keys used to set object properties
