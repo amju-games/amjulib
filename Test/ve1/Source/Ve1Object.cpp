@@ -8,6 +8,12 @@ Ve1Object::Ve1Object() : m_location(-1)
 {
   m_isSelected = false;
   m_ignorePortalId = -1;
+  m_isPickable = true;
+}
+
+bool Ve1Object::IsPickable() const 
+{ 
+  return m_isPickable; 
 }
 
 void Ve1Object::IgnorePortalId(int portalId)

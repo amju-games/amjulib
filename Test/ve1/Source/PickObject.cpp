@@ -5,6 +5,7 @@
 #include <Unproject.h>
 #include <Line3.h>
 #include <ClipLineSegBox.h>
+#include "Ve1Object.h"
 
 namespace Amju
 {
@@ -24,6 +25,13 @@ GameObject* PickObject(const Vec2f& mouseScreen)
   {
     GameObject* pgo = it->second;
     Assert(pgo);
+    Ve1Object* v = dynamic_cast<Ve1Object*>(pgo);
+    Assert(v);
+    if (!v->IsPickable())
+    {
+      continue;
+    }
+
     AABB* aabb = pgo->GetAABB();
     if (aabb && Clip(lineSeg, *aabb, 0))
     {
