@@ -43,8 +43,8 @@ print "Query: $sql\n";
     $sql = "insert into session (player_id, start, expires) values ($player_id, now(), FROM_UNIXTIME(UNIX_TIMESTAMP(now()) + 3600*24)) on duplicate key update id=id+1";
     insert($sql);
 
-    # Get session ID for this player
-    $sql = "select now(), a.id, b.playername, b.obj_id from session as a, player as b where a.player_id=$player_id and a.player_id=b.id";
+    # Get session ID for this player and start location
+    $sql = "select now(), a.id, b.playername, b.obj_id, c.loc from session as a, player as b, objectpos as c where a.player_id=$player_id and a.player_id=b.id and b.obj_id=c.id";
 
 print "Query: $sql\n";
 
@@ -52,11 +52,11 @@ print "Query: $sql\n";
     $query = $dbh->prepare($sql) or die
       "Query prepare failed for this query: $sql\n";
     $query->execute;
-    if (my ($now, $session_id, $playername, $objid) = $query->fetchrow_array)
+    if (my ($now, $session_id, $playername, $objid, $loc) = $query->fetchrow_array)
     {
 print "Your new session ID: $session_id\n";
 
-      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid>\n";
+      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$loc</loc>\n";
     }
     else
     {
