@@ -62,13 +62,25 @@ std::cout << "Got session ID but no player name, WTF??\n";
     p = m_xml.getChildNode(3);
     if (SafeStrCmp(p.getName(), "objid"))
     {
-      objId = atoi(p.getText());
+      objId = ToInt(p.getText());
 std::cout << "**Got local player object ID: " << objId << "\n";
     }
     else
     {
         // Got session ID but we don't know the object ID for the local player. WTF ?
 std::cout << "Got session ID but we don't know the object ID for the local player. WTF?\n";
+    }
+
+    p = m_xml.getChildNode(4);
+    if (SafeStrCmp(p.getName(), "loc"))
+    {
+      int loc = ToInt(p.getText());
+      TheGSStartGame::Instance()->SetStartLoc(loc); 
+std::cout << "Got start location: " << loc << "\n";
+    }
+    else
+    {
+std::cout << "No start location.\n";
     }
 
     std::cout << "Got session ID! " << sessionId << "\n"; 
