@@ -6,6 +6,7 @@
 namespace Amju
 {
 void SetLocalPlayerId(int localPlayerId);
+int GetLocalPlayerId();
 
 Player* GetLocalPlayer();
 

@@ -23,7 +23,8 @@ void GSWaitForNewLocation::Update()
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
 
-  if (TerrainReady() && GetLocalPlayer()) 
+  if (TerrainReady() && 
+      TheGame::Instance()->GetGameObject(GetLocalPlayerId()))
   {
     if (GetGameMode() == AMJU_MODE_EDIT)
     {

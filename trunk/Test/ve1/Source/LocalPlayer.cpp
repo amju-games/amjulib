@@ -42,6 +42,11 @@ void SetLocalPlayerId(int id)
   localPlayerId = id;
 }
 
+int GetLocalPlayerId()
+{
+  return localPlayerId;
+}
+
 
 
 
