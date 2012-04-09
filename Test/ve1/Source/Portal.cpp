@@ -6,6 +6,7 @@
 #include "Ve1Node.h"
 #include "Ve1SceneGraph.h"
 #include "Useful.h"
+#include "GameMode.h"
 
 namespace Amju
 {
@@ -26,6 +27,7 @@ const char* Portal::GetTypeName() const
 
 Portal::Portal()
 {
+  m_isPickable = (GetGameMode() == AMJU_MODE_EDIT);
   m_isOpen = true;
 
   Set(DEST_KEY, "1"); // value is game object ID for destination portal
@@ -88,13 +90,14 @@ void Portal::Update()
 
 void Portal::OnLocationEntry()
 {
-  // TODO
-
-  // Add node to Scene Graph
-  m_sceneNode = new Ve1Node(this);
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-  root->AddChild(m_sceneNode);
+  if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    // Add node to Scene Graph
+    m_sceneNode = new Ve1Node(this);
+    SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+    Assert(root);
+    root->AddChild(m_sceneNode);
+  }
 }
 
 void Portal::OnPlayerCollision(Player* player)
@@ -145,12 +148,14 @@ std::cout << "* Dest location: " << destLocation << " dest pos: " << destPos << 
 
   // Set new position immediately
   player->SetPos(destPos);
+  player->MoveTo(destPos); // stop moving ?
+/*
   // Move in current direction a little bit ?
   Vec3f vel = player->GetVel();
   vel.Normalise();
   vel *= 100.0f;
   player->MoveTo(destPos + vel);
-
+*/
   // Set dest portal so we don't flip back and forth
   Portal* destPortal = dynamic_cast<Portal*>(destObj);
   Assert(destPortal);
