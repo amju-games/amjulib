@@ -10,10 +10,10 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include "Vec3.h"
 #include "Texture.h"
 #include "SceneNode.h"
+#include <CollisionMesh.h>
 
 namespace Amju
 {
-class CollisionMesh;
 struct Tri;
 
 // Implement a simple kind of shadow: a dark circle on the ground.
@@ -92,7 +92,7 @@ protected:
   // TODO Get all meshes from the rest of the scene graph ??
   // Allow multiple meshes, so we can continue to cast on a mesh as we leave it and
   //  land on another mesh
-  std::vector<CollisionMesh*> m_mesh;
+  std::vector<PCollisionMesh> m_mesh;
 
   // Shadow texture - Resource
   PTexture m_texture;

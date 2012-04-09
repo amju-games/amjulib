@@ -2,6 +2,7 @@
 #define COLLISION_MESH_H
 
 #include <vector>
+#include <RCPtr.h>
 #include "Tri.h"
 #include "Matrix.h"
 #include "ObjMesh.h"
@@ -17,7 +18,7 @@ bool GetY(const Tri& tri, const Vec2f& xz, float* y);
 
 // TODO SimpleCollisionMesh and OctreeCollisionMesh ?
 
-class CollisionMesh
+class CollisionMesh : public RefCounted
 {
   // So ObjMesh can easily populate a CollisionMesh
   friend class ObjMesh;
@@ -55,6 +56,8 @@ public:
 private:
   Tris m_tris;
 };
+
+typedef RCPtr<CollisionMesh> PCollisionMesh;
 }
 
 #endif

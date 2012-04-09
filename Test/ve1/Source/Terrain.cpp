@@ -50,13 +50,13 @@ bool TerrainReady()
 class TerrainSceneNode : public SceneMesh
 {
 public:
-  TerrainSceneNode(Terrain* t) : m_terrain(t) {}
-  CollisionMesh* GetCollisionMesh() { return & m_collMesh; }
-  void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(&m_collMesh); }
+  TerrainSceneNode(Terrain* t) : m_terrain(t), m_collMesh(new CollisionMesh) {}
+  CollisionMesh* GetCollisionMesh() { return m_collMesh; }
+  void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(m_collMesh); }
 
 private:
   Terrain* m_terrain;
-  CollisionMesh m_collMesh;
+  PCollisionMesh m_collMesh;
 };
 
 Terrain::Terrain()
