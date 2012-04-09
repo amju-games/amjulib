@@ -17,6 +17,7 @@ void SetStartLocation()
 
 GSStartGame::GSStartGame()
 {
+  m_startLoc = 1;
 }
 
 void GSStartGame::Update()
@@ -51,7 +52,9 @@ void GSStartGame::OnActive()
   // Clear scene graph and initialise empty root node
   //ClearVe1SceneGraph();
 
-  SetStartLocation();
+  ////SetStartLocation();
+  SetLocalPlayerLocation(m_startLoc);
+  m_startLoc = 1; // for next time
 }
 
 bool GSStartGame::OnCursorEvent(const CursorEvent& ce)
