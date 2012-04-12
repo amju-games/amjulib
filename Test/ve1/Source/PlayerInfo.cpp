@@ -90,17 +90,23 @@ bool PlayerInfo::Load()
   // FileExists doesn't append File::Root
   if (FileExists(File::GetRoot() + m_filename))
   {
+#ifdef PI_DEBUG
 std::cout << "Loading player info " << m_filename << "...\n";
+#endif
   }
   else
   {
+#ifdef PI_DEBUG
 std::cout << "Loading player info " << m_filename << " doesn't exist! - - it's a new file\n";
-
+#endif
     // We assume the player is new and has not saved any player info yet - this is OK.
     return true;
   }
 
+#ifdef PI_DEBUG
 std::cout << "Loading player info " << m_filename << "...\n";
+#endif
+
   File f;
   if (!f.OpenRead(m_filename))
   {
@@ -119,7 +125,9 @@ std::cout << "Loading player info " << m_filename << "...\n";
       return false;
     }
 
+#ifdef PI_DEBUG
 std::cout << " Got line: " << s << "\n";
+#endif
 
     Strings strs = Split(s, ',');
     if (strs.size() != 2)
@@ -129,14 +137,18 @@ std::cout << " Got line: " << s << "\n";
     }
     PISetString(strs[0], strs[1]);
   }
+#ifdef PI_DEBUG
 std::cout << "End of player info load.\n";
+#endif
 
   return true;
 }
 
 bool PlayerInfo::Save()
 {
+#ifdef PI_DEBUG
 std::cout << "SAVING PLAYER INFO FILE " << m_filename << "\n";
+#endif
 
   File f; // TODO no glue file
   if (!f.OpenWrite(m_filename))
@@ -175,17 +187,23 @@ static const char* PIM_FILENAME = "playerinfo.txt";
 
 bool PlayerInfoManager::Load()
 {
+#ifdef PI_DEBUG
 std::cout << "PlayerInfoManager: loading players...\n";
+#endif
 
   if (!FileExists(File::GetRoot() + PIM_FILENAME))
   {
+#ifdef PI_DEBUG
 std::cout << "No playerinfo file exists to load.\n";
+#endif
     return true;
   } 
   File f;
   if (!f.OpenRead(PIM_FILENAME))
   {
+#ifdef PI_DEBUG
 std::cout << "Player info file does exist but we couldn't open it for reading!\n";
+#endif
     return false;
   }
   int numPlayers = 0;
@@ -195,8 +213,9 @@ std::cout << "Player info file does exist but we couldn't open it for reading!\n
     return false; 
   }
 
+#ifdef PI_DEBUG
 std::cout << "PlayerInfoManager: opened file, got " << numPlayers << " as number of players.\n";
-
+#endif
   for (int i = 0; i < numPlayers; i++)
   {
     std::string s;
@@ -206,8 +225,9 @@ std::cout << "PlayerInfoManager: opened file, got " << numPlayers << " as number
       return false;
     }
 
+#ifdef PI_DEBUG
 std::cout << "PlayerInfoManager: player " << i << " name: \"" << s << "\"\n";
-
+#endif
     m_map[s] = 0; 
   }
   return true;
