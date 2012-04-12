@@ -5,6 +5,8 @@
 #include <File.h>
 #include "Ve1OnlineReqManager.h"
 
+//#define DOWNLOAD_DEBUG
+
 namespace Amju
 {
 // TODO
@@ -30,25 +32,33 @@ private:
 
 bool DownloadManager::GetFile(const std::string& filename)
 {
+#ifdef DOWNLOAD_DEBUG
 std::cout << "GetFile: " << filename << "\n";
+#endif
 
   State s = m_map[filename];
   switch (s)
   {
   case AMJU_DL_FAILED:
+#ifdef DOWNLOAD_DEBUG
 std::cout << " - DL Failed, so no!??\n";
+#endif
     return false;
 
   case AMJU_DL_UNKNOWN:
     if (FileExists(File::GetRoot() + filename))
     {
+#ifdef DOWNLOAD_DEBUG
 std::cout << " - File exists.\n";
+#endif
       m_map[filename] = AMJU_DL_LOCAL;
       return true;
     }
     else
     {
+#ifdef DOWNLOAD_DEBUG
 std::cout << " - File not local, downloading...\n";
+#endif
       OnlineReq* filedownloadreq = new FileDownloadReq(
         this, filename, TheVe1ReqManager::Instance()->MakeDownloadUrl(filename));
 
@@ -68,11 +78,15 @@ std::cout << " - File not local, download failed (too many requests ?)\n";
     }
 
   case AMJU_DL_LOCAL:
+#ifdef DOWNLOAD_DEBUG
 std::cout << " - Should be local.\n";
+#endif
     return true;
 
   case AMJU_DL_DOWNLOADING:
+#ifdef DOWNLOAD_DEBUG
 std::cout << " - is still downloading.\n";
+#endif
     return true;
 
   }
