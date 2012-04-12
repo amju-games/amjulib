@@ -22,6 +22,7 @@
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
+//#define OBJECT_CHECK_DEBUG
 
 namespace Amju
 {
@@ -138,7 +139,9 @@ public:
     // Add each new object to ObjectManager, as it now needs to download all associated assets, 
     //  then create the new object locally.
 
+#ifdef OBJECT_CHECK_DEBUG
 std::cout << "Got successful response to object check request!\n";
+#endif
 
     // Format of XML:
     // <now/>           <- Child(0)
@@ -569,10 +572,9 @@ std::cout << " ..old location trashed, adding game objects in new location...\n"
     Ve1Object* v = dynamic_cast<Ve1Object*>(go.GetPtr());
     if (v)
     {
-std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
-
       if (v->GetLocation() == m_location)
       {
+std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
         TheGame::Instance()->AddGameObject(go);
         TheSAP::Instance()->AddBox(go);
         v->OnLocationEntry();
