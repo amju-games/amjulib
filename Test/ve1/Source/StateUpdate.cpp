@@ -15,13 +15,14 @@ GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "ge
 void GetStateUpdatesReq::OnSuccess()
 {
   // Child 0 is timestamp
-  PXml p = m_xml.getChildNode(0);
-  Assert(SafeStrCmp(p.getName(), "now"));
-  std::string timestamp = p.getText();
-std::cout << "Got new pos update timestamp (from server): " << timestamp << "\n";
-  TheObjectUpdater::Instance()->SetTimestampUpdate(timestamp);
+  //PXml p = m_xml.getChildNode(0);
+  //Assert(SafeStrCmp(p.getName(), "now"));
+  //std::string timestamp = p.getText();
+//std::cout << "Got new state update timestamp (from server): " << timestamp << "\n";
 
-  p = m_xml.getChildNode(1);
+  TheObjectUpdater::Instance()->SetTimestampUpdate(m_timestamp);
+
+  PXml p = m_xml.getChildNode(1);
   if (SafeStrCmp(p.getName(), "states"))
   {
 #ifdef XML_DEBUG
