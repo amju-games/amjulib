@@ -19,13 +19,14 @@ PosUpdateReq::PosUpdateReq(const std::string& url) : Ve1Req(url, "pos update req
 void PosUpdateReq::OnSuccess()
 {
   // Child 0 is timestamp
-  PXml p = m_xml.getChildNode(0);
-  Assert(SafeStrCmp(p.getName(), "now"));
-  std::string timestamp = p.getText();
-std::cout << "Got new pos update timestamp: " << timestamp << "\n";
-  TheObjectUpdater::Instance()->SetTimestampPos(timestamp);
+//  PXml p = m_xml.getChildNode(0);
+//  Assert(SafeStrCmp(p.getName(), "now"));
+//  std::string timestamp = p.getText();
+//std::cout << "Got new pos update timestamp: " << timestamp << "\n";
 
-  p = m_xml.getChildNode(1);
+  TheObjectUpdater::Instance()->SetTimestampPos(m_timestamp);
+
+  PXml p = m_xml.getChildNode(1);
   if (SafeStrCmp(p.getName(), "objs"))
   {
 #ifdef XML_DEBUG
