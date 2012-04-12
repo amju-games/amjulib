@@ -8,6 +8,8 @@
 #include <StringUtils.h>
 #include "GSNetError.h"
 
+//#define SEND_DEBUG
+
 namespace Amju
 {
 ReqGetNewMsgs::ReqGetNewMsgs(const std::string& url) : Ve1Req(url, "getnewmsgs")
@@ -63,7 +65,9 @@ std::cout << "No local player yet, can't send get new msgs request\n";
   url += "&recip=";
   url += ToString(GetLocalPlayer()->GetId());
 
+#ifdef SEND_DEBUG
 std::cout << "Sending req to check for new msgs: " << url << "\n";
+#endif
 
   // Only need one request in flight
   TheVe1ReqManager::Instance()->AddReq(new ReqGetNewMsgs(url), 1);
