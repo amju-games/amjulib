@@ -14,6 +14,8 @@
 #include "Ve1OnlineReqManager.h"
 #include "TextToSpeech.h"
 
+#define SEND_DEBUG
+
 namespace Amju
 {
 static const float MAX_CHECK_PERIOD = 5.0f;
@@ -97,7 +99,9 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   // Strip out characters which are not allowed - use boost reg exp
   // Replace punctuation chars with ascii code.
 
+#ifdef SEND_DEBUG
 std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: " << msg << "\n";
+#endif
 
   static const int MAX_CONCURRENT_MSGS = 1; // ?
 
