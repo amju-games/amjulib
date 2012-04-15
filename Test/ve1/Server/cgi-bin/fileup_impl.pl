@@ -16,7 +16,7 @@ sub fileup_impl($)
 
   $CGI::POST_MAX = 1024 * 500; 
   my $safe_filename_characters = "a-zA-Z0-9_.-"; 
-  my $upload_dir = "../assets_test/"; 
+  my $upload_dir = "../assets/"; 
   my $query = new CGI; 
   my $filename = $query->param($name_in_form); 
   if (!$filename) 
@@ -49,6 +49,7 @@ sub fileup_impl($)
     # Only need to connect to DB in this case -- assume connected ?
     my_connect();
     my $sql = "insert into fileupdate (filename, whenchanged) values ('$filename', now()) on duplicate key update whenchanged=now()";
+    print "Updating DB: $sql\n";
     update_or_insert($sql);
   }
 
