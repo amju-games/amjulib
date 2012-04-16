@@ -54,7 +54,6 @@ protected:
 protected:
   std::string m_name;
 
-  bool m_posHasBeenSet; // first pos request we set pos immediately, then move to it subsequently
   Vec3f m_newPos; // pos we are aiming for
   bool m_isMoving; // travelling towards m_newPos
 
