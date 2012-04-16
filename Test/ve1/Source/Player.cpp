@@ -93,7 +93,7 @@ GameObject* CreatePlayer()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Player::TYPENAME, CreatePlayer);
 
-Player::Player() : m_posHasBeenSet(false), m_sceneNode(0)
+Player::Player() : m_sceneNode(0)
 {
   m_dir = 0;
   m_dirCurrent = m_dir;
@@ -150,7 +150,7 @@ void Player::OnLocationExit()
 {
   // We can't be the Local Player - this function is called when an object leaves the location
   //  where the local player is :-)
-  Assert(!IsLocalPlayer());
+  //////Assert(!IsLocalPlayer());
 
   // Remove from SceneGraph
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
@@ -216,8 +216,8 @@ void Player::SetArrowPos(const Vec3f& newpos)
   m.Translate(newpos);
   m_arrow->SetLocalTransform(m);
 
-  static const float XSIZE = 15.0f;
-  static const float YSIZE = 60.0f;
+  static const float XSIZE = 10.0f;
+  static const float YSIZE = 30.0f;
   m_arrow->GetAABB()->Set(
     newpos.x - XSIZE, newpos.x + XSIZE,
     newpos.y, newpos.y + YSIZE,
@@ -232,36 +232,24 @@ void Player::MoveTo(const Vec3f& newpos)
   // TODO Change position immediately if this is first MoveTo() for this location.
   // Otherwise we should walk to the new pos.
 
-  if (m_posHasBeenSet)
-  {
 std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
 
-    Vec3f dir = GetPos() - newpos;
+  Vec3f dir = GetPos() - newpos;
 
-    // Why TF was this commented out??!?!?!
-    if (dir.SqLen() < 1.0f) // TODO CONFIG
-    {
-      SetVel(Vec3f(0, 0, 0));
-      SetArrowVis(false);
-    }
-    else
-    {
-      dir.Normalise();
-      static const float SPEED = 50.0f; // TODO CONFIG
-      SetVel(-dir * SPEED);
-
-      // Work out direction to face
-      SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
-    }
-  }
-  else  
+  // Why TF was this commented out??!?!?!
+  if (dir.SqLen() < 1.0f) // TODO CONFIG
   {
-std::cout << "Player: first pos update, so set immediately\n";
+    SetVel(Vec3f(0, 0, 0));
+    SetArrowVis(false);
+  }
+  else
+  {
+    dir.Normalise();
+    static const float SPEED = 50.0f; // TODO CONFIG
+    SetVel(-dir * SPEED);
 
-    // First pos update, so immediately set pos
-    m_posHasBeenSet = true;
-    SetPos(newpos); 
-    m_isMoving = false;
+    // Work out direction to face
+    SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
   }
 }
 
