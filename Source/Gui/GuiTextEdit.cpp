@@ -184,7 +184,15 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   switch (ke.keyType)
   {
   case AMJU_KEY_CHAR:
-    Insert(ke.key);
+    // Prevent chars like Tab 
+    if (ke.key >= ' ') // && ke.key <= (char)127)
+    {
+      Insert(ke.key);
+    }
+    else
+    {
+      // TODO Alert user that character is out of range
+    }
     break;
 
   case AMJU_KEY_UP:
