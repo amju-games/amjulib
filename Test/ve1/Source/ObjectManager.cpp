@@ -26,9 +26,6 @@
 
 namespace Amju
 {
-static const int MAX_CONCURRENT_DOWNLOADS = 16; // ???
-
-
 std::ostream& operator<<(std::ostream& os, const Object& obj)
 {
   return os << obj.m_id << " (" << obj.m_type << ")";
@@ -246,8 +243,8 @@ std::cout << " GetFile returned true\n";
     }
     else
     {
-std::cout << " GetFile returned false\n";
-Assert(0);
+std::cout << " GetFile for " << s << " returned false\n";
+//Assert(0);
     }
   }
 
