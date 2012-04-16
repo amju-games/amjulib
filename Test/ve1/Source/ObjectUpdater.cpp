@@ -12,6 +12,7 @@
 #include <Timer.h>
 #include "GSNetError.h"
 #include "ObjectManager.h"
+#include "LocalPlayer.h"
 
 #define OU_DEBUG
 
@@ -261,10 +262,27 @@ std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)
       {
-std::cout << "..using MoveTo\n";
-        // Set location (ignores if no change)
-        ve1Obj->SetLocation(location);
-        ve1Obj->MoveTo(pos);
+        int vloc = ve1Obj->GetLocation();
+
+        // If this msg is for local player and we are in a different location, discard this msg.
+/*
+        if (ve1Obj->GetId() == GetLocalPlayerId() && location != vloc && vloc != -1)
+        {
+std::cout << "## Discarding pos update for local player as we are here: " << vloc << " and update is for location " << location << "\n";
+        }
+        else 
+*/
+        if (location == vloc)
+        {
+std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " << location << "\n";
+          ve1Obj->MoveTo(pos);
+        }
+        else
+        {
+std::cout << "Moving object " << ve1Obj->GetId() << " to NEW location " << location << "\n";
+          ve1Obj->SetLocation(location);
+          ve1Obj->SetPos(pos);
+        }
       }
       else
       {
