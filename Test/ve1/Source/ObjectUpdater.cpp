@@ -14,7 +14,7 @@
 #include "ObjectManager.h"
 #include "LocalPlayer.h"
 
-#define OU_DEBUG
+//#define OU_DEBUG
 
 namespace Amju
 {
