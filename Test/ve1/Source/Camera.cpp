@@ -1,6 +1,8 @@
 #include "Camera.h"
 #include <EventPoller.h>
 
+//#define CAM_DEBUG
+
 namespace Amju
 {
 static const float CAM_Y = 100.0f;
@@ -94,6 +96,9 @@ bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     leftDrag = mbe.isDown;
     if (camKey)
     {
+#ifdef CAM_DEBUG
+std::cout << "Camera handling mouse button event\n";
+#endif
       return true;
     }
   }
@@ -102,6 +107,9 @@ bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     rightDrag = mbe.isDown;
     if (camKey)
     {
+#ifdef CAM_DEBUG
+std::cout << "Camera handling mouse button event\n";
+#endif
       return true;
     }
   }
@@ -110,6 +118,9 @@ bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     midDrag = mbe.isDown;
     if (camKey)
     {
+#ifdef CAM_DEBUG
+std::cout << "Camera handling mouse button event\n";
+#endif
       return true;
     }
   }
