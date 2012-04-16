@@ -71,8 +71,8 @@ std::cout << " - File not local, downloading...\n";
       else
       {
 std::cout << " - File not local, download failed (too many requests ?)\n";
-        m_map[filename] = AMJU_DL_FAILED;
-        Assert(0);
+        m_map[filename] = AMJU_DL_UNKNOWN;
+        //Assert(0);
         return false;
       }
     }
