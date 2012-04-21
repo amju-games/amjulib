@@ -9,7 +9,7 @@ namespace Amju
 {
 void OnResumeButton()
 {
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+  TheGSPaused::Instance()->GoBack();
 }
 
 void OnOptionsButton()
