@@ -2,6 +2,8 @@
 #include <iostream>
 #include <ConfigFile.h>
 
+//#define REQ_DEBUG
+
 namespace Amju
 {
 static const char* SERVER_KEY = "server";
@@ -136,7 +138,10 @@ bool Ve1ReqManager::AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs)
   // Fail here if we are not logged in
   if (!IsLoggedIn())
   {
+#ifdef REQ_DEBUG
 std::cout << "* Can't make request, not logged in *\n";
+#endif
+
     return false;
   }
 
