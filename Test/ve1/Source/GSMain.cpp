@@ -28,6 +28,7 @@ namespace Amju
 {
 void OnPauseButton()
 {
+  TheGSPaused::Instance()->SetPrevState(TheGSMain::Instance());
   TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
 }
 
