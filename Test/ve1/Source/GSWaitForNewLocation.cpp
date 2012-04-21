@@ -8,9 +8,17 @@
 #include "GSEdit.h"
 #include "GameMode.h"
 #include "LocalPlayer.h"
+#include "GSPaused.h"
 
 namespace Amju
 {
+static void OnCancel()
+{
+  // Set prev state for Pause
+  TheGSPaused::Instance()->SetPrevState(TheGSWaitForNewLocation::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
+}
+
 GSWaitForNewLocation::GSWaitForNewLocation()
 {
 }
@@ -54,6 +62,7 @@ void GSWaitForNewLocation::OnActive()
 
   m_gui = LoadGui("gui-waitfornewlocation.txt");
   Assert(m_gui);
+  GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancel);
 }
 
 bool GSWaitForNewLocation::OnCursorEvent(const CursorEvent& ce)
