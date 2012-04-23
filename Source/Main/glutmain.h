@@ -17,8 +17,7 @@
 
 #include <AmjuFinal.h>
 
-static const int WINDOW_W = 640;
-static const int WINDOW_H = 480;
+#define KEY_CODE_DEBUG
 
 using namespace Amju;
 
@@ -69,8 +68,9 @@ void key(char k, bool down)
   }
   else
   {
-// TODO Just temporarily until we sort out all the control keys
-//std::cout << "Got key event, char code is : " << (int)k << "\n";
+#ifdef KEY_CODE_DEBUG
+std::cout << "Got key " << (down ? "DOWN" : "UP") << " event, char is : " << k << " (" << (int)k << ")\n";
+#endif
 
     ke->keyType = AMJU_KEY_CHAR;
     ke->key = k;
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
 
   // w is global defined in game-specific code
-  glutInitWindowSize(w.GetWidth(), w.GetHeight()); //WINDOW_W, WINDOW_H);
+  glutInitWindowSize(w.GetWidth(), w.GetHeight()); 
 
   glutCreateWindow("Hello"); // TODO App name
   glutDisplayFunc(draw);
@@ -181,7 +181,6 @@ int main(int argc, char **argv)
   AmjuGL::SetImpl(new AmjuGLOpenGL);
 
   // Defined in game-specific code
-  //Amju::AmjuGLWindowInfo w(WINDOW_W, WINDOW_H, false);
   Amju::AmjuGL::CreateWindow(&w);
   Amju::AmjuGL::Init();
 
