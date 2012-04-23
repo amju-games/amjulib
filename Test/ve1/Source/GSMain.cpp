@@ -86,13 +86,13 @@ std::cout << "In DoMoveRequest...\n";
   if (selectedObj)
   {
     const std::string name = selectedObj->GetTypeName();
-std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
+//std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
 
     ShowObjectMenu(selectedObj);
   }
   else if (GetLocalPlayer())
   {
-std::cout << "Ground clicked...\n";
+//std::cout << "Ground clicked...\n";
     Vec3f pos;
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
@@ -102,7 +102,7 @@ std::cout << "Ground clicked...\n";
 
     if (GetTerrain()->GetMousePos(lineSeg, &pos))
     {
-std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+//std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
       int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
        // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
@@ -127,7 +127,7 @@ std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
     }
     else
     {
-std::cout << "...not a point on the ground, apparently..?\n";
+//std::cout << "...not a point on the ground, apparently..?\n";
     }
   }
 }
