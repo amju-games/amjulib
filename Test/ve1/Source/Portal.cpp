@@ -123,7 +123,7 @@ std::cout << "* Portal: Dest key doesn't exist!\n";
 
   if (player->GetIgnorePortalId() == this->GetId())
   {
-std::cout << "* Portal: Set to ignore this one.\n";
+//std::cout << "* Portal: Set to ignore this one.\n";
     return;
   }
 
@@ -141,14 +141,16 @@ std::cout << "* Portal: dest portal doesn't exist [yet]..\n";
   const Vec3f& destPos = destObj->GetPos();
 std::cout << "* Dest location: " << destLocation << " dest pos: " << destPos << "\n";
 
-  TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), destPos, destLocation);
-
   // Should Player do this ?
   SetLocalPlayerLocation(destLocation); // LocalPlayer
+
+  // Just do this, and wait for round trip from server. Ensures consistency..?
+  TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), destPos, destLocation);
 
   // Set new position immediately
   player->SetPos(destPos);
   player->MoveTo(destPos); // stop moving ?
+
 /*
   // Move in current direction a little bit ?
   Vec3f vel = player->GetVel();
