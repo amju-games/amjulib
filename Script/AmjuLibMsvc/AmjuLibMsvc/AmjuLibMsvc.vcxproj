@@ -211,6 +211,7 @@
     <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp" />
+    <ClCompile Include="..\..\..\Source\Sound\TextToSpeech.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Strings\StringUtils.cpp" />
@@ -424,6 +425,7 @@
     <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
     <ClInclude Include="..\..\..\Source\Scene\Shadow.h" />
     <ClInclude Include="..\..\..\Source\Scene\TextMaker.h" />
+    <ClInclude Include="..\..\..\Source\Sound\TextToSpeech.h" />
     <ClInclude Include="..\..\..\Source\Strings\ReportError.h" />
     <ClInclude Include="..\..\..\Source\Strings\SafeUtils.h" />
     <ClInclude Include="..\..\..\Source\Strings\StringUtils.h" />

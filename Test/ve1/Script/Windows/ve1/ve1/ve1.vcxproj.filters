@@ -186,9 +186,6 @@
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\TextToSpeech.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -360,9 +357,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\TextToSpeech.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h">

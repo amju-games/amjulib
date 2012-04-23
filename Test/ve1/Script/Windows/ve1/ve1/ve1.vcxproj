@@ -192,7 +192,6 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
-    <ClCompile Include="..\..\..\..\Source\TextToSpeech.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
@@ -252,7 +251,6 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
-    <ClInclude Include="..\..\..\..\Source\TextToSpeech.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
