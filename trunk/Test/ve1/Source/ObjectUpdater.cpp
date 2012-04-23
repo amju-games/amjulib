@@ -265,13 +265,12 @@ std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "
         int vloc = ve1Obj->GetLocation();
 
         // If this msg is for local player and we are in a different location, discard this msg.
-/*
-        if (ve1Obj->GetId() == GetLocalPlayerId() && location != vloc && vloc != -1)
+
+        if (ve1Obj->GetId() == GetLocalPlayerId()) //&& location != vloc && vloc != -1)
         {
-std::cout << "## Discarding pos update for local player as we are here: " << vloc << " and update is for location " << location << "\n";
+std::cout << "## This is update for local player.  We are here: " << vloc << " and update is for location " << location << "\n";
         }
-        else 
-*/
+
         if (location == vloc)
         {
 std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " << location << "\n";
@@ -319,7 +318,7 @@ std::cout << "..using SetPos, not a Ve1Object\n";
       const std::string& key = it->first.second;
       const std::string& val = it->second; 
 
-std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
+//std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
 
       ve1Obj->Set(key, val);
 
@@ -341,7 +340,9 @@ std::cout << "Object Updater: updating object " << id << " key: " << key << " va
 
 void ObjectUpdater::QueueUpdatePos(int id, const Vec3f& pos, int location)
 {
+#ifdef QUEUE_DEBUG
 std::cout << "Queueing update pos: id: " << id << " pos: " << pos << " location: " << location << "\n";
+#endif
 
   m_posMap[id] = PosLocation(pos, location);
   m_posMapCache[id] = PosLocation(pos, location);
@@ -349,7 +350,9 @@ std::cout << "Queueing update pos: id: " << id << " pos: " << pos << " location:
 
 void ObjectUpdater::QueueUpdate(int id, const std::string& key, const std::string& val)
 {
+#ifdef QUEUE_DEBUG
 std::cout << "Queueing update: id: " << id << " key: " << key << " val: " << val << "\n";
+#endif
 
   IdKey idkey(id, key);
   m_keyvalMap[idkey] = val;
@@ -383,7 +386,7 @@ void ObjectUpdater::SendUpdateReq(int objId, const std::string& key, const std::
 {
 std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
 
-  static const int MAX_CONCURRENT_UPDATE_REQS = 16; // ?
+  static const int MAX_CONCURRENT_UPDATE_REQS = 1000; // Would be a problem if we didn't send..??
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_STATE);
   url += "&obj_id=";
@@ -405,7 +408,7 @@ public:
 
   virtual void OnSuccess()
   {
-std::cout << "Move req success!\n";
+//std::cout << "Move req success!\n";
 
     // Do nothing for now, we will download the new position and cache it
     // TODO Prediction
