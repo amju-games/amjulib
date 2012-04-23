@@ -169,14 +169,6 @@ int GSEdit::GetUniqueId()
   return 0;
 }
 
-//void GSEdit::OnNextLocation()
-//{
-//  m_location++;
-//  SetLocalPlayerLocation(m_location);
-//  // Will wait in GSWaitForNewLocation. Need to add a cancel button there, so we can come back here.
-//  // But need to reset to old location in this case..???
-//}
-
 void GSEdit::Update()
 {
   GSBase::Update();
@@ -596,7 +588,7 @@ void GSEdit::GoToSelectedLocation()
   }
   if (id != -1)
   {
-    SetLocalPlayerLocation(id);
+    SetLocalPlayerLocation(id); // Go to a new location
   }
 }
 
