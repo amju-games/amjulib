@@ -87,7 +87,7 @@ void Terrain::OnLocationEntry()
   std::string path = GetFilePath(m_objFilename);
   std::string file = StripPath(m_objFilename);
 
-std::cout << "Terrain OnLocationEntry: Path: " << path << " Filename: " << file << "\n";
+//std::cout << "Terrain OnLocationEntry: Path: " << path << " Filename: " << file << "\n";
 
   std::string oldRoot = File::GetRoot();
   File::SetRoot(oldRoot + path, "/");
