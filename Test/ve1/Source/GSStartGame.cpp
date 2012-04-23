@@ -6,15 +6,6 @@
 
 namespace Amju
 {
-void SetStartLocation()
-{
-  // TODO Query server ?
-  // For now, always start in the "hub" location ("plaza") - Location 1.
-  // TODO We should set our position to a safe start position too.
-  int loc = 1;
-  SetLocalPlayerLocation(loc);
-}
-
 GSStartGame::GSStartGame()
 {
   m_startLoc = 1;
@@ -42,19 +33,8 @@ void GSStartGame::OnActive()
 {
   GSBase::OnActive();
 
-  // If single player, load objects now.
-
-  // If multi player, start object manager
-
-  // Once loaded..
-  //TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
-
-  // Clear scene graph and initialise empty root node
-  //ClearVe1SceneGraph();
-
-  ////SetStartLocation();
   SetLocalPlayerLocation(m_startLoc);
-  m_startLoc = 1; // for next time
+  m_startLoc = 1; // for next time TODO Should this be -1 ??
 }
 
 bool GSStartGame::OnCursorEvent(const CursorEvent& ce)
