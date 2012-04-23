@@ -308,7 +308,12 @@ bool GuiText::LoadText(File* f)
   }
   Strings strs = Split(s, ',');
   int size = strs.size();
+  if (size < 2)
+  {
+    f->ReportError("Unexpected font info: " + s);
+  }
   Assert(size >= 2);
+
   std::string fontName = "font2d/" + strs[0] + "-font.font";
   m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
   m_textSize = ToFloat(strs[1]);
