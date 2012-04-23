@@ -102,7 +102,7 @@ void Object::Create()
         if (go->Load(&f))
         {
           //TheGame::Instance()->AddGameObject(go);
-std::cout << "Object load: Successfully loaded game object " << *this << "... ";
+//std::cout << "Object load: Successfully loaded game object " << *this << "... ";
           TheObjectManager::Instance()->AddGameObject(go);
         }
         else
@@ -112,7 +112,7 @@ std::cout << "Object load: Failed to load game object " << *this << "\n";
       }
       else
       {
-std::cout << "Object load: no data file " << m_datafile << "\n";
+//std::cout << "Object load: no data file " << m_datafile << "\n";
       }
     }
   }
@@ -186,7 +186,7 @@ std::cout << " ID: " << id << ": ";
 std::cout << " Type: " << type << "\n";
 #endif
 
-std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " << assetfile << " Data file: " << datafile << " Owner: " << owner << "\n";
+//std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " << assetfile << " Data file: " << datafile << " Owner: " << owner << "\n";
 
         TheObjectManager::Instance()->AddObject(new Object(id, owner, type, assetfile, datafile));
       }
@@ -239,7 +239,7 @@ std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
 
     if (TheObjectManager::Instance()->GetFile(s))
     {
-std::cout << " GetFile returned true\n";
+//std::cout << " GetFile returned true\n";
     }
     else
     {
@@ -330,7 +330,7 @@ bool ObjectManager::Load()
     f.ReportError("Object create cache: Expected num objects");
     return false;
   }
-std::cout << "Object create cache: got " << numObjs << " objs!\n";
+//std::cout << "Object create cache: got " << numObjs << " objs!\n";
 
   for (int i = 0; i < numObjs; i++)
   {
@@ -339,11 +339,11 @@ std::cout << "Object create cache: got " << numObjs << " objs!\n";
     {
       return false;
     }
-std::cout << " - Adding object " << *obj << "\n";
+//std::cout << " - Adding object " << *obj << "\n";
 
     AddObject(obj);
   }
-std::cout << "Loaded object create cache ok!\n";
+//std::cout << "Loaded object create cache ok!\n";
   return true;
 }
 
@@ -497,7 +497,7 @@ void ObjectManager::AddGameObject(PGameObject go)
   Assert(m_allGameObjects.find(go->GetId()) == m_allGameObjects.end());
 
   m_allGameObjects[go->GetId()] = go;
-std::cout << "Created game object " << go->GetId() << " " << go->GetTypeName() << " but don't know its location yet\n"; 
+//std::cout << "Created game object " << go->GetId() << " " << go->GetTypeName() << " but don't know its location yet\n"; 
 }
 
 void ObjectManager::OnObjectChangeLocation(int objId)
@@ -519,13 +519,13 @@ void ObjectManager::OnObjectChangeLocation(int objId)
     if (v->GetLocation() == m_location)
     {
       TheGame::Instance()->AddGameObject(go);
-std::cout << "Added game object to our location (" << m_location << ")\n"; 
+std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() << ") to our location (" << m_location << ")\n"; 
 
       v->OnLocationEntry();
     }
     else
     {
-std::cout << "Game object " << objId << " not in our location (" << m_location << ")\n"; 
+std::cout << "Game object " << objId << " changed location but is not in our location (" << m_location << ")\n"; 
       TheGame::Instance()->EraseGameObject(objId);
       v->OnLocationExit();
     }
@@ -538,30 +538,27 @@ std::cout << "Game object " << objId << " not in our location (" << m_location <
 
 void ObjectManager::SetLocalPlayerLocation(int newLocation)
 {
-std::cout << "In ObjectManager::SetLocalPlayerLocation...\n";
+std::cout << "#¢#¢#¢ In ObjectManager::SetLocalPlayerLocation...\n";
 
   if (m_location == newLocation)
   {
 std::cout << "Er, setting location to current value!\n";
     // TODO Commenting this out doesn't fix problem :-(
-    ////return;
+    return;
   }
 
   m_location = newLocation;
 
-  // Tell existing game objects to exit
-  // TODO, although trashing the SceneGraph probably covers most of it.
-
   TheGame::Instance()->ClearGameObjects();
   // If using Sweep and Prune for collisions, clear list of objects
-  TheSAP::Instance()->Clear();
+  ////TheSAP::Instance()->Clear();
 
   ClearVe1SceneGraph();
 
   // Clear the current terrain, which is the important thing the new location must have!
   ClearTerrain();
 
-std::cout << " ..old location trashed, adding game objects in new location...\n";
+//std::cout << " ..old location trashed, adding game objects in new location...\n";
 
   for (GameObjects::iterator it = m_allGameObjects.begin(); it != m_allGameObjects.end(); ++it)
   {
@@ -571,9 +568,9 @@ std::cout << " ..old location trashed, adding game objects in new location...\n"
     {
       if (v->GetLocation() == m_location)
       {
-std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
+//std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
         TheGame::Instance()->AddGameObject(go);
-        TheSAP::Instance()->AddBox(go);
+        ////TheSAP::Instance()->AddBox(go);
         v->OnLocationEntry();
       }
     }
