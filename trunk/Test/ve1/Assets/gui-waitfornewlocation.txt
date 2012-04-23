@@ -4,9 +4,9 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+waitfornewlocation-comp
 // Num children
-1
+2
 
 
 // Element type
@@ -22,4 +22,20 @@ Waiting for new location...
 // Font name, size
 arial, 1.0
 
+
+// Button
+// element type
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 2.0
 
