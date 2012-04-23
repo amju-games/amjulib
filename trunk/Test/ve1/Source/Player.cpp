@@ -229,10 +229,7 @@ void Player::MoveTo(const Vec3f& newpos)
   m_newPos = newpos;
   m_isMoving = true;
 
-  // TODO Change position immediately if this is first MoveTo() for this location.
-  // Otherwise we should walk to the new pos.
-
-std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
+//std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
 
   Vec3f dir = GetPos() - newpos;
 
