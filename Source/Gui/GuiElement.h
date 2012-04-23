@@ -33,6 +33,8 @@ public:
   void SetHasFocus(bool f);
   bool HasFocus() const;  
 
+  virtual void OnGetFocus() {}
+
   // Set command as an object for Undo, or a function for simple, 
   //  non-undoable action
   void SetCommand(PGuiCommand pCommand);
@@ -45,6 +47,15 @@ public:
   void SetSize(const Vec2f&);
   const Vec2f& GetSize() const;
 
+  // Scale factor so entire GUI can be zoomed in for accessibility
+  static void SetGlobalScale(float f);
+  static float GetGlobalScale();
+
+  // Text to speech: if enabled, text-based elements speak when they 
+  //  get focus. Also they should have a "speak" button.
+  static void SetTextToSpeechEnabled(bool);
+  static bool IsTextToSpeechEnabled();
+
   void SetVisible(bool isVis);
   bool IsVisible() const;
 
@@ -53,6 +64,9 @@ public:
 
   void SetParent(GuiElement* parent) { m_parent = parent; }
   GuiElement* GetParent() { return m_parent; }
+
+  // For elements containing text, say the text.
+  virtual void TextToSpeech() {}
 
 protected:
   // Pos is top-left of element

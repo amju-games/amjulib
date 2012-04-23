@@ -17,6 +17,7 @@ public:
   GuiText();
   virtual void Draw();  
   virtual bool Load(File*); 
+  virtual void TextToSpeech();
 
   // Load just the text info (not name, size, etc)
   bool LoadText(File*);

@@ -19,6 +19,8 @@ public:
   // GuiElement overrides
   virtual bool Load(File*); 
   virtual void Draw();
+  virtual void OnGetFocus();
+  virtual void TextToSpeech();
 
   // EventListener overrides - respond to mouse/cursor movement
   //  and button presses

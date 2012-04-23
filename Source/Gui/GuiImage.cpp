@@ -69,8 +69,6 @@ bool GuiImage::Load(File* f)
     return false;
   }
 
-  //BuildTris();
-
   return true;
 }
 }

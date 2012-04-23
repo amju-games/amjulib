@@ -1,3 +1,5 @@
+#include <Timer.h>
+#include <TextToSpeech.h>
 #include "GuiButton.h"
 #include "Font.h"
 #include "Screen.h"
@@ -61,6 +63,19 @@ void GuiButton::SetIsFocusButton(bool isFocusButton)
   }
 }
 
+void GuiButton::OnGetFocus()
+{
+  SetIsFocusButton(true);
+}
+
+void GuiButton::TextToSpeech()
+{
+  if (!m_guiText.GetText().empty())
+  {
+    Amju::TextToSpeech(m_guiText.GetText());
+  }
+}
+
 void GuiButton::ClickSound() const
 { 
   // TODO Get resource from ResourceManager ??
@@ -80,26 +95,6 @@ bool GuiButton::Load(File* f)
   }
   m_guiText.SetPos(GetPos());
   m_guiText.SetSize(GetSize());
-
-/*
-  if (!f->GetDataLine(&m_text))
-  {
-    f->ReportError("Expected button text");
-    return false;
-  }
-  // Get font name and size
-  std::string s;
-  if (!f->GetDataLine(&s))
-  {
-    f->ReportError("Expected font info");
-    return false;
-  }
-  Strings strs = Split(s, ',');
-  Assert(strs.size() == 2);
-  std::string fontName = "font2d/" + strs[0] + "-font.font";
-  m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
-  m_fontSize = ToFloat(strs[1]);
-*/
 
   return true;
 }
@@ -127,6 +122,35 @@ void GuiButton::Draw()
   }
 */
 
+  if (IsFocusButton() || HasFocus()) // TODO just one
+  {
+    // Draw border
+    // TODO Could be image - allow flexible way to give GUIs themes
+    static float t = 0;
+    float dt = TheTimer::Instance()->GetDt();
+    t += dt;
+    PushColour();
+    float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
+    Colour c(s, s, 1, 1);
+    AmjuGL::SetColour(c); //inverse ? m_fgCol : m_bgCol);
+    //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+
+    Rect r = GetRect(this);
+    float BORDER = 0.025f; // TODO configurable
+    float xmin = r.GetMin(0) - BORDER;
+    float xmax = r.GetMax(0) + BORDER;
+    float ymin = r.GetMin(1) - BORDER;
+    float ymax = r.GetMax(1) + BORDER;
+    r.Set(xmin, xmax, ymin, ymax);
+    
+    GuiImage focus(*this);
+    focus.SetPos(Vec2f(xmin, ymax));
+    focus.SetSize(Vec2f(xmax - xmin, ymax - ymin));
+    focus.Draw();
+
+    //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+    PopColour();
+  }
   GuiImage::Draw();
 
   PushColour();
@@ -214,6 +238,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (m_isPressed)
       {
         ClickSound();
+        SetHasFocus(true);
         return true; // handled
       }
     }
