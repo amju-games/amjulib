@@ -58,7 +58,7 @@ struct SpeechInit
 #ifdef WIN32
     std::wstring ws;
     ws.assign(s.begin(), s.end());
-    HRESULT hr = pVoice->Speak(ws.c_str(), 0, NULL);
+    HRESULT hr = pVoice->Speak(ws.c_str(), SPF_PURGEBEFORESPEAK | SPF_ASYNC, NULL);
 #endif
 
 #ifdef MACOSX

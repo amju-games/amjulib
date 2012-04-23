@@ -708,6 +708,9 @@
     <ClCompile Include="..\..\..\Source\Collision\BruteForce.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Sound\TextToSpeech.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1336,6 +1339,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Collision\BruteForce.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sound\TextToSpeech.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
