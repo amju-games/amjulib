@@ -96,7 +96,8 @@ void ChatConsole::OnActive()
 
   GuiButton* send = (GuiButton*)GetElementByName(m_gui, "chat-send-button");
   send->SetCommand(Amju::OnChatSendButton);
-  send->SetIsFocusButton(true);
+  //send->SetIsFocusButton(true);
+  send->SetHasFocus(true); // use in preference to SetIsFocusButton
 
   GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
   textedit->SetText("");

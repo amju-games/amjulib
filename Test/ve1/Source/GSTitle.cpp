@@ -53,7 +53,7 @@ void GSTitle::OnActive()
 
   GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
   start->SetCommand(Amju::OnStartButton);
-  start->SetIsFocusButton(true);
+  start->SetHasFocus(true); // use in preference to SetIsFocusButton
 
   GuiButton* quit = (GuiButton*)GetElementByName(m_gui, "quit-button");
   quit->SetCommand(Amju::OnQuitButton);
