@@ -5,11 +5,16 @@
 
 namespace Amju
 {
-void OnAvatarButton()
+static void OnAvatarButton()
 {
   TheGSAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
 
   TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+}
+
+static void OnBack()
+{
+  TheGSOptions::Instance()->GoBack();
 }
 
 GSOptions::GSOptions()
@@ -40,6 +45,7 @@ void GSOptions::OnActive()
   m_gui = LoadGui("gui-options.txt");
   Assert(m_gui);
   m_gui->GetElementByName("avatar-button")->SetCommand(OnAvatarButton);
+  m_gui->GetElementByName("back-button")->SetCommand(OnBack);
 }
 
 bool GSOptions::OnCursorEvent(const CursorEvent& ce)
