@@ -7,12 +7,20 @@
 namespace Amju
 {
 static GuiElement* focusElement = 0;
+static float globalScale = 1.0f;
+static bool textToSpeechEnabled = true;
 
 void GuiElement::SetHasFocus(bool f)
 {
   if (f)
   {
     focusElement = this;
+    OnGetFocus();
+
+    if (IsTextToSpeechEnabled())
+    {
+      TextToSpeech();
+    }
   }
   else
   {
@@ -23,6 +31,26 @@ void GuiElement::SetHasFocus(bool f)
 bool GuiElement::HasFocus() const
 {
   return (focusElement == this);
+}
+
+void GuiElement::SetGlobalScale(float f)
+{
+  globalScale = f;
+}
+
+float GuiElement::GetGlobalScale()
+{
+  return globalScale;
+}
+
+void GuiElement::SetTextToSpeechEnabled(bool t)
+{
+  textToSpeechEnabled = t;
+}
+
+bool GuiElement::IsTextToSpeechEnabled()
+{
+  return textToSpeechEnabled;
 }
 
 Rect GetRect(GuiElement* elem)
@@ -40,6 +68,7 @@ GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName)
   if (!elem)
   {
 std::cout << "Unexpected: no node named \"" << nodeName << "\" in GUI tree with root \"" << root->GetName() << "\"\n";
+    Assert(0);
   }
   return elem;
 }

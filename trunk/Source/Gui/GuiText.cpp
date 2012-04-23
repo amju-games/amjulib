@@ -4,6 +4,7 @@
 #include "Colour.h"
 #include <StringUtils.h>
 #include <Timer.h>
+#include <TextToSpeech.h>
 
 //#define TEXT_RECT_DEBUG
 
@@ -25,6 +26,14 @@ GuiText::GuiText()
   SetCharTime(0);
   m_isMulti = false;
   m_topLine = 0;
+}
+
+void GuiText::TextToSpeech()
+{
+  if (!m_text.empty())
+  {
+    Amju::TextToSpeech(m_text);
+  }
 }
 
 void GuiText::SizeToText()
