@@ -122,7 +122,7 @@ void GuiButton::Draw()
   }
 */
 
-  if (IsFocusButton() || HasFocus()) // TODO just one
+  if (IsFocusButton()) ///// || HasFocus()) // TODO just one
   {
     // Draw border
     // TODO Could be image - allow flexible way to give GUIs themes
@@ -132,8 +132,7 @@ void GuiButton::Draw()
     PushColour();
     float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
     Colour c(s, s, 1, 1);
-    AmjuGL::SetColour(c); //inverse ? m_fgCol : m_bgCol);
-    //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    AmjuGL::SetColour(c); 
 
     Rect r = GetRect(this);
     float BORDER = 0.025f; // TODO configurable
@@ -148,7 +147,6 @@ void GuiButton::Draw()
     focus.SetSize(Vec2f(xmax - xmin, ymax - ymin));
     focus.Draw();
 
-    //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
   }
   GuiImage::Draw();
@@ -163,26 +161,6 @@ void GuiButton::Draw()
   AmjuGL::PopMatrix();
   PopColour();
 
-/*
-  // Draw text
-  // TODO Get font name, point size - use a GuiText object
-  PushColour();
-  float w = m_font->GetTextWidth(m_text);
-  float x = m_pos.x + m_size.x * 0.5f - w * 0.5f * m_fontSize;
-  float y = m_pos.y - m_size.y; // + 0.5f * heighOfChar ??
-  float origSize = m_font->GetSize();
-  m_font->SetSize(m_fontSize);
-  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
-  m_font->Print(x, y, m_text.c_str());
-  // TODO Flag
-  // Drop shadow
-  AmjuGL::SetColour(0, 0, 0, 1);
-  m_font->Print(x, y + 0.01f, m_text.c_str());
-
-  m_font->SetSize(origSize);
-  PopColour();
-*/
-
   AmjuGL::PopMatrix();
 }
 
@@ -196,7 +174,7 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   // TODO Adjust for cursor hot spot - dependency on Cursor Manager ??
 
   // Point in button rectangle ?
-  Rect r = GetRect(this);//(m_pos.x, m_pos.x + m_size.x, m_pos.y - m_size.y, m_pos.y);
+  Rect r = GetRect(this);
   m_isMouseOver = (r.IsPointIn(Vec2f(ce.x, ce.y)));
 
   // This isn't right - only handled if we click the button
