@@ -43,8 +43,10 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("ok-button")->SetCommand(OnOK);
-  GuiListBox* listbox = dynamic_cast<GuiListBox*>(m_gui->GetElementByName("listbox"));
+  GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
+  GetElementByName(m_gui, "edit1")->SetHasFocus(true);
+
+  GuiListBox* listbox = dynamic_cast<GuiListBox*>(GetElementByName(m_gui, "listbox"));
   Assert(listbox);
   for (int i = 0; i < 10; i++)
   {
