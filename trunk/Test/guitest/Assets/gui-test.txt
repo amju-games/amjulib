@@ -6,8 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
-
+7
 
 // Element type
 gui-text
@@ -48,10 +47,23 @@ I am editable! Try editing me and moving the caret around! Wheeee!
 // Font name, size
 arial, 0.75, left
 
+// Element type
+gui-text-edit
+// Element name
+edit2
+// pos (coords are -1..1)
+-0.8, 0.0
+// size
+1.6, 0.1
+// Text
+Another editable text box! I am editable! Try editing me and moving the caret around! Wheeee!
+// Font name, size
+arial, 1.0, left
+
 gui-list-box
 listbox
 // pos
--0.8, 0.0
+-0.8, -0.2
 // size
 0.4, 0.4
 
@@ -72,4 +84,6 @@ OK
 // Font name, size
 arial, 1.0 
 
+gui-kb
+// TODO
 
