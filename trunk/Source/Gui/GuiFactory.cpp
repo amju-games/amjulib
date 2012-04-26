@@ -6,6 +6,7 @@
 #include "GuiComposite.h"
 #include "GuiListBox.h"
 #include "GuiWindow.h"
+#include "GuiKeyboard.h"
 
 namespace Amju
 {
@@ -16,6 +17,7 @@ GuiElement* CreateGuiTextEdit() { return new GuiTextEdit; }
 GuiElement* CreateGuiComposite() { return new GuiComposite; }
 GuiElement* CreateListBox() { return new GuiListBox; }
 GuiElement* CreateWindow() { return new GuiWindow; }
+GuiElement* CreateKb() { return new GuiKeyboard; }
 
 GuiFactory::GuiFactory()
 {
@@ -26,5 +28,6 @@ GuiFactory::GuiFactory()
   Add(GuiComposite::NAME, &CreateGuiComposite);
   Add(GuiListBox::NAME, &CreateListBox);
   Add(GuiWindow::NAME, &CreateWindow);
+  Add(GuiKeyboard::NAME, &CreateKb);
 }
 }

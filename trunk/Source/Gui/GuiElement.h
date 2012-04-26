@@ -45,7 +45,7 @@ public:
   const Vec2f& GetPos() const;
 
   void SetSize(const Vec2f&);
-  const Vec2f& GetSize() const;
+  Vec2f GetSize() const;
 
   // Scale factor so entire GUI can be zoomed in for accessibility
   static void SetGlobalScale(float f);

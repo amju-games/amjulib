@@ -12,11 +12,11 @@ void GuiImage::Draw()
     return;
   }
 
-  if (m_pos != m_oldPos || m_size != m_oldSize)
+  if (m_pos != m_oldPos || GetSize() != m_oldSize)
   {
     BuildTris();
     m_oldPos = m_pos;
-    m_oldSize = m_size;
+    m_oldSize = GetSize();
   }
 
   Assert(m_texture);
@@ -27,12 +27,14 @@ void GuiImage::Draw()
 
 void GuiImage::BuildTris()
 {
+  Vec2f size = GetSize();
+
   AmjuGL::Vert verts[4] = 
   {
-    AmjuGL::Vert(m_pos.x + m_size.x, m_pos.y - m_size.y, 0,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(m_pos.x + m_size.x, m_pos.y, 0,   1, 1,   0, 1, 0),
+    AmjuGL::Vert(m_pos.x + size.x, m_pos.y - size.y, 0,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
+    AmjuGL::Vert(m_pos.x + size.x, m_pos.y, 0,   1, 1,   0, 1, 0),
     AmjuGL::Vert(m_pos.x, m_pos.y, 0,   0, 1,   0, 1, 0),
-    AmjuGL::Vert(m_pos.x, m_pos.y - m_size.y, 0,   0, 0,   0, 1, 0)
+    AmjuGL::Vert(m_pos.x, m_pos.y - size.y, 0,   0, 0,   0, 1, 0)
   };
 
   m_tris.clear();

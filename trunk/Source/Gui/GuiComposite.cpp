@@ -75,6 +75,7 @@ bool GuiComposite::Load(File* f)
     Assert(0);
     return false;
   }
+
   // No pos and size, so not using base class impl
   return LoadChildren(f);
 }
@@ -108,6 +109,7 @@ bool GuiComposite::LoadChildren(File* f)
       return false;
     }
     e->SetParent(this);
+
     m_children.push_back(e);
   }
   return true;
@@ -160,7 +162,7 @@ bool GuiComposite::SetFocusNextChild()
   {
     if (m_children[i]->HasFocus())
     {
-      int next = i + 1; 
+      unsigned int next = i + 1; 
       if (next == m_children.size())
       {
         next = 0;

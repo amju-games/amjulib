@@ -208,9 +208,9 @@ void GuiElement::SetSize(const Vec2f& v)
   m_size = v;
 }
 
-const Vec2f& GuiElement::GetSize() const
+Vec2f GuiElement::GetSize() const
 {
-  return m_size;
+  return m_size * GetGlobalScale();
 }
 
 void GuiElement::SetVisible(bool isVis)
