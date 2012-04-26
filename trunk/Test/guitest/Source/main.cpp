@@ -15,6 +15,7 @@
 #include <Game.h>
 #include <CursorManager.h>
 #include <Font.h>
+#include <GuiElement.h>
 #include "GSGuiTest.h"
 
 namespace Amju
@@ -33,6 +34,8 @@ void StartUp()
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
 
   TheGame::Instance()->SetCurrentState(TheGSGuiTest::Instance());
+
+  GuiElement::SetGlobalScale(1.0f);
 }
 }
 
