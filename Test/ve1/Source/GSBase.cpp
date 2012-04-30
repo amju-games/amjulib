@@ -32,7 +32,13 @@ void GSBase::SetPrevState(GameState* prevState)
 
 void GSBase::GoBack()
 {
+  if (!m_prevState)
+  {
+    // Not sure if using type_info like this works reliably :-(
+    std::cout << "FAIL in Go back to prev state: current state: " << typeid(*this).name() << "\n"; 
+  }
   Assert(m_prevState);
+
 std::cout << "GO BACK to previous state...\n";
 
   TheGame::Instance()->SetCurrentState(m_prevState);
