@@ -447,7 +447,7 @@ void Player::SetMenu(GuiMenu* menu)
   }
   else
   {
-    menu->AddItem(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
+    menu->AddChild(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
   }
 }
 

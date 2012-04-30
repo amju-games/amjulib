@@ -408,7 +408,7 @@ public:
 
   virtual void OnSuccess()
   {
-//std::cout << "Move req success!\n";
+std::cout << "Move req result: " << GetResult().GetString() << "\n";
 
     // Do nothing for now, we will download the new position and cache it
     // TODO Prediction
@@ -425,6 +425,21 @@ private:
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_POSITION);
+  url += "&obj_id=";
+  url += ToString(objId);
+  url += "&x=" + ToString(pos.x);
+  url += "&y=" + ToString(pos.y);
+  url += "&z=" + ToString(pos.z);
+  url += "&loc=" + ToString(location);
+
+  // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
+  // Need to kill any existing pos update req then add this new one. TODO
+  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
+}
+
+void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int location)
+{
+  std::string url = TheVe1ReqManager::Instance()->MakeUrl(CHANGE_LOCATION);
   url += "&obj_id=";
   url += ToString(objId);
   url += "&x=" + ToString(pos.x);

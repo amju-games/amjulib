@@ -63,6 +63,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case SET_POSITION:
     s += "movereq.pl"; // Calling code adds object ID, new location req
     break;
+  
+  case CHANGE_LOCATION:
+    s += "changelocation.pl";
+    break;
 
   case GET_NEW_OBJECTS:
     s += "getobjects.pl"; // Calling code adds time of last check, (region)
