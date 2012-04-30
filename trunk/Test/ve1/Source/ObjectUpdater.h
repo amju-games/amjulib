@@ -19,6 +19,7 @@ public:
   void SendUpdateReq(int objId, const std::string& key, const std::string& val);
 
   void SendPosUpdateReq(int objId, const Vec3f& val, int location);
+  void SendChangeLocationReq(int objId, const Vec3f& val, int location);
 
   // Queue a position update for a game object. Called from position update successful response.
   void QueueUpdatePos(int id, const Vec3f& pos, int location);
