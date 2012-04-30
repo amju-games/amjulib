@@ -33,6 +33,7 @@ void GSStartGame::OnActive()
 {
   GSBase::OnActive();
 
+  SetLocalPlayerLocation(-1); // Force reload if m_startLoc is last location
   SetLocalPlayerLocation(m_startLoc);
   m_startLoc = 1; // for next time TODO Should this be -1 ??
 }

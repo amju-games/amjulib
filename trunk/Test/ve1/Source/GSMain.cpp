@@ -47,7 +47,7 @@ void GSMain::ShowObjectMenu(GameObject* obj)
 {
   m_menu = new GuiMenu;
 
-  m_menu->SetPos(m_mouseScreen);
+  m_menu->SetLocalPos(m_mouseScreen);
 
   Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
   if (v)
@@ -79,7 +79,7 @@ void GSMain::Update()
 
 void GSMain::DoMoveRequest()
 {
-std::cout << "In DoMoveRequest...\n";
+//std::cout << "In DoMoveRequest...\n";
 
   GameObject* selectedObj = PickObject(m_mouseScreen);
 
