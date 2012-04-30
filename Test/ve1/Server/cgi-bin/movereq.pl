@@ -27,14 +27,28 @@ sub move()
   my $loc = param('loc');
   my $obj_id = param('obj_id');
 
+  # If location is not the same as the location the object is currently in, discard this request.
+  # This is so once we go to another location, any outstanding move reqs from the old location are ignored.
+  my $sql = "select loc from objectpos where id=$obj_id limit 1";
+  my $query = $dbh->prepare($sql) or die
+    "Query prepare failed for this query: $sql\n";
+  $query->execute;
+  if (my ($found_loc) = $query->fetchrow_array)
+  {
+    if ($found_loc != $loc)
+    {
+      print "Discarding move req from old location.\n";
+      return;
+    }
+  }
 
   # TODO Check LOS to new requested location
 
-  my $sql = "insert into objectpos (id, x, y, z, loc, whenchanged) values ($obj_id, $x, $y, $z, $loc, now()) on duplicate key update x=$x, y=$y, z=$z, loc=$loc, whenchanged=now() ";
+  $sql = "insert into objectpos (id, x, y, z, loc, whenchanged) values ($obj_id, $x, $y, $z, $loc, now()) on duplicate key update x=$x, y=$y, z=$z, loc=$loc, whenchanged=now() ";
 
   print "Query: $sql\n\n";
 
-  my $query = $dbh->prepare($sql) or die
+  $query = $dbh->prepare($sql) or die
     "Query prepare failed for this query: $sql\n";
 
   $query->execute;
