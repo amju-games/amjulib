@@ -14,6 +14,9 @@
 #ifdef MACOSX
 #include <GLUT/glut.h>
 #endif
+#ifdef WIN32
+#include <gl/glut.h>
+#endif
 
 #include <AmjuFinal.h>
 
