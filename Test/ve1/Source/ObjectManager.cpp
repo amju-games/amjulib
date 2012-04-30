@@ -547,6 +547,12 @@ std::cout << "Er, setting location to current value!\n";
     return;
   }
 
+  // Why not do this ??
+  if (GetLocalPlayer())
+  {
+    GetLocalPlayer()->SetLocation(newLocation);
+  }
+
   m_location = newLocation;
 
   TheGame::Instance()->ClearGameObjects();
