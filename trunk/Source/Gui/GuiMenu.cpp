@@ -20,8 +20,6 @@ void GuiMenuItem::Init(const std::string& text)
   SetJust(AMJU_JUST_LEFT);
 
   SizeToText();
-  //m_size.x = GetTextWidth(m_text) * m_textSize;
-  //m_size.y = 0.1f * m_textSize; // TODO TEMP TEST
 }
 
 GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
@@ -65,12 +63,12 @@ struct NestedMenuCommand : public GuiCommand
     if (topMenu && !topMenu->IsVertical())
     {
       // Draw below
-      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(0, -m_pGui->GetSize().y));
+      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetLocalPos(/*m_pGui->GetPos() + */ Vec2f(0, -m_pGui->GetSize().y));
     }
     else
     {
       // Draw to right
-      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetPos(m_pGui->GetPos() + Vec2f(m_pGui->GetSize().x, 0));
+      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetLocalPos(/*m_pGui->GetPos() + */ Vec2f(m_pGui->GetSize().x, 0));
     }
     return false;
   }
@@ -101,6 +99,8 @@ GuiMenu::GuiMenu()
 {
   m_selected = -1;
   m_isVertical = true;
+  m_hideOnSelection = true;
+
   TheEventPoller::Instance()->AddListener(this, MENU_PRIORITY);
 }
 
@@ -119,12 +119,12 @@ void GuiMenu::Draw()
 
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
-  Vec2f pos(m_pos); // calc pos of each item
+  Vec2f pos; //(m_pos); // calc pos of each item
 
-  for (unsigned int i = 0; i < m_items.size(); i++)
+  for (unsigned int i = 0; i < m_children.size(); i++)
   {
     bool isSel = (m_selected == (int)i);
-    GuiElement* item = m_items[i];
+    GuiElement* item = m_children[i];
 
     // Highlight selected item
 ////    ((GuiText*)item)->SetInverse(isSel); // TODO what if Items are not Text ?
@@ -144,7 +144,7 @@ void GuiMenu::Draw()
     item->SetSize(size); 
 
     // Set position of item
-    item->SetPos(pos);
+    item->SetLocalPos(pos);
     if (m_isVertical)
     {
       pos.y -= size.y; // -ve = down the screen
@@ -165,7 +165,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       mbe.isDown)
   {
     if (!GetRect(this).IsPointIn(m_cursorPos) &&
-        !(m_parent && GetRect(m_parent).IsPointIn(m_cursorPos)))
+        !(GetParent() && GetRect(GetParent()).IsPointIn(m_cursorPos)))
     {
       // Click outside menu area => hide menu
       SetVisible(false);
@@ -176,9 +176,12 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     if (m_selected != -1)
     {
       // TODO Should react on mouse up when up item == down item.
-      m_items[m_selected]->ExecuteCommand();
+      m_children[m_selected]->ExecuteCommand();
       // Problem with nested item, but should open up on mouse over anyway...
-//      SetVisible(false); // TODO flag for this behaviour
+      if (m_hideOnSelection)
+      {
+        SetVisible(false); 
+      }
       return true; // handled
     }
   }
@@ -196,15 +199,15 @@ bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
   }
 
   m_selected = -1;
-  if (m_items.empty())
+  if (m_children.empty())
   {
     return false;
   }
 
   // Check each item
-  for (unsigned int i = 0; i < m_items.size(); i++)
+  for (unsigned int i = 0; i < m_children.size(); i++)
   {
-    GuiElement* item = m_items[i];
+    GuiElement* item = m_children[i];
 
     Rect r = GetRect(item);
 
@@ -217,34 +220,37 @@ bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
   return false;
 }
 
-void GuiMenu::AddItem(GuiMenuItem* pItem)
+void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
 {
-  m_items.push_back(pItem);
+  m_children.push_back(pItem);
   pItem->SetParent(this);
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();
+  Vec2f thisSize = GetSize();
 
   if (m_isVertical)
   {
-    if (size.x > m_size.x)
+    if (size.x > thisSize.x)
     {
-      m_size.x = size.x;
+      thisSize.x = size.x;
     }
-    m_size.y += size.y;
+    thisSize.y += size.y;
   }
   else
   {
-    if (size.y > m_size.y)
+    if (size.y > thisSize.y)
     {
-      m_size.y = size.y;
+      thisSize.y = size.y;
     }
-    m_size.x += size.x;
+    thisSize.x += size.x;
   }
+
+  SetSize(thisSize);
 }
 
-void GuiMenu::Clear()
-{
-   m_items.clear();
-}
+//void GuiMenu::Clear()
+//{
+//   m_items.clear();
+//}
 }

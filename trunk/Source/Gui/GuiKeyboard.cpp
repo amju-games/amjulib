@@ -20,16 +20,22 @@ struct KbCommand : public GuiCommand
   char m_char;
 };
 
-bool GuiKeyboard::Load(File*)
+bool GuiKeyboard::Load(File* file)
 {
-  const std::string filename = "gui-kb.txt"; // TODO global KB choice 
+  if (!GuiElement::Load(file))
+  {
+    return false;
+  }
+
+  const std::string filename = "gui-kb.txt"; // TODO global KB choice, depending on Language setting
   File f;
   if (!f.OpenRead(filename))
   {
     Assert(0);
     return false;
   }
-  if (! GuiComposite::Load(&f))
+
+  if (!GuiComposite::Load(&f))
   {
     return false;
   }

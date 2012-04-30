@@ -4,6 +4,7 @@
 #include <vector>
 #include "GuiElement.h"
 #include "GuiText.h"
+#include "GuiComposite.h"
 
 namespace Amju
 {
@@ -41,7 +42,7 @@ private:
 };
 
 
-class GuiMenu : public GuiElement
+class GuiMenu : public GuiComposite
 {
 public:
   GuiMenu();
@@ -52,21 +53,21 @@ public:
 
   virtual void Draw();  
 
-  void AddItem(GuiMenuItem* pItem);
-  void Clear();
-  // TODO Insert, Remove items
+  virtual void AddChild(GuiElement* pItem);
+  //void Clear();
+  // TODO Add Insert, Remove items: call GuiComposite funcs
 
   // Adjust selected item when cursor moves
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 protected:
-  typedef std::vector<PGuiMenuItem> Items;
-  Items m_items;
+//  typedef std::vector<PGuiMenuItem> Items;
+//  Items m_items;
   int m_selected; // index in m_items or -1
   Vec2f m_cursorPos; // last position passed into OnCursorEvent
 
-  PGuiMenu m_childMenu; // ?
+//  PGuiMenu m_childMenu; // ?
   bool m_isVertical;
   // If true, hide menu when an item is selected
   bool m_hideOnSelection;

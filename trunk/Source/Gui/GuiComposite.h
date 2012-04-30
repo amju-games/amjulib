@@ -24,7 +24,7 @@ public:
 
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
-  void AddChild(GuiElement*);
+  virtual void AddChild(GuiElement*);
   void Clear();
 
 protected:

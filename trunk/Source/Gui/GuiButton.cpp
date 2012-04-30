@@ -93,8 +93,10 @@ bool GuiButton::Load(File* f)
   {
     return false;
   }
-  m_guiText.SetPos(GetPos());
+  m_guiText.SetLocalPos(GetLocalPos());
   m_guiText.SetSize(GetSize());
+  
+  m_guiText.SetParent(GetParent());
 
   return true;
 }
@@ -143,7 +145,8 @@ void GuiButton::Draw()
     r.Set(xmin, xmax, ymin, ymax);
     
     GuiImage focus(*this);
-    focus.SetPos(Vec2f(xmin, ymax));
+    focus.SetParent(0);
+    focus.SetLocalPos(Vec2f(xmin, ymax));
     focus.SetSize(Vec2f(xmax - xmin, ymax - ymin));
     focus.Draw();
 

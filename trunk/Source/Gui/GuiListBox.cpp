@@ -98,11 +98,11 @@ void GuiListBox::AddItem(GuiText* text)
   size.x = GetSize().x;
   text->SetSize(size);
 
-  Vec2f pos = GetPos();
+  Vec2f pos = GetLocalPos();
   // NB subtract => go down the screen
   // TODO This should be accumulated height
   pos.y -= 0.1f * (float)m_children.size(); // TODO
-  text->SetPos(pos);
+  text->SetLocalPos(pos);
 
   m_children.push_back(text);
 }
@@ -129,7 +129,7 @@ bool GuiListBox::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       mbe.isDown)
   {
     if (!GetRect(this).IsPointIn(cursorPos) &&
-        !(m_parent && GetRect(m_parent).IsPointIn(cursorPos)))
+        !(GetParent() && GetRect(GetParent()).IsPointIn(cursorPos)))
     {
       // Click outside area 
       //SetVisible(false);
