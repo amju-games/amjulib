@@ -651,22 +651,22 @@ std::cout << "Property for obj: " << it->first << "=" << it->second << "\n";
 void GSEdit::CreateContextMenu()
 {
   m_menu = new GuiMenu;
-  m_menu->SetPos(m_mouseScreen);
+  m_menu->SetLocalPos(m_mouseScreen);
   if (m_selectedObjects.empty())
   {
     m_menu->Clear(); 
-    m_menu->AddItem(new GuiMenuItem("Go to Location...", OnGotoLocation));
-    m_menu->AddItem(new GuiMenuItem("Add new Location...", OnNewLocation));
-    m_menu->AddItem(new GuiMenuItem("Update this mesh...", OnEditLocation));
+    m_menu->AddChild(new GuiMenuItem("Go to Location...", OnGotoLocation));
+    m_menu->AddChild(new GuiMenuItem("Add new Location...", OnNewLocation));
+    m_menu->AddChild(new GuiMenuItem("Update this mesh...", OnEditLocation));
 
     GuiMenu* childMenu = new GuiMenu;
     childMenu->SetName("Child menu");
 
     // Get types from Game Object Factory..?
-    childMenu->AddItem(new GuiMenuItem("Portal", new NewObjectCommand(Portal::TYPENAME)));
+    childMenu->AddChild(new GuiMenuItem("Portal", new NewObjectCommand(Portal::TYPENAME)));
     // TODO Other types
 
-    m_menu->AddItem(new GuiNestMenuItem("New Game Object...", childMenu));
+    m_menu->AddChild(new GuiNestMenuItem("New Game Object...", childMenu));
   }
   else if (m_selectedObjects.size() == 1)
   {
@@ -675,7 +675,7 @@ void GSEdit::CreateContextMenu()
 
 std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
     m_menu->Clear(); 
-    m_menu->AddItem(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
+    m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
 //    m_menu->AddItem(new GuiMenuItem("Save changes to object", new SaveObjectCommand()));
   }
   else

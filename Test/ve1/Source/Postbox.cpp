@@ -5,7 +5,7 @@ namespace Amju
 {
 void Postbox::SetMenu(GuiMenu* menu)
 {
-  menu->AddItem(new GuiMenuItem("Send a message..."));
+  menu->AddChild(new GuiMenuItem("Send a message..."));
 }
 }
 

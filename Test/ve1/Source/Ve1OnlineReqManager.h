@@ -15,6 +15,7 @@ enum Task
   FILE_UPDATE_CHECK, // get list of files which have been changed since last check
 
   SET_POSITION,
+  CHANGE_LOCATION,
   GET_POSITION_UPDATES,
 
   SET_STATE,  // send a key/val to store in DB

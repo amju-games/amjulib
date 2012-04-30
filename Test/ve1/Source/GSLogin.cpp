@@ -49,6 +49,11 @@ void GSLogin::OnActive()
   GetElementByName(m_gui, "login-button")->SetCommand(Amju::OnLoginButton);
   GetElementByName(m_gui, "cancel-button")->SetCommand(Amju::OnCancelButton);
   GetElementByName(m_gui, "email")->SetHasFocus(true);
+
+  // TODO Set last email address entered ?
+  GuiTextEdit* elem = dynamic_cast<GuiTextEdit*>(m_gui->GetElementByName("email"));
+  Assert(elem);
+  // ...
 }
 
 void GSLogin::OnLoginButton()
@@ -58,6 +63,9 @@ void GSLogin::OnLoginButton()
   if (elem)
   {
     std::string email = elem->GetText();
+
+    // TODO Save email in prefs
+
     // TODO password; use https
 
     // Get the next state to fire off the request. This avoids the race condition where the request

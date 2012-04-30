@@ -49,7 +49,7 @@ std::cout << "Obj " << i << ": ";
       float z = ToFloat(obj.getChildNode(3).getText());
       int location = atoi(obj.getChildNode(4).getText());
 
-//std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
+std::cout << "##@@## Got msg from server, Queueing pos for object " << id << " location: " << location << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
 
       TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z), location);

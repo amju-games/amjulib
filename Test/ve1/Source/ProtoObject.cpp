@@ -56,7 +56,7 @@ public:
     text.SetText(s);
     text.SizeToText(); 
     text.SetJust(GuiText::AMJU_JUST_LEFT);
-    text.SetPos(screenpos);
+    text.SetLocalPos(screenpos);
     text.Draw();
 
     PopColour();

@@ -31,7 +31,7 @@ void ChatConsole::Conversation::Draw()
   {
     GuiText* text = m_texts[i];
     pos += text->GetSize().y;
-    text->SetPos(Vec2f(-0.8f, pos));
+    text->SetLocalPos(Vec2f(-0.8f, pos));
     m_texts[i]->Draw();
 
     MultColour(Colour(1, 1, 1, 0.6f)); // fade
