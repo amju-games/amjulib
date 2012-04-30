@@ -41,8 +41,9 @@ public:
   void SetCommand(CommandFunc commandFunc);
   void ExecuteCommand();
 
-  void SetPos(const Vec2f&);
-  const Vec2f& GetPos() const;
+  void SetLocalPos(const Vec2f&);
+  Vec2f GetLocalPos() const;
+  Vec2f GetCombinedPos() const;
 
   void SetSize(const Vec2f&);
   Vec2f GetSize() const;
@@ -68,7 +69,7 @@ public:
   // For elements containing text, say the text.
   virtual void TextToSpeech() {}
 
-protected:
+private:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
   /*
@@ -78,7 +79,9 @@ protected:
               |              |
      (-1, -1) +--------------+ (1, -1)
   */
-  Vec2f m_pos;
+  Vec2f m_localpos;
+//? Or calc on fly? //  Vec2f m_combinedPos;
+
   Vec2f m_size;
   std::string m_name;
   bool m_isVisible; // TODO Use flags if more 

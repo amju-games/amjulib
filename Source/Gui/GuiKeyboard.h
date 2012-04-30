@@ -1,12 +1,12 @@
 #ifndef GUI_KEYBOARD_H_INCLUDED
 #define GUI_KEYBOARD_H_INCLUDED
 
-#include "GuiComposite.h"
+#include "GuiWindow.h"
 
 namespace Amju
 {
 // Generates keyboard events
-class GuiKeyboard : public GuiComposite
+class GuiKeyboard : public GuiWindow
 {
 public:
   static const char* NAME;

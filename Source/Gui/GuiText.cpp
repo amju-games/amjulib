@@ -38,8 +38,8 @@ void GuiText::TextToSpeech()
 
 void GuiText::SizeToText()
 {
-  m_size.x = GetTextWidth(m_text) * m_textSize;
-  m_size.y = 0.1f * m_textSize; // font size of 1 needs height 0.1
+  Vec2f size(GetTextWidth(m_text) * m_textSize, 0.1f * m_textSize); // font size of 1 needs height 0.1
+  SetSize(size);
 }
 
 void GuiText::SetCharTime(float secs)
@@ -144,8 +144,10 @@ void GuiText::Draw()
 
 void GuiText::DrawMultiLine()
 {
-  float y = m_pos.y - m_textSize * 0.1f;
-  float minY = m_pos.y - m_size.y;
+  Vec2f pos = GetCombinedPos();
+
+  float y = pos.y - m_textSize * 0.1f;
+  float minY = pos.y - GetSize().y;
 
   int lines = m_lines.size();
   for (int i = m_topLine; i < lines; i++)
@@ -164,9 +166,10 @@ void GuiText::DrawMultiLine()
 
 void GuiText::DrawSingleLine()
 {
+  Vec2f pos = GetCombinedPos();
   // Centre the text vertically
   // TODO Why 0.1, depends on font size ?
-  float y = m_pos.y - m_size.y * 0.5f - m_textSize * 0.05f;
+  float y = pos.y - GetSize().y * 0.5f - m_textSize * 0.05f;
 
   // NB This is single line only, need another path for multi-line.
   // Decide on character range to draw
@@ -197,17 +200,20 @@ void GuiText::DrawSingleLine()
 
 void GuiText::PrintLine(const std::string& str, float y)
 {
+  Vec2f pos = GetCombinedPos();
+  Vec2f size = GetSize();
+
   Font* font = GetFont();
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    font->Print(m_pos.x, y, str.c_str());
+    font->Print(pos.x, y, str.c_str());
     break;
   case AMJU_JUST_RIGHT:
-    font->Print(m_pos.x + m_size.x - GetTextWidth(str), y, str.c_str());
+    font->Print(pos.x + size.x - GetTextWidth(str), y, str.c_str());
     break;
   case AMJU_JUST_CENTRE:
-    font->Print(m_pos.x + 0.5f * (m_size.x - GetTextWidth(str)), y, str.c_str());
+    font->Print(pos.x + 0.5f * (size.x - GetTextWidth(str)), y, str.c_str());
     break;
   default:
     Assert(0);
@@ -218,25 +224,26 @@ void GuiText::GetFirstLast(int line, int* first, int* last)
 {
   *first = 0;
   *last = m_text.size();
+  Vec2f size = GetSize();
 
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    while (GetFont()->GetTextWidth(m_text.substr(0, *last)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(0, *last)) > size.x)
     {
       (*last)--;
     }
     return;
 
   case AMJU_JUST_RIGHT:
-    while (GetFont()->GetTextWidth(m_text.substr(*first)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(*first)) > size.x)
     {
       (*first)++;
     }
     return;
 
   case AMJU_JUST_CENTRE:
-    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > size.x)
     {
       (*first)++;
       (*last)--;
@@ -269,7 +276,7 @@ void GuiText::SetText(const std::string& text)
 
   if (m_isMulti)
   {
-    m_lines = WordWrap(m_text, m_size.x / m_textSize, WidthFinder(this));
+    m_lines = WordWrap(m_text, GetSize().x / m_textSize, WidthFinder(this));
   }
 
   m_currentChar = 0;

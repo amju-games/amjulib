@@ -12,6 +12,11 @@ static bool textToSpeechEnabled = true;
 
 void GuiElement::SetHasFocus(bool f)
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   if (f)
   {
     focusElement = this;
@@ -55,11 +60,10 @@ bool GuiElement::IsTextToSpeechEnabled()
 
 Rect GetRect(GuiElement* elem)
 {
-  return Rect(
-    elem->GetPos().x, 
-    elem->GetPos().x + elem->GetSize().x, 
-    elem->GetPos().y - elem->GetSize().y,
-    elem->GetPos().y);
+  Vec2f pos = elem->GetCombinedPos();
+  Vec2f size = elem->GetSize();
+
+  return Rect(pos.x, pos.x + size.x, pos.y - size.y, pos.y);
 }
 
 GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName)
@@ -123,7 +127,7 @@ bool GuiElement::Load(File* f)
     return false;
   }
 
-  if (!LoadVec2(f, &m_pos))
+  if (!LoadVec2(f, &m_localpos))
   {
     Assert(0);
     return false;
@@ -193,14 +197,28 @@ GuiElement* GuiElement::GetElementByName(const std::string& name)
   return 0;
 }
 
-void GuiElement::SetPos(const Vec2f& v)
+void GuiElement::SetLocalPos(const Vec2f& v)
 {
-  m_pos = v;
+  m_localpos = v;
 }
 
-const Vec2f& GuiElement::GetPos() const
+Vec2f GuiElement::GetLocalPos() const
 {
-  return m_pos;
+  return m_localpos * GetGlobalScale();
+}
+
+Vec2f GuiElement::GetCombinedPos() const
+{
+  GuiElement* parent = (const_cast<GuiElement*>(this))->GetParent();
+
+  if (parent)
+  {
+    return GetLocalPos() + parent->GetCombinedPos(); 
+  }
+  else
+  {
+    return GetLocalPos();
+  }
 }
 
 void GuiElement::SetSize(const Vec2f& v)

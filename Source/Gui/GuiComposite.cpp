@@ -50,7 +50,7 @@ void GuiComposite::Draw()
 
 GuiElement* GuiComposite::GetElementByName(const std::string& name)
 {
-  if (name == m_name)
+  if (name == GetName())
   {
     return this;
   }
@@ -69,12 +69,14 @@ GuiElement* GuiComposite::GetElementByName(const std::string& name)
 
 bool GuiComposite::Load(File* f)
 {
-  if (!f->GetDataLine(&m_name))
+  std::string name;
+  if (!f->GetDataLine(&name))
   {
     f->ReportError("Gui comp: expected name");
     Assert(0);
     return false;
   }
+  SetName(name);
 
   // No pos and size, so not using base class impl
   return LoadChildren(f);
@@ -104,13 +106,13 @@ bool GuiComposite::LoadChildren(File* f)
       return false;
     }
     Assert(e);
+    e->SetParent(this);
     if (!e->Load(f))
     {
       return false;
     }
-    e->SetParent(this);
 
-    m_children.push_back(e);
+    AddChild(e); // subclasses can override this and resize etc
   }
   return true;
 }

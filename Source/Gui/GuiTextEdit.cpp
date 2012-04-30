@@ -143,7 +143,7 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   }
 
   // When L button clicked, find new caret position
-  float startX = GetPos().x;
+  float startX = GetCombinedPos().x;
 std::cout << "Mouse X: " << mbe.x << " text start X: " << startX << "\n";
 std::cout << "Displayed String: \"" << m_text.substr(m_first, m_last - m_first) << "\"\n";
 
@@ -266,10 +266,12 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
     caret++;
   }
 
+  Vec2f size = GetSize();  
+
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > m_size.x)
+    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > size.x)
     {
       if (caret > *last)
       {
