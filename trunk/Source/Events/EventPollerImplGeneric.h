@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-class Event;
+struct Event;
 
 class EventPollerImplGeneric : public EventPollerImpl
 {
