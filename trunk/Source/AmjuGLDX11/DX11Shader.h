@@ -1,5 +1,5 @@
-#ifndef DX9_SHADER_H
-#define DX9_SHADER_H
+#ifndef DX11_SHADER_H
+#define DX11_SHADER_H
 
 #include <string>
 #include <d3d11.h>
