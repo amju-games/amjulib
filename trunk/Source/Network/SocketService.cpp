@@ -17,6 +17,7 @@ Added to repository
 
 #if defined(WIN32)
 #include <winsock2.h>
+#pragma comment(lib, "ws2_32.lib")
 #endif
 
 #ifdef GEKKO
