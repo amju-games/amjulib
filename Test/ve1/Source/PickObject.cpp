@@ -7,6 +7,8 @@
 #include <ClipLineSegBox.h>
 #include "Ve1Object.h"
 
+//#define PICK_DEBUG
+
 namespace Amju
 {
 GameObject* PickObject(const Vec2f& mouseScreen)
@@ -35,7 +37,9 @@ GameObject* PickObject(const Vec2f& mouseScreen)
     AABB* aabb = pgo->GetAABB();
     if (aabb && Clip(lineSeg, *aabb, 0))
     {
+#ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
+#endif
 
       // Line seg intersects this box
       // Choose object whose centre (position) is closest to line seg..?
@@ -43,7 +47,10 @@ std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
       //float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
       if (dist < bestDist)
       {
+#ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " AND IS CLOSEST!\n";
+#endif
+
         bestDist = dist;
         selectedObj = pgo;
       }
