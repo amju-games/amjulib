@@ -1,8 +1,9 @@
 #include "Timer.h"
 
-#if defined(WIN32) && defined(AMJU_USE_SDL)
-#include <SDL.h>
-#endif // WIN32 + SDL
+#if defined(WIN32)
+#include <windows.h>
+#pragma comment(lib, "winmm.lib")
+#endif // WIN32 
 
 #if defined(MACOSX) || defined (IPHONE)
 #include <sys/time.h>
@@ -91,9 +92,9 @@ void Timer::Update()
 //  dt = 1.0f / 60.0f; // TODO TEMP TEST
 //#endif
 
-#if defined(WIN32) && defined(AMJU_USE_SDL)
+#if defined(WIN32) //&& defined(AMJU_USE_SDL)
   static unsigned int oldt = 0;
-  unsigned int t = SDL_GetTicks();
+  unsigned int t = timeGetTime(); //SDL_GetTicks();
   unsigned int diff = t - oldt;
   oldt = t;
   dt = (float)diff / 1000.0f;
