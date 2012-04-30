@@ -145,7 +145,7 @@ std::cout << "* Dest location: " << destLocation << " dest pos: " << destPos << 
   SetLocalPlayerLocation(destLocation); // LocalPlayer
 
   // Just do this, and wait for round trip from server. Ensures consistency..?
-  TheObjectUpdater::Instance()->SendPosUpdateReq(player->GetId(), destPos, destLocation);
+  TheObjectUpdater::Instance()->SendChangeLocationReq(player->GetId(), destPos, destLocation);
 
   // Set new position immediately
   player->SetPos(destPos);
