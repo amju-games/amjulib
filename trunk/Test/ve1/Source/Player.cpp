@@ -170,7 +170,11 @@ void Player::OnLocationEntry()
   root->AddChild(m_arrow.GetPtr());
   SetArrowVis(false);
 
-  m_isMoving = false;
+  m_isMoving = false; 
+  SetVel(Vec3f(0, 0, 0)); // TODO walk out of doorway ?
+
+  // TODO Set m_newPos ??
+
   m_inNewLocation = true;
 }
 
@@ -299,6 +303,10 @@ void Player::Update()
       SetArrowVis(false);
       m_isMoving = false;
     }
+  }
+  else
+  {
+    Assert(GetVel().SqLen() == 0);
   }
 
   if (m_sceneNode)
