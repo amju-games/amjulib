@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-class Camera : public SceneNodeCamera, public EventListener
+class Camera : public SceneNodeCamera
 {
 public:
   Camera();
@@ -15,12 +15,17 @@ public:
   void SetTarget(GameObject* g) { m_target = g; }
   virtual void Update();
 
+private:
+  GameObject* m_target;
+};
+
+class CameraControl : public EventListener
+{
+public:
   virtual bool OnKeyEvent(const KeyEvent&);
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
-private:
-  GameObject* m_target;
 };
 }
 

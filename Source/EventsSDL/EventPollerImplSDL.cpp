@@ -202,25 +202,29 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
     }
 
     int eaten = AMJU_MAX_PRIORITY + 1;
+    int count = 0;
     for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
     {
-      if (it->first > eaten)
+      int priority = it->first;
+      if (priority > eaten)
       {
         break;
       }
 
-      EventListener* e = it->second;
-      Assert(e);
+      EventListener* ev = it->second;
+      Assert(ev);
 
-      if (isQuit && e->OnQuitEvent() ||
-          isKeyEvent && e->OnKeyEvent(ke) ||
-          isCursorEvent && e->OnCursorEvent(ce) ||
-          isJoyEvent && e->OnJoyAxisEvent(je[joyNum]) ||
-          isButtonEvent && e->OnButtonEvent(be) ||
-          isMouseButtonEvent && e->OnMouseButtonEvent(mbe))
+      if (isQuit && ev->OnQuitEvent() ||
+          isKeyEvent && ev->OnKeyEvent(ke) ||
+          isCursorEvent && ev->OnCursorEvent(ce) ||
+          isJoyEvent && ev->OnJoyAxisEvent(je[joyNum]) ||
+          isButtonEvent && ev->OnButtonEvent(be) ||
+          isMouseButtonEvent && ev->OnMouseButtonEvent(mbe))
       {
         eaten = it->first;
       }
+
+      count++;
     }
   }
 }

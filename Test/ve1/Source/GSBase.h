@@ -16,10 +16,6 @@ public:
   virtual void Draw(); // Set up proj and mview matrices
   virtual void OnActive();
 
-  // Drag to rotate etc
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
   void SetPrevState(GameState*);
   void GoBack();  // return to prev state - must have been set!
 

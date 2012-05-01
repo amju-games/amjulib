@@ -20,8 +20,6 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 void GSBase::OnActive()
 {
   GameState::OnActive();
-
-//  TheGSNetError::Instance()->SetPrevState(this);
 }
 
 void GSBase::SetPrevState(GameState* prevState)
@@ -83,26 +81,4 @@ void GSBase::Update()
   }
 */
 }
-
-bool GSBase::OnCursorEvent(const CursorEvent& ce)
-{
-  static float oldx = ce.x;
-  if (m_drag)
-  {
-    float xdiff = ce.x - oldx;
-    m_yrot += xdiff * 100.0f;
-  }
-  oldx = ce.x;
-  return false;
-}
-
-bool GSBase::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
-  {
-    m_drag = mbe.isDown;  
-  }
-  return false;
-}
-
 }

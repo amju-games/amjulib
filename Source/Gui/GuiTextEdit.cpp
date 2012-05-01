@@ -16,8 +16,6 @@ GuiTextEdit::GuiTextEdit() : m_caret(0)
   m_drawCaret = true;
   m_first = 0;
   m_last = 0;
-
-  TheEventPoller::Instance()->AddListener(this); 
 }
 
 void GuiTextEdit::Draw()

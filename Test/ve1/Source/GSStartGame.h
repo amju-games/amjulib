@@ -17,10 +17,8 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
   void SetStartLoc(int loc) { m_startLoc = loc; }
+  int GetStartLoc() const { return m_startLoc; }
 
 private:
   int m_startLoc;

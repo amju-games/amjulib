@@ -2,6 +2,7 @@
 #include <AmjuGL.h>
 #include <CursorManager.h>
 #include <Timer.h>
+#include <EventPoller.h>
 
 namespace Amju
 {
@@ -40,8 +41,11 @@ void GSGui::OnActive()
 
 void GSGui::OnDeactive()
 {
+  GSBase::OnDeactive();
+
   // Reload GUI every time we activate. 
   // (This makes it reasonable to add gui elements as listeners when they are created)
+  TheEventPoller::Instance()->RemoveListener(m_gui);
   m_gui = 0;
 }
 

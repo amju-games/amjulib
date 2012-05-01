@@ -32,6 +32,7 @@ public:
   void RemoveListener(EventListener*);
   bool HasListener(EventListener*) const;
   void SetListenerPriority(EventListener*, int priority);
+  void Clear();
 
   void SetImpl(EventPollerImpl*);
   EventPollerImpl* GetImpl();

@@ -8,12 +8,9 @@ namespace Amju
 {
 const char* GuiListBox::NAME = "gui-list-box";
 
-static const int LB_PRIORITY = -1; // higher priority
-
 GuiListBox::GuiListBox()
 {
   m_isMultiSelect = false;
-  TheEventPoller::Instance()->AddListener(this, LB_PRIORITY);
 }
 
 void GuiListBox::SetIsMultiSel(bool isMulti)

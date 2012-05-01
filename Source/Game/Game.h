@@ -10,7 +10,7 @@
 
 namespace Amju
 {
-class Game : public NonCopyable, public EventListener
+class Game : public NonCopyable
 {
 private:
   Game();
@@ -26,8 +26,8 @@ public:
   // Execute one game loop, use if Run() not suitable for platform
   void RunOneLoop();
 
-  // Event Listener
-  virtual bool OnQuitEvent();
+  // Call from Event Listener
+  bool OnQuitEvent();
 
   // Called by device/OS when this app is interrupted. E.g. on phone, a call is received.
   // Go to game state registered as the Pause state, if any.
