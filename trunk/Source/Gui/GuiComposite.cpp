@@ -6,11 +6,8 @@ namespace Amju
 {
 const char* GuiComposite::NAME = "gui-comp";
 
-static const int COMP_PRIORITY = -100; // takes priority over most stuff ???
-
 GuiComposite::GuiComposite()
 {
-  TheEventPoller::Instance()->AddListener(this, COMP_PRIORITY); 
 }
 
 int GuiComposite::GetNumChildren() const
@@ -117,8 +114,92 @@ bool GuiComposite::LoadChildren(File* f)
   return true;
 }
 
+bool GuiComposite::OnCursorEvent(const CursorEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnCursorEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnRotationEvent(const RotationEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnRotationEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnJoyAxisEvent(const JoyAxisEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnJoyAxisEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnButtonEvent(const ButtonEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnButtonEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnMouseButtonEvent(const MouseButtonEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnMouseButtonEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
 bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
 {
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnKeyEvent(ke))
+    {
+      ret = true;
+    }
+  }
+  if (ret)
+  {
+    return true;
+  }
+
   if (!IsVisible())
   {
     return false;
@@ -142,7 +223,8 @@ bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
 
 bool GuiComposite::SetFocusPrevChild()
 {
-  for (unsigned int i = 0; i < m_children.size(); i++)
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
   {
     if (m_children[i]->HasFocus())
     {

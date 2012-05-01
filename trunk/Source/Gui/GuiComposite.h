@@ -18,6 +18,11 @@ public:
 
   // Up/Down to set focus to prev/next child
   virtual bool OnKeyEvent(const KeyEvent&); 
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnRotationEvent(const RotationEvent&);
+  virtual bool OnJoyAxisEvent(const JoyAxisEvent&);
+  virtual bool OnButtonEvent(const ButtonEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
   bool SetFocusPrevChild();
   bool SetFocusNextChild();

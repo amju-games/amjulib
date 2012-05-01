@@ -21,7 +21,8 @@ Camera::Camera() : m_target(0)
 {
   // Load settings
 
-  TheEventPoller::Instance()->AddListener(this, -100); // High priority, right ?
+  // TODO CameraControl
+  //TheEventPoller::Instance()->AddListener(this, -100); // High priority, right ?
 }
 
 void Camera::Update()
@@ -43,7 +44,7 @@ void Camera::Update()
   }
 }
 
-bool Camera::OnKeyEvent(const KeyEvent& kb)
+bool CameraControl::OnKeyEvent(const KeyEvent& kb)
 {
   // TODO Only alter camera if ALT or some other key is held down
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') // TODO S/b command
@@ -54,7 +55,7 @@ bool Camera::OnKeyEvent(const KeyEvent& kb)
   return false;
 }
 
-bool Camera::OnCursorEvent(const CursorEvent& ce)
+bool CameraControl::OnCursorEvent(const CursorEvent& ce)
 {
   static float oldx = ce.x;
   static float oldy = ce.y;
@@ -89,7 +90,7 @@ bool Camera::OnCursorEvent(const CursorEvent& ce)
   return b;
 }
 
-bool Camera::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool CameraControl::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {

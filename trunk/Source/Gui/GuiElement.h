@@ -2,7 +2,6 @@
 #define GUI_ELEMENT_H
 
 #include <vector>
-#include "RCPtr.h"
 #include "EventListener.h"
 #include "Vec2.h"
 #include "File.h"
@@ -13,7 +12,7 @@ namespace Amju
 {
 typedef void (*CommandFunc)();
 
-class GuiElement : public RefCounted, public EventListener
+class GuiElement : public EventListener
 {
 public:
   GuiElement();

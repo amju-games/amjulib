@@ -6,8 +6,6 @@
 
 namespace Amju
 {
-static const int MENU_PRIORITY = -1; // higher priority
-
 GuiMenuItem::GuiMenuItem(const std::string& text)
 {
   Init(text);
@@ -100,8 +98,6 @@ GuiMenu::GuiMenu()
   m_selected = -1;
   m_isVertical = true;
   m_hideOnSelection = true;
-
-  TheEventPoller::Instance()->AddListener(this, MENU_PRIORITY);
 }
 
 GuiMenu::~GuiMenu()

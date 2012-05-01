@@ -31,6 +31,11 @@ void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pList
   }
 }
 
+void EventPoller::Clear()
+{
+  m_listeners.clear();
+}
+
 void EventPoller::AddListener(EventListener* pListener, int priority)
 {
   Assert(pListener);

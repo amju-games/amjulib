@@ -2,11 +2,12 @@
 #define AMJU_EVENT_LISTENER_H_INCLUDED
 
 #include <map>
+#include <RCPtr.h>
 #include "EventTypes.h"
 
 namespace Amju
 {
-class EventListener
+class EventListener : public RefCounted
 {
 public:
   virtual ~EventListener();
@@ -23,9 +24,11 @@ public:
   virtual bool OnQuitEvent() { return false; }
 };
 
+typedef RCPtr<EventListener> PEventListener;
+
 // Map of priority to EventListener. Listeners are notified in ascending priority order.
 // If a listener eats an event, no listeners with a lower priority are notified.
-typedef std::multimap<int, EventListener*> Listeners;  
+typedef std::multimap<int, PEventListener> Listeners;  
 }
 
 #endif // AMJU_EVENT_LISTENER_H_INCLUDED

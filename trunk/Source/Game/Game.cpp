@@ -8,7 +8,6 @@ namespace Amju
 {
 Game::Game()
 {
-  TheEventPoller::Instance()->AddListener(this);
   m_currentState = 0;
   m_pauseState = 0;
   m_newState = 0;
@@ -128,7 +127,6 @@ void Game::UpdateState()
 
   if (m_currentState)
   {
-    TheEventPoller::Instance()->RemoveListener(m_currentState);
     m_currentState->OnDeactive();
   }
 
@@ -139,7 +137,6 @@ void Game::UpdateState()
   // This next line may set m_newState, so zero it first
   // TODO Not sure why, is this old ??
   m_currentState->OnActive();
-  TheEventPoller::Instance()->AddListener(m_currentState);
 }
 
 PGameObject Game::GetGameObject(int id)

@@ -37,14 +37,4 @@ void GSStartGame::OnActive()
   SetLocalPlayerLocation(m_startLoc);
   m_startLoc = 1; // for next time TODO Should this be -1 ??
 }
-
-bool GSStartGame::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSStartGame::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace

@@ -20,7 +20,7 @@ public:
 
 private:
   static const int NUM_CURSORS = 4;
-  Cursor m_cursors[NUM_CURSORS];
+  Cursor* m_cursors[NUM_CURSORS];
 };
 typedef Singleton<CursorManager> TheCursorManager;
 }

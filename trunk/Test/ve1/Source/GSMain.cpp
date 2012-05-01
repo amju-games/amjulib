@@ -41,11 +41,14 @@ GSMain::GSMain()
 {
   m_moveRequest = false;
   m_yRot = 0;
+  m_listener = new GSMainListener;
+  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 void GSMain::ShowObjectMenu(GameObject* obj)
 {
   m_menu = new GuiMenu;
+  TheEventPoller::Instance()->AddListener(m_menu);
 
   m_menu->SetLocalPos(m_mouseScreen);
 
@@ -184,6 +187,8 @@ void GSMain::OnDeactive()
   GSBase::OnDeactive();
 
   m_gui = 0;
+
+  // TODO Poss leaking menus ?? Check EventListeners
   m_menu = 0;
 
   TheChatConsole::Instance()->OnDeactive();
@@ -212,6 +217,16 @@ void GSMain::OnActive()
 }
 
 static bool rightButtonDown = false;
+
+bool GSMainListener::OnCursorEvent(const CursorEvent& ce)
+{
+  return TheGSMain::Instance()->OnCursorEvent(ce);
+}
+
+bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  return TheGSMain::Instance()->OnMouseButtonEvent(mbe);
+}
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
 {
@@ -261,30 +276,6 @@ std::cout << " - Chat active so discarding mouse click\n";
     m_moveRequest = true;
   }
   
-/*
-    if (m_menu && GetRect(m_menu).IsPointIn(m_mouseScreen))
-    {
-std::cout << "Click event - Get rid of menu\n";
-      TheEventPoller::Instance()->RemoveListener(m_menu);
-      m_menu = 0;
-    }
-  }
-  else
-  {
-    if (!m_menu)
-    {
-std::cout << "Click event - move to new pos\n";
-      // Move to location:
-      m_moveRequest = true;
-    }
-  }
-*/
-
-  return false;
-}
-
-bool GSMain::OnKeyEvent(const KeyEvent& ke)
-{
   return false;
 }
 

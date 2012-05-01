@@ -12,6 +12,13 @@ namespace Amju
 {
 class GameObject;
 
+class GSMainListener : public EventListener
+{
+public:
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+};
+
 class GSMain : public GSBase
 {
 protected:
@@ -25,19 +32,8 @@ public:
   virtual void OnActive();
   virtual void OnDeactive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual bool OnKeyEvent(const KeyEvent&);
-
-/*
-  bool CanShowMsg() const;
-//  void ShowMsg(const MsgManager::Msg& msg);
-  void OnChatSend();
-  void OnChatCancel();
-  void ActivateChatSend(bool active, int recipId);
-  void ActivateChatRecv(bool active, const MsgManager::Msg* = 0);
-  void OnRecvClose();
-*/
+  bool OnCursorEvent(const CursorEvent&);
+  bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 private:
   void DoMoveRequest();
@@ -58,6 +54,8 @@ private:
 
   // Debug camera
   float m_yRot;
+
+  RCPtr<GSMainListener> m_listener;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace

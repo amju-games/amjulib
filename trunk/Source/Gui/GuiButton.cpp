@@ -11,15 +11,11 @@ namespace Amju
 {
 const char* GuiButton::NAME = "gui-button";
 
-static const int BUTTON_PRIORITY = -100; // a pressed button takes priority over most stuff
-
 static GuiButton* focusButton = 0;
 static GuiButton* cancelButton = 0;
 
 GuiButton::GuiButton()
 {
-  TheEventPoller::Instance()->AddListener(this, BUTTON_PRIORITY); 
-
   m_isMouseOver = false;
   m_isPressed = false;
 }
