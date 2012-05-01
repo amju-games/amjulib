@@ -20,7 +20,7 @@ void Ve1Node::Draw()
   }
   else
   {
-    MultColour(Colour(0.6, 0.6, 0.6, 1));
+    MultColour(Colour(0.6f, 0.6f, 0.6f, 1.0f));
   }
 
   Vec2f screenpos;
