@@ -13,6 +13,7 @@
 #include "GSNetError.h"
 #include "ObjectManager.h"
 #include "LocalPlayer.h"
+#include "GameMode.h"
 
 //#define OU_DEBUG
 
@@ -217,7 +218,7 @@ void ObjectUpdater::Update()
 
   // TODO These poll periods should depend on network latency/bandwidth
   static const float POS_UPDATE_PERIOD = 1.0f; // TODO CONFIG
-  if (m_posElapsed > POS_UPDATE_PERIOD)
+  if (m_posElapsed > POS_UPDATE_PERIOD && IsOnline())
   {
 //std::cout << "Creating new pos update req...\n";
 
@@ -233,7 +234,7 @@ void ObjectUpdater::Update()
 
   m_updateElapsed += TheTimer::Instance()->GetDt();
   static const float UPDATE_PERIOD = 5.0f; // TODO CONFIG
-  if (m_updateElapsed > UPDATE_PERIOD)
+  if (m_updateElapsed > UPDATE_PERIOD && IsOnline())
   {
     m_updateElapsed = 0;
 
@@ -266,11 +267,12 @@ std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "
 
         // If this msg is for local player and we are in a different location, discard this msg.
 
-        if (ve1Obj->GetId() == GetLocalPlayerId()) //&& location != vloc && vloc != -1)
+        if (ve1Obj->GetId() == GetLocalPlayerId() && vloc != -1)
         {
+          // Ignore all pos updates for local player ???!?
 std::cout << "## This is update for local player.  We are here: " << vloc << " and update is for location " << location << "\n";
         }
-
+        else
         if (location == vloc)
         {
 std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " << location << "\n";
