@@ -39,7 +39,10 @@ void draw()
 {
   TheGame::Instance()->RunOneLoop();
 
+#ifndef WIN32
   glutSwapBuffers(); // ?
+#endif
+
   glutPostRedisplay();
 }
 
