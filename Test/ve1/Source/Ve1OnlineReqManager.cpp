@@ -1,6 +1,7 @@
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
 #include <ConfigFile.h>
+#include "GameMode.h"
 
 //#define REQ_DEBUG
 
@@ -147,6 +148,11 @@ std::cout << "* Can't make request, not logged in *\n";
 #endif
 
     return false;
+  }
+
+  if (IsOffline())
+  {
+    return true;
   }
 
   return OnlineReqManager::AddReq(req, maxConcurrentReqs);
