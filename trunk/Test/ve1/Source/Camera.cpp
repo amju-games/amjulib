@@ -21,8 +21,7 @@ Camera::Camera() : m_target(0)
 {
   // Load settings
 
-  // TODO CameraControl
-  //TheEventPoller::Instance()->AddListener(this, -100); // High priority, right ?
+  m_control = new CameraControl;
 }
 
 void Camera::Update()
@@ -42,6 +41,11 @@ void Camera::Update()
     //SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
     //SetLookAtPos(Vec3f(0, 0, 0));
   }
+}
+
+CameraControl::CameraControl()
+{
+  TheEventPoller::Instance()->AddListener(this, -100); // High priority, right ?
 }
 
 bool CameraControl::OnKeyEvent(const KeyEvent& kb)
