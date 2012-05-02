@@ -75,6 +75,10 @@ AABB* Portal::GetAABB()
 
 void Portal::Update()
 {
+}
+
+void Portal::OnLocationEntry()
+{
   static const float XSIZE = 20.0f; // TODO CONFIG
   static const float YSIZE = 40.0f;
   m_aabb.Set(
@@ -82,14 +86,6 @@ void Portal::Update()
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - XSIZE, m_pos.z + XSIZE);
 
-  if (m_sceneNode)
-  {
-    *(m_sceneNode->GetAABB()) = m_aabb;
-  }
-}
-
-void Portal::OnLocationEntry()
-{
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
     // Add node to Scene Graph
@@ -97,6 +93,7 @@ void Portal::OnLocationEntry()
     SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
     Assert(root);
     root->AddChild(m_sceneNode);
+    *(m_sceneNode->GetAABB()) = m_aabb;
   }
 }
 
