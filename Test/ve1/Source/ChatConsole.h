@@ -11,7 +11,7 @@
 namespace Amju
 {
 // The user interface for chatting with other players
-class ChatConsole : public NonCopyable, public EventListener
+class ChatConsole : public NonCopyable
 {
 private:
   ChatConsole();
