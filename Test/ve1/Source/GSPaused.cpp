@@ -14,6 +14,7 @@ void OnResumeButton()
 
 void OnOptionsButton()
 {
+  TheGSOptions::Instance()->SetPrevState(TheGSPaused::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 

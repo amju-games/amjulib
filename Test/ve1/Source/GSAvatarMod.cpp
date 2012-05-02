@@ -79,7 +79,7 @@ void GSAvatarMod::OnPrevType()
 void GSAvatarMod::OnCancel()
 {
   // Go to previous state, or main state, or title state ?
-  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  GoBack();
 }
 
 void GSAvatarMod::OnOk()
@@ -99,8 +99,7 @@ void GSAvatarMod::OnOk()
   TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("tex"), ToString(m_currentTex)); // TODO use int, not string
   // TODO more avatar settings
 
-  // Go to Main state 
-  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());  
+  GoBack(); 
 }
 
 void GSAvatarMod::Update()
