@@ -423,6 +423,7 @@ private:
   Vec3f m_requestedPos;
 };
 
+static const int MAX_POS_UPDATE_REQS = 10; // for mad clicking -- do we need even more ???
 
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
@@ -436,7 +437,7 @@ void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 
   // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
   // Need to kill any existing pos update req then add this new one. TODO
-  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
+  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), MAX_POS_UPDATE_REQS);
 }
 
 void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int location)
@@ -451,7 +452,7 @@ void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int locat
 
   // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
   // Need to kill any existing pos update req then add this new one. TODO
-  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), 1);
+  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), MAX_POS_UPDATE_REQS);
 }
 }
 
