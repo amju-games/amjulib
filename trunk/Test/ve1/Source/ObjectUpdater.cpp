@@ -281,8 +281,8 @@ std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " <<
         else
         {
 std::cout << "Moving object " << ve1Obj->GetId() << " to NEW location " << location << "\n";
-          ve1Obj->SetLocation(location);
           ve1Obj->SetPos(pos);
+          ve1Obj->SetLocation(location);
         }
       }
       else
