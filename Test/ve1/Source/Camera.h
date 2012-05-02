@@ -7,6 +7,18 @@
 
 namespace Amju
 {
+// For edit mode and debugging
+class CameraControl : public EventListener
+{
+public:
+  CameraControl();
+
+  virtual bool OnKeyEvent(const KeyEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+
+};
+
 class Camera : public SceneNodeCamera
 {
 public:
@@ -17,15 +29,7 @@ public:
 
 private:
   GameObject* m_target;
-};
-
-class CameraControl : public EventListener
-{
-public:
-  virtual bool OnKeyEvent(const KeyEvent&);
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
+  RCPtr<CameraControl> m_control;
 };
 }
 
