@@ -70,11 +70,14 @@ void GSStartMenu::OnActive()
   m_gui = LoadGui("gui-startmenu.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("single-button")->SetCommand(Amju::OnSingleButton);
-  m_gui->GetElementByName("multi-button")->SetCommand(Amju::OnMultiButton);
-  m_gui->GetElementByName("nogame-button")->SetCommand(Amju::OnNoGameButton);
-  m_gui->GetElementByName("local-button")->SetCommand(Amju::OnLocalButton);
-  m_gui->GetElementByName("edit-button")->SetCommand(Amju::OnEditButton);
+  GetElementByName(m_gui, "single-button")->SetCommand(Amju::OnSingleButton);
+  GetElementByName(m_gui, "multi-button")->SetCommand(Amju::OnMultiButton);
+  GetElementByName(m_gui, "nogame-button")->SetCommand(Amju::OnNoGameButton);
+  GetElementByName(m_gui, "local-button")->SetCommand(Amju::OnLocalButton);
+  GetElementByName(m_gui, "edit-button")->SetCommand(Amju::OnEditButton);
+
+  // TODO remember last choice and keep highlighted
+  GetElementByName(m_gui, "single-button")->SetHasFocus(true); 
 }
 
 bool GSStartMenu::OnCursorEvent(const CursorEvent& ce)
