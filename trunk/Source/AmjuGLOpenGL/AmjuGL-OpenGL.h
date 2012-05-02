@@ -11,11 +11,16 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "AmjuGL-OpenGL-Base.h"
 #include "AmjuGLWindowInfo.h"
 
+#undef CreateWindow
+
 namespace Amju
 {
 class AmjuGLOpenGL : public AmjuGLOpenGLBase
 {
 public:
+  typedef bool (*WindowCreateFunc)(AmjuGLWindowInfo*);
+  AmjuGLOpenGL(WindowCreateFunc);
+
   // Call once at app startup
   virtual void Init();
 

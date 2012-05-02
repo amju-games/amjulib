@@ -20,7 +20,7 @@
 
 #include <AmjuFinal.h>
 
-#define KEY_CODE_DEBUG
+//#define KEY_CODE_DEBUG
 
 using namespace Amju;
 
@@ -29,7 +29,7 @@ namespace Amju
 extern AmjuGLWindowInfo w;
 
 // TODO Make this a GLUT version in AmjuGLOpenGL
-bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo*)
+bool CreateWindowGLUT(AmjuGLWindowInfo*)
 {
   return true;
 }
@@ -171,6 +171,17 @@ void mousemove(int x, int y)
   QueueEvent(ce);
 }
 
+void joystick(unsigned int buttonMask, int x, int y, int z)
+{
+  // TODO ignore if same state as last time
+  JoyAxisEvent* j = new JoyAxisEvent;
+  j->controller = 0;
+  j->x = (float)x / 1000.0f;
+  j->y = (float)y / 1000.0f;
+  // TODO buttons
+  QueueEvent(j);
+}
+
 int main(int argc, char **argv)
 {
   // TODO Have a CreateWindow for GLUT.. but events are tangled up with creating windows :-(
@@ -182,6 +193,10 @@ int main(int argc, char **argv)
 
   glutCreateWindow("Hello"); // TODO App name
   glutDisplayFunc(draw);
+
+  // DON'T auto-repeat - we will do it ourselves
+  glutIgnoreKeyRepeat(1);
+
   glutKeyboardFunc(keydown);
   glutKeyboardUpFunc(keyup);
   glutSpecialFunc(specialkeydown);
@@ -190,9 +205,16 @@ int main(int argc, char **argv)
   glutMotionFunc(mousemove);
   glutPassiveMotionFunc(mousemove);
 
+  int js = glutDeviceGet(GLUT_HAS_JOYSTICK);
+  if (js != 0)
+  {
+    std::cout << "GLUT says joystick available!\n";
+  }
+  glutJoystickFunc(joystick, 50);
+
   TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric); 
 
-  AmjuGL::SetImpl(new AmjuGLOpenGL);
+  AmjuGL::SetImpl(new AmjuGLOpenGL(CreateWindowGLUT));
 
   // Defined in game-specific code
   Amju::AmjuGL::CreateWindow(&w);
