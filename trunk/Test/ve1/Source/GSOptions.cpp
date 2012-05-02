@@ -8,7 +8,6 @@ namespace Amju
 static void OnAvatarButton()
 {
   TheGSAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
-
   TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
 }
 
