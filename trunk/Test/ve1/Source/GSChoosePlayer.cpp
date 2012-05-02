@@ -98,15 +98,23 @@ std::cout << "GSChoosePlayer: no existing player names.\n";
   m_gui = LoadGui("gui-chooseplayer.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("cancel-button")->SetCommand(OnCancelButton);
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  cancel->SetCommand(OnCancelButton);
+  cancel->SetIsCancelButton(true);
 
 std::cout << "GSChoosePlayer: Num players: " << numPlayers << "\n";
 
+  static int choice = 0;
   for (int i = 0; i < 4; i++)
   {
     GuiElement* elem = m_gui->GetElementByName("p" + ToString(i) + "-button");
     GuiButton* b = dynamic_cast<GuiButton*>(elem);
     Assert(b);
+
+    if (i == choice)
+    {
+      b->SetHasFocus(true);
+    }
 
     if (i < numPlayers)
     {
