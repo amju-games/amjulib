@@ -23,11 +23,25 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 //#define USE_IMMEDIATE_MODE
 //#define OPENGL_SHOW_INFO
 
+#undef CreateWindow
+
 namespace Amju
 {
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
+
+AmjuGLOpenGL::WindowCreateFunc windowCreateFunc = 0;
+
+AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
+{
+  windowCreateFunc = f;
+}
+
+bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* wi)
+{
+  return windowCreateFunc(wi);
+}
 
 void AmjuGLOpenGL::Flip()
 {

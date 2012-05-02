@@ -8,7 +8,7 @@
 
 namespace Amju
 {
-bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* w)
+bool CreateWindowSDLOpenGL(AmjuGLWindowInfo* w)
 {
   Assert(w);
   const SDL_VideoInfo* video;

@@ -39,6 +39,7 @@ using namespace Amju;
 namespace Amju
 {
 extern Amju::AmjuGLWindowInfo w;
+bool CreateWindowSDLOpenGL(AmjuGLWindowInfo* w);
 }
 
 int main(int argc, char **argv)
@@ -59,7 +60,7 @@ int main(int argc, char **argv)
 
 #ifdef AMJU_USE_OPENGL
   std::cout << "Using OpenGL\n";
-  AmjuGL::SetImpl(new AmjuGLOpenGL);
+  AmjuGL::SetImpl(new AmjuGLOpenGL(CreateWindowSDLOpenGL));
   TheEventPoller::Instance()->SetImpl(new EventPollerImplSDL);
 #endif // AMJU_USE_OPENGL
 
