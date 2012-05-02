@@ -58,11 +58,19 @@ void key(char k, bool down)
 
   if (k == 127) // backspace
   {
+#ifdef WIN32
+    ke->keyType = AMJU_KEY_DELETE;
+#else
     ke->keyType = AMJU_KEY_BACKSPACE;
+#endif
   }
   else if (k == 8) // delete
   {
+#ifdef WIN32
+    ke->keyType = AMJU_KEY_BACKSPACE;
+#else
     ke->keyType = AMJU_KEY_DELETE;
+#endif
   }
   else if (k == 13)
   {
