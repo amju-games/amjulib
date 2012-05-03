@@ -153,7 +153,41 @@ bool GuiComposite::OnJoyAxisEvent(const JoyAxisEvent& e)
       ret = true;
     }
   }
-  return ret;
+  if (ret)
+  {
+    return true;
+  }
+
+  // TODO move to Gui Menu
+  static bool up = false; // TODO member var
+  static bool down = false;
+  if (e.y > 0.5f) // TODO Sensitivity
+  {
+    if (!up)
+    {
+      SetFocusPrevChild();
+    }
+    up = true;
+  }
+  else
+  {
+    up = false;
+  }
+
+  if (e.y < -0.5f)
+  {
+    if (!down)
+    {
+      SetFocusNextChild();
+    }
+    down = true;
+  }
+  else
+  {
+    down = false;
+  }
+
+  return true;
 }
 
 bool GuiComposite::OnButtonEvent(const ButtonEvent& e)
@@ -199,6 +233,8 @@ bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
   {
     return true;
   }
+
+  // TODO Move to GuiMenu ?
 
   if (!IsVisible())
   {
