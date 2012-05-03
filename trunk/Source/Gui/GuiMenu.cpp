@@ -6,6 +6,8 @@
 
 namespace Amju
 {
+const char* GuiMenu::NAME = "gui-menu";
+
 GuiMenuItem::GuiMenuItem(const std::string& text)
 {
   Init(text);
