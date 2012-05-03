@@ -45,6 +45,8 @@ private:
 class GuiMenu : public GuiComposite
 {
 public:
+  static const char* NAME;
+
   GuiMenu();
   virtual ~GuiMenu();
 
