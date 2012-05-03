@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ConfigFile.h>
 #include "GameMode.h"
+#include "LogOut.h"
 
 //#define REQ_DEBUG
 
@@ -12,19 +13,25 @@ static const char* ENV_KEY = "env";
 
 std::string UrlRoot()
 {
-  GameConfigFile* config = TheGameConfigFile::Instance();
+  static bool first = true;
+  static std::string res;
+  if (first)
+  {
+    GameConfigFile* config = TheGameConfigFile::Instance();
 
-  std::string server = "www.amju.com";
-  if (config->Exists(SERVER_KEY))
-  {
-    server = config->GetValue(SERVER_KEY);
+    std::string server = "www.amju.com";
+    if (config->Exists(SERVER_KEY))
+    {
+      server = config->GetValue(SERVER_KEY);
+    }
+    std::string env = "ve1";
+    if (config->Exists(ENV_KEY))
+    {
+      server = config->GetValue(ENV_KEY);
+    }
+    res = server + "/" + env + "/";
   }
-  std::string env = "ve1";
-  if (config->Exists(ENV_KEY))
-  {
-    server = config->GetValue(ENV_KEY);
-  }
-  return server + "/" + env + "/";
+  return res;
 }
 
 Ve1ReqManager::Ve1ReqManager()
@@ -57,9 +64,16 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   switch (t)
   {
   case LOGIN:
+    {
+      static int registerLogout = atexit(SendLogOut);
+    }
     s += "login.pl";
     // ** NB return ** -- we don't have a session yet!
     return s;
+
+  case LOGOUT:
+    s += "logout.pl";
+    break;
 
   case SET_POSITION:
     s += "movereq.pl"; // Calling code adds object ID, new location req

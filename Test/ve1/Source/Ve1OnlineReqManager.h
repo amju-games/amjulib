@@ -10,6 +10,7 @@ namespace Amju
 enum Task
 {
   LOGIN,
+  LOGOUT,
 
   GET_NEW_OBJECTS,  // get list of new objects
   FILE_UPDATE_CHECK, // get list of files which have been changed since last check
