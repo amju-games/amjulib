@@ -4,6 +4,7 @@
 #include "GSMain.h"
 #include "GSOptions.h"
 #include "GSTitle.h"
+#include "LogOut.h"
 
 namespace Amju
 {
@@ -22,6 +23,7 @@ void OnQuitButton()
 {
   // TODO Quit confirm -- use generic yes/no state
   //exit(0); // TODO Check dtors called -> state saved
+  SendLogOut();
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
 
