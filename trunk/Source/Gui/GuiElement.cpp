@@ -239,6 +239,11 @@ void GuiElement::SetVisible(bool isVis)
 
 bool GuiElement::IsVisible() const
 {
+  if (const_cast<GuiElement*>(this)->GetParent())
+  {
+    return ((const_cast<GuiElement*>(this))->GetParent()->IsVisible() && m_isVisible);
+  }
+
   return m_isVisible;
 }
 }
