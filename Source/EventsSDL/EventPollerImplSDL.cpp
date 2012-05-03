@@ -54,7 +54,7 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
 
 void EventPollerImplSDL::Update(Listeners* pListeners)
 {
-  // Init joysticks - TODO check for extra joysticks plugged in
+  // Init joysticks etc
   static bool first = true;
   if (first)
   {
@@ -180,12 +180,12 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         je[joyNum].controller = joyNum;
         if (sje.axis == 0)
         {
-          je[joyNum].x = (float)(sje.value) * (1.0f/32768.0f);
+          je[joyNum].x = (float)(sje.value) * (-1.0f/32768.0f);
           isJoyEvent = true;
         }
         else if (sje.axis == 1)
         {
-          je[joyNum].y = (float)(sje.value) * (1.0f/32768.0f);
+          je[joyNum].y = (float)(sje.value) * (-1.0f/32768.0f);
           isJoyEvent = true;
         }
         break;
@@ -193,8 +193,21 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
 
     case SDL_JOYBALLMOTION:		/* Joystick trackball motion */
     case SDL_JOYHATMOTION:		/* Joystick hat position change */
+      break;
+
     case SDL_JOYBUTTONDOWN:		/* Joystick button pressed */
     case SDL_JOYBUTTONUP:			/* Joystick button released */
+      {
+        SDL_JoyButtonEvent jbe = e.jbutton;
+        joyNum = jbe.which;
+        be.controller = joyNum;
+        be.isDown = (jbe.state == SDL_PRESSED);
+        // TODO Array to map SDL button num to Amju event enum
+        be.button = (Button)jbe.button;
+        isButtonEvent = (jbe.button <= 3); // only handle buttons 0-3 right now
+      }
+      break;
+
     case SDL_SYSWMEVENT:			/* System specific event */
     case SDL_VIDEORESIZE:			/* User resized video mode */
     case SDL_VIDEOEXPOSE:			/* Screen needs to be redrawn */
