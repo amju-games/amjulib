@@ -246,10 +246,10 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
   {
     if (be.isDown)
     {
-      m_isPressed = m_isMouseOver;
+      m_isPressed = HasFocus(); 
       return m_isPressed;
     }
-    else if (m_isMouseOver)
+    else if (HasFocus())
     {
       // Execute command for this button
       ClickSound();
