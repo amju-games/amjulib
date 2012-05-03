@@ -175,6 +175,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
@@ -235,6 +236,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\LogOut.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
