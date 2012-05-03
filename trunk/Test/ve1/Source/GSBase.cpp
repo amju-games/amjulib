@@ -20,6 +20,13 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 void GSBase::OnActive()
 {
   GameState::OnActive();
+
+  // Set this state to be the previous state for the Error screen.
+  // But not for the Error state!
+  if (this != TheGSNetError::Instance())
+  {
+    TheGSNetError::Instance()->SetPrevState(this);
+  }
 }
 
 void GSBase::SetPrevState(GameState* prevState)
