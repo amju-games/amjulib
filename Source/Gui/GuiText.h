@@ -26,8 +26,12 @@ public:
   virtual const std::string& GetText() const;
  
   void SetTextSize(float textSize);
+  float GetTextSize() const;
 
   void SizeToText(); // changes size to accomodate text
+
+  // Call to decide which bits of the text fit in the bounding rect
+  void RecalcFirstLast();
 
   Font* GetFont();
 
@@ -50,12 +54,14 @@ protected:
   friend struct WidthFinder;
   float GetTextWidth(const std::string& text);
 
-  void DrawSingleLine();
+  void DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg);
   void DrawMultiLine();
 
-  void PrintLine(const std::string&, float y);
+  void PrintLine(const std::string&, float x, float y);
 
 protected:
+  static const float CHAR_HEIGHT_FOR_SIZE_1;
+
   std::string m_text;
   std::string m_fontName;
   Just m_just;
@@ -73,6 +79,13 @@ protected:
   bool m_isMulti;
   Strings m_lines; // for multi-line text boxes, split the text into lines
   int m_topLine; // first line displayed
+
+  // First and last chars drawn in line (single line only)
+  int m_first;
+  int m_last;
+
+  int m_caret; // index of caret: 0 means at left
+  int m_selectedText; // index of other end of selected text (poss before or after caret)
 };
 }
 

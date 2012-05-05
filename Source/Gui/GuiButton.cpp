@@ -91,7 +91,8 @@ bool GuiButton::Load(File* f)
   }
   m_guiText.SetLocalPos(GetLocalPos());
   m_guiText.SetSize(GetSize());
-  
+  m_guiText.RecalcFirstLast();
+ 
   m_guiText.SetParent(GetParent());
 
   return true;

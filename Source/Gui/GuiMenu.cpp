@@ -20,6 +20,7 @@ void GuiMenuItem::Init(const std::string& text)
   SetJust(AMJU_JUST_LEFT);
 
   SizeToText();
+  RecalcFirstLast();
 }
 
 GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
