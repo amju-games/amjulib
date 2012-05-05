@@ -54,6 +54,7 @@ void QueueEvent(Amju::Event* e)
 void key(char k, bool down)
 {
   KeyEvent* ke = new KeyEvent;  
+  ke->modifier = glutGetModifiers();
   ke->keyDown = down;
 
   if (k == 127) // backspace
@@ -106,6 +107,12 @@ void keyup(unsigned char k, int, int)
 void special(int key, bool down)
 {
   KeyEvent* ke = new KeyEvent;  
+
+  Assert(GLUT_ACTIVE_SHIFT == AMJU_KEY_MOD_SHIFT);
+  Assert(GLUT_ACTIVE_CTRL == AMJU_KEY_MOD_CTRL);
+  Assert(GLUT_ACTIVE_ALT == AMJU_KEY_MOD_ALT);
+
+  ke->modifier = glutGetModifiers();
   switch (key)
   {
   case GLUT_KEY_LEFT:
@@ -124,6 +131,21 @@ void special(int key, bool down)
     ke->keyType = AMJU_KEY_DOWN;
     break;
 
+  case GLUT_KEY_PAGE_UP:
+    ke->keyType = AMJU_KEY_PAGE_UP;
+    break;
+
+  case GLUT_KEY_PAGE_DOWN:
+    ke->keyType = AMJU_KEY_PAGE_DOWN;
+    break;
+
+  case GLUT_KEY_HOME:
+    ke->keyType = AMJU_KEY_HOME;
+    break;
+
+  case GLUT_KEY_END:
+    ke->keyType = AMJU_KEY_END;
+    break;
   }
   ke->keyDown = down;
   QueueEvent(ke);
