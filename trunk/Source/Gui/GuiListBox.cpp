@@ -89,6 +89,7 @@ void GuiListBox::AddItem(GuiText* text)
   text->SetDrawBg(true); // TODO TEMP TEST
   text->SetJust(GuiText::AMJU_JUST_LEFT); // ?
   text->SizeToText(); // Resize
+  text->RecalcFirstLast();
 
   // Size to width of listbox
   Vec2f size = text->GetSize();

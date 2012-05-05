@@ -12,6 +12,9 @@ namespace Amju
 {
 const char* GuiText::NAME = "gui-text";
 
+// I.e. character at font size 1 takes up 1/20th of the screen height
+const float GuiText::CHAR_HEIGHT_FOR_SIZE_1 = 0.1f; 
+
 GuiText::GuiText()
 {
   m_fontName = "font2d/arial-font.font";
@@ -26,6 +29,10 @@ GuiText::GuiText()
   SetCharTime(0);
   m_isMulti = false;
   m_topLine = 0;
+  m_first = 0;
+  m_last = 0;
+  m_caret = 0;
+  m_selectedText = 0;
 }
 
 void GuiText::TextToSpeech()
@@ -38,7 +45,7 @@ void GuiText::TextToSpeech()
 
 void GuiText::SizeToText()
 {
-  Vec2f size(GetTextWidth(m_text) * m_textSize, 0.1f * m_textSize); // font size of 1 needs height 0.1
+  Vec2f size(GetTextWidth(m_text) * m_textSize, CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
   SetSize(size);
 }
 
@@ -52,11 +59,18 @@ void GuiText::SetCharTime(float secs)
 void GuiText::SetTextSize(float textSize)
 {
   m_textSize = textSize;
+  RecalcFirstLast();
+}
+
+float GuiText::GetTextSize() const
+{
+  return m_textSize;
 }
 
 void GuiText::SetJust(Just j)
 {
   m_just = j;
+  RecalcFirstLast();
 }
 
 void GuiText::SetInverse(bool inv)
@@ -106,7 +120,8 @@ void GuiText::Draw()
 
   Font* font = GetFont();
 
-  bool inverse = (m_inverse || IsSelected());
+  bool inverse = !(m_inverse || IsSelected());
+
   if (m_drawBg)
   {
     PushColour();
@@ -116,10 +131,6 @@ void GuiText::Draw()
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
-
-    PushColour();
-    // Set text colour to contrast with BG, but only if BG is drawn
-    MultColour(inverse ? m_bgCol: m_fgCol);
   }
 
   float oldSize = font->GetSize();
@@ -131,22 +142,26 @@ void GuiText::Draw()
   }
   else
   {
-    DrawSingleLine();
+    DrawSingleLine(m_first, m_last, inverse ? m_fgCol : m_bgCol, inverse ? m_bgCol : m_fgCol);
+
+    // Draw selected - do draw BG
+    if (m_caret != m_selectedText)
+    {
+      int left = std::min(m_caret, m_selectedText);
+      int right = std::max(m_caret, m_selectedText);
+    
+      DrawSingleLine(left, right, inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
+    }
   }
 
   font->SetSize(oldSize);
-
-  if (m_drawBg)
-  {
-    PopColour();
-  }
 }
 
 void GuiText::DrawMultiLine()
 {
   Vec2f pos = GetCombinedPos();
 
-  float y = pos.y - m_textSize * 0.1f;
+  float y = pos.y - m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
   float minY = pos.y - GetSize().y;
 
   int lines = m_lines.size();
@@ -155,8 +170,8 @@ void GuiText::DrawMultiLine()
     // TODO
     std::string str = m_lines[i];
 
-    PrintLine(str, y); 
-    y -= m_textSize * 0.1f; // 0.1 is height of text at size 1.0
+    PrintLine(str, GetCombinedPos().x, y); 
+    y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1 * GetTextSize();  
     if (y < minY)
     {
       break;
@@ -164,20 +179,57 @@ void GuiText::DrawMultiLine()
   }
 }
 
-void GuiText::DrawSingleLine()
+void GuiText::RecalcFirstLast()
 {
-  Vec2f pos = GetCombinedPos();
-  // Centre the text vertically
-  // TODO Why 0.1, depends on font size ?
-  float y = pos.y - GetSize().y * 0.5f - m_textSize * 0.05f;
+  GetFirstLast(0, &m_first, &m_last);
+}
 
+void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg)
+{
   // NB This is single line only, need another path for multi-line.
   // Decide on character range to draw
-  int first, last;
-  GetFirstLast(0, &first, &last);
-  last -= first; // convert from index to number of chars to draw
-  std::string str = m_text.substr(first, last);
-  Trim(&str);
+  std::string str = m_text.substr(first, last - first);
+  //Trim(&str); ?
+
+  Vec2f pos = GetCombinedPos();
+  // Centre the text vertically
+  float y = pos.y - GetSize().y * 0.5f - m_textSize * 0.5f * CHAR_HEIGHT_FOR_SIZE_1;
+
+  float x = 0; // text x pos
+  float xmin = 0; // bounding rect min and max x
+  float xmax = 0;
+  float startX = GetCombinedPos().x;
+
+  Vec2f size = GetSize();
+  switch (m_just)
+  {
+  case AMJU_JUST_LEFT:
+    xmin = (GetFont()->GetTextWidth(m_text.substr(m_first, first - m_first)) * GetTextSize()) + startX;
+    xmax = (GetFont()->GetTextWidth(m_text.substr(m_first, last - m_first)) * GetTextSize()) + startX;
+    x = xmin;
+    break;
+
+  case AMJU_JUST_RIGHT:
+    x = GetCombinedPos().x + size.x - GetTextWidth(str);
+    break;
+  case AMJU_JUST_CENTRE:
+    x = GetCombinedPos().x + 0.5f * (size.x - GetTextWidth(str));
+    xmin = x;
+    xmax = x + GetTextWidth(str) * GetTextSize();
+    break;
+  }
+
+  if (m_drawBg)
+  {
+    PushColour();
+    MultColour(bg);
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    Rect r; 
+    r.Set(xmin, xmax, y, y + CHAR_HEIGHT_FOR_SIZE_1 * GetTextSize()); // TODO
+    DrawSolidRect(r);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+    PopColour();
+  }
 
   if (m_charTime > 0)
   {
@@ -195,15 +247,28 @@ void GuiText::DrawSingleLine()
     }
   }
 
-  PrintLine(str, y);
+  if (m_drawBg)
+  {
+    PushColour();
+    MultColour(fg);
+    PrintLine(str, x, y);
+    PopColour();
+  }
+  else
+  {  
+    PrintLine(str, x, y);
+  }
 }
 
-void GuiText::PrintLine(const std::string& str, float y)
+void GuiText::PrintLine(const std::string& str, float x, float y)
 {
+  Font* font = GetFont();
+  font->Print(x, y, str.c_str());
+
+/*
   Vec2f pos = GetCombinedPos();
   Vec2f size = GetSize();
 
-  Font* font = GetFont();
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
@@ -218,6 +283,7 @@ void GuiText::PrintLine(const std::string& str, float y)
   default:
     Assert(0);
   }
+*/
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
@@ -281,12 +347,17 @@ void GuiText::SetText(const std::string& text)
 
   m_currentChar = 0;
   m_currentCharTime = 0;
+
+  RecalcFirstLast();
 }
 
 void GuiText::SetIsMulti(bool multi)
 {
+  if (multi == m_isMulti) return;
+
   m_isMulti = multi;
   SetText(m_text);
+  RecalcFirstLast();
 }
 
 float GuiText::GetTextWidth(const std::string& text)
@@ -378,6 +449,7 @@ bool GuiText::LoadText(File* f)
     }
   }
 
+  RecalcFirstLast();
   return true;
 }
 }

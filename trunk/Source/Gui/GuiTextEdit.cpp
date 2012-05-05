@@ -7,15 +7,13 @@ namespace Amju
 {
 const char* GuiTextEdit::NAME = "gui-text-edit";
 
-GuiTextEdit::GuiTextEdit() : m_caret(0)
+GuiTextEdit::GuiTextEdit() 
 {
   m_just = AMJU_JUST_LEFT;
 
   m_drawBg = true;
   m_caretTimer = 0;
   m_drawCaret = true;
-  m_first = 0;
-  m_last = 0;
 }
 
 void GuiTextEdit::Draw()
@@ -41,7 +39,7 @@ void GuiTextEdit::Draw()
   }
 
   // Works best if caret width is zero, (change widths file for char 124)
-  if (m_drawCaret)
+  if (false) ////m_drawCaret)  // TODO
   {
     std::string left = m_myText.substr(0, m_caret);
     std::string right = m_myText.substr(m_caret);
@@ -78,6 +76,17 @@ void GuiTextEdit::Draw()
   }
 
   GuiText::Draw();
+
+  // Draw caret - TODO multi line 
+  if (m_drawCaret)
+  {
+    PushColour();
+    AmjuGL::SetColour(m_inverse ? m_fgCol : m_bgCol);
+    float startX = GetCombinedPos().x;
+    float x = (GetFont()->GetTextWidth(m_myText.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
+    PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); // TODO TEMP TEST 
+    PopColour();
+  }
 }
 
 bool GuiTextEdit::Load(File* f)
@@ -88,6 +97,9 @@ bool GuiTextEdit::Load(File* f)
   }
   m_myText = m_text;
   m_caret = m_text.size();
+  m_selectedText = m_caret;
+
+  RecalcFirstLast();
 
   return true;
 }
@@ -102,6 +114,8 @@ void GuiTextEdit::SetText(const std::string& text)
   m_text = text;
   m_myText = text;
   m_caret = m_text.size();
+  m_selectedText = m_caret;
+  RecalcFirstLast();
 }
 
 void GuiTextEdit::Insert(char c)
@@ -111,11 +125,57 @@ void GuiTextEdit::Insert(char c)
 
   m_myText = left + c + right;
   m_caret++;
+  m_selectedText = m_caret;
+  RecalcFirstLast();
 }
+
+int GuiTextEdit::CalcCursorPos(float mousex)
+{
+  int pos = m_caret;
+
+  float startX = GetCombinedPos().x;
+
+  for (int i = m_first; i < m_last; i++)
+  {
+    float x = (GetFont()->GetTextWidth(m_myText.substr(m_first, i - m_first)) * GetTextSize()) + startX;
+
+    if (x > mousex)
+    {
+      pos = std::max(0, i - 1);
+      // DON'T recalc m_first and m_last!
+      break;
+    }
+  }
+  return pos;
+}
+
+static bool s_drag = false;
 
 bool GuiTextEdit::OnCursorEvent(const CursorEvent& ce)
 {
   // TODO In drag mode, select part of the text
+
+  Rect r = GetRect(this);
+  if (!r.IsPointIn(Vec2f(ce.x, ce.y)))
+  {
+    return false; // not handled - cursor not in edit box
+  }
+
+  if (s_drag && HasFocus())
+  {
+    m_selectedText = CalcCursorPos(ce.x);
+std::cout << "Selected: m_caret: " << m_caret << " m_selectedText: " << m_selectedText << ": \"";
+if (m_caret > m_selectedText)
+{
+  std::cout << m_myText.substr(m_selectedText, m_caret - m_selectedText);
+}
+else
+{
+  std::cout << m_myText.substr(m_caret, m_selectedText - m_caret);
+}
+std::cout << "\"\n";
+  }
+
   return false;
 }
 
@@ -124,6 +184,11 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   if (!IsVisible())
   {
     return false;
+  }
+
+  if (HasFocus())
+  {
+    s_drag = mbe.isDown;
   }
 
   Rect r = GetRect(this);
@@ -140,6 +205,10 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     return true;  
   }
 
+  m_caret = CalcCursorPos(mbe.x);
+  m_selectedText = m_caret;
+
+/*
   // When L button clicked, find new caret position
   float startX = GetCombinedPos().x;
 std::cout << "Mouse X: " << mbe.x << " text start X: " << startX << "\n";
@@ -147,19 +216,21 @@ std::cout << "Displayed String: \"" << m_text.substr(m_first, m_last - m_first) 
 
   for (int i = m_first; i < m_last; i++)
   {
-    float x = GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) + startX;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * GetTextSize()) + startX;
 
 std::cout << "String: \"" << m_text.substr(m_first, i - m_first) << "\" X " << x << "\n";
 
     if (x > mbe.x)
     {
 std::cout << "FOUND POS!\n";
-      m_caret = i;
+      m_caret = std::max(0, i - 1);
+      // DON'T recalc m_first and m_last!
       break;
     }
   }
+*/
   
-  return false;
+  return false; // ?
 }
 
 bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
@@ -202,6 +273,7 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     if (m_caret > 0)
     {
       m_caret--;
+      m_selectedText = m_caret; // TODO Unless shift is down ?
     }
     break;
 
@@ -209,6 +281,7 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     if (m_caret < (int)m_myText.size())
     {
       m_caret++;
+      m_selectedText = m_caret; // TODO Unless shift is down ?
     }
     break;
 
@@ -231,6 +304,7 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
       std::string right = m_myText.substr(m_caret);
       m_myText = left + right;
       m_caret--;
+      m_selectedText = m_caret; 
     }
     break;
 
@@ -251,6 +325,11 @@ std::cout << "Unexpected key type: " << ke.keyType << " key: '" << ke.key << "' 
     break;
   }
 
+  if (m_caret >= m_last || m_caret <= m_first)
+  {
+    RecalcFirstLast();
+  }
+
   return true; // handled
 }
 
@@ -269,7 +348,7 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    while (GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) > size.x)
+    while ((GetFont()->GetTextWidth(m_myText.substr(*first, *last - *first)) * GetTextSize()) > size.x)
     {
       if (caret > *last)
       {
@@ -289,6 +368,10 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
       }
     }
 
+    if (*last > (int)m_text.size())
+    {
+      *last = m_text.size();
+    }
     Assert(*last <= (int)m_text.size());
     Assert(*first >= 0);
     Assert(m_caret >= *first);

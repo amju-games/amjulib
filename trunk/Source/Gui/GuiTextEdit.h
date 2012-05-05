@@ -25,16 +25,12 @@ public:
 
 protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
-  
+  int CalcCursorPos(float mouseX);
+ 
 protected:
-  int m_caret; // index of caret: 0 means at left
   float m_caretTimer;
   bool m_drawCaret;
   std::string m_myText;
-
-  // First and last chars drawn in line
-  int m_first;
-  int m_last;
 };
 }
 
