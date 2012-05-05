@@ -4,6 +4,8 @@
 #include "EventPoller.h"
 #include "Screen.h"
 
+#define STATE_DEBUG
+
 namespace Amju
 {
 Game::Game()
@@ -109,6 +111,10 @@ GameState* Game::GetState()
 
 void Game::SetCurrentState(GameState* gs)
 {
+#ifdef STATE_DEBUG
+std::cout << "Game::SetCurrentState: new state is " << typeid(*gs).name() << "\n";
+#endif
+
   m_newState = gs;
 }
 
@@ -127,12 +133,26 @@ void Game::UpdateState()
 
   if (m_currentState)
   {
+#ifdef STATE_DEBUG
+std::cout << "Game::UpdateState: deactivating state: " << typeid(*m_currentState).name() << "\n";
+#endif
+
     m_currentState->OnDeactive();
+  }
+  else
+  {
+#ifdef STATE_DEBUG
+std::cout << "Game::UpdateState: no current state to deactivate.\n";
+#endif
   }
 
   m_currentState = m_newState;
   Assert(m_currentState);
   m_newState = 0;
+
+#ifdef STATE_DEBUG
+std::cout << "Game::UpdateState: activating new state: " << typeid(*m_currentState).name() << "\n";
+#endif
 
   // This next line may set m_newState, so zero it first
   // TODO Not sure why, is this old ??
