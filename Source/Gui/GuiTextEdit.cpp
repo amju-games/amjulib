@@ -78,15 +78,12 @@ void GuiTextEdit::Draw()
   GuiText::Draw();
 
   // Draw caret - TODO multi line 
-  if (m_drawCaret)
-  {
-    PushColour();
-    AmjuGL::SetColour(m_inverse ? m_fgCol : m_bgCol);
-    float startX = GetCombinedPos().x;
-    float x = (GetFont()->GetTextWidth(m_myText.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
-    PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); // TODO TEMP TEST 
-    PopColour();
-  }
+  PushColour();
+  AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
+  float startX = GetCombinedPos().x;
+  float x = (GetFont()->GetTextWidth(m_myText.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
+  PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); // TODO TEMP TEST 
+  PopColour();
 }
 
 bool GuiTextEdit::Load(File* f)
@@ -120,11 +117,22 @@ void GuiTextEdit::SetText(const std::string& text)
 
 void GuiTextEdit::Insert(char c)
 {
-  std::string left = m_myText.substr(0, m_caret);
-  std::string right = m_myText.substr(m_caret);
+  int left = std::min(m_caret, m_selectedText);  
+  int right = std::max(m_caret, m_selectedText);  
 
-  m_myText = left + c + right;
-  m_caret++;
+  std::string leftStr = m_myText.substr(0, left);
+  std::string rightStr = m_myText.substr(right);
+
+  m_myText = leftStr + c + rightStr;
+
+  if (left == right)
+  {
+    m_caret++;
+  }
+  else
+  {
+    m_caret = left + 1;
+  }
   m_selectedText = m_caret;
   RecalcFirstLast();
 }
@@ -208,28 +216,6 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   m_caret = CalcCursorPos(mbe.x);
   m_selectedText = m_caret;
 
-/*
-  // When L button clicked, find new caret position
-  float startX = GetCombinedPos().x;
-std::cout << "Mouse X: " << mbe.x << " text start X: " << startX << "\n";
-std::cout << "Displayed String: \"" << m_text.substr(m_first, m_last - m_first) << "\"\n";
-
-  for (int i = m_first; i < m_last; i++)
-  {
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * GetTextSize()) + startX;
-
-std::cout << "String: \"" << m_text.substr(m_first, i - m_first) << "\" X " << x << "\n";
-
-    if (x > mbe.x)
-    {
-std::cout << "FOUND POS!\n";
-      m_caret = std::max(0, i - 1);
-      // DON'T recalc m_first and m_last!
-      break;
-    }
-  }
-*/
-  
   return false; // ?
 }
 
@@ -270,7 +256,14 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     break;
 
   case AMJU_KEY_LEFT:
-    if (m_caret > 0)
+    if (ke.modifier & AMJU_KEY_MOD_SHIFT)
+    {
+      if (m_selectedText > 0)
+      {
+        m_selectedText--;
+      }
+    }
+    else if (m_caret > 0)
     {
       m_caret--;
       m_selectedText = m_caret; // TODO Unless shift is down ?
@@ -278,7 +271,14 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     break;
 
   case AMJU_KEY_RIGHT:
-    if (m_caret < (int)m_myText.size())
+    if (ke.modifier & AMJU_KEY_MOD_SHIFT)
+    {
+      if (m_selectedText < (int)m_myText.size())
+      {
+        m_selectedText++;
+      }
+    }
+    else if (m_caret < (int)m_myText.size())
     {
       m_caret++;
       m_selectedText = m_caret; // TODO Unless shift is down ?
@@ -300,9 +300,16 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   case AMJU_KEY_BACKSPACE:
     if (m_caret > 0)
     {
-      std::string left = m_myText.substr(0, m_caret - 1);
-      std::string right = m_myText.substr(m_caret);
-      m_myText = left + right;
+      int left = std::min(m_caret, m_selectedText);  
+      int right = std::max(m_caret, m_selectedText);  
+      if (left == right)
+      {
+        left--;
+      }
+
+      std::string leftStr = m_myText.substr(0, left);
+      std::string rightStr = m_myText.substr(right);
+      m_myText = leftStr + rightStr;
       m_caret--;
       m_selectedText = m_caret; 
     }
@@ -311,9 +318,16 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   case AMJU_KEY_DELETE:
     if (m_caret < (int)m_myText.size())
     {
-      std::string left = m_myText.substr(0, m_caret);
-      std::string right = m_myText.substr(m_caret + 1);
-      m_myText = left + right;
+      int left = std::min(m_caret, m_selectedText);  
+      int right = std::max(m_caret, m_selectedText);  
+      if (left == right)
+      {
+        right++;
+      }
+
+      std::string leftStr = m_myText.substr(0, m_caret);
+      std::string rightStr = m_myText.substr(m_caret + 1);
+      m_myText = leftStr + rightStr;
     }
     break;
 
