@@ -120,7 +120,7 @@ void GuiText::Draw()
 
   Font* font = GetFont();
 
-  bool inverse = !(m_inverse || IsSelected());
+  bool inverse = (m_inverse || IsSelected());
 
   if (m_drawBg)
   {
@@ -142,7 +142,7 @@ void GuiText::Draw()
   }
   else
   {
-    DrawSingleLine(m_first, m_last, inverse ? m_fgCol : m_bgCol, inverse ? m_bgCol : m_fgCol);
+    DrawSingleLine(m_first, m_last, inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
 
     // Draw selected - do draw BG
     if (m_caret != m_selectedText)
@@ -150,7 +150,7 @@ void GuiText::Draw()
       int left = std::min(m_caret, m_selectedText);
       int right = std::max(m_caret, m_selectedText);
     
-      DrawSingleLine(left, right, inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
+      DrawSingleLine(left, right, inverse ? m_fgCol : m_bgCol, inverse ? m_bgCol : m_fgCol);
     }
   }
 
@@ -204,8 +204,8 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    xmin = (GetFont()->GetTextWidth(m_text.substr(m_first, first - m_first)) * GetTextSize()) + startX;
-    xmax = (GetFont()->GetTextWidth(m_text.substr(m_first, last - m_first)) * GetTextSize()) + startX;
+    xmin = (GetFont()->GetTextWidth(m_text.substr(m_first, first - m_first))) + startX;
+    xmax = (GetFont()->GetTextWidth(m_text.substr(m_first, last - m_first))) + startX;
     x = xmin;
     break;
 
@@ -264,26 +264,6 @@ void GuiText::PrintLine(const std::string& str, float x, float y)
 {
   Font* font = GetFont();
   font->Print(x, y, str.c_str());
-
-/*
-  Vec2f pos = GetCombinedPos();
-  Vec2f size = GetSize();
-
-  switch (m_just)
-  {
-  case AMJU_JUST_LEFT:
-    font->Print(pos.x, y, str.c_str());
-    break;
-  case AMJU_JUST_RIGHT:
-    font->Print(pos.x + size.x - GetTextWidth(str), y, str.c_str());
-    break;
-  case AMJU_JUST_CENTRE:
-    font->Print(pos.x + 0.5f * (size.x - GetTextWidth(str)), y, str.c_str());
-    break;
-  default:
-    Assert(0);
-  }
-*/
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
