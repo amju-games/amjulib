@@ -19,18 +19,19 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
   virtual void SetText(const std::string&);
-  virtual const std::string& GetText() const;
+//  virtual const std::string& GetText() const;
 
   void Insert(char);
 
 protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
   int CalcCursorPos(float mouseX);
+  int NextWord(int); // for caret/selection movement
+  int PrevWord(int);
  
 protected:
   float m_caretTimer;
   bool m_drawCaret;
-  std::string m_myText;
 };
 }
 
