@@ -6,6 +6,8 @@ namespace Amju
 {
 void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
 {
+  // TODO Modifiers
+
   pKe->keyDown = (ske.state == SDL_PRESSED);
   switch (ske.keysym.sym)
   {
@@ -35,6 +37,12 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
     break;
   case SDLK_DELETE:
     pKe->keyType = AMJU_KEY_DELETE;
+    break;
+  case SDLK_HOME:
+    pKe->keyType = AMJU_KEY_HOME;
+    break;
+  case SDLK_END:
+    pKe->keyType = AMJU_KEY_END;
     break;
   default:
     pKe->keyType = AMJU_KEY_CHAR;
