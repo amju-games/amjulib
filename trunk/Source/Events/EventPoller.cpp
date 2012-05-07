@@ -9,6 +9,24 @@ EventPollerImpl* EventPoller::GetImpl()
   return m_pImpl;
 }
 
+void EventPollerImpl::Update(Listeners* pListeners)
+{
+  while (!m_q.empty())
+  {
+    Event* event = m_q.front(); // Events on heap
+    m_q.pop();
+
+    NotifyListenersWithPriority(event, pListeners);
+
+    delete event; // Events on heap
+  }
+}
+
+void EventPollerImpl::QueueEvent(Event* event)
+{
+  m_q.push(event);
+}
+
 void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pListeners)
 {
   int eaten = AMJU_MAX_PRIORITY + 1;
