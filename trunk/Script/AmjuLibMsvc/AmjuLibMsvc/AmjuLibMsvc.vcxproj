@@ -168,7 +168,6 @@
     <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp" />
     <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
-    <ClCompile Include="..\..\..\Source\Events\EventPollerImplGeneric.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
@@ -374,7 +373,6 @@
     <ClInclude Include="..\..\..\Source\Community\DownloadReq.h" />
     <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
-    <ClInclude Include="..\..\..\Source\Events\EventPollerImplGeneric.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\ConfigFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h" />

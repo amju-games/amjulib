@@ -714,9 +714,6 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Events\EventPollerImplGeneric.cpp">
-      <Filter>Events</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1351,9 +1348,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h">
       <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Events\EventPollerImplGeneric.h">
-      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
