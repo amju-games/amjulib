@@ -47,6 +47,8 @@ EventPollerImplWii::EventPollerImplWii()
 
 void EventPollerImplWii::Update(Listeners* pListeners)
 {
+  EventPollerImpl::Update(pListeners);
+
   static float ir_x[WPAD_MAX_WIIMOTES] = { 0, 0, 0, 0, 0 };
   static float ir_y[WPAD_MAX_WIIMOTES] = { 0, 0, 0, 0, 0 };
 

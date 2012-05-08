@@ -254,6 +254,8 @@ LRESULT EventPollerImplWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 
 void EventPollerImplWin32::Update(Listeners* pListeners)
 {
+  EventPollerImpl::Update(pListeners);
+
   m_listeners = pListeners;
 
   int bGotMsg;
