@@ -100,6 +100,7 @@ Player::Player() : m_sceneNode(0)
   m_isLocal = false;
   m_isMoving = false;
   m_inNewLocation = false;
+  m_fadeTime = 0;
 }
 
 const std::string& Player::GetName() const
@@ -111,16 +112,6 @@ void Player::SetName(const std::string& name)
 {
   m_name = name;
 }
-
-//bool Player::IsLocalPlayer() const
-//{
-//  return m_isLocal;
-//}
-     
-//void Player::SetIsLocalPlayer(bool isLocal)
-//{
-//  m_isLocal = isLocal;
-//}
 
 bool Player::Load(File* f)
 {
@@ -180,12 +171,6 @@ void Player::OnLocationEntry()
 
 // Scene Graph
 
-//void Player::Draw()
-//{
-//  Assert(GetAABB());
-//  DrawAABB(*GetAABB());
-//}
-
 void Player::Set(const std::string& key, const std::string& val)
 {
   Ve1Object::Set(key, val);
@@ -202,6 +187,18 @@ void Player::Set(const std::string& key, const std::string& val)
   else if (key == "name")
   {
     SetName(val);
+  }
+  else if (key == "loggedin")
+  {
+    if (val == "n")
+    {
+      // Start fading this player - TODO
+      if (m_sceneNode) m_sceneNode->SetVisible(false);    
+    }
+    else
+    {
+      if (m_sceneNode) m_sceneNode->SetVisible(true);    
+    }
   }
 }
 
