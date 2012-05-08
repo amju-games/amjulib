@@ -65,7 +65,13 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   {
   case LOGIN:
     {
-      static int registerLogout = atexit(SendLogOut);
+      // Get SendLogOut() to be called on exit - only register the function once
+      static int registerLogout = true;
+      if (registerLogout)
+      {
+        atexit(SendLogOut);
+        registerLogout = false;
+      }
     }
     s += "login.pl";
     // ** NB return ** -- we don't have a session yet!
