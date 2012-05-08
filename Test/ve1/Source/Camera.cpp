@@ -1,5 +1,7 @@
-#include "Camera.h"
 #include <EventPoller.h>
+#include <Game.h>
+#include <DegRad.h>
+#include "Camera.h"
 
 //#define CAM_DEBUG
 
@@ -29,7 +31,30 @@ void Camera::Update()
   if (m_target)
   {
     const Vec3f& pos = m_target->GetPos();
-    SetEyePos(Vec3f(pos.x + sin(yRot) * zDist, pos.y + CAM_Y, pos.z + cos(yRot) * zDist));
+    yRot = 0;
+
+    // TODO Get closest portal
+    static PGameObject lastportal = 0;
+    int pid = m_target->GetIgnorePortalId();
+    if (pid > -1)
+    {
+      lastportal = TheGame::Instance()->GetGameObject(pid);
+    }
+    
+    if (lastportal)
+    {
+      float pdist = (pos - lastportal->GetPos()).SqLen(); // sq dist from portal to player
+      static const float MAX_DIST = 5000.0f; // TODO TEMP TEST
+      if (pdist < MAX_DIST) 
+      {
+        yRot = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_DIST); 
+std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
+      }
+    }
+    
+    Vec3f eye(pos.x + sin(yRot) * zDist, pos.y + CAM_Y, pos.z + cos(yRot) * zDist);
+
+    SetEyePos(eye); 
     SetLookAtPos(pos);
   }
   else

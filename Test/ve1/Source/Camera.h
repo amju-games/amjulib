@@ -3,7 +3,7 @@
 
 #include <SceneNodeCamera.h>
 #include <EventListener.h>
-#include <GameObject.h>
+#include "Ve1Object.h"
 
 namespace Amju
 {
@@ -24,11 +24,11 @@ class Camera : public SceneNodeCamera
 public:
   Camera();
 
-  void SetTarget(GameObject* g) { m_target = g; }
+  void SetTarget(Ve1Object* g) { m_target = g; }
   virtual void Update();
 
 private:
-  GameObject* m_target;
+  Ve1Object* m_target;
   RCPtr<CameraControl> m_control;
 };
 }
