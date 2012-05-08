@@ -6,7 +6,10 @@ namespace Amju
 {
 void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
 {
-  // TODO Modifiers
+  // Modifiers
+  if (ske.keysym.mod & KMOD_SHIFT) pKe->modifier |= AMJU_KEY_MOD_SHIFT;
+  if (ske.keysym.mod & KMOD_CTRL) pKe->modifier |= AMJU_KEY_MOD_CTRL;
+  if (ske.keysym.mod & KMOD_ALT) pKe->modifier |= AMJU_KEY_MOD_ALT;
 
   pKe->keyDown = (ske.state == SDL_PRESSED);
   switch (ske.keysym.sym)
@@ -62,6 +65,8 @@ void SetKeyType(const SDL_KeyboardEvent& ske, KeyEvent* pKe)
 
 void EventPollerImplSDL::Update(Listeners* pListeners)
 {
+  EventPollerImpl::Update(pListeners);
+
   // Init joysticks etc
   static bool first = true;
   if (first)
@@ -188,7 +193,7 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         je[joyNum].controller = joyNum;
         if (sje.axis == 0)
         {
-          je[joyNum].x = (float)(sje.value) * (-1.0f/32768.0f);
+          je[joyNum].x = (float)(sje.value) * (1.0f/32768.0f);
           isJoyEvent = true;
         }
         else if (sje.axis == 1)
