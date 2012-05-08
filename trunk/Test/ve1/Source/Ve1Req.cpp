@@ -34,6 +34,15 @@ void Ve1Req::HandleResult()
       m_errorStr = m_name + ": Didn't get time stamp in result: " + str;
     }
 
+    if (m_xml.nChildNode() > 1) 
+    {
+      p = m_xml.getChildNode(1);
+      if (SafeStrCmp(p.getName(), "error"))
+      {
+        m_errorStr = p.getText();
+        success = false;
+      }
+    }
   }
   else
   {
