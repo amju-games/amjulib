@@ -171,7 +171,7 @@ void GuiText::DrawMultiLine()
     std::string str = m_lines[i];
 
     PrintLine(str, GetCombinedPos().x, y); 
-    y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1 * GetTextSize();  
+    y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
     if (y < minY)
     {
       break;
