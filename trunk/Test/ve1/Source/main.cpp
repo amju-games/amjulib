@@ -7,6 +7,8 @@
 #endif // WIN32
 
 #define AMJU_USE_OPENGL
+//#define AMJU_USE_GLUT
+//#define AMJU_USE_DX9
 
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
@@ -27,6 +29,8 @@
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 #include "SAPCollideFunc.h"
+#include "QuitHandler.h"
+#include "JoystickToCursor.h" // TODO TEMP TEST
 
 namespace Amju
 {
@@ -55,7 +59,10 @@ void StartUp()
   File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
   
   // Set SAP collide func
-  TheSAP::Instance()->SetCollideFunc(SAPCollideFunc);
+  //TheSAP::Instance()->SetCollideFunc(SAPCollideFunc);
+  TheEventPoller::Instance()->AddListener(new QuitHandler);
+  // TODO TEMP TEST
+  TheEventPoller::Instance()->AddListener(new JoystickToCursor, -999);
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for .obj files, binary loader for .objb 
@@ -69,7 +76,6 @@ void StartUp()
   ClearVe1SceneGraph();
 
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
-  //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
 }
 }
 
