@@ -8,10 +8,17 @@ bool JoystickToCursor::OnJoyAxisEvent(const JoyAxisEvent& je)
   // Make cursor event with the joystick data 
   // TODO sensitivity
 
-  static const float SENSITIVITY = 1.0f; // TODO configurable per user
+  // TODO keep moving for as long as j/s is non-zero. This needs an Update(), as 
+  // events are only generated when the j/s changes state.
 
-  m_coord.x += je.x * SENSITIVITY;
-  m_coord.y += je.y * SENSITIVITY;
+  static const float SENSITIVITY = 1.5f; // TODO configurable per user
+
+  // TODO
+  // Check if m_coord is same as je within some tolerance, ignore if so.
+  // (configurable tolerance too)
+
+  m_coord.x = je.x * SENSITIVITY; 
+  m_coord.y = je.y * SENSITIVITY;
 
   CursorEvent* ce = new CursorEvent;
   ce->controller = je.controller;
@@ -31,6 +38,8 @@ bool JoystickToCursor::OnButtonEvent(const ButtonEvent& be)
   case AMJU_BUTTON_A:
     mbe = new MouseButtonEvent;
     mbe->button = AMJU_BUTTON_MOUSE_LEFT;
+    break;
+
   default:
     return false;
   }
