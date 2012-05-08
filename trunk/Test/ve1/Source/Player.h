@@ -70,6 +70,9 @@ protected:
 
   // Set when we enter a new location 
   bool m_inNewLocation;
+
+  // Start fading out when a player has logged out
+  float m_fadeTime;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
