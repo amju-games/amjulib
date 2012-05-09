@@ -3,6 +3,8 @@
 #include <Game.h>
 #include "GSTitle.h"
 #include <GuiText.h>
+#include <GuiButton.h>
+#include "GSYesNoQuitProcess.h"
 
 namespace Amju
 {
@@ -28,7 +30,7 @@ void OnErrorOk()
 
 void OnErrorQuit()
 {
-  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());  // ? Quit game, or quit process ?
 }
 
 GSNetError::GSNetError()
@@ -65,9 +67,18 @@ void GSNetError::OnActive()
   m_gui = LoadGui("gui-error.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("error-ok-button")->SetCommand(Amju::OnErrorOk);
-  m_gui->GetElementByName("error-quit-button")->SetCommand(Amju::OnErrorQuit);
+////  m_gui->GetElementByName("error-ok-button")->SetCommand(Amju::OnErrorOk);
+////  m_gui->GetElementByName("error-quit-button")->SetCommand(Amju::OnErrorQuit);
   
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "error-ok-button");
+  ok->SetCommand(Amju::OnErrorOk);
+  ok->SetHasFocus(true);
+
+  GuiButton* quit = (GuiButton*)GetElementByName(m_gui, "error-quit-button");
+  quit->SetCommand(Amju::OnErrorQuit);
+  quit->SetIsCancelButton(true);
+
+
   GuiText* t = dynamic_cast<GuiText*>(m_gui->GetElementByName("error"));
   Assert(t);
   t->SetText(m_errorStr);
