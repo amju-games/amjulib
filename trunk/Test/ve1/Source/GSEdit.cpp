@@ -663,7 +663,11 @@ void GSEdit::CreateContextMenu()
     childMenu->SetName("Child menu");
 
     // Get types from Game Object Factory..?
-    childMenu->AddChild(new GuiMenuItem("Portal", new NewObjectCommand(Portal::TYPENAME)));
+    std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
+    for (unsigned int i = 0; i < types.size(); i++)
+    {
+      childMenu->AddChild(new GuiMenuItem("Portal", new NewObjectCommand(types[i])));
+    }
     // TODO Other types
 
     m_menu->AddChild(new GuiNestMenuItem("New Game Object...", childMenu));
