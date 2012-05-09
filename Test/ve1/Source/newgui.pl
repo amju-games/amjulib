@@ -36,8 +36,6 @@ public:\
   virtual void Draw2d();\
   virtual void OnActive();\
 \
-  virtual bool OnCursorEvent(const CursorEvent&);\
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);\
 };\
 typedef Singleton<$class> The$class;\
 } // namespace\
@@ -75,17 +73,13 @@ void " . $scope . "Draw2d()\
 void " . $scope . "OnActive()\
 {\
   GSGui::OnActive();\
+\
+  m_gui = LoadGui(\"TODO\");\
+  Assert(m_gui);\
+\
+  // TODO Set focus element, cancel element, command handlers\
 }\
 \
-bool " . $scope . "OnCursorEvent(const CursorEvent& ce)\
-{\
-  return false;\
-}\
-\
-bool " . $scope . "OnMouseButtonEvent(const MouseButtonEvent& mbe)\
-{\
-  return false;\
-}\
 } // namespace\n";
 
 close (DOT_CPP);
