@@ -174,6 +174,8 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
@@ -237,6 +239,8 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNoQuitProcess.h" />
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
