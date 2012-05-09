@@ -20,8 +20,6 @@ public:
 
   void OnLoginButton();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 };
 typedef Singleton<GSLogin> TheGSLogin;
 } // namespace
