@@ -18,8 +18,6 @@ public:
   virtual void OnActive();
   virtual void OnDeactive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 };
 typedef Singleton<GSTitle> TheGSTitle;
 } // namespace

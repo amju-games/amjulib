@@ -5,6 +5,7 @@
 #include "GSStartMenu.h"
 #include "GSLogin.h"
 #include "GSChoosePlayer.h"
+#include "GSYesNoQuitProcess.h"
 
 namespace Amju
 {
@@ -18,10 +19,9 @@ static void OnStartButton()
 
 static void OnQuitButton()
 {
-  // Confirm ?
-
-//  AmjuExit();
-  exit(0);
+  // Confirm 
+  TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSTitle::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
 }
 
 GSTitle::GSTitle()
@@ -68,13 +68,4 @@ void GSTitle::OnDeactive()
   CreateText("");
 }
 
-bool GSTitle::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSTitle::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
