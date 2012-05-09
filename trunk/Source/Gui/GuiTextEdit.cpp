@@ -219,18 +219,28 @@ std::cout << "GuiTextEdit Drag is now " << (s_drag ? "ON" : "OFF") << "\n";
   return true; // ?
 }
 
+static bool IsWordSep(char c)
+{
+  // TODO Configurable
+  if (isalnum(c))
+  {
+    return false;
+  }
+  return true;
+}
+
 int GuiTextEdit::NextWord(int pos)
 {
-  if (pos >= (int)m_text.size())
-  {
-    return (int)m_text.size();
-  }
-
   do
   {
     pos++;
   }
-  while (pos < (int)m_text.size() - 1 && m_text[pos] != ' ');
+  while (pos < (int)m_text.size() && !IsWordSep(m_text[pos]));
+
+  if (pos >= (int)m_text.size())
+  {
+    return (int)m_text.size();
+  }
 
   return pos;
 }
@@ -246,7 +256,7 @@ int GuiTextEdit::PrevWord(int pos)
   {
     pos--;
   }
-  while (pos > 0 && m_text[pos] != ' '); // TODO other word separators
+  while (pos > 0 && !IsWordSep(m_text[pos])); 
   
   return pos;
 }
@@ -381,11 +391,10 @@ std::cout << "Next char\n";
     break;
 
   case AMJU_KEY_BACKSPACE:
-    if (m_caret > 0)
     {
       int left = std::min(m_caret, m_selectedText);  
       int right = std::max(m_caret, m_selectedText);  
-      if (left == right)
+      if (left == right && m_caret > 0)
       {
         left--;
       }
@@ -393,24 +402,26 @@ std::cout << "Next char\n";
       std::string leftStr = m_text.substr(0, left);
       std::string rightStr = m_text.substr(right);
       m_text = leftStr + rightStr;
-      m_caret--;
+      m_caret = left;
       m_selectedText = m_caret; 
     }
     break;
 
   case AMJU_KEY_DELETE:
-    if (m_caret < (int)m_text.size())
+    //if ()
     {
       int left = std::min(m_caret, m_selectedText);  
       int right = std::max(m_caret, m_selectedText);  
-      if (left == right)
+      if (left == right && m_caret < (int)m_text.size())
       {
         right++;
       }
 
-      std::string leftStr = m_text.substr(0, m_caret);
-      std::string rightStr = m_text.substr(m_caret + 1);
+      std::string leftStr = m_text.substr(0, left);
+      std::string rightStr = m_text.substr(right);
       m_text = leftStr + rightStr;
+      m_caret = left;
+      m_selectedText = m_caret; 
     }
     break;
 
