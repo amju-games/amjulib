@@ -78,7 +78,7 @@ int main(int argc, char **argv)
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWin32);
 #endif // AMJU_USE_DX11
 
-  TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
+  //TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
 #endif // WIN32
 
 #ifdef IPHONE
