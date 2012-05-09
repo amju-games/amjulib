@@ -121,17 +121,24 @@ void GuiButton::Draw()
   }
 */
 
-  if (IsFocusButton()) ///// || HasFocus()) // TODO just one
+  if (IsFocusButton() || IsCancelButton()) ///// || HasFocus()) // TODO just one
   {
     // Draw border
     // TODO Could be image - allow flexible way to give GUIs themes
     static float t = 0;
-    float dt = TheTimer::Instance()->GetDt();
-    t += dt;
     PushColour();
-    float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-    Colour c(s, s, 1, 1);
-    AmjuGL::SetColour(c); 
+    if (IsFocusButton())
+    {
+      float dt = TheTimer::Instance()->GetDt();
+      t += dt;
+      float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
+      Colour c(s, s, 1, 1);
+      AmjuGL::SetColour(c); 
+    }
+    else
+    {
+      AmjuGL::SetColour(Colour(1, 0, 0, 1));
+    }
 
     Rect r = GetRect(this);
     float BORDER = 0.025f; // TODO configurable
@@ -243,6 +250,7 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
     return false;
   }
 
+  // TODO Configurable buttons, so static var/manager
   if (be.button == AMJU_BUTTON_A)
   {
     if (be.isDown)
