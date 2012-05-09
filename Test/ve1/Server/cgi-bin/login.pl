@@ -65,11 +65,14 @@ print "Your new session ID: $session_id\n";
     else
     {
       print "Errr.. failed to create session?!\n";
+      my $t = time();
+      print "<now>$t</now><error>BAD_SESSION</error>\n";
     }
   }
   else
   {
-    print "No such email\n";
+    my $t = time();
+    print "<now>$t</now><error>BAD_EMAIL</error>\n";
   }
 }
 
