@@ -24,7 +24,7 @@ public:
     }
     else
     {
-      MultColour(Colour(0.6, 0.6, 0.6, 1));
+      MultColour(Colour(0.6f, 0.6f, 0.6f, 1));
     }
 
     Vec2f screenpos;
