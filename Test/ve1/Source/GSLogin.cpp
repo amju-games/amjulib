@@ -1,3 +1,4 @@
+#include <GuiButton.h>
 #include "GSLogin.h"
 #include <AmjuGL.h>
 #include "GSMain.h"
@@ -5,9 +6,12 @@
 #include <GuiTextEdit.h>
 #include "GSLoginWaiting.h"
 #include "GSTitle.h"
+#include <ConfigFile.h>
 
 namespace Amju
 {
+static std::string lastEmail = "person@example.com";
+
 static void OnLoginButton()
 {
   TheGSLogin::Instance()->OnLoginButton();
@@ -46,14 +50,22 @@ void GSLogin::OnActive()
   m_gui = LoadGui("gui-login.txt");
   Assert(m_gui);
 
-  GetElementByName(m_gui, "login-button")->SetCommand(Amju::OnLoginButton);
-  GetElementByName(m_gui, "cancel-button")->SetCommand(Amju::OnCancelButton);
+  GuiButton* login = (GuiButton*)GetElementByName(m_gui, "login-button");
+  login->SetCommand(Amju::OnLoginButton);
+  login->SetHasFocus(true);
+
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  cancel->SetCommand(Amju::OnCancelButton);
+  cancel->SetIsCancelButton(true);
+
   GetElementByName(m_gui, "email")->SetHasFocus(true);
 
   // TODO Set last email address entered ?
+  // TODO use config ?
+  //static GameConfigFile* config = TheGameConfigFile::Instance();
   GuiTextEdit* elem = dynamic_cast<GuiTextEdit*>(m_gui->GetElementByName("email"));
   Assert(elem);
-  // ...
+  elem->SetText(lastEmail);
 }
 
 void GSLogin::OnLoginButton()
@@ -63,7 +75,7 @@ void GSLogin::OnLoginButton()
   if (elem)
   {
     std::string email = elem->GetText();
-
+    lastEmail = email;
     // TODO Save email in prefs
 
     // TODO password; use https
@@ -77,13 +89,4 @@ void GSLogin::OnLoginButton()
   }
 }
 
-bool GSLogin::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSLogin::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
