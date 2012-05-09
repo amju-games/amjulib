@@ -1,5 +1,6 @@
 #include "EventPoller.h"
-#include "AmjuAssert.h"
+#include <AmjuAssert.h>
+#include <Timer.h>
 
 namespace Amju
 {
@@ -27,8 +28,60 @@ void EventPollerImpl::QueueEvent(Event* event)
   m_q.push(event);
 }
 
+static KeyEvent lastKeyEvent;
+static const float AUTO_REPEAT_START_DELAY = 0.5f; // TODO Configurable
+static const float AUTO_REPEAT_RPT_DELAY = 0.3f;
+
+static float rptTimer = 0;
+
+enum AutoRepeatState { AMJU_AR_NONE, AMJU_AR_START_WAIT, AMJU_AR_RPT_WAIT }; 
+static AutoRepeatState arState = AMJU_AR_NONE;
+
+void HandleKey(KeyEvent* ke)
+{
+  // TODO distinguish between "real" and auto-repeat key events
+  if (ke->keyDown)
+  {
+std::cout << "Got key down event!\n";
+
+    lastKeyEvent = *ke;
+    arState = AMJU_AR_START_WAIT;
+    rptTimer = AUTO_REPEAT_START_DELAY;
+  }
+  else
+  {
+    arState = AMJU_AR_NONE;
+    rptTimer = 0;
+  }
+}
+
+void Repeat()
+{
+  if (arState == AMJU_AR_NONE)
+  {
+    return;
+  }
+
+  rptTimer -= TheTimer::Instance()->GetDt();
+
+  if (rptTimer < 0)
+  {
+    // Have reached time limit, we now start repeating
+    // TODO Queue Key Up event first ???
+    TheEventPoller::Instance()->GetImpl()->QueueEvent(new KeyEvent(lastKeyEvent));
+
+    arState = AMJU_AR_RPT_WAIT;
+    rptTimer = AUTO_REPEAT_RPT_DELAY;
+  }
+}
+
 void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pListeners)
 {
+  if (dynamic_cast<KeyEvent*>(event)) // TODO Auto-repeatable flag ?
+  {
+    HandleKey((KeyEvent*)event);
+  }
+
   int eaten = AMJU_MAX_PRIORITY + 1;
   for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
   {
@@ -98,5 +151,6 @@ void EventPoller::Update()
   // Copy listeners so we can add or remove listeners in response to an event
   Listeners copyListeners = m_listeners;
   m_pImpl->Update(&copyListeners);
+  Repeat();
 }
 }

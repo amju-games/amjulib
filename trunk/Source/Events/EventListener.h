@@ -21,6 +21,7 @@ public:
   virtual bool OnButtonEvent(const ButtonEvent&) { return false; }
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&) { return false; }
   virtual bool OnBalanceBoardEvent(const BalanceBoardEvent&) { return false; }
+  virtual bool OnTextEvent(const TextEvent&) { return false; }
   virtual bool OnQuitEvent() { return false; }
 };
 

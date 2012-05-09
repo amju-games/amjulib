@@ -1,6 +1,8 @@
 #ifndef AMJU_EVENT_TYPES_H
 #define AMJU_EVENT_TYPES_H
 
+#include <string>
+
 /*
   Coords for cursor events etc use this coord system:
 
@@ -142,6 +144,17 @@ struct BalanceBoardEvent : public Event
 
   virtual bool UpdateListener(EventListener*);
 };
+
+enum TextEventType { AMJU_OOPS, AMJU_CUT, AMJU_COPY, AMJU_PASTE, AMJU_UNDO, AMJU_REDO };
+struct TextEvent : public Event
+{
+  TextEvent() : type(AMJU_OOPS), clipboard(0) {}
+  TextEventType type;
+  std::string* clipboard;
+
+  virtual bool UpdateListener(EventListener*);
+};
+
 }
 
 #endif
