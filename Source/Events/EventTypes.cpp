@@ -42,4 +42,9 @@ bool BalanceBoardEvent::UpdateListener(EventListener* el)
 {
   return el->OnBalanceBoardEvent(*this);
 }
+
+bool TextEvent::UpdateListener(EventListener* el)
+{
+  return el->OnTextEvent(*this);
+}
 }

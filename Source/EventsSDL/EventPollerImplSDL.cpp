@@ -110,9 +110,9 @@ void EventPollerImplSDL::Update(Listeners* pListeners)
     {
     case SDL_QUIT:
       isQuit = true;
+      QueueEvent(new QuitEvent);
       break;
-    case SDL_ACTIVEEVENT:			/* Application loses/gains visibility */
-      break;
+
     case SDL_KEYDOWN:			/* Keys pressed */
     case SDL_KEYUP:			/* Keys released */
       {
@@ -140,6 +140,7 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
 #endif
 
           isKeyEvent = true;
+          NotifyListenersWithPriority(&ke, pListeners);
         }
         break;
       }
@@ -152,6 +153,9 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         ce.x = ((float)sme.x / (float)Screen::X()) * 2.0f - 1.0f;
         ce.y = (1.0f - (float)sme.y / (float)Screen::Y()) * 2.0f - 1.0f;
         isCursorEvent = true;
+
+        NotifyListenersWithPriority(&ce, pListeners);
+
         break;
       }
 
@@ -183,6 +187,9 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         
         mbe.isDown = (sme.state == SDL_PRESSED);
         isMouseButtonEvent = true;
+
+        NotifyListenersWithPriority(&mbe, pListeners);
+
         break;
       }
 
@@ -195,18 +202,18 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         {
           je[joyNum].x = (float)(sje.value) * (1.0f/32768.0f);
           isJoyEvent = true;
+
+          NotifyListenersWithPriority(&je[joyNum], pListeners);
         }
         else if (sje.axis == 1)
         {
           je[joyNum].y = (float)(sje.value) * (-1.0f/32768.0f);
           isJoyEvent = true;
+
+          NotifyListenersWithPriority(&je[joyNum], pListeners);
         }
         break;
       }
-
-    case SDL_JOYBALLMOTION:		/* Joystick trackball motion */
-    case SDL_JOYHATMOTION:		/* Joystick hat position change */
-      break;
 
     case SDL_JOYBUTTONDOWN:		/* Joystick button pressed */
     case SDL_JOYBUTTONUP:			/* Joystick button released */
@@ -218,15 +225,12 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
         // TODO Array to map SDL button num to Amju event enum
         be.button = (Button)jbe.button;
         isButtonEvent = (jbe.button <= 3); // only handle buttons 0-3 right now
+          
+        NotifyListenersWithPriority(&be, pListeners);
       }
       break;
-
-    case SDL_SYSWMEVENT:			/* System specific event */
-    case SDL_VIDEORESIZE:			/* User resized video mode */
-    case SDL_VIDEOEXPOSE:			/* Screen needs to be redrawn */
-      break;
-    }
-
+    } // switch
+    /*
     int eaten = AMJU_MAX_PRIORITY + 1;
     int count = 0;
     for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
@@ -252,6 +256,8 @@ std::cout << "Key event: type: " << TYPE[ke.keyType] << " key: " << ke.key <<
 
       count++;
     }
-  }
+    */
+
+  } // while more events
 }
 }
