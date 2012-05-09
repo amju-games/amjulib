@@ -22,8 +22,7 @@ void LoadConfig()
 
 void SaveConfig()
 {
-  // TODO call on exit
-
+  // called on exit
   TheGameConfigFile::Instance()->Save(GetConfigFilename(), false);
 }
 }
