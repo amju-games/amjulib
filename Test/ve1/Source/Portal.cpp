@@ -27,6 +27,7 @@ const char* Portal::GetTypeName() const
 
 Portal::Portal()
 {
+  // TODO Survives between sessions ??
   m_isPickable = (GetGameMode() == AMJU_MODE_EDIT);
   m_isOpen = true;
 
