@@ -42,7 +42,6 @@ GSMain::GSMain()
   m_moveRequest = false;
   m_yRot = 0;
   m_listener = new GSMainListener;
-  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 void GSMain::ShowObjectMenu(GameObject* obj)
@@ -192,6 +191,8 @@ void GSMain::OnDeactive()
   m_menu = 0;
 
   TheChatConsole::Instance()->OnDeactive();
+
+  TheEventPoller::Instance()->RemoveListener(m_listener);
 }
 
 void GSMain::OnActive()
@@ -214,6 +215,8 @@ void GSMain::OnActive()
   m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
 
   TheChatConsole::Instance()->OnActive();
+
+  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 static bool rightButtonDown = false;
