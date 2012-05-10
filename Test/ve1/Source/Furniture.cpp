@@ -1,5 +1,7 @@
 #include <GameObjectFactory.h>
 #include "Furniture.h"
+#include "Ve1Node.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -43,6 +45,25 @@ void Furniture::OnLocationEntry()
   // Set scene node
 
   // Set AABB
+
+  static const float XSIZE = 20.0f; // TODO CONFIG
+  static const float YSIZE = 40.0f;
+  AABB aabb;
+  aabb.Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+  //if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    // Add node to Scene Graph
+    m_sceneNode = new Ve1Node(this);
+    SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+    Assert(root);
+    root->AddChild(m_sceneNode);
+    *(m_sceneNode->GetAABB()) = aabb;
+  }
+
 }
 
 void Furniture::Set(const std::string& key, const std::string& val)
