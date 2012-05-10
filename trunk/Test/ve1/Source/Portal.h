@@ -23,7 +23,7 @@ public:
 
   void OnPlayerCollision(Player* player);
 
-  // For collision testing (should use SAP)
+  // For collision testing 
   AABB* GetAABB();
 
 private:
