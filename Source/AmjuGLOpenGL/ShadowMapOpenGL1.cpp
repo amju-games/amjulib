@@ -1,7 +1,6 @@
-#if defined(MACOSX) || defined(WIN32)
+#if defined(USE_SHADOW_MAP_OPENGL_1)
 
 #include "ShadowMapOpenGL1.h"
-#define AMJU_USE_GLUT
 #include <AmjuGL.h> // TODO Can merrily use raw OpenGL here
 #include <Screen.h>
 #include "OpenGL.h"
