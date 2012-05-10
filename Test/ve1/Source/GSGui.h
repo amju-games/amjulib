@@ -3,6 +3,7 @@
 
 #include "GSBase.h"
 #include <GuiElement.h>
+#include <GuiImage.h>
 #include "TextDraw.h"
 
 namespace Amju 
@@ -23,6 +24,7 @@ public:
 
 protected:
   PGuiElement m_gui;
+  GuiImage m_bgImage;
 };
 } // namespace
 #endif

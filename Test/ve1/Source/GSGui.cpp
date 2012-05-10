@@ -18,7 +18,12 @@ void GSGui::Update()
 
 void GSGui::Draw()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  m_bgImage.Draw();  
+  AmjuGL::PopAttrib();
 
   GSBase::Draw();
   TextDraw::Draw();
@@ -37,6 +42,13 @@ void GSGui::Draw2d()
 void GSGui::OnActive()
 {
   GSBase::OnActive();
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+
+  if (!m_bgImage.OpenAndLoad("bgimage.txt"))
+  {
+std::cout << "Failed to load GUI bg image!\n";
+    Assert(0);
+  }
 }
 
 void GSGui::OnDeactive()
