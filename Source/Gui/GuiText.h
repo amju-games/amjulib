@@ -54,6 +54,9 @@ protected:
   friend struct WidthFinder;
   float GetTextWidth(const std::string& text);
 
+  // Called twice from Draw, for drop shadow
+  void ReallyDraw();
+
   void DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg);
   void DrawMultiLine();
 
