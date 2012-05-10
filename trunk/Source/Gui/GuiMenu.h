@@ -37,6 +37,9 @@ public:
   virtual void Draw();
   GuiMenu* GetChild() { return m_childMenu; }
 
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+
 private:
   PGuiMenu m_childMenu;
 };

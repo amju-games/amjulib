@@ -96,6 +96,24 @@ void GuiNestMenuItem::Draw()
   }
 }
 
+bool GuiNestMenuItem::OnCursorEvent(const CursorEvent& ce)
+{
+  if (m_childMenu) 
+  {
+    return m_childMenu->OnCursorEvent(ce);
+  }
+  return false;
+}
+
+bool GuiNestMenuItem::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  if (m_childMenu) 
+  {
+    return m_childMenu->OnMouseButtonEvent(mbe);
+  }
+  return false;
+}
+
 GuiMenu::GuiMenu()
 {
   m_selected = -1;
@@ -159,15 +177,24 @@ void GuiMenu::Draw()
 
 bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  GuiComposite::OnMouseButtonEvent(mbe);
+
   if (IsVisible() &&
       mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
-    if (!GetRect(this).IsPointIn(m_cursorPos) &&
-        !(GetParent() && GetRect(GetParent()).IsPointIn(m_cursorPos)))
+    Rect r = GetRect(this);
+    if (!r.IsPointIn(m_cursorPos) 
+      //&& !(GetParent() && GetRect(GetParent()).IsPointIn(m_cursorPos)) // TODO
+    )
     {
+      // TODO Not if this is a fixed menu bar
+
       // Click outside menu area => hide menu
       SetVisible(false);
+
+      // TODO Callback for when menu is made invis
+
       return true; //  handled (for last time until made visible again)
     }
 
@@ -189,6 +216,8 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
 {
+  GuiComposite::OnCursorEvent(ce);
+
   m_cursorPos.x = ce.x;
   m_cursorPos.y = ce.y;
 
@@ -223,6 +252,11 @@ void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
 {
   m_children.push_back(pItem);
   pItem->SetParent(this);
+
+  if (dynamic_cast<GuiNestMenuItem*>(pItem))
+  {
+    m_hideOnSelection = false;
+  }
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();

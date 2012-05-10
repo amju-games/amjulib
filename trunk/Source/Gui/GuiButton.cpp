@@ -1,6 +1,6 @@
 #include <Timer.h>
 #include <TextToSpeech.h>
-#include <CursorManager.h>
+#include "CursorManager.h"
 #include "GuiButton.h"
 #include "Font.h"
 #include "Screen.h"
@@ -237,15 +237,16 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     }
     else 
     {
-      m_isPressed = false; // mouse is released whether command executed or not
-      if (IsMouseOver()) // Only execute if we are on button when we release
+      if (IsMouseOver() && m_isPressed) // Only execute if we are on button when we release
       {
         // Execute command for this button
         ClickSound();
         ExecuteCommand();
         //m_isMouseOver = false; // once clicked, revert to unselected.. OK?? No, is very annoying
+        m_isPressed = false; // mouse is released whether command executed or not
         return true; // handled
       }
+      m_isPressed = false; // mouse is released whether command executed or not
     }
   }
   return false; // not handled
