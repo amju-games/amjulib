@@ -154,6 +154,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
@@ -219,6 +220,7 @@ xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll c:\programdata\
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
+    <ClInclude Include="..\..\..\..\Source\Furniture.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
