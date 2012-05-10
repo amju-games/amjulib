@@ -21,6 +21,12 @@ struct Loc
 };
 typedef std::vector<Loc> Locs;
 
+class GSEditListener : public EventListener
+{
+public:
+  virtual bool OnCursorEvent(const CursorEvent&);
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+};
 
 class GSEdit : public GSBase
 {
@@ -76,6 +82,8 @@ private:
 
   // All locations, so we can jump from one to another
   Locs m_locs;
+
+  RCPtr<EventListener> m_listener;
 };
 
 typedef Singleton<GSEdit> TheGSEdit;
