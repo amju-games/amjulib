@@ -118,6 +118,24 @@ void GuiText::Draw()
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 #endif // _DEBUG
 
+  ReallyDraw();
+
+  /*
+  // Drop shadow version:
+  // Only works if no BG. TODO Drop shadow dir, colours
+  PushColour();
+  ReallyDraw();
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(0, 0.01f, 0);
+  AmjuGL::SetColour(0, 0, 0, 1);
+  ReallyDraw();
+  AmjuGL::PopMatrix();
+  PopColour();
+  */
+}
+
+void GuiText::ReallyDraw()
+{
   Font* font = GetFont();
 
   bool inverse = (m_inverse || IsSelected());
