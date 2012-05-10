@@ -3,6 +3,24 @@
 
 namespace Amju
 {
+// TODO This just returns first cursor. Maybe a bit field so we can tell if multiple cursors
+//  are in the rect ?
+bool CursorManager::IsCursorIn(const Rect& rect, int* cursorIndex) const
+{
+  for (int i = 0; i < NUM_CURSORS; i++)
+  {
+    if (rect.IsPointIn(m_cursors[i]->GetPos()))
+    {
+      if (cursorIndex)
+      {
+        *cursorIndex = i;
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
 bool CursorManager::Load(const Vec2f& hotspot)
 {
   for (int i = 0; i < NUM_CURSORS; i++)
