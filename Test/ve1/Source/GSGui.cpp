@@ -22,6 +22,9 @@ void GSGui::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  static float f = 0;
+  AmjuGL::RotateZ(f);
+  f += 30.0f * TheTimer::Instance()->GetDt();
   m_bgImage.Draw();  
   AmjuGL::PopAttrib();
 
