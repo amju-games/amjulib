@@ -43,15 +43,10 @@ public:
 
 private:
   void ClickSound() const; // TODO in GuiElement ?
+  void SetIsMouseOver(bool);
 
 protected:
   GuiText m_guiText;
-/*
-  // Text - use GUI Text ?
-  std::string m_text;
-  PFont m_font;
-  float m_fontSize;
-*/
   Colour m_textColour;
 
   bool m_isMouseOver; // Draw bigger

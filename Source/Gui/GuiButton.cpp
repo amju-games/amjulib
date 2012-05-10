@@ -1,5 +1,6 @@
 #include <Timer.h>
 #include <TextToSpeech.h>
+#include <CursorManager.h>
 #include "GuiButton.h"
 #include "Font.h"
 #include "Screen.h"
@@ -95,6 +96,13 @@ bool GuiButton::Load(File* f)
  
   m_guiText.SetParent(GetParent());
 
+  // Check for initial mouse over
+  Rect rect = GetRect(this); 
+  if (TheCursorManager::Instance()->IsCursorIn(rect))
+  {
+    SetIsMouseOver(true);
+  }
+ 
   return true;
 }
 
@@ -111,15 +119,15 @@ void GuiButton::Draw()
     static const float PRESSED_OFFSET = 0.01f;
     AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
   }
-/*
-  if (m_isMouseOver)
+
+  if (IsMouseOver())
   {
     // TODO This is no good, the size change depends on the position of the button.
     // Should instead rebuild tri list.
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
-*/
+
 
   if (IsFocusButton() || IsCancelButton()) ///// || HasFocus()) // TODO just one
   {
@@ -182,7 +190,7 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
 
   // Point in button rectangle ?
   Rect r = GetRect(this);
-  m_isMouseOver = (r.IsPointIn(Vec2f(ce.x, ce.y)));
+  SetIsMouseOver(r.IsPointIn(Vec2f(ce.x, ce.y)));
 
   // This isn't right - only handled if we click the button
   ////  return m_isMouseOver; // handled if over this button 
@@ -219,7 +227,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   {
     if (mbe.isDown)
     {
-      m_isPressed = m_isMouseOver;
+      m_isPressed = IsMouseOver();
       if (m_isPressed)
       {
         ClickSound();
@@ -230,7 +238,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     else 
     {
       m_isPressed = false; // mouse is released whether command executed or not
-      if (m_isMouseOver) // Only execute if we are on button when we release
+      if (IsMouseOver()) // Only execute if we are on button when we release
       {
         // Execute command for this button
         ClickSound();
@@ -284,6 +292,21 @@ void GuiButton::SetTextColour(const Colour& col)
 bool GuiButton::IsMouseOver() const
 {
   return m_isMouseOver;
+}
+
+void GuiButton::SetIsMouseOver(bool m)
+{
+  if (m && !m_isMouseOver)
+  {
+    // Could vibrate, or TTS the text
+  }
+
+  m_isMouseOver = m;
+
+  if (m)
+  {
+    SetIsFocusButton(true);
+  }
 }
 
 bool GuiButton::IsPressed() const

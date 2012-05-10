@@ -1,7 +1,8 @@
 #ifndef CURSOR_MANAGER_H
 #define CURSOR_MANAGER_H
 
-#include "Singleton.h"
+#include <Singleton.h>
+#include <Rect.h>
 #include "Cursor.h"
 
 namespace Amju
@@ -17,6 +18,9 @@ public:
   void Draw();
   void Update();
   Cursor* GetCursor(int i);
+
+  // Returns true if a cursor is in the given rect. Can also return index of (first) cursor found.
+  bool IsCursorIn(const Rect& rect, int* cursorIndex = 0) const;
 
 private:
   static const int NUM_CURSORS = 4;
