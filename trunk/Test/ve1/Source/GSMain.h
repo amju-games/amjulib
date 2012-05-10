@@ -55,7 +55,7 @@ private:
   // Debug camera
   float m_yRot;
 
-  RCPtr<GSMainListener> m_listener;
+  RCPtr<EventListener> m_listener;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
