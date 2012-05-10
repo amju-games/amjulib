@@ -1,3 +1,4 @@
+#include <EventPoller.h>
 #include "GSEdit.h"
 #include "Ve1SceneGraph.h"
 #include <AmjuGL.h>
@@ -140,6 +141,16 @@ private:
   std::string m_typename;
 };
 
+bool GSEditListener::OnCursorEvent(const CursorEvent& ce)
+{
+  return TheGSEdit::Instance()->OnCursorEvent(ce);
+}
+
+bool GSEditListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  return TheGSEdit::Instance()->OnMouseButtonEvent(mbe);
+}
+
 GSEdit::GSEdit()
 {
   m_mouseDownLeft = false;
@@ -149,6 +160,7 @@ GSEdit::GSEdit()
   m_newObjectId = -1;
   m_getDragVec = false;
   m_selObj = 0;
+  m_listener = new GSEditListener;
 }
 
 void GSEdit::SetLocs(const Locs& locs)
@@ -400,6 +412,10 @@ std::cout << "Nothing selected, can't change!\n";
     }
   }
 
+  if (b)
+  {
+    GetElementByName(m_gui, "property-comp")->SetVisible(true); // parent
+  }
   GetElementByName(m_gui, "property-value")->SetVisible(b);
   GetElementByName(m_gui, "property-set")->SetVisible(b);
   GetElementByName(m_gui, "property-set-cancel")->SetVisible(b);
@@ -443,6 +459,8 @@ void GSEdit::OnActive()
   GetElementByName(m_gui, "property-cancel")->SetCommand(OnCancelProperty);
   GetElementByName(m_gui, "property-set")->SetCommand(Amju::OnPropertySet);
   GetElementByName(m_gui, "property-set-cancel")->SetCommand(OnPropertySetCancel);
+
+  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 void GSEdit::ShowPropertyList(bool b)
@@ -451,6 +469,7 @@ void GSEdit::ShowPropertyList(bool b)
   props->SetVisible(b);
   if (b)
   {
+//    GetElementByName(m_gui, "property-comp")->SetVisible(true); // parent
     GetElementByName(m_gui, "property-list")->SetVisible(true);
     GetElementByName(m_gui, "property-change")->SetVisible(true);
     GetElementByName(m_gui, "property-value")->SetVisible(false);
@@ -473,7 +492,11 @@ void GSEdit::OnDeactive()
 {
   GSBase::OnDeactive();
   m_gui = 0;
+
+  TheEventPoller::Instance()->RemoveListener(m_menu);
   m_menu = 0;
+
+  TheEventPoller::Instance()->RemoveListener(m_listener);
 
   // TODO Check for outstanding changes, confirm and save to server
 }
@@ -651,10 +674,12 @@ std::cout << "Property for obj: " << it->first << "=" << it->second << "\n";
 void GSEdit::CreateContextMenu()
 {
   m_menu = new GuiMenu;
+  TheEventPoller::Instance()->AddListener(m_menu);
+
   m_menu->SetLocalPos(m_mouseScreen);
   if (m_selectedObjects.empty())
   {
-    m_menu->Clear(); 
+    // ?m_menu->Clear(); 
     m_menu->AddChild(new GuiMenuItem("Go to Location...", OnGotoLocation));
     m_menu->AddChild(new GuiMenuItem("Add new Location...", OnNewLocation));
     m_menu->AddChild(new GuiMenuItem("Update this mesh...", OnEditLocation));
@@ -666,7 +691,7 @@ void GSEdit::CreateContextMenu()
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
     for (unsigned int i = 0; i < types.size(); i++)
     {
-      childMenu->AddChild(new GuiMenuItem("Portal", new NewObjectCommand(types[i])));
+      childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(types[i])));
     }
     // TODO Other types
 
