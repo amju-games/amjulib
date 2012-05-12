@@ -39,7 +39,8 @@ run:
 	cp $(TARGET) $(RUNDIR); \
 	cp -R $(ASSETSDIR)/* $(DATADIR); \
 	cd $(RUNDIR); \
-	./$(APP)
+	echo run | gdb $(APP); \
+	cd -
 
 runclean:
 	rm $(RUNDIR)/* ; make run
