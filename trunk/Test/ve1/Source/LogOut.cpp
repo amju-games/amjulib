@@ -1,3 +1,4 @@
+#include <iostream>
 #include <HttpClient.h>
 #include "LogOut.h"
 #include "Ve1OnlineReqManager.h"
