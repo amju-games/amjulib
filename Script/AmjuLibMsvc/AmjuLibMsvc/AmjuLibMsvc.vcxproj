@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -101,7 +101,7 @@
     <ClCompile>
       <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" 
 /I "../../../Source/Utils/Zlib"
-/I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene" /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community" /I "../../../Source/Image/Png"   %(AdditionalOptions)</AdditionalOptions>
+/I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene" /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community" /I "../../../Source/Image/Png"   /I "../../../Source/Lua" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
@@ -197,10 +197,44 @@
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lbaselib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldblib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldump.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\linit.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\liolib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmathlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loadlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loslib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstrlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltablib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\luac.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\print.c" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
@@ -409,10 +443,35 @@
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
+    <ClInclude Include="..\..\..\Source\Lua\Lua.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llimits.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\luaconf.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lualib.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.h" />
     <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
     <ClInclude Include="..\..\..\Source\Main\main.h" />
     <ClInclude Include="..\..\..\Source\Main\nonglutmain.h" />
