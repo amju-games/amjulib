@@ -1,6 +1,4 @@
 #include <EventPoller.h>
-#include "GSEdit.h"
-#include "Ve1SceneGraph.h"
 #include <AmjuGL.h>
 #include <CursorManager.h>
 #include <Game.h>
@@ -8,7 +6,9 @@
 #include <GameObjectFactory.h>
 #include <GuiListBox.h>
 #include <GuiTextEdit.h>
+#include "GSEdit.h"
 #include "GSNetError.h"
+#include "Ve1SceneGraph.h"
 #include "PickObject.h"
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
@@ -18,6 +18,7 @@
 #include "GSStartMenu.h"
 #include "Portal.h" // TODO hopefully we can query GameObjectFactory
 #include "ProtoObject.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -528,6 +529,8 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
       pos += m_right * dx * 100.0f;
       pos += m_up * dy * 100.0f;
       obj->SetPos(pos);
+
+std::cout << "Should be sending pos update: " << pos << "\n";
 
       TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
     }

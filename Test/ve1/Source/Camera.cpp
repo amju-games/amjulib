@@ -11,6 +11,7 @@ static const float CAM_Y = 100.0f;
 static const float CAM_Z = 150.0f;
 static float zDist = CAM_Z;
 static float yRot = 0;
+static float yRot2 = 0;
 
 static bool leftDrag = false;
 static bool rightDrag = false;
@@ -48,11 +49,13 @@ void Camera::Update()
       if (pdist < MAX_DIST) 
       {
         yRot = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_DIST); 
-std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
+
+//std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
       }
     }
-    
-    Vec3f eye(pos.x + sin(yRot) * zDist, pos.y + CAM_Y, pos.z + cos(yRot) * zDist);
+   
+    float y = yRot + yRot2; 
+    Vec3f eye(pos.x + sin(y) * zDist, pos.y + CAM_Y, pos.z + cos(y) * zDist);
 
     SetEyePos(eye); 
     SetLookAtPos(pos);
@@ -60,7 +63,8 @@ std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x="
   else
   {
     const Vec3f& pos = posNoTarget; 
-    SetEyePos(Vec3f(pos.x + sin(yRot) * zDist, pos.y + CAM_Y, pos.z + cos(yRot) * zDist));
+    float y = yRot + yRot2; 
+    SetEyePos(Vec3f(pos.x + sin(y) * zDist, pos.y + CAM_Y, pos.z + cos(y) * zDist));
     SetLookAtPos(pos);
 
     //SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
@@ -106,7 +110,7 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   }
   if (rightDrag)
   {
-    yRot += dx;
+    yRot2 += dx;
     b = true;
   }
   if (midDrag)

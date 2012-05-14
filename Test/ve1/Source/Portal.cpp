@@ -13,6 +13,9 @@ namespace Amju
 const char* Portal::TYPENAME = "portal";
 static const char* DEST_KEY = "dest_portal_id";
 
+static const float XSIZE = 20.0f; // TODO CONFIG
+static const float YSIZE = 40.0f;
+
 GameObject* CreatePortal()
 {
   return new Portal;
@@ -27,9 +30,7 @@ const char* Portal::GetTypeName() const
 
 Portal::Portal()
 {
-  // TODO Survives between sessions ??
-  m_isPickable = (GetGameMode() == AMJU_MODE_EDIT);
-  m_isOpen = true;
+  m_isOpen = true; // TODO
 
   Set(DEST_KEY, "1"); // value is game object ID for destination portal
 }
@@ -76,18 +77,27 @@ AABB* Portal::GetAABB()
 
 void Portal::Update()
 {
-}
-
-void Portal::OnLocationEntry()
-{
-  static const float XSIZE = 20.0f; // TODO CONFIG
-  static const float YSIZE = 40.0f;
   m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - XSIZE, m_pos.z + XSIZE);
 
   if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    *(m_sceneNode->GetAABB()) = m_aabb;
+  }
+}
+
+void Portal::OnLocationEntry()
+{
+  m_isPickable = (GetGameMode() == AMJU_MODE_EDIT);
+
+  m_aabb.Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+  //if (GetGameMode() == AMJU_MODE_EDIT)
   {
     // Add node to Scene Graph
     m_sceneNode = new Ve1Node(this);

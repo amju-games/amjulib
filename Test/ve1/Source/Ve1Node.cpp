@@ -31,12 +31,14 @@ void Ve1Node::Draw()
   DrawSolidAABB(*(m_obj->GetAABB()));
   DrawAABB(*(m_obj->GetAABB()));
 
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::PushAttrib(
+    AmjuGL::AMJU_TEXTURE_2D | AmjuGL:: AMJU_LIGHTING | AmjuGL::AMJU_BLEND | AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_DEPTH_WRITE);
 
-  // TODO Draw info
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
 
   AmjuGL::PushMatrix();
   AmjuGL::SetIdentity();
@@ -61,8 +63,7 @@ void Ve1Node::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::PopMatrix();
 
-  AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-  AmjuGL::Disable(AmjuGL::AMJU_BLEND);
+  AmjuGL::PopAttrib();
 }
 
 }

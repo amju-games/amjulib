@@ -2,10 +2,14 @@
 #include "Furniture.h"
 #include "Ve1Node.h"
 #include "Ve1SceneGraph.h"
+#include "GameMode.h"
 
 namespace Amju
 {
 const char* Furniture::TYPENAME = "furniture";
+  
+static const float XSIZE = 20.0f; // TODO CONFIG
+static const float YSIZE = 40.0f;
 
 GameObject* CreateFurniture()
 {
@@ -27,6 +31,16 @@ const char* Furniture::GetTypeName() const
 void Furniture::Update()
 {
   // If we have moved, respond to collisions with walls; get height; set AABB
+  AABB aabb;
+  aabb.Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+  if (m_sceneNode)
+  {
+    *(m_sceneNode->GetAABB()) = aabb;
+  }
 
   // If moving and like a ball, we should rotate
 }
@@ -46,8 +60,6 @@ void Furniture::OnLocationEntry()
 
   // Set AABB
 
-  static const float XSIZE = 20.0f; // TODO CONFIG
-  static const float YSIZE = 40.0f;
   AABB aabb;
   aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
