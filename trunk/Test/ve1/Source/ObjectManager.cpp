@@ -544,7 +544,10 @@ std::cout << "#¢#¢#¢ In ObjectManager::SetLocalPlayerLocation...\n";
   {
 std::cout << "Er, setting location to current value!\n";
     // TODO Commenting this out doesn't fix problem :-(
-    return;
+    if (GetGameMode() != AMJU_MODE_EDIT)
+    {
+      return;
+    }
   }
 
   // Why not do this ??
