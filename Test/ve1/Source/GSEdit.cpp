@@ -493,7 +493,10 @@ void GSEdit::OnDeactive()
   GSBase::OnDeactive();
   m_gui = 0;
 
-  TheEventPoller::Instance()->RemoveListener(m_menu);
+  if (m_menu)
+  {
+    TheEventPoller::Instance()->RemoveListener(m_menu);
+  }
   m_menu = 0;
 
   TheEventPoller::Instance()->RemoveListener(m_listener);
