@@ -268,10 +268,15 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
     return false;
   }
 
-  if (!HasFocus())
-  {
-    return false;
-  }
+  // Buttons can generate key events, so this GuiTextEdit object may not have the focus (the button
+  //  just clicked would have it). So the last GuiTextEdit to have the focus should accept this key.
+//  if (!HasFocus())
+//  {
+//    return false;
+//  }
+
+  // Is this the current or most recent GuiTextEdit to have focus ?
+  // TODO 
 
   if (!ke.keyDown)
   {

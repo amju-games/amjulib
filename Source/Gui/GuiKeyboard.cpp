@@ -1,3 +1,4 @@
+#include <EventPoller.h>
 #include "GuiKeyboard.h"
 
 namespace Amju
@@ -6,18 +7,25 @@ const char* GuiKeyboard::NAME = "gui-kb";
 
 struct KbCommand : public GuiCommand
 {
-  KbCommand(char c) : m_char(c)
+  KbCommand(const KeyEvent& ke) : m_ke(ke)
   {
   }
 
   virtual bool Do()
   {
-    std::cout << "Generating key event: " << m_char << "\n";
+    // Generate key down followed by key up event
+    KeyEvent* k1 = new KeyEvent(m_ke);
+    k1->keyDown = true;
+    TheEventPoller::Instance()->GetImpl()->QueueEvent(k1);
 
+    KeyEvent* k2 = new KeyEvent(m_ke);
+    k2->keyDown = false;
+    TheEventPoller::Instance()->GetImpl()->QueueEvent(k2);
+ 
     return false; // no undo
   }
 
-  char m_char;
+  KeyEvent m_ke;
 };
 
 bool GuiKeyboard::Load(File* file)
@@ -46,7 +54,14 @@ bool GuiKeyboard::Load(File* file)
   {
 //std::cout << "Set command for key " << CHARS[i] << "\n";
 
-    Amju::GetElementByName(this, std::string(1, CHARS[i]))->SetCommand(new KbCommand(CHARS[i])); 
+    KeyEvent ke;
+    // Printable char
+    ke.keyType = AMJU_KEY_CHAR;
+    ke.key = CHARS[i];
+    ke.keyDown = true;
+    ke.modifier = AMJU_KEY_MOD_NONE;
+    
+    Amju::GetElementByName(this, std::string(1, CHARS[i]))->SetCommand(new KbCommand(ke)); 
   }
   // Arrow keys etc ?
 
