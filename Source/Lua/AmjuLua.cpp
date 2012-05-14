@@ -12,6 +12,7 @@ Class to wrap Lua C API
 #include <iostream>
 extern "C"
 {
+#include "LuaLib/lua.h"
 #include "LuaLib/lualib.h"
 #include "LuaLib/lauxlib.h"
 }
