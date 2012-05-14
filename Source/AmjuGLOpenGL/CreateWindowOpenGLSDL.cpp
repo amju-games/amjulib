@@ -1,7 +1,4 @@
-#if defined(WIN32) && defined(AMJU_USE_SDL)
-
 #include "AmjuGL-OpenGL.h"
-// Use SDL for now
 #include <SDL.h>
 #include "ReportError.h"
 #include "AmjuAssert.h"
@@ -55,5 +52,4 @@ bool CreateWindowSDLOpenGL(AmjuGLWindowInfo* w)
 }
 }
 
-#endif // WIN32
 
