@@ -15,7 +15,7 @@ extern "C"
 #include "LuaLib-5.1.4/lualib.h"
 #include "LuaLib-5.1.4/lauxlib.h"
 }
-#include "Lua.h"
+#include "AmjuLua.h"
 #include <File.h>
 
 #define LUA_DEBUG
@@ -29,11 +29,8 @@ Lua::Lua()
   m_pL = lua_open();
 
   // Include all lua libraries.
-  luaopen_base(m_pL);
-//  luaopen_io(m_pL);
-  luaopen_string(m_pL);
-  luaopen_table(m_pL);
-  luaopen_math(m_pL);
+  luaL_openlibs(m_pL);
+
   luaopen_debug(m_pL); // we want to make it as easy as possible to 
     // debug scripts!
 }
