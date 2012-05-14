@@ -1,5 +1,5 @@
 
-MACHDEP =  -arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_GLUT 
+MACHDEP =  -arch i386 -DMACOSX -DXP_MACOSX -D__i386__ 
 # __i386__ for intel mac
 # XP_MACOSX for libpng
 # AMJU_USE_GLUT for window creation etc

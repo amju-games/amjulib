@@ -14,6 +14,7 @@ SOURCES := ../../Source \
   $(AMJU)/Collision \
   $(AMJU)/Community \
   $(AMJU)/Events \
+  $(AMJU)/EventsSDL \
   $(AMJU)/FileUtils \
   $(AMJU)/Font \
   $(AMJU)/Game \
@@ -42,7 +43,7 @@ SOURCES := ../../Source \
   $(AMJU)/Utils/Xml \
   $(AMJU)/Utils/Zlib
 
-EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG
+EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
   
