@@ -7,7 +7,7 @@
 #include <ClipLineSegBox.h>
 #include "Ve1Object.h"
 
-//#define PICK_DEBUG
+#define PICK_DEBUG
 
 namespace Amju
 {
@@ -31,6 +31,9 @@ GameObject* PickObject(const Vec2f& mouseScreen)
     Assert(v);
     if (!v->IsPickable())
     {
+#ifdef PICK_DEBUG
+std::cout << " Obj " << pgo->GetId() << " is not pickable.\n";
+#endif
       continue;
     }
 
@@ -54,6 +57,14 @@ std::cout << " Obj " << pgo->GetId() << " AND IS CLOSEST!\n";
         bestDist = dist;
         selectedObj = pgo;
       }
+    }
+    else if (aabb)
+    {
+std::cout << " Obj " << pgo->GetId() << " is not picked.\n";
+    }
+    else
+    {
+std::cout << " Obj " << pgo->GetId() << " has no AABB.\n";
     }
   }
 
