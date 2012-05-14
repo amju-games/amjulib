@@ -8,7 +8,7 @@
 #include <SoundManager.h>
 #include <BassSoundPlayer.h>
 #include <AmjuGLWindowInfo.h>
-#include <EventPollerImplGeneric.h>
+#include <EventPoller.h>
 
 // TODO include glut.h for other platforms
 #ifdef MACOSX
@@ -48,7 +48,7 @@ void draw()
 
 void QueueEvent(Amju::Event* e)
 {
-  ((Amju::EventPollerImplGeneric*)Amju::TheEventPoller::Instance()->GetImpl())->QueueEvent(e);
+  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
 void key(char k, bool down)
@@ -234,7 +234,7 @@ int main(int argc, char **argv)
   }
   glutJoystickFunc(joystick, 50);
 
-  TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric); 
+  TheEventPoller::Instance()->SetImpl(new EventPollerImpl); 
 
   AmjuGL::SetImpl(new AmjuGLOpenGL(CreateWindowGLUT));
 
