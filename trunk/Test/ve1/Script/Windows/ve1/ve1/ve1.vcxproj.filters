@@ -210,6 +210,12 @@
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Baddie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Ve1ObjectChar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -401,6 +407,15 @@
     <ClInclude Include="..\..\..\..\Source\Furniture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Baddie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Fightable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Ve1ObjectChar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
@@ -412,5 +427,10 @@
     <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9d.lib" />
     <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx11.lib" />
     <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx11d.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\newgui.pl" />
+    <None Include="..\..\..\..\Source\newreq.pl" />
+    <None Include="..\..\..\..\Source\newstate.pl" />
   </ItemGroup>
 </Project>
