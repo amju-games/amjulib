@@ -1,17 +1,17 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2006
-$Log: LuaTest.cpp,v $
-Revision 1.1  2006/01/16 13:40:34  jay
-Test harness for Lua class
-
-*/
+#ifdef WIN32
+#ifdef _DEBUG
+#pragma comment(lib, "../../../../../../Build/Debug/AmjuLibMsvc.lib")
+#else
+#pragma comment(lib, "../../../../../../Build/Release/AmjuLibMsvc.lib")
+#endif 
+#endif // WIN32
 
 #include <iostream>
 #include <string>
-#include "Lua.h"
+#include <Lua.h>
 
 namespace Amju
-{
+{ 
 void ReportError(const std::string& e)
 {
   std::cout << e.c_str() << "\n";

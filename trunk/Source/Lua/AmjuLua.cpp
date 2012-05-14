@@ -12,9 +12,8 @@ Class to wrap Lua C API
 #include <iostream>
 extern "C"
 {
-#include "LuaLib/lua.h"
-#include "LuaLib/lualib.h"
-#include "LuaLib/lauxlib.h"
+#include "LuaLib-5.1.4/lualib.h"
+#include "LuaLib-5.1.4/lauxlib.h"
 }
 #include "Lua.h"
 #include <File.h>
@@ -31,7 +30,7 @@ Lua::Lua()
 
   // Include all lua libraries.
   luaopen_base(m_pL);
-  luaopen_io(m_pL);
+//  luaopen_io(m_pL);
   luaopen_string(m_pL);
   luaopen_table(m_pL);
   luaopen_math(m_pL);
@@ -51,8 +50,8 @@ std::cout << "Loading lua script " << filename << "...\n";
 #endif
 
   // TODO TEMP TEST
-  int r = lua_dofile(m_pL, filename); 
-     //luaL_loadfile(m_pL, filename);
+  int r = //lua_dofile(m_pL, filename); 
+     luaL_loadfile(m_pL, filename);
 #ifdef LUA_DEBUG
 std::cout << " ..result: " << r << "\n";
 #endif
