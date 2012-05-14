@@ -54,6 +54,14 @@ public:
   CollisionMesh* GetCollisionMesh() { return m_collMesh; }
   void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(m_collMesh); }
 
+  virtual void Draw()
+  {
+    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING);
+    AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+    SceneMesh::Draw();
+    AmjuGL::PopAttrib();
+  }
+
 private:
   Terrain* m_terrain;
   PCollisionMesh m_collMesh;
