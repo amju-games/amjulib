@@ -28,12 +28,6 @@ include $(AMJULIB_MAC_SCRIPT_PATH)/mac_rules
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
 
-# define these in Makefile then include this file
-
-# j.c. we want the Build dir to not be in here - this needed a change further down.
-#BUILD		:=	../../../../Build/obj2bin/Mac
-#TARGET		:=	$(BUILD)/obj2bin
-#AMJU      := ../../../../Source
 
 AMJU_LIB_DIRS := \
   $(AMJU)/AmjuGL \
@@ -42,6 +36,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Collision \
   $(AMJU)/Community \
   $(AMJU)/Events \
+  $(AMJU)/EventsSDL \
   $(AMJU)/FileUtils \
   $(AMJU)/Font \
   $(AMJU)/Game \
@@ -77,8 +72,12 @@ INCLUDES	:=	$(AMJU_LIB_DIRS)
 # options for code generation
 #---------------------------------------------------------------------------------
 # In EXTRA_CFLAGS specify -g -O0 or -O2
-CFLAGS	=  -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
+
+# Wait, $(INCLUDE) is not defined until later - surely this is wrong. Move this block down ?
+CFLAGS	=  -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS) 
+#-I/Library/Frameworks/SDL.framework/Headers
 CXXFLAGS	=	$(CFLAGS)
+OBJCFLAGS	=	$(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -Wl
 
@@ -128,6 +127,8 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 #---------------------------------------------------------------------------------
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
+MMFILES         :=      $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mm)))
+MFILES         :=      $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.m)))
 sFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.S)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
@@ -146,12 +147,14 @@ endif
 export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(addsuffix .o,$(TPLFILES)) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
+					$(MFILES:.m=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o)
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
 #---------------------------------------------------------------------------------
-export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
+export INCLUDE	:=	-I/Library/Frameworks/SDL.framework/Headers \
+					$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					-I$(CURDIR)/$(BUILD)
 
