@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-7
+8
 
 // Element type
 gui-text
@@ -32,7 +32,7 @@ multi-text1
 // Text
 I am some multi-line text. This should go on separate lines.
 // Font name, size
-arial, 0.75, left, multi
+arial, 0.75, centre, multi, bgcol=ff0000, fgcol=ffffff
 
 // Element type
 gui-text-edit
@@ -84,6 +84,27 @@ OK
 // Font name, size
 arial, 1.0 
 
+// GUI KEYBOARD
 gui-kb
-// TODO
+// KB is loaded from separate file, which depends on Language etc.
+// name, pos, size as for other elements
+kb1
+0.2, -0.2
+//0.6, 0.3
+1.0, 1.0
+
+// Dialog
+gui-dialog
+mydialog
+-0.2, 0
+0.4, 0.3
+// children
+1
+
+gui-text
+text-on-dialog
+0, 0
+0.4, 0.1
+Hello, I am some text on the dialog
+arial, 1.0, fgcol=000000
 

@@ -9,7 +9,9 @@
 #endif // WIN32
 
 #define AMJU_USE_OPENGL
+#define AMJU_USE_GLUT
 
+#include <iostream>
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
