@@ -1,15 +1,13 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include "Ve1Object.h"
+#include "Ve1ObjectChar.h"
 #include <Shadow.h>
 #include <SceneMesh.h>
 
 namespace Amju
 {
-class Ve1Character;
-
-class Player : public Ve1Object
+class Player : public Ve1ObjectChar
 {
 public:
   static const char* TYPENAME;
@@ -30,49 +28,18 @@ public:
   bool IsLocalPlayer() const; 
 //  void SetIsLocalPlayer(bool);
 
-  const std::string& GetName() const;
-  void SetName(const std::string& name);
-
   // Ve1Object overrides
-  virtual void MoveTo(const Vec3f& newPos);
   virtual void Set(const std::string& key, const std::string& val);
   virtual void SetMenu(GuiMenu*);
-
-  // Set direction which character should face - we rotate to face this
-  //  direction over time - DEGREES
-  void SetDir(float degs);
-
-  virtual AABB* GetAABB();
 
   // Set position of arrow for this player, i.e. where we want to go
   void SetArrowPos(const Vec3f& pos); 
   void SetArrowVis(bool visible);
 
 protected:
-  void TurnToFaceDir();
-
-protected:
-  std::string m_name;
-
-  Vec3f m_newPos; // pos we are aiming for
-  bool m_isMoving; // travelling towards m_newPos
-
-  RCPtr<Ve1Character> m_sceneNode;
-  
-  float m_dir; // Direction of movement - DEGREES
-  float m_dirCurrent; // Direction we currently face -- we will reduce the difference
-   // between m_dirCurrent and m_dir until we face the direction of movement.
-
   bool m_isLocal;
 
-  RCPtr<Shadow> m_shadow;
   RCPtr<SceneMesh> m_arrow; // destination arrow
-
-  // Set when we enter a new location 
-  bool m_inNewLocation;
-
-  // Start fading out when a player has logged out
-  float m_fadeTime;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);

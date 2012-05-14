@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <Game.h>
 #include <AmjuGL.h>
-#include <Teapot.h>
+//#include <Teapot.h>
 #include "Ve1SceneGraph.h"
 #include <iostream>
 #include "Ve1Character.h"
@@ -24,6 +24,9 @@
 
 namespace Amju
 {
+static const float XSIZE = 10.0f;
+static const float YSIZE = 30.0f;
+
 class PlayerSceneNode : public Ve1Character
 {
 public:
@@ -93,24 +96,10 @@ GameObject* CreatePlayer()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Player::TYPENAME, CreatePlayer);
 
-Player::Player() : m_sceneNode(0)
+Player::Player() 
 {
-  m_dir = 0;
-  m_dirCurrent = m_dir;
   m_isLocal = false;
-  m_isMoving = false;
-  m_inNewLocation = false;
   m_fadeTime = 0;
-}
-
-const std::string& Player::GetName() const
-{
-  return m_name;
-}
-
-void Player::SetName(const std::string& name)
-{
-  m_name = name;
 }
 
 bool Player::Load(File* f)
@@ -217,38 +206,10 @@ void Player::SetArrowPos(const Vec3f& newpos)
   m.Translate(newpos);
   m_arrow->SetLocalTransform(m);
 
-  static const float XSIZE = 10.0f;
-  static const float YSIZE = 30.0f;
   m_arrow->GetAABB()->Set(
     newpos.x - XSIZE, newpos.x + XSIZE,
     newpos.y, newpos.y + YSIZE,
     newpos.z - XSIZE, newpos.z + XSIZE);
-}
-
-void Player::MoveTo(const Vec3f& newpos)
-{
-  m_newPos = newpos;
-  m_isMoving = true;
-
-//std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
-
-  Vec3f dir = GetPos() - newpos;
-
-  // Why TF was this commented out??!?!?!
-  if (dir.SqLen() < 1.0f) // TODO CONFIG
-  {
-    SetVel(Vec3f(0, 0, 0));
-    SetArrowVis(false);
-  }
-  else
-  {
-    dir.Normalise();
-    static const float SPEED = 50.0f; // TODO CONFIG
-    SetVel(-dir * SPEED);
-
-    // Work out direction to face
-    SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
-  }
 }
 
 void Player::Update()
@@ -259,7 +220,7 @@ void Player::Update()
     return; 
   }
 
-  GameObject::Update();
+  GameObject::Update(); // TODO Why not Ve1Object ?
   
   // Tell shadow the collision mesh it is casting onto
   // TODO Use octree etc
@@ -319,8 +280,6 @@ void Player::Update()
     // TODO TEMP TEST
 ////    *(m_arrow->GetAABB()) = *(m_sceneNode->GetAABB());
 
-    static const float XSIZE = 15.0f;
-    static const float YSIZE = 60.0f;
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
       m_pos.y, m_pos.y + YSIZE,
@@ -379,55 +338,6 @@ void Player::Update()
     }
 
   }
-}
-
-void Player::SetDir(float degs)
-{
-  m_dir = degs;
-}
-
-void Player::TurnToFaceDir()
-{
-  Matrix mat;
-  mat.RotateY(DegToRad(m_dirCurrent));
-  mat.TranslateKeepRotation(m_pos);
-  m_sceneNode->SetLocalTransform(mat);
-
-  static const float ROT_SPEED = 10.0f; // TODO CONFIG
-  float dt = TheTimer::Instance()->GetDt();
-  float angleDiff = m_dir - m_dirCurrent;
-
-  // Rotate to face m_dir, taking the shortest route (CW or CCW)
-  if (fabs(angleDiff) < 10.0f)
-  {
-    m_dirCurrent = m_dir;
-  }
-  else
-  {
-    if (angleDiff < -180.0f)
-    {
-      m_dir += 360.0f;
-    }
-    else if (angleDiff > 180.0f)
-    {
-      m_dir -= 360.0f;
-    }
-    angleDiff = m_dir - m_dirCurrent;
-
-    if (m_dirCurrent > m_dir)
-    {
-      m_dirCurrent -= ROT_SPEED * dt * fabs(angleDiff);
-    }
-    else if (m_dirCurrent < m_dir)
-    {
-      m_dirCurrent += ROT_SPEED * dt * fabs(angleDiff);
-    }
-  }
-}
-
-AABB* Player::GetAABB()
-{
-  return m_sceneNode->GetAABB();
 }
 
 class CommandTalk : public GuiCommand
