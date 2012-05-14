@@ -3,14 +3,37 @@
 #include <Timer.h>
 #include <AmjuGL.h>
 #include <iostream>
+#include <EventPoller.h>
 
 namespace Amju
 {
 static float yrot = 0;
 
+bool GameStateListener::OnQuitEvent()
+{
+  return TheGame::Instance()->OnQuitEvent();
+}
+
+bool GameStateListener::OnCursorEvent(const CursorEvent& ce)
+{
+  return m_state->OnCursorEvent(ce);
+}
+
+bool GameStateListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  return m_state->OnMouseButtonEvent(mbe);
+}
+
+bool GameStateListener::OnKeyEvent(const KeyEvent& ke)
+{
+  return m_state->OnKeyEvent(ke);
+}
+
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 {
   m_nextState = 0;
+  m_listener = new GameStateListener(this);
+  TheEventPoller::Instance()->AddListener(m_listener); // TODO use OnActive/OnDeactive
 }
 
 void GSBase::Draw()
@@ -67,6 +90,11 @@ bool GSBase::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   {
     drag = mbe.isDown;  
   }
+  return false;
+}
+
+bool GSBase::OnKeyEvent(const KeyEvent& ke)
+{
   return false;
 }
 
