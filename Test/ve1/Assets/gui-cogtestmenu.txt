@@ -1,0 +1,42 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+3
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Please choose cognitive test type...
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+gui-button
+letter1-button
+-0.4, 0.3
+0.8, 0.2
+gui-button-4.png
+letter cancellation 1
+arial, 1.0
+
+// no game button
+gui-button
+cancel-button
+-0.4, -0.3
+0.8, 0.2
+gui-button-4.png
+cancel
+arial, 1.0 
+
+
