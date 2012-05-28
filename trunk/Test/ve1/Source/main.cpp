@@ -16,10 +16,7 @@
 #include <ResourceManager.h>
 #include <ObjMesh.h>
 #include <Font.h>
-#include "GSTitle.h"
-#include "GSMain.h"
-#include "GSLogin.h"
-#include "GSAvatarMod.h"
+#include "GSCopyAssets.h"
 #include <CursorManager.h>
 #include <File.h>
 #include <Directory.h>
@@ -28,7 +25,7 @@
 #include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
-#include "SAPCollideFunc.h"
+//#include "SAPCollideFunc.h"
 #include "QuitHandler.h"
 #include "JoystickToCursor.h" // TODO TEMP TEST
 
@@ -75,7 +72,8 @@ void StartUp()
   // Create empty root node
   ClearVe1SceneGraph();
 
-  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+  // Start with state that copies assets to Save Dir
+  TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
 }
 }
 
