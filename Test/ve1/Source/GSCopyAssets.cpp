@@ -11,7 +11,7 @@ std::string GetDataDir()
   std::string dataDir = GetProcessDir();
 
 #ifdef WIN32
-  dataDir += "/Data";
+  dataDir += "/Data/";
 #endif
 
 #ifdef MACOSX
@@ -48,7 +48,7 @@ bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
   // Check all files, copying if necessary.
   for (unsigned int i = 0; i < files.size(); i++)
   {
-//std::cout << files[i] << "\n";
+//std::cout << "In " << srcDir << ": " << files[i] << "\n";
 
     CopyFileIfMissing(files[i], srcDir, destDir);
   }
