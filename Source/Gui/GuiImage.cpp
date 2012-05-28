@@ -74,4 +74,9 @@ bool GuiImage::Load(File* f)
 
   return true;
 }
+
+void GuiImage::SetTexture(Texture* tex)
+{
+  m_texture = tex;
+}
 }
