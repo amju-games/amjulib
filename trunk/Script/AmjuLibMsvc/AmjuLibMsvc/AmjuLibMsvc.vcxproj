@@ -448,7 +448,7 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
-    <ClInclude Include="..\..\..\Source\Lua\Lua.h" />
+    <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.h" />
