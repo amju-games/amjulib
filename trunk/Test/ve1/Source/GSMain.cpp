@@ -212,7 +212,7 @@ void GSMain::OnActive()
   pauseButton->SetCommand(Amju::OnPauseButton);
   //TheEventPoller::Instance()->SetListenerPriority(pauseButton, -1); // so we don't move to the button pos
 
-  m_gui->GetElementByName("build-button")->SetCommand(Amju::OnBuildButton);
+  ////GetElementByName(m_gui, "build-button")->SetCommand(Amju::OnBuildButton);
 
   TheChatConsole::Instance()->OnActive();
 
