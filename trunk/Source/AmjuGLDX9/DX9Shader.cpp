@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX9
+
 #include "AmjuFirst.h"
 #include "DX9Shader.h"
 #include "AmjuGL-DX9.h"
@@ -269,3 +271,5 @@ void DX9Shader::Set(const std::string& name, AmjuGL::TextureHandle texId)
 }
 
 }
+
+#endif // AMJU_OFFER_DX9

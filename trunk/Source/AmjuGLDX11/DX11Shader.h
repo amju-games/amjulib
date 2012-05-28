@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX11
+
 #ifndef DX11_SHADER_H
 #define DX11_SHADER_H
 
@@ -53,7 +55,8 @@ private:
   ID3D11PixelShader* m_pPixelShader;
   ID3DBlob* pVSBlob; // what is this for ?
 };
-
 }
 
-#endif
+#endif // include guard
+
+#endif // AMJU_OFFER_DX11

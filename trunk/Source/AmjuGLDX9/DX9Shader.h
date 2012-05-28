@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX9
+
 #ifndef DX9_SHADER_H
 #define DX9_SHADER_H
 
@@ -47,4 +49,6 @@ private:
 
 }
 
-#endif
+#endif // include guard
+
+#endif // AMJU_OFFER_DX9
