@@ -14,26 +14,26 @@ gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 0.2
+-1.0, 0.8
 // size
 2.0, 0.1
 // Text
 Paused
 // Font name, size
-arial, 1.0
+arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // element type
 gui-button
 // Element name
 resume-button
 // pos (coords are -1..1)
--0.4, -0.2
+-0.4, -0.5
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-resume >
+resume
 // Font name, size
 arial, 2.0 
 
@@ -42,7 +42,7 @@ gui-button
 // Element name
 options-button
 // pos (coords are -1..1)
--0.4, -0.5
+-0.4, 0.3
 // size
 0.8, 0.2
 // Image
@@ -57,7 +57,7 @@ gui-button
 // Element name
 quit-button
 // pos (coords are -1..1)
--0.4, -0.8
+-0.4, 0.0
 // size
 0.8, 0.2
 // Image
