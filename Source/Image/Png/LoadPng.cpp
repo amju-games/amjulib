@@ -2,6 +2,7 @@
 #include "png.h"
 #include <File.h>
 #include <ReportError.h>
+#include <StringUtils.h>
 
 // Most of this code taken from LIBPNG example.c
 
@@ -11,7 +12,11 @@ static void ReadFunc(png_structp png, png_bytep data, png_size_t size)
 {
   File* f = (File*)png_get_io_ptr(png); 
   unsigned int bytesRead = f->GetBinary(size, data);
-  Assert(bytesRead == size);
+  if (bytesRead != size)
+  { 
+    std::string err = "Read failed! bytesRead: " + ToString(bytesRead) + " size: " + ToString((unsigned int)size);
+    f->ReportError(err);
+  }
 }
 
 unsigned char* LoadPng(
