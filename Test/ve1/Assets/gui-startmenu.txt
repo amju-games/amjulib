@@ -20,7 +20,7 @@ text1
 // Text
 Please choose game type...
 // Font name, size
-arial, 1.0
+arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // Single-player button
 // element type
@@ -63,21 +63,21 @@ gui-button-4.png
 no game
 arial, 2.0 
 
-// Local for development only
 gui-button
-local-button
+cancel-button
 -0.2, -0.6
 0.4, 0.1
 gui-button-4.png
-local
+cancel
 arial, 1.0 
 
-// Button for editing content
+// TODO normally hidden
 gui-button
-edit-button
+admin-button
 -0.2, -0.75
 0.4, 0.1
 gui-button-4.png
-edit mode
+admin...
 arial, 1.0 
+
 

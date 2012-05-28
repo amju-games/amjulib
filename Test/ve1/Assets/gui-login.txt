@@ -19,7 +19,7 @@ email
 // Text
 jason@amju.com
 // Font name, size
-arial, 1.0
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
 
 // Element type
 gui-text
@@ -32,7 +32,7 @@ text1
 // Text
 Please enter your email address...
 // Font name, size
-arial, 1.0
+arial, 1.0, bgcol=000000, fgcol=ffffff
 
 gui-button
 login-button

@@ -43,7 +43,7 @@ question
 // size
 2.0, 0.3
 // Text
-This is the title page. I am a long string that ought to be split up into multiple lines.
+This is the question
 // Font name, size
-arial, 1.0, multi
+arial, 1.0, bgcol=000000, fgcol=ffffff
 

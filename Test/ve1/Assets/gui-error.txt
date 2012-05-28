@@ -18,9 +18,9 @@ text1
 // size
 2.0, 0.1
 // Text
-Oh dear...
+Oh dear!
 // Font name, size
-arial, 1.0
+arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // Element type
 gui-text
@@ -33,7 +33,7 @@ error
 // Text
 error
 // Font name, size
-arial, 0.5, left, multi
+arial, 1.0, left, multi, bgcol=000000, fgcol=ffffff
 
 // element type
 gui-button

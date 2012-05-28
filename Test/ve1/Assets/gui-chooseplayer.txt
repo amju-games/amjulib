@@ -44,7 +44,7 @@ arial, 2.5
 
 gui-button
 cancel-button
--0.4, -0.7
+-0.4, -0.65
 0.8, 0.2
 gui-button-4.png
 cancel
@@ -56,11 +56,11 @@ gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 1.0
+-1.0, 0.8 
 // size
-2.0, 0.3
+2.0, 0.1
 // Text
-Choose player
+Please choose player...
 // Font name, size
-arial, 2.0, centre
+arial, 1.0, centre, bgcol=000000, fgcol=ffffff
 
