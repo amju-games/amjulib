@@ -82,6 +82,8 @@ private:
 
 void GSChoosePlayer::OnActive()
 {
+  GSGui::OnActive();
+
   Strings players = ThePlayerInfoManager::Instance()->GetPlayerNames();
   int numPlayers = players.size();
 
@@ -92,8 +94,6 @@ std::cout << "GSChoosePlayer: no existing player names.\n";
     OnNewPlayer();
     return;
   }
-
-  GSGui::OnActive();
 
   m_gui = LoadGui("gui-chooseplayer.txt");
   Assert(m_gui);
