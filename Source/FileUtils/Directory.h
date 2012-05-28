@@ -27,6 +27,7 @@ Added to repository
 namespace Amju
 {
 // Lists all files in the given directory.
+// File::Root is NOT prepended to directory.
 // If useGlue is true, and a Glue File is ready, the list of files in
 // the glue file is returned. In this case the directory is not used.
 // Returns true if successful.
@@ -45,7 +46,7 @@ bool Dir(
 std::string GetSaveDir(const std::string& appName);
 
 // Get user desktop directory.
-// This is for saving fles that we want the user to be able to
+// This is for saving files that we want the user to be able to
 // find easily.
 std::string GetDesktopDir();
 
@@ -62,6 +63,10 @@ bool FileExists(const std::string& filename);
 // Delete a file FROM THE OS FILESYSTEM: not a glue file
 enum DeleteResult { AMJU_FILE_DOES_NOT_EXIST, AMJU_DELETED_OK, AMJU_DELETE_FAILED };
 DeleteResult AmjuDeleteFile(const std::string& filename);
+
+// Copy an OS file from srcDir to destDir. I.e. like 'cp srcDir/filename destDir/'
+// srcDir and destDir do NOT have File::Root prepended.
+bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::string& filename);
 }
 
 #endif

@@ -109,7 +109,7 @@ bool Dir(
   // Return list of files in directory.
 #if defined(WIN32)
   _finddata_t fileinfo;
-  std::string s = File::GetRoot() + directory + "*.*";
+  std::string s = directory + "*.*";
   long f = _findfirst(s.c_str(), &fileinfo);
   if (f == -1)
   {
@@ -126,7 +126,7 @@ bool Dir(
   return true;
 
 #else
-  DIR* dirp = opendir((File::GetRoot() + directory).c_str());
+  DIR* dirp = opendir(directory.c_str());
   if (!dirp)
   {
     return false;
@@ -481,5 +481,47 @@ DeleteResult AmjuDeleteFile(const std::string& filename)
   }
   return AMJU_DELETED_OK;
 }
+
+bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::string& filename)
+{
+  std::string src = srcDir + "/" + filename;
+  std::string dest = destDir + "/" + filename;
+
+  // boost::filesystem::copy_file would be the thing to use here, if we were using Boost.
+
+#if defined (WIN32)
+  // Requires Windows XP
+  return CopyFileA(src.c_str(), dest.c_str(), TRUE); // do fail if dest already exists
+
+/*
+#elif defined (MACOSX)
+
+  // Requires Mac OS X 10.5 
+  copyfile_state_t s = copyfile_state_alloc();
+  int ret = copyfile(src.c_str(), dest.c_str(), s, COPYFILE_ALL);
+  copyfile_state_free(s);
+*/
+
+#else
+  // Well, this looks slow but will be supported for all platforms, right ?
+  // (Not sure fstreams implemented on Wii ?)
+
+  FILE *fsource = fopen(src.c_str(), "r");
+  if (!fsource) return false;
+
+  FILE *ftarget = fopen(dest.c_str(), "w");
+  if (!ftarget) return false;
+
+  char ch;
+  while ((ch = fgetc(fsource)) != EOF)
+      fputc(ch, ftarget);
+
+  fclose(fsource);
+  fclose(ftarget);
+  return true;
+
+#endif
+}
+
 }
 
