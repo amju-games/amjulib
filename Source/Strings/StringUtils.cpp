@@ -122,7 +122,7 @@ std::string StripPath(const std::string& s)
 
 std::string GetFilePath(const std::string& filename)
 {
-  const std::string slash = "/"; 
+  const std::string slash = "/\\"; 
   return GetFilePath(filename, slash);
 }
 
