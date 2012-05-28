@@ -68,7 +68,7 @@ std::cout << "Baddie scene node: Failed to load dino.\n";
 
   m_sceneNode = node;
 
-  m_sceneNode->AddChild(m_shadow.GetPtr());
+  //m_sceneNode->AddChild(m_shadow.GetPtr());
 
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
