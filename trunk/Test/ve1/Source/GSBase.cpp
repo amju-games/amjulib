@@ -35,6 +35,11 @@ void GSBase::SetPrevState(GameState* prevState)
   m_prevState = prevState;
 }
 
+GameState* GSBase::GetPrevState()
+{
+  return m_prevState;
+}
+
 void GSBase::GoBack()
 {
   if (!m_prevState)

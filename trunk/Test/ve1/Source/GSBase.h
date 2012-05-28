@@ -17,6 +17,8 @@ public:
   virtual void OnActive();
 
   void SetPrevState(GameState*);
+  GameState* GetPrevState();
+
   void GoBack();  // return to prev state - must have been set!
 
 protected:
