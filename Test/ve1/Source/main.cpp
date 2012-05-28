@@ -17,12 +17,10 @@
 #include <ObjMesh.h>
 #include <Font.h>
 #include "GSCopyAssets.h"
-#include <CursorManager.h>
 #include <File.h>
 #include <Directory.h>
 #include <ConfigFile.h>
 #include <SAP.h>
-#include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 //#include "SAPCollideFunc.h"
@@ -66,8 +64,7 @@ void StartUp()
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
   TheResourceManager::Instance()->AddLoader("objb", BinaryObjLoader);
 
-  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
-  TheAvatarManager::Instance()->Load();
+  // Don't try to load any assets yet! Wait until we have copied assets as required
 
   // Create empty root node
   ClearVe1SceneGraph();

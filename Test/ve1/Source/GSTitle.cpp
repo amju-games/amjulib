@@ -2,10 +2,12 @@
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <CursorManager.h>
 #include "GSStartMenu.h"
 #include "GSLogin.h"
 #include "GSChoosePlayer.h"
 #include "GSYesNoQuitProcess.h"
+#include "AvatarManager.h"
 
 namespace Amju
 {
@@ -48,6 +50,15 @@ void GSTitle::Draw2d()
 
 void GSTitle::OnActive()
 {
+  static bool first = true;
+  if (first)
+  {
+    first = false;
+
+    TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+    TheAvatarManager::Instance()->Load();
+  }
+
   GSGui::OnActive();
 
   m_gui = LoadGui("gui-title.txt");
