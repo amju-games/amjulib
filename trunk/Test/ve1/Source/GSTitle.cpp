@@ -19,9 +19,11 @@ static void OnStartButton()
 
 static void OnQuitButton()
 {
-  // Confirm 
-  TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSTitle::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
+  // No Confirm from Title screen
+  exit(0);
+ 
+  //TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSTitle::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
 }
 
 GSTitle::GSTitle()
