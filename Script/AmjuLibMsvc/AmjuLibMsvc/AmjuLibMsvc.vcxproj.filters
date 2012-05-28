@@ -1457,9 +1457,6 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h">
       <Filter>Gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\Lua.h">
-      <Filter>Lua</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.h">
       <Filter>Lua\LuaLib-5.1.4</Filter>
     </ClInclude>
@@ -1531,6 +1528,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h">
+      <Filter>Lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
