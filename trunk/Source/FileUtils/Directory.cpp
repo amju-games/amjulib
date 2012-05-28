@@ -91,6 +91,8 @@ Added to repository
 #endif
 #include "AmjuFinal.h"
 
+#define DIRECTORY_DEBUG
+
 namespace Amju
 {
 bool Dir(
@@ -502,22 +504,41 @@ bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::
 */
 
 #else
+
+  std::ifstream f1(src.c_str(), std::fstream::binary);
+  std::ofstream f2(dest.c_str(), std::fstream::trunc | std::fstream::binary);
+  f2 << f1.rdbuf(); 
+  return true;
+
+/*
   // Well, this looks slow but will be supported for all platforms, right ?
   // (Not sure fstreams implemented on Wii ?)
 
-  FILE *fsource = fopen(src.c_str(), "r");
-  if (!fsource) return false;
+  FILE *fsource = fopen(src.c_str(), "rb");
+  if (!fsource) 
+  {
+std::cout << "FileCopy FAILED: couldn't open src: " << src << "\n";
+    return false;
+  }
 
-  FILE *ftarget = fopen(dest.c_str(), "w");
-  if (!ftarget) return false;
+  FILE *ftarget = fopen(dest.c_str(), "wb");
+  if (!ftarget) 
+  {
+std::cout << "FileCopy FAILED: couldn't open dest: " << dest << "\n";
+    return false;
+  }
 
   char ch;
+
+  // NO NO NO This is WRONG!!! Gahhh!! TODO Fix this!
+
   while ((ch = fgetc(fsource)) != EOF)
       fputc(ch, ftarget);
 
   fclose(fsource);
   fclose(ftarget);
   return true;
+*/
 
 #endif
 }
