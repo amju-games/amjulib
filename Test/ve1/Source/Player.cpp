@@ -24,8 +24,8 @@
 
 namespace Amju
 {
-static const float XSIZE = 10.0f;
-static const float YSIZE = 30.0f;
+static const float ARROW_XSIZE = 5.0f;
+static const float ARROW_YSIZE = 30.0f;
 
 class PlayerSceneNode : public Ve1Character
 {
@@ -207,13 +207,16 @@ void Player::SetArrowPos(const Vec3f& newpos)
   m_arrow->SetLocalTransform(m);
 
   m_arrow->GetAABB()->Set(
-    newpos.x - XSIZE, newpos.x + XSIZE,
-    newpos.y, newpos.y + YSIZE,
-    newpos.z - XSIZE, newpos.z + XSIZE);
+    newpos.x - ARROW_XSIZE, newpos.x + ARROW_XSIZE,
+    newpos.y, newpos.y + ARROW_YSIZE,
+    newpos.z - ARROW_XSIZE, newpos.z + ARROW_XSIZE);
 }
 
 void Player::Update()
 {
+  Ve1ObjectChar::Update();
+
+/*
   // Not safe to do anything if the Terrain has not been created yet 
   if (!TerrainReady())
   {
@@ -247,6 +250,7 @@ void Player::Update()
   {
     m_pos.y = y;
   }
+*/
 
   // Stop moving if we are close enough to the destination
   // TODO This ends up happening every frame, only do it if we are moving
@@ -267,6 +271,7 @@ void Player::Update()
     Assert(GetVel().SqLen() == 0);
   }
 
+/*
   if (m_sceneNode)
   {
     Matrix m;
@@ -312,6 +317,7 @@ void Player::Update()
       }
     }
   }
+*/
 
   if (m_ignorePortalId != -1)
   {
