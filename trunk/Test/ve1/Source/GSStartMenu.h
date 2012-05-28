@@ -17,8 +17,6 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 };
 typedef Singleton<GSStartMenu> TheGSStartMenu;
 } // namespace
