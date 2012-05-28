@@ -118,8 +118,7 @@ bool Dir(
 
   do
   {
-    std::string f = directory; // TODO flag
-    f += ToLower(fileinfo.name);
+    std::string f = StripPath(fileinfo.name);
     pResult->push_back(f);
   }
   while (_findnext(f, &fileinfo) == 0); // 0 => success
@@ -135,7 +134,7 @@ bool Dir(
   while (struct dirent* dp = readdir(dirp))
   {
     std::string f = dp->d_name;
-    f = ToLower(f);
+    f = StripPath(f);
 
     pResult->push_back(f);
   }
@@ -491,7 +490,7 @@ bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::
 
 #if defined (WIN32)
   // Requires Windows XP
-  return CopyFileA(src.c_str(), dest.c_str(), TRUE); // do fail if dest already exists
+  return CopyFileA(src.c_str(), dest.c_str(), TRUE) == TRUE; // do fail if dest already exists
 
 /*
 #elif defined (MACOSX)
