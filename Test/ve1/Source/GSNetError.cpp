@@ -30,7 +30,9 @@ void OnErrorOk()
 
 void OnErrorQuit()
 {
-  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());  // ? Quit game, or quit process ?
+  static GSYesNoQuitProcess* gs = TheGSYesNoQuitProcess::Instance();
+  gs->SetPrevState(TheGSNetError::Instance()->GetPrevState());
+  TheGame::Instance()->SetCurrentState(gs); 
 }
 
 GSNetError::GSNetError()
