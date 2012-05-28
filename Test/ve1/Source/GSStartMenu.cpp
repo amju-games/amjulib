@@ -1,28 +1,24 @@
 #include "GSStartMenu.h"
 #include <AmjuGL.h>
 #include <Game.h>
+#include <GuiButton.h>
 #include "GSChoosePlayer.h"
 #include "GSStartGame.h"
 #include "GameMode.h"
+#include "GSCogTestMenu.h"
+#include "GSTitle.h"
+#include "GSAdminMenu.h"
 
 namespace Amju
 {
-void OnNoGameButton()
+static void OnNoGameButton()
 {
   SetGameMode(AMJU_MODE_NO_GAME); 
   //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
-void OnLocalButton()
-{
-  // Local mode -- no server connection
-  SetGameMode(AMJU_MODE_LOCAL); 
-  //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-}
-
-void OnSingleButton()
+static void OnSingleButton()
 {
   // TODO Still connect to server to log activity and get run time content.
   // Set single player flag.
@@ -31,17 +27,21 @@ void OnSingleButton()
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
-void OnMultiButton()
+static void OnMultiButton()
 {
   SetGameMode(AMJU_MODE_MULTI); 
   //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
-void OnEditButton()
+static void OnCancelButton()
 {
-  SetGameMode(AMJU_MODE_EDIT);
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+}
+
+static void OnAdminButton()
+{
+  TheGame::Instance()->SetCurrentState(TheGSAdminMenu::Instance());
 }
 
 GSStartMenu::GSStartMenu()
@@ -73,20 +73,14 @@ void GSStartMenu::OnActive()
   GetElementByName(m_gui, "single-button")->SetCommand(Amju::OnSingleButton);
   GetElementByName(m_gui, "multi-button")->SetCommand(Amju::OnMultiButton);
   GetElementByName(m_gui, "nogame-button")->SetCommand(Amju::OnNoGameButton);
-  GetElementByName(m_gui, "local-button")->SetCommand(Amju::OnLocalButton);
-  GetElementByName(m_gui, "edit-button")->SetCommand(Amju::OnEditButton);
+  GetElementByName(m_gui, "admin-button")->SetCommand(Amju::OnAdminButton);
+
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  cancel->SetCommand(Amju::OnCancelButton);
+  cancel->SetIsCancelButton(true);
 
   // TODO remember last choice and keep highlighted
   GetElementByName(m_gui, "single-button")->SetHasFocus(true); 
 }
 
-bool GSStartMenu::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSStartMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
