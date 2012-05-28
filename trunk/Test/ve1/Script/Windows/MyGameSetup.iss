@@ -7,8 +7,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{5F1820EB-3B24-4F20-B8EB-30D083C8511F}
 AppName=My Game
-AppVersion=0.1
-;AppVerName=My Game 0.1
+AppVersion=0.2
+;AppVerName=My Game 0.2
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
@@ -28,17 +28,21 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\Jason\projects\amjulib\Test\ve1\Script\Windows\ve1\Release\My Game.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Jason\projects\amjulib\Test\ve1\Assets\*.*"; DestDir: "{app}\Data\"; Flags: ignoreversion
-Source: "C:\Users\Jason\projects\amjulib\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
-Source: "C:\Users\Jason\projects\amjulib\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: ignoreversion
+Source: "..\..\..\..\Build\ve1\Windows\Release\ve1.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\GLUT\glut32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\SDL\lib\sdl.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Assets\*.*"; DestDir: "{app}\Data\"; Flags: ignoreversion
+Source: "..\..\..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
+Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\My Game"; Filename: "{app}\My Game.exe"
-Name: "{commondesktop}\My Game"; Filename: "{app}\My Game.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\My Game"; Filename: "{app}\My Game.exe"; Tasks: quicklaunchicon
+Name: "{group}\My Game"; Filename: "{app}\ve1.exe"
+Name: "{commondesktop}\My Game"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\My Game"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\My Game.exe"; Description: "{cm:LaunchProgram,My Game}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,My Game}"; Flags: nowait postinstall skipifsilent
 
