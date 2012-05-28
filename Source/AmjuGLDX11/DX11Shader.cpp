@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX11
+
 #include "AmjuFirst.h"
 #include "DX11Shader.h"
 #include "AmjuGL-DX11.h"
@@ -205,3 +207,4 @@ void DX11Shader::Set(const std::string& name, AmjuGL::TextureHandle texId)
 }
 
 }
+#endif // AMJU_OFFER_DX11

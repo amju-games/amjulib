@@ -2,6 +2,8 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
+#ifdef AMJU_OFFER_DX9
+
 #ifndef AMJU_GL_DX9_H_INCLUDED
 #define AMJU_GL_DX9_H_INCLUDED
 
@@ -131,5 +133,6 @@ private:
 
 } // namespace Amju
 
-#endif
+#endif // include guard
 
+#endif //  AMJU_OFFER_DX9

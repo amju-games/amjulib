@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX9
+
 // TODO
 // Shadows: broken, but in game code ?
 //  - try OGL - there is a translate somewhere..?
@@ -777,3 +779,5 @@ ShadowMap* AmjuGLDX9::CreateShadowMap()
 }
 
 } // namespace
+
+#endif // AMJU_OFFER_DX9

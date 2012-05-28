@@ -1,3 +1,4 @@
+#ifdef AMJU_OFFER_DX11
 
 #include "AmjuFirst.h"
 #include "AmjuGL-DX11.h"
@@ -903,3 +904,5 @@ Shader* AmjuGLDX11::LoadShader(const std::string& shaderFileName)
 }
 
 } // namespace
+
+#endif // AMJU_OFFER_DX11

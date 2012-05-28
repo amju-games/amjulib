@@ -1,3 +1,5 @@
+#ifdef AMJU_OFFER_DX9
+
 #include "AmjuGL-DX9.h"
 #include <AmjuGLWindowInfo.h>
 #include <WinScreen.h>
@@ -361,3 +363,5 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     return 0;
 }            
+
+#endif // AMJU_OFFER_DX9
