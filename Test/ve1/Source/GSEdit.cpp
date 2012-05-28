@@ -624,15 +624,18 @@ void GSEdit::GoToSelectedLocation()
 class NewObjectCommand : public GuiCommand
 {
 public:
-  NewObjectCommand(const std::string& typeName) : m_typeName(typeName) { }
+  NewObjectCommand(const std::string& typeName, const std::string& assetfile, const std::string& datafile) : 
+    m_typeName(typeName), m_assetfile(assetfile), m_datafile(datafile) { }
+
   virtual bool Do()
   {
-std::cout << "Create new object of type " << m_typeName << "\n";
-
     // Create request to get new ID. Make obj when we get response.
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECT_ID);
     url += "&type=" + m_typeName;
-    url += "&assetfile=none&datafile=none"; // TODO depends on type of object we want to create 
+    url += "&assetfile=" + m_assetfile + "&datafile=" + m_datafile; 
+
+std::cout << "Create new object of type " << m_typeName << " URL: " << url << "\n";
+
     TheVe1ReqManager::Instance()->AddReq(new ReqNewObjId(url, m_typeName)); 
 
     return false;
@@ -640,6 +643,8 @@ std::cout << "Create new object of type " << m_typeName << "\n";
 
 private:
   std::string m_typeName;
+  std::string m_assetfile;
+  std::string m_datafile;
 };
 
 class SetPropsCommand : public GuiCommand
@@ -697,7 +702,18 @@ void GSEdit::CreateContextMenu()
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
     for (unsigned int i = 0; i < types.size(); i++)
     {
-      childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(types[i])));
+      std::string assetfile = "none";
+      std::string datafile = "none";
+
+      std::string type = types[i];
+      if (type == "baddie") // TODO Numeric ID ?
+      {
+std::cout << "Context menu - baddie found.\n";
+
+        assetfile = "player-assets.txt";
+        datafile = "player-data.txt";
+      } 
+      childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(type, assetfile, datafile)));
     }
     // TODO Other types
 
