@@ -34,7 +34,14 @@ bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, c
   else
   {
     std::cout << "Copying file " << filename << "\n";
-    FileCopy(srcDir, destDir, filename); 
+    if (FileCopy(srcDir, destDir, filename))
+    {
+      std::cout << "..FileCopy was OK!\n";
+    }
+    else
+    {
+      std::cout << "..FileCopy FAILED!\n";
+    }
   }
 
   return true;
@@ -74,11 +81,13 @@ std::cout << "Copying files to Save Dir as required...\n";
     static std::string dataDir = GetDataDir();
     static std::string saveDir = File::GetRoot();
 
-    DoCopyingForDir(dataDir, saveDir);
-
-    // Create subdirs for font2d and font3d
+    MkDir(saveDir);
+    // Create subdirs for font2d and font3d - do this before copying, to avoid problem.
+    // TODO Fix Dir() so it distinguishes between files and dirs!!
     MkDir(saveDir + "/font2d");
     MkDir(saveDir + "/font3d");
+
+    DoCopyingForDir(dataDir, saveDir);
 
     // Copy assets from data dir to save dir for font2d and font3d.
     DoCopyingForDir(dataDir + "/font2d/", saveDir + "/font2d/");
