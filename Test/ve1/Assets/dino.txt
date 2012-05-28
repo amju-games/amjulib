@@ -1,0 +1,9 @@
+// Dino
+// Ver
+1
+// Mesh name
+pz-dino2.md2
+// 2 textures
+dino1.bmp
+dino1a.bmp
+
