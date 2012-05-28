@@ -15,6 +15,8 @@ class Ve1ObjectChar : public Ve1Object
 public:
   Ve1ObjectChar();
 
+  virtual void Update();
+
   const std::string& GetName() const;
   void SetName(const std::string& name);
 
