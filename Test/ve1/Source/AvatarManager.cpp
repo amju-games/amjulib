@@ -38,12 +38,18 @@ bool AvatarManager::Load()
       return false;
     }
 
+    // Surely MD2 Model should be managed by Resource manager???!!!
+    Md2Model* ch = (Md2Model*)TheResourceManager::Instance()->GetRes(s);
+    // Instead of:
+    /*
     Md2Model* ch = new Md2Model;
     if (!ch->Load(s))
     {
       f.ReportError("Failed to load character " + ToString(i));
       return false;
     }
+    */
+
     m_chars.push_back(ch);
   }
 
