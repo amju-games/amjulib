@@ -65,6 +65,16 @@ sub new_player_impl($$$)
 
   my $setnamesql = "insert into objectstate values ($objid, 'name', '$playername', now()) on duplicate key update val='$playername', whenchanged=now()";
   insert($setnamesql);
+
+  # TODO Set values for avatar
+  my $sql = "insert into objectstate values ($objid, 'type', 1, now())"; # TODO TEMP TEST
+  insert($sql);
+  $sql = "insert into objectstate values ($objid, 'tex', 1, now())"; # TODO TEMP TEST
+  insert($sql);
+
+  # TODO Set location and pos
+  $sql = "insert into objectpos (`id`, `x`, `y`, `z`, `loc`) values ($objid, 0, 0, 0, 1)";
+  insert($sql);
 }
 
 
