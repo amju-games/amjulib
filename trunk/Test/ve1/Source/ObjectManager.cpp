@@ -22,7 +22,7 @@
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
-//#define OBJECT_CHECK_DEBUG
+#define OBJECT_CHECK_DEBUG
 
 namespace Amju
 {
@@ -245,6 +245,8 @@ std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
     {
 std::cout << " GetFile for " << s << " returned false\n";
 //Assert(0);
+      // Force reload next update, to get files which failed this time
+      m_state = AMJU_AL_UNKNOWN;
     }
   }
 
