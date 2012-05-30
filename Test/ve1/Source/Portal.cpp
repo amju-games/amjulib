@@ -97,7 +97,7 @@ void Portal::OnLocationEntry()
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - XSIZE, m_pos.z + XSIZE);
 
-  //if (GetGameMode() == AMJU_MODE_EDIT)
+  if (GetGameMode() == AMJU_MODE_EDIT)
   {
     // Add node to Scene Graph
     m_sceneNode = new Ve1Node(this);

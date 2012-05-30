@@ -48,8 +48,8 @@ public:
     {
       Ve1Character::Draw();
 
-      Assert(m_player->GetAABB());
-      DrawAABB(*(m_player->GetAABB()));
+      //Assert(m_player->GetAABB());
+      //DrawAABB(*(m_player->GetAABB()));
  
       // Print name 
       // TODO Do all these in one go, to minimise state changes
