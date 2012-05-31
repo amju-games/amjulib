@@ -4,11 +4,17 @@
 #include <Game.h>
 #include "GSTitle.h"
 
+#define WIN32_TEST_COPY_ASSETS
+
 namespace Amju
 {
 std::string GetDataDir()
 {
+#ifdef WIN32_TEST_COPY_ASSETS
+  std::string dataDir = "c:/program files (x86)/my game"; 
+#else
   std::string dataDir = GetProcessDir();
+#endif
 
 #ifdef WIN32
   dataDir += "/Data/";
@@ -114,12 +120,6 @@ void GSCopyAssets::OnActive()
 {
   // Before loading anything, copy the files necessary to show logo or 'please wait' indicator.
 
-//  GSGui::OnActive();
-//  m_gui = 
-  //LoadGui("TODO");
-//  Assert(m_gui);
-
-  // TODO Set focus element, cancel element, command handlers
 }
 
 } // namespace
