@@ -52,4 +52,10 @@ define bin2o
 	echo "extern const u32" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`_size";" >> `(echo $(<F) | tr . _)`.h
 endef
 
+# j.c.
+BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
+
+BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
+
+
 
