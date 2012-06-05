@@ -4,14 +4,19 @@
 #include <Game.h>
 #include "GSTitle.h"
 
-#define WIN32_TEST_COPY_ASSETS
+#if defined(WIN32) && defined(_DEBUG)
+//#define WIN32_TEST_COPY_ASSETS
+#endif
 
 namespace Amju
 {
 std::string GetDataDir()
 {
 #ifdef WIN32_TEST_COPY_ASSETS
-  std::string dataDir = "c:/program files (x86)/my game"; 
+  // When developing, we don't want to use the real process dir.
+  // TODO How do we know if this is a 32-bit or 64-bit machine ? 
+  std::string dataDir = "c:/program files (x86)/my game";  // on 64-bit machine
+  std::string dataDir = "c:/program files/my game";  // on 32-bit machine
 #else
   std::string dataDir = GetProcessDir();
 #endif
