@@ -56,15 +56,12 @@ Added to repository
 */
 
 #include "AmjuFirst.h"
-#if defined(WIN32)
-#pragma warning(disable: 4786)
-#endif
-
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #include <algorithm>
 #include <iostream>
+#include <AmjuTime.h>
 #include "Directory.h"
 #include "GlueFile.h"
 #include "FileImplGlue.h"
@@ -91,7 +88,7 @@ Added to repository
 #endif
 #include "AmjuFinal.h"
 
-#define DIRECTORY_DEBUG
+//#define DIRECTORY_DEBUG
 
 namespace Amju
 {
@@ -492,7 +489,7 @@ bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::
 
 #if defined (WIN32)
   // Requires Windows XP
-  return CopyFileA(src.c_str(), dest.c_str(), TRUE) == TRUE; // do fail if dest already exists
+  return CopyFileA(src.c_str(), dest.c_str(), FALSE) == TRUE; // do copy even if dest already exists
 
 /*
 #elif defined (MACOSX)
@@ -505,42 +502,20 @@ bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::
 
 #else
 
+  // Copy file even if dest already exists
   std::ifstream f1(src.c_str(), std::fstream::binary);
   std::ofstream f2(dest.c_str(), std::fstream::trunc | std::fstream::binary);
   f2 << f1.rdbuf(); 
   return true;
 
-/*
-  // Well, this looks slow but will be supported for all platforms, right ?
-  // (Not sure fstreams implemented on Wii ?)
-
-  FILE *fsource = fopen(src.c_str(), "rb");
-  if (!fsource) 
-  {
-std::cout << "FileCopy FAILED: couldn't open src: " << src << "\n";
-    return false;
-  }
-
-  FILE *ftarget = fopen(dest.c_str(), "wb");
-  if (!ftarget) 
-  {
-std::cout << "FileCopy FAILED: couldn't open dest: " << dest << "\n";
-    return false;
-  }
-
-  char ch;
-
-  // NO NO NO This is WRONG!!! Gahhh!! TODO Fix this!
-
-  while ((ch = fgetc(fsource)) != EOF)
-      fputc(ch, ftarget);
-
-  fclose(fsource);
-  fclose(ftarget);
-  return true;
-*/
-
 #endif
+}
+
+Time GetFileModifiedTime(const std::string& filename)
+{
+  struct stat buf;
+  stat(filename.c_str(), &buf);
+  return Time(buf.st_mtime);
 }
 
 }

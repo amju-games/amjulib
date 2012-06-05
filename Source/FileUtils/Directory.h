@@ -26,6 +26,8 @@ Added to repository
 
 namespace Amju
 {
+class Time;
+
 // Lists all files in the given directory.
 // File::Root is NOT prepended to directory.
 // If useGlue is true, and a Glue File is ready, the list of files in
@@ -67,6 +69,9 @@ DeleteResult AmjuDeleteFile(const std::string& filename);
 // Copy an OS file from srcDir to destDir. I.e. like 'cp srcDir/filename destDir/'
 // srcDir and destDir do NOT have File::Root prepended.
 bool FileCopy(const std::string& srcDir, const std::string& destDir, const std::string& filename);
+
+// Get last time OS file was modified
+Time GetFileModifiedTime(const std::string& filename); 
 }
 
 #endif
