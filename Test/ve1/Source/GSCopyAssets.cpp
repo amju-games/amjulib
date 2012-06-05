@@ -2,6 +2,7 @@
 #include <AmjuGL.h>
 #include <Directory.h>
 #include <Game.h>
+#include <AmjuTime.h>
 #include "GSTitle.h"
 
 #if defined(WIN32) && defined(_DEBUG)
@@ -37,8 +38,31 @@ std::cout << "GetDataDir returning: " << dataDir << "\n";
 // Check if file exists in Save Dir. If not, copies it from Data dir.
 bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, const std::string& destDir)
 {
-  std::string s = destDir + "/" + filename;
-  if (FileExists(s))
+  std::string dest = destDir + "/" + filename;
+  Time destTime = GetFileModifiedTime(dest);
+
+  std::string src = srcDir + "/" + filename;
+  Time srcTime = GetFileModifiedTime(src);
+
+  if (destTime < srcTime)
+  {
+std::cout << "Copying file " << filename << " as dest is older than src.\n";
+    if (FileCopy(srcDir, destDir, filename))
+    {
+      std::cout << "..FileCopy was OK!\n";
+    }
+    else
+    {
+      std::cout << "..FileCopy FAILED!\n";
+    }
+  }
+  else
+  {
+std::cout << "No need to copy file " << filename << ", it's up to date.\n";
+  }
+
+/*
+  if (FileExists(dest))
   {
     std::cout << "File already exists: " << s << "\n";
   }
@@ -54,6 +78,7 @@ bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, c
       std::cout << "..FileCopy FAILED!\n";
     }
   }
+*/
 
   return true;
 }
