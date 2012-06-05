@@ -21,7 +21,7 @@ sub make_new_player()
 {
   my $playername = param('playername') or die "Expected playername";
   my $email = param('email') or die "Expected email";
-  my $hashpw = param('hashpw') or die "Expected hashpw";
+  my $hashpw = "123"; #param('hashpw') or die "Expected hashpw";
 
   new_player_impl($playername, $email, $hashpw);
 }

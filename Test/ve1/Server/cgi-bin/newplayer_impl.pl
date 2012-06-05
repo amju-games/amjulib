@@ -9,7 +9,11 @@ require "common.pl";
 sub new_player_impl($$$)
 {
   my $playername = shift;
+  $playername = lc($playername);
+
   my $email = shift;
+  $email = lc($email);
+
   my $haspw = shift;
 
   # See if the player/ip address already exists
@@ -67,9 +71,12 @@ sub new_player_impl($$$)
   insert($setnamesql);
 
   # TODO Set values for avatar
-  my $sql = "insert into objectstate values ($objid, 'type', 1, now())"; # TODO TEMP TEST
+  my $av_type = int(rand(3));
+  my $sql = "insert into objectstate values ($objid, 'type', $av_type, now())"; # TODO TEMP TEST
   insert($sql);
-  $sql = "insert into objectstate values ($objid, 'tex', 1, now())"; # TODO TEMP TEST
+
+  my $av_tex = int(rand(6));
+  $sql = "insert into objectstate values ($objid, 'tex', $av_tex, now())"; # TODO TEMP TEST
   insert($sql);
 
   # TODO Set location and pos

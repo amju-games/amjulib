@@ -17,6 +17,7 @@ login();
 sub login()
 {
   my $email = param('email') or die "Expected email\n";
+  $email = lc($email);  # make lower case
 
 print "Email: \"$email\"\n";
 
