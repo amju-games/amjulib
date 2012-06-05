@@ -29,10 +29,6 @@
 
 namespace Amju
 {
-static const char* APP_NAME = "ve1"; // default name for App data dir
-
-static const char* APP_NAME_CONFIG_KEY = "appname";
-
 void ReportError(const std::string& str)
 {
   std::cout << "ERROR: " << str << "\n";
@@ -45,14 +41,6 @@ void StartUp()
 {
   LoadConfig();
 
-  std::string appname = APP_NAME;
-  if (TheGameConfigFile::Instance()->Exists(APP_NAME_CONFIG_KEY))
-  {
-    appname = TheGameConfigFile::Instance()->GetValue(APP_NAME_CONFIG_KEY);
-  }
-  // TODO Get SaveDir from config or workding dir of executable
-  File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
-  
   // Set SAP collide func
   //TheSAP::Instance()->SetCollideFunc(SAPCollideFunc);
   TheEventPoller::Instance()->AddListener(new QuitHandler);

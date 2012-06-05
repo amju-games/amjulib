@@ -1,6 +1,6 @@
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
-#include <ConfigFile.h>
+#include "SpecialConfig.h"
 #include "GameMode.h"
 #include "LogOut.h"
 
@@ -8,6 +8,9 @@
 
 namespace Amju
 {
+static const char* DEFAULT_SERVER = "www.amju.com";
+static const char* DEFAULT_ENV = "ve1";
+
 static const char* SERVER_KEY = "server";
 static const char* ENV_KEY = "env";
 
@@ -17,14 +20,14 @@ std::string UrlRoot()
   static std::string res;
   if (first)
   {
-    GameConfigFile* config = TheGameConfigFile::Instance();
+    ConfigFile* config = TheSpecialConfigFile::Instance();
 
-    std::string server = "www.amju.com";
+    std::string server = DEFAULT_SERVER;
     if (config->Exists(SERVER_KEY))
     {
       server = config->GetValue(SERVER_KEY);
     }
-    std::string env = "ve1";
+    std::string env = DEFAULT_ENV;
     if (config->Exists(ENV_KEY))
     {
       server = config->GetValue(ENV_KEY);
