@@ -19,11 +19,22 @@ GuiButton::GuiButton()
 {
   m_isMouseOver = false;
   m_isPressed = false;
+  m_isEnabled = true;
 }
 
 GuiButton::~GuiButton()
 {
   // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
+}
+
+bool GuiButton::IsEnabled() const
+{
+  return m_isEnabled;
+}
+
+void GuiButton::SetIsEnabled(bool b)
+{
+  m_isEnabled = b;
 }
 
 bool GuiButton::IsCancelButton() const
@@ -164,14 +175,20 @@ void GuiButton::Draw()
 
     PopColour();
   }
-  GuiImage::Draw();
 
   PushColour();
-  AmjuGL::SetColour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a);
+  if (!IsEnabled())
+  {
+    MultColour(Colour(1, 1, 1, 0.5f));
+  }
+
+  GuiImage::Draw();
+
+  MultColour(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a));
   m_guiText.Draw();
   AmjuGL::PushMatrix();
   AmjuGL::Translate(0, 0.01f, 0);
-  AmjuGL::SetColour(0, 0, 0, 1);
+  MultColour(Colour(0, 0, 0, 1));
   m_guiText.Draw();
   AmjuGL::PopMatrix();
   PopColour();
@@ -181,7 +198,7 @@ void GuiButton::Draw()
 
 bool GuiButton::OnCursorEvent(const CursorEvent& ce)
 {
-  if (!IsVisible())
+  if (!IsVisible() ||!IsEnabled())
   {
     return false;
   }
@@ -200,6 +217,11 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
 
 bool GuiButton::OnKeyEvent(const KeyEvent& ke)
 {
+  if (!IsVisible() ||!IsEnabled())
+  {
+    return false;
+  }
+
   if ((IsFocusButton()  && ke.keyType == AMJU_KEY_ENTER)  ||
       (IsCancelButton() && ke.keyType == AMJU_KEY_ESC))
   {
@@ -216,7 +238,7 @@ bool GuiButton::OnKeyEvent(const KeyEvent& ke)
 
 bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-  if (!IsVisible())
+  if (!IsVisible() ||!IsEnabled())
   {
     return false;
   }
@@ -254,7 +276,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 bool GuiButton::OnButtonEvent(const ButtonEvent& be)
 {
-  if (!IsVisible())
+  if (!IsVisible() ||!IsEnabled())
   {
     return false;
   }
