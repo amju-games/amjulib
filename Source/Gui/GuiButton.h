@@ -41,6 +41,9 @@ public:
   bool IsCancelButton() const;
   void SetIsCancelButton(bool isCancelButton);
 
+  bool IsEnabled() const;
+  void SetIsEnabled(bool);
+
 private:
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
@@ -51,6 +54,7 @@ protected:
 
   bool m_isMouseOver; // Draw bigger
   bool m_isPressed; // Draw offset right/down
+  bool m_isEnabled;
 };
 }
 
