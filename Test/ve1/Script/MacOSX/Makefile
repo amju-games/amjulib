@@ -6,7 +6,7 @@ APP		:=	ve1
 
 VERSION		:=	0.2
 
-BUILD		:=	../../../../Build/$(APP)/Mac
+BUILD		:=	../../../../Build/$(APP)/$(AMJU_BUILD_ARCH)
 TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
@@ -14,11 +14,11 @@ ASSETSDIR 	:=	../../Assets
 # These are the shared font assets, not just for this project
 FONT2D		:=	../../../../Assets/font2d
 FONT3D		:=	../../../../Assets/font3d
-RUNDIR		:=	/Users/Shared/ve1
+RUNDIR		:=	$(BUILD)/"My Game.app"/Contents/MacOS
 DATADIR		:=	$(RUNDIR)/Data
 
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
+	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/$(AMJU_BUILD_ARCH)/amjulib.a \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
@@ -40,10 +40,8 @@ run_old:
 
 run:
 	cp $(TARGET) $(RUNDIR); \
-	cp -R $(ASSETSDIR)/* $(DATADIR); \
 	cd $(RUNDIR); \
-	./$(APP); \
-	cd -
+	./$(APP)
 
 # Hmm, if there's an assert we don't go into gdb, so not much use :-(
 #	echo run | gdb $(APP); \
