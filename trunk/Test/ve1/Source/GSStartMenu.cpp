@@ -70,9 +70,17 @@ void GSStartMenu::OnActive()
   m_gui = LoadGui("gui-startmenu.txt");
   Assert(m_gui);
 
-  GetElementByName(m_gui, "single-button")->SetCommand(Amju::OnSingleButton);
-  GetElementByName(m_gui, "multi-button")->SetCommand(Amju::OnMultiButton);
-  GetElementByName(m_gui, "nogame-button")->SetCommand(Amju::OnNoGameButton);
+  GuiButton* single = (GuiButton*)GetElementByName(m_gui, "single-button");
+  single->SetIsEnabled(false);
+  single->SetCommand(Amju::OnSingleButton);
+
+  GuiButton* multi = (GuiButton*)GetElementByName(m_gui, "multi-button");
+  multi->SetCommand(Amju::OnMultiButton);
+
+  GuiButton* nogame = (GuiButton*)GetElementByName(m_gui, "nogame-button");
+  nogame->SetIsEnabled(false);
+  nogame->SetCommand(Amju::OnNoGameButton);
+
   GetElementByName(m_gui, "admin-button")->SetCommand(Amju::OnAdminButton);
 
   GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
@@ -80,7 +88,7 @@ void GSStartMenu::OnActive()
   cancel->SetIsCancelButton(true);
 
   // TODO remember last choice and keep highlighted
-  GetElementByName(m_gui, "single-button")->SetHasFocus(true); 
+  multi->SetHasFocus(true); 
 }
 
 } // namespace
