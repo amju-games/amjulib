@@ -17,7 +17,7 @@ make
 # TODO Make fat binary
 export BUILD=../../../../Build/ve1/
 
-lipo -create $(BUILD)/Mac-i386/ve1 $(BUILD)/Mac-ppc/ve1 -output ve1.univ
+lipo -create $BUILD/Mac-i386/ve1 $BUILD/Mac-ppc/ve1 -output ve1.univ
 strip ve1.univ
 
 # Make app bundle, put universal binary in 
