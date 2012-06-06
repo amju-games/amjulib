@@ -18,7 +18,7 @@ make
 export BUILD=../../../../Build/ve1/
 
 lipo -create $BUILD/Mac-i386/ve1 $BUILD/Mac-ppc/ve1 -output $BUILD/ve1.univ
-strip ve1.univ
+strip $BUILD/ve1.univ
 
 # Make app bundle, put universal binary in 
 
