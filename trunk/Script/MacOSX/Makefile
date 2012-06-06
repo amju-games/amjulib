@@ -4,7 +4,7 @@ $(error "Please set AMJULIB_MAC_SCRIPT_PATH in your environment. ")
 endif
 
 
-BUILD		:=	../../Build/Mac
+BUILD		:=	../../Build/$(AMJU_BUILD_ARCH)
 TARGET		:=	$(BUILD)/amjulib.a
 AMJU      := ../../../amjulib/Source
 SOURCES := ../../Source \
@@ -43,6 +43,7 @@ SOURCES := ../../Source \
   $(AMJU)/Utils/Xml \
   $(AMJU)/Utils/Zlib
 
+# TODO Make this an env var
 EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile

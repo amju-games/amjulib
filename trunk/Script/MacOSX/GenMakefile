@@ -19,6 +19,14 @@ ifeq ($(strip $(AMJULIB_MAC_SCRIPT_PATH)),)
 $(error "Please set AMJULIB_MAC_SCRIPT_PATH in your environment.")
 endif
 
+ifeq ($(strip $(AMJU_BUILD_ARCH)),)
+$(error "Please set AMJU_BUILD_ARCH in your environment.")
+endif
+
+ifeq ($(strip $(AMJU_MACHDEP)),)
+$(error "Please set AMJU_MACHDEP in your environment.")
+endif
+
 include $(AMJULIB_MAC_SCRIPT_PATH)/mac_rules
 
 #---------------------------------------------------------------------------------
@@ -74,12 +82,12 @@ INCLUDES	:=	$(AMJU_LIB_DIRS)
 # In EXTRA_CFLAGS specify -g -O0 or -O2
 
 # Wait, $(INCLUDE) is not defined until later - surely this is wrong. Move this block down ?
-CFLAGS	=  -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS) 
+CFLAGS	=  -Wall $(AMJU_MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS) 
 #-I/Library/Frameworks/SDL.framework/Headers
 CXXFLAGS	=	$(CFLAGS)
 OBJCFLAGS	=	$(CFLAGS)
 
-LDFLAGS	=	-g $(MACHDEP) -Wl
+LDFLAGS	=	-g $(AMJU_MACHDEP) -Wl
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
