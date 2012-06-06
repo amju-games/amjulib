@@ -39,6 +39,8 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
+  GuiElement::SetTextToSpeechEnabled(false);
+
   LoadConfig();
 
   // Set SAP collide func
