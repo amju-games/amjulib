@@ -22,10 +22,10 @@ strip ve1.univ
 
 # Make app bundle, put universal binary in 
 
-ASSETSDIR       :=      ../../Assets
+export ASSETSDIR=../../Assets
 # These are the shared font assets, not just for this project
-FONT2D          :=      ../../../../Assets/font2d
-FONT3D          :=      ../../../../Assets/font3d
+export FONT2D=../../../../Assets/font2d
+export FONT3D=../../../../Assets/font3d
 
 rm -rf $BUILD/"My Game.app"
 cp -R "My Game.app" $BUILD
