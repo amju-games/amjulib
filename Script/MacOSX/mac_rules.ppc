@@ -1,9 +1,0 @@
-
-MACHDEP =  -arch ppc -DMACOSX -DXP_MACOSX 
-# __i386__ for intel mac
-# XP_MACOSX for libpng
-# AMJU_USE_GLUT for window creation etc
-
-include $(AMJULIB_MAC_SCRIPT_PATH)/base_rules
-
-
