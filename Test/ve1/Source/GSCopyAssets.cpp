@@ -17,7 +17,7 @@ std::string GetDataDir()
   // When developing, we don't want to use the real process dir.
   // TODO How do we know if this is a 32-bit or 64-bit machine ? 
   std::string dataDir = "c:/program files (x86)/my game";  // on 64-bit machine
-  std::string dataDir = "c:/program files/my game";  // on 32-bit machine
+  //std::string dataDir = "c:/program files/my game";  // on 32-bit machine
 #else
   std::string dataDir = GetProcessDir();
 #endif
@@ -38,15 +38,29 @@ std::cout << "GetDataDir returning: " << dataDir << "\n";
 // Check if file exists in Save Dir. If not, copies it from Data dir.
 bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, const std::string& destDir)
 {
+  bool doCopy = true;
   std::string dest = destDir + "/" + filename;
-  Time destTime = GetFileModifiedTime(dest);
 
-  std::string src = srcDir + "/" + filename;
-  Time srcTime = GetFileModifiedTime(src);
-
-  if (destTime < srcTime)
+  if (FileExists(dest))
   {
-std::cout << "Copying file " << filename << " as dest is older than src.\n";
+std::cout << "File already exists: " << dest << "\n";
+
+    Time destTime = GetFileModifiedTime(dest);
+
+    std::string src = srcDir + "/" + filename;
+    Time srcTime = GetFileModifiedTime(src);
+
+std::cout << "File: " << filename << " destTime: " << destTime.ToString() << " srcTime: " << srcTime.ToString() << "\n";
+
+    if (!(destTime < srcTime))
+    {
+      doCopy = false;
+    }
+  }
+
+  if (doCopy)
+  {
+std::cout << "Copying file " << filename << " as dest is older than src, or doesn't exist.\n";
     if (FileCopy(srcDir, destDir, filename))
     {
       std::cout << "..FileCopy was OK!\n";
@@ -116,6 +130,8 @@ std::cout << "Copying files to Save Dir as required...\n";
 
     static std::string dataDir = GetDataDir();
     static std::string saveDir = File::GetRoot();
+
+std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
     MkDir(saveDir);
     // Create subdirs for font2d and font3d - do this before copying, to avoid problem.
