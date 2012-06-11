@@ -5,6 +5,7 @@
 #############################################
 
 require "common.pl";
+require "sendnotification.pl";
 
 my_connect();
 
@@ -62,6 +63,9 @@ print "Your new session ID: $session_id\n";
       # Set logged in flag as object value 
       $sql = "insert into objectstate (`id`, `key`, `val`) select player.obj_id, 'loggedin', 'y' from player, session where player.id = session.player_id and session.id=$session_id on duplicate key update val='y'";
       insert($sql);
+
+      # Notify admin of login
+      notifyLogin($playername, $player_id);
     }
     else
     {
