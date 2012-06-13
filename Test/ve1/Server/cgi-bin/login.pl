@@ -6,6 +6,7 @@
 
 require "common.pl";
 require "sendnotification.pl";
+require "sendemail2.pl";
 
 my_connect();
 
@@ -65,19 +66,26 @@ print "Your new session ID: $session_id\n";
       insert($sql);
 
       # Notify admin of login
-      notifyLogin($playername, $player_id);
+      notifyProwl("Successful login", "Player $playername ($player_id) just logged in!");
     }
     else
     {
       print "Errr.. failed to create session?!\n";
       my $t = time();
-      print "<now>$t</now><error>BAD_SESSION</error>\n";
+      print "<now>$t</now><error>BAD_SESSION: Well, this was not expected. Not at all. This could perhaps be due to the database being hammered too much. </error>\n";
+    
+      sendEmail("Login: bad session", "Hi, login.pl here. $email just tried to log in got a BAD_SESSION error! Well, bye!");
+      notifyProwl("Bad session error", "BAD_SESSION error for $email!");
     }
   }
   else
   {
     my $t = time();
-    print "<now>$t</now><error>BAD_EMAIL</error>\n";
+    print "<now>$t</now><error>BAD_EMAIL: Sorry, I didn't recognise your email address. Please could you check for spelling mistakes. Probably you have more than one email address, and I have a different one in my database to the one you just used. If it's any consolation, Jason gets texted and emailed when this happens, so he will be on the case soon.</error>\n";
+
+    sendEmail("Login: bad email", "Hi, login.pl here. Someone just tried to log in with this email address and it wasn't found in the player table.\n$email\nServer time is: $t\nBye!");
+      
+    notifyProwl("BAD login", "Bad email: $email");
   }
 }
 
