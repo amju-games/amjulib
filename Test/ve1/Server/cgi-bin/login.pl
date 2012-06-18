@@ -21,7 +21,48 @@ sub login()
   my $email = param('email') or die "Expected email\n";
   $email = lc($email);  # make lower case
 
+  my $clientver = param('clientver');
+  if (!$clientver)
+  {
+    $clientver = "v.0.2";
+  }
+
 print "Email: \"$email\"\n";
+print "Client ver: $clientver\n";
+
+  # Check version against the current version (TODO have latest version number in a file)
+  if ($clientver =~ /v\.(\d+)\.(\d+)/)
+  {
+    my $major = "$1";
+    my $minor = "$2"; 
+
+    print "Major: $major, Minor: $minor\n";
+
+    # Check major/minor version numbers, error if this client version is too old
+    my $latestMajor = "0";
+    my $latestMinor = "2";
+    print "LATEST Major: $latestMajor, Minor: $latestMinor\n";
+
+    if ($major < $latestMajor || $major == $latestMajor && $minor < $latestMinor)
+    {
+      # Client too old
+      my $t = time();
+      print "<now>$t</now><error>BAD_CLIENT: Sorry, it looks like you need to download the latest version of the game. There are some spiffy new features which unfortunately won't work with the version you have.<error>\n";
+
+      sendEmail("Login: bad client", "Hi, login.pl here. $email just tried to log in but has an old client (version: $clientver).\nServer time is: $t\nBye!");
+      
+      notifyProwl("BAD client", "Email: $email Version: $clientver");
+      return 1;
+    }
+    else
+    {
+      print "Your client version is up to date.\n";
+    }
+  }
+  else
+  {
+    print "Don't understand your client version.\n";
+  }
 
   my $sql = "select id from player where email='$email'";
 
@@ -81,7 +122,7 @@ print "Your new session ID: $session_id\n";
   else
   {
     my $t = time();
-    print "<now>$t</now><error>BAD_EMAIL: Sorry, I didn't recognise your email address. Please could you check for spelling mistakes. Probably you have more than one email address, and I have a different one in my database to the one you just used. If it's any consolation, Jason gets texted and emailed when this happens, so he will be on the case soon.</error>\n";
+    print "<now>$t</now><error>BAD_EMAIL: Sorry, I didn't recognise your email address. Please could you check for spelling mistakes. Maybe you have more than one email address, and I have a different one in my database to the one you just used. If it's any consolation, Jason gets texted and emailed when this happens, so he will be on the case soon.</error>\n";
 
     sendEmail("Login: bad email", "Hi, login.pl here. Someone just tried to log in with this email address and it wasn't found in the player table.\n$email\nServer time is: $t\nBye!");
       
