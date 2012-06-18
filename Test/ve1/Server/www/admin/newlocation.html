@@ -1,0 +1,22 @@
+<html>
+<head>
+
+</head>
+<body>
+<img src="../mygame.png" align=center>
+<p style="font-family:Arial">
+<br><br>
+<b>Create a new location</b>
+<br><br>
+
+
+<form type="hidden" name="MAX_FILE_SIZE" value="500" action="../..//cgi-bin/newlocation.pl" style="font-family:Arial" method="post" enctype="multipart/form-data">
+Terrain .obj file: <input type="file" name="obj_filename" />
+.mtl file: <input type="file" name="mtl_filename" />
+Location ID: <input type="text" name="loc_id" />
+<input type="submit" value="Create" /> 
+</form>
+
+</body>
+</html>
+
