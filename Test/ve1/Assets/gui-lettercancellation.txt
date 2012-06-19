@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+4
 
 
 // Element type
@@ -33,19 +33,33 @@ timer
 // Text
 Time remaining: 3:00
 // Font name, size
-arial, 1.0, left, multi, bgcol=ff0000, fgcol=ffffff
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
 
 gui-button
 // Element name
-cancel-button
+done-button
 // pos (coords are -1..1)
--0.2, -0.8
+-0.5, -0.8
 // size
 0.4, 0.1
 // Image
 gui-button-4.png
 // Text
-quit test
+done!
+// Font name, size
+arial, 1.0 
+
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+0.1, -0.8
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+quit
 // Font name, size
 arial, 1.0 
 
