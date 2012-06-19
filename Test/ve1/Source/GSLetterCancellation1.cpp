@@ -7,10 +7,21 @@
 #include <EventPoller.h>
 #include <Game.h>
 #include <DrawRect.h>
+#include <Timer.h>
 #include "GSCogTestMenu.h"
 
 namespace Amju
 {
+static void OnDoneButton()
+{
+  // Send results, go to next test.
+  // NB We must be sure to not lose the results. Store them locally, keep sending until we get ack 
+  //  from server..?
+  
+  // TODO Where should we go when we administer the test for real ?
+  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+}
+
 static void OnCancelButton()
 {
   // TODO Where should we go when we administer the test for real ?
@@ -35,9 +46,11 @@ GSLetterCancellation1::GSLetterCancellation1()
   m_top = 0.5f; 
   m_left = -1.0f; 
   m_vSpacing = 0.12f;
-  m_hSpacing = 0.03f;
+  m_hSpacing = 0.0325f;
   m_fontSize = 0.05f;
   m_sqSize = 0.025f;
+
+  m_mouseOver = false;
 }
 
 Rect GSLetterCancellation1::MakeRect(int i, int j)
@@ -49,22 +62,22 @@ Rect GSLetterCancellation1::MakeRect(int i, int j)
 
 bool GSLetterCancellation1::OnCursorEvent(const CursorEvent& ce)
 {
-  /*
-  // TEST
+  // Highlight letter under cursor
   for (int i = 0; i < 6; i++)
   {
     for (int j = 0; j < 52; j++)
     {
       Rect r = MakeRect(i, j);
-      // TODO highlight any selected letter    
       if (r.IsPointIn(Vec2f(ce.x, ce.y)))
       {
-        std::cout << m_letters[i][j];
-        break;
+std::cout << "Found! " << m_letters[i][j] << "\n";
+        m_mouseRect = r;
+        m_mouseOver = true;
+        return true;
       }
     }
   }
-  */
+  m_mouseOver = false;
 
   return false;
 }
@@ -112,7 +125,30 @@ bool GSLetterCancellation1::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 void GSLetterCancellation1::Update()
 {
   GSGui::Update();
- 
+
+  m_timer -= TheTimer::Instance()->GetDt();
+
+  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
+  std::string s;
+  if (m_timer > 0)
+  {
+    int min = (int)(m_timer / 60.0f);
+    int sec = (int)(m_timer - 60.0f * min);
+    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
+  }
+  else
+  {
+    m_isFinished = true;
+    // TODO flash
+    s = "0:00";
+
+    if (m_timer < -10.0f)
+    {
+      OnDoneButton();
+    }
+  }
+
+  timeText->SetText(s);
 }
 
 void GSLetterCancellation1::Draw()
@@ -132,8 +168,15 @@ void GSLetterCancellation1::Draw2d()
     AmjuGL::DrawTriList(m_tris[i]);
   }
 
-  // Highlight selected letters
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  if (m_mouseOver)
+  {
+    AmjuGL::SetColour(Colour(0, 1, 1, 0.5f));
+    DrawSolidRect(m_mouseRect);
+  }
+
+  // Highlight selected letters
+  AmjuGL::SetColour(Colour(1, 0, 0, 1));
   if (!m_blocks.empty())
   {
     AmjuGL::DrawTriList(m_blocks);
@@ -159,6 +202,8 @@ void GSLetterCancellation1::Draw2d()
 void GSLetterCancellation1::OnActive()
 {
   // Reset timer and score
+  m_timer = 180.0f; //  3 mins
+  m_mouseOver = false;
 
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
@@ -217,6 +262,10 @@ void GSLetterCancellation1::OnActive()
   }
 
   // TODO Set focus element, cancel element, command handlers
+
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetCommand(Amju::OnDoneButton);
+  done->SetHasFocus(true);
 
   GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
   cancel->SetCommand(Amju::OnCancelButton);
