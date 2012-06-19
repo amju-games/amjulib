@@ -43,7 +43,6 @@ protected:
   AmjuGL::Tris m_tris[6]; // 6 rows of 52 chars, set by research design
 
   RCPtr<EventListener> m_listener;
-  unsigned int m_timer;
 
   std::string m_fontImgFilename;
   float m_top; 
@@ -56,6 +55,14 @@ protected:
   char m_letters[6][52]; // the letters
 
   AmjuGL::Tris m_blocks; // blocks over/under ? selected letters
+
+  // True if letter under mouse cursor
+  bool m_mouseOver;
+  Rect m_mouseRect;
+
+  float m_timer;
+  bool m_isPaused;
+  bool m_isFinished;
 };
 typedef Singleton<GSLetterCancellation1> TheGSLetterCancellation1;
 } // namespace
