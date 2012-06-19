@@ -2,6 +2,7 @@
 #define GS_LETTERCANCELLATION1_H_INCLUDED
 
 #include <Singleton.h>
+#include <TextureSequence.h>
 #include "GSGui.h"
 
 namespace Amju 
@@ -30,9 +31,31 @@ public:
   bool OnMouseButtonEvent(const MouseButtonEvent&);
 
 protected:
-  std::vector<GuiElement*> m_letters;
+  Rect MakeRect(int i, int j);
+
+protected:
+  // We display a grid of letters, 6 rows * 52 letters. This is defined by the research design.
+  //std::vector<GuiElement*> m_letters; // Too slow!
+
+  // Can't use GUI Text objects for the letters, as there are so many this is too slow.
+  // Use 6 rows of tris.
+  TextureSequence m_ts;
+  AmjuGL::Tris m_tris[6]; // 6 rows of 52 chars, set by research design
+
   RCPtr<EventListener> m_listener;
   unsigned int m_timer;
+
+  std::string m_fontImgFilename;
+  float m_top; 
+  float m_left; 
+  float m_vSpacing;
+  float m_hSpacing;
+  float m_fontSize;
+  float m_sqSize; // size of selection square
+
+  char m_letters[6][52]; // the letters
+
+  AmjuGL::Tris m_blocks; // blocks over/under ? selected letters
 };
 typedef Singleton<GSLetterCancellation1> TheGSLetterCancellation1;
 } // namespace
