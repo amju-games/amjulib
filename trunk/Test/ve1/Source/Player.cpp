@@ -160,9 +160,9 @@ void Player::OnLocationEntry()
 
 // Scene Graph
 
-void Player::Set(const std::string& key, const std::string& val)
+void Player::SetKeyVal(const std::string& key, const std::string& val)
 {
-  Ve1Object::Set(key, val);
+  Ve1Object::SetKeyVal(key, val);
   if (key == "type")
   {
     int type = ToInt(val); // TODO overload Set to take an int
