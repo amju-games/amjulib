@@ -93,7 +93,7 @@ void Ve1Object::MoveTo(const Vec3f& pos)
   SetPos(pos);
 }
 
-void Ve1Object::Set(const std::string& key, const std::string& val)
+void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
 {
   m_valmap[key] = val; 
 }

@@ -28,7 +28,7 @@ public:
   virtual void OnLocationExit() { } 
 
   // Set a state (key, val) pair
-  virtual void Set(const std::string& key, const std::string& val);
+  virtual void SetKeyVal(const std::string& key, const std::string& val);
   bool Exists(const std::string& key) const;
   const std::string& GetVal(const std::string& key) const;
   ValMap* GetValMap();
@@ -61,8 +61,7 @@ protected:
   //  i.e. it's in whatever the current location is.
   int m_location;
 
-  // For edit mode
-  // Values set by Set()
+  // Values set by SetKeyVal()
   ValMap m_valmap; 
 
   bool m_isSelected;

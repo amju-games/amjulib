@@ -32,12 +32,12 @@ Portal::Portal()
 {
   m_isOpen = true; // TODO
 
-  Set(DEST_KEY, "1"); // value is game object ID for destination portal
+  SetKeyVal(DEST_KEY, "1"); // value is game object ID for destination portal
 }
 
-void Portal::Set(const std::string& key, const std::string& val)
+void Portal::SetKeyVal(const std::string& key, const std::string& val)
 {
-  Ve1Object::Set(key, val);
+  Ve1Object::SetKeyVal(key, val);
   
   if (key == DEST_KEY)
   {
@@ -54,7 +54,7 @@ std::cout << "* Portal: dest portal doesn't exist [yet]..\n";
     if (destObj->GetVal(DEST_KEY) != thisId)
     {
 std::cout << "Setting dest ID " << thisId << " for portal " << destId << "\n";
-      destObj->Set(DEST_KEY, thisId);
+      destObj->SetKeyVal(DEST_KEY, thisId);
       // TODO Should we send this update to server ? Or just always set it in client!?
       TheObjectUpdater::Instance()->SendUpdateReq(destObj->GetId(), DEST_KEY, thisId);
     }

@@ -382,7 +382,7 @@ std::cout << "Old Property for obj: " << it->first << "=" << it->second << "\n";
   TheObjectUpdater::Instance()->SendUpdateReq(m_selObj->GetId(), key, newVal);
 
   // Set locally (or wait for server ?)
-  m_selObj->Set(key, newVal);
+  m_selObj->SetKeyVal(key, newVal);
 
   // Refresh list
   ShowPropsForObj(m_selObj->GetId());

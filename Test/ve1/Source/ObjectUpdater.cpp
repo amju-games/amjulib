@@ -281,6 +281,15 @@ std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " <<
         else
         {
 std::cout << "Moving object " << ve1Obj->GetId() << " to NEW location " << location << "\n";
+
+          // TODO We want other players who leave the current location to go to the last place in the
+          //  current location before disappearing - so they will appear to go through a portal, not
+          //  just vanish. So don't set this pos/location until they have reached their previous 
+          //  destination in the current location - just continue, so we will check again.
+          // TODO
+          // E.g. if (ve1Obj->IsMoving()) { ++it; continue; }
+          // TODO But watch out, make sure there is a safety net so all objects are correctly located
+          //  eventually!
           ve1Obj->SetPos(pos);
           ve1Obj->SetLocation(location);
         }
@@ -322,7 +331,7 @@ std::cout << "..using SetPos, not a Ve1Object\n";
 
 //std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
 
-      ve1Obj->Set(key, val);
+      ve1Obj->SetKeyVal(key, val);
 
 #ifdef WIN32
       it = m_keyvalMap.erase(it);

@@ -78,9 +78,9 @@ void Furniture::OnLocationEntry()
 
 }
 
-void Furniture::Set(const std::string& key, const std::string& val)
+void Furniture::SetKeyVal(const std::string& key, const std::string& val)
 {
-  Ve1Object::Set(key, val);
+  Ve1Object::SetKeyVal(key, val);
 }
 
 void Furniture::OnPlayerCollision(Player* player)

@@ -29,7 +29,7 @@ public:
 //  void SetIsLocalPlayer(bool);
 
   // Ve1Object overrides
-  virtual void Set(const std::string& key, const std::string& val);
+  virtual void SetKeyVal(const std::string& key, const std::string& val);
   virtual void SetMenu(GuiMenu*);
 
   // Set position of arrow for this player, i.e. where we want to go
