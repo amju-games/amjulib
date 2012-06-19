@@ -6,7 +6,11 @@
 #include <StringUtils.h>
 #include <ResourceManager.h>
 #include <Font.h>
+#ifdef WIN32
+#include <windows.h>
+#else
 #include <sys/time.h>
+#endif
 
 #define AMJU_SHOW_FRAME_TIME
 
@@ -95,9 +99,16 @@ void Game::Run()
 void Game::RunOneLoop()
 {
 #ifdef AMJU_SHOW_FRAME_TIME
+
+#ifdef WIN32
+  unsigned long start = GetTickCount();
+
+#else
   // Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
   timeval tbefore;
   gettimeofday(&tbefore, 0);
+
+#endif
 #endif
 
 
@@ -109,19 +120,23 @@ void Game::RunOneLoop()
   static Amju::Font* font =
     (Amju::Font*)Amju::TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
 
-  if (!font)
+  if (font)
   {
-    return;
+#ifdef WIN32
+    unsigned long delta = GetTickCount() - start;
+    std::string s = Amju::ToString((unsigned int)delta);
+
+#else
+    timeval tafter;
+    gettimeofday(&tafter, 0);
+    double t = tafter.tv_sec - tbefore.tv_sec + (tafter.tv_usec - tbefore.tv_usec) * 1e-6;
+    std::string s = Amju::ToString((int)(t * 1000.0f));
+#endif
+
+    // Display time per frame
+    s += "ms";
+    font->Print(-0.9f, 0.8f, s.c_str());
   }
-
-  timeval tafter;
-  gettimeofday(&tafter, 0);
-  double t = tafter.tv_sec - tbefore.tv_sec + (tafter.tv_usec - tbefore.tv_usec) * 1e-6;
-
-  // Display time/frame
-  std::string s = Amju::ToString((int)(t * 1000.0f));
-  s += "ms";
-  font->Print(-0.9f, 0.8f, s.c_str());
 
 #endif //  AMJU_SHOW_FRAME_TIME
 
