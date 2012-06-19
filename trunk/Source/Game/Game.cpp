@@ -3,6 +3,12 @@
 #include "Timer.h"
 #include "EventPoller.h"
 #include "Screen.h"
+#include <StringUtils.h>
+#include <ResourceManager.h>
+#include <Font.h>
+#include <sys/time.h>
+
+#define AMJU_SHOW_FRAME_TIME
 
 #define STATE_DEBUG
 
@@ -88,9 +94,36 @@ void Game::Run()
 
 void Game::RunOneLoop()
 {
-  Update();
+#ifdef AMJU_SHOW_FRAME_TIME
+  // Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
+  timeval tbefore;
+  gettimeofday(&tbefore, 0);
+#endif
 
+
+  Update();
   Draw();
+
+
+#ifdef AMJU_SHOW_FRAME_TIME
+  static Amju::Font* font =
+    (Amju::Font*)Amju::TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+
+  if (!font)
+  {
+    return;
+  }
+
+  timeval tafter;
+  gettimeofday(&tafter, 0);
+  double t = tafter.tv_sec - tbefore.tv_sec + (tafter.tv_usec - tbefore.tv_usec) * 1e-6;
+
+  // Display time/frame
+  std::string s = Amju::ToString((int)(t * 1000.0f));
+  s += "ms";
+  font->Print(-0.9f, 0.8f, s.c_str());
+
+#endif //  AMJU_SHOW_FRAME_TIME
 
   AmjuGL::Flip(); 
 }
