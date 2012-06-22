@@ -40,6 +40,7 @@ run_old:
 
 run:
 	cp $(TARGET) $(RUNDIR); \
+	cp special.cfg $(BUILD); \
 	cd $(RUNDIR); \
 	./$(APP)
 
