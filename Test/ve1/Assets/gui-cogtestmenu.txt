@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+4
 
 
 // Element type
@@ -23,11 +23,19 @@ Please choose cognitive test type...
 arial, 1.0, bgcol=000000, fgcol=ffffff
 
 gui-button
-letter1-button
+letter-m-button
 -0.4, 0.3
-0.8, 0.2
+0.8, 0.1
 gui-button-4.png
-letter cancellation 1
+letter cancellation: M 
+arial, 1.0
+
+gui-button
+letter-sigma-button
+-0.4, 0.1
+0.8, 0.1
+gui-button-4.png
+letter cancellation: sigma 
 arial, 1.0
 
 // no game button
