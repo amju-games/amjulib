@@ -30,6 +30,9 @@ public:
   bool OnCursorEvent(const CursorEvent&);
   bool OnMouseButtonEvent(const MouseButtonEvent&);
 
+  // Call this with different filenames prior to activating, to change task details.
+  bool LoadConfig(const std::string& filename);
+
 protected:
   Rect MakeRect(int i, int j);
 
@@ -54,14 +57,21 @@ protected:
 
   char m_letters[6][52]; // the letters
 
+  // The task is to click on the "special" letters without clicking on any others.
+  // This is timed, with 3 mins to find all the special letters.
+  char m_specialLetter;
+  int m_numSpecialLetters;
+
   AmjuGL::Tris m_blocks; // blocks over/under ? selected letters
 
   // True if letter under mouse cursor
   bool m_mouseOver;
-  Rect m_mouseRect;
+  Rect m_mouseRect; // to draw rectangle around letter under mouse cursor 
 
   float m_timer;
-  bool m_isPaused;
+  float m_maxTime; // 3 mins in Malec et al
+
+  bool m_isPaused; // ?
   bool m_isFinished;
 };
 typedef Singleton<GSLetterCancellation1> TheGSLetterCancellation1;

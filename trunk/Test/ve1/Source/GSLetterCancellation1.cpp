@@ -142,7 +142,7 @@ void GSLetterCancellation1::Update()
     // TODO flash
     s = "0:00";
 
-    if (m_timer < -10.0f)
+    //if (m_timer < -10.0f)
     {
       OnDoneButton();
     }
@@ -199,6 +199,28 @@ void GSLetterCancellation1::Draw2d()
   GSGui::Draw2d();
 }
 
+bool GSLetterCancellation1::LoadConfig(const std::string& filename)
+{
+  File f;
+  if (!f.OpenRead(filename))
+  {
+    // Oh no, this is serious. If we can't load the tests, we can't do the research.
+    // TODO Display a special help screen.
+    // TODO Send a log message to the server.
+
+    return false;
+  }
+
+  // Get font image filename
+  if (!f.GetDataLine(&m_fontImgFilename))
+  {
+    f.ReportError("Expected font filename for letter cancellation test");
+    return false;
+  } 
+
+  return true;
+}
+
 void GSLetterCancellation1::OnActive()
 {
   // Reset timer and score
@@ -222,23 +244,32 @@ void GSLetterCancellation1::OnActive()
   }
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
-  // The participant should click on as many of the Ms as he/she can in 3 mins.
+  // (Generally: there are m_numSpecialLetters * m_specialLetter).
+  // The participant should click on as many of the special letters  as he/she can in 3 mins.
   // NB How do we deal with wrong clicks, etc ?
 
   const int MAX_LETTERS = 6 * 52;
   const int NUM_M = 32; // from Malec et al
-  char letters[MAX_LETTERS + 1];
-  char no_m[26] = "ABCDEFGHIJKLNOPQRSTUVWXYZ"; // no "m"
 
+  // This is all the letters in the grid, which is eventually shuffled
+  char letters[MAX_LETTERS + 1];
+
+  // First we get the exact required number of the special letter.
   for (int i = 0; i < NUM_M; i++)
   {
     letters[i] = 'M';
   }
 
+  // These letters are used to randomly fill the rest of the space.
+  char no_m[26] = "ABCDEFGHIJKLNOPQRSTUVWXYZ"; // no "m"
+
   for (int i = NUM_M; i < MAX_LETTERS; i++)
   {
     letters[i] = no_m[rand() % 25];
   }
+
+  // Letters now consists of the exact number of special characters, followed by a bunch of random
+  //  letters (which doesn't include any of the special letter). Now we shuffle.
   std::random_shuffle(letters, letters + MAX_LETTERS);
 
   for (int i = 0; i < 6; i++)
