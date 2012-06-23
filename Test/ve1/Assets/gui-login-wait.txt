@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-3
+2
 
 
 // Element type
@@ -22,6 +22,26 @@ Waiting...
 // Font name, size
 arial, 1.0
 
+// Cancel button
+// element type
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 2.0 
+
+
+
+// Not used
+
 // Element type
 gui-text
 // Element name
@@ -35,19 +55,4 @@ error
 // Font name, size
 arial, 1.0 
 
-// Cancel button
-// element type
-gui-button
-// Element name
-cancel-button
-// pos (coords are -1..1)
--0.4, -0.72
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-cancel
-// Font name, size
-arial, 2.0 
 
