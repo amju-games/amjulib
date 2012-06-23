@@ -8,30 +8,15 @@
 
 namespace Amju
 {
-static const char* DEFAULT_SERVER = "www.amju.com";
-static const char* DEFAULT_ENV = "ve1";
-
-static const char* SERVER_KEY = "server";
-static const char* ENV_KEY = "env";
-
 std::string UrlRoot()
 {
   static bool first = true;
   static std::string res;
-  if (first)
+  if (first)  // just do look ups once
   {
-    ConfigFile* config = TheSpecialConfigFile::Instance();
-
-    std::string server = DEFAULT_SERVER;
-    if (config->Exists(SERVER_KEY))
-    {
-      server = config->GetValue(SERVER_KEY);
-    }
-    std::string env = DEFAULT_ENV;
-    if (config->Exists(ENV_KEY))
-    {
-      server = config->GetValue(ENV_KEY);
-    }
+    first = false;
+    std::string server = GetServer();
+    std::string env = GetEnv();
     res = server + "/" + env + "/";
   }
   return res;
