@@ -304,6 +304,8 @@ std::cout << " - GOT AN OBJECT! " << obj->GetId() << "\n";
 
 void GSEdit::Draw2d()
 {
+  GSBase::Draw2d();
+
   m_gui->Draw();
 
   if (m_menu)

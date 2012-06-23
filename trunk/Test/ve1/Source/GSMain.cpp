@@ -169,6 +169,8 @@ void GSMain::Draw()
 
 void GSMain::Draw2d()
 {
+  GSBase::Draw2d();
+
   m_gui->Draw();
 
   if (m_menu)
