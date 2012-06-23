@@ -6,6 +6,8 @@
 #include <StringUtils.h>
 #include <ResourceManager.h>
 #include <Font.h>
+#include <Rect.h>
+#include <DrawRect.h>
 #ifdef WIN32
 #include <windows.h>
 #else
@@ -135,7 +137,14 @@ void Game::RunOneLoop()
 
     // Display time per frame
     s += "ms";
-    font->Print(-0.9f, 0.8f, s.c_str());
+    PushColour();
+    AmjuGL::SetColour(Colour(0, 0, 0, 1));
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    Rect r(-1.0f, -0.7f, -1.0f, -0.9f);
+    DrawSolidRect(r);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+    PopColour();
+    font->Print(-1.0f, -1.0f, s.c_str());
   }
 
 #endif //  AMJU_SHOW_FRAME_TIME
