@@ -8,6 +8,7 @@
 #include "GSChoosePlayer.h"
 #include "GSYesNoQuitProcess.h"
 #include "AvatarManager.h"
+#include "Version.h"
 
 namespace Amju
 {
@@ -71,6 +72,13 @@ void GSTitle::OnActive()
   GuiButton* quit = (GuiButton*)GetElementByName(m_gui, "quit-button");
   quit->SetCommand(Amju::OnQuitButton);
   quit->SetIsCancelButton(true);
+
+  GuiText* ver = (GuiText*)GetElementByName(m_gui, "version");
+  std::string s = "v." + ToString(VersionMajor) + "." + ToString(VersionMinor);
+#ifdef _DEBUG
+  s += " DEBUG";
+#endif
+  ver->SetText(s);
 
   CreateText("my game");
 }
