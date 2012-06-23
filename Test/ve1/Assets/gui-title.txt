@@ -38,9 +38,9 @@ version
 // pos (coords are -1..1)
 -1.0, 1.0 
 // size
-0.5, 0.1
+0.8, 0.1
 // Text
-v.0.2
+v.0.3 in progress
 // Font name, size
-arial, 0.75, left
+arial, 0.75, left, bgcol=000000, fgcol=ffffff
 
