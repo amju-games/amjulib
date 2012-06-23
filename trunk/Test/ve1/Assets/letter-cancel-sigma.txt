@@ -1,0 +1,8 @@
+// version
+1
+
+// font img 
+font2d/symbol-32pt-1024_512.png
+
+
+

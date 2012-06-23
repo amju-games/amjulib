@@ -1,0 +1,8 @@
+// version
+1
+
+// font img 
+font2d/arial_round_1024_36pt.png
+
+
+
