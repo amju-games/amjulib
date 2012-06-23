@@ -11,8 +11,15 @@ static void OnCancelButton()
   TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 }
 
-static void OnLetter1Button()
+static void OnLetterSigmaButton()
 {
+  TheGSLetterCancellation1::Instance()->LoadConfig("letter-cancel-sigma.txt");
+  TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
+}
+
+static void OnLetterMButton()
+{
+  TheGSLetterCancellation1::Instance()->LoadConfig("letter-cancel-m.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
 }
 
@@ -46,7 +53,8 @@ void GSCogTestMenu::OnActive()
 
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "cancel-button")->SetCommand(Amju::OnCancelButton);
-  GetElementByName(m_gui, "letter1-button")->SetCommand(Amju::OnLetter1Button);
+  GetElementByName(m_gui, "letter-m-button")->SetCommand(Amju::OnLetterMButton);
+  GetElementByName(m_gui, "letter-sigma-button")->SetCommand(Amju::OnLetterSigmaButton);
 
 }
 
