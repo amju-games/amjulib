@@ -70,18 +70,46 @@ sub new_player_impl($$$)
   my $setnamesql = "insert into objectstate values ($objid, 'name', '$playername', now()) on duplicate key update val='$playername', whenchanged=now()";
   insert($setnamesql);
 
-  # TODO Set values for avatar
+  # Set values for avatar appearance
   my $av_type = int(rand(3));
-  my $sql = "insert into objectstate values ($objid, 'type', $av_type, now())"; # TODO TEMP TEST
+  my $sql = "insert into objectstate values ($objid, 'type', $av_type, now())"; 
   insert($sql);
 
   my $av_tex = int(rand(6));
-  $sql = "insert into objectstate values ($objid, 'tex', $av_tex, now())"; # TODO TEMP TEST
+  $sql = "insert into objectstate values ($objid, 'tex', $av_tex, now())"; 
   insert($sql);
 
-  # TODO Set location and pos
-  $sql = "insert into objectpos (`id`, `x`, `y`, `z`, `loc`) values ($objid, 0, 0, 0, 1)";
+  # Set location and pos - this relies on there being an empty square at the start location for new players
+  #  to materialise in.
+  my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
+  my $z = rand(500) - 250;
+  my $startLoc = 1;
+
+  print "<br><br>Start location: ($x, $z)\n";
+
+  $sql = "insert into objectpos (`id`, `x`, `y`, `z`, `loc`) values ($objid, $x, 0, $z, $startLoc)";
   insert($sql);
+
+  # Initially logged out
+  $sql = "insert into objectstate (`id`, `key`, `val`) values($objid, 'loggedin', 'n') on duplicate key update val='n'";
+  insert($sql);
+
+  # Send email to new player. TODO Use a template so we can easily edit this.
+  # TODO Send html or text ??
+  my $sendmail = '/usr/sbin/sendmail';
+  if (!open(MAIL, "|$sendmail -oi -t ") )
+  {
+    print "Added user ok, except at the end, where I failed to open to sendmail.";
+    return;
+  }
+
+  print MAIL "From: jason\@amju.com\n";
+  print MAIL "To: $email\n";
+  print MAIL "Subject: Welcome to MY GAME!\n\n";
+  print MAIL "Dear $playername,\nwelcome to My Game, an experimental multi-player online game.\n\nTo get started, please go to www.amju.com/ve1/www\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
+  close(MAIL);
+
+  print "All OK, and sent email to new player.\n"; 
 }
 
 
