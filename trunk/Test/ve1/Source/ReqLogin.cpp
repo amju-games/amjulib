@@ -15,6 +15,7 @@
 #include "LocalPlayer.h"
 #include "GSChoosePlayer.h"
 #include "GSFileUpdateCheck.h"
+#include "Version.h"
 
 namespace Amju
 {
@@ -141,6 +142,8 @@ void SendLoginReq(const std::string& email)
 {
   // TODO Sanitize email addr
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(LOGIN) + "?email=" + email;
+  // Send version: server can check we are up-to-date
+  url += "&clientver=v." + ToString(VersionMajor) + "." + ToString(VersionMinor);
 
   TheVe1ReqManager::Instance()->AddLoginReq(new ReqLogin(url, email));
 }
