@@ -12,6 +12,10 @@ private:
   friend class Singleton<SpecialConfigFile>;
 };
 typedef Singleton<SpecialConfigFile> TheSpecialConfigFile;
+
+std::string GetServer();
+std::string GetEnv();
+std::string GetAppName();
 }
 
 #endif
