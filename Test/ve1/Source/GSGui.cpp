@@ -34,6 +34,8 @@ void GSGui::Draw()
 
 void GSGui::Draw2d()
 {
+  GSBase::Draw2d();
+
   if (m_gui)
   {
     m_gui->Draw();

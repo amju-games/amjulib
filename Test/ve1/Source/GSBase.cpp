@@ -2,10 +2,12 @@
 #include <Game.h>
 #include <Timer.h>
 #include <AmjuGL.h>
+#include <GuiText.h>
 #include <iostream>
 #include "ObjectManager.h"
 #include "PosUpdate.h"
 #include "GSNetError.h"
+#include "SpecialConfig.h"
 
 namespace Amju
 {
@@ -52,6 +54,32 @@ void GSBase::GoBack()
 std::cout << "GO BACK to previous state...\n";
 
   TheGame::Instance()->SetCurrentState(m_prevState);
+}
+
+void GSBase::Draw2d()
+{
+  // Draw env info, etc.
+  static GuiText t;
+
+  t.SetSize(Vec2f(1.0f, 0.1f));
+  t.SetJust(GuiText::AMJU_JUST_LEFT);
+  t.SetInverse(true);
+  t.SetDrawBg(true);
+
+  t.SetLocalPos(Vec2f(-1.0f, 0.8f));
+  std::string s = "SaveDir: " + GetAppName();
+  t.SetText(s);
+  t.Draw();
+ 
+  t.SetLocalPos(Vec2f(-1.0f, 0.7f));
+  s = "Server: " + GetServer();
+  t.SetText(s);
+  t.Draw();
+
+  t.SetLocalPos(Vec2f(-1.0f, 0.6f));
+  s = "Env: " + GetEnv();
+  t.SetText(s);
+  t.Draw();
 }
 
 void GSBase::Draw()
