@@ -218,6 +218,7 @@ sub create_tables()
   $sql = "insert into object (type, assetfile, datafile, owner, createtime) values ('terrain', 'terrain-1-assets.txt', 'terrain-data.txt', 0, now());";
   insert($sql);
 
+  # TODO Add admin player character
 
   new_player_impl('jay', 'jason@amju.com', '123');
   new_player_impl('ella', 'ella@amju.com', '123');
