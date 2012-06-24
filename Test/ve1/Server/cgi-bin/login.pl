@@ -8,6 +8,10 @@ require "common.pl";
 require "sendnotification.pl";
 require "sendemail2.pl";
 
+# This is the minimum client version which you must have to be able to log in.
+my $latestMajor = "0";
+my $latestMinor = "2";
+
 my_connect();
 
 sub login();
@@ -15,6 +19,50 @@ login();
 
 
 ##### end of main function
+
+# For research project, send info about research session
+sub add_research_element($$)
+{
+  my ($player_id, $new_session_id) = @_;
+
+  my $period = 60 * 60 * 24 * 7;
+
+  print "<research>";
+
+  # SQL to get the last research session, if there has been one
+  my $sql = "select now(), s.id, s.start, rs.session_num, rs.phase, rs.session_in_phase  from session as s, research_session as rs where s.player_id=$player_id and s.id=rs.session_id order by s.start desc limit 1";
+
+  $query = $dbh->prepare($sql) or die "Query prepare failed for this query: $sql\n";
+  $query->execute;
+  if (my ($now, $session_id, $start, $r_session_num, $phase, $session_in_phase) = $query->fetchrow_array)
+  {
+    # There has been at least one session. Time for next research session ? All sessions done ?
+    my $is_r_s = 0;
+    if ($now > $start + $period)
+    {
+      $is_r_s = 1;
+    }
+    print "<is_research_session>$is_r_s</is_research_session>\n";
+    print "<session_num>$r_session_num + 1</session_num>\n"; # 1-based
+    print "<mode>0</mode>\n"; # No game, set baseline
+    print "<cog_test>TODO</cog_test>\n";
+
+    # Set game mode (phase): no game, single, or multi
+    # Set session within this phase
+  }
+  else
+  {
+    # No previous sessions, this is the first.
+    print "First research session!\n";
+    print "<is_research_session>1</is_research_session>\n";
+    print "<session_num>1</session_num>\n"; # 1-based
+    print "<mode>0</mode>\n"; # No game, set baseline
+    print "<cog_test>TODO</cog_test>\n";
+  }
+
+  print "</research>";
+}
+
 
 sub login()
 {
@@ -39,8 +87,6 @@ print "Client ver: $clientver\n";
     print "Major: $major, Minor: $minor\n";
 
     # Check major/minor version numbers, error if this client version is too old
-    my $latestMajor = "0";
-    my $latestMinor = "2";
     print "LATEST Major: $latestMajor, Minor: $latestMinor\n";
 
     if ($major < $latestMajor || $major == $latestMajor && $minor < $latestMinor)
@@ -101,6 +147,9 @@ print "Query: $sql\n";
 print "Your new session ID: $session_id\n";
 
       print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$loc</loc>\n";
+
+      # Add info for research project: is this a research session, which game mode, etc.
+      add_research_element($player_id, $session_id);
    
       # Set logged in flag as object value 
       $sql = "insert into objectstate (`id`, `key`, `val`) select player.obj_id, 'loggedin', 'y' from player, session where player.id = session.player_id and session.id=$session_id on duplicate key update val='y'";
