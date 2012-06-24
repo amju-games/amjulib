@@ -1,4 +1,4 @@
-export VERSION=0.2
+export VERSION=0.3
 
 export AMJU_BUILD_ARCH=Mac-i386
 export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__'
