@@ -58,13 +58,4 @@ void GSLoginWaiting::OnActive()
   SendLoginReq(m_email);
 }
 
-bool GSLoginWaiting::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSLoginWaiting::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
