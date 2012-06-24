@@ -42,10 +42,9 @@ sub create_table_cogtest()
 
 CREATE TABLE `research_cogtest`
 (`id` INT NOT NULL,
-`playerid` INT NOT NULL,
-`whentaken` TIMESTAMP NOT NULL,
+`session_id` INT NOT NULL,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`playerid`) REFERENCES player(`id`)
+FOREIGN KEY (`session_id`) REFERENCES session(`id`)
 ) ENGINE = MYISAM;
 END
 
@@ -116,6 +115,26 @@ END
   update_or_insert($sql);
 }
 
+sub create_table_session()
+{
+  # Research sessions
+  drop_table("research_session"); # one row per research session (currently weekly) per player
+
+  my $sql = <<END;
+
+CREATE TABLE `research_session`
+(`session_id` INT NOT NULL,
+`session_num` INT NOT NULL,
+`phase` INT NOT NULL,
+`session_in_phase` INT NOT NULL,
+FOREIGN KEY (`session_id`) REFERENCES session(`id`)
+) ENGINE = MYISAM;
+END
+
+  update_or_insert($sql);
+
+  print "Created research_testresult table! $sql\n<br>\n";
+}
 
 sub create_tables()
 {
@@ -125,7 +144,9 @@ sub create_tables()
 
   create_table_cogtest();
 
-  create_table_action();
+#  create_table_action();
+
+  create_table_session();
 }
 
 
