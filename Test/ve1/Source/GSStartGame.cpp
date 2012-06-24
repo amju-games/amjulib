@@ -13,25 +13,24 @@ GSStartGame::GSStartGame()
 
 void GSStartGame::Update()
 {
-  GSBase::Update();
+  GSGui::Update();
 
   //TheObjectManager::Instance()->Update(); // no need, we will be out of here next frame
 }
 
 void GSStartGame::Draw()
 {
-  GSBase::Draw();
-
+  GSGui::Draw();
 }
 
 void GSStartGame::Draw2d()
 {
-  // No need to draw, we will be changing to 'wait for location' state very soon..
+  GSGui::Draw2d();
 }
 
 void GSStartGame::OnActive()
 {
-  GSBase::OnActive();
+  GSGui::OnActive();
 
   SetLocalPlayerLocation(-1); // Force reload if m_startLoc is last location
   SetLocalPlayerLocation(m_startLoc);
