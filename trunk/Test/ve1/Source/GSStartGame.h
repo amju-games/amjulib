@@ -2,11 +2,11 @@
 #define GS_STARTGAME_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSBase.h"
+#include "GSGui.h"
 
 namespace Amju 
 {
-class GSStartGame : public GSBase
+class GSStartGame : public GSGui
 {
   GSStartGame();
   friend class Singleton<GSStartGame>;
