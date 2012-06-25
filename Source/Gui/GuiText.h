@@ -45,6 +45,7 @@ public:
   void SetJust(Just j);
   void SetIsMulti(bool); // Multi line ?
 
+  // For text which is revealed a char at a time, this is the period for each char
   void SetCharTime(float secs);
 
 protected:
