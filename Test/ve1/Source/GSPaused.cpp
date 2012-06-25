@@ -4,7 +4,7 @@
 #include "GSMain.h"
 #include "GSOptions.h"
 #include "GSTitle.h"
-#include "LogOut.h"
+#include "GSYesNoQuitSession.h"
 
 namespace Amju
 {
@@ -21,10 +21,8 @@ void OnOptionsButton()
 
 void OnQuitButton()
 {
-  // TODO Quit confirm -- use generic yes/no state
-  //exit(0); // TODO Check dtors called -> state saved
-  SendLogOut();
-  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+  TheGSYesNoQuitSession::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitSession::Instance());
 }
 
 GSPaused::GSPaused()
