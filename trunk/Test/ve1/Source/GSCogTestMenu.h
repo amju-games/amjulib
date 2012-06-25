@@ -17,6 +17,12 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void ResetTests();
+
+  // TODO Set order of tests; set propoerties of each test
+
+private:
+  int m_nextTest;
 };
 typedef Singleton<GSCogTestMenu> TheGSCogTestMenu;
 } // namespace
