@@ -53,6 +53,10 @@ public:
 
   virtual bool Do()
   {
+    TheGSLoginWaiting::Instance()->SetEmail(m_email);
+    TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+
+    /*
     if (IsOnline())
     {
       TheGSLoginWaiting::Instance()->SetEmail(m_email);
@@ -71,6 +75,8 @@ public:
 
       TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
     }
+    */
+
     return false;
   }
 
