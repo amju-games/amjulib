@@ -349,6 +349,20 @@ void GuiText::SetText(const std::string& text)
   RecalcFirstLast();
 }
 
+bool GuiText::IsMulti() const
+{
+  return m_isMulti;
+}
+
+int GuiText::GetNumLines() const
+{
+  if (IsMulti())
+  {
+    return m_lines.size();
+  }
+  return 1; 
+}
+
 void GuiText::SetIsMulti(bool multi)
 {
   if (multi == m_isMulti) return;
