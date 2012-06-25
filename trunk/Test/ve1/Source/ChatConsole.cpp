@@ -4,6 +4,7 @@
 #include <GuiButton.h>
 #include "ChatConsole.h"
 #include "LocalPlayer.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -89,6 +90,44 @@ void ChatConsole::OnDeactive()
   m_gui = 0;
 }
 
+void ChatConsole::SetPlayerIsTyping(bool isTyping, int typerId, int recipId)
+{
+  // TODO
+  if (isTyping)
+  {
+std::cout << "This player: " << typerId << " is typing a message for " << recipId << ".\n";
+    if (recipId == m_lastRecipId)
+    {
+std::cout << "Holy shit, that's ME!!\n";
+    }
+  }
+  else
+  {
+std::cout << "This player: " << typerId << " is not typing anything.\n";
+  }
+}
+
+void OnTyping()
+{
+std::cout << "Typing!!\n";
+  TheChatConsole::Instance()->OnTyping();
+}
+
+void ChatConsole::OnTyping()
+{
+  // Set state for the local player so the other client can see that we are typing something.
+  int recip = m_lastRecipId;
+  GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
+  if (textedit->GetText().empty())
+  {
+    // No text
+    recip = 0;
+  }
+
+  int senderId = GetLocalPlayer()->GetId();
+  TheObjectUpdater::Instance()->SendUpdateReq(senderId, SET_KEY("istyping"), ToString(recip));
+}
+
 void ChatConsole::OnActive()
 {
   m_gui = LoadGui("gui-chat.txt");
@@ -101,6 +140,7 @@ void ChatConsole::OnActive()
 
   GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
   textedit->SetText("");
+  textedit->SetOnCharFunc(Amju::OnTyping);
 
   GetElementByName(m_gui, "chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
   ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
@@ -130,6 +170,9 @@ std::cout << "Blank msg, not sending.\n";
 
   //ActivateChatSend(false, -1); // ??
   textedit->SetText("");
+
+  // Reset typing flag
+  OnTyping();
 
   GetElementByName(m_gui, "msg-recv-comp")->SetVisible(true);
 }

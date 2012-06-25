@@ -39,6 +39,12 @@ public:
   void ActivateChatRecv(bool active, const MsgManager::Msg* = 0);
   void OnRecvClose();
 
+  // Set flag for player typing msg to another player - display something if it makes sense
+  void SetPlayerIsTyping(bool isTyping, int typerId, int recipId);
+
+  // Called when we type into text edit box
+  void OnTyping();
+
 private:
   PGuiElement m_gui;
 
