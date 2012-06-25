@@ -14,6 +14,13 @@ GuiTextEdit::GuiTextEdit()
   m_drawBg = true;
   m_caretTimer = 0;
   m_drawCaret = true;
+  
+  m_onCharFunc = 0;
+}
+
+void GuiTextEdit::SetOnCharFunc(CommandFunc f)
+{
+  m_onCharFunc = f;
 }
 
 void GuiTextEdit::Draw()
@@ -123,6 +130,11 @@ void GuiTextEdit::Insert(char c)
   }
   m_selectedText = m_caret;
   RecalcFirstLast();
+  
+  if (m_onCharFunc)
+  {
+    m_onCharFunc();
+  }
 }
 
 int GuiTextEdit::CalcCursorPos(float mousex)
