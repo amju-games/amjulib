@@ -15,7 +15,10 @@
 #include "LocalPlayer.h"
 #include "GSChoosePlayer.h"
 #include "GSFileUpdateCheck.h"
+#include "GSSessionInfo.h"
 #include "Version.h"
+#include "GameMode.h"
+#include "GSCogTestMenu.h"
 
 namespace Amju
 {
@@ -25,7 +28,7 @@ ReqLogin::ReqLogin(const std::string& url, const std::string& email) : Ve1Req(ur
 
 void ReqLogin::OnFailure()
 {
-  ShowError("Couldn't log in. " + m_errorStr, TheGSLogin::Instance());
+  ShowError("Couldn't log in. " + m_errorStr, TheGSTitle::Instance());
 }
 
 void ReqLogin::OnSuccess()
@@ -105,31 +108,83 @@ std::cout << "No start location.\n";
     SetLocalPlayerId(objId);
 
     Assert(pi);
-    // TODO No good, this should be a flag on server
-    /*
-    if (pi->PIGetBool(PI_KEY("has set up")))
+
+    // Handle research info: session, mode, etc.
+    GameMode gm = AMJU_MODE_MULTI;
+    bool doCogTests = false;
+
+    PXml research = m_xml.getChildNode(5);
+    if (SafeStrCmp(research.getName(), "research"))
     {
-      // Go to the main game, we are now logged in OK!
-      TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+      p = research.getChildNode(0);
+      if (SafeStrCmp(p.getName(), "is_research_session")) 
+      {
+        int isRS = ToInt(p.getText());
+        if (isRS)
+        {
+          doCogTests = true;
+std::cout << "This is a research session so we should do the cog tests before going into the game.\n"; 
+        }
+        else
+        {
+std::cout << "This is NOT a research session, woohoo!\n";
+        }
+      }
+      else
+      {
+std::cout << "Found research element but unexpected format (no is_research_session).\n";
+      }
+
+      p = research.getChildNode(2);
+      if (SafeStrCmp(p.getName(), "mode"))
+      {
+        int mode = ToInt(p.getText());
+        switch (mode)
+        {
+        case 0: 
+std::cout << "NO GAME MODE!!\n";
+          gm = AMJU_MODE_NO_GAME; 
+          break;
+        
+        case 1:
+std::cout << "SINGLE MODE!!\n";
+          gm = AMJU_MODE_SINGLE;
+          break;
+
+        case 2:
+std::cout << "MULTI MODE!!\n";
+          gm = AMJU_MODE_MULTI;
+          break;
+
+        default:
+std::cout << "Unexpected mode value.\n";
+    
+        }
+      }
+      else
+      {
+std::cout << "Found research element but unexpected format (no mode).\n";
+      }
     }
     else
     {
-      // Go to set up page
-      TheGSAvatarMod::Instance()->SetPrevState(TheGSLogin::Instance());
-      TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+std::cout << "No research element in login.pl response?!?\n";
+      Assert(0);
     }
-    */
 
-    // Always go to avatar page..????
-    // Problems here - we don't yet have the player's avatar state from the server, so 
-    //  display the default (white cat). 
-    //TheGSAvatarMod::Instance()->SetPrevState(TheGSChoosePlayer::Instance());
-    //TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+    SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
-    // Logged in: check for updated files before starting game.
-    //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-    // TODO TheGSFileUpdateCheck::Instance()->SetNext(TheGSStartGame::Instance());
-    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+    if (doCogTests)
+    {
+      TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    }
+    else
+    {
+      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+    }
+
+    // No point ?
+    // TheGame::Instance()->SetCurrentState(TheGSSessionInfo::Instance());
   }
   else
   {
