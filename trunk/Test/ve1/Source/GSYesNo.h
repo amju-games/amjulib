@@ -15,7 +15,7 @@ public:
   virtual void OnActive();
 
   virtual void OnYes() = 0;
-  virtual void OnNo() = 0;
+  virtual void OnNo() { GoBack(); } 
 
 protected:
   std::string m_question;
