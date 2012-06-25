@@ -22,7 +22,7 @@
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
-#define OBJECT_CHECK_DEBUG
+//#define OBJECT_CHECK_DEBUG
 
 namespace Amju
 {
