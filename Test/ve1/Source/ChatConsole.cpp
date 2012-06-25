@@ -33,7 +33,7 @@ void ChatConsole::Conversation::Draw()
     GuiText* text = m_texts[i];
     pos += text->GetSize().y;
     text->SetLocalPos(Vec2f(-0.8f, pos));
-    m_texts[i]->Draw();
+    text->Draw();
 
     MultColour(Colour(1, 1, 1, 0.6f)); // fade
   }
@@ -44,16 +44,18 @@ void ChatConsole::Conversation::Draw()
 void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg)
 {
   GuiText* text = new GuiText;
+  text->SetIsMulti(true); // So we can see all of a long msg!
+  text->SetSize(Vec2f(1.6f, 0.1f)); //text->GetSize().y)); // TODO multi line msgs
   text->SetTextSize(1.0f);
   text->SetText(msg);
-  text->SizeToText(); 
-  text->SetSize(Vec2f(1.6f, text->GetSize().y)); // TODO multi line msgs
+  //text->SizeToText(); 
+  text->SetSize(Vec2f(1.6f, (float)text->GetNumLines() * 0.1f)); // TODO multi line msgs
   text->SetDrawBg(true);
   text->SetInverse(sentNotRecv);
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   if (sentNotRecv)
   {
-    text->SetJust(GuiText::AMJU_JUST_RIGHT);
+    //text->SetJust(GuiText::AMJU_JUST_RIGHT);
     //text->SetFgCol(Colour(0, 0, 0, 1));
   }
 
