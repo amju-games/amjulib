@@ -11,7 +11,6 @@ class GSYesNoQuitProcess : public GSYesNo
 public:
   GSYesNoQuitProcess();
   virtual void OnYes();
-  virtual void OnNo();
 };
 
 typedef Singleton<GSYesNoQuitProcess> TheGSYesNoQuitProcess;
