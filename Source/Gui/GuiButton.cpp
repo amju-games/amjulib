@@ -326,10 +326,12 @@ void GuiButton::SetIsMouseOver(bool m)
 
   m_isMouseOver = m;
 
+  /* Terrible idea
   if (m)
   {
     SetIsFocusButton(true);
   }
+  */
 }
 
 bool GuiButton::IsPressed() const
