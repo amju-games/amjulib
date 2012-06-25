@@ -189,6 +189,12 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       if (m_sceneNode) m_sceneNode->SetVisible(true);    
     }
   }
+  else if (key == "istyping")
+  {
+    int recipId = ToInt(val);
+    bool isTyping = (recipId > 0);
+    TheChatConsole::Instance()->SetPlayerIsTyping(isTyping, GetId(), recipId); 
+  }
 }
 
 void Player::SetArrowVis(bool visible)
