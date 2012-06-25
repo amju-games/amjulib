@@ -14,11 +14,6 @@ void GSYesNoQuitProcess::OnYes()
   exit(0);
 }
 
-void GSYesNoQuitProcess::OnNo()
-{
-  GoBack();
-}
-
 }
 
 
