@@ -40,6 +40,10 @@ void GSFileUpdateCheck::OnFinishedChecking(const std::string& timestamp)
 void GSFileUpdateCheck::OnSkip()
 {
   // TODO Hmm, could be complicated as request is already in flight..??
+  // Ignore response if this state is no longer current.
+
+  // DON'T update timestamp
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
 void GSFileUpdateCheck::Draw()
