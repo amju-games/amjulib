@@ -2,6 +2,7 @@
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <GuiText.h>
 #include <CursorManager.h>
 #include "GSStartMenu.h"
 #include "GSLogin.h"
@@ -9,24 +10,22 @@
 #include "GSYesNoQuitProcess.h"
 #include "AvatarManager.h"
 #include "Version.h"
+#include "SpecialConfig.h"
 
 namespace Amju
 {
 static void OnStartButton()
 {
-  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 
-  // For now, no start menu as there is only the multi player option
-  //TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+  // Don't go to the menu. The game mode now depends on the response from login.pl.
+  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
 static void OnQuitButton()
 {
   // No Confirm from Title screen
   exit(0);
- 
-  //TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSTitle::Instance());
-  //TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
 }
 
 GSTitle::GSTitle()
@@ -47,6 +46,29 @@ void GSTitle::Draw()
 void GSTitle::Draw2d()
 {
   GSGui::Draw2d();
+
+  // Draw env info, etc.
+  static GuiText t;
+
+  t.SetSize(Vec2f(1.0f, 0.1f));
+  t.SetJust(GuiText::AMJU_JUST_LEFT);
+  t.SetInverse(true);
+  t.SetDrawBg(true);
+
+  t.SetLocalPos(Vec2f(-1.0f, 0.8f));
+  std::string s = "SaveDir: " + GetAppName();
+  t.SetText(s);
+  t.Draw();
+
+  t.SetLocalPos(Vec2f(-1.0f, 0.7f));
+  s = "Server: " + GetServer();
+  t.SetText(s);
+  t.Draw();
+
+  t.SetLocalPos(Vec2f(-1.0f, 0.6f));
+  s = "Env: " + GetEnv();
+  t.SetText(s);
+  t.Draw();
 }
 
 void GSTitle::OnActive()
