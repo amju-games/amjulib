@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SafeUtils.h>
 #include <Directory.h>
+#include <Game.h>
 #include "Timestamp.h"
 #include "MsgManager.h"
 #include "LocalPlayer.h"
@@ -19,6 +20,15 @@ FileUpdater::FileUpdater(const std::string& url) : Ve1Req(url, "file-update")
 
 void FileUpdater::OnSuccess()
 {
+  // Do nothing if GSFileUpdateCheck is no longer the current state - this means we chose
+  //  to skip this check.
+  // TODO
+  if (TheGame::Instance()->GetState() != TheGSFileUpdateCheck::Instance())
+  {
+std::cout << "SKIPPED FILE UPDATE CHECK, SO IGNORING SERVER RESPONSE!!\n";
+    return;
+  }
+
   PXml p = m_xml.getChildNode(1);
   if (SafeStrCmp(p.getName(), "files"))
   {
