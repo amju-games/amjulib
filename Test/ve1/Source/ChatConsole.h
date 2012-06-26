@@ -6,6 +6,7 @@
 #include <Singleton.h>
 #include <EventListener.h>
 #include <GuiText.h>
+#include <Vec2.h>
 #include "MsgManager.h"
 
 namespace Amju
@@ -62,8 +63,16 @@ private:
     void AddText(bool sentNotRecv, const std::string& msg);
   };
 
+  friend struct Conversation;
+
   typedef std::map<int, Conversation> Convs;
   Convs m_convs;
+
+  // On screen pos, size
+  Vec2f m_size; // size of entire chat window
+  Vec2f m_pos; // top left of chat window
+  float m_fontSize; // size of text for msgs
+
 };
 
 typedef Singleton<ChatConsole> TheChatConsole;
