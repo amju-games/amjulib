@@ -21,6 +21,10 @@ void GuiElement::SetHasFocus(bool f)
   {
     focusElement = this;
     OnGetFocus();
+    if (m_onFocusFunc)
+    {
+      m_onFocusFunc();
+    }
 
     if (IsTextToSpeechEnabled())
     {
@@ -36,6 +40,11 @@ void GuiElement::SetHasFocus(bool f)
 bool GuiElement::HasFocus() const
 {
   return (focusElement == this);
+}
+
+void GuiElement::SetOnFocusFunc(CommandFunc f)
+{
+  m_onFocusFunc = f;
 }
 
 void GuiElement::SetGlobalScale(float f)
@@ -83,6 +92,7 @@ GuiElement::GuiElement()
   m_isVisible = true;
   m_isSelected = false;
   m_commandFunc = 0;
+  m_onFocusFunc = 0;
 }
 
 PGuiElement LoadGui(const std::string& filename)
