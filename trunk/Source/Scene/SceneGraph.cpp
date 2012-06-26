@@ -118,6 +118,12 @@ void SceneGraph::DrawNode(SceneNode* p)
 void SceneGraph::DrawChildren(
   SceneNode* node, Frustum::FrustumResult fr)
 {
+  // If a node is not visible, its children should also not be visible. Right ?
+  if (!node->IsVisible())
+  {
+    return;
+  }
+
   Assert(!m_isHeirarchy || fr != Frustum::AMJU_OUTSIDE);
 
   // If this node is a camera, set the SceneGraph current camera to this..?
@@ -218,6 +224,7 @@ void SceneGraph::Draw()
   m_root[AMJU_OPAQUE]->CombineTransform();
 
   SceneNode* node = m_root[AMJU_OPAQUE];
+  Assert(node);
   Frustum::FrustumResult fr = m_frustum.Intersects(*(node->GetAABB()));
 
   if (fr != Frustum::AMJU_OUTSIDE)
