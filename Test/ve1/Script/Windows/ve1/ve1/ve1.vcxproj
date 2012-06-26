@@ -42,7 +42,8 @@
     <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -90,13 +91,20 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>mkdir ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S  ..\..\..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll  ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>Copy data to build dir</Message>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -184,6 +192,7 @@
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNoQuitSession.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
@@ -206,6 +215,7 @@
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
@@ -219,6 +229,7 @@
     <ClCompile Include="..\..\..\..\Source\Ve1OnlineReqManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1SceneGraph.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Version.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h" />
@@ -257,6 +268,7 @@
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNoQuitProcess.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNoQuitSession.h" />
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
@@ -278,6 +290,7 @@
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
+    <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
@@ -291,6 +304,7 @@
     <ClInclude Include="..\..\..\..\Source\Ve1OnlineReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
+    <ClInclude Include="..\..\..\..\Source\Version.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d11.lib" />
