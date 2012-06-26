@@ -49,11 +49,11 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
 
   GuiText* text = new GuiText;
   text->SetIsMulti(true); // So we can see all of a long msg!
-  text->SetSize(Vec2f(cc->m_size.x, cc->m_fontSize * 0.1f)); 
+  text->SetSize(Vec2f(cc->m_size.x, cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetTextSize(cc->m_fontSize);
   text->SetText(msg);
   //text->SizeToText(); // TODO make this work for multi-line
-  text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * 0.1f)); 
+  text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetDrawBg(true);
   text->SetInverse(sentNotRecv);
   text->SetJust(GuiText::AMJU_JUST_LEFT);

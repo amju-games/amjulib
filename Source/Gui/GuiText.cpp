@@ -188,9 +188,15 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
     // TODO
     std::string str = m_lines[i];
 
+    float x = GetCombinedPos().x;
+    if (m_just == AMJU_JUST_RIGHT)
+    {
+      x += GetSize().x - GetTextWidth(str);
+    }
+
     PushColour();
     MultColour(fg);
-    PrintLine(str, GetCombinedPos().x, y); 
+    PrintLine(str, x, y); 
     PopColour();
 
     y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  

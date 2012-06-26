@@ -13,6 +13,7 @@ class GuiText : public GuiElement
 {
 public:
   static const char* NAME;
+  static const float CHAR_HEIGHT_FOR_SIZE_1;
 
   GuiText();
   virtual void Draw();  
@@ -67,8 +68,6 @@ protected:
   void PrintLine(const std::string&, float x, float y);
 
 protected:
-  static const float CHAR_HEIGHT_FOR_SIZE_1;
-
   std::string m_text;
   std::string m_fontName;
   Just m_just;
