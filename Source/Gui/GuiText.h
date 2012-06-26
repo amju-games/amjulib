@@ -62,7 +62,7 @@ protected:
   void ReallyDraw();
 
   void DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg);
-  void DrawMultiLine();
+  void DrawMultiLine(const Colour& fg, const Colour& bg);
 
   void PrintLine(const std::string&, float x, float y);
 

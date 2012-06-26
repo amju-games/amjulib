@@ -156,7 +156,7 @@ void GuiText::ReallyDraw()
 
   if (m_isMulti)
   {
-    DrawMultiLine();
+    DrawMultiLine(inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
   }
   else
   {
@@ -175,7 +175,7 @@ void GuiText::ReallyDraw()
   font->SetSize(oldSize);
 }
 
-void GuiText::DrawMultiLine()
+void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 {
   Vec2f pos = GetCombinedPos();
 
@@ -188,7 +188,11 @@ void GuiText::DrawMultiLine()
     // TODO
     std::string str = m_lines[i];
 
+    PushColour();
+    MultColour(fg);
     PrintLine(str, GetCombinedPos().x, y); 
+    PopColour();
+
     y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
     if (y < minY)
     {
@@ -237,6 +241,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
     break;
   }
 
+  // TODO Isn't this already done in ReallyDraw() ?
   if (m_drawBg)
   {
     PushColour();
@@ -274,6 +279,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
   }
   else
   {  
+    // Why don't we use fg ??
     PrintLine(str, x, y);
   }
 }
