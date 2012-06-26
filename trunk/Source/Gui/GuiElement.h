@@ -33,6 +33,7 @@ public:
   bool HasFocus() const;  
 
   virtual void OnGetFocus() {}
+  void SetOnFocusFunc(CommandFunc onFocusFunc);
 
   // Set command as an object for Undo, or a function for simple, 
   //  non-undoable action
@@ -91,6 +92,8 @@ private:
   CommandFunc m_commandFunc;
 
   GuiElement* m_parent; // parent element, may be 0
+
+  CommandFunc m_onFocusFunc; // called when this element gets the focus
 };
 
 typedef RCPtr<GuiElement> PGuiElement;
