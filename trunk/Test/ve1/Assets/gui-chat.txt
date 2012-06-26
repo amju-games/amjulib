@@ -88,6 +88,6 @@ chat-cancel-button
 -0.4, -0.7
 0.4, 0.1
 gui-button-4.png
-cancel
+close
 arial, 1.0
 
