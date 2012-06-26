@@ -25,14 +25,16 @@ static void OnChatCancelButton()
 
 void ChatConsole::Conversation::Draw()
 {
+  static ChatConsole* cc = TheChatConsole::Instance();
+
   PushColour();
 
-  float pos = -0.6f; // TODO CONFIG
+  float pos = cc->m_pos.y + 0.2f; // -0.6f; // TODO CONFIG
   for (int i = m_texts.size() - 1; i >= 0; i--)
   {
     GuiText* text = m_texts[i];
     pos += text->GetSize().y;
-    text->SetLocalPos(Vec2f(-0.8f, pos));
+    text->SetLocalPos(Vec2f(cc->m_pos.x, pos));
     text->Draw();
 
     MultColour(Colour(1, 1, 1, 0.6f)); // fade
@@ -43,19 +45,23 @@ void ChatConsole::Conversation::Draw()
 
 void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg)
 {
+  static ChatConsole* cc = TheChatConsole::Instance();
+
   GuiText* text = new GuiText;
   text->SetIsMulti(true); // So we can see all of a long msg!
-  text->SetSize(Vec2f(1.6f, 0.1f)); //text->GetSize().y)); // TODO multi line msgs
-  text->SetTextSize(1.0f);
+  text->SetSize(Vec2f(cc->m_size.x, cc->m_fontSize * 0.1f)); 
+  text->SetTextSize(cc->m_fontSize);
   text->SetText(msg);
-  //text->SizeToText(); 
-  text->SetSize(Vec2f(1.6f, (float)text->GetNumLines() * 0.1f)); // TODO multi line msgs
+  //text->SizeToText(); // TODO make this work for multi-line
+  text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * 0.1f)); 
   text->SetDrawBg(true);
   text->SetInverse(sentNotRecv);
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   if (sentNotRecv)
   {
-    //text->SetJust(GuiText::AMJU_JUST_RIGHT);
+    text->SetJust(GuiText::AMJU_JUST_RIGHT);
+
+    // ???
     //text->SetFgCol(Colour(0, 0, 0, 1));
   }
 
@@ -67,6 +73,11 @@ ChatConsole::ChatConsole()
   m_lastRecipId = -1;
   m_chatSendIsActive = false;
   m_chatRecvIsActive = false;
+
+  // TODO Load from config
+  m_pos = Vec2f(-0.8f, -0.8f);
+  m_size = Vec2f(1.6f, 1.0f); // TODO TEMP TEST
+  m_fontSize = 0.7f;
 }
 
 void ChatConsole::Draw()
@@ -208,6 +219,10 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
     ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
+
+    GuiButton* send = (GuiButton*)GetElementByName(m_gui, "chat-send-button");
+    send->SetHasFocus(true); // use in preference to SetIsFocusButton
+
     GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
     textedit->SetHasFocus(true);
     //textedit->SetText("");
