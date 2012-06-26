@@ -276,6 +276,14 @@ std::cout << "Unexpected, tried to access ChatConsole: ActivateChatRecv\n";
     // TODO TEMP TEST
     m_lastRecipId = msg->m_senderId;
 
+    static std::set<int> displayedIDs;
+    if (displayedIDs.count(msg->m_id))
+    {
+std::cout << "Wait, we already displayed this msg!!\n"; 
+      Assert(0);
+    }
+    displayedIDs.insert(msg->m_id);
+
     m_convs[m_lastRecipId].AddText(false, msg->m_text);
 
   }
