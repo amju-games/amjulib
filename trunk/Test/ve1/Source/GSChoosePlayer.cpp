@@ -133,14 +133,14 @@ std::cout << "GSChoosePlayer: Num players: " << numPlayers << "\n";
       b->SetText(playername);
       b->SetCommand(new ChoosePlayerCommand(i, email, playername));
     }
-    else if (i == numPlayers && IsOnline())
+    else if (i == numPlayers)
     {
       b->SetText("new...");
       b->SetCommand(OnNewPlayer);
     } 
     else
     {
-      elem->SetVisible(false);
+      b->SetVisible(false);
     }
   }
 }
