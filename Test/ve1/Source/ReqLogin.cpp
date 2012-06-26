@@ -15,7 +15,6 @@
 #include "LocalPlayer.h"
 #include "GSChoosePlayer.h"
 #include "GSFileUpdateCheck.h"
-#include "GSSessionInfo.h"
 #include "Version.h"
 #include "GameMode.h"
 #include "GSCogTestMenu.h"
