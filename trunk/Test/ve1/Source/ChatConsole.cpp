@@ -2,6 +2,7 @@
 #include <GuiTextEdit.h>
 #include <GuiWindow.h>
 #include <GuiButton.h>
+#include <EventPoller.h>
 #include "ChatConsole.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
@@ -100,6 +101,7 @@ bool ChatConsole::IsActive() const
 
 void ChatConsole::OnDeactive()
 {
+  TheEventPoller::Instance()->RemoveListener(m_gui);
   m_gui = 0;
 }
 
@@ -128,6 +130,12 @@ std::cout << "Typing!!\n";
 
 void ChatConsole::OnTyping()
 {
+  if (!m_gui)
+  {
+std::cout << "Unexpected, tried to access ChatConsole: OnTyping\n";
+    return;
+  }
+
   // Set state for the local player so the other client can see that we are typing something.
   int recip = m_lastRecipId;
   GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
@@ -163,6 +171,12 @@ void ChatConsole::OnActive()
 
 void ChatConsole::OnChatSend()
 {
+  if (!m_gui)
+  {
+std::cout << "Unexpected, tried to access ChatConsole: OnChatSend\n";
+    return;
+  }
+
   Assert(m_lastRecipId != -1);
   Assert(GetLocalPlayer()); // or couldn't send, right ?
 
@@ -207,6 +221,12 @@ bool ChatConsole::CanShowMsg() const
 
 void ChatConsole::ActivateChatSend(bool active, int recipId)
 {
+  if (!m_gui)
+  {
+std::cout << "Unexpected, tried to access ChatConsole: ActivateChatSend\n";
+    return;
+  }
+
   // TODO polish -- jump onto screen
   m_lastRecipId = recipId;
 
@@ -236,6 +256,12 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
 void ChatConsole::ActivateChatRecv(bool active, const MsgManager::Msg* msg)
 {
+  if (!m_gui)
+  {
+std::cout << "Unexpected, tried to access ChatConsole: ActivateChatRecv\n";
+    return;
+  }
+
   if (active && msg)
   {
     std::string senderName;
