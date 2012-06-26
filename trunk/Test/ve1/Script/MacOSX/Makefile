@@ -44,6 +44,9 @@ run:
 	cd $(RUNDIR); \
 	./$(APP)
 
+# NB To be sure you have all up-to-date assets, do a make release, then make run
+
+
 # Hmm, if there's an assert we don't go into gdb, so not much use :-(
 #	echo run | gdb $(APP); \
 #	cd -
@@ -61,7 +64,13 @@ release:
 	cp -R $(ASSETSDIR)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/; \
 	cp -R $(FONT2D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font2d; \
 	cp -R $(FONT3D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font3d; \
-	cp $(TARGET) $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; \
+	cp $(TARGET) $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; 
+
+
+# Do a make zip to create a zip file for publishing on web site
+
+zip:
+	make release; \
 	strip $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; \
 	cd $(BUILD); \
 	rm "My Game.zip"; \
