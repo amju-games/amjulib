@@ -3,6 +3,7 @@
 #include "Ve1Node.h"
 #include "Ve1SceneGraph.h"
 #include "GameMode.h"
+#include "Player.h"
 
 namespace Amju
 {
@@ -30,6 +31,8 @@ const char* Furniture::GetTypeName() const
 
 void Furniture::Update()
 {
+  Ve1Object::Update();
+
   // If we have moved, respond to collisions with walls; get height; set AABB
   AABB aabb;
   aabb.Set(
@@ -83,11 +86,17 @@ void Furniture::SetKeyVal(const std::string& key, const std::string& val)
   Ve1Object::SetKeyVal(key, val);
 }
 
+void Furniture::SetMenu(GuiMenu* menu)
+{
+  // If not currently carried; if you are strong enough
+//  menu->AddChild(new GuiMenuItem("Pick up", new CommandPickUp(this)));
+}
+
 void Furniture::OnPlayerCollision(Player* player)
 {
   // We might get pushed away from player, or player could move back -- depends on our "mass".
 
-  // 
+//std::cout << "Guhhhh!!! Collide with furniture!! player: " << player->GetId() << " furniture: " << GetId() << "\n";
 }
 
 AABB* Furniture::GetAABB()

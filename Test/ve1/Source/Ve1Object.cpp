@@ -11,6 +11,16 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_isPickable = true;
 }
 
+void Ve1Object::Update()
+{
+  m_oldPos = m_pos;
+}
+
+const Vec3f& Ve1Object::GetOldPos() const
+{
+  return m_oldPos;
+}
+
 bool Ve1Object::IsPickable() const 
 { 
   return m_isPickable; 

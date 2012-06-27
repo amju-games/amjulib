@@ -28,6 +28,10 @@ public:
 
   virtual AABB* GetAABB();
 
+  bool IsMoving() const;
+
+  // Get where we are headed
+  const Vec3f& GetTargetPos();
 
 protected:
   void TurnToFaceDir();
