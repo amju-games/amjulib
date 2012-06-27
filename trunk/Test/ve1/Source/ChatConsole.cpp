@@ -161,7 +161,7 @@ void ChatConsole::OnActive()
 
   GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
   textedit->SetText("");
-  textedit->SetOnCharFunc(Amju::OnTyping);
+  textedit->SetOnChangeFunc(Amju::OnTyping);
 
   GetElementByName(m_gui, "chat-cancel-button")->SetCommand(Amju::OnChatCancelButton);
   ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
