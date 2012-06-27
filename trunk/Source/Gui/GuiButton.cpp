@@ -176,14 +176,14 @@ void GuiButton::Draw()
     PopColour();
   }
 
+
+  GuiImage::Draw();
+
   PushColour();
   if (!IsEnabled())
   {
     MultColour(Colour(1, 1, 1, 0.5f));
   }
-
-  GuiImage::Draw();
-
   MultColour(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a));
   m_guiText.Draw();
   AmjuGL::PushMatrix();
