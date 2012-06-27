@@ -218,7 +218,8 @@ void GSMain::OnActive()
 
   TheChatConsole::Instance()->OnActive();
 
-  TheEventPoller::Instance()->AddListener(m_listener);
+  TheEventPoller::Instance()->AddListener(m_listener, 100); 
+  // high number = low priority, so GUI button clicks etc eat the events.
 }
 
 static bool rightButtonDown = false;
