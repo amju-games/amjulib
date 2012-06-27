@@ -22,8 +22,8 @@ public:
 
   void Insert(char);
 
-  // Set callback which is called whenever a new char is typed
-  void SetOnCharFunc(CommandFunc onCharFunc);
+  // Set callback which is called whenever text is changed (e.g. a new char is typed)
+  void SetOnChangeFunc(CommandFunc onCharFunc);
 
 protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
@@ -34,7 +34,7 @@ protected:
 protected:
   float m_caretTimer;
   bool m_drawCaret;
-  CommandFunc m_onCharFunc;
+  CommandFunc m_onChangeFunc;
 };
 }
 

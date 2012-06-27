@@ -15,12 +15,12 @@ GuiTextEdit::GuiTextEdit()
   m_caretTimer = 0;
   m_drawCaret = true;
   
-  m_onCharFunc = 0;
+  m_onChangeFunc = 0;
 }
 
-void GuiTextEdit::SetOnCharFunc(CommandFunc f)
+void GuiTextEdit::SetOnChangeFunc(CommandFunc f)
 {
-  m_onCharFunc = f;
+  m_onChangeFunc = f;
 }
 
 void GuiTextEdit::Draw()
@@ -131,9 +131,9 @@ void GuiTextEdit::Insert(char c)
   m_selectedText = m_caret;
   RecalcFirstLast();
   
-  if (m_onCharFunc)
+  if (m_onChangeFunc)
   {
-    m_onCharFunc();
+    m_onChangeFunc();
   }
 }
 
@@ -396,6 +396,7 @@ std::cout << "Next char\n";
     break;
 
   case AMJU_KEY_ENTER:
+    // TODO multi-line
     ExecuteCommand();
     break;
 
@@ -421,6 +422,11 @@ std::cout << "Next char\n";
       m_text = leftStr + rightStr;
       m_caret = left;
       m_selectedText = m_caret; 
+  
+      if (m_onChangeFunc)
+      {
+        m_onChangeFunc();
+      }
     }
     break;
 
@@ -439,6 +445,11 @@ std::cout << "Next char\n";
       m_text = leftStr + rightStr;
       m_caret = left;
       m_selectedText = m_caret; 
+
+      if (m_onChangeFunc)
+      {
+        m_onChangeFunc();
+      }
     }
     break;
 
