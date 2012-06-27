@@ -36,31 +36,86 @@ public:
 
   virtual void Update()
   {
-    if (GetMd2())
+    if (GetMd2() && m_player && m_player->IsLoggedIn())
     {
       Ve1Character::Update();
     }
   }
 
+/*
+  // TODO This doesn't work - SceneGraph is broken, sigh.
+
+  virtual void BeforeDraw()
+  {
+    bool loggedin = m_player->IsLoggedIn();
+    if (loggedin)
+    {
+      PushColour();
+      MultColour(Colour(0.2, 0.2, 0.2, 0.2f));
+    }
+  }
+
+  virtual void AfterDraw()
+  {
+    bool loggedin = m_player->IsLoggedIn();
+    if (loggedin)
+    {
+      PopColour();
+    }
+  }
+*/
+
   virtual void Draw()
   {
-    if (GetMd2())
+    //bool loggedIn = m_player->IsLoggedIn();
+    if (GetMd2() && m_player)
     {
+      //if (!loggedIn)
+      //{
+      //  AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
+      //  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+      //}
+
       Ve1Character::Draw();
 
+      //if (!loggedIn)
+      //{
+      //  AmjuGL::PopAttrib();
+      //}
+    }
+  }
+ 
+protected:
+  RCPtr<Player> m_player;
+};
+
+  // TODO Name tag scene node
+class PlayerNameNode : public SceneNode
+{
+public:
+  PlayerNameNode(Player* p) : m_player(p)
+  {
+    SetBlended(true);
+  }
+
+  virtual void Draw()
+  {
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
  
       // Print name 
       // TODO Do all these in one go, to minimise state changes
+      AmjuGL::PushAttrib(AmjuGL::AMJU_BLEND | AmjuGL::AMJU_DEPTH_READ);
       AmjuGL::Enable(AmjuGL::AMJU_BLEND);
       AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
       GuiText text;
-      text.SetTextSize(10.0f);
+      text.SetTextSize(5.0f); // TODO CONFIG
       text.SetText(m_player->GetName());
-      text.SetSize(Vec2f(10.0f, 1.0f));
-      text.SetJust(GuiText::AMJU_JUST_LEFT);
+    
+      static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
+      text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
+      text.SetJust(GuiText::AMJU_JUST_CENTRE);
       //text.SetInverse(true);
       //text.SetDrawBg(true);
 
@@ -68,23 +123,25 @@ public:
     
       Matrix m;
       m.SetIdentity();
-      Vec3f tr(m_local[12], m_local[13], m_local[14]);
+      //Vec3f tr(m_local[12], m_local[13], m_local[14]);
+      Vec3f tr(m_combined[12], m_combined[13], m_combined[14]);
       m.Translate(tr);
       AmjuGL::MultMatrix(m);
-      AmjuGL::Translate(0, 70.0f, 0);
+      static const float SCALE_FACTOR = 20.0f;
+      float x = MAX_NAME_WIDTH * SCALE_FACTOR * -0.5f;
+      AmjuGL::Translate(x, 60.0f, 0); // TODO CONFIG
     
-      AmjuGL::Scale(20, 20, 10);  
+      AmjuGL::Scale(SCALE_FACTOR, SCALE_FACTOR, 10);  
 
       text.Draw();
       AmjuGL::PopMatrix();
-
-      AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-      AmjuGL::Disable(AmjuGL::AMJU_BLEND);
-    }
+      AmjuGL::PopAttrib();
   }
+ 
 protected:
   RCPtr<Player> m_player;
-};
+};  
+
 
 const char* Player::TYPENAME = "player";
 
@@ -99,7 +156,16 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Player::TYPENAME,
 Player::Player() 
 {
   m_isLocal = false;
+  m_isLoggedIn = false;
   m_fadeTime = 0;
+}
+
+bool Player::IsLoggedIn() const
+{
+  return m_isLoggedIn;
+
+//  return (IsLocalPlayer() || 
+//    (Exists(SET_KEY("loggedin")) && GetVal(SET_KEY("loggedin")) == "y"));
 }
 
 bool Player::Load(File* f)
@@ -114,6 +180,9 @@ bool Player::Load(File* f)
     return false;
   }
   m_sceneNode->AddChild(m_shadow.GetPtr());
+
+  m_nameTag = new PlayerNameNode(this);
+  m_sceneNode->AddChild(m_nameTag.GetPtr());
 
   // Load arrow scene node
   ObjMesh* arrowMesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("arrow.obj"); 
@@ -158,8 +227,6 @@ void Player::OnLocationEntry()
   m_inNewLocation = true;
 }
 
-// Scene Graph
-
 void Player::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
@@ -179,15 +246,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   }
   else if (key == "loggedin")
   {
-    if (val == "n")
-    {
-      // Start fading this player - TODO
-      if (m_sceneNode) m_sceneNode->SetVisible(false);    
-    }
-    else
-    {
-      if (m_sceneNode) m_sceneNode->SetVisible(true);    
-    }
+    m_isLoggedIn = (val == "y");
   }
   else if (key == "istyping")
   {
@@ -222,6 +281,20 @@ void Player::Update()
 {
   Ve1ObjectChar::Update();
 
+  // Translucent if logged out
+  if (IsLoggedIn())
+  {
+    m_sceneNode->SetColour(Colour(1, 1, 1, 1));
+    m_sceneNode->SetBlended(false);
+  }
+  else
+  {
+    // TODO Translucent has odd effects, players lose their translucency depending on camera pos ????
+    static const float GREY = 0.0f;
+    m_sceneNode->SetColour(Colour(GREY, GREY, GREY, 1));
+    m_sceneNode->SetBlended(false);
+  }
+  
 /*
   // Not safe to do anything if the Terrain has not been created yet 
   if (!TerrainReady())
@@ -275,6 +348,12 @@ void Player::Update()
   else
   {
     Assert(GetVel().SqLen() == 0);
+  }
+
+  if (m_sceneNode)
+  {
+    // Set shadow AABB to same as Scene Node so we don't cull it by mistake
+    *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
   }
 
 /*
@@ -372,9 +451,13 @@ void Player::SetMenu(GuiMenu* menu)
   if (IsLocalPlayer())
   {
   }
+  else if (IsLoggedIn())
+  {
+    menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
+  }
   else
   {
-    menu->AddChild(new GuiMenuItem("Talk to this player", new CommandTalk(this)));
+    menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
   }
 }
 
