@@ -20,8 +20,9 @@ public:
   virtual void Update();
   virtual bool Load(File*);
   virtual void OnLocationEntry();
-  virtual void SetKeyVal(const std::string&, const std::string&);
-
+  virtual void SetKeyVal(const std::string& key, const std::string& val);
+  virtual void SetMenu(GuiMenu*);
+  
   void OnPlayerCollision(Player* player);
 
   // For collision testing 

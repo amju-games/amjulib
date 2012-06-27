@@ -163,9 +163,6 @@ Player::Player()
 bool Player::IsLoggedIn() const
 {
   return m_isLoggedIn;
-
-//  return (IsLocalPlayer() || 
-//    (Exists(SET_KEY("loggedin")) && GetVal(SET_KEY("loggedin")) == "y"));
 }
 
 bool Player::Load(File* f)

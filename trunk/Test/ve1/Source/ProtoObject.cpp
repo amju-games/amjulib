@@ -106,6 +106,8 @@ void ProtoObject::SetProtoLocation(int loc)
 
 void ProtoObject::Update()
 {
+  Ve1Object::Update();
+
   static const float XSIZE = 10.0f;
   static const float YSIZE = 20.0f;
   GetAABB()->Set(

@@ -77,6 +77,8 @@ AABB* Portal::GetAABB()
 
 void Portal::Update()
 {
+  Ve1Object::Update();
+
   m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,

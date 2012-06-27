@@ -18,6 +18,8 @@ public:
 
   virtual void Draw() { } // we use Scene Graph to draw
 
+  virtual void Update(); // subclasses call this
+
   // Called when object is 'activated' because the local player changes location to 
   //  where this object is. 
   // ONLY CALL WHEN SAFE TO DO SO, I.E. ALL OBJECTS IN NEW LOCATION ARE CREATED....
@@ -26,6 +28,9 @@ public:
   // Called when this object leaves the location of the local player. 
   // This only applies to objects which can move autonomously, i.e. non-local players.
   virtual void OnLocationExit() { } 
+
+  const Vec3f& GetOldPos() const;
+ 
 
   // Set a state (key, val) pair
   virtual void SetKeyVal(const std::string& key, const std::string& val);
@@ -69,6 +74,8 @@ protected:
   int m_ignorePortalId;
 
   bool m_isPickable;
+
+  Vec3f m_oldPos;
 };
 
 // Keep track of keys used to set object properties

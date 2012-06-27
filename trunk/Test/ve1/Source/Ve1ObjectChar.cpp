@@ -9,6 +9,8 @@ namespace Amju
 static const float XSIZE = 10;
 static const float YSIZE = 30; // TODO TEMP TEST, baddies can be any size
 
+static const float SPEED = 50.0f; // TODO CONFIG
+
 Ve1ObjectChar::Ve1ObjectChar()
 {
   m_dir = 0;
@@ -19,12 +21,13 @@ Ve1ObjectChar::Ve1ObjectChar()
 
 void Ve1ObjectChar::Update()
 {
-
   // Not safe to do anything if the Terrain has not been created yet
   if (!TerrainReady())
   {
     return;
   }
+
+  Ve1Object::Update();
 
   GameObject::Update(); // TODO Why not Ve1Object ?
 
@@ -133,6 +136,16 @@ void Ve1ObjectChar::SetName(const std::string& name)
   m_name = name;
 }
 
+bool Ve1ObjectChar::IsMoving() const
+{
+  return m_isMoving;
+}
+
+const Vec3f& Ve1ObjectChar::GetTargetPos()
+{
+  return m_newPos;
+}
+
 // TODO Move this up to base class Ve1Object ?
 void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
 {
@@ -152,7 +165,6 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
   else
   {
     dir.Normalise();
-    static const float SPEED = 50.0f; // TODO CONFIG
     SetVel(-dir * SPEED);
 
     // Work out direction to face
