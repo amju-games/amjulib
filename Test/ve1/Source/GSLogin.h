@@ -19,7 +19,7 @@ public:
   virtual void OnActive();
 
   void OnLoginButton();
-
+  void OnLoginChar(); // callback when text has char inserted
 };
 typedef Singleton<GSLogin> TheGSLogin;
 } // namespace
