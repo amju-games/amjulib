@@ -36,10 +36,14 @@ public:
   void SetArrowPos(const Vec3f& pos); 
   void SetArrowVis(bool visible);
 
+  bool IsLoggedIn() const;
+
 protected:
   bool m_isLocal;
+  bool m_isLoggedIn;
 
   RCPtr<SceneMesh> m_arrow; // destination arrow
+  RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
