@@ -25,13 +25,13 @@ static void OnCogTestButton()
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
-static void OnLocalButton()
-{
-  // Local mode -- no server connection
-  SetGameMode(AMJU_MODE_LOCAL);
-  //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-}
+//static void OnLocalButton()
+//{
+//  // Local mode -- no server connection
+//  SetGameMode(AMJU_MODE_LOCAL);
+//  //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+//  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+//}
 
 GSAdminMenu::GSAdminMenu()
 {
@@ -62,7 +62,7 @@ void GSAdminMenu::OnActive()
   Assert(m_gui);
 
   // Set focus element, cancel element, command handlers
-  GetElementByName(m_gui, "local-button")->SetCommand(Amju::OnLocalButton);
+//  GetElementByName(m_gui, "local-button")->SetCommand(Amju::OnLocalButton);
   GetElementByName(m_gui, "edit-button")->SetCommand(Amju::OnEditButton);
   GetElementByName(m_gui, "cog-button")->SetCommand(Amju::OnCogTestButton);
 
