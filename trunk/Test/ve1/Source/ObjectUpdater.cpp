@@ -218,7 +218,7 @@ void ObjectUpdater::Update()
 
   // TODO These poll periods should depend on network latency/bandwidth
   static const float POS_UPDATE_PERIOD = 1.0f; // TODO CONFIG
-  if (m_posElapsed > POS_UPDATE_PERIOD && IsOnline())
+  if (m_posElapsed > POS_UPDATE_PERIOD) //// && IsOnline())
   {
 //std::cout << "Creating new pos update req...\n";
 
@@ -234,7 +234,7 @@ void ObjectUpdater::Update()
 
   m_updateElapsed += TheTimer::Instance()->GetDt();
   static const float UPDATE_PERIOD = 5.0f; // TODO CONFIG
-  if (m_updateElapsed > UPDATE_PERIOD && IsOnline())
+  if (m_updateElapsed > UPDATE_PERIOD) //// && IsOnline())
   {
     m_updateElapsed = 0;
 
