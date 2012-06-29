@@ -35,6 +35,8 @@ public:
   bool OnCursorEvent(const CursorEvent&);
   bool OnMouseButtonEvent(const MouseButtonEvent&);
 
+  void SetNumPlayersOnline(int);
+
 private:
   void DoMoveRequest();
   void ShowObjectMenu(GameObject*);
@@ -44,6 +46,7 @@ private:
   bool m_moveRequest;
   PGuiElement m_gui;
   RCPtr<GuiMenu> m_menu;
+  int m_numPlayersOnline;
 
 /*
   // Chat recipient

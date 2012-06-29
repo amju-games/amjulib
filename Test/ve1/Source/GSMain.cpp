@@ -42,6 +42,14 @@ GSMain::GSMain()
   m_moveRequest = false;
   m_yRot = 0;
   m_listener = new GSMainListener;
+  m_numPlayersOnline = 0;
+}
+
+void GSMain::SetNumPlayersOnline(int n)
+{
+  m_numPlayersOnline = n;
+
+std::cout << "Num players online is now: " << m_numPlayersOnline << "\n";
 }
 
 void GSMain::ShowObjectMenu(GameObject* obj)
@@ -115,17 +123,19 @@ void GSMain::DoMoveRequest()
       GetLocalPlayer()->SetArrowPos(pos); 
       GetLocalPlayer()->SetArrowVis(true);
 
-      if (IsOnline())
-      {
-        TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
-        GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
-      }
-      else
-      {
-        // Offline - send msg to move (will be cached) 
-        ///////GetLocalPlayer()->MoveTo(pos, location);
-        TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
-      }
+      //if (IsOnline())
+      //{
+
+      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+      GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
+
+      //}
+      //else
+      //{
+      //  // Offline - send msg to move (will be cached) 
+      //  ///////GetLocalPlayer()->MoveTo(pos, location);
+      //  TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
+      //}
     }
     else
     {
