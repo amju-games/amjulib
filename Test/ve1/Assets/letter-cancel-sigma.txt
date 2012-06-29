@@ -1,6 +1,9 @@
 // version
 1
 
+// test name
+Letter2
+
 // font img 
 font2d/symbol-32pt-1024_512.png
 
