@@ -29,8 +29,6 @@ void Ve1ObjectChar::Update()
 
   Ve1Object::Update();
 
-  GameObject::Update(); // TODO Why not Ve1Object ?
-
   // Tell shadow the collision mesh it is casting onto
   // TODO Use octree etc
   // NB This only works if Terrain is activated before player!!
@@ -48,7 +46,6 @@ void Ve1ObjectChar::Update()
     m_shadow->AddCollisionMesh(GetTerrain()->GetCollisionMesh());
     m_inNewLocation = false;
   }
-
 
   // Get height for (x, z);
   float y = 0;
