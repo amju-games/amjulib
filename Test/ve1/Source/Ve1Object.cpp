@@ -14,6 +14,8 @@ Ve1Object::Ve1Object() : m_location(-1)
 void Ve1Object::Update()
 {
   m_oldPos = m_pos;
+
+  GameObject::Update();
 }
 
 const Vec3f& Ve1Object::GetOldPos() const
