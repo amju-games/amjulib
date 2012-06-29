@@ -108,14 +108,32 @@ std::cout << "No start location.\n";
 
     Assert(pi);
 
-    // Handle research info: session, mode, etc.
+    if (GetGameMode() == AMJU_MODE_EDIT)
+    {
+      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+    }
+    else
+    {
+      // Handle research info: session, mode, etc.
+      ChooseMode();
+    }
+  }
+  else
+  {
+std::cout << "Didn't get sesssion ID from server :-(\n";
+      TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
+  }
+}
+
+void ReqLogin::ChooseMode()
+{
     GameMode gm = AMJU_MODE_MULTI;
     bool doCogTests = false;
 
     PXml research = m_xml.getChildNode(5);
     if (SafeStrCmp(research.getName(), "research"))
     {
-      p = research.getChildNode(0);
+      PXml p = research.getChildNode(0);
       if (SafeStrCmp(p.getName(), "is_research_session")) 
       {
         int isRS = ToInt(p.getText());
@@ -181,15 +199,6 @@ std::cout << "No research element in login.pl response?!?\n";
     {
       TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
     }
-
-    // No point ?
-    // TheGame::Instance()->SetCurrentState(TheGSSessionInfo::Instance());
-  }
-  else
-  {
-std::cout << "Didn't get sesssion ID from server :-(\n";
-      TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
-  }
 }
 
 void SendLoginReq(const std::string& email)
