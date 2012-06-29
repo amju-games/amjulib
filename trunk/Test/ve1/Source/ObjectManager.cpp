@@ -293,11 +293,11 @@ ObjectManager::ObjectManager()
   {
 std::cout << "ObjectManager cache load failed\n";
 
-    if (!IsOnline())
-    {
-std::cout << "CAN'T CONTINUE, NO CACHE AND NOT ONLINE!!\n";
-      // TODO Go to error state ?
-    }
+    //if (!IsOnline())
+    //{
+    //std::cout << "CAN'T CONTINUE, NO CACHE AND NOT ONLINE!!\n";
+    //  // TODO Go to error state ?
+    //}
 
     m_objects.clear();
     m_timestamp = "1";
