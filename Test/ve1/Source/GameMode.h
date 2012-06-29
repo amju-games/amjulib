@@ -5,7 +5,7 @@ namespace Amju
 {
 enum GameMode
 {
-  AMJU_MODE_LOCAL,
+  AMJU_MODE_NONE,
   AMJU_MODE_NO_GAME, // non-game mode, to establish baseline
   AMJU_MODE_SINGLE,  
   AMJU_MODE_MULTI,
@@ -16,8 +16,8 @@ void SetGameMode(GameMode gm);
 
 GameMode GetGameMode();
 
-bool IsOnline();
-bool IsOffline();
+//bool IsOnline();
+//bool IsOffline();
 }
 
 #endif

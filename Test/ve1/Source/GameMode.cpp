@@ -2,7 +2,7 @@
 
 namespace Amju
 {
-static GameMode s_gm = AMJU_MODE_LOCAL;
+static GameMode s_gm = AMJU_MODE_NONE;
 
 void SetGameMode(GameMode gm)
 {
@@ -14,7 +14,7 @@ GameMode GetGameMode()
   return s_gm;
 }
 
-
+/*
 bool IsOnline()
 {
   return !IsOffline();
@@ -24,5 +24,6 @@ bool IsOffline()
 {
   return s_gm == AMJU_MODE_LOCAL;
 }
+*/
 }
 
