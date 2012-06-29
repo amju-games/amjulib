@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+4
 
 
 // Element type
@@ -24,13 +24,13 @@ arial, 1.0, bgcol=000000, fgcol=ffffff
 
 
 // Local for development only
-gui-button
-local-button
--0.2, 0.5
-0.4, 0.1
-gui-button-4.png
-local
-arial, 1.0 
+//gui-button
+//local-button
+//-0.2, 0.5
+//0.4, 0.1
+//gui-button-4.png
+//local
+//arial, 1.0 
 
 // Button for editing content
 gui-button
