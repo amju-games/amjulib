@@ -8,6 +8,7 @@
 
 namespace Amju
 {
+// Controls sending and receiving of chat messages
 class MsgManager : public NonCopyable
 {
 public:
