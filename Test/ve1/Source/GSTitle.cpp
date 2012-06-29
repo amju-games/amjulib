@@ -16,10 +16,10 @@ namespace Amju
 {
 static void OnStartButton()
 {
-  //TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 
   // Don't go to the menu. The game mode now depends on the response from login.pl.
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
 static void OnQuitButton()
