@@ -7,5 +7,29 @@ Letter2
 // font img 
 font2d/symbol-32pt-1024_512.png
 
+// Special
+S
 
+// Num special
+36
+
+// Non-special chars
+// No J, V, or S 
+// These letters correspond to the greek letters on the font sheet
+ABCDEFGHIKLMNOPQRTUWXYZ
+
+
+// Layout
+// m_top = 
+0.3
+// m_left = 
+-0.95
+// m_vSpacing = 
+0.12
+// m_hSpacing = 
+0.036
+// m_fontSize = 
+0.05
+// m_sqSize = 
+0.025
 

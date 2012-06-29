@@ -7,5 +7,26 @@ Letter1
 // font img 
 font2d/arial_round_1024_36pt.png
 
+// Special
+M
 
+// Num special
+32
+
+// Non-special chars
+ABCDEFGHIJKLNOPQRSTUVWXYZ
+
+// Layout
+// m_top = 
+0.3
+// m_left = 
+-0.95
+// m_vSpacing = 
+0.12
+// m_hSpacing = 
+0.036
+// m_fontSize = 
+0.05
+// m_sqSize = 
+0.025
 
