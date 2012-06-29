@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-4
+5
 
 
 // Element type
@@ -32,6 +32,19 @@ timer
 2.0, 0.1 
 // Text
 Time remaining: 3:00
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+// Element type
+gui-text
+// Element name
+score
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.1 
+// Text
+Score
 // Font name, size
 arial, 1.0, bgcol=ff0000, fgcol=ffffff
 
