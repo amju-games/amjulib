@@ -6,62 +6,25 @@ gui-comp
 // Name
 hud-comp
 // Num children
-6
+4
 
 
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.8
-// size
-2.0, 0.1
-// Text
-Please choose game type...
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
-
-// Single-player button
-// element type
 gui-button
-// Element name
-single-button
-// pos (coords are -1..1)
+start-button
 -0.4, 0.3
-// size
 0.8, 0.2
-// Image
 gui-button-4.png
-// Text
-single player
-// Font name, size
+start game
 arial, 1.4
 
-// Multi-player button
-// element type
 gui-button
-// Element name
-multi-button
-// pos (coords are -1..1)
+options-button
 -0.4, 0
-// size
 0.8, 0.2
-// Image
 gui-button-4.png
-// Text
-multi player
-// Font name, size
+options
 arial, 1.4 
 
-// no game button
-gui-button
-nogame-button
--0.4, -0.3
-0.8, 0.2
-gui-button-4.png
-no game
-arial, 2.0 
 
 gui-button
 cancel-button
@@ -80,4 +43,21 @@ gui-button-4.png
 admin...
 arial, 1.0 
 
+
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Please choose game type...
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// Single-player button
 
