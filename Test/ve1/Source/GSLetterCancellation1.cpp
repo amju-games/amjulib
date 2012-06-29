@@ -1,5 +1,6 @@
 #include "GSLetterCancellation1.h"
 #include <AmjuGL.h>
+#include <ReportError.h>
 #include <GuiButton.h>
 #include <GuiText.h>
 #include <GuiComposite.h>
@@ -9,14 +10,30 @@
 #include <DrawRect.h>
 #include <Timer.h>
 #include "GSCogTestMenu.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
+static const int MAX_LETTERS = 6 * 52; // size of grid, from Malec et al
+//static const int NUM_M = 32; // from Malec et al, number of letters in grid to find
+static const float MAX_TIME = 180.0f;
+
 static void OnDoneButton()
+{
+  TheGSLetterCancellation1::Instance()->FinishedTest();
+}
+
+void GSLetterCancellation1::FinishedTest()
 {
   // Send results, go to next test.
   // NB We must be sure to not lose the results. Store them locally, keep sending until we get ack 
-  //  from server..?
+  //  from server.
+
+std::cout << "Finished! Sending results to server...\n";
+
+  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "correct", ToString(m_correct)));
+  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "incorrect", ToString(m_incorrect)));
+  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "time", ToString(m_timer)));
   
   // TODO Where should we go when we administer the test for real ?
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
@@ -24,6 +41,8 @@ static void OnDoneButton()
 
 static void OnCancelButton()
 {
+  // TODO Should we allow this ?
+
   // TODO Where should we go when we administer the test for real ?
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
@@ -51,6 +70,10 @@ GSLetterCancellation1::GSLetterCancellation1()
   m_sqSize = 0.025f;
 
   m_mouseOver = false;
+
+  m_timer = MAX_TIME;
+  m_correct = 0;
+  m_incorrect = 0;
 }
 
 Rect GSLetterCancellation1::MakeRect(int i, int j)
@@ -70,7 +93,6 @@ bool GSLetterCancellation1::OnCursorEvent(const CursorEvent& ce)
       Rect r = MakeRect(i, j);
       if (r.IsPointIn(Vec2f(ce.x, ce.y)))
       {
-std::cout << "Found! " << m_letters[i][j] << "\n";
         m_mouseRect = r;
         m_mouseOver = true;
         return true;
@@ -84,6 +106,11 @@ std::cout << "Found! " << m_letters[i][j] << "\n";
 
 bool GSLetterCancellation1::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  if (mbe.isDown)
+  {
+    return false;
+  }
+
   for (int i = 0; i < 6; i++)
   {
     for (int j = 0; j < 52; j++)
@@ -94,7 +121,26 @@ bool GSLetterCancellation1::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
       if (r.IsPointIn(Vec2f(mbe.x, mbe.y)))
       {
-        std::cout << "sel:" << m_letters[i][j] << "\n";
+std::cout << "sel:" << m_letters[i][j] << "\n";
+        if (m_specialLetter == m_letters[i][j])
+        {
+          // TODO sound, but pre-load into mem
+          m_correct++;
+          if (m_correct == m_numSpecialLetter)
+          {
+            // Done!
+            OnDoneButton();
+          }
+        }
+        else
+        {
+          // TODO sound, but pre-load into mem
+          m_incorrect++;
+        }
+
+        GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+        std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+        scoreText->SetText(s); 
 
         AmjuGL::Vert verts[4] = 
         {
@@ -155,7 +201,6 @@ void GSLetterCancellation1::Draw()
 {
   // No funky BG
   //GSGui::Draw();
-
 }
 
 void GSLetterCancellation1::Draw2d()
@@ -206,11 +251,18 @@ bool GSLetterCancellation1::LoadConfig(const std::string& filename)
   {
     // Oh no, this is serious. If we can't load the tests, we can't do the research.
     // TODO Display a special help screen.
-    // TODO Send a log message to the server.
+    // TODO Send a log message to the server: ReportError (and Assert) should do this.
 
     return false;
   }
 
+  // Get test name. This is used to tag the results
+  if (!f.GetDataLine(&m_testName))
+  {
+    f.ReportError("Expected test name");
+    return false;
+  }
+ 
   // Get font image filename
   if (!f.GetDataLine(&m_fontImgFilename))
   {
@@ -218,14 +270,76 @@ bool GSLetterCancellation1::LoadConfig(const std::string& filename)
     return false;
   } 
 
+  // Load special letter
+  std::string s;
+  if (!f.GetDataLine(&s))
+  {
+    f.ReportError("Expected special letter");
+    return false;
+  }
+  m_specialLetter = s[0];
+
+  // Get number of special letters sprinkled in grid
+  if (!f.GetInteger(&m_numSpecialLetter))
+  {
+    f.ReportError("Expected number of special letters");
+    return false;
+  }
+
+  // Get the non-special letters
+  if (!f.GetDataLine(&m_noSpecial))
+  {
+    f.ReportError("Expected non-special characters");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_top)) 
+  {
+    f.ReportError("Expected m_top");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_left))
+  {
+    f.ReportError("Expected m_left");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_vSpacing))
+  {
+    f.ReportError("Expected m_vSpacing");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_hSpacing))
+  {
+    f.ReportError("Expected m_hSpacing");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_fontSize))
+  {
+    f.ReportError("Expected m_fontSize");
+    return false;  
+  }
+
+  if (!f.GetFloat(&m_sqSize))
+  {
+    f.ReportError("Expected m_sqSize");
+    return false;  
+  }
+
   return true;
 }
 
 void GSLetterCancellation1::OnActive()
 {
   // Reset timer and score
-  m_timer = 180.0f; //  3 mins
+  m_timer = MAX_TIME;
   m_mouseOver = false;
+  m_correct = 0;
+  m_incorrect = 0;
+  m_blocks.clear();
 
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
@@ -239,6 +353,7 @@ void GSLetterCancellation1::OnActive()
   // TODO font file name - get from font mgr ?
   if (!m_ts.Load(m_fontImgFilename, 16, 8, m_fontSize, m_fontSize))
   {
+    ReportError("Failed to load font for letter cancellation test");
     Assert(0);
     // ?
   }
@@ -248,24 +363,24 @@ void GSLetterCancellation1::OnActive()
   // The participant should click on as many of the special letters  as he/she can in 3 mins.
   // NB How do we deal with wrong clicks, etc ?
 
-  const int MAX_LETTERS = 6 * 52;
-  const int NUM_M = 32; // from Malec et al
-
   // This is all the letters in the grid, which is eventually shuffled
   char letters[MAX_LETTERS + 1];
 
   // First we get the exact required number of the special letter.
-  for (int i = 0; i < NUM_M; i++)
+  for (int i = 0; i < m_numSpecialLetter; i++)
   {
-    letters[i] = 'M';
+    letters[i] = m_specialLetter;
   }
 
   // These letters are used to randomly fill the rest of the space.
-  char no_m[26] = "ABCDEFGHIJKLNOPQRSTUVWXYZ"; // no "m"
+  //std::string no_m = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // will have no "m" (whatever the special letter is)
+  //no_m.erase(std::remove(no_m.begin(), no_m.end(), m_specialLetter), no_m.end());
+std::cout << "Letters but with no special letter: " << m_noSpecial << "\n";
 
-  for (int i = NUM_M; i < MAX_LETTERS; i++)
+  int size = m_noSpecial.size();
+  for (int i = m_numSpecialLetter; i < MAX_LETTERS; i++)
   {
-    letters[i] = no_m[rand() % 25];
+    letters[i] = m_noSpecial[rand() % size];
   }
 
   // Letters now consists of the exact number of special characters, followed by a bunch of random
@@ -309,6 +424,7 @@ void GSLetterCancellation1::OnDeactive()
 {
   GSGui::OnDeactive();
   TheEventPoller::Instance()->RemoveListener(m_listener);
+  // TODO Kill font texture
 }
 
 } // namespace

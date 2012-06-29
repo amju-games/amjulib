@@ -33,6 +33,9 @@ public:
   // Call this with different filenames prior to activating, to change task details.
   bool LoadConfig(const std::string& filename);
 
+  // Called from Done button or when timer expires. Send results, go to next state.
+  void FinishedTest();
+
 protected:
   Rect MakeRect(int i, int j);
 
@@ -60,7 +63,9 @@ protected:
   // The task is to click on the "special" letters without clicking on any others.
   // This is timed, with 3 mins to find all the special letters.
   char m_specialLetter;
-  int m_numSpecialLetters;
+  int m_numSpecialLetter;
+  // String consisting of all other characters which the grid will contain
+  std::string m_noSpecial;
 
   AmjuGL::Tris m_blocks; // blocks over/under ? selected letters
 
@@ -73,6 +78,10 @@ protected:
 
   bool m_isPaused; // ?
   bool m_isFinished;
+
+  std::string m_testName; // to tag results sent to server
+  int m_correct;
+  int m_incorrect;
 };
 typedef Singleton<GSLetterCancellation1> TheGSLetterCancellation1;
 } // namespace
