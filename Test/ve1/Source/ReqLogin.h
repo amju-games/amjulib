@@ -14,6 +14,9 @@ public:
   virtual void OnFailure();
 
 private:
+  void ChooseMode();
+
+private:
   std::string m_email;
 };
 
