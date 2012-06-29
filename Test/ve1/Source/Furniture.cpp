@@ -50,15 +50,35 @@ void Furniture::Update()
 
 bool Furniture::Load(File* f)
 {
+  // Create Scene Node, but don't attach to SceneGraph until needed
+
   // Get mesh filename. 
+  std::string meshFilename;
+  if (!f->GetDataLine(&meshFilename))
+  {
+    f->ReportError("Expected mesh file name for furniture");
+    return false;
+  }
 
-  // Load shadow
+  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFilename);
+  Assert(mesh);
+  SceneMesh* sm = new SceneMesh;
+  sm->SetMesh(mesh);
+  m_sceneNode = sm;
 
+  m_shadow = new Shadow;
+  if (!m_shadow->Load(f))
+  {
+    return false;
+  }
+  m_sceneNode->AddChild(m_shadow.GetPtr());
   return true;
 }
 
 void Furniture::OnLocationEntry()
 {
+  // TODO Base class
+
   // Set scene node
 
   // Set AABB
@@ -79,6 +99,15 @@ void Furniture::OnLocationEntry()
     *(m_sceneNode->GetAABB()) = aabb;
   }
 
+}
+
+void Furniture::OnLocationExit()
+{
+  // TODO Base class
+  // Remove from SceneGraph
+  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  Assert(root);
+  root->DelChild(m_sceneNode.GetPtr());
 }
 
 void Furniture::SetKeyVal(const std::string& key, const std::string& val)

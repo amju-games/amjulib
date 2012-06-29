@@ -1,7 +1,8 @@
 #ifndef FURNITURE_H_INCLUDED
 #define FURNITURE_H_INCLUDED
 
-#include <SceneNode.h>
+#include <SceneMesh.h>
+#include <Shadow.h>
 #include "Ve1Object.h"
 
 namespace Amju
@@ -20,6 +21,7 @@ public:
   virtual void Update();
   virtual bool Load(File*);
   virtual void OnLocationEntry();
+  virtual void OnLocationExit();
   virtual void SetKeyVal(const std::string& key, const std::string& val);
   virtual void SetMenu(GuiMenu*);
   
@@ -31,6 +33,8 @@ public:
 private:
   AABB m_aabb; // Not needed, can use SceneNode AABB ?
   RCPtr<SceneNode> m_sceneNode;
+
+  RCPtr<Shadow> m_shadow;
 };
 }
 
