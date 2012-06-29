@@ -8,9 +8,11 @@
 #include "GSCogTestMenu.h"
 #include "GSTitle.h"
 #include "GSAdminMenu.h"
+#include "GSOptions.h"
 
 namespace Amju
 {
+/*
 static void OnNoGameButton()
 {
   SetGameMode(AMJU_MODE_NO_GAME); 
@@ -31,6 +33,19 @@ static void OnMultiButton()
 {
   SetGameMode(AMJU_MODE_MULTI); 
   //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+}
+*/
+
+static void OnOptionsButton()
+{
+  // Set back state!!
+  TheGSOptions::Instance()->SetPrevState(TheGSStartMenu::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
+}
+
+static void OnStartButton()
+{
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
@@ -65,21 +80,23 @@ void GSStartMenu::Draw2d()
 
 void GSStartMenu::OnActive()
 {
+  SetGameMode(AMJU_MODE_NONE);
+
   GSGui::OnActive();
 
   m_gui = LoadGui("gui-startmenu.txt");
   Assert(m_gui);
 
-  GuiButton* single = (GuiButton*)GetElementByName(m_gui, "single-button");
-  single->SetIsEnabled(false);
-  single->SetCommand(Amju::OnSingleButton);
+  GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
+////  start->SetIsEnabled(false);
+  start->SetCommand(Amju::OnStartButton);
 
-  GuiButton* multi = (GuiButton*)GetElementByName(m_gui, "multi-button");
-  multi->SetCommand(Amju::OnMultiButton);
+  GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
+  options->SetCommand(Amju::OnOptionsButton);
 
-  GuiButton* nogame = (GuiButton*)GetElementByName(m_gui, "nogame-button");
-  nogame->SetIsEnabled(false);
-  nogame->SetCommand(Amju::OnNoGameButton);
+//  GuiButton* nogame = (GuiButton*)GetElementByName(m_gui, "nogame-button");
+//  nogame->SetIsEnabled(false);
+//  nogame->SetCommand(Amju::OnNoGameButton);
 
   GetElementByName(m_gui, "admin-button")->SetCommand(Amju::OnAdminButton);
 
@@ -88,7 +105,7 @@ void GSStartMenu::OnActive()
   cancel->SetIsCancelButton(true);
 
   // TODO remember last choice and keep highlighted
-  multi->SetHasFocus(true); 
+  start->SetHasFocus(true); 
 }
 
 } // namespace
