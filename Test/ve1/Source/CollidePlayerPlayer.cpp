@@ -7,6 +7,11 @@ namespace Amju
 {
 void CollidePlayerPlayer(Player* p1, Player* p2)
 {
+  if (!p1->IsLoggedIn() || !p2->IsLoggedIn())
+  {
+    return;
+  }
+
   // Move both players away from each other
   Vec3f v = p1->GetPos() - p2->GetPos();
   // Avoid divide by zero if objects are set to the same location
