@@ -31,6 +31,9 @@ enum Task
   CREATE_LOCATION,
   GET_ALL_LOCATIONS,
   GET_NEW_OBJECT_ID,  // for creating new object
+
+  // Research
+  SEND_TEST_RESULT,
 };
 
 class Ve1ReqManager : public OnlineReqManager

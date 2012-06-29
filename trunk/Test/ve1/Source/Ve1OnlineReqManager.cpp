@@ -128,6 +128,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case FILE_UPDATE_CHECK:
     s += "getupdatedfiles.pl";
     break;
+
+  case SEND_TEST_RESULT:
+    s += "storeresult.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.
@@ -158,10 +162,10 @@ std::cout << "* Can't make request, not logged in *\n";
     return false;
   }
 
-  if (IsOffline())
-  {
-    return true;
-  }
+  //if (IsOffline())
+  //{
+  //  return true;
+  //}
 
   return OnlineReqManager::AddReq(req, maxConcurrentReqs);
 
