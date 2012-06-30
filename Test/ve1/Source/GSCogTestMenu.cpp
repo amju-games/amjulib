@@ -5,6 +5,7 @@
 #include "GSFileUpdateCheck.h"
 #include "GSLetterCancellation1.h"
 #include "GSTitle.h"
+#include "GSStroopWord.h"
 
 namespace Amju
 {
@@ -28,6 +29,11 @@ static void LetterMTest()
 {
   TheGSLetterCancellation1::Instance()->LoadConfig("letter-cancel-m.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
+}
+
+static void StroopWord()
+{
+  TheGame::Instance()->SetCurrentState(TheGSStroopWord::Instance());
 }
 
 static void Done()
@@ -82,10 +88,14 @@ void GSCogTestMenu::OnActive()
   Assert(text);
 
   // Set text and OK button command depending on next test to perform...
+  // TODO Use localisation system so we can improve all the text.
   switch (m_nextTest)
   {
   case 0:
-    // TODO Use localisation system so we can improve this text.
+    text->SetText("Here comes STROOP WORD");
+    ok->SetCommand(Amju::StroopWord);
+    break;
+  case 2:
 
     text->SetText("Please take some tests before you start. This first one is a letter cancellation test. Click on all the M letters that you see. You have 3 minutes to complete this task.");
     ok->SetCommand(Amju::LetterMTest);
