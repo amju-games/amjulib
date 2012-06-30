@@ -17,6 +17,21 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void OnLeftRight(bool isLeftButton);
+  void Finished();
+ 
+private:
+  void SetTest();
+
+private:
+  float m_timer;
+  float m_maxTime;
+  bool m_leftIsCorrect;
+  int m_correct;
+  int m_incorrect;
+  std::string m_testName;
+  bool m_isFinished;
+  Colour m_goodColour;
 };
 typedef Singleton<GSStroopColour> TheGSStroopColour;
 } // namespace
