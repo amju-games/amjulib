@@ -67,21 +67,21 @@ public:
 
   virtual void Draw()
   {
-    //bool loggedIn = m_player->IsLoggedIn();
+    bool loggedIn = m_player->IsLoggedIn();
     if (GetMd2() && m_player)
     {
-      //if (!loggedIn)
-      //{
-      //  AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
-      //  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-      //}
+      if (!loggedIn)
+      {
+        AmjuGL::PushAttrib(AmjuGL::AMJU_BLEND);
+        AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+      }
 
       Ve1Character::Draw();
 
-      //if (!loggedIn)
-      //{
-      //  AmjuGL::PopAttrib();
-      //}
+      if (!loggedIn)
+      {
+        AmjuGL::PopAttrib();
+      }
     }
   }
  
@@ -216,12 +216,34 @@ void Player::OnLocationEntry()
   root->AddChild(m_arrow.GetPtr());
   SetArrowVis(false);
 
+  // TODO Portal should have a heading which you should face when you appear at the destination
   m_isMoving = false; 
   SetVel(Vec3f(0, 0, 0)); // TODO walk out of doorway ?
 
   // TODO Set m_newPos ??
 
   m_inNewLocation = true;
+}
+
+typedef std::map<Player*, bool> LoggedInMap;
+LoggedInMap loggedInMap;
+
+static void SetLoggedInPlayer(Player* p, bool b)
+{
+  loggedInMap[p] = b;
+}
+
+static int CountOnlinePlayers()
+{
+  int res = 0;
+  for (LoggedInMap::iterator it = loggedInMap.begin(); it != loggedInMap.end(); ++it)
+  {
+    if (it->second)
+    {
+      res++;
+    }
+  }
+  return res;
 }
 
 void Player::SetKeyVal(const std::string& key, const std::string& val)
@@ -244,6 +266,9 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   else if (key == "loggedin")
   {
     m_isLoggedIn = (val == "y");
+    SetLoggedInPlayer(this, m_isLoggedIn);
+    static GSMain* gsm = TheGSMain::Instance();
+    gsm->SetNumPlayersOnline(CountOnlinePlayers());
   }
   else if (key == "istyping")
   {
@@ -288,8 +313,8 @@ void Player::Update()
   {
     // TODO Translucent has odd effects, players lose their translucency depending on camera pos ????
     static const float GREY = 0.0f;
-    m_sceneNode->SetColour(Colour(GREY, GREY, GREY, 1));
-    m_sceneNode->SetBlended(false);
+    m_sceneNode->SetColour(Colour(GREY, GREY, GREY, 0.2f));
+    m_sceneNode->SetBlended(false); // problems
   }
   
 /*
@@ -299,7 +324,7 @@ void Player::Update()
     return; 
   }
 
-  GameObject::Update(); // TODO Why not Ve1Object ?
+  ////////GameObject::Update(); // TODO Why not Ve1Object ?
   
   // Tell shadow the collision mesh it is casting onto
   // TODO Use octree etc
