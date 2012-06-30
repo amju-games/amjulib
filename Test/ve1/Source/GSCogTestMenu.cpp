@@ -6,6 +6,7 @@
 #include "GSLetterCancellation1.h"
 #include "GSTitle.h"
 #include "GSStroopWord.h"
+#include "GSStroopColour.h"
 #include "GSStroopColourWord.h"
 
 namespace Amju
@@ -35,6 +36,11 @@ static void LetterMTest()
 static void StroopWord()
 {
   TheGame::Instance()->SetCurrentState(TheGSStroopWord::Instance());
+}
+
+static void StroopColour()
+{
+  TheGame::Instance()->SetCurrentState(TheGSStroopColour::Instance());
 }
 
 static void StroopColourWord()
@@ -98,6 +104,11 @@ void GSCogTestMenu::OnActive()
   switch (m_nextTest)
   {
   case 0:
+    text->SetText("Here comes STROOP COLOUR");
+    ok->SetCommand(Amju::StroopColour);
+    break;
+
+  case 4:
     text->SetText("Here comes STROOP COLOUR WORD");
     ok->SetCommand(Amju::StroopColourWord);
     break;
