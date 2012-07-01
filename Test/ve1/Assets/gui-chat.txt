@@ -6,19 +6,19 @@ gui-comp
 // Name
 chat-comp
 // Num children
-2
+1
 
 // ---------------------------------------------------
-gui-comp
-msg-recv-comp
-1
+//gui-comp
+//msg-recv-comp
+//1
 // Child
-gui-window
-msg-text
--0.8, -0.2
-1.6, 0.3
-// window is a comp - no children
-0
+//gui-window
+//msg-text
+//1, -1
+//0.6, 0.3
+//// window is a comp - no children
+//0
 
 //msg text goes here
 //arial,1.0,left,multi,bgcol=ffc0c0,fgcol=ff00ff
@@ -51,9 +51,9 @@ gui-text-edit
 // name
 chat-text-edit
 // pos
--0.8, -0.6
+0, -0.6
 // size
-1.6, 0.1
+0.8, 0.1
 // Text
 enter chat text
 // Font
@@ -64,9 +64,9 @@ gui-text
 // name
 chat-recip-name
 // pos
--0.8, -0.7
+0, -0.8
 // Size
-1.6, 0.1
+0.8, 0.1
 // Text
 recipient name
 // Font
@@ -76,7 +76,7 @@ arial,1.0,right,fgcol=ffc0c0,bgcol=ff00ff
 // Child
 gui-button
 chat-send-button
--0.8, -0.7
+0, -0.7
 0.4, 0.1
 gui-button-4.png
 send
@@ -85,7 +85,7 @@ arial, 1.0
 // Child
 gui-button
 chat-cancel-button
--0.4, -0.7
+0.4, -0.7
 0.4, 0.1
 gui-button-4.png
 close
