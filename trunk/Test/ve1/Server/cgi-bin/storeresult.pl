@@ -21,20 +21,41 @@ sub storeresult()
     return;
   }
 
-#  my $testid = param('testid') or die "No test ID";
+  # The session during which the test took place -- not necessarily this session
+  my $session = param('research_sessionid') or die "No research session"; 
 
-  my $session = param('session_id'); # must be OK
+  my $test_type = param('test_type') or die "No test type";
   my $key = param('key') or die "No key";
-  my $val = param('val') or die "No val";
+  my $val = param('val'); # values can be zero! ### or die "No val";
 
-  my $sql = "insert into research_testresult (`session_id`, `key`, `val`) values ($session, '$key', '$val')";
+  # session and test type are unique.
+  # Make sure this test has a row in research_cogtest
+  # Look up or create ID for this unique pair (session id, test type).
 
+  my $sql = "select id from research_cogtest where session_id=$session and test_type=$test_type";
+  my $query = $dbh->prepare($sql) or die "Prepare failed for: '$sql'";
+  $query->execute or die "Failed to execute '$sql'";
+  my $testid;
+  if (! (($testid) = $query->fetchrow_array))
+  {
+    $sql = "insert into research_cogtest(`test_type`, `session_id`) values ($test_type, $session)";
+    insert($sql); 
+    $sql = "select LAST_INSERT_ID() limit 1";
+    $query = $dbh->prepare($sql) or die "Prepare failed for: '$sql'";
+    $query->execute or die "Failed to execute '$sql'";
+    if (! (($testid) = $query->fetchrow_array))
+    {
+      # Error!
+      die "Failed to get last insert id!";
+    }
+  }
+
+  # Enter row for this test in research_testresult
+  $sql = "insert into research_testresult (`test_id`, `key`, `val`) values ($testid, '$key', '$val')";
+  insert($sql);
+ 
   print "Query: $sql\n\n";
 
-  my $query = $dbh->prepare($sql) or die
-    "Query prepare failed for this query: $sql\n";
-
-  $query->execute;
 
   # Acknowledge result stored
   print "<stored>1</stored>";
