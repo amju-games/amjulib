@@ -41,9 +41,11 @@ sub create_table_cogtest()
   my $sql = <<END;
 
 CREATE TABLE `research_cogtest`
-(`id` INT NOT NULL,
+(`id` INT NOT NULL AUTO_INCREMENT,
+`test_type` INT NOT NULL,
 `session_id` INT NOT NULL,
 PRIMARY KEY (`id`),
+UNIQUE KEY (`test_type`, `session_id`),
 FOREIGN KEY (`session_id`) REFERENCES session(`id`)
 ) ENGINE = MYISAM;
 END
@@ -55,10 +57,10 @@ END
   $sql = <<END;
 
 CREATE TABLE `research_testresult`
-(`testid` INT NOT NULL,
+(`test_id` INT NOT NULL,
 `key` VARCHAR(30) NOT NULL,
 `val` VARCHAR(30) NOT NULL,
-FOREIGN KEY (`testid`) REFERENCES research_cogtest(`id`)
+FOREIGN KEY (`test_id`) REFERENCES research_cogtest(`id`)
 ) ENGINE = MYISAM;
 END
 
@@ -146,7 +148,7 @@ sub create_tables()
 
 #  create_table_action();
 
-  create_table_session();
+#  create_table_session();
 }
 
 
