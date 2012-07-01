@@ -145,6 +145,11 @@ void Ve1ReqManager::SetSessionId(const std::string& session)
   m_session = session;
 }
 
+const std::string& Ve1ReqManager::GetSessionId() const
+{
+  return m_session;
+}
+
 bool Ve1ReqManager::AddLoginReq(RCPtr<OnlineReq> req)
 {
   return OnlineReqManager::AddReq(req, 1);

@@ -35,6 +35,10 @@ void GSReactionTime::OnButton()
     {
 std::cout << "Reaction time result: " << m_reactionTime << "s\n";
 
+    // Send results
+    TheCogTestResults::Instance()->StoreResult(new Result(
+      AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(m_reactionTime)));
+
     m_mode = RT_AFTER_TEST;
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
     b->SetIsEnabled(false); 

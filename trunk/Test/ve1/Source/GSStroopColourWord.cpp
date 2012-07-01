@@ -99,9 +99,9 @@ void GSStroopColourWord::Finished()
   // TODO Send results
 std::cout << "Finished! Sending results to server...\n";
 
-  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "correct", ToString(m_correct)));
-  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "incorrect", ToString(m_incorrect)));
-//  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "time", ToString(m_timer)));
+  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR_WORD, "correct", ToString(m_correct)));
+  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR_WORD, "incorrect", ToString(m_incorrect)));
+//  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR_WORD, "time", ToString(m_timer)));
 
   // TODO Where should we go when we administer the test for real ?
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());

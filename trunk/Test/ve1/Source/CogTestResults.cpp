@@ -1,4 +1,5 @@
 #include <iostream>
+#include <StringUtils.h>
 #include "CogTestResults.h"
 #include "Ve1OnlineReqManager.h"
 
@@ -13,10 +14,13 @@ public:
   {
   }
 
+/*
   virtual void OnFailure()
   {
     // Don't show error, we will retry later
+std::cout << "Store result req FAILED!
   }
+*/
 
   virtual void OnSuccess()
   {
@@ -42,22 +46,25 @@ bool CogTestResults::Save()
 
 void CogTestResults::Commit()
 {
-  // Send each uncommitted result to server.
+  // Send all uncommitted results to server.
   
 }
 
-void CogTestResults::SendResult(const Result& res)
+void CogTestResults::SendResult(const Result* res)
 {
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SEND_TEST_RESULT);
 
-  url += "&key=" + res.m_key + "&val=" + res.m_val;
+  url += "&test_type=" + ToString(res->m_testId) + 
+    "&research_sessionid=" + res->m_sessionId + 
+    "&key=" + res->m_key + 
+    "&val=" + res->m_val;
 
 std::cout << "Sending this request: " << url << "\n";
 
   TheVe1ReqManager::Instance()->AddReq(new ReqStoreResult(url), MAX_CONCURRENT_RESULTS); 
 }
 
-void CogTestResults::StoreResult(const Result& res)
+void CogTestResults::StoreResult(const Result* res)
 {
   // Save and keep trying until confirmed
 

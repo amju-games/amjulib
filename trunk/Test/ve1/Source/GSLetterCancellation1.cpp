@@ -31,9 +31,9 @@ void GSLetterCancellation1::FinishedTest()
 
 std::cout << "Finished! Sending results to server...\n";
 
-  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "correct", ToString(m_correct)));
-  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "incorrect", ToString(m_incorrect)));
-  TheCogTestResults::Instance()->StoreResult(Result(m_testName, "time", ToString(m_timer)));
+  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
+  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
+  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
   
   // TODO Where should we go when we administer the test for real ?
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
@@ -244,8 +244,10 @@ void GSLetterCancellation1::Draw2d()
   GSGui::Draw2d();
 }
 
-bool GSLetterCancellation1::LoadConfig(const std::string& filename)
+bool GSLetterCancellation1::LoadConfig(int testId, const std::string& filename)
 {
+  m_testId = testId;
+
   File f;
   if (!f.OpenRead(filename))
   {
@@ -256,13 +258,6 @@ bool GSLetterCancellation1::LoadConfig(const std::string& filename)
     return false;
   }
 
-  // Get test name. This is used to tag the results
-  if (!f.GetDataLine(&m_testName))
-  {
-    f.ReportError("Expected test name");
-    return false;
-  }
- 
   // Get font image filename
   if (!f.GetDataLine(&m_fontImgFilename))
   {
