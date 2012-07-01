@@ -8,6 +8,7 @@
 #include "GSStroopWord.h"
 #include "GSStroopColour.h"
 #include "GSStroopColourWord.h"
+#include "GSReactionTime.h"
 
 namespace Amju
 {
@@ -46,6 +47,11 @@ static void StroopColour()
 static void StroopColourWord()
 {
   TheGame::Instance()->SetCurrentState(TheGSStroopColourWord::Instance());
+}
+
+static void ReactionTime()
+{
+  TheGame::Instance()->SetCurrentState(TheGSReactionTime::Instance());
 }
 
 static void Done()
@@ -104,6 +110,11 @@ void GSCogTestMenu::OnActive()
   switch (m_nextTest)
   {
   case 0:
+    text->SetText("Here comes Reaction Time test");
+    ok->SetCommand(Amju::ReactionTime);
+    break;
+
+  case 5:
     text->SetText("Here comes STROOP COLOUR");
     ok->SetCommand(Amju::StroopColour);
     break;
