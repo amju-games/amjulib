@@ -97,8 +97,9 @@ void GSCogTestMenu::OnActive()
   // The OK button then starts the next test.
   // TODO Set focus element, cancel element, command handlers
   GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  cancel->SetCommand(Amju::OnCancelButton);
+  cancel->SetCommand(Amju::Done);
   cancel->SetIsCancelButton(true);
+  cancel->SetText("skip!");
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   ok->SetIsFocusButton(true);
