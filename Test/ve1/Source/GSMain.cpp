@@ -1,5 +1,6 @@
 #include "GSMain.h"
 #include <AmjuGL.h>
+#include <Screen.h>
 #include <SAP.h> 
 #include <BruteForce.h> // test against SAP
 #include <Unproject.h>
@@ -32,17 +33,14 @@ void OnPauseButton()
   TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
 }
 
-void OnBuildButton()
-{
-  // Enable build GUI
-}
-
 GSMain::GSMain()
 {
   m_moveRequest = false;
   m_yRot = 0;
   m_listener = new GSMainListener;
   m_numPlayersOnline = 0;
+
+  m_viewportWidth = 1.0f; 
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -85,13 +83,23 @@ void GSMain::Update()
 //  TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
   // TODO TEMP TEST
   BruteForce(TheGame::Instance()->GetGameObjects());
+
+  TheChatConsole::Instance()->Update();
 }
 
 void GSMain::DoMoveRequest()
 {
 //std::cout << "In DoMoveRequest...\n";
 
-  GameObject* selectedObj = PickObject(m_mouseScreen);
+  Vec2f mouseScreen = m_mouseScreen;
+  mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
+std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
+  if (mouseScreen.x > 1.0f)
+  {
+    return;
+  }
+
+  GameObject* selectedObj = PickObject(mouseScreen);
 
   if (selectedObj)
   {
@@ -106,8 +114,8 @@ void GSMain::DoMoveRequest()
     Vec3f pos;
     Vec3f mouseWorldNear;
     Vec3f mouseWorldFar;
-    Unproject(m_mouseScreen, 0, &mouseWorldNear);
-    Unproject(m_mouseScreen, 1, &mouseWorldFar);
+    Unproject(mouseScreen, 0, &mouseWorldNear);
+    Unproject(mouseScreen, 1, &mouseWorldFar);
     LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
 
     if (GetTerrain()->GetMousePos(lineSeg, &pos))
@@ -123,19 +131,9 @@ void GSMain::DoMoveRequest()
       GetLocalPlayer()->SetArrowPos(pos); 
       GetLocalPlayer()->SetArrowVis(true);
 
-      //if (IsOnline())
-      //{
-
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
       GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
 
-      //}
-      //else
-      //{
-      //  // Offline - send msg to move (will be cached) 
-      //  ///////GetLocalPlayer()->MoveTo(pos, location);
-      //  TheObjectUpdater::Instance()->QueueUpdatePos(GetLocalPlayer()->GetId(), pos, location);
-      //}
     }
     else
     {
@@ -144,17 +142,24 @@ void GSMain::DoMoveRequest()
   }
 }
 
+void GSMain::SetViewWidth(float w)
+{
+  m_viewportWidth = w;
+}
+
 void GSMain::Draw()
 {
-/////  GSBase::Draw();
-  AmjuGL::SetClearColour(Colour(1, 1, 0, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+
+  int width = (int)((float)Screen::X()  * m_viewportWidth);
+  AmjuGL::Viewport(0, 0, width, Screen::Y());
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
   const float NEAR_PLANE = 1.0f;
   const float FAR_PLANE = 3000.0f;
-  float aspect = 1.3f;
+  float aspect = (float)width / (float)Screen::Y();
   AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
@@ -175,6 +180,8 @@ void GSMain::Draw()
     m_moveRequest = false;
     AmjuGL::PopMatrix();
   }
+  
+  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
 }
 
 void GSMain::Draw2d()
