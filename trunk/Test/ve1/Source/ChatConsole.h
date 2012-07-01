@@ -22,23 +22,16 @@ public:
   bool  IsActive() const;
 
   void Draw();
-  void Update(); // ?
+  void Update(); 
 
   void OnActive();
   void OnDeactive(); 
 
-  // Treat enter as Send button
-  //virtual bool OnKeyEvent(const KeyEvent&);
-  //virtual bool OnCursorEvent(const CursorEvent&);
-  //virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
   bool CanShowMsg() const;
-//  void ShowMsg(const MsgManager::Msg& msg);
   void OnChatSend();
   void OnChatCancel();
   void ActivateChatSend(bool active, int recipId);
   void ActivateChatRecv(bool active, const MsgManager::Msg* = 0);
-  void OnRecvClose();
 
   // Set flag for player typing msg to another player - display something if it makes sense
   void SetPlayerIsTyping(bool isTyping, int typerId, int recipId);
@@ -73,6 +66,15 @@ private:
   Vec2f m_pos; // top left of chat window
   float m_fontSize; // size of text for msgs
 
+  enum Mode
+  {
+    CHAT_OPENING,
+    CHAT_CLOSING,
+    CHAT_OPEN,
+    CHAT_CLOSED,
+  };
+  Mode m_mode;
+  Vec2f m_vel; // vel when moving on screen
 };
 
 typedef Singleton<ChatConsole> TheChatConsole;

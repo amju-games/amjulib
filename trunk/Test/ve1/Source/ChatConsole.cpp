@@ -3,9 +3,12 @@
 #include <GuiWindow.h>
 #include <GuiButton.h>
 #include <EventPoller.h>
+#include <Screen.h>
+#include <Timer.h>
 #include "ChatConsole.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -19,29 +22,18 @@ static void OnChatCancelButton()
   TheChatConsole::Instance()->OnChatCancel();
 }
 
-//static void OnRecvCloseButton()
-//{
-//  TheChatConsole::Instance()->OnRecvClose();
-//}
-
 void ChatConsole::Conversation::Draw()
 {
   static ChatConsole* cc = TheChatConsole::Instance();
 
-  PushColour();
-
-  float pos = cc->m_pos.y + 0.2f; // -0.6f; // TODO CONFIG
+  float pos = cc->m_pos.y + 0.25f; 
   for (int i = m_texts.size() - 1; i >= 0; i--)
   {
     GuiText* text = m_texts[i];
     pos += text->GetSize().y;
     text->SetLocalPos(Vec2f(cc->m_pos.x, pos));
     text->Draw();
-
-    MultColour(Colour(1, 1, 1, 0.6f)); // fade
   }
-
-  PopColour();
 }
 
 void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg)
@@ -61,9 +53,6 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   if (sentNotRecv)
   {
     text->SetJust(GuiText::AMJU_JUST_RIGHT);
-
-    // ???
-    //text->SetFgCol(Colour(0, 0, 0, 1));
   }
 
   m_texts.push_back(text);
@@ -76,9 +65,63 @@ ChatConsole::ChatConsole()
   m_chatRecvIsActive = false;
 
   // TODO Load from config
-  m_pos = Vec2f(-0.8f, -0.8f);
-  m_size = Vec2f(1.6f, 1.0f); // TODO TEMP TEST
-  m_fontSize = 0.7f;
+  m_size = Vec2f(0.8f, 1.0f); 
+  m_pos = Vec2f(1.0f - m_size.x, -0.8f);
+  m_fontSize = 0.7f; // TODO CONFIG
+  
+  m_mode = CHAT_CLOSED;
+  m_vel = Vec2f(-10.0f, 0); // moves from right hand side
+}
+
+void ChatConsole::Update()
+{
+  if (!m_gui)
+  {
+    return;
+  }
+
+  GSMain* gsm = TheGSMain::Instance();
+
+  switch (m_mode)
+  {
+  case CHAT_OPENING:
+    {
+std::cout << "Chat opening!\n";
+
+    float dt = TheTimer::Instance()->GetDt();
+    Vec2f pos = m_gui->GetLocalPos();
+    pos += m_vel * dt;
+
+    if (pos.x < m_pos.x)
+    {
+      pos.x = m_pos.x;
+      m_mode = CHAT_OPEN;
+    }
+    gsm->SetViewWidth((pos.x + 1.0f) * 0.5f);
+    m_gui->SetLocalPos(pos);
+    }
+    break;
+
+  case CHAT_CLOSING:
+    {
+std::cout << "Chat closing!\n";
+
+    float dt = TheTimer::Instance()->GetDt();
+    Vec2f pos = m_gui->GetLocalPos();
+    pos -= m_vel * dt;
+    if (pos.x > 1.0f)
+    {
+      pos.x = 1.0f;
+      m_mode = CHAT_CLOSED;
+    }
+    gsm->SetViewWidth((pos.x + 1.0f) * 0.5f);
+    m_gui->SetLocalPos(pos);
+    }
+    break;
+
+  default:
+    break;
+  }
 }
 
 void ChatConsole::Draw()
@@ -167,6 +210,11 @@ void ChatConsole::OnActive()
   ////GetElementByName(m_gui, "recv-close-button")->SetCommand(Amju::OnRecvCloseButton);
   ActivateChatSend(false, -1);
   ActivateChatRecv(false);
+
+  m_mode = CHAT_CLOSED;
+  Vec2f pos = m_gui->GetLocalPos();
+  pos.x = 1.0f;
+  m_gui->SetLocalPos(pos);
 }
 
 void ChatConsole::OnChatSend()
@@ -199,20 +247,21 @@ std::cout << "Blank msg, not sending.\n";
   textedit->SetText("");
 
   // Reset typing flag
-  OnTyping();
+  OnTyping(); // empty text so flag will reset
 
-  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(true);
+////  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(true);
 }
 
 void ChatConsole::OnChatCancel()
 {
+  // Chat console closed
   ActivateChatSend(false, -1);
 }
 
-void ChatConsole::OnRecvClose()
-{
-  ActivateChatRecv(false);
-}
+//void ChatConsole::OnRecvClose()
+//{
+//  ActivateChatRecv(false);
+//}
 
 bool ChatConsole::CanShowMsg() const
 {
@@ -228,6 +277,15 @@ std::cout << "Unexpected, tried to access ChatConsole: ActivateChatSend\n";
   }
 
   // TODO polish -- jump onto screen
+  if (active && m_mode != CHAT_OPEN)
+  {
+    m_mode = CHAT_OPENING;
+  }
+  else if (!active && m_mode != CHAT_CLOSED)
+  {
+    m_mode = CHAT_CLOSING;
+  }
+
   m_lastRecipId = recipId;
 
   if (active)
@@ -249,7 +307,7 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
   }
   else
   {
-    m_gui->GetElementByName("chat-comp")->SetVisible(false);
+    //m_gui->GetElementByName("chat-comp")->SetVisible(false);
   }
   m_chatSendIsActive = active;
 }
@@ -288,7 +346,7 @@ std::cout << "Wait, we already displayed this msg!!\n";
 
   }
 
-  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(active);
+////  GetElementByName(m_gui, "msg-recv-comp")->SetVisible(active);
   m_chatRecvIsActive = active;
 }
 

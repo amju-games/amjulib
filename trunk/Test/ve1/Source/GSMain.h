@@ -37,6 +37,9 @@ public:
 
   void SetNumPlayersOnline(int);
 
+  // So chat console reduces the width of the 3D scene
+  void SetViewWidth(float w);
+
 private:
   void DoMoveRequest();
   void ShowObjectMenu(GameObject*);
@@ -48,17 +51,13 @@ private:
   RCPtr<GuiMenu> m_menu;
   int m_numPlayersOnline;
 
-/*
-  // Chat recipient
-  int m_lastRecipId;
-  bool m_chatSendIsActive;
-  bool m_chatRecvIsActive;
-*/
-
   // Debug camera
   float m_yRot;
 
   RCPtr<EventListener> m_listener;
+
+  // Adjust viewport width so chat fits down side..?
+  float m_viewportWidth;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace
