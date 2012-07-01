@@ -5,38 +5,12 @@
 #include "GSChoosePlayer.h"
 #include "GSStartGame.h"
 #include "GameMode.h"
-#include "GSCogTestMenu.h"
 #include "GSTitle.h"
 #include "GSAdminMenu.h"
 #include "GSOptions.h"
 
 namespace Amju
 {
-/*
-static void OnNoGameButton()
-{
-  SetGameMode(AMJU_MODE_NO_GAME); 
-  //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-}
-
-static void OnSingleButton()
-{
-  // TODO Still connect to server to log activity and get run time content.
-  // Set single player flag.
-  SetGameMode(AMJU_MODE_SINGLE); 
-  //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-}
-
-static void OnMultiButton()
-{
-  SetGameMode(AMJU_MODE_MULTI); 
-  //TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-}
-*/
-
 static void OnOptionsButton()
 {
   // Set back state!!
@@ -88,15 +62,10 @@ void GSStartMenu::OnActive()
   Assert(m_gui);
 
   GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
-////  start->SetIsEnabled(false);
   start->SetCommand(Amju::OnStartButton);
 
   GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
   options->SetCommand(Amju::OnOptionsButton);
-
-//  GuiButton* nogame = (GuiButton*)GetElementByName(m_gui, "nogame-button");
-//  nogame->SetIsEnabled(false);
-//  nogame->SetCommand(Amju::OnNoGameButton);
 
   GetElementByName(m_gui, "admin-button")->SetCommand(Amju::OnAdminButton);
 

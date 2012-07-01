@@ -9,6 +9,7 @@
 #include "GSStroopColour.h"
 #include "GSStroopColourWord.h"
 #include "GSReactionTime.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
@@ -24,13 +25,13 @@ static void OnCancelButton()
 
 static void LetterSigmaTest()
 {
-  TheGSLetterCancellation1::Instance()->LoadConfig("letter-cancel-sigma.txt");
+  TheGSLetterCancellation1::Instance()->LoadConfig(AMJU_COG_TEST_SYMBOL_CAN, "letter-cancel-sigma.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
 }
 
 static void LetterMTest()
 {
-  TheGSLetterCancellation1::Instance()->LoadConfig("letter-cancel-m.txt");
+  TheGSLetterCancellation1::Instance()->LoadConfig(AMJU_COG_TEST_LETTER_CAN, "letter-cancel-m.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
 }
 

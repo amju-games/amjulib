@@ -31,7 +31,8 @@ public:
   bool OnMouseButtonEvent(const MouseButtonEvent&);
 
   // Call this with different filenames prior to activating, to change task details.
-  bool LoadConfig(const std::string& filename);
+  // Test ID is one of the enums in CogTestResults.
+  bool LoadConfig(int testId, const std::string& filename);
 
   // Called from Done button or when timer expires. Send results, go to next state.
   void FinishedTest();
@@ -79,7 +80,7 @@ protected:
   bool m_isPaused; // ?
   bool m_isFinished;
 
-  std::string m_testName; // to tag results sent to server
+  int m_testId; // to tag results sent to server
   int m_correct;
   int m_incorrect;
 };

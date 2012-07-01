@@ -59,6 +59,7 @@ public:
   bool AddLoginReq(RCPtr<OnlineReq> req); 
 
   void SetSessionId(const std::string& session);
+  const std::string& GetSessionId() const;
 
 private:
   bool m_isLoggedIn;
