@@ -1,4 +1,6 @@
 #include <EventPoller.h>
+#include <DrawRect.h>
+#include <AmjuGL.h>
 #include "GuiKeyboard.h"
 
 namespace Amju
@@ -28,6 +30,40 @@ struct KbCommand : public GuiCommand
   KeyEvent m_ke;
 };
 
+GuiKeyboard::GuiKeyboard()
+{
+  m_page = 0;
+}
+
+void GuiKeyboard::ChangePage(int page)
+{
+  // Hide old page
+  GetChild(m_page)->SetVisible(false);
+
+  page = m_page;
+
+  // Show new page
+  GetChild(m_page)->SetVisible(true);
+}
+
+void GuiKeyboard::Draw()
+{
+  PushColour();
+  static const float G = 0.5f;
+  AmjuGL::SetColour(Colour(G, G, G, 1));
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  Rect r = GetRect(this);
+  DrawSolidRect(r);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  PopColour();
+
+  GuiWindow::Draw();
+}
+
+void GuiKeyboard::SetKbScale(float s)
+{
+}
+
 bool GuiKeyboard::Load(File* file)
 {
   if (!GuiElement::Load(file))
@@ -35,11 +71,18 @@ bool GuiKeyboard::Load(File* file)
     return false;
   }
 
-  const std::string filename = "gui-kb.txt"; // TODO global KB choice, depending on Language setting
+  // Get filename for KB layout. This string can be localised, giving language-specific keyboards.
+
+  std::string filename; // = "gui-kb.txt"; // TODO global KB choice, depending on Language setting
+  if (!file->GetLocalisedString(&filename))
+  {
+    file->ReportError("Expected keyboard file name");
+    return false;
+  }
+
   File f;
   if (!f.OpenRead(filename))
   {
-    Assert(0);
     return false;
   }
 
@@ -48,6 +91,7 @@ bool GuiKeyboard::Load(File* file)
     return false;
   }
 
+/*
   // Set command on each key
   static const char CHARS[] = "abcdefghijklmnopqrstuvwxyz0123456789"; 
   for (unsigned int i = 0; i < 36; i++)
@@ -64,6 +108,14 @@ bool GuiKeyboard::Load(File* file)
     Amju::GetElementByName(this, std::string(1, CHARS[i]))->SetCommand(new KbCommand(ke)); 
   }
   // Arrow keys etc ?
+*/
+
+  
+  GetChild(0)->SetVisible(true);
+  for (int i = 1; i < GetNumChildren(); i++)
+  {
+    GetChild(i)->SetVisible(false);
+  }
 
   return true;
 }
