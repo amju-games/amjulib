@@ -1,6 +1,7 @@
 #ifndef GUI_RECT_H_INCLUDED
 #define GUI_RECT_H_INCLUDED
 
+#include <AmjuGL.h>
 #include <Colour.h>
 #include "GuiElement.h"
 
