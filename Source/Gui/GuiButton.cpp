@@ -253,7 +253,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (m_isPressed)
       {
         ClickSound();
-        SetHasFocus(true);
+        //SetHasFocus(true); // Not sure about this. TODO Make it a flag ?
         return true; // handled
       }
     }
