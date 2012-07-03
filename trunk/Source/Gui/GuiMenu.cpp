@@ -119,12 +119,18 @@ GuiMenu::GuiMenu()
   m_selected = -1;
   m_isVertical = true;
   m_hideOnSelection = true;
+  m_clickedAway = 0;
 }
 
 GuiMenu::~GuiMenu()
 {
   // Done in ~EventListener
   //TheEventPoller::Instance()->RemoveListener(this); 
+}
+
+void GuiMenu::SetOnClickedAwayFunc(CommandFunc func)
+{
+  m_clickedAway = func;
 }
 
 void GuiMenu::Draw()
@@ -192,6 +198,11 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
       // Click outside menu area => hide menu
       SetVisible(false);
+      // Callback for clicking off menu  
+      if (m_clickedAway)
+      {
+        m_clickedAway();
+      }
 
       // TODO Callback for when menu is made invis
 

@@ -66,6 +66,9 @@ public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
+  // Set callback for when mouse is clicked away from menu
+  void SetOnClickedAwayFunc(CommandFunc);
+
 protected:
 //  typedef std::vector<PGuiMenuItem> Items;
 //  Items m_items;
@@ -76,6 +79,9 @@ protected:
   bool m_isVertical;
   // If true, hide menu when an item is selected
   bool m_hideOnSelection;
+
+  // Callback when mouse click is outside menu bounds
+  CommandFunc m_clickedAway;
 };
 }
 
