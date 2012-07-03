@@ -7,7 +7,7 @@
 #include <ClipLineSegBox.h>
 #include "Ve1Object.h"
 
-#define PICK_DEBUG
+//#define PICK_DEBUG
 
 namespace Amju
 {
@@ -60,11 +60,15 @@ std::cout << " Obj " << pgo->GetId() << " AND IS CLOSEST!\n";
     }
     else if (aabb)
     {
+#ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " is not picked.\n";
+#endif
     }
     else
     {
+#ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " has no AABB.\n";
+#endif
     }
   }
 
