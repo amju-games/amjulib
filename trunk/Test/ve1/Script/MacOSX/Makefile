@@ -19,24 +19,14 @@ DATADIR		:=	$(RUNDIR)/Data
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/$(AMJU_BUILD_ARCH)/amjulib.a \
+        $(AMJULIB_MAC_SCRIPT_PATH)/../../Source/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib \
+        $(AMJULIB_MAC_SCRIPT_PATH)/../../Source/SoundBass/Bass2.4/Macosx/libbassmidi.dylib \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
 	-lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
-
-run_old:
-	mkdir $(RUNDIR); \
-	mkdir $(DATADIR); \
-	mkdir $(DATADIR)/font2d; \
-	mkdir $(DATADIR)/font3d; \
-	cp $(TARGET) $(RUNDIR); \
-	cp -R $(ASSETSDIR)/* $(DATADIR); \
-	cp $(FONT2D)/* $(DATADIR)/font2d/; \
-	cp $(FONT3D)/* $(DATADIR)/font3d/; \
-	cd $(RUNDIR); \
-	./$(APP)
 
 run:
 	cp $(TARGET) $(RUNDIR); \
@@ -46,10 +36,6 @@ run:
 
 # NB To be sure you have all up-to-date assets, do a make release, then make run
 
-
-# Hmm, if there's an assert we don't go into gdb, so not much use :-(
-#	echo run | gdb $(APP); \
-#	cd -
 
 runclean:
 	rm $(RUNDIR)/* ; make run
@@ -64,6 +50,8 @@ release:
 	cp -R $(ASSETSDIR)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/; \
 	cp -R $(FONT2D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font2d; \
 	cp -R $(FONT3D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font3d; \
+        cp $(AMJU)/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $(BUILD)/"My Game.app"/Contents/MacOS/; \
+        cp $(AMJU)/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib $(BUILD)/"My Game.app"/Contents/MacOS/ ; \
 	cp $(TARGET) $(BUILD)/"My Game.app"/Contents/MacOS/"My Game"; 
 
 
