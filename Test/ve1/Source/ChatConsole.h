@@ -44,6 +44,8 @@ private:
 
   // Chat recipient
   int m_lastRecipId;
+  std::string m_recipName;
+
   bool m_chatSendIsActive;
   bool m_chatRecvIsActive;
 
@@ -75,6 +77,8 @@ private:
   };
   Mode m_mode;
   Vec2f m_vel; // vel when moving on screen
+
+  bool m_typing;
 };
 
 typedef Singleton<ChatConsole> TheChatConsole;
