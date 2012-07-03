@@ -16,7 +16,8 @@ Amju Games source code (c) Copyright Jason Colman 2006
 #include "Bass2.3/Win/bass.h"
 #include "Bass2.3/Win/bassmidi.h"
 #endif
-#include "StringUtils.h"
+#include <StringUtils.h>
+#include <File.h>
 
 namespace Amju
 {
@@ -182,7 +183,7 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
   {
     if (!(m_chan=BASS_MusicLoad(
       FALSE, // mem ?
-      songFile.c_str(), // file
+      (File::GetRoot() + songFile).c_str(), // file
       0, // offset
       0, // length
       BASS_SAMPLE_LOOP|BASS_MUSIC_SURROUND, 
