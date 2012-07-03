@@ -40,6 +40,8 @@ public:
   void OnTyping();
 
 private:
+  void Hide();
+
   PGuiElement m_gui;
 
   // Chat recipient

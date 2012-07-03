@@ -76,10 +76,20 @@ ChatConsole::ChatConsole()
   m_pos = Vec2f(1.0f - m_size.x, -0.8f);
   m_fontSize = 0.7f; // TODO CONFIG
   
-  m_mode = CHAT_CLOSED;
   m_vel = Vec2f(-10.0f, 0); // moves from right hand side
 
   m_typing = false;
+}
+
+void ChatConsole::Hide()
+{
+  m_mode = CHAT_CLOSED;
+  Vec2f pos = m_gui->GetLocalPos();
+  pos.x = 1.0f;
+  m_gui->SetLocalPos(pos);
+
+  static GSMain* gsm = TheGSMain::Instance();
+  gsm->SetViewWidth(1.0f);
 }
 
 void ChatConsole::Update()
@@ -89,7 +99,7 @@ void ChatConsole::Update()
     return;
   }
 
-  GSMain* gsm = TheGSMain::Instance();
+  static GSMain* gsm = TheGSMain::Instance();
 
   switch (m_mode)
   {
@@ -153,7 +163,7 @@ std::cout << "Chat closing!\n";
 
 void ChatConsole::Draw()
 {
-  if (m_gui)
+  if (m_gui && m_mode != CHAT_CLOSED)
   {
     m_gui->Draw();
 
@@ -184,7 +194,7 @@ void ChatConsole::SetPlayerIsTyping(bool isTyping, int typerId, int recipId)
 std::cout << "This player: " << typerId << " is typing a message for " << recipId << ".\n";
     if (typerId == m_lastRecipId && recipId == GetLocalPlayerId())
     {
-std::cout << "Holy shit, that's ME!!\n";
+std::cout << "That's ME!!\n";
        m_typing = true;
     }
   }
@@ -245,10 +255,7 @@ void ChatConsole::OnActive()
   ActivateChatSend(false, -1);
   ActivateChatRecv(false);
 
-  m_mode = CHAT_CLOSED;
-  Vec2f pos = m_gui->GetLocalPos();
-  pos.x = 1.0f;
-  m_gui->SetLocalPos(pos);
+  Hide();
 }
 
 void ChatConsole::OnChatSend()
@@ -310,7 +317,7 @@ std::cout << "Unexpected, tried to access ChatConsole: ActivateChatSend\n";
     return;
   }
 
-  // TODO polish -- jump onto screen
+  // polish -- jump onto screen
   if (active && m_mode != CHAT_OPEN)
   {
     m_mode = CHAT_OPENING;
