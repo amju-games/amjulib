@@ -12,6 +12,16 @@ GuiRect::GuiRect()
   m_flags = 0;
 }
 
+void GuiRect::SetColour(const Colour& colour)
+{
+  m_colour = colour;
+}
+
+void GuiRect::SetRoundCorners(unsigned int flags)
+{
+  m_flags = flags;
+}
+
 void GuiRect::Draw()
 {
   if (!IsVisible())
