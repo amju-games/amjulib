@@ -78,6 +78,8 @@ ChatConsole::ChatConsole()
   
   m_mode = CHAT_CLOSED;
   m_vel = Vec2f(-10.0f, 0); // moves from right hand side
+
+  m_typing = false;
 }
 
 void ChatConsole::Update()
@@ -126,6 +128,24 @@ std::cout << "Chat closing!\n";
     }
     break;
 
+  case CHAT_OPEN:
+    if (m_typing)
+    {
+      static float timer = 0;
+      static int t = 0;
+      static const char* DOTS[3] = { "  .", " . ", ".  " };
+      timer += TheTimer::Instance()->GetDt();
+      if (timer > 0.5f) // TODO
+      {
+        timer = 0;
+        t++;
+        if (t > 2)
+        {         
+          t = 0;
+        }
+        ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(DOTS[t] + m_recipName);
+      }
+    }
   default:
     break;
   }
@@ -158,17 +178,24 @@ void ChatConsole::OnDeactive()
 void ChatConsole::SetPlayerIsTyping(bool isTyping, int typerId, int recipId)
 {
   // TODO
+  m_typing = false;
   if (isTyping)
   {
 std::cout << "This player: " << typerId << " is typing a message for " << recipId << ".\n";
-    if (recipId == m_lastRecipId)
+    if (typerId == m_lastRecipId && recipId == GetLocalPlayerId())
     {
 std::cout << "Holy shit, that's ME!!\n";
+       m_typing = true;
     }
   }
   else
   {
 std::cout << "This player: " << typerId << " is not typing anything.\n";
+    if (typerId == m_lastRecipId)
+    {
+      // Hide dots
+      ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(m_recipName);
+    }
   }
 }
 
@@ -299,11 +326,10 @@ std::cout << "Unexpected, tried to access ChatConsole: ActivateChatSend\n";
   {
 std::cout << "Activate chat -- recip ID = " << recipId << "\n";
 
-    std::string recipName;
-    GetNameForPlayer(recipId, &recipName);
+    GetNameForPlayer(recipId, &m_recipName);
 
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
-    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(recipName);
+    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(m_recipName);
 
     GuiButton* send = (GuiButton*)GetElementByName(m_gui, "chat-send-button");
     send->SetHasFocus(true); // use in preference to SetIsFocusButton
