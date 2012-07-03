@@ -419,8 +419,6 @@ public:
 
   virtual void OnSuccess()
   {
-std::cout << "Move req result: " << GetResult().GetString() << "\n";
-
     // Do nothing for now, we will download the new position and cache it
     // TODO Prediction
 
