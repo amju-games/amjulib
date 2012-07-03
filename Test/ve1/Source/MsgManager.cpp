@@ -70,7 +70,12 @@ void MsgManager::Update()
     TextToSpeech(msg.m_text);
 
     // Mark message as read -- TODO only after player clicks OK in gui..?
-    MarkRead(msg);
+    if (m_map.size() == 1)
+    {
+      // Last (i.e. most recent) msg - mark as read: this should 
+      //  mark all earlier msgs as read also.
+      MarkRead(msg);
+    }
 
     m_map.erase(it);
   }
