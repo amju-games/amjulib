@@ -48,11 +48,18 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   //text->SizeToText(); // TODO make this work for multi-line
   text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetDrawBg(true);
-  text->SetInverse(sentNotRecv);
-  text->SetJust(GuiText::AMJU_JUST_LEFT);
+  text->SetInverse(false);
   if (sentNotRecv)
   {
+    text->SetJust(GuiText::AMJU_JUST_LEFT);
+    text->SetBgCol(Colour(1, 1, 1, 1));
+    text->SetFgCol(Colour(0, 0, 0, 1));
+  }
+  else
+  {
     text->SetJust(GuiText::AMJU_JUST_RIGHT);
+    text->SetBgCol(Colour(1, 0, 1, 1)); // TODO different colours for different recips ?
+    text->SetFgCol(Colour(1, 1, 1, 1));
   }
 
   m_texts.push_back(text);
