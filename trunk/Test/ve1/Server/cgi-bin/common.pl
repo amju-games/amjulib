@@ -58,14 +58,14 @@ sub insert($)
 {
   my $sql = shift;
   update_or_insert($sql);
-  print "Insert successful: '$sql'\n";
+  #print "Insert successful: '$sql'\n";
 }
 
 sub update($)
 {
   my $sql = shift;
   update_or_insert($sql);
-  print "Update successful: '$sql'\n";
+  #print "Update successful: '$sql'\n";
 }
 
 sub drop_table($)
@@ -113,7 +113,7 @@ sub check_session()
 
   if (($find_session_id, $time_now) = $query->fetchrow_array)
   {
-    print "Found session ID $find_session_id\n";
+    #print "Found session ID $find_session_id\n";
     print "<now>$time_now</now>\n";
     return 1;
   }
