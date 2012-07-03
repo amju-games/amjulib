@@ -71,7 +71,7 @@ chat-recip-name
 recipient name
 // Font
 //arial, 1.0
-arial,1.0,right,fgcol=ffc0c0,bgcol=ff00ff
+arial,1.0,right,fgcol=ffffff,bgcol=ff00ff
 
 // Child
 gui-button
