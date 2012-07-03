@@ -62,6 +62,19 @@ public:
   // For non-indexed triangle list, this is simply the 3 verts of a triangle.
   struct Tri
   {
+    Tri() {}
+    Tri(const Vert& v0, const Vert& v1, const Vert& v2) 
+    { 
+      Set(v0, v1, v2);
+    }
+
+    void Set(const Vert& v0, const Vert& v1, const Vert& v2)
+    {
+      m_verts[0] = v0;
+      m_verts[1] = v1;
+      m_verts[2] = v2;
+    }
+ 
     Vert m_verts[3];
   };
 
