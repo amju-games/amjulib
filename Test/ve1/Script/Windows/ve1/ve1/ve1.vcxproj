@@ -162,6 +162,10 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollideObjectFurniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
@@ -186,8 +190,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopColour.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopColourWord.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
@@ -238,6 +246,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
+    <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
+    <ClInclude Include="..\..\..\..\Source\CollideObjectFurniture.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
     <ClInclude Include="..\..\..\..\Source\Fightable.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
@@ -262,8 +272,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
     <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
+    <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopColour.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopColourWord.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
