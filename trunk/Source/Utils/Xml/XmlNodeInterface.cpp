@@ -76,7 +76,11 @@ PXml ParseXml(const char* xmlInput)
     XMLResults xe;
     XMLNode xMainNode = XMLNode::parseString(xmlTag, NULL, &xe);
 
-    //std::cout << "XML Result: " << xe.error << " line: " << xe.nLine << "\n";
+    if (xe.error != eXMLErrorNone)
+    {
+      std::cout << "XML Result Error: " << XMLError(xe.error) << " line: " << xe.nLine << "\n";
+    }
+
     //PrintTree(xMainNode, 0);
 
     return xMainNode;
