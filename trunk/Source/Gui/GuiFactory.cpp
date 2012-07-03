@@ -9,6 +9,7 @@
 #include "GuiKeyboard.h"
 #include "GuiMenu.h"
 #include "GuiDialog.h"
+#include "GuiRect.h"
 
 namespace Amju
 {
@@ -22,6 +23,7 @@ GuiElement* CreateWindow() { return new GuiWindow; }
 GuiElement* CreateKb() { return new GuiKeyboard; }
 GuiElement* CreateMenu() { return new GuiMenu; }
 GuiElement* CreateDialog() { return new GuiDialog; }
+GuiElement* CreateRect() { return new GuiRect; }
 
 GuiFactory::GuiFactory()
 {
@@ -35,5 +37,6 @@ GuiFactory::GuiFactory()
   Add(GuiKeyboard::NAME, &CreateKb);
   Add(GuiMenu::NAME, &CreateMenu);
   Add(GuiDialog::NAME, &CreateDialog);
+  Add(GuiRect::NAME, &CreateRect);
 }
 }
