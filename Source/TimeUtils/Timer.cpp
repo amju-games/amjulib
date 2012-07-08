@@ -72,12 +72,6 @@ static float elapsed = 0;
 
 void Timer::Update()
 {
-//#if defined(MACOSX) && defined(AMJU_USE_GLUT_TIMER)
-//  int millisecs = glutGet(GLUT_ELAPSED_TIME);
-//  double d = double(millisecs) / 1000.0;
-//  dt = (float)d;
-//#endif
-
 #if defined(MACOSX) || defined(IPHONE) 
   timeval tv;
   gettimeofday(&tv, 0);
@@ -88,17 +82,13 @@ void Timer::Update()
 
 #endif // MACOSX
 
-//#ifdef IPHONE
-//  dt = 1.0f / 60.0f; // TODO TEMP TEST
-//#endif
-
-#if defined(WIN32) //&& defined(AMJU_USE_SDL)
+#if defined(WIN32) 
   static unsigned int oldt = 0;
-  unsigned int t = timeGetTime(); //SDL_GetTicks();
+  unsigned int t = timeGetTime(); 
   unsigned int diff = t - oldt;
   oldt = t;
   dt = (float)diff / 1000.0f;
-#endif // WIN32 + SDL
+#endif // WIN32 
 
 #ifdef GEKKO
   static MillisecondTimer oldt;
@@ -109,8 +99,12 @@ void Timer::Update()
   dt = (float)diff / 1000.0f;
 #endif // GEKKO
 
-  static const float MAX_DT = 0.02f;
+  static const float MAX_DT = 1.0f / 30.0f;
   if (dt > MAX_DT)
+  {
+    dt = MAX_DT;
+  }
+  if (dt < 0)
   {
     dt = MAX_DT;
   }
