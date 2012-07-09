@@ -59,6 +59,8 @@ enum KeyModifier
 
 struct KeyEvent : public Event
 {
+  KeyEvent() : keyDown(false), modifier(0) {}
+
   KeyType keyType; // If AMJU_KEY_CHAR, key is a printable character
   char key; // character if key is printable character, TODO UNICODE
   bool keyDown;
