@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GSNetError.h"
 #include <AmjuGL.h>
 #include <Game.h>
@@ -43,6 +44,8 @@ GSNetError::GSNetError()
 void GSNetError::SetError(const std::string& error)
 { 
   m_errorStr = error;
+
+std::cout << "ERROR: " << error << "\n";
 }
 
 void GSNetError::Update()
