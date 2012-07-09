@@ -1,7 +1,8 @@
-#include "GuiTextEdit.h"
+#include <iostream>
 #include <EventPoller.h>
 #include <Timer.h>
 #include <DrawRect.h>
+#include "GuiTextEdit.h"
 
 namespace Amju
 {
