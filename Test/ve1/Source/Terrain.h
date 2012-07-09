@@ -1,25 +1,24 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include "Ve1Object.h"
 #include <SceneNode.h>
 #include <Line3.h>
+#include "Ve1Object.h"
+#include "HasCollisionMesh.h"
 
 namespace Amju
 {
 class CollisionMesh;
 
-class TerrainSceneNode;
-
 // Location has a Terrain. In a tree structure for drawing, collisions. 
 // Terrain has a SceneNode, as it is drawn, but is itself a game object (allowing it to be downloadable).
-class Terrain : public Ve1Object
+class Terrain : public Ve1Object, public HasCollisionMesh
 {
 public:
   Terrain();
 
   // Get location clicked on, for user navigation. Returns false if not a point on ground
-  bool GetMousePos(const LineSeg& mouseLine, Vec3f* pos);
+//  bool GetMousePos(const LineSeg& mouseLine, Vec3f* pos);
 
 ////  virtual void Draw(); //?
   virtual void Update();
@@ -30,8 +29,8 @@ public:
 
   virtual void OnLocationEntry();
 
-  // For collision tests/shadows -- TODO Octree
-  CollisionMesh* GetCollisionMesh();
+//  // For collision tests/shadows -- TODO Octree
+//  CollisionMesh* GetCollisionMesh();
 
   void SetMeshFilename(const std::string& filename) { m_objFilename = filename; }
 
@@ -43,7 +42,7 @@ protected:
 
   // If a regular grid, we don't need anything fancy, you can just divide the coord to get the triangle.
 
-  TerrainSceneNode* m_sceneNode;
+//  SceneCollisionMesh* m_sceneNode;
 };
 
 // Get the Terrain for the current location for this client
