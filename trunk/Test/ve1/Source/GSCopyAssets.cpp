@@ -43,14 +43,13 @@ bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, c
 
   if (FileExists(dest))
   {
-std::cout << "File already exists: " << dest << "\n";
+//std::cout << "File already exists: " << dest << "\n";
 
     Time destTime = GetFileModifiedTime(dest);
 
     std::string src = srcDir + "/" + filename;
     Time srcTime = GetFileModifiedTime(src);
 
-std::cout << "File: " << filename << " destTime: " << destTime.ToString() << " srcTime: " << srcTime.ToString() << "\n";
 
     if (!(destTime < srcTime))
     {
@@ -60,6 +59,7 @@ std::cout << "File: " << filename << " destTime: " << destTime.ToString() << " s
 
   if (doCopy)
   {
+//std::cout << "File: " << filename << " destTime: " << destTime.ToString() << " srcTime: " << srcTime.ToString() << "\n";
 std::cout << "Copying file " << filename << " as dest is older than src, or doesn't exist.\n";
     if (FileCopy(srcDir, destDir, filename))
     {
@@ -72,7 +72,7 @@ std::cout << "Copying file " << filename << " as dest is older than src, or does
   }
   else
   {
-std::cout << "No need to copy file " << filename << ", it's up to date.\n";
+//std::cout << "No need to copy file " << filename << ", it's up to date.\n";
   }
 
 /*
@@ -138,12 +138,14 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
     // TODO Fix Dir() so it distinguishes between files and dirs!!
     MkDir(saveDir + "/font2d");
     MkDir(saveDir + "/font3d");
+    MkDir(saveDir + "/Sound");
 
     DoCopyingForDir(dataDir, saveDir);
 
     // Copy assets from data dir to save dir for font2d and font3d.
     DoCopyingForDir(dataDir + "/font2d/", saveDir + "/font2d/");
     DoCopyingForDir(dataDir + "/font3d/", saveDir + "/font3d/");
+    DoCopyingForDir(dataDir + "/Sound/", saveDir + "/Sound/");
 
     // All copied - go to next state 
     // TODO Once logo displayed etc
