@@ -40,7 +40,7 @@ void GuiTextEdit::Draw()
   {
     m_caretTimer = 0;
   }
-  else if (HasFocus() && m_caretTimer < BLINK_TIME_HALF)
+  else if (m_caretTimer < BLINK_TIME_HALF)
   {
     m_drawCaret = true;
   }
@@ -73,15 +73,12 @@ void GuiTextEdit::Draw()
   GuiText::Draw();
 
   // Draw caret - TODO multi line 
-  if (HasFocus())
-  {
-    PushColour();
-    AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
-    float startX = GetCombinedPos().x;
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
-    PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
-    PopColour();
-  }
+  PushColour();
+  AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
+  float startX = GetCombinedPos().x;
+  float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
+  PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
+  PopColour();
 }
 
 bool GuiTextEdit::Load(File* f)
@@ -205,16 +202,17 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     return false;
   }
 
-  //if (HasFocus())
-  {
-    s_drag = mbe.isDown;
-std::cout << "GuiTextEdit Drag is now " << (s_drag ? "ON" : "OFF") << "\n";
-  }
-
   Rect r = GetRect(this);
   if (!r.IsPointIn(Vec2f(mbe.x, mbe.y)))
   {
     return false; // not handled - cursor not in edit box
+  }
+
+  // We want to drag to select text even if this is not the focus ?
+  //if (HasFocus())
+  {
+    s_drag = mbe.isDown;
+std::cout << "GuiTextEdit Drag is now " << (s_drag ? "ON" : "OFF") << "\n";
   }
 
   // If clicked in bounding rect, this element gets focus
