@@ -5,7 +5,7 @@
 #include "Bitmap.h"
 #include "ReportError.h"
 #include <StringUtils.h>
-#include <Png/LoadPng.h>
+#include <LoadPng.h>
 #include "AmjuFinal.h"
 
 namespace Amju

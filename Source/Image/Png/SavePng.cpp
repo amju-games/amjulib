@@ -9,7 +9,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 
 #include <iostream>
 #include <stdlib.h>     /* for exit() prototype */
-#include "Png/png.h"
+#include <png.h>
 #include "File.h"
 #include "AmjuFinal.h"
 
