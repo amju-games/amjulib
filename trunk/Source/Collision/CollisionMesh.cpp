@@ -2,13 +2,13 @@
 #include "Vec2.h"
 #include "Plane.h"
 // Magic Software triangle-sphere intersect test
-#include "Mgc/MgcIntr3DTriSphr.h"
+#include <MgcIntr3DTriSphr.h>
 // Mgc point-in-poly test
-#include "Mgc/MgcCont2DPointInPolygon.h"
+#include <MgcCont2DPointInPolygon.h>
 // Mgc distance from line to triangle
-#include "Mgc/MgcDist3DLinTri.h"
+#include <MgcDist3DLinTri.h>
 // Mgc dist from point to triangle
-#include "Mgc/MgcDist3DVecTri.h"
+#include <MgcDist3DVecTri.h>
 
 namespace Amju
 {
