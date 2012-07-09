@@ -1,9 +1,10 @@
-#include "GSTitle.h"
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
 #include <GuiText.h>
 #include <CursorManager.h>
+#include <SoundManager.h>
+#include "GSTitle.h"
 #include "GSStartMenu.h"
 #include "GSLogin.h"
 #include "GSChoosePlayer.h"
@@ -11,15 +12,27 @@
 #include "AvatarManager.h"
 #include "Version.h"
 #include "SpecialConfig.h"
+#include "GSFade.h"
+#include "PlayerInfo.h"
 
 namespace Amju
 {
 static void OnStartButton()
 {
-  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  // If no players, go straight to log in screen
+  if (ThePlayerInfoManager::Instance()->GetNumPlayerNames() == 0)
+  {
+    TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
+  }
+  else
+  {
+    // Menu is back in -- so we can options (and admin menu) before starting
+    TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  }
 
-  // Don't go to the menu. The game mode now depends on the response from login.pl.
-  //TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
+
+  // Ideally
+  //Fade(TheGSStartMenu::Instance(), 2.0f);
 }
 
 static void OnQuitButton()
@@ -103,6 +116,8 @@ void GSTitle::OnActive()
   ver->SetText(s);
 
   CreateText("my game");
+
+  TheSoundManager::Instance()->PlaySong("/Sound/apz1.it");
 }
 
 void GSTitle::OnDeactive()
