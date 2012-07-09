@@ -27,7 +27,7 @@ protected:
 protected:
   float m_time;
   float m_maxTime;
-  GSBase* m_nextState;
+  GameState* m_nextState;
   float m_yrot; 
   bool m_drag;
   GameState* m_prevState;
