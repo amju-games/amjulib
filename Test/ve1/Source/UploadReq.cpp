@@ -1,5 +1,5 @@
 #include "UploadReq.h"
-#include "GSNewLocation.h"
+#include "GSWaitForUpload.h"
 
 namespace Amju
 {
@@ -11,7 +11,7 @@ void UploadReq::OnSuccess()
 {
 std::cout << "Upload SUCCESS for " << m_filename << "!\n";
 
-  TheGSNewLocation::Instance()->OnUploadFinished(UploadInfo(true, m_filename));
+  TheGSWaitForUpload::Instance()->OnUploadFinished(UploadInfo(true, m_filename));
 }
 
 void UploadReq::OnFailure()
@@ -26,7 +26,7 @@ std::cout << "ERROR: " << res.GetErrorString() << "\n";
 std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
 //std::cout << "URL: " << m_url << "\n";
   
-  TheGSNewLocation::Instance()->OnUploadFinished(UploadInfo(false, m_filename));
+  TheGSWaitForUpload::Instance()->OnUploadFinished(UploadInfo(false, m_filename));
 }
 
 }
