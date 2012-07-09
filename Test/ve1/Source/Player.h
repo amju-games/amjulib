@@ -20,13 +20,10 @@ public:
   virtual void OnLocationEntry();
   virtual void OnLocationExit();
  
-  bool Init(); // TODO why ?
-
   // NB We don't have a LocalPlayer subclass. This is because if a different user logs in, the
   //  types of the players will be wrong. With a flag it's much easier to change who the local
   //  player is.
   bool IsLocalPlayer() const; 
-//  void SetIsLocalPlayer(bool);
 
   // Ve1Object overrides
   virtual void SetKeyVal(const std::string& key, const std::string& val);
