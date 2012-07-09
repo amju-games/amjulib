@@ -14,9 +14,9 @@
 #include <sys/time.h>
 #endif
 
-#define AMJU_SHOW_FRAME_TIME
+//#define AMJU_SHOW_FRAME_TIME
 
-#define STATE_DEBUG
+//#define STATE_DEBUG
 
 namespace Amju
 {
