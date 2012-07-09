@@ -20,10 +20,9 @@
 #include <File.h>
 #include <Directory.h>
 #include <ConfigFile.h>
-#include <SAP.h>
+#include <BassSoundPlayer.h>
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
-//#include "SAPCollideFunc.h"
 #include "QuitHandler.h"
 #include "JoystickToCursor.h" // TODO TEMP TEST
 
@@ -39,12 +38,12 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
+  TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
+
   GuiElement::SetTextToSpeechEnabled(false);
 
   LoadConfig();
 
-  // Set SAP collide func
-  //TheSAP::Instance()->SetCollideFunc(SAPCollideFunc);
   TheEventPoller::Instance()->AddListener(new QuitHandler);
   // TODO TEMP TEST
   TheEventPoller::Instance()->AddListener(new JoystickToCursor, -999);
