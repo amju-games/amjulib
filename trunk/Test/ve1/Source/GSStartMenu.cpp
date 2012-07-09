@@ -1,7 +1,8 @@
-#include "GSStartMenu.h"
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <SoundManager.h>
+#include "GSStartMenu.h"
 #include "GSChoosePlayer.h"
 #include "GSStartGame.h"
 #include "GameMode.h"
@@ -75,6 +76,8 @@ void GSStartMenu::OnActive()
 
   // TODO remember last choice and keep highlighted
   start->SetHasFocus(true); 
+
+  TheSoundManager::Instance()->PlaySong("Sound/piano.it");
 }
 
 } // namespace
