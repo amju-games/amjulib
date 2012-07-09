@@ -58,7 +58,7 @@ void GuiRect::BuildTris()
   m_tris.clear();
   AmjuGL::Tri tri;
 
-  if (m_cornerRadius < 0.0001f)
+  if (m_cornerRadius < 0.0001f || m_flags == 0x0f)
   {
     // Solid Rect
     AmjuGL::Vert verts[4] =
@@ -82,8 +82,13 @@ void GuiRect::BuildTris()
   }
   else
   {
+    // Get aspect ratio so corners are square
+    int vx, vy, vw, vh;
+    AmjuGL::GetViewport(&vx, &vy, &vw, &vh);
+    float asp = (float)vw / (float)vh;
+
     float x[4] = { pos.x, pos.x + m_cornerRadius, pos.x + size.x - m_cornerRadius, pos.x + size.x };
-    float y[4] = { pos.y, pos.y - m_cornerRadius, pos.y - size.y + m_cornerRadius, pos.y - size.y };
+    float y[4] = { pos.y, pos.y - m_cornerRadius * asp, pos.y - size.y + m_cornerRadius * asp, pos.y - size.y };
 
     AmjuGL::Vert v[16] =
     {
