@@ -19,6 +19,7 @@
 #include "Portal.h" // TODO hopefully we can query GameObjectFactory
 #include "ProtoObject.h"
 #include "Useful.h"
+#include "GSObjMesh.h"
 
 namespace Amju
 {
@@ -225,8 +226,15 @@ void GSEdit::Draw()
     // Get up and right vectors 
     Matrix mat;
     mat.ModelView(); // Get Modelview matrix
-    m_up = Vec3f(mat[1], mat[5], mat[9]);
+
+    // TODO Attempt to fix drag axes:
+
+    m_up = Vec3f(0, 1, 0); //mat[1], mat[5], mat[9]);
     m_right = Vec3f(mat[0], mat[4], mat[8]);
+
+    // Make sure m_right is only in (x, z) plane..?
+    m_right.y = 0;
+    m_right.Normalise();
   }
 
   // Draw axes for selected object
@@ -532,9 +540,9 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
       pos += m_up * dy * 100.0f;
       obj->SetPos(pos);
 
-std::cout << "Should be sending pos update: " << pos << "\n";
-
-      TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
+//std::cout << "Should be sending pos update: " << pos << "\n";
+      // Don't send, wait til mouse up event
+//      TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
     }
   }
 
@@ -548,6 +556,17 @@ bool GSEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   // Left click: check for clicking on an object
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {
+    if (!mbe.isDown && m_mouseDownLeft && !m_selectedObjects.empty())
+    {
+      // Mouse up - if we were dragging something, send its new position now.
+      for (SelObjects::iterator it = m_selectedObjects.begin(); it != m_selectedObjects.end(); ++it)
+      {
+        GameObject* obj = *it;
+        Vec3f pos = obj->GetPos();
+        TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
+      }
+    }
+
     m_mouseDownLeft = mbe.isDown;
 //std::cout << "Left Mouse button event! " << (m_mouseDownLeft ? "DOWN" : "UP") << "\n";
     m_isPicking = mbe.isDown;
@@ -649,6 +668,21 @@ private:
   std::string m_datafile;
 };
 
+class SetObjMeshCommand : public GuiCommand
+{
+public:
+  SetObjMeshCommand(int objId) : m_id(objId) {}
+  virtual bool Do()
+  {
+    TheGSObjMesh::Instance()->SetId(m_id);
+    TheGame::Instance()->SetCurrentState(TheGSObjMesh::Instance());
+    return false;
+  }
+
+private:
+  int m_id;
+};
+
 class SetPropsCommand : public GuiCommand
 {
 public:
@@ -704,6 +738,8 @@ void GSEdit::CreateContextMenu()
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
     for (unsigned int i = 0; i < types.size(); i++)
     {
+      // TODO Map of functions to call to generate file names
+
       std::string assetfile = "none";
       std::string datafile = "none";
 
@@ -728,6 +764,7 @@ std::cout << "Context menu - baddie found.\n";
 
 std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
     m_menu->Clear(); 
+    m_menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(obj->GetId())));
     m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
 //    m_menu->AddItem(new GuiMenuItem("Save changes to object", new SaveObjectCommand()));
   }

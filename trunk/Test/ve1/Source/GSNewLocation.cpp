@@ -13,6 +13,7 @@
 #include "LocalPlayer.h"
 #include "SaveConfig.h"
 #include "Terrain.h"
+#include "GSWaitForUpload.h"
 
 namespace Amju
 {
@@ -202,6 +203,11 @@ void GSNewLocation::RequestNewId()
   }
 }
 
+void OnFinishedUpload()
+{
+  TheGSNewLocation::Instance()->OnFinishedUpload();
+}
+
 void GSNewLocation::OnNewIdResponse(const std::string& id)
 {
   if (id.empty())
@@ -277,8 +283,34 @@ std::cout << "UPLOAD THIS FILE: " << file << "\n";
   TheVe1ReqManager::Instance()->AddReq(new UploadReq(url, m_dataFilename), m_totalFiles);
 
   // Now we wait -- but make sure Online Req Manager is being updated!
+  static GSWaitForUpload* wfu = TheGSWaitForUpload::Instance();
+  wfu->SetOnFinishedFunc(Amju::OnFinishedUpload);
+  wfu->SetTotalFiles(m_totalFiles);
+  TheGame::Instance()->SetCurrentState(wfu);
 }
 
+void GSNewLocation::OnFinishedUpload()
+{
+  if (m_mode == AMJU_EDIT)
+  {
+std::cout << "All uploaded, we are done here!\n";
+    OnLocationCreated();
+  }
+  else
+  {
+    SetError("Finished uploading, creating new location on server...");
+ 
+    std::string dir = MakeLocDir(); 
+
+    // Send req to make new Location game object.
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
+    url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
+    url = ToUrlFormat(url);
+    TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
+  }
+}
+
+/*
 void GSNewLocation::OnUploadFinished(const UploadInfo& ui)
 {
   if (ui.m_ok)
@@ -322,6 +354,7 @@ std::cout << "All uploaded, we are done here!\n";
     SetError("Uploaded " + ToString(m_uploadedFiles) + " of " + ToString(m_totalFiles) + "  files...");
   } 
 }
+*/
 
 void GSNewLocation::OnLocationCreated()
 {

@@ -27,10 +27,11 @@ enum Task
   MARK_MSG_READ,
 
   FILE_UPLOAD, // for admin game editing
-  GET_NEW_LOCATION_ID, // for creating new location
-  CREATE_LOCATION,
+  GET_NEW_LOCATION_ID, // for creating new location placeholder, gets ID
+  CREATE_LOCATION, // set once ID known and all data uploaded
   GET_ALL_LOCATIONS,
-  GET_NEW_OBJECT_ID,  // for creating new object
+  GET_NEW_OBJECT_ID,  // for creating new object placeholder, gets ID
+  CREATE_OBJECT, // set once ID known and all data uploaded 
 
   // Research
   SEND_TEST_RESULT,
