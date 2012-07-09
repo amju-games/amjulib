@@ -91,25 +91,54 @@ bool GuiKeyboard::Load(File* file)
     return false;
   }
 
-/*
-  // Set command on each key
+  GuiElement* elem = 0;
+
+  // Set command on each key. 
+  // TODO this must include all punctuation etc.
   static const char CHARS[] = "abcdefghijklmnopqrstuvwxyz0123456789"; 
   for (unsigned int i = 0; i < 36; i++)
   {
-//std::cout << "Set command for key " << CHARS[i] << "\n";
-
-    KeyEvent ke;
-    // Printable char
-    ke.keyType = AMJU_KEY_CHAR;
-    ke.key = CHARS[i];
-    ke.keyDown = true;
-    ke.modifier = AMJU_KEY_MOD_NONE;
-    
-    Amju::GetElementByName(this, std::string(1, CHARS[i]))->SetCommand(new KbCommand(ke)); 
+    // We use the member function GetElementByName, which fails without asserting.
+    // So chars not in this keyboard are just ignored. 
+    elem = GetElementByName(std::string(1, CHARS[i]));
+    if (elem)
+    {
+      KeyEvent ke;
+      // Printable char
+      ke.keyType = AMJU_KEY_CHAR;
+      ke.key = CHARS[i];
+      ke.modifier = AMJU_KEY_MOD_NONE;
+   
+      elem->SetCommand(new KbCommand(ke)); 
+    }
   }
-  // Arrow keys etc ?
-*/
+  // Special keys - enter, space, mode, delete, shift.
+  elem = GetElementByName("space");
+  if (elem)
+  {
+      KeyEvent ke;
+      ke.keyType = AMJU_KEY_SPACE;
+      elem->SetCommand(new KbCommand(ke)); 
+  }  
 
+  elem = GetElementByName("enter");
+  if (elem)
+  {
+      KeyEvent ke;
+      ke.keyType = AMJU_KEY_ENTER;
+      elem->SetCommand(new KbCommand(ke)); 
+  }  
+
+  elem = GetElementByName("del");
+  if (elem)
+  {
+      KeyEvent ke;
+      ke.keyType = AMJU_KEY_BACKSPACE;
+      elem->SetCommand(new KbCommand(ke)); 
+  }  
+
+  // TODO Shift, mode
+  // Arrow keys etc ?
   
   GetChild(0)->SetVisible(true);
   for (int i = 1; i < GetNumChildren(); i++)
