@@ -24,6 +24,9 @@
 #include "Camera.h"
 #include "PickObject.h"
 #include "ChatConsole.h"
+#include "MouseToGroundPos.h"
+#include "HasCollisionMesh.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -50,18 +53,41 @@ void GSMain::SetNumPlayersOnline(int n)
 std::cout << "Num players online is now: " << m_numPlayersOnline << "\n";
 }
 
-void GSMain::ShowObjectMenu(GameObject* obj)
+void OnMenuClickedAway()
 {
-  m_menu = new GuiMenu;
-  TheEventPoller::Instance()->AddListener(m_menu);
+  TheGSMain::Instance()->OnMenuClickedAway();
+}
 
-  m_menu->SetLocalPos(m_mouseScreen);
+bool GSMain::ShowObjectMenu(GameObject* obj)
+{
+  // Get distance from local player to this object, don't show menu if too far away
+  // TODO
+  static const float MENU_DISTANCE = 100.0f; // TODO CONFIG ?
 
   Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
   if (v)
   {
-    v->SetMenu(m_menu);
+    RCPtr<GuiMenu> menu = new GuiMenu;
+    v->SetMenu(menu);
+
+    // Only show menu if it has items
+    if (menu->GetNumChildren() > 0)
+    {
+      m_menu = menu;
+      m_menu->SetOnClickedAwayFunc(Amju::OnMenuClickedAway);
+      TheEventPoller::Instance()->AddListener(m_menu, -1); // cursor is -2 priority
+      // TODO Fix this so we can see it if on right hand side
+      Vec2f pos = m_mouseScreen;
+      Vec2f size = m_menu->GetSize();
+      if (pos.x + size.x > 1.0f)
+      {
+        pos.x = 1.0f - size.x;
+      }
+      m_menu->SetLocalPos(pos);
+      return true;
+    }
   }
+  return false;
 }
 
 void GSMain::Update()
@@ -89,7 +115,19 @@ void GSMain::Update()
 
 void GSMain::DoMoveRequest()
 {
-//std::cout << "In DoMoveRequest...\n";
+std::cout << "In DoMoveRequest...\n";
+  if (m_menu)
+  {
+std::cout << " ...m_menu exists ";
+    if (m_menu->IsVisible())
+    {
+std::cout << "and is visible.\n";
+    }
+    else
+    {
+std::cout << "and is NOT visible.\n";
+    }
+  }
 
   Vec2f mouseScreen = m_mouseScreen;
   mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
@@ -103,24 +141,49 @@ std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
 
   if (selectedObj)
   {
-    const std::string name = selectedObj->GetTypeName();
-//std::cout << "Selected " << name << " ID: " << selectedObj->GetId() << "\n";
+//std::cout << "Selected " << *selectedObj << "\n";
 
-    ShowObjectMenu(selectedObj);
+    if (ShowObjectMenu(selectedObj))
+    {
+      return;
+    }
+    // No menu. Find point on mesh, and go to that position.
+
   }
-  else if (GetLocalPlayer())
+
+  // No object selected, so find position on terrain. 
+  if (GetLocalPlayer())
   {
 //std::cout << "Ground clicked...\n";
     Vec3f pos;
-    Vec3f mouseWorldNear;
-    Vec3f mouseWorldFar;
-    Unproject(mouseScreen, 0, &mouseWorldNear);
-    Unproject(mouseScreen, 1, &mouseWorldFar);
-    LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
+//    Vec3f mouseWorldNear;
+//    Vec3f mouseWorldFar;
+//    Unproject(mouseScreen, 0, &mouseWorldNear);
+//    Unproject(mouseScreen, 1, &mouseWorldFar);
+//    LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
 
-    if (GetTerrain()->GetMousePos(lineSeg, &pos))
+//    if (GetTerrain()->GetMousePos(lineSeg, &pos))
+
+    // Try to treat selected object like terrain, and get a position to go to.
+    bool gotpos = false;
+    HasCollisionMesh* hcm = dynamic_cast<HasCollisionMesh*>(selectedObj);
+    if (hcm)
     {
-//std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+      gotpos = MouseToGroundPos(hcm->GetCollisionMesh(), mouseScreen, &pos);
+      if (gotpos)
+      {
+std::cout << "Found point on ground on this obj: " << *selectedObj << "\n";
+      }
+    }
+
+    if (!gotpos)
+    {
+      gotpos = MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
+    }
+
+    if (gotpos)
+    {
+std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 
       int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
        // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
@@ -198,6 +261,12 @@ void GSMain::Draw2d()
   TheChatConsole::Instance()->Draw();
 
   TheCursorManager::Instance()->Draw();
+}
+
+void GSMain::OnMenuClickedAway()
+{
+std::cout << "Clicked off menu, so now it's invisible.\n";
+  //m_menu = 0;
 }
 
 void GSMain::OnDeactive()
@@ -290,11 +359,12 @@ bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
   if (TheChatConsole::Instance()->IsActive())
   {
-std::cout << " - Chat active so discarding mouse click\n";
-    return false; 
+std::cout << " - Chat active but NOT discarding mouse click\n";
+    //return false; 
   }
 
-  if (!mbe.isDown)
+  // Do req if mouse button is down but no menu
+  if (mbe.isDown && (!m_menu || !m_menu->IsVisible()))
   {
     m_moveRequest = true;
   }

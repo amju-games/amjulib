@@ -40,9 +40,11 @@ public:
   // So chat console reduces the width of the 3D scene
   void SetViewWidth(float w);
 
+  void OnMenuClickedAway();
+
 private:
   void DoMoveRequest();
-  void ShowObjectMenu(GameObject*);
+  bool ShowObjectMenu(GameObject*);
 
 private:
   Vec2f m_mouseScreen;
