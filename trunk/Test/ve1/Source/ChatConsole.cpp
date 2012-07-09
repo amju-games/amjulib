@@ -9,6 +9,7 @@
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "GSMain.h"
+#include "Kb.h"
 
 namespace Amju
 {
@@ -73,12 +74,24 @@ ChatConsole::ChatConsole()
 
   // TODO Load from config
   m_size = Vec2f(0.8f, 1.0f); 
-  m_pos = Vec2f(1.0f - m_size.x, -0.8f);
+  m_pos = Vec2f(1.0f - m_size.x, -1.0f);
+  m_bottomY = -1.0f; // KB moves this up
   m_fontSize = 0.7f; // TODO CONFIG
   
   m_vel = Vec2f(-10.0f, 0); // moves from right hand side
 
   m_typing = false;
+}
+
+void ChatConsole::SetBottom(float y)
+{
+std::cout << "Setting chat console bottom to " << y << "\n";
+
+  m_pos.y = y;
+
+  Vec2f pos = m_gui->GetLocalPos();
+  pos.y = y;
+  m_gui->SetLocalPos(pos);
 }
 
 void ChatConsole::Hide()
@@ -99,14 +112,14 @@ void ChatConsole::Update()
     return;
   }
 
+  TheKb::Instance()->Update();
+
   static GSMain* gsm = TheGSMain::Instance();
 
   switch (m_mode)
   {
   case CHAT_OPENING:
     {
-std::cout << "Chat opening!\n";
-
     float dt = TheTimer::Instance()->GetDt();
     Vec2f pos = m_gui->GetLocalPos();
     pos += m_vel * dt;
@@ -123,8 +136,6 @@ std::cout << "Chat opening!\n";
 
   case CHAT_CLOSING:
     {
-std::cout << "Chat closing!\n";
-
     float dt = TheTimer::Instance()->GetDt();
     Vec2f pos = m_gui->GetLocalPos();
     pos -= m_vel * dt;
@@ -163,6 +174,9 @@ std::cout << "Chat closing!\n";
 
 void ChatConsole::Draw()
 {
+  static Kb* kb = TheKb::Instance();
+  kb->Draw();
+
   if (m_gui && m_mode != CHAT_CLOSED)
   {
     m_gui->Draw();
@@ -344,9 +358,34 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
     GuiTextEdit* textedit = (GuiTextEdit*)GetElementByName(m_gui, "chat-text-edit");
     textedit->SetHasFocus(true);
     //textedit->SetText("");
+
+    GuiElement* bg = GetElementByName(m_gui, "bg");
+    Vec2f size = bg->GetSize();
+    Vec2f pos = bg->GetLocalPos();
+
+    // Soft KB: set size of GUI depending on KB enabled/disabled
+    static Kb* kb = TheKb::Instance();
+    if (kb->IsEnabled())
+    {
+      kb->Activate();
+      SetBottom(-0.2f); 
+      size.y = 1.2f;
+      bg->SetSize(size);
+      pos.y = 1.2f;
+      bg->SetLocalPos(pos);
+    }
+    else
+    {
+      SetBottom(-1.0f); 
+      size.y = 2.0f;
+      bg->SetSize(size);
+      pos.y = 2.0f;
+      bg->SetLocalPos(pos);
+    }
   }
   else
   {
+    TheKb::Instance()->Deactivate();
     //m_gui->GetElementByName("chat-comp")->SetVisible(false);
   }
   m_chatSendIsActive = active;

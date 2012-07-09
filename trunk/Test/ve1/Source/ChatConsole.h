@@ -39,6 +39,9 @@ public:
   // Called when we type into text edit box
   void OnTyping();
 
+  // Set min y value:  -1 is bottom of screen.
+  void SetBottom(float y); 
+
 private:
   void Hide();
 
@@ -81,6 +84,8 @@ private:
   Vec2f m_vel; // vel when moving on screen
 
   bool m_typing;
+
+  float m_bottomY;
 };
 
 typedef Singleton<ChatConsole> TheChatConsole;
