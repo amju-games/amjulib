@@ -3,11 +3,9 @@
 #include <DrawOBB3.h>
 #include <AmjuGL.h>
 #include "Ve1SceneGraph.h"
-#include <SceneMesh.h>
 #include <GameObjectFactory.h>
 #include <File.h>
 #include <ReportError.h>
-#include <CollisionMesh.h>
 #include <StringUtils.h>
 // Magic Software triangle-sphere intersect test
 #include "Mgc/MgcIntr3DTriSphr.h"
@@ -47,6 +45,7 @@ bool TerrainReady()
   return (currentTerrain != 0);
 }
 
+/*
 class TerrainSceneNode : public SceneMesh
 {
 public:
@@ -66,6 +65,7 @@ private:
   Terrain* m_terrain;
   PCollisionMesh m_collMesh;
 };
+*/
 
 Terrain::Terrain()
 {
@@ -111,7 +111,7 @@ void Terrain::OnLocationEntry()
     return; 
   }
 
-  TerrainSceneNode* tsn = new TerrainSceneNode(this);
+  SceneCollisionMesh* tsn = new SceneCollisionMesh;
   tsn->SetMesh(mesh);
 
   // TODO Not sure this actually does anything. What we want is to work out the AABB for the mesh.
@@ -127,10 +127,10 @@ void Terrain::OnLocationEntry()
 //std::cout << "Terrain load: NICE! Created terrain object\n";
 }
 
-CollisionMesh* Terrain::GetCollisionMesh()
-{
-  return m_sceneNode->GetCollisionMesh();
-}
+//CollisionMesh* Terrain::GetCollisionMesh()
+//{
+//  return m_sceneNode->GetCollisionMesh();
+//}
 
 
 /*
@@ -156,6 +156,7 @@ const char* Terrain::GetTypeName() const
   return TYPENAME;
 }
 
+/*
 bool Terrain::GetMousePos(const LineSeg& seg, Vec3f* pos)
 {
   // Find all intersecting floor tris
@@ -245,31 +246,8 @@ std::cout << "d=" << d << "... expecting zero.\n";
 
   *pos = closest;
   return foundOne;
-
-/*
-  // Find intersection of line seg and terrain triangles - Octree would make this efficient
-  // TODO
-  // Assume ground plane at y=0. Find (x, z) at this y value.
-  // Point p = P0 + t(P1 - P0)    =>   t = (p - P0) / (P1 - P0)
-  //  p.y = 0, so t = - P0.y / (P1.y - P0.y)
-  float m = (seg.p1.y - seg.p0.y); 
-  if (m == 0)
-  {
-    std::cout << "Can't get mouse pos, line parallel to ground ?\n";
-    return Vec3f();
-  }
-  else
-  {
-    float t = - seg.p0.y / m;
-    if (t < 0 || t > 1)
-    {
-std::cout << "Unexpected value for t! " << t << "\n";
-      return Vec3f();      
-    }
-std::cout << "t: " << t << "\n";
-    return seg.GetPoint(t);
-  }
-*/
 }
+*/
+
 }
 
