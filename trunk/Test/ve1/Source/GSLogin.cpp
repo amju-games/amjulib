@@ -1,12 +1,12 @@
 #include <GuiButton.h>
-#include "GSLogin.h"
 #include <AmjuGL.h>
-#include "GSMain.h"
 #include <Game.h>
 #include <GuiTextEdit.h>
+#include <ConfigFile.h>
+#include "GSLogin.h"
 #include "GSLoginWaiting.h"
 #include "GSTitle.h"
-#include <ConfigFile.h>
+#include "Kb.h"
 
 namespace Amju
 {
@@ -30,6 +30,8 @@ void GSLogin::Update()
 {
   GSGui::Update();
 
+  static Kb* kb = TheKb::Instance();
+  kb->Update();
 }
 
 void GSLogin::Draw()
@@ -40,6 +42,9 @@ void GSLogin::Draw()
 
 void GSLogin::Draw2d()
 {
+  static Kb* kb = TheKb::Instance();
+  kb->Draw();
+
   GSGui::Draw2d();
 }
 
@@ -94,6 +99,16 @@ void GSLogin::OnActive()
   GuiTextEdit* text = (GuiTextEdit*)(m_gui->GetElementByName("email"));
   text->SetText(lastEmail);
   text->SetOnChangeFunc(Amju::OnLoginChar);
+
+  static Kb* kb = TheKb::Instance();
+  if (kb->IsEnabled())
+  {
+    kb->Activate();
+    // Set floor of this GUI
+    Vec2f pos = m_gui->GetLocalPos();
+    pos.y = 0.7f; // TODO depends on gui txt file, ideally we set this to below the bottom element.
+    m_gui->SetLocalPos(pos);
+  }
 }
 
 void GSLogin::OnLoginButton()
@@ -114,6 +129,8 @@ void GSLogin::OnLoginButton()
     TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
     // Oh no, race condition, wait till state changed 
     //SendLoginReq(email);
+  
+    TheKb::Instance()->Deactivate();
   }
 }
 
