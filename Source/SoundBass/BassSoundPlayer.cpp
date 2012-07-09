@@ -105,7 +105,7 @@ std::cout << "WAV length is " << wavLength << "\n";
   {
     hs = BASS_SampleLoad(
       FALSE, // in mem ?
-      wavFile.c_str(), // filename
+      (File::GetRoot() + wavFile).c_str(), // filename
       0, // file offset
       0, // "use all data up to end of file": 2 'iterators' defining a range ?
       MAX_PLAYBACKS, 
