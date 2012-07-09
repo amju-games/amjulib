@@ -14,7 +14,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 
 extern "C"
 {
-#include "Gpc/gpc.h" // Polygon clipping code - it's in C.
+#include <gpc.h> // Polygon clipping code - it's in C.
 }
 #include "AmjuFinal.h"
 
