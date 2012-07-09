@@ -29,6 +29,8 @@ public:
   enum Mode { AMJU_ADD_NEW, AMJU_EDIT };
   void SetMode(Mode mode);
 
+  void OnFinishedUpload();
+
 protected:
   void RestoreLastPath();
   void RequestNewId();
