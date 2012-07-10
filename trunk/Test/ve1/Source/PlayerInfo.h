@@ -47,6 +47,7 @@ public:
   void SetCurrentPlayer(const std::string& playerName);
   PlayerInfo* GetPI(); // gets current player, must be set first
   Strings GetPlayerNames() const; // returns list of player filenames
+  int GetNumPlayerNames() const;
 
 private:
   PlayerInfoManager();
@@ -55,7 +56,9 @@ private:
   bool Load();
   bool Save();
 
-  typedef std::map<const std::string, PPlayerInfo> PIMap;
+  typedef std::pair<unsigned int, PPlayerInfo> TimestampPlayerInfo;
+
+  typedef std::map<const std::string, TimestampPlayerInfo> PIMap;
   PIMap m_map;
   PlayerInfo* m_currentPI;
 };
