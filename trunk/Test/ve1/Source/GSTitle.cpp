@@ -7,16 +7,26 @@
 #include "GSTitle.h"
 #include "GSStartMenu.h"
 #include "GSLogin.h"
+#include "GSLoginWaiting.h"
 #include "GSChoosePlayer.h"
 #include "GSYesNoQuitProcess.h"
 #include "AvatarManager.h"
 #include "Version.h"
 #include "SpecialConfig.h"
-#include "GSFade.h"
 #include "PlayerInfo.h"
 
 namespace Amju
 {
+static void OnQuickStartButton()
+{
+  static PlayerInfoManager* pim = ThePlayerInfoManager::Instance();
+  PlayerInfo* pi = pim->GetPI();
+  Assert(pi);
+  std::string email = pi->PIGetString(PI_KEY("email"));
+  TheGSLoginWaiting::Instance()->SetEmail(email);
+  TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+}
+
 static void OnStartButton()
 {
   // If no players, go straight to log in screen
@@ -104,6 +114,28 @@ void GSTitle::OnActive()
   start->SetCommand(Amju::OnStartButton);
   start->SetHasFocus(true); // use in preference to SetIsFocusButton
 
+  GuiButton* quick = (GuiButton*)GetElementByName(m_gui, "quick-start-button");
+  static PlayerInfoManager* pim = ThePlayerInfoManager::Instance();
+  if (pim->GetNumPlayerNames() > 0)
+  {
+    quick->SetVisible(true);
+    quick->SetCommand(Amju::OnQuickStartButton);
+    quick->SetHasFocus(true);
+
+    // Change button text to player name
+    Strings names = pim->GetPlayerNames();
+    Assert(!names.empty());
+    pim->SetCurrentPlayer(names[0]);
+    PlayerInfo* pi = pim->GetPI();
+    Assert(pi);
+    std::string playername = pi->PIGetString(PI_KEY("playername"));
+    quick->SetText(playername);
+  }
+  else
+  {
+    quick->SetVisible(false);
+  }
+
   GuiButton* quit = (GuiButton*)GetElementByName(m_gui, "quit-button");
   quit->SetCommand(Amju::OnQuitButton);
   quit->SetIsCancelButton(true);
@@ -117,6 +149,7 @@ void GSTitle::OnActive()
 
   CreateText("my game");
 
+  // TODO CONFIG
   TheSoundManager::Instance()->PlaySong("/Sound/apz1.it");
 }
 
