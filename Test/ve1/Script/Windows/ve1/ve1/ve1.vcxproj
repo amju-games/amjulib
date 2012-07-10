@@ -160,6 +160,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Building.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
@@ -207,6 +208,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
@@ -250,6 +252,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\Baddie.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
+    <ClInclude Include="..\..\..\..\Source\Building.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
@@ -296,12 +299,14 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
+    <ClInclude Include="..\..\..\..\Source\LurkMsg.h" />
     <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\PickObject.h" />
+    <ClInclude Include="..\..\..\..\Source\PlatformInfo.h" />
     <ClInclude Include="..\..\..\..\Source\Player.h" />
     <ClInclude Include="..\..\..\..\Source\PlayerInfo.h" />
     <ClInclude Include="..\..\..\..\Source\Portal.h" />
