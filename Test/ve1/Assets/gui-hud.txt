@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-1
+2
 
 // Main HUD buttons
 
@@ -24,6 +24,22 @@ gui-button-4.png
 pause
 // Font name, size
 arial, 1.0 
+
+// Quit button
+gui-button
+quit-button
+// pos (coords are -1..1)
+// Hidden
+0.55, 1.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+quit
+// Font name, size
+arial, 1.0 
+
 
 // Heart image
 gui-image
