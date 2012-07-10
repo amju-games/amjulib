@@ -30,11 +30,13 @@ public:
   // For collision testing 
   AABB* GetAABB();
 
-private:
-  AABB m_aabb; // Not needed, can use SceneNode AABB ?
+protected:
+  AABB m_aabb; 
   RCPtr<SceneNode> m_sceneNode;
 
   RCPtr<Shadow> m_shadow;
+
+  int m_pickupId;
 };
 }
 
