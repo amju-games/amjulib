@@ -238,7 +238,7 @@ std::cout << "PlayerInfoManager: opened file, got " << numPlayers << " as number
 #ifdef PI_DEBUG
 std::cout << "PlayerInfoManager: player " << i << " name: \"" << s << "\" timestamp: " << ts << "\n";
 #endif
-    m_map[s] = TimestampPlayerInfo(ts, 0); 
+    m_map[s] = TimestampPlayerInfo(ts, (PlayerInfo*)0); 
   }
 
   return true;
