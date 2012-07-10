@@ -30,6 +30,7 @@ public:
   void SetHeightRange(float up, float down);
 
   void SetSize(float size);
+  void SetTexture(Texture*);
 
   // Add a CollisionMesh onto which the shadow is cast
   void AddCollisionMesh(CollisionMesh*);
