@@ -22,6 +22,11 @@ void GuiRect::SetRoundCorners(unsigned int flags)
   m_flags = flags;
 }
 
+void GuiRect::SetCornerRadius(float r)
+{
+  m_cornerRadius = r;
+}
+
 void GuiRect::Draw()
 {
   if (!IsVisible())

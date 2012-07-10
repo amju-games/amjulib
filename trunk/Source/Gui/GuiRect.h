@@ -22,6 +22,7 @@ public:
   };
 
   void SetRoundCorners(unsigned int);
+  void SetCornerRadius(float);
   void SetColour(const Colour& colour);
 
 protected:
