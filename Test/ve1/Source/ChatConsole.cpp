@@ -2,6 +2,7 @@
 #include <GuiTextEdit.h>
 #include <GuiWindow.h>
 #include <GuiButton.h>
+#include <GuiRect.h>
 #include <EventPoller.h>
 #include <Screen.h>
 #include <Timer.h>
@@ -33,6 +34,14 @@ void ChatConsole::Conversation::Draw()
     GuiText* text = m_texts[i];
     pos += text->GetSize().y;
     text->SetLocalPos(Vec2f(cc->m_pos.x, pos));
+
+    GuiRect r;
+    r.SetLocalPos(text->GetLocalPos());
+    r.SetSize(text->GetSize());
+    r.SetCornerRadius(0.03f);
+    r.SetColour(Colour(1, 0, 0, 1)); // TODO TEMP TEST
+    r.Draw();
+
     text->Draw();
   }
 }
