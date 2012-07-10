@@ -44,7 +44,7 @@ sub newid()
   }
 
   # No object ID yet, and early timestamp, so we don't recognise it as new until we populate it.
-  $sql = "insert into object (type,assetfile,datafile,owner,createtime) values ('$obj_type','$assetfile','$datafile',$owner,now()) on duplicate key update id=id+1";
+  $sql = "insert into object (type,assetfile,datafile,owner,createtime) values ('$obj_type','$assetfile','$datafile',$owner,1)";
 
 #  print "Query: $sql\n\n";
 
