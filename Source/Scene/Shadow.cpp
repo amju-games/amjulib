@@ -117,6 +117,11 @@ bool Shadow::Load(File* f)
   return true;
 }
 
+void Shadow::SetTexture(Texture* tex)
+{
+  m_texture = tex;
+}
+
 void Shadow::SetSize(float size)
 {
   m_size = size;
