@@ -14,6 +14,8 @@
 
 namespace Amju
 {
+static Colour RECIP_COLOUR(0.5f, 0, 0.5f, 1);
+
 static void OnChatSendButton()
 {
   TheChatConsole::Instance()->OnChatSend();
@@ -29,21 +31,57 @@ void ChatConsole::Conversation::Draw()
   static ChatConsole* cc = TheChatConsole::Instance();
 
   float pos = cc->m_pos.y + 0.25f; 
-  for (int i = m_texts.size() - 1; i >= 0; i--)
+  for (int i = m_phrases.size() - 1; i >= 0; i--)
   {
-    GuiText* text = m_texts[i];
+    GuiText* text = m_phrases[i].m_text;
     pos += text->GetSize().y;
-    text->SetLocalPos(Vec2f(cc->m_pos.x, pos));
+    text->SetLocalPos(Vec2f(cc->m_pos.x - 0.025f, pos));
 
-    GuiRect r;
-    r.SetLocalPos(text->GetLocalPos());
-    r.SetSize(text->GetSize());
-    r.SetCornerRadius(0.03f);
-    r.SetColour(Colour(1, 0, 0, 1)); // TODO TEMP TEST
-    r.Draw();
+    if (!m_phrases[i].m_sentByMe)
+    {
+      GuiRect r;
+      r.SetLocalPos(text->GetCombinedPos());
+      r.SetSize(text->GetSize() + Vec2f(0.01f, 0));
+      r.SetCornerRadius(0.02f);
+      r.SetColour(RECIP_COLOUR); 
+
+      // Corners: is phrase above also from recip ?
+      unsigned int flags = 0;
+      if (i > 0 && !m_phrases[i - 1].m_sentByMe)
+      { 
+        flags |= GuiRect::AMJU_TL | GuiRect::AMJU_TR;
+      }
+      // Next msg from recip ?
+      if (i < (int)m_phrases.size() - 1 && !m_phrases[i + 1].m_sentByMe)
+      {
+        flags |= GuiRect::AMJU_BL | GuiRect::AMJU_BR;
+      }
+      r.SetRoundCorners(flags);
+      
+      r.Draw();
+    }
 
     text->Draw();
   }
+
+  // Draw name tag at top
+  GuiRect r;
+  r.SetLocalPos(Vec2f(0.3f, 1.0f));
+  r.SetSize(Vec2f(0.6f, 0.12f));
+  r.SetCornerRadius(0.04f);
+  r.SetColour(Colour(0, 0, 0, 1)); 
+  r.SetRoundCorners(GuiRect::AMJU_TL | GuiRect::AMJU_TR);
+  r.Draw();
+
+  GuiText text;
+  text.SetLocalPos(Vec2f(0.3f, 1.0f));
+  text.SetSize(Vec2f(0.6f, 0.12f)); 
+  text.SetTextSize(1.0f);
+  text.SetText(cc->m_recipName);
+  text.SetDrawBg(false);
+  text.SetJust(GuiText::AMJU_JUST_CENTRE);
+  text.SetFgCol(Colour(1, 1, 1, 1));
+  text.Draw();
 }
 
 void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg)
@@ -57,7 +95,7 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   text->SetText(msg);
   //text->SizeToText(); // TODO make this work for multi-line
   text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
-  text->SetDrawBg(true);
+  text->SetDrawBg(false);
   text->SetInverse(false);
   if (sentNotRecv)
   {
@@ -72,7 +110,7 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
     text->SetFgCol(Colour(1, 1, 1, 1));
   }
 
-  m_texts.push_back(text);
+  m_phrases.push_back(Phrase(sentNotRecv, text));
 }
 
 ChatConsole::ChatConsole()
@@ -359,7 +397,9 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
     GetNameForPlayer(recipId, &m_recipName);
 
     m_gui->GetElementByName("chat-comp")->SetVisible(true);
-    ((GuiText*)m_gui->GetElementByName("chat-recip-name"))->SetText(m_recipName);
+
+    GuiText* guiRecipName = ((GuiText*)m_gui->GetElementByName("chat-recip-name"));
+    guiRecipName->SetText(m_recipName);
 
     GuiButton* send = (GuiButton*)GetElementByName(m_gui, "chat-send-button");
     send->SetHasFocus(true); // use in preference to SetIsFocusButton
@@ -382,6 +422,8 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
       bg->SetSize(size);
       pos.y = 1.2f;
       bg->SetLocalPos(pos);
+
+      guiRecipName->SetLocalPos(Vec2f(guiRecipName->GetLocalPos().x, 1.2f));
     }
     else
     {
@@ -390,6 +432,8 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
       bg->SetSize(size);
       pos.y = 2.0f;
       bg->SetLocalPos(pos);
+
+      guiRecipName->SetLocalPos(Vec2f(guiRecipName->GetLocalPos().x, 2.0f));
     }
   }
   else

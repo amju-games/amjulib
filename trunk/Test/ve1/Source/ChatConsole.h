@@ -57,7 +57,14 @@ private:
   // One conversation is between two players, comprised of messages
   struct Conversation 
   {
-    std::vector<RCPtr<GuiText> > m_texts;
+    struct Phrase
+    {
+      Phrase(bool sentByMe, GuiText* text) : m_sentByMe(sentByMe), m_text(text) {}
+
+      bool m_sentByMe;
+      RCPtr<GuiText> m_text;
+    };
+    std::vector<Phrase> m_phrases;
 
     void Draw();
     void AddText(bool sentNotRecv, const std::string& msg);
