@@ -20,19 +20,14 @@ const char* Building::GetTypeName() const
   return TYPENAME;
 }
 
+CollisionMesh* Building::GetCollisionMesh()
+{
+  return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
+}
+
 void Building::OnPlayerCollision(Player* player)
 {
   // TODO per tri collision det/response
-}
-
-void Building::OnLocationEntry()
-{
-  // Create scene node, add to scene graph
-}
-
-void Building::OnLocationExit()
-{
-  // Remove node from graph
 }
 
 void Building::SetKeyVal(const std::string& key, const std::string& val)

@@ -29,8 +29,7 @@ public:
 
   virtual void OnLocationEntry();
 
-//  // For collision tests/shadows -- TODO Octree
-//  CollisionMesh* GetCollisionMesh();
+  virtual CollisionMesh* GetCollisionMesh();
 
   void SetMeshFilename(const std::string& filename) { m_objFilename = filename; }
 

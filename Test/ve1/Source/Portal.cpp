@@ -32,7 +32,7 @@ Portal::Portal()
 {
   m_isOpen = true; // TODO
 
-  SetKeyVal(DEST_KEY, "1"); // value is game object ID for destination portal
+  SetKeyVal(DEST_KEY, "-1"); // value is game object ID for destination portal
 }
 
 void Portal::SetKeyVal(const std::string& key, const std::string& val)
@@ -68,11 +68,6 @@ bool Portal::Load(File* f)
   // NB All Ve1Objects know their own location
 
   return true;
-}
-
-AABB* Portal::GetAABB()
-{
-  return &m_aabb;
 }
 
 void Portal::Update()

@@ -20,10 +20,9 @@ public:
   // No menu items, so we can select positions inside
   virtual void SetMenu(GuiMenu*) {}
 
-  virtual void OnLocationEntry();  
-  virtual void OnLocationExit();  
-
   virtual void SetKeyVal(const std::string& key, const std::string& val);
+
+  virtual CollisionMesh* GetCollisionMesh();
 };
 }
 

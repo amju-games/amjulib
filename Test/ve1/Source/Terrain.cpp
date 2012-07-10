@@ -45,6 +45,11 @@ bool TerrainReady()
   return (currentTerrain != 0);
 }
 
+CollisionMesh* Terrain::GetCollisionMesh()
+{
+  return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
+}
+
 /*
 class TerrainSceneNode : public SceneMesh
 {

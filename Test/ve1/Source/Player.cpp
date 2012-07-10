@@ -255,12 +255,20 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   if (key == "type")
   {
     int type = ToInt(val); // TODO overload Set to take an int
-    TheAvatarManager::Instance()->SetAvatar(type, m_sceneNode);
+    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
+    if (vc)
+    {
+      TheAvatarManager::Instance()->SetAvatar(type, vc);
+    }
   }
   else if (key == "tex")
   {
     int texNum = ToInt(val);
-    TheAvatarManager::Instance()->SetTexture(texNum, m_sceneNode);
+    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
+    if (vc)
+    {
+      TheAvatarManager::Instance()->SetTexture(texNum, vc);
+    }
   }
   else if (key == "name")
   {
@@ -345,7 +353,7 @@ void Player::Update()
   }
   else
   {
-    Assert(GetVel().SqLen() == 0);
+    //Assert(GetVel().SqLen() == 0);
   }
 
   if (m_sceneNode)

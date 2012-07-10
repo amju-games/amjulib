@@ -20,22 +20,14 @@ public:
   virtual const char* GetTypeName() const;
   virtual void Update();
   virtual bool Load(File*);
-  virtual void OnLocationEntry();
-  virtual void OnLocationExit();
   virtual void SetKeyVal(const std::string& key, const std::string& val);
   virtual void SetMenu(GuiMenu*);
   
   void OnPlayerCollision(Player* player);
 
-  // For collision testing 
-  AABB* GetAABB();
+  AABB* GetAABB(); // could be zero if picked up, etc.
 
 protected:
-  AABB m_aabb; 
-  RCPtr<SceneNode> m_sceneNode;
-
-  RCPtr<Shadow> m_shadow;
-
   int m_pickupId;
 };
 }

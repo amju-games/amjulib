@@ -523,6 +523,11 @@ void ObjectManager::OnObjectChangeLocation(int objId)
       TheGame::Instance()->AddGameObject(go);
 std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() << ") to our location (" << m_location << ")\n"; 
 
+      if (GetGameMode() == AMJU_MODE_EDIT)
+      {
+        v->CreateEditNode();
+      }
+
       v->OnLocationEntry();
     }
     else

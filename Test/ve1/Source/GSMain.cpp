@@ -18,7 +18,7 @@
 #include "GSPaused.h"
 #include <EventPoller.h>
 #include "MsgManager.h"
-#include <GuiTextEdit.h>
+#include <GuiButton.h>
 #include "GSNetError.h"
 #include "GameMode.h"
 #include "Camera.h"
@@ -36,6 +36,11 @@ void OnPauseButton()
   TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
 }
 
+void OnQuitButton()
+{
+  TheGSMain::Instance()->OnQuitButton();
+}
+
 GSMain::GSMain()
 {
   m_moveRequest = false;
@@ -44,6 +49,8 @@ GSMain::GSMain()
   m_numPlayersOnline = 0;
 
   m_viewportWidth = 1.0f; 
+
+  m_quitConfirm = false;
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -300,13 +307,27 @@ void GSMain::OnActive()
   pauseButton->SetCommand(Amju::OnPauseButton);
   //TheEventPoller::Instance()->SetListenerPriority(pauseButton, -1); // so we don't move to the button pos
 
-  ////GetElementByName(m_gui, "build-button")->SetCommand(Amju::OnBuildButton);
+  GuiButton* quitButton = (GuiButton*)m_gui->GetElementByName("quit-button");
+  quitButton->SetCommand(Amju::OnQuitButton);
 
   TheChatConsole::Instance()->OnActive();
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.
 }
+
+void GSMain::OnQuitButton()
+{
+  if (m_quitConfirm)
+  {
+    exit(0);
+  }
+
+  m_quitConfirm = true;
+  GuiButton* quit = (GuiButton*)m_gui->GetElementByName("quit-button");
+  quit->SetText("sure?");
+}
+
 
 static bool rightButtonDown = false;
 
@@ -369,6 +390,13 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
     m_moveRequest = true;
   }
   
+  if (m_quitConfirm)
+  {
+    m_quitConfirm = false; // clicked off quit button
+    GuiButton* quit = (GuiButton*)m_gui->GetElementByName("quit-button");
+    quit->SetText("quit");
+  }
+
   return false;
 }
 

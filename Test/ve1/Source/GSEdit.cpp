@@ -104,6 +104,7 @@ std::cout << "Got new object ID from server! " << id << "\n";
       Ve1Object* go = new ProtoObject; 
 #else
       Ve1Object* go = (Ve1Object*)TheGameObjectFactory::Instance()->Create(m_typename);
+      go->CreateEditNode();
 #endif
 
       Assert(go); // Typename should be from Factory, so Create should always succeed, right ?

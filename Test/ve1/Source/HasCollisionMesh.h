@@ -10,11 +10,7 @@ class HasCollisionMesh
 public:
   virtual ~HasCollisionMesh() {}
 
-  // For collision tests/shadows -- TODO Octree
-  CollisionMesh* GetCollisionMesh()
-  {
-    return m_sceneNode->GetCollisionMesh();
-  }
+  virtual CollisionMesh* GetCollisionMesh() = 0;
 
 protected:
   // (Octree of) triangles ??
@@ -22,7 +18,7 @@ protected:
 
   // If a regular grid, we don't need anything fancy, you can just divide the coord to get the triangle.
 
-  SceneCollisionMesh* m_sceneNode;
+  //SceneCollisionMesh* m_sceneNode;
 
 };
 }
