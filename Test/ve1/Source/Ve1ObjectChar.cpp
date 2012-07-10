@@ -17,6 +17,13 @@ Ve1ObjectChar::Ve1ObjectChar()
   m_dirCurrent = m_dir;
   m_isMoving = false;
   m_inNewLocation = false;
+  m_collidingObject = 0;
+  m_recalcHeading = false;
+}
+
+void Ve1ObjectChar::SetIsColliding(GameObject* collidingObject)
+{
+  m_collidingObject = collidingObject;
 }
 
 void Ve1ObjectChar::Update()
@@ -49,11 +56,29 @@ void Ve1ObjectChar::Update()
 
   // Get height for (x, z);
   float y = 0;
+  // TODO Drop down
+  // TODO Also check objects which have collision mesh
+
   // Get closest Y value to current, not the highest or lowest
   if (GetTerrain()->GetCollisionMesh()->GetClosestY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y))
   {
     m_pos.y = y;
   }
+
+  // Recalc heading if we are not colliding
+  if (m_collidingObject)
+  {
+    m_recalcHeading = true;
+  }
+  else if (m_recalcHeading)
+  {
+    m_recalcHeading = false;
+    if (m_isMoving)
+    {
+      MoveTo(m_newPos);
+    }
+  }
+  m_collidingObject = 0;
 
 /*
   // Stop moving if we are close enough to the destination
@@ -85,9 +110,6 @@ void Ve1ObjectChar::Update()
 
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
     *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
-
-    // TODO TEMP TEST
-////    *(m_arrow->GetAABB()) = *(m_sceneNode->GetAABB());
 
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
@@ -143,21 +165,16 @@ const Vec3f& Ve1ObjectChar::GetTargetPos()
   return m_newPos;
 }
 
-// TODO Move this up to base class Ve1Object ?
 void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
 {
   m_newPos = newpos;
   m_isMoving = true;
 
-//std::cout << "Player: got new pos to move to: " << newpos << ", current pos is " << GetPos() << "\n";
-
   Vec3f dir = GetPos() - newpos;
 
-  // Why TF was this commented out??!?!?!
   if (dir.SqLen() < 1.0f) // TODO CONFIG
   {
     SetVel(Vec3f(0, 0, 0));
-// TODO    SetArrowVis(false);
   }
   else
   {
@@ -217,7 +234,5 @@ AABB* Ve1ObjectChar::GetAABB()
 {
   return m_sceneNode->GetAABB();
 }
-
-
 }
 

@@ -33,6 +33,9 @@ public:
   // Get where we are headed
   const Vec3f& GetTargetPos();
 
+  // Call when we collide with something. When we are no longer colliding, we recalc heading.
+  void SetIsColliding(GameObject* collidingObject);
+
 protected:
   void TurnToFaceDir();
 
@@ -55,6 +58,8 @@ protected:
   // Start fading out when a player has logged out
   float m_fadeTime;
 
+  GameObject* m_collidingObject; // (one of the) objects we are colliding with
+  bool m_recalcHeading; // if true, recalc
 };
 }
 
