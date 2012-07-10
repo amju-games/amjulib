@@ -10,8 +10,18 @@ class Ve1Object;
 class Ve1Node : public SceneNode
 {
 public:
-  Ve1Node(Ve1Object* obj) : m_obj(obj) { } 
+  Ve1Node(Ve1Object* obj) : m_obj(obj) {} 
 
+  virtual void Draw();
+
+protected:
+  Ve1Object* m_obj;
+};
+
+class Ve1NameNode : public SceneNode
+{
+public:
+  Ve1NameNode(Ve1Object* obj) : m_obj(obj) {}
   virtual void Draw();
 
 protected:

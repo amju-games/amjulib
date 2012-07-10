@@ -6,6 +6,8 @@
 #include <GameObject.h>
 #include <Xml/XmlNodeInterface.h>
 #include <GuiMenu.h>
+#include <SceneNode.h>
+#include <Shadow.h>
 
 namespace Amju
 {
@@ -23,11 +25,11 @@ public:
   // Called when object is 'activated' because the local player changes location to 
   //  where this object is. 
   // ONLY CALL WHEN SAFE TO DO SO, I.E. ALL OBJECTS IN NEW LOCATION ARE CREATED....
-  virtual void OnLocationEntry() = 0;
+  virtual void OnLocationEntry();
 
   // Called when this object leaves the location of the local player. 
   // This only applies to objects which can move autonomously, i.e. non-local players.
-  virtual void OnLocationExit() { } 
+  virtual void OnLocationExit();
 
   const Vec3f& GetOldPos() const;
  
@@ -60,7 +62,12 @@ public:
   int GetIgnorePortalId() const;
 
   bool IsPickable() const;
+
+  // Create a visible scene node for Edit mode
+  void CreateEditNode();
  
+  AABB* GetAABB();
+
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
   //  i.e. it's in whatever the current location is.
@@ -76,6 +83,11 @@ protected:
   bool m_isPickable;
 
   Vec3f m_oldPos;
+
+  RCPtr<SceneNode> m_sceneNode;
+  RCPtr<Shadow> m_shadow;
+
+  AABB m_aabb; 
 };
 
 // Keep track of keys used to set object properties

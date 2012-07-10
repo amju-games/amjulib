@@ -11,6 +11,10 @@ static const float YSIZE = 30; // TODO TEMP TEST, baddies can be any size
 
 static const float SPEED = 50.0f; // TODO CONFIG
 
+static const float GRAVITY = -50.0f; // TODO CONFIG
+
+static const float BOUNCE_VEL = -50.0f;
+
 Ve1ObjectChar::Ve1ObjectChar()
 {
   m_dir = 0;
@@ -33,6 +37,8 @@ void Ve1ObjectChar::Update()
   {
     return;
   }
+
+  m_acc.y = GRAVITY;
 
   Ve1Object::Update();
 
@@ -60,9 +66,23 @@ void Ve1ObjectChar::Update()
   // TODO Also check objects which have collision mesh
 
   // Get closest Y value to current, not the highest or lowest
+  float groundY = m_pos.y;
   if (GetTerrain()->GetCollisionMesh()->GetClosestY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y))
   {
-    m_pos.y = y;
+    groundY = y;
+  }
+  if (m_pos.y < groundY)
+  {
+    m_pos.y = groundY;
+    if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
+    {
+      m_vel.y *= -0.6f;
+      m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
+    }
+    else
+    {
+      m_vel.y = 0; // ?
+    }
   }
 
   // Recalc heading if we are not colliding
@@ -118,9 +138,12 @@ void Ve1ObjectChar::Update()
 
     TurnToFaceDir();
 
-    if (m_sceneNode->GetMd2())
+    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
+    if (vc && vc->GetMd2())
     {
-      float speed = m_vel.SqLen();
+      Vec3f v = m_vel;
+      v.y = 0;
+      float speed = v.SqLen();
 
       // TODO Simplify -- either moving or idle.
       // NB Speeds should be an avatar variable and level up
@@ -131,15 +154,15 @@ void Ve1ObjectChar::Update()
 
       if (speed > RUN_SPEED)
       {
-        m_sceneNode->SetAnim("walk"); //"run");
+        vc->SetAnim("walk"); //"run");
       }
       else if (speed > WALK_SPEED)
       {
-        m_sceneNode->SetAnim("walk");
+        vc->SetAnim("walk");
       }
       else
       {
-        m_sceneNode->SetAnim("stand");
+        vc->SetAnim("stand");
       }
     }
   }

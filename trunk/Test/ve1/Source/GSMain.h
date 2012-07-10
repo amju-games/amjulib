@@ -41,6 +41,7 @@ public:
   void SetViewWidth(float w);
 
   void OnMenuClickedAway();
+  void OnQuitButton();
 
 private:
   void DoMoveRequest();
@@ -60,6 +61,8 @@ private:
 
   // Adjust viewport width so chat fits down side..?
   float m_viewportWidth;
+
+  bool m_quitConfirm;
 };
 typedef Singleton<GSMain> TheGSMain;
 } // namespace

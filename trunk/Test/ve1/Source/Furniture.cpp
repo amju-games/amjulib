@@ -24,8 +24,9 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Furniture::TYPENA
 Furniture::Furniture()
 {
   // Set pos to out of range, so invisible until pos set
+  // ?????????
 
-  m_pickupId = 0;
+  m_pickupId = 0; // ID of player picking this object up
 }
 
 const char* Furniture::GetTypeName() const
@@ -100,42 +101,6 @@ std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " <
   return true;
 }
 
-void Furniture::OnLocationEntry()
-{
-  // TODO Base class
-
-  // Set scene node
-
-  // Set AABB
-
-
-  if (GetGameMode() == AMJU_MODE_EDIT  || !m_sceneNode)
-  {
-    static const float XSIZE = 20.0f; // TODO CONFIG
-    static const float YSIZE = 40.0f;
-
-    m_sceneNode = new Ve1Node(this);
-    m_aabb.Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
-      m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
-  }
-
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-  root->AddChild(m_sceneNode);
-}
-
-void Furniture::OnLocationExit()
-{
-  // TODO This should go in Base class ?
-
-  // Remove from SceneGraph
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-  root->DelChild(m_sceneNode.GetPtr());
-}
-
 void Furniture::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
@@ -158,7 +123,7 @@ std::cout << " should be setting " << *this << " down now.\n";
           float y = go->GetPos().y;
           m_pos.y = y;
           float h = m_aabb.GetYSize();
-          go->SetPos(go->GetPos() + Vec3f(0, h, 0));
+          go->SetPos(go->GetPos() + Vec3f(0, h + 100.0f, 0)); // 100 is TEMP TEST
         }
       }
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);

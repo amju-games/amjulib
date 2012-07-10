@@ -4,25 +4,25 @@
 #include "GSMain.h"
 #include "GSOptions.h"
 #include "GSTitle.h"
-#include "GSYesNoQuitSession.h"
+#include "GSYesNoQuitProcess.h"
 
 namespace Amju
 {
-void OnResumeButton()
+static void OnResumeButton()
 {
   TheGSPaused::Instance()->GoBack();
 }
 
-void OnOptionsButton()
+static void OnOptionsButton()
 {
   TheGSOptions::Instance()->SetPrevState(TheGSPaused::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 
-void OnQuitButton()
+static void OnQuitButton()
 {
-  TheGSYesNoQuitSession::Instance()->SetPrevState(TheGSMain::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitSession::Instance());
+  TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
 }
 
 GSPaused::GSPaused()

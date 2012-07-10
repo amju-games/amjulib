@@ -44,13 +44,9 @@ protected:
   Vec3f m_newPos; // pos we are aiming for
   bool m_isMoving; // travelling towards m_newPos
 
-  RCPtr<Ve1Character> m_sceneNode;
- 
   float m_dir; // Direction of movement - DEGREES
   float m_dirCurrent; // Direction we currently face -- we will reduce the difference
    // between m_dirCurrent and m_dir until we face the direction of movement.
-
-  RCPtr<Shadow> m_shadow;
 
   // Set when we enter a new location - TODO s/b in Ve1Object ?
   bool m_inNewLocation;

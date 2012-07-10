@@ -40,14 +40,6 @@ std::cout << "Called baddie load function.\n";
   return true;
 }
 
-void Baddie::OnLocationExit()
-{
-  // Remove from SceneGraph
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-  root->DelChild(m_sceneNode.GetPtr());
-}
-
 void Baddie::OnLocationEntry()
 {
   // Create Scene Node, but don't attach to SceneGraph until needed

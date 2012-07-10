@@ -17,7 +17,6 @@ public:
   virtual void Update();
   virtual bool Load(File*);
   virtual void OnLocationEntry();
-  virtual void OnLocationExit();
 };
 }
 

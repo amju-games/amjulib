@@ -1,7 +1,6 @@
 #ifndef PORTAL_H_INCLUDED
 #define PORTAL_H_INCLUDED
 
-#include <SceneNode.h>
 #include "Ve1Object.h"
 
 namespace Amju
@@ -23,13 +22,8 @@ public:
 
   void OnPlayerCollision(Player* player);
 
-  // For collision testing 
-  AABB* GetAABB();
-
 private:
   bool m_isOpen;
-  AABB m_aabb;
-  RCPtr<SceneNode> m_sceneNode;
 };
 }
 

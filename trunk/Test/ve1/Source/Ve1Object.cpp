@@ -1,6 +1,9 @@
 #include "Ve1Object.h"
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
+#include "Ve1Node.h"
+#include "GameMode.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -9,6 +12,32 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_isSelected = false;
   m_ignorePortalId = -1;
   m_isPickable = true;
+}
+
+AABB* Ve1Object::GetAABB()
+{
+  return &m_aabb;
+}
+
+void Ve1Object::CreateEditNode()
+{
+  if (GetGameMode() == AMJU_MODE_EDIT && !m_sceneNode)
+  {
+    static const float XSIZE = 20.0f; // TODO CONFIG
+    static const float YSIZE = 40.0f;
+
+    m_sceneNode = new Ve1Node(this);
+    m_aabb.Set(
+      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.y, m_pos.y + YSIZE,
+      m_pos.z - XSIZE, m_pos.z + XSIZE);
+    *(m_sceneNode->GetAABB()) = m_aabb;
+
+    SceneNode* name = new Ve1NameNode(this);
+    AABB aabb(-10000.0f, 10000.0f, -10000.0f, 10000.0f, -10000.0f, 10000.0f);
+    *(name->GetAABB()) = aabb;
+    m_sceneNode->AddChild(name);
+  }
 }
 
 void Ve1Object::Update()
@@ -126,6 +155,27 @@ const std::string& Ve1Object::GetVal(const std::string& key) const
 ValMap* Ve1Object::GetValMap()
 {
   return &m_valmap;
+}
+
+void Ve1Object::OnLocationEntry()
+{
+  if (m_sceneNode)
+  {
+    SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+    Assert(root);
+    root->AddChild(m_sceneNode);
+  }
+}
+
+void Ve1Object::OnLocationExit()
+{
+  // Remove from SceneGraph
+  if (m_sceneNode)
+  {
+    SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+    Assert(root);
+    root->DelChild(m_sceneNode.GetPtr());
+  }
 }
 
 }

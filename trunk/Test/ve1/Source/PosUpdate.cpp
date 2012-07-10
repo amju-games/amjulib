@@ -51,6 +51,8 @@ std::cout << "Obj " << i << ": ";
 
 std::cout << "##@@## Got msg from server, Queueing pos for object " << id << " location: " << location << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
+      // TODO just to track down odd coords
+      Assert(fabs(x) < 2000.0f);
 
       TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z), location);
     }
