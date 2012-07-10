@@ -189,7 +189,10 @@ void AmjuGL::Init()
   currentFlags = AMJU_DEPTH_WRITE; // on at startup, right ?
  
   impl->Init();
+	
+#ifndef IPHONE	
   Viewport(0, 0, Screen::X(), Screen::Y());
+#endif
 }
 
 bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
