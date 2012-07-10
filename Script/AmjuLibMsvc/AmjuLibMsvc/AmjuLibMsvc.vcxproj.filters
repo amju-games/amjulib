@@ -822,6 +822,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1531,6 +1534,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h">
       <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiRect.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
