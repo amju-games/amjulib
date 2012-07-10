@@ -9,7 +9,6 @@
 #include <File.h>
 #include <SoundManager.h>
 #include <EventPoller.h>
-#include <EventPollerImplGeneric.h>
 #include <Screen.h>
 #include <BassSoundPlayer.h>
 #include <StringUtils.h>
@@ -130,6 +129,8 @@ std::cout << "In render!\n";
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
 
+	std::cout << "Backing width: " << backingWidth << " Height: " << backingHeight << "\n";
+	
     // Enable depth buffer - From http://forums.toucharcade.com/showthread.php?t=28829
     glGenRenderbuffersOES(1, &depthRenderbuffer);
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
