@@ -35,8 +35,8 @@ void SetViewportN(float x, float y, float w, float h)
   AmjuGL::Viewport(
     (x + 1.0f) * Screen::X() * 0.5f, 
     (y + 1.0f) * Screen::Y() * 0.5f, 
-    w * Screen::X() * 0.5f,
-    h * Screen::Y() * 0.5f);
+    w * (float)Screen::X() * 0.5f,
+    h * (float)Screen::Y() * 0.5f);
 }
 
 void GetViewportN(float* x, float* y, float* w, float* h)

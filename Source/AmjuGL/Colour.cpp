@@ -77,7 +77,11 @@ Colour FromHexString(const std::string& s)
   Assert(size == 6 || size == 8); 
   for (int i = size - 2, j = size / 2 - 1; i >= 0; i -= 2, j--)
   {
+#ifdef WIN32
+    sscanf_s(s.substr(i, 2).c_str(), "%X", &r[j]);
+#else
     sscanf(s.substr(i, 2).c_str(), "%X", &r[j]);
+#endif
   } 
   return Colour((float)r[0]/255.0f, (float)r[1]/255.0f, (float)r[2]/255.0f, (float)r[3]/255.0f);
 }
