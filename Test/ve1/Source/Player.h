@@ -34,6 +34,7 @@ public:
   void SetArrowVis(bool visible);
 
   bool IsLoggedIn() const;
+  void SetLoggedIn(bool loggedIn);
 
 protected:
   bool m_isLocal;
