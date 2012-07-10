@@ -28,34 +28,34 @@ ffffff
 //flags
 12
 
-gui-comp
-nametag-comp
-2
+//gui-comp
+//nametag-comp
+//2
 
-// Tag
-gui-rect
-tag
--0.3, 0.5
-0.4, 0.1
-// Colour
-ffffff
-0.04
-// flags
-12
+//// Tag
+//gui-rect
+//tag
+//-0.3, 0.5
+//0.4, 0.1
+//// Colour
+//ffffff
+//0.04
+//// flags
+//12
 
-// Recipient name - goes in tag
+// Recipient name 
 gui-text
 // name
 chat-recip-name
 // pos
--0.35, 0.5
+0.0, 2.0
 // Size
-0.3, 0.1
+0.8, 0.1
 // Text
 recipient name
 // Font
 //arial, 1.0
-arial,1.0,right,fgcol=000000, bgcol=ffffff
+arial,1.0,centre,fgcol=000000, bgcol=ffffff
 //,fgcol=ffffff,bgcol=ff00ff
 
 
@@ -65,7 +65,7 @@ gui-text-edit
 // name
 chat-text-edit
 // pos
--0.025, 0.2
+-0.025, 0.225
 // size
 0.8, 0.1
 // Text
