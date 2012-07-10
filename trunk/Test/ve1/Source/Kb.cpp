@@ -47,6 +47,7 @@ void Kb::Update()
   switch (m_mode)
   {
   case KB_SHOWN:
+    m_kb->SetVisible(true);
     break;
 
   case KB_HIDDEN:
@@ -54,6 +55,7 @@ void Kb::Update()
 
   case KB_SHOWING:
     {
+    m_kb->SetVisible(true);
     float dt = TheTimer::Instance()->GetDt();
     Vec2f pos = m_kb->GetLocalPos();
     pos.y += vel * dt;
@@ -74,6 +76,7 @@ void Kb::Update()
     if (pos.y < -1.0f)
     {
       m_mode = KB_HIDDEN;
+      m_kb->SetVisible(false);
     }
     m_kb->SetLocalPos(pos);
     }
