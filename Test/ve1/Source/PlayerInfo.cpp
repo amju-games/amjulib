@@ -3,6 +3,9 @@
 #include <StringUtils.h>
 #include <Directory.h>
 #include <iostream>
+#include <AmjuTime.h>
+
+#define PI_DEBUG
 
 namespace Amju
 {
@@ -225,11 +228,19 @@ std::cout << "PlayerInfoManager: opened file, got " << numPlayers << " as number
       return false;
     }
 
+    unsigned int ts;
+    if (!f.GetInteger((int*)&ts))
+    {
+      f.ReportError("Expected timestamp for player " + s);
+      return false;
+    }
+
 #ifdef PI_DEBUG
-std::cout << "PlayerInfoManager: player " << i << " name: \"" << s << "\"\n";
+std::cout << "PlayerInfoManager: player " << i << " name: \"" << s << "\" timestamp: " << ts << "\n";
 #endif
-    m_map[s] = 0; 
+    m_map[s] = TimestampPlayerInfo(ts, 0); 
   }
+
   return true;
 }
 
@@ -245,14 +256,16 @@ bool PlayerInfoManager::Save()
   for (PIMap::iterator it = m_map.begin(); it != m_map.end(); ++it)
   {
     f.Write(it->first); 
+    f.WriteInteger(it->second.first); 
   }
+
   return true;
 }
 
 void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
 {
   PIMap::iterator it = m_map.find(filename);
-  if (it == m_map.end() || !it->second)
+  if (it == m_map.end() || !it->second.second)
   {
     PlayerInfo* pi = new PlayerInfo;
     pi->SetFilename(filename);
@@ -260,23 +273,44 @@ void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
     {
       // TODO What to do here ?? Player has lost player data!! Oh no!
     }
-    m_map[filename] = pi;
+
+    unsigned int now = Time::Now().ToSeconds();
+    m_map[filename] = TimestampPlayerInfo(now, pi);
     m_currentPI = pi;
   }
   else
   {
-    m_currentPI = it->second;
+    m_currentPI = it->second.second;
   }
 }
 
 Strings PlayerInfoManager::GetPlayerNames() const
 {
-  Strings s;
+  // TODO Sort strings in order of use, most recent first, i.e. descending order
+
+  typedef std::map<unsigned int, std::string, std::greater<unsigned int> > TimestampName;
+  TimestampName tn;
+
+  // Put names into map so they will be sorted, most recent first
   for (PIMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
   {
-    s.push_back(it->first);
+    unsigned int timestamp = it->second.first;
+    tn[timestamp] = it->first; 
   }
+
+  // Copy names in order into vector
+  Strings s;
+  for (TimestampName::const_iterator it = tn.begin(); it != tn.end(); ++it)
+  {
+    s.push_back(it->second);
+  }
+
   return s;
+}
+
+int PlayerInfoManager::GetNumPlayerNames() const
+{
+  return m_map.size();
 }
 }
 
