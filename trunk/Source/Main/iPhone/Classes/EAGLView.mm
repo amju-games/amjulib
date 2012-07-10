@@ -9,7 +9,7 @@
 #import "EAGLView.h"
 #import "ES1Renderer.h"
 
-#include <EventPollerImplGeneric.h>
+#include <EventPoller.h>
 #include <EventTypes.h>
 
 @implementation EAGLView
@@ -157,7 +157,7 @@
 
 void QueueEvent(Amju::Event* e)
 {
-	((Amju::EventPollerImplGeneric*)Amju::TheEventPoller::Instance()->GetImpl())->QueueEvent(e);
+	Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
 void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
