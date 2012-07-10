@@ -195,7 +195,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
     }
 
     PushColour();
-    MultColour(fg);
+    AmjuGL::SetColour(fg);
     PrintLine(str, x, y); 
     PopColour();
 
@@ -251,7 +251,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
   if (m_drawBg)
   {
     PushColour();
-    MultColour(bg);
+    AmjuGL::SetColour(bg);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     Rect r; 
     r.Set(xmin, xmax, y, y + CHAR_HEIGHT_FOR_SIZE_1 * GetTextSize()); // TODO
@@ -279,7 +279,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
   if (m_drawBg)
   {
     PushColour();
-    MultColour(fg);
+    AmjuGL::SetColour(fg);
     PrintLine(str, x, y);
     PopColour();
   }
