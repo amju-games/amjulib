@@ -1,5 +1,6 @@
 #include <GameObjectFactory.h>
 #include <File.h>
+#include <Texture.h>
 #include "Baddie.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
@@ -60,7 +61,12 @@ std::cout << "Baddie scene node: Failed to load dino.\n";
 
   m_sceneNode = node;
 
-  //m_sceneNode->AddChild(m_shadow.GetPtr());
+  m_shadow = new Shadow;
+  m_shadow->SetSize(20.0f); // TODO 
+  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("shadow.png"); // TODO
+
+  m_shadow->SetTexture(tex);
+  m_sceneNode->AddChild(m_shadow.GetPtr());
 
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
