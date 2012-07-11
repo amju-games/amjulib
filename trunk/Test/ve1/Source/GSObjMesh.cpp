@@ -8,6 +8,7 @@
 #include "SaveConfig.h"
 #include "UploadNewContent.h"
 #include "GSWaitForUpload.h"
+#include "ReqSetObjectFilenames.h"
 
 namespace Amju
 {
@@ -28,7 +29,9 @@ static void OnFinishedUpload()
   TheGSObjMesh::Instance()->OnFinishedUpload();
 }
 
-
+/*
+// Finalise creation of new object. TODO Put in its own file, rename it. 
+// Can call multiple times, to change file names, right ?
 class CreateNewObjectReq : public Ve1Req
 {
 public:
@@ -56,6 +59,7 @@ std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
     // TODO Error msg
   }
 };
+*/
 
 GSObjMesh::GSObjMesh()
 {
@@ -93,6 +97,7 @@ std::cout << "The msg was:" << str << "\n";
 
 void GSObjMesh::OnFinishedUpload()
 {
+  // Make sure the GUI is loaded ?? Race condition ??
   TheGame::Instance()->SetCurrentState(this);
 
   // Now send DB query to update row in Object table - we must set asset file and data file.
@@ -100,13 +105,14 @@ void GSObjMesh::OnFinishedUpload()
 
 std::cout << "Finished uploading, creating new object on server...\n";
 
-  // Send req to make new game object.
-  std::string id = ToString(m_objId); 
+  SendReqSetObjectFilenames(m_objId, m_assetFilename, m_dataFilename);
 
-  std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_OBJECT);
-  url += "&obj_id=" + id + "&asset_file=" + m_assetFilename + "&data_file=" + m_dataFilename;
-  url = ToUrlFormat(url);
-  TheVe1ReqManager::Instance()->AddReq(new CreateNewObjectReq(url), m_totalFiles);
+//  // Send req to make new game object.
+//  std::string id = ToString(m_objId); 
+//  std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_OBJECT);
+//  url += "&obj_id=" + id + "&asset_file=" + m_assetFilename + "&data_file=" + m_dataFilename;
+//  url = ToUrlFormat(url);
+//  TheVe1ReqManager::Instance()->AddReq(new CreateNewObjectReq(url), m_totalFiles);
 }
 
 // Naw, lots of objects could use the same mesh.

@@ -19,6 +19,10 @@ AABB* Ve1Object::GetAABB()
   return &m_aabb;
 }
 
+void Ve1Object::SetEditMenu(GuiMenu* menu)
+{
+}
+
 void Ve1Object::CreateEditNode()
 {
   if (GetGameMode() == AMJU_MODE_EDIT && !m_sceneNode)

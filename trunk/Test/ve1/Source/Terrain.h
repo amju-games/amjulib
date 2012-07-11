@@ -33,6 +33,8 @@ public:
 
   void SetMeshFilename(const std::string& filename) { m_objFilename = filename; }
 
+  virtual void SetEditMenu(GuiMenu*);
+
 protected:
   std::string m_objFilename;
 

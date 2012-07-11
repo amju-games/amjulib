@@ -2,6 +2,7 @@
 #include "Building.h"
 #include "SceneCollisionMesh.h"
 #include "Player.h"
+#include "SetObjMeshCommand.h"
 
 namespace Amju
 {
@@ -20,6 +21,12 @@ const char* Building::GetTypeName() const
   return TYPENAME;
 }
 
+/*
+void Building::SetEditMenu(GuiMenu* menu)
+{
+  menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
+}
+
 CollisionMesh* Building::GetCollisionMesh()
 {
   return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
@@ -33,7 +40,7 @@ void Building::OnPlayerCollision(Player* player)
 void Building::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
-
 }
+*/
 }
 

@@ -36,6 +36,8 @@ public:
   // Call when we collide with something. When we are no longer colliding, we recalc heading.
   void SetIsColliding(GameObject* collidingObject);
 
+  virtual void SetEditMenu(GuiMenu*);
+  
 protected:
   void TurnToFaceDir();
 

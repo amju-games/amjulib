@@ -8,15 +8,16 @@
 #include <ReportError.h>
 #include <StringUtils.h>
 // Magic Software triangle-sphere intersect test
-#include "Mgc/MgcIntr3DTriSphr.h"
+////#include "Mgc/MgcIntr3DTriSphr.h"
 // Mgc point-in-poly test
-#include "Mgc/MgcCont2DPointInPolygon.h"
+////#include "Mgc/MgcCont2DPointInPolygon.h"
 // Mgc distance from line to triangle
-#include "Mgc/MgcDist3DLinTri.h"
+////#include "Mgc/MgcDist3DLinTri.h"
 // Mgc dist from point to triangle
-#include "Mgc/MgcDist3DVecTri.h"
+////#include "Mgc/MgcDist3DVecTri.h"
 #include "Useful.h"
-#include <Plane.h>
+////#include <Plane.h>
+#include "SetObjMeshCommand.h"
 
 namespace Amju
 {
@@ -43,6 +44,11 @@ void ClearTerrain()
 bool TerrainReady()
 {
   return (currentTerrain != 0);
+}
+
+void Terrain::SetEditMenu(GuiMenu* menu)
+{
+  menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
 }
 
 CollisionMesh* Terrain::GetCollisionMesh()

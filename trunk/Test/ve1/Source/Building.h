@@ -3,12 +3,13 @@
 
 #include "Ve1Object.h"
 #include "HasCollisionMesh.h"
+#include "Furniture.h"
 
 namespace Amju
 {
 class Player;
 
-class Building : public Ve1Object, public HasCollisionMesh
+class Building : public Furniture ///////Ve1Object, public HasCollisionMesh
 {
 public:
   static const char* TYPENAME;
@@ -20,9 +21,10 @@ public:
   // No menu items, so we can select positions inside
   virtual void SetMenu(GuiMenu*) {}
 
-  virtual void SetKeyVal(const std::string& key, const std::string& val);
-
-  virtual CollisionMesh* GetCollisionMesh();
+//  virtual void SetEditMenu(GuiMenu*);
+//  virtual void SetKeyVal(const std::string& key, const std::string& val);
+//  virtual CollisionMesh* GetCollisionMesh();
+//  virtual bool Load(File*);
 };
 }
 

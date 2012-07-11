@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Useful.h"
 #include "SceneCollisionMesh.h"
+#include "SetObjMeshCommand.h"
 
 namespace Amju
 {
@@ -27,6 +28,16 @@ Furniture::Furniture()
   // ?????????
 
   m_pickupId = 0; // ID of player picking this object up
+}
+
+void Furniture::SetEditMenu(GuiMenu* menu)
+{
+  menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
+}
+
+CollisionMesh* Furniture::GetCollisionMesh()
+{
+  return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
 }
 
 const char* Furniture::GetTypeName() const

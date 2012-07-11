@@ -22,6 +22,8 @@ public:
 
   void OnPlayerCollision(Player* player);
 
+  virtual void SetEditMenu(GuiMenu*) {}
+
 private:
   bool m_isOpen;
 };
