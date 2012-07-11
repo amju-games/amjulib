@@ -1,3 +1,4 @@
+#include <iostream>
 #include "SAPCollideFunc.h"
 #include <GameObject.h>
 #include <AABB.h>
