@@ -73,7 +73,7 @@ std::cout << "Called StartUp...\n";
 
 - (void)render
 {
-std::cout << "In render!\n";
+//std::cout << "In render!\n";
 
     // This application only creates a single context which is already set current at this point.
     // This call is redundant, but needed if dealing with multiple contexts.
