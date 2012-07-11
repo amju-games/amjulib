@@ -227,6 +227,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
@@ -318,9 +319,11 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
+    <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
