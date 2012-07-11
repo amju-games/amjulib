@@ -25,6 +25,41 @@ Ve1ObjectChar::Ve1ObjectChar()
   m_recalcHeading = false;
 }
 
+class SetMd2Command : public GuiCommand
+{
+public:
+  SetMd2Command(int objId) : m_objId(objId) {}
+  
+  virtual bool Do()
+  {
+    // TODO
+    return false;
+  }
+
+private:
+  int m_objId;
+};
+
+class SetTexCommand : public GuiCommand
+{
+public:
+  SetTexCommand(int objId) : m_objId(objId) {}
+
+  virtual bool Do()
+  {
+    return false;
+  }
+
+private:
+  int m_objId;
+};
+
+void Ve1ObjectChar::SetEditMenu(GuiMenu* menu)
+{
+  menu->AddChild(new GuiMenuItem("Set md2 model...", new SetMd2Command(GetId())));
+  menu->AddChild(new GuiMenuItem("Set texture...", new SetTexCommand(GetId())));
+}
+
 void Ve1ObjectChar::SetIsColliding(GameObject* collidingObject)
 {
   m_collidingObject = collidingObject;
@@ -38,6 +73,8 @@ void Ve1ObjectChar::Update()
     return;
   }
 
+  // TODO Not if underwater ?
+  // TODO Put in base class, so we can drop things ?
   m_acc.y = GRAVITY;
 
   Ve1Object::Update();
@@ -76,6 +113,8 @@ void Ve1ObjectChar::Update()
     m_pos.y = groundY;
     if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
     {
+std::cout << "**BOUNCE**!?!?!?!\n";
+
       m_vel.y *= -0.6f;
       m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
     }

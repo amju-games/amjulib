@@ -669,20 +669,20 @@ private:
   std::string m_datafile;
 };
 
-class SetObjMeshCommand : public GuiCommand
-{
-public:
-  SetObjMeshCommand(int objId) : m_id(objId) {}
-  virtual bool Do()
-  {
-    TheGSObjMesh::Instance()->SetId(m_id);
-    TheGame::Instance()->SetCurrentState(TheGSObjMesh::Instance());
-    return false;
-  }
-
-private:
-  int m_id;
-};
+//class SetObjMeshCommand : public GuiCommand
+//{
+//public:
+//  SetObjMeshCommand(int objId) : m_id(objId) {}
+//  virtual bool Do()
+//  {
+//    TheGSObjMesh::Instance()->SetId(m_id);
+//    TheGame::Instance()->SetCurrentState(TheGSObjMesh::Instance());
+//    return false;
+//  }
+//
+//private:
+//  int m_id;
+//};
 
 class SetPropsCommand : public GuiCommand
 {
@@ -745,13 +745,14 @@ void GSEdit::CreateContextMenu()
       std::string datafile = "none";
 
       std::string type = types[i];
-      if (type == "baddie") // TODO Numeric ID ?
-      {
-std::cout << "Context menu - baddie found.\n";
 
-        assetfile = "player-assets.txt";
-        datafile = "player-data.txt";
-      } 
+////      if (type == "baddie") // TODO Numeric ID ?
+////      {
+////std::cout << "Context menu - baddie found.\n";
+////        assetfile = "player-assets.txt";
+////        datafile = "player-data.txt";
+////      } 
+
       childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(type, assetfile, datafile)));
     }
     // TODO Other types
@@ -765,9 +766,9 @@ std::cout << "Context menu - baddie found.\n";
 
 std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
     m_menu->Clear(); 
-    m_menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(obj->GetId())));
+
     m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
-//    m_menu->AddItem(new GuiMenuItem("Save changes to object", new SaveObjectCommand()));
+    obj->SetEditMenu(m_menu); // add type-specific options to menu
   }
   else
   {

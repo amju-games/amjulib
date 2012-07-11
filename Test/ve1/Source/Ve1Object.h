@@ -44,8 +44,12 @@ public:
   // NB If location changes, we must call SetLocation().
   virtual void MoveTo(const Vec3f& pos);
 
-  // Set menu items appropriate to this object type
+  // Set in-game menu items appropriate to this object type
   virtual void SetMenu(GuiMenu*) { }
+
+  // Set edit mode menu appropriate to this type: this is for edit mode only.
+  // Call base class for menu choices common to all types
+  virtual void SetEditMenu(GuiMenu*) = 0;
 
   // Rets true if location has been set for this object
   bool LocationReady() const;

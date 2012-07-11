@@ -22,7 +22,7 @@ void Ve1Node::Draw()
   }
   else
   {
-    MultColour(Colour(0.6f, 0.6f, 0.6f, 1.0f));
+    MultColour(Colour(0, 0, 1, 1)); // So visible, grey is not very noticeable
   }
 
   Assert(m_obj->GetAABB());
