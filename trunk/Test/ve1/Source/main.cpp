@@ -11,6 +11,7 @@
 //#define AMJU_USE_DX9
 
 #include <main.h>
+/****
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
 #include <ResourceManager.h>
@@ -62,4 +63,5 @@ void StartUp()
   TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
 }
 }
+***/
 
