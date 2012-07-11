@@ -35,6 +35,11 @@ bool CreateWindowGLUT(AmjuGLWindowInfo*)
 }
 }
 
+void resize(int x, int y)
+{
+  Screen::SetSize(x, y);
+}
+
 void draw()
 {
   TheGame::Instance()->RunOneLoop();
@@ -215,6 +220,7 @@ int main(int argc, char **argv)
 
   glutCreateWindow("Hello"); // TODO App name
   glutDisplayFunc(draw);
+  glutReshapeFunc(resize);
 
   // DON'T auto-repeat - we will do it ourselves
   glutIgnoreKeyRepeat(1);
