@@ -49,9 +49,12 @@ void GSWaitForUpload::OnActive()
 
 void GSWaitForUpload::SetError(const std::string& str)
 {
-  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("error"));
-  Assert(text);
-  text->SetText(str);
+  if (m_gui)
+  {
+    GuiText* text = dynamic_cast<GuiText*>(GetElementByName(m_gui, "error"));
+    Assert(text);
+    text->SetText(str);
+  }
 }
 
 void GSWaitForUpload::OnUploadFinished(const UploadInfo& ui)
