@@ -19,6 +19,7 @@
 #include "Terrain.h"
 #include "ObjectUpdater.h"
 #include "GameMode.h"
+#include "Useful.h"
 
 //#define XML_DEBUG
 #define ASSET_DEBUG
@@ -29,6 +30,23 @@ namespace Amju
 std::ostream& operator<<(std::ostream& os, const Object& obj)
 {
   return os << obj.m_id << " (" << obj.m_type << ")";
+}
+
+void AddGameObjectToGame(GameObject* go)
+{
+  static Game* g = TheGame::Instance();
+
+  Assert(go);
+
+  // Remove existing, with warning
+  int id = go->GetId();
+  if (g->GetGameObject(id))
+  {
+std::cout << "***WARNING: GameObject " << *go << " already in Game container, erasing and re-adding!\n";
+      TheGame::Instance()->EraseGameObject(id);
+  }
+
+  TheGame::Instance()->AddGameObject(go);
 }
 
 bool Object::Save(File* f)
@@ -88,7 +106,6 @@ void Object::Create()
     if (m_datafile.empty() || m_datafile == "none")
     {
 //std::cout << "Object load: no data file needed for " << *this << "\n";
-      //TheGame::Instance()->AddGameObject(go);
       TheObjectManager::Instance()->AddGameObject(go);
     }
     else
@@ -101,7 +118,6 @@ void Object::Create()
 
         if (go->Load(&f))
         {
-          //TheGame::Instance()->AddGameObject(go);
 //std::cout << "Object load: Successfully loaded game object " << *this << "... ";
           TheObjectManager::Instance()->AddGameObject(go);
         }
@@ -384,8 +400,15 @@ void ObjectManager::AddObject(PObject obj)
   {
     // Shouldn't happen because we are supposed to be getting new objects since the last time
     //  we checked, right ?
+    if (GetGameMode() == AMJU_MODE_EDIT)
+    {
+std::cout << "*** INFO: Overwriting object " << obj->m_id << " in ObjectManager\n";
+    }
+    else
+    {
 std::cout << "Trying to add duplicate object to object manager list!\n";
-    return;
+      return;
+    }
   }
 
   // Add this object to cache -- contains all objects ever created
@@ -520,7 +543,7 @@ void ObjectManager::OnObjectChangeLocation(int objId)
   {
     if (v->GetLocation() == m_location)
     {
-      TheGame::Instance()->AddGameObject(go);
+      AddGameObjectToGame(go); ////TheGame::Instance()->AddGameObject(go);
 std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() << ") to our location (" << m_location << ")\n"; 
 
       if (GetGameMode() == AMJU_MODE_EDIT)
@@ -539,7 +562,7 @@ std::cout << "Game object " << objId << " changed location but is not in our loc
   }
   else
   {
-    TheGame::Instance()->AddGameObject(go);
+    AddGameObjectToGame(go); ////TheGame::Instance()->AddGameObject(go);
   }
 }
 
@@ -585,7 +608,7 @@ std::cout << "Er, setting location to current value!\n";
       if (v->GetLocation() == m_location)
       {
 //std::cout << " ..Game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
-        TheGame::Instance()->AddGameObject(go);
+        AddGameObjectToGame(go); ////TheGame::Instance()->AddGameObject(go);
         ////TheSAP::Instance()->AddBox(go);
         v->OnLocationEntry();
       }
@@ -593,7 +616,7 @@ std::cout << "Er, setting location to current value!\n";
     else
     {
 std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << ", id: " << go->GetId() << "\n";
-      TheGame::Instance()->AddGameObject(go);
+      AddGameObjectToGame(go); ////TheGame::Instance()->AddGameObject(go);
     } 
   }
 
