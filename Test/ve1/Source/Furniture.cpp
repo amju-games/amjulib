@@ -69,11 +69,28 @@ void Furniture::Update()
     // TODO recalc AABB for VFC and picking
   }
 
-  Matrix m;
-  m.Translate(m_pos);
-  m_sceneNode->SetLocalTransform(m);
-  *(m_sceneNode->GetAABB()) = m_aabb;
-  m_sceneNode->GetAABB()->Translate(m_pos);
+  // TODO Only if we have moved!!!
+  // TODO
+  if ((m_pos - m_collMeshPos).SqLen() > 0.1f)
+  { 
+    Matrix m;
+    m.Translate(m_pos);
+    // TODO Also rotation
+
+    m_sceneNode->SetLocalTransform(m);
+
+    // Recalc collision mesh
+    Vec3f v = m_pos - m_collMeshPos;
+    m.Translate(v);
+    GetCollisionMesh()->Transform(m);
+
+    // Don't need to do this -- the AABB is being translated somewhere else - where ?
+    ////m_aabb.Translate(v);
+    *(m_sceneNode->GetAABB()) = m_aabb;
+    m_sceneNode->GetAABB()->Translate(m_pos);
+
+    m_collMeshPos = m_pos;
+  }
 
   // If moving and like a ball, we should rotate
 }
@@ -105,6 +122,7 @@ bool Furniture::Load(File* f)
   sm->SetMesh(mesh);
   sm->CalcCollisionMesh(mesh);
   sm->GetCollisionMesh()->CalcAABB(&m_aabb);
+  *(sm->GetAABB()) = m_aabb;
   m_sceneNode = sm;
 std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " << m_aabb.GetYSize() << " " << m_aabb.GetZSize() << "\n";
 
@@ -134,7 +152,7 @@ std::cout << " should be setting " << *this << " down now.\n";
           float y = go->GetPos().y;
           m_pos.y = y;
           float h = m_aabb.GetYSize();
-          go->SetPos(go->GetPos() + Vec3f(0, h + 100.0f, 0)); // 100 is TEMP TEST
+          go->SetPos(go->GetPos() + Vec3f(0, h + 10.0f, 0)); // 10 is TEMP TEST
         }
       }
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);

@@ -70,6 +70,13 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   // Get distance from local player to this object, don't show menu if too far away
   // TODO
   static const float MENU_DISTANCE = 100.0f; // TODO CONFIG ?
+  static const float MENU_DISTANCE2 =  MENU_DISTANCE * MENU_DISTANCE;
+
+  float sqdist = (GetLocalPlayer()->GetPos() - obj->GetPos()).SqLen();
+  if (sqdist > MENU_DISTANCE2)
+  {
+    return false;
+  }
 
   Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
   if (v)
@@ -148,7 +155,7 @@ std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
 
   if (selectedObj)
   {
-//std::cout << "Selected " << *selectedObj << "\n";
+std::cout << "Selected " << *selectedObj << "\n";
 
     if (ShowObjectMenu(selectedObj))
     {
@@ -161,30 +168,33 @@ std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
   // No object selected, so find position on terrain. 
   if (GetLocalPlayer())
   {
-//std::cout << "Ground clicked...\n";
     Vec3f pos;
-//    Vec3f mouseWorldNear;
-//    Vec3f mouseWorldFar;
-//    Unproject(mouseScreen, 0, &mouseWorldNear);
-//    Unproject(mouseScreen, 1, &mouseWorldFar);
-//    LineSeg lineSeg(mouseWorldNear, mouseWorldFar);
-
-//    if (GetTerrain()->GetMousePos(lineSeg, &pos))
 
     // Try to treat selected object like terrain, and get a position to go to.
     bool gotpos = false;
     HasCollisionMesh* hcm = dynamic_cast<HasCollisionMesh*>(selectedObj);
     if (hcm)
     {
+std::cout << "Try to find point on this object: " << *selectedObj << "\n";
+
       gotpos = MouseToGroundPos(hcm->GetCollisionMesh(), mouseScreen, &pos);
       if (gotpos)
       {
-std::cout << "Found point on ground on this obj: " << *selectedObj << "\n";
+std::cout << " - Found point on ground on this obj: " << *selectedObj << "!\n";
       }
+      else
+      {
+std::cout << " - No luck!\n";
+      }
+    }
+    else if (selectedObj)
+    {
+std::cout << *selectedObj << " does not have collision mesh.\n";
     }
 
     if (!gotpos)
     {
+std::cout << "Try to find point on terrain for this mouse pos.\n";
       gotpos = MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
     }
 
