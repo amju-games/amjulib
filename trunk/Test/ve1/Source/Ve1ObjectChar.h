@@ -38,8 +38,12 @@ public:
 
   virtual void SetEditMenu(GuiMenu*);
   
+  void SetKeyVal(const std::string& key, const std::string& val);
+
 protected:
   void TurnToFaceDir();
+
+  void HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
 
 protected:
   std::string m_name;
