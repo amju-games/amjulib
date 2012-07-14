@@ -8,7 +8,7 @@ namespace Amju
 {
 struct Tri
 {
-  Tri();
+  Tri() {}
   Tri(const Vec3f& v0, const Vec3f& v1, const Vec3f& v2) 
   {
     m_verts[0] = v0;
