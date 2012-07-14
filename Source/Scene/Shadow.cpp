@@ -132,34 +132,34 @@ void Shadow::ClearCollisionMeshes()
   m_mesh.clear();
 }
 
+void Shadow::EraseCollisionMesh(CollisionMesh* mesh)
+{
+  m_mesh.erase(mesh);
+}
+
 void Shadow::AddCollisionMesh(CollisionMesh* mesh)
 {
-  m_mesh.push_back(mesh);
-
-/*
-  if (mesh == m_mesh[0])
-  {
-    return;
-  }
-
-  // Lose oldest mesh
-  for (int i = MAX_MESHES - 1; i > 0; i--)
-  {
-    m_mesh[i] = m_mesh[i - 1];
-  }
-  m_mesh[0] = mesh;
-*/
+  //m_mesh.push_back(mesh);
+  m_mesh.insert(mesh);
 }
 
 void Shadow::Draw()
 {
   Assert(m_size > 0);
   Vec3f pos(m_combined[12], m_combined[13], m_combined[14]);
-
+/*
   for (unsigned int i = 0; i < m_mesh.size(); i++)
   {
     Assert(m_mesh[i]);
     MyDraw(pos, m_size, *(m_mesh[i]));
+  }
+*/
+
+  for (std::set<CollisionMesh*>::iterator it = m_mesh.begin(); it != m_mesh.end(); ++it)
+  {
+    CollisionMesh* m = *it;
+    Assert(m);
+    MyDraw(pos, m_size, *m);
   }
 }
 
@@ -317,7 +317,7 @@ void Shadow::RecalculateList(
 
   // Get the height poly which is the heighest below y.
 
-  float h = 0;
+  //float h = 0;
   // Get highest point on coll mesh ?
   // Better if we can avoid doing this. Shadow centre (x, z) mat be off
   //  the mesh!

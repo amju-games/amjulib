@@ -34,6 +34,7 @@ public:
 
   // Add a CollisionMesh onto which the shadow is cast
   void AddCollisionMesh(CollisionMesh*);
+  void EraseCollisionMesh(CollisionMesh*);
   void ClearCollisionMeshes();
 
 protected:
@@ -93,7 +94,7 @@ protected:
   // TODO Get all meshes from the rest of the scene graph ??
   // Allow multiple meshes, so we can continue to cast on a mesh as we leave it and
   //  land on another mesh
-  std::vector<PCollisionMesh> m_mesh;
+  std::set<CollisionMesh*> m_mesh;
 
   // Shadow texture - Resource
   PTexture m_texture;
