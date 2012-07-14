@@ -7,7 +7,22 @@
 //
 
 #import "My_GameAppDelegate.h"
-#include "DownloadReq.h"
+#include "Updater.h"
+#include <iostream> // TEMP
+#include <string>
+
+using namespace Amju;
+
+std::string reportText = "Hmmm...";
+
+void Report(const char* s)
+{
+	std::cout << s; // TODO
+	reportText += s;
+	// TODO Force redisplay
+	// Like this:  -- need pointer to window or AppDelegate 
+//	[window setViewNeedsDisplay:YES]; 
+}
 
 @implementation My_GameAppDelegate
 
@@ -15,8 +30,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
+
+	// TODO Set ptr to this or window
 	
-	// Make HTTP req to get latest version from server
+	Updater* u = new Updater(Report);
+	u->Start();
+	// TODO Call OnFinished function so we can quit etc	
 }
 
 @end
