@@ -1,10 +1,13 @@
 export VERSION=0.3
 
+# Make amjulib
 export AMJU_BUILD_ARCH=Mac-i386
 export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__'
 pushd ../../../../Script/MacOSX
 make
 popd
+
+# Now make the game, linking to amjulib
 make
 
 export AMJU_BUILD_ARCH=Mac-ppc
@@ -12,6 +15,7 @@ export AMJU_MACHDEP='-arch ppc -DMACOSX -DXP_MACOSX'
 pushd ../../../../Script/MacOSX
 make
 popd
+
 make
 
 # TODO Make fat binary
