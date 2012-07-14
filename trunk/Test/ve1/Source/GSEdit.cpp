@@ -20,6 +20,11 @@
 #include "ProtoObject.h"
 #include "Useful.h"
 #include "GSObjMesh.h"
+#include "Portal.h"
+#include "Building.h"
+#include "Furniture.h"
+#include "Baddie.h"
+#include "TutorialNpc.h"
 
 namespace Amju
 {
@@ -727,7 +732,6 @@ void GSEdit::CreateContextMenu()
   m_menu->SetLocalPos(m_mouseScreen);
   if (m_selectedObjects.empty())
   {
-    // ?m_menu->Clear(); 
     m_menu->AddChild(new GuiMenuItem("Go to Location...", OnGotoLocation));
     m_menu->AddChild(new GuiMenuItem("Add new Location...", OnNewLocation));
     m_menu->AddChild(new GuiMenuItem("Update this mesh...", OnEditLocation));
@@ -736,27 +740,31 @@ void GSEdit::CreateContextMenu()
     childMenu->SetName("Child menu");
 
     // Get types from Game Object Factory..?
+    // TODO Just hard code it, so we can do different things depending on the type.
+    // E.g. differnet file names. Automatically commit objects where filenames are known ?
+    // For baddies and NPCs, data files could contain all possible values. Then use a (key, val)
+    // to set which one. Like for Players.
+      
+    childMenu->AddChild(new GuiMenuItem("Furniture", 
+      new NewObjectCommand(Furniture::TYPENAME, "none", "none")));
+
+    childMenu->AddChild(new GuiMenuItem("Building", 
+      new NewObjectCommand(Building::TYPENAME, "none", "none")));
+
+    childMenu->AddChild(new GuiMenuItem("Portal", 
+      new NewObjectCommand(Portal::TYPENAME, "none", "none")));
+
+/*
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
     for (unsigned int i = 0; i < types.size(); i++)
     {
-      // TODO Map of functions to call to generate file names
-
       std::string assetfile = "none";
       std::string datafile = "none";
 
       std::string type = types[i];
-
-////      if (type == "baddie") // TODO Numeric ID ?
-////      {
-////std::cout << "Context menu - baddie found.\n";
-////        assetfile = "player-assets.txt";
-////        datafile = "player-data.txt";
-////      } 
-
       childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(type, assetfile, datafile)));
     }
-    // TODO Other types
-
+*/
     m_menu->AddChild(new GuiNestMenuItem("New Game Object...", childMenu));
   }
   else if (m_selectedObjects.size() == 1)
@@ -764,15 +772,14 @@ void GSEdit::CreateContextMenu()
     Ve1Object* obj = *(m_selectedObjects.begin());
     Assert(obj == m_selObj);
 
-std::cout << "Create context menu for object " << obj->GetId() << " " << obj->GetTypeName() << "...\n";
-    m_menu->Clear(); 
+    //?m_menu->Clear(); 
 
     m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
     obj->SetEditMenu(m_menu); // add type-specific options to menu
   }
   else
   {
-    // Multi selection
+    // Multi selection TODO
 std::cout << "Create context menu for multiple objects...\n";
   }
 }
