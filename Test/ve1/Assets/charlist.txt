@@ -2,15 +2,16 @@
 // ver
 1
 // Num chars
-3
+5
 pz-cat.md2
 //pz-dog.md2
 pz-rabbit.md2
 pz-squirrel.md2
-
+pz-dino2.md2
+amju.md2
 
 // Num texture pairs
-6
+8
 
 pz-pet1a.png
 pz-pet1.png
@@ -30,4 +31,10 @@ pz-pet5.png
 pz-pet9a.png
 pz-pet9.png
 
+dino1a.png
+dino1.png
+
+// TODO Convert to png!!!
+amju2.bmp
+amju2a.bmp
 
