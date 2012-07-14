@@ -17,6 +17,7 @@ public:
   virtual void Update();
   virtual bool Load(File*);
 
+  // Add arrow to scene graph
   virtual void OnLocationEntry();
   virtual void OnLocationExit();
  

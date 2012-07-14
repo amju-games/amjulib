@@ -16,7 +16,6 @@ public:
   virtual const char* GetTypeName() const;
   virtual void Update();
   virtual bool Load(File*);
-  virtual void OnLocationEntry();
 };
 }
 

@@ -251,30 +251,9 @@ static int CountOnlinePlayers()
 
 void Player::SetKeyVal(const std::string& key, const std::string& val)
 {
-  Ve1Object::SetKeyVal(key, val);
-  if (key == "type")
-  {
-    int type = ToInt(val); // TODO overload Set to take an int
-    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
-    if (vc)
-    {
-      TheAvatarManager::Instance()->SetAvatar(type, vc);
-    }
-  }
-  else if (key == "tex")
-  {
-    int texNum = ToInt(val);
-    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
-    if (vc)
-    {
-      TheAvatarManager::Instance()->SetTexture(texNum, vc);
-    }
-  }
-  else if (key == "name")
-  {
-    SetName(val);
-  }
-  else if (key == "loggedin")
+  Ve1ObjectChar::SetKeyVal(key, val);
+  
+  if (key == "loggedin")
   {
     bool isLoggedIn = (val == "y");
     SetLoggedIn(isLoggedIn);

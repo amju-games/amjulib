@@ -29,20 +29,6 @@ void Baddie::Update()
 
 bool Baddie::Load(File* f)
 {
-std::cout << "Called baddie load function.\n";
-
-  m_shadow = new Shadow;
-//  m_shadow->SetSize(20.0f); // TODO TEMP TEST
-  if (!m_shadow->Load(f))
-  {
-    return false;
-  }
-
-  return true;
-}
-
-void Baddie::OnLocationEntry()
-{
   // Create Scene Node, but don't attach to SceneGraph until needed
   Ve1Character* node = new Ve1Character;
 
@@ -68,6 +54,7 @@ std::cout << "Baddie scene node: Failed to load dino.\n";
   m_shadow->SetTexture(tex);
   m_sceneNode->AddChild(m_shadow.GetPtr());
 
+/*
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
 
@@ -79,6 +66,9 @@ std::cout << "Adding scene node to SceneGraph for baddie\n";
   SetVel(Vec3f(0, 0, 0)); 
 
   m_inNewLocation = true;
+*/
+
+  return true;
 }
 
 }
