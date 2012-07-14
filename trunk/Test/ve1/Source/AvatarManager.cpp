@@ -12,6 +12,7 @@ bool AvatarManager::Load()
   // Add a new object with asset list to server, which this client will then download...?
 
   m_chars.clear();
+  m_texPairs.clear();
 
   File f;
   if (!f.OpenRead("charlist.txt"))
@@ -59,6 +60,8 @@ bool AvatarManager::Load()
     f.ReportError("Expected num textures");
     return false;
   }
+
+  m_texPairs.reserve(numTex);
 
   for (int i = 0; i < numTex; i++)
   {
