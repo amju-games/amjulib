@@ -18,9 +18,12 @@ bool MouseToGroundPos(const CollisionMesh* m, const Vec2f& mouseScreen, Vec3f* g
 {
   Vec3f mouseWorldNear;
   Vec3f mouseWorldFar;
+
   Unproject(mouseScreen, 0, &mouseWorldNear);
   Unproject(mouseScreen, 1, &mouseWorldFar);
  
+  Vec3f dir = mouseWorldFar - mouseWorldNear;
+
   LineSeg seg(mouseWorldNear, mouseWorldFar);
 
   // Find all intersecting floor tris
@@ -57,6 +60,7 @@ std::cout << "Found " << size << " tris....\n";
 #endif
 
   bool foundOne = false;
+  Tri theTri;
   for (int i = 0; i < size; i++)
   {
     const Tri& t = tris[i];
@@ -65,9 +69,9 @@ std::cout << "Found " << size << " tris....\n";
     const Vec3f& b = t.m_verts[1];
     const Vec3f& c = t.m_verts[2];
 
-    // Skip vertical tris
+    // Skip tris facing away from us. This means the normal will be between 0 and 1.
     Plane plane(a, b, c);
-    if (plane.B() < 0.5f)
+    if (DotProduct(plane.Normal(),  dir) > 0)
     {
       continue;
     }
@@ -105,10 +109,15 @@ std::cout << "d=" << d << "... expecting zero.\n";
       closestSqDist = squareDist;
       closest = p;
       foundOne = true;
+      theTri = t; // remember triangle for later
     }
   }
 
+  // If selected tri is vertical, find the height at the (x, z). 
+  m->GetClosestY(Vec2f(closest.x, closest.z), closest.y, &closest.y);  
+
   *groundPos = closest;
+
   return foundOne;
 }
 

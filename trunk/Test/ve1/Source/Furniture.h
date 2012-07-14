@@ -33,6 +33,9 @@ public:
 
 protected:
   int m_pickupId;
+
+  // last position where coll mesh was created - this is so we can translate collision mesh
+  Vec3f m_collMeshPos; 
 };
 }
 

@@ -23,6 +23,11 @@ public:
     AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
     SceneMesh::Draw();
     AmjuGL::PopAttrib();
+
+    if (m_collMesh)
+    {
+      m_collMesh->Draw();
+    }
   }
 
 private:
