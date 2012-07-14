@@ -47,6 +47,10 @@ inline bool operator<(const PObject& o1, const PObject& o2)
   {
     return true;
   }
+  return false;
+
+  // The other data doesn't matter: if the IDs are the same, it's the same object.
+/*
   else if (o1->m_id > o2->m_id)
   {
     return false;
@@ -74,14 +78,13 @@ inline bool operator<(const PObject& o1, const PObject& o2)
   {
     return true;
   }
-  /*
   else if (o1->m_assetlist > o2->m_assetlist)
   {
     return false;
   }
-  */
 
   return false;
+*/
 }
 
 
