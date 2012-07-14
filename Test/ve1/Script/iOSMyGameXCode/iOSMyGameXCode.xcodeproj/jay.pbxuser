@@ -1,0 +1,142 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* iOSMyGameXCode */ = {
+		activeExec = 0;
+		executables = (
+			693D49AA15ADC13800B84D5C /* iOSMyGameXCode */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 693D49AA15ADC13800B84D5C /* iOSMyGameXCode */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* iOSMyGameXCode */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* iOSMyGameXCode */,
+		);
+		codeSenseManager = 693D49BD15ADC15600B84D5C /* Code sense */;
+		executables = (
+			693D49AA15ADC13800B84D5C /* iOSMyGameXCode */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					835,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 363709218;
+			PBXWorkspaceStateSaveDate = 363709218;
+		};
+		perUserProjectItems = {
+			693D4C1515ADC47700B84D5C /* XCBuildMessageTextBookmark */ = 693D4C1515ADC47700B84D5C /* XCBuildMessageTextBookmark */;
+			693D4C1615ADC47700B84D5C /* PBXTextBookmark */ = 693D4C1615ADC47700B84D5C /* PBXTextBookmark */;
+			693D4C3615ADC59400B84D5C /* PBXTextBookmark */ = 693D4C3615ADC59400B84D5C /* PBXTextBookmark */;
+		};
+		sourceControlManager = 693D49BC15ADC15600B84D5C /* Source Control */;
+		userBuildSettings = {
+			OBJROOT = "$(SYMROOT)";
+			SYMROOT = /Users/jay/projects/amjulib/Build/iOSMyGameXCode/iOSMyGameXCode/build;
+		};
+	};
+	693D49AA15ADC13800B84D5C /* iOSMyGameXCode */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = iOSMyGameXCode;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	693D49BC15ADC15600B84D5C /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	693D49BD15ADC15600B84D5C /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	693D4B2C15ADC34A00B84D5C /* GSMain.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 5343}}";
+			sepNavSelRange = "{1490, 0}";
+			sepNavVisRange = "{1300, 450}";
+		};
+	};
+	693D4B8115ADC34A00B84D5C /* SAPCollideFunc.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 468}}";
+			sepNavSelRange = "{404, 0}";
+			sepNavVisRange = "{0, 499}";
+		};
+	};
+	693D4C1515ADC47700B84D5C /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'cout' is not a member of 'std'";
+		fRef = 693D4B8115ADC34A00B84D5C /* SAPCollideFunc.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 0;
+		rLoc = 0;
+		rType = 1;
+	};
+	693D4C1615ADC47700B84D5C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 693D4B8115ADC34A00B84D5C /* SAPCollideFunc.cpp */;
+		name = "SAPCollideFunc.cpp: 1";
+		rLen = 0;
+		rLoc = 19;
+		rType = 0;
+		vrLen = 400;
+		vrLoc = 0;
+	};
+	693D4C3615ADC59400B84D5C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 693D4B8115ADC34A00B84D5C /* SAPCollideFunc.cpp */;
+		name = "SAPCollideFunc.cpp: 1";
+		rLen = 0;
+		rLoc = 19;
+		rType = 0;
+		vrLen = 400;
+		vrLoc = 0;
+	};
+}
