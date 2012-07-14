@@ -5,7 +5,7 @@
 
 namespace Amju
 {
-static const int MAX_CONCURRENT_RESULTS = 10; // max result HTTP reqs in flight
+static const int MAX_CONCURRENT_RESULTS = 100; // max result HTTP reqs in flight
 
 class ReqStoreResult : public Ve1Req
 {
