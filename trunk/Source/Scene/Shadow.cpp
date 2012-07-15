@@ -155,7 +155,7 @@ void Shadow::Draw()
   }
 */
 
-  for (std::set<CollisionMesh*>::iterator it = m_mesh.begin(); it != m_mesh.end(); ++it)
+  for (Meshes::iterator it = m_mesh.begin(); it != m_mesh.end(); ++it)
   {
     CollisionMesh* m = *it;
     Assert(m);
