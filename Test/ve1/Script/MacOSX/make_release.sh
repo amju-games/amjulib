@@ -40,6 +40,8 @@ cp -R $ASSETSDIR/* $BUILD/"My Game.app"/Contents/Resources/Data/
 cp -R $FONT2D/* $BUILD/"My Game.app"/Contents/Resources/Data/font2d
 cp -R $FONT3D/* $BUILD/"My Game.app"/Contents/Resources/Data/font3d
 cp $BUILD/ve1.univ $BUILD/"My Game.app"/Contents/MacOS/"My Game"
+cp ../../../../Source/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $(BUILD)/"My Game.app"/Contents/MacOS/
+cp ../../../../Source/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib $(BUILD)/"My Game.app"/Contents/MacOS/
 cd $BUILD
 
 # Zip bundle
@@ -48,6 +50,8 @@ zip -9 "My Game.zip" "My Game.app"
 zip -9 "My Game.zip" "My Game.app/Contents"
 zip -9 "My Game.zip" "My Game.app/Contents/Info.plist"
 zip -9 "My Game.zip" "My Game.app/Contents/MacOS/My Game"
+zip -9 "My Game.zip" "My Game.app/Contents/MacOS/libbass.dylib"
+zip -9 "My Game.zip" "My Game.app/Contents/MacOS/libbassmidi.dylib"
 zip -9 "My Game.zip" "My Game.app/Contents/Resources"
 zip -9 -r "My Game.zip" "My Game.app/Contents/Resources/Data"
 zip -9 "My Game.zip" "My Game.app/Contents/Resources/MyGame.icns"
