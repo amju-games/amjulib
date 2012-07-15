@@ -64,7 +64,15 @@ void Furniture::Update()
   {
     // Get pos of pickup player. Set scene node pos to this.
     GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
-    m_pos = go->GetPos() + Vec3f(0, 40, 0); // y offset TODO
+    if (go)
+    {
+      m_pos = go->GetPos() + Vec3f(0, 40, 0); // y offset TODO
+      Player* p = dynamic_cast<Player*>(go); 
+      if (p)
+      {
+        p->SetCarrying(this);
+      }
+    }
 
     // TODO recalc AABB for VFC and picking
   }
@@ -137,6 +145,9 @@ void Furniture::SetKeyVal(const std::string& key, const std::string& val)
   if (key == SET_KEY("pickup"))
   {
     int pickupId = ToInt(val);
+    GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
+    Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
+
     if (pickupId == 0)
     {
 std::cout << "Got drop msg... ";
@@ -146,22 +157,36 @@ std::cout << "Got drop msg... ";
       {
 std::cout << " should be setting " << *this << " down now.\n";
 
-        GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
         if (go)
         {
           float y = go->GetPos().y;
           m_pos.y = y;
           float h = m_aabb.GetYSize();
           go->SetPos(go->GetPos() + Vec3f(0, h + 10.0f, 0)); // 10 is TEMP TEST
+
+          if (p)
+          {
+            p->SetCarrying(0);
+          }
         }
       }
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
     }
     else
     {
-GameObject* go = TheGame::Instance()->GetGameObject(pickupId);
+      if (go)
+      {
 std::cout << *this << " got picked up by " << *go << "\n";
+      }
+      else
+      {
+std::cout << *this << " got picked up by object " << pickupId << " but this object not created yet!!\n";
+      }
 
+      if (p)
+      {
+        p->SetCarrying(this);     
+      }
     }
 std::cout << "Setting m_pickupId to " << pickupId << "\n";
     m_pickupId = pickupId;

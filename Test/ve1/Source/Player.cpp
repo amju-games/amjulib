@@ -21,6 +21,7 @@
 #include <CollisionMesh.h>
 #include "Useful.h"
 #include "ChatConsole.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -158,6 +159,40 @@ Player::Player()
   m_isLocal = false;
   m_isLoggedIn = false;
   m_fadeTime = 0;
+  m_carrying = 0;
+}
+
+void Player::SetCarrying(Ve1Object* obj)
+{
+  if (obj)
+  {
+    if (m_carrying)
+    {
+//std::cout << "Must drop current object first!\n";
+    }
+    else
+    {
+std::cout << *this << " is now carrying " << *obj << "\n";
+    }
+  }
+  else
+  {
+    if (m_carrying)
+    {
+std::cout << "Dropping currently carried object " << *m_carrying << ".\n";
+    }
+    else
+    {
+std::cout << "?? Got drop object by not carrying anything\n";
+    }
+  }
+
+  m_carrying = obj;
+}
+
+Ve1Object* Player::GetCarrying()
+{
+  return m_carrying;
 }
 
 bool Player::IsLoggedIn() const
@@ -226,6 +261,12 @@ void Player::OnLocationEntry()
 
   // Set appearance
   SetLoggedIn(IsLoggedIn());
+
+  // If we are carrying something, change its location too
+  if (m_carrying)
+  {
+    TheObjectUpdater::Instance()->SendChangeLocationReq(m_carrying->GetId(), GetPos(), GetLocation()); 
+  }
 }
 
 typedef std::map<Player*, bool> LoggedInMap;
