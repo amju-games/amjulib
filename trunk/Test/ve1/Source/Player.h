@@ -37,12 +37,17 @@ public:
   bool IsLoggedIn() const;
   void SetLoggedIn(bool loggedIn);
 
+  void SetCarrying(Ve1Object*);
+  Ve1Object* GetCarrying();
+
 protected:
   bool m_isLocal;
   bool m_isLoggedIn;
 
   RCPtr<SceneMesh> m_arrow; // destination arrow
   RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
+
+  RCPtr<Ve1Object> m_carrying;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
