@@ -71,7 +71,7 @@ chat-text-edit
 // Text
 enter chat text
 // Font
-arial, 1.0
+arial, 1.0, fgcol=000000, bgcol=ffffff
 
 // Child
 gui-button

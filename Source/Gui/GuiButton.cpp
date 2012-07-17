@@ -179,19 +179,19 @@ void GuiButton::Draw()
 
   GuiImage::Draw();
 
-  PushColour();
+  //PushColour();
+  float a = 1.0f;
   if (!IsEnabled())
   {
-    MultColour(Colour(1, 1, 1, 0.5f));
+    a = 0.5f;
   }
-  MultColour(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, m_textColour.m_a));
+  m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
   AmjuGL::PushMatrix();
   AmjuGL::Translate(0, 0.01f, 0);
-  MultColour(Colour(0, 0, 0, 1));
+  m_guiText.SetFgCol(Colour(0, 0, 0, a));
   m_guiText.Draw();
   AmjuGL::PopMatrix();
-  PopColour();
 
   AmjuGL::PopMatrix();
 }

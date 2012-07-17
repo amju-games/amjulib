@@ -24,8 +24,8 @@ GuiText::GuiText()
   m_textSize = 1.0f;
   static const Colour WHITE(1, 1, 1, 1);
   static const Colour BLACK(0, 0, 0, 1);
-  m_bgCol = WHITE;
-  m_fgCol = BLACK;
+  m_bgCol = BLACK;
+  m_fgCol = WHITE;
   SetCharTime(0);
   m_isMulti = false;
   m_topLine = 0;
@@ -276,18 +276,10 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
     }
   }
 
-  if (m_drawBg)
-  {
-    PushColour();
-    AmjuGL::SetColour(fg);
-    PrintLine(str, x, y);
-    PopColour();
-  }
-  else
-  {  
-    // Why don't we use fg ??
-    PrintLine(str, x, y);
-  }
+  PushColour();
+  AmjuGL::SetColour(fg);
+  PrintLine(str, x, y);
+  PopColour();
 }
 
 void GuiText::PrintLine(const std::string& str, float x, float y)
