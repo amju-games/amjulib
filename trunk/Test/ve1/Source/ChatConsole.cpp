@@ -11,6 +11,7 @@
 #include "ObjectUpdater.h"
 #include "GSMain.h"
 #include "Kb.h"
+#include "Player.h"
 
 namespace Amju
 {
@@ -93,7 +94,6 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   text->SetSize(Vec2f(cc->m_size.x, cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetTextSize(cc->m_fontSize);
   text->SetText(msg);
-  //text->SizeToText(); // TODO make this work for multi-line
   text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetDrawBg(false);
   text->SetInverse(false);
@@ -244,6 +244,19 @@ void ChatConsole::OnDeactive()
 {
   TheEventPoller::Instance()->RemoveListener(m_gui);
   m_gui = 0;
+}
+
+void ChatConsole::SetPlayerLoggedIn(Player* p, bool isLoggedIn)
+{
+  Assert(p);
+  if (m_mode == CHAT_CLOSED)
+  {
+    return;
+  }
+  if (p->GetId() == m_lastRecipId)
+  {
+std::cout << "Notify player, because " << p->GetName() << " has just logged " << (isLoggedIn ? "IN" : "OUT") << "\n";
+  }
 }
 
 void ChatConsole::SetPlayerIsTyping(bool isTyping, int typerId, int recipId)

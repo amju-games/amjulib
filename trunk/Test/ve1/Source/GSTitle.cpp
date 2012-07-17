@@ -14,6 +14,7 @@
 #include "Version.h"
 #include "SpecialConfig.h"
 #include "PlayerInfo.h"
+#include "LurkMsg.h" // TODO TEMP TEST
 
 namespace Amju
 {
@@ -29,6 +30,11 @@ static void OnQuickStartButton()
 
 static void OnStartButton()
 {
+  // TODO TEMP TEST
+  TheLurker::Instance()->Queue(LurkMsg("hello", Colour(1, 1, 1, 1), Colour(0, 0, 0, 1), AMJU_TOP));
+  return; 
+
+
   // If no players, go straight to log in screen
   if (ThePlayerInfoManager::Instance()->GetNumPlayerNames() == 0)
   {
@@ -59,6 +65,7 @@ void GSTitle::Update()
 {
   GSGui::Update();
 
+  TheLurker::Instance()->Update();
 }
 
 void GSTitle::Draw()
@@ -92,6 +99,9 @@ void GSTitle::Draw2d()
   s = "Env: " + GetEnv();
   t.SetText(s);
   t.Draw();
+
+  // TODO TEMP TEST
+  TheLurker::Instance()->Draw();
 }
 
 void GSTitle::OnActive()

@@ -294,6 +294,8 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1ObjectChar::SetKeyVal(key, val);
   
+  static ChatConsole* cc = TheChatConsole::Instance();
+
   if (key == "loggedin")
   {
     bool isLoggedIn = (val == "y");
@@ -301,12 +303,15 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     SetLoggedInPlayer(this, m_isLoggedIn);
     static GSMain* gsm = TheGSMain::Instance();
     gsm->SetNumPlayersOnline(CountOnlinePlayers());
+
+    // So we can notify if current recipient logs in or out
+    cc->SetPlayerLoggedIn(this, isLoggedIn);
   }
   else if (key == "istyping")
   {
     int recipId = ToInt(val);
     bool isTyping = (recipId > 0);
-    TheChatConsole::Instance()->SetPlayerIsTyping(isTyping, GetId(), recipId); 
+    cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
 }
 
