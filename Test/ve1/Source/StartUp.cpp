@@ -49,6 +49,9 @@ void StartUp()
 
   // Start with state that copies assets to Save Dir
   TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
+
+  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  TheGame::Instance()->SetFrameTimeFont(font);
 }
 }
 
