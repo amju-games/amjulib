@@ -136,7 +136,7 @@ void Game::RunOneLoop()
     double draw = tafter.tv_sec - mid.tv_sec + (tafter.tv_usec - mid.tv_usec) * 1e-6;
     double update = mid.tv_sec - tbefore.tv_sec + (mid.tv_usec - tbefore.tv_usec) * 1e-6;
     std::string s = "Draw: " + ToString((int)(draw * 1000.0f)) +
-      update: " + ToString((int)(update * 1000.0f));
+      " update: " + ToString((int)(update * 1000.0f));
 #endif
 
     // Display time per frame
