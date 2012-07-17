@@ -31,7 +31,8 @@ private:
   RCPtr<GuiRect> m_rect;
 
   Vec2f m_pos; // current pos
-  Vec2f m_finalPos; // position when LURK_SHOWN state is reached
+  Vec2f m_showPos; // position when LURK_SHOWN state is reached
+  Vec2f m_hidePos; // position when fully hidden
   Vec2f m_vel;
 
   float m_timer;

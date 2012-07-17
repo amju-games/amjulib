@@ -27,6 +27,7 @@
 #include "MouseToGroundPos.h"
 #include "HasCollisionMesh.h"
 #include "Useful.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {
@@ -125,6 +126,8 @@ void GSMain::Update()
   BruteForce(TheGame::Instance()->GetGameObjects());
 
   TheChatConsole::Instance()->Update();
+
+  TheLurker::Instance()->Update();
 }
 
 void GSMain::DoMoveRequest()
@@ -276,6 +279,8 @@ void GSMain::Draw2d()
   }
 
   TheChatConsole::Instance()->Draw();
+
+  TheLurker::Instance()->Draw();
 
   TheCursorManager::Instance()->Draw();
 }
