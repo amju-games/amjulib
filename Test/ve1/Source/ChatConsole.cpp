@@ -12,6 +12,7 @@
 #include "GSMain.h"
 #include "Kb.h"
 #include "Player.h"
+#include "LurkMsg.h" 
 
 namespace Amju
 {
@@ -132,8 +133,6 @@ ChatConsole::ChatConsole()
 
 void ChatConsole::SetBottom(float y)
 {
-std::cout << "Setting chat console bottom to " << y << "\n";
-
   m_pos.y = y;
 
   Vec2f pos = m_gui->GetLocalPos();
@@ -147,6 +146,7 @@ void ChatConsole::Hide()
   Vec2f pos = m_gui->GetLocalPos();
   pos.x = 1.0f;
   m_gui->SetLocalPos(pos);
+  m_gui->SetVisible(false);
 
   static GSMain* gsm = TheGSMain::Instance();
   gsm->SetViewWidth(1.0f);
@@ -167,6 +167,8 @@ void ChatConsole::Update()
   {
   case CHAT_OPENING:
     {
+    m_gui->SetVisible(true);
+
     float dt = TheTimer::Instance()->GetDt();
     Vec2f pos = m_gui->GetLocalPos();
     pos += m_vel * dt;
@@ -190,6 +192,7 @@ void ChatConsole::Update()
     {
       pos.x = 1.0f;
       m_mode = CHAT_CLOSED;
+      m_gui->SetVisible(false);
     }
     gsm->SetViewWidth((pos.x + 1.0f) * 0.5f);
     m_gui->SetLocalPos(pos);
@@ -255,7 +258,8 @@ void ChatConsole::SetPlayerLoggedIn(Player* p, bool isLoggedIn)
   }
   if (p->GetId() == m_lastRecipId)
   {
-std::cout << "Notify player, because " << p->GetName() << " has just logged " << (isLoggedIn ? "IN" : "OUT") << "\n";
+    std::string s = p->GetName() + " has just logged " + (isLoggedIn ? "in!" : "out!");
+    TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(1, 0, 1, 1), AMJU_TOP));
   }
 }
 

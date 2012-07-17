@@ -14,7 +14,7 @@
 #include "Version.h"
 #include "SpecialConfig.h"
 #include "PlayerInfo.h"
-#include "LurkMsg.h" // TODO TEMP TEST
+#include "LurkMsg.h" // so we can display msgs in title screen
 
 namespace Amju
 {
@@ -30,11 +30,6 @@ static void OnQuickStartButton()
 
 static void OnStartButton()
 {
-  // TODO TEMP TEST
-  TheLurker::Instance()->Queue(LurkMsg("hello", Colour(1, 1, 1, 1), Colour(0, 0, 0, 1), AMJU_TOP));
-  return; 
-
-
   // If no players, go straight to log in screen
   if (ThePlayerInfoManager::Instance()->GetNumPlayerNames() == 0)
   {
@@ -82,7 +77,6 @@ void GSTitle::Draw2d()
 
   t.SetSize(Vec2f(1.0f, 0.1f));
   t.SetJust(GuiText::AMJU_JUST_LEFT);
-  t.SetInverse(true);
   t.SetDrawBg(true);
 
   t.SetLocalPos(Vec2f(-1.0f, 0.8f));
