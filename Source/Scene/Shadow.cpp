@@ -130,37 +130,50 @@ void Shadow::SetSize(float size)
 void Shadow::ClearCollisionMeshes()
 {
   m_mesh.clear();
+  m_list.clear(); // so can't be casting any shadows
 }
 
 void Shadow::EraseCollisionMesh(CollisionMesh* mesh)
 {
   m_mesh.erase(mesh);
+  Recalc();
 }
 
 void Shadow::AddCollisionMesh(CollisionMesh* mesh)
 {
   //m_mesh.push_back(mesh);
   m_mesh.insert(mesh);
+  Recalc();
+}
+
+void Shadow::Recalc()
+{
+  m_list.clear();
+  Vec3f pos(m_combined[12], m_combined[13], m_combined[14]);
+  for (Meshes::iterator it = m_mesh.begin(); it != m_mesh.end(); ++it)
+  {
+    CollisionMesh* m = *it;
+    Assert(m);
+    RecalculateList(pos.x, pos.y, pos.z, m_size, *m);
+  }
 }
 
 void Shadow::Draw()
 {
   Assert(m_size > 0);
-  Vec3f pos(m_combined[12], m_combined[13], m_combined[14]);
-/*
-  for (unsigned int i = 0; i < m_mesh.size(); i++)
-  {
-    Assert(m_mesh[i]);
-    MyDraw(pos, m_size, *(m_mesh[i]));
-  }
-*/
+  Vec3f v(m_combined[12], m_combined[13], m_combined[14]);
 
-  for (Meshes::iterator it = m_mesh.begin(); it != m_mesh.end(); ++it)
+  if (v.x != m_oldx || v.y != m_oldy || v.z != m_oldz || m_size != m_oldsize)
   {
-    CollisionMesh* m = *it;
-    Assert(m);
-    MyDraw(pos, m_size, *m);
+    Recalc();
+
+    m_oldx = v.x;
+    m_oldy = v.y;
+    m_oldz = v.z;
+    m_oldsize = m_size;
   }
+
+  DrawList();
 }
 
 void Shadow::Update()
@@ -312,8 +325,6 @@ void Shadow::RecalculateList(
   const CollisionMesh& collMesh)
 {
   AMJU_CALL_STACK;
-
-  m_list.clear();
 
   // Get the height poly which is the heighest below y.
 
