@@ -14,8 +14,6 @@
 #include <sys/time.h>
 #endif
 
-//#define AMJU_SHOW_FRAME_TIME
-
 //#define STATE_DEBUG
 
 namespace Amju
@@ -25,8 +23,13 @@ Game::Game()
   m_currentState = 0;
   m_pauseState = 0;
   m_newState = 0;
+  m_font = 0;
 }
 
+void Game::SetFrameTimeFont(Font* f)
+{
+  m_font = f;
+}
 
 void Game::PauseGame()
 {
@@ -100,54 +103,52 @@ void Game::Run()
 
 void Game::RunOneLoop()
 {
-#ifdef AMJU_SHOW_FRAME_TIME
-
 #ifdef WIN32
-  unsigned long start = GetTickCount();
-
+    unsigned long start = GetTickCount();
 #else
-  // Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
-  timeval tbefore;
-  gettimeofday(&tbefore, 0);
-
+    // Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
+    timeval tbefore;
+    gettimeofday(&tbefore, 0);
 #endif
-#endif
-
 
   Update();
+
+#ifdef WIN32
+    unsigned long mid = GetTickCount();
+#else
+    // Get time taken to update/draw/flip, giving the 'real' FPS, not fixed to screen refresh rate
+    timeval mid;
+    gettimeofday(&mid, 0);
+#endif
+
   Draw();
 
-
-#ifdef AMJU_SHOW_FRAME_TIME
-  static Amju::Font* font =
-    (Amju::Font*)Amju::TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-
-  if (font)
+  if (m_font)
   {
 #ifdef WIN32
-    unsigned long delta = GetTickCount() - start;
-    std::string s = Amju::ToString((unsigned int)delta);
+    unsigned long draw = GetTickCount() - mid;
+    unsigned long update = mid - start;
+    std::string s = "Draw: " + ToString((unsigned int)draw) + " update: " + ToString((unsigned int)update);
 
 #else
     timeval tafter;
     gettimeofday(&tafter, 0);
-    double t = tafter.tv_sec - tbefore.tv_sec + (tafter.tv_usec - tbefore.tv_usec) * 1e-6;
-    std::string s = Amju::ToString((int)(t * 1000.0f));
+    double draw = tafter.tv_sec - mid.tv_sec + (tafter.tv_usec - mid.tv_usec) * 1e-6;
+    double update = mid.tv_sec - tbefore.tv_sec + (mid.tv_usec - tbefore.tv_usec) * 1e-6;
+    std::string s = "Draw: " + ToString((int)(draw * 1000.0f)) +
+      update: " + ToString((int)(update * 1000.0f));
 #endif
 
     // Display time per frame
-    s += "ms";
     PushColour();
     AmjuGL::SetColour(Colour(0, 0, 0, 1));
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    Rect r(-1.0f, -0.7f, -1.0f, -0.9f);
+    Rect r(-1.0f, 0, -1.0f, -0.9f);
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
-    font->Print(-1.0f, -1.0f, s.c_str());
+    m_font->Print(-1.0f, -1.0f, s.c_str());
   }
-
-#endif //  AMJU_SHOW_FRAME_TIME
 
   AmjuGL::Flip(); 
 }
