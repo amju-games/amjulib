@@ -288,6 +288,9 @@
     <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\StartUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -571,19 +574,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d11.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9d.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx11.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx11d.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\Source\newgui.pl" />
-    <None Include="..\..\..\..\Source\newreq.pl" />
-    <None Include="..\..\..\..\Source\newstate.pl" />
   </ItemGroup>
 </Project>
