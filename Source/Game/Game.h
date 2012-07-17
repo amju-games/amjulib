@@ -10,6 +10,8 @@
 
 namespace Amju
 {
+class Font;
+
 class Game : public NonCopyable
 {
 private:
@@ -50,6 +52,9 @@ public:
   // Functions commonly used by Game States
   void UpdateGameObjects();
 
+  // Set a font to display frame time
+  void SetFrameTimeFont(Font*);
+
 private:
   void UpdateState(); // go to new state if set
 
@@ -59,6 +64,8 @@ private:
   GameState* m_newState;
 
   GameObjects m_objects;
+
+  Font* m_font;
 };
 typedef Singleton<Game> TheGame;
 }
