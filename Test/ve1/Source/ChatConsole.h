@@ -11,6 +11,8 @@
 
 namespace Amju
 {
+class Player;
+
 // The user interface for chatting with other players
 class ChatConsole : public NonCopyable
 {
@@ -35,6 +37,9 @@ public:
 
   // Set flag for player typing msg to another player - display something if it makes sense
   void SetPlayerIsTyping(bool isTyping, int typerId, int recipId);
+
+  // Called when player logs in or out
+  void SetPlayerLoggedIn(Player*, bool isLoggedIn);
 
   // Called when we type into text edit box
   void OnTyping();
