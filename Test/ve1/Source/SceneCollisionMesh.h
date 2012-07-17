@@ -5,9 +5,10 @@
 #include <CollisionMesh.h>
 #include <AmjuGL.h>
 
+//#define SHOW_COLLISION_MESH
+
 namespace Amju
 {
-
 class SceneCollisionMesh : public SceneMesh
 {
 public:
@@ -24,10 +25,12 @@ public:
     SceneMesh::Draw();
     AmjuGL::PopAttrib();
 
+#ifdef SHOW_COLLISION_MESH
     if (m_collMesh)
     {
       m_collMesh->Draw();
     }
+#endif // SHOW_COLLISION_MESH
   }
 
 private:
