@@ -13,5 +13,5 @@ set PATH="\Program Files (x86)\Inno Setup 5\";%PATH%
 iscc.exe MyGameSetup.iss
 
 cd Output
-copy setup.exe "..\..\..\..\..\..\mygame-%VERSION%.exe"
+copy setup.exe "..\..\..\..\..\..\MyGame-v.%VERSION%-setup.exe"
 
