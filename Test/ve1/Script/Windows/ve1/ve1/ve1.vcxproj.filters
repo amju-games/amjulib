@@ -291,6 +291,9 @@
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerBuilding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -576,5 +579,11 @@
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\main_iphone.mm" />
+    <None Include="..\..\..\..\Source\newgui.pl" />
+    <None Include="..\..\..\..\Source\newreq.pl" />
+    <None Include="..\..\..\..\Source\newstate.pl" />
   </ItemGroup>
 </Project>
