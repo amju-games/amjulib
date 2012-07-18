@@ -30,7 +30,17 @@ std::cout << "No special config.\n";
 
   std::string appname = GetAppName();
 
+#ifdef MACOSX
+  // Permissions issues make it best for every user to have a private Save Dir.
+  // All Save Dirs are in ~/.mygame/ 
+
+  std::string saveDir = GetDesktopDir() + "../.mygame/" + appname + "/Data/";
+  std::cout << "THIS IS THE DAVE DIR: " << saveDir << "\n";
+  File::SetRoot(saveDir, "/");
+  
+#else
   File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
+#endif
 
   TheGameConfigFile::Instance()->Load(CONFIG_FILE_NAME);
   atexit(SaveConfig);
