@@ -34,7 +34,12 @@ std::cout << "No special config.\n";
   // Permissions issues make it best for every user to have a private Save Dir.
   // All Save Dirs are in ~/.mygame/ 
 
-  std::string saveDir = GetDesktopDir() + "../.mygame/" + appname + "/Data/";
+  std::string saveDir = GetDesktopDir() + "../.mygame/";
+  MkDir(saveDir);
+  saveDir += appname;
+  MkDir(saveDir);
+  saveDir += "/Data/";
+  MkDir(saveDir);
   std::cout << "THIS IS THE DAVE DIR: " << saveDir << "\n";
   File::SetRoot(saveDir, "/");
   
