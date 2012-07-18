@@ -9,6 +9,9 @@ namespace Amju
 class DownloadManager
 {
 public:
+  // If we have too many requests, GetFile() will fail, and you should retry.
+  static const int MAX_CONCURRENT_DOWNLOADS = 16;  
+
   bool GetFile(const std::string& filename);
 
   bool IsLocal(const std::string& filename);

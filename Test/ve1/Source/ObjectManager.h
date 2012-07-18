@@ -151,6 +151,10 @@ public:
 
   void SetTimestamp(const std::string& timestamp);
 
+  // Don't call GetFile directly - call this to queue the request.
+  // That way we can retry if the request fails.
+  void QGetFile(const std::string& filename);
+
 private:
   // Local cache of objects successfully created
   bool Load();
@@ -161,6 +165,11 @@ private:
 
   // Timestamp of last server request
   std::string m_timestamp;
+
+  // Queue of files to download. We remove files from this queue when we know they have been
+  //  successfully downloaded, and retry periodically until then.
+  typedef std::set<std::string> FileQ;
+  FileQ m_fileQ;
 
   // Asset list:
   // Objects point to asset lists.
