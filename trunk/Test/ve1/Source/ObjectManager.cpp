@@ -253,17 +253,7 @@ std::cout << "Failed to open asset list file " << m_name << "\n";
 std::cout << " Got asset " << s << ", adding to ObjectManager....\n";
 #endif
 
-    if (TheObjectManager::Instance()->GetFile(s))
-    {
-//std::cout << " GetFile returned true\n";
-    }
-    else
-    {
-std::cout << " GetFile for " << s << " returned false\n";
-//Assert(0);
-      // Force reload next update, to get files which failed this time
-      m_state = AMJU_AL_UNKNOWN;
-    }
+    TheObjectManager::Instance()->QGetFile(s);
   }
 
   return true;
@@ -394,6 +384,11 @@ std::cout << "Saved object create cache ok!\n";
   return true;
 }
 
+void ObjectManager::QGetFile(const std::string& filename)
+{
+  m_fileQ.insert(filename);
+}
+
 void ObjectManager::AddObject(PObject obj)
 {
   if (m_objects.find(obj) != m_objects.end())
@@ -420,7 +415,7 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
   // Get the asset list and data file if we haven't already
   if (!obj->m_datafile.empty() && obj->m_datafile != "none")
   {
-    GetFile(obj->m_datafile);
+    QGetFile(obj->m_datafile);
   }
 
   // See if we have already got the asset list (because we already found another object of the same type, etc.)
@@ -432,7 +427,7 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
       // Asset List not yet created
       AssetList* assetlist = new AssetList(assetlistname);
       m_assetLists[assetlistname] = assetlist;
-      GetFile(assetlistname);
+      QGetFile(assetlistname);
     }
   }
 
@@ -453,6 +448,34 @@ void ObjectManager::Update()
   if (fileCheckTime > FILE_CHECK_TIME)
   {
     fileCheckTime = 0;
+
+    // Check the file download queue
+    int i = 0;
+    for (FileQ::iterator it = m_fileQ.begin(); it != m_fileQ.end(); )
+    {
+      i++;
+      if (i > MAX_CONCURRENT_DOWNLOADS)
+      {
+        break;
+      }
+      const std::string& filename = *it;
+      if (IsLocal(filename))
+      {
+        // Remove this filename, we have successfully downloaded it 
+#ifdef WIN32
+        it = m_fileQ.erase(it);
+#else
+        m_fileQ.erase(it);
+        ++it;
+#endif
+      }
+      else
+      {
+        GetFile(*it); // really call GetFile()
+        ++it;
+      }
+    }
+
 
     for (Objects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
     {

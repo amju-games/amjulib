@@ -9,10 +9,6 @@
 
 namespace Amju
 {
-// TODO
-static const int MAX_CONCURRENT_DOWNLOADS = 16;  // ???
-
-
 class FileDownloadReq : public DownloadReq
 {
 public:
