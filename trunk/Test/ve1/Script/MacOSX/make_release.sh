@@ -57,6 +57,6 @@ zip -9 -r "My Game.zip" "My Game.app/Contents/Resources/Data"
 zip -9 "My Game.zip" "My Game.app/Contents/Resources/MyGame.icns"
 zip -9 "My Game.zip" "My Game.app/Contents/Resources/English.lproj"
 zip -9 "My Game.zip" "My Game.app/Contents/Resources/English.lproj/InfoPlist.strings"
-mv "My Game.zip" "MyGame-v."$VERSION".zip"
+mv "My Game.zip" "../../../../../MyGame-v."$VERSION".zip"
 
 
