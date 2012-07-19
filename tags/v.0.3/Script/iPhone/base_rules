@@ -1,0 +1,34 @@
+PREFIX	:=	
+
+export AS		:=	$(PREFIX)as
+export AR		:=	$(PREFIX)ar
+export OBJCOPY	:=	$(PREFIX)objcopy
+
+export CC		:=	/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2
+export CXX		:=	/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2
+
+#---------------------------------------------------------------------------------
+%.a:
+	@echo $(notdir $@)
+	@rm -f $@
+	@$(AR) -rc $@ $^
+
+#---------------------------------------------------------------------------------
+%.o: %.cpp
+	@echo $(notdir $<)
+	@$(CXX) -MMD -MP -MF $(DEPSDIR)/$*.d $(CXXFLAGS) -c $< -o $@ $(ERROR_FILTER)
+	
+#---------------------------------------------------------------------------------
+%.o: %.c
+	@echo $(notdir $<)
+	@$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(CFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+%.o: %.mm
+	@echo $(notdir $<)
+	@echo @$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
+	@$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
+
+#---------------------------------------------------------------------------------
+
+

@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0F0D3BA9-521E-44E1-8518-EFDE33AE4CCD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ve1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
+    <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
+    <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/I "../../../../../../Source/Events" 
+/I "../../../../../../Source/EventsWin32" 
+/I "../../../../../../Source/EventsSDL" 
+/I "../../../../../../Source/Utils" 
+/I "../../../../../../Source/FileUtils" 
+/I "../../../../../../Source/AmjuGL"  /I "../../../../../../Source/Network"  /I "../../../../../../Source/Thread"  /I "../../../../../../Source/Community"   
+/I "../../../../../../Source/AmjuGLOpenGL" 
+/I "../../../../../../Source/AmjuGLDX9" 
+/I "../../../../../../Source/AmjuGLDX11" 
+/I "../../../../../../Source/Mem" 
+/I "../../../../../../Source/Md2" 
+/I "../../../../../../Source/Image" 
+/I "../../../../../../Source/Geom" 
+/I "../../../../../../Source/Strings" 
+/I "../../../../../../Source/TimeUtils" 
+/I "../../../../../../Source/Game" 
+/I "../../../../../../Source/Resource" 
+/I "../../../../../../Source/Scene" 
+/I "../../../../../../Source/Obj"  
+/I "../../../../../../Source/Collision" 
+/I "../../../../../../Source/Gui" 
+/I "../../../../../../Source/Font" 
+/I "../../../../../../Source/Sound" 
+/I "../../../../../../Source/SoundSDLMixer" 
+/I "../../../../../../Source/GeomLoad" 
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"  /I "../../../../../../Source/Localise" /I "../../../../../../Source/Lua"   %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>mkdir ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S  ..\..\..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
+xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll  ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy data to build dir</Message>
+    </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/I "../../../../../../Source/Events" 
+/I "../../../../../../Source/EventsWin32" 
+/I "../../../../../../Source/EventsSDL" 
+/I "../../../../../../Source/Utils" 
+/I "../../../../../../Source/FileUtils" 
+/I "../../../../../../Source/AmjuGL"  /I "../../../../../../Source/Network"  /I "../../../../../../Source/Thread"  /I "../../../../../../Source/Community"   
+/I "../../../../../../Source/AmjuGLOpenGL" 
+/I "../../../../../../Source/AmjuGLDX9" 
+/I "../../../../../../Source/AmjuGLDX11" 
+/I "../../../../../../Source/Mem" 
+/I "../../../../../../Source/Md2" 
+/I "../../../../../../Source/Image" 
+/I "../../../../../../Source/Geom" 
+/I "../../../../../../Source/Strings" 
+/I "../../../../../../Source/TimeUtils" 
+/I "../../../../../../Source/Game" 
+/I "../../../../../../Source/Resource" 
+/I "../../../../../../Source/Scene" 
+/I "../../../../../../Source/Obj"  
+/I "../../../../../../Source/Collision" 
+/I "../../../../../../Source/Gui" 
+/I "../../../../../../Source/Font" 
+/I "../../../../../../Source/Sound" 
+/I "../../../../../../Source/SoundSDLMixer" 
+/I "../../../../../../Source/GeomLoad" 
+/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"   /I "../../../../../../Source/Localise"  /I "../../../../../../Source/Lua"   %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalOptions>/ENTRY:mainCRTStartup %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Building.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollideObjectFurniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerBuilding.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSEdit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLetterCancellation1.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSNetError.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSNewLocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSObjMesh.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopColour.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopColourWord.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSWaitForUpload.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSYesNoQuitSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ObjectUpdater.cpp" />
+    <ClCompile Include="..\..\..\..\Source\PickObject.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Player.cpp" />
+    <ClCompile Include="..\..\..\..\Source\PlayerInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Portal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Postbox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\PosUpdate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ProtoObject.cpp" />
+    <ClCompile Include="..\..\..\..\Source\QuitHandler.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqGetNewMsgs.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqLogin.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TutorialNpc.cpp" />
+    <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
+    <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Character.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Node.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Object.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1ObjectChar.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1OnlineReqManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1SceneGraph.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Version.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\Animated.h" />
+    <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Baddie.h" />
+    <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
+    <ClInclude Include="..\..\..\..\Source\Building.h" />
+    <ClInclude Include="..\..\..\..\Source\Camera.h" />
+    <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
+    <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
+    <ClInclude Include="..\..\..\..\Source\CollideObjectFurniture.h" />
+    <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Fightable.h" />
+    <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
+    <ClInclude Include="..\..\..\..\Source\Furniture.h" />
+    <ClInclude Include="..\..\..\..\Source\GameMode.h" />
+    <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
+    <ClInclude Include="..\..\..\..\Source\GSBase.h" />
+    <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
+    <ClInclude Include="..\..\..\..\Source\GSEdit.h" />
+    <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />
+    <ClInclude Include="..\..\..\..\Source\GSGui.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLetterCancellation1.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
+    <ClInclude Include="..\..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\..\Source\GSNetError.h" />
+    <ClInclude Include="..\..\..\..\Source\GSNewLocation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSObjMesh.h" />
+    <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
+    <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
+    <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopColour.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopColourWord.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />
+    <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
+    <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSWaitForUpload.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNoQuitProcess.h" />
+    <ClInclude Include="..\..\..\..\Source\GSYesNoQuitSession.h" />
+    <ClInclude Include="..\..\..\..\Source\HasCollisionMesh.h" />
+    <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
+    <ClInclude Include="..\..\..\..\Source\Kb.h" />
+    <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\LogOut.h" />
+    <ClInclude Include="..\..\..\..\Source\LurkMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
+    <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
+    <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
+    <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
+    <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
+    <ClInclude Include="..\..\..\..\Source\PickObject.h" />
+    <ClInclude Include="..\..\..\..\Source\PlatformInfo.h" />
+    <ClInclude Include="..\..\..\..\Source\Player.h" />
+    <ClInclude Include="..\..\..\..\Source\PlayerInfo.h" />
+    <ClInclude Include="..\..\..\..\Source\Portal.h" />
+    <ClInclude Include="..\..\..\..\Source\Postbox.h" />
+    <ClInclude Include="..\..\..\..\Source\PosUpdate.h" />
+    <ClInclude Include="..\..\..\..\Source\ProtoObject.h" />
+    <ClInclude Include="..\..\..\..\Source\QuitHandler.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqGetNewMsgs.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqLogin.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
+    <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
+    <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
+    <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
+    <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
+    <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
+    <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
+    <ClInclude Include="..\..\..\..\Source\Terrain.h" />
+    <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
+    <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
+    <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
+    <ClInclude Include="..\..\..\..\Source\TutorialNpc.h" />
+    <ClInclude Include="..\..\..\..\Source\UploadNewContent.h" />
+    <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
+    <ClInclude Include="..\..\..\..\Source\Useful.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Character.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Node.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Object.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1ObjectChar.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1OnlineReqManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
+    <ClInclude Include="..\..\..\..\Source\Version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
+    <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Source\main_iphone.mm" />
+    <None Include="..\..\..\..\Source\newgui.pl" />
+    <None Include="..\..\..\..\Source\newreq.pl" />
+    <None Include="..\..\..\..\Source\newstate.pl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,8 @@
+// Resource group
+// version
+1
+// resources
+font2d/arial_512_16pt.bmpa
+font2d/arial-font.font
+spheremap_bar.bmp
+

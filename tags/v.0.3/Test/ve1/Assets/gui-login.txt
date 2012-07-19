@@ -1,0 +1,56 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+4
+
+// Element type
+gui-text-edit
+// Element name
+email
+// pos (coords are -1..1)
+-0.5, 0.1
+// size
+1.0, 0.1
+// Text
+jason@amju.com
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.1
+// Text
+Please enter your email address...
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+gui-button
+login-button
+// pos (coords are -1..1)
+-0.4, -0.25
+// size
+0.8, 0.2
+gui-button-4.png
+login
+arial, 2.0 
+
+gui-button
+cancel-button
+// pos (coords are -1..1)
+-0.4, -0.55
+// size
+0.8, 0.2
+gui-button-4.png
+cancel
+arial, 2.0 
+

@@ -1,0 +1,67 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+// Element type
+gui-text-edit
+// Element name
+obj_file
+// pos (coords are -1..1)
+-0.5, 0.1
+// size
+1.0, 0.1
+// Text
+/path/to/file.obj
+// Font name, size
+arial, 1.0
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.5
+// size
+2.0, 0.3
+// Text
+Please enter path and file for scene .obj (will be file browser)
+// Font name, size
+arial, 1.0, multi, centre
+
+gui-text
+error
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.1
+// Text
+(error text here)
+// Font name, size
+arial, 1.0, centre
+
+gui-button
+ok-button
+// pos (coords are -1..1)
+-0.4, -0.25
+// size
+0.8, 0.2
+gui-button-4.png
+OK
+arial, 2.0 
+
+gui-button
+cancel-button
+// pos (coords are -1..1)
+-0.4, -0.55
+// size
+0.8, 0.2
+gui-button-4.png
+cancel
+arial, 2.0 
+

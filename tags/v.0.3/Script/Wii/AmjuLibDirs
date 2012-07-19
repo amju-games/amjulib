@@ -1,0 +1,35 @@
+
+AMJU_LIB_DIRS := \
+  $(AMJU)/AmjuGL \
+  $(AMJU)/AmjuGLGCube \
+  $(AMJU)/Clip \
+  $(AMJU)/Collision \
+  $(AMJU)/Community \
+  $(AMJU)/Events \
+  $(AMJU)/EventsWii \
+  $(AMJU)/FileUtils \
+  $(AMJU)/Font \
+  $(AMJU)/Game \
+  $(AMJU)/Geom/Mgc \
+  $(AMJU)/Geom \
+  $(AMJU)/GeomDraw \
+  $(AMJU)/GeomLoad \
+  $(AMJU)/Gui \
+  $(AMJU)/Image \
+  $(AMJU)/Image/Png \
+  $(AMJU)/Localise \
+  $(AMJU)/Main \
+  $(AMJU)/Md2 \
+  $(AMJU)/Mem \
+  $(AMJU)/Network \
+  $(AMJU)/Obj \
+  $(AMJU)/Resource \
+  $(AMJU)/Scene \
+  $(AMJU)/Sound \
+  $(AMJU)/SoundWii \
+  $(AMJU)/Strings \
+  $(AMJU)/Thread \
+  $(AMJU)/TimeUtils \
+  $(AMJU)/Utils \
+  $(AMJU)/Utils/Zlib
+  

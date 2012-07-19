@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugAssetTest|Win32">
+      <Configuration>DebugAssetTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseAssetTest|Win32">
+      <Configuration>ReleaseAssetTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{93920D98-6C4D-43A6-8579-AA7200EC11D0}</ProjectGuid>
+    <RootNamespace>AmjuLibMsvc</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" 
+/I "../../../Source/Utils/Zlib"
+/I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene" /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community" /I "../../../Source/Image/Png"   /I "../../../Source/Lua"    /I "../../../Source/Geom/Mgc"   /I "../../../Source/Clip" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image"  /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;NO_COMPILED_ASSETS;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/AmjuGL" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image"  /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;NO_COMPILED_ASSETS;%(PreprocessorDefinitions); AMJU_USE_SDL</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Bone.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\BoneWeight.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\IndexedMesh.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp" />
+    <ClCompile Include="..\..\..\Source\Anim\Skin.cpp" />
+    <ClCompile Include="..\..\..\Source\Collision\BruteForce.cpp" />
+    <ClCompile Include="..\..\..\Source\Collision\SAP.cpp" />
+    <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp" />
+    <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp" />
+    <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\Endian.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\File.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImpl.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplGlue.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplMem.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplStd.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\FileSize.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\GlueFile.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
+    <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lbaselib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldblib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldump.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\linit.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\liolib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmathlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loadlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loslib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstrlib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltablib.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\luac.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.c" />
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\print.c" />
+    <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\HttpReq.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\OnlineReqManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\ServerSocket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\Socket.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\SocketService.cpp" />
+    <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp" />
+    <ClCompile Include="..\..\..\Source\Sound\TextToSpeech.cpp" />
+    <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp" />
+    <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Strings\StringUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\AmjuGL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\Colour.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\Screen.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\WinScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\GLShader.cpp" />
+    <ClCompile Include="..\..\..\Source\Events\EventListener.cpp" />
+    <ClCompile Include="..\..\..\Source\Events\EventPoller.cpp" />
+    <ClCompile Include="..\..\..\Source\Events\EventTypes.cpp" />
+    <ClCompile Include="..\..\..\Source\Localise\Localise.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\Mutex.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\Thread.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\ThreadGate.cpp" />
+    <ClCompile Include="..\..\..\Source\Thread\ThreadManager.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\AmjuTime.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Sign.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Unproject.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Variable.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlParser2.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\adler32.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\compress.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\crc32.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\deflate.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\example.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\gzio.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\infback.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inffast.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inflate.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\minigzip.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\trees.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\zutil.c" />
+    <ClCompile Include="..\..\..\Source\Mem\AmjuMem.cpp" />
+    <ClCompile Include="..\..\..\Source\Mem\CallStack.cpp" />
+    <ClCompile Include="..\..\..\Source\Md2\Md2Model.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\AABB.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Capsule.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Frustum.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Geometry.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Matrix.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\OBB2.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\OBB3.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Plane.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Rect.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Sphere.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\Tri.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\Bitmap.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\Texture.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\TextureUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\Png\example.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\LoadPng.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\Png\png.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngerror.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pnggccrd.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngget.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngmem.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngpread.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngread.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrio.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrtran.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrutil.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngset.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngtest.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngtrans.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngvcrd.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwio.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwrite.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwtran.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwutil.c" />
+    <ClCompile Include="..\..\..\Source\Image\Png\SavePng.cpp" />
+    <ClCompile Include="..\..\..\Source\TimeUtils\Timer.cpp" />
+    <ClCompile Include="..\..\..\Source\Game\Game.cpp" />
+    <ClCompile Include="..\..\..\Source\Game\GameObject.cpp" />
+    <ClCompile Include="..\..\..\Source\Game\GameState.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\Billboard.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\SceneGraph.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\SceneMesh.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\SceneNode.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\SceneNodeCamera.cpp" />
+    <ClCompile Include="..\..\..\Source\Resource\AlphaBmpLoader.cpp" />
+    <ClCompile Include="..\..\..\Source\Resource\BinaryResource.cpp" />
+    <ClCompile Include="..\..\..\Source\Resource\ResourceManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Obj\ObjMesh.cpp" />
+    <ClCompile Include="..\..\..\Source\Obj\ObjUsefulFunctions.cpp" />
+    <ClCompile Include="..\..\..\Source\Clip\Gpc.c" />
+    <ClCompile Include="..\..\..\Source\Collision\CollisionManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Collision\CollisionMesh.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiButton.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiCommandHandler.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiComposite.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiElement.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiFactory.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiImage.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiMenu.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiText.cpp" />
+    <ClCompile Include="..\..\..\Source\Font\Font.cpp" />
+    <ClCompile Include="..\..\..\Source\Font\TextureSequence.cpp" />
+    <ClCompile Include="..\..\..\Source\Sound\SoundManager.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadAABB.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadMatrix.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadVec2.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadVec3.cpp" />
+    <ClCompile Include="..\..\..\Source\SoundSDLMixer\SoundSDLMixer.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawAABB.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawOBB2.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawOBB3.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawRect.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawSphere.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\CreateWindowDX9.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\DX9Shader.cpp" />
+    <ClCompile Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.cpp" />
+    <ClCompile Include="..\..\..\Source\SoundBass\BassSoundPlayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
+    <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />
+    <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Bone.h" />
+    <ClInclude Include="..\..\..\Source\Anim\BoneWeight.h" />
+    <ClInclude Include="..\..\..\Source\Anim\IndexedMesh.h" />
+    <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Skeleton.h" />
+    <ClInclude Include="..\..\..\Source\Anim\Skin.h" />
+    <ClInclude Include="..\..\..\Source\Collision\BruteForce.h" />
+    <ClInclude Include="..\..\..\Source\Collision\SAP.h" />
+    <ClInclude Include="..\..\..\Source\Community\DownloadReq.h" />
+    <ClInclude Include="..\..\..\Source\Community\Screenshot.h" />
+    <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\ConfigFile.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\Directory.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\Endian.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\File.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImpl.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplGlue.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplMem.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplStd.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\FileSize.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\GlueFile.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\GlueFileMem.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
+    <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcLine3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcMath.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRay3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRTLib.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSegment3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSphere.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
+    <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
+    <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiRect.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
+    <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llimits.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\luaconf.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lualib.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.h" />
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.h" />
+    <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
+    <ClInclude Include="..\..\..\Source\Main\main.h" />
+    <ClInclude Include="..\..\..\Source\Main\nonglutmain.h" />
+    <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
+    <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
+    <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />
+    <ClInclude Include="..\..\..\Source\Network\HttpReq.h" />
+    <ClInclude Include="..\..\..\Source\Network\OnlineReqManager.h" />
+    <ClInclude Include="..\..\..\Source\Network\ServerSocket.h" />
+    <ClInclude Include="..\..\..\Source\Network\Socket.h" />
+    <ClInclude Include="..\..\..\Source\Network\SocketService.h" />
+    <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
+    <ClInclude Include="..\..\..\Source\Scene\Shadow.h" />
+    <ClInclude Include="..\..\..\Source\Scene\TextMaker.h" />
+    <ClInclude Include="..\..\..\Source\Sound\TextToSpeech.h" />
+    <ClInclude Include="..\..\..\Source\Strings\ReportError.h" />
+    <ClInclude Include="..\..\..\Source\Strings\SafeUtils.h" />
+    <ClInclude Include="..\..\..\Source\Strings\StringUtils.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL-Impl.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL-Null.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Colour.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Screen.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Shader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShaderNull.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\WinScreen.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\GLShader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\OpenGL.h" />
+    <ClInclude Include="..\..\..\Source\Events\EventListener.h" />
+    <ClInclude Include="..\..\..\Source\Events\EventPoller.h" />
+    <ClInclude Include="..\..\..\Source\Events\EventTypes.h" />
+    <ClInclude Include="..\..\..\Source\Localise\Localise.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Locker.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Mutex.h" />
+    <ClInclude Include="..\..\..\Source\Thread\Thread.h" />
+    <ClInclude Include="..\..\..\Source\Thread\ThreadGate.h" />
+    <ClInclude Include="..\..\..\Source\Thread\ThreadManager.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\AmjuTime.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h" />
+    <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h" />
+    <ClInclude Include="..\..\..\Source\Utils\AmjuSleep.h" />
+    <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Common.h" />
+    <ClInclude Include="..\..\..\Source\Utils\DegRad.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Factory.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Launcher.h" />
+    <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Pause.h" />
+    <ClInclude Include="..\..\..\Source\Utils\RCPtr.h" />
+    <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Sign.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Singleton.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Unproject.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Variable.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlParser2.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlUtils.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\crc32.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\deflate.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inffast.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inflate.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\trees.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zconf.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zconf.in.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zlib.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zutil.h" />
+    <ClInclude Include="..\..\..\Source\Mem\AmjuFinal.h" />
+    <ClInclude Include="..\..\..\Source\Mem\AmjuFirst.h" />
+    <ClInclude Include="..\..\..\Source\Mem\AmjuMem.h" />
+    <ClInclude Include="..\..\..\Source\Mem\CallStack.h" />
+    <ClInclude Include="..\..\..\Source\Mem\MemCheck.h" />
+    <ClInclude Include="..\..\..\Source\Md2\Md2Model.h" />
+    <ClInclude Include="..\..\..\Source\Md2\Md2Norms.h" />
+    <ClInclude Include="..\..\..\Source\Geom\AABB.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Capsule.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Frustum.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Geometry.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Line2.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Line3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Matrix.h" />
+    <ClInclude Include="..\..\..\Source\Geom\OBB2.h" />
+    <ClInclude Include="..\..\..\Source\Geom\OBB3.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Plane.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Quaternion.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Rect.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Sphere.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Tri.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Vec2.h" />
+    <ClInclude Include="..\..\..\Source\Geom\Vec3.h" />
+    <ClInclude Include="..\..\..\Source\Image\Bitmap.h" />
+    <ClInclude Include="..\..\..\Source\Image\Texture.h" />
+    <ClInclude Include="..\..\..\Source\Image\TextureUtils.h" />
+    <ClInclude Include="..\..\..\Source\Image\Png\config.h" />
+    <ClInclude Include="..\..\..\Source\Image\Png\LoadPng.h" />
+    <ClInclude Include="..\..\..\Source\Image\Png\png.h" />
+    <ClInclude Include="..\..\..\Source\Image\Png\pngconf.h" />
+    <ClInclude Include="..\..\..\Source\Image\Png\SavePng.h" />
+    <ClInclude Include="..\..\..\Source\TimeUtils\Timer.h" />
+    <ClInclude Include="..\..\..\Source\Game\Game.h" />
+    <ClInclude Include="..\..\..\Source\Game\GameObject.h" />
+    <ClInclude Include="..\..\..\Source\Game\GameObjectFactory.h" />
+    <ClInclude Include="..\..\..\Source\Game\GameState.h" />
+    <ClInclude Include="..\..\..\Source\Scene\Billboard.h" />
+    <ClInclude Include="..\..\..\Source\Scene\SceneGraph.h" />
+    <ClInclude Include="..\..\..\Source\Scene\SceneMesh.h" />
+    <ClInclude Include="..\..\..\Source\Scene\SceneNode.h" />
+    <ClInclude Include="..\..\..\Source\Scene\SceneNodeCamera.h" />
+    <ClInclude Include="..\..\..\Source\Resource\AlphaBmpLoader.h" />
+    <ClInclude Include="..\..\..\Source\Resource\BinaryResource.h" />
+    <ClInclude Include="..\..\..\Source\Resource\ResourceManager.h" />
+    <ClInclude Include="..\..\..\Source\Obj\ObjMesh.h" />
+    <ClInclude Include="..\..\..\Source\Obj\ObjUsefulFunctions.h" />
+    <ClInclude Include="..\..\..\Source\Clip\Gpc.h" />
+    <ClInclude Include="..\..\..\Source\Collision\CollisionManager.h" />
+    <ClInclude Include="..\..\..\Source\Collision\CollisionMesh.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiButton.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiCommandHandler.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiComposite.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiElement.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiFactory.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiImage.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiMenu.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiText.h" />
+    <ClInclude Include="..\..\..\Source\Font\Font.h" />
+    <ClInclude Include="..\..\..\Source\Font\TextureSequence.h" />
+    <ClInclude Include="..\..\..\Source\Sound\SoundManager.h" />
+    <ClInclude Include="..\..\..\Source\Sound\SoundPlayerImpl.h" />
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadAABB.h" />
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadMatrix.h" />
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadVec2.h" />
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadVec3.h" />
+    <ClInclude Include="..\..\..\Source\SoundSDLMixer\SoundSDLMixer.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawAABB.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawOBB2.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawOBB3.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawRect.h" />
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawSphere.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLDX9\DX9Shader.h" />
+    <ClInclude Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.h" />
+    <ClInclude Include="..\..\..\Source\SoundBass\BassSoundPlayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\Anim\anim-notes.txt" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcLine3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcMath.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcRay3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSegment3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSphere.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector2.inl" />
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

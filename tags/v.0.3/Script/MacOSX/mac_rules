@@ -1,0 +1,16 @@
+
+#MACHDEP =  -arch i386 -DMACOSX -DXP_MACOSX -D__i386__ 
+# This is now set as part of the env
+
+# __i386__ for intel mac
+# XP_MACOSX for libpng
+# AMJU_USE_GLUT for window creation etc
+
+include $(AMJULIB_MAC_SCRIPT_PATH)/base_rules
+
+
+# j.c.
+# Now in base_rules
+#BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
+#BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
+

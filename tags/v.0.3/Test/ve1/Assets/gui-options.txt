@@ -1,0 +1,81 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Options
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.4, -0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+back
+// Font name, size
+arial, 2.0 
+
+gui-button
+fullscreen-button
+-0.4,0.5
+0.8,0.2
+gui-button-4.png
+fullscreen
+arial, 2.0
+
+gui-button
+sound-button
+-0.4,0.3
+0.8,0.2
+gui-button-4.png
+sound...
+arial, 2.0
+
+gui-button
+keyboard-button
+-0.4,0.1
+0.8,0.2
+gui-button-4.png
+keyboard...
+arial, 2.0
+
+
+
+
+// element type
+gui-button
+// Element name
+avatar-button
+// pos (coords are -1..1)
+-0.4, 0.3 
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+edit avatar...
+// Font name, size
+arial, 1.0 
+

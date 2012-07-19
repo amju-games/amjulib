@@ -1,0 +1,63 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+4
+
+
+gui-button
+start-button
+-0.4, 0.3
+0.8, 0.2
+gui-button-4.png
+start game
+arial, 1.4
+
+gui-button
+options-button
+-0.4, 0
+0.8, 0.2
+gui-button-4.png
+options
+arial, 1.4 
+
+
+gui-button
+cancel-button
+-0.2, -0.6
+0.4, 0.1
+gui-button-4.png
+cancel
+arial, 1.0 
+
+// TODO normally hidden
+gui-button
+admin-button
+-0.2, -0.75
+0.4, 0.1
+gui-button-4.png
+admin...
+arial, 1.0 
+
+
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Please choose game type...
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// Single-player button
+

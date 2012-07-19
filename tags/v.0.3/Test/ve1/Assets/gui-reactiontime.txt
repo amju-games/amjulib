@@ -1,0 +1,95 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.9
+// size
+2.0, 0.1
+// Text
+Reaction time test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// Element type
+gui-text
+// Element name
+timer
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1 
+// Text
+Time
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+// Element type
+gui-text
+// Element name
+word
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.4
+// Text
+ready...
+// Font name, size
+arial, 4.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+// Element name
+button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+click me!
+// Font name, size
+arial, 1.5 
+
+gui-button
+// Element name
+ok-button
+// pos (coords are -1..1)
+-0.2, -0.75
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 1.0
+
+
+
+// Best time, avg etc ?
+// Element type
+gui-text
+// Element name
+score
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.1 
+// Text
+Score
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+

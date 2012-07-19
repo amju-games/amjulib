@@ -1,0 +1,1571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="EventsWin32">
+      <UniqueIdentifier>{67c049f9-22e7-48ca-ae29-ac8020a61290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileUtils">
+      <UniqueIdentifier>{d57b5727-327b-4c3b-82d6-0220e38a72f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{c869ef24-295a-4b22-98f5-8360c5c72f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGL">
+      <UniqueIdentifier>{b8359f42-37ea-40c7-9c98-823571099111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGLOpenGL">
+      <UniqueIdentifier>{78669136-af81-4ce8-85cd-399d95ccce78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{7b5665a8-2893-452b-9669-fd9b5e1871b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Localise">
+      <UniqueIdentifier>{47e55a0d-b228-4c16-830b-0af69b0be221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{90c102e3-239c-487a-9887-ca1afd5ef209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Zlib">
+      <UniqueIdentifier>{97c65300-99d2-4fc5-bd5a-4e6f0ea389d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mem">
+      <UniqueIdentifier>{73cd7d4a-3a87-4474-ace9-c4631a3742bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Md2">
+      <UniqueIdentifier>{8f2b9402-c5ee-4dca-90d2-0bb6bc7d43c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geom">
+      <UniqueIdentifier>{b7d070c5-7023-4133-9f39-b58aab6d35fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{063f1e26-4301-488e-a037-d93087e8d2d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image\Png">
+      <UniqueIdentifier>{279cb83b-c8a4-4d2f-b77f-7819eb6d0f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeUtils">
+      <UniqueIdentifier>{3f627440-1b2a-4d25-a571-bb44f29ff0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{0f768a9d-4731-4959-9aa5-76729f526bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{dcd4c228-17d2-4fdb-ac61-5d8abc85477b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{50a24c83-eb8a-453b-82a9-f6fa232287c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj">
+      <UniqueIdentifier>{c0d5247d-1a8a-4fd5-a050-b5515cc01451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clip">
+      <UniqueIdentifier>{3b406653-270a-4b8f-a4e2-b00f8f02bd0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{3a8deeb7-232c-496b-9bab-6bb1b029cb45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{cd94da5a-35d4-49a4-90d3-344554f7058c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{75c4527d-165a-49fe-a1f9-450dfe8e1b9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{68c024a2-f773-4a68-88fc-0d1a44d40f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeomLoad">
+      <UniqueIdentifier>{d5d4dfa2-2abf-4660-9050-025bfa35b2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SoundSDLMixer">
+      <UniqueIdentifier>{45f3e441-6acf-4041-bbd3-dee5e76d84a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeomDraw">
+      <UniqueIdentifier>{4dc25113-8738-49a5-9a3b-a61c8ae3e8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGLDX9">
+      <UniqueIdentifier>{5da3cad9-508e-4581-88a9-d9410f21c7f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventsSDL">
+      <UniqueIdentifier>{1f414350-7957-4b81-9e34-81d271584ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SoundBass">
+      <UniqueIdentifier>{a3ecd12a-3812-4d41-8895-5cd80246da7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Anim">
+      <UniqueIdentifier>{4a72438f-8e76-433d-99b1-0e2feef8f496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{60693a78-3ef5-478a-a21a-19c30b7f93b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Community">
+      <UniqueIdentifier>{61fd7171-097d-4966-858f-be0e3e7d29b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{05d3a416-a62f-47f8-bb04-71ee236399d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGLDX11">
+      <UniqueIdentifier>{9642f302-3c23-4bd4-b596-75151880585f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geom\Mgc">
+      <UniqueIdentifier>{7bd90580-ff3b-49b6-9072-5090981af2d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Xml">
+      <UniqueIdentifier>{e71a5a40-f948-4867-8609-04c9b442503e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4c00bbb9-066c-4927-9363-6e749a98ea90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{871de3b8-52af-456b-9ab0-6243f419c13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua\LuaLib-5.1.4">
+      <UniqueIdentifier>{2eb26d3b-b5dc-4858-96ea-3ba6bed61d65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
+      <Filter>EventsWin32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\Endian.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\File.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImpl.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplGlue.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplMem.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\FileImplStd.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\FileSize.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\GlueFile.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\ReportError.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\SafeUtils.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\StringUtils.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\AmjuGL.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\Colour.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\Screen.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\WinScreen.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\GLShader.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Events\EventListener.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Events\EventPoller.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Events\EventTypes.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Localise\Localise.cpp">
+      <Filter>Localise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Pause.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Sign.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Variable.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\adler32.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\compress.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\crc32.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\deflate.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\example.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\gzio.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\infback.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inffast.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inflate.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\inftrees.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\minigzip.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\trees.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\uncompr.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Zlib\zutil.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Mem\AmjuMem.cpp">
+      <Filter>Mem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Mem\CallStack.cpp">
+      <Filter>Mem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Md2\Md2Model.cpp">
+      <Filter>Md2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\AABB.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Capsule.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Frustum.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Geometry.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Matrix.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\OBB2.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\OBB3.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Plane.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Quaternion.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Rect.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Sphere.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Tri.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Bitmap.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Texture.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\TextureUtils.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\example.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\LoadPng.cpp">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\png.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngerror.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pnggccrd.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngget.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngmem.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngpread.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngread.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrio.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrtran.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngrutil.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngset.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngtest.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngtrans.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngvcrd.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwio.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwrite.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwtran.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\pngwutil.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\Png\SavePng.cpp">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\Timer.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Game\GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Game\GameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\Billboard.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\SceneGraph.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\SceneMesh.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\SceneNode.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\SceneNodeCamera.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Resource\AlphaBmpLoader.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Resource\BinaryResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Resource\ResourceManager.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Obj\ObjMesh.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Obj\ObjUsefulFunctions.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Clip\Gpc.c">
+      <Filter>Clip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\CollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\CollisionMesh.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiButton.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiCommandHandler.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiComposite.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiElement.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiFactory.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiImage.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiMenu.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiText.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Font\Font.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Font\TextureSequence.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Sound\SoundManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadAABB.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadMatrix.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadVec2.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadVec3.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\SoundSDLMixer\SoundSDLMixer.cpp">
+      <Filter>SoundSDLMixer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawAABB.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawOBB2.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawOBB3.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawRect.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\DrawSphere.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.cpp">
+      <Filter>AmjuGLDX9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\CreateWindowDX9.cpp">
+      <Filter>AmjuGLDX9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX9\DX9Shader.cpp">
+      <Filter>AmjuGLDX9</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.cpp">
+      <Filter>EventsSDL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\SoundBass\BassSoundPlayer.cpp">
+      <Filter>SoundBass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Line3.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Anim.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\AnimPlayer.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Bone.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\BoneWeight.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\IndexedMesh.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\KeyFrame.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Skeleton.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Anim\Skin.cpp">
+      <Filter>Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\HttpReq.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\OnlineReqManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\ServerSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\Socket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\SocketService.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Community\Screenshot.cpp">
+      <Filter>Community</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\Mutex.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\Thread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\ThreadGate.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Thread\ThreadManager.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\SAP.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp">
+      <Filter>AmjuGLDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp">
+      <Filter>AmjuGLDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp">
+      <Filter>Geom\Mgc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\AmjuTime.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Community\DownloadReq.cpp">
+      <Filter>Community</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlParser2.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Xml\XmlUtils.cpp">
+      <Filter>Utils\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Unproject.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collision\BruteForce.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Sound\TextToSpeech.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lbaselib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldblib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldump.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\linit.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\liolib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmathlib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loadlib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\loslib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstrlib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltablib.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\luac.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\print.c">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
+      <Filter>EventsWin32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\BinaryData.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\CsvTokeniser.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\Directory.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\Endian.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\File.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImpl.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplGlue.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplMem.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\FileImplStd.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\FileSize.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\GlueFile.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\GlueFileMem.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\ReportError.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\SafeUtils.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\StringUtils.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL-Impl.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL-Null.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGL.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\AmjuGLWindowInfo.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Colour.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Screen.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Shader.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShaderNull.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\WinScreen.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\GLShader.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\OpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Events\EventListener.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Events\EventPoller.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Events\EventTypes.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Localise\Localise.h">
+      <Filter>Localise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Common.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\DegRad.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Factory.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Pause.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\RCPtr.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Sign.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Variable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\crc32.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\deflate.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inffast.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inffixed.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inflate.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\inftrees.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\trees.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zconf.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zconf.in.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zlib.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Zlib\zutil.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Mem\AmjuFinal.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Mem\AmjuFirst.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Mem\AmjuMem.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Mem\CallStack.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Mem\MemCheck.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Md2\Md2Model.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Md2\Md2Norms.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\AABB.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Capsule.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Frustum.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Geometry.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Line2.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Line3.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Matrix.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\OBB2.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\OBB3.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Plane.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Quaternion.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Rect.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Sphere.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Tri.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Vec2.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Vec3.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Bitmap.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Texture.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\TextureUtils.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Png\config.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Png\LoadPng.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Png\png.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Png\pngconf.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\Png\SavePng.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\Timer.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Game\GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Game\GameObjectFactory.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Game\GameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\Billboard.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\SceneGraph.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\SceneMesh.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\SceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\SceneNodeCamera.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Resource\AlphaBmpLoader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Resource\BinaryResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Resource\ResourceManager.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Obj\ObjMesh.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Obj\ObjUsefulFunctions.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Clip\Gpc.h">
+      <Filter>Clip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\CollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\CollisionMesh.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiButton.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiCommandHandler.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiComposite.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiElement.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiFactory.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiImage.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiMenu.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiText.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Font\Font.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Font\TextureSequence.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sound\SoundManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sound\SoundPlayerImpl.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadAABB.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadMatrix.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadVec2.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadVec3.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\SoundSDLMixer\SoundSDLMixer.h">
+      <Filter>SoundSDLMixer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawAABB.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawOBB2.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawOBB3.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawRect.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\DrawSphere.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX9\AmjuGL-DX9.h">
+      <Filter>AmjuGLDX9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX9\DX9Shader.h">
+      <Filter>AmjuGLDX9</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.h">
+      <Filter>EventsSDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\SoundBass\BassSoundPlayer.h">
+      <Filter>SoundBass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Skin.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Anim.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\AnimManager.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\AnimPlayer.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Bone.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\BoneWeight.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\IndexedMesh.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\KeyFrame.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Anim\Skeleton.h">
+      <Filter>Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\ClientSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HostInfo.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HttpClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\HttpReq.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\OnlineReqManager.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\ServerSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\Socket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\SocketService.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Network\UrlUtils.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Community\Screenshot.h">
+      <Filter>Community</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Locker.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Mutex.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\Thread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\ThreadGate.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Thread\ThreadManager.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\SAP.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h">
+      <Filter>AmjuGLDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h">
+      <Filter>AmjuGLDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinLin.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DLinTri.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecLin.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcDist3DVecTri.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DLinSphr.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcIntr3DTriSphr.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcLine3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcMath.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRay3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcRTLib.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSegment3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcSphere.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h">
+      <Filter>Geom\Mgc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\AmjuTime.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Community\DownloadReq.h">
+      <Filter>Community</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlNodeInterface.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlParser2.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Xml\XmlUtils.h">
+      <Filter>Utils\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Unproject.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\Cursor.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\CursorManager.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\TextMaker.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\ConfigFile.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\Shadow.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuSleep.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Launcher.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\glutmain.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Main\nonglutmain.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collision\BruteForce.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Sound\TextToSpeech.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lapi.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lauxlib.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lcode.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldebug.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ldo.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lfunc.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lgc.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llex.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\llimits.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lmem.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lobject.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lopcodes.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lparser.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstate.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lstring.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltable.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\ltm.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lua.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\luaconf.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lualib.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lundump.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.h">
+      <Filter>Lua\LuaLib-5.1.4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiRect.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Source\Anim\anim-notes.txt">
+      <Filter>Anim</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcLine3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcMath.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcRay3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSegment3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcSphere.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector2.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl">
+      <Filter>Geom\Mgc</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,78 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.9
+// size
+2.0, 0.1
+// Text
+Letter cancellation test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// Element type
+gui-text
+// Element name
+timer
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1 
+// Text
+Time remaining: 3:00
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+// Element type
+gui-text
+// Element name
+score
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.1 
+// Text
+Score
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+gui-button
+// Element name
+done-button
+// pos (coords are -1..1)
+-0.5, -0.8
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+done!
+// Font name, size
+arial, 1.0 
+
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+0.1, -0.8
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+quit
+// Font name, size
+arial, 1.0 
+

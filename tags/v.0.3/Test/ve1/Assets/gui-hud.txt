@@ -1,0 +1,93 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+2
+
+// Main HUD buttons
+
+// element type
+gui-button
+// Element name
+pause-button
+// pos (coords are -1..1)
+-0.9, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+pause
+// Font name, size
+arial, 1.0 
+
+// Quit button
+gui-button
+quit-button
+// pos (coords are -1..1)
+// Hidden
+0.55, 1.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+quit
+// Font name, size
+arial, 1.0 
+
+
+// Heart image
+gui-image
+heart-img
+0.8, 1.0
+0.2, 0.25
+heart.png
+
+// Num hearts text
+gui-text
+heart-num
+0.7, 0.9
+0.3, 0.1
+// Text
+0
+cheri, 1.0
+
+
+
+
+
+// element type
+gui-button
+// Element name
+build-button
+// pos (coords are -1..1)
+-0.45, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+build...
+// Font name, size
+arial, 1.0 
+
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, -0.8
+// size
+2.0, 0.2
+// Text
+This is some text
+// Font name, size
+arial, 1.0 
+
