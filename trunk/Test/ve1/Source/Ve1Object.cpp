@@ -12,6 +12,7 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_isSelected = false;
   m_ignorePortalId = -1;
   m_isPickable = true;
+  m_hidden = false;
 }
 
 AABB* Ve1Object::GetAABB()
@@ -47,6 +48,11 @@ void Ve1Object::CreateEditNode()
 void Ve1Object::Update()
 {
   m_oldPos = m_pos;
+
+  if (m_sceneNode)
+  {
+    m_sceneNode->SetVisible(!m_hidden);
+  }
 
   GameObject::Update();
 }
@@ -141,6 +147,11 @@ void Ve1Object::MoveTo(const Vec3f& pos)
 void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
 {
   m_valmap[key] = val; 
+
+  if (key == "hidden")
+  {
+    m_hidden = (val == "y");
+  }
 }
 
 bool Ve1Object::Exists(const std::string& key) const
