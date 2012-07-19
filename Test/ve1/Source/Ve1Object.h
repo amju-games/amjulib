@@ -70,7 +70,7 @@ public:
   // Create a visible scene node for Edit mode
   void CreateEditNode();
  
-  AABB* GetAABB();
+  virtual AABB* GetAABB(); // overriding GameObject's impl
 
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
@@ -92,6 +92,8 @@ protected:
   RCPtr<Shadow> m_shadow;
 
   AABB m_aabb; 
+
+  bool m_hidden; // if true, set scene node invisible
 };
 
 // Keep track of keys used to set object properties
