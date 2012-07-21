@@ -2,6 +2,7 @@
 #include <Game.h>
 #include <DegRad.h>
 #include "Camera.h"
+#include "Portal.h"
 
 //#define CAM_DEBUG
 
@@ -10,8 +11,8 @@ namespace Amju
 static const float CAM_Y = 100.0f;
 static const float CAM_Z = 150.0f;
 static float zDist = CAM_Z;
-static float yRot = 0;
-static float yRot2 = 0;
+static float yRot = 0; // rotation so we can see in doorways, etc.
+static float yRot2 = 0; // user drag mouse - intended for edit mode
 
 static bool leftDrag = false;
 static bool rightDrag = false;
@@ -22,9 +23,22 @@ static Vec3f posNoTarget;
 
 Camera::Camera() : m_target(0)
 {
-  // Load settings
+  Reset();
 
   m_control = new CameraControl;
+}
+
+void Camera::Reset()
+{
+  // TODO Load settings, make configurable from server
+  
+  zDist = CAM_Z;
+  yRot = 0;
+  yRot2 = 0;
+  leftDrag = false;
+  rightDrag = false;
+  midDrag = false;
+  camKey = false;
 }
 
 void Camera::Update()
@@ -36,19 +50,39 @@ void Camera::Update()
 
     // TODO Get closest portal
     static PGameObject lastportal = 0;
+    // We want to get the closest portal to the target, even if they have never intersected it.
     int pid = m_target->GetIgnorePortalId();
     if (pid > -1)
     {
       lastportal = TheGame::Instance()->GetGameObject(pid);
     }
+    else
+    {
+      // Look for portals in this room, find closest.
+      // TODO Optimise
+      // just check periodically ?
+      Portals portals = GetPortals();
+      float bestSqDist = 999999.9f;
+      for (Portals::iterator it = portals.begin(); it != portals.end(); ++it)
+      {
+        Portal* p = *it;
+        float sqDist = (p->GetPos() - pos).SqLen();
+        if (sqDist < bestSqDist)
+        {
+          bestSqDist = sqDist;
+          lastportal = p;
+        }
+      } 
+    }
     
     if (lastportal)
     {
       float pdist = (pos - lastportal->GetPos()).SqLen(); // sq dist from portal to player
-      static const float MAX_DIST = 5000.0f; // TODO TEMP TEST
-      if (pdist < MAX_DIST) 
+      static const float MAX_DIST = 500.0f; // TODO CONFIG
+      static const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
+      if (pdist < MAX_SQ_DIST) 
       {
-        yRot = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_DIST); 
+        yRot = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_SQ_DIST); 
 
 //std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
       }

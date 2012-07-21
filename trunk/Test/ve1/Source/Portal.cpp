@@ -1,5 +1,6 @@
-#include "Portal.h"
 #include <GameObjectFactory.h>
+#include <Game.h>
+#include "Portal.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "ObjectManager.h"
@@ -15,6 +16,33 @@ static const char* DEST_KEY = "dest_portal_id";
 
 static const float XSIZE = 20.0f; // TODO CONFIG
 static const float YSIZE = 40.0f;
+
+static Portals portals;
+Portals& GetPortals()
+{
+  // Repop when we enter a new location
+  static int lastLoc = -1;
+  int lpl = GetLocalPlayerLocation();
+
+  if (lastLoc != lpl)
+  {
+    lastLoc = lpl;
+  
+    portals.clear();
+    GameObjects* gos = TheGame::Instance()->GetGameObjects();
+    for (GameObjects::iterator it = gos->begin(); it != gos->end(); ++it)
+    {
+      GameObject* g = it->second;
+      Portal* p = dynamic_cast<Portal*>(g);
+      if (p)
+      {
+        portals.insert(p);
+      }
+    }
+  }
+
+  return portals;
+}
 
 GameObject* CreatePortal()
 {

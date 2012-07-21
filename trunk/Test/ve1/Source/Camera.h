@@ -27,6 +27,8 @@ public:
   void SetTarget(Ve1Object* g) { m_target = g; }
   virtual void Update();
 
+  void Reset();
+
 private:
   Ve1Object* m_target;
   RCPtr<CameraControl> m_control;
