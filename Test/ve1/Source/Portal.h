@@ -27,6 +27,11 @@ public:
 private:
   bool m_isOpen;
 };
+
+// Keep set of portals in current room, for Camera to search.
+typedef std::set<RCPtr<Portal> > Portals;
+
+Portals& GetPortals();
 }
 
 #endif

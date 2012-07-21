@@ -9,6 +9,8 @@
 #include "GameMode.h"
 #include "LocalPlayer.h"
 #include "GSPaused.h"
+#include "Ve1SceneGraph.h"
+#include "Camera.h"
 
 namespace Amju
 {
@@ -40,6 +42,9 @@ void GSWaitForNewLocation::Update()
     }
     else
     {
+      Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
+      cam->Reset();
+
       TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
     }
   }
