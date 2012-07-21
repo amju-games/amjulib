@@ -54,7 +54,7 @@ sub add_research_element($$)
   {
     # No previous sessions, this is the first.
     print "First research session!\n";
-    print "<is_research_session>1</is_research_session>\n";
+    print "<is_research_session>0</is_research_session>\n";
     print "<session_num>1</session_num>\n"; # 1-based
     print "<mode>0</mode>\n"; # No game, set baseline
     print "<cog_test>TODO</cog_test>\n";
@@ -177,6 +177,16 @@ print "Your new session ID: $session_id\n";
       
     notifyProwl("BAD login", "Bad email: $email");
   }
+
+  # Mark any inactive players as logged out
+  # TODO Here inactive means no change in position for > 1 hour
+  $sql = "update objectstate set `val`='n' where `key`='loggedin' and id in (select distinct a.obj_id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 60 * 60 )";
+  update($sql);
+
+  # Make players drop any carried objects if they are inactive (less time, because hogging items is bad)
+  $sql = "update objectstate set val='0' where `key`='pickup' and val in (select distinct a.obj_id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 60 * 5 )";
+  update($sql);
+
 }
 
 
