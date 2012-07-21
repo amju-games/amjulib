@@ -58,7 +58,10 @@ void GSMain::SetNumPlayersOnline(int n)
 {
   m_numPlayersOnline = n;
 
-std::cout << "Num players online is now: " << m_numPlayersOnline << "\n";
+  // Rethink this. We generate msgs a lot faster than we display them :-(
+
+  //std::string s = "Players online: " + ToString(m_numPlayersOnline);
+  //TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(0.2, 0, 0.2, 1), AMJU_BOTTOM));
 }
 
 void OnMenuClickedAway()
