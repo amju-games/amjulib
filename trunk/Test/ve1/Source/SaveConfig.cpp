@@ -40,7 +40,7 @@ std::cout << "No special config.\n";
   MkDir(saveDir);
   saveDir += "/Data/";
   MkDir(saveDir);
-  std::cout << "THIS IS THE DAVE DIR: " << saveDir << "\n";
+  std::cout << "THIS IS THE SAVE DIR: " << saveDir << "\n";
   File::SetRoot(saveDir, "/");
   
 #else
