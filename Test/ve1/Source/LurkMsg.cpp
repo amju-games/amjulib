@@ -190,6 +190,11 @@ void Lurker::Queue(const LurkMsg& lm)
   m_qmap[lm.m_lurkPos].push(lm);
 }
 
+void Lurker::Clear()
+{
+  m_qmap.clear();
+}
+
 }
 
 
