@@ -346,6 +346,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
   </ItemGroup>
