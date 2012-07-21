@@ -50,6 +50,7 @@ public:
   void Update();
   void Draw();
   void Queue(const LurkMsg& lm);
+  void Clear(); // to prevent old msgs from stacking up
 
 private:
   typedef std::queue<LurkMsg> LurkMsgQ; // queue of msgs or one Lurk pos
