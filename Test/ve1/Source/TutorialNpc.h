@@ -2,10 +2,10 @@
 #define TUTORIAL_NPC_H_INCLUDED
 
 #include "Ve1ObjectChar.h"
-#include "Ve1Character.h"
 
 namespace Amju
 {
+// Set objectives for the player, giving tutorial information, etc.
 class TutorialNpc : public Ve1ObjectChar
 {
 public:
