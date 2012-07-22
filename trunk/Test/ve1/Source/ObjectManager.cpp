@@ -453,7 +453,6 @@ void ObjectManager::Update()
     int i = 0;
     for (FileQ::iterator it = m_fileQ.begin(); it != m_fileQ.end(); )
     {
-      i++;
       if (i > MAX_CONCURRENT_DOWNLOADS)
       {
         break;
@@ -471,8 +470,11 @@ void ObjectManager::Update()
       }
       else
       {
+std::cout << "FILE Q: trying to download file: " << *it << "\n";
+
         GetFile(*it); // really call GetFile()
         ++it;
+        i++; // inc count of requests
       }
     }
 
