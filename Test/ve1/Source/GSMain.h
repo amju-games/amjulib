@@ -11,6 +11,7 @@
 namespace Amju 
 {
 class GameObject;
+class Furniture;
 
 class GSMainListener : public EventListener
 {
@@ -42,6 +43,9 @@ public:
 
   void OnMenuClickedAway();
   void OnQuitButton();
+
+  // Show button to drop carried item
+  void ShowDropButton(Furniture*, bool show); 
 
 private:
   void DoMoveRequest();
