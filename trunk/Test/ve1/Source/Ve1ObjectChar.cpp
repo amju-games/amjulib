@@ -28,6 +28,9 @@ static const float GRAVITY = -50.0f; // TODO CONFIG
 
 static const float BOUNCE_VEL = -50.0f;
 
+static const char* TYPE_KEY = "type";
+static const char* TEX_KEY = "tex";
+
 Ve1ObjectChar::Ve1ObjectChar()
 {
   m_dir = 0;
@@ -36,12 +39,15 @@ Ve1ObjectChar::Ve1ObjectChar()
   m_inNewLocation = false;
   m_collidingObject = 0;
   m_recalcHeading = false;
+
+  SetKeyVal(TYPE_KEY, "0");
+  SetKeyVal(TEX_KEY, "0");
 }
 
 void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
-  if (key == "type")
+  if (key == TYPE_KEY)
   {
     int type = ToInt(val); // TODO overload Set to take an int
     Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
@@ -50,7 +56,7 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       TheAvatarManager::Instance()->SetAvatar(type, vc);
     }
   }
-  else if (key == "tex")
+  else if (key == TEX_KEY)
   {
     int texNum = ToInt(val);
     Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());

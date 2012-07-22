@@ -68,9 +68,9 @@ public:
 
   virtual void Draw()
   {
-    bool loggedIn = m_player->IsLoggedIn();
     if (GetMd2() && m_player)
     {
+      bool loggedIn = m_player->IsLoggedIn();
       if (!loggedIn)
       {
         AmjuGL::PushAttrib(AmjuGL::AMJU_BLEND);
@@ -354,7 +354,7 @@ void Player::SetLoggedIn(bool loggedIn)
     // TODO Translucent has odd effects, players lose their translucency depending on camera pos ????
     static const float GREY = 0.0f;
     m_sceneNode->SetColour(Colour(GREY, GREY, GREY, 0.2f));
-    m_sceneNode->SetBlended(false); // problems
+    m_sceneNode->SetBlended(true); // problems ?
   }
 }
 
