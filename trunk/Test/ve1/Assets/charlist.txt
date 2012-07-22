@@ -34,7 +34,6 @@ pz-pet9.png
 dino1a.png
 dino1.png
 
-// TODO Convert to png!!!
-amju2.bmp
-amju2a.bmp
+amju2.png
+amju2a.png
 
