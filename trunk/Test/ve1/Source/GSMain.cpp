@@ -28,6 +28,7 @@
 #include "HasCollisionMesh.h"
 #include "Useful.h"
 #include "LurkMsg.h"
+#include "Furniture.h"
 
 namespace Amju
 {
@@ -52,6 +53,23 @@ GSMain::GSMain()
   m_viewportWidth = 1.0f; 
 
   m_quitConfirm = false;
+}
+
+void GSMain::ShowDropButton(Furniture* f, bool show)
+{
+std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
+
+  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
+
+  if (show)
+  {
+    drop->SetCommand(new CommandPickUp(f, false));
+    drop->SetVisible(true);
+  }
+  else
+  {
+    drop->SetVisible(false);
+  }
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -207,19 +225,27 @@ std::cout << "Try to find point on terrain for this mouse pos.\n";
     if (gotpos)
     {
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+      Player* player = GetLocalPlayer();
+      // Sanity check the destination: if too far away, discard, it was probably not what the
+      //  player intended.
+      float sqDist = (player->GetPos() - pos).SqLen();
+std::cout << "Sq dist to arrow pos is: " << sqDist << "\n";
+      const float MAX_DIST = 500.0f; // TODO CONFIG
+      const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
+      if (sqDist < MAX_SQ_DIST)
+      { 
+        int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
+         // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
+         // Maybe don't send location, but send it as a separate kind of request ?
 
-      int location = GetLocalPlayerLocation(); // It's the current location, unless we hit a portal.
-       // TODO Not sure how this is going to work. Do we detect a portal collision client-side ?
-       // Maybe don't send location, but send it as a separate kind of request ?
+        // TODO We want to respond immediately but we get out of sync with server
+        // Move towards point, but server will send back actual destination
+        player->SetArrowPos(pos); 
+        player->SetArrowVis(true);
 
-      // TODO We want to respond immediately but we get out of sync with server
-      // Move towards point, but server will send back actual destination
-      GetLocalPlayer()->SetArrowPos(pos); 
-      GetLocalPlayer()->SetArrowVis(true);
-
-      TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
-      GetLocalPlayer()->MoveTo(pos); // client side predict - respond immediately
-
+        TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+        player->MoveTo(pos); // client side predict - respond immediately
+      }
     }
     else
     {
@@ -327,6 +353,9 @@ void GSMain::OnActive()
 
   GuiButton* quitButton = (GuiButton*)m_gui->GetElementByName("quit-button");
   quitButton->SetCommand(Amju::OnQuitButton);
+  
+  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
+  drop->SetVisible(false); // hide drop button until we pick someting up
 
   TheChatConsole::Instance()->OnActive();
 

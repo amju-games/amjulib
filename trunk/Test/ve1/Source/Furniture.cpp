@@ -186,21 +186,23 @@ std::cout << " should be setting " << *this << " down now.\n";
       if (go)
       {
 std::cout << *this << " got picked up by " << *go << "\n";
+
+        if (pickupId == GetLocalPlayerId())
+        {
+std::cout << "That's me! Local player picked up this object!\n";
+
+          // Show drop button
+          TheGSMain::Instance()->ShowDropButton(this, true);
+        }
+
+        if (p)
+        {
+          p->SetCarrying(this);     
+        }
       }
       else
       {
 std::cout << *this << " got picked up by object " << pickupId << " but this object not created yet!!\n";
-      }
-
-      if (pickupId == GetLocalPlayerId())
-      {
-        // Show drop button
-        TheGSMain::Instance()->ShowDropButton(this, true);
-      }
-
-      if (p)
-      {
-        p->SetCarrying(this);     
       }
     }
 std::cout << "Setting m_pickupId to " << pickupId << "\n";
