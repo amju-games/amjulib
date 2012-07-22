@@ -37,6 +37,20 @@ protected:
   // last position where coll mesh was created - this is so we can translate collision mesh
   Vec3f m_collMeshPos; 
 };
+
+class CommandPickUp : public GuiCommand
+{
+public:
+  CommandPickUp(Furniture* f, bool takeNotDrop);
+
+  virtual bool Do();
+
+private:
+  Furniture* m_f;
+  bool m_takeNotDrop;
+};
+
+
 }
 
 #endif

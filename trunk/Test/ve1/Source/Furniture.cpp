@@ -10,6 +10,7 @@
 #include "Useful.h"
 #include "SceneCollisionMesh.h"
 #include "SetObjMeshCommand.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -170,7 +171,15 @@ std::cout << " should be setting " << *this << " down now.\n";
           }
         }
       }
-      TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
+
+      // This looks very wrong - the server should set the position of the object when it is put down.
+      // At the very least, only the player who moved the item should position it!?
+      if (m_pickupId == GetLocalPlayerId())
+      {
+        TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
+        // Hide drop button
+        TheGSMain::Instance()->ShowDropButton(this, false);
+      }
     }
     else
     {
@@ -183,6 +192,12 @@ std::cout << *this << " got picked up by " << *go << "\n";
 std::cout << *this << " got picked up by object " << pickupId << " but this object not created yet!!\n";
       }
 
+      if (pickupId == GetLocalPlayerId())
+      {
+        // Show drop button
+        TheGSMain::Instance()->ShowDropButton(this, true);
+      }
+
       if (p)
       {
         p->SetCarrying(this);     
@@ -193,27 +208,19 @@ std::cout << "Setting m_pickupId to " << pickupId << "\n";
   }
 }
 
-class CommandPickUp : public GuiCommand
+CommandPickUp::CommandPickUp(Furniture* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
+
+bool CommandPickUp::Do()
 {
-public:
-  CommandPickUp(Furniture* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
-
-  virtual bool Do()
-  {
 std::cout << "Pick up command!\n";
-    // TODO This is special, the server must determine if OK - no other pick up is happening.
-    // I.e. it's not just a key/val pair, needs special case code.
+  // TODO This is special, the server must determine if OK - no other pick up is happening.
+  // I.e. it's not just a key/val pair, needs special case code.
 
-    TheObjectUpdater::Instance()->SendUpdateReq(
-      m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
+  TheObjectUpdater::Instance()->SendUpdateReq(
+    m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
 
-    return false;
-  }
-
-private:
-  Furniture* m_f;
-  bool m_takeNotDrop;
-};
+  return false;
+}
 
 void Furniture::SetMenu(GuiMenu* menu)
 {
@@ -223,7 +230,7 @@ void Furniture::SetMenu(GuiMenu* menu)
   {
     menu->AddChild(new GuiMenuItem("Pick up", new CommandPickUp(this, true)));
   }
-  else // if (m_pickupId == GetLocalPlayerId())
+  else if (m_pickupId == GetLocalPlayerId())
   {
 std::cout << "Set menu: should be Put down\n";
     menu->AddChild(new GuiMenuItem("Put down", new CommandPickUp(this, false)));
