@@ -32,41 +32,16 @@ bool Baddie::Load(File* f)
   // Create Scene Node, but don't attach to SceneGraph until needed
   Ve1Character* node = new Ve1Character;
 
-  File dinoFile;
-  if (!dinoFile.OpenRead("dino.txt"))
-  {
-std::cout << "Baddie scene node: Failed to load dino.\n";
-    Assert(0);
-  }
-
-  if (!node->Load(&dinoFile))
-  {
-std::cout << "Baddie scene node: Failed to load dino.\n";
-    Assert(0); //return false;
-  }
-
   m_sceneNode = node;
 
   m_shadow = new Shadow;
-  m_shadow->SetSize(20.0f); // TODO 
-  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("shadow.png"); // TODO
-
-  m_shadow->SetTexture(tex);
+  if (!m_shadow->Load(f))
+  {
+    return false;
+  }
   m_sceneNode->AddChild(m_shadow.GetPtr());
 
-/*
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-
-std::cout << "Adding scene node to SceneGraph for baddie\n";
-
-  root->AddChild(m_sceneNode.GetPtr());
-
-  m_isMoving = false;
-  SetVel(Vec3f(0, 0, 0)); 
-
   m_inNewLocation = true;
-*/
 
   return true;
 }
