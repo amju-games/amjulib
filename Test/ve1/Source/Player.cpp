@@ -221,18 +221,12 @@ bool Player::Load(File* f)
   Assert(arrowMesh);
   m_arrow = new SceneMesh;
   m_arrow->SetMesh(arrowMesh);
-//  m_arrow->UpdateBoundingVol();
-//  m_sceneNode->AddChild(m_arrow.GetPtr()); // TODO TEMP TEST
 
   return true;
 }
 
 void Player::OnLocationExit()
 {
-  // We can't be the Local Player - this function is called when an object leaves the location
-  //  where the local player is :-)
-  //////Assert(!IsLocalPlayer());
-
   // Remove from SceneGraph
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
@@ -244,8 +238,6 @@ void Player::OnLocationEntry()
 {
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
-
-//std::cout << "Adding scene node to SceneGraph for player\n";
 
   root->AddChild(m_sceneNode.GetPtr());
   root->AddChild(m_arrow.GetPtr());
