@@ -26,6 +26,7 @@ sub newid()
   my $obj_type = param('type');
   my $assetfile = param('assetfile');
   my $datafile = param('datafile');
+  my $alive = param('alive');
 
   # Get owner
   my $session_id = param('session_id');
@@ -44,7 +45,14 @@ sub newid()
   }
 
   # No object ID yet, and early timestamp, so we don't recognise it as new until we populate it.
-  $sql = "insert into object (type,assetfile,datafile,owner,createtime) values ('$obj_type','$assetfile','$datafile',$owner,1)";
+  # If we set "alive" param, the object is fully created with valid timestamp.
+  my $createtime = "1";
+  if ($alive)
+  {
+    $createtime = "now()";
+  }
+
+  $sql = "insert into object (type,assetfile,datafile,owner,createtime) values ('$obj_type','$assetfile','$datafile',$owner, $createtime)";
 
 #  print "Query: $sql\n\n";
 
