@@ -769,10 +769,13 @@ void GSEdit::CreateContextMenu()
       new NewObjectCommand(Building::TYPENAME, "none", "none")));
 
     childMenu->AddChild(new GuiMenuItem("Portal", 
-      new NewObjectCommand(Portal::TYPENAME, "none", "none")));
+      new NewObjectCommand(Portal::TYPENAME, "none", "none", true)));
 
     childMenu->AddChild(new GuiMenuItem("Baddie", 
-      new NewObjectCommand(Baddie::TYPENAME, "baddie-assets.txt", "none", true)));
+      new NewObjectCommand(Baddie::TYPENAME, "baddie-assets.txt", "baddie-data.txt", true)));
+
+    childMenu->AddChild(new GuiMenuItem("TutorialNPC", 
+      new NewObjectCommand(TutorialNpc::TYPENAME, "tutnpc-assets.txt", "tutnpc-data.txt", true)));
 
 /*
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
