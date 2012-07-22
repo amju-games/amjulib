@@ -41,9 +41,10 @@ sub updatestate()
     else
     {
       # We can only drop the object if we are the current owner.
-      # TODO
-      my $sql = "update objectstate set val='0', whenchanged=now() where `key`='$key' and id=$obj_id";
-      # .. and val in (select objectId from player, session)... 
+      my $session_id = param('session_id') or die "No session id";
+
+      my $sql = "update objectstate set val='0', whenchanged=now() where `key`='$key' and id=$obj_id and val in (select b.obj_id FROM session as a, player as b where a.player_id=b.id and a.id=$session_id) ";
+
       update($sql);
     }
     return;
