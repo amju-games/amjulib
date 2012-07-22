@@ -5,10 +5,10 @@ namespace Amju
 void CollideObjectFurniture(GameObject* go1, GameObject* go2)
 {
   Assert(dynamic_cast<Ve1Object*>(go1));
-  Assert(dynamic_cast<Furniture*>(go2));
+  Assert(dynamic_cast<Ve1Object*>(go2));
 
   Ve1Object* go = (Ve1Object*)go1;
-  Furniture* furn = (Furniture*)go2;
+  Ve1Object* furn = (Ve1Object*)go2; // furniture - immovable
 
   /* 
   Move back so not interpenetrating:
@@ -64,17 +64,4 @@ void CollideObjectFurniture(GameObject* go1, GameObject* go2)
   go->SetPos(goPos);
 }
 
-//static bool b[] = 
-//{
-//  TheCollisionManager::Instance()->Add(
-//    Player::TYPENAME, Furniture::TYPENAME, &CollideObjectFurniture),
-
-//  TheCollisionManager::Instance()->Add(
-//    Dino::NAME, Fence::NAME, &CollideObjectFence),
-
-//  TheCollisionManager::Instance()->Add(
-//    Pet::NAME, Fence::NAME, &CollideObjectFence)
-
-  // TODO others
-//};
 }
