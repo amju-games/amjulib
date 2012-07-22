@@ -233,7 +233,7 @@ void ObjectUpdater::Update()
   }
 
   m_updateElapsed += TheTimer::Instance()->GetDt();
-  static const float UPDATE_PERIOD = 5.0f; // TODO CONFIG
+  static const float UPDATE_PERIOD = 1.0f; // TODO CONFIG
   if (m_updateElapsed > UPDATE_PERIOD) //// && IsOnline())
   {
     m_updateElapsed = 0;
