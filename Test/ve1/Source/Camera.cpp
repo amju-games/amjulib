@@ -78,7 +78,7 @@ void Camera::Update()
     if (lastportal)
     {
       float pdist = (pos - lastportal->GetPos()).SqLen(); // sq dist from portal to player
-      static const float MAX_DIST = 500.0f; // TODO CONFIG
+      static const float MAX_DIST = 200.0f; // TODO CONFIG
       static const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
       if (pdist < MAX_SQ_DIST) 
       {
