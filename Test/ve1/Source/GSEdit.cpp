@@ -477,7 +477,7 @@ void GSEdit::OnActive()
   GetElementByName(m_gui, "property-set")->SetCommand(Amju::OnPropertySet);
   GetElementByName(m_gui, "property-set-cancel")->SetCommand(OnPropertySetCancel);
 
-  TheEventPoller::Instance()->AddListener(m_listener);
+  TheEventPoller::Instance()->AddListener(m_listener, 10); // low priority
 }
 
 void GSEdit::ShowPropertyList(bool b)
@@ -557,6 +557,8 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
 
 bool GSEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  // Ignore if a GUI is active - this should happen anyway!!
+
   m_mouseScreen = Vec2f(mbe.x, mbe.y);
 
   // Left click: check for clicking on an object
@@ -651,8 +653,8 @@ void GSEdit::GoToSelectedLocation()
 class NewObjectCommand : public GuiCommand
 {
 public:
-  NewObjectCommand(const std::string& typeName, const std::string& assetfile, const std::string& datafile) : 
-    m_typeName(typeName), m_assetfile(assetfile), m_datafile(datafile) { }
+  NewObjectCommand(const std::string& typeName, const std::string& assetfile, const std::string& datafile, bool alive = false) : 
+    m_typeName(typeName), m_assetfile(assetfile), m_datafile(datafile), m_alive(alive) { }
 
   virtual bool Do()
   {
@@ -660,6 +662,10 @@ public:
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_NEW_OBJECT_ID);
     url += "&type=" + m_typeName;
     url += "&assetfile=" + m_assetfile + "&datafile=" + m_datafile; 
+    if (m_alive)
+    {
+      url += "&alive=1";
+    }
 
 std::cout << "Create new object of type " << m_typeName << " URL: " << url << "\n";
 
@@ -672,6 +678,13 @@ private:
   std::string m_typeName;
   std::string m_assetfile;
   std::string m_datafile;
+  bool m_alive; // create with current timestamp, so immediately committed
+};
+
+// For baddies and NPCs, set the type and texture as key/val pairs
+class NewCharObjectCommand : public NewObjectCommand
+{
+// 
 };
 
 //class SetObjMeshCommand : public GuiCommand
@@ -695,6 +708,10 @@ public:
   SetPropsCommand(int objId) : m_id(objId)  {}
   virtual bool Do()
   {
+    // Set properties in another State ?
+//    TheGSSetObjectProperties::Instance()->SetId(m_id);
+//    TheGame::Instance()->SetCurrentState(TheGSSetObjectProperties);
+
     TheGSEdit::Instance()->ShowPropsForObj(m_id);
     return false; // no undo
   }
@@ -753,6 +770,9 @@ void GSEdit::CreateContextMenu()
 
     childMenu->AddChild(new GuiMenuItem("Portal", 
       new NewObjectCommand(Portal::TYPENAME, "none", "none")));
+
+    childMenu->AddChild(new GuiMenuItem("Baddie", 
+      new NewObjectCommand(Baddie::TYPENAME, "baddie-assets.txt", "none", true)));
 
 /*
     std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
