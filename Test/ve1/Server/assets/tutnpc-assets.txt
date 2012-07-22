@@ -1,5 +1,7 @@
 // Ver
 1
+// Force download new version of charlist.txt
+charlist.txt
 amju.md2
 amju2.png
 amju2a.png
