@@ -51,7 +51,7 @@ SocketService::~SocketService()
   AMJU_CALL_STACK;
 
 #if defined(WIN32)
-  WSACleanup();
+  //WSACleanup();
 #endif
 
 // TODO GEKKO cleanup ?
