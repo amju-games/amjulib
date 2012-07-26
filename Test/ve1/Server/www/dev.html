@@ -1,0 +1,51 @@
+<html>
+<head>
+
+</head>
+<body>
+<p style="font-family:Arial" align=left>
+<img src="mygame.png">
+<img src="UoP2.png" height=43 align=right valign=top>
+<br>
+<b>Information for developers</b>
+<p style="font-family:Arial">
+Firstly, thanks for helping me with this project!!<br><br>
+<b>Bug database</b>
+<br>
+Please report bugs and ideas for enhancements in the <a href="http://code.google.com/p/amju-mygame/issues/list" target="_blank">bug database</a>. 
+
+<br><br>
+<b>Check out source and build</b>
+<br>
+This project is in an svn repository on googlecode. Please email me with your google email address to be added to the project.
+<br><br>
+<img src="win-icon.png"> 
+<font face="Arial, Helvetica">
+To check out the source code on Windows:
+<li>Install <a href="http://tortoisesvn.net/" target="_blank">Tortoise SVN</a> or your favourite SVN client
+<li><a href="https://www.google.com/accounts/NewAccount" target="_blank">Create a google account</a> if you don't have one
+<li>Email me your google email address to be added as a contributor
+<li>Check out: right-click in your projects directory, choose SVN checkout and check out amjulib, like this:
+<br><br>
+<img src="win-checkout.png">
+<br><br>
+To build the project:
+<li>Install Microsoft Visual Studio 2010
+<li>Within the source code you checked out, go to <i>amjulib/Test/ve1/Script/Windows/ve1</i> and open <i>ve1.sln</i>
+<br><br><img src="win-sln.png">
+<li>Build and run... it should work. Please contact me if not!
+
+<br><br>
+<img src="mac-icon.png"> 
+To check out the source code on Mac OS X:
+<li>Use terminal or xterm: something like this:
+<pre>    cd ~/my_projects_dir<br>    svn co https://amjulib.googlecode.com/svn/trunk/ ./amjulib </pre>
+<li>Then to build it, well, you have to build the amjulib library, then the game itself:
+<pre>    cd amjulib/Script/MacOSX<br>    export AMJULIB_MAC_SCRIPT_PATH=`pwd`<br>    make<br>    cd ../../Test/ve1/Script/MacOSX<br>    make<br>    make release<br>    make run
+</pre>
+<br>
+
+<br>
+</body>
+</html>
+
