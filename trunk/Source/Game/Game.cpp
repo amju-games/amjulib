@@ -15,6 +15,7 @@
 #endif
 
 //#define STATE_DEBUG
+#define SHOW_FRAME_TIME
 
 namespace Amju
 {
@@ -103,6 +104,7 @@ void Game::Run()
 
 void Game::RunOneLoop()
 {
+#ifdef SHOW_FRAME_TIME
 #ifdef WIN32
     unsigned long start = GetTickCount();
 #else
@@ -110,9 +112,11 @@ void Game::RunOneLoop()
     timeval tbefore;
     gettimeofday(&tbefore, 0);
 #endif
+#endif //  SHOW_FRAME_TIME
 
   Update();
 
+#ifdef SHOW_FRAME_TIME
 #ifdef WIN32
     unsigned long mid = GetTickCount();
 #else
@@ -120,9 +124,11 @@ void Game::RunOneLoop()
     timeval mid;
     gettimeofday(&mid, 0);
 #endif
+#endif //  SHOW_FRAME_TIME
 
   Draw();
 
+#ifdef SHOW_FRAME_TIME
   if (m_font)
   {
 #ifdef WIN32
@@ -143,12 +149,14 @@ void Game::RunOneLoop()
     PushColour();
     AmjuGL::SetColour(Colour(0, 0, 0, 1));
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    Rect r(-1.0f, 0, -1.0f, -0.9f);
+    float w = m_font->GetTextWidth(s);
+    Rect r(-1.0f, -1.0f + w, -1.0f, -0.9f);
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
     m_font->Print(-1.0f, -1.0f, s.c_str());
   }
+#endif //  SHOW_FRAME_TIME
 
   AmjuGL::Flip(); 
 }
