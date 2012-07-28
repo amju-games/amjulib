@@ -14,7 +14,7 @@ class Ve1Req : public OnlineReq
 {
 public:
   Ve1Req(const std::string url, const char* name, HttpClient::HttpMethod method = HttpClient::GET) : 
-    OnlineReq(url, method, name)
+    OnlineReq(url, method, name), m_critical(true)
   {
   }
 
@@ -29,6 +29,7 @@ protected:
   PXml m_xml;
   std::string m_errorStr;
   std::string m_timestamp;
+  bool m_critical; // all errors are treated as critical failures ?
 };
 }
 
