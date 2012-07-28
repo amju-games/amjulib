@@ -2,7 +2,6 @@
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiTextEdit.h>
-#include <ConfigFile.h>
 #include "GSLogin.h"
 #include "GSLoginWaiting.h"
 #include "GSTitle.h"
@@ -95,10 +94,11 @@ void GSLogin::OnActive()
 
   // TODO Set last email address entered ?
   // TODO use config ?
-  //static GameConfigFile* config = TheGameConfigFile::Instance();
   GuiTextEdit* text = (GuiTextEdit*)(m_gui->GetElementByName("email"));
   text->SetText(lastEmail);
   text->SetOnChangeFunc(Amju::OnLoginChar);
+
+  OnLoginChar(); // check if email address is well formed, enable login button if so
 
   static Kb* kb = TheKb::Instance();
   if (kb->IsEnabled())
