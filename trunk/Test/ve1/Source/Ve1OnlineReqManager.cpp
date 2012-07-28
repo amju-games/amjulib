@@ -17,7 +17,7 @@ std::string UrlRoot()
     first = false;
     std::string server = GetServer();
     std::string env = GetEnv();
-    res = server + "/" + env + "/";
+    res = "http://" + server + "/" + env + "/";
   }
   return res;
 }
