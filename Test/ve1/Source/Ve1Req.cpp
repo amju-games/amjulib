@@ -65,6 +65,14 @@ void Ve1Req::OnFailure()
     // TODO  Check for timeout etc
   // TODO Display error msg
 
-  ShowError(m_errorStr);
+  if (m_critical)
+  {
+    ShowError(m_errorStr);
+  }
+  else
+  {
+    // Non critical... check if errors happen a lot or just sporadically 
+std::cout << "NET ERROR but non-critical...\n";
+  }
 }
 }

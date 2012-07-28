@@ -14,7 +14,10 @@
 
 namespace Amju
 {
-PosUpdateReq::PosUpdateReq(const std::string& url) : Ve1Req(url, "pos update req") {}
+PosUpdateReq::PosUpdateReq(const std::string& url) : Ve1Req(url, "pos update req") 
+{
+  m_critical = false;
+}
 
 void PosUpdateReq::OnSuccess()
 {
