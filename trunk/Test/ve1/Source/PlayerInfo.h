@@ -49,12 +49,12 @@ public:
   Strings GetPlayerNames() const; // returns list of player filenames
   int GetNumPlayerNames() const;
 
+  bool Load();
+  bool Save();
+
 private:
   PlayerInfoManager();
   friend class Singleton<PlayerInfoManager>;
-
-  bool Load();
-  bool Save();
 
   typedef std::pair<unsigned int, PPlayerInfo> TimestampPlayerInfo;
 
