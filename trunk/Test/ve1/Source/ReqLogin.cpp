@@ -96,11 +96,15 @@ std::cout << "No start location.\n";
     // TODO Sanitise the filename
 
     ThePlayerInfoManager::Instance()->SetCurrentPlayer(playerInfoFilename);
+    ThePlayerInfoManager::Instance()->Save();
+
     PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI(); 
 
     pi->PISetInt(PI_KEY("player obj id"), objId);
     pi->PISetString(PI_KEY("playername"), playername);
     pi->PISetString(PI_KEY("email"), m_email);
+    pi->Save();
+
     // TODO Do we need to set this via ObjectUpdater too, so it gets sent to all clients ?
 
     // Set ID of this player object as the local player ID
