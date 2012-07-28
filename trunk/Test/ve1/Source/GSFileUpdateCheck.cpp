@@ -5,6 +5,7 @@
 #include "GSWaitForNewLocation.h"
 #include "FileUpdater.h"
 #include "GSStartGame.h"
+#include "SaveConfig.h"
 
 namespace Amju
 {
@@ -34,6 +35,8 @@ void GSFileUpdateCheck::OnFinishedChecking(const std::string& timestamp)
 {
   m_timestamp = timestamp;
   TheGameConfigFile::Instance()->Set(FILE_UPDATE_TIMESTAMP, m_timestamp);
+  SaveConfig();
+
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
