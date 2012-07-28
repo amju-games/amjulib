@@ -42,6 +42,12 @@ void BlinkCharacter::Update()
 
 void BlinkCharacter::Draw()
 {
+  if (!m_pTex[0] || !m_pTex[1])
+  {
+std::cout << "Warning: BlinkChar: can't draw, textures not set yet.\n";
+    return;
+  }
+
   int blink = 0;
 
   // TODO CONFIG ? Or random

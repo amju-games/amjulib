@@ -20,12 +20,24 @@ Animated::Animated()
 
 void Animated::SetAnim(const std::string& animName)
 {
+  if (!m_pModel)
+  {
+std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
+    return;
+  }
+
   int anim = m_pModel->GetAnimationFromName(animName);
   SetAnim(anim);
 }
 
 void Animated::SetAnim(int anim)
 {
+  if (!m_pModel)
+  {
+std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
+    return;
+  }
+
   Assert(anim != -1);
 
   if (anim == m_anim)
@@ -80,6 +92,12 @@ void Animated::Draw()
 {
   Assert(IsVisible());
 
+  if (!m_pModel)
+  {
+std::cout << "Warning: Animated: can't draw, no MD2 model set yet.\n";
+    return;
+  }
+
   Assert(m_pModel);
 
   float t = m_t * 10.0f;
@@ -101,6 +119,12 @@ void Animated::Draw()
 
 void Animated::Update()
 {
+  if (!m_pModel)
+  {
+std::cout << "Warning: Animated: can't update, no MD2 model set yet.\n";
+    return;
+  }
+
   SceneNode::Update();
 
   Assert(m_pModel);
