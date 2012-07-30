@@ -8,7 +8,7 @@
 #endif // GEKKO
 
 #ifdef MACOSX
-#include <curses.h>
+#include <string>
 #endif
 
 #include "AmjuFinal.h"
@@ -22,7 +22,7 @@ void Pause(const char* funcName, const char* fileName, unsigned int line)
 
 #ifdef MACOSX
   std::cout << "Press enter to continue..."; 
-  getch();
+  std::cin.get();
 #endif
 
 #ifdef WIN32
