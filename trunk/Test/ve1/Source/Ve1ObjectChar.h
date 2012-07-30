@@ -4,6 +4,7 @@
 #include <Shadow.h>
 #include <SceneMesh.h>
 #include "Ve1Object.h"
+#include "AttackEffect.h"
 
 namespace Amju
 {
@@ -38,7 +39,10 @@ public:
 
   virtual void SetEditMenu(GuiMenu*);
   
-  void SetKeyVal(const std::string& key, const std::string& val);
+  virtual void SetKeyVal(const std::string& key, const std::string& val);
+
+  // Show effect because local player wants to attack this char
+  void ShowAttacked();
 
 protected:
   void TurnToFaceDir();
@@ -62,6 +66,8 @@ protected:
 
   GameObject* m_collidingObject; // (one of the) objects we are colliding with
   bool m_recalcHeading; // if true, recalc
+
+  RCPtr<AttackEffect> m_effect;
 };
 }
 
