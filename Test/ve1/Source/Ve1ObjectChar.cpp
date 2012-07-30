@@ -325,6 +325,11 @@ std::cout << "**BOUNCE**!?!?!?!\n";
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - XSIZE, m_pos.z + XSIZE);
 
+    if (m_effect)
+    {
+      *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
+    }
+
     TurnToFaceDir();
 
     Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
@@ -446,5 +451,11 @@ AABB* Ve1ObjectChar::GetAABB()
 {
   return m_sceneNode->GetAABB();
 }
+
+void Ve1ObjectChar::ShowAttacked()
+{
+  m_effect->Start();
+}
+
 }
 
