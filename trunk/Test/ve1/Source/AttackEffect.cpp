@@ -28,7 +28,8 @@ float AttackEffect::NewTime() const
 
 void AttackEffect::HandleDeadParticle(Particle2d* p)
 {
-  Recycle(p);
+//  Recycle(p);
+  ParticleEffect2d::HandleDeadParticle(p);
 }
 
 
