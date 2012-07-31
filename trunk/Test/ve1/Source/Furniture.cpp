@@ -146,68 +146,84 @@ void Furniture::SetKeyVal(const std::string& key, const std::string& val)
   if (key == SET_KEY("pickup"))
   {
     int pickupId = ToInt(val);
-    GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
-    Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
+    HandlePickup(pickupId);
+  }
+}
 
-    if (pickupId == 0)
-    {
+void Furniture::HandlePickup(int pickupId)
+{
+  // pickupId is the new owner
+
+  if (pickupId == 0)
+  {
+    // DROP    
 std::cout << "Got drop msg... ";
 
-      // Set down: change height to player height. Put player on top.
-      if (m_pickupId != 0)
+    // Set down: change height to player height. Put player on top.
+    if (m_pickupId == 0)
+    {
+std::cout << *this << " Got drop msg but no previous owner!\n";
+    }
+    else
+    {
+std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
+
+      GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
+
+      if (go)
       {
-std::cout << " should be setting " << *this << " down now.\n";
+        float y = go->GetPos().y;
+        m_pos.y = y;
+        float h = m_aabb.GetYSize();
+        go->SetPos(go->GetPos() + Vec3f(0, h + 10.0f, 0)); // 10 is TEMP TEST
 
-        if (go)
+        Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
+        if (p)
         {
-          float y = go->GetPos().y;
-          m_pos.y = y;
-          float h = m_aabb.GetYSize();
-          go->SetPos(go->GetPos() + Vec3f(0, h + 10.0f, 0)); // 10 is TEMP TEST
-
-          if (p)
-          {
-            p->SetCarrying(0);
-          }
+          p->SetCarrying(0);
         }
       }
+    }
 
-      // This looks very wrong - the server should set the position of the object when it is put down.
-      // At the very least, only the player who moved the item should position it!?
-      if (m_pickupId == GetLocalPlayerId())
+    // This looks very wrong - the server should set the position of the object when it is put down.
+    // At the very least, only the player who moved the item should position it!?
+    if (m_pickupId == GetLocalPlayerId())
+    {
+      TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
+      // Hide drop button
+      TheGSMain::Instance()->ShowDropButton(this, false);
+    }
+  }
+  else
+  {
+    // Pick up msg
+
+    GameObject* go = TheGame::Instance()->GetGameObject(pickupId);
+    if (go)
+    {
+std::cout << *this << " got picked up by " << *go << "\n";
+
+      if (pickupId == GetLocalPlayerId())
       {
-        TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
-        // Hide drop button
-        TheGSMain::Instance()->ShowDropButton(this, false);
+std::cout << "That's me! Local player picked up this object!\n";
+
+        // Show drop button
+        TheGSMain::Instance()->ShowDropButton(this, true);
+      }
+
+      Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
+      if (p)
+      {
+        p->SetCarrying(this);     
       }
     }
     else
     {
-      if (go)
-      {
-std::cout << *this << " got picked up by " << *go << "\n";
-
-        if (pickupId == GetLocalPlayerId())
-        {
-std::cout << "That's me! Local player picked up this object!\n";
-
-          // Show drop button
-          TheGSMain::Instance()->ShowDropButton(this, true);
-        }
-
-        if (p)
-        {
-          p->SetCarrying(this);     
-        }
-      }
-      else
-      {
 std::cout << *this << " got picked up by object " << pickupId << " but this object not created yet!!\n";
-      }
     }
-std::cout << "Setting m_pickupId to " << pickupId << "\n";
-    m_pickupId = pickupId;
   }
+std::cout << "Setting m_pickupId to " << pickupId << "\n";
+  m_pickupId = pickupId;
 }
 
 CommandPickUp::CommandPickUp(Furniture* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
