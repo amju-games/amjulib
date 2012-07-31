@@ -32,6 +32,8 @@ public:
   virtual CollisionMesh* GetCollisionMesh();
 
 protected:
+  void HandlePickup(int pickupId);
+
   int m_pickupId;
 
   // last position where coll mesh was created - this is so we can translate collision mesh
