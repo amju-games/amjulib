@@ -37,6 +37,11 @@ public:
 
   virtual void Update()
   {
+    if (!IsVisible()) 
+    {
+      return;
+    }
+
     if (GetMd2() && m_player && m_player->IsLoggedIn())
     {
       Ve1Character::Update();
@@ -68,7 +73,7 @@ public:
 
   virtual void Draw()
   {
-    if (GetMd2() && m_player)
+    if (IsVisible() && GetMd2() && m_player)
     {
       bool loggedIn = m_player->IsLoggedIn();
       if (!loggedIn)
@@ -101,6 +106,8 @@ public:
 
   virtual void Draw()
   {
+    if (IsVisible())
+    {
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
  
@@ -137,6 +144,7 @@ public:
       text.Draw();
       AmjuGL::PopMatrix();
       AmjuGL::PopAttrib();
+    }
   }
  
 protected:
@@ -353,6 +361,11 @@ void Player::SetLoggedIn(bool loggedIn)
 void Player::Update()
 {
   Ve1ObjectChar::Update();
+
+  if (m_hidden)
+  {
+    return;
+  }
 
   // Stop moving if we are close enough to the destination
   // TODO This ends up happening every frame, only do it if we are moving

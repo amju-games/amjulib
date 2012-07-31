@@ -7,6 +7,11 @@ namespace Amju
 {
 void CollidePlayerFurniture(Player* player, Furniture* f)
 {
+  if (player->IsHidden() || f->IsHidden())
+  {
+    return;
+  }
+
   // Move back away from furniture, and then adjust heading if moving.
 
   f->OnPlayerCollision(player);
