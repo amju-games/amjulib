@@ -7,6 +7,11 @@ namespace Amju
 {
 void CollidePlayerPlayer(Player* p1, Player* p2)
 {
+  if (p1->IsHidden() || p2->IsHidden())
+  {
+    return;
+  }
+
   if (!p1->IsLoggedIn() || !p2->IsLoggedIn())
   {
     return;

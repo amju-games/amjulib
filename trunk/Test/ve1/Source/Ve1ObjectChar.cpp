@@ -212,6 +212,11 @@ void Ve1ObjectChar::Update()
 
   Ve1Object::Update();
 
+  if (IsHidden())
+  {
+    return;
+  }
+
   // Tell shadow the collision mesh it is casting onto
   // TODO Use octree etc
   // NB This only works if Terrain is activated before player!!

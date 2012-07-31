@@ -6,6 +6,11 @@ namespace Amju
 {
 void CollidePlayerPortal(Player* player, Portal* portal)
 {
+  if (player->IsHidden())
+  {
+    return;
+  }
+
   portal->OnPlayerCollision(player);
 }
 

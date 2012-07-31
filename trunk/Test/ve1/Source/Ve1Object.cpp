@@ -4,6 +4,7 @@
 #include "Ve1Node.h"
 #include "GameMode.h"
 #include "Ve1SceneGraph.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -13,6 +14,11 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_ignorePortalId = -1;
   m_isPickable = true;
   m_hidden = false;
+}
+
+bool Ve1Object::IsHidden() const
+{
+  return m_hidden;
 }
 
 AABB* Ve1Object::GetAABB()
@@ -54,7 +60,10 @@ void Ve1Object::Update()
     m_sceneNode->SetVisible(!m_hidden);
   }
 
-  GameObject::Update();
+  if (!IsHidden())
+  {
+    GameObject::Update();
+  }
 }
 
 const Vec3f& Ve1Object::GetOldPos() const
@@ -150,6 +159,7 @@ void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
 
   if (key == "hidden")
   {
+std::cout << "Setting hidden flag for " << *this << " to: " << val << "\n";
     m_hidden = (val == "y");
   }
 }

@@ -72,6 +72,8 @@ public:
  
   virtual AABB* GetAABB(); // overriding GameObject's impl
 
+  bool IsHidden() const; // if true, object is invisible and does not interact with anything
+
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
   //  i.e. it's in whatever the current location is.

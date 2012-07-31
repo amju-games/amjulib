@@ -6,9 +6,12 @@ namespace Amju
 {
 void CollidePlayerBuilding(Player* player, Building* b)
 {
+  if (player->IsHidden())
+  {
+    return;
+  }
 
   player->SetIsColliding(b);
-
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
