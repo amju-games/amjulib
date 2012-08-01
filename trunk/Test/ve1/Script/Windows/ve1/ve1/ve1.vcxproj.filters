@@ -294,6 +294,18 @@
     <ClCompile Include="..\..\..\..\Source\CollidePlayerBuilding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerBaddie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\GSProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -575,16 +587,27 @@
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\AttackEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\CrashMonitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\GSProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
     <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
+    <Library Include="..\..\..\..\..\..\Source\Network\curl\lib\libcurl.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Source\main_iphone.mm" />
     <None Include="..\..\..\..\Source\newgui.pl" />
     <None Include="..\..\..\..\Source\newreq.pl" />
     <None Include="..\..\..\..\Source\newstate.pl" />
+    <None Include="..\..\..\..\Source\newclass.pl" />
   </ItemGroup>
 </Project>

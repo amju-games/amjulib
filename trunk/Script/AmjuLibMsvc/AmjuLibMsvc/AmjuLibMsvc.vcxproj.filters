@@ -825,6 +825,15 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\ParticleEffect2d.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Resource\LoadMeshResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1537,6 +1546,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiRect.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\ParticleEffect2d.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Resource\LoadTextureResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
