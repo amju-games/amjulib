@@ -95,6 +95,8 @@
 xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
 xcopy /Y /S  ..\..\..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\Data\
 xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll  ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+copy /Y  ..\..\..\..\..\..\Source\GLUT\glut32.dll  ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
+xcopy /Y /S  ..\..\..\..\..\..\Source\Network\curl\lib\*.dll  ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
 copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\
 </Command>
     </PostBuildEvent>
@@ -157,6 +159,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
+    <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp" />
     <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
@@ -165,10 +168,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollideObjectFurniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerBaddie.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerBuilding.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
@@ -193,6 +198,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSObjMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSProxy.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
@@ -252,6 +258,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h" />
+    <ClInclude Include="..\..\..\..\Source\AttackEffect.h" />
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\Baddie.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
@@ -260,6 +267,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
     <ClInclude Include="..\..\..\..\Source\CollideObjectFurniture.h" />
+    <ClInclude Include="..\..\..\..\Source\CrashMonitor.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
     <ClInclude Include="..\..\..\..\Source\Fightable.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
@@ -285,6 +293,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSObjMesh.h" />
     <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
     <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
+    <ClInclude Include="..\..\..\..\Source\GSProxy.h" />
     <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
@@ -347,11 +356,13 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
+    <Library Include="..\..\..\..\..\..\Source\Network\curl\lib\libcurl.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Source\main_iphone.mm" />
+    <None Include="..\..\..\..\Source\newclass.pl" />
     <None Include="..\..\..\..\Source\newgui.pl" />
     <None Include="..\..\..\..\Source\newreq.pl" />
     <None Include="..\..\..\..\Source\newstate.pl" />

@@ -245,6 +245,9 @@
     <ClCompile Include="..\..\..\Source\Network\Socket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\SocketService.cpp" />
     <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Resource\LoadMeshResource.cpp" />
+    <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\ParticleEffect2d.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\TextMaker.cpp" />
     <ClCompile Include="..\..\..\Source\Sound\TextToSpeech.cpp" />
@@ -486,6 +489,9 @@
     <ClInclude Include="..\..\..\Source\Network\Socket.h" />
     <ClInclude Include="..\..\..\Source\Network\SocketService.h" />
     <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
+    <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h" />
+    <ClInclude Include="..\..\..\Source\Resource\LoadTextureResource.h" />
+    <ClInclude Include="..\..\..\Source\Scene\ParticleEffect2d.h" />
     <ClInclude Include="..\..\..\Source\Scene\Shadow.h" />
     <ClInclude Include="..\..\..\Source\Scene\TextMaker.h" />
     <ClInclude Include="..\..\..\Source\Sound\TextToSpeech.h" />
