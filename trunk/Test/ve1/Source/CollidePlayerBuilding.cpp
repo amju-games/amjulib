@@ -6,7 +6,7 @@ namespace Amju
 {
 void CollidePlayerBuilding(Player* player, Building* b)
 {
-  if (player->IsHidden())
+  if (player->IsHidden() || b->IsHidden())
   {
     return;
   }
