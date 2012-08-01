@@ -118,7 +118,7 @@ std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: "
   url += "&msg='";
   url += newmsg;
   url += "'";
-  TheVe1ReqManager::Instance()->AddReq(new ReqSendMsg(ToUrlFormat(url)), MAX_CONCURRENT_MSGS);
+  TheVe1ReqManager::Instance()->AddReq(new ReqSendMsg(url), MAX_CONCURRENT_MSGS);
 }
 
 std::string EncodeMsg(const std::string& plainMsg)
