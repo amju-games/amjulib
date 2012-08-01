@@ -10,6 +10,7 @@
 #include "GSLoginWaiting.h"
 #include "GSChoosePlayer.h"
 #include "GSYesNoQuitProcess.h"
+#include "GSOptions.h"
 #include "AvatarManager.h"
 #include "Version.h"
 #include "SpecialConfig.h"
@@ -26,6 +27,12 @@ static void OnQuickStartButton()
   std::string email = pi->PIGetString(PI_KEY("email"));
   TheGSLoginWaiting::Instance()->SetEmail(email);
   TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
+}
+
+static void OnOptionsButton()
+{
+  TheGSOptions::Instance()->SetPrevState(TheGSTitle::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 
 static void OnStartButton()
@@ -120,6 +127,9 @@ void GSTitle::OnActive()
   GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
   start->SetCommand(Amju::OnStartButton);
   start->SetHasFocus(true); // use in preference to SetIsFocusButton
+
+  GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
+  options->SetCommand(Amju::OnOptionsButton);
 
   GuiButton* quick = (GuiButton*)GetElementByName(m_gui, "quick-start-button");
   static PlayerInfoManager* pim = ThePlayerInfoManager::Instance();

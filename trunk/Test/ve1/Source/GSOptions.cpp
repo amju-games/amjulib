@@ -3,16 +3,11 @@
 #include <GuiButton.h>
 #include "GSOptions.h"
 #include "GSAvatarMod.h"
+#include "GSProxy.h"
 #include "Kb.h"
 
 namespace Amju
 {
-static void OnAvatarButton()
-{
-  TheGSAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
-}
-
 static void OnBack()
 {
   TheGSOptions::Instance()->GoBack();
@@ -24,6 +19,13 @@ static void OnSound()
 
 static void OnFullscreen()
 {
+}
+
+static void OnInternet()
+{
+  TheGSProxy::Instance()->SetPrevState(TheGSOptions::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSProxy::Instance()); 
+  // TODO Other internet options, with proxy settings as one page.
 }
 
 static void OnKeyboard()
@@ -78,6 +80,7 @@ void GSOptions::OnActive()
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
   GetElementByName(m_gui, "sound-button")->SetCommand(OnSound);
   GetElementByName(m_gui, "fullscreen-button")->SetCommand(OnFullscreen);
+  GetElementByName(m_gui, "inet-button")->SetCommand(OnInternet);
 
   // TODO Hide for iPad etc, this must always have KB.
   GuiButton* kb = (GuiButton*)GetElementByName(m_gui, "keyboard-button");
