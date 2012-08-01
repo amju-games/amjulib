@@ -38,7 +38,7 @@ public:
   void SetSuccess(bool);
   void SetErrorString(const std::string& errorStr);
 
-  std::string GetString() const; // convenience, treat data as a string for text resources
+  const std::string& GetString() const; 
 
   const unsigned char* GetData() const;
   unsigned int Size() const;
@@ -47,7 +47,9 @@ public:
   std::string GetErrorString() const;
 
 private:
-  std::vector<unsigned char> m_data;
+  std::string m_data;
+  friend class HttpClient;
+
   bool m_success;
   std::string m_errorStr;
 };
@@ -56,11 +58,13 @@ private:
 class HttpClient
 {
 public:
-  enum HttpMethod { GET, POST, HEAD };
+  enum HttpMethod { GET, POST };
 
   // NB This url is NOT formatted i.e. characters changed to %<hex number>
   // Do this yourself if required, using UrlUtils functions.
   bool Get(const std::string& url, HttpMethod m, HttpResult* result);
+
+  static void SetProxy(const std::string& proxyName, int port, const std::string& user, const std::string& pw);
 };
 }
 
