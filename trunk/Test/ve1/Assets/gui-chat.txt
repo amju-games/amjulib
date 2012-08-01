@@ -24,7 +24,7 @@ bg
 // Colour
 ffffff
 // corner radius
-0.05
+0.03
 //flags
 12
 
