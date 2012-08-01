@@ -31,7 +31,7 @@ static const float ARROW_YSIZE = 30.0f;
 class PlayerSceneNode : public Ve1Character
 {
 public:
-  PlayerSceneNode(Player* p) : m_player(p)
+  PlayerSceneNode(Player* p) : Ve1Character(p), m_player(p)
   {
   }
 

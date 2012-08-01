@@ -29,37 +29,6 @@ static void OnFinishedUpload()
   TheGSObjMesh::Instance()->OnFinishedUpload();
 }
 
-/*
-// Finalise creation of new object. TODO Put in its own file, rename it. 
-// Can call multiple times, to change file names, right ?
-class CreateNewObjectReq : public Ve1Req
-{
-public:
-  CreateNewObjectReq(const std::string& url) : Ve1Req(url, "create object") { }
-
-  virtual void OnSuccess()
-  {
-std::cout << "Create new object succeeded!\n";
-    // Go back to Edit state: the new object should be magically updated via the regular
-    //  ObjectUpdater mechanism, right ?
-    TheGame::Instance()->SetCurrentState(TheGSEdit::Instance()); 
-  }
-
-  virtual void OnFailure()
-  {
-std::cout << "Create new object FAILED!\n";
-
-  const HttpResult& res = GetResult();
-
-std::cout << "RESULT: " << res.GetString() << "\n";
-std::cout << "ERROR: " << res.GetErrorString() << "\n";
-std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
-
-    TheGSObjMesh::Instance()->SetError("Failed to create new object.");
-    // TODO Error msg
-  }
-};
-*/
 
 GSObjMesh::GSObjMesh()
 {

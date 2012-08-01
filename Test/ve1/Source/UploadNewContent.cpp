@@ -130,18 +130,23 @@ std::cout << "UPLOAD THIS FILE: " << file << "\n";
   // Upload asset file
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(FILE_UPLOAD);
   url += "&dir=" + serverDir;
-  url += "&filename=" + assetFilename + "&data=" + assetFile;
-  url = ToUrlFormat(url);
+  url += "&filename=" + assetFilename + "&data=" + ToUrlFormat(assetFile);
+
+std::cout << "Uploading asset file: Req=" << url << "\n";
+
+//  url = ToUrlFormat(url);
   TheVe1ReqManager::Instance()->AddReq(new UploadReq(url, assetFilename), totalFiles);
 
   // Upload location data file
   url = TheVe1ReqManager::Instance()->MakeUrl(FILE_UPLOAD);
   url += "&dir=" + serverDir;
   url += "&filename=" + dataFilename + "&data=" +  
-    "// version\r\n1\r\n// obj file\r\n" + serverDir + "/" + objFile;
+    ToUrlFormat("// version\r\n1\r\n// obj file\r\n" + serverDir + "/" + objFile);
   // TODO Use dataFile contents passed in
 
-  url = ToUrlFormat(url);
+std::cout << "Uploading data file: Req=" << url << "\n";
+
+//  url = ToUrlFormat(url);
   TheVe1ReqManager::Instance()->AddReq(new UploadReq(url, dataFilename), totalFiles);
 
   return true;

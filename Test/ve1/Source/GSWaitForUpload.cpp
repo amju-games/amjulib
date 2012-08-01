@@ -80,27 +80,6 @@ std::cout << " ...num files uploaded now: " << m_uploadedFiles << "\n";
     // Callback
     Assert(m_onFinishedFunc);
     m_onFinishedFunc();
-
-/*
-    if (m_mode == AMJU_EDIT)
-    {
-std::cout << "All uploaded, we are done here!\n";
-      OnLocationCreated();
-    }
-    else
-    {
-      SetError("Finished uploading, creating new location on server...");
-
-      std::string dir = MakeLocDir(); //"Loc_" + m_locId; // TODO comon func
-
-      // Send req to make new Location game object.
-      std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
-      url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
-      url = ToUrlFormat(url);
-      TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
-    }
-*/
-
   }
   else
   {

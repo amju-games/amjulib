@@ -751,7 +751,7 @@ void GSEdit::CreateContextMenu()
   {
     m_menu->AddChild(new GuiMenuItem("Go to Location...", OnGotoLocation));
     m_menu->AddChild(new GuiMenuItem("Add new Location...", OnNewLocation));
-    m_menu->AddChild(new GuiMenuItem("Update this mesh...", OnEditLocation));
+    m_menu->AddChild(new GuiMenuItem("Update this location mesh...", OnEditLocation));
 
     GuiMenu* childMenu = new GuiMenu;
     childMenu->SetName("Child menu");

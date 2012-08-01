@@ -15,7 +15,7 @@ void SendReqSetObjectFilenames(int objId, const std::string& assetFilename, cons
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_OBJECT);
   url += "&obj_id=" + id + "&asset_file=" + assetFilename + "&data_file=" + dataFilename;
-  url = ToUrlFormat(url);
+//  url = ToUrlFormat(url);
   TheVe1ReqManager::Instance()->AddReq(new ReqSetObjectFilenames(url), 1);
   // Only change one object's files at a time, right ?
 }

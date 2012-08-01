@@ -272,14 +272,14 @@ std::cout << "UPLOAD THIS FILE: " << file << "\n";
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(FILE_UPLOAD);
   url += "&dir=" + dir;
   url += "&filename=" + m_assetFilename + "&data=" + assetFile;
-  url = ToUrlFormat(url);
+//  url = ToUrlFormat(url);
   TheVe1ReqManager::Instance()->AddReq(new UploadReq(url, m_assetFilename), m_totalFiles);
 
   // Upload location data file
   url = TheVe1ReqManager::Instance()->MakeUrl(FILE_UPLOAD);
   url += "&dir=" + dir;
   url += "&filename=" + m_dataFilename + "&data=" +  "// version\r\n1\r\n// obj file\r\n" + dir + "/" + m_objFile;
-  url = ToUrlFormat(url);
+//  url = ToUrlFormat(url);
   TheVe1ReqManager::Instance()->AddReq(new UploadReq(url, m_dataFilename), m_totalFiles);
 
   // Now we wait -- but make sure Online Req Manager is being updated!
@@ -305,56 +305,10 @@ std::cout << "All uploaded, we are done here!\n";
     // Send req to make new Location game object.
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
     url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
-    url = ToUrlFormat(url);
+//    url = ToUrlFormat(url);
     TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
   }
 }
-
-/*
-void GSNewLocation::OnUploadFinished(const UploadInfo& ui)
-{
-  if (ui.m_ok)
-  {
-    // No mutex required, responses are handled in main thread
-    m_uploadedFiles++;
-
-std::cout << "SUCCESS for " << ui.m_filename << "\n";
-  }
-  else
-  {
-    SetError("Failed on " + ui.m_filename);
-std::cout << "FAIL for " << ui.m_filename << "\n";
-    return;
-  }
-
-std::cout << " ...num files uploaded now: " << m_uploadedFiles << "\n";
-
-  if (m_uploadedFiles == m_totalFiles)
-  {
-    if (m_mode == AMJU_EDIT)
-    {
-std::cout << "All uploaded, we are done here!\n";
-      OnLocationCreated();
-    }
-    else
-    {
-      SetError("Finished uploading, creating new location on server...");
-  
-      std::string dir = MakeLocDir(); //"Loc_" + m_locId; // TODO comon func
-
-      // Send req to make new Location game object.
-      std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
-      url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
-      url = ToUrlFormat(url);
-      TheVe1ReqManager::Instance()->AddReq(new CreateNewLocationReq(url), m_totalFiles);
-    }
-  }
-  else 
-  {
-    SetError("Uploaded " + ToString(m_uploadedFiles) + " of " + ToString(m_totalFiles) + "  files...");
-  } 
-}
-*/
 
 void GSNewLocation::OnLocationCreated()
 {
