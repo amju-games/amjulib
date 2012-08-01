@@ -154,7 +154,7 @@ void GSAvatarMod::OnActive()
   GetGuiSceneGraph()->Clear();
   GetGuiSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
-  m_char = new Ve1Character;
+  m_char = new Ve1Character(0);
   GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char); 
 
   PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();

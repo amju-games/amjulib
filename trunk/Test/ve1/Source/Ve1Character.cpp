@@ -1,8 +1,36 @@
 #include "Ve1Character.h"
 #include <File.h>
+#include <DrawAABB.h>
+#include "GameMode.h"
+#include "Ve1Object.h"
 
 namespace Amju
 {
+void Ve1Character::Draw()
+{
+  if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    PushColour();
+    if (m_obj->IsSelected())
+    {
+      MultColour(Colour(1, 0, 0, 1));
+    }
+    else
+    {
+      MultColour(Colour(0, 0, 1, 1)); // So visible, grey is not very noticeable
+    }
+
+    Assert(GetAABB());
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    DrawAABB(*(GetAABB()));
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+
+    PopColour();
+  }
+
+  BlinkCharacter::Draw();
+}
+
 bool Ve1Character::Load(File* f)
 {
   std::string meshName;

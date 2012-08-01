@@ -21,7 +21,7 @@ void TutorialNpc::Update()
 
 bool TutorialNpc::Load(File* f)
 {
-  Ve1Character* node = new Ve1Character;
+  Ve1Character* node = new Ve1Character(this);
 
   m_sceneNode = node;
 

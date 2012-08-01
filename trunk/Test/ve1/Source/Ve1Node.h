@@ -2,11 +2,10 @@
 #define VE1_NODE_H_INCLUDED
 
 #include <SceneNode.h>
+#include "Ve1Object.h"
 
 namespace Amju
 {
-class Ve1Object;
-
 class Ve1Node : public SceneNode
 {
 public:
@@ -15,7 +14,7 @@ public:
   virtual void Draw();
 
 protected:
-  Ve1Object* m_obj;
+  RCPtr<Ve1Object> m_obj;
 };
 
 class Ve1NameNode : public SceneNode
@@ -25,7 +24,7 @@ public:
   virtual void Draw();
 
 protected:
-  Ve1Object* m_obj;
+  RCPtr<Ve1Object> m_obj;
 };
 }
 

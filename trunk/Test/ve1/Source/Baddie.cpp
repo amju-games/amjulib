@@ -47,7 +47,7 @@ void Baddie::Update()
 bool Baddie::Load(File* f)
 {
   // Create Scene Node, but don't attach to SceneGraph until needed
-  Ve1Character* node = new Ve1Character;
+  Ve1Character* node = new Ve1Character(this);
 
   m_sceneNode = node;
 
