@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -27,7 +27,7 @@ gui-button
 // Element name
 back-button
 // pos (coords are -1..1)
--0.4, -0.2
+-0.4, -0.5
 // size
 0.8, 0.2
 // Image
@@ -59,23 +59,17 @@ keyboard-button
 0.8,0.2
 gui-button-4.png
 keyboard...
+arial, 1.5 
+
+gui-button
+inet-button
+-0.4,-0.1
+0.8,0.2
+gui-button-4.png
+internet...
 arial, 2.0
 
 
 
 
-// element type
-gui-button
-// Element name
-avatar-button
-// pos (coords are -1..1)
--0.4, 0.3 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-edit avatar...
-// Font name, size
-arial, 1.0 
 

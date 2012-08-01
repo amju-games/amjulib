@@ -1,0 +1,80 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+proxy-comp
+// Num children
+6
+
+
+gui-button
+has-proxy-button
+-0.5, 0.6 
+0.8, 0.2
+gui-button-4.png
+use proxy
+arial, 1.0 
+
+
+gui-text-edit
+proxy-hostname-text
+// pos (coords are -1..1)
+-0.5, 0.1
+// size
+1.0, 0.1
+// Text
+proxy@example.com:1234
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text-edit
+proxy-username-text
+// pos (coords are -1..1)
+-0.5, -0.1
+// size
+1.0, 0.1
+// Text
+username
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text-edit
+proxy-pw-text
+// pos (coords are -1..1)
+-0.5, -0.3 
+// size
+1.0, 0.1
+// Text
+password
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-button
+proxy-ok-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 2.0 
+
+gui-button
+proxy-cancel-button
+// pos (coords are -1..1)
+-0.4, -0.725
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 1.75 
+
+
