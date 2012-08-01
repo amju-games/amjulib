@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{5F1820EB-3B24-4F20-B8EB-30D083C8511F}
 AppName=My Game
-AppVersion=0.2
+AppVersion=0.4
 ;AppVerName=My Game 0.2
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
@@ -30,6 +30,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Files]
 Source: "..\..\..\..\Build\ve1\Windows\Release\ve1.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\GLUT\glut32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\Network\curl\lib\libcurl.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Source\Network\curl\lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SDL\lib\sdl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.dll"; DestDir: "{app}"; Flags: ignoreversion
