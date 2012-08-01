@@ -145,7 +145,7 @@ void ParticleEffect2d::Update()
   m_isDead = isDead;
 
   // TODO Not needed if we can disable Z-writing..?
-  std::sort(m_particles.begin(), m_particles.end());
+//  std::sort(m_particles.begin(), m_particles.end());
 
   Matrix mat;
   mat.ModelView(); // Get Modelview matrix
@@ -193,6 +193,7 @@ void ParticleEffect2d::Start()
     p.m_vel = NewVel();
     p.m_acc = NewAcc();
     p.m_time = NewTime();
+    p.m_isDead = false;
   }
 }
 }
