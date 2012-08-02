@@ -99,11 +99,31 @@ std::cout << "Port: " << port << "\n";
   CURL* curl = curl_easy_init();
   if(curl) 
   {
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str()); 
+    std::string strippedurl; // don't let these go out of scope before we perform req!
+    std::string data;  // (**This is bullshit**, I thought the strings were supposed to be copied)
+
     curl_easy_setopt(curl, CURLOPT_HEADER, 1);  // we DO want http header
+    if (m == HttpClient::POST)
+    {
+      strippedurl = StripDataFromUrl(url);
+      data = GetDataFromUrl(url); 
+
+      curl_easy_setopt(curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
+
+      curl_easy_setopt(curl, CURLOPT_URL, strippedurl.c_str());
+      curl_easy_setopt(curl, CURLOPT_POST, 1);
+
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, data.size());
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str());
+    }
+    else
+    {
+      curl_easy_setopt(curl, CURLOPT_URL, url.c_str()); 
+    }
 
     // For proxy:
     std::string proxy = s_proxyName;
+    std::string user;
     if (s_proxyPort != -1)
     {
       proxy += ":" + ToString(s_proxyPort);
@@ -111,7 +131,7 @@ std::cout << "Port: " << port << "\n";
     curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
     if (!s_proxyUser.empty())
     {
-      std::string user = s_proxyUser;
+      user = s_proxyUser;
       if (!s_proxyPw.empty()) 
       {
         user += ":" + s_proxyPw;
