@@ -116,8 +116,8 @@ void GSTitle::OnActive()
     TheAvatarManager::Instance()->Load();
   }
 
-  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  TheGame::Instance()->SetFrameTimeFont(font);
+//  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+//  TheGame::Instance()->SetFrameTimeFont(font);
 
   GSGui::OnActive();
 
