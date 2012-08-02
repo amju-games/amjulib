@@ -208,7 +208,7 @@ std::string GetDataFromUrl(const std::string& url)
   {
     return ""; // no data
   }
-  return url.substr(f); // return f to end
+  return url.substr(f + 1); // return f to end - STRIP THE "?"
 }
 
 std::string StripDataFromUrl(const std::string& url)
