@@ -34,9 +34,6 @@ public:
   // Get where we are headed
   const Vec3f& GetTargetPos();
 
-  // Call when we collide with something. When we are no longer colliding, we recalc heading.
-  void SetIsColliding(GameObject* collidingObject);
-
   virtual void SetEditMenu(GuiMenu*);
   
   virtual void SetKeyVal(const std::string& key, const std::string& val);
@@ -46,8 +43,6 @@ public:
 
 protected:
   void TurnToFaceDir();
-
-  void HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
 
 protected:
   std::string m_name;
@@ -64,7 +59,6 @@ protected:
   // Start fading out when a player has logged out
   float m_fadeTime;
 
-  GameObject* m_collidingObject; // (one of the) objects we are colliding with
   bool m_recalcHeading; // if true, recalc
 
   RCPtr<AttackEffect> m_effect;
