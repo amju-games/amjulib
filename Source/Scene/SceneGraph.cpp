@@ -145,6 +145,10 @@ void SceneGraph::DrawChildren(
   for (unsigned int i = 0; i < s; i++)
   {
     PSceneNode& child = node->m_children[i];
+    if (!child->IsVisible())
+    {
+      continue;
+    }
 
     // Get frustum result for child. If child nodes are always contained
     //  within their parents, we only need to recalc if the parent node
