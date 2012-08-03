@@ -537,6 +537,7 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
   if (m_mouseDownLeft && 
       !m_selectedObjects.empty())
   {
+    std::string str;
     for (SelObjects::iterator it = m_selectedObjects.begin(); it != m_selectedObjects.end(); ++it)
     {
       // Move this obj
@@ -544,12 +545,16 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
       Vec3f pos = obj->GetPos();
       pos += m_right * dx * 100.0f;
       pos += m_up * dy * 100.0f;
+
+      str = ToString(pos); // TODO pos change if multiple objects ? 
+
       obj->SetPos(pos);
 
 //std::cout << "Should be sending pos update: " << pos << "\n";
       // Don't send, wait til mouse up event
 //      TheObjectUpdater::Instance()->SendPosUpdateReq(obj->GetId(), pos, m_location);
     }
+    ((GuiText*)GetElementByName(m_gui, "text1"))->SetText(str);
   }
 
   return false;
@@ -777,17 +782,6 @@ void GSEdit::CreateContextMenu()
     childMenu->AddChild(new GuiMenuItem("TutorialNPC", 
       new NewObjectCommand(TutorialNpc::TYPENAME, "tutnpc-assets.txt", "tutnpc-data.txt", true)));
 
-/*
-    std::vector<std::string> types = TheGameObjectFactory::Instance()->GetTypeNames();
-    for (unsigned int i = 0; i < types.size(); i++)
-    {
-      std::string assetfile = "none";
-      std::string datafile = "none";
-
-      std::string type = types[i];
-      childMenu->AddChild(new GuiMenuItem(types[i], new NewObjectCommand(type, assetfile, datafile)));
-    }
-*/
     m_menu->AddChild(new GuiNestMenuItem("New Game Object...", childMenu));
   }
   else if (m_selectedObjects.size() == 1)
