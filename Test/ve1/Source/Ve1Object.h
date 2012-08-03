@@ -73,6 +73,18 @@ public:
   virtual AABB* GetAABB(); // overriding GameObject's impl
 
   bool IsHidden() const; // if true, object is invisible and does not interact with anything
+  void SetHidden(bool);
+
+  // Handle collisions and cast shadows
+
+  // Call when we collide with something. When we are no longer colliding, we recalc heading.
+  void SetIsColliding(GameObject* collidingObject);
+
+protected:
+  void HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
+
+  void HandleFloor(CollisionMesh* m);
+  virtual void OnBounceStop() {}
 
 protected:
   // Location ID. -1 means the object doesn't live in one particular location, it's in every location, 
@@ -96,6 +108,9 @@ protected:
   AABB m_aabb; 
 
   bool m_hidden; // if true, set scene node invisible
+
+  GameObject* m_collidingObject; // (one of the) objects we are colliding with
+
 };
 
 // Keep track of keys used to set object properties

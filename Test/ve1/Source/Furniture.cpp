@@ -116,7 +116,6 @@ bool Furniture::Load(File* f)
     return false;
   }
 
-  m_shadow = new Shadow;
 //  if (!m_shadow->Load(f))
 //  {
 //    return false;

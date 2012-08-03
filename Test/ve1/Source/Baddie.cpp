@@ -51,7 +51,6 @@ bool Baddie::Load(File* f)
 
   m_sceneNode = node;
 
-  m_shadow = new Shadow;
   if (!m_shadow->Load(f))
   {
     return false;

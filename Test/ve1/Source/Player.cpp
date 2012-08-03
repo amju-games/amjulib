@@ -214,7 +214,6 @@ bool Player::Load(File* f)
   PlayerSceneNode* psn = new PlayerSceneNode(this);
   m_sceneNode = psn;
 
-  m_shadow = new Shadow;
   if (!m_shadow->Load(f))
   {
     return false;
