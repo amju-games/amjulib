@@ -1,8 +1,10 @@
 #include "Ve1Req.h"
 #include <Xml/XmlParser2.h>
 #include <SafeUtils.h>
+#include <StringUtils.h>
 #include <iostream>
 #include "GSNetError.h"
+#include "CreateCollect.h"
 
 namespace Amju
 {
@@ -75,4 +77,35 @@ void Ve1Req::OnFailure()
 std::cout << "NET ERROR but non-critical...\n";
   }
 }
+
+void Ve1Req::CheckCollects()
+{
+  int n = m_xml.nChildNode();
+
+  for (int i = 1; i < n; i++)
+  {
+    PXml p = m_xml.getChildNode(i);
+    if (SafeStrCmp(p.getName(), "collect"))
+    {
+std::cout << "Found collect msg!!\n";
+      // format: <collect> <num/> <type/> <id/> </collect>
+      PXml ch = p.getChildNode(0);
+      if (!SafeStrCmp(ch.getName(), "num"))
+      {
+        m_errorStr += "bad collect element";
+        OnFailure();
+      }
+      int num = ToInt(ch.getText());
+      ch = p.getChildNode(1);
+      int type = ToInt(ch.getText());
+      ch = p.getChildNode(2);
+      int id = ToInt(ch.getText()); 
+      for (int j = 0; j < num; j++)
+      {
+        CreateCollect(type, id);
+      }
+    }
+  }
+}
+
 }
