@@ -26,6 +26,10 @@ public:
   virtual void OnFailure();
 
 protected:
+  // Check if the response tells us to create collectables
+  void CheckCollects();
+
+protected:
   PXml m_xml;
   std::string m_errorStr;
   std::string m_timestamp;
