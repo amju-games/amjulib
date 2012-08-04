@@ -9,6 +9,8 @@
 
 namespace Amju
 {
+class File;
+
 enum TestId
 {
   AMJU_COG_TEST_LETTER_CAN = 1,
@@ -22,14 +24,23 @@ enum TestId
 class Result
 {
 public:
+  Result() : m_testId(-1), m_key("none"), m_val("none"), m_committed(false), m_timestamp(Time::Now())
+  {
+    m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
+  }
+
   Result(int testId, const std::string& key, const std::string& val) :  
     m_testId(testId), m_key(key), m_val(val), m_committed(false), m_timestamp(Time::Now())
   {
     m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
   }
 
+  bool Load(File*);
+  bool Save(File*);
+
 private:
   friend class CogTestResults;
+  friend class ReqStoreResult;
 
   std::string m_sessionId;
   int m_testId; 
@@ -47,17 +58,22 @@ private:
 // We may want to show the player ALL his/her results, which would need to be retrieved from the server.
 class CogTestResults : public NonCopyable
 {
+  CogTestResults();
+  friend class Singleton<CogTestResults>;
+
 public:
+  ~CogTestResults();
+
   bool Load();
   bool Save();
 
-  void StoreResult(const Result*);
+  void StoreResult(Result*);
 
   // Call to attempt to send all outstanding results to server
   void Commit();
 
 private:
-  void SendResult(const Result*);
+  void SendResult(Result*);
 
 private:
   typedef std::vector<Result*> Results;
