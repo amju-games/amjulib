@@ -1,6 +1,17 @@
-// player data
+// BADDIE data
 // ver
 1
 shadow.png
-20
+40
+
+// Effect
+// image - TODO TEMP TEST
+sparkle1.png
+// size
+20.0
+// number
+50
+// max time
+2.0
+
 
