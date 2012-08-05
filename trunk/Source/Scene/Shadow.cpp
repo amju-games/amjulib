@@ -52,6 +52,7 @@ void Shadow::Polygon::Draw()
   AmjuGL::DrawTriList(m_tris);
 
 #ifdef SHADOW_DEBUG
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   for (unsigned int i = 0; i < m_tris.size(); i++)
   {
     const AmjuGL::Tri& tri = m_tris[i];
@@ -63,6 +64,7 @@ void Shadow::Polygon::Draw()
     AmjuGL::DrawLine(v1, v2);
     AmjuGL::DrawLine(v2, v0);
   }
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 #endif // SHADOW_DEBUG
 }
 
@@ -141,7 +143,6 @@ void Shadow::EraseCollisionMesh(CollisionMesh* mesh)
 
 void Shadow::AddCollisionMesh(CollisionMesh* mesh)
 {
-  //m_mesh.push_back(mesh);
   m_mesh.insert(mesh);
   Recalc();
 }
@@ -160,6 +161,11 @@ void Shadow::Recalc()
 
 void Shadow::Draw()
 {
+  DrawList();
+}
+
+void Shadow::Update()
+{
   Assert(m_size > 0);
   Vec3f v(m_combined[12], m_combined[13], m_combined[14]);
 
@@ -172,14 +178,9 @@ void Shadow::Draw()
     m_oldz = v.z;
     m_oldsize = m_size;
   }
-
-  DrawList();
 }
 
-void Shadow::Update()
-{
-}
-
+/*
 void Shadow::MyDraw(
   const Vec3f& v,
   float size,
@@ -206,6 +207,7 @@ void Shadow::MyDraw(
   RecalculateList(v.x, v.y, v.z, size, collMesh);
   DrawList();
 }
+*/
 
 void Shadow::SetHeightRange(float up, float down)
 {
@@ -269,7 +271,7 @@ void Shadow::DrawList()
 
   if (m_list.empty())
   {
-#ifdef SHADOW_DEBUG
+#ifdef SHADOW_DEBUG_EMPTY
 std::cout << "Shadow list is empty\n";
 #endif
 
@@ -328,11 +330,11 @@ void Shadow::RecalculateList(
 
   // Get the height poly which is the heighest below y.
 
-  //float h = 0;
   // Get highest point on coll mesh ?
   // Better if we can avoid doing this. Shadow centre (x, z) mat be off
   //  the mesh!
-  /*
+// Was commented out starting here 
+  float h = 0;
   if (!collMesh.GetY(Vec2f(x, z), &h)) // TODO Must be highest
   {
     return;
@@ -356,9 +358,14 @@ std::cout << "SHADOW: TOO HIGH TO CAST SHADOW??\n";
   else 
   {
     RecalcMult(y, h);
-// TODO TEMP TEST//    size *= m_mult;
+// TODO TEMP TEST//    
+    size *= m_mult;
   }
-  */
+// Was commented out down to here 
+  if (size <= SMALLEST)
+  {
+    return;
+  }
 
   Assert(size > 0);
 
@@ -366,7 +373,7 @@ std::cout << "SHADOW: TOO HIGH TO CAST SHADOW??\n";
   RecalculateVerts();
 
   // Get a horizontal bounding square centred on x, z.
-  // This is used to get all the heightservers we need to consider.
+  // This is used to get all the collision meshes we need to consider.
   // It doesn't imply that the shadow must be a quad.
   const float x1 = x + size;
   const float x2 = x - size;
@@ -404,13 +411,12 @@ std::cout << "SHADOW: TOO HIGH TO CAST SHADOW??\n";
   {
 #ifdef SHADOW_DEBUG
     // Draw the floor poly
-    //glLineWidth(4);
-    //AmjuGL::Disable(GL_TEXTURE_2D);
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     PushColour();
-    //MultColour(Colour(0, 0, 0, 1.0f));
+    MultColour(Colour(1, 0, 0, 1.0f));
     (*it).Draw();
     PopColour();
-    //AmjuGL::Enable(GL_TEXTURE_2D);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 #endif
 
     // Now for each height poly, clip the shadow poly to it.
@@ -467,9 +473,6 @@ void Shadow::ClipShadowToTri(
   // is cast on. We have to get the intersection of the two polygons.
   // Luckily we can use the GPC ("Generic Polygon Clipper").
 
-  // Vector of shadow polygon vertices after clipping.
-  std::vector<Vec3f> vertices;
-
   // Set up gpc data structures for the two polygons.
   // First poly: the shadow 
   gpc_vertex v1[36]; // TODO arbitrary max number of verts.
@@ -492,7 +495,7 @@ void Shadow::ClipShadowToTri(
   int h1 = 0;
   p1.hole = &h1;
 
-  // Second poly: convert hp to gpc data structures.
+  // Second poly: convert to gpc data structures.
   const int numverts = 3; // vertices in ground poly
   const int MAX_VERTS = 36; // TODO get real max from scene ?
   gpc_vertex v2[MAX_VERTS]; // Don't allocate with new, for speed.
@@ -522,45 +525,35 @@ void Shadow::ClipShadowToTri(
   gpc_polygon result;
   gpc_polygon_clip(GPC_INT, &p1, &p2, &result);
 
-  // Convert result into vector of VertexBase.
+  // Convert result into vector of Vec3s
   if (result.num_contours != 1)
   {
     // Error, there should be one gpc 'contour' (== polygon here).
 #ifdef SHADOW_DEBUG
-std::cout << "SHADOW: BAILING before cliiping shadow poly to height poly!\n";
+std::cout << "SHADOW: BAILING before clipping shadow poly to height poly!\n";
 #endif
     return;
   }
 
+  Polygon poly;
   gpc_vertex_list& vlist = result.contour[0];
   for (int k = 0; k < vlist.num_vertices; k++)
   {
     gpc_vertex& v = vlist.vertex[k];
     Vec3f vb((float)v.x, 0, (float)v.y);
-    vertices.push_back(vb);
+
+    float y = 0;
+    bool gotY = GetY(tri, Vec2f(vb.x, vb.z), &y);
+    Assert(gotY);
+
+    float s, t;
+    MapST(centrex, centrez, vb.x, vb.z, size, &s, &t);
+
+    poly.AddVertex(AmjuGL::Vert(vb.x, y + OFFSET, vb.z, s, t, 0, 1.0f, 0));
   }
 
   // Free the contour in the polygon result.
   gpc_free_polygon(&result);
-
-  // TODO we could do this in the loop above.
-  Polygon poly;
-  for (unsigned int j = 0; j < vertices.size(); j++)
-  {
-    const Vec3f& v = vertices[j];
-    float y = 0;
-    bool gotY = GetY(tri, Vec2f(v.x, v.z), &y);
-    Assert(gotY);
-    //Assert(y != HeightServer::BadHeight);
-
-    float s, t;
-    MapST(centrex, centrez, v.x, v.z, size, &s, &t);
-    //TexVertex texv(s, t);
-    //SceneVertex sv(v.x, y + OFFSET, v.z);
-
-    poly.AddVertex(AmjuGL::Vert(v.x, y + OFFSET, v.z, s, t, 0, 1.0f, 0));
-    //poly.AddTexVertex(texv);
-  }
 
   // Finished creating the polygon - now tesselate it
   poly.Tesselate();
