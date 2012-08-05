@@ -63,21 +63,32 @@ sub add_research_element($$)
   print "</research>";
 }
 
-
-sub login()
+sub cleanup_inactive_players()
 {
-  my $email = param('email') or die "Expected email\n";
-  $email = lc($email);  # make lower case
-
   # Mark any inactive players as logged out
-  # TODO Here inactive means no change in position for > 1 hour
-  $sql = "update objectstate set `val`='n' where `key`='loggedin' and id in (select distinct a.obj_id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 60 * 60 )";
+  # TODO Here inactive means no change in position for > 1 hour, and logged in over an hour ago
+  # (TODO Tweak these)
+  my $sql = "update objectstate set `val`='n' where `key`='loggedin' and id in ( select distinct a.obj_id from player as a, session as b, objectpos as c where a.obj_id=c.id and a.id=b.player_id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 3600 and  TIMESTAMPDIFF(SECOND, b.start, now()) > 3600 )";
+
+  update($sql);
+
+  # TODO Also end the session(s) - get session ID for each player(s) we are logging out
+  $sql = " update session set `expires`=now() where   TIMESTAMPDIFF(SECOND, start, now()) > 3600  and player_id in ( select distinct a.id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 3600)";
+
   update($sql);
 
   # Make players drop any carried objects if they are inactive (less time, because hogging items is bad)
   $sql = "update objectstate set val='0' where `key`='pickup' and val in (select distinct a.obj_id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 60 * 5 )";
   update($sql);
 
+}
+
+sub login()
+{
+  my $email = param('email') or die "Expected email\n";
+  $email = lc($email);  # make lower case
+
+  cleanup_inactive_players();
 
   my $clientver = param('clientver');
   if (!$clientver)
