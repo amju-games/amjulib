@@ -29,6 +29,7 @@
 #include "Useful.h"
 #include "LurkMsg.h"
 #include "Furniture.h"
+#include "CreateCollect.h" // TODO TEMP TEST
 
 namespace Amju
 {
@@ -70,6 +71,24 @@ std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
   {
     drop->SetVisible(false);
   }
+}
+
+void GSMain::SetHeartNum(int num)
+{
+  if (!m_gui)
+  {
+std::cout << "SetHeartNum: no gui!?!\n";
+    return;
+  }
+
+  GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
+  if (!text) 
+  {
+std::cout << "SetHeartNum: no heart-num element\n";
+    return;
+  }
+  text->SetText(ToString(num));
+std::cout << "Set heart text to " << num << "\n";
 }
 
 void GSMain::SetNumPlayersOnline(int n)
