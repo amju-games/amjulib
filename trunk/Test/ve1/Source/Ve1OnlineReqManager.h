@@ -33,6 +33,8 @@ enum Task
   GET_NEW_OBJECT_ID,  // for creating new object placeholder, gets ID
   CREATE_OBJECT, // set once ID known and all data uploaded 
 
+  FIGHT,
+
   // Research
   SEND_TEST_RESULT,
 };
