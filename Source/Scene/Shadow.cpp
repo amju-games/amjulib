@@ -24,9 +24,10 @@ namespace Amju
 {
 static const float MAX_HEIGHT = 100.0f;
 static const float SMALLEST = 1.0f; // ?
-static const float OFFSET = 5.0f; // ?
 static const float HEIGHT_RANGE_DOWN = 100.0f;
 static const float HEIGHT_RANGE_UP = 100.0f;
+
+float Shadow::s_offset = 1.0f; 
 
 void Shadow::Polygon::Tesselate()
 {
@@ -93,6 +94,11 @@ Shadow::Shadow()
   m_size = 0;
 
   SetBlended(true);
+}
+
+void Shadow::SetOffset(float offset)
+{
+  s_offset = offset;
 }
 
 bool Shadow::Load(File* f)
@@ -166,7 +172,11 @@ void Shadow::Draw()
 
 void Shadow::Update()
 {
-  Assert(m_size > 0);
+  if (m_size <= 0)
+  {
+    return;
+  }
+
   Vec3f v(m_combined[12], m_combined[13], m_combined[14]);
 
   if (v.x != m_oldx || v.y != m_oldy || v.z != m_oldz || m_size != m_oldsize)
@@ -179,35 +189,6 @@ void Shadow::Update()
     m_oldsize = m_size;
   }
 }
-
-/*
-void Shadow::MyDraw(
-  const Vec3f& v,
-  float size,
-  const CollisionMesh& collMesh)
-{
-  AMJU_CALL_STACK;
-
-  // Assumes that if we don't move, the surface on which we cast a shadow 
-  //  won't have changed either.
-  if (v.x == m_oldx && v.y == m_oldy && v.z == m_oldz && size == m_oldsize)
-  {
-    // No need to recalculate shadow. Just draw the contents of the list.
-    DrawList();
-    return;
-  }
-
-  m_oldx = v.x;
-  m_oldy = v.y;
-  m_oldz = v.z;
-  m_oldsize = size;
-  m_forceRefresh = false;
-
-  // Recalculate the shadow, and fill the list. 
-  RecalculateList(v.x, v.y, v.z, size, collMesh);
-  DrawList();
-}
-*/
 
 void Shadow::SetHeightRange(float up, float down)
 {
@@ -549,7 +530,7 @@ std::cout << "SHADOW: BAILING before clipping shadow poly to height poly!\n";
     float s, t;
     MapST(centrex, centrez, vb.x, vb.z, size, &s, &t);
 
-    poly.AddVertex(AmjuGL::Vert(vb.x, y + OFFSET, vb.z, s, t, 0, 1.0f, 0));
+    poly.AddVertex(AmjuGL::Vert(vb.x, y + s_offset, vb.z, s, t, 0, 1.0f, 0));
   }
 
   // Free the contour in the polygon result.
