@@ -22,6 +22,9 @@ class Shadow : public SceneNode
 public:
   Shadow();
 
+  // Set height offset to avoid z fighting
+  static void SetOffset(float);
+
   // SceneNode overrides
   virtual bool Load(File*);
   virtual void Draw();
@@ -136,6 +139,8 @@ protected:
   float m_oldx, m_oldy, m_oldz, m_oldsize;
 
   bool m_forceRefresh;
+
+  static float s_offset;
 };
 }
 
