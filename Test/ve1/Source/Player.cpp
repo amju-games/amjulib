@@ -28,6 +28,8 @@ namespace Amju
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
 
+static const char* STAMINA_KEY = "stamina";
+
 class PlayerSceneNode : public Ve1Character
 {
 public:
@@ -218,7 +220,6 @@ bool Player::Load(File* f)
   {
     return false;
   }
-  m_sceneNode->AddChild(m_shadow.GetPtr());
 
   m_nameTag = new PlayerNameNode(this);
   m_sceneNode->AddChild(m_nameTag.GetPtr());
@@ -243,10 +244,11 @@ void Player::OnLocationExit()
 
 void Player::OnLocationEntry()
 {
+  Ve1ObjectChar::OnLocationEntry();
+
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
 
-  root->AddChild(m_sceneNode.GetPtr());
   root->AddChild(m_arrow.GetPtr());
   SetArrowVis(false);
 
@@ -255,8 +257,6 @@ void Player::OnLocationEntry()
   SetVel(Vec3f(0, 0, 0)); // TODO walk out of doorway ?
 
   // TODO Set m_newPos ??
-
-  m_inNewLocation = true;
 
   // Set appearance
   SetLoggedIn(IsLoggedIn());
@@ -312,6 +312,15 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     bool isTyping = (recipId > 0);
     cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
+  else if (key == STAMINA_KEY)
+  {
+    // (Also handled in base class)
+    if (IsLocalPlayer())
+    {
+      TheGSMain::Instance()->SetHeartNum(m_stamina);
+    }
+  }
+
 }
 
 void Player::SetArrowVis(bool visible)

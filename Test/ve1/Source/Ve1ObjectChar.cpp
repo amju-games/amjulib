@@ -5,6 +5,8 @@
 #include "Terrain.h"
 #include "AvatarManager.h"
 #include "Useful.h"
+#include "GSMain.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -19,17 +21,22 @@ static const float BOUNCE_VEL = -50.0f;
 
 static const char* TYPE_KEY = "type";
 static const char* TEX_KEY = "tex";
+static const char* NAME_KEY = "name";
+static const char* HEADING_KEY = "heading";
+static const char* STAMINA_KEY = "stamina";
 
 Ve1ObjectChar::Ve1ObjectChar()
 {
   m_dir = 0;
   m_dirCurrent = m_dir;
   m_isMoving = false;
-  m_inNewLocation = false;
   m_recalcHeading = false;
 
   SetKeyVal(TYPE_KEY, "0");
   SetKeyVal(TEX_KEY, "0");
+
+  // Default, should be set by server
+  m_stamina = 3; // TODO CONFIG
 }
 
 void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
@@ -53,13 +60,18 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       TheAvatarManager::Instance()->SetTexture(texNum, vc);
     }
   }
-  else if (key == "name")
+  else if (key == NAME_KEY)
   {
     SetName(val);
   }
-  else if (key == "heading")
+  else if (key == HEADING_KEY) 
   {
     m_dir = ToFloat(val); 
+  }
+  else if (key == STAMINA_KEY)
+  {
+    m_stamina = ToInt(val); 
+std::cout << "Got stamina value " << m_stamina << " for " << *this << "\n";
   }
 }
 
@@ -85,24 +97,6 @@ void Ve1ObjectChar::Update()
   if (IsHidden())
   {
     return;
-  }
-
-  // Tell shadow the collision mesh it is casting onto
-  // TODO Use octree etc
-  // NB This only works if Terrain is activated before player!!
-  // Also this crashes if Terrain not created at all yet!!
-  // -> General problem of relying on another object already being in existence: you can't!!
-  // When you start, and when you change locations, you must wait for the Terrain to be set up.
-  // Otherwise we will be falling through floor, etc. if not crashing.
-
-  // Just do once per location, but only when Terrain is valid.
-  // I.e. have a flag, set it in OnLocationEntry. It's not complicated.
-
-  if (m_inNewLocation)
-  {
-    m_shadow->ClearCollisionMeshes();
-    m_shadow->AddCollisionMesh(GetTerrain()->GetCollisionMesh());
-    m_inNewLocation = false;
   }
 
   // Handle wall collisions with terrain and any building
@@ -255,6 +249,8 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
 void Ve1ObjectChar::SetDir(float degs)
 {
   m_dir = degs;
+
+  // TODO Send this to DB
 }
 
 void Ve1ObjectChar::TurnToFaceDir()

@@ -53,15 +53,14 @@ protected:
   float m_dirCurrent; // Direction we currently face -- we will reduce the difference
    // between m_dirCurrent and m_dir until we face the direction of movement.
 
-  // Set when we enter a new location - TODO s/b in Ve1Object ?
-  bool m_inNewLocation;
-
   // Start fading out when a player has logged out
   float m_fadeTime;
 
   bool m_recalcHeading; // if true, recalc
 
   RCPtr<AttackEffect> m_effect;
+
+  int m_stamina; // health - like Fighting Fantasy
 };
 }
 

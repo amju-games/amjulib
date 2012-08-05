@@ -18,6 +18,7 @@
 #include "Ve1SceneGraph.h"
 #include "Useful.h"
 #include "HasCollisionMesh.h"
+#include "Terrain.h"
 
 namespace Amju
 {
@@ -31,6 +32,7 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_hidden = false;
   m_collidingObject = 0;
   m_shadow = new Shadow;
+  m_inNewLocation = 2;
 }
 
 void Ve1Object::SetIsColliding(GameObject* collidingObject)
@@ -233,6 +235,17 @@ void Ve1Object::Update()
   {
     GameObject::Update();
   }
+
+  if (m_inNewLocation > 0 && TerrainReady())
+  {
+    if (m_inNewLocation == 1)
+    {
+      m_shadow->ClearCollisionMeshes();
+      m_shadow->AddCollisionMesh(GetTerrain()->GetCollisionMesh());
+    }
+
+    m_inNewLocation--;
+  }
 }
 
 const Vec3f& Ve1Object::GetOldPos() const
@@ -353,11 +366,15 @@ ValMap* Ve1Object::GetValMap()
 
 void Ve1Object::OnLocationEntry()
 {
+  m_inNewLocation = 2;
+
   if (m_sceneNode)
   {
     SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
     Assert(root);
     root->AddChild(m_sceneNode);
+
+    m_sceneNode->AddChild(m_shadow.GetPtr());
   }
 }
 
