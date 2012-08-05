@@ -24,6 +24,7 @@ LIBS	:= \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
+	-lcurl \
 	-lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
