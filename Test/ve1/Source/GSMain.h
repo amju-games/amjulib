@@ -47,6 +47,8 @@ public:
   // Show button to drop carried item
   void ShowDropButton(Furniture*, bool show); 
 
+  void SetHeartNum(int);
+
 private:
   void DoMoveRequest();
   bool ShowObjectMenu(GameObject*);
