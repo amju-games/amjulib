@@ -29,9 +29,6 @@ bool TutorialNpc::Load(File* f)
   {
     return false;
   }
-  m_sceneNode->AddChild(m_shadow.GetPtr());
-
-  m_inNewLocation = true;
 
   return true;
 }

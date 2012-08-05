@@ -116,13 +116,6 @@ bool Furniture::Load(File* f)
     return false;
   }
 
-//  if (!m_shadow->Load(f))
-//  {
-//    return false;
-//  }
-
-  // TODO Only on Location Entry, surely ?!!  Can we just use Key/Vals for all this ?
-
   // Obj mesh comes last, as mesh file name is appended to data file contents when we upload
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFilename);
   Assert(mesh);
@@ -134,7 +127,6 @@ bool Furniture::Load(File* f)
   m_sceneNode = sm;
 std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " << m_aabb.GetYSize() << " " << m_aabb.GetZSize() << "\n";
 
-//  m_sceneNode->AddChild(m_shadow.GetPtr());
   return true;
 }
 

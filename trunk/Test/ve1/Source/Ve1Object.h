@@ -111,6 +111,12 @@ protected:
 
   GameObject* m_collidingObject; // (one of the) objects we are colliding with
 
+  // Set when we enter a new location  - counter, not bool, because we won't have set
+  //  the position for the shadow scene node in the first frame, but we will by the second.
+  int m_inNewLocation;
+
+  // Set of objects with which we are in collision. If this set changes, recalc shadows.
+  // OR CHECKSUM ????
 };
 
 // Keep track of keys used to set object properties

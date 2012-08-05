@@ -96,8 +96,6 @@ void Collect::OnLocationEntry()
 
   Vec3f vel(rnd(-20.0f, 20.0f), rnd(100.0f, 200.0f), rnd(-20.0f, 20.0f));
   SetVel(vel);
-
-  m_shadow->AddCollisionMesh(GetTerrain()->GetCollisionMesh());
 }
 
 void Collect::Update()
@@ -191,9 +189,6 @@ std::cout << "Bad mesh for " << *this << ": " << objFilename << "\n";
   sm->SetTexture(tex);
 
   m_sceneNode = sm;
-
-  m_sceneNode->AddChild(m_shadow.GetPtr());
-  
 
   return true;
 }

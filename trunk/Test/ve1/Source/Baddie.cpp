@@ -6,6 +6,7 @@
 #include "Ve1Character.h"
 #include "LocalPlayer.h"
 #include "AttackEffect.h"
+#include "FightReq.h"
 
 namespace Amju
 {
@@ -55,7 +56,6 @@ bool Baddie::Load(File* f)
   {
     return false;
   }
-  m_sceneNode->AddChild(m_shadow.GetPtr());
 
   // TODO TEMP TEST
   // Particle effect when attacked, etc.
@@ -68,8 +68,6 @@ bool Baddie::Load(File* f)
   m_effect->SetVisible(true);
 
   m_sceneNode->AddChild(m_effect.GetPtr());
-
-  m_inNewLocation = true;
 
   return true;
 }
@@ -93,7 +91,9 @@ public:
     vel.y += YSIZE;
     loc->SetVel(vel);
 
-    m_opponent->ShowAttacked();
+    SendFightReq(m_opponent);
+
+//    m_opponent->ShowAttacked();
     
     return false;
   }
