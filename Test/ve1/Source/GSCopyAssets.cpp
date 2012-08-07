@@ -27,7 +27,7 @@ std::string GetDataDir()
 #endif
 
 #ifdef MACOSX
-  dataDir += "/My Game.app/Contents/Resources/Data/";
+  dataDir += "/../Resources/Data/";
 #endif
 
 std::cout << "GetDataDir returning: " << dataDir << "\n";
