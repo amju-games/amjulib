@@ -13,7 +13,7 @@ void LoadConfig()
 {
   // The "special" config file is used to set a custom server, environment, or Save Dir.
   // It's optional, intended only for testing, e.g. a test environment.
-  std::string specialFileName = GetProcessDir() + "/" + SPECIAL_FILE_NAME;
+  std::string specialFileName = GetProcessDir() + "/../../../" + SPECIAL_FILE_NAME;
 
 std::cout << "In LoadConfig().. attempting to load special config file: " << specialFileName << "\n";
 
