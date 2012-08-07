@@ -7,6 +7,7 @@
 #include <File.h>
 #include <Game.h>
 #include <GameObjectFactory.h>
+#include <Directory.h>
 #include "Player.h"
 #include "LocalPlayer.h"
 #include <StringUtils.h>
@@ -460,6 +461,8 @@ void ObjectManager::Update()
       const std::string& filename = *it;
       if (IsLocal(filename))
       {
+std::cout << "FILE Q: already local: " << filename << "\n";
+
         // Remove this filename, we have successfully downloaded it 
 #ifdef WIN32
         it = m_fileQ.erase(it);
@@ -474,7 +477,10 @@ std::cout << "FILE Q: trying to download file: " << *it << "\n";
 
         GetFile(*it); // really call GetFile()
         ++it;
-        i++; // inc count of requests
+		if (!FileExists(File::GetRoot() + filename))
+		{
+          i++; // inc count of requests
+		}
       }
     }
 
