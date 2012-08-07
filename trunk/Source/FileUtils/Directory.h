@@ -53,7 +53,7 @@ std::string GetSaveDir(const std::string& appName);
 std::string GetDesktopDir();
 
 // Get the directory where the process lives.
-// For Mac Bundles, it is the directory where the bundle (*.app) lives.
+// For Mac Bundles, it is the directory where the executable lives INSIDE THE APP bundle (*.app).
 // For other executables, it is the directory where this executable lives.
 std::string GetProcessDir();
 

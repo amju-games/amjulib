@@ -282,7 +282,8 @@ std::cout << "Unexpected: didn't get exe file name: " << bytes << "\n";
 std::cout << "This really is an app bundle.\n";
 #endif
     // This really is a bundle. So we want to go from <dir>/Bundle.app/Contents/MacOS/<exe> to <dir>
-    root += "/../../../";
+    //root += "/../../../";
+    // This turned out to be a bad idea - better to append the ../../../ if required by client code.
   }
   else
   {
