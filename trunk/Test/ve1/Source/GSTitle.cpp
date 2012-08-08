@@ -48,7 +48,6 @@ static void OnStartButton()
     TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
   }
 
-
   // Ideally
   //Fade(TheGSStartMenu::Instance(), 2.0f);
 }
@@ -172,6 +171,8 @@ void GSTitle::OnActive()
 
 void GSTitle::OnDeactive()
 {
+  TheSoundManager::Instance()->PlaySong("Sound/piano.it");
+
   GSGui::OnDeactive();
   CreateText("");
 }
