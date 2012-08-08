@@ -16,10 +16,11 @@
 #include "GameMode.h"
 
 //#define OU_DEBUG
+//#define YES_USE_CACHE
 
 namespace Amju
 {
-static const char* FILENAME = "object_state_cache.txt";
+static const char* CACHE_FILENAME = "object_state_cache.txt";
 
 ObjectUpdater::ObjectUpdater() : m_timestampPos(1), m_timestampUpdate(1)
 {
@@ -37,12 +38,14 @@ ObjectUpdater::~ObjectUpdater()
 
 bool ObjectUpdater::Load()
 {
+#ifdef YES_USE_CACHE
+
 #ifdef OU_DEBUG
-std::cout << "Loading " << FILENAME << "...\n";
+std::cout << "Loading " << CACHE_FILENAME << "...\n";
 #endif
 
   File f;
-  if (!f.OpenRead(FILENAME))
+  if (!f.OpenRead(CACHE_FILENAME))
   {
     return false;
   }
@@ -124,15 +127,19 @@ std::cout << "...Loaded " << num << " update items...\n";
 std::cout << "...Loaded " << num << " positions, OK, done!\n";
 #endif
   
+#endif // YES_USE_CACHE
+
   return true;
 }
 
 bool ObjectUpdater::Save()
 {
-std::cout << "Saving " << FILENAME << "...\n";
+#ifdef YES_USE_CACHE
+
+std::cout << "Saving " << CACHE_FILENAME << "...\n";
 
   File f;
-  if (!f.OpenWrite(FILENAME))
+  if (!f.OpenWrite(CACHE_FILENAME))
   {
     return false;
   }
@@ -196,6 +203,8 @@ std::cout << "  - Saving " << s << "\n";
 #ifdef OU_DEBUG
 std::cout << "...saved ok!\n";
 #endif
+
+#endif // YES_USE_CACHE
 
   return true;
 }

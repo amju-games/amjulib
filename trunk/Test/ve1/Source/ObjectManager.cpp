@@ -26,8 +26,13 @@
 #define ASSET_DEBUG
 //#define OBJECT_CHECK_DEBUG
 
+// Cache is a good idea but seems to be causing a lot of probs when changing version
+//#define YES_USE_CACHE
+
 namespace Amju
 {
+static const char* CACHE_FILENAME = "objects_created_cache.txt";
+
 std::ostream& operator<<(std::ostream& os, const Object& obj)
 {
   return os << obj.m_id << " (" << obj.m_type << ")";
@@ -286,8 +291,6 @@ void AssetList::Update()
     m_state = AMJU_AL_ALL_ASSETS_LOADED;
   }
 }
-  
-static const char* FILENAME = "objects_created_cache.txt";
 
 ObjectManager::ObjectManager()
 {
@@ -323,8 +326,10 @@ void ObjectManager::SetTimestamp(const std::string& t)
 
 bool ObjectManager::Load()
 {
+#ifdef YES_USE_CACHE
+
   File f;
-  if (!f.OpenRead(FILENAME))
+  if (!f.OpenRead(CACHE_FILENAME))
   {
     return false;
   }
@@ -353,16 +358,21 @@ bool ObjectManager::Load()
     AddObject(obj);
   }
 //std::cout << "Loaded object create cache ok!\n";
+
+#endif // YES_USE_CACHE
+
   return true;
 }
 
 bool ObjectManager::Save()
 {
+#ifdef YES_USE_CACHE
+
 std::cout << "Saving object create cache... ";
 
   // Write contents of object cache to file
   File f;
-  if (!f.OpenWrite(FILENAME))
+  if (!f.OpenWrite(CACHE_FILENAME))
   {
     return false;
   }
@@ -382,6 +392,9 @@ std::cout << "FAILED to save object create cache!!\n";
     }
   }
 std::cout << "Saved object create cache ok!\n";
+
+#endif // YES_USE_CACHE
+
   return true;
 }
 
@@ -406,10 +419,6 @@ std::cout << "Trying to add duplicate object to object manager list!\n";
       return;
     }
   }
-
-  // Add this object to cache -- contains all objects ever created
-  // TODO Is this necessary ?
-////  m_objectCache.insert(obj);
 
   m_objects.insert(obj);
 
