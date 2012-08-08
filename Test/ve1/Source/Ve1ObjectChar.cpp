@@ -7,6 +7,7 @@
 #include "Useful.h"
 #include "GSMain.h"
 #include "LocalPlayer.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -66,7 +67,11 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   }
   else if (key == HEADING_KEY) 
   {
-    m_dir = ToFloat(val); 
+    if (this != GetLocalPlayer())
+    {
+      // We sent this to server a while ago
+      m_dir = ToFloat(val); 
+    }
   }
   else if (key == STAMINA_KEY)
   {
@@ -251,6 +256,7 @@ void Ve1ObjectChar::SetDir(float degs)
   m_dir = degs;
 
   // TODO Send this to DB
+  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
 }
 
 void Ve1ObjectChar::TurnToFaceDir()
