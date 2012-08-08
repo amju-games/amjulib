@@ -447,6 +447,41 @@ void ObjMesh::MungeData()
     }
   }
 
+  // Remove unused materials
+  for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); )
+  {
+    bool found = false;
+    std::string matName = it->first;
+    // Look for this name in all groups
+    for (Groups::iterator jt = m_groups.begin(); jt != m_groups.end(); ++jt)
+    {
+      const Group& g = jt->second;
+      if (g.m_materialName == matName)
+      {
+        found = true;
+        break;
+      }
+    }
+    if (found)
+    {
+      ++it;
+    }
+    else
+    {
+#ifdef OBJ_DEBUG
+      std::cout << "Removing unused material " << matName << "\n";
+#endif
+		
+#ifdef WIN32
+      it = m_materials.erase(it);
+#else
+      // See http://stackoverflow.com/questions/52714/stl-vector-vs-map-erase
+      m_materials.erase(it);
+      ++it;
+#endif
+    }
+  }
+
   // Remove data no longer needed (only used to create group data)
   m_points.clear();
   m_normals.clear();
