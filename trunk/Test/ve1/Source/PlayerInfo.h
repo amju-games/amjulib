@@ -26,6 +26,8 @@ public:
   int PIGetInt(const std::string& key) const;
   float PIGetFloat(const std::string& key) const;
 
+  bool Exists(const std::string& key) const;
+
   // Load file -- succeeds if file does not exist, assume not created yet
   bool Load();
   bool Save();

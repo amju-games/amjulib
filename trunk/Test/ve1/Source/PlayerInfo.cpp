@@ -39,6 +39,11 @@ void PlayerInfo::PISetFloat(const std::string& key, float val)
   m_map[key] = ToString(val);
 }
 
+bool PlayerInfo::Exists(const std::string& key) const
+{
+  return (m_map.find(key) != m_map.end());
+}
+
 const std::string& PlayerInfo::PIGetString(const std::string& key) const
 {
   PIMap::const_iterator it = m_map.find(key);
@@ -182,7 +187,8 @@ PlayerInfoManager::~PlayerInfoManager()
 
 PlayerInfo* PlayerInfoManager::GetPI()
 {
-  Assert(m_currentPI);
+//  Assert(m_currentPI);
+  // If zero, no one has logged in..?
   return m_currentPI;
 }
 
@@ -304,6 +310,9 @@ Strings PlayerInfoManager::GetPlayerNames() const
   {
     s.push_back(it->second);
   }
+
+  // TODO something like
+//  std::copy(tn.begin, tn.end, std::back_inserter(s));
 
   return s;
 }
