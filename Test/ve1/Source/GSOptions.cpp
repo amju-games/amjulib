@@ -1,6 +1,7 @@
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <SoundManager.h>
 #include "GSOptions.h"
 #include "GSAvatarMod.h"
 #include "GSProxy.h"
@@ -35,6 +36,9 @@ static void OnKeyboard()
 
 GSOptions::GSOptions()
 {
+  // Default values before set by player
+  m_musicVol = 1.0f;
+  m_soundVol = 1.0f;
 }
 
 void GSOptions::OnKeyboard()
@@ -94,4 +98,36 @@ void GSOptions::OnActive()
     kb->SetText("Enable KB");
   }
 }
+
+void GSOptions::OnDeactive()
+{
+  // Save settings to the current PlayerInfo if there is one.
+  PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+  if (pi)
+  {
+    SaveSettingsToPI(pi);
+  }
+
+  GSGui::OnDeactive();
+}
+
+static const char* MUSIC_VOL_KEY = "options-music-vol";
+
+void GSOptions::LoadSettingsFromPI(PlayerInfo* pi)
+{
+  Assert(pi);
+  if (pi->Exists(MUSIC_VOL_KEY))
+  {
+    m_musicVol = pi->PIGetFloat(MUSIC_VOL_KEY);
+  }
+  TheSoundManager::Instance()->SetSongMaxVolume(m_musicVol);
+  // etc....
+}
+
+void GSOptions::SaveSettingsToPI(PlayerInfo* pi)
+{
+  Assert(pi);
+  pi->PISetFloat(MUSIC_VOL_KEY, m_musicVol);
+}
+
 } // namespace
