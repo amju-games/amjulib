@@ -4,6 +4,7 @@
 #include <Xml/XmlParser2.h>
 #include <Xml/XmlNodeInterface.h>
 #include <SafeUtils.h>
+#include <SoundManager.h>
 #include <Game.h>
 #include "GSStartGame.h"
 #include "GSLoginWaiting.h"
@@ -18,6 +19,7 @@
 #include "Version.h"
 #include "GameMode.h"
 #include "GSCogTestMenu.h"
+#include "GSOptions.h"
 
 namespace Amju
 {
@@ -105,12 +107,18 @@ std::cout << "No start location.\n";
     pi->PISetString(PI_KEY("email"), m_email);
     pi->Save();
 
+    // Set options for this player
+    TheGSOptions::Instance()->LoadSettingsFromPI(pi);
+
     // TODO Do we need to set this via ObjectUpdater too, so it gets sent to all clients ?
 
     // Set ID of this player object as the local player ID
     SetLocalPlayerId(objId);
 
     Assert(pi);
+
+    // Play happy logged in sound
+    TheSoundManager::Instance()->PlayWav("Sound/button112.wav");
 
     if (GetGameMode() == AMJU_MODE_EDIT)
     {
