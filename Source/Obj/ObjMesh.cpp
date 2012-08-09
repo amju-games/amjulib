@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <ReportError.h>
 #include "ObjMesh.h"
 #include "File.h"
 #include "StringUtils.h"
@@ -419,6 +420,10 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
 
 void ObjMesh::MungeData()
 {
+#ifdef OBJ_DEBUG
+  std::cout << "Optimising .obj data (*cough* because maya is so shit *cough*)...\n";
+#endif
+
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
     /* increment in body */)
@@ -464,6 +469,9 @@ void ObjMesh::MungeData()
     }
     if (found)
     {
+#ifdef OBJ_DEBUG
+      std::cout << "KEEPING material " << matName << "\n";
+#endif
       ++it;
     }
     else
@@ -475,7 +483,6 @@ void ObjMesh::MungeData()
 #ifdef WIN32
       it = m_materials.erase(it);
 #else
-      // See http://stackoverflow.com/questions/52714/stl-vector-vs-map-erase
       m_materials.erase(it);
       ++it;
 #endif
@@ -870,6 +877,14 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
         }
         of.Write(s);
       }
+    }
+
+    MaterialVec matVec;
+    GetMaterials(&matVec);
+    if (!SaveMtlFiles(matVec))
+    {
+      ReportError("Failed to save materials");
+      return false;
     }
   }
 
