@@ -17,6 +17,7 @@ class Ve1Object : public GameObject
 {
 public:
   Ve1Object();
+  virtual ~Ve1Object();
 
   virtual void Draw() { } // we use Scene Graph to draw
 
@@ -69,7 +70,10 @@ public:
 
   // Create a visible scene node for Edit mode
   void CreateEditNode();
- 
+
+  // Call to set scene node, removing any old node from scene
+  void SetSceneNode(SceneNode* n);
+   
   virtual AABB* GetAABB(); // overriding GameObject's impl
 
   bool IsHidden() const; // if true, object is invisible and does not interact with anything
