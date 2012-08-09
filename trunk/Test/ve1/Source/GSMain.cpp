@@ -19,6 +19,7 @@
 #include <EventPoller.h>
 #include "MsgManager.h"
 #include <GuiButton.h>
+#include <SoundManager.h>
 #include "GSNetError.h"
 #include "GameMode.h"
 #include "Camera.h"
@@ -355,6 +356,8 @@ void GSMain::OnDeactive()
 
 void GSMain::OnActive()
 {
+  TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
+
   GSBase::OnActive();
 
   TheGSNetError::Instance()->SetPrevState(this);
