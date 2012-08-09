@@ -751,7 +751,6 @@ void GSEdit::CreateContextMenu()
   m_menu = new GuiMenu;
   TheEventPoller::Instance()->AddListener(m_menu);
 
-  m_menu->SetLocalPos(m_mouseScreen);
   if (m_selectedObjects.empty())
   {
     m_menu->AddChild(new GuiMenuItem("Go to Location...", OnGotoLocation));
@@ -799,6 +798,17 @@ void GSEdit::CreateContextMenu()
     // Multi selection TODO
 std::cout << "Create context menu for multiple objects...\n";
   }
+
+  Vec2f pos = m_mouseScreen;
+  if (pos.x + m_menu->GetSize().x > 1.0f)
+  {
+    pos.x = 1.0f - m_menu->GetSize().x;
+  }
+  if (pos.y - m_menu->GetSize().y < -1.0f)
+  {
+    pos.y = -1.0f + m_menu->GetSize().y;
+  }
+  m_menu->SetLocalPos(pos);
 }
 
 bool GSEdit::OnKeyEvent(const KeyEvent&)
