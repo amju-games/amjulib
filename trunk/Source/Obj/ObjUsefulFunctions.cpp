@@ -6,6 +6,29 @@
 
 namespace Amju
 {
+bool SaveMtlFiles(const MaterialVec& mats)
+{
+  typedef std::map<std::string, RCPtr<File> > FileMap; // map material filenames to Files
+  FileMap fm;
+
+  for (MaterialVec::const_iterator it = mats.begin(); it != mats.end(); ++it)
+  {
+    const Material* mat = *it;
+    RCPtr<File>& f = fm[mat->m_filename];
+    if (!f)
+    {
+      f = new File(File::NO_VERSION, File::STD);
+      f->OpenWrite(mat->m_filename);
+    }
+
+    f->Write("newmtl " + mat->m_name);
+    f->Write("map_Kd " + mat->m_texfilename);
+    f->Write("flags " + ToString(mat->m_flags));
+    f->Write("Ns 1.0"); // for Maya
+  }
+  return true;
+}
+
 bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 {
   File f(File::NO_VERSION);

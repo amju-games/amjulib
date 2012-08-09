@@ -37,6 +37,11 @@ typedef std::vector<RCPtr<Material> > MaterialVec;
 
 bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats);
 
+// Save a bunch of materials - could be to multiple files. Will overwrite these files.
+// This is text .obj mode, because binary mode has materials in the same file as the
+//  mesh.
+bool SaveMtlFiles(const MaterialVec& mats);
+
 // Face type - assumes all faces are triangles,
 //  so is most efficient.
 struct Face
