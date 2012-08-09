@@ -47,6 +47,7 @@ File::File(
 {
   AMJU_CALL_STACK;
 
+  m_isOpen = false;
   m_bEOFReached = false; 
   m_version = -1; // meaning no version info found yet.
   m_currentLine = 0;
@@ -135,6 +136,11 @@ bool File::ReadVersion()
   return true;
 }
 
+bool File::IsOpen() const
+{
+  return m_isOpen;
+}
+
 bool File::OpenRead(const std::string& filename, bool isBinary, bool useRoot) 
 {
   AMJU_CALL_STACK;
@@ -167,6 +173,7 @@ bool File::OpenRead(const std::string& filename, bool isBinary, bool useRoot)
     return false;
   }
 
+  m_isOpen = true;
   return ReadVersion();
 }
 
@@ -224,6 +231,8 @@ bool File::OpenWrite(
     return false;
   }
  
+  m_isOpen = true;
+
   if (m_hasVersionInfo)
   {
     WriteComment("// File version");
@@ -576,6 +585,7 @@ void File::SetTokeniser(Tokeniser* p)
 bool File::Close()
 {
   AMJU_CALL_STACK;
+  m_isOpen = false;
   return m_pImpl->Close();
 }
 }

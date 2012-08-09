@@ -67,6 +67,8 @@ public:
     bool useRoot = true,
     bool truncate = true);
  
+  bool IsOpen() const;
+  
   bool Close();
 
   // Get size of file
@@ -151,6 +153,8 @@ public:
 protected:
   // Read version 
   bool ReadVersion();
+
+  bool m_isOpen;
 
   // Version number of file if the file format supports this.
   int m_version;
