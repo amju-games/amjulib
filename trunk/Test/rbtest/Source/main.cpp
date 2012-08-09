@@ -9,6 +9,7 @@
 #endif // WIN32
 
 #define AMJU_USE_OPENGL
+#define AMJU_USE_GLUT
 
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
