@@ -34,6 +34,24 @@ void OnDone()
   TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 }
 
+class DelReq : public Ve1Req
+{
+public:
+  DelReq(const std::string& url) : Ve1Req(url, "delete") {}
+  virtual void OnSuccess()
+  {
+    // ?
+  }
+};
+
+void SendDelReq(int id)
+{
+  std::string url = TheVe1ReqManager::Instance()->MakeUrl(DELETE_OBJECT);
+  url += "&obj_id=";
+  url += ToString(id);
+  TheVe1ReqManager::Instance()->AddReq(new DelReq(url));
+}
+
 class GetLocations : public Ve1Req
 {
 public:
@@ -725,6 +743,32 @@ private:
   int m_id;
 };
 
+class DelObjCommand : public GuiCommand
+{
+public:
+  DelObjCommand(int objId) : m_id(objId) {}
+  virtual bool Do()
+  {
+    std::cout << "SORRY DUDE NOT IMPLEMENTED YET\n";
+    // Must show confirm yes/no
+    static Game* g = TheGame::Instance();
+    if (g->GetGameObject(m_id))
+    {
+      Ve1Object* vo = dynamic_cast<Ve1Object*>(g->GetGameObject(m_id).GetPtr());
+      if (vo)
+      {
+        vo->OnLocationExit();
+      }
+      g->EraseGameObject(m_id);
+    }
+    SendDelReq(m_id);
+    return false;
+  }
+
+private:
+  int m_id;
+};
+
 void GSEdit::ShowPropsForObj(int id)
 {
   GuiListBox* props = (GuiListBox*)GetElementByName(m_gui, "property-list");
@@ -792,6 +836,7 @@ void GSEdit::CreateContextMenu()
 
     m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
     obj->SetEditMenu(m_menu); // add type-specific options to menu
+    m_menu->AddChild(new GuiMenuItem("Delete this object", new DelObjCommand(obj->GetId())));
   }
   else
   {
