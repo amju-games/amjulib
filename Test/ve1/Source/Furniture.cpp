@@ -118,13 +118,20 @@ bool Furniture::Load(File* f)
 
   // Obj mesh comes last, as mesh file name is appended to data file contents when we upload
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFilename);
+  if (!mesh)
+  {
+    return false;
+  }
+
   Assert(mesh);
   SceneCollisionMesh* sm = new SceneCollisionMesh;
   sm->SetMesh(mesh);
   sm->CalcCollisionMesh(mesh);
   sm->GetCollisionMesh()->CalcAABB(&m_aabb);
   *(sm->GetAABB()) = m_aabb;
-  m_sceneNode = sm;
+
+  SetSceneNode(sm);
+
 std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " << m_aabb.GetYSize() << " " << m_aabb.GetZSize() << "\n";
 
   return true;

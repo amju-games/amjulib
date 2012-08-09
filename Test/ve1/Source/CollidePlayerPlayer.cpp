@@ -20,7 +20,7 @@ void CollidePlayerPlayer(Player* p1, Player* p2)
   // Move both players away from each other
   Vec3f v = p1->GetPos() - p2->GetPos();
   // Avoid divide by zero if objects are set to the same location
-  if (v.SqLen() > 0.001f)
+  if (v.SqLen() > 1.0f)
   {
     v.Normalise();
   }
