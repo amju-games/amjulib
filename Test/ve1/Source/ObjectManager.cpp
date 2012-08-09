@@ -49,7 +49,12 @@ void AddGameObjectToGame(GameObject* go)
   if (g->GetGameObject(id))
   {
 std::cout << "***WARNING: GameObject " << *go << " already in Game container, erasing and re-adding!\n";
-      TheGame::Instance()->EraseGameObject(id);
+    Ve1Object* vo = dynamic_cast<Ve1Object*>(g->GetGameObject(id).GetPtr());
+    if (vo)
+    {
+      vo->OnLocationExit();
+    }
+    g->EraseGameObject(id);
   }
 
   TheGame::Instance()->AddGameObject(go);
