@@ -35,6 +35,11 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_inNewLocation = 2;
 }
 
+Ve1Object::~Ve1Object()
+{
+  OnLocationExit();
+}
+
 void Ve1Object::SetIsColliding(GameObject* collidingObject)
 {
   m_collidingObject = collidingObject;
@@ -176,9 +181,16 @@ std::cout << "d=" << d << "... expecting zero.\n";
   if (foundOne)
   {
     Vec3f norm = CrossProduct(theTri.m_verts[1] - theTri.m_verts[0], theTri.m_verts[2] - theTri.m_verts[0]);
-    norm.Normalise();
-    float dist = sqrt((oldPos - newPos).SqLen());
-    m_pos += norm * dist;
+    if (norm.SqLen() > 1.0f)
+    {
+      norm.Normalise();
+      float dist = sqrt((oldPos - newPos).SqLen());
+      m_pos += norm * dist;
+    }
+    else
+    {
+std::cout << "Dodgy triangle in collision mesh ?\n";      
+    }
   }
 }
 
@@ -199,6 +211,12 @@ AABB* Ve1Object::GetAABB()
 
 void Ve1Object::SetEditMenu(GuiMenu* menu)
 {
+}
+
+void Ve1Object::SetSceneNode(SceneNode* n)
+{
+  Ve1Object::OnLocationExit();
+  m_sceneNode = n;
 }
 
 void Ve1Object::CreateEditNode()
@@ -384,8 +402,10 @@ void Ve1Object::OnLocationExit()
   if (m_sceneNode)
   {
     SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-    Assert(root);
-    root->DelChild(m_sceneNode.GetPtr());
+    if (root)
+    {
+      root->DelChild(m_sceneNode.GetPtr());
+    }
   }
 }
 
