@@ -32,6 +32,7 @@ enum Task
   GET_ALL_LOCATIONS,
   GET_NEW_OBJECT_ID,  // for creating new object placeholder, gets ID
   CREATE_OBJECT, // set once ID known and all data uploaded 
+  DELETE_OBJECT,
 
   FIGHT,
 
