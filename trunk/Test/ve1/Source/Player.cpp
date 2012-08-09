@@ -78,8 +78,24 @@ public:
     if (IsVisible() && GetMd2() && m_player)
     {
       bool loggedIn = m_player->IsLoggedIn();
+
+      // For logged out players, only draw if near the local player.
+      // We fade in/out with distance. The distance could be configurable.
+      // This gives a good frame rate improvement if lots of logged out players.
       if (!loggedIn)
       {
+        float sqDist = (GetLocalPlayer()->GetPos() - m_player->GetPos()).SqLen();
+        if (sqDist > 5000.0f) // TODO TEMP TEST
+        {
+          // Too far away
+          return;
+        }
+        else if (sqDist > 4000.0f) // TODO TEMP TEST
+        {
+          float a = (sqDist - 4000.0f) / 1000.0f;
+          MultColour(Colour(1, 1, 1, 1.0f - a));
+        }
+
         AmjuGL::PushAttrib(AmjuGL::AMJU_BLEND);
         AmjuGL::Enable(AmjuGL::AMJU_BLEND);
       }
@@ -368,7 +384,29 @@ void Player::SetLoggedIn(bool loggedIn)
 
 void Player::Update()
 {
-  Ve1ObjectChar::Update();
+  if (m_isLoggedIn)
+  {
+    Ve1ObjectChar::Update();
+  }
+  else if (m_sceneNode)
+  {
+    Matrix m;
+    m.Translate(m_pos);
+    m_sceneNode->SetLocalTransform(m);
+
+    // Set shadow AABB to same as Scene Node so we don't cull it by mistake
+    *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
+
+    static const float XSIZE = 10;
+    static const float YSIZE = 30; // TODO TEMP TEST
+    // Size doesn't matter, just for VFC here
+    GetAABB()->Set(
+      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.y, m_pos.y + YSIZE,
+      m_pos.z - XSIZE, m_pos.z + XSIZE);
+
+    TurnToFaceDir();
+  }
 
   if (m_hidden)
   {
