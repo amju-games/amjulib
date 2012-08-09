@@ -129,6 +129,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
     s += "newobject_row.pl";
     break;
 
+  case DELETE_OBJECT:
+    s += "deleteobject.pl";
+    break;
+
   case FILE_UPDATE_CHECK:
     s += "getupdatedfiles.pl";
     break;
