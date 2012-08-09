@@ -17,6 +17,8 @@ void GuiMenuItem::Init(const std::string& text)
 {
   SetText(text);
   SetDrawBg(true);
+  std::swap(m_bgCol, m_fgCol); // becase draw BG inverts???
+
   SetJust(AMJU_JUST_LEFT);
 
   SizeToText();
@@ -54,7 +56,8 @@ struct NestedMenuCommand : public GuiCommand
     GuiNestMenuItem* menuItem = (GuiNestMenuItem*)m_pGui;
 
     // Make sub menu visible
-    menuItem->GetChild()->SetVisible(true);
+    GuiElement* child = menuItem->GetChild();
+    child->SetVisible(true);
 
     // Set Pos of nested menu: may be to right, or below this item
     // (Ignore to left for now, TODO)
@@ -64,12 +67,28 @@ struct NestedMenuCommand : public GuiCommand
     if (topMenu && !topMenu->IsVertical())
     {
       // Draw below
-      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetLocalPos(/*m_pGui->GetPos() + */ Vec2f(0, -m_pGui->GetSize().y));
+      child->SetLocalPos(/*m_pGui->GetPos() + */ Vec2f(0, -m_pGui->GetSize().y));
     }
     else
     {
-      // Draw to right
-      ((GuiNestMenuItem*)m_pGui)->GetChild()->SetLocalPos(/*m_pGui->GetPos() + */ Vec2f(m_pGui->GetSize().x, 0));
+      // Draw to left/right
+      float posx = m_pGui->GetCombinedPos().x;
+      float x = m_pGui->GetSize().x;
+      float childw = child->GetSize().x;
+      if ((posx + x + childw) > 1.0f)
+      {
+        x = -childw;
+      }
+      float y = 0;
+      float posy = m_pGui->GetCombinedPos().y;
+      float childh = child->GetSize().y;
+      if ((posy - childh) < -1.0f)
+      {
+        y = -1.0f - (posy - childh);
+      }
+      
+      // Set rel pos
+      child->SetLocalPos(Vec2f(x, y));
     }
     return false;
   }
