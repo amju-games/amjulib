@@ -26,6 +26,20 @@ std::cout << "Attempting to load obj: " << pathFile << "\n";
   RCPtr<ObjMesh> mesh = new ObjMesh;
   bool loaded = mesh->Load(objFile, binary);
 
+/*
+  // TODO
+  // Save optimised/binary version: then we upload this, not the text version
+  if (!binary)
+  {
+    mesh->Save(objFile + "b", true);
+  }
+*/
+  // This may cause a lot of work - for now, save optimised text version
+  if (!binary)
+  {
+    mesh->Save(objFile, false);
+  }
+
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
 
