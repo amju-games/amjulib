@@ -26,6 +26,7 @@ public:
   // Set direction which character should face - we rotate to face this
   //  direction over time - DEGREES
   void SetDir(float degs);
+  void SetDirToFace(GameObject* go); // face this object
 
   virtual AABB* GetAABB();
 

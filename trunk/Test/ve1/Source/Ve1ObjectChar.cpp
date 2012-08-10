@@ -251,6 +251,13 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
   }
 }
 
+void Ve1ObjectChar::SetDirToFace(GameObject* go)
+{
+  const Vec3f& v = go->GetPos();
+  float degs = RadToDeg(atan2(v.x - m_pos.x, v.z - m_pos.z));
+  m_dir = degs;
+}
+
 void Ve1ObjectChar::SetDir(float degs)
 {
   m_dir = degs;
