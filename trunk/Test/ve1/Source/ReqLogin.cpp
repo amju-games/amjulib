@@ -203,9 +203,11 @@ std::cout << "No research element in login.pl response?!?\n";
 
     SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
+    SetDoCogTests(doCogTests); // mode, in GameMode
     if (doCogTests)
     {
-      TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+      //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
     }
     else
     {

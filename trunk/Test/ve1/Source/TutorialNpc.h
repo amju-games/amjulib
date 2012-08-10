@@ -5,6 +5,8 @@
 
 namespace Amju
 {
+class Player;
+
 // Set objectives for the player, giving tutorial information, etc.
 class TutorialNpc : public Ve1ObjectChar
 {
@@ -14,8 +16,11 @@ public:
   virtual const char* GetTypeName() const { return TYPENAME; }
   virtual void Update();
   virtual bool Load(File*);
-
   virtual void SetMenu(GuiMenu*);
+  virtual void OnLocationEntry();
+
+  void OnPlayerCollision(Player*);
+  void Trigger();
 
 protected:
 };

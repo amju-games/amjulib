@@ -14,16 +14,17 @@ GameMode GetGameMode()
   return s_gm;
 }
 
-/*
-bool IsOnline()
+static bool cogTests = false;
+
+bool DoCogTests()
 {
-  return !IsOffline();
+  return cogTests;
 }
 
-bool IsOffline()
+void SetDoCogTests(bool c)
 {
-  return s_gm == AMJU_MODE_LOCAL;
+  cogTests = c;
 }
-*/
+
 }
 
