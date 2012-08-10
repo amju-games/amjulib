@@ -4,63 +4,51 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+reaction-time-comp
 // Num children
-5
+3
 
-
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.9
-// size
-2.0, 0.1
-// Text
-Reaction time test
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // Element type
 gui-text
 // Element name
 timer
 // pos (coords are -1..1)
--1.0, 0.8
+-1.0, 1.8
 // size
 2.0, 0.1 
 // Text
 Time
 // Font name, size
-arial, 1.0, bgcol=ff0000, fgcol=ffffff
+arial, 1.0, bgcol=ffffff, fgcol=000000
 
 // Element type
 gui-text
 // Element name
 word
 // pos (coords are -1..1)
--1.0, 0.2
+-1.0, 0.7
 // size
-2.0, 0.4
+2.0, 0.2
 // Text
 ready...
 // Font name, size
-arial, 4.0, bgcol=ffffff, fgcol=000000
+arial, 2.0, bgcol=ffffff, fgcol=000000
 
 gui-button
 // Element name
 button
 // pos (coords are -1..1)
--0.4, -0.5
+-0.4, 0.4
 // size
-0.8, 0.2
+0.8, 0.8
 // Image
-gui-button-4.png
+red_button.png
 // Text
 click me!
 // Font name, size
 arial, 1.5 
+
 
 gui-button
 // Element name
@@ -92,4 +80,17 @@ Score
 // Font name, size
 arial, 1.0, bgcol=ff0000, fgcol=ffffff
 
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.9
+// size
+2.0, 0.1
+// Text
+Reaction time test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
 
