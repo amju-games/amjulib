@@ -13,11 +13,13 @@ LurkMsg::LurkMsg()
   m_timer = 0;
   m_state = LURK_NEW;
   m_lurkPos = AMJU_NONE;
+  m_scale = 1.0f;
 }
 
-LurkMsg::LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp)
+LurkMsg::LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+  CommandFunc onFinished)
 {
-  Set(text, fgCol, bgCol, lp);
+  Set(text, fgCol, bgCol, lp, onFinished);
 }
 
 bool LurkMsg::IsFinished() const
@@ -27,8 +29,11 @@ bool LurkMsg::IsFinished() const
 
 void LurkMsg::Draw()
 {
+  AmjuGL::PushMatrix();
+  AmjuGL::Scale(m_scale, m_scale, 1.0f);
   m_rect->Draw();
   m_text->Draw();
+  AmjuGL::PopMatrix();
 }
 
 void LurkMsg::Update()
@@ -62,12 +67,19 @@ void LurkMsg::Update()
       m_text->SetLocalPos(m_showPos);
       m_state = LURK_SHOWN;
     }
-    else
+    else if (m_lurkPos == AMJU_CENTRE && m_scale > 1.0f)
+    {
+      m_scale = 1.0f;
+      m_state = LURK_SHOWN;
+    }
+    else 
     {
       Vec2f  dpos = m_vel * dt;
       m_pos += dpos;
       m_rect->SetLocalPos(m_rect->GetLocalPos() + dpos);
       m_text->SetLocalPos(m_text->GetLocalPos() + dpos);
+
+      m_scale += 2.0f * dt; // TODO TEMP TEST
     }
     break;
 
@@ -76,9 +88,16 @@ void LurkMsg::Update()
     if ((m_lurkPos == AMJU_TOP    && m_pos.y > m_hidePos.y) ||
         (m_lurkPos == AMJU_BOTTOM && m_pos.y < m_hidePos.y) ||
         (m_lurkPos == AMJU_LEFT   && m_pos.x < m_hidePos.x) ||
-        (m_lurkPos == AMJU_RIGHT  && m_pos.x > m_hidePos.x))
+        (m_lurkPos == AMJU_RIGHT  && m_pos.x > m_hidePos.x) ||
+        (m_lurkPos == AMJU_CENTRE && m_scale < 0.25f))
     {
       m_state = LURK_FINISHED;
+      m_scale = 0;
+
+      if (m_onFinished)
+      {
+        m_onFinished();
+      }
     }
     else
     {
@@ -86,6 +105,8 @@ void LurkMsg::Update()
       m_pos += dpos;
       m_rect->SetLocalPos(m_rect->GetLocalPos() + dpos);
       m_text->SetLocalPos(m_text->GetLocalPos() + dpos);
+
+      m_scale -= 2.0f * dt; // TODO TEMP TEST
     }
     break;
 
@@ -96,15 +117,21 @@ void LurkMsg::Update()
   }
 }
 
-void LurkMsg::Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp)
+void LurkMsg::Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+  CommandFunc onFinished)
 {
   m_lurkPos = lp;
   m_timer = 0;
   m_state = LURK_NEW;
+  m_onFinished = onFinished;
 
   m_text = new GuiText;
+  if (lp == AMJU_CENTRE)
+  {
+    m_text->SetIsMulti(true);
+  }
   m_text->SetTextSize(1.5f); // TODO CONFIG
-  m_text->SetSize(Vec2f(2.0f, 0.1f)); // assume single line
+  m_text->SetSize(Vec2f(1.6f, 0.1f)); // assume single line
   m_text->SetText(text);
   m_text->SizeToText();
   m_text->SetFgCol(fgCol);
@@ -142,11 +169,21 @@ void LurkMsg::Set(const std::string& text, const Colour& fgCol, const Colour& bg
     m_hidePos = Vec2f(1.0f + EXTRA.x, m_showPos.y);
     m_rect->SetRoundCorners(GuiRect::AMJU_BR | GuiRect::AMJU_TR);
     break;
+
+  case AMJU_CENTRE:
+    m_showPos = Vec2f(-w * 0.5f, h * 0.5f - 0.3f); // TODO CONFIG y-offset
+    m_hidePos = m_showPos;
+    m_rect->SetRoundCorners(0); 
+    m_scale = 0.5f;
+    break;
   }
 
   m_vel = (m_showPos - m_hidePos);
-  m_vel.Normalise();
-  m_vel *= 0.5f; // TODO CONFIG
+  if (m_vel.SqLen() > 0)
+  {
+    m_vel.Normalise();
+    m_vel *= 0.5f; // TODO CONFIG
+  }
   m_pos = m_hidePos;
   m_text->SetLocalPos(m_hidePos); 
   m_rect->SetLocalPos(m_hidePos - 0.5f * Vec2f(EXTRA.x, -EXTRA.y)); 
