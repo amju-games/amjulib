@@ -36,6 +36,7 @@ Source: "..\..\..\..\Source\SDL\lib\sdl.dll"; DestDir: "{app}"; Flags: ignorever
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\Assets\*.*"; DestDir: "{app}\Data\"; Flags: ignoreversion
+Source: "..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
