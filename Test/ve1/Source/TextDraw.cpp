@@ -29,6 +29,7 @@ void TextDraw::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
+  AmjuGL::PushMatrix();
   static float a = 0; 
   // TODO CONFIG!!
   a += TheTimer::Instance()->GetDt(); 
@@ -45,6 +46,7 @@ void TextDraw::Draw()
     AmjuGL::Vec3(1, 1, 1)); // Light direction
 
   GetGuiSceneGraph()->Draw();
+  AmjuGL::PopMatrix();
 }
 
 class Reflect : public SceneNode
