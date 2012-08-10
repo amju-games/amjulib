@@ -45,8 +45,25 @@ void GuiText::TextToSpeech()
 
 void GuiText::SizeToText()
 {
-  Vec2f size(GetTextWidth(m_text) * m_textSize, CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
-  SetSize(size);
+  if (IsMulti())
+  {
+    float longest = 0;
+    for (unsigned int i = 0; i < m_lines.size(); i++)
+    {
+      float size = GetTextWidth(m_lines[i]) * m_textSize;
+      if (size > longest)
+      {
+        longest = size;
+      }
+    }
+    Vec2f size(longest, (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
+    SetSize(size);
+  }
+  else
+  {
+    Vec2f size(GetTextWidth(m_text) * m_textSize, CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
+    SetSize(size);
+  }
 }
 
 void GuiText::SetCharTime(float secs)
