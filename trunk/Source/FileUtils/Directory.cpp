@@ -516,7 +516,7 @@ Time GetFileModifiedTime(const std::string& filename)
 {
   struct stat buf;
   stat(filename.c_str(), &buf);
-  return Time(buf.st_mtime);
+  return Time((unsigned int)buf.st_mtime);
 }
 
 }
