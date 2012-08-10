@@ -3,6 +3,7 @@
 #include <CursorManager.h>
 #include <Timer.h>
 #include <EventPoller.h>
+#include "LurkMsg.h"
 
 namespace Amju
 {
@@ -14,6 +15,7 @@ void GSGui::Update()
 {
   GSBase::Update();
   TextDraw::Update();
+  TheLurker::Instance()->Update();
 }
 
 void GSGui::Draw()
@@ -22,10 +24,14 @@ void GSGui::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+
+  AmjuGL::PushMatrix();
   static float f = 0;
   AmjuGL::RotateZ(f);
   f += 30.0f * TheTimer::Instance()->GetDt();
   m_bgImage.Draw();  
+  AmjuGL::PopMatrix();
+
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
@@ -40,6 +46,8 @@ void GSGui::Draw2d()
   {
     m_gui->Draw();
   }
+
+  TheLurker::Instance()->Draw();
 
   TheCursorManager::Instance()->Draw();
 }

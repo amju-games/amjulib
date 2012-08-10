@@ -7,8 +7,10 @@
 #include <Game.h>
 #include <DrawRect.h>
 #include <Timer.h>
+#include <SoundManager.h>
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {
@@ -34,6 +36,9 @@ void GSReactionTime::OnButton()
   case RT_TIMING:
     {
 std::cout << "Reaction time result: " << m_reactionTime << "s\n";
+    std::string str = "Well done!";
+    LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_TOP);
+    TheLurker::Instance()->Queue(lm);
 
     // Send results
     TheCogTestResults::Instance()->StoreResult(new Result(
@@ -46,6 +51,8 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
       
     GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
     word->SetText(ToString(m_reactionTime, 2));
+
+    TheSoundManager::Instance()->PlayWav("Sound/applause.wav");
     }
     break;
 
@@ -57,6 +64,18 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     }
     else
     {
+      std::string str;
+      if (m_testNum == m_maxTestNum)
+      {
+        str = "This is your last go!";
+      }
+      else
+      {
+        str = "Please have another go!";
+      }
+      LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_TOP);
+      TheLurker::Instance()->Queue(lm);
+      
       SetTest();
     }
     break;
@@ -85,6 +104,8 @@ void GSReactionTime::Update()
       m_waitTime = 0;
       word->SetText("");
       m_mode = RT_WAITING;
+
+      TheSoundManager::Instance()->PlayWav("Sound/ticktock.wav");
     }
     break;
 
@@ -97,6 +118,8 @@ void GSReactionTime::Update()
       b->SetText("click me!");
       m_mode = RT_TIMING;
       b->SetIsEnabled(true); 
+
+      TheSoundManager::Instance()->PlayWav("Sound/alarme.wav");
     }
     break;
 

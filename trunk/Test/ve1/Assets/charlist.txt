@@ -4,7 +4,6 @@
 // Num chars
 5
 pz-cat.md2
-//pz-dog.md2
 pz-rabbit.md2
 pz-squirrel.md2
 pz-dino2.md2
