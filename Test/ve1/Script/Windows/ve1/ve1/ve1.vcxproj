@@ -257,6 +257,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1BruteForce.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Node.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Object.cpp" />
@@ -358,6 +359,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\UploadNewContent.h" />
     <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1BruteForce.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Character.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Node.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Object.h" />
