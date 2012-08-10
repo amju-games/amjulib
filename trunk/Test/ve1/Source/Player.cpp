@@ -85,14 +85,19 @@ public:
       if (!loggedIn)
       {
         float sqDist = (GetLocalPlayer()->GetPos() - m_player->GetPos()).SqLen();
-        if (sqDist > 5000.0f) // TODO TEMP TEST
+        static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
+        static const float MIN_FADE_DIST = 100.0f;
+        static const float MAX_FADE_DIST2 = MAX_FADE_DIST * MAX_FADE_DIST;
+        static const float MIN_FADE_DIST2 = MIN_FADE_DIST * MIN_FADE_DIST;
+
+        if (sqDist > MAX_FADE_DIST2) 
         {
           // Too far away
           return;
         }
-        else if (sqDist > 4000.0f) // TODO TEMP TEST
+        else if (sqDist > MIN_FADE_DIST2) 
         {
-          float a = (sqDist - 4000.0f) / 1000.0f;
+          float a = (sqDist - MIN_FADE_DIST2) / (MAX_FADE_DIST2 - MIN_FADE_DIST2);
           MultColour(Colour(1, 1, 1, 1.0f - a));
         }
 
