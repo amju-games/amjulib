@@ -19,6 +19,7 @@ LurkMsg::LurkMsg()
 LurkMsg::LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
   CommandFunc onFinished)
 {
+  m_scale = 1.0f;
   Set(text, fgCol, bgCol, lp, onFinished);
 }
 
@@ -79,7 +80,10 @@ void LurkMsg::Update()
       m_rect->SetLocalPos(m_rect->GetLocalPos() + dpos);
       m_text->SetLocalPos(m_text->GetLocalPos() + dpos);
 
-      m_scale += 2.0f * dt; // TODO TEMP TEST
+      if (m_lurkPos == AMJU_CENTRE)
+      {
+        m_scale += 2.0f * dt; // TODO TEMP TEST
+      }
     }
     break;
 
@@ -106,7 +110,10 @@ void LurkMsg::Update()
       m_rect->SetLocalPos(m_rect->GetLocalPos() + dpos);
       m_text->SetLocalPos(m_text->GetLocalPos() + dpos);
 
-      m_scale -= 2.0f * dt; // TODO TEMP TEST
+      if (m_lurkPos == AMJU_CENTRE)
+      {
+        m_scale -= 2.0f * dt; // TODO TEMP TEST
+      }
     }
     break;
 
