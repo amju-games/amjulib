@@ -165,41 +165,39 @@ std::cout << "Failed to load GUI bg image!\n";
     func = Amju::ReactionTime;
     break;
 
-  case 5:
-    str = "Here comes STROOP COLOUR";
+  case 1:
+    str = "This is called a letter cancellation test. Please click on all the M letters that you see. You have 3 minutes to complete this task.";
+    func = Amju::LetterMTest;
+    break;
+
+  case 2:
+    str = "This time, click on all the sigma letters that you see. They look like this: ü"; // char(129)
+    func = Amju::LetterSigmaTest;
+    break;
+
+  case 3:
+    str = "This next one is called a Stroop Colour test. Click on the button which says the colour of the coloured rectangle.";
     func = Amju::StroopColour;
     break;
 
   case 4:
-    str = "Here comes STROOP COLOUR WORD";
-    func = Amju::StroopColourWord;
-    break;
-
-  case 3:
-    str = "Here comes STROOP WORD";
+    str = "Nearly finished. This is called the Stroop Word test.";
     func = Amju::StroopWord;
     break;
 
-  case 2:
-    str = "Please take some tests before you start. This first one is a letter cancellation test. Click on all the M letters that you see. You have 3 minutes to complete this task.";
-    func = Amju::LetterMTest;
+  case 5:
+    str = "This is the last one. It's called the Stroop Colour Word test.";
+    func = Amju::StroopColourWord;
     break;
-
-  case 1:
-    str = "In this test, click on all the sigma letters that you see.";
-    func = Amju::LetterSigmaTest;
-    break;
-
-  // etc
 
   default:
-    str = "Well done on doing all those tests. Now you can play the game.";
+    str = "Well done on doing all those tests! Now you can carry on playing the game!";
     func = Amju::Done;
   }
   m_nextTest++;
 
-  text->SetText(str);
-  ok->SetCommand(func);
+//  text->SetText(str);
+//  ok->SetCommand(func);
 
   LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
     func);
