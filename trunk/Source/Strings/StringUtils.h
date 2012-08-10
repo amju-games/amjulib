@@ -91,42 +91,55 @@ std::string InsertCommas(const char* numStr);
 // Word Wrap
 // WIDTH_FINDER must support float operator() (const std::string&)
 // returning the width of the string.
-typedef std::vector<std::string> Lines;
-
 template <class WIDTH_FINDER>
-Lines WordWrap(std::string s, float maxW, WIDTH_FINDER t)
+Strings WordWrap(std::string ss, float maxW, WIDTH_FINDER t)
 {
-  Lines l;
-  
-  std::string rem;
-  while (!s.empty())
+  // Start off by splitting by newlines in s. Then we word wrap the strings.
+  ss = Remove(ss, '\r');
+  Strings longStrs = Split(ss, '\n');
+  Strings strs;
+
+  for (Strings::iterator it = longStrs.begin(); it != longStrs.end(); ++it)
   {
-    if (t(s) <= maxW ||
-        std::find(s.begin(), s.end(), ' ') == s.end() ) // no space in s
+    std::string s = *it;
+    Trim(&s);
+    if (s.empty())
     {
-      l.push_back(s);
-      s = rem;
-      if (!s.empty() && s[0] == ' ')
-      {
-        s = s.substr(1); // remove leading space
-      }
-      rem = "";
+      strs.push_back("");
+      continue;
     }
-    else
+
+    std::string rem;
+    while (!s.empty())
     {
-      // Search backwards in s until we find the last space.
-      for (int i = s.size() - 1; i >= 0; i--)
+      if (t(s) <= maxW ||
+          std::find(s.begin(), s.end(), ' ') == s.end() ) // no space in s
       {
-        if (s[i] == ' ')
+        strs.push_back(s);
+        s = rem;
+        if (!s.empty() && s[0] == ' ')
         {
-          rem = s.substr(i) + rem;
-          s = s.substr(0, i);
-          break;
+          s = s.substr(1); // remove leading space
+        }
+        rem = "";
+      }
+      else
+      {
+        // Search backwards in s until we find the last space.
+        for (int i = s.size() - 1; i >= 0; i--)
+        {
+          if (s[i] == ' ')
+          {
+            rem = s.substr(i) + rem;
+            s = s.substr(0, i);
+            break;
+          }
         }
       }
     }
   }
-  return l;
+
+  return strs;
 }
 
 }
