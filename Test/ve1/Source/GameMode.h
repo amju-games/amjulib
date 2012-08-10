@@ -16,8 +16,8 @@ void SetGameMode(GameMode gm);
 
 GameMode GetGameMode();
 
-//bool IsOnline();
-//bool IsOffline();
+bool DoCogTests();
+void SetDoCogTests(bool);
 }
 
 #endif
