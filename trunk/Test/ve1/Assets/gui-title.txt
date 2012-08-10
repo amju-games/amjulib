@@ -11,7 +11,7 @@ hud-comp
 
 gui-button
 quick-start-button
--0.5, -0.2
+-0.5, -0.3
 1.0, 0.25 
 gui-button-4.png
 quick start
@@ -20,7 +20,7 @@ arial, 2.5
 gui-button
 start-button
 // pos (coords are -1..1)
--0.4, -0.5
+-0.4, -0.6
 // size
 0.8, 0.2
 // Image
@@ -34,7 +34,7 @@ arial, 2.0
 gui-button
 options-button
 // pos (coords are -1..1)
--0.4, -0.725
+-0.4, -1.725
 // size
 0.8, 0.2
 // Image
