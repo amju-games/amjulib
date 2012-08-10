@@ -2,7 +2,6 @@
 #include <AmjuGL.h>
 #include <Screen.h>
 #include <SAP.h> 
-#include <BruteForce.h> // test against SAP
 #include <Unproject.h>
 #include <ClipLineSegBox.h>
 #include <iostream>
@@ -31,6 +30,7 @@
 #include "LurkMsg.h"
 #include "Furniture.h"
 #include "CreateCollect.h" // TODO TEMP TEST
+#include "Ve1BruteForce.h" // test against SAP
 
 namespace Amju
 {
