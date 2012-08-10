@@ -32,6 +32,7 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_hidden = false;
   m_collidingObject = 0;
   m_shadow = new Shadow;
+  m_shadow->SetHeightRange(10.0f, 25.0f); // TODO TEMP TEST CONFIG
   m_inNewLocation = 2;
 }
 
