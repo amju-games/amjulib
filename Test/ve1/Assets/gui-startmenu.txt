@@ -14,25 +14,25 @@ start-button
 -0.4, 0.3
 0.8, 0.2
 gui-button-4.png
-start game
-arial, 1.4
+log in...
+arial, 1.8
 
 gui-button
 options-button
 -0.4, 0
 0.8, 0.2
 gui-button-4.png
-options
-arial, 1.4 
+options...
+arial, 1.8 
 
 
 gui-button
 cancel-button
--0.2, -0.6
-0.4, 0.1
+-0.4, -0.3
+0.8, 0.2
 gui-button-4.png
 cancel
-arial, 1.0 
+arial, 1.8 
 
 // TODO normally hidden
 gui-button
