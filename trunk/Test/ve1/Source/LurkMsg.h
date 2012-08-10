@@ -18,11 +18,14 @@ class LurkMsg
 {
 public:
   LurkMsg();
-  LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp);
+  // Optional function which is called when message has been displayed and has now gone away
+  LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp, 
+    CommandFunc onFinished = 0);
 
   void Draw();
   void Update();
-  void Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp);
+  void Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+    CommandFunc onFinished = 0);
 
   bool IsFinished() const;
  
@@ -34,6 +37,7 @@ private:
   Vec2f m_showPos; // position when LURK_SHOWN state is reached
   Vec2f m_hidePos; // position when fully hidden
   Vec2f m_vel;
+  float m_scale; // for centre msgs which scale up and down
 
   float m_timer;
   
@@ -42,6 +46,8 @@ private:
 
   friend class Lurker;
   LurkPos m_lurkPos;
+
+  CommandFunc m_onFinished;
 };
 
 class Lurker : public NonCopyable
