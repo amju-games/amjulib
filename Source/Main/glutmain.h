@@ -37,6 +37,7 @@ bool CreateWindowGLUT(AmjuGLWindowInfo*)
 
 void resize(int x, int y)
 {
+std::cout << "GLUT resize callback, x: " << x << " y: " << y << "\n";
   Screen::SetSize(x, y);
 }
 
@@ -232,6 +233,8 @@ int main(int argc, char **argv)
   glutMouseFunc(mousebutton);
   glutMotionFunc(mousemove);
   glutPassiveMotionFunc(mousemove);
+
+  glutIdleFunc(draw);
 
   int js = glutDeviceGet(GLUT_HAS_JOYSTICK);
   if (js != 0)
