@@ -1,9 +1,12 @@
 #include <GameObjectFactory.h>
+#include <Game.h>
 #include "TutorialNpc.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
 #include "LocalPlayer.h"
 #include "GameMode.h"
+#include "LurkMsg.h"
+#include "GSCogTestMenu.h"
 
 namespace Amju
 {
@@ -50,6 +53,8 @@ void TutorialNpc::OnPlayerCollision(Player* player)
 
 void TutorialNpc::OnLocationEntry()
 {
+  Ve1ObjectChar::OnLocationEntry();
+
   // TODO Special types of TutNPCs, depends on key
 
   if (DoCogTests()) // && type=="cogtest"
@@ -58,14 +63,21 @@ void TutorialNpc::OnLocationEntry()
 
     Vec3f pos = GetLocalPlayer()->GetPos();
     pos.x += 50.0f;
+    pos.z += 50.0f;
     SetPos(pos);
     Trigger();
   }
 }
 
+void OnCogTestMsgFinished()
+{
+  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+}
+
 void TutorialNpc::Trigger()
 {
   // Turn to face player
+  SetDirToFace(GetLocalPlayer());
 
   // Get player's token for this NPC if any
 
@@ -79,6 +91,12 @@ void TutorialNpc::Trigger()
   // Decide on "question" depending on token
 
   // Show "question" text
+  std::string text = "Hello " + GetLocalPlayer()->GetName() + 
+    "!\nI have got a quiz for you. You will win lots of jellybeans by doing it!";
+  // When this msg has been displayed, we go to the Cog Test state.
+  LurkMsg lm(text, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
+    OnCogTestMsgFinished);
+  TheLurker::Instance()->Queue(lm);
 }
 
 }
