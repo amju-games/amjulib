@@ -34,6 +34,8 @@ END
   print "Created player table! $sql\n<br>\n";
 }
 
+# TODO I just found out that 'start' was set to update to the current timestamp on every update!!
+# We don't want this! -- but how is this Create Table setting such an attribute ???
 sub create_table_session()
 {
   my $sql = <<END;
