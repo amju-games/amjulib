@@ -14,9 +14,23 @@
 
 namespace Amju
 {
+// TODO CONFIG
+static const Colour FG_COLOUR(1, 1, 1, 1);
+static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
+
 static void OnButton()
 {
   TheGSReactionTime::Instance()->OnButton();
+}
+
+static void NextGo()
+{
+  TheGSReactionTime::Instance()->NextGo();
+}
+
+void StartRT()
+{
+  TheGSReactionTime::Instance()->SetTest();
 }
 
 GSReactionTime::GSReactionTime()
@@ -26,7 +40,7 @@ GSReactionTime::GSReactionTime()
   m_maxWaitTime = 0; 
   m_testNum = 0; 
   m_maxTestNum = 3;
-  m_mode = RT_BEFORE_TEST;
+  m_mode = RT_NOT_STARTED_YET;
 }
 
 void GSReactionTime::OnButton()
@@ -36,15 +50,15 @@ void GSReactionTime::OnButton()
   case RT_TIMING:
     {
 std::cout << "Reaction time result: " << m_reactionTime << "s\n";
-    std::string str = "Well done!";
-    LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_TOP);
+    std::string str = "Well done! You hit the button in " + 
+      ToString(m_reactionTime, 2) +
+      " seconds!";
+
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
-    // Send results
-    TheCogTestResults::Instance()->StoreResult(new Result(
-      AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(m_reactionTime)));
-
-    m_mode = RT_AFTER_TEST;
+    //m_mode = RT_AFTER_TEST;
+    m_mode = RT_CONTINUE;
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
     b->SetIsEnabled(false); 
     b->SetText("");
@@ -52,36 +66,75 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
     word->SetText(ToString(m_reactionTime, 2));
 
-    TheSoundManager::Instance()->PlayWav("Sound/applause.wav");
-    }
-    break;
+    TheSoundManager::Instance()->PlayWav("Sound/applause2.wav");
 
-  case RT_CONTINUE:
-    m_testNum++;
-    if (m_testNum > m_maxTestNum)
+    if (TheGSCogTestMenu::Instance()->IsPrac())
     {
-      TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+      m_testNum = -1; // so practice goes not counted
+      TheGSCogTestMenu::Instance()->SetIsPrac(false);
+      LurkMsg lm("That was a practice. Now let's try for real!", 
+        FG_COLOUR, BG_COLOUR, AMJU_CENTRE, Amju::NextGo);
+      TheLurker::Instance()->Queue(lm);
+      // TODO Ask if player would like another prac
     }
     else
     {
+      // Send results
+      TheCogTestResults::Instance()->StoreResult(new Result(
+        AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(m_reactionTime)));
+
+      NextGo();
+    }
+    }
+    break;
+
+  default:
+    // TODO restart timer
+    Assert(0);
+  }
+}
+
+void GSReactionTime::NextGo()
+{
+  Assert(m_mode == RT_CONTINUE);
+
+  m_testNum++;
+  if (m_testNum == m_maxTestNum)
+  {
+    LurkMsg lm("That's the end. Thanks for playing my reaction time game!", 
+      FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+    // TODO Give reward (based on score ?)
+
+    TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  }
+  else
+  {
+    if (m_testNum > 0)
+    {
       std::string str;
-      if (m_testNum == m_maxTestNum)
+      // TODO Switch, different phrase each time ?
+      if (m_testNum == m_maxTestNum - 1)
       {
         str = "This is your last go!";
       }
       else
       {
-        str = "Please have another go!";
+        str = "That was go number " + 
+          ToString(m_testNum) + 
+          " of " + 
+          ToString(m_maxTestNum) + 
+          ". Try again, and see if you can beat your time!";
       }
-      LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_TOP);
+      // Don't continue with test until msg OKed
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartRT);
       TheLurker::Instance()->Queue(lm);
-      
-      SetTest();
     }
-    break;
-
-  default:
-    Assert(0);
+    else
+    {
+      SetTest(); // no msg, so start immediately
+    }
   }
 }
 
@@ -97,6 +150,9 @@ void GSReactionTime::Update()
 
   switch (m_mode)
   {
+  case RT_NOT_STARTED_YET:
+    break;
+
   case RT_BEFORE_TEST:
     m_waitTime += dt;
     if (m_waitTime >= 3.0f) // TODO TEMP TEST
@@ -123,15 +179,18 @@ void GSReactionTime::Update()
     }
     break;
 
+  /*
   case RT_AFTER_TEST:
     m_waitTime += dt;
     if (m_waitTime >= 3.0f) // TODO TEMP TEST
     {
       m_mode = RT_CONTINUE;
-      b->SetText("next...");
-      b->SetIsEnabled(true);
+      NextGo();
+      //b->SetText("next...");
+      //b->SetIsEnabled(true);
     }
     break;
+  */
 
   case RT_TIMING:
     m_reactionTime += dt;
@@ -188,9 +247,22 @@ void GSReactionTime::OnActive()
   GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
   b->SetCommand(Amju::OnButton);
   b->SetHasFocus(true);
+  b->SetShowIfFocus(false);
+  b->SetIsEnabled(false); 
+  b->SetText("");
+
+  GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
+  word->SetText("");
 
   m_testNum = 0; 
-  SetTest();
+
+  std::string str = "OK, when I say GO, press the button as quickly as you can. You get " +
+    ToString(m_maxTestNum) +
+    " goes at this.";
+  LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartRT);
+  TheLurker::Instance()->Queue(lm);
+
+  m_mode = RT_NOT_STARTED_YET;
 }
 
 void GSReactionTime::SetTest()

@@ -19,9 +19,39 @@ GameObject* CreateTutorialNpc()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(TutorialNpc::TYPENAME, CreateTutorialNpc);
 
+TutorialNpc::TutorialNpc()
+{
+  m_hasDoneCogTests = false;
+  m_hasTriggered = false;
+}
+
 void TutorialNpc::Update()
 {
   Ve1ObjectChar::Update();
+
+  // Chase player if it's important to give this task
+  if (DoCogTests() && !m_hasDoneCogTests) // && type=="cogtest"
+  {
+    // Go next to local player so we are visible and triggered
+    Vec3f pos = GetLocalPlayer()->GetPos();
+    MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
+  }
+
+  // Trigger if close enough to player and not already triggered
+  if (!m_hasTriggered)
+  {
+    Vec3f p0 = m_pos;
+    p0.y = 0;
+    Vec3f p1 = GetLocalPlayer()->GetPos();
+    p1.y = 0;
+    static const float TRIGGER_RADIUS = 75.0f; // TODO CONFIG
+    static const float TR2 = TRIGGER_RADIUS * TRIGGER_RADIUS;
+    if ((p1 - p0).SqLen() < TR2)
+    {
+      SetVel(Vec3f()); // make sure we stop
+      Trigger();
+    }
+  }
 }
 
 bool TutorialNpc::Load(File* f)
@@ -35,6 +65,7 @@ bool TutorialNpc::Load(File* f)
     return false;
   }
 
+  m_hasTriggered = false;
   return true;
 }
 
@@ -45,10 +76,7 @@ void TutorialNpc::SetMenu(GuiMenu*)
 
 void TutorialNpc::OnPlayerCollision(Player* player)
 {
-  if (player->IsLocalPlayer())
-  {
-    Trigger();
-  }
+  // Already triggered in Update, when within some radius of player
 }
 
 void TutorialNpc::OnLocationEntry()
@@ -57,15 +85,12 @@ void TutorialNpc::OnLocationEntry()
 
   // TODO Special types of TutNPCs, depends on key
 
-  if (DoCogTests()) // && type=="cogtest"
+  if (DoCogTests() && !m_hasDoneCogTests) // && type=="cogtest"
   {
     // Go next to local player so we are visible and triggered
-
     Vec3f pos = GetLocalPlayer()->GetPos();
-    pos.x += 50.0f;
-    pos.z += 50.0f;
-    SetPos(pos);
-    Trigger();
+    SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
+    MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
   }
 }
 
@@ -76,6 +101,8 @@ void OnCogTestMsgFinished()
 
 void TutorialNpc::Trigger()
 {
+  m_hasTriggered = true;
+
   // Turn to face player
   SetDirToFace(GetLocalPlayer());
 
@@ -97,6 +124,11 @@ void TutorialNpc::Trigger()
   LurkMsg lm(text, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
     OnCogTestMsgFinished);
   TheLurker::Instance()->Queue(lm);
+
+  if (DoCogTests()) 
+  {
+    m_hasDoneCogTests = true;
+  }
 }
 
 }

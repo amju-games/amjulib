@@ -18,6 +18,9 @@
 
 namespace Amju
 {
+static const Colour FG_COLOUR(1, 1, 1, 1);
+static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
+
 static void OnCancelButton()
 {
   // If we cancel, the session will not be complete so we should have to do the cog tests
@@ -26,6 +29,21 @@ static void OnCancelButton()
 
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   TheGSCogTestMenu::Instance()->ResetTests();
+}
+
+static void NoPrac()
+{
+  TheGSCogTestMenu::Instance()->DoPractice(false);
+}
+
+static void YesPrac()
+{
+  TheGSCogTestMenu::Instance()->DoPractice(true);
+}
+
+static void AskPractice()
+{
+  TheGSCogTestMenu::Instance()->AskPractice();
 }
 
 static void LetterSigmaTest()
@@ -69,6 +87,8 @@ static void Done()
 GSCogTestMenu::GSCogTestMenu()
 {
   m_nextTest = 0;
+  m_func = 0;
+  m_isPrac = false;
 }
 
 void GSCogTestMenu::ResetTests()
@@ -108,6 +128,11 @@ void GSCogTestMenu::Draw2d()
 //  TheLurker::Instance()->Draw();
 }
 
+void GSCogTestMenu::AdvanceToNextTest()
+{
+  m_nextTest++;
+}
+
 void GSCogTestMenu::OnActive()
 {
   //GSGui::OnActive();
@@ -131,77 +156,90 @@ std::cout << "Failed to load GUI bg image!\n";
   m.Translate(pos);
   ch->SetLocalTransform(m);
 
+  ClearGuiSceneGraph();
   GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(ch);
 
   m_gui = LoadGui("gui-cogtestmenu.txt");
   Assert(m_gui);
 
-  // We display some text, which depends on the next test to administer.
-  // The OK button then starts the next test.
-  // TODO Set focus element, cancel element, command handlers
-  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  if (cancel)
-  {
-    cancel->SetCommand(Amju::Done);
-    cancel->SetIsCancelButton(true);
-    cancel->SetText("skip!");
-  }
-
-  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
-  ok->SetIsFocusButton(true);
-
-  GuiText* text = (GuiText*)GetElementByName(m_gui, "text1");
-  Assert(text);
-
   // Set text and OK button command depending on next test to perform...
   // TODO Use localisation system so we can improve all the text.
+  /*
+  TODO
+  std::string strs[] = 
+  {
+  };
+  CommandFunc funcs[] = 
+  {
+  };
+  */
+  m_isPrac = false;
   std::string str;
-  CommandFunc func = 0;
 
   switch (m_nextTest)
   {
   case 0:
-    str = "This is a reaction time game. Press the red button as soon as the alarm goes off!";
-    func = Amju::ReactionTime;
+    str = "This is a reaction time game. What you have to do is press the big red button as soon as the alarm goes off!";
+    m_func = Amju::ReactionTime;
     break;
 
   case 1:
     str = "This is called a letter cancellation test. Please click on all the M letters that you see. You have 3 minutes to complete this task.";
-    func = Amju::LetterMTest;
+    m_func = Amju::LetterMTest;
     break;
 
   case 2:
     str = "This time, click on all the sigma letters that you see. They look like this: ü"; // char(129)
-    func = Amju::LetterSigmaTest;
+    m_func = Amju::LetterSigmaTest;
     break;
 
   case 3:
     str = "This next one is called a Stroop Colour test. Click on the button which says the colour of the coloured rectangle.";
-    func = Amju::StroopColour;
+    m_func = Amju::StroopColour;
     break;
 
   case 4:
     str = "Nearly finished. This is called the Stroop Word test.";
-    func = Amju::StroopWord;
+    m_func = Amju::StroopWord;
     break;
 
   case 5:
     str = "This is the last one. It's called the Stroop Colour Word test.";
-    func = Amju::StroopColourWord;
+    m_func = Amju::StroopColourWord;
     break;
 
   default:
     str = "Well done on doing all those tests! Now you can carry on playing the game!";
-    func = Amju::Done;
+    m_func = Amju::Done;
   }
-  m_nextTest++;
 
-//  text->SetText(str);
-//  ok->SetCommand(func);
-
-  LurkMsg lm(str, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
-    func);
+  LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, Amju::AskPractice);
   TheLurker::Instance()->Queue(lm);
+}
+
+void GSCogTestMenu::AskPractice()
+{
+  std::string q("Would you like to have a practice go first ?");
+  TheLurker::Instance()->ShowYesNo(q, FG_COLOUR, BG_COLOUR, Amju::NoPrac, Amju::YesPrac);
+}
+
+void GSCogTestMenu::SetIsPrac(bool b)
+{
+  m_isPrac = b;
+}
+
+bool GSCogTestMenu::IsPrac() const
+{
+  return m_isPrac;
+}
+
+void GSCogTestMenu::DoPractice(bool b)
+{
+  if (b)
+  {
+    SetIsPrac(b);
+  }
+  m_func();
 }
 
 } // namespace
