@@ -9,6 +9,7 @@ SceneGraph* GetVe1SceneGraph();
 void ClearVe1SceneGraph();
 
 SceneGraph* GetGuiSceneGraph();
+void ClearGuiSceneGraph();
 
 }
 
