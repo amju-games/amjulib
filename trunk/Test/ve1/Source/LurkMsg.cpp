@@ -1,4 +1,5 @@
 #include <Timer.h>
+#include <EventPoller.h>
 #include "LurkMsg.h"
 
 namespace Amju
@@ -33,7 +34,10 @@ void LurkMsg::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::Scale(m_scale, m_scale, 1.0f);
   m_rect->Draw();
-  m_text->Draw();
+  if (m_scale > 0.99f)
+  {
+    m_text->Draw();
+  }
   AmjuGL::PopMatrix();
 }
 
@@ -50,10 +54,13 @@ void LurkMsg::Update()
     break;
 
   case LURK_SHOWN:
-    m_timer += dt;
-    if (m_timer > LURK_MAX_TIME)
+    if (m_lurkPos != AMJU_CENTRE) // wait for button click. TODO allow timed CENTRE msgs
     {
-      m_state = LURK_HIDING;
+      m_timer += dt;
+      if (m_timer > LURK_MAX_TIME)
+      {
+        m_state = LURK_HIDING;
+      }
     }
     break;
 
@@ -196,6 +203,26 @@ void LurkMsg::Set(const std::string& text, const Colour& fgCol, const Colour& bg
   m_rect->SetLocalPos(m_hidePos - 0.5f * Vec2f(EXTRA.x, -EXTRA.y)); 
 }
 
+static void OnLurkOk()
+{
+  TheLurker::Instance()->OnLurkOk();
+}
+
+Lurker::Lurker()
+{
+  m_button = new GuiButton;
+  m_button->OpenAndLoad("lurk-button.txt");
+  TheEventPoller::Instance()->AddListener(m_button);
+  m_button->SetVisible(false);
+  m_button->SetCommand(Amju::OnLurkOk);
+}
+
+void Lurker::OnLurkOk()
+{
+  m_qmap[AMJU_CENTRE].front().m_state = LurkMsg::LURK_HIDING;
+  m_button->SetVisible(true);
+}
+
 void Lurker::Update()
 {
   for (QMap::iterator it = m_qmap.begin(); it != m_qmap.end(); ++it)
@@ -225,13 +252,30 @@ void Lurker::Draw()
     {
       continue;
     }
-    q.front().Draw();
+    LurkMsg& msg = q.front();
+    msg.Draw();
+    if (msg.m_lurkPos == AMJU_CENTRE && msg.m_state == LurkMsg::LURK_SHOWN)
+    {
+      Vec2f pos = msg.m_rect->GetLocalPos(); // TODO move this
+      pos += Vec2f(msg.m_rect->GetSize().x - m_button->GetSize().x, -msg.m_rect->GetSize().y);
+      m_button->SetLocalPos(pos);
+      m_button->SetVisible(true);
+      m_button->Draw();
+    }
   }
 }
 
 void Lurker::Queue(const LurkMsg& lm)
 {
   m_qmap[lm.m_lurkPos].push(lm);
+}
+
+void Lurker::ShowYesNo(const std::string& q, const Colour& fgCol, const Colour& bgCol, 
+  CommandFunc no, CommandFunc yes)
+{
+  LurkMsg msg(q, fgCol, bgCol,AMJU_CENTRE, yes);
+  // TODO Yes/no buttons
+  Queue(msg);
 }
 
 void Lurker::Clear()
