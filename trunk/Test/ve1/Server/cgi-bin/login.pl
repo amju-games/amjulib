@@ -72,10 +72,11 @@ sub cleanup_inactive_players()
 
   update($sql);
 
-  # TODO Also end the session(s) - get session ID for each player(s) we are logging out
-  $sql = " update session set `expires`=now() where   TIMESTAMPDIFF(SECOND, start, now()) > 3600  and player_id in ( select distinct a.id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 3600)";
+  # TODO - this could be broken. Odd start/expires timestamps in session table :-(
 
-  update($sql);
+  # TODO Also end the session(s) - get session ID for each player(s) we are logging out
+#  $sql = " update session set `expires`=now() where   TIMESTAMPDIFF(SECOND, start, now()) > 3600  and player_id in ( select distinct a.id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 3600)";
+#  update($sql);
 
   # Make players drop any carried objects if they are inactive (less time, because hogging items is bad)
   $sql = "update objectstate set val='0' where `key`='pickup' and val in (select distinct a.obj_id from player as a, objectpos as c where a.obj_id=c.id and TIMESTAMPDIFF(SECOND, c.whenchanged, now()) > 60 * 5 )";
