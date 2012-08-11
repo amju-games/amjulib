@@ -7,7 +7,9 @@
 #include <Colour.h>
 #include <GuiText.h>
 #include <GuiRect.h>
+#include <GuiButton.h>
 #include <Singleton.h>
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -52,16 +54,31 @@ private:
 
 class Lurker : public NonCopyable
 {
+  Lurker();
+  friend class Singleton<Lurker>;
+
 public:
   void Update();
   void Draw();
   void Queue(const LurkMsg& lm);
+
+  // TODO
+  void QueueMultiPage(const Strings& strs, const Colour& fgCol, const Colour& bgCol);
+
+  void ShowYesNo(const std::string& q, const Colour& fgCol, const Colour& bgCol, 
+    CommandFunc no, CommandFunc yes);
+
   void Clear(); // to prevent old msgs from stacking up
+
+  void OnLurkOk();
 
 private:
   typedef std::queue<LurkMsg> LurkMsgQ; // queue of msgs or one Lurk pos
   typedef std::map<LurkPos, LurkMsgQ> QMap; 
   QMap m_qmap; // one queue for each position
+
+  // next/ok button for Centred text (TODO make this per-LurkMsg ?)
+  RCPtr<GuiButton> m_button; 
 };
 
 typedef Singleton<Lurker> TheLurker;

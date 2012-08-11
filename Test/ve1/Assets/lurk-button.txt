@@ -1,0 +1,8 @@
+// version
+1
+lurk-button
+-0.2, 0
+0.4, 0.1
+gui-button-4.png
+ok
+arial, 0.8
