@@ -34,6 +34,9 @@ public:
   // Test ID is one of the enums in CogTestResults.
   bool LoadConfig(int testId, const std::string& filename);
 
+  // Call to re/start
+  void StartTest();
+
   // Called from Done button or when timer expires. Send results, go to next state.
   void FinishedTest();
 

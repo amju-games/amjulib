@@ -11,32 +11,54 @@
 #include <Timer.h>
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {
 static const int MAX_LETTERS = 6 * 52; // size of grid, from Malec et al
 //static const int NUM_M = 32; // from Malec et al, number of letters in grid to find
-static const float MAX_TIME = 180.0f;
+static const float MAX_TIME = 180.0f; // 3 mins, from Malec et al
+
+// TODO CONFIG
+static const Colour FG_COLOUR(1, 1, 1, 1);
+static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
 
 static void OnDoneButton()
 {
   TheGSLetterCancellation1::Instance()->FinishedTest();
 }
 
+static void StartLC()
+{
+  TheGSLetterCancellation1::Instance()->StartTest();
+}
+
 void GSLetterCancellation1::FinishedTest()
 {
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  if (isPrac)
+  {
+    TheGSCogTestMenu::Instance()->SetIsPrac(false);
+
+    std::string str = "OK, you got " + ToString(m_correct) +
+      " correct! Let's try it for real! You have 3 minutes!";
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
+    TheLurker::Instance()->Queue(lm);
+  }
+  else
+  {
   // Send results, go to next test.
-  // NB We must be sure to not lose the results. Store them locally, keep sending until we get ack 
-  //  from server.
 
 std::cout << "Finished! Sending results to server...\n";
 
-  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
-  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
-  TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
   
-  // TODO Where should we go when we administer the test for real ?
-  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    // Advance to the next test
+    TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  }
 }
 
 static void OnCancelButton()
@@ -61,7 +83,7 @@ GSLetterCancellation1::GSLetterCancellation1()
 {
   m_listener = new LCListener;
 
-  m_fontImgFilename = "font2d/arial_round_1024_36pt.png";
+  //m_fontImgFilename = "font2d/arial_round_1024_36pt.png";
   m_top = 0.5f; 
   m_left = -1.0f; 
   m_vSpacing = 0.12f;
@@ -122,6 +144,12 @@ bool GSLetterCancellation1::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (r.IsPointIn(Vec2f(mbe.x, mbe.y)))
       {
 std::cout << "sel:" << m_letters[i][j] << "\n";
+        if ('@' == m_letters[i][j])
+        {
+          // This symbol means already picked this letter
+          return false;
+        }
+
         if (m_specialLetter == m_letters[i][j])
         {
           // TODO sound, but pre-load into mem
@@ -137,6 +165,9 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
           // TODO sound, but pre-load into mem
           m_incorrect++;
         }
+
+        // Mark as picked
+        m_letters[i][j] = '@';
 
         GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
         std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
@@ -161,7 +192,8 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         tri.m_verts[2] = verts[3];
         m_blocks.push_back(tri);
 
-        break;
+        // Done
+        return false;
       }
     }
   }
@@ -174,27 +206,31 @@ void GSLetterCancellation1::Update()
 
   m_timer -= TheTimer::Instance()->GetDt();
 
-  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
-  std::string s;
-  if (m_timer > 0)
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  // Don't do countdown if in practice mode
+  if (!isPrac)
   {
-    int min = (int)(m_timer / 60.0f);
-    int sec = (int)(m_timer - 60.0f * min);
-    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
-  }
-  else
-  {
-    m_isFinished = true;
-    // TODO flash
-    s = "0:00";
-
-    //if (m_timer < -10.0f)
+    GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
+    std::string s;
+    if (m_timer > 0)
     {
-      OnDoneButton();
+      int min = (int)(m_timer / 60.0f);
+      int sec = (int)(m_timer - 60.0f * min);
+      s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
     }
-  }
+    else
+    {
+      m_isFinished = true;
+      // TODO flash
+      s = "0:00";
 
-  timeText->SetText(s);
+      //if (m_timer < -10.0f)
+      {
+        OnDoneButton();
+      }
+    }
+    timeText->SetText(s);
+  }
 }
 
 void GSLetterCancellation1::Draw()
@@ -329,13 +365,6 @@ bool GSLetterCancellation1::LoadConfig(int testId, const std::string& filename)
 
 void GSLetterCancellation1::OnActive()
 {
-  // Reset timer and score
-  m_timer = MAX_TIME;
-  m_mouseOver = false;
-  m_correct = 0;
-  m_incorrect = 0;
-  m_blocks.clear();
-
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
 
@@ -352,6 +381,35 @@ void GSLetterCancellation1::OnActive()
     Assert(0);
     // ?
   }
+
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetCommand(Amju::OnDoneButton);
+  done->SetHasFocus(true);
+
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  cancel->SetCommand(Amju::OnCancelButton);
+  cancel->SetIsCancelButton(true);
+
+  TheEventPoller::Instance()->AddListener(m_listener);
+
+  StartTest();
+}
+
+void GSLetterCancellation1::StartTest()
+{
+  // Reset timer and score
+  m_timer = MAX_TIME;
+  m_mouseOver = false;
+  m_correct = 0;
+  m_incorrect = 0;
+  m_blocks.clear();
+
+
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(isPrac);
+  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
+  timeText->SetVisible(!isPrac);
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
   // (Generally: there are m_numSpecialLetters * m_specialLetter).
@@ -401,18 +459,6 @@ std::cout << "Letters but with no special letter: " << m_noSpecial << "\n";
       m_tris[i].push_back(tris[1]);
     }
   }
-
-  // TODO Set focus element, cancel element, command handlers
-
-  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnDoneButton);
-  done->SetHasFocus(true);
-
-  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  cancel->SetCommand(Amju::OnCancelButton);
-  cancel->SetIsCancelButton(true);
-
-  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 void GSLetterCancellation1::OnDeactive()

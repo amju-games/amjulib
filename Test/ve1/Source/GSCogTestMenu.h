@@ -16,13 +16,22 @@ public:
   virtual void Draw();
   virtual void Draw2d();
   virtual void OnActive();
+  
+  void AdvanceToNextTest();
 
   void ResetTests();
 
+  // Practice mode
+  void AskPractice();
+  bool IsPrac() const; // true if player wants a practice
+  void SetIsPrac(bool);
+  void DoPractice(bool b);
   // TODO Set order of tests; set propoerties of each test
 
 private:
   int m_nextTest;
+  CommandFunc m_func; // call to go to next state... could just use a switch...?
+  bool m_isPrac;
 };
 typedef Singleton<GSCogTestMenu> TheGSCogTestMenu;
 } // namespace

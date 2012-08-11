@@ -12,6 +12,7 @@ class TutorialNpc : public Ve1ObjectChar
 {
 public:
   static const char* TYPENAME;
+  TutorialNpc();
 
   virtual const char* GetTypeName() const { return TYPENAME; }
   virtual void Update();
@@ -23,6 +24,8 @@ public:
   void Trigger();
 
 protected:
+  bool m_hasDoneCogTests;
+  bool m_hasTriggered;
 };
 }
 
