@@ -125,8 +125,16 @@ void SceneNode::DelChild(PSceneNode node)
   Assert(node);
   node->SetParent(0); // probably not necessary
   Nodes::iterator it = std::find(m_children.begin(), m_children.end(), node);
-  Assert(it != m_children.end());
-  m_children.erase(it);
+  if (it == m_children.end())
+  {
+#ifdef _DEBUG
+    std::cout << "Unexpected, node not in scene graph.\n";
+#endif
+  }
+  else
+  {
+    m_children.erase(it);
+  }
 }
 
 void SceneNode::AddChild(PSceneNode node)
