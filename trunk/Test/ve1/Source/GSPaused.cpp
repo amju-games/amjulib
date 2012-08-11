@@ -4,7 +4,7 @@
 #include "GSMain.h"
 #include "GSOptions.h"
 #include "GSTitle.h"
-#include "GSYesNoQuitProcess.h"
+#include "GSQuitGame.h"
 
 namespace Amju
 {
@@ -21,8 +21,11 @@ static void OnOptionsButton()
 
 static void OnQuitButton()
 {
-  TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSMain::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
+  //TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSMain::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());
+
+  TheGSQuitGame::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSQuitGame::Instance());
 }
 
 GSPaused::GSPaused()
