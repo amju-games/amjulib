@@ -20,6 +20,7 @@ GuiButton::GuiButton()
   m_isMouseOver = false;
   m_isPressed = false;
   m_isEnabled = true;
+  m_showIfFocus = true;
 }
 
 GuiButton::~GuiButton()
@@ -69,6 +70,11 @@ void GuiButton::SetIsFocusButton(bool isFocusButton)
   {
     focusButton = 0;
   }
+}
+
+void GuiButton::SetShowIfFocus(bool s)
+{
+  m_showIfFocus = s;
 }
 
 void GuiButton::OnGetFocus()
@@ -140,7 +146,8 @@ void GuiButton::Draw()
   }
 
 
-  if (IsFocusButton() || IsCancelButton()) ///// || HasFocus()) // TODO just one
+  if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus) 
+    ///// || HasFocus()) // TODO just one
   {
     // Draw border
     // TODO Could be image - allow flexible way to give GUIs themes
@@ -185,6 +192,7 @@ void GuiButton::Draw()
   {
     a = 0.5f;
   }
+  m_guiText.SetLocalPos(GetLocalPos());
   m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
   AmjuGL::PushMatrix();

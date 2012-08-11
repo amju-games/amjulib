@@ -37,6 +37,7 @@ public:
 
   bool IsFocusButton() const;
   void SetIsFocusButton(bool isFocusButton);
+  void SetShowIfFocus(bool);
 
   bool IsCancelButton() const;
   void SetIsCancelButton(bool isCancelButton);
@@ -55,6 +56,7 @@ protected:
   bool m_isMouseOver; // Draw bigger
   bool m_isPressed; // Draw offset right/down
   bool m_isEnabled;
+  bool m_showIfFocus;
 };
 }
 
