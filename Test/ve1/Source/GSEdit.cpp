@@ -15,9 +15,7 @@
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include "GSNewLocation.h"
-#include "GSStartMenu.h"
-#include "Portal.h" // TODO hopefully we can query GameObjectFactory
-#include "ProtoObject.h"
+#include "Portal.h" 
 #include "Useful.h"
 #include "GSObjMesh.h"
 #include "Portal.h"
@@ -25,13 +23,15 @@
 #include "Furniture.h"
 #include "Baddie.h"
 #include "TutorialNpc.h"
+#include "GSQuitGame.h"
 
 namespace Amju
 {
 void OnDone()
 {
-  // TODO Any need to check for unsaved changes ? Everything is saved as we go along, right ?
-  TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
+  // TODO Or pause menu ?
+  TheGSQuitGame::Instance()->SetPrevState(TheGSEdit::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSQuitGame::Instance());
 }
 
 class DelReq : public Ve1Req
