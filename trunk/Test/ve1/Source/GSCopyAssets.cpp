@@ -119,7 +119,9 @@ GSCopyAssets::GSCopyAssets()
 
 void GSCopyAssets::Update()
 {
-  GSGui::Update();
+  //GSGui::Update();
+  // Do we need this ?
+  // GSBase::Update();
 
   static bool done = false;
   if (!done)
