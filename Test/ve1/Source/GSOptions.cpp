@@ -112,6 +112,7 @@ void GSOptions::OnDeactive()
 }
 
 static const char* MUSIC_VOL_KEY = "options-music-vol";
+static const char* KB_KEY = "options-kb";
 
 void GSOptions::LoadSettingsFromPI(PlayerInfo* pi)
 {
@@ -121,6 +122,13 @@ void GSOptions::LoadSettingsFromPI(PlayerInfo* pi)
     m_musicVol = pi->PIGetFloat(MUSIC_VOL_KEY);
   }
   TheSoundManager::Instance()->SetSongMaxVolume(m_musicVol);
+
+  if (pi->Exists(KB_KEY))
+  {
+    bool kb = pi->PIGetBool(KB_KEY);
+    TheKb::Instance()->SetEnabled(kb);
+  }
+
   // etc....
 }
 
@@ -128,6 +136,7 @@ void GSOptions::SaveSettingsToPI(PlayerInfo* pi)
 {
   Assert(pi);
   pi->PISetFloat(MUSIC_VOL_KEY, m_musicVol);
+  pi->PISetBool(KB_KEY, TheKb::Instance()->IsEnabled());
 }
 
 } // namespace

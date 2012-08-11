@@ -107,8 +107,6 @@ void Kb::Activate()
 
   TheEventPoller::Instance()->AddListener(m_kb);
 
-  // Wrong place - do this in GSMain
-//  TheChatConsole::Instance()->SetBottom(-0.2f); // TODO Get this from KB config
 }
 
 void Kb::Deactivate()
