@@ -1,8 +1,26 @@
 #include "GSQuitGame.h"
 #include <AmjuGL.h>
+#include <Game.h>
+#include <GuiButton.h>
+#include "GSTitle.h"
 
 namespace Amju
 {
+static void OnQuitSession()
+{
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+}
+
+static void OnQuitProcess()
+{
+  exit(0);
+}
+
+static void OnCancel()
+{
+  TheGSQuitGame::Instance()->GoBack();
+}
+
 GSQuitGame::GSQuitGame()
 {
 }
@@ -10,13 +28,11 @@ GSQuitGame::GSQuitGame()
 void GSQuitGame::Update()
 {
   GSGui::Update();
-
 }
 
 void GSQuitGame::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSQuitGame::Draw2d()
@@ -31,7 +47,16 @@ void GSQuitGame::OnActive()
   m_gui = LoadGui("gui-quitgame.txt");
   Assert(m_gui);
 
-  // TODO Set focus element, cancel element, command handlers
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  cancel->SetCommand(Amju::OnCancel);
+  cancel->SetHasFocus(true); 
+
+  GuiButton* qsession = (GuiButton*)GetElementByName(m_gui, "quitsession-button");
+  qsession->SetCommand(Amju::OnQuitSession);
+
+  GuiButton* qprocess = (GuiButton*)GetElementByName(m_gui, "quitprocess-button");
+  qprocess->SetCommand(Amju::OnQuitProcess);
+
 }
 
 } // namespace
