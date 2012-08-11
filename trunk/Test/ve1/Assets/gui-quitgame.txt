@@ -1,0 +1,59 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+quitgame-comp
+// Num children
+4
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Are you sure you want to quit the game ?
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// element type
+gui-button
+// Element name
+quitsession-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit to main menu
+// Font name, size
+arial, 2.0 
+
+gui-button
+quitprocess-button
+-0.4,0.5
+0.8,0.2
+gui-button-4.png
+quit completely
+arial, 2.0
+
+gui-button
+cancel-button
+-0.4,0.3
+0.8,0.2
+gui-button-4.png
+don't quit
+arial, 2.0
+
+
+
+
+
