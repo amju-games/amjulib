@@ -209,6 +209,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSProxy.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSQuitGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
@@ -245,6 +246,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ROConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
@@ -308,6 +310,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
     <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
     <ClInclude Include="..\..\..\..\Source\GSProxy.h" />
+    <ClInclude Include="..\..\..\..\Source\GSQuitGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
@@ -345,6 +348,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
+    <ClInclude Include="..\..\..\..\Source\ROConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
