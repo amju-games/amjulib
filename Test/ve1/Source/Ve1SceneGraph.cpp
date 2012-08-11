@@ -11,6 +11,14 @@ void ClearVe1SceneGraph()
   sg->SetCamera(new Camera);
 }
 
+void ClearGuiSceneGraph()
+{
+  SceneGraph* sg = GetGuiSceneGraph();
+  sg->Clear();
+  sg->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
+  sg->SetCamera(new Camera);
+}
+
 SceneGraph* GetVe1SceneGraph()
 {
   static SceneGraph* sg = 0;
