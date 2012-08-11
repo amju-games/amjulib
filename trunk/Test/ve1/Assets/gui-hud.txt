@@ -59,14 +59,14 @@ arial, 1.0
 // Heart image
 gui-image
 heart-img
-0.8, 1.0
+0.7, 1.0
 0.2, 0.25
 heart.png
 
 // Num hearts text
 gui-text
 heart-num
-0.7, 0.9
+0.6, 0.9
 0.3, 0.1
 // Text
 0
