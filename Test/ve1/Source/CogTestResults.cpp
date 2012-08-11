@@ -15,7 +15,6 @@ class ReqStoreResult : public Ve1Req
 public:
   ReqStoreResult(const std::string& url, Result* res) : Ve1Req(url, "sendresult"), m_res(res)
   {
-    m_res->m_committed = true;
   }
 
   virtual void OnFailure()
@@ -31,7 +30,7 @@ std::cout << "Store result req FAILED! for this res: "
   virtual void OnSuccess()
   {
     // Result committed ok: Mark result as committed, so it won't be sent again.
-
+    m_res->m_committed = true;
   }
 
 private:
