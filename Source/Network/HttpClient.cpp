@@ -108,7 +108,9 @@ std::cout << "Port: " << port << "\n";
       strippedurl = StripDataFromUrl(url);
       data = GetDataFromUrl(url); 
 
+#ifdef _DEBUG
       curl_easy_setopt(curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
+#endif
 
       curl_easy_setopt(curl, CURLOPT_URL, strippedurl.c_str());
       curl_easy_setopt(curl, CURLOPT_POST, 1);
