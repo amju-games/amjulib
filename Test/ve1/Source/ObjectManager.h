@@ -136,6 +136,10 @@ public:
   void AddObject(PObject);
 
   void AddGameObject(PGameObject);
+  
+  // For Edit mode
+//  void EraseGameObject(int id);
+  void Clear();
 
   // Use this in preference to the Game when the object may not be in the local player's location
   PGameObject GetGameObject(int id); 

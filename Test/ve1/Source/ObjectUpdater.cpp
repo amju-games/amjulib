@@ -36,6 +36,17 @@ ObjectUpdater::~ObjectUpdater()
   Save();
 }
 
+void ObjectUpdater::Clear()
+{
+  m_posMap.clear();
+  m_keyvalMap.clear();
+  // No need to trash the cache containers ???
+  m_timestampPos = 1;
+  m_timestampUpdate = 1;
+  m_posElapsed = 0;
+  m_updateElapsed = 0;
+}
+
 bool ObjectUpdater::Load()
 {
 #ifdef YES_USE_CACHE

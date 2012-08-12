@@ -570,6 +570,24 @@ void ObjectManager::AddGameObject(PGameObject go)
 //std::cout << "Created game object " << go->GetId() << " " << go->GetTypeName() << " but don't know its location yet\n"; 
 }
 
+//void ObjectManager::EraseGameObject(int id)
+//{
+//  // For Edit mode
+//  Assert(m_allGameObjects.find(id) != m_allGameObjects.end());
+//  m_allGameObjects.erase(id);
+//}
+
+void ObjectManager::Clear()
+{
+  TrashMap(); //m_map.clear();
+  m_elapsed = 0;
+  m_timestamp = "1";
+  m_fileQ.clear();
+  m_objects.clear();
+  m_assetLists.clear();
+  m_allGameObjects.clear();
+}
+
 void ObjectManager::OnObjectChangeLocation(int objId)
 {
   // No such object - OK if we are in edit mode and have just created it
@@ -666,7 +684,7 @@ std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << "
   }
 
   // Change to waiting state: some objects required for this new location might not exist yet
-  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance()); //TheGSWaitForNewLocation::Instance());
 }
 
 PGameObject ObjectManager::GetGameObject(int id)
