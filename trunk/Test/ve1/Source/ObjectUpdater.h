@@ -33,6 +33,9 @@ public:
   void HintCheckForUpdates();
   void HintCheckForPosUpdates();
 
+  // For Edit mode
+  void Clear();
+
 private:
   // Save object states to local cache. Save timestamp of last server response.
   bool Save();

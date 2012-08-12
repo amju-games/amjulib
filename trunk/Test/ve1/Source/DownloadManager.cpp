@@ -31,6 +31,10 @@ private:
   DownloadManager* m_dl;
 };
 
+void DownloadManager::TrashMap()
+{
+  m_map.clear();
+}
 
 bool DownloadManager::GetFile(const std::string& filename)
 {

@@ -25,6 +25,9 @@ public:
   };
   void SetState(const std::string& filename, State);
 
+  // Empty map (used in Edit mode to make sure we download changed files)
+  void TrashMap();
+
 private:
 
   typedef std::map<std::string, State> FileMap;
