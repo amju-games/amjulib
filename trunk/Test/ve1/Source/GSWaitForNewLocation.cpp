@@ -16,9 +16,16 @@ namespace Amju
 {
 static void OnCancel()
 {
-  // Set prev state for Pause
-  TheGSPaused::Instance()->SetPrevState(TheGSWaitForNewLocation::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
+  if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    TheGame::Instance()->SetCurrentState(TheGSEdit::Instance());
+  }
+  else
+  {
+    // Set prev state for Pause
+    TheGSPaused::Instance()->SetPrevState(TheGSWaitForNewLocation::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
+  }
 }
 
 GSWaitForNewLocation::GSWaitForNewLocation()
