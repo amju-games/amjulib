@@ -137,7 +137,6 @@ GuiMenu::GuiMenu()
 {
   m_selected = -1;
   m_isVertical = true;
-//  m_hideOnSelection = true;
   m_clickedAway = 0;
 }
 
@@ -285,11 +284,6 @@ void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
 {
   m_children.push_back(pItem);
   pItem->SetParent(this);
-
-//  if (dynamic_cast<GuiNestMenuItem*>(pItem))
-//  {
-//    m_hideOnSelection = false;
-//  }
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();
