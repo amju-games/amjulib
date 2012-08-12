@@ -462,6 +462,10 @@ void GSEdit::OnActive()
 
   TheGSNetError::Instance()->SetPrevState(this);
 
+  // Make sure nothing selected 
+  m_selObj = 0;
+  m_selectedObjects.clear();
+
   // We only want to do this if we decide to reload the world
 //  GetVe1SceneGraph()->Clear();
 
@@ -515,6 +519,11 @@ void GSEdit::ShowPropertyList(bool b)
 
 void GSEdit::ShowLocationList(bool b)
 {
+  if (!m_gui)
+  {
+    return;
+  }
+
   GuiElement* locs = GetElementByName(m_gui, "location-list");
   locs->SetVisible(b);
   GuiElement* elem = GetElementByName(m_gui, "location-ok");
@@ -600,7 +609,7 @@ bool GSEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
     m_mouseDownLeft = mbe.isDown;
 //std::cout << "Left Mouse button event! " << (m_mouseDownLeft ? "DOWN" : "UP") << "\n";
-    m_isPicking = mbe.isDown;
+    m_isPicking = true;
     m_getDragVec = true; // TODO if key held down
   }
   else if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
@@ -635,6 +644,8 @@ void OnGotoLocation()
 
 void GSEdit::ChooseLocation()
 {
+  m_menu = 0;
+
   // Show listbox, populate with all locations
   GuiElement* elem = GetElementByName(m_gui, "location-list");
   GuiListBox* lb = dynamic_cast<GuiListBox*>(elem);
