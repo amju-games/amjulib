@@ -121,6 +121,17 @@ Font* GuiText::GetFont()
   return m_font;
 }
 
+void GuiText::SetFont(Font* font)
+{
+  m_font = font;
+}
+
+void GuiText::SetFont(const std::string& fontName)
+{
+  m_fontName = fontName;
+  GetFont();
+}
+
 void GuiText::Draw()
 {
   if (!IsVisible())

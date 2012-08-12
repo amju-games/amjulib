@@ -35,6 +35,8 @@ public:
   void RecalcFirstLast();
 
   Font* GetFont();
+  void SetFont(Font*);
+  void SetFont(const std::string& fontName);
 
   void SetInverse(bool inv);
   void SetDrawBg(bool drawBg);
