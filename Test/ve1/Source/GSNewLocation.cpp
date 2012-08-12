@@ -132,6 +132,12 @@ void GSNewLocation::OnOKButton()
   Assert(text);
   std::string pathFile = text->GetText();
 
+  // Remember this path
+  static GameConfigFile* config = TheGameConfigFile::Instance();
+  config->Set(LOCATION_PATH_KEY, pathFile);
+  SaveConfig();
+
+
 std::cout << "Attempting to load Location obj: " << pathFile << "\n";
 
   std::string path = GetFilePath(pathFile);
@@ -147,16 +153,22 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
   RCPtr<ObjMesh> mesh = new ObjMesh;
   bool loaded = mesh->Load(m_objFile, binary); 
 
-  // After loading, revert to original file root
-  File::SetRoot(origRoot, "/");
-
-  if (!loaded)
+  if (loaded)
+  {
+    std::cout << "Loaded obj file ok!!\n";
+    if (!binary)
+    {
+      mesh->Save(m_objFile, false); // Save optimised files 
+    }
+  }
+  else
   {
     SetError("Failed to load obj file " + m_objFile);
     return;
   }
 
-std::cout << "Loaded obj file ok!!\n";
+  // After loading, revert to original file root
+  File::SetRoot(origRoot, "/");
 
   // TODO Create path + filename
   if (GetTerrain())
@@ -171,11 +183,6 @@ std::cout << "Loaded obj file ok!!\n";
   // When we re-enter location, we should load the new file.
   // Make sure file is not cached by ResourceManager
   TheResourceManager::Instance()->Clear(); 
-
-  // Remember this path
-  static GameConfigFile* config = TheGameConfigFile::Instance();
-  config->Set(LOCATION_PATH_KEY, pathFile);
-  SaveConfig();
 
   // Make list of .mtl files and textures to upload.
   m_strs.clear(); 
