@@ -137,7 +137,7 @@ GuiMenu::GuiMenu()
 {
   m_selected = -1;
   m_isVertical = true;
-  m_hideOnSelection = true;
+//  m_hideOnSelection = true;
   m_clickedAway = 0;
 }
 
@@ -232,9 +232,12 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     if (m_selected != -1)
     {
       // TODO Should react on mouse up when up item == down item.
-      m_children[m_selected]->ExecuteCommand();
-      // Problem with nested item, but should open up on mouse over anyway...
-      if (m_hideOnSelection)
+      GuiElement* child = m_children[m_selected];
+      child->ExecuteCommand();
+
+      // If not nested, 
+      bool hideOnSelection = (dynamic_cast<GuiNestMenuItem*>(child) == 0);
+      if (hideOnSelection)
       {
         SetVisible(false); 
       }
@@ -283,10 +286,10 @@ void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
   m_children.push_back(pItem);
   pItem->SetParent(this);
 
-  if (dynamic_cast<GuiNestMenuItem*>(pItem))
-  {
-    m_hideOnSelection = false;
-  }
+//  if (dynamic_cast<GuiNestMenuItem*>(pItem))
+//  {
+//    m_hideOnSelection = false;
+//  }
 
   // Adjust size of menu
   const Vec2f& size = pItem->GetSize();
