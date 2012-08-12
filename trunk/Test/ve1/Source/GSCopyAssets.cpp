@@ -99,15 +99,18 @@ std::cout << "Copying file " << filename << " as dest is older than src, or does
 
 bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
 {
-  std::vector<std::string> files;
-  Dir(srcDir, &files, false);
+  DirEnts des;
+  Dir(srcDir, &des, false);
  
   // Check all files, copying if necessary.
-  for (unsigned int i = 0; i < files.size(); i++)
+  for (unsigned int i = 0; i < des.size(); i++)
   {
 //std::cout << "In " << srcDir << ": " << files[i] << "\n";
-
-    CopyFileIfMissing(files[i], srcDir, destDir);
+    DirEnt& de = des[i];
+    if (!de.m_isDir)
+    {
+      CopyFileIfMissing(de.m_name, srcDir, destDir);
+    }
   }
 
   return true;

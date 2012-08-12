@@ -33,9 +33,19 @@ class Time;
 // If useGlue is true, and a Glue File is ready, the list of files in
 // the glue file is returned. In this case the directory is not used.
 // Returns true if successful.
+struct DirEnt
+{
+  DirEnt() : m_isDir(false) {}
+  DirEnt(const std::string& name, bool isDir) : m_name(name), m_isDir(isDir) {}
+
+  std::string m_name;
+  bool m_isDir;
+};
+typedef std::vector<DirEnt> DirEnts;
+
 bool Dir(
   const std::string& directory, 
-  std::vector<std::string>* pResult, 
+  DirEnts* pResult, 
   bool useGlue = true);
 
 
