@@ -17,8 +17,10 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  void SetPrevState(GameState*);
+  void SetPrevState(GameState* prev);
   GameState* GetPrevState();
+
+  void SetNextState(GameState* next);
 
   void GoBack();  // return to prev state - must have been set!
 
