@@ -14,6 +14,9 @@
 #include "SaveConfig.h"
 #include "Terrain.h"
 #include "GSWaitForUpload.h"
+#include "ObjectManager.h"
+#include "ObjectUpdater.h"
+#include "ReqSetObjectFilenames.h"
 
 namespace Amju
 {
@@ -112,9 +115,12 @@ void GSNewLocation::SetMode(GSNewLocation::Mode mode)
 
 void GSNewLocation::SetError(const std::string& str)
 {
-  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("error"));
-  Assert(text);
-  text->SetText(str);
+  if (m_gui)
+  {
+    GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("error"));
+    Assert(text);
+    text->SetText(str);
+  }
 }
 
 void GSNewLocation::OnOKButton()
@@ -153,7 +159,15 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
 std::cout << "Loaded obj file ok!!\n";
 
   // TODO Create path + filename
-  GetTerrain()->SetMeshFilename(MakeLocDir() + "/" + m_objFile);
+  if (GetTerrain())
+  {
+    GetTerrain()->SetMeshFilename(MakeLocDir() + "/" + m_objFile);
+  }
+  else
+  {
+    std::cout << "No terrain in this location!?!\n";
+  }
+
   // When we re-enter location, we should load the new file.
   // Make sure file is not cached by ResourceManager
   TheResourceManager::Instance()->Clear(); 
@@ -291,17 +305,30 @@ std::cout << "UPLOAD THIS FILE: " << file << "\n";
 
 void GSNewLocation::OnFinishedUpload()
 {
+  std::string dir = MakeLocDir();
+
   if (m_mode == AMJU_EDIT)
   {
 std::cout << "All uploaded, we are done here!\n";
+
+    // Trash map of downloaded files
+    TheObjectManager::Instance()->TrashMap(); // shouldn't be necessary
+
+    // Touch object
+    SendReqSetObjectFilenames(GetTerrain()->GetId(), dir + "/" + m_assetFilename, dir + "/" + m_dataFilename);
+
+    // Delete current terrain so we are forced to re-download
+    TheObjectManager::Instance()->Clear(); 
+    TheObjectUpdater::Instance()->Clear(); 
+
+    ClearTerrain(); // shouldn't be necessary
+
     OnLocationCreated();
   }
   else
   {
     SetError("Finished uploading, creating new location on server...");
  
-    std::string dir = MakeLocDir(); 
-
     // Send req to make new Location game object.
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(CREATE_LOCATION);
     url += "&loc_id=" + m_locId + "&asset_file=" + dir + "/" + m_assetFilename + "&data_file=" + dir + "/" + m_dataFilename;
