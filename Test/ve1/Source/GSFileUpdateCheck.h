@@ -17,14 +17,9 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
   void OnSkip(); // just go to next state..?
 
   void OnFinishedChecking(const std::string& timestamp); // called when we have got response from server 
-
-  void SetNextState(GameState* next);
 
 private:
   std::string m_timestamp;
