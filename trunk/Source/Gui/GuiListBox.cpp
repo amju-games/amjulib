@@ -122,6 +122,11 @@ bool GuiListBox::Load(File* f)
 
 bool GuiListBox::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  if (!IsVisible())
+  {
+    return false;
+  }
+
   Vec2f cursorPos(mbe.x, mbe.y);
  
   if (IsVisible() &&
