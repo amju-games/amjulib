@@ -29,6 +29,9 @@ public:
   void Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
     CommandFunc onFinished = 0);
 
+  void Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+    CommandFunc onFinished = 0);
+
   bool IsFinished() const;
  
 private:
