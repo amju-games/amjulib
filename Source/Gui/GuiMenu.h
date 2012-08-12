@@ -77,8 +77,6 @@ protected:
 
 //  PGuiMenu m_childMenu; // ?
   bool m_isVertical;
-  // If true, hide menu when an item is selected
-  bool m_hideOnSelection;
 
   // Callback when mouse click is outside menu bounds
   CommandFunc m_clickedAway;
