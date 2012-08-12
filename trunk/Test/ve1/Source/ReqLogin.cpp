@@ -122,7 +122,7 @@ std::cout << "No start location.\n";
 
     if (GetGameMode() == AMJU_MODE_EDIT)
     {
-      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+      TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
     }
     else
     {
@@ -204,15 +204,7 @@ std::cout << "No research element in login.pl response?!?\n";
     SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
     SetDoCogTests(doCogTests); // mode, in GameMode
-    if (doCogTests)
-    {
-      //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
-      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
-    }
-    else
-    {
-      TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
-    }
+    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance()); //TheGSFileUpdateCheck::Instance());
 }
 
 void SendLoginReq(const std::string& email)
