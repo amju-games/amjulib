@@ -23,7 +23,6 @@ GSFileUpdateCheck::GSFileUpdateCheck()
   {
     m_timestamp = "1";
   }
-//  m_next = TheGSWaitForNewLocation::Instance();
 }
 
 void GSFileUpdateCheck::Update()
@@ -37,7 +36,7 @@ void GSFileUpdateCheck::OnFinishedChecking(const std::string& timestamp)
   TheGameConfigFile::Instance()->Set(FILE_UPDATE_TIMESTAMP, m_timestamp);
   SaveConfig();
 
-  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
 void GSFileUpdateCheck::OnSkip()
@@ -46,7 +45,7 @@ void GSFileUpdateCheck::OnSkip()
   // Ignore response if this state is no longer current.
 
   // DON'T update timestamp
-  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
 void GSFileUpdateCheck::Draw()
@@ -76,13 +75,4 @@ void GSFileUpdateCheck::OnActive()
   TheVe1ReqManager::Instance()->AddReq(new FileUpdater(url));
 }
 
-bool GSFileUpdateCheck::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSFileUpdateCheck::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
