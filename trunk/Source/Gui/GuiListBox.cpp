@@ -33,8 +33,10 @@ void GuiListBox::Draw()
   // Draw bg - TODO just the parts not covered by child items
   PushColour();
   AmjuGL::SetColour(0, 0, 1, 1);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   Rect r = GetRect(this);
   DrawSolidRect(r);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   PopColour();
 
   GuiWindow::Draw();
