@@ -618,10 +618,10 @@ std::cout << "#¢#¢#¢ In ObjectManager::SetLocalPlayerLocation...\n";
   if (m_location == newLocation)
   {
 std::cout << "Er, setting location to current value!\n";
-    // TODO Commenting this out doesn't fix problem :-(
+    // We want to download new location mesh etc....
     if (GetGameMode() != AMJU_MODE_EDIT)
     {
-      return;
+      //return;
     }
   }
 
