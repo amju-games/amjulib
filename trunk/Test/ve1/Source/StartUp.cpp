@@ -27,6 +27,21 @@ Amju::AmjuGLWindowInfo w(640, 480, false);
 
 void StartUp()
 {
+/*
+// TODO TEMP TEST
+DirEnts des;
+Dir("/Users/jay", &des, false);
+for (DirEnts::iterator it = des.begin(); it != des.end(); ++it)
+{
+  std::cout << it->m_name;
+  if (it->m_isDir)
+  {
+    std::cout << " DIR";
+  }
+  std::cout << "\n";
+}
+*/
+
   TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
 
   GuiElement::SetTextToSpeechEnabled(false);
