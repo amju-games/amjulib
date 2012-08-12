@@ -117,7 +117,7 @@ bool Dir(
   // Return list of files in directory.
 #if defined(WIN32)
   _finddata_t fileinfo;
-  std::string s = directory + "*.*";
+  std::string s = directory + "/*.*";
   long f = _findfirst(s.c_str(), &fileinfo);
   if (f == -1)
   {
