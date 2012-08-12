@@ -535,6 +535,8 @@ void GSEdit::ShowLocationList(bool b)
 void GSEdit::OnDeactive()
 {
   GSBase::OnDeactive();
+
+  TheEventPoller::Instance()->RemoveListener(m_gui);
   m_gui = 0;
 
   if (m_menu)
