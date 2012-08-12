@@ -127,7 +127,7 @@ bool Dir(
   do
   {
     std::string f = StripPath(fileinfo.name);
-    bool isDir = (fileinfo.attrib & _A_SUBDIR != 0);
+    bool isDir = ((fileinfo.attrib & _A_SUBDIR) != 0);
     DirEnt de(f, isDir);
     pResult->push_back(de);
   }
@@ -146,7 +146,17 @@ bool Dir(
     std::string f = dp->d_name;
     f = StripPath(f);
 
-    pResult->push_back(f);
+    struct stat buf;
+    bool exists = (stat((directory + "/" + f).c_str(), &buf) != -1);
+    if (!exists)
+    {
+      std::cout << "Can't stat file listed by readdir..!?!\n";
+      Assert(0);
+      continue;
+    }
+    bool isDir = ((buf.st_mode & S_IFDIR) != 0);
+    DirEnt de(f, isDir);
+    pResult->push_back(de);
   }
   closedir(dirp);
   return true;
