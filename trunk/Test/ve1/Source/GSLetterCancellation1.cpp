@@ -35,6 +35,9 @@ static void StartLC()
 
 void GSLetterCancellation1::FinishedTest()
 {
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(false);
+
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   if (isPrac)
   {
@@ -47,9 +50,12 @@ void GSLetterCancellation1::FinishedTest()
   }
   else
   {
-  // Send results, go to next test.
+    // Send results, go to next test.
 
-std::cout << "Finished! Sending results to server...\n";
+    std::string str = "Well done, you finished! You got " + ToString(m_correct) +
+      " correct!";
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
 
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
@@ -133,6 +139,8 @@ bool GSLetterCancellation1::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     return false;
   }
 
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+
   for (int i = 0; i < 6; i++)
   {
     for (int j = 0; j < 52; j++)
@@ -152,6 +160,12 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
 
         if (m_specialLetter == m_letters[i][j])
         {
+          if (isPrac)
+          {
+            LurkMsg lm("Yes, that's correct!", FG_COLOUR, BG_COLOUR, AMJU_TOP);
+            TheLurker::Instance()->Queue(lm);
+          }
+
           // TODO sound, but pre-load into mem
           m_correct++;
           if (m_correct == m_numSpecialLetter)
@@ -162,6 +176,13 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         }
         else
         {
+          if (isPrac)
+          {
+            LurkMsg lm("Whoops, that one is not correct!", 
+              FG_COLOUR, BG_COLOUR, AMJU_TOP);
+            TheLurker::Instance()->Queue(lm);
+          }
+
           // TODO sound, but pre-load into mem
           m_incorrect++;
         }
@@ -404,12 +425,14 @@ void GSLetterCancellation1::StartTest()
   m_incorrect = 0;
   m_blocks.clear();
 
-
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
   done->SetVisible(isPrac);
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   timeText->SetVisible(!isPrac);
+
+  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
   // (Generally: there are m_numSpecialLetters * m_specialLetter).

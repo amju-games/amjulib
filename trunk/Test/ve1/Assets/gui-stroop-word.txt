@@ -14,7 +14,7 @@ gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 0.9
+-1.0, 1.9
 // size
 2.0, 0.1
 // Text
@@ -33,7 +33,7 @@ timer
 // Text
 Time remaining: 3:00
 // Font name, size
-arial, 1.0, bgcol=ff0000, fgcol=ffffff
+arial, 1.0, bgcol=ffffff, fgcol=000000
 
 // Element type
 gui-text
@@ -46,7 +46,7 @@ score
 // Text
 Score
 // Font name, size
-arial, 1.0, bgcol=ff0000, fgcol=ffffff
+arial, 1.0, bgcol=ffffff, fgcol=000000
 
 // Element type
 gui-text
@@ -59,7 +59,7 @@ word
 // Text
 word
 // Font name, size
-arial, 4.0, bgcol=ffffff, fgcol=000000
+arial, 3.0, bgcol=ffffff, fgcol=000000
 
 gui-button
 // Element name

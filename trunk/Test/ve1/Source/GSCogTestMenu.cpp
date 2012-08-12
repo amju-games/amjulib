@@ -86,14 +86,14 @@ static void Done()
 
 GSCogTestMenu::GSCogTestMenu()
 {
-  m_nextTest = 0;
+  ResetTests();
   m_func = 0;
   m_isPrac = false;
 }
 
 void GSCogTestMenu::ResetTests()
 {
-  m_nextTest = 0;
+  m_nextTest = 2; // TODO TEMP TEST
 }
 
 void GSCogTestMenu::Update()
@@ -184,13 +184,30 @@ std::cout << "Failed to load GUI bg image!\n";
     break;
 
   case 1:
-    str = "This is called a letter cancellation test. Please click on all the M letters that you see. You have 3 minutes to complete this task.";
+    str = "This next one is called a letter cancellation test. Please click on all the M letters that you see. You have 3 minutes to complete this task.";
     m_func = Amju::LetterMTest;
     break;
 
   case 2:
-    str = "This time, click on all the sigma letters that you see. They look like this: ü"; // char(129)
+    {
+    str = "This time, click on all the sigma letters that you see. They look like this..."; 
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+
+    GuiText* text = new GuiText;
+    text->SetFont("font2d/symbol-font.font");
+    text->SetTextSize(4.5f); // TODO CONFIG
+    text->SetSize(Vec2f(1.6f, 0.5f)); 
+    text->SetText("S");
+    text->SizeToText();
+    text->SetFgCol(FG_COLOUR);
+    lm.Set(text, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+
+    str = "It's the same rules as before, but this time find the sigma letters!";
+
     m_func = Amju::LetterSigmaTest;
+    }
     break;
 
   case 3:

@@ -131,29 +131,37 @@ void LurkMsg::Update()
   }
 }
 
-void LurkMsg::Set(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+void LurkMsg::Set(const std::string& str, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
   CommandFunc onFinished)
 {
-  m_lurkPos = lp;
-  m_timer = 0;
-  m_state = LURK_NEW;
-  m_onFinished = onFinished;
-
-  m_text = new GuiText;
+  GuiText* text = new GuiText;
   if (lp == AMJU_CENTRE)
   {
-    m_text->SetIsMulti(true);
+    text->SetIsMulti(true);
   }
-  m_text->SetTextSize(1.5f); // TODO CONFIG
-  m_text->SetSize(Vec2f(1.6f, 0.1f)); // assume single line
-  m_text->SetText(text);
-  m_text->SizeToText();
-  m_text->SetFgCol(fgCol);
+  text->SetTextSize(1.5f); // TODO CONFIG
+  text->SetSize(Vec2f(1.6f, 0.1f)); // assume single line
+  text->SetText(str);
+  text->SizeToText();
+  text->SetFgCol(fgCol);
+
+  Set(text, fgCol, bgCol, lp, onFinished);
+}
+
+void LurkMsg::Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
+  CommandFunc onFinished)
+{
+  m_text = text;
 
   m_rect = new GuiRect;
   m_rect->SetSize(m_text->GetSize() + EXTRA);
   m_rect->SetColour(bgCol);
   m_rect->SetCornerRadius(0.04f); // TODO CONFIG
+
+  m_lurkPos = lp;
+  m_timer = 0;
+  m_state = LURK_NEW;
+  m_onFinished = onFinished;
 
   float h = m_text->GetSize().y;
   float w = m_text->GetSize().x;
