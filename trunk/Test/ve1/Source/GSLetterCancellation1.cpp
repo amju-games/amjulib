@@ -102,6 +102,8 @@ GSLetterCancellation1::GSLetterCancellation1()
   m_timer = MAX_TIME;
   m_correct = 0;
   m_incorrect = 0;
+
+  m_showLurk = true;
 }
 
 Rect GSLetterCancellation1::MakeRect(int i, int j)

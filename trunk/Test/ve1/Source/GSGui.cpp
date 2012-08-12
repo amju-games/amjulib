@@ -9,13 +9,18 @@ namespace Amju
 {
 GSGui::GSGui()
 {
+  m_showLurk = false;
 }
 
 void GSGui::Update()
 {
   GSBase::Update();
   TextDraw::Update();
-  TheLurker::Instance()->Update();
+
+  if (m_showLurk)
+  {
+    TheLurker::Instance()->Update();
+  }
 }
 
 void GSGui::Draw()
@@ -47,7 +52,10 @@ void GSGui::Draw2d()
     m_gui->Draw();
   }
 
-  TheLurker::Instance()->Draw();
+  if (m_showLurk)
+  {
+    TheLurker::Instance()->Draw();
+  }
 
   TheCursorManager::Instance()->Draw();
 }

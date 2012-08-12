@@ -253,6 +253,8 @@ void Lurker::Update()
 
 void Lurker::Draw()
 {
+  m_button->SetVisible(false); // so inert if not displayed
+
   for (QMap::iterator it = m_qmap.begin(); it != m_qmap.end(); ++it)
   {
     LurkMsgQ& q = it->second;
