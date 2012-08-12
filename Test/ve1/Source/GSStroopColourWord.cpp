@@ -116,6 +116,7 @@ GSStroopColourWord::GSStroopColourWord()
   m_incorrect = 0;
   m_testName = "Stroop Colour Word";
   m_isFinished = false;
+  m_showLurk = true;
 }
 
 void GSStroopColourWord::Update()

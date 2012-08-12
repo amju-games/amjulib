@@ -25,6 +25,7 @@ public:
 protected:
   PGuiElement m_gui;
   GuiImage m_bgImage;
+  bool m_showLurk;
 };
 } // namespace
 #endif

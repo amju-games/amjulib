@@ -106,6 +106,7 @@ GSStroopWord::GSStroopWord()
   m_incorrect = 0;
   m_testName = "Stroop Word";
   m_isFinished = false;
+  m_showLurk = true;
 }
 
 void GSStroopWord::Update()

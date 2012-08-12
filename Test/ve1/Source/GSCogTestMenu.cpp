@@ -89,6 +89,7 @@ GSCogTestMenu::GSCogTestMenu()
   ResetTests();
   m_func = 0;
   m_isPrac = false;
+  m_showLurk = true;
 }
 
 void GSCogTestMenu::ResetTests()

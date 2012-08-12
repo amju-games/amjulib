@@ -118,6 +118,7 @@ GSStroopColour::GSStroopColour()
   m_incorrect = 0;
   m_testName = "Stroop Colour ";
   m_isFinished = false;
+  m_showLurk = true;
 }
 
 void GSStroopColour::Update()

@@ -41,6 +41,7 @@ GSReactionTime::GSReactionTime()
   m_testNum = 0; 
   m_maxTestNum = 3;
   m_mode = RT_NOT_STARTED_YET;
+  m_showLurk = true;
 }
 
 void GSReactionTime::OnButton()
