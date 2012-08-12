@@ -94,7 +94,7 @@ namespace Amju
 {
 bool Dir(
   const std::string& directory, 
-  std::vector<std::string>* pResult, 
+  DirEnts* pResult, 
   bool useGlue /* = true */)
 {
   AMJU_CALL_STACK;
@@ -102,7 +102,16 @@ bool Dir(
   if (useGlue && FileImplGlue::IsReady())
   {
     // Return list of files in Glue File.
-    return FileImplGlue::GetGlueFile()->Dir(pResult);
+    Strings strs;
+    if (!FileImplGlue::GetGlueFile()->Dir(&strs))
+    {
+      return false;
+    }
+    for (unsigned int i = 0; i < strs.size(); i++)
+    {
+      pResult->push_back(DirEnt(strs[i], false));
+    }
+    return true;
   }
  
   // Return list of files in directory.
@@ -118,7 +127,9 @@ bool Dir(
   do
   {
     std::string f = StripPath(fileinfo.name);
-    pResult->push_back(f);
+    bool isDir = (fileinfo.attrib & _A_SUBDIR != 0);
+    DirEnt de(f, isDir);
+    pResult->push_back(de);
   }
   while (_findnext(f, &fileinfo) == 0); // 0 => success
   return true;
