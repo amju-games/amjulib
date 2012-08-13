@@ -1,5 +1,6 @@
 #include <GameObjectFactory.h>
 #include <Game.h>
+#include <DegRad.h>
 #include "Furniture.h"
 #include "ObjectUpdater.h"
 #include "LocalPlayer.h"
@@ -78,19 +79,29 @@ void Furniture::Update()
     // TODO recalc AABB for VFC and picking
   }
 
+  TurnToFaceDir(); // ?
+
+  // TODO Recalc collision mesh if:
+  // - we just got dropped, could be rotated
+  // Translate coll mesh if:
+  // - we are NOT picked up and got moved (e.g. pushed by a player) (doesn't cause rotation)
+
   // TODO Only if we have moved!!!
   // TODO
   if ((m_pos - m_collMeshPos).SqLen() > 0.1f)
   { 
     Matrix m;
     m.Translate(m_pos);
-    // TODO Also rotation
+    //// TODO Also rotation
+    //m.RotateY(DegToRad(m_dir));
+    //m.TranslateKeepRotation(m_pos);
 
-    m_sceneNode->SetLocalTransform(m);
+    //m_sceneNode->SetLocalTransform(m);
 
     // Recalc collision mesh
     Vec3f v = m_pos - m_collMeshPos;
     m.Translate(v);
+    // TODO difference in pos and ROTATION
     GetCollisionMesh()->Transform(m);
 
     // Don't need to do this -- the AABB is being translated somewhere else - where ?
@@ -235,6 +246,18 @@ std::cout << "Pick up command!\n";
   TheObjectUpdater::Instance()->SendUpdateReq(
     m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
 
+  return false;
+}
+
+CommandRotate::CommandRotate(Furniture* f) : m_f(f) {}
+
+bool CommandRotate::Do()
+{
+  // TODO Rotation angle:
+  // For crates etc, any angle is ok.
+  // For fences, AABBs are wrong for non-90 degrees. But we are using collision meshes
+  //  which are super accuate.
+  m_f->SetDir(m_f->GetDir() + 30.0f); 
   return false;
 }
 

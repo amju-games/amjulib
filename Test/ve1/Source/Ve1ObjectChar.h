@@ -23,11 +23,6 @@ public:
 
   virtual void MoveTo(const Vec3f& newPos);
 
-  // Set direction which character should face - we rotate to face this
-  //  direction over time - DEGREES
-  void SetDir(float degs);
-  void SetDirToFace(GameObject* go); // face this object
-
   virtual AABB* GetAABB();
 
   bool IsMoving() const;
@@ -43,16 +38,9 @@ public:
   void ShowAttacked();
 
 protected:
-  void TurnToFaceDir();
-
-protected:
   std::string m_name;
   Vec3f m_newPos; // pos we are aiming for
   bool m_isMoving; // travelling towards m_newPos
-
-  float m_dir; // Direction of movement - DEGREES
-  float m_dirCurrent; // Direction we currently face -- we will reduce the difference
-   // between m_dirCurrent and m_dir until we face the direction of movement.
 
   // Start fading out when a player has logged out
   float m_fadeTime;

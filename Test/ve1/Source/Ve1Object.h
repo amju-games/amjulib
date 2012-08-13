@@ -84,7 +84,16 @@ public:
   // Call when we collide with something. When we are no longer colliding, we recalc heading.
   void SetIsColliding(GameObject* collidingObject);
 
+  // Set direction which character should face - we rotate to face this
+  //  direction over time - DEGREES
+  void SetDirToFace(GameObject* go); // face this object
+  void SetDir(float degs);
+  float GetDir() const;
+
 protected:
+  // Reduce difference between currentDir and dir (desired heading)
+  void TurnToFaceDir();
+
   void HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
 
   void HandleFloor(CollisionMesh* m);
@@ -121,6 +130,11 @@ protected:
 
   // Set of objects with which we are in collision. If this set changes, recalc shadows.
   // OR CHECKSUM ????
+
+
+  float m_dir; // Direction we face (aka heading) - DEGREES
+  float m_dirCurrent; // Direction we currently face -- we will reduce the difference
+   // between m_dirCurrent and m_dir until we face the direction of movement.
 };
 
 // Keep track of keys used to set object properties
