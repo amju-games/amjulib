@@ -19,6 +19,11 @@ public:
 
   virtual void Draw()
   {
+    if (!IsVisible())
+    { 
+      return;
+    }
+
     m_tex->UseThisTexture();
     AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
     SceneMesh::Draw();
@@ -45,6 +50,8 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Collect::TYPENAME
 
 Collect::Collect()
 {
+  m_specialId = 0;
+  m_rot = 0;
   m_rotvel = 10.0f;
   m_timer = 0;
 }
@@ -100,13 +107,19 @@ void Collect::OnLocationEntry()
 
 void Collect::Update()
 {
+  if (IsHidden())
+  {
+    return;
+  }
+
   m_acc.y = GRAVITY;
   float dt = TheTimer::Instance()->GetDt(); 
   m_timer += dt;
   if (m_timer > 10.0f) // TODO CONFIG
   {
     // Start flashing.
-    bool vis = (m_timer - (int)m_timer) > 0.5f;
+    float d = m_timer - floor(m_timer);
+    bool vis = d > 0.5f;
     m_sceneNode->SetVisible(vis);
 
     if (m_timer > 15.0f) // TODO CONFIG
