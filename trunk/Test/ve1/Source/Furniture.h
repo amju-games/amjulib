@@ -44,7 +44,6 @@ class CommandPickUp : public GuiCommand
 {
 public:
   CommandPickUp(Furniture* f, bool takeNotDrop);
-
   virtual bool Do();
 
 private:
@@ -52,6 +51,15 @@ private:
   bool m_takeNotDrop;
 };
 
+class CommandRotate : public GuiCommand
+{
+public:
+  CommandRotate(Furniture* f);
+  virtual bool Do();
+
+private:
+  Furniture* m_f;
+};
 
 }
 

@@ -10,20 +10,28 @@ hud-comp
 
 // Main HUD buttons
 
-// element type
+gui-comp
+// Name
+pickup-comp
+// Num children
+2
+
 gui-button
-// Element name
 drop-button
-// pos (coords are -1..1)
--0.4, -0.65 
-// size
+-0.85, -0.65 
 0.8, 0.2
-// Image
 gui-button-4.png
-// Text
 drop
-// Font name, size
 arial, 1.6 
+
+gui-button
+rotate-button
+0.05, -0.65 
+0.8, 0.2
+gui-button-4.png
+rotate
+arial, 1.6 
+
 
 // element type
 gui-button

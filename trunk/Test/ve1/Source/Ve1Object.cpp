@@ -10,6 +10,7 @@
 #include <Line3.h>
 #include <Plane.h>
 #include <Timer.h>
+#include <DegRad.h>
 #include "Ve1Object.h"
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
@@ -19,10 +20,13 @@
 #include "Useful.h"
 #include "HasCollisionMesh.h"
 #include "Terrain.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
 static const float BOUNCE_VEL = -50.0f;
+
+static const char* HEADING_KEY = "heading";
 
 Ve1Object::Ve1Object() : m_location(-1)
 {
@@ -34,11 +38,72 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_shadow = new Shadow;
   m_shadow->SetHeightRange(10.0f, 25.0f); // TODO TEMP TEST CONFIG
   m_inNewLocation = 2;
+  m_dir = 0;
+  m_dirCurrent = m_dir;
 }
 
 Ve1Object::~Ve1Object()
 {
   OnLocationExit();
+}
+
+float Ve1Object::GetDir() const
+{
+  return m_dir;
+}
+
+void Ve1Object::SetDir(float degs)
+{
+  m_dir = degs;
+
+  // TODO Send this to DB
+  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
+}
+
+void Ve1Object::SetDirToFace(GameObject* go)
+{
+  const Vec3f& v = go->GetPos();
+  float degs = RadToDeg(atan2(v.x - m_pos.x, v.z - m_pos.z));
+  m_dir = degs;
+}
+
+void Ve1Object::TurnToFaceDir()
+{
+  Matrix mat;
+  mat.RotateY(DegToRad(m_dirCurrent));
+  mat.TranslateKeepRotation(m_pos);
+  m_sceneNode->SetLocalTransform(mat);
+
+  static const float ROT_SPEED = 10.0f; // TODO CONFIG
+  float dt = TheTimer::Instance()->GetDt();
+  float angleDiff = m_dir - m_dirCurrent;
+
+  // Rotate to face m_dir, taking the shortest route (CW or CCW)
+  if (fabs(angleDiff) < 10.0f)
+  {
+    m_dirCurrent = m_dir;
+  }
+  else
+  {
+    if (angleDiff < -180.0f)
+    {
+      m_dir += 360.0f;
+    }
+    else if (angleDiff > 180.0f)
+    {
+      m_dir -= 360.0f;
+    }
+    angleDiff = m_dir - m_dirCurrent;
+
+    if (m_dirCurrent > m_dir)
+    {
+      m_dirCurrent -= ROT_SPEED * dt * fabs(angleDiff);
+    }
+    else if (m_dirCurrent < m_dir)
+    {
+      m_dirCurrent += ROT_SPEED * dt * fabs(angleDiff);
+    }
+  }
 }
 
 void Ve1Object::SetIsColliding(GameObject* collidingObject)
@@ -362,6 +427,14 @@ void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
   {
 std::cout << "Setting hidden flag for " << *this << " to: " << val << "\n";
     m_hidden = (val == "y");
+  }
+  else if (key == HEADING_KEY) 
+  {
+    if (this != GetLocalPlayer())
+    {
+      // We sent this to server a while ago
+      m_dir = ToFloat(val); 
+    }
   }
 }
 

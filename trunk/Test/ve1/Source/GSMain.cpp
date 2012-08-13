@@ -61,16 +61,21 @@ void GSMain::ShowDropButton(Furniture* f, bool show)
 {
 std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
 
-  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
+  GuiButton* pickupComp = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
 
   if (show)
   {
+    GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
     drop->SetCommand(new CommandPickUp(f, false));
-    drop->SetVisible(true);
+
+    GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
+    rotate->SetCommand(new CommandRotate(f));
+
+    pickupComp->SetVisible(true);
   }
   else
   {
-    drop->SetVisible(false);
+    pickupComp->SetVisible(false);
   }
 }
 
@@ -376,7 +381,7 @@ void GSMain::OnActive()
   GuiButton* quitButton = (GuiButton*)m_gui->GetElementByName("quit-button");
   quitButton->SetCommand(Amju::OnQuitButton);
   
-  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
+  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
   drop->SetVisible(false); // hide drop button until we pick someting up
 
   TheChatConsole::Instance()->OnActive();

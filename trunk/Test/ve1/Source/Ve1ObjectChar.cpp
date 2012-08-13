@@ -23,13 +23,10 @@ static const float BOUNCE_VEL = -50.0f;
 static const char* TYPE_KEY = "type";
 static const char* TEX_KEY = "tex";
 static const char* NAME_KEY = "name";
-static const char* HEADING_KEY = "heading";
 static const char* STAMINA_KEY = "stamina";
 
 Ve1ObjectChar::Ve1ObjectChar()
 {
-  m_dir = 0;
-  m_dirCurrent = m_dir;
   m_isMoving = false;
   m_recalcHeading = false;
 
@@ -64,14 +61,6 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   else if (key == NAME_KEY)
   {
     SetName(val);
-  }
-  else if (key == HEADING_KEY) 
-  {
-    if (this != GetLocalPlayer())
-    {
-      // We sent this to server a while ago
-      m_dir = ToFloat(val); 
-    }
   }
   else if (key == STAMINA_KEY)
   {
@@ -248,60 +237,6 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
 
     // Work out direction to face
     SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
-  }
-}
-
-void Ve1ObjectChar::SetDirToFace(GameObject* go)
-{
-  const Vec3f& v = go->GetPos();
-  float degs = RadToDeg(atan2(v.x - m_pos.x, v.z - m_pos.z));
-  m_dir = degs;
-}
-
-void Ve1ObjectChar::SetDir(float degs)
-{
-  m_dir = degs;
-
-  // TODO Send this to DB
-  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
-}
-
-void Ve1ObjectChar::TurnToFaceDir()
-{
-  Matrix mat;
-  mat.RotateY(DegToRad(m_dirCurrent));
-  mat.TranslateKeepRotation(m_pos);
-  m_sceneNode->SetLocalTransform(mat);
-
-  static const float ROT_SPEED = 10.0f; // TODO CONFIG
-  float dt = TheTimer::Instance()->GetDt();
-  float angleDiff = m_dir - m_dirCurrent;
-
-  // Rotate to face m_dir, taking the shortest route (CW or CCW)
-  if (fabs(angleDiff) < 10.0f)
-  {
-    m_dirCurrent = m_dir;
-  }
-  else
-  {
-    if (angleDiff < -180.0f)
-    {
-      m_dir += 360.0f;
-    }
-    else if (angleDiff > 180.0f)
-    {
-      m_dir -= 360.0f;
-    }
-    angleDiff = m_dir - m_dirCurrent;
-
-    if (m_dirCurrent > m_dir)
-    {
-      m_dirCurrent -= ROT_SPEED * dt * fabs(angleDiff);
-    }
-    else if (m_dirCurrent < m_dir)
-    {
-      m_dirCurrent += ROT_SPEED * dt * fabs(angleDiff);
-    }
   }
 }
 
