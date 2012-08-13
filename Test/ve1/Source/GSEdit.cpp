@@ -578,6 +578,8 @@ bool GSEdit::OnCursorEvent(const CursorEvent& ce)
       str = ToString(pos); // TODO pos change if multiple objects ? 
 
       obj->SetPos(pos);
+      Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
+      v->MoveTo(pos);
 
 //std::cout << "Should be sending pos update: " << pos << "\n";
       // Don't send, wait til mouse up event
