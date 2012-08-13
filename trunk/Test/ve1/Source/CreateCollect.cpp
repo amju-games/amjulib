@@ -22,7 +22,7 @@ void CreateCollect(int type, int specialId)
   
   // TODO TEMP TEST
   // Set pos first
-  c->Create("bean.obj", "bean5.png");
+  c->Create("heart.obj", "bean4.png");
 
   c->OnLocationEntry();
 
