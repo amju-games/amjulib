@@ -23,6 +23,10 @@ TutorialNpc::TutorialNpc()
 {
   m_hasDoneCogTests = false;
   m_hasTriggered = false;
+
+  // Prevent false triggers
+  SetPos(Vec3f(20000.0f, 0, 0)); // TODO CONFIG ?
+  MoveTo(GetPos()); 
 }
 
 void TutorialNpc::Update()
@@ -117,16 +121,17 @@ void TutorialNpc::Trigger()
 
   // Decide on "question" depending on token
 
-  // Show "question" text
-  std::string text = "Hello " + GetLocalPlayer()->GetName() + 
-    "!\nI have got a quiz for you. You will win lots of jellybeans by doing it!";
-  // When this msg has been displayed, we go to the Cog Test state.
-  LurkMsg lm(text, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
-    OnCogTestMsgFinished);
-  TheLurker::Instance()->Queue(lm);
 
-  if (DoCogTests()) 
+  if (DoCogTests() && !m_hasDoneCogTests) 
   {
+    // Show "question" text
+    std::string text = "Hello " + GetLocalPlayer()->GetName() + 
+      "!\nI have got a quiz for you. You will win lots of jellybeans by doing it!";
+    // When this msg has been displayed, we go to the Cog Test state.
+    LurkMsg lm(text, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
+      OnCogTestMsgFinished);
+    TheLurker::Instance()->Queue(lm);
+
     m_hasDoneCogTests = true;
   }
 }
