@@ -103,6 +103,8 @@ void Collect::OnLocationEntry()
 
   Vec3f vel(rnd(-20.0f, 20.0f), rnd(100.0f, 200.0f), rnd(-20.0f, 20.0f));
   SetVel(vel);
+
+  m_timer = rnd(-2.0f, 0); // so different times/flashing
 }
 
 void Collect::Update()
@@ -120,6 +122,7 @@ void Collect::Update()
     // Start flashing.
     float d = m_timer - floor(m_timer);
     bool vis = d > 0.5f;
+
     m_sceneNode->SetVisible(vis);
 
     if (m_timer > 15.0f) // TODO CONFIG
