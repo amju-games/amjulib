@@ -10,10 +10,20 @@
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "GSMain.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {
 static const float MAX_TIME = 45.0f; // from Malec et al
+
+// TODO CONFIG
+static const Colour FG_COLOUR(1, 1, 1, 1);
+static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
+
+static void OnDoneButton()
+{
+  TheGSStroopColour::Instance()->Finished();
+}
 
 static void OnLeftButton()
 {
@@ -25,9 +35,13 @@ static void OnRightButton()
   TheGSStroopColour::Instance()->OnLeftRight(false);
 }
 
+static void OnReset()
+{
+  TheGSStroopColour::Instance()->ResetTest();
+}
+
 void GSStroopColour::SetTest()
 {
-////  GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
   GuiButton* left = (GuiButton*)GetElementByName(m_gui, "left-button");
   GuiButton* right = (GuiButton*)GetElementByName(m_gui, "right-button");
 
@@ -99,28 +113,80 @@ void GSStroopColour::OnLeftRight(bool isLeftButton)
 
 void GSStroopColour::Finished()
 {
-  // TODO Send results
-std::cout << "Finished! Sending results to server...\n";
+  m_isFinished = true;
 
-  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "correct", ToString(m_correct)));
-  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "incorrect", ToString(m_incorrect)));
-//  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "time", ToString(m_timer)));
+  // Hide GUI
+  GuiButton* left = (GuiButton*)GetElementByName(m_gui, "left-button");
+  left->SetVisible(false);
 
-  //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
-  // Go back to Main, to collect rewards, then go back (NPC controls this)
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+  GuiButton* right = (GuiButton*)GetElementByName(m_gui, "right-button");
+  right->SetVisible(false);
+
+  GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
+  word->SetVisible(false);
+
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(false);
+
+  if (TheGSCogTestMenu::Instance()->IsPrac())
+  {
+    TheGSCogTestMenu::Instance()->SetIsPrac(false);
+    LurkMsg lm("That was a practice. Now let's try for real!", 
+        FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+    TheLurker::Instance()->Queue(lm);
+    // TODO Ask if player would like another prac
+  }
+  else
+  {
+    TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "correct", ToString(m_correct)));
+    TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "incorrect", ToString(m_incorrect)));
+
+    TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+
+    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    // Go back to Main, to collect rewards, then go back (NPC controls this)
+    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+  }
 }
 
 GSStroopColour::GSStroopColour()
 {
+  m_testName = "Stroop Colour ";
+  m_showLurk = true;
   m_maxTime = MAX_TIME;
   m_timer = m_maxTime;
   m_leftIsCorrect = false;
   m_correct = 0;
   m_incorrect = 0;
-  m_testName = "Stroop Colour ";
   m_isFinished = false;
-  m_showLurk = true;
+}
+
+void GSStroopColour::ResetTest()
+{
+  GuiButton* left = (GuiButton*)GetElementByName(m_gui, "left-button");
+  left->SetCommand(Amju::OnLeftButton);
+  left->SetVisible(true);
+
+  GuiButton* right = (GuiButton*)GetElementByName(m_gui, "right-button");
+  right->SetCommand(Amju::OnRightButton);
+  right->SetVisible(true);
+
+  GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
+  word->SetVisible(false);
+
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetCommand(Amju::OnDoneButton);
+  done->SetVisible(true);
+
+  m_timer = m_maxTime;
+  m_leftIsCorrect = false;
+  m_correct = 0;
+  m_incorrect = 0;
+  m_isFinished = false;
+
+  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  scoreText->SetText(s);
 }
 
 void GSStroopColour::Update()
@@ -131,29 +197,29 @@ void GSStroopColour::Update()
 
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   std::string s;
-  if (m_timer > 0)
+
+  if (!m_isFinished)
   {
-    int min = (int)(m_timer / 60.0f);
-    int sec = (int)(m_timer - 60.0f * min);
-    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
+    if (m_timer > 0)
+    {
+      int min = (int)(m_timer / 60.0f);
+      int sec = (int)(m_timer - 60.0f * min);
+      s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
+    }
+    else
+    {
+      // TODO flash
+      s = "0:00";
+
+      Finished();
+    }
+
+    timeText->SetText(s);
   }
-  else
-  {
-    m_isFinished = true;
-    // TODO flash
-    s = "0:00";
-
-    Finished();
-  }
-
-  timeText->SetText(s);
-
 }
 
 void GSStroopColour::Draw()
 {
-//  GSGui::Draw();
-
 }
 
 void GSStroopColour::Draw2d()
@@ -163,7 +229,7 @@ void GSStroopColour::Draw2d()
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
   PushColour();
-  Rect r(-0.5f, 0.5f, -0.2f, 0.2f);
+  Rect r(-0.5f, 0.5f, 0, 0.4f);
   AmjuGL::SetColour(m_goodColour);
   DrawSolidRect(r);  
   PopColour();
@@ -179,26 +245,10 @@ void GSStroopColour::OnActive()
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
 
-  m_gui = LoadGui("gui-stroop-word.txt"); // Same GUI?!
+  m_gui = LoadGui("gui-stroop-word.txt"); // Same GUI for all 3 Stroop tests
   Assert(m_gui);
 
-  // TODO Set focus element, cancel element, command handlers
-  GuiButton* left = (GuiButton*)GetElementByName(m_gui, "left-button");
-  left->SetCommand(Amju::OnLeftButton);
-  //left->SetHasFocus(true);
-
-  GuiButton* right = (GuiButton*)GetElementByName(m_gui, "right-button");
-  right->SetCommand(Amju::OnRightButton);
-//  cancel->SetIsCancelButton(true);
-
-  GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
-  word->SetVisible(false);
-
-  m_timer = m_maxTime;;
-  m_leftIsCorrect = false;
-  m_correct = 0;
-  m_incorrect = 0;
-  m_isFinished = false;
+  ResetTest();
 
   SetTest(); // set first word
 }
