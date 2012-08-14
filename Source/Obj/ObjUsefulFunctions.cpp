@@ -68,7 +68,12 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 
     if (strs[0] == "map_Kd" || strs[0] == "map_Ka")
     {
-      Assert(strs.size() == 2);
+      // .obj/.mtl files can be dodgy
+      if (strs.size() != 2)
+      {
+        f.ReportError("Unexpected format for map_Kd/map_Ka");
+        continue;
+      }
 
 //std::cout << "Found texture name " << strs[1] << "\n";
 
@@ -78,7 +83,12 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
     }
     else if (strs[0] == "newmtl")
     {
-      Assert(strs.size() == 2);
+      if (strs.size() != 2)
+      {
+        f.ReportError("Unexpected format for newmtl");
+        continue;
+      }
+
       Material* mat = new Material;
       mats->push_back(mat);
       current = mat;
@@ -87,6 +97,12 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
     }
     else if (strs[0] == "flags")
     {
+      if (strs.size() != 2)
+      {
+        f.ReportError("Unexpected format for flags");
+        continue;
+      }
+
       Assert(strs.size() == 2);
       current->m_flags = ToInt(strs[1]); 
     }
@@ -149,7 +165,8 @@ Face ToFace(const Strings& fstrs)
     // TODO We only handle triangles - handle other size polys ?
     if (fstrs.size() < 4)
     {
-        Assert(0);
+      std::cout << "Unexpected format for face";
+      return f;
     }
     for (int i = 0; i < 3 /*strs.size()*/; i++)
     {
