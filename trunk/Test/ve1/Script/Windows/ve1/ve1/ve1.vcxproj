@@ -249,6 +249,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ROConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />

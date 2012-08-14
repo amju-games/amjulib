@@ -5,8 +5,6 @@
 #include <CollisionMesh.h>
 #include <AmjuGL.h>
 
-//#define SHOW_COLLISION_MESH
-
 namespace Amju
 {
 class SceneCollisionMesh : public SceneMesh
@@ -16,22 +14,9 @@ public:
 
   CollisionMesh* GetCollisionMesh() { return m_collMesh; }
 
-  void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(m_collMesh); }
+  void CalcCollisionMesh() { m_mesh->CalcCollisionMesh(m_collMesh); }
 
-  virtual void Draw()
-  {
-    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING);
-    AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
-    SceneMesh::Draw();
-    AmjuGL::PopAttrib();
-
-#ifdef SHOW_COLLISION_MESH
-    if (m_collMesh)
-    {
-      m_collMesh->Draw();
-    }
-#endif // SHOW_COLLISION_MESH
-  }
+  virtual void Draw();
 
 private:
   PCollisionMesh m_collMesh;
