@@ -14,6 +14,11 @@ bool SaveMtlFiles(const MaterialVec& mats)
   for (MaterialVec::const_iterator it = mats.begin(); it != mats.end(); ++it)
   {
     const Material* mat = *it;
+    if (mat->m_filename.empty())
+    {
+      continue;
+    }
+
     RCPtr<File>& f = fm[mat->m_filename];
     if (!f)
     {
@@ -21,8 +26,13 @@ bool SaveMtlFiles(const MaterialVec& mats)
       f->OpenWrite(mat->m_filename);
     }
 
+    Assert(!mat->m_name.empty());
     f->Write("newmtl " + mat->m_name);
-    f->Write("map_Kd " + mat->m_texfilename);
+
+    if (!mat->m_texfilename.empty())
+    {
+      f->Write("map_Kd " + mat->m_texfilename);
+    }
     f->Write("flags " + ToString(mat->m_flags));
     f->Write("Ns 1.0"); // for Maya
   }

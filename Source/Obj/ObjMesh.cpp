@@ -7,7 +7,9 @@
 #include "CollisionMesh.h"
 #include <Matrix.h>
 
-//#define OBJ_DEBUG
+#ifdef _DEBUG
+#define OBJ_DEBUG
+#endif
 
 namespace Amju
 {
@@ -859,8 +861,14 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
       of.Write("g " + groupName);
 
       // TODO This works up to a point, but only if materials are one per file.
-      of.Write("mtllib " + m.m_filename);
-      of.Write("usemtl " + mtlName);
+      if (!m.m_filename.empty())
+      {
+        of.Write("mtllib " + m.m_filename);
+      }
+      if (!mtlName.empty())
+      {
+        of.Write("usemtl " + mtlName);
+      }
 
       of.Write("# Faces");
       for (unsigned int i = 0; i < sg.m_faces.size(); i++)
