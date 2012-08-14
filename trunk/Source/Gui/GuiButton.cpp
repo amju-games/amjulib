@@ -10,6 +10,8 @@
 
 namespace Amju
 {
+std::string GuiButton::s_clickFilename;
+
 const char* GuiButton::NAME = "gui-button";
 
 static GuiButton* focusButton = 0;
@@ -21,6 +23,7 @@ GuiButton::GuiButton()
   m_isPressed = false;
   m_isEnabled = true;
   m_showIfFocus = true;
+  m_onPressedDown = 0;
 }
 
 GuiButton::~GuiButton()
@@ -90,10 +93,31 @@ void GuiButton::TextToSpeech()
   }
 }
 
+void GuiButton::SetOnPressedDownFunc(CommandFunc f)
+{
+  m_onPressedDown = f;
+}
+
+void GuiButton::OnPressedDown()
+{
+  if (m_onPressedDown)
+  {
+    m_onPressedDown();
+  }
+}
+
 void GuiButton::ClickSound() const
 { 
-  // TODO Get resource from ResourceManager ??
-//  TheSoundManager::Instance()->PlayWav("click"); // NB no file ext
+  if (!s_clickFilename.empty())
+  {
+    static SoundManager* s = TheSoundManager::Instance();
+    s->PlayWav(s_clickFilename);
+  }
+}
+
+void GuiButton::SetClickFilename(const std::string& clickFilename)
+{
+  s_clickFilename = clickFilename;
 }
 
 bool GuiButton::Load(File* f)
@@ -262,6 +286,8 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       {
         ClickSound();
         //SetHasFocus(true); // Not sure about this. TODO Make it a flag ?
+        OnPressedDown();
+
         return true; // handled
       }
     }

@@ -58,7 +58,6 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
-    //m_mode = RT_AFTER_TEST;
     m_mode = RT_CONTINUE;
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
     b->SetIsEnabled(false); 
@@ -180,19 +179,6 @@ void GSReactionTime::Update()
     }
     break;
 
-  /*
-  case RT_AFTER_TEST:
-    m_waitTime += dt;
-    if (m_waitTime >= 3.0f) // TODO TEMP TEST
-    {
-      m_mode = RT_CONTINUE;
-      NextGo();
-      //b->SetText("next...");
-      //b->SetIsEnabled(true);
-    }
-    break;
-  */
-
   case RT_TIMING:
     m_reactionTime += dt;
     timeText->SetText(ToString(m_reactionTime, 2));
@@ -225,10 +211,6 @@ void GSReactionTime::Draw2d()
   case RT_TIMING:
     break;
 
-  case RT_AFTER_TEST:
-    // Show time, etc
-    break;
-
   case RT_CONTINUE:
     break;   
   }
@@ -246,7 +228,10 @@ void GSReactionTime::OnActive()
 
   // Set focus element, cancel element, command handlers
   GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
-  b->SetCommand(Amju::OnButton);
+
+  // Execute handler when button pressed down, not when released!
+  b->SetOnPressedDownFunc(Amju::OnButton);
+
   b->SetHasFocus(true);
   b->SetShowIfFocus(false);
   b->SetIsEnabled(false); 
@@ -257,9 +242,10 @@ void GSReactionTime::OnActive()
 
   m_testNum = 0; 
 
-  std::string str = "OK, when I say GO, press the button as quickly as you can. You get " +
-    ToString(m_maxTestNum) +
-    " goes at this.";
+  std::string str = "OK, when I say GO, press the button as quickly as you can!";
+  //. You get " +
+  //  ToString(m_maxTestNum) +
+  //  " goes at this.";
   LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartRT);
   TheLurker::Instance()->Queue(lm);
 

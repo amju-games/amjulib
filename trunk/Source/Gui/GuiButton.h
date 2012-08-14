@@ -45,9 +45,13 @@ public:
   bool IsEnabled() const;
   void SetIsEnabled(bool);
 
+  void SetOnPressedDownFunc(CommandFunc f);
+  void SetClickFilename(const std::string& clickFilename);
+
 private:
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
+  void OnPressedDown();
 
 protected:
   GuiText m_guiText;
@@ -57,6 +61,10 @@ protected:
   bool m_isPressed; // Draw offset right/down
   bool m_isEnabled;
   bool m_showIfFocus;
+
+  CommandFunc m_onPressedDown;
+
+  static std::string s_clickFilename;
 };
 }
 
