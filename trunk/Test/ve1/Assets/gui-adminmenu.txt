@@ -23,15 +23,6 @@ Admin menu
 arial, 1.0, bgcol=000000, fgcol=ffffff
 
 
-// Local for development only
-//gui-button
-//local-button
-//-0.2, 0.5
-//0.4, 0.1
-//gui-button-4.png
-//local
-//arial, 1.0 
-
 // Button for editing content
 gui-button
 edit-button
@@ -44,7 +35,7 @@ arial, 1.6
 // Button to test cognitive tests
 gui-button
 cog-button
--0.4, 0.2 
+-0.4, 0.1 
 0.8, 0.2
 gui-button-4.png
 cognitive tests...
@@ -52,9 +43,9 @@ arial, 1.0
 
 gui-button
 cancel-button
--0.4, 0.0
+-0.4, -0.2
 0.8, 0.2
 gui-button-4.png
 cancel
-arial, 1.0 
+arial, 1.6
 
