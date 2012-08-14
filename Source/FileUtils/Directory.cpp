@@ -416,8 +416,9 @@ std::string GetSaveDir(const std::string& appName)
   if (first)
   {
     first = false;
-    // NB Common, not specific to current user
-    bool success = ShGetFolderPath(CSIDL_COMMON_APPDATA, &s);
+    // NB *IS* specific to current user, hopefully will fix issues where
+    //  we can't write to saved files
+    bool success = ShGetFolderPath(CSIDL_LOCAL_APPDATA, &s);
     
     // This only works on Win2000+
     // TODO Try to load the function at run time. If this fails fall
