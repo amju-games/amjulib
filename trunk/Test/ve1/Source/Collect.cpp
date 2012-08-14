@@ -4,6 +4,8 @@
 #include <File.h>
 #include <ResourceManager.h>
 #include <SceneMesh.h>
+#include <SoundManager.h>
+#include "Ve1OnlineReqManager.h"
 #include "Useful.h"
 #include "SetObjMeshCommand.h"
 #include "Terrain.h"
@@ -12,6 +14,19 @@
 
 namespace Amju
 {
+class ReqGotCollect : public Ve1Req
+{
+public:
+  ReqGotCollect::ReqGotCollect(const std::string& url) : Ve1Req(url, "gotcollect", HttpClient::GET)
+  {
+  }
+
+  void ReqGotCollect::OnSuccess()
+  {
+    std::cout << "Successfully sent msg that we got a collect!\n";
+  }
+};
+
 class SceneCollectMesh : public SceneMesh
 {
 public:
@@ -76,12 +91,20 @@ std::cout << "Non local player intersects " << *this << "\n";
 
   // This object goes out of play.
   
-
-  // Show effect.
+    // Show effect.
   // Send msg to server that we have collected this.
 std::cout << "Collected " << *this << "!!!\n";
 
   SetHidden(true); 
+
+  // TODO nice effect
+  TheSoundManager::Instance()->PlayWav("pip.wav"); // TODO TEMP TEST
+
+  std::string url = TheVe1ReqManager::Instance()->MakeUrl(GOT_COLLECT);
+  url += "&player_obj_id=" + ToString(GetLocalPlayerId());
+  url += "&special_id=" + ToString(m_specialId);
+  static const int MAX_COLLECTS = 50;
+  TheVe1ReqManager::Instance()->AddReq(new ReqGotCollect(url), MAX_COLLECTS);
 }
 
 void Collect::OnBounceStop()

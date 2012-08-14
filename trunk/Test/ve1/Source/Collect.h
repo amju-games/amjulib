@@ -26,6 +26,8 @@ public:
 
   void OnPlayerCollision(Player*);
 
+  void SetSpecialId(int s) { m_specialId = s; }
+
 protected:
   virtual void OnBounceStop();
 
