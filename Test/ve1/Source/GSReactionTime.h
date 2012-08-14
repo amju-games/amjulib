@@ -33,7 +33,6 @@ private:
     RT_BEFORE_TEST, // display "Ready...", wait 3 secs
     RT_WAITING, // wait for random time
     RT_TIMING,  // counting elapsed time until button pressed
-    RT_AFTER_TEST, // short pause after button pressed
     RT_CONTINUE, // ready to go to next test
   };
   Mode m_mode;
