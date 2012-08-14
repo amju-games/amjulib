@@ -15,12 +15,14 @@
 #include "Version.h"
 #include "SpecialConfig.h"
 #include "PlayerInfo.h"
+#include "GameMode.h"
 #include "LurkMsg.h" // so we can display msgs in title screen
 
 namespace Amju
 {
 static void OnQuickStartButton()
 {
+  SetGameMode(AMJU_MODE_NONE);
   static PlayerInfoManager* pim = ThePlayerInfoManager::Instance();
   PlayerInfo* pi = pim->GetPI();
   Assert(pi);
