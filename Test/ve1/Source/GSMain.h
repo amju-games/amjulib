@@ -57,7 +57,13 @@ private:
   Vec2f m_mouseScreen;
   bool m_moveRequest;
   PGuiElement m_gui;
+
   RCPtr<GuiMenu> m_menu;
+  // the last object which displayed a menu
+  GameObject* m_menuObject;
+  // If true, the last object menu was dismissed with no choice selected
+  bool m_wasClickedAway;
+
   int m_numPlayersOnline;
 
   // Debug camera

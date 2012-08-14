@@ -55,11 +55,19 @@ GSMain::GSMain()
   m_viewportWidth = 1.0f; 
 
   m_quitConfirm = false;
+
+  m_menuObject = 0;
+  m_wasClickedAway = false;
 }
 
 void GSMain::ShowDropButton(Furniture* f, bool show)
 {
 std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
+
+  if (!m_gui)
+  {
+    return; // TODO TEMP TEST - HACK, shouldn't get here
+  }
 
   GuiButton* pickupComp = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
 
@@ -128,12 +136,22 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   Ve1Object* v = dynamic_cast<Ve1Object*>(obj);
   if (v)
   {
+    if (v == m_menuObject && m_wasClickedAway)
+    {
+      // Player previously clicked on this object and did not select a choice.
+      // So don't show menu again, allowing player to select position on the object.
+      return false;
+    }
+
     RCPtr<GuiMenu> menu = new GuiMenu;
     v->SetMenu(menu);
 
     // Only show menu if it has items
     if (menu->GetNumChildren() > 0)
     {
+      m_menuObject = v;
+      m_wasClickedAway = false;
+
       m_menu = menu;
       m_menu->SetOnClickedAwayFunc(Amju::OnMenuClickedAway);
       TheEventPoller::Instance()->AddListener(m_menu, -1); // cursor is -2 priority
@@ -245,6 +263,7 @@ std::cout << *selectedObj << " does not have collision mesh.\n";
     {
 std::cout << "Try to find point on terrain for this mouse pos.\n";
       gotpos = MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
+      m_menuObject = 0; // so we can now select an object again
     }
 
     if (gotpos)
@@ -343,6 +362,8 @@ void GSMain::OnMenuClickedAway()
 {
 std::cout << "Clicked off menu, so now it's invisible.\n";
   //m_menu = 0;
+
+  m_wasClickedAway = true;
 }
 
 void GSMain::OnDeactive()
