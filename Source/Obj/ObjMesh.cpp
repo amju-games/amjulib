@@ -40,6 +40,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
   // Iterate over groups once to count how many faces there are;
   // then iterate again to convert each one to a tri.
   // Don't add tris for groups whose material has 'no collide' flag set.
+  pCollMesh->m_tris.clear();
 
   int numFaces = 0;
   for (Groups::iterator it = m_groups.begin();
