@@ -22,7 +22,14 @@ void CreateCollect(int type, int specialId)
   
   // TODO TEMP TEST
   // Set pos first
-  c->Create("heart.obj", "heart2.png");
+  static const int NUM = 2;
+  static const char* MESH_TEX[NUM][2] = 
+  {
+    { "heart.obj", "heart2.png" },
+    { "bean.obj",  "bean1.png" }
+  };
+  int r = rand() % NUM;
+  c->Create(MESH_TEX[r][0], MESH_TEX[r][1]);
 
   c->OnLocationEntry();
 
