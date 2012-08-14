@@ -46,7 +46,7 @@ public:
   void SetIsEnabled(bool);
 
   void SetOnPressedDownFunc(CommandFunc f);
-  void SetClickFilename(const std::string& clickFilename);
+  static void SetClickFilename(const std::string& clickFilename);
 
 private:
   void ClickSound() const; // TODO in GuiElement ?
