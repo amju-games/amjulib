@@ -4,23 +4,10 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+stroop-comp
 // Num children
-6
+7
 
-
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 1.9
-// size
-2.0, 0.1
-// Text
-Stroop Word test
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // Element type
 gui-text
@@ -65,7 +52,7 @@ gui-button
 // Element name
 left-button
 // pos (coords are -1..1)
--0.9, -0.5
+-0.9, -0.3
 // size
 0.8, 0.2
 // Image
@@ -79,7 +66,7 @@ gui-button
 // Element name
 right-button
 // pos (coords are -1..1)
-0.1, -0.5
+0.1, -0.3
 // size
 0.8, 0.2
 // Image
@@ -89,3 +76,30 @@ right choice
 // Font name, size
 arial, 1.5 
 
+
+gui-button
+done-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+done
+// Font name, size
+arial, 1.6 
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.9
+// size
+2.0, 0.1
+// Text
+Stroop Word test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
