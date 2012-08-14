@@ -344,12 +344,25 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     {
       // Switch current group - create a new group if it doesn't
       //  already exist in the map.
-      currentGroup = strs[1];
-      Group& g = m_groups[currentGroup];
-      g.m_name = currentGroup;
+      if (strs.size() == 2)
+      {
+        currentGroup = strs[1];
+        Group& g = m_groups[currentGroup];
+        g.m_name = currentGroup;
+      }
+      else
+      {
+        f.ReportError("Unexpected format for group");
+      }
     }
     else if (strs[0] == "mtllib")
     {
+      if (strs.size() != 2)
+      {
+        f.ReportError("Unexpected format for mtllib");
+        continue;
+      }
+
       std::string mtlfilename = strs[1];
       MaterialVec mats;
       if (!LoadMtlFile(mtlfilename, &mats))
@@ -379,6 +392,12 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     }
     else if (strs[0] == "usemtl")
     {
+      if (strs.size() != 2)
+      {
+        f.ReportError("Unexpected format for usemtl");
+        continue;
+      }
+
       std::string matname = strs[1];
       Group& g = m_groups[currentGroup];
       if (g.m_materialName.empty())
