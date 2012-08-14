@@ -128,6 +128,7 @@ void Collect::OnLocationEntry()
   SetVel(vel);
 
   m_timer = rnd(-2.0f, 0); // so different times/flashing
+  m_rot = rnd(0, 6.28f); // 2 pi radians
 }
 
 void Collect::Update()
