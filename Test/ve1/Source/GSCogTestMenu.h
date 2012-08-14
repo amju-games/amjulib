@@ -28,6 +28,10 @@ public:
   void DoPractice(bool b);
   // TODO Set order of tests; set propoerties of each test
 
+  // Returns true while we are doing the tests. We go back to GSMain then back to here
+  //  so we can collect rewards between tests.
+  bool IsDoingTests();
+
 private:
   int m_nextTest;
   CommandFunc m_func; // call to go to next state... could just use a switch...?

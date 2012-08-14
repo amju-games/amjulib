@@ -9,7 +9,7 @@
 #include <Timer.h>
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
-
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -94,7 +94,9 @@ std::cout << "Finished! Sending results to server...\n";
 //  TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_WORD, "time", ToString(m_timer)));
 
   // TODO Where should we go when we administer the test for real ?
-  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  // Go back to Main, to collect rewards, then go back (NPC controls this)
+  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 GSStroopWord::GSStroopWord()
