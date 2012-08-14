@@ -30,6 +30,8 @@ Furniture::Furniture()
   // ?????????
 
   m_pickupId = 0; // ID of player picking this object up
+  m_collMeshRot = m_dir;
+  m_handlePickup = false;
 }
 
 void Furniture::SetEditMenu(GuiMenu* menu)
@@ -56,6 +58,12 @@ void Furniture::Update()
     return; // assert ?
   }
 
+  // WHY doesn't this work ??? 
+  //if (m_handlePickup)
+  //{
+  //  HandlePickup(m_pickupId);
+  //}
+
   if (m_pickupId == 0)
   {
     //Matrix m;
@@ -81,35 +89,24 @@ void Furniture::Update()
 
   TurnToFaceDir(); // ?
 
-  // TODO Recalc collision mesh if:
-  // - we just got dropped, could be rotated
-  // Translate coll mesh if:
-  // - we are NOT picked up and got moved (e.g. pushed by a player) (doesn't cause rotation)
-
-  // TODO Only if we have moved!!!
-  // TODO
-  if ((m_pos - m_collMeshPos).SqLen() > 0.1f)
+  // If we got moved or rotated, transform Collision Mesh and recalc bounding box
+  if ((m_pos - m_collMeshPos).SqLen() > 0.1f || fabs(m_collMeshRot - m_dir) > 0.1f)
   { 
     Matrix m;
-    m.Translate(m_pos);
-    //// TODO Also rotation
-    //m.RotateY(DegToRad(m_dir));
-    //m.TranslateKeepRotation(m_pos);
 
-    //m_sceneNode->SetLocalTransform(m);
+    ((SceneCollisionMesh*)m_sceneNode.GetPtr())->CalcCollisionMesh();
 
-    // Recalc collision mesh
-    Vec3f v = m_pos - m_collMeshPos;
-    m.Translate(v);
-    // TODO difference in pos and ROTATION
+    m.RotateY(DegToRad(m_dir));
     GetCollisionMesh()->Transform(m);
 
-    // Don't need to do this -- the AABB is being translated somewhere else - where ?
-    ////m_aabb.Translate(v);
+    m.Translate(m_pos);
+    GetCollisionMesh()->Transform(m);
+    GetCollisionMesh()->CalcAABB(&m_aabb);
+
     *(m_sceneNode->GetAABB()) = m_aabb;
-    m_sceneNode->GetAABB()->Translate(m_pos);
 
     m_collMeshPos = m_pos;
+    m_collMeshRot = m_dir;
   }
 
   // If moving and like a ball, we should rotate
@@ -137,7 +134,7 @@ bool Furniture::Load(File* f)
   Assert(mesh);
   SceneCollisionMesh* sm = new SceneCollisionMesh;
   sm->SetMesh(mesh);
-  sm->CalcCollisionMesh(mesh);
+  sm->CalcCollisionMesh();
   sm->GetCollisionMesh()->CalcAABB(&m_aabb);
   *(sm->GetAABB()) = m_aabb;
 
@@ -155,12 +152,16 @@ void Furniture::SetKeyVal(const std::string& key, const std::string& val)
   if (key == SET_KEY("pickup"))
   {
     int pickupId = ToInt(val);
+    m_handlePickup = true;
+    // Do this later - too soon causes problems
     HandlePickup(pickupId);
   }
 }
 
 void Furniture::HandlePickup(int pickupId)
 {
+  m_handlePickup = false;
+
   // pickupId is the new owner
 
   if (pickupId == 0)

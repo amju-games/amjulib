@@ -34,10 +34,12 @@ public:
 protected:
   void HandlePickup(int pickupId);
 
+  bool m_handlePickup; // if true. call HandlePickup when Updating
   int m_pickupId;
 
   // last position where coll mesh was created - this is so we can translate collision mesh
   Vec3f m_collMeshPos; 
+  float m_collMeshRot;
 };
 
 class CommandPickUp : public GuiCommand
