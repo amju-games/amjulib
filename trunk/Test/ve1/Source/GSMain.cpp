@@ -91,18 +91,20 @@ void GSMain::SetHeartNum(int num)
 {
   if (!m_gui)
   {
-std::cout << "SetHeartNum: no gui!?!\n";
+//std::cout << "SetHeartNum: no gui!?!\n";
     return;
   }
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
   if (!text) 
   {
+    Assert(0);
 std::cout << "SetHeartNum: no heart-num element\n";
     return;
   }
   text->SetText(ToString(num));
 std::cout << "Set heart text to " << num << "\n";
+  text->SetVisible(true); 
 }
 
 void GSMain::SetNumPlayersOnline(int n)
