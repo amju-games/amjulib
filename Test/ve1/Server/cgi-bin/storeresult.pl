@@ -59,6 +59,11 @@ sub storeresult()
 
   # Acknowledge result stored
   print "<stored>1</stored>";
+  
+  # Reward for taking test
+  # TODO base on result ?
+  # TODO more/variety
+  print "<collect> <num>3</num> <type>0</type> <id>12345</id> </collect>\n"; 
 }
 
 
