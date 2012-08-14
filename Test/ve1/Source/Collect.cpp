@@ -98,7 +98,7 @@ std::cout << "Collected " << *this << "!!!\n";
   SetHidden(true); 
 
   // TODO nice effect
-  TheSoundManager::Instance()->PlayWav("pip.wav"); // TODO TEMP TEST
+  TheSoundManager::Instance()->PlayWav("Sound/pip.wav"); // TODO TEMP TEST
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(GOT_COLLECT);
   url += "&player_obj_id=" + ToString(GetLocalPlayerId());
@@ -142,6 +142,12 @@ void Collect::Update()
   m_timer += dt;
   if (m_timer > 10.0f) // TODO CONFIG
   {
+    SetHidden(true);
+  }
+
+  /*
+  if (m_timer > 10.0f) // TODO CONFIG
+  {
     // Start flashing.
     float d = m_timer - floor(m_timer);
     bool vis = d > 0.5f;
@@ -153,6 +159,7 @@ void Collect::Update()
       SetHidden(true);
     }
   }
+  */
 
   Ve1Object::Update();
 
