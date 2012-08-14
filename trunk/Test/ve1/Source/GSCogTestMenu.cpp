@@ -15,6 +15,7 @@
 #include "Ve1SceneGraph.h"
 #include "AvatarManager.h"
 #include "LurkMsg.h"
+#include "GameMode.h"
 
 namespace Amju
 {
@@ -94,7 +95,7 @@ GSCogTestMenu::GSCogTestMenu()
 
 void GSCogTestMenu::ResetTests()
 {
-  m_nextTest = 2; // TODO TEMP TEST
+  m_nextTest = 0; // TODO TEMP TEST
 }
 
 void GSCogTestMenu::Update()
@@ -132,6 +133,12 @@ void GSCogTestMenu::Draw2d()
 void GSCogTestMenu::AdvanceToNextTest()
 {
   m_nextTest++;
+}
+
+bool GSCogTestMenu::IsDoingTests()
+{
+  bool b = DoCogTests() && m_nextTest < 6;
+  return b;
 }
 
 void GSCogTestMenu::OnActive()

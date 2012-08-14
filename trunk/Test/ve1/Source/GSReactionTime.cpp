@@ -11,6 +11,7 @@
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "LurkMsg.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -107,7 +108,9 @@ void GSReactionTime::NextGo()
     // TODO Give reward (based on score ?)
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
-    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    // Go back to Main, to collect rewards, then go back (NPC controls this)
+    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
   else
   {
@@ -192,28 +195,11 @@ void GSReactionTime::Update()
 
 void GSReactionTime::Draw()
 {
-//  GSGui::Draw();
-
 }
 
 void GSReactionTime::Draw2d()
 {
   GSGui::Draw2d();
-
-  switch (m_mode)
-  {
-  case RT_BEFORE_TEST:
-    break;
-
-  case RT_WAITING:
-    break;
-
-  case RT_TIMING:
-    break;
-
-  case RT_CONTINUE:
-    break;   
-  }
 }
 
 void GSReactionTime::OnActive()

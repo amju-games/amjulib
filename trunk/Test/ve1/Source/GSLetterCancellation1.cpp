@@ -12,6 +12,7 @@
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "LurkMsg.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -63,7 +64,9 @@ void GSLetterCancellation1::FinishedTest()
   
     // Advance to the next test
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
-    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+    // Go back to Main, to collect rewards, then go back (NPC controls this)
+    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
 }
 
@@ -429,7 +432,14 @@ void GSLetterCancellation1::StartTest()
 
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+
+  // Release mode only: hide button ?
+#ifdef _DEBUG
+  done->SetVisible(true);
+#else
   done->SetVisible(isPrac);
+#endif
+
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   timeText->SetVisible(!isPrac);
 

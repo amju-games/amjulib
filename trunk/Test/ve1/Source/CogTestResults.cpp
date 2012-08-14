@@ -31,6 +31,8 @@ std::cout << "Store result req FAILED! for this res: "
   {
     // Result committed ok: Mark result as committed, so it won't be sent again.
     m_res->m_committed = true;
+
+    CheckCollects();
   }
 
 private:

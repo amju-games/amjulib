@@ -1,5 +1,6 @@
 #include <GameObjectFactory.h>
 #include <Game.h>
+#include <Timer.h>
 #include "TutorialNpc.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
@@ -21,24 +22,50 @@ static bool registered = TheGameObjectFactory::Instance()->Add(TutorialNpc::TYPE
 
 TutorialNpc::TutorialNpc()
 {
-  m_hasDoneCogTests = false;
+  m_ctState = CT_START;
   m_hasTriggered = false;
 
-  // Prevent false triggers
-  SetPos(Vec3f(20000.0f, 0, 0)); // TODO CONFIG ?
-  MoveTo(GetPos()); 
+  // Prevent false triggers - doesn't work, pos is set later
+//  SetPos(Vec3f(20000.0f, 0, 0)); // TODO CONFIG ?
+//  MoveTo(GetPos()); 
 }
 
 void TutorialNpc::Update()
 {
   Ve1ObjectChar::Update();
 
+  m_timer += TheTimer::Instance()->GetDt();
+
   // Chase player if it's important to give this task
-  if (DoCogTests() && !m_hasDoneCogTests) // && type=="cogtest"
+  if (TheGSCogTestMenu::Instance()->IsDoingTests())
   {
-    // Go next to local player so we are visible and triggered
-    Vec3f pos = GetLocalPlayer()->GetPos();
-    MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
+    switch (m_ctState)
+    {
+    case CT_START:
+      {
+        // Chase local player so we are visible and triggered
+        Vec3f pos = GetLocalPlayer()->GetPos();
+        MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
+      }
+      break;
+
+    case CT_DOING_TESTS:
+      {
+        Vec3f pos = GetLocalPlayer()->GetPos();
+        static const float MAX_FOLLOW_DIST = 200.0f; // TODO CONFIG
+        if ((pos - m_pos).SqLen() > MAX_FOLLOW_DIST * MAX_FOLLOW_DIST) 
+        {
+          MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
+        }     
+        // After a delay we trigger again
+        if (m_timer > 10.0f) // TODO
+        {
+          m_hasTriggered = false;
+          m_timer = 0;
+        }
+      }
+      break;
+    }
   }
 
   // Trigger if close enough to player and not already triggered
@@ -87,19 +114,24 @@ void TutorialNpc::OnLocationEntry()
 {
   Ve1ObjectChar::OnLocationEntry();
 
-  // TODO Special types of TutNPCs, depends on key
+  // Start near player
+  Vec3f pos = GetLocalPlayer()->GetPos();
+  SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
 
-  if (DoCogTests() && !m_hasDoneCogTests) // && type=="cogtest"
-  {
-    // Go next to local player so we are visible and triggered
-    Vec3f pos = GetLocalPlayer()->GetPos();
-    SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
-    MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
-  }
+  m_timer = 0;
+
+  //if (DoCogTests() && !m_hasDoneCogTests) // && type=="cogtest"
+  //{
+  //  // Go next to local player so we are visible and triggered
+  //  Vec3f pos = GetLocalPlayer()->GetPos();
+  //  SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
+  //  MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
+  //}
 }
 
 void OnCogTestMsgFinished()
 {
+  //m_timer = 0;
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
@@ -121,18 +153,22 @@ void TutorialNpc::Trigger()
 
   // Decide on "question" depending on token
 
-
-  if (DoCogTests() && !m_hasDoneCogTests) 
+  
+  if (m_ctState == CT_START) 
   {
     // Show "question" text
     std::string text = "Hello " + GetLocalPlayer()->GetName() + 
-      "!\nI have got a quiz for you. You will win lots of jellybeans by doing it!";
+      "!\nI have got a quiz for you. You will win lots of hearts by doing it!";
     // When this msg has been displayed, we go to the Cog Test state.
     LurkMsg lm(text, Colour(1, 1, 1, 1), Colour(0.5f, 0, 0.5f, 0.5f), AMJU_CENTRE, 
       OnCogTestMsgFinished);
     TheLurker::Instance()->Queue(lm);
-
-    m_hasDoneCogTests = true;
+    m_ctState = CT_DOING_TESTS;
+    m_timer = 0;
+  }
+  else if (m_ctState == CT_DOING_TESTS)
+  {
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
   }
 }
 
