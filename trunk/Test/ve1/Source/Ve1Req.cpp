@@ -69,12 +69,12 @@ void Ve1Req::OnFailure()
 
   if (m_critical)
   {
-    ShowError(m_errorStr);
+    ShowError(m_name + ": " + m_errorStr);
   }
   else
   {
     // Non critical... check if errors happen a lot or just sporadically 
-std::cout << "NET ERROR but non-critical...\n";
+std::cout << "NET ERROR but non-critical: " << m_errorStr << " - request name: " << m_name << "\n";
   }
 }
 
