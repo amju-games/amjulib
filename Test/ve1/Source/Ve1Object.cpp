@@ -132,18 +132,24 @@ void Ve1Object::HandleFloor(CollisionMesh* m)
 
   if (m_pos.y < groundY)
   {
-    m_pos.y = groundY;
-    if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
+    float diff = groundY - m_pos.y;
+    static const float MAX_JUMP  = 10.0f;  // TODO CONFIG
+    if (diff < MAX_JUMP ||
+        !m->GetClosestLowerY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y)) // no floor lower than us
     {
-std::cout << "**BOUNCE**!?!?!?!\n";
+      m_pos.y = groundY;
+      if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
+      {
+  std::cout << "**BOUNCE**!?!?!?!\n";
 
-      m_vel.y *= -0.6f; // TODO CONFIG
-      m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
-    }
-    else
-    {
-      m_vel.y = 0; // ?
-      OnBounceStop();
+        m_vel.y *= -0.6f; // TODO CONFIG
+        m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
+      }
+      else
+      {
+        m_vel.y = 0; // ?
+        OnBounceStop();
+      }
     }
   }
 }
@@ -268,6 +274,11 @@ bool Ve1Object::IsHidden() const
 void Ve1Object::SetHidden(bool b)
 {
   m_hidden = b;
+
+  if (m_sceneNode)
+  {
+    m_sceneNode->SetVisible(!m_hidden);
+  }
 }
 
 AABB* Ve1Object::GetAABB()
@@ -309,11 +320,6 @@ void Ve1Object::CreateEditNode()
 void Ve1Object::Update()
 {
   m_oldPos = m_pos;
-
-  if (m_sceneNode)
-  {
-    m_sceneNode->SetVisible(!m_hidden);
-  }
 
   if (!IsHidden())
   {
@@ -467,6 +473,8 @@ void Ve1Object::OnLocationEntry()
     root->AddChild(m_sceneNode);
 
     m_sceneNode->AddChild(m_shadow.GetPtr());
+
+    m_sceneNode->SetVisible(!m_hidden);
   }
 }
 
