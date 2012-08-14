@@ -10,7 +10,7 @@ cd ..
 REM Run Inno Setup script
 set PATH="\Program Files\Inno Setup 5\";%PATH%
 set PATH="\Program Files (x86)\Inno Setup 5\";%PATH%
-iscc.exe MyGameSetup.iss
+iscc.exe MyGameSetup_debug.iss
 
 cd Output
 copy setup.exe "..\..\..\..\..\..\MyGame-v.%VERSION%-setup.exe"
