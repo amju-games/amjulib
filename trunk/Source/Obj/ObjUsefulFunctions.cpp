@@ -75,8 +75,6 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
         continue;
       }
 
-//std::cout << "Found texture name " << strs[1] << "\n";
-
       Assert(current);
       current->m_texfilename = strs[1];
       current->m_texture = (Texture*)TheResourceManager::Instance()->GetRes(current->m_texfilename);
@@ -129,7 +127,9 @@ Vec3f ToVec3(const Strings& strs)
 {
     if (strs.size() != 4)
     {
+        std::cout << "Unexpected format for Vec3\n";
         Assert(0);
+        return Vec3f();
     }
     return Vec3f(ToFloat(strs[1]), ToFloat(strs[2]), ToFloat(strs[3]));
 }
@@ -141,7 +141,9 @@ Vec2f ToVec2(const Strings& strs)
 {
     if (strs.size() != 3)
     {
+        std::cout << "Unexpected format for Vec2\n";
         Assert(0);
+        return Vec2f();
     }
     return Vec2f(ToFloat(strs[1]), ToFloat(strs[2]));
 }
