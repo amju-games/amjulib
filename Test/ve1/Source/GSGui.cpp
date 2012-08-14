@@ -4,6 +4,7 @@
 #include <Timer.h>
 #include <EventPoller.h>
 #include "LurkMsg.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -64,6 +65,8 @@ void GSGui::OnActive()
 {
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+
+  ClearGuiSceneGraph();
 
   if (!m_bgImage.OpenAndLoad("bgimage.txt"))
   {
