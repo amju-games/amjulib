@@ -95,13 +95,12 @@ GSCogTestMenu::GSCogTestMenu()
 
 void GSCogTestMenu::ResetTests()
 {
-  m_nextTest = 0; // TODO TEMP TEST
+  m_nextTest = 3; // TODO TEMP TEST
 }
 
 void GSCogTestMenu::Update()
 {
   GSGui::Update();
-//  TheLurker::Instance()->Update();
 }
 
 void GSCogTestMenu::Draw()
@@ -127,7 +126,6 @@ void GSCogTestMenu::Draw()
 void GSCogTestMenu::Draw2d()
 {
   GSGui::Draw2d();
-//  TheLurker::Instance()->Draw();
 }
 
 void GSCogTestMenu::AdvanceToNextTest()

@@ -19,7 +19,8 @@ public:
 
   void OnLeftRight(bool isLeftButton);
   void Finished();
- 
+  void ResetTest();
+
 private:
   void SetTest();
 

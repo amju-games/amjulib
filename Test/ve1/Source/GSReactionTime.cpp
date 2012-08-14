@@ -67,7 +67,7 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
     word->SetText(ToString(m_reactionTime, 2));
 
-    TheSoundManager::Instance()->PlayWav("Sound/applause2.wav");
+    TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
 
     if (TheGSCogTestMenu::Instance()->IsPrac())
     {
