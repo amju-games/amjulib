@@ -1,6 +1,8 @@
 #include "SceneCollisionMesh.h"
 
-#define SHOW_COLLISION_MESH
+#ifdef _DEBUG
+//#define SHOW_COLLISION_MESH
+#endif
 
 namespace Amju
 {
