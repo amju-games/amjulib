@@ -17,11 +17,11 @@ namespace Amju
 class ReqGotCollect : public Ve1Req
 {
 public:
-  ReqGotCollect::ReqGotCollect(const std::string& url) : Ve1Req(url, "gotcollect", HttpClient::GET)
+  ReqGotCollect(const std::string& url) : Ve1Req(url, "gotcollect", HttpClient::GET)
   {
   }
 
-  void ReqGotCollect::OnSuccess()
+  void OnSuccess()
   {
     std::cout << "Successfully sent msg that we got a collect!\n";
   }
