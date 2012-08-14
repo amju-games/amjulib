@@ -38,6 +38,9 @@ public:
   // Get height on mesh for (x, z), nearest to given y.
   bool GetClosestY(const Vec2f& v, float y, float* pClosestY) const;
 
+  // Get height on mesh which is closest to given y but equal or lower
+  bool GetClosestLowerY(const Vec2f& v, float y, float* pClosestY) const;
+
   // Get all the triangles in the mesh which intersect the given AABB.
   void GetAllTrisInBox(const AABB& aabb, Tris* pTris) const;
 
