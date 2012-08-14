@@ -333,15 +333,6 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     bool isTyping = (recipId > 0);
     cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
-  else if (key == STAMINA_KEY)
-  {
-    // (Also handled in base class)
-    if (IsLocalPlayer())
-    {
-      TheGSMain::Instance()->SetHeartNum(m_stamina);
-    }
-  }
-
 }
 
 void Player::SetArrowVis(bool visible)
@@ -466,6 +457,11 @@ void Player::Update()
     {
       m_ignorePortalId = -1; // ?
     }
+  }
+
+  if (IsLocalPlayer())
+  {
+    TheGSMain::Instance()->SetHeartNum(m_stamina);
   }
 }
 
