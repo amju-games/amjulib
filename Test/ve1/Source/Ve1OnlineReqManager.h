@@ -35,6 +35,7 @@ enum Task
   DELETE_OBJECT,
 
   FIGHT,
+  GOT_COLLECT, // notify server when player gets a collectable item
 
   // Research
   SEND_TEST_RESULT,

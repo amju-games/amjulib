@@ -144,6 +144,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case FIGHT:
     s += "fightreq.pl";
     break;
+
+  case GOT_COLLECT:
+    s += "gotcollect.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.

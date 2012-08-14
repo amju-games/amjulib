@@ -10,10 +10,10 @@ void CreateCollect(int type, int specialId)
   Collect* c = new Collect;
   static int id = 1000000;
   id++;
-  c->SetId(id);
- 
-  // .. Load etc
+  c->SetId(id); // Game obj ID
 
+  c->SetSpecialId(specialId); // collect ID to validate on server
+ 
   // Set location (necessary ?)
   c->SetLocation(GetLocalPlayerLocation());
 
@@ -22,7 +22,7 @@ void CreateCollect(int type, int specialId)
   
   // TODO TEMP TEST
   // Set pos first
-  c->Create("heart.obj", "bean4.png");
+  c->Create("heart.obj", "heart2.png");
 
   c->OnLocationEntry();
 
