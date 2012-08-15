@@ -6,7 +6,7 @@ gui-comp
 // Name
 reaction-time-comp
 // Num children
-3
+4
 
 
 // Element type
@@ -52,17 +52,17 @@ arial, 1.5
 
 gui-button
 // Element name
-ok-button
+done-button
 // pos (coords are -1..1)
--0.2, -0.75
+-0.4, -0.75
 // size
-0.4, 0.1
+0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-ok
+done
 // Font name, size
-arial, 1.0
+arial, 1.6
 
 
 

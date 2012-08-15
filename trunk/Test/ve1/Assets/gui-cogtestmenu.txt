@@ -4,10 +4,11 @@
 // Element type
 gui-comp
 // Name
-prac-comp
+cogtestmenu-comp
 // Num children
-2
+0
 
+// The idea here was to show hearts during the cog tests....
 
 // Heart image
 gui-image

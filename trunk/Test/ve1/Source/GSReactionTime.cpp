@@ -35,6 +35,11 @@ void StartRT()
   TheGSReactionTime::Instance()->SetTest();
 }
 
+void OnDoneButton()
+{
+  TheGSReactionTime::Instance()->Quit();
+}
+
 GSReactionTime::GSReactionTime()
 {
   m_reactionTime = 0; 
@@ -48,6 +53,9 @@ GSReactionTime::GSReactionTime()
 
 void GSReactionTime::OnButton()
 {
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(false);
+
   switch (m_mode)
   {
   case RT_TIMING:
@@ -94,6 +102,16 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     // TODO restart timer
     Assert(0);
   }
+}
+
+void GSReactionTime::Quit()
+{
+  // TODO Play a sound
+
+  TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+
+  // Go back to Main, to collect rewards, then go back (NPC controls this)
+  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 void GSReactionTime::NextGo()
@@ -228,10 +246,12 @@ void GSReactionTime::OnActive()
 
   m_testNum = 0; 
 
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetCommand(Amju::OnDoneButton);
+  done->SetVisible(false);
+
   std::string str = "OK, when I say GO, press the button as quickly as you can!";
-  //. You get " +
-  //  ToString(m_maxTestNum) +
-  //  " goes at this.";
+
   LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartRT);
   TheLurker::Instance()->Queue(lm);
 
@@ -254,6 +274,9 @@ std::cout << "Waiting time is: " << m_maxWaitTime << "s\n";
   m_mode = RT_BEFORE_TEST;
   m_waitTime = 0;
   m_reactionTime = 0;
+
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(true);
 }
 
 } // namespace
