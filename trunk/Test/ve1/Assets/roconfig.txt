@@ -2,3 +2,20 @@
 // version
 1
 
+cogtest-first-test 0
+
+npc-max-follow-dist 200.0
+npc-trigger-delay 10.0
+npc-max-follow-dist  75.0
+
+music-title Sound/hammers.it
+music-menu Sound/piano.it
+
+sound-got-collect Sound/cashreg.wav
+sound-npc-trigger Sound/whistlehere.wav
+sound-new-lurkmsg Sound/pop.wav
+sound-new-cogtest Sound/gong.wav
+sound-rt-go  Sound/alarme.wav
+sound-cogtest-fail Sound/fail.wav
+sound-cogtest-correct Sound/bell_tinkle.wav
+
