@@ -1,4 +1,5 @@
 #include "AmjuFirst.h"
+#include <StringUtils.h>
 #include "ConfigFile.h"
 #include "File.h"
 #include "Tokeniser.h"
@@ -98,26 +99,38 @@ bool ConfigFile::Load(const std::string& filename, bool useRoot)
   return true;
 }
 
-std::string ConfigFile::GetValue(const std::string& key) const
+std::string ConfigFile::GetValue(const std::string& key, const std::string& defaultVal) const
 {
   ConfigMap::const_iterator it = m_values.find(key);
   if (it == m_values.end())
   {
-    return "";
+    return defaultVal;
   }
   return it->second;
 }
 
-float ConfigFile::GetFloat(const std::string& key) const
+float ConfigFile::GetFloat(const std::string& key, float defaultVal) const
 {
   AMJU_CALL_STACK;
 
   ConfigMap::const_iterator it = m_values.find(key);
   if (it == m_values.end())
   {
-    return 0;
+    return defaultVal;
   }
-  return (float)atof(it->second.c_str());
+  return ToFloat(it->second.c_str());
+}
+
+int ConfigFile::GetInt(const std::string& key, int defaultVal) const
+{
+  AMJU_CALL_STACK;
+
+  ConfigMap::const_iterator it = m_values.find(key);
+  if (it == m_values.end())
+  {
+    return defaultVal;
+  }
+  return ToInt(it->second.c_str());
 }
 
 bool ConfigFile::Exists(const std::string& key) const
