@@ -1,6 +1,7 @@
 #include <GameObjectFactory.h>
 #include <Game.h>
 #include <Timer.h>
+#include <SoundManager.h>
 #include "TutorialNpc.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
@@ -8,6 +9,7 @@
 #include "GameMode.h"
 #include "LurkMsg.h"
 #include "GSCogTestMenu.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -52,15 +54,16 @@ void TutorialNpc::Update()
     case CT_DOING_TESTS:
       {
         Vec3f pos = GetLocalPlayer()->GetPos();
-        static const float MAX_FOLLOW_DIST = 200.0f; // TODO CONFIG
+        static const float MAX_FOLLOW_DIST = ROConfig()->GetFloat("npc-max-follow-dist", 200.0f);
         if ((pos - m_pos).SqLen() > MAX_FOLLOW_DIST * MAX_FOLLOW_DIST) 
         {
           MoveTo(pos + Vec3f(30.0f, 0, 0)); // TODO CONFIG
         }     
         // After a delay we trigger again
-        if (m_timer > 10.0f) // TODO
+        static const float NPC_TRIGGER_DELAY = ROConfig()->GetFloat("npc-trigger-delay", 10.0f);
+        if (m_timer > NPC_TRIGGER_DELAY) 
         {
-          m_hasTriggered = false;
+          m_hasTriggered = false; // causing Trigger to be called again when we are close
           m_timer = 0;
         }
       }
@@ -75,7 +78,7 @@ void TutorialNpc::Update()
     p0.y = 0;
     Vec3f p1 = GetLocalPlayer()->GetPos();
     p1.y = 0;
-    static const float TRIGGER_RADIUS = 75.0f; // TODO CONFIG
+    static const float TRIGGER_RADIUS = ROConfig()->GetFloat("npc-max-follow-dist", 75.0f);
     static const float TR2 = TRIGGER_RADIUS * TRIGGER_RADIUS;
     if ((p1 - p0).SqLen() < TR2)
     {
@@ -137,6 +140,7 @@ void OnCogTestMsgFinished()
 
 void TutorialNpc::Trigger()
 {
+  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-npc-trigger"));
   m_hasTriggered = true;
 
   // Turn to face player
@@ -156,7 +160,6 @@ void TutorialNpc::Trigger()
   
   if (m_ctState == CT_START) 
   {
-    // Show "question" text
     std::string text = "Hello " + GetLocalPlayer()->GetName() + 
       "!\nI have got a quiz for you. You will win lots of hearts by doing it!";
     // When this msg has been displayed, we go to the Cog Test state.
