@@ -1,0 +1,38 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+lurk-comp
+// Num children
+3
+
+gui-button
+ok-button
+-0.2, 0
+0.4, 0.1
+gui-button-4.png
+ok
+arial, 0.8
+
+gui-button
+yes-button
+0.05, 0
+0.4, 0.1
+gui-button-4.png
+yes
+arial, 0.8 
+
+gui-button
+no-button
+-0.45, 0
+0.4,0.1
+gui-button-4.png
+no
+arial, 0.8
+
+
+
+
+
