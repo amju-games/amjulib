@@ -1,5 +1,7 @@
 #include <Timer.h>
 #include <EventPoller.h>
+#include <SoundManager.h>
+#include "ROConfig.h"
 #include "LurkMsg.h"
 
 namespace Amju
@@ -15,13 +17,21 @@ LurkMsg::LurkMsg()
   m_state = LURK_NEW;
   m_lurkPos = AMJU_NONE;
   m_scale = 1.0f;
+
+  m_onOk = 0;
+  m_onYes = 0;
+  m_onNo = 0;
 }
 
 LurkMsg::LurkMsg(const std::string& text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
-  CommandFunc onFinished)
+  CommandFunc onOk)
 {
+  m_onOk = 0;
+  m_onYes = 0;
+  m_onNo = 0;
+
   m_scale = 1.0f;
-  Set(text, fgCol, bgCol, lp, onFinished);
+  Set(text, fgCol, bgCol, lp, onOk);
 }
 
 bool LurkMsg::IsFinished() const
@@ -48,6 +58,7 @@ void LurkMsg::Update()
   switch (m_state)
   {
   case LURK_NEW:
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-new-lurkmsg"));
     m_state = LURK_SHOWING;
     m_rect->SetVisible(true);
     m_text->SetVisible(true);
@@ -104,11 +115,6 @@ void LurkMsg::Update()
     {
       m_state = LURK_FINISHED;
       m_scale = 0;
-
-      if (m_onFinished)
-      {
-        m_onFinished();
-      }
     }
     else
     {
@@ -131,6 +137,45 @@ void LurkMsg::Update()
   }
 }
 
+void LurkMsg::SetOkCommand(CommandFunc onOk)
+{
+  m_onOk = onOk;
+}
+
+void LurkMsg::SetYesCommand(CommandFunc onYes)
+{
+  m_onYes = onYes;
+}
+
+void LurkMsg::SetNoCommand(CommandFunc onNo)
+{
+  m_onNo = onNo;
+}
+
+void LurkMsg::DoOk()
+{
+  if (m_onOk)
+  {
+    m_onOk();
+  }
+}
+
+void LurkMsg::DoYes()
+{
+  if (m_onYes)
+  {
+    m_onYes();
+  }
+}
+
+void LurkMsg::DoNo()
+{
+  if (m_onNo)
+  {
+    m_onNo();
+  }
+}
+
 void LurkMsg::Set(const std::string& str, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
   CommandFunc onFinished)
 {
@@ -149,7 +194,7 @@ void LurkMsg::Set(const std::string& str, const Colour& fgCol, const Colour& bgC
 }
 
 void LurkMsg::Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkPos lp,
-  CommandFunc onFinished)
+  CommandFunc onOk)
 {
   m_text = text;
 
@@ -161,7 +206,7 @@ void LurkMsg::Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkP
   m_lurkPos = lp;
   m_timer = 0;
   m_state = LURK_NEW;
-  m_onFinished = onFinished;
+  m_onOk = onOk;
 
   float h = m_text->GetSize().y;
   float w = m_text->GetSize().x;
@@ -216,19 +261,67 @@ static void OnLurkOk()
   TheLurker::Instance()->OnLurkOk();
 }
 
+static void OnLurkYes()
+{
+  TheLurker::Instance()->OnLurkYes();
+}
+
+static void OnLurkNo()
+{
+  TheLurker::Instance()->OnLurkNo();
+}
+
 Lurker::Lurker()
 {
+  m_gui = LoadGui("gui-lurk.txt");
+  Assert(m_gui);
+
+  m_ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+  Assert(m_ok);
+  m_ok->SetCommand(Amju::OnLurkOk);
+
+  m_yes = (GuiButton*)GetElementByName(m_gui, "yes-button");
+  Assert(m_yes);
+  m_yes->SetCommand(Amju::OnLurkYes);
+
+  m_no = (GuiButton*)GetElementByName(m_gui, "no-button");
+  Assert(m_no);
+  m_no->SetCommand(Amju::OnLurkNo);
+
+/*
   m_button = new GuiButton;
   m_button->OpenAndLoad("lurk-button.txt");
   TheEventPoller::Instance()->AddListener(m_button);
   m_button->SetVisible(false);
   m_button->SetCommand(Amju::OnLurkOk);
+*/
 }
 
 void Lurker::OnLurkOk()
 {
-  m_qmap[AMJU_CENTRE].front().m_state = LurkMsg::LURK_HIDING;
-  m_button->SetVisible(true);
+  LurkMsg& lm = m_qmap[AMJU_CENTRE].front();
+  lm.m_state = LurkMsg::LURK_HIDING;
+  lm.DoOk();
+
+  m_gui->SetVisible(true); // ?
+}
+
+void Lurker::OnLurkYes()
+{
+  LurkMsg& lm = m_qmap[AMJU_CENTRE].front();
+  lm.m_state = LurkMsg::LURK_HIDING;
+  lm.DoYes();
+
+  m_gui->SetVisible(true); // ?
+}
+
+void Lurker::OnLurkNo()
+{
+  LurkMsg& lm = m_qmap[AMJU_CENTRE].front();
+  lm.m_state = LurkMsg::LURK_HIDING;
+  lm.DoNo();
+
+  m_gui->SetVisible(true); // ?
 }
 
 void Lurker::Update()
@@ -240,20 +333,24 @@ void Lurker::Update()
     {
       continue;
     }
-    if (q.front().IsFinished())
+    LurkMsg& msg = q.front();
+    if (msg.IsFinished())
     {
       q.pop();
     }
     else
     {
-      q.front().Update();
+      msg.Update();
+      m_ok->SetVisible(msg.m_onOk != 0 || (msg.m_onYes == 0 && msg.m_onNo == 0));
+      m_yes->SetVisible(msg.m_onYes != 0);
+      m_no->SetVisible(msg.m_onNo != 0);
     }
   }
 }
 
 void Lurker::Draw()
 {
-  m_button->SetVisible(false); // so inert if not displayed
+  m_gui->SetVisible(false); // so inert if not displayed
 
   for (QMap::iterator it = m_qmap.begin(); it != m_qmap.end(); ++it)
   {
@@ -266,11 +363,15 @@ void Lurker::Draw()
     msg.Draw();
     if (msg.m_lurkPos == AMJU_CENTRE && msg.m_state == LurkMsg::LURK_SHOWN)
     {
-      Vec2f pos = msg.m_rect->GetLocalPos(); // TODO move this
-      pos += Vec2f(msg.m_rect->GetSize().x - m_button->GetSize().x, -msg.m_rect->GetSize().y);
-      m_button->SetLocalPos(pos);
-      m_button->SetVisible(true);
-      m_button->Draw();
+      Vec2f pos = msg.m_rect->GetLocalPos(); 
+      pos += Vec2f(0, -msg.m_rect->GetSize().y);
+      pos.x = 0;
+      m_gui->SetLocalPos(pos);
+      m_gui->SetVisible(true);
+
+      // Hide buttons with no command
+
+      m_gui->Draw();
     }
   }
 }
@@ -283,8 +384,10 @@ void Lurker::Queue(const LurkMsg& lm)
 void Lurker::ShowYesNo(const std::string& q, const Colour& fgCol, const Colour& bgCol, 
   CommandFunc no, CommandFunc yes)
 {
-  LurkMsg msg(q, fgCol, bgCol,AMJU_CENTRE, yes);
-  // TODO Yes/no buttons
+  LurkMsg msg(q, fgCol, bgCol,AMJU_CENTRE, 0);
+  msg.SetNoCommand(no);
+  msg.SetYesCommand(yes);
+
   Queue(msg);
 }
 
