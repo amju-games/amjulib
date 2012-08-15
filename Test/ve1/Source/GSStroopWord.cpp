@@ -7,6 +7,8 @@
 #include <Game.h>
 #include <DrawRect.h>
 #include <Timer.h>
+#include <SoundManager.h>
+#include "ROConfig.h"
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "GSMain.h"
@@ -83,11 +85,12 @@ void GSStroopWord::OnLeftRight(bool isLeftButton)
 {
   if (isLeftButton == m_leftIsCorrect)
   {
-    // TODO sound
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
     m_correct++;
   }
   else
   {
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-fail"));
     m_incorrect++;
   }
 
@@ -119,14 +122,43 @@ void GSStroopWord::Finished()
 
   if (TheGSCogTestMenu::Instance()->IsPrac())
   {
+    std::string str;
+    if (m_correct == 0)
+    {
+      // TODO offer another practice go
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+    else
+    {
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+
+      str = "OK, you got " + ToString(m_correct) +
+        " correct! Let's try it for real!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+
     TheGSCogTestMenu::Instance()->SetIsPrac(false);
-    LurkMsg lm("That was a practice. Now let's try for real!", 
-        FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
-    TheLurker::Instance()->Queue(lm);
-    // TODO Ask if player would like another prac
   }
   else
   {
+    std::string str;
+    if (m_correct == 0)
+    {
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better next time!";
+    }
+    else
+    {
+      str = "Well done! You got " + ToString(m_correct) + " correct!";
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+    }
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_WORD, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_WORD, "incorrect", ToString(m_incorrect)));
 

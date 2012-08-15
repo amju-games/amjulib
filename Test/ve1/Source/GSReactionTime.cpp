@@ -12,6 +12,7 @@
 #include "CogTestResults.h"
 #include "LurkMsg.h"
 #include "GSMain.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -102,13 +103,12 @@ void GSReactionTime::NextGo()
   m_testNum++;
   if (m_testNum == m_maxTestNum)
   {
-    LurkMsg lm("That's the end. Thanks for playing my reaction time game!", 
+    LurkMsg lm("Thanks for playing my reaction time game! I have got some other things for you to do!", 
       FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
-    // TODO Give reward (based on score ?)
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
-    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+
     // Go back to Main, to collect rewards, then go back (NPC controls this)
     TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
@@ -164,7 +164,7 @@ void GSReactionTime::Update()
       word->SetText("");
       m_mode = RT_WAITING;
 
-      TheSoundManager::Instance()->PlayWav("Sound/ticktock.wav");
+      //TheSoundManager::Instance()->PlayWav("Sound/ticktock.wav");
     }
     break;
 
@@ -178,7 +178,7 @@ void GSReactionTime::Update()
       m_mode = RT_TIMING;
       b->SetIsEnabled(true); 
 
-      TheSoundManager::Instance()->PlayWav("Sound/alarme.wav");
+      TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-rt-go"));
     }
     break;
 

@@ -2,6 +2,7 @@
 #include <Screen.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <SoundManager.h>
 #include "GSCogTestMenu.h"
 #include "GSFileUpdateCheck.h"
 #include "GSLetterCancellation1.h"
@@ -16,6 +17,7 @@
 #include "AvatarManager.h"
 #include "LurkMsg.h"
 #include "GameMode.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -95,7 +97,7 @@ GSCogTestMenu::GSCogTestMenu()
 
 void GSCogTestMenu::ResetTests()
 {
-  m_nextTest = 3; // TODO TEMP TEST
+  m_nextTest = ROConfig()->GetInt("cogtest-first-test", 0); // For testing
 }
 
 void GSCogTestMenu::Update()
@@ -141,6 +143,10 @@ bool GSCogTestMenu::IsDoingTests()
 
 void GSCogTestMenu::OnActive()
 {
+  // TODO Fade vol down to v quiet
+  TheSoundManager::Instance()->StopSong();
+  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-new-cogtest"));
+
   //GSGui::OnActive();
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
@@ -217,17 +223,23 @@ std::cout << "Failed to load GUI bg image!\n";
     break;
 
   case 3:
-    str = "This next one is called a Stroop Colour test. Click on the button which says the colour of the coloured rectangle.";
+    str = "This next one is called a Stroop Colour test. I will show you a coloured rectangle. Please click on the button which says the colour of the rectangle.";
     m_func = Amju::StroopColour;
     break;
 
   case 4:
-    str = "Nearly finished. This is called the Stroop Word test.";
+    str = "I have two more for you. This is called the Stroop Word test. I will show you a word. Please click on the button which is the same as the word. Easy!";
     m_func = Amju::StroopWord;
     break;
 
   case 5:
-    str = "This is the last one. It's called the Stroop Colour Word test.";
+    {
+      str = "This is the last one. It's called the Stroop Colour Word test.";
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+      TheLurker::Instance()->Queue(lm);
+    }
+    str = "I will show you a word like before. But this time, the words are coloured. "
+      "You have to click the button for the colour, not the word. It's quite tricky!";
     m_func = Amju::StroopColourWord;
     break;
 

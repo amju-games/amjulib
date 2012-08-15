@@ -9,6 +9,8 @@
 #include <Game.h>
 #include <DrawRect.h>
 #include <Timer.h>
+#include <SoundManager.h>
+#include "ROConfig.h"
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "LurkMsg.h"
@@ -44,17 +46,39 @@ void GSLetterCancellation1::FinishedTest()
   {
     TheGSCogTestMenu::Instance()->SetIsPrac(false);
 
-    std::string str = "OK, you got " + ToString(m_correct) +
-      " correct! Let's try it for real! You have 3 minutes!";
-    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
-    TheLurker::Instance()->Queue(lm);
+    std::string str;
+    if (m_correct == 0)
+    {
+      // TODO offer another practice go
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
+      TheLurker::Instance()->Queue(lm);
+    }
+    else
+    {
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+
+      str = "OK, you got " + ToString(m_correct) +
+        " correct! Let's try it for real! You have 3 minutes!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
+      TheLurker::Instance()->Queue(lm);
+    }
   }
   else
   {
     // Send results, go to next test.
-
-    std::string str = "Well done, you finished! You got " + ToString(m_correct) +
-      " correct!";
+    std::string str;
+    if (m_correct == 0)
+    {
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better next time!";
+    }
+    else
+    {
+      str = "Well done, you finished! You got " + ToString(m_correct) + " correct!";
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+    }
     LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
@@ -62,9 +86,8 @@ void GSLetterCancellation1::FinishedTest()
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
   
-    // Advance to the next test
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
-    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+
     // Go back to Main, to collect rewards, then go back (NPC controls this)
     TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
@@ -92,7 +115,6 @@ GSLetterCancellation1::GSLetterCancellation1()
 {
   m_listener = new LCListener;
 
-  //m_fontImgFilename = "font2d/arial_round_1024_36pt.png";
   m_top = 0.5f; 
   m_left = -1.0f; 
   m_vSpacing = 0.12f;
@@ -165,13 +187,13 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
 
         if (m_specialLetter == m_letters[i][j])
         {
-          if (isPrac)
+          if (isPrac && m_correct == 0)
           {
             LurkMsg lm("Yes, that's correct!", FG_COLOUR, BG_COLOUR, AMJU_TOP);
             TheLurker::Instance()->Queue(lm);
           }
 
-          // TODO sound, but pre-load into mem
+          TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
           m_correct++;
           if (m_correct == m_numSpecialLetter)
           {
@@ -181,14 +203,14 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         }
         else
         {
-          if (isPrac)
+          if (isPrac && m_incorrect == 0)
           {
             LurkMsg lm("Whoops, that one is not correct!", 
               FG_COLOUR, BG_COLOUR, AMJU_TOP);
             TheLurker::Instance()->Queue(lm);
           }
 
-          // TODO sound, but pre-load into mem
+          TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-fail"));
           m_incorrect++;
         }
 
@@ -445,6 +467,7 @@ void GSLetterCancellation1::StartTest()
 
   GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
   std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  scoreText->SetText(s);
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
   // (Generally: there are m_numSpecialLetters * m_specialLetter).

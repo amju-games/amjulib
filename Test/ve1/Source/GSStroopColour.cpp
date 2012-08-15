@@ -7,6 +7,8 @@
 #include <Game.h>
 #include <DrawRect.h>
 #include <Timer.h>
+#include <SoundManager.h>
+#include "ROConfig.h"
 #include "GSCogTestMenu.h"
 #include "CogTestResults.h"
 #include "GSMain.h"
@@ -45,6 +47,7 @@ void GSStroopColour::SetTest()
   GuiButton* left = (GuiButton*)GetElementByName(m_gui, "left-button");
   GuiButton* right = (GuiButton*)GetElementByName(m_gui, "right-button");
 
+  // TODO Why these colours, why 5 ??
   static const int NUM_WORDS = 5;
   static const char* WORDS[NUM_WORDS] = { "red", "green", "blue", "yellow", "purple" };
   static const Colour COLOURS[NUM_WORDS] = 
@@ -94,11 +97,12 @@ void GSStroopColour::OnLeftRight(bool isLeftButton)
 {
   if (isLeftButton == m_leftIsCorrect)
   {
-    // TODO sound
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
     m_correct++;
   }
   else
   {
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-fail"));
     m_incorrect++;
   }
 
@@ -130,20 +134,48 @@ void GSStroopColour::Finished()
 
   if (TheGSCogTestMenu::Instance()->IsPrac())
   {
+    std::string str;
+    if (m_correct == 0)
+    {
+      // TODO offer another practice go
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+    else
+    {
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+
+      str = "OK, you got " + ToString(m_correct) +
+        " correct! Let's try it for real!";
+
+      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+
     TheGSCogTestMenu::Instance()->SetIsPrac(false);
-    LurkMsg lm("That was a practice. Now let's try for real!", 
-        FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
-    TheLurker::Instance()->Queue(lm);
-    // TODO Ask if player would like another prac
   }
   else
   {
+    std::string str;
+    if (m_correct == 0)
+    {
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better next time!";
+    }
+    else
+    {
+      str = "Well done! You got " + ToString(m_correct) + " correct!";
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+    }
+    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "incorrect", ToString(m_incorrect)));
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
-    //TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
     // Go back to Main, to collect rewards, then go back (NPC controls this)
     TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
