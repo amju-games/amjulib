@@ -16,8 +16,10 @@ public:
   bool Load(const std::string& filename, bool useRoot = true);
   bool Save(const std::string& filename, bool useRoot = true);
 
-  std::string GetValue(const std::string& key) const;
-  float GetFloat(const std::string& key) const;
+  // Returns default if key does not exist
+  std::string GetValue(const std::string& key, const std::string& defaultVal = "") const;
+  float GetFloat(const std::string& key, float defaultVal = 0) const;
+  int GetInt(const std::string& key, int defaultVal = 0) const;
 
   bool Exists(const std::string& key) const;
 
