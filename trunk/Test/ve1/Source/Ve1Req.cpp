@@ -69,7 +69,8 @@ void Ve1Req::OnFailure()
 
   if (m_critical)
   {
-    ShowError(m_name + ": " + m_errorStr);
+    //ShowError(m_name + ": " + m_errorStr);
+std::cout << "NET ERROR AND IS CRITICAL!?!: " << m_errorStr << " - request name: " << m_name << "\n";
   }
   else
   {
