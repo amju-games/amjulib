@@ -74,7 +74,7 @@ heart.png
 // Num hearts text
 gui-text
 heart-num
-0.6, 0.86
+0.6, 0.87
 0.3, 0.1
 // Text
 0

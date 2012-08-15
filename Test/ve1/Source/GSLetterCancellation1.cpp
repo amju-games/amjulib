@@ -455,12 +455,8 @@ void GSLetterCancellation1::StartTest()
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
 
-  // Release mode only: hide button ?
-#ifdef _DEBUG
+  // Always allow player to escape, but TODO no prize if you skip out early
   done->SetVisible(true);
-#else
-  done->SetVisible(isPrac);
-#endif
 
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   timeText->SetVisible(!isPrac);

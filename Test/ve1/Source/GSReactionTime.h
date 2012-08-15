@@ -20,6 +20,7 @@ public:
   void OnButton();
   void NextGo();
   void SetTest();
+  void Quit();
 
 private:
   float m_reactionTime; // increase from zero 
