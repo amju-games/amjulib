@@ -3,10 +3,11 @@
 namespace Amju
 {
 static const char* RO_CONFIG_FILENAME = "roconfig.txt";
-void SaveROConfig()
-{
-  ROConfig()->Save(RO_CONFIG_FILENAME);
-}
+
+//void SaveROConfig()
+//{
+//  ROConfig()->Save(RO_CONFIG_FILENAME);
+//}
 
 ConfigFile* ROConfig()
 {
@@ -15,7 +16,9 @@ ConfigFile* ROConfig()
   {
     cf = new ConfigFile;
 	  cf->Load(RO_CONFIG_FILENAME);
-	  atexit(SaveROConfig);
+
+    // Duh, it's read only
+	  //atexit(SaveROConfig);
   }
   return cf;
 }
