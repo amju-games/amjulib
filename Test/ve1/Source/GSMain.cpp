@@ -384,6 +384,7 @@ void GSMain::OnDeactive()
 
 void GSMain::OnActive()
 {
+  // TODO This should be per-location and also depend on time of day!
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
 
   GSBase::OnActive();
