@@ -17,6 +17,11 @@
 #include "PlayerInfo.h"
 #include "GameMode.h"
 #include "LurkMsg.h" // so we can display msgs in title screen
+#include "ROConfig.h"
+
+//#define SHOW_ENV_INFO
+//#define SHOW_FRAME_TIME
+#define SHOW_VERSION
 
 namespace Amju
 {
@@ -62,13 +67,12 @@ static void OnQuitButton()
 
 GSTitle::GSTitle()
 {
+  m_showLurk = true;
 }
 
 void GSTitle::Update()
 {
   GSGui::Update();
-
-  TheLurker::Instance()->Update();
 }
 
 void GSTitle::Draw()
@@ -80,6 +84,7 @@ void GSTitle::Draw2d()
 {
   GSGui::Draw2d();
 
+#ifdef SHOW_ENV_INFO
   // Draw env info, etc.
   static GuiText t;
 
@@ -101,9 +106,7 @@ void GSTitle::Draw2d()
   s = "Env: " + GetEnv();
   t.SetText(s);
   t.Draw();
-
-  // TODO TEMP TEST
-  TheLurker::Instance()->Draw();
+#endif
 }
 
 void GSTitle::OnActive()
@@ -117,8 +120,10 @@ void GSTitle::OnActive()
     TheAvatarManager::Instance()->Load();
   }
 
-//  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-//  TheGame::Instance()->SetFrameTimeFont(font);
+#ifdef SHOW_FRAME_TIME
+  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  TheGame::Instance()->SetFrameTimeFont(font);
+#endif
 
   GSGui::OnActive();
 
@@ -127,7 +132,7 @@ void GSTitle::OnActive()
 
   GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
   start->SetCommand(Amju::OnStartButton);
-  start->SetHasFocus(true); // use in preference to SetIsFocusButton
+  start->SetHasFocus(true); 
 
   GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
   options->SetCommand(Amju::OnOptionsButton);
@@ -158,22 +163,24 @@ void GSTitle::OnActive()
   quit->SetCommand(Amju::OnQuitButton);
   quit->SetIsCancelButton(true);
 
+#ifdef SHOW_VERSION
   GuiText* ver = (GuiText*)GetElementByName(m_gui, "version");
   std::string s = "v." + ToString(VersionMajor) + "." + ToString(VersionMinor);
 #ifdef _DEBUG
   s += " DEBUG";
 #endif
   ver->SetText(s);
+#endif
 
   CreateText("my game");
 
   // TODO CONFIG
-  TheSoundManager::Instance()->PlaySong("/Sound/apz1.it");
+  TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-title", "Sound/hammers.it"));
 }
 
 void GSTitle::OnDeactive()
 {
-  TheSoundManager::Instance()->PlaySong("Sound/piano.it");
+  TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-menu", "Sound/piano.it"));
 
   GSGui::OnDeactive();
   CreateText("");

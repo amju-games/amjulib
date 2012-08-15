@@ -28,7 +28,7 @@ void CreateCollect(int type, int specialId)
     { "heart.obj", "heart2.png" },
     { "bean.obj",  "bean1.png" }
   };
-  int r = rand() % NUM;
+  int r = 0; // TODO    rand() % NUM;
   c->Create(MESH_TEX[r][0], MESH_TEX[r][1]);
 
   c->OnLocationEntry();

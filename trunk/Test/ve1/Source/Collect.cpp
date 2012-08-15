@@ -11,6 +11,7 @@
 #include "Terrain.h"
 #include "HasCollisionMesh.h"
 #include "LocalPlayer.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -98,7 +99,7 @@ std::cout << "Collected " << *this << "!!!\n";
   SetHidden(true); 
 
   // TODO nice effect
-  TheSoundManager::Instance()->PlayWav("Sound/pip.wav"); // TODO TEMP TEST
+  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-got-collect", "Sound/pop.wav")); 
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(GOT_COLLECT);
   url += "&player_obj_id=" + ToString(GetLocalPlayerId());
