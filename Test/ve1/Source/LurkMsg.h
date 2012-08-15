@@ -33,7 +33,15 @@ public:
     CommandFunc onFinished = 0);
 
   bool IsFinished() const;
+
+  void SetOkCommand(CommandFunc onOk);
+  void SetYesCommand(CommandFunc onYes);
+  void SetNoCommand(CommandFunc onNo);
  
+  void DoOk();
+  void DoYes();
+  void DoNo();
+
 private:
   RCPtr<GuiText> m_text;
   RCPtr<GuiRect> m_rect;
@@ -52,7 +60,9 @@ private:
   friend class Lurker;
   LurkPos m_lurkPos;
 
-  CommandFunc m_onFinished;
+  CommandFunc m_onOk;
+  CommandFunc m_onYes;
+  CommandFunc m_onNo;
 };
 
 class Lurker : public NonCopyable
@@ -74,6 +84,8 @@ public:
   void Clear(); // to prevent old msgs from stacking up
 
   void OnLurkOk();
+  void OnLurkYes();
+  void OnLurkNo();
 
 private:
   typedef std::queue<LurkMsg> LurkMsgQ; // queue of msgs or one Lurk pos
@@ -81,7 +93,11 @@ private:
   QMap m_qmap; // one queue for each position
 
   // next/ok button for Centred text (TODO make this per-LurkMsg ?)
-  RCPtr<GuiButton> m_button; 
+  //RCPtr<GuiButton> m_button; 
+   PGuiElement m_gui; // yes/no/ok buttons
+   GuiButton* m_ok;
+   GuiButton* m_yes;
+   GuiButton* m_no;
 };
 
 typedef Singleton<Lurker> TheLurker;
