@@ -41,9 +41,10 @@ bool SoundManager::PlayWav(const std::string& wav, float vol)
     return m_pImpl->PlayWav(wav, vol);
   }
 
-  // The idea is: if more than 3 copies of the same sound are playing,
+  static const int MAX_NUM_SAME_WAV = 10; // TODO CONFIG
+  // The idea is: if more than MAX_NUM_SAME_WAV copies of the same sound are playing,
   // wait 3 seconds before allowing any more copies of the sound to play.
-  // After the 3 secs, up to 3 of the same sounds can be played again, etc.
+  // After the 3 secs, up to MAX_NUM_SAME_WAV of the same sounds can be played again, etc.
 
   int& count = it->second.first;
   float& time = it->second.second;
@@ -53,7 +54,7 @@ bool SoundManager::PlayWav(const std::string& wav, float vol)
     count = 0; // The count has expired, we can play more instances of this wav
   }
 
-  if (count > 3 )  // TODO CONFIG
+  if (count > MAX_NUM_SAME_WAV )  
   {
     return false; // Too many instances of this wav playing
   }
