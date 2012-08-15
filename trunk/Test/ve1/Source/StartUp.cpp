@@ -10,6 +10,7 @@
 #include <BassSoundPlayer.h>
 #include <SoundManager.h>
 #include <EventPoller.h>
+#include <GuiButton.h>
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 #include "QuitHandler.h"
@@ -41,6 +42,8 @@ void StartUp()
   // Use Text obj loader for .obj files, binary loader for .objb
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
   TheResourceManager::Instance()->AddLoader("objb", BinaryObjLoader);
+
+  GuiButton::SetClickFilename("Sound/click.wav"); // doesn't try to load it
 
   // Don't try to load any assets yet! Wait until we have copied assets as required
 
