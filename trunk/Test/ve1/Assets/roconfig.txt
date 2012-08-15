@@ -19,3 +19,4 @@ sound-rt-go  Sound/alarme.wav
 sound-cogtest-fail Sound/fail.wav
 sound-cogtest-correct Sound/bell_tinkle.wav
 
+ve1obj-max-jump 20.0

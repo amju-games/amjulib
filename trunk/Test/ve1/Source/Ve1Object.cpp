@@ -21,6 +21,7 @@
 #include "HasCollisionMesh.h"
 #include "Terrain.h"
 #include "ObjectUpdater.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -133,9 +134,10 @@ void Ve1Object::HandleFloor(CollisionMesh* m)
   if (m_pos.y < groundY)
   {
     float diff = groundY - m_pos.y;
-    static const float MAX_JUMP  = 10.0f;  // TODO CONFIG
-    if (diff < MAX_JUMP ||
-        !m->GetClosestLowerY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y)) // no floor lower than us
+    static const float MAX_JUMP  = ROConfig()->GetFloat("ve1obj-max-jump", 20.0f);
+    if (diff < MAX_JUMP)
+      //||
+      //  !m->GetClosestLowerY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y)) // no floor lower than us
     {
       m_pos.y = groundY;
       if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
