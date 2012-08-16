@@ -65,7 +65,6 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   else if (key == STAMINA_KEY)
   {
     m_stamina = ToInt(val); 
-std::cout << "Got stamina value " << m_stamina << " for " << *this << "\n";
   }
 }
 

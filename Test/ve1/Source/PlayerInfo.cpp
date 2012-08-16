@@ -5,7 +5,7 @@
 #include <iostream>
 #include <AmjuTime.h>
 
-#define PI_DEBUG
+//#define PI_DEBUG
 
 namespace Amju
 {

@@ -4,8 +4,12 @@
 #include <Directory.h>
 #include <File.h>
 #include "Ve1OnlineReqManager.h"
+#include "ROConfig.h"
 
+#ifdef _DEBUG
 #define DOWNLOAD_DEBUG
+//#define DOWNLOAD_DEBUG_VERBOSE
+#endif
 
 namespace Amju
 {
@@ -31,6 +35,12 @@ private:
   DownloadManager* m_dl;
 };
 
+DownloadManager::DownloadManager()
+{
+  // Low number by default
+  MAX_CONCURRENT_DOWNLOADS = ROConfig()->GetInt("net-max-conc-downloads", 4);
+}
+
 void DownloadManager::TrashMap()
 {
   m_map.clear();
@@ -38,7 +48,7 @@ void DownloadManager::TrashMap()
 
 bool DownloadManager::GetFile(const std::string& filename)
 {
-#ifdef DOWNLOAD_DEBUG
+#ifdef DOWNLOAD_DEBUG_VERBOSE
 std::cout << "GetFile: " << filename << "\n";
 #endif
 
@@ -47,14 +57,14 @@ std::cout << "GetFile: " << filename << "\n";
   {
   case AMJU_DL_FAILED:
 #ifdef DOWNLOAD_DEBUG
-std::cout << " - DL Failed, so no!??\n";
+std::cout << "GetFile: DL Failed for " << filename << "\n";
 #endif
     return false;
 
   case AMJU_DL_UNKNOWN:
     if (FileExists(File::GetRoot() + filename))
     {
-#ifdef DOWNLOAD_DEBUG
+#ifdef DOWNLOAD_DEBUG_VERBOSE
 std::cout << " - File exists.\n";
 #endif
       m_map[filename] = AMJU_DL_LOCAL;
@@ -86,7 +96,7 @@ std::cout << " - File not local, download failed (too many requests ?)\n";
     }
 
   case AMJU_DL_LOCAL:
-#ifdef DOWNLOAD_DEBUG
+#ifdef DOWNLOAD_DEBUG_VERBOSE
 std::cout << " - Should be local.\n";
 #endif
     return true;

@@ -38,6 +38,13 @@ std::cout << "found objs element\n";
 
     int numObjs = p.nChildNode();
 
+#ifdef _DEBUG
+if (numObjs > 0)
+{
+  std::cout << "PosUpdateReq: got " << numObjs << " positions.\n";
+}
+#endif
+
     for (int i = 0; i < numObjs; i++)
     {
       PXml obj = p.getChildNode(i);
@@ -52,7 +59,7 @@ std::cout << "Obj " << i << ": ";
       float z = ToFloat(obj.getChildNode(3).getText());
       int location = atoi(obj.getChildNode(4).getText());
 
-std::cout << "##@@## Got msg from server, Queueing pos for object " << id << " location: " << location << " x: " << x << " y: " << y << " z: " << z << "\n";
+//std::cout << "##@@## Got msg from server, Queueing pos for object " << id << " location: " << location << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
       // TODO just to track down odd coords
       Assert(fabs(x) < 2000.0f);

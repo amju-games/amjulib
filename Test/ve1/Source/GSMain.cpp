@@ -91,7 +91,6 @@ void GSMain::SetHeartNum(int num)
 {
   if (!m_gui)
   {
-//std::cout << "SetHeartNum: no gui!?!\n";
     return;
   }
 
@@ -103,7 +102,6 @@ std::cout << "SetHeartNum: no heart-num element\n";
     return;
   }
   text->SetText(ToString(num));
-std::cout << "Set heart text to " << num << "\n";
   text->SetVisible(true); 
 }
 

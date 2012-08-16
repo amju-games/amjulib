@@ -90,8 +90,6 @@ bool Terrain::Load(File* f)
     return false;  
   }
 
-std::cout << "Terrain load: got obj mesh name: \"" << m_objFilename << "\"\n";
-
   return true;
 }
 
