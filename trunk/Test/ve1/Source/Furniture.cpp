@@ -13,6 +13,8 @@
 #include "SetObjMeshCommand.h"
 #include "GSMain.h"
 
+//#define AABB_DEBUG
+
 namespace Amju
 {
 const char* Furniture::TYPENAME = "furniture";
@@ -140,7 +142,9 @@ bool Furniture::Load(File* f)
 
   SetSceneNode(sm);
 
+#ifdef AABB_DEBUG
 std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " << m_aabb.GetYSize() << " " << m_aabb.GetZSize() << "\n";
+#endif
 
   return true;
 }
@@ -167,16 +171,22 @@ void Furniture::HandlePickup(int pickupId)
   if (pickupId == 0)
   {
     // DROP    
+#ifdef PICKUP_DEBUG
 std::cout << "Got drop msg... ";
+#endif
 
     // Set down: change height to player height. Put player on top.
     if (m_pickupId == 0)
     {
+#ifdef PICKUP_DEBUG
 std::cout << *this << " Got drop msg but no previous owner!\n";
+#endif
     }
     else
     {
+#ifdef PICKUP_DEBUG
 std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
+#endif
 
       GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
 
@@ -211,8 +221,9 @@ std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
     GameObject* go = TheGame::Instance()->GetGameObject(pickupId);
     if (go)
     {
+#ifdef PICKUP_DEBUG
 std::cout << *this << " got picked up by " << *go << "\n";
-
+#endif
       if (pickupId == GetLocalPlayerId())
       {
 std::cout << "That's me! Local player picked up this object!\n";
@@ -229,10 +240,14 @@ std::cout << "That's me! Local player picked up this object!\n";
     }
     else
     {
+#ifdef PICKUP_DEBUG
 std::cout << *this << " got picked up by object " << pickupId << " but this object not created yet!!\n";
+#endif
     }
   }
+#ifdef PICKUP_DEBUG
 std::cout << "Setting m_pickupId to " << pickupId << "\n";
+#endif
   m_pickupId = pickupId;
 }
 
@@ -240,7 +255,6 @@ CommandPickUp::CommandPickUp(Furniture* f, bool takeNotDrop) : m_f(f), m_takeNot
 
 bool CommandPickUp::Do()
 {
-std::cout << "Pick up command!\n";
   // TODO This is special, the server must determine if OK - no other pick up is happening.
   // I.e. it's not just a key/val pair, needs special case code.
 
@@ -272,7 +286,6 @@ void Furniture::SetMenu(GuiMenu* menu)
   }
   else if (m_pickupId == GetLocalPlayerId())
   {
-std::cout << "Set menu: should be Put down\n";
     menu->AddChild(new GuiMenuItem("Put down", new CommandPickUp(this, false)));
   }
 }
@@ -280,8 +293,6 @@ std::cout << "Set menu: should be Put down\n";
 void Furniture::OnPlayerCollision(Player* player)
 {
   // We might get pushed away from player, or player could move back -- depends on our "mass".
-
-//std::cout << "Guhhhh!!! Collide with furniture!! player: " << player->GetId() << " furniture: " << GetId() << "\n";
 }
 
 AABB* Furniture::GetAABB()

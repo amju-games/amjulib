@@ -17,6 +17,7 @@
 
 //#define OU_DEBUG
 //#define YES_USE_CACHE
+//#define POS_DEBUG
 
 namespace Amju
 {
@@ -260,12 +261,9 @@ void ObjectUpdater::Update()
 
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_STATE_UPDATES);
     url += "&time=" + TimestampToString(m_timestampUpdate); 
-//std::cout << "URL: " << url << "\n";
   
     TheVe1ReqManager::Instance()->AddReq(new GetStateUpdatesReq(url));
   }
-
-//std::cout << "Updating position/locations: " << m_posMap.size() << " elements in map.\n";
 
   for (PosMap::iterator it = m_posMap.begin(); it != m_posMap.end();   )
   {
@@ -278,7 +276,9 @@ void ObjectUpdater::Update()
       const Vec3f& pos = it->second.pos;
       int location = it->second.location;
 
+#ifdef POS_DEBUG
 std::cout << "Object Updater: updating object " << id << " to pos: " << pos << " loc: " << location << "\n";
+#endif
 
       Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
       if (ve1Obj)
@@ -290,17 +290,20 @@ std::cout << "Object Updater: updating object " << id << " to pos: " << pos << "
         if (ve1Obj->GetId() == GetLocalPlayerId() && vloc != -1)
         {
           // Ignore all pos updates for local player ???!?
-std::cout << "## This is update for local player.  We are here: " << vloc << " and update is for location " << location << "\n";
         }
         else
         if (location == vloc)
         {
+#ifdef POS_DEBUG
 std::cout << "Moving object " << ve1Obj->GetId() << ", within same location " << location << "\n";
+#endif
           ve1Obj->MoveTo(pos);
         }
         else
         {
+#ifdef POS_DEBUG
 std::cout << "Moving object " << ve1Obj->GetId() << " to NEW location " << location << "\n";
+#endif
 
           // TODO We want other players who leave the current location to go to the last place in the
           //  current location before disappearing - so they will appear to go through a portal, not
@@ -452,7 +455,7 @@ private:
   Vec3f m_requestedPos;
 };
 
-static const int MAX_POS_UPDATE_REQS = 10; // for mad clicking -- do we need even more ???
+static const int MAX_POS_UPDATE_REQS = 1; // for mad clicking 
 
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {

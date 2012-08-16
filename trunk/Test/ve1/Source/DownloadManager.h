@@ -9,8 +9,7 @@ namespace Amju
 class DownloadManager
 {
 public:
-  // If we have too many requests, GetFile() will fail, and you should retry.
-  static const int MAX_CONCURRENT_DOWNLOADS = 16;  
+  DownloadManager();
 
   bool GetFile(const std::string& filename);
 
@@ -29,9 +28,12 @@ public:
   void TrashMap();
 
 private:
-
   typedef std::map<std::string, State> FileMap;
   FileMap m_map;
+
+protected:
+  // "const", but loaded from a file
+  int MAX_CONCURRENT_DOWNLOADS;
 };
 }
 

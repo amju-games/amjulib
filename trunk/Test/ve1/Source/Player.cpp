@@ -336,8 +336,6 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
 
 void Player::SetArrowVis(bool visible)
 {
-//std::cout << "Setting arrow vis to " << (visible ? "true" : "false") << "\n";
-
   m_arrow->SetVisible(visible);
 }
 

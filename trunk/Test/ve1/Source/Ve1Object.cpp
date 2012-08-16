@@ -23,6 +23,8 @@
 #include "ObjectUpdater.h"
 #include "ROConfig.h"
 
+//#define LOCATION_DEBUG
+
 namespace Amju
 {
 static const float BOUNCE_VEL = -50.0f;
@@ -114,7 +116,10 @@ void Ve1Object::SetIsColliding(GameObject* collidingObject)
   HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
   if (h)
   {
-std::cout << "Shadow: adding collision mesh for " << *collidingObject << "\n";
+
+////// TODO: fix how shadows and multiple collision meshes work. 
+////// 
+//////std::cout << "Shadow: adding collision mesh for " << *collidingObject << "\n";
 
     m_shadow->AddCollisionMesh(h->GetCollisionMesh());
   }
@@ -372,7 +377,7 @@ void Ve1Object::SetSelected(bool selected)
 
 int Ve1Object::GetLocation() const
 {
-#ifdef _DEBUG
+#ifdef LOCATION_DEBUG
   if (m_location == -1)
   {
     std::cout << "Warning, object " << GetId() << " has location -1.\n"; 
@@ -386,7 +391,9 @@ int Ve1Object::GetLocation() const
 
 void Ve1Object::SetLocation(int newLocation)
 {
+#ifdef LOCATION_DEBUG
 std::cout << "Setting location for " << m_id << " (" << GetTypeName() << "): " << newLocation << " (old: " << m_location << ")...\n";
+#endif
 
   // Remove from game & scene graph etc if not in same location as local player
   // BUT object could also Enter the local player location!
@@ -437,7 +444,6 @@ void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
 
   if (key == "hidden")
   {
-std::cout << "Setting hidden flag for " << *this << " to: " << val << "\n";
     m_hidden = (val == "y");
   }
   else if (key == HEADING_KEY) 

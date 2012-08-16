@@ -23,7 +23,7 @@
 #include "Useful.h"
 
 //#define XML_DEBUG
-#define ASSET_DEBUG
+//#define ASSET_DEBUG
 //#define OBJECT_CHECK_DEBUG
 
 // Cache is a good idea but seems to be causing a lot of probs when changing version
@@ -475,7 +475,9 @@ void ObjectManager::Update()
       const std::string& filename = *it;
       if (IsLocal(filename))
       {
+#ifdef FILEQ_DEBUG
 std::cout << "FILE Q: already local: " << filename << "\n";
+#endif
 
         // Remove this filename, we have successfully downloaded it 
 #ifdef WIN32
@@ -487,14 +489,13 @@ std::cout << "FILE Q: already local: " << filename << "\n";
       }
       else
       {
-std::cout << "FILE Q: trying to download file: " << *it << "\n";
-
         GetFile(*it); // really call GetFile()
         ++it;
-		if (!FileExists(File::GetRoot() + filename))
-		{
+	if (!FileExists(File::GetRoot() + filename))
+	{
+std::cout << "FILE Q: really trying to download file: " << *it << "\n";
           i++; // inc count of requests
-		}
+	}
       }
     }
 
@@ -606,8 +607,11 @@ void ObjectManager::OnObjectChangeLocation(int objId)
   {
     if (v->GetLocation() == m_location)
     {
-      AddGameObjectToGame(go); ////TheGame::Instance()->AddGameObject(go);
+      AddGameObjectToGame(go); 
+
+#ifdef LOCATION_DEBUG
 std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() << ") to our location (" << m_location << ")\n"; 
+#endif
 
       if (GetGameMode() == AMJU_MODE_EDIT)
       {
@@ -618,7 +622,10 @@ std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() <<
     }
     else
     {
+#ifdef LOCATION_DEBUG
 std::cout << "Game object " << objId << " changed location but is not in our location (" << m_location << ")\n"; 
+#endif
+
       TheGame::Instance()->EraseGameObject(objId);
       v->OnLocationExit();
     }
@@ -631,8 +638,6 @@ std::cout << "Game object " << objId << " changed location but is not in our loc
 
 void ObjectManager::SetLocalPlayerLocation(int newLocation)
 {
-std::cout << "#¢#¢#¢ In ObjectManager::SetLocalPlayerLocation...\n";
-
   if (m_location == newLocation)
   {
 std::cout << "Er, setting location to current value!\n";
