@@ -424,7 +424,11 @@ std::cout << "Setting location for " << m_id << " (" << GetTypeName() << "): " <
 void Ve1Object::MoveTo(const Vec3f& pos)
 {
   // Default behaviour: instantly change position
-  SetPos(pos);
+  // BUT if selected, we are moving it in edit mode, so ignore where the server thinks we are
+  if (!m_isSelected)
+  {
+    SetPos(pos);
+  }
 }
 
 void Ve1Object::SetKeyVal(const std::string& key, const std::string& val)
