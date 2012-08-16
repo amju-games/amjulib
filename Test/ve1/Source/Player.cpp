@@ -1,7 +1,6 @@
 #include "Player.h"
 #include <Game.h>
 #include <AmjuGL.h>
-//#include <Teapot.h>
 #include "Ve1SceneGraph.h"
 #include <iostream>
 #include "Ve1Character.h"
