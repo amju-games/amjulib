@@ -28,6 +28,7 @@ Added to repository
 
 #include <string>
 #include <vector>
+#include <curl/curl.h>
 
 namespace Amju
 {
@@ -60,12 +61,19 @@ class HttpClient
 public:
   enum HttpMethod { GET, POST };
 
+  HttpClient();
+  ~HttpClient();
+
   // NB This url is NOT formatted i.e. characters changed to %<hex number>
   // Do this yourself if required, using UrlUtils functions.
   bool Get(const std::string& url, HttpMethod m, HttpResult* result);
 
   static void SetProxy(const std::string& proxyName, int port, const std::string& user, const std::string& pw);
+
+protected:
+  CURL* m_curl; 
 };
+
 }
 
 #endif

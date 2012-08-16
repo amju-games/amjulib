@@ -7,7 +7,6 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <iostream>
 #include <stdio.h>
 #include <string>
-#include <curl/curl.h>
 #include "HttpClient.h"
 #include <UrlUtils.h>
 #include <StringUtils.h>
@@ -76,6 +75,16 @@ static int s_proxyPort = -1;
 static std::string s_proxyUser;
 static std::string s_proxyPw;
 
+HttpClient::HttpClient()
+{
+  m_curl = curl_easy_init();
+}
+
+HttpClient::~HttpClient()
+{
+  curl_easy_cleanup(m_curl);
+}
+
 bool HttpClient::Get(
   const std::string& url, 
   HttpClient::HttpMethod m,
@@ -96,31 +105,30 @@ std::cout << "Port: " << port << "\n";
 #endif
 
   bool ok = true;
-  CURL* curl = curl_easy_init();
-  if(curl) 
+  if (m_curl) 
   {
     std::string strippedurl; // don't let these go out of scope before we perform req!
     std::string data;  // (**This is bullshit**, I thought the strings were supposed to be copied)
 
-    curl_easy_setopt(curl, CURLOPT_HEADER, 1);  // we DO want http header
+    curl_easy_setopt(m_curl, CURLOPT_HEADER, 1);  // we DO want http header
     if (m == HttpClient::POST)
     {
       strippedurl = StripDataFromUrl(url);
       data = GetDataFromUrl(url); 
 
 #ifdef _DEBUG
-      curl_easy_setopt(curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
+      curl_easy_setopt(m_curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
 #endif
 
-      curl_easy_setopt(curl, CURLOPT_URL, strippedurl.c_str());
-      curl_easy_setopt(curl, CURLOPT_POST, 1);
+      curl_easy_setopt(m_curl, CURLOPT_URL, strippedurl.c_str());
+      curl_easy_setopt(m_curl, CURLOPT_POST, 1);
 
-      curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, data.size());
-      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str());
+      curl_easy_setopt(m_curl, CURLOPT_POSTFIELDSIZE, data.size());
+      curl_easy_setopt(m_curl, CURLOPT_POSTFIELDS, data.c_str());
     }
     else
     {
-      curl_easy_setopt(curl, CURLOPT_URL, url.c_str()); 
+      curl_easy_setopt(m_curl, CURLOPT_URL, url.c_str()); 
     }
 
     // For proxy:
@@ -130,7 +138,7 @@ std::cout << "Port: " << port << "\n";
     {
       proxy += ":" + ToString(s_proxyPort);
     }
-    curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+    curl_easy_setopt(m_curl, CURLOPT_PROXY, proxy.c_str());
     if (!s_proxyUser.empty())
     {
       user = s_proxyUser;
@@ -138,26 +146,24 @@ std::cout << "Port: " << port << "\n";
       {
         user += ":" + s_proxyPw;
       }
-      curl_easy_setopt(curl, CURLOPT_PROXYUSERPWD, user.c_str());
+      curl_easy_setopt(m_curl, CURLOPT_PROXYUSERPWD, user.c_str());
     }
 
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback_func);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &(result->m_data)); // Use HttpClient* ?
+    curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, callback_func);
+    curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, &(result->m_data)); // Use HttpClient* ?
 
     // Perform the request, res will get the return code 
-    CURLcode res = curl_easy_perform(curl);
+    CURLcode res = curl_easy_perform(m_curl);
     if(res != CURLE_OK)
     {
       ok = false;
       result->SetErrorString(curl_easy_strerror(res));
     }
-
-    curl_easy_cleanup(curl);
   }
   else
   {
     ok = false;
-std::cout << "UTTERLY FAILED TO GET " << url  << "\n";
+std::cout << "UTTERLY FAILED TO GET " << url  << " No CURL object.\n";
     Assert(0); // ?
   }
   result->SetSuccess(ok);
