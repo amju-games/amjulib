@@ -4,6 +4,7 @@
 #include "Ve1Req.h"
 #include <Singleton.h>
 #include <RCPtr.h>
+#include "SerialReqManager.h"
 
 namespace Amju
 {
@@ -41,7 +42,7 @@ enum Task
   SEND_TEST_RESULT,
 };
 
-class Ve1ReqManager : public OnlineReqManager
+class Ve1ReqManager : public SerialReqManager
 {
 public:
   Ve1ReqManager();
