@@ -8,7 +8,7 @@
 #include <Matrix.h>
 
 #ifdef _DEBUG
-#define OBJ_DEBUG
+//#define OBJ_DEBUG
 #endif
 
 namespace Amju
