@@ -56,7 +56,7 @@ Added HttpReq to repository
 // need to lock the data.
 // The correct way to access the data is to first check IsFinished(),
 // and only access the other data if this returns true.
-#define HTTP_REQ_USE_MUTEX
+//#define HTTP_REQ_USE_MUTEX
 
 namespace Amju
 {

@@ -330,6 +330,9 @@
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\SerialReqManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -636,6 +639,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\ROConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\SerialReqManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

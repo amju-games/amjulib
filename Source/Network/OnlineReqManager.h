@@ -29,7 +29,7 @@ Added OnlineReqManager to repository
 #ifndef ONLINE_REQ_MANAGER_H_INCLUDED
 #define ONLINE_REQ_MANAGER_H_INCLUDED
 
-#include <vector>
+#include <deque>
 #include "HttpReq.h"
 
 namespace Amju
@@ -82,7 +82,7 @@ public:
   int CountAllReqs() const;
 
 private:
-  typedef std::vector<SharedPtr<OnlineReq> > OnlineReqs;
+  typedef std::deque<SharedPtr<OnlineReq> > OnlineReqs;
   OnlineReqs m_reqs;
 };
 }
