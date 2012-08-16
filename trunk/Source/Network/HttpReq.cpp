@@ -90,6 +90,11 @@ void HttpReq::Work()
 {
   HttpClient hc;
 
+  DoRequest(hc);
+}
+
+void HttpReq::DoRequest(HttpClient& hc)
+{
   HttpResult res;
   hc.Get(m_url, m_method, &m_httpResult);
 

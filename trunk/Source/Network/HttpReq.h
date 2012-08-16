@@ -37,6 +37,9 @@ public:
   // Create HttpClient, get response
   virtual void Work();
 
+  // Use an existing HttpClient, do the request (url)
+  void DoRequest(HttpClient& hc);
+
   // Call this to find out if the request has finished yet.
   // THREAD SAFE
   bool IsFinished();
