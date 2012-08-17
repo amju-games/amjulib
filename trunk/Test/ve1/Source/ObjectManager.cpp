@@ -493,7 +493,7 @@ std::cout << "FILE Q: already local: " << filename << "\n";
         ++it;
 	if (!FileExists(File::GetRoot() + filename))
 	{
-std::cout << "FILE Q: really trying to download file: " << *it << "\n";
+std::cout << "FILE Q: really trying to download file: " << filename << "\n";
           i++; // inc count of requests
 	}
       }
