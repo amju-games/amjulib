@@ -30,8 +30,8 @@ void EventPollerImpl::QueueEvent(Event* event)
 }
 
 static KeyEvent lastKeyEvent;
-static const float AUTO_REPEAT_START_DELAY = 0.5f; // TODO Configurable
-static const float AUTO_REPEAT_RPT_DELAY = 0.3f;
+static const float AUTO_REPEAT_START_DELAY = 0.5f; // TODO CONFIG 
+static const float AUTO_REPEAT_RPT_DELAY = 0.1f;
 
 static float rptTimer = 0;
 
@@ -40,14 +40,14 @@ static AutoRepeatState arState = AMJU_AR_NONE;
 
 void HandleKey(KeyEvent* ke)
 {
-  // TODO distinguish between "real" and auto-repeat key events
   if (ke->keyDown)
   {
-std::cout << "Got key down event!\n";
-
-    lastKeyEvent = *ke;
-    arState = AMJU_AR_START_WAIT;
-    rptTimer = AUTO_REPEAT_START_DELAY;
+    if (arState == AMJU_AR_NONE)
+    {
+      lastKeyEvent = *ke;
+      arState = AMJU_AR_START_WAIT;
+      rptTimer = AUTO_REPEAT_START_DELAY;
+    }
   }
   else
   {
