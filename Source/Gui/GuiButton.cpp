@@ -33,6 +33,11 @@ GuiButton::~GuiButton()
 
 bool GuiButton::IsEnabled() const
 {
+  if (!m_onPressedDown && !m_pCommand && !m_commandFunc)
+  {
+    return false;
+  }
+
   return m_isEnabled;
 }
 
