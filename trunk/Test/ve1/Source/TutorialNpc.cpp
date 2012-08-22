@@ -90,9 +90,9 @@ void TutorialNpc::Update()
 
 bool TutorialNpc::Load(File* f)
 {
-  Ve1Character* node = new Ve1Character(this);
-
-  m_sceneNode = node;
+  // TODO Can't yet
+  //Ve1Character* node = new Ve1Character(this);
+  //m_sceneNode = node;
 
   if (!m_shadow->Load(f))
   {

@@ -156,6 +156,9 @@ std::cout << "Failed to load GUI bg image!\n";
     Assert(0);
   }
 
+  // Add a character, so it looks like she is talking to the player.
+  // This was confusing for participant, so drop this idea.
+/*
   Ve1Character* ch = new Ve1Character(0);
   // TODO CONFIG - these depend on the contents of charlist.txt!
   TheAvatarManager::Instance()->SetAvatar(4, ch);
@@ -170,6 +173,7 @@ std::cout << "Failed to load GUI bg image!\n";
 
   ClearGuiSceneGraph();
   GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(ch);
+*/
 
   m_gui = LoadGui("gui-cogtestmenu.txt");
   Assert(m_gui);

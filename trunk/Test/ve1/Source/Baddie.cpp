@@ -2,6 +2,7 @@
 #include <File.h>
 #include <Texture.h>
 #include "Baddie.h"
+#include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
 #include "LocalPlayer.h"
@@ -48,9 +49,8 @@ void Baddie::Update()
 bool Baddie::Load(File* f)
 {
   // Create Scene Node, but don't attach to SceneGraph until needed
-  Ve1Character* node = new Ve1Character(this);
-
-  m_sceneNode = node;
+  ////Ve1Character* node = TheAvatarManager::Instance()->Create("baddie"); //new Ve1Character(this);
+  ////m_sceneNode = node;
 
   if (!m_shadow->Load(f))
   {

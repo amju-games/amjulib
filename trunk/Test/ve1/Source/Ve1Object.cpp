@@ -299,7 +299,9 @@ void Ve1Object::SetEditMenu(GuiMenu* menu)
 
 void Ve1Object::SetSceneNode(SceneNode* n)
 {
+  // Remove any existing node from scene graph
   Ve1Object::OnLocationExit();
+
   m_sceneNode = n;
 }
 

@@ -13,6 +13,12 @@ public:
   virtual void Draw();
   virtual void Update();
 
+  virtual void SetFromCharacterName(const std::string& characterName);
+
+protected:
+
+  // TODO don't call these, which are special case - specialise behaviour in 
+  //  SetFromCharacterName()
   bool LoadTextures(const std::string& texture1, const std::string& texture2);
 
   void SetTex(Texture* t1, Texture* t2);

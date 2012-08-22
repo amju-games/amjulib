@@ -55,25 +55,25 @@ GSAvatarMod::GSAvatarMod()
 void GSAvatarMod::OnNextColour()
 {
   m_currentTex++;
-  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
+  //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 void GSAvatarMod::OnPrevColour()
 {
   m_currentTex--;
-  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
+  //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 void GSAvatarMod::OnNextType()
 {
   m_currentChar++;
-  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+  //TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
 }
 
 void GSAvatarMod::OnPrevType()
 {
   m_currentChar--;
-  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+  //TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
 }
 
 void GSAvatarMod::OnCancel()
@@ -154,9 +154,13 @@ void GSAvatarMod::OnActive()
   GetGuiSceneGraph()->Clear();
   GetGuiSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
-  m_char = new Ve1Character(0);
+  static AvatarManager* am = TheAvatarManager::Instance();
+
+  m_char = am->Create("baddie"); // TODO  //new Ve1Character(0);
   GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char); 
 
+  // TODO
+  // ?? Setting locally, wtf, must set key/val on server
   PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
   if (pi->PIGetBool(PI_KEY("has set up")))
   {
@@ -165,8 +169,8 @@ void GSAvatarMod::OnActive()
     m_currentTex = pi->PIGetInt(PI_KEY("tex"));
   }
 
-  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
-  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
+//  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+//  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 bool GSAvatarMod::OnCursorEvent(const CursorEvent& ce)

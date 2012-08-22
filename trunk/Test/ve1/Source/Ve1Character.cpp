@@ -8,6 +8,9 @@ namespace Amju
 {
 void Ve1Character::Draw()
 {
+  // Subclasses override. Use before/after to show selected - TODO
+
+/*
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
     PushColour();
@@ -29,17 +32,20 @@ void Ve1Character::Draw()
   }
 
   BlinkCharacter::Draw();
+*/
 }
 
 bool Ve1Character::Load(File* f)
 {
+/*
+  // This is a character name which avatar manager uses to create scene node object and load data
+  // ????
   std::string meshName;
   if (!f->GetDataLine(&meshName))
   {
     f->ReportError("No mesh name for character");
     return false;
   }
-
   // Load mesh and textures from file
   if (!LoadMd2(meshName))
   {
@@ -57,6 +63,7 @@ bool Ve1Character::Load(File* f)
   {
     return false;
   }
+*/
 
   return true;
 }

@@ -1,26 +1,33 @@
 #ifndef ANIMATED_H_INCLUDED
 #define ANIMATED_H_INCLUDED
 
-#include "SceneNode.h"
+#include "Ve1Character.h"
 #include "Md2Model.h"
 
 namespace Amju
 {
-class Animated : public SceneNode
+// TODO Rename to Md2Node etc
+
+class Animated : public Ve1Character
 {
 public:
   Animated();
 
   virtual void Draw();
   virtual void Update();
-  void SetAnim(int animId);
-  void SetAnim(const std::string& animName);
 
+  virtual void SetFromCharacterName(const std::string& characterName);
+
+  virtual void SetAnim(const std::string& animName);
+
+  // TODO Why do we need these ?
   bool LoadMd2(const std::string& md2name);
   void SetMd2(Md2Model* model);
   Md2Model* GetMd2();
 
 protected:
+  void SetAnim(int animId);
+
   // No texture data here - we don't know how many textures 
 
   PMd2Model m_pModel;
