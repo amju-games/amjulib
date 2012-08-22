@@ -17,7 +17,13 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void OnOk();
 };
+
 typedef Singleton<GSProxy> TheGSProxy;
+
+// Set HttpClient proxy settings from config file
+void SetProxy();
+
 } // namespace
 #endif
