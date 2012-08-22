@@ -1,13 +1,16 @@
-#include "GSCopyAssets.h"
 #include <AmjuGL.h>
 #include <Directory.h>
 #include <Game.h>
 #include <AmjuTime.h>
+#include <Pause.h>
+#include "GSCopyAssets.h"
 #include "GSTitle.h"
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS
 #endif
+
+#define FILECOPY_DEBUG
 
 namespace Amju
 {
@@ -59,20 +62,27 @@ bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, c
 
   if (doCopy)
   {
-//std::cout << "File: " << filename << " destTime: " << destTime.ToString() << " srcTime: " << srcTime.ToString() << "\n";
+#ifdef FILECOPY_DEBUG
 std::cout << "Copying file " << filename << " as dest is older than src, or doesn't exist.\n";
+#endif
+
     if (FileCopy(srcDir, destDir, filename))
     {
+#ifdef FILECOPY_DEBUG
       std::cout << "..FileCopy was OK!\n";
+#endif
     }
     else
     {
-      std::cout << "..FileCopy FAILED!\n";
+      // Always show for diagnosing crashes etc
+      std::cout << "FileCopy FAILED: srcDir: " << srcDir << " destDir: " << destDir << " file: " << filename << "\n";
     }
   }
   else
   {
-//std::cout << "No need to copy file " << filename << ", it's up to date.\n";
+#ifdef FILECOPY_DEBUG2
+std::cout << "No need to copy file " << filename << ", it's up to date.\n";
+#endif
   }
 
 /*
@@ -116,16 +126,52 @@ bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
   return true;
 }
 
+void RecursiveCopy(const std::string& srcDir, const std::string& destDir)
+{
+std::cout << "Recursively copying " << srcDir << " to " << destDir << "\n";
+
+std::cout << "Making dir " << destDir << "\n";
+  MkDir(destDir);
+
+  // List contents of src dir
+  DirEnts des;
+  Dir(srcDir, &des, false);
+ 
+  // Check all files, copying if necessary.
+  for (unsigned int i = 0; i < des.size(); i++)
+  {
+    DirEnt& de = des[i];
+
+std::cout << "In " << srcDir << ": " << " found: " << de.m_name << (de.m_isDir ? " (DIR)" : "") << "\n";
+
+    if (de.m_name[0] == '.')
+    {
+std::cout << "...continuing\n";
+//PAUSE;
+      continue;
+    }
+
+    if (de.m_isDir)
+    {
+std::cout << "So should recusively copy...\n";
+      std::string dir = "/" + de.m_name + "/";
+      RecursiveCopy(srcDir + dir, destDir + dir);
+//PAUSE;
+    }
+    else
+    {
+      CopyFileIfMissing(de.m_name, srcDir, destDir);
+//PAUSE;
+    }
+  }
+}
+
 GSCopyAssets::GSCopyAssets()
 {
 }
 
 void GSCopyAssets::Update()
 {
-  //GSGui::Update();
-  // Do we need this ?
-  // GSBase::Update();
-
   static bool done = false;
   if (!done)
   {
@@ -138,12 +184,16 @@ std::cout << "Copying files to Save Dir as required...\n";
 
 std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
+    RecursiveCopy(dataDir, saveDir); // because characters are in subdirs
+
+/*
     MkDir(saveDir);
     // Create subdirs for font2d and font3d - do this before copying, to avoid problem.
     // TODO Fix Dir() so it distinguishes between files and dirs!!
     MkDir(saveDir + "/font2d");
     MkDir(saveDir + "/font3d");
     MkDir(saveDir + "/Sound");
+    MkDir(saveDir + "/characters");
 
     DoCopyingForDir(dataDir, saveDir);
 
@@ -151,6 +201,7 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
     DoCopyingForDir(dataDir + "/font2d/", saveDir + "/font2d/");
     DoCopyingForDir(dataDir + "/font3d/", saveDir + "/font3d/");
     DoCopyingForDir(dataDir + "/Sound/", saveDir + "/Sound/");
+*/
 
     // All copied - go to next state 
     // TODO Once logo displayed etc
