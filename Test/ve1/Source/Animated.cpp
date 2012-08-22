@@ -18,11 +18,21 @@ Animated::Animated()
   m_anim = 0;
 }
 
+void Animated::SetFromCharacterName(const std::string& chName)
+{
+  // Characters must be consistently named: chName.md2
+  std::string file = "characters/" + chName + "/" + chName + ".md2";
+
+std::cout << "Loading character MD2: " << file << "\n";
+
+  LoadMd2(file);
+}
+
 void Animated::SetAnim(const std::string& animName)
 {
   if (!m_pModel)
   {
-std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
+//std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
     return;
   }
 
@@ -34,7 +44,7 @@ void Animated::SetAnim(int anim)
 {
   if (!m_pModel)
   {
-std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
+//std::cout << "Warning: Animated: anim set but MD2 model not set yet\n";
     return;
   }
 
@@ -94,7 +104,7 @@ void Animated::Draw()
 
   if (!m_pModel)
   {
-std::cout << "Warning: Animated: can't draw, no MD2 model set yet.\n";
+//std::cout << "Warning: Animated: can't draw, no MD2 model set yet.\n";
     return;
   }
 
@@ -121,7 +131,7 @@ void Animated::Update()
 {
   if (!m_pModel)
   {
-std::cout << "Warning: Animated: can't update, no MD2 model set yet.\n";
+//std::cout << "Warning: Animated: can't update, no MD2 model set yet.\n";
     return;
   }
 

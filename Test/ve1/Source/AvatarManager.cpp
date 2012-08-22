@@ -1,18 +1,50 @@
-#include "AvatarManager.h"
 #include <File.h>
 #include <StringUtils.h>
 #include <ReportError.h>
 #include <ResourceManager.h>
+#include "AvatarManager.h"
+#include "BlinkCharacter.h" // TODO TEMP TEST
 
 namespace Amju
 {
+Ve1Character* AvatarManager::Create(const std::string& characterName)
+{
+  // TODO TEMP TEST
+  // use character name to look up create func and data directory, options, etc.
+
+  Ve1Character* ch = 0;
+  CharMap::iterator it = m_chars.find(characterName);
+  if (it == m_chars.end())
+  {
+    std::cout << "Unexpected character name: " << characterName << "\n";
+    // Default
+    ch = new BlinkCharacter;
+  }
+  else
+  {
+    std::string chType = it->second;
+    // TODO use factory using type
+//  if (chType == "md3")
+//  {
+//  }
+  
+    ch = new BlinkCharacter;
+  }
+
+  Assert(ch);
+  ch->SetFromCharacterName(characterName);
+
+  return ch;
+}
+
+
 bool AvatarManager::Load()
 {
   // Load character types - NB we want this to be downloadable.
   // Add a new object with asset list to server, which this client will then download...?
 
-  m_chars.clear();
-  m_texPairs.clear();
+////  m_chars.clear();
+////  m_texPairs.clear();
 
   File f;
   if (!f.OpenRead("charlist.txt"))
@@ -28,32 +60,47 @@ bool AvatarManager::Load()
     return false;
   }
 
-  m_chars.reserve(numChars);
+////  m_chars.reserve(numChars);
 
   for (int i = 0; i < numChars; i++)
   {
-    std::string s;
-    if (!f.GetDataLine(&s))
+    std::string chName;
+    if (!f.GetDataLine(&chName))
     {
-      f.ReportError("Expected MD2 filename");
+      f.ReportError("Expected character name");
       return false;
     }
 
+    // Read type
+    std::string chType;
+    if (!f.GetDataLine(&chType))
+    {
+      f.ReportError("Expected character type");
+      return false;
+    }
+
+    // TODO
+    //ChInfo chInfo;
+    //chInfo.type = chType;
+
+    m_chars[chName] = chType;
+
+/*
     // Surely MD2 Model should be managed by Resource manager???!!!
     Md2Model* ch = (Md2Model*)TheResourceManager::Instance()->GetRes(s);
     // Instead of:
-    /*
     Md2Model* ch = new Md2Model;
     if (!ch->Load(s))
     {
       f.ReportError("Failed to load character " + ToString(i));
       return false;
     }
-    */
-
     m_chars.push_back(ch);
+*/
+
   }
 
+/*
   int numTex = 0;
   if (!f.GetInteger(&numTex))
   {
@@ -80,10 +127,12 @@ bool AvatarManager::Load()
     } 
     m_texPairs.push_back(std::make_pair(t1, t2));
   }
+*/
 
   return true;
 }
 
+/*
 void AvatarManager::SetAvatar(int type, Ve1Character* ch)
 {
   Assert(!m_chars.empty()); 
@@ -103,6 +152,7 @@ void AvatarManager::SetTexture(int texNum, Ve1Character* ch)
 
   ch->SetTex(m_texPairs[texNum].first, m_texPairs[texNum].second);
 }
+*/
 
 }
 

@@ -29,10 +29,11 @@ static const float ARROW_YSIZE = 30.0f;
 
 static const char* STAMINA_KEY = "stamina";
 
+/*
 class PlayerSceneNode : public Ve1Character
 {
 public:
-  PlayerSceneNode(Player* p) : Ve1Character(p), m_player(p)
+  PlayerSceneNode(Player* p) : m_player(p)
   {
   }
 
@@ -49,7 +50,6 @@ public:
     }
   }
 
-/*
   // TODO This doesn't work - SceneGraph is broken, sigh.
 
   virtual void BeforeDraw()
@@ -70,7 +70,6 @@ public:
       PopColour();
     }
   }
-*/
 
   virtual void Draw()
   {
@@ -116,6 +115,7 @@ public:
 protected:
   RCPtr<Player> m_player;
 };
+*/
 
   // TODO Name tag scene node
 class PlayerNameNode : public SceneNode
@@ -233,8 +233,11 @@ bool Player::IsLoggedIn() const
 bool Player::Load(File* f)
 {
   // Create Scene Node, but don't attach to SceneGraph until needed  
-  PlayerSceneNode* psn = new PlayerSceneNode(this);
-  m_sceneNode = psn;
+
+  // TODO We can't until we call SetFromCharacterName in SetKeyVal
+
+  //PlayerSceneNode* psn = new PlayerSceneNode(this);
+  //m_sceneNode = psn;
 
   if (!m_shadow->Load(f))
   {

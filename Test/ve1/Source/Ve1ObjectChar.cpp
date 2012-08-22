@@ -22,16 +22,18 @@ static const float BOUNCE_VEL = -50.0f;
 
 static const char* TYPE_KEY = "type";
 static const char* TEX_KEY = "tex";
+static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
 static const char* STAMINA_KEY = "stamina";
+
+static const char* DEFAULT_AVATAR = "bird1";
 
 Ve1ObjectChar::Ve1ObjectChar()
 {
   m_isMoving = false;
   m_recalcHeading = false;
 
-  SetKeyVal(TYPE_KEY, "0");
-  SetKeyVal(TEX_KEY, "0");
+  SetKeyVal(AVATAR_KEY, DEFAULT_AVATAR);
 
   // Default, should be set by server
   m_stamina = 3; // TODO CONFIG
@@ -40,6 +42,7 @@ Ve1ObjectChar::Ve1ObjectChar()
 void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
+/*
   if (key == TYPE_KEY)
   {
     int type = ToInt(val); // TODO overload Set to take an int
@@ -58,13 +61,21 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       TheAvatarManager::Instance()->SetTexture(texNum, vc);
     }
   }
-  else if (key == NAME_KEY)
+*/
+
+  if (key == NAME_KEY)
   {
     SetName(val);
   }
   else if (key == STAMINA_KEY)
   {
     m_stamina = ToInt(val); 
+  }
+  else if (key == AVATAR_KEY)
+  {
+    static AvatarManager* am = TheAvatarManager::Instance();
+    Ve1Character* node = am->Create(val);
+    SetSceneNode(node); 
   }
 }
 
@@ -169,7 +180,7 @@ void Ve1ObjectChar::Update()
     TurnToFaceDir();
 
     Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
-    if (vc && vc->GetMd2())
+    if (vc) //// && vc->GetMd2())
     {
       Vec3f v = m_vel;
       v.y = 0;

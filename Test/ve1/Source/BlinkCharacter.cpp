@@ -9,6 +9,21 @@ BlinkCharacter::BlinkCharacter()
   m_blinkTime = 0;
 }
 
+void BlinkCharacter::SetFromCharacterName(const std::string& chName)
+{
+  Animated::SetFromCharacterName(chName);
+  // Use a strict naming convention for the two texture files; otherwise read the names from another
+  //  well-named text file.
+
+  // TODO static subdir string
+  std::string tex1 = "characters/" + chName + "/" + chName + ".png";
+  std::string tex2 = "characters/" + chName + "/" + chName + "a.png";
+
+std::cout << "Loading textures for blink char: " << tex1 << "  and  " << tex2 << "\n";
+
+  LoadTextures(tex1, tex2);
+}
+
 void BlinkCharacter::SetTex(Texture* t1, Texture* t2)
 {
   Assert(t1);
