@@ -73,13 +73,16 @@ void GuiTextEdit::Draw()
 
   GuiText::Draw();
 
-  // Draw caret - TODO multi line 
-  PushColour();
-  AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
-  float startX = GetCombinedPos().x;
-  float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
-  PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
-  PopColour();
+  if (m_drawCaret && HasFocus())
+  {
+    // Draw caret - TODO multi line 
+    PushColour();
+    AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
+    float startX = GetCombinedPos().x;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
+    PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
+    PopColour();
+  }
 }
 
 bool GuiTextEdit::Load(File* f)
@@ -281,10 +284,10 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
 
   // Buttons can generate key events, so this GuiTextEdit object may not have the focus (the button
   //  just clicked would have it). So the last GuiTextEdit to have the focus should accept this key.
-//  if (!HasFocus())
-//  {
-//    return false;
-//  }
+  if (!HasFocus())
+  {
+    return false;
+  }
 
   // Is this the current or most recent GuiTextEdit to have focus ?
   // TODO 

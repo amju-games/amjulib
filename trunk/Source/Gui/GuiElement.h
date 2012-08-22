@@ -69,7 +69,7 @@ public:
   // For elements containing text, say the text.
   virtual void TextToSpeech() {}
 
-private:
+protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
   /*
