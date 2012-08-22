@@ -11,6 +11,7 @@
 #include <SoundManager.h>
 #include <EventPoller.h>
 #include <GuiButton.h>
+#include "GSProxy.h"
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 #include "QuitHandler.h"
@@ -52,6 +53,8 @@ void StartUp()
 
   // Start with state that copies assets to Save Dir
   TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
+
+  SetProxy();
 }
 }
 
