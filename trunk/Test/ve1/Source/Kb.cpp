@@ -15,18 +15,18 @@ Kb::Kb()
   SetEnabled(false); 
 }
 
+bool Kb::Load(const std::string& guiKbFilename)
+{
+  // Remove old listener ?
+  Deactivate();
+
+  m_kb = new GuiKeyboard;
+  return m_kb->OpenAndLoad(guiKbFilename); //"gui-kb-2.txt");
+}
+
 void Kb::SetEnabled(bool b)
 {
   m_enabled = b;
-  if (b && !m_kb)
-  {
-    m_kb = new GuiKeyboard;
-    m_kb->OpenAndLoad("gui-kb-2.txt");
-    Vec2f pos = m_kb->GetLocalPos();
-    pos.y = -1.0f;
-    m_kb->SetLocalPos(pos);
-    m_mode = KB_HIDDEN;
-  }
 }
 
 bool Kb::IsEnabled() const
@@ -99,27 +99,31 @@ void Kb::Activate()
     return;
   }
 
+  Assert(m_kb); // call Load first
+
+  Vec2f pos = m_kb->GetLocalPos();
+  pos.y = -1.0f;
+  m_kb->SetLocalPos(pos);
+ 
+
   m_mode = KB_SHOWING;
 
-  Vec2f pos = m_kb->GetLocalPos(); 
-  pos.y = -1;
-  m_kb->SetLocalPos(pos);
-
   TheEventPoller::Instance()->AddListener(m_kb);
-
 }
 
 void Kb::Deactivate()
 {
+/*
   if (!m_enabled)
   {
     return;
   }
+*/
 
   m_mode = KB_HIDING;
   static EventPoller* e = TheEventPoller::Instance();
 
-  if (e->HasListener(m_kb))
+  if (m_kb && e->HasListener(m_kb))
   {
     e->RemoveListener(m_kb);
   }

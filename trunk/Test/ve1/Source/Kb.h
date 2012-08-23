@@ -21,6 +21,9 @@ public:
   void SetEnabled(bool);
   bool IsEnabled() const;
 
+  // Call to change page
+  bool Load(const std::string& guiKbFilename);
+
 private:
   RCPtr<GuiKeyboard> m_kb;
 
