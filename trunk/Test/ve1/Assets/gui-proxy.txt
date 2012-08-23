@@ -6,7 +6,7 @@ gui-comp
 // Name
 proxy-comp
 // Num children
-6
+11
 
 
 gui-button
@@ -17,6 +17,13 @@ gui-button-4.png
 use proxy
 arial, 1.0 
 
+
+gui-text
+label1
+-0.8, 0.1
+0.25, 0.1
+Proxy 
+arial, 0.8, fgcol=ffffff, bgcol=0000ff
 
 gui-text-edit
 proxy-hostname-text
@@ -29,6 +36,32 @@ proxy@example.com:1234
 // Font name, size
 arial, 1.0, bgcol=ffffff, fgcol=0000ff
 
+// Colon to show port is required 
+gui-text
+label2
+0.55, 0.1
+0.5, 0.1
+:
+arial, 0.9, fgcol=ffffff, bgcol=0000ff
+
+gui-text-edit
+proxy-port-text
+// pos (coords are -1..1)
+0.6, 0.1
+// size
+0.2, 0.1
+// Text
+12345
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text
+label3
+-0.8, -0.1
+0.25, 0.1
+User name
+arial, 0.8, fgcol=ffffff, bgcol=0000ff
+
 gui-text-edit
 proxy-username-text
 // pos (coords are -1..1)
@@ -39,6 +72,13 @@ proxy-username-text
 username
 // Font name, size
 arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text
+label1
+-0.8, -0.3
+0.25, 0.1
+Password
+arial, 0.8, fgcol=ffffff, bgcol=0000ff
 
 gui-text-edit
 proxy-pw-text
