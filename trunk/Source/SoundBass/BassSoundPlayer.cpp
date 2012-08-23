@@ -29,7 +29,7 @@ BassSoundPlayer::BassSoundPlayer()
 
   // check that BASS 2.3 was loaded
   unsigned long ver = BASS_GetVersion();
-#ifdef _DEBUG
+#ifdef BASS_DEBUG
 std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
 #endif
 
@@ -205,7 +205,7 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
 
   BASS_ChannelPlay(m_chan,FALSE);
 
-#ifdef _DEBUG
+#ifdef BASS_DEBUG
 std::cout << "BASS: new song: " << songFile.c_str() << " chan: " << m_chan << "\n";
 #endif
 
@@ -219,7 +219,7 @@ void BassSoundPlayer::StopSong()
     return;
   }
 
-#ifdef _DEBUG
+#ifdef BASS_DEBUG
 std::cout << "BASS: Stopping song on channel " << m_chan << "\n";
 #endif
   BASS_ChannelStop(m_chan); 
