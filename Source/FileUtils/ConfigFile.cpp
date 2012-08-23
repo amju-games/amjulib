@@ -49,7 +49,7 @@ bool ConfigFile::Save(const std::string& filename, bool useRoot)
     s += " ";
     s += it->second;
     f.Write(s);
-#ifdef _DEBUG
+#ifdef CONFIG_FILE_DEBUG
     std::cout << "Config file: saving: " << s.c_str() << std::endl;
 #endif
   }
