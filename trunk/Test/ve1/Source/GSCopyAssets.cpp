@@ -10,7 +10,7 @@
 //#define WIN32_TEST_COPY_ASSETS
 #endif
 
-#define FILECOPY_DEBUG
+//#define FILECOPY_DEBUG
 
 namespace Amju
 {
@@ -33,7 +33,7 @@ std::string GetDataDir()
   dataDir += "/../Resources/Data/";
 #endif
 
-std::cout << "GetDataDir returning: " << dataDir << "\n";
+//std::cout << "GetDataDir returning: " << dataDir << "\n";
 
   return dataDir;
 }
@@ -128,40 +128,46 @@ bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
 
 void RecursiveCopy(const std::string& srcDir, const std::string& destDir)
 {
+#ifdef FILECOPY_DEBUG
 std::cout << "Recursively copying " << srcDir << " to " << destDir << "\n";
-
 std::cout << "Making dir " << destDir << "\n";
+#endif
+
   MkDir(destDir);
 
   // List contents of src dir
   DirEnts des;
   Dir(srcDir, &des, false);
  
-  // Check all files, copying if necessary.
   for (unsigned int i = 0; i < des.size(); i++)
   {
     DirEnt& de = des[i];
 
+#ifdef FILECOPY_DEBUG
 std::cout << "In " << srcDir << ": " << " found: " << de.m_name << (de.m_isDir ? " (DIR)" : "") << "\n";
+#endif
 
-    if (de.m_name[0] == '.')
+    if (de.m_name[0] == '.') // name starts with a dot ? 
     {
-std::cout << "...continuing\n";
-//PAUSE;
+#ifdef FILECOPY_DEBUG
+std::cout << "...skipping this dir.\n";
+#endif
+
       continue;
     }
 
     if (de.m_isDir)
     {
+#ifdef FILECOPY_DEBUG
 std::cout << "So should recusively copy...\n";
+#endif
+
       std::string dir = "/" + de.m_name + "/";
       RecursiveCopy(srcDir + dir, destDir + dir);
-//PAUSE;
     }
     else
     {
       CopyFileIfMissing(de.m_name, srcDir, destDir);
-//PAUSE;
     }
   }
 }
@@ -186,23 +192,6 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
     RecursiveCopy(dataDir, saveDir); // because characters are in subdirs
 
-/*
-    MkDir(saveDir);
-    // Create subdirs for font2d and font3d - do this before copying, to avoid problem.
-    // TODO Fix Dir() so it distinguishes between files and dirs!!
-    MkDir(saveDir + "/font2d");
-    MkDir(saveDir + "/font3d");
-    MkDir(saveDir + "/Sound");
-    MkDir(saveDir + "/characters");
-
-    DoCopyingForDir(dataDir, saveDir);
-
-    // Copy assets from data dir to save dir for font2d and font3d.
-    DoCopyingForDir(dataDir + "/font2d/", saveDir + "/font2d/");
-    DoCopyingForDir(dataDir + "/font3d/", saveDir + "/font3d/");
-    DoCopyingForDir(dataDir + "/Sound/", saveDir + "/Sound/");
-*/
-
     // All copied - go to next state 
     // TODO Once logo displayed etc
     TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
@@ -211,13 +200,10 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
 void GSCopyAssets::Draw()
 {
-//  GSGui::Draw();
-
 }
 
 void GSCopyAssets::Draw2d()
 {
-//  GSGui::Draw2d();
 }
 
 void GSCopyAssets::OnActive()
