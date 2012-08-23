@@ -2,7 +2,16 @@
 // ver
 1
 // Num chars
-5
+2
+// Correspond to subdirs in characters/
+bird1
+md2blink
+
+lara
+md3
+
+
+
 pz-cat.md2
 pz-rabbit.md2
 pz-squirrel.md2
