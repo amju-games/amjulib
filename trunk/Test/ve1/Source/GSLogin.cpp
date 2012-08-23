@@ -103,6 +103,8 @@ void GSLogin::OnActive()
   static Kb* kb = TheKb::Instance();
   if (kb->IsEnabled())
   {
+    kb->Load("gui-kb-email-lower.txt"); // contains localised KB layout filename
+
     kb->Activate();
     // Set floor of this GUI
     Vec2f pos = m_gui->GetLocalPos();
