@@ -41,6 +41,8 @@ void Kb::Update()
     return;
   }
 
+  Assert(m_kb); // call Load first
+
   static const float vel = 10.0f;
   float ypos = -1 + m_kb->GetSize().y;
 
