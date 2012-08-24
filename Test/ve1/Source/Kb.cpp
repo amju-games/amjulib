@@ -17,11 +17,15 @@ Kb::Kb()
 
 bool Kb::Load(const std::string& guiKbFilename)
 {
+std::cout << "KB: Loading kb layout: " << guiKbFilename << "\n";
+
   // Remove old listener ?
   Deactivate();
 
+//std::cout << "KB: deactivated old layout.\n";
+
   m_kb = new GuiKeyboard;
-  return m_kb->OpenAndLoad(guiKbFilename); //"gui-kb-2.txt");
+  return m_kb->OpenAndLoad(guiKbFilename); 
 }
 
 void Kb::SetEnabled(bool b)
