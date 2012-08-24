@@ -296,6 +296,8 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   //  just clicked would have it). So the last GuiTextEdit to have the focus should accept this key.
   if (!HasFocus())
   {
+std::cout << "Key event ignored by " << m_name << " as does not have focus.\n";
+
     return false;
   }
 

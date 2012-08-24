@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-static GuiElement* focusElement = 0;
+static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
 
@@ -14,11 +14,28 @@ void GuiElement::SetHasFocus(bool f)
 {
   if (!IsVisible())
   {
+std::cout << "GUI: setting focus to " << m_name << " but not visible, so no effect.\n";
     return;
   }
 
   if (f)
   {
+#ifdef FOCUS_DEBUG
+std::cout << "GUI: setting focus to " << m_name;
+if (focusElement == this)
+{
+  std::cout << "(already had focus)\n";
+}
+else if (focusElement)
+{
+  std::cout << " (" << focusElement->m_name << " loses focus)\n";
+}
+else
+{
+  std::cout << " (no previous focus)\n";
+}
+#endif
+
     focusElement = this;
     OnGetFocus();
     if (m_onFocusFunc)
@@ -33,7 +50,26 @@ void GuiElement::SetHasFocus(bool f)
   }
   else
   {
-    focusElement = 0;
+#ifdef FOCUS_DEBUG
+std::cout << "GUI: REMOVING focus from " << m_name;
+if (focusElement == this)
+{
+  std::cout << "(did have focus)\n";
+}
+else if (focusElement)
+{
+  std::cout << " (" << focusElement->m_name << " would loses focus, disregarding)\n";
+}
+else
+{
+  std::cout << " (no previous focus)\n";
+}
+#endif
+
+    if (focusElement == this)
+    {
+      focusElement = 0;
+    }
   }
 }
 
