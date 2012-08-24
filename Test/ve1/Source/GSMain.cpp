@@ -6,6 +6,8 @@
 #include <ClipLineSegBox.h>
 #include <iostream>
 #include <Game.h>
+#include <GuiText.h>
+#include "Ve1Req.h"
 #include "Terrain.h"
 #include "Ve1SceneGraph.h"
 #include "LocalPlayer.h"
@@ -31,6 +33,8 @@
 #include "Furniture.h"
 #include "CreateCollect.h" // TODO TEMP TEST
 #include "Ve1BruteForce.h" // test against SAP
+
+#define SHOW_NUM_ERRORS
 
 namespace Amju
 {
@@ -354,6 +358,22 @@ void GSMain::Draw2d()
   TheChatConsole::Instance()->Draw();
 
   TheLurker::Instance()->Draw();
+
+#ifdef SHOW_NUM_ERRORS
+  // Show number of critical/non critical errors from server 
+  static GuiText t;
+  int critical = 0;
+  int nonCritical = 0;
+  Ve1Req::GetNumErrors(&critical, &nonCritical);
+  t.SetSize(Vec2f(1.0f, 0.1f));
+  t.SetJust(GuiText::AMJU_JUST_LEFT);
+  t.SetDrawBg(true);
+  t.SetLocalPos(Vec2f(-1.0f, 0.8f));
+  std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical);
+  t.SetText(s);
+  t.Draw();
+
+#endif
 
   TheCursorManager::Instance()->Draw();
 }
