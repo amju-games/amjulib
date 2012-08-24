@@ -13,6 +13,8 @@ namespace Amju
 class Ve1Req : public OnlineReq
 {
 public:
+  static void GetNumErrors(int* critical, int* nonCritical);
+
   Ve1Req(const std::string url, const char* name, HttpClient::HttpMethod method = HttpClient::GET) : 
     OnlineReq(url, method, name), m_critical(true)
   {
@@ -34,6 +36,9 @@ protected:
   std::string m_errorStr;
   std::string m_timestamp;
   bool m_critical; // all errors are treated as critical failures ?
+
+  static int s_criticalErrors;
+  static int s_nonCriticalErrors;
 };
 }
 

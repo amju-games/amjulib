@@ -8,6 +8,15 @@
 
 namespace Amju
 {
+int Ve1Req::s_criticalErrors = 0;
+int Ve1Req::s_nonCriticalErrors = 0;
+
+void Ve1Req::GetNumErrors(int* critical, int* nonCritical)
+{
+  *critical = s_criticalErrors;
+  *nonCritical = s_nonCriticalErrors;
+}
+
 void Ve1Req::HandleResult()
 {
   m_errorStr.clear();
@@ -69,11 +78,15 @@ void Ve1Req::OnFailure()
 
   if (m_critical)
   {
-    //ShowError(m_name + ": " + m_errorStr);
+    s_criticalErrors++;
+
+    ShowError(m_name + ": " + m_errorStr);
 std::cout << "NET ERROR AND IS CRITICAL!?!: " << m_errorStr << " - request name: " << m_name << "\n";
   }
   else
   {
+    s_nonCriticalErrors++;
+
     // Non critical... check if errors happen a lot or just sporadically 
 std::cout << "NET ERROR but non-critical: " << m_errorStr << " - request name: " << m_name << "\n";
   }
