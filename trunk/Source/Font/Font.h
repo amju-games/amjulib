@@ -41,7 +41,7 @@ public:
 
   // Draw the text on the window. 
   // (x, y) coords are -1..1
-  void Print(float x, float y, const char* text);
+  void Print(float x, float y, const char* text, float scaleX = 1.0f);
 
   // Draw text in world space as a series of billboards.
   // The billboards can always be standing up, or facing the camera.
