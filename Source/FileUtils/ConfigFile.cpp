@@ -154,6 +154,16 @@ void ConfigFile::Set(const std::string& key, const std::string& value)
     m_values[key] = value;
   }
 }
+ 
+void ConfigFile::SetFloat(const std::string& key, float value)
+{
+  Set(key, ToString(value));
+}
+
+void ConfigFile::SetInt(const std::string& key, int value)
+{
+  Set(key, ToString(value));
+}
 
 int ConfigFile::GetChecksum() const
 {
