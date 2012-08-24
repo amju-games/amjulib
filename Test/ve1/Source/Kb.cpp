@@ -1,10 +1,17 @@
 #include <Timer.h>
 #include <EventPoller.h>
+#include <GuiButton.h>
 #include "Kb.h"
 #include "ChatConsole.h"
 
 namespace Amju
 {
+void OnNextPage()
+{
+  static Kb* kb = TheKb::Instance();
+  kb->OnNextPage();
+}
+
 Kb::Kb()
 {
   m_mode = KB_HIDDEN;
@@ -13,6 +20,8 @@ Kb::Kb()
   //  otherwise it's a user pref.
 
   SetEnabled(false); 
+
+  m_currentPage = -1;
 }
 
 bool Kb::Load(const std::string& guiKbFilename)
@@ -25,7 +34,52 @@ std::cout << "KB: Loading kb layout: " << guiKbFilename << "\n";
 //std::cout << "KB: deactivated old layout.\n";
 
   m_kb = new GuiKeyboard;
-  return m_kb->OpenAndLoad(guiKbFilename); 
+  bool b = m_kb->OpenAndLoad(guiKbFilename); 
+  if (!b)
+  {
+    return false;
+  }
+  // Set up handler for next page button
+  GuiButton* nextpage = (GuiButton*)m_kb->GetElementByName("nextpage");
+  if (nextpage)
+  {
+    nextpage->SetCommand(Amju::OnNextPage);
+    if (m_pages.size() < 2)
+    {
+std::cout << "Next page set but num pages is " << m_pages.size() << "!!\n";
+      Assert(0);
+    }
+  }
+  else
+  {
+std::cout << "KB: no next page for this layout: " << guiKbFilename << "\n";
+  }
+
+  return true;
+}
+
+void Kb::SetPages(const Strings& filenames)
+{
+  m_pages = filenames;
+  m_currentPage = -1;
+  OnNextPage();
+}
+
+void Kb::OnNextPage()
+{
+  m_currentPage++;
+  Assert(m_currentPage <= (int)m_pages.size());
+
+  if (m_currentPage == (int)m_pages.size())
+  {
+    m_currentPage = 0;
+  } 
+  const std::string& page = m_pages[m_currentPage];
+  bool b = Load(page);
+  if (!b)
+  {
+std::cout << "Failed to load KB page: " << page << "\n";
+  }
 }
 
 void Kb::SetEnabled(bool b)
