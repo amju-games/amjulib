@@ -60,7 +60,10 @@ void GSLogin::OnLoginChar()
   GuiButton* login = (GuiButton*)GetElementByName(m_gui, "login-button");
   if (b)
   {
+#ifdef EMAIL_DEBUG
 std::cout << "Email is ok, enable login button.\n";
+#endif
+
     // Set button to be focus, then text 
     login->SetIsEnabled(true);
     login->SetHasFocus(true); 
@@ -68,7 +71,10 @@ std::cout << "Email is ok, enable login button.\n";
   }
   else
   {
+#ifdef EMAIL_DEBUG
 std::cout << "Email is NOT ok, disable login button.\n";
+#endif
+
     login->SetHasFocus(false); 
     login->SetIsEnabled(false); 
   }
