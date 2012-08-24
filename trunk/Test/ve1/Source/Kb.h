@@ -3,6 +3,7 @@
 
 #include <GuiKeyboard.h>
 #include <Singleton.h>
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -21,8 +22,14 @@ public:
   void SetEnabled(bool);
   bool IsEnabled() const;
 
+  // Set a list of layout filenames
+  void SetPages(const Strings& pageFilenames);
+
   // Call to change page
   bool Load(const std::string& guiKbFilename);
+
+  // Called when Next page button pressed
+  void OnNextPage();
 
 private:
   RCPtr<GuiKeyboard> m_kb;
@@ -37,6 +44,10 @@ private:
   Mode m_mode;
 
   bool m_enabled;
+
+  // Filenames for a sequence of layouts
+  Strings m_pages;
+  int m_currentPage;
 };
 
 typedef Singleton<Kb> TheKb;
