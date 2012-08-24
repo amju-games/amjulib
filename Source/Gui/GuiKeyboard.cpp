@@ -94,9 +94,13 @@ bool GuiKeyboard::Load(File* file)
   GuiElement* elem = 0;
 
   // Set command on each key. 
-  // TODO this must include all punctuation etc.
-  static const char CHARS[] = "abcdefghijklmnopqrstuvwxyz0123456789"; 
-  for (unsigned int i = 0; i < 36; i++)
+
+  // Printable characters: try to find a key for each printable character.
+  // TODO For localisation, this string must be loaded from string table.
+  const std::string CHARS = 
+    "!@£$%^&*()_-+={[}]:;\"'|\\~`<,>.?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; 
+
+  for (unsigned int i = 0; i < CHARS.size(); i++)
   {
     // We use the member function GetElementByName, which fails without asserting.
     // So chars not in this keyboard are just ignored. 
