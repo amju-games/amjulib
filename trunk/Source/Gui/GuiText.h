@@ -25,9 +25,14 @@ public:
 
   virtual void SetText(const std::string& text);
   virtual const std::string& GetText() const;
- 
+
+  // Really font size 
   void SetTextSize(float textSize);
   float GetTextSize() const;
+  
+  // Set X scale, to squish more text into a tight squeeze, etc
+  void SetScaleX(float scaleX);
+  float GetScaleX() const;
 
   void SizeToText(); // changes size to accomodate text
 
@@ -94,6 +99,8 @@ protected:
 
   int m_caret; // index of caret: 0 means at left
   int m_selectedText; // index of other end of selected text (poss before or after caret)
+
+  float m_scaleX;
 };
 }
 

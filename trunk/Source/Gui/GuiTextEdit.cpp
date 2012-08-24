@@ -15,13 +15,23 @@ GuiTextEdit::GuiTextEdit()
   m_drawBg = true;
   m_caretTimer = 0;
   m_drawCaret = true;
-  
   m_onChangeFunc = 0;
+  m_isPassword = false;
 }
 
 void GuiTextEdit::SetOnChangeFunc(CommandFunc f)
 {
   m_onChangeFunc = f;
+}
+
+void GuiTextEdit::SetIsPassword(bool isPw)
+{
+  m_isPassword = isPw;
+}
+
+bool GuiTextEdit::IsPassword() const
+{
+  return m_isPassword;
 }
 
 void GuiTextEdit::Draw()
@@ -79,7 +89,7 @@ void GuiTextEdit::Draw()
     PushColour();
     AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
     float startX = GetCombinedPos().x;
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize()) + startX;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize() * m_scaleX) + startX;
     PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
     PopColour();
   }
@@ -155,7 +165,7 @@ int GuiTextEdit::CalcCursorPos(float mousex)
   int pos = m_caret;
   for (int i = m_first; i < m_last; i++)
   {
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * GetTextSize()) + startX;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * GetTextSize() * m_scaleX) + startX;
 
     if (x > mousex)
     {
@@ -486,7 +496,7 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    while ((GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) * GetTextSize()) > size.x)
+    while ((GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) * GetTextSize() * m_scaleX) > size.x)
     {
       if (caret > *last)
       {

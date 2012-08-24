@@ -25,6 +25,9 @@ public:
   // Set callback which is called whenever text is changed (e.g. a new char is typed)
   void SetOnChangeFunc(CommandFunc onCharFunc);
 
+  void SetIsPassword(bool isPassword);
+  bool IsPassword() const;
+
 protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
   int CalcCursorPos(float mouseX);
@@ -35,6 +38,7 @@ protected:
   float m_caretTimer;
   bool m_drawCaret;
   CommandFunc m_onChangeFunc;
+  bool m_isPassword; // if so, don't show characters
 };
 }
 

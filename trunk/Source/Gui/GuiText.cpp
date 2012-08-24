@@ -33,6 +33,17 @@ GuiText::GuiText()
   m_last = 0;
   m_caret = 0;
   m_selectedText = 0;
+  m_scaleX = 0.5f;
+}
+
+void GuiText::SetScaleX(float scaleX)
+{
+  m_scaleX = scaleX;
+}
+
+float GuiText::GetScaleX() const
+{
+  return m_scaleX;
 }
 
 void GuiText::TextToSpeech()
@@ -313,7 +324,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
 void GuiText::PrintLine(const std::string& str, float x, float y)
 {
   Font* font = GetFont();
-  font->Print(x, y, str.c_str());
+  font->Print(x, y, str.c_str(), m_scaleX); 
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
@@ -407,7 +418,7 @@ void GuiText::SetIsMulti(bool multi)
 float GuiText::GetTextWidth(const std::string& text)
 {
   float textWidth = GetFont()->GetTextWidth(text);
-  return textWidth;
+  return textWidth * m_scaleX;
 }
 
 bool GuiText::Load(File* f)
