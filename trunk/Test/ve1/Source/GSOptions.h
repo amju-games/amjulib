@@ -24,6 +24,9 @@ public:
   void LoadSettingsFromPI(PlayerInfo*);
   void SaveSettingsToPI(PlayerInfo*);
 
+  void LoadFromConfig();
+  void SaveToConfig();
+
 private:
   // TODO Variables for volume, screen, kb, etc.
   float m_musicVol;

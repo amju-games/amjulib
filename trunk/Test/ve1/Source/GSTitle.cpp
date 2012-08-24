@@ -18,6 +18,7 @@
 #include "GameMode.h"
 #include "LurkMsg.h" // so we can display msgs in title screen
 #include "ROConfig.h"
+#include "Kb.h"
 
 //#define SHOW_ENV_INFO
 //#define SHOW_FRAME_TIME
@@ -118,6 +119,12 @@ void GSTitle::OnActive()
 
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
     TheAvatarManager::Instance()->Load();
+
+    // Set default keyboard layout
+    TheKb::Instance()->Load("gui-kb-letter-lower.txt");
+    // TODO Check for success - what if it fails ?
+
+    TheGSOptions::Instance()->LoadFromConfig();
   }
 
 #ifdef SHOW_FRAME_TIME

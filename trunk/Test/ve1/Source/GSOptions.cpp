@@ -2,15 +2,19 @@
 #include <Game.h>
 #include <GuiButton.h>
 #include <SoundManager.h>
+#include <ConfigFile.h>
 #include "GSOptions.h"
 #include "GSAvatarMod.h"
 #include "GSProxy.h"
 #include "Kb.h"
+#include "SaveConfig.h"
 
 namespace Amju
 {
 static void OnBack()
 {
+  TheGSOptions::Instance()->SaveToConfig();
+
   TheGSOptions::Instance()->GoBack();
 }
 
@@ -86,6 +90,8 @@ void GSOptions::OnActive()
   GetElementByName(m_gui, "fullscreen-button")->SetCommand(OnFullscreen);
   GetElementByName(m_gui, "inet-button")->SetCommand(OnInternet);
 
+  LoadFromConfig();
+
   // TODO Hide for iPad etc, this must always have KB.
   GuiButton* kb = (GuiButton*)GetElementByName(m_gui, "keyboard-button");
   kb->SetCommand(Amju::OnKeyboard);
@@ -113,6 +119,25 @@ void GSOptions::OnDeactive()
 
 static const char* MUSIC_VOL_KEY = "options-music-vol";
 static const char* KB_KEY = "options-kb";
+
+void GSOptions::LoadFromConfig()
+{
+  static GameConfigFile* config = TheGameConfigFile::Instance();
+
+  m_musicVol = config->GetFloat(MUSIC_VOL_KEY, m_musicVol);
+  bool kb = config->GetInt(KB_KEY, 0) != 0;
+  TheKb::Instance()->SetEnabled(kb);
+}
+
+void GSOptions::SaveToConfig()
+{
+  static GameConfigFile* config = TheGameConfigFile::Instance();
+
+  config->SetFloat(MUSIC_VOL_KEY, m_musicVol);
+  config->SetInt(KB_KEY, TheKb::Instance()->IsEnabled() ? 1 : 0);
+
+  SaveConfig();
+}
 
 void GSOptions::LoadSettingsFromPI(PlayerInfo* pi)
 {
