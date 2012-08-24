@@ -24,6 +24,8 @@ public:
   bool Exists(const std::string& key) const;
 
   void Set(const std::string& key, const std::string& value);
+  void SetFloat(const std::string& key, float value);
+  void SetInt(const std::string& key, int value);
 
   void Erase(const std::string& key);
 
