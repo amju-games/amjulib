@@ -56,13 +56,6 @@ public:
 
   void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff);
 
-  // Draw the given element, with optional scale factor.
-  // This lets us accurately position quads of any size.
-  void Draw(int element, float size = 1.0f);
-
-  // Draw billboard quad in world space, textured with the given element.
-  void DrawBillboard(int element, float size, bool isVertical = false);
- 
   // Bind the texture. Doing this once up front instead of every call to
   // Draw() may be more efficient.
   void Bind();
@@ -76,7 +69,6 @@ public:
   void SetSize(float width, float height);
 
 protected:
-  unsigned int m_displayList;  // TODO Delete this variable
   PTexture m_pTexture; 
   int m_numElements;
   float m_sizex, m_sizey;

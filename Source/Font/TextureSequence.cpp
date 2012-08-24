@@ -126,7 +126,6 @@ bool TextureSequence::Load(
   {
     return false;
   }
-  //pTexture->CreateBinding(Texture::AMJU_TEXTURE_REGULAR, false /* clamp, don't wrap */);
 
   Set(pTexture, numElementsX, numElementsY, sizeX, sizeY);
 
