@@ -3,7 +3,8 @@
 #include <ReportError.h>
 #include <ResourceManager.h>
 #include "AvatarManager.h"
-#include "BlinkCharacter.h" // TODO TEMP TEST
+#include "BlinkCharacter.h" // TODO TEMP TEST - use factory
+#include "Md3Node.h" // factory
 
 namespace Amju
 {
@@ -17,18 +18,29 @@ Ve1Character* AvatarManager::Create(const std::string& characterName)
   if (it == m_chars.end())
   {
     std::cout << "Unexpected character name: " << characterName << "\n";
-    // Default
+    // Create a placeholder node of default type. This probably means we have not downloaded
+    //  data for a new type.
     ch = new BlinkCharacter;
   }
   else
   {
     std::string chType = it->second;
+    // TODO struct with other attributes, e.g. scale factor
+
     // TODO use factory using type
-//  if (chType == "md3")
-//  {
-//  }
-  
-    ch = new BlinkCharacter;
+    if (chType == "md3")
+    {
+      ch = new Md3Node;
+    }
+    else if (chType == "md2blink")
+    {
+      ch = new BlinkCharacter; 
+    }
+    // etc -- TODO use Factory
+    else
+    {
+      ch = new Animated; // TODO rename this class
+    }
   }
 
   Assert(ch);

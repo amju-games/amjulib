@@ -42,26 +42,6 @@ Ve1ObjectChar::Ve1ObjectChar()
 void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
 {
   Ve1Object::SetKeyVal(key, val);
-/*
-  if (key == TYPE_KEY)
-  {
-    int type = ToInt(val); // TODO overload Set to take an int
-    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
-    if (vc)
-    {
-      TheAvatarManager::Instance()->SetAvatar(type, vc);
-    }
-  }
-  else if (key == TEX_KEY)
-  {
-    int texNum = ToInt(val);
-    Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
-    if (vc)
-    {
-      TheAvatarManager::Instance()->SetTexture(texNum, vc);
-    }
-  }
-*/
 
   if (key == NAME_KEY)
   {
@@ -75,8 +55,16 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   {
     static AvatarManager* am = TheAvatarManager::Instance();
     Ve1Character* node = am->Create(val);
-    SetSceneNode(node); 
+    if (node)
+    {
+      SetSceneNode(node); 
+    }
+    else
+    {
+std::cout << "Unexpected avatar key: " << val << "\n";
+    }
   }
+
 }
 
 void Ve1ObjectChar::SetEditMenu(GuiMenu* menu)
