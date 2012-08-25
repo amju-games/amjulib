@@ -9,7 +9,6 @@
 #include "GSStartGame.h"
 #include "GSLoginWaiting.h"
 #include "PlayerInfo.h"
-#include "GSAvatarMod.h"
 #include "GSLogin.h"
 #include "GSNetError.h"
 #include "GSTitle.h"
