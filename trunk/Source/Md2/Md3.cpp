@@ -490,29 +490,38 @@ t3DModel *CModelMD3::GetModel(int whichPart)
 /////
 ///////////////////////////////// LOAD MODEL \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CModelMD3::LoadModel(const char *  strPath, const char *  strModel)
+bool CModelMD3::LoadModel(const std::string& strPath, const std::string& strModel)
 {
-	char strLowerModel[255] = {0};	// This stores the file name for the lower.md3 model
-	char strUpperModel[255] = {0};	// This stores the file name for the upper.md3 model
-	char strHeadModel[255]  = {0};	// This stores the file name for the head.md3 model
-	char strLowerSkin[255]  = {0};	// This stores the file name for the lower.md3 skin
-	char strUpperSkin[255]  = {0};	// This stores the file name for the upper.md3 skin
-	char strHeadSkin[255]   = {0};	// This stores the file name for the head.md3 skin
+  // TODO jesus, replace char[]s with std::strings
+
+	//char strLowerModel[255] = {0};	// This stores the file name for the lower.md3 model
+	//char strUpperModel[255] = {0};	// This stores the file name for the upper.md3 model
+	//char strHeadModel[255]  = {0};	// This stores the file name for the head.md3 model
+	//char strLowerSkin[255]  = {0};	// This stores the file name for the lower.md3 skin
+	//char strUpperSkin[255]  = {0};	// This stores the file name for the upper.md3 skin
+	//char strHeadSkin[255]   = {0};	// This stores the file name for the head.md3 skin
 	CLoadMD3 loadMd3;				// This object allows us to load each .md3 and .skin file
 
 	// Make sure valid path and model names were passed in
-	if(!strPath || !strModel) return false;
 
 	// Store the correct files names for the .md3 and .skin file for each body part.
 	// We concatinate this on top of the path name to be loaded from.
-	sprintf(strLowerModel, "%s_lower.md3", strModel);
-	sprintf(strUpperModel, "%s_upper.md3", strModel);
-	sprintf(strHeadModel,  "%s_head.md3",  strModel);
-	
+	//sprintf(strLowerModel, "%s_lower.md3", strModel);
+	//sprintf(strUpperModel, "%s_upper.md3", strModel);
+	//sprintf(strHeadModel,  "%s_head.md3",  strModel);
+
+        std::string strLowerModel = strPath + strModel + "_lower.md3";
+        std::string strUpperModel = strPath + strModel + "_upper.md3";
+        std::string strHeadModel = strPath +  strModel + "_head.md3";
+
 	// Get the skin file names with their path
-	sprintf(strLowerSkin, "%s_lower.skin", strModel);
-	sprintf(strUpperSkin, "%s_upper.skin", strModel);
-	sprintf(strHeadSkin,  "%s_head.skin",  strModel);
+	//sprintf(strLowerSkin, "%s_lower.skin", strModel);
+	//sprintf(strUpperSkin, "%s_upper.skin", strModel);
+	//sprintf(strHeadSkin,  "%s_head.skin",  strModel);
+
+        std::string strLowerSkin = strPath + strModel + "_lower.skin";
+        std::string strUpperSkin = strPath + strModel + "_upper.skin";
+        std::string strHeadSkin = strPath +  strModel + "_head.skin";
 	
 	// Load the head mesh (*_head.md3) and make sure it loaded properly
 	if(!loadMd3.ImportMD3(&m_Head,  strHeadModel))
@@ -585,10 +594,11 @@ bool CModelMD3::LoadModel(const char *  strPath, const char *  strModel)
 	// We added to this function the code that loads the animation config file
 
 	// This stores the file name for the .cfg animation file
-	char strConfigFile[255] = {0};	
+	//char strConfigFile[255] = {0};	
 
 	// Add the path and file name prefix to the animation.cfg file
-	sprintf(strConfigFile,  "%s_animation.cfg",  strModel);
+	//sprintf(strConfigFile,  "%s_animation.cfg",  strModel);
+        std::string strConfigFile = strPath + strModel + "_animation.cfg";
 
 	// Load the animation config file (*_animation.config) and make sure it loaded properly
 	if(!LoadAnimations(strConfigFile))
@@ -617,17 +627,15 @@ bool CModelMD3::LoadModel(const char *  strPath, const char *  strModel)
 /////
 ///////////////////////////////// LOAD WEAPON \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CModelMD3::LoadWeapon(const char *  strPath, const char *  strModel)
+bool CModelMD3::LoadWeapon(const std::string& strPath, const std::string& strModel)
 {
-	char strWeaponModel[255]  = {0};	// This stores the file name for the weapon model
-	char strWeaponShader[255] = {0};	// This stores the file name for the weapon shader.
+	//char strWeaponModel[255]  = {0};	// This stores the file name for the weapon model
+	//char strWeaponShader[255] = {0};	// This stores the file name for the weapon shader.
 	CLoadMD3 loadMd3;					// This object allows us to load the.md3 and .shader file
 
-	// Make sure the path and model were valid, otherwise return false
-	if(!strPath || !strModel) return false;
-
 	// Concatenate the path and model name together
-	sprintf(strWeaponModel, "%s.md3", strModel);
+	//sprintf(strWeaponModel, "%s.md3", strModel);
+        std::string strWeaponModel = strPath + strModel + ".md3";
 
 	// Load the weapon mesh (*.md3) and make sure it loaded properly
 	if(!loadMd3.ImportMD3(&m_Weapon,  strWeaponModel))
@@ -638,7 +646,8 @@ bool CModelMD3::LoadWeapon(const char *  strPath, const char *  strModel)
 	}
 
 	// Add the path, file name and .shader extension together to get the file name and path
-	sprintf(strWeaponShader, "%s.shader", strModel);
+	//sprintf(strWeaponShader, "%s.shader", strModel);
+        std::string strWeaponShader = strPath + strModel + ".shader";
 
 	// Load our textures associated with the gun from the weapon shader file
 	if(!loadMd3.LoadShader(&m_Weapon, strWeaponShader))
@@ -666,7 +675,7 @@ bool CModelMD3::LoadWeapon(const char *  strPath, const char *  strModel)
 /////
 ///////////////////////////////// LOAD WEAPON \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-Texture* CreateTexture(const char* file)
+Texture* CreateTexture(const std::string& file)
 {
   return (Texture*)TheResourceManager::Instance()->GetRes(file);
 
@@ -687,7 +696,7 @@ std::cout << "In Md3.cpp: CreateTexture(): Texture file: " << stripped.c_str() <
 */
 }
 
-bool CModelMD3::LoadModelTextures(t3DModel *pModel, const char *  strPath)
+bool CModelMD3::LoadModelTextures(t3DModel *pModel, const std::string& strPath)
 {
 	// Go through all the materials that are assigned to this model
 	for(int i = 0; i < pModel->numOfMaterials; i++)
@@ -718,10 +727,11 @@ bool CModelMD3::LoadModelTextures(t3DModel *pModel, const char *  strPath)
 			if(bNewTexture == false) continue;
 */
 			
-			char strFullPath[255] = {0};
+			//char strFullPath[255] = {0};
 
 			// Add the file name and path together so we can load the texture
-			sprintf(strFullPath, "%s", pModel->pMaterials[i].strFile);
+			//sprintf(strFullPath, "%s", pModel->pMaterials[i].strFile);
+                        std::string strFullPath = strPath + pModel->pMaterials[i].strFile;
 
 			// We pass in a reference to an index into our texture array member variable.
 			// The size() function returns the current loaded texture count.  Initially
@@ -756,7 +766,7 @@ std::cout << "Md3: CreateTexture returned TRUE! " << strFullPath << "\n";
 /////
 ///////////////////////////////// LOAD ANIMATIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CModelMD3::LoadAnimations(const char *  strConfigFile)
+bool CModelMD3::LoadAnimations(const std::string& strConfigFile)
 {
 	// This function is given a path and name to an animation config file to load.
 	// The implementation of this function is arbitrary, so if you have a better way
@@ -976,7 +986,7 @@ void CModelMD3::UpdateModel(t3DModel *pModel)
 	if(pModel->nextFrame == 0) 
 		pModel->nextFrame =  startFrame;
 
-std::cout << "Updating... current frame: " << pModel->currentFrame << ", next frame: " << pModel->nextFrame << "\n";
+// std::cout << "Updating... current frame: " << pModel->currentFrame << ", next frame: " << pModel->nextFrame << "\n";
 
 	// Next, we want to get the current time that we are interpolating by.  Remember,
 	// if t = 0 then we are at the beginning of the animation, where if t = 1 we are at the end.
@@ -1165,7 +1175,7 @@ void CModelMD3::SetCurrentTime(t3DModel *pModel)
 	// Return if there is no animations in this model
 	if(!pModel->pAnimations.size()) 
         {
-std::cout << "No animations\n";
+//std::cout << "No animations\n";
           return;
         }
 
@@ -1203,7 +1213,7 @@ std::cout << "No animations\n";
 
 	// Set the t for the model to be used in interpolation
 	pModel->t = t;
-std::cout << "t: " << t << "\n";
+////std::cout << "t: " << t << "\n";
 }
 
 //////////// *** NEW *** ////////// *** NEW *** ///////////// *** NEW *** ////////////////////
@@ -1405,11 +1415,9 @@ CLoadMD3::CLoadMD3()
 /////
 ///////////////////////////////// IMPORT MD3 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CLoadMD3::ImportMD3(t3DModel *pModel, const char *strFileName)
+bool CLoadMD3::ImportMD3(t3DModel *pModel, const std::string& strFileName)
 {
 std::cout << "LOADING MODEL: " << strFileName << "\n";
-
-	char strMessage[255] = {0};
 
 	// Open the MD3 file in binary
         std::string filepluspath = "";
@@ -1423,8 +1431,6 @@ std::cout << "LOADING MODEL: " << strFileName << "\n";
 	if(!b) 
 	{
 		// Display an error message and don't load anything if no file was found
-		sprintf(strMessage, "Unable to find the file: %s!", strFileName);
-		std::cout << strMessage << "\n";
 		return false;
 	}
 std::cout << "Opened " << strFileName << " ok.\n";
@@ -1447,8 +1453,7 @@ std::cout << "Opened " << strFileName << " ok.\n";
 	if((ID[0] != 'I' || ID[1] != 'D' || ID[2] != 'P' || ID[3] != '3') || m_Header.version != 15)
 	{
 		// Display an error message for bad file format, then stop loading
-		sprintf(strMessage, "Invalid file format (Version not 15): %s!", strFileName);
-		std::cout << strMessage << "\n";
+		std::cout << "Invalid file format (Version not 15): " <<  strFileName << "\n";
                 std::cout << "ID found: " << m_Header.version << "\n";
 		return false;
 	}
@@ -1687,10 +1692,10 @@ void CLoadMD3::ConvertDataStructures(t3DModel *pModel, tMd3MeshInfo meshHeader)
 /////
 ///////////////////////////////// LOAD SKIN \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CLoadMD3::LoadSkin(t3DModel *pModel, const char *  strSkin)
+bool CLoadMD3::LoadSkin(t3DModel *pModel, const std::string& strSkin)
 {
 	// Make sure valid data was passed in
-	if(!pModel || !strSkin) return false;
+	if (!pModel) return false;
 
 	// Open the skin file
 	//std::ifstream fin(strSkin);
@@ -1768,10 +1773,10 @@ std::cout << "Reading skin file: " << strSkin << ", found texture: " << texture.
 /////
 ///////////////////////////////// LOAD SHADER \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
-bool CLoadMD3::LoadShader(t3DModel *pModel, const char *  strShader)
+bool CLoadMD3::LoadShader(t3DModel *pModel, const std::string& strShader)
 {
 	// Make sure valid data was passed in
-	if(!pModel || !strShader) return false;
+	if (!pModel) return false;
 
 	// Open the shader file
 	//ifstream fin(strShader);
