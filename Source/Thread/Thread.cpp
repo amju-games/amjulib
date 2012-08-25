@@ -48,7 +48,7 @@ void ThreadFunction(void *p)
 void* ThreadFunction(void* p)
 #endif
 {
-  Thread* pThread = static_cast<Thread*>(p);
+  RCPtr<Thread> pThread = static_cast<Thread*>(p);
   pThread->Work();
   pThread->Finish();
 
