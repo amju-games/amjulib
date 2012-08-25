@@ -228,6 +228,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
     <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Md3Node.cpp" />
     <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
@@ -331,6 +332,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
     <ClInclude Include="..\..\..\..\Source\LurkMsg.h" />
+    <ClInclude Include="..\..\..\..\Source\Md3Node.h" />
     <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
