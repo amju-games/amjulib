@@ -236,6 +236,7 @@
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lvm.c" />
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\lzio.c" />
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.1.4\print.c" />
+    <ClCompile Include="..\..\..\Source\Md2\Md3.cpp" />
     <ClCompile Include="..\..\..\Source\Network\ClientSocket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HostInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Network\HttpClient.cpp" />
@@ -480,6 +481,8 @@
     <ClInclude Include="..\..\..\Source\Main\glutmain.h" />
     <ClInclude Include="..\..\..\Source\Main\main.h" />
     <ClInclude Include="..\..\..\Source\Main\nonglutmain.h" />
+    <ClInclude Include="..\..\..\Source\Md2\Md3.h" />
+    <ClInclude Include="..\..\..\Source\Md2\Md3Types.h" />
     <ClInclude Include="..\..\..\Source\Network\ClientSocket.h" />
     <ClInclude Include="..\..\..\Source\Network\HostInfo.h" />
     <ClInclude Include="..\..\..\Source\Network\HttpClient.h" />

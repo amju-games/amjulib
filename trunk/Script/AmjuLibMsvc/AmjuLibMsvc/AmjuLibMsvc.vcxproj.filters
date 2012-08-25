@@ -834,6 +834,9 @@
     <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Md2\Md3.cpp">
+      <Filter>Md2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1555,6 +1558,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h">
       <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Md2\Md3Types.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Md2\Md3.h">
+      <Filter>Md2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
