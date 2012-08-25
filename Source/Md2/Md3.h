@@ -258,13 +258,13 @@ public:
 	CLoadMD3();								
 
 	// This is the function that you call to load the MD3 model
-	bool ImportMD3(t3DModel *pModel, const char * strFileName);
+	bool ImportMD3(t3DModel *pModel, const std::string& strFileName);
 
 	// This loads a model's .skin file
-	bool LoadSkin(t3DModel *pModel, const char *  strSkin);
+	bool LoadSkin(t3DModel *pModel, const std::string& strSkin);
 
 	// This loads a weapon's .shader file
-	bool LoadShader(t3DModel *pModel, const char *  strShader);
+	bool LoadShader(t3DModel *pModel, const std::string& strShader);
 
 private:
 
@@ -309,10 +309,10 @@ public:
 	
 	// This loads the model from a path and name prefix.   It takes the path and
 	// model name prefix to be added to _upper.md3, _lower.md3 or _head.md3.
-	bool LoadModel(const char *  strPath, const char *  strModel);
+	bool LoadModel(const std::string& strPath, const std::string& strModel);
 
 	// This loads the weapon and takes the same path and model name to be added to .md3
-	bool LoadWeapon(const char * strPath, const char * strModel);
+	bool LoadWeapon(const std::string& strPath, const std::string& strModel);
 
 	// This links a model to another model (pLink) so that it's the parent of that child.
 	// The strTagName is the tag, or joint, that they will be linked at (I.E. "tag_torso").
@@ -347,13 +347,13 @@ public:
 private:
 
 	// This loads the models textures with a given path
-	bool LoadModelTextures(t3DModel *pModel, const char * strPath);
+	bool LoadModelTextures(t3DModel *pModel, const std::string& strPath);
 
 
 //////////// *** NEW *** ////////// *** NEW *** ///////////// *** NEW *** ////////////////////
 
 	// This loads the animation config file (.cfg) for the character
-	bool LoadAnimations(const char * strConfigFile);
+	bool LoadAnimations(const std::string& strConfigFile);
 
 	// This updates the models current frame of animation, and calls SetCurrentTime()
 	void UpdateModel(t3DModel *pModel);
