@@ -8,7 +8,7 @@ BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
-RUNDIR 		:=	../../Assets/lara
+RUNDIR 		:=	../../Assets
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
