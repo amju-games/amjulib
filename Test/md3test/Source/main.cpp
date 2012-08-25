@@ -39,7 +39,7 @@ bool MyCreateWindowGLUT(AmjuGLWindowInfo*)
 }
 
 
-#define MODEL_PATH  "lara"                              // This stores the folder name the character is in
+#define MODEL_PATH  "lara/"                              // This stores the folder name the character is in
 #define MODEL_NAME      "lara"                          // This stores the prefix for all the character files
 #define GUN_NAME    "Railgun"                   // This stores the name of our gun to load
 
