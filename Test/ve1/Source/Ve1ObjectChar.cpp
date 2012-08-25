@@ -20,8 +20,8 @@ static const float GRAVITY = -50.0f; // TODO CONFIG
 
 static const float BOUNCE_VEL = -50.0f;
 
-static const char* TYPE_KEY = "type";
-static const char* TEX_KEY = "tex";
+//static const char* TYPE_KEY = "type";
+//static const char* TEX_KEY = "tex";
 static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
 static const char* STAMINA_KEY = "stamina";
@@ -57,7 +57,9 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
     Ve1Character* node = am->Create(val);
     if (node)
     {
-      SetSceneNode(node); 
+      SetSceneNode(node);
+      // TODO if in local player location
+      OnLocationEntry();
     }
     else
     {
