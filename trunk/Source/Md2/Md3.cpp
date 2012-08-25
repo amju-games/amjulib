@@ -1364,13 +1364,13 @@ void CModelMD3::SetLegsAnimation(const char *  strAnimation)
 		// If the animation name passed in is the same as the current animation's name
 		if( !strcmp(m_Lower.pAnimations[i].strName, strAnimation) )
 		{
-std::cout << "Setting legs anim to " << strAnimation << "\n";
+//std::cout << "Setting legs anim to " << strAnimation << "\n";
 
 			// Set the legs animation to the current animation we just found and return
 			m_Lower.currentAnim = i;
 			m_Lower.currentFrame = m_Lower.pAnimations[m_Lower.currentAnim].startFrame;
 
-std::cout << "Start frame: " << m_Lower.pAnimations[m_Lower.currentAnim].startFrame << "\n";
+//std::cout << "Start frame: " << m_Lower.pAnimations[m_Lower.currentAnim].startFrame << "\n";
 
 			return;
 		}
