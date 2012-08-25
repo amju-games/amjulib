@@ -6,6 +6,7 @@
 #include <vector>
 #include <File.h>
 #include <Endian.h>
+#include <RCPtr.h>
 #include "Md3Types.h"
 
 // This file stores all of our structures and classes (besides the modular model ones in main.h)
@@ -24,6 +25,8 @@
 #define kHead	2			// This stores the ID for the head model
 #define kWeapon	3			// This stores the ID for the weapon model
 
+namespace Amju
+{
 // This enumeration stores all the animations in order from the config file (.cfg)
 typedef enum 
 {
@@ -298,7 +301,7 @@ private:
 };
 
 // This is our model class that we use to load and draw and free the Quake3 characters
-class CModelMD3
+class CModelMD3 : public RefCounted
 {
 
 public:
@@ -428,6 +431,7 @@ private:
 
 /////// * /////////// * /////////// * NEW * /////// * /////////// * /////////// *
 
+}
 
 #endif
 

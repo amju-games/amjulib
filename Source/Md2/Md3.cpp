@@ -22,8 +22,8 @@
 #include "Md3.h"
 #include "StringUtils.h"
 
-using namespace std;
-using namespace Amju;
+namespace Amju
+{
 
 //////////// *** NEW *** ////////// *** NEW *** ///////////// *** NEW *** ////////////////////
 
@@ -1713,7 +1713,7 @@ bool CLoadMD3::LoadSkin(t3DModel *pModel, const std::string& strSkin)
 
 	// These 2 variables are for reading in each line from the file, then storing
 	// the index of where the bitmap name starts after the last '/' character.
-	string strLine = "";
+	std::string strLine = "";
 	int textureNameStart = 0;
 
 	// Go through every line in the .skin file
@@ -1903,4 +1903,7 @@ void CLoadMD3::CleanUp()
 //
 //
 //
+
+} // namespace 
+
 
