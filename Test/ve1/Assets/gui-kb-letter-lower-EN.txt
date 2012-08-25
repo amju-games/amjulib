@@ -246,11 +246,11 @@ m
 arial, 2.0 
 
 gui-button
-@
+,
 1.49,-0.4
 0.2, 0.2
 key2.png
-@
+,
 arial, 2.0 
 
 gui-button
@@ -270,19 +270,19 @@ row4
 5
 
 gui-button
-nextpage
+mode1
 0,-0.6
 0.3, 0.2
 key3.png
-123
+M1
 arial, 2.0 
 
 gui-button
-prevpage
+mode2
 0.3,-0.6
 0.3, 0.2
 key3.png
-123
+M2
 arial, 2.0 
 
 gui-button
@@ -294,24 +294,119 @@ space
 arial, 2.0 
 
 gui-button
-del
+mode3
 1.4,-0.6
 0.3, 0.2
 key3.png
-Del
+M3
 arial, 2.0 
 
 gui-button
-enter
+mode4
 1.7,-0.6
 0.3, 0.2
 key3.png
-Enter
+M4
 arial, 2.0 
 
 
 
 // ******************************************
+// PAGE 2
+
+// Four rows
+gui-comp
+page1
+1
+
+
+gui-comp
+row0
+10
+
+gui-button
+1
+0,0 
+0.2, 0.2
+key2.png
+1
+arial, 2.0 
+
+gui-button
+2
+0.2,0
+0.2, 0.2
+key2.png
+2
+arial, 2.0 
+
+gui-button
+3
+0.2,0
+0.2, 0.2
+key2.png
+3
+arial, 2.0 
+
+gui-button
+4
+0.3,0
+0.2, 0.2
+key2.png
+4
+arial, 2.0 
+
+gui-button
+5
+0.4,0
+0.2, 0.2
+key2.png
+5
+arial, 2.0 
+
+gui-button
+6
+0.5,0
+0.2, 0.2
+key2.png
+6
+arial, 2.0 
+
+gui-button
+7
+0.6,0
+0.2, 0.2
+key2.png
+7
+arial, 2.0 
+
+gui-button
+8
+0.7,0
+0.2, 0.2
+key2.png
+8
+arial, 2.0 
+
+gui-button
+9
+0.8,0
+0.2, 0.2
+key2.png
+9
+arial, 2.0 
+
+gui-button
+0
+0.9,0
+0.2, 0.2
+key2.png
+0
+arial, 2.0 
+
+
+
+
 
 
 
