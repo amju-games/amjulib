@@ -52,6 +52,16 @@ private:
 };
 
 typedef Singleton<Kb> TheKb;
+
+// For convenience, using hardcoded filenames to hardcode kb layouts!
+// (But can still be localised by having a localised file name in each gui-kb-* file)
+enum KbLayout
+{
+  KB_LAYOUT_REGULAR,
+  KB_LAYOUT_EMAIL
+};
+
+void KbSetLayout(KbLayout);
 }
 
 #endif

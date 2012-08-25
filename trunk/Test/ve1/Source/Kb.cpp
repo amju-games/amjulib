@@ -1,11 +1,38 @@
 #include <Timer.h>
 #include <EventPoller.h>
 #include <GuiButton.h>
+#include <StringUtils.h>
 #include "Kb.h"
 #include "ChatConsole.h"
 
 namespace Amju
 {
+void KbSetLayout(KbLayout layout)
+{
+  Strings strs;
+
+  switch (layout)
+  {
+  case KB_LAYOUT_REGULAR:
+    strs.push_back("gui-kb-letter-lower.txt");
+    strs.push_back("gui-kb-letter-upper.txt");
+    strs.push_back("gui-kb-num.txt");
+    break;
+
+  case KB_LAYOUT_EMAIL:
+    strs.push_back("gui-kb-email-lower.txt");
+    strs.push_back("gui-kb-letter-upper.txt");
+    strs.push_back("gui-kb-num.txt");
+    break;
+
+  default:
+    std::cout << "Unexpected kb layout! " << layout << "\n";
+    Assert(0);
+  }
+
+  TheKb::Instance()->SetPages(strs); // loads first one
+}
+
 void OnNextPage()
 {
   static Kb* kb = TheKb::Instance();
