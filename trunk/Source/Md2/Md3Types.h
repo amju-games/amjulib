@@ -27,6 +27,8 @@
 #include "Endian.h"
 #include "Texture.h"
 
+namespace Amju
+{
 // This is our 3D point class.  This will be used to store the vertices of our model.
 class CVector3 
 {
@@ -221,6 +223,8 @@ void DeInit();
 
 bool Init();
 void RenderScene();
+
+} // namespace
 
 #endif 
 
