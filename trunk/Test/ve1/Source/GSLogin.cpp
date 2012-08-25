@@ -117,7 +117,6 @@ void GSLogin::OnActive()
 //    strs.push_back("gui-kb-num.txt");
 //    kb->SetPages(strs); // loads first one
 
-    kb->Activate();
     // Set floor of this GUI
     Vec2f pos = m_gui->GetLocalPos();
     pos.y = 0.7f; // TODO depends on gui txt file, ideally we set this to below the bottom element.
