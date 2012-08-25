@@ -22,83 +22,83 @@ row1
 10
 
 gui-button
-q
+[
 0,0
 0.20, 0.20
 key2.png
-q
+[
 arial, 2.0 
 
 gui-button
-w
+]
 0.2,0
 0.20, 0.20
 key2.png
-w
+]
 arial, 2.0 
 
 gui-button
-e
+{
 0.4,0
 0.20, 0.20
 key2.png
-e
+{
 arial, 2.0 
 
 gui-button
-r
+}
 0.6,0
 0.20, 0.20
 key2.png
-r
+}
 arial, 2.0 
 
 gui-button
-t
+#
 0.8,0
 0.20, 0.20
 key2.png
-t
+#
 arial, 2.0 
 
 gui-button
-y
+%
 1.0,0
 0.20, 0.20
 key2.png
-y
+%
 arial, 2.0 
 
 gui-button
-u
+^
 1.2,0
 0.20, 0.20
 key2.png
-u
+^
 arial, 2.0 
 
 gui-button
-i
+*
 1.4,0
 0.20, 0.20
 key2.png
-i
+*
 arial, 2.0 
 
 gui-button
-o
++
 1.6,0
 0.20, 0.20
 key2.png
-o
++
 arial, 2.0 
 
 gui-button
-p
+=
 1.8,0
 0.20, 0.20
 key2.png
-p
+=
 arial, 2.0 
 
 
@@ -110,75 +110,75 @@ row2
 9
 
 gui-button
-a
+_
 0.06,-0.2
 0.2, 0.2
 key2.png
-a
+_
 arial, 2.0 
 
 gui-button
-s
+\
 0.26,-0.2
 0.2, 0.2
 key2.png
-s
+\
 arial, 2.0 
 
 gui-button
-d
+|
 0.46,-0.2
 0.2, 0.2
 key2.png
-d
+|
 arial, 2.0 
 
 gui-button
-f
+~
 0.66,-0.2
 0.2, 0.2
 key2.png
-f
+~
 arial, 2.0 
 
 gui-button
-g
+<
 0.86,-0.2
 0.2, 0.2
 key2.png
-g
+<
 arial, 2.0 
 
 gui-button
-h
+>
 1.06,-0.2
 0.2, 0.2
 key2.png
-h
+>
 arial, 2.0 
 
 gui-button
-j
+@
 1.26,-0.2
 0.2, 0.2
 key2.png
-j
+@
 arial, 2.0 
 
 gui-button
-k
+&
 1.46,-0.2
 0.2, 0.2
 key2.png
-k
+&
 arial, 2.0 
 
 gui-button
-l
+"
 1.66,-0.2
 0.2, 0.2
 key2.png
-l
+"
 arial, 2.0 
 
 
@@ -190,43 +190,43 @@ row3
 9
 
 gui-button
-z
+.
 0.09,-0.4
 0.2, 0.2
 key2.png
-z
+.
 arial, 2.0 
 
 gui-button
-x
+,
 0.29,-0.4
 0.2, 0.2
 key2.png
-x
+,
 arial, 2.0 
 
 gui-button
-c
+?
 0.49,-0.4
 0.2, 0.2
 key2.png
-c
+?
 arial, 2.0 
 
 gui-button
-v
+!
 0.69,-0.4
 0.2, 0.2
 key2.png
-v
+!
 arial, 2.0 
 
 gui-button
-b
+'
 0.89,-0.4
 0.2, 0.2
 key2.png
-b
+'
 arial, 2.0 
 
 gui-button
@@ -274,15 +274,15 @@ prevpage
 0,-0.6
 0.3, 0.2
 key3.png
-Symbol
-arial, 2.0, inv 
+123
+arial, 2.0, inv
 
 gui-button
 nextpage
 0.3,-0.6
 0.3, 0.2
 key3.png
-ABC
+abc
 arial, 2.0, inv
 
 gui-button
@@ -299,7 +299,7 @@ del
 0.3, 0.2
 key3.png
 Del
-arial, 2.0, inv 
+arial, 2.0, inv
 
 gui-button
 enter
@@ -312,6 +312,7 @@ arial, 2.0, inv
 
 
 // ******************************************
+
 
 
 
