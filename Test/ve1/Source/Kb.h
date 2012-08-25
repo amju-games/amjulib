@@ -28,8 +28,9 @@ public:
   // Call to change page
   bool Load(const std::string& guiKbFilename);
 
-  // Called when Next page button pressed
+  // Called when Next/Prev page button pressed
   void OnNextPage();
+  void OnPrevPage();
 
 private:
   RCPtr<GuiKeyboard> m_kb;

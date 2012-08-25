@@ -12,6 +12,12 @@ void OnNextPage()
   kb->OnNextPage();
 }
 
+void OnPrevPage()
+{
+  static Kb* kb = TheKb::Instance();
+  kb->OnPrevPage();
+}
+
 Kb::Kb()
 {
   m_mode = KB_HIDDEN;
@@ -28,10 +34,8 @@ bool Kb::Load(const std::string& guiKbFilename)
 {
 std::cout << "KB: Loading kb layout: " << guiKbFilename << "\n";
 
-  // Remove old listener ?
+  // Remove old listener 
   Deactivate();
-
-//std::cout << "KB: deactivated old layout.\n";
 
   m_kb = new GuiKeyboard;
   bool b = m_kb->OpenAndLoad(guiKbFilename); 
@@ -53,6 +57,21 @@ std::cout << "Next page set but num pages is " << m_pages.size() << "!!\n";
   else
   {
 std::cout << "KB: no next page for this layout: " << guiKbFilename << "\n";
+  }
+
+  GuiButton* prevpage = (GuiButton*)m_kb->GetElementByName("prevpage");
+  if (prevpage)
+  {
+    prevpage->SetCommand(Amju::OnPrevPage);
+    if (m_pages.size() < 2)
+    {
+std::cout << "Prev page set but num pages is " << m_pages.size() << "!!\n";
+      Assert(0);
+    }
+  }
+  else
+  {
+std::cout << "KB: no prev page for this layout: " << guiKbFilename << "\n";
   }
 
   return true;
@@ -80,6 +99,25 @@ void Kb::OnNextPage()
   {
 std::cout << "Failed to load KB page: " << page << "\n";
   }
+  m_mode = KB_SHOWING;
+  Activate();
+}
+
+void Kb::OnPrevPage()
+{
+  m_currentPage--;
+  if (m_currentPage == -1)
+  {
+    m_currentPage = (int)m_pages.size() - 1;
+  }
+  const std::string& page = m_pages[m_currentPage];
+  bool b = Load(page);
+  if (!b)
+  {
+std::cout << "Failed to load KB page: " << page << "\n";
+  }
+  m_mode = KB_SHOWING;
+  Activate();
 }
 
 void Kb::SetEnabled(bool b)
