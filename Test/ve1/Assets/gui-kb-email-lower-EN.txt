@@ -270,20 +270,20 @@ row4
 5
 
 gui-button
-nextpage
+prevpage
 0,-0.6
 0.3, 0.2
 key3.png
-123
-arial, 2.0 
+Symbol
+arial, 2.0, inv
 
 gui-button
-prevpage
+nextpage
 0.3,-0.6
 0.3, 0.2
 key3.png
-123
-arial, 2.0 
+ABC
+arial, 2.0, inv
 
 gui-button
 space
@@ -299,7 +299,7 @@ del
 0.3, 0.2
 key3.png
 Del
-arial, 2.0 
+arial, 2.0, inv 
 
 gui-button
 enter
@@ -307,7 +307,7 @@ enter
 0.3, 0.2
 key3.png
 Enter
-arial, 2.0 
+arial, 2.0, inv 
 
 
 
