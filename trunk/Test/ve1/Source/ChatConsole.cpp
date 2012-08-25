@@ -433,9 +433,8 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
     static Kb* kb = TheKb::Instance();
     if (kb->IsEnabled())
     {
-      kb->Load("gui-kb-email-lower.txt"); // TODO
+      KbSetLayout(KB_LAYOUT_REGULAR);
 
-      kb->Activate();
       SetBottom(-0.2f); 
       size.y = 1.2f;
       bg->SetSize(size);
