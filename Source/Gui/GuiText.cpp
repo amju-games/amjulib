@@ -33,7 +33,7 @@ GuiText::GuiText()
   m_last = 0;
   m_caret = 0;
   m_selectedText = 0;
-  m_scaleX = 0.5f;
+  m_scaleX = 1.0f;
 }
 
 void GuiText::SetScaleX(float scaleX)
@@ -496,6 +496,10 @@ bool GuiText::LoadText(File* f)
     {
       std::string c = s.substr(6); // colour code should start at 6th char
       m_fgCol = FromHexString(c);
+    }
+    else if (StringContains(s, "sx="))
+    {
+      m_scaleX = ToFloat(s.substr(4));
     }
     else
     {
