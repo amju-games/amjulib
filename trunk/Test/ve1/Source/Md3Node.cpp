@@ -1,3 +1,4 @@
+#include <AmjuGL.h>
 #include "Md3Node.h"
 
 namespace Amju
@@ -14,10 +15,23 @@ void Md3Node::Update()
 
 void Md3Node::Draw()
 {
-  if (m_model)
+  Assert(IsVisible());
+  if (!m_model)
   {
-    m_model->DrawModel();
-  }  
+    return;
+  }
+
+  AmjuGL::PushMatrix();
+  AmjuGL::MultMatrix(m_local);
+  // TODO Offset Y so feet are at zero
+  AmjuGL::Translate(0, 23.0f, 0);
+  m_model->DrawModel();
+  AmjuGL::PopMatrix();
+
+#ifdef AABB_DEBUG
+  DrawAABB(*GetAABB());
+#endif
+   
 }
 
 void Md3Node::SetFromCharacterName(const std::string& chName)
@@ -33,14 +47,18 @@ void Md3Node::SetFromCharacterName(const std::string& chName)
   {
     std::cout << "Failed to load model.\n";
   }
-
 }
 
 void Md3Node::SetAnim(const std::string& animName)
 {
   Assert(m_model);
-  m_model->SetTorsoAnimation("BOTH_DEATH1");
-  m_model->SetLegsAnimation("LEGS_RUN");
+  static bool once = true;
+  if (once)
+  {
+    once = false;
+    m_model->SetTorsoAnimation("BOTH_DEATH1");
+    m_model->SetLegsAnimation("LEGS_RUN");
+  }
 }
 
 }

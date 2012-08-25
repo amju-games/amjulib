@@ -22,10 +22,16 @@ static const float XSIZE = 20.0f;
 static const float YSIZE = 60.0f;
 
 const char* Baddie::TYPENAME = "baddie";
+static const char* AVATAR_KEY = "avatar";
 
 const char* Baddie::GetTypeName() const
 {
   return TYPENAME;
+}
+
+Baddie::Baddie()
+{
+  //SetKeyVal(AVATAR_KEY, "dino1");
 }
 
 void Baddie::Update()

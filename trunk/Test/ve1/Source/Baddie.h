@@ -13,6 +13,7 @@ class Baddie : public Ve1ObjectChar
 public:
   static const char* TYPENAME;
 
+  Baddie();
   virtual const char* GetTypeName() const;
   virtual void Update();
   virtual bool Load(File*);

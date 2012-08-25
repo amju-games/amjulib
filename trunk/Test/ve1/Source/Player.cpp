@@ -244,9 +244,6 @@ bool Player::Load(File* f)
     return false;
   }
 
-  m_nameTag = new PlayerNameNode(this);
-  m_sceneNode->AddChild(m_nameTag.GetPtr());
-
   // Load arrow scene node
   ObjMesh* arrowMesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("arrow.obj"); 
   Assert(arrowMesh);
@@ -274,6 +271,12 @@ void Player::OnLocationEntry()
 
   root->AddChild(m_arrow.GetPtr());
   SetArrowVis(false);
+
+  m_nameTag = new PlayerNameNode(this);
+  if (m_sceneNode)
+  {
+    m_sceneNode->AddChild(m_nameTag.GetPtr());
+  }
 
   // TODO Portal should have a heading which you should face when you appear at the destination
   m_isMoving = false; 
