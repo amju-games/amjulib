@@ -121,8 +121,7 @@ void GSTitle::OnActive()
     TheAvatarManager::Instance()->Load();
 
     // Set default keyboard layout
-    TheKb::Instance()->Load("gui-kb-letter-lower.txt");
-    // TODO Check for success - what if it fails ?
+    KbSetLayout(KB_LAYOUT_REGULAR);
 
     TheGSOptions::Instance()->LoadFromConfig();
   }

@@ -109,11 +109,13 @@ void GSLogin::OnActive()
   static Kb* kb = TheKb::Instance();
   if (kb->IsEnabled())
   {
-    // Filenames for pages for this Kb layout
-    Strings strs;
-    strs.push_back("gui-kb-email-lower.txt");
-    strs.push_back("gui-kb-num.txt");
-    kb->SetPages(strs); // loads first one
+    KbSetLayout(KB_LAYOUT_EMAIL);
+
+//    // Filenames for pages for this Kb layout
+//    Strings strs;
+//    strs.push_back("gui-kb-email-lower.txt");
+//    strs.push_back("gui-kb-num.txt");
+//    kb->SetPages(strs); // loads first one
 
     kb->Activate();
     // Set floor of this GUI
