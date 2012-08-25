@@ -17,12 +17,14 @@ void KbSetLayout(KbLayout layout)
     strs.push_back("gui-kb-letter-lower.txt");
     strs.push_back("gui-kb-letter-upper.txt");
     strs.push_back("gui-kb-num.txt");
+    strs.push_back("gui-kb-symbol.txt");
     break;
 
   case KB_LAYOUT_EMAIL:
     strs.push_back("gui-kb-email-lower.txt");
     strs.push_back("gui-kb-letter-upper.txt");
     strs.push_back("gui-kb-num.txt");
+    strs.push_back("gui-kb-symbol.txt");
     break;
 
   default:
