@@ -40,7 +40,7 @@ private:
   private:
     RCPtr<OnlineReq> m_req;
     HttpClient m_hc;
-    Mutex m_mutex;
+    mutable Mutex m_mutex;
   };
   SerialThread* m_thread;
 };

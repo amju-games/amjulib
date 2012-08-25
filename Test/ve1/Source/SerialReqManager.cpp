@@ -28,17 +28,20 @@ std::cout << "REQ: " << req->GetName() << "\n";
 
 void SerialReqManager::SerialThread::Work()
 {
-  while (true)
+  while (!m_stop)
   {
-//    m_mutex.Lock();
+    m_mutex.Lock();
     RCPtr<OnlineReq> r = m_req;
     bool ready = (r && !r->IsFinished());
-//    m_mutex.Unlock();
+    m_mutex.Unlock();
 
     if (ready)
     {
-      m_req->DoRequest(m_hc);
+      r->DoRequest(m_hc);
+    
+      m_mutex.Lock();
       m_req = 0;
+      m_mutex.Unlock();
     }
     else
     {
@@ -49,12 +52,16 @@ void SerialReqManager::SerialThread::Work()
 
 void SerialReqManager::SerialThread::SetReq(RCPtr<OnlineReq> req)
 {
+  MutexLocker mlock(m_mutex);
+
   Assert(m_req == 0);
   m_req = req;
 }
 
-bool SerialReqManager::SerialThread::Waiting() const
+bool SerialReqManager::SerialThread::Waiting()  const
 {
+  MutexLocker mlock(m_mutex);
+
   return (m_req == 0);
 }
 
@@ -93,7 +100,7 @@ bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType)
   // This lets us get rid of old positions which will be overwritten, etc.
   // TODO
 
-std::cout << "QUEUE REQ: " << req->GetName() << "\n";
+//std::cout << "QUEUE REQ: " << req->GetName() << "\n";
 
   m_reqs.push_back(req);
 
