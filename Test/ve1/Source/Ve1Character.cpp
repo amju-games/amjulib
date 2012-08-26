@@ -32,7 +32,11 @@ void Ve1Character::Update()
   // For logged out players, only draw if near the local player.
   // We fade in/out with distance. The distance could be configurable.
   // This gives a good frame rate improvement if lots of logged out players.
-  if (!loggedIn)
+  if (loggedIn)
+  {
+    SetBlended(false); // no translucency
+  }
+  else
   {
     float sqDist = (GetLocalPlayer()->GetPos() - player->GetPos()).SqLen();
     static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
@@ -49,7 +53,11 @@ void Ve1Character::Update()
     else if (sqDist > MIN_FADE_DIST2)
     {
       float a = (sqDist - MIN_FADE_DIST2) / (MAX_FADE_DIST2 - MIN_FADE_DIST2);
-      SetColour(Colour(1, 1, 1, 1.0f - a));
+      //SetColour(Colour(1, 1, 1, 1.0f - a));
+      
+      // Incoporates code which was in Player::SetLoggedIn()
+      SetColour(Colour(0, 0, 0, 0.2f * (1.0f - a)));
+      SetBlended(true);
     }
   }
    

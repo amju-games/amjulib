@@ -55,6 +55,7 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   {
     static AvatarManager* am = TheAvatarManager::Instance();
     Ve1Character* node = am->Create(val);
+    node->SetObj(this);
     if (node)
     {
       SetSceneNode(node);
