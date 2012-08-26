@@ -300,6 +300,9 @@ namespace Amju
     // This renders the character to the screen
     void DrawModel();
 
+    // j.c. Update model: TODO separate per-player data from shared model data
+    void Update();
+
     // This frees the character's data
     void DestroyModel(t3DModel *pModel);
 
