@@ -11,7 +11,12 @@ Md3Node::Md3Node()
 
 void Md3Node::Update()
 {
-  
+  Ve1Character::Update();
+
+  if (IsVisible())
+  {
+    // TODO Animate
+  }  
 }
 
 void Md3Node::Draw()

@@ -3,9 +3,59 @@
 #include <DrawAABB.h>
 #include "GameMode.h"
 #include "Ve1Object.h"
+#include "Player.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
+void Ve1Character::BeforeDraw()
+{
+}
+
+void Ve1Character::AfterDraw()
+{
+}
+
+void Ve1Character::Update()
+{
+  Player* player = dynamic_cast<Player*>(m_obj.GetPtr());
+  if (!player)
+  {
+    return;
+  }
+
+  // It's a player: fade out distant players
+  // TODO Distance depends if logged in or not. Even logged in players should fade ?
+
+  bool loggedIn = player->IsLoggedIn();
+
+  // For logged out players, only draw if near the local player.
+  // We fade in/out with distance. The distance could be configurable.
+  // This gives a good frame rate improvement if lots of logged out players.
+  if (!loggedIn)
+  {
+    float sqDist = (GetLocalPlayer()->GetPos() - player->GetPos()).SqLen();
+    static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
+    static const float MIN_FADE_DIST = 100.0f;
+    static const float MAX_FADE_DIST2 = MAX_FADE_DIST * MAX_FADE_DIST;
+    static const float MIN_FADE_DIST2 = MIN_FADE_DIST * MIN_FADE_DIST;
+
+    if (sqDist > MAX_FADE_DIST2)
+    {
+      // Too far away
+      SetVisible(false);
+      return;
+    }
+    else if (sqDist > MIN_FADE_DIST2)
+    {
+      float a = (sqDist - MIN_FADE_DIST2) / (MAX_FADE_DIST2 - MIN_FADE_DIST2);
+      SetColour(Colour(1, 1, 1, 1.0f - a));
+    }
+  }
+   
+   SetVisible(true);
+}
+
 void Ve1Character::Draw()
 {
   // Subclasses override. Use before/after to show selected - TODO

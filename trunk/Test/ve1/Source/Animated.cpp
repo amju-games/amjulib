@@ -145,7 +145,12 @@ void Animated::Update()
     return;
   }
 
-  SceneNode::Update();
+  Ve1Character::Update();
+  
+  if (!IsVisible())
+  {
+    return;
+  }
 
   Assert(m_pModel);
   float dt = TheTimer::Instance()->GetDt();

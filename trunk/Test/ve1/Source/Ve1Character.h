@@ -14,9 +14,13 @@ public:
 
   virtual bool Load(File* f);
   virtual void Draw() = 0;
+  virtual void Update() = 0; // CALL THIS IMPLEMENTATION FOR FADING
 
   // Md2, Md3 etc do these in different ways
   virtual void SetFromCharacterName(const std::string& characterName) = 0;
+
+  virtual void BeforeDraw();
+  virtual void AfterDraw();
 
   enum Anim
   {
