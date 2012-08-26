@@ -2,15 +2,22 @@
 // ver
 1
 // Num chars
-2
-// Correspond to subdirs in characters/
+3
+// Names correspond to subdirs in Assets/characters/
+
 bird1
 md2blink
 
 lara
 md3
 
+dino1
+md2blink
 
+
+
+////////////////////////////////////
+// OLD DATA
 
 pz-cat.md2
 pz-rabbit.md2
