@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-6
+7
 
 
 // Element type
@@ -38,8 +38,16 @@ back
 arial, 2.0 
 
 gui-button
+avatar-button
+-0.4,0.8
+0.8,0.2
+gui-button-4.png
+my avatar...
+arial, 2.0
+
+gui-button
 fullscreen-button
--0.4,0.5
+-0.4,0.55
 0.8,0.2
 gui-button-4.png
 fullscreen
@@ -55,7 +63,7 @@ arial, 2.0
 
 gui-button
 keyboard-button
--0.4,0.1
+-0.4,0.05
 0.8,0.2
 gui-button-4.png
 keyboard...
@@ -63,7 +71,7 @@ arial, 1.5
 
 gui-button
 inet-button
--0.4,-0.1
+-0.4,-0.2
 0.8,0.2
 gui-button-4.png
 internet...
