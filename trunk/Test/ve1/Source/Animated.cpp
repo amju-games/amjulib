@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "ReportError.h"
 #include "DrawAABB.h"
+#include "Player.h"
 #include "AmjuFinal.h"
 
 namespace Amju
@@ -148,6 +149,12 @@ void Animated::Update()
   Ve1Character::Update();
   
   if (!IsVisible())
+  {
+    return;
+  }
+
+  Player* player = dynamic_cast<Player*>(m_obj.GetPtr());
+  if (player && !player->IsLoggedIn())
   {
     return;
   }
