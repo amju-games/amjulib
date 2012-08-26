@@ -1,4 +1,5 @@
 #include <AmjuGL.h>
+#include "Player.h"
 #include "Md3Node.h"
 
 namespace Amju
@@ -13,10 +14,18 @@ void Md3Node::Update()
 {
   Ve1Character::Update();
 
-  if (IsVisible())
+  if (!IsVisible())
   {
-    // TODO Animate
+    return;
   }  
+
+  Player* player = dynamic_cast<Player*>(m_obj.GetPtr());
+  if (player && !player->IsLoggedIn())
+  {
+    return;
+  }
+
+  m_model->Update();
 }
 
 void Md3Node::Draw()

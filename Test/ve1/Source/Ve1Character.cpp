@@ -38,6 +38,8 @@ void Ve1Character::Update()
   }
   else
   {
+    SetAnim(ANIM_IDLE);
+
     float sqDist = (GetLocalPlayer()->GetPos() - player->GetPos()).SqLen();
     static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
     static const float MIN_FADE_DIST = 100.0f;
@@ -57,6 +59,11 @@ void Ve1Character::Update()
       
       // Incoporates code which was in Player::SetLoggedIn()
       SetColour(Colour(0, 0, 0, 0.2f * (1.0f - a)));
+      SetBlended(true);
+    }
+    else
+    {
+      SetColour(Colour(0, 0, 0, 0.2f));
       SetBlended(true);
     }
   }
