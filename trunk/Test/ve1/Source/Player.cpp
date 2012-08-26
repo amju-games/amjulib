@@ -365,6 +365,7 @@ void Player::SetLoggedIn(bool loggedIn)
 
   Assert(m_sceneNode);
 
+  /*
   // Translucent if logged out
   // Does this have to be every frame.
   if (IsLoggedIn())
@@ -379,6 +380,7 @@ void Player::SetLoggedIn(bool loggedIn)
     m_sceneNode->SetColour(Colour(GREY, GREY, GREY, 0.2f));
     m_sceneNode->SetBlended(true); // problems ?
   }
+  */
 }
 
 void Player::Update()
