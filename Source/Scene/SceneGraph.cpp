@@ -280,6 +280,8 @@ void SceneGraph::Draw()
 
   // Draw alpha-blended nodes
   std::sort(m_blendNodes.begin(), m_blendNodes.end());
+  
+  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 
   for (BlendNodes::iterator it = m_blendNodes.begin(); it != m_blendNodes.end(); ++it)
   {
@@ -291,7 +293,9 @@ void SceneGraph::Draw()
       AmjuGL::PushMatrix();
       // Blended nodes may need to mult by their combined transform.
       // Shadows don't need to do this because they use absolute coords.
+      sn->BeforeDraw();
       DrawNode(sn);
+      sn->AfterDraw();
       AmjuGL::PopMatrix();
     }
   }
