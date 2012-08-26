@@ -8,6 +8,7 @@
 #include "GSProxy.h"
 #include "Kb.h"
 #include "SaveConfig.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -36,6 +37,12 @@ static void OnInternet()
 static void OnKeyboard()
 {
   TheGSOptions::Instance()->OnKeyboard();
+}
+
+static void OnAvatar()
+{
+  TheGSAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance()); 
 }
 
 GSOptions::GSOptions()
@@ -89,6 +96,13 @@ void GSOptions::OnActive()
   GetElementByName(m_gui, "sound-button")->SetCommand(OnSound);
   GetElementByName(m_gui, "fullscreen-button")->SetCommand(OnFullscreen);
   GetElementByName(m_gui, "inet-button")->SetCommand(OnInternet);
+  
+
+  GuiButton* avatar = (GuiButton*)GetElementByName(m_gui, "avatar-button");
+  Assert(avatar);
+  avatar->SetCommand(OnAvatar);
+  bool okToChangeAvatar = (GetLocalPlayer() && GetLocalPlayer()->IsLoggedIn());
+  avatar->SetIsEnabled(okToChangeAvatar);  
 
   LoadFromConfig();
 

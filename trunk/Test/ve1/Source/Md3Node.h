@@ -13,11 +13,13 @@ public:
   virtual void Draw();
   virtual void Update();
   virtual void SetFromCharacterName(const std::string& characterName);
-  virtual void SetAnim(const std::string& animName);
+  virtual void SetAnim(Anim anim);
 
 private:
   // Md3 mesh - owned by ResourceManager
   RCPtr<CModelMD3> m_model;
+
+  Anim m_currentAnim;
 };
 
 }

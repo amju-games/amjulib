@@ -18,7 +18,7 @@ public:
 
   virtual void SetFromCharacterName(const std::string& characterName);
 
-  virtual void SetAnim(const std::string& animName);
+  virtual void SetAnim(Anim animName);
 
   // TODO Why do we need these ?
   bool LoadMd2(const std::string& md2name);

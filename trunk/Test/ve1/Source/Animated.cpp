@@ -28,7 +28,7 @@ std::cout << "Loading character MD2: " << file << "\n";
   LoadMd2(file);
 }
 
-void Animated::SetAnim(const std::string& animName)
+void Animated::SetAnim(Animated::Anim anim)
 {
   if (!m_pModel)
   {
@@ -36,8 +36,18 @@ void Animated::SetAnim(const std::string& animName)
     return;
   }
 
-  int anim = m_pModel->GetAnimationFromName(animName);
-  SetAnim(anim);
+  // These names match order of Anim enum. The strings are the same in the MD2 model.
+  // We allow MD2s to have anims in any order, so we look up per-model.
+  static const int NUM_ANIMS = 3;
+  static const char* ANIM_NAMES[NUM_ANIMS] = 
+  {
+    "stand",
+    "walk",
+    "walk" // because no run, TODO
+  };
+  Assert(anim < NUM_ANIMS);
+  int animCode = m_pModel->GetAnimationFromName(ANIM_NAMES[anim]);
+  SetAnim(animCode);
 }
 
 void Animated::SetAnim(int anim)

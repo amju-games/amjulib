@@ -18,11 +18,6 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
-  bool LoadCharList();
-
   void OnNextType();
   void OnPrevType();
   void OnNextColour();
@@ -31,13 +26,15 @@ public:
   void OnOk();
 
 private:
+  void CreateChar();
+
+private:
   //typedef std::vector<RCPtr<Ve1Character> > Characters;
   //Characters m_chars;
 
-  Ve1Character* m_char;
+  RCPtr<Ve1Character> m_char;
 
-  int m_currentChar;
-  int m_currentTex;
+  std::string m_currentChar;
 };
 typedef Singleton<GSAvatarMod> TheGSAvatarMod;
 } // namespace

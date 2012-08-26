@@ -185,15 +185,15 @@ void Ve1ObjectChar::Update()
 
       if (speed > RUN_SPEED)
       {
-        vc->SetAnim("walk"); //"run");
+        vc->SetAnim(Ve1Character::ANIM_RUN);
       }
       else if (speed > WALK_SPEED)
       {
-        vc->SetAnim("walk");
+        vc->SetAnim(Ve1Character::ANIM_WALK);
       }
       else
       {
-        vc->SetAnim("stand");
+        vc->SetAnim(Ve1Character::ANIM_IDLE);
       }
     }
   }
