@@ -167,6 +167,7 @@ void GSAvatarMod::CreateChar()
   static AvatarManager* am = TheAvatarManager::Instance();
 
   m_char = am->Create(m_currentChar);
+  m_char->SetAnim(Ve1Character::ANIM_IDLE);
   ClearGuiSceneGraph();
   GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char.GetPtr()); 
 
