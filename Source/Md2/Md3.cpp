@@ -646,20 +646,20 @@ namespace Amju
     SetCurrentTime(pModel);
   }
 
+  void CModelMD3::Update()
+  {
+    // Update the leg and torso animations
+    // TODO Break up shared and per-player data
+    UpdateModel(&m_Lower);
+    UpdateModel(&m_Upper);
+  }
+
   void CModelMD3::DrawModel()
   {
     // Rotate the model to compensate for the z up orientation that the model was saved
     //glRotatef(-90, 1, 0, 0);
     AmjuGL::RotateX(-90.0f);
     AmjuGL::RotateZ(-90.0f);
-
-    // Since we have animation now, when we draw the model the animation frames need
-    // to be updated.  To do that, we pass in our lower and upper models to UpdateModel().
-    // There is no need to pass in the head of weapon, since they don't have any animation.
-
-    // Update the leg and torso animations
-    UpdateModel(&m_Lower);
-    UpdateModel(&m_Upper);
 
     // Draw the first link, which is the lower body.  This will then recursively go
     // through the models attached to this model and drawn them.
