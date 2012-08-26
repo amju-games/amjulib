@@ -22,6 +22,7 @@ static const float XSIZE = 20.0f;
 static const float YSIZE = 60.0f;
 
 const char* Baddie::TYPENAME = "baddie";
+
 static const char* AVATAR_KEY = "avatar";
 
 const char* Baddie::GetTypeName() const
@@ -31,7 +32,7 @@ const char* Baddie::GetTypeName() const
 
 Baddie::Baddie()
 {
-  //SetKeyVal(AVATAR_KEY, "dino1");
+  SetKeyVal(AVATAR_KEY, "dino1");
 }
 
 void Baddie::Update()
@@ -54,10 +55,6 @@ void Baddie::Update()
 
 bool Baddie::Load(File* f)
 {
-  // Create Scene Node, but don't attach to SceneGraph until needed
-  ////Ve1Character* node = TheAvatarManager::Instance()->Create("baddie"); //new Ve1Character(this);
-  ////m_sceneNode = node;
-
   if (!m_shadow->Load(f))
   {
     return false;

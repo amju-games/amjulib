@@ -11,6 +11,7 @@
 #include "GSStartMenu.h"
 #include "AvatarManager.h"
 #include "Ve1Object.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -47,33 +48,31 @@ void OnTypeNextButton()
 
 GSAvatarMod::GSAvatarMod()
 {
-  m_currentChar = 0;
-  m_currentTex = 0;
   m_char = 0;
 }
 
 void GSAvatarMod::OnNextColour()
 {
-  m_currentTex++;
+  //m_currentTex++;
   //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 void GSAvatarMod::OnPrevColour()
 {
-  m_currentTex--;
+  //m_currentTex--;
   //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
 void GSAvatarMod::OnNextType()
 {
-  m_currentChar++;
-  //TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+  m_currentChar = TheAvatarManager::Instance()->GetNextName(m_currentChar);
+  CreateChar();
 }
 
 void GSAvatarMod::OnPrevType()
 {
-  m_currentChar--;
-  //TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
+  m_currentChar = TheAvatarManager::Instance()->GetPrevName(m_currentChar);
+  CreateChar();
 }
 
 void GSAvatarMod::OnCancel()
@@ -85,18 +84,17 @@ void GSAvatarMod::OnCancel()
 void GSAvatarMod::OnOk()
 {
   PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
-  pi->PISetBool(PI_KEY("has set up"), true);
+//  pi->PISetBool(PI_KEY("has set up"), true);
 
   // This may not be necessary except as an optimisation and so we display the correct type next time
   //  we are in this game state...?
   // TODO Not using this info yet
-  pi->PISetInt(PI_KEY("type"), m_currentChar);
-  pi->PISetInt(PI_KEY("tex"), m_currentTex);
+//  pi->PISetInt(PI_KEY("avatar"), m_currentChar);
 
   // Send update req so all clients show correct avatar settings
   int objId = pi->PIGetInt(PI_KEY("player obj id"));
-  TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("type"), ToString(m_currentChar)); // TODO use int, not string
-  TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("tex"), ToString(m_currentTex)); // TODO use int, not string
+  // OR GetLocalPlayer()->GetId() -- which is better ?
+  TheObjectUpdater::Instance()->SendUpdateReq(objId, SET_KEY("avatar"), m_currentChar); 
   // TODO more avatar settings
 
   GoBack(); 
@@ -154,34 +152,24 @@ void GSAvatarMod::OnActive()
   GetGuiSceneGraph()->Clear();
   GetGuiSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
+  // TODO Horribly hardcoded here, use constants
+  m_currentChar = GetLocalPlayer()->GetVal("avatar");
+  if (m_currentChar.empty())
+  {
+std::cout << "No avatar set for local player ???\n";
+    m_currentChar = "bird1";
+  }
+  CreateChar();
+}
+
+void GSAvatarMod::CreateChar()
+{
   static AvatarManager* am = TheAvatarManager::Instance();
 
-  m_char = am->Create("baddie"); // TODO  //new Ve1Character(0);
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char); 
+  m_char = am->Create(m_currentChar);
+  ClearGuiSceneGraph();
+  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(m_char.GetPtr()); 
 
-  // TODO
-  // ?? Setting locally, wtf, must set key/val on server
-  PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
-  if (pi->PIGetBool(PI_KEY("has set up")))
-  {
-    // Has set up, so we can get previous settings
-    m_currentChar = pi->PIGetInt(PI_KEY("type")); 
-    m_currentTex = pi->PIGetInt(PI_KEY("tex"));
-  }
-
-//  TheAvatarManager::Instance()->SetAvatar(m_currentChar, m_char);
-//  TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
 }
 
-bool GSAvatarMod::OnCursorEvent(const CursorEvent& ce)
-{
-  GSGui::OnCursorEvent(ce);
-  return false;
-}
-
-bool GSAvatarMod::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  GSGui::OnMouseButtonEvent(mbe);
-  return false;
-}
 } // namespace

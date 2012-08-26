@@ -16,6 +16,9 @@ public:
 
   Ve1Character* Create(const std::string& characterName);
 
+  const std::string& GetNextName(const std::string& characterName);
+  const std::string& GetPrevName(const std::string& characterName);
+
 /*
   // Set the avatar type for a character
   void SetAvatar(int type, Ve1Character*);

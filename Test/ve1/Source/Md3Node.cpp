@@ -6,6 +6,7 @@ namespace Amju
 Md3Node::Md3Node()
 {
   m_model = 0;
+  m_currentAnim = ANIM_NOT_SET_YET;
 }
 
 void Md3Node::Update()
@@ -49,15 +50,37 @@ void Md3Node::SetFromCharacterName(const std::string& chName)
   }
 }
 
-void Md3Node::SetAnim(const std::string& animName)
+void Md3Node::SetAnim(Md3Node::Anim anim)
 {
   Assert(m_model);
-  static bool once = true;
-  if (once)
+  // Only if anim changes
+  // MD3 TODO - extract current model state from drawing/static data
+
+  if (anim == m_currentAnim)
   {
-    once = false;
-    m_model->SetTorsoAnimation("BOTH_DEATH1");
+    return;
+  }
+  m_currentAnim = anim;
+
+  switch (anim) 
+  {
+  case ANIM_IDLE:
+    m_model->SetTorsoAnimation("TORSO_STAND");
+    m_model->SetLegsAnimation("LEGS_IDLE");
+    break;
+
+  case ANIM_WALK:
+    m_model->SetTorsoAnimation("TORSO_STAND2"); // TODO ?
+    m_model->SetLegsAnimation("LEGS_WALK");
+    break;
+
+  case ANIM_RUN:
+    m_model->SetTorsoAnimation("TORSO_STAND2"); // TODO ?
     m_model->SetLegsAnimation("LEGS_RUN");
+    break;
+
+  default:
+    Assert(0);
   }
 }
 

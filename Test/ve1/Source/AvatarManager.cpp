@@ -8,6 +8,46 @@
 
 namespace Amju
 {
+const std::string& AvatarManager::GetNextName(const std::string& characterName)
+{
+  Assert(!m_chars.empty());
+
+  CharMap::iterator it = m_chars.find(characterName);
+  if (it == m_chars.end())
+  {
+std::cout << "Get next name: No character called \"" << characterName << "\"\n";
+    return m_chars.begin()->first;
+  }
+  
+  ++it;
+  if (it == m_chars.end())
+  {
+    it = m_chars.begin();
+  }
+  return it->first;
+}
+
+const std::string& AvatarManager::GetPrevName(const std::string& characterName)
+{
+  Assert(!m_chars.empty());
+
+  CharMap::reverse_iterator it(m_chars.find(characterName)); // NB explicit ctor call required,
+    // http://stackoverflow.com/questions/2310656/reverse-iteration-from-a-given-map-iterator
+
+  if (it == m_chars.rend())
+  {
+std::cout << "Get next name: No character called \"" << characterName << "\"\n";
+    return m_chars.begin()->first;
+  }
+  
+  ++it;
+  if (it == m_chars.rend())
+  {
+    it = m_chars.rbegin();
+  }
+  return it->first;
+}
+
 Ve1Character* AvatarManager::Create(const std::string& characterName)
 {
   // TODO TEMP TEST

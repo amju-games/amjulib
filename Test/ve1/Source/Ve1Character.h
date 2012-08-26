@@ -17,7 +17,16 @@ public:
 
   // Md2, Md3 etc do these in different ways
   virtual void SetFromCharacterName(const std::string& characterName) = 0;
-  virtual void SetAnim(const std::string& animName) = 0;
+
+  enum Anim
+  {
+    ANIM_NOT_SET_YET = -1,
+
+    ANIM_IDLE = 0,
+    ANIM_WALK = 1,
+    ANIM_RUN  = 2
+  };
+  virtual void SetAnim(Anim anim) = 0;
 
   void SetObj(Ve1Object* obj) { m_obj = obj; }
 
