@@ -64,8 +64,8 @@ sub create_table_object()
 CREATE TABLE `object`
 (`id` INT NOT NULL AUTO_INCREMENT,
 `type` VARCHAR(30) NOT NULL,
-`assetfile` VARCHAR(30) NOT NULL,
-`datafile` VARCHAR(30) NOT NULL,
+`assetfile` VARCHAR(100) NOT NULL,
+`datafile` VARCHAR(100) NOT NULL,
 `owner` INT NOT NULL,
 `createtime` TIMESTAMP,
 PRIMARY KEY (`id`),
@@ -152,7 +152,7 @@ sub create_table_fileupdate()
   my $sql = <<END;
 
 CREATE TABLE `fileupdate`
-(`filename` VARCHAR(30) NOT NULL,
+(`filename` VARCHAR(100) NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
 PRIMARY KEY (`filename`),
 INDEX (`whenchanged`)
@@ -172,7 +172,7 @@ CREATE TABLE `location`
 (`id` INT NOT NULL AUTO_INCREMENT,
 `obj_id` INT NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
-`name` VARCHAR(50),
+`name` VARCHAR(100),
 PRIMARY KEY (`id`),
 FOREIGN KEY (`obj_id`) REFERENCES object(`id`),
 INDEX (`whenchanged`)
