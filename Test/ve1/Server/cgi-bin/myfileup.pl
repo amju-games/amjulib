@@ -56,8 +56,6 @@ sub myfileup_impl()
     my_connect2();
     my $sql = "insert into fileupdate (filename, whenchanged) values ('$directory/$filename', now()) on duplicate key update whenchanged=now()";
     update_or_insert($sql);
-    # Disconnect ASAP, to avoid running out of connections
-    disconnect();
   }
 
   #my $upload_filehandle = $query->param('data'); 
