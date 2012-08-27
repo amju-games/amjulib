@@ -54,16 +54,13 @@ sub storeresult()
   $sql = "insert into research_testresult (`test_id`, `key`, `val`) values ($testid, '$key', '$val')";
   insert($sql);
  
-  print "Query: $sql\n\n";
-
-
   # Acknowledge result stored
   print "<stored>1</stored>";
   
   # Reward for taking test
   # TODO base on result ?
   # TODO more/variety
-  print "<collect> <num>3</num> <type>0</type> <id>12345</id> </collect>\n"; 
+  print "<collect> <num>1</num> <type>0</type> <id>12345</id> </collect>\n"; 
 }
 
 
