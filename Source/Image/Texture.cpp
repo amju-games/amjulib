@@ -1,5 +1,10 @@
+//#define AMJU_USE_SDL_IMG
 
 #include "AmjuFirst.h"
+#ifdef AMJU_USE_SDL_IMG
+#include <SDL_image.h>
+#endif
+
 #include "Texture.h"
 #include "TextureUtils.h"
 #include "Bitmap.h"
@@ -44,6 +49,21 @@ bool Texture::Load(const std::string& filename)
   unsigned char* data = 0;
   unsigned int bpp = 3; // bytes per pixel
 
+#ifdef AMJU_USE_SDL_IMG
+
+  SDL_Surface* surf = IMG_Load(filename.c_str());
+  if (!surf)
+  {
+    ReportError("Failed to load texture " + filename);
+    return false;
+  }
+  w = surf->w;
+  h = surf->h;
+  data = (unsigned char*)surf->pixels;
+  bpp = surf->format->BytesPerPixel; 
+
+#else
+
   std::string ext = ToLower(GetFileExt(filename));
   if (ext == "bmp")
   {
@@ -62,8 +82,16 @@ bool Texture::Load(const std::string& filename)
     return false;
   }
 
+#endif
+
   Create(data, w, h, bpp); 
+
+#ifdef AMJU_USE_SDL_IMAGE
+  SDL_FreeSurface(surf);
+#else
   delete [] data;
+#endif
+
   return true;
 }
 
