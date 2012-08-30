@@ -15,6 +15,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2012
 
 #include <AmjuGL.h>
 #include <AmjuGL-OpenGL.h>
+#include <StringUtils.h>
+#include <Directory.h>
 
 #include <Md3.h>
 #include <Timer.h>
@@ -27,6 +29,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2012
 
 using namespace Amju;
 
+Strings charlist;
+int currentChar = 0;
 
 namespace Amju
 {
@@ -38,12 +42,7 @@ bool MyCreateWindowGLUT(AmjuGLWindowInfo*)
 }
 }
 
-
-#define MODEL_PATH  "lara/"                              // This stores the folder name the character is in
-#define MODEL_NAME      "lara"                          // This stores the prefix for all the character files
-#define GUN_NAME    "Railgun"                   // This stores the name of our gun to load
-
-static CModelMD3 md3;
+static RCPtr<CModelMD3> md3;
 static float yRot = 0;
 static float xRot = 0;
 static float xPos = 0;
@@ -83,6 +82,28 @@ void PrintText(const std::string& text, float x, float y)
   glPopAttrib();
 }
 
+void Load(const std::string& dirName)
+{
+  md3 = new CModelMD3;
+
+  std::cout << "*** Loading " << dirName << "\n";
+
+  // Load the 3 body part meshes and their skin, textures and animation config files
+  bool bResult = md3->LoadModel(dirName + "/"); //, modelName); //MODEL_PATH, MODEL_NAME);
+  if (!bResult)
+  {
+    std::cout << "Failed to load model.\n";
+  }
+
+//  // Load the gun and attach it to our character
+//  bResult = md3->LoadWeapon(modelPath, gunName); //MODEL_PATH, GUN_NAME);
+//  if (!bResult)
+//  {
+//    std::cout << "Failed to load weapon model.\n";
+//  }
+
+}
+
 void draw()
 {
   TheTimer::Instance()->Update();
@@ -94,29 +115,15 @@ void draw()
 #ifdef _DEBUG
 std::cout << "Creating mesh...\n";
 #endif
-    
-        // Load the 3 body part meshes and their skin, textures and animation config files
-        bool bResult = md3.LoadModel(MODEL_PATH, MODEL_NAME);
-        if (!bResult)
-        {
-            std::cout << "Failed to load model.\n";
-        }
 
-        // Load the gun and attach it to our character
-        bResult = md3.LoadWeapon(MODEL_PATH, GUN_NAME);
-        if (!bResult)
-        {
-            std::cout << "Failed to load weapon model.\n";
-        }
-
-    md3.SetTorsoAnimation("BOTH_DEATH1");
-    md3.SetLegsAnimation("LEGS_RUN");
+    Load(charlist[0]);
     initialised = true;
-  }
+  }    
 
   if (!paused)
   {
     //animPlayer.Update(dt, interpolate);
+    md3->Update();
   }
   else if (stepping)
   {
@@ -134,7 +141,7 @@ std::cout << "Creating mesh...\n";
   
   AmjuGL::InitFrame(); // 0.5f, 0.5f, 0.5f);
   AmjuGL::BeginScene();
-  AmjuGL::LookAt(0, 10.0f, 50.0f, 0, 0,0, 0, 1.0f, 0);
+  AmjuGL::LookAt(0, 10.0f, 80.0f, 0, 0,0, 0, 1.0f, 0);
 
   AmjuGL::Translate(xPos, yPos, zPos);
 
@@ -157,7 +164,7 @@ std::cout << "Creating mesh...\n";
   glPopAttrib();
   glEnable(GL_TEXTURE_2D);
 
-  md3.DrawModel();
+  md3->DrawModel();
 
   glDisable(GL_DEPTH_TEST);
   glDisable(GL_TEXTURE_2D);
@@ -222,7 +229,49 @@ void keydown(unsigned char c, int x, int y)
     //animPlayer.Update(0, interpolate);
   }
 
-  // TODO 
+  // Next char and prev char
+  if (c == 'n')
+  {
+    currentChar++;
+    if (currentChar == (int)charlist.size())
+    {
+      currentChar = 0;
+    }
+    std::cout << "New character: " << charlist[currentChar] << "\n";
+    Load(charlist[currentChar]);
+  }
+
+  if (c == 'b')
+  {
+    currentChar--;
+    if (currentChar == -1)
+    {
+      currentChar = charlist.size() - 1;
+    }
+    std::cout << "New character: " << charlist[currentChar] << "\n";
+    Load(charlist[currentChar]);
+  }
+
+  if (c == 'a')
+  {
+    static int anim = 0;
+    anim++;
+    if (anim > 1)
+    {
+      anim = 0;
+    }
+    switch (anim)
+    {
+    case 0:
+      md3->SetTorsoAnimation("TORSO_STAND_2");
+      md3->SetLegsAnimation("LEGS_RUN");
+      break;
+    case 1:
+      md3->SetTorsoAnimation("TORSO_STAND");
+      md3->SetLegsAnimation("LEGS_IDLE");
+      break;
+    }
+  }
 }
 
 void idle()
@@ -270,6 +319,8 @@ void mousemove(int x, int y)
 
 int main(int argc, char **argv)
 {
+  std::cout << "Usage: " << StripPath(argv[0]) << " [modelPath]\n";
+
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -297,12 +348,29 @@ int main(int argc, char **argv)
   float aspect = (float)windowX / (float)windowY;
   AmjuGL::SetPerspectiveProjection(45.0f, aspect, 1.0f, 1000.0f); 
 
-  glEnable(GL_LIGHTING);
+  glDisable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_DEPTH_TEST);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 
-  glFrontFace(GL_CW); // this means we need to reverse the winding order when we load the tris for an MD3
+//  glFrontFace(GL_CW); // this means we need to reverse the winding order when we load the tris for an MD3
+
+  // Look for md3 characters
+  DirEnts des;
+  Dir(".", &des, false);
+  for (unsigned int i = 0; i < des.size(); i++)
+  {
+    DirEnt& de = des[i];
+    if (de.m_name[0] == '.')
+    {
+      continue;
+    }
+    if (de.m_isDir)
+    {
+      std::cout << de.m_name << "\n";
+      charlist.push_back(de.m_name);
+    }
+  }
 
   glutMainLoop();
   return 0;
