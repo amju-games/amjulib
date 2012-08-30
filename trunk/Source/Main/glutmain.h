@@ -24,16 +24,6 @@
 
 using namespace Amju;
 
-namespace Amju
-{
-extern AmjuGLWindowInfo w;
-
-// TODO Make this a GLUT version in AmjuGLOpenGL
-bool CreateWindowGLUT(AmjuGLWindowInfo*)
-{
-  return true;
-}
-}
 
 void resize(int x, int y)
 {
@@ -210,16 +200,26 @@ void joystick(unsigned int buttonMask, int x, int y, int z)
   QueueEvent(j);
 }
 
-int main(int argc, char **argv)
+namespace Amju
 {
-  // TODO Have a CreateWindow for GLUT.. but events are tangled up with creating windows :-(
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
+extern AmjuGLWindowInfo w;
 
-  // w is global defined in game-specific code
-  glutInitWindowSize(w.GetWidth(), w.GetHeight()); 
+// TODO Make this a GLUT version in AmjuGLOpenGL
+bool CreateWindowGLUT(AmjuGLWindowInfo* w)
+{
+  if (w->IsFullScreen())
+  {
+    // TODO glutGameMode
+  }
+  else
+  {
+    // w is global defined in game-specific code
+    glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
+    glutCreateWindow("Hello"); // TODO App name
+  }
 
-  glutCreateWindow("Hello"); // TODO App name
+  // TODO Set icon
+
   glutDisplayFunc(draw);
   glutReshapeFunc(resize);
 
@@ -242,6 +242,14 @@ int main(int argc, char **argv)
     std::cout << "GLUT says joystick available!\n";
   }
   glutJoystickFunc(joystick, 50);
+  return true;
+}
+}
+
+int main(int argc, char **argv)
+{
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
 
   TheEventPoller::Instance()->SetImpl(new EventPollerImpl); 
 
