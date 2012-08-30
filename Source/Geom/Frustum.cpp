@@ -68,30 +68,21 @@ Frustum::FrustumResult Frustum::Intersects(const AABB& aabb) const
   {
     // Get "positive" and "negative" vertices for box for this plane
     Vec3f pos(aabb.GetMin(0), aabb.GetMin(1), aabb.GetMin(2));
+    Vec3f neg(aabb.GetMax(0), aabb.GetMax(1), aabb.GetMax(2));
+
     if (frustum[p][0] >= 0)
     {
       pos.x = aabb.GetMax(0);
-    }
-    if (frustum[p][1] >= 0)
-    {
-      pos.y = aabb.GetMax(1);
-    }
-    if (frustum[p][2] >= 0)
-    {
-      pos.z = aabb.GetMax(2);
-    }
-
-    Vec3f neg(aabb.GetMax(0), aabb.GetMax(1), aabb.GetMax(2));
-    if (frustum[p][0] >= 0)
-    {
       neg.x = aabb.GetMin(0);
     }
     if (frustum[p][1] >= 0)
     {
+      pos.y = aabb.GetMax(1);
       neg.y = aabb.GetMin(1);
     }
     if (frustum[p][2] >= 0)
     {
+      pos.z = aabb.GetMax(2);
       neg.z = aabb.GetMin(2);
     }
 
@@ -132,10 +123,10 @@ void Frustum::Create()
 {
   AMJU_CALL_STACK;
 
-  float	proj[16];									// For Grabbing The PROJECTION Matrix
-  float	modl[16];									// For Grabbing The MODELVIEW Matrix
-  float	clip[16];									// Result Of Concatenating PROJECTION and MODELVIEW
-  float	t;											// Temporary Work Variable
+  float	proj[16]; // For Grabbing The PROJECTION Matrix
+  float	modl[16]; // For Grabbing The MODELVIEW Matrix
+  float	clip[16]; // Result Of Concatenating PROJECTION and MODELVIEW
+  float	t; 
 
   AmjuGL::GetMatrix(AmjuGL::AMJU_PROJECTION_MATRIX, proj);
   AmjuGL::GetMatrix(AmjuGL::AMJU_MODELVIEW_MATRIX, modl);
