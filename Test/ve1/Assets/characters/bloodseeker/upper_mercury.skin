@@ -1,0 +1,6 @@
+tag_head,
+tag_weapon,
+u_bones,models/players/bloodseeker/chrome_bones.tga
+u_harness,models/players/bloodseeker/mercury_lower.jpg
+u_torso,models/players/bloodseeker/mercury_upper.jpg
+tag_torso,

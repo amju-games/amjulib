@@ -1,0 +1,6 @@
+tag_head,
+tag_weapon,
+u_bones,models/players/bloodseeker/bloodseeker_bones.tga
+u_harness,models/players/bloodseeker/bloodseeker_lower.tga
+u_torso,models/players/bloodseeker/bloodseeker_upper.tga
+tag_torso,
