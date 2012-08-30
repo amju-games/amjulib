@@ -1,9 +1,9 @@
-u_body,models/players/knight/kgt_1.tga
-u_sword,models/players/knight/kgt_1.tga
-u_rbicep,models/players/knight/kgt_1.tga
-u_rforearm,models/players/knight/kgt_2.tga
-u_lbicep,models/players/knight/kgt_1.tga
-u_lforearm,models/players/knight/kgt_2.tga
+u_body,models/players/knight/kgt_1.png
+u_sword,models/players/knight/kgt_1.png
+u_rbicep,models/players/knight/kgt_1.png
+u_rforearm,models/players/knight/kgt_2.png
+u_lbicep,models/players/knight/kgt_1.png
+u_lforearm,models/players/knight/kgt_2.png
 tag_head,
 tag_weapon,
 tag_torso,
