@@ -44,6 +44,7 @@ Resource* Md2Loader(const std::string& resName)
 
 ResourceManager::ResourceManager()
 {
+  AddLoader("tga", ImageLoader);
   AddLoader("png", ImageLoader);
   AddLoader("bmp", ImageLoader);
   AddLoader("md2", Md2Loader);
