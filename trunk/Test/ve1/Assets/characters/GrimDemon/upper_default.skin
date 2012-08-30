@@ -1,24 +1,24 @@
-u_upper,models/players/GrimDemon/DHgrimdemon_body.tga
+u_upper,models/players/GrimDemon/DHgrimdemon_body.png
 
-u_wingleft,models/players/GrimDemon/DHgrimdemon_wing.tga
+u_wingleft,models/players/GrimDemon/DHgrimdemon_wing.png
 
-u_head,models/players/GrimDemon/DHgrimdemon_head.tga
+u_head,models/players/GrimDemon/DHgrimdemon_head.png
 
-u_wingright,models/players/GrimDemon/DHgrimdemon_wing.tga
+u_wingright,models/players/GrimDemon/DHgrimdemon_wing.png
 
-u_bat,models/players/GrimDemon/DH_bat.tga
-u_littlebatwing02,models/players/GrimDemon/DH_bat.tga
-u_littlebatwing01,models/players/GrimDemon/DH_bat.tga
+u_bat,models/players/GrimDemon/DH_bat.png
+u_littlebatwing02,models/players/GrimDemon/DH_bat.png
+u_littlebatwing01,models/players/GrimDemon/DH_bat.png
 
-u_tongue,models/players/GrimDemon/DHgrimdemon_head.tga
-u_eyer,models/players/GrimDemon/DHgrimdemon_head.tga
-u_eyel,models/players/GrimDemon/DHgrimdemon_head.tga
-u_teeth,models/players/GrimDemon/DHgrimdemon_teeth.tga
+u_tongue,models/players/GrimDemon/DHgrimdemon_head.png
+u_eyer,models/players/GrimDemon/DHgrimdemon_head.png
+u_eyel,models/players/GrimDemon/DHgrimdemon_head.png
+u_teeth,models/players/GrimDemon/DHgrimdemon_teeth.png
 
-u_bat02,models/players/GrimDemon/DH_bat.tga
-u_batwingl2,models/players/GrimDemon/DH_bat.tga
-u_batwingr2,models/players/GrimDemon/DH_bat.tga
-u_bat03,models/players/GrimDemon/DH_bat.tga
-u_batwingl03,models/players/GrimDemon/DH_bat.tga
-u_batwingr03,models/players/GrimDemon/DH_bat.tga
-u_thunder,models/players/GrimDemon/t1.tga
+u_bat02,models/players/GrimDemon/DH_bat.png
+u_batwingl2,models/players/GrimDemon/DH_bat.png
+u_batwingr2,models/players/GrimDemon/DH_bat.png
+u_bat03,models/players/GrimDemon/DH_bat.png
+u_batwingl03,models/players/GrimDemon/DH_bat.png
+u_batwingr03,models/players/GrimDemon/DH_bat.png
+u_thunder,models/players/GrimDemon/t1.png

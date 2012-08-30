@@ -1,4 +1,4 @@
-l_armour,models/players/dark_knight/pendarion_extras_512.tga
-l_lower,models/players/dark_knight/pendarion_body_512.tga
-l_banners,models/players/dark_knight/pendarion_extras_fx_512.tga
+l_armour,models/players/dark_knight/pendarion_extras_512.png
+l_lower,models/players/dark_knight/pendarion_body_512.png
+l_banners,models/players/dark_knight/pendarion_extras_fx_512.png
 tag_torso,
