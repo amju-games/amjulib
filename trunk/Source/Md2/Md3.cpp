@@ -16,6 +16,8 @@
 #include "Md3.h"
 #include "StringUtils.h"
 
+//#define MD3_DEBUG
+
 namespace Amju
 {
   void CQuaternion::CreateMatrix(float *pMatrix)
@@ -285,17 +287,27 @@ namespace Amju
     return &m_Weapon;
   }
 
-  bool CModelMD3::LoadModel(const std::string& strPath, const std::string& strModel)
+  bool CModelMD3::LoadModel(const std::string& strPath) ////, const std::string& strModel)
   {
     CLoadMD3 loadMd3;				// This object allows us to load each .md3 and .skin file
+
+/* OLD from lara example, doesn't seem to be the convention
 
     std::string strLowerModel = strPath + strModel + "_lower.md3";
     std::string strUpperModel = strPath + strModel + "_upper.md3";
     std::string strHeadModel = strPath +  strModel + "_head.md3";
-
     std::string strLowerSkin = strPath + strModel + "_lower.skin";
     std::string strUpperSkin = strPath + strModel + "_upper.skin";
     std::string strHeadSkin = strPath +  strModel + "_head.skin";
+*/
+
+    // More standard naming convention
+    std::string strLowerModel = strPath + "lower.md3";
+    std::string strUpperModel = strPath + "upper.md3";
+    std::string strHeadModel = strPath +  "head.md3";
+    std::string strLowerSkin = strPath + "lower_default.skin";
+    std::string strUpperSkin = strPath + "upper_default.skin";
+    std::string strHeadSkin = strPath +  "head_default.skin";
 
     // Load the head mesh (*_head.md3) and make sure it loaded properly
     if(!loadMd3.ImportMD3(&m_Head,  strHeadModel))
@@ -363,7 +375,12 @@ namespace Amju
     }
 
     // Add the path and file name prefix to the animation.cfg file
+/* OLD  from Lara example
     std::string strConfigFile = strPath + strModel + "_animation.cfg";
+*/
+
+    // More conventional
+    std::string strConfigFile = strPath + "animation.cfg";
 
     // Load the animation config file (*_animation.config) and make sure it loaded properly
     if(!LoadAnimations(strConfigFile))
@@ -441,7 +458,6 @@ namespace Amju
           std::cout << "Md3: CreateTexture Failed to load texture " << strFullPath << "\n";
           return false;
         }							
-        std::cout << "Md3: CreateTexture returned TRUE! " << strFullPath << "\n";                        
 
         // Set the texture ID for this material by getting the current loaded texture count
         pModel->pMaterials[i].textureId = pTex; //strTextures.size();
@@ -498,17 +514,19 @@ namespace Amju
     // This of course isn't the most solid way, but it works fine.  It wouldn't hurt
     // to put in some more checks to make sure no numbers are in the header info.
 
-    std::cout << "ANIMATION CONFIG FILE: \n";
-
     while (f.GetDataLine(&strLine)) //Token(&strWord))  //( fin >> strWord)
     {
       Strings strs = Split(strLine, '\t');
-      std::cout << "Got this line: '" << strLine << "' num splits: " << strs.size() << "\n";
+#ifdef MD3_DEBUG
+std::cout << "Got this line: '" << strLine << "' num splits: " << strs.size() << "\n";
+#endif
 
       // If the first character of the word is NOT a number, we haven't hit an animation line
       if(!isdigit( strLine[0] ))
       {
-        std::cout << "(ignoring this line: " << strLine.c_str() << ")\n";
+#ifdef MD3_DEBUG
+std::cout << "(ignoring this line: " << strLine.c_str() << ")\n";
+#endif
         continue;
       }
 
@@ -534,12 +552,14 @@ namespace Amju
       name = Replace(name, "//", "");
       Trim(&name);
 
+#ifdef MD3_DEBUG
       std::cout 
         << "Start frame: " << startFrame 
         << "\tNum of frames: " << numOfFrames 
         << "\tLooping: " << loopingFrames 
         << "\tFPS: " << framesPerSecond 
         << "\tName: '" << name << "'\n";
+#endif
 
       // Copy the name of the animation to our animation structure
       strcpy(animations[currentAnim].strName, name.c_str());
@@ -952,7 +972,9 @@ namespace Amju
 
   bool CLoadMD3::ImportMD3(t3DModel *pModel, const std::string& strFileName)
   {
-    std::cout << "LOADING MODEL: " << strFileName << "\n";
+#ifdef MD3_DEBUG
+std::cout << "LOADING MODEL: " << strFileName << "\n";
+#endif
 
     // Open the MD3 file in binary
     std::string filepluspath = "";
@@ -967,8 +989,9 @@ namespace Amju
       // Display an error message and don't load anything if no file was found
       return false;
     }
+#ifdef MD3_DEBUG
     std::cout << "Opened " << strFileName << " ok.\n";
-
+#endif
     // Read the header data and store it in our m_Header member variable
     m_bytesRead += m_pFile->GetBinary(sizeof(tMd3Header), (unsigned char *)&m_Header);
     m_Header.Endianise();
@@ -1003,7 +1026,9 @@ namespace Amju
     // Here we allocate memory for the bone information and read the bones in.
     m_pBones = new tMd3Bone [m_Header.numFrames];
     m_bytesRead += m_pFile->GetBinary(sizeof(tMd3Bone) * m_Header.numFrames, (unsigned char *)m_pBones);
+#ifdef MD3_DEBUG
     std::cout << "Read bone info, discarding for now.\n";
+#endif
 
     // TODO Endianise the bone info
 
@@ -1021,7 +1046,6 @@ namespace Amju
     m_bytesRead += m_pFile->GetBinary(sizeof(tMd3Tag) * m_Header.numFrames * m_Header.numTags, 
       (unsigned char *)pModel->pTags);
 
-    std::cout << "Read tag info, endianising...\n";
     for (int j = 0; j < m_Header.numFrames * m_Header.numTags; j++)
     {
       tMd3Tag& tag = pModel->pTags[j];
@@ -1049,14 +1073,15 @@ namespace Amju
     // Go through all of the sub-objects in this mesh
     for (i = 0; i < m_Header.numMeshes; i++)
     {
+#ifdef MD3_DEBUG
       std::cout << "Loading sub-object " << i << " of " << m_Header.numMeshes << "...\n";
+#endif
 
       // Seek to the start of this mesh and read in it's header
       m_pFile->BinarySeek(meshOffset);
 
       m_pFile->GetBinary(sizeof(tMd3MeshInfo), (unsigned char *)&meshHeader);
       meshHeader.Endianise();
-      std::cout << "Finished reading mesh header and endianised...\n";
 
       // Here we allocate all of our memory from the header's information
       m_pSkins     = new tMd3Skin [meshHeader.numSkins];
@@ -1165,7 +1190,7 @@ namespace Amju
       // with this model, have the pixels flipped horizontally.  If you use other image
       // files and your texture mapping is crazy looking, try deleting this negative.
       currentMesh.pTexVerts[i].x =  m_pTexCoords[i].textureCoord[0];
-      currentMesh.pTexVerts[i].y = -m_pTexCoords[i].textureCoord[1];
+      currentMesh.pTexVerts[i].y = m_pTexCoords[i].textureCoord[1];
     }
 
     // Go through all of the face data and assign it over to OUR structure
@@ -1235,7 +1260,9 @@ namespace Amju
 
           // Copy the name of the file into our texture file name variable.
           strcpy(texture.strFile, &strLine[textureNameStart]);
+#ifdef MD3_DEBUG
           std::cout << "Reading skin file: " << strSkin << ", found texture: " << texture.strFile << "\n";
+#endif
 
           // The tile or scale for the UV's is 1 to 1 
           texture.uTile = texture.uTile = 1;

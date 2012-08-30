@@ -282,7 +282,7 @@ namespace Amju
 
     // This loads the model from a path and name prefix.   It takes the path and
     // model name prefix to be added to _upper.md3, _lower.md3 or _head.md3.
-    bool LoadModel(const std::string& strPath, const std::string& strModel);
+    bool LoadModel(const std::string& strPath); ////, const std::string& strModel);
 
     // This loads the weapon and takes the same path and model name to be added to .md3
     bool LoadWeapon(const std::string& strPath, const std::string& strModel);
