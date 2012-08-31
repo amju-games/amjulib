@@ -57,7 +57,7 @@ void Md3Node::SetFromCharacterName(const std::string& chName)
   // Load the 3 body part meshes and their skin, textures and animation config files
   std::string path = "characters/" + chName + "/";
 
-  bool bResult = m_model->LoadModel(path, chName);
+  bool bResult = m_model->LoadModel(path); //, chName);
   if (!bResult)
   {
     std::cout << "Failed to load model.\n";

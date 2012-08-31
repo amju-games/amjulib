@@ -1,4 +1,5 @@
 #include "GSAvatarMod.h"
+#include <Timer.h>
 #include <AmjuGL.h>
 #include <File.h>
 #include <ReportError.h>
@@ -12,6 +13,7 @@
 #include "AvatarManager.h"
 #include "Ve1Object.h"
 #include "LocalPlayer.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -106,11 +108,15 @@ void GSAvatarMod::Update()
 
   // Don't do this, it will update characters twice
   //GetGuiSceneGraph()->Update();
+
+  float dt = TheTimer::Instance()->GetDt();
+  static const float ROT_VEL = ROConfig()->GetFloat("avatar-rot-vel", 10.0);
+  m_yrot += ROT_VEL * dt;
 }
 
 void GSAvatarMod::Draw()
 {
-//  AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
+  AmjuGL::SetClearColour(Colour(0.5f, 0.5f, 1, 1));
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
@@ -123,7 +129,7 @@ void GSAvatarMod::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 50, 100,  0, 0, 0,  0, 1, 0);
+  AmjuGL::LookAt(0, 100, 200,  0, 50, 0,  0, 1, 0);
 
   AmjuGL::RotateY(m_yrot);
 
