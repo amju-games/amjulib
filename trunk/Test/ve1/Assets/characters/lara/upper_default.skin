@@ -1,5 +1,5 @@
 tag_head,
 tag_weapon,
 tag_torso,
-u_torso,models/players/laracroft/default.png
-u_head,models/players/laracroft/default_h.png
+u_torso,models/players/laracroft/default.bmp
+u_head,models/players/laracroft/default_h.bmp

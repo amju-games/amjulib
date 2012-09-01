@@ -1,8 +1,8 @@
-l_hips,models/players/slig/default.tga
-l_thighleft,models/players/slig/default.tga
-l_thighright,models/players/slig/default.tga
-l_calfleft,models/players/slig/default.tga
-l_calfright,models/players/slig/default.tga
-l_footleft,models/players/slig/default.tga
-l_footright,models/players/slig/default.tga
+l_hips,models/players/slig/default.png
+l_thighleft,models/players/slig/default.png
+l_thighright,models/players/slig/default.png
+l_calfleft,models/players/slig/default.png
+l_calfright,models/players/slig/default.png
+l_footleft,models/players/slig/default.png
+l_footright,models/players/slig/default.png
 tag_torso,
