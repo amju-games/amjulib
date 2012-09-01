@@ -1,5 +1,5 @@
-u_torso,models/players/stb/chicken.tga
-u_feathers,models/players/stb/feathers.tga
+u_torso,models/players/stb/chicken.png
+u_feathers,models/players/stb/feathers.png
 tag_torso,
 tag_weapon,
 tag_head,

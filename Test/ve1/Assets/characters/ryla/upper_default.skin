@@ -1,5 +1,5 @@
-u_torso,models/players/ryla/body_b.tga
-u_armor,models/players/ryla/armor_b.tga
+u_torso,models/players/ryla/body_b.png
+u_armor,models/players/ryla/armor_b.png
 tag_head,
 tag_weapon,
 tag_torso,
