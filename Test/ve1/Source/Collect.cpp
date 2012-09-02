@@ -86,7 +86,7 @@ void Collect::OnPlayerCollision(Player* p)
 
   if (p != GetLocalPlayer())
   {
-std::cout << "Non local player intersects " << *this << "\n";
+//std::cout << "Non local player intersects " << *this << "\n";
     return;
   }
 
