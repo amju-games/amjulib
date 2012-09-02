@@ -6,21 +6,8 @@ gui-comp
 // Name
 hud-comp
 // Num children
-7
+4
 
-
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.8
-// size
-2.0, 0.1
-// Text
-Modify your avatar... 
-// Font name, size
-arial, 1.0
 
 // Buttons for avatar type 
 // element type
@@ -53,6 +40,37 @@ type >
 // Font name, size
 arial, 2.0 
 
+// element type
+gui-button
+// Element name
+ok-button
+// pos (coords are -1..1)
+-0.8, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+0.0, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 2.0 
+
+
 // Buttons for avatar colour 
 // element type
 gui-button
@@ -84,33 +102,17 @@ colour >
 // Font name, size
 arial, 2.0 
 
-// element type
-gui-button
-// Element name
-ok-button
-// pos (coords are -1..1)
--0.8, -0.7
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-ok
-// Font name, size
-arial, 2.0 
 
-// element type
-gui-button
+// Element type
+gui-text
 // Element name
-cancel-button
+text1
 // pos (coords are -1..1)
-0.0, -0.7
+-1.0, 0.8
 // size
-0.8, 0.2
-// Image
-gui-button-4.png
+2.0, 0.1
 // Text
-cancel
+Modify your avatar... 
 // Font name, size
-arial, 2.0 
+arial, 1.0
 
