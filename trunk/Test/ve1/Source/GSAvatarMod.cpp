@@ -110,7 +110,7 @@ void GSAvatarMod::Update()
   //GetGuiSceneGraph()->Update();
 
   float dt = TheTimer::Instance()->GetDt();
-  static const float ROT_VEL = ROConfig()->GetFloat("avatar-rot-vel", 10.0);
+  static const float ROT_VEL = ROConfig()->GetFloat("avatar-rot-vel", 50.0);
   m_yrot += ROT_VEL * dt;
 }
 
@@ -129,7 +129,7 @@ void GSAvatarMod::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 100, 200,  0, 50, 0,  0, 1, 0);
+  AmjuGL::LookAt(0, 100, 120,  0, 50, 0,  0, 1, 0);
 
   AmjuGL::RotateY(m_yrot);
 
@@ -152,8 +152,8 @@ void GSAvatarMod::OnActive()
   m_gui->GetElementByName("cancel-button")->SetCommand(Amju::OnCancelButton);
   m_gui->GetElementByName("type-prev-button")->SetCommand(Amju::OnTypePrevButton);
   m_gui->GetElementByName("type-next-button")->SetCommand(Amju::OnTypeNextButton);
-  m_gui->GetElementByName("colour-prev-button")->SetCommand(Amju::OnColourPrevButton);
-  m_gui->GetElementByName("colour-next-button")->SetCommand(Amju::OnColourNextButton);
+//  m_gui->GetElementByName("colour-prev-button")->SetCommand(Amju::OnColourPrevButton);
+//  m_gui->GetElementByName("colour-next-button")->SetCommand(Amju::OnColourNextButton);
 
   GetGuiSceneGraph()->Clear();
   GetGuiSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
