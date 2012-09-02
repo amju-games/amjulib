@@ -246,38 +246,52 @@ std::cout << "Selected " << *selectedObj << "\n";
     HasCollisionMesh* hcm = dynamic_cast<HasCollisionMesh*>(selectedObj);
     if (hcm)
     {
+#ifdef PICK_DEBUG
 std::cout << "Try to find point on this object: " << *selectedObj << "\n";
+#endif
 
       gotpos = MouseToGroundPos(hcm->GetCollisionMesh(), mouseScreen, &pos);
       if (gotpos)
       {
+#ifdef PICK_DEBUG
 std::cout << " - Found point on ground on this obj: " << *selectedObj << "!\n";
+#endif
       }
       else
       {
+#ifdef PICK_DEBUG
 std::cout << " - No luck!\n";
+#endif
       }
     }
     else if (selectedObj)
     {
+#ifdef PICK_DEBUG
 std::cout << *selectedObj << " does not have collision mesh.\n";
+#endif
     }
 
     if (!gotpos)
     {
+#ifdef PICK_DEBUG
 std::cout << "Try to find point on terrain for this mouse pos.\n";
+#endif
       gotpos = MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
       m_menuObject = 0; // so we can now select an object again
     }
 
     if (gotpos)
     {
+#ifdef PICK_DEBUG
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
+#endif
       Player* player = GetLocalPlayer();
       // Sanity check the destination: if too far away, discard, it was probably not what the
       //  player intended.
       float sqDist = (player->GetPos() - pos).SqLen();
+#ifdef PICK_DEBUG
 std::cout << "Sq dist to arrow pos is: " << sqDist << "\n";
+#endif
       const float MAX_DIST = 500.0f; // TODO CONFIG
       const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
       if (sqDist < MAX_SQ_DIST)
@@ -297,7 +311,9 @@ std::cout << "Sq dist to arrow pos is: " << sqDist << "\n";
     }
     else
     {
-//std::cout << "...not a point on the ground, apparently..?\n";
+#ifdef PICK_DEBUG
+std::cout << "...not a point on the ground, apparently..?\n";
+#endif
     }
   }
 }
