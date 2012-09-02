@@ -28,7 +28,8 @@ public:
 
     ANIM_IDLE = 0,
     ANIM_WALK = 1,
-    ANIM_RUN  = 2
+    ANIM_RUN  = 2,
+    ANIM_DEATH = 3,
   };
   virtual void SetAnim(Anim anim) = 0;
 

@@ -1,4 +1,5 @@
 #include <Timer.h>
+#include <Game.h>
 #include <DegRad.h>
 #include "Ve1ObjectChar.h"
 #include "Ve1Character.h"
@@ -8,6 +9,7 @@
 #include "GSMain.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
+#include "GSDeath.h"
 
 namespace Amju
 {
@@ -50,6 +52,22 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   else if (key == STAMINA_KEY)
   {
     m_stamina = ToInt(val); 
+    if (m_stamina <= 0)
+    {
+      m_stamina = 0;
+      // Show player death anim
+      Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
+      if (vc)
+      {
+        vc->SetAnim(Ve1Character::ANIM_DEATH);
+        // Special state IF local player, otherwise will just be respawned by new server pos
+        if (GetId() == GetLocalPlayerId())
+        {
+          TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+        }
+        // TODO Chat msgs?? Send a lurk msg to any chat recipient ?
+      }
+    }
   }
   else if (key == AVATAR_KEY)
   {
@@ -59,12 +77,15 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
     if (node)
     {
       SetSceneNode(node);
-      // TODO if in local player location
-      OnLocationEntry();
+      // if in local player location
+      if (GetLocation() == GetLocalPlayerLocation())
+      {
+        OnLocationEntry();
+      }
     }
     else
     {
-std::cout << "Unexpected avatar key: " << val << "\n";
+std::cout << "Unexpected avatar name: " << val << "\n";
     }
   }
 
