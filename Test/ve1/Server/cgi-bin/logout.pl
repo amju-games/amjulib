@@ -10,5 +10,9 @@ require "logout_impl.pl";
 
 my_connect();
 
-logout();
+# If session is bad, don't log out
+if (check_session() != 0)
+{
+  logout();
+}
 

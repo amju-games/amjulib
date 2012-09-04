@@ -117,7 +117,7 @@ sub check_session()
     print "<now>$time_now</now>\n";
     return 1;
   }
-  print "Session expired!\n";
+  print "BAD_SESSION: Session expired!\n";
   return 0;
 }
 

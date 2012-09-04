@@ -143,12 +143,9 @@ print "Query: $sql\n";
 
   if (my ($player_id) = $query->fetchrow_array)
   {
-    # DON'T Delete old session
-    #$sql = "delete from session where player_id=$player_id";
-    #print "Query: $sql\n";
-    #$query = $dbh->prepare($sql) or die
-    #  "Query prepare failed for this query: $sql\n";
-    #$query->execute;
+    # DON'T Delete any old sessions,  but DO make sure they are marked as expired
+    $sql = "update session set expires=now() where player_id=$player_id and expires > now()";
+    update($sql);
 
     # Create new session
     # Session lasts 24 hours..?
