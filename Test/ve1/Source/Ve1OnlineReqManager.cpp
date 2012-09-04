@@ -168,12 +168,12 @@ const std::string& Ve1ReqManager::GetSessionId() const
 
 bool Ve1ReqManager::AddLoginReq(RCPtr<OnlineReq> req)
 {
-  return SerialReqManager::AddReq(req, 1);
+  return SerialReqManager::AddReq(req, 1, false);
 }
 
 #define THREADS_VERSION
 
-bool Ve1ReqManager::AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs)
+bool Ve1ReqManager::AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs, bool discardNewNotOld)
 {
   // Fail here if we are not logged in
   if (!IsLoggedIn())
@@ -191,7 +191,7 @@ std::cout << "* Can't make request, not logged in *\n";
   //}
 
 #ifdef THREADS_VERSION
-  return SerialReqManager::AddReq(req, maxConcurrentReqs);
+  return SerialReqManager::AddReq(req, maxConcurrentReqs, discardNewNotOld);
 #endif
 
  // No-threads versions
