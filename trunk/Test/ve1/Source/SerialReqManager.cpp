@@ -93,7 +93,7 @@ void SerialReqManager::Update()
   }
 }
 
-bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType)
+bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType, bool discardNewNotOld)
 {
   // If there are more than maxRequestsOfThisType already in the queue,
   //  remove the earlier ones.
@@ -102,7 +102,73 @@ bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType)
 
 //std::cout << "QUEUE REQ: " << req->GetName() << "\n";
 
+  int count = CountReqsWithName(req->GetName());
+  if (count > maxRequestsOfThisType)
+  {
+    // Discard this msg, or older msgs, depending on flag.
+    if (discardNewNotOld)
+    {
+      // Easy - dump this msg :-)
+std::cout << "QUEUE REQ: DISCARDING NEWEST: " << req->GetName() << "\n";
+      return false;
+    }
+    else
+    {
+std::cout << "QUEUE REQ: DISCARDING OLDEST: " << req->GetName() << " found: " << count 
+  << ", max: " << maxRequestsOfThisType << "\n";
+
+      // Check current req - is it the same type ? If so, reduce count as we can't remove this one.
+      if (m_reqs[0]->GetName() == req->GetName())
+      {
+        count--;
+std::cout << "Current req is the same type!\n";
+      }
+      // Iterate over queued requests, oldest first
+      while (count > maxRequestsOfThisType)
+      {
+std::cout << " count: " << count << ", max: " << maxRequestsOfThisType << " ..Looking... ";
+        bool found = false;
+        for (OnlineReqs::iterator it = m_reqs.begin() + 1; // start after current.
+             it != m_reqs.end();
+             ++it)
+        {
+std::cout << "'" << (*it)->GetName() << "'  ";
+
+          if ((*it)->GetName() == req->GetName())
+          {
+std::cout << " found!\n";
+
+            found = true;
+            m_reqs.erase(it);
+            count--;
+            break; // can't keep iterating, invalidated
+          }
+        }
+  
+        if (!found)
+        {
+std::cout << "Logic error, count is " << count << " but no reqs of type " << req->GetName() << " found.\n";
+          Assert(0);
+        }
+      }
+    }
+  }
+
   m_reqs.push_back(req);
+
+
+std::cout << "Here is the queue now: \n";
+for (unsigned int i = 0; i < m_reqs.size(); i++)
+{
+  std::string url = m_reqs[i]->GetUrl();
+  const unsigned int MAX_URL_LEN = 60;
+  if (url.size() > MAX_URL_LEN)
+  {
+    url = url.substr(0, MAX_URL_LEN);
+  }
+  std::cout << i << ": " << m_reqs[i]->GetName() << "\t" << url << "\n";
+}
+
 
   if (!m_thread)
   {
@@ -118,4 +184,18 @@ int SerialReqManager::CountAllReqs() const
 {
   return m_reqs.size();
 }
+
+int SerialReqManager::CountReqsWithName(const std::string& name)
+{
+  int count = 0;
+  for (OnlineReqs::iterator it = m_reqs.begin(); it != m_reqs.end(); ++it)
+  {
+    if ((*it)->GetName() == name)
+    {
+      ++count;
+    }
+  }
+  return count;
+}
+
 }

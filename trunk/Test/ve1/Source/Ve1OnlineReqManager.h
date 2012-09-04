@@ -59,7 +59,7 @@ public:
   //void Update() {}
 
   // Check for valid log in before sending req
-  bool AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs = 1);
+  bool AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs = 1, bool discardNewNotOld = true);
 
   // Login req is special, as you don't need to be logged in to send it :-)
   bool AddLoginReq(RCPtr<OnlineReq> req); 
