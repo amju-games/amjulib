@@ -1190,7 +1190,7 @@ std::cout << "LOADING MODEL: " << strFileName << "\n";
       // with this model, have the pixels flipped horizontally.  If you use other image
       // files and your texture mapping is crazy looking, try deleting this negative.
       currentMesh.pTexVerts[i].x =  m_pTexCoords[i].textureCoord[0];
-      currentMesh.pTexVerts[i].y = m_pTexCoords[i].textureCoord[1];
+      currentMesh.pTexVerts[i].y = -m_pTexCoords[i].textureCoord[1];
     }
 
     // Go through all of the face data and assign it over to OUR structure
