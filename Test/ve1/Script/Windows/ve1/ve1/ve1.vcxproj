@@ -172,6 +172,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Building.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CogTestNpc.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\Collect.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollideObjectFurniture.cpp" />
@@ -186,6 +187,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\FightReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
+    <ClCompile Include="..\..\..\..\Source\FirstTimeMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
@@ -195,6 +197,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSDeath.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEdit.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
@@ -232,6 +235,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Objective.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\PickObject.cpp" />
@@ -255,10 +259,10 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TaskTrigger.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
-    <ClCompile Include="..\..\..\..\Source\TutorialNpc.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
@@ -281,6 +285,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Building.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
+    <ClInclude Include="..\..\..\..\Source\CogTestNpc.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
     <ClInclude Include="..\..\..\..\Source\Collect.h" />
     <ClInclude Include="..\..\..\..\Source\CollideObjectFurniture.h" />
@@ -290,6 +295,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Fightable.h" />
     <ClInclude Include="..\..\..\..\Source\FightReq.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
+    <ClInclude Include="..\..\..\..\Source\FirstTimeMsg.h" />
     <ClInclude Include="..\..\..\..\Source\Furniture.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
@@ -299,6 +305,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
+    <ClInclude Include="..\..\..\..\Source\GSDeath.h" />
     <ClInclude Include="..\..\..\..\Source\GSEdit.h" />
     <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />
@@ -336,6 +343,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
+    <ClInclude Include="..\..\..\..\Source\Objective.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\PickObject.h" />
@@ -360,11 +368,11 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
+    <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
-    <ClInclude Include="..\..\..\..\Source\TutorialNpc.h" />
     <ClInclude Include="..\..\..\..\Source\UploadNewContent.h" />
     <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
