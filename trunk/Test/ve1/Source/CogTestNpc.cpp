@@ -2,7 +2,7 @@
 #include <Game.h>
 #include <Timer.h>
 #include <SoundManager.h>
-#include "TutorialNpc.h"
+#include "CogTestNpc.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
 #include "LocalPlayer.h"
