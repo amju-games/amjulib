@@ -1,11 +1,12 @@
 #include "LocalPlayer.h"
-//#include <Game.h>
 #include "ObjectManager.h"
 
 namespace Amju
 {
 static int localPlayerId = -1;
 static int localPlayerLocation = -1;
+
+const char* TOTAL_PLAY_TIME_KEY = "total_play_time";
 
 int GetLocalPlayerLocation()
 {
@@ -47,30 +48,6 @@ int GetLocalPlayerId()
   return localPlayerId;
 }
 
-
-
-
-/*
-void OnNewObject()
-{
-  // Show new object menu
-  OnBuildButton(); // same as if Build button clicked
-}
-
-void OnBuildButton(); // in GSMain
-
-const char* LocalPlayer::TYPENAME = "local-player";
-  
-LocalPlayer::LocalPlayer()
-{
-  localplayer = this;
-}
-
-void LocalPlayer::SetMenu(GuiMenu* menu)
-{
-  menu->AddItem(new GuiMenuItem("Add a new object...", OnNewObject));
-}
-*/
 }
 
 

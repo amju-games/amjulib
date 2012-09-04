@@ -15,6 +15,8 @@ Player* GetLocalPlayer();
 // So keep the local player location stored, whether or nor the local player object exists.
 int GetLocalPlayerLocation();
 void SetLocalPlayerLocation(int lpl);
+
+extern const char* TOTAL_PLAY_TIME_KEY;
 }
 
 #endif
