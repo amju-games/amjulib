@@ -208,6 +208,9 @@ std::cout << "No research element in login.pl response?!?\n";
 
 void SendLoginReq(const std::string& email)
 {
+  // Clear any queued requests
+  TheVe1ReqManager::Instance()->Clear();
+
   // TODO Sanitize email addr
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(LOGIN) + "?email=" + email;
   // Send version: server can check we are up-to-date
