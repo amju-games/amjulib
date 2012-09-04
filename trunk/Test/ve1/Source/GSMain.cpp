@@ -33,6 +33,7 @@
 #include "Furniture.h"
 #include "CreateCollect.h" // TODO TEMP TEST
 #include "Ve1BruteForce.h" // test against SAP
+#include "FirstTimeMsg.h"
 
 #define SHOW_NUM_ERRORS
 
@@ -177,6 +178,13 @@ void GSMain::Update()
 {
   GSBase::Update();
 
+  // TODO different message depending on game mode.
+  if (!FirstTimeMsg("Welcome to My Game!", MsgNum(1)))
+  {
+    // Above msg already shown
+    FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));
+  }
+
   GetVe1SceneGraph()->Update();
 
   // Make periodic checks for newly created objects
@@ -188,9 +196,7 @@ void GSMain::Update()
 
   TheGame::Instance()->UpdateGameObjects();
 
-  // TODO Need to set collision test function
-//  TheSAP::Instance()->Update(*(TheGame::Instance()->GetGameObjects())); // sweep & prune
-  // TODO TEMP TEST
+  // TODO SAP instead
   BruteForce(TheGame::Instance()->GetGameObjects());
 
   TheChatConsole::Instance()->Update();
@@ -381,11 +387,13 @@ void GSMain::Draw2d()
   int critical = 0;
   int nonCritical = 0;
   Ve1Req::GetNumErrors(&critical, &nonCritical);
+  // Get serial request queue size
+  int q = TheVe1ReqManager::Instance()->CountAllReqs();
   t.SetSize(Vec2f(1.0f, 0.1f));
   t.SetJust(GuiText::AMJU_JUST_LEFT);
   t.SetDrawBg(true);
-  t.SetLocalPos(Vec2f(-1.0f, 0.8f));
-  std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical);
+  t.SetLocalPos(Vec2f(-1.0f, 1.0f));
+  std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical) + " Q: " + ToString(q);
   t.SetText(s);
   t.Draw();
 
