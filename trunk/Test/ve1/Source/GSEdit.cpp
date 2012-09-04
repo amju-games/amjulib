@@ -22,7 +22,7 @@
 #include "Building.h"
 #include "Furniture.h"
 #include "Baddie.h"
-#include "TutorialNpc.h"
+#include "CogTestNpc.h"
 #include "GSQuitGame.h"
 
 namespace Amju
@@ -837,8 +837,8 @@ void GSEdit::CreateContextMenu()
     childMenu->AddChild(new GuiMenuItem("Baddie", 
       new NewObjectCommand(Baddie::TYPENAME, "baddie-assets.txt", "baddie-data.txt", true)));
 
-    childMenu->AddChild(new GuiMenuItem("TutorialNPC", 
-      new NewObjectCommand(TutorialNpc::TYPENAME, "tutnpc-assets.txt", "tutnpc-data.txt", true)));
+//    childMenu->AddChild(new GuiMenuItem("CogTestNPC", 
+//      new NewObjectCommand(CogTestNpc::TYPENAME, "ctnpc-assets.txt", "ctnpc-data.txt", true)));
 
     m_menu->AddChild(new GuiNestMenuItem("New Game Object...", childMenu));
   }
