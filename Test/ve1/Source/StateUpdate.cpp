@@ -8,7 +8,7 @@
 
 namespace Amju
 {
-GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get pos updates")
+GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get state updates")
 {
   m_critical = false;
 }
