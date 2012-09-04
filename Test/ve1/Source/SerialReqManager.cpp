@@ -103,7 +103,7 @@ bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType, b
 //std::cout << "QUEUE REQ: " << req->GetName() << "\n";
 
   int count = CountReqsWithName(req->GetName());
-  if (count > maxRequestsOfThisType)
+  if (count >= maxRequestsOfThisType)
   {
     // Discard this msg, or older msgs, depending on flag.
     if (discardNewNotOld)
@@ -124,7 +124,7 @@ std::cout << "QUEUE REQ: DISCARDING OLDEST: " << req->GetName() << " found: " <<
 std::cout << "Current req is the same type!\n";
       }
       // Iterate over queued requests, oldest first
-      while (count > maxRequestsOfThisType)
+      while (count >= maxRequestsOfThisType)
       {
 std::cout << " count: " << count << ", max: " << maxRequestsOfThisType << " ..Looking... ";
         bool found = false;
