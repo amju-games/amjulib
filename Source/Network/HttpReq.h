@@ -34,6 +34,8 @@ public:
 
   virtual ~HttpReq();
 
+  const std::string& GetUrl() const { return m_url; }
+
   // Create HttpClient, get response
   virtual void Work();
 
