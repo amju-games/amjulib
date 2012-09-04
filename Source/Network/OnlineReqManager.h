@@ -48,7 +48,7 @@ public:
 
   virtual void HandleResult() = 0;
 
-  const char* GetName() const;
+  const std::string& GetName() const;
 
 protected:
   // This is for debugging, so we can report on requests,

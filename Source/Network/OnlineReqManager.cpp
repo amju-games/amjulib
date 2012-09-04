@@ -68,11 +68,11 @@ void OnlineReq::Work()
   HandleResult();
 }
 
-const char* OnlineReq::GetName() const
+const std::string& OnlineReq::GetName() const
 {
   AMJU_CALL_STACK;
 
-  return m_name.c_str();
+  return m_name;
 }
 
 void OnlineReqManager::Update()
