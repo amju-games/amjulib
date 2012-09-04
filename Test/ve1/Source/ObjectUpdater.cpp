@@ -438,7 +438,8 @@ std::cout << "Sending state update: " << objId << " key: " << key << " val: " <<
 class MoveReq : public Ve1Req
 {
 public:
-  MoveReq(const std::string& url, const Vec3f& pos) : Ve1Req(url, "set position"), m_requestedPos(pos)
+  MoveReq(const std::string& url, const std::string& name, const Vec3f& pos) : 
+    Ve1Req(url, name.c_str()), m_requestedPos(pos)
   {
   }
 
@@ -455,7 +456,7 @@ private:
   Vec3f m_requestedPos;
 };
 
-static const int MAX_POS_UPDATE_REQS = 1; // for mad clicking 
+static const int MAX_POS_UPDATE_REQS = 2; // for mad clicking 
 
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
@@ -471,8 +472,11 @@ void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
   url += "&loc=" + ToString(location);
 
   // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
-  // Need to kill any existing pos update req then add this new one. TODO
-  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), MAX_POS_UPDATE_REQS);
+  // Need to kill any existing pos update req then add this new one. 
+  // Allow 2 in case one is in flight. Then allow only one more. Delete any older waiting positions
+  //  FOR THIS OBJECT.
+  std::string reqName = "setpos_" + ToString(objId); 
+  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, reqName, pos), MAX_POS_UPDATE_REQS, false);
 }
 
 void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int location)
@@ -485,9 +489,8 @@ void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int locat
   url += "&z=" + ToString(pos.z);
   url += "&loc=" + ToString(location);
 
-  // Only one pos request allowed at one time -- this is no good, the latest click will be discarded.
-  // Need to kill any existing pos update req then add this new one. TODO
-  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, pos), MAX_POS_UPDATE_REQS);
+  std::string reqName = "setpos_" + ToString(objId); 
+  TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, reqName, pos), MAX_POS_UPDATE_REQS, false);
 }
 }
 
