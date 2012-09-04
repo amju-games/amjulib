@@ -407,7 +407,7 @@ void ObjectUpdater::SetTimestampUpdate(Timestamp timestamp)
 class ObjUpdateReq : public Ve1Req
 {
 public:
-  ObjUpdateReq(const std::string& url) : Ve1Req(url, "obj update req") {}
+  ObjUpdateReq(const std::string& url, const std::string& name) : Ve1Req(url, name.c_str()) {}
 
   virtual void OnSuccess()
   {
@@ -431,7 +431,11 @@ std::cout << "Sending state update: " << objId << " key: " << key << " val: " <<
   url += key;
   url += "&val=";
   url += val; 
-  TheVe1ReqManager::Instance()->AddReq(new ObjUpdateReq(url), MAX_CONCURRENT_UPDATE_REQS);
+
+  std::string reqName = "obj_up_" + ToString(objId) + "_" + key;
+
+  // Discard all but most recent
+  TheVe1ReqManager::Instance()->AddReq(new ObjUpdateReq(url, reqName), 1, false);
 }
 
 
