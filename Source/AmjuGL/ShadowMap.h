@@ -2,27 +2,17 @@
 #define SHADOW_MAP_H
 
 #include <AmjuGL.h>
-#include <RCPtr.h>
+#include <Drawable.h>
 
 namespace Amju
 {
 // Render using a Shadow Map
-class ShadowMap : public RefCounted
+class ShadowMap : public Drawable
 {
 public:
-  ShadowMap() : m_drawFunc(0) {}
-  virtual ~ShadowMap() {}
-
-  typedef void (*DrawFunc)();
-  void SetDrawFunc(DrawFunc df) { m_drawFunc = df; }
-
   void SetLightPos(const AmjuGL::Vec3& lp) { m_lightPos = lp; }
 
-  virtual bool Init() = 0;
-  virtual void Draw() = 0;
-
 protected:
-  DrawFunc m_drawFunc;
   AmjuGL::Vec3 m_lightPos;
 };
 
