@@ -4,7 +4,7 @@ endif
 
 APP		:=	ve1
 
-VERSION		:=	0.3
+VERSION		:=	0.5
 
 BUILD		:=	../../../../Build/$(APP)/$(AMJU_BUILD_ARCH)
 TARGET		:=	$(BUILD)/$(APP)

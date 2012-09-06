@@ -1,4 +1,4 @@
-export VERSION=0.4
+export VERSION=0.5
 
 # Make amjulib
 export AMJU_BUILD_ARCH=Mac-i386
