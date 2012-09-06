@@ -178,11 +178,11 @@ GSCopyAssets::GSCopyAssets()
 
 void GSCopyAssets::Update()
 {
-  static bool done = false;
-  if (!done)
+  // Counter so we draw window before copying
+  static int done = 0;
+  done++;
+  if (done == 2)
   {
-    done = true;
-
 std::cout << "Copying files to Save Dir as required...\n";
 
     static std::string dataDir = GetDataDir();
@@ -209,7 +209,7 @@ void GSCopyAssets::Draw2d()
 void GSCopyAssets::OnActive()
 {
   // Before loading anything, copy the files necessary to show logo or 'please wait' indicator.
-
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 }
 
 } // namespace
