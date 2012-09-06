@@ -6,7 +6,7 @@ gui-comp
 // Name
 waitfornewlocation-comp
 // Num children
-2
+3
 
 
 // Element type
@@ -18,9 +18,22 @@ text1
 // size
 2.0, 0.1
 // Text
-Waiting for location data...
+Please wait, downloading location data
 // Font name, size
 arial, 1.0
+
+// Element type
+gui-text
+// Element name
+filename-text
+// pos (coords are -1..1)
+-1.0, 0.1
+// size
+2.0, 0.1
+// Text
+...
+// Font name, size
+arial, 0.6 
 
 
 // Button
