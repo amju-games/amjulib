@@ -4,6 +4,7 @@
 #include <Directory.h>
 #include <File.h>
 #include "Ve1OnlineReqManager.h"
+#include "GSWaitForNewLocation.h"
 #include "ROConfig.h"
 
 #ifdef _DEBUG
@@ -23,6 +24,9 @@ public:
   virtual void OnDownloaded()
   {
     m_dl->SetState(m_filename, DownloadManager::AMJU_DL_LOCAL);
+
+    // Bodge: show downloads
+    TheGSWaitForNewLocation::Instance()->SetLatestDownloadedFilename(m_filename);
   }
 
   virtual void OnDownloadFailed() 

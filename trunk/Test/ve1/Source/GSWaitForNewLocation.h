@@ -21,8 +21,9 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  // Call to show user that we are downloading stuff
+  void SetLatestDownloadedFilename(const std::string& filename);
+
 };
 typedef Singleton<GSWaitForNewLocation> TheGSWaitForNewLocation;
 } // namespace

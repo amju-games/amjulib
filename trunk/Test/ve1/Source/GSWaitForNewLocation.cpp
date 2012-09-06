@@ -32,6 +32,17 @@ GSWaitForNewLocation::GSWaitForNewLocation()
 {
 }
 
+void GSWaitForNewLocation::SetLatestDownloadedFilename(const std::string& filename)
+{
+  if (!m_gui)
+  {
+    return; // no longer in this state, hmm..
+  }
+  GuiText* t = (GuiText*)GetElementByName(m_gui, "filename-text");
+  Assert(t);
+  t->SetText(filename);
+}
+
 void GSWaitForNewLocation::Update()
 {
   GSGui::Update();
@@ -77,13 +88,4 @@ void GSWaitForNewLocation::OnActive()
   GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancel);
 }
 
-bool GSWaitForNewLocation::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSWaitForNewLocation::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
