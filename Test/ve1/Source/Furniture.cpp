@@ -96,19 +96,23 @@ void Furniture::Update()
   { 
     Matrix m;
 
-    ((SceneCollisionMesh*)m_sceneNode.GetPtr())->CalcCollisionMesh();
+    SceneCollisionMesh* scm = dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr());
+    if (scm)
+    {
+      scm->CalcCollisionMesh();
+  
+      m.RotateY(DegToRad(m_dir));
+      GetCollisionMesh()->Transform(m);
 
-    m.RotateY(DegToRad(m_dir));
-    GetCollisionMesh()->Transform(m);
+      m.Translate(m_pos);
+      GetCollisionMesh()->Transform(m);
+      GetCollisionMesh()->CalcAABB(&m_aabb);
 
-    m.Translate(m_pos);
-    GetCollisionMesh()->Transform(m);
-    GetCollisionMesh()->CalcAABB(&m_aabb);
+      *(m_sceneNode->GetAABB()) = m_aabb;
 
-    *(m_sceneNode->GetAABB()) = m_aabb;
-
-    m_collMeshPos = m_pos;
-    m_collMeshRot = m_dir;
+      m_collMeshPos = m_pos;
+      m_collMeshRot = m_dir;
+    }
   }
 
   // If moving and like a ball, we should rotate
