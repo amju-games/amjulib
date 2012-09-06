@@ -5,6 +5,7 @@
 #include "GuiTextEdit.h"
 #include "GuiComposite.h"
 #include "GuiListBox.h"
+#include "GuiFileListBox.h"
 #include "GuiWindow.h"
 #include "GuiKeyboard.h"
 #include "GuiMenu.h"
@@ -24,6 +25,7 @@ GuiElement* CreateKb() { return new GuiKeyboard; }
 GuiElement* CreateMenu() { return new GuiMenu; }
 GuiElement* CreateDialog() { return new GuiDialog; }
 GuiElement* CreateRect() { return new GuiRect; }
+GuiElement* CreateFileListBox() { return new GuiFileListBox; }
 
 GuiFactory::GuiFactory()
 {
@@ -38,5 +40,6 @@ GuiFactory::GuiFactory()
   Add(GuiMenu::NAME, &CreateMenu);
   Add(GuiDialog::NAME, &CreateDialog);
   Add(GuiRect::NAME, &CreateRect);
+  Add(GuiFileListBox::NAME, &CreateFileListBox);
 }
 }
