@@ -11,6 +11,11 @@ SerialReqManager::SerialReqManager()
   m_thread = 0;
 }
 
+void SerialReqManager::Clear()
+{
+  m_reqs.clear();
+}
+
 #ifdef NO_THREADS
 void SerialReqManager::Update()
 {
@@ -109,35 +114,35 @@ bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType, b
     if (discardNewNotOld)
     {
       // Easy - dump this msg :-)
+#ifdef QUEUE_DEBUG
 std::cout << "QUEUE REQ: DISCARDING NEWEST: " << req->GetName() << "\n";
+#endif
+
       return false;
     }
     else
     {
+#ifdef QUEUE_DEBUG
 std::cout << "QUEUE REQ: DISCARDING OLDEST: " << req->GetName() << " found: " << count 
   << ", max: " << maxRequestsOfThisType << "\n";
+#endif
 
       // Check current req - is it the same type ? If so, reduce count as we can't remove this one.
       if (m_reqs[0]->GetName() == req->GetName())
       {
         count--;
-std::cout << "Current req is the same type!\n";
       }
+
       // Iterate over queued requests, oldest first
       while (count >= maxRequestsOfThisType)
       {
-std::cout << " count: " << count << ", max: " << maxRequestsOfThisType << " ..Looking... ";
         bool found = false;
         for (OnlineReqs::iterator it = m_reqs.begin() + 1; // start after current.
              it != m_reqs.end();
              ++it)
         {
-std::cout << "'" << (*it)->GetName() << "'  ";
-
           if ((*it)->GetName() == req->GetName())
           {
-std::cout << " found!\n";
-
             found = true;
             m_reqs.erase(it);
             count--;
@@ -157,6 +162,7 @@ std::cout << "Logic error, count is " << count << " but no reqs of type " << req
   m_reqs.push_back(req);
 
 
+#ifdef QUEUE_DEBUG
 std::cout << "Here is the queue now: \n";
 for (unsigned int i = 0; i < m_reqs.size(); i++)
 {
@@ -168,7 +174,7 @@ for (unsigned int i = 0; i < m_reqs.size(); i++)
   }
   std::cout << i << ": " << m_reqs[i]->GetName() << "\t" << url << "\n";
 }
-
+#endif
 
   if (!m_thread)
   {

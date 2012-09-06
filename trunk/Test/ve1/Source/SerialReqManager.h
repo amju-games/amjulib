@@ -28,6 +28,9 @@ public:
   // Return the number of requests with the given name.
   int CountReqsWithName(const std::string& name);
 
+  // Clear all requests - but any request in flight is not cancelled
+  void Clear();
+
 private:
   typedef std::deque<RCPtr<OnlineReq> > OnlineReqs;
   OnlineReqs m_reqs;
