@@ -6,7 +6,23 @@ gui-comp
 // Name
 hud-comp
 // Num children
-8
+2
+
+// File browser in progress
+gui-file-list-box
+// Name
+fb
+0, 0.9
+0.7, 0.7
+
+// GUI KEYBOARD
+gui-kb
+// name, pos, size as for other elements
+kb1
+-1.0, -0.2
+2.0, 1.0
+// KB is loaded from separate file, which depends on Language etc.
+gui-kb.txt
 
 // Element type
 gui-text
@@ -84,19 +100,10 @@ OK
 // Font name, size
 arial, 1.0 
 
-// GUI KEYBOARD
-gui-kb
-// KB is loaded from separate file, which depends on Language etc.
-// name, pos, size as for other elements
-kb1
-0.2, -0.2
-//0.6, 0.3
-1.0, 1.0
-
 // Dialog
 gui-dialog
 mydialog
--0.2, 0
+-0.2, -0.4 
 0.4, 0.3
 // children
 1
@@ -106,5 +113,5 @@ text-on-dialog
 0, 0
 0.4, 0.1
 Hello, I am some text on the dialog
-arial, 1.0, fgcol=000000
+arial, 1.0, bgcol=ff0000,fgcol=000000
 
