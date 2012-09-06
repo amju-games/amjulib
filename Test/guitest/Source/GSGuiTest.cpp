@@ -2,6 +2,7 @@
 #include <iostream>
 #include <AmjuGL.h>
 #include <GuiListBox.h>
+#include <GuiFileListBox.h>
 
 namespace Amju
 {
@@ -43,6 +44,12 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
 
+  GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
+  Assert(fb);
+  fb->SetDir("/Users/jay/projects/amjulib/Test/ve1/");
+
+
+/*
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
   GetElementByName(m_gui, "edit1")->SetHasFocus(true);
 
@@ -55,6 +62,7 @@ void GSGuiTest::OnActive()
    
     listbox->AddItem(t);
   }
+*/
 }
 
 bool GSGuiTest::OnCursorEvent(const CursorEvent& ce)
