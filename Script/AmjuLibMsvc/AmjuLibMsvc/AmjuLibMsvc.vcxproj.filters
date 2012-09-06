@@ -837,6 +837,9 @@
     <ClCompile Include="..\..\..\Source\Md2\Md3.cpp">
       <Filter>Md2</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1564,6 +1567,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Md2\Md3.h">
       <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
