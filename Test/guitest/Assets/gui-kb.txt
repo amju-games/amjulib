@@ -6,96 +6,16 @@
 // Name
 kb-comp
 // Num children
-4
+// PAGES
+1
 
+// ******************************************
+// PAGE 1
+
+// Four rows
 gui-comp
-row0
-10
-
-gui-button
-1
-0,0 
-0.1, 0.1
-key2.bmp
-1
-arial, 1.0 
-
-gui-button
-2
-0.1,0
-0.1, 0.1
-key2.bmp
-2
-arial, 1.0 
-
-gui-button
-3
-0.2,0
-0.1, 0.1
-key2.bmp
-3
-arial, 1.0 
-
-gui-button
+page0
 4
-0.3,0
-0.1, 0.1
-key2.bmp
-4
-arial, 1.0 
-
-gui-button
-5
-0.4,0
-0.1, 0.1
-key2.bmp
-5
-arial, 1.0 
-
-gui-button
-6
-0.5,0
-0.1, 0.1
-key2.bmp
-6
-arial, 1.0 
-
-gui-button
-7
-0.6,0
-0.1, 0.1
-key2.bmp
-7
-arial, 1.0 
-
-gui-button
-8
-0.7,0
-0.1, 0.1
-key2.bmp
-8
-arial, 1.0 
-
-gui-button
-9
-0.8,0
-0.1, 0.1
-key2.bmp
-9
-arial, 1.0 
-
-gui-button
-0
-0.9,0
-0.1, 0.1
-key2.bmp
-0
-arial, 1.0 
-
-
-
-
-
 
 gui-comp
 row1
@@ -103,98 +23,86 @@ row1
 
 gui-button
 q
-0.03,-0.1 
-0.1, 0.1
+0,0
+0.20, 0.20
 key2.bmp
 q
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 w
-0.13,-0.10
-0.1, 0.1
+0.2,0
+0.20, 0.20
 key2.bmp
 w
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 e
-0.23,-0.10
-0.1, 0.1
+0.4,0
+0.20, 0.20
 key2.bmp
 e
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 r
-0.33,-0.10
-0.1, 0.1
+0.6,0
+0.20, 0.20
 key2.bmp
 r
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 t
-0.43,-0.10
-0.1, 0.1
+0.8,0
+0.20, 0.20
 key2.bmp
 t
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 y
-0.53,-0.10
-0.1, 0.1
+1.0,0
+0.20, 0.20
 key2.bmp
 y
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 u
-0.63,-0.10
-0.1, 0.1
+1.2,0
+0.20, 0.20
 key2.bmp
 u
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 i
-0.73,-0.10
-0.1, 0.1
+1.4,0
+0.20, 0.20
 key2.bmp
 i
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 o
-0.83,-0.10
-0.1, 0.1
+1.6,0
+0.20, 0.20
 key2.bmp
 o
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 p
-0.93,-0.10
-0.1, 0.1
+1.8,0
+0.20, 0.20
 key2.bmp
 p
-arial, 1.0 
+arial, 2.0 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ------------------------------------------
 
 
 gui-comp
@@ -204,80 +112,77 @@ row2
 gui-button
 a
 0.06,-0.2
-0.1, 0.1
+0.2, 0.2
 key2.bmp
 a
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 s
-0.16,-0.2
-0.1, 0.1
-key2.bmp
-s
-arial, 1.0 
-
-gui-button
-d
 0.26,-0.2
-0.1, 0.1
+0.2, 0.2
+key2.bmp
+s
+arial, 2.0 
+
+gui-button
+d
+0.46,-0.2
+0.2, 0.2
 key2.bmp
 d
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 f
-0.36,-0.2
-0.1, 0.1
-key2.bmp
-f
-arial, 1.0 
-
-gui-button
-g
-0.46,-0.2
-0.1, 0.1
-key2.bmp
-g
-arial, 1.0 
-
-gui-button
-h
-0.56,-0.2
-0.1, 0.1
-key2.bmp
-h
-arial, 1.0 
-
-gui-button
-j
 0.66,-0.2
-0.1, 0.1
+0.2, 0.2
+key2.bmp
+f
+arial, 2.0 
+
+gui-button
+g
+0.86,-0.2
+0.2, 0.2
+key2.bmp
+g
+arial, 2.0 
+
+gui-button
+h
+1.06,-0.2
+0.2, 0.2
+key2.bmp
+h
+arial, 2.0 
+
+gui-button
+j
+1.26,-0.2
+0.2, 0.2
 key2.bmp
 j
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 k
-0.76,-0.2
-0.1, 0.1
+1.46,-0.2
+0.2, 0.2
 key2.bmp
 k
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 l
-0.86,-0.2
-0.1, 0.1
+1.66,-0.2
+0.2, 0.2
 key2.bmp
 l
-arial, 1.0 
+arial, 2.0 
 
 
-
-
-
-
+// ------------------------------------------
 
 
 gui-comp
@@ -286,75 +191,188 @@ row3
 
 gui-button
 z
-0.09,-0.3
-0.1, 0.1
+0.09,-0.4
+0.2, 0.2
 key2.bmp
 z
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 x
-0.19,-0.3
-0.1, 0.1
+0.29,-0.4
+0.2, 0.2
 key2.bmp
 x
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 c
-0.29,-0.3
-0.1, 0.1
+0.49,-0.4
+0.2, 0.2
 key2.bmp
 c
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 v
-0.39,-0.3
-0.1, 0.1
+0.69,-0.4
+0.2, 0.2
 key2.bmp
 v
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 b
-0.49,-0.3
-0.1, 0.1
+0.89,-0.4
+0.2, 0.2
 key2.bmp
 b
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 n
-0.59,-0.3
-0.1, 0.1
+1.09,-0.4
+0.2, 0.2
 key2.bmp
 n
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 m
-0.69,-0.3
-0.1, 0.1
+1.29,-0.4
+0.2, 0.2
 key2.bmp
 m
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 ,
-0.79,-0.3
-0.1, 0.1
+1.49,-0.4
+0.2, 0.2
 key2.bmp
 ,
-arial, 1.0 
+arial, 2.0 
 
 gui-button
 .
-0.89,-0.3
-0.1, 0.1
+1.69,-0.4
+0.2, 0.2
 key2.bmp
 .
-arial, 1.0 
+arial, 2.0 
+
+
+// ------------------------------------------
+
+
+gui-comp
+row4
+1
+
+gui-button
+space
+0.6,-0.6
+0.8, 0.2
+key1.bmp
+space
+arial, 2.0 
+
+
+
+// ******************************************
+// PAGE 2
+
+// Four rows
+gui-comp
+page1
+1
+
+
+gui-comp
+row0
+10
+
+gui-button
+1
+0,0 
+0.2, 0.2
+key2.bmp
+1
+arial, 2.0 
+
+gui-button
+2
+0.2,0
+0.2, 0.2
+key2.bmp
+2
+arial, 2.0 
+
+gui-button
+3
+0.2,0
+0.2, 0.2
+key2.bmp
+3
+arial, 2.0 
+
+gui-button
+4
+0.3,0
+0.2, 0.2
+key2.bmp
+4
+arial, 2.0 
+
+gui-button
+5
+0.4,0
+0.2, 0.2
+key2.bmp
+5
+arial, 2.0 
+
+gui-button
+6
+0.5,0
+0.2, 0.2
+key2.bmp
+6
+arial, 2.0 
+
+gui-button
+7
+0.6,0
+0.2, 0.2
+key2.bmp
+7
+arial, 2.0 
+
+gui-button
+8
+0.7,0
+0.2, 0.2
+key2.bmp
+8
+arial, 2.0 
+
+gui-button
+9
+0.8,0
+0.2, 0.2
+key2.bmp
+9
+arial, 2.0 
+
+gui-button
+0
+0.9,0
+0.2, 0.2
+key2.bmp
+0
+arial, 2.0 
+
+
 
 
 
