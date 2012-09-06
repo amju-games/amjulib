@@ -110,15 +110,15 @@ std::cout << "Port: " << port << "\n";
     std::string strippedurl; // don't let these go out of scope before we perform req!
     std::string data;  // (**This is bullshit**, I thought the strings were supposed to be copied)
 
+#ifdef HTTP_DEBUG
+      curl_easy_setopt(m_curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
+#endif
+
     curl_easy_setopt(m_curl, CURLOPT_HEADER, 1);  // we DO want http header
     if (m == HttpClient::POST)
     {
       strippedurl = StripDataFromUrl(url);
       data = GetDataFromUrl(url); 
-
-#ifdef _DEBUG
-      curl_easy_setopt(m_curl, CURLOPT_VERBOSE, 1); // TODO TEMP TEST
-#endif
 
       curl_easy_setopt(m_curl, CURLOPT_URL, strippedurl.c_str());
       curl_easy_setopt(m_curl, CURLOPT_POST, 1);
@@ -128,6 +128,7 @@ std::cout << "Port: " << port << "\n";
     }
     else
     {
+      curl_easy_setopt(m_curl, CURLOPT_POST, 0);
       curl_easy_setopt(m_curl, CURLOPT_URL, url.c_str()); 
     }
 
