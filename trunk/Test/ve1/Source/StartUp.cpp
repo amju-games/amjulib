@@ -25,7 +25,7 @@ void ReportError(const std::string& str)
 }
 
 // Create global variable window info
-Amju::AmjuGLWindowInfo w(640, 480, false);
+Amju::AmjuGLWindowInfo w(640, 480, false, "My Game!");
 
 void StartUp()
 {
