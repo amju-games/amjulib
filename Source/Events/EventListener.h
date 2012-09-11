@@ -23,6 +23,7 @@ public:
   virtual bool OnBalanceBoardEvent(const BalanceBoardEvent&) { return false; }
   virtual bool OnTextEvent(const TextEvent&) { return false; }
   virtual bool OnQuitEvent() { return false; }
+  virtual bool OnResizeEvent(const ResizeEvent&) { return false; }
 };
 
 typedef RCPtr<EventListener> PEventListener;

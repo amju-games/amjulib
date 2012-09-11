@@ -157,6 +157,15 @@ struct TextEvent : public Event
   virtual bool UpdateListener(EventListener*);
 };
 
+enum ResizeType { AMJU_MAXIMISE, AMJU_MINIMISE, AMJU_RESIZE, AMJU_FULLSCREEN_ON, AMJU_FULLSCREEN_OFF };
+struct ResizeEvent : public Event
+{
+  int x, y;
+  ResizeType type; 
+  
+  virtual bool UpdateListener(EventListener*);
+};
+
 }
 
 #endif

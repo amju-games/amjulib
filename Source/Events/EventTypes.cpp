@@ -47,4 +47,9 @@ bool TextEvent::UpdateListener(EventListener* el)
 {
   return el->OnTextEvent(*this);
 }
+  
+bool ResizeEvent::UpdateListener(EventListener* el)
+{
+  return el->OnResizeEvent(*this);
+}
 }
