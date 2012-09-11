@@ -25,10 +25,20 @@
 using namespace Amju;
 
 
+void QueueEvent(Amju::Event* e)
+{
+  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
+}
+
 void resize(int x, int y)
 {
-std::cout << "GLUT resize callback, x: " << x << " y: " << y << "\n";
+//std::cout << "GLUT resize callback, x: " << x << " y: " << y << "\n";
   Screen::SetSize(x, y);
+  ResizeEvent* e = new ResizeEvent;
+  e->type = AMJU_RESIZE; // TODO How do we get minimise, maximise etc
+  e->x = x;
+  e->y = y;
+  QueueEvent(e);
 }
 
 void draw()
@@ -40,11 +50,6 @@ void draw()
 #endif
 
   glutPostRedisplay();
-}
-
-void QueueEvent(Amju::Event* e)
-{
-  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
 void key(char k, bool down)
@@ -207,6 +212,9 @@ extern AmjuGLWindowInfo w;
 // TODO Make this a GLUT version in AmjuGLOpenGL
 bool CreateWindowGLUT(AmjuGLWindowInfo* w)
 {
+  // w is global defined in game-specific code
+  glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
+
   if (w->IsFullScreen())
   {
     // TODO glutGameMode
@@ -215,9 +223,9 @@ bool CreateWindowGLUT(AmjuGLWindowInfo* w)
   {
     // w is global defined in game-specific code
     glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
-    glutCreateWindow("Hello"); // TODO App name
+    glutCreateWindow(w->GetTitle()); 
   }
-
+ 
   // TODO Set icon
 
   glutDisplayFunc(draw);
