@@ -19,7 +19,7 @@ void BlinkCharacter::SetFromCharacterName(const std::string& chName)
   std::string tex1 = "characters/" + chName + "/" + chName + ".png";
   std::string tex2 = "characters/" + chName + "/" + chName + "a.png";
 
-std::cout << "Loading textures for blink char: " << tex1 << "  and  " << tex2 << "\n";
+//std::cout << "Loading textures for blink char: " << tex1 << "  and  " << tex2 << "\n";
 
   LoadTextures(tex1, tex2);
 }
