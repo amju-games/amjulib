@@ -85,7 +85,10 @@ sub my_connect2()
 
   if (not $dbh)
   {
-    die "Failed to connect to DB: $DBI::errstr\n";
+    my $t = time();
+    print "<now>$t</now><error>BAD_DB_CONNECT</error>\n";
+    exit(0);
+#    die "Failed to connect to DB: $DBI::errstr\n";
   }
 }
 
