@@ -420,7 +420,7 @@ public:
 
 void ObjectUpdater::SendUpdateReq(int objId, const std::string& key, const std::string& val)
 {
-std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
+//std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
 
   static const int MAX_CONCURRENT_UPDATE_REQS = 1000; // Would be a problem if we didn't send..??
 
