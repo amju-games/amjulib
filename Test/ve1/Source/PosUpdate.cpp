@@ -38,7 +38,7 @@ std::cout << "found objs element\n";
 
     int numObjs = p.nChildNode();
 
-#ifdef _DEBUG
+#ifdef XML_DEBUG
 if (numObjs > 0)
 {
   std::cout << "PosUpdateReq: got " << numObjs << " positions.\n";
