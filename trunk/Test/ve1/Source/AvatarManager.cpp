@@ -57,7 +57,7 @@ Ve1Character* AvatarManager::Create(const std::string& characterName)
   CharMap::iterator it = m_chars.find(characterName);
   if (it == m_chars.end())
   {
-    std::cout << "Unexpected character name: " << characterName << "\n";
+std::cout << "Unexpected character name: " << characterName << "\n";
     // Create a placeholder node of default type. This probably means we have not downloaded
     //  data for a new type.
     ch = new BlinkCharacter;
