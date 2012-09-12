@@ -24,7 +24,7 @@ void Animated::SetFromCharacterName(const std::string& chName)
   // Characters must be consistently named: chName.md2
   std::string file = "characters/" + chName + "/" + chName + ".md2";
 
-std::cout << "Loading character MD2: " << file << "\n";
+//std::cout << "Loading character MD2: " << file << "\n";
 
   LoadMd2(file);
 }
