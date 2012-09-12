@@ -1,5 +1,6 @@
 #include "GSMain.h"
 #include <AmjuGL.h>
+#include <ShadowMap.h>
 #include <Screen.h>
 #include <SAP.h> 
 #include <Unproject.h>
@@ -35,7 +36,8 @@
 #include "Ve1BruteForce.h" // test against SAP
 #include "FirstTimeMsg.h"
 
-#define SHOW_NUM_ERRORS
+//#define SHOW_NUM_ERRORS
+//#define USE_SHADOW_MAP
 
 namespace Amju
 {
@@ -179,11 +181,10 @@ void GSMain::Update()
   GSBase::Update();
 
   // TODO different message depending on game mode.
-  if (!FirstTimeMsg("Welcome to My Game!", MsgNum(1)))
-  {
-    // Above msg already shown
-    FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));
-  }
+  FirstTimeMsg("Welcome to My Game!", MsgNum(1));
+
+  // TODO IF above msg already shown
+//  FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));
 
   GetVe1SceneGraph()->Update();
 
@@ -206,23 +207,9 @@ void GSMain::Update()
 
 void GSMain::DoMoveRequest()
 {
-std::cout << "In DoMoveRequest...\n";
-  if (m_menu)
-  {
-std::cout << " ...m_menu exists ";
-    if (m_menu->IsVisible())
-    {
-std::cout << "and is visible.\n";
-    }
-    else
-    {
-std::cout << "and is NOT visible.\n";
-    }
-  }
-
   Vec2f mouseScreen = m_mouseScreen;
   mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
-std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
+//std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
   if (mouseScreen.x > 1.0f)
   {
     return;
@@ -232,7 +219,9 @@ std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
 
   if (selectedObj)
   {
+#ifdef PICK_DEBUG
 std::cout << "Selected " << *selectedObj << "\n";
+#endif
 
     if (ShowObjectMenu(selectedObj))
     {
@@ -329,6 +318,11 @@ void GSMain::SetViewWidth(float w)
   m_viewportWidth = w;
 }
 
+static void ShadowDraw()
+{
+  GetVe1SceneGraph()->Draw();
+}
+
 void GSMain::Draw()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
@@ -350,7 +344,23 @@ void GSMain::Draw()
   Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
   cam->SetTarget(GetLocalPlayer()); // could be 0
 
+#ifdef USE_SHADOW_MAP
+
+  static PShadowMap sm = 0;
+  if (!sm)
+  {
+    sm = AmjuGL::CreateShadowMap();
+    sm->SetLightPos(AmjuGL::Vec3(20, 20, 20));
+    sm->Init();
+    sm->SetDrawFunc(ShadowDraw);
+  }
+  sm->Draw();
+
+#else // USE_SHADOW_MAP
+
   GetVe1SceneGraph()->Draw();
+
+#endif // USE_SHADOW_MAP
 
   if (m_moveRequest)
   {
