@@ -14,6 +14,7 @@ namespace Amju
 {
 ReqGetNewMsgs::ReqGetNewMsgs(const std::string& url) : Ve1Req(url, "getnewmsgs")
 {
+  m_critical = false;
 }
 
 static std::string timestamp = "1";
