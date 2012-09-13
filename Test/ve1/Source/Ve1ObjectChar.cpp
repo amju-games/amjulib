@@ -16,7 +16,7 @@ namespace Amju
 static const float XSIZE = 10;
 static const float YSIZE = 30; // TODO TEMP TEST, baddies can be any size
 
-static const float SPEED = 50.0f; // TODO CONFIG
+static const float SPEED = 80.0f; // TODO CONFIG
 
 static const float GRAVITY = -50.0f; // TODO CONFIG
 
