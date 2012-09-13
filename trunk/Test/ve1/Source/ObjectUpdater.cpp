@@ -464,9 +464,6 @@ static const int MAX_POS_UPDATE_REQS = 2; // for mad clicking
 
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
-  // TODO just to track down odd coords
-  Assert(fabs(pos.x) < 2000.0f);
-
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_POSITION);
   url += "&obj_id=";
   url += ToString(objId);
