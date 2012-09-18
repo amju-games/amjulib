@@ -20,7 +20,7 @@ text1
 // Text
 Are you sure you want to quit the game ?
 // Font name, size
-arial, 1.0
+arial, 1.0, fgcol=ffffff
 
 gui-button
 cancel-button
@@ -28,7 +28,7 @@ cancel-button
 0.8,0.2
 gui-button-4.png
 don't quit
-arial, 2.0
+arial, 2.0, sx=0.6
 
 gui-button
 quitsession-button
@@ -36,7 +36,7 @@ quitsession-button
 0.8, 0.2
 gui-button-4.png
 yes, quit game
-arial, 1.6 
+arial, 1.6, sx=0.6
 
 gui-button
 quitprocess-button
@@ -44,7 +44,7 @@ quitprocess-button
 0.8,0.2
 gui-button-4.png
 quit completely
-arial, 1.6
+arial, 1.6, sx=0.6
 
 
 

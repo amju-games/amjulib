@@ -20,7 +20,7 @@ text1
 // Text
 Oh dear!
 // Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
+arial, 1.0,fgcol=ffffff
 
 // Element type
 gui-text

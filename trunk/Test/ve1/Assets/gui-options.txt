@@ -6,21 +6,21 @@ gui-comp
 // Name
 hud-comp
 // Num children
-7
+6
 
 
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.8
-// size
-2.0, 0.1
-// Text
-Options
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
+//// Element type
+//gui-text
+//// Element name
+//text1
+//// pos (coords are -1..1)
+//-1.0, 0.8
+//// size
+//2.0, 0.1
+//// Text
+//Options
+//// Font name, size
+//arial, 1.0, bgcol=000000, fgcol=ffffff
 
 // element type
 gui-button

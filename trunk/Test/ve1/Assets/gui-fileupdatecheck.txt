@@ -20,7 +20,7 @@ text1
 // Text
 Checking for updated files...
 // Font name, size
-arial, 1.0
+arial, 1.0, fgcol=ffffff
 
 // Button
 // element type

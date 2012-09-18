@@ -20,7 +20,7 @@ error
 // Text
 File upload...
 // Font name, size
-arial, 1.0
+arial, 1.0, fgcol=ffffff
 
 
 // Button
