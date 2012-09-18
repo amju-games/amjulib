@@ -24,8 +24,8 @@ GuiText::GuiText()
   m_textSize = 1.0f;
   static const Colour WHITE(1, 1, 1, 1);
   static const Colour BLACK(0, 0, 0, 1);
-  m_bgCol = BLACK;
-  m_fgCol = WHITE;
+  m_bgCol = WHITE;
+  m_fgCol = BLACK;
   SetCharTime(0);
   m_isMulti = false;
   m_topLine = 0;

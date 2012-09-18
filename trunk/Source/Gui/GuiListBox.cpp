@@ -55,7 +55,14 @@ void GuiListBox::SetSelected(int child, bool selected)
 {
   Assert(child < GetNumChildren());
 
-////  ((GuiText*)GetChild(child))->SetInverse(selected); // TODO what if Items are not Text ?
+#ifdef _DEBUG
+  GuiText* text = dynamic_cast<GuiText*>(GetChild(child));
+  if (text)
+  {
+    std::cout << "List box " << m_name << ": " << text->GetText() << (selected ? " selected" : " UNselected") << "\n";
+  }
+#endif
+
   GetChild(child)->SetSelected(selected);
 
   if (!IsMultiSel())
@@ -173,7 +180,9 @@ bool GuiListBox::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       // Toggle selected flag for this child
       SetSelected(selected, !IsSelected(selected));
 
-      //m_items[m_selected]->ExecuteCommand();
+      // TODO Why is this a bad idea ?
+      //m_items[m_selected]->ExecuteCommand(); 
+
       // Problem with nested item, but should open up on mouse over anyway...
 //      SetVisible(false); // TODO flag for this behaviour
       return true; // handled
