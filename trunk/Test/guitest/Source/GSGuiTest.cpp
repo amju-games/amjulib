@@ -46,8 +46,15 @@ void GSGuiTest::OnActive()
 
   GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
   Assert(fb);
-  fb->SetDir("/Users/jay/projects/amjulib/Test/ve1/");
 
+  // Set default/start dir
+#ifdef WIN32
+  fb->SetDir("c:\\");
+#endif
+
+#ifdef MACOSX
+  fb->SetDir("/");
+#endif
 
 /*
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);

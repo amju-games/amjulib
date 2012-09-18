@@ -8,6 +8,11 @@ hud-comp
 // Num children
 2
 
+gui-scroll
+// Name
+fb scroller
+// One child follows (decorator)
+
 // File browser in progress
 gui-file-list-box
 // Name
