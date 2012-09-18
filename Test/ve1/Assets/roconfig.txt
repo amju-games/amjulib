@@ -2,7 +2,7 @@
 // version
 1
 
-cogtest-first-test 0
+cogtest-first-test 5
 
 npc-max-follow-dist 200.0
 npc-trigger-delay 10.0
