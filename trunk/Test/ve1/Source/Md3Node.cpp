@@ -1,4 +1,5 @@
 #include <AmjuGL.h>
+#include <DrawAABB.h>
 #include "Player.h"
 #include "Md3Node.h"
 
@@ -43,10 +44,10 @@ void Md3Node::Draw()
   m_model->DrawModel();
   AmjuGL::PopMatrix();
 
-#ifdef AABB_DEBUG
-  DrawAABB(*GetAABB());
-#endif
-   
+  if (s_showAABB)
+  {
+    DrawAABB(*GetAABB());
+  }   
 }
 
 void Md3Node::SetFromCharacterName(const std::string& chName)

@@ -128,7 +128,8 @@ public:
 
   virtual void Draw()
   {
-    if (IsVisible())
+    // Don't draw name of local player ?
+    if (IsVisible() && m_player->GetId() != GetLocalPlayerId())
     {
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
@@ -148,6 +149,7 @@ public:
       text.SetJust(GuiText::AMJU_JUST_CENTRE);
       //text.SetInverse(true);
       //text.SetDrawBg(true);
+      text.SetFgCol(Colour(1, 1, 1, 1));
 
       AmjuGL::PushMatrix();
     

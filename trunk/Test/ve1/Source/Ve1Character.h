@@ -35,7 +35,10 @@ public:
 
   void SetObj(Ve1Object* obj) { m_obj = obj; }
 
+  static void SetShowAABBs(bool show);
+
 protected:
+  static bool s_showAABB;
   RCPtr<Ve1Object> m_obj;
 };
 

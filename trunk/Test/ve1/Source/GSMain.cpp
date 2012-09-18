@@ -35,6 +35,7 @@
 #include "CreateCollect.h" // TODO TEMP TEST
 #include "Ve1BruteForce.h" // test against SAP
 #include "FirstTimeMsg.h"
+#include "Ve1Character.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -489,6 +490,18 @@ bool GSMainListener::OnCursorEvent(const CursorEvent& ce)
 bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   return TheGSMain::Instance()->OnMouseButtonEvent(mbe);
+}
+
+bool GSMainListener::OnKeyEvent(const KeyEvent& ke)
+{
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'b' && ke.keyDown)
+  {
+    static bool show = false;
+    show = !show;
+    Ve1Character::SetShowAABBs(show);
+    return true;
+  }
+  return false;
 }
 
 bool GSMain::OnCursorEvent(const CursorEvent& ce)
