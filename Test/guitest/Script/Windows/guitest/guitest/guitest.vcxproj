@@ -85,6 +85,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /S  ..\..\..\..\Assets\* ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\
+xcopy /Y /S  ..\..\..\..\..\..\Assets\gui\* ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\
+mkdir ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\font2d
+xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*  ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\font2d
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
