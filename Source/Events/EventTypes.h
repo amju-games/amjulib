@@ -45,6 +45,7 @@ enum KeyType
   AMJU_KEY_PAGE_DOWN,
   AMJU_KEY_HOME,
   AMJU_KEY_END,
+  AMJU_KEY_ALT,
 
   AMJU_KEY_MAX
 };

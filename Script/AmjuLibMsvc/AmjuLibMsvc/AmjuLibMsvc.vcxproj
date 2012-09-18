@@ -202,6 +202,7 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiScroll.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
@@ -454,6 +455,7 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiRect.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiScroll.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
     <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />
