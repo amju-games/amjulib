@@ -30,16 +30,25 @@ void GuiListBox::Draw()
     return;
   }
 
+  Rect r = GetRect(this);
+
   // Draw bg - TODO just the parts not covered by child items
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
   AmjuGL::SetColour(0, 0, 1, 1);
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  Rect r = GetRect(this);
   DrawSolidRect(r);
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   PopColour();
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
   GuiWindow::Draw();
+
+  // Border
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  PushColour();
+  AmjuGL::SetColour(1, 1, 1, 1);
+  DrawRect(r);
+  PopColour();
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 }
 
 void GuiListBox::SetSelected(int child, bool selected)
