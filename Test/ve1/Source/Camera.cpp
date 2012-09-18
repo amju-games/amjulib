@@ -3,6 +3,7 @@
 #include <DegRad.h>
 #include "Camera.h"
 #include "Portal.h"
+#include "ROConfig.h"
 
 //#define CAM_DEBUG
 
@@ -12,7 +13,8 @@ static const float CAM_Y = 100.0f;
 static const float CAM_Z = 150.0f;
 static float zDist = CAM_Z;
 static float yRot = 0; // rotation so we can see in doorways, etc.
-static float yRot2 = 0; // user drag mouse - intended for edit mode
+static float yRot2 = 0; // user drag mouse - intended for edit mode, maybe also game mode
+static float xRot = 0;
 
 static bool leftDrag = false;
 static bool rightDrag = false;
@@ -20,6 +22,7 @@ static bool midDrag = false;
 static bool camKey = false;
 
 static Vec3f posNoTarget;
+static Vec3f posOffset;
 
 Camera::Camera() : m_target(0)
 {
@@ -33,6 +36,7 @@ void Camera::Reset()
   // TODO Load settings, make configurable from server
   
   zDist = CAM_Z;
+  xRot = 0;
   yRot = 0;
   yRot2 = 0;
   leftDrag = false;
@@ -43,9 +47,11 @@ void Camera::Reset()
 
 void Camera::Update()
 {
+  Vec3f pos;
+
   if (m_target)
   {
-    const Vec3f& pos = m_target->GetPos();
+    pos = m_target->GetPos();
     yRot = 0;
 
     // TODO Get closest portal
@@ -78,7 +84,7 @@ void Camera::Update()
     if (lastportal)
     {
       float pdist = (pos - lastportal->GetPos()).SqLen(); // sq dist from portal to player
-      static const float MAX_DIST = 200.0f; // TODO CONFIG
+      static const float MAX_DIST = ROConfig()->GetFloat("portal-max-dist", 200.0f); 
       static const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
       if (pdist < MAX_SQ_DIST) 
       {
@@ -87,23 +93,21 @@ void Camera::Update()
 //std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
       }
     }
-   
-    float y = yRot + yRot2; 
-    Vec3f eye(pos.x + sin(y) * zDist, pos.y + CAM_Y, pos.z + cos(y) * zDist);
-
-    SetEyePos(eye); 
-    SetLookAtPos(pos);
   }
   else
   {
-    const Vec3f& pos = posNoTarget; 
-    float y = yRot + yRot2; 
-    SetEyePos(Vec3f(pos.x + sin(y) * zDist, pos.y + CAM_Y, pos.z + cos(y) * zDist));
-    SetLookAtPos(pos);
-
-    //SetEyePos(Vec3f(0, CAM_Y, CAM_Z));
-    //SetLookAtPos(Vec3f(0, 0, 0));
+    pos = posNoTarget; 
   }
+  pos += posOffset;
+
+  float y = yRot + yRot2; 
+
+  SetEyePos(Vec3f(
+    pos.x + sin(y) * cos(xRot) * zDist, 
+    pos.y + sin(xRot) * zDist, 
+    pos.z + cos(y) * cos(xRot) * zDist));
+
+  SetLookAtPos(pos);
 }
 
 CameraControl::CameraControl()
@@ -114,7 +118,9 @@ CameraControl::CameraControl()
 bool CameraControl::OnKeyEvent(const KeyEvent& kb)
 {
   // TODO Only alter camera if ALT or some other key is held down
-  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') // TODO S/b command
+  // Would like to use ALT like Maya but not getting the ALT/option key from GLUT...
+
+  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') 
   {
     camKey = kb.keyDown;
   }
@@ -145,12 +151,13 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   if (rightDrag)
   {
     yRot2 += dx;
+    xRot += dy;
     b = true;
   }
   if (midDrag)
   {
-    posNoTarget.x -= dx * 100.0f;
-    posNoTarget.y -= dy * 100.0f;
+    posOffset.x -= dx * 100.0f;
+    posOffset.y -= dy * 100.0f;
     b = true;
   }
 

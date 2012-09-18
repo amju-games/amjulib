@@ -18,6 +18,7 @@ class GSMainListener : public EventListener
 public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnKeyEvent(const KeyEvent&);
 };
 
 class GSMain : public GSBase

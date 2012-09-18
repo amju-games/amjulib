@@ -133,9 +133,10 @@ void Animated::Draw()
   m_pModel->DrawFrames(m_frame, m_nextFrame, t);
   AmjuGL::PopMatrix();
 
-#ifdef AABB_DEBUG
-  DrawAABB(*GetAABB());
-#endif
+  if (s_showAABB)
+  {
+    DrawAABB(*GetAABB());
+  }
 }
 
 void Animated::Update()
