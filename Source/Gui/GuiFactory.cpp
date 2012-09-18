@@ -11,6 +11,7 @@
 #include "GuiMenu.h"
 #include "GuiDialog.h"
 #include "GuiRect.h"
+#include "GuiScroll.h"
 
 namespace Amju
 {
@@ -26,6 +27,7 @@ GuiElement* CreateMenu() { return new GuiMenu; }
 GuiElement* CreateDialog() { return new GuiDialog; }
 GuiElement* CreateRect() { return new GuiRect; }
 GuiElement* CreateFileListBox() { return new GuiFileListBox; }
+GuiElement* CreateScroll() { return new GuiScroll; }
 
 GuiFactory::GuiFactory()
 {
@@ -41,5 +43,6 @@ GuiFactory::GuiFactory()
   Add(GuiDialog::NAME, &CreateDialog);
   Add(GuiRect::NAME, &CreateRect);
   Add(GuiFileListBox::NAME, &CreateFileListBox);
+  Add(GuiScroll::NAME, &CreateScroll);
 }
 }
