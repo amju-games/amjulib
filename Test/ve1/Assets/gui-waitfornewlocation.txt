@@ -20,7 +20,7 @@ text1
 // Text
 Please wait, downloading location data
 // Font name, size
-arial, 1.0
+arial, 1.0, fgcol=ffffff
 
 // Element type
 gui-text
@@ -33,7 +33,7 @@ filename-text
 // Text
 ...
 // Font name, size
-arial, 0.6 
+arial, 0.6, fgcol=ffffff
 
 
 // Button

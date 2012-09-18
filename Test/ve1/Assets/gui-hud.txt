@@ -78,7 +78,7 @@ heart-num
 0.3, 0.1
 // Text
 0
-cheri, 0.8, right
+cheri, 0.8, right, fgcol=ffffff
 
 
 
@@ -112,5 +112,5 @@ text1
 // Text
 This is some text
 // Font name, size
-arial, 1.0 
+arial, 1.0, fgcol=ffffff
 

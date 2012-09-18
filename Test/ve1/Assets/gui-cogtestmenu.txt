@@ -24,7 +24,7 @@ heart-num
 0.3, 0.1
 // Text
 0
-cheri, 1.0
+cheri, 1.0, fgcol=ffffff
 
 
 
@@ -50,7 +50,7 @@ prac-text
 // Text
 Please choose cognitive test type...
 // Font name, size
-arial, 1.0, multi
+arial, 1.0, multi, fgcol=ffffff
 
 
 // cancel button

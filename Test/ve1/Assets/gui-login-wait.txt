@@ -20,7 +20,7 @@ text1
 // Text
 Waiting to log in...
 // Font name, size
-arial, 1.0
+arial, 1.0, fgcol=ffffff
 
 // Cancel button
 // element type
@@ -53,6 +53,6 @@ error-string
 // Text
 error
 // Font name, size
-arial, 1.0 
+arial, 1.0, fgcol=ffffff
 
 

@@ -32,7 +32,7 @@ text1
 // Text
 Please enter path and file for scene .obj (will be file browser)
 // Font name, size
-arial, 1.0, multi, centre
+arial, 1.0, multi, centre, fgcol=ffffff
 
 gui-text
 error
@@ -43,7 +43,7 @@ error
 // Text
 (error text here)
 // Font name, size
-arial, 1.0, centre
+arial, 1.0, centre, fgcol=ffffff
 
 gui-button
 ok-button
