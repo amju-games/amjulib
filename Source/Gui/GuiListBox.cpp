@@ -30,6 +30,7 @@ void GuiListBox::Draw()
     return;
   }
 
+/*
   Rect r = GetRect(this);
 
   // Draw bg - TODO just the parts not covered by child items
@@ -39,9 +40,11 @@ void GuiListBox::Draw()
   DrawSolidRect(r);
   PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+*/
 
-  GuiWindow::Draw();
+  GuiComposite::Draw();
 
+/*
   // Border
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
@@ -49,6 +52,7 @@ void GuiListBox::Draw()
   DrawRect(r);
   PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+*/
 }
 
 void GuiListBox::SetSelected(int child, bool selected)
@@ -154,7 +158,10 @@ bool GuiListBox::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // Click outside area 
       //SetVisible(false);
-      return false; // not handled 
+
+std::cout << "Click outside list box\n";
+
+      //return false; // not handled 
     }
 
     // Clicked on an item

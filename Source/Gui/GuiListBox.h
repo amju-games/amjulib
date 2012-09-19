@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-class GuiListBox : public GuiWindow
+class GuiListBox : public GuiComposite //GuiWindow
 {
 public:
   static const char* NAME;
