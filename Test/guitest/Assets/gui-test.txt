@@ -8,10 +8,19 @@ hud-comp
 // Num children
 2
 
+gui-window
+// Name
+fb window
+// Pos, size
+0, 0.9
+0.7, 0.7
+// num children (hmm, always 1 == decorator ?)
+1
+
 gui-scroll
 // Name
 fb scroller
-// One child follows (decorator)
+// One child follows (always 1, decorator)
 
 // File browser in progress
 gui-file-list-box

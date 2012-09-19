@@ -19,12 +19,17 @@ bool GuiWindow::Load(File* f)
 
 void GuiWindow::Draw()
 {
-#ifdef WINDOW_DEBUG
+//#ifdef WINDOW_DEBUG
+  // TODO make this a flag
+  // Border
   Rect r = GetRect(this);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  PushColour();
+  AmjuGL::SetColour(1, 1, 1, 1); // TODO make configurable
   DrawRect(r);
+  PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-#endif
+//#endif
 
   int vp[4];
   AmjuGL::GetViewport(&vp[0], &vp[1], &vp[2], &vp[3]);

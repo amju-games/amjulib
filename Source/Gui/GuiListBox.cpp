@@ -124,7 +124,7 @@ void GuiListBox::AddItem(GuiText* text)
   pos.y -= 0.1f * (float)m_children.size(); // TODO
   text->SetLocalPos(pos);
 
-  m_children.push_back(text);
+  AddChild(text);
 }
 
 bool GuiListBox::Load(File* f)
