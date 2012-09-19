@@ -37,8 +37,10 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
   GuiElement* child = m_children[0];
   
   CursorEvent e(ce);
-  e.x += m_scrollPos.x;
-  e.y += m_scrollPos.y;
+//  e.x += m_scrollPos.x;
+//  e.y -= m_scrollPos.y;
+
+//std::cout << "Mouse: orig x: " << ce.x << " y: " << ce.y << " new x: " << e.x << " y: " << e.y << "\n";
 
   return child->OnCursorEvent(e); 
 }
@@ -49,8 +51,10 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   GuiElement* child = m_children[0];
 
   MouseButtonEvent e(mbe);
-  e.x += m_scrollPos.x;
-  e.y += m_scrollPos.y;
+//  e.x += m_scrollPos.x;
+//  e.y -= m_scrollPos.y;
+std::cout << "BUTTON EVENT: m_scrollPos.y: " << m_scrollPos.y;
+std::cout << " Mouse: orig x: " << mbe.x << " y: " << mbe.y << " new x: " << e.x << " y: " << e.y << "\n";
 
   return child->OnMouseButtonEvent(e); 
 }
@@ -59,13 +63,15 @@ void GuiScroll::Draw()
 {
   // Update not called. TODO
   float dt = TheTimer::Instance()->GetDt();
-  static const float DECEL = 0.2f; // TODO
-  m_scrollVel *= (1.0f - DECEL * dt);
+  static const float DECEL = 0.5f; // TODO
+  m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
   m_scrollPos += m_scrollVel * dt;
 
   // Enforce boundary - TODO other edges
   m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
   m_scrollPos.y = std::max(m_scrollPos.y, 0.0f);
+
+///  m_scrollPos.y = 0.2f; // TODO TEMP TEST
 
   // TODO
   /*
@@ -77,18 +83,20 @@ void GuiScroll::Draw()
   ...
   */
 
-  //SetLocalPos(-m_scrollPos); // so combined pos for child is updated
+  SetLocalPos(-m_scrollPos); // so combined pos for child is updated
 
   Assert(m_children.size() == 1);
   GuiElement* child = m_children[0];
 
-  //child->Draw();
+  child->Draw();
 
-  // Don't translate, won't work for mouse coords etc
+/*
+  // translate - must compensate for mouse coords etc
   AmjuGL::PushMatrix();
   AmjuGL::Translate(m_scrollPos.x, m_scrollPos.y, 0);
   child->Draw();
   AmjuGL::PopMatrix();
+*/
 }
 
 void GuiScroll::Update()
