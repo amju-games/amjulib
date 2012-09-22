@@ -19,9 +19,7 @@ std::cout << "Attempting to load obj: " << pathFile << "\n";
 
   std::string objFile = StripPath(pathFile);
 
-  // TODO Bypass Res Manager so we don't cache the file, we want to reload it.
-  // Also, no path is given here so files with the same name in different dirs
-  //  won't work!!!!
+  // Bypass Res Manager so we don't cache the file, we want to reload it.
   bool binary = (GetFileExt(objFile) == "objb");
   RCPtr<ObjMesh> mesh = new ObjMesh;
   bool loaded = mesh->Load(objFile, binary);
@@ -35,8 +33,9 @@ std::cout << "Attempting to load obj: " << pathFile << "\n";
   }
 */
   // This may cause a lot of work - for now, save optimised text version
-  if (!binary)
+  if (loaded && !binary)
   {
+    //std::string filename = GetFileNoExt(objFile) + "_save.obj";
     mesh->Save(objFile, false);
   }
 
