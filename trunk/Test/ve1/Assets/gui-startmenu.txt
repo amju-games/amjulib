@@ -6,8 +6,16 @@ gui-comp
 // Name
 hud-comp
 // Num children
-4
+5
 
+
+gui-button
+guest-button
+-0.4, 0.6
+0.8, 0.2
+gui-button-4.png
+log in as guest
+arial, 1.8, sx=0.6
 
 gui-button
 start-button
