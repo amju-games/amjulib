@@ -43,11 +43,6 @@ void Md3Node::Draw()
   AmjuGL::Translate(0, 23.0f, 0);
   m_model->DrawModel();
   AmjuGL::PopMatrix();
-
-  if (s_showAABB)
-  {
-    DrawAABB(*GetAABB());
-  }   
 }
 
 void Md3Node::SetFromCharacterName(const std::string& chName)
