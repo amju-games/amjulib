@@ -6,6 +6,7 @@
 #include "Ve1SceneGraph.h"
 #include "SetObjMeshCommand.h"
 #include "SceneCollisionMesh.h"
+#include "Useful.h"
 
 namespace Amju
 {
@@ -58,7 +59,7 @@ bool Skybox::Load(File* f)
 
   SetSceneNode(sm);
 
-#ifdef AABB_DEBUG
+#ifdef _DEBUG
 std::cout << "Got AABB for " << *this << " size: " << m_aabb.GetXSize() << " " << m_aabb.GetYSize() << " " << m_aabb.GetZSize() << "\n";
 #endif
 

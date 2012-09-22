@@ -335,7 +335,7 @@ void GSMain::Draw()
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
   const float NEAR_PLANE = 1.0f;
-  const float FAR_PLANE = 3000.0f;
+  const float FAR_PLANE = 20000.0f;
   float aspect = (float)width / (float)Screen::Y();
   AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
 

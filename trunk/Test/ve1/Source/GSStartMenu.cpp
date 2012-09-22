@@ -9,6 +9,7 @@
 #include "GSTitle.h"
 #include "GSAdminMenu.h"
 #include "GSOptions.h"
+#include "GSLoginWaiting.h"
 
 namespace Amju
 {
@@ -17,6 +18,12 @@ static void OnOptionsButton()
   // Set back state!!
   TheGSOptions::Instance()->SetPrevState(TheGSStartMenu::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
+}
+
+static void OnGuestButton()
+{
+  TheGSLoginWaiting::Instance()->SetEmail("guest");
+  TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
 }
 
 static void OnStartButton()
@@ -64,6 +71,9 @@ void GSStartMenu::OnActive()
 
   GuiButton* start = (GuiButton*)GetElementByName(m_gui, "start-button");
   start->SetCommand(Amju::OnStartButton);
+
+  GuiButton* guest = (GuiButton*)GetElementByName(m_gui, "guest-button");
+  guest->SetCommand(Amju::OnGuestButton);
 
   GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
   options->SetCommand(Amju::OnOptionsButton);

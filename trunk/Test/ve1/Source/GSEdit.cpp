@@ -24,6 +24,7 @@
 #include "Baddie.h"
 #include "CogTestNpc.h"
 #include "GSQuitGame.h"
+#include "Skybox.h"
 
 namespace Amju
 {
@@ -830,6 +831,9 @@ void GSEdit::CreateContextMenu()
 
     childMenu->AddChild(new GuiMenuItem("Building", 
       new NewObjectCommand(Building::TYPENAME, "none", "none")));
+
+    childMenu->AddChild(new GuiMenuItem("Skybox", 
+      new NewObjectCommand(Skybox::TYPENAME, "none", "none")));
 
     childMenu->AddChild(new GuiMenuItem("Portal", 
       new NewObjectCommand(Portal::TYPENAME, "none", "none", true)));
