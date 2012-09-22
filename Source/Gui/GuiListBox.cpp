@@ -3,27 +3,87 @@
 #include <AmjuGL.h>
 #include <Screen.h>
 #include <DrawRect.h>
+#include <AmjuAssert.h>
+#include "GuiScroll.h"
 
 namespace Amju
 {
 const char* GuiListBox::NAME = "gui-list-box";
 
+GuiElement* CreateListBox() 
+{
+  // To make list boxes scroll, create a Scroll decorator which has a List Box child.
+  // Stick the whole thing in a Window.
+
+  GuiListBox* w = new GuiListBox;
+  GuiScroll* s = new GuiScroll;
+  GuiList* lb = new GuiList;
+  w->AddChild(s);
+  s->AddChild(lb);
+  return w; 
+}
+
 GuiListBox::GuiListBox()
+{
+}
+
+void GuiListBox::Clear()
+{
+  GetList()->Clear();
+}
+
+GuiList* GuiListBox::GetList()
+{
+  GuiElement* child = GetChild(0);
+  Assert(child);
+  GuiScroll* scr = dynamic_cast<GuiScroll*>(child);
+  Assert(scr);
+  GuiElement* gr = scr->GetChild(0);
+  Assert(gr);
+  GuiList* list = dynamic_cast<GuiList*>(gr);
+  Assert(list);
+  return list;
+}
+
+GuiScroll* GuiListBox::GetScroll()
+{
+  GuiElement* child = GetChild(0);
+  Assert(child);
+  GuiScroll* scr = dynamic_cast<GuiScroll*>(child);
+  Assert(scr);
+  return scr;
+}
+
+bool GuiListBox::Load(File* f)
+{
+  if (!GuiElement::Load(f))
+  {
+    return false;
+  }
+//  GetScroll()->SetLocalPos(GetCombinedPos());
+  GetScroll()->SetSize(GetSize()); // TODO do we need this ?
+//  GetList()->SetLocalPos(GetCombinedPos());
+  GetList()->SetSize(GetSize());
+
+  return true;
+}
+
+GuiList::GuiList()
 {
   m_isMultiSelect = false;
 }
 
-void GuiListBox::SetIsMultiSel(bool isMulti)
+void GuiList::SetIsMultiSel(bool isMulti)
 {
   m_isMultiSelect = isMulti;
 }
 
-bool GuiListBox::IsMultiSel() const
+bool GuiList::IsMultiSel() const
 {
   return m_isMultiSelect;
 }
 
-void GuiListBox::Draw()
+void GuiList::Draw()
 {
   if (!IsVisible())
   {
@@ -55,7 +115,7 @@ void GuiListBox::Draw()
 */
 }
 
-void GuiListBox::SetSelected(int child, bool selected)
+void GuiList::SetSelected(int child, bool selected)
 {
   Assert(child < GetNumChildren());
 
@@ -85,12 +145,12 @@ void GuiListBox::SetSelected(int child, bool selected)
   }
 }
 
-bool GuiListBox::IsSelected(int child) const
+bool GuiList::IsSelected(int child) const
 {
   return (m_selset.count(child) != 0);
 }
 
-int GuiListBox::GetSelectedItem() const
+int GuiList::GetSelectedItem() const
 {
   // only for non-multi-select lists
   Assert(!IsMultiSel());
@@ -106,7 +166,7 @@ int GuiListBox::GetSelectedItem() const
   return -1;
 }
 
-void GuiListBox::AddItem(GuiText* text)
+void GuiList::AddItem(GuiText* text)
 {
   text->SetDrawBg(true); // TODO TEMP TEST
   text->SetJust(GuiText::AMJU_JUST_LEFT); // ?
@@ -127,7 +187,7 @@ void GuiListBox::AddItem(GuiText* text)
   AddChild(text);
 }
 
-bool GuiListBox::Load(File* f)
+bool GuiList::Load(File* f)
 {
   // Get name, pos, size
   if (!GuiElement::Load(f))
@@ -140,7 +200,7 @@ bool GuiListBox::Load(File* f)
   return true;
 }
 
-bool GuiListBox::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GuiList::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (!IsVisible())
   {

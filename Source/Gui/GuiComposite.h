@@ -30,7 +30,8 @@ public:
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
   virtual void AddChild(GuiElement*);
-  void Clear();
+
+  virtual void Clear();
 
 protected:
   bool LoadChildren(File*);

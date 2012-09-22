@@ -7,16 +7,21 @@ namespace Amju
 {
 class GuiFileListBox : public GuiListBox
 {
+protected:
+  GuiFileListBox();
+  friend GuiElement* CreateFileListBox();
+
 public:
   static const char* NAME;
 
-  GuiFileListBox();
   void SetDir(const std::string& dir);
   void Refresh();
 
 protected:
   std::string m_dir;
 };
+
+GuiElement* CreateFileListBox();
 }
 
 #endif

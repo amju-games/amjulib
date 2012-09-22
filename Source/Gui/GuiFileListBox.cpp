@@ -1,9 +1,20 @@
 #include <Directory.h>
 #include "GuiFileListBox.h"
+#include "GuiScroll.h"
 
 namespace Amju
 {
 const char* GuiFileListBox::NAME = "gui-file-list-box";
+
+GuiElement* CreateFileListBox()
+{
+  GuiFileListBox* w = new GuiFileListBox;
+  GuiScroll* s = new GuiScroll;
+  GuiList* lb = new GuiList;
+  w->AddChild(s);
+  s->AddChild(lb);
+  return w; 
+}
 
 GuiFileListBox::GuiFileListBox()
 {
@@ -51,7 +62,7 @@ std::cout << "GuiFileListBox: populating list, dir: " << m_dir << "\n";
       //elem->SetScaleX(0.5f); // TODO Some good way of showing difference
     }
     elem->SetText(name);
-    AddItem(elem);
+    GetList()->AddItem(elem);
   }
 std::cout << "Done!\n";
 }
