@@ -88,6 +88,7 @@
     <PostBuildEvent>
       <Command>xcopy /Y /S  ..\..\..\..\Assets\* ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\
 xcopy /Y /S  ..\..\..\..\..\..\Assets\gui\* ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\
+xcopy /Y /S  ..\..\..\..\..\..\Source\GLUT\*.dll ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\
 mkdir ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\font2d
 xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*  ..\..\..\..\..\..\Build\guitest\Windows\$(Configuration)\font2d
 
@@ -121,11 +122,10 @@ xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*  ..\..\..\..\..\..\Build\guitest\
     <ClInclude Include="..\..\..\..\Source\GSGuiTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDLmain.lib" />
+    <None Include="..\..\..\..\Assets\gui-test.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Assets\gui-test.txt" />
+    <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
