@@ -51,10 +51,14 @@ bool Skybox::Load(File* f)
   }
 
   Assert(mesh);
-  SceneCollisionMesh* sm = new SceneCollisionMesh;
+  // TODO Collision mesh not reqd
+  SceneMesh* sm = new SceneMesh;
   sm->SetMesh(mesh);
-  sm->CalcCollisionMesh();
-  sm->GetCollisionMesh()->CalcAABB(&m_aabb);
+  sm->SetIsLit(false);
+//  sm->CalcCollisionMesh();
+//  sm->GetCollisionMesh()->CalcAABB(&m_aabb);
+  static const float S = 1000.0f; // box size - but not critical
+  m_aabb.Set(-S, S, -S, S, -S, S);
   *(sm->GetAABB()) = m_aabb;
 
   SetSceneNode(sm);
@@ -109,5 +113,15 @@ void Skybox::Update()
   mat.RotateY(m_yRot);
   m_sceneNode->SetLocalTransform(mat);
   m_sceneNode->MultLocalTransform(mat2);
+}
+
+void Skybox::OnLocationEntry()
+{
+  m_inNewLocation = 0;
+
+  if (m_sceneNode)
+  {
+    GetVe1SceneGraph()->SetRootNode(SceneGraph::AMJU_SKYBOX, m_sceneNode);
+  }
 }
 }
