@@ -8,13 +8,6 @@
 
 namespace Amju
 {
-bool Ve1Character::s_showAABB = false;
-
-void Ve1Character::SetShowAABBs(bool show)
-{
-  s_showAABB = show;
-}
-
 void Ve1Character::BeforeDraw()
 {
 }
