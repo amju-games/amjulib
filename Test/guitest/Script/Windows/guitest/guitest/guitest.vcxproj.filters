@@ -34,12 +34,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\..\SDL\lib\SDLmain.lib" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\..\..\Assets\gui-test.txt">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
   </ItemGroup>
 </Project>

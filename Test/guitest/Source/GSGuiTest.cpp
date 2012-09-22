@@ -43,7 +43,7 @@ void GSGuiTest::OnActive()
 
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
-
+  
   GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
   Assert(fb);
 
