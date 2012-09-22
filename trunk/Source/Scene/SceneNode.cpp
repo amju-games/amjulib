@@ -47,6 +47,7 @@ SceneNode::SceneNode()
   SetVisible(true);
   SetIsCamera(false);
   SetCollidable(true);
+  SetIsLit(true);
 }
 
 void SceneNode::SetColour(const Colour& colour)
@@ -223,10 +224,42 @@ void SceneNode::CombineTransform()
   }
 }
 
+static bool s_showAABB = false;
+void SceneNode::SetGlobalShowAABB(bool b)
+{
+  s_showAABB = b;
+}
+
+bool SceneNode::ShowAABB() const
+{
+  // TODO
+  return s_showAABB;
+}
+
+// TODO   void SetShowAABB(bool);
+
 static const uint32 VISIBLE    = 0x01;
 static const uint32 COLLIDABLE = 0x02;
 static const uint32 BLENDED    = 0x04;
 static const uint32 CAMERA     = 0x08;
+static const uint32 LIGHTING   = 0x10;
+
+bool SceneNode::IsLit() const
+{
+  return m_flags & LIGHTING;
+}
+
+void SceneNode::SetIsLit(bool b)
+{
+  if (b)
+  {
+    m_flags |= LIGHTING;
+  }
+  else
+  {
+    m_flags &= ~LIGHTING;
+  }
+}
 
 bool SceneNode::IsVisible() const
 {

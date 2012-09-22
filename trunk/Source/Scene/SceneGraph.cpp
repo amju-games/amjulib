@@ -111,6 +111,12 @@ void SceneGraph::DrawNode(SceneNode* p)
     PushColour();
     MultColour(p->m_colour);
     p->Draw();
+
+    if (p->ShowAABB()) 
+    {
+      DrawAABB(*(p->GetAABB()));
+    }
+
     PopColour();
   }
 }

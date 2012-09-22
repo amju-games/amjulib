@@ -19,14 +19,22 @@ void SceneMesh::SetMesh(PObjMesh mesh)
 
 void SceneMesh::Draw()
 {
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING);
+  if (IsLit())
+  {
+    AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+  }
+  else
+  {
+    AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  }
+
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_local);
   m_mesh->Draw();
   AmjuGL::PopMatrix();
 
-#ifdef DEBUG_DRAW_AABB
-  DrawAABB(*(GetAABB()));
-#endif  
+  AmjuGL::PopAttrib();
 }
 
 void SceneMesh::Update()

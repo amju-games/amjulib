@@ -61,11 +61,17 @@ public:
   bool IsCollidable() const;
   bool IsBlended() const; 
   bool IsCamera() const;
+  bool IsLit() const;
+  bool ShowAABB() const;
 
   void SetVisible(bool);
   void SetCollidable(bool);
   void SetBlended(bool);
   void SetIsCamera(bool);
+  void SetIsLit(bool);
+  void SetShowAABB(bool); // If called, overrides global setting
+
+  static void SetGlobalShowAABB(bool);
 
   void AddChild(PSceneNode node);
   void DelChild(PSceneNode node);
