@@ -124,8 +124,19 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') 
   {
     camKey = kb.keyDown;
+    return true;
   }
 
+#ifdef _DEBUG
+  // Debug: show AABBs for SceneNodes
+  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'b' && kb.keyDown)
+  {
+    static bool show = false;
+    show = !show;
+    SceneNode::SetGlobalShowAABB(show);
+    return true;
+  }
+#endif
   return false;
 }
 
