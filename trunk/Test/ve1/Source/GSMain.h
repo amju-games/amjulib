@@ -13,6 +13,8 @@ namespace Amju
 class GameObject;
 class Furniture;
 
+// Need this because EventPoller expects all listeners to be ref counted/on heap.
+// GameStates are singletons, not ref counted.
 class GSMainListener : public EventListener
 {
 public:
