@@ -19,6 +19,11 @@ bool GuiWindow::Load(File* f)
 
 void GuiWindow::Draw()
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
 //#ifdef WINDOW_DEBUG
   // TODO make this a flag
   // Border

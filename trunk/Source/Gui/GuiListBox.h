@@ -7,13 +7,36 @@
 
 namespace Amju
 {
-class GuiListBox : public GuiComposite //GuiWindow
+// Not sure how best to do this. 
+// GuiListBox wraps up the complicated innards of a list box.
+// It's really a Window, containing a Scroll control, containing a List.
+class GuiList;
+class GuiScroll;
+
+class GuiListBox : public GuiWindow
 {
+protected:
+  GuiListBox();
+  friend GuiElement* CreateListBox();
+
 public:
   static const char* NAME;
 
-  GuiListBox();
+  // Convenient access to innards
+  GuiList* GetList();
+  GuiScroll* GetScroll();
 
+  virtual bool Load(File*);
+  virtual void Clear(); // Clear list, not the child of this object
+};
+
+// Not factory-creatable
+class GuiList : public GuiComposite 
+{
+public:
+  GuiList();
+
+  // Use in preference to AddChild, as it can resize the listbox to fit the text
   void AddItem(GuiText* text);  
 
   virtual void Draw();
@@ -32,6 +55,8 @@ protected:
   typedef std::set<int> SelSet;
   SelSet m_selset;
 };
+
+GuiElement* CreateListBox();
 }
 
 #endif
