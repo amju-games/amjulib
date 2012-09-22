@@ -256,6 +256,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\SerialReqManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Skybox.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
@@ -366,6 +367,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\SerialReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
+    <ClInclude Include="..\..\..\..\Source\Skybox.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />
