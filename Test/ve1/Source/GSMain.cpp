@@ -36,6 +36,7 @@
 #include "Ve1BruteForce.h" // test against SAP
 #include "FirstTimeMsg.h"
 #include "Ve1Character.h"
+#include "ROConfig.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -132,7 +133,7 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
 {
   // Get distance from local player to this object, don't show menu if too far away
   // TODO
-  static const float MENU_DISTANCE = 100.0f; // TODO CONFIG ?
+  static const float MENU_DISTANCE = ROConfig()->GetFloat("menu-obj-distance", 100.0f); // TODO CONFIG ?
   static const float MENU_DISTANCE2 =  MENU_DISTANCE * MENU_DISTANCE;
 
   float sqdist = (GetLocalPlayer()->GetPos() - obj->GetPos()).SqLen();
@@ -494,13 +495,6 @@ bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 bool GSMainListener::OnKeyEvent(const KeyEvent& ke)
 {
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'b' && ke.keyDown)
-  {
-    static bool show = false;
-    show = !show;
-    Ve1Character::SetShowAABBs(show);
-    return true;
-  }
   return false;
 }
 
