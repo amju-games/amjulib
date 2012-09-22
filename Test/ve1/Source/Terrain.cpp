@@ -126,6 +126,8 @@ void Terrain::OnLocationEntry()
   // TODO Not sure this actually does anything. What we want is to work out the AABB for the mesh.
   tsn->UpdateBoundingVol(); // TODO just set a huge AABB
   tsn->CalcCollisionMesh();
+  tsn->GetCollisionMesh()->CalcAABB(&m_aabb);
+  *(tsn->GetAABB()) = m_aabb;
 
   // Add Terrain to Scene Graph
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
