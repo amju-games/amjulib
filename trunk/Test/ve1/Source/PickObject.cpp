@@ -7,6 +7,7 @@
 #include <ClipLineSegBox.h>
 #include "Ve1Object.h"
 #include "Terrain.h"
+#include "Skybox.h"
 
 //#define PICK_DEBUG
 
@@ -51,13 +52,20 @@ std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
 //      float dist = LineSeg(mouseWorldNear, mouseWorldFar).SqDist(pgo->GetPos());
       float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
 
-      // Treat terrain as least attractive option
-      if (dynamic_cast<Terrain*>(v))
+      // Treat skybox as least attractive option, followed by terrain
+      if (dynamic_cast<Skybox*>(v))
+      {
+#ifdef PICK_DEBUG
+std::cout << " Obj " << pgo->GetId() << " skybox so treated as far away\n";
+#endif
+        dist = 999900.0f; 
+      }
+      else if (dynamic_cast<Terrain*>(v))
       {
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " terrain so treated as far away\n";
 #endif
-        dist = 999990.0f; 
+        dist = 999800.0f; 
       }
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " sqDist: " << dist << "\n";
