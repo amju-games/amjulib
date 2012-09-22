@@ -18,7 +18,7 @@ public:
   virtual const char* GetTypeName() const;
   virtual bool Load(File*);
   virtual void Update();
-
+  virtual void OnLocationEntry();
   virtual void SetEditMenu(GuiMenu*);
 
 private:
