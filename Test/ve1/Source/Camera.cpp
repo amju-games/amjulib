@@ -14,7 +14,8 @@ static const float CAM_Z = 150.0f;
 static float zDist = CAM_Z;
 static float yRot = 0; // rotation so we can see in doorways, etc.
 static float yRot2 = 0; // user drag mouse - intended for edit mode, maybe also game mode
-static float xRot = 0;
+static const float XROT_START = DegToRad(45.0f); // TODO default is to look down at target at this angle
+static float xRot = XROT_START;
 
 static bool leftDrag = false;
 static bool rightDrag = false;
@@ -36,7 +37,7 @@ void Camera::Reset()
   // TODO Load settings, make configurable from server
   
   zDist = CAM_Z;
-  xRot = 0;
+  xRot = XROT_START;
   yRot = 0;
   yRot2 = 0;
   leftDrag = false;
@@ -145,13 +146,13 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   bool b = false;
   if (leftDrag)
   {
-    zDist -= dy * 100.0f;
+    yRot2 -= dx;
+    xRot -= dy;
     b = true;
   }
   if (rightDrag)
   {
-    yRot2 += dx;
-    xRot += dy;
+    zDist += dy * 100.0f; // TODO sensitivity
     b = true;
   }
   if (midDrag)

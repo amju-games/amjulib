@@ -6,6 +6,7 @@
 #include <Line3.h>
 #include <ClipLineSegBox.h>
 #include "Ve1Object.h"
+#include "Terrain.h"
 
 //#define PICK_DEBUG
 
@@ -46,8 +47,22 @@ std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
 
       // Line seg intersects this box
       // Choose object whose centre (position) is closest to line seg..?
-      float dist = LineSeg(mouseWorldNear, mouseWorldFar).SqDist(pgo->GetPos());
-      //float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
+
+//      float dist = LineSeg(mouseWorldNear, mouseWorldFar).SqDist(pgo->GetPos());
+      float dist = (mouseWorldNear - pgo->GetPos()).SqLen(); // pick closest
+
+      // Treat terrain as least attractive option
+      if (dynamic_cast<Terrain*>(v))
+      {
+#ifdef PICK_DEBUG
+std::cout << " Obj " << pgo->GetId() << " terrain so treated as far away\n";
+#endif
+        dist = 999990.0f; 
+      }
+#ifdef PICK_DEBUG
+std::cout << " Obj " << pgo->GetId() << " sqDist: " << dist << "\n";
+#endif
+
       if (dist < bestDist)
       {
 #ifdef PICK_DEBUG
