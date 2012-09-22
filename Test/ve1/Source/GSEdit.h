@@ -24,6 +24,7 @@ typedef std::vector<Loc> Locs;
 class GSEditListener : public EventListener
 {
 public:
+  virtual bool OnKeyEvent(const KeyEvent& ke);
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 };

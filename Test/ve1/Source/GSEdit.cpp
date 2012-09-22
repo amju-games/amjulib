@@ -394,7 +394,7 @@ void GSEdit::OnPropertySet()
   // Get the property to change
   elem = GetElementByName(m_gui, "property-list");
   GuiListBox* lb = ((GuiListBox*)elem);
-  int sel = lb->GetSelectedItem();
+  int sel = lb->GetList()->GetSelectedItem();
   if (sel < 0)
   {
 std::cout << "Nothing selected in list box?\n";
@@ -430,7 +430,7 @@ void GSEdit::ShowChangeProperty(bool b)
     // Check that an item is selected in list box
     GuiElement* elem = GetElementByName(m_gui, "property-list");
     GuiListBox* lb = ((GuiListBox*)elem);
-    int sel = lb->GetSelectedItem();
+    int sel = lb->GetList()->GetSelectedItem();
     if (sel < 0)
     {
 std::cout << "Nothing selected, can't change!\n";
@@ -662,7 +662,7 @@ void GSEdit::ChooseLocation()
     const Loc& loc = m_locs[i];
     GuiText* t = new GuiText;
     t->SetText(ToString(loc.m_id) + " \"" + loc.m_name + "\"");
-    lb->AddItem(t);
+    lb->GetList()->AddItem(t);
   }
   ShowLocationList(true);
 }
@@ -672,11 +672,11 @@ void GSEdit::GoToSelectedLocation()
   GuiElement* elem = GetElementByName(m_gui, "location-list");
   GuiListBox* lb = dynamic_cast<GuiListBox*>(elem);
   Assert(lb);
-  int n = lb->GetNumChildren();
+  int n = lb->GetList()->GetNumChildren();
   int id = -1;
   for (int i = 0; i < n; i++)
   {
-    GuiElement* child = lb->GetChild(i);
+    GuiElement* child = lb->GetList()->GetChild(i);
     if (child->IsSelected())
     {
       id = m_locs[i].m_id;
@@ -800,7 +800,7 @@ std::cout << "Here are the properties for the selected object (" << obj->GetId()
 std::cout << "Property for obj: " << it->first << "=" << it->second << "\n";
     GuiText* t = new GuiText;
     t->SetText(it->first + " = " + it->second);
-    props->AddItem(t);
+    props->GetList()->AddItem(t);
   }
 
   ShowPropertyList(true);
@@ -875,9 +875,23 @@ std::cout << "Create context menu for multiple objects...\n";
   m_menu->SetLocalPos(pos);
 }
 
-bool GSEdit::OnKeyEvent(const KeyEvent&)
+bool GSEditListener::OnKeyEvent(const KeyEvent& ke)
+{
+  return TheGSEdit::Instance()->OnKeyEvent(ke);
+}
+
+bool GSEdit::OnKeyEvent(const KeyEvent& ke)
 {
   // TODO Set move command etc for objects with keys ??
+
+  // Esc = unselect any selection
+  if (ke.keyType == AMJU_KEY_ESC && ke.keyDown)
+  {
+    m_selObj = 0;
+    m_selectedObjects.clear();
+    ((GuiText*)GetElementByName(m_gui, "text1"))->SetText("no selection");
+    return true;
+  }
 
   return false;
 }
