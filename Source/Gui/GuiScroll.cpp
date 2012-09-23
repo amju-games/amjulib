@@ -8,6 +8,12 @@ namespace Amju
 {
 const char* GuiScroll::NAME = "gui-scroll";
 
+void GuiScroll::Reset()
+{
+  m_scrollPos = Vec2f(0, 0);
+  m_scrollVel = Vec2f(0, 0);
+}
+
 bool GuiScroll::OnKeyEvent(const KeyEvent& e)
 {
   // TODO has focus ?
@@ -31,18 +37,27 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
   return false;
 }
 
+static bool leftDrag = false;
+
 bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 {
   Assert(m_children.size() == 1);
   GuiElement* child = m_children[0];
-  
-  CursorEvent e(ce);
-//  e.x += m_scrollPos.x;
-//  e.y -= m_scrollPos.y;
 
-//std::cout << "Mouse: orig x: " << ce.x << " y: " << ce.y << " new x: " << e.x << " y: " << e.y << "\n";
+  // TODO put dx/dy in Cursor Event
+  static float oldx = ce.x;
+  static float oldy = ce.y;
+  float dx = ce.x - oldx;
+  float dy = ce.y - oldy;
+  oldx = ce.x;
+  oldy = ce.y;
 
-  return child->OnCursorEvent(e); 
+  if (leftDrag)
+  {
+    OnScrollVelEvent(Vec2f(0, dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
+  }
+
+  return child->OnCursorEvent(ce); 
 }
 
 bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
@@ -50,13 +65,12 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   Assert(m_children.size() == 1);
   GuiElement* child = m_children[0];
 
-  MouseButtonEvent e(mbe);
-//  e.x += m_scrollPos.x;
-//  e.y -= m_scrollPos.y;
-std::cout << "BUTTON EVENT: m_scrollPos.y: " << m_scrollPos.y;
-std::cout << " Mouse: orig x: " << mbe.x << " y: " << mbe.y << " new x: " << e.x << " y: " << e.y << "\n";
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  {
+    leftDrag = mbe.isDown;
+  }
 
-  return child->OnMouseButtonEvent(e); 
+  return child->OnMouseButtonEvent(mbe); 
 }
 
 void GuiScroll::Draw()
@@ -67,9 +81,11 @@ void GuiScroll::Draw()
   m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
   m_scrollPos += m_scrollVel * dt;
 
+  std::cout << "ScrollPos.y: " << m_scrollPos.y << "\n";
+
   // Enforce boundary - TODO other edges
-//  m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
-//  m_scrollPos.y = std::max(m_scrollPos.y, 0.0f);
+  m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
+  m_scrollPos.y = std::max(m_scrollPos.y, 0.0f);
 
 ///  m_scrollPos.y = 0.2f; // TODO TEMP TEST
 
