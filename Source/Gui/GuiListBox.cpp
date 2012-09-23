@@ -71,12 +71,24 @@ bool GuiListBox::Load(File* f)
 GuiList::GuiList()
 {
   m_isMultiSelect = false;
-  m_dcf = 0;
+  m_doubleClickFunc = 0;
+  m_singleClickFunc = 0;
 }
 
-void GuiList::SetDoubleClickFunc(DoubleClickFunc dcf)
+void GuiList::Clear()
 {
-  m_dcf = dcf;
+  GuiComposite::Clear();
+  m_selset.clear();
+}
+
+void GuiList::SetDoubleClickFunc(ClickFunc cf)
+{
+  m_doubleClickFunc = cf;
+}
+
+void GuiList::SetSingleClickFunc(ClickFunc cf)
+{
+  m_singleClickFunc = cf;
 }
 
 void GuiList::SetIsMultiSel(bool isMulti)
@@ -223,7 +235,7 @@ bool GuiList::OnDoubleClickEvent(const DoubleClickEvent& dce)
     return false;
   }
 
-  if (m_dcf)
+  if (m_doubleClickFunc)
   {
     Vec2f cursorPos(dce.x, dce.y);
     for (unsigned int i = 0; i < m_children.size(); i++)
@@ -232,7 +244,7 @@ bool GuiList::OnDoubleClickEvent(const DoubleClickEvent& dce)
       Rect r = GetRect(item);
       if (r.IsPointIn(cursorPos))
       {
-        m_dcf(this, i);
+        m_doubleClickFunc(this, i);
         return true; 
       }
     }
@@ -272,8 +284,19 @@ bool GuiList::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       // TODO Should react on mouse up when up item == down item ??
 
-      // Toggle selected flag for this child
-      SetSelected(selected, !IsSelected(selected));
+      if (IsMultiSel())
+      {
+        // Toggle selected flag for this child
+        SetSelected(selected, !IsSelected(selected));
+      }
+      else
+      {
+        SetSelected(selected, true);
+        if (m_singleClickFunc)
+        {
+          m_singleClickFunc(this, selected);
+        }
+      }
 
       // TODO Why is this a bad idea ?
       //m_items[m_selected]->ExecuteCommand(); 

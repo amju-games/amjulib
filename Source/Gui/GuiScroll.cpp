@@ -81,7 +81,7 @@ void GuiScroll::Draw()
   m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
   m_scrollPos += m_scrollVel * dt;
 
-  std::cout << "ScrollPos.y: " << m_scrollPos.y << "\n";
+//  std::cout << "ScrollPos.y: " << m_scrollPos.y << "\n";
 
   // Enforce boundary - TODO other edges
   m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
