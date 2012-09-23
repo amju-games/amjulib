@@ -71,6 +71,12 @@ bool GuiListBox::Load(File* f)
 GuiList::GuiList()
 {
   m_isMultiSelect = false;
+  m_dcf = 0;
+}
+
+void GuiList::SetDoubleClickFunc(DoubleClickFunc dcf)
+{
+  m_dcf = dcf;
 }
 
 void GuiList::SetIsMultiSel(bool isMulti)
@@ -200,6 +206,36 @@ bool GuiList::Load(File* f)
   return true;
 }
 
+bool GuiList::OnDoubleClickEvent(const DoubleClickEvent& dce)
+{
+  if (dce.button != AMJU_BUTTON_LEFT)
+  {
+    return false;
+  }
+
+  if (!IsVisible())
+  {
+    return false;
+  }
+
+  if (m_dcf)
+  {
+    Vec2f cursorPos(dce.x, dce.y);
+    for (unsigned int i = 0; i < m_children.size(); i++)
+    {
+      GuiElement* item = m_children[i];
+      Rect r = GetRect(item);
+      if (r.IsPointIn(cursorPos))
+      {
+        m_dcf(this, i);
+        return true; 
+      }
+    }
+  }
+
+  return false;
+}
+
 bool GuiList::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (!IsVisible())
@@ -209,22 +245,9 @@ bool GuiList::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
   Vec2f cursorPos(mbe.x, mbe.y);
  
-  if (IsVisible() &&
-      mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
-    if (!GetRect(this).IsPointIn(cursorPos) &&
-        !(GetParent() && GetRect(GetParent()).IsPointIn(cursorPos)))
-    {
-      // Click outside area 
-      //SetVisible(false);
-
-std::cout << "Click outside list box\n";
-
-      //return false; // not handled 
-    }
-
-    // Clicked on an item
     // Check each item
     int selected = -1;
     for (unsigned int i = 0; i < m_children.size(); i++)
@@ -242,7 +265,7 @@ std::cout << "Click outside list box\n";
 
     if (selected != -1)
     {
-      // TODO Should react on mouse up when up item == down item.
+      // TODO Should react on mouse up when up item == down item ??
 
       // Toggle selected flag for this child
       SetSelected(selected, !IsSelected(selected));

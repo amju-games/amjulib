@@ -76,11 +76,39 @@ void Repeat()
   }
 }
 
+void HandleDoubleClick(MouseButtonEvent* mbe)
+{
+  // For the clicked button, if time since last down click is below threshold, generate a
+  //  double click event.
+  static float time[] = { 0, 0, 0 }; 
+
+  static const float DOUBLE_CLICK_TIME = 0.5f; // TODO CONFIG
+
+  if (mbe->isDown)
+  {
+    float timeNow = TheTimer::Instance()->GetElapsedTime();
+    if (timeNow - time[(int)mbe->button] < DOUBLE_CLICK_TIME)
+    {
+      DoubleClickEvent* dce = new DoubleClickEvent;
+      dce->button = mbe->button;
+      dce->x = mbe->x;
+      dce->y = mbe->y;
+      TheEventPoller::Instance()->GetImpl()->QueueEvent(dce);
+    }
+    time[(int)mbe->button] = timeNow;
+  }
+}
+
 void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pListeners)
 {
   if (dynamic_cast<KeyEvent*>(event)) // TODO Auto-repeatable flag ?
   {
     HandleKey((KeyEvent*)event);
+  }
+
+  if (dynamic_cast<MouseButtonEvent*>(event))
+  {
+    HandleDoubleClick((MouseButtonEvent*)event);
   }
 
   int eaten = AMJU_MAX_PRIORITY + 1;

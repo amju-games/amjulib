@@ -33,6 +33,11 @@ bool MouseButtonEvent::UpdateListener(EventListener* el)
   return el->OnMouseButtonEvent(*this);
 }
 
+bool DoubleClickEvent::UpdateListener(EventListener* el)
+{
+  return el->OnDoubleClickEvent(*this);
+}
+
 bool RotationEvent::UpdateListener(EventListener* el)
 {
   return el->OnRotationEvent(*this);
