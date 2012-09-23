@@ -14,6 +14,15 @@ void DoubleClickFile(GuiList* lb, int selectedIndex)
   flb->OnDoubleClick(selectedIndex);
 }
 
+void SingleClickFile(GuiList* lb, int selectedIndex)
+{
+  GuiElement* elem = lb->GetParent()->GetParent();
+  Assert(elem);
+  Assert(dynamic_cast<GuiFileListBox*>(elem));
+  GuiFileListBox* flb = (GuiFileListBox*)elem;
+  flb->OnSingleClick(selectedIndex);
+}
+
 GuiElement* CreateFileListBox()
 {
   GuiFileListBox* w = new GuiFileListBox;
@@ -22,6 +31,7 @@ GuiElement* CreateFileListBox()
   w->AddChild(s);
   s->AddChild(lb);
 
+  lb->SetSingleClickFunc(SingleClickFile);
   lb->SetDoubleClickFunc(DoubleClickFile);
   lb->SetIsMultiSel(false);
 
@@ -30,12 +40,30 @@ GuiElement* CreateFileListBox()
 
 GuiFileListBox::GuiFileListBox()
 {
-  m_filechooseCallback = 0;
+  m_doubleClickCallback = 0;
+  m_singleClickCallback = 0;
 }
 
-void GuiFileListBox::SetFileChooseCallback(FileChooseCallback cb)
+void GuiFileListBox::SetDoubleClickCallback(ClickCallback cb)
 {
-  m_filechooseCallback = cb;
+  m_doubleClickCallback = cb;
+}
+
+void GuiFileListBox::SetSingleClickCallback(ClickCallback cb)
+{
+  m_singleClickCallback = cb;
+}
+
+void GuiFileListBox::OnSingleClick(int selectedIndex)
+{
+  Assert(selectedIndex >= 0);
+  Assert(selectedIndex < (int)m_dirents.size());
+  if (m_singleClickCallback)
+  {
+    DirEnt& de = m_dirents[selectedIndex];
+    std::string f = m_dir + "/" + de.m_name;
+    m_singleClickCallback(f);
+  }
 }
 
 void GuiFileListBox::OnDoubleClick(int selectedIndex)
@@ -53,10 +81,10 @@ void GuiFileListBox::OnDoubleClick(int selectedIndex)
 std::cout << "Executing command for " << de.m_name << "\n";
 
     // Much more useful to call a callback with the full path and filename
-    if (m_filechooseCallback)
+    if (m_doubleClickCallback)
     {
       std::string f = m_dir + "/" + de.m_name;
-      m_filechooseCallback(f);
+      m_doubleClickCallback(f);
     }
     else
     {

@@ -30,8 +30,8 @@ public:
   virtual void Clear(); // Clear list, not the child of this object
 };
 
-// Callback which can be called on double-click
-typedef void (*DoubleClickFunc)(GuiList*, int selectedIndex);
+// Callback which can be called on single- or double-click
+typedef void (*ClickFunc)(GuiList*, int selectedIndex);
 
 // Not factory-creatable
 class GuiList : public GuiComposite 
@@ -47,6 +47,8 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent& mbe);
   virtual bool OnDoubleClickEvent(const DoubleClickEvent& dce);
 
+  virtual void Clear(); // clear children and sel set
+
   void SetSelected(int child, bool selected);
   bool IsSelected(int child) const;
   int GetSelectedItem() const; // only for non-multi-select lists
@@ -55,13 +57,15 @@ public:
   bool IsMultiSel() const;
 
   // Set callback to be called when an item is double-clicked
-  void SetDoubleClickFunc(DoubleClickFunc dcf);
+  void SetDoubleClickFunc(ClickFunc dcf);
+  void SetSingleClickFunc(ClickFunc dcf);
 
 protected:
   bool m_isMultiSelect;
   typedef std::set<int> SelSet;
   SelSet m_selset;
-  DoubleClickFunc m_dcf;
+  ClickFunc m_doubleClickFunc;
+  ClickFunc m_singleClickFunc;
 };
 
 GuiElement* CreateListBox();
