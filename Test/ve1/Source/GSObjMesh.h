@@ -18,6 +18,7 @@ public:
   virtual void OnActive();
 
   void OnOKButton();
+  void SetFile(const std::string& pathAndFile);
 
   void SetId(int id); // ID of Game Object for which we are setting mesh
 
