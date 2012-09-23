@@ -23,6 +23,11 @@ public:
   virtual bool OnJoyAxisEvent(const JoyAxisEvent&);
   virtual bool OnButtonEvent(const ButtonEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnDoubleClickEvent(const DoubleClickEvent&);
+  virtual bool OnBalanceBoardEvent(const BalanceBoardEvent&);
+  virtual bool OnTextEvent(const TextEvent&);
+  virtual bool OnQuitEvent();
+  virtual bool OnResizeEvent(const ResizeEvent&);
 
   bool SetFocusPrevChild();
   bool SetFocusNextChild();

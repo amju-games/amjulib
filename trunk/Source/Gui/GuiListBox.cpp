@@ -133,13 +133,18 @@ void GuiList::SetSelected(int child, bool selected)
   }
 #endif
 
-  GetChild(child)->SetSelected(selected);
-
-  if (!IsMultiSel())
+  if (selected && !IsMultiSel())
   {
     // Not multi select, so at most one member in set.
+    for (SelSet::iterator it = m_selset.begin(); it != m_selset.end(); ++it)
+    {
+      int i = *it;
+      GetChild(i)->SetSelected(false);
+    }
     m_selset.clear();
   }
+
+  GetChild(child)->SetSelected(selected);
 
   if (selected)
   {
@@ -208,7 +213,7 @@ bool GuiList::Load(File* f)
 
 bool GuiList::OnDoubleClickEvent(const DoubleClickEvent& dce)
 {
-  if (dce.button != AMJU_BUTTON_LEFT)
+  if (dce.button != AMJU_BUTTON_MOUSE_LEFT)
   {
     return false;
   }

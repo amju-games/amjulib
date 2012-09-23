@@ -218,6 +218,76 @@ bool GuiComposite::OnMouseButtonEvent(const MouseButtonEvent& e)
   return ret;
 }
 
+bool GuiComposite::OnDoubleClickEvent(const DoubleClickEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnDoubleClickEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnBalanceBoardEvent(const BalanceBoardEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnBalanceBoardEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnTextEvent(const TextEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnTextEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnQuitEvent()
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnQuitEvent())
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiComposite::OnResizeEvent(const ResizeEvent& e)
+{
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnResizeEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
 bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
 {
   bool ret = false;

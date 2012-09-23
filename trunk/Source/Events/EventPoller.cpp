@@ -78,16 +78,23 @@ void Repeat()
 
 void HandleDoubleClick(MouseButtonEvent* mbe)
 {
+  static const float DOUBLE_CLICK_TIME = 0.5f; // TODO CONFIG
+
   // For the clicked button, if time since last down click is below threshold, generate a
   //  double click event.
-  static float time[] = { 0, 0, 0 }; 
 
-  static const float DOUBLE_CLICK_TIME = 0.5f; // TODO CONFIG
+  // Time since last click for each button - start values prevent first
+  //  click from being treated as double-click
+  static float time[] = {-DOUBLE_CLICK_TIME, -DOUBLE_CLICK_TIME, -DOUBLE_CLICK_TIME }; 
 
   if (mbe->isDown)
   {
     float timeNow = TheTimer::Instance()->GetElapsedTime();
-    if (timeNow - time[(int)mbe->button] < DOUBLE_CLICK_TIME)
+    float dt = timeNow - time[(int)mbe->button];
+
+//std::cout << "Double click: dt=" << dt << "\n";
+
+    if (dt < DOUBLE_CLICK_TIME)
     {
       DoubleClickEvent* dce = new DoubleClickEvent;
       dce->button = mbe->button;

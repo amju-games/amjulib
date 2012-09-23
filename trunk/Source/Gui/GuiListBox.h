@@ -54,6 +54,7 @@ public:
   void SetIsMultiSel(bool isMulti);
   bool IsMultiSel() const;
 
+  // Set callback to be called when an item is double-clicked
   void SetDoubleClickFunc(DoubleClickFunc dcf);
 
 protected:
