@@ -129,6 +129,15 @@ struct MouseButtonEvent : public Event
   virtual bool UpdateListener(EventListener*);
 };
 
+struct DoubleClickEvent : public Event
+{
+  MouseButton button;
+  // Useful to give coords. Cursor coords are -1..1 in x and y
+  float x, y;
+
+  virtual bool UpdateListener(EventListener*);
+};
+
 enum Axis { AMJU_AXIS_X, AMJU_AXIS_Y, AMJU_AXIS_Z };
 struct RotationEvent : public Event
 {
