@@ -1,4 +1,12 @@
 #ifdef WIN32
+#if defined(_DEBUG)
+#pragma comment(lib, "../../../../../../Build/Debug/AmjuLibMsvc.lib")
+#else
+#pragma comment(lib, "../../../../../../Build/Release/AmjuLibMsvc.lib")
+#endif 
+#endif // WIN32
+
+#ifdef WIN32
 // Windows: use OpenGL or Direct 3D - can choose at runtime, 
 // so don't make this a compile time switch ?
 // OR: allow compile-time switch to completely remove DX or OpenGL, 
@@ -19,7 +27,7 @@
 namespace Amju
 {
 // Create global variable window info 
-Amju::AmjuGLWindowInfo w(640, 480, false);
+Amju::AmjuGLWindowInfo w(640, 480, false, "View OBJ");
 
 void StartUp()
 {

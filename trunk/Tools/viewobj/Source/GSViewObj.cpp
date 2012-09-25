@@ -3,6 +3,8 @@
 #include <ObjMesh.h>
 #include <iostream>
 #include <Timer.h>
+#include <File.h>
+#include <EventPoller.h>
 
 namespace Amju
 {
@@ -21,6 +23,8 @@ static bool texturing = true;
 GSViewObj::GSViewObj()
 {
   //m_nextState=...
+  m_eventListener = new MyEventListener;
+  TheEventPoller::Instance()->AddListener(m_eventListener);
 }
 
 void GSViewObj::Update()
@@ -75,8 +79,9 @@ void GSViewObj::Draw2d()
 void GSViewObj::OnActive()
 {
   AmjuGL::SetClearColour(Colour(0, 1, 0, 1));
+  File::SetRoot("C:\\Users\\jason\\Dropbox\\Misc\\obj_downloads\\OBJ Bridge\\", "\\");
   mesh = new ObjMesh;
-  if (mesh->Load("model.obj"))
+  if (mesh->Load("Bridge.obj")) ///"model.obj"))
   {
     std::cout << "Successfully loaded obj file!\n";
   }
@@ -179,6 +184,21 @@ bool GSViewObj::OnKeyEvent(const KeyEvent& ke)
   }
 
   return true;
+}
+
+bool MyEventListener::OnCursorEvent(const CursorEvent& e)
+{
+  return TheGSViewObj::Instance()->OnCursorEvent(e);
+}
+
+bool MyEventListener::OnMouseButtonEvent(const MouseButtonEvent& e)
+{
+  return TheGSViewObj::Instance()->OnMouseButtonEvent(e);
+}
+
+bool MyEventListener::OnKeyEvent(const KeyEvent& e)
+{
+  return TheGSViewObj::Instance()->OnKeyEvent(e);
 }
 
 } // namespace
