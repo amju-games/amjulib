@@ -198,6 +198,7 @@
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
@@ -451,6 +452,7 @@
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiFileDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
