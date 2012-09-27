@@ -33,6 +33,7 @@ SOURCES := ../../Source \
   $(AMJU)/Network \
   $(AMJU)/Obj \
   $(AMJU)/Resource \
+  $(AMJU)/SDL/include \
   $(AMJU)/Scene \
   $(AMJU)/Sound \
   $(AMJU)/SoundBass \
