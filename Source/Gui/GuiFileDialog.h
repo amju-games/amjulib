@@ -9,6 +9,8 @@ class GuiFileDialog : public GuiDialog
 {
 public:
   static const char* NAME;
+
+  virtual bool Load(File* f);
 };
 
 GuiElement* CreateFileDialog();
