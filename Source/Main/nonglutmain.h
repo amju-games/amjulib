@@ -11,10 +11,11 @@
 #endif // GEKKO
 
 #ifdef WIN32
+#include <AmjuGLWindowInfo.h>
 #include <AmjuGL-OpenGL.h>
-#include <EventPollerImplSDL.h>
 #include <AmjuGL-DX9.h>
 #include <AmjuGL-DX11.h>
+#include <EventPollerImplSDL.h>
 #include <EventPollerImplWin32.h>
 #include <BassSoundPlayer.h>
 #endif // WIN32
@@ -31,8 +32,11 @@
 
 #include <Game.h>
 #include <SoundManager.h>
-#include <AmjuGLWindowInfo.h>
 #include <AmjuFinal.h>
+
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
 
 using namespace Amju;
 
