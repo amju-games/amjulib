@@ -42,7 +42,52 @@ void GuiWindow::Draw()
   Vec2f size = GetSize();
   Vec2f pos = GetCombinedPos();
 
-  SetViewportN(pos.x, pos.y -  size.y, size.x, size.y);
+  // Set viewport so anything outside of the boundary will be clipped. But make sure
+  //  the new viewport is no larger than any existing viewport set!
+  // So, get the current veiwport in normalised form, then do min/max to make sure
+  //  we don't draw outside the boundary for any ancestor nodes.
+  float nvp[4]; // normalised viewport
+  GetViewportN(&nvp[0], &nvp[1], &nvp[2], &nvp[3]); // x, y, w, h
+
+std::cout << "Window: " << m_name << ": inherited viewport: x: " << nvp[0] << " y: " << nvp[1] << " w: " << nvp[2] << " h: " << nvp[3] << "\n";
+
+  float x = pos.x; 
+  // Chop w to fit inherited window width
+  float w = size.x;
+  if (pos.x < nvp[0])
+  {
+    x = nvp[0]; // choose rightmost
+    w -= (nvp[0] - pos.x); // reduce width by left hand excess
+  }
+  if (w > nvp[2]) // TODO is this right ? 
+  {
+    w = nvp[2];
+  }
+  if (w < 0)
+  {
+    w = 0;
+  }
+
+  float y = pos.y - size.y; ///std::max(pos.y - size.y, nvp[1]); // TODO 
+  float h = size.y;
+  if (y < nvp[1]) // TODO Sort this
+  {
+    y = nvp[1]; // wrong
+    h -= (nvp[1] - y); // wrong
+  }
+  if (h > nvp[3])
+  {
+    h = nvp[3];
+  }
+  if (h < 0)
+  {
+    h = 0;
+  }
+
+std::cout << "Window: " << m_name << ": setting new viewpt: x: " << x << " y: " << y << " w: " << w << " h: " << h << "\n";
+
+  //SetViewportN(pos.x, pos.y -  size.y, size.x, size.y);
+  SetViewportN(x, y, w, h);
 
   // Now this element should fill whole viewport. Map the top left coord to (-1, 1) and
   //  bottom right to (1, -1).
