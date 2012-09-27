@@ -1,0 +1,25 @@
+// Gui file dialog
+// Ver
+1
+
+// Format as for GuiWindow
+
+// GuiElement: name, pos, size
+file-dialog-window
+-0.8, 0.8
+1.6, 1.6
+
+
+// Children
+// Num children
+1
+
+//   .. each child
+
+gui-file-list-box
+// Name
+fd-file-list-box
+// Pos, size
+0.2, 0.1
+0.7, 0.7
+
