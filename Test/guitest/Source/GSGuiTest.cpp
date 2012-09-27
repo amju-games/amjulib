@@ -44,18 +44,6 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
   
-//  GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
-//  Assert(fb);
-
-  // Set default/start dir
-#ifdef WIN32
-//  fb->SetDir("c:\\");
-#endif
-
-#ifdef MACOSX
-//  fb->SetDir("/");
-#endif
-
 /*
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
   GetElementByName(m_gui, "edit1")->SetHasFocus(true);
