@@ -63,6 +63,7 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Network \
   $(AMJU)/Obj \
   $(AMJU)/Resource \
+  $(AMJU)/SDL/include \
   $(AMJU)/Scene \
   $(AMJU)/Sound \
   $(AMJU)/SoundBass \
