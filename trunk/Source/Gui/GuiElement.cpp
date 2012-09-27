@@ -170,6 +170,7 @@ bool GuiElement::Load(File* f)
 {
   if (!f->GetDataLine(&m_name))
   {
+    f->ReportError("Gui element: expected name");
     Assert(0);
     return false;
   }
