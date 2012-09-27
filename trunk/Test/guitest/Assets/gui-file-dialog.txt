@@ -20,6 +20,6 @@ gui-file-list-box
 // Name
 fd-file-list-box
 // Pos, size
-0.2, 0.1
+-0.1, 0.1
 0.7, 0.7
 
