@@ -44,16 +44,16 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
   
-  GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
-  Assert(fb);
+//  GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName(m_gui, "fb"));
+//  Assert(fb);
 
   // Set default/start dir
 #ifdef WIN32
-  fb->SetDir("c:\\");
+//  fb->SetDir("c:\\");
 #endif
 
 #ifdef MACOSX
-  fb->SetDir("/");
+//  fb->SetDir("/");
 #endif
 
 /*

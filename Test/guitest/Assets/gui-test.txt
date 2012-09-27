@@ -6,7 +6,14 @@ gui-comp
 // Name
 gui-test-app-comp
 // Num children
-2
+1
+
+gui-file-dialog
+// Name
+my-file-dialog
+// Layout File - code will expect specific Gui objects with hardcoded names
+gui-file-dialog.txt
+// TODO pos ?
 
 gui-file-list-box
 // Name
