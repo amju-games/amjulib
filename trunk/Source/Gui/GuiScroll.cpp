@@ -84,20 +84,21 @@ void GuiScroll::Draw()
 //  std::cout << "ScrollPos.y: " << m_scrollPos.y << "\n";
 
   // Enforce boundary - TODO other edges
-  m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
-  m_scrollPos.y = std::max(m_scrollPos.y, 0.0f);
+  //m_scrollPos.x = std::max(m_scrollPos.x, 0.0f);
+  //m_scrollPos.y = std::max(m_scrollPos.y, 0.0f);
 
 ///  m_scrollPos.y = 0.2f; // TODO TEMP TEST
 
   // TODO
-  /*
+  
   // Bounce on end reached ??
-  if (m_scrollPos.x < 0)
+  if (m_scrollPos.y < 0)
   {
-    m_scrollVel.x = -0.5f * m_scrollVel.x;
+    m_scrollPos.y = 0;
+    m_scrollVel.y = -0.25f * m_scrollVel.y;
   }
-  ...
-  */
+  
+  
 
   SetLocalPos(m_scrollPos); // so combined pos for child is updated
 
