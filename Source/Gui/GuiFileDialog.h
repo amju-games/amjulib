@@ -11,6 +11,9 @@ public:
   static const char* NAME;
 
   virtual bool Load(File* f);
+
+  void OnListboxClick(const std::string& fullPathAndFilename);
+  void OnPathChange();
 };
 
 GuiElement* CreateFileDialog();
