@@ -46,16 +46,12 @@ void GuiWindow::Draw()
 
 #ifdef NESTED_VIEWPORTS
 
-std::cout << "Window: " << m_name << ": [Combined] pos: x: " << pos.x << " y: " << pos.y << "\n";
-
   // Set viewport so anything outside of the boundary will be clipped. But make sure
   //  the new viewport is no larger than any existing viewport set!
   // So, get the current veiwport in normalised form, then do min/max to make sure
   //  we don't draw outside the boundary for any ancestor nodes.
   float nvp[4]; // normalised viewport
   GetViewportN(&nvp[0], &nvp[1], &nvp[2], &nvp[3]); // x, y, w, h
-
-std::cout << "Window: " << m_name << ": inherited viewport: x: " << nvp[0] << " y: " << nvp[1] << " w: " << nvp[2] << " h: " << nvp[3] << "\n";
 
   float x = pos.x; 
   // Chop w to fit inherited window width
@@ -90,30 +86,29 @@ std::cout << "Window: " << m_name << ": inherited viewport: x: " << nvp[0] << " 
     h = 0;
   }
 
-std::cout << "Window: " << m_name << ": setting new viewpt: x: " << x << " y: " << y << " w: " << w << " h: " << h << "\n";
-
-  //SetViewportN(pos.x, pos.y -  size.y, size.x, size.y);
   SetViewportN(x, y, w, h);
 
-  // Now this element should fill whole viewport. Map the top left coord (pos.x, pos.y + size.y) to (-1, 1) and
+  // Now this element should fill whole viewport. 
+  // Map the top left coord (pos.x, pos.y + size.y) to (-1, 1) and
   //  bottom right (pos.x + size.x, pos.y) to (1, -1).
   AmjuGL::PushMatrix();
 
-  float trx1 = pos.x * -2.0f / size.x - 1.0f; // ok
-  float try1 = 1.0f - pos.y * 2.0f / size.y;
+  // Scale factor. The whole range should be -1..+1, so we want to map the range of coords
+  //  to a total range of 2.0.
+  float sx = 2.0f / w;
+  float sy = 2.0f / h;
+  // Translate so that the min x coord maps to -1: 
+  //  trx + minx * sx = -1   => trx = minx * -sx - 1
+  // OR Equally, trx + maxx* sx = 1   => trx = maxx * -sx + 1
+  float trX = x * -sx - 1.0f;
+  float trY = 1.0f - (y + h) * 2.0f / h; // same idea but y is upside down
 
-  float trx2 = x * -2.0f / w - 1.0f;
-  float try2 = 1.0f - (y + h) * 2.0f / h;
+  // Sadly if this window is nested, there is ALREADY a translate and scale factor in effect!
+  // Hmm, this "works" but will trash any transformation NOT due to nested windowing.
+  AmjuGL::SetIdentity(); // whoops, there goes the old scale and translate
 
-
-//  AmjuGL::Translate(pos.x * -2.0f / size.x - 1.0f, 1.0f - pos.y * 2.0f / size.y, 0);
-//  AmjuGL::Scale(2.0f / size.x, 2.0f / size.y, 1.0f);
-
-//  AmjuGL::Translate(x * -2.0f / w - 1.0f, 1.0f - y * 2.0f / h, 0);
-
-  AmjuGL::Translate(trx2, try2, 0);
-  
-  AmjuGL::Scale(2.0f / w, 2.0f / h, 1.0f);
+  AmjuGL::Translate(trX, trY, 0);  
+  AmjuGL::Scale(sx, sy, 1.0f);
 
   GuiComposite::Draw();
   AmjuGL::PopMatrix();
@@ -122,6 +117,8 @@ std::cout << "Window: " << m_name << ": setting new viewpt: x: " << x << " y: " 
 
   SetViewportN(pos.x, pos.y -  size.y, size.x, size.y);
   AmjuGL::PushMatrix();
+  // Translate so that the min x coord maps to -1: 
+  //  trx + minx * sx = -1   => trx = minx * -sx - 1
   AmjuGL::Translate(pos.x * -2.0f / size.x - 1.0f, 1.0f - pos.y * 2.0f / size.y, 0);
   AmjuGL::Scale(2.0f / size.x, 2.0f / size.y, 1.0f);
 
