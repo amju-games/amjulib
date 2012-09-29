@@ -6,16 +6,19 @@ gui-comp
 // Name
 gui-test-app-comp
 // Num children
-1
+2
 
-//gui-window
-//outer-window
-//0.0, 0.0
-//0.5, 0.5
-//// Child
-//1
+
+// Nested window test
 gui-window
-my-img-window
+outer-window
+0.0, 0.0
+0.5, 0.5
+// Child
+1
+// Inner window: clipped to outer window
+gui-window
+inner-window
 0.3, 0.1
 0.5, 0.5
 // Child
@@ -23,9 +26,8 @@ my-img-window
 gui-image
 my-image
 0, 0
-0.2, 0.4
+0.4, 0.4
 image.png
-
 
 
 
@@ -35,6 +37,10 @@ my-file-dialog
 // Layout File - code will expect specific Gui objects with hardcoded names
 gui-file-dialog.txt
 // TODO pos ?
+
+
+
+
 
 
 

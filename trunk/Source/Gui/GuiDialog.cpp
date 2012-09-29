@@ -50,19 +50,17 @@ bool GuiDialog::Load(File* f)
 
 void GuiDialog::Draw()
 {
-  GuiWindow::Draw();
-
-/*
+  // TODO Tiled background
   // Draw bg - TODO colour, texture ? Rounded corners etc ?
   Rect r = GetRect(this);
   AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::SetColour(Colour(1, 0, 0, 1));
   DrawSolidRect(r);
   AmjuGL::PopAttrib(); 
+  
 
-  GuiComposite::Draw();
-*/
-
+  GuiWindow::Draw();
 }
 }
 
