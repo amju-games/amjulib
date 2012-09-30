@@ -136,6 +136,47 @@ std::string GetFilePath(const std::string& s, const std::string& slashChar)
   return ""; // No slash: only filename, no path. So return empty string for path.
 }
 
+std::string CleanPath(const std::string& path)
+{
+  // replace "/<dir>/../" with "/" (except "/../../" and "/./../")
+  std::string s = Replace(path, "\\", "/");
+  s = Replace(s, "//", "/");
+
+  //    /  <dir>  /   ..  /
+  //    ^    ^    ^   ^   ^
+  //    f1  d1   f2   d2  f3
+
+  std::string::iterator f1 = std::find(s.begin(), s.end(), '/');
+  while (f1 != s.end())
+  {
+    std::string::iterator f2 = std::find(f1 + 1, s.end(), '/');
+    if (f2 == s.end())
+    {
+      break;
+    }
+    std::string::iterator f3 = std::find(f2 + 1, s.end(), '/');
+    //if (f3 == s.end())
+    //{
+      // OK if end of string
+      //break;
+    //}
+    std::string d1(f1 + 1, f2);
+    std::string d2(f2 + 1, f3);
+    if (d1 != "." && d1 != ".." && d2 == "..")
+    {
+      s = std::string(s.begin(), f1) + std::string(f3, s.end());
+      f1 = std::find(s.begin(), s.end(), '/');
+    }
+    else
+    {
+      f1 = f2;
+    }
+  }
+
+std::cout << "CleanPath: \"" << path << "\" => \"" << s << "\"\n";
+  return s;
+}
+
 void Trim(std::string* ps)
 {
   AMJU_CALL_STACK;

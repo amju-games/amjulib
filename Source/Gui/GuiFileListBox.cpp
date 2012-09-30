@@ -1,5 +1,6 @@
 #include "GuiFileListBox.h"
 #include "GuiScroll.h"
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -75,6 +76,11 @@ void GuiFileListBox::OnDoubleClick(int selectedIndex)
   {
     std::string dir = m_dir + "/" + de.m_name;
     SetDir(dir);
+
+    if (m_doubleClickCallback)
+    {
+      m_doubleClickCallback(dir);
+    }
   }
   else
   {
@@ -97,7 +103,7 @@ std::cout << "Executing command for " << de.m_name << "\n";
 
 void GuiFileListBox::SetDir(const std::string& dir)
 {
-  m_dir = dir;
+  m_dir = CleanPath(dir);
   Refresh();
   GetScroll()->Reset();
 }

@@ -196,10 +196,16 @@ void GuiList::AddItem(GuiText* text)
   text->SizeToText(); // Resize
   text->RecalcFirstLast();
 
-  // Size to width of listbox
+  // Resize as appropriate
   Vec2f size = text->GetSize();
+  // Resize horizontally to width of text ?
+  // OR chop text to fit in list box ?
   size.x = GetSize().x;
   text->SetSize(size);
+  // Increase size of listbox vertically
+  Vec2f mySize = GetSize();
+  mySize.y += text->GetSize().y;
+  SetSize(mySize);
 
   Vec2f pos = GetLocalPos();
   // NB subtract => go down the screen
