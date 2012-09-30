@@ -79,6 +79,7 @@ void GuiList::Clear()
 {
   GuiComposite::Clear();
   m_selset.clear();
+  SetSize(Vec2f(0, 0));
 }
 
 void GuiList::SetDoubleClickFunc(ClickFunc cf)
@@ -197,13 +198,14 @@ void GuiList::AddItem(GuiText* text)
   text->RecalcFirstLast();
 
   // Resize as appropriate
+  Vec2f mySize = GetSize();
   Vec2f size = text->GetSize();
   // Resize horizontally to width of text ?
   // OR chop text to fit in list box ?
-  size.x = GetSize().x;
-  text->SetSize(size);
+  //size.x = GetSize().x;
+  //text->SetSize(size);
   // Increase size of listbox vertically
-  Vec2f mySize = GetSize();
+  mySize.x = std::max(mySize.x, size.x);
   mySize.y += text->GetSize().y;
   SetSize(mySize);
 
