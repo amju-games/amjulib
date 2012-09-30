@@ -31,21 +31,25 @@ void OnPathChange()
 
 void GuiFileDialog::OnListboxClick(const std::string& fullPathAndFilename)
 {
-  lastPath = fullPathAndFilename; 
+  lastPath = CleanPath(fullPathAndFilename); 
   GuiTextEdit* text = dynamic_cast<GuiTextEdit*>(GetElementByName("fd-path-text"));
   Assert(text);
-  text->SetText(fullPathAndFilename);
+  text->SetText(lastPath);
+
+std::cout << "Listbox click: lastPath is now \"" << lastPath << "\"\n";
 }
 
 void GuiFileDialog::OnPathChange()
 {
   GuiTextEdit* text = dynamic_cast<GuiTextEdit*>(GetElementByName("fd-path-text"));
   Assert(text);
-  lastPath = text->GetText(); 
+  lastPath = CleanPath(text->GetText()); 
 
   GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName("fd-file-list-box"));
   Assert(fb);
   fb->SetDir(lastPath);
+
+std::cout << "Path change: lastPath is now \"" << lastPath << "\"\n";
 }
 
 bool GuiFileDialog::Load(File* f)
