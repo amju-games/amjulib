@@ -28,6 +28,9 @@ std::string GetFileNoExt(const std::string& f);
 std::string GetFilePath(const std::string& filename);
 std::string GetFilePath(const std::string& filename, const std::string& slashChar);
 
+// Clean path + optional filename: replace "/<dir>/../" with "/"
+std::string CleanPath(const std::string& path);
+
 // Convert string to lower case.
 std::string ToLower(const std::string& s);
 
