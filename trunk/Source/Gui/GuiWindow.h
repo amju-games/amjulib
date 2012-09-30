@@ -14,7 +14,14 @@ public:
   virtual void Draw();
   virtual bool Load(File*); 
 
+  // Discard if outside this Window's region, right ?
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnDoubleClickEvent(const DoubleClickEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&);
+
 protected:
+  // Our rectangle after clipping by any ancestor Windows
+  Rect m_clippedRect;
 };
 }
 

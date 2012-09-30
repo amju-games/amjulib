@@ -87,6 +87,7 @@ void GuiWindow::Draw()
   }
 
   SetViewportN(x, y, w, h);
+  m_clippedRect.Set(x, x + w, y, y + h);
 
   // Now this element should fill whole viewport. 
   // Map the top left coord (pos.x, pos.y + size.y) to (-1, 1) and
@@ -129,5 +130,72 @@ void GuiWindow::Draw()
 
   AmjuGL::Viewport(vp[0], vp[1], vp[2], vp[3]);
 }
+
+bool GuiWindow::OnDoubleClickEvent(const DoubleClickEvent& e)
+{
+  /*
+  // Discard if outside Window
+  if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
+  {
+    return false;
+  }
+  */
+
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnDoubleClickEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiWindow::OnMouseButtonEvent(const MouseButtonEvent& e)
+{
+  /*
+  // Discard mouse down event if outside Window
+  if (e.isDown && !m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
+  {
+    return false;
+  }
+  */
+
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnMouseButtonEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
+bool GuiWindow::OnCursorEvent(const CursorEvent& e)
+{
+  /*
+  // Discard if outside Window ?
+  if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
+  {
+//    return false;
+  }
+  */
+
+  bool ret = false;
+  int s = m_children.size();
+  for (int i = 0; i < s; i++)
+  {
+    if (m_children[i]->OnCursorEvent(e))
+    {
+      ret = true;
+    }
+  }
+  return ret;
+}
+
 }
 
