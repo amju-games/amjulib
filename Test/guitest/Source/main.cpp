@@ -18,6 +18,7 @@
 #include <CursorManager.h>
 #include <Font.h>
 #include <GuiElement.h>
+#include <ObjMesh.h>
 #include "GSGuiTest.h"
 
 namespace Amju
@@ -34,6 +35,7 @@ void StartUp()
 {
   TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
+  TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
   TheGame::Instance()->SetCurrentState(TheGSGuiTest::Instance());
 
