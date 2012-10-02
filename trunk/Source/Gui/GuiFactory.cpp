@@ -13,6 +13,7 @@
 #include "GuiRect.h"
 #include "GuiScroll.h"
 #include "GuiFileDialog.h"
+#include "GuiObjView.h"
 
 namespace Amju
 {
@@ -44,5 +45,6 @@ GuiFactory::GuiFactory()
   Add(GuiFileListBox::NAME, &CreateFileListBox);
   Add(GuiScroll::NAME, &CreateScroll);
   Add(GuiFileDialog::NAME, &CreateFileDialog);
+  Add(GuiObjView::NAME, &CreateObjView);
 }
 }
