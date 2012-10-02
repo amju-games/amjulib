@@ -133,13 +133,11 @@ void GuiWindow::Draw()
 
 bool GuiWindow::OnDoubleClickEvent(const DoubleClickEvent& e)
 {
-  /*
   // Discard if outside Window
   if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
   {
     return false;
   }
-  */
 
   bool ret = false;
   int s = m_children.size();
@@ -155,13 +153,11 @@ bool GuiWindow::OnDoubleClickEvent(const DoubleClickEvent& e)
 
 bool GuiWindow::OnMouseButtonEvent(const MouseButtonEvent& e)
 {
-  /*
   // Discard mouse down event if outside Window
   if (e.isDown && !m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
   {
     return false;
   }
-  */
 
   bool ret = false;
   int s = m_children.size();
@@ -177,13 +173,11 @@ bool GuiWindow::OnMouseButtonEvent(const MouseButtonEvent& e)
 
 bool GuiWindow::OnCursorEvent(const CursorEvent& e)
 {
-  /*
   // Discard if outside Window ?
   if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
   {
-//    return false;
+    return false;
   }
-  */
 
   bool ret = false;
   int s = m_children.size();
