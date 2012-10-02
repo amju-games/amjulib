@@ -8,18 +8,12 @@ gui-test-app-comp
 // Num children
 1
 
-gui-window
-// TODO sort this out
-my-obj-view-window
-0.0, 0.0
-1.0, 1.0
-1
 gui-obj-view
 my-obj-view
 0.0, 0.0
 1.0, 1.0
-/Users/jay/Lamp/lamp.obj
-
+///Users/jay/Lamp/lamp.obj
+C:\Users\jason\Dropbox\Misc\obj_downloads\bridge\Bridge.obj
 
 // Nested window test
 gui-window

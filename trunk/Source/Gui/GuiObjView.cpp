@@ -7,19 +7,40 @@ const char* GuiObjView::NAME = "gui-obj-view";
 
 GuiElement* CreateObjView()
 {
-  GuiWindow* w = new GuiWindow;
   GuiObjView* gov = new GuiObjView;
-  w->AddChild(gov);
-  return w;
+  GuiObj* go = new GuiObj;
+  gov->AddChild(go);
+  return gov;
 }
 
-void GuiObjView::Draw()
+void GuiObj::Draw()
 {
   if (m_mesh)
   {
     // TODO Controllable camera
+    Assert(AmjuGL::GetMatrixMode() == AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::PushMatrix();
+    AmjuGL::SetIdentity();
+    AmjuGL::SetPerspectiveProjection(45.0f, 1.0, 1.0, 1000.0f); // TODO load in ? Settable ?
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::PushMatrix();
+    AmjuGL::SetIdentity();
+    AmjuGL::LookAt(0, 100, 300,  0, 0, 0,  0, 1, 0);
 
+    static float degs = 0;
+    degs += 0.1f;
+    AmjuGL::RotateY(degs);
+    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_DEPTH_WRITE);
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);
     m_mesh->Draw();    
+    AmjuGL::PopAttrib();
+
+    AmjuGL::PopMatrix();
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::PopMatrix();
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   }
 }
 
@@ -28,7 +49,7 @@ bool GuiObjView::Load(File* f)
   // Load name, pos, size, obj filename
   if (!GuiElement::Load(f))
   {
-    return false;
+    return false; 
   }
   std::string objFile;
   if (!f->GetDataLine(&objFile))
@@ -48,32 +69,42 @@ bool GuiObjView::Load(File* f)
   //RCPtr<ObjMesh> mesh = new ObjMesh;
   //bool loaded = mesh->Load(objFile, binary);
 
-  m_mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(objFileNoPath);
+  PObjMesh mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(objFileNoPath);
 
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
 
-  if (!m_mesh)
+  if (!mesh)
   {
     f->ReportError("Failed to load obj mesh " + objFile);
     return false;
   }
+  SetObjMesh(mesh);
+
   // TODO Calc AABB for camera
 
   return true;
 }
 
-bool GuiObjView::OnMouseButtonEvent(const MouseButtonEvent&)
+bool GuiObj::OnMouseButtonEvent(const MouseButtonEvent&)
 {
   return false; // TODO
 }
 
-bool GuiObjView::OnCursorEvent(const CursorEvent&)
+bool GuiObj::OnCursorEvent(const CursorEvent&)
 {
   return false; // TODO
 }
 
 void GuiObjView::SetObjMesh(ObjMesh* mesh)
+{
+  Assert(m_children.size() == 1);
+  GuiObj* go = dynamic_cast<GuiObj*>(m_children[0].GetPtr());
+  Assert(go);
+  go->SetObjMesh(mesh);
+}
+
+void GuiObj::SetObjMesh(ObjMesh* mesh)
 {
   m_mesh = mesh;
 }
