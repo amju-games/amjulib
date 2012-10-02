@@ -6,19 +6,27 @@
 
 namespace Amju
 {
+// Same idea as a GuiListBox, GuiObjView is a window, hiding the 
+//  inner GUI element which draws the OBJ mesh.
+class GuiObj;
+
 class GuiObjView : public GuiWindow
 {
 public:
   static const char* NAME;
 
-  virtual void Draw();
   virtual bool Load(File*);
+  void SetObjMesh(ObjMesh*);
+};
 
+class GuiObj : public GuiElement
+{
+public:
+  virtual void Draw();
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnCursorEvent(const CursorEvent&);
-
   void SetObjMesh(ObjMesh*);
-
+  
 private:
   // TODO Should be a scene graph, right ?
   PObjMesh m_mesh;
