@@ -6,7 +6,19 @@ gui-comp
 // Name
 gui-test-app-comp
 // Num children
-2
+1
+
+gui-window
+// TODO sort this out
+my-obj-view-window
+0.0, 0.0
+1.0, 1.0
+1
+gui-obj-view
+my-obj-view
+0.0, 0.0
+1.0, 1.0
+/Users/jay/Lamp/lamp.obj
 
 
 // Nested window test
@@ -37,9 +49,6 @@ my-file-dialog
 // Layout File - code will expect specific Gui objects with hardcoded names
 gui-file-dialog.txt
 // TODO pos ?
-
-
-
 
 
 
