@@ -86,6 +86,7 @@ bool GuiFileDialog::Load(File* f)
   GuiTextEdit* text = dynamic_cast<GuiTextEdit*>(GetElementByName("fd-path-text"));
   Assert(text);
   text->SetText(path);
+  text->SetOnChangeFunc(Amju::OnPathChange);
 
   return true;
 }

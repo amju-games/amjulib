@@ -62,8 +62,16 @@ void GuiFileListBox::OnSingleClick(int selectedIndex)
   if (m_singleClickCallback)
   {
     DirEnt& de = m_dirents[selectedIndex];
-    std::string f = m_dir + "/" + de.m_name;
-    m_singleClickCallback(f);
+
+    if (de.m_isDir && de.m_name == "..")
+    {
+      // Hmm, doesn't feel right to respond to this in the same way as other entries..???
+    }
+    else
+    {
+      std::string f = m_dir + "/" + de.m_name;
+      m_singleClickCallback(f);
+    }
   }
 }
 

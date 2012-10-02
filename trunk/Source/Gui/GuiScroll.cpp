@@ -93,7 +93,7 @@ void GuiScroll::Draw()
     m_scrollVel.y = -0.25f * m_scrollVel.y;
   }
   
-  float maxy = child->GetSize().y - GetSize().y; // depends on size of child and how much space there is to display it
+  float maxy = std::max(0.0f, child->GetSize().y - GetSize().y); // depends on size of child and how much space there is to display it
   if (m_scrollPos.y > maxy)
   {
     m_scrollPos.y = maxy;

@@ -79,7 +79,7 @@ void GuiList::Clear()
 {
   GuiComposite::Clear();
   m_selset.clear();
-  SetSize(Vec2f(0, 0));
+  SetSize(Vec2f(0, 0)); // this is so we can't scroll past the bottom
 }
 
 void GuiList::SetDoubleClickFunc(ClickFunc cf)
@@ -110,6 +110,9 @@ void GuiList::Draw()
   }
 
 /*
+  // This rectangle bounds the height of the list and the widest item.
+  // This is not necessarily the size of the list box, which may be bigger or smaller!
+
   Rect r = GetRect(this);
 
   // Draw bg - TODO just the parts not covered by child items
