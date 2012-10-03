@@ -22,6 +22,8 @@ public:
 class GuiObj : public GuiElement
 {
 public:
+  GuiObj();
+
   virtual void Draw();
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   virtual bool OnCursorEvent(const CursorEvent&);
@@ -30,6 +32,14 @@ public:
 private:
   // TODO Should be a scene graph, right ?
   PObjMesh m_mesh;
+
+  float xrot;
+  float yrot;
+  bool Ldrag;
+  bool Mdrag;
+  bool Rdrag;
+  Vec3f pos;
+
 };
 
 GuiElement* CreateObjView();

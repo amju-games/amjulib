@@ -13,37 +13,6 @@ GuiElement* CreateObjView()
   return gov;
 }
 
-void GuiObj::Draw()
-{
-  if (m_mesh)
-  {
-    // TODO Controllable camera
-    Assert(AmjuGL::GetMatrixMode() == AmjuGL::AMJU_MODELVIEW_MATRIX);
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-    AmjuGL::PushMatrix();
-    AmjuGL::SetIdentity();
-    AmjuGL::SetPerspectiveProjection(45.0f, 1.0, 1.0, 1000.0f); // TODO load in ? Settable ?
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-    AmjuGL::PushMatrix();
-    AmjuGL::SetIdentity();
-    AmjuGL::LookAt(0, 100, 300,  0, 0, 0,  0, 1, 0);
-
-    static float degs = 0;
-    degs += 0.1f;
-    AmjuGL::RotateY(degs);
-    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_DEPTH_WRITE);
-    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);
-    m_mesh->Draw();    
-    AmjuGL::PopAttrib();
-
-    AmjuGL::PopMatrix();
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-    AmjuGL::PopMatrix();
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-  }
-}
-
 bool GuiObjView::Load(File* f)
 {
   // Load name, pos, size, obj filename
@@ -51,6 +20,7 @@ bool GuiObjView::Load(File* f)
   {
     return false; 
   }
+  // TODO child loads itself
   std::string objFile;
   if (!f->GetDataLine(&objFile))
   {
@@ -86,14 +56,106 @@ bool GuiObjView::Load(File* f)
   return true;
 }
 
-bool GuiObj::OnMouseButtonEvent(const MouseButtonEvent&)
+
+GuiObj::GuiObj()
 {
-  return false; // TODO
+  xrot = 0;
+  yrot = 0;
+  Ldrag = false;
+  Mdrag = false;
+  Rdrag = false;
 }
 
-bool GuiObj::OnCursorEvent(const CursorEvent&)
+void GuiObj::Draw()
 {
-  return false; // TODO
+  if (m_mesh)
+  {
+    // TODO Controllable camera
+    Assert(AmjuGL::GetMatrixMode() == AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::PushMatrix();
+    AmjuGL::SetIdentity();
+
+    const float FOVY = 60.0f;  // TODO
+    const float NEAR_PLANE = 1.0f;
+    const float FAR_PLANE = 4000.0f;
+    float aspect = 1.3f;
+    AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
+
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::PushMatrix();
+    AmjuGL::SetIdentity();
+
+    AmjuGL::LookAt(0, 100, 300,  0, 0, 0,  0, 1, 0); // TODO
+    AmjuGL::Translate(pos.x, pos.y, pos.z);
+    AmjuGL::RotateX(xrot);
+    AmjuGL::RotateY(yrot);
+
+    // TODO Lighting, texturing, wireframe flags
+
+    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_DEPTH_WRITE);
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);
+
+    m_mesh->Draw();    
+
+    AmjuGL::PopAttrib();
+
+    AmjuGL::PopMatrix();
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::PopMatrix();
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  }
+}
+
+bool GuiObj::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  {
+    Ldrag = mbe.isDown;
+  }
+  else if (mbe.button == AMJU_BUTTON_MOUSE_MIDDLE)
+  {
+    Mdrag = mbe.isDown;
+  }
+  else if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
+  {
+    Rdrag = mbe.isDown;
+  }
+
+  return false; 
+}
+
+bool GuiObj::OnCursorEvent(const CursorEvent& ce)
+{
+  static float oldx = ce.x;
+  static float oldy = ce.y;
+  float dx = ce.x - oldx;
+  float dy = ce.y - oldy;
+  oldx = ce.x;
+  oldy = ce.y;
+
+  if (Ldrag)
+  {
+    static const float SENSITIVITY = 100.0f;
+
+    xrot += dy * SENSITIVITY;
+    yrot += dx * SENSITIVITY;
+  }
+  else if (Mdrag)
+  {
+    static const float SENSITIVITY = 100.0f;
+
+    pos.y += dy * SENSITIVITY;
+    pos.x += dx * SENSITIVITY;
+  }
+  else if (Rdrag)
+  {
+    static const float SENSITIVITY = 100.0f;
+
+    pos.z += dy * SENSITIVITY;
+  }
+  return false; 
 }
 
 void GuiObjView::SetObjMesh(ObjMesh* mesh)
