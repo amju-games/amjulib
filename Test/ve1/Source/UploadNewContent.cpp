@@ -31,13 +31,14 @@ std::cout << "Attempting to load obj: " << pathFile << "\n";
   {
     mesh->Save(objFile + "b", true);
   }
-*/
+
   // This may cause a lot of work - for now, save optimised text version
   if (loaded && !binary)
   {
     //std::string filename = GetFileNoExt(objFile) + "_save.obj";
     mesh->Save(objFile, false);
   }
+*/
 
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
