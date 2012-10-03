@@ -37,6 +37,28 @@ Resource* BinaryObjLoader(const std::string& resName)
   return obj;
 }
 
+ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
+{
+  std::string path = GetFilePath(pathFile);
+  std::string origRoot = File::GetRoot();
+  File::SetRoot(path , "/"); // TODO change SetRoot params
+
+  std::string objFile = StripPath(pathFile);
+
+  // Bypass Res Manager so we don't cache the file, we want to reload it.
+  ObjMesh* mesh = new ObjMesh;
+  bool loaded = mesh->Load(objFile, binary);
+  if (!loaded)
+  {
+    delete mesh;
+    mesh = 0;
+  }
+  // After loading, revert to original file root
+  File::SetRoot(origRoot, "/");
+
+  return mesh;
+}
+
 void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
 {
   // Iterate over groups once to count how many faces there are;
