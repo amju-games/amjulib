@@ -4,7 +4,7 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+choose-obj-comp
 // Num children
 3
 
