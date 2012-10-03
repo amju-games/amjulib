@@ -11,6 +11,8 @@ TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
 ASSETSDIR 	:=	../../Assets
+# Shared GUI assets
+GUIASSETSDIR 	:=	../../../../Assets/gui
 # These are the shared font assets, not just for this project
 FONT2D		:=	../../../../Assets/font2d
 FONT3D		:=	../../../../Assets/font3d
@@ -49,6 +51,7 @@ release:
 	mkdir -p $(BUILD)/"My Game.app"/Contents/Resources/Data/font2d; \
 	mkdir -p $(BUILD)/"My Game.app"/Contents/Resources/Data/font3d; \
 	cp -R $(ASSETSDIR)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/; \
+	cp -R $(GUIASSETSDIR)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/; \
 	cp -R $(FONT2D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font2d; \
 	cp -R $(FONT3D)/* $(BUILD)/"My Game.app"/Contents/Resources/Data/font3d; \
         cp $(AMJU)/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $(BUILD)/"My Game.app"/Contents/MacOS/; \
