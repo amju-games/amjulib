@@ -5,6 +5,7 @@
 #include <UrlUtils.h>
 #include <GuiButton.h>
 #include <GuiFileListBox.h>
+#include <GuiFileDialog.h>
 #include "GSObjMesh.h"
 #include "GSEdit.h"
 #include "SaveConfig.h"
@@ -105,7 +106,7 @@ std::cout << "Finished uploading, creating new object on server...\n";
 
 void GSObjMesh::SetFile(const std::string& pathAndFile)
 {
-  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("obj_file"));
+  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("fd-path-text"));
   Assert(text);
   text->SetText(pathAndFile);
 }
@@ -113,7 +114,7 @@ void GSObjMesh::SetFile(const std::string& pathAndFile)
 void GSObjMesh::OnOKButton()
 {
   // Get path + file name
-  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("obj_file"));
+  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("fd-path-text"));
   Assert(text);
   std::string pathFile = text->GetText();
 
@@ -139,6 +140,11 @@ void GSObjMesh::OnOKButton()
 
     if (ok)
     {
+      // Hide file dialog
+      GuiElement* dlg = (m_gui->GetElementByName("my-file-dialog"));
+      Assert(dlg);
+      dlg->SetVisible(false);
+
       static GSWaitForUpload* wfu = TheGSWaitForUpload::Instance();
       wfu->SetOnFinishedFunc(Amju::OnFinishedUpload);
       wfu->SetTotalFiles(m_totalFiles);
@@ -191,24 +197,27 @@ std::cout << "Testing new file browser GUI...\n";
   cancel->SetCommand(Amju::OnCancelButton);
   cancel->SetIsCancelButton(true);
 
-/*
   // Text edit control needs focus to accept kb input ??
-  GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "obj_file");
-  Assert(edit);
-  edit->SetHasFocus(true);
+  //GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "fd-path-text");
+  //Assert(edit);
+  //edit->SetHasFocus(true);
   static GameConfigFile* config = TheGameConfigFile::Instance();
   std::string pathFile = "/";
   if (config->Exists(MESH_PATH_KEY))
   {
     pathFile = config->GetValue(MESH_PATH_KEY);
   } 
-  edit->SetText(pathFile);
 
-  GuiFileListBox* flb = (GuiFileListBox*)GetElementByName(m_gui, "my-file-browser");
-  flb->SetDoubleClickCallback(Amju::OnDoubleClick);
-  flb->SetSingleClickCallback(Amju::OnSingleClick);
-  flb->SetDir(GetFilePath(pathFile));
-*/
+  GuiFileDialog* dlg = (GuiFileDialog*)(m_gui->GetElementByName("my-file-dialog"));
+  Assert(dlg);
+  dlg->SetPathAndFile(pathFile);
+
+  //edit->SetText(pathFile);
+  //GuiFileListBox* flb = (GuiFileListBox*)GetElementByName(m_gui, "my-file-browser");
+  //flb->SetDoubleClickCallback(Amju::OnDoubleClick);
+  //flb->SetSingleClickCallback(Amju::OnSingleClick);
+  //flb->SetDir(GetFilePath(pathFile));
+
 }
 
 } // namespace
