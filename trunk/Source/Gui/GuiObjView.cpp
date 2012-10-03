@@ -44,12 +44,16 @@ bool GuiObjView::Load(File* f)
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
 
-  if (!mesh)
+  if (mesh)
+  {
+    SetObjMesh(mesh);
+  }
+  else
   {
     f->ReportError("Failed to load obj mesh " + objFile);
-    return false;
+    // OK, just display nothing
+    //return false;
   }
-  SetObjMesh(mesh);
 
   // TODO Calc AABB for camera
 

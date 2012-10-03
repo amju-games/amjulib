@@ -1,6 +1,8 @@
+#include <StringUtils.h>
 #include "GuiFileDialog.h"
 #include "GuiFileListBox.h"
 #include "GuiTextEdit.h"
+#include "GuiObjView.h"
 
 namespace Amju
 {
@@ -36,6 +38,8 @@ void GuiFileDialog::OnListboxClick(const std::string& fullPathAndFilename)
   Assert(text);
   text->SetText(lastPath);
 
+  ShowPreview();
+
 std::cout << "Listbox click: lastPath is now \"" << lastPath << "\"\n";
 }
 
@@ -49,7 +53,25 @@ void GuiFileDialog::OnPathChange()
   Assert(fb);
   fb->SetDir(lastPath);
 
+  ShowPreview();
+
 std::cout << "Path change: lastPath is now \"" << lastPath << "\"\n";
+}
+
+void GuiFileDialog::ShowPreview()
+{
+  // TODO Look up preview type associated with extension
+  if (GetFileExt(lastPath) == "obj")
+  {
+    // TODO Load mesh - don't use ResourceManager
+    ObjMesh* mesh = LoadObjMesh(lastPath);
+    if (mesh)
+    {
+      GuiObjView* gov = dynamic_cast<GuiObjView*>(GetElementByName("fd-obj-view"));
+      Assert(gov);
+      gov->SetObjMesh(mesh);
+    }
+  }
 }
 
 bool GuiFileDialog::Load(File* f)
@@ -89,6 +111,24 @@ bool GuiFileDialog::Load(File* f)
   text->SetOnChangeFunc(Amju::OnPathChange);
 
   return true;
+}
+
+void GuiFileDialog::SetPathAndFile(const std::string& path)
+{
+  GuiFileListBox* fb = dynamic_cast<GuiFileListBox*>(GetElementByName("fd-file-list-box"));
+  Assert(fb);
+  fb->SetDir(GetFilePath(path));
+  // Set path text
+  GuiTextEdit* text = dynamic_cast<GuiTextEdit*>(GetElementByName("fd-path-text"));
+  Assert(text);
+  text->SetText(path);
+}
+
+std::string GuiFileDialog::GetPathAndFile()
+{
+  GuiTextEdit* text = dynamic_cast<GuiTextEdit*>(GetElementByName("fd-path-text"));
+  Assert(text);
+  return text->GetText();
 }
 
 }

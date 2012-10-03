@@ -113,7 +113,7 @@ void GuiWindow::Draw()
 
   GuiComposite::Draw();
   AmjuGL::PopMatrix();
-
+  
 #else // NESTED_VIEWPORTS
 
   SetViewportN(pos.x, pos.y -  size.y, size.x, size.y);
