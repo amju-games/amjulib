@@ -29,7 +29,7 @@ bool CursorEvent::UpdateListener(EventListener* el)
   dy = y - oldy[controller];
   oldy[controller] = y;
 
-std::cout << "x: " << x << " y: " << y << " dx: " << dx << " dy: " << dy << "\n";
+//std::cout << "x: " << x << " y: " << y << " dx: " << dx << " dy: " << dy << "\n";
 
   return el->OnCursorEvent(*this);
 }

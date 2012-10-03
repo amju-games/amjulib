@@ -4,15 +4,14 @@
 
 // Format as for GuiWindow
 
-// GuiElement: name, pos, size
-file-dialog-window
+// NO name (set in parent file), pos, size
 -0.8, 0.5
-1.2, 1.2
+1.55, 1.2
 
 
 // Children
 // Num children
-4
+5
 
 //   .. each child
 
@@ -20,20 +19,27 @@ gui-file-list-box
 // Name
 fd-file-list-box
 // Pos, size
-0.1, -0.25
+0.05, -0.25
 0.7, 0.7
 
 // Text box showing path + Filename
 gui-text-edit
 fd-path-text
-0.1, -0.1
-1.0, 0.1
+0.05, -0.1
+1.45, 0.1
 // Text
 path
 // Font name, size
 arial, 1.0, left
 
 
+gui-obj-view
+fd-obj-view
+0.8, -0.25
+0.7, 0.7
+///Users/jay/Lamp/lamp.obj
+//C:\Users\jason\Dropbox\Misc\obj_downloads\bridge\Bridge.obj
+/
 
 gui-button
 ok-button

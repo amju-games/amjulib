@@ -12,8 +12,15 @@ public:
 
   virtual bool Load(File* f);
 
+  void SetPathAndFile(const std::string& path);
+  std::string GetPathAndFile();
+
   void OnListboxClick(const std::string& fullPathAndFilename);
   void OnPathChange();
+
+private:
+  // Called when new file selected, show contents in preview pane
+  void ShowPreview();
 };
 
 GuiElement* CreateFileDialog();

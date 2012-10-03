@@ -1,5 +1,6 @@
 #include <DrawRect.h>
 #include <AmjuGL.h>
+#include <LoadVec2.h>
 #include "GuiDialog.h"
 
 namespace Amju
@@ -28,24 +29,25 @@ bool GuiDialog::Load(File* f)
     return false;
   }
 
-  if (!GuiWindow::Load(&f2))
+  // Like GuiWindow::Load, but we don't want to load in the name again. This would be
+  //  only a generic name in the template file, not a unique name.
+  //if (!GuiWindow::Load(&f2))
+  //{
+  //  return false;
+  //}
+  if (!LoadVec2(&f2, &m_localpos))
   {
+    Assert(0);
     return false;
   }
 
-  return true; 
+  if (!LoadVec2(&f2, &m_size))
+  {
+    Assert(0);
+    return false;
+  }
 
-/*
-  if (!GuiElement::Load(f))
-  {
-    return false;
-  }
-  if (!LoadChildren(f))
-  {
-    return false;
-  }
-  return true;
-*/
+  return LoadChildren(&f2);
 }
 
 void GuiDialog::Draw()

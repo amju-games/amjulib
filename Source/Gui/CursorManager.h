@@ -10,7 +10,7 @@ namespace Amju
 class CursorManager : public NonCopyable
 {
 private:
-  CursorManager() {}
+  CursorManager();
   friend class Singleton<CursorManager>;
 
 public:
