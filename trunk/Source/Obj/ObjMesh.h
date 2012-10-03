@@ -60,6 +60,9 @@ typedef RCPtr<ObjMesh> PObjMesh;
 Resource* TextObjLoader(const std::string& resName);
 Resource* BinaryObjLoader(const std::string& resName);
 
+// Used to load an .obj mesh and other associated files (.mtl and textures)
+ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary = false);
+
 } // namespace
 
 #endif
