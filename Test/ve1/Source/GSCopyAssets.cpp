@@ -5,6 +5,7 @@
 #include <Pause.h>
 #include "GSCopyAssets.h"
 #include "GSTitle.h"
+#include "GSObjMesh.h" // Todo temp test
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS
@@ -194,7 +195,9 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
     // All copied - go to next state 
     // TODO Once logo displayed etc
-    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+// TODO TEMP TEST
+    //TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSObjMesh::Instance());
   }
 }
 
