@@ -176,19 +176,25 @@ void GSObjMesh::OnActive()
 {
   GSGui::OnActive();
 
-  m_gui = LoadGui("gui-newlocation.txt");
+std::cout << "Testing new file browser GUI...\n";
+
+  m_gui = LoadGui("gui-choose-obj-file.txt");
   Assert(m_gui);
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+  Assert(ok);
   ok->SetCommand(Amju::OnOKButton);
   ok->SetHasFocus(true);
 
   GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  Assert(cancel);
   cancel->SetCommand(Amju::OnCancelButton);
   cancel->SetIsCancelButton(true);
 
+/*
   // Text edit control needs focus to accept kb input ??
   GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "obj_file");
+  Assert(edit);
   edit->SetHasFocus(true);
   static GameConfigFile* config = TheGameConfigFile::Instance();
   std::string pathFile = "/";
@@ -202,6 +208,7 @@ void GSObjMesh::OnActive()
   flb->SetDoubleClickCallback(Amju::OnDoubleClick);
   flb->SetSingleClickCallback(Amju::OnSingleClick);
   flb->SetDir(GetFilePath(pathFile));
+*/
 }
 
 } // namespace
