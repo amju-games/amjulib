@@ -74,7 +74,8 @@ struct CursorEvent : public Event
 {
   // Cursor coords are -1..1 in x and y
   float x, y;
-  short controller;
+  float dx, dy; // change since last CursorEvent for this controller
+  short controller; // ID, e.g. 0..3 for Wiimotes, 0 for single mouse
 
   virtual bool UpdateListener(EventListener*);
 };
