@@ -3,9 +3,9 @@
 #include <Game.h>
 #include <AmjuTime.h>
 #include <Pause.h>
+#include <CursorManager.h>
 #include "GSCopyAssets.h"
 #include "GSTitle.h"
-#include "GSObjMesh.h" // Todo temp test
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS
@@ -193,11 +193,12 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
     RecursiveCopy(dataDir, saveDir); // because characters are in subdirs
 
+    // All done, now we can start loading stuff
+    TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
+
     // All copied - go to next state 
     // TODO Once logo displayed etc
-// TODO TEMP TEST
-    //TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
-    TheGame::Instance()->SetCurrentState(TheGSObjMesh::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   }
 }
 
