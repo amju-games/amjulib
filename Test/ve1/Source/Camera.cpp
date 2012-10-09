@@ -124,7 +124,7 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') 
   {
     camKey = kb.keyDown;
-    return true;
+    return false;
   }
 
 #ifdef _DEBUG
@@ -134,7 +134,7 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
     static bool show = false;
     show = !show;
     SceneNode::SetGlobalShowAABB(show);
-    return true;
+    return false;
   }
 #endif
   return false;
