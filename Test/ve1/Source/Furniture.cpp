@@ -264,6 +264,8 @@ bool CommandPickUp::Do()
 
   TheObjectUpdater::Instance()->SendUpdateReq(
     m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
+  
+  TheGSMain::Instance()->ClearContextMenu();
 
   return false;
 }
@@ -277,6 +279,9 @@ bool CommandRotate::Do()
   // For fences, AABBs are wrong for non-90 degrees. But we are using collision meshes
   //  which are super accuate.
   m_f->SetDir(m_f->GetDir() + 30.0f); 
+
+  TheGSMain::Instance()->ClearContextMenu();
+
   return false;
 }
 
