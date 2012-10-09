@@ -286,11 +286,13 @@ void Furniture::SetMenu(GuiMenu* menu)
 
   if (m_pickupId == 0)
   {
-    menu->AddChild(new GuiMenuItem("Pick up", new CommandPickUp(this, true)));
+    //menu->AddChild(new GuiMenuItem("Pick up", new CommandPickUp(this, true)));
+    AddMenuItem("Pick up", new CommandPickUp(this, true));
   }
   else if (m_pickupId == GetLocalPlayerId())
   {
-    menu->AddChild(new GuiMenuItem("Put down", new CommandPickUp(this, false)));
+    //menu->AddChild(new GuiMenuItem("Put down", new CommandPickUp(this, false)));
+    AddMenuItem("Put down", new CommandPickUp(this, false));
   }
 }
 

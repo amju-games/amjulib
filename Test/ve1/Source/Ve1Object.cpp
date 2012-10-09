@@ -22,6 +22,7 @@
 #include "Terrain.h"
 #include "ObjectUpdater.h"
 #include "ROConfig.h"
+#include "GSMain.h"
 
 //#define LOCATION_DEBUG
 
@@ -48,6 +49,12 @@ Ve1Object::Ve1Object() : m_location(-1)
 Ve1Object::~Ve1Object()
 {
   OnLocationExit();
+}
+
+void Ve1Object::AddMenuItem(const std::string& text, GuiCommand* command)
+{
+  // TODO Pass on to GSMain
+  TheGSMain::Instance()->AddMenuItem(text, command);
 }
 
 float Ve1Object::GetDir() const
