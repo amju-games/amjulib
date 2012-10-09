@@ -6,7 +6,17 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+6
+
+// Context menu - container for buttons
+gui-comp
+context-menu-holder
+// TODO Rectangle for background and cancel button
+1
+gui-comp
+context-menu
+0
+
 
 // Main HUD buttons
 
