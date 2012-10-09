@@ -47,6 +47,13 @@ public:
   void OnMenuClickedAway();
   void OnQuitButton();
 
+  // Context-sensitive menu for the currently selected object.
+  // This is now a row of buttons rather than a GuiMenu. This is to improve usability. The menu
+  //  got in the way of playing the game when displayed over the selected object.
+  GuiComposite* GetContextMenu();
+  void ClearContextMenu();
+  void AddMenuItem(const std::string& text, GuiCommand* command);
+
   // Show button to drop carried item
   void ShowDropButton(Furniture*, bool show); 
 

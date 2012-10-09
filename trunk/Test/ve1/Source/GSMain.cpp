@@ -69,6 +69,34 @@ GSMain::GSMain()
   m_wasClickedAway = false;
 }
 
+GuiComposite* GSMain::GetContextMenu()
+{
+  GuiComposite* contextMenu = dynamic_cast<GuiComposite*>(GetElementByName(m_gui, "context-menu"));
+  Assert(contextMenu);
+  return contextMenu;
+}
+
+void GSMain::ClearContextMenu()
+{
+  // Send off screen ?
+  GetContextMenu()->Clear();
+}
+
+void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
+{
+  GuiComposite* contextMenu = GetContextMenu();
+  if (!contextMenu)
+  {
+    return;
+  }
+  GuiButton* button = new GuiButton;
+  button->SetText(text);
+  button->SetCommand(command);
+  // Set position depending on how many buttons are already there
+  // TODO
+  contextMenu->AddChild(button);
+}
+
 void GSMain::ShowDropButton(Furniture* f, bool show)
 {
 std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";

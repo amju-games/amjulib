@@ -19,6 +19,9 @@ public:
   Ve1Object();
   virtual ~Ve1Object();
 
+  // Add an item to the context-sensitive menu
+  static void AddMenuItem(const std::string& text, GuiCommand*);
+
   virtual void Draw() { } // we use Scene Graph to draw
 
   virtual void Update(); // subclasses call this
