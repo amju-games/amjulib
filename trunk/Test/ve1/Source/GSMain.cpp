@@ -79,7 +79,7 @@ GuiComposite* GSMain::GetContextMenu()
 void GSMain::ClearContextMenu()
 {
   // Send off screen ?
-  GetContextMenu()->Clear();
+  GetContextMenu()->SetVisible(false);
 }
 
 void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
@@ -90,10 +90,14 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
     return;
   }
   GuiButton* button = new GuiButton;
+  bool loadedOk = button->OpenAndLoad("context-button.txt");
+  Assert(loadedOk);
   button->SetText(text);
   button->SetCommand(command);
   // Set position depending on how many buttons are already there
-  // TODO
+  float y = (float)(contextMenu->GetNumChildren()) * button->GetSize().y;
+  Vec2f pos(-1.0f, y);
+  button->SetLocalPos(pos);
   contextMenu->AddChild(button);
 }
 
@@ -180,10 +184,13 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
       return false;
     }
 
-    RCPtr<GuiMenu> menu = new GuiMenu;
+    RCPtr<GuiMenu> menu = 0; // TODO TEMP TEST new GuiMenu;
+    GetContextMenu()->Clear();
+    GetContextMenu()->SetVisible(true);
     v->SetMenu(menu);
 
     // Only show menu if it has items
+    /*
     if (menu->GetNumChildren() > 0)
     {
       m_menuObject = v;
@@ -202,6 +209,7 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
       m_menu->SetLocalPos(pos);
       return true;
     }
+    */
   }
   return false;
 }
