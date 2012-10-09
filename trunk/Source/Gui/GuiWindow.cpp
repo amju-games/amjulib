@@ -174,10 +174,11 @@ bool GuiWindow::OnMouseButtonEvent(const MouseButtonEvent& e)
 bool GuiWindow::OnCursorEvent(const CursorEvent& e)
 {
   // Discard if outside Window ?
-  if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
-  {
-    return false;
-  }
+  // TODO Make this a flag
+//  if (!m_clippedRect.IsPointIn(Vec2f(e.x, e.y)))
+//  {
+//    return false;
+//  }
 
   bool ret = false;
   int s = m_children.size();
@@ -188,6 +189,22 @@ bool GuiWindow::OnCursorEvent(const CursorEvent& e)
       ret = true;
     }
   }
+
+  if (!ret)
+  {
+    // No children handled this so could use to drag window, if we are draggable
+    // TODO
+/*
+    if (m_drag && IsDraggable())
+    {
+      Vec2f pos = GetLocalPos();
+      pos += Vec2f(e.dx, e.dy);
+      SetLocalPos(pos);
+    }
+*/
+
+  }
+
   return ret;
 }
 
