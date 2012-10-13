@@ -46,7 +46,11 @@ void Animated::SetAnim(Animated::Anim anim)
     "walk",
     "walk" // because no run, TODO
   };
-  Assert(anim < NUM_ANIMS);
+  if (anim >= NUM_ANIMS)
+  {
+std::cout << "WARNING Bad anim for Animated!!\n";
+    return;
+  }
   int animCode = m_pModel->GetAnimationFromName(ANIM_NAMES[anim]);
   SetAnim(animCode);
 }
