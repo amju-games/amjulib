@@ -4,6 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #include "AmjuFirst.h"
 #include <iostream>
+#include <Drawable.h>
 #include "OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
 #include "ShadowMapOpenGL1.h"
@@ -405,6 +406,12 @@ ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
 
   return new ShadowMapOpenGL2;
 #endif
+}
+
+Drawable* AmjuGLOpenGLBase::Create(int typeId)
+{
+  // Populate this in Ctor
+  return TheDrawableFactory::Instance()->Create(typeId);
 }
 
 }

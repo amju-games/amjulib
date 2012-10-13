@@ -86,6 +86,8 @@ public:
 
   virtual ShadowMap* CreateShadowMap();
 
+  virtual Drawable* Create(int);
+
 }; // class 
 } // namespace Amju
 
