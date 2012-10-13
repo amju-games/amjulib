@@ -10,6 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <vector>
 #include <AmjuTypes.h>
 #include "Colour.h"
+#include "Drawable.h"
 
 #ifdef CreateWindow
 #undef CreateWindow
@@ -264,6 +265,9 @@ public:
 
   // Create a ShadowMap (ref counted, on heap).
   static ShadowMap* CreateShadowMap();
+
+  // Abstract Factory: impl creates appropriate Drawable, e.g. ShadowMap, Outliner, CelShader, etc.
+  static Drawable* Create(int drawableTypeId);
 
 }; // struct AmjuGL
 } // namespace Amju

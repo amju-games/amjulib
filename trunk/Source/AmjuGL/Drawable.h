@@ -2,9 +2,13 @@
 #define AMJU_GL_DRAWABLE_H_INCLUDED
 
 #include <RCPtr.h>
+#include <Factory.h>
+#include <Singleton.h>
 
 namespace Amju
 {
+typedef void (*DrawFunc)();
+
 // Abstract base class for drawable things created by the AmjuGL impl.
 class Drawable : public RefCounted
 {
@@ -12,7 +16,6 @@ public:
   Drawable() : m_drawFunc(0) {}
   virtual ~Drawable() {}
   
-  typedef void (*DrawFunc)();
   void SetDrawFunc(DrawFunc df) { m_drawFunc = df; }
 
   virtual bool Init() = 0;
@@ -23,6 +26,9 @@ protected:
 };
 
 typedef RCPtr<Drawable> PDrawable;
+
+
+typedef Singleton<Factory<Drawable, int> > TheDrawableFactory;
 
 
 // Null behaviour is to just call the draw function, with no extra processing.

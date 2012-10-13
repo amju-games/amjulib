@@ -16,6 +16,9 @@ namespace Amju
 class Outliner : public Drawable
 {
 public:
+  // Pass this ID to AmjuGL::Create
+  static const int TYPE_ID = 2;
+
   // TODO Set line width, colour, etc
 
 };
