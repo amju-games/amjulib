@@ -33,10 +33,12 @@ static int s_matrixStackSize[3] = { 0, 0, 0 };
 //  and for queries
 static AmjuGL::MatrixMode s_currentMatrix = AmjuGL::AMJU_MATRIX_NOTSETYET;
 
+#ifdef AMJU_PUSH_POP_CHECK
 static const char* AMJU_MTX_NAME[] = 
 {
   "MODVIEW", "PROJ", "TEXTURE"
 };
+#endif
 
 static float s_screenRotation = 0;
 
@@ -669,4 +671,11 @@ ShadowMap* AmjuGL::CreateShadowMap()
   return impl->CreateShadowMap();
 }
 
+Drawable* AmjuGL::Create(int drawableTypeId)
+{
+  AMJU_CALL_STACK;
+  return impl->Create(drawableTypeId);
 }
+
+}
+
