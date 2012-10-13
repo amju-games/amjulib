@@ -16,8 +16,8 @@ void BlinkCharacter::SetFromCharacterName(const std::string& chName)
   //  well-named text file.
 
   // TODO static subdir string
-  std::string tex1 = "characters/" + chName + "/" + chName + ".png";
-  std::string tex2 = "characters/" + chName + "/" + chName + "a.png";
+  std::string tex1 = "characters/" + chName + "/" + chName + "a.png";
+  std::string tex2 = "characters/" + chName + "/" + chName + ".png";
 
 //std::cout << "Loading textures for blink char: " << tex1 << "  and  " << tex2 << "\n";
 
