@@ -154,7 +154,7 @@ void Ve1Object::HandleFloor(CollisionMesh* m)
       m_pos.y = groundY;
       if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
       {
-  std::cout << "**BOUNCE**!?!?!?!\n";
+        ////  std::cout << "**BOUNCE**!?!?!?!\n";
 
         m_vel.y *= -0.6f; // TODO CONFIG
         m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame

@@ -107,7 +107,8 @@ private:
 
 void Baddie::SetMenu(GuiMenu* menu)
 {
-  menu->AddChild(new GuiMenuItem("FIGHT!!", new CommandFight(this))); 
+  //menu->AddChild(new GuiMenuItem("FIGHT!!", new CommandFight(this))); 
+  AddMenuItem("FIGHT!!", new CommandFight(this)); 
 }
 
 }

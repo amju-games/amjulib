@@ -494,11 +494,13 @@ void Player::SetMenu(GuiMenu* menu)
   }
   else if (IsLoggedIn())
   {
-    menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
+    //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
+    AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
   }
   else
   {
-    menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
+    //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
+    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
 }
 

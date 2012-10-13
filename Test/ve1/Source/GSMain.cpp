@@ -189,6 +189,11 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
     GetContextMenu()->SetVisible(true);
     v->SetMenu(menu);
 
+    if (GetContextMenu()->GetNumChildren() > 0)
+    {
+      return true; // so don't walk to position clicked
+    }
+
     // Only show menu if it has items
     /*
     if (menu->GetNumChildren() > 0)
