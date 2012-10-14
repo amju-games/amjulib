@@ -1,8 +1,48 @@
 #include <EventPoller.h>
+#include <Timer.h>
 #include "JoystickToCursor.h"
 
 namespace Amju
 {
+JoystickToCursor* TheJoyStickToCursor()
+{
+  static JoystickToCursor* js = 0;
+  if (!js)
+  {
+    js = new JoystickToCursor;
+  }
+  return js;
+}
+
+void JoystickToCursor::Update()
+{
+  float dt = TheTimer::Instance()->GetDt();
+  m_coord += m_joy * dt;
+  if (m_coord.x < -1)
+  {
+    m_coord.x = -1;
+  }
+  if (m_coord.x > 1)
+  {
+    m_coord.x = 1;
+  }
+  if (m_coord.y < -1)
+  {
+    m_coord.y = -1;
+  }
+  if (m_coord.y > 1)
+  {
+    m_coord.y = 1;
+  }
+
+  CursorEvent* ce = new CursorEvent;
+  ce->controller = 0; // TODO je.controller;
+  ce->x = m_coord.x;
+  ce->y = m_coord.y;
+
+  TheEventPoller::Instance()->GetImpl()->QueueEvent(ce);
+}
+
 bool JoystickToCursor::OnJoyAxisEvent(const JoyAxisEvent& je)
 {
   // Make cursor event with the joystick data 
@@ -17,15 +57,8 @@ bool JoystickToCursor::OnJoyAxisEvent(const JoyAxisEvent& je)
   // Check if m_coord is same as je within some tolerance, ignore if so.
   // (configurable tolerance too)
 
-  m_coord.x = je.x * SENSITIVITY; 
-  m_coord.y = je.y * SENSITIVITY;
-
-  CursorEvent* ce = new CursorEvent;
-  ce->controller = je.controller;
-  ce->x = m_coord.x;
-  ce->y = m_coord.y;
-
-  TheEventPoller::Instance()->GetImpl()->QueueEvent(ce);
+  m_joy.x = je.x * SENSITIVITY; 
+  m_joy.y = je.y * SENSITIVITY;
 
   return true;
 }
