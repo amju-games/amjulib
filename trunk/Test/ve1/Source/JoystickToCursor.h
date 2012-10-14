@@ -12,9 +12,14 @@ public:
   virtual bool OnJoyAxisEvent(const JoyAxisEvent&);
   virtual bool OnButtonEvent(const ButtonEvent&);
 
+  void Update();
+
 private:
+  Vec2f m_joy;
   Vec2f m_coord;  
 };
+
+JoystickToCursor* TheJoystickToCursor();
 }
 
 #endif

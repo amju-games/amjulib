@@ -15,7 +15,7 @@
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 #include "QuitHandler.h"
-#include "JoystickToCursor.h" // TODO TEMP TEST
+#include "JoystickToCursor.h" 
 
 namespace Amju
 {
@@ -37,7 +37,7 @@ void StartUp()
 
   TheEventPoller::Instance()->AddListener(new QuitHandler);
   // TODO TEMP TEST
-  TheEventPoller::Instance()->AddListener(new JoystickToCursor, -999);
+//  TheEventPoller::Instance()->AddListener(TheJoystickToCursor(), -999);
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for .obj files, binary loader for .objb
