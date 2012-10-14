@@ -105,6 +105,19 @@ void Game::Run()
 void Game::RunOneLoop()
 {
 #ifdef SHOW_FRAME_TIME
+    static std::string fps;
+    static int framesThisSec = 0;
+    framesThisSec++;
+    static int elapsed = 0;
+    float e = TheTimer::Instance()->GetElapsedTime(); 
+
+    if ((int)e != elapsed)
+    {
+      elapsed = (int)e;
+      fps = ToString(framesThisSec);
+      framesThisSec = 0;
+    }
+
 #ifdef WIN32
     unsigned long start = GetTickCount();
 #else
@@ -112,6 +125,7 @@ void Game::RunOneLoop()
     timeval tbefore;
     gettimeofday(&tbefore, 0);
 #endif
+
 #endif //  SHOW_FRAME_TIME
 
   Update();
@@ -144,6 +158,8 @@ void Game::RunOneLoop()
     std::string s = "Draw: " + ToString((int)(draw * 1000.0f)) +
       " update: " + ToString((int)(update * 1000.0f));
 #endif
+
+    s += " fps: " + fps;
 
     // Display time per frame
     PushColour();
