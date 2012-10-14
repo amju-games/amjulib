@@ -20,8 +20,8 @@
 #include "ROConfig.h"
 #include "Kb.h"
 
-//#define SHOW_ENV_INFO
-//#define SHOW_FRAME_TIME
+#define SHOW_ENV_INFO
+#define SHOW_FRAME_TIME
 #define SHOW_VERSION
 
 namespace Amju
