@@ -48,11 +48,18 @@ void Animated::SetAnim(Animated::Anim anim)
   };
   if (anim >= NUM_ANIMS)
   {
-std::cout << "WARNING Bad anim for Animated!!\n";
+std::cout << "WARNING Bad anim: " << (int)anim << " for Animated!!\n";
     return;
   }
-  int animCode = m_pModel->GetAnimationFromName(ANIM_NAMES[anim]);
-  SetAnim(animCode);
+  if (m_pModel->IsValidName(ANIM_NAMES[anim]))
+  {
+    int animCode = m_pModel->GetAnimationFromName(ANIM_NAMES[anim]);
+    SetAnim(animCode);
+  }
+  else
+  {
+std::cout << "WARNING Invalid anim name: " << ANIM_NAMES[anim] << " for Animated!\n";
+  }
 }
 
 void Animated::SetAnim(int anim)
