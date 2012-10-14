@@ -56,6 +56,9 @@ public:
   // Get Animation enum from name for this mesh.
   Animation GetAnimationFromName(const std::string&);
 
+  // Check that a string is a valid Animation name 
+  bool IsValidName(const std::string& s) const;
+
   // For this mesh, does the given animation repeat ?
   bool GetDoesActionRepeat(Animation animation) const;
   bool GetDoesActionFreeze(Animation animation) const;
@@ -72,9 +75,6 @@ protected:
 
   // Add an animation name for this mesh
   void AddAnimationName(const std::string&);
-
-  // Check that a string is a valid Animation name 
-  bool IsValidName(const std::string& s) const;
 
   void StoreNewFrame(const std::string& name, int start, int end);
 
