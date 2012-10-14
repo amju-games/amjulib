@@ -197,12 +197,45 @@ void mousemove(int x, int y)
 void joystick(unsigned int buttonMask, int x, int y, int z)
 {
   // TODO ignore if same state as last time
-  JoyAxisEvent* j = new JoyAxisEvent;
-  j->controller = 0;
-  j->x = (float)x / 1000.0f;
-  j->y = (float)y / 1000.0f;
-  // TODO buttons
-  QueueEvent(j);
+  static int oldx = -99999;
+  static int oldy = -99999;
+  static int oldz = -99999;
+  static unsigned int oldbuttons = 99999;
+
+  if (x != oldx || y != oldy || z != oldz)
+  {
+    oldx = x;
+    oldy = y;
+    oldz = z;
+
+    JoyAxisEvent* j = new JoyAxisEvent;
+    j->controller = 0;
+    // TODO What is the min/max value ??
+    j->x = (float)x / 2000.0f;
+    j->y = -(float)y / 2000.0f;
+    QueueEvent(j);
+  }
+
+  if (oldbuttons != buttonMask)
+  {
+    // TODO buttons
+std::cout << "Button mask: " << buttonMask << "\n";
+
+    unsigned int diff = oldbuttons ^ buttonMask;
+std::cout << "Diff: " << diff << "\n";
+
+    ButtonEvent* be = new ButtonEvent;
+    be->controller = 0; // TODO only one joystick in GLUT ?
+    if (diff & 0x01)
+    {
+      be->button = AMJU_BUTTON_A;
+      be->isDown = buttonMask & 0x01; 
+    }
+    // ... TODO 
+
+    oldbuttons = buttonMask;
+    QueueEvent(be);
+  }
 }
 
 namespace Amju
