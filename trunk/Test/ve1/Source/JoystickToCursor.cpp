@@ -4,7 +4,7 @@
 
 namespace Amju
 {
-JoystickToCursor* TheJoyStickToCursor()
+JoystickToCursor* TheJoystickToCursor()
 {
   static JoystickToCursor* js = 0;
   if (!js)
