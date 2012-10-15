@@ -187,6 +187,15 @@ void mousebutton(int button, int state, int x, int y)
 
 void mousemove(int x, int y)
 {
+  static int oldx = -1;
+  static int oldy = -1;
+  if (x == oldx && y == oldy)
+  {
+    return; // GLUT generates a lot of no op mouse events ???
+  }
+  oldx = x;
+  oldy = y;
+
   CursorEvent* ce = new CursorEvent;
   ce->controller = 0;
   ce->x = (float)x / (float)Amju::Screen::X() * 2.0f - 1.0f; 
