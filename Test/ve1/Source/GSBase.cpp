@@ -7,6 +7,7 @@
 #include "ObjectManager.h"
 #include "PosUpdate.h"
 #include "GSNetError.h"
+#include "JoystickToCursor.h"
 
 namespace Amju
 {
@@ -57,7 +58,7 @@ void GSBase::GoBack()
   }
   Assert(m_prevState);
 
-std::cout << "GO BACK to previous state...\n";
+std::cout << "GO BACK to previous state... (" << typeid(*m_prevState).name() << ")\n";
 
   TheGame::Instance()->SetCurrentState(m_prevState);
 }
@@ -91,6 +92,8 @@ void GSBase::Update()
 
   float dt = TheTimer::Instance()->GetDt();
   m_time += dt;
+
+  TheJoystickToCursor()->Update();
 
 /*
   if (m_time >= m_maxTime)

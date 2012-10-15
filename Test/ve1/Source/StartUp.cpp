@@ -37,7 +37,7 @@ void StartUp()
 
   TheEventPoller::Instance()->AddListener(new QuitHandler);
   // TODO TEMP TEST
-//  TheEventPoller::Instance()->AddListener(TheJoystickToCursor(), -999);
+  TheEventPoller::Instance()->AddListener(TheJoystickToCursor(), -999);
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   // Use Text obj loader for .obj files, binary loader for .objb
