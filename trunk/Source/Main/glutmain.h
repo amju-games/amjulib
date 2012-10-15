@@ -194,13 +194,24 @@ void mousemove(int x, int y)
   QueueEvent(ce);
 }
 
+void QueueButtonEvent(Button b, int controller, bool isDown)
+{
+  ButtonEvent* be = new ButtonEvent;
+  be->controller = controller; 
+  be->button = b;
+  be->isDown = isDown;
+  QueueEvent(be);
+
+static const char* BUTTON_NAME[8] = { "A", "B", "C", "D", "Left", "Right", "Up", "Down" };
+std::cout << "Joystick " << BUTTON_NAME[(int)b] << "  button " << (be->isDown ? "down" : "up") << "\n";
+}
+
 void joystick(unsigned int buttonMask, int x, int y, int z)
 {
-  // TODO ignore if same state as last time
   static int oldx = -99999;
   static int oldy = -99999;
   static int oldz = -99999;
-  static unsigned int oldbuttons = 99999;
+  static unsigned int oldbuttons = buttonMask; // this is OK, first event is bogus anyway
 
   if (x != oldx || y != oldy || z != oldz)
   {
@@ -224,17 +235,26 @@ std::cout << "Button mask: " << buttonMask << "\n";
     unsigned int diff = oldbuttons ^ buttonMask;
 std::cout << "Diff: " << diff << "\n";
 
-    ButtonEvent* be = new ButtonEvent;
-    be->controller = 0; // TODO only one joystick in GLUT ?
+    int controller = 0; // TODO only one joystick in GLUT ?
     if (diff & 0x01)
     {
-      be->button = AMJU_BUTTON_A;
-      be->isDown = buttonMask & 0x01; 
+      QueueButtonEvent(AMJU_BUTTON_A, controller, buttonMask & 0x01); 
+    }
+    if (diff & 0x02)
+    {
+      QueueButtonEvent(AMJU_BUTTON_B, controller, buttonMask & 0x02); 
+    }
+    if (diff & 0x04)
+    {
+      QueueButtonEvent(AMJU_BUTTON_C, controller, buttonMask & 0x04); 
+    }
+    if (diff & 0x08)
+    {
+      QueueButtonEvent(AMJU_BUTTON_D, controller, buttonMask & 0x08); 
     }
     // ... TODO 
 
     oldbuttons = buttonMask;
-    QueueEvent(be);
   }
 }
 
