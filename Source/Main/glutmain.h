@@ -45,6 +45,10 @@ void draw()
 {
   TheGame::Instance()->RunOneLoop();
 
+#ifdef WIN32
+  glutForceJoystickFunc();
+#endif
+
 #ifndef WIN32
   glutSwapBuffers(); // ?
 #endif
@@ -247,19 +251,19 @@ std::cout << "Diff: " << diff << "\n";
     int controller = 0; // TODO only one joystick in GLUT ?
     if (diff & 0x01)
     {
-      QueueButtonEvent(AMJU_BUTTON_A, controller, buttonMask & 0x01); 
+      QueueButtonEvent(AMJU_BUTTON_A, controller, (buttonMask & 0x01) != 0); 
     }
     if (diff & 0x02)
     {
-      QueueButtonEvent(AMJU_BUTTON_B, controller, buttonMask & 0x02); 
+      QueueButtonEvent(AMJU_BUTTON_B, controller, (buttonMask & 0x02) != 0); 
     }
     if (diff & 0x04)
     {
-      QueueButtonEvent(AMJU_BUTTON_C, controller, buttonMask & 0x04); 
+      QueueButtonEvent(AMJU_BUTTON_C, controller, (buttonMask & 0x04) != 0); 
     }
     if (diff & 0x08)
     {
-      QueueButtonEvent(AMJU_BUTTON_D, controller, buttonMask & 0x08); 
+      QueueButtonEvent(AMJU_BUTTON_D, controller, (buttonMask & 0x08) != 0); 
     }
     // ... TODO 
 
@@ -311,7 +315,13 @@ bool CreateWindowGLUT(AmjuGLWindowInfo* w)
   {
     std::cout << "GLUT says joystick available!\n";
   }
+
+#ifdef WIN32
+  glutJoystickFunc(joystick, 0); // we will force polling
+#else
   glutJoystickFunc(joystick, 50);
+#endif
+
   return true;
 }
 }

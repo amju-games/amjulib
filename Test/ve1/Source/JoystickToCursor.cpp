@@ -14,9 +14,22 @@ JoystickToCursor* TheJoystickToCursor()
   return js;
 }
 
+JoystickToCursor::JoystickToCursor()
+{
+  m_hasEvent = false;
+}
+
 void JoystickToCursor::Update()
 {
   float dt = TheTimer::Instance()->GetDt();
+  if (!m_hasEvent)
+  {
+    return;
+  }
+
+  // We should use whatever the cursor coord is currently (could have been moved by mouse)
+  // m_coord = Mouse::Coord(); // TODO
+
   m_coord += m_joy * dt;
   if (m_coord.x < -1)
   {
@@ -41,6 +54,11 @@ void JoystickToCursor::Update()
   ce->y = m_coord.y;
 
   TheEventPoller::Instance()->GetImpl()->QueueEvent(ce);
+
+  if (m_joy.SqLen() < 0.01f) // TODO Sensitivity
+  {
+    m_hasEvent = false;
+  }
 }
 
 bool JoystickToCursor::OnJoyAxisEvent(const JoyAxisEvent& je)
@@ -59,6 +77,8 @@ bool JoystickToCursor::OnJoyAxisEvent(const JoyAxisEvent& je)
 
   m_joy.x = je.x * SENSITIVITY; 
   m_joy.y = je.y * SENSITIVITY;
+
+  m_hasEvent = true;
 
   return true;
 }
