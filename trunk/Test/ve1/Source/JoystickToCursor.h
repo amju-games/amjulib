@@ -9,6 +9,8 @@ namespace Amju
 class JoystickToCursor : public EventListener
 {
 public:
+  JoystickToCursor();
+
   virtual bool OnJoyAxisEvent(const JoyAxisEvent&);
   virtual bool OnButtonEvent(const ButtonEvent&);
 
@@ -17,6 +19,7 @@ public:
 private:
   Vec2f m_joy;
   Vec2f m_coord;  
+  bool m_hasEvent; 
 };
 
 JoystickToCursor* TheJoystickToCursor();
