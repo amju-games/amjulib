@@ -168,7 +168,11 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   }
   if (midDrag)
   {
-    posOffset.x -= dx * 100.0f;
+    float y = yRot + yRot2; 
+
+    posOffset.x -= dx * cos(y) * 100.0f;
+    posOffset.z += dx * sin(y) * 100.0f;
+
     posOffset.y -= dy * 100.0f;
     b = true;
   }
