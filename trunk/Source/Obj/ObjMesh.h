@@ -2,8 +2,8 @@
 #define OBJ_MESH_H_INCLUDED
 
 #include <map>
+#include <ResourceManager.h>
 #include "ObjUsefulFunctions.h"
-#include "ResourceManager.h"
 
 namespace Amju
 {
@@ -32,6 +32,9 @@ public:
 
   void GetMaterials(MaterialVec* vec);
 
+  const AABB& GetAABB(); // for entire mesh
+  const AABB& GetAABB(const std::string& groupname); // for one group
+
 private:
   bool LoadBinary(const std::string& filename);
   bool SaveBinary(const std::string& filename);
@@ -49,6 +52,8 @@ private:
 
   typedef std::map<std::string, Material> Materials;
   Materials m_materials;
+
+  AABB m_aabb; // union of all group AABBs
 
 private:
   void DrawGroup(Group& g);
