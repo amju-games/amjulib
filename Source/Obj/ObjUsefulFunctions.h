@@ -6,6 +6,7 @@
 #include <vector>
 #include "Vec3.h"
 #include "Vec2.h"
+#include <AABB.h>
 #include "AmjuGL.h"
 #include <Texture.h>
 
@@ -72,6 +73,7 @@ struct Group
   std::string m_name;
   std::string m_materialName; // TODO int index
   AmjuGL::Tris m_tris;
+  AABB m_aabb;
 };
 
 // Group with extra info for saving

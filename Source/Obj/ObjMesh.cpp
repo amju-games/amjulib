@@ -462,6 +462,19 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
   return true;
 }
 
+const AABB& ObjMesh::GetAABB()
+{
+  return m_aabb;
+}
+
+const AABB& ObjMesh::GetAABB(const std::string& groupname)
+{
+  Groups::iterator it = m_groups.find(groupname);
+  Assert(it != m_groups.end());
+  Group& g = it->second;
+  return g.m_aabb; 
+}
+
 void ObjMesh::MungeData()
 {
 #ifdef OBJ_DEBUG
@@ -474,6 +487,8 @@ void ObjMesh::MungeData()
   {
     Group& g = it->second;
     BuildGroup(g);
+
+    m_aabb.Union(g.m_aabb);
 
     // Erase empty groups
     if (g.m_tris.empty())
@@ -630,6 +645,8 @@ if (m_uvs.empty())
       t.m_verts[j].m_x = vP.x;
       t.m_verts[j].m_y = vP.y;
       t.m_verts[j].m_z = vP.z;
+
+      m_aabb.SetIf(vP.x, vP.y, vP.z);
     }
     g.m_tris.push_back(t);
   }
