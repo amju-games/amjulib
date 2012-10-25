@@ -4,9 +4,9 @@ Amju Games source code (c) Copyright Jason Colman 2000-2012
 
 #ifdef WIN32
 #if defined(_DEBUG)
-#pragma comment(lib, "../../../../../Build/Debug/AmjuLibMsvc.lib")
+#pragma comment(lib, "../../../../../../Build/Debug/AmjuLibMsvc.lib")
 #else
-#pragma comment(lib, "../../../../../Build/Release/AmjuLibMsvc.lib")
+#pragma comment(lib, "../../../../../../Build/Release/AmjuLibMsvc.lib")
 #endif 
 #endif // WIN32
 
@@ -184,10 +184,10 @@ std::cout << "Creating mesh...\n";
 
   AmjuGL::Flip();
 
-//#ifndef WIN32
+#ifndef WIN32
   // WIN32 AmjuGLOpenGL swaps buffers already!
   glutSwapBuffers(); 
-//#endif
+#endif
 }
 
 void keydown(unsigned char c, int x, int y)
