@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
