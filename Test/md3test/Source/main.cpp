@@ -34,7 +34,7 @@ int currentChar = 0;
 
 namespace Amju
 {
-AmjuGLWindowInfo w(640, 480, false);
+AmjuGLWindowInfo w(640, 480, false, "MD3 test");
 
 bool MyCreateWindowGLUT(AmjuGLWindowInfo*)
 {
