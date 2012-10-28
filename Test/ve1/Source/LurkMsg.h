@@ -87,6 +87,8 @@ public:
   void OnLurkYes();
   void OnLurkNo();
 
+  void TextToSpeech(const std::string& text);
+
 private:
   typedef std::queue<LurkMsg> LurkMsgQ; // queue of msgs or one Lurk pos
   typedef std::map<LurkPos, LurkMsgQ> QMap; 
