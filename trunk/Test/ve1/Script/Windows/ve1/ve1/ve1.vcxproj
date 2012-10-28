@@ -190,6 +190,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\FirstTimeMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
@@ -217,6 +218,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStory.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColour.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColourWord.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
@@ -299,6 +301,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\FirstTimeMsg.h" />
     <ClInclude Include="..\..\..\..\Source\Furniture.h" />
+    <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
@@ -326,6 +329,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStory.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColour.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColourWord.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />

@@ -1,36 +1,59 @@
 #include <Localise.h>
+#include <Game.h>
 #include "FirstTimeMsg.h"
 #include "LurkMsg.h"
 #include "LocalPlayer.h"
 #include "Player.h"
 #include "ObjectUpdater.h"
 #include "Ve1OnlineReqManager.h"
+#include "GSStory.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
-bool FirstTimeMsg(const std::string& text, MsgNum msgNumber)
+static void ShowText(const std::string& text, bool storyMode)
 {
+  if (storyMode)
+  {
+    TheGSStory::Instance()->SetText(text);
+    TheGSStory::Instance()->SetPrevState(TheGame::Instance()->GetState());
+    TheGame::Instance()->SetCurrentState(TheGSStory::Instance());
+  }
+  else
+  {
+    // Show this msg
+    LurkMsg lm(Lookup(text), LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);
+  }
+}
+
+bool FirstTimeMsg(const std::string& text, MsgNum msgNumber, bool storyMode)
+{
+  Player* p = GetLocalPlayer();
+  if (!p)
+  {
+    std::cout << "No player, can't show msg!\n";
+    Assert(0);
+    return false;
+  }
+
   std::string key = "shown_msg_" + ToString(msgNumber);
-  if (GetLocalPlayer()->Exists(key))
+  if (p->Exists(key))
   {
     // Already shown this msg
     return false;
   } 
 
   // Set shown flag
-  TheObjectUpdater::Instance()->SendUpdateReq(GetLocalPlayer()->GetId(), key, "y");
+  TheObjectUpdater::Instance()->SendUpdateReq(p->GetId(), key, "y");
+  p->SetKeyVal(key, "y");
+  // TODO set shown flag when msg closed ?
 
-  GetLocalPlayer()->SetKeyVal(key, "y");
-  // TODO set shown flag when msg closed.
-
-  // Show this msg
-  LurkMsg lm(Lookup(text), Colour(1, 1, 1, 1), Colour(0, 0, 0, 1), AMJU_CENTRE); 
-  TheLurker::Instance()->Queue(lm);
-
+  ShowText(text, storyMode);
   return true;
 }
 
-bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber)
+bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber, bool storyMode)
 {
   typedef std::pair<int, MsgNum> PlayerMsg;
   typedef std::set<PlayerMsg> Msgs;
@@ -44,12 +67,8 @@ bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber)
   }   
   msgs.insert(pm);
 
-  // Show this msg
-  LurkMsg lm(Lookup(text), Colour(1, 1, 1, 1), Colour(0, 0, 0, 1), AMJU_CENTRE); 
-  TheLurker::Instance()->Queue(lm);
-
+  ShowText(text, storyMode);
   return true;
 }
-
 }
 

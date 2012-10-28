@@ -21,9 +21,12 @@ public:
 
   void OnReadOk(); 
 
+  void SetText(const std::string& text);
+
 private:
   bool m_showedOk; // true if player has read current story fragment, and we can go on to the next
   int m_storyLineNum; // index of current story fragment we are displaying
+  std::string m_text;
 };
 typedef Singleton<GSStory> TheGSStory;
 } // namespace

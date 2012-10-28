@@ -37,6 +37,8 @@
 #include "FirstTimeMsg.h"
 #include "Ve1Character.h"
 #include "ROConfig.h"
+#include "GSCogTestMenu.h"
+#include "GameConsts.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -219,12 +221,49 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   return false;
 }
 
+// TODO Move this
+// Do game-specific find and replace in a string:
+// <p> -> player name
+std::string GameLookup(const std::string& text)
+{
+  std::string playerName = GetLocalPlayer()->GetName();
+  return Replace(text, "<p>", playerName);
+}
+
+void OnYesCogTests()
+{
+  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+}
+
+void OnNoCogTests()
+{
+  LurkMsg lm("That's OK, but please do the tests soon!", LURK_FG, LURK_BG, AMJU_CENTRE);
+  TheLurker::Instance()->Queue(lm);
+}
+
 void GSMain::Update()
 {
   GSBase::Update();
 
   // TODO different message depending on game mode.
-  FirstTimeMsg("Welcome to My Game!", MsgNum(1));
+  // This message can be the same each time.
+  if (!FirstTimeMsgThisSession(
+    GameLookup("Hello, <p>! This is your space ship calling you. Do you remember what happened? We crash landed on a planet!"), 
+    MsgNum(1),
+    false))
+  {
+    // Do cog tests if scheduled and not done yet this session (well, process run)
+    static bool cogtestsdone = false;
+    if (!cogtestsdone && DoCogTests())
+    {
+      cogtestsdone = true;
+
+      std::string text = 
+      "I would like to make sure you are OK after the crash. So please allow me to give you some tests. It will only take a few minutes.";
+      TheLurker::Instance()->ShowYesNo(text, LURK_FG, LURK_BG,
+        OnNoCogTests, OnYesCogTests);
+    }
+  }
 
   // TODO IF above msg already shown
 //  FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));

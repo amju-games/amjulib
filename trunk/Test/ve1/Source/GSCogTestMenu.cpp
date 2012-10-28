@@ -248,7 +248,7 @@ std::cout << "Failed to load GUI bg image!\n";
     break;
 
   default:
-    str = "Well done on doing all those tests! Now you can carry on playing the game!";
+    str = "Well done on doing all those tests! Now please explore this planet, and find the missing space ship parts!";
     m_func = Amju::Done;
   }
 

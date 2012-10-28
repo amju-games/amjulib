@@ -34,6 +34,7 @@ TutorialNpc::TutorialNpc()
 
 void TutorialNpc::Update()
 {
+  /*
   Ve1ObjectChar::Update();
 
   m_timer += TheTimer::Instance()->GetDt();
@@ -86,6 +87,7 @@ void TutorialNpc::Update()
       Trigger();
     }
   }
+  */
 }
 
 bool TutorialNpc::Load(File* f)
@@ -118,8 +120,8 @@ void TutorialNpc::OnLocationEntry()
   Ve1ObjectChar::OnLocationEntry();
 
   // Start near player
-  Vec3f pos = GetLocalPlayer()->GetPos();
-  SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
+//  Vec3f pos = GetLocalPlayer()->GetPos();
+//  SetPos(pos + Vec3f(200.0f, 0, -30.0f)); // TODO CONFIG
 
   m_timer = 0;
 
@@ -140,6 +142,7 @@ void OnCogTestMsgFinished()
 
 void TutorialNpc::Trigger()
 {
+  /*
   TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-npc-trigger"));
   m_hasTriggered = true;
 
@@ -173,6 +176,7 @@ void TutorialNpc::Trigger()
   {
     TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
   }
+  */
 }
 
 }
