@@ -1,5 +1,7 @@
 #include <AmjuGL.h>
 #include <StringsFile.h>
+#include <GuiButton.h>
+#include <GuiText.h>
 #include "GSStory.h"
 #include "LocalPlayer.h"
 
@@ -7,9 +9,14 @@ namespace Amju
 {
 static const char* STORY_NUM_KEY = "story_num";
 
+void OnStoryReadOk()
+{
+  TheGSStory::Instance()->OnReadOk();
+}
+
 void OnStoryDone()
 {
-  TheGSStory::Instance()->GoBack(); // ???
+  TheGSStory::Instance()->GoBack(); 
 }
 
 GSStory::GSStory()
@@ -18,16 +25,20 @@ GSStory::GSStory()
   m_storyLineNum = 0;
 }
 
+void GSStory::OnReadOk()
+{
+  m_showedOk = true;
+  GoBack();
+}
+
 void GSStory::Update()
 {
   GSGui::Update();
-
 }
 
 void GSStory::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSStory::Draw2d()
@@ -85,6 +96,16 @@ std::cout << "Can't show story, no player is logged in.\n";
 
   m_showedOk = false; 
   // TODO Set focus element, cancel element, command handlers
+
+  GuiText* text = (GuiText*)GetElementByName(m_gui, "story-text");
+  Assert(text);
+  text->SetText(storyLines[m_storyLineNum]);
+
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "story-ok-button");
+  Assert(ok);
+  // TODO Set couple of seconds after last page of story fragment has been shown.
+  // (TODO multi page - just single page for now.)
+  ok->SetCommand(OnStoryReadOk); 
 }
 
 void GSStory::OnDeactive()
