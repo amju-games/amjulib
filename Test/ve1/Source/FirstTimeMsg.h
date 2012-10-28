@@ -15,18 +15,20 @@ typedef int MsgNum;
 // be data driven. 
 // NB The msg text will be looked up (for a localised version of the string) in this function.
 //
-// Reutn true if message is displayed, else false if already shown previously.
+// Can show message in-game (lurk msg) or switch to "story mode".
+//
+// Return true if message is displayed, else false if already shown previously.
 //
 // TODO Make a message struct with voice over. Multiple page message would be a vector etc.
 // TODO Hash the msg -- no need for msg number..? 
-bool FirstTimeMsg(const std::string& msg, MsgNum msgNumber);
+bool FirstTimeMsg(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
 
 // Necessary ?
 bool HasShownMsg(MsgNum msgNumber);
 
 // Show message the first time it is triggered for the player.
 // But reset the flag each session - i.e. stored locally, not on server. 
-bool FirstTimeMsgThisSession(const std::string& msg, MsgNum msgNumber);
+bool FirstTimeMsgThisSession(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
 }
 
 #endif

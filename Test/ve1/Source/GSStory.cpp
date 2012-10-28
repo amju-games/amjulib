@@ -46,6 +46,11 @@ void GSStory::Draw2d()
   GSGui::Draw2d();
 }
 
+void GSStory::SetText(const std::string& text)
+{
+  m_text = text;
+}
+
 void GSStory::OnActive()
 {
   GSGui::OnActive();
@@ -56,6 +61,7 @@ void GSStory::OnActive()
   m_gui = LoadGui("gui-story.txt");
   Assert(m_gui);
 
+  /*
   // Load story text
   Strings storyLines;
 
@@ -93,13 +99,14 @@ std::cout << "Can't show story, no player is logged in.\n";
     storyNum = p->GetVal(STORY_NUM_KEY);
     m_storyLineNum = ToInt(storyNum);
   }
+  */
 
   m_showedOk = false; 
   // TODO Set focus element, cancel element, command handlers
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "story-text");
   Assert(text);
-  text->SetText(storyLines[m_storyLineNum]);
+  text->SetText(m_text); // not storyLines[m_storyLineNum]);
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "story-ok-button");
   Assert(ok);
@@ -110,6 +117,7 @@ std::cout << "Can't show story, no player is logged in.\n";
 
 void GSStory::OnDeactive()
 {
+  /*
   Player* p = GetLocalPlayer();
   if (p && m_showedOk)
   {
@@ -117,6 +125,7 @@ void GSStory::OnDeactive()
     std::string storyNum = ToString(m_storyLineNum + 1);
     p->SetKeyVal(STORY_NUM_KEY, storyNum);
   }
+  */
 }
 } // namespace
 
