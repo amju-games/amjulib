@@ -10,7 +10,7 @@ story-comp
 
 gui-button
 story-ok-button
--0.4, -1.5
+-0.4, -0.7
 0.8, 0.2
 gui-button-4.png
 ok
@@ -21,9 +21,9 @@ gui-text
 // Element name
 story-text
 // pos (coords are -1..1)
--1.0, 1.8
+-0.8, 0.7
 // size
-2.0, 1.0
+1.6, 1.0
 // Text
 Story fragment goes here
 // Font name, size
