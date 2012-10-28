@@ -1,6 +1,7 @@
 #include <Timer.h>
 #include <EventPoller.h>
 #include <SoundManager.h>
+#include <TextToSpeech.h>
 #include "ROConfig.h"
 #include "LurkMsg.h"
 
@@ -84,12 +85,17 @@ void LurkMsg::Update()
     {
       m_rect->SetLocalPos(m_showPos - 0.5f * Vec2f(EXTRA.x, -EXTRA.y));
       m_text->SetLocalPos(m_showPos);
+
+      m_text->TextToSpeech();
+
       m_state = LURK_SHOWN;
     }
     else if (m_lurkPos == AMJU_CENTRE && m_scale > 1.0f)
     {
       m_scale = 1.0f;
       m_state = LURK_SHOWN;
+
+      m_text->TextToSpeech();
     }
     else 
     {
@@ -395,6 +401,14 @@ void Lurker::Clear()
 {
   m_qmap.clear();
 }
+
+//void Lurker::TextToSpeech(const std::string& text)
+//{
+//  if (!text.empty())
+//  {
+//    Amju::TextToSpeech(text);
+//  }
+//}
 
 }
 
