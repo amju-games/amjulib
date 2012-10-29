@@ -45,7 +45,7 @@ button
 // Image
 red_button.png
 // Text
-click me!
+GO!
 // Font name, size
 arial, 1.5 
 
@@ -60,9 +60,20 @@ done-button
 // Image
 gui-button-4.png
 // Text
-done
+stop test
 // Font name, size
 arial, 1.6
+
+gui-text
+mytext
+// pos (coords are -1..1)
+-1.0, -0.55
+// size
+2.0, 0.2 
+// Text
+If you want to stop doing this test, please click "stop test"
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, multi
 
 
 
