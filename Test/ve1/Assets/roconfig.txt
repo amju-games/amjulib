@@ -24,3 +24,6 @@ ve1obj-max-jump 20.0
 
 // max distance to get context menu for object
 menu-obj-distance 500
+
+// TODO TEMP TEST
+cog-test-nag-time 5 

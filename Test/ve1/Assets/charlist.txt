@@ -2,7 +2,7 @@
 // ver
 1
 // Num chars
-24
+21
 // Names correspond to subdirs in Assets/characters/
 
 GrimDemon
@@ -68,17 +68,18 @@ md3
 lobo
 md3
 
-bird1
-md2blink
-
-pz-cat
-md2blink
-
 lara
 md3
 
-dino1
-md2blink
+
+//bird1
+//md2blink
+
+//pz-cat
+//md2blink
+
+//dino1
+//md2blink
 
 
 
