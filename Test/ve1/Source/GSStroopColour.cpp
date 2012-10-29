@@ -13,14 +13,11 @@
 #include "CogTestResults.h"
 #include "GSMain.h"
 #include "LurkMsg.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
 static const float MAX_TIME = 45.0f; // from Malec et al
-
-// TODO CONFIG
-static const Colour FG_COLOUR(1, 1, 1, 1);
-static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
 
 static void OnDoneButton()
 {
@@ -140,7 +137,7 @@ void GSStroopColour::Finished()
       // TODO offer another practice go
       str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
       TheLurker::Instance()->Queue(lm);
     }
     else
@@ -150,7 +147,7 @@ void GSStroopColour::Finished()
       str = "OK, you got " + ToString(m_correct) +
         " correct! Let's try it for real!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
       TheLurker::Instance()->Queue(lm);
     }
 
@@ -168,7 +165,7 @@ void GSStroopColour::Finished()
       str = "Well done! You got " + ToString(m_correct) + " correct!";
       TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
     }
-    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR, "correct", ToString(m_correct)));
@@ -176,8 +173,7 @@ void GSStroopColour::Finished()
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
-    // Go back to Main, to collect rewards, then go back (NPC controls this)
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
   }
 }
 

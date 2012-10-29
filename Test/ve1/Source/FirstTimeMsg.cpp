@@ -27,6 +27,21 @@ static void ShowText(const std::string& text, bool storyMode)
   }
 }
 
+bool HasShownMsg(MsgNum msgNumber)
+{
+  Player* p = GetLocalPlayer();
+  std::string key = "shown_msg_" + ToString(msgNumber);
+  return (p->Exists(key));
+}
+
+void SetShownMsg(MsgNum msgNumber)
+{
+  Player* p = GetLocalPlayer();
+  std::string key = "shown_msg_" + ToString(msgNumber);
+  TheObjectUpdater::Instance()->SendUpdateReq(p->GetId(), key, "y");
+  p->SetKeyVal(key, "y");
+}
+
 bool FirstTimeMsg(const std::string& text, MsgNum msgNumber, bool storyMode)
 {
   Player* p = GetLocalPlayer();
@@ -37,17 +52,14 @@ bool FirstTimeMsg(const std::string& text, MsgNum msgNumber, bool storyMode)
     return false;
   }
 
-  std::string key = "shown_msg_" + ToString(msgNumber);
-  if (p->Exists(key))
+  if (HasShownMsg(msgNumber))
   {
     // Already shown this msg
     return false;
   } 
 
   // Set shown flag
-  TheObjectUpdater::Instance()->SendUpdateReq(p->GetId(), key, "y");
-  p->SetKeyVal(key, "y");
-  // TODO set shown flag when msg closed ?
+  SetShownMsg(msgNumber);   // TODO set shown flag when msg closed ?
 
   ShowText(text, storyMode);
   return true;

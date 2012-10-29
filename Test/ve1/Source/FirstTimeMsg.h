@@ -23,12 +23,14 @@ typedef int MsgNum;
 // TODO Hash the msg -- no need for msg number..? 
 bool FirstTimeMsg(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
 
-// Necessary ?
-bool HasShownMsg(MsgNum msgNumber);
-
 // Show message the first time it is triggered for the player.
 // But reset the flag each session - i.e. stored locally, not on server. 
 bool FirstTimeMsgThisSession(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
+
+// Set/Get Server, not in-memory flag
+bool HasShownMsg(MsgNum msgNumber);
+
+void SetShownMsg(MsgNum msgNumber);
 }
 
 #endif

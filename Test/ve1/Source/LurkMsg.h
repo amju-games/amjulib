@@ -89,6 +89,8 @@ public:
 
   void TextToSpeech(const std::string& text);
 
+  bool IsDisplayingMsg() const;
+
 private:
   typedef std::queue<LurkMsg> LurkMsgQ; // queue of msgs or one Lurk pos
   typedef std::map<LurkPos, LurkMsgQ> QMap; 
