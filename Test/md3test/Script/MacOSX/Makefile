@@ -13,8 +13,6 @@ RUNDIR 		:=	../../Assets
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
-	-framework SDL \
-	-framework SDL_image \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
