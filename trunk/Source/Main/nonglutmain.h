@@ -96,14 +96,14 @@ int main(int argc, char **argv)
 #endif // AMJU_CONSOLE
 #endif // IPHONE
 
+std::cout << "Just before startup...\n";
+  StartUp();
+
   Amju::AmjuGL::CreateWindow(&w);  // Before Init() for all impls
 
   Amju::AmjuGL::Init();
 
   //Amju::AmjuGL::SetScreenRotation(10.0f);
-
-std::cout << "Just before startup...\n";
-  StartUp();
 
 std::cout << "Just before run...\n";
   TheGame::Instance()->Run();

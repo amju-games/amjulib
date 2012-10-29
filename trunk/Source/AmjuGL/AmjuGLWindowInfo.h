@@ -13,6 +13,8 @@ public:
   int GetHeight() const;
   bool IsFullScreen() const;
   const char* GetTitle() const;
+  void SetWidth(int w);
+  void SetHeight(int h);
 
 private:
   int m_width;

@@ -26,4 +26,15 @@ bool AmjuGLWindowInfo::IsFullScreen() const
 {
   return m_isFullScreen;
 }
+
+void AmjuGLWindowInfo::SetWidth(int w)
+{
+  m_width = w;
+}
+
+void AmjuGLWindowInfo::SetHeight(int h)
+{
+  m_height = h;
+}
+
 }
