@@ -15,6 +15,7 @@
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
 #include "QuitHandler.h"
+#include "ResizeHandler.h"
 #include "JoystickToCursor.h" 
 
 namespace Amju
@@ -34,8 +35,22 @@ void StartUp()
   GuiElement::SetTextToSpeechEnabled(false);
 
   LoadConfig();
+  ConfigFile* cf = TheGameConfigFile::Instance();
+  static const char* SCREEN_X = "screen-x";
+  static const char* SCREEN_Y = "screen-y";
+
+  if (cf->Exists(SCREEN_X))
+  {
+    w.SetWidth(cf->GetInt(SCREEN_X));
+  }
+  if (cf->Exists(SCREEN_Y))
+  {
+    w.SetHeight(cf->GetInt(SCREEN_Y));
+  }
+
 
   TheEventPoller::Instance()->AddListener(new QuitHandler);
+  TheEventPoller::Instance()->AddListener(new ResizeHandler);
   // TODO TEMP TEST
   TheEventPoller::Instance()->AddListener(TheJoystickToCursor(), -999);
 
