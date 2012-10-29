@@ -18,12 +18,10 @@
 #include "LurkMsg.h"
 #include "GameMode.h"
 #include "ROConfig.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
-static const Colour FG_COLOUR(1, 1, 1, 1);
-static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
-
 static void OnCancelButton()
 {
   // If we cancel, the session will not be complete so we should have to do the cog tests
@@ -195,7 +193,7 @@ std::cout << "Failed to load GUI bg image!\n";
   switch (m_nextTest)
   {
   case 0:
-    str = "This is a reaction time game. What you have to do is press the big red button as soon as the alarm goes off!";
+    str = "OK, thanks! This first one is a reaction time test. Please press the big red button as soon as the alarm goes off!";
     m_func = Amju::ReactionTime;
     break;
 
@@ -207,7 +205,7 @@ std::cout << "Failed to load GUI bg image!\n";
   case 2:
     {
     str = "This time, click on all the sigma letters that you see. They look like this..."; 
-    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
     GuiText* text = new GuiText;
@@ -216,8 +214,8 @@ std::cout << "Failed to load GUI bg image!\n";
     text->SetSize(Vec2f(1.6f, 0.5f)); 
     text->SetText("S");
     text->SizeToText();
-    text->SetFgCol(FG_COLOUR);
-    lm.Set(text, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    text->SetFgCol(LURK_FG);
+    lm.Set(text, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
     str = "It's the same rules as before, but this time find the sigma letters!";
@@ -239,7 +237,7 @@ std::cout << "Failed to load GUI bg image!\n";
   case 5:
     {
       str = "This is the last one. It's called the Stroop Colour Word test.";
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
       TheLurker::Instance()->Queue(lm);
     }
     str = "I will show you a word like before. But this time, the words are coloured. "
@@ -252,14 +250,14 @@ std::cout << "Failed to load GUI bg image!\n";
     m_func = Amju::Done;
   }
 
-  LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, Amju::AskPractice);
+  LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::AskPractice);
   TheLurker::Instance()->Queue(lm);
 }
 
 void GSCogTestMenu::AskPractice()
 {
   std::string q("Would you like to have a practice go first ?");
-  TheLurker::Instance()->ShowYesNo(q, FG_COLOUR, BG_COLOUR, Amju::NoPrac, Amju::YesPrac);
+  TheLurker::Instance()->ShowYesNo(q, LURK_FG, LURK_BG, Amju::NoPrac, Amju::YesPrac);
 }
 
 void GSCogTestMenu::SetIsPrac(bool b)

@@ -15,16 +15,13 @@
 #include "CogTestResults.h"
 #include "LurkMsg.h"
 #include "GSMain.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
 static const int MAX_LETTERS = 6 * 52; // size of grid, from Malec et al
 //static const int NUM_M = 32; // from Malec et al, number of letters in grid to find
 static const float MAX_TIME = 180.0f; // 3 mins, from Malec et al
-
-// TODO CONFIG
-static const Colour FG_COLOUR(1, 1, 1, 1);
-static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
 
 static void OnDoneButton()
 {
@@ -52,7 +49,7 @@ void GSLetterCancellation1::FinishedTest()
       // TODO offer another practice go
       str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, StartLC);
       TheLurker::Instance()->Queue(lm);
     }
     else
@@ -62,7 +59,7 @@ void GSLetterCancellation1::FinishedTest()
       str = "OK, you got " + ToString(m_correct) +
         " correct! Let's try it for real! You have 3 minutes!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, StartLC);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, StartLC);
       TheLurker::Instance()->Queue(lm);
     }
   }
@@ -79,7 +76,7 @@ void GSLetterCancellation1::FinishedTest()
       str = "Well done, you finished! You got " + ToString(m_correct) + " correct!";
       TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
     }
-    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
@@ -88,8 +85,7 @@ void GSLetterCancellation1::FinishedTest()
   
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
-    // Go back to Main, to collect rewards, then go back (NPC controls this)
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
   }
 }
 
@@ -189,7 +185,7 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         {
           if (isPrac && m_correct == 0)
           {
-            LurkMsg lm("Yes, that's correct!", FG_COLOUR, BG_COLOUR, AMJU_TOP);
+            LurkMsg lm("Yes, that's correct!", LURK_FG, LURK_BG, AMJU_TOP);
             TheLurker::Instance()->Queue(lm);
           }
 
@@ -206,7 +202,7 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
           if (isPrac && m_incorrect == 0)
           {
             LurkMsg lm("Whoops, that one is not correct!", 
-              FG_COLOUR, BG_COLOUR, AMJU_TOP);
+              LURK_FG, LURK_BG, AMJU_TOP);
             TheLurker::Instance()->Queue(lm);
           }
 

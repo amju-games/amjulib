@@ -8,6 +8,7 @@
 #include <iostream>
 #include <Game.h>
 #include <GuiText.h>
+#include <Timer.h>
 #include "Ve1Req.h"
 #include "Terrain.h"
 #include "Ve1SceneGraph.h"
@@ -39,6 +40,7 @@
 #include "ROConfig.h"
 #include "GSCogTestMenu.h"
 #include "GameConsts.h"
+#include "CogTestNag.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -230,40 +232,20 @@ std::string GameLookup(const std::string& text)
   return Replace(text, "<p>", playerName);
 }
 
-void OnYesCogTests()
-{
-  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
-}
-
-void OnNoCogTests()
-{
-  LurkMsg lm("That's OK, but please do the tests soon!", LURK_FG, LURK_BG, AMJU_CENTRE);
-  TheLurker::Instance()->Queue(lm);
-}
-
 void GSMain::Update()
 {
   GSBase::Update();
 
   // TODO different message depending on game mode.
   // This message can be the same each time.
-  if (!FirstTimeMsgThisSession(
-    GameLookup("Hello, <p>! This is your space ship calling you. Do you remember what happened? We crash landed on a planet!"), 
+  FirstTimeMsgThisSession(
+    GameLookup("Hello, <p>! This is ELLA, your space ship computer calling you. Do you remember what happened? We crash landed on a planet!"), 
     MsgNum(1),
-    false))
-  {
-    // Do cog tests if scheduled and not done yet this session (well, process run)
-    static bool cogtestsdone = false;
-    if (!cogtestsdone && DoCogTests())
-    {
-      cogtestsdone = true;
+    false);
 
-      std::string text = 
-      "I would like to make sure you are OK after the crash. So please allow me to give you some tests. It will only take a few minutes.";
-      TheLurker::Instance()->ShowYesNo(text, LURK_FG, LURK_BG,
-        OnNoCogTests, OnYesCogTests);
-    }
-  }
+  FirstTimeMsg("To walk around, click on the ground where you want to go. Try it!", MsgNum(2), false);
+
+  TheCogTestNag::Instance()->Update();
 
   // TODO IF above msg already shown
 //  FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));

@@ -402,6 +402,20 @@ void Lurker::Clear()
   m_qmap.clear();
 }
 
+bool Lurker::IsDisplayingMsg() const
+{
+  for (QMap::const_iterator it = m_qmap.begin(); it != m_qmap.end(); ++it)
+  {
+    const LurkMsgQ& q = it->second;
+    if (!q.empty())
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 //void Lurker::TextToSpeech(const std::string& text)
 //{
 //  if (!text.empty())

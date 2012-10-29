@@ -13,14 +13,13 @@
 #include "CogTestResults.h"
 #include "GSMain.h"
 #include "LurkMsg.h"
+#include "GameConsts.h"
+#include "GameMode.h"
+#include "GSCogResults.h"
 
 namespace Amju
 {
 static const float MAX_TIME = 45.0f; // from Malec et al
-
-// TODO CONFIG
-static const Colour FG_COLOUR(1, 1, 1, 1);
-static const Colour BG_COLOUR(0.5f, 0, 0.5f, 0.5f);
 
 static void OnDoneButton()
 {
@@ -114,6 +113,15 @@ void GSStroopColourWord::OnLeftRight(bool isLeftButton)
   SetTest();
 }
 
+void OnSeeResultsNo()
+{
+}
+
+void OnSeeResultsYes()
+{
+  TheGame::Instance()->SetCurrentState(TheGSCogResults::Instance());
+}
+
 void GSStroopColourWord::Finished()
 {
   m_isFinished = true;
@@ -139,7 +147,7 @@ void GSStroopColourWord::Finished()
       // TODO offer another practice go
       str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
       TheLurker::Instance()->Queue(lm);
     }
     else
@@ -149,7 +157,7 @@ void GSStroopColourWord::Finished()
       str = "OK, you got " + ToString(m_correct) +
         " correct! Let's try it for real!";
 
-      LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE, OnReset);
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
       TheLurker::Instance()->Queue(lm);
     }
 
@@ -167,7 +175,7 @@ void GSStroopColourWord::Finished()
       str = "Well done! You got " + ToString(m_correct) + " correct!";
       TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
     }
-    LurkMsg lm(str, FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
     TheCogTestResults::Instance()->StoreResult(new Result(AMJU_COG_TEST_STROOP_COLOUR_WORD, "correct", ToString(m_correct)));
@@ -176,9 +184,14 @@ void GSStroopColourWord::Finished()
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
     // This is the last test. Show final msg.
-    LurkMsg lm2("That's the end. Thanks for doing my quiz!", 
-      FG_COLOUR, BG_COLOUR, AMJU_CENTRE);
-    TheLurker::Instance()->Queue(lm2);
+    // TODO Show results
+    //LurkMsg lm2("That's the end. Thank you for doing my tests! Would you like to look at your results?", 
+    //  LURK_FG, LURK_BG, AMJU_CENTRE);
+    TheLurker::Instance()->ShowYesNo(
+      "That's the end. Thank you for doing my tests! Would you like to look at your results?", 
+      LURK_FG, LURK_BG, OnSeeResultsNo, OnSeeResultsYes);
+    
+    SetDoCogTests(false); // TODO Or SetCogTestsDone()
 
     TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
