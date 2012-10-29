@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-static const char* STORY_NUM_KEY = "story_num";
+//static const char* STORY_NUM_KEY = "story_num";
 
 void OnStoryReadOk()
 {

@@ -22,6 +22,7 @@
 
 namespace Amju
 {
+/*
 static void OnCancelButton()
 {
   // If we cancel, the session will not be complete so we should have to do the cog tests
@@ -31,6 +32,7 @@ static void OnCancelButton()
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   TheGSCogTestMenu::Instance()->ResetTests();
 }
+*/
 
 static void NoPrac()
 {

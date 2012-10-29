@@ -382,10 +382,12 @@ void GSMain::SetViewWidth(float w)
   m_viewportWidth = w;
 }
 
+#ifdef USE_SHADOW_MAP
 static void ShadowDraw()
 {
   GetVe1SceneGraph()->Draw();
 }
+#endif
 
 void GSMain::Draw()
 {
