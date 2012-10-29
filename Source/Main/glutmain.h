@@ -335,12 +335,12 @@ int main(int argc, char **argv)
 
   AmjuGL::SetImpl(new AmjuGLOpenGL(CreateWindowGLUT));
 
+  // This game-specific function must be defined for each project
+  StartUp();
+
   // Defined in game-specific code
   Amju::AmjuGL::CreateWindow(&w);
   Amju::AmjuGL::Init();
-
-  // This game-specific function must be defined for each project
-  StartUp();
 
   // Can't do this, glutMainLoop is in charge
   //TheGame::Instance()->Run();
