@@ -1,10 +1,15 @@
 #include "GSGui.h"
 #include <AmjuGL.h>
+
+#define GLEW_STATIC
+#include <OpenGL.h> // naughty, using OpenGL directly here to scroll texture
+
 #include <CursorManager.h>
 #include <Timer.h>
 #include <EventPoller.h>
 #include "LurkMsg.h"
 #include "Ve1SceneGraph.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -31,17 +36,23 @@ void GSGui::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
-  AmjuGL::PushMatrix();
+  glMatrixMode(GL_TEXTURE); // naughty!
+  glPushMatrix();
   static float f = 0;
-  AmjuGL::RotateZ(f);
-  f += 30.0f * TheTimer::Instance()->GetDt();
+  //AmjuGL::RotateZ(f);
+
+  AmjuGL::Translate(-f, 0, 0);
+
+  static float SPEED = 0.05f; // Too soon for ROConfig()->GetFloat("scope-speed");
+  f += SPEED * TheTimer::Instance()->GetDt();
   m_bgImage.Draw();  
-  AmjuGL::PopMatrix();
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
 
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
-  TextDraw::Draw();
+  //TextDraw::Draw();
 }
 
 void GSGui::Draw2d()

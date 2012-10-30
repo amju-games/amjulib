@@ -18,6 +18,8 @@ public:
   virtual void OnActive();
   virtual void OnDeactive();
 
+private:
+  GuiImage m_titleImage;
 };
 typedef Singleton<GSTitle> TheGSTitle;
 } // namespace

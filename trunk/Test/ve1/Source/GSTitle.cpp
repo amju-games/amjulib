@@ -19,6 +19,7 @@
 #include "LurkMsg.h" // so we can display msgs in title screen
 #include "ROConfig.h"
 #include "Kb.h"
+#include "Ve1SceneGraph.h"
 
 #define SHOW_ENV_INFO
 #define SHOW_FRAME_TIME
@@ -78,7 +79,20 @@ void GSTitle::Update()
 
 void GSTitle::Draw()
 {
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+
+  m_titleImage.Draw();  
+
+  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+  PushColour();
+  AmjuGL::SetColour(Colour(1, 1, 1, 0.25f));
   GSGui::Draw();
+  PopColour();
+
+  AmjuGL::PopAttrib();
 }
 
 void GSTitle::Draw2d()
@@ -131,6 +145,12 @@ void GSTitle::OnActive()
 #endif
 
   GSGui::OnActive();
+
+  if (!m_titleImage.OpenAndLoad("title-bgimage.txt"))
+  {
+std::cout << "Failed to load GUI title bg image!\n";
+    Assert(0);
+  }
 
   m_gui = LoadGui("gui-title.txt");
   Assert(m_gui);

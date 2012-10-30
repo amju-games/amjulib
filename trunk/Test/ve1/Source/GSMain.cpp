@@ -241,6 +241,10 @@ void GSMain::Update()
   // TODO IF above msg already shown
 //  FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));
 
+  // Disable pause button if Lurk msg showing
+  GuiButton* pauseButton = (GuiButton*)m_gui->GetElementByName("pause-button");
+  pauseButton->SetIsEnabled(!TheLurker::Instance()->IsDisplayingMsg());
+
   GetVe1SceneGraph()->Update();
 
   // Make periodic checks for newly created objects
@@ -382,6 +386,8 @@ static void ShadowDraw()
 
 void GSMain::Draw()
 {
+//  AmjuGL::ReportState(std::cout);
+
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   int width = (int)((float)Screen::X()  * m_viewportWidth);
@@ -550,8 +556,19 @@ bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   return TheGSMain::Instance()->OnMouseButtonEvent(mbe);
 }
 
-bool GSMainListener::OnKeyEvent(const KeyEvent& ke)
+bool GSMainListener::OnKeyEvent(const KeyEvent& kb)
 {
+#ifdef _DEBUG
+  // Debug: show AABBs for SceneNodes
+  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'b' && kb.keyDown)
+  {
+    static bool show = false;
+    show = !show;
+    SceneNode::SetGlobalShowAABB(show);
+    return false;
+  }
+#endif
+
   return false;
 }
 
