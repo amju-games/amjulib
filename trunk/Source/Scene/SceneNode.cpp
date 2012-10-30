@@ -47,7 +47,7 @@ SceneNode::SceneNode()
   SetVisible(true);
   SetIsCamera(false);
   SetCollidable(true);
-  SetIsLit(true);
+  SetIsLit(false);
 }
 
 void SceneNode::SetColour(const Colour& colour)
