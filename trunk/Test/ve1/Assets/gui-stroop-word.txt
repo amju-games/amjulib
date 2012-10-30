@@ -86,7 +86,7 @@ done-button
 // Image
 gui-button-4.png
 // Text
-done
+stop test
 // Font name, size
 arial, 1.6 
 

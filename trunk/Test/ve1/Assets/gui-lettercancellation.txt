@@ -39,29 +39,29 @@ gui-button
 // Element name
 done-button
 // pos (coords are -1..1)
--0.4, -0.7
+-0.4, -0.6
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-done!
+stop practicing
 // Font name, size
-arial, 2.0 
+arial, 1.6, sx=0.6 
 
 gui-button
 // Element name
 cancel-button
 // pos (coords are -1..1)
-0.1, -1.8
+-0.4, -0.6
 // size
-0.4, 0.1
+0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-quit
+stop test
 // Font name, size
-arial, 1.0 
+arial, 2.0 
 
 
 
