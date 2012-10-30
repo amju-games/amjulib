@@ -9,13 +9,10 @@
 
 namespace Amju
 {
-static const float CAM_Y = 100.0f;
-static const float CAM_Z = 150.0f;
-static float zDist = CAM_Z;
+static float zDist = 0;
 static float yRot = 0; // rotation so we can see in doorways, etc.
 static float yRot2 = 0; // user drag mouse - intended for edit mode, maybe also game mode
-static const float XROT_START = DegToRad(45.0f); // TODO default is to look down at target at this angle
-static float xRot = XROT_START;
+static float xRot = 0;
 
 static bool leftDrag = false;
 static bool rightDrag = false;
@@ -35,6 +32,8 @@ Camera::Camera() : m_target(0)
 void Camera::Reset()
 {
   // TODO Load settings, make configurable from server
+  static const float CAM_Z = ROConfig()->GetFloat("cam-z");
+  static const float XROT_START = DegToRad(ROConfig()->GetFloat("cam-xrot")); 
   
   zDist = CAM_Z;
   xRot = XROT_START;
@@ -127,16 +126,6 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
     return false;
   }
 
-#ifdef _DEBUG
-  // Debug: show AABBs for SceneNodes
-  if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'b' && kb.keyDown)
-  {
-    static bool show = false;
-    show = !show;
-    SceneNode::SetGlobalShowAABB(show);
-    return false;
-  }
-#endif
   return false;
 }
 
