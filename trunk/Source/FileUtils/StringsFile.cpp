@@ -4,8 +4,8 @@ namespace Amju
 {
 bool LoadStrings(const std::string& filename, Strings* result)
 {
-  File f;
-  if (!f.OpenRead(filename, File::NO_VERSION))
+  File f(File::NO_VERSION);
+  if (!f.OpenRead(filename))
   {
     return false;
   }
