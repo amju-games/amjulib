@@ -3,7 +3,10 @@
 1
 
 // Change this for testing, should be 0
-cogtest-first-test 0
+cogtest-first-test 1
+
+// Sound
+max-vol  0.1
 
 npc-max-follow-dist 200.0
 npc-trigger-delay 10.0
