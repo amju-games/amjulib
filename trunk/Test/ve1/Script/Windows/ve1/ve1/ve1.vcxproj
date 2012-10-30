@@ -173,6 +173,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Building.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CogTestNag.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestNpc.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\Collect.cpp" />
@@ -191,12 +192,14 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\FirstTimeMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GameLookup.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCogResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSDeath.cpp" />
@@ -204,7 +207,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
-    <ClCompile Include="..\..\..\..\Source\GSLetterCancellation1.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLetterCancellation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
@@ -254,6 +257,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ResizeHandler.cpp" />
     <ClCompile Include="..\..\..\..\Source\ROConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
@@ -289,6 +293,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Building.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
+    <ClInclude Include="..\..\..\..\Source\CogTestNag.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestNpc.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
     <ClInclude Include="..\..\..\..\Source\Collect.h" />
@@ -302,12 +307,14 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\FirstTimeMsg.h" />
     <ClInclude Include="..\..\..\..\Source\Furniture.h" />
     <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
+    <ClInclude Include="..\..\..\..\Source\GameLookup.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
     <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCogResults.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
     <ClInclude Include="..\..\..\..\Source\GSDeath.h" />
@@ -315,7 +322,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
-    <ClInclude Include="..\..\..\..\Source\GSLetterCancellation1.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLetterCancellation.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
@@ -343,6 +350,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
+    <ClInclude Include="..\..\..\..\Source\LogInTime.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
     <ClInclude Include="..\..\..\..\Source\LurkMsg.h" />
     <ClInclude Include="..\..\..\..\Source\Md3Node.h" />
@@ -366,6 +374,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
+    <ClInclude Include="..\..\..\..\Source\ResizeHandler.h" />
     <ClInclude Include="..\..\..\..\Source\ROConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
