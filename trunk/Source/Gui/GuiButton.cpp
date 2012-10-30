@@ -263,8 +263,11 @@ bool GuiButton::OnKeyEvent(const KeyEvent& ke)
       (IsCancelButton() && ke.keyType == AMJU_KEY_ESC))
   {
     m_isPressed = ke.keyDown;
-    ClickSound();
-    if (!ke.keyDown)
+    if (ke.keyDown)
+    {
+      ClickSound();
+    }
+    else
     {
       ExecuteCommand();
     }
@@ -301,7 +304,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (IsMouseOver() && m_isPressed) // Only execute if we are on button when we release
       {
         // Execute command for this button
-        ClickSound();
+        //ClickSound();
         ExecuteCommand();
         //m_isMouseOver = false; // once clicked, revert to unselected.. OK?? No, is very annoying
         m_isPressed = false; // mouse is released whether command executed or not
@@ -325,13 +328,13 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
   {
     if (be.isDown)
     {
+      ClickSound();
       m_isPressed = HasFocus(); 
       return m_isPressed;
     }
     else if (HasFocus())
     {
       // Execute command for this button
-      ClickSound();
       ExecuteCommand();
       m_isPressed = false;
       return true; // handled
