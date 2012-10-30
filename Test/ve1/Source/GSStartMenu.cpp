@@ -87,7 +87,9 @@ void GSStartMenu::OnActive()
   // TODO remember last choice and keep highlighted
   start->SetHasFocus(true); 
 
+#ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong("Sound/piano.it");
+#endif
 }
 
 } // namespace

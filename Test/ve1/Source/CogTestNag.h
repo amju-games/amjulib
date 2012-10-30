@@ -16,6 +16,10 @@ public:
   void Update(); 
 };
 
+void OnCogTestStopPartWayThrough();
+
+void NagReset();
+
 typedef Singleton<CogTestNag> TheCogTestNag;
 }
 

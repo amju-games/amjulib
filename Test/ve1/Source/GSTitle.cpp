@@ -179,13 +179,16 @@ void GSTitle::OnActive()
 
   CreateText("my game");
 
-  // TODO CONFIG
+#ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-title", "Sound/hammers.it"));
+#endif
 }
 
 void GSTitle::OnDeactive()
 {
+#ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-menu", "Sound/piano.it"));
+#endif
 
   GSGui::OnDeactive();
   CreateText("");

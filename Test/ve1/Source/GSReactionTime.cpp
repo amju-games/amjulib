@@ -14,6 +14,7 @@
 #include "GSMain.h"
 #include "ROConfig.h"
 #include "GameConsts.h"
+#include "CogTestNag.h"
 
 namespace Amju
 {
@@ -104,10 +105,12 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
 void GSReactionTime::Quit()
 {
   // TODO Play a sound
+  OnCogTestStopPartWayThrough();
 
-  TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+  // Don't advance, not done this one yet.
+  //TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
-  // Go back to Main, to collect rewards, then go back (NPC controls this)
+  // Go back to Main, will nag again later.
   TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 

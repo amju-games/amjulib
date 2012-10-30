@@ -223,15 +223,6 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   return false;
 }
 
-// TODO Move this
-// Do game-specific find and replace in a string:
-// <p> -> player name
-std::string GameLookup(const std::string& text)
-{
-  std::string playerName = GetLocalPlayer()->GetName();
-  return Replace(text, "<p>", playerName);
-}
-
 void GSMain::Update()
 {
   GSBase::Update();
@@ -239,7 +230,7 @@ void GSMain::Update()
   // TODO different message depending on game mode.
   // This message can be the same each time.
   FirstTimeMsgThisSession(
-    GameLookup("Hello, <p>! This is ELLA, your space ship computer calling you. Do you remember what happened? We crash landed on a planet!"), 
+    "Hello, <p>! This is ELLA, your space ship computer calling you. Do you remember what happened? We crash landed on a planet!", 
     MsgNum(1),
     false);
 
@@ -502,8 +493,10 @@ void GSMain::OnDeactive()
 
 void GSMain::OnActive()
 {
+#ifdef PLAY_MUSIC
   // TODO This should be per-location and also depend on time of day!
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
+#endif
 
   GSBase::OnActive();
 
