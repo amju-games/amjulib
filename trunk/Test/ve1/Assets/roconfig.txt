@@ -5,16 +5,13 @@
 // Change this for testing, should be 0
 cogtest-first-test 1
 
+// scrolling texture effect in GUI states
+scope-speed  0.05
+
 // Sound
 max-vol  0.1
-
-npc-max-follow-dist 200.0
-npc-trigger-delay 10.0
-npc-max-follow-dist  75.0
-
 music-title Sound/hammers.it
 music-menu Sound/piano.it
-
 sound-got-collect Sound/cashreg.wav
 sound-npc-trigger Sound/whistlehere.wav
 sound-new-lurkmsg Sound/pop.wav
@@ -28,5 +25,20 @@ ve1obj-max-jump 20.0
 // max distance to get context menu for object
 menu-obj-distance 500
 
-// TODO TEMP TEST
-cog-test-nag-time 5 
+// Time period between cog test nags
+cog-test-nag-time 120
+
+// NPCs - no longer used ?
+npc-max-follow-dist 200.0
+npc-trigger-delay 10.0
+npc-max-follow-dist  75.0
+
+
+// Camera
+cam-z           300
+cam-xrot        20
+
+// Portals
+portal-max-dist  400
+
+
