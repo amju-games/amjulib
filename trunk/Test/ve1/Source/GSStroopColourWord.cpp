@@ -16,10 +16,19 @@
 #include "GameConsts.h"
 #include "GameMode.h"
 #include "GSCogResults.h"
+#include "CogTestNag.h"
 
 namespace Amju
 {
 static const float MAX_TIME = 45.0f; // from Malec et al
+
+static void OnStopTest()
+{
+  OnCogTestStopPartWayThrough();
+
+  // Go back to Main, will nag again later.
+  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+}
 
 static void OnDoneButton()
 {
@@ -223,7 +232,7 @@ void GSStroopColourWord::ResetTest()
   word->SetVisible(true);
 
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnDoneButton);
+  done->SetCommand(Amju::OnStopTest);
   done->SetVisible(true);
 
   m_timer = m_maxTime;

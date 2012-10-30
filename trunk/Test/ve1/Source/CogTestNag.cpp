@@ -11,17 +11,49 @@ namespace Amju
 {
 static float cogtesttime = 0;
 static bool nagdone = false;
+static int declines = 0;
+static int stops = 0;
+
+void NagReset()
+{
+  cogtesttime = 0;
+  nagdone = false;
+  declines = 0;
+  stops = 0;
+}
 
 void OnYesCogTests()
 {
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
-void OnNoCogTests()
+void OnDeclineCogTests()
 {
   // TODO Log number of declines for research
+  declines++;
 
-  LurkMsg lm("OK, but please do the tests soon! I will ask you again in a few minutes.", LURK_FG, LURK_BG, AMJU_CENTRE);
+  std::string text;
+  if (stops == 0)
+  {
+    text = "OK, but please do the tests soon! I will ask you again in a few minutes.";
+  }
+  else
+  {
+    text = "OK, but please continue with the tests soon! I will ask you again in a few minutes.";
+  }
+  LurkMsg lm(text, LURK_FG, LURK_BG, AMJU_CENTRE);
+
+  TheLurker::Instance()->Queue(lm);
+  nagdone = false;
+  cogtesttime = 0;
+}
+
+void OnCogTestStopPartWayThrough()
+{
+  // TODO Log number of declines for research
+  stops++;
+
+  LurkMsg lm("OK, but please finish taking the tests soon! I will ask you again in a few minutes.", LURK_FG, LURK_BG, AMJU_CENTRE);
   TheLurker::Instance()->Queue(lm);
   nagdone = false;
   cogtesttime = 0;
@@ -52,10 +84,20 @@ void CogTestNag::Update()
   if (!nagdone && cogtesttime > COG_TEST_NAG_TIME && DoCogTests())
   {
     nagdone = true;
-    std::string text = 
-      "I would like to make sure you are OK after the crash. So please allow me to give you some tests. Is that OK ?"; 
+    std::string text;
+    
+    if (stops == 0)
+    {
+      text = "I would like to make sure you are OK after the crash. So please allow me to give you some tests. Is that OK?"; 
+    }
+    else
+    {
+      // Has already stopped tests before
+      text = "I would like to make sure you are OK. So please continue to take my tests. Can you do it now?"; 
+    }
+
     TheLurker::Instance()->ShowYesNo(text, LURK_FG, LURK_BG,
-      OnNoCogTests, OnYesCogTests);
+      OnDeclineCogTests, OnYesCogTests);
   }
 }
 

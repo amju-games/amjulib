@@ -17,6 +17,7 @@
 #include "QuitHandler.h"
 #include "ResizeHandler.h"
 #include "JoystickToCursor.h" 
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -30,11 +31,18 @@ Amju::AmjuGLWindowInfo w(640, 480, false, "My Game!");
 
 void StartUp()
 {
-  TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
+  LoadConfig();
+
+  SoundManager* sm = TheSoundManager::Instance();
+  sm->SetImpl(new BassSoundPlayer);
+  // Sound can drown out text-to-speech, so max vol is lower than 1.0
+  float maxVol = ROConfig()->GetFloat("max-vol");
+  sm->SetSongMaxVolume(maxVol);
+  sm->SetWavMaxVolume(maxVol);
 
   GuiElement::SetTextToSpeechEnabled(false);
 
-  LoadConfig();
+  // Set screen size if saved last time
   ConfigFile* cf = TheGameConfigFile::Instance();
   static const char* SCREEN_X = "screen-x";
   static const char* SCREEN_Y = "screen-y";
@@ -48,10 +56,10 @@ void StartUp()
     w.SetHeight(cf->GetInt(SCREEN_Y));
   }
 
-
   TheEventPoller::Instance()->AddListener(new QuitHandler);
   TheEventPoller::Instance()->AddListener(new ResizeHandler);
-  // TODO TEMP TEST
+
+  // Joystick can be used to control mouse cursor
   TheEventPoller::Instance()->AddListener(TheJoystickToCursor(), -999);
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);

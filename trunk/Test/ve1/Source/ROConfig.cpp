@@ -1,3 +1,4 @@
+#include <AmjuAssert.h>
 #include "ROConfig.h"
 
 namespace Amju
@@ -15,7 +16,10 @@ ConfigFile* ROConfig()
   if (!cf)
   {
     cf = new ConfigFile;
-	  cf->Load(RO_CONFIG_FILENAME);
+	  if (!cf->Load(RO_CONFIG_FILENAME))
+    {
+      Assert(0);
+    }
 
     // Duh, it's read only
 	  //atexit(SaveROConfig);

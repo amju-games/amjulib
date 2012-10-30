@@ -8,6 +8,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "GSStory.h"
 #include "GameConsts.h"
+#include "GameLookup.h"
 
 namespace Amju
 {
@@ -15,14 +16,14 @@ static void ShowText(const std::string& text, bool storyMode)
 {
   if (storyMode)
   {
-    TheGSStory::Instance()->SetText(text);
+    TheGSStory::Instance()->SetText(GameLookup(text));
     TheGSStory::Instance()->SetPrevState(TheGame::Instance()->GetState());
     TheGame::Instance()->SetCurrentState(TheGSStory::Instance());
   }
   else
   {
     // Show this msg
-    LurkMsg lm(Lookup(text), LURK_FG, LURK_BG, AMJU_CENTRE); 
+    LurkMsg lm(GameLookup(text), LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);
   }
 }

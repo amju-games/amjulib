@@ -5,7 +5,7 @@
 #include <SoundManager.h>
 #include "GSCogTestMenu.h"
 #include "GSFileUpdateCheck.h"
-#include "GSLetterCancellation1.h"
+#include "GSLetterCancellation.h"
 #include "GSTitle.h"
 #include "GSStroopWord.h"
 #include "GSStroopColour.h"
@@ -51,14 +51,14 @@ static void AskPractice()
 
 static void LetterSigmaTest()
 {
-  TheGSLetterCancellation1::Instance()->LoadConfig(AMJU_COG_TEST_SYMBOL_CAN, "letter-cancel-sigma.txt");
-  TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
+  TheGSLetterCancellation::Instance()->LoadConfig(AMJU_COG_TEST_SYMBOL_CAN, "letter-cancel-sigma.txt");
+  TheGame::Instance()->SetCurrentState(TheGSLetterCancellation::Instance());
 }
 
 static void LetterMTest()
 {
-  TheGSLetterCancellation1::Instance()->LoadConfig(AMJU_COG_TEST_LETTER_CAN, "letter-cancel-m.txt");
-  TheGame::Instance()->SetCurrentState(TheGSLetterCancellation1::Instance());
+  TheGSLetterCancellation::Instance()->LoadConfig(AMJU_COG_TEST_LETTER_CAN, "letter-cancel-m.txt");
+  TheGame::Instance()->SetCurrentState(TheGSLetterCancellation::Instance());
 }
 
 static void StroopWord()
@@ -145,7 +145,7 @@ void GSCogTestMenu::OnActive()
 {
   // TODO Fade vol down to v quiet
   TheSoundManager::Instance()->StopSong();
-  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-new-cogtest"));
+//  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-new-cogtest"));
 
   //GSGui::OnActive();
   GSBase::OnActive();

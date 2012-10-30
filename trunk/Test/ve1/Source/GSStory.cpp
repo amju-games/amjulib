@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-//static const char* STORY_NUM_KEY = "story_num";
+static const char* STORY_NUM_KEY = "story_num";
 
 void OnStoryReadOk()
 {
@@ -61,7 +61,6 @@ void GSStory::OnActive()
   m_gui = LoadGui("gui-story.txt");
   Assert(m_gui);
 
-  /*
   // Load story text
   Strings storyLines;
 
@@ -99,14 +98,20 @@ std::cout << "Can't show story, no player is logged in.\n";
     storyNum = p->GetVal(STORY_NUM_KEY);
     m_storyLineNum = ToInt(storyNum);
   }
-  */
 
   m_showedOk = false; 
   // TODO Set focus element, cancel element, command handlers
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "story-text");
   Assert(text);
-  text->SetText(m_text); // not storyLines[m_storyLineNum]);
+  if (m_text.empty())
+  {
+    text->SetText(storyLines[m_storyLineNum]);
+  }
+  else
+  {
+    text->SetText(m_text); 
+  }
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "story-ok-button");
   Assert(ok);
@@ -117,7 +122,6 @@ std::cout << "Can't show story, no player is logged in.\n";
 
 void GSStory::OnDeactive()
 {
-  /*
   Player* p = GetLocalPlayer();
   if (p && m_showedOk)
   {
@@ -125,7 +129,6 @@ void GSStory::OnDeactive()
     std::string storyNum = ToString(m_storyLineNum + 1);
     p->SetKeyVal(STORY_NUM_KEY, storyNum);
   }
-  */
 }
 } // namespace
 
