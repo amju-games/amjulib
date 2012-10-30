@@ -180,6 +180,7 @@
     <ClCompile Include="..\..\..\Source\FileUtils\FileSize.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\StringsFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
@@ -429,6 +430,7 @@
     <ClInclude Include="..\..\..\Source\FileUtils\FileSize.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\GlueFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\GlueFileMem.h" />
+    <ClInclude Include="..\..\..\Source\FileUtils\StringsFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
     <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
