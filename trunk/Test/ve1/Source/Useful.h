@@ -13,6 +13,7 @@ namespace Amju
 // Vec3
 std::ostream& operator<<(std::ostream& os, const Vec3f& v);
 std::string ToString(const Vec3f& v);
+Vec3f ToVec3(const std::string& s);
 
 // Game Object
 std::ostream& operator<<(std::ostream& os, const GameObject& go);

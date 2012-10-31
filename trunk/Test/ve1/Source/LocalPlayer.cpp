@@ -1,5 +1,9 @@
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
+#include "ObjectUpdater.h"
+#include "ROConfig.h"
+#include "Useful.h"
+#include "GSStartGame.h"
 
 namespace Amju
 {
@@ -46,6 +50,22 @@ void SetLocalPlayerId(int id)
 int GetLocalPlayerId()
 {
   return localPlayerId;
+}
+
+void ResetLocalPlayer()
+{
+  int startLoc = ROConfig()->GetInt("start-loc");
+  TheGSStartGame::Instance()->SetStartLoc(startLoc); 
+
+  std::string pos = ROConfig()->GetValue("start-pos");
+  Vec3f startPos(ToVec3(pos));
+
+  Player* player = GetLocalPlayer();
+  TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayerId(), startPos, startLoc);
+  if (player)
+  {
+    player->SetPos(startPos); // client side predict - respond immediately
+  }
 }
 
 }

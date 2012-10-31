@@ -18,6 +18,13 @@ std::string ToString(const Vec3f& v)
 //  return std::string("x: ") + ToString(v.x) + std::string(" y: ") + ToString(v.y) + std::string(" z: ") + ToString(v.z);
 }
 
+Vec3f ToVec3(const std::string& s)
+{
+  Strings strs = Split(s, ',');
+  Assert(strs.size() == 3);
+  return Vec3f(ToFloat(strs[0]), ToFloat(strs[1]), ToFloat(strs[2]));
+}
+
 std::ostream& operator<<(std::ostream& os, const GameObject& go)
 {
   return os << "Object " << go.GetId() << " (" << go.GetTypeName() << ")";
