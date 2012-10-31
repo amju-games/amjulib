@@ -283,6 +283,8 @@ void GSLetterCancellation::Draw()
 {
   // No funky BG
   //GSGui::Draw();
+
+  DrawCogTestBg();
 }
 
 void GSLetterCancellation::Draw2d()
@@ -412,6 +414,8 @@ bool GSLetterCancellation::LoadConfig(int testId, const std::string& filename)
 void GSLetterCancellation::OnActive()
 {
   GSBase::OnActive();
+  LoadCogTestBg();
+
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
 
   m_gui = LoadGui("gui-lettercancellation.txt");

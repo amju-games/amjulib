@@ -22,7 +22,7 @@
 #include "Ve1SceneGraph.h"
 
 #define SHOW_ENV_INFO
-#define SHOW_FRAME_TIME
+//#define SHOW_FRAME_TIME
 #define SHOW_VERSION
 
 namespace Amju
@@ -197,7 +197,7 @@ std::cout << "Failed to load GUI title bg image!\n";
   ver->SetText(s);
 #endif
 
-  CreateText("my game");
+  //CreateText("my game");
 
 #ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-title", "Sound/hammers.it"));
@@ -211,7 +211,7 @@ void GSTitle::OnDeactive()
 #endif
 
   GSGui::OnDeactive();
-  CreateText("");
+  //CreateText("");
 }
 
 } // namespace

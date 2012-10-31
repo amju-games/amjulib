@@ -73,7 +73,8 @@ void GSStartMenu::OnActive()
   start->SetCommand(Amju::OnStartButton);
 
   GuiButton* guest = (GuiButton*)GetElementByName(m_gui, "guest-button");
-  guest->SetCommand(Amju::OnGuestButton);
+  // not supported currently 
+  //guest->SetCommand(Amju::OnGuestButton);
 
   GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
   options->SetCommand(Amju::OnOptionsButton);

@@ -21,7 +21,7 @@ GSGui::GSGui()
 void GSGui::Update()
 {
   GSBase::Update();
-  TextDraw::Update();
+  //TextDraw::Update();
 
   if (m_showLurk)
   {
@@ -99,13 +99,41 @@ void GSGui::OnDeactive()
   m_gui = 0;
 }
 
-bool GSGui::OnCursorEvent(const CursorEvent& ce)
+bool GSGui::LoadCogTestBg()
 {
-  return false;
+  if (!m_bgImage.OpenAndLoad("cogbgimage.txt"))
+  {
+std::cout << "Failed to load cog test bg image!\n";
+    Assert(0);
+    return false;
+  }
+  return true;
 }
 
-bool GSGui::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+void GSGui::DrawCogTestBg()
 {
-  return false;
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+
+  glMatrixMode(GL_TEXTURE); // naughty!
+  glPushMatrix();
+  static float f = 0;
+  //AmjuGL::RotateZ(f);
+
+  // Scrolling might be distracting
+  AmjuGL::Translate(-f, 0, 0);
+
+  static float SPEED = 0.001f; // Too soon for ROConfig()->GetFloat("scope-speed");
+  f += SPEED * TheTimer::Instance()->GetDt();
+  m_bgImage.Draw();  
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+
+  AmjuGL::PopAttrib();
+
+  GSBase::Draw();
+
 }
 } // namespace

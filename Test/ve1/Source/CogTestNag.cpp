@@ -6,6 +6,7 @@
 #include "GSCogTestMenu.h"
 #include "ROConfig.h"
 #include "GameMode.h"
+#include "ChatConsole.h"
 
 namespace Amju
 {
@@ -76,7 +77,8 @@ void CogTestNag::Update()
   //static const float COG_TEST_WAIT_TIME = ROConfig()->GetFloat("cog-test-wait-time", 10.0f);
   //static float cogtesttime = COG_TEST_NAG_TIME - COG_TEST_WAIT_TIME;
 
-  if (!TheLurker::Instance()->IsDisplayingMsg())
+  if (!TheLurker::Instance()->IsDisplayingMsg() &&
+      !TheChatConsole::Instance()->IsActive())
   {
     cogtesttime += dt;
   }

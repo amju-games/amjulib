@@ -107,6 +107,7 @@ void GSCogTestMenu::Update()
 
 void GSCogTestMenu::Draw()
 {
+  /*
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
@@ -123,6 +124,9 @@ void GSCogTestMenu::Draw()
 
   GetGuiSceneGraph()->Draw();
   AmjuGL::PopMatrix();
+  */
+
+  DrawCogTestBg();
 }
 
 void GSCogTestMenu::Draw2d()
@@ -150,11 +154,12 @@ void GSCogTestMenu::OnActive()
   //GSGui::OnActive();
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
-  if (!m_bgImage.OpenAndLoad("cogbgimage.txt"))
-  {
-std::cout << "Failed to load GUI bg image!\n";
-    Assert(0);
-  }
+  LoadCogTestBg();
+//  if (!m_bgImage.OpenAndLoad("cogbgimage.txt"))
+//  {
+//std::cout << "Failed to load GUI bg image!\n";
+//    Assert(0);
+//  }
 
   // Add a character, so it looks like she is talking to the player.
   // This was confusing for participant, so drop this idea.
