@@ -5,6 +5,10 @@
 // Change this for testing, should be 0
 cogtest-first-test 1
 
+// Start position on new game/reset
+start-loc    54
+start-pos    0,200,2000
+
 // scrolling texture effect in GUI states
 scope-speed  0.05
 
@@ -38,7 +42,7 @@ npc-max-follow-dist  75.0
 cam-z           300
 cam-xrot        20
 
-// Portals
+// Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
 portal-max-dist  400
 
 

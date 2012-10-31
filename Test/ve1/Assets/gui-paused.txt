@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-4
+5
 
 
 // Element type
@@ -14,7 +14,7 @@ gui-text
 // Element name
 text1
 // pos (coords are -1..1)
--1.0, 0.8
+-1.0, 1.0
 // size
 2.0, 0.1
 // Text
@@ -27,13 +27,29 @@ gui-button
 // Element name
 resume-button
 // pos (coords are -1..1)
--0.4, -0.5
+-0.4, -0.6
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-resume
+continue playing
+// Font name, size
+arial, 2.0, sx=0.6
+
+
+// element type
+gui-button
+// Element name
+reset-button
+// pos (coords are -1..1)
+-0.4, 0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+reset me!
 // Font name, size
 arial, 2.0 
 
@@ -42,7 +58,7 @@ gui-button
 // Element name
 options-button
 // pos (coords are -1..1)
--0.4, 0.3
+-0.4, 0.2
 // size
 0.8, 0.2
 // Image
@@ -57,13 +73,13 @@ gui-button
 // Element name
 quit-button
 // pos (coords are -1..1)
--0.4, 0.0
+-0.4, -0.1
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-quit...
+quit game
 // Font name, size
 arial, 2.0 
 

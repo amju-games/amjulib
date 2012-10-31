@@ -4,8 +4,8 @@
 
 // cog test bg image
 //gui-image
-heart-img
+cogtest-bg-img
 -1.5, 1.5
 3, 3
-wh8.png
+grid2.png
 
