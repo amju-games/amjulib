@@ -215,6 +215,7 @@ void GSReactionTime::Update()
 
 void GSReactionTime::Draw()
 {
+  DrawCogTestBg();
 }
 
 void GSReactionTime::Draw2d()
@@ -225,8 +226,10 @@ void GSReactionTime::Draw2d()
 void GSReactionTime::OnActive()
 {
 //  GSGui::OnActive();
-
   GSBase::OnActive();
+
+  LoadCogTestBg();
+
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
 
   m_gui = LoadGui("gui-reactiontime.txt");

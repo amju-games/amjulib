@@ -4,11 +4,11 @@
 #include "GSBase.h"
 #include <GuiElement.h>
 #include <GuiImage.h>
-#include "TextDraw.h"
+//#include "TextDraw.h"
 
 namespace Amju 
 {
-class GSGui : public GSBase, public TextDraw
+class GSGui : public GSBase //, public TextDraw
 {
 protected:
   GSGui();
@@ -19,9 +19,10 @@ public:
   virtual void OnActive();
   virtual void OnDeactive();
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-
+protected:
+  bool LoadCogTestBg();
+  void DrawCogTestBg();
+ 
 protected:
   PGuiElement m_gui;
   GuiImage m_bgImage;

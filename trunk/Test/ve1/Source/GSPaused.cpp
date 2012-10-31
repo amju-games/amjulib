@@ -5,9 +5,15 @@
 #include "GSOptions.h"
 #include "GSTitle.h"
 #include "GSQuitGame.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
+static void OnResetButton()
+{
+  ResetLocalPlayer();
+}
+
 static void OnResumeButton()
 {
   TheGSPaused::Instance()->GoBack();
@@ -59,6 +65,7 @@ void GSPaused::OnActive()
   m_gui->GetElementByName("resume-button")->SetCommand(Amju::OnResumeButton);
   m_gui->GetElementByName("options-button")->SetCommand(Amju::OnOptionsButton);
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
+  m_gui->GetElementByName("reset-button")->SetCommand(Amju::OnResetButton);
 }
 
 bool GSPaused::OnCursorEvent(const CursorEvent& ce)

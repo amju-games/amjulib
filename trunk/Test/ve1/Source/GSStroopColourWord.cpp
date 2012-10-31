@@ -276,6 +276,7 @@ void GSStroopColourWord::Update()
 
 void GSStroopColourWord::Draw()
 {
+  DrawCogTestBg();
 }
 
 void GSStroopColourWord::Draw2d()
@@ -285,9 +286,10 @@ void GSStroopColourWord::Draw2d()
 
 void GSStroopColourWord::OnActive()
 {
-//  GSGui::OnActive();
-
   GSBase::OnActive();
+
+  LoadCogTestBg();
+
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
 
   m_gui = LoadGui("gui-stroop-word.txt"); 
