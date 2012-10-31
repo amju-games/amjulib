@@ -16,6 +16,9 @@ Player* GetLocalPlayer();
 int GetLocalPlayerLocation();
 void SetLocalPlayerLocation(int lpl);
 
+// Call this to reset local player to known good start position
+void ResetLocalPlayer();
+
 extern const char* TOTAL_PLAY_TIME_KEY;
 }
 

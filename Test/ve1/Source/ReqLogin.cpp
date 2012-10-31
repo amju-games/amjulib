@@ -79,7 +79,8 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
     if (SafeStrCmp(p.getName(), "loc"))
     {
       int loc = ToInt(p.getText());
-      TheGSStartGame::Instance()->SetStartLoc(loc); 
+      // TODO TEMP TEST Use ResetLocalPlayer() to set start pos/loc
+      //TheGSStartGame::Instance()->SetStartLoc(loc); 
 std::cout << "Got start location: " << loc << "\n";
     }
     else
@@ -113,6 +114,8 @@ std::cout << "No start location.\n";
 
     // Set ID of this player object as the local player ID
     SetLocalPlayerId(objId);
+
+    ResetLocalPlayer();
 
     Assert(pi);
 
