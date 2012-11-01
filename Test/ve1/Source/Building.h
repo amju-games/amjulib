@@ -9,7 +9,7 @@ namespace Amju
 {
 class Player;
 
-class Building : public Furniture ///////Ve1Object, public HasCollisionMesh
+class Building : public Furniture 
 {
 public:
   static const char* TYPENAME;
