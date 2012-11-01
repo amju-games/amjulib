@@ -198,6 +198,7 @@
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiCalendar.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp" />
@@ -640,6 +641,7 @@
     <ClInclude Include="..\..\..\Source\AmjuGLDX9\DX9Shader.h" />
     <ClInclude Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.h" />
     <ClInclude Include="..\..\..\Source\SoundBass\BassSoundPlayer.h" />
+    <ClInclude Include="GuiCalendar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt" />
