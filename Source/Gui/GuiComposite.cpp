@@ -100,6 +100,7 @@ bool GuiComposite::LoadChildren(File* f)
     if (!e)
     {
       f->ReportError("Failed to create GUI element of type " + s);
+      Assert(0);
       return false;
     }
     Assert(e);
