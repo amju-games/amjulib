@@ -6,6 +6,7 @@
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
 #include "GSTitle.h"
+#include "GSThanks.h" // TODO TEMP TEST
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS
@@ -198,7 +199,7 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 
     // All copied - go to next state 
     // TODO Once logo displayed etc
-    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSThanks::Instance()); ///Title::Instance());
   }
 }
 

@@ -198,6 +198,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCalendar.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
@@ -219,12 +220,14 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSProxy.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSQuitGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSScribble.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStory.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColour.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColourWord.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSThanks.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForUpload.cpp" />
@@ -313,6 +316,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSBuildMenu.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCalendar.h" />
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogResults.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
@@ -334,12 +338,14 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSProxy.h" />
     <ClInclude Include="..\..\..\..\Source\GSQuitGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
+    <ClInclude Include="..\..\..\..\Source\GSScribble.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSStory.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColour.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColourWord.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />
+    <ClInclude Include="..\..\..\..\Source\GSThanks.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForUpload.h" />
@@ -374,6 +380,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
+    <ClInclude Include="..\..\..\..\Source\ResetPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\ResizeHandler.h" />
     <ClInclude Include="..\..\..\..\Source\ROConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
