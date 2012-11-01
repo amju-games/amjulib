@@ -41,7 +41,7 @@ bool GuiCalendar::Load(File* f)
     text->SetLocalPos(Vec2f(w * (float)i, 0));
     text->SetFgCol(Colour(1, 1, 1, 1));
     Colour bg(0, 0, 1, 1);
-    if (i % 1)
+    if ((i % 1) != 0)
     {
       bg = Colour(0.2f, 0.2f, 1, 1);
     }
