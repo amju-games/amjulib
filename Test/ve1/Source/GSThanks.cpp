@@ -1,34 +1,34 @@
-#include "GSCogResults.h"
+#include "GSThanks.h"
 #include <AmjuGL.h>
 
 namespace Amju
 {
-GSCogResults::GSCogResults()
+GSThanks::GSThanks()
 {
 }
 
-void GSCogResults::Update()
+void GSThanks::Update()
 {
   GSGui::Update();
 
 }
 
-void GSCogResults::Draw()
+void GSThanks::Draw()
 {
   GSGui::Draw();
 
 }
 
-void GSCogResults::Draw2d()
+void GSThanks::Draw2d()
 {
   GSGui::Draw2d();
 }
 
-void GSCogResults::OnActive()
+void GSThanks::OnActive()
 {
   GSGui::OnActive();
 
-  m_gui = LoadGui("gui-cogresults.txt");
+  m_gui = LoadGui("TODO");
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers

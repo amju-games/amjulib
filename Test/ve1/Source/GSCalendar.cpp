@@ -1,34 +1,34 @@
-#include "GSCogResults.h"
+#include "GSCalendar.h"
 #include <AmjuGL.h>
 
 namespace Amju
 {
-GSCogResults::GSCogResults()
+GSCalendar::GSCalendar()
 {
 }
 
-void GSCogResults::Update()
+void GSCalendar::Update()
 {
   GSGui::Update();
 
 }
 
-void GSCogResults::Draw()
+void GSCalendar::Draw()
 {
   GSGui::Draw();
 
 }
 
-void GSCogResults::Draw2d()
+void GSCalendar::Draw2d()
 {
   GSGui::Draw2d();
 }
 
-void GSCogResults::OnActive()
+void GSCalendar::OnActive()
 {
   GSGui::OnActive();
 
-  m_gui = LoadGui("gui-cogresults.txt");
+  m_gui = LoadGui("gui-calendar.txt");
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers
