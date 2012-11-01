@@ -1,5 +1,6 @@
-#include "GSCalendar.h"
+#include <GuiCalendar.h>
 #include <AmjuGL.h>
+#include "GSCalendar.h"
 
 namespace Amju
 {
@@ -32,6 +33,9 @@ void GSCalendar::OnActive()
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers
+
+  GuiCalendar* cal = dynamic_cast<GuiCalendar*>(GetElementByName(m_gui, "thecalendar"));
+  cal->SetStartEndDate(Time::MakeTime(0, 0, 0, 1, 11, 2012), Time::MakeTime(0, 0, 0, 1, 12, 2012));
 }
 
 } // namespace
