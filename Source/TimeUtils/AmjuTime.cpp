@@ -154,7 +154,20 @@ int Time::GetHours() const
   return mytm.tm_hour;
 }
 
-int Time::GetDays() const
+int Time::GetDayOfWeek() const
+{
+  AMJU_CALL_STACK;
+
+  tm mytm;
+#ifdef MACOSX
+  localtime_r((const time_t*)&m_secs, &mytm);
+#else
+  mytm = *(localtime((const time_t*)&m_secs));
+#endif
+  return mytm.tm_wday;
+}
+
+int Time::GetDayOfMonth() const
 {
   AMJU_CALL_STACK;
 

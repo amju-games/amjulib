@@ -57,7 +57,9 @@ public:
   int GetMins() const;
   int GetHours() const;
   // One-based day, i.e. 1-31 incl.
-  int GetDays() const;
+  int GetDayOfMonth() const;
+  // Day of week, Sunday = 0
+  int GetDayOfWeek() const;
   // One-based month, i.e. jan==1
   int GetMonths() const;
   // Year returned is in full 4-digit format, e.g. 1969, 2005
