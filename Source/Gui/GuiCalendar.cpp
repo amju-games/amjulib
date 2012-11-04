@@ -23,7 +23,7 @@ bool GuiCalendar::Load(File* f)
   // Add top row of days - TODO Set start day
   // TODO localise
   // TODO long/short day names
-  std::string DAYS[] = { "Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun" };
+  std::string DAY[] = { "Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun" };
 
   GuiComposite* toprow = new GuiComposite;
   Vec2f size = GetSize();
@@ -35,13 +35,14 @@ bool GuiCalendar::Load(File* f)
   {
     GuiText* text = new GuiText;
     // TODO Colours
+    // TODO Font
     text->SetTextSize(1.0f); // TODO CONFIG
     text->SetSize(Vec2f(w, 0.1f)); // assume single line
-    text->SetText(DAYS[i]);
+    text->SetText(DAY[i]);
     text->SetLocalPos(Vec2f(w * (float)i, 0));
     text->SetFgCol(Colour(1, 1, 1, 1));
     Colour bg(0, 0, 1, 1);
-    if ((i % 1) != 0)
+    if ((i % 2) != 0)
     {
       bg = Colour(0.2f, 0.2f, 1, 1);
     }
@@ -56,6 +57,8 @@ bool GuiCalendar::Load(File* f)
 
 void GuiCalendar::SetStartEndDate(Time start, Time end)
 {
+  std::string MONTH[] = { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
+
   start.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
   end.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
@@ -70,17 +73,45 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   float h = (size.y - 0.1f) / (float)numrows;
   Vec2f cellSize(w, h);
 
-  // TODO split into rows ?
-  for (int i = 0; i < numdays; i++)
+  int day = start.GetDayOfWeek() - 1;
+  if (day < 0)
   {
-    GuiText* text = new GuiText;
+    day += 7;
+  }
+
+  float y = -0.1f;
+  float x = (float)day * w;
+  for (int i = 0; i <= numdays; i++)
+  {
+    GuiCalendarDayCell* text = new GuiCalendarDayCell;
     text->SetTextSize(1.0f); // TODO CONFIG
     text->SetSize(cellSize); 
-    text->SetText(ToString(i));
-    text->SetLocalPos(Vec2f(w * (float)i, h * (float)i));
+    text->SetIsMulti(true);
+    text->SetTime(start);
+
+    int dayOfMonth = start.GetDayOfMonth();
+    int month = start.GetMonths() - 1; // 1-based
+    std::string str = MONTH[month] + "\n" + ToString(dayOfMonth);
+    text->SetText(str);
+//std::cout << start.ToString() << "\n";
+
+    start += ONE_DAY_IN_SECONDS;
+    text->SetLocalPos(Vec2f(x, y));
+    day++;
+    if (day >= 7)
+    {
+      day = 0;
+      x = 0;
+      y -= h;
+    }
+    else
+    {
+      x += w;
+    }
+
     text->SetFgCol(Colour(1, 1, 1, 1));
     Colour bg(0, 0, 1, 1);
-    if (i % 1)
+    if ((i % 2) == 1)
     {
       bg = Colour(0.2f, 0.2f, 1, 1);
     }
@@ -92,8 +123,33 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   }
 }
 
-void GuiCalendar::AddDay(Time day)
+GuiCalendarDayCell* GuiCalendar::GetCell(Time t)
+{
+  t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  int n = GetNumChildren();
+  for (int i = 0; i < n; i++)
+  {
+    GuiElement* e = GetChild(i);
+    GuiCalendarDayCell* dc = dynamic_cast<GuiCalendarDayCell*>(e);
+    if (dc && dc->GetTime() == t) 
+    {
+      return dc;   
+    }
+  }
+  return 0;
+}
+
+GuiCalendarDayCell::GuiCalendarDayCell() : m_timestamp(0)
 {
 }
 
+void GuiCalendarDayCell::SetTime(Time t)
+{
+  m_timestamp = t;
+}
+
+Time GuiCalendarDayCell::GetTime() const
+{
+  return m_timestamp;
+}
 }
