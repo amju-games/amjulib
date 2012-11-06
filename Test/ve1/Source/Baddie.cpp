@@ -7,7 +7,7 @@
 #include "Ve1Character.h"
 #include "LocalPlayer.h"
 #include "AttackEffect.h"
-#include "FightReq.h"
+#include "CommandFight.h"
 
 namespace Amju
 {
@@ -74,36 +74,6 @@ bool Baddie::Load(File* f)
 
   return true;
 }
-
-class CommandFight : public GuiCommand
-{
-public:
-  CommandFight(Ve1ObjectChar* opp) : m_opponent(opp)
-  {
-  }
-
-  virtual bool Do()
-  {
-    // Show visual effect. Send request to server.
-    Player* loc = GetLocalPlayer();
-    Vec3f pos = m_opponent->GetPos();
-    pos.y += 40.0f; // TODO TEMP TEST
-    loc->MoveTo(pos);
-
-    Vec3f vel = loc->GetVel();
-    vel.y += YSIZE;
-    loc->SetVel(vel);
-
-    SendFightReq(m_opponent);
-
-//    m_opponent->ShowAttacked();
-    
-    return false;
-  }
-
-private:
-  Ve1ObjectChar* m_opponent;
-};
 
 void Baddie::SetMenu(GuiMenu* menu)
 {
