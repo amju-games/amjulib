@@ -6,7 +6,6 @@
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
 #include "GSTitle.h"
-#include "GSThanks.h" // TODO TEMP TEST
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS
@@ -54,7 +53,6 @@ bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, c
 
     std::string src = srcDir + "/" + filename;
     Time srcTime = GetFileModifiedTime(src);
-
 
     if (!(destTime < srcTime))
     {
@@ -198,8 +196,7 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
 
     // All copied - go to next state 
-    // TODO Once logo displayed etc
-    TheGame::Instance()->SetCurrentState(TheGSThanks::Instance()); ///Title::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance()); 
   }
 }
 
