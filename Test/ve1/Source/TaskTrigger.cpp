@@ -208,7 +208,7 @@ if (m_totalSecsPlayed >= 0)
   {
     return false;
   }
-  if (m_dayOfMonth > -1 && m_dayOfMonth < t.GetDays())
+  if (m_dayOfMonth > -1 && m_dayOfMonth < t.GetDayOfMonth())
   {
     return false;
   }
