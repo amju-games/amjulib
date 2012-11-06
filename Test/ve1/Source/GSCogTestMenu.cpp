@@ -107,25 +107,6 @@ void GSCogTestMenu::Update()
 
 void GSCogTestMenu::Draw()
 {
-  /*
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-  AmjuGL::SetIdentity();
-  const float FOVY = 60.0f;
-  const float NEAR_PLANE = 1.0f; 
-  const float FAR_PLANE = 3000.0f;
-  static const float aspect = (float)Screen::X() / (float)Screen::Y();
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
-
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-  AmjuGL::SetIdentity();
-  AmjuGL::PushMatrix();
-
-  AmjuGL::LookAt(0, 2.0f, 8.0f,   0, 0, 0,  0, 1.0f, 0);
-
-  GetGuiSceneGraph()->Draw();
-  AmjuGL::PopMatrix();
-  */
-
   DrawCogTestBg();
 }
 
@@ -148,7 +129,7 @@ bool GSCogTestMenu::IsDoingTests()
 void GSCogTestMenu::OnActive()
 {
   // TODO Fade vol down to v quiet
-  TheSoundManager::Instance()->StopSong();
+//  TheSoundManager::Instance()->StopSong();
 //  TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-new-cogtest"));
 
   //GSGui::OnActive();
