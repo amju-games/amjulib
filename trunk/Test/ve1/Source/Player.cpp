@@ -21,6 +21,7 @@
 #include "Useful.h"
 #include "ChatConsole.h"
 #include "ObjectUpdater.h"
+#include "CommandFight.h"
 
 namespace Amju
 {
@@ -496,6 +497,7 @@ void Player::SetMenu(GuiMenu* menu)
   {
     //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
     AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
+    AddMenuItem("FIGHT!!", new CommandFight(this));
   }
   else
   {
