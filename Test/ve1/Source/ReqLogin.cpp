@@ -19,6 +19,7 @@
 #include "GameMode.h"
 #include "GSCogTestMenu.h"
 #include "GSOptions.h"
+#include "ResearchCalendar.h"
 
 namespace Amju
 {
@@ -195,6 +196,25 @@ std::cout << "Unexpected mode value.\n";
       else
       {
 std::cout << "Found research element but unexpected format (no mode).\n";
+      }
+      
+      // Schedule - for calendar
+      p = research.getChildNode(3);
+      if (SafeStrCmp(p.getName(), "dates"))
+      {
+        // Bunch of dates - add to TheResearchCal
+        int numDates = p.nChildNode();
+        for (int i = 0; i < numDates; i++)
+        {
+          PXml date = p.getChildNode(i);
+          std::string dateStr = date.getText();
+          unsigned int secs = ToInt(dateStr);
+          TheResearchCal::Instance()->AddPlayDate(Time(secs));   
+        }
+      }
+      else
+      {
+std::cout << "Login: found research element but no schedule.\n";
       }
     }
     else
