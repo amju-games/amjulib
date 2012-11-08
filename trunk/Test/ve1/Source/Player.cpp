@@ -21,6 +21,7 @@
 #include "Useful.h"
 #include "ChatConsole.h"
 #include "ObjectUpdater.h"
+#include "AttackEffect.h"
 #include "CommandFight.h"
 
 namespace Amju
@@ -252,6 +253,24 @@ bool Player::Load(File* f)
   Assert(arrowMesh);
   m_arrow = new SceneMesh;
   m_arrow->SetMesh(arrowMesh);
+
+  // Particle effect when attacked, etc.
+  File fight;
+  if (!fight.OpenRead("fighteffect.txt"))
+  {
+    fight.ReportError("Failed to load effect");
+    return false;
+  }
+
+  m_effect = new AttackEffect;
+  if (!m_effect->Load(&fight))
+  {
+    fight.ReportError("Failed to load effect");
+    return false;
+  }
+  m_effect->SetVisible(true);
+
+  m_sceneNode->AddChild(m_effect.GetPtr());
 
   return true;
 }
