@@ -39,6 +39,7 @@ void Baddie::Update()
 {
   Ve1ObjectChar::Update();
 
+  // Surely this is all done in base class ???
   if (GetAABB())
   {
     GetAABB()->Set(
@@ -60,12 +61,18 @@ bool Baddie::Load(File* f)
     return false;
   }
 
-  // TODO TEMP TEST
   // Particle effect when attacked, etc.
-  m_effect = new AttackEffect;
-  if (!m_effect->Load(f))
+  File fight;
+  if (!fight.OpenRead("fighteffect.txt"))
   {
-    f->ReportError("Failed to load exit effect");
+    fight.ReportError("Failed to load effect");
+    return false;
+  }
+
+  m_effect = new AttackEffect;
+  if (!m_effect->Load(&fight))
+  {
+    fight.ReportError("Failed to load effect");
     return false;
   }
   m_effect->SetVisible(true);
