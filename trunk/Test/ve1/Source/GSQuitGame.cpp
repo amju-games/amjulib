@@ -3,11 +3,13 @@
 #include <Game.h>
 #include <GuiButton.h>
 #include "GSTitle.h"
+#include "LogOut.h"
 
 namespace Amju
 {
 static void OnQuitSession()
 {
+  SendLogOut();
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
 
