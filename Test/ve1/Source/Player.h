@@ -41,13 +41,14 @@ public:
   Ve1Object* GetCarrying();
 
 protected:
-  bool m_isLocal;
-  bool m_isLoggedIn;
-
   RCPtr<SceneMesh> m_arrow; // destination arrow
   RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
 
   RCPtr<Ve1Object> m_carrying;
+
+  bool m_isLocal;
+  bool m_isLoggedIn;
+  bool m_isDead; // if so, must go back to spaceship
 };
 
 bool GetNameForPlayer(int objId, std::string* r);

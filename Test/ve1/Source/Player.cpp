@@ -23,6 +23,8 @@
 #include "ObjectUpdater.h"
 #include "AttackEffect.h"
 #include "CommandFight.h"
+#include "LurkMsg.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
@@ -489,6 +491,18 @@ void Player::Update()
   if (IsLocalPlayer())
   {
     TheGSMain::Instance()->SetHeartNum(m_stamina);
+
+    if (m_stamina <= 0)
+    {
+      // Player now has to go back to the spaceship to regenerate or something.
+      if (!m_isDead)
+      {
+        LurkMsg lm("You need to return to your spaceship to recover from your injuries!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+        TheLurker::Instance()->Queue(lm);
+      }
+
+      m_isDead = true;
+    }
   }
 }
 
