@@ -135,6 +135,7 @@ void Object::Create()
         else
         {
 std::cout << "Object load: Failed to load game object " << *this << "\n";
+          Assert(0);
         }
       }
       else
