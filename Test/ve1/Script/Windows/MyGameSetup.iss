@@ -6,15 +6,15 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{5F1820EB-3B24-4F20-B8EB-30D083C8511F}
-AppName=My Game
-AppVersion=0.4
+AppName=Crash Site
+AppVersion=0.5
 ;AppVerName=My Game 0.2
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
 AppUpdatesURL=http://www.amju.com/
-DefaultDirName={pf}\My Game
-DefaultGroupName=My Game
+DefaultDirName={pf}\Crash Site
+DefaultGroupName=Crash Site
 AllowNoIcons=yes
 OutputBaseFilename=setup
 Compression=lzma
