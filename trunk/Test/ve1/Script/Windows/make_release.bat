@@ -1,6 +1,6 @@
 REM Make windows release of MY GAME
 
-set VERSION=0.4
+set VERSION=0.5
 
 cd ve1
 devenv /build "Release|Win32" ve1.sln
