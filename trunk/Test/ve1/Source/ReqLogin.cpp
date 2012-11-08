@@ -116,7 +116,8 @@ std::cout << "No start location.\n";
     // Set ID of this player object as the local player ID
     SetLocalPlayerId(objId);
 
-    ResetLocalPlayer();
+    // Better to stay in old place unless Reset is required
+    //ResetLocalPlayer();
 
     Assert(pi);
 
