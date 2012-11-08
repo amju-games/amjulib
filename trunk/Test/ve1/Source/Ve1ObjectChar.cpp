@@ -55,7 +55,10 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
     if (m_stamina <= 0)
     {
       m_stamina = 0;
-      // Show player death anim
+    }
+
+      /*
+      // Show player death anim ??
       Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
       if (vc)
       {
@@ -63,11 +66,12 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
         // Special state IF local player, otherwise will just be respawned by new server pos
         if (GetId() == GetLocalPlayerId())
         {
-          TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+          //TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
         }
         // TODO Chat msgs?? Send a lurk msg to any chat recipient ?
       }
-    }
+      */
+    
   }
   else if (key == AVATAR_KEY)
   {
