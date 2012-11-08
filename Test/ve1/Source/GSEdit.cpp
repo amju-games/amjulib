@@ -442,9 +442,16 @@ std::cout << "Nothing selected, can't change!\n";
       ValMap* valmap = m_selObj->GetValMap();
       ValMap::iterator it = valmap->begin();
       std::advance(it, sel);
-      std::string val = it->second;
-      GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "property-value");
-      edit->SetText(val); 
+      if (it == valmap->end())
+      {
+        Assert(0);
+      }
+      else
+      {
+        std::string val = it->second;
+        GuiTextEdit* edit = (GuiTextEdit*)GetElementByName(m_gui, "property-value");
+        edit->SetText(val); 
+      }
     }
   }
 
