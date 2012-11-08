@@ -7,7 +7,8 @@ cogtest-first-test 1
 
 // Start position on new game/reset
 start-loc    54
-start-pos    0,200,2000
+// This pos should be OK in all locations
+start-pos    0,0,0
 
 // scrolling texture effect in GUI states
 scope-speed  0.05
