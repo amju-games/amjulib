@@ -184,6 +184,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CommandFight.cpp" />
     <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CreateCollect.cpp" />
     <ClCompile Include="..\..\..\..\Source\DownloadManager.cpp" />
@@ -260,6 +261,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ReqMsgRead.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSendMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\ReqSetObjectFilenames.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ResearchCalendar.cpp" />
     <ClCompile Include="..\..\..\..\Source\ResizeHandler.cpp" />
     <ClCompile Include="..\..\..\..\Source\ROConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
@@ -301,6 +303,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
     <ClInclude Include="..\..\..\..\Source\Collect.h" />
     <ClInclude Include="..\..\..\..\Source\CollideObjectFurniture.h" />
+    <ClInclude Include="..\..\..\..\Source\CommandFight.h" />
     <ClInclude Include="..\..\..\..\Source\CrashMonitor.h" />
     <ClInclude Include="..\..\..\..\Source\CreateCollect.h" />
     <ClInclude Include="..\..\..\..\Source\DownloadManager.h" />
@@ -380,6 +383,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ReqMsgRead.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSendMsg.h" />
     <ClInclude Include="..\..\..\..\Source\ReqSetObjectFilenames.h" />
+    <ClInclude Include="..\..\..\..\Source\ResearchCalendar.h" />
     <ClInclude Include="..\..\..\..\Source\ResetPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\ResizeHandler.h" />
     <ClInclude Include="..\..\..\..\Source\ROConfig.h" />
