@@ -83,7 +83,10 @@ GuiComposite* GSMain::GetContextMenu()
 void GSMain::ClearContextMenu()
 {
   // Send off screen ?
-  GetContextMenu()->SetVisible(false);
+  if (m_gui)
+  {
+    GetContextMenu()->SetVisible(false);
+  }
 }
 
 void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
