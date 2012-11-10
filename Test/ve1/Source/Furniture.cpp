@@ -39,6 +39,7 @@ Furniture::Furniture()
 void Furniture::SetEditMenu(GuiMenu* menu)
 {
   menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
+  menu->AddChild(new GuiMenuItem("Rotate", new CommandRotate(this)));
 }
 
 CollisionMesh* Furniture::GetCollisionMesh()
