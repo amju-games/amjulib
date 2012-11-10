@@ -18,6 +18,10 @@ std::cout << "Attempting to load obj: " << pathFile << "\n";
   File::SetRoot(path , "/"); // TODO change SetRoot params
 
   std::string objFile = StripPath(pathFile);
+  if (objFile.empty())
+  {
+    return false;
+  }
 
   // Bypass Res Manager so we don't cache the file, we want to reload it.
   bool binary = (GetFileExt(objFile) == "objb");
