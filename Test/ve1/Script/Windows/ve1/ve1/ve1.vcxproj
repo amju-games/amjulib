@@ -230,6 +230,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSThanks.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSToday.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForUpload.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
@@ -350,6 +351,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />
     <ClInclude Include="..\..\..\..\Source\GSThanks.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
+    <ClInclude Include="..\..\..\..\Source\GSToday.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForUpload.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
