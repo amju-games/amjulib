@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -22,26 +22,26 @@ Paused
 // Font name, size
 arial, 1.0, bgcol=000000, fgcol=ffffff
 
-// element type
-gui-button
-// Element name
-resume-button
-// pos (coords are -1..1)
--0.4, -0.6
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-continue playing
-// Font name, size
-arial, 2.0, sx=0.6
-
 
 // element type
 gui-button
 // Element name
 reset-button
+// pos (coords are -1..1)
+-0.4, 0.8
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+reset me!
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+calendar-button
 // pos (coords are -1..1)
 -0.4, 0.5
 // size
@@ -49,7 +49,7 @@ reset-button
 // Image
 gui-button-4.png
 // Text
-reset me!
+calendar
 // Font name, size
 arial, 2.0 
 
@@ -82,4 +82,20 @@ gui-button-4.png
 quit game
 // Font name, size
 arial, 2.0 
+
+// element type
+gui-button
+// Element name
+resume-button
+// pos (coords are -1..1)
+-0.4, -0.6
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+continue playing
+// Font name, size
+arial, 2.0, sx=0.6
+
 
