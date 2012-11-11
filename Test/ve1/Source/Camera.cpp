@@ -17,7 +17,7 @@ static float xRot = 0;
 static bool leftDrag = false;
 static bool rightDrag = false;
 static bool midDrag = false;
-static bool camKey = false;
+static bool camKey = true;
 
 static Vec3f posNoTarget;
 static Vec3f posOffset;
@@ -42,7 +42,7 @@ void Camera::Reset()
   leftDrag = false;
   rightDrag = false;
   midDrag = false;
-  camKey = false;
+  camKey = true;
 }
 
 void Camera::Update()
@@ -122,7 +122,7 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
 
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') 
   {
-    camKey = kb.keyDown;
+    //camKey = kb.keyDown;
     return false;
   }
 
@@ -179,7 +179,7 @@ bool CameraControl::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 #ifdef CAM_DEBUG
 std::cout << "Camera handling mouse button event\n";
 #endif
-      return true;
+      return false;
     }
   }
   else if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
