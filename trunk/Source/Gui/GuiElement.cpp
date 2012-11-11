@@ -187,6 +187,9 @@ bool GuiElement::Load(File* f)
     return false;
   }
 
+  Assert(m_size.x > 0);
+  Assert(m_size.y > 0);
+
   return true;
 }
 
