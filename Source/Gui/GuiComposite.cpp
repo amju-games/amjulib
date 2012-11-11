@@ -93,6 +93,8 @@ bool GuiComposite::LoadChildren(File* f)
     std::string s;
     if (!f->GetDataLine(&s))
     {
+std::cout << "GUI composite: Child " << i << " of " << num 
+  << ": Expected more data, but have reached end of file.\n";
       Assert(0);
       return false;
     }
