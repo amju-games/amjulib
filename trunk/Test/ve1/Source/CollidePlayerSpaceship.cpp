@@ -7,8 +7,6 @@ namespace Amju
 {
 void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
 {
-std::cout << "Hi collide player/spaceship\n";
-
   if (player->IsHidden() || spaceship->IsHidden())
   {
     return;
