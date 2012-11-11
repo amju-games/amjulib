@@ -10,8 +10,10 @@ today-comp
 
 gui-button
 ok-button
-0.1, -0.7
--0.4, 0.2
+// pos
+-0.4, -0.7
+// size
+0.8, 0.2
 gui-button-4.png
 ok
 arial, 1.5
