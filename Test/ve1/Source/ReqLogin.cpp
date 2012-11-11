@@ -22,6 +22,7 @@
 #include "ResearchCalendar.h"
 #include "GSThanks.h"
 #include "GSCalendar.h"
+#include "GSToday.h"
 
 namespace Amju
 {
@@ -229,8 +230,8 @@ std::cout << "No research element in login.pl response?!?\n";
 
     SetDoCogTests(doCogTests); // mode, in GameMode
 
-    TheGSCalendar::Instance()->SetPrevState(TheGSStartGame::Instance());
-    TheGSThanks::Instance()->SetPrevState(TheGSStartGame::Instance());
+    TheGSCalendar::Instance()->SetPrevState(TheGSToday::Instance());
+    TheGSThanks::Instance()->SetPrevState(TheGSToday::Instance());
     TheGame::Instance()->SetCurrentState(TheGSThanks::Instance());
 
       //TheGSStartGame::Instance()); 
