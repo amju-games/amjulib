@@ -1,10 +1,16 @@
 #include <GuiCalendar.h>
 #include <AmjuGL.h>
+#include <GuiButton.h>
 #include "GSCalendar.h"
 #include "ResearchCalendar.h"
 
 namespace Amju
 {
+static void OnCalOk()
+{
+  TheGSCalendar::Instance()->GoBack();
+}
+
 GSCalendar::GSCalendar()
 {
 }
@@ -33,6 +39,8 @@ void GSCalendar::OnActive()
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+  ok->SetCommand(OnCalOk);
 
   GuiCalendar* cal = dynamic_cast<GuiCalendar*>(GetElementByName(m_gui, "thecalendar"));
   cal->SetStartEndDate(Time::MakeTime(0, 0, 0, 1, 11, 2012), Time::MakeTime(0, 0, 0, 1, 12, 2012));

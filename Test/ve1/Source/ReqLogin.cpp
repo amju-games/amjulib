@@ -20,6 +20,8 @@
 #include "GSCogTestMenu.h"
 #include "GSOptions.h"
 #include "ResearchCalendar.h"
+#include "GSThanks.h"
+#include "GSCalendar.h"
 
 namespace Amju
 {
@@ -226,7 +228,13 @@ std::cout << "No research element in login.pl response?!?\n";
     SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
     SetDoCogTests(doCogTests); // mode, in GameMode
-    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance()); //TheGSFileUpdateCheck::Instance());
+
+    TheGSCalendar::Instance()->SetPrevState(TheGSStartGame::Instance());
+    TheGSThanks::Instance()->SetPrevState(TheGSStartGame::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSThanks::Instance());
+
+      //TheGSStartGame::Instance()); 
+      //TheGSFileUpdateCheck::Instance());
 }
 
 void SendLoginReq(const std::string& email)
