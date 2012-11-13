@@ -6,7 +6,7 @@ gui-comp
 // Name
 cogtestmenu-comp
 // Num children
-0
+2
 
 // The idea here was to show hearts during the cog tests....
 
