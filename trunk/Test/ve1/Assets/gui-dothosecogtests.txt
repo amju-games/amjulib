@@ -4,25 +4,35 @@
 // Element type
 gui-comp
 // Name
-today-comp
+docogtests-comp
 // Num children
-3
+4
 
 gui-button
 ok-button
 // pos
--0.4, -0.7
+-0.4, -0.3
 // size
 0.8, 0.2
 gui-button-4.png
 ok
-arial, 1.5
+arial, 2.0
+
+gui-button
+quit-button
+// pos
+-0.4, -0.5
+// size
+0.8, 0.2
+gui-button-4.png
+quit
+arial, 2.0
 
 gui-text
 date-text
 -0.8, 0.9
 1.6, 0.2
-date
+Paused
 arial, 2.0, fgcol=ffffff
 
 gui-text
@@ -30,7 +40,7 @@ long-text
 -0.9, 0.6
 1.8, 1.2
 // Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
-This is where we describe what the participant is doing today.
+Please click OK when you are ready to resume doing the tests. Thank you!
 arial, 1.0, multi, fgcol=ffffff
 
 

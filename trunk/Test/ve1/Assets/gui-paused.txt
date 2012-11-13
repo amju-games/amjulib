@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-6
+7
 
 
 // Element type
@@ -71,9 +71,25 @@ arial, 2.0
 // element type
 gui-button
 // Element name
-quit-button
+achievements-button
 // pos (coords are -1..1)
 -0.4, -0.1
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+achievements
+// Font name, size
+arial, 2.0, sx=0.6
+
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+-0.4, -0.4
 // size
 0.8, 0.2
 // Image
@@ -88,7 +104,7 @@ gui-button
 // Element name
 resume-button
 // pos (coords are -1..1)
--0.4, -0.6
+-0.4, -0.7
 // size
 0.8, 0.2
 // Image

@@ -7,10 +7,17 @@
 #include "GSQuitGame.h"
 #include "LocalPlayer.h"
 #include "GSCalendar.h"
+#include "GSAchievements.h"
 
 namespace Amju
 {
-static void OnCalButton()
+static void OnAchievementsButton()
+{
+  TheGSAchievements::Instance()->SetPrevState(TheGSPaused::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSAchievements::Instance());
+}
+
+static void OnCalendarButton()
 {
   TheGSCalendar::Instance()->SetPrevState(TheGSPaused::Instance());
   TheGame::Instance()->SetCurrentState(TheGSCalendar::Instance());
@@ -73,7 +80,8 @@ void GSPaused::OnActive()
   m_gui->GetElementByName("options-button")->SetCommand(Amju::OnOptionsButton);
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
   m_gui->GetElementByName("reset-button")->SetCommand(Amju::OnResetButton);
-  m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalButton);
+  m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalendarButton);
+  m_gui->GetElementByName("achievements-button")->SetCommand(Amju::OnAchievementsButton);
 }
 
 bool GSPaused::OnCursorEvent(const CursorEvent& ce)

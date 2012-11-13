@@ -7,7 +7,21 @@
 
 namespace Amju
 {
-typedef std::vector<Time> Times;
+struct ResearchDate
+{
+  ResearchDate(Time time, bool cogTest, bool play) : m_time(time), m_cogTest(cogTest), m_play(play) {}
+
+  // Date/time of session
+  Time m_time;
+
+  // If true, participant is due to take cog tests
+  bool m_cogTest;
+
+  // if true, participant is due to play the game.
+  bool m_play;
+};
+
+typedef std::vector<ResearchDate> ResearchDates;
 
 // Store dates/timees of all scheduled research sessions for the study.
 // Get this from server, so we can have more than one study/overlapping etc if required.
@@ -15,18 +29,17 @@ class ResearchCalendar : public NonCopyable
 {
 public:
   void Clear();
-  const Times& GetPlayDates();
-  const Times& GetTestOnlyDates();
+  const ResearchDates& GetResearchDates() const;
+  const ResearchDate* GetToday() const; // could return zero
+  const ResearchDate* GetNext() const; // could return zero
 
-  void AddPlayDate(Time);
-  void AddTestOnlyDate(Time);
-
+  void AddResearchDate(const ResearchDate&);
+  
 private:
-  Times m_play;
-  Times m_testOnly;
+  ResearchDates m_dates;
 };
 
-typedef Singleton<ResearchCalendar> TheResearchCal;
+typedef Singleton<ResearchCalendar> TheResearchCalendar;
 }
 
 #endif

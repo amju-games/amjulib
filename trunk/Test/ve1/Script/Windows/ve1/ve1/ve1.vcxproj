@@ -195,6 +195,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameLookup.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSAchievements.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
@@ -205,6 +206,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSDeath.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSDoThoseCogTests.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEdit.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
@@ -316,6 +318,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
     <ClInclude Include="..\..\..\..\Source\GameLookup.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
+    <ClInclude Include="..\..\..\..\Source\GSAchievements.h" />
     <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSBase.h" />
@@ -326,6 +329,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
     <ClInclude Include="..\..\..\..\Source\GSDeath.h" />
+    <ClInclude Include="..\..\..\..\Source\GSDoThoseCogTests.h" />
     <ClInclude Include="..\..\..\..\Source\GSEdit.h" />
     <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />

@@ -4,28 +4,27 @@ namespace Amju
 {
 void ResearchCalendar::Clear()
 {
-  m_play.clear();
-  m_testOnly.clear();
+  m_dates.clear();
 }
 
-const Times& ResearchCalendar::GetPlayDates()
+const ResearchDates& ResearchCalendar::GetResearchDates() const
 {
-  return m_play;
+  return m_dates;
 }
 
-const Times& ResearchCalendar::GetTestOnlyDates()
+void ResearchCalendar::AddResearchDate(const ResearchDate& d)
 {
-  return m_testOnly;
+  m_dates.push_back(d);
 }
 
-void ResearchCalendar::AddPlayDate(Time t)
+const ResearchDate* ResearchCalendar::GetToday() const
 {
-  m_play.push_back(t);
+  return 0;
 }
 
-void ResearchCalendar::AddTestOnlyDate(Time t)
+const ResearchDate* ResearchCalendar::GetNext() const
 {
-  m_testOnly.push_back(t);
+  return 0;
 }
 
 }
