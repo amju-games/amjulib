@@ -7,6 +7,8 @@
 #include "ROConfig.h"
 #include "GameMode.h"
 #include "ChatConsole.h"
+#include "GSDoThoseCogTests.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -51,13 +53,25 @@ void OnDeclineCogTests()
 
 void OnCogTestStopPartWayThrough()
 {
-  // TODO Log number of declines for research
-  stops++;
+  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  {
+    // You can't play the game, you have to finish the tests.
+    TheGSDoThoseCogTests::Instance()->SetPrevState(TheGSCogTestMenu::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSDoThoseCogTests::Instance());
+  }
+  else
+  {
+    // Go back to Main, will nag again later.
+    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 
-  LurkMsg lm("OK, but please finish taking the tests soon! I will ask you again in a few minutes.", LURK_FG, LURK_BG, AMJU_CENTRE);
-  TheLurker::Instance()->Queue(lm);
-  nagdone = false;
-  cogtesttime = 0;
+    // TODO Log number of declines for research
+    stops++;
+
+    LurkMsg lm("OK, but please finish taking the tests soon! I will ask you again in a few minutes.", LURK_FG, LURK_BG, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+    nagdone = false;
+    cogtesttime = 0;
+  }
 }
 
 CogTestNag::CogTestNag()

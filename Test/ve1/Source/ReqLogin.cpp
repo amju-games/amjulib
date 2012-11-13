@@ -145,13 +145,18 @@ std::cout << "Didn't get sesssion ID from server :-(\n";
 
 void ReqLogin::ChooseMode()
 {
+    TheResearchCalendar::Instance()->Clear();
+
     GameMode gm = AMJU_MODE_MULTI;
     bool doCogTests = false;
 
     PXml research = m_xml.getChildNode(5);
     if (SafeStrCmp(research.getName(), "research"))
     {
-      PXml p = research.getChildNode(0);
+      PXml p;
+      
+      /*
+      p = research.getChildNode(0);
       if (SafeStrCmp(p.getName(), "is_research_session")) 
       {
         int isRS = ToInt(p.getText());
@@ -177,7 +182,7 @@ std::cout << "Found research element but unexpected format (no is_research_sessi
         switch (mode)
         {
         case 0: 
-std::cout << "NO GAME MODE!!\n";
+std::cout << "'NO GAME' MODE!!\n";
           gm = AMJU_MODE_NO_GAME; 
           break;
         
@@ -200,9 +205,10 @@ std::cout << "Unexpected mode value.\n";
       {
 std::cout << "Found research element but unexpected format (no mode).\n";
       }
-      
+      */
+
       // Schedule - for calendar
-      p = research.getChildNode(3);
+      p = research.getChildNode(4);
       if (SafeStrCmp(p.getName(), "dates"))
       {
         // Bunch of dates - add to TheResearchCal
@@ -210,21 +216,37 @@ std::cout << "Found research element but unexpected format (no mode).\n";
         for (int i = 0; i < numDates; i++)
         {
           PXml date = p.getChildNode(i);
-          std::string dateStr = date.getText();
-          unsigned int secs = ToInt(dateStr);
-          TheResearchCal::Instance()->AddPlayDate(Time(secs));   
+          if (SafeStrCmp(date.getName(), "date"))
+          {
+            if (SafeStrCmp(date.getChildNode(0).getName(), "timestamp") &&
+                SafeStrCmp(date.getChildNode(1).getName(), "cogtest") &&
+                SafeStrCmp(date.getChildNode(2).getName(), "play"))
+            {
+              std::string dateStr = date.getChildNode(0).getText();
+              bool cogtest = SafeStrCmp(date.getChildNode(1).getText(), "1"); 
+              bool play = SafeStrCmp(date.getChildNode(2).getText(), "1"); 
+              TheResearchCalendar::Instance()->AddResearchDate(ResearchDate(Time(dateStr), cogtest, play));   
+            }
+            else
+            {
+              std::cout << "Login: unexpected format for session dates.\n";
+              Assert(0);
+            }
+          }
         }
       }
       else
       {
-std::cout << "Login: found research element but no schedule.\n";
+        std::cout << "Login: found research element but no schedule.\n";
       }
     }
     else
     {
-std::cout << "No research element in login.pl response?!?\n";
+      std::cout << "No research element in login.pl response?!?\n";
       Assert(0);
     }
+
+    // Now we can look up today on the calendar to get game mode flags.
 
     SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 

@@ -4,7 +4,7 @@
 // Element type
 gui-comp
 // Name
-today-comp
+achievements-comp
 // Num children
 3
 
@@ -22,7 +22,7 @@ gui-text
 date-text
 -0.8, 0.9
 1.6, 0.2
-date
+Your achievements
 arial, 2.0, fgcol=ffffff
 
 gui-text
@@ -30,7 +30,7 @@ long-text
 -0.9, 0.6
 1.8, 1.2
 // Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
-This is where we describe what the participant is doing today.
+This is where we describe achievements.
 arial, 1.0, multi, fgcol=ffffff
 
 

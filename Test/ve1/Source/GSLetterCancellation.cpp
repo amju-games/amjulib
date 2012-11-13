@@ -17,6 +17,8 @@
 #include "GSMain.h"
 #include "GameConsts.h"
 #include "CogTestNag.h"
+#include "GameMode.h"
+#include "GSDoThoseCogTests.h"
 
 namespace Amju
 {
@@ -27,8 +29,6 @@ static const float MAX_TIME = 180.0f; // 3 mins, from Malec et al
 static void OnStopTest()
 {
   OnCogTestStopPartWayThrough();
-  // Go back to Main, will nag again later.
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 static void OnDoneButton()

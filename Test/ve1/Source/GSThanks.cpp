@@ -51,7 +51,7 @@ void GSThanks::OnActive()
   cal->SetCommand(OnThanksCal);
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "long-text");
-  text->SetText("Thanks for participating in this research project! I hope you find it enjoyable.\n\nYou are asked to play this game a total of 8 times, over the course of 4 weeks. I will show you a calendar of when to play.\n\nIn the game, you are asked to take some tests. This is part of the research project, and I am sorry if it's a bit boring.\n\nWould you like to see the calendar now?");
+  text->SetText("Thanks for participating in this research project! I hope you find it enjoyable.\n\nYou are asked to play this game a total of 11 times, over the course of 4 weeks. I will show you a calendar of when to play.\n\nIn the game, you are asked to take some tests. This is part of the research project, and I am sorry if it's a bit boring.\n\nWould you like to see the calendar now?");
 }
 
 } // namespace

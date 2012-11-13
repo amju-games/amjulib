@@ -49,14 +49,22 @@ void GSCalendar::OnActive()
 //  GuiCalendarDayCell* cell = cal->GetCell(Time::Now());
 //  cell->SetBgCol(Colour(1, 0, 0, 1));
 
-  const Times& playDays = TheResearchCal::Instance()->GetPlayDates();
-  int n = playDays.size();
+  const ResearchDates& dates = TheResearchCalendar::Instance()->GetResearchDates();
+  int n = dates.size();
   for (int i = 0; i < n; i++)
   {
-    Time t = playDays[i];
+    Time t = dates[i].m_time;
     
     GuiCalendarDayCell* cell = cal->GetCell(t);
-    cell->SetBgCol(Colour(1, 0, 0, 1));
+    if (cell)
+    {
+      cell->SetBgCol(Colour(1, 0, 0, 1));
+    }
+    else
+    {
+      // TODO Not sure how serious this is
+std::cout << "Date not in range of calendar: " << t.ToString() << "\n";
+    }
   }
 }
 
