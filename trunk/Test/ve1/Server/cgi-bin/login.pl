@@ -54,11 +54,25 @@ sub add_research_element($$)
   {
     # No previous sessions, this is the first.
     print "First research session!\n";
-    print "<is_research_session>0</is_research_session>\n";
+    print "<is_research_session>1</is_research_session>\n";
     print "<session_num>1</session_num>\n"; # 1-based
-    print "<mode>0</mode>\n"; # No game, set baseline
+    # Mode: 0 = No game; 2 = Multi player mode. (No single player mode)
+    print "<mode>0</mode>\n"; 
     print "<cog_test>TODO</cog_test>\n";
   }
+
+  # Get calendar info
+  print "<dates>";
+  $sql = "select UNIX_TIMESTAMP(d.date), d.cog_test, d.play  from  player as p, research_group as g, research_date as d where p.research_group=g.research_group and d.date_id >= g.start_date and d.date_id <= g.end_date and p.id=$player_id";
+  $query = $dbh->prepare($sql) or die "Query prepare failed for this query: $sql\n";
+  $query->execute;
+  while (my ($timestamp, $cog_test, $play) = $query->fetchrow_array)
+  {
+    print "<date>";
+    print "<timestamp>$timestamp</timestamp><cogtest>$cog_test</cogtest><play>$play</play>";
+    print "</date>";
+  }
+  print "</dates>";
 
   print "</research>";
 }
