@@ -67,6 +67,7 @@ public:
   
   std::string ToString() const;
 
+  std::string ToStringJustDate() const;
 
   // Time arithmetic: you can add or subtract TimePeriods from Times.
   Time& operator+=(const TimePeriod&);
