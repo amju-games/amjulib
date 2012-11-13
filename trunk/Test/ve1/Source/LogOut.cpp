@@ -19,6 +19,8 @@ std::cout << "Logging out...\n";
     HttpResult res;
     hc.Get(url, HttpClient::GET, &res);
 std::cout << "Logout response: " << res.GetString() << "\n";
+
+    TheVe1ReqManager::Instance()->SetLoggedIn(false);
   }
 }
 }
