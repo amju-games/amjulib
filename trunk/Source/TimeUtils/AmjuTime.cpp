@@ -96,6 +96,19 @@ Time::Time(unsigned int secs) : m_secs(secs)
 
 }
 
+std::string Time::ToStringJustDate() const
+{
+  // TODO localisation!
+  std::string MONTH[] = { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
+  std::string DAY[] = { "Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun" };
+
+  int dayOfMonth = GetDayOfMonth();
+  int month = GetMonths() - 1; // 1-based
+  std::string str = MONTH[month] + Amju::ToString(dayOfMonth);
+  // TODO Year
+  return str;
+}
+
 std::string Time::ToString() const
 {
   tm mytm;
