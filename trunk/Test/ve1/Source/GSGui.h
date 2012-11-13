@@ -4,11 +4,10 @@
 #include "GSBase.h"
 #include <GuiElement.h>
 #include <GuiImage.h>
-//#include "TextDraw.h"
 
 namespace Amju 
 {
-class GSGui : public GSBase //, public TextDraw
+class GSGui : public GSBase 
 {
 protected:
   GSGui();
@@ -22,6 +21,9 @@ public:
 protected:
   bool LoadCogTestBg();
   void DrawCogTestBg();
+
+  // If gui is showing hearts, update the number to match local player's count
+  void UpdateHeartCount();
  
 protected:
   PGuiElement m_gui;

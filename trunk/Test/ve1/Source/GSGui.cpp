@@ -7,9 +7,11 @@
 #include <CursorManager.h>
 #include <Timer.h>
 #include <EventPoller.h>
+#include <GuiText.h>
 #include "LurkMsg.h"
 #include "Ve1SceneGraph.h"
 #include "ROConfig.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -134,6 +136,26 @@ void GSGui::DrawCogTestBg()
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
+}
 
+void GSGui::UpdateHeartCount()
+{
+  if (m_gui)
+  {
+    GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
+    if (text)
+    {
+      Player* p = GetLocalPlayer();
+      if (p)
+      {
+        static const char* STAMINA_KEY = "stamina";
+        if (p->Exists(STAMINA_KEY))
+        {
+          std::string s = p->GetVal(STAMINA_KEY);
+          text->SetText(s);
+        }
+      }
+    }
+  }
 }
 } // namespace
