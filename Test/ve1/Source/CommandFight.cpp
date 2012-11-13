@@ -14,9 +14,9 @@ bool CommandFight::Do()
   pos.y += 40.0f; // TODO TEMP TEST
   loc->MoveTo(pos);
 
-  Vec3f vel = loc->GetVel();
-  vel.y += YSIZE;
-  loc->SetVel(vel);
+//  Vec3f vel = loc->GetVel();
+//  vel.y += YSIZE;
+//  loc->SetVel(vel);
 
   SendFightReq(m_opponent);
 

@@ -272,8 +272,6 @@ bool Player::Load(File* f)
   }
   m_effect->SetVisible(true);
 
-  m_sceneNode->AddChild(m_effect.GetPtr());
-
   return true;
 }
 
@@ -300,6 +298,8 @@ void Player::OnLocationEntry()
   if (m_sceneNode)
   {
     m_sceneNode->AddChild(m_nameTag.GetPtr());
+
+    m_sceneNode->AddChild(m_effect.GetPtr());
   }
 
   // TODO Portal should have a heading which you should face when you appear at the destination

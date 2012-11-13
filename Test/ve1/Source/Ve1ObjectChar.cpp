@@ -183,15 +183,15 @@ void Ve1ObjectChar::Update()
       *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
     }
 
-    GetAABB()->Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
-      m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
-
     if (m_effect)
     {
       *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
     }
+
+    GetAABB()->Set(
+      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.y, m_pos.y + YSIZE,
+      m_pos.z - XSIZE, m_pos.z + XSIZE);
 
     TurnToFaceDir();
 
