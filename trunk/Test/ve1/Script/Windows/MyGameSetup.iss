@@ -5,7 +5,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{5F1820EB-3B24-4F20-B8EB-30D083C8511F}
+AppId={{027E36B-5981-4B37-9C8F-2ACF9E33EA4D}
 AppName=Crash Site
 AppVersion=0.5
 ;AppVerName=My Game 0.2
@@ -42,10 +42,10 @@ Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: i
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\My Game"; Filename: "{app}\ve1.exe"
-Name: "{commondesktop}\My Game"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\My Game"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
+Name: "{group}\Crash Site"; Filename: "{app}\ve1.exe"
+Name: "{commondesktop}\Crash Site"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Crash Site"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,My Game}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,Crash Site}"; Flags: nowait postinstall skipifsilent
 
