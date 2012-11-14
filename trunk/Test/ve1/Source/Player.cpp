@@ -157,9 +157,14 @@ public:
     
       Matrix m;
       m.SetIdentity();
-      //Vec3f tr(m_local[12], m_local[13], m_local[14]);
+
+      // Reverse modelview rotation
+      Matrix r;
+      r.ModelView();
+      m = TransposeRot(r);
+
       Vec3f tr(m_combined[12], m_combined[13], m_combined[14]);
-      m.Translate(tr);
+      m.TranslateKeepRotation(tr);
       AmjuGL::MultMatrix(m);
       static const float SCALE_FACTOR = 20.0f;
       float x = MAX_NAME_WIDTH * SCALE_FACTOR * -0.5f;
@@ -470,7 +475,7 @@ void Player::Update()
   {
     Vec3f dir = GetPos() - m_newPos;
     dir.y = 0; // ignore y coord for now
-    if (dir.SqLen() < 1.0f) // TODO CONFIG
+    if (dir.SqLen() < 10.0f) // TODO CONFIG
     {
       SetVel(Vec3f(0, 0, 0));
       m_newPos = GetPos();
@@ -560,8 +565,9 @@ void Player::SetMenu(GuiMenu* menu)
   }
   else
   {
+    // TODO put back leaving messages
     //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
-    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
+    //AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
 }
 
