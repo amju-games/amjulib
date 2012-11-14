@@ -1,3 +1,4 @@
+#include <Game.h>
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
@@ -61,11 +62,18 @@ void ResetLocalPlayer()
   Vec3f startPos(ToVec3(pos));
 
   Player* player = GetLocalPlayer();
-  TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayerId(), startPos, startLoc);
+  //TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayerId(), startPos, startLoc);
+  TheObjectUpdater::Instance()->SendChangeLocationReq(GetLocalPlayerId(), startPos, startLoc);
+
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+  
+  // ?
+  /*
   if (player)
   {
     player->SetPos(startPos); // client side predict - respond immediately
   }
+  */
 }
 
 }
