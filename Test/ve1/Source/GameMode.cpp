@@ -14,6 +14,11 @@ GameMode GetGameMode()
   return s_gm;
 }
 
+bool IsEditMode()
+{
+  return s_gm == AMJU_MODE_EDIT;
+}
+
 static bool cogTests = false;
 
 bool DoCogTests()
