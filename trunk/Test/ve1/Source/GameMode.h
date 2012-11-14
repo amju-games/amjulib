@@ -16,6 +16,8 @@ void SetGameMode(GameMode gm);
 
 GameMode GetGameMode();
 
+bool IsEditMode();
+
 bool DoCogTests();
 void SetDoCogTests(bool);
 }

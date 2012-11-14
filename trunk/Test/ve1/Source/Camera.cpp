@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Portal.h"
 #include "ROConfig.h"
+#include "GameMode.h"
 
 //#define CAM_DEBUG
 
@@ -42,7 +43,15 @@ void Camera::Reset()
   leftDrag = false;
   rightDrag = false;
   midDrag = false;
-  camKey = true;
+
+  if (IsEditMode())
+  {
+    camKey = false;
+  }
+  else
+  {
+    camKey = true;
+  }
 }
 
 void Camera::Update()
@@ -122,7 +131,10 @@ bool CameraControl::OnKeyEvent(const KeyEvent& kb)
 
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'c') 
   {
-    //camKey = kb.keyDown;
+    if (IsEditMode())
+    { 
+      camKey = kb.keyDown;
+    }
     return false;
   }
 
