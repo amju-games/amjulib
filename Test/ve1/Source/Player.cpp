@@ -31,8 +31,6 @@ namespace Amju
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
 
-static const char* STAMINA_KEY = "stamina";
-
 /*
 class PlayerSceneNode : public Ve1Character
 {
