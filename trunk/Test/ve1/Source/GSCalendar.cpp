@@ -43,27 +43,39 @@ void GSCalendar::OnActive()
   ok->SetCommand(OnCalOk);
 
   GuiCalendar* cal = dynamic_cast<GuiCalendar*>(GetElementByName(m_gui, "thecalendar"));
-  cal->SetStartEndDate(Time::MakeTime(0, 0, 0, 1, 11, 2012), Time::MakeTime(0, 0, 0, 1, 12, 2012));
 
   // Get Today cell ?
 //  GuiCalendarDayCell* cell = cal->GetCell(Time::Now());
 //  cell->SetBgCol(Colour(1, 0, 0, 1));
 
   const ResearchDates& dates = TheResearchCalendar::Instance()->GetResearchDates();
-  int n = dates.size();
-  for (int i = 0; i < n; i++)
+  if (dates.empty())
   {
-    Time t = dates[i].m_time;
+    // TODO show message - no sessions are scheduled 
+  }
+  else
+  {
+    ResearchDate start = dates[0];
+    ResearchDate end = dates[dates.size() - 1];
+    Time startTime = start.m_time;
+    Time endTime = end.m_time;
+    cal->SetStartEndDate(startTime, endTime);
+
+    int n = dates.size();
+    for (int i = 0; i < n; i++)
+    {
+      Time t = dates[i].m_time;
     
-    GuiCalendarDayCell* cell = cal->GetCell(t);
-    if (cell)
-    {
-      cell->SetBgCol(Colour(1, 0, 0, 1));
-    }
-    else
-    {
-      // TODO Not sure how serious this is
-std::cout << "Date not in range of calendar: " << t.ToString() << "\n";
+      GuiCalendarDayCell* cell = cal->GetCell(t);
+      if (cell)
+      {
+        cell->SetBgCol(Colour(1, 0, 0, 1));
+      }
+      else
+      {
+        // TODO Not sure how serious this is
+  std::cout << "Date not in range of calendar: " << t.ToString() << "\n";
+      }
     }
   }
 }
