@@ -14,13 +14,15 @@ bool CommandFight::Do()
   pos.y += 40.0f; // TODO TEMP TEST
   loc->MoveTo(pos);
 
+  // Causes player to float way up into the air
 //  Vec3f vel = loc->GetVel();
 //  vel.y += YSIZE;
 //  loc->SetVel(vel);
 
   SendFightReq(m_opponent);
 
-//    m_opponent->ShowAttacked();
+  // Do this when we get server response
+  //m_opponent->ShowAttacked();
    
   return false;
 }

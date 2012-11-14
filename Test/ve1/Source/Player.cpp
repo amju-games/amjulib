@@ -360,6 +360,34 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     bool isTyping = (recipId > 0);
     cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
+  else if (key == "beat_up_by")
+  {
+    if (val != "0" && IsLocalPlayer())
+    {
+      TheObjectUpdater::Instance()->SendUpdateReq(GetId(), "beat_up_by", "0");
+      int oppId = ToInt(val);
+      static int prevOpp = 0;
+      Player* opp = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(oppId).GetPtr());
+      std::string s = "You just got beat up!";
+      if (opp && !opp->GetName().empty())
+      {
+        s = "You just got beat up by " + opp->GetName();
+        if (oppId == prevOpp)
+        {
+          s += " again!";
+        }
+        else
+        {
+          s += "!";
+        }
+      }
+      prevOpp = oppId; // remember previous opponent
+
+      LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);
+      ShowAttacked();
+    }
+  }
 }
 
 void Player::SetArrowVis(bool visible)
