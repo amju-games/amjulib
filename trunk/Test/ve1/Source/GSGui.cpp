@@ -12,6 +12,7 @@
 #include "Ve1SceneGraph.h"
 #include "ROConfig.h"
 #include "LocalPlayer.h"
+#include "HeartCount.h"
 
 namespace Amju
 {
@@ -145,15 +146,10 @@ void GSGui::UpdateHeartCount()
     GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
     if (text)
     {
-      Player* p = GetLocalPlayer();
-      if (p)
+      int h = 0;
+      if (GetHeartCount(&h))
       {
-        static const char* STAMINA_KEY = "stamina";
-        if (p->Exists(STAMINA_KEY))
-        {
-          std::string s = p->GetVal(STAMINA_KEY);
-          text->SetText(s);
-        }
+        text->SetText(ToString(h));
       }
     }
   }

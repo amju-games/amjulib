@@ -38,6 +38,8 @@ enum Task
   FIGHT,
   GOT_COLLECT, // notify server when player gets a collectable item
 
+  CHANGE_VALUE, // add or subtract to a numeric value for an object
+
   // Research
   SEND_TEST_RESULT,
 };

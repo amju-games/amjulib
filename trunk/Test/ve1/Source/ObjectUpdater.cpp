@@ -434,7 +434,7 @@ void ObjectUpdater::SendUpdateReq(int objId, const std::string& key, const std::
 
   std::string reqName = "obj_up_" + ToString(objId) + "_" + key;
 
-  // Discard all but most recent
+  // Discard all but most recent (name is unique for obj ID and key)
   TheVe1ReqManager::Instance()->AddReq(new ObjUpdateReq(url, reqName), 1, false);
 }
 
