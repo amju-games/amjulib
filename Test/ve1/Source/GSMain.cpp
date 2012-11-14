@@ -621,8 +621,20 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
     //return false; 
   }
 
+  m_mouseScreen.x = mbe.x;
+  m_mouseScreen.y = mbe.y;
+  static Vec2f mouseScreenButtonDown;
+  if (mbe.isDown)
+  {
+    mouseScreenButtonDown = m_mouseScreen;
+  }
+
+  float sqlen = (m_mouseScreen - mouseScreenButtonDown).SqLen();
+  std::cout << "Sqlen: " << sqlen << "\n";
+  bool dragged = (sqlen > 0.01f);
+
   // Do req if mouse button is down but no menu
-  if (mbe.isDown && (!m_menu || !m_menu->IsVisible()))
+  if (!mbe.isDown && !dragged && (!m_menu || !m_menu->IsVisible()))
   {
     m_moveRequest = true;
   }
