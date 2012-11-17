@@ -3,14 +3,15 @@
 #include <Game.h>
 #include <GuiButton.h>
 #include "GSTitle.h"
-#include "LogOut.h"
+#include "GSLogout.h"
 
 namespace Amju
 {
 static void OnQuitSession()
 {
-  SendLogOut();
-  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+//  SendLogOut();
+  TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());
 }
 
 static void OnQuitProcess()
