@@ -64,12 +64,31 @@ void GSCalendar::OnActive()
     int n = dates.size();
     for (int i = 0; i < n; i++)
     {
-      Time t = dates[i].m_time;
+      const ResearchDate& d = dates[i];
+      Time t = d.m_time;
     
       GuiCalendarDayCell* cell = cal->GetCell(t);
       if (cell)
       {
         cell->SetBgCol(Colour(1, 0, 0, 1));
+        std::string str;
+        if (d.m_cogTest && d.m_play)
+        {
+          str = "Please play game at set time, and take tests.";
+        }
+        else if (d.m_cogTest)
+        {
+          str = "Please take tests only, at any time.";
+        }
+        else if (d.m_play)
+        {
+          str = "Please play game at set time - no tests.";
+        }
+        else
+        {
+          Assert(0);
+        }
+        cell->SetMainEventStr(str);
       }
       else
       {

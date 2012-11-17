@@ -5,6 +5,9 @@
 
 namespace Amju
 {
+// Use this to create a Local Player object when we are doing cog tests only.
+void CreateDummyLocalPlayer();
+
 void SetLocalPlayerId(int localPlayerId);
 int GetLocalPlayerId();
 

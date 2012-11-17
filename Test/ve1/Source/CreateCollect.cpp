@@ -7,6 +7,13 @@ namespace Amju
 {
 void CreateCollect(int type, int specialId)
 {
+  Player* player = GetLocalPlayer();
+  if (!player)
+  {
+    Assert(0);
+    return;
+  }
+
   Collect* c = new Collect;
   static int id = 1000000;
   id++;
@@ -18,7 +25,7 @@ void CreateCollect(int type, int specialId)
   c->SetLocation(GetLocalPlayerLocation());
 
   // Set position
-  c->SetPos(GetLocalPlayer()->GetPos());
+  c->SetPos(player->GetPos());
   
   // TODO TEMP TEST
   // Set pos first
