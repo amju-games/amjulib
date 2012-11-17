@@ -148,7 +148,7 @@ void ReqLogin::ChooseMode()
 {
   TheResearchCalendar::Instance()->Clear();
 
-  GameMode gm = AMJU_MODE_MULTI;
+  GameMode gm = AMJU_MODE_NO_GAME;
   bool doCogTests = false;
 
   PXml research = m_xml.getChildNode(5);
@@ -235,10 +235,14 @@ std::cout << "Found research element but unexpected format (no mode).\n";
             t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
             if (t == today)
             {
+              // TODO Cog tests already done today ?
               doCogTests = cogtest;
-              if (!play)
+              if (play)
               { 
-                gm = AMJU_MODE_NO_GAME;
+                gm = AMJU_MODE_MULTI;
+              }
+              if (doCogTests && !play)
+              {
                 // Create dummy target for heart count, etc
                 CreateDummyLocalPlayer();
               }
