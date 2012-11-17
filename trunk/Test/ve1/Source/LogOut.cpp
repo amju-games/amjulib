@@ -9,7 +9,10 @@ void SendLogOut()
 {
   if (TheVe1ReqManager::Instance()->IsLoggedIn())
   {
-std::cout << "Logging out...\n";
+std::cout << "Logging out, so first clearing request queue...\n";
+    TheVe1ReqManager::Instance()->Clear();
+
+std::cout << "Now sending log out request (blocking)...\n";
 
     // Not threaded - so we definitely send request on exit ?
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(LOGOUT);
