@@ -1,0 +1,38 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+finishedtests-comp
+// Num children
+3
+
+gui-button
+ok-button
+// pos
+-0.4, -0.3
+// size
+0.8, 0.2
+gui-button-4.png
+ok
+arial, 2.0
+
+
+gui-text
+thanks-text
+-0.8, 0.9
+1.6, 0.2
+Well done!
+arial, 2.0, fgcol=ffffff
+
+gui-text
+long-text
+-0.9, 0.6
+1.8, 1.2
+// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
+Well done, and thanks for doing the tests!
+arial, 1.0, multi, fgcol=ffffff
+
+
+
