@@ -27,8 +27,8 @@ sub fight()
   }
 
   # Fighting player object ID (not required, get from session ?)
-  my $id = 1; #param('id') or die "No id";
-  my $opp = 3; #param('opp') or die "No opponent id";
+  my $id = param('id') or die "No id";
+  my $opp = param('opp') or die "No opponent id";
 
   # TODO Special stats table ????? OR read-only flag for keys
   
@@ -55,12 +55,16 @@ print "Your attack: $attack Opponent attack: $oppattack\n";
     $oppdamage = 1;
 #    $oppstamina -= $oppdamage;
     update("update objectstate set `val`=`val` - 1, whenchanged=now() where `id`=$opp and `key`='stamina'");
+
+    # Set beat up key/val pair, so attacked player gets message
+    update_or_insert("insert into objectstate values ($opp, 'beat_up_by', '$id', now()) on duplicate key update `val`='$id'");
   }
   else
   {
     $damage = 1;
 #    $stamina -= $damage;
     update("update objectstate set `val`=`val` - 1, whenchanged=now() where `id`=$id and `key`='stamina'");
+    update_or_insert("insert into objectstate values ($opp, 'beat_up_by', '$id', now()) on duplicate key update `val`='$id'");
   }
 
 print "You take: $damage damage  Opponent takes: $oppdamage damage\n";
