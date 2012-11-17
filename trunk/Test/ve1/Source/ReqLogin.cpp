@@ -1,4 +1,5 @@
 #include "ReqLogin.h"
+#include <TimePeriod.h>
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
 #include <Xml/XmlParser2.h>
@@ -145,119 +146,136 @@ std::cout << "Didn't get sesssion ID from server :-(\n";
 
 void ReqLogin::ChooseMode()
 {
-    TheResearchCalendar::Instance()->Clear();
+  TheResearchCalendar::Instance()->Clear();
 
-    GameMode gm = AMJU_MODE_MULTI;
-    bool doCogTests = false;
+  GameMode gm = AMJU_MODE_MULTI;
+  bool doCogTests = false;
 
-    PXml research = m_xml.getChildNode(5);
-    if (SafeStrCmp(research.getName(), "research"))
-    {
-      PXml p;
+  PXml research = m_xml.getChildNode(5);
+  if (SafeStrCmp(research.getName(), "research"))
+  {
+    PXml p;
       
-      /*
-      p = research.getChildNode(0);
-      if (SafeStrCmp(p.getName(), "is_research_session")) 
+    /*
+    p = research.getChildNode(0);
+    if (SafeStrCmp(p.getName(), "is_research_session")) 
+    {
+      int isRS = ToInt(p.getText());
+      if (isRS)
       {
-        int isRS = ToInt(p.getText());
-        if (isRS)
-        {
-          doCogTests = true;
+        doCogTests = true;
 std::cout << "This is a research session so we should do the cog tests before going into the game.\n"; 
-        }
-        else
-        {
+      }
+      else
+      {
 std::cout << "This is NOT a research session, woohoo!\n";
-        }
-      }
-      else
-      {
-std::cout << "Found research element but unexpected format (no is_research_session).\n";
-      }
-
-      p = research.getChildNode(2);
-      if (SafeStrCmp(p.getName(), "mode"))
-      {
-        int mode = ToInt(p.getText());
-        switch (mode)
-        {
-        case 0: 
-std::cout << "'NO GAME' MODE!!\n";
-          gm = AMJU_MODE_NO_GAME; 
-          break;
-        
-        case 1:
-std::cout << "SINGLE MODE!!\n";
-          gm = AMJU_MODE_SINGLE;
-          break;
-
-        case 2:
-std::cout << "MULTI MODE!!\n";
-          gm = AMJU_MODE_MULTI;
-          break;
-
-        default:
-std::cout << "Unexpected mode value.\n";
-    
-        }
-      }
-      else
-      {
-std::cout << "Found research element but unexpected format (no mode).\n";
-      }
-      */
-
-      // Schedule - for calendar
-      p = research.getChildNode(4);
-      if (SafeStrCmp(p.getName(), "dates"))
-      {
-        // Bunch of dates - add to TheResearchCal
-        int numDates = p.nChildNode();
-        for (int i = 0; i < numDates; i++)
-        {
-          PXml date = p.getChildNode(i);
-          if (SafeStrCmp(date.getName(), "date"))
-          {
-            if (SafeStrCmp(date.getChildNode(0).getName(), "timestamp") &&
-                SafeStrCmp(date.getChildNode(1).getName(), "cogtest") &&
-                SafeStrCmp(date.getChildNode(2).getName(), "play"))
-            {
-              std::string dateStr = date.getChildNode(0).getText();
-              bool cogtest = SafeStrCmp(date.getChildNode(1).getText(), "1"); 
-              bool play = SafeStrCmp(date.getChildNode(2).getText(), "1"); 
-              TheResearchCalendar::Instance()->AddResearchDate(ResearchDate(Time(dateStr), cogtest, play));   
-            }
-            else
-            {
-              std::cout << "Login: unexpected format for session dates.\n";
-              Assert(0);
-            }
-          }
-        }
-      }
-      else
-      {
-        std::cout << "Login: found research element but no schedule.\n";
       }
     }
     else
     {
-      std::cout << "No research element in login.pl response?!?\n";
-      Assert(0);
+std::cout << "Found research element but unexpected format (no is_research_session).\n";
     }
 
-    // Now we can look up today on the calendar to get game mode flags.
+    p = research.getChildNode(2);
+    if (SafeStrCmp(p.getName(), "mode"))
+    {
+      int mode = ToInt(p.getText());
+      switch (mode)
+      {
+      case 0: 
+std::cout << "'NO GAME' MODE!!\n";
+        gm = AMJU_MODE_NO_GAME; 
+        break;
+        
+      case 1:
+std::cout << "SINGLE MODE!!\n";
+        gm = AMJU_MODE_SINGLE;
+        break;
 
-    SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
+      case 2:
+std::cout << "MULTI MODE!!\n";
+        gm = AMJU_MODE_MULTI;
+        break;
 
-    SetDoCogTests(doCogTests); // mode, in GameMode
+      default:
+std::cout << "Unexpected mode value.\n";
+    
+      }
+    }
+    else
+    {
+std::cout << "Found research element but unexpected format (no mode).\n";
+    }
+    */
 
-    TheGSCalendar::Instance()->SetPrevState(TheGSToday::Instance());
-    TheGSThanks::Instance()->SetPrevState(TheGSToday::Instance());
-    TheGame::Instance()->SetCurrentState(TheGSThanks::Instance());
+    // Schedule - for calendar
+    p = research.getChildNode(4);
+    if (SafeStrCmp(p.getName(), "dates"))
+    {
+      static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+      Time today(Time::Now());
+      today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
-      //TheGSStartGame::Instance()); 
-      //TheGSFileUpdateCheck::Instance());
+      // Bunch of dates - add to TheResearchCal
+      int numDates = p.nChildNode();
+      for (int i = 0; i < numDates; i++)
+      {
+        PXml date = p.getChildNode(i);
+        if (SafeStrCmp(date.getName(), "date"))
+        {
+          if (SafeStrCmp(date.getChildNode(0).getName(), "timestamp") &&
+              SafeStrCmp(date.getChildNode(1).getName(), "cogtest") &&
+              SafeStrCmp(date.getChildNode(2).getName(), "play"))
+          {
+            std::string dateStr = date.getChildNode(0).getText();
+            bool cogtest = SafeStrCmp(date.getChildNode(1).getText(), "1"); 
+            bool play = SafeStrCmp(date.getChildNode(2).getText(), "1"); 
+
+            Time t(dateStr);
+            t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+            if (t == today)
+            {
+              doCogTests = cogtest;
+              if (!play)
+              { 
+                gm = AMJU_MODE_NO_GAME;
+                // Create dummy target for heart count, etc
+                CreateDummyLocalPlayer();
+              }
+            }
+            TheResearchCalendar::Instance()->AddResearchDate(ResearchDate(Time(dateStr), cogtest, play));   
+          }
+          else
+          {
+            std::cout << "Login: unexpected format for session dates.\n";
+            Assert(0);
+          }
+        }
+      }
+    }
+    else
+    {
+      std::cout << "Login: found research element but no schedule.\n";
+    }
+  }
+  else
+  {
+    std::cout << "No research element in login.pl response?!?\n";
+    Assert(0);
+  }
+
+  // Now we can look up today on the calendar to get game mode flags.
+
+  SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
+
+  SetDoCogTests(doCogTests); // mode, in GameMode
+
+  TheGSCalendar::Instance()->SetPrevState(TheGSToday::Instance());
+  TheGSThanks::Instance()->SetPrevState(TheGSToday::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSThanks::Instance());
+
+    //TheGSStartGame::Instance()); 
+    //TheGSFileUpdateCheck::Instance());
 }
 
 void SendLoginReq(const std::string& email)

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "GSNetError.h"
 #include "CreateCollect.h"
+#include "HeartCount.h"
 
 namespace Amju
 {
@@ -89,6 +90,29 @@ std::cout << "NET ERROR AND IS CRITICAL!?!: " << m_errorStr << " - request name:
 
     // Non critical... check if errors happen a lot or just sporadically 
 std::cout << "NET ERROR but non-critical: " << m_errorStr << " - request name: " << m_name << "\n";
+  }
+}
+
+void Ve1Req::CheckCollects2d()
+{
+  int n = m_xml.nChildNode();
+
+  for (int i = 1; i < n; i++)
+  {
+    PXml p = m_xml.getChildNode(i);
+    if (SafeStrCmp(p.getName(), "collect"))
+    {
+std::cout << "Found collect msg!!\n";
+      // format: <collect> <num/> <type/> <id/> </collect>
+      PXml ch = p.getChildNode(0);
+      if (!SafeStrCmp(ch.getName(), "num"))
+      {
+        m_errorStr += "bad collect element";
+        OnFailure();
+      }
+      int num = ToInt(ch.getText());
+      ChangeHeartCount(num);
+    }
   }
 }
 
