@@ -1,16 +1,52 @@
 #include <TimePeriod.h>
 #include "GuiCalendar.h"
 #include "GuiText.h"
+#include "DrawBorder.h"
 
 namespace Amju
 {
 const char* GuiCalendar::NAME = "gui-calendar";
 
 static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+static const int ONE_WEEK_IN_SECONDS = ONE_DAY_IN_SECONDS * 7;
 
 GuiElement* CreateCalendar()
 {
   return new GuiCalendar;
+}
+
+GuiCalendar::GuiCalendar()
+{
+  m_focus = 0;
+}
+
+void GuiCalendar::Draw()
+{
+  GuiComposite::Draw();
+  // Draw focus day
+  if (m_focus)
+  {
+    GuiCalendarDayCell* dc = dynamic_cast<GuiCalendarDayCell*>(m_focus);
+    Assert(dc);
+
+    RCPtr<GuiText> text = new GuiText;
+    text->SetIsMulti(true);
+    text->SetTextSize(1.2f); // TODO CONFIG
+    text->SetSize(Vec2f(0.8f, 0.1f)); // sets max line width
+    text->SetLocalPos(m_focus->GetCombinedPos());
+    text->SetText(dc->GetMainEventStr());
+    text->SizeToText();
+    text->SetFgCol(Colour(0, 0, 0 ,1));
+    text->SetBgCol(Colour(1, 1, 1 ,1));
+    text->SetDrawBg(true);
+
+    text->Draw();
+  }
+}
+
+const Vec2f& GuiCalendar::GetCellSize() const
+{
+  return m_cellSize;
 }
 
 bool GuiCalendar::Load(File* f)
@@ -57,10 +93,21 @@ bool GuiCalendar::Load(File* f)
 
 void GuiCalendar::SetStartEndDate(Time start, Time end)
 {
+  Clear();
+
   std::string MONTH[] = { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
+
+  Time today = Time::Now();
+  today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
   start.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
   end.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  // Round up to end of week
+  int daysToEndOfWeek = 7 - end.GetDayOfWeek();
+  if (daysToEndOfWeek < 7)
+  {
+    end += TimePeriod(ONE_DAY_IN_SECONDS * daysToEndOfWeek);
+  }
 
   int numdays = (end - start).ToSeconds() / ONE_DAY_IN_SECONDS;
   int numrows = numdays / 7;
@@ -71,7 +118,7 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   Vec2f size = GetSize();
   float w = size.x / 7.0f;
   float h = (size.y - 0.1f) / (float)numrows;
-  Vec2f cellSize(w, h);
+  m_cellSize = Vec2f(w, h);
 
   int day = start.GetDayOfWeek() - 1;
   if (day < 0)
@@ -83,17 +130,18 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   float x = (float)day * w;
   for (int i = 0; i <= numdays; i++)
   {
-    GuiCalendarDayCell* text = new GuiCalendarDayCell;
-    text->SetTextSize(1.0f); // TODO CONFIG
-    text->SetSize(cellSize); 
-    text->SetIsMulti(true);
+    GuiCalendarDayCell* text = new GuiCalendarDayCell(this);
     text->SetTime(start);
 
     int dayOfMonth = start.GetDayOfMonth();
     int month = start.GetMonths() - 1; // 1-based
     std::string str = MONTH[month] + "\n" + ToString(dayOfMonth);
     text->SetText(str);
-//std::cout << start.ToString() << "\n";
+
+    if (start == today)
+    {
+      text->SetInverse(true);
+    }
 
     start += ONE_DAY_IN_SECONDS;
     text->SetLocalPos(Vec2f(x, y));
@@ -117,7 +165,6 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
     }
 
     text->SetBgCol(bg);
-    text->SetDrawBg(true);
     
     AddChild(text);
   }
@@ -139,8 +186,30 @@ GuiCalendarDayCell* GuiCalendar::GetCell(Time t)
   return 0;
 }
 
-GuiCalendarDayCell::GuiCalendarDayCell() : m_timestamp(0)
+void GuiCalendar::SetFocusDay(GuiCalendarDayCell* focus)
 {
+  m_focus = focus;
+}
+
+bool GuiCalendar::OnCursorEvent(const CursorEvent& ce)
+{
+  GuiComposite::OnCursorEvent(ce);
+
+  Rect r = GetRect(this);
+  if (!r.IsPointIn(Vec2f(ce.x, ce.y)))
+  {
+    SetFocusDay(0);
+  }
+  return false;
+}
+
+GuiCalendarDayCell::GuiCalendarDayCell(GuiCalendar* parent) : m_timestamp(0)
+{
+  SetParent(parent);
+  SetTextSize(1.0f); // TODO CONFIG
+  SetSize(parent->GetCellSize()); 
+  SetIsMulti(true);
+  SetDrawBg(true);
 }
 
 void GuiCalendarDayCell::SetTime(Time t)
@@ -151,5 +220,32 @@ void GuiCalendarDayCell::SetTime(Time t)
 Time GuiCalendarDayCell::GetTime() const
 {
   return m_timestamp;
+}
+
+void GuiCalendarDayCell::Draw()
+{
+  GuiText::Draw(); // TODO for now
+  DrawBorder(this, Colour(1, 1, 1, 1));
+}
+
+bool GuiCalendarDayCell::OnCursorEvent(const CursorEvent& ce)
+{
+  Rect r = GetRect(this);
+  if (r.IsPointIn(Vec2f(ce.x, ce.y)))
+  {
+    // Show event
+    ((GuiCalendar*)m_parent)->SetFocusDay(this);
+  }
+  return false;
+}
+
+const std::string GuiCalendarDayCell::GetMainEventStr() const
+{
+  return m_mainEventStr;
+}
+
+void GuiCalendarDayCell::SetMainEventStr(const std::string& str)
+{
+  m_mainEventStr = str;
 }
 }

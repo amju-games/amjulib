@@ -2,6 +2,7 @@
 #include <AmjuGL.h>
 #include <Screen.h>
 #include <DrawRect.h>
+#include "DrawBorder.h"
 
 #define NESTED_VIEWPORTS
 
@@ -29,13 +30,7 @@ void GuiWindow::Draw()
 //#ifdef WINDOW_DEBUG
   // TODO make this a flag
   // Border
-  Rect r = GetRect(this);
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  PushColour();
-  AmjuGL::SetColour(1, 1, 1, 1); // TODO make configurable
-  DrawRect(r);
-  PopColour();
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  DrawBorder(this, Colour(1, 1, 1, 1));
 //#endif
 
   int vp[4];
