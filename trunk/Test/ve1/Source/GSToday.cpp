@@ -89,7 +89,7 @@ void GSToday::OnActive()
     if (DoCogTests())
     {
       str = "Today, please take a few tests. This should take about ten minutes. After that, you are done!";
-      // TODO Get next date from the ResearchCalendar
+      // TODO Get next date from the ResearchCalendar -- show in final thanks page
     }
     else
     {

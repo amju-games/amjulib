@@ -81,6 +81,7 @@ void CreateDummyLocalPlayer()
 {
   Player* p = new Player;
   p->SetId(GetLocalPlayerId());
+  TheGame::Instance()->ClearGameObjects();
   TheGame::Instance()->AddGameObject(p);
 }
 }
