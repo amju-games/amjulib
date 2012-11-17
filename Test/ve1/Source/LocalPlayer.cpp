@@ -61,7 +61,7 @@ void ResetLocalPlayer()
   std::string pos = ROConfig()->GetValue("start-pos");
   Vec3f startPos(ToVec3(pos));
 
-  Player* player = GetLocalPlayer();
+  //Player* player = GetLocalPlayer();
   //TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayerId(), startPos, startLoc);
   TheObjectUpdater::Instance()->SendChangeLocationReq(GetLocalPlayerId(), startPos, startLoc);
 
@@ -76,6 +76,13 @@ void ResetLocalPlayer()
   */
 }
 
+
+void CreateDummyLocalPlayer()
+{
+  Player* p = new Player;
+  p->SetId(GetLocalPlayerId());
+  TheGame::Instance()->AddGameObject(p);
+}
 }
 
 
