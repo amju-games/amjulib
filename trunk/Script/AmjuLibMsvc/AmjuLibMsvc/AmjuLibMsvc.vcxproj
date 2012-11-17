@@ -198,6 +198,7 @@
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiCalendar.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
@@ -455,6 +456,7 @@
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
+    <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h" />

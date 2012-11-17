@@ -1,10 +1,11 @@
 #include "GuiText.h"
 #include "Font.h"
 #include "DrawRect.h"
-#include "Colour.h"
+#include <Colour.h>
 #include <StringUtils.h>
 #include <Timer.h>
 #include <TextToSpeech.h>
+#include "DrawBorder.h"
 
 //#define TEXT_RECT_DEBUG
 
@@ -150,12 +151,17 @@ void GuiText::Draw()
     return;
   }
 
+  // TODO make this a flag ?
 #ifdef TEXT_RECT_DEBUG
-  Rect r = GetRect(this);
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  DrawRect(r);
-  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  DrawBorder(this, Colour(1, 1, 1, 1)); 
 #endif // _DEBUG
+
+  bool inverse = (m_inverse || IsSelected());
+
+  if (m_drawBg)
+  {
+    DrawFilled(this, inverse ? m_fgCol : m_bgCol);
+  }
 
   ReallyDraw();
 
@@ -178,17 +184,6 @@ void GuiText::ReallyDraw()
   Font* font = GetFont();
 
   bool inverse = (m_inverse || IsSelected());
-
-  if (m_drawBg)
-  {
-    PushColour();
-    MultColour(inverse ? m_fgCol : m_bgCol);
-    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    Rect r = GetRect(this);
-    DrawSolidRect(r);
-    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-    PopColour();
-  }
 
   float oldSize = font->GetSize();
   font->SetSize(m_textSize * oldSize);
@@ -219,7 +214,9 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
   Vec2f pos = GetCombinedPos();
 
   float y = pos.y - m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
-  float minY = pos.y - GetSize().y;
+  // The extra fudge factor here is so we don't discard the last line
+  //  when it fits ok, because it's a borderline case.
+  float minY = pos.y - GetSize().y - 0.01f;
 
   int lines = m_lines.size();
   for (int i = m_topLine; i < lines; i++)
@@ -239,6 +236,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
     PopColour();
 
     y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
+    // TODO Make text a window so lines will be clipped
     if (y < minY)
     {
       break;
