@@ -35,11 +35,18 @@ public:
 
 bool ChangeHeartCount(int delta)
 {
+  Player* player = GetLocalPlayer();
+  if (!player)
+  {
+    return false;
+  }
+
   // Must be a server side script to avoid lost data! 
   static const int MAX_CHANGE_HEARTS = 100;
   static const std::string STAMINA_KEY = "stamina";
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(CHANGE_VALUE);
+  url += "&player_obj_id=" + player->GetId();
   url += "&key=" + STAMINA_KEY;
   url += "&change=" + ToString(delta);
 
