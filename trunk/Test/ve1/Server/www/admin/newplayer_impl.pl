@@ -34,7 +34,7 @@ sub new_player_impl($$$)
     return;
   }
 
-  my $insertsql = "insert into player (playername, email, hashpw, thumbnail, lasttime) values ('$playername', '$email', 'HASHPW', '', now())";
+  my $insertsql = "insert into player (playername, email, hashpw, thumbnail, lasttime, research_group) values ('$playername', '$email', 'HASHPW', '', now(), 'a')";
   insert($insertsql);
 
   my $querysql = "select id from player where email='$email'";
@@ -106,7 +106,7 @@ sub new_player_impl($$$)
   print MAIL "From: jason\@amju.com\n";
   print MAIL "To: $email\n";
   print MAIL "Subject: Welcome to MY GAME!\n\n";
-  print MAIL "Dear $playername,\nwelcome to My Game, an experimental multi-player online game.\n\nTo get started, please go to www.amju.com/ve1/www\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
+  print MAIL "Dear $playername,\nThanks for volunteering to participate in my experiment.\n\nTo get started, please go to www.amju.com/ve1/www\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
   close(MAIL);
 
   print "All OK, and sent email to new player.\n"; 
