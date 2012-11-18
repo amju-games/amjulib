@@ -11,7 +11,7 @@ docogtests-comp
 gui-button
 ok-button
 // pos
--0.4, -0.3
+-0.4, -0.2
 // size
 0.8, 0.2
 gui-button-4.png
@@ -21,12 +21,12 @@ arial, 2.0
 gui-button
 quit-button
 // pos
--0.4, -0.5
+-0.2, -0.5
 // size
-0.8, 0.2
+0.4, 0.1
 gui-button-4.png
 quit
-arial, 2.0
+arial, 1.0
 
 gui-text
 date-text
