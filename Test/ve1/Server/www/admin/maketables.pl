@@ -24,6 +24,7 @@ CREATE TABLE `player`
 `thumbnail` VARCHAR(30) NOT NULL,
 `lasttime` TIMESTAMP,
 `obj_id` INT NOT NULL,
+`research_group` VARCHAR(10) NOT NULL,
 PRIMARY KEY (`id`),
 FOREIGN KEY (`obj_id`) REFERENCES object(`id`)
 ) ENGINE = MYISAM;
