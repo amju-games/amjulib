@@ -25,9 +25,6 @@ static const float MAX_TIME = 45.0f; // from Malec et al
 static void OnStopTest()
 {
   OnCogTestStopPartWayThrough();
-
-  // Go back to Main, will nag again later.
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 static void OnDoneButton()
@@ -124,6 +121,7 @@ void GSStroopColourWord::OnLeftRight(bool isLeftButton)
 
 void OnSeeResultsNo()
 {
+  OnCogTestsAllDone();
 }
 
 void OnSeeResultsYes()
@@ -201,8 +199,6 @@ void GSStroopColourWord::Finished()
       LURK_FG, LURK_BG, OnSeeResultsNo, OnSeeResultsYes);
     
     SetDoCogTests(false); // TODO Or SetCogTestsDone()
-
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
   }
 }
 

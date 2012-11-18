@@ -1,8 +1,16 @@
-#include "GSCogResults.h"
 #include <AmjuGL.h>
+#include <GuiButton.h>
+#include "GSCogResults.h"
+#include "CogTestNag.h"
 
 namespace Amju
 {
+static void OnCogTestResultsOk()
+{
+  // TODO does this work from anywhere ??
+  OnCogTestsAllDone();
+}
+
 GSCogResults::GSCogResults()
 {
 }
@@ -32,6 +40,8 @@ void GSCogResults::OnActive()
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+  ok->SetCommand(OnCogTestResultsOk);
 }
 
 } // namespace

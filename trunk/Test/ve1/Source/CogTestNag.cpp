@@ -9,6 +9,8 @@
 #include "ChatConsole.h"
 #include "GSDoThoseCogTests.h"
 #include "GSMain.h"
+#include "GSFinishedTests.h"
+#include "GSFileUpdateCheck.h"
 
 namespace Amju
 {
@@ -49,6 +51,19 @@ void OnDeclineCogTests()
   TheLurker::Instance()->Queue(lm);
   nagdone = false;
   cogtesttime = 0;
+}
+
+void OnCogTestsAllDone()
+{
+  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  {
+    TheGame::Instance()->SetCurrentState(TheGSFinishedTests::Instance());
+  }
+  else
+  {
+    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+  }
+  TheGSCogTestMenu::Instance()->ResetTests();
 }
 
 void OnCogTestStopPartWayThrough()

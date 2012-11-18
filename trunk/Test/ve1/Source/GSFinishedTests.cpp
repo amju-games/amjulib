@@ -1,13 +1,16 @@
 #include <AmjuGL.h>
 #include <GuiButton.h>
+#include <Game.h>
 #include "GSFinishedTests.h"
+#include "GSLogout.h"
 #include "GSTitle.h"
 
 namespace Amju
 {
 static void OnFinishedTestsOk()
 {
-  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+  TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());
 }
 
 GSFinishedTests::GSFinishedTests()

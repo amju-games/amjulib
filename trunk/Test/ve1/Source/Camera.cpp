@@ -160,7 +160,7 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   {
     yRot2 -= dx;
     xRot -= dy;
-    b = true;
+    b = false; // true means we can't move off a button we have pressed down
   }
   if (rightDrag)
   {
