@@ -4,7 +4,7 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+lettercanc-comp
 // Num children
 6
 
@@ -53,15 +53,15 @@ gui-button
 // Element name
 cancel-button
 // pos (coords are -1..1)
--0.4, -0.6
+-0.9, 0.9
 // size
-0.8, 0.2
+0.4, 0.1
 // Image
 gui-button-4.png
 // Text
 stop test
 // Font name, size
-arial, 2.0 
+arial, 1.0 
 
 
 // Heart image
