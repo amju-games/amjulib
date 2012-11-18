@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>My Game</string>
+	<string>Crash Site</string>
 	<key>CFBundleGetInfoString</key>
-	<string>My Game</string>
+	<string>Crash Site</string>
 	<key>CFBundleIconFile</key>
 	<string>amju_icon5.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>My Game</string>
+	<string>Crash Site</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>My Game</string>
+	<string>Crash Site</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
