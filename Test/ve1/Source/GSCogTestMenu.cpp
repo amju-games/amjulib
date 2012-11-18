@@ -19,6 +19,8 @@
 #include "GameMode.h"
 #include "ROConfig.h"
 #include "GameConsts.h"
+#include "GSFinishedTests.h"
+#include "CogTestNag.h"
 
 namespace Amju
 {
@@ -83,8 +85,7 @@ static void ReactionTime()
 
 static void Done()
 {
-  TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
-  TheGSCogTestMenu::Instance()->ResetTests();
+  OnCogTestsAllDone();
 }
 
 GSCogTestMenu::GSCogTestMenu()

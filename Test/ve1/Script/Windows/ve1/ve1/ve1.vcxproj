@@ -210,10 +210,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSEdit.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSEditLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSFileUpdateCheck.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSFinishedTests.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLetterCancellation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLogout.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSNetError.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSNewLocation.cpp" />
@@ -334,10 +336,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSEdit.h" />
     <ClInclude Include="..\..\..\..\Source\GSEditLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSFileUpdateCheck.h" />
+    <ClInclude Include="..\..\..\..\Source\GSFinishedTests.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
     <ClInclude Include="..\..\..\..\Source\GSLetterCancellation.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLogout.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
     <ClInclude Include="..\..\..\..\Source\GSNetError.h" />
     <ClInclude Include="..\..\..\..\Source\GSNewLocation.h" />

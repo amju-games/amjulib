@@ -106,12 +106,6 @@ void GSReactionTime::Quit()
 {
   // TODO Play a sound
   OnCogTestStopPartWayThrough();
-
-  // Don't advance, not done this one yet.
-  //TheGSCogTestMenu::Instance()->AdvanceToNextTest();
-
-  // Go back to Main, will nag again later.
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 void GSReactionTime::NextGo()

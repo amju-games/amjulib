@@ -16,6 +16,8 @@ public:
   void Update(); 
 };
 
+void OnCogTestsAllDone(); // call when all tests completed
+
 void OnCogTestStopPartWayThrough();
 
 void NagReset();

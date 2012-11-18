@@ -8,6 +8,7 @@
 #include "GSCogTestMenu.h"
 #include "GSTitle.h"
 #include "GSStartGame.h"
+#include "GSLogout.h"
 
 namespace Amju
 {
@@ -26,7 +27,8 @@ static void OnTodayOk()
     else
     {
       // Explain state ?? No, the text in this state explains.
-      state = TheGSTitle::Instance();
+      TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
+      TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());
     }
   }
   else if (GetGameMode() == AMJU_MODE_MULTI)
