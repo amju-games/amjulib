@@ -10,6 +10,7 @@
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "GSDeath.h"
+#include "GameMode.h"
 
 namespace Amju
 {
@@ -82,7 +83,7 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
     {
       SetSceneNode(node);
       // if in local player location
-      if (GetLocation() == GetLocalPlayerLocation())
+      if (GetLocation() == GetLocalPlayerLocation() && GetGameMode() != AMJU_MODE_NO_GAME)
       {
         OnLocationEntry();
       }

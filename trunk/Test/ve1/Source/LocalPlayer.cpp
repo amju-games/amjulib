@@ -37,7 +37,8 @@ Player* GetLocalPlayer()
     return 0;
   }
 
-  GameObject* p = TheObjectManager::Instance()->GetGameObject(localPlayerId);
+  // TODO This was ObjectManager: does this cause a problem ?
+  GameObject* p = TheGame::Instance()->GetGameObject(localPlayerId);
 
   // May return 0
   return (Player*)p;

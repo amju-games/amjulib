@@ -94,18 +94,18 @@ arial, 1.0
 // Heart image
 gui-image
 heart-img
-0.7, 1.0
-0.2, 0.25
+0.6, 1.05
+0.4, 0.5
 heart.png
 
 // Num hearts text
 gui-text
 heart-num
 0.6, 0.9
-0.3, 0.1
+0.4, 0.2
 // Text
 0
-cheri, 1.0, fgcol=ffffff
+arial, 1.5, fgcol=ffffff, sx=0.7
 
 
 

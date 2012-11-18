@@ -17,6 +17,8 @@
 #include "GameMode.h"
 #include "GSCogResults.h"
 #include "CogTestNag.h"
+#include "HeartCount.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -101,6 +103,7 @@ void GSStroopColourWord::OnLeftRight(bool isLeftButton)
 {
   if (isLeftButton == m_leftIsCorrect)
   {
+    ChangeHeartCount(1);
     TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
     m_correct++;
   }
@@ -245,6 +248,8 @@ void GSStroopColourWord::ResetTest()
 void GSStroopColourWord::Update()
 {
   GSGui::Update();
+  TheObjectUpdater::Instance()->Update();
+  UpdateHeartCount();
 
   m_timer -= TheTimer::Instance()->GetDt();
 

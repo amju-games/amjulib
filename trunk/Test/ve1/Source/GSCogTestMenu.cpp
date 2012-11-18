@@ -21,6 +21,7 @@
 #include "GameConsts.h"
 #include "GSFinishedTests.h"
 #include "CogTestNag.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -104,6 +105,8 @@ void GSCogTestMenu::ResetTests()
 void GSCogTestMenu::Update()
 {
   GSGui::Update();
+  TheObjectUpdater::Instance()->Update();
+  UpdateHeartCount();
 }
 
 void GSCogTestMenu::Draw()
