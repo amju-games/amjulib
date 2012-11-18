@@ -3,7 +3,7 @@
 1
 
 // Change this for testing, should be 0
-cogtest-first-test 5
+cogtest-first-test 0
 
 // Start position on new game/reset
 start-loc    54

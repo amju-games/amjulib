@@ -46,7 +46,7 @@ bool ChangeHeartCount(int delta)
   static const std::string STAMINA_KEY = "stamina";
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(CHANGE_VALUE);
-  url += "&player_obj_id=" + player->GetId();
+  url += "&player_obj_id=" + ToString(player->GetId());
   url += "&key=" + STAMINA_KEY;
   url += "&change=" + ToString(delta);
 
