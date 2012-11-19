@@ -15,6 +15,7 @@
 #include "ROConfig.h"
 #include "GameConsts.h"
 #include "CogTestNag.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -161,6 +162,8 @@ void GSReactionTime::NextGo()
 void GSReactionTime::Update()
 {
   GSGui::Update();
+  TheObjectUpdater::Instance()->Update();
+  UpdateHeartCount();
 
   float dt = TheTimer::Instance()->GetDt();
 
