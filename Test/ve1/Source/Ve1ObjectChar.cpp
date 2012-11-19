@@ -36,7 +36,7 @@ Ve1ObjectChar::Ve1ObjectChar()
   m_isMoving = false;
   m_recalcHeading = false;
 
-  SetKeyVal(AVATAR_KEY, DEFAULT_AVATAR);
+  // ?? SetKeyVal(AVATAR_KEY, DEFAULT_AVATAR);
 
   // Default, should be set by server
   m_stamina = 3; // TODO CONFIG
