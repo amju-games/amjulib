@@ -10,25 +10,25 @@ proxy-comp
 
 
 gui-button
-has-proxy-button
--0.5, 0.6 
-0.8, 0.2
+use-proxy-button
+-0.5, 1.6 
+0.4, 0.1
 gui-button-4.png
 use proxy
-arial, 1.0 
+arial, 1.0, sx=0.8 
 
 
 gui-text
 label1
--0.8, 0.1
-0.25, 0.1
+-0.95, 0.3
+0.4, 0.1
 Proxy 
-arial, 0.8, fgcol=ffffff, bgcol=0000ff
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
 
 gui-text-edit
 proxy-hostname-text
 // pos (coords are -1..1)
--0.5, 0.1
+-0.5, 0.3
 // size
 1.0, 0.1
 // Text
@@ -39,17 +39,17 @@ arial, 1.0, bgcol=ffffff, fgcol=0000ff
 // Colon to show port is required 
 gui-text
 label2
-0.55, 0.1
-0.5, 0.1
-:
-arial, 0.9, fgcol=ffffff, bgcol=0000ff
+-0.95, 0.1
+0.4, 0.1
+Port
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
 
 gui-text-edit
 proxy-port-text
 // pos (coords are -1..1)
-0.6, 0.1
+-0.5, 0.1
 // size
-0.2, 0.1
+0.3, 0.1
 // Text
 12345
 // Font name, size
@@ -57,10 +57,10 @@ arial, 1.0, bgcol=ffffff, fgcol=0000ff
 
 gui-text
 label3
--0.8, -0.1
-0.25, 0.1
+-0.95, -0.1
+0.45, 0.1
 User name
-arial, 0.8, fgcol=ffffff, bgcol=0000ff
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
 
 gui-text-edit
 proxy-username-text
@@ -75,10 +75,10 @@ arial, 1.0, bgcol=ffffff, fgcol=0000ff
 
 gui-text
 label1
--0.8, -0.3
-0.25, 0.1
+-0.95, -0.3
+0.4, 0.1
 Password
-arial, 0.8, fgcol=ffffff, bgcol=0000ff
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
 
 gui-text-edit
 proxy-pw-text
@@ -94,27 +94,27 @@ arial, 1.0, bgcol=ffffff, fgcol=0000ff
 gui-button
 proxy-ok-button
 // pos (coords are -1..1)
--0.4, -0.5
+0.1, -0.6
 // size
-0.8, 0.2
+0.6, 0.15
 // Image
 gui-button-4.png
 // Text
 ok
 // Font name, size
-arial, 2.0 
+arial, 1.5 
 
 gui-button
 proxy-cancel-button
 // pos (coords are -1..1)
--0.4, -0.725
+-0.7, -0.6
 // size
-0.8, 0.2
+0.6, 0.15
 // Image
 gui-button-4.png
 // Text
 cancel
 // Font name, size
-arial, 1.75 
+arial, 1.5 
 
 

@@ -79,7 +79,12 @@ void GSStartMenu::OnActive()
   GuiButton* options = (GuiButton*)GetElementByName(m_gui, "options-button");
   options->SetCommand(Amju::OnOptionsButton);
 
-  GetElementByName(m_gui, "admin-button")->SetCommand(Amju::OnAdminButton);
+  GuiButton* admin = (GuiButton*)GetElementByName(m_gui, "admin-button");
+#ifdef _DEBUG
+  admin->SetCommand(Amju::OnAdminButton);
+#else
+  admin->SetVisible(false);  
+#endif
 
   GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
   cancel->SetCommand(Amju::OnCancelButton);

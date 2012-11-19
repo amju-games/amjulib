@@ -93,8 +93,8 @@ void GSOptions::OnActive()
   Assert(m_gui);
 
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
-  GetElementByName(m_gui, "sound-button")->SetCommand(OnSound);
-  GetElementByName(m_gui, "fullscreen-button")->SetCommand(OnFullscreen);
+//  GetElementByName(m_gui, "sound-button")->SetCommand(OnSound);
+//  GetElementByName(m_gui, "fullscreen-button")->SetCommand(OnFullscreen);
   GetElementByName(m_gui, "inet-button")->SetCommand(OnInternet);
   
 

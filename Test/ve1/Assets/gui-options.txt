@@ -35,7 +35,7 @@ gui-button-4.png
 // Text
 back
 // Font name, size
-arial, 2.0 
+arial, 1.6 
 
 gui-button
 avatar-button
@@ -43,7 +43,7 @@ avatar-button
 0.8,0.2
 gui-button-4.png
 my avatar...
-arial, 2.0
+arial, 1.6, sx=0.8
 
 gui-button
 fullscreen-button
@@ -51,7 +51,7 @@ fullscreen-button
 0.8,0.2
 gui-button-4.png
 fullscreen
-arial, 2.0
+arial, 1.6
 
 gui-button
 sound-button
@@ -59,7 +59,7 @@ sound-button
 0.8,0.2
 gui-button-4.png
 sound...
-arial, 2.0
+arial, 1.6
 
 gui-button
 keyboard-button
@@ -67,15 +67,15 @@ keyboard-button
 0.8,0.2
 gui-button-4.png
 keyboard...
-arial, 1.5 
+arial, 1.6, sx=0.9 
 
 gui-button
 inet-button
 -0.4,-0.2
 0.8,0.2
 gui-button-4.png
-internet...
-arial, 2.0
+proxy...
+arial, 1.6
 
 
 
