@@ -26,6 +26,8 @@ static void OnTodayOk()
     }
     else
     {
+      // TODO We get here but never leave this state...??? WTF ???
+
       // Explain state ?? No, the text in this state explains.
       TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
       TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());

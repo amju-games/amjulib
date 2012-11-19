@@ -19,6 +19,7 @@
 #include "CogTestNag.h"
 #include "GameMode.h"
 #include "GSDoThoseCogTests.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
@@ -249,6 +250,8 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
 void GSLetterCancellation::Update()
 {
   GSGui::Update();
+  TheObjectUpdater::Instance()->Update();
+  UpdateHeartCount();
 
   m_timer -= TheTimer::Instance()->GetDt();
 
