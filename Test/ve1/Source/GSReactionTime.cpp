@@ -96,6 +96,12 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     }
     break;
 
+  case RT_WAITING:
+    // If mouse button pressed before "GO" displayed, player might be spamming the mouse button.
+    // Reset wait period - TODO sound/visual to show that mouse click is ignored.
+    m_waitTime = 0;
+    break;
+
   default:
     // TODO restart timer
     Assert(0);
@@ -185,7 +191,7 @@ void GSReactionTime::Update()
     {
       m_waitTime = 0;
       word->SetText("GO!");
-      b->SetText("click me!");
+      b->SetText("GO!");
       m_mode = RT_TIMING;
       b->SetIsEnabled(true); 
 
@@ -267,7 +273,10 @@ std::cout << "Reaction time, test number: " << m_testNum << "\n";
   GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
   word->SetText("ready...");
 
-  m_maxWaitTime = 4.0f + (float)rand() / (float)RAND_MAX * 3.0f; // TODO Rand between ? and 7.0
+  float minTime = ROConfig()->GetFloat("rt-min-wait-time", 2.0);
+  float extra = ROConfig()->GetFloat("rt-extra-wait-time", 2.0);
+  m_maxWaitTime = minTime + (float)rand() / (float)RAND_MAX * extra; // wait between min and min+extra
+
 std::cout << "Waiting time is: " << m_maxWaitTime << "s\n";
 
   m_mode = RT_BEFORE_TEST;

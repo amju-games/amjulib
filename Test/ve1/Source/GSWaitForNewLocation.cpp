@@ -52,7 +52,7 @@ void GSWaitForNewLocation::Update()
   TheObjectUpdater::Instance()->Update();
 
   bool terrainReady = TerrainReady();
-  bool playerReady = TheGame::Instance()->GetGameObject(GetLocalPlayerId());
+  bool playerReady = (TheGame::Instance()->GetGameObject(GetLocalPlayerId()) != 0);
   bool editMode = GetGameMode() == AMJU_MODE_EDIT;
 
 std::cout << "Terrain is " << (terrainReady ? "READY" : "NOT ready") 
