@@ -12,6 +12,10 @@ static const char* PROXY_PORT_KEY = "proxy_port";
 static const char* PROXY_USER_KEY = "proxy_user";
 static const char* PROXY_PW_KEY = "proxy_pw";
 
+static void OnUseProxy()
+{
+}
+
 void SetProxy()
 {
   static GameConfigFile* config = TheGameConfigFile::Instance();
@@ -121,6 +125,9 @@ void GSProxy::OnActive()
   
   GuiTextEdit* pw = (GuiTextEdit*)GetElementByName(m_gui, "proxy-pw-text");
   pw->SetText(config->GetValue(PROXY_PW_KEY, ""));
+
+  GuiButton* useProxy = (GuiButton*)GetElementByName(m_gui, "use-proxy-button");
+  useProxy->SetCommand(OnUseProxy);
 }
 
 } // namespace

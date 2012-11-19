@@ -139,6 +139,9 @@ void GSTitle::OnActive()
     TheGSOptions::Instance()->LoadFromConfig();
   }
 
+  // Kill off any dummy player object
+  TheGame::Instance()->ClearGameObjects();
+
 #ifdef SHOW_FRAME_TIME
   Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
   TheGame::Instance()->SetFrameTimeFont(font);
