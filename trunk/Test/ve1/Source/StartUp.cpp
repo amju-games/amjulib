@@ -35,10 +35,12 @@ void StartUp()
 
   SoundManager* sm = TheSoundManager::Instance();
   sm->SetImpl(new BassSoundPlayer);
+
+  // Too soon, assets not copied yet!!
   // Sound can drown out text-to-speech, so max vol is lower than 1.0
-  float maxVol = ROConfig()->GetFloat("max-vol");
-  sm->SetSongMaxVolume(maxVol);
-  sm->SetWavMaxVolume(maxVol);
+  //float maxVol = ROConfig()->GetFloat("max-vol");
+  //sm->SetSongMaxVolume(maxVol);
+  //sm->SetWavMaxVolume(maxVol);
 
   GuiElement::SetTextToSpeechEnabled(false);
 
@@ -72,7 +74,7 @@ void StartUp()
   // Don't try to load any assets yet! Wait until we have copied assets as required
 
   // Create empty root node
-  ClearVe1SceneGraph();
+  //ClearVe1SceneGraph();
 
   // Start with state that copies assets to Save Dir
   TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
