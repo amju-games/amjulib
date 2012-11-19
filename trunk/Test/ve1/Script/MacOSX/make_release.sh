@@ -13,21 +13,27 @@ popd
 # Now make the game, linking to amjulib
 make
 
-export AMJU_BUILD_ARCH=Mac-ppc
-export AMJU_MACHDEP='-arch ppc -DMACOSX -DXP_MACOSX'
-pushd ../../../../Script/MacOSX
-make
-popd
+# No ppc build for now
 
-make
+#export AMJU_BUILD_ARCH=Mac-ppc
+#export AMJU_MACHDEP='-arch ppc -DMACOSX -DXP_MACOSX'
+#pushd ../../../../Script/MacOSX
+#make
+#popd
 
-# TODO Make fat binary
+#make
+
 export BUILD=../../../../Build/ve1/
 
-lipo -create $BUILD/Mac-i386/ve1 $BUILD/Mac-ppc/ve1 -output $BUILD/ve1.univ
+# TODO Make fat binary like this if ppc and intel
+#lipo -create $BUILD/Mac-i386/ve1 $BUILD/Mac-ppc/ve1 -output $BUILD/ve1.univ
+
+# No ppc, not fat binary
+cp $BUILD/Mac-i386/ve1 $BUILD/ve1.univ
+
 strip $BUILD/ve1.univ
 
-# Make app bundle, put universal binary in 
+# Make app bundle, copy in executable and assets
 
 export ASSETSDIR=../../Assets
 # These are the shared font assets, not just for this project
@@ -42,7 +48,7 @@ mkdir -p $BUILD/"$APPNAME"/Contents/Resources/Data/font3d
 cp -R $ASSETSDIR/* $BUILD/"$APPNAME"/Contents/Resources/Data/
 cp -R $FONT2D/* $BUILD/"$APPNAME"/Contents/Resources/Data/font2d
 cp -R $FONT3D/* $BUILD/"$APPNAME"/Contents/Resources/Data/font3d
-cp $BUILD/ve1.univ $BUILD/"$APPNAME"/Contents/MacOS/"My Game"
+cp $BUILD/ve1.univ $BUILD/"$APPNAME"/Contents/MacOS/"Crash Site"
 cp ../../../../Source/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $BUILD/"$APPNAME"/Contents/MacOS/
 cp ../../../../Source/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib $BUILD/"$APPNAME"/Contents/MacOS/
 cd $BUILD
@@ -52,7 +58,7 @@ rm "My Game.zip"
 zip -9 "$ZIPNAME" "$APPNAME"
 zip -9 "$ZIPNAME" "$APPNAME/Contents"
 zip -9 "$ZIPNAME" "$APPNAME/Contents/Info.plist"
-zip -9 "$ZIPNAME" "$APPNAME/Contents/MacOS/My Game"
+zip -9 "$ZIPNAME" "$APPNAME/Contents/MacOS/Crash Site"
 zip -9 "$ZIPNAME" "$APPNAME/Contents/MacOS/libbass.dylib"
 zip -9 "$ZIPNAME" "$APPNAME/Contents/MacOS/libbassmidi.dylib"
 zip -9 "$ZIPNAME" "$APPNAME/Contents/Resources"
