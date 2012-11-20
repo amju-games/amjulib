@@ -12,6 +12,11 @@
 
 namespace Amju
 {
+static void OnTodayPlay()
+{
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+}
+
 static void OnTodayOk()
 {
   GameState* state = 0;
@@ -76,6 +81,13 @@ void GSToday::OnActive()
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   ok->SetCommand(OnTodayOk);
+
+  // For admin/dev, button to play game even on non-game days
+  GuiButton* play = (GuiButton*)GetElementByName(m_gui, "play-button");
+  play->SetCommand(OnTodayPlay);
+#ifndef _DEBUG
+  play->SetVisible(false);
+#endif
 
   GuiText* dateText = (GuiText*)GetElementByName(m_gui, "date-text");
   Time now = Time::Now();

@@ -25,101 +25,14 @@
 #include "CommandFight.h"
 #include "LurkMsg.h"
 #include "GameConsts.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
 
-/*
-class PlayerSceneNode : public Ve1Character
-{
-public:
-  PlayerSceneNode(Player* p) : m_player(p)
-  {
-  }
-
-  virtual void Update()
-  {
-    if (!IsVisible()) 
-    {
-      return;
-    }
-
-    if (GetMd2() && m_player && m_player->IsLoggedIn())
-    {
-      Ve1Character::Update();
-    }
-  }
-
-  // TODO This doesn't work - SceneGraph is broken, sigh.
-
-  virtual void BeforeDraw()
-  {
-    bool loggedin = m_player->IsLoggedIn();
-    if (loggedin)
-    {
-      PushColour();
-      MultColour(Colour(0.2, 0.2, 0.2, 0.2f));
-    }
-  }
-
-  virtual void AfterDraw()
-  {
-    bool loggedin = m_player->IsLoggedIn();
-    if (loggedin)
-    {
-      PopColour();
-    }
-  }
-
-  virtual void Draw()
-  {
-    if (IsVisible() && GetMd2() && m_player)
-    {
-      bool loggedIn = m_player->IsLoggedIn();
-
-      // For logged out players, only draw if near the local player.
-      // We fade in/out with distance. The distance could be configurable.
-      // This gives a good frame rate improvement if lots of logged out players.
-      if (!loggedIn)
-      {
-        float sqDist = (GetLocalPlayer()->GetPos() - m_player->GetPos()).SqLen();
-        static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
-        static const float MIN_FADE_DIST = 100.0f;
-        static const float MAX_FADE_DIST2 = MAX_FADE_DIST * MAX_FADE_DIST;
-        static const float MIN_FADE_DIST2 = MIN_FADE_DIST * MIN_FADE_DIST;
-
-        if (sqDist > MAX_FADE_DIST2) 
-        {
-          // Too far away
-          return;
-        }
-        else if (sqDist > MIN_FADE_DIST2) 
-        {
-          float a = (sqDist - MIN_FADE_DIST2) / (MAX_FADE_DIST2 - MIN_FADE_DIST2);
-          MultColour(Colour(1, 1, 1, 1.0f - a));
-        }
-
-        AmjuGL::PushAttrib(AmjuGL::AMJU_BLEND);
-        AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-      }
-
-      Ve1Character::Draw();
-
-      if (!loggedIn)
-      {
-        AmjuGL::PopAttrib();
-      }
-    }
-  }
- 
-protected:
-  RCPtr<Player> m_player;
-};
-*/
-
-  // TODO Name tag scene node
+// Name tag scene node
 class PlayerNameNode : public SceneNode
 {
 public:
@@ -199,6 +112,8 @@ Player::Player()
   m_isLoggedIn = false;
   m_fadeTime = 0;
   m_carrying = 0;
+
+  m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
 }
 
 void Player::SetCarrying(Ve1Object* obj)
@@ -258,6 +173,7 @@ bool Player::Load(File* f)
   Assert(arrowMesh);
   m_arrow = new SceneMesh;
   m_arrow->SetMesh(arrowMesh);
+  //m_arrow->SetIsLit(true); // no normals ?
 
   // Particle effect when attacked, etc.
   File fight;
@@ -292,17 +208,24 @@ void Player::OnLocationEntry()
   Ve1ObjectChar::OnLocationEntry();
 
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  Assert(root);
-
-  root->AddChild(m_arrow.GetPtr());
-  SetArrowVis(false);
+  if (root)
+  {
+    root->AddChild(m_arrow.GetPtr());
+    SetArrowVis(false);
+  }
 
   m_nameTag = new PlayerNameNode(this);
   if (m_sceneNode)
   {
-    m_sceneNode->AddChild(m_nameTag.GetPtr());
+    if (m_nameTag)
+    {
+      m_sceneNode->AddChild(m_nameTag.GetPtr());
+    }
 
-    m_sceneNode->AddChild(m_effect.GetPtr());
+    if (m_effect)
+    {
+      m_sceneNode->AddChild(m_effect.GetPtr());
+    }
   }
 
   // TODO Portal should have a heading which you should face when you appear at the destination
@@ -418,7 +341,7 @@ void Player::SetLoggedIn(bool loggedIn)
 {
   m_isLoggedIn = loggedIn;
 
-  Assert(m_sceneNode);
+  //Assert(m_sceneNode);
 
   /*
   // Translucent if logged out
@@ -451,11 +374,11 @@ void Player::Update()
     m_sceneNode->SetLocalTransform(m);
 
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
-    *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
+    m_shadow->SetAABB(*(m_sceneNode->GetAABB()));
 
-    static const float XSIZE = 10;
-    static const float YSIZE = 30; // TODO TEMP TEST
-    // Size doesn't matter, just for VFC here
+    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 30.0f);
+    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 100.0f);
+
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
       m_pos.y, m_pos.y + YSIZE,
@@ -569,6 +492,16 @@ void Player::SetMenu(GuiMenu* menu)
     //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
     //AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
+}
+
+void Player::OnCollideFuel(FuelCell* f)
+{
+  // TODO
+}
+
+float Player::GetViewDist() const
+{
+  return m_viewDistance;
 }
 
 bool GetNameForPlayer(int objId, std::string* r)

@@ -490,12 +490,14 @@ void Ve1Object::OnLocationEntry()
   if (m_sceneNode)
   {
     SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-    Assert(root);
-    root->AddChild(m_sceneNode);
+    if (root)
+    {
+      root->AddChild(m_sceneNode);
 
-    m_sceneNode->AddChild(m_shadow.GetPtr());
+      m_sceneNode->AddChild(m_shadow.GetPtr());
 
-    m_sceneNode->SetVisible(!m_hidden);
+      m_sceneNode->SetVisible(!m_hidden);
+    }
   }
 }
 

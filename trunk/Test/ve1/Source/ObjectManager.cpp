@@ -22,7 +22,7 @@
 #include "GameMode.h"
 #include "Useful.h"
 
-//#define XML_DEBUG
+#define XML_DEBUG
 //#define ASSET_DEBUG
 //#define OBJECT_CHECK_DEBUG
 
