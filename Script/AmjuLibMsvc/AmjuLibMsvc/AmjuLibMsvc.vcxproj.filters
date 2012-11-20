@@ -858,6 +858,9 @@
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\AmjuRand.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1606,6 +1609,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuRand.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

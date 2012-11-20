@@ -15,6 +15,9 @@ public:
   virtual void Draw();
   virtual void Update();
 
+  void SetTexture(Texture*);
+  void SetSize(float size);
+
 protected:
   float m_size; // side length of square billboard
   PTexture m_texture;

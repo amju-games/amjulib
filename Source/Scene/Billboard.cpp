@@ -11,6 +11,16 @@ Billboard::Billboard()
   SetBlended(true);
 }
 
+void Billboard::SetTexture(Texture* tex)
+{
+  m_texture = tex;
+}
+
+void Billboard::SetSize(float size)
+{
+  m_size = size;
+}
+
 bool Billboard::Load(File* f)
 {
   // Texture
@@ -25,7 +35,7 @@ bool Billboard::Load(File* f)
 
   if (!f->GetFloat(&m_size))
   {
-    f->ReportError("Expected particle size");
+    f->ReportError("Expected billboard size");
     return false;
   }
   return true;
