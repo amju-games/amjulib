@@ -25,6 +25,7 @@
 #include "CogTestNpc.h"
 #include "GSQuitGame.h"
 #include "Skybox.h"
+#include "FuelCell.h"
 
 namespace Amju
 {
@@ -128,6 +129,9 @@ std::cout << "Got new object ID from server! " << id << "\n";
       Ve1Object* go = new ProtoObject; 
 #else
       Ve1Object* go = (Ve1Object*)TheGameObjectFactory::Instance()->Create(m_typename);
+
+      go->SetPos(GetVe1SceneGraph()->GetCamera()->GetEyePos());
+
       go->CreateEditNode();
 #endif
 
@@ -841,6 +845,9 @@ void GSEdit::CreateContextMenu()
 
     childMenu->AddChild(new GuiMenuItem("Skybox", 
       new NewObjectCommand(Skybox::TYPENAME, "none", "none")));
+
+    childMenu->AddChild(new GuiMenuItem("FuelCellManager", 
+      new NewObjectCommand(FuelCellManager::TYPENAME, "none", "none", true)));
 
     childMenu->AddChild(new GuiMenuItem("Portal", 
       new NewObjectCommand(Portal::TYPENAME, "none", "none", true)));

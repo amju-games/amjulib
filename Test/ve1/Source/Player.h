@@ -7,6 +7,8 @@
 
 namespace Amju
 {
+class FuelCell;
+
 class Player : public Ve1ObjectChar
 {
 public:
@@ -40,6 +42,10 @@ public:
   void SetCarrying(Ve1Object*);
   Ve1Object* GetCarrying();
 
+  void OnCollideFuel(FuelCell* f);
+
+  float GetViewDist() const;
+
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow
   RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
@@ -49,6 +55,9 @@ protected:
   bool m_isLocal;
   bool m_isLoggedIn;
   bool m_isDead; // if so, must go back to spaceship
+
+  // This increases from a min value so things further away can be seen
+  float m_viewDistance;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);

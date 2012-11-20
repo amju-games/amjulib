@@ -5,6 +5,21 @@
 
 namespace Amju 
 {
+class FuelCellManager : public Ve1Object
+{
+public:
+  static const char* TYPENAME;
+  virtual const char* GetTypeName() const;
+
+  // Create fuel cells in new location, local to client only
+  virtual void OnLocationEntry();
+
+  virtual void SetEditMenu(GuiMenu*) {}
+
+  virtual void Update();
+
+};
+
 class FuelCell : public Furniture
 {
 public:
@@ -12,6 +27,9 @@ public:
   virtual const char* GetTypeName() const;
 
   FuelCell();
+
+  virtual bool Load(File*);
+  virtual void SetEditMenu(GuiMenu*) {}
 
 };
 } // namespace

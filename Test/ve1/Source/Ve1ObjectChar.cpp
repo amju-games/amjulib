@@ -11,12 +11,10 @@
 #include "ObjectUpdater.h"
 #include "GSDeath.h"
 #include "GameMode.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
-static const float XSIZE = 10;
-static const float YSIZE = 30; // TODO TEMP TEST, baddies can be any size
-
 static const float SPEED = 80.0f; // TODO CONFIG
 
 static const float GRAVITY = -50.0f; // TODO CONFIG
@@ -78,19 +76,22 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   {
     static AvatarManager* am = TheAvatarManager::Instance();
     Ve1Character* node = am->Create(val);
-    node->SetObj(this);
     if (node)
     {
+      node->SetObj(this);
       SetSceneNode(node);
       // if in local player location
-      if (GetLocation() == GetLocalPlayerLocation() && GetGameMode() != AMJU_MODE_NO_GAME)
+      if (GetLocation() == GetLocalPlayerLocation()) 
+        // TODO don't get here is we are not playing game - this doesn't work too well
+        //  && GetGameMode() != AMJU_MODE_NO_GAME)
       {
         OnLocationEntry();
       }
     }
     else
     {
-std::cout << "Unexpected avatar name: " << val << "\n";
+      // TODO Set to good default avatar
+std::cout << "Unexpected avatar name: " << val << " for player/npc " << GetName() << "\n";
     }
   }
 
@@ -188,6 +189,9 @@ void Ve1ObjectChar::Update()
     {
       *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
     }
+
+    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 30.0f);
+    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 100.0f);
 
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
