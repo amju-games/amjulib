@@ -46,4 +46,9 @@ cam-xrot        20
 // Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
 portal-max-dist  400
 
+// Player AABB
+player-aabb-x  15
+player-aabb-y  60
 
+// View dist, which increases - player can only see objects to this dist
+player-min-view-dist 200

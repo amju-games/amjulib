@@ -6,7 +6,7 @@ gui-comp
 // Name
 today-comp
 // Num children
-3
+4
 
 gui-button
 ok-button
@@ -17,6 +17,17 @@ ok-button
 gui-button-4.png
 ok
 arial, 1.5
+
+gui-button
+play-button
+// pos
+-0.4, -0.4
+// size
+0.8, 0.2
+gui-button-4.png
+play anyway
+arial, 1.5
+
 
 gui-text
 date-text
