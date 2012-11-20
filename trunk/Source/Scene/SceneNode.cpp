@@ -60,6 +60,11 @@ AABB* SceneNode::GetAABB()
   return &m_aabb;
 }
 
+void SceneNode::SetAABB(const AABB& aabb)
+{
+  m_aabb = aabb;
+}
+
 SceneNode* SceneNode::GetParent()
 {
   return m_parent;

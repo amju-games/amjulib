@@ -287,6 +287,7 @@
     <ClCompile Include="..\..\..\Source\TimeUtils\TimePeriod.cpp" />
     <ClCompile Include="..\..\..\Source\TimeUtils\TimeRange.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\AmjuRand.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
@@ -540,6 +541,7 @@
     <ClInclude Include="..\..\..\Source\TimeUtils\TimePeriod.h" />
     <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuAssert.h" />
+    <ClInclude Include="..\..\..\Source\Utils\AmjuRand.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuSleep.h" />
     <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
     <ClInclude Include="..\..\..\Source\Utils\Common.h" />
