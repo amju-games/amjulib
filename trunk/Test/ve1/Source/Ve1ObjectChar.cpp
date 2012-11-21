@@ -27,7 +27,7 @@ static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
 static const char* STAMINA_KEY = "stamina";
 
-static const char* DEFAULT_AVATAR = "bird1";
+static const char* DEFAULT_AVATAR = "marge";
 
 Ve1ObjectChar::Ve1ObjectChar()
 {

@@ -32,7 +32,7 @@ const char* Baddie::GetTypeName() const
 
 Baddie::Baddie()
 {
-  SetKeyVal(AVATAR_KEY, "dino1");
+  SetKeyVal(AVATAR_KEY, "GrimDemon");
 }
 
 void Baddie::Update()

@@ -271,6 +271,12 @@ void ObjectUpdater::Update()
     // The object may exist in ObjectManager but not in Game, as it may not be in local player
     // location!
     GameObject* go = TheObjectManager::Instance()->GetGameObject(id);
+    // check if local only -- is this a good idea ??
+    if (!go)
+    {
+      go = TheGame::Instance()->GetGameObject(id).GetPtr();
+    }
+
     if (go)
     {
       const Vec3f& pos = it->second.pos;
