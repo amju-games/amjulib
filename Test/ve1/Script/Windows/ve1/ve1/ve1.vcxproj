@@ -380,6 +380,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Md3Node.h" />
     <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
+    <ClInclude Include="..\..\..\..\Source\MsgNum.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
     <ClInclude Include="..\..\..\..\Source\Objective.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />

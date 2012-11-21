@@ -129,7 +129,8 @@ void GSAvatarMod::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 100, 120,  0, 50, 0,  0, 1, 0);
+  static const float Y = ROConfig()->GetFloat("avatar-cam-y", 60.0f);
+  AmjuGL::LookAt(0, Y, 120,    0, 0, 0,    0, 1, 0);
 
   AmjuGL::RotateY(m_yrot);
 
