@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{027E36B-5981-4B37-9C8F-2ACF9E33EA4D}
 AppName=Crash Site
-AppVersion=0.5
+AppVersion=0.6
 ;AppVerName=My Game 0.2
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
@@ -36,6 +36,7 @@ Source: "..\..\..\..\Source\SDL\lib\sdl.dll"; DestDir: "{app}"; Flags: ignorever
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\Assets\*.*"; DestDir: "{app}\Data\"; Flags: ignoreversion
+Source: "..\..\Assets\characters\*.*"; DestDir: "{app}\Data\characters\"; Flags: ignoreversion recursesubdirs
 Source: "..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: ignoreversion
