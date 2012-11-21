@@ -41,6 +41,8 @@
 #include "GSCogTestMenu.h"
 #include "GameConsts.h"
 #include "CogTestNag.h"
+#include "GSAvatarMod.h"
+#include "MsgNum.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -226,6 +228,19 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   return false;
 }
 
+static void OnChangeLookNo()
+{
+  FirstTimeMsg("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
+  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
+}
+
+static void OnChangeLookYes()
+{
+  TheGSAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+  FirstTimeMsgThisSession("Much better! OK, to walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
+}
+
 void GSMain::Update()
 {
   GSBase::Update();
@@ -234,15 +249,14 @@ void GSMain::Update()
   // This message can be the same each time.
   FirstTimeMsgThisSession(
     "Hello, <p>! This is ELLA, your space ship computer calling you. Do you remember what happened? We crash landed on a planet!", 
-    MsgNum(1),
+    UNIQUE_MSG_ID,
     false);
 
-  FirstTimeMsg("To walk around, click on the ground where you want to go. Try it!", MsgNum(2), false);
+  FirstTimeQuestionThisSession(
+    "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
+    UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
 
   TheCogTestNag::Instance()->Update();
-
-  // TODO IF above msg already shown
-//  FirstTimeMsgThisSession("Welcome back!",  MsgNum(2));
 
   // Disable pause button if Lurk msg showing
   GuiButton* pauseButton = (GuiButton*)m_gui->GetElementByName("pause-button");

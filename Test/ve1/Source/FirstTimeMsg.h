@@ -2,6 +2,7 @@
 #define FIRST_TIME_MSG_H_INCLUDED
 
 #include <string>
+#include <GuiElement.h>
 
 namespace Amju
 {
@@ -23,9 +24,15 @@ typedef int MsgNum;
 // TODO Hash the msg -- no need for msg number..? 
 bool FirstTimeMsg(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
 
+void ResetFirstTimeSessionFlags();
+
 // Show message the first time it is triggered for the player.
 // But reset the flag each session - i.e. stored locally, not on server. 
 bool FirstTimeMsgThisSession(const std::string& msg, MsgNum msgNumber, bool storyMode = true);
+
+// Shows Lurk question on first call this session
+bool FirstTimeQuestionThisSession(
+  const std::string& msg, MsgNum msgNumber,  CommandFunc no, CommandFunc yes);
 
 // Set/Get Server, not in-memory flag
 bool HasShownMsg(MsgNum msgNumber);
