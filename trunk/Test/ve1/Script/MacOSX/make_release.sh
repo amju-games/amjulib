@@ -1,4 +1,4 @@
-export VERSION=0.5
+export VERSION=0.6
 
 export APPNAME="Crash Site.app"
 export ZIPNAME="CrashSite.zip"
