@@ -90,14 +90,22 @@ void GuiScroll::Draw()
   if (m_scrollPos.y < 0)
   {
     m_scrollPos.y = 0;
+#ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
+#else
+    m_scrollVel.y = 0;
+#endif
   }
   
   float maxy = std::max(0.0f, child->GetSize().y - GetSize().y); // depends on size of child and how much space there is to display it
   if (m_scrollPos.y > maxy)
   {
     m_scrollPos.y = maxy;
+#ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
+#else
+    m_scrollVel.y = 0;
+#endif
   }
   SetLocalPos(m_scrollPos); // so combined pos for child is updated
 
