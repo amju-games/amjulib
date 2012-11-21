@@ -1,6 +1,7 @@
 #include <EventPoller.h>
 #include <Game.h>
 #include <DegRad.h>
+#include <Timer.h>
 #include "Camera.h"
 #include "Portal.h"
 #include "ROConfig.h"
@@ -11,8 +12,8 @@
 namespace Amju
 {
 static float zDist = 0;
-static float yRot = 0; // rotation so we can see in doorways, etc.
-static float yRot2 = 0; // user drag mouse - intended for edit mode, maybe also game mode
+static float yRotAuto = 0; // rotation so we can see in doorways, etc.
+static float yRotUser = 0; // user drag mouse - intended for edit mode, maybe also game mode
 static float xRot = 0;
 
 static bool leftDrag = false;
@@ -38,8 +39,13 @@ void Camera::Reset()
   
   zDist = CAM_Z;
   xRot = XROT_START;
-  yRot = 0;
-  yRot2 = 0;
+  yRotAuto = 0;
+  if (m_target)
+  {
+    // Face player (or whatever) face on
+    yRotAuto = m_target->GetDir();
+  }
+  yRotUser = 0;
   leftDrag = false;
   rightDrag = false;
   midDrag = false;
@@ -56,13 +62,37 @@ void Camera::Reset()
 
 void Camera::Update()
 {
+  float dt = TheTimer::Instance()->GetDt();
   Vec3f pos;
 
   if (m_target)
   {
     pos = m_target->GetPos();
-    yRot = 0;
+    // yRotAuto = 0;
 
+    // Swing behind target
+    float dir = m_target->GetDir() + 180.0f;
+    float angleDiff = yRotAuto - dir;
+
+    // Rotate to face m_dir, taking the shortest route (CW or CCW)
+    if (fabs(angleDiff) < 0.1f) // TODO CONFIG
+    {
+      yRotAuto  = dir;
+    }
+    else
+    {
+      float ROT_SPEED = 1.0f; // TODO CONFIG
+      if (yRotAuto > dir)
+      {
+        yRotAuto -= ROT_SPEED * dt * fabs(angleDiff);
+      }
+      else if (yRotAuto < dir)
+      {
+        yRotAuto += ROT_SPEED * dt * fabs(angleDiff);
+      }
+    }
+
+#ifdef PORTAL_ROTATE
     // TODO Get closest portal
     static PGameObject lastportal = 0;
     // We want to get the closest portal to the target, even if they have never intersected it.
@@ -97,11 +127,12 @@ void Camera::Update()
       static const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
       if (pdist < MAX_SQ_DIST) 
       {
-        yRot = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_SQ_DIST); 
+        yRotAuto = atan2(-pos.x, pos.z) * (1.0f - pdist / MAX_SQ_DIST); 
 
-//std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRot degs=" << RadToDeg(yRot) << "\n";
+//std::cout << "SQ Dist from portal: " << pdist << " pos.z=" << pos.z << " pos.x=" << pos.x << " yRotAuto degs=" << RadToDeg(yRotAuto) << "\n";
       }
     }
+#endif // PORTAL_ROTATE
   }
   else
   {
@@ -109,7 +140,7 @@ void Camera::Update()
   }
   pos += posOffset;
 
-  float y = yRot + yRot2; 
+  float y = DegToRad(yRotAuto + yRotUser); 
 
   SetEyePos(Vec3f(
     pos.x + sin(y) * cos(xRot) * zDist, 
@@ -158,7 +189,7 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   bool b = false;
   if (leftDrag)
   {
-    yRot2 -= dx;
+    yRotUser -= RadToDeg(dx);
     xRot -= dy;
     b = false; // true means we can't move off a button we have pressed down
   }
@@ -169,7 +200,7 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   }
   if (midDrag)
   {
-    float y = yRot + yRot2; 
+    float y = yRotAuto + yRotUser; 
 
     posOffset.x -= dx * cos(y) * 100.0f;
     posOffset.z += dx * sin(y) * 100.0f;
