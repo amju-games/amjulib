@@ -52,3 +52,6 @@ player-aabb-y  60
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200
+
+// Avatar select view
+avatar-cam-y  100
