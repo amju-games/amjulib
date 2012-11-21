@@ -66,12 +66,18 @@ bool FirstTimeMsg(const std::string& text, MsgNum msgNumber, bool storyMode)
   return true;
 }
 
-bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber, bool storyMode)
-{
-  typedef std::pair<int, MsgNum> PlayerMsg;
-  typedef std::set<PlayerMsg> Msgs;
+// Flags
+typedef std::pair<int, MsgNum> PlayerMsg;
+typedef std::set<PlayerMsg> Msgs;
+static Msgs msgs;
 
-  static Msgs msgs;
+void ResetFirstTimeSessionFlags()
+{
+  msgs.clear();
+}
+
+bool DoShowMsg(MsgNum msgNumber)
+{
   int session = ToInt(TheVe1ReqManager::Instance()->GetSessionId());
   PlayerMsg pm(session, msgNumber);
   if (msgs.count(pm) != 0)
@@ -79,9 +85,35 @@ bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber, bool sto
     return false;
   }   
   msgs.insert(pm);
-
-  ShowText(text, storyMode);
   return true;
 }
+
+bool FirstTimeMsgThisSession(const std::string& text, MsgNum msgNumber, bool storyMode)
+{
+  if (DoShowMsg(msgNumber))
+  {
+    ShowText(text, storyMode);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+bool FirstTimeQuestionThisSession(
+  const std::string& msg, MsgNum msgNumber,  CommandFunc no, CommandFunc yes)
+{
+  if (DoShowMsg(msgNumber))
+  {
+    TheLurker::Instance()->ShowYesNo(msg, LURK_FG, LURK_BG, no, yes);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 }
 
