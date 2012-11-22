@@ -273,6 +273,14 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
 
 AABB* Ve1ObjectChar::GetAABB()
 {
+  if (!m_sceneNode)
+  {
+    return 0;
+  }
+
+  Assert(m_sceneNode);
+  Assert(m_sceneNode->GetAABB());
+
   return m_sceneNode->GetAABB();
 }
 

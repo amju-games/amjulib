@@ -14,6 +14,7 @@ void BruteForce(GameObjects* gameobjs)
   {
     Assert(dynamic_cast<Ve1Object*>(it->second.GetPtr()));
     Ve1Object* go1 = (Ve1Object*)it->second.GetPtr();
+    Assert(go1);
 
     if (go1->IsHidden())
     {
@@ -26,6 +27,7 @@ void BruteForce(GameObjects* gameobjs)
     {
       Assert(dynamic_cast<Ve1Object*>(jt->second.GetPtr()));
       Ve1Object* go2 = (Ve1Object*)jt->second.GetPtr();
+      Assert(go2);
 
       if (go2->IsHidden())
       {
