@@ -11,18 +11,20 @@
 #include "Player.h"
 #include "ReqMsgRead.h"
 #include "ChatConsole.h"
+#include "BroadcastConsole.h"
 #include "Ve1OnlineReqManager.h"
 #include "TextToSpeech.h"
+#include "ROConfig.h"
 
 #define SEND_DEBUG
 
 namespace Amju
 {
-static const float MAX_CHECK_PERIOD = 5.0f;
-
 MsgManager::MsgManager()
 {
   m_elapsed = 0;
+
+  static const float MAX_CHECK_PERIOD = ROConfig()->GetFloat("chat-poll-period", 2.0f);
   m_checkPeriod = MAX_CHECK_PERIOD;
 }
 
@@ -55,29 +57,58 @@ void MsgManager::Update()
   }
 
   static ChatConsole* cc = TheChatConsole::Instance();
+  static BroadcastConsole* bc = TheBroadcastConsole::Instance();
+
+  // First look for broadcast msgs
+  for (Msgs::iterator it = m_map.begin(); it != m_map.end(); )
+  {
+    Msg& msg = it->second;
+    if (msg.m_recipId < 0)
+    {
+      // Broadcast
+      std::string name;
+      std::string str;
+      if (GetNameForPlayer(msg.m_senderId, &name))
+      {
+        str = name + ": ";
+      }
+      str += msg.m_text; 
+      bc->OnMsgRecv(str);
+
+      m_map.erase(it++); // which doesn't invalidate iterator, right ??
+    }
+    else
+    {
+      ++it;
+    }
+  }
+
+  // Show remaining msgs in chat console if allowed
   // Can we display the new msg ?
   if (cc->CanShowMsg())
   {
     // Tell the main game state that we have a new msg 
     Msgs::iterator it = m_map.begin();
-    Assert(it != m_map.end());
-    Msg& msg = it->second;
-    //gsm->ShowMsg(msg);
-    cc->ActivateChatRecv(true, &msg);
-    cc->ActivateChatSend(true, msg.m_senderId);
-
-    // Text to speech -- NB is here the best place ?
-    TextToSpeech(msg.m_text);
-
-    // Mark message as read -- TODO only after player clicks OK in gui..?
-    if (m_map.size() == 1)
+    if (it != m_map.end())
     {
-      // Last (i.e. most recent) msg - mark as read: this should 
-      //  mark all earlier msgs as read also.
-      MarkRead(msg);
-    }
+      Msg& msg = it->second;
+      //gsm->ShowMsg(msg);
+      cc->ActivateChatRecv(true, &msg);
+      cc->ActivateChatSend(true, msg.m_senderId);
 
-    m_map.erase(it);
+      // Text to speech -- NB is here the best place ?
+      TextToSpeech(msg.m_text);
+
+      // Mark message as read -- TODO only after player clicks OK in gui..?
+      if (m_map.size() == 1)
+      {
+        // Last (i.e. most recent) msg - mark as read: this should 
+        //  mark all earlier msgs as read also.
+        MarkRead(msg);
+      }
+
+      m_map.erase(it);
+    }
   }
 }
 
@@ -95,8 +126,10 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   Assert(recipId != -1);
   // For now, assume senders and recips are Players
   Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(senderId).GetPtr()));
-  Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
-
+  if (recipId >= 0)
+  {
+    Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
+  }
   // Replace spaces in msg 
   // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
   std::string newmsg = EncodeMsg(msg); ////Replace(msg, " ", "_");
