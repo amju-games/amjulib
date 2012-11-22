@@ -189,23 +189,26 @@ bool CameraControl::OnCursorEvent(const CursorEvent& ce)
   bool b = false;
   if (leftDrag)
   {
-    yRotUser -= RadToDeg(dx);
-    xRot -= dy;
+    static const float XROT_SCALE = ROConfig()->GetFloat("cam-xrot-scale", 10.0f);
+    static const float YROT_SCALE = ROConfig()->GetFloat("cam-yrot-scale", 10.0f);
+
+    yRotUser -= RadToDeg(dx) * YROT_SCALE;
+    xRot -= dy * XROT_SCALE;
     b = false; // true means we can't move off a button we have pressed down
   }
   if (rightDrag)
   {
-    zDist += dy * 100.0f; // TODO sensitivity
+    zDist += dy * 1000.0f; // TODO sensitivity
     b = true;
   }
   if (midDrag)
   {
-    float y = yRotAuto + yRotUser; 
+    float y = DegToRad(yRotAuto + yRotUser); 
 
-    posOffset.x -= dx * cos(y) * 100.0f;
-    posOffset.z += dx * sin(y) * 100.0f;
+    posOffset.x -= dx * cos(y) * 1000.0f;
+    posOffset.z += dx * sin(y) * 1000.0f;
 
-    posOffset.y -= dy * 100.0f;
+    posOffset.y -= dy * 1000.0f;
     b = true;
   }
 

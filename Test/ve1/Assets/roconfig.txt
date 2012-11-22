@@ -6,7 +6,7 @@
 cogtest-first-test 0
 
 // Start position on new game/reset
-start-loc    54
+start-loc    57
 // This pos should be OK in all locations
 start-pos    0,0,0
 
@@ -30,6 +30,9 @@ ve1obj-max-jump 20.0
 // max distance to get context menu for object
 menu-obj-distance 500
 
+// Max distance from player you can click
+max-click-dist    2000
+
 // Time period between cog test nags
 cog-test-nag-time 120
 
@@ -40,18 +43,23 @@ npc-max-follow-dist  75.0
 
 
 // Camera
+// initial dist from cam to player
 cam-z           300
+// initial x rot (i.e. altitude angle)
 cam-xrot        20
+// User drag sensitivity
+cam-xrot-scale  10
+cam-yrot-scale  10
 
 // Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
 portal-max-dist  400
 
 // Player AABB
-player-aabb-x  15
+player-aabb-x  12
 player-aabb-y  60
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200
 
-// Avatar select view
+// Avatar select view - camera height
 avatar-cam-y  100
