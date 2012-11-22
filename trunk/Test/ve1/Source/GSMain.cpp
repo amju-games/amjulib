@@ -503,6 +503,8 @@ void GSMain::Draw2d()
 {
   GSBase::Draw2d();
 
+  TheBroadcastConsole::Instance()->Draw();
+
   if (m_gui)
   {
     m_gui->Draw();
@@ -514,7 +516,6 @@ void GSMain::Draw2d()
   }
 
   TheChatConsole::Instance()->Draw();
-  TheBroadcastConsole::Instance()->Draw();
 
   TheLurker::Instance()->Draw();
 

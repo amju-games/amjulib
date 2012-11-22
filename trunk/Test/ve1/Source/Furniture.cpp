@@ -286,7 +286,9 @@ bool CommandRotate::Do()
   // For crates etc, any angle is ok.
   // For fences, AABBs are wrong for non-90 degrees. But we are using collision meshes
   //  which are super accuate.
-  m_f->SetDir(m_f->GetDir() + 30.0f); 
+  
+  // OK, using 90 degs so AABBs are not inaccurate for picking
+  m_f->SetDir(m_f->GetDir() + 90.0f); 
 
   TheGSMain::Instance()->ClearContextMenu();
 

@@ -68,8 +68,9 @@ void Camera::Update()
   if (m_target)
   {
     pos = m_target->GetPos();
-    // yRotAuto = 0;
 
+    // yRotAuto = 0;
+#ifdef AUTO_ROTATE
     // Swing behind target
     float dir = m_target->GetDir() + 180.0f;
     float angleDiff = yRotAuto - dir;
@@ -91,6 +92,7 @@ void Camera::Update()
         yRotAuto += ROT_SPEED * dt * fabs(angleDiff);
       }
     }
+#endif // AUTO_ROTATE
 
 #ifdef PORTAL_ROTATE
     // TODO Get closest portal
