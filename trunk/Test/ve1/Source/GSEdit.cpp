@@ -26,6 +26,7 @@
 #include "GSQuitGame.h"
 #include "Skybox.h"
 #include "FuelCell.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {
@@ -770,25 +771,37 @@ private:
   int m_id;
 };
 
+static int delId = -1;
+static void OnDelYes()
+{
+  static Game* g = TheGame::Instance();
+  if (g->GetGameObject(delId))
+  {
+    Ve1Object* vo = dynamic_cast<Ve1Object*>(g->GetGameObject(delId).GetPtr());
+    if (vo)
+    {
+      vo->OnLocationExit();
+    }
+    g->EraseGameObject(delId);
+  }
+  SendDelReq(delId);
+}
+
+static void OnDelNo()
+{
+}
+
 class DelObjCommand : public GuiCommand
 {
 public:
   DelObjCommand(int objId) : m_id(objId) {}
   virtual bool Do()
   {
-    std::cout << "SORRY DUDE NOT IMPLEMENTED YET\n";
-    // Must show confirm yes/no
-    static Game* g = TheGame::Instance();
-    if (g->GetGameObject(m_id))
-    {
-      Ve1Object* vo = dynamic_cast<Ve1Object*>(g->GetGameObject(m_id).GetPtr());
-      if (vo)
-      {
-        vo->OnLocationExit();
-      }
-      g->EraseGameObject(m_id);
-    }
-    SendDelReq(m_id);
+    delId = m_id;
+    TheLurker::Instance()->ShowYesNo(
+      "Sure you want to delete object " + ToString(m_id) + " ?", 
+      Colour(1, 1, 1, 1), Colour(1, 0, 0, 1), OnDelNo, OnDelYes);
+
     return false;
   }
 
@@ -904,6 +917,11 @@ bool GSEdit::OnKeyEvent(const KeyEvent& ke)
     m_selObj = 0;
     m_selectedObjects.clear();
     ((GuiText*)GetElementByName(m_gui, "text1"))->SetText("no selection");
+    if (m_menu)
+    {
+      TheEventPoller::Instance()->RemoveListener(m_menu);
+    }
+    m_menu = 0;
     return true;
   }
 
