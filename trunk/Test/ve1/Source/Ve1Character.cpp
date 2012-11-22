@@ -40,6 +40,8 @@ void Ve1Character::Update()
   {
     SetAnim(ANIM_IDLE);
 
+    // Show all players in debug mode
+#ifndef _DEBUG
     float sqDist = (GetLocalPlayer()->GetPos() - player->GetPos()).SqLen();
     static const float MAX_FADE_DIST = 200.0f; // TODO CONFIG
     static const float MIN_FADE_DIST = 100.0f;
@@ -66,6 +68,8 @@ void Ve1Character::Update()
       SetColour(Colour(0, 0, 0, 0.2f));
       SetBlended(true);
     }
+#endif
+
   }
    
    SetVisible(true);
