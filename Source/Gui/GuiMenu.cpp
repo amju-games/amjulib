@@ -17,7 +17,7 @@ void GuiMenuItem::Init(const std::string& text)
 {
   SetText(text);
   SetDrawBg(true);
-  std::swap(m_bgCol, m_fgCol); // becase draw BG inverts???
+  //std::swap(m_bgCol, m_fgCol); // becase draw BG inverts???
 
   SetJust(AMJU_JUST_LEFT);
 
@@ -243,6 +243,19 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       return true; // handled
     }
   }
+
+  // If mouse button is up, and over menu, treat as handled. Right ?
+  if (IsVisible() &&
+      mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
+      !mbe.isDown)
+  {
+    Rect r = GetRect(this);
+    if (r.IsPointIn(m_cursorPos))
+    {
+      return true;
+    }
+  }
+
   return false; // not handled
 }
 
