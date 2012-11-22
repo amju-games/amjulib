@@ -27,6 +27,7 @@
 #include "GameConsts.h"
 #include "ROConfig.h"
 #include "HeartCount.h"
+#include "CommandPickup.h"
 
 namespace Amju
 {
@@ -150,6 +151,15 @@ std::cout << "?? Got drop object by not carrying anything\n";
 Ve1Object* Player::GetCarrying()
 {
   return m_carrying;
+}
+
+void Player::SetDir(float degs)
+{
+  Ve1ObjectChar::SetDir(degs);
+  if (m_carrying)
+  {
+    m_carrying->SetDir(degs);
+  }
 }
 
 bool Player::IsLoggedIn() const
@@ -490,6 +500,11 @@ void Player::SetMenu(GuiMenu* menu)
 {
   if (IsLocalPlayer())
   {
+    // If carrying, drop is option
+    if (m_carrying)
+    {
+      AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
+    }
   }
   else if (IsLoggedIn())
   {

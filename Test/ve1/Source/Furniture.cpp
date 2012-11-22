@@ -12,6 +12,7 @@
 #include "SceneCollisionMesh.h"
 #include "SetObjMeshCommand.h"
 #include "GSMain.h"
+#include "CommandPickup.h"
 
 //#define AABB_DEBUG
 
@@ -217,6 +218,9 @@ std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
       // Hide drop button
       TheGSMain::Instance()->ShowDropButton(this, false);
+
+      m_sceneNode->SetColour(Colour(1, 1, 1, 1));
+      m_sceneNode->SetBlended(false);
     }
   }
   else
@@ -235,6 +239,9 @@ std::cout << "That's me! Local player picked up this object!\n";
 
         // Show drop button
         TheGSMain::Instance()->ShowDropButton(this, true);
+
+        m_sceneNode->SetColour(Colour(1, 1, 1, 0.5f));
+        m_sceneNode->SetBlended(true);
       }
 
       Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
@@ -256,7 +263,7 @@ std::cout << "Setting m_pickupId to " << pickupId << "\n";
   m_pickupId = pickupId;
 }
 
-CommandPickUp::CommandPickUp(Furniture* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
+CommandPickUp::CommandPickUp(Ve1Object* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
 
 bool CommandPickUp::Do()
 {
@@ -292,12 +299,17 @@ void Furniture::SetMenu(GuiMenu* menu)
 
   if (m_pickupId == 0)
   {
-    //menu->AddChild(new GuiMenuItem("Pick up", new CommandPickUp(this, true)));
-    AddMenuItem("Pick up", new CommandPickUp(this, true));
+    if (GetLocalPlayer()->GetCarrying())
+    {
+      std::cout << "can't pick up, already carrying something else!\n";
+    }
+    else
+    {
+      AddMenuItem("Pick up", new CommandPickUp(this, true));
+    }
   }
   else if (m_pickupId == GetLocalPlayerId())
   {
-    //menu->AddChild(new GuiMenuItem("Put down", new CommandPickUp(this, false)));
     AddMenuItem("Put down", new CommandPickUp(this, false));
   }
 }

@@ -42,17 +42,6 @@ protected:
   float m_collMeshRot;
 };
 
-class CommandPickUp : public GuiCommand
-{
-public:
-  CommandPickUp(Furniture* f, bool takeNotDrop);
-  virtual bool Do();
-
-private:
-  Furniture* m_f;
-  bool m_takeNotDrop;
-};
-
 class CommandRotate : public GuiCommand
 {
 public:

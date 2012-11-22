@@ -43,6 +43,7 @@
 #include "CogTestNag.h"
 #include "GSAvatarMod.h"
 #include "MsgNum.h"
+#include "CommandPickup.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -77,18 +78,30 @@ GSMain::GSMain()
 
 GuiComposite* GSMain::GetContextMenu()
 {
+#ifdef USE_BUTTONS_FOR_CONTEXT_MENU
   GuiComposite* contextMenu = dynamic_cast<GuiComposite*>(GetElementByName(m_gui, "context-menu"));
   Assert(contextMenu);
   return contextMenu;
+#else
+  return m_menu;
+#endif
 }
 
 void GSMain::ClearContextMenu()
 {
+#ifdef USE_BUTTONS_FOR_CONTEXT_MENU
   // Send off screen ?
   if (m_gui)
   {
     GetContextMenu()->SetVisible(false);
   }
+#else
+  if (m_menu)
+  {
+    TheEventPoller::Instance()->RemoveListener(m_menu);
+  }
+  m_menu = 0;
+#endif  
 }
 
 void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
@@ -98,6 +111,9 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
   {
     return;
   }
+
+#ifdef USE_BUTTONS_FOR_CONTEXT_MENU
+
   GuiButton* button = new GuiButton;
   bool loadedOk = button->OpenAndLoad("context-button.txt");
   Assert(loadedOk);
@@ -108,6 +124,11 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
   Vec2f pos(-1.0f, y);
   button->SetLocalPos(pos);
   contextMenu->AddChild(button);
+
+#else
+  contextMenu->AddChild(new GuiMenuItem(text, command));
+#endif
+
 }
 
 void GSMain::ShowDropButton(Furniture* f, bool show)
@@ -137,40 +158,17 @@ std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
   }
 }
 
+static int fuelCells = 0;
+static int hearts = 0;
+
 void GSMain::SetFuelCells(int num)
 {
-  if (!m_gui)
-  {
-    return;
-  }
-
-  GuiText* text = (GuiText*)GetElementByName(m_gui, "fuelcell-num");
-  if (!text) 
-  {
-    Assert(0);
-std::cout << "SetFuelCells: no fuelcell-num element\n";
-    return;
-  }
-  text->SetText(ToString(num));
-  text->SetVisible(true); 
+  fuelCells = num;
 }
 
 void GSMain::SetHeartNum(int num)
 {
-  if (!m_gui)
-  {
-    return;
-  }
-
-  GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
-  if (!text) 
-  {
-    Assert(0);
-std::cout << "SetHeartNum: no heart-num element\n";
-    return;
-  }
-  text->SetText(ToString(num));
-  text->SetVisible(true); 
+  hearts = num;
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -211,24 +209,25 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
       return false;
     }
 
-    RCPtr<GuiMenu> menu = 0; // TODO TEMP TEST new GuiMenu;
-    GetContextMenu()->Clear();
-    GetContextMenu()->SetVisible(true);
-    v->SetMenu(menu);
+    //RCPtr<GuiMenu> menu = 0; // TODO TEMP TEST new GuiMenu;
+    m_menu = new GuiMenu;
+    //GetContextMenu()->Clear();
+    //GetContextMenu()->SetVisible(true);
+    v->SetMenu(m_menu);
 
+#ifdef WTF
     if (GetContextMenu()->GetNumChildren() > 0)
     {
       return true; // so don't walk to position clicked
     }
-
+#endif
     // Only show menu if it has items
-    /*
-    if (menu->GetNumChildren() > 0)
+    
+    if (m_menu->GetNumChildren() > 0)
     {
       m_menuObject = v;
       m_wasClickedAway = false;
 
-      m_menu = menu;
       m_menu->SetOnClickedAwayFunc(Amju::OnMenuClickedAway);
       TheEventPoller::Instance()->AddListener(m_menu, -1); // cursor is -2 priority
       // TODO Fix this so we can see it if on right hand side
@@ -241,7 +240,11 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
       m_menu->SetLocalPos(pos);
       return true;
     }
-    */
+    else
+    {
+      m_menu = 0;
+    }
+    
   }
   return false;
 }
@@ -297,6 +300,27 @@ void GSMain::Update()
   TheChatConsole::Instance()->Update();
 
   TheLurker::Instance()->Update();
+
+  // Update hearts and fuel cells
+  GuiText* text1 = (GuiText*)GetElementByName(m_gui, "fuelcell-num");
+  if (!text1) 
+  {
+    Assert(0);
+std::cout << "SetFuelCells: no fuelcell-num element\n";
+    return;
+  }
+  text1->SetText(ToString(fuelCells));
+  text1->SetVisible(true); 
+
+  GuiText* text2 = (GuiText*)GetElementByName(m_gui, "heart-num");
+  if (!text2) 
+  {
+    Assert(0);
+std::cout << "SetHeartNum: no heart-num element\n";
+    return;
+  }
+  text2->SetText(ToString(hearts));
+  text2->SetVisible(true); 
 }
 
 void GSMain::DoMoveRequest()
@@ -516,7 +540,7 @@ void GSMain::Draw2d()
 void GSMain::OnMenuClickedAway()
 {
 std::cout << "Clicked off menu, so now it's invisible.\n";
-  //m_menu = 0;
+  ClearContextMenu();
 
   m_wasClickedAway = true;
 }
@@ -665,7 +689,8 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
   std::cout << "Sqlen: " << sqlen << "\n";
   bool dragged = (sqlen > 0.01f);
 
-  // Do req if mouse button is down but no menu
+  // Do req if mouse button is up, no drag, and no menu
+  // TODO And we didn't just close the menu because we made a selection
   if (!mbe.isDown && !dragged && (!m_menu || !m_menu->IsVisible()))
   {
     m_moveRequest = true;
