@@ -48,7 +48,7 @@ cam-z           300
 // initial x rot (i.e. altitude angle)
 cam-xrot        20
 // User drag sensitivity
-cam-xrot-scale  10
+cam-xrot-scale  2
 cam-yrot-scale  10
 
 // Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
