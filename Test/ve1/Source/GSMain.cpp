@@ -44,6 +44,7 @@
 #include "GSAvatarMod.h"
 #include "MsgNum.h"
 #include "CommandPickup.h"
+#include "BroadcastConsole.h"
 
 //#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -513,6 +514,7 @@ void GSMain::Draw2d()
   }
 
   TheChatConsole::Instance()->Draw();
+  TheBroadcastConsole::Instance()->Draw();
 
   TheLurker::Instance()->Draw();
 

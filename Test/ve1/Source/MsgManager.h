@@ -17,14 +17,15 @@ public:
   
   struct Msg
   {
-    Msg() : m_id(-1), m_senderId(-1), m_whenSent(1)  {}
+    Msg() : m_id(-1), m_senderId(-1), m_recipId(-1), m_whenSent(1)  {}
 
-    Msg(int id, const std::string& text, int senderId, Timestamp whenSent) :
-      m_id(id), m_text(text), m_senderId(senderId), m_whenSent(whenSent) {}
+    Msg(int id, const std::string& text, int senderId, int recipId, Timestamp whenSent) :
+      m_id(id), m_text(text), m_senderId(senderId), m_recipId(recipId), m_whenSent(whenSent) {}
 
     int m_id;
     std::string m_text;
     int m_senderId;
+    int m_recipId;
     Timestamp m_whenSent;
     // Type, e.g. post, chat, pigeon post
   };

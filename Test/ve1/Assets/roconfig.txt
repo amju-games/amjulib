@@ -63,3 +63,10 @@ player-min-view-dist 200
 
 // Avatar select view - camera height
 avatar-cam-y  100
+
+// Polling periods
+// Chat msgs
+chat-poll-period  2.0
+
+// Broadcast chat - how many lines
+chat-max-lines    8
