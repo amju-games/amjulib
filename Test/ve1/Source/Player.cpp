@@ -26,11 +26,14 @@
 #include "LurkMsg.h"
 #include "GameConsts.h"
 #include "ROConfig.h"
+#include "HeartCount.h"
 
 namespace Amju
 {
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
+
+const std::string FUELCELL_KEY = "fuelcells";
 
 // Name tag scene node
 class PlayerNameNode : public SceneNode
@@ -270,13 +273,13 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   Ve1ObjectChar::SetKeyVal(key, val);
   
   static ChatConsole* cc = TheChatConsole::Instance();
+  static GSMain* gsm = TheGSMain::Instance();
 
   if (key == "loggedin")
   {
     bool isLoggedIn = (val == "y");
     SetLoggedIn(isLoggedIn);
     SetLoggedInPlayer(this, m_isLoggedIn);
-    static GSMain* gsm = TheGSMain::Instance();
     gsm->SetNumPlayersOnline(CountOnlinePlayers());
 
     // So we can notify if current recipient logs in or out
@@ -315,6 +318,14 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       TheLurker::Instance()->Queue(lm);
       ShowAttacked();
     }
+  }
+  else if (key == FUELCELL_KEY)
+  {
+    // TODO Set count member var too ?
+    // TODO AChievements - e.g. first one, 5th, 10th, 20th, etc.
+
+    int fc = ToInt(val);
+    gsm->SetFuelCells(fc);    
   }
 }
 
@@ -496,7 +507,7 @@ void Player::SetMenu(GuiMenu* menu)
 
 void Player::OnCollideFuel(FuelCell* f)
 {
-  // TODO
+  ChangePlayerCount(FUELCELL_KEY, 1);
 }
 
 float Player::GetViewDist() const

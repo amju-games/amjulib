@@ -58,6 +58,7 @@ public:
   void ShowDropButton(Furniture*, bool show); 
 
   void SetHeartNum(int);
+  void SetFuelCells(int);
 
 private:
   void DoMoveRequest();
