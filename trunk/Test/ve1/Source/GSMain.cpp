@@ -381,7 +381,7 @@ std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 #ifdef PICK_DEBUG
 std::cout << "Sq dist to arrow pos is: " << sqDist << "\n";
 #endif
-      const float MAX_DIST = 500.0f; // TODO CONFIG
+      static const float MAX_DIST = ROConfig()->GetFloat("max-click-dist", 2000.0f); 
       const float MAX_SQ_DIST = MAX_DIST * MAX_DIST; 
       if (sqDist < MAX_SQ_DIST)
       { 
