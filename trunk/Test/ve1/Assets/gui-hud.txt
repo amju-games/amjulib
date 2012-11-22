@@ -92,7 +92,7 @@ arial, 1.5, fgcol=ffffff, sx=0.9
 
 // Fuel cell text
 gui-text
-heart-num
+fuelcell-num
 0.2, 0.9
 0.4, 0.2
 // Text
