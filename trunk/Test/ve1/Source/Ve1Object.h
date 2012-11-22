@@ -90,7 +90,7 @@ public:
   // Set direction which character should face - we rotate to face this
   //  direction over time - DEGREES
   void SetDirToFace(GameObject* go); // face this object
-  void SetDir(float degs);
+  virtual void SetDir(float degs);
   float GetDir() const;
 
 protected:

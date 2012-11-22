@@ -1,13 +1,15 @@
 #include <iostream>
-#include "PickObject.h"
 #include <GameObject.h>
 #include <Game.h>
 #include <Unproject.h>
 #include <Line3.h>
 #include <ClipLineSegBox.h>
+#include "PickObject.h"
 #include "Ve1Object.h"
 #include "Terrain.h"
 #include "Skybox.h"
+#include "LocalPlayer.h"
+#include "Useful.h"
 
 //#define PICK_DEBUG
 
@@ -15,6 +17,9 @@ namespace Amju
 {
 GameObject* PickObject(const Vec2f& mouseScreen)
 {
+  // Get object carried by player - don't pick
+  Ve1Object* carried = GetLocalPlayer()->GetCarrying();
+
   Vec3f mouseWorldNear;
   Vec3f mouseWorldFar;
 
@@ -36,6 +41,12 @@ GameObject* PickObject(const Vec2f& mouseScreen)
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " is not pickable.\n";
 #endif
+      continue;
+    }
+    if (v == carried)
+    {
+      // Can't select it then!
+      std::cout << "Skipping carried object " << *v << "\n";
       continue;
     }
 
