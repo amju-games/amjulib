@@ -71,12 +71,7 @@ sub new_player_impl($$$)
   insert($setnamesql);
 
   # Set values for avatar appearance
-  my $av_type = int(rand(3));
-  my $sql = "insert into objectstate values ($objid, 'type', $av_type, now())"; 
-  insert($sql);
-
-  my $av_tex = int(rand(6));
-  $sql = "insert into objectstate values ($objid, 'tex', $av_tex, now())"; 
+  my $sql = "insert into objectstate values ($objid, 'avatar', 'marge', now())"; 
   insert($sql);
 
   # Set location and pos - this relies on there being an empty square at the start location for new players
