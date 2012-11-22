@@ -24,7 +24,7 @@ GameObject* PickObject(const Vec2f& mouseScreen)
 
   GameObject* selectedObj = 0;
   GameObjects* objs = TheGame::Instance()->GetGameObjects();
-  float bestDist = 999999.9f;
+  float bestDist = 9e20f;
   for (GameObjects::iterator it = objs->begin(); it != objs->end(); ++it)
   {
     GameObject* pgo = it->second;
@@ -58,14 +58,14 @@ std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " skybox so treated as far away\n";
 #endif
-        dist = 999900.0f; 
+        dist = 9e19f; 
       }
       else if (dynamic_cast<Terrain*>(v))
       {
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " terrain so treated as far away\n";
 #endif
-        dist = 999800.0f; 
+        dist = 9e18f; 
       }
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " sqDist: " << dist << "\n";
