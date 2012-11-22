@@ -137,6 +137,24 @@ std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
   }
 }
 
+void GSMain::SetFuelCells(int num)
+{
+  if (!m_gui)
+  {
+    return;
+  }
+
+  GuiText* text = (GuiText*)GetElementByName(m_gui, "fuelcell-num");
+  if (!text) 
+  {
+    Assert(0);
+std::cout << "SetFuelCells: no fuelcell-num element\n";
+    return;
+  }
+  text->SetText(ToString(num));
+  text->SetVisible(true); 
+}
+
 void GSMain::SetHeartNum(int num)
 {
   if (!m_gui)
