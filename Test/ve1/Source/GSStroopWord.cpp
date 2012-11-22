@@ -25,10 +25,10 @@ static void OnStopTest()
   OnCogTestStopPartWayThrough();
 }
 
-static void OnDoneButton()
-{
-  TheGSStroopWord::Instance()->Finished();
-}
+//static void OnDoneButton()
+//{
+//  TheGSStroopWord::Instance()->Finished();
+//}
 
 static void OnLeftButton()
 {

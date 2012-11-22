@@ -29,10 +29,10 @@ static void OnStopTest()
   OnCogTestStopPartWayThrough();
 }
 
-static void OnDoneButton()
-{
-  TheGSStroopColourWord::Instance()->Finished();
-}
+//static void OnDoneButton()
+//{
+//  TheGSStroopColourWord::Instance()->Finished();
+//}
 
 static void OnLeftButton()
 {
