@@ -59,6 +59,7 @@ public:
 
   void SetHeartNum(int);
   void SetFuelCells(int);
+  void ResetHud();
 
 private:
   void DoMoveRequest();
