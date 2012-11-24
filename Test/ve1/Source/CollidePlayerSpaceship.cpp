@@ -14,9 +14,7 @@ void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
 
   player->SetIsColliding(spaceship);
 
-  FirstTimeMsgThisSession("This is your spaceship! It needs fuel. Please find fuel cells and bring them back here!", MsgNum(3), false);
-
-  // TODO carrying fuel cell ?
+  player->OnSpaceshipCollision();
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
