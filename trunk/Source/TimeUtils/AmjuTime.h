@@ -96,6 +96,10 @@ protected:
   unsigned int m_secs;
 
 };
+
+static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+static const int ONE_WEEK_IN_SECONDS = ONE_DAY_IN_SECONDS * 7;
+
 }
 
 #endif
