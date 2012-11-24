@@ -36,7 +36,7 @@ gui-button-4.png
 // Text
 reset me!
 // Font name, size
-arial, 2.0 
+arial, 1.6 
 
 // element type
 gui-button
@@ -51,7 +51,7 @@ gui-button-4.png
 // Text
 calendar
 // Font name, size
-arial, 2.0 
+arial, 1.6 
 
 // element type
 gui-button
@@ -64,9 +64,9 @@ options-button
 // Image
 gui-button-4.png
 // Text
-options...
+options
 // Font name, size
-arial, 2.0 
+arial, 1.6
 
 // element type
 gui-button
@@ -81,7 +81,7 @@ gui-button-4.png
 // Text
 achievements
 // Font name, size
-arial, 2.0, sx=0.6
+arial, 1.6, sx=0.8
 
 
 // element type
@@ -97,7 +97,7 @@ gui-button-4.png
 // Text
 quit game
 // Font name, size
-arial, 2.0 
+arial, 1.6
 
 // element type
 gui-button
@@ -110,8 +110,8 @@ resume-button
 // Image
 gui-button-4.png
 // Text
-continue playing
+continue
 // Font name, size
-arial, 2.0, sx=0.6
+arial, 1.6
 
 

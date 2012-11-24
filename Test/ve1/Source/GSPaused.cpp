@@ -79,7 +79,8 @@ void GSPaused::OnActive()
   m_gui->GetElementByName("resume-button")->SetCommand(Amju::OnResumeButton);
   m_gui->GetElementByName("options-button")->SetCommand(Amju::OnOptionsButton);
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
-  m_gui->GetElementByName("reset-button")->SetCommand(Amju::OnResetButton);
+  //m_gui->GetElementByName("reset-button")->SetEnabled(false); 
+    //SetCommand(Amju::OnResetButton);
   m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalendarButton);
   m_gui->GetElementByName("achievements-button")->SetCommand(Amju::OnAchievementsButton);
 }
