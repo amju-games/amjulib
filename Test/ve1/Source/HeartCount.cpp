@@ -6,13 +6,24 @@ namespace Amju
 {
 bool GetHeartCount(int* result)
 {
+  static const char* STAMINA_KEY = "stamina";
+  return GetPlayerCount(STAMINA_KEY, result);
+}
+
+bool GetFuelCellCount(int* result)
+{
+  static const char* FUELCELL_KEY = "stamina";
+  return GetPlayerCount(FUELCELL_KEY, result);
+}
+
+bool GetPlayerCount(const std::string& key, int* result)
+{
   Player* p = GetLocalPlayer();
   if (p)
   {
-    static const char* STAMINA_KEY = "stamina";
-    if (p->Exists(STAMINA_KEY))
+    if (p->Exists(key))
     {
-      std::string s = p->GetVal(STAMINA_KEY);
+      std::string s = p->GetVal(key);
       *result = ToInt(s);
       return true;
     }
