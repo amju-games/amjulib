@@ -7,9 +7,6 @@ namespace Amju
 {
 const char* GuiCalendar::NAME = "gui-calendar";
 
-static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-static const int ONE_WEEK_IN_SECONDS = ONE_DAY_IN_SECONDS * 7;
-
 GuiElement* CreateCalendar()
 {
   return new GuiCalendar;
