@@ -24,7 +24,7 @@ sub showmsgs()
   my $time = param('time') or die "Expected time since last check";
   my $recip = param('recip') or die "Expected recip";
 
-  my $sql = "SELECT id, sender, UNIX_TIMESTAMP(whensent), msg FROM chat WHERE candelete = 0 and recip = $recip and whensent >= FROM_UNIXTIME($time)";
+  my $sql = "SELECT id, sender, UNIX_TIMESTAMP(whensent), msg, recip FROM chat WHERE candelete = 0 and (recip = $recip or recip = -2) and whensent > FROM_UNIXTIME($time)";
 
   print "Query: $sql\n\n";
 
@@ -34,10 +34,10 @@ sub showmsgs()
   $query->execute or die "Failed to execute query!?!";
 
   print "<msgs>\n";
-  while (my ($id, $sender, $whensent, $msg) = $query->fetchrow_array)
+  while (my ($id, $sender, $whensent, $msg, $recip) = $query->fetchrow_array)
   {
     print "<msg>";
-    print "<id>$id</id> <sender>$sender</sender> <whensent>$whensent</whensent> <msg>$msg</msg>";
+    print "<id>$id</id> <sender>$sender</sender> <whensent>$whensent</whensent> <msg>$msg</msg> <recip>$recip</recip>";
     print "</msg>\n";
   }
   print "</msgs>\n";
