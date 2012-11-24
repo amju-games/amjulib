@@ -213,7 +213,6 @@ std::cout << "Found research element but unexpected format (no mode).\n";
     p = research.getChildNode(4);
     if (SafeStrCmp(p.getName(), "dates"))
     {
-      static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
       Time today(Time::Now());
       today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 

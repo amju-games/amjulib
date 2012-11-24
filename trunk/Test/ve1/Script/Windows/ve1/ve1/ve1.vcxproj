@@ -165,6 +165,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\Achievement.cpp" />
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
     <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp" />
     <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
@@ -186,6 +187,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerSpaceship.cpp" />
     <ClCompile Include="..\..\..\..\Source\CommandFight.cpp" />
     <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CreateCollect.cpp" />
@@ -278,6 +280,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\SerialReqManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Skybox.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Spaceship.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
@@ -299,6 +302,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Version.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\Achievement.h" />
     <ClInclude Include="..\..\..\..\Source\Animated.h" />
     <ClInclude Include="..\..\..\..\Source\AttackEffect.h" />
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
@@ -412,6 +416,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\SerialReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
     <ClInclude Include="..\..\..\..\Source\Skybox.h" />
+    <ClInclude Include="..\..\..\..\Source\Spaceship.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />

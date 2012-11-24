@@ -5,6 +5,7 @@
 #include <UrlUtils.h>
 #include <Game.h>
 #include <StringUtils.h>
+#include <TimePeriod.h>
 #include "ReqSendMsg.h"
 #include "ReqGetNewMsgs.h"
 #include "GSMain.h"
@@ -15,6 +16,8 @@
 #include "Ve1OnlineReqManager.h"
 #include "TextToSpeech.h"
 #include "ROConfig.h"
+#include "HeartCount.h"
+#include "Achievement.h"
 
 #define SEND_DEBUG
 
@@ -65,16 +68,28 @@ void MsgManager::Update()
     Msg& msg = it->second;
     if (msg.m_recipId < 0)
     {
-      // Broadcast
-      std::string name;
-      std::string str;
-      if (GetNameForPlayer(msg.m_senderId, &name))
+      // This is a broadcast msg
+      // Discard msgs sent before today
+      if (msg.m_whenSent < Time::Now().RoundDown(TimePeriod(ONE_DAY_IN_SECONDS)))
       {
-        str = name + ": ";
+        std::cout << "Discarding old broadcast msg: " << msg.m_text << "\n";
       }
-      str += msg.m_text; 
-      bc->OnMsgRecv(str);
-
+      else
+      {
+        std::string name;
+        std::string str;
+        if (GetNameForPlayer(msg.m_senderId, &name))
+        {
+          str = name + ": ";
+          str += msg.m_text; 
+          bc->OnMsgRecv(str);
+        }
+        else
+        {
+          std::cout << "Discarding broadcast msg (another room?) from player " 
+            << msg.m_senderId << ": " << msg.m_text << "\n";
+        }
+      }
       m_map.erase(it++); // which doesn't invalidate iterator, right ??
     }
     else
@@ -122,6 +137,36 @@ void MsgManager::MarkRead(const Msg& msg)
 
 void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 {
+  // How many msgs sent in total ? First message ? That's an achievement. etc.
+  static const std::string NUM_MSGS_SENT = "num_msgs_sent";
+  int numMsgsSent = 0;
+  GetPlayerCount(NUM_MSGS_SENT, &numMsgsSent);
+  ChangePlayerCount(NUM_MSGS_SENT, 1);
+
+  numMsgsSent++; // just for convenience here, or we will be off by one below
+
+  // NB Watch for race condition here. Multiple increments could batch up.
+  if (numMsgsSent >= 1 && !HasWonAchievement(ACH_MSGS_SENT_1))
+  {
+    OnWinAchievement(ACH_MSGS_SENT_1, "You sent a message!");
+  }
+  if (numMsgsSent >= 5 && !HasWonAchievement(ACH_MSGS_SENT_5))
+  {
+    OnWinAchievement(ACH_MSGS_SENT_5, "You sent your 5th message!");
+  }
+  if (numMsgsSent == 10 && !HasWonAchievement(ACH_MSGS_SENT_10))
+  {
+    OnWinAchievement(ACH_MSGS_SENT_10, "You sent your 10th message!");
+  }
+  if (numMsgsSent == 20 && !HasWonAchievement(ACH_MSGS_SENT_20))
+  {
+    OnWinAchievement(ACH_MSGS_SENT_20, "You sent your 20th message!");
+  }
+  if (numMsgsSent == 50 && !HasWonAchievement(ACH_MSGS_SENT_50))
+  {
+    OnWinAchievement(ACH_MSGS_SENT_50, "You sent your 50th message!!");
+  }
+
   Assert(senderId != -1);
   Assert(recipId != -1);
   // For now, assume senders and recips are Players
