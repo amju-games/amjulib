@@ -24,6 +24,7 @@
 #include "GSThanks.h"
 #include "GSCalendar.h"
 #include "GSToday.h"
+#include "GSMain.h"
 
 namespace Amju
 {
@@ -277,9 +278,7 @@ std::cout << "Found research element but unexpected format (no mode).\n";
   TheGSCalendar::Instance()->SetPrevState(TheGSToday::Instance());
   TheGSThanks::Instance()->SetPrevState(TheGSToday::Instance());
   TheGame::Instance()->SetCurrentState(TheGSThanks::Instance());
-
-    //TheGSStartGame::Instance()); 
-    //TheGSFileUpdateCheck::Instance());
+  TheGSMain::Instance()->ResetHud();
 }
 
 void SendLoginReq(const std::string& email)
