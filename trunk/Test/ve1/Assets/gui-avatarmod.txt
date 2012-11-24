@@ -21,9 +21,9 @@ type-prev-button
 // Image
 gui-button-4.png
 // Text
-< type
+< previous
 // Font name, size
-arial, 2.0 
+arial, 2.0, sx=0.8
 
 // element type
 gui-button
@@ -36,9 +36,9 @@ type-next-button
 // Image
 gui-button-4.png
 // Text
-type >
+next >
 // Font name, size
-arial, 2.0 
+arial, 2.0, sx=0.8
 
 // element type
 gui-button

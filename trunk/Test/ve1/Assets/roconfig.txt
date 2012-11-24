@@ -51,6 +51,10 @@ cam-xrot        20
 cam-xrot-scale  2
 cam-yrot-scale  10
 
+// Dist in screen space to count as a camera drag
+// (Full screen width is 2)
+cam-drag_min    0.01
+
 // Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
 portal-max-dist  400
 
