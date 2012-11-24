@@ -12,7 +12,7 @@ bool GetHeartCount(int* result)
 
 bool GetFuelCellCount(int* result)
 {
-  static const char* FUELCELL_KEY = "stamina";
+  static const char* FUELCELL_KEY = "fuelcells";
   return GetPlayerCount(FUELCELL_KEY, result);
 }
 

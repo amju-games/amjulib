@@ -70,11 +70,12 @@ void BroadcastConsole::OnMsgRecv(const std::string& str)
 
   // Iterate, set positions
   float x = -1.0f;
-  float y = -0.8f; // TODO Bottom of screen after KB drawn
+  float y = -0.9f; // TODO Bottom of screen after KB drawn
   for (Texts::iterator it = m_texts.begin(); it != m_texts.end(); ++it)
   {
     RCPtr<GuiText> text = *it;
-    text->SetLocalPos(Vec2f(x, y));
+    Vec2f size = text->GetSize();
+    text->SetLocalPos(Vec2f(x, y + size.y));
     y += text->GetSize().y;
   }
 

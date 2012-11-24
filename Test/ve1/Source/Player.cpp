@@ -31,6 +31,8 @@
 #include "FirstTimeMsg.h"
 #include "MsgNum.h"
 #include "GameLookup.h"
+#include "Achievement.h"
+#include "ObjectManager.h"
 
 namespace Amju
 {
@@ -344,10 +346,10 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
 
     int fc = ToInt(val);
     gsm->SetFuelCells(fc);    
-    // When we get first value from server, set last count too.
+    // When we get first value from server, we can now check for achievements
     if (m_lastFuelCellCount == -1)
     {
-      m_lastFuelCellCount = fc;
+      m_lastFuelCellCount = 0;
     }
   }
 }
@@ -547,6 +549,10 @@ float Player::GetViewDist() const
 void Player::OnSpaceshipCollision()
 {
   // TODO Only process on first collision frame, ignore subsequently
+  if (!IsLocalPlayer())
+  {
+    return;
+  }
 
   FirstTimeMsgThisSession("This is your spaceship!", UNIQUE_MSG_ID, false); 
 
@@ -577,18 +583,32 @@ std::cout << "Fuel cell count unchanged from last collision.\n";
   int diff = fc - m_lastFuelCellCount;
   Assert(diff != 0); // and always positive, right ?? Unless you can lose them.
 std::cout << "Fuel cell diff: " << diff << "\n"; 
-  m_lastFuelCellCount = fc;
 
   // TODO Different bands
   std::string str = "Wow, you brought me more fuel! Thank you <p>!";
  
   LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
   TheLurker::Instance()->Queue(lm);
+
+  if (fc > 0 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_1))
+  {
+    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_1, "You brought your first fuel cell back to the ship!");
+  }
+  if (fc >= 5 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_5))
+  {
+    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_5, "You brought 5 fuel cells back to the ship!");
+  }
+  if (fc >= 10 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_10))
+  {
+    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_10, "You brought 10 fuel cells back to the ship!");
+  }
+  // etc
+  m_lastFuelCellCount = fc;
 }
 
 bool GetNameForPlayer(int objId, std::string* r)
 {
-  Player* p = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(objId).GetPtr());
+  Player* p = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(objId).GetPtr());
   if (p)
   {
     *r = p->GetName();

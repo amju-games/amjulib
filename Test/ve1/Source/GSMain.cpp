@@ -46,7 +46,7 @@
 #include "CommandPickup.h"
 #include "BroadcastConsole.h"
 
-//#define SHOW_NUM_ERRORS
+#define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
 
 namespace Amju
@@ -258,7 +258,7 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
 
 static void OnChangeLookNo()
 {
-  FirstTimeMsg("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
+  FirstTimeMsgThisSession("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
   FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
 }
 

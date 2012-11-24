@@ -7,7 +7,6 @@ namespace Amju
 {
 extern Colour LURK_FG;
 extern Colour LURK_BG;
-
 }
 
 #endif
