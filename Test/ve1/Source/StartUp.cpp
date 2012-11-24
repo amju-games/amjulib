@@ -27,7 +27,7 @@ void ReportError(const std::string& str)
 }
 
 // Create global variable window info
-Amju::AmjuGLWindowInfo w(640, 480, false, "My Game!");
+Amju::AmjuGLWindowInfo w(640, 480, false, "Crash Site - Experimental multi-player online game");
 
 void StartUp()
 {
