@@ -28,6 +28,9 @@
 #include "ROConfig.h"
 #include "HeartCount.h"
 #include "CommandPickup.h"
+#include "FirstTimeMsg.h"
+#include "MsgNum.h"
+#include "GameLookup.h"
 
 namespace Amju
 {
@@ -118,6 +121,7 @@ Player::Player()
   m_carrying = 0;
 
   m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
+  m_lastFuelCellCount = -1;
 }
 
 void Player::SetCarrying(Ve1Object* obj)
@@ -340,6 +344,11 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
 
     int fc = ToInt(val);
     gsm->SetFuelCells(fc);    
+    // When we get first value from server, set last count too.
+    if (m_lastFuelCellCount == -1)
+    {
+      m_lastFuelCellCount = fc;
+    }
   }
 }
 
@@ -513,6 +522,7 @@ void Player::SetMenu(GuiMenu* menu)
   else if (IsLoggedIn())
   {
     //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
+
     AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
     AddMenuItem("FIGHT!!", new CommandFight(this));
   }
@@ -532,6 +542,48 @@ void Player::OnCollideFuel(FuelCell* f)
 float Player::GetViewDist() const
 {
   return m_viewDistance;
+}
+
+void Player::OnSpaceshipCollision()
+{
+  // TODO Only process on first collision frame, ignore subsequently
+
+  FirstTimeMsgThisSession("This is your spaceship!", UNIQUE_MSG_ID, false); 
+
+  // No value yet
+  if (m_lastFuelCellCount == -1)
+  {
+    return;
+  }
+ 
+  int fc = 0;
+  if (!GetFuelCellCount(&fc))
+  {
+    Assert(0);
+    return;
+  } 
+  if (fc == 0)
+  {
+    FirstTimeMsgThisSession("It needs fuel. Please find fuel cells and bring them back here!", UNIQUE_MSG_ID, false);
+    return;
+  }
+
+  // If carrying more than last time, we might get an achievement
+  if (fc == m_lastFuelCellCount)
+  {
+std::cout << "Fuel cell count unchanged from last collision.\n";
+    return;
+  }
+  int diff = fc - m_lastFuelCellCount;
+  Assert(diff != 0); // and always positive, right ?? Unless you can lose them.
+std::cout << "Fuel cell diff: " << diff << "\n"; 
+  m_lastFuelCellCount = fc;
+
+  // TODO Different bands
+  std::string str = "Wow, you brought me more fuel! Thank you <p>!";
+ 
+  LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
+  TheLurker::Instance()->Queue(lm);
 }
 
 bool GetNameForPlayer(int objId, std::string* r)

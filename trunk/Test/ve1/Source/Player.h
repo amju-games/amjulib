@@ -49,6 +49,8 @@ public:
 
   float GetViewDist() const;
 
+  void OnSpaceshipCollision();
+
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow
   RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
@@ -61,6 +63,8 @@ protected:
 
   // This increases from a min value so things further away can be seen
   float m_viewDistance;
+
+  int m_lastFuelCellCount;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
