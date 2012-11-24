@@ -172,6 +172,12 @@ void GSMain::SetHeartNum(int num)
   hearts = num;
 }
 
+void GSMain::ResetHud()
+{
+  fuelCells = 0;
+  hearts = 0;
+}
+
 void GSMain::SetNumPlayersOnline(int n)
 {
   m_numPlayersOnline = n;
@@ -690,7 +696,9 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
 
   float sqlen = (m_mouseScreen - mouseScreenButtonDown).SqLen();
   std::cout << "Sqlen: " << sqlen << "\n";
-  bool dragged = (sqlen > 0.01f);
+  static const float DRAG_MIN = ROConfig()->GetFloat("cam-drag-min", 0.05f);
+  static const float DRAG_MIN2 = DRAG_MIN * DRAG_MIN;
+  bool dragged = (sqlen > DRAG_MIN2);
 
   // Do req if mouse button is up, no drag, and no menu
   // TODO And we didn't just close the menu because we made a selection
