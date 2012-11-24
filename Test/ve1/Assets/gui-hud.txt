@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-8
+10
 
 // Context menu - container for buttons
 gui-comp
@@ -90,6 +90,14 @@ heart-num
 0
 arial, 1.5, fgcol=ffffff, sx=0.9
 
+gui-text
+heart-txt
+0.6, 0.95
+0.4, 0.1
+// Text
+Health
+arial, 0.75, fgcol=ffffff, sx=0.9
+
 // Fuel image
 gui-image
 fuel-img
@@ -105,6 +113,14 @@ fuelcell-num
 // Text
 0
 arial, 1.5, fgcol=ffffff, sx=0.9
+
+gui-text
+fuelcell-txt
+0.2, 0.95
+0.4, 0.1
+// Text
+Fuel
+arial, 0.75, fgcol=ffffff, sx=0.9
 
 
 
