@@ -13,6 +13,9 @@
 #include "SetObjMeshCommand.h"
 #include "GSMain.h"
 #include "CommandPickup.h"
+#include "GameLookup.h"
+#include "LurkMsg.h"
+#include "HeartCount.h"
 
 //#define AABB_DEBUG
 
@@ -269,6 +272,29 @@ bool CommandPickUp::Do()
 {
   // TODO This is special, the server must determine if OK - no other pick up is happening.
   // I.e. it's not just a key/val pair, needs special case code.
+
+  if (m_takeNotDrop)
+  {
+    int cost = 10; // how many hearts it costs to lift this
+    // TODO TEMP TEST -- depends on mass of object
+
+    int hc = 0;
+    if (GetHeartCount(&hc))
+    {
+      if (hc <= cost)
+      {
+        std::string text = "Too heavy! You need more hearts!";
+        LurkMsg lm(GameLookup(text), Colour(1, 1, 1, 1), Colour(1, 0, 0, 1), AMJU_CENTRE); 
+        TheLurker::Instance()->Queue(lm);
+
+        return false;
+      }
+      else
+      {
+        ChangeHeartCount(-cost); 
+      }
+    }
+  }
 
   TheObjectUpdater::Instance()->SendUpdateReq(
     m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
