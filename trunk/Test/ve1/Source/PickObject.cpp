@@ -18,7 +18,12 @@ namespace Amju
 GameObject* PickObject(const Vec2f& mouseScreen)
 {
   // Get object carried by player - don't pick
-  Ve1Object* carried = GetLocalPlayer()->GetCarrying();
+  Ve1Object* carried = 0;
+  Player* player = GetLocalPlayer();
+  if (player)
+  {
+    carried = player->GetCarrying();
+  }
 
   Vec3f mouseWorldNear;
   Vec3f mouseWorldFar;
