@@ -445,10 +445,10 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
     }
     else
     {
-      SetBottom(-1.0f); 
-      size.y = 2.0f;
+      SetBottom(-0.9f); 
+      size.y = 1.9f;
       bg->SetSize(size);
-      pos.y = 2.0f;
+      pos.y = 1.9f;
       bg->SetLocalPos(pos);
 
       guiRecipName->SetLocalPos(Vec2f(guiRecipName->GetLocalPos().x, 2.0f));
@@ -456,7 +456,8 @@ std::cout << "Activate chat -- recip ID = " << recipId << "\n";
   }
   else
   {
-    TheKb::Instance()->Deactivate();
+    // If KB is enabled, have present all the time
+//    TheKb::Instance()->Deactivate();
     //m_gui->GetElementByName("chat-comp")->SetVisible(false);
   }
   m_chatSendIsActive = active;

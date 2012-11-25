@@ -27,10 +27,16 @@ public:
   // Called by MsgManager when we get a new broadcast msg
   void OnMsgRecv(const std::string&);
 
+  void OnActive();
+
+private:
+  void ReposText();
+
 private:
   typedef std::deque<RCPtr<GuiText> > Texts;
   Texts m_texts;
   RCPtr<GuiTextEdit> m_edit;
+  float m_bottom; // bottom of window, taking KB into account
 };
 
 typedef Singleton<BroadcastConsole> TheBroadcastConsole;
