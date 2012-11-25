@@ -328,8 +328,25 @@ std::cout << "SetFuelCells: no fuelcell-num element\n";
 std::cout << "SetHeartNum: no heart-num element\n";
     return;
   }
+  GuiElement* heartImg = GetElementByName(m_gui, "heart-img");
+  Assert(heartImg);
+
   text2->SetText(ToString(hearts));
-  text2->SetVisible(true); 
+  if (hearts <= 0)
+  {
+    float t = TheTimer::Instance()->GetElapsedTime();
+    t -= floor(t);
+    Assert(t <= 1.0f);
+    bool vis = (t < 0.5f);
+
+    text2->SetVisible(vis);
+    heartImg->SetVisible(vis);
+  }
+  else
+  {
+    text2->SetVisible(true); 
+    heartImg->SetVisible(true);
+  }
 }
 
 void GSMain::DoMoveRequest()
