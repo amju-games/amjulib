@@ -36,20 +36,56 @@ void SerialReqManager::SerialThread::Work()
   while (!m_stop)
   {
     m_mutex.Lock();
+
+#ifdef SRM_DEBUG
+std::cout << "SRM: Locked1\n";
+#endif
+
     RCPtr<OnlineReq> r = m_req;
     bool ready = (r && !r->IsFinished());
     m_mutex.Unlock();
 
+#ifdef SRM_DEBUG
+std::cout << "SRM: Unlocked1\n";
+#endif
+
     if (ready)
     {
+#ifdef SRM_DEBUG
+std::cout << "SRM: Doing request...\n";
+#endif
+
+#define REUSE_HTTP_CLIENT
+
+#ifdef REUSE_HTTP_CLIENT
       r->DoRequest(m_hc);
+#else
+      HttpClient hc;
+      r->DoRequest(hc);
+#endif
+
+#ifdef SRM_DEBUG
+std::cout << "SRM: Done request...\n";
+#endif
     
       m_mutex.Lock();
+#ifdef SRM_DEBUG
+std::cout << "SRM: Locked2\n";
+#endif
+
       m_req = 0;
       m_mutex.Unlock();
+
+#ifdef SRM_DEBUG
+std::cout << "SRM: Unlocked2\n";
+#endif
     }
     else
     {
+#ifdef SRM_DEBUG
+std::cout << "SRM: Sleep\n";
+#endif
+
       SleepMs(10); 
     }
   }
