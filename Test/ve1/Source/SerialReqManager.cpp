@@ -3,6 +3,7 @@
 #include <AmjuSleep.h>
 
 //#define NO_THREADS
+//#define SRM_DEBUG
 
 namespace Amju
 {
@@ -21,11 +22,12 @@ void SerialReqManager::Update()
 {
 }
 
-bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType)
+bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType, bool)
 {
 std::cout << "REQ: " << req->GetName() << "\n";
 
-  req->DoRequest(m_hc);   
+  static HttpClient hc;
+  req->DoRequest(hc);   
   req->HandleResult();
   return true;
 }
@@ -52,7 +54,7 @@ std::cout << "SRM: Unlocked1\n";
     if (ready)
     {
 #ifdef SRM_DEBUG
-std::cout << "SRM: Doing request...\n";
+std::cout << "SRM: Doing request...: " << r->GetName() << "\n";
 #endif
 
 #define REUSE_HTTP_CLIENT
