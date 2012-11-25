@@ -560,16 +560,13 @@ void Player::OnSpaceshipCollision()
 
   FirstTimeMsgThisSession("This is your spaceship!", UNIQUE_MSG_ID, false); 
 
-  int hc = 0;
-  if (GetHeartCount(&hc))
+  if (m_isDead)
   {
-    if (hc < 1)
-    {
-      std::string str = "Your health is restored!";
-      LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
-      TheLurker::Instance()->Queue(lm);
-      ChangeHeartCount(100);
-    }
+    std::string str = "Your health is restored!";
+    LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+    ChangeHeartCount(100);
+    m_isDead = false;
   }
 
   // No value yet
