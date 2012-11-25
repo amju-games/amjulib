@@ -258,7 +258,8 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
 
 static void OnChangeLookNo()
 {
-  FirstTimeMsgThisSession("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
+  // TODO Add this as an "on No" message, otherwise you get msgs shuffled with others.
+//  FirstTimeMsgThisSession("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
   FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
 }
 
@@ -266,7 +267,7 @@ static void OnChangeLookYes()
 {
   TheGSAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
   TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
-  FirstTimeMsgThisSession("Much better! OK, to walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
+  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
 }
 
 void GSMain::Update()
