@@ -134,6 +134,8 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
 
 void GSMain::ShowDropButton(Furniture* f, bool show)
 {
+  return; // Don't like, not required..?
+
 std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
 
   if (!m_gui)
@@ -373,6 +375,10 @@ std::cout << "Selected " << *selectedObj << "\n";
     }
     // No menu. Find point on mesh, and go to that position.
 
+    if (selectedObj != m_menuObject)
+    {
+      m_menuObject = 0;
+    }
   }
 
   // No object selected, so find position on terrain. 
