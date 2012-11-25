@@ -246,6 +246,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitSession.cpp" />
     <ClCompile Include="..\..\..\..\Source\HeartCount.cpp" />
+    <ClCompile Include="..\..\..\..\Source\HotLava.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
@@ -378,6 +379,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSYesNoQuitSession.h" />
     <ClInclude Include="..\..\..\..\Source\HasCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\HeartCount.h" />
+    <ClInclude Include="..\..\..\..\Source\HotLava.h" />
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
