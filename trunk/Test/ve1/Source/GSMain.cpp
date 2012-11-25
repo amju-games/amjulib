@@ -306,6 +306,7 @@ void GSMain::Update()
   BruteForce(TheGame::Instance()->GetGameObjects());
 
   TheChatConsole::Instance()->Update();
+  TheBroadcastConsole::Instance()->Update();
 
   TheLurker::Instance()->Update();
 
@@ -598,6 +599,7 @@ void GSMain::OnActive()
   drop->SetVisible(false); // hide drop button until we pick someting up
 
   TheChatConsole::Instance()->OnActive();
+  TheBroadcastConsole::Instance()->OnActive();
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.

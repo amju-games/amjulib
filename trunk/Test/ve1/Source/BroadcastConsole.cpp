@@ -3,6 +3,7 @@
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include "ROConfig.h"
+#include "Kb.h"
 
 namespace Amju
 {
@@ -13,14 +14,33 @@ static void OnEnter()
 
 BroadcastConsole::BroadcastConsole()
 {
+  m_bottom = -0.9f;
+
   m_edit = new GuiTextEdit;
-  m_edit->SetLocalPos(Vec2f(-1.0f, -0.9f)); // TODO depends on KB, and can move
+  m_edit->SetLocalPos(Vec2f(-1.0f, m_bottom)); // depends on KB, and can move
   m_edit->SetSize(Vec2f(2.0f, 0.1f)); // TODO depends on chat console
   m_edit->SetBgCol(Colour(0, 0, 0, 1));
   m_edit->SetFgCol(Colour(1, 1, 1, 1));
 
   TheEventPoller::Instance()->AddListener(m_edit);
   m_edit->SetCommand(Amju::OnEnter);
+}
+
+void BroadcastConsole::OnActive()
+{
+  m_edit->SetHasFocus(true);
+
+  static Kb* kb = TheKb::Instance();
+  if (kb->IsEnabled())
+  {
+    m_bottom = 0.0f; // TODO TEMP TEST
+  }
+  else
+  {
+    m_bottom = -0.9f;
+  }
+  m_edit->SetLocalPos(Vec2f(-1.0f, m_bottom)); 
+  ReposText();
 }
 
 void BroadcastConsole::OnEnter()
@@ -55,7 +75,7 @@ void BroadcastConsole::OnMsgRecv(const std::string& str)
   GuiText* text = new GuiText;
   text->SetIsMulti(true);
   text->SetTextSize(1.0f); // TODO CONFIG
-  text->SetSize(Vec2f(1.6f, 0.1f)); // assume single line
+  text->SetSize(Vec2f(2.0f, 0.1f)); // assume single line
   text->SetText(str);
   text->SizeToText();
   text->SetFgCol(Colour(1, 1, 0, 1));
@@ -67,10 +87,14 @@ void BroadcastConsole::OnMsgRecv(const std::string& str)
   {
     m_texts.pop_back();
   }
+  ReposText();
+}
 
+void BroadcastConsole::ReposText()
+{
   // Iterate, set positions
   float x = -1.0f;
-  float y = -0.9f; // TODO Bottom of screen after KB drawn
+  float y = m_bottom;
   for (Texts::iterator it = m_texts.begin(); it != m_texts.end(); ++it)
   {
     RCPtr<GuiText> text = *it;
@@ -78,7 +102,6 @@ void BroadcastConsole::OnMsgRecv(const std::string& str)
     text->SetLocalPos(Vec2f(x, y + size.y));
     y += text->GetSize().y;
   }
-
 }
 
 }
