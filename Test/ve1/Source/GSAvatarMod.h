@@ -20,13 +20,12 @@ public:
 
   void OnNextType();
   void OnPrevType();
-  void OnNextColour();
-  void OnPrevColour();
   void OnCancel();
   void OnOk();
 
 private:
   void CreateChar();
+  void CheckAvailable();
 
 private:
   //typedef std::vector<RCPtr<Ve1Character> > Characters;
@@ -35,6 +34,8 @@ private:
   RCPtr<Ve1Character> m_char;
 
   std::string m_currentChar;
+  int m_current;
+  int m_howManyCharsAvailable; // increases with Achievements
 };
 typedef Singleton<GSAvatarMod> TheGSAvatarMod;
 } // namespace

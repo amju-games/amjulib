@@ -16,8 +16,12 @@ public:
 
   Ve1Character* Create(const std::string& characterName);
 
-  const std::string& GetNextName(const std::string& characterName);
-  const std::string& GetPrevName(const std::string& characterName);
+  int GetNumNames() const;
+  const std::string& GetName(int) const;
+  bool GetIndex(const std::string& name, int* index) const;
+
+//  const std::string& GetNextName(const std::string& characterName);
+//  const std::string& GetPrevName(const std::string& characterName);
 
 /*
   // Set the avatar type for a character
@@ -37,7 +41,10 @@ private:
   TexPairs m_texPairs;
 */
 
-  typedef std::map<std::string, std::string> CharMap;
+  // Maintain the order in charlist.txt.
+  // All chars are MD3.
+  typedef std::vector<std::string > CharMap;
+  //typedef std::map<std::string, std::string> CharMap;
   CharMap m_chars;
 };
 

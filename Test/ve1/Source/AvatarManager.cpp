@@ -8,6 +8,29 @@
 
 namespace Amju
 {
+int AvatarManager::GetNumNames() const
+{
+  return m_chars.size();
+}
+
+const std::string& AvatarManager::GetName(int i) const
+{
+  Assert(i < (int)m_chars.size());
+  return m_chars[i];
+}
+
+bool AvatarManager::GetIndex(const std::string& name, int* index) const
+{
+  CharMap::const_iterator it = std::find(m_chars.begin(), m_chars.end(), name);
+  if (it == m_chars.end())
+  {
+    return false;
+  }
+  *index = std::distance(m_chars.begin(), it);
+  return true;
+}
+
+/*
 const std::string& AvatarManager::GetNextName(const std::string& characterName)
 {
   Assert(!m_chars.empty());
@@ -47,6 +70,7 @@ std::cout << "Get next name: No character called \"" << characterName << "\"\n";
   }
   return it->first;
 }
+*/
 
 Ve1Character* AvatarManager::Create(const std::string& characterName)
 {
@@ -54,7 +78,8 @@ Ve1Character* AvatarManager::Create(const std::string& characterName)
   // use character name to look up create func and data directory, options, etc.
 
   Ve1Character* ch = 0;
-  CharMap::iterator it = m_chars.find(characterName);
+  //CharMap::iterator it = m_chars.find(characterName);
+  CharMap::iterator it = std::find(m_chars.begin(), m_chars.end(), characterName);
   if (it == m_chars.end())
   {
     Assert(0);
@@ -65,7 +90,7 @@ std::cout << "Unexpected character name: " << characterName << "\n";
   }
   else
   {
-    std::string chType = it->second;
+    std::string chType = "md3"; //it->second;
     // TODO struct with other attributes, e.g. scale factor
 
     // TODO use factory using type
@@ -89,7 +114,6 @@ std::cout << "Unexpected character name: " << characterName << "\n";
 
   return ch;
 }
-
 
 bool AvatarManager::Load()
 {
@@ -136,7 +160,8 @@ bool AvatarManager::Load()
     //ChInfo chInfo;
     //chInfo.type = chType;
 
-    m_chars[chName] = chType;
+    //m_chars[chName] = chType;
+    m_chars.push_back(chName);
 
 /*
     // Surely MD2 Model should be managed by Resource manager???!!!

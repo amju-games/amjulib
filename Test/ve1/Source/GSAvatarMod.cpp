@@ -1,12 +1,13 @@
-#include "GSAvatarMod.h"
 #include <Timer.h>
 #include <AmjuGL.h>
 #include <File.h>
 #include <ReportError.h>
 #include <StringUtils.h>
-#include "Ve1SceneGraph.h"
 #include <Game.h>
+#include <GuiButton.h>
+#include "GSAvatarMod.h"
 #include "GSStartGame.h"
+#include "Ve1SceneGraph.h"
 #include "PlayerInfo.h"
 #include "ObjectUpdater.h"
 #include "GSStartMenu.h"
@@ -27,16 +28,6 @@ void OnCancelButton()
   TheGSAvatarMod::Instance()->OnCancel();
 }
 
-void OnColourPrevButton()
-{
-  TheGSAvatarMod::Instance()->OnPrevColour();
-}
-
-void OnColourNextButton()
-{
-  TheGSAvatarMod::Instance()->OnNextColour();
-}
-
 void OnTypePrevButton()
 {
   TheGSAvatarMod::Instance()->OnPrevType();
@@ -51,30 +42,59 @@ void OnTypeNextButton()
 GSAvatarMod::GSAvatarMod()
 {
   m_char = 0;
+  m_howManyCharsAvailable = 4;
+  m_current = 0;
 }
 
-void GSAvatarMod::OnNextColour()
+void GSAvatarMod::CheckAvailable()
 {
-  //m_currentTex++;
-  //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
-}
-
-void GSAvatarMod::OnPrevColour()
-{
-  //m_currentTex--;
-  //TheAvatarManager::Instance()->SetTexture(m_currentTex, m_char);
+  SceneNode* node = GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+ 
+  if (m_current >= m_howManyCharsAvailable)
+  {
+    if (node)
+    {
+      node->SetColour(Colour(0.5f, 0.5f, 0.5f, 0.5f));
+      ok->SetIsEnabled(false);
+    }
+  }
+  else
+  {
+    if (node)
+    {
+      node->SetColour(Colour(1, 1, 1, 1));
+      ok->SetIsEnabled(true);
+    }
+  }
 }
 
 void GSAvatarMod::OnNextType()
 {
-  m_currentChar = TheAvatarManager::Instance()->GetNextName(m_currentChar);
+  AvatarManager* am = TheAvatarManager::Instance();
+  m_current++;
+  if (m_current == am->GetNumNames())
+  {
+    m_current = 0;
+  }
+
+  m_currentChar = am->GetName(m_current);
   CreateChar();
+  CheckAvailable();
 }
 
 void GSAvatarMod::OnPrevType()
 {
-  m_currentChar = TheAvatarManager::Instance()->GetPrevName(m_currentChar);
+  AvatarManager* am = TheAvatarManager::Instance();
+  m_current--;
+  if (m_current < 0)
+  {
+    m_current = am->GetNumNames() - 1;
+  }
+
+  m_currentChar = am->GetName(m_current);
   CreateChar();
+  CheckAvailable();
 }
 
 void GSAvatarMod::OnCancel()
@@ -164,9 +184,15 @@ void GSAvatarMod::OnActive()
   if (m_currentChar.empty())
   {
 std::cout << "No avatar set for local player ???\n";
-    m_currentChar = "bird1";
+    m_currentChar = "marge";
+  }
+  if (!TheAvatarManager::Instance()->GetIndex(m_currentChar, &m_current))
+  {
+    std::cout << "Couldn't find name in Avatar Manager: " << m_currentChar << "\n";
+    Assert(0);
   }
   CreateChar();
+  CheckAvailable();
 }
 
 void GSAvatarMod::CreateChar()
