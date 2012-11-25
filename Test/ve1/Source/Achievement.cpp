@@ -1,5 +1,6 @@
 #include <set>
 #include <utility>
+#include <AmjuAssert.h>
 #include "Achievement.h"
 #include "HeartCount.h"
 #include "LocalPlayer.h"
@@ -71,5 +72,44 @@ int GetNumAchievements()
   Assert(b);
   return r;
 }
+
+const char* GetAchievementName(AchCode a)
+{
+  Assert(a < ACH_MAX);
+
+  /*
+  ACH_FUEL_CELL_TO_SHIP_1,
+  ACH_FUEL_CELL_TO_SHIP_5,
+  ACH_FUEL_CELL_TO_SHIP_10,
+  ACH_FUEL_CELL_TO_SHIP_20,
+  ACH_FUEL_CELL_TO_SHIP_50,
+  ACH_FUEL_CELL_TO_SHIP_100,
+
+  ACH_MSGS_SENT_1,
+  ACH_MSGS_SENT_5,
+  ACH_MSGS_SENT_10,
+  ACH_MSGS_SENT_20,
+  ACH_MSGS_SENT_50,
+  ACH_MSGS_SENT_100,
+  */
+  
+  static const char* ACH_NAME[] = 
+  {
+    "Brought your first fuel cell to the spaceship",
+    "Brought 5 fuel cells to the spaceship",
+    "Brought 10 fuel cells to the spaceship",
+    "Brought 20 fuel cells to the spaceship",
+    "Brought 50 fuel cells to the spaceship",
+    "Brought 100 fuel cells to the spaceship",
+    "Sent 1 message",
+    "Sent 5 messages",
+    "Sent 10 messages",
+    "Sent 20 messages",
+    "Sent 50 messages",
+    "Sent 100 messages",
+  };
+  return ACH_NAME[a]; // TODO localise
+}
+
 }
 
