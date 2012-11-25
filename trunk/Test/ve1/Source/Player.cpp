@@ -343,13 +343,15 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   {
     // TODO Set count member var too ?
     // TODO AChievements - e.g. first one, 5th, 10th, 20th, etc.
-
-    int fc = ToInt(val);
-    gsm->SetFuelCells(fc);    
-    // When we get first value from server, we can now check for achievements
-    if (m_lastFuelCellCount == -1)
+    if (IsLocalPlayer())
     {
-      m_lastFuelCellCount = 0;
+      int fc = ToInt(val);
+      gsm->SetFuelCells(fc);    
+      // When we get first value from server, we can now check for achievements
+      if (m_lastFuelCellCount == -1)
+      {
+        m_lastFuelCellCount = 0;
+      }
     }
   }
 }
@@ -585,6 +587,7 @@ std::cout << "Fuel cell count unchanged from last collision.\n";
 std::cout << "Fuel cell diff: " << diff << "\n"; 
 
   // TODO Different bands
+// TODO Needs better msg
   std::string str = "Wow, you brought me more fuel! Thank you <p>!";
  
   LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
