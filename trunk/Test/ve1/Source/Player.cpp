@@ -558,6 +558,18 @@ void Player::OnSpaceshipCollision()
 
   FirstTimeMsgThisSession("This is your spaceship!", UNIQUE_MSG_ID, false); 
 
+  int hc = 0;
+  if (GetHeartCount(&hc))
+  {
+    if (hc < 1)
+    {
+      std::string str = "Your health is restored!";
+      LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
+      TheLurker::Instance()->Queue(lm);
+      ChangeHeartCount(100);
+    }
+  }
+
   // No value yet
   if (m_lastFuelCellCount == -1)
   {
@@ -572,7 +584,7 @@ void Player::OnSpaceshipCollision()
   } 
   if (fc == 0)
   {
-    FirstTimeMsgThisSession("It needs fuel. Please find fuel cells and bring them back here!", UNIQUE_MSG_ID, false);
+    FirstTimeMsgThisSession("Your spaceship needs fuel. Please find fuel cells and bring them back here!", UNIQUE_MSG_ID, false);
     return;
   }
 
@@ -588,7 +600,7 @@ std::cout << "Fuel cell diff: " << diff << "\n";
 
   // TODO Different bands
 // TODO Needs better msg
-  std::string str = "Wow, you brought me more fuel! Thank you <p>!";
+  std::string str = "Thanks for bringing fuel to your spaceship, <p>!";
  
   LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
   TheLurker::Instance()->Queue(lm);
