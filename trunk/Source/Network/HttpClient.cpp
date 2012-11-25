@@ -154,7 +154,16 @@ std::cout << "Port: " << port << "\n";
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, &(result->m_data)); // Use HttpClient* ?
 
     // Perform the request, res will get the return code 
+#ifdef HTTP_DEBUG
+std::cout << "Before curl_easy_perform... ";
+#endif
+
     CURLcode res = curl_easy_perform(m_curl);
+
+#ifdef HTTP_DEBUG
+std::cout << "AFTER curl_easy_perform.\n";
+#endif
+
     if(res != CURLE_OK)
     {
       ok = false;
