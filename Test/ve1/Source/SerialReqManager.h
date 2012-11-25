@@ -22,11 +22,16 @@ public:
   // of requests of this type would be exceeded.
   bool AddReq(SharedPtr<OnlineReq>, int maxRequestsOfThisType = 1, bool discardNewNotOld = true);
 
-  // Count all requests
+  // Count all queued requests
   int CountAllReqs() const;
 
   // Return the number of requests with the given name.
   int CountReqsWithName(const std::string& name);
+
+  // Get total number of responses received
+  int GetTotalNumResponses() const;
+  // Get total number of requests queued
+  int GetTotalNumQueued() const;
 
   // Clear all requests - but any request in flight is not cancelled
   void Clear();
@@ -49,6 +54,8 @@ private:
     mutable Mutex m_mutex;
   };
   SerialThread* m_thread;
+  int m_numResponses;
+  int m_numQueued;
 };
 }
 

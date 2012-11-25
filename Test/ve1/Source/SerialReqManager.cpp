@@ -10,6 +10,18 @@ namespace Amju
 SerialReqManager::SerialReqManager()
 {
   m_thread = 0;
+  m_numResponses = 0;
+  m_numQueued = 0;
+}
+
+int SerialReqManager::GetTotalNumResponses() const
+{
+  return m_numResponses;
+}
+
+int SerialReqManager::GetTotalNumQueued() const
+{
+  return m_numQueued;
 }
 
 void SerialReqManager::Clear()
@@ -120,6 +132,13 @@ void SerialReqManager::Update()
   if (req->IsFinished())
   {
     req->HandleResult();
+
+    m_numResponses++;
+
+#ifdef SRM_DEBUG
+    std::cout << "SRM: Total responses: " << m_numResponses << "\n";
+#endif
+
     m_reqs.pop_front();
   }
 
@@ -199,6 +218,11 @@ std::cout << "Logic error, count is " << count << " but no reqs of type " << req
 
   m_reqs.push_back(req);
 
+  m_numQueued++;
+
+#ifdef SRM_DEBUG
+std::cout << "SRM: Total queued: " << m_numQueued << "\n";
+#endif
 
 #ifdef QUEUE_DEBUG
 std::cout << "Here is the queue now: \n";
