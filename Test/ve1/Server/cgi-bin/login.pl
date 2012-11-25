@@ -103,7 +103,8 @@ sub login()
   my $email = param('email') or die "Expected email\n";
   $email = lc($email);  # make lower case
 
-  cleanup_inactive_players();
+  # Buggy - logs out people who have just logged in, argh!
+  #cleanup_inactive_players();
 
   my $clientver = param('clientver');
   if (!$clientver)
