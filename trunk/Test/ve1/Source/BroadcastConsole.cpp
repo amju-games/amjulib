@@ -17,8 +17,8 @@ BroadcastConsole::BroadcastConsole()
   m_bottom = -0.9f;
 
   m_edit = new GuiTextEdit;
-  m_edit->SetLocalPos(Vec2f(-1.0f, m_bottom)); // depends on KB, and can move
-  m_edit->SetSize(Vec2f(2.0f, 0.1f)); // TODO depends on chat console
+  m_edit->SetLocalPos(Vec2f(-0.99f, m_bottom)); // depends on KB, and can move
+  m_edit->SetSize(Vec2f(1.98f, 0.1f)); // TODO depends on chat console
   m_edit->SetBgCol(Colour(0, 0, 0, 1));
   m_edit->SetFgCol(Colour(1, 1, 1, 1));
 
@@ -33,11 +33,11 @@ void BroadcastConsole::OnActive()
   static Kb* kb = TheKb::Instance();
   if (kb->IsEnabled())
   {
-    m_bottom = 0.0f; // TODO TEMP TEST
+    m_bottom = -0.09f; // TODO TEMP TEST
   }
   else
   {
-    m_bottom = -0.9f;
+    m_bottom = -0.89f;
   }
   m_edit->SetLocalPos(Vec2f(-1.0f, m_bottom)); 
   ReposText();
