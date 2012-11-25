@@ -33,7 +33,13 @@ MsgManager::MsgManager()
 
 void MsgManager::QueueMsg(const Msg& msg)
 {
-  m_map[msg.m_whenSent] = msg;
+  if (m_msgsRecv.count(msg.m_id) > 0)
+  {
+std::cout << "Discarding msg ID " << msg.m_id << " as already queued.\n";
+    return; // already in set
+  }
+  m_msgsRecv.insert(msg.m_id);
+  m_map.insert(std::make_pair(msg.m_whenSent, msg));
 }
 
 void MsgManager::Update()
@@ -186,7 +192,7 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: " << msg << "\n";
 #endif
 
-  static const int MAX_CONCURRENT_MSGS = 1; // ?
+  static const int MAX_CONCURRENT_MSGS = 100; // ?
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SEND_MSG);
   url += "&recip=";

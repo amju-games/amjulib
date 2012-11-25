@@ -1,9 +1,10 @@
 #ifndef MSG_MANAGER_H
 #define MSG_MANAGER_H
 
-#include <Singleton.h>
+#include <set>
 #include <string>
 #include <map>
+#include <Singleton.h>
 #include "Timestamp.h"
 
 namespace Amju
@@ -42,10 +43,13 @@ private:
 
 private:
 
-  typedef std::map<Timestamp, Msg> Msgs;
+  typedef std::multimap<Timestamp, Msg> Msgs;
   Msgs m_map;
   float m_elapsed;
   float m_checkPeriod;
+
+  // IDs of msgs received from server
+  std::set<int> m_msgsRecv;
 };
 
 std::string EncodeMsg(const std::string& plainMsg);
