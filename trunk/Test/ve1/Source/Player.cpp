@@ -124,6 +124,7 @@ Player::Player()
 
   m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
   m_lastFuelCellCount = -1;
+  m_isDead = false;
 }
 
 void Player::SetCarrying(Ve1Object* obj)
@@ -489,7 +490,8 @@ void Player::Update()
       // Player now has to go back to the spaceship to regenerate or something.
       if (!m_isDead)
       {
-        LurkMsg lm("You need to return to your spaceship to recover from your injuries!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+        LurkMsg lm("You need to return to your spaceship to recover from your injuries!", 
+          Colour(1, 1, 1, 1), Colour(1, 0, 0, 1), AMJU_CENTRE); 
         TheLurker::Instance()->Queue(lm);
       }
 
