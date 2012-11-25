@@ -1,6 +1,7 @@
 #include <iostream>
 #include <StringUtils.h>
 #include <File.h>
+#include <TimePeriod.h>
 #include "CogTestResults.h"
 #include "Ve1OnlineReqManager.h"
 
@@ -136,7 +137,27 @@ bool CogTestResults::Load()
     m_results.push_back(res);
   }
 
+  Commit(); // make sure results are sent
   return true;
+}
+
+Results CogTestResults::GetResultsForDate(Time testDate)
+{
+  testDate.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  Results r;
+
+  for (unsigned int i = 0; i < m_results.size(); i++)
+  {
+    Result* res = m_results[i];
+    Time t = res->m_timestamp;
+    t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+    if (t == testDate)
+    {
+      r.push_back(res);
+    }
+  }
+
+  return r;
 }
 
 bool CogTestResults::Save()
