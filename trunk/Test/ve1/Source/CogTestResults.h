@@ -52,6 +52,8 @@ private:
   Time m_timestamp;
 };
 
+typedef std::vector<Result*> Results;
+
 // Send results to server: until we get confirmation that the result was received, we should
 //  store locally and keep retrying.
 // We may also want to display the results to the player, so need to retrieve some results.
@@ -72,11 +74,14 @@ public:
   // Call to attempt to send all outstanding results to server
   void Commit();
 
+  // Returns Results for the given date (timestamp is rounded down).
+  // NB This will only return historical results stored locally, it doesn't pull down from server.
+  Results GetResultsForDate(Time);
+
 private:
   void SendResult(Result*);
 
 private:
-  typedef std::vector<Result*> Results;
   Results m_results;
 };
 typedef Singleton<CogTestResults> TheCogTestResults;

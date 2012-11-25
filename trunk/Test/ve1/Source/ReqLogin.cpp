@@ -25,6 +25,7 @@
 #include "GSCalendar.h"
 #include "GSToday.h"
 #include "GSMain.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
@@ -141,7 +142,7 @@ std::cout << "No start location.\n";
   else
   {
 std::cout << "Didn't get sesssion ID from server :-(\n";
-      TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
+    TheGSLoginWaiting::Instance()->SetErrorString("Didn't get session ID from server");
   }
 }
 
@@ -155,62 +156,8 @@ void ReqLogin::ChooseMode()
   PXml research = m_xml.getChildNode(5);
   if (SafeStrCmp(research.getName(), "research"))
   {
-    PXml p;
-      
-    /*
-    p = research.getChildNode(0);
-    if (SafeStrCmp(p.getName(), "is_research_session")) 
-    {
-      int isRS = ToInt(p.getText());
-      if (isRS)
-      {
-        doCogTests = true;
-std::cout << "This is a research session so we should do the cog tests before going into the game.\n"; 
-      }
-      else
-      {
-std::cout << "This is NOT a research session, woohoo!\n";
-      }
-    }
-    else
-    {
-std::cout << "Found research element but unexpected format (no is_research_session).\n";
-    }
-
-    p = research.getChildNode(2);
-    if (SafeStrCmp(p.getName(), "mode"))
-    {
-      int mode = ToInt(p.getText());
-      switch (mode)
-      {
-      case 0: 
-std::cout << "'NO GAME' MODE!!\n";
-        gm = AMJU_MODE_NO_GAME; 
-        break;
-        
-      case 1:
-std::cout << "SINGLE MODE!!\n";
-        gm = AMJU_MODE_SINGLE;
-        break;
-
-      case 2:
-std::cout << "MULTI MODE!!\n";
-        gm = AMJU_MODE_MULTI;
-        break;
-
-      default:
-std::cout << "Unexpected mode value.\n";
-    
-      }
-    }
-    else
-    {
-std::cout << "Found research element but unexpected format (no mode).\n";
-    }
-    */
-
     // Schedule - for calendar
-    p = research.getChildNode(4);
+    PXml p = research.getChildNode(4);
     if (SafeStrCmp(p.getName(), "dates"))
     {
       Time today(Time::Now());
@@ -235,8 +182,18 @@ std::cout << "Found research element but unexpected format (no mode).\n";
             t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
             if (t == today)
             {
-              // TODO Cog tests already done today ?
-              doCogTests = cogtest;
+              // Cog tests already done today ?
+              Results results = TheCogTestResults::Instance()->GetResultsForDate(Time::Now());
+              if (results.empty())
+              {
+                doCogTests = cogtest;
+              }
+              else
+              {
+                doCogTests = false;
+                std::cout << "Test results for today are here already.\n";
+              }
+
               if (play)
               { 
                 gm = AMJU_MODE_MULTI;
