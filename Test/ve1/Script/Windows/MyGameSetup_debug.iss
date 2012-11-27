@@ -5,16 +5,16 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{5F1820EB-3B24-4F20-B8EB-30D083C8511F}
-AppName=My Game
-AppVersion=0.4
+AppId={{027E36B-5981-4B37-9C8F-2ACF9E33EA4D}
+AppName=Crash Site
+AppVersion=0.6
 ;AppVerName=My Game 0.2
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
 AppUpdatesURL=http://www.amju.com/
-DefaultDirName={pf}\My Game
-DefaultGroupName=My Game
+DefaultDirName={pf}\Crash Site
+DefaultGroupName=Crash Site
 AllowNoIcons=yes
 OutputBaseFilename=setup
 Compression=lzma
@@ -36,15 +36,16 @@ Source: "..\..\..\..\Source\SDL\lib\sdl.dll"; DestDir: "{app}"; Flags: ignorever
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\Assets\*.*"; DestDir: "{app}\Data\"; Flags: ignoreversion
+Source: "..\..\Assets\characters\*.*"; DestDir: "{app}\Data\characters\"; Flags: ignoreversion recursesubdirs
 Source: "..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font2d\*.*"; DestDir: "{app}\Data\font2d\"; Flags: ignoreversion
 Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\My Game"; Filename: "{app}\ve1.exe"
+Name: "{group}\Crash Site"; Filename: "{app}\ve1.exe"
 Name: "{commondesktop}\My Game"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\My Game"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Crash Site"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,My Game}"; Flags: nowait postinstall skipifsilent
