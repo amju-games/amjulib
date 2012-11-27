@@ -44,9 +44,9 @@ Source: "..\..\..\..\Assets\font3d\*.*"; DestDir: "{app}\Data\font3d\"; Flags: i
 
 [Icons]
 Name: "{group}\Crash Site"; Filename: "{app}\ve1.exe"
-Name: "{commondesktop}\My Game"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
+Name: "{commondesktop}\Crash Site"; Filename: "{app}\ve1.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Crash Site"; Filename: "{app}\ve1.exe"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,My Game}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ve1.exe"; Description: "{cm:LaunchProgram,Crash Site}"; Flags: nowait postinstall skipifsilent
 
