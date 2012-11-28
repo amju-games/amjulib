@@ -156,10 +156,12 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
   if (loaded)
   {
     std::cout << "Loaded obj file ok!!\n";
+    /*
     if (!binary)
     {
       mesh->Save(m_objFile, false); // Save optimised files 
     }
+    */
   }
   else
   {
