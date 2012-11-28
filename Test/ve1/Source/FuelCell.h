@@ -30,7 +30,7 @@ public:
 
   virtual bool Load(File*);
   virtual void SetEditMenu(GuiMenu*) {}
-
+  virtual void SetMenu(GuiMenu*) {}
 };
 } // namespace
 #endif
