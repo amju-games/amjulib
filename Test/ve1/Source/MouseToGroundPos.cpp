@@ -77,7 +77,7 @@ std::cout << "Found " << size << " tris....\n";
     }
 
     // Skip (nearly) vertical polys, so we can't climb up walls
-    if (plane.Normal().y > 0.5f) // TODO CONFIG
+    if (plane.Normal().y < 0.2f) // TODO CONFIG
     {
       continue;
     }
