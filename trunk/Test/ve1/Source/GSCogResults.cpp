@@ -8,7 +8,15 @@ namespace Amju
 static void OnCogTestResultsOk()
 {
   // TODO does this work from anywhere ??
-  OnCogTestsAllDone();
+  static GSCogResults* cr = TheGSCogResults::Instance();
+  if (cr->GetPrevState())
+  {
+    cr->GoBack();
+  }
+  else
+  {
+    OnCogTestsAllDone();
+  }
 }
 
 GSCogResults::GSCogResults()
