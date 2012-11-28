@@ -2,9 +2,11 @@
 #include <AmjuSleep.h>
 #include <Timer.h>
 #include "SerialReqManager.h"
+#include "ROConfig.h"
 
 //#define NO_THREADS
 //#define SRM_DEBUG
+#define KILL_HANGING_REQ
 
 namespace Amju
 {
@@ -133,7 +135,10 @@ void SerialReqManager::Update()
   static float reqTime = 0;
   if (req->IsFinished())
   {
+#ifdef SRM_DEBUG
 std::cout << "Request took " << reqTime << "s to complete.\n";
+#endif
+
     reqTime = 0;
     req->HandleResult();
 
@@ -147,17 +152,22 @@ std::cout << "Request took " << reqTime << "s to complete.\n";
   }
   else
   {
+    static const float HANG_TIME = ROConfig()->GetFloat("hang-time", 10.0f);
     float dt = TheTimer::Instance()->GetDt();
     reqTime += dt;
-    if (reqTime > 3.0f) // Hanging, on Mac this is a problem
+    if (reqTime > HANG_TIME) // Hanging, on Mac this is a problem
     {
-std::cout << "Reqest " << req->GetName() << " seems to have hung, time is " << reqTime << "s.\n";
+std::cout << "Reqest " << req->GetName() << " may have hung, time is " << reqTime << "s.\n";
+
+#ifdef KILL_HANGING_REQ
       reqTime = 0;
       m_reqs.pop_front();
       // The thread is now blocked. 
       // TODO if there was a way of killing the request, that would be best
       m_thread = new SerialThread;
       m_thread->Start();
+#endif
+
     }
   }
 
