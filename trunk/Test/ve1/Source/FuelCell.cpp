@@ -122,6 +122,7 @@ const char* FuelCell::GetTypeName() const
 
 FuelCell::FuelCell()
 {
+  m_isPickable = false;
 }
 
 bool FuelCell::Load(File*)
