@@ -222,6 +222,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogout.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSNetError.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSObjMesh.cpp" />
@@ -240,6 +241,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSThanks.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSToday.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSTodaysTask.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForUpload.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
@@ -354,6 +356,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogout.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\..\Source\GSMap.h" />
     <ClInclude Include="..\..\..\..\Source\GSNetError.h" />
     <ClInclude Include="..\..\..\..\Source\GSNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSObjMesh.h" />
@@ -372,6 +375,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSThanks.h" />
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSToday.h" />
+    <ClInclude Include="..\..\..\..\Source\GSTodaysTask.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForUpload.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
