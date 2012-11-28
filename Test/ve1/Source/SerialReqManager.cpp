@@ -1,6 +1,7 @@
 #include <iostream>
-#include "SerialReqManager.h"
 #include <AmjuSleep.h>
+#include <Timer.h>
+#include "SerialReqManager.h"
 
 //#define NO_THREADS
 //#define SRM_DEBUG
@@ -129,8 +130,11 @@ void SerialReqManager::Update()
 
   OnlineReq* req = m_reqs.front();
 
+  static float reqTime = 0;
   if (req->IsFinished())
   {
+std::cout << "Request took " << reqTime << "s to complete.\n";
+    reqTime = 0;
     req->HandleResult();
 
     m_numResponses++;
@@ -140,6 +144,21 @@ void SerialReqManager::Update()
 #endif
 
     m_reqs.pop_front();
+  }
+  else
+  {
+    float dt = TheTimer::Instance()->GetDt();
+    reqTime += dt;
+    if (reqTime > 3.0f) // Hanging, on Mac this is a problem
+    {
+std::cout << "Reqest " << req->GetName() << " seems to have hung, time is " << reqTime << "s.\n";
+      reqTime = 0;
+      m_reqs.pop_front();
+      // The thread is now blocked. 
+      // TODO if there was a way of killing the request, that would be best
+      m_thread = new SerialThread;
+      m_thread->Start();
+    }
   }
 
   if (m_reqs.empty())
