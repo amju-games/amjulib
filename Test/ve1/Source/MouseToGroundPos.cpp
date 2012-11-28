@@ -76,6 +76,12 @@ std::cout << "Found " << size << " tris....\n";
       continue;
     }
 
+    // Skip (nearly) vertical polys, so we can't climb up walls
+    if (plane.Normal().y > 0.5f) // TODO CONFIG
+    {
+      continue;
+    }
+
 #ifdef TERRAIN_DEBUG
 std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
 std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
