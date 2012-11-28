@@ -9,9 +9,23 @@
 #include "GSTitle.h"
 #include "GSStartGame.h"
 #include "GSLogout.h"
+#include "GSAchievements.h"
+#include "GSCogResults.h"
 
 namespace Amju
 {
+static void OnTodayViewAchievements()
+{
+  TheGSAchievements::Instance()->SetPrevState(TheGSToday::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSAchievements::Instance());
+}
+
+static void OnTodayViewResults()
+{
+  TheGSCogResults::Instance()->SetPrevState(TheGSToday::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSCogResults::Instance());
+}
+
 static void OnTodayPlay()
 {
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
@@ -31,8 +45,6 @@ static void OnTodayOk()
     }
     else
     {
-      // TODO We get here but never leave this state...??? WTF ???
-
       // Explain state ?? No, the text in this state explains.
       TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
       state = TheGSLogout::Instance();
@@ -81,6 +93,17 @@ void GSToday::OnActive()
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   ok->SetCommand(OnTodayOk);
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    ok->SetText("play!");
+  }
+
+  // View game stats
+  GuiButton* viewAch = (GuiButton*)GetElementByName(m_gui, "view-ach-button");
+  viewAch->SetCommand(OnTodayViewAchievements);
+
+  GuiButton* viewResults = (GuiButton*)GetElementByName(m_gui, "view-results-button");
+  viewResults->SetCommand(OnTodayViewResults);
 
   // For admin/dev, button to play game even on non-game days
   GuiButton* play = (GuiButton*)GetElementByName(m_gui, "play-button");
