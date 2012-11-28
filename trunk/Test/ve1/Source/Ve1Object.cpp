@@ -23,6 +23,7 @@
 #include "ObjectUpdater.h"
 #include "ROConfig.h"
 #include "GSMain.h"
+#include "Terrain.h"
 
 //#define LOCATION_DEBUG
 
@@ -340,6 +341,18 @@ void Ve1Object::Update()
   if (!IsHidden())
   {
     GameObject::Update();
+
+    // HACK: stop things falling down forever
+    // Use min y of terrain AABB
+    Terrain* t = GetTerrain();
+    if (t)
+    {
+      float y = t->GetAABB()->GetMin(1);
+      if (m_pos.y < y)
+      {
+        m_pos.y = y;
+      }
+    }
   }
 
   if (m_inNewLocation > 0 && TerrainReady())
