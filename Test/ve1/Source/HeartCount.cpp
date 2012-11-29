@@ -57,12 +57,17 @@ bool ChangePlayerCount(const std::string& key, int delta)
   {
     return false;
   }
+  int id = GetLocalPlayerId();
+  return ChangeObjCount(id, key, delta);
+}
 
+bool ChangeObjCount(int objId, const std::string& key, int delta)
+{
   // Must be a server side script to avoid lost data! 
   static const int MAX_CHANGE_HEARTS = 100;
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(CHANGE_VALUE);
-  url += "&player_obj_id=" + ToString(player->GetId());
+  url += "&player_obj_id=" + ToString(objId);
   url += "&key=" + key;
   url += "&change=" + ToString(delta);
 

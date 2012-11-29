@@ -13,6 +13,13 @@ public:
 
   Spaceship();
 
+  virtual void SetKeyVal(const std::string& key, const std::string& val);
+
+  // Called when local player adds more fuel to ship. We then send this to server.
+  void AddFuel(int delta);
+
+private:
+
 };
 }
 

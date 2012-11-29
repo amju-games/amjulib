@@ -71,7 +71,7 @@ void FuelCellManager::OnLocationEntry()
     FuelCell* f = new FuelCell;
     f->SetId(id++);
 
-    float s = ROConfig()->GetFloat("fuel-cell-spread", 300.0f); 
+    float s = ROConfig()->GetFloat("fuel-cell-spread", 200.0f); 
     Vec3f r(Rnd(-s, s), Rnd(0, s), Rnd(-s, s));
     Vec3f p = GetPos() + r; 
     f->SetPos(p);
