@@ -35,7 +35,7 @@ void MsgManager::QueueMsg(const Msg& msg)
 {
   if (m_msgsRecv.count(msg.m_id) > 0)
   {
-std::cout << "Discarding msg ID " << msg.m_id << " as already queued.\n";
+//std::cout << "Discarding msg ID " << msg.m_id << " as already queued.\n";
     return; // already in set
   }
   m_msgsRecv.insert(msg.m_id);
