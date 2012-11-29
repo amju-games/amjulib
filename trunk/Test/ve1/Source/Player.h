@@ -8,6 +8,7 @@
 namespace Amju
 {
 class FuelCell;
+class Spaceship;
 
 class Player : public Ve1ObjectChar
 {
@@ -49,7 +50,7 @@ public:
 
   float GetViewDist() const;
 
-  void OnSpaceshipCollision();
+  void OnSpaceshipCollision(Spaceship* spaceship);
 
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow

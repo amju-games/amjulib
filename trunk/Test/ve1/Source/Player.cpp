@@ -33,13 +33,16 @@
 #include "GameLookup.h"
 #include "Achievement.h"
 #include "ObjectManager.h"
+#include "FuelCount.h"
+#include "Spaceship.h"
+#include "FuelCount.h"
 
 namespace Amju
 {
+static const std::string FUELCELL_KEY = "fuelcells";
+
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
-
-const std::string FUELCELL_KEY = "fuelcells";
 
 // Name tag scene node
 class PlayerNameNode : public SceneNode
@@ -342,17 +345,36 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   }
   else if (key == FUELCELL_KEY)
   {
-    // TODO Set count member var too ?
-    // TODO AChievements - e.g. first one, 5th, 10th, 20th, etc.
     if (IsLocalPlayer())
     {
       int fc = ToInt(val);
-      gsm->SetFuelCells(fc);    
-      // When we get first value from server, we can now check for achievements
-      if (m_lastFuelCellCount == -1)
+
+      // Lurk msg - total number of fuel cells ever brought to ship
+      std::string s;
+      if (fc == 1)
       {
-        m_lastFuelCellCount = 0;
+        s = "You brought a fuel cell to the ship!";
       }
+      else
+      {
+        s = "You have brought a total of " + val + " fuel cells to the ship!";
+      }
+      LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);
+
+      if (fc > 0 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_1))
+      {
+        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_1, "You brought your first fuel cell back to the ship!");
+      }
+      if (fc >= 5 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_5))
+      {
+        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_5, "You brought 5 fuel cells back to the ship!");
+      }
+      if (fc >= 10 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_10))
+      {
+        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_10, "You brought 10 fuel cells back to the ship!");
+      }
+      // etc
     }
   }
 }
@@ -542,7 +564,15 @@ void Player::SetMenu(GuiMenu* menu)
 
 void Player::OnCollideFuel(FuelCell* f)
 {
-  ChangePlayerCount(FUELCELL_KEY, 1);
+  // Inc number of fuel cells locally carried. When we collide with spaceship we transfer this number
+  //  to server.
+  ChangeLocalPlayerFuelCount(1);
+
+  static GSMain* gsm = TheGSMain::Instance();
+
+  // Total number in spaceship today??
+  gsm->SetFuelCells(GetLocalPlayerFuelCount());    
+
 }
 
 float Player::GetViewDist() const
@@ -550,7 +580,7 @@ float Player::GetViewDist() const
   return m_viewDistance;
 }
 
-void Player::OnSpaceshipCollision()
+void Player::OnSpaceshipCollision(Spaceship* spaceship)
 {
   // TODO Only process on first collision frame, ignore subsequently
   if (!IsLocalPlayer())
@@ -569,55 +599,43 @@ void Player::OnSpaceshipCollision()
     m_isDead = false;
   }
 
-  // No value yet
-  if (m_lastFuelCellCount == -1)
-  {
-    return;
-  }
- 
-  int fc = 0;
-  if (!GetFuelCellCount(&fc))
-  {
-    Assert(0);
-    return;
-  } 
+  int fc = GetLocalPlayerFuelCount();
   if (fc == 0)
   {
     FirstTimeMsgThisSession("Your spaceship needs fuel. Please find fuel cells and bring them back here!", UNIQUE_MSG_ID, false);
     return;
   }
 
-  // If carrying more than last time, we might get an achievement
-  if (fc == m_lastFuelCellCount)
-  {
-std::cout << "Fuel cell count unchanged from last collision.\n";
-    return;
-  }
-  int diff = fc - m_lastFuelCellCount;
-  Assert(diff != 0); // and always positive, right ?? Unless you can lose them.
-std::cout << "Fuel cell diff: " << diff << "\n"; 
+std::cout << "Fuel cells: " << fc << "\n"; 
 
   // TODO Different bands
 // TODO Needs better msg
   std::string str = "Thanks for bringing fuel to your spaceship, <p>!";
- 
   LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
   TheLurker::Instance()->Queue(lm);
 
-  if (fc > 0 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_1))
+  spaceship->AddFuel(fc);
+
+  // Add fc to server-based count of total fuel cells you have ever brought
+  // Count goes up for this player: total num fuel cells ever brought to ship
+  ChangePlayerCount(FUELCELL_KEY, fc);
+
+  // Send system message that you brought fuel
+  static const int BROADCAST = -2;
+  if (fc == 1)
   {
-    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_1, "You brought your first fuel cell back to the ship!");
+    str = "<BROUGHT A FUEL CELL TO THE SHIP>";
   }
-  if (fc >= 5 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_5))
+  else
   {
-    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_5, "You brought 5 fuel cells back to the ship!");
+    str = "<BROUGHT " + ToString(fc) + " FUEL CELLS TO THE SHIP>";
   }
-  if (fc >= 10 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_10))
-  {
-    OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_10, "You brought 10 fuel cells back to the ship!");
-  }
-  // etc
-  m_lastFuelCellCount = fc;
+  TheMsgManager::Instance()->SendMsg(GetLocalPlayerId(), BROADCAST, str);
+
+  static GSMain* gsm = TheGSMain::Instance();
+  gsm->SetFuelCells(0);    
+
+  ResetLocalPlayerFuelCount();
 }
 
 bool GetNameForPlayer(int objId, std::string* r)

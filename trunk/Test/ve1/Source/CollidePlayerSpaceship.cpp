@@ -12,9 +12,9 @@ void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
     return;
   }
 
-  player->SetIsColliding(spaceship);
+  //player->SetIsColliding(spaceship);
 
-  player->OnSpaceshipCollision();
+  player->OnSpaceshipCollision(spaceship);
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
