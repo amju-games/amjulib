@@ -11,6 +11,8 @@
 #include <Line3.h>
 #include <Plane.h>
 #include "MouseToGroundPos.h"
+#include "Useful.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -69,7 +71,7 @@ std::cout << "Found " << size << " tris....\n";
     const Vec3f& b = t.m_verts[1];
     const Vec3f& c = t.m_verts[2];
 
-    // Skip tris facing away from us. This means the normal will be between 0 and 1.
+    // Skip tris facing away from us. This means the dot prod will be between 0 and 1.
     Plane plane(a, b, c);
     if (DotProduct(plane.Normal(),  dir) > 0)
     {
@@ -77,7 +79,12 @@ std::cout << "Found " << size << " tris....\n";
     }
 
     // Skip (nearly) vertical polys, so we can't climb up walls
-    if (plane.Normal().y < 0.2f) // TODO CONFIG
+#ifdef _DEBUG
+  std::cout << "Normal of tri selected: " << plane.Normal() << "\n";
+#endif
+
+    static const float VERTICAL_Y = ROConfig()->GetFloat("vertical-y", 0.9f);
+    if (plane.Normal().y < VERTICAL_Y) 
     {
       continue;
     }
@@ -128,5 +135,6 @@ std::cout << "d=" << d << "... expecting zero.\n";
 }
 
 }
+
 
 

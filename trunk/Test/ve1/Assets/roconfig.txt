@@ -74,3 +74,6 @@ chat-poll-period  2.0
 
 // Broadcast chat - how many lines
 chat-max-lines    8
+
+// Cut off point for treating sloping floors as walls
+vertical-y  0.8
