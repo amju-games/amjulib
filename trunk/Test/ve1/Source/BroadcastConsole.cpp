@@ -46,7 +46,7 @@ void BroadcastConsole::OnActive()
 void BroadcastConsole::OnEnter()
 {
   std::string str = m_edit->GetText();
-std::cout << "Broadcast console got enter key press.. msg is: \"" << str << "\"\n";
+//std::cout << "Broadcast console got enter key press.. msg is: \"" << str << "\"\n";
   if (!str.empty())
   {
     m_edit->SetText("");
