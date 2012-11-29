@@ -34,6 +34,8 @@ public:
   const ResearchDate* GetNext() const; // could return zero
 
   void AddResearchDate(const ResearchDate&);
+
+  int GetDayOnPlanet() const; // get play day number
   
 private:
   ResearchDates m_dates;
