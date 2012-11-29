@@ -50,6 +50,9 @@ protected:
   RCPtr<AttackEffect> m_effect;
 
   int m_stamina; // health - like Fighting Fantasy
+
+  // used to find if we overshot destination
+  float sqLenLastTime;
 };
 }
 

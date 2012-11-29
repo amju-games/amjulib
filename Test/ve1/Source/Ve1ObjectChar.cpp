@@ -38,6 +38,7 @@ Ve1ObjectChar::Ve1ObjectChar()
 
   // Default, should be set by server
   m_stamina = 3; // TODO CONFIG
+  sqLenLastTime = 9999999.9f; // Must be big
 }
 
 void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
@@ -256,11 +257,23 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
   m_isMoving = true;
 
   Vec3f dir = GetPos() - newpos;
+  float sqLen = dir.SqLen();
+  // TODO Check if distance is greater than last time - if so, we have missed the target!
 
-  if (dir.SqLen() < 1.0f) // TODO CONFIG
+  static const float STOP_DIST = ROConfig()->GetFloat("stop-dist", 10.0f);
+  if (sqLen < STOP_DIST)
   {
     SetVel(Vec3f(0, 0, 0));
+    m_isMoving = false; // Not sure why this wasn't here
   }
+  // TODO enable this when we are reliably resetting sqLenLastTime, otherwise sometimes characters won't move
+  /*
+  else if (sqLen > sqLenLastTime)
+  {
+    SetVel(Vec3f(0, 0, 0));
+    m_isMoving = false; // Not sure why this wasn't here
+  }
+  */
   else
   {
     dir.Normalise();
@@ -269,6 +282,7 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
     // Work out direction to face
     SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
   }
+  sqLenLastTime = sqLen;
 }
 
 AABB* Ve1ObjectChar::GetAABB()
