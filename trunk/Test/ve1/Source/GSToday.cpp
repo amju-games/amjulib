@@ -7,10 +7,11 @@
 #include "GameMode.h"
 #include "GSCogTestMenu.h"
 #include "GSTitle.h"
-#include "GSStartGame.h"
+#include "GSTodaysTask.h"
 #include "GSLogout.h"
 #include "GSAchievements.h"
 #include "GSCogResults.h"
+#include "GSStartGame.h"
 
 namespace Amju
 {
@@ -52,8 +53,8 @@ static void OnTodayOk()
   }
   else if (GetGameMode() == AMJU_MODE_MULTI)
   {
-    // If it's a game day, go to main state.
-    state = TheGSStartGame::Instance();
+    // If it's a game day, start playing
+    state = TheGSTodaysTask::Instance();
   } 
   else
   {

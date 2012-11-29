@@ -1,0 +1,46 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+today-comp
+// Num children
+4
+
+gui-button
+ok-button
+// pos
+-0.4, -0.6
+// size
+0.8, 0.2
+gui-button-4.png
+ok
+arial, 2.0
+
+
+gui-text
+long-text
+-0.9, 0.9
+1.8, 1.2
+// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
+Your spaceship has crash landed on the planet Blarg. You must find fuel cells to escape!
+arial, 1.0, multi, fgcol=ffffff
+
+gui-text
+date-text
+-0.8, 0.6
+1.6, 0.4
+Day <n>\n on planet Blarg
+arial, 2.0, multi, fgcol=ffffff
+
+
+gui-text
+obj-text
+-0.9, 0.1
+1.8, 1.2
+// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
+Your objective: find <f> fuel cells and bring them back to your space ship!
+arial, 1.0, multi, fgcol=ffff00
+
+
