@@ -26,6 +26,7 @@
 #include "GSToday.h"
 #include "GSMain.h"
 #include "CogTestResults.h"
+#include "FuelCount.h"
 
 namespace Amju
 {
@@ -226,6 +227,8 @@ void ReqLogin::ChooseMode()
   }
 
   // Now we can look up today on the calendar to get game mode flags.
+
+  ResetLocalPlayerFuelCount();
 
   SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
