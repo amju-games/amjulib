@@ -33,7 +33,7 @@ void ReportError(const std::string& str)
 
 void StartUp()
 {
-  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+//  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 

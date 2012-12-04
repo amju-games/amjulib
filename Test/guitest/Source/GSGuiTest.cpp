@@ -1,8 +1,9 @@
-#include "GSGuiTest.h"
 #include <iostream>
 #include <AmjuGL.h>
 #include <GuiListBox.h>
 #include <GuiFileListBox.h>
+#include <CursorManager.h>
+#include "GSGuiTest.h"
 
 namespace Amju
 {
@@ -40,6 +41,8 @@ void OnOK()
 void GSGuiTest::OnActive()
 {
   GSGui::OnActive();
+
+  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
 
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
