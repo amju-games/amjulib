@@ -15,6 +15,9 @@
 #include "GuiFileDialog.h"
 #include "GuiObjView.h"
 #include "GuiCalendar.h"
+#include "GuiDataBarDisplay.h"
+#include "GuiChart.h"
+#include "GuiDataLineDisplay.h"
 
 namespace Amju
 {
@@ -48,5 +51,7 @@ GuiFactory::GuiFactory()
   Add(GuiFileDialog::NAME, &CreateFileDialog);
   Add(GuiObjView::NAME, &CreateObjView);
   Add(GuiCalendar::NAME, &CreateCalendar);
+  Add(GuiChart::NAME, &CreateChart);
+  Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
 }
 }
