@@ -27,13 +27,13 @@ sub sendmsg()
 
   my $sql = "insert into chat (recip, sender, candelete, whensent, msg) values ($recip, $sender, 0, now(), '$msg') on duplicate key update id = id + 1";
 
-  print "Query: $sql\n\n";
+  update_or_insert($sql);
 
-  my $query = $dbh->prepare($sql) or die
-    "Query prepare failed for this query: $sql\n";
+  # Set (key, value) for this player so other players will know to
+  #  retrieve new messages
+  $sql = "insert into objectstate (id, `key`, val, whenchanged) values ($sender, 'last_msg_sent', LAST_INSERT_ID(), now() ) on duplicate key update val=LAST_INSERT_ID(), whenchanged=now()";
 
-  $query->execute;
-
+  update_or_insert($sql);
 }
 
 
