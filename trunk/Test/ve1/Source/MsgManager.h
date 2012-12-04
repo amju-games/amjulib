@@ -13,7 +13,8 @@ namespace Amju
 class MsgManager : public NonCopyable
 {
 public:
-  void Update();
+  void Update(); // check queue
+  void CheckForNewMsgs();  // send req to server
   void SendMsg(int senderId, int recipId, const std::string& msg);
   
   struct Msg
