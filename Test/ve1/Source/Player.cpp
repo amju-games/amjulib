@@ -40,6 +40,7 @@
 namespace Amju
 {
 static const std::string FUELCELL_KEY = "fuelcells";
+static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
 
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
@@ -376,6 +377,10 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       }
       // etc
     }
+  }
+  else if (key == LAST_MSG_SENT_KEY)
+  {
+    TheMsgManager::Instance()->CheckForNewMsgs();
   }
 }
 

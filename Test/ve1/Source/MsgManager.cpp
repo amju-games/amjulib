@@ -42,23 +42,15 @@ void MsgManager::QueueMsg(const Msg& msg)
   m_map.insert(std::make_pair(msg.m_whenSent, msg));
 }
 
+void MsgManager::CheckForNewMsgs()
+{
+  // Get Msgs with ID greater than last msg ID recved
+  // Queue new msgs  -- in OnSuccess() in ReqGetNewMsgs
+  SendGetNewMsgsReq();
+}
+
 void MsgManager::Update()
 {
-  // TODO Check periodically
-
-  // Period can be short cut if we might be in a conversation
-
-  float dt = TheTimer::Instance()->GetDt();
-  m_elapsed += dt;
-  if (m_elapsed > m_checkPeriod)
-  {
-    m_elapsed = 0;
-
-    // Get Msgs with ID greater than last msg ID recved
-    SendGetNewMsgsReq();
-    // Queue new msgs  -- in OnSuccess() in ReqGetNewMsgs
-  }
-
   // Check if any new msgs in queue
   if (m_map.empty())
   {
@@ -181,12 +173,9 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   {
     Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
   }
-  // Replace spaces in msg 
-  // TODO what about punctuation chars.. they are stripped out at server, need special codes like HTML
-  std::string newmsg = EncodeMsg(msg); ////Replace(msg, " ", "_");
 
-  // Strip out characters which are not allowed - use boost reg exp
-  // Replace punctuation chars with ascii code.
+  // Encode all characters in msg 
+  std::string newmsg = EncodeMsg(msg); 
 
 #ifdef SEND_DEBUG
 std::cout << "Sending msg: to: " << recipId << " From: " << senderId << " msg: " << msg << "\n";
