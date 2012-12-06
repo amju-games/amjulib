@@ -45,6 +45,7 @@ Ve1Object::Ve1Object() : m_location(-1)
   m_inNewLocation = 2;
   m_dir = 0;
   m_dirCurrent = m_dir;
+  m_capsuleRadius = 30.0f; // Default, get better value in subclasses
 }
 
 Ve1Object::~Ve1Object()
@@ -169,25 +170,25 @@ void Ve1Object::HandleFloor(CollisionMesh* m)
   }
 }
 
-void Ve1Object::HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos)
+bool Ve1Object::HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos)
 {
   Vec3f dir = newPos - oldPos;
   LineSeg seg(oldPos, newPos);
 
   // Find all intersecting floor tris
   CollisionMesh::Tris tris;
-  Capsule cap(seg, 1.0f); // TODO Radius
+  Capsule cap(seg, m_capsuleRadius); 
 
   if (!m->Intersects(cap, &tris))
   {
-    return ;
+    return false;
   }
 
   if (tris.empty())
   {
     // So Intersects() above should have returned false!?
     Assert(0);
-    return;
+    return false;
   }
 
   Mgc::Vector3 pt1(seg.p0.x, seg.p0.y, seg.p0.z);
@@ -223,8 +224,11 @@ std::cout << "Found " << size << " tris....\n";
       continue;
     }
     // Skip ground planes
-    if (plane.B() > 0.1f)
+    // TODO Should this match VERTICAL_Y in MouseToGroundPos() ??
+    static const float VERTICAL_Y = ROConfig()->GetFloat("vertical-y", 0.9f);
+    if (plane.B() >= VERTICAL_Y)
     {
+      // Tri is more or less horizontal: don't treat as a wall
       continue;
     }
 
@@ -279,6 +283,8 @@ std::cout << "d=" << d << "... expecting zero.\n";
 std::cout << "Dodgy triangle in collision mesh ?\n";      
     }
   }
+
+  return foundOne;
 }
 
 bool Ve1Object::IsHidden() const

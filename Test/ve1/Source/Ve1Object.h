@@ -97,7 +97,8 @@ protected:
   // Reduce difference between currentDir and dir (desired heading)
   void TurnToFaceDir();
 
-  void HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
+  // Return true if we do respond to a wall collision (so should recalc heading)
+  bool HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
 
   void HandleFloor(CollisionMesh* m);
   virtual void OnBounceStop() {}
@@ -134,10 +135,11 @@ protected:
   // Set of objects with which we are in collision. If this set changes, recalc shadows.
   // OR CHECKSUM ????
 
-
   float m_dir; // Direction we face (aka heading) - DEGREES
   float m_dirCurrent; // Direction we currently face -- we will reduce the difference
    // between m_dirCurrent and m_dir until we face the direction of movement.
+
+  float m_capsuleRadius;
 };
 
 // Keep track of keys used to set object properties

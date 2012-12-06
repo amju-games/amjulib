@@ -123,12 +123,18 @@ void Ve1ObjectChar::Update()
   }
 
   // Handle wall collisions with terrain and any building
-  HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos);
+  if (HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos))
+  {
+    m_recalcHeading = true;
+  }
 
   HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
   if (h)
   {
-    HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos);
+    if (HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos))
+    {
+      m_recalcHeading = true;
+    }
   }
 
   HandleFloor(GetTerrain()->GetCollisionMesh());
