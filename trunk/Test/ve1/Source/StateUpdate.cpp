@@ -4,7 +4,9 @@
 #include <Xml/XmlParser2.h>
 #include "ObjectUpdater.h"
 #include <SafeUtils.h>
+#include <StringUtils.h>
 #include "GSNetError.h"
+#include "PlayerNames.h"
 
 namespace Amju
 {
@@ -44,10 +46,38 @@ std::cout << "Obj " << i << ": ";
       std::string key = obj.getChildNode(1).getText();
       std::string val = obj.getChildNode(2).getText();
 
-//std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
       // TODO Sanity check ?
 
-      TheObjectUpdater::Instance()->QueueUpdate(id, key, val);
+      if (key == "pos")
+      {
+        Strings strs = Split(val, ',');
+        if (strs.size() == 4)
+        {
+          float x = ToFloat(strs[0]);
+          float y = ToFloat(strs[1]);
+          float z = ToFloat(strs[2]);
+          int loc = ToInt(strs[3]);
+          
+std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
+          TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z), loc);
+        }
+        else
+        {
+std::cout << "Unexpected bad pos: " << val << " for pos for ID " << id << "\n";
+          Assert(0);
+        }
+      }
+      else
+      {
+std::cout << "Got update for object " << id << " key: " << key << " val: " << val << "\n";
+        TheObjectUpdater::Instance()->QueueUpdate(id, key, val);
+      }
+
+      // TODO Or in ObjectUpdater ?
+      if (key == "name")
+      {
+        SetPlayerName(id, val);
+      }
     }
   }
   else
