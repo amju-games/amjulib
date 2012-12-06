@@ -8,8 +8,29 @@ require "common.pl";
 
 my_connect();
 
-sub move();
-move();
+#sub move();
+#move();
+
+sub update_research_table();
+update_research_table();
+
+sub update_research_table()
+{
+  if (check_session() == 0)
+  {
+    return;
+  }
+
+  my $x = param('x');
+  my $y = param('y');
+  my $z = param('z');
+  my $loc = param('loc');
+  my $obj_id = param('obj_id');
+
+  # Update "research" table - log all data for analysis
+  $sql = "insert into research_objectpos (id, x, y, z, loc, whenchanged) values ($obj_id, $x, $y, $z, $loc, now())";
+  insert($sql);
+}
 
 
 ##### end of main function
