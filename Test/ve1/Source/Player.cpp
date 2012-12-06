@@ -36,6 +36,7 @@
 #include "FuelCount.h"
 #include "Spaceship.h"
 #include "FuelCount.h"
+#include "PlayerNames.h"
 
 namespace Amju
 {
@@ -645,6 +646,10 @@ std::cout << "Fuel cells: " << fc << "\n";
 
 bool GetNameForPlayer(int objId, std::string* r)
 {
+  *r = GetPlayerName(objId);
+  return !(r->empty());
+
+/*
   Player* p = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(objId).GetPtr());
   if (p)
   {
@@ -652,6 +657,7 @@ bool GetNameForPlayer(int objId, std::string* r)
     return true;
   }
   return false;
+*/
 }
 }
 
