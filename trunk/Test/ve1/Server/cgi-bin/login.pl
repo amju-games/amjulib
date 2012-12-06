@@ -11,6 +11,7 @@ require "sendemail2.pl";
 # This is the minimum client version which you must have to be able to log in.
 my $latestMajor = "0";
 my $latestMinor = "7";
+my $startloc = 57;
 
 my_connect();
 
@@ -19,6 +20,21 @@ login();
 
 
 ##### end of main function
+
+sub init_start_pos($)
+{
+  my $objid = shift;
+
+  # Set location and pos - this relies on there being an empty square at the start location for new players
+  #  to materialise in.
+  my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
+  my $z = rand(500) - 250;
+
+  my $val = "$x,0,$x,$startloc";
+  $sql = "insert into objectstate (`id`, `key`, `val`, `whenchanged`) values ($objid, 'pos', '$val', now()) on duplicate key update val='$val', whenchanged=now()";
+  insert($sql);
+}
+
 
 # For research project, send info about research session
 sub add_research_element($$)
@@ -180,7 +196,9 @@ print "Query: $sql\n";
     {
 print "Your new session ID: $session_id\n";
 
-      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$loc</loc>\n";
+      # Reset to start loc
+      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$startloc</loc>\n";
+      init_start_pos($objid);
 
       # Add info for research project: is this a research session, which game mode, etc.
       add_research_element($player_id, $session_id);
