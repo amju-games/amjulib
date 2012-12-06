@@ -4,6 +4,8 @@
 #include "SerialReqManager.h"
 #include "ROConfig.h"
 
+#define SRM_AUDIT
+//#define QUEUE_DEBUG
 //#define NO_THREADS
 //#define SRM_DEBUG
 #define KILL_HANGING_REQ
@@ -135,8 +137,8 @@ void SerialReqManager::Update()
   static float reqTime = 0;
   if (req->IsFinished())
   {
-#ifdef SRM_DEBUG
-std::cout << "Request took " << reqTime << "s to complete.\n";
+#ifdef SRM_AUDIT
+std::cout << "Request " << req->GetName() << " took " << reqTime << "s to complete.\n";
 #endif
 
     reqTime = 0;
@@ -144,7 +146,7 @@ std::cout << "Request took " << reqTime << "s to complete.\n";
 
     m_numResponses++;
 
-#ifdef SRM_DEBUG
+#ifdef SRM_AUDIT
     std::cout << "SRM: Total responses: " << m_numResponses << "\n";
 #endif
 
@@ -249,8 +251,9 @@ std::cout << "Logic error, count is " << count << " but no reqs of type " << req
 
   m_numQueued++;
 
-#ifdef SRM_DEBUG
-std::cout << "SRM: Total queued: " << m_numQueued << "\n";
+#ifdef SRM_AUDIT
+std::cout << "SRM: Total ever queued: " << m_numQueued << " elapsed: " 
+  << TheTimer::Instance()->GetElapsedTime() << "\n";
 #endif
 
 #ifdef QUEUE_DEBUG
