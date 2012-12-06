@@ -233,6 +233,7 @@ void ObjectUpdater::HintCheckForPosUpdates()
 
 void ObjectUpdater::Update()
 {
+/*
   // Get pos updates periodically.
   // TODO Only get objects whose position has changed since last check ?
   m_posElapsed += TheTimer::Instance()->GetDt();
@@ -252,10 +253,11 @@ void ObjectUpdater::Update()
 
     TheVe1ReqManager::Instance()->AddReq(new PosUpdateReq(url));
   }
+*/
 
   m_updateElapsed += TheTimer::Instance()->GetDt();
-  static const float UPDATE_PERIOD = 1.0f; // TODO CONFIG
-  if (m_updateElapsed > UPDATE_PERIOD) //// && IsOnline())
+  static const float UPDATE_PERIOD = 2.0f; // TODO CONFIG
+  if (m_updateElapsed > UPDATE_PERIOD) 
   {
     m_updateElapsed = 0;
 
@@ -426,9 +428,7 @@ public:
 
 void ObjectUpdater::SendUpdateReq(int objId, const std::string& key, const std::string& val)
 {
-//std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
-
-  static const int MAX_CONCURRENT_UPDATE_REQS = 1000; // Would be a problem if we didn't send..??
+std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_STATE);
   url += "&obj_id=";
@@ -470,6 +470,12 @@ static const int MAX_POS_UPDATE_REQS = 2; // for mad clicking
 
 void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
 {
+  // Update objectstate table, not objectpos, to cut down on selects
+  std::string val = ToString((int)pos.x) + "," + ToString((int)pos.y) + "," + ToString((int)pos.z) + "," + ToString(location); 
+  SendUpdateReq(objId, "pos", val);
+
+  // Still send this to update research table
+
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_POSITION);
   url += "&obj_id=";
   url += ToString(objId);
@@ -484,10 +490,14 @@ void ObjectUpdater::SendPosUpdateReq(int objId, const Vec3f& pos, int location)
   //  FOR THIS OBJECT.
   std::string reqName = "setpos_" + ToString(objId); 
   TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, reqName, pos), MAX_POS_UPDATE_REQS, false);
+
 }
 
 void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int location)
 {
+  SendPosUpdateReq(objId, pos, location);
+
+/*
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(CHANGE_LOCATION);
   url += "&obj_id=";
   url += ToString(objId);
@@ -498,6 +508,7 @@ void ObjectUpdater::SendChangeLocationReq(int objId, const Vec3f& pos, int locat
 
   std::string reqName = "setpos_" + ToString(objId); 
   TheVe1ReqManager::Instance()->AddReq(new MoveReq(url, reqName, pos), MAX_POS_UPDATE_REQS, false);
+*/
 }
 }
 
