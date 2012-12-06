@@ -44,12 +44,14 @@
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
+    <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)\</IntDir>
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -266,6 +268,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\PickObject.cpp" />
     <ClCompile Include="..\..\..\..\Source\Player.cpp" />
     <ClCompile Include="..\..\..\..\Source\PlayerInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\PlayerNames.cpp" />
     <ClCompile Include="..\..\..\..\Source\Portal.cpp" />
     <ClCompile Include="..\..\..\..\Source\Postbox.cpp" />
     <ClCompile Include="..\..\..\..\Source\PosUpdate.cpp" />
@@ -404,6 +407,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\PlatformInfo.h" />
     <ClInclude Include="..\..\..\..\Source\Player.h" />
     <ClInclude Include="..\..\..\..\Source\PlayerInfo.h" />
+    <ClInclude Include="..\..\..\..\Source\PlayerNames.h" />
     <ClInclude Include="..\..\..\..\Source\Portal.h" />
     <ClInclude Include="..\..\..\..\Source\Postbox.h" />
     <ClInclude Include="..\..\..\..\Source\PosUpdate.h" />

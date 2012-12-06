@@ -200,6 +200,10 @@
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiCalendar.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiChart.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataBarDisplay.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataDisplay.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp" />
@@ -458,7 +462,13 @@
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiCalendar.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiChart.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataBarDisplay.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataDisplay.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataLineDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiFileBrowser.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
@@ -657,6 +667,7 @@
     <None Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.inl" />
     <None Include="..\..\..\Source\Geom\Mgc\MgcVector2.inl" />
     <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl" />
+    <None Include="..\..\..\Source\Gui\TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

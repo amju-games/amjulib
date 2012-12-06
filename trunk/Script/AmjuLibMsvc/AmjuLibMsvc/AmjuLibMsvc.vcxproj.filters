@@ -861,6 +861,18 @@
     <ClCompile Include="..\..\..\Source\Utils\AmjuRand.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiChart.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataBarDisplay.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataDisplay.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1613,6 +1625,24 @@
     <ClInclude Include="..\..\..\Source\Utils\AmjuRand.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiCalendar.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiChart.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataBarDisplay.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataDisplay.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDataLineDisplay.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiFileBrowser.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">
@@ -1641,6 +1671,9 @@
     </None>
     <None Include="..\..\..\Source\Geom\Mgc\MgcVector3.inl">
       <Filter>Geom\Mgc</Filter>
+    </None>
+    <None Include="..\..\..\Source\Gui\TODO.txt">
+      <Filter>Gui</Filter>
     </None>
   </ItemGroup>
 </Project>
