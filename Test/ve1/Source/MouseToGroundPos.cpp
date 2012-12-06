@@ -86,6 +86,7 @@ std::cout << "Found " << size << " tris....\n";
     static const float VERTICAL_Y = ROConfig()->GetFloat("vertical-y", 0.9f);
     if (plane.Normal().y < VERTICAL_Y) 
     {
+      // Treat tri as vertical, so we can't go to the point on this tri
       continue;
     }
 
