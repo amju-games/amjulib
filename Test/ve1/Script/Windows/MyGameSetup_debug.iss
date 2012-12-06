@@ -7,8 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{027E36B-5981-4B37-9C8F-2ACF9E33EA4D}
 AppName=Crash Site
-AppVersion=0.6
-;AppVerName=My Game 0.2
+AppVersion=0.7
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
