@@ -56,8 +56,8 @@ std::cout << "No data for chart.\n";
 //  float barW = size.x / (float)numRows;
 
   // Get constants
-  float xChartPos = GetLocalPos().x;
-  float yChartPos = GetLocalPos().y;
+  float xChartPos = GetCombinedPos().x;
+  float yChartPos = GetCombinedPos().y;
   float minX = (float)data->GetMinX();
   float xRange = (float)data->GetMaxX() - minX;
   Assert(xRange >= 0);

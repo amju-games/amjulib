@@ -34,6 +34,16 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
     OnScrollVelEvent(Vec2f(0, 1.0f));
     return true;
   }
+  if (e.keyType == AMJU_KEY_LEFT && e.keyDown)
+  {
+    OnScrollVelEvent(Vec2f(-1.0f, 0));
+    return true;
+  }
+  else if (e.keyType == AMJU_KEY_RIGHT && e.keyDown)
+  {
+    OnScrollVelEvent(Vec2f(1.0f, 0));
+    return true;
+  }
   return false;
 }
 
@@ -54,7 +64,7 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 
   if (leftDrag)
   {
-    OnScrollVelEvent(Vec2f(0, dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
+    OnScrollVelEvent(Vec2f(dx * 10.0f, dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
   }
 
   return child->OnCursorEvent(ce); 
@@ -85,8 +95,29 @@ void GuiScroll::Draw()
   m_scrollPos += m_scrollVel * dt;
 
   // TODO x-axis
-  
-  // Bounce on end reached
+  // Bounce or stop on end reached
+  if (m_scrollPos.x < 0)
+  {
+    m_scrollPos.x = 0;
+#ifdef BOUNCE
+    m_scrollVel.x = -0.25f * m_scrollVel.x;
+#else
+    m_scrollVel.x = 0;
+#endif
+  }
+  float maxx = std::max(0.0f, child->GetSize().x - GetSize().x); 
+  // depends on size of child and how much space there is to display it
+  if (m_scrollPos.x > maxx)
+  {
+    m_scrollPos.x = maxx;
+#ifdef BOUNCE
+    m_scrollVel.x = -0.25f * m_scrollVel.x;
+#else
+    m_scrollVel.x = 0;
+#endif
+  }
+
+  // Y axis
   if (m_scrollPos.y < 0)
   {
     m_scrollPos.y = 0;
@@ -125,6 +156,9 @@ void GuiScroll::OnScrollVelEvent(const Vec2f& scrollVel)
   // Enforce min/max
   m_scrollVel.x = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.x));
   m_scrollVel.y = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.y));
+
+std::cout << "Scroll vel for " << GetName() << ": x:" << m_scrollVel.x 
+  << " y: " << m_scrollVel.y << "\n"; 
 }
 
 bool GuiScroll::Load(File* f)

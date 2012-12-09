@@ -1,4 +1,5 @@
 #include "GuiChart.h"
+#include "GuiFactory.h"
 #include "GuiDataLineDisplay.h" // TODO TEMP TEST
 
 namespace Amju
@@ -45,11 +46,26 @@ bool GuiChart::Load(File* f)
     return false;
   }
   GetScroll()->SetSize(GetSize()); // TODO do we need this ?
-  GetDataDisplay()->SetSize(GetSize());
 
-  // TODO Set type of data display
-  // TODO Use factory for this
-  GetScroll()->AddChild(new GuiDataLineDisplay);
+  std::string displayType;
+  if (!f->GetDataLine(&displayType))
+  {
+    f->ReportError("Gui Chart expected display type");
+    return false;
+  }
+  GuiElement* elem = TheGuiFactory::Instance()->Create(displayType);
+  if (!elem)
+  {
+    f->ReportError("Gui Chart: unexpected display type: " + displayType);
+    return false;
+  }
+  GetScroll()->AddChild(elem);
+  if (!elem->Load(f))
+  {
+    f->ReportError("Failed to load Gui Chart as display type failed to load");
+    return false;
+  }
+  //GetDataDisplay()->SetSize(GetSize());
 
   return true;
 }
