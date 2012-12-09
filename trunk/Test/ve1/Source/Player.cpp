@@ -130,6 +130,7 @@ Player::Player()
   m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
   m_lastFuelCellCount = -1;
   m_isDead = false;
+  m_totalFuelCells = -1; // not set yet
 }
 
 void Player::SetCarrying(Ve1Object* obj)
@@ -350,19 +351,22 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     if (IsLocalPlayer())
     {
       int fc = ToInt(val);
-
       // Lurk msg - total number of fuel cells ever brought to ship
       std::string s;
-      if (fc == 1)
+      if (m_totalFuelCells != -1)
       {
-        s = "You brought a fuel cell to the ship!";
+        if (fc == 1)
+        {
+          s = "You brought a fuel cell to the ship!";
+        }
+        else
+        {
+          s = "You have brought a total of " + val + " fuel cells to the ship!";
+        }
+        LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
+        TheLurker::Instance()->Queue(lm);
       }
-      else
-      {
-        s = "You have brought a total of " + val + " fuel cells to the ship!";
-      }
-      LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);
+      m_totalFuelCells = fc;
 
       if (fc > 0 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_1))
       {
@@ -461,11 +465,12 @@ void Player::Update()
 
   // Stop moving if we are close enough to the destination
   // TODO This ends up happening every frame, only do it if we are moving
-  if (m_isMoving)
+  if (true) //m_isMoving)
   {
     Vec3f dir = GetPos() - m_newPos;
     dir.y = 0; // ignore y coord for now
-    if (dir.SqLen() < 10.0f) // TODO CONFIG
+    static const float STOP_DISTANCE = ROConfig()->GetFloat("stop-dist", 20.0f);
+    if (dir.SqLen() < STOP_DISTANCE) 
     {
       SetVel(Vec3f(0, 0, 0));
       m_newPos = GetPos();

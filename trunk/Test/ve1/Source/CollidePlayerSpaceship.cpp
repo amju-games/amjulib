@@ -12,7 +12,7 @@ void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
     return;
   }
 
-  //player->SetIsColliding(spaceship);
+  player->SetIsColliding(spaceship);
 
   player->OnSpaceshipCollision(spaceship);
 }

@@ -4,24 +4,15 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+choose-obj-comp
 // Num children
-6
+3
 
-// Element type
-gui-text-edit
-// Element name
-obj_file
-// pos (coords are -1..1)
--0.7, 0.8
-// size
-1.4, 0.1
-// Text
-/path/to/file.obj
-// Font name, size
-arial, 1.0
+gui-file-dialog
+my-file-dialog
+// Template
+gui-file-dialog.txt
 
-// Element type
 gui-text
 // Element name
 text1
@@ -34,13 +25,6 @@ Please select scene .obj
 // Font name, size
 arial, 1.0, multi, centre, fgcol=ffffff
 
-// File browser
-gui-file-list-box
-my-file-browser
-// pos
--0.7, 0.7
-// Size
-1.4, 1.0
 
 gui-text
 error
@@ -53,23 +37,4 @@ error
 // Font name, size
 arial, 1.0, centre, fgcol=ffffff
 
-gui-button
-ok-button
-// pos (coords are -1..1)
--0.9, -0.7
-// size
-0.8, 0.2
-gui-button-4.png
-OK
-arial, 2.0 
-
-gui-button
-cancel-button
-// pos (coords are -1..1)
-0.1, -0.7
-// size
-0.8, 0.2
-gui-button-4.png
-cancel
-arial, 2.0 
 

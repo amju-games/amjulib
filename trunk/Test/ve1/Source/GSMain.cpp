@@ -296,7 +296,8 @@ void GSMain::Update()
   GetVe1SceneGraph()->Update();
 
   // Make periodic checks for newly created objects
-  TheObjectManager::Instance()->Update();
+  // Just do this in GSWaitForNewLocation, right?
+  //TheObjectManager::Instance()->Update();
 
   TheObjectUpdater::Instance()->Update();
 
@@ -600,6 +601,9 @@ void GSMain::OnActive()
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
 #endif
 
+  static const bool showAABB = (ROConfig()->GetValue("show-aabb", "n") == "y");
+  SceneNode::SetGlobalShowAABB(showAABB);
+
   GSBase::OnActive();
 
   TheGSNetError::Instance()->SetPrevState(this);
@@ -656,6 +660,7 @@ bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 bool GSMainListener::OnKeyEvent(const KeyEvent& kb)
 {
 #ifdef _DEBUG
+  // TODO no good: broadcast edit box gets these events now.
   // Debug: show AABBs for SceneNodes
   if (kb.keyType == AMJU_KEY_CHAR && kb.key == 'b' && kb.keyDown)
   {

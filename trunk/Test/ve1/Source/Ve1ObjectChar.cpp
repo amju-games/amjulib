@@ -17,8 +17,6 @@ namespace Amju
 {
 static const float SPEED = 80.0f; // TODO CONFIG
 
-static const float GRAVITY = -50.0f; // TODO CONFIG
-
 static const float BOUNCE_VEL = -50.0f;
 
 //static const char* TYPE_KEY = "type";
@@ -113,6 +111,7 @@ void Ve1ObjectChar::Update()
 
   // TODO Not if underwater ?
   // TODO Put in base class, so we can drop things ?
+  static const float GRAVITY = ROConfig()->GetFloat("gravity", -50.0f); 
   m_acc.y = GRAVITY;
 
   Ve1Object::Update();
@@ -148,7 +147,9 @@ void Ve1ObjectChar::Update()
   {
     m_recalcHeading = true;
   }
-  else if (m_recalcHeading)
+
+
+  if (true) //m_recalcHeading)
   {
     m_recalcHeading = false;
     if (m_isMoving)
