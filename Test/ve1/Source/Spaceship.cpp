@@ -43,7 +43,7 @@ void Spaceship::SetKeyVal(const std::string& key, const std::string& val)
     int fc = ToInt(val);
 
     std::string str;
-    if (fc == 1)
+    if (fc == 1 || fc == 0)
     {
       str = "The spaceship now has one fuel cell!";
     }
@@ -51,8 +51,10 @@ void Spaceship::SetKeyVal(const std::string& key, const std::string& val)
     {
       str = "The spaceship now has a total of " + val + " fuel cells!";
     }
-    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
-    TheLurker::Instance()->Queue(lm);
+    TheMsgManager::Instance()->QueueMsg(MsgManager::Msg(0, str, -2, -2, Time::Now())); 
+    // Lurk msg "annoying"
+    //LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
+    //TheLurker::Instance()->Queue(lm);
 
     // Check for meeting objective for the day
   }
@@ -62,8 +64,11 @@ void Spaceship::AddFuel(int delta)
 {
   // Player collided with us, giving us this many fuel cells.
 
-  // Count goes up for spaceship grand total
-  ChangeObjCount(GetId(), GetKey(), delta);
+  if (delta != 0)
+  {
+    // Count goes up for spaceship grand total
+    ChangeObjCount(GetId(), GetKey(), delta);
+  }
 }
 
 } // namespace

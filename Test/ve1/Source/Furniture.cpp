@@ -16,6 +16,7 @@
 #include "GameLookup.h"
 #include "LurkMsg.h"
 #include "HeartCount.h"
+#include "ROConfig.h"
 
 //#define AABB_DEBUG
 
@@ -58,6 +59,11 @@ const char* Furniture::GetTypeName() const
 
 void Furniture::Update()
 {
+  // Lots of problems if furniture can fall. Every furniture will need collision meshes for terrain
+  //  and other intersecting objects.
+//  static const float GRAVITY = ROConfig()->GetFloat("gravity", -50.0f); 
+//  m_acc.y = GRAVITY;
+
   Ve1Object::Update();
 
   if (!m_sceneNode)
@@ -83,7 +89,8 @@ void Furniture::Update()
     GameObject* go = TheGame::Instance()->GetGameObject(m_pickupId);
     if (go)
     {
-      m_pos = go->GetPos() + Vec3f(0, 40, 0); // y offset TODO
+      static const float PICKUP_Y = ROConfig()->GetFloat("pickup-y", 60.0f);
+      m_pos = go->GetPos() + Vec3f(0, PICKUP_Y, 0); 
       Player* p = dynamic_cast<Player*>(go); 
       if (p)
       {

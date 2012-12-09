@@ -163,7 +163,7 @@ std::cout << "Reqest " << req->GetName() << " may have hung, time is " << reqTim
 
 #ifdef KILL_HANGING_REQ
       reqTime = 0;
-      m_reqs.pop_front();
+      ////m_reqs.pop_front();
       // The thread is now blocked. 
       // TODO if there was a way of killing the request, that would be best
       m_thread = new SerialThread;

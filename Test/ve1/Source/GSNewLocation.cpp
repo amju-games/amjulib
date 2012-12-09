@@ -12,6 +12,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "LocalPlayer.h"
 #include "SaveConfig.h"
+#include <GuiFileDialog.h>
 #include "Terrain.h"
 #include "GSWaitForUpload.h"
 #include "ObjectManager.h"
@@ -128,7 +129,8 @@ void GSNewLocation::OnOKButton()
   // Save path/file in prefs.
 
   // Try loading .obj file. Temporarily set File Root to path to .obj and other files.
-  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("obj_file"));
+  ////GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("obj_file"));
+  GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("fd-path-text"));
   Assert(text);
   std::string pathFile = text->GetText();
 
@@ -375,7 +377,7 @@ void GSNewLocation::OnActive()
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOKNew);
   GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancelButton);
   // Text edit control needs focus to accept kb input
-  GetElementByName(m_gui, "obj_file")->SetHasFocus(true);
+  //GetElementByName(m_gui, "obj_file")->SetHasFocus(true);
 
   // TODO "test" and "commit" buttons
 
@@ -390,9 +392,10 @@ void GSNewLocation::RestoreLastPath()
   if (config->Exists(LOCATION_PATH_KEY))
   {
     std::string s = config->GetValue(LOCATION_PATH_KEY);
-    GuiText* text = dynamic_cast<GuiText*>(m_gui->GetElementByName("obj_file"));
-    Assert(text);
-    text->SetText(s); 
+
+    GuiFileDialog* dlg = (GuiFileDialog*)(m_gui->GetElementByName("my-file-dialog"));
+    Assert(dlg);
+    dlg->SetPathAndFile(s);
   }
 }
 

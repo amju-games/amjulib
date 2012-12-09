@@ -66,6 +66,7 @@ protected:
   float m_viewDistance;
 
   int m_lastFuelCellCount;
+  int m_totalFuelCells; // total num fuel cells brought to spaceship - -1 until set from server
 };
 
 bool GetNameForPlayer(int objId, std::string* r);

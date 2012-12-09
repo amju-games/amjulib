@@ -469,10 +469,13 @@ void ObjectManager::Update()
     int i = 0;
     for (FileQ::iterator it = m_fileQ.begin(); it != m_fileQ.end(); )
     {
+      // No need for limit, as reqs are now queued. 
+      /*
       if (i > MAX_CONCURRENT_DOWNLOADS)
       {
         break;
       }
+      */
       const std::string& filename = *it;
       if (IsLocal(filename))
       {
@@ -492,11 +495,11 @@ std::cout << "FILE Q: already local: " << filename << "\n";
       {
         GetFile(*it); // really call GetFile()
         ++it;
-	if (!FileExists(File::GetRoot() + filename))
-	{
+        if (!FileExists(File::GetRoot() + filename))
+        {
 std::cout << "FILE Q: really trying to download file: " << filename << "\n";
-          i++; // inc count of requests
-	}
+                i++; // inc count of requests
+        }
       }
     }
 

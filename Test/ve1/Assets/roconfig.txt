@@ -53,14 +53,25 @@ cam-yrot-scale  10
 
 // Dist in screen space to count as a camera drag
 // (Full screen width is 2)
-cam-drag_min    0.01
+cam-drag_min    0.0
 
 // Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
 portal-max-dist  400
 
+// Collide with walls: push away by this much extra (multiply) so we don't slowly get through non-vertical walls 
+extra-push  1.1
+// distance to arrow destination when we consider it reached
+stop-dist  20
+
+gravity  -50
+
+// height above player where picked-up object floats
+pickup-y    60
+
 // Player AABB
 player-aabb-x  12
 player-aabb-y  60
+show-aabb      n
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200

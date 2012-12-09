@@ -32,13 +32,12 @@ public:
     // Type, e.g. post, chat, pigeon post
   };
 
+  void QueueMsg(const Msg& msg);
+
 private:
 
   friend class Singleton<MsgManager>;
   MsgManager();
-
-  friend class ReqGetNewMsgs;
-  void QueueMsg(const Msg& msg);
 
   void MarkRead(const Msg& msg); // flag as read on server
 

@@ -69,7 +69,7 @@ void Ve1Object::SetDir(float degs)
   m_dir = degs;
 
   // TODO Send this to DB
-  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
+////  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
 }
 
 void Ve1Object::SetDirToFace(GameObject* go)
@@ -276,7 +276,8 @@ std::cout << "d=" << d << "... expecting zero.\n";
     {
       norm.Normalise();
       float dist = sqrt((oldPos - newPos).SqLen());
-      m_pos += norm * dist;
+      static const float EXTRA_PUSH = ROConfig()->GetFloat("extra-push", 1.1f);
+      m_pos += norm * dist * EXTRA_PUSH;
     }
     else
     {
