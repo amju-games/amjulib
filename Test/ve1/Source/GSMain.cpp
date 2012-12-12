@@ -297,7 +297,7 @@ void GSMain::Update()
 
   // Make periodic checks for newly created objects
   // Just do this in GSWaitForNewLocation, right?
-  //TheObjectManager::Instance()->Update();
+  TheObjectManager::Instance()->Update();
 
   TheObjectUpdater::Instance()->Update();
 
