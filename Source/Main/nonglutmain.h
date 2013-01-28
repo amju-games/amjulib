@@ -97,11 +97,13 @@ int main(int argc, char **argv)
 #endif // IPHONE
 
 std::cout << "Just before startup...\n";
-  StartUp();
+  StartUpBeforeCreateWindow();
 
   Amju::AmjuGL::CreateWindow(&w);  // Before Init() for all impls
 
   Amju::AmjuGL::Init();
+
+  StartUpAfter CreateWindow();
 
   //Amju::AmjuGL::SetScreenRotation(10.0f);
 
