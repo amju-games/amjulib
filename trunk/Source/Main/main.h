@@ -1,6 +1,7 @@
 namespace Amju
 {
-void StartUp();
+void StartUpBeforeCreateWindow();
+void StartUpAfterCreateWindow();
 }
 
 #ifdef IPHONE
