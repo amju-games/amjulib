@@ -39,7 +39,9 @@
         glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
 
 std::cout << "In init()...\n";
-                
+        
+        Amju::StartUpBeforeCreateWindow();
+        
         Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES);
 
 std::cout << "Set AmjuGL impl...\n";
@@ -63,7 +65,7 @@ std::cout << "Called AmjuGL::Init()...\n";
 			
 std::cout << "About to call StartUp...\n";
 	
-        Amju::StartUp();
+        Amju::StartUpAfterCreateWindow();
         
 std::cout << "Called StartUp...\n";
     }
