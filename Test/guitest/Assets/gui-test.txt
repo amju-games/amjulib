@@ -8,10 +8,15 @@ gui-test-app-comp
 // Num children
 1
 
+gui-chart
+MyChart
+0, 0
+0.5, 0.5
+// Display type
 data-line-display
 MyLineDisplay
 0, 0
-0.5, 0.7
+0.8, 0.6
 
 
 gui-file-dialog
