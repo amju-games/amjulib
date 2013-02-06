@@ -98,7 +98,7 @@ void read_png(FILE *fp, unsigned int sig_read)  /* file is already open */
    png_infop info_ptr;
    png_uint_32 width, height;
    int bit_depth, color_type, interlace_type;
-#endif no_open_file /* only use one prototype! */
+#endif //no_open_file /* only use one prototype! */
 
    /* Create and initialize the png_struct with the desired error handler
     * functions.  If you want to use the default stderr and longjump method,
@@ -149,7 +149,7 @@ void read_png(FILE *fp, unsigned int sig_read)  /* file is already open */
     */
    png_set_read_fn(png_ptr, (void *)user_io_ptr, user_read_fn);
    /* where user_io_ptr is a structure you want available to the callbacks */
-#endif no_streams /* Use only one I/O method! */
+#endif //no_streams /* Use only one I/O method! */
 
    /* If we have already read some of the signature */
    png_set_sig_bytes(png_ptr, sig_read);
@@ -372,18 +372,18 @@ void read_png(FILE *fp, unsigned int sig_read)  /* file is already open */
 #else no_sparkle /* Read the image using the "rectangle" effect */
          png_read_rows(png_ptr, png_bytepp_NULL, &row_pointers[y],
             number_of_rows);
-#endif no_sparkle /* use only one of these two methods */
+#endif //no_sparkle /* use only one of these two methods */
       }
 
       /* if you want to display the image after every pass, do
          so here */
-#endif no_single /* use only one of these two methods */
+#endif //no_single /* use only one of these two methods */
    }
-#endif no_entire /* use only one of these two methods */
+#endif //no_entire /* use only one of these two methods */
 
    /* read rest of file, and get additional chunks in info_ptr - REQUIRED */
    png_read_end(png_ptr, info_ptr);
-#endif hilevel
+#endif //hilevel
 
    /* At this point you have read the entire image */
 
@@ -613,7 +613,7 @@ void write_png(char *file_name /* , ... other image information ... */)
    png_set_write_fn(png_ptr, (void *)user_io_ptr, user_write_fn,
       user_IO_flush_function);
    /* where user_io_ptr is a structure you want available to the callbacks */
-#endif no_streams /* only use one initialization method */
+#endif //no_streams /* only use one initialization method */
 
 #ifdef hilevel
    /* This is the easy way.  Use it if you already have all the
@@ -775,7 +775,7 @@ void write_png(char *file_name /* , ... other image information ... */)
          png_write_rows(png_ptr, &row_pointers[y], 1);
       }
    }
-#endif no_entire /* use only one output method */
+#endif //no_entire /* use only one output method */
 
    /* You can write optional chunks like tEXt, zTXt, and tIME at the end
     * as well.  Shouldn't be necessary in 1.1.0 and up as all the public
@@ -785,7 +785,7 @@ void write_png(char *file_name /* , ... other image information ... */)
 
    /* It is REQUIRED to call this to finish writing the rest of the file */
    png_write_end(png_ptr, info_ptr);
-#endif hilevel
+#endif //hilevel
 
    /* If you png_malloced a palette, free it here (don't free info_ptr->palette,
       as recommended in versions 1.0.5m and earlier of this example; if
