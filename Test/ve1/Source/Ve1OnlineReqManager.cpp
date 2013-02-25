@@ -16,8 +16,11 @@ std::string UrlRoot()
   {
     first = false;
     std::string server = GetServer();
-    std::string env = GetEnv();
-    res = "http://" + server + "/" + env + "/";
+// Move from servage to lunarpages: no env dir for scripts, (so harder to have 
+//  different envs :-( )
+//    std::string env = GetEnv();
+    res = "http://" + server + "/"; 
+// + env + "/";
   }
   return res;
 }
