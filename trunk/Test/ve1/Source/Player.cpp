@@ -455,7 +455,10 @@ void Player::Update()
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - XSIZE, m_pos.z + XSIZE);
 
+    /*
+    DISABLED for 2D look and feel
     TurnToFaceDir();
+    */
   }
 
   if (m_hidden)
@@ -563,7 +566,10 @@ void Player::SetMenu(GuiMenu* menu)
     //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
 
     AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
+    /*
+    NO FIGHTING
     AddMenuItem("FIGHT!!", new CommandFight(this));
+    */
   }
   else
   {

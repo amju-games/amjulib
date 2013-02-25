@@ -1,5 +1,8 @@
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
+#include "Cam2d.h"
+
+#define CAM_2D
 
 namespace Amju
 {
@@ -8,7 +11,12 @@ void ClearVe1SceneGraph()
   SceneGraph* sg = GetVe1SceneGraph();
   sg->Clear();
   sg->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
+
+#ifdef CAM_2D
+  sg->SetCamera(new Cam2d);
+#else
   sg->SetCamera(new Camera);
+#endif
 }
 
 void ClearGuiSceneGraph()

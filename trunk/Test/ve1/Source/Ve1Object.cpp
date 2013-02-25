@@ -514,7 +514,9 @@ void Ve1Object::OnLocationEntry()
     {
       root->AddChild(m_sceneNode);
 
+/* NO SHADOWS FOR 2D
       m_sceneNode->AddChild(m_shadow.GetPtr());
+*/
 
       m_sceneNode->SetVisible(!m_hidden);
     }

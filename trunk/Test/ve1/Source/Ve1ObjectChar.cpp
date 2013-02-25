@@ -12,6 +12,7 @@
 #include "GSDeath.h"
 #include "GameMode.h"
 #include "ROConfig.h"
+#include "Ve1SpriteNode.h"
 
 namespace Amju
 {
@@ -73,8 +74,13 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   }
   else if (key == AVATAR_KEY)
   {
-    static AvatarManager* am = TheAvatarManager::Instance();
-    Ve1Character* node = am->Create(val);
+    // New 2D players
+
+    //static AvatarManager* am = TheAvatarManager::Instance();
+    Ve1SpriteNode* node = new Ve1SpriteNode;
+    node->SetFromCharacterName("");
+
+    //am->Create(val);
     if (node)
     {
       node->SetObj(this);
@@ -206,7 +212,10 @@ void Ve1ObjectChar::Update()
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - XSIZE, m_pos.z + XSIZE);
 
+    /*
+    NOT FOR 2D
     TurnToFaceDir();
+    */
 
     Ve1Character* vc = dynamic_cast<Ve1Character*>(m_sceneNode.GetPtr());
     if (vc) //// && vc->GetMd2())
