@@ -791,10 +791,19 @@ void AmjuGLDX11::UseTexture(AmjuGL::TextureHandle th)
   g_pTextureRV = reinterpret_cast<ID3D11ShaderResourceView*>(th);
 }
 
-void AmjuGLDX11::SetTextureMode(AmjuGL::TextureType tt)
+void AmjuGLDX11::SetTextureType(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
+}
 
+void AmjuGLDX11::SetTextureMode(AmjuGL::TextureMode tm)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLDX11::SetTextureFilter(AmjuGL::TextureFilter tf)
+{
+  AMJU_CALL_STACK;
 }
 
 void AmjuGLDX11::GetScreenshot(unsigned char* buffer, int w, int h)
