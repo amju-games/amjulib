@@ -392,6 +392,38 @@ void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
   glBindTexture(GL_TEXTURE_2D, t);
 }
 
+void AmjuGLOpenGLBase::SetTextureMode(AmjuGL::TextureMode tm)
+{
+  if (tm == AmjuGL::AMJU_TEXTURE_WRAP)
+  {
+  }
+  else if (tm == AmjuGL::AMJU_TEXTURE_CLAMP)
+  {
+  }
+  else
+  {
+    Assert(0);
+  }
+}
+
+void AmjuGLOpenGLBase::SetTextureFilter(AmjuGL::TextureFilter tf)
+{
+  if (tf == AmjuGL::AMJU_TEXTURE_NICE)
+  {
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  }
+  else if (tf == AmjuGL::AMJU_TEXTURE_NEAREST)
+  {
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  }
+  else
+  {
+    Assert(0);
+  }
+}
+
 ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
 {
 #ifdef IPHONE

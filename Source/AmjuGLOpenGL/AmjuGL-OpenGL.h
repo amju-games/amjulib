@@ -55,13 +55,12 @@ public:
     int height, 
     uint8* data);
 
-  virtual void SetTextureMode(AmjuGL::TextureType tt);
-
   // Copy screen into buffer  - which should be allocated by caller.
   virtual void GetScreenshot(unsigned char* buffer, int w, int h);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
 
+  virtual void SetTextureType(AmjuGL::TextureType tt);
 }; // class 
 
 } // namespace Amju
