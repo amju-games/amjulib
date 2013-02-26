@@ -99,7 +99,24 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
 std::cout << "Unexpected avatar name: " << val << " for player/npc " << GetName() << "\n";
     }
   }
-
+  else if (key.substr(0, 5) == "sprite")
+  {
+    Ve1SpriteNode* node = dynamic_cast<Ve1SpriteNode*>(m_sceneNode.GetPtr());
+    Assert(node);
+    // "sprite_tex_0", "sprite_colour_0" for layer 0 sprite info, etc.
+    if (key == "sprite_tex_0")
+    {
+      node->SetLayerTex(0, val);
+    } 
+    else if (key == "sprite_colour_0")
+    {
+      node->SetLayerColour(0, FromHexString(val));
+    }
+    else
+    {
+      Assert(0);
+    }
+  }
 }
 
 void Ve1ObjectChar::SetEditMenu(GuiMenu* menu)

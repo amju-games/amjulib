@@ -62,7 +62,7 @@ void Camera::Reset()
 
 void Camera::Update()
 {
-  float dt = TheTimer::Instance()->GetDt();
+  //float dt = TheTimer::Instance()->GetDt();
   Vec3f pos;
 
   if (m_target)
