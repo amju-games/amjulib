@@ -101,7 +101,9 @@ public:
   // Call to use a Texture once set up
   virtual void UseTexture(AmjuGL::TextureHandle) = 0;
 
-  virtual void SetTextureMode(AmjuGL::TextureType tt) = 0;
+  virtual void SetTextureType(AmjuGL::TextureType tt) = 0;
+  virtual void SetTextureMode(AmjuGL::TextureMode tm) = 0;
+  virtual void SetTextureFilter(AmjuGL::TextureFilter tf) = 0;
 
   // Copy screen into buffer  - which should be allocated by caller.
   virtual void GetScreenshot(unsigned char* buffer, int w, int h) = 0;

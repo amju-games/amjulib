@@ -618,11 +618,21 @@ void AmjuGL::DestroyTextureHandle(TextureHandle* th)
   impl->DestroyTextureHandle(th);
 }
 
-void AmjuGL::SetTextureMode(TextureType tt)
+void AmjuGL::SetTextureType(TextureType tt)
 {
   AMJU_CALL_STACK;
 
-  impl->SetTextureMode(tt);
+  impl->SetTextureType(tt);
+}
+
+void AmjuGL::SetTextureMode(TextureMode tm)
+{
+  impl->SetTextureMode(tm);
+}
+
+void AmjuGL::SetTextureFilter(TextureFilter tf)
+{
+  impl->SetTextureFilter(tf);
 }
 
 void AmjuGL::SetTexture(
