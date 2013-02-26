@@ -49,7 +49,6 @@ void Shadow::Polygon::Draw()
 {
   AMJU_CALL_STACK;
 
-  AmjuGL::SetTextureMode(AmjuGL::AMJU_TEXTURE_REGULAR);
   AmjuGL::DrawTriList(m_tris);
 
 #ifdef SHADOW_DEBUG
