@@ -256,7 +256,7 @@ void AmjuGLOpenGL::DrawIndexedTriList(
   // TODO
 }
 
-void AmjuGLOpenGL::SetTextureMode(AmjuGL::TextureType tt)
+void AmjuGLOpenGL::SetTextureType(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
 

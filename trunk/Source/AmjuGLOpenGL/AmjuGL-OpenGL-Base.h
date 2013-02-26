@@ -73,6 +73,9 @@ public:
   // Call to use a Texture once set up
   virtual void UseTexture(AmjuGL::TextureHandle);
 
+  virtual void SetTextureMode(AmjuGL::TextureMode tm);
+  virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
+
   // Lighting
   virtual void DrawLighting(
     const AmjuGL::LightColour& globalAmbient, 
