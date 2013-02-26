@@ -171,11 +171,13 @@ public:
 
   // Set current matrix stack
   // TODO Can we use Texture matrix in GL ES/D3D ?
-  enum MatrixMode { 
+  enum MatrixMode 
+  { 
     AMJU_MATRIX_NOTSETYET  = -1, 
     AMJU_MODELVIEW_MATRIX  =  0, 
     AMJU_PROJECTION_MATRIX =  1, 
-    AMJU_TEXTURE_MATRIX    =  2};
+    AMJU_TEXTURE_MATRIX    =  2
+  };
 
   static void SetMatrixMode(MatrixMode);
   static MatrixMode GetMatrixMode();
@@ -225,6 +227,10 @@ public:
 
   enum TextureDepth { AMJU_RGB, AMJU_RGBA };
 
+  enum TextureMode { AMJU_TEXTURE_WRAP, AMJU_TEXTURE_CLAMP };
+
+  enum TextureFilter { AMJU_TEXTURE_NICE, AMJU_TEXTURE_NEAREST };
+
   // Set up a texture: specify type, depth, width and height, and give data.
   // TextureHandle is set on return.
   static void SetTexture(
@@ -238,7 +244,9 @@ public:
   // Call to use a Texture once set up
   static void UseTexture(TextureHandle);
 
-  static void SetTextureMode(TextureType tt);
+  static void SetTextureType(TextureType tt);
+  static void SetTextureMode(TextureMode tm);
+  static void SetTextureFilter(TextureFilter tf);
 
   // Copy screen into buffer  - which should be allocated by caller.
   // Format of data is RGB888
