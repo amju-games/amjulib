@@ -22,11 +22,11 @@ std::cout << "Setting sprite from character name...\n";
 
   // This loads the base spritesheet, which we don't actually draw???
   // (TODO Change LayerSprite so we don't need it)
-  std::string tex = "spritesheet.png";
+  std::string tex = "characters/2d/spritesheet.png";
   if (!m_sprite.Load(tex, 16, 1))
   {
     ReportError("FAILED TO LOAD sprite from char name");
-    assert(0);
+    Assert(0);
   }
 
   m_sprite.SetCellTime(0.25f);
@@ -37,8 +37,8 @@ std::cout << "Setting sprite from character name...\n";
   // Add layers
   // TODO TEMP TEST -- really add them when we get state msgs
   Texture* headTex = (Texture*)
-    TheResourceManager::Instance()->GetRes("spritesheet.png");
-  m_sprite.AddLayer(SpriteLayer(0, headTex, Colour(1, 1, 0, 1)));  
+    TheResourceManager::Instance()->GetRes("characters/2d/spritesheet.png");
+  m_sprite.AddLayer(SpriteLayer(0, headTex, Colour(1, 1, 1, 1)));  
 }
 
 void Ve1SpriteNode::Draw()
@@ -46,7 +46,7 @@ void Ve1SpriteNode::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_local);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
-  m_sprite.Draw(Vec2f(0, 0), 5.0f);
+  m_sprite.DrawLayers(Vec2f(0, 0), 2.0f);
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   AmjuGL::PopMatrix();
 }

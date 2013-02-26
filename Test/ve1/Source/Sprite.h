@@ -52,7 +52,7 @@ public:
   void SetLayerColour(int layer, const Colour&);
 
 private:
-  typedef std::map<float, SpriteLayer> LayerMap;
+  typedef std::map<int, SpriteLayer> LayerMap;
   LayerMap m_map;
 };
 }
