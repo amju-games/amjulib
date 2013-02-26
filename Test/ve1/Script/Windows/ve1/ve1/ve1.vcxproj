@@ -175,6 +175,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\BroadcastConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\Building.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Cam2d.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestNag.cpp" />
@@ -203,6 +204,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameLookup.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameMode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GS2dAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAchievements.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
@@ -289,6 +291,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Skybox.cpp" />
     <ClCompile Include="..\..\..\..\Source\Spaceship.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
     <ClCompile Include="..\..\..\..\Source\StateUpdate.cpp" />
     <ClCompile Include="..\..\..\..\Source\TaskTrigger.cpp" />
@@ -306,6 +309,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Ve1OnlineReqManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1SceneGraph.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve1SpriteNode.cpp" />
     <ClCompile Include="..\..\..\..\Source\Version.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +321,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\BroadcastConsole.h" />
     <ClInclude Include="..\..\..\..\Source\Building.h" />
+    <ClInclude Include="..\..\..\..\Source\Cam2d.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestNag.h" />
@@ -339,6 +344,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
     <ClInclude Include="..\..\..\..\Source\GameLookup.h" />
     <ClInclude Include="..\..\..\..\Source\GameMode.h" />
+    <ClInclude Include="..\..\..\..\Source\GS2dAvatarMod.h" />
     <ClInclude Include="..\..\..\..\Source\GSAchievements.h" />
     <ClInclude Include="..\..\..\..\Source\GSAdminMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSAvatarMod.h" />
@@ -430,6 +436,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Skybox.h" />
     <ClInclude Include="..\..\..\..\Source\Spaceship.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
+    <ClInclude Include="..\..\..\..\Source\Sprite.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />
     <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
@@ -447,6 +454,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Ve1OnlineReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve1SpriteNode.h" />
     <ClInclude Include="..\..\..\..\Source\Version.h" />
   </ItemGroup>
   <ItemGroup>
