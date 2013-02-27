@@ -23,6 +23,10 @@ private:
   AmjuGL::TextureHandle m_texId;
   int m_width;
   int m_height;
+
+#ifdef _DEBUG
+  std::string m_name;
+#endif
 };
 
 typedef RCPtr<Texture> PTexture;
