@@ -4,9 +4,6 @@
 
 namespace Amju
 {
-// Size of player sprites
-static const float SIZE = 40.0f;
-
 Sprite::Sprite()
 {
   m_minCellNum = 0;
@@ -42,7 +39,7 @@ void Sprite::Draw(const Vec2f& pos, float size)
 {
   m_seq.Bind();
  
-  AmjuGL::PushMatrix();
+  //AmjuGL::PushMatrix();
 
   AmjuGL::Tri t[2];
   m_seq.MakeTris(m_cellNum, size, t, pos.x, pos.y);
@@ -51,13 +48,9 @@ void Sprite::Draw(const Vec2f& pos, float size)
   tris.push_back(t[0]);
   tris.push_back(t[1]);
 
-  AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
-  // Translate so centred on sprite
-  static const float HSIZE = SIZE * 0.5f;
-  AmjuGL::Translate(-HSIZE, -HSIZE, 0); 
   AmjuGL::DrawTriList(tris);  
 
-  AmjuGL::PopMatrix();
+  //AmjuGL::PopMatrix();
 }
 
 void Sprite::Update()
@@ -75,10 +68,9 @@ void Sprite::Update()
   }
 }
 
-bool Sprite::Load(const std::string& texFilename, int numCellsX, int numCellsY)
+bool Sprite::Load(const std::string& texFilename, int numCellsX, int numCellsY, float cellSizeX, float cellSizeY)
 {
-  // Cell shape is not square
-  if (!m_seq.Load(texFilename, numCellsX, numCellsY, SIZE * 0.5f, SIZE))
+  if (!m_seq.Load(texFilename, numCellsX, numCellsY, cellSizeX, cellSizeY))
   {
     ReportError("Failed to load Sprite sheet "  + texFilename);
     return false;
@@ -95,7 +87,7 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
 {
   AmjuGL::SetTextureFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
 
-  AmjuGL::PushMatrix();
+  //AmjuGL::PushMatrix();
 
   AmjuGL::Tri t[2];
   m_seq.MakeTris(m_cellNum, size, t, pos.x, pos.y);
@@ -104,23 +96,24 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
   tris.push_back(t[0]);
   tris.push_back(t[1]);
 
-  AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
-  // Translate so centred on sprite
-  static const float HSIZE = SIZE * 0.5f;
-  AmjuGL::Translate(-HSIZE, -HSIZE, 0); 
-
   for (LayerMap::iterator it = m_map.begin(); it != m_map.end(); ++it)
   {
     const SpriteLayer& layer = it->second;
+    if (!layer.visible)
+    {
+      continue;
+    }
+
     Assert(layer.tex);
     layer.tex->UseThisTexture();
  
     PushColour();
-    MultColour(layer.colour);
+    //MultColour(layer.colour);
+    AmjuGL::SetColour(layer.colour);
     AmjuGL::DrawTriList(tris);
     PopColour();  
   }
-  AmjuGL::PopMatrix();
+  //AmjuGL::PopMatrix();
 }
 
 void LayerSprite::SetLayerTex(int layer, Texture* tex)
@@ -131,6 +124,16 @@ void LayerSprite::SetLayerTex(int layer, Texture* tex)
 void LayerSprite::SetLayerColour(int layer, const Colour& col)
 {
   m_map[layer].colour = col;
+}
+
+void LayerSprite::SetLayerVis(int layer, bool vis)
+{
+  m_map[layer].visible = vis;
+}
+
+void LayerSprite::Clear()
+{
+  m_map.clear();
 }
 }
 
