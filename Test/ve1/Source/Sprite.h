@@ -19,7 +19,7 @@ public:
 
   void Draw(const Vec2f& pos, float size);
   void Update();
-  bool Load(const std::string& texFilename, int numCellsX, int numCellsY);
+  bool Load(const std::string& texFilename, int numCellsX, int numCellsY, float cellSizeX, float cellSizeY);
 
 protected:
   TextureSequence m_seq;
@@ -34,13 +34,14 @@ protected:
 struct SpriteLayer
 {
   SpriteLayer() {}
-  SpriteLayer(int z_, Texture* tex_, const Colour& colour_) : z(z_), tex(tex_), colour(colour_)
+  SpriteLayer(int z_, Texture* tex_, const Colour& colour_) : z(z_), tex(tex_), colour(colour_), visible(true)
   {
   }
 
   int z;
   PTexture tex;
   Colour colour;
+  bool visible;
 };
 
 class LayerSprite : public Sprite
@@ -49,11 +50,9 @@ public:
   void AddLayer(const SpriteLayer&);
   void DrawLayers(const Vec2f& pos, float size);
 
-  // Can be 0 to turn off layer?
   void SetLayerTex(int layer, Texture*);
-
-  // Make layer invisible with alpha
   void SetLayerColour(int layer, const Colour&);
+  void SetLayerVis(int layer, bool vis);
 
   // Erase all layers
   void Clear();
