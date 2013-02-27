@@ -6,7 +6,7 @@
 //  colour is enabled for each group.
 
 // num layer groups
-1
+4
 
 // layer group name
 Head
@@ -15,8 +15,42 @@ Head
 characters/2d/head.png
 // num colours
 4
-ffff00
+ffffff
 ff0000
 ffffff
 c0ffc0
+
+// layer group name
+Eyes
+// Num textures
+1
+characters/2d/eyes1.png
+// num colours
+1
+000000
+// TODO different eye colours; eye gaze dir
+
+
+// layer group name
+Hair
+// Num textures
+1
+characters/2d/hair1.png
+// num colours
+4
+000000
+fa0176
+ffff00
+ff0000
+
+// layer group name
+Legs
+// Num textures
+1
+characters/2d/legs2.png
+// num colours
+2
+ffff00
+00c0c0
+
 
