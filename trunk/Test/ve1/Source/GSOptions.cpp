@@ -4,7 +4,7 @@
 #include <SoundManager.h>
 #include <ConfigFile.h>
 #include "GSOptions.h"
-#include "GSAvatarMod.h"
+#include "GS2dAvatarMod.h"
 #include "GSProxy.h"
 #include "Kb.h"
 #include "SaveConfig.h"
@@ -41,8 +41,8 @@ static void OnKeyboard()
 
 static void OnAvatar()
 {
-  TheGSAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance()); 
+  TheGS2dAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
+  TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance()); 
 }
 
 GSOptions::GSOptions()

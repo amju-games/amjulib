@@ -59,8 +59,52 @@ void Ve1SpriteNode::Update()
 
 void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
 {
+  // ?
+/*
+  if (anim == m_currentAnim)
+  {
+    return;
+  }
+*/
+
   // TODO Set anim range here
   // BUT also based on direction
+  if (anim == ANIM_IDLE)
+  {
+    int c = m_sprite.GetCell();
+    m_sprite.SetCellRange(c, c);
+  }
+  else
+  {
+    Vec3f dir = m_obj->GetVel();
+    if (fabs(dir.x) > fabs(dir.z))
+    {
+      // Left or right
+      if (dir.x < 0)
+      {
+        // Left
+        m_sprite.SetCellRange(12, 15);
+      }
+      else
+      {
+        // Right
+        m_sprite.SetCellRange(8, 11);
+      }
+    }
+    else
+    {
+      // Up or down
+      if (dir.z < 0)
+      {
+        // Up?
+        m_sprite.SetCellRange(4, 7);
+      }
+      else
+      {
+        m_sprite.SetCellRange(0, 3);
+      }
+    }
+  }
 }
 }
 
