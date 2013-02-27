@@ -1,0 +1,22 @@
+// Ver
+1
+
+// Layer groups for 2D avatar customisation
+// Each group has a list of textures and colours. One texture and one
+//  colour is enabled for each group.
+
+// num layer groups
+1
+
+// layer group name
+Head
+// num textures for this layer group
+1
+characters/2d/head.png
+// num colours
+4
+ffff00
+ff0000
+ffffff
+c0ffc0
+
