@@ -92,6 +92,10 @@ bool Texture::Load(const std::string& filename)
   delete [] data;
 #endif
 
+#ifdef _DEBUG
+  m_name = StripPath(filename);
+#endif
+
   return true;
 }
 
