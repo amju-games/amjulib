@@ -48,8 +48,15 @@ class LayerSprite : public Sprite
 public:
   void AddLayer(const SpriteLayer&);
   void DrawLayers(const Vec2f& pos, float size);
+
+  // Can be 0 to turn off layer?
   void SetLayerTex(int layer, Texture*);
+
+  // Make layer invisible with alpha
   void SetLayerColour(int layer, const Colour&);
+
+  // Erase all layers
+  void Clear();
 
 private:
   typedef std::map<int, SpriteLayer> LayerMap;

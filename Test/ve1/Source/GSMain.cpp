@@ -41,7 +41,7 @@
 #include "GSCogTestMenu.h"
 #include "GameConsts.h"
 #include "CogTestNag.h"
-#include "GSAvatarMod.h"
+#include "GS2dAvatarMod.h"
 #include "MsgNum.h"
 #include "CommandPickup.h"
 #include "BroadcastConsole.h"
@@ -267,8 +267,8 @@ static void OnChangeLookNo()
 
 static void OnChangeLookYes()
 {
-  TheGSAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSAvatarMod::Instance());
+  TheGS2dAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance());
   FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
 }
 

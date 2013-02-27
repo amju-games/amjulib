@@ -28,6 +28,11 @@ void Sprite::SetCellTime(float cellTime)
   m_cellTime = 0; // ?
 }
 
+int Sprite::GetCell() const
+{
+  return m_cellNum;
+}
+
 void Sprite::SetCell(int cell)
 {
   m_cellNum = cell;
