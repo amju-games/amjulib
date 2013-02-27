@@ -6,14 +6,45 @@ gui-comp
 // Name
 hud-comp
 // Num children
-4
+9
 
 
 // Buttons for avatar type 
 // element type
 gui-button
 // Element name
-type-prev-button
+layer-prev-button
+// pos (coords are -1..1)
+-1.0, 0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+< prev layer
+// Font name, size
+arial, 2.0, sx=0.8
+
+// element type
+gui-button
+// Element name
+layer-next-button
+// pos (coords are -1..1)
+0.2, 0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+next layer >
+// Font name, size
+arial, 2.0, sx=0.8
+
+
+// element type
+gui-button
+// Element name
+tex-prev-button
 // pos (coords are -1..1)
 -1.0, 0 
 // size
@@ -21,14 +52,14 @@ type-prev-button
 // Image
 gui-button-4.png
 // Text
-< previous
+< prev tex
 // Font name, size
 arial, 2.0, sx=0.8
 
 // element type
 gui-button
 // Element name
-type-next-button
+tex-next-button
 // pos (coords are -1..1)
 0.2, 0 
 // size
@@ -36,9 +67,43 @@ type-next-button
 // Image
 gui-button-4.png
 // Text
-next >
+next tex >
 // Font name, size
 arial, 2.0, sx=0.8
+
+
+
+// element type
+gui-button
+// Element name
+col-prev-button
+// pos (coords are -1..1)
+-1.0, -0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+< prev colour
+// Font name, size
+arial, 2.0, sx=0.8
+
+// element type
+gui-button
+// Element name
+col-next-button
+// pos (coords are -1..1)
+0.2, -0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+next colour >
+// Font name, size
+arial, 2.0, sx=0.8
+
+
 
 // element type
 gui-button
@@ -67,38 +132,6 @@ cancel-button
 gui-button-4.png
 // Text
 cancel
-// Font name, size
-arial, 2.0 
-
-
-// Buttons for avatar colour 
-// element type
-gui-button
-// Element name
-colour-prev-button
-// pos (coords are -1..1)
--1.0, 0.25 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-< colour
-// Font name, size
-arial, 2.0 
-
-// element type
-gui-button
-// Element name
-colour-next-button
-// pos (coords are -1..1)
-0.2, 0.25 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-colour >
 // Font name, size
 arial, 2.0 
 
