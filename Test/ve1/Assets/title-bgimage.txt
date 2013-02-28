@@ -7,5 +7,5 @@
 heart-img
 -1.0, 1.0
 2, 2
-crashsite.png
-
+//crashsite.png
+hungry.png

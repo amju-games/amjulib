@@ -86,11 +86,13 @@ void GSTitle::Draw()
 
   m_titleImage.Draw();  
 
+  /*
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
   PushColour();
   AmjuGL::SetColour(Colour(1, 1, 1, 0.25f));
   GSGui::Draw();
   PopColour();
+  */
 
   AmjuGL::PopAttrib();
 }
