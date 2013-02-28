@@ -1,6 +1,7 @@
 #include <Timer.h>
 #include <ReportError.h>
 #include "Sprite.h"
+#include "LayerGroup.h"
 
 namespace Amju
 {
@@ -116,18 +117,25 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
   //AmjuGL::PopMatrix();
 }
 
-void LayerSprite::SetLayerTex(int layer, Texture* tex)
+void LayerSprite::SetLayerTex(int layer, int texIndex)
 {
-  m_map[layer].tex = tex;
+  Texture* t = TheLayerGroupManager::Instance()->GetTexture(layer, texIndex);
+  Assert(t);
+
+  m_map[layer].tex = t;
+  m_map[layer].texIndex = texIndex;
 }
 
-void LayerSprite::SetLayerColour(int layer, const Colour& col)
+void LayerSprite::SetLayerColour(int layer, int colIndex)
 {
+  const Colour& col = TheLayerGroupManager::Instance()->GetColour(layer, colIndex);
   m_map[layer].colour = col;
+  m_map[layer].colIndex = colIndex;
 }
 
 void LayerSprite::SetLayerVis(int layer, bool vis)
 {
+//  Assert(m_map.find(layer) != m_map.end());
   m_map[layer].visible = vis;
 }
 

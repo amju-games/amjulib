@@ -16,8 +16,10 @@ public:
 
   virtual void SetFromCharacterName(const std::string&);
 
-  void SetLayerTex(int layer, const std::string& tex);
-  void SetLayerColour(int layer, const Colour&);
+  void SetLayerTex(int layer, int texIndex);
+  void SetLayerColour(int layer, int colIndex);
+
+  const LayerSprite& GetSprite() const;
 
 private:
   LayerSprite m_sprite;

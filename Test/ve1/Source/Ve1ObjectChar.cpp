@@ -1,6 +1,7 @@
 #include <Timer.h>
 #include <Game.h>
 #include <DegRad.h>
+#include <StringUtils.h>
 #include "Ve1ObjectChar.h"
 #include "Ve1Character.h"
 #include "Terrain.h"
@@ -99,18 +100,21 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
 std::cout << "Unexpected avatar name: " << val << " for player/npc " << GetName() << "\n";
     }
   }
-  else if (key.substr(0, 5) == "sprite")
+  else if (key.substr(0, 6) == "sprite")
   {
     Ve1SpriteNode* node = dynamic_cast<Ve1SpriteNode*>(m_sceneNode.GetPtr());
     Assert(node);
     // "sprite_tex_0", "sprite_colour_0" for layer 0 sprite info, etc.
-    if (key == "sprite_tex_0")
+    std::string sub = key.substr(0, 10);
+    std::string layerStr = key.substr(11);
+    int layer = ToInt(layerStr);
+    if (sub == "sprite_tex")
     {
-      node->SetLayerTex(0, val);
+      node->SetLayerTex(layer, ToInt(val));
     } 
-    else if (key == "sprite_colour_0")
+    else if (sub == "sprite_col")
     {
-      node->SetLayerColour(0, FromHexString(val));
+      node->SetLayerColour(layer, ToInt(val));
     }
     else
     {

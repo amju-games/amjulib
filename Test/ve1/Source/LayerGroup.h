@@ -5,29 +5,42 @@
 
 namespace Amju
 {
-class LayerGroup
+// Selection of textures and colours available for one layer
+class Layer
 {
 public:
-  LayerGroup() : m_currentTexture(0), m_currentColour(0) {}
   bool Load(File*);
 
 private:
   typedef std::vector<PTexture> Textures;
   typedef std::vector<Colour> Colours;
 
+  friend class LayerGroupManager;
+
   Textures m_textures;
   Colours m_colours;
   std::string m_name;
-
-  int m_currentTexture;
-  int m_currentColour;
-
-  friend class LayerGroups;
 };
 
 // Single instance where all layers are kept
 class LayerGroupManager : public NonCopyable
 {
+private:
+  LayerGroupManager();
+  friend Singleton<LayerGroupManager>;
+
+public:
+  bool Load(File*);
+
+  int GetNumTextures(int layer) const;
+  int GetNumColours(int layer) const;
+
+  Texture* GetTexture(int layer, int num) const;
+  const Colour& GetColour(int layer, int num) const;
+
+private:
+  typedef std::vector<Layer> Layers;
+  Layers m_layers;
 };
 
 typedef Singleton<LayerGroupManager> TheLayerGroupManager; 
@@ -41,7 +54,6 @@ class LayerGroups
 {
 public:
   LayerGroups() : m_currentLayer(0) {}
-  bool Load(File*);
 
   void NextLayer();
   void PrevLayer();
@@ -67,10 +79,14 @@ public:
   void SendToServer();
 
 private:
-  typedef std::vector<LayerGroup> Groups;
-  Groups m_groups;
-
   int m_currentLayer;
+  struct LayerSet
+  {
+    int m_currentTexture;
+    int m_currentColour;
+  };
+  typedef std::vector<LayerSet> LayerSets;
+  LayerSets m_layers;
 };
 
 }
