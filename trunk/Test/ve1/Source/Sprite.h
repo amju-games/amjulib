@@ -33,15 +33,18 @@ protected:
 // Sprite composed of layers
 struct SpriteLayer
 {
-  SpriteLayer() {}
-  SpriteLayer(int z_, Texture* tex_, const Colour& colour_) : z(z_), tex(tex_), colour(colour_), visible(true)
+  SpriteLayer() : z(0), visible(true), texIndex(0), colIndex(0) {}
+  SpriteLayer(int z_, Texture* tex_, const Colour& colour_, int texIndex_, int colIndex_) : 
+    z(z_), tex(tex_), colour(colour_), visible(true), texIndex(texIndex_), colIndex(colIndex_)
   {
   }
 
-  int z;
+  int z; // layer num
   PTexture tex;
   Colour colour;
   bool visible;
+  int texIndex; // index used to look up into LayerGroupManager
+  int colIndex;
 };
 
 class LayerSprite : public Sprite
@@ -50,14 +53,15 @@ public:
   void AddLayer(const SpriteLayer&);
   void DrawLayers(const Vec2f& pos, float size);
 
-  void SetLayerTex(int layer, Texture*);
-  void SetLayerColour(int layer, const Colour&);
+  void SetLayerTex(int layer, int texIndex);
+  void SetLayerColour(int layer, int colIndex);
   void SetLayerVis(int layer, bool vis);
 
   // Erase all layers
   void Clear();
 
 private:
+  friend class LayerGroups;
   typedef std::map<int, SpriteLayer> LayerMap;
   LayerMap m_map;
 };

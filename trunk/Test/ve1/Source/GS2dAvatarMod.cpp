@@ -6,9 +6,20 @@
 #include <GuiButton.h>
 #include <Timer.h>
 #include "GS2dAvatarMod.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
+void OnOk()
+{
+  TheGS2dAvatarMod::Instance()->OnOk();
+}
+
+void OnCancel()
+{
+  TheGS2dAvatarMod::Instance()->OnCancel();
+}
+
 void OnNextLayer()
 {
   TheGS2dAvatarMod::Instance()->OnNextLayer();
@@ -42,15 +53,6 @@ void OnPrevCol()
 
 GS2dAvatarMod::GS2dAvatarMod()
 {
-  // Read from file
-  File f;
-  if (!f.OpenRead("layergroups.txt"))
-  {
-    f.ReportError("Failed to load layer groups file for 2D avatars");
-    Assert(0); 
-  }
-  m_layerGroups.Load(&f); 
-
   // Set up sprite
   std::string tex = "characters/2d/spritesheet.png";
   if (!m_sprite.Load(tex, 16, 1, 0.5f, 1.0f))
@@ -63,22 +65,6 @@ GS2dAvatarMod::GS2dAvatarMod()
   m_sprite.SetCellTime(0.25f);
   m_sprite.SetCellRange(0, 0);
   m_sprite.SetCell(0);
-
-  // Add layers
-  // TODO TEMP TEST -- really add them when we get state msgs
-  /*
-  Texture* headTex = (Texture*)
-    TheResourceManager::Instance()->GetRes("characters/2d/head.png");
-  m_sprite.AddLayer(SpriteLayer(0, headTex, Colour(1, 1, 1, 1)));  
-
-  Texture* eyesTex = (Texture*)
-    TheResourceManager::Instance()->GetRes("characters/2d/eyes1.png");
-  m_sprite.AddLayer(SpriteLayer(1, eyesTex, Colour(1, 1, 1, 1)));  
-
-  Texture* legsTex = (Texture*)
-    TheResourceManager::Instance()->GetRes("characters/2d/legs2.png");
-  m_sprite.AddLayer(SpriteLayer(2, legsTex, Colour(1, 1, 1, 1)));  
-  */
 }
 
 void GS2dAvatarMod::Update()
@@ -124,7 +110,7 @@ void GS2dAvatarMod::Draw2d()
     timer = 0;
   }
 
-  m_sprite.DrawLayers(Vec2f(0, 0), 1.0f);
+  m_sprite.DrawLayers(Vec2f(-0.25f, -0.5f), 1.0f);
 
   if (m_gui)
   {
@@ -166,42 +152,67 @@ void GS2dAvatarMod::OnActive()
   Assert(prevCol);
   prevCol->SetCommand(Amju::OnPrevCol);
 
-  // TODO Set layer groups from player
+  GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
+  Assert(ok);
+  ok->SetCommand(Amju::OnOk);
 
+  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  Assert(cancel);
+  cancel->SetCommand(Amju::OnCancel);
+
+  // TODO Set layer groups from player
+  m_layerGroups.SetFromSprite(GetLocalPlayer()->GetSprite());
   m_layerGroups.SetSprite(&m_sprite);
 }
 
 void GS2dAvatarMod::OnNextLayer()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.NextLayer(); 
 }
 
 void GS2dAvatarMod::OnPrevLayer()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.PrevLayer(); 
 }
 
 void GS2dAvatarMod::OnNextTex()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.NextTexture();
   m_layerGroups.SetSprite(&m_sprite);
 }
 
 void GS2dAvatarMod::OnPrevTex()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.PrevTexture();
   m_layerGroups.SetSprite(&m_sprite);
 }
 
 void GS2dAvatarMod::OnNextCol()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.NextColour();
   m_layerGroups.SetSprite(&m_sprite);
 }
 
 void GS2dAvatarMod::OnPrevCol()
 {
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.PrevColour();
   m_layerGroups.SetSprite(&m_sprite);
+}
+
+void GS2dAvatarMod::OnOk()
+{
+  m_layerGroups.SendToServer();
+  GoBack();
+}
+
+void GS2dAvatarMod::OnCancel()
+{
+  GoBack();
 }
 } // namespace

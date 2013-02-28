@@ -25,6 +25,8 @@ public:
   void OnPrevTex();
   void OnNextCol();
   void OnPrevCol();
+  void OnOk();
+  void OnCancel();
 
 private:
   LayerSprite m_sprite; // shows the current settings

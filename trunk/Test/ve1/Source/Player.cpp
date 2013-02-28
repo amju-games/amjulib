@@ -37,6 +37,7 @@
 #include "Spaceship.h"
 #include "FuelCount.h"
 #include "PlayerNames.h"
+#include "Ve1SpriteNode.h"
 
 namespace Amju
 {
@@ -131,6 +132,12 @@ Player::Player()
   m_lastFuelCellCount = -1;
   m_isDead = false;
   m_totalFuelCells = -1; // not set yet
+}
+
+const LayerSprite& Player::GetSprite() const
+{
+  Assert(m_sceneNode);
+  return ((Ve1SpriteNode*)m_sceneNode.GetPtr())->GetSprite();
 }
 
 void Player::SetCarrying(Ve1Object* obj)

@@ -4,6 +4,7 @@
 #include "Ve1ObjectChar.h"
 #include <Shadow.h>
 #include <SceneMesh.h>
+#include "Sprite.h"
 
 namespace Amju
 {
@@ -51,6 +52,9 @@ public:
   float GetViewDist() const;
 
   void OnSpaceshipCollision(Spaceship* spaceship);
+
+  // New 2D customisable avatars
+  const LayerSprite& GetSprite() const;
 
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow

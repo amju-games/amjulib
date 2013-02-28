@@ -1,22 +1,26 @@
 #include <AmjuGL.h>
 #include <ReportError.h>
 #include "Ve1SpriteNode.h"
+#include "LayerGroup.h"
 
 namespace Amju
 {
 // Size of player sprites
 static const float SIZE = 40.0f;
 
-void Ve1SpriteNode::SetLayerTex(int layer, const std::string& tex)
+const LayerSprite& Ve1SpriteNode::GetSprite() const
 {
-  Texture* t = (Texture*)TheResourceManager::Instance()->GetRes(tex);
-  Assert(t);
-  m_sprite.SetLayerTex(layer, t);
+  return m_sprite;
 }
 
-void Ve1SpriteNode::SetLayerColour(int layer, const Colour& col)
+void Ve1SpriteNode::SetLayerTex(int layer, int texIndex)
 {
-  m_sprite.SetLayerColour(layer, col);
+  m_sprite.SetLayerTex(layer, texIndex);
+}
+
+void Ve1SpriteNode::SetLayerColour(int layer, int colIndex)
+{
+  m_sprite.SetLayerColour(layer, colIndex);
 }
 
 void Ve1SpriteNode::SetFromCharacterName(const std::string& s)
@@ -39,9 +43,12 @@ std::cout << "Setting sprite from character name...\n";
 
   // Add layers
   // TODO TEMP TEST -- really add them when we get state msgs
-  Texture* headTex = (Texture*)
-    TheResourceManager::Instance()->GetRes("characters/2d/spritesheet.png");
-  m_sprite.AddLayer(SpriteLayer(0, headTex, Colour(1, 1, 1, 1)));  
+  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+  for (int i = 0; i < 5; i++)
+  {
+    // Fof layer i, set tex 0 and colour 0
+    m_sprite.AddLayer(SpriteLayer(i, lgm->GetTexture(i, 0), lgm->GetColour(i, 0), 0, 0));  
+  }
 }
 
 void Ve1SpriteNode::Draw()
@@ -49,6 +56,7 @@ void Ve1SpriteNode::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_local);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 
   AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
 

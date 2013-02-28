@@ -256,6 +256,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\HotLava.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LayerGroup.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
     <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
@@ -397,6 +398,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve1\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\HotLava.h" />
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
+    <ClInclude Include="..\..\..\..\Source\LayerGroup.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogInTime.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
