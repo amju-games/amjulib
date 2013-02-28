@@ -27,7 +27,7 @@ class LayerGroupManager : public NonCopyable
 {
 private:
   LayerGroupManager();
-  friend Singleton<LayerGroupManager>;
+  friend class Singleton<LayerGroupManager>;
 
 public:
   bool Load(File*);
