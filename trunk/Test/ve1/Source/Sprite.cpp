@@ -86,8 +86,6 @@ void LayerSprite::AddLayer(const SpriteLayer& layer)
 
 void LayerSprite::DrawLayers(const Vec2f& pos, float size)
 {
-  AmjuGL::SetTextureFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
-
   //AmjuGL::PushMatrix();
 
   AmjuGL::Tri t[2];
@@ -107,6 +105,7 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
 
     Assert(layer.tex);
     layer.tex->UseThisTexture();
+    AmjuGL::SetTextureFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
  
     PushColour();
     //MultColour(layer.colour);
