@@ -63,8 +63,8 @@ GS2dAvatarMod::GS2dAvatarMod()
 
   // TODO TEMP TEST
   m_sprite.SetCellTime(0.25f);
-  m_sprite.SetCellRange(0, 0);
-  m_sprite.SetCell(0);
+  m_sprite.SetCellRange(1, 1);
+  m_sprite.SetCell(1);
 }
 
 void GS2dAvatarMod::Update()
