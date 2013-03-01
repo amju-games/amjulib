@@ -208,7 +208,8 @@ print "Your new session ID: $session_id\n";
       insert($sql);
 
       # Notify admin of login
-      notifyProwl("Successful login", "Player $playername ($player_id) just logged in!");
+# 1 Mar 2013: this hangs if prowl server is unresponsive, so don't do this
+#      notifyProwl("Successful login", "Player $playername ($player_id) just logged in!");
     }
     else
     {
