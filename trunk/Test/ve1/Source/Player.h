@@ -54,7 +54,7 @@ public:
   void OnSpaceshipCollision(Spaceship* spaceship);
 
   // New 2D customisable avatars
-  const LayerSprite& GetSprite() const;
+  LayerSprite& GetSprite();
 
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow

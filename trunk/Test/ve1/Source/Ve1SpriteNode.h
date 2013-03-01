@@ -19,7 +19,7 @@ public:
   void SetLayerTex(int layer, int texIndex);
   void SetLayerColour(int layer, int colIndex);
 
-  const LayerSprite& GetSprite() const;
+  LayerSprite& GetSprite();
 
 private:
   LayerSprite m_sprite;
