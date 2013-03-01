@@ -134,7 +134,7 @@ Player::Player()
   m_totalFuelCells = -1; // not set yet
 }
 
-const LayerSprite& Player::GetSprite() const
+LayerSprite& Player::GetSprite() 
 {
   Assert(m_sceneNode);
   return ((Ve1SpriteNode*)m_sceneNode.GetPtr())->GetSprite();

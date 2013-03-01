@@ -208,6 +208,7 @@ void GS2dAvatarMod::OnPrevCol()
 void GS2dAvatarMod::OnOk()
 {
   m_layerGroups.SendToServer();
+  m_layerGroups.SetSprite(&(GetLocalPlayer()->GetSprite()));
   GoBack();
 }
 

@@ -8,7 +8,7 @@ namespace Amju
 // Size of player sprites
 static const float SIZE = 40.0f;
 
-const LayerSprite& Ve1SpriteNode::GetSprite() const
+LayerSprite& Ve1SpriteNode::GetSprite() 
 {
   return m_sprite;
 }
