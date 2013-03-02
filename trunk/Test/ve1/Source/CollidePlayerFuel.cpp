@@ -13,16 +13,7 @@ void CollidePlayerFuel(Player* player, FuelCell* f)
     return;
   }
 
-<<<<<<< .mine=======  f->SetHidden(true);
-  TheSoundManager::Instance()->PlayWav("button112.wav"); // TODO
-
-  // TODO Different messages
-  FirstTimeMsgThisSession(
-    "Great, this is a fuel cell! We need these. Find as many as you can!", 
-    MsgNum(10),
-    false);
-
->>>>>>> .theirs  player->OnCollideFuel(f);
+  player->OnCollideFuel(f);
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(

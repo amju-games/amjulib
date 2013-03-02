@@ -153,6 +153,7 @@ const char* FuelCell::GetTypeName() const
 FuelCell::FuelCell()
 {
   m_isPickable = true;
+  m_owner = 0;
 }
 
 bool FuelCell::Load(File*)
