@@ -21,4 +21,11 @@ void ChangeLocalPlayerFuelCount(int delta)
 
 std::cout << "Local player fuel cell count is now: " << delta << "\n";
 }
+
+int DailyFoodCount()
+{
+  // TODO Increases over experiment schedule
+  return 3;
+}
+
 }

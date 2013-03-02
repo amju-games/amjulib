@@ -4,44 +4,70 @@
 #include <Billboard.h>
 #include <DrawAABB.h>
 #include <AmjuRand.h>
+#include <ReportError.h>
 #include "FuelCell.h"
 #include "LocalPlayer.h"
 #include "GameMode.h"
 #include "Ve1Node.h"
 #include "Ve1SceneGraph.h"
 #include "ROConfig.h"
+#include "Sprite.h"
+#include "Terrain.h"
 
 namespace Amju
 {
 const char* FuelCell::TYPENAME = "fuelcell";
 
+// Size of food sprites
+static const float SIZE = 20.0f;
+
 class FuelNode : public SceneNode
 {
 public:
+  FuelNode();
   virtual void Draw();
   virtual void Update();
+
+private:
+  Sprite m_sprite;
 };
+
+FuelNode::FuelNode()
+{
+  std::string tex = "food1.png";
+  // TODO 2 * 2 cells, depends on sprite layout
+  if (!m_sprite.Load(tex, 2, 2, SIZE, SIZE))
+  {
+    ReportError("FAILED TO LOAD food sprite");
+    Assert(0);
+  }
+
+  m_sprite.SetCellTime(0.1f);
+  // TODO TEMP TEST should be random
+  m_sprite.SetCellRange(0, 0);
+  m_sprite.SetCell(0);
+
+}
 
 void FuelNode::Update()
 {
   // Visible from player ?
   // TODO
+
+  m_sprite.Update();
 }
 
 void FuelNode::Draw()
 {
-  AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::PushMatrix();
 
-  PushColour();
-  // TODO different colour varieties
+  AmjuGL::MultMatrix(m_local);
+  AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
+  static const float HSIZE = SIZE * 0.5f;
+  AmjuGL::Translate(-HSIZE, -HSIZE, 0); 
+  m_sprite.Draw(Vec2f(0, 0), 2.0f);
 
-  DrawSolidAABB(*(GetAABB()));
-  // TODO glow
-
-  PopColour();
-
-  AmjuGL::PopAttrib();
+  AmjuGL::PopMatrix();
 }
 
 const char* FuelCellManager::TYPENAME = "fuelcellmanager";
@@ -74,6 +100,10 @@ void FuelCellManager::OnLocationEntry()
     float s = ROConfig()->GetFloat("fuel-cell-spread", 200.0f); 
     Vec3f r(Rnd(-s, s), Rnd(0, s), Rnd(-s, s));
     Vec3f p = GetPos() + r; 
+    if (TerrainReady())
+    {
+      GetTerrain()->GetCollisionMesh()->GetY(Vec2f(p.x, p.z), &p.y); // TODO TEMP TEST Set all food to y = 0
+    }
     f->SetPos(p);
     f->Load(0);
     TheGame::Instance()->AddGameObject(f);

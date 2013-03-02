@@ -13,7 +13,7 @@ void CollidePlayerFuel(Player* player, FuelCell* f)
     return;
   }
 
-  f->SetHidden(true);
+<<<<<<< .mine=======  f->SetHidden(true);
   TheSoundManager::Instance()->PlayWav("button112.wav"); // TODO
 
   // TODO Different messages
@@ -22,7 +22,7 @@ void CollidePlayerFuel(Player* player, FuelCell* f)
     MsgNum(10),
     false);
 
-  player->OnCollideFuel(f);
+>>>>>>> .theirs  player->OnCollideFuel(f);
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
