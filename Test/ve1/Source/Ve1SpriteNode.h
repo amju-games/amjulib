@@ -22,6 +22,9 @@ public:
   LayerSprite& GetSprite();
 
 private:
+  void SetAnimRange(int a, int b);
+
+private:
   LayerSprite m_sprite;
 };
 }

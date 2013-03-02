@@ -38,11 +38,13 @@ std::cout << "Setting sprite from character name...\n";
 
   m_sprite.SetCellTime(0.25f);
   // TODO TEMP TEST
-  m_sprite.SetCellRange(8, 11);
-  m_sprite.SetCell(0);
+  m_sprite.SetCellRange(1, 1);
+  m_sprite.SetCell(1);
 
   // Add layers
   // TODO TEMP TEST -- really add them when we get state msgs
+  // OR this is OK, the layers are set when we get server msgs. 
+  // These are the default settings for each layer.
   static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
   for (int i = 0; i < 5; i++)
   {
@@ -76,6 +78,16 @@ void Ve1SpriteNode::Update()
   m_sprite.Update();
 }
 
+void Ve1SpriteNode::SetAnimRange(int a, int b)
+{
+  int c = m_sprite.GetCell();
+  m_sprite.SetCellRange(a, b);
+  if (c < a || c > b)
+  {
+    m_sprite.SetCell(a);
+  }
+}
+
 void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
 {
   // ?
@@ -90,8 +102,9 @@ void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
   // BUT also based on direction
   if (anim == ANIM_IDLE)
   {
-    int c = m_sprite.GetCell();
+    int c = 1; //m_sprite.GetCell();
     m_sprite.SetCellRange(c, c);
+    m_sprite.SetCell(c);
   }
   else
   {
@@ -102,12 +115,12 @@ void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
       if (dir.x < 0)
       {
         // Left
-        m_sprite.SetCellRange(12, 15);
+        SetAnimRange(12, 15);
       }
       else
       {
         // Right
-        m_sprite.SetCellRange(8, 11);
+        SetAnimRange(8, 11);
       }
     }
     else
@@ -116,11 +129,11 @@ void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
       if (dir.z < 0)
       {
         // Up?
-        m_sprite.SetCellRange(4, 7);
+        SetAnimRange(4, 7);
       }
       else
       {
-        m_sprite.SetCellRange(0, 3);
+        SetAnimRange(0, 3);
       }
     }
   }
