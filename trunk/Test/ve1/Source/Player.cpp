@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <Game.h>
 #include <AmjuGL.h>
+#include <SoundManager.h>
 #include "Ve1SceneGraph.h"
 #include <iostream>
 #include "Ve1Character.h"
@@ -38,6 +39,7 @@
 #include "FuelCount.h"
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
+#include "FuelCell.h"
 
 namespace Amju
 {
@@ -588,9 +590,38 @@ void Player::SetMenu(GuiMenu* menu)
 
 void Player::OnCollideFuel(FuelCell* f)
 {
+  // New behaviour:
+  // Increment food count, if less than daily limit; make food invis.
+  // Else: attach food to player, drag around. Give to other player we intersect.
+
+
+  /*
+  FirstTimeMsgThisSession(
+    "Great, this is a fuel cell! We need these. Find as many as you can!", 
+    MsgNum(10),
+    false);
+  */
+
   // Inc number of fuel cells locally carried. When we collide with spaceship we transfer this number
   //  to server.
-  ChangeLocalPlayerFuelCount(1);
+  ChangeLocalPlayerFuelCount(+1);
+  // TODO This should adjust count on the server
+
+  if (GetLocalPlayerFuelCount() <= DailyFoodCount())
+  {
+    f->SetHidden(true);
+    TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
+
+    // TODO different messages for different count values
+    LurkMsg lm("You ate some food! You feel happy!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+  }
+  else
+  {
+    // We have eaten enough food today.
+    // Keep the food so we can give it to other players
+    // I.e. PICK UP
+  }
 
   static GSMain* gsm = TheGSMain::Instance();
 

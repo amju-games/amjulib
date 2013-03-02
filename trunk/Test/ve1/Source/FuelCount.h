@@ -14,6 +14,8 @@ int GetLocalPlayerFuelCount();
 
 void ChangeLocalPlayerFuelCount(int delta);
 
+// Returns number of food items each player should eat today
+int DailyFoodCount();
 }
 
 #endif
