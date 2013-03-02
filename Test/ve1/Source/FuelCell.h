@@ -31,6 +31,11 @@ public:
   virtual bool Load(File*);
   virtual void SetEditMenu(GuiMenu*) {}
   virtual void SetMenu(GuiMenu*) {}
+
+  void SetOwner(Ve1Object* v) { m_owner = v; }
+
+private:
+  Ve1Object* m_owner;
 };
 } // namespace
 #endif
