@@ -195,6 +195,10 @@ bool Player::IsLoggedIn() const
 
 bool Player::Load(File* f)
 {
+  return true; 
+
+
+
   // Create Scene Node, but don't attach to SceneGraph until needed  
 
   // TODO We can't until we call SetFromCharacterName in SetKeyVal
@@ -619,7 +623,7 @@ void Player::EatFood(FuelCell* f)
   }
 
   // Check if we have now eaten enough for the day
-  bool weAreHungry = GetLocalPlayerFuelCount() <= DailyFoodCount();
+  bool weAreHungry = GetLocalPlayerFuelCount() < DailyFoodCount();
   if (weAreHungry)
   {
     LurkMsg lm("You still need to eat some more food today!", 
@@ -644,7 +648,7 @@ void Player::OnCollideFuel(FuelCell* f)
   // Else: attach food to player, drag around. Give to other player we intersect.
 
   Ve1Object* owner = f->GetOwner();
-  bool weAreHungry = GetLocalPlayerFuelCount() <= DailyFoodCount();
+  bool weAreHungry = GetLocalPlayerFuelCount() < DailyFoodCount();
 
   if (owner == this)
   {
