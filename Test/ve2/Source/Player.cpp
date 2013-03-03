@@ -208,11 +208,12 @@ bool Player::Load(File* f)
   }
 
   // Load arrow scene node
+/*
   ObjMesh* arrowMesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("arrow.obj"); 
   Assert(arrowMesh);
   m_arrow = new SceneMesh;
   m_arrow->SetMesh(arrowMesh);
-  //m_arrow->SetIsLit(true); // no normals ?
+*/
 
   // Particle effect when attacked, etc.
   File fight;
@@ -239,19 +240,21 @@ void Player::OnLocationExit()
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   Assert(root);
   root->DelChild(m_sceneNode.GetPtr());
-  root->DelChild(m_arrow.GetPtr());
+  //root->DelChild(m_arrow.GetPtr());
 }
 
 void Player::OnLocationEntry()
 {
   Ve1ObjectChar::OnLocationEntry();
 
+/*
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
   if (root)
   {
     root->AddChild(m_arrow.GetPtr());
     SetArrowVis(false);
   }
+*/
 
   m_nameTag = new PlayerNameNode(this);
   if (m_sceneNode)
@@ -400,11 +403,14 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
 
 void Player::SetArrowVis(bool visible)
 {
+/*
   m_arrow->SetVisible(visible);
+*/
 }
 
 void Player::SetArrowPos(const Vec3f& newpos)
 {
+/*
 //std::cout << " Setting arrow pos to " << newpos << "\n";
 
   Matrix m;
@@ -415,6 +421,7 @@ void Player::SetArrowPos(const Vec3f& newpos)
     newpos.x - ARROW_XSIZE, newpos.x + ARROW_XSIZE,
     newpos.y, newpos.y + ARROW_YSIZE,
     newpos.z - ARROW_XSIZE, newpos.z + ARROW_XSIZE);
+*/
 }
 
 void Player::SetLoggedIn(bool loggedIn)
