@@ -8,7 +8,7 @@
 
 namespace Amju
 {
-std::string UrlRoot()
+std::string AssetUrlRoot()
 {
   static bool first = true;
   static std::string res;
@@ -16,11 +16,24 @@ std::string UrlRoot()
   {
     first = false;
     std::string server = GetServer();
-// Move from servage to lunarpages: no env dir for scripts, (so harder to have 
-//  different envs :-( )
-//    std::string env = GetEnv();
-    res = "http://" + server + "/"; 
-// + env + "/";
+    // Move from servage to lunarpages: all scripts must be under cgi-bin
+    std::string env = GetEnv();
+    res = "http://" + server + "/assets/" + env + "/";
+  }
+  return res;
+}
+
+std::string ScriptUrlRoot()
+{
+  static bool first = true;
+  static std::string res;
+  if (first)  // just do look ups once
+  {
+    first = false;
+    std::string server = GetServer();
+    // Move from servage to lunarpages: all scripts must be under cgi-bin
+    std::string env = GetEnv();
+    res = "http://" + server + "/cgi-bin/" + env + "/";
   }
   return res;
 }
@@ -42,14 +55,14 @@ bool Ve1ReqManager::IsLoggedIn() const
 
 std::string Ve1ReqManager::MakeDownloadUrl(const std::string& filename)
 {
-  std::string s = UrlRoot() + "assets/" + filename;
+  std::string s = AssetUrlRoot() + filename;
   return s;
 }
 
 std::string Ve1ReqManager::MakeUrl(Task t)
 {
   // TODO CONFIG
-  std::string s =  UrlRoot() + "cgi-bin/";
+  std::string s =  ScriptUrlRoot();
   
   // Add Task-specific CGI script name
   switch (t)
