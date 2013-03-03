@@ -49,7 +49,15 @@ void Furniture::SetEditMenu(GuiMenu* menu)
 
 CollisionMesh* Furniture::GetCollisionMesh()
 {
-  return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
+  if (!m_sceneNode.GetPtr())
+  {
+    return 0;
+  }
+  if (!dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))
+  {
+    return 0;
+  }
+  return ((SceneCollisionMesh*)(m_sceneNode.GetPtr()))->GetCollisionMesh();
 }
 
 const char* Furniture::GetTypeName() const

@@ -390,13 +390,14 @@ std::cout << "Selected " << *selectedObj << "\n";
     // Try to treat selected object like terrain, and get a position to go to.
     bool gotpos = false;
     HasCollisionMesh* hcm = dynamic_cast<HasCollisionMesh*>(selectedObj);
-    if (hcm)
+    CollisionMesh* collMesh = hcm ? hcm->GetCollisionMesh() : 0;
+    if (hcm && collMesh)
     {
 #ifdef PICK_DEBUG
 std::cout << "Try to find point on this object: " << *selectedObj << "\n";
 #endif
 
-      gotpos = MouseToGroundPos(hcm->GetCollisionMesh(), mouseScreen, &pos);
+      gotpos = MouseToGroundPos(collMesh, mouseScreen, &pos);
       if (gotpos)
       {
 #ifdef PICK_DEBUG
