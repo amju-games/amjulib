@@ -46,7 +46,8 @@ std::cout << "Setting sprite from character name...\n";
   // OR this is OK, the layers are set when we get server msgs. 
   // These are the default settings for each layer.
   static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
-  for (int i = 0; i < 5; i++)
+  int numLayers = lgm->GetNumLayers();
+  for (int i = 0; i < numLayers; i++)
   {
     // Fof layer i, set tex 0 and colour 0
     m_sprite.AddLayer(SpriteLayer(i, lgm->GetTexture(i, 0), lgm->GetColour(i, 0), 0, 0));  

@@ -32,6 +32,8 @@ private:
 public:
   bool Load(File*);
 
+  int GetNumLayers() const;
+
   int GetNumTextures(int layer) const;
   int GetNumColours(int layer) const;
 
