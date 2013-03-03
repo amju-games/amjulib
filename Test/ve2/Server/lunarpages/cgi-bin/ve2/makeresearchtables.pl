@@ -37,6 +37,8 @@ sub create_table_cogtest()
 {
   drop_table("research_cogtest");
   drop_table("research_testresult");
+  drop_table("research_group");
+  drop_table("research_date");
 
   my $sql = <<END;
 
@@ -170,7 +172,7 @@ sub create_tables()
 {
   print "Creating RESEARCH tables for this environment!\n";
 
-#  create_table_position();
+  create_table_position();
 
   create_table_cogtest();
 
