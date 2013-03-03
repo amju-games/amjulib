@@ -602,6 +602,8 @@ void GSMain::OnActive()
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
 #endif
 
+  SceneNode::SetGlobalShowAABB(true);
+
   static const bool showAABB = (ROConfig()->GetValue("show-aabb", "n") == "y");
   SceneNode::SetGlobalShowAABB(showAABB);
 
