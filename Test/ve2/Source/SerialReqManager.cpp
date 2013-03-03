@@ -4,7 +4,7 @@
 #include "SerialReqManager.h"
 #include "ROConfig.h"
 
-#define SRM_AUDIT
+//#define SRM_AUDIT
 //#define QUEUE_DEBUG
 //#define NO_THREADS
 //#define SRM_DEBUG
