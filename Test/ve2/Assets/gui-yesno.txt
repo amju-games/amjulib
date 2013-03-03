@@ -1,0 +1,49 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+3
+
+
+// Button  
+// element type
+gui-button
+// Element name
+yes-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+yes
+// Font name, size
+arial, 2.0 
+
+gui-button
+no-button
+-0.4, -0.7
+0.8, 0.2
+gui-button-4.png
+no
+arial, 2.0 
+
+
+// Element type
+gui-text
+// Element name
+question
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.3
+// Text
+This is the question
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+

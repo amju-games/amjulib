@@ -1,0 +1,83 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+6
+
+
+//// Element type
+//gui-text
+//// Element name
+//text1
+//// pos (coords are -1..1)
+//-1.0, 0.8
+//// size
+//2.0, 0.1
+//// Text
+//Options
+//// Font name, size
+//arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+back
+// Font name, size
+arial, 1.6 
+
+gui-button
+avatar-button
+-0.4,0.8
+0.8,0.2
+gui-button-4.png
+my avatar...
+arial, 1.6, sx=0.8
+
+gui-button
+fullscreen-button
+-0.4,0.55
+0.8,0.2
+gui-button-4.png
+fullscreen
+arial, 1.6
+
+gui-button
+sound-button
+-0.4,0.3
+0.8,0.2
+gui-button-4.png
+sound...
+arial, 1.6
+
+gui-button
+keyboard-button
+-0.4,0.05
+0.8,0.2
+gui-button-4.png
+keyboard...
+arial, 1.6, sx=0.9 
+
+gui-button
+inet-button
+-0.4,-0.2
+0.8,0.2
+gui-button-4.png
+proxy...
+arial, 1.6
+
+
+
+
+

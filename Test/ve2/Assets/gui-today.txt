@@ -1,0 +1,68 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+today-comp
+// Num children
+6
+
+gui-button
+view-results-button
+// pos
+-0.4, 0.0
+// size
+0.8, 0.2
+gui-button-4.png
+view test results
+arial, 1.5, sx=0.8
+
+gui-button
+view-ach-button
+// pos
+-0.4, -0.3
+// size
+0.8, 0.2
+gui-button-4.png
+view achievements
+arial, 1.5, sx=0.6
+
+gui-button
+ok-button
+// pos
+-0.4, -0.6
+// size
+0.8, 0.2
+gui-button-4.png
+ok
+arial, 2.0
+
+gui-button
+play-button
+// pos
+-0.2, -0.85
+// size
+0.4, 0.1
+gui-button-4.png
+play
+arial, 0.75, sx=0.8
+
+
+gui-text
+date-text
+-0.8, 0.9
+1.6, 0.2
+date
+arial, 2.0, fgcol=ffffff
+
+gui-text
+long-text
+-0.9, 0.6
+1.8, 1.2
+// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
+This is where we describe what the participant is doing today.
+arial, 1.0, multi, fgcol=ffffff
+
+
+
