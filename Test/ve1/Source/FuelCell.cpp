@@ -178,5 +178,18 @@ bool FuelCell::Load(File*)
   return true;
 }
 
+void FuelCell::Update()
+{
+  Furniture::Update();
+
+  if (m_owner)
+  {
+    Vec3f p = m_owner->GetPos();
+    SetPos(p);
+    float s = 5.0f; // TODO CONFIG
+    m_aabb.Set(p.x - s, p.x + s, p.y - s, p.y + s, p.z - s, p.z + s); 
+    m_sceneNode->SetAABB(m_aabb);
+  }
+}
 
 } // namespace

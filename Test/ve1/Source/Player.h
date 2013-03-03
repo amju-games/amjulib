@@ -56,6 +56,9 @@ public:
   // New 2D customisable avatars
   LayerSprite& GetSprite();
 
+private:
+  void EatFood(FuelCell*);
+
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow
   RCPtr<SceneNode> m_nameTag; // visible name shown above player (move to base class ?)
