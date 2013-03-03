@@ -1,0 +1,11 @@
+// v
+1
+
+
+// bg image
+//gui-image
+heart-img
+-1.5, 1.5
+3, 3
+bg2.png
+

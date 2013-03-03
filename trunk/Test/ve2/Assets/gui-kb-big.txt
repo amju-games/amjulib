@@ -1,0 +1,412 @@
+// version
+1
+
+// Element type - not required
+//gui-comp
+// Name
+kb-comp
+// Num children
+// PAGES
+1
+
+// ******************************************
+// PAGE 1
+
+// Four rows
+gui-comp
+page0
+4
+
+gui-comp
+row1
+10
+
+gui-button
+q
+0,0
+0.20, 0.20
+key2.png
+q
+arial, 2.0 
+
+gui-button
+w
+0.2,0
+0.20, 0.20
+key2.png
+w
+arial, 2.0 
+
+gui-button
+e
+0.4,0
+0.20, 0.20
+key2.png
+e
+arial, 2.0 
+
+gui-button
+r
+0.6,0
+0.20, 0.20
+key2.png
+r
+arial, 2.0 
+
+gui-button
+t
+0.8,0
+0.20, 0.20
+key2.png
+t
+arial, 2.0 
+
+gui-button
+y
+1.0,0
+0.20, 0.20
+key2.png
+y
+arial, 2.0 
+
+gui-button
+u
+1.2,0
+0.20, 0.20
+key2.png
+u
+arial, 2.0 
+
+gui-button
+i
+1.4,0
+0.20, 0.20
+key2.png
+i
+arial, 2.0 
+
+gui-button
+o
+1.6,0
+0.20, 0.20
+key2.png
+o
+arial, 2.0 
+
+gui-button
+p
+1.8,0
+0.20, 0.20
+key2.png
+p
+arial, 2.0 
+
+
+// ------------------------------------------
+
+
+gui-comp
+row2
+9
+
+gui-button
+a
+0.06,-0.2
+0.2, 0.2
+key2.png
+a
+arial, 2.0 
+
+gui-button
+s
+0.26,-0.2
+0.2, 0.2
+key2.png
+s
+arial, 2.0 
+
+gui-button
+d
+0.46,-0.2
+0.2, 0.2
+key2.png
+d
+arial, 2.0 
+
+gui-button
+f
+0.66,-0.2
+0.2, 0.2
+key2.png
+f
+arial, 2.0 
+
+gui-button
+g
+0.86,-0.2
+0.2, 0.2
+key2.png
+g
+arial, 2.0 
+
+gui-button
+h
+1.06,-0.2
+0.2, 0.2
+key2.png
+h
+arial, 2.0 
+
+gui-button
+j
+1.26,-0.2
+0.2, 0.2
+key2.png
+j
+arial, 2.0 
+
+gui-button
+k
+1.46,-0.2
+0.2, 0.2
+key2.png
+k
+arial, 2.0 
+
+gui-button
+l
+1.66,-0.2
+0.2, 0.2
+key2.png
+l
+arial, 2.0 
+
+
+// ------------------------------------------
+
+
+gui-comp
+row3
+9
+
+gui-button
+z
+0.09,-0.4
+0.2, 0.2
+key2.png
+z
+arial, 2.0 
+
+gui-button
+x
+0.29,-0.4
+0.2, 0.2
+key2.png
+x
+arial, 2.0 
+
+gui-button
+c
+0.49,-0.4
+0.2, 0.2
+key2.png
+c
+arial, 2.0 
+
+gui-button
+v
+0.69,-0.4
+0.2, 0.2
+key2.png
+v
+arial, 2.0 
+
+gui-button
+b
+0.89,-0.4
+0.2, 0.2
+key2.png
+b
+arial, 2.0 
+
+gui-button
+n
+1.09,-0.4
+0.2, 0.2
+key2.png
+n
+arial, 2.0 
+
+gui-button
+m
+1.29,-0.4
+0.2, 0.2
+key2.png
+m
+arial, 2.0 
+
+gui-button
+,
+1.49,-0.4
+0.2, 0.2
+key2.png
+,
+arial, 2.0 
+
+gui-button
+.
+1.69,-0.4
+0.2, 0.2
+key2.png
+.
+arial, 2.0 
+
+
+// ------------------------------------------
+
+
+gui-comp
+row4
+5
+
+gui-button
+mode1
+0,-0.6
+0.3, 0.2
+key3.png
+M1
+arial, 2.0 
+
+gui-button
+mode2
+0.3,-0.6
+0.3, 0.2
+key3.png
+M2
+arial, 2.0 
+
+gui-button
+space
+0.6,-0.6
+0.8, 0.2
+key1.png
+space
+arial, 2.0 
+
+gui-button
+mode3
+1.4,-0.6
+0.3, 0.2
+key3.png
+M3
+arial, 2.0 
+
+gui-button
+mode4
+1.7,-0.6
+0.3, 0.2
+key3.png
+M4
+arial, 2.0 
+
+
+
+// ******************************************
+// PAGE 2
+
+// Four rows
+gui-comp
+page1
+1
+
+
+gui-comp
+row0
+10
+
+gui-button
+1
+0,0 
+0.2, 0.2
+key2.png
+1
+arial, 2.0 
+
+gui-button
+2
+0.2,0
+0.2, 0.2
+key2.png
+2
+arial, 2.0 
+
+gui-button
+3
+0.2,0
+0.2, 0.2
+key2.png
+3
+arial, 2.0 
+
+gui-button
+4
+0.3,0
+0.2, 0.2
+key2.png
+4
+arial, 2.0 
+
+gui-button
+5
+0.4,0
+0.2, 0.2
+key2.png
+5
+arial, 2.0 
+
+gui-button
+6
+0.5,0
+0.2, 0.2
+key2.png
+6
+arial, 2.0 
+
+gui-button
+7
+0.6,0
+0.2, 0.2
+key2.png
+7
+arial, 2.0 
+
+gui-button
+8
+0.7,0
+0.2, 0.2
+key2.png
+8
+arial, 2.0 
+
+gui-button
+9
+0.8,0
+0.2, 0.2
+key2.png
+9
+arial, 2.0 
+
+gui-button
+0
+0.9,0
+0.2, 0.2
+key2.png
+0
+arial, 2.0 
+
+
+
+
+
+
+

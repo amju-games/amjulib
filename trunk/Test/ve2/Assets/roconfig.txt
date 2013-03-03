@@ -1,0 +1,90 @@
+// ro config
+// version
+1
+
+// Change this for testing, should be 0
+cogtest-first-test 0
+
+// Start position on new game/reset
+start-loc    57
+// This pos should be OK in all locations
+start-pos    0,0,0
+
+// scrolling texture effect in GUI states
+scope-speed  0.05
+
+// Sound
+max-vol  0.1
+music-title Sound/hammers.it
+music-menu Sound/piano.it
+sound-got-collect Sound/cashreg.wav
+sound-npc-trigger Sound/whistlehere.wav
+sound-new-lurkmsg Sound/pop.wav
+sound-new-cogtest Sound/gong.wav
+sound-rt-go  Sound/alarme.wav
+sound-cogtest-fail Sound/fail.wav
+sound-cogtest-correct Sound/bell_tinkle.wav
+
+ve1obj-max-jump 20.0
+
+// max distance to get context menu for object
+menu-obj-distance 500
+
+// Max distance from player you can click
+max-click-dist    2000
+
+// Time period between cog test nags
+cog-test-nag-time 120
+
+// NPCs - no longer used ?
+npc-max-follow-dist 200.0
+npc-trigger-delay 10.0
+npc-max-follow-dist  75.0
+
+
+// Camera
+// initial dist from cam to player
+cam-z           300
+// initial x rot (i.e. altitude angle)
+cam-xrot        20
+// User drag sensitivity
+cam-xrot-scale  2
+cam-yrot-scale  10
+
+// Dist in screen space to count as a camera drag
+// (Full screen width is 2)
+cam-drag_min    0.0
+
+// Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
+portal-max-dist  400
+
+// Collide with walls: push away by this much extra (multiply) so we don't slowly get through non-vertical walls 
+extra-push  1.1
+// distance to arrow destination when we consider it reached
+stop-dist  20
+
+gravity  -50
+
+// height above player where picked-up object floats
+pickup-y    60
+
+// Player AABB
+player-aabb-x  12
+player-aabb-y  60
+show-aabb      n
+
+// View dist, which increases - player can only see objects to this dist
+player-min-view-dist 200
+
+// Avatar select view - camera height
+avatar-cam-y  100
+
+// Polling periods
+// Chat msgs
+chat-poll-period  2.0
+
+// Broadcast chat - how many lines
+chat-max-lines    8
+
+// Cut off point for treating sloping floors as walls
+vertical-y  0.8

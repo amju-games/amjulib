@@ -1,0 +1,12 @@
+// version
+1
+
+// Name
+kb
+// Pos
+-1, -0.2
+// Size
+2.0, 0.8
+// Filename for KB layout, localised
+gui-kb-num-EN.txt
+

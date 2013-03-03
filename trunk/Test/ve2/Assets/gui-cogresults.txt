@@ -1,0 +1,42 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+cogresults-comp
+// Num children
+2
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1
+// Text
+This feature is coming "soon"
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+// TODO more text
+
+// element type
+gui-button
+// Element name
+ok-button
+// pos (coords are -1..1)
+-0.4, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 2.0
+
+
