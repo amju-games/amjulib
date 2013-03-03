@@ -588,46 +588,96 @@ void Player::SetMenu(GuiMenu* menu)
   }
 }
 
+void Player::EatFood(FuelCell* f)
+{
+  ChangeLocalPlayerFuelCount(+1);
+  Ve1Object* owner = f->GetOwner();
+  if (owner)
+  {
+    std::string otherPlayer = GetPlayerName(owner->GetId());
+    if (otherPlayer.empty())
+    {
+      otherPlayer = "That other player";
+    }
+    LurkMsg lm(otherPlayer + " gave you some food! Isn't that nice!", 
+      LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+  }
+  else
+  {
+    // TODO different messages for different count values
+    LurkMsg lm("You ate some food! You feel happy!", 
+      LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+  }
+
+  // Check if we have now eaten enough for the day
+  bool weAreHungry = GetLocalPlayerFuelCount() <= DailyFoodCount();
+  if (weAreHungry)
+  {
+    LurkMsg lm("You still need to eat some more food today!", 
+      LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+  }
+  else
+  {
+    LurkMsg lm("You have eaten enough food for today! You are full up!", 
+      LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+  }
+
+  f->SetHidden(true);
+  TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
+}
+
 void Player::OnCollideFuel(FuelCell* f)
 {
   // New behaviour:
   // Increment food count, if less than daily limit; make food invis.
   // Else: attach food to player, drag around. Give to other player we intersect.
 
+  Ve1Object* owner = f->GetOwner();
+  bool weAreHungry = GetLocalPlayerFuelCount() <= DailyFoodCount();
 
-  /*
-  FirstTimeMsgThisSession(
-    "Great, this is a fuel cell! We need these. Find as many as you can!", 
-    MsgNum(10),
-    false);
-  */
-
-  // Inc number of fuel cells locally carried. When we collide with spaceship we transfer this number
-  //  to server.
-  ChangeLocalPlayerFuelCount(+1);
-  // TODO This should adjust count on the server
-
-  if (GetLocalPlayerFuelCount() <= DailyFoodCount())
+  if (owner == this)
   {
-    f->SetHidden(true);
-    TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
-
-    // TODO different messages for different count values
-    LurkMsg lm("You ate some food! You feel happy!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+    // We are already carrying this food
+    return;
+  }
+  else if (owner && !weAreHungry) 
+  {
+    // Another player is carrying this food. 
+    // We are not hungry, so we don't take the food. 
+    return;
+  }
+  else if (owner && weAreHungry)
+  {
+    // Another player is carrying this food. 
+    // We are hungry, so we eat it.
+    // The other player should get some reward for feeding us.
+    EatFood(f);
+  }
+  else if (!owner && weAreHungry)
+  {
+    // Noone is carrying the food. 
+    // We are hungry, so we eat it.
+    EatFood(f);
+  }
+  else if (!owner && !weAreHungry)
+  {
+    // Noone is carrying the food. 
+    // We are not hungry, so we pick up the food. 
+    LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);    
+    f->SetOwner(this);
   }
   else
   {
-    // We have eaten enough food today.
-    // Keep the food so we can give it to other players
-    // I.e. PICK UP
+    Assert(0);
   }
 
   static GSMain* gsm = TheGSMain::Instance();
-
-  // Total number in spaceship today??
   gsm->SetFuelCells(GetLocalPlayerFuelCount());    
-
 }
 
 float Player::GetViewDist() const
