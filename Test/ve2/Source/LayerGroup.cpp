@@ -93,6 +93,11 @@ std::cout << "Success! Loaded " << numGroups << " layer groups.\n";
   return true;
 }
 
+int LayerGroupManager::GetNumLayers() const
+{
+  return m_layers.size();
+}
+
 int LayerGroupManager::GetNumTextures(int layer) const
 {
   return m_layers[layer].m_textures.size();
