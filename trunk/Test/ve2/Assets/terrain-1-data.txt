@@ -1,0 +1,5 @@
+// ver
+1
+// obj mesh
+locations/location1/loc1.obj
+
