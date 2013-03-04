@@ -433,6 +433,10 @@ std::cout << "Try to find point on terrain for this mouse pos.\n";
 std::cout << "Pos: " << pos.x << ", " << pos.y << ", " << pos.z << "\n";
 #endif
       Player* player = GetLocalPlayer();
+
+      // 2D game: assume ground is a flat plane
+      pos.y = player->GetPos().y;
+
       // Sanity check the destination: if too far away, discard, it was probably not what the
       //  player intended.
       float sqDist = (player->GetPos() - pos).SqLen();
@@ -729,7 +733,9 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
   }
 
   float sqlen = (m_mouseScreen - mouseScreenButtonDown).SqLen();
+#ifdef DRAG_DEBUG
   std::cout << "Sqlen: " << sqlen << "\n";
+#endif
   static const float DRAG_MIN = ROConfig()->GetFloat("cam-drag-min", 0.05f);
   static const float DRAG_MIN2 = DRAG_MIN * DRAG_MIN;
   bool dragged = (sqlen > DRAG_MIN2);
