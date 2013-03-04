@@ -428,7 +428,9 @@ public:
 
 void ObjectUpdater::SendUpdateReq(int objId, const std::string& key, const std::string& val)
 {
+#ifdef OU_DEBUG
 std::cout << "Sending state update: " << objId << " key: " << key << " val: " << val << "\n";
+#endif
 
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(SET_STATE);
   url += "&obj_id=";
