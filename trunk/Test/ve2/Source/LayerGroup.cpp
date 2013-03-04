@@ -2,6 +2,8 @@
 #include "ObjectUpdater.h"
 #include "LocalPlayer.h"
 
+//#define LAYER_DEBUG
+
 namespace Amju
 {
 bool Layer::Load(File* f)
@@ -33,7 +35,9 @@ bool Layer::Load(File* f)
     }
     m_textures.push_back(tex);
   }
+#ifdef LAYER_DEBUG
 std::cout << "Layer group: loaded " << numTextures << " textures ok.\n";
+#endif
 
   int numColours = 0;
   if (!f->GetInteger(&numColours))
@@ -52,7 +56,9 @@ std::cout << "Layer group: loaded " << numTextures << " textures ok.\n";
     Colour col = FromHexString(s); // TODO error checking ?
     m_colours.push_back(col);
   }
+#ifdef LAYER_DEBUG
 std::cout << "Layer group: loaded " << numColours << " colours ok.\n";
+#endif
 
   return true;
 }
@@ -89,7 +95,9 @@ bool LayerGroupManager::Load(File* f)
     }
     m_layers.push_back(g);
   }
+#ifdef LAYER_DEBUG
 std::cout << "Success! Loaded " << numGroups << " layer groups.\n";
+#endif
   return true;
 }
 
