@@ -8,6 +8,8 @@
 #include "GSNetError.h"
 #include "PlayerNames.h"
 
+//#define UPDATE_DEBUG
+
 namespace Amju
 {
 GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get state updates")
@@ -57,8 +59,11 @@ std::cout << "Obj " << i << ": ";
           float y = ToFloat(strs[1]);
           float z = ToFloat(strs[2]);
           int loc = ToInt(strs[3]);
-          
+
+#ifdef UPDATE_DEBUG          
 std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
+#endif
+
           TheObjectUpdater::Instance()->QueueUpdatePos(id, Vec3f(x, y, z), loc);
         }
         else
@@ -69,7 +74,9 @@ std::cout << "Unexpected bad pos: " << val << " for pos for ID " << id << "\n";
       }
       else
       {
+#ifdef UPDATE_DEBUG          
 std::cout << "Got update for object " << id << " key: " << key << " val: " << val << "\n";
+#endif
         TheObjectUpdater::Instance()->QueueUpdate(id, key, val);
       }
 

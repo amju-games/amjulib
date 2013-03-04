@@ -14,6 +14,8 @@
 #include "Useful.h"
 #include "ROConfig.h"
 
+//#define MGP_DEBUG
+
 namespace Amju
 {
 bool MouseToGroundPos(const CollisionMesh* m, const Vec2f& mouseScreen, Vec3f* groundPos)
@@ -34,7 +36,9 @@ bool MouseToGroundPos(const CollisionMesh* m, const Vec2f& mouseScreen, Vec3f* g
 
   if (!m->Intersects(cap, &tris))
   {
+#ifdef MGP_DEBUG
 std::cout << "MouseToGroundPos: Line seg didn't intersect any tris\n";
+#endif
     return false;
   }
 
@@ -57,7 +61,7 @@ std::cout << "MouseToGroundPos: Line seg didn't intersect any tris\n";
 
   int size = tris.size();
 
-#ifdef TERRAIN_DEBUG
+#ifdef MGP_DEBUG
 std::cout << "Found " << size << " tris....\n";
 #endif
 
@@ -79,7 +83,7 @@ std::cout << "Found " << size << " tris....\n";
     }
 
     // Skip (nearly) vertical polys, so we can't climb up walls
-#ifdef _DEBUG
+#ifdef MGP_DEBUG
   std::cout << "Normal of tri selected: " << plane.Normal() << "\n";
 #endif
 
@@ -90,7 +94,7 @@ std::cout << "Found " << size << " tris....\n";
       continue;
     }
 
-#ifdef TERRAIN_DEBUG
+#ifdef MGP_DEBUG
 std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
 std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
 #endif
@@ -102,13 +106,13 @@ std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
 
     float q = 0; // parameter along line seg 0..1
 
-#ifdef TERRAIN_DEBUG
+#ifdef MGP_DEBUG
     float d =
 #endif
     Mgc::SqrDistance(s, tri, &q);
     Vec3f p = seg.p0 + q * (seg.p1 - seg.p0);
 
-#ifdef TERRAIN_DEBUG
+#ifdef MGP_DEBUG
 std::cout << "SqrDistance intersect: " << p << "\n";
 
     // Dist d should be zero - the line seg intersects the tri.
