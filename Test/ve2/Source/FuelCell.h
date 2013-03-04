@@ -5,6 +5,8 @@
 
 namespace Amju 
 {
+void SetRandomFoodInLocation();
+
 class FuelCellManager : public Ve1Object
 {
 public:
