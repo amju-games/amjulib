@@ -77,6 +77,13 @@ const char* FuelCellManager::GetTypeName() const
   return TYPENAME;
 }
 
+void SetRandomFoodInLocation()
+{
+  FuelCellManager fcm;
+  fcm.SetPos(Vec3f(0, 0, 0)); // TODO
+  fcm.OnLocationEntry();
+}
+
 void FuelCellManager::OnLocationEntry()
 {
   if (GetGameMode() == AMJU_MODE_EDIT)

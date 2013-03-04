@@ -11,6 +11,7 @@
 #include "GSPaused.h"
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
+#include "FuelCell.h"
 
 namespace Amju
 {
@@ -68,6 +69,8 @@ void GSWaitForNewLocation::Update()
     {
       Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
       cam->Reset();
+
+      SetRandomFoodInLocation();
 
       TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
     }
