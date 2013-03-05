@@ -40,6 +40,7 @@
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
 #include "FuelCell.h"
+#include "GS2dAvatarMod.h"
 
 namespace Amju
 {
@@ -556,6 +557,18 @@ void Player::Update()
   }
 }
 
+class CommandAvatarMod : public GuiCommand
+{
+public:
+  virtual bool Do()
+  {
+    static GS2dAvatarMod* gs = TheGS2dAvatarMod::Instance();
+    gs->SetPrevState(TheGSMain::Instance());
+    TheGame::Instance()->SetCurrentState(gs);
+    return true;
+  }
+};
+
 class CommandTalk : public GuiCommand
 {
 public:
@@ -575,11 +588,14 @@ void Player::SetMenu(GuiMenu* menu)
 {
   if (IsLocalPlayer())
   {
+    AddMenuItem("Change look", new CommandAvatarMod);
+/*
     // If carrying, drop is option
     if (m_carrying)
     {
       AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
     }
+*/
   }
   else if (IsLoggedIn())
   {

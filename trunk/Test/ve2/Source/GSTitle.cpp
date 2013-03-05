@@ -11,7 +11,6 @@
 #include "GSChoosePlayer.h"
 #include "GSYesNoQuitProcess.h"
 #include "GSOptions.h"
-#include "AvatarManager.h"
 #include "Version.h"
 #include "SpecialConfig.h"
 #include "PlayerInfo.h"
@@ -132,8 +131,6 @@ void GSTitle::OnActive()
   if (first)
   {
     first = false;
-
-    TheAvatarManager::Instance()->Load();
 
     // Set default keyboard layout
     KbSetLayout(KB_LAYOUT_REGULAR);

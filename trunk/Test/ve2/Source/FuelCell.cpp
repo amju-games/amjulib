@@ -192,7 +192,20 @@ void FuelCell::Update()
   if (m_owner)
   {
     Vec3f p = m_owner->GetPos();
-    SetPos(p);
+    // Get dragged behind
+    Vec3f diff = p - GetPos();
+    float sqdist = diff.SqLen();
+    const float MAX_DIST = 30.0f; // TODO CONFIG
+    if (sqdist > MAX_DIST * MAX_DIST)
+    {
+      SetVel(diff); // TODO TEMP TEST
+    }
+    else
+    {
+      SetVel(Vec3f());
+    }
+
+    p = GetPos();
     float s = 5.0f; // TODO CONFIG
     m_aabb.Set(p.x - s, p.x + s, p.y - s, p.y + s, p.z - s, p.z + s); 
     m_sceneNode->SetAABB(m_aabb);
