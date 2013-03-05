@@ -5,6 +5,7 @@
 
 namespace Amju
 {
+/*
 void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
 {
   if (player->IsHidden() || spaceship->IsHidden())
@@ -19,6 +20,7 @@ void CollidePlayerSpaceship(Player* player, Spaceship* spaceship)
 
 static bool b1 = TheCollisionManager::Instance()->Add(
   Player::TYPENAME, Spaceship::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerSpaceship);
+*/
 
 }
 

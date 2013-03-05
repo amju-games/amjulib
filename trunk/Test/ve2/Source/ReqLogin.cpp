@@ -228,7 +228,7 @@ void ReqLogin::ChooseMode()
 
   // Now we can look up today on the calendar to get game mode flags.
 
-  ResetLocalPlayerFuelCount();
+  //ResetLocalPlayerFuelCount();
 
   SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 

@@ -56,6 +56,8 @@ public:
   // New 2D customisable avatars
   LayerSprite& GetSprite();
 
+  int GetFoodCount();
+
 private:
   void EatFood(FuelCell*);
 

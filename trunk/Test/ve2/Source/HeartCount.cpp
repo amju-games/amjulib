@@ -4,9 +4,23 @@
 
 namespace Amju
 {
+static const char* FOOD_KEY = "food";
+
+bool GetFoodCount(int* result)
+{
+  return GetPlayerCount(FOOD_KEY, result);
+}
+
+bool ChangeFoodCount(int delta)
+{
+  return ChangePlayerCount(FOOD_KEY, delta);
+}
+
+
+static const char* STAMINA_KEY = "stamina";
+
 bool GetHeartCount(int* result)
 {
-  static const char* STAMINA_KEY = "stamina";
   return GetPlayerCount(STAMINA_KEY, result);
 }
 
@@ -46,7 +60,6 @@ public:
 
 bool ChangeHeartCount(int delta)
 {
-  static const std::string STAMINA_KEY = "stamina";
   return ChangePlayerCount(STAMINA_KEY, delta);
 }
 

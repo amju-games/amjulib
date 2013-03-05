@@ -47,6 +47,8 @@ namespace Amju
 static const std::string FUELCELL_KEY = "fuelcells";
 static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
 
+static const char* FOOD_KEY = "FOOD";
+
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
 
@@ -615,12 +617,29 @@ void Player::SetMenu(GuiMenu* menu)
   }
 }
 
+int Player::GetFoodCount()
+{
+  if (Exists(FOOD_KEY))
+  {
+    std::string s = GetVal(FOOD_KEY);
+    int i = ToInt(s);
+    return i;
+  }
+  Assert(0);
+  return 0;
+}
+
 void Player::EatFood(FuelCell* f)
 {
-  ChangeLocalPlayerFuelCount(+1);
   Ve1Object* owner = f->GetOwner();
   if (owner)
-  {
+  { 
+    Assert(owner != this);
+
+    // Inc count of this player on server
+    ChangeObjCount(GetId(), FOOD_KEY, +1);
+
+    // DOH!! THIS NEEDS TO HAPPEN ON THE OTHER PLAYER'S MACHINE!!!
     std::string otherPlayer = GetPlayerName(owner->GetId());
     if (otherPlayer.empty())
     {
@@ -632,6 +651,9 @@ void Player::EatFood(FuelCell* f)
   }
   else
   {
+    // Inc local player count on server
+    ChangeFoodCount(+1);
+
     // TODO different messages for different count values
     LurkMsg lm("You ate some food! You feel happy!", 
       LURK_FG, LURK_BG, AMJU_CENTRE); 
@@ -639,7 +661,7 @@ void Player::EatFood(FuelCell* f)
   }
 
   // Check if we have now eaten enough for the day
-  bool weAreHungry = GetLocalPlayerFuelCount() < DailyFoodCount();
+  bool weAreHungry = GetFoodCount() < DailyFoodCount();
   if (weAreHungry)
   {
     LurkMsg lm("You still need to eat some more food today!", 
@@ -664,7 +686,14 @@ void Player::OnCollideFuel(FuelCell* f)
   // Else: attach food to player, drag around. Give to other player we intersect.
 
   Ve1Object* owner = f->GetOwner();
-  bool weAreHungry = GetLocalPlayerFuelCount() < DailyFoodCount();
+
+  if (!Exists(FOOD_KEY))
+  {
+    // Don't yet know if we are hungry or not - wait till we get count
+    return;
+  }
+
+  bool weAreHungry = GetFoodCount() < DailyFoodCount();
 
   if (owner == this)
   {
@@ -704,7 +733,7 @@ void Player::OnCollideFuel(FuelCell* f)
   }
 
   static GSMain* gsm = TheGSMain::Instance();
-  gsm->SetFuelCells(GetLocalPlayerFuelCount());    
+  gsm->SetFuelCells(GetFoodCount());    
 }
 
 float Player::GetViewDist() const
@@ -712,6 +741,7 @@ float Player::GetViewDist() const
   return m_viewDistance;
 }
 
+/*
 void Player::OnSpaceshipCollision(Spaceship* spaceship)
 {
   // TODO Only process on first collision frame, ignore subsequently
@@ -769,6 +799,7 @@ std::cout << "Fuel cells: " << fc << "\n";
 
   ResetLocalPlayerFuelCount();
 }
+*/
 
 bool GetNameForPlayer(int objId, std::string* r)
 {
