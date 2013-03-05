@@ -71,7 +71,7 @@ pickup-y    60
 // Player AABB
 player-aabb-x  12
 player-aabb-y  60
-show-aabb      n
+show-aabb     y 
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200
