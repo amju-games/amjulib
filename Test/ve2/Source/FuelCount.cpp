@@ -5,6 +5,7 @@ namespace Amju
 {
 static int fc = 0;
 
+/*
 void ResetLocalPlayerFuelCount()
 {
   fc = 0;
@@ -21,6 +22,7 @@ void ChangeLocalPlayerFuelCount(int delta)
 
 std::cout << "Local player fuel cell count is now: " << delta << "\n";
 }
+*/
 
 int DailyFoodCount()
 {
