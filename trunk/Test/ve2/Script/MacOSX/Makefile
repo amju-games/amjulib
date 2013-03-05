@@ -54,7 +54,6 @@ release:
 	cp -R $(ASSETSDIR)/* $(BUILD)/$(APPNAME)/Contents/Resources/Data/; \
 	cp -R $(GUIASSETSDIR)/* $(BUILD)/$(APPNAME)/Contents/Resources/Data/; \
 	cp -R $(FONT2D)/* $(BUILD)/$(APPNAME)/Contents/Resources/Data/font2d; \
-	cp -R $(FONT3D)/* $(BUILD)/$(APPNAME)/Contents/Resources/Data/font3d; \
         cp $(AMJU)/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $(BUILD)/$(APPNAME)/Contents/MacOS/; \
         cp $(AMJU)/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib $(BUILD)/$(APPNAME)/Contents/MacOS/ ; \
 	cp $(TARGET) $(BUILD)/$(APPNAME)/Contents/MacOS/"Hungry People"; 
