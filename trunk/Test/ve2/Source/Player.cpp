@@ -668,7 +668,7 @@ void Player::EatFood(FuelCell* f)
     {
       otherPlayer = "That other player";
     }
-    TheMsgManager::Instance()->SendMsg(-3, GetId(), otherPlayer + "gave you some food!");
+    TheMsgManager::Instance()->SendMsg(-3, GetId(), otherPlayer + " gave you some food!");
   }
   else
   {
