@@ -48,7 +48,7 @@ sub new_player_impl($$$)
 
   print "Player ID=$playerid<br>\n";
 
-  $insertsql = "insert into object (type, assetfile, datafile, owner, createtime) values ('player', 'player-assets.txt', 'player-data.txt', $playerid, now())";
+  $insertsql = "insert into object (type, assetfile, datafile, owner, createtime) values ('player', 'none', 'none', $playerid, now())";
   print "<br>$insertsql<br>\n";
 
 
@@ -71,9 +71,13 @@ sub new_player_impl($$$)
   insert($setnamesql);
 
   # Set values for avatar appearance
-  my $sql = "insert into objectstate values ($objid, 'avatar', 'marge', now())"; 
-  insert($sql);
+#  my $sql = "insert into objectstate values ($objid, 'avatar', 'marge', now())"; 
+#  insert($sql);
 
+  # Set initial food count to zero
+  my $foodsql = "insert into objectstate values($objid, 'food', '0', now())";
+  insert($foodsql);
+ 
   # Set location and pos - this relies on there being an empty square at the start location for new players
   #  to materialise in.
   my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
