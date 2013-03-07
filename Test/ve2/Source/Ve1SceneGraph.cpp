@@ -1,11 +1,35 @@
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
 #include "Cam2d.h"
+#include "Useful.h"
 
 #define CAM_2D
 
 namespace Amju
 {
+bool SpriteBlendNodeComp(
+  const SceneGraph::BlendNode& b1, const SceneGraph::BlendNode& b2)
+{
+//std::cout << "Comparing z values " << b1.m_pos.z << " and " << b2.m_pos.z << "\n";
+
+  if (b1.m_pos.y < b2.m_pos.y)
+  {
+    return true;
+  }
+  else if (b1.m_pos.y > b2.m_pos.y)
+  {
+    return false;
+  }
+
+  // Y values equal
+  if (b1.m_pos.z < b1.m_pos.z)
+  {
+    return true;
+  }
+
+  return false;
+}
+
 void ClearVe1SceneGraph()
 {
   SceneGraph* sg = GetVe1SceneGraph();
@@ -33,6 +57,7 @@ SceneGraph* GetVe1SceneGraph()
   if (!sg)
   {
     sg = new SceneGraph;
+    sg->SetBlendNodeComp(SpriteBlendNodeComp);
   }
   return sg;
 }

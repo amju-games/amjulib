@@ -8,6 +8,11 @@ namespace Amju
 // Size of player sprites
 static const float SIZE = 40.0f;
 
+Ve1SpriteNode::Ve1SpriteNode()
+{
+  SetBlended(true);
+}
+
 LayerSprite& Ve1SpriteNode::GetSprite() 
 {
   return m_sprite;

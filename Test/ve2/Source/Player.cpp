@@ -634,20 +634,29 @@ void Player::EatFood(FuelCell* f)
   Ve1Object* owner = f->GetOwner();
   if (owner)
   { 
+    // This player is NOT the local player. Only the local player can be
+    //  the owner.
     Assert(owner != this);
+    Assert(GetLocalPlayer() != this);
 
-    // Inc count of this player on server
+    // Inc count of this (recipient) player on server
     ChangeObjCount(GetId(), FOOD_KEY, +1);
 
+/*
     // DOH!! THIS NEEDS TO HAPPEN ON THE OTHER PLAYER'S MACHINE!!!
     std::string otherPlayer = GetPlayerName(owner->GetId());
     if (otherPlayer.empty())
     {
       otherPlayer = "That other player";
     }
-    LurkMsg lm(otherPlayer + " gave you some food! Isn't that nice!", 
+*/
+    std::string recipName = GetPlayerName(GetId());
+
+    LurkMsg lm("You gave some food to " + recipName + "!", 
       LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);    
+
+    // Send message from 'the game' to this (recipient) player
   }
   else
   {
@@ -658,21 +667,21 @@ void Player::EatFood(FuelCell* f)
     LurkMsg lm("You ate some food! You feel happy!", 
       LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);    
-  }
 
-  // Check if we have now eaten enough for the day
-  bool weAreHungry = GetFoodCount() < DailyFoodCount();
-  if (weAreHungry)
-  {
-    LurkMsg lm("You still need to eat some more food today!", 
-      LURK_FG, LURK_BG, AMJU_CENTRE); 
-    TheLurker::Instance()->Queue(lm);    
-  }
-  else
-  {
-    LurkMsg lm("You have eaten enough food for today! You are full up!", 
-      LURK_FG, LURK_BG, AMJU_CENTRE); 
-    TheLurker::Instance()->Queue(lm);    
+    // Check if we have now eaten enough for the day
+    bool weAreHungry = GetFoodCount() < DailyFoodCount();
+    if (weAreHungry)
+    {
+      LurkMsg lm("You still need to eat some more food today!", 
+        LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
+    else
+    {
+      LurkMsg lm("You have eaten enough food for today! You are full up!", 
+        LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
   }
 
   f->SetHidden(true);
@@ -805,16 +814,6 @@ bool GetNameForPlayer(int objId, std::string* r)
 {
   *r = GetPlayerName(objId);
   return !(r->empty());
-
-/*
-  Player* p = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(objId).GetPtr());
-  if (p)
-  {
-    *r = p->GetName();
-    return true;
-  }
-  return false;
-*/
 }
 }
 

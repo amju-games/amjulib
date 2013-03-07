@@ -9,6 +9,8 @@ namespace Amju
 class Ve1SpriteNode : public Ve1Character
 {
 public:
+  Ve1SpriteNode();
+
   virtual void Draw();
   virtual void Update();
 
