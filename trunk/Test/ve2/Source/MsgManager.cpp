@@ -18,6 +18,8 @@
 #include "ROConfig.h"
 #include "HeartCount.h"
 #include "Achievement.h"
+#include "LurkMsg.h"
+#include "GameConsts.h"
 
 #define SEND_DEBUG
 
@@ -106,11 +108,20 @@ void MsgManager::Update()
     {
       Msg& msg = it->second;
       //gsm->ShowMsg(msg);
-      cc->ActivateChatRecv(true, &msg);
-      cc->ActivateChatSend(true, msg.m_senderId);
 
-      // Text to speech -- NB is here the best place ?
-      TextToSpeech(msg.m_text);
+      if (msg.m_senderId < 0)
+      {
+        LurkMsg lm(msg.m_text, LURK_FG, LURK_BG, AMJU_CENTRE); 
+        TheLurker::Instance()->Queue(lm);    
+      }
+      else
+      {
+        cc->ActivateChatRecv(true, &msg);
+        cc->ActivateChatSend(true, msg.m_senderId);
+
+        // Text to speech -- NB is here the best place ?
+        TextToSpeech(msg.m_text);
+      }
 
       // Mark message as read -- TODO only after player clicks OK in gui..?
       if (m_map.size() == 1)
@@ -168,7 +179,11 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   Assert(senderId != -1);
   Assert(recipId != -1);
   // For now, assume senders and recips are Players
-  Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(senderId).GetPtr()));
+  if (senderId >= 0)
+  {
+    Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(senderId).GetPtr()));
+  }
+
   if (recipId >= 0)
   {
     Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
