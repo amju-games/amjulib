@@ -93,7 +93,6 @@ void SceneGraph::DrawAABBs(SceneNode* node)
   // Good place to work out total number of nodes because we recurse
   //  over the entire tree - no culling here.
   m_nodesTotal++;
-
   DrawAABB(*(node->GetAABB()));
   unsigned int s = node->m_children.size();
   for (unsigned int i = 0; i < s; i++)
@@ -121,7 +120,12 @@ void SceneGraph::DrawNode(SceneNode* p)
 
     if (p->ShowAABB()) 
     {
+      AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_TEXTURE_2D);
+      AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+      AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+      AmjuGL::SetColour(Colour(0.5, 0.5, 0.5, 1.0f));
       DrawAABB(*(p->GetAABB()));
+      AmjuGL::PopAttrib();
     }
 
     PopColour();
