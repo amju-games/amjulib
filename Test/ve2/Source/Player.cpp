@@ -47,7 +47,7 @@ namespace Amju
 static const std::string FUELCELL_KEY = "fuelcells";
 static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
 
-static const char* FOOD_KEY = "FOOD";
+static const char* FOOD_KEY = "food";
 
 static const float ARROW_XSIZE = 5.0f;
 static const float ARROW_YSIZE = 30.0f;
@@ -137,6 +137,10 @@ Player::Player()
   m_lastFuelCellCount = -1;
   m_isDead = false;
   m_totalFuelCells = -1; // not set yet
+
+  Ve1SpriteNode* sn = new Ve1SpriteNode;
+  sn->SetObj(this);
+  SetSceneNode(sn);
 }
 
 LayerSprite& Player::GetSprite() 
@@ -470,13 +474,14 @@ void Player::Update()
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
     m_shadow->SetAABB(*(m_sceneNode->GetAABB()));
 
-    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 30.0f);
-    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 100.0f);
+    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 40.0f);
+    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 10.0f);
+    static const float ZSIZE = ROConfig()->GetFloat("player-aabb-z", 40.0f);
 
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
       m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
+      m_pos.z - ZSIZE, m_pos.z + ZSIZE);
 
     /*
     DISABLED for 2D look and feel

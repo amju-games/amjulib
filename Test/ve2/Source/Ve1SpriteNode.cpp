@@ -11,26 +11,6 @@ static const float SIZE = 40.0f;
 Ve1SpriteNode::Ve1SpriteNode()
 {
   SetBlended(true);
-}
-
-LayerSprite& Ve1SpriteNode::GetSprite() 
-{
-  return m_sprite;
-}
-
-void Ve1SpriteNode::SetLayerTex(int layer, int texIndex)
-{
-  m_sprite.SetLayerTex(layer, texIndex);
-}
-
-void Ve1SpriteNode::SetLayerColour(int layer, int colIndex)
-{
-  m_sprite.SetLayerColour(layer, colIndex);
-}
-
-void Ve1SpriteNode::SetFromCharacterName(const std::string& s)
-{
-std::cout << "Setting sprite from character name...\n";
 
   // This loads the base spritesheet, which we don't actually draw???
   // (TODO Change LayerSprite so we don't need it)
@@ -59,6 +39,25 @@ std::cout << "Setting sprite from character name...\n";
   }
 }
 
+LayerSprite& Ve1SpriteNode::GetSprite() 
+{
+  return m_sprite;
+}
+
+void Ve1SpriteNode::SetLayerTex(int layer, int texIndex)
+{
+  m_sprite.SetLayerTex(layer, texIndex);
+}
+
+void Ve1SpriteNode::SetLayerColour(int layer, int colIndex)
+{
+  m_sprite.SetLayerColour(layer, colIndex);
+}
+
+void Ve1SpriteNode::SetFromCharacterName(const std::string& s)
+{
+}
+
 void Ve1SpriteNode::Draw()
 {
   AmjuGL::PushMatrix();
@@ -69,8 +68,7 @@ void Ve1SpriteNode::Draw()
   AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
 
   // Translate so centred on sprite
-  static const float HSIZE = SIZE * 0.5f;
-  AmjuGL::Translate(-HSIZE, -HSIZE, 0); 
+  AmjuGL::Translate(-SIZE * 0.5f, -SIZE * 1.0f, 0); 
 
   m_sprite.DrawLayers(Vec2f(0, 0), 2.0f);
 

@@ -73,35 +73,9 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       */
     
   }
-  else if (key == AVATAR_KEY)
-  {
-    // New 2D players
-
-    //static AvatarManager* am = TheAvatarManager::Instance();
-    Ve1SpriteNode* node = new Ve1SpriteNode;
-    node->SetFromCharacterName("");
-
-    //am->Create(val);
-    if (node)
-    {
-      node->SetObj(this);
-      SetSceneNode(node);
-      // if in local player location
-      if (GetLocation() == GetLocalPlayerLocation()) 
-        // TODO don't get here is we are not playing game - this doesn't work too well
-        //  && GetGameMode() != AMJU_MODE_NO_GAME)
-      {
-        OnLocationEntry();
-      }
-    }
-    else
-    {
-      // TODO Set to good default avatar
-std::cout << "Unexpected avatar name: " << val << " for player/npc " << GetName() << "\n";
-    }
-  }
   else if (key.substr(0, 6) == "sprite")
   {
+    Assert(m_sceneNode);
     Ve1SpriteNode* node = dynamic_cast<Ve1SpriteNode*>(m_sceneNode.GetPtr());
     Assert(node);
     // "sprite_tex_0", "sprite_colour_0" for layer 0 sprite info, etc.
@@ -225,13 +199,14 @@ void Ve1ObjectChar::Update()
       *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
     }
 
-    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 30.0f);
-    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 100.0f);
+    static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 40.0f);
+    static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 10.0f);
+    static const float ZSIZE = ROConfig()->GetFloat("player-aabb-z", 40.0f);
 
     GetAABB()->Set(
       m_pos.x - XSIZE, m_pos.x + XSIZE,
       m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
+      m_pos.z - ZSIZE, m_pos.z + ZSIZE);
 
     /*
     NOT FOR 2D
