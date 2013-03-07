@@ -69,9 +69,16 @@ gravity  -50
 pickup-y    60
 
 // Player AABB
-player-aabb-x  12
-player-aabb-y  60
+player-aabb-x  16
+player-aabb-y  10
+player-aabb-z  32
 show-aabb     y 
+
+// Food AABB
+food-aabb-x  12
+food-aabb-y  10
+food-aabb-z  12
+
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200

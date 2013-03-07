@@ -43,10 +43,12 @@ FuelNode::FuelNode()
   }
 
   m_sprite.SetCellTime(0.1f);
-  // TODO TEMP TEST should be random
-  m_sprite.SetCellRange(0, 0);
-  m_sprite.SetCell(0);
+  // random food
+  int c = (int)Rnd(0, 4);
+  m_sprite.SetCellRange(c, c);
+  m_sprite.SetCell(c);
 
+  SetBlended(true);
 }
 
 void FuelNode::Update()
@@ -63,8 +65,8 @@ void FuelNode::Draw()
 
   AmjuGL::MultMatrix(m_local);
   AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
-  static const float HSIZE = SIZE * 0.5f;
-  AmjuGL::Translate(-HSIZE, -HSIZE, 0); 
+ 
+  AmjuGL::Translate(-SIZE, -SIZE, 0); 
   m_sprite.Draw(Vec2f(0, 0), 2.0f);
 
   AmjuGL::PopMatrix();
@@ -118,17 +120,18 @@ void FuelCellManager::OnLocationEntry()
   }
 }
 
-static const float XSIZE = 20.0f; // TODO CONFIG
-static const float YSIZE = 40.0f;
-
 void FuelCellManager::Update()
 {
   Ve1Object::Update();
 
-  m_aabb.Set(
+  static const float XSIZE = ROConfig()->GetFloat("food-aabb-x", 40.0f);
+  static const float YSIZE = ROConfig()->GetFloat("food-aabb-y", 10.0f);
+  static const float ZSIZE = ROConfig()->GetFloat("food-aabb-z", 40.0f);
+
+  GetAABB()->Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,
-    m_pos.z - XSIZE, m_pos.z + XSIZE);
+    m_pos.z - ZSIZE, m_pos.z + ZSIZE);
 
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
@@ -166,9 +169,16 @@ FuelCell::FuelCell()
 bool FuelCell::Load(File*)
 {
   Vec3f p = GetPos();
-  float s = 5.0f; // TODO CONFIG
 
-  m_aabb.Set(p.x - s, p.x + s, p.y - s, p.y + s, p.z - s, p.z + s); 
+  static const float XSIZE = ROConfig()->GetFloat("food-aabb-x", 40.0f);
+  static const float YSIZE = ROConfig()->GetFloat("food-aabb-y", 10.0f);
+  static const float ZSIZE = ROConfig()->GetFloat("food-aabb-z", 40.0f);
+
+  m_aabb.Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - ZSIZE, m_pos.z + ZSIZE);
+
   FuelNode* sm = new FuelNode;
   sm->SetAABB(m_aabb);
 
@@ -206,8 +216,16 @@ void FuelCell::Update()
     }
 
     p = GetPos();
-    float s = 5.0f; // TODO CONFIG
-    m_aabb.Set(p.x - s, p.x + s, p.y - s, p.y + s, p.z - s, p.z + s); 
+
+    static const float XSIZE = ROConfig()->GetFloat("food-aabb-x", 40.0f);
+    static const float YSIZE = ROConfig()->GetFloat("food-aabb-y", 10.0f);
+    static const float ZSIZE = ROConfig()->GetFloat("food-aabb-z", 40.0f);
+
+    m_aabb.Set(
+      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.y, m_pos.y + YSIZE,
+      m_pos.z - ZSIZE, m_pos.z + ZSIZE);
+
     m_sceneNode->SetAABB(m_aabb);
   }
 }
