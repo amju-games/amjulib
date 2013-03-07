@@ -41,6 +41,7 @@
 #include "Ve1SpriteNode.h"
 #include "FuelCell.h"
 #include "GS2dAvatarMod.h"
+#include "MsgManager.h"
 
 namespace Amju
 {
@@ -662,6 +663,12 @@ void Player::EatFood(FuelCell* f)
     TheLurker::Instance()->Queue(lm);    
 
     // Send message from 'the game' to this (recipient) player
+    std::string otherPlayer = GetPlayerName(owner->GetId());
+    if (otherPlayer.empty())
+    {
+      otherPlayer = "That other player";
+    }
+    TheMsgManager::Instance()->SendMsg(-3, GetId(), otherPlayer + "gave you some food!");
   }
   else
   {
