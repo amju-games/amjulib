@@ -11,7 +11,13 @@ namespace Amju
 {
 bool SceneGraph::BlendNode::operator<(const BlendNode& bn) const
 {
-  return m_screenZ > bn.m_screenZ;
+  return m_screenZ > bn.m_screenZ; // so further away drawn first
+}
+
+bool DefaultBlendNodeComp(
+  const SceneGraph::BlendNode& b1, const SceneGraph::BlendNode& b2)
+{
+  return (b1 < b2);
 }
 
 SceneGraph::SceneGraph()
@@ -19,6 +25,7 @@ SceneGraph::SceneGraph()
   m_nodesInFrustum = 0;
   m_nodesTotal = 0;
   m_isHeirarchy = false;
+  m_blendNodeComp = DefaultBlendNodeComp;
 }
 
 PSceneNode SceneGraph::GetRootNode(GraphType gt)
@@ -56,11 +63,7 @@ void SceneGraph::AddBlendNode(PSceneNode p)
   BlendNode bn;
   bn.m_sceneNode = p;
 
-  // Get dist to camera
-  // TODO Is this correct ?? Isn't it distance from pos to origin ?
-
-  //const Matrix& camMat = GetCamera()->m_combined;
-  //Vec3f camPos(camMat[12], camMat[13], camMat[14]);
+  // Get dist from camera to node p
 
   const Matrix& mat = p->m_combined;
   Vec3f pos(mat[12], mat[13], mat[14]);
@@ -68,6 +71,10 @@ void SceneGraph::AddBlendNode(PSceneNode p)
   Vec3f camPos = GetCamera()->GetEyePos(); 
 
   bn.m_screenZ = (camPos - pos).SqLen(); // ..??
+
+  // Store pos of node for other types of ordering
+  bn.m_pos = pos;
+
   m_blendNodes.push_back(bn);
 }
 
@@ -204,6 +211,11 @@ void SceneGraph::DrawChildren(
   node->AfterDraw();
 }
 
+void SceneGraph::SetBlendNodeComp(BlendNodeComp bnc)
+{
+  m_blendNodeComp = bnc;
+}
+
 void SceneGraph::Draw()
 {
   m_nodesInFrustum = 0;
@@ -285,7 +297,7 @@ void SceneGraph::Draw()
   }
 
   // Draw alpha-blended nodes
-  std::sort(m_blendNodes.begin(), m_blendNodes.end());
+  std::sort(m_blendNodes.begin(), m_blendNodes.end(), m_blendNodeComp);
   
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 

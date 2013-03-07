@@ -49,6 +49,21 @@ private:
   void UpdateNode(SceneNode* p);
   void UpdateChildren(SceneNode* p);
 
+public:
+  // Collection of alpha blended nodes
+  struct BlendNode
+  {
+    PSceneNode m_sceneNode;
+    float m_screenZ; // z distance from camera
+    Vec3f m_pos; // world coords
+
+    bool operator<(const BlendNode& bn) const;
+  };
+
+  typedef bool (*BlendNodeComp)(const BlendNode&, const BlendNode&);
+
+  void SetBlendNodeComp(BlendNodeComp bnc);
+
 private:
   // Array of nodes, for multiple passes ?
   PSceneNode m_root[AMJU_MAX_GT];
@@ -56,16 +71,10 @@ private:
   // Pointer to the camera node
   PSceneNodeCamera m_camera;
 
-  // Collection of alpha blended nodes
-  struct BlendNode
-  {
-    PSceneNode m_sceneNode;
-    float m_screenZ;
-
-    bool operator<(const BlendNode& bn) const;
-  };
   typedef std::vector<BlendNode> BlendNodes;
   BlendNodes m_blendNodes;
+
+  BlendNodeComp m_blendNodeComp;
 
   Frustum m_frustum;
   int m_nodesInFrustum;
