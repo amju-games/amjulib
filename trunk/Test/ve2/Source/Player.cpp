@@ -705,6 +705,7 @@ void Player::OnCollideFuel(FuelCell* f)
   // New behaviour:
   // Increment food count, if less than daily limit; make food invis.
   // Else: attach food to player, drag around. Give to other player we intersect.
+  Assert(!f->IsHidden());
 
   Ve1Object* owner = f->GetOwner();
 
