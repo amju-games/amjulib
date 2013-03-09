@@ -7,6 +7,11 @@ namespace Amju
 {
 void CollidePlayerPlayer(Player* p1, Player* p2)
 {
+  // Awesome: for player-player, we are allowed to overlap. The scene graph
+  //  should handle overlapping to give 2.5D effect.
+  return;
+
+  /*
   if (p1->IsHidden() || p2->IsHidden())
   {
     return;
@@ -46,6 +51,7 @@ void CollidePlayerPlayer(Player* p1, Player* p2)
   }
 
 std::cout << "Whoa, player " << p1->GetId() << " hit player " << p2->GetId() << "!!!\n";
+*/
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
