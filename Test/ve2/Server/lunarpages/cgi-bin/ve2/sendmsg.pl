@@ -30,10 +30,20 @@ sub sendmsg()
   update_or_insert($sql);
 
   # Set (key, value) for this player so other players will know to
-  #  retrieve new messages
-  $sql = "insert into objectstate (id, `key`, val, whenchanged) values ($sender, 'last_msg_sent', LAST_INSERT_ID(), now() ) on duplicate key update val=LAST_INSERT_ID(), whenchanged=now()";
+  #  retrieve new messages: if there's a valid recip id, set row for the recip.
+  # If there's a valid sender ID, set for the sender.
+  if ($recip > 0)
+  {
+    $sql = "insert into objectstate (id, `key`, val, whenchanged) values ($recip, 'last_msg_sent', LAST_INSERT_ID(), now() ) on duplicate key update val=LAST_INSERT_ID(), whenchanged=now()";
 
-  update_or_insert($sql);
+    insert($sql);
+  }
+  elsif ($sender > 0)
+  {
+    $sql = "insert into objectstate (id, `key`, val, whenchanged) values ($sender, 'last_msg_sent', LAST_INSERT_ID(), now() ) on duplicate key update val=LAST_INSERT_ID(), whenchanged=now()";
+
+    insert($sql);
+  }
 }
 
 
