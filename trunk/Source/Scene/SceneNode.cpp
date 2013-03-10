@@ -251,7 +251,7 @@ static const uint32 LIGHTING   = 0x10;
 
 bool SceneNode::IsLit() const
 {
-  return m_flags & LIGHTING;
+  return (m_flags & LIGHTING) != 0;
 }
 
 void SceneNode::SetIsLit(bool b)
