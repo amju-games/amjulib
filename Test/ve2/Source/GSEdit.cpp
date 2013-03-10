@@ -132,7 +132,10 @@ std::cout << "Got new object ID from server! " << id << "\n";
 #else
       Ve1Object* go = (Ve1Object*)TheGameObjectFactory::Instance()->Create(m_typename);
 
-      go->SetPos(GetVe1SceneGraph()->GetCamera()->GetEyePos());
+      Vec3f pos = GetVe1SceneGraph()->GetCamera()->GetLookAtPos();
+      // TODO Ideally find intersection with y = 0
+      pos.y = 1.0f; // TODO CONFIG
+      go->SetPos(pos);
 
       go->CreateEditNode();
 #endif
