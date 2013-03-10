@@ -6,7 +6,7 @@
 cogtest-first-test 0
 
 // Start position on new game/reset
-start-loc    57
+start-loc    1
 // This pos should be OK in all locations
 start-pos    0,0,0
 
@@ -44,7 +44,7 @@ npc-max-follow-dist  75.0
 
 // Camera
 // initial dist from cam to player
-cam-z           300
+cam-z           500
 // initial x rot (i.e. altitude angle)
 cam-xrot        20
 // User drag sensitivity
