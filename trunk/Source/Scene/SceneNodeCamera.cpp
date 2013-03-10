@@ -13,6 +13,11 @@ const Vec3f& SceneNodeCamera::GetEyePos() const
   return m_eye;
 }
 
+const Vec3f& SceneNodeCamera::GetLookAtPos() const
+{
+  return m_lookat;
+}
+
 void SceneNodeCamera::SetEyePos(const Vec3f& eye)
 {
   m_eye = eye;
