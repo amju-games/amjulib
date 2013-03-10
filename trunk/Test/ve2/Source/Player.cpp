@@ -597,13 +597,12 @@ void Player::SetMenu(GuiMenu* menu)
   if (IsLocalPlayer())
   {
     AddMenuItem("Change look", new CommandAvatarMod);
-/*
+
     // If carrying, drop is option
     if (m_carrying)
     {
       AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
     }
-*/
   }
   else if (IsLoggedIn())
   {
