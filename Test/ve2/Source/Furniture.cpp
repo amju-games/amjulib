@@ -159,6 +159,9 @@ bool Furniture::Load(File* f)
 
   Assert(mesh);
   SceneCollisionMesh* sm = new SceneCollisionMesh;
+
+  sm->SetBlended(true);
+
   sm->SetMesh(mesh);
   sm->CalcCollisionMesh();
   sm->GetCollisionMesh()->CalcAABB(&m_aabb);
@@ -238,7 +241,7 @@ std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
       TheGSMain::Instance()->ShowDropButton(this, false);
 
       m_sceneNode->SetColour(Colour(1, 1, 1, 1));
-      m_sceneNode->SetBlended(false);
+      //m_sceneNode->SetBlended(false);
     }
   }
   else
@@ -259,7 +262,7 @@ std::cout << "That's me! Local player picked up this object!\n";
         TheGSMain::Instance()->ShowDropButton(this, true);
 
         m_sceneNode->SetColour(Colour(1, 1, 1, 0.5f));
-        m_sceneNode->SetBlended(true);
+        //m_sceneNode->SetBlended(true);
       }
 
       Player* p = dynamic_cast<Player*>(go); // TODO Always a player ?
