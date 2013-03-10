@@ -279,7 +279,7 @@ void GSMain::Update()
   // TODO different message depending on game mode.
   // This message can be the same each time.
   FirstTimeMsgThisSession(
-    "Hello, <p>! This is ELLA, your space ship computer calling you. Do you remember what happened? We crash landed on a planet!", 
+    "Hello, <p>! In this game, you must feed your hungry friends!", 
     UNIQUE_MSG_ID,
     false);
 
