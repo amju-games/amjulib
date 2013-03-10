@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Cam2d.h"
 #include "Useful.h"
+#include "GameMode.h"
 
 #define CAM_2D
 
@@ -37,7 +38,14 @@ void ClearVe1SceneGraph()
   sg->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
 
 #ifdef CAM_2D
-  sg->SetCamera(new Cam2d);
+  if (GetGameMode() == AMJU_MODE_EDIT)
+  {
+    sg->SetCamera(new Camera);
+  }
+  else
+  {
+    sg->SetCamera(new Cam2d);
+  }
 #else
   sg->SetCamera(new Camera);
 #endif
