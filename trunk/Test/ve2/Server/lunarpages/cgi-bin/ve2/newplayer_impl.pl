@@ -82,7 +82,7 @@ sub new_player_impl($$$)
   #  to materialise in.
   my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
   my $z = rand(500) - 250;
-  my $startLoc = 57;
+  my $startLoc = 1;
 
   print "<br><br>Start location: ($x, $z)\n";
 
