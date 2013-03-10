@@ -16,9 +16,9 @@ std::string AssetUrlRoot()
   {
     first = false;
     std::string server = GetServer();
-    // Move from servage to lunarpages: all scripts must be under cgi-bin
+    // Move from servage to lunarpages: assets in root/ve2/assets/
     std::string env = GetEnv();
-    res = "http://" + server + "/assets/" + env + "/";
+    res = "http://" + server + "/" + env + "/assets/";
   }
   return res;
 }
