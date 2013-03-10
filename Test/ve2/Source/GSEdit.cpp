@@ -260,8 +260,9 @@ void GSEdit::Draw()
 
     // TODO Attempt to fix drag axes:
 
-    m_up = Vec3f(0, 1, 0); //mat[1], mat[5], mat[9]);
-    m_right = Vec3f(mat[0], mat[4], mat[8]);
+    // 2D: only (x, z) movement allowed
+    m_up = Vec3f(0, 0, 1); 
+    m_right = Vec3f(1, 0, 0);
 
     // Make sure m_right is only in (x, z) plane..?
     m_right.y = 0;
@@ -856,9 +857,6 @@ void GSEdit::CreateContextMenu()
 
     childMenu->AddChild(new GuiMenuItem("Building", 
       new NewObjectCommand(Building::TYPENAME, "none", "none")));
-
-    childMenu->AddChild(new GuiMenuItem("Skybox", 
-      new NewObjectCommand(Skybox::TYPENAME, "none", "none")));
 
     childMenu->AddChild(new GuiMenuItem("FuelCellManager", 
       new NewObjectCommand(FuelCellManager::TYPENAME, "none", "none", true)));
