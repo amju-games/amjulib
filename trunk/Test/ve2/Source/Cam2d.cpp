@@ -1,9 +1,8 @@
 #include "Cam2d.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
-static float HEIGHT = 300.0f;
-
 Cam2d::Cam2d()
 {
   m_target = 0;
@@ -18,6 +17,7 @@ void Cam2d::Update()
   }
 
   SetLookAtPos(pos);
+  static const float HEIGHT = ROConfig()->GetFloat("cam-z", 300.0f);
   SetEyePos(pos + Vec3f(0, HEIGHT, 2.0f)); // TODO TEMP TEST
 }
 
