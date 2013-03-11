@@ -14,14 +14,17 @@ sub myfileup_impl()
 {
   my $name_in_form = "filename";
   my $directory = param('dir');
-  my $upload_dir = "../assets/$directory/";
+
+  # NB This path is new for lunarpages. 
+  #  public_html/ve2/assets/
+  my $upload_dir = "../../ve2/assets/$directory/";
  
   #unless(-e $upload_dir or mkdir $upload_dir) 
   #{
   #  die "Unable to create dir $directory ($upload_dir)\n";
   #}
 
-  # Will fail after first time 
+  # Will fail after first time, but that's ok 
   mkdir $upload_dir;
 
   $CGI::POST_MAX = 1024 * 500; 
