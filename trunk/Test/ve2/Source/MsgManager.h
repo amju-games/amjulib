@@ -15,6 +15,11 @@ class MsgManager : public NonCopyable
 public:
   void Update(); // check queue
   void CheckForNewMsgs();  // send req to server
+
+  // Special sender/recipient codes for SendMsg()
+  static const int BROADCAST_RECIP = -2; // use as recip ID
+  static const int SYSTEM_SENDER = -3; // use as sender ID
+
   void SendMsg(int senderId, int recipId, const std::string& msg);
   
   struct Msg

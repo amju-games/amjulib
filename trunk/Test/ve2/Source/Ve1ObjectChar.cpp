@@ -23,7 +23,7 @@ static const float BOUNCE_VEL = -50.0f;
 
 //static const char* TYPE_KEY = "type";
 //static const char* TEX_KEY = "tex";
-static const char* AVATAR_KEY = "avatar";
+//static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
 static const char* STAMINA_KEY = "stamina";
 

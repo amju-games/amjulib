@@ -31,7 +31,7 @@
 
 namespace Amju
 {
-static const char* CACHE_FILENAME = "objects_created_cache.txt";
+//static const char* CACHE_FILENAME = "objects_created_cache.txt";
 
 std::ostream& operator<<(std::ostream& os, const Object& obj)
 {

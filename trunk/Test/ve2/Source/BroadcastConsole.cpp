@@ -50,8 +50,7 @@ void BroadcastConsole::OnEnter()
   if (!str.empty())
   {
     m_edit->SetText("");
-    static const int BROADCAST = -2;
-    TheMsgManager::Instance()->SendMsg(GetLocalPlayerId(), BROADCAST, str);
+    TheMsgManager::Instance()->SendMsg(GetLocalPlayerId(), MsgManager::BROADCAST_RECIP, str);
   }
 }
 
