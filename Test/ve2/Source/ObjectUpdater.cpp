@@ -21,7 +21,7 @@
 
 namespace Amju
 {
-static const char* CACHE_FILENAME = "object_state_cache.txt";
+//static const char* CACHE_FILENAME = "object_state_cache.txt";
 
 ObjectUpdater::ObjectUpdater() : m_timestampPos(1), m_timestampUpdate(1)
 {

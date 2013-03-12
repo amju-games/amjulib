@@ -36,7 +36,6 @@
 #include "ObjectManager.h"
 #include "FuelCount.h"
 #include "Spaceship.h"
-#include "FuelCount.h"
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
 #include "FuelCell.h"
@@ -48,10 +47,11 @@ namespace Amju
 static const std::string FUELCELL_KEY = "fuelcells";
 static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
 
-static const char* FOOD_KEY = "food";
+static const char* FOOD_RECEIVED_KEY = "food-recv";
+static const char* FOOD_GIVEN_KEY = "food-given";
 
-static const float ARROW_XSIZE = 5.0f;
-static const float ARROW_YSIZE = 30.0f;
+//static const float ARROW_XSIZE = 5.0f;
+//static const float ARROW_YSIZE = 30.0f;
 
 // Name tag scene node
 class PlayerNameNode : public SceneNode
@@ -622,15 +622,16 @@ void Player::SetMenu(GuiMenu* menu)
   }
 }
 
-int Player::GetFoodCount()
+int Player::GetFoodRecvCount()
 {
-  if (Exists(FOOD_KEY))
+  if (Exists(FOOD_RECEIVED_KEY))
   {
-    std::string s = GetVal(FOOD_KEY);
+    std::string s = GetVal(FOOD_RECEIVED_KEY);
     int i = ToInt(s);
     return i;
   }
-  Assert(0);
+std::cout << "No food recv count for player " << *this << "\n";
+//  Assert(0);
   return 0;
 }
 
@@ -645,16 +646,11 @@ void Player::EatFood(FuelCell* f)
     Assert(GetLocalPlayer() != this);
 
     // Inc count of this (recipient) player on server
-    ChangeObjCount(GetId(), FOOD_KEY, +1);
+    ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
 
-/*
-    // DOH!! THIS NEEDS TO HAPPEN ON THE OTHER PLAYER'S MACHINE!!!
-    std::string otherPlayer = GetPlayerName(owner->GetId());
-    if (otherPlayer.empty())
-    {
-      otherPlayer = "That other player";
-    }
-*/
+    // Inc count of food given by the local player
+    ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1);
+
     std::string recipName = GetPlayerName(GetId());
 
     LurkMsg lm("You gave some food to " + recipName + "!", 
@@ -667,10 +663,13 @@ void Player::EatFood(FuelCell* f)
     {
       otherPlayer = "That other player";
     }
-    TheMsgManager::Instance()->SendMsg(-3, GetId(), otherPlayer + " gave you some food!");
+    TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
   }
   else
   {
+    Assert(0);
+
+/*
     // Inc local player count on server
     ChangeFoodCount(+1);
 
@@ -693,6 +692,7 @@ void Player::EatFood(FuelCell* f)
         LURK_FG, LURK_BG, AMJU_CENTRE); 
       TheLurker::Instance()->Queue(lm);    
     }
+*/
   }
 
   f->SetHidden(true);
@@ -708,39 +708,45 @@ void Player::OnCollideFuel(FuelCell* f)
 
   Ve1Object* owner = f->GetOwner();
 
+/*
   if (!Exists(FOOD_KEY))
   {
     // Don't yet know if we are hungry or not - wait till we get count
     return;
   }
+*/
 
-  bool weAreHungry = GetFoodCount() < DailyFoodCount();
+  //bool weAreHungry = GetFoodCount() < DailyFoodCount();
 
   if (owner == this)
   {
     // We are already carrying this food
     return;
   }
+/*
   else if (owner && !weAreHungry) 
   {
     // Another player is carrying this food. 
     // We are not hungry, so we don't take the food. 
     return;
   }
-  else if (owner && weAreHungry)
+*/
+  else if (owner) // && weAreHungry)
   {
     // Another player is carrying this food. 
     // We are hungry, so we eat it.
     // The other player should get some reward for feeding us.
     EatFood(f);
   }
+/*
   else if (!owner && weAreHungry)
   {
     // Noone is carrying the food. 
     // We are hungry, so we eat it.
     EatFood(f);
   }
-  else if (!owner && !weAreHungry)
+*/
+  else if (!owner) // && !weAreHungry)
   {
     // Noone is carrying the food. 
     // We are not hungry, so we pick up the food. 
@@ -754,7 +760,9 @@ void Player::OnCollideFuel(FuelCell* f)
   }
 
   static GSMain* gsm = TheGSMain::Instance();
-  gsm->SetFuelCells(GetFoodCount());    
+
+  // TODO Given and received counts
+  gsm->SetFuelCells(GetFoodRecvCount());    
 }
 
 float Player::GetViewDist() const
