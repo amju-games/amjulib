@@ -39,26 +39,6 @@ bool Layer::Load(File* f)
 std::cout << "Layer group: loaded " << numTextures << " textures ok.\n";
 #endif
 
-  int numColours = 0;
-  if (!f->GetInteger(&numColours))
-  {
-    f->ReportError("Failed to load num colours for layer group " + m_name);
-    return false;
-  }
-  for (int i = 0; i < numColours; i++)
-  {
-    std::string s;
-    if (!f->GetDataLine(&s))
-    {
-      f->ReportError("Failed to load colour for layer group " + m_name);
-      return false;
-    }
-    Colour col = FromHexString(s); // TODO error checking ?
-    m_colours.push_back(col);
-  }
-#ifdef LAYER_DEBUG
-std::cout << "Layer group: loaded " << numColours << " colours ok.\n";
-#endif
 
   return true;
 }
@@ -98,6 +78,28 @@ bool LayerGroupManager::Load(File* f)
 #ifdef LAYER_DEBUG
 std::cout << "Success! Loaded " << numGroups << " layer groups.\n";
 #endif
+
+  int numColours = 0;
+  if (!f->GetInteger(&numColours))
+  {
+    f->ReportError("Failed to load num colours for layer group manager");
+    return false;
+  }
+  for (int i = 0; i < numColours; i++)
+  {
+    std::string s;
+    if (!f->GetDataLine(&s))
+    {
+      f->ReportError("Failed to load colour for layer group manager");
+      return false;
+    }
+    Colour col = FromHexString(s); // TODO error checking ?
+    m_colours.push_back(col);
+  }
+#ifdef LAYER_DEBUG
+std::cout << "Layer group: loaded " << numColours << " colours ok.\n";
+#endif
+
   return true;
 }
 
@@ -111,9 +113,9 @@ int LayerGroupManager::GetNumTextures(int layer) const
   return m_layers[layer].m_textures.size();
 }
 
-int LayerGroupManager::GetNumColours(int layer) const
+int LayerGroupManager::GetNumColours() const
 {
-  return m_layers[layer].m_colours.size();
+  return m_colours.size();
 }
 
 Texture* LayerGroupManager::GetTexture(int layer, int num) const
@@ -121,9 +123,9 @@ Texture* LayerGroupManager::GetTexture(int layer, int num) const
   return m_layers[layer].m_textures[num];
 }
 
-const Colour& LayerGroupManager::GetColour(int layer, int num) const
+const Colour& LayerGroupManager::GetColour(int num) const
 {
-  return m_layers[layer].m_colours[num];
+  return m_colours[num];
 }
 
 int LayerGroups::GetCurrentLayer() const
@@ -175,6 +177,14 @@ void LayerGroups::PrevTexture()
 }
 
 
+void LayerGroups::SetColour(int c)
+{
+  //static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+  LayerSet& g = m_layers[m_currentLayer];
+  g.m_currentColour = c;
+}
+
+/*
 void LayerGroups::NextColour()
 {
   static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
@@ -198,6 +208,7 @@ void LayerGroups::PrevColour()
     g.m_currentColour = lgm->GetNumColours(m_currentLayer) - 1;
   }
 }
+*/
 
 int LayerGroups::GetNumTextures() const
 {
@@ -205,11 +216,13 @@ int LayerGroups::GetNumTextures() const
   return lgm->GetNumTextures(m_currentLayer);
 }
 
+/*
 int LayerGroups::GetNumColours() const
 {
   static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
   return lgm->GetNumColours(m_currentLayer);
 }
+*/
 
 void LayerGroups::SetSprite(LayerSprite* sprite)
 {
@@ -222,7 +235,7 @@ void LayerGroups::SetSprite(LayerSprite* sprite)
     LayerSet& g = m_layers[i];
 
     Texture* tex = lgm->GetTexture(i, g.m_currentTexture);
-    const Colour& col = lgm->GetColour(i, g.m_currentColour);
+    const Colour& col = lgm->GetColour(g.m_currentColour);
 
     SpriteLayer sl(i, tex, col, g.m_currentTexture, g.m_currentColour);
     sprite->AddLayer(sl);

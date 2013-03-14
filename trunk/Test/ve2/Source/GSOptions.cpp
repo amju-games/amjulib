@@ -19,6 +19,7 @@ static void OnBack()
   TheGSOptions::Instance()->GoBack();
 }
 
+/*
 static void OnSound()
 {
 }
@@ -26,6 +27,7 @@ static void OnSound()
 static void OnFullscreen()
 {
 }
+*/
 
 static void OnInternet()
 {

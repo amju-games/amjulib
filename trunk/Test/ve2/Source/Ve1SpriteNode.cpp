@@ -35,7 +35,7 @@ Ve1SpriteNode::Ve1SpriteNode()
   for (int i = 0; i < numLayers; i++)
   {
     // Fof layer i, set tex 0 and colour 0
-    m_sprite.AddLayer(SpriteLayer(i, lgm->GetTexture(i, 0), lgm->GetColour(i, 0), 0, 0));  
+    m_sprite.AddLayer(SpriteLayer(i, lgm->GetTexture(i, 0), lgm->GetColour(0), 0, 0));  
   }
 }
 

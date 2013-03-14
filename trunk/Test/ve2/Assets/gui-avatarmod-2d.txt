@@ -4,9 +4,9 @@
 // Element type
 gui-comp
 // Name
-hud-comp
+avatar-config-comp
 // Num children
-9
+10
 
 
 // Buttons for avatar type 
@@ -148,4 +148,64 @@ text1
 Modify your avatar... 
 // Font name, size
 arial, 1.0, fgcol=ffffff
+
+
+// colour select composite
+gui-comp
+colour-select
+// num children
+4
+// colour button 1
+gui-button
+colour-button-1
+// pos
+0, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+// colour button 2
+gui-button
+colour-button-2
+// pos
+0.2, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-3
+// pos
+0.4, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-4
+// pos
+0.6, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
 
