@@ -154,7 +154,7 @@ arial, 1.0, fgcol=ffffff
 gui-comp
 colour-select
 // num children
-4
+10
 // colour button 1
 gui-button
 colour-button-1
@@ -200,6 +200,84 @@ gui-button
 colour-button-4
 // pos
 0.6, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-5
+// pos
+0.8, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-6
+// pos
+1.0, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-7
+// pos
+1.2, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-8
+// pos
+1.4, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-9
+// pos
+1.6, -0.5
+// size
+0.2, 0.2
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-10
+// pos
+1.8, -0.5
 // size
 0.2, 0.2
 // image

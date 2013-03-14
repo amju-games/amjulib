@@ -179,12 +179,13 @@ void GS2dAvatarMod::OnActive()
   cancel->SetCommand(Amju::OnCancel);
 
   // Set colour buttons
-  for (int i = 0; i < 4; i++)
+  LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+  for (int i = 0; i < 10; i++)
   {
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "colour-button-" + 
       ToString(i + 1));
     Assert(b);
-    Colour c;// TODO TEMP TEST - look up
+    Colour c = lgm->GetColour(i);
     b->SetButtonColour(c); 
     b->SetCommand(new ColourCommand(i));
   }
