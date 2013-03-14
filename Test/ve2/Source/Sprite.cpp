@@ -127,7 +127,7 @@ void LayerSprite::SetLayerTex(int layer, int texIndex)
 
 void LayerSprite::SetLayerColour(int layer, int colIndex)
 {
-  const Colour& col = TheLayerGroupManager::Instance()->GetColour(layer, colIndex);
+  const Colour& col = TheLayerGroupManager::Instance()->GetColour(colIndex);
   m_map[layer].colour = col;
   m_map[layer].colIndex = colIndex;
 }

@@ -13,12 +13,10 @@ public:
 
 private:
   typedef std::vector<PTexture> Textures;
-  typedef std::vector<Colour> Colours;
 
   friend class LayerGroupManager;
 
   Textures m_textures;
-  Colours m_colours;
   std::string m_name;
 };
 
@@ -35,14 +33,18 @@ public:
   int GetNumLayers() const;
 
   int GetNumTextures(int layer) const;
-  int GetNumColours(int layer) const;
-
   Texture* GetTexture(int layer, int num) const;
-  const Colour& GetColour(int layer, int num) const;
+
+  int GetNumColours() const;
+  const Colour& GetColour(int num) const;
 
 private:
   typedef std::vector<Layer> Layers;
   Layers m_layers;
+
+  // Choice of colours is the same for all layers
+  typedef std::vector<Colour> Colours;
+  Colours m_colours;
 };
 
 typedef Singleton<LayerGroupManager> TheLayerGroupManager; 
@@ -64,8 +66,12 @@ public:
   // Go to the next/prev texture for the current layer
   void NextTexture();
   void PrevTexture();
+
   void NextColour();
   void PrevColour();
+
+  // Set colour index for the currently active layer
+  void SetColour(int);
 
   // Return num textures in the currently active layer
   int GetNumTextures() const;

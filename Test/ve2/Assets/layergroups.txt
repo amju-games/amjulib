@@ -2,8 +2,8 @@
 1
 
 // Layer groups for 2D avatar customisation
-// Each group has a list of textures and colours. One texture and one
-//  colour is enabled for each group.
+// Each group has a list of textures. There is also one shared list of colours. 
+// One texture and one colour is enabled for each layer group.
 
 // num layer groups
 7
@@ -13,21 +13,13 @@ Head
 // num textures for this layer group
 1
 characters/2d/head.png
-// num colours
-4
-efc089
-ce9552
-805c32
-473623
+
 
 // layer group name
 Eyes
 // Num textures
 1
 characters/2d/eyes1.png
-// num colours
-1
-000000
 // TODO different eye colours; eye gaze dir
 
 
@@ -38,26 +30,13 @@ Hair
 characters/2d/hair1.png
 characters/2d/hair2.png
 characters/2d/blank.png
-// num colours
-6
-000000
-eeeeee
-f8e32e
-7a4c20
-ff0000
-f95bdd
+
 
 // layer group name
 Legs
 // Num textures
 1
 characters/2d/legs2.png
-// num colours
-4
-efc089
-ce9552
-805c32
-473623
 
 
 // layer group name
@@ -65,12 +44,6 @@ Body
 // Num textures
 1
 characters/2d/body1.png
-// num colours
-4
-efc089
-ce9552
-805c32
-473623
 
 
 // layer group name
@@ -79,12 +52,7 @@ Trousers, skirt etc
 2
 characters/2d/trousers.png
 characters/2d/blank.png
-// num colours
-4
-000000
-ff0000
-00ff00
-0000ff
+
 
 // layer group name
 Tops
@@ -93,10 +61,24 @@ Tops
 characters/2d/top1.png
 characters/2d/top2.png
 characters/2d/blank.png
+
+// -----------------------------------------------------------
 // num colours
-4
+16
+ffffff
+000000
+eeeeee
+f8e32e
+7a4c20
+ffff00
+f95bdd
+efc089
+ce9552
+805c32
+473623
 000000
 ff0000
 00ff00
 0000ff
+ffffff
 

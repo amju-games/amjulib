@@ -40,6 +40,7 @@ void OnPrevTex()
   TheGS2dAvatarMod::Instance()->OnPrevTex();
 }
 
+/*
 void OnNextCol()
 {
   TheGS2dAvatarMod::Instance()->OnNextCol();
@@ -49,7 +50,22 @@ void OnPrevCol()
 {
   TheGS2dAvatarMod::Instance()->OnPrevCol();
 }
+*/
 
+class ColourCommand : public GuiCommand
+{
+public:
+  ColourCommand(int colour) : m_colour(colour) {}
+
+  virtual bool Do()
+  {
+    TheGS2dAvatarMod::Instance()->OnSetColour(m_colour);
+    return false;
+  }
+
+private:
+  int m_colour;
+};
 
 GS2dAvatarMod::GS2dAvatarMod()
 {
@@ -144,6 +160,7 @@ void GS2dAvatarMod::OnActive()
   Assert(prevTex);
   prevTex->SetCommand(Amju::OnPrevTex);
 
+/*
   GuiButton* nextCol = (GuiButton*)GetElementByName(m_gui, "col-next-button");
   Assert(nextCol);
   nextCol->SetCommand(Amju::OnNextCol);
@@ -151,6 +168,7 @@ void GS2dAvatarMod::OnActive()
   GuiButton* prevCol = (GuiButton*)GetElementByName(m_gui, "col-prev-button");
   Assert(prevCol);
   prevCol->SetCommand(Amju::OnPrevCol);
+*/
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   Assert(ok);
@@ -160,7 +178,18 @@ void GS2dAvatarMod::OnActive()
   Assert(cancel);
   cancel->SetCommand(Amju::OnCancel);
 
-  // TODO Set layer groups from player
+  // Set colour buttons
+  for (int i = 0; i < 4; i++)
+  {
+    GuiButton* b = (GuiButton*)GetElementByName(m_gui, "colour-button-" + 
+      ToString(i + 1));
+    Assert(b);
+    Colour c;// TODO TEMP TEST - look up
+    b->SetButtonColour(c); 
+    b->SetCommand(new ColourCommand(i));
+  }
+ 
+  // Set layer groups from player
   m_layerGroups.SetFromSprite(GetLocalPlayer()->GetSprite());
   m_layerGroups.SetSprite(&m_sprite);
 }
@@ -191,6 +220,7 @@ void GS2dAvatarMod::OnPrevTex()
   m_layerGroups.SetSprite(&m_sprite);
 }
 
+/*
 void GS2dAvatarMod::OnNextCol()
 {
   m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
@@ -202,6 +232,14 @@ void GS2dAvatarMod::OnPrevCol()
 {
   m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
   m_layerGroups.PrevColour();
+  m_layerGroups.SetSprite(&m_sprite);
+}
+*/
+
+void GS2dAvatarMod::OnSetColour(int colour)
+{
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+  m_layerGroups.SetColour(colour);
   m_layerGroups.SetSprite(&m_sprite);
 }
 

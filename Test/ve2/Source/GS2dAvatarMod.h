@@ -27,6 +27,7 @@ public:
   void OnPrevCol();
   void OnOk();
   void OnCancel();
+  void OnSetColour(int colour);
 
 private:
   LayerSprite m_sprite; // shows the current settings
