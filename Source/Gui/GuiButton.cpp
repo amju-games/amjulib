@@ -212,8 +212,10 @@ void GuiButton::Draw()
     PopColour();
   }
 
-
+  PushColour();
+  AmjuGL::SetColour(m_buttonColour);
   GuiImage::Draw();
+  PopColour();
 
   //PushColour();
   float a = 1.0f;
@@ -352,6 +354,11 @@ void GuiButton::SetText(const std::string& text)
 void GuiButton::SetTextColour(const Colour& col)
 {
   m_textColour = col;
+}
+
+void GuiButton::SetButtonColour(const Colour& col)
+{
+  m_buttonColour = col;
 }
 
 bool GuiButton::IsMouseOver() const

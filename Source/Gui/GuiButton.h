@@ -31,6 +31,7 @@ public:
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);
+  void SetButtonColour(const Colour& col);
 
   bool IsMouseOver() const;
   bool IsPressed() const;
@@ -56,6 +57,7 @@ private:
 protected:
   GuiText m_guiText;
   Colour m_textColour;
+  Colour m_buttonColour;
 
   bool m_isMouseOver; // Draw bigger
   bool m_isPressed; // Draw offset right/down
