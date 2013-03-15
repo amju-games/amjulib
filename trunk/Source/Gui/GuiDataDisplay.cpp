@@ -43,7 +43,7 @@ void ChartData::AddRow(const ChartData::Row& r)
   if (!m_rows.empty())
   {
     // Check num y vals same as previous row
-    Assert(m_rows[0].second.size() == m_numYVals);
+    Assert((int)m_rows[0].second.size() == m_numYVals);
   }
   m_rows.push_back(r);
 
