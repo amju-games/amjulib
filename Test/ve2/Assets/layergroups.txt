@@ -6,13 +6,13 @@
 // One texture and one colour is enabled for each layer group.
 
 // num layer groups
-7
+5
 
 // layer group name
-Head
+Skin
 // num textures for this layer group
 1
-characters/2d/head.png
+characters/2d/skin.png
 
 
 // layer group name
@@ -30,20 +30,6 @@ Hair
 characters/2d/hair1.png
 characters/2d/hair2.png
 characters/2d/blank.png
-
-
-// layer group name
-Legs
-// Num textures
-1
-characters/2d/legs2.png
-
-
-// layer group name
-Body
-// Num textures
-1
-characters/2d/body1.png
 
 
 // layer group name

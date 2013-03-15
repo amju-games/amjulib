@@ -46,11 +46,23 @@ LayerSprite& Ve1SpriteNode::GetSprite()
 
 void Ve1SpriteNode::SetLayerTex(int layer, int texIndex)
 {
+  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+  if (layer >= lgm->GetNumLayers())
+  {
+    return;
+  }
+
   m_sprite.SetLayerTex(layer, texIndex);
 }
 
 void Ve1SpriteNode::SetLayerColour(int layer, int colIndex)
 {
+  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+  if (layer >= lgm->GetNumLayers())
+  {
+    return;
+  }
+
   m_sprite.SetLayerColour(layer, colIndex);
 }
 
