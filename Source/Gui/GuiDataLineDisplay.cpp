@@ -13,6 +13,12 @@ GuiElement* CreateDataLineDisplay()
   return new GuiDataLineDisplay;
 }
 
+// TODO Thickness; draw area under line
+void DrawLine(const Vec2f& v1, const Vec2f& v2)
+{
+  AmjuGL::DrawLine(AmjuGL::Vec3(v1.x, v1.y, 0), AmjuGL::Vec3(v2.x, v2.y, 0));
+}
+
 bool GuiDataLineDisplay::Load(File* f)
 {
   // Get name, pos, size
@@ -26,16 +32,12 @@ bool GuiDataLineDisplay::Load(File* f)
 
 void GuiDataLineDisplay::Draw()
 {
-  // TODO TEMP TEST Draw background
+  // Draw background - TODO Colour
   DrawFilled(this, Colour(1, 1, 1, 1), 0);
 
-  ChartData test;
-  test.AddRowSimple(2, 5);
-  test.AddRowSimple(3, 7);
-  test.AddRowSimple(-1, 4);
-  test.AddRowSimple(7, 2);
+  // TODO Draw grid lines?
 
-  ChartData* data = &test; // TODO GetData();
+  ChartData* data = GetData();
   if (!data)
   {
     return;
@@ -74,16 +76,18 @@ std::cout << "No data for chart.\n";
     Assert(yRange >= 0);
 
     // Draw each data row. TODO colours for each row..? Or auto generate
+    Vec2f prevLineSegEnd; // point in previous iteration, to draw line 
     for (int i = 0; i < numRows; i++)
     {
-      const ChartData::Row& row = data->m_rows[i]; // TODO GetRow()
+      const ChartData::Row& row = data->GetRow(i);
       // Get x-coord for this xval
       ChartData::XTYPE xVal = row.first;
       ChartData::YTYPE yVal = row.second[yv];
 
       float xPos = ((float)(xVal - minX)) / xRange * xSize + xChartPos;
       float yPos = ((float)(yVal - minY)) / yRange * ySize + yChartPos - ySize;
- 
+
+#ifdef CHART_DEBUG 
 std::cout 
   << "Chart row " << i 
   << " xVal: " << xVal 
@@ -95,6 +99,7 @@ std::cout
   << " xChartPos: " << xChartPos 
   << " yChartPos: " << yChartPos 
   << "\n";
+#endif
 
        static const float S = 0.01f;
        Rect rect(xPos - S, xPos + S, yPos - S, yPos + S);
@@ -102,8 +107,16 @@ std::cout
        AmjuGL::SetColour(Colour(1, 0, 0, 1));
        AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
        DrawSolidRect(rect);
+
+       Vec2f lineSegEnd(xPos, yPos);
+       if (i > 0)
+       {
+         DrawLine(lineSegEnd, prevLineSegEnd);
+       }
        AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
        PopColour();
+
+       prevLineSegEnd = lineSegEnd;
     }
   }
 }
