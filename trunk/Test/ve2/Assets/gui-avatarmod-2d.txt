@@ -6,7 +6,49 @@ gui-comp
 // Name
 avatar-config-comp
 // Num children
-10
+13
+
+// Buttons for selecting layer
+gui-button
+layer-button-0
+-0.9, 0.5
+0.6, 0.15
+gui-button-4.png
+hair
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-1
+-0.9, 0.3
+0.6, 0.15
+gui-button-4.png
+skin
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-2
+-0.9, 0.1
+0.6, 0.15
+gui-button-4.png
+eyes
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-3
+-0.9, -0.1
+0.6, 0.15
+gui-button-4.png
+tops
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-4
+-0.9, -0.3
+0.6, 0.15
+gui-button-4.png
+bottoms
+arial, 1.5, sx=0.8
+
 
 
 // Buttons for avatar type 
@@ -15,7 +57,7 @@ gui-button
 // Element name
 layer-prev-button
 // pos (coords are -1..1)
--1.0, 0.3
+-1.0, 2.0 
 // size
 0.8, 0.2
 // Image
@@ -30,7 +72,7 @@ gui-button
 // Element name
 layer-next-button
 // pos (coords are -1..1)
-0.2, 0.3
+0.2, 2.0 
 // size
 0.8, 0.2
 // Image
@@ -46,7 +88,7 @@ gui-button
 // Element name
 tex-prev-button
 // pos (coords are -1..1)
--1.0, 0 
+0.2, -0.25 
 // size
 0.8, 0.2
 // Image
@@ -68,38 +110,6 @@ tex-next-button
 gui-button-4.png
 // Text
 next tex >
-// Font name, size
-arial, 2.0, sx=0.8
-
-
-
-// element type
-gui-button
-// Element name
-col-prev-button
-// pos (coords are -1..1)
--1.0, -0.3
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-< prev colour
-// Font name, size
-arial, 2.0, sx=0.8
-
-// element type
-gui-button
-// Element name
-col-next-button
-// pos (coords are -1..1)
-0.2, -0.3
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-next colour >
 // Font name, size
 arial, 2.0, sx=0.8
 
@@ -159,9 +169,9 @@ colour-select
 gui-button
 colour-button-1
 // pos
-0, -0.5
+-0.8, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -173,9 +183,9 @@ arial, 1.0
 gui-button
 colour-button-2
 // pos
-0.2, -0.5
+-0.7, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -186,9 +196,9 @@ arial, 1.0
 gui-button
 colour-button-3
 // pos
-0.4, -0.5
+-0.6, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -199,9 +209,9 @@ arial, 1.0
 gui-button
 colour-button-4
 // pos
-0.6, -0.5
+-0.5, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -212,9 +222,9 @@ arial, 1.0
 gui-button
 colour-button-5
 // pos
-0.8, -0.5
+-0.4, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -225,9 +235,9 @@ arial, 1.0
 gui-button
 colour-button-6
 // pos
-1.0, -0.5
+-0.3, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -238,9 +248,9 @@ arial, 1.0
 gui-button
 colour-button-7
 // pos
-1.2, -0.5
+-0.2, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -251,9 +261,9 @@ arial, 1.0
 gui-button
 colour-button-8
 // pos
-1.4, -0.5
+-0.1, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -264,9 +274,9 @@ arial, 1.0
 gui-button
 colour-button-9
 // pos
-1.6, -0.5
+0.0, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
@@ -277,9 +287,9 @@ arial, 1.0
 gui-button
 colour-button-10
 // pos
-1.8, -0.5
+0.1, -0.5
 // size
-0.2, 0.2
+0.1, 0.1
 // image
 colour-button.png
 // text
