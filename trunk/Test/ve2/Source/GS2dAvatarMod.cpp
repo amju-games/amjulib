@@ -185,6 +185,7 @@ void GS2dAvatarMod::OnActive()
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "colour-button-" + 
       ToString(i + 1));
     Assert(b);
+    b->SetText("");
     Colour c = lgm->GetColour(i);
     b->SetButtonColour(c); 
     b->SetCommand(new ColourCommand(i));
@@ -220,22 +221,6 @@ void GS2dAvatarMod::OnPrevTex()
   m_layerGroups.PrevTexture();
   m_layerGroups.SetSprite(&m_sprite);
 }
-
-/*
-void GS2dAvatarMod::OnNextCol()
-{
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.NextColour();
-  m_layerGroups.SetSprite(&m_sprite);
-}
-
-void GS2dAvatarMod::OnPrevCol()
-{
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.PrevColour();
-  m_layerGroups.SetSprite(&m_sprite);
-}
-*/
 
 void GS2dAvatarMod::OnSetColour(int colour)
 {
