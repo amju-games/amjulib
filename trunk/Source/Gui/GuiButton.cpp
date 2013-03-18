@@ -131,6 +131,9 @@ bool GuiButton::Load(File* f)
   {
     return false;
   }
+  // Button textures don't wrap
+  GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
+
   // Load text
   if (!m_guiText.LoadText(f))
   {

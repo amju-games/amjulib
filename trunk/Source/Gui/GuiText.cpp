@@ -436,6 +436,13 @@ bool GuiText::LoadText(File* f)
     f->ReportError("GUI Text: Expected localised string");
     return false;
   }
+
+  // Special code for empty string - because an actual empty string will be ignored
+  if (s == "@@@")
+  {
+    s = "";
+  }
+
   SetText(s);
 
   // TODO Flags for multiline/word wrap
