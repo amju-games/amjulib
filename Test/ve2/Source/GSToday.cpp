@@ -115,7 +115,7 @@ void GSToday::OnActive()
 
   GuiText* dateText = (GuiText*)GetElementByName(m_gui, "date-text");
   Time now = Time::Now();
-  dateText->SetText(now.ToString()); // TODO just the date part
+  dateText->SetText(now.ToStringJustDate()); 
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "long-text");
   std::string str;
