@@ -15,16 +15,48 @@
 
 namespace Amju
 {
+AmjuGL::TextureFilter Texture::s_defaultFilter = AmjuGL::AMJU_TEXTURE_NICE;
+AmjuGL::TextureMode Texture::s_defaultWrapMode = AmjuGL::AMJU_TEXTURE_WRAP;
+
+void Texture::SetDefaultFilter(AmjuGL::TextureFilter tf)
+{
+  s_defaultFilter = tf;
+}
+
+void Texture::SetDefaultWrapMode(AmjuGL::TextureMode tm)
+{
+  s_defaultWrapMode = tm;
+}
+
 Texture::Texture()
 {
   m_texId = -1;
   m_width = 0;
   m_height = 0;
+
+  m_filter = s_defaultFilter;
+  m_wrapMode = s_defaultWrapMode;
+  m_textureType = AmjuGL::AMJU_TEXTURE_REGULAR;
 }
 
 Texture::~Texture()
 {
   AmjuGL::DestroyTextureHandle(&m_texId);
+}
+
+void Texture::SetFilter(AmjuGL::TextureFilter tf)
+{
+  m_filter = tf;
+}
+
+void Texture::SetWrapMode(AmjuGL::TextureMode tm)
+{
+  m_wrapMode = tm;
+}
+
+void Texture::SetTextureType(AmjuGL::TextureType tt)
+{
+  m_textureType = tt;
 }
 
 AmjuGL::TextureHandle Texture::GetId() const
@@ -116,6 +148,11 @@ void Texture::UseThisTexture()
   // Will be false if using console only for debugging
 //  Assert(m_texId != (AmjuGL::TextureHandle)-1);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+
+  AmjuGL::SetTextureFilter(m_filter); // nicest or nearest
+  AmjuGL::SetTextureType(m_textureType); // env map or UV coords
+  AmjuGL::SetTextureMode(m_wrapMode); // wrap or clamp
+
   AmjuGL::UseTexture(m_texId);
 }
 }

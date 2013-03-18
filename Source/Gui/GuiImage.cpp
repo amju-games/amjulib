@@ -79,4 +79,10 @@ void GuiImage::SetTexture(Texture* tex)
 {
   m_texture = tex;
 }
+
+Texture* GuiImage::GetTexture()
+{
+  return m_texture;
+}
+
 }

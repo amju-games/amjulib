@@ -15,6 +15,7 @@ public:
   virtual bool Load(File*);
 
   void SetTexture(Texture* tex);
+  Texture* GetTexture();
 
 private:
   void BuildTris();
