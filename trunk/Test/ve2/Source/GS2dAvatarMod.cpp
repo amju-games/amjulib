@@ -20,37 +20,28 @@ void OnCancel()
   TheGS2dAvatarMod::Instance()->OnCancel();
 }
 
-void OnNextLayer()
+static const float SCALE = 0.1f; // scale increments
+
+void OnShorter()
 {
-  TheGS2dAvatarMod::Instance()->OnNextLayer();
+  TheGS2dAvatarMod::Instance()->OnScale(Vec2f(0, -SCALE));
 }
 
-void OnPrevLayer()
+void OnTaller()
 {
-  TheGS2dAvatarMod::Instance()->OnPrevLayer();
+  TheGS2dAvatarMod::Instance()->OnScale(Vec2f(0, +SCALE));
 }
 
-void OnNextTex()
+void OnThinner()
 {
-  TheGS2dAvatarMod::Instance()->OnNextTex();
+  TheGS2dAvatarMod::Instance()->OnScale(Vec2f(-SCALE, 0));
 }
 
-void OnPrevTex()
+void OnFatter()
 {
-  TheGS2dAvatarMod::Instance()->OnPrevTex();
+  TheGS2dAvatarMod::Instance()->OnScale(Vec2f(+SCALE, 0));
 }
 
-/*
-void OnNextCol()
-{
-  TheGS2dAvatarMod::Instance()->OnNextCol();
-}
-
-void OnPrevCol()
-{
-  TheGS2dAvatarMod::Instance()->OnPrevCol();
-}
-*/
 
 class ColourCommand : public GuiCommand
 {
@@ -67,6 +58,39 @@ private:
   int m_colour;
 };
 
+class LayerCommand : public GuiCommand
+{
+public:
+  LayerCommand(int i, GuiElement* group) : m_layer(i), m_group(group) {}
+
+  virtual bool Do()
+  {
+    TheGS2dAvatarMod::Instance()->ActivateGroup(m_group);
+    TheGS2dAvatarMod::Instance()->OnSetLayer(m_layer);
+
+    return false;
+  }
+
+private:
+  int m_layer;
+  GuiElement* m_group;
+};
+
+class TextureCommand : public GuiCommand
+{
+public:
+  TextureCommand(int tex) : m_tex(tex) {}
+
+  virtual bool Do()
+  {
+    TheGS2dAvatarMod::Instance()->OnSetTexture(m_tex);
+    return false;
+  }
+
+private:
+  int m_tex;
+};
+
 GS2dAvatarMod::GS2dAvatarMod()
 {
   // Set up sprite
@@ -77,10 +101,12 @@ GS2dAvatarMod::GS2dAvatarMod()
     Assert(0);
   }
 
-  // TODO TEMP TEST
+  // Sprite cell to display
   m_sprite.SetCellTime(0.25f);
   m_sprite.SetCellRange(1, 1);
   m_sprite.SetCell(1);
+
+  m_oldGroup = 0;
 }
 
 void GS2dAvatarMod::Update()
@@ -97,15 +123,8 @@ void GS2dAvatarMod::Draw()
 
 void GS2dAvatarMod::Draw2d()
 {
-  //GSGui::Draw2d();
   GSBase::Draw2d();
-
-  /*
-  if (m_showLurk)
-  {
-    TheLurker::Instance()->Draw();
-  }
-  */
+  // Not: GSGui::Draw2d();
 
   // Show the current layer as flashing
   static float timer = 0;
@@ -136,39 +155,33 @@ void GS2dAvatarMod::Draw2d()
   TheCursorManager::Instance()->Draw();
 }
 
+void GS2dAvatarMod::ActivateGroup(GuiElement* newGroup)
+{
+  if (m_oldGroup)
+  {
+    m_oldGroup->SetVisible(false);
+  }
+
+  if (newGroup)
+  {
+    newGroup->SetVisible(true);
+  }
+
+  m_oldGroup = newGroup;
+}
+
 void GS2dAvatarMod::OnActive()
 {
   GSGui::OnActive();
 
+  if (!m_bgImage.OpenAndLoad("bgimage-avatar-mod.txt"))
+  {
+std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
+    Assert(0);
+  }
+
   m_gui = LoadGui("gui-avatarmod-2d.txt");
   Assert(m_gui);
-
-  // TODO Set focus element, cancel element, command handlers
-  GuiButton* nextLayer = (GuiButton*)GetElementByName(m_gui, "layer-next-button");
-  Assert(nextLayer);
-  nextLayer->SetCommand(Amju::OnNextLayer);
-
-  GuiButton* prevLayer = (GuiButton*)GetElementByName(m_gui, "layer-prev-button");
-  Assert(prevLayer);
-  prevLayer->SetCommand(Amju::OnPrevLayer);
-
-  GuiButton* nextTex = (GuiButton*)GetElementByName(m_gui, "tex-next-button");
-  Assert(nextTex);
-  nextTex->SetCommand(Amju::OnNextTex);
-
-  GuiButton* prevTex = (GuiButton*)GetElementByName(m_gui, "tex-prev-button");
-  Assert(prevTex);
-  prevTex->SetCommand(Amju::OnPrevTex);
-
-/*
-  GuiButton* nextCol = (GuiButton*)GetElementByName(m_gui, "col-next-button");
-  Assert(nextCol);
-  nextCol->SetCommand(Amju::OnNextCol);
-
-  GuiButton* prevCol = (GuiButton*)GetElementByName(m_gui, "col-prev-button");
-  Assert(prevCol);
-  prevCol->SetCommand(Amju::OnPrevCol);
-*/
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   Assert(ok);
@@ -178,14 +191,45 @@ void GS2dAvatarMod::OnActive()
   Assert(cancel);
   cancel->SetCommand(Amju::OnCancel);
 
-  // Set colour buttons
   LayerGroupManager* lgm = TheLayerGroupManager::Instance();
-  for (int i = 0; i < 10; i++)
+  std::string GROUPNAME[] = 
+  {
+    "head-body-group", "eyes-group", "hair-group", "bottoms-group", "tops-group"
+  };
+
+  // Layer buttons
+  for (int i = 0; i < 5; i++)
+  {
+    GuiButton* b = (GuiButton*)GetElementByName(m_gui, "layer-button-" + ToString(i));
+    Assert(b);
+
+    // Find group of buttons to activate when layer button selected
+    GuiElement* group = 0;
+    if (!GROUPNAME[i].empty())
+    {
+      group = GetElementByName(m_gui, GROUPNAME[i]);
+      Assert(group);
+    }
+    b->SetCommand(new LayerCommand(i, group));
+  }
+
+  // Set the buttons for the different layers
+  ((GuiButton*)GetElementByName(m_gui, "hair-button-1"))->SetCommand(new TextureCommand(0));
+  ((GuiButton*)GetElementByName(m_gui, "hair-button-2"))->SetCommand(new TextureCommand(1));
+  ((GuiButton*)GetElementByName(m_gui, "hair-button-3"))->SetCommand(new TextureCommand(2));
+
+  ((GuiButton*)GetElementByName(m_gui, "scale-button-1"))->SetCommand(OnShorter);
+  ((GuiButton*)GetElementByName(m_gui, "scale-button-2"))->SetCommand(OnTaller);
+  ((GuiButton*)GetElementByName(m_gui, "scale-button-3"))->SetCommand(OnThinner);
+  ((GuiButton*)GetElementByName(m_gui, "scale-button-4"))->SetCommand(OnFatter);
+
+  // Set colour buttons
+  for (int i = 0; i < 16; i++)
   {
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "colour-button-" + 
       ToString(i + 1));
     Assert(b);
-    b->SetText("");
+
     Colour c = lgm->GetColour(i);
     b->SetButtonColour(c); 
     b->SetCommand(new ColourCommand(i));
@@ -196,37 +240,32 @@ void GS2dAvatarMod::OnActive()
   m_layerGroups.SetSprite(&m_sprite);
 }
 
-void GS2dAvatarMod::OnNextLayer()
+void GS2dAvatarMod::OnSetTexture(int texture)
 {
   m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.NextLayer(); 
-}
 
-void GS2dAvatarMod::OnPrevLayer()
-{
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.PrevLayer(); 
-}
-
-void GS2dAvatarMod::OnNextTex()
-{
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.NextTexture();
-  m_layerGroups.SetSprite(&m_sprite);
-}
-
-void GS2dAvatarMod::OnPrevTex()
-{
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-  m_layerGroups.PrevTexture();
+  m_layerGroups.SetTexture(texture);
   m_layerGroups.SetSprite(&m_sprite);
 }
 
 void GS2dAvatarMod::OnSetColour(int colour)
 {
   m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+
   m_layerGroups.SetColour(colour);
   m_layerGroups.SetSprite(&m_sprite);
+}
+
+void GS2dAvatarMod::OnSetLayer(int layer)
+{
+  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+
+  m_layerGroups.SetCurrentLayer(layer);
+  m_layerGroups.SetSprite(&m_sprite);
+}
+
+void GS2dAvatarMod::OnScale(const Vec2f& scale)
+{
 }
 
 void GS2dAvatarMod::OnOk()

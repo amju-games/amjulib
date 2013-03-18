@@ -133,53 +133,61 @@ int LayerGroups::GetCurrentLayer() const
   return m_currentLayer;
 }
 
-
-void LayerGroups::NextLayer()
+void LayerGroups::SetCurrentLayer(int layer)
 {
-  m_currentLayer++;
-  if (m_currentLayer >= (int)m_layers.size())
-  {
-    m_currentLayer = 0;
-  }
+  m_currentLayer = layer;
 }
 
-void LayerGroups::PrevLayer()
-{
-  m_currentLayer--;
-  if (m_currentLayer < 0)
-  {
-    m_currentLayer = m_layers.size() - 1;
-  }
-}
+//void LayerGroups::NextLayer()
+//{
+//  m_currentLayer++;
+//  if (m_currentLayer >= (int)m_layers.size())
+//  {
+//    m_currentLayer = 0;
+//  }
+//}
+//
+//void LayerGroups::PrevLayer()
+//{
+//  m_currentLayer--;
+//  if (m_currentLayer < 0)
+//  {
+//    m_currentLayer = m_layers.size() - 1;
+//  }
+//}
 
-void LayerGroups::NextTexture()
-{
-  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+//void LayerGroups::NextTexture()
+//{
+//  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+//
+//  LayerSet& g = m_layers[m_currentLayer];
+//  g.m_currentTexture++;
+//  if (g.m_currentTexture >= lgm->GetNumTextures(m_currentLayer))
+//  {
+//    g.m_currentTexture = 0;
+//  }
+//}
+//
+//void LayerGroups::PrevTexture()
+//{
+//  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
+//
+//  LayerSet& g = m_layers[m_currentLayer];
+//  g.m_currentTexture--;
+//  if (g.m_currentTexture < 0)
+//  {
+//    g.m_currentTexture = lgm->GetNumTextures(m_currentLayer) - 1;
+//  }
+//}
 
+void LayerGroups::SetTexture(int t)
+{
   LayerSet& g = m_layers[m_currentLayer];
-  g.m_currentTexture++;
-  if (g.m_currentTexture >= lgm->GetNumTextures(m_currentLayer))
-  {
-    g.m_currentTexture = 0;
-  }
+  g.m_currentTexture = t;
 }
-
-void LayerGroups::PrevTexture()
-{
-  static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
-
-  LayerSet& g = m_layers[m_currentLayer];
-  g.m_currentTexture--;
-  if (g.m_currentTexture < 0)
-  {
-    g.m_currentTexture = lgm->GetNumTextures(m_currentLayer) - 1;
-  }
-}
-
 
 void LayerGroups::SetColour(int c)
 {
-  //static LayerGroupManager* lgm = TheLayerGroupManager::Instance();
   LayerSet& g = m_layers[m_currentLayer];
   g.m_currentColour = c;
 }

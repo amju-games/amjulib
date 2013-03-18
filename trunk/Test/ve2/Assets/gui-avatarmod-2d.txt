@@ -6,114 +6,7 @@ gui-comp
 // Name
 avatar-config-comp
 // Num children
-13
-
-// Buttons for selecting layer
-gui-button
-layer-button-0
--0.9, 0.5
-0.6, 0.15
-gui-button-4.png
-hair
-arial, 1.5, sx=0.8
-
-gui-button
-layer-button-1
--0.9, 0.3
-0.6, 0.15
-gui-button-4.png
-skin
-arial, 1.5, sx=0.8
-
-gui-button
-layer-button-2
--0.9, 0.1
-0.6, 0.15
-gui-button-4.png
-eyes
-arial, 1.5, sx=0.8
-
-gui-button
-layer-button-3
--0.9, -0.1
-0.6, 0.15
-gui-button-4.png
-tops
-arial, 1.5, sx=0.8
-
-gui-button
-layer-button-4
--0.9, -0.3
-0.6, 0.15
-gui-button-4.png
-bottoms
-arial, 1.5, sx=0.8
-
-
-
-// Buttons for avatar type 
-// element type
-gui-button
-// Element name
-layer-prev-button
-// pos (coords are -1..1)
--1.0, 2.0 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-< prev layer
-// Font name, size
-arial, 2.0, sx=0.8
-
-// element type
-gui-button
-// Element name
-layer-next-button
-// pos (coords are -1..1)
-0.2, 2.0 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-next layer >
-// Font name, size
-arial, 2.0, sx=0.8
-
-
-// element type
-gui-button
-// Element name
-tex-prev-button
-// pos (coords are -1..1)
-0.2, -0.25 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-< prev tex
-// Font name, size
-arial, 2.0, sx=0.8
-
-// element type
-gui-button
-// Element name
-tex-next-button
-// pos (coords are -1..1)
-0.2, 0 
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-next tex >
-// Font name, size
-arial, 2.0, sx=0.8
-
-
+14
 
 // element type
 gui-button
@@ -160,11 +53,147 @@ Modify your avatar...
 arial, 1.0, fgcol=ffffff
 
 
+// Buttons for selecting layer
+gui-button
+layer-button-0
+-0.9, 0.5
+0.6, 0.15
+gui-button-4.png
+head+body
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-1
+-0.9, 0.3
+0.6, 0.15
+gui-button-4.png
+eyes
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-2
+-0.9, 0.1
+0.6, 0.15
+gui-button-4.png
+hair
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-3
+-0.9, -0.1
+0.6, 0.15
+gui-button-4.png
+bottoms
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-4
+-0.9, -0.3
+0.6, 0.15
+gui-button-4.png
+tops
+arial, 1.5, sx=0.8
+
+// Group for head/body
+// -------------------
+gui-comp
+head-body-group
+// num children
+4
+gui-button
+scale-button-1
+0.3, 0.3
+0.2, 0.2
+scale-button-1.png
+@@@
+arial, 2.0
+
+gui-button
+scale-button-2
+0.5, 0.3
+0.2, 0.2
+scale-button-2.png
+@@@
+arial, 2.0
+
+gui-button
+scale-button-3
+0.3, 0.1
+0.2, 0.2
+scale-button-3.png
+@@@
+arial, 2.0
+
+gui-button
+scale-button-4
+0.5, 0.1
+0.2, 0.2
+scale-button-4.png
+@@@
+arial, 2.0
+
+// Group for eyes
+// --------------
+gui-comp
+eyes-group
+// num children
+0
+
+// Group for hair
+// --------------
+
+gui-comp
+hair-group
+// num children
+3
+
+gui-button
+hair-button-1
+0.3, 0.3
+0.2, 0.2
+hair-button-1.png
+@@@
+arial, 2.0
+
+gui-button
+hair-button-2
+0.5, 0.3
+0.2, 0.2
+hair-button-2.png
+@@@
+arial, 2.0
+
+gui-button
+hair-button-3
+0.7, 0.3
+0.2, 0.2
+hair-button-3.png
+@@@
+arial, 2.0
+
+
+// Group for bottoms
+// -----------------
+gui-comp
+bottoms-group
+// num children
+0
+
+// Group for tops
+// --------------
+gui-comp
+tops-group
+// num children
+0
+
+
+
 // colour select composite
+// --------------------------
 gui-comp
 colour-select
 // num children
-10
+16
 // colour button 1
 gui-button
 colour-button-1
@@ -297,3 +326,80 @@ colour-button.png
 // font etc
 arial, 1.0
 
+gui-button
+colour-button-11
+// pos
+0.2, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-12
+// pos
+0.3, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-13
+// pos
+0.4, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-14
+// pos
+0.5, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-15
+// pos
+0.6, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
+
+gui-button
+colour-button-16
+// pos
+0.7, -0.5
+// size
+0.1, 0.1
+// image
+colour-button.png
+// text
+@@@
+// font etc
+arial, 1.0
