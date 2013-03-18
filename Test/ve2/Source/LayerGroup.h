@@ -61,14 +61,16 @@ public:
 
   void NextLayer();
   void PrevLayer();
+  void SetCurrentLayer(int layer);
   int GetCurrentLayer() const;
 
   // Go to the next/prev texture for the current layer
-  void NextTexture();
-  void PrevTexture();
+  //void NextTexture();
+  //void PrevTexture();
+  void SetTexture(int);
 
-  void NextColour();
-  void PrevColour();
+  //void NextColour();
+  //void PrevColour();
 
   // Set colour index for the currently active layer
   void SetColour(int);

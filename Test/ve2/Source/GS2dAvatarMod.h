@@ -19,20 +19,20 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  void OnNextLayer();
-  void OnPrevLayer();
-  void OnNextTex();
-  void OnPrevTex();
-  void OnNextCol();
-  void OnPrevCol();
   void OnOk();
   void OnCancel();
   void OnSetColour(int colour);
+  void OnSetLayer(int layer);
+  void ActivateGroup(GuiElement* newGroup);
+  void OnSetTexture(int texture);
+  void OnScale(const Vec2f&);
 
 private:
   LayerSprite m_sprite; // shows the current settings
 
   LayerGroups m_layerGroups; 
+
+  GuiElement* m_oldGroup;
 };
 typedef Singleton<GS2dAvatarMod> TheGS2dAvatarMod;
 } // namespace
