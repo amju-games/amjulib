@@ -18,8 +18,10 @@ characters/2d/skin.png
 // layer group name
 Eyes
 // Num textures
-1
-characters/2d/eyes1.png
+2
+characters/2d/eyes_white.png
+characters/2d/eyes_look_n.png
+
 // TODO different eye colours; eye gaze dir
 
 

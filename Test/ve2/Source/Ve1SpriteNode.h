@@ -28,6 +28,11 @@ private:
 
 private:
   LayerSprite m_sprite;
+  EyesSprite m_eyes;
+  // Blinking
+  float m_blinkTime;
+  float m_maxBlinkTime;
+  float m_gazeTime;
 };
 }
 

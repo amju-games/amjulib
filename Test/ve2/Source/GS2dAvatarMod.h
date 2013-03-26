@@ -3,7 +3,7 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
-#include "Sprite.h"
+#include "Ve1SpriteNode.h"
 #include "LayerGroup.h"
 
 namespace Amju 
@@ -28,9 +28,10 @@ public:
   void OnScale(const Vec2f&);
 
 private:
-  LayerSprite m_sprite; // shows the current settings
+  //LayerSprite m_sprite; // shows the current settings
+  Ve1SpriteNode m_spriteNode;
 
-  LayerGroups m_layerGroups; 
+  LayerGroups m_layerGroups; // store settings for each layer
 
   GuiElement* m_oldGroup;
 };

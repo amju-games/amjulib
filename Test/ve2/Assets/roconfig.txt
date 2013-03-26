@@ -47,7 +47,7 @@ npc-max-follow-dist  75.0
 
 // Camera
 // initial dist from cam to player
-cam-z           500
+cam-z           200
 // initial x rot (i.e. altitude angle)
 cam-xrot        20
 // User drag sensitivity

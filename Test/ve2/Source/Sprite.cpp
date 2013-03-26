@@ -142,5 +142,40 @@ void LayerSprite::Clear()
 {
   m_map.clear();
 }
+ 
+EyesSprite::EyesSprite() : m_gaze(0)
+{
+}
+
+void EyesSprite::SetEyesOpen(bool open)
+{
+  if (open)
+  {
+    // closed eyes (zero layer) is invis.
+    SetLayerVis(0, false);
+    // Whites are vis.
+    SetLayerVis(1, true);
+    // Gaze dir is vis
+    SetLayerVis(2, true);
+  }
+  else
+  {
+    // All except closed eyes layer is invis.
+    SetLayerVis(0, true);
+    SetLayerVis(1, false);
+    SetLayerVis(2, false);
+  }
+}
+
+void EyesSprite::SetEyeColour(int colIndex)
+{
+  SetLayerColour(2, colIndex);
+}
+
+void EyesSprite::SetEyeGazeTex(Texture* tex)
+{
+  m_map[2].tex = tex;
+}
+
 }
 
