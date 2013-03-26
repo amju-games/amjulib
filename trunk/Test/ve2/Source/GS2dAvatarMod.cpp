@@ -93,6 +93,7 @@ private:
 
 GS2dAvatarMod::GS2dAvatarMod()
 {
+  /*
   // Set up sprite
   std::string tex = "characters/2d/spritesheet.png";
   if (!m_sprite.Load(tex, 16, 1, 0.5f, 1.0f))
@@ -105,6 +106,7 @@ GS2dAvatarMod::GS2dAvatarMod()
   m_sprite.SetCellTime(0.25f);
   m_sprite.SetCellRange(1, 1);
   m_sprite.SetCell(1);
+  */
 
   m_oldGroup = 0;
 }
@@ -112,7 +114,7 @@ GS2dAvatarMod::GS2dAvatarMod()
 void GS2dAvatarMod::Update()
 {
   GSGui::Update();
-
+  m_spriteNode.Update();
 }
 
 void GS2dAvatarMod::Draw()
@@ -127,6 +129,7 @@ void GS2dAvatarMod::Draw2d()
   // Not: GSGui::Draw2d();
 
   // Show the current layer as flashing
+  /*
   static float timer = 0;
   timer += TheTimer::Instance()->GetDt();
   static const float FLASH_TIME = 0.1f;
@@ -144,8 +147,20 @@ void GS2dAvatarMod::Draw2d()
   {
     timer = 0;
   }
+  */
 
-  m_sprite.DrawLayers(Vec2f(-0.25f, -0.5f), 1.0f);
+  //m_sprite.DrawLayers(Vec2f(-0.25f, -0.5f), 1.0f);
+  AmjuGL::PushMatrix();
+  AmjuGL::RotateX(90.0f); 
+  static float f = 0;
+  f += TheTimer::Instance()->GetDt();
+  float s = sin(f) * 0.001f;
+  AmjuGL::Scale(0.01f, 1, 0.01f);
+  AmjuGL::Translate(0, 0, 0.2f);
+  AmjuGL::Scale(1, 1, 1.0f + s);
+
+  m_spriteNode.Draw();
+  AmjuGL::PopMatrix();
 
   if (m_gui)
   {
@@ -237,31 +252,35 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
  
   // Set layer groups from player
   m_layerGroups.SetFromSprite(GetLocalPlayer()->GetSprite());
-  m_layerGroups.SetSprite(&m_sprite);
+  m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 void GS2dAvatarMod::OnSetTexture(int texture)
 {
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+//  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
 
   m_layerGroups.SetTexture(texture);
-  m_layerGroups.SetSprite(&m_sprite);
+//  m_layerGroups.SetSprite(&m_sprite);
+  m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 void GS2dAvatarMod::OnSetColour(int colour)
 {
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+ // m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
 
   m_layerGroups.SetColour(colour);
-  m_layerGroups.SetSprite(&m_sprite);
+  //m_layerGroups.SetSprite(&m_sprite);
+  m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 void GS2dAvatarMod::OnSetLayer(int layer)
 {
-  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
+  //m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
 
   m_layerGroups.SetCurrentLayer(layer);
-  m_layerGroups.SetSprite(&m_sprite);
+//  m_layerGroups.SetSprite(&m_sprite);
+  m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
+
 }
 
 void GS2dAvatarMod::OnScale(const Vec2f& scale)

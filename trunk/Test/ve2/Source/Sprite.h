@@ -53,17 +53,32 @@ public:
   void AddLayer(const SpriteLayer&);
   void DrawLayers(const Vec2f& pos, float size);
 
-  void SetLayerTex(int layer, int texIndex);
+  void SetLayerTex(int layer, int texIndex); // indexes looked up in TheLayerGroupManager
   void SetLayerColour(int layer, int colIndex);
   void SetLayerVis(int layer, bool vis);
 
   // Erase all layers
   void Clear();
 
-private:
+protected:
   friend class LayerGroups;
   typedef std::map<int, SpriteLayer> LayerMap;
   LayerMap m_map;
+};
+
+// Eyes: special case
+// Eyes are open or closed (sleeping or blinking).
+// If open, eyes have background (fixed colour), and another layer showing eye gaze.
+class EyesSprite : public LayerSprite
+{
+public:
+  EyesSprite();
+  void SetEyesOpen(bool open);
+  void SetEyeColour(int colIndex); // indexes looked up in TheLayerGroupManager
+  void SetEyeGazeTex(Texture* tex);
+
+private:
+  int m_gaze;
 };
 }
 
