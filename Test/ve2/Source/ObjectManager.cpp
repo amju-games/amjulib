@@ -25,6 +25,7 @@
 //#define XML_DEBUG
 //#define ASSET_DEBUG
 //#define OBJECT_CHECK_DEBUG
+//#define FILEQ_DEBUG
 
 // Cache is a good idea but seems to be causing a lot of probs when changing version
 //#define YES_USE_CACHE
@@ -103,7 +104,9 @@ bool Object::Load(File* f)
 
 void Object::Create()
 {
-//  std::cout << "Loading object " << *this << "\n";
+#ifdef ASSET_DEBUG
+std::cout << "Object::Create: Creating object " << *this << "\n";
+#endif
 
   // Create new object, load it, add to Game
   PGameObject go = TheGameObjectFactory::Instance()->Create(m_type);
@@ -294,7 +297,12 @@ void AssetList::Update()
         return;
       }
     }
+
     m_state = AMJU_AL_ALL_ASSETS_LOADED;
+
+#ifdef ASSET_DEBUG
+std::cout << "Asset List " << m_name << " is completely loaded!\n";
+#endif
   }
 }
 

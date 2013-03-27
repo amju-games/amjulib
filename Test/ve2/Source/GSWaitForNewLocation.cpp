@@ -12,6 +12,7 @@
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
 #include "FuelCell.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
@@ -56,8 +57,12 @@ void GSWaitForNewLocation::Update()
   bool playerReady = (TheGame::Instance()->GetGameObject(GetLocalPlayerId()) != 0);
   bool editMode = GetGameMode() == AMJU_MODE_EDIT;
 
-//std::cout << "Terrain is " << (terrainReady ? "READY" : "NOT ready") 
-//  << " player is " << (playerReady ? "READY" : "NOT ready") << "\n";
+  static int showStatus = ROConfig()->GetInt("new-location-show-status", 0);
+  if (showStatus > 0)
+  {
+    std::cout << "Terrain is " << (terrainReady ? "READY" : "NOT ready") 
+      << " player is " << (playerReady ? "READY" : "NOT ready") << "\n";
+  }
 
   if (terrainReady && (playerReady || editMode))
   {
