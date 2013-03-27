@@ -6,7 +6,7 @@ gui-comp
 // Name
 avatar-config-comp
 // Num children
-14
+13
 
 // element type
 gui-button
@@ -62,12 +62,20 @@ gui-button-4.png
 head+body
 arial, 1.5, sx=0.8
 
+//gui-button
+//layer-button-1
+//-0.9, 0.3
+//0.6, 0.15
+//gui-button-4.png
+//eyes
+//arial, 1.5, sx=0.8
+
 gui-button
 layer-button-1
 -0.9, 0.3
 0.6, 0.15
 gui-button-4.png
-eyes
+hair
 arial, 1.5, sx=0.8
 
 gui-button
@@ -75,20 +83,12 @@ layer-button-2
 -0.9, 0.1
 0.6, 0.15
 gui-button-4.png
-hair
+bottoms
 arial, 1.5, sx=0.8
 
 gui-button
 layer-button-3
 -0.9, -0.1
-0.6, 0.15
-gui-button-4.png
-bottoms
-arial, 1.5, sx=0.8
-
-gui-button
-layer-button-4
--0.9, -0.3
 0.6, 0.15
 gui-button-4.png
 tops
@@ -177,15 +177,61 @@ arial, 2.0
 gui-comp
 bottoms-group
 // num children
-0
+3
+gui-button
+bots-button-1
+0.3, 0.3
+0.2, 0.2
+bots-button-1.png
+@@@
+arial, 2.0
+
+gui-button
+bots-button-2
+0.5, 0.3
+0.2, 0.2
+bots-button-2.png
+@@@
+arial, 2.0
+
+gui-button
+bots-button-3
+0.7, 0.3
+0.2, 0.2
+bots-button-3.png
+@@@
+arial, 2.0
+
 
 // Group for tops
 // --------------
 gui-comp
 tops-group
 // num children
-0
+3
+gui-button
+tops-button-1
+0.3, 0.3
+0.2, 0.2
+tops-button-1.png
+@@@
+arial, 2.0
 
+gui-button
+tops-button-2
+0.5, 0.3
+0.2, 0.2
+tops-button-2.png
+@@@
+arial, 2.0
+
+gui-button
+tops-button-3
+0.7, 0.3
+0.2, 0.2
+tops-button-3.png
+@@@
+arial, 2.0
 
 
 // colour select composite

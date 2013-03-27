@@ -110,6 +110,7 @@ int LayerGroupManager::GetNumLayers() const
 
 int LayerGroupManager::GetNumTextures(int layer) const
 {
+  Assert(layer < (int)m_layers.size());
   return m_layers[layer].m_textures.size();
 }
 
@@ -120,11 +121,16 @@ int LayerGroupManager::GetNumColours() const
 
 Texture* LayerGroupManager::GetTexture(int layer, int num) const
 {
-  return m_layers[layer].m_textures[num];
+  Assert(layer < (int)m_layers.size());
+  const Layer::Textures& vec = m_layers[layer].m_textures;
+  Assert((int)vec.size() >= num);
+
+  return vec[num]; //m_layers[layer].m_textures[num];
 }
 
 const Colour& LayerGroupManager::GetColour(int num) const
 {
+  Assert(num < (int)m_colours.size());
   return m_colours[num];
 }
 
@@ -190,6 +196,10 @@ void LayerGroups::SetColour(int c)
 {
   LayerSet& g = m_layers[m_currentLayer];
   g.m_currentColour = c;
+}
+
+void LayerGroups::SetVisible(bool visible)
+{
 }
 
 /*

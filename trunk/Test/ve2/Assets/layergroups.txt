@@ -6,7 +6,7 @@
 // One texture and one colour is enabled for each layer group.
 
 // num layer groups
-5
+4
 
 // layer group name
 Skin
@@ -14,15 +14,6 @@ Skin
 1
 characters/2d/skin.png
 
-
-// layer group name
-Eyes
-// Num textures
-2
-characters/2d/eyes_white.png
-characters/2d/eyes_look_n.png
-
-// TODO different eye colours; eye gaze dir
 
 
 // layer group name
@@ -37,8 +28,9 @@ characters/2d/blank.png
 // layer group name
 Trousers, skirt etc
 // Num textures
-2
+3
 characters/2d/trousers.png
+characters/2d/shorttrousers.png
 characters/2d/blank.png
 
 

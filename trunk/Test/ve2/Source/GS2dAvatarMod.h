@@ -26,6 +26,11 @@ public:
   void ActivateGroup(GuiElement* newGroup);
   void OnSetTexture(int texture);
   void OnScale(const Vec2f&);
+  void OnBlank();
+
+private:
+  template<class FUNC>  
+  void SetButtonCommand(const std::string& buttonName, FUNC func);
 
 private:
   //LayerSprite m_sprite; // shows the current settings
