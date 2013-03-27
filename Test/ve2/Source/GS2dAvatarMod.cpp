@@ -42,6 +42,10 @@ void OnFatter()
   TheGS2dAvatarMod::Instance()->OnScale(Vec2f(+SCALE, 0));
 }
 
+void OnBlank()
+{
+  TheGS2dAvatarMod::Instance()->OnBlank();
+}
 
 class ColourCommand : public GuiCommand
 {
@@ -93,21 +97,6 @@ private:
 
 GS2dAvatarMod::GS2dAvatarMod()
 {
-  /*
-  // Set up sprite
-  std::string tex = "characters/2d/spritesheet.png";
-  if (!m_sprite.Load(tex, 16, 1, 0.5f, 1.0f))
-  {
-    ReportError("FAILED TO LOAD sprite for avatar customisation screen");
-    Assert(0);
-  }
-
-  // Sprite cell to display
-  m_sprite.SetCellTime(0.25f);
-  m_sprite.SetCellRange(1, 1);
-  m_sprite.SetCell(1);
-  */
-
   m_oldGroup = 0;
 }
 
@@ -120,7 +109,6 @@ void GS2dAvatarMod::Update()
 void GS2dAvatarMod::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GS2dAvatarMod::Draw2d()
@@ -128,29 +116,8 @@ void GS2dAvatarMod::Draw2d()
   GSBase::Draw2d();
   // Not: GSGui::Draw2d();
 
-  // Show the current layer as flashing
-  /*
-  static float timer = 0;
-  timer += TheTimer::Instance()->GetDt();
-  static const float FLASH_TIME = 0.1f;
-  int layer = m_layerGroups.GetCurrentLayer();
-
-  if (timer < FLASH_TIME)
-  {
-    m_sprite.SetLayerVis(layer, false);
-  }
-  else if (timer < 2 * FLASH_TIME)
-  {
-    m_sprite.SetLayerVis(layer, true);
-  }
-  else
-  {
-    timer = 0;
-  }
-  */
-
-  //m_sprite.DrawLayers(Vec2f(-0.25f, -0.5f), 1.0f);
   AmjuGL::PushMatrix();
+  // Scale for 'breathing' effect..?
   AmjuGL::RotateX(90.0f); 
   static float f = 0;
   f += TheTimer::Instance()->GetDt();
@@ -185,6 +152,15 @@ void GS2dAvatarMod::ActivateGroup(GuiElement* newGroup)
   m_oldGroup = newGroup;
 }
 
+template<class FUNC>
+void GS2dAvatarMod::SetButtonCommand(const std::string& buttonName, FUNC func)
+{
+  GuiButton* b = ((GuiButton*)GetElementByName(m_gui, buttonName));
+  Assert(b);
+  b->GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
+  b->SetCommand(func);
+}
+
 void GS2dAvatarMod::OnActive()
 {
   GSGui::OnActive();
@@ -209,11 +185,11 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
   LayerGroupManager* lgm = TheLayerGroupManager::Instance();
   std::string GROUPNAME[] = 
   {
-    "head-body-group", "eyes-group", "hair-group", "bottoms-group", "tops-group"
+    "head-body-group", "hair-group", "bottoms-group", "tops-group"
   };
 
   // Layer buttons
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 4; i++)
   {
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "layer-button-" + ToString(i));
     Assert(b);
@@ -224,19 +200,29 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
     {
       group = GetElementByName(m_gui, GROUPNAME[i]);
       Assert(group);
+      group->SetVisible(false);
     }
     b->SetCommand(new LayerCommand(i, group));
   }
 
   // Set the buttons for the different layers
-  ((GuiButton*)GetElementByName(m_gui, "hair-button-1"))->SetCommand(new TextureCommand(0));
-  ((GuiButton*)GetElementByName(m_gui, "hair-button-2"))->SetCommand(new TextureCommand(1));
-  ((GuiButton*)GetElementByName(m_gui, "hair-button-3"))->SetCommand(new TextureCommand(2));
+  SetButtonCommand("hair-button-1", new TextureCommand(0));
+  SetButtonCommand("hair-button-2", new TextureCommand(1));
+  SetButtonCommand("hair-button-3", new TextureCommand(2)); //Amju::OnBlank); // invis
 
-  ((GuiButton*)GetElementByName(m_gui, "scale-button-1"))->SetCommand(OnShorter);
-  ((GuiButton*)GetElementByName(m_gui, "scale-button-2"))->SetCommand(OnTaller);
-  ((GuiButton*)GetElementByName(m_gui, "scale-button-3"))->SetCommand(OnThinner);
-  ((GuiButton*)GetElementByName(m_gui, "scale-button-4"))->SetCommand(OnFatter);
+  SetButtonCommand("scale-button-1", OnShorter);
+  SetButtonCommand("scale-button-2", OnTaller);
+  SetButtonCommand("scale-button-3", OnThinner);
+  SetButtonCommand("scale-button-4", OnFatter);
+
+  SetButtonCommand("tops-button-1", new TextureCommand(0));
+  SetButtonCommand("tops-button-2", new TextureCommand(1));
+  SetButtonCommand("tops-button-3", new TextureCommand(2)); //Amju::OnBlank); // invis
+
+  SetButtonCommand("bots-button-1", new TextureCommand(0));
+  SetButtonCommand("bots-button-2", new TextureCommand(1));
+  SetButtonCommand("bots-button-3", new TextureCommand(2)); //Amju::OnBlank); // invis
+
 
   // Set colour buttons
   for (int i = 0; i < 16; i++)
@@ -244,6 +230,8 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "colour-button-" + 
       ToString(i + 1));
     Assert(b);
+
+    b->GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
 
     Colour c = lgm->GetColour(i);
     b->SetButtonColour(c); 
@@ -257,34 +245,29 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
 
 void GS2dAvatarMod::OnSetTexture(int texture)
 {
-//  m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-
   m_layerGroups.SetTexture(texture);
-//  m_layerGroups.SetSprite(&m_sprite);
   m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 void GS2dAvatarMod::OnSetColour(int colour)
 {
- // m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-
   m_layerGroups.SetColour(colour);
-  //m_layerGroups.SetSprite(&m_sprite);
   m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 void GS2dAvatarMod::OnSetLayer(int layer)
 {
-  //m_sprite.SetLayerVis(m_layerGroups.GetCurrentLayer(), true);
-
   m_layerGroups.SetCurrentLayer(layer);
-//  m_layerGroups.SetSprite(&m_sprite);
   m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
-
 }
 
 void GS2dAvatarMod::OnScale(const Vec2f& scale)
 {
+}
+
+void GS2dAvatarMod::OnBlank()
+{
+  // TODO
 }
 
 void GS2dAvatarMod::OnOk()

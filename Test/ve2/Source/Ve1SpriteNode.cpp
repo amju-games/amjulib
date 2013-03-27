@@ -138,11 +138,11 @@ void Ve1SpriteNode::Update()
   }
 
   // Set eye gaze dir
-  static const char* EYE_GAZE[] = 
+  static const int NUM_EYE_GAZE_TEXTURES = 2;
+  static const char* EYE_GAZE[NUM_EYE_GAZE_TEXTURES] = 
   {
     "characters/2d/eyes_look_se.png",
-    "characters/2d/eyes_look_n.png",
-    "characters/2d/eyes_look_se.png",
+    "characters/2d/eyes_look_sw.png",
 
   };
   // Get direction of interest. Randomize a bit?
@@ -153,7 +153,7 @@ void Ve1SpriteNode::Update()
   if (m_gazeTime > MAX_GAZE_TIME)
   {
     m_gazeTime = 0;
-    int i = rand() % 3;
+    int i = rand() % NUM_EYE_GAZE_TEXTURES;
     Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes(EYE_GAZE[i]);
     m_eyes.SetEyeGazeTex(tex);
   }
