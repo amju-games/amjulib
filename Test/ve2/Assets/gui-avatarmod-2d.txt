@@ -6,7 +6,7 @@ gui-comp
 // Name
 avatar-config-comp
 // Num children
-13
+14
 
 // element type
 gui-button
@@ -52,8 +52,14 @@ Modify your avatar...
 // Font name, size
 arial, 1.0, fgcol=ffffff
 
+// Group for layer select buttons (head, top, bottom, etc)
+// -------------------------------------------------------
+gui-comp
+layer-select-group
+// num children
+4
 
-// Buttons for selecting layer
+// Buttons for selecting layers
 gui-button
 layer-button-0
 -0.9, 0.5
@@ -61,14 +67,6 @@ layer-button-0
 gui-button-4.png
 head+body
 arial, 1.5, sx=0.8
-
-//gui-button
-//layer-button-1
-//-0.9, 0.3
-//0.6, 0.15
-//gui-button-4.png
-//eyes
-//arial, 1.5, sx=0.8
 
 gui-button
 layer-button-1
@@ -93,6 +91,25 @@ layer-button-3
 gui-button-4.png
 tops
 arial, 1.5, sx=0.8
+
+gui-button
+layer-button-4
+-0.9, -0.3
+0.6, 0.15
+gui-button-4.png
+glasses
+arial, 1.5, sx=0.8
+
+gui-button
+layer-button-5
+-0.9, -0.5
+0.6, 0.15
+gui-button-4.png
+mouth
+arial, 1.5, sx=0.8
+
+
+
 
 // Group for head/body
 // -------------------
@@ -232,6 +249,37 @@ tops-button-3
 tops-button-3.png
 @@@
 arial, 2.0
+
+
+// Group for glasses
+// -----------------
+gui-comp
+glasses-group
+// num children
+2
+gui-button
+glasses-button-1
+0.3, 0.3
+0.2, 0.2
+glasses-button-1.png
+@@@
+arial, 2.0
+
+gui-button
+glasses-button-2
+0.5, 0.3
+0.2, 0.2
+glasses-button-2.png
+@@@
+arial, 2.0
+
+
+// Group for mouth
+// ---------------
+gui-comp
+mouth-group
+// num children
+0
 
 
 // colour select composite

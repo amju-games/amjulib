@@ -87,6 +87,7 @@ private:
   {
     int m_currentTexture;
     int m_currentColour;
+    bool m_visible;
   };
   typedef std::vector<LayerSet> LayerSets;
   LayerSets m_layers;
