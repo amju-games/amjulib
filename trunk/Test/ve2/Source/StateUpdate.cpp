@@ -9,6 +9,7 @@
 #include "PlayerNames.h"
 
 //#define UPDATE_DEBUG
+//#define XML_DEBUG
 
 namespace Amju
 {
