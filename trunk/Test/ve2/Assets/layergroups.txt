@@ -6,7 +6,7 @@
 // One texture and one colour is enabled for each layer group.
 
 // num layer groups
-4
+7
 
 // layer group name
 Skin
@@ -41,6 +41,30 @@ Tops
 characters/2d/top1.png
 characters/2d/top2.png
 characters/2d/blank.png
+
+// layer group name
+Glasses
+// Num textures
+2
+characters/2d/glasses.png
+characters/2d/blank.png
+
+// layer group name
+Mouth
+// Num textures
+2
+characters/2d/mouth1.png
+//characters/2d/mouth2.png
+characters/2d/blank.png
+
+// layer group name
+Facial hair
+// Num textures
+1
+//characters/2d/beard1.png
+//characters/2d/beard2.png
+characters/2d/blank.png
+
 
 // -----------------------------------------------------------
 // num colours
