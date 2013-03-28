@@ -65,7 +65,7 @@ layer-select-group
 // Buttons for selecting layers
 gui-button
 layer-button-0
--0.9, 0.5
+-0.9, 0.9
 0.6, 0.15
 gui-button-4.png
 head+body
@@ -73,7 +73,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-1
--0.9, 0.3
+-0.9, 0.7
 0.6, 0.15
 gui-button-4.png
 hair
@@ -81,7 +81,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-2
--0.9, 0.1
+-0.9, 0.5
 0.6, 0.15
 gui-button-4.png
 bottoms
@@ -89,7 +89,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-3
--0.9, -0.1
+-0.9, 0.3
 0.6, 0.15
 gui-button-4.png
 tops
@@ -97,7 +97,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-4
--0.9, -0.3
+-0.9, 0.1
 0.6, 0.15
 gui-button-4.png
 glasses
@@ -105,7 +105,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-5
--0.9, -0.5
+-0.9, -0.1
 0.6, 0.15
 gui-button-4.png
 mouth
@@ -113,7 +113,7 @@ arial, 1.5, sx=0.8
 
 gui-button
 layer-button-6
--0.9, -0.7
+-0.9, -0.3
 0.6, 0.15
 gui-button-4.png
 facial hair
@@ -170,7 +170,6 @@ eyes-group
 // Child 6 of root
 // Group for hair
 // --------------
-
 gui-comp
 hair-group
 // num children
