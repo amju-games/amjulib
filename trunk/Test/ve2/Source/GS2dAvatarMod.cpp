@@ -183,10 +183,10 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
   cancel->SetCommand(Amju::OnCancel);
 
   LayerGroupManager* lgm = TheLayerGroupManager::Instance();
-  static const int NUM_GROUP_NAMES = 6;
+  static const int NUM_GROUP_NAMES = 7;
   std::string GROUPNAME[NUM_GROUP_NAMES] = 
   {
-    "head-body-group", "hair-group", "bottoms-group", "tops-group", "glasses-group", "mouth-group"
+    "head-body-group", "hair-group", "bottoms-group", "tops-group", "glasses-group", "mouth-group", "facial-group"
   };
 
   // Layer buttons
@@ -226,6 +226,10 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
 
   SetButtonCommand("glasses-button-1", new TextureCommand(0));
   SetButtonCommand("glasses-button-2", new TextureCommand(1)); // invis
+
+  SetButtonCommand("facial-button-1", new TextureCommand(0));
+  SetButtonCommand("facial-button-2", new TextureCommand(1));
+  SetButtonCommand("facial-button-3", new TextureCommand(2)); //Amju::OnBlank); // invis
 
   // Set colour buttons
   for (int i = 0; i < 16; i++)
