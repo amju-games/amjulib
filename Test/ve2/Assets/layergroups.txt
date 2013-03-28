@@ -12,7 +12,7 @@
 Skin
 // num textures for this layer group
 1
-characters/2d/skin.png
+characters/2d/skin-no-outline.png
 
 
 
