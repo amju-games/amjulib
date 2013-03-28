@@ -60,9 +60,9 @@ characters/2d/blank.png
 // layer group name
 Facial hair
 // Num textures
-1
-//characters/2d/beard1.png
-//characters/2d/beard2.png
+3
+characters/2d/beard1.png
+characters/2d/beard2.png
 characters/2d/blank.png
 
 

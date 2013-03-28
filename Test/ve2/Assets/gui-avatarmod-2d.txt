@@ -6,8 +6,9 @@ gui-comp
 // Name
 avatar-config-comp
 // Num children
-14
+13
 
+// Child 0 of root
 // element type
 gui-button
 // Element name
@@ -23,6 +24,7 @@ ok
 // Font name, size
 arial, 2.0 
 
+// Child 1 of root
 // element type
 gui-button
 // Element name
@@ -38,7 +40,7 @@ cancel
 // Font name, size
 arial, 2.0 
 
-
+// Child 2 of root
 // Element type
 gui-text
 // Element name
@@ -52,12 +54,13 @@ Modify your avatar...
 // Font name, size
 arial, 1.0, fgcol=ffffff
 
+// Child 3 of root
 // Group for layer select buttons (head, top, bottom, etc)
 // -------------------------------------------------------
 gui-comp
 layer-select-group
 // num children
-4
+7
 
 // Buttons for selecting layers
 gui-button
@@ -108,9 +111,16 @@ gui-button-4.png
 mouth
 arial, 1.5, sx=0.8
 
+gui-button
+layer-button-6
+-0.9, -0.7
+0.6, 0.15
+gui-button-4.png
+facial hair
+arial, 1.5, sx=0.8
 
 
-
+// Child 4 of root
 // Group for head/body
 // -------------------
 gui-comp
@@ -149,6 +159,7 @@ scale-button-4.png
 @@@
 arial, 2.0
 
+// Child 5 of root
 // Group for eyes
 // --------------
 gui-comp
@@ -156,6 +167,7 @@ eyes-group
 // num children
 0
 
+// Child 6 of root
 // Group for hair
 // --------------
 
@@ -189,6 +201,7 @@ hair-button-3.png
 arial, 2.0
 
 
+// Child 7 of root
 // Group for bottoms
 // -----------------
 gui-comp
@@ -219,7 +232,7 @@ bots-button-3.png
 @@@
 arial, 2.0
 
-
+// Child 8 of root
 // Group for tops
 // --------------
 gui-comp
@@ -250,7 +263,7 @@ tops-button-3.png
 @@@
 arial, 2.0
 
-
+// Child 9 of root
 // Group for glasses
 // -----------------
 gui-comp
@@ -274,6 +287,7 @@ glasses-button-2.png
 arial, 2.0
 
 
+// Child 10 of root
 // Group for mouth
 // ---------------
 gui-comp
@@ -281,7 +295,40 @@ mouth-group
 // num children
 0
 
+// Child 11 of root
+// Group for facial hair
+// ---------------------
+gui-comp
+facial-group
+// num children
+3
+gui-button
+facial-button-1
+0.3, 0.3
+0.2, 0.2
+facial-button-1.png
+@@@
+arial, 2.0
 
+gui-button
+facial-button-2
+0.5, 0.3
+0.2, 0.2
+facial-button-2.png
+@@@
+arial, 2.0
+
+gui-button
+facial-button-3
+0.7, 0.3
+0.2, 0.2
+facial-button-3.png
+@@@
+arial, 2.0
+
+
+
+// Child 12 of root
 // colour select composite
 // --------------------------
 gui-comp
