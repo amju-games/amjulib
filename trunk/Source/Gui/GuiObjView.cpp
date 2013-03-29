@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <StringUtils.h>
 #include "GuiObjView.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

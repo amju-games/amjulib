@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include <DrawRect.h>
 #include <AmjuGL.h>
 #include "GuiKeyboard.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

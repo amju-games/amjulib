@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "GuiMenu.h"
 #include <AmjuGL.h>
 #include <Colour.h>
 #include <DrawRect.h>
 #include <EventPoller.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <algorithm>
 #include <AmjuGL.h>
 #include <Timer.h>
 #include "GuiScroll.h"
 #include "GuiFactory.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

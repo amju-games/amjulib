@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "GuiChart.h"
 #include "GuiFactory.h"
 #include "GuiDataLineDisplay.h" // TODO TEMP TEST
+#include <AmjuFinal.h>
 
 namespace Amju
 {

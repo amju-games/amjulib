@@ -12,6 +12,8 @@ public:
   static const char* NAME;
 
   GuiComposite();
+  virtual ~GuiComposite();
+
   virtual void Draw();
   virtual bool Load(File*); 
   virtual GuiElement* GetElementByName(const std::string& name);
