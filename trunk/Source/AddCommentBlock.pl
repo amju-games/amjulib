@@ -17,7 +17,7 @@
 use File::Find;
 use strict;
 
-my $COMMENT_BLOCK = "/* I am so cool */\n\n";
+my $COMMENT_BLOCK = "/* Amju Games source code (c) Copyright 2000-2013 Jason Colman */\n\n";
 
 sub AddHeaders($)
 {
