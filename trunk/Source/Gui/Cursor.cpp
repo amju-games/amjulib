@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "Cursor.h"
 #include "ResourceManager.h"
 #include "Pause.h"
 #include "EventPoller.h"
 #include "Screen.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
