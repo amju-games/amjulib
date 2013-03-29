@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GuiFactory.h"
 #include "GuiButton.h"
 #include "GuiImage.h"
@@ -18,6 +19,7 @@
 #include "GuiDataBarDisplay.h"
 #include "GuiChart.h"
 #include "GuiDataLineDisplay.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

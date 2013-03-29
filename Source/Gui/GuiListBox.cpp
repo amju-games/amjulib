@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GuiListBox.h"
 #include <EventPoller.h>
 #include <AmjuGL.h>
@@ -5,6 +6,7 @@
 #include <DrawRect.h>
 #include <AmjuAssert.h>
 #include "GuiScroll.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

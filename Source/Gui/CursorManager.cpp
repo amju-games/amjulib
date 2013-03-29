@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "CursorManager.h"
 #include "ResourceManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

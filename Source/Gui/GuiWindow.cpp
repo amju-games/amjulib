@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "GuiWindow.h"
 #include <AmjuGL.h>
 #include <Screen.h>
 #include <DrawRect.h>
 #include "DrawBorder.h"
+#include <AmjuFinal.h>
 
 #define NESTED_VIEWPORTS
 

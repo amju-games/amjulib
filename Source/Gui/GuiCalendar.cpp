@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <TimePeriod.h>
 #include "GuiCalendar.h"
 #include "GuiText.h"
 #include "DrawBorder.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

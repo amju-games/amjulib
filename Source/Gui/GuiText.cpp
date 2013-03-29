@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GuiText.h"
 #include "Font.h"
 #include "DrawRect.h"
@@ -6,6 +7,7 @@
 #include <Timer.h>
 #include <TextToSpeech.h>
 #include "DrawBorder.h"
+#include <AmjuFinal.h>
 
 //#define TEXT_RECT_DEBUG
 

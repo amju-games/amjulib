@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <TextToSpeech.h>
 #include "CursorManager.h"
@@ -7,6 +8,7 @@
 #include "EventPoller.h"
 #include "SoundManager.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -14,8 +16,8 @@ std::string GuiButton::s_clickFilename;
 
 const char* GuiButton::NAME = "gui-button";
 
-static GuiButton* focusButton = 0;
-static GuiButton* cancelButton = 0;
+static RCPtr<GuiButton> focusButton = 0;
+static RCPtr<GuiButton> cancelButton = 0;
 
 GuiButton::GuiButton()
 {
@@ -53,6 +55,9 @@ bool GuiButton::IsCancelButton() const
 
 void GuiButton::SetIsCancelButton(bool isCancelButton)
 {
+  // TODO causing crash?
+
+  /*
   if (isCancelButton)
   {
     cancelButton = this;
@@ -61,6 +66,7 @@ void GuiButton::SetIsCancelButton(bool isCancelButton)
   {
     cancelButton = 0;
   }
+  */
 }
 
 bool GuiButton::IsFocusButton() const
@@ -70,6 +76,8 @@ bool GuiButton::IsFocusButton() const
 
 void GuiButton::SetIsFocusButton(bool isFocusButton)
 {
+  // TODO causing crash?
+  /*
   if (isFocusButton)
   {
     focusButton = this;
@@ -78,6 +86,7 @@ void GuiButton::SetIsFocusButton(bool isFocusButton)
   {
     focusButton = 0;
   }
+  */
 }
 
 void GuiButton::SetShowIfFocus(bool s)
@@ -139,6 +148,12 @@ bool GuiButton::Load(File* f)
   {
     return false;
   }
+
+#ifdef _DEBUG
+  // For debugging, set name
+  m_guiText.SetName("text for button " + m_name + ": \"" + m_guiText.GetText() + "\"");
+#endif
+
   m_guiText.SetLocalPos(GetLocalPos());
   m_guiText.SetSize(GetSize());
   m_guiText.RecalcFirstLast();
@@ -298,7 +313,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (m_isPressed)
       {
         ClickSound();
-        //SetHasFocus(true); // Not sure about this. TODO Make it a flag ?
+        SetHasFocus(true); // Not sure about this. TODO Make it a flag ?
         OnPressedDown();
 
         return true; // handled

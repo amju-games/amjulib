@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <DrawRect.h>
 #include <AmjuGL.h>
 #include <LoadVec2.h>
 #include "GuiDialog.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

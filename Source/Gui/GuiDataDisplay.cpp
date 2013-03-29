@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <limits>
 #include "GuiDataDisplay.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

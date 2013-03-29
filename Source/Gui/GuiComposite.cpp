@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include "GuiComposite.h"
 #include "GuiFactory.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -8,6 +10,11 @@ const char* GuiComposite::NAME = "gui-comp";
 
 GuiComposite::GuiComposite()
 {
+}
+
+GuiComposite::~GuiComposite()
+{
+  Clear(); // to find crash
 }
 
 int GuiComposite::GetNumChildren() const

@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <Texture.h>
 #include <ResourceManager.h>
 #include "GuiRect.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

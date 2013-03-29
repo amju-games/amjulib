@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "GuiFileListBox.h"
 #include "GuiScroll.h"
 #include <StringUtils.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

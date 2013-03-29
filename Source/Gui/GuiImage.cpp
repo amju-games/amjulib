@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "GuiImage.h"
 #include "ResourceManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
