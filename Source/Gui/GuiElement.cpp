@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "GuiElement.h"
 #include "GuiFactory.h"
 #include "StringUtils.h"
 #include "EventPoller.h"
 #include "LoadVec2.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -12,6 +14,7 @@ static bool textToSpeechEnabled = true;
 
 void GuiElement::SetHasFocus(bool f)
 {
+  /*
   if (!IsVisible())
   {
 std::cout << "GUI: setting focus to " << m_name << " but not visible, so no effect.\n";
@@ -71,6 +74,7 @@ else
       focusElement = 0;
     }
   }
+  */
 }
 
 bool GuiElement::HasFocus() const
@@ -164,6 +168,8 @@ GuiElement::~GuiElement()
   //TheEventPoller::Instance()->RemoveListener(this); 
   //Assert(!TheEventPoller::Instance()->HasListener(this));
   // removed in EventListener dtor, so not removed yet.
+
+  std::cout << "Deleting GuiElement " << m_name << "\n";
 }
 
 bool GuiElement::Load(File* f)

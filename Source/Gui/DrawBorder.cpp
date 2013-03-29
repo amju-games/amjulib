@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <DrawRect.h>
 #include <Rect.h>
 #include "GuiElement.h"
 #include "DrawBorder.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
