@@ -589,6 +589,10 @@ void GSMain::OnDeactive()
 {
   GSBase::OnDeactive();
 
+  if (TheEventPoller::Instance()->HasListener(m_gui))
+  {
+    TheEventPoller::Instance()->RemoveListener(m_gui);
+  }
   m_gui = 0;
 
   // TODO Poss leaking menus ?? Check EventListeners
