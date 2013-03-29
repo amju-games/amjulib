@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <StringUtils.h>
 #include <File.h>
 #include <TimePeriod.h>
 #include "CogTestResults.h"
 #include "Ve1OnlineReqManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

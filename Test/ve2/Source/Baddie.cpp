@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include <File.h>
 #include <Texture.h>
@@ -8,6 +9,7 @@
 #include "LocalPlayer.h"
 #include "AttackEffect.h"
 #include "CommandFight.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

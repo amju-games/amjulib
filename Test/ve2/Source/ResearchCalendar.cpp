@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <TimePeriod.h>
 #include "ResearchCalendar.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

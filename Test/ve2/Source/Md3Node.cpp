@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <DrawAABB.h>
 #include "Player.h"
 #include "Md3Node.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

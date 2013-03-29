@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "FightReq.h"
 #include "Ve1Req.h"
 #include "Ve1OnlineReqManager.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

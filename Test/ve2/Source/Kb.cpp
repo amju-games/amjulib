@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <EventPoller.h>
 #include <GuiButton.h>
 #include <StringUtils.h>
 #include "Kb.h"
 #include "ChatConsole.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,4 +1,5 @@
 // Magic Software triangle-sphere intersect test
+#include <AmjuFirst.h>
 #include "Mgc/MgcIntr3DTriSphr.h"
 // Mgc point-in-poly test
 #include "Mgc/MgcCont2DPointInPolygon.h"
@@ -24,6 +25,7 @@
 #include "ROConfig.h"
 #include "GSMain.h"
 #include "Terrain.h"
+#include <AmjuFinal.h>
 
 //#define LOCATION_DEBUG
 

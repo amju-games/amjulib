@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <map>
 #include "PlayerNames.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

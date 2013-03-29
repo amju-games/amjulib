@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <StringsFile.h>
 #include <GuiButton.h>
 #include <GuiText.h>
 #include "GSStory.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "GSNetError.h"
 #include <AmjuGL.h>
@@ -6,6 +7,7 @@
 #include <GuiText.h>
 #include <GuiButton.h>
 #include "GSYesNoQuitProcess.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

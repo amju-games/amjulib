@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include <StringUtils.h>
 #include <UrlUtils.h>
@@ -5,6 +6,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "GSEdit.h"
 #include "GSObjMesh.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

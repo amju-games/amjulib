@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSWaitForNewLocation.h"
 #include <AmjuGL.h>
 #include "Terrain.h"
@@ -13,6 +14,7 @@
 #include "Camera.h"
 #include "FuelCell.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

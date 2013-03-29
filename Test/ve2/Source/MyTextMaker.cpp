@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "MyTextMaker.h"
 #include <AmjuGL.h>
 #include <Colour.h>
 #include <Timer.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

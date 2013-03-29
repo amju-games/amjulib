@@ -1,8 +1,8 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <Game.h>
 #include "Objective.h"
 #include "File.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

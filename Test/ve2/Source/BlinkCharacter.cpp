@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "BlinkCharacter.h"
 #include "Timer.h"
 #include "ResourceManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

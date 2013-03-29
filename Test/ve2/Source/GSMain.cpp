@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSMain.h"
 #include <AmjuGL.h>
 #include <ShadowMap.h>
@@ -45,6 +46,7 @@
 #include "MsgNum.h"
 #include "CommandPickup.h"
 #include "BroadcastConsole.h"
+#include <AmjuFinal.h>
 
 #define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
@@ -220,6 +222,10 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
 
     //RCPtr<GuiMenu> menu = 0; // TODO TEMP TEST new GuiMenu;
     m_menu = new GuiMenu;
+#ifdef _DEBUG
+    m_menu->SetName("context menu for object " + ToString(*v));
+#endif
+
     //GetContextMenu()->Clear();
     //GetContextMenu()->SetVisible(true);
     v->SetMenu(m_menu);

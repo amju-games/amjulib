@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include "CreateCollect.h"
 #include "LocalPlayer.h"
 #include "Collect.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

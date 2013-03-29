@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <AmjuSleep.h>
 #include <Timer.h>
 #include "SerialReqManager.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 //#define SRM_AUDIT
 //#define QUEUE_DEBUG

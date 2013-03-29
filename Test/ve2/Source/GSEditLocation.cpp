@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "GSEditLocation.h"
 #include <Game.h>
 #include "GSEdit.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include <Game.h>
 #include <DegRad.h>
@@ -17,6 +18,7 @@
 #include "LurkMsg.h"
 #include "HeartCount.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 //#define AABB_DEBUG
 

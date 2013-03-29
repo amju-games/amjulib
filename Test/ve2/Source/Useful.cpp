@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <sstream>
 #include <StringUtils.h>
 #include "Useful.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

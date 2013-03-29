@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "ReqLogin.h"
 #include <TimePeriod.h>
 #include "Ve1OnlineReqManager.h"
@@ -27,6 +28,7 @@
 #include "GSMain.h"
 #include "CogTestResults.h"
 #include "FuelCount.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

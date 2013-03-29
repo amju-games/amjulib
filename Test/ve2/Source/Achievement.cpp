@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <set>
 #include <utility>
 #include <AmjuAssert.h>
@@ -7,6 +8,7 @@
 #include "LurkMsg.h"
 #include "GameLookup.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

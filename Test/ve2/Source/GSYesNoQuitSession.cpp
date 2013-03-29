@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include "GSYesNoQuitSession.h"
 #include "GSTitle.h"
 #include "LogOut.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

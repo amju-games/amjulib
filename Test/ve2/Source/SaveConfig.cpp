@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "SaveConfig.h"
 #include "SpecialConfig.h"
 #include <Directory.h>
 #include <File.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

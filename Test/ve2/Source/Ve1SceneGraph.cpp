@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
 #include "Cam2d.h"
 #include "Useful.h"
 #include "GameMode.h"
+#include <AmjuFinal.h>
 
 #define CAM_2D
 

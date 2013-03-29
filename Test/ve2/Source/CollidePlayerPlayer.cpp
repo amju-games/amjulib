@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <Timer.h>
 #include "CollisionManager.h"
 #include "Player.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

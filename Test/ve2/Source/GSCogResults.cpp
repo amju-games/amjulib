@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <GuiButton.h>
 #include "GSCogResults.h"
 #include "CogTestNag.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "ReqSendMsg.h"
 #include <iostream>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

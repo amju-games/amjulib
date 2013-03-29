@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Game.h>
 #include <ConfigFile.h>
@@ -12,6 +13,7 @@
 #include "UploadNewContent.h"
 #include "GSWaitForUpload.h"
 #include "ReqSetObjectFilenames.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "DownloadManager.h"
 #include <DownloadReq.h>
@@ -6,6 +7,7 @@
 #include "Ve1OnlineReqManager.h"
 #include "GSWaitForNewLocation.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 #ifdef _DEBUG
 #define DOWNLOAD_DEBUG

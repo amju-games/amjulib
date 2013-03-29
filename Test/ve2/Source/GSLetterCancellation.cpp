@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSLetterCancellation.h"
 #include <AmjuGL.h>
 #include <ReportError.h>
@@ -20,6 +21,7 @@
 #include "GameMode.h"
 #include "GSDoThoseCogTests.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "ReqGetNewMsgs.h"
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
@@ -7,6 +8,7 @@
 #include "LocalPlayer.h"
 #include <StringUtils.h>
 #include "GSNetError.h"
+#include <AmjuFinal.h>
 
 //#define SEND_DEBUG
 

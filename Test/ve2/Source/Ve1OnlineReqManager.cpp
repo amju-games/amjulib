@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "Ve1OnlineReqManager.h"
 #include <iostream>
 #include "SpecialConfig.h"
 #include "GameMode.h"
 #include "LogOut.h"
+#include <AmjuFinal.h>
 
 //#define REQ_DEBUG
 

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSStroopColourWord.h"
 #include <AmjuGL.h>
 #include <ReportError.h>
@@ -19,6 +20,7 @@
 #include "CogTestNag.h"
 #include "HeartCount.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

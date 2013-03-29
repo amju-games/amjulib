@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <CollisionManager.h>
 #include "Player.h"
 #include "Furniture.h"
 #include "CollideObjectFurniture.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

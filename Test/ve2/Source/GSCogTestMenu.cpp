@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Screen.h>
 #include <Game.h>
@@ -22,6 +23,7 @@
 #include "GSFinishedTests.h"
 #include "CogTestNag.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

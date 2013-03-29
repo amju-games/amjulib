@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include <Timer.h>
 #include "CogTestNag.h"
@@ -11,6 +12,7 @@
 #include "GSMain.h"
 #include "GSFinishedTests.h"
 #include "GSFileUpdateCheck.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

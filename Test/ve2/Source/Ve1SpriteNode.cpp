@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <ReportError.h>
 #include <Timer.h>
@@ -5,6 +6,7 @@
 #include "Ve1SpriteNode.h"
 #include "LayerGroup.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

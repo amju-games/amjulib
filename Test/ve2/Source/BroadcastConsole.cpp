@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include "BroadcastConsole.h"
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include "ROConfig.h"
 #include "Kb.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

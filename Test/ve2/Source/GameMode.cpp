@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "GameMode.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

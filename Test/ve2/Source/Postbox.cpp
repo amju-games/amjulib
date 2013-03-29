@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "Postbox.h"
 #include <GuiMenu.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

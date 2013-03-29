@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <Game.h>
 #include <DegRad.h>
@@ -14,6 +15,7 @@
 #include "GameMode.h"
 #include "ROConfig.h"
 #include "Ve1SpriteNode.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "QuitHandler.h"
 #include <Game.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

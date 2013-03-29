@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <GuiButton.h>
 #include "GSAchievements.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

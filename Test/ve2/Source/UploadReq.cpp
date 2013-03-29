@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "UploadReq.h"
 #include "GSWaitForUpload.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

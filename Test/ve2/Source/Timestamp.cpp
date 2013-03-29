@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "Timestamp.h"
 #include <StringUtils.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

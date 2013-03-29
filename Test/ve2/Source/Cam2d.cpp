@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "Cam2d.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

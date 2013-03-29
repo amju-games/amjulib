@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "MsgManager.h"
 #include <iostream>
 #include <StringUtils.h>
@@ -20,6 +21,7 @@
 #include "Achievement.h"
 #include "LurkMsg.h"
 #include "GameConsts.h"
+#include <AmjuFinal.h>
 
 #define SEND_DEBUG
 

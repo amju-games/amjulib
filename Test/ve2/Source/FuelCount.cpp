@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "FuelCount.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

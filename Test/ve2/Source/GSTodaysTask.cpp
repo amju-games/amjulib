@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
 #include "GSTodaysTask.h"
 #include "GSStartGame.h"
 #include "ResearchCalendar.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

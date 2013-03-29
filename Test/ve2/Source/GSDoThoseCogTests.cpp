@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <GuiButton.h>
 #include <Game.h>
 #include "GSDoThoseCogTests.h"
 #include "GSQuitGame.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

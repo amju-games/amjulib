@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Directory.h>
 #include <Game.h>
@@ -6,6 +7,7 @@
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
 #include "GSTitle.h"
+#include <AmjuFinal.h>
 
 #if defined(WIN32) && defined(_DEBUG)
 //#define WIN32_TEST_COPY_ASSETS

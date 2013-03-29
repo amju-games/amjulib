@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
@@ -5,6 +6,7 @@
 #include "ROConfig.h"
 #include "Useful.h"
 #include "GSStartGame.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

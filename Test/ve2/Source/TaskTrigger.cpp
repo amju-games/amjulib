@@ -2,13 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2006
 */
 
-#include "AmjuFirst.h"
 
+#include <AmjuFirst.h>
 #include <File.h>
 #include <AmjuTime.h>
 #include "TaskTrigger.h"
 #include "LocalPlayer.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

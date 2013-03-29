@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <EventPoller.h>
 #include <SoundManager.h>
 #include <TextToSpeech.h>
 #include "ROConfig.h"
 #include "LurkMsg.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

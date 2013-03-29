@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <GuiButton.h>
 #include "GSLogout.h"
 #include "LogOut.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

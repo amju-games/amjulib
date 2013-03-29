@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "TextDraw.h"
 #include <SceneMesh.h>
 #include "Ve1SceneGraph.h"
@@ -9,6 +10,7 @@
 #include <Localise.h>
 #include <Screen.h>
 #include <Game.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

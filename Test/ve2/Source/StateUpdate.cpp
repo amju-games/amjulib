@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "StateUpdate.h"
 #include <iostream>
 #include <Xml/XmlNodeInterface.h>
@@ -7,6 +8,7 @@
 #include <StringUtils.h>
 #include "GSNetError.h"
 #include "PlayerNames.h"
+#include <AmjuFinal.h>
 
 //#define UPDATE_DEBUG
 //#define XML_DEBUG

@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <ConfigFile.h>
 #include "ResizeHandler.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

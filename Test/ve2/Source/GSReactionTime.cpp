@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSReactionTime.h"
 #include <AmjuGL.h>
 #include <ReportError.h>
@@ -16,6 +17,7 @@
 #include "GameConsts.h"
 #include "CogTestNag.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

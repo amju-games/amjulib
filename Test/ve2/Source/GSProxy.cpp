@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include <GuiButton.h>
 #include <GuiTextEdit.h>
 #include <AmjuGL.h>
 #include <ConfigFile.h>
 #include "SaveConfig.h"
 #include "GSProxy.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

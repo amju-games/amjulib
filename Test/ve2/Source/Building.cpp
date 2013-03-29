@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include "Building.h"
 #include "SceneCollisionMesh.h"
 #include "Player.h"
 #include "SetObjMeshCommand.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

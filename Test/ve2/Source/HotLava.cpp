@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include "HotLava.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

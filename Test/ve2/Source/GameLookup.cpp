@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "GameLookup.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

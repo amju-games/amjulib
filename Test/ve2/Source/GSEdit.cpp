@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include <AmjuGL.h>
 #include <CursorManager.h>
@@ -28,6 +29,7 @@
 #include "FuelCell.h"
 #include "LurkMsg.h"
 #include "HotLava.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

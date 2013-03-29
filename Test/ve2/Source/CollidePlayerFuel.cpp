@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <CollisionManager.h>
 #include <SoundManager.h>
 #include "Player.h"
 #include "FuelCell.h"
 #include "FirstTimeMsg.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

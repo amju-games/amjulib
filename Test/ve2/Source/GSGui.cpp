@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSGui.h"
 #include <AmjuGL.h>
 
@@ -13,6 +14,7 @@
 #include "ROConfig.h"
 #include "LocalPlayer.h"
 #include "HeartCount.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
