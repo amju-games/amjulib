@@ -7,7 +7,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 
 #include <new>
 
-#if defined(USE_AMJU_DEBUG_NEW) && defined(MACOSX)
+#if defined(USE_AMJU_DEBUG_NEW) //&& defined(MACOSX)
 
 // Call to generate report of outstanding memory allocations
 void ReportMem();
@@ -22,9 +22,6 @@ void SetBreakSize(size_t size);
 void SetLimit(unsigned int limit);
 
 
-#ifndef WIN32
-// Can't get this to work with MS stl
-
 // Overload operator new so you can give the file/line number of allocation
 void* operator new(size_t size, const char* file, int line);
 
@@ -32,7 +29,6 @@ void* operator new(size_t size, const char* file, int line);
 void* operator new[](size_t size, const char* file, int line);
 
 #ifdef WIN32
-// Never reached
 // MSVC: warns that there is no matching operator delete.. ?
 void operator delete(void*, const char* file, int line);
 void operator delete[](void*, const char* file, int line);
@@ -41,8 +37,6 @@ void operator delete[](void*, const char* file, int line);
 
 // Call the overloaded operator new giving file and line number
 #define new new(__FILE__, __LINE__)
-
-#endif // WIN32
 
 
 // Used to turn off allocation logging for call stack or other 

@@ -5,13 +5,9 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 // NB Bad idea to use #include "AmjuFirst.h", #include "AmjuFinal.h", or
 //  AMJU_CALL_STACK here.
 
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif // WIN32
-
 #include "AmjuMem.h"
 
-#if defined(USE_AMJU_DEBUG_NEW) && defined(MACOSX)
+#if defined(USE_AMJU_DEBUG_NEW) //&& defined(MACOSX)
 
 #ifdef new
 #undef new
@@ -24,11 +20,23 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 // #include <cstddef> ??
 
 #include <map>
+#include <set>
 #include <fstream>
 #include <assert.h>
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
+#if __cplusplus > 199711L
+#define USE_CPLUSPLUS_11_MUTEX
+#endif
+
+#ifdef USE_CPLUSPLUS_11_MUTEX
+#include <mutex.h>
+#else
+#include <Mutex.h>
+#endif
+
 #include "AmjuFinal.h"
 
 #ifdef new
@@ -155,7 +163,7 @@ static unsigned int limit = 0;
 // Recursion depth count:
 // Using a map in operator new can cause new to be called again 
 //  -- only add to the map if the recursion depth is zero!
-static unsigned int depth = 0;
+static int depth = 0;
 
 void IncRecursionDepth()
 {
@@ -186,8 +194,8 @@ void SetLimit(unsigned int lim)
   limit = lim;
 }
 
-static int totalMemAllocated = 0;
-static int maxMemAllocated = 0;
+static unsigned int totalMemAllocated = 0;
+static unsigned int maxMemAllocated = 0;
 
 struct Breaker
 {
@@ -201,8 +209,29 @@ void Break()
 
 Breaker myBreaker;
 
+#ifdef USE_CPLUSPLUS_11_MUTEX
+std::mutex& GetMutex()
+{
+  static std::mutex theMute
+  return thexMutex;
+}
+#else
+Amju::Mutex& GetMutex()
+{
+  static Amju::Mutex theMutex;
+  return theMutex;
+}
+#endif
+
+
 void* myNew(size_t size, const char* file, int line)
 {
+#ifdef USE_CPLUSPLUS_11_MUTEX
+  std::lock_guard<std::mutex> lg(GetMutex());
+#else
+  Amju::MutexLocker ml(GetMutex());
+#endif
+
   // We have to allow allocations of size 0.
   // To make sure this works OK with malloc, change size to 1 in this case.
   // TODO Also print warning ?
@@ -213,9 +242,11 @@ void* myNew(size_t size, const char* file, int line)
 
   void* p = malloc(size);
 
-  if (ready && depth == 0)
+  assert(depth >= 0);
+
+  ++depth;
+  if (ready && depth == 1)
   {
-    ++depth;
 
     currentAlloc++;
 
@@ -256,8 +287,10 @@ void* myNew(size_t size, const char* file, int line)
 
     AllocMgr::Instance()->allocMap.insert(kv);
 
-    --depth;
   }
+
+  assert(depth >= 0);
+  --depth;
 
   return p;
 }
@@ -285,25 +318,63 @@ void* operator new[](size_t size)
 
 void operator delete(void* p)
 {
-  if (p)
+#ifdef USE_CPLUSPLUS_11_MUTEX
+  std::lock_guard<std::mutex> lg(GetMutex());
+#else
+  Amju::MutexLocker ml(GetMutex());
+#endif
+
+  typedef std::set<void*> DeletedSet;
+  static DeletedSet delSet;
+
+  if (!p)
   {
-    if (ready) // && depth == 0)
+    return;
+  }
+
+  assert(depth >= 0);
+  depth++;
+
+  if (ready && depth == 1)
+  {
+    AllocMap::iterator it = AllocMgr::Instance()->allocMap.find(p);
+
+    if (it == AllocMgr::Instance()->allocMap.end())
     {
-      AllocMap::iterator it = AllocMgr::Instance()->allocMap.find(p);
-
-      if (it != AllocMgr::Instance()->allocMap.end())
+      // Allocation not found! Already deleted?
+      if (delSet.count(p) > 0)
       {
-        totalMemAllocated -= it->second.m_size;
-
-        AllocMgr::Instance()->allocMap.erase(it);
+        std::cout << "Double delete!?!\n";
+        //assert(0);
       }
     }
+    else
+    {
+      totalMemAllocated -= it->second.m_size;
 
-    free(p);
+      AllocMgr::Instance()->allocMap.erase(it);
+    }
+
+    delSet.insert(p); // insert into set of deleted allocs, to check for double delete
   }
+
+  free(p);
+
+  assert(depth >= 0);
+  depth--;
 }
 
 void operator delete[](void* p)
+{
+  operator delete(p);
+}
+
+void operator delete(void* p, const char*, int)
+{
+  operator delete(p);
+}
+
+void operator delete[](void* p, const char*, int)
 {
   operator delete(p);
 }
@@ -400,7 +471,7 @@ void ReportMem()
     }
 
     // Write call stack
-    for (int i = 0; i < a.m_callstack.size(); i++)
+    for (unsigned int i = 0; i < a.m_callstack.size(); i++)
     {
       fprintf(file, "%s ",  a.m_callstack[i].c_str());
     }
