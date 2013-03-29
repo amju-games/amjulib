@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Colour.h>
 #include <ResourceManager.h>
@@ -7,6 +8,7 @@
 #include <Timer.h>
 #include "GS2dAvatarMod.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -77,7 +79,7 @@ public:
 
 private:
   int m_layer;
-  GuiElement* m_group;
+  RCPtr<GuiElement> m_group;
 };
 
 class TextureCommand : public GuiCommand
