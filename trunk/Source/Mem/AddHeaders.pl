@@ -36,8 +36,8 @@ sub AddHeaders($)
   # Keep track of the current include in case it turns out to be the final one.
   # Then we add the final include to it.
   # If no includes yet, just do nothing. 
-  # First include:  #include "AmjuFirst.h"
-  # Last include:   #include "AmjuFinal.h"
+  # First include:  #include <AmjuFirst.h>
+  # Last include:   #include <AmjuFinal.h>
  
   my $lineNum = 0;
   my $wasChanged = 0;
@@ -55,13 +55,13 @@ sub AddHeaders($)
       $lines[$lineNum] = "**DELETE_ME**";
     }
 
-    # If first line is #ifdef etc, put #include "AmjuFirst.h" before it
+    # If first line is #ifdef etc, put #include <AmjuFirst.h> before it
     if ($line =~ /^#/)
     {
       if (!$foundFirst)
       {
         $foundFirst = 1;
-        my $newline = "#include \"AmjuFirst.h\"\n" . $line;
+        my $newline = "#include <AmjuFirst.h>\n" . $line;
         $lines[$lineNum] = $newline;
         $wasChanged = 1;
       }
@@ -89,29 +89,28 @@ sub AddHeaders($)
 
   if ($line eq "**DELETE_ME**")
   {
-    $lines[$lastIncludeLine] = "#include \"AmjuFinal.h\"";
+    $lines[$lastIncludeLine] = "#include <AmjuFinal.h>";
   }
   else
   {
-    $lines[$lastIncludeLine] = $line . "\n#include \"AmjuFinal.h\"";
+    $lines[$lastIncludeLine] = $line . "\n#include <AmjuFinal.h>";
   }
 
 
   # Print new verison of file 
   # -------------------------
   #
-  print "\n\nNEW FILE:\n";
-  foreach my $line (@lines)
-  {
-    if ($line ne "**DELETE_ME**")
-    {
-      print "$line\n";
-    }
-  }
-  print "\n\n";
-
   if ($ARGV[1] eq "nowrite")
   {
+    print "\n\nNEW FILE:\n";
+    foreach my $line (@lines)
+    {
+      if ($line ne "**DELETE_ME**")
+      {
+        print "$line\n";
+      }
+    }
+    print "\n\n";
     return;
   }
 
@@ -124,6 +123,7 @@ sub AddHeaders($)
   {
     if ($line2 ne "**DELETE_ME**")
     {
+      $line2 =~ s/\r//g;
       print MODIFY_THIS "$line2\n";
     }
   }
