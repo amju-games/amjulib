@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Game.h>
 #include "GSWaitForUpload.h"
 #include "GSEdit.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

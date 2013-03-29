@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "BruteForce.h"
 #include "CollisionManager.h"
 #include "Ve1Object.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

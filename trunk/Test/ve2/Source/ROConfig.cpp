@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <AmjuAssert.h>
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

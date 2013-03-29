@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "ObjectUpdater.h"
 #include <Game.h>
 #include "Useful.h"
@@ -14,6 +15,7 @@
 #include "ObjectManager.h"
 #include "LocalPlayer.h"
 #include "GameMode.h"
+#include <AmjuFinal.h>
 
 //#define OU_DEBUG
 //#define YES_USE_CACHE

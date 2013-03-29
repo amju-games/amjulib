@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Terrain.h"
 #include <iostream>
 #include <DrawOBB3.h>
@@ -18,6 +19,7 @@
 #include "Useful.h"
 ////#include <Plane.h>
 #include "SetObjMeshCommand.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

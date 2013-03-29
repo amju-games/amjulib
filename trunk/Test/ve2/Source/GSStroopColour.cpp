@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSStroopColour.h"
 #include <AmjuGL.h>
 #include <ReportError.h>
@@ -15,6 +16,7 @@
 #include "LurkMsg.h"
 #include "GameConsts.h"
 #include "CogTestNag.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

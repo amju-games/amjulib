@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSFileUpdateCheck.h"
 #include <Game.h>
 #include <AmjuGL.h>
@@ -6,6 +7,7 @@
 #include "FileUpdater.h"
 #include "GSStartGame.h"
 #include "SaveConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

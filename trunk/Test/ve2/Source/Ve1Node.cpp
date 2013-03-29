@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Ve1Node.h"
 #include <iostream>
 #include <SceneNode.h>
@@ -7,6 +8,7 @@
 #include "Ve1SceneGraph.h"
 #include "Ve1Object.h"
 #include "Useful.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
@@ -19,6 +20,7 @@
 #include "ROConfig.h"
 #include "Kb.h"
 #include "Ve1SceneGraph.h"
+#include <AmjuFinal.h>
 
 #define SHOW_ENV_INFO
 //#define SHOW_FRAME_TIME

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include <Game.h>
 #include <GuiButton.h>
@@ -9,6 +10,7 @@
 #include "Kb.h"
 #include "SaveConfig.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

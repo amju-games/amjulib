@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
 #include <ResourceManager.h>
@@ -18,6 +19,7 @@
 #include "ResizeHandler.h"
 #include "JoystickToCursor.h" 
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

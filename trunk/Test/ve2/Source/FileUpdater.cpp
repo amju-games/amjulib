@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "FileUpdater.h"
 #include <iostream>
 #include <SafeUtils.h>
@@ -9,6 +10,7 @@
 #include <StringUtils.h>
 #include "GSNetError.h"
 #include "GSFileUpdateCheck.h"
+#include <AmjuFinal.h>
 
 #define XML_DEBUG
 

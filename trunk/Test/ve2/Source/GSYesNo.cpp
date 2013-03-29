@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include <GuiButton.h>
 #include <GuiText.h>
 #include "GSYesNo.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

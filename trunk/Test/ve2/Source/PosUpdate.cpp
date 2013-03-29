@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "PosUpdate.h"
 #include <Game.h>
 #include <GameObject.h>
@@ -11,6 +12,7 @@
 #include "Ve1Object.h"
 #include "ObjectUpdater.h"
 #include "GSNetError.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

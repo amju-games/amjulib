@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <Outliner.h>
 #include "SceneCollisionMesh.h"
+#include <AmjuFinal.h>
 
 #ifdef _DEBUG
 //#define SHOW_COLLISION_MESH

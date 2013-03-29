@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Player.h"
 #include <Game.h>
 #include <AmjuGL.h>
@@ -41,6 +42,7 @@
 #include "FuelCell.h"
 #include "GS2dAvatarMod.h"
 #include "MsgManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -60,6 +62,14 @@ public:
   PlayerNameNode(Player* p) : m_player(p)
   {
     SetBlended(true);
+    m_text.SetTextSize(5.0f); // TODO CONFIG
+    m_text.SetText(m_player->GetName());    
+    static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
+    m_text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
+    m_text.SetJust(GuiText::AMJU_JUST_CENTRE);
+    m_text.SetFgCol(Colour(1, 1, 1, 1));
+    m_text.SetInverse(true);
+    m_text.SetDrawBg(true);
   }
 
   virtual void Draw()
@@ -76,17 +86,6 @@ public:
       AmjuGL::Enable(AmjuGL::AMJU_BLEND);
       AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
-      GuiText text;
-      text.SetTextSize(5.0f); // TODO CONFIG
-      text.SetText(m_player->GetName());
-    
-      static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
-      text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
-      text.SetJust(GuiText::AMJU_JUST_CENTRE);
-      //text.SetInverse(true);
-      //text.SetDrawBg(true);
-      text.SetFgCol(Colour(1, 1, 1, 1));
-
       AmjuGL::PushMatrix();
     
       Matrix m;
@@ -101,12 +100,13 @@ public:
       m.TranslateKeepRotation(tr);
       AmjuGL::MultMatrix(m);
       static const float SCALE_FACTOR = 20.0f;
+      static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
       float x = MAX_NAME_WIDTH * SCALE_FACTOR * -0.5f;
       AmjuGL::Translate(x, 60.0f, 0); // TODO CONFIG
     
       AmjuGL::Scale(SCALE_FACTOR, SCALE_FACTOR, 10);  
 
-      text.Draw();
+      m_text.Draw();
       AmjuGL::PopMatrix();
       AmjuGL::PopAttrib();
     }
@@ -114,6 +114,7 @@ public:
  
 protected:
   RCPtr<Player> m_player;
+  GuiText m_text;
 };  
 
 

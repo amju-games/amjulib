@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "LayerGroup.h"
 #include "ObjectUpdater.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 //#define LAYER_DEBUG
 

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Collect.h"
 #include <Timer.h>
 #include <GameObjectFactory.h> 
@@ -12,6 +13,7 @@
 #include "HasCollisionMesh.h"
 #include "LocalPlayer.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

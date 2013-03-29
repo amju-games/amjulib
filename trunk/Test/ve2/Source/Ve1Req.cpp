@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Ve1Req.h"
 #include <Xml/XmlParser2.h>
 #include <SafeUtils.h>
@@ -6,6 +7,7 @@
 #include "GSNetError.h"
 #include "CreateCollect.h"
 #include "HeartCount.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

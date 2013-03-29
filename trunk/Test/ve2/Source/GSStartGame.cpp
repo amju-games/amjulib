@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "GSStartGame.h"
 #include "GSMain.h"
 #include <AmjuGL.h>
 #include <Game.h>
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

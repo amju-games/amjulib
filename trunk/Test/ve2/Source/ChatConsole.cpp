@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GuiText.h>
 #include <GuiTextEdit.h>
 #include <GuiWindow.h>
@@ -13,6 +14,7 @@
 #include "Kb.h"
 #include "Player.h"
 #include "LurkMsg.h" 
+#include <AmjuFinal.h>
 
 namespace Amju
 {

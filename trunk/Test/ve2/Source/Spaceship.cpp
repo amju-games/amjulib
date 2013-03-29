@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include "Spaceship.h"
 #include "HeartCount.h"
@@ -5,6 +6,7 @@
 #include "ResearchCalendar.h"
 #include "LurkMsg.h"
 #include "GameConsts.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

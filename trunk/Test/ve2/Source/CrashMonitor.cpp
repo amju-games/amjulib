@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <Directory.h>
 #include "CrashMonitor.h"
 #include "File.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

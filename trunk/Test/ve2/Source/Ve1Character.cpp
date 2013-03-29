@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Ve1Character.h"
 #include <File.h>
 #include <DrawAABB.h>
@@ -5,6 +6,7 @@
 #include "Ve1Object.h"
 #include "Player.h"
 #include "LocalPlayer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

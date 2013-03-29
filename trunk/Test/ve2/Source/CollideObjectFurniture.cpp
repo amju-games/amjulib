@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "Furniture.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

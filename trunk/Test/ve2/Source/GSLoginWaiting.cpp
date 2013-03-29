@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include "GSLoginWaiting.h"
 #include <AmjuGL.h>
 #include <Game.h>
 #include "GSTitle.h"
 #include <GuiText.h>
 #include "ReqLogin.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

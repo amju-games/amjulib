@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "SpecialConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

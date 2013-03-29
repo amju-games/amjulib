@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <Game.h>
 #include <StringUtils.h>
@@ -18,6 +19,7 @@
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
 #include "ReqSetObjectFilenames.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

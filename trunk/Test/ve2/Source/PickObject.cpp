@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <GameObject.h>
 #include <Game.h>
@@ -10,6 +11,7 @@
 #include "Skybox.h"
 #include "LocalPlayer.h"
 #include "Useful.h"
+#include <AmjuFinal.h>
 
 //#define PICK_DEBUG
 

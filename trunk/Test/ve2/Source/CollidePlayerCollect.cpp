@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "CollisionManager.h"
 #include "Player.h"
 #include "Collect.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

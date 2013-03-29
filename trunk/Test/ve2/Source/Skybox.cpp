@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Skybox.h"
 #include "GameObjectFactory.h"
 #include "Timer.h"
@@ -7,6 +8,7 @@
 #include "SetObjMeshCommand.h"
 #include "SceneCollisionMesh.h"
 #include "Useful.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

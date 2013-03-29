@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "HeartCount.h"
 #include "LocalPlayer.h"
 #include "Ve1OnlineReqManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

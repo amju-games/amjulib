@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Unproject.h>
 // Magic Software triangle-sphere intersect test
 #include "Mgc/MgcIntr3DTriSphr.h"
@@ -13,6 +14,7 @@
 #include "MouseToGroundPos.h"
 #include "Useful.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 //#define MGP_DEBUG
 

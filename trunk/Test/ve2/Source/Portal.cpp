@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include <Game.h>
 #include "Portal.h"
@@ -8,6 +9,7 @@
 #include "Ve1SceneGraph.h"
 #include "Useful.h"
 #include "GameMode.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

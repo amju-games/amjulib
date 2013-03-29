@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSBase.h"
 #include <Game.h>
 #include <Timer.h>
@@ -8,6 +9,7 @@
 #include "PosUpdate.h"
 #include "GSNetError.h"
 #include "JoystickToCursor.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

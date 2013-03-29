@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Game.h>
 #include <GameObjectFactory.h>
 #include <SceneNode.h>
@@ -13,6 +14,7 @@
 #include "ROConfig.h"
 #include "Sprite.h"
 #include "Terrain.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

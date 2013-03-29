@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Localise.h>
 #include <Game.h>
 #include "FirstTimeMsg.h"
@@ -9,6 +10,7 @@
 #include "GSStory.h"
 #include "GameConsts.h"
 #include "GameLookup.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

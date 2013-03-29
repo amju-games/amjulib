@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include <Timer.h>
 #include "JoystickToCursor.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

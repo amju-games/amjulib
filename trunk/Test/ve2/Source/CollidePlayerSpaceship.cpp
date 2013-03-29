@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <CollisionManager.h>
 #include "Player.h"
 #include "Spaceship.h"
 #include "FirstTimeMsg.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

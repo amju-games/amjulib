@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <GameObjectFactory.h>
 #include <Game.h>
 #include <Timer.h>
@@ -10,6 +11,7 @@
 #include "LurkMsg.h"
 #include "GSCogTestMenu.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

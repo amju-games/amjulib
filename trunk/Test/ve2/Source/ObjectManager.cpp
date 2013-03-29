@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "ObjectManager.h"
 #include <Timer.h>
 #include "Ve1Req.h"
@@ -21,6 +22,7 @@
 #include "ObjectUpdater.h"
 #include "GameMode.h"
 #include "Useful.h"
+#include <AmjuFinal.h>
 
 //#define XML_DEBUG
 //#define ASSET_DEBUG

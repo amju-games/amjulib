@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "GSScribble.h"
 #include <AmjuGL.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "GSPaused.h"
 #include <AmjuGL.h>
 #include <Game.h>
@@ -8,6 +9,7 @@
 #include "LocalPlayer.h"
 #include "GSCalendar.h"
 #include "GSAchievements.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

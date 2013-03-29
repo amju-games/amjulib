@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "CommandFight.h"
 #include "FightReq.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

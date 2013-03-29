@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <ReportError.h>
 #include "Sprite.h"
 #include "LayerGroup.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

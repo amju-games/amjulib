@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <set>
 #include <File.h>
@@ -6,6 +7,7 @@
 #include <ObjMesh.h>
 #include "Ve1OnlineReqManager.h"
 #include "UploadReq.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

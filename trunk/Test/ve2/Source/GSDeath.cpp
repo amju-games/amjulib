@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "GSDeath.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include "PlayerInfo.h"
 #include <File.h>
 #include <StringUtils.h>
 #include <Directory.h>
 #include <iostream>
 #include <AmjuTime.h>
+#include <AmjuFinal.h>
 
 //#define PI_DEBUG
 

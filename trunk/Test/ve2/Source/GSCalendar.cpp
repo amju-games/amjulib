@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <GuiCalendar.h>
 #include <AmjuGL.h>
 #include <GuiButton.h>
 #include "GSCalendar.h"
 #include "ResearchCalendar.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

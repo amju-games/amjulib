@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <File.h>
 #include <StringUtils.h>
 #include <ReportError.h>
@@ -5,6 +6,7 @@
 #include "AvatarManager.h"
 #include "BlinkCharacter.h" // TODO TEMP TEST - use factory
 #include "Md3Node.h" // factory
+#include <AmjuFinal.h>
 
 namespace Amju
 {

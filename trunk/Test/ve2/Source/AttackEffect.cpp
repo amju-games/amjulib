@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "AttackEffect.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

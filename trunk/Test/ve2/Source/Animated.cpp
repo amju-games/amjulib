@@ -1,4 +1,4 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Animated.h"
 #include "Timer.h"
 #include "AmjuGL.h"
@@ -7,7 +7,7 @@
 #include "ReportError.h"
 #include "DrawAABB.h"
 #include "Player.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

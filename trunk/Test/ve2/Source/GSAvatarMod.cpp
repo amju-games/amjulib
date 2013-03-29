@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <Timer.h>
 #include <AmjuGL.h>
 #include <File.h>
@@ -15,6 +16,7 @@
 #include "Ve1Object.h"
 #include "LocalPlayer.h"
 #include "ROConfig.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

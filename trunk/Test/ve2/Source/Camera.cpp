@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <EventPoller.h>
 #include <Game.h>
 #include <DegRad.h>
@@ -6,6 +7,7 @@
 #include "Portal.h"
 #include "ROConfig.h"
 #include "GameMode.h"
+#include <AmjuFinal.h>
 
 //#define CAM_DEBUG
 
