@@ -21,6 +21,8 @@ public:
   void SetLayerTex(int layer, int texIndex);
   void SetLayerColour(int layer, int colIndex);
 
+  void SetScale(const Vec2f& scale);
+
   LayerSprite& GetSprite();
 
 private:
@@ -33,6 +35,7 @@ private:
   float m_blinkTime;
   float m_maxBlinkTime;
   float m_gazeTime;
+  Vec2f m_scale;
 };
 }
 
