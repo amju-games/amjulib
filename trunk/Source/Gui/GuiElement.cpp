@@ -6,6 +6,8 @@
 #include "LoadVec2.h"
 #include <AmjuFinal.h>
 
+#define ENABLE_FOCUS_ELEMENT
+
 namespace Amju
 {
 static RCPtr<GuiElement> focusElement = 0;
@@ -14,7 +16,8 @@ static bool textToSpeechEnabled = true;
 
 void GuiElement::SetHasFocus(bool f)
 {
-  /*
+#ifdef ENABLE_FOCUS_ELEMENT
+
   if (!IsVisible())
   {
 std::cout << "GUI: setting focus to " << m_name << " but not visible, so no effect.\n";
@@ -74,7 +77,7 @@ else
       focusElement = 0;
     }
   }
-  */
+#endif // ENABLE_FOCUS_ELEMENT
 }
 
 bool GuiElement::HasFocus() const
