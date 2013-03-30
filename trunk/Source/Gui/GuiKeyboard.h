@@ -21,6 +21,8 @@ public:
   // Set distance between keys
   void SetKbGaps(float g);
 
+  virtual bool OnKeyEvent(const KeyEvent&); 
+
 protected:
   void SetKeys();
 
