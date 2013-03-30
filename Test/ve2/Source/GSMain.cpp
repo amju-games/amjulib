@@ -46,6 +46,7 @@
 #include "MsgNum.h"
 #include "CommandPickup.h"
 #include "BroadcastConsole.h"
+#include "Kb.h"
 #include <AmjuFinal.h>
 
 #define SHOW_NUM_ERRORS
@@ -316,6 +317,7 @@ void GSMain::Update()
 
   TheChatConsole::Instance()->Update();
   TheBroadcastConsole::Instance()->Update();
+  TheKb::Instance()->Update();
 
   TheLurker::Instance()->Update();
 
@@ -364,6 +366,15 @@ void GSMain::DoMoveRequest()
   mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
 //std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
   if (mouseScreen.x > 1.0f)
+  {
+    return;
+  }
+  // Convert y coord
+  static BroadcastConsole* bc = TheBroadcastConsole::Instance();
+  float bottom = bc->GetY();
+  mouseScreen.y = (mouseScreen.y - bottom) / (1.0f - bottom) * 2.0f - 1.0f; 
+  // Clicked below playable area
+  if (mouseScreen.y < -1.0f)
   {
     return;
   }
@@ -494,7 +505,9 @@ void GSMain::Draw()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   int width = (int)((float)Screen::X()  * m_viewportWidth);
-  AmjuGL::Viewport(0, 0, width, Screen::Y());
+  static BroadcastConsole* bc = TheBroadcastConsole::Instance();
+  int y = (int)((bc->GetY() + 1.0f) * 0.5f * (float)Screen::Y());
+  AmjuGL::Viewport(0, y, width, Screen::Y() - y);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
@@ -548,6 +561,9 @@ void GSMain::Draw2d()
 
   TheBroadcastConsole::Instance()->Draw();
 
+  static Kb* kb = TheKb::Instance();
+  kb->Draw();
+
   if (m_gui)
   {
     m_gui->Draw();
@@ -563,21 +579,24 @@ void GSMain::Draw2d()
   TheLurker::Instance()->Draw();
 
 #ifdef SHOW_NUM_ERRORS
-  // Show number of critical/non critical errors from server 
-  static GuiText t;
-  int critical = 0;
-  int nonCritical = 0;
-  Ve1Req::GetNumErrors(&critical, &nonCritical);
-  // Get serial request queue size
-  int q = TheVe1ReqManager::Instance()->CountAllReqs();
-  t.SetSize(Vec2f(1.0f, 0.1f));
-  t.SetJust(GuiText::AMJU_JUST_LEFT);
-  t.SetDrawBg(true);
-  t.SetLocalPos(Vec2f(-1.0f, 1.0f));
-  std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical) + " Q: " + ToString(q);
-  t.SetText(s);
-  t.Draw();
-
+  static int showErrs = ROConfig()->GetInt("show-errors", 0);
+  if (showErrs > 0)
+  {
+    // Show number of critical/non critical errors from server 
+    static GuiText t;
+    int critical = 0;
+    int nonCritical = 0;
+    Ve1Req::GetNumErrors(&critical, &nonCritical);
+    // Get serial request queue size
+    int q = TheVe1ReqManager::Instance()->CountAllReqs();
+    t.SetSize(Vec2f(1.0f, 0.1f));
+    t.SetJust(GuiText::AMJU_JUST_LEFT);
+    t.SetDrawBg(true);
+    t.SetLocalPos(Vec2f(-1.0f, 1.0f));
+    std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical) + " Q: " + ToString(q);
+    t.SetText(s);
+    t.Draw();
+  }
 #endif
 
   TheCursorManager::Instance()->Draw();
@@ -605,6 +624,7 @@ void GSMain::OnDeactive()
   m_menu = 0;
 
   TheChatConsole::Instance()->OnDeactive();
+  TheKb::Instance()->Deactivate();
 
   TheEventPoller::Instance()->RemoveListener(m_listener);
 }
@@ -642,6 +662,7 @@ void GSMain::OnActive()
 
   TheChatConsole::Instance()->OnActive();
   TheBroadcastConsole::Instance()->OnActive();
+  TheKb::Instance()->Activate();
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.

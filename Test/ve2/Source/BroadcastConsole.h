@@ -29,6 +29,9 @@ public:
 
   void OnActive();
 
+  // Get Y position of edit box. Game play is above this.
+  float GetY() const;
+
 private:
   void ReposText();
 
