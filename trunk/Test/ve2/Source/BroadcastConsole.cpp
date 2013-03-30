@@ -28,6 +28,11 @@ BroadcastConsole::BroadcastConsole()
   m_edit->SetCommand(Amju::OnEnter);
 }
 
+float BroadcastConsole::GetY() const
+{
+  return m_bottom;
+}
+
 void BroadcastConsole::OnActive()
 {
   m_edit->SetHasFocus(true);

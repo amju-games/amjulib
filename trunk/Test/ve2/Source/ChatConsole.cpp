@@ -161,8 +161,6 @@ void ChatConsole::Update()
     return;
   }
 
-  TheKb::Instance()->Update();
-
   static GSMain* gsm = TheGSMain::Instance();
 
   switch (m_mode)
@@ -226,9 +224,6 @@ void ChatConsole::Update()
 
 void ChatConsole::Draw()
 {
-  static Kb* kb = TheKb::Instance();
-  kb->Draw();
-
   if (m_gui && m_mode != CHAT_CLOSED)
   {
     m_gui->Draw();

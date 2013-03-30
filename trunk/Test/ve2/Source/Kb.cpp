@@ -233,11 +233,14 @@ void Kb::Activate()
   Vec2f pos = m_kb->GetLocalPos();
   pos.y = -1.0f;
   m_kb->SetLocalPos(pos);
- 
 
   m_mode = KB_SHOWING;
 
-  TheEventPoller::Instance()->AddListener(m_kb);
+  static EventPoller* ep = TheEventPoller::Instance();
+  if (!ep->HasListener(m_kb))
+  {
+    ep->AddListener(m_kb);
+  }
 }
 
 void Kb::Deactivate()
