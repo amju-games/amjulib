@@ -275,7 +275,7 @@ prevpage
 0.3, 0.2
 key3.png
 Symbol
-arial, 2.0, inv, sx=0.5 
+arial, 2.0, sx=0.5 
 
 gui-button
 nextpage
@@ -283,7 +283,7 @@ nextpage
 0.3, 0.2
 key3.png
 ABC
-arial, 2.0, inv, sx=0.5
+arial, 2.0, sx=0.5
 
 gui-button
 space
@@ -299,7 +299,7 @@ del
 0.3, 0.2
 key3.png
 Del
-arial, 2.0, inv, sx=0.5
+arial, 2.0, sx=0.5
 
 gui-button
 enter
@@ -307,7 +307,7 @@ enter
 0.3, 0.2
 key3.png
 Enter
-arial, 2.0, inv, sx=0.5
+arial, 2.0, sx=0.5
 
 
 
