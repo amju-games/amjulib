@@ -66,6 +66,14 @@ void GuiKeyboard::SetKbScale(float s)
 {
 }
 
+bool GuiKeyboard::OnKeyEvent(const KeyEvent& ke)
+{
+  // Discard KB events here, or can get an infinite loop, where e.g. the Enter key fires the command
+  //  for the Enter button, generating an Enter KB event.
+std::cout << "Keyboard: KB event: " << ke.key << "\n";
+  return false;
+}
+
 bool GuiKeyboard::Load(File* file)
 {
   if (!GuiElement::Load(file))
