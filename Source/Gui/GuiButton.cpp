@@ -10,6 +10,8 @@
 #include "StringUtils.h"
 #include <AmjuFinal.h>
 
+#define ENABLE_FOCUS_BUTTON
+
 namespace Amju
 {
 std::string GuiButton::s_clickFilename;
@@ -55,9 +57,8 @@ bool GuiButton::IsCancelButton() const
 
 void GuiButton::SetIsCancelButton(bool isCancelButton)
 {
-  // TODO causing crash?
+#ifdef ENABLE_FOCUS_BUTTON
 
-  /*
   if (isCancelButton)
   {
     cancelButton = this;
@@ -66,7 +67,8 @@ void GuiButton::SetIsCancelButton(bool isCancelButton)
   {
     cancelButton = 0;
   }
-  */
+
+#endif // ENABLE_FOCUS_BUTTON
 }
 
 bool GuiButton::IsFocusButton() const
@@ -76,8 +78,8 @@ bool GuiButton::IsFocusButton() const
 
 void GuiButton::SetIsFocusButton(bool isFocusButton)
 {
-  // TODO causing crash?
-  /*
+#ifdef ENABLE_FOCUS_BUTTON
+
   if (isFocusButton)
   {
     focusButton = this;
@@ -86,7 +88,8 @@ void GuiButton::SetIsFocusButton(bool isFocusButton)
   {
     focusButton = 0;
   }
-  */
+
+#endif //ENABLE_FOCUS_BUTTON
 }
 
 void GuiButton::SetShowIfFocus(bool s)
