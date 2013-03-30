@@ -45,6 +45,7 @@
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
     <EmbedManifest>false</EmbedManifest>
+    <LibraryPath>..\..\..\..\..\..\Build\Debug\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -52,6 +53,7 @@
     <IntDir>..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\</IntDir>
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <EmbedManifest>false</EmbedManifest>
+    <LibraryPath>..\..\..\..\..\..\Build\Release\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,6 +93,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>AmjuLibMsvc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
@@ -154,6 +159,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>/ENTRY:mainCRTStartup %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>AmjuLibMsvc.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
