@@ -6,6 +6,7 @@
 #include "Ve1SpriteNode.h"
 #include "LayerGroup.h"
 #include "ROConfig.h"
+#include "Player.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -134,41 +135,49 @@ void Ve1SpriteNode::Update()
   m_sprite.Update();
   m_eyes.Update();
 
-  // TODO Don't blink if "asleep", i.e. logged out
-  float dt = TheTimer::Instance()->GetDt();
-  m_blinkTime += dt;
-  if (m_blinkTime > m_maxBlinkTime)
+  Player* player = dynamic_cast<Player*>(m_obj.GetPtr());
+  if (player && !player->IsLoggedIn())
   {
+    // Not logged in - show closed eyes
     m_eyes.SetEyesOpen(false);
-    if (m_blinkTime > m_maxBlinkTime + 0.2f) // TODO
+  }
+  else
+  {
+    // TODO Don't blink if "asleep", i.e. logged out
+    float dt = TheTimer::Instance()->GetDt();
+    m_blinkTime += dt;
+    if (m_blinkTime > m_maxBlinkTime)
     {
-      m_eyes.SetEyesOpen(true);
-      m_blinkTime = 0;
-      m_maxBlinkTime = Rnd(0.5f, 2.5f); // TODO
+      m_eyes.SetEyesOpen(false);
+      if (m_blinkTime > m_maxBlinkTime + 0.2f) // TODO
+      {
+        m_eyes.SetEyesOpen(true);
+        m_blinkTime = 0;
+        m_maxBlinkTime = Rnd(0.5f, 2.5f); // TODO
+      }
+    }
+
+    // Set eye gaze dir
+    static const int NUM_EYE_GAZE_TEXTURES = 2;
+    static const char* EYE_GAZE[NUM_EYE_GAZE_TEXTURES] = 
+    {
+      "characters/2d/eyes_look_se.png",
+      "characters/2d/eyes_look_sw.png",
+
+    };
+    // Get direction of interest. Randomize a bit?
+    // Convert direction into index into EYE_GAZE.
+    m_gazeTime += dt;
+    static const float MAX_GAZE_TIME = ROConfig()->GetFloat("gaze-time", 1.0f);
+
+    if (m_gazeTime > MAX_GAZE_TIME)
+    {
+      m_gazeTime = 0;
+      int i = rand() % NUM_EYE_GAZE_TEXTURES;
+      Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes(EYE_GAZE[i]);
+      m_eyes.SetEyeGazeTex(tex);
     }
   }
-
-  // Set eye gaze dir
-  static const int NUM_EYE_GAZE_TEXTURES = 2;
-  static const char* EYE_GAZE[NUM_EYE_GAZE_TEXTURES] = 
-  {
-    "characters/2d/eyes_look_se.png",
-    "characters/2d/eyes_look_sw.png",
-
-  };
-  // Get direction of interest. Randomize a bit?
-  // Convert direction into index into EYE_GAZE.
-  m_gazeTime += dt;
-  static const float MAX_GAZE_TIME = ROConfig()->GetFloat("gaze-time", 1.0f);
-
-  if (m_gazeTime > MAX_GAZE_TIME)
-  {
-    m_gazeTime = 0;
-    int i = rand() % NUM_EYE_GAZE_TEXTURES;
-    Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes(EYE_GAZE[i]);
-    m_eyes.SetEyeGazeTex(tex);
-  }
-
 }
 
 void Ve1SpriteNode::SetAnimRange(int a, int b)
