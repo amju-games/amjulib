@@ -33,12 +33,13 @@ private:
   void SetButtonCommand(const std::string& buttonName, FUNC func);
 
 private:
-  //LayerSprite m_sprite; // shows the current settings
   Ve1SpriteNode m_spriteNode;
 
   LayerGroups m_layerGroups; // store settings for each layer
 
   GuiElement* m_oldGroup;
+
+  Vec2f m_scale; // current scale, sent to server on OK
 };
 typedef Singleton<GS2dAvatarMod> TheGS2dAvatarMod;
 } // namespace

@@ -8,6 +8,8 @@
 #include <Timer.h>
 #include "GS2dAvatarMod.h"
 #include "LocalPlayer.h"
+#include "Useful.h"
+#include "ObjectUpdater.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -100,6 +102,7 @@ private:
 GS2dAvatarMod::GS2dAvatarMod()
 {
   m_oldGroup = 0;
+  m_scale = Vec2f(1.0f, 1.0f);
 }
 
 void GS2dAvatarMod::Update()
@@ -272,6 +275,10 @@ void GS2dAvatarMod::OnSetLayer(int layer)
 
 void GS2dAvatarMod::OnScale(const Vec2f& scale)
 {
+  m_scale += scale;
+  m_spriteNode.SetScale(m_scale);
+
+std::cout << "New scale: " << m_scale.x << ", " << m_scale.y << "\n";
 }
 
 void GS2dAvatarMod::OnBlank()
@@ -281,8 +288,18 @@ void GS2dAvatarMod::OnBlank()
 
 void GS2dAvatarMod::OnOk()
 {
+  // Send scale
+  int id = GetLocalPlayerId();
+  std::string key = "scale_sprite";
+  std::string val = ToString(m_scale);
+  TheObjectUpdater::Instance()->SendUpdateReq(id, key, val);
+
   m_layerGroups.SendToServer();
   m_layerGroups.SetSprite(&(GetLocalPlayer()->GetSprite()));
+
+  // Set scale in local player
+  GetLocalPlayer()->SetScale(m_scale);
+
   GoBack();
 }
 

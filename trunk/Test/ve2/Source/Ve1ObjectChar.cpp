@@ -15,6 +15,7 @@
 #include "GameMode.h"
 #include "ROConfig.h"
 #include "Ve1SpriteNode.h"
+#include "Useful.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -75,6 +76,11 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       */
     
   }
+  else if (key == "scale_sprite")
+  {
+    Vec2f scale = ToVec2(val);
+    SetScale(scale);
+  }
   else if (key.substr(0, 6) == "sprite")
   {
     Assert(m_sceneNode);
@@ -97,6 +103,14 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
       Assert(0);
     }
   }
+}
+
+void Ve1ObjectChar::SetScale(const Vec2f& scale)
+{
+  Assert(m_sceneNode);
+  Ve1SpriteNode* node = dynamic_cast<Ve1SpriteNode*>(m_sceneNode.GetPtr());
+  Assert(node);
+  node->SetScale(scale);
 }
 
 void Ve1ObjectChar::SetEditMenu(GuiMenu* menu)

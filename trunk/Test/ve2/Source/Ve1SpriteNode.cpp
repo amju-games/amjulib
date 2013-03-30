@@ -22,6 +22,8 @@ Ve1SpriteNode::Ve1SpriteNode()
   m_maxBlinkTime = 0;
   m_gazeTime = 0;
 
+  m_scale = Vec2f(1.0f, 1.0f);
+
   // This loads the base spritesheet, which we don't actually draw???
   // (TODO Change LayerSprite so we don't need it)
   std::string tex = "characters/2d/spritesheet.png";
@@ -99,6 +101,11 @@ void Ve1SpriteNode::SetFromCharacterName(const std::string& s)
 {
 }
 
+void Ve1SpriteNode::SetScale(const Vec2f& scale)
+{
+  m_scale = scale;
+}
+
 void Ve1SpriteNode::Draw()
 {
   AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ);
@@ -111,6 +118,8 @@ void Ve1SpriteNode::Draw()
 
   // Translate so centred on sprite
   AmjuGL::Translate(-SIZE * 0.5f, -SIZE * 1.0f, 0); 
+
+  AmjuGL::Scale(m_scale.x, m_scale.y, 1.0f);
 
   m_sprite.DrawLayers(Vec2f(0, 0), 2.0f);
   m_eyes.DrawLayers(Vec2f(0, 0), 2.0f);

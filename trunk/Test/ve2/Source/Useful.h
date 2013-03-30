@@ -4,11 +4,16 @@
 #include <iostream>
 #include <string>
 #include <Vec3.h>
+#include <Vec2.h>
 #include <GameObject.h>
 
 namespace Amju
 {
-// Useful functions for output
+// Useful functions for output, etc
+
+// Vec2
+std::string ToString(const Vec2f& v);
+Vec2f ToVec2(const std::string& s);
 
 // Vec3
 std::ostream& operator<<(std::ostream& os, const Vec3f& v);

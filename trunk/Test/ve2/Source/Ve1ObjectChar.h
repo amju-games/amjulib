@@ -37,6 +37,9 @@ public:
   // Show effect because local player wants to attack this char
   void ShowAttacked();
 
+  // Set (x, z) scale for 2D characters
+  void SetScale(const Vec2f& scale);
+
 protected:
   std::string m_name;
   Vec3f m_newPos; // pos we are aiming for
