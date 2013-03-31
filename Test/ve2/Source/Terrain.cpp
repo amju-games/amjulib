@@ -58,27 +58,18 @@ CollisionMesh* Terrain::GetCollisionMesh()
   return (dynamic_cast<SceneCollisionMesh*>(m_sceneNode.GetPtr()))->GetCollisionMesh();
 }
 
-/*
-class TerrainSceneNode : public SceneMesh
+class TerrainSceneNode : public SceneCollisionMesh
 {
 public:
-  TerrainSceneNode(Terrain* t) : m_terrain(t), m_collMesh(new CollisionMesh) {}
-  CollisionMesh* GetCollisionMesh() { return m_collMesh; }
-  void CalcCollisionMesh(ObjMesh* mesh) { mesh->CalcCollisionMesh(m_collMesh); }
-
   virtual void Draw()
   {
-    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING);
+    AmjuGL::SetTextureFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
+    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ | AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_LIGHTING);
     AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
     SceneMesh::Draw();
     AmjuGL::PopAttrib();
   }
-
-private:
-  Terrain* m_terrain;
-  PCollisionMesh m_collMesh;
 };
-*/
 
 Terrain::Terrain()
 {
@@ -111,6 +102,7 @@ void Terrain::OnLocationEntry()
   std::string oldRoot = File::GetRoot();
   File::SetRoot(oldRoot + path, "/");
 
+  Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
   ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(file);
 
   File::SetRoot(oldRoot, "/");
@@ -122,7 +114,7 @@ void Terrain::OnLocationEntry()
     return; 
   }
 
-  SceneCollisionMesh* tsn = new SceneCollisionMesh;
+  SceneCollisionMesh* tsn = new TerrainSceneNode; //SceneCollisionMesh;
   tsn->SetMesh(mesh);
 
   // TODO Not sure this actually does anything. What we want is to work out the AABB for the mesh.
