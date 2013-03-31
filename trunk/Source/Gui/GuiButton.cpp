@@ -316,7 +316,9 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       if (m_isPressed)
       {
         ClickSound();
-        SetHasFocus(true); // Not sure about this. TODO Make it a flag ?
+        // Don't make button the focus when clicked - this would remove the focus from
+        //  any edit box which we want to receive keyboard events.
+        //SetHasFocus(true);
         OnPressedDown();
 
         return true; // handled
