@@ -63,22 +63,28 @@ public:
   {
     SetBlended(true);
     m_text.SetTextSize(5.0f); // TODO CONFIG
-    m_text.SetText(m_player->GetName());    
     static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
     m_text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
     m_text.SetJust(GuiText::AMJU_JUST_CENTRE);
-    m_text.SetFgCol(Colour(1, 1, 1, 1));
-    m_text.SetInverse(true);
-    m_text.SetDrawBg(true);
+    m_text.SetFgCol(Colour(0, 0, 0, 1));
+    //m_text.SetInverse(true);
+    //m_text.SetDrawBg(true);
   }
 
   virtual void Draw()
   {
     // Don't draw name of local player ?
-    if (IsVisible() && m_player->GetId() != GetLocalPlayerId())
+    if (IsVisible())  // && m_player->GetId() != GetLocalPlayerId())
     {
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
+  
+      std::string name = m_player->GetName();
+      if (!m_player->IsLoggedIn())
+      {
+        name += " (asleep)";
+      }
+      m_text.SetText(name);    
  
       // Print name 
       // TODO Do all these in one go, to minimise state changes
@@ -619,7 +625,7 @@ void Player::SetMenu(GuiMenu* menu)
   {
     // TODO put back leaving messages
     //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
-    //AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
+    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
 }
 
@@ -639,197 +645,82 @@ std::cout << "No food recv count for player " << *this << "\n";
 void Player::EatFood(FuelCell* f)
 {
   Ve1Object* owner = f->GetOwner();
-  if (owner)
-  { 
-    // This player is NOT the local player. Only the local player can be
-    //  the owner.
-    Assert(owner != this);
-    Assert(GetLocalPlayer() != this);
+  Assert(owner);
+  // This player is NOT the local player. Only the local player can be
+  //  the owner.
+  Assert(owner != this);
+  Assert(GetLocalPlayer() != this);
 
-    // Inc count of this (recipient) player on server
-    ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
+  // Inc count of this (recipient) player on server
+  ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
 
-    // Inc count of food given by the local player
-    ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1);
+  // Inc count of food given by the local player
+  ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1);
 
-    std::string recipName = GetPlayerName(GetId());
+  std::string recipName = GetPlayerName(GetId());
 
-    LurkMsg lm("You gave some food to " + recipName + "!", 
-      LURK_FG, LURK_BG, AMJU_CENTRE); 
-    TheLurker::Instance()->Queue(lm);    
+  LurkMsg lm("You gave some food to " + recipName + "!", 
+    LURK_FG, LURK_BG, AMJU_CENTRE); 
+  TheLurker::Instance()->Queue(lm);    
 
-    // Send message from 'the game' to this (recipient) player
-    std::string otherPlayer = GetPlayerName(owner->GetId());
-    if (otherPlayer.empty())
-    {
-      otherPlayer = "That other player";
-    }
-    TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
-  }
-  else
+  // Send message from 'the game' to this (recipient) player
+  std::string otherPlayer = GetPlayerName(owner->GetId());
+  if (otherPlayer.empty())
   {
-    Assert(0);
-
-/*
-    // Inc local player count on server
-    ChangeFoodCount(+1);
-
-    // TODO different messages for different count values
-    LurkMsg lm("You ate some food! You feel happy!", 
-      LURK_FG, LURK_BG, AMJU_CENTRE); 
-    TheLurker::Instance()->Queue(lm);    
-
-    // Check if we have now eaten enough for the day
-    bool weAreHungry = GetFoodCount() < DailyFoodCount();
-    if (weAreHungry)
-    {
-      LurkMsg lm("You still need to eat some more food today!", 
-        LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-    }
-    else
-    {
-      LurkMsg lm("You have eaten enough food for today! You are full up!", 
-        LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-    }
-*/
+    otherPlayer = "That other player";
   }
-
+  TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
+  
   f->SetHidden(true);
   TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
 }
 
 void Player::OnCollideFuel(FuelCell* f)
 {
-  // New behaviour:
-  // Increment food count, if less than daily limit; make food invis.
-  // Else: attach food to player, drag around. Give to other player we intersect.
+  // Local player: picks up food if not currently picked up.
+  // Non-local player: gets given the food if carried by local player.
+
+  static GSMain* gsm = TheGSMain::Instance();
+
   Assert(!f->IsHidden());
 
   Ve1Object* owner = f->GetOwner();
-
-/*
-  if (!Exists(FOOD_KEY))
-  {
-    // Don't yet know if we are hungry or not - wait till we get count
-    return;
-  }
-*/
-
-  //bool weAreHungry = GetFoodCount() < DailyFoodCount();
 
   if (owner == this)
   {
     // We are already carrying this food
     return;
   }
-/*
-  else if (owner && !weAreHungry) 
+  else if (owner) 
   {
-    // Another player is carrying this food. 
-    // We are not hungry, so we don't take the food. 
-    return;
-  }
-*/
-  else if (owner) // && weAreHungry)
-  {
-    // Another player is carrying this food. 
-    // We are hungry, so we eat it.
-    // The other player should get some reward for feeding us.
+    // This player is non local. The local player is carrying this food. 
+    // We get given the food. The other (local) player should get some reward for feeding us.
     EatFood(f);
   }
-/*
-  else if (!owner && weAreHungry)
+  else if (IsLocalPlayer())
   {
+    Assert(!owner);
+
     // Noone is carrying the food. 
-    // We are hungry, so we eat it.
-    EatFood(f);
-  }
-*/
-  else if (!owner) // && !weAreHungry)
-  {
-    // Noone is carrying the food. 
-    // We are not hungry, so we pick up the food. 
+    // We pick up the food. 
+    // Only show this msg the first time around
+    FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
+    /* Not:
     LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);    
+    */
     f->SetOwner(this);
   }
-  else
-  {
-    Assert(0);
-  }
-
-  static GSMain* gsm = TheGSMain::Instance();
+  
 
   // TODO Given and received counts
-  gsm->SetFuelCells(GetFoodRecvCount());    
+  //gsm->SetFuelCells(GetFoodRecvCount());    
 }
 
 float Player::GetViewDist() const
 {
   return m_viewDistance;
 }
-
-/*
-void Player::OnSpaceshipCollision(Spaceship* spaceship)
-{
-  // TODO Only process on first collision frame, ignore subsequently
-  if (!IsLocalPlayer())
-  {
-    return;
-  }
-
-  FirstTimeMsgThisSession("This is your spaceship!", UNIQUE_MSG_ID, false); 
-
-  if (m_isDead)
-  {
-    std::string str = "Your health is restored!";
-    LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
-    TheLurker::Instance()->Queue(lm);
-    ChangeHeartCount(100);
-    m_isDead = false;
-  }
-
-  int fc = GetLocalPlayerFuelCount();
-  if (fc == 0)
-  {
-    FirstTimeMsgThisSession("Your spaceship needs fuel. Please find fuel cells and bring them back here!", UNIQUE_MSG_ID, false);
-    return;
-  }
-
-std::cout << "Fuel cells: " << fc << "\n"; 
-
-  // TODO Different bands
-// TODO Needs better msg
-  std::string str = "Thanks for bringing fuel to your spaceship, <p>!";
-  LurkMsg lm(GameLookup(str), LURK_FG, LURK_BG, AMJU_CENTRE);
-  TheLurker::Instance()->Queue(lm);
-
-  spaceship->AddFuel(fc);
-
-  // Add fc to server-based count of total fuel cells you have ever brought
-  // Count goes up for this player: total num fuel cells ever brought to ship
-  ChangePlayerCount(FUELCELL_KEY, fc);
-
-  // Send system message that you brought fuel
-  static const int BROADCAST = -2;
-  if (fc == 1)
-  {
-    str = "<BROUGHT A FUEL CELL TO THE SHIP>";
-  }
-  else
-  {
-    str = "<BROUGHT " + ToString(fc) + " FUEL CELLS TO THE SHIP>";
-  }
-  TheMsgManager::Instance()->SendMsg(GetLocalPlayerId(), BROADCAST, str);
-
-  static GSMain* gsm = TheGSMain::Instance();
-  gsm->SetFuelCells(0);    
-
-  ResetLocalPlayerFuelCount();
-}
-*/
 
 bool GetNameForPlayer(int objId, std::string* r)
 {
