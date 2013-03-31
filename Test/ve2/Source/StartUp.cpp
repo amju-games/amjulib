@@ -37,6 +37,8 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
+  Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
+
   LoadConfig();
 
   SoundManager* sm = TheSoundManager::Instance();
