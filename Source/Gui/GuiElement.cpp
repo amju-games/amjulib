@@ -172,7 +172,7 @@ GuiElement::~GuiElement()
   //Assert(!TheEventPoller::Instance()->HasListener(this));
   // removed in EventListener dtor, so not removed yet.
 
-  std::cout << "Deleting GuiElement " << m_name << "\n";
+//  std::cout << "Deleting GuiElement " << m_name << "\n";
 }
 
 bool GuiElement::Load(File* f)
