@@ -10,6 +10,7 @@
 #include "LocalPlayer.h"
 #include "Useful.h"
 #include "ObjectUpdater.h"
+#include "ROConfig.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -275,7 +276,32 @@ void GS2dAvatarMod::OnSetLayer(int layer)
 
 void GS2dAvatarMod::OnScale(const Vec2f& scale)
 {
+  static const float SCALE_MIN_X = ROConfig()->GetFloat("scale-min-x", 0.5f);
+  static const float SCALE_MAX_X = ROConfig()->GetFloat("scale-max-x", 1.5f);
+  static const float SCALE_MIN_Y = ROConfig()->GetFloat("scale-min-y", 0.5f);
+  static const float SCALE_MAX_Y = ROConfig()->GetFloat("scale-max-y", 1.5f);
+
   m_scale += scale;
+
+  if (m_scale.x < SCALE_MIN_X)
+  {
+    m_scale.x = SCALE_MIN_X;
+    // TODO Beep
+  }
+  if (m_scale.x > SCALE_MAX_X)
+  {
+    m_scale.x = SCALE_MAX_X; 
+  }
+  if (m_scale.y < SCALE_MIN_Y)
+  {
+    m_scale.y = SCALE_MIN_Y;
+    // TODO Beep
+  }
+  if (m_scale.y > SCALE_MAX_Y)
+  {
+    m_scale.y = SCALE_MAX_Y;  
+  }
+
   m_spriteNode.SetScale(m_scale);
 
 std::cout << "New scale: " << m_scale.x << ", " << m_scale.y << "\n";

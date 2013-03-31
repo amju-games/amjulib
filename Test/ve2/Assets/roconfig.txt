@@ -2,8 +2,17 @@
 // version
 1
 
+// Show number of non-critical errors, critical errors, and Queue size in GSMain
+show-errors 0
+
 // Requests are serialised, so no desperate need to cap number of downloads.
 net-max-conc-downloads  100
+
+// Avatar scale
+scale-min-x 0.5
+scale-max-x 1.5
+scale-min-y 0.5
+scale-max-y 1.5
 
 // Change this for testing, should be 0
 cogtest-first-test 0
@@ -47,7 +56,7 @@ npc-max-follow-dist  75.0
 
 // Camera
 // initial dist from cam to player
-cam-z           200
+cam-z           250
 // initial x rot (i.e. altitude angle)
 cam-xrot        20
 // User drag sensitivity
