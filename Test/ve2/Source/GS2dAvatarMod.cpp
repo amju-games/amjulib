@@ -254,6 +254,9 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
   // Set layer groups from player
   m_layerGroups.SetFromSprite(GetLocalPlayer()->GetSprite());
   m_layerGroups.SetSprite(&m_spriteNode.GetSprite());
+  // Set scale from player
+  m_scale = GetLocalPlayer()->GetScale(); 
+  m_spriteNode.SetScale(m_scale);
 }
 
 void GS2dAvatarMod::OnSetTexture(int texture)

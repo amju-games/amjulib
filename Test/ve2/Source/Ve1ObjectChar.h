@@ -39,6 +39,7 @@ public:
 
   // Set (x, z) scale for 2D characters
   void SetScale(const Vec2f& scale);
+  const Vec2f& GetScale() const;
 
 protected:
   std::string m_name;

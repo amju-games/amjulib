@@ -107,6 +107,11 @@ void Ve1SpriteNode::SetScale(const Vec2f& scale)
   m_scale = scale;
 }
 
+const Vec2f& Ve1SpriteNode::GetScale() const
+{
+  return m_scale;
+}
+
 void Ve1SpriteNode::Draw()
 {
   AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ);

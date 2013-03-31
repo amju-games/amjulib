@@ -22,6 +22,7 @@ public:
   void SetLayerColour(int layer, int colIndex);
 
   void SetScale(const Vec2f& scale);
+  const Vec2f& GetScale() const;
 
   LayerSprite& GetSprite();
 
