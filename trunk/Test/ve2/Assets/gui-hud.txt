@@ -79,7 +79,7 @@ gui-image
 heart-img
 0.6, 1.05
 0.4, 0.5
-heart.png
+heart16-3.png
 
 // Num hearts text
 gui-text
