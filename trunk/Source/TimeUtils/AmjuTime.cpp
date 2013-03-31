@@ -100,9 +100,9 @@ std::string Time::ToStringJustDate() const
 {
   // TODO localisation!
   std::string MONTH[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-  std::string DAY[] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+  std::string DAY[] = { "Sunday" , "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
-  int dayOfWeek = GetDayOfWeek() - 1;
+  int dayOfWeek = GetDayOfWeek();
   int dayOfMonth = GetDayOfMonth();
   int month = GetMonths() - 1; // 1-based
   int years = GetYears();
