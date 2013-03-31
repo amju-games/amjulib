@@ -28,7 +28,7 @@ static const float BOUNCE_VEL = -50.0f;
 //static const char* TEX_KEY = "tex";
 //static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
-static const char* STAMINA_KEY = "stamina";
+static const char* STAMINA_KEY = "food-given";
 
 //static const char* DEFAULT_AVATAR = "marge";
 
@@ -40,7 +40,7 @@ Ve1ObjectChar::Ve1ObjectChar()
   // ?? SetKeyVal(AVATAR_KEY, DEFAULT_AVATAR);
 
   // Default, should be set by server
-  m_stamina = 3; // TODO CONFIG
+  m_stamina = 0; // Initial value - no food given
   sqLenLastTime = 9999999.9f; // Must be big
 }
 
