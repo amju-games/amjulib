@@ -105,6 +105,14 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   }
 }
 
+const Vec2f& Ve1ObjectChar::GetScale() const
+{
+  Assert(m_sceneNode);
+  Ve1SpriteNode* node = dynamic_cast<Ve1SpriteNode*>(m_sceneNode.GetPtr());
+  Assert(node);
+  return node->GetScale(); 
+}
+
 void Ve1ObjectChar::SetScale(const Vec2f& scale)
 {
   Assert(m_sceneNode);
@@ -204,11 +212,13 @@ void Ve1ObjectChar::Update()
     m_sceneNode->SetLocalTransform(m);
     //m_sceneNode->Update(); // done for whole scene graph elsewhere
 
+/*
     if (m_shadow)
     {
       // Set shadow AABB to same as Scene Node so we don't cull it by mistake
       *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
     }
+*/
 
     if (m_effect)
     {
@@ -219,10 +229,12 @@ void Ve1ObjectChar::Update()
     static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 10.0f);
     static const float ZSIZE = ROConfig()->GetFloat("player-aabb-z", 40.0f);
 
+    Vec2f scale = GetScale();
+
     GetAABB()->Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.x - XSIZE * scale.x * 0.5f, m_pos.x + XSIZE * scale.x * 0.5f,
       m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - ZSIZE, m_pos.z + ZSIZE);
+      m_pos.z - ZSIZE * scale.y, m_pos.z + ZSIZE);
 
     /*
     NOT FOR 2D
