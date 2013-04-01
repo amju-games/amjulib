@@ -1,4 +1,4 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Pause.h"
 #include <iostream>
 
@@ -10,8 +10,7 @@
 #ifdef MACOSX
 #include <string>
 #endif
-
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

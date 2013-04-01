@@ -1,6 +1,6 @@
 //#define AMJU_USE_SDL_IMG
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #ifdef AMJU_USE_SDL_IMG
 #include <SDL_image.h>
 #endif
@@ -11,7 +11,7 @@
 #include "ReportError.h"
 #include <StringUtils.h>
 #include <LoadPng.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

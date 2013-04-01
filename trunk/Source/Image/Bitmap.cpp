@@ -24,7 +24,7 @@ Added to repository
 // This source code originally written by JASON COLMAN 2000-2003. 
 // You may use it as you wish, at your own risk!  jason@amju.com.
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -37,7 +37,7 @@ Added to repository
 #include <string.h> // memset
 #include <iostream>
 #include <string>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace std;
 

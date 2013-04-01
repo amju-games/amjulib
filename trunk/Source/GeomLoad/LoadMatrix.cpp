@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "LoadMatrix.h"
 #include "Matrix.h"
 #include "File.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

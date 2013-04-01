@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #ifdef AMJU_OFFER_DX9
 
 // TODO
@@ -13,14 +14,13 @@
 // Vertex buffers
 // Improve API to batch quads/tris; use vertex buffers 
 
-#include "AmjuFirst.h"
 #include <d3dx9math.h>
 #include "AmjuGL-DX9.h"
 #include <WinScreen.h>
 #include "DX9Shader.h"
 #include <ShaderNull.h>
 #include "ShadowMap.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

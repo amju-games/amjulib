@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <stdlib.h>
 #include "AmjuRand.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

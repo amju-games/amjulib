@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "Sign.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

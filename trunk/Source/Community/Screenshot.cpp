@@ -2,11 +2,11 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2006
 */
 
-#include "AmjuFirst.h"
 
 // Save .bmp for test/comparison -- blue and red are reversed though :-(
 //#define SAVE_AS_BMP
 
+#include <AmjuFirst.h>
 #include <iostream>
 
 #include "Screenshot.h"
@@ -25,7 +25,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 #include <Thread.h>
 #include <RCPtr.h>
 #include <AmjuAssert.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

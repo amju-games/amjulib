@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <iostream>
 #include <Drawable.h>
 #include "OpenGL.h"
@@ -11,7 +11,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL2.h"
 #include "ShadowMapOpenGL3.h"
 #include <AmjuAssert.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 //#define SHADER_DEBUG
 //#define OPENGL_SHOW_INFO

@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "AmjuGL-OpenGL.h"
 #include <SDL.h>
 #include "ReportError.h"
 #include "AmjuAssert.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

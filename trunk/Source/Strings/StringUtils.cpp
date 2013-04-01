@@ -36,8 +36,8 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -52,7 +52,7 @@ Added to repository
 #include <sstream>
 #include "StringUtils.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

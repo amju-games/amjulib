@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "LoadMeshResource.h"
 #include "ObjMesh.h"
 #include "File.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

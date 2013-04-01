@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "LoadVec2.h"
 #include "File.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,10 +1,10 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <StringUtils.h>
 #include "ConfigFile.h"
 #include "File.h"
 #include "Tokeniser.h"
 #include <iostream>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace std;
 

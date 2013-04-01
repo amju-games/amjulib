@@ -1,6 +1,6 @@
+#include <AmjuFirst.h>
 #if !defined(IPHONE) || defined(AMJU_USE_ES2)
 
-#include "AmjuFirst.h"
 #include "GLShader.h"
 
 #include <iostream>
@@ -8,7 +8,7 @@
 #include "AmjuAssert.h"
 #include "OpenGL.h"
 #include <File.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 #define SHADER_DEBUG
 

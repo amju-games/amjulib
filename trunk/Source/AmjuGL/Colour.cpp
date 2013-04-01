@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "Colour.h"
 #include "AmjuGL.h"
 #include "AmjuAssert.h"
 #include <iostream> // TEST
 #include <stdio.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

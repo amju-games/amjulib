@@ -33,16 +33,16 @@ Added to Uptime Overlord project
 
 */
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #include <iostream>
 #include "UrlUtils.h"
 #include <StringUtils.h>
 #include <Directory.h>
 #include <File.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

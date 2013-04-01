@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "GameObject.h"
 #include "Timer.h"
 #include "File.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

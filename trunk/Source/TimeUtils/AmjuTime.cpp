@@ -30,7 +30,7 @@ New Time class - but calling the file Time.h causes problems.
 
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #ifdef WIN32
 #define _USE_32BIT_TIME_T
 #endif
@@ -42,7 +42,7 @@ New Time class - but calling the file Time.h causes problems.
 #include "StringUtils.h"
 #include "TimePeriod.h"
 #include <File.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

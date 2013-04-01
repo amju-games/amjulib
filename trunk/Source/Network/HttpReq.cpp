@@ -34,13 +34,13 @@ Added HttpReq to repository
 
 */
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #include <iostream>
 #include "HttpReq.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 #ifdef _DEBUG
 //#define HTTP_REQ_DEBUG

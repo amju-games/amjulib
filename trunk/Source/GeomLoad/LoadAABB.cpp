@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "LoadAABB.h"
 #include <File.h>
 #include <AABB.h>
 #include <StringUtils.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

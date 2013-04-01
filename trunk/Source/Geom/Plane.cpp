@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <math.h>
 #include "Plane.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

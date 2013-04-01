@@ -15,12 +15,12 @@ Added to repository
 // This source code originally written by JASON COLMAN 2000-2003. 
 // You may use it as you wish, at your own risk!  jason@amju.com.
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #include "FileImpl.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

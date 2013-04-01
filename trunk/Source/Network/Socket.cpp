@@ -18,7 +18,7 @@ Added to repository
 // Sockets code based on sample code in BSD Sockets Primer by Jim Frost
 // http://world.std.com/~jimf/papers/sockets/sockets.html
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Socket.h"
 #include "SocketService.h"
 
@@ -30,9 +30,9 @@ Added to repository
 #ifdef GEKKO
 #include <network.h>
 #include <string.h>
+#include <AmjuFinal.h>
 #endif
 
-#include "AmjuFinal.h"
 
 namespace Amju
 {

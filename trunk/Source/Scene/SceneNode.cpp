@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include "SceneNode.h"
 #include "File.h"
 #include "StringUtils.h"
 #include "LoadMatrix.h"
 #include "AmjuGL.h"
 #include "SceneGraph.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

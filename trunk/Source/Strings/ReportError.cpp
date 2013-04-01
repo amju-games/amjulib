@@ -2,13 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #include <windows.h>
 #endif
 #include "ReportError.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

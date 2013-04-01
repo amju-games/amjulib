@@ -15,7 +15,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Launcher.h"
 #include <iostream>
 
@@ -28,7 +28,7 @@ Added to repository
 #include <CoreFoundation/CFUrl.h>
 #include <Carbon/Carbon.h>
 #endif
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

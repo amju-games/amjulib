@@ -71,6 +71,7 @@
  ****************************************************************************
  */
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
@@ -78,7 +79,6 @@
 // j.c.
 #define _XMLPARSER_NO_MESSAGEBOX_
 
-#include "AmjuFirst.h"
 #ifndef _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_DEPRECATE
 #endif
@@ -98,7 +98,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 XMLCSTR XMLNode::getVersion() { return _T("v2.27"); }
 void freeXMLString(XMLSTR t){free(t);}

@@ -22,13 +22,13 @@
 
 
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "MgcDist3DLinLin.h"
 
 #include "MgcDist3DVecTri.h"
 
 #include "MgcDist3DLinTri.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Mgc;
 

@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "BinaryResource.h"
 #include "File.h"
 #include "AmjuAssert.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

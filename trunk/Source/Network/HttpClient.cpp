@@ -2,8 +2,8 @@
 Amju Games source code (c) Copyright Jason Colman 2004
 */
 
-#include <AmjuFirst.h>
 
+#include <AmjuFirst.h>
 #include <iostream>
 #include <stdio.h>
 #include <string>

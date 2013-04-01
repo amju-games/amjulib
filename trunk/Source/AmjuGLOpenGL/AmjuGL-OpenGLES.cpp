@@ -2,12 +2,12 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <math.h>
 #include <AmjuGL.h>
 #include "AmjuGL-OpenGLES.h"
 #include "OpenGL.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 #define GLint int
 #define GLfloat float

@@ -2,12 +2,12 @@
 Amju Games source code (c) Copyright Jason Colman 2004
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Frustum.h"
 #include "Sphere.h"
 #include "AABB.h"
 #include "AmjuGL.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

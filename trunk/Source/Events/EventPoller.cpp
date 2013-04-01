@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <AmjuAssert.h>
 #include <Timer.h>
 #include "EventPoller.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

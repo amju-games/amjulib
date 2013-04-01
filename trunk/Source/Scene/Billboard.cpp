@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "Billboard.h"
 #include "File.h"
 #include "ResourceManager.h"
 #include <AmjuGL.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

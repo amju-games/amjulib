@@ -16,7 +16,7 @@ Added to repository
 */
 
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable:4786)
 #endif
@@ -25,7 +25,7 @@ Added to repository
 #include <string>
 #include <vector>
 #include "XmlNodeInterface.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Amju;
 

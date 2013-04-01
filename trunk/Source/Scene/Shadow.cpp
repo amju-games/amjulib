@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2009
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <string>
 #include "Shadow.h"
 #include "ResourceManager.h"
@@ -15,8 +15,8 @@ Amju Games source code (c) Copyright Jason Colman 2009
 extern "C"
 {
 #include <gpc.h> // Polygon clipping code - it's in C.
+#include <AmjuFinal.h>
 }
-#include "AmjuFinal.h"
 
 //#define SHADOW_DEBUG
 

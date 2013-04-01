@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "DownloadReq.h"
 #include <iostream>
 #include <File.h>
 #include <StringUtils.h>
 #include <Directory.h>
+#include <AmjuFinal.h>
 
 #define DOWNLOAD_REQ_DEBUG
 

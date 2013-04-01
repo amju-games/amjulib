@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #if defined(MACOSX) || defined(WIN32)
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +29,7 @@
 #include "VECTOR4D.h"
 #include "MATRIX4X4.h"
 #include <Screen.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

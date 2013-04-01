@@ -12,7 +12,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #ifdef MSVC
 #pragma warning(disable: 4786)
 #endif
@@ -20,7 +20,7 @@ Added to repository
 #include "XMLUtils.h"
 #include <string>
 #include <vector>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace std;
 

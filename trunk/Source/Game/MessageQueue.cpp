@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "MessageQueue.h"
 #include <Timer.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

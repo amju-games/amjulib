@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #ifdef WIN32
 #define _USE_MATH_DEFINES
 #endif
@@ -12,6 +13,7 @@
 #endif // WIN32
 #ifdef MACOSX
 #include <GLUT/glut.h>
+#include <AmjuFinal.h>
 #endif // MACOSX
 #endif // AMJU_USE_GLUT
 

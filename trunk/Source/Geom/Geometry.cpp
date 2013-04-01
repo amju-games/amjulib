@@ -2,13 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2004-2009
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #ifdef MSVC
 #define _USE_MATH_DEFINES
 #endif // MSVC
 #include <math.h>
 #include "Geometry.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

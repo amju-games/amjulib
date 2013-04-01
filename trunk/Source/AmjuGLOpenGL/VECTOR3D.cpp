@@ -13,7 +13,9 @@
 //	http://www.paulsprojects.net/NewBSDLicense.txt)
 //////////////////////////////////////////////////////////////////////////////////////////	
 
+#include <AmjuFirst.h>
 #include "VECTOR3D.h"
+#include <AmjuFinal.h>
 
 void VECTOR3D::Normalize()
 {

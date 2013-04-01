@@ -23,9 +23,9 @@ Added to repository
  
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "ThreadManager.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

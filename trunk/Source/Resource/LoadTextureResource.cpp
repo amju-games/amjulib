@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "LoadTextureResource.h"
 #include "Texture.h"
 #include "File.h"
 #include "ResourceManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

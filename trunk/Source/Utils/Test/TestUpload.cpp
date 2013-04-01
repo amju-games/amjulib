@@ -4,7 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 
 // Test harness: Upload a .png file
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -14,7 +14,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 #include "HttpClient.h"
 #include "StringUtils.h"
 #include "UrlUtils.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Amju;
 

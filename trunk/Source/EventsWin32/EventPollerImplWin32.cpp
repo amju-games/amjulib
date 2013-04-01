@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "EventPollerImplWin32.h"
 #include <windows.h>
 #include <WinScreen.h>
 #include <Screen.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -12,7 +12,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "SocketService.h"
 
 #if defined(WIN32)
@@ -23,9 +23,9 @@ Added to repository
 #ifdef GEKKO
 #include <network.h>
 #include <errno.h>
+#include <AmjuFinal.h>
 #endif
 
-#include "AmjuFinal.h"
 
 namespace Amju
 {

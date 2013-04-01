@@ -27,16 +27,16 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
 
+#include <AmjuFirst.h>
 #include <iostream>
 #include "Thread.h"
 #include "ThreadManager.h"
 
 #if defined(WIN32)
 #include <process.h>
+#include <AmjuFinal.h>
 #endif
-#include "AmjuFinal.h"
 
 //#define THREAD_DEBUG
 

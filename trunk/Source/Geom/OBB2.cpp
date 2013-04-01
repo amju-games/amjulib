@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include "OBB2.h"
 #include <Vec3.h>
 #include <Plane.h>
 #include <AmjuAssert.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

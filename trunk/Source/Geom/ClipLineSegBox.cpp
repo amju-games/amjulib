@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "ClipLineSegBox.h"
+#include <AmjuFinal.h>
 
 // Valid points on the line seg are m_start + t * m_direction for
 //  t in [0..1] for x, y and z.

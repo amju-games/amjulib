@@ -2,10 +2,12 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2011
 */
 
+#include <AmjuFirst.h>
 #include <math.h> // fabs
 #include "Skin.h"
 #include "File.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

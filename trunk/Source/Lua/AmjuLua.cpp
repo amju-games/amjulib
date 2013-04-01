@@ -9,6 +9,7 @@ Class to wrap Lua C API
 
 */
 
+#include <AmjuFirst.h>
 #include <iostream>
 extern "C"
 {
@@ -17,6 +18,7 @@ extern "C"
 }
 #include "AmjuLua.h"
 #include <File.h>
+#include <AmjuFinal.h>
 
 #define LUA_DEBUG
 

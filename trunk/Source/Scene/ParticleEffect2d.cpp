@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include "ParticleEffect2d.h"
 #include "File.h"
 #include "ResourceManager.h"
 #include "Timer.h"
 #include "LoadTextureResource.h"
 #include <AmjuGL.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

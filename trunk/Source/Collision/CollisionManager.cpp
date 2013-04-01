@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "CollisionManager.h"
 #include <iostream>
+#include <AmjuFinal.h>
 
 //#define COLL_MGR_DEBUG
 

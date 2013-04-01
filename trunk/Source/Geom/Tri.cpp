@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "Tri.h"
 #include "AmjuGL.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
