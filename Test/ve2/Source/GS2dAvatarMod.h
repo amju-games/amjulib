@@ -37,7 +37,7 @@ private:
 
   LayerGroups m_layerGroups; // store settings for each layer
 
-  GuiElement* m_oldGroup;
+  PGuiElement m_oldGroup;
 
   Vec2f m_scale; // current scale, sent to server on OK
 };
