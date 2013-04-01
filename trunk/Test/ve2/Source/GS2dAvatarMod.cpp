@@ -306,8 +306,6 @@ void GS2dAvatarMod::OnScale(const Vec2f& scale)
   }
 
   m_spriteNode.SetScale(m_scale);
-
-std::cout << "New scale: " << m_scale.x << ", " << m_scale.y << "\n";
 }
 
 void GS2dAvatarMod::OnBlank()
