@@ -1,10 +1,10 @@
+#include <AmjuFirst.h>
 #ifdef AMJU_OFFER_DX9
 
-#include "AmjuFirst.h"
 #include "DX9Shader.h"
 #include "AmjuGL-DX9.h"
 #include "Assert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

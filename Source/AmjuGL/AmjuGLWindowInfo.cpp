@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "AmjuGLWindowInfo.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

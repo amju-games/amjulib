@@ -17,9 +17,11 @@
 //	http://www.paulsprojects.net/NewBSDLicense.txt)
 //////////////////////////////////////////////////////////////////////////////////////////	
 
+#include <AmjuFirst.h>
 #include <memory.h>
 #include "MATRIX4X4.h"
 #include <Common.h>
+#include <AmjuFinal.h>
 
 MATRIX4X4::MATRIX4X4(float e0, float e1, float e2, float e3,
 					float e4, float e5, float e6, float e7,

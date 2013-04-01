@@ -15,13 +15,13 @@ Added to repository
   
 */
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #include <algorithm> // swap
 #include "Endian.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

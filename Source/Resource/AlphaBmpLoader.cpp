@@ -1,9 +1,11 @@
+#include <AmjuFirst.h>
 #include "AlphaBmpLoader.h"
 #include "ResourceManager.h"
 #include "StringUtils.h"
 #include "Texture.h"
 #include "TextureUtils.h"
 #include "Bitmap.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

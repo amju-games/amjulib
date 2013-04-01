@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #if defined(USE_SHADOW_MAP_OPENGL_1)
 
 #include "ShadowMapOpenGL1.h"
@@ -11,6 +12,7 @@
 extern "C"
 {
 #include "showbuffer.h"
+#include <AmjuFinal.h>
 }
 
 // Uses demo code from http://www.udel.edu/CIS/software/dist/Mesa-6.4.2/progs/demos/

@@ -1,7 +1,9 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "OBB3.h"
 #include "ClipLineSegBox.h"
 #include <AmjuAssert.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

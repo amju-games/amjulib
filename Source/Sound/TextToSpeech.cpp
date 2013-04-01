@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "TextToSpeech.h"
 
 #ifdef WIN32
@@ -18,6 +19,7 @@ extern CComModule _Module;
 #ifdef MACOSX
 
 #include <ApplicationServices/ApplicationServices.h>
+#include <AmjuFinal.h>
 
 #endif // MACOSX
 

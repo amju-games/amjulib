@@ -1,9 +1,11 @@
 
+#include <AmjuFirst.h>
 #include "IndexedMesh.h"
 #include "File.h"
 #include "Geometry.h"
 //#include "TextureMethodFactory.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

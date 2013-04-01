@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "SceneGraph.h"
 #include "SceneMesh.h"
 #include <DrawAABB.h>
+#include <AmjuFinal.h>
 
 #define USE_VFC
 //#define VFC_DEBUG

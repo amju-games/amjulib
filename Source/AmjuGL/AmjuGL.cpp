@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <stack>
 #include "AmjuGL.h"
 #include "AmjuGL-Impl.h"
@@ -11,7 +11,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "Colour.h"
 #include <iostream>
 #include <StringUtils.h> // For debug reporting state
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

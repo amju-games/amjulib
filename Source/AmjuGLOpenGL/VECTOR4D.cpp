@@ -13,7 +13,9 @@
 //	http://www.paulsprojects.net/NewBSDLicense.txt)
 //////////////////////////////////////////////////////////////////////////////////////////	
 
+#include <AmjuFirst.h>
 #include "VECTOR4D.h"
+#include <AmjuFinal.h>
 
 void VECTOR4D::RotateX(double angle)
 {

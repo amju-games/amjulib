@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include "OutlinerOpenGL.h"
 #include "OpenGL.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

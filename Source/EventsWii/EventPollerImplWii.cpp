@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include "EventPollerImplWii.h"
 #include <wiiuse/wpad.h>
 #include "Pause.h"  
 #include <Screen.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

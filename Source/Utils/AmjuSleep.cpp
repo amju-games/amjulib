@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "AmjuSleep.h"
 #ifdef WIN32
 #include <Windows.h>
@@ -5,6 +6,7 @@
 
 #ifdef MACOSX
 #include <unistd.h>
+#include <AmjuFinal.h>
 #endif
 
 namespace Amju

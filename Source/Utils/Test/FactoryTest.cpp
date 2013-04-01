@@ -1,8 +1,8 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Factory.h"
 #include <iostream>
-#include "AmjuFinal.h"
 #include "SharedPtr.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

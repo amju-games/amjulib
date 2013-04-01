@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <iostream>
 #include <gcmodplay.h>
 #include <asndlib.h> 
@@ -5,6 +6,7 @@
 #include "File.h"
 #include <ReportError.h>
 #include <Pause.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

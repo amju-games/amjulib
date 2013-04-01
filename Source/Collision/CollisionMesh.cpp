@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "CollisionMesh.h"
 #include "Vec2.h"
 #include "Plane.h"
@@ -9,6 +10,7 @@
 #include <MgcDist3DLinTri.h>
 // Mgc dist from point to triangle
 #include <MgcDist3DVecTri.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

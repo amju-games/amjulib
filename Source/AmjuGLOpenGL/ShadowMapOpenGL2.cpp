@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #ifndef IPHONE
 
 #include <iostream>
@@ -7,6 +8,7 @@
 #include "GLShader.h"
 #include <math.h>
 #include <Screen.h>
+#include <AmjuFinal.h>
 
 // This implementation is adapted from http://fabiensanglard.net/shadowmapping/
 // TODO: Add lighting, get this to work with textures

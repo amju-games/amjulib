@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "Sphere.h"
 #include <Line3.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

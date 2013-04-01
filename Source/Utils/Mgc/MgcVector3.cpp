@@ -22,9 +22,9 @@
 
 
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "MgcVector3.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 //using namespace Mgc; // j.c.
 namespace Mgc // j.c.

@@ -2,10 +2,12 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2008
 */
 
+#include <AmjuFirst.h>
 #include "AnimPlayer.h"
 #include "Skeleton.h"
 #include <AmjuGL.h>
 #include <Colour.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

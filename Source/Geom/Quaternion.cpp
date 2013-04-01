@@ -2,13 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2005-2009
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Quaternion.h"
 #include "Matrix.h"
 #include "Common.h"
 #include "File.h"
 #include "StringUtils.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

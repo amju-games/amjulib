@@ -1,4 +1,4 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "TextureUtils.h"
 #include "AmjuAssert.h"
 #ifdef GEKKO
@@ -6,7 +6,7 @@
 #include <string.h> // memcpy ??!
 #endif
 #include <iostream>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

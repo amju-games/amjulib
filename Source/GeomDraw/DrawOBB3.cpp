@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "DrawOBB3.h"
 #include <AmjuGL.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

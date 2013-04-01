@@ -1,4 +1,6 @@
+#include <AmjuFirst.h>
 #include "Teapot.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

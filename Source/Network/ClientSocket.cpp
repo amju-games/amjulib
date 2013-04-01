@@ -15,8 +15,8 @@ Added to repository
 // Sockets code based on sample code in BSD Sockets Primer by Jim Frost
 // http://world.std.com/~jimf/papers/sockets/sockets.html
 
-#include "AmjuFirst.h"
 
+#include <AmjuFirst.h>
 #include "ClientSocket.h"
 #if defined(WIN32)
 #include <winsock2.h>
@@ -28,8 +28,8 @@ Added to repository
 #include <stdlib.h>
 #include <string.h>
 #endif
+#include <AmjuFinal.h>
 
-#include "AmjuFinal.h"
 
 namespace Amju
 {

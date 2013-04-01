@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "LoadPng.h"
 #include "png.h"
 #include <File.h>
 #include <ReportError.h>
 #include <StringUtils.h>
+#include <AmjuFinal.h>
 
 // Most of this code taken from LIBPNG example.c
 

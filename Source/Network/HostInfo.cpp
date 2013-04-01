@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "HostInfo.h"
 
 #ifdef GEKKO
@@ -12,6 +13,7 @@ u32 net_gethostip(); // http://forum.wiibrew.org/read.php?11,7676,7678
 
 #include <StringUtils.h>
 #include <AmjuAssert.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

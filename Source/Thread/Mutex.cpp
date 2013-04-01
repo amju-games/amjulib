@@ -21,17 +21,17 @@ Added to repository
 // Some threading code adapted from "Portable Thread Synchronization Using C++"
 // http://world.std.com/~jimf/papers/c++sync/c++sync.html
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #if defined(MACOSX) || defined(IPHONE)
 #include "sys/errno.h"
 #endif
 
 #include "Mutex.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

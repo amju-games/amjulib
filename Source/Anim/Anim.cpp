@@ -2,8 +2,10 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2008
 */
 
+#include <AmjuFirst.h>
 #include "Anim.h"
 #include "File.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

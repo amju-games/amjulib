@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include <assert.h>
 #include <ReportError.h>
 #include "ObjMesh.h"
@@ -6,6 +7,7 @@
 #include "AmjuGL.h"
 #include "CollisionMesh.h"
 #include <Matrix.h>
+#include <AmjuFinal.h>
 
 #ifdef _DEBUG
 //#define OBJ_DEBUG

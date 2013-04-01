@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2004
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <iostream>
 #include "Common.h"
 #include "TextureSequence.h"
@@ -10,7 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "File.h"
 #include "Matrix.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

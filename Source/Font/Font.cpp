@@ -2,14 +2,14 @@
 Amju Games source code (c) Copyright Jason Colman 2005
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <algorithm>
 #include <iostream>
 #include "Font.h"
 #include "File.h"
 #include "StringUtils.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

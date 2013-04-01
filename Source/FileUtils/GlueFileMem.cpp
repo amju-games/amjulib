@@ -21,7 +21,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -31,7 +31,7 @@ Added to repository
 #include "GlueFileMem.h"
 #include "FileSize.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace std;
 namespace Amju

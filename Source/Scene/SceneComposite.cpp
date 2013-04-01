@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "SceneComposite.h"
 #include "File.h"
 #include "AmjuGL.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

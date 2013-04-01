@@ -43,10 +43,10 @@ Added to repository
 
 */
 
+#include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#include "AmjuFirst.h"
 #include <iostream>
 #ifdef MACOSX
 #include <sys/types.h>  // chmod
@@ -54,7 +54,7 @@ Added to repository
 #endif
 
 #include "FileImplStd.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace std;
 namespace Amju

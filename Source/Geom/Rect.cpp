@@ -1,8 +1,8 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "Rect.h"
 #include <algorithm>
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

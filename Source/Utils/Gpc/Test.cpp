@@ -14,9 +14,9 @@ Added to repository
 
 extern "C"
 {
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "gpc.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 }
 
 int main(int, char**)

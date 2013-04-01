@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "ObjUsefulFunctions.h"
 #include "AmjuAssert.h"
 #include "StringUtils.h"
 #include "File.h"
 #include "ResourceManager.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

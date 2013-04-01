@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2006
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -11,7 +11,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 #include "Localise.h"
 #include "StringUtils.h"
 #include "File.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 //#define LOCALISE_DEBUG
 

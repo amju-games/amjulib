@@ -55,7 +55,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -86,7 +86,7 @@ Added to repository
 #ifdef MACOSX
 #include <Carbon/Carbon.h>
 #endif
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 //#define DIRECTORY_DEBUG
 

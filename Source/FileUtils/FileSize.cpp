@@ -12,7 +12,7 @@ Added to repository
   
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -22,7 +22,7 @@ Added to repository
 #include <string>
 #include "FileSize.h"
 #include "File.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

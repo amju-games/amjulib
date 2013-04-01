@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "EventPollerImplSDL.h"
 #include <SDL.h> 
 #include <Screen.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

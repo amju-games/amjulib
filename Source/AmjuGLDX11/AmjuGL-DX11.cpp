@@ -1,6 +1,6 @@
+#include <AmjuFirst.h>
 #ifdef AMJU_OFFER_DX11
 
-#include "AmjuFirst.h"
 #include "AmjuGL-DX11.h"
 #include <D3DX11tex.h>
 #include <AmjuGLWindowInfo.h>
@@ -9,7 +9,7 @@
 #include <ShaderNull.h>
 #include <DegRad.h>
 #include <stack>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

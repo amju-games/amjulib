@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include "SceneMesh.h"
 #include "File.h"
 #include "AmjuGL.h"
 #include "CollisionMesh.h"
 #include "DrawAABB.h"
+#include <AmjuFinal.h>
 
 //#define DEBUG_DRAW_AABB
 

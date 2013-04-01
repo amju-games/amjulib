@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Game.h"
 #include "AmjuGL.h"
 #include "Timer.h"
@@ -12,6 +13,7 @@
 #include <windows.h>
 #else
 #include <sys/time.h>
+#include <AmjuFinal.h>
 #endif
 
 //#define STATE_DEBUG

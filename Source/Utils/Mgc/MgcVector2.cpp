@@ -22,13 +22,13 @@
 
 
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <cfloat>
 
 #include <cmath>
 
 #include "MgcVector2.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Mgc;
 namespace Mgc // j.c.

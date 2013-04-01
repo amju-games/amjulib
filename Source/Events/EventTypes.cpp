@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "EventTypes.h"
 #include "EventListener.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

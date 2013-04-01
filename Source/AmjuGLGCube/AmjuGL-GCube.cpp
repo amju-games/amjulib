@@ -2,8 +2,8 @@
 Amju Games source code (c) Copyright Jason Colman 2009
 */
 
-#include "AmjuFirst.h"
 
+#include <AmjuFirst.h>
 #include <iostream>
 #include <stack>
 #include <string.h> // for memset()
@@ -24,7 +24,7 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include "Colour.h"
 #include "Screen.h"
 #include <ShadowMap.h>
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

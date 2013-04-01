@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "Screen.h"
 #include <AmjuAssert.h>
 #include <AmjuGL.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

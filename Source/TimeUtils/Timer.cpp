@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "Timer.h"
 
 #if defined(WIN32)
@@ -11,6 +12,7 @@
 
 #ifdef GEKKO
 #include <gccore.h>
+#include <AmjuFinal.h>
 
 // From http://forum.wiibrew.org/read.php?11,11264
 // Posted by AerialX

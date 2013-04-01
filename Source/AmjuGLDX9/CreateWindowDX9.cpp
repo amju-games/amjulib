@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #ifdef AMJU_OFFER_DX9
 
 #include "AmjuGL-DX9.h"
@@ -9,6 +10,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <stdio.h> // sprintf
+#include <AmjuFinal.h>
 
 using namespace Amju;
 

@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "SceneGameObject.h"
 #include "AmjuGL.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

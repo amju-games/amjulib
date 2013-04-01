@@ -22,9 +22,9 @@
 
 
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "MgcCont3DSphere.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Mgc;
 

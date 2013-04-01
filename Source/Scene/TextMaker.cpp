@@ -1,8 +1,10 @@
+#include <AmjuFirst.h>
 #include <utility>
 #include "TextMaker.h"
 #include "SceneMesh.h"
 #include "CollisionMesh.h"
 #include "AABB.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,4 +1,4 @@
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "AmjuAssert.h"
 #include <iostream>
 #include <fstream>
@@ -7,9 +7,9 @@
 #include <Pause.h>
 #include <AmjuTime.h>
 #include <StringUtils.h>
+#include <AmjuFinal.h>
 #endif // GEKKO
 
-#include "AmjuFinal.h"
 
 namespace Amju
 {

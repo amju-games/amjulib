@@ -1,3 +1,4 @@
+#include <AmjuFirst.h>
 #include "ResourceManager.h"
 #include "Md2Model.h"
 #include "Texture.h"
@@ -6,6 +7,7 @@
 #include "StringUtils.h"
 #include <Font.h>
 #include <iostream>
+#include <AmjuFinal.h>
 
 //#define RESOURCE_GROUP_DEBUG
 

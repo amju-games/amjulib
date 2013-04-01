@@ -2,7 +2,8 @@
 Amju Games source code (c) Copyright Jason Colman 2006
 */
 
-#define AMJU_USE_BASS 
+#include <AmjuFirst.h>
+//#define AMJU_USE_BASS 
 #ifdef AMJU_USE_BASS
 #include <iostream>
 #include "BassSoundPlayer.h"
@@ -18,6 +19,7 @@ Amju Games source code (c) Copyright Jason Colman 2006
 #endif
 #include <StringUtils.h>
 #include <File.h>
+#include <AmjuFinal.h>
 
 namespace Amju
 {

@@ -1,6 +1,8 @@
+#include <AmjuFirst.h>
 #include "SoundSDLMixer.h"
 #include <SDL_mixer.h>
 #include <ReportError.h>
+#include <AmjuFinal.h>
 
 namespace
 {

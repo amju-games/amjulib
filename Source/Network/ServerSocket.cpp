@@ -15,7 +15,7 @@ Added to repository
 // Sockets code based on sample code in BSD Sockets Primer by Jim Frost
 // http://world.std.com/~jimf/papers/sockets/sockets.html
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "ServerSocket.h"
 #if defined(WIN32)
 #include <winsock2.h>
@@ -25,8 +25,8 @@ Added to repository
 #ifdef GEKKO
 #include <network.h>
 #endif
+#include <AmjuFinal.h>
 
-#include "AmjuFinal.h"
 
 namespace Amju
 {

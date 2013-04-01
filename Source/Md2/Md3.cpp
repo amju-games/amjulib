@@ -1,5 +1,6 @@
 // Modified from www.gametutorials.com, original author Ben Humphrey, digiben@gametutorials.com
 
+#include <AmjuFirst.h>
 #include <fstream>
 #include <iostream>
 #include <ResourceManager.h>
@@ -15,6 +16,7 @@
 #endif
 #include "Md3.h"
 #include "StringUtils.h"
+#include <AmjuFinal.h>
 
 //#define MD3_DEBUG
 

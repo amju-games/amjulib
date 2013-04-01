@@ -35,11 +35,11 @@ Added OnlineReqManager to repository
 
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include <set>
 #include <iostream>
 #include "OnlineReqManager.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 #ifdef _DEBUG
 //#define DEBUG_ONLINE

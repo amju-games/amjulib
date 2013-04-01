@@ -2,10 +2,10 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #include "FileImplGlue.h"
 #include "AmjuAssert.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

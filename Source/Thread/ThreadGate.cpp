@@ -1,13 +1,13 @@
 
+#include <AmjuFirst.h>
 #ifndef GEKKO
 
-#include "AmjuFirst.h"
 #include <iostream>
 #ifndef WIN32
 #include <errno.h>
 #endif
 #include "ThreadGate.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

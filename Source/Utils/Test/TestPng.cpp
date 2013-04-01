@@ -4,7 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 
 // Test harness: test saving a .png file
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #endif
@@ -12,7 +12,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2006
 #include <iostream>
 #include "SavePng.h"
 #include "File.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 using namespace Amju;
 

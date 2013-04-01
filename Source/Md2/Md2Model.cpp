@@ -4,7 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 
 //#define MD2_DEBUG
 
-#include "AmjuFirst.h"
+#include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)
 #pragma warning(disable: 4305) // double to float truncation
@@ -29,8 +29,8 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "AmjuAssert.h"
 #ifdef USE_GL_COMMANDS
 #include "OpenGL.h"
+#include <AmjuFinal.h>
 #endif
-#include "AmjuFinal.h"
 
 using namespace std;
 

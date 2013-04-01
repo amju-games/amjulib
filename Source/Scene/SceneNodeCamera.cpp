@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "SceneNodeCamera.h"
 #include "AmjuGL.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {

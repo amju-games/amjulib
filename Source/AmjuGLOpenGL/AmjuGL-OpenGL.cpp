@@ -2,6 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
+#include <AmjuFirst.h>
 #if defined (WIN32) || defined (MACOSX)
 
 #ifdef WIN32
@@ -9,7 +10,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #pragma comment(lib, "glu32.lib")
 #endif
 
-#include "AmjuFirst.h"
 #include <iostream>
 //#include "GL/glew.h"
 #include "AmjuGL-OpenGL.h"
@@ -17,7 +17,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShaderNull.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
-#include "AmjuFinal.h"
+#include <AmjuFinal.h>
 
 #define SHADER_DEBUG
 //#define USE_IMMEDIATE_MODE
