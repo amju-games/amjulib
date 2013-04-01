@@ -131,6 +131,7 @@ ChatConsole::ChatConsole()
   m_vel = Vec2f(-10.0f, 0); // moves from right hand side
 
   m_typing = false;
+  m_mode = CHAT_CLOSED;
 }
 
 void ChatConsole::SetBottom(float y)
