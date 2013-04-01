@@ -1,5 +1,7 @@
+#include <AmjuFirst.h>
 #include "SoundManager.h"
 #include "Timer.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -20,17 +22,32 @@ void SoundManager::SetImpl(SoundPlayerImpl* pImpl)
 
 void SoundManager::SetGlueFile(GlueFile* glueFile)
 {
+  if (!m_pImpl)
+  {
+    return;
+  }
+
   m_pImpl->SetGlueFile(glueFile);
 }
 
 GlueFile* SoundManager::GetGlueFile()
 {
+  if (!m_pImpl)
+  {
+    return 0;
+  }
+
   return m_pImpl->GetGlueFile();
 }
 
 bool SoundManager::PlayWav(const std::string& wav, float vol)
 {
   AMJU_CALL_STACK;
+
+  if (!m_pImpl)
+  {
+    return false;
+  }
 
   float t = TheTimer::Instance()->GetElapsedTime();
 
@@ -67,6 +84,11 @@ bool SoundManager::PlayWav(const std::string& wav, float vol)
 
 bool SoundManager::PlaySong(const std::string& songFile)
 {
+  if (!m_pImpl)
+  {
+    return false;
+  }
+
   if (m_song != songFile)
   {
     StopSong();
@@ -78,24 +100,46 @@ bool SoundManager::PlaySong(const std::string& songFile)
 
 void SoundManager::StopSong()
 {
+  if (!m_pImpl)
+  {
+    return;
+  }
+
   m_pImpl->StopSong();
   m_song = "";
 }
 
 void SoundManager::Update()
 {
+  if (!m_pImpl)
+  {
+    return;
+  }
+
   m_pImpl->Update();
 }
 
 void SoundManager::SetWavMaxVolume(float f)
 {
   m_maxWavVol = f; 
+
+  if (!m_pImpl)
+  {
+    return;
+  }
+
   m_pImpl->SetWavMaxVolume(f);
 }
 
 void SoundManager::SetSongMaxVolume(float f)
 { 
   m_maxSongVol = f; 
+
+  if (!m_pImpl)
+  {
+    return;
+  }
+
   m_pImpl->SetSongMaxVolume(f);
 }
 
