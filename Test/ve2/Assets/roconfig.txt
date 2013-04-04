@@ -2,6 +2,8 @@
 // version
 1
 
+new-location-show-status 0
+
 // Show number of non-critical errors, critical errors, and Queue size in GSMain
 show-errors 0
 
