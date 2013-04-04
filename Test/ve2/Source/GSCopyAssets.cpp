@@ -6,7 +6,7 @@
 #include <Pause.h>
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
-#include "GSTitle.h"
+#include "GSLogo.h"
 #include <AmjuFinal.h>
 
 #if defined(WIN32) && defined(_DEBUG)
@@ -198,7 +198,7 @@ std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
 
     // All copied - go to next state 
-    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance()); 
+    TheGame::Instance()->SetCurrentState(TheGSLogo::Instance()); 
   }
 }
 
