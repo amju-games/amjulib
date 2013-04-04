@@ -3,15 +3,10 @@
 #include <AmjuRand.h>
 #include "TitlePerson.h"
 #include "LayerGroup.h"
+#include "ROConfig.h"
 
 namespace Amju
 {
-static const float VEL_MIN = 0.4f;
-static const float VEL_MAX = 1.4f;
-
-static const float SCREEN_RIGHT = 1.2f;
-static const float SCREEN_LEFT = -SCREEN_RIGHT;
-
 static const float OFFSCREEN_MIN = 1.2f;
 static const float OFFSCREEN_MAX = 2.2f;
 
@@ -38,16 +33,22 @@ void TitlePerson::Randomise()
   m_spritenode.SetScale(scale);
 
   // Move to one side of screen
+  static const float VEL_MIN = ROConfig()->GetFloat("title-vel-min", 0.3f);
+  static const float VEL_MAX = ROConfig()->GetFloat("title-vel-max", 1.0f);
+
+  m_xpos = Rnd(OFFSCREEN_MIN, OFFSCREEN_MAX);
+  m_xvel = -Rnd(VEL_MIN, VEL_MAX); 
+
+  float celltime = -0.25f / m_xvel;  
+  // e.g. 1 unit/sec -> 0.25f; 2 units/sec -> 0.125
+
+  m_spritenode.GetSprite().SetCellTime(celltime);
+
   if (rand() & 1)
   {
-    m_xpos = Rnd(OFFSCREEN_MIN, OFFSCREEN_MAX);
-    m_xvel = -Rnd(VEL_MIN, VEL_MAX); 
+    m_xpos = -m_xpos;
+    m_xvel = -m_xvel;
   }  
-  else
-  {
-    m_xpos = -Rnd(OFFSCREEN_MIN, OFFSCREEN_MAX);
-    m_xvel = Rnd(VEL_MIN, VEL_MAX); // TODO CONFIG
-  }
 }
 
 void TitlePerson::Draw()
@@ -83,7 +84,7 @@ void TitlePerson::Update()
 
 void TitlePeople::Update()
 {
-  for (int i = 0; i < m_people.size(); i++)
+  for (unsigned int i = 0; i < m_people.size(); i++)
   {
     m_people[i].Update();
   }
@@ -91,7 +92,7 @@ void TitlePeople::Update()
 
 void TitlePeople::Draw()
 {
-  for (int i = 0; i < m_people.size(); i++)
+  for (unsigned int i = 0; i < m_people.size(); i++)
   {
     m_people[i].Draw();
   }
@@ -100,15 +101,6 @@ void TitlePeople::Draw()
 TitlePeople::TitlePeople()
 {
   m_people.resize(5);
-
-/*
-  const int NUM_PEOPLE = 5;
-  m_people.reserve(NUM_PEOPLE);
-  for (int i = 0; i < NUM_PEOPLE; i++)
-  {
-    m_people.push_back(TitlePerson());
-  }
-*/
 }
 }
 
