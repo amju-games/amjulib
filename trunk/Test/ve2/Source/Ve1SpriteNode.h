@@ -15,6 +15,7 @@ public:
   virtual void Update();
 
   void SetAnim(Anim anim);
+  void SetAnimRange(int a, int b);
 
   virtual void SetFromCharacterName(const std::string&);
 
@@ -25,9 +26,6 @@ public:
   const Vec2f& GetScale() const;
 
   LayerSprite& GetSprite();
-
-private:
-  void SetAnimRange(int a, int b);
 
 private:
   LayerSprite m_sprite;

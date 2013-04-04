@@ -3,6 +3,7 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
+#include "TitlePerson.h"
 
 namespace Amju 
 {
@@ -20,6 +21,7 @@ public:
 
 private:
   GuiImage m_titleImage;
+  TitlePeople m_tp;
 };
 typedef Singleton<GSTitle> TheGSTitle;
 } // namespace
