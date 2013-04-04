@@ -556,7 +556,7 @@ void Player::Update()
   if (IsLocalPlayer())
   {
     TheGSMain::Instance()->SetHeartNum(m_stamina);
-
+/*
     if (m_stamina <= 0)
     {
       // Player now has to go back to the spaceship to regenerate or something.
@@ -569,6 +569,7 @@ void Player::Update()
 
       m_isDead = true;
     }
+*/
   }
 }
 
@@ -680,7 +681,7 @@ void Player::OnCollideFuel(FuelCell* f)
   // Local player: picks up food if not currently picked up.
   // Non-local player: gets given the food if carried by local player.
 
-  static GSMain* gsm = TheGSMain::Instance();
+  //static GSMain* gsm = TheGSMain::Instance();
 
   Assert(!f->IsHidden());
 
@@ -705,6 +706,10 @@ void Player::OnCollideFuel(FuelCell* f)
     // We pick up the food. 
     // Only show this msg the first time around
     FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
+
+    // TODO Sound every time
+    TheSoundManager::Instance()->PlayWav("pickup.wav"); // TODO
+
     /* Not:
     LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);    
