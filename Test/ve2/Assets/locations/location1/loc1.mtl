@@ -1,4 +1,5 @@
 newmtl lambert2SG
+Ns 1.0
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -6,6 +7,7 @@ Tf 1.00 1.00 1.00
 map_Kd ground1.png
 Ni 1.00
 newmtl lambert3SG
+Ns 1.0
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -13,22 +15,25 @@ Tf 1.00 1.00 1.00
 map_Kd ground2.png
 Ni 1.00
 newmtl lambert4SG
+Ns 1.0
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd bg2.png
+map_Kd dress6.png
 Ni 1.00
 newmtl loc1:blinn1SG
+Ns 1.0
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd tex1.png
+map_Kd photo5.png
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
 newmtl loc1:lambert4SG
+Ns 1.0
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -37,3 +42,59 @@ map_Kd vine-arch.png
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
+newmtl pasted__lambert4SG
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd photo5.png
+Ni 1.00
+newmtl pasted__pasted__lambert4SG
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd photo4.png
+Ni 1.00
+newmtl pasted__pasted__lambert4SG1
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd photo3.png
+Ni 1.00
+newmtl pasted__pasted__lambert4SG2
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd photo6.png
+Ni 1.00
+newmtl pasted__pasted__lambert4SG3
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd photo1.png
+Ni 1.00
+newmtl pasted__pasted__lambert4SG4
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd stone1.png
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert4SG4
+Ns 1.0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd stone1.png
+Ni 1.00
