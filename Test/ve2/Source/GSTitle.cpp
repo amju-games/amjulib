@@ -76,6 +76,7 @@ GSTitle::GSTitle()
 void GSTitle::Update()
 {
   GSGui::Update();
+  m_tp.Update();
 }
 
 void GSTitle::Draw()
@@ -86,6 +87,8 @@ void GSTitle::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
   m_titleImage.Draw();  
+
+  m_tp.Draw();
 
   /*
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
