@@ -92,23 +92,23 @@ arial, 1.5, fgcol=ffffff, sx=0.9
 
 gui-text
 heart-txt
-0.6, 0.95
-0.4, 0.1
+0.5, 0.95
+0.5, 0.1
 // Text
-Health
+Food given
 arial, 0.75, fgcol=ffffff, sx=0.9
 
 // Fuel image
 gui-image
 fuel-img
-0.2, 1.05
+0.2, 10.05
 0.4, 0.5
 fuel.png
 
 // Fuel cell text
 gui-text
 fuelcell-num
-0.2, 0.9
+0.2, 10.9
 0.4, 0.2
 // Text
 0
@@ -116,7 +116,7 @@ arial, 1.5, fgcol=ffffff, sx=0.9
 
 gui-text
 fuelcell-txt
-0.2, 0.95
+0.2, 10.95
 0.4, 0.1
 // Text
 Fuel
