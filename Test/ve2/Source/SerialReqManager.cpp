@@ -6,11 +6,15 @@
 #include "ROConfig.h"
 #include <AmjuFinal.h>
 
+#define REUSE_HTTP_CLIENT
+
 //#define SRM_AUDIT
 //#define QUEUE_DEBUG
 //#define NO_THREADS
 //#define SRM_DEBUG
-#define KILL_HANGING_REQ
+//#define SRM_LOCK_DEBUG
+//#define SRM_SLEEP_DEBUG
+//#define KILL_HANGING_REQ
 
 namespace Amju
 {
@@ -58,7 +62,7 @@ void SerialReqManager::SerialThread::Work()
   {
     m_mutex.Lock();
 
-#ifdef SRM_DEBUG
+#ifdef SRM_LOCK_DEBUG
 std::cout << "SRM: Locked1\n";
 #endif
 
@@ -66,17 +70,15 @@ std::cout << "SRM: Locked1\n";
     bool ready = (r && !r->IsFinished());
     m_mutex.Unlock();
 
-#ifdef SRM_DEBUG
+#ifdef SRM_LOCK_DEBUG
 std::cout << "SRM: Unlocked1\n";
 #endif
 
     if (ready)
     {
 #ifdef SRM_DEBUG
-std::cout << "SRM: Doing request...: " << r->GetName() << "\n";
+std::cout << "SRM: Doing request: " << r->GetName() << "\n";
 #endif
-
-#define REUSE_HTTP_CLIENT
 
 #ifdef REUSE_HTTP_CLIENT
       r->DoRequest(m_hc);
@@ -86,24 +88,24 @@ std::cout << "SRM: Doing request...: " << r->GetName() << "\n";
 #endif
 
 #ifdef SRM_DEBUG
-std::cout << "SRM: Done request...\n";
+std::cout << "SRM: Done request: " << r->GetName() << "\n";
 #endif
     
       m_mutex.Lock();
-#ifdef SRM_DEBUG
+#ifdef SRM_LOCK_DEBUG
 std::cout << "SRM: Locked2\n";
 #endif
 
       m_req = 0;
       m_mutex.Unlock();
 
-#ifdef SRM_DEBUG
+#ifdef SRM_LOCK_DEBUG
 std::cout << "SRM: Unlocked2\n";
 #endif
     }
     else
     {
-#ifdef SRM_DEBUG
+#ifdef SRM_SLEEP_DEBUG
 std::cout << "SRM: Sleep\n";
 #endif
 
@@ -134,7 +136,22 @@ void SerialReqManager::Update()
     return;
   }
 
+  if (!m_thread)
+  {
+    return;
+  }
+
   OnlineReq* req = m_reqs.front();
+
+  if (m_thread->Waiting() && !req->IsFinished())
+  {
+#ifdef SRM_AUDIT
+std::cout << "SRM: Set thread request: " << req->GetName() << "\n";
+#endif
+
+    m_thread->SetReq(req);
+    return;
+  }
 
   static float reqTime = 0;
   if (req->IsFinished())
@@ -157,6 +174,7 @@ std::cout << "Request " << req->GetName() << " took " << reqTime << "s to comple
   else
   {
     static const float HANG_TIME = ROConfig()->GetFloat("hang-time", 10.0f);
+
     float dt = TheTimer::Instance()->GetDt();
     reqTime += dt;
     if (reqTime > HANG_TIME) // Hanging, on Mac this is a problem
@@ -164,27 +182,15 @@ std::cout << "Request " << req->GetName() << " took " << reqTime << "s to comple
 std::cout << "Reqest " << req->GetName() << " may have hung, time is " << reqTime << "s.\n";
 
 #ifdef KILL_HANGING_REQ
-      reqTime = 0;
       ////m_reqs.pop_front();
       // The thread is now blocked. 
       // TODO if there was a way of killing the request, that would be best
       m_thread = new SerialThread;
       m_thread->Start();
+      reqTime = 0;
 #endif
 
     }
-  }
-
-  if (m_reqs.empty())
-  {
-    return;
-  }
-
-  req = m_reqs.front();
-
-  if (m_thread->Waiting())
-  {
-    m_thread->SetReq(req);
   }
 }
 
@@ -195,7 +201,9 @@ bool SerialReqManager::AddReq(RCPtr<OnlineReq> req, int maxRequestsOfThisType, b
   // This lets us get rid of old positions which will be overwritten, etc.
   // TODO
 
-//std::cout << "QUEUE REQ: " << req->GetName() << "\n";
+#ifdef SRM_AUDIT
+std::cout << "SRM: Queueing request: \"" << req->GetName() << "\"\n";
+#endif
 
   int count = CountReqsWithName(req->GetName());
   if (count >= maxRequestsOfThisType)
