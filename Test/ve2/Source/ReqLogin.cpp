@@ -28,6 +28,7 @@
 #include "GSMain.h"
 #include "CogTestResults.h"
 #include "FuelCount.h"
+#include "LogOut.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -104,6 +105,14 @@ std::cout << "No start location.\n";
 
     TheVe1ReqManager::Instance()->SetSessionId(sessionId);
     TheVe1ReqManager::Instance()->SetLoggedIn(true);
+
+    // Canceled?
+    static Game* game = TheGame::Instance();
+    if (game->GetState() != TheGSLoginWaiting::Instance())
+    {
+      SendLogOut();
+      return;
+    }
 
     // Check if we are set up
     std::string playerInfoFilename = playername + ".txt";
