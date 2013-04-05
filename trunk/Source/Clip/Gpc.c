@@ -39,7 +39,9 @@ Copyright: (C) 1997-1999, Advanced Interfaces Group,
 
 // JC - fix MSVC 9 warning 
 #ifdef WIN32
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #endif// WIN32
 
 
