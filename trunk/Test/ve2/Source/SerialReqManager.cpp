@@ -37,7 +37,10 @@ int SerialReqManager::GetTotalNumQueued() const
 
 void SerialReqManager::Clear()
 {
-  m_reqs.clear();
+  if (!m_reqs.empty())
+  {
+    m_reqs.erase(m_reqs.begin() + 1, m_reqs.end());
+  }
 }
 
 #ifdef NO_THREADS
@@ -141,7 +144,7 @@ void SerialReqManager::Update()
     return;
   }
 
-  OnlineReq* req = m_reqs.front();
+  RCPtr<OnlineReq> req = m_reqs.front();
 
   if (m_thread->Waiting() && !req->IsFinished())
   {

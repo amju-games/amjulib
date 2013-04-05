@@ -2,8 +2,9 @@
 #include "GSLoginWaiting.h"
 #include <AmjuGL.h>
 #include <Game.h>
-#include "GSTitle.h"
+#include <GuiButton.h>
 #include <GuiText.h>
+#include "GSTitle.h"
 #include "ReqLogin.h"
 #include <AmjuFinal.h>
 
@@ -33,7 +34,11 @@ void GSLoginWaiting::SetErrorString(const std::string& error)
 void GSLoginWaiting::Update()
 {
   GSGui::Update();
-
+  if (m_time > 10.0f) // TODO CONFIG
+  {
+    GuiButton* cancel = (GuiButton*)m_gui->GetElementByName("cancel-button");
+    cancel->SetVisible(true);
+  }
 }
 
 void GSLoginWaiting::Draw()
@@ -54,7 +59,10 @@ void GSLoginWaiting::OnActive()
   m_gui = LoadGui("gui-login-wait.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("cancel-button")->SetCommand(Amju::OnCancelButton);
+  GuiButton* cancel = (GuiButton*)m_gui->GetElementByName("cancel-button");
+  cancel->SetCommand(Amju::OnCancelButton);
+  //cancel->SetVisible(false); // make visible after delay
+  cancel->SetIsCancelButton(true);
 
   // Now it's safe to create the login request -- however quickly it completes, we are ready!
   SendLoginReq(m_email);
