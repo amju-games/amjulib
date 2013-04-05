@@ -216,6 +216,7 @@ std::cout << "Failed to load GUI bg image for avatar mod screen!\n";
   SetButtonCommand("hair-button-1", new TextureCommand(0));
   SetButtonCommand("hair-button-2", new TextureCommand(1));
   SetButtonCommand("hair-button-3", new TextureCommand(2)); //Amju::OnBlank); // invis
+  SetButtonCommand("hair-button-4", new TextureCommand(3));
 
   SetButtonCommand("scale-button-1", OnShorter);
   SetButtonCommand("scale-button-2", OnTaller);
