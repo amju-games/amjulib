@@ -5,6 +5,7 @@
 #include <TextToSpeech.h>
 #include "ROConfig.h"
 #include "LurkMsg.h"
+#include "Kb.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -246,7 +247,14 @@ void LurkMsg::Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkP
     break;
 
   case AMJU_CENTRE:
-    m_showPos = Vec2f(-w * 0.5f, h * 0.5f - 0.3f); // TODO CONFIG y-offset
+    float yOffset = -0.3f;
+    static Kb* kb = TheKb::Instance();
+    if (kb->IsEnabled())
+    {
+      yOffset = +0.3f;
+    }
+
+    m_showPos = Vec2f(-w * 0.5f, h * 0.5f + yOffset); 
     m_hidePos = m_showPos;
     m_rect->SetRoundCorners(0); 
     m_scale = 0.5f;
