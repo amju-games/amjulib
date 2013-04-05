@@ -28,7 +28,7 @@ Ve1SpriteNode::Ve1SpriteNode()
   // This loads the base spritesheet, which we don't actually draw???
   // (TODO Change LayerSprite so we don't need it)
   std::string tex = "characters/2d/spritesheet.png";
-  if (!m_sprite.Load(tex, 16, 1, SIZE * 0.5f, SIZE))
+  if (!m_sprite.Load(tex, 8, 1, SIZE * 0.5f, SIZE))
   {
     ReportError("FAILED TO LOAD sprite from char name");
     Assert(0);
@@ -38,7 +38,7 @@ Ve1SpriteNode::Ve1SpriteNode()
   m_sprite.SetCellRange(1, 1);
   m_sprite.SetCell(1);
 
-  m_eyes.Load(tex, 16, 1, SIZE * 0.5f, SIZE);
+  m_eyes.Load(tex, 8, 1, SIZE * 0.5f, SIZE);
   m_eyes.SetCellTime(CELL_TIME);
   m_eyes.SetCellRange(1, 1);
   m_eyes.SetCell(1);
@@ -217,6 +217,19 @@ void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
   else
   {
     Vec3f dir = m_obj->GetVel();
+    // 2 directional: 
+    // Up or down ?
+    if (dir.z < 0)
+    {
+      // Up?
+      SetAnimRange(4, 7);
+    }
+    else
+    {
+      SetAnimRange(0, 3);
+    }
+
+#ifdef FOUR_DIRECTIONAL
     if (fabs(dir.x) > fabs(dir.z))
     {
       // Left or right
@@ -244,6 +257,8 @@ void Ve1SpriteNode::SetAnim(Ve1SpriteNode::Anim anim)
         SetAnimRange(0, 3);
       }
     }
+#endif
+
   }
 }
 }
