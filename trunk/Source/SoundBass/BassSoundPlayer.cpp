@@ -3,7 +3,7 @@ Amju Games source code (c) Copyright Jason Colman 2006
 */
 
 #include <AmjuFirst.h>
-//#define AMJU_USE_BASS 
+
 #ifdef AMJU_USE_BASS
 #include <iostream>
 #include "BassSoundPlayer.h"
