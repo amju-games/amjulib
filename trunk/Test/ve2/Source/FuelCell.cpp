@@ -38,7 +38,7 @@ FuelNode::FuelNode()
 {
   std::string tex = "food1.png";
   // TODO 2 * 2 cells, depends on sprite layout
-  if (!m_sprite.Load(tex, 2, 2, SIZE, SIZE))
+  if (!m_sprite.Load(tex, 4, 4, SIZE, SIZE))
   {
     ReportError("FAILED TO LOAD food sprite");
     Assert(0);
@@ -46,7 +46,7 @@ FuelNode::FuelNode()
 
   m_sprite.SetCellTime(0.1f);
   // random food
-  int c = (int)Rnd(0, 4);
+  int c = (int)Rnd(0, 10);
   m_sprite.SetCellRange(c, c);
   m_sprite.SetCell(c);
 
