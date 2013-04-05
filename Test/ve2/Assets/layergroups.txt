@@ -19,10 +19,11 @@ characters/2d/skin-no-outline.png
 // layer group name
 Hair
 // Num textures
-3
+4
 characters/2d/hair1.png
 characters/2d/hair2.png
 characters/2d/blank.png
+characters/2d/hair4.png
 
 
 // layer group name

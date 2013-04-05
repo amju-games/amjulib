@@ -173,7 +173,7 @@ eyes-group
 gui-comp
 hair-group
 // num children
-3
+4
 
 gui-button
 hair-button-1
@@ -199,6 +199,13 @@ hair-button-3.png
 @@@
 arial, 2.0
 
+gui-button
+hair-button-4
+0.3, 0.1
+0.2, 0.2
+hair-button-4.png
+@@@
+arial, 2.0
 
 // Child 7 of root
 // Group for bottoms
