@@ -12,6 +12,7 @@
 #include <SoundManager.h>
 #include <EventPoller.h>
 #include <GuiButton.h>
+#include <AmjuRand.h>
 #include "GSProxy.h"
 #include "Ve1SceneGraph.h"
 #include "SaveConfig.h"
@@ -37,6 +38,8 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
+  Randomise();
+
   Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
 
   LoadConfig();
