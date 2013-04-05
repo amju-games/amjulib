@@ -8,7 +8,7 @@ namespace Amju
 {
 bool ResizeHandler::OnResizeEvent(const ResizeEvent& re)
 {
-  ConfigFile* cf = TheGameConfigFile::Instance();
+  static ConfigFile* cf = TheGameConfigFile::Instance();
   cf->SetInt("screen-x", re.x);
   cf->SetInt("screen-y", re.y);
 

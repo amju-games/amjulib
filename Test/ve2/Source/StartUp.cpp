@@ -34,6 +34,10 @@ Amju::AmjuGLWindowInfo w(640, 480, false, "Hungry People - Experimental multi-pl
 
 void StartUpBeforeCreateWindow()
 {
+  LoadConfig();
+  ConfigFile* cf = TheGameConfigFile::Instance();
+  w.SetWidth(cf->GetInt("screen-x"));
+  w.SetHeight(cf->GetInt("screen-y"));
 }
 
 void StartUpAfterCreateWindow()
@@ -41,8 +45,6 @@ void StartUpAfterCreateWindow()
   Randomise();
 
   Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
-
-  LoadConfig();
 
   SoundManager* sm = TheSoundManager::Instance();
   sm->SetImpl(new BassSoundPlayer);
