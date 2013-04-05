@@ -149,10 +149,10 @@ void Texture::UseThisTexture()
 //  Assert(m_texId != (AmjuGL::TextureHandle)-1);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
+  AmjuGL::UseTexture(m_texId);
+
   AmjuGL::SetTextureFilter(m_filter); // nicest or nearest
   AmjuGL::SetTextureType(m_textureType); // env map or UV coords
   AmjuGL::SetTextureMode(m_wrapMode); // wrap or clamp
-
-  AmjuGL::UseTexture(m_texId);
 }
 }
