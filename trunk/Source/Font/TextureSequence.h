@@ -68,6 +68,8 @@ public:
 
   void SetSize(float width, float height);
 
+  Texture* GetTexture() { return m_pTexture; }
+
 protected:
   PTexture m_pTexture; 
   int m_numElements;

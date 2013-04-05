@@ -87,6 +87,7 @@ bool Font::Load(File* pf)
     pf->ReportError("Failed to load texture sequence for font");
     return false;
   }
+  m_textureSequence.GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NICE);
 
   // Get start character - usually something like 0 or 32.
   if (!pf->GetInteger(&m_startChar))
