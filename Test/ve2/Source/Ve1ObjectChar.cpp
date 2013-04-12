@@ -28,7 +28,7 @@ static const float BOUNCE_VEL = -50.0f;
 //static const char* TEX_KEY = "tex";
 //static const char* AVATAR_KEY = "avatar";
 static const char* NAME_KEY = "name";
-static const char* STAMINA_KEY = "food-given";
+static const char* FOOD_GIVEN_KEY = "food-given";
 
 //static const char* DEFAULT_AVATAR = "marge";
 
@@ -52,7 +52,7 @@ void Ve1ObjectChar::SetKeyVal(const std::string& key, const std::string& val)
   {
     SetName(val);
   }
-  else if (key == STAMINA_KEY)
+  else if (key == FOOD_GIVEN_KEY)
   {
     m_stamina = ToInt(val); 
     if (m_stamina <= 0)
@@ -134,10 +134,12 @@ void Ve1ObjectChar::Update()
     return;
   }
 
+  /*
   // TODO Not if underwater ?
   // TODO Put in base class, so we can drop things ?
   static const float GRAVITY = ROConfig()->GetFloat("gravity", -50.0f); 
   m_acc.y = GRAVITY;
+  */
 
   Ve1Object::Update();
 
