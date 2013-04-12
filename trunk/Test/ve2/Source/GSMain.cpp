@@ -343,8 +343,11 @@ std::cout << "SetHeartNum: no heart-num element\n";
   }
   GuiElement* heartImg = GetElementByName(m_gui, "heart-img");
   Assert(heartImg);
-
   text2->SetText(ToString(hearts));
+  text2->SetVisible(true); 
+  heartImg->SetVisible(true);
+
+  /* // This was for flashing when health was <= 0
   if (hearts <= 0)
   {
     float t = TheTimer::Instance()->GetElapsedTime();
@@ -360,6 +363,8 @@ std::cout << "SetHeartNum: no heart-num element\n";
     text2->SetVisible(true); 
     heartImg->SetVisible(true);
   }
+  */
+
 }
 
 void GSMain::DoMoveRequest()
