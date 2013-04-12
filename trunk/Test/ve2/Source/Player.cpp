@@ -556,6 +556,8 @@ void Player::Update()
   if (IsLocalPlayer())
   {
     TheGSMain::Instance()->SetHeartNum(m_stamina);
+    TheGSMain::Instance()->SetFuelCells(GetFoodRecvCount());
+
 /*
     if (m_stamina <= 0)
     {
