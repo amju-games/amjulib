@@ -1,9 +1,10 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include "Ve1ObjectChar.h"
+#include <deque>
 #include <Shadow.h>
 #include <SceneMesh.h>
+#include "Ve1ObjectChar.h"
 #include "Sprite.h"
 
 namespace Amju
@@ -59,6 +60,9 @@ public:
   int GetFoodRecvCount();
   int GetFoodGivenCount();
 
+  // Called on collision, to give food
+  void OnCollidePlayer(Player* otherPlayer);
+
 private:
   void EatFood(FuelCell*);
 
@@ -77,6 +81,9 @@ protected:
 
   int m_lastFuelCellCount;
   int m_totalFuelCells; // total num fuel cells brought to spaceship - -1 until set from server
+
+  typedef std::deque<RCPtr<Ve1Object> > CarriedFood;
+  CarriedFood m_carriedFood;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
