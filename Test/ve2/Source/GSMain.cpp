@@ -1,6 +1,7 @@
 #include <AmjuFirst.h>
 #include "GSMain.h"
 #include <AmjuGL.h>
+#include <CollisionManager.h>
 #include <ShadowMap.h>
 #include <Screen.h>
 #include <SAP.h> 
@@ -313,6 +314,7 @@ void GSMain::Update()
   TheGame::Instance()->UpdateGameObjects();
 
   // TODO SAP instead
+  TheCollisionManager::Instance()->InitFrame(); // TODO this should be in Game class
   BruteForce(TheGame::Instance()->GetGameObjects());
 
   TheChatConsole::Instance()->Update();
