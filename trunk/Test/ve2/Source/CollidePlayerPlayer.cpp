@@ -11,6 +11,9 @@ void CollidePlayerPlayer(Player* p1, Player* p2)
 {
   // Awesome: for player-player, we are allowed to overlap. The scene graph
   //  should handle overlapping to give 2.5D effect.
+
+  p1->OnCollidePlayer(p2);
+
   return;
 
   /*

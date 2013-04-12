@@ -660,6 +660,7 @@ void Player::EatFood(FuelCell* f)
 
   std::string recipName = GetPlayerName(GetId());
 
+  // Show msg to local player
   LurkMsg lm("You gave some food to " + recipName + "!", 
     LURK_FG, LURK_BG, AMJU_CENTRE); 
   TheLurker::Instance()->Queue(lm);    
@@ -676,6 +677,27 @@ void Player::EatFood(FuelCell* f)
   TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
 }
 
+void Player::OnCollidePlayer(Player* otherPlayer)
+{
+  if (!IsLocalPlayer())
+  {
+    return;
+  }
+
+  std::cout << "Local player collided with player " << otherPlayer->m_name << "\n";
+
+  if (m_carriedFood.empty())
+  {
+    std::cout << "Bad luck, we don't have food to give.\n";
+    return;
+  }
+
+  FuelCell* f = dynamic_cast<FuelCell*>(m_carriedFood.back().GetPtr());
+  Assert(f);
+  m_carriedFood.pop_back(); // it's a deque, we add with push_front
+  otherPlayer->EatFood(f);
+}
+
 void Player::OnCollideFuel(FuelCell* f)
 {
   // Local player: picks up food if not currently picked up.
@@ -690,14 +712,17 @@ void Player::OnCollideFuel(FuelCell* f)
   if (owner == this)
   {
     // We are already carrying this food
+    Assert(std::find(m_carriedFood.begin(), m_carriedFood.end(), f) != m_carriedFood.end());
     return;
   }
+  /* // Give food by colliding player-player
   else if (owner) 
   {
     // This player is non local. The local player is carrying this food. 
     // We get given the food. The other (local) player should get some reward for feeding us.
     EatFood(f);
   }
+  */
   else if (IsLocalPlayer())
   {
     Assert(!owner);
@@ -715,6 +740,7 @@ void Player::OnCollideFuel(FuelCell* f)
     TheLurker::Instance()->Queue(lm);    
     */
     f->SetOwner(this);
+    m_carriedFood.push_front(f);
   }
   
 
