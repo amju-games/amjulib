@@ -86,7 +86,7 @@ pickup-y    60
 player-aabb-x  16
 player-aabb-y  10
 player-aabb-z  32
-show-aabb     y 
+show-aabb     n
 
 // Food AABB
 food-aabb-x  12

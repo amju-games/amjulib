@@ -1,6 +1,7 @@
 #ifndef KB_H_INCLUDED
 #define KB_H_INCLUDED
 
+#include <GuiButton.h>
 #include <GuiKeyboard.h>
 #include <Singleton.h>
 #include <StringUtils.h>
@@ -34,6 +35,7 @@ public:
 
 private:
   RCPtr<GuiKeyboard> m_kb;
+  RCPtr<GuiButton> m_showButton;
 
   enum Mode
   {

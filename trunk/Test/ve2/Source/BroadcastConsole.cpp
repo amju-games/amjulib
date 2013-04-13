@@ -63,6 +63,15 @@ void BroadcastConsole::OnEnter()
 
 void BroadcastConsole::Update()
 {
+  // Check if KB has changed hidden/shown
+  static bool prevKbStatus = TheKb::Instance()->IsEnabled();
+  bool kbStatus = TheKb::Instance()->IsEnabled();
+  if (kbStatus != prevKbStatus)
+  {
+    std::cout << "Broadcast console: Wait, what? The KB changed status!\n";
+    OnActive();
+    prevKbStatus = kbStatus;
+  }
 }
 
 void BroadcastConsole::Draw()
