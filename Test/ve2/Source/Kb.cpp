@@ -49,6 +49,19 @@ void OnPrevPage()
   kb->OnPrevPage();
 }
 
+void OnShow()
+{
+  static Kb* kb = TheKb::Instance();
+  kb->SetEnabled(true);
+  kb->Activate();
+}
+
+void OnHide()
+{
+  static Kb* kb = TheKb::Instance();
+  kb->Deactivate(); // Not SetEnabled(false), so we get the hiding animation. Right??
+}
+
 Kb::Kb()
 {
   m_mode = KB_HIDDEN;
@@ -104,6 +117,24 @@ std::cout << "Prev page set but num pages is " << m_pages.size() << "!!\n";
   {
 std::cout << "KB: no prev page for this layout: " << guiKbFilename << "\n";
   }
+
+  GuiButton* hide = (GuiButton*)m_kb->GetElementByName("hide");
+  if (hide)
+  {
+    hide->SetCommand(Amju::OnHide);
+  }
+  else
+  {
+std::cout << "KB: no hide button for this layout: " << guiKbFilename << "\n";
+  }
+
+  m_showButton = new GuiButton;
+  if (!m_showButton->OpenAndLoad("gui-kb-showbutton.txt"))
+  {
+    std::cout << "KB: failed to load show button.\n";
+    return false;
+  }
+  m_showButton->SetCommand(Amju::OnShow);
 
   return true;
 }
@@ -206,6 +237,7 @@ void Kb::Update()
     {
       m_mode = KB_HIDDEN;
       m_kb->SetVisible(false);
+      SetEnabled(false);
     }
     m_kb->SetLocalPos(pos);
     }
@@ -219,12 +251,18 @@ void Kb::Draw()
   {
     m_kb->Draw();
   }
+  else
+  {
+    m_showButton->SetVisible(true);
+  }
 }
 
 void Kb::Activate()
 {
+  static EventPoller* ep = TheEventPoller::Instance();
   if (!m_enabled)
   {
+    ep->AddListener(m_showButton);
     return;
   }
 
@@ -236,7 +274,6 @@ void Kb::Activate()
 
   m_mode = KB_SHOWING;
 
-  static EventPoller* ep = TheEventPoller::Instance();
   if (!ep->HasListener(m_kb))
   {
     ep->AddListener(m_kb);

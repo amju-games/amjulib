@@ -270,11 +270,11 @@ row4
 5
 
 gui-button
-prevpage
+hide
 0,-0.6
 0.3, 0.2
 key3.png
-123
+Hide
 arial, 2.0, sx=0.5
 
 gui-button

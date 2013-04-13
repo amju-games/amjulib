@@ -112,7 +112,7 @@ void GSToday::OnActive()
   GuiButton* play = (GuiButton*)GetElementByName(m_gui, "play-button");
   play->SetCommand(OnTodayPlay);
 #ifndef _DEBUG
-  play->SetVisible(false);
+//  play->SetVisible(false);
 #endif
 
   GuiText* dateText = (GuiText*)GetElementByName(m_gui, "date-text");
