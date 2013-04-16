@@ -98,6 +98,17 @@ END
   update_or_insert($sql);
 
   print "Created research_date table! $sql\n<br>\n";
+
+  $sql = <<END;
+CREATE TABLE  `research_group_current` (
+`research_group` VARCHAR( 10 ) NOT NULL,
+PRIMARY KEY(`research_group`)
+) ENGINE = MYISAM ;
+END
+
+  update_or_insert($sql);
+
+  print "Created research_group_current table! $sql\n<br>\n";
 }
 
 sub create_table_action()
