@@ -68,6 +68,34 @@ END
 
   print "Created research_testresult table! $sql\n<br>\n";
 
+  $sql = <<END;
+CREATE TABLE  `research_group` (
+`research_group` VARCHAR( 10 ) NOT NULL ,
+`start_date` INT NOT NULL ,
+`end_date` INT NOT NULL
+) ENGINE = MYISAM ;
+END
+
+  update_or_insert($sql);
+
+  print "Created research_group table! $sql\n<br>\n";
+
+  $sql = <<END;
+CREATE TABLE  `research_date` (
+`date_id` INT NOT NULL ,
+`cog_test` INT NOT NULL ,
+`play` INT NOT NULL ,
+`date` DATE NOT NULL ,
+PRIMARY KEY (  `date_id` ) ,
+UNIQUE (
+`date`
+)
+) ENGINE = MYISAM ;
+END
+
+  update_or_insert($sql);
+
+  print "Created research_date table! $sql\n<br>\n";
 }
 
 sub create_table_action()

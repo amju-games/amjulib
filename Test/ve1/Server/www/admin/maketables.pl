@@ -87,7 +87,7 @@ sub create_table_objectstate()
 CREATE TABLE `objectstate`
 (`id` INT NOT NULL,
 `key` VARCHAR(30) NOT NULL,
-`val` VARCHAR(30) NOT NULL,
+`val` VARCHAR(50) NOT NULL,
 `whenchanged` TIMESTAMP NOT NULL,
 PRIMARY KEY (`id`, `key`),
 FOREIGN KEY (`id`) REFERENCES object(`id`),
