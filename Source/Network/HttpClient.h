@@ -28,7 +28,9 @@ Added to repository
 
 #include <string>
 #include <vector>
-#include <curl/curl.h>
+#ifdef AMJU_USE_CURL
+#include "curl/curl.h"
+#endif // AMJU_USE_CURL
 
 namespace Amju
 {
@@ -71,7 +73,9 @@ public:
   static void SetProxy(const std::string& proxyName, int port, const std::string& user, const std::string& pw);
 
 protected:
-  CURL* m_curl; 
+#ifdef AMJU_USE_CURL
+  CURL* m_curl;
+#endif // AMJU_USE_CURL
 };
 
 }

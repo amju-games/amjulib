@@ -77,12 +77,16 @@ static std::string s_proxyPw;
 
 HttpClient::HttpClient()
 {
+#ifdef AMJU_USE_CURL
   m_curl = curl_easy_init();
+#endif // AMJU_USE_CURL
 }
 
 HttpClient::~HttpClient()
 {
+#ifdef AMJU_USE_CURL
   curl_easy_cleanup(m_curl);
+#endif // AMJU_USE_CURL
 }
 
 bool HttpClient::Get(
@@ -104,6 +108,7 @@ std::cout << "Port: " << port << "\n";
   }
 #endif
 
+#ifdef AMJU_USE_CURL
   bool ok = true;
   if (m_curl) 
   {
@@ -178,6 +183,9 @@ std::cout << "UTTERLY FAILED TO GET " << url  << " No CURL object.\n";
   }
   result->SetSuccess(ok);
   return ok;
+#endif // AMJU_USE_CURL
+ 
+  return false;
 }
 
 void HttpClient::SetProxy(
