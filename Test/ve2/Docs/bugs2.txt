@@ -1,0 +1,44 @@
+Broadcast console + Chat console
+When KB hides or shows: if chat console is active, refresh size.
+If chat console activated, hide broadcast console.
+KB should have set bottom function. 
+For emails, bottom is at bottom of screen.
+Hopefully class Kb is reusable?
+
+
+DONE
+We give all our food to anyone we intersect -- just give one!
+Causes lots of annoying msgs
+
+DONE??
+Login bug
+---------
+If login times out, we kill off the http request, and create a new copy.
+But this doesn't work - we end up getting a BAD_SESSION fault.
+What's going on? Our session ID gets outdated when another login request hits.
+What we could do: discard login reqs that were sent before the login req we
+have granted? -- so add a timestamp to the req.
+
+DONE
+Lurk msg interferes with GUI keyboard.
+Don't draw anything over the KB.
+
+
+DONE: don't eat food, just pic up and give to other people.
+ - reduce game design complexity
+
+Show human-readable error msgs
+
+
+Check cog tests ok, storing results etc. Check reporting works.
+
+
+
+Level design
+Have some variety in background. 
+Ideally want buildings, trees etc to collide.
+Buildings have AABBs, so should just work, but the 3D top-down view of buildings could be confusing?
+Adding boxes to obj mesh could work?
+
+
+
