@@ -17,7 +17,7 @@
 use File::Find;
 use strict;
 
-my $COMMENT_BLOCK = "/* Amju Games source code (c) Copyright 2000-2013 Jason Colman */\n\n";
+my $COMMENT_BLOCK = "/* Amju Games source code (c) Copyright 2000-2013 Jason Colman */\n";
 
 sub AddHeaders($)
 {
@@ -98,18 +98,18 @@ sub AddHeaders($)
   # Print new verison of file 
   # -------------------------
   #
-  print "\n\nNEW FILE:\n";
-  foreach my $line (@lines)
-  {
-    if ($line ne "**DELETE_ME**")
-    {
-      print "$line\n";
-    }
-  }
-  print "\n\n";
-
   if ($ARGV[1] eq "nowrite")
   {
+    print "\n\nNEW FILE:\n";
+    foreach my $line (@lines)
+    {
+      if ($line ne "**DELETE_ME**")
+      {
+        #chomp($line);
+        print "$line\n";
+      }
+    }
+    print "\n\n";
     return;
   }
 
@@ -122,7 +122,10 @@ sub AddHeaders($)
   {
     if ($line2 ne "**DELETE_ME**")
     {
-      print MODIFY_THIS "$line2" . $/;
+      chomp($line2);
+      $line2 =~ s/\r//g;
+
+      print MODIFY_THIS "$line2\n"; 
     }
   }
   close (MODIFY_THIS);
@@ -131,7 +134,7 @@ sub AddHeaders($)
 
 sub MaybeAddHeaders($)
 {
-  if (/\.cpp$/)
+  if (/\.cpp$/ or /\.h$/)
   {
     print "FOUND FILE: $_\n";
     AddHeaders($_);
