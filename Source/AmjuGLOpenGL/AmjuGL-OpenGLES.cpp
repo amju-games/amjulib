@@ -352,6 +352,26 @@ void AmjuGLOpenGLES::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 	//Assert(0);
 }
 	
+void AmjuGLOpenGLES::SetTextureType(AmjuGL::TextureType tt)
+{
+  AMJU_CALL_STACK;
+    
+  // TODO - must use shader in ES
+/*
+  if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
+  {
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+  }
+  else if (tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
+  {
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+  }
+*/
+}
 } // namespace Amju
 
 
