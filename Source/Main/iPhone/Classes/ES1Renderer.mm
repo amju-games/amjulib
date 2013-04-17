@@ -40,6 +40,16 @@
 
 std::cout << "In init()...\n";
         
+	// Get path to data files
+	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+		
+	// From http://forums.macrumors.com/showthread.php?t=494103
+	//NSString *foo = @"your text here";
+	//const char *bar = [foo UTF8String];
+		
+	const char* cFilePath = [filePath UTF8String];
+	Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
+
         Amju::StartUpBeforeCreateWindow();
         
         Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES);
@@ -50,15 +60,7 @@ std::cout << "Set AmjuGL impl...\n";
 
 std::cout << "Called AmjuGL::Init()...\n";
 	
-	// Get path to data files
-	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-		
-	// From http://forums.macrumors.com/showthread.php?t=494103
-	//NSString *foo = @"your text here";
-	//const char *bar = [foo UTF8String];
-		
-	const char* cFilePath = [filePath UTF8String];
-	Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
+        Amju::StartUpAfterCreateWindow();
 		
 	Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
 	Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
