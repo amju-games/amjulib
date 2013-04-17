@@ -22,10 +22,12 @@ public:
   virtual void Update();
   virtual void SetSongMaxVolume(float);
 
+#ifdef AMJU_USE_MIDI
   void MidiSetSoundFont(const char* soundfont);
   void MidiNoteOn(int note);
   void MidiNoteOff(int note);
-
+#endif // AMJU_USE_MIDI
+    
 private:
   // Channel for current song
   unsigned long m_chan;
