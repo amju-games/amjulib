@@ -187,35 +187,35 @@ arial, 2.0
 
 gui-comp
 row3
-9
+5
 
 gui-button
 .
-0.09,-0.4
-0.2, 0.2
-key2.png
-.
-arial, 2.0 
-
-gui-button
-,
-0.29,-0.4
-0.2, 0.2
-key2.png
-,
-arial, 2.0 
-
-gui-button
-?
 0.49,-0.4
 0.2, 0.2
 key2.png
+.
+arial, 2.0 
+
+gui-button
+,
+0.69,-0.4
+0.2, 0.2
+key2.png
+,
+arial, 2.0 
+
+gui-button
+?
+0.89,-0.4
+0.2, 0.2
+key2.png
 ?
 arial, 2.0 
 
 gui-button
 !
-0.69,-0.4
+1.09,-0.4
 0.2, 0.2
 key2.png
 !
@@ -223,42 +223,10 @@ arial, 2.0
 
 gui-button
 '
-0.89,-0.4
-0.2, 0.2
-key2.png
-'
-arial, 2.0 
-
-gui-button
-n
-1.09,-0.4
-0.2, 0.2
-key2.png
-n
-arial, 2.0 
-
-gui-button
-m
 1.29,-0.4
 0.2, 0.2
 key2.png
-m
-arial, 2.0 
-
-gui-button
-,
-1.49,-0.4
-0.2, 0.2
-key2.png
-,
-arial, 2.0 
-
-gui-button
-.
-1.69,-0.4
-0.2, 0.2
-key2.png
-.
+'
 arial, 2.0 
 
 

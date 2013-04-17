@@ -253,7 +253,7 @@ void Kb::Draw()
   }
   else
   {
-    m_showButton->SetVisible(true);
+    m_showButton->Draw();
   }
 }
 

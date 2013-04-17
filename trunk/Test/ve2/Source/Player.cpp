@@ -640,7 +640,7 @@ int Player::GetFoodRecvCount()
     int i = ToInt(s);
     return i;
   }
-std::cout << "No food recv count for player " << *this << "\n";
+//std::cout << "No food recv count for player " << *this << "\n";
 //  Assert(0);
   return 0;
 }
