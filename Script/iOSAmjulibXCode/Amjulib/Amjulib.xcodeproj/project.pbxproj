@@ -297,8 +297,6 @@
 		693D435C15AB7CE900B84D5C /* SoundPlayerImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D427B15AB7CE900B84D5C /* SoundPlayerImpl.h */; };
 		693D435D15AB7CE900B84D5C /* TextToSpeech.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D427C15AB7CE900B84D5C /* TextToSpeech.cpp */; };
 		693D435E15AB7CE900B84D5C /* TextToSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D427D15AB7CE900B84D5C /* TextToSpeech.h */; };
-		693D436715AB7CE900B84D5C /* libbassmidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D428E15AB7CE900B84D5C /* libbassmidi.a */; };
-		693D436815AB7CE900B84D5C /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D429015AB7CE900B84D5C /* libbass.a */; };
 		693D436E15AB7CE900B84D5C /* BassSoundPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D429815AB7CE900B84D5C /* BassSoundPlayer.cpp */; };
 		693D436F15AB7CE900B84D5C /* BassSoundPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D429915AB7CE900B84D5C /* BassSoundPlayer.h */; };
 		693D437015AB7CE900B84D5C /* ReportError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D429B15AB7CE900B84D5C /* ReportError.cpp */; };
@@ -331,7 +329,6 @@
 		693D438B15AB7CE900B84D5C /* AmjuTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42B915AB7CE900B84D5C /* AmjuTypes.h */; };
 		693D438C15AB7CE900B84D5C /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42BA15AB7CE900B84D5C /* Common.h */; };
 		693D438D15AB7CE900B84D5C /* DegRad.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42BB15AB7CE900B84D5C /* DegRad.h */; };
-		693D438E15AB7CE900B84D5C /* DoubleDisp.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42BC15AB7CE900B84D5C /* DoubleDisp.h */; };
 		693D438F15AB7CE900B84D5C /* Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42BD15AB7CE900B84D5C /* Factory.h */; };
 		693D439315AB7CE900B84D5C /* Launcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42C215AB7CE900B84D5C /* Launcher.cpp */; };
 		693D439415AB7CE900B84D5C /* Launcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42C315AB7CE900B84D5C /* Launcher.h */; };
@@ -348,7 +345,6 @@
 		693D43C015AB7CE900B84D5C /* Unproject.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42F915AB7CE900B84D5C /* Unproject.h */; };
 		693D43C115AB7CE900B84D5C /* Variable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42FA15AB7CE900B84D5C /* Variable.cpp */; };
 		693D43C215AB7CE900B84D5C /* Variable.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42FB15AB7CE900B84D5C /* Variable.h */; };
-		693D43C315AB7CE900B84D5C /* XmlTestMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42FE15AB7CE900B84D5C /* XmlTestMain.cpp */; };
 		693D43C415AB7CE900B84D5C /* XmlNodeInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42FF15AB7CE900B84D5C /* XmlNodeInterface.cpp */; };
 		693D43C515AB7CE900B84D5C /* XmlNodeInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430015AB7CE900B84D5C /* XmlNodeInterface.h */; };
 		693D43C615AB7CE900B84D5C /* XmlParser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D430115AB7CE900B84D5C /* XmlParser2.cpp */; };
@@ -381,6 +377,8 @@
 		693D43E115AB7CE900B84D5C /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431D15AB7CE900B84D5C /* zlib.h */; };
 		693D43E215AB7CE900B84D5C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431E15AB7CE900B84D5C /* zutil.c */; };
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
+		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
+		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -687,8 +685,6 @@
 		693D427B15AB7CE900B84D5C /* SoundPlayerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayerImpl.h; sourceTree = "<group>"; };
 		693D427C15AB7CE900B84D5C /* TextToSpeech.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextToSpeech.cpp; sourceTree = "<group>"; };
 		693D427D15AB7CE900B84D5C /* TextToSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextToSpeech.h; sourceTree = "<group>"; };
-		693D428E15AB7CE900B84D5C /* libbassmidi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbassmidi.a; sourceTree = "<group>"; };
-		693D429015AB7CE900B84D5C /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbass.a; sourceTree = "<group>"; };
 		693D429815AB7CE900B84D5C /* BassSoundPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BassSoundPlayer.cpp; sourceTree = "<group>"; };
 		693D429915AB7CE900B84D5C /* BassSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BassSoundPlayer.h; sourceTree = "<group>"; };
 		693D429B15AB7CE900B84D5C /* ReportError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReportError.cpp; sourceTree = "<group>"; };
@@ -721,7 +717,6 @@
 		693D42B915AB7CE900B84D5C /* AmjuTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuTypes.h; sourceTree = "<group>"; };
 		693D42BA15AB7CE900B84D5C /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		693D42BB15AB7CE900B84D5C /* DegRad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DegRad.h; sourceTree = "<group>"; };
-		693D42BC15AB7CE900B84D5C /* DoubleDisp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleDisp.h; sourceTree = "<group>"; };
 		693D42BD15AB7CE900B84D5C /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
 		693D42C215AB7CE900B84D5C /* Launcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Launcher.cpp; sourceTree = "<group>"; };
 		693D42C315AB7CE900B84D5C /* Launcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Launcher.h; sourceTree = "<group>"; };
@@ -738,7 +733,6 @@
 		693D42F915AB7CE900B84D5C /* Unproject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unproject.h; sourceTree = "<group>"; };
 		693D42FA15AB7CE900B84D5C /* Variable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Variable.cpp; sourceTree = "<group>"; };
 		693D42FB15AB7CE900B84D5C /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
-		693D42FE15AB7CE900B84D5C /* XmlTestMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlTestMain.cpp; sourceTree = "<group>"; };
 		693D42FF15AB7CE900B84D5C /* XmlNodeInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlNodeInterface.cpp; sourceTree = "<group>"; };
 		693D430015AB7CE900B84D5C /* XmlNodeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlNodeInterface.h; sourceTree = "<group>"; };
 		693D430115AB7CE900B84D5C /* XmlParser2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlParser2.cpp; sourceTree = "<group>"; };
@@ -771,6 +765,8 @@
 		693D431D15AB7CE900B84D5C /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		693D431E15AB7CE900B84D5C /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
+		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -781,8 +777,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				693D436715AB7CE900B84D5C /* libbassmidi.a in Frameworks */,
-				693D436815AB7CE900B84D5C /* libbass.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +820,20 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				693D406F15AB783A00B84D5C /* AmjuGL */,
+				693D407015AB796F00B84D5C /* AmjuGLOpenGL */,
+				693D407F15AB79BF00B84D5C /* Clip */,
+				693D408415AB79DC00B84D5C /* Collision */,
+				693D409515AB79FE00B84D5C /* Community */,
+				693D409E15AB7A2000B84D5C /* Events */,
+				693D40AF15AB7A3C00B84D5C /* FileUtils */,
+				693D40E615AB7A6900B84D5C /* Font */,
+				693D40EF15AB7C1A00B84D5C /* Game */,
+				693D410215AB7C3C00B84D5C /* Geom */,
+				693D418615AB7C6800B84D5C /* GeomDraw */,
+				693D419F15AB7C7D00B84D5C /* GeomLoad */,
+				693D41B015AB7C9100B84D5C /* Gui */,
+				693D41F215AB7CA700B84D5C /* Image */,
 				693D423415AB7CE800B84D5C /* Localise */,
 				693D423815AB7CE800B84D5C /* Md2 */,
 				693D423C15AB7CE900B84D5C /* Mem */,
@@ -839,20 +847,6 @@
 				693D42A115AB7CE900B84D5C /* Thread */,
 				693D42AB15AB7CE900B84D5C /* TimeUtils */,
 				693D42B415AB7CE900B84D5C /* Utils */,
-				693D41F215AB7CA700B84D5C /* Image */,
-				693D41B015AB7C9100B84D5C /* Gui */,
-				693D419F15AB7C7D00B84D5C /* GeomLoad */,
-				693D418615AB7C6800B84D5C /* GeomDraw */,
-				693D410215AB7C3C00B84D5C /* Geom */,
-				693D40EF15AB7C1A00B84D5C /* Game */,
-				693D40E615AB7A6900B84D5C /* Font */,
-				693D40AF15AB7A3C00B84D5C /* FileUtils */,
-				693D409E15AB7A2000B84D5C /* Events */,
-				693D409515AB79FE00B84D5C /* Community */,
-				693D408415AB79DC00B84D5C /* Collision */,
-				693D407F15AB79BF00B84D5C /* Clip */,
-				693D407015AB796F00B84D5C /* AmjuGLOpenGL */,
-				693D406F15AB783A00B84D5C /* AmjuGL */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -860,6 +854,8 @@
 		693D406F15AB783A00B84D5C /* AmjuGL */ = {
 			isa = PBXGroup;
 			children = (
+				695AD8B916B7BD8200E1E814 /* Drawable.h */,
+				695AD8BA16B7BD8200E1E814 /* Outliner.h */,
 				693D404F15AB780200B84D5C /* AmjuGL-Impl.h */,
 				693D405015AB780200B84D5C /* AmjuGL-Null.h */,
 				693D405115AB780200B84D5C /* AmjuGL.cpp */,
@@ -1364,7 +1360,6 @@
 		693D428D15AB7CE900B84D5C /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				693D428E15AB7CE900B84D5C /* libbassmidi.a */,
 				693D428F15AB7CE900B84D5C /* mp3-free */,
 			);
 			path = iPhone;
@@ -1373,7 +1368,6 @@
 		693D428F15AB7CE900B84D5C /* mp3-free */ = {
 			isa = PBXGroup;
 			children = (
-				693D429015AB7CE900B84D5C /* libbass.a */,
 			);
 			path = "mp3-free";
 			sourceTree = "<group>";
@@ -1435,7 +1429,6 @@
 				693D42B915AB7CE900B84D5C /* AmjuTypes.h */,
 				693D42BA15AB7CE900B84D5C /* Common.h */,
 				693D42BB15AB7CE900B84D5C /* DegRad.h */,
-				693D42BC15AB7CE900B84D5C /* DoubleDisp.h */,
 				693D42BD15AB7CE900B84D5C /* Factory.h */,
 				693D42C215AB7CE900B84D5C /* Launcher.cpp */,
 				693D42C315AB7CE900B84D5C /* Launcher.h */,
@@ -1462,7 +1455,6 @@
 		693D42FC15AB7CE900B84D5C /* Xml */ = {
 			isa = PBXGroup;
 			children = (
-				693D42FD15AB7CE900B84D5C /* Test */,
 				693D42FF15AB7CE900B84D5C /* XmlNodeInterface.cpp */,
 				693D430015AB7CE900B84D5C /* XmlNodeInterface.h */,
 				693D430115AB7CE900B84D5C /* XmlParser2.cpp */,
@@ -1472,14 +1464,6 @@
 				693D430515AB7CE900B84D5C /* XmlUtils.h */,
 			);
 			path = Xml;
-			sourceTree = "<group>";
-		};
-		693D42FD15AB7CE900B84D5C /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				693D42FE15AB7CE900B84D5C /* XmlTestMain.cpp */,
-			);
-			path = Test;
 			sourceTree = "<group>";
 		};
 		693D430615AB7CE900B84D5C /* Zlib */ = {
@@ -1687,7 +1671,6 @@
 				693D438B15AB7CE900B84D5C /* AmjuTypes.h in Headers */,
 				693D438C15AB7CE900B84D5C /* Common.h in Headers */,
 				693D438D15AB7CE900B84D5C /* DegRad.h in Headers */,
-				693D438E15AB7CE900B84D5C /* DoubleDisp.h in Headers */,
 				693D438F15AB7CE900B84D5C /* Factory.h in Headers */,
 				693D439415AB7CE900B84D5C /* Launcher.h in Headers */,
 				693D43B315AB7CE900B84D5C /* NonCopyable.h in Headers */,
@@ -1712,6 +1695,8 @@
 				693D43E015AB7CE900B84D5C /* zconf.in.h in Headers */,
 				693D43E115AB7CE900B84D5C /* zlib.h in Headers */,
 				693D43E315AB7CE900B84D5C /* zutil.h in Headers */,
+				695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */,
+				695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1740,6 +1725,9 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Amjulib" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -1927,7 +1915,6 @@
 				693D43B815AB7CE900B84D5C /* Sign.cpp in Sources */,
 				693D43BF15AB7CE900B84D5C /* Unproject.cpp in Sources */,
 				693D43C115AB7CE900B84D5C /* Variable.cpp in Sources */,
-				693D43C315AB7CE900B84D5C /* XmlTestMain.cpp in Sources */,
 				693D43C415AB7CE900B84D5C /* XmlNodeInterface.cpp in Sources */,
 				693D43C615AB7CE900B84D5C /* XmlParser2.cpp in Sources */,
 				693D43C815AB7CE900B84D5C /* XmlTestMain.cpp in Sources */,
@@ -1960,11 +1947,16 @@
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/Amjulib.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Amjulib_Prefix.pch;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					LANDSCAPE,
+					IPHONE,
+					AMJU_USE_BASS,
+					_DEBUG,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1988,6 +1980,11 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Amjulib_Prefix.pch;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					LANDSCAPE,
+					IPHONE,
+					AMJU_USE_BASS,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2015,7 +2012,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2028,7 +2024,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Release;
