@@ -50,6 +50,9 @@ std::cout << "In init()...\n";
 	const char* cFilePath = [filePath UTF8String];
 	Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
 
+	Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
+	Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
+			
         Amju::StartUpBeforeCreateWindow();
         
         Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES);
@@ -62,9 +65,6 @@ std::cout << "Called AmjuGL::Init()...\n";
 	
         Amju::StartUpAfterCreateWindow();
 		
-	Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
-	Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
-			
 std::cout << "About to call StartUp...\n";
 	
         Amju::StartUpAfterCreateWindow();
