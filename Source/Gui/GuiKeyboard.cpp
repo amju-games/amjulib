@@ -108,7 +108,7 @@ bool GuiKeyboard::Load(File* file)
   // Printable characters: try to find a key for each printable character.
   // TODO For localisation, this string must be loaded from string table.
   const std::string CHARS = 
-    "!@£$%^&*()_-+={[}]:;\"'|\\~`<,>.?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; 
+    "!@£$%^&*()_-+={[}]:;\"'|\\~`<,>.?/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#"; 
 
   for (unsigned int i = 0; i < CHARS.size(); i++)
   {
