@@ -82,10 +82,19 @@ Added to repository
 
 #else
 #include <dirent.h>
+#include <errno.h>
+#include <libgen.h>
+#include <string.h>
 #endif
+
 #ifdef MACOSX
 #include <Carbon/Carbon.h>
 #endif
+
+#ifdef IPHONE
+#include "iOSGetDir.h"
+#endif
+
 #include <AmjuFinal.h>
 
 //#define DIRECTORY_DEBUG
@@ -165,6 +174,45 @@ bool Dir(
   return true; 
 }
 
+
+/* Function with behaviour like `mkdir -p'  */
+// From: http://niallohiggins.com/2009/01/08/mkpath-mkdir-p-alike-in-c-for-unix/
+int
+mkpath(const char *s, mode_t mode)
+{
+  char *q, *r = NULL, *path = NULL, *up = NULL;
+  int rv = -1;
+  if (strcmp(s, ".") == 0 || strcmp(s, "/") == 0)
+    return (0);
+
+  if ((path = strdup(s)) == NULL)
+    exit(1);
+    
+  if ((q = strdup(s)) == NULL)
+    exit(1);
+
+  if ((r = dirname(q)) == NULL)
+    goto out;
+        
+  if ((up = strdup(r)) == NULL)
+    exit(1);
+
+  if ((mkpath(up, mode) == -1) && (errno != EEXIST))
+    goto out;
+
+  if ((mkdir(path, mode) == -1) && (errno != EEXIST))
+    rv = -1;
+  else
+    rv = 0;
+
+out:
+  if (up != NULL)
+    free(up);
+  free(q);
+  free(path);
+  return (rv);
+}
+
 bool MkDir(const std::string& dir)
 {
   AMJU_CALL_STACK;
@@ -173,11 +221,12 @@ bool MkDir(const std::string& dir)
   std::cout << "Creating directory " << dir.c_str() << "\n";
 #endif
 
+/*
 #ifdef WIN32
   int r = _mkdir(dir.c_str()); // VC8: mkdir deprecated..
 #else
   int r = mkdir(dir.c_str(), 0);
-  
+
 #ifndef GEKKO
   // Set permission: rwxr-xr-x
   chmod(dir.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
@@ -187,7 +236,12 @@ bool MkDir(const std::string& dir)
 std::cout << "CHMOD: " << dir.c_str() << "\n";
 #endif
 #endif
+*/
 
+  // Handy function to give 'mkdir -p' effect 
+  int r = mkpath(dir.c_str(), 0777);
+ 
+/* 
 #ifdef DIRECTORY_DEBUG
 #ifdef MACOSX
   if (r != 0)
@@ -214,6 +268,7 @@ std::cout << "CHMOD: " << dir.c_str() << "\n";
   }
 #endif // MACOSX
 #endif // DIRECTORY_DEBUG
+*/
 
   return (r == 0);
 }
@@ -255,22 +310,26 @@ bool ShGetFolderPath(uint32 pathType, std::string* pResult)
 // From https://developer.apple.com/carbon/tipsandtricks.html
 Boolean AmIBundled()
 {
-        FSRef processRef;
-        FSCatalogInfo processInfo;
-        int isBundled;
-        ProcessSerialNumber psn = {0, kCurrentProcess};
+  FSRef processRef;
+  FSCatalogInfo processInfo;
+  int isBundled;
+  ProcessSerialNumber psn = {0, kCurrentProcess};
 
-        GetProcessBundleLocation (&psn, &processRef);
-        FSGetCatalogInfo (&processRef, kFSCatInfoNodeFlags,
-                                                &processInfo, NULL, NULL, NULL);
-        isBundled = processInfo.nodeFlags & kFSNodeIsDirectoryMask;
+  GetProcessBundleLocation (&psn, &processRef);
+  FSGetCatalogInfo (&processRef, kFSCatInfoNodeFlags, &processInfo, NULL, NULL, NULL);
+  isBundled = processInfo.nodeFlags & kFSNodeIsDirectoryMask;
 
-        return( isBundled );
+  return( isBundled );
 }
 #endif
 
 std::string GetProcessDir()
 {
+#ifdef IPHONE
+  std::cout << "Yikes, calling GetProcessDir\n";
+  Assert(0);
+#endif // IPHONE
+  
 #ifdef MACOSX
   // This works for exes which are not bundles!
   CFBundleRef mainBundle = CFBundleGetMainBundle();
@@ -335,7 +394,25 @@ std::cout << "GetProcessDir() result: " << root.c_str() << "\n";
 #endif
 }
 
-
+std::string GetDataDir()
+{
+#ifdef WIN32
+  std::string dataDir = GetProcessDir();
+  dataDir += "/Data/";
+  return dataDir;
+#endif
+  
+#ifdef MACOSX
+  std::string dataDir = GetProcessDir();
+  dataDir += "/../Resources/Data/";
+  return dataDir;
+#endif
+  
+#ifdef IPHONE
+  return iOSGetDataDir();
+#endif
+}
+  
 std::string GetDesktopDir()
 {
 #ifdef WIN32
@@ -397,8 +474,9 @@ std::string GetSaveDir(const std::string& appName)
 #endif
 
 #ifdef IPHONE
-  std::cout << "Save dir: " << File::GetRoot() << "\n";
-  return File::GetRoot();
+  return iOSGetDataDir();
+  //std::cout << "Save dir: " << File::GetRoot() << "\n";
+  //return File::GetRoot();
 #endif
 
   // Not in the application directory, so the app can be upgraded without losing
