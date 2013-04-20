@@ -40,6 +40,7 @@
 
 std::cout << "In init()...\n";
         
+/*
 	// Get path to data files
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
 		
@@ -49,7 +50,8 @@ std::cout << "In init()...\n";
 		
 	const char* cFilePath = [filePath UTF8String];
 	Amju::File::SetRoot(Amju::GetFilePath(cFilePath), "/");    
-
+*/
+    
 	Amju::TheSoundManager::Instance()->SetImpl(new Amju::BassSoundPlayer);
 	Amju::TheEventPoller::Instance()->SetImpl(new Amju::EventPollerImplGeneric);
 			
