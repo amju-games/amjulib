@@ -20,6 +20,7 @@ Added to repository
 #include "XMLUtils.h"
 #include <string>
 #include <vector>
+#include <stdlib.h>
 #include <AmjuFinal.h>
 
 using namespace std;
