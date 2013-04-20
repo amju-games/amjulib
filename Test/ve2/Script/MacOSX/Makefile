@@ -45,7 +45,17 @@ runclean:
 	rm $(RUNDIR)/* ; make run
 
 
-release:
+release-glue:
+	rm -rf $(BUILD)/$(APPNAME); \
+	cp -R $(APPNAME) $(BUILD)/; \
+	mkdir -p $(BUILD)/$(APPNAME)/Contents/Resources/Data; \
+	cp -R $(BUILD)/../CompiledAssets/data-Mac.glue $(BUILD)/$(APPNAME)/Contents/Resources/Data/; \
+        cp $(AMJU)/SoundBass/Bass2.4/Macosx/libbassmidi.dylib $(BUILD)/$(APPNAME)/Contents/MacOS/; \
+        cp $(AMJU)/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib $(BUILD)/$(APPNAME)/Contents/MacOS/ ; \
+	cp $(TARGET) $(BUILD)/$(APPNAME)/Contents/MacOS/"Hungry People"; 
+
+
+release-noglue:
 	rm -rf $(BUILD)/$(APPNAME); \
 	cp -R $(APPNAME) $(BUILD)/; \
 	mkdir -p $(BUILD)/$(APPNAME)/Contents/Resources/Data; \
