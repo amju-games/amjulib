@@ -7,6 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		690566F4172094AF008A0C92 /* DrawBorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566DF172094AF008A0C92 /* DrawBorder.cpp */; };
+		690566F5172094AF008A0C92 /* DrawBorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E0172094AF008A0C92 /* DrawBorder.h */; };
+		690566F6172094AF008A0C92 /* GuiCalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E1172094AF008A0C92 /* GuiCalendar.cpp */; };
+		690566F7172094AF008A0C92 /* GuiCalendar.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E2172094AF008A0C92 /* GuiCalendar.h */; };
+		690566F8172094AF008A0C92 /* GuiChart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E3172094AF008A0C92 /* GuiChart.cpp */; };
+		690566F9172094AF008A0C92 /* GuiChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E4172094AF008A0C92 /* GuiChart.h */; };
+		690566FA172094AF008A0C92 /* GuiDataBarDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E5172094AF008A0C92 /* GuiDataBarDisplay.cpp */; };
+		690566FB172094AF008A0C92 /* GuiDataBarDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E6172094AF008A0C92 /* GuiDataBarDisplay.h */; };
+		690566FC172094AF008A0C92 /* GuiDataDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E7172094AF008A0C92 /* GuiDataDisplay.cpp */; };
+		690566FD172094AF008A0C92 /* GuiDataDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E8172094AF008A0C92 /* GuiDataDisplay.h */; };
+		690566FE172094AF008A0C92 /* GuiDataLineDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E9172094AF008A0C92 /* GuiDataLineDisplay.cpp */; };
+		690566FF172094AF008A0C92 /* GuiDataLineDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566EA172094AF008A0C92 /* GuiDataLineDisplay.h */; };
+		69056700172094AF008A0C92 /* GuiFileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566EB172094AF008A0C92 /* GuiFileBrowser.h */; };
+		69056701172094AF008A0C92 /* GuiFileDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566EC172094AF008A0C92 /* GuiFileDialog.cpp */; };
+		69056702172094AF008A0C92 /* GuiFileDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566ED172094AF008A0C92 /* GuiFileDialog.h */; };
+		69056703172094AF008A0C92 /* GuiFileListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566EE172094AF008A0C92 /* GuiFileListBox.cpp */; };
+		69056704172094AF008A0C92 /* GuiFileListBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566EF172094AF008A0C92 /* GuiFileListBox.h */; };
+		69056705172094AF008A0C92 /* GuiObjView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566F0172094AF008A0C92 /* GuiObjView.cpp */; };
+		69056706172094AF008A0C92 /* GuiObjView.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566F1172094AF008A0C92 /* GuiObjView.h */; };
+		69056707172094AF008A0C92 /* GuiScroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566F2172094AF008A0C92 /* GuiScroll.cpp */; };
+		69056708172094AF008A0C92 /* GuiScroll.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566F3172094AF008A0C92 /* GuiScroll.h */; };
+		6905670B17213527008A0C92 /* StringsFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905670917213527008A0C92 /* StringsFile.cpp */; };
+		6905670C17213527008A0C92 /* StringsFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905670A17213527008A0C92 /* StringsFile.h */; };
+		6905670F1721354F008A0C92 /* ParticleEffect2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905670D1721354F008A0C92 /* ParticleEffect2d.cpp */; };
+		690567101721354F008A0C92 /* ParticleEffect2d.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905670E1721354F008A0C92 /* ParticleEffect2d.h */; };
+		6905671517213583008A0C92 /* LoadMeshResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905671117213583008A0C92 /* LoadMeshResource.cpp */; };
+		6905671617213583008A0C92 /* LoadMeshResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671217213583008A0C92 /* LoadMeshResource.h */; };
+		6905671717213583008A0C92 /* LoadTextureResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905671317213583008A0C92 /* LoadTextureResource.cpp */; };
+		6905671817213583008A0C92 /* LoadTextureResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671417213583008A0C92 /* LoadTextureResource.h */; };
+		6905671B172135A7008A0C92 /* AmjuRand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69056719172135A7008A0C92 /* AmjuRand.cpp */; };
+		6905671C172135A7008A0C92 /* AmjuRand.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671A172135A7008A0C92 /* AmjuRand.h */; };
+		6905671F1721B74A008A0C92 /* iOSGetDir.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671D1721B74A008A0C92 /* iOSGetDir.h */; };
+		690567201721B74A008A0C92 /* iOSGetDir.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6905671E1721B74A008A0C92 /* iOSGetDir.mm */; };
 		693D405C15AB780200B84D5C /* AmjuGL-Impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D404F15AB780200B84D5C /* AmjuGL-Impl.h */; };
 		693D405D15AB780200B84D5C /* AmjuGL-Null.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D405015AB780200B84D5C /* AmjuGL-Null.h */; };
 		693D405E15AB780200B84D5C /* AmjuGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D405115AB780200B84D5C /* AmjuGL.cpp */; };
@@ -383,6 +416,39 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		690566DF172094AF008A0C92 /* DrawBorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawBorder.cpp; sourceTree = "<group>"; };
+		690566E0172094AF008A0C92 /* DrawBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBorder.h; sourceTree = "<group>"; };
+		690566E1172094AF008A0C92 /* GuiCalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiCalendar.cpp; sourceTree = "<group>"; };
+		690566E2172094AF008A0C92 /* GuiCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiCalendar.h; sourceTree = "<group>"; };
+		690566E3172094AF008A0C92 /* GuiChart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiChart.cpp; sourceTree = "<group>"; };
+		690566E4172094AF008A0C92 /* GuiChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiChart.h; sourceTree = "<group>"; };
+		690566E5172094AF008A0C92 /* GuiDataBarDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDataBarDisplay.cpp; sourceTree = "<group>"; };
+		690566E6172094AF008A0C92 /* GuiDataBarDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDataBarDisplay.h; sourceTree = "<group>"; };
+		690566E7172094AF008A0C92 /* GuiDataDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDataDisplay.cpp; sourceTree = "<group>"; };
+		690566E8172094AF008A0C92 /* GuiDataDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDataDisplay.h; sourceTree = "<group>"; };
+		690566E9172094AF008A0C92 /* GuiDataLineDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDataLineDisplay.cpp; sourceTree = "<group>"; };
+		690566EA172094AF008A0C92 /* GuiDataLineDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDataLineDisplay.h; sourceTree = "<group>"; };
+		690566EB172094AF008A0C92 /* GuiFileBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiFileBrowser.h; sourceTree = "<group>"; };
+		690566EC172094AF008A0C92 /* GuiFileDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiFileDialog.cpp; sourceTree = "<group>"; };
+		690566ED172094AF008A0C92 /* GuiFileDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiFileDialog.h; sourceTree = "<group>"; };
+		690566EE172094AF008A0C92 /* GuiFileListBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiFileListBox.cpp; sourceTree = "<group>"; };
+		690566EF172094AF008A0C92 /* GuiFileListBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiFileListBox.h; sourceTree = "<group>"; };
+		690566F0172094AF008A0C92 /* GuiObjView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiObjView.cpp; sourceTree = "<group>"; };
+		690566F1172094AF008A0C92 /* GuiObjView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiObjView.h; sourceTree = "<group>"; };
+		690566F2172094AF008A0C92 /* GuiScroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiScroll.cpp; sourceTree = "<group>"; };
+		690566F3172094AF008A0C92 /* GuiScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiScroll.h; sourceTree = "<group>"; };
+		6905670917213527008A0C92 /* StringsFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringsFile.cpp; path = ../../../Source/FileUtils/StringsFile.cpp; sourceTree = "<group>"; };
+		6905670A17213527008A0C92 /* StringsFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringsFile.h; path = ../../../Source/FileUtils/StringsFile.h; sourceTree = "<group>"; };
+		6905670D1721354F008A0C92 /* ParticleEffect2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEffect2d.cpp; sourceTree = "<group>"; };
+		6905670E1721354F008A0C92 /* ParticleEffect2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEffect2d.h; sourceTree = "<group>"; };
+		6905671117213583008A0C92 /* LoadMeshResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadMeshResource.cpp; sourceTree = "<group>"; };
+		6905671217213583008A0C92 /* LoadMeshResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMeshResource.h; sourceTree = "<group>"; };
+		6905671317213583008A0C92 /* LoadTextureResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadTextureResource.cpp; sourceTree = "<group>"; };
+		6905671417213583008A0C92 /* LoadTextureResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadTextureResource.h; sourceTree = "<group>"; };
+		69056719172135A7008A0C92 /* AmjuRand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmjuRand.cpp; sourceTree = "<group>"; };
+		6905671A172135A7008A0C92 /* AmjuRand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuRand.h; sourceTree = "<group>"; };
+		6905671D1721B74A008A0C92 /* iOSGetDir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSGetDir.h; path = ../../../Source/FileUtils/iOSGetDir.h; sourceTree = "<group>"; };
+		6905671E1721B74A008A0C92 /* iOSGetDir.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSGetDir.mm; path = ../../../Source/FileUtils/iOSGetDir.mm; sourceTree = "<group>"; };
 		693D404F15AB780200B84D5C /* AmjuGL-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Impl.h"; path = "../../../Source/AmjuGL/AmjuGL-Impl.h"; sourceTree = SOURCE_ROOT; };
 		693D405015AB780200B84D5C /* AmjuGL-Null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Null.h"; path = "../../../Source/AmjuGL/AmjuGL-Null.h"; sourceTree = SOURCE_ROOT; };
 		693D405115AB780200B84D5C /* AmjuGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGL.cpp; path = ../../../Source/AmjuGL/AmjuGL.cpp; sourceTree = SOURCE_ROOT; };
@@ -430,8 +496,8 @@
 		693D40B215AB7A5600B84D5C /* ConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigFile.h; path = ../../../Source/FileUtils/ConfigFile.h; sourceTree = SOURCE_ROOT; };
 		693D40B315AB7A5600B84D5C /* CsvTokeniser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CsvTokeniser.cpp; path = ../../../Source/FileUtils/CsvTokeniser.cpp; sourceTree = SOURCE_ROOT; };
 		693D40B415AB7A5600B84D5C /* CsvTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CsvTokeniser.h; path = ../../../Source/FileUtils/CsvTokeniser.h; sourceTree = SOURCE_ROOT; };
-		693D40B515AB7A5600B84D5C /* Directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Directory.cpp; path = ../../../Source/FileUtils/Directory.cpp; sourceTree = SOURCE_ROOT; };
-		693D40B615AB7A5600B84D5C /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Directory.h; path = ../../../Source/FileUtils/Directory.h; sourceTree = SOURCE_ROOT; };
+		693D40B515AB7A5600B84D5C /* Directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = Directory.cpp; path = ../../../Source/FileUtils/Directory.cpp; sourceTree = SOURCE_ROOT; tabWidth = 2; };
+		693D40B615AB7A5600B84D5C /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = Directory.h; path = ../../../Source/FileUtils/Directory.h; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		693D40B715AB7A5600B84D5C /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Endian.cpp; path = ../../../Source/FileUtils/Endian.cpp; sourceTree = SOURCE_ROOT; };
 		693D40B815AB7A5600B84D5C /* Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Endian.h; path = ../../../Source/FileUtils/Endian.h; sourceTree = SOURCE_ROOT; };
 		693D40B915AB7A5600B84D5C /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../../../Source/FileUtils/File.cpp; sourceTree = SOURCE_ROOT; };
@@ -940,6 +1006,10 @@
 		693D40AF15AB7A3C00B84D5C /* FileUtils */ = {
 			isa = PBXGroup;
 			children = (
+				6905671D1721B74A008A0C92 /* iOSGetDir.h */,
+				6905671E1721B74A008A0C92 /* iOSGetDir.mm */,
+				6905670917213527008A0C92 /* StringsFile.cpp */,
+				6905670A17213527008A0C92 /* StringsFile.h */,
 				693D40B015AB7A5600B84D5C /* BinaryData.h */,
 				693D40B115AB7A5600B84D5C /* ConfigFile.cpp */,
 				693D40B215AB7A5600B84D5C /* ConfigFile.h */,
@@ -1122,6 +1192,27 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				690566DF172094AF008A0C92 /* DrawBorder.cpp */,
+				690566E0172094AF008A0C92 /* DrawBorder.h */,
+				690566E1172094AF008A0C92 /* GuiCalendar.cpp */,
+				690566E2172094AF008A0C92 /* GuiCalendar.h */,
+				690566E3172094AF008A0C92 /* GuiChart.cpp */,
+				690566E4172094AF008A0C92 /* GuiChart.h */,
+				690566E5172094AF008A0C92 /* GuiDataBarDisplay.cpp */,
+				690566E6172094AF008A0C92 /* GuiDataBarDisplay.h */,
+				690566E7172094AF008A0C92 /* GuiDataDisplay.cpp */,
+				690566E8172094AF008A0C92 /* GuiDataDisplay.h */,
+				690566E9172094AF008A0C92 /* GuiDataLineDisplay.cpp */,
+				690566EA172094AF008A0C92 /* GuiDataLineDisplay.h */,
+				690566EB172094AF008A0C92 /* GuiFileBrowser.h */,
+				690566EC172094AF008A0C92 /* GuiFileDialog.cpp */,
+				690566ED172094AF008A0C92 /* GuiFileDialog.h */,
+				690566EE172094AF008A0C92 /* GuiFileListBox.cpp */,
+				690566EF172094AF008A0C92 /* GuiFileListBox.h */,
+				690566F0172094AF008A0C92 /* GuiObjView.cpp */,
+				690566F1172094AF008A0C92 /* GuiObjView.h */,
+				690566F2172094AF008A0C92 /* GuiScroll.cpp */,
+				690566F3172094AF008A0C92 /* GuiScroll.h */,
 				693D41B115AB7C9100B84D5C /* Cursor.cpp */,
 				693D41B215AB7C9100B84D5C /* Cursor.h */,
 				693D41B315AB7C9100B84D5C /* CursorManager.cpp */,
@@ -1288,6 +1379,10 @@
 		693D425E15AB7CE900B84D5C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6905671117213583008A0C92 /* LoadMeshResource.cpp */,
+				6905671217213583008A0C92 /* LoadMeshResource.h */,
+				6905671317213583008A0C92 /* LoadTextureResource.cpp */,
+				6905671417213583008A0C92 /* LoadTextureResource.h */,
 				693D425F15AB7CE900B84D5C /* AlphaBmpLoader.cpp */,
 				693D426015AB7CE900B84D5C /* AlphaBmpLoader.h */,
 				693D426115AB7CE900B84D5C /* BinaryResource.cpp */,
@@ -1302,6 +1397,8 @@
 		693D426515AB7CE900B84D5C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				6905670D1721354F008A0C92 /* ParticleEffect2d.cpp */,
+				6905670E1721354F008A0C92 /* ParticleEffect2d.h */,
 				693D426615AB7CE900B84D5C /* Billboard.cpp */,
 				693D426715AB7CE900B84D5C /* Billboard.h */,
 				693D426815AB7CE900B84D5C /* SceneComposite.cpp */,
@@ -1422,6 +1519,8 @@
 		693D42B415AB7CE900B84D5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				69056719172135A7008A0C92 /* AmjuRand.cpp */,
+				6905671A172135A7008A0C92 /* AmjuRand.h */,
 				693D42B515AB7CE900B84D5C /* AmjuAssert.cpp */,
 				693D42B615AB7CE900B84D5C /* AmjuAssert.h */,
 				693D42B715AB7CE900B84D5C /* AmjuSleep.cpp */,
@@ -1697,6 +1796,23 @@
 				693D43E315AB7CE900B84D5C /* zutil.h in Headers */,
 				695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */,
 				695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */,
+				690566F5172094AF008A0C92 /* DrawBorder.h in Headers */,
+				690566F7172094AF008A0C92 /* GuiCalendar.h in Headers */,
+				690566F9172094AF008A0C92 /* GuiChart.h in Headers */,
+				690566FB172094AF008A0C92 /* GuiDataBarDisplay.h in Headers */,
+				690566FD172094AF008A0C92 /* GuiDataDisplay.h in Headers */,
+				690566FF172094AF008A0C92 /* GuiDataLineDisplay.h in Headers */,
+				69056700172094AF008A0C92 /* GuiFileBrowser.h in Headers */,
+				69056702172094AF008A0C92 /* GuiFileDialog.h in Headers */,
+				69056704172094AF008A0C92 /* GuiFileListBox.h in Headers */,
+				69056706172094AF008A0C92 /* GuiObjView.h in Headers */,
+				69056708172094AF008A0C92 /* GuiScroll.h in Headers */,
+				6905670C17213527008A0C92 /* StringsFile.h in Headers */,
+				690567101721354F008A0C92 /* ParticleEffect2d.h in Headers */,
+				6905671617213583008A0C92 /* LoadMeshResource.h in Headers */,
+				6905671817213583008A0C92 /* LoadTextureResource.h in Headers */,
+				6905671C172135A7008A0C92 /* AmjuRand.h in Headers */,
+				6905671F1721B74A008A0C92 /* iOSGetDir.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1933,6 +2049,22 @@
 				693D43DC15AB7CE900B84D5C /* trees.c in Sources */,
 				693D43DE15AB7CE900B84D5C /* uncompr.c in Sources */,
 				693D43E215AB7CE900B84D5C /* zutil.c in Sources */,
+				690566F4172094AF008A0C92 /* DrawBorder.cpp in Sources */,
+				690566F6172094AF008A0C92 /* GuiCalendar.cpp in Sources */,
+				690566F8172094AF008A0C92 /* GuiChart.cpp in Sources */,
+				690566FA172094AF008A0C92 /* GuiDataBarDisplay.cpp in Sources */,
+				690566FC172094AF008A0C92 /* GuiDataDisplay.cpp in Sources */,
+				690566FE172094AF008A0C92 /* GuiDataLineDisplay.cpp in Sources */,
+				69056701172094AF008A0C92 /* GuiFileDialog.cpp in Sources */,
+				69056703172094AF008A0C92 /* GuiFileListBox.cpp in Sources */,
+				69056705172094AF008A0C92 /* GuiObjView.cpp in Sources */,
+				69056707172094AF008A0C92 /* GuiScroll.cpp in Sources */,
+				6905670B17213527008A0C92 /* StringsFile.cpp in Sources */,
+				6905670F1721354F008A0C92 /* ParticleEffect2d.cpp in Sources */,
+				6905671517213583008A0C92 /* LoadMeshResource.cpp in Sources */,
+				6905671717213583008A0C92 /* LoadTextureResource.cpp in Sources */,
+				6905671B172135A7008A0C92 /* AmjuRand.cpp in Sources */,
+				690567201721B74A008A0C92 /* iOSGetDir.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
