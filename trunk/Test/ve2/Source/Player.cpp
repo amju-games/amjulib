@@ -8,7 +8,6 @@
 #include "Ve1Character.h"
 #include <File.h>
 #include "Useful.h"
-#include "AvatarManager.h"
 #include <StringUtils.h>
 #include <DegRad.h>
 #include <Timer.h>

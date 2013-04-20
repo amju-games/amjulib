@@ -3,7 +3,6 @@
 #include <File.h>
 #include <Texture.h>
 #include "Baddie.h"
-#include "AvatarManager.h"
 #include "Ve1SceneGraph.h"
 #include "Ve1Character.h"
 #include "LocalPlayer.h"

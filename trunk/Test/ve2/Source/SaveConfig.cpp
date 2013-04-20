@@ -23,6 +23,7 @@ void LoadConfig()
   std::string specialFileName = GetProcessDir() + "/" + SPECIAL_FILE_NAME;
 #endif
 
+#if defined(MACOSX) || defined(WIN32)
 std::cout << "In LoadConfig().. attempting to load special config file: " << specialFileName << "\n";
 
   if (TheSpecialConfigFile::Instance()->Load(specialFileName, false))
@@ -33,7 +34,8 @@ std::cout << "OK, loaded special config file!\n";
   {
 std::cout << "No special config.\n";
   }
-
+#endif // MACOSX || WIN32
+  
   // The above could fail, if no special config file - that's ok.
 
   std::string appname = GetAppName();
