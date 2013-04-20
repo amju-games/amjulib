@@ -15,7 +15,6 @@
 #include "CogTestResults.h"
 #include "Ve1Character.h"
 #include "Ve1SceneGraph.h"
-#include "AvatarManager.h"
 #include "LurkMsg.h"
 #include "GameMode.h"
 #include "ROConfig.h"

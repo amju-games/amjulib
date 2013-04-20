@@ -36,8 +36,15 @@ void StartUpBeforeCreateWindow()
 {
   LoadConfig();
   ConfigFile* cf = TheGameConfigFile::Instance();
-  w.SetWidth(cf->GetInt("screen-x"));
-  w.SetHeight(cf->GetInt("screen-y"));
+
+  const char* SCREEN_X = "screen-x";
+  const char* SCREEN_Y = "screen-y";
+
+  if (cf->Exists(SCREEN_X) && cf->Exists(SCREEN_Y))
+  {
+    w.SetWidth(cf->GetInt(SCREEN_X));
+    w.SetHeight(cf->GetInt(SCREEN_Y));
+  }
 }
 
 void StartUpAfterCreateWindow()

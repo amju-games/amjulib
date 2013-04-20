@@ -1,6 +1,8 @@
 #include <AmjuFirst.h>
 #include <AmjuGL.h>
+#include <StringUtils.h>
 #include <Directory.h>
+#include <GlueFile.h>
 #include <Game.h>
 #include <AmjuTime.h>
 #include <Pause.h>
@@ -17,30 +19,6 @@
 
 namespace Amju
 {
-std::string GetDataDir()
-{
-#ifdef WIN32_TEST_COPY_ASSETS
-  // When developing, we don't want to use the real process dir.
-  // TODO How do we know if this is a 32-bit or 64-bit machine ? 
-  std::string dataDir = "c:/program files (x86)/my game";  // on 64-bit machine
-  //std::string dataDir = "c:/program files/my game";  // on 32-bit machine
-#else
-  std::string dataDir = GetProcessDir();
-#endif
-
-#ifdef WIN32
-  dataDir += "/Data/";
-#endif
-
-#ifdef MACOSX
-  dataDir += "/../Resources/Data/";
-#endif
-
-//std::cout << "GetDataDir returning: " << dataDir << "\n";
-
-  return dataDir;
-}
-
 // Check if file exists in Save Dir. If not, copies it from Data dir.
 bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, const std::string& destDir)
 {
@@ -128,6 +106,56 @@ bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
   return true;
 }
 
+void CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& destDir)
+{
+  std::string oldRoot = File::GetRoot();
+  File::SetRoot("", "/");
+  GlueFile gf;
+  bool loaded = gf.OpenGlueFile(srcGlueFilePath, false);
+  File::SetRoot(oldRoot, "/");
+
+  if (!loaded)
+  {
+    std::cout << "Failed to open glue file " << srcGlueFilePath << "\n";
+    Assert(0);
+    return;
+  }
+  Strings strs;
+  gf.Dir(&strs);
+  int size = strs.size();
+  for (int i = 0; i < size; i++)
+  {
+    const std::string& subfile = strs[i];
+    std::cout << "Copying file " << subfile << " from glue file...\n";
+
+    unsigned int seekbase = 0;
+    if (!gf.GetSeekBase(subfile, &seekbase))
+    {
+      std::cout << "Failed to find subfile " << subfile << " in glue file, but was listed in Dir!!\n";
+      Assert(0);
+      return;
+    }
+    uint32 size = gf.GetSize(subfile);
+    unsigned char* buf = new unsigned char[size + 1];
+    gf.GetBinary(seekbase, size, buf);
+
+    File outFile(false); // no version info
+    std::string outFileName = destDir + subfile;
+    std::string outFileDir = GetFilePath(outFileName);
+    MkDir(outFileDir);
+    if (!outFile.OpenWrite(outFileName, 0, true, false, true))
+    {
+      std::cout << "Failed to open file " << outFileName << " for writing.\n";
+      Assert(0);
+    } 
+    if (!outFile.WriteBinary((char*)buf, size))
+    {
+      std::cout << "Failed to write binary data to " << outFileName << ", size: " << size << "\n";
+      Assert(0);
+    }
+  }
+}
+
 void RecursiveCopy(const std::string& srcDir, const std::string& destDir)
 {
 #ifdef FILECOPY_DEBUG
@@ -185,15 +213,23 @@ void GSCopyAssets::Update()
   done++;
   if (done == 2)
   {
-std::cout << "Copying files to Save Dir as required...\n";
-
+//#ifndef IPHONE
+    std::cout << "Copying files to Save Dir as required...\n";
+      
     static std::string dataDir = GetDataDir();
+
+    // This is OK as we set File root to the Save Dir in LoadConfig()
     static std::string saveDir = File::GetRoot();
 
+    std::string glueFilePath = dataDir + "data-Mac.glue";
+
 std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
+std::cout << "Glue file + path: " << glueFilePath << "\n";
 
-    RecursiveCopy(dataDir, saveDir); // because characters are in subdirs
-
+    //RecursiveCopy(dataDir, saveDir); // because characters are in subdirs
+    CopyFromGlueFile(glueFilePath, saveDir);
+//#endif // IPHONE
+      
     // All done, now we can start loading stuff
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
 

@@ -6,7 +6,6 @@
 #include "Ve1ObjectChar.h"
 #include "Ve1Character.h"
 #include "Terrain.h"
-#include "AvatarManager.h"
 #include "Useful.h"
 #include "GSMain.h"
 #include "LocalPlayer.h"
