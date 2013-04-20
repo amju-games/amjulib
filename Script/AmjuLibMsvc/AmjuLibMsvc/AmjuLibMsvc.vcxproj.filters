@@ -873,6 +873,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\MkDir.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">

@@ -180,6 +180,7 @@
     <ClCompile Include="..\..\..\Source\FileUtils\FileSize.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\GlueFileMem.cpp" />
+    <ClCompile Include="..\..\..\Source\FileUtils\MkDir.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\StringsFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />

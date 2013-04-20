@@ -174,11 +174,11 @@ bool Dir(
   return true; 
 }
 
+#if 0
 
 /* Function with behaviour like `mkdir -p'  */
 // From: http://niallohiggins.com/2009/01/08/mkpath-mkdir-p-alike-in-c-for-unix/
-int
-mkpath(const char *s, mode_t mode)
+int mkpath(const char *s, mode_t mode)
 {
   char *q, *r = NULL, *path = NULL, *up = NULL;
   int rv = -1;
@@ -272,6 +272,8 @@ std::cout << "CHMOD: " << dir.c_str() << "\n";
 
   return (r == 0);
 }
+
+#endif
 
 #ifdef WIN32
 bool ShGetFolderPath(uint32 pathType, std::string* pResult)
