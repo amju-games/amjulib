@@ -57,6 +57,11 @@ bool Dir(
 // a new high-level  directory to be created on their disk, and don't like it.
 std::string GetSaveDir(const std::string& appName);
 
+// Get directory where we expect to find data.
+// For Windows: it's <process dir>/Data
+// For Mac: <bundle dir>/Contents/Resources/Data
+std::string GetDataDir();
+  
 // Get user desktop directory.
 // This is for saving files that we want the user to be able to
 // find easily.
