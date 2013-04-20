@@ -176,7 +176,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Achievement.cpp" />
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
     <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp" />
-    <ClCompile Include="..\..\..\..\Source\AvatarManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\BroadcastConsole.cpp" />
@@ -213,7 +212,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GS2dAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAchievements.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSAdminMenu.cpp" />
-    <ClCompile Include="..\..\..\..\Source\GSAvatarMod.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSBuildMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCalendar.cpp" />
@@ -268,7 +266,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
     <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Md3Node.cpp" />
     <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
