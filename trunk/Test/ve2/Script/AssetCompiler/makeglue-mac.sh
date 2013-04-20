@@ -19,6 +19,7 @@ mkdir -p $DEST_DIR/characters/2d/
 mkdir -p $DEST_DIR/font2d/
 mkdir -p $DEST_DIR/obj/
 mkdir -p $DEST_DIR/locations/location1/
+mkdir -p $DEST_DIR/Sound/
 
 cp $SRC_DIR/*.png $DEST_DIR
 cp $SRC_DIR/*.txt $DEST_DIR
@@ -36,9 +37,9 @@ cp $SRC_DIR/locations/location1/*.obj $DEST_DIR/locations/location1/
 cp $SRC_DIR/locations/location1/*.mtl $DEST_DIR/locations/location1/
 cp $SRC_DIR/locations/location1/*.png $DEST_DIR/locations/location1/
 
-# TODO Sound separately
-#cp $SRC_DIR/*.it $DEST_DIR
-#cp $SRC_DIR/*.wav $DEST_DIR
+# no need to have Sound separately??
+cp $SRC_DIR/Sound/*.it $DEST_DIR/Sound/
+cp $SRC_DIR/Sound/*.wav $DEST_DIR/Sound/
 
 # TODO Convert text files to binary
 #  When we do this, no need to distribute separate .mtl files.
@@ -49,8 +50,8 @@ cd $DEST_DIR
 
 # Create empty glue file
 $GLUE_EXE -c $GLUE_FILE
-
-for f in *.txt *.png *.obj *.mtl characters/2d/* font2d/* obj/* locations/location1/*
+$
+for f in *.txt *.png *.obj *.mtl characters/2d/* font2d/* obj/* locations/location1/* Sound/*
 do
     echo "Adding file: " $f
     $GLUE_EXE -a $GLUE_FILE $f
