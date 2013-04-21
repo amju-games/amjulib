@@ -17,6 +17,14 @@
 
 //#define FILECOPY_DEBUG
 
+#ifdef MACOSX
+static const char* GLUE_FILE_NAME = "data-Mac.glue";
+#endif
+
+#ifdef IPHONE
+static const char* GLUE_FILE_NAME = "data-iphone.glue";
+#endif
+
 namespace Amju
 {
 // Check if file exists in Save Dir. If not, copies it from Data dir.
@@ -106,7 +114,7 @@ bool DoCopyingForDir(const std::string& srcDir, const std::string& destDir)
   return true;
 }
 
-void CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& destDir)
+bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& destDir)
 {
   std::string oldRoot = File::GetRoot();
   File::SetRoot("", "/");
@@ -118,7 +126,7 @@ void CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
   {
     std::cout << "Failed to open glue file " << srcGlueFilePath << "\n";
     Assert(0);
-    return;
+    return false;
   }
   Strings strs;
   gf.Dir(&strs);
@@ -133,7 +141,7 @@ void CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
     {
       std::cout << "Failed to find subfile " << subfile << " in glue file, but was listed in Dir!!\n";
       Assert(0);
-      return;
+      return false;
     }
     uint32 size = gf.GetSize(subfile);
     unsigned char* buf = new unsigned char[size + 1];
@@ -142,18 +150,27 @@ void CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
     File outFile(false); // no version info
     std::string outFileName = destDir + subfile;
     std::string outFileDir = GetFilePath(outFileName);
-    MkDir(outFileDir);
+    if (!MkDir(outFileDir))
+    {
+      std::cout << "MkDir failed: " << outFileDir << "\n";
+      Assert(0);
+      return false;
+    }
     if (!outFile.OpenWrite(outFileName, 0, true, false, true))
     {
       std::cout << "Failed to open file " << outFileName << " for writing.\n";
       Assert(0);
-    } 
+      return false;
+    }
     if (!outFile.WriteBinary((char*)buf, size))
     {
       std::cout << "Failed to write binary data to " << outFileName << ", size: " << size << "\n";
       Assert(0);
+      return false;
     }
+    delete [] buf; // whoops
   }
+  return true;
 }
 
 void RecursiveCopy(const std::string& srcDir, const std::string& destDir)
@@ -221,7 +238,7 @@ void GSCopyAssets::Update()
     // This is OK as we set File root to the Save Dir in LoadConfig()
     static std::string saveDir = File::GetRoot();
 
-    std::string glueFilePath = dataDir + "data-Mac.glue";
+    std::string glueFilePath = dataDir + GLUE_FILE_NAME; 
 
 std::cout << "Data Dir: " << dataDir << "\nSave Dir: " << saveDir << "\n";
 std::cout << "Glue file + path: " << glueFilePath << "\n";
