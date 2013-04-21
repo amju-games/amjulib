@@ -1,5 +1,6 @@
 // From http://stackoverflow.com/questions/10402499/mkdir-c-function
 
+#include <iostream>
 #include <sstream>
 #include <sys/stat.h>
 
@@ -9,9 +10,12 @@
 #endif
 
 #include "Directory.h"
+//#define MKDIR_DEBUG
 
 namespace Amju
 {
+    // TODO Have "DirExists" function in Directory. Don't think this works 
+    //  for Windows. 
    /**
      * Checks if a folder exists
      * @param foldername path to the folder to check.
@@ -20,8 +24,13 @@ namespace Amju
     bool folder_exists(std::string foldername)
     {
         struct stat st;
-        stat(foldername.c_str(), &st);
-        return st.st_mode & S_IFDIR;
+        // j.c. fix for iphone
+        if (stat(foldername.c_str(), &st) == -1)
+        {
+            return false;
+        }
+        bool exists = (st.st_mode & S_IFDIR) != 0;
+        return exists;
     }
 
     /**
@@ -57,10 +66,27 @@ namespace Amju
         while (std::getline(ss, level, '/'))
         {
             current_level += level; // append folder to the current level
-
+            if (current_level.empty()) // j.c. fix
+            {
+                continue;
+            }
+#ifdef MKDIR_DEBUG
+            std::cout << "mkdir: current_level: \"" << current_level << "\"\n";
+#endif
             // create current level
-            if (!folder_exists(current_level) && _mkdir(current_level.c_str()) != 0)
-                return -1;
+            if (!folder_exists(current_level))
+            {
+#ifdef MKDIR_DEBUG
+                std::cout << "Folder does not exist: " << current_level << " - creating...\n";
+#endif
+                if (_mkdir(current_level.c_str()) != 0)
+                {
+#ifdef MKDIR_DEBUG
+                    std::cout << "FAILED to create folder " << current_level << "!!\n";
+#endif
+                    return -1;
+                }
+            }
 
             current_level += "/"; // don't forget to append a slash
         }

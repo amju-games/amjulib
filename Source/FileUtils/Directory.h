@@ -24,6 +24,11 @@ Added to repository
 #include <string>
 #include <vector>
 
+#ifdef IPHONE
+#include "iOSGetDir.h"
+#endif
+
+
 namespace Amju
 {
 class Time;
