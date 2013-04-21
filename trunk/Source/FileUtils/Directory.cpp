@@ -91,10 +91,6 @@ Added to repository
 #include <Carbon/Carbon.h>
 #endif
 
-#ifdef IPHONE
-#include "iOSGetDir.h"
-#endif
-
 #include <AmjuFinal.h>
 
 //#define DIRECTORY_DEBUG
@@ -476,7 +472,7 @@ std::string GetSaveDir(const std::string& appName)
 #endif
 
 #ifdef IPHONE
-  return iOSGetDataDir();
+  return iOSGetSaveDir();
   //std::cout << "Save dir: " << File::GetRoot() << "\n";
   //return File::GetRoot();
 #endif
