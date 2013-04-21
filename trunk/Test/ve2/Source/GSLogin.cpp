@@ -33,6 +33,13 @@ void GSLogin::Update()
 
   static Kb* kb = TheKb::Instance();
   kb->Update();
+  Vec2f pos = m_gui->GetLocalPos();
+  pos.y = 0;
+  if (kb->IsEnabled())
+  {
+    pos.y = 0.7f; 
+  }
+  m_gui->SetLocalPos(pos);
 }
 
 void GSLogin::Draw()
@@ -112,12 +119,6 @@ void GSLogin::OnActive()
   if (kb->IsEnabled())
   {
     KbSetLayout(KB_LAYOUT_EMAIL);
-
-//    // Filenames for pages for this Kb layout
-//    Strings strs;
-//    strs.push_back("gui-kb-email-lower.txt");
-//    strs.push_back("gui-kb-num.txt");
-//    kb->SetPages(strs); // loads first one
 
     // Set floor of this GUI
     Vec2f pos = m_gui->GetLocalPos();
