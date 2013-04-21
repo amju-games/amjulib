@@ -10,7 +10,7 @@
 #endif
 
 #include "Directory.h"
-//#define MKDIR_DEBUG
+#define MKDIR_DEBUG
 
 namespace Amju
 {
@@ -24,11 +24,15 @@ namespace Amju
     bool folder_exists(std::string foldername)
     {
         struct stat st;
+#ifdef IPHONE
         // j.c. fix for iphone
         if (stat(foldername.c_str(), &st) == -1)
         {
             return false;
         }
+#else
+        stat(foldername.c_str(), &st);
+#endif
         bool exists = (st.st_mode & S_IFDIR) != 0;
         return exists;
     }
@@ -68,22 +72,27 @@ namespace Amju
             current_level += level; // append folder to the current level
             if (current_level.empty()) // j.c. fix
             {
+                current_level += "/"; // don't forget to append a slash
                 continue;
             }
-#ifdef MKDIR_DEBUG
+#ifdef MKDIR_DEBUG_2
             std::cout << "mkdir: current_level: \"" << current_level << "\"\n";
 #endif
             // create current level
-            if (!folder_exists(current_level))
+            if (folder_exists(current_level))
+            {
+#ifdef MKDIR_DEBUG_2
+                std::cout << "Folder DOES exist: " << current_level << "\n";
+#endif
+            }
+            else
             {
 #ifdef MKDIR_DEBUG
                 std::cout << "Folder does not exist: " << current_level << " - creating...\n";
 #endif
                 if (_mkdir(current_level.c_str()) != 0)
                 {
-#ifdef MKDIR_DEBUG
                     std::cout << "FAILED to create folder " << current_level << "!!\n";
-#endif
                     return -1;
                 }
             }
