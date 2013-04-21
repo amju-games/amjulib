@@ -10,8 +10,8 @@
 #endif
 
 #include "Directory.h"
+//#define MKDIR_DEBUG
 #include <StringUtils.h>
-#define MKDIR_DEBUG
 
 namespace Amju
 {
