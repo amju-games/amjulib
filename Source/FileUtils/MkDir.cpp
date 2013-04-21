@@ -30,11 +30,16 @@ namespace Amju
         {
             return false;
         }
-#else
-        stat(foldername.c_str(), &st);
-#endif
         bool exists = (st.st_mode & S_IFDIR) != 0;
         return exists;
+#else
+        if (stat(foldername.c_str(), &st) != 0)
+        {
+            return false;
+        }
+        bool exists = ((st.st_mode & S_IFDIR) != 0);
+        return exists;
+#endif
     }
 
     /**
