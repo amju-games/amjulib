@@ -99,10 +99,7 @@
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S  ..\..\..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S  ..\..\..\..\..\..\Assets\gui\*.*   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
+copy ..\..\..\..\..\..\Build\CompiledAssets\data-win.glue  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
 copy /Y  ..\..\..\..\..\..\Source\GLUT\glut32.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
 xcopy /Y /S  ..\..\..\..\..\..\Source\Network\curl\lib\*.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
 copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\

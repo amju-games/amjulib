@@ -60,7 +60,13 @@ std::cout << "No special config.\n";
 #ifdef IPHONE
   File::SetRoot(iOSGetSaveDir(), "/");
 #else
-  File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
+  std::string saveDir = GetSaveDir(appname) + "/Data/";
+  if (!MkDir(saveDir)) // works like mkdir -p
+  {
+    std::cout << "FAILED TO CREATE SAVE DIR: " << saveDir << "\n";
+    Assert(0);
+  } 
+  File::SetRoot(saveDir, "/");
 #endif
 #endif
 
