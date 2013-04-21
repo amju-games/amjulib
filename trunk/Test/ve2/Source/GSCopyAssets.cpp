@@ -25,6 +25,10 @@ static const char* GLUE_FILE_NAME = "data-Mac.glue";
 static const char* GLUE_FILE_NAME = "data-iphone.glue";
 #endif
 
+#ifdef WIN32
+static const char* GLUE_FILE_NAME = "data-win.glue";
+#endif
+
 namespace Amju
 {
 // Check if file exists in Save Dir. If not, copies it from Data dir.

@@ -10,6 +10,7 @@
 #endif
 
 #include "Directory.h"
+#include <StringUtils.h>
 #define MKDIR_DEBUG
 
 namespace Amju
@@ -71,15 +72,24 @@ namespace Amju
         std::string level;
         std::stringstream ss(path);
 
+#ifdef WIN32
+        // Get drive letter & colon (windows only)
+        std::string drive;
+        if (std::getline(ss, drive, ':'))
+        {
+          std::cout << "Mkdir: Drive: " << drive << "\n";
+          current_level = drive + ":/";
+        }
+#endif
         // split path using slash as a separator
         while (std::getline(ss, level, '/'))
         {
-            current_level += level; // append folder to the current level
-            if (current_level.empty()) // j.c. fix
+            if (level.empty()) // j.c. fix
             {
                 current_level += "/"; // don't forget to append a slash
                 continue;
             }
+            current_level += level; // append folder to the current level
 #ifdef MKDIR_DEBUG_2
             std::cout << "mkdir: current_level: \"" << current_level << "\"\n";
 #endif
@@ -110,6 +120,7 @@ namespace Amju
 
     bool MkDir(const std::string& dir)
     {
-      return (mkdir(dir.c_str()) == 0);
+      std::string s = Replace(dir, "\\", "/");
+      return (mkdir(s.c_str()) == 0);
     }
 } // namespace Amju
