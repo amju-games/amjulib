@@ -54,7 +54,11 @@ std::cout << "No special config.\n";
   File::SetRoot(saveDir, "/");
   
 #else
+#ifdef IPHONE
+  File::SetRoot(iOSGetSaveDir(), "/");
+#else
   File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
+#endif
 #endif
 
   TheGameConfigFile::Instance()->Load(CONFIG_FILE_NAME);
