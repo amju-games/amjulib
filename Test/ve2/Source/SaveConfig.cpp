@@ -45,11 +45,14 @@ std::cout << "No special config.\n";
   // All Save Dirs are in ~/.mygame/ 
 
   std::string saveDir = GetDesktopDir() + "../.mygame/";
-  MkDir(saveDir);
   saveDir += appname;
-  MkDir(saveDir);
   saveDir += "/Data/";
-  MkDir(saveDir);
+  if (!MkDir(saveDir)) // works like mkdir -p
+  {
+    std::cout << "FAILED TO CREATE SAVE DIR: " << saveDir << "\n";
+    Assert(0);
+  } 
+
   std::cout << "THIS IS THE SAVE DIR: " << saveDir << "\n";
   File::SetRoot(saveDir, "/");
   
