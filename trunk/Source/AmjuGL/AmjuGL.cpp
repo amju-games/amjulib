@@ -246,6 +246,10 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
 
   Assert(w > 0);
   Assert(h > 0);
+  int screenX = Screen::X();
+  int screenY = Screen::Y();
+//  Assert(w <= screenX);
+//  Assert(h <= screenY);
 
   // TODO "LANDSCAPE" should be settable at run time..?
   // Currently it's defined for devices that have a portrait orientation by default, i.e. phones.
@@ -257,12 +261,23 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
     return;
   }
 
-  impl->Viewport(y, x, h, w);
+  int x2 = screenY - h;
+  int y2 = x;
+  int w2 = h;
+  int h2 = w;
 
-  viewport[0] = y;
-  viewport[1] = x;
-  viewport[2] = h;
-  viewport[3] = w;
+#ifdef LANDSCAPE_DEBUG
+std::cout << "Viewport: x: " << x << " y: " << y << " w: " << w << " h: " << h
+    << " Screen X: " << Screen::X() << " Y: " << Screen::Y() << "\n";
+std::cout << " =>  x: " << x2 << " y: " << y2 << " w: " << w2 << " h: " << h2 << "\n";
+#endif
+
+  impl->Viewport(x2, y2, w2, h2);
+    
+  viewport[0] = x2;
+  viewport[1] = y2;
+  viewport[2] = w2;
+  viewport[3] = h2;
 
 #else
   if (viewport[0] == x && viewport[1] == y && viewport[2] == w && viewport[3] == h)
