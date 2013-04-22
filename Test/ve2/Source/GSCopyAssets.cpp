@@ -138,7 +138,9 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
   for (int i = 0; i < size; i++)
   {
     const std::string& subfile = strs[i];
+#ifdef FILECOPY_DEBUG
     std::cout << "Copying file " << subfile << " from glue file...\n";
+#endif
 
     unsigned int seekbase = 0;
     if (!gf.GetSeekBase(subfile, &seekbase))
