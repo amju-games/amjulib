@@ -249,10 +249,14 @@ void Kb::Draw()
 {
   if (m_enabled)
   {
+    m_kb->SetVisible(true);
+    m_showButton->SetVisible(false);
     m_kb->Draw();
   }
   else
   {
+    m_kb->SetVisible(false);
+    m_showButton->SetVisible(true);
     m_showButton->Draw();
   }
 }
