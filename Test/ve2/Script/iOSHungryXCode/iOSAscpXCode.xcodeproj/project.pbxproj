@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2514C27B10084DCA00A42282 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27910084DCA00A42282 /* Shader.fsh */; };
-		2514C27C10084DCA00A42282 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2514C27A10084DCA00A42282 /* Shader.vsh */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		69056643172070DA008A0C92 /* Achievement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905651B172070D9008A0C92 /* Achievement.cpp */; };
@@ -163,6 +161,7 @@
 		690566DA172070DA008A0C92 /* Version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69056641172070DA008A0C92 /* Version.cpp */; };
 		690566DD17207176008A0C92 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 690566DB17207176008A0C92 /* icon.png */; };
 		690566DE17207176008A0C92 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690566DC17207176008A0C92 /* MainWindow.xib */; };
+		6905672217233F2A008A0C92 /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 6905672117233F2A008A0C92 /* data-iphone.glue */; };
 		690B10F9171DC2B80024BB22 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 690B10F8171DC2B80024BB22 /* Default-568h@2x.png */; };
 		693D48E615AC3C5B00B84D5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D48E515AC3C5B00B84D5C /* AudioToolbox.framework */; };
 		693D48EA15AC3C6A00B84D5C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D48E915AC3C6A00B84D5C /* CFNetwork.framework */; };
@@ -173,8 +172,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Hungry People.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hungry People.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2514C27910084DCA00A42282 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		2514C27A10084DCA00A42282 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* iOSAscpXCode_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSAscpXCode_Prefix.pch; sourceTree = "<group>"; };
@@ -469,6 +466,7 @@
 		69056642172070DA008A0C92 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Version.h; path = ../../../Source/Version.h; sourceTree = "<group>"; };
 		690566DB17207176008A0C92 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../Assets/iPhone/icon.png; sourceTree = "<group>"; };
 		690566DC17207176008A0C92 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../../../../Assets/iPhone/MainWindow.xib; sourceTree = "<group>"; };
+		6905672117233F2A008A0C92 /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../Build/ve2/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
 		690B10F8171DC2B80024BB22 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		690B10FA171EC09A0024BB22 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbass.a; path = "../../../amjulib/Source/SoundBass/Bass2.4/iPhone/mp3-free/libbass.a"; sourceTree = "<group>"; };
 		693D48E515AC3C5B00B84D5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -801,8 +799,6 @@
 		2514C27610084DB600A42282 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				2514C27910084DCA00A42282 /* Shader.fsh */,
-				2514C27A10084DCA00A42282 /* Shader.vsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -833,6 +829,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6905672117233F2A008A0C92 /* data-iphone.glue */,
 				690566DB17207176008A0C92 /* icon.png */,
 				690566DC17207176008A0C92 /* MainWindow.xib */,
 			);
@@ -902,8 +899,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2514C27B10084DCA00A42282 /* Shader.fsh in Resources */,
-				2514C27C10084DCA00A42282 /* Shader.vsh in Resources */,
 				690B10F9171DC2B80024BB22 /* Default-568h@2x.png in Resources */,
 				690566A7172070DA008A0C92 /* newclass.pl in Resources */,
 				690566A8172070DA008A0C92 /* newgui.pl in Resources */,
@@ -911,6 +906,7 @@
 				690566AA172070DA008A0C92 /* newstate.pl in Resources */,
 				690566DD17207176008A0C92 /* icon.png in Resources */,
 				690566DE17207176008A0C92 /* MainWindow.xib in Resources */,
+				6905672217233F2A008A0C92 /* data-iphone.glue in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
