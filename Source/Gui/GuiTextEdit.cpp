@@ -196,6 +196,8 @@ bool GuiTextEdit::OnCursorEvent(const CursorEvent& ce)
   if (s_drag && HasFocus())
   {
     m_selectedText = CalcCursorPos(ce.x);
+      
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Selected: m_caret: " << m_caret << " m_selectedText: " << m_selectedText << ": \"";
 if (m_caret > m_selectedText)
 {
@@ -206,6 +208,7 @@ else
   std::cout << m_text.substr(m_caret, m_selectedText - m_caret);
 }
 std::cout << "\"\n";
+#endif
   }
 
   return false;
@@ -228,7 +231,9 @@ bool GuiTextEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   //if (HasFocus())
   {
     s_drag = mbe.isDown;
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "GuiTextEdit Drag is now " << (s_drag ? "ON" : "OFF") << "\n";
+#endif
   }
 
   // If clicked in bounding rect, this element gets focus
@@ -298,8 +303,9 @@ bool GuiTextEdit::OnKeyEvent(const KeyEvent& ke)
   //  just clicked would have it). So the last GuiTextEdit to have the focus should accept this key.
   if (!HasFocus())
   {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Key event ignored by " << m_name << " as does not have focus.\n";
-
+#endif
     return false;
   }
 
@@ -340,19 +346,25 @@ std::cout << "Key event ignored by " << m_name << " as does not have focus.\n";
       // Prev word
       if (ke.modifier & AMJU_KEY_MOD_SHIFT)
       {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Prev word + select\n";
+#endif
         m_caret = PrevWord(m_caret);
       }
       else
       {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Prev word\n";
+#endif
         m_caret = PrevWord(m_caret);
         m_selectedText = m_caret; 
       }
     }
     else if (ke.modifier & AMJU_KEY_MOD_SHIFT)
     {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Prev char + select\n";
+#endif
       // Select char to left
       if (m_caret > 0)
       {
@@ -361,7 +373,9 @@ std::cout << "Prev char + select\n";
     }
     else 
     {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Prev char\n";
+#endif
       if (m_caret > 0)
       {
         // Move caret left
@@ -381,19 +395,25 @@ std::cout << "Prev char\n";
       // Next word
       if (ke.modifier & AMJU_KEY_MOD_SHIFT)
       {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Next word + select\n";
-        m_caret = NextWord(m_caret); 
+#endif
+        m_caret = NextWord(m_caret);
       }
       else 
       {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Next word\n";
-        m_caret = NextWord(m_caret); 
+#endif
+        m_caret = NextWord(m_caret);
         m_selectedText = m_caret; 
       }
     }
     else if (ke.modifier & AMJU_KEY_MOD_SHIFT)
     {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Next char + select\n";
+#endif
       if (m_caret < (int)m_text.size())
       {
         m_caret++;
@@ -401,7 +421,9 @@ std::cout << "Next char + select\n";
     }
     else 
     {
+#ifdef TEXT_EDIT_DEBUG
 std::cout << "Next char\n";
+#endif
       if (m_caret < (int)m_text.size())
       {
         m_caret++;
