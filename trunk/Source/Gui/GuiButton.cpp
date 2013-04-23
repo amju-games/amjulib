@@ -268,7 +268,7 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   // Point in button rectangle ?
   Rect r = GetRect(this);
   SetIsMouseOver(r.IsPointIn(Vec2f(ce.x, ce.y)));
-
+    
   // This isn't right - only handled if we click the button
   ////  return m_isMouseOver; // handled if over this button 
 
@@ -305,7 +305,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   {
     return false;
   }
-
+ 
   // If event is mouse button up, and button is pressed, and mouse is over button,
   // then trigger command.
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
@@ -320,19 +320,23 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
         //  any edit box which we want to receive keyboard events.
         //SetHasFocus(true);
         OnPressedDown();
-
         return true; // handled
       }
     }
-    else 
+    else
     {
+#ifdef IPHONE
+        if (IsMouseOver())
+#else
       if (IsMouseOver() && m_isPressed) // Only execute if we are on button when we release
+#endif
       {
         // Execute command for this button
         //ClickSound();
         ExecuteCommand();
         //m_isMouseOver = false; // once clicked, revert to unselected.. OK?? No, is very annoying
         m_isPressed = false; // mouse is released whether command executed or not
+        std::cout << "Button up for " << m_name << " - executed command\n";
         return true; // handled
       }
       m_isPressed = false; // mouse is released whether command executed or not
