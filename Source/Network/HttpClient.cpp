@@ -10,6 +10,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "HttpClient.h"
 #include <UrlUtils.h>
 #include <StringUtils.h>
+#include "iOSGetUrl.h"
 #include <AmjuAssert.h>
 #include <AmjuFinal.h>
 
@@ -106,6 +107,12 @@ std::cout << "Path: " << path << "\n";
 std::cout << "Server: " << host << "\n";
 std::cout << "Port: " << port << "\n";
   }
+#endif
+    
+#ifdef IPHONE
+  bool ok = iOSGetUrl(url, &result->m_data);
+  result->SetSuccess(ok);
+  return ok;
 #endif
 
 #ifdef AMJU_USE_CURL
