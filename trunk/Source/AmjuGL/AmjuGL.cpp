@@ -13,6 +13,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <StringUtils.h> // For debug reporting state
 #include <AmjuFinal.h>
 
+//#define LANDSCAPE_DEBUG
+
 namespace Amju
 {
 // Implement OpenGL-style Attribute stack in this base class.
@@ -274,10 +276,10 @@ std::cout << " =>  x: " << x2 << " y: " << y2 << " w: " << w2 << " h: " << h2 <<
 
   impl->Viewport(x2, y2, w2, h2);
     
-  viewport[0] = x2;
-  viewport[1] = y2;
-  viewport[2] = w2;
-  viewport[3] = h2;
+  viewport[0] = x; // So GetViewport gets back what was set
+  viewport[1] = y;
+  viewport[2] = w;
+  viewport[3] = h;
 
 #else
   if (viewport[0] == x && viewport[1] == y && viewport[2] == w && viewport[3] == h)
