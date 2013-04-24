@@ -370,8 +370,17 @@ std::cout << "SetHeartNum: no heart-num element\n";
 void GSMain::DoMoveRequest()
 {
   Vec2f mouseScreen = m_mouseScreen;
+    
+#ifdef IPHONE
+  // For rotated screen
+  std::swap(mouseScreen.y, mouseScreen.x);
+  mouseScreen.x = -mouseScreen.x;
+#endif
+    
   mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
+
 //std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
+    
   if (mouseScreen.x > 1.0f)
   {
     return;
@@ -380,6 +389,9 @@ void GSMain::DoMoveRequest()
   static BroadcastConsole* bc = TheBroadcastConsole::Instance();
   float bottom = bc->GetY();
   mouseScreen.y = (mouseScreen.y - bottom) / (1.0f - bottom) * 2.0f - 1.0f; 
+    
+//std::cout << "Mousescreen.y = " << mouseScreen.y << "\n";
+    
   // Clicked below playable area
   if (mouseScreen.y < -1.0f)
   {
@@ -778,11 +790,19 @@ std::cout << " - Chat active but NOT discarding mouse click\n";
 
   // Do req if mouse button is up, no drag, and no menu
   // TODO And we didn't just close the menu because we made a selection
+#ifdef IPHONE
+  if (!dragged && (!m_menu || !m_menu->IsVisible()))
+  {
+    m_moveRequest = true;
+  }
+    
+#else
   if (!mbe.isDown && !dragged && (!m_menu || !m_menu->IsVisible()))
   {
     m_moveRequest = true;
   }
-  
+#endif
+    
   if (m_quitConfirm)
   {
     m_quitConfirm = false; // clicked off quit button
