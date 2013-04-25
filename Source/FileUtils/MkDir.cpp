@@ -77,7 +77,9 @@ namespace Amju
         std::string drive;
         if (std::getline(ss, drive, ':'))
         {
+#ifdef MKDIR_DEBUG_2
           std::cout << "Mkdir: Drive: " << drive << "\n";
+#endif
           current_level = drive + ":/";
         }
 #endif
