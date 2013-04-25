@@ -16,7 +16,7 @@ mkdir %DEST_DIR%
 mkdir %DEST_DIR%\characters\2d\
 mkdir %DEST_DIR%\font2d\
 mkdir %DEST_DIR%\obj\
-mkdir %DEST_DIR%\locations\location\
+mkdir %DEST_DIR%\locations\location1\
 mkdir %DEST_DIR%\Sound\
 
 REM Copy other files to compiled dir
