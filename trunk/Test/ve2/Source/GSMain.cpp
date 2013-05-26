@@ -370,16 +370,9 @@ std::cout << "SetHeartNum: no heart-num element\n";
 void GSMain::DoMoveRequest()
 {
   Vec2f mouseScreen = m_mouseScreen;
-    
-#ifdef IPHONE
-  // For rotated screen
-  std::swap(mouseScreen.y, mouseScreen.x);
-  mouseScreen.x = -mouseScreen.x;
-#endif
-    
-  mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
 
-//std::cout << "Mousescreen.x = " << mouseScreen.x << "\n";
+  // Transform x coord so -1 is at the left of the screen, +1 is the rightmost edge of the viewport.
+  mouseScreen.x = (mouseScreen.x + 1.0f) * (1.0f / m_viewportWidth) - 1.0f;
     
   if (mouseScreen.x > 1.0f)
   {
@@ -388,16 +381,26 @@ void GSMain::DoMoveRequest()
   // Convert y coord
   static BroadcastConsole* bc = TheBroadcastConsole::Instance();
   float bottom = bc->GetY();
+
+  // Transform y so +1 is at the top of the screen, -1 is where the broadcast console starts.
   mouseScreen.y = (mouseScreen.y - bottom) / (1.0f - bottom) * 2.0f - 1.0f; 
-    
-//std::cout << "Mousescreen.y = " << mouseScreen.y << "\n";
-    
+
   // Clicked below playable area
   if (mouseScreen.y < -1.0f)
   {
     return;
   }
 
+#ifdef IPHONE
+    // This rotate is for the Unproject calls later (in PickObject and GetMouseToGroundPos).
+    // The mouse coord is rotated by the time we get here, so this rotates it back.
+    
+//    std::cout << "Before: ms.x: " << mouseScreen.x << ", ms.y: " << mouseScreen.y << "\n";
+    std::swap(mouseScreen.y, mouseScreen.x);
+    mouseScreen.x = -mouseScreen.x;
+//    std::cout << "After: ms.x: " << mouseScreen.x << ", ms.y: " << mouseScreen.y << "\n";
+#endif
+        
   GameObject* selectedObj = PickObject(mouseScreen);
 
   if (selectedObj)
