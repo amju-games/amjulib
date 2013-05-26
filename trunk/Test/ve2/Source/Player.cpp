@@ -617,7 +617,8 @@ void Player::SetMenu(GuiMenu* menu)
   {
     //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
 
-    AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
+// No one-to-one chat
+//    AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
     /*
     NO FIGHTING
     AddMenuItem("FIGHT!!", new CommandFight(this));
@@ -627,7 +628,9 @@ void Player::SetMenu(GuiMenu* menu)
   {
     // TODO put back leaving messages
     //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
-    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
+
+// No leaving messages
+//    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
 }
 
