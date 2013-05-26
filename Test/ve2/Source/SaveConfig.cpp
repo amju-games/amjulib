@@ -23,7 +23,11 @@ void LoadConfig()
   std::string specialFileName = GetProcessDir() + "/" + SPECIAL_FILE_NAME;
 #endif
 
-#if defined(MACOSX) || defined(WIN32)
+#ifdef IPHONE
+  std::string specialFileName = GetDataDir() + "/" + SPECIAL_FILE_NAME;
+#endif
+
+#if defined(MACOSX) || defined(WIN32) || defined(IPHONE)
 std::cout << "In LoadConfig().. attempting to load special config file: " << specialFileName << "\n";
 
   if (TheSpecialConfigFile::Instance()->Load(specialFileName, false))
@@ -34,7 +38,7 @@ std::cout << "OK, loaded special config file!\n";
   {
 std::cout << "No special config.\n";
   }
-#endif // MACOSX || WIN32
+#endif // MACOSX || WIN32 || IPHONE
   
   // The above could fail, if no special config file - that's ok.
 
