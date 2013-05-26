@@ -132,6 +132,8 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
     Assert(0);
     return false;
   }
+  Time glueTime = GetFileModifiedTime(srcGlueFilePath);
+
   Strings strs;
   gf.Dir(&strs);
   int size = strs.size();
@@ -141,6 +143,28 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
 #ifdef FILECOPY_DEBUG
     std::cout << "Copying file " << subfile << " from glue file...\n";
 #endif
+
+    std::string outFileName = destDir + subfile;
+    // Check if we should copy file - we should if it does not exist, or
+    //  timestamp of glue file is more recent than the file.
+    bool doCopy = true;
+
+    if (FileExists(outFileName))
+    {
+#ifdef FILECOPY_DEBUG
+std::cout << "File already exists: " << outFileName << "\n";
+#endif
+    Time destTime = GetFileModifiedTime(outFileName);
+
+    if (!(destTime < glueTime))
+    {
+#ifdef FILECOPY_DEBUG
+std::cout << "  Don't copy, it's more recent.\n";
+#endif
+      doCopy = false; // more recent copy already there
+    }
+  }
+
 
     unsigned int seekbase = 0;
     if (!gf.GetSeekBase(subfile, &seekbase))
@@ -154,7 +178,6 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
     gf.GetBinary(seekbase, size, buf);
 
     File outFile(false); // no version info
-    std::string outFileName = destDir + subfile;
     std::string outFileDir = GetFilePath(outFileName);
     if (!MkDir(outFileDir))
     {
