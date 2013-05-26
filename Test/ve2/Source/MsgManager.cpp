@@ -157,27 +157,29 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   numMsgsSent++; // just for convenience here, or we will be off by one below
 
   // NB Watch for race condition here. Multiple increments could batch up.
-  if (numMsgsSent >= 1 && !HasWonAchievement(ACH_MSGS_SENT_1))
+  if (senderId != SYSTEM_SENDER) // "system" msgs don't count
   {
-    OnWinAchievement(ACH_MSGS_SENT_1, "You sent a message!");
+    if (numMsgsSent >= 1 && !HasWonAchievement(ACH_MSGS_SENT_1))
+    {
+      OnWinAchievement(ACH_MSGS_SENT_1, "You sent a message!");
+    }
+    if (numMsgsSent >= 5 && !HasWonAchievement(ACH_MSGS_SENT_5))
+    {
+      OnWinAchievement(ACH_MSGS_SENT_5, "You sent your 5th message!");
+    }
+    if (numMsgsSent == 10 && !HasWonAchievement(ACH_MSGS_SENT_10))
+    {
+      OnWinAchievement(ACH_MSGS_SENT_10, "You sent your 10th message!");
+    }
+    if (numMsgsSent == 20 && !HasWonAchievement(ACH_MSGS_SENT_20))
+    {
+      OnWinAchievement(ACH_MSGS_SENT_20, "You sent your 20th message!");
+    }
+    if (numMsgsSent == 50 && !HasWonAchievement(ACH_MSGS_SENT_50))
+    {
+      OnWinAchievement(ACH_MSGS_SENT_50, "You sent your 50th message!!");
+    }
   }
-  if (numMsgsSent >= 5 && !HasWonAchievement(ACH_MSGS_SENT_5))
-  {
-    OnWinAchievement(ACH_MSGS_SENT_5, "You sent your 5th message!");
-  }
-  if (numMsgsSent == 10 && !HasWonAchievement(ACH_MSGS_SENT_10))
-  {
-    OnWinAchievement(ACH_MSGS_SENT_10, "You sent your 10th message!");
-  }
-  if (numMsgsSent == 20 && !HasWonAchievement(ACH_MSGS_SENT_20))
-  {
-    OnWinAchievement(ACH_MSGS_SENT_20, "You sent your 20th message!");
-  }
-  if (numMsgsSent == 50 && !HasWonAchievement(ACH_MSGS_SENT_50))
-  {
-    OnWinAchievement(ACH_MSGS_SENT_50, "You sent your 50th message!!");
-  }
-
   Assert(senderId != -1);
   Assert(recipId != -1);
   // For now, assume senders and recips are Players
