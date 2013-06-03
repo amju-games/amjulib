@@ -243,7 +243,11 @@ bool ChatConsole::IsActive() const
 
 void ChatConsole::OnDeactive()
 {
-  TheEventPoller::Instance()->RemoveListener(m_gui);
+  static EventPoller* ep = TheEventPoller::Instance();
+  if (ep->HasListener(m_gui))
+  {
+    ep->RemoveListener(m_gui);
+  }
   m_gui = 0;
 }
 
