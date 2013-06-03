@@ -348,6 +348,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     bool isTyping = (recipId > 0);
     cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
+/*
   else if (key == "beat_up_by")
   {
     if (val != "0" && IsLocalPlayer())
@@ -376,6 +377,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       ShowAttacked();
     }
   }
+*/
   else if (key == FUELCELL_KEY)
   {
     if (IsLocalPlayer())

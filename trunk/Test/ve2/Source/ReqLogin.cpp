@@ -188,7 +188,12 @@ void ReqLogin::ChooseMode()
           {
             std::string dateStr = date.getChildNode(0).getText();
             bool cogtest = SafeStrCmp(date.getChildNode(1).getText(), "1"); 
-            bool play = SafeStrCmp(date.getChildNode(2).getText(), "1"); 
+
+            // 'play' field is an enum: 0 for no game (tests only); 
+            //  1 for single-player mode; 2 for multi-player mode.
+            bool single = SafeStrCmp(date.getChildNode(2).getText(), "1"); 
+            bool multi = SafeStrCmp(date.getChildNode(2).getText(), "2"); 
+            bool play = single || multi;
 
             Time t(dateStr);
             t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
@@ -196,6 +201,7 @@ void ReqLogin::ChooseMode()
             {
               // Cog tests already done today ?
               Results results = TheCogTestResults::Instance()->GetResultsForDate(Time::Now());
+              // TODO Check if only partially done
               if (results.empty())
               {
                 doCogTests = cogtest;
@@ -206,10 +212,15 @@ void ReqLogin::ChooseMode()
                 std::cout << "Test results for today are here already.\n";
               }
 
-              if (play)
+              if (multi)
               { 
                 gm = AMJU_MODE_MULTI;
               }
+              else if (single)
+              {
+                gm = AMJU_MODE_SINGLE;
+              }
+
               if (doCogTests && !play)
               {
                 // Create dummy target for heart count, etc

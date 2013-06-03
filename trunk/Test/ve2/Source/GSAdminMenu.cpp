@@ -27,14 +27,6 @@ static void OnCogTestButton()
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
-//static void OnLocalButton()
-//{
-//  // Local mode -- no server connection
-//  SetGameMode(AMJU_MODE_LOCAL);
-//  //TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-//  TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
-//}
-
 GSAdminMenu::GSAdminMenu()
 {
 }

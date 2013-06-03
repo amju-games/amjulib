@@ -29,8 +29,15 @@ static void OnTodayViewResults()
   TheGame::Instance()->SetCurrentState(TheGSCogResults::Instance());
 }
 
-static void OnTodayPlay()
+static void OnTodayPlaySingle()
 {
+  SetGameMode(AMJU_MODE_SINGLE);
+  TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
+}
+
+static void OnTodayPlayMulti()
+{
+  SetGameMode(AMJU_MODE_MULTI);
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
@@ -109,10 +116,14 @@ void GSToday::OnActive()
   viewResults->SetCommand(OnTodayViewResults);
 
   // For admin/dev, button to play game even on non-game days
-  GuiButton* play = (GuiButton*)GetElementByName(m_gui, "play-button");
-  play->SetCommand(OnTodayPlay);
+  GuiButton* playSingle = (GuiButton*)GetElementByName(m_gui, "play-single-button");
+  GuiButton* playMulti = (GuiButton*)GetElementByName(m_gui, "play-multi-button");
+  playSingle->SetCommand(OnTodayPlaySingle);
+  playMulti->SetCommand(OnTodayPlayMulti);
+
 #ifndef _DEBUG
-//  play->SetVisible(false);
+  playSingle->SetVisible(false);
+  playMulti->SetVisible(false);
 #endif
 
   GuiText* dateText = (GuiText*)GetElementByName(m_gui, "date-text");
