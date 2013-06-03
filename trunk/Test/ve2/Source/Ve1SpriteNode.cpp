@@ -7,6 +7,7 @@
 #include "LayerGroup.h"
 #include "ROConfig.h"
 #include "Player.h"
+#include "GameMode.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -114,6 +115,16 @@ const Vec2f& Ve1SpriteNode::GetScale() const
 
 void Ve1SpriteNode::Draw()
 {
+  if (GetGameMode() == AMJU_MODE_SINGLE)
+  {
+    // Don't draw non-local player
+    Player* p = dynamic_cast<Player*>(m_obj.GetPtr());
+    if (p && !p->IsLocalPlayer())
+    {
+      return;
+    }
+  }
+
   AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_READ);
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_local);
