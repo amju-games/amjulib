@@ -317,9 +317,12 @@ void GSMain::Update()
   TheCollisionManager::Instance()->InitFrame(); // TODO this should be in Game class
   BruteForce(TheGame::Instance()->GetGameObjects());
 
-  TheChatConsole::Instance()->Update();
-  TheBroadcastConsole::Instance()->Update();
-  TheKb::Instance()->Update();
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    TheChatConsole::Instance()->Update();
+    TheBroadcastConsole::Instance()->Update();
+    TheKb::Instance()->Update();
+  }
 
   TheLurker::Instance()->Update();
 
@@ -380,8 +383,11 @@ void GSMain::DoMoveRequest()
   }
   // Convert y coord
   static BroadcastConsole* bc = TheBroadcastConsole::Instance();
-  float bottom = bc->GetY();
-
+  float bottom = -1.0f;
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    bottom = bc->GetY();
+  }
   // Transform y so +1 is at the top of the screen, -1 is where the broadcast console starts.
   mouseScreen.y = (mouseScreen.y - bottom) / (1.0f - bottom) * 2.0f - 1.0f; 
 
@@ -528,7 +534,11 @@ void GSMain::Draw()
 
   int width = (int)((float)Screen::X()  * m_viewportWidth);
   static BroadcastConsole* bc = TheBroadcastConsole::Instance();
-  int y = (int)((bc->GetY() + 1.0f) * 0.5f * (float)Screen::Y());
+  int y = 0;
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    y = (int)((bc->GetY() + 1.0f) * 0.5f * (float)Screen::Y());
+  }
   AmjuGL::Viewport(0, y, width, Screen::Y() - y);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
@@ -581,10 +591,14 @@ void GSMain::Draw2d()
 {
   GSBase::Draw2d();
 
-  TheBroadcastConsole::Instance()->Draw();
-
   static Kb* kb = TheKb::Instance();
-  kb->Draw();
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    TheBroadcastConsole::Instance()->Draw();
+    kb->Draw();
+    // TODO Maybe we don't need this
+    TheChatConsole::Instance()->Draw();
+  }
 
   if (m_gui)
   {
@@ -595,8 +609,6 @@ void GSMain::Draw2d()
   {
     m_menu->Draw();
   }
-
-  TheChatConsole::Instance()->Draw();
 
   TheLurker::Instance()->Draw();
 
@@ -682,9 +694,12 @@ void GSMain::OnActive()
   GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
   drop->SetVisible(false); // hide drop button until we pick someting up
 
-  TheChatConsole::Instance()->OnActive();
-  TheBroadcastConsole::Instance()->OnActive();
-  TheKb::Instance()->Activate();
+  if (GetGameMode() == AMJU_MODE_MULTI)
+  {
+    TheChatConsole::Instance()->OnActive();
+    TheBroadcastConsole::Instance()->OnActive();
+    TheKb::Instance()->Activate();
+  }
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.
