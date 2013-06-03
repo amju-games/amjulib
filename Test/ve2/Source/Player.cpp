@@ -41,6 +41,7 @@
 #include "FuelCell.h"
 #include "GS2dAvatarMod.h"
 #include "MsgManager.h"
+#include "GameMode.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -72,6 +73,16 @@ public:
 
   virtual void Draw()
   {
+    Assert(m_player);
+    if (GetGameMode() == AMJU_MODE_SINGLE)
+    {
+      // Don't draw non-local player
+      if (!m_player->IsLocalPlayer())
+      {
+        return;
+      }
+    }
+
     // Don't draw name of local player ?
     if (IsVisible())  // && m_player->GetId() != GetLocalPlayerId())
     {
