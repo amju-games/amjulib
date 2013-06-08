@@ -284,10 +284,28 @@ void GSMain::Update()
 {
   GSBase::Update();
 
-  // TODO different message depending on game mode.
-  // This message can be the same each time.
+  std::string s;
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_SINGLE)
+  {
+    // TODO localise
+    s = "Hello, <p>! Today, you are hungry and must find food! Pick up and eat food by walking into it.";
+  }
+  else if (gm == AMJU_MODE_MULTI)
+  {
+    s = "Hello, <p>! Today, you must feed the other players! Pick up food by walking into it, then give it to other players by walking into them.";
+  }
+  else if (gm == AMJU_MODE_EDIT)
+  {
+    s = "Have fun in edit mode!";
+  }
+  else
+  {
+    Assert(0); // how did we get here?
+  }
+
   FirstTimeMsgThisSession(
-    "Hello, <p>! In this game, you must feed your hungry friends!", 
+    s,
     UNIQUE_MSG_ID,
     false);
 

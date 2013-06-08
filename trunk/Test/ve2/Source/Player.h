@@ -9,7 +9,7 @@
 
 namespace Amju
 {
-class FuelCell;
+class Food;
 class Spaceship;
 
 class Player : public Ve1ObjectChar
@@ -48,7 +48,7 @@ public:
   void SetCarrying(Ve1Object*);
   Ve1Object* GetCarrying();
 
-  void OnCollideFuel(FuelCell* f);
+  void OnCollideFood(Food* f);
 
   float GetViewDist() const;
 
@@ -64,7 +64,7 @@ public:
   void OnCollidePlayer(Player* otherPlayer);
 
 private:
-  void EatFood(FuelCell*);
+  void EatFood(Food*);
 
 protected:
   RCPtr<SceneMesh> m_arrow; // destination arrow
@@ -79,8 +79,8 @@ protected:
   // This increases from a min value so things further away can be seen
   float m_viewDistance;
 
-  int m_lastFuelCellCount;
-  int m_totalFuelCells; // total num fuel cells brought to spaceship - -1 until set from server
+  int m_lastFoodCount;
+  int m_totalFoods; // total num Food cells brought to spaceship - -1 until set from server
 
   typedef std::deque<RCPtr<Ve1Object> > CarriedFood;
   CarriedFood m_carriedFood;

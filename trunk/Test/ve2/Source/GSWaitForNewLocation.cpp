@@ -12,7 +12,7 @@
 #include "GSPaused.h"
 #include "Ve1SceneGraph.h"
 #include "Camera.h"
-#include "FuelCell.h"
+#include "Food.h"
 #include "ROConfig.h"
 #include <AmjuFinal.h>
 

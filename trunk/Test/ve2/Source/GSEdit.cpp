@@ -26,7 +26,7 @@
 #include "CogTestNpc.h"
 #include "GSQuitGame.h"
 #include "Skybox.h"
-#include "FuelCell.h"
+#include "Food.h"
 #include "LurkMsg.h"
 #include "HotLava.h"
 #include <AmjuFinal.h>
@@ -864,7 +864,7 @@ void GSEdit::CreateContextMenu()
       new NewObjectCommand(Building::TYPENAME, "none", "none")));
 
     childMenu->AddChild(new GuiMenuItem("FuelCellManager", 
-      new NewObjectCommand(FuelCellManager::TYPENAME, "none", "none", true)));
+      new NewObjectCommand(FoodManager::TYPENAME, "none", "none", true)));
 
     childMenu->AddChild(new GuiMenuItem("HotLava", 
       new NewObjectCommand(HotLava::TYPENAME, "none", "none", true)));

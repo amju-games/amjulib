@@ -2,22 +2,22 @@
 #include <CollisionManager.h>
 #include <SoundManager.h>
 #include "Player.h"
-#include "FuelCell.h"
+#include "Food.h"
 #include "FirstTimeMsg.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-void CollidePlayerFuel(Player* player, FuelCell* f)
+void CollidePlayerFood(Player* player, Food* f)
 {
   if (player->IsHidden() || f->IsHidden())
   {
     return;
   }
 
-  player->OnCollideFuel(f);
+  player->OnCollideFood(f);
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Player::TYPENAME, FuelCell::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerFuel);
+  Player::TYPENAME, Food::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerFood);
 } 

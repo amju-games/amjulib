@@ -1,5 +1,5 @@
-#ifndef FUELCELL_H_INCLUDED
-#define FUELCELL_H_INCLUDED
+#ifndef FOOD_H_INCLUDED
+#define FOOD_H_INCLUDED
 
 #include "Furniture.h"
 
@@ -7,13 +7,13 @@ namespace Amju
 {
 void SetRandomFoodInLocation();
 
-class FuelCellManager : public Ve1Object
+class FoodManager : public Ve1Object
 {
 public:
   static const char* TYPENAME;
   virtual const char* GetTypeName() const;
 
-  // Create fuel cells in new location, local to client only
+  // Create Food cells in new location, local to client only
   virtual void OnLocationEntry();
 
   virtual void SetEditMenu(GuiMenu*) {}
@@ -22,13 +22,13 @@ public:
 
 };
 
-class FuelCell : public Furniture
+class Food : public Furniture
 {
 public:
   static const char* TYPENAME;
   virtual const char* GetTypeName() const;
 
-  FuelCell();
+  Food();
 
   virtual bool Load(File*);
   virtual void SetEditMenu(GuiMenu*) {}

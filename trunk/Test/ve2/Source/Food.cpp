@@ -6,7 +6,7 @@
 #include <DrawAABB.h>
 #include <AmjuRand.h>
 #include <ReportError.h>
-#include "FuelCell.h"
+#include "Food.h"
 #include "LocalPlayer.h"
 #include "GameMode.h"
 #include "Ve1Node.h"
@@ -18,15 +18,15 @@
 
 namespace Amju
 {
-const char* FuelCell::TYPENAME = "fuelcell";
+const char* Food::TYPENAME = "Food";
 
 // Size of food sprites
 static const float SIZE = 20.0f;
 
-class FuelNode : public SceneNode
+class FoodNode : public SceneNode
 {
 public:
-  FuelNode();
+  FoodNode();
   virtual void Draw();
   virtual void Update();
 
@@ -34,7 +34,7 @@ private:
   Sprite m_sprite;
 };
 
-FuelNode::FuelNode()
+FoodNode::FoodNode()
 {
   std::string tex = "food1.png";
   // TODO 2 * 2 cells, depends on sprite layout
@@ -53,7 +53,7 @@ FuelNode::FuelNode()
   SetBlended(true);
 }
 
-void FuelNode::Update()
+void FoodNode::Update()
 {
   // Visible from player ?
   // TODO
@@ -61,7 +61,7 @@ void FuelNode::Update()
   m_sprite.Update();
 }
 
-void FuelNode::Draw()
+void FoodNode::Draw()
 {
   AmjuGL::PushMatrix();
 
@@ -74,21 +74,21 @@ void FuelNode::Draw()
   AmjuGL::PopMatrix();
 }
 
-const char* FuelCellManager::TYPENAME = "fuelcellmanager";
+const char* FoodManager::TYPENAME = "Foodmanager";
 
-const char* FuelCellManager::GetTypeName() const
+const char* FoodManager::GetTypeName() const
 {
   return TYPENAME;
 }
 
 void SetRandomFoodInLocation()
 {
-  FuelCellManager fcm;
+  FoodManager fcm;
   fcm.SetPos(Vec3f(0, 0, 0)); // TODO
   fcm.OnLocationEntry();
 }
 
-void FuelCellManager::OnLocationEntry()
+void FoodManager::OnLocationEntry()
 {
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
@@ -101,14 +101,14 @@ void FuelCellManager::OnLocationEntry()
   }
   // else... ????
 
-  // Create fuel cells
+  // Create Food cells
   static int id = 20000;
   for (int i = 0; i < 10; i++)
   {
-    FuelCell* f = new FuelCell;
+    Food* f = new Food;
     f->SetId(id++);
 
-    float s = ROConfig()->GetFloat("fuel-cell-spread", 200.0f); 
+    float s = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
     Vec3f r(Rnd(-s, s), Rnd(0, s), Rnd(-s, s));
     Vec3f p = GetPos() + r; 
     if (TerrainReady())
@@ -122,7 +122,7 @@ void FuelCellManager::OnLocationEntry()
   }
 }
 
-void FuelCellManager::Update()
+void FoodManager::Update()
 {
   Ve1Object::Update();
 
@@ -141,34 +141,34 @@ void FuelCellManager::Update()
   }
 }
 
-GameObject* CreateFuelCellManager()
+GameObject* CreateFoodManager()
 {
-  return new FuelCellManager;
+  return new FoodManager;
 }
 
-GameObject* CreateFuelCell()
+GameObject* CreateFood()
 {
-  return new FuelCell;
+  return new Food;
 }
 
 static bool registered[] = 
 { 
-  TheGameObjectFactory::Instance()->Add(FuelCell::TYPENAME, CreateFuelCell),
-  TheGameObjectFactory::Instance()->Add(FuelCellManager::TYPENAME, CreateFuelCellManager)
+  TheGameObjectFactory::Instance()->Add(Food::TYPENAME, CreateFood),
+  TheGameObjectFactory::Instance()->Add(FoodManager::TYPENAME, CreateFoodManager)
 };
 
-const char* FuelCell::GetTypeName() const
+const char* Food::GetTypeName() const
 {
   return TYPENAME;
 }
 
-FuelCell::FuelCell()
+Food::Food()
 {
   m_isPickable = true;
   m_owner = 0;
 }
 
-bool FuelCell::Load(File*)
+bool Food::Load(File*)
 {
   Vec3f p = GetPos();
 
@@ -181,7 +181,7 @@ bool FuelCell::Load(File*)
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - ZSIZE, m_pos.z + ZSIZE);
 
-  FuelNode* sm = new FuelNode;
+  FoodNode* sm = new FoodNode;
   sm->SetAABB(m_aabb);
 
   SetSceneNode(sm);
@@ -198,7 +198,7 @@ bool FuelCell::Load(File*)
   return true;
 }
 
-void FuelCell::Update()
+void Food::Update()
 {
   Furniture::Update();
 
