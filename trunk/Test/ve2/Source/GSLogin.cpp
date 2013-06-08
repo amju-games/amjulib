@@ -116,6 +116,7 @@ void GSLogin::OnActive()
   OnLoginChar(); // check if email address is well formed, enable login button if so
 
   static Kb* kb = TheKb::Instance();
+  kb->SetEnabled(true);
   if (kb->IsEnabled())
   {
     KbSetLayout(KB_LAYOUT_EMAIL);
