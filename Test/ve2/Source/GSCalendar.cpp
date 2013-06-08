@@ -4,6 +4,7 @@
 #include <GuiButton.h>
 #include "GSCalendar.h"
 #include "ResearchCalendar.h"
+#include "LurkMsg.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -20,6 +21,7 @@ GSCalendar::GSCalendar()
 void GSCalendar::Update()
 {
   GSGui::Update();
+  TheLurker::Instance()->Update();
 }
 
 void GSCalendar::Draw()
@@ -29,6 +31,7 @@ void GSCalendar::Draw()
 
 void GSCalendar::Draw2d()
 {
+  TheLurker::Instance()->Draw();
   GSGui::Draw2d();
 }
 
@@ -54,6 +57,11 @@ void GSCalendar::OnActive()
   if (dates.empty())
   {
     // TODO show message - no sessions are scheduled 
+    // TODO localisation
+    std::string s = 
+      "Your calendar is empty! This could mean the experiment is over, "
+      "or could be a bug... please contact Jason for help!";
+    TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(0.2, 0, 0.2, 1), AMJU_CENTRE, OnCalOk));
   }
   else
   {
