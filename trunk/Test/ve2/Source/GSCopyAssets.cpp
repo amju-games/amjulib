@@ -9,6 +9,7 @@
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
 #include "GSLogo.h"
+#include "GSTitle.h"
 #include <AmjuFinal.h>
 
 #if defined(WIN32) && defined(_DEBUG)
@@ -280,7 +281,11 @@ std::cout << "Glue file + path: " << glueFilePath << "\n";
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
 
     // All copied - go to next state 
+#ifdef _DEBUG
+  TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+#else
     TheGame::Instance()->SetCurrentState(TheGSLogo::Instance()); 
+#endif
   }
 }
 
