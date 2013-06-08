@@ -34,11 +34,11 @@
 #include "GameLookup.h"
 #include "Achievement.h"
 #include "ObjectManager.h"
-#include "FuelCount.h"
+#include "FoodCount.h"
 #include "Spaceship.h"
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
-#include "FuelCell.h"
+#include "Food.h"
 #include "GS2dAvatarMod.h"
 #include "MsgManager.h"
 #include "GameMode.h"
@@ -46,7 +46,7 @@
 
 namespace Amju
 {
-static const std::string FUELCELL_KEY = "fuelcells";
+static const std::string Food_KEY = "Foods";
 static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
 
 static const char* FOOD_RECEIVED_KEY = "food-recv";
@@ -152,9 +152,9 @@ Player::Player()
   m_carrying = 0;
 
   m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
-  m_lastFuelCellCount = -1;
+  m_lastFoodCount = -1;
   m_isDead = false;
-  m_totalFuelCells = -1; // not set yet
+  m_totalFoods = -1; // not set yet
 
   Ve1SpriteNode* sn = new Ve1SpriteNode;
   sn->SetObj(this);
@@ -389,39 +389,39 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     }
   }
 */
-  else if (key == FUELCELL_KEY)
+  else if (key == Food_KEY)
   {
     if (IsLocalPlayer())
     {
       int fc = ToInt(val);
-      // Lurk msg - total number of fuel cells ever brought to ship
+      // Lurk msg - total number of Food cells ever brought to ship
       std::string s;
-      if (m_totalFuelCells != -1)
+      if (m_totalFoods != -1)
       {
         if (fc == 1)
         {
-          s = "You brought a fuel cell to the ship!";
+          s = "You brought a Food cell to the ship!";
         }
         else
         {
-          s = "You have brought a total of " + val + " fuel cells to the ship!";
+          s = "You have brought a total of " + val + " Food cells to the ship!";
         }
         LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
         TheLurker::Instance()->Queue(lm);
       }
-      m_totalFuelCells = fc;
+      m_totalFoods = fc;
 
-      if (fc > 0 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_1))
+      if (fc > 0 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_1))
       {
-        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_1, "You brought your first fuel cell back to the ship!");
+        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_1, "You brought your first Food cell back to the ship!");
       }
-      if (fc >= 5 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_5))
+      if (fc >= 5 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_5))
       {
-        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_5, "You brought 5 fuel cells back to the ship!");
+        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_5, "You brought 5 Food cells back to the ship!");
       }
-      if (fc >= 10 && !HasWonAchievement(ACH_FUEL_CELL_TO_SHIP_10))
+      if (fc >= 10 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_10))
       {
-        OnWinAchievement(ACH_FUEL_CELL_TO_SHIP_10, "You brought 10 fuel cells back to the ship!");
+        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_10, "You brought 10 Food cells back to the ship!");
       }
       // etc
     }
@@ -568,7 +568,7 @@ void Player::Update()
   if (IsLocalPlayer())
   {
     TheGSMain::Instance()->SetHeartNum(m_stamina);
-    TheGSMain::Instance()->SetFuelCells(GetFoodRecvCount());
+//    TheGSMain::Instance()->SetFoods(GetFoodRecvCount());
 
 /*
     if (m_stamina <= 0)
@@ -660,7 +660,7 @@ int Player::GetFoodRecvCount()
   return 0;
 }
 
-void Player::EatFood(FuelCell* f)
+void Player::EatFood(Food* f)
 {
   Ve1Object* owner = f->GetOwner();
   Assert(owner);
@@ -709,14 +709,17 @@ void Player::OnCollidePlayer(Player* otherPlayer)
     return;
   }
 
-  FuelCell* f = dynamic_cast<FuelCell*>(m_carriedFood.back().GetPtr());
+  Food* f = dynamic_cast<Food*>(m_carriedFood.back().GetPtr());
   Assert(f);
   m_carriedFood.pop_back(); // it's a deque, we add with push_front
   otherPlayer->EatFood(f);
 }
 
-void Player::OnCollideFuel(FuelCell* f)
+void Player::OnCollideFood(Food* f)
 {
+  // Single player mode: eat the food.
+
+
   // Local player: picks up food if not currently picked up.
   // Non-local player: gets given the food if carried by local player.
 
@@ -762,7 +765,7 @@ void Player::OnCollideFuel(FuelCell* f)
   
 
   // TODO Given and received counts
-  //gsm->SetFuelCells(GetFoodRecvCount());    
+  //gsm->SetFoods(GetFoodRecvCount());    
 }
 
 float Player::GetViewDist() const

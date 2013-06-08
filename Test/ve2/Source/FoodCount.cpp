@@ -1,6 +1,6 @@
 #include <AmjuFirst.h>
 #include <iostream>
-#include "FuelCount.h"
+#include "FoodCount.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -8,21 +8,21 @@ namespace Amju
 static int fc = 0;
 
 /*
-void ResetLocalPlayerFuelCount()
+void ResetLocalPlayerFoodCount()
 {
   fc = 0;
 }
 
-int GetLocalPlayerFuelCount()
+int GetLocalPlayerFoodCount()
 {
   return fc;
 }
 
-void ChangeLocalPlayerFuelCount(int delta)
+void ChangeLocalPlayerFoodCount(int delta)
 {
   fc += delta;
 
-std::cout << "Local player fuel cell count is now: " << delta << "\n";
+std::cout << "Local player Food cell count is now: " << delta << "\n";
 }
 */
 

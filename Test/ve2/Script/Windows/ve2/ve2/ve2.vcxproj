@@ -188,7 +188,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\CollidePlayerBaddie.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerBuilding.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerCollect.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CollidePlayerFuel.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerFood.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
@@ -200,8 +200,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\FightReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\FirstTimeMsg.cpp" />
-    <ClCompile Include="..\..\..\..\Source\FuelCell.cpp" />
-    <ClCompile Include="..\..\..\..\Source\FuelCount.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Food.cpp" />
+    <ClCompile Include="..\..\..\..\Source\FoodCount.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameLookup.cpp" />
@@ -341,8 +341,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\FightReq.h" />
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\FirstTimeMsg.h" />
-    <ClInclude Include="..\..\..\..\Source\FuelCell.h" />
-    <ClInclude Include="..\..\..\..\Source\FuelCount.h" />
+    <ClInclude Include="..\..\..\..\Source\Food.h" />
+    <ClInclude Include="..\..\..\..\Source\FoodCount.h" />
     <ClInclude Include="..\..\..\..\Source\Furniture.h" />
     <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
     <ClInclude Include="..\..\..\..\Source\GameLookup.h" />

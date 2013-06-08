@@ -27,7 +27,7 @@
 #include "GSToday.h"
 #include "GSMain.h"
 #include "CogTestResults.h"
-#include "FuelCount.h"
+#include "FoodCount.h"
 #include "LogOut.h"
 #include <AmjuFinal.h>
 
@@ -250,7 +250,7 @@ void ReqLogin::ChooseMode()
 
   // Now we can look up today on the calendar to get game mode flags.
 
-  //ResetLocalPlayerFuelCount();
+  //ResetLocalPlayerFoodCount();
 
   SetGameMode(gm); // TODO handle edit mode - send extra flag to login.pl ??
 
