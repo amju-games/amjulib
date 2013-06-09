@@ -165,23 +165,16 @@ std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
   }
 }
 
-static int fuelCells = 0;
-static int hearts = 0;
+static int score = 0;
 
-void GSMain::SetFuelCells(int num)
+void GSMain::SetScore(int num)
 {
-  fuelCells = num;
-}
-
-void GSMain::SetHeartNum(int num)
-{
-  hearts = num;
+  score = num;
 }
 
 void GSMain::ResetHud()
 {
-  fuelCells = 0;
-  hearts = 0;
+  score = 0;
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -352,9 +345,11 @@ void GSMain::Update()
 std::cout << "SetFuelCells: no fuelcell-num element\n";
     return;
   }
-  text1->SetText(ToString(fuelCells));
+  text1->SetText(ToString(score));
   text1->SetVisible(true); 
 
+  // Simplify by removing one of the score elements
+  /*
   GuiText* text2 = (GuiText*)GetElementByName(m_gui, "heart-num");
   if (!text2) 
   {
@@ -367,6 +362,7 @@ std::cout << "SetHeartNum: no heart-num element\n";
   text2->SetText(ToString(hearts));
   text2->SetVisible(true); 
   heartImg->SetVisible(true);
+  */
 
   /* // This was for flashing when health was <= 0
   if (hearts <= 0)

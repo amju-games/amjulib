@@ -186,15 +186,6 @@ bool Food::Load(File*)
 
   SetSceneNode(sm);
 
-/*
-  Billboard* bb = new Billboard;
-  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("flare.png");
-  bb->SetTexture(tex);
-  bb->SetSize(30.0f); // TODO CONFIG
-  bb->SetAABB(m_aabb);
-  sm->AddChild(bb);
-*/
-
   return true;
 }
 
