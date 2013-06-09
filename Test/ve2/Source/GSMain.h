@@ -57,8 +57,7 @@ public:
   // Show button to drop carried item
   void ShowDropButton(Furniture*, bool show); 
 
-  void SetHeartNum(int);
-  void SetFuelCells(int);
+  void SetScore(int);
   void ResetHud();
 
 private:

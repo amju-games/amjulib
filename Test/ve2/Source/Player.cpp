@@ -42,16 +42,11 @@
 #include "GS2dAvatarMod.h"
 #include "MsgManager.h"
 #include "GameMode.h"
+#include "GameConsts.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-static const std::string Food_KEY = "Foods";
-static const std::string LAST_MSG_SENT_KEY = "last_msg_sent";
-
-static const char* FOOD_RECEIVED_KEY = "food-recv";
-static const char* FOOD_GIVEN_KEY = "food-given";
-
 //static const float ARROW_XSIZE = 5.0f;
 //static const float ARROW_YSIZE = 30.0f;
 
@@ -389,7 +384,8 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     }
   }
 */
-  else if (key == Food_KEY)
+/*
+  else if (key == FOOD_KEY)
   {
     if (IsLocalPlayer())
     {
@@ -426,6 +422,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       // etc
     }
   }
+*/
   else if (key == LAST_MSG_SENT_KEY)
   {
     TheMsgManager::Instance()->CheckForNewMsgs();
@@ -565,9 +562,21 @@ void Player::Update()
     }
   }
 
+  static GSMain* gsm = TheGSMain::Instance();
   if (IsLocalPlayer())
   {
-    TheGSMain::Instance()->SetHeartNum(m_stamina);
+    GameMode gm = GetGameMode();
+    if (gm == AMJU_MODE_SINGLE)
+    {
+      // Score is food eaten
+      gsm->SetScore(m_stamina); // TODO
+    }
+    else if (gm == AMJU_MODE_MULTI)
+    {
+      // Score is food given + food recv ??
+      gsm->SetScore(m_stamina); // TODO
+    }
+
 //    TheGSMain::Instance()->SetFoods(GetFoodRecvCount());
 
 /*
@@ -688,6 +697,7 @@ void Player::EatFood(Food* f)
   {
     otherPlayer = "That other player";
   }
+  // TODO no good, should be only one message however many foods are given.
   TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
   
   f->SetHidden(true);
@@ -717,52 +727,48 @@ void Player::OnCollidePlayer(Player* otherPlayer)
 
 void Player::OnCollideFood(Food* f)
 {
-  // Single player mode: eat the food.
-
-
-  // Local player: picks up food if not currently picked up.
-  // Non-local player: gets given the food if carried by local player.
-
-  //static GSMain* gsm = TheGSMain::Instance();
-
   Assert(!f->IsHidden());
 
-  Ve1Object* owner = f->GetOwner();
-
-  if (owner == this)
+  // Single player mode: eat the food.
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_SINGLE)
   {
-    // We are already carrying this food
-    Assert(std::find(m_carriedFood.begin(), m_carriedFood.end(), f) != m_carriedFood.end());
-    return;
+    f->SetHidden(true);
+    TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
+    // Inc count of this (recipient) player on server
+    ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
   }
-  /* // Give food by colliding player-player
-  else if (owner) 
+  else if (gm == AMJU_MODE_MULTI)
   {
-    // This player is non local. The local player is carrying this food. 
-    // We get given the food. The other (local) player should get some reward for feeding us.
-    EatFood(f);
-  }
-  */
-  else if (IsLocalPlayer())
-  {
-    Assert(!owner);
+    // Local player: picks up food if not currently picked up.
+    Ve1Object* owner = f->GetOwner();
 
-    // Noone is carrying the food. 
-    // We pick up the food. 
-    // Only show this msg the first time around
-    FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
+    if (owner == this)
+    {
+      // We are already carrying this food
+      Assert(std::find(m_carriedFood.begin(), m_carriedFood.end(), f) != m_carriedFood.end());
+      return;
+    }
+    else if (IsLocalPlayer())
+    {
+      Assert(!owner);
 
-    // TODO Sound every time
-    TheSoundManager::Instance()->PlayWav("pickup.wav"); // TODO
+      // Noone is carrying the food. 
+      // We pick up the food. 
+      // Only show this msg the first time around
+      FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
 
-    /* Not:
-    LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
-    TheLurker::Instance()->Queue(lm);    
-    */
-    f->SetOwner(this);
-    m_carriedFood.push_front(f);
-  }
-  
+      // TODO Sound every time
+      TheSoundManager::Instance()->PlayWav("pickup.wav"); // TODO
+
+      /* Not:
+      LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+      */
+      f->SetOwner(this);
+      m_carriedFood.push_front(f);
+    }
+  }  
 
   // TODO Given and received counts
   //gsm->SetFoods(GetFoodRecvCount());    

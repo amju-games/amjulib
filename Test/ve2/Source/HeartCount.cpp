@@ -26,12 +26,6 @@ bool GetHeartCount(int* result)
   return GetPlayerCount(STAMINA_KEY, result);
 }
 
-bool GetFuelCellCount(int* result)
-{
-  static const char* FUELCELL_KEY = "fuelcells";
-  return GetPlayerCount(FUELCELL_KEY, result);
-}
-
 bool GetPlayerCount(const std::string& key, int* result)
 {
   Player* p = GetLocalPlayer();
