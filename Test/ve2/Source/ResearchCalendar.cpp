@@ -49,7 +49,7 @@ int ResearchCalendar::GetDayOnPlanet() const
 
   for (unsigned int i = 0; i < m_dates.size(); i++)
   {
-    if (m_dates[i].m_play)
+    if (m_dates[i].m_playSingle || m_dates[i].m_playMulti)
     {
       d++;
     }
