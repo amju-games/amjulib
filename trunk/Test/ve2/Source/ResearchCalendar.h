@@ -9,7 +9,8 @@ namespace Amju
 {
 struct ResearchDate
 {
-  ResearchDate(Time time, bool cogTest, bool play) : m_time(time), m_cogTest(cogTest), m_play(play) {}
+  ResearchDate(Time time, bool cogTest, bool playSingle, bool playMulti) :
+    m_time(time), m_cogTest(cogTest), m_playSingle(playSingle), m_playMulti(playMulti) {}
 
   // Date/time of session
   Time m_time;
@@ -17,13 +18,14 @@ struct ResearchDate
   // If true, participant is due to take cog tests
   bool m_cogTest;
 
-  // if true, participant is due to play the game.
-  bool m_play;
+  // if true, participant is due to play the game, in single- or multi-player mode.
+  bool m_playSingle;
+  bool m_playMulti;
 };
 
 typedef std::vector<ResearchDate> ResearchDates;
 
-// Store dates/timees of all scheduled research sessions for the study.
+// Store dates/times of all scheduled research sessions for the study.
 // Get this from server, so we can have more than one study/overlapping etc if required.
 class ResearchCalendar : public NonCopyable
 {

@@ -61,7 +61,7 @@ void GSCalendar::OnActive()
     std::string s = 
       "Your calendar is empty! This could mean the experiment is over, "
       "or could be a bug... please contact Jason for help!";
-    TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(0.2, 0, 0.2, 1), AMJU_CENTRE, OnCalOk));
+    TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(0.2f, 0, 0.2f, 1), AMJU_CENTRE, OnCalOk));
   }
   else
   {
@@ -82,17 +82,17 @@ void GSCalendar::OnActive()
       {
         cell->SetBgCol(Colour(1, 0, 0, 1));
         std::string str;
-        if (d.m_cogTest && d.m_play)
+        if (d.m_playSingle)
         {
-          str = "Please play game at set time, and take tests.";
+          str = "Please play single-player game.";
+        }
+        else if (d.m_playMulti)
+        {
+          str = "Please play multi-player game.";
         }
         else if (d.m_cogTest)
         {
           str = "Please take tests only, at any time.";
-        }
-        else if (d.m_play)
-        {
-          str = "Please play game at set time - no tests.";
         }
         else
         {
