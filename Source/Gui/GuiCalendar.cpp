@@ -55,6 +55,11 @@ bool GuiCalendar::Load(File* f)
     return false;
   }
 
+  return true;
+}
+
+void GuiCalendar::AddDayColumnHeadings()
+{
   // Add top row of days - TODO Set start day
   // TODO localise
   // TODO long/short day names
@@ -71,7 +76,7 @@ bool GuiCalendar::Load(File* f)
     GuiText* text = new GuiText;
     // TODO Colours
     // TODO Font
-    text->SetTextSize(1.0f); // TODO CONFIG
+    text->SetTextSize(0.5f); // TODO CONFIG
     text->SetSize(Vec2f(w, 0.1f)); // assume single line
     text->SetText(DAY[i]);
     text->SetLocalPos(Vec2f(w * (float)i, 0));
@@ -86,13 +91,12 @@ bool GuiCalendar::Load(File* f)
     text->SetDrawBg(true);
     toprow->AddChild(text);
   }
-
-  return true;
 }
 
 void GuiCalendar::SetStartEndDate(Time start, Time end)
 {
   Clear();
+  AddDayColumnHeadings();
 
   std::string MONTH[] = { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 
@@ -100,6 +104,9 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
   start.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  int daysToStartOfWeek = (start.GetDayOfWeek() + 6) % 7;
+  start -= TimePeriod(ONE_DAY_IN_SECONDS * daysToStartOfWeek); // start at Sunday
+
   end.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
   // Round up to end of week
   int daysToEndOfWeek = 7 - end.GetDayOfWeek();
@@ -164,7 +171,8 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
     }
 
     text->SetBgCol(bg);
-    
+    text->SetTextSize(0.5f); // TODO CONFIG
+ 
     AddChild(text);
   }
 }

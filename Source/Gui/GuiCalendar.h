@@ -53,6 +53,8 @@ public:
 
   // TODO Set font, size, etc.
 
+  void AddDayColumnHeadings();
+
 private:
   Vec2f m_cellSize;
   GuiCalendarDayCell* m_focus;
