@@ -282,7 +282,7 @@ void GSMain::Update()
   if (gm == AMJU_MODE_SINGLE)
   {
     // TODO localise
-    s = "Hello, <p>! Today, you are hungry and must find food! Pick up and eat food by walking into it.";
+    s = "Hello, <p>! Today, you are hungry and must find food for yourself! Pick up and eat food by walking into it.";
   }
   else if (gm == AMJU_MODE_MULTI)
   {

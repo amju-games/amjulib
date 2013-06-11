@@ -45,7 +45,8 @@ static void OnTodayOk()
 {
   GameState* state = 0;
 
-  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_NO_GAME)
   {
     // If no game day and it's not a research session, there is nothing to do.
     // If no game day, go straight to cog test.
@@ -60,7 +61,7 @@ static void OnTodayOk()
       state = TheGSLogout::Instance();
     }
   }
-  else if (GetGameMode() == AMJU_MODE_MULTI)
+  else if (gm == AMJU_MODE_MULTI || gm == AMJU_MODE_SINGLE)
   {
     // If it's a game day, start playing
     state = TheGSTodaysTask::Instance();
@@ -136,7 +137,8 @@ void GSToday::OnActive()
   // No game mode, and we must do test
   // No game mode, and no need to do test
   // Multi-player mode. May need to do test, will be prompted in game.
-  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_NO_GAME)
   {
     // If no game day and test required, go straight to cog test.
     if (DoCogTests())
@@ -151,7 +153,7 @@ void GSToday::OnActive()
       // TODO Get next date from the ResearchCalendar
     }
   }
-  else if (GetGameMode() == AMJU_MODE_MULTI)
+  else if (gm == AMJU_MODE_MULTI)
   {
     // If it's a game day, go to main state.
     str = "Please play the game for as long as you like, up to one hour. Please feel free to interact with other players as much as you like.";
@@ -160,6 +162,15 @@ void GSToday::OnActive()
       str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
     }
   } 
+  else if (gm == AMJU_MODE_SINGLE)
+  {
+    // If it's a game day, go to main state.
+    str = "Please play the game for as long as you like, up to one hour. Today it is a single-player game.";
+    if (DoCogTests())
+    {
+      str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
+    }
+  }
   else
   {
 std::cout << "Unexpected game mode!!\n";
