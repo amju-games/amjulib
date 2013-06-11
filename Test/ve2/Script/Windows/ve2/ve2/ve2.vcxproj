@@ -290,8 +290,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\SerialReqManager.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Skybox.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Spaceship.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Source\StartUp.cpp" />
@@ -438,8 +436,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\SerialReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
-    <ClInclude Include="..\..\..\..\Source\Skybox.h" />
-    <ClInclude Include="..\..\..\..\Source\Spaceship.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\Sprite.h" />
     <ClInclude Include="..\..\..\..\Source\StateUpdate.h" />

@@ -656,6 +656,7 @@ void Player::SetMenu(GuiMenu* menu)
   }
 }
 
+/*
 int Player::GetFoodRecvCount()
 {
   if (Exists(FOOD_RECEIVED_KEY))
@@ -668,6 +669,7 @@ int Player::GetFoodRecvCount()
 //  Assert(0);
   return 0;
 }
+*/
 
 void Player::EatFood(Food* f)
 {
@@ -679,18 +681,23 @@ void Player::EatFood(Food* f)
   Assert(GetLocalPlayer() != this);
 
   // Inc count of this (recipient) player on server
-  ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
+  ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1); // for expt
+  ChangeObjCount(GetId(), SCORE_KEY, +1);
 
   // Inc count of food given by the local player
-  ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1);
+  ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1); // for expt
+  ChangeObjCount(GetLocalPlayerId(), SCORE_KEY, +1);
 
   std::string recipName = GetPlayerName(GetId());
 
+  /*
   // Show msg to local player
   LurkMsg lm("You gave some food to " + recipName + "!", 
     LURK_FG, LURK_BG, AMJU_CENTRE); 
   TheLurker::Instance()->Queue(lm);    
+  */
 
+  /*
   // Send message from 'the game' to this (recipient) player
   std::string otherPlayer = GetPlayerName(owner->GetId());
   if (otherPlayer.empty())
@@ -699,7 +706,8 @@ void Player::EatFood(Food* f)
   }
   // TODO no good, should be only one message however many foods are given.
   TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
-  
+  */
+
   f->SetHidden(true);
   TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
 }
@@ -736,7 +744,8 @@ void Player::OnCollideFood(Food* f)
     f->SetHidden(true);
     TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
     // Inc count of this (recipient) player on server
-    ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1);
+    ChangeObjCount(GetId(), FOOD_EATEN_KEY, +1); // for expt
+    ChangeObjCount(GetId(), SCORE_KEY, +1);
   }
   else if (gm == AMJU_MODE_MULTI)
   {
