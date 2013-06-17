@@ -183,6 +183,25 @@ void GSCogTestMenu::OnActive()
   m_isPrac = false;
   std::string str;
 
+  // Check for tests already done (may have restarted exe)
+  Time today = Time::Now();
+  // Map m_nextTest to TestID - they are not the same, grr
+  TestId LOOKUP_TEST_ID[] = 
+  {
+    AMJU_COG_TEST_REACTION_TIME,
+    AMJU_COG_TEST_LETTER_CAN,
+    AMJU_COG_TEST_SYMBOL_CAN,
+    AMJU_COG_TEST_STROOP_COLOUR,
+    AMJU_COG_TEST_STROOP_WORD,
+    AMJU_COG_TEST_STROOP_COLOUR_WORD,
+  };
+  CogTestResults* ctr = TheCogTestResults::Instance();
+  while (m_nextTest < 6 && ctr->IsTestComplete(today, LOOKUP_TEST_ID[m_nextTest]))
+  {
+    std::cout << "Test " << LOOKUP_TEST_ID[m_nextTest] << " is done!\n";
+    m_nextTest++;
+  }
+
   switch (m_nextTest)
   {
   case 0:
@@ -239,7 +258,7 @@ void GSCogTestMenu::OnActive()
     break;
 
   default:
-    str = "Well done on doing all those tests! Now please explore this planet, and find the missing space ship parts!";
+    str = "Well done on doing all those tests!";
     m_func = Amju::Done;
   }
 

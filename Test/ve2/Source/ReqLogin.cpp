@@ -200,16 +200,18 @@ void ReqLogin::ChooseMode()
             if (t == today)
             {
               // Cog tests already done today ?
-              Results results = TheCogTestResults::Instance()->GetResultsForDate(Time::Now());
-              // TODO Check if only partially done
-              if (results.empty())
+              bool gotAllResults = TheCogTestResults::Instance()->HaveGotAllResultsForDate(Time::Now());
+
+              if (gotAllResults)
               {
-                doCogTests = cogtest;
+                // All test results are in - no need to do any cog tests.
+                doCogTests = false;
+                std::cout << "Test results for today are here already.\n";
               }
               else
               {
-                doCogTests = false;
-                std::cout << "Test results for today are here already.\n";
+                // NOT all done: so if it is a cog test day, we will set doCogTests to true.
+                doCogTests = cogtest;
               }
 
               if (multi)

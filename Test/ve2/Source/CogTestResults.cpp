@@ -143,6 +143,39 @@ bool CogTestResults::Load()
   return true;
 }
 
+bool CogTestResults::IsTestComplete(Time testDate, TestId id)
+{
+  int n = GetNumResults(testDate, id);
+  return n >= EXPECTED_NUM_RESULTS_FOR_TEST[(int)id];
+}
+
+int CogTestResults::GetNumResults(Time testDate, TestId id)
+{
+  Results r = GetResultsForDate(testDate);
+  int numResults = 0;
+  for (unsigned int i = 0; i < r.size(); i++)
+  {
+    if (r[i]->m_testId == id)
+    {
+      numResults++;
+    }
+  }
+  return numResults;
+}
+
+bool CogTestResults::HaveGotAllResultsForDate(Time testDate)
+{
+  for (int i = (int)AMJU_COG_TEST_LETTER_CAN; i < (int)AMJU_COG_TEST_MAX; i++)
+  {
+    bool complete = IsTestComplete(testDate, (TestId)i);
+    if (!complete)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
 Results CogTestResults::GetResultsForDate(Time testDate)
 {
   testDate.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));

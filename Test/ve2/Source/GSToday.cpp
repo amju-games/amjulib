@@ -104,17 +104,20 @@ void GSToday::OnActive()
 
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   ok->SetCommand(OnTodayOk);
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_MULTI || gm == AMJU_MODE_SINGLE)
   {
     ok->SetText("play!");
   }
 
+/*
   // View game stats
   GuiButton* viewAch = (GuiButton*)GetElementByName(m_gui, "view-ach-button");
   viewAch->SetCommand(OnTodayViewAchievements);
 
   GuiButton* viewResults = (GuiButton*)GetElementByName(m_gui, "view-results-button");
   viewResults->SetCommand(OnTodayViewResults);
+*/
 
   // For admin/dev, button to play game even on non-game days
   GuiButton* playSingle = (GuiButton*)GetElementByName(m_gui, "play-single-button");
@@ -137,13 +140,12 @@ void GSToday::OnActive()
   // No game mode, and we must do test
   // No game mode, and no need to do test
   // Multi-player mode. May need to do test, will be prompted in game.
-  GameMode gm = GetGameMode();
   if (gm == AMJU_MODE_NO_GAME)
   {
     // If no game day and test required, go straight to cog test.
     if (DoCogTests())
     {
-      str = "Today, please take a few tests. This should take about ten minutes. After that, you are done!";
+      str = "Today, please take a few tests. This should take about ten minutes. Thank you!";
       // TODO Get next date from the ResearchCalendar -- show in final thanks page
     }
     else
