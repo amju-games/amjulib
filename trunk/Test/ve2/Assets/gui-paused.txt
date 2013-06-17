@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-7
+5
 
 
 // Element type
@@ -23,35 +23,9 @@ Paused
 arial, 1.0, bgcol=000000, fgcol=ffffff
 
 
-// element type
-gui-button
-// Element name
-reset-button
-// pos (coords are -1..1)
--0.4, 0.8
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-reset me!
-// Font name, size
-arial, 1.6 
 
-// element type
-gui-button
-// Element name
-calendar-button
-// pos (coords are -1..1)
--0.4, 0.5
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-calendar
-// Font name, size
-arial, 1.6 
+
+
 
 // element type
 gui-button
