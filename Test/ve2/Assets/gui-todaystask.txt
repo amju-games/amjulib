@@ -24,7 +24,7 @@ long-text
 -0.9, 0.9
 1.8, 1.2
 // Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
-Your spaceship has crash landed on the planet Blarg. You must find fuel cells to escape!
+You have been shipwrecked on a desert island!
 arial, 1.0, multi, fgcol=ffffff
 
 gui-text
