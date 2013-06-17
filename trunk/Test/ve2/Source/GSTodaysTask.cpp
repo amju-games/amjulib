@@ -5,6 +5,7 @@
 #include "GSTodaysTask.h"
 #include "GSStartGame.h"
 #include "ResearchCalendar.h"
+#include "GameMode.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -45,8 +46,8 @@ void GSTodaysTask::OnActive()
 
   int d = TheResearchCalendar::Instance()->GetDayOnPlanet();
   Assert(d > 0);
-  Assert(d <= 8);
-  std::string str = "Day " + ToString(d) + "\non planet Blarg";
+  //Assert(d <= 8); //????
+  std::string str = "Day " + ToString(d) + "\non the island";
 
   GuiText* dayN = (GuiText*)GetElementByName(m_gui, "date-text");
   dayN->SetText(str);
@@ -54,7 +55,20 @@ void GSTodaysTask::OnActive()
   const int FUEL_CELL_OBJECTIVE[8] = { 10, 20, 25, 30, 35, 40, 50, 100 };
   int f = FUEL_CELL_OBJECTIVE[d - 1];
 
-  str = "Your objective: find " + ToString(f) + " fuel cells and bring them back to your space ship!";
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_SINGLE)
+  {
+    str = "Find food for yourself!";
+  }
+  else if (gm == AMJU_MODE_MULTI)
+  {
+    str = "Find food for your friends on the island!";
+  }
+  else
+  {
+    Assert(0);
+    str = "";
+  }
 
   GuiText* obj = (GuiText*)GetElementByName(m_gui, "obj-text");
   obj->SetText(str);
