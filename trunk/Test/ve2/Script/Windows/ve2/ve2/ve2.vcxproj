@@ -192,7 +192,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
-    <ClCompile Include="..\..\..\..\Source\CollidePlayerSpaceship.cpp" />
     <ClCompile Include="..\..\..\..\Source\CommandFight.cpp" />
     <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CreateCollect.cpp" />

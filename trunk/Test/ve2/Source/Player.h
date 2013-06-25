@@ -10,7 +10,7 @@
 namespace Amju
 {
 class Food;
-class Spaceship;
+class Baddie;
 
 class Player : public Ve1ObjectChar
 {
@@ -50,10 +50,6 @@ public:
 
   void OnCollideFood(Food* f);
 
-  float GetViewDist() const;
-
-  void OnSpaceshipCollision(Spaceship* spaceship);
-
   // New 2D customisable avatars
   LayerSprite& GetSprite();
 
@@ -62,6 +58,7 @@ public:
 
   // Called on collision, to give food
   void OnCollidePlayer(Player* otherPlayer);
+  void OnCollideBaddie(Baddie* baddie);
 
 private:
   void EatFood(Food*);
@@ -75,9 +72,6 @@ protected:
   bool m_isLocal;
   bool m_isLoggedIn;
   bool m_isDead; // if so, must go back to spaceship
-
-  // This increases from a min value so things further away can be seen
-  float m_viewDistance;
 
   int m_lastFoodCount;
   int m_totalFoods; // total num Food cells brought to spaceship - -1 until set from server

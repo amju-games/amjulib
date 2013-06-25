@@ -33,7 +33,7 @@ const char* Baddie::GetTypeName() const
 
 Baddie::Baddie()
 {
-  SetKeyVal(AVATAR_KEY, "GrimDemon");
+  //SetKeyVal(AVATAR_KEY, "GrimDemon");
 }
 
 void Baddie::Update()
@@ -57,6 +57,7 @@ void Baddie::Update()
 
 bool Baddie::Load(File* f)
 {
+  /*
   if (!m_shadow->Load(f))
   {
     return false;
@@ -79,6 +80,7 @@ bool Baddie::Load(File* f)
   m_effect->SetVisible(true);
 
   m_sceneNode->AddChild(m_effect.GetPtr());
+  */
 
   return true;
 }

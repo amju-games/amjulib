@@ -35,7 +35,6 @@
 #include "Achievement.h"
 #include "ObjectManager.h"
 #include "FoodCount.h"
-#include "Spaceship.h"
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
 #include "Food.h"
@@ -146,7 +145,6 @@ Player::Player()
   m_fadeTime = 0;
   m_carrying = 0;
 
-  m_viewDistance = ROConfig()->GetFloat("player-min-view-dist", 100.0f);
   m_lastFoodCount = -1;
   m_isDead = false;
   m_totalFoods = -1; // not set yet
@@ -783,9 +781,16 @@ void Player::OnCollideFood(Food* f)
   //gsm->SetFoods(GetFoodRecvCount());    
 }
 
-float Player::GetViewDist() const
+void Player::OnCollideBaddie(Baddie* baddie)
 {
-  return m_viewDistance;
+  // Only worry about the local player
+  Assert(IsLocalPlayer());
+
+  // Is it lethal? If so, die immediately
+
+  // Lose some points
+
+  // Dead ?
 }
 
 bool GetNameForPlayer(int objId, std::string* r)
