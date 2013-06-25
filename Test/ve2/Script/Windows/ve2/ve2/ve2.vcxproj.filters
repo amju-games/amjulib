@@ -396,9 +396,6 @@
     <ClCompile Include="..\..\..\..\Source\Achievement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\CollidePlayerSpaceship.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\HotLava.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
