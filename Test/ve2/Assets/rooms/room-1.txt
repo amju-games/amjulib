@@ -1,0 +1,8 @@
+// ROOM 1
+// Version
+1
+
+// type
+room
+
+
