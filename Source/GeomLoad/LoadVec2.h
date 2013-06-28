@@ -6,7 +6,10 @@
 namespace Amju
 {
 class File;
+
 bool LoadVec2(File* f, Vec2f* v);
+
+bool LoadVec2(File* f, Vec2i* v);
 }
 
 #endif
