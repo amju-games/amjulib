@@ -4,5 +4,18 @@
 
 // type
 room
+// Num textures
+2
+bean1.png
+bean4.png
+// (x, y) Size of grid
+7, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+1 1 1 1 1 1 1
+1 0 0 0 0 0 1
+1 0 0 0 0 0 1
+1 0 1 0 0 0 1
+1 1 1 1 1 1 1
 
 
