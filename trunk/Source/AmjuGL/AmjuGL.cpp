@@ -375,6 +375,8 @@ void AmjuGL::DrawTriList(const Tris& tris)
 {
   AMJU_CALL_STACK;
 
+  Assert(!tris.empty());
+
 #ifdef _DEBUG
   if (IsWireFrameMode())
   {
