@@ -53,6 +53,8 @@
 #define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
 
+#define PICK_DEBUG
+
 namespace Amju
 {
 void OnPauseButton()
@@ -154,8 +156,8 @@ std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
     GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
     drop->SetCommand(new CommandPickUp(f, false));
 
-    GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
-    rotate->SetCommand(new CommandRotate(f));
+    //GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
+    //rotate->SetCommand(new CommandRotate(f));
 
     pickupComp->SetVisible(true);
   }
@@ -306,7 +308,9 @@ void GSMain::Update()
     "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
     UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
 
-  TheCogTestNag::Instance()->Update();
+  // This is to nag about cog tests -- but if it's a test day, you shouldn't be
+  // playing, right?
+  //TheCogTestNag::Instance()->Update();
 
   // Disable pause button if Lurk msg showing
   GuiButton* pauseButton = (GuiButton*)m_gui->GetElementByName("pause-button");
@@ -482,7 +486,8 @@ std::cout << *selectedObj << " does not have collision mesh.\n";
 #ifdef PICK_DEBUG
 std::cout << "Try to find point on terrain for this mouse pos.\n";
 #endif
-      gotpos = MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
+      gotpos = true;   //MouseToGroundPos(GetTerrain()->GetCollisionMesh(), mouseScreen, &pos);
+      pos = MouseToXZ(mouseScreen);
       m_menuObject = 0; // so we can now select an object again
     }
 

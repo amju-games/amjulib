@@ -193,18 +193,18 @@ Ve1Object* Player::GetCarrying()
   return m_carrying;
 }
 
-void Player::SetDir(float degs)
-{
-  Ve1ObjectChar::SetDir(degs);
-
-  // Makes AABBs inaccurate for long objects etc
-#ifdef ALLOW_ARBITRARY_ANGLES
-  if (m_carrying)
-  {
-    m_carrying->SetDir(degs);
-  }
-#endif
-}
+//void Player::SetDir(float degs)
+//{
+//  Ve1ObjectChar::SetDir(degs);
+//
+//  // Makes AABBs inaccurate for long objects etc
+//#ifdef ALLOW_ARBITRARY_ANGLES
+//  if (m_carrying)
+//  {
+//    m_carrying->SetDir(degs);
+//  }
+//#endif
+//}
 
 bool Player::IsLoggedIn() const
 {

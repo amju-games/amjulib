@@ -61,234 +61,234 @@ void Ve1Object::AddMenuItem(const std::string& text, GuiCommand* command)
   TheGSMain::Instance()->AddMenuItem(text, command);
 }
 
-float Ve1Object::GetDir() const
-{
-  return m_dir;
-}
+//float Ve1Object::GetDir() const
+//{
+//  return m_dir;
+//}
+//
+//void Ve1Object::SetDir(float degs)
+//{
+//  m_dir = degs;
+//
+//  // TODO Send this to DB
+//////  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
+//}
+//
+//void Ve1Object::SetDirToFace(GameObject* go)
+//{
+//  const Vec3f& v = go->GetPos();
+//  float degs = RadToDeg(atan2(v.x - m_pos.x, v.z - m_pos.z));
+//  m_dir = degs;
+//}
+//
+//void Ve1Object::TurnToFaceDir()
+//{
+//  Matrix mat;
+//  mat.RotateY(DegToRad(m_dirCurrent));
+//  mat.TranslateKeepRotation(m_pos);
+//  m_sceneNode->SetLocalTransform(mat);
+//
+//  static const float ROT_SPEED = 10.0f; // TODO CONFIG
+//  float dt = TheTimer::Instance()->GetDt();
+//  float angleDiff = m_dir - m_dirCurrent;
+//
+//  // Rotate to face m_dir, taking the shortest route (CW or CCW)
+//  if (fabs(angleDiff) < 10.0f)
+//  {
+//    m_dirCurrent = m_dir;
+//  }
+//  else
+//  {
+//    if (angleDiff < -180.0f)
+//    {
+//      m_dir += 360.0f;
+//    }
+//    else if (angleDiff > 180.0f)
+//    {
+//      m_dir -= 360.0f;
+//    }
+//    angleDiff = m_dir - m_dirCurrent;
+//
+//    if (m_dirCurrent > m_dir)
+//    {
+//      m_dirCurrent -= ROT_SPEED * dt * fabs(angleDiff);
+//    }
+//    else if (m_dirCurrent < m_dir)
+//    {
+//      m_dirCurrent += ROT_SPEED * dt * fabs(angleDiff);
+//    }
+//  }
+//}
 
-void Ve1Object::SetDir(float degs)
-{
-  m_dir = degs;
+//void Ve1Object::SetIsColliding(GameObject* collidingObject)
+//{
+//  m_collidingObject = collidingObject;
+//
+//  HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
+//  if (h)
+//  {
+//
+//////// TODO: fix how shadows and multiple collision meshes work. 
+//////// 
+////////std::cout << "Shadow: adding collision mesh for " << *collidingObject << "\n";
+//
+//    m_shadow->AddCollisionMesh(h->GetCollisionMesh());
+//  }
+//}
 
-  // TODO Send this to DB
-////  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), HEADING_KEY, ToString(degs));
-}
-
-void Ve1Object::SetDirToFace(GameObject* go)
-{
-  const Vec3f& v = go->GetPos();
-  float degs = RadToDeg(atan2(v.x - m_pos.x, v.z - m_pos.z));
-  m_dir = degs;
-}
-
-void Ve1Object::TurnToFaceDir()
-{
-  Matrix mat;
-  mat.RotateY(DegToRad(m_dirCurrent));
-  mat.TranslateKeepRotation(m_pos);
-  m_sceneNode->SetLocalTransform(mat);
-
-  static const float ROT_SPEED = 10.0f; // TODO CONFIG
-  float dt = TheTimer::Instance()->GetDt();
-  float angleDiff = m_dir - m_dirCurrent;
-
-  // Rotate to face m_dir, taking the shortest route (CW or CCW)
-  if (fabs(angleDiff) < 10.0f)
-  {
-    m_dirCurrent = m_dir;
-  }
-  else
-  {
-    if (angleDiff < -180.0f)
-    {
-      m_dir += 360.0f;
-    }
-    else if (angleDiff > 180.0f)
-    {
-      m_dir -= 360.0f;
-    }
-    angleDiff = m_dir - m_dirCurrent;
-
-    if (m_dirCurrent > m_dir)
-    {
-      m_dirCurrent -= ROT_SPEED * dt * fabs(angleDiff);
-    }
-    else if (m_dirCurrent < m_dir)
-    {
-      m_dirCurrent += ROT_SPEED * dt * fabs(angleDiff);
-    }
-  }
-}
-
-void Ve1Object::SetIsColliding(GameObject* collidingObject)
-{
-  m_collidingObject = collidingObject;
-
-  HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
-  if (h)
-  {
-
-////// TODO: fix how shadows and multiple collision meshes work. 
-////// 
-//////std::cout << "Shadow: adding collision mesh for " << *collidingObject << "\n";
-
-    m_shadow->AddCollisionMesh(h->GetCollisionMesh());
-  }
-}
-
-void Ve1Object::HandleFloor(CollisionMesh* m)
-{
-  // Find ground pos: either the building etc we are colliding with..
-  // Get closest Y value to current, not the highest or lowest
-  float groundY = m_pos.y;
-  float y = 0;
-  if (m->GetClosestY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y))
-  {
-    groundY = y;
-  }
-
-  if (m_pos.y < groundY)
-  {
-    float diff = groundY - m_pos.y;
-    static const float MAX_JUMP  = ROConfig()->GetFloat("ve1obj-max-jump", 20.0f);
-    if (diff < MAX_JUMP)
-      //||
-      //  !m->GetClosestLowerY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y)) // no floor lower than us
-    {
-      m_pos.y = groundY;
-      if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
-      {
-        ////  std::cout << "**BOUNCE**!?!?!?!\n";
-
-        m_vel.y *= -0.6f; // TODO CONFIG
-        m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
-      }
-      else
-      {
-        m_vel.y = 0; // ?
-        OnBounceStop();
-      }
-    }
-  }
-}
-
-bool Ve1Object::HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos)
-{
-  Vec3f dir = newPos - oldPos;
-  LineSeg seg(oldPos, newPos);
-
-  // Find all intersecting floor tris
-  CollisionMesh::Tris tris;
-  Capsule cap(seg, m_capsuleRadius); 
-
-  if (!m->Intersects(cap, &tris))
-  {
-    return false;
-  }
-
-  if (tris.empty())
-  {
-    // So Intersects() above should have returned false!?
-    Assert(0);
-    return false;
-  }
-
-  Mgc::Vector3 pt1(seg.p0.x, seg.p0.y, seg.p0.z);
-  Mgc::Vector3 pt2(seg.p1.x - seg.p0.x, seg.p1.y - seg.p0.y, seg.p1.z - seg.p0.z);
-  Mgc::Segment3 s;
-  s.Origin() = pt1;
-  s.Direction() = pt2;
-
-  // Iterate over tris - find intersection points. Keep track of the closest point to p0.
-  Vec3f closest = seg.p1;
-  float closestSqDist = (seg.p1 - seg.p0).SqLen();
-
-  int size = tris.size();
-
-#ifdef TERRAIN_DEBUG
-std::cout << "Found " << size << " tris....\n";
-#endif
-
-  bool foundOne = false;
-  Tri theTri;
-  for (int i = 0; i < size; i++)
-  {
-    const Tri& t = tris[i];
-
-    const Vec3f& a = t.m_verts[0];
-    const Vec3f& b = t.m_verts[1];
-    const Vec3f& c = t.m_verts[2];
-
-    // Skip tris facing away from us. This means the dot prod of normal and dir will be between 0 and 1.
-    Plane plane(a, b, c);
-    if (DotProduct(plane.Normal(),  dir) > 0)
-    {
-      continue;
-    }
-    // Skip ground planes
-    // TODO Should this match VERTICAL_Y in MouseToGroundPos() ??
-    static const float VERTICAL_Y = ROConfig()->GetFloat("vertical-y", 0.9f);
-    if (plane.B() >= VERTICAL_Y)
-    {
-      // Tri is more or less horizontal: don't treat as a wall
-      continue;
-    }
-
-#ifdef TERRAIN_DEBUG
-std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
-std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
-#endif
-
-    Mgc::Triangle3 tri;
-    tri.Origin() = Mgc::Vector3(a.x, a.y, a.z);
-    tri.Edge0() = Mgc::Vector3(b.x - a.x, b.y - a.y, b.z - a.z);
-    tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
-
-    float q = 0; // parameter along line seg 0..1
-
-#ifdef TERRAIN_DEBUG
-    float d =
-#endif
-    Mgc::SqrDistance(s, tri, &q);
-    Vec3f p = seg.p0 + q * (seg.p1 - seg.p0);
-
-#ifdef TERRAIN_DEBUG
-std::cout << "SqrDistance intersect: " << p << "\n";
-
-    // Dist d should be zero - the line seg intersects the tri.
-std::cout << "d=" << d << "... expecting zero.\n";
-#endif
-
-    // Get dist from p0 to p so we get closest tri along line seg.
-    float squareDist = (seg.p0 - p).SqLen(); // TODO or should that be p1 ?
-
-    if (squareDist < closestSqDist)
-    {
-      closestSqDist = squareDist;
-      closest = p;
-      foundOne = true;
-      theTri = t; // remember triangle for later
-    }
-  }
-
-  if (foundOne)
-  {
-    Vec3f norm = CrossProduct(theTri.m_verts[1] - theTri.m_verts[0], theTri.m_verts[2] - theTri.m_verts[0]);
-    if (norm.SqLen() > 1.0f)
-    {
-      norm.Normalise();
-      float dist = sqrt((oldPos - newPos).SqLen());
-      static const float EXTRA_PUSH = ROConfig()->GetFloat("extra-push", 1.1f);
-      m_pos += norm * dist * EXTRA_PUSH;
-    }
-    else
-    {
-std::cout << "Dodgy triangle in collision mesh ?\n";      
-    }
-  }
-
-  return foundOne;
-}
+//void Ve1Object::HandleFloor(CollisionMesh* m)
+//{
+//  // Find ground pos: either the building etc we are colliding with..
+//  // Get closest Y value to current, not the highest or lowest
+//  float groundY = m_pos.y;
+//  float y = 0;
+//  if (m->GetClosestY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y))
+//  {
+//    groundY = y;
+//  }
+//
+//  if (m_pos.y < groundY)
+//  {
+//    float diff = groundY - m_pos.y;
+//    static const float MAX_JUMP  = ROConfig()->GetFloat("ve1obj-max-jump", 20.0f);
+//    if (diff < MAX_JUMP)
+//      //||
+//      //  !m->GetClosestLowerY(Vec2f(m_pos.x, m_pos.z), m_pos.y, &y)) // no floor lower than us
+//    {
+//      m_pos.y = groundY;
+//      if (m_vel.y < BOUNCE_VEL) // less than i.e. more negative
+//      {
+//        ////  std::cout << "**BOUNCE**!?!?!?!\n";
+//
+//        m_vel.y *= -0.6f; // TODO CONFIG
+//        m_pos.y += m_vel.y * TheTimer::Instance()->GetDt(); // move up so not intersecting ground next frame
+//      }
+//      else
+//      {
+//        m_vel.y = 0; // ?
+//        OnBounceStop();
+//      }
+//    }
+//  }
+//}
+//
+//bool Ve1Object::HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos)
+//{
+//  Vec3f dir = newPos - oldPos;
+//  LineSeg seg(oldPos, newPos);
+//
+//  // Find all intersecting floor tris
+//  CollisionMesh::Tris tris;
+//  Capsule cap(seg, m_capsuleRadius); 
+//
+//  if (!m->Intersects(cap, &tris))
+//  {
+//    return false;
+//  }
+//
+//  if (tris.empty())
+//  {
+//    // So Intersects() above should have returned false!?
+//    Assert(0);
+//    return false;
+//  }
+//
+//  Mgc::Vector3 pt1(seg.p0.x, seg.p0.y, seg.p0.z);
+//  Mgc::Vector3 pt2(seg.p1.x - seg.p0.x, seg.p1.y - seg.p0.y, seg.p1.z - seg.p0.z);
+//  Mgc::Segment3 s;
+//  s.Origin() = pt1;
+//  s.Direction() = pt2;
+//
+//  // Iterate over tris - find intersection points. Keep track of the closest point to p0.
+//  Vec3f closest = seg.p1;
+//  float closestSqDist = (seg.p1 - seg.p0).SqLen();
+//
+//  int size = tris.size();
+//
+//#ifdef TERRAIN_DEBUG
+//std::cout << "Found " << size << " tris....\n";
+//#endif
+//
+//  bool foundOne = false;
+//  Tri theTri;
+//  for (int i = 0; i < size; i++)
+//  {
+//    const Tri& t = tris[i];
+//
+//    const Vec3f& a = t.m_verts[0];
+//    const Vec3f& b = t.m_verts[1];
+//    const Vec3f& c = t.m_verts[2];
+//
+//    // Skip tris facing away from us. This means the dot prod of normal and dir will be between 0 and 1.
+//    Plane plane(a, b, c);
+//    if (DotProduct(plane.Normal(),  dir) > 0)
+//    {
+//      continue;
+//    }
+//    // Skip ground planes
+//    // TODO Should this match VERTICAL_Y in MouseToGroundPos() ??
+//    static const float VERTICAL_Y = ROConfig()->GetFloat("vertical-y", 0.9f);
+//    if (plane.B() >= VERTICAL_Y)
+//    {
+//      // Tri is more or less horizontal: don't treat as a wall
+//      continue;
+//    }
+//
+//#ifdef TERRAIN_DEBUG
+//std::cout << "This tri: " << a << " ; " << b << " ; " << c << "\n";
+//std::cout << "Seg: " << seg.p0 << " - " << seg.p1 << "\n";
+//#endif
+//
+//    Mgc::Triangle3 tri;
+//    tri.Origin() = Mgc::Vector3(a.x, a.y, a.z);
+//    tri.Edge0() = Mgc::Vector3(b.x - a.x, b.y - a.y, b.z - a.z);
+//    tri.Edge1() = Mgc::Vector3(c.x - a.x, c.y - a.y, c.z - a.z);
+//
+//    float q = 0; // parameter along line seg 0..1
+//
+//#ifdef TERRAIN_DEBUG
+//    float d =
+//#endif
+//    Mgc::SqrDistance(s, tri, &q);
+//    Vec3f p = seg.p0 + q * (seg.p1 - seg.p0);
+//
+//#ifdef TERRAIN_DEBUG
+//std::cout << "SqrDistance intersect: " << p << "\n";
+//
+//    // Dist d should be zero - the line seg intersects the tri.
+//std::cout << "d=" << d << "... expecting zero.\n";
+//#endif
+//
+//    // Get dist from p0 to p so we get closest tri along line seg.
+//    float squareDist = (seg.p0 - p).SqLen(); // TODO or should that be p1 ?
+//
+//    if (squareDist < closestSqDist)
+//    {
+//      closestSqDist = squareDist;
+//      closest = p;
+//      foundOne = true;
+//      theTri = t; // remember triangle for later
+//    }
+//  }
+//
+//  if (foundOne)
+//  {
+//    Vec3f norm = CrossProduct(theTri.m_verts[1] - theTri.m_verts[0], theTri.m_verts[2] - theTri.m_verts[0]);
+//    if (norm.SqLen() > 1.0f)
+//    {
+//      norm.Normalise();
+//      float dist = sqrt((oldPos - newPos).SqLen());
+//      static const float EXTRA_PUSH = ROConfig()->GetFloat("extra-push", 1.1f);
+//      m_pos += norm * dist * EXTRA_PUSH;
+//    }
+//    else
+//    {
+//std::cout << "Dodgy triangle in collision mesh ?\n";      
+//    }
+//  }
+//
+//  return foundOne;
+//}
 
 bool Ve1Object::IsHidden() const
 {
@@ -322,26 +322,26 @@ void Ve1Object::SetSceneNode(SceneNode* n)
   m_sceneNode = n;
 }
 
-void Ve1Object::CreateEditNode()
-{
-  if (GetGameMode() == AMJU_MODE_EDIT && !m_sceneNode)
-  {
-    static const float XSIZE = 20.0f; // TODO CONFIG
-    static const float YSIZE = 40.0f;
-
-    m_sceneNode = new Ve1Node(this);
-    m_aabb.Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
-      m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
-    *(m_sceneNode->GetAABB()) = m_aabb;
-
-    SceneNode* name = new Ve1NameNode(this);
-    AABB aabb(-10000.0f, 10000.0f, -10000.0f, 10000.0f, -10000.0f, 10000.0f);
-    *(name->GetAABB()) = aabb;
-    m_sceneNode->AddChild(name);
-  }
-}
+//void Ve1Object::CreateEditNode()
+//{
+//  if (GetGameMode() == AMJU_MODE_EDIT && !m_sceneNode)
+//  {
+//    static const float XSIZE = 20.0f; // TODO CONFIG
+//    static const float YSIZE = 40.0f;
+//
+//    m_sceneNode = new Ve1Node(this);
+//    m_aabb.Set(
+//      m_pos.x - XSIZE, m_pos.x + XSIZE,
+//      m_pos.y, m_pos.y + YSIZE,
+//      m_pos.z - XSIZE, m_pos.z + XSIZE);
+//    *(m_sceneNode->GetAABB()) = m_aabb;
+//
+//    SceneNode* name = new Ve1NameNode(this);
+//    AABB aabb(-10000.0f, 10000.0f, -10000.0f, 10000.0f, -10000.0f, 10000.0f);
+//    *(name->GetAABB()) = aabb;
+//    m_sceneNode->AddChild(name);
+//  }
+//}
 
 void Ve1Object::Update()
 {
@@ -351,6 +351,7 @@ void Ve1Object::Update()
   {
     GameObject::Update();
 
+    /*
     // HACK: stop things falling down forever
     // Use min y of terrain AABB
     Terrain* t = GetTerrain();
@@ -362,8 +363,10 @@ void Ve1Object::Update()
         m_pos.y = y;
       }
     }
+    */
   }
 
+  /*
   if (m_inNewLocation > 0 && TerrainReady())
   {
     if (m_inNewLocation == 1)
@@ -374,6 +377,7 @@ void Ve1Object::Update()
 
     m_inNewLocation--;
   }
+  */
 }
 
 const Vec3f& Ve1Object::GetOldPos() const
@@ -507,7 +511,7 @@ ValMap* Ve1Object::GetValMap()
 
 void Ve1Object::OnLocationEntry()
 {
-  m_inNewLocation = 2;
+  ////m_inNewLocation = 2;
 
   if (m_sceneNode)
   {

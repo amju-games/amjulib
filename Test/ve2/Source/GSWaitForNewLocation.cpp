@@ -53,23 +53,24 @@ void GSWaitForNewLocation::Update()
   GSGui::Update();
 
   // New June 2013: don't download anything. Load game objects from file.
-  /*
+  // But we still have to wait for player, sigh
+  
   // Check for objects we are dependent on. When they are all present, we can go to main state.
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
 
-  bool terrainReady = TerrainReady();
+  //bool terrainReady = TerrainReady();
   bool playerReady = (TheGame::Instance()->GetGameObject(GetLocalPlayerId()) != 0);
   bool editMode = GetGameMode() == AMJU_MODE_EDIT;
 
   static int showStatus = ROConfig()->GetInt("new-location-show-status", 0);
   if (showStatus > 0)
   {
-    std::cout << "Terrain is " << (terrainReady ? "READY" : "NOT ready") 
+    std::cout //<< "Terrain is " << (terrainReady ? "READY" : "NOT ready") 
       << " player is " << (playerReady ? "READY" : "NOT ready") << "\n";
   }
 
-  if (terrainReady && (playerReady || editMode))
+  if (playerReady || editMode)
   {
     if (editMode)
     {
@@ -85,7 +86,6 @@ void GSWaitForNewLocation::Update()
       TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
     }
   }
-  */
 }
 
 void GSWaitForNewLocation::Draw()
@@ -121,7 +121,7 @@ void GSWaitForNewLocation::OnActive()
     Assert(0);
   }
 
-  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+//  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 } // namespace

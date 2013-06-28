@@ -109,12 +109,12 @@ void FoodManager::OnLocationEntry()
     f->SetId(id++);
 
     float s = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
-    Vec3f r(Rnd(-s, s), Rnd(0, s), Rnd(-s, s));
+    Vec3f r(Rnd(-s, s), 10, Rnd(-s, s));
     Vec3f p = GetPos() + r; 
-    if (TerrainReady())
-    {
-      GetTerrain()->GetCollisionMesh()->GetY(Vec2f(p.x, p.z), &p.y); // TODO TEMP TEST Set all food to y = 0
-    }
+    //if (TerrainReady())
+    //{
+    //  GetTerrain()->GetCollisionMesh()->GetY(Vec2f(p.x, p.z), &p.y); // TODO TEMP TEST Set all food to y = 0
+    //}
     f->SetPos(p);
     f->Load(0);
     TheGame::Instance()->AddGameObject(f);

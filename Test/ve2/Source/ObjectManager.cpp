@@ -627,10 +627,10 @@ void ObjectManager::OnObjectChangeLocation(int objId)
 std::cout << "Added game object " << go->GetId() << " (" << go->GetTypeName() << ") to our location (" << m_location << ")\n"; 
 #endif
 
-      if (GetGameMode() == AMJU_MODE_EDIT)
-      {
-        v->CreateEditNode();
-      }
+      //if (GetGameMode() == AMJU_MODE_EDIT)
+      //{
+      //  v->CreateEditNode();
+      //}
 
       v->OnLocationEntry();
     }
@@ -677,7 +677,7 @@ std::cout << "Er, setting location to current value!\n";
   ClearVe1SceneGraph();
 
   // Clear the current terrain, which is the important thing the new location must have!
-  ClearTerrain();
+//  ClearTerrain();
 
 //std::cout << " ..old location trashed, adding game objects in new location...\n";
 

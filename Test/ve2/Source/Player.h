@@ -23,7 +23,7 @@ public:
   virtual bool Load(File*);
 
   // Set dir of anything carried
-  virtual void SetDir(float degs);
+  //virtual void SetDir(float degs);
 
   // Add arrow to scene graph
   virtual void OnLocationEntry();

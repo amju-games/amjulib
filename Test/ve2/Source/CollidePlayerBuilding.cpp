@@ -13,7 +13,7 @@ void CollidePlayerBuilding(Player* player, Building* b)
     return;
   }
 
-  player->SetIsColliding(b);
+  //player->SetIsColliding(b);
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(

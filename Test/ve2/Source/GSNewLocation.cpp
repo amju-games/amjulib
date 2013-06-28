@@ -177,14 +177,14 @@ std::cout << "Attempting to load Location obj: " << pathFile << "\n";
   File::SetRoot(origRoot, "/");
 
   // TODO Create path + filename
-  if (GetTerrain())
-  {
-    GetTerrain()->SetMeshFilename(MakeLocDir() + "/" + m_objFile);
-  }
-  else
-  {
-    std::cout << "No terrain in this location!?!\n";
-  }
+  //if (GetTerrain())
+  //{
+  //  GetTerrain()->SetMeshFilename(MakeLocDir() + "/" + m_objFile);
+  //}
+  //else
+  //{
+  //  std::cout << "No terrain in this location!?!\n";
+  //}
 
   // When we re-enter location, we should load the new file.
   // Make sure file is not cached by ResourceManager
@@ -328,13 +328,13 @@ std::cout << "All uploaded, we are done here!\n";
     TheObjectManager::Instance()->TrashMap(); // shouldn't be necessary
 
     // Touch object
-    SendReqSetObjectFilenames(GetTerrain()->GetId(), dir + "/" + m_assetFilename, dir + "/" + m_dataFilename);
+//    SendReqSetObjectFilenames(GetTerrain()->GetId(), dir + "/" + m_assetFilename, dir + "/" + m_dataFilename);
 
     // Delete current terrain so we are forced to re-download
     TheObjectManager::Instance()->Clear(); 
     TheObjectUpdater::Instance()->Clear(); 
 
-    ClearTerrain(); // shouldn't be necessary
+//    ClearTerrain(); // shouldn't be necessary
 
     OnLocationCreated();
   }

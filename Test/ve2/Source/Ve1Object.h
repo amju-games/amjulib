@@ -72,7 +72,7 @@ public:
   bool IsPickable() const;
 
   // Create a visible scene node for Edit mode
-  void CreateEditNode();
+  //void CreateEditNode();
 
   // Call to set scene node, removing any old node from scene
   void SetSceneNode(SceneNode* n);
@@ -90,17 +90,17 @@ public:
   // Set direction which character should face - we rotate to face this
   //  direction over time - DEGREES
   void SetDirToFace(GameObject* go); // face this object
-  virtual void SetDir(float degs);
-  float GetDir() const;
+  //virtual void SetDir(float degs);
+  //float GetDir() const;
 
 protected:
   // Reduce difference between currentDir and dir (desired heading)
-  void TurnToFaceDir();
+  //void TurnToFaceDir();
 
   // Return true if we do respond to a wall collision (so should recalc heading)
-  bool HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
+  //bool HandleWalls(CollisionMesh* m, const Vec3f& oldPos, const Vec3f& newPos);
 
-  void HandleFloor(CollisionMesh* m);
+  //void HandleFloor(CollisionMesh* m);
   virtual void OnBounceStop() {}
 
 protected:

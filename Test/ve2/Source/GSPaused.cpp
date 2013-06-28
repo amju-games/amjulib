@@ -83,8 +83,8 @@ void GSPaused::OnActive()
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
   //m_gui->GetElementByName("reset-button")->SetEnabled(false); 
     //SetCommand(Amju::OnResetButton);
-  m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalendarButton);
-  m_gui->GetElementByName("achievements-button")->SetCommand(Amju::OnAchievementsButton);
+//  m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalendarButton);
+//  m_gui->GetElementByName("achievements-button")->SetCommand(Amju::OnAchievementsButton);
 }
 
 bool GSPaused::OnCursorEvent(const CursorEvent& ce)

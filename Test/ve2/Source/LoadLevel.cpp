@@ -1,7 +1,8 @@
-#include "LoadLevel.h"
 #include <Game.h>
 #include <GameObjectFactory.h>
 #include <File.h>
+#include "LoadLevel.h"
+#include "Ve1Object.h"
 
 namespace Amju
 {
@@ -27,6 +28,12 @@ bool LoadLevel(const std::string& filename)
       return false;
     }
     TheGame::Instance()->AddGameObject(go);
+    Ve1Object* v = dynamic_cast<Ve1Object*>(go);
+    Assert(v);
+    if (v)
+    {
+      v->OnLocationEntry();
+    }
   }
   return true;
 }
