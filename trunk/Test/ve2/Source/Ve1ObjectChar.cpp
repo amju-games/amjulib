@@ -128,10 +128,10 @@ void Ve1ObjectChar::SetEditMenu(GuiMenu* menu)
 void Ve1ObjectChar::Update()
 {
   // Not safe to do anything if the Terrain has not been created yet
-  if (!TerrainReady())
-  {
-    return;
-  }
+  //if (!TerrainReady())
+  //{
+  //  return;
+  //}
 
   /*
   // TODO Not if underwater ?
@@ -148,25 +148,25 @@ void Ve1ObjectChar::Update()
   }
 
   // Handle wall collisions with terrain and any building
-  if (HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos))
-  {
-    m_recalcHeading = true;
-  }
+  //if (HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos))
+  //{
+  //  m_recalcHeading = true;
+  //}
 
-  HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
-  if (h)
-  {
-    if (HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos))
-    {
-      m_recalcHeading = true;
-    }
-  }
+  //HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
+  //if (h)
+  //{
+  //  if (HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos))
+  //  {
+  //    m_recalcHeading = true;
+  //  }
+  //}
 
-  HandleFloor(GetTerrain()->GetCollisionMesh());
-  if (h)
-  {  
-    HandleFloor(h->GetCollisionMesh());
-  }
+  //HandleFloor(GetTerrain()->GetCollisionMesh());
+  //if (h)
+  //{  
+  //  HandleFloor(h->GetCollisionMesh());
+  //}
 
   // Recalc heading if we are not colliding
   if (m_collidingObject)
@@ -321,7 +321,7 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
     SetVel(-dir * SPEED);
 
     // Work out direction to face
-    SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
+    //SetDir(RadToDeg(atan2((double)m_vel.x, (double)m_vel.z)));
   }
   sqLenLastTime = sqLen;
 }

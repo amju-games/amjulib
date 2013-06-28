@@ -45,7 +45,7 @@ void Camera::Reset()
   if (m_target)
   {
     // Face player (or whatever) face on
-    yRotAuto = m_target->GetDir();
+//    yRotAuto = m_target->GetDir();
   }
   yRotUser = 0;
   leftDrag = false;

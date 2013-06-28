@@ -17,7 +17,7 @@ void CollidePlayerFurniture(Player* player, Furniture* f)
   // Move back away from furniture, and then adjust heading if moving.
 
 //  f->OnPlayerCollision(player);
-  player->SetIsColliding(f);
+//  player->SetIsColliding(f);
 
 //  CollideObjectFurniture(player, f);
 }

@@ -139,7 +139,7 @@ std::cout << "Got new object ID from server! " << id << "\n";
       pos.y = 1.0f; // TODO CONFIG
       go->SetPos(pos);
 
-      go->CreateEditNode();
+      //go->CreateEditNode();
 #endif
 
       Assert(go); // Typename should be from Factory, so Create should always succeed, right ?

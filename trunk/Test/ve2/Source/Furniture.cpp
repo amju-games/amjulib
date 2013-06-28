@@ -45,8 +45,8 @@ Furniture::Furniture()
 
 void Furniture::SetEditMenu(GuiMenu* menu)
 {
-  menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
-  menu->AddChild(new GuiMenuItem("Rotate", new CommandRotate(this)));
+  //menu->AddChild(new GuiMenuItem("Set obj mesh...", new SetObjMeshCommand(GetId())));
+  //menu->AddChild(new GuiMenuItem("Rotate", new CommandRotate(this)));
 }
 
 CollisionMesh* Furniture::GetCollisionMesh()
@@ -111,7 +111,7 @@ void Furniture::Update()
     // TODO recalc AABB for VFC and picking
   }
 
-  TurnToFaceDir(); // ?
+  //TurnToFaceDir(); // ?
 
   // If we got moved or rotated, transform Collision Mesh and recalc bounding box
   if ((m_pos - m_collMeshPos).SqLen() > 0.1f || fabs(m_collMeshRot - m_dir) > 0.1f)
@@ -324,22 +324,22 @@ bool CommandPickUp::Do()
   return false;
 }
 
-CommandRotate::CommandRotate(Furniture* f) : m_f(f) {}
-
-bool CommandRotate::Do()
-{
-  // TODO Rotation angle:
-  // For crates etc, any angle is ok.
-  // For fences, AABBs are wrong for non-90 degrees. But we are using collision meshes
-  //  which are super accuate.
-  
-  // OK, using 90 degs so AABBs are not inaccurate for picking
-  m_f->SetDir(m_f->GetDir() + 90.0f); 
-
-  TheGSMain::Instance()->ClearContextMenu();
-
-  return false;
-}
+//CommandRotate::CommandRotate(Furniture* f) : m_f(f) {}
+//
+//bool CommandRotate::Do()
+//{
+//  // TODO Rotation angle:
+//  // For crates etc, any angle is ok.
+//  // For fences, AABBs are wrong for non-90 degrees. But we are using collision meshes
+//  //  which are super accuate.
+//  
+//  // OK, using 90 degs so AABBs are not inaccurate for picking
+//  m_f->SetDir(m_f->GetDir() + 90.0f); 
+//
+//  TheGSMain::Instance()->ClearContextMenu();
+//
+//  return false;
+//}
 
 void Furniture::SetMenu(GuiMenu* menu)
 {

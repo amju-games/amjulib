@@ -32,21 +32,21 @@ GameObject* CreateTerrain()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Terrain::TYPENAME, CreateTerrain);
 
-Terrain* GetTerrain()
-{
-  Assert(currentTerrain);
-  return currentTerrain;
-}
-
-void ClearTerrain()
-{
-  currentTerrain = 0;
-}
-
-bool TerrainReady()
-{
-  return (currentTerrain != 0);
-}
+//Terrain* GetTerrain()
+//{
+//  Assert(currentTerrain);
+//  return currentTerrain;
+//}
+//
+//void ClearTerrain()
+//{
+//  currentTerrain = 0;
+//}
+//
+//bool TerrainReady()
+//{
+//  return (currentTerrain != 0);
+//}
 
 void Terrain::SetEditMenu(GuiMenu* menu)
 {
@@ -88,6 +88,10 @@ bool Terrain::Load(File* f)
 
 void Terrain::OnLocationEntry()
 {
+  return; // June 2013
+
+
+
   // Here we should already be loaded and ready to go.
   // Problem is other objects can have their OnLocationEntry() func called first.
   // It shouldn't matter what order this happens.

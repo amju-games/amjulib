@@ -20,6 +20,33 @@
 
 namespace Amju
 {
+// Find intersection of ouse line where Y = 0
+Vec3f MouseToXZ(const Vec2f& mouseScreen)
+{
+  Vec3f mouseWorldNear;
+  Vec3f mouseWorldFar;
+
+  Unproject(mouseScreen, 0, &mouseWorldNear);
+  Unproject(mouseScreen, 1, &mouseWorldFar);
+ 
+  Vec3f dir = mouseWorldFar - mouseWorldNear;
+
+  LineSeg seg(mouseWorldNear, mouseWorldFar);
+  // Find t in equn of line when y = 0
+  // Point p = p0 + t(p1 - p0) => t = (p - p0) / (p1 - p0)
+  // y = 0, so t = -p0.y / (p1.y - p0.y)
+  float m = seg.p1.y - seg.p0.y;
+  if (m == 0)
+  {
+    Assert(0);
+    return Vec3f();
+  }
+  float t = -seg.p0.y / m;
+  Assert(t >= 0);
+  Assert(t <= 1);
+  return seg.GetPoint(t);
+}
+
 bool MouseToGroundPos(const CollisionMesh* m, const Vec2f& mouseScreen, Vec3f* groundPos)
 {
   Vec3f mouseWorldNear;

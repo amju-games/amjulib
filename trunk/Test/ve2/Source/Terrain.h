@@ -47,9 +47,9 @@ protected:
 };
 
 // Get the Terrain for the current location for this client
-Terrain* GetTerrain();
-void ClearTerrain(); // when we leave current location
-bool TerrainReady(); // returns true when a Terrain exists (i.e. GetTerrain() is valid)
+//Terrain* GetTerrain();
+//void ClearTerrain(); // when we leave current location
+//bool TerrainReady(); // returns true when a Terrain exists (i.e. GetTerrain() is valid)
 
 }
 

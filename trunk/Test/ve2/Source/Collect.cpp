@@ -168,19 +168,19 @@ void Collect::Update()
   Ve1Object::Update();
 
   // Handle wall collisions with terrain and any building
-  HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos);
+  //HandleWalls(GetTerrain()->GetCollisionMesh(), m_oldPos, m_pos);
 
-  HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
-  if (h)
-  {
-    HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos);
-  }
+  //HasCollisionMesh* h = dynamic_cast<HasCollisionMesh*>(m_collidingObject);
+  //if (h)
+  //{
+  //  HandleWalls(h->GetCollisionMesh(), m_oldPos, m_pos);
+  //}
 
-  HandleFloor(GetTerrain()->GetCollisionMesh());
-  if (h)
-  {
-    HandleFloor(h->GetCollisionMesh());
-  }
+  //HandleFloor(GetTerrain()->GetCollisionMesh());
+  //if (h)
+  //{
+  //  HandleFloor(h->GetCollisionMesh());
+  //}
 
   m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,

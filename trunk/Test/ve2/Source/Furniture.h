@@ -42,15 +42,15 @@ protected:
   float m_collMeshRot;
 };
 
-class CommandRotate : public GuiCommand
-{
-public:
-  CommandRotate(Furniture* f);
-  virtual bool Do();
-
-private:
-  Furniture* m_f;
-};
+//class CommandRotate : public GuiCommand
+//{
+//public:
+//  CommandRotate(Furniture* f);
+//  virtual bool Do();
+//
+//private:
+//  Furniture* m_f;
+//};
 
 }
 
