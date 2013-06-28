@@ -258,6 +258,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
     <ClCompile Include="..\..\..\..\Source\LayerGroup.cpp" />
+    <ClCompile Include="..\..\..\..\Source\LoadLevel.cpp" />
     <ClCompile Include="..\..\..\..\Source\LocalPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\LogOut.cpp" />
     <ClCompile Include="..\..\..\..\Source\LurkMsg.cpp" />
@@ -285,6 +286,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\ResearchCalendar.cpp" />
     <ClCompile Include="..\..\..\..\Source\ResizeHandler.cpp" />
     <ClCompile Include="..\..\..\..\Source\ROConfig.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Room.cpp" />
+    <ClCompile Include="..\..\..\..\Source\RoomNode.cpp" />
     <ClCompile Include="..\..\..\..\Source\SAPCollideFunc.cpp" />
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
@@ -399,6 +402,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
     <ClInclude Include="..\..\..\..\Source\LayerGroup.h" />
+    <ClInclude Include="..\..\..\..\Source\LoadLevel.h" />
     <ClInclude Include="..\..\..\..\Source\LocalPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\LogInTime.h" />
     <ClInclude Include="..\..\..\..\Source\LogOut.h" />
@@ -430,6 +434,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\ResetPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\ResizeHandler.h" />
     <ClInclude Include="..\..\..\..\Source\ROConfig.h" />
+    <ClInclude Include="..\..\..\..\Source\Room.h" />
+    <ClInclude Include="..\..\..\..\Source\RoomNode.h" />
     <ClInclude Include="..\..\..\..\Source\SAPCollideFunc.h" />
     <ClInclude Include="..\..\..\..\Source\SaveConfig.h" />
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
