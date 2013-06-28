@@ -17,6 +17,12 @@ public:
 
   virtual void OnLocationEntry();
 
+private:
+  friend class RoomNode;
+
+  typedef std::vector<Vec2f> PosVec;
+  typedef std::map<std::string, PosVec> TileMap;
+  TileMap m_tilemap;
 };
 }
 
