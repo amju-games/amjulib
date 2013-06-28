@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "Food.h"
 #include "ROConfig.h"
+#include "LoadLevel.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -51,6 +52,8 @@ void GSWaitForNewLocation::Update()
 {
   GSGui::Update();
 
+  // New June 2013: don't download anything. Load game objects from file.
+  /*
   // Check for objects we are dependent on. When they are all present, we can go to main state.
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
@@ -82,6 +85,7 @@ void GSWaitForNewLocation::Update()
       TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
     }
   }
+  */
 }
 
 void GSWaitForNewLocation::Draw()
@@ -102,6 +106,22 @@ void GSWaitForNewLocation::OnActive()
   m_gui = LoadGui("gui-waitfornewlocation.txt");
   Assert(m_gui);
   GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancel);
+
+  // New June 2013: don't download anything. Load game objects from file.
+
+  // What's our new location?
+  int loc = GetLocalPlayerLocation();
+  // Load level (room) for this level
+  std::string filename = "rooms/room-" + ToString(loc) + ".txt";
+
+  // TODO Load one object at a time
+  if (!LoadLevel(filename))
+  {
+    // Serious problem, can't load level
+    Assert(0);
+  }
+
+  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 } // namespace

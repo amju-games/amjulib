@@ -70,11 +70,16 @@ void GSFileUpdateCheck::OnActive()
 
   m_gui->GetElementByName("skip-button")->SetCommand(Amju::OnSkip);
 
+  // New June 2013: Don't check for updated files. Just skip to next state.
+  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
+
+  /*
   // Create request
   // Url contains timestamp of last check
   std::string url = TheVe1ReqManager::Instance()->MakeUrl(FILE_UPDATE_CHECK);
   url += "&time=" + m_timestamp;
   TheVe1ReqManager::Instance()->AddReq(new FileUpdater(url));
+  */
 }
 
 } // namespace
