@@ -53,6 +53,8 @@ void StartUpAfterCreateWindow()
 
   Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
 
+  TheGame::Instance()->SetUpdateCopy(true);
+
   SoundManager* sm = TheSoundManager::Instance();
   sm->SetImpl(new BassSoundPlayer);
 

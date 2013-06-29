@@ -1,23 +1,23 @@
-// ROOM 1
+// ROOM 2
 // Version
 1
 
 // type
 room
 // Num textures
-2
-bean1.png
-bean4.png
+3
+bean5.png
+bg.png
+bg2.png
 // (x, y) Size of grid
 7, 5
 // Grid of tiles - numbers are zero-based indices into texture list
 // Split so we can have >10 tiles
 1 1 1 1 1 1 1
-1 0 0 0 0 0 1
-1 0 0 0 0 0 1
-1 0 1 0 0 0 1
+0 0 0 0 0 2 1
+0 0 0 2 0 0 0
+0 0 1 0 0 0 1
 1 1 1 1 1 1 1
 
 // Destinations N, S, E, W
-3, 0, 2, 0
-
+0, 0, 0, 1
