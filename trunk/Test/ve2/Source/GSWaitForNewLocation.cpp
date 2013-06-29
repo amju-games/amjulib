@@ -15,6 +15,7 @@
 #include "Food.h"
 #include "ROConfig.h"
 #include "LoadLevel.h"
+#include "Room.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -112,8 +113,8 @@ void GSWaitForNewLocation::OnActive()
   // What's our new location?
   int loc = GetLocalPlayerLocation();
   // Load level (room) for this level
-  std::string filename = "rooms/room-" + ToString(loc) + ".txt";
-
+  std::string filename = MakeRoomFilename(loc);
+  
   // TODO Load one object at a time
   if (!LoadLevel(filename))
   {

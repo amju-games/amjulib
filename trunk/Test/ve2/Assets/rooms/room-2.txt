@@ -14,10 +14,18 @@ bg2.png
 // Grid of tiles - numbers are zero-based indices into texture list
 // Split so we can have >10 tiles
 1 1 1 1 1 1 1
-0 0 0 0 0 2 1
-0 0 0 2 0 0 0
-0 0 1 0 0 0 1
+2 2 2 2 2 2 1
+2 2 2 2 2 2 2 
+2 1 2 2 1 2 1
 1 1 1 1 1 1 1
+
+// Obstacles grid
+3 3 3 0 3 3 3
+3 0 0 0 0 0 0
+3 0 0 0 0 0 0
+3 0 0 0 0 0 0
+3 3 3 3 3 3 3
+
 
 // Destinations N, S, E, W
 0, 0, 0, 1
