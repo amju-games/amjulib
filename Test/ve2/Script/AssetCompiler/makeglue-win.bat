@@ -15,8 +15,8 @@ del /S /Q %DEST_DIR%\*.*
 mkdir %DEST_DIR%
 mkdir %DEST_DIR%\characters\2d\
 mkdir %DEST_DIR%\font2d\
-mkdir %DEST_DIR%\obj\
-mkdir %DEST_DIR%\locations\location1\
+REM mkdir %DEST_DIR%\obj\
+REM mkdir %DEST_DIR%\locations\location1\
 mkdir %DEST_DIR%\Sound\
 mkdir %DEST_DIR%\rooms\
 
@@ -51,7 +51,7 @@ REM make glue file
 %GLUE_EXE% -c %GLUE_FILE%
 
 REM for each file, add to glue file.
-for %%f in (*.txt, *.png, characters\2d\*, font2d\*, obj\*, rooms\*, Sound\*) do %GLUE_EXE% -a %GLUE_FILE% %%f
+for %%f in (*.txt, *.png, characters\2d\*, font2d\*, rooms\*, Sound\*) do %GLUE_EXE% -a %GLUE_FILE% %%f
 
 
 REM Verify contents
