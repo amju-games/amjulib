@@ -55,6 +55,8 @@ public:
   // Set a font to display frame time
   void SetFrameTimeFont(Font*);
 
+  void SetUpdateCopy(bool);
+
 private:
   void UpdateState(); // go to new state if set
 
@@ -66,6 +68,11 @@ private:
   GameObjects m_objects;
 
   Font* m_font;
+
+  // If true, copy m_objects and iterate over the copy in Update().
+  // You would do this if updating objects could add or delete items
+  //  from the container.
+  bool m_updateCopy;
 };
 typedef Singleton<Game> TheGame;
 }

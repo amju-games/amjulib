@@ -27,6 +27,12 @@ Game::Game()
   m_pauseState = 0;
   m_newState = 0;
   m_font = 0;
+  m_updateCopy = false;
+}
+
+void Game::SetUpdateCopy(bool uc)
+{
+  m_updateCopy = uc;
 }
 
 void Game::SetFrameTimeFont(Font* f)
@@ -181,9 +187,27 @@ void Game::RunOneLoop()
 
 void Game::UpdateGameObjects()
 {
-  for (GameObjects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+  // TODO To be safe, we should copy the container of game objects, so
+  //  any updates which add or delete game objects do not invalidate the
+  //  iterator. But if this is expensive, leave it to the game-specific code
+  //  to sort out...
+
+  if (m_updateCopy)
   {
-    it->second->Update();
+    GameObjects objs(m_objects); // Yikes, but updating might remove or add objects
+
+    for (GameObjects::iterator it = objs.begin(); it != objs.end(); ++it)
+    {
+      it->second->Update();
+    }
+  }
+  else
+  {
+    // Updates won't add or delete elements, so iterate over original container 
+    for (GameObjects::iterator it = m_objects.begin(); it != m_objects.end(); ++it)
+    {
+      it->second->Update();
+    }
   }
 }
 
