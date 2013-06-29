@@ -5,18 +5,27 @@
 // type
 room
 // Num textures
-2
+3
 bean1.png
 bean4.png
+heart.png
 // (x, y) Size of grid
 7, 5
-// Grid of tiles - numbers are zero-based indices into texture list
-// Split so we can have >10 tiles
+// Grid of tiles - numbers are ONE-based indices into texture list
+// (0 means no tile here)
+// Split by spaces so we can have >10 tiles
+// Background grid
 1 1 1 1 1 1 1
-1 0 0 0 0 0 1
-1 0 0 0 0 0 1
-1 0 1 0 0 0 1
+1 2 2 2 2 2 1
+1 2 2 2 2 2 1
+1 2 2 2 2 2 1
 1 1 1 1 1 1 1
+// Obstacles grid
+3 3 3 0 3 3 3
+3 0 0 0 0 0 0
+3 0 0 0 0 0 0
+3 0 0 0 0 0 0
+3 3 3 3 3 3 3
 
 // Destinations N, S, E, W
 3, 0, 2, 0

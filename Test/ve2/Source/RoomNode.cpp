@@ -11,7 +11,7 @@ RoomNode::RoomNode(Room* room) : m_room(room)
 
 void RoomNode::Build()
 {
-  Vec2f size(100, 100); // = GetSize();
+  Vec2f size = m_room->m_tilesize;
   Vec2f pos(0, 0); // = GetCombinedPos();
 
   AmjuGL::Vert verts[4] = 
@@ -39,30 +39,43 @@ void RoomNode::Build()
 void RoomNode::Draw()
 {
   //AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  //AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+  AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_BLEND);
+
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::PushMatrix();
   AmjuGL::RotateX(-90);
 
-  for (Room::TileMap::iterator it = m_room->m_tilemap.begin(); it != m_room->m_tilemap.end(); ++it)
+  Vec2f size = m_room->m_tilesize;
+
+  for (int i = 0; i < 2; i++) // each tile map
   {
-    std::string t = it->first;
-
-    // TODO Check if this is badly inefficient
-    Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes(t);
-    Assert(tex);
-    tex->UseThisTexture();
-
-    Room::PosVec& posvec = it->second;
-    for (unsigned int i = 0; i < posvec.size(); i++)
+    if (i > 0)
     {
-      Vec2f pos = posvec[i];
-      AmjuGL::PushMatrix();
-      AmjuGL::Translate(pos.x * 100.0f, pos.y * -100.0f, 0);
-      AmjuGL::DrawTriList(m_tris);
-      AmjuGL::PopMatrix();
+      AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+    }
+
+    for (Room::TileMap::iterator it = m_room->m_tilemap[i].begin(); it != m_room->m_tilemap[i].end(); ++it)
+    {
+      std::string t = it->first;
+
+      // TODO Check if this is badly inefficient
+      Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes(t);
+      Assert(tex);
+      tex->UseThisTexture();
+
+      Room::PosVec& posvec = it->second;
+      for (unsigned int i = 0; i < posvec.size(); i++)
+      {
+        Vec2f pos = posvec[i];
+        AmjuGL::PushMatrix();
+        AmjuGL::Translate(pos.x * size.x, pos.y * -size.y, 0);
+        AmjuGL::DrawTriList(m_tris);
+        AmjuGL::PopMatrix();
+      }
     }
   }
 
   AmjuGL::PopMatrix();
+  AmjuGL::PopAttrib();
 }
 }

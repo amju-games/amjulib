@@ -13,10 +13,17 @@ ground2.png
 // Grid of tiles - numbers are zero-based indices into texture list
 // Split so we can have >10 tiles
 1 1 1 1 1 1 1
-1 0 0 0 0 0 1
-1 0 0 0 0 0 1
-1 0 1 0 0 0 1
-1 0 0 0 0 0 1
+1 1 1 1 1 1 1
+1 1 1 1 1 1 1
+1 1 1 1 1 1 1
+1 1 1 1 1 1 1
+
+// Obstacles grid
+2 2 2 0 0 0 0
+2 0 0 0 0 0 0
+0 0 0 2 0 0 0
+2 0 0 0 0 0 0
+0 0 0 2 2 0 0
 
 // Destinations N, S, E, W
 0, 1, 0, 0

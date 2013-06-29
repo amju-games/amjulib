@@ -16,6 +16,11 @@ Room* GetRoom()
   return s_room;
 }
 
+std::string MakeRoomFilename(int loc)
+{
+  return "rooms/room-" + ToString(loc) + ".txt";
+}
+
 GameObject* CreateRoom()
 {
   return new Room;
@@ -25,7 +30,39 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Room::TYPENAME, C
 
 Room::Room()
 {
-  m_tilesize = Vec2f(100, 100);
+  m_tilesize = Vec2f(50, 50);
+}
+
+Vec2f Room::GetSize() const
+{
+  return Vec2f(m_tilesize.x * m_gridsize.x, m_tilesize.y * m_gridsize.y);
+}
+
+static Vec2f GetRoomSize(int dest)
+{
+  // Expensive - only done when we are definitely changing room
+  std::string filename = MakeRoomFilename(dest);
+  File f;
+  if (!f.OpenRead(filename))
+  {
+    Assert(0);
+    return Vec2f();
+  }
+  std::string s;
+  if (!f.GetDataLine(&s))
+  {
+    Assert(0);
+    return Vec2f();
+  }
+  GameObject* go = TheGameObjectFactory::Instance()->Create(s);
+  Room* room = dynamic_cast<Room*>(go);
+  if (!room)
+  {
+    Assert(0);
+    return Vec2f();
+  }
+  room->Load(&f);
+  return room->GetSize();
 }
 
 void Room::Update()
@@ -53,7 +90,8 @@ void Room::Update()
         changeLoc = true;
         destLocation = w;
         destPos = pos;
-        destPos.x = east - smallDist; // TODO Assumes all rooms same size
+        Vec2f size = GetRoomSize(w); // get size of dest room
+        destPos.x = size.x - smallDist; 
       }
       else
       {
@@ -89,7 +127,7 @@ void Room::Update()
         changeLoc = true;
         destLocation = s;
         destPos = pos;
-        destPos.z = smallDist; // TODO Assumes all rooms same size
+        destPos.z = smallDist; 
       }
       else
       {
@@ -107,7 +145,8 @@ void Room::Update()
         changeLoc = true;
         destLocation = n;
         destPos = pos;
-        destPos.z = south - smallDist; 
+        Vec2f size = GetRoomSize(n); // Get size of dest room
+        destPos.z = size.y - smallDist; 
       }
       else
       {
@@ -143,8 +182,7 @@ bool Room::Load(File* f)
     return false;
   }
 
-  Strings texNames;
-  texNames.reserve(numTextures);
+  m_texNames.reserve(numTextures);
   std::string s;
 
   for (int i = 0; i < numTextures; i++)
@@ -154,7 +192,12 @@ bool Room::Load(File* f)
       f->ReportError("Expected texture name");
       return false;
     }
-    texNames.push_back(s);
+    if (!TheResourceManager::Instance()->GetRes(s))
+    {
+      f->ReportError("Not a valid texture name: " + s);
+      return false;
+    }
+    m_texNames.push_back(s);
   }
 
   if (!LoadVec2(f, &m_gridsize))
@@ -163,34 +206,14 @@ bool Room::Load(File* f)
     return false;
   }
 
-  for (int y = 0; y < m_gridsize.y; y++)
+  for (int i = 0; i < 2; i++)
   {
-    if (!f->GetDataLine(&s))
+    if (!LoadGrid(i, f))
     {
-      f->ReportError("Expected grid line " + ToString(y));
       return false;
-    }
-    Strings strs = Split(s, ' ');
-    if (strs.size() != m_gridsize.x)
-    {
-      f->ReportError("Grid size does not match tile data.");
-      return false;
-    }
-    for (int x = 0; x < m_gridsize.x; x++)
-    {
-      int t = ToInt(strs[x]);
-      if (t >= (int)texNames.size())
-      {
-        f->ReportError("Tile number too big: " + strs[x] + " in grid pos (" + ToString(x) + ", " + ToString(y) + ")");
-        return false;
-      }
-      std::string tex = texNames[t];
-
-      // Group all tiles with same texture
-      PosVec& posvec = m_tilemap[tex];
-      posvec.push_back(Vec2f((float)x, (float)y));
     }
   }
+
   // Load destination room numbers to NSEW
   if (!f->GetDataLine(&s))
   {
@@ -218,6 +241,45 @@ bool Room::Load(File* f)
     return false;
   }
 
+  return true;
+}
+
+bool Room::LoadGrid(int grid, File* f)
+{
+  std::string s;
+  for (int y = 0; y < m_gridsize.y; y++)
+  {
+    if (!f->GetDataLine(&s))
+    {
+      f->ReportError("Expected grid line " + ToString(y));
+      return false;
+    }
+    Strings strs = Split(s, ' ');
+    if (strs.size() != m_gridsize.x)
+    {
+      f->ReportError("Grid size does not match tile data.");
+      return false;
+    }
+    for (int x = 0; x < m_gridsize.x; x++)
+    {
+      int t = ToInt(strs[x]);
+      if (t == 0)
+      {
+        continue; // no tile here
+      }
+
+      if (t > (int)m_texNames.size())
+      {
+        f->ReportError("Tile number too big: " + strs[x] + " in grid pos (" + ToString(x) + ", " + ToString(y) + ")");
+        return false;
+      }
+      std::string tex = m_texNames[t - 1];
+
+      // Group all tiles with same texture
+      PosVec& posvec = m_tilemap[grid][tex];
+      posvec.push_back(Vec2f((float)x, (float)y));
+    }
+  }
   return true;
 }
 
