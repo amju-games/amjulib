@@ -38,9 +38,6 @@ void RoomNode::Build()
 
 void RoomNode::Draw()
 {
-//  Assert(m_texture);
-//  m_texture->UseThisTexture();
-
   //AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   //AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::PushMatrix();
