@@ -26,6 +26,17 @@ bg2.png
 3 0 0 0 0 0 0
 3 3 3 3 3 3 3
 
-
 // Destinations N, S, E, W
 0, 0, 0, 1
+
+baddie
+// Pos
+100, 0, 100
+// Tex
+skull2.png
+// Num cells
+1,1
+// Size
+80, 80
+// Damage to player on collision
+1
