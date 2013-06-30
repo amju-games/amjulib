@@ -301,6 +301,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\TitlePerson.cpp" />
+    <ClCompile Include="..\..\..\..\Source\UnCollide.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
     <ClCompile Include="..\..\..\..\Source\Useful.cpp" />
@@ -450,6 +451,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
     <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
+    <ClInclude Include="..\..\..\..\Source\UnCollide.h" />
     <ClInclude Include="..\..\..\..\Source\UploadNewContent.h" />
     <ClInclude Include="..\..\..\..\Source\UploadReq.h" />
     <ClInclude Include="..\..\..\..\Source\Useful.h" />
