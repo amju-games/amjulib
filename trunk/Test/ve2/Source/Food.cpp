@@ -109,7 +109,7 @@ void FoodManager::OnLocationEntry()
     f->SetId(id++);
 
     float s = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
-    Vec3f r(Rnd(-s, s), 10, Rnd(-s, s));
+    Vec3f r(Rnd(-s, s), 0, Rnd(-s, s));
     Vec3f p = GetPos() + r; 
     //if (TerrainReady())
     //{
