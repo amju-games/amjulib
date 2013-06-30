@@ -2,11 +2,11 @@
 #define GS_DEATH_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSMain.h"
+#include "GSGui.h"
 
 namespace Amju
 {
-class GSDeath : public GSMain
+class GSDeath : public GSGui
 {
 private:
   GSDeath();
@@ -15,6 +15,7 @@ private:
 public:
   virtual void Update();
   virtual void OnActive();
+  virtual void OnDeactive();
 
 };
 

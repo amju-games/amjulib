@@ -16,6 +16,8 @@ public:
   virtual bool Load(File*);
   virtual void SetMenu(GuiMenu* menu);
 
+  int GetDamage() const { return m_damage; }
+
 protected:
   int m_damage;
 

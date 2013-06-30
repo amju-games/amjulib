@@ -174,6 +174,10 @@ void GSMain::SetScore(int num)
   score = num;
 }
 
+void GSMain::SetHealth(int health)
+{
+}
+
 void GSMain::ResetHud()
 {
   score = 0;
