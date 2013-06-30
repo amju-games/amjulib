@@ -5,28 +5,59 @@
 // type
 room
 // Num textures
-3
-bean1.png
-bean4.png
-heart.png
+11
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-11
+ground3.png
+rock1.png
+rock2.png
+
 // (x, y) Size of grid
-7, 5
+// TODO Room 1 must be big enough for all players to start in
+9, 7
 // Grid of tiles - numbers are ONE-based indices into texture list
 // (0 means no tile here)
 // Split by spaces so we can have >10 tiles
 // Background grid
-1 1 1 1 1 1 1
-1 2 2 2 2 2 1
-1 2 2 2 2 2 1
-1 2 2 2 2 2 1
-1 1 1 1 1 1 1
+5  1  1  1  1  1  1  1  6
+4  9  9  9  9  9  9  9  3
+4  9  9  9  9  9  9  9  3
+4  9  9  9  9  9  9  9  3
+4  9  9  9  9  9  9  9  3
+4  9  9  9  9  9  9  9  3
+7  2  2  2  2  2  2  2  8
 // Obstacles grid
-3 3 3 0 3 3 3
-3 0 0 0 0 0 0
-3 0 0 0 0 0 0
-3 0 0 0 0 0 0
-3 3 3 3 3 3 3
+10 11 10 11 10 11 10 11 10
+11  0  0  0  0  0  0  0  0
+10  0  0  0  0  0  0  0  0
+11  0  0  0  0  0  0  0  0
+10  0  0  0  0  0  0  0  0
+11  0  0  0  0  0  0  0  0
+10 11 10 11 10 11 10 11 10
 
 // Destinations N, S, E, W
 3, 0, 2, 0
+
+baddie
+// Pos
+100, 0, 100
+// Tex
+skull2.png
+// Num cells
+1,1
+// Size
+80, 80
+// Damage to player on collision
+1
+
+
 
