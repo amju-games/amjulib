@@ -69,8 +69,10 @@ static Vec2f GetRoomSize(int dest)
 
 void Room::Update()
 {
-  float east = m_tilesize.x * m_gridsize.x;
-  float south = m_tilesize.y * m_gridsize.y;
+  float east = m_tilesize.x * m_gridsize.x * 0.5f;
+  float west = -east;
+  float south = m_tilesize.y * m_gridsize.y * 0.5f;
+  float north = -south;
 
   float smallDist = 20.0f; // TODO CONFIG
 
@@ -83,7 +85,7 @@ void Room::Update()
   if (p)
   {
     Vec3f pos = p->GetPos();
-    if (pos.x < 0)
+    if (pos.x < west)
     {
       int w = GetDest(AMJU_ROOM_W);
       if (w)
@@ -93,18 +95,7 @@ void Room::Update()
         destLocation = w;
         destPos = pos;
         Vec2f size = GetRoomSize(w); // get size of dest room
-        destPos.x = size.x - smallDist; 
-      }
-      else
-      {
-        // Stop player moving West
-        pos.x = 0;
-        p->SetPos(pos);
-
-        // Try smoothing jitter
-        Vec3f vel = p->GetVel();
-        vel.x = 0;
-        p->SetVel(vel);
+        destPos.x = size.x * 0.5f - smallDist; 
       }
     }
     else if (pos.x > east)
@@ -116,12 +107,8 @@ void Room::Update()
         changeLoc = true;
         destLocation = e;
         destPos = pos;
-        destPos.x = smallDist; 
-      }
-      else
-      {
-        pos.x = east;
-        p->SetPos(pos);
+        Vec2f size = GetRoomSize(e); // get size of dest room
+        destPos.x = size.x * -0.5f + smallDist; 
       }
     }
 
@@ -134,16 +121,11 @@ void Room::Update()
         changeLoc = true;
         destLocation = s;
         destPos = pos;
-        destPos.z = smallDist; 
-      }
-      else
-      {
-        // Stop player moving West
-        pos.z = south;
-        p->SetPos(pos);
+        Vec2f size = GetRoomSize(s); // Get size of dest room
+        destPos.z = size.y * -0.5f + smallDist; 
       }
     }
-    else if (pos.z < 0) // up, off top of room
+    else if (pos.z < north) // up, off top of room
     {
       int n = GetDest(AMJU_ROOM_N); 
       if (n)
@@ -153,12 +135,7 @@ void Room::Update()
         destLocation = n;
         destPos = pos;
         Vec2f size = GetRoomSize(n); // Get size of dest room
-        destPos.z = size.y - smallDist; 
-      }
-      else
-      {
-        pos.z = 0;
-        p->SetPos(pos);
+        destPos.z = size.y * 0.5f - smallDist; 
       }
     }
 
@@ -177,7 +154,8 @@ void Room::Update()
     }
 
     // Check for collision with obstacles layer (tilemap [1])
-    // TODO Another way could be to create an Obstacle game object for each tile
+    // (Another way could be to create an Obstacle game object for each tile,
+    //  but this is linear time anyway.)
     TileMap& tm = m_tilemap[1];
     for (TileMap::iterator it = tm.begin(); it != tm.end(); ++it)
     {
@@ -189,9 +167,10 @@ void Room::Update()
           0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
         if (aabb.Intersects(*(p->GetAABB())))
         {
+          // Slow down if in contact with obstacle
           Vec3f vel = p->GetVel();
-          vel *= 0.5f;
-          p->SetVel(vel); // TODO TEMP TEST
+          vel *= 0.5f; // TODO Config
+          p->SetVel(vel); 
 
           UnCollide(p, p->GetOldPos(), aabb);
         }
@@ -307,7 +286,9 @@ bool Room::LoadGrid(int grid, File* f)
 
       // Group all tiles with same texture
       PosVec& posvec = m_tilemap[grid][tex];
-      posvec.push_back(Vec2f((float)x, (float)y));
+      // Centre grid on origin
+      Vec2f tilepos((float)x - (float)m_gridsize.x * 0.5f, (float)y - (float)m_gridsize.y * 0.5f);
+      posvec.push_back(tilepos);
     }
   }
   return true;
