@@ -5,10 +5,7 @@
 
 namespace Amju
 {
-// NPCs which are obstacles in the game. Players can battle NPCs. If defeated, the Baddie
-//  can give a rewards to the player.
-
-class Baddie : public Ve1ObjectChar
+class Baddie : public Ve1Object
 {
 public:
   static const char* TYPENAME;
@@ -18,6 +15,13 @@ public:
   virtual void Update();
   virtual bool Load(File*);
   virtual void SetMenu(GuiMenu* menu);
+
+protected:
+  int m_damage;
+
+  // So players can kill baddies - TODO
+  int m_maxHealth;
+  int m_health;
 };
 }
 
