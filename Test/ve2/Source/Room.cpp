@@ -1,11 +1,13 @@
 #include <GameObjectFactory.h>
 #include <StringUtils.h>
 #include <LoadVec2.h>
+#include <AABB.h>
 #include "Room.h"
 #include "RoomNode.h"
 #include "Ve1SceneGraph.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
+#include "UnCollide.h"
 
 namespace Amju
 {
@@ -30,7 +32,7 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Room::TYPENAME, C
 
 Room::Room()
 {
-  m_tilesize = Vec2f(50, 50);
+  m_tilesize = Vec2f(100, 100);
 }
 
 Vec2f Room::GetSize() const
@@ -98,6 +100,11 @@ void Room::Update()
         // Stop player moving West
         pos.x = 0;
         p->SetPos(pos);
+
+        // Try smoothing jitter
+        Vec3f vel = p->GetVel();
+        vel.x = 0;
+        p->SetVel(vel);
       }
     }
     else if (pos.x > east)
@@ -165,8 +172,31 @@ void Room::Update()
       // Set new position immediately
       p->SetPos(destPos);
       p->MoveTo(destPos); // stop moving ?
+
+      return;
     }
 
+    // Check for collision with obstacles layer (tilemap [1])
+    // TODO Another way could be to create an Obstacle game object for each tile
+    TileMap& tm = m_tilemap[1];
+    for (TileMap::iterator it = tm.begin(); it != tm.end(); ++it)
+    {
+      Room::PosVec& posvec = it->second;
+      for (unsigned int i = 0; i < posvec.size(); i++)
+      {
+        Vec2f& pos = posvec[i];
+        AABB aabb(pos.x * m_tilesize.x, (pos.x + 1) * m_tilesize.x, 
+          0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
+        if (aabb.Intersects(*(p->GetAABB())))
+        {
+          Vec3f vel = p->GetVel();
+          vel *= 0.5f;
+          p->SetVel(vel); // TODO TEMP TEST
+
+          UnCollide(p, p->GetOldPos(), aabb);
+        }
+      }
+    }
   }
 }
 
