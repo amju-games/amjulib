@@ -6,25 +6,30 @@
 
 namespace Amju
 {
-static const char* FOOD_KEY = "food";
+////static const char* FOOD_KEY = "food";
+////
+////bool GetFoodCount(int* result)
+////{
+////  return GetPlayerCount(FOOD_KEY, result);
+////}
+////
+////bool ChangeFoodCount(int delta)
+////{
+////  return ChangePlayerCount(FOOD_KEY, delta);
+////}
+////
+////
+////static const char* STAMINA_KEY = "stamina";
+////
+////bool GetHeartCount(int* result)
+////{
+////  return GetPlayerCount(STAMINA_KEY, result);
+////}
+////bool ChangeHeartCount(int delta)
+////{
+////  return ChangePlayerCount(STAMINA_KEY, delta);
+////}
 
-bool GetFoodCount(int* result)
-{
-  return GetPlayerCount(FOOD_KEY, result);
-}
-
-bool ChangeFoodCount(int delta)
-{
-  return ChangePlayerCount(FOOD_KEY, delta);
-}
-
-
-static const char* STAMINA_KEY = "stamina";
-
-bool GetHeartCount(int* result)
-{
-  return GetPlayerCount(STAMINA_KEY, result);
-}
 
 bool GetPlayerCount(const std::string& key, int* result)
 {
@@ -53,11 +58,6 @@ public:
     std::cout << "Successfully sent change!\n";
   }
 };
-
-bool ChangeHeartCount(int delta)
-{
-  return ChangePlayerCount(STAMINA_KEY, delta);
-}
 
 bool ChangePlayerCount(const std::string& key, int delta)
 {

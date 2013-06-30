@@ -29,8 +29,8 @@ public:
 
 protected:
   // Check if the response tells us to create collectables
-  void CheckCollects();
-  void CheckCollects2d();
+//  void CheckCollects();
+//  void CheckCollects2d();
 
 protected:
   PXml m_xml;

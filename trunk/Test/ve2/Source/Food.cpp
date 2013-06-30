@@ -14,6 +14,7 @@
 #include "ROConfig.h"
 #include "Sprite.h"
 #include "Terrain.h"
+#include "GameConsts.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -102,7 +103,7 @@ void FoodManager::OnLocationEntry()
   // else... ????
 
   // Create Food cells
-  static int id = 20000;
+  static int id = FOOD_START_ID;
   for (int i = 0; i < 10; i++)
   {
     Food* f = new Food;

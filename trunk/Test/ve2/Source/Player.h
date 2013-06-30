@@ -71,7 +71,7 @@ protected:
 
   bool m_isLocal;
   bool m_isLoggedIn;
-  bool m_isDead; // if so, must go back to spaceship
+  bool m_isDead; // if so, must go back to start location
 
   int m_lastFoodCount;
   int m_totalFoods; // total num Food cells brought to spaceship - -1 until set from server

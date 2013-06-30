@@ -424,7 +424,7 @@ public:
     // We have successfully updated the server. 
     TheObjectUpdater::Instance()->HintCheckForUpdates();   
 
-    CheckCollects();
+    //CheckCollects();
   }
 };
 
