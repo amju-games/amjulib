@@ -888,7 +888,7 @@ void GSEdit::CreateContextMenu()
     //?m_menu->Clear(); 
 
     m_menu->AddChild(new GuiMenuItem("Set properties...", new SetPropsCommand(obj->GetId())));
-    obj->SetEditMenu(m_menu); // add type-specific options to menu
+    //obj->SetEditMenu(m_menu); // add type-specific options to menu
     m_menu->AddChild(new GuiMenuItem("Delete this object", new DelObjCommand(obj->GetId())));
   }
   else

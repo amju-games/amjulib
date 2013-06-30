@@ -21,7 +21,7 @@ public:
 std::cout << GetResult().GetString() << "\n";
 
     m_opponent->ShowAttacked();
-    CheckCollects();
+    //CheckCollects();
   }
 
 private:

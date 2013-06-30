@@ -138,34 +138,34 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
 
 }
 
-void GSMain::ShowDropButton(Furniture* f, bool show)
-{
-  return; // Don't like, not required..?
-
-std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
-
-  if (!m_gui)
-  {
-    return; // TODO TEMP TEST - HACK, shouldn't get here
-  }
-
-  GuiButton* pickupComp = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
-
-  if (show)
-  {
-    GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
-    drop->SetCommand(new CommandPickUp(f, false));
-
-    //GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
-    //rotate->SetCommand(new CommandRotate(f));
-
-    pickupComp->SetVisible(true);
-  }
-  else
-  {
-    pickupComp->SetVisible(false);
-  }
-}
+//void GSMain::ShowDropButton(Furniture* f, bool show)
+//{
+//  return; // Don't like, not required..?
+//
+//std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
+//
+//  if (!m_gui)
+//  {
+//    return; // TODO TEMP TEST - HACK, shouldn't get here
+//  }
+//
+//  //GuiButton* pickupComp = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
+//
+//  if (show)
+//  {
+//    GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
+//    drop->SetCommand(new CommandPickUp(f, false));
+//
+//    //GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
+//    //rotate->SetCommand(new CommandRotate(f));
+//
+//    pickupComp->SetVisible(true);
+//  }
+//  else
+//  {
+//    pickupComp->SetVisible(false);
+//  }
+//}
 
 static int score = 0;
 
@@ -342,11 +342,11 @@ void GSMain::Update()
   TheLurker::Instance()->Update();
 
   // Update hearts and fuel cells
-  GuiText* text1 = (GuiText*)GetElementByName(m_gui, "fuelcell-num");
+  GuiText* text1 = (GuiText*)GetElementByName(m_gui, "score-num");
   if (!text1) 
   {
     Assert(0);
-std::cout << "SetFuelCells: no fuelcell-num element\n";
+std::cout << "SetFuelCells: no score-num element\n";
     return;
   }
   text1->SetText(ToString(score));
@@ -710,8 +710,8 @@ void GSMain::OnActive()
   GuiButton* quitButton = (GuiButton*)m_gui->GetElementByName("quit-button");
   quitButton->SetCommand(Amju::OnQuitButton);
   
-  GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
-  drop->SetVisible(false); // hide drop button until we pick someting up
+  //GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
+  //drop->SetVisible(false); // hide drop button until we pick someting up
 
   if (GetGameMode() == AMJU_MODE_MULTI)
   {

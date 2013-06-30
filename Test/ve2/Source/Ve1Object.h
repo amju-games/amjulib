@@ -53,7 +53,7 @@ public:
 
   // Set edit mode menu appropriate to this type: this is for edit mode only.
   // Call base class for menu choices common to all types
-  virtual void SetEditMenu(GuiMenu*) = 0;
+//////  virtual void SetEditMenu(GuiMenu*) = 0;
 
   // Rets true if location has been set for this object
   bool LocationReady() const;

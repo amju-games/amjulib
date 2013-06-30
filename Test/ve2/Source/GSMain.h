@@ -55,7 +55,7 @@ public:
   void AddMenuItem(const std::string& text, GuiCommand* command);
 
   // Show button to drop carried item
-  void ShowDropButton(Furniture*, bool show); 
+  //void ShowDropButton(Furniture*, bool show); 
 
   void SetScore(int);
   void ResetHud();

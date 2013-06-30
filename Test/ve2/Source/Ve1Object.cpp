@@ -310,10 +310,6 @@ AABB* Ve1Object::GetAABB()
   return &m_aabb;
 }
 
-void Ve1Object::SetEditMenu(GuiMenu* menu)
-{
-}
-
 void Ve1Object::SetSceneNode(SceneNode* n)
 {
   // Remove any existing node from scene graph

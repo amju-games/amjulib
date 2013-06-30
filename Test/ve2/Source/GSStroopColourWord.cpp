@@ -105,7 +105,8 @@ void GSStroopColourWord::OnLeftRight(bool isLeftButton)
 {
   if (isLeftButton == m_leftIsCorrect)
   {
-    ChangeHeartCount(1);
+    // TODO How much score improvement?
+    ChangePlayerCount(SCORE_KEY, 100); //ChangeHeartCount(1);
     TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
     m_correct++;
   }

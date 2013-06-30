@@ -95,57 +95,57 @@ std::cout << "NET ERROR but non-critical: " << m_errorStr << " - request name: "
   }
 }
 
-void Ve1Req::CheckCollects2d()
-{
-  int n = m_xml.nChildNode();
-
-  for (int i = 1; i < n; i++)
-  {
-    PXml p = m_xml.getChildNode(i);
-    if (SafeStrCmp(p.getName(), "collect"))
-    {
-std::cout << "Found collect msg!!\n";
-      // format: <collect> <num/> <type/> <id/> </collect>
-      PXml ch = p.getChildNode(0);
-      if (!SafeStrCmp(ch.getName(), "num"))
-      {
-        m_errorStr += "bad collect element";
-        OnFailure();
-      }
-      int num = ToInt(ch.getText());
-      ChangeHeartCount(num);
-    }
-  }
-}
-
-void Ve1Req::CheckCollects()
-{
-  int n = m_xml.nChildNode();
-
-  for (int i = 1; i < n; i++)
-  {
-    PXml p = m_xml.getChildNode(i);
-    if (SafeStrCmp(p.getName(), "collect"))
-    {
-std::cout << "Found collect msg!!\n";
-      // format: <collect> <num/> <type/> <id/> </collect>
-      PXml ch = p.getChildNode(0);
-      if (!SafeStrCmp(ch.getName(), "num"))
-      {
-        m_errorStr += "bad collect element";
-        OnFailure();
-      }
-      int num = ToInt(ch.getText());
-      ch = p.getChildNode(1);
-      int type = ToInt(ch.getText());
-      ch = p.getChildNode(2);
-      int id = ToInt(ch.getText()); 
-      for (int j = 0; j < num; j++)
-      {
-        CreateCollect(type, id);
-      }
-    }
-  }
-}
+//void Ve1Req::CheckCollects2d()
+//{
+//  int n = m_xml.nChildNode();
+//
+//  for (int i = 1; i < n; i++)
+//  {
+//    PXml p = m_xml.getChildNode(i);
+//    if (SafeStrCmp(p.getName(), "collect"))
+//    {
+//std::cout << "Found collect msg!!\n";
+//      // format: <collect> <num/> <type/> <id/> </collect>
+//      PXml ch = p.getChildNode(0);
+//      if (!SafeStrCmp(ch.getName(), "num"))
+//      {
+//        m_errorStr += "bad collect element";
+//        OnFailure();
+//      }
+//      int num = ToInt(ch.getText());
+//      ChangeHeartCount(num);
+//    }
+//  }
+//}
+//
+//void Ve1Req::CheckCollects()
+//{
+//  int n = m_xml.nChildNode();
+//
+//  for (int i = 1; i < n; i++)
+//  {
+//    PXml p = m_xml.getChildNode(i);
+//    if (SafeStrCmp(p.getName(), "collect"))
+//    {
+//std::cout << "Found collect msg!!\n";
+//      // format: <collect> <num/> <type/> <id/> </collect>
+//      PXml ch = p.getChildNode(0);
+//      if (!SafeStrCmp(ch.getName(), "num"))
+//      {
+//        m_errorStr += "bad collect element";
+//        OnFailure();
+//      }
+//      int num = ToInt(ch.getText());
+//      ch = p.getChildNode(1);
+//      int type = ToInt(ch.getText());
+//      ch = p.getChildNode(2);
+//      int id = ToInt(ch.getText()); 
+//      for (int j = 0; j < num; j++)
+//      {
+//        CreateCollect(type, id);
+//      }
+//    }
+//  }
+//}
 
 }

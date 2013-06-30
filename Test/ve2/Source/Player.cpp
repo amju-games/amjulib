@@ -336,7 +336,15 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   static ChatConsole* cc = TheChatConsole::Instance();
   static GSMain* gsm = TheGSMain::Instance();
 
-  if (key == "loggedin")
+  if (key == SCORE_KEY)
+  {
+    if (IsLocalPlayer())
+    {
+      int score = ToInt(GetVal(SCORE_KEY));
+      gsm->SetScore(score); 
+    }
+  }
+  else if (key == "loggedin")
   {
     bool isLoggedIn = (val == "y");
     SetLoggedIn(isLoggedIn);
@@ -560,20 +568,20 @@ void Player::Update()
     }
   }
 
-  static GSMain* gsm = TheGSMain::Instance();
-  if (IsLocalPlayer())
-  {
-    GameMode gm = GetGameMode();
-    if (gm == AMJU_MODE_SINGLE)
-    {
-      // Score is food eaten
-      gsm->SetScore(m_stamina); // TODO
-    }
-    else if (gm == AMJU_MODE_MULTI)
-    {
-      // Score is food given + food recv ??
-      gsm->SetScore(m_stamina); // TODO
-    }
+  //static GSMain* gsm = TheGSMain::Instance();
+  //if (IsLocalPlayer())
+  //{
+  //  GameMode gm = GetGameMode();
+  //  if (gm == AMJU_MODE_SINGLE)
+  //  {
+  //    // Score is food eaten
+  //    gsm->SetScore(m_stamina); // TODO
+  //  }
+  //  else if (gm == AMJU_MODE_MULTI)
+  //  {
+  //    // Score is food given + food recv ??
+  //    gsm->SetScore(m_stamina); // TODO
+  //  }
 
 //    TheGSMain::Instance()->SetFoods(GetFoodRecvCount());
 
@@ -591,7 +599,7 @@ void Player::Update()
       m_isDead = true;
     }
 */
-  }
+//  }
 }
 
 class CommandAvatarMod : public GuiCommand
@@ -630,7 +638,7 @@ void Player::SetMenu(GuiMenu* menu)
     // If carrying, drop is option
     if (m_carrying)
     {
-      AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
+/////      AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
     }
   }
   else if (IsLoggedIn())

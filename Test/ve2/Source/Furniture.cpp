@@ -240,7 +240,7 @@ std::cout << *this << " Got drop msg; previous owner ID " << m_pickupId << "\n";
     {
       TheObjectUpdater::Instance()->SendPosUpdateReq(GetId(), m_pos, m_location);
       // Hide drop button
-      TheGSMain::Instance()->ShowDropButton(this, false);
+      //TheGSMain::Instance()->ShowDropButton(this, false);
 
       m_sceneNode->SetColour(Colour(1, 1, 1, 1));
       //m_sceneNode->SetBlended(false);
@@ -261,7 +261,7 @@ std::cout << *this << " got picked up by " << *go << "\n";
 std::cout << "That's me! Local player picked up this object!\n";
 
         // Show drop button
-        TheGSMain::Instance()->ShowDropButton(this, true);
+        //TheGSMain::Instance()->ShowDropButton(this, true);
 
         m_sceneNode->SetColour(Colour(1, 1, 1, 0.5f));
         //m_sceneNode->SetBlended(true);
@@ -286,43 +286,43 @@ std::cout << "Setting m_pickupId to " << pickupId << "\n";
   m_pickupId = pickupId;
 }
 
-CommandPickUp::CommandPickUp(Ve1Object* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
+//CommandPickUp::CommandPickUp(Ve1Object* f, bool takeNotDrop) : m_f(f), m_takeNotDrop(takeNotDrop) {}
 
-bool CommandPickUp::Do()
-{
-  // TODO This is special, the server must determine if OK - no other pick up is happening.
-  // I.e. it's not just a key/val pair, needs special case code.
-
-  if (m_takeNotDrop)
-  {
-    int cost = 10; // how many hearts it costs to lift this
-    // TODO TEMP TEST -- depends on mass of object
-
-    int hc = 0;
-    if (GetHeartCount(&hc))
-    {
-      if (hc <= cost)
-      {
-        std::string text = "Too heavy! You need more hearts!";
-        LurkMsg lm(GameLookup(text), Colour(1, 1, 1, 1), Colour(1, 0, 0, 1), AMJU_CENTRE); 
-        TheLurker::Instance()->Queue(lm);
-
-        return false;
-      }
-      else
-      {
-        ChangeHeartCount(-cost); 
-      }
-    }
-  }
-
-  TheObjectUpdater::Instance()->SendUpdateReq(
-    m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
-  
-  TheGSMain::Instance()->ClearContextMenu();
-
-  return false;
-}
+//bool CommandPickUp::Do()
+//{
+//  // TODO This is special, the server must determine if OK - no other pick up is happening.
+//  // I.e. it's not just a key/val pair, needs special case code.
+//
+//  if (m_takeNotDrop)
+//  {
+//    int cost = 10; // how many hearts it costs to lift this
+//    // TODO TEMP TEST -- depends on mass of object
+//
+//    int hc = 0;
+//    if (GetHeartCount(&hc))
+//    {
+//      if (hc <= cost)
+//      {
+//        std::string text = "Too heavy! You need more hearts!";
+//        LurkMsg lm(GameLookup(text), Colour(1, 1, 1, 1), Colour(1, 0, 0, 1), AMJU_CENTRE); 
+//        TheLurker::Instance()->Queue(lm);
+//
+//        return false;
+//      }
+//      else
+//      {
+//        ChangeHeartCount(-cost); 
+//      }
+//    }
+//  }
+//
+//  TheObjectUpdater::Instance()->SendUpdateReq(
+//    m_f->GetId(), SET_KEY("pickup"), (m_takeNotDrop ? ToString(GetLocalPlayerId()) : "0"));
+//  
+//  TheGSMain::Instance()->ClearContextMenu();
+//
+//  return false;
+//}
 
 //CommandRotate::CommandRotate(Furniture* f) : m_f(f) {}
 //
@@ -353,12 +353,12 @@ void Furniture::SetMenu(GuiMenu* menu)
     }
     else
     {
-      AddMenuItem("Pick up", new CommandPickUp(this, true));
+////      AddMenuItem("Pick up", new CommandPickUp(this, true));
     }
   }
   else if (m_pickupId == GetLocalPlayerId())
   {
-    AddMenuItem("Put down", new CommandPickUp(this, false));
+ ////   AddMenuItem("Put down", new CommandPickUp(this, false));
   }
 }
 

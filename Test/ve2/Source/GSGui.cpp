@@ -14,6 +14,7 @@
 #include "ROConfig.h"
 #include "LocalPlayer.h"
 #include "HeartCount.h"
+#include "GameConsts.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -149,7 +150,7 @@ void GSGui::UpdateHeartCount()
     if (text)
     {
       int h = 0;
-      if (GetHeartCount(&h))
+      if (GetPlayerCount(SCORE_KEY, &h))
       {
         text->SetText(ToString(h));
       }

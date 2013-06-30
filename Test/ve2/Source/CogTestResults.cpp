@@ -36,7 +36,7 @@ std::cout << "Store result req FAILED! for this res: "
     m_res->m_committed = true;
 
     //CheckCollects();
-    CheckCollects2d();
+    //CheckCollects2d();
   }
 
 private:
