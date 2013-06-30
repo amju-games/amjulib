@@ -336,6 +336,7 @@ Strings Split(const std::string& cs, char c)
 #endif 
       r.push_back(s.substr(0, i));
       s = s.substr(i + 1);
+      Trim(&s); // Allow whitespace, get rid of it here
     }
   }
   return r;
