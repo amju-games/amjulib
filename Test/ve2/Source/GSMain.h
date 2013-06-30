@@ -58,6 +58,7 @@ public:
   //void ShowDropButton(Furniture*, bool show); 
 
   void SetScore(int);
+  void SetHealth(int);
   void ResetHud();
 
 private:

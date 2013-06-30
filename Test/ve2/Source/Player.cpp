@@ -42,6 +42,8 @@
 #include "MsgManager.h"
 #include "GameMode.h"
 #include "GameConsts.h"
+#include "Baddie.h"
+#include "GSDeath.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -145,13 +147,16 @@ Player::Player()
   m_fadeTime = 0;
   m_carrying = 0;
 
-  m_lastFoodCount = -1;
+//  m_lastFoodCount = -1;
   m_isDead = false;
-  m_totalFoods = -1; // not set yet
+//  m_totalFoods = -1; // not set yet
 
   Ve1SpriteNode* sn = new Ve1SpriteNode;
   sn->SetObj(this);
   SetSceneNode(sn);
+
+  m_maxHealth = 3; // Default
+  m_health = m_maxHealth;
 }
 
 LayerSprite& Player::GetSprite() 
@@ -213,6 +218,11 @@ bool Player::IsLoggedIn() const
 
 bool Player::Load(File* f)
 {
+  m_maxHealth = 3; // Default until we get a new value from server
+  m_health = m_maxHealth;
+
+  TheGSMain::Instance()->SetHealth(m_health);
+
   return true; 
 
 
@@ -224,10 +234,10 @@ bool Player::Load(File* f)
   //PlayerSceneNode* psn = new PlayerSceneNode(this);
   //m_sceneNode = psn;
 
-  if (!m_shadow->Load(f))
-  {
-    return false;
-  }
+  //if (!m_shadow->Load(f))
+  //{
+  //  return false;
+  //}
 
   // Load arrow scene node
 /*
@@ -238,22 +248,22 @@ bool Player::Load(File* f)
 */
 
   // Particle effect when attacked, etc.
-  File fight;
-  if (!fight.OpenRead("fighteffect.txt"))
-  {
-    fight.ReportError("Failed to load effect");
-    return false;
-  }
+  //File fight;
+  //if (!fight.OpenRead("fighteffect.txt"))
+  //{
+  //  fight.ReportError("Failed to load effect");
+  //  return false;
+  //}
 
-  m_effect = new AttackEffect;
-  if (!m_effect->Load(&fight))
-  {
-    fight.ReportError("Failed to load effect");
-    return false;
-  }
-  m_effect->SetVisible(true);
+  //m_effect = new AttackEffect;
+  //if (!m_effect->Load(&fight))
+  //{
+  //  fight.ReportError("Failed to load effect");
+  //  return false;
+  //}
+  //m_effect->SetVisible(true);
 
-  return true;
+  //return true;
 }
 
 void Player::OnLocationExit()
@@ -797,8 +807,16 @@ void Player::OnCollideBaddie(Baddie* baddie)
   // Is it lethal? If so, die immediately
 
   // Lose some points
+  int damage = baddie->GetDamage();
+  m_health -= damage;
+
+  TheGSMain::Instance()->SetHealth(m_health);
 
   // Dead ?
+  if (m_health <= 0)
+  {
+    TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+  }
 }
 
 bool GetNameForPlayer(int objId, std::string* r)

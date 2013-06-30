@@ -73,11 +73,14 @@ protected:
   bool m_isLoggedIn;
   bool m_isDead; // if so, must go back to start location
 
-  int m_lastFoodCount;
-  int m_totalFoods; // total num Food cells brought to spaceship - -1 until set from server
+//  int m_lastFoodCount;
+//  int m_totalFoods; // total num Food cells brought to spaceship - -1 until set from server
 
   typedef std::deque<RCPtr<Ve1Object> > CarriedFood;
   CarriedFood m_carriedFood;
+
+  int m_maxHealth;
+  int m_health;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
