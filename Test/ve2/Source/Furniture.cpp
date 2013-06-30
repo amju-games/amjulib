@@ -89,9 +89,9 @@ void Furniture::Update()
 
   if (m_pickupId == 0)
   {
-    //Matrix m;
-    //m.Translate(m_pos);
-    //m_sceneNode->SetLocalTransform(m);
+    Matrix m;
+    m.Translate(m_pos);
+    m_sceneNode->SetLocalTransform(m);
   }
   else
   {
