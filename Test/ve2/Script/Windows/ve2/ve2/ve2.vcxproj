@@ -174,6 +174,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
     <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp" />
     <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BaddieNode.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\BroadcastConsole.cpp" />
     <ClCompile Include="..\..\..\..\Source\Building.cpp" />
@@ -322,6 +323,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\AttackEffect.h" />
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\Baddie.h" />
+    <ClInclude Include="..\..\..\..\Source\BaddieNode.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\BroadcastConsole.h" />
     <ClInclude Include="..\..\..\..\Source\Building.h" />
