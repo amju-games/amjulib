@@ -55,8 +55,10 @@ void StartUpAfterCreateWindow()
 
   TheGame::Instance()->SetUpdateCopy(true);
 
+#ifdef AMJU_USE_BASS
   SoundManager* sm = TheSoundManager::Instance();
   sm->SetImpl(new BassSoundPlayer);
+#endif
 
   // Too soon, assets not copied yet!!
   // Sound can drown out text-to-speech, so max vol is lower than 1.0
