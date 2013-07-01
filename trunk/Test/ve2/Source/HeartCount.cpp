@@ -55,7 +55,7 @@ public:
 
   void OnSuccess()
   {
-    std::cout << "Successfully sent change!\n";
+    std::cout << "Successfully sent change! " + m_url + "\n";
   }
 };
 
