@@ -277,6 +277,9 @@ void Player::OnLocationExit()
 
 void Player::OnLocationEntry()
 {
+  // Can't carry food across room boundary..??
+  m_carriedFood.clear();
+
   Ve1ObjectChar::OnLocationEntry();
 
 /*
