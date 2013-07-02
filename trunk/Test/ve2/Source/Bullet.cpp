@@ -1,3 +1,4 @@
+#include <Game.h>
 #include "Bullet.h"
 #include "GameConsts.h"
 #include "SpriteNode.h"
@@ -31,7 +32,7 @@ Bullet::Bullet()
   // Set ID
   static int id = BULLET_START_ID;
 
-std::cout << "New bullet: " << id << "\n";
+//std::cout << "New bullet: " << id << "\n";
 
   SetId(id++);
   BulletNode* bn = new BulletNode(this);
@@ -65,4 +66,9 @@ void Bullet::Update()
   }
 }
 
+void Bullet::Destroy()
+{
+  OnLocationExit();
+  TheGame::Instance()->EraseGameObject(GetId());
+}
 }
