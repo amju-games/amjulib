@@ -35,6 +35,7 @@ void UnCollide(GameObject* go, const Vec3f& oldPos, const AABB& aabb)
   {
     goPos.x += penDist.x;
   }
+  /*
   else if (oldBox.GetMax(1) < aabb.GetMin(1))
   {
     goPos.y -= penDist.y;
@@ -43,6 +44,7 @@ void UnCollide(GameObject* go, const Vec3f& oldPos, const AABB& aabb)
   {
     goPos.y += penDist.y;
   }
+  */
   else if (oldBox.GetMax(2) < aabb.GetMin(2))
   {
     goPos.z -= penDist.z;
