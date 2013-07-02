@@ -25,7 +25,7 @@ extern const char* FOOD_GIVEN_KEY;
 
 extern const int FOOD_START_ID;
 extern const int BADDDIE_START_ID;
-
+extern const int BULLET_START_ID;
 }
 
 #endif

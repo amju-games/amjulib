@@ -60,6 +60,8 @@ public:
   void OnCollidePlayer(Player* otherPlayer);
   void OnCollideBaddie(Baddie* baddie);
 
+  void ShootBaddie(Baddie* baddie);
+
 private:
   void EatFood(Food*);
 

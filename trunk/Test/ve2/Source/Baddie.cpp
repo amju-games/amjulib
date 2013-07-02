@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <Game.h>
 #include <GameObjectFactory.h>
 #include <File.h>
 #include <Texture.h>
@@ -100,6 +101,11 @@ bool Baddie::Load(File* f)
     return false;
   }
 
+  // TODO Load max health
+
+  m_maxHealth = 10; 
+  m_health = m_maxHealth;
+
   BaddieNode* bn = new BaddieNode(this, tex, cells.x, cells.y, size.x * 0.5f, size.y * 0.5f);
 
   SetSceneNode(bn);
@@ -134,8 +140,32 @@ bool Baddie::Load(File* f)
 
 void Baddie::SetMenu(GuiMenu* menu)
 {
+  // No menu, but fire at it
+
+  Player* p = GetLocalPlayer();
+  if (p)
+  {
+    p->ShootBaddie(this);
+  }
+
   //menu->AddChild(new GuiMenuItem("FIGHT!!", new CommandFight(this))); 
 ////  AddMenuItem("FIGHT!!", new CommandFight(this)); 
+}
+
+void Baddie::OnCollideBullet()
+{
+  // Take damage - destroy if health <= 0
+  m_health--;
+
+  float f = (float)m_health / (float)m_maxHealth;
+  Colour col(f, f, f, 1);
+  m_sceneNode->SetColour(col);
+
+  if (m_health <= 0)
+  {
+    OnLocationExit();
+    TheGame::Instance()->EraseGameObject(GetId());
+  }
 }
 
 }

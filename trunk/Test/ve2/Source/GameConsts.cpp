@@ -23,7 +23,8 @@ const char* FOOD_RECEIVED_KEY = "food-recv";
 const char* FOOD_GIVEN_KEY = "food-given";
 
 // IDs for local game objects
-const int FOOD_START_ID = 20000;
-const int BADDDIE_START_ID = 30000;
+const int FOOD_START_ID =    200000;
+const int BADDDIE_START_ID = 300000;
+const int BULLET_START_ID =  400000;
 
 }

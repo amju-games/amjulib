@@ -21,6 +21,8 @@ public:
   void Update();
   bool Load(const std::string& texFilename, int numCellsX, int numCellsY, float cellSizeX, float cellSizeY);
 
+  const Vec2f& GetSize() const;
+
 protected:
   TextureSequence m_seq;
   int m_minCellNum;
@@ -28,6 +30,7 @@ protected:
   int m_cellNum;
   float m_maxCellTime;
   float m_cellTime;
+  Vec2f m_size;
 };
 
 // Sprite composed of layers

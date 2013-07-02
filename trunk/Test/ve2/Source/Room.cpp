@@ -33,6 +33,7 @@ static bool registered = TheGameObjectFactory::Instance()->Add(Room::TYPENAME, C
 Room::Room()
 {
   m_tilesize = Vec2f(100, 100);
+  m_isPickable = false;
 }
 
 Vec2f Room::GetSize() const

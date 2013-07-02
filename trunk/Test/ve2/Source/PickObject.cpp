@@ -13,7 +13,7 @@
 #include "Useful.h"
 #include <AmjuFinal.h>
 
-//#define PICK_DEBUG
+#define PICK_DEBUG
 
 namespace Amju
 {

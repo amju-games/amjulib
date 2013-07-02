@@ -48,6 +48,7 @@
 #include "CommandPickup.h"
 #include "BroadcastConsole.h"
 #include "Kb.h"
+#include "Baddie.h"
 #include <AmjuFinal.h>
 
 #define SHOW_NUM_ERRORS
@@ -441,6 +442,14 @@ std::cout << "Selected " << *selectedObj << "\n";
     {
       return;
     }
+
+    // We don't want to run into a baddie if we clicked on it! We want to shoot it!
+    if (dynamic_cast<Baddie*>(selectedObj))
+    {
+std::cout << "Clicked on baddie!\n";
+      return;
+    }
+
     // No menu. Find point on mesh, and go to that position.
 
     if (selectedObj != m_menuObject)
@@ -693,7 +702,7 @@ void GSMain::OnActive()
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
 #endif
 
-  static const bool showAABB = (ROConfig()->GetValue("show-aabb", "n") == "y");
+  static const bool showAABB = true; // (ROConfig()->GetValue("show-aabb", "n") == "y");
   SceneNode::SetGlobalShowAABB(showAABB);
 
   GSBase::OnActive();

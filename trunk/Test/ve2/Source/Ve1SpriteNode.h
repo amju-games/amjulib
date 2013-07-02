@@ -6,6 +6,8 @@
 
 namespace Amju
 {
+// Scene Node type for players - layers of clothes etc, with animated eyes.
+// TODO Rename this type, to perhaps PlayerNode.
 class Ve1SpriteNode : public Ve1Character
 {
 public:
