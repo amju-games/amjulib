@@ -94,8 +94,6 @@ void LayerSprite::AddLayer(const SpriteLayer& layer)
 
 void LayerSprite::DrawLayers(const Vec2f& pos, float size)
 {
-  //AmjuGL::PushMatrix();
-
   AmjuGL::Tri t[2];
   m_seq.MakeTris(m_cellNum, size, t, pos.x, pos.y);
   AmjuGL::Tris tris;
@@ -116,12 +114,10 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
     AmjuGL::SetTextureFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
  
     PushColour();
-    //MultColour(layer.colour);
-    AmjuGL::SetColour(layer.colour);
+    MultColour(layer.colour);
     AmjuGL::DrawTriList(tris);
     PopColour();  
   }
-  //AmjuGL::PopMatrix();
 }
 
 void LayerSprite::SetLayerTex(int layer, int texIndex)
