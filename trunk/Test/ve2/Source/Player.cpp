@@ -46,6 +46,7 @@
 #include "Baddie.h"
 #include "GSDeath.h"
 #include "Bullet.h"
+#include "UnCollide.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -159,6 +160,7 @@ Player::Player()
 
   m_maxHealth = 3; // Default
   m_health = m_maxHealth;
+  m_hitTimer = 0;
 }
 
 LayerSprite& Player::GetSprite() 
@@ -499,9 +501,20 @@ void Player::SetLoggedIn(bool loggedIn)
 
 void Player::Update()
 {
+  float dt = TheTimer::Instance()->GetDt();
+
   if (m_isLoggedIn)
   {
     Ve1ObjectChar::Update();
+
+    if (m_hitTimer > 0)
+    {
+      Matrix m;
+      const float JIGGLE = 2.0f;
+      Vec3f jiggle(Rnd(-JIGGLE, JIGGLE), 0, Rnd(-JIGGLE, JIGGLE));
+      m.Translate(jiggle);
+      m_sceneNode->MultLocalTransform(m);
+    }
   }
   else if (m_sceneNode)
   {
@@ -510,7 +523,7 @@ void Player::Update()
     m_sceneNode->SetLocalTransform(m);
 
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
-    m_shadow->SetAABB(*(m_sceneNode->GetAABB()));
+    //m_shadow->SetAABB(*(m_sceneNode->GetAABB()));
 
     static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 40.0f);
     static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 10.0f);
@@ -554,8 +567,26 @@ void Player::Update()
 
   if (m_sceneNode)
   {
-    // Set shadow AABB to same as Scene Node so we don't cull it by mistake
+    // Set name tag AABB to same as Scene Node so we don't cull it by mistake
     *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
+
+    Colour col(1, 1, 1, 1);
+    if (m_hitTimer > 0)
+    {
+      m_hitTimer -= dt;
+      col = Colour(1, 0, 0, 1);
+      if (m_hitTimer <= 0)
+      {
+        m_hitTimer = 0;
+
+        // Dead ?
+        if (m_health <= 0)
+        {
+          TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+        }
+      }
+    }
+    m_sceneNode->SetColour(col);
   }
 
   if (m_ignorePortalId != -1)
@@ -809,6 +840,12 @@ void Player::OnCollideBaddie(Baddie* baddie)
   // Only worry about the local player
   Assert(IsLocalPlayer());
 
+  if (m_hitTimer > 0)
+  {
+    // Already hit
+    return;
+  }
+
   // Is it lethal? If so, die immediately
 
   // Lose some points
@@ -817,11 +854,17 @@ void Player::OnCollideBaddie(Baddie* baddie)
 
   TheGSMain::Instance()->SetHealth(m_health);
 
-  // Dead ?
-  if (m_health <= 0)
-  {
-    TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
-  }
+  static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
+  m_hitTimer = MAX_HIT_TIME;  
+  // Check for death in update, after we have shown the effect of the hit.
+
+  // Can't go through - it may be acting as an obstacle
+  UnCollide(this, GetOldPos(), (*baddie->GetAABB()));
+
+  // Slow down
+  Vec3f vel = GetVel();
+  vel *= 0.5f; // TODO Config
+  SetVel(vel); 
 }
 
 void Player::ShootBaddie(Baddie* baddie)
