@@ -14,6 +14,9 @@ public:
   virtual const char* GetTypeName() const;
 
   virtual void Update();
+
+  // Call if bullet hits something or goes off world
+  void Destroy();
 };
 }
 

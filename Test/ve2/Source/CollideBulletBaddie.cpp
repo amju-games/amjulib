@@ -17,8 +17,7 @@ void CollideBulletBaddie(Bullet* bullet, Baddie* baddie)
   baddie->OnCollideBullet();
 
   // Get rid of bullet
-  bullet->OnLocationExit();
-  TheGame::Instance()->EraseGameObject(bullet->GetId());
+  bullet->Destroy();
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
