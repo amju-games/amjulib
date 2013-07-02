@@ -71,6 +71,11 @@ void Sprite::Update()
   }
 }
 
+const Vec2f& Sprite::GetSize() const
+{
+  return m_size;
+}
+
 bool Sprite::Load(const std::string& texFilename, int numCellsX, int numCellsY, float cellSizeX, float cellSizeY)
 {
   if (!m_seq.Load(texFilename, numCellsX, numCellsY, cellSizeX, cellSizeY))
@@ -78,6 +83,7 @@ bool Sprite::Load(const std::string& texFilename, int numCellsX, int numCellsY, 
     ReportError("Failed to load Sprite sheet "  + texFilename);
     return false;
   }
+  m_size = Vec2f(cellSizeX, cellSizeY);
   return true;
 }
 

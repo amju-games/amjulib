@@ -18,6 +18,8 @@ public:
 
   int GetDamage() const { return m_damage; }
 
+  void OnCollideBullet();
+
 protected:
   int m_damage;
 

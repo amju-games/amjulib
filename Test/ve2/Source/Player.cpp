@@ -1,24 +1,25 @@
 #include <AmjuFirst.h>
-#include "Player.h"
 #include <Game.h>
 #include <AmjuGL.h>
 #include <SoundManager.h>
-#include "Ve1SceneGraph.h"
 #include <iostream>
-#include "Ve1Character.h"
 #include <File.h>
-#include "Useful.h"
 #include <StringUtils.h>
 #include <DegRad.h>
 #include <Timer.h>
 #include <GuiText.h>
 #include <DrawAABB.h>
-#include "LocalPlayer.h"
-#include "GSMain.h"
+#include <AmjuRand.h>
 #include <GameObjectFactory.h>
 #include <Shadow.h>
-#include "Terrain.h"
 #include <CollisionMesh.h>
+#include "Player.h"
+#include "Ve1Character.h"
+#include "Ve1SceneGraph.h"
+#include "Useful.h"
+#include "Terrain.h"
+#include "LocalPlayer.h"
+#include "GSMain.h"
 #include "Useful.h"
 #include "ChatConsole.h"
 #include "ObjectUpdater.h"
@@ -44,6 +45,7 @@
 #include "GameConsts.h"
 #include "Baddie.h"
 #include "GSDeath.h"
+#include "Bullet.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -820,6 +822,26 @@ void Player::OnCollideBaddie(Baddie* baddie)
   {
     TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
   }
+}
+
+void Player::ShootBaddie(Baddie* baddie)
+{
+  Vec3f pos = baddie->GetPos();
+  // Add a bit of random variation
+  pos.x += Rnd(-20.0f, 20.0f);
+  pos.z += Rnd(-20.0f, 20.0f);
+
+  // TODO Would also like the bullet path to be a bit curved
+
+  Vec3f vel = pos - m_pos;
+  vel.Normalise();
+  static const float BULLET_SPEED = 400.0f; // TODO CONFIG
+  vel *= BULLET_SPEED; 
+  Bullet* b = new Bullet;
+  b->SetVel(vel);
+  b->SetPos(m_pos);
+
+  TheGame::Instance()->AddGameObject(b);
 }
 
 bool GetNameForPlayer(int objId, std::string* r)
