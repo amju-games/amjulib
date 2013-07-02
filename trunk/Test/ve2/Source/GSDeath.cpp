@@ -4,6 +4,7 @@
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
 #include "GSWaitForNewLocation.h"
+#include "LurkMsg.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -19,6 +20,8 @@ void GSDeath::OnActive()
   GSGui::OnActive();
 
   m_time = 0;
+
+  TheLurker::Instance()->Clear();
 }
 
 void GSDeath::OnDeactive()
