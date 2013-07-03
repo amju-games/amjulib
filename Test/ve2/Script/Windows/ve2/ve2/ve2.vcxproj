@@ -422,6 +422,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Objective.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectUpdater.h" />
+    <ClInclude Include="..\..\..\..\Source\Obstacle.h" />
     <ClInclude Include="..\..\..\..\Source\PickObject.h" />
     <ClInclude Include="..\..\..\..\Source\PlatformInfo.h" />
     <ClInclude Include="..\..\..\..\Source\Player.h" />

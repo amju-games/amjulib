@@ -162,6 +162,8 @@ Player::Player()
   m_health = m_maxHealth;
   m_hitTimer = 0;
   m_flashTimer = 0;
+
+  ResetHealth();
 }
 
 LayerSprite& Player::GetSprite() 
@@ -225,8 +227,6 @@ bool Player::Load(File* f)
 {
   m_maxHealth = 3; // Default until we get a new value from server
   m_health = m_maxHealth;
-
-  TheGSMain::Instance()->SetHealth(m_health);
 
   return true; 
 
@@ -517,6 +517,8 @@ void Player::Update()
   {
     Ve1ObjectChar::Update();
 
+    TheGSMain::Instance()->SetHealth(m_health);
+
     if (m_hitTimer > 0)
     {
       Matrix m;
@@ -580,38 +582,41 @@ void Player::Update()
     // Set name tag AABB to same as Scene Node so we don't cull it by mistake
     *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
 
-    Colour col(1, 1, 1, 1);
-    if (m_hitTimer > 0)
+    // Set colour depending on health - only if logged in
+    if (IsLoggedIn())
     {
-      m_hitTimer -= dt;
-      col = Colour(1, 0, 0, 1);
-      if (m_hitTimer <= 0)
+      Colour col(1, 1, 1, 1);
+      if (m_hitTimer > 0)
       {
-        m_hitTimer = 0;
-
-        // Dead ?
-        if (m_health <= 0)
+        m_hitTimer -= dt;
+        col = Colour(1, 0, 0, 1);
+        if (m_hitTimer <= 0)
         {
-          TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+          m_hitTimer = 0;
+
+          // Dead ?
+          if (m_health <= 0)
+          {
+            TheGame::Instance()->SetCurrentState(TheGSDeath::Instance());
+          }
         }
       }
-    }
-    else if (m_health == 1) // TODO TEMP TEST
-    {
-      // Flash if health low
-      m_flashTimer -= dt;
-      static const float FLASH = 0.6f; // TODO CONFIG
-      if (m_flashTimer <= 0)
+      else if (m_health == 1) // TODO TEMP TEST
       {
-        m_flashTimer = FLASH; 
+        // Flash if health low
+        m_flashTimer -= dt;
+        static const float FLASH = 0.6f; // TODO CONFIG
+        if (m_flashTimer <= 0)
+        {
+          m_flashTimer = FLASH; 
+        }
+        if (m_flashTimer > FLASH * 0.5f)
+        {
+          col = Colour(1, 0, 0, 1); // flash red? green also looks good - maybe for magic attack etc...
+        }
       }
-      if (m_flashTimer > FLASH * 0.5f)
-      {
-        col = Colour(1, 0, 0, 1); // flash red? green also looks good - maybe for magic attack etc...
-      }
+      m_sceneNode->SetColour(col);
     }
-    m_sceneNode->SetColour(col);
-
   }
 
   if (m_ignorePortalId != -1)
@@ -761,6 +766,9 @@ void Player::EatFood(Food* f)
   ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1); // for expt
   ChangeObjCount(GetId(), SCORE_KEY, +1);
 
+  // Inc health of recipient player
+  ChangeObjCount(GetId(), HEALTH_KEY, +1);
+
   // Inc count of food given by the local player
   ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1); // for expt
   ChangeObjCount(GetLocalPlayerId(), SCORE_KEY, +1);
@@ -784,6 +792,14 @@ void Player::EatFood(Food* f)
   // TODO no good, should be only one message however many foods are given.
   TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
   */
+
+  std::string otherPlayer = GetPlayerName(owner->GetId());
+  if (otherPlayer.empty())
+  {
+    otherPlayer = "Someone";
+  }
+  std::string str = otherPlayer + " gave some food to " + recipName + "!";
+  TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
 
   f->SetHidden(true);
   TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
@@ -823,6 +839,9 @@ void Player::OnCollideFood(Food* f)
     // Inc count of this (recipient) player on server
     ChangeObjCount(GetId(), FOOD_EATEN_KEY, +1); // for expt
     ChangeObjCount(GetId(), SCORE_KEY, +1);
+
+    // Get some health
+    m_health++; // single player, no need to upload health, right??
   }
   else if (gm == AMJU_MODE_MULTI)
   {
@@ -842,7 +861,8 @@ void Player::OnCollideFood(Food* f)
       // Noone is carrying the food. 
       // We pick up the food. 
       // Only show this msg the first time around
-      FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
+      // Annoying
+      //FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
 
       // TODO Sound every time
       TheSoundManager::Instance()->PlayWav("pickup.wav"); // TODO
@@ -877,7 +897,6 @@ void Player::OnCollideBaddie(Baddie* baddie)
   int damage = baddie->GetDamage();
   m_health -= damage;
 
-  TheGSMain::Instance()->SetHealth(m_health);
   // Send this to server so we can see other players' health
   TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
   // Could also send a system message
@@ -919,6 +938,12 @@ void Player::ShootBaddie(Baddie* baddie)
   b->SetPos(m_pos);
 
   TheGame::Instance()->AddGameObject(b);
+}
+
+void Player::ResetHealth()
+{
+  m_health = m_maxHealth;
+  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
 }
 
 bool GetNameForPlayer(int objId, std::string* r)
