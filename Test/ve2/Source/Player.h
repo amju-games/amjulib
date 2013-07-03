@@ -84,6 +84,7 @@ protected:
   int m_maxHealth;
   int m_health;
   float m_hitTimer;
+  float m_flashTimer;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);
