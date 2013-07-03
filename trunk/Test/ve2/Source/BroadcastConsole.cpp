@@ -109,7 +109,7 @@ void BroadcastConsole::ReposText()
 {
   // Iterate, set positions
   float x = -1.0f;
-  float y = m_bottom + 0.1f; // avoid "Show" button
+  float y = m_bottom + 0.18f; // avoid "Show" button
   for (Texts::iterator it = m_texts.begin(); it != m_texts.end(); ++it)
   {
     RCPtr<GuiText> text = *it;
