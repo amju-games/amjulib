@@ -168,20 +168,24 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
 //  }
 //}
 
-static int score = 0;
+static int s_score = 0;
 
 void GSMain::SetScore(int num)
 {
-  score = num;
+  s_score = num;
 }
+
+static int s_health = 0;
 
 void GSMain::SetHealth(int health)
 {
+  s_health = health;
 }
 
 void GSMain::ResetHud()
 {
-  score = 0;
+  s_score = 0;
+  s_health = 3;
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -354,7 +358,7 @@ void GSMain::Update()
 std::cout << "SetFuelCells: no score-num element\n";
     return;
   }
-  text1->SetText(ToString(score));
+  text1->SetText(ToString(s_score));
   text1->SetVisible(true); 
 
   // Simplify by removing one of the score elements
@@ -587,23 +591,7 @@ void GSMain::Draw()
   Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
   cam->SetTarget(GetLocalPlayer()); // could be 0
 
-#ifdef USE_SHADOW_MAP
-
-  static PShadowMap sm = 0;
-  if (!sm)
-  {
-    sm = AmjuGL::CreateShadowMap();
-    sm->SetLightPos(AmjuGL::Vec3(20, 20, 20));
-    sm->Init();
-    sm->SetDrawFunc(ShadowDraw);
-  }
-  sm->Draw();
-
-#else // USE_SHADOW_MAP
-
   GetVe1SceneGraph()->Draw();
-
-#endif // USE_SHADOW_MAP
 
   if (m_moveRequest)
   {
@@ -665,6 +653,33 @@ void GSMain::Draw2d()
   }
 #endif
 
+  // Health
+  AmjuGL::PushMatrix();
+  int s_maxHealth = 3; // TODO
+  static const float HEART_SIZE = 0.2f;
+  AmjuGL::Translate(0.6f - HEART_SIZE * (float)s_maxHealth, 0.9f, 0);
+  static GuiImage* heartImg = 0;
+  for (int i = 0; i < s_maxHealth; i++)
+  {
+    if (!heartImg)
+    {
+      heartImg = new GuiImage;
+      heartImg->SetTexture((Texture*)TheResourceManager::Instance()->GetRes("heart16-red.png"));
+      heartImg->SetSize(Vec2f(HEART_SIZE, HEART_SIZE));
+    }
+    Colour col(1, 1, 1, 1);
+    if (i >= s_health)
+    {
+      col = Colour(0.5f, 0.5f, 1, 1);
+    }
+    PushColour();
+    MultColour(col);
+    heartImg->Draw();
+    PopColour();
+    AmjuGL::Translate(HEART_SIZE, 0, 0);
+  }
+  AmjuGL::PopMatrix();
+
   TheCursorManager::Instance()->Draw();
 }
 
@@ -702,7 +717,7 @@ void GSMain::OnActive()
   TheSoundManager::Instance()->PlaySong("Sound/apz2.it");
 #endif
 
-  static const bool showAABB = true; // (ROConfig()->GetValue("show-aabb", "n") == "y");
+  static const bool showAABB = (ROConfig()->GetValue("show-aabb", "n") == "y");
   SceneNode::SetGlobalShowAABB(showAABB);
 
   GSBase::OnActive();
