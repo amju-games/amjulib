@@ -168,10 +168,10 @@ void Room::Update()
           0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
         if (aabb.Intersects(*(p->GetAABB())))
         {
-          // Slow down if in contact with obstacle
-          Vec3f vel = p->GetVel();
-          vel *= 0.5f; // TODO Config
-          p->SetVel(vel); 
+          // Slow down if in contact with obstacle??
+          //Vec3f vel = p->GetVel();
+          //vel *= 0.5f; // TODO Config
+          //p->SetVel(vel); 
 
           UnCollide(p, p->GetOldPos(), aabb);
         }
