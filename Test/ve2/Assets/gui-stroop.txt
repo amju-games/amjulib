@@ -1,0 +1,151 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+stroop-comp
+// Num children
+11
+
+
+// Element type
+gui-text
+// Element name
+timer
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1 
+// Text
+Time remaining: 3:00
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+// Element type
+gui-text
+// Element name
+score
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.1 
+// Text
+Score
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+// Element type
+gui-text
+// Element name
+word
+// pos (coords are -1..1)
+-1.0, 0.4
+// size
+2.0, 0.4
+// Text
+word
+// Font name, size
+arial, 3.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+// Element name
+button1
+// pos (coords are -1..1)
+-0.9, -0.3
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+choice 1
+// Font name, size
+arial, 1.0
+
+gui-button
+// Element name
+button2
+// pos (coords are -1..1)
+-0.45, -0.3
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+choice 2
+// Font name, size
+arial, 1.0
+
+gui-button
+// Element name
+button3
+// pos (coords are -1..1)
+0.05, -0.3
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+choice 3
+// Font name, size
+arial, 1.0 
+
+gui-button
+// Element name
+button4
+// pos (coords are -1..1)
+0.50, -0.3
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+choice 4
+// Font name, size
+arial, 1.0 
+
+
+gui-button
+done-button
+// pos (coords are -1..1)
+-0.9, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+stop test
+// Font name, size
+arial, 1.0 
+
+
+// Heart image
+gui-image
+heart-img
+0.6, 1.05
+0.4, 0.5
+heart.png
+
+// Num hearts text
+gui-text
+heart-num
+0.6, 0.9
+0.4, 0.2
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.7
+
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.9
+// size
+2.0, 0.1
+// Text
+Stroop Word test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff

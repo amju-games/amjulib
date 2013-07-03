@@ -70,7 +70,9 @@ void OnCogTestsAllDone()
 
 void OnCogTestStopPartWayThrough()
 {
-  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  GameMode gm = GetGameMode();
+
+  if (gm == AMJU_MODE_NO_GAME || gm == AMJU_MODE_NONE)
   {
     // You can't play the game, you have to finish the tests.
     TheGSDoThoseCogTests::Instance()->SetPrevState(TheGSCogTestMenu::Instance());

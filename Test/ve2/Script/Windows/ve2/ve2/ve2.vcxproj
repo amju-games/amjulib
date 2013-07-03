@@ -244,6 +244,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStory.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSStroopBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColour.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopColourWord.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStroopWord.cpp" />
@@ -391,6 +392,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSStory.h" />
+    <ClInclude Include="..\..\..\..\Source\GSStroopBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColour.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopColourWord.h" />
     <ClInclude Include="..\..\..\..\Source\GSStroopWord.h" />
