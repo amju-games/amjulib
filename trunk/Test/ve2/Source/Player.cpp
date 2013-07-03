@@ -368,7 +368,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     //  see the health of other players
     if (!IsLocalPlayer())
     {
-      m_health = ToInt(key);
+      m_health = ToInt(val);
     }
   }
   else if (key == "loggedin")
@@ -880,6 +880,13 @@ void Player::OnCollideBaddie(Baddie* baddie)
   TheGSMain::Instance()->SetHealth(m_health);
   // Send this to server so we can see other players' health
   TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
+  // Could also send a system message
+  std::string str;
+  if (GetNameForPlayer(GetId(), &str)) // TODO IS this the best way to do this?
+  {
+    str += " is in trouble!"; // TODO variety of msgs
+    TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+  }
 
   static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
   m_hitTimer = MAX_HIT_TIME;  

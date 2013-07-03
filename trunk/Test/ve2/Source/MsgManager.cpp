@@ -88,8 +88,10 @@ void MsgManager::Update()
         }
         else
         {
-          std::cout << "Discarding broadcast msg (another room?) from player " 
-            << msg.m_senderId << ": " << msg.m_text << "\n";
+          //std::cout << "Discarding broadcast msg (another room?) from player " 
+          //  << msg.m_senderId << ": " << msg.m_text << "\n";
+          str = msg.m_text; 
+          bc->OnMsgRecv(str);
         }
       }
       m_map.erase(it++); // which doesn't invalidate iterator, right ??
