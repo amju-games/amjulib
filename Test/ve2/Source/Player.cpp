@@ -361,6 +361,15 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
       gsm->SetScore(score); 
     }
   }
+  else if (key == HEALTH_KEY)
+  {
+    // Set health if we are not the local player. This is so we can
+    //  see the health of other players
+    if (!IsLocalPlayer())
+    {
+      m_health = ToInt(key);
+    }
+  }
   else if (key == "loggedin")
   {
     bool isLoggedIn = (val == "y");
@@ -587,6 +596,11 @@ void Player::Update()
       }
     }
     m_sceneNode->SetColour(col);
+
+    // Flash if health low
+    if (m_health == 1) // TODO TEMP TEST
+    {
+    }
   }
 
   if (m_ignorePortalId != -1)
@@ -853,6 +867,8 @@ void Player::OnCollideBaddie(Baddie* baddie)
   m_health -= damage;
 
   TheGSMain::Instance()->SetHealth(m_health);
+  // Send this to server so we can see other players' health
+  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
 
   static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
   m_hitTimer = MAX_HIT_TIME;  
