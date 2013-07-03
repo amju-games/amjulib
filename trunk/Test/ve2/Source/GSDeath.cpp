@@ -22,6 +22,11 @@ void GSDeath::OnActive()
   m_time = 0;
 
   TheLurker::Instance()->Clear();
+
+  m_gui = LoadGui("gui-death.txt");
+  Assert(m_gui);
+
+  GetLocalPlayer()->ResetHealth();
 }
 
 void GSDeath::OnDeactive()

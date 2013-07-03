@@ -27,7 +27,6 @@ GSGui::GSGui()
 void GSGui::Update()
 {
   GSBase::Update();
-  //TextDraw::Update();
 
   if (m_showLurk)
   {
@@ -45,7 +44,6 @@ void GSGui::Draw()
   glMatrixMode(GL_TEXTURE); // naughty!
   glPushMatrix();
   static float f = 0;
-  //AmjuGL::RotateZ(f);
 
   AmjuGL::Translate(-f, 0, 0);
 
@@ -58,7 +56,6 @@ void GSGui::Draw()
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
-  //TextDraw::Draw();
 }
 
 void GSGui::Draw2d()

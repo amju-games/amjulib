@@ -62,6 +62,8 @@ public:
 
   void ShootBaddie(Baddie* baddie);
 
+  void ResetHealth();
+
 private:
   void EatFood(Food*);
 
