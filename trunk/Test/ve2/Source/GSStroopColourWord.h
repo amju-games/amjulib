@@ -2,35 +2,21 @@
 #define GS_STROOPCOLOURWORD_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSGui.h"
+#include "GSStroopBase.h"
 
 namespace Amju 
 {
-class GSStroopColourWord : public GSGui
+class GSStroopColourWord : public GSStroopBase
 {
   GSStroopColourWord();
   friend class Singleton<GSStroopColourWord>;
 
 public:
-  virtual void Update();
-  virtual void Draw();
-  virtual void Draw2d();
-  virtual void OnActive();
-
-  void OnLeftRight(bool isLeftButton);
-  void Finished();
-  void ResetTest();
 
 private:
   void SetTest();
 
 private:
-  float m_timer;
-  float m_maxTime;
-  bool m_leftIsCorrect;
-  int m_correct;
-  int m_incorrect;
-  std::string m_testName;
   bool m_isFinished;
 };
 typedef Singleton<GSStroopColourWord> TheGSStroopColourWord;
