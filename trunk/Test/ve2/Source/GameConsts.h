@@ -22,6 +22,7 @@ extern const char* FOOD_KEY; // ?
 extern const char* FOOD_EATEN_KEY;
 extern const char* FOOD_RECEIVED_KEY;
 extern const char* FOOD_GIVEN_KEY;
+extern const char* HEALTH_KEY;
 
 extern const int FOOD_START_ID;
 extern const int BADDDIE_START_ID;
