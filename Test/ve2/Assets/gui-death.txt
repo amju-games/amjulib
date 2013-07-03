@@ -1,0 +1,25 @@
+// DEATH gui
+// version
+1
+
+// Element type
+gui-comp
+// Name
+death-comp
+// Num children
+1
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.1
+// size
+2.0, 0.2
+// Text
+Oh dear! You died!
+// Font name, size
+arial, 2.0,fgcol=ffffff
+

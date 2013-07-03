@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-8
+4
 
 //// Context menu - container for buttons
 //gui-comp
@@ -62,7 +62,7 @@ arial, 1.0
 gui-button
 quit-button
 // pos (coords are -1..1)
-// Hidden
+// CURRENTLY HIDDEN, perhaps it's confusing
 0.55, 1.9
 // size
 0.4, 0.1
@@ -74,14 +74,14 @@ quit
 arial, 1.0 
 
 
-// Heart image
-gui-image
-score-img
-0.6, 1.05
-0.4, 0.5
-heart16-red.png
+//// Heart image
+//gui-image
+//score-img
+//0.6, 1.05
+//0.4, 0.5
+//heart16-red.png
 
-// Num hearts text
+// Score text
 gui-text
 score-num
 0.6, 0.9
@@ -98,29 +98,29 @@ score-text
 SCORE
 arial, 0.75, fgcol=ffffff, sx=0.9
 
-// Health image
-gui-image
-health-img
-0.2, 1.05
-0.4, 0.5
-heart16-blue.png
+//// Health image
+//gui-image
+//health-img
+//0.2, 1.05
+//0.4, 0.5
+//heart16-blue.png
 
 // Health text
-gui-text
-health-num
-0.2, 0.9
-0.4, 0.2
+//gui-text
+//health-num
+//0.2, 0.9
+//0.4, 0.2
 // Text
-0
-arial, 1.5, fgcol=ffffff, sx=0.9
+//0
+//arial, 1.5, fgcol=ffffff, sx=0.9
 
-gui-text
-health-txt
-0.2, 0.95
-0.4, 0.1
-// Text
-HEALTH
-arial, 0.75, fgcol=ffffff, sx=0.9
+//gui-text
+//health-txt
+//0.2, 0.95
+//0.4, 0.1
+//// Text
+//HEALTH
+//arial, 0.75, fgcol=ffffff, sx=0.9
 
 
 
