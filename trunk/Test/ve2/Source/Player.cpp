@@ -158,9 +158,10 @@ Player::Player()
   sn->SetObj(this);
   SetSceneNode(sn);
 
-  m_maxHealth = 3; // Default
+  m_maxHealth = 3; // Default - TODO
   m_health = m_maxHealth;
   m_hitTimer = 0;
+  m_flashTimer = 0;
 }
 
 LayerSprite& Player::GetSprite() 
@@ -595,12 +596,22 @@ void Player::Update()
         }
       }
     }
+    else if (m_health == 1) // TODO TEMP TEST
+    {
+      // Flash if health low
+      m_flashTimer -= dt;
+      static const float FLASH = 0.6f; // TODO CONFIG
+      if (m_flashTimer <= 0)
+      {
+        m_flashTimer = FLASH; 
+      }
+      if (m_flashTimer > FLASH * 0.5f)
+      {
+        col = Colour(1, 0, 0, 1); // flash red? green also looks good - maybe for magic attack etc...
+      }
+    }
     m_sceneNode->SetColour(col);
 
-    // Flash if health low
-    if (m_health == 1) // TODO TEMP TEST
-    {
-    }
   }
 
   if (m_ignorePortalId != -1)
