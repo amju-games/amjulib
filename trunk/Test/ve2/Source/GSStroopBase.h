@@ -1,11 +1,11 @@
 #ifndef GS_STROOP_BASE_H_INCLUDED
 #define GS_STROOP_BASE_H_INCLUDED
 
-#include "GSGui.h"
+#include "GSCogTestBase.h"
 
 namespace Amju
 {
-class GSStroopBase : public GSGui
+class GSStroopBase : public GSCogTestBase
 {
 public:
   GSStroopBase();
@@ -18,9 +18,9 @@ public:
   void OnChoiceButton(int choice);
 
   virtual void ResetTest();
+
 protected:
   virtual void SetTest();
-
   void Finished();
 
 protected:

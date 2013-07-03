@@ -252,6 +252,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSTitle.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSToday.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTodaysTask.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSTrailMakingTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForUpload.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
@@ -364,6 +365,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSCalendar.h" />
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogResults.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCogTestBase.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
     <ClInclude Include="..\..\..\..\Source\GSDeath.h" />
@@ -400,6 +402,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSTitle.h" />
     <ClInclude Include="..\..\..\..\Source\GSToday.h" />
     <ClInclude Include="..\..\..\..\Source\GSTodaysTask.h" />
+    <ClInclude Include="..\..\..\..\Source\GSTrailMakingTest.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForUpload.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />

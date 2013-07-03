@@ -138,7 +138,7 @@ void GSStroopBase::SetTest()
 
 void GSStroopBase::OnActive()
 {
-  GSBase::OnActive();
+  GSBase::OnActive(); // SKIPPING GSCogTestBase and GSGui: WHY????????? Because loading wrong background??
 
   LoadCogTestBg();
 
@@ -154,7 +154,7 @@ void GSStroopBase::OnActive()
 
 void GSStroopBase::Update()
 {
-  GSGui::Update();
+  GSCogTestBase::Update();
   TheObjectUpdater::Instance()->Update();
   UpdateHeartCount();
 
@@ -189,7 +189,7 @@ void GSStroopBase::Draw()
 
 void GSStroopBase::Draw2d()
 {
-  GSGui::Draw2d();
+  GSCogTestBase::Draw2d();
 }
 
 void GSStroopBase::OnChoiceButton(int choice)

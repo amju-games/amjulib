@@ -57,7 +57,8 @@ void OnDeclineCogTests()
 
 void OnCogTestsAllDone()
 {
-  if (GetGameMode() == AMJU_MODE_NO_GAME)
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_NO_GAME || gm == AMJU_MODE_NONE)
   {
     TheGame::Instance()->SetCurrentState(TheGSFinishedTests::Instance());
   }
