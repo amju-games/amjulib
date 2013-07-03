@@ -12,6 +12,7 @@
 #include "GSStroopColour.h"
 #include "GSStroopColourWord.h"
 #include "GSReactionTime.h"
+#include "GSTrailMakingTest.h"
 #include "CogTestResults.h"
 #include "Ve1Character.h"
 #include "Ve1SceneGraph.h"
@@ -85,6 +86,11 @@ static void ReactionTime()
   TheGame::Instance()->SetCurrentState(TheGSReactionTime::Instance());
 }
 
+static void TrailMakingTest()
+{
+  TheGame::Instance()->SetCurrentState(TheGSTrailMakingTest::Instance());
+}
+
 static void Done()
 {
   OnCogTestsAllDone();
@@ -127,7 +133,7 @@ void GSCogTestMenu::AdvanceToNextTest()
 
 bool GSCogTestMenu::IsDoingTests()
 {
-  bool b = DoCogTests() && m_nextTest < 6;
+  bool b = DoCogTests(); //// && m_nextTest < 6; // Why < 6??
   return b;
 }
 
@@ -141,51 +147,22 @@ void GSCogTestMenu::OnActive()
   GSBase::OnActive();
   AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
   LoadCogTestBg();
-//  if (!m_bgImage.OpenAndLoad("cogbgimage.txt"))
-//  {
-//std::cout << "Failed to load GUI bg image!\n";
-//    Assert(0);
-//  }
-
-  // Add a character, so it looks like she is talking to the player.
-  // This was confusing for participant, so drop this idea.
-/*
-  Ve1Character* ch = new Ve1Character(0);
-  // TODO CONFIG - these depend on the contents of charlist.txt!
-  TheAvatarManager::Instance()->SetAvatar(4, ch);
-  TheAvatarManager::Instance()->SetTexture(7, ch);
-
-  // TODO CONFIG position character
-  Vec3f pos(-25.0f, -25.0f, -100.0f);
-
-  Matrix m;
-  m.Translate(pos);
-  ch->SetLocalTransform(m);
-
-  ClearGuiSceneGraph();
-  GetGuiSceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE)->AddChild(ch);
-*/
 
   m_gui = LoadGui("gui-cogtestmenu.txt");
   Assert(m_gui);
 
   // Set text and OK button command depending on next test to perform...
   // TODO Use localisation system so we can improve all the text.
-  /*
-  TODO
-  std::string strs[] = 
-  {
-  };
-  CommandFunc funcs[] = 
-  {
-  };
-  */
+
   m_isPrac = false;
   std::string str;
 
   // Check for tests already done (may have restarted exe)
   Time today = Time::Now();
-  // Map m_nextTest to TestID - they are not the same, grr
+
+  // This is the list of cog tests to take, in order. Not necessarily all the tests, and not necessarily in
+  //  the order they are enumerated in TestId.
+  // TODO This could be read from the server, so each group could have a custom set of tests.
   TestId LOOKUP_TEST_ID[] = 
   {
     AMJU_COG_TEST_REACTION_TIME,
@@ -194,27 +171,32 @@ void GSCogTestMenu::OnActive()
     AMJU_COG_TEST_STROOP_COLOUR,
     AMJU_COG_TEST_STROOP_WORD,
     AMJU_COG_TEST_STROOP_COLOUR_WORD,
+    AMJU_COG_TEST_TRAIL_MAKING,
+
+    AMJU_COG_TEST_MAX
   };
+
   CogTestResults* ctr = TheCogTestResults::Instance();
-  while (m_nextTest < 6 && ctr->IsTestComplete(today, LOOKUP_TEST_ID[m_nextTest]))
+  while (LOOKUP_TEST_ID[m_nextTest] != AMJU_COG_TEST_MAX  && 
+         ctr->IsTestComplete(today, LOOKUP_TEST_ID[m_nextTest]))
   {
     std::cout << "Test " << LOOKUP_TEST_ID[m_nextTest] << " is done!\n";
     m_nextTest++;
   }
 
-  switch (m_nextTest)
+  switch (LOOKUP_TEST_ID[m_nextTest])
   {
-  case 0:
+  case AMJU_COG_TEST_REACTION_TIME:
     str = "OK, thanks! This first one is a reaction time test. Please press the big red button as soon as the alarm goes off!";
     m_func = Amju::ReactionTime;
     break;
 
-  case 1:
+  case AMJU_COG_TEST_LETTER_CAN:
     str = "This next one is called a letter cancellation test. Please click on all the M letters that you see. You have 3 minutes to complete this task.";
     m_func = Amju::LetterMTest;
     break;
 
-  case 2:
+  case AMJU_COG_TEST_SYMBOL_CAN:
     {
     str = "This time, click on all the sigma letters that you see. They look like this..."; 
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
@@ -236,25 +218,30 @@ void GSCogTestMenu::OnActive()
     }
     break;
 
-  case 3:
+  case AMJU_COG_TEST_STROOP_COLOUR:
     str = "This next one is called a Stroop Colour test. I will show you a coloured rectangle. Please click on the button which says the colour of the rectangle.";
     m_func = Amju::StroopColour;
     break;
 
-  case 4:
-    str = "I have two more for you. This is called the Stroop Word test. I will show you a word. Please click on the button which is the same as the word. Easy!";
+  case AMJU_COG_TEST_STROOP_WORD:
+    str = "This is called the Stroop Word test. I will show you a word. Please click on the button which is the same as the word. Easy!";
     m_func = Amju::StroopWord;
     break;
 
-  case 5:
+  case AMJU_COG_TEST_STROOP_COLOUR_WORD:
     {
-      str = "This is the last one. It's called the Stroop Colour Word test.";
+      str = "This is called the Stroop Colour Word test.";
       LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
       TheLurker::Instance()->Queue(lm);
     }
     str = "I will show you a word like before. But this time, the words are coloured. "
       "You have to click the button for the colour, not the word. It's quite tricky!";
     m_func = Amju::StroopColourWord;
+    break;
+
+  case AMJU_COG_TEST_TRAIL_MAKING:
+    str = "This is called a trail making test.";
+    m_func = Amju::TrailMakingTest;
     break;
 
   default:
