@@ -7,6 +7,8 @@ namespace Amju
 {
 class GSCogTestBase : public GSGui
 {
+public:
+  virtual void OnActive();
 };
 };
 
