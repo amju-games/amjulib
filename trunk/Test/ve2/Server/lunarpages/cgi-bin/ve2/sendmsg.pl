@@ -38,11 +38,18 @@ sub sendmsg()
 
     insert($sql);
   }
-  elsif ($sender > 0)
+
+  if ($sender > 0)
   {
     $sql = "insert into objectstate (id, `key`, val, whenchanged) values ($sender, 'last_msg_sent', LAST_INSERT_ID(), now() ) on duplicate key update val=LAST_INSERT_ID(), whenchanged=now()";
 
     insert($sql);
+  }
+  else
+  {
+    $sql = "update objectstate set val=LAST_INSERT_ID(), whenchanged=now() where `key`='last_msg_sent'";
+
+    update($sql);
   }
 }
 

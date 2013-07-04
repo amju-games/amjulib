@@ -45,41 +45,9 @@ sub add_research_element($$)
 
   print "<research>";
 
-  # SQL to get the last research session, if there has been one
-  my $sql = "select now(), s.id, s.start, rs.session_num, rs.phase, rs.session_in_phase  from session as s, research_session as rs where s.player_id=$player_id and s.id=rs.session_id order by s.start desc limit 1";
-
-  $query = $dbh->prepare($sql) or die "Query prepare failed for this query: $sql\n";
-  $query->execute;
-  if (my ($now, $session_id, $start, $r_session_num, $phase, $session_in_phase) = $query->fetchrow_array)
-  {
-    # There has been at least one session. Time for next research session ? All sessions done ?
-    my $is_r_s = 0;
-    if ($now > $start + $period)
-    {
-      $is_r_s = 1;
-    }
-    print "<is_research_session>$is_r_s</is_research_session>\n";
-    print "<session_num>$r_session_num + 1</session_num>\n"; # 1-based
-    print "<mode>0</mode>\n"; # No game, set baseline
-    print "<cog_test>TODO</cog_test>\n";
-
-    # Set game mode (phase): no game, single, or multi
-    # Set session within this phase
-  }
-  else
-  {
-    # No previous sessions, this is the first.
-    print "First research session!\n";
-    print "<is_research_session>1</is_research_session>\n";
-    print "<session_num>1</session_num>\n"; # 1-based
-    # Mode: 0 = No game; 2 = Multi player mode. (No single player mode)
-    print "<mode>0</mode>\n"; 
-    print "<cog_test>TODO</cog_test>\n";
-  }
-
   # Get calendar info
   print "<dates>";
-  $sql = "select UNIX_TIMESTAMP(d.date), d.cog_test, d.play  from  player as p, research_group as g, research_date as d where p.research_group=g.research_group and d.date_id >= g.start_date and d.date_id <= g.end_date and p.id=$player_id";
+  $sql = "select UNIX_TIMESTAMP(d.date), d.cog_test, d.play  from  player as p, research_group as g, research_date as d where p.research_group=g.research_group and d.date_id >= g.start_date and d.date_id <= g.end_date and p.id=$player_id ORDER BY d.date";
   $query = $dbh->prepare($sql) or die "Query prepare failed for this query: $sql\n";
   $query->execute;
   while (my ($timestamp, $cog_test, $play) = $query->fetchrow_array)
@@ -146,7 +114,7 @@ print "Client ver: $clientver\n";
     {
       # Client too old
       my $t = time();
-      print "<now>$t</now><error>BAD_CLIENT: Sorry, it looks like you need to download the latest version of the game. There are some spiffy new features which unfortunately won't work with the version you have.<error>\n";
+      print "<now>$t</now><error>BAD_CLIENT: Sorry, it looks like you need to download the latest version of the game. There are some spiffy new features which unfortunately won't work with the version you have.</error>\n";
 
       sendEmail("Login: bad client", "Hi, login.pl here. $email just tried to log in but has an old client (version: $clientver).\nServer time is: $t\nBye!");
       

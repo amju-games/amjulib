@@ -102,10 +102,10 @@ sub new_player_impl($$$)
     return;
   }
 
-  print MAIL "From: jason\@amju.com\n";
+  print MAIL "From: jason.colman\@port.ac.uk\n";
   print MAIL "To: $email\n";
   print MAIL "Subject: Welcome to my game!\n\n";
-  print MAIL "Dear $playername,\nThanks for volunteering to participate in my experiment.\n\nTo get started, please go to www.amju.com/ve1/www\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
+  print MAIL "Dear $playername,\nThanks for volunteering to participate in my experiment.\n\nTo get started, please go to www.amju.com/mygame\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
   close(MAIL);
 
   print "All OK, and sent email to new player.\n"; 
