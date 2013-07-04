@@ -27,6 +27,8 @@ GSTrailMakingTest::GSTrailMakingTest()
 
   m_currentCircle = -1;
   m_correct = 0;
+
+  m_alternatingVersion = true;
 }
 
 void GSTrailMakingTest::OnDeactive()
@@ -39,19 +41,54 @@ void GSTrailMakingTest::OnActive()
 {
   GSCogTestBase::OnActive();
 
-
   TheEventPoller::Instance()->AddListener(m_listener, 100);
   // high number = low priority, so GUI button clicks etc eat the events.
 
   m_gui = LoadGui("gui-trailmaking.txt"); 
   Assert(m_gui);
 
+  // Grid of allowable positions
+  static const int GRID_W = 8;
+  static const int GRID_H = 7;
+  float w = 2.0f / GRID_W;
+  float h = 2.0f / GRID_H;
+
+  Vec2f grid[80];
+  int g = 0;
+  for (int i = 0; i < GRID_H; i++)
+  {
+    for (int j = 0; j < GRID_W; j++)
+    {
+      grid[g++] = Vec2f(j * w - 0.9f, i * h - 0.9f);
+    }
+  }
+  std::random_shuffle(grid, grid + GRID_W * GRID_H);
+
   // Create dots
+  g = 0;
   for (int i = 0; i < 25; i++)
   {
-    Vec2f pos(Rnd(-0.7f, 0.7f), Rnd(-0.7f, 0.7f));
-    std::string str = ToString(i);
-    // TODO A/1/B/2 version
+    Vec2f pos = grid[g++] + Vec2f(Rnd(-0.05f, 0.05f), Rnd(-0.05f, 0.05f));
+
+    std::string str;
+    if (m_alternatingVersion)
+    {
+      // A/1/B/2 version
+      int j = i / 2;
+      if (i % 2)
+      {
+        str = std::string(1, 'A' + j);
+      }
+      else
+      {
+        str = ToString(j + 1);
+      }
+    }
+    else
+    {
+      str = ToString(i);
+    }
+
     TrailCircle d(pos, str);
     m_circles.push_back(d);
   }
@@ -97,22 +134,22 @@ void TrailCircle::Draw()
     text.SetSize(Vec2f(0.1f, 0.1f));
   }
 
-  Colour col(1, 1, 1, 1);
-  if (m_clicked)
-  {
-    col = Colour(0, 0, 0, 1);
-  }
+  const Colour BLACK(0, 0, 0, 1);
+  const Colour WHITE(1, 1, 1, 1);
+  const Colour RED(1, 0, 0, 1);
 
   circleImg->SetLocalPos(Vec2f(m_pos.x - CIRCLE_SIZE * 0.5f, m_pos.y + CIRCLE_SIZE * 0.5f));
   PushColour();
+  MultColour(m_incorrect ? RED : (m_clicked ? BLACK : WHITE));
   circleImg->Draw();
   PopColour();
 
   // Draw number/letter
-  text.SetSize(0.2f, 0.1f);
+  text.SetSize(Vec2f(0.2f, 0.1f));
   text.SetJust(GuiText::AMJU_JUST_CENTRE);
-  text.SetLocalPos(m_pos + Vec2f(-0.1f, 0.03f));
+  text.SetLocalPos(m_pos + Vec2f(-0.1f, 0.012f));
   text.SetText(m_str);
+  text.SetFgCol(m_clicked || m_incorrect ? WHITE : BLACK);
   text.Draw();
 }
 
@@ -124,8 +161,9 @@ void GSTrailMakingTest::Draw2d()
   }
 
   // Draw lines connecting correctly clicked dots
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
   PushColour();
-  AmjuGL::SetColour();
+  AmjuGL::SetColour(Colour(0, 0, 0, 1));
   for (int i = 1; i < m_currentCircle; i++)
   {
     Vec2f pos[2] = { m_circles[i - 1].m_pos, m_circles[i].m_pos };
@@ -140,12 +178,20 @@ bool GSTrailMakingTest::OnCursorEvent(const CursorEvent& ce)
 {
 //std::cout << "Cursor pos: (" << ce.x << ", " << ce.y << ")\n";
 
+  for (int i = 0; i < (int)m_circles.size(); i++)
+  {
+    m_circles[i].m_incorrect = false;
+  }
+
   // Check if cursor is on a dot
+  bool noCircle = true;
   for (int i = 0; i < (int)m_circles.size(); i++)
   {
     if (m_circles[i].IsClicked(Vec2f(ce.x, ce.y)))
     {
-std::cout << "Clicked on circle " << i << "\n";
+      noCircle = false;
+
+//std::cout << "Clicked on circle " << i << "\n";
 
       if (i == m_currentCircle)
       {
@@ -156,15 +202,36 @@ std::cout << "Clicked on circle " << i << "\n";
         // On next dot in sequence - correct!
         m_correct++;
         m_currentCircle++;
+        m_circles[m_currentCircle].m_clicked = true;
 
-std::cout << "CORRECT! Now on to circle " << m_currentCircle << "\n";
+        if (m_currentCircle >= (int)m_circles.size())
+        {
+std::cout << "FINISHED!\n";
+          // Save num errors, time, num completed, (other info ?)
+        }
+        else
+        {
+std::cout << "CORRECT! Now on to circle " << m_currentCircle + 1 << "\n";
+        }
       }
       else
       {
         // On a different dot. Incorrect? But only score incorrect once.
+        if (!m_circles[i].m_incorrect)
+        {
+          std::cout << "Incorrect!\n";
+        }
+        m_circles[i].m_incorrect = true;
       }
     }
   }
+  //if (noCircle)
+  //{
+  //  for (int i = 0; i < (int)m_circles.size(); i++)
+  //  {
+  //    m_circles[i].m_incorrect = false;
+  //  }
+  //}
 
   return true;
 }

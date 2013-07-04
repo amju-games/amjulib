@@ -216,6 +216,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSCalendar.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogResults.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCogTestBase.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSDeath.cpp" />
