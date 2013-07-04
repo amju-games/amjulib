@@ -17,12 +17,14 @@ rm -rf $DEST_DIR
 mkdir -p $DEST_DIR
 mkdir -p $DEST_DIR/characters/2d/
 mkdir -p $DEST_DIR/font2d/
-mkdir -p $DEST_DIR/obj/
-mkdir -p $DEST_DIR/locations/location1/
+#mkdir -p $DEST_DIR/obj/
+#mkdir -p $DEST_DIR/locations/location1/
 mkdir -p $DEST_DIR/Sound/
+mkdir -p $DEST_DIR/rooms/
 
 cp $SRC_DIR/*.png $DEST_DIR
 cp $SRC_DIR/*.txt $DEST_DIR
+cp $SRC_DIR/rooms/* $DEST_DIR/rooms/
 cp $SRC_DIR/characters/2d/*.png $DEST_DIR/characters/2d/
 cp $SRC_DIR/font2d/*.png $DEST_DIR/font2d/
 cp $SRC_DIR/font2d/*.txt $DEST_DIR/font2d/
@@ -30,12 +32,12 @@ cp $FONT2D/arial*.png $DEST_DIR/font2d/
 cp $FONT2D/arial*.txt $DEST_DIR/font2d/
 cp $GUIASSETSDIR/*.png $DEST_DIR
 cp $GUIASSETSDIR/*.txt $DEST_DIR
-cp $SRC_DIR/obj/*.obj $DEST_DIR/obj/
-cp $SRC_DIR/obj/*.mtl $DEST_DIR/obj/
-cp $SRC_DIR/obj/*.png $DEST_DIR/obj/
-cp $SRC_DIR/locations/location1/*.obj $DEST_DIR/locations/location1/
-cp $SRC_DIR/locations/location1/*.mtl $DEST_DIR/locations/location1/
-cp $SRC_DIR/locations/location1/*.png $DEST_DIR/locations/location1/
+#cp $SRC_DIR/obj/*.obj $DEST_DIR/obj/
+#cp $SRC_DIR/obj/*.mtl $DEST_DIR/obj/
+#cp $SRC_DIR/obj/*.png $DEST_DIR/obj/
+#cp $SRC_DIR/locations/location1/*.obj $DEST_DIR/locations/location1/
+#cp $SRC_DIR/locations/location1/*.mtl $DEST_DIR/locations/location1/
+#cp $SRC_DIR/locations/location1/*.png $DEST_DIR/locations/location1/
 
 # no need to have Sound separately??
 cp $SRC_DIR/Sound/*.it $DEST_DIR/Sound/
@@ -51,7 +53,7 @@ cd $DEST_DIR
 # Create empty glue file
 $GLUE_EXE -c $GLUE_FILE
 $
-for f in *.txt *.png *.obj *.mtl characters/2d/* font2d/* obj/* locations/location1/* Sound/*
+for f in *.txt *.png characters/2d/* font2d/* rooms/* Sound/*
 do
     echo "Adding file: " $f
     $GLUE_EXE -a $GLUE_FILE $f
