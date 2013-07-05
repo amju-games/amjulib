@@ -24,7 +24,15 @@ sub add_activity_week($$$$)
   for (my $i = 0; $i < 4; $i++)
   {
     my $days = $firstday + $i;
-    my $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($id, 0, $activity, DATE_ADD(DATE('$startdate'), INTERVAL $days DAY))";
+    my $ins;
+    if ($days == 0)
+    {
+      $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($id, 0, $activity, DATE('$startdate'))";
+    }
+    else
+    {
+      $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($id, 0, $activity, DATE_ADD(DATE('$startdate'), INTERVAL $days DAY))";
+    }
     print "\n<br>$ins\n";
     insert($ins);
     $id++;
@@ -61,7 +69,15 @@ sub add_new_rg()
   for (my $i = 0; $i < 7; $i++)
   {
     my $thisid = $id + 10 * $i + 9;
-    my $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($thisid, 1, 0, DATE_ADD(DATE('$startdate'), INTERVAL $i WEEK))";
+    my $ins;
+    if ($i == 0)
+    {
+      $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($thisid, 1, 0, DATE('$startdate'))";
+    }
+    else
+    {
+      $ins = "insert into research_date(date_id, cog_test, play, `date`) values ($thisid, 1, 0, DATE_ADD(DATE('$startdate'), INTERVAL $i WEEK))";
+    }
     print "\n<br>$ins\n";
     insert($ins);
   }
