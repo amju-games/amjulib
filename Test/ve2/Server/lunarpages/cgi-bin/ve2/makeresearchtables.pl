@@ -88,10 +88,7 @@ CREATE TABLE  `research_date` (
 `cog_test` INT NOT NULL ,
 `play` INT NOT NULL ,
 `date` DATE NOT NULL ,
-PRIMARY KEY (  `date_id` ) ,
-UNIQUE (
-`date`
-)
+PRIMARY KEY (  `date_id` ) 
 ) ENGINE = MYISAM ;
 END
 
