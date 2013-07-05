@@ -44,6 +44,9 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent& mbe);
 
 protected:
+  void AddCircle(int i, const Vec2f& pos);
+
+protected:
   typedef std::vector<TrailCircle> Circles;
   Circles m_circles;
  

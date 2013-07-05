@@ -52,9 +52,11 @@ void GSTrailMakingTest::OnActive()
   static const int GRID_W = 8;
   static const int GRID_H = 7;
   float w = 2.0f / GRID_W;
-  float h = 2.0f / GRID_H;
+  float h = 1.7f / GRID_H; // top of screen has info/buttons
 
-  Vec2f grid[80];
+#ifdef RANDOM_DISTRIBUTION
+  Vec2f grid[GRID_W * GRID_H];
+
   int g = 0;
   for (int i = 0; i < GRID_H; i++)
   {
@@ -65,12 +67,73 @@ void GSTrailMakingTest::OnActive()
   }
   std::random_shuffle(grid, grid + GRID_W * GRID_H);
 
-  // Create dots
+  // Create circles
   g = 0;
   for (int i = 0; i < 25; i++)
   {
     Vec2f pos = grid[g++] + Vec2f(Rnd(-0.05f, 0.05f), Rnd(-0.05f, 0.05f));
+    AddCircle(i, pos);
+  }
+#endif // RANDOM_DISTRIBUTION
 
+  // Kind of Random walk
+  // Array of bools so we don't have 2 circles overlapping
+  bool grid[GRID_W * GRID_H];
+  for (int i = 0; i < GRID_W * GRID_H; i++)
+  {
+    grid[i] = false;
+  }
+
+OH_CRAP:
+
+  // Start in the middle
+  Vec2i pos(GRID_W / 2, GRID_H / 2);
+  for (int i = 0; i < 25; i++)
+  {
+    Vec2i newPos = pos;
+    int count = 0;
+    int gridSq = newPos.x * GRID_W + newPos.y;
+    while (grid[gridSq])
+    {
+      count++;
+      if (count > 50)
+      {
+std::cout << "Oh crap, got boxed in, restarting random walk..\n";
+
+        goto OH_CRAP; // I R teh awsom programmer
+      }
+
+      // reach further if we can't find an empty square
+      int reach = (count < 10) ? 3 : 5;
+
+      // Find a new position close to the old position
+      newPos = Vec2i(pos.x + rand() % reach - reach/2, 
+        pos.y + rand() % reach - reach/2);
+      if (newPos.x < 0) newPos.x = 0;
+      if (newPos.x >= GRID_W) newPos.x = GRID_W - 1;
+      if (newPos.y < 0) newPos.y = 0;
+      if (newPos.y >= GRID_H) newPos.y = GRID_H - 1;
+    
+      gridSq = newPos.x * GRID_W + newPos.y;
+    }
+    pos = newPos;
+
+    grid[gridSq] = true; // mark grid square as used
+
+    // Convert grid coord to screen coord, with a bit of randomness
+    Vec2f posf = Vec2f(pos.x * w - 0.9f + Rnd(-0.05f, 0.05f), 
+      pos.y * h - 0.9f + Rnd(-0.05f, 0.05f));
+
+    AddCircle(i, posf);
+  }
+
+  // Reset test scores
+  m_currentCircle = -1;
+  m_correct = 0;
+}
+
+void GSTrailMakingTest::AddCircle(int i, const Vec2f& pos)
+{
     std::string str;
     if (m_alternatingVersion)
     {
@@ -92,11 +155,6 @@ void GSTrailMakingTest::OnActive()
 
     TrailCircle d(pos, str);
     m_circles.push_back(d);
-  }
-
-  // Reset test scores
-  m_currentCircle = -1;
-  m_correct = 0;
 }
 
 void GSTrailMakingTest::Update()
@@ -172,7 +230,7 @@ void GSTrailMakingTest::Draw2d()
   }
   PopColour();
 
-  GSBase::Draw2d(); // cursor
+  GSCogTestBase::Draw2d(); // cursor
 }
 
 bool GSTrailMakingTest::OnCursorEvent(const CursorEvent& ce)
@@ -220,7 +278,9 @@ std::cout << "CORRECT! Now on to circle " << m_currentCircle + 1 << "\n";
         // On a different dot. Incorrect? But only score incorrect once.
         if (!m_circles[i].m_incorrect)
         {
-          std::cout << "Incorrect!\n";
+          // TODO Get this to print out only once per incorrect circle,
+          //  then can use for incorrect score.
+////          std::cout << "Incorrect!\n";
         }
         m_circles[i].m_incorrect = true;
       }
