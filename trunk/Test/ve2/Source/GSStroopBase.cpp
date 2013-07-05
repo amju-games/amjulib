@@ -146,6 +146,7 @@ void GSStroopBase::OnActive()
 
   m_gui = LoadGui("gui-stroop.txt"); // same for all Stroop tests
   Assert(m_gui);
+  LoadCommonGui();
 
   ResetTest();
 
