@@ -5,29 +5,41 @@
 // type
 room
 // Num textures
-3
-bean5.png
-bg.png
-bg2.png
-// (x, y) Size of grid
-7, 5
-// Grid of tiles - numbers are zero-based indices into texture list
-// Split so we can have >10 tiles
-1 1 1 1 1 1 1
-2 2 2 2 2 2 1
-2 2 2 2 2 2 2 
-2 1 2 2 1 2 1
-1 1 1 1 1 1 1
+12
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-12
+ground3.png
+rock3.png
+rock4.png
+steps-ew.png
 
+// (x, y) Size of grid
+9, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Background grid
+5  1  1  1  1  1  1  1  6
+4  9  9  9  9  9  9  9  12
+4  9  9  9  9  9  9  9  12
+4  9  9  9  9  9  9  9  12
+7  2  2  2  2  2  2  2  8
 // Obstacles grid
-3 3 3 0 3 3 3
-3 0 0 0 0 0 0
-3 0 0 0 0 0 0
-3 0 0 0 0 0 0
-3 3 3 3 3 3 3
+10 11 10 11 10 10 10 11 10
+0   0  0  0  0  0  0  0  0
+0   0  0  0  0  0  0  0  0
+0   0  0  0  0  0  0  0  0
+10 11 10 11 10 11 10 11 10
 
 // Destinations N, S, E, W
-0, 0, 0, 1
+0, 0, 4, 1
 
 baddie
 // Pos

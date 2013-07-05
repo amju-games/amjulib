@@ -1,7 +1,0 @@
-// ver
-1
-locations/location1/arch.png
-locations/location1/loc1.mtl
-locations/location1/loc1.obj
-locations/location1/tex1.png
-
