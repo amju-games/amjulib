@@ -46,6 +46,7 @@ void GSTrailMakingTest::OnActive()
 
   m_gui = LoadGui("gui-trailmaking.txt"); 
   Assert(m_gui);
+  LoadCommonGui();
 
   // Grid of allowable positions
   static const int GRID_W = 8;

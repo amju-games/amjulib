@@ -9,6 +9,10 @@ class GSCogTestBase : public GSGui
 {
 public:
   virtual void OnActive();
+
+protected:
+  // Call AFTER loading m_gui
+  void LoadCommonGui();
 };
 };
 
