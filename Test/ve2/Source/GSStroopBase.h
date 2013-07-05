@@ -21,18 +21,15 @@ public:
 
 protected:
   virtual void SetTest();
-  void Finished();
+  virtual void Finished();
 
 protected:
-  float m_timer;
   float m_maxTime;
   int m_correctChoice;
   int m_correct;
   int m_incorrect;
   std::string m_testName;
   bool m_isFinished;
-
-  int m_testId;
 
   static const int NUM_WORDS = 5;
   static const char* WORDS[NUM_WORDS];

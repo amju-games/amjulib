@@ -156,31 +156,9 @@ void GSStroopBase::OnActive()
 void GSStroopBase::Update()
 {
   GSCogTestBase::Update();
-  TheObjectUpdater::Instance()->Update();
+//  TheObjectUpdater::Instance()->Update(); // ???
   UpdateHeartCount();
-
-  m_timer -= TheTimer::Instance()->GetDt();
-
-  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
-  std::string s;
-  if (!m_isFinished)
-  {
-    if (m_timer > 0)
-    {
-      int min = (int)(m_timer / 60.0f);
-      int sec = (int)(m_timer - 60.0f * min);
-      s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
-    }
-    else
-    {
-      // TODO flash
-      s = "0:00";
-
-      Finished();
-    }
-
-    timeText->SetText(s);
-  }
+  UpdateTimer();
 }
 
 void GSStroopBase::Draw()

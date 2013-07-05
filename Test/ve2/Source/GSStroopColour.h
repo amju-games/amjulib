@@ -13,7 +13,6 @@ class GSStroopColour : public GSStroopBase
 
 public:
   virtual void Draw2d();
-  void Finished();
   void ResetTest(); 
 
 private:

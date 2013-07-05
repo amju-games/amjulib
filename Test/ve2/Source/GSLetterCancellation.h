@@ -3,7 +3,7 @@
 
 #include <Singleton.h>
 #include <TextureSequence.h>
-#include "GSGui.h"
+#include "GSCogTestBase.h"
 
 namespace Amju 
 {
@@ -15,7 +15,7 @@ public:
   
 };
 
-class GSLetterCancellation : public GSGui
+class GSLetterCancellation : public GSCogTestBase
 {
   GSLetterCancellation();
   friend class Singleton<GSLetterCancellation>;
@@ -38,7 +38,7 @@ public:
   void StartTest();
 
   // Called from Done button or when timer expires. Send results, go to next state.
-  void FinishedTest();
+  void Finished();
 
 protected:
   Rect MakeRect(int i, int j);
@@ -77,13 +77,11 @@ protected:
   bool m_mouseOver;
   Rect m_mouseRect; // to draw rectangle around letter under mouse cursor 
 
-  float m_timer;
   float m_maxTime; // 3 mins in Malec et al
 
   bool m_isPaused; // ?
   bool m_isFinished;
 
-  int m_testId; // to tag results sent to server
   int m_correct;
   int m_incorrect;
 };
