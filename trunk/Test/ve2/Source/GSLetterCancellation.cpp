@@ -36,7 +36,7 @@ static void OnStopTest()
 
 static void OnDoneButton()
 {
-  TheGSLetterCancellation::Instance()->FinishedTest();
+  TheGSLetterCancellation::Instance()->Finished();
 }
 
 static void StartLC()
@@ -44,7 +44,7 @@ static void StartLC()
   TheGSLetterCancellation::Instance()->StartTest();
 }
 
-void GSLetterCancellation::FinishedTest()
+void GSLetterCancellation::Finished()
 {
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
   done->SetVisible(false);
@@ -199,7 +199,7 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
           if (m_correct == m_numSpecialLetter)
           {
             // Done!
-            OnDoneButton();
+            Finished();
           }
         }
         else
@@ -277,7 +277,7 @@ void GSLetterCancellation::Update()
 
       //if (m_timer < -10.0f)
       {
-        OnDoneButton();
+        Finished();
       }
     }
     timeText->SetText(s);

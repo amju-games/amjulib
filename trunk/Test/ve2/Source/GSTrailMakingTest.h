@@ -43,8 +43,11 @@ public:
   virtual bool OnCursorEvent(const CursorEvent& ce);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent& mbe);
 
+  void ResetTest();
+
 protected:
   void AddCircle(int i, const Vec2f& pos);
+  void Finished();
 
 protected:
   typedef std::vector<TrailCircle> Circles;
@@ -52,6 +55,7 @@ protected:
  
   int m_currentCircle;
   int m_correct;
+  int m_incorrect;
 
   TrailListener* m_listener;
 

@@ -1,12 +1,34 @@
+#include <AmjuFirst.h>
+#define GLEW_STATIC
+#include <OpenGL.h>
 #include <ResourceManager.h>
 #include <AmjuRand.h>
 #include <Screen.h>
 #include <EventPoller.h>
 #include <GuiText.h>
+#include <GuiButton.h>
+#include <SoundManager.h>
+#include <Game.h>
 #include "GSTrailMakingTest.h"
+#include "CogTestNag.h"
+#include "GSCogTestMenu.h"
+#include "LurkMsg.h"
+#include "CogTestResults.h"
+#include "GameConsts.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
+static void OnStopTest()
+{
+  OnCogTestStopPartWayThrough(); 
+}
+
+static void OnReset()
+{
+  TheGSTrailMakingTest::Instance()->ResetTest();
+}
+
 class TrailListener : public EventListener
 {
 public:
@@ -23,12 +45,17 @@ public:
 
 GSTrailMakingTest::GSTrailMakingTest()
 {
+  m_testId = AMJU_COG_TEST_TRAIL_MAKING;
+
   m_listener = new TrailListener;
 
   m_currentCircle = -1;
   m_correct = 0;
+  m_incorrect = 0;
+  m_currentCircle = -1;
+  m_isFinished = false;
 
-  m_alternatingVersion = true;
+  m_alternatingVersion = true; // TODO 
 }
 
 void GSTrailMakingTest::OnDeactive()
@@ -46,7 +73,23 @@ void GSTrailMakingTest::OnActive()
 
   m_gui = LoadGui("gui-trailmaking.txt"); 
   Assert(m_gui);
-  LoadCommonGui();
+//  LoadCommonGui(); // instead of..
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetCommand(Amju::OnStopTest);
+  done->SetVisible(true);
+
+  ResetTest();
+}
+
+void GSTrailMakingTest::ResetTest()
+{
+  m_circles.clear();
+  m_correct = 0;
+  m_incorrect = 0;
+  m_currentCircle = -1;
+  m_isFinished = false;
+  static const float MAX_TIME = 120.0f; // TODO TEMP TEST
+  m_timer = MAX_TIME;
 
   // Grid of allowable positions
   static const int GRID_W = 8;
@@ -160,6 +203,8 @@ void GSTrailMakingTest::AddCircle(int i, const Vec2f& pos)
 void GSTrailMakingTest::Update()
 {
   GSCogTestBase::Update();
+  UpdateHeartCount();
+  UpdateTimer();
 }
 
 void GSTrailMakingTest::Draw()
@@ -223,11 +268,16 @@ void GSTrailMakingTest::Draw2d()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
   PushColour();
   AmjuGL::SetColour(Colour(0, 0, 0, 1));
+  glLineWidth(3); // ?
+  glBegin(GL_LINES);
   for (int i = 1; i < m_currentCircle; i++)
   {
     Vec2f pos[2] = { m_circles[i - 1].m_pos, m_circles[i].m_pos };
-    AmjuGL::DrawLine(AmjuGL::Vec3(pos[0].x, pos[0].y, 0), AmjuGL::Vec3(pos[1].x, pos[1].y, 0));
+    //AmjuGL::DrawLine(AmjuGL::Vec3(pos[0].x, pos[0].y, 0), AmjuGL::Vec3(pos[1].x, pos[1].y, 0));
+    glVertex2f(pos[0].x, pos[0].y);
+    glVertex2f(pos[1].x, pos[1].y);
   }
+  glEnd();
   PopColour();
 
   GSCogTestBase::Draw2d(); // cursor
@@ -263,10 +313,11 @@ bool GSTrailMakingTest::OnCursorEvent(const CursorEvent& ce)
         m_currentCircle++;
         m_circles[m_currentCircle].m_clicked = true;
 
-        if (m_currentCircle >= (int)m_circles.size())
+        if (m_currentCircle == (int)m_circles.size() - 1)
         {
 std::cout << "FINISHED!\n";
           // Save num errors, time, num completed, (other info ?)
+          Finished();
         }
         else
         {
@@ -301,4 +352,63 @@ bool GSTrailMakingTest::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   return true;
 }
+
+void GSTrailMakingTest::Finished()
+{
+  if (m_isFinished)
+  {
+    return;
+  }
+
+  m_isFinished = true;
+
+  if (TheGSCogTestMenu::Instance()->IsPrac())
+  {
+    std::string str;
+    if (m_correct == 0)
+    {
+      // TODO offer another practice go
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better this time!";
+
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+    else
+    {
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+
+      str = "OK, you got " + ToString(m_correct) +
+        " correct! Let's try it for real!";
+
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnReset);
+      TheLurker::Instance()->Queue(lm);
+    }
+
+    TheGSCogTestMenu::Instance()->SetIsPrac(false);
+  }
+  else
+  {
+    std::string str;
+    if (m_correct == 0)
+    {
+      str = "Oh dear, you didn't get any correct! Well, I am sure you will do better next time!";
+    }
+    else
+    {
+      str = "Well done! You got " + ToString(m_correct) + " correct!";
+      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+    }
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lm);
+
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
+
+    TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+
+    TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  }
+}
+
 }
