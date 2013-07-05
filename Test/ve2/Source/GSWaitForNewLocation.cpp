@@ -84,6 +84,14 @@ void GSWaitForNewLocation::Update()
 
       SetRandomFoodInLocation();
 
+      std::string str;
+      if (GetNameForPlayer(GetLocalPlayerId(), &str))
+      {
+        str += " entered room "; // TODO variety of msgs
+        str += ToString(GetLocalPlayerLocation());
+        TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+      }
+
       TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
     }
   }
