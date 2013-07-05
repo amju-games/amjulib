@@ -24,8 +24,9 @@ GameObject* CreateBaddie()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Baddie::TYPENAME, CreateBaddie);
 
+// TODO
 static const float XSIZE = 20.0f;
-static const float YSIZE = 60.0f;
+static const float YSIZE = 5.0f;
 
 const char* Baddie::TYPENAME = "baddie";
 
