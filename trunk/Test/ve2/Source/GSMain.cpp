@@ -54,7 +54,7 @@
 #define SHOW_NUM_ERRORS
 //#define USE_SHADOW_MAP
 
-#define PICK_DEBUG
+//#define PICK_DEBUG
 
 namespace Amju
 {
