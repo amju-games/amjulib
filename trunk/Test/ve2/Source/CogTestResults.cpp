@@ -257,6 +257,12 @@ std::cout << "Sending this request: " << url << "\n";
 
 void CogTestResults::StoreResult(Result* res)
 {
+  if (res->NoSessionId())
+  {
+std::cout << "Discarding cog test result as no session ID.\n";
+    return;
+  }
+
   // Save and keep trying until confirmed
   m_results.push_back(res);
   Save();
