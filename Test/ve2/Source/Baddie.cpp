@@ -5,6 +5,7 @@
 #include <Texture.h>
 #include <LoadVec3.h>
 #include <LoadVec2.h>
+#include <Timer.h>
 #include "Baddie.h"
 #include "BaddieNode.h"
 #include "Ve1SceneGraph.h"
@@ -35,8 +36,14 @@ const char* Baddie::GetTypeName() const
   return TYPENAME;
 }
 
-Baddie::Baddie() : m_damage(0)
+Baddie::Baddie() 
 {
+  m_damage = 0;
+  m_chaseSpeed = 0;
+  m_isDestructible = true;
+  m_maxHealth = 1; 
+  m_health = m_maxHealth;
+
 }
 
 void Baddie::Update()
@@ -169,6 +176,45 @@ void Baddie::OnCollideBullet()
   }
 }
 
+
+ToggleBaddie::ToggleBaddie()
+{
+  m_harmful = false;
+  for (int i = 0; i < 4; i++)
+  {
+    m_time[i] = 0;
+    m_cellRange[i] = 0;
+  }
+  m_timeInState = 0;
+  m_maxTimeInState = 0;
+}
+
+void ToggleBaddie::Update()
+{
+  float dt = TheTimer::Instance()->GetDt();
+  m_timeInState += dt;
+  if (m_timeInState > m_maxTimeInState)
+  {
+    m_timeInState = 0;
+    m_harmful = !m_harmful;
+    // New random time, within range for this state
+  }
+}
+
+int ToggleBaddie::GetDamage() const
+{
+  return m_harmful ? m_damage : 0;
+}
+
+bool ToggleBaddie::Load(File* f)
+{
+  if (!Baddie::Load(f))
+  {
+    return false;
+  }
+
+  return true;
+}
 }
 
 
