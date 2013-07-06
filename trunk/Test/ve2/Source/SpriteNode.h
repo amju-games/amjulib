@@ -17,6 +17,8 @@ public:
   // Subclasses update AABB then call this
   virtual void Update();
 
+  Sprite* GetSprite() { return &m_sprite; }
+
 private:
   Sprite m_sprite;
 };
