@@ -49,6 +49,24 @@ skull2.png
 // Num cells
 1,1
 // Size
-80, 80
+40, 40
 // Damage to player on collision
 1
+// Max health
+5
+// Chase speed
+50
+// Time: harmless range
+2
+3
+// Time: harmful range
+2
+3
+// Cell range: harmless
+0
+0
+// Cell range: harmful
+0
+0
+
+
