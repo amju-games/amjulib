@@ -56,6 +56,8 @@ public:
   bool Load(File*);
   bool Save(File*);
 
+  bool NoSessionId() const { return m_sessionId.empty(); }
+
 private:
   friend class CogTestResults;
   friend class ReqStoreResult;
