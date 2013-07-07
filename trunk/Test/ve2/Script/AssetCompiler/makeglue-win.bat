@@ -15,8 +15,6 @@ del /S /Q %DEST_DIR%\*.*
 mkdir %DEST_DIR%
 mkdir %DEST_DIR%\characters\2d\
 mkdir %DEST_DIR%\font2d\
-REM mkdir %DEST_DIR%\obj\
-REM mkdir %DEST_DIR%\locations\location1\
 mkdir %DEST_DIR%\Sound\
 mkdir %DEST_DIR%\rooms\
 
@@ -35,13 +33,6 @@ copy %GUIASSETSDIR%\*.txt %DEST_DIR%
 copy %SRC_DIR%\rooms\*  %DEST_DIR%\rooms\
 copy %SRC_DIR%\Sound\*.it  %DEST_DIR%\Sound\
 copy %SRC_DIR%\Sound\*.wav %DEST_DIR%\Sound\
-
-REM copy %SRC_DIR%\obj\*.obj %DEST_DIR%\obj\
-REM copy %SRC_DIR%\obj\*.mtl %DEST_DIR%\obj\
-REM copy %SRC_DIR%\obj\*.png %DEST_DIR%\obj\
-REM copy %SRC_DIR%\locations\location1\*.obj %DEST_DIR%\locations\location1\
-REM copy %SRC_DIR%\locations\location1\*.mtl %DEST_DIR%\locations\location1\
-REM copy %SRC_DIR%\locations\location1\*.png %DEST_DIR%\locations\location1\
 
 cd %DEST_DIR%
 
