@@ -36,7 +36,10 @@ bool GuiDataLineDisplay::Load(File* f)
 void GuiDataLineDisplay::Draw()
 {
   // Draw background - TODO Colour
-  DrawFilled(this, Colour(0.8f, 0.8f, 0.8f, 1), 0);
+  static const Colour BG_COLOUR = Colour(0.8f, 0.8f, 0.8f, 1);
+  static const Colour GRID_COLOUR = Colour(0.95f, 0.95f, 0.95f, 1);
+
+  DrawFilled(this, BG_COLOUR, 0);
 
   // TODO Draw grid lines?
 
@@ -57,9 +60,12 @@ std::cout << "No data for chart.\n";
   const Vec2f& size = GetSize();
 //  float barW = size.x / (float)numRows;
 
+  static const float X_BORDER = 0.2f;
+  static const float Y_BORDER = 0.1f;
+
   // Get constants
-  float xChartPos = GetCombinedPos().x + 0.2f; // TODO TEMP TEST offset
-  float yChartPos = GetCombinedPos().y;
+  float xChartPos = GetCombinedPos().x + X_BORDER; 
+  float yChartPos = GetCombinedPos().y - Y_BORDER;
   float minX = (float)data->GetMinX();
   float xRange = (float)data->GetMaxX() - minX;
   if (xRange < 0.001f)
@@ -69,9 +75,18 @@ std::cout << "No data for chart.\n";
   }
   Assert(xRange >= 0);
   // TODO Create a border area by changing these
-  float xSize = size.x - 0.4; // remove 0.2 from sides for labels
+  float xSize = size.x - X_BORDER * 2.0f; // remove 0.2 from sides for labels
   // Remove 0.1 off the bottom for x axis labels
-  float ySize = size.y - 0.1f; // TODO 
+  float ySize = size.y - Y_BORDER * 2.0f;  
+
+  // Draw grid
+  PushColour();
+  AmjuGL::SetColour(GRID_COLOUR);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  DrawLine(Vec2f(xChartPos, yChartPos), Vec2f(xChartPos + xSize, yChartPos));
+  DrawLine(Vec2f(xChartPos, yChartPos - ySize), Vec2f(xChartPos + xSize, yChartPos - ySize));
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  PopColour();
 
   // Draw x axis labels
   for (int i = 0; i < numRows; i++)
@@ -138,7 +153,7 @@ std::cout
        static const float S = 0.01f;
        Rect rect(xPos - S, xPos + S, yPos - S, yPos + S);
        PushColour();
-       AmjuGL::SetColour(Colour(1, 0, 0, 1));
+       AmjuGL::SetColour(GetColour(yv));
        AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
        DrawSolidRect(rect);
 
