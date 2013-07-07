@@ -432,6 +432,13 @@ bool File::GetDataLine(string* pResult, bool trim)
     }
   } while (IsComment(str) && More());
     
+  // Blank lines are skipped, so we need a special code for an empty string.
+  //  ($$$ is used for localised strings.)
+  if (str == "$$$empty")
+  {
+    str = "";
+  }
+
   *pResult = str;
   return true;
 }
