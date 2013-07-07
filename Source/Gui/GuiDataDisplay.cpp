@@ -30,6 +30,7 @@ ChartData::ChartData()
   m_maxX = std::numeric_limits<XTYPE>::min();
   m_minX = std::numeric_limits<XTYPE>::max();
   m_numYVals = 0;
+  m_useSameMinMax = true; // TODO TEMP TEST
 }
 
 void ChartData::AddRowSimple(XTYPE x, YTYPE y)
@@ -37,6 +38,11 @@ void ChartData::AddRowSimple(XTYPE x, YTYPE y)
   YVals yvals;
   yvals.push_back(y);
   AddRow(Row(x, yvals));  
+}
+
+void ChartData::AddXAxisLabel(const std::string& label)
+{
+  m_xAxisLabels.push_back(label);
 }
 
 void ChartData::AddRow(const ChartData::Row& r)
@@ -62,22 +68,53 @@ void ChartData::AddRow(const ChartData::Row& r)
   const YVals& y = r.second;
   if (m_maxY.empty())
   {
-    m_maxY = y;
+    for (unsigned int j = 0; j < y.size(); j++)
+    {
+      m_maxY.push_back(std::numeric_limits<XTYPE>::min());
+    }
   }
   if (m_minY.empty())
   {
-    m_minY = y;
+    for (unsigned int j = 0; j < y.size(); j++)
+    {
+      m_minY.push_back(std::numeric_limits<XTYPE>::max());
+    }
   }
   
-  for (unsigned int i = 0; i < y.size(); i++) 
+  if (m_useSameMinMax)
   {
-    if (y[i] > m_maxY[i])
+    // Set all min values to the same min y value
+    // Set all max values to the same max y value
+    for (unsigned int i = 0; i < y.size(); i++) 
     {
-      m_maxY[i] = y[i];
+      if (y[i] > m_maxY[0])
+      {
+        for (unsigned int j = 0; j < m_maxY.size(); j++)
+        {
+          m_maxY[j] = y[i];
+        }
+      }
+      if (y[i] < m_minY[0])
+      {
+        for (unsigned int j = 0; j < m_maxY.size(); j++)
+        {
+          m_minY[j] = y[i];
+        }
+      }
     }
-    if (y[i] < m_minY[i])
+  }
+  else
+  {
+    for (unsigned int i = 0; i < y.size(); i++) 
     {
-      m_minY[i] = y[i];
+      if (y[i] > m_maxY[i])
+      {
+        m_maxY[i] = y[i];
+      }
+      if (y[i] < m_minY[i])
+      {
+        m_minY[i] = y[i];
+      }
     }
   }
 }

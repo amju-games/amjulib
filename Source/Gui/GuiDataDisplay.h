@@ -19,6 +19,7 @@ public:
   typedef std::vector<YTYPE> YVals;
   typedef std::pair<XTYPE, YVals> Row;
   typedef std::vector<Row> Rows;
+  typedef std::vector<std::string> Labels;
 
   ChartData();
 
@@ -27,6 +28,9 @@ public:
   unsigned int GetNumRows() const { return m_rows.size(); }
 
   void AddRow(const Row& r);
+  void AddXAxisLabel(const std::string& label);
+
+  const std::string& GetXAxisLabel(int i) const { return m_xAxisLabels[i]; }
 
   // Use to simply add a row for simple (x, y) data (not multiple Y vals)
   void AddRowSimple(XTYPE x, YTYPE y);
@@ -47,6 +51,12 @@ private:
   // Once the first row is added, all other rows must have this same
   //  number of y vals.
   int m_numYVals;
+
+  Labels m_xAxisLabels;
+
+  // If set, all y values are within the same (min, max) range
+  // If not set, each line has its own min and max.
+  bool m_useSameMinMax;
 };
 
 class GuiDataDisplay : public GuiElement
