@@ -895,6 +895,11 @@ void Player::OnCollideBaddie(Baddie* baddie)
 
   // Lose some points
   int damage = baddie->GetDamage();
+  if (damage == 0)
+  {
+    return;
+  }
+
   m_health -= damage;
 
   // Send this to server so we can see other players' health
