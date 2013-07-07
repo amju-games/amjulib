@@ -1,0 +1,25 @@
+// version
+1
+
+
+// Name
+results-chart
+
+// pos
+-0.5, 0.5
+
+// size
+1.0, 1.0
+
+// Display type -- line
+data-line-display
+
+// Name, pos, size for data display.. this is offset within outer window,
+//  so you can scroll to see all of the chart.
+my-data-display
+
+// pos
+0, 0
+
+// size
+1.0, 1.0

@@ -18,9 +18,9 @@ text1
 // size
 2.0, 0.1
 // Text
-This feature is coming "soon"
+Your test scores
 // Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
+arial, 1.0, fgcol=000000
 
 // TODO more text
 
@@ -29,7 +29,7 @@ gui-button
 // Element name
 ok-button
 // pos (coords are -1..1)
--0.4, -0.7
+-0.4, -0.8
 // size
 0.8, 0.2
 // Image

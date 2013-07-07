@@ -2,7 +2,9 @@
 #define GS_COGRESULTS_H_INCLUDED
 
 #include <Singleton.h>
+#include <GuiChart.h>
 #include "GSGui.h"
+#include "CogTestResults.h"
 
 namespace Amju 
 {
@@ -17,6 +19,11 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+protected:
+  void SetChart(TestId);
+
+protected:
+  RCPtr<GuiChart> m_chart;
 };
 typedef Singleton<GSCogResults> TheGSCogResults;
 } // namespace
