@@ -15,6 +15,23 @@ void GuiDataDisplay::Draw()
   // Draw bg?
 }
 
+const Colour& GuiDataDisplay::GetColour(int dataColumn)
+{
+  const int NUM_COLOURS = 8;
+  static const Colour COLOUR[NUM_COLOURS] = 
+  {
+    Colour(1, 0, 0, 1),
+    Colour(1, 1, 0, 1),
+    Colour(0, 1, 0, 1),
+    Colour(0, 1, 1, 1),
+    Colour(0.5, 0.5, 0, 1),
+    Colour(1, 0.5, 0.5, 1),
+    Colour(1, 0, 1, 1),
+    Colour(0, 0, 1, 1),
+  };
+  return COLOUR[dataColumn % NUM_COLOURS];
+}
+
 void GuiDataDisplay::SetData(ChartData* data)
 {
   m_data = data;

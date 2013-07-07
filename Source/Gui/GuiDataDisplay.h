@@ -2,6 +2,7 @@
 #define GUI_DATA_DISPLAY_H_INCLUDED
 
 #include <vector>
+#include <Colour.h>
 #include "GuiElement.h"
 
 namespace Amju
@@ -67,6 +68,10 @@ public:
   virtual void Draw() = 0;
   void SetData(ChartData*);
   ChartData* GetData();
+
+  // Each 'column' of data (if you think of the data as rows in a DB table)
+  //  is drawn in a different colour
+  const Colour& GetColour(int dataColumn);
 
 protected:
   ChartData* m_data;
