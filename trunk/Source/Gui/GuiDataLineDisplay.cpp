@@ -4,6 +4,7 @@
 #include <DrawRect.h>
 #include "GuiDataLineDisplay.h"
 #include "DrawBorder.h"
+#include "GuiText.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -35,7 +36,7 @@ bool GuiDataLineDisplay::Load(File* f)
 void GuiDataLineDisplay::Draw()
 {
   // Draw background - TODO Colour
-  DrawFilled(this, Colour(1, 1, 1, 1), 0);
+  DrawFilled(this, Colour(0.8f, 0.8f, 0.8f, 1), 0);
 
   // TODO Draw grid lines?
 
@@ -45,10 +46,7 @@ void GuiDataLineDisplay::Draw()
     return;
   }
 
-  // Get max y-value
-  // NB we can display multiple y values in chart - TODO
-  // NB It might make sense to precalc meta data when the data is changed
-
+  // Row of data, as if in a DB table
   int numRows = (int)data->GetNumRows();
   if (numRows == 0)
   {
@@ -60,14 +58,43 @@ std::cout << "No data for chart.\n";
 //  float barW = size.x / (float)numRows;
 
   // Get constants
-  float xChartPos = GetCombinedPos().x;
+  float xChartPos = GetCombinedPos().x + 0.2f; // TODO TEMP TEST offset
   float yChartPos = GetCombinedPos().y;
   float minX = (float)data->GetMinX();
   float xRange = (float)data->GetMaxX() - minX;
+  if (xRange < 0.001f)
+  {
+    xRange = 1.0f;
+    // TODO What abount negative range ??
+  }
   Assert(xRange >= 0);
   // TODO Create a border area by changing these
-  float xSize = size.x;
-  float ySize = size.y;
+  float xSize = size.x - 0.4; // remove 0.2 from sides for labels
+  // Remove 0.1 off the bottom for x axis labels
+  float ySize = size.y - 0.1f; // TODO 
+
+  // Draw x axis labels
+  for (int i = 0; i < numRows; i++)
+  {
+    const ChartData::Row& row = data->GetRow(i);
+    // Get x-coord for this xval
+    ChartData::XTYPE xVal = row.first;
+
+    const std::string& str = data->GetXAxisLabel(i);
+        
+    static GuiText t;
+    t.SetSize(Vec2f(1.0f, 0.1f));
+    t.SetJust(GuiText::AMJU_JUST_CENTRE);
+    t.SetDrawBg(false);
+    float xPos = ((float)(xVal - minX)) / xRange * xSize + xChartPos;
+    float yPos = yChartPos - ySize;
+    t.SetLocalPos(Vec2f(xPos - 0.5f, yPos));
+    t.SetText(str);
+    t.SetTextSize(0.3f); // TODO 
+    t.Draw();
+  }
+
+  // Draw lines
 
   // Loop for each column of yVals
   int numYvs = data->GetNumYVals();
@@ -75,6 +102,11 @@ std::cout << "No data for chart.\n";
   {
     float minY = (float)data->GetMinY(yv);
     float yRange = (float)data->GetMaxY(yv) - minY;
+    if (yRange < 0.001f)
+    {
+      yRange = 1.0f;
+      // TODO What abount negative range ??
+    }
     Assert(yRange >= 0);
 
     // Draw each data row. TODO colours for each row..? Or auto generate
