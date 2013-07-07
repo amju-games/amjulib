@@ -172,6 +172,7 @@ void GSCogTestMenu::OnActive()
     AMJU_COG_TEST_STROOP_WORD,
     AMJU_COG_TEST_STROOP_COLOUR_WORD,
     AMJU_COG_TEST_TRAIL_MAKING,
+    AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE,
 
     AMJU_COG_TEST_MAX
   };
@@ -242,15 +243,34 @@ void GSCogTestMenu::OnActive()
   case AMJU_COG_TEST_TRAIL_MAKING:
     str = "This is called a trail making test.";
     m_func = Amju::TrailMakingTest;
+    TheGSTrailMakingTest::Instance()->SetIsAlternatingVersion(false);
+    break;
+
+  case AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE:
+    str = "This is called a trail making test (alternating).";
+    m_func = Amju::TrailMakingTest;
+    TheGSTrailMakingTest::Instance()->SetIsAlternatingVersion(true);
+    break;
+
+  case AMJU_COG_TEST_MAX:
+    str = "Well done and thank you for doing all those tests!";
+    m_func = Amju::Done;
     break;
 
   default:
-    str = "Well done on doing all those tests!";
-    m_func = Amju::Done;
+    Assert(0);
   }
 
-  LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::AskPractice);
-  TheLurker::Instance()->Queue(lm);
+  if (LOOKUP_TEST_ID[m_nextTest] == AMJU_COG_TEST_MAX)
+  {
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::Done);
+    TheLurker::Instance()->Queue(lm);
+  }
+  else
+  {
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::AskPractice);
+    TheLurker::Instance()->Queue(lm);
+  }
 }
 
 void GSCogTestMenu::AskPractice()

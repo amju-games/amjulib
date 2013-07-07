@@ -1,9 +1,13 @@
+#include <AmjuFirst.h>
 #include <GuiButton.h>
 #include <GuiComposite.h>
 #include <EventPoller.h>
 #include <Timer.h>
 #include "GSCogTestBase.h"
 #include "CogTestNag.h"
+#include "HeartCount.h"
+#include "GameConsts.h"
+#include <AmjuFinal.h>
 
 namespace Amju
 {
@@ -15,6 +19,11 @@ static void OnStopTest()
 GSCogTestBase::GSCogTestBase()
 {
   m_isFinished = false;
+  m_testId = -1;
+  m_timer = 0;
+  m_maxTime = 0;
+  m_correct = 0;
+  m_incorrect = 0;
 }
 
 void GSCogTestBase::OnActive()
@@ -23,6 +32,19 @@ void GSCogTestBase::OnActive()
   GSBase::OnActive();
   LoadCogTestBg();
   m_isFinished = false;
+}
+
+void GSCogTestBase::UpdateCorrectIncorrect()
+{
+  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "correct-incorrect-text");
+  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  scoreText->SetText(s);
+}
+
+void GSCogTestBase::UpdateScore()
+{
+  // Call when test complete
+  ChangePlayerCount(SCORE_KEY, m_correct); // ? 
 }
 
 void GSCogTestBase::UpdateTimer()
@@ -53,10 +75,9 @@ void GSCogTestBase::UpdateTimer()
 
 void GSCogTestBase::LoadCommonGui()
 {
-#ifdef WTF
   // Load common gui file, then create composite of this and the 
   //  state-specific gui.
-  EventPoller* ep = TheEventPoller::Instance();
+  static EventPoller* ep = TheEventPoller::Instance();
   if (ep->HasListener(m_gui))
   {
     ep->RemoveListener(m_gui);
@@ -75,24 +96,9 @@ void GSCogTestBase::LoadCommonGui()
   m_gui = comp;
   ep->AddListener(m_gui);
 
-  PGuiElement common = LoadGui("gui-cog-test-common.txt");
-  Assert(common);
-  static EventPoller* ep = TheEventPoller::Instance();
-  if (ep->HasListener(common))
-  {
-    ep->RemoveListener(common);
-  }
-  GuiComposite* comp = dynamic_cast<GuiComposite*>(m_gui.GetPtr());
-  if (comp)
-  {
-    comp->AddChild(common);
-  }
-
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
   done->SetCommand(Amju::OnStopTest);
   done->SetVisible(true);
-#endif
-
 }
 }
 

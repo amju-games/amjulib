@@ -18,20 +18,20 @@ timer
 // size
 2.0, 0.1 
 // Text
-Time remaining: 3:00
+$$$empty
 // Font name, size
 arial, 1.0, bgcol=ffffff, fgcol=000000
 
 // Element type
 gui-text
 // Element name
-score-text
+correct-incorrect-text
 // pos (coords are -1..1)
 -1.0, 0.9
 // size
 2.0, 0.1 
 // Text
-Score text (correct etc)
+$$$empty
 // Font name, size
 arial, 1.0, bgcol=ffffff, fgcol=000000
 
@@ -53,13 +53,13 @@ arial, 1.0
 gui-image
 heart-img
 0.8, 1.0
-0.2, 0.2
-heart.png
+0.17, 0.2
+coin3.png
 
 // Num hearts text
 gui-text
 score-num
-1.0, 0.7
+0.5, 1.0
 0.3, 0.2
 // Text
 SCORE
@@ -67,15 +67,3 @@ arial, 1.5, fgcol=000000, sx=0.7
 
 
 
-// Element type
-gui-text
-// Element name
-test-type
-// pos (coords are -1..1)
--1.0, 1.9
-// size
-2.0, 0.1
-// Text
-TEST NAME
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff

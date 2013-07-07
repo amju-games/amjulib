@@ -15,6 +15,7 @@
 #include "LurkMsg.h"
 #include "CogTestResults.h"
 #include "GameConsts.h"
+#include "ROConfig.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -55,7 +56,13 @@ GSTrailMakingTest::GSTrailMakingTest()
   m_currentCircle = -1;
   m_isFinished = false;
 
-  m_alternatingVersion = true; // TODO 
+  m_alternatingVersion = false;  
+}
+
+void GSTrailMakingTest::SetIsAlternatingVersion(bool isAlternating)
+{
+  m_alternatingVersion = isAlternating;
+  m_testId = isAlternating ? AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE : AMJU_COG_TEST_TRAIL_MAKING;
 }
 
 void GSTrailMakingTest::OnDeactive()
@@ -73,10 +80,10 @@ void GSTrailMakingTest::OnActive()
 
   m_gui = LoadGui("gui-trailmaking.txt"); 
   Assert(m_gui);
-//  LoadCommonGui(); // instead of..
-  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnStopTest);
-  done->SetVisible(true);
+  LoadCommonGui(); // instead of..
+  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  //done->SetCommand(Amju::OnStopTest);
+  //done->SetVisible(true);
 
   ResetTest();
 }
@@ -146,8 +153,8 @@ std::cout << "Oh crap, got boxed in, restarting random walk..\n";
         goto OH_CRAP; // I R teh awsom programmer
       }
 
-      // reach further if we can't find an empty square
-      int reach = (count < 10) ? 3 : 5;
+      // reach further if we can't find an empty square???
+      int reach = 3; //(count < 10) ? 3 : 5;
 
       // Find a new position close to the old position
       newPos = Vec2i(pos.x + rand() % reach - reach/2, 
@@ -193,7 +200,7 @@ void GSTrailMakingTest::AddCircle(int i, const Vec2f& pos)
     }
     else
     {
-      str = ToString(i);
+      str = ToString(i + 1);
     }
 
     TrailCircle d(pos, str);
@@ -205,6 +212,7 @@ void GSTrailMakingTest::Update()
   GSCogTestBase::Update();
   UpdateHeartCount();
   UpdateTimer();
+  UpdateCorrectIncorrect();
 }
 
 void GSTrailMakingTest::Draw()
@@ -259,48 +267,36 @@ void TrailCircle::Draw()
 
 void GSTrailMakingTest::Draw2d()
 {
+  // Draw lines connecting correctly clicked dots
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  PushColour();
+  AmjuGL::SetColour(Colour(0, 0, 0, 1));
+  glLineWidth(3); // ? Make AmjuGL func
+  for (int i = 1; i <= m_currentCircle; i++)
+  {
+    Vec2f pos[2] = { m_circles[i - 1].m_pos, m_circles[i].m_pos };
+    AmjuGL::DrawLine(AmjuGL::Vec3(pos[0].x, pos[0].y, 0), AmjuGL::Vec3(pos[1].x, pos[1].y, 0));
+  }
+  PopColour();
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+
   for (unsigned int i = 0; i < m_circles.size(); i++)
   {
     m_circles[i].Draw();
   }
-
-  // Draw lines connecting correctly clicked dots
-  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
-  PushColour();
-  AmjuGL::SetColour(Colour(0, 0, 0, 1));
-  glLineWidth(3); // ?
-  glBegin(GL_LINES);
-  for (int i = 1; i < m_currentCircle; i++)
-  {
-    Vec2f pos[2] = { m_circles[i - 1].m_pos, m_circles[i].m_pos };
-    //AmjuGL::DrawLine(AmjuGL::Vec3(pos[0].x, pos[0].y, 0), AmjuGL::Vec3(pos[1].x, pos[1].y, 0));
-    glVertex2f(pos[0].x, pos[0].y);
-    glVertex2f(pos[1].x, pos[1].y);
-  }
-  glEnd();
-  PopColour();
 
   GSCogTestBase::Draw2d(); // cursor
 }
 
 bool GSTrailMakingTest::OnCursorEvent(const CursorEvent& ce)
 {
-//std::cout << "Cursor pos: (" << ce.x << ", " << ce.y << ")\n";
-
-  for (int i = 0; i < (int)m_circles.size(); i++)
-  {
-    m_circles[i].m_incorrect = false;
-  }
-
-  // Check if cursor is on a dot
+  // Check if cursor is on a circle
   bool noCircle = true;
   for (int i = 0; i < (int)m_circles.size(); i++)
   {
     if (m_circles[i].IsClicked(Vec2f(ce.x, ce.y)))
     {
       noCircle = false;
-
-//std::cout << "Clicked on circle " << i << "\n";
 
       if (i == m_currentCircle)
       {
@@ -318,32 +314,47 @@ bool GSTrailMakingTest::OnCursorEvent(const CursorEvent& ce)
 std::cout << "FINISHED!\n";
           // Save num errors, time, num completed, (other info ?)
           Finished();
+          // TODO Tada! sound
         }
         else
         {
-std::cout << "CORRECT! Now on to circle " << m_currentCircle + 1 << "\n";
+std::cout << "CORRECT! Now on to circle " << m_currentCircle + 1 << " (" + 
+  m_circles[m_currentCircle + 1].m_str + ")\n";
+
+          TheSoundManager::Instance()->PlayWav(
+            ROConfig()->GetValue("sound-cogtest-correct"));
         }
       }
       else
       {
-        // On a different dot. Incorrect? But only score incorrect once.
-        if (!m_circles[i].m_incorrect)
+        // If a circle has already been correctly clicked, then this is not
+        //  an incorrect choice.
+        if (!m_circles[i].m_clicked)
         {
-          // TODO Get this to print out only once per incorrect circle,
-          //  then can use for incorrect score.
-////          std::cout << "Incorrect!\n";
+          // On a different dot. Incorrect? But only score incorrect once.
+          if (!m_circles[i].m_incorrect)
+          {
+            // TODO Get this to print out only once per incorrect circle,
+            //  then can use for incorrect score.
+std::cout << "Incorrect!\n";
+            m_incorrect++;
+          }
+          m_circles[i].m_incorrect = true;
+
+          TheSoundManager::Instance()->PlayWav(
+            ROConfig()->GetValue("sound-cogtest-fail"));
         }
-        m_circles[i].m_incorrect = true;
       }
     }
   }
-  //if (noCircle)
-  //{
-  //  for (int i = 0; i < (int)m_circles.size(); i++)
-  //  {
-  //    m_circles[i].m_incorrect = false;
-  //  }
-  //}
+
+  if (noCircle)
+  {
+    for (int i = 0; i < (int)m_circles.size(); i++)
+    {
+      m_circles[i].m_incorrect = false;
+    }
+  }
 
   return true;
 }
@@ -404,6 +415,8 @@ void GSTrailMakingTest::Finished()
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
+
+    UpdateScore();
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 

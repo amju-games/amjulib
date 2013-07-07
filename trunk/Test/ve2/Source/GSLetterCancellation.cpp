@@ -48,8 +48,8 @@ void GSLetterCancellation::Finished()
 {
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
   done->SetVisible(false);
-  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  cancel->SetVisible(false);
+  //GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  //cancel->SetVisible(false);
 
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   if (isPrac)
@@ -97,6 +97,8 @@ void GSLetterCancellation::Finished()
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
   
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
+
+    UpdateScore();
 
     TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
   }
@@ -218,9 +220,10 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         // Mark as picked
         m_letters[i][j] = '@';
 
-        GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-        std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-        scoreText->SetText(s); 
+        UpdateCorrectIncorrect();
+        //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+        //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+        //scoreText->SetText(s); 
 
         AmjuGL::Vert verts[4] = 
         {
@@ -254,34 +257,35 @@ void GSLetterCancellation::Update()
   GSGui::Update();
   TheObjectUpdater::Instance()->Update();
   UpdateHeartCount();
+  UpdateTimer();
 
-  m_timer -= TheTimer::Instance()->GetDt();
+  //m_timer -= TheTimer::Instance()->GetDt();
 
-  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
-  // Don't do countdown if in practice mode
-  if (!isPrac)
-  {
-    GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
-    std::string s;
-    if (m_timer > 0)
-    {
-      int min = (int)(m_timer / 60.0f);
-      int sec = (int)(m_timer - 60.0f * min);
-      s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
-    }
-    else
-    {
-      m_isFinished = true;
-      // TODO flash
-      s = "0:00";
+  //bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  //// Don't do countdown if in practice mode
+  //if (!isPrac)
+  //{
+  //  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
+  //  std::string s;
+  //  if (m_timer > 0)
+  //  {
+  //    int min = (int)(m_timer / 60.0f);
+  //    int sec = (int)(m_timer - 60.0f * min);
+  //    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
+  //  }
+  //  else
+  //  {
+  //    m_isFinished = true;
+  //    // TODO flash
+  //    s = "0:00";
 
-      //if (m_timer < -10.0f)
-      {
-        Finished();
-      }
-    }
-    timeText->SetText(s);
-  }
+  //    //if (m_timer < -10.0f)
+  //    {
+  //      Finished();
+  //    }
+  //  }
+  //  timeText->SetText(s);
+  //}
 }
 
 void GSLetterCancellation::Draw()
@@ -425,6 +429,8 @@ void GSLetterCancellation::OnActive()
 
   m_gui = LoadGui("gui-lettercancellation.txt");
   Assert(m_gui);
+  LoadCommonGui();
+
   GuiComposite* comp = dynamic_cast<GuiComposite*>(m_gui.GetPtr());
   Assert(comp);
 
@@ -437,12 +443,12 @@ void GSLetterCancellation::OnActive()
     // ?
   }
 
-  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnDoneButton);
+  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  //done->SetCommand(Amju::OnDoneButton);
   //done->SetHasFocus(true);
 
-  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  cancel->SetCommand(Amju::OnStopTest);
+  //GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  //cancel->SetCommand(Amju::OnStopTest);
   //cancel->SetIsCancelButton(true);
 
   TheEventPoller::Instance()->AddListener(m_listener);
@@ -460,28 +466,29 @@ void GSLetterCancellation::StartTest()
   m_blocks.clear();
 
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
-  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
+  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  ////GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
 
   // Always allow player to escape, but TODO no prize if you skip out early
-  if (isPrac)
-  {
-    // For practice, done is visible, cancel is not visible.
-    done->SetVisible(true);
-    cancel->SetVisible(false);
-  }
-  else
-  {
-    done->SetVisible(false);
-    cancel->SetVisible(true);
-  }
+  //if (isPrac)
+  //{
+  //  // For practice, done is visible, cancel is not visible.
+  //  done->SetVisible(true);
+  //  ////cancel->SetVisible(false);
+  //}
+  //else
+  //{
+  //  done->SetVisible(false);
+  //  ////cancel->SetVisible(true);
+  //}
 
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   timeText->SetVisible(!isPrac);
 
-  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  scoreText->SetText(s);
+  UpdateCorrectIncorrect();
+  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  //scoreText->SetText(s);
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
   // (Generally: there are m_numSpecialLetters * m_specialLetter).

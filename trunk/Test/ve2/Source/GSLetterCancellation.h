@@ -80,10 +80,6 @@ protected:
   float m_maxTime; // 3 mins in Malec et al
 
   bool m_isPaused; // ?
-  bool m_isFinished;
-
-  int m_correct;
-  int m_incorrect;
 };
 typedef Singleton<GSLetterCancellation> TheGSLetterCancellation;
 } // namespace
