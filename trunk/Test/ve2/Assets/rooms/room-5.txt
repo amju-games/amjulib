@@ -1,4 +1,4 @@
-// ROOM 2
+// ROOM 5
 // Version
 1
 
@@ -18,28 +18,28 @@ ground4-sw.png
 ground4-se.png
 // 9-12
 ground3.png
-rock3.png
-rock4.png
+log1.png
+log2.png
 steps-ew.png
 
 // (x, y) Size of grid
-9, 5
+3, 5
 // Grid of tiles - numbers are zero-based indices into texture list
 // Background grid
-5  1  1  1  1  1  1  1  6
-4  9  9  9  9  9  9  9  12
-4  9  9  9  9  9  9  9  12
-4  9  9  9  9  9  9  9  12
-7  2  2  2  2  2  2  2  8
+5  1  6
+4  9  12
+4  9  12
+4  9  12
+7  2  8
 // Obstacles grid
-10 11 10 11 10 10 10 11 10
-0   0  0  0  0  0  0  0  0
-0   0  0  0  0  0  0  0  0
-0   0  0  0  0  0  0  0  0
-10 11 10 11  0 11 10 11 10
+10  0 11
+11  0 10
+10  0 11
+11  0 10
+10  10 11
 
 // Destinations N, S, E, W
-0, 5, 4, 1
+2, 0, 0, 0
 
 baddie
 // Pos
@@ -70,7 +70,7 @@ skull2.png
 0
 // Sounds for harmless/harmful state change
 <none>
-<none>
+sound/gasp_x.wav
 
 baddie
 // Pos
