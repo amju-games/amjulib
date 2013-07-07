@@ -176,6 +176,22 @@ bool CogTestResults::HaveGotAllResultsForDate(Time testDate)
   return true;
 }
 
+Results CogTestResults::GetResultsForTestType(TestId tid)
+{
+  Results r;
+
+  for (unsigned int i = 0; i < m_results.size(); i++)
+  {
+    Result* res = m_results[i];    
+    if (res->m_testId == tid)
+    {
+      r.push_back(res);
+    }
+  }
+
+  return r;
+}
+
 Results CogTestResults::GetResultsForDate(Time testDate)
 {
   testDate.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));

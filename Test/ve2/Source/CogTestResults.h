@@ -21,6 +21,7 @@ enum TestId
   AMJU_COG_TEST_STROOP_COLOUR_WORD,
   AMJU_COG_TEST_REACTION_TIME,
   AMJU_COG_TEST_TRAIL_MAKING,
+  AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE,
 
   AMJU_COG_TEST_MAX
 };
@@ -36,7 +37,8 @@ const int EXPECTED_NUM_RESULTS_FOR_TEST[] =
   2,  // AMJU_COG_TEST_STROOP_COLOUR,
   2,  // AMJU_COG_TEST_STROOP_COLOUR_WORD,
   3,  // AMJU_COG_TEST_REACTION_TIME
-  2,  // AMJU_COG_TEST_TRAIL_MAKING   // TODO
+  3,  // AMJU_COG_TEST_TRAIL_MAKING   
+  3,  // AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE   
 };
 
 class Result
@@ -57,6 +59,10 @@ public:
   bool Save(File*);
 
   bool NoSessionId() const { return m_sessionId.empty(); }
+
+  const std::string& GetKey() const { return m_key; }
+  const std::string& GetVal() const { return m_val; }
+  Time GetTimestamp() const { return m_timestamp; }
 
 private:
   friend class CogTestResults;
@@ -93,6 +99,10 @@ public:
 
   // Call to attempt to send all outstanding results to server
   void Commit();
+
+  // Returns Results for the given test type.
+  // NB This will only return historical results stored locally, it doesn't pull down from server.
+  Results GetResultsForTestType(TestId);
 
   // Returns Results for the given date (timestamp is rounded down).
   // NB This will only return historical results stored locally, it doesn't pull down from server.

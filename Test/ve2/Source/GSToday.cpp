@@ -114,10 +114,10 @@ void GSToday::OnActive()
   // View game stats
   GuiButton* viewAch = (GuiButton*)GetElementByName(m_gui, "view-ach-button");
   viewAch->SetCommand(OnTodayViewAchievements);
+*/
 
   GuiButton* viewResults = (GuiButton*)GetElementByName(m_gui, "view-results-button");
   viewResults->SetCommand(OnTodayViewResults);
-*/
 
   // For admin/dev, button to play game even on non-game days
   GuiButton* playSingle = (GuiButton*)GetElementByName(m_gui, "play-single-button");

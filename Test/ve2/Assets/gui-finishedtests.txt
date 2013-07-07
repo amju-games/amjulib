@@ -6,7 +6,7 @@ gui-comp
 // Name
 finishedtests-comp
 // Num children
-3
+4
 
 gui-button
 ok-button
@@ -16,6 +16,16 @@ ok-button
 0.8, 0.2
 gui-button-4.png
 ok
+arial, 2.0
+
+gui-button
+results-button
+// pos
+-0.4, 0
+// size
+0.8, 0.2
+gui-button-4.png
+view results
 arial, 2.0
 
 

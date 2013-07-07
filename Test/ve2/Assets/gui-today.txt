@@ -6,17 +6,17 @@ gui-comp
 // Name
 today-comp
 // Num children
-5
+6
 
-//gui-button
-//view-results-button
-//// pos
-//-0.4, 0.0
-//// size
-//0.8, 0.2
-//gui-button-4.png
-//view test results
-//arial, 1.5, sx=0.8
+gui-button
+view-results-button
+// pos
+-0.4, 0.0
+// size
+0.8, 0.2
+gui-button-4.png
+view test results
+arial, 1.5, sx=0.8
 
 //gui-button
 //view-ach-button
