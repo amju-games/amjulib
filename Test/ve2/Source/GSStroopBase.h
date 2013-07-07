@@ -24,12 +24,8 @@ protected:
   virtual void Finished();
 
 protected:
-  float m_maxTime;
   int m_correctChoice;
-  int m_correct;
-  int m_incorrect;
   std::string m_testName;
-  bool m_isFinished;
 
   static const int NUM_WORDS = 5;
   static const char* WORDS[NUM_WORDS];

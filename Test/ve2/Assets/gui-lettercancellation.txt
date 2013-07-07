@@ -6,91 +6,15 @@ gui-comp
 // Name
 lettercanc-comp
 // Num children
-6
-
-
-// Element type
-gui-text
-// Element name
-timer
-// pos (coords are -1..1)
--1.0, 0.8
-// size
-2.0, 0.1 
-// Text
-Time remaining: 3:00
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000
-
-// Element type
-gui-text
-// Element name
-score
-// pos (coords are -1..1)
--1.0, 0.7
-// size
-2.0, 0.1 
-// Text
-Score
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000
-
-gui-button
-// Element name
-done-button
-// pos (coords are -1..1)
--0.4, -0.6
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-stop practicing
-// Font name, size
-arial, 1.6, sx=0.6 
-
-gui-button
-// Element name
-cancel-button
-// pos (coords are -1..1)
--0.9, 0.9
-// size
-0.4, 0.1
-// Image
-gui-button-4.png
-// Text
-stop test
-// Font name, size
-arial, 1.0 
-
-
-// Heart image
-gui-image
-heart-img
-0.6, 1.05
-0.4, 0.5
-heart.png
-
-// Num hearts text
-gui-text
-heart-num
-0.6, 0.9
-0.4, 0.2
-// Text
 0
-arial, 1.5, fgcol=ffffff, sx=0.7
 
 
-// Element type
-gui-text
-// Element name
-text1
-// pos (coords are -1..1)
--1.0, 0.9
-// size
-2.0, 0.1
-// Text
-Letter cancellation test
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff
+
+
+
+
+
+
+
+
 

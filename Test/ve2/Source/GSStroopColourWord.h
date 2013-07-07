@@ -17,7 +17,6 @@ private:
   void SetTest();
 
 private:
-  bool m_isFinished;
 };
 typedef Singleton<GSStroopColourWord> TheGSStroopColourWord;
 } // namespace

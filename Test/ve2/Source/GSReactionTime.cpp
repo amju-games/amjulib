@@ -128,6 +128,9 @@ void GSReactionTime::NextGo()
       LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 
+    m_correct = 3; // so added to score
+    UpdateScore();
+
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 
     TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
@@ -228,6 +231,12 @@ void GSReactionTime::Draw2d()
   GSGui::Draw2d();
 }
 
+void GSReactionTime::Finished()
+{
+  // Player has run out of time - move on..
+
+}
+
 void GSReactionTime::OnActive()
 {
 //  GSGui::OnActive();
@@ -239,6 +248,7 @@ void GSReactionTime::OnActive()
 
   m_gui = LoadGui("gui-reactiontime.txt");
   Assert(m_gui);
+  LoadCommonGui();
 
   // Set focus element, cancel element, command handlers
   GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");

@@ -113,9 +113,10 @@ void GSStroopBase::ResetTest()
   m_incorrect = 0;
   m_isFinished = false;
 
-  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  scoreText->SetText(s);
+  UpdateCorrectIncorrect();
+  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  //scoreText->SetText(s);
 }
 
 void GSStroopBase::SetTest()
@@ -123,7 +124,8 @@ void GSStroopBase::SetTest()
   GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
   word->SetVisible(true);
 
-  std::random_shuffle(m_indices, m_indices + NUM_WORDS);
+  // Don't shuffle buttons, this is not done in the PEBL version of the test
+  ////std::random_shuffle(m_indices, m_indices + NUM_WORDS);
 
   m_correctChoice = rand() % 4; 
 
@@ -178,7 +180,6 @@ void GSStroopBase::OnChoiceButton(int choice)
   if (choice == m_correctChoice)
   {
     // TODO How much score improvement?
-    ChangePlayerCount(SCORE_KEY, 100); 
     TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
     m_correct++;
   }
@@ -188,9 +189,10 @@ void GSStroopBase::OnChoiceButton(int choice)
     m_incorrect++;
   }
 
-  GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  scoreText->SetText(s);
+  UpdateCorrectIncorrect();
+  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
+  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
+  //scoreText->SetText(s);
 
   // Animate the text off the screen ?
 
@@ -256,6 +258,8 @@ void GSStroopBase::Finished()
     Assert(m_testId != -1);
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
+
+    UpdateScore();
 
     TheGSCogTestMenu::Instance()->AdvanceToNextTest();
 

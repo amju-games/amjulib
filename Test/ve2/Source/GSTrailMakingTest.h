@@ -26,8 +26,6 @@ struct TrailCircle
   bool m_incorrect;
 };
 
-class TrailListener;
-
 class GSTrailMakingTest : public GSCogTestBase
 {
   GSTrailMakingTest();
@@ -45,6 +43,8 @@ public:
 
   void ResetTest();
 
+  void SetIsAlternatingVersion(bool isAlternating);
+
 protected:
   void AddCircle(int i, const Vec2f& pos);
   void Finished();
@@ -54,11 +54,10 @@ protected:
   Circles m_circles;
  
   int m_currentCircle;
-  int m_correct;
-  int m_incorrect;
 
-  TrailListener* m_listener;
+  RCPtr<EventListener> m_listener;
 
+  // false = 1, 2, 3.. true = 1, A, 2, B, 3, C..
   bool m_alternatingVersion;
 };
 }

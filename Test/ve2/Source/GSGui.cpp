@@ -143,13 +143,17 @@ void GSGui::UpdateHeartCount()
 {
   if (m_gui)
   {
-    GuiText* text = (GuiText*)GetElementByName(m_gui, "heart-num");
+    GuiText* text = (GuiText*)GetElementByName(m_gui, "score-num");
     if (text)
     {
       int h = 0;
       if (GetPlayerCount(SCORE_KEY, &h))
       {
         text->SetText(ToString(h));
+      }
+      else
+      {
+        text->SetText("?");
       }
     }
   }

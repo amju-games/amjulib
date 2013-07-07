@@ -29,7 +29,11 @@ void GSStroopColourWord::SetTest()
   GSStroopBase::SetTest();
 
   GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
-  int incorrect = (m_correctChoice + 1) % 4;
+  int incorrect = m_correctChoice;
+  while (incorrect == m_correctChoice)
+  {
+    incorrect = rand() % 4;
+  }
   word->SetFgCol(COLOURS[m_indices[m_correctChoice]]); // colour is correct
   word->SetText(WORDS[m_indices[incorrect]]); // text is incorrect
 }

@@ -2,11 +2,11 @@
 #define GS_REACTIONTIME_H_INCLUDED
 
 #include <Singleton.h>
-#include "GSGui.h"
+#include "GSCogTestBase.h"
 
 namespace Amju 
 {
-class GSReactionTime : public GSGui
+class GSReactionTime : public GSCogTestBase
 {
   GSReactionTime();
   friend class Singleton<GSReactionTime>;
@@ -16,6 +16,8 @@ public:
   virtual void Draw();
   virtual void Draw2d();
   virtual void OnActive();
+
+  virtual void Finished();
 
   void OnButton();
   void NextGo();
