@@ -6,7 +6,7 @@ gui-comp
 // Name
 cogresults-comp
 // Num children
-2
+12
 
 
 // Element type
@@ -22,7 +22,85 @@ Your test scores
 // Font name, size
 arial, 1.0, fgcol=000000
 
-// TODO more text
+// Element type
+gui-text
+// Element name
+test-name
+// pos (coords are -1..1)
+-1.0, -0.5
+// size
+2.0, 0.1
+// Text
+<test name>
+// Font name, size
+arial, 1.0, fgcol=000000
+
+
+// Key
+// Element type
+gui-text
+// Element name
+key1
+// pos (coords are -1..1)
+-0.9, -0.6
+// size
+0.5, 0.1
+// Text
+key 1
+// Font name, size
+arial, 0.7, fgcol=000000, left
+
+// Element type
+gui-text
+// Element name
+key2
+// pos (coords are -1..1)
+-0.3, -0.6
+// size
+0.5, 0.1
+// Text
+key 2
+// Font name, size
+arial, 0.7, fgcol=000000, left
+
+// Element type
+gui-text
+// Element name
+key3
+// pos (coords are -1..1)
+0.4, -0.6
+// size
+0.5, 0.1
+// Text
+key 3
+// Font name, size
+arial, 0.7, fgcol=000000, left
+
+gui-rect
+key1-img
+-1.0, -0.6
+0.1, 0.1
+// Colour
+ff0000
+0
+15
+
+gui-rect
+key2-img
+-0.4, -0.6
+0.1, 0.1
+ffff00
+0
+15
+
+gui-rect
+key1-img
+0.3, -0.6
+0.1, 0.1
+00ff00
+0
+15
+
 
 // element type
 gui-button
@@ -39,4 +117,49 @@ ok
 // Font name, size
 arial, 2.0
 
+gui-chart
+// Name
+results-chart
+// pos
+-0.9, 0.8
+// size
+1.8, 1.2
+// Display type -- line
+data-line-display
+// Name, pos, size for data display.. this is offset within outer window,
+//  so you can scroll to see all of the chart.
+my-data-display
+// pos
+0, 0
+// size
+1.8, 1.2
 
+// element type
+gui-button
+// Element name
+next-button
+// pos (coords are -1..1)
+0.6, -0.8
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+next
+// Font name, size
+arial, 2.0
+
+// element type
+gui-button
+// Element name
+prev-button
+// pos (coords are -1..1)
+-1.0, -0.8
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+prev
+// Font name, size
+arial, 2.0

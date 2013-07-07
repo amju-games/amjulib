@@ -19,11 +19,14 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void OnNext();
+  void OnPrev();
+
 protected:
   void SetChart(TestId);
 
 protected:
-  RCPtr<GuiChart> m_chart;
+  int m_testId;
 };
 typedef Singleton<GSCogResults> TheGSCogResults;
 } // namespace

@@ -8,6 +8,16 @@
 
 namespace Amju
 {
+static void OnNext()
+{
+  TheGSCogResults::Instance()->OnNext();
+}
+
+static void OnPrev()
+{
+  TheGSCogResults::Instance()->OnPrev();
+}
+
 static void OnCogTestResultsOk()
 {
   // TODO does this work from anywhere ??
@@ -24,6 +34,7 @@ static void OnCogTestResultsOk()
 
 GSCogResults::GSCogResults()
 {
+  m_testId = AMJU_COG_TEST_LETTER_CAN;
 }
 
 void GSCogResults::Update()
@@ -40,21 +51,37 @@ void GSCogResults::Draw()
 
 void GSCogResults::Draw2d()
 {
-  m_chart->Draw();
-
   GSGui::Draw2d();
 }
 
 void GSCogResults::SetChart(TestId test)
 {
+  GuiText* testname = (GuiText*)GetElementByName(m_gui, "test-name");
+  testname->SetText(GetTestName(test));
+
+  GuiText* key[3] = 
+  {
+    (GuiText*)GetElementByName(m_gui, "key1"),
+    (GuiText*)GetElementByName(m_gui, "key2"),
+    (GuiText*)GetElementByName(m_gui, "key3")
+  };
+
   ChartData* cd = new ChartData;
-  m_chart->GetDataDisplay()->SetData(cd);
+  GuiChart* chart = (GuiChart*)GetElementByName(m_gui, "results-chart");
+  Assert(chart);
+  chart->GetDataDisplay()->SetData(cd);
 
   typedef std::map<Time, Results> DateMap;
   DateMap datemap;
 
   // Get historical results from CogTestResults
   Results r = TheCogTestResults::Instance()->GetResultsForTestType(test);
+  if (r.empty())
+  {
+    // TODO Hide unused GUI
+    return;
+  }
+
   for (unsigned int i = 0; i < r.size(); i++)
   {
     Result* res = r[i];    
@@ -63,6 +90,21 @@ void GSCogResults::SetChart(TestId test)
 
     // Put data into buckets for dates
     datemap[t].push_back(res);
+  }
+
+  // TODO Detect and fix situations where data is missing
+
+  // Look at first date of data
+  Results& results = datemap.begin()->second;
+  int num = results.size();
+  if (num != 2 && num != 3)
+  {
+    // Unexpected number of results :-(
+  }
+  // Set key text
+  for (int i = 0; i < num; i++)
+  {
+    key[i]->SetText(results[i]->GetKey());
   }
 
   int x = 0;
@@ -86,7 +128,6 @@ void GSCogResults::SetChart(TestId test)
     cd->AddRow(row);
     cd->AddXAxisLabel(t.ToStringJustDate());
   }
-
 }
 
 void GSCogResults::OnActive()
@@ -98,20 +139,36 @@ void GSCogResults::OnActive()
   m_gui = LoadGui("gui-cogresults.txt");
   Assert(m_gui);
 
-  m_chart = (GuiChart*)CreateChart();
-  if (!m_chart->OpenAndLoad("gui-results-chart.txt"))
-  {
-    Assert(0);
-  }
-  GuiComposite* comp = dynamic_cast<GuiComposite*>(m_gui.GetPtr());
-  Assert(comp);
-  comp->AddChild(m_chart);
-
   // TODO Set focus element, cancel element, command handlers
   GuiButton* ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   ok->SetCommand(OnCogTestResultsOk);
 
-  SetChart(AMJU_COG_TEST_REACTION_TIME);
+  GuiButton* next = (GuiButton*)GetElementByName(m_gui, "next-button");
+  next->SetCommand(Amju::OnNext);
+
+  GuiButton* prev = (GuiButton*)GetElementByName(m_gui, "prev-button");
+  prev->SetCommand(Amju::OnPrev);
+
+  SetChart((TestId)m_testId);
 }
 
+void GSCogResults::OnNext()
+{
+  m_testId++;
+  if (m_testId >= AMJU_COG_TEST_MAX)
+  {
+    m_testId = AMJU_COG_TEST_LETTER_CAN;
+  }
+  SetChart((TestId)m_testId);
+}
+
+void GSCogResults::OnPrev()
+{
+  m_testId--;
+  if (m_testId < AMJU_COG_TEST_LETTER_CAN)
+  {
+    m_testId = AMJU_COG_TEST_MAX - 1;
+  }
+  SetChart((TestId)m_testId);
+}
 } // namespace

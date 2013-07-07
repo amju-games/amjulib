@@ -13,6 +13,23 @@ static const int MAX_CONCURRENT_RESULTS = 100; // max result HTTP reqs in flight
 
 static const char* COGTEST_FILENAME = "cogtest.txt";
 
+const char* GetTestName(TestId id)
+{
+  static const char* NAMES[AMJU_COG_TEST_MAX] = 
+  {
+    0,
+    "Letter Cancellation test",
+    "Symbol Cancellation test",
+    "Stroop Word test",
+    "Stroop Colour test",
+    "Stroop Colour-Word test",
+    "Reaction time test",
+    "Trail-Making test (numbers only)",
+    "Trail-Making test (letters and numbers)"
+  };
+  return NAMES[id];
+}
+
 class ReqStoreResult : public Ve1Req
 {
 public:

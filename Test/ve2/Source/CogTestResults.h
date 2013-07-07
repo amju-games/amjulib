@@ -26,6 +26,8 @@ enum TestId
   AMJU_COG_TEST_MAX
 };
 
+const char* GetTestName(TestId);
+
 // For each test ID above, the number of test results we expect to get.
 // If we have that many results, the test is complete.
 const int EXPECTED_NUM_RESULTS_FOR_TEST[] = 
