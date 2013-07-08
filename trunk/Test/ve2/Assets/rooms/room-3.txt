@@ -5,7 +5,7 @@
 // type
 room
 // Num textures
-11
+12
 // 1 - 4
 ground4-n.png
 ground4-s.png
@@ -20,6 +20,7 @@ ground4-se.png
 ground3.png
 rock3.png
 rock2.png
+cliff1.png
 
 // (x, y) Size of grid
 7, 5
@@ -33,7 +34,7 @@ rock2.png
 // Obstacles grid
 10 11 10 11 10 11 10
 11  0  0  0  0  0 11
-10  0  0  0  0  0 10
+12 12 12 12 12 12 12
 11  0  0  0  0  0 11
 10 11  0  0  0 11 10
 
