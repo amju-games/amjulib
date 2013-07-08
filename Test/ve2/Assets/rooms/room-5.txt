@@ -27,9 +27,9 @@ steps-ew.png
 // Grid of tiles - numbers are zero-based indices into texture list
 // Background grid
 5  1  6
-4  9  12
-4  9  12
-4  9  12
+4  9  3
+4  9  3
+4  9  3
 7  2  8
 // Obstacles grid
 10  0 11
