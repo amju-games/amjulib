@@ -522,14 +522,10 @@ void GSMain::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
-  //const float FOVY = 60.0f;
-  //const float NEAR_PLANE = 1.0f;
-  //const float FAR_PLANE = 20000.0f;
-  float aspect = (float)width / (float)Screen::Y();
-  //AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
 
   // Don't want perspective - just simple ortho projection
-  AmjuGL::Scale(0.005f, 0.005f * aspect, 0.001f);
+  const float ASPECT = 1.6f; // Fixed, otherwise you see a different amount of the world depending on window dimensions!
+  AmjuGL::Scale(0.004f, 0.004f * ASPECT, 0.001f);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
