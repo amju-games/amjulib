@@ -182,10 +182,18 @@ void GSMain::SetHealth(int health)
   s_health = health;
 }
 
+static int s_room = 1;
+
+void GSMain::SetRoom(int room)
+{
+  s_room = room;
+}
+
 void GSMain::ResetHud()
 {
   s_score = 0;
   s_health = 3;
+  s_room = 1;
 }
 
 void GSMain::SetNumPlayersOnline(int n)
@@ -352,24 +360,24 @@ void GSMain::Update()
 
   // Update hearts and fuel cells
   GuiText* text1 = (GuiText*)GetElementByName(m_gui, "score-num");
-  if (!text1) 
+  if (text1) 
   {
-    Assert(0);
-std::cout << "SetFuelCells: no score-num element\n";
-    return;
+    text1->SetText(ToString(s_score));
   }
-  text1->SetText(ToString(s_score));
-  text1->SetVisible(true); 
 
-  // Simplify by removing one of the score elements
-  /*
-  GuiText* text2 = (GuiText*)GetElementByName(m_gui, "heart-num");
-  if (!text2) 
+  GuiText* text2 = (GuiText*)GetElementByName(m_gui, "health-num");
+  if (text2) 
   {
-    Assert(0);
-std::cout << "SetHeartNum: no heart-num element\n";
-    return;
+    text2->SetText(ToString(s_health));
   }
+
+  GuiText* text3 = (GuiText*)GetElementByName(m_gui, "room-num");
+  if (text3) 
+  {
+    text3->SetText(ToString(s_room));
+  }
+
+  /*
   GuiElement* heartImg = GetElementByName(m_gui, "heart-img");
   Assert(heartImg);
   text2->SetText(ToString(hearts));
@@ -653,6 +661,7 @@ void GSMain::Draw2d()
   }
 #endif
 
+#ifdef DRAW_LINE_OF_HEARTS
   // Health
   AmjuGL::PushMatrix();
   int s_maxHealth = 3; // TODO
@@ -679,6 +688,7 @@ void GSMain::Draw2d()
     AmjuGL::Translate(HEART_SIZE, 0, 0);
   }
   AmjuGL::PopMatrix();
+#endif // DRAW_LINE_OF_HEARTS
 
   TheCursorManager::Instance()->Draw();
 }
