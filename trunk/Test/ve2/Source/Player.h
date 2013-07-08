@@ -62,6 +62,7 @@ public:
 
   void ShootBaddie(Baddie* baddie);
 
+  int GetHealth() const;
   void ResetHealth();
 
 private:

@@ -64,8 +64,8 @@ public:
     m_text.SetTextSize(5.0f); // TODO CONFIG
     static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
     m_text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
-    m_text.SetJust(GuiText::AMJU_JUST_CENTRE);
-    m_text.SetFgCol(Colour(0, 0, 0, 1));
+    m_text.SetJust(GuiText::AMJU_JUST_LEFT);
+    m_text.SetFgCol(Colour(1, 1, 1, 1));
     //m_text.SetInverse(true);
     //m_text.SetDrawBg(true);
   }
@@ -88,7 +88,7 @@ public:
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
   
-      std::string name = m_player->GetName();
+      std::string name = ToString(m_player->GetHealth()) + "  " + m_player->GetName();
       if (!m_player->IsLoggedIn())
       {
         name += " (asleep)";
@@ -106,22 +106,32 @@ public:
       Matrix m;
       m.SetIdentity();
 
-      // Reverse modelview rotation
-      Matrix r;
-      r.ModelView();
-      m = TransposeRot(r);
+      // World is drawn on x-y plane
+      m.RotateX(-M_PI / 2.0);
 
       Vec3f tr(m_combined[12], m_combined[13], m_combined[14]);
       m.TranslateKeepRotation(tr);
       AmjuGL::MultMatrix(m);
       static const float SCALE_FACTOR = 20.0f;
       static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
-      float x = MAX_NAME_WIDTH * SCALE_FACTOR * -0.5f;
-      AmjuGL::Translate(x, 60.0f, 0); // TODO CONFIG
-    
-      AmjuGL::Scale(SCALE_FACTOR, SCALE_FACTOR, 10);  
+      // World is big compared to -1..1 coords
+      AmjuGL::Scale(SCALE_FACTOR, SCALE_FACTOR, 1);  
+      float x = MAX_NAME_WIDTH * -0.5f;
+      AmjuGL::Translate(0, 3.0f, 0); // TODO CONFIG
+
+      static GuiImage* heartImg = 0;
+      static const float HEART_SIZE = 1.2f;
+      if (!heartImg)
+      {
+        heartImg = new GuiImage;
+        heartImg->SetTexture((Texture*)TheResourceManager::Instance()->GetRes("heart16-red.png"));
+        heartImg->SetSize(Vec2f(HEART_SIZE, HEART_SIZE));
+        heartImg->SetLocalPos(Vec2f(-HEART_SIZE, 0));
+      }
+      heartImg->Draw();
 
       m_text.Draw();
+
       AmjuGL::PopMatrix();
       AmjuGL::PopAttrib();
     }
@@ -164,6 +174,11 @@ Player::Player()
   m_flashTimer = 0;
 
   ResetHealth();
+}
+
+int Player::GetHealth() const
+{
+  return m_health;
 }
 
 LayerSprite& Player::GetSprite() 
