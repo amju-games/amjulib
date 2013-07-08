@@ -154,7 +154,7 @@ std::cout << "Oh crap, got boxed in, restarting random walk..\n";
       }
 
       // reach further if we can't find an empty square???
-      int reach = 3; //(count < 10) ? 3 : 5;
+      int reach = (count < 10) ? 3 : 5;
 
       // Find a new position close to the old position
       newPos = Vec2i(pos.x + rand() % reach - reach/2, 
@@ -329,7 +329,8 @@ std::cout << "CORRECT! Now on to circle " << m_currentCircle + 1 << " (" +
       {
         // If a circle has already been correctly clicked, then this is not
         //  an incorrect choice.
-        if (!m_circles[i].m_clicked)
+        // Don't start counting incorrect choices until the first circle is clicked.
+        if (m_correct > 0 && !m_circles[i].m_clicked)
         {
           // On a different dot. Incorrect? But only score incorrect once.
           if (!m_circles[i].m_incorrect)
