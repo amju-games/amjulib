@@ -26,7 +26,7 @@ results-button
 0.8, 0.2
 gui-button-4.png
 view results
-arial, 2.0
+arial, 1.5, sx=0.7
 
 
 gui-text
