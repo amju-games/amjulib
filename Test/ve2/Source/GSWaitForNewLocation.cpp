@@ -92,7 +92,9 @@ void GSWaitForNewLocation::Update()
         TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
       }
 
-      TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+      static GSMain* gsm = TheGSMain::Instance();
+      gsm->SetRoom(GetLocalPlayerLocation());
+      TheGame::Instance()->SetCurrentState(gsm);
     }
   }
 }

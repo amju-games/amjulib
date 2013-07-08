@@ -59,6 +59,8 @@ public:
 
   void SetScore(int);
   void SetHealth(int);
+  void SetRoom(int);
+
   void ResetHud();
 
 private:
