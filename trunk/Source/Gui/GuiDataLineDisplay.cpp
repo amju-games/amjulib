@@ -53,7 +53,7 @@ void GuiDataLineDisplay::Draw()
   int numRows = (int)data->GetNumRows();
   if (numRows == 0)
   {
-std::cout << "No data for chart.\n";
+//std::cout << "No data for chart.\n";
     return;
   }
 
@@ -109,7 +109,8 @@ std::cout << "No data for chart.\n";
     t.Draw();
   }
 
-  // Draw lines
+  // Draw data points and lines
+  m_dataPoints.clear();
 
   // Loop for each column of yVals
   int numYvs = data->GetNumYVals();
@@ -165,9 +166,39 @@ std::cout
        AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
        PopColour();
 
+       static GuiText t;
+       t.SetSize(Vec2f(1.0f, 0.1f));
+       t.SetJust(GuiText::AMJU_JUST_CENTRE);
+       t.SetDrawBg(false);
+       t.SetLocalPos(Vec2f(xPos - 0.5f, yPos + 0.1f));
+       t.SetText(ToString(yVal));
+       t.SetTextSize(0.3f); // TODO 
+       t.Draw();
+
+       DataPoint dp;
+       dp.m_rect = rect;
+       dp.m_colour = GetColour(yv);
+       dp.m_val = ToString(yVal);
+       m_dataPoints.push_back(dp);
+
        prevLineSegEnd = lineSegEnd;
     }
   }
+}
+
+bool GuiDataLineDisplay::OnCursorEvent(const CursorEvent& ce)
+{
+  int s = m_dataPoints.size();
+  for (int i = 0; i < s; i++)
+  {
+    DataPoint& dp = m_dataPoints[i];
+    if (dp.m_rect.IsPointIn(Vec2f(ce.x, ce.y)))
+    {
+      // Show full info for this data point
+      // TODO
+    }
+  }
+  return false;
 }
 
 }
