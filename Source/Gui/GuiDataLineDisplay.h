@@ -11,6 +11,8 @@ public:
   static const char* NAME;  
   virtual void Draw();
   virtual bool Load(File*);
+
+  virtual bool OnCursorEvent(const CursorEvent&);
 };
 
 GuiElement* CreateDataLineDisplay();

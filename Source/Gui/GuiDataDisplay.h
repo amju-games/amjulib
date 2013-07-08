@@ -75,6 +75,15 @@ public:
 
 protected:
   ChartData* m_data;
+
+  // Data points: we can mouse over each one
+  struct DataPoint
+  {
+    Rect m_rect;
+    std::string m_val;
+    Colour m_colour; // ?
+  };
+  std::vector<DataPoint> m_dataPoints;
 };
 
 }
