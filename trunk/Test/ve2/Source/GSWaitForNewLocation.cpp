@@ -131,8 +131,6 @@ void GSWaitForNewLocation::OnActive()
     // Serious problem, can't load level
     Assert(0);
   }
-
-//  TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
 }
 
 } // namespace

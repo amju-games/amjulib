@@ -52,8 +52,6 @@
 #include <AmjuFinal.h>
 
 #define SHOW_NUM_ERRORS
-//#define USE_SHADOW_MAP
-
 //#define PICK_DEBUG
 
 namespace Amju
@@ -138,35 +136,6 @@ void GSMain::AddMenuItem(const std::string& text, GuiCommand* command)
 #endif
 
 }
-
-//void GSMain::ShowDropButton(Furniture* f, bool show)
-//{
-//  return; // Don't like, not required..?
-//
-//std::cout << "Drop Button: show: " << show << " object: " << *f << "\n";
-//
-//  if (!m_gui)
-//  {
-//    return; // TODO TEMP TEST - HACK, shouldn't get here
-//  }
-//
-//  //GuiButton* pickupComp = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
-//
-//  if (show)
-//  {
-//    GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "drop-button");
-//    drop->SetCommand(new CommandPickUp(f, false));
-//
-//    //GuiButton* rotate = (GuiButton*)GetElementByName(m_gui, "rotate-button");
-//    //rotate->SetCommand(new CommandRotate(f));
-//
-//    pickupComp->SetVisible(true);
-//  }
-//  else
-//  {
-//    pickupComp->SetVisible(false);
-//  }
-//}
 
 static int s_score = 0;
 
@@ -376,33 +345,6 @@ void GSMain::Update()
   {
     text3->SetText(ToString(s_room));
   }
-
-  /*
-  GuiElement* heartImg = GetElementByName(m_gui, "heart-img");
-  Assert(heartImg);
-  text2->SetText(ToString(hearts));
-  text2->SetVisible(true); 
-  heartImg->SetVisible(true);
-  */
-
-  /* // This was for flashing when health was <= 0
-  if (hearts <= 0)
-  {
-    float t = TheTimer::Instance()->GetElapsedTime();
-    t -= floor(t);
-    Assert(t <= 1.0f);
-    bool vis = (t < 0.5f);
-
-    text2->SetVisible(vis);
-    heartImg->SetVisible(vis);
-  }
-  else
-  {
-    text2->SetVisible(true); 
-    heartImg->SetVisible(true);
-  }
-  */
-
 }
 
 void GSMain::DoMoveRequest()
@@ -563,13 +505,6 @@ void GSMain::SetViewWidth(float w)
   m_viewportWidth = w;
 }
 
-#ifdef USE_SHADOW_MAP
-static void ShadowDraw()
-{
-  GetVe1SceneGraph()->Draw();
-}
-#endif
-
 void GSMain::Draw()
 {
 //  AmjuGL::ReportState(std::cout);
@@ -587,11 +522,14 @@ void GSMain::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
-  const float FOVY = 60.0f;
-  const float NEAR_PLANE = 1.0f;
-  const float FAR_PLANE = 20000.0f;
+  //const float FOVY = 60.0f;
+  //const float NEAR_PLANE = 1.0f;
+  //const float FAR_PLANE = 20000.0f;
   float aspect = (float)width / (float)Screen::Y();
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
+  //AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR_PLANE, FAR_PLANE);
+
+  // Don't want perspective - just simple ortho projection
+  AmjuGL::Scale(0.005f, 0.005f * aspect, 0.001f);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
@@ -826,8 +764,6 @@ bool GSMain::OnCursorEvent(const CursorEvent& ce)
 
 bool GSMain::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-//std::cout << "Mouse button event!!\n";
-
   // Player has clicked somewhere on screen.
   // Response will depend on whether an object was clicked, or a GUI element.
   // If the ground was clicked, make a request to move to that location.

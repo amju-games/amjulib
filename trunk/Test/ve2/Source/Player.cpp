@@ -960,8 +960,11 @@ void Player::ShootBaddie(Baddie* baddie)
 
 void Player::ResetHealth()
 {
-  m_health = m_maxHealth;
-  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
+  if (m_health < m_maxHealth)
+  {
+    m_health = m_maxHealth;
+    TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
+  }
 }
 
 bool GetNameForPlayer(int objId, std::string* r)
