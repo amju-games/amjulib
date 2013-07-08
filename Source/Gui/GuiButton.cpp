@@ -12,6 +12,8 @@
 
 #define ENABLE_FOCUS_BUTTON
 
+//#define BUTTON_DEBUG
+
 namespace Amju
 {
 std::string GuiButton::s_clickFilename;
@@ -336,7 +338,9 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
         ExecuteCommand();
         //m_isMouseOver = false; // once clicked, revert to unselected.. OK?? No, is very annoying
         m_isPressed = false; // mouse is released whether command executed or not
+#ifdef BUTTON_DEBUG
         std::cout << "Button up for " << m_name << " - executed command\n";
+#endif
         return true; // handled
       }
       m_isPressed = false; // mouse is released whether command executed or not
