@@ -432,21 +432,17 @@ bool GuiText::Load(File* f)
 
 bool GuiText::LoadText(File* f)
 {
-  std::string s;
-  if (!f->GetLocalisedString(&s))
+  std::string text;
+  if (!f->GetLocalisedString(&text))
   {
     f->ReportError("GUI Text: Expected localised string");
     return false;
   }
 
-  // Special code for empty string - because an actual empty string will be ignored
-  if (s == "@@@")
-  {
-    s = "";
-  }
+  // Special code for empty string is $$$epty -- see File::GetDataLine() 
+  //  - because an actual empty string will be ignored
 
-  SetText(s);
-
+  std::string s;
   // TODO Flags for multiline/word wrap
   // font name, font size, etc
   // Get font name and size
@@ -514,6 +510,8 @@ bool GuiText::LoadText(File* f)
       return false;
     }
   }
+
+  SetText(text);
 
   RecalcFirstLast();
   return true;
