@@ -3,7 +3,9 @@
 #include <GuiComposite.h>
 #include <EventPoller.h>
 #include <Timer.h>
+#include <Game.h>
 #include "GSCogTestBase.h"
+#include "GSPauseCogTest.h"
 #include "CogTestNag.h"
 #include "HeartCount.h"
 #include "GameConsts.h"
@@ -13,7 +15,13 @@ namespace Amju
 {
 static void OnStopTest()
 {
-  OnCogTestStopPartWayThrough(); 
+  static GSPauseCogTest* pct = TheGSPauseCogTest::Instance();
+  static Game* game = TheGame::Instance();
+
+  pct->SetPrevState(game->GetState());
+  game->SetCurrentState(pct);  
+
+  //OnCogTestStopPartWayThrough(); 
 }
 
 GSCogTestBase::GSCogTestBase()
