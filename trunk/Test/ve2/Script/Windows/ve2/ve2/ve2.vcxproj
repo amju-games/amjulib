@@ -203,7 +203,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\FileUpdater.cpp" />
     <ClCompile Include="..\..\..\..\Source\FirstTimeMsg.cpp" />
     <ClCompile Include="..\..\..\..\Source\Food.cpp" />
-    <ClCompile Include="..\..\..\..\Source\FoodCount.cpp" />
     <ClCompile Include="..\..\..\..\Source\Furniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameConsts.cpp" />
     <ClCompile Include="..\..\..\..\Source\GameLookup.cpp" />
@@ -237,6 +236,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSNewLocation.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSObjMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSOptions.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSPauseCogTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSPaused.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSProxy.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSQuitGame.cpp" />
@@ -352,7 +352,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\FileUpdater.h" />
     <ClInclude Include="..\..\..\..\Source\FirstTimeMsg.h" />
     <ClInclude Include="..\..\..\..\Source\Food.h" />
-    <ClInclude Include="..\..\..\..\Source\FoodCount.h" />
     <ClInclude Include="..\..\..\..\Source\Furniture.h" />
     <ClInclude Include="..\..\..\..\Source\GameConsts.h" />
     <ClInclude Include="..\..\..\..\Source\GameLookup.h" />
@@ -387,6 +386,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSNewLocation.h" />
     <ClInclude Include="..\..\..\..\Source\GSObjMesh.h" />
     <ClInclude Include="..\..\..\..\Source\GSOptions.h" />
+    <ClInclude Include="..\..\..\..\Source\GSPauseCogTest.h" />
     <ClInclude Include="..\..\..\..\Source\GSPaused.h" />
     <ClInclude Include="..\..\..\..\Source\GSProxy.h" />
     <ClInclude Include="..\..\..\..\Source\GSQuitGame.h" />
