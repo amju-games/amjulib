@@ -168,6 +168,13 @@ bool Baddie::Load(File* f)
     f->ReportError("Expected max health");
     return false;
   }
+
+  if (m_maxHealth == -1)
+  {
+    m_maxHealth = 1;
+    m_isDestructible = false;
+  }
+
   m_health = m_maxHealth;
 
   if (!f->GetFloat(&m_chaseSpeed))
@@ -245,8 +252,13 @@ bool Baddie::Load(File* f)
 
 void Baddie::SetMenu(GuiMenu* menu)
 {
-  // No menu, but fire at it
+  // Don't try to shoot indestructible baddies..?
+  if (!m_isDestructible)
+  {
+    return;
+  }
 
+  // No menu, but fire at this baddie
   Player* p = GetLocalPlayer();
   if (p)
   {
