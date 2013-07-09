@@ -91,8 +91,10 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     else
     {
       // Send results
+      // Store as ms, not seconds, so all result types are int.
+      int rtMs = (int)(m_reactionTime * 1000.0f);
       TheCogTestResults::Instance()->StoreResult(new Result(
-        AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(m_reactionTime)));
+        AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(rtMs)));
 
       NextGo();
     }

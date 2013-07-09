@@ -121,7 +121,7 @@ void GSCogResults::SetChart(TestId test)
     {
       Result* res = *jt;
 
-      float f = ToFloat(res->GetVal()) * 100.0f;
+      float f = ToInt(res->GetVal());
       row.second.push_back((ChartData::YTYPE)f);
     }
 
