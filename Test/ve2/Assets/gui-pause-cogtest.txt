@@ -24,36 +24,49 @@ arial, 1.0, bgcol=000000, fgcol=ffffff
 
 
 
-
-
-
 // element type
 gui-button
 // Element name
-options-button
+resume-button
 // pos (coords are -1..1)
--0.4, 0.2
+-0.4, 0.7
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-options
+resume test
 // Font name, size
 arial, 1.6
 
 // element type
 gui-button
 // Element name
-achievements-button
+help-button
 // pos (coords are -1..1)
--0.4, -0.1
+-0.4, 0.4
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-achievements
+show help for this test
+// Font name, size
+arial, 1.6, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+restart-button
+// pos (coords are -1..1)
+-0.4, 0.1
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+start test again
 // Font name, size
 arial, 1.6, sx=0.8
 
@@ -61,31 +74,31 @@ arial, 1.6, sx=0.8
 // element type
 gui-button
 // Element name
-quit-button
+skip-button
 // pos (coords are -1..1)
--0.4, -0.4
+-0.4, -0.2
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-quit game
+skip this test - do it later
 // Font name, size
-arial, 1.6
+arial, 1.4, sx=0.7
+
 
 // element type
 gui-button
 // Element name
-resume-button
+quit-button
 // pos (coords are -1..1)
--0.4, -0.7
+-0.4, -0.5
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-continue
+quit doing tests
 // Font name, size
 arial, 1.6
-
 
