@@ -13,7 +13,6 @@
 #include "Ve1SceneGraph.h"
 #include "ROConfig.h"
 #include "Sprite.h"
-#include "Terrain.h"
 #include "GameConsts.h"
 #include <AmjuFinal.h>
 
@@ -37,9 +36,8 @@ private:
 
 FoodNode::FoodNode()
 {
-  std::string tex = "food1.png";
-  // TODO 2 * 2 cells, depends on sprite layout
-  if (!m_sprite.Load(tex, 4, 4, SIZE, SIZE))
+  std::string tex = "food2.png";
+  if (!m_sprite.Load(tex, 4, 2, SIZE, SIZE))
   {
     ReportError("FAILED TO LOAD food sprite");
     Assert(0);
@@ -47,7 +45,7 @@ FoodNode::FoodNode()
 
   m_sprite.SetCellTime(0.1f);
   // random food
-  int c = (int)Rnd(0, 10);
+  int c = (int)Rnd(0, 4);
   m_sprite.SetCellRange(c, c);
   m_sprite.SetCell(c);
 
@@ -91,20 +89,11 @@ void SetRandomFoodInLocation()
 
 void FoodManager::OnLocationEntry()
 {
-  if (GetGameMode() == AMJU_MODE_EDIT)
-  {
-    // Add node to Scene Graph
-    m_sceneNode = new Ve1Node(this);
-    SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-    Assert(root);
-    root->AddChild(m_sceneNode);
-    *(m_sceneNode->GetAABB()) = m_aabb;
-  }
-  // else... ????
-
-  // Create Food cells
+  // Create Food 
   static int id = FOOD_START_ID;
-  for (int i = 0; i < 10; i++)
+  static const int NUM_FOOD_PER_FOOD_MANAGER = ROConfig()->GetInt("num-food-per-foodmgr", 3);
+
+  for (int i = 0; i < NUM_FOOD_PER_FOOD_MANAGER; i++)
   {
     Food* f = new Food;
     f->SetId(id++);
@@ -112,10 +101,6 @@ void FoodManager::OnLocationEntry()
     float s = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
     Vec3f r(Rnd(-s, s), 0, Rnd(-s, s));
     Vec3f p = GetPos() + r; 
-    //if (TerrainReady())
-    //{
-    //  GetTerrain()->GetCollisionMesh()->GetY(Vec2f(p.x, p.z), &p.y); // TODO TEMP TEST Set all food to y = 0
-    //}
     f->SetPos(p);
     f->Load(0);
     TheGame::Instance()->AddGameObject(f);
