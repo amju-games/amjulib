@@ -4,6 +4,19 @@
 
 new-location-show-status 0
 
+// Change this for testing, should be 0
+cogtest-first-test 0
+
+
+// FOOD
+// ====
+num-food-per-foodmgr 3
+// Food AABB
+food-aabb-x  20
+// TODO All heights should be hardcoded now this is 2D
+food-aabb-y  10
+food-aabb-z  20
+
 // Show number of non-critical errors, critical errors, and Queue size in GSMain
 show-errors 0
 
@@ -15,9 +28,6 @@ scale-min-x 0.5
 scale-max-x 1.5
 scale-min-y 0.5
 scale-max-y 1.5
-
-// Change this for testing, should be 0
-cogtest-first-test 0
 
 // Start position on new game/reset
 start-loc    1
@@ -87,11 +97,6 @@ player-aabb-x  16
 player-aabb-y  10
 player-aabb-z  32
 show-aabb     n
-
-// Food AABB
-food-aabb-x  12
-food-aabb-y  10
-food-aabb-z  12
 
 
 // View dist, which increases - player can only see objects to this dist
