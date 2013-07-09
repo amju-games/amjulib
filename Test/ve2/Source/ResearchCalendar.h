@@ -21,6 +21,11 @@ struct ResearchDate
   // if true, participant is due to play the game, in single- or multi-player mode.
   bool m_playSingle;
   bool m_playMulti;
+
+  bool operator<(const ResearchDate& rd)
+  {
+    return m_time < rd.m_time;
+  }
 };
 
 typedef std::vector<ResearchDate> ResearchDates;
