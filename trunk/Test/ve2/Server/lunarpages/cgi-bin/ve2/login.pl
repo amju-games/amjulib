@@ -21,19 +21,19 @@ login();
 
 ##### end of main function
 
-sub init_start_pos($)
-{
-  my $objid = shift;
-
-  # Set location and pos - this relies on there being an empty square at the start location for new players
-  #  to materialise in.
-  my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
-  my $z = rand(500) - 250;
-
-  my $val = "$x,0,$x,$startloc";
-  $sql = "insert into objectstate (`id`, `key`, `val`, `whenchanged`) values ($objid, 'pos', '$val', now()) on duplicate key update val='$val', whenchanged=now()";
-  insert($sql);
-}
+#sub init_start_pos($)
+#{
+#  my $objid = shift;
+#
+#  # Set location and pos - this relies on there being an empty square at the start location for new players
+#  #  to materialise in.
+#  my $x = rand(500) - 250; # TODO Be sure this square area exists in the location mesh!!!
+#  my $z = rand(500) - 250;
+#
+#  my $val = "$x,0,$x,$startloc";
+#  $sql = "insert into objectstate (`id`, `key`, `val`, `whenchanged`) values ($objid, 'pos', '$val', now()) on duplicate key update val='$val', whenchanged=now()";
+#  insert($sql);
+#}
 
 
 # For research project, send info about research session
@@ -152,7 +152,7 @@ print "Query: $sql\n";
     insert($sql);
 
     # Get session ID for this player and start location
-    $sql = "select now(), a.id, b.playername, b.obj_id, c.loc from session as a, player as b, objectpos as c where a.player_id=$player_id and a.player_id=b.id and b.obj_id=c.id and a.id=LAST_INSERT_ID()";
+    $sql = "select now(), a.id, b.playername, b.obj_id from session as a, player as b where a.player_id=$player_id and a.player_id=b.id and a.id=LAST_INSERT_ID()";
 
 print "Query: $sql\n";
 
@@ -160,13 +160,28 @@ print "Query: $sql\n";
     $query = $dbh->prepare($sql) or die
       "Query prepare failed for this query: $sql\n";
     $query->execute;
-    if (my ($now, $session_id, $playername, $objid, $loc) = $query->fetchrow_array)
+    if (my ($now, $session_id, $playername, $objid) = $query->fetchrow_array)
     {
 print "Your new session ID: $session_id\n";
 
-      # Reset to start loc
-      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$startloc</loc>\n";
-      init_start_pos($objid);
+      # Get pos/location
+      my $pos_sql = "select val from objectstate where `key`='pos' and id=$objid";
+
+      $query = $dbh->prepare($pos_sql)or die "Prepare failed for $query\n";
+      $query->execute;
+      my $loc;
+      if (($loc) = $query->fetchrow_array)
+      {
+print "\n\nLoc: $loc\n";
+      }
+      else
+      {
+print "FAILED to get loc :-(\n";
+      }
+
+      # Send location, don't reset 
+      print "<now>$now</now> <session>$session_id</session><playername>$playername</playername><objid>$objid</objid><loc>$loc</loc>\n";
+      #####init_start_pos($objid);
 
       # Add info for research project: is this a research session, which game mode, etc.
       add_research_element($player_id, $session_id);
