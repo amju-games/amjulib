@@ -44,19 +44,19 @@ done-button
 // Image
 gui-button-4.png
 // Text
-stop test
+pause
 // Font name, size
 arial, 1.0 
 
 
-// Heart image
+
 gui-image
-heart-img
+coin-img
 0.8, 1.0
 0.17, 0.2
 coin3.png
 
-// Num hearts text
+
 gui-text
 score-num
 0.5, 1.0
