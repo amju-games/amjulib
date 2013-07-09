@@ -27,7 +27,6 @@
 #include "GSToday.h"
 #include "GSMain.h"
 #include "CogTestResults.h"
-#include "FoodCount.h"
 #include "LogOut.h"
 #include <AmjuFinal.h>
 
@@ -89,8 +88,17 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
     p = m_xml.getChildNode(4);
     if (SafeStrCmp(p.getName(), "loc"))
     {
-      int loc = ToInt(p.getText());
-      // TODO Use ResetLocalPlayer() to set start pos/loc ?????
+      int loc = 1;
+      if (p.getText())
+      {
+        std::string locStr = p.getText();
+        Strings strs = Split(locStr, ',');
+        if (strs.size() == 4)
+        {
+          loc = ToInt(strs[3]);
+        }
+      }
+
       TheGSStartGame::Instance()->SetStartLoc(loc); 
 std::cout << "Got start location: " << loc << "\n";
     }
