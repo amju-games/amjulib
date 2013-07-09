@@ -177,7 +177,7 @@ void ReqLogin::ChooseMode()
   if (SafeStrCmp(research.getName(), "research"))
   {
     // Schedule - for calendar
-    PXml p = research.getChildNode(4);
+    PXml p = research.getChildNode(0);
     if (SafeStrCmp(p.getName(), "dates"))
     {
       Time today(Time::Now());
