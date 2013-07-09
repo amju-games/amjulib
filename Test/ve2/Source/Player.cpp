@@ -35,7 +35,6 @@
 #include "GameLookup.h"
 #include "Achievement.h"
 #include "ObjectManager.h"
-#include "FoodCount.h"
 #include "PlayerNames.h"
 #include "Ve1SpriteNode.h"
 #include "Food.h"
@@ -107,7 +106,7 @@ public:
       m.SetIdentity();
 
       // World is drawn on x-y plane
-      m.RotateX(-M_PI / 2.0);
+      m.RotateX((float)(-M_PI / 2.0));
 
       Vec3f tr(m_combined[12], m_combined[13], m_combined[14]);
       m.TranslateKeepRotation(tr);
