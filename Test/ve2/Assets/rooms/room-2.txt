@@ -83,8 +83,8 @@ spikes2.png
 50, 50
 // Damage to player on collision
 1
-// Max health
-5
+// Max health -- -1 == indestructible
+-1 
 // Chase speed
 0
 // Time: harmless range
