@@ -35,7 +35,7 @@ steps-ew.png
 // Lava pool
 baddie
 // Pos -- behind so always under player
-50, -10, 100
+50, -1, 100
 // Tex
 lava1.png
 // Num cells
