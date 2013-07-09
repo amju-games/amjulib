@@ -1,4 +1,4 @@
-REM Make windows release of MY GAME
+REM Make windows release of MY GAME ("Hungry People")
 
 set VERSION=0.9
 
