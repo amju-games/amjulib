@@ -4,6 +4,7 @@
 #include <GuiButton.h>
 #include <GuiText.h>
 #include <AmjuTime.h>
+#include <TimePeriod.h>
 #include "GSToday.h"
 #include "GameMode.h"
 #include "GSCogTestMenu.h"
@@ -136,6 +137,10 @@ void GSToday::OnActive()
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "long-text");
   std::string str;
+
+  now.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->HaveGotAllResultsForDate(now);
+
   // The cases are:
   // No game mode, and we must do test
   // No game mode, and no need to do test
@@ -143,7 +148,11 @@ void GSToday::OnActive()
   if (gm == AMJU_MODE_NO_GAME)
   {
     // If no game day and test required, go straight to cog test.
-    if (DoCogTests())
+    if (cogTestsAllDoneToday)
+    {
+      str = "You have done the tests, and there is nothing else for you to do today. Thank you!";
+    }
+    else if (DoCogTests())
     {
       str = "Today, please take a few tests. This should take about ten minutes. Thank you!";
       // TODO Get next date from the ResearchCalendar -- show in final thanks page
@@ -158,19 +167,27 @@ void GSToday::OnActive()
   else if (gm == AMJU_MODE_MULTI)
   {
     // If it's a game day, go to main state.
-    str = "Please play the game for as long as you like, up to one hour. Please feel free to interact with other players as much as you like.";
+    str = "Today, please play the game.";
     if (DoCogTests())
     {
       str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
+    }
+    else
+    {
+      str += "\n\nThere are no tests for you today!";
     }
   } 
   else if (gm == AMJU_MODE_SINGLE)
   {
     // If it's a game day, go to main state.
-    str = "Please play the game for as long as you like, up to one hour. Today it is a single-player game.";
+    str = "Please play the game. Today it is a single-player game.";
     if (DoCogTests())
     {
       str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
+    }
+    else
+    {
+      str += "\n\nThere are no tests for you today!";
     }
   }
   else
