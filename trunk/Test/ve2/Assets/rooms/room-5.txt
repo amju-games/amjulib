@@ -20,87 +20,24 @@ ground4-se.png
 ground3.png
 log1.png
 log2.png
-steps-ew.png
+ground4.png
 
 // (x, y) Size of grid
-3, 5
+5, 5
 // Grid of tiles - numbers are zero-based indices into texture list
 // Background grid
-5  1  6
-4  9  3
-4  9  3
-4  9  3
-7  2  8
+0 5  1  6  0
+0 4  9  3  0
+0 4  9  3  0
+0 7  2  8  0
+0 12 12 12 0
 // Obstacles grid
-10  0 11
-11  0 10
-10  0 11
-11  0 10
-10  10 11
+0 10  0  11 0
+0 11  0  10 0
+0 10  0  11 0
+0 11  0  10 0
+0 10  0  11 0
 
 // Destinations N, S, E, W
 2, 0, 0, 0
-
-baddie
-// Pos
-100, 0, 100
-// Tex
-skull2.png
-// Num cells
-1,1
-// Size
-40, 40
-// Damage to player on collision
-1
-// Max health
-5
-// Chase speed
-50
-// Time: harmless range
-2
-3
-// Time: harmful range
-2
-3
-// Cell range: harmless
-0
-0
-// Cell range: harmful
-0
-0
-// Sounds for harmless/harmful state change
-<none>
-sound/gasp_x.wav
-
-baddie
-// Pos
-200, 0, 100
-// Tex
-spikes2.png
-// Num cells
-2,1
-// Size
-50, 50
-// Damage to player on collision
-1
-// Max health
-5
-// Chase speed
-0
-// Time: harmless range
-2
-3
-// Time: harmful range
-2
-3
-// Cell range: harmless
-1
-1
-// Cell range: harmful
-0
-0
-// Sounds for harmless/harmful state change
-<none>
-// TODO Want Knife Shinggggg
-sound/pop.wav
 
