@@ -531,7 +531,10 @@ void Player::Update()
   {
     Ve1ObjectChar::Update();
 
-    TheGSMain::Instance()->SetHealth(m_health);
+    if (IsLocalPlayer())
+    {
+      TheGSMain::Instance()->SetHealth(m_health);
+    }
 
     if (m_hitTimer > 0)
     {
