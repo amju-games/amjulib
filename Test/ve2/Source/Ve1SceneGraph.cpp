@@ -13,7 +13,6 @@ namespace Amju
 bool SpriteBlendNodeComp(
   const SceneGraph::BlendNode& b1, const SceneGraph::BlendNode& b2)
 {
-  /*
   if (b1.m_pos.y < b2.m_pos.y)
   {
     return true;
@@ -22,7 +21,6 @@ bool SpriteBlendNodeComp(
   {
     return false;
   }
-  */
 
   // Y values equal
   if (b1.m_pos.z < b2.m_pos.z)
