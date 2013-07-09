@@ -600,8 +600,8 @@ void Player::Update()
     *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
 
     // Set colour depending on health - only if logged in
-    if (IsLoggedIn())
-    {
+    //if (IsLoggedIn())// ???
+    //{
       Colour col(1, 1, 1, 1);
       if (m_hitTimer > 0)
       {
@@ -633,7 +633,7 @@ void Player::Update()
         }
       }
       m_sceneNode->SetColour(col);
-    }
+    //}
   }
 
   if (m_ignorePortalId != -1)
@@ -824,8 +824,9 @@ void Player::EatFood(Food* f)
 
 void Player::OnCollidePlayer(Player* otherPlayer)
 {
-  if (!IsLocalPlayer())
+  if (!IsLocalPlayer() && otherPlayer->IsLocalPlayer())
   {
+    otherPlayer->OnCollidePlayer(this);
     return;
   }
 
