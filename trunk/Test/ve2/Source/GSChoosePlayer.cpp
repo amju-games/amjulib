@@ -58,27 +58,6 @@ public:
     TheGSLoginWaiting::Instance()->SetEmail(m_email);
     TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
 
-    /*
-    if (IsOnline())
-    {
-      TheGSLoginWaiting::Instance()->SetEmail(m_email);
-      TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
-    }
-    else
-    {
-      // TODO This duplicates code in ReqLogin::OnSuccess()
-
-      ThePlayerInfoManager::Instance()->SetCurrentPlayer(m_playername + ".txt");
-      PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
-      int objId = pi->PIGetInt(PI_KEY("player obj id"));
-      SetLocalPlayerId(objId);
-
-      // TODO Set location ?
-
-      TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
-    }
-    */
-
     return false;
   }
 
