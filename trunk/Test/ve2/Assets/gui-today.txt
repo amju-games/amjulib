@@ -6,7 +6,7 @@ gui-comp
 // Name
 today-comp
 // Num children
-6
+7
 
 gui-button
 view-results-button
@@ -27,6 +27,16 @@ arial, 1.5, sx=0.8
 //gui-button-4.png
 //view achievements
 //arial, 1.5, sx=0.6
+
+gui-button
+mod-avatar-button
+// pos
+-0.4, -0.3
+// size
+0.8, 0.2
+gui-button-4.png
+change your look
+arial, 1.5, sx=0.6
 
 gui-button
 ok-button
