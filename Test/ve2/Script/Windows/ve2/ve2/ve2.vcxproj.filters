@@ -396,9 +396,6 @@
     <ClCompile Include="..\..\..\..\Source\Achievement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\HotLava.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\GSMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -469,6 +466,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\GSPauseCogTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Treasure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerTreasure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -866,9 +869,6 @@
     <ClInclude Include="..\..\..\..\Source\Achievement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\HotLava.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Source\GSMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -936,6 +936,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\GSPauseCogTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Treasure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

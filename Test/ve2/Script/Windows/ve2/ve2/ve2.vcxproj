@@ -160,12 +160,11 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     </Link>
     <PostBuildEvent>
       <Command>mkdir ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S  ..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S  ..\..\..\..\..\..\Assets\*.*   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
-xcopy /Y /S ..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\*.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
+copy ..\..\..\..\..\..\Build\CompiledAssets\data-win.glue  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\Data\
 copy /Y  ..\..\..\..\..\..\Source\GLUT\glut32.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
 xcopy /Y /S  ..\..\..\..\..\..\Source\Network\curl\lib\*.dll  ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
-copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\</Command>
+copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)\
+</Command>
       <Message>Copy files</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -195,6 +194,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\CollidePlayerFurniture.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\CollidePlayerPortal.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CollidePlayerTreasure.cpp" />
     <ClCompile Include="..\..\..\..\Source\CommandFight.cpp" />
     <ClCompile Include="..\..\..\..\Source\CrashMonitor.cpp" />
     <ClCompile Include="..\..\..\..\Source\CreateCollect.cpp" />
@@ -260,7 +260,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitSession.cpp" />
     <ClCompile Include="..\..\..\..\Source\HeartCount.cpp" />
-    <ClCompile Include="..\..\..\..\Source\HotLava.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
     <ClCompile Include="..\..\..\..\Source\Kb.cpp" />
     <ClCompile Include="..\..\..\..\Source\LayerGroup.cpp" />
@@ -308,6 +307,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\TitlePerson.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Treasure.cpp" />
     <ClCompile Include="..\..\..\..\Source\UnCollide.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadReq.cpp" />
@@ -411,7 +411,6 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSYesNoQuitSession.h" />
     <ClInclude Include="..\..\..\..\Source\HasCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\HeartCount.h" />
-    <ClInclude Include="..\..\..\..\Source\HotLava.h" />
     <ClInclude Include="..\..\..\..\Source\JoystickToCursor.h" />
     <ClInclude Include="..\..\..\..\Source\Kb.h" />
     <ClInclude Include="..\..\..\..\Source\LayerGroup.h" />
@@ -464,6 +463,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
+    <ClInclude Include="..\..\..\..\Source\Treasure.h" />
     <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
     <ClInclude Include="..\..\..\..\Source\UnCollide.h" />
     <ClInclude Include="..\..\..\..\Source\UploadNewContent.h" />
