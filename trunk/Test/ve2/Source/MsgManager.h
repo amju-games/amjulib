@@ -50,8 +50,6 @@ private:
 
   typedef std::multimap<Timestamp, Msg> Msgs;
   Msgs m_map;
-  float m_elapsed;
-  float m_checkPeriod;
 
   // IDs of msgs received from server
   std::set<int> m_msgsRecv;
