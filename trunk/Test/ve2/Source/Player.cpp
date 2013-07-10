@@ -558,10 +558,14 @@ void Player::Update()
     static const float YSIZE = ROConfig()->GetFloat("player-aabb-y", 10.0f);
     static const float ZSIZE = ROConfig()->GetFloat("player-aabb-z", 40.0f);
 
+    const Vec2f& scale = ((Ve1SpriteNode*)m_sceneNode.GetPtr())->GetScale();
+    float xsize = XSIZE * scale.x;
+    float zsize = ZSIZE * scale.y;
+
     GetAABB()->Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
+      m_pos.x - xsize, m_pos.x + xsize,
       m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - ZSIZE, m_pos.z + ZSIZE);
+      m_pos.z - zsize, m_pos.z + zsize);
 
     /*
     DISABLED for 2D look and feel

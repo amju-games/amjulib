@@ -133,10 +133,9 @@ void Ve1SpriteNode::Draw()
 
   AmjuGL::RotateX(-90.0f); // so x-y plane is x-z plane
 
-  // Translate so centred on sprite
-  AmjuGL::Translate(-SIZE * 0.5f, -SIZE * 1.0f, 0); 
-
   AmjuGL::Scale(m_scale.x, m_scale.y, 1.0f);
+  // Translate so centred on sprite
+  AmjuGL::Translate(-SIZE * 0.5f, -SIZE, 0); 
 
   m_sprite.DrawLayers(Vec2f(0, 0), 2.0f);
   m_eyes.DrawLayers(Vec2f(0, 0), 2.0f);
