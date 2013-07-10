@@ -95,19 +95,12 @@ pickup-y    60
 // Player AABB
 player-aabb-x  16
 player-aabb-y  10
-player-aabb-z  32
-show-aabb     n
+player-aabb-z  24
+show-aabb     y
 
 
 // View dist, which increases - player can only see objects to this dist
 player-min-view-dist 200
-
-// Avatar select view - camera height
-avatar-cam-y  100
-
-// Polling periods
-// Chat msgs
-chat-poll-period  2.0
 
 // Broadcast chat - how many lines
 chat-max-lines    8
