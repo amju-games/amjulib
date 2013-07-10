@@ -29,11 +29,6 @@ static const int MAX_LETTERS = 6 * 52; // size of grid, from Malec et al
 //static const int NUM_M = 32; // from Malec et al, number of letters in grid to find
 static const float MAX_TIME = 180.0f; // 3 mins, from Malec et al
 
-static void OnStopTest()
-{
-  OnCogTestStopPartWayThrough();
-}
-
 static void OnDoneButton()
 {
   TheGSLetterCancellation::Instance()->Finished();
@@ -221,9 +216,6 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         m_letters[i][j] = '@';
 
         UpdateCorrectIncorrect();
-        //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-        //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-        //scoreText->SetText(s); 
 
         AmjuGL::Vert verts[4] = 
         {
@@ -443,14 +435,6 @@ void GSLetterCancellation::OnActive()
     // ?
   }
 
-  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  //done->SetCommand(Amju::OnDoneButton);
-  //done->SetHasFocus(true);
-
-  //GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-  //cancel->SetCommand(Amju::OnStopTest);
-  //cancel->SetIsCancelButton(true);
-
   TheEventPoller::Instance()->AddListener(m_listener);
 
   StartTest();
@@ -466,29 +450,11 @@ void GSLetterCancellation::StartTest()
   m_blocks.clear();
 
   bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
-  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  ////GuiButton* cancel = (GuiButton*)GetElementByName(m_gui, "cancel-button");
-
-  // Always allow player to escape, but TODO no prize if you skip out early
-  //if (isPrac)
-  //{
-  //  // For practice, done is visible, cancel is not visible.
-  //  done->SetVisible(true);
-  //  ////cancel->SetVisible(false);
-  //}
-  //else
-  //{
-  //  done->SetVisible(false);
-  //  ////cancel->SetVisible(true);
-  //}
 
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
   timeText->SetVisible(!isPrac);
 
   UpdateCorrectIncorrect();
-  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  //scoreText->SetText(s);
 
   // Create a 6 * 52 grid of letters. There are 32 'M's randomly distributed.
   // (Generally: there are m_numSpecialLetters * m_specialLetter).

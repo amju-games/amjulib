@@ -14,6 +14,9 @@
 #include "GSAchievements.h"
 #include "GSCogResults.h"
 #include "GSStartGame.h"
+#include "GS2dAvatarMod.h"
+#include "GSWaitForNewLocation.h"
+#include "LocalPlayer.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -23,6 +26,25 @@ static void OnTodayViewAchievements()
   TheGSAchievements::Instance()->SetPrevState(TheGSToday::Instance());
   TheGame::Instance()->SetCurrentState(TheGSAchievements::Instance());
 }
+
+//static void OnTodayModAvatar()
+//{
+//  static GS2dAvatarMod* am = TheGS2dAvatarMod::Instance();
+//  static GSWaitForNewLocation* wnl = TheGSWaitForNewLocation::Instance();
+//  static Game* game = TheGame::Instance();
+//
+//  if (GetLocalPlayer())
+//  {
+//    am->SetPrevState(TheGSToday::Instance());
+//    game->SetCurrentState(am);
+//  }
+//  else
+//  {
+//    // Wait for player to download
+//    wnl->SetPrevState(TheGSToday::Instance());
+//    game->SetCurrentState(wnl);
+//  }
+//}
 
 static void OnTodayViewResults()
 {
@@ -65,7 +87,8 @@ static void OnTodayOk()
   else if (gm == AMJU_MODE_MULTI || gm == AMJU_MODE_SINGLE)
   {
     // If it's a game day, start playing
-    state = TheGSTodaysTask::Instance();
+    // (skipping TheGSTodaysTask, which seems like an unnecessary extra page)
+    state = TheGSStartGame::Instance();
   } 
   else
   {
@@ -116,6 +139,11 @@ void GSToday::OnActive()
   GuiButton* viewAch = (GuiButton*)GetElementByName(m_gui, "view-ach-button");
   viewAch->SetCommand(OnTodayViewAchievements);
 */
+
+  GuiButton* avatar = (GuiButton*)GetElementByName(m_gui, "mod-avatar-button");
+  //avatar->SetCommand(OnTodayModAvatar);
+  // Disabled for now: tricky, as local player object has to exist, so we have to wait.
+  avatar->SetVisible(false);
 
   GuiButton* viewResults = (GuiButton*)GetElementByName(m_gui, "view-results-button");
   viewResults->SetCommand(OnTodayViewResults);

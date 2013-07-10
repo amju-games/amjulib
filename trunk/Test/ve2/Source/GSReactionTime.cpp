@@ -36,11 +36,6 @@ void StartRT()
   TheGSReactionTime::Instance()->SetTest();
 }
 
-void OnDoneButton()
-{
-  TheGSReactionTime::Instance()->Quit();
-}
-
 GSReactionTime::GSReactionTime()
 {
   m_reactionTime = 0; 
@@ -269,7 +264,6 @@ void GSReactionTime::OnActive()
   m_testNum = 0; 
 
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnDoneButton);
   done->SetVisible(false);
 
   std::string str = "OK, when I say GO, press the button as quickly as you can!";
