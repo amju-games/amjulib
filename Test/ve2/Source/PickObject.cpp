@@ -20,12 +20,12 @@ namespace Amju
 GameObject* PickObject(const Vec2f& mouseScreen)
 {
   // Get object carried by player - don't pick
-  Ve1Object* carried = 0;
-  Player* player = GetLocalPlayer();
-  if (player)
-  {
-    carried = player->GetCarrying();
-  }
+  //Ve1Object* carried = 0;
+  //Player* player = GetLocalPlayer();
+  //if (player)
+  //{
+  //  carried = player->GetCarrying();
+  //}
 
   Vec3f mouseWorldNear;
   Vec3f mouseWorldFar;
@@ -50,12 +50,12 @@ std::cout << " Obj " << pgo->GetId() << " is not pickable.\n";
 #endif
       continue;
     }
-    if (v == carried)
-    {
-      // Can't select it then!
-      std::cout << "Skipping carried object " << *v << "\n";
-      continue;
-    }
+    //if (v == carried)
+    //{
+    //  // Can't select it then!
+    //  std::cout << "Skipping carried object " << *v << "\n";
+    //  continue;
+    //}
 
     AABB* aabb = pgo->GetAABB();
     if (aabb && Clip(lineSeg, *aabb, 0))
