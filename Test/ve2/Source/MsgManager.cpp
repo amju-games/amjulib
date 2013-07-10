@@ -29,10 +29,6 @@ namespace Amju
 {
 MsgManager::MsgManager()
 {
-  m_elapsed = 0;
-
-  static const float MAX_CHECK_PERIOD = ROConfig()->GetFloat("chat-poll-period", 2.0f);
-  m_checkPeriod = MAX_CHECK_PERIOD;
 }
 
 void MsgManager::QueueMsg(const Msg& msg)
