@@ -20,11 +20,6 @@
 
 namespace Amju
 {
-static void OnStopTest()
-{
-  OnCogTestStopPartWayThrough(); 
-}
-
 static void OnReset()
 {
   TheGSTrailMakingTest::Instance()->ResetTest();
@@ -80,10 +75,7 @@ void GSTrailMakingTest::OnActive()
 
   m_gui = LoadGui("gui-trailmaking.txt"); 
   Assert(m_gui);
-  LoadCommonGui(); // instead of..
-  //GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  //done->SetCommand(Amju::OnStopTest);
-  //done->SetVisible(true);
+  LoadCommonGui();
 
   ResetTest();
 }
@@ -102,7 +94,7 @@ void GSTrailMakingTest::ResetTest()
   static const int GRID_W = 8;
   static const int GRID_H = 7;
   float w = 2.0f / GRID_W;
-  float h = 1.7f / GRID_H; // top of screen has info/buttons
+  float h = 1.6f / GRID_H; // top of screen has info/buttons
 
 #ifdef RANDOM_DISTRIBUTION
   Vec2f grid[GRID_W * GRID_H];
@@ -145,11 +137,13 @@ OH_CRAP:
     int gridSq = newPos.x * GRID_W + newPos.y;
     while (grid[gridSq])
     {
+      // TODO Fix this
       count++;
       if (count > 50)
       {
 std::cout << "Oh crap, got boxed in, restarting random walk..\n";
 
+        count = 0;
         goto OH_CRAP; // I R teh awsom programmer
       }
 
@@ -172,7 +166,7 @@ std::cout << "Oh crap, got boxed in, restarting random walk..\n";
 
     // Convert grid coord to screen coord, with a bit of randomness
     Vec2f posf = Vec2f(pos.x * w - 0.9f + Rnd(-0.05f, 0.05f), 
-      pos.y * h - 0.9f + Rnd(-0.05f, 0.05f));
+      pos.y * h - 0.8f + Rnd(-0.05f, 0.05f));
 
     AddCircle(i, posf);
   }

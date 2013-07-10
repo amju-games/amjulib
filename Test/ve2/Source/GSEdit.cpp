@@ -28,7 +28,6 @@
 #include "Skybox.h"
 #include "Food.h"
 #include "LurkMsg.h"
-#include "HotLava.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -865,9 +864,6 @@ void GSEdit::CreateContextMenu()
 
     childMenu->AddChild(new GuiMenuItem("FuelCellManager", 
       new NewObjectCommand(FoodManager::TYPENAME, "none", "none", true)));
-
-    childMenu->AddChild(new GuiMenuItem("HotLava", 
-      new NewObjectCommand(HotLava::TYPENAME, "none", "none", true)));
 
     childMenu->AddChild(new GuiMenuItem("Portal", 
       new NewObjectCommand(Portal::TYPENAME, "none", "none", true)));

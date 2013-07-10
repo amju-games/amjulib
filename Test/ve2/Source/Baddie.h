@@ -1,7 +1,7 @@
 #ifndef BADDIE_H_INCLUDED
 #define BADDIE_H_INCLUDED
 
-#include "Ve1ObjectChar.h"
+#include "Ve1Object.h"
 
 namespace Amju
 {

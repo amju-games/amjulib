@@ -27,10 +27,6 @@ GameObject* CreateBaddie()
 
 static bool registered = TheGameObjectFactory::Instance()->Add(Baddie::TYPENAME, CreateBaddie);
 
-// TODO
-static const float XSIZE = 20.0f;
-static const float YSIZE = 5.0f;
-
 const char* Baddie::TYPENAME = "baddie";
 
 const char* Baddie::GetTypeName() const
@@ -83,8 +79,11 @@ void Baddie::Update()
 
   if (GetAABB())
   {
+    // Make bounding box smaller to give player the benefit of the doubt
     float x = m_size.x * 0.4f;
     float y = m_size.y * 0.4f;
+
+    static const float YSIZE = 50.0f;
 
     GetAABB()->Set(
       m_pos.x - x, m_pos.x + x,

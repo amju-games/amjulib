@@ -22,9 +22,11 @@
 #include "Ve1SceneGraph.h"
 #include <AmjuFinal.h>
 
+#ifdef _DEBUG
 #define SHOW_ENV_INFO
 //#define SHOW_FRAME_TIME
 #define SHOW_VERSION
+#endif
 
 namespace Amju
 {
@@ -89,14 +91,6 @@ void GSTitle::Draw()
   m_titleImage.Draw();  
 
   m_tp.Draw();
-
-  /*
-  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-  PushColour();
-  AmjuGL::SetColour(Colour(1, 1, 1, 0.25f));
-  GSGui::Draw();
-  PopColour();
-  */
 
   AmjuGL::PopAttrib();
 }
@@ -195,16 +189,16 @@ std::cout << "Failed to load GUI title bg image!\n";
   quit->SetCommand(Amju::OnQuitButton);
   quit->SetIsCancelButton(true);
 
-#ifdef SHOW_VERSION
   GuiText* ver = (GuiText*)GetElementByName(m_gui, "version");
+#ifdef SHOW_VERSION
   std::string s = "v." + ToString(VersionMajor) + "." + ToString(VersionMinor);
 #ifdef _DEBUG
   s += " DEBUG";
 #endif
   ver->SetText(s);
+#else
+  ver->SetVisible(false);
 #endif
-
-  //CreateText("my game");
 
 #ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-title", "Sound/hammers.it"));
@@ -218,7 +212,6 @@ void GSTitle::OnDeactive()
 #endif
 
   GSGui::OnDeactive();
-  //CreateText("");
 }
 
 } // namespace

@@ -36,11 +36,6 @@ static void OnReset()
   }
 }
 
-static void OnStopTest()
-{
-  OnCogTestStopPartWayThrough(); // global function, right?
-}
-
 class CommandChoiceButton : public GuiCommand
 {
 public:
@@ -104,7 +99,6 @@ void GSStroopBase::ResetTest()
   word->SetVisible(true);
 
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
-  done->SetCommand(Amju::OnStopTest);
   done->SetVisible(true);
 
   m_timer = m_maxTime;
@@ -114,9 +108,6 @@ void GSStroopBase::ResetTest()
   m_isFinished = false;
 
   UpdateCorrectIncorrect();
-  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  //scoreText->SetText(s);
 }
 
 void GSStroopBase::SetTest()
@@ -190,9 +181,6 @@ void GSStroopBase::OnChoiceButton(int choice)
   }
 
   UpdateCorrectIncorrect();
-  //GuiText* scoreText = (GuiText*)GetElementByName(m_gui, "score");
-  //std::string s = "Correct: " + ToString(m_correct) + " Incorrect: " + ToString(m_incorrect);
-  //scoreText->SetText(s);
 
   // Animate the text off the screen ?
 

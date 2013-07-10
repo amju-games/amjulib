@@ -63,7 +63,7 @@ version
 // size
 0.8, 0.1
 // Text
-v.0.3 in progress
+$$$empty
 // Font name, size
 arial, 0.75, left, bgcol=000000, fgcol=ffffff
 
