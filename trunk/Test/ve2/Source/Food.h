@@ -11,15 +11,20 @@ class FoodManager : public Ve1Object
 {
 public:
   static const char* TYPENAME;
+
+  FoodManager();
   virtual const char* GetTypeName() const;
 
   // Create Food cells in new location, local to client only
   virtual void OnLocationEntry();
-
   virtual void SetEditMenu(GuiMenu*) {}
-
   virtual void Update();
+  virtual bool Load(File*);
 
+private:
+  // Put m_numfood foods in the room, around m_pos, in a circle of size m_radius
+  int m_numfood;
+  float m_radius;
 };
 
 class Food : public Furniture

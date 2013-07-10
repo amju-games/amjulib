@@ -27,6 +27,9 @@ extern const char* HEALTH_KEY;
 extern const int FOOD_START_ID;
 extern const int BADDDIE_START_ID;
 extern const int BULLET_START_ID;
+extern const int TREASURE_START_ID;
+extern const int FOOD_MGR_START_ID;
+
 }
 
 #endif

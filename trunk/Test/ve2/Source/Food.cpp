@@ -6,6 +6,7 @@
 #include <DrawAABB.h>
 #include <AmjuRand.h>
 #include <ReportError.h>
+#include <LoadVec3.h>
 #include "Food.h"
 #include "LocalPlayer.h"
 #include "GameMode.h"
@@ -73,11 +74,18 @@ void FoodNode::Draw()
   AmjuGL::PopMatrix();
 }
 
-const char* FoodManager::TYPENAME = "Foodmanager";
+const char* FoodManager::TYPENAME = "foodmanager";
 
 const char* FoodManager::GetTypeName() const
 {
   return TYPENAME;
+}
+
+FoodManager::FoodManager()
+{
+  static const int NUM_FOOD_PER_FOOD_MANAGER = ROConfig()->GetInt("num-food-per-foodmgr", 3);
+  m_numfood = NUM_FOOD_PER_FOOD_MANAGER;
+  m_radius = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
 }
 
 void SetRandomFoodInLocation()
@@ -87,18 +95,45 @@ void SetRandomFoodInLocation()
   fcm.OnLocationEntry();
 }
 
+bool FoodManager::Load(File* f)
+{
+  static int id = FOOD_MGR_START_ID;
+  SetId(id++);
+
+  Vec3f pos;
+  if (!LoadVec3(f, &pos))
+  {
+    f->ReportError("Expected position");
+    return false;
+  }
+  SetPos(pos);
+
+  if (!f->GetInteger(&m_numfood))
+  {
+    f->ReportError("Expected num foods");
+    return false;
+  }
+
+  if (f->GetFloat(&m_radius))
+  {
+    f->ReportError("Expected radius");
+    return false;
+  }
+
+  return true;
+}
+
 void FoodManager::OnLocationEntry()
 {
   // Create Food 
   static int id = FOOD_START_ID;
-  static const int NUM_FOOD_PER_FOOD_MANAGER = ROConfig()->GetInt("num-food-per-foodmgr", 3);
 
-  for (int i = 0; i < NUM_FOOD_PER_FOOD_MANAGER; i++)
+  for (int i = 0; i < m_numfood; i++)
   {
     Food* f = new Food;
     f->SetId(id++);
 
-    float s = ROConfig()->GetFloat("Food-cell-spread", 200.0f); 
+    float s = m_radius;
     Vec3f r(Rnd(-s, s), 0, Rnd(-s, s));
     Vec3f p = GetPos() + r; 
     f->SetPos(p);
