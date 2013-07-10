@@ -41,6 +41,16 @@ steps-ew.png
 // Destinations N, S, E, W
 0, 5, 4, 1
 
+treasure
+// pos
+100, 0, -100
+// tex
+diamond1.png
+// cells
+4, 1
+// points
+1000
+
 baddie
 // Pos
 100, 0, 100
