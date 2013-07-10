@@ -6,7 +6,7 @@ gui-comp
 // Name
 today-comp
 // Num children
-4
+2
 
 gui-button
 ok-button
@@ -20,27 +20,10 @@ arial, 2.0
 
 
 gui-text
-long-text
--0.9, 0.9
-1.8, 1.2
-// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
-You have been shipwrecked on a desert island!
-arial, 1.0, multi, fgcol=ffffff
-
-gui-text
-date-text
--0.8, 0.6
-1.6, 0.4
-Day <n>\n on planet Blarg
-arial, 2.0, multi, fgcol=ffffff
-
-
-gui-text
 obj-text
 -0.9, 0.1
 1.8, 1.2
-// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
-Your objective: find <f> fuel cells and bring them back to your space ship!
+Your objective
 arial, 1.0, multi, fgcol=ffff00
 
 
