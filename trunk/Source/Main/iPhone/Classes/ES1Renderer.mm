@@ -136,6 +136,8 @@ std::cout << "Called StartUp...\n";
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
 
 	std::cout << "Backing width: " << backingWidth << " Height: " << backingHeight << "\n";
+
+    Amju::Screen::SetSize(backingHeight, backingWidth);
 	
     // Enable depth buffer - From http://forums.toucharcade.com/showthread.php?t=28829
     glGenRenderbuffersOES(1, &depthRenderbuffer);

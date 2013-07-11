@@ -11,6 +11,7 @@
 
 #include <EventPoller.h>
 #include <EventTypes.h>
+#include <Screen.h>
 
 @implementation EAGLView
 
@@ -165,13 +166,16 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 	ce->controller = 0;
 
   // Rotate cursor data to screen orientation - TODO make this run time
+  float scrX2 = float(Amju::Screen::X() / 2);
+  float scrY2 = float(Amju::Screen::Y() / 2);
+
 #ifdef LANDSCAPE
-	ce->x = 1.0f - (float)y / 240.0f;	
-	ce->y = 1.0f - (float)x / 160.0f;
+	ce->x = 1.0f - (float)y / scrX2;	
+	ce->y = 1.0f - (float)x / scrY2;
 
 #else
-	ce->x = (float)x / 160.0f - 1.0f;
-	ce->y = 1.0f - (float)y / 240.0f;
+	ce->x = (float)x / scrY2 - 1.0f;
+	ce->y = 1.0f - (float)y / scrX2;
 
 #endif
 }
