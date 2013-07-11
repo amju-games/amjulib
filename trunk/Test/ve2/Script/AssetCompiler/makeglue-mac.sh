@@ -17,8 +17,6 @@ rm -rf $DEST_DIR
 mkdir -p $DEST_DIR
 mkdir -p $DEST_DIR/characters/2d/
 mkdir -p $DEST_DIR/font2d/
-#mkdir -p $DEST_DIR/obj/
-#mkdir -p $DEST_DIR/locations/location1/
 mkdir -p $DEST_DIR/Sound/
 mkdir -p $DEST_DIR/rooms/
 
@@ -32,21 +30,10 @@ cp $FONT2D/arial*.png $DEST_DIR/font2d/
 cp $FONT2D/arial*.txt $DEST_DIR/font2d/
 cp $GUIASSETSDIR/*.png $DEST_DIR
 cp $GUIASSETSDIR/*.txt $DEST_DIR
-#cp $SRC_DIR/obj/*.obj $DEST_DIR/obj/
-#cp $SRC_DIR/obj/*.mtl $DEST_DIR/obj/
-#cp $SRC_DIR/obj/*.png $DEST_DIR/obj/
-#cp $SRC_DIR/locations/location1/*.obj $DEST_DIR/locations/location1/
-#cp $SRC_DIR/locations/location1/*.mtl $DEST_DIR/locations/location1/
-#cp $SRC_DIR/locations/location1/*.png $DEST_DIR/locations/location1/
 
 # no need to have Sound separately??
 cp $SRC_DIR/Sound/*.it $DEST_DIR/Sound/
 cp $SRC_DIR/Sound/*.wav $DEST_DIR/Sound/
-
-# TODO Convert text files to binary
-#  When we do this, no need to distribute separate .mtl files.
-#. makeobjsbin-mac.sh
-
 
 cd $DEST_DIR
 
