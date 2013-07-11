@@ -8,5 +8,5 @@ kb
 // Size
 2.0, 0.8
 // Filename for KB layout, localised
-gui-kb-symbol-EN.txt
+gui-kb-symbol-en.txt
 
