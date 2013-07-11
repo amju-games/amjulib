@@ -17,6 +17,7 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <iostream>
 #include <time.h>
 #include "File.h"
+#include "Directory.h"
 #include <AmjuFinal.h>
 
 //#define GLUE_FILE_DEBUG
@@ -255,6 +256,16 @@ bool GlueFile::SimpleOpen(const std::string gluefilename, bool read)
 
   if (!m_gluefile.is_open())
   {
+std::cout << "In GlueFile::SimpleOpen: failed to open file \"" << fileAndPath << "\"\n";
+    if (FileExists(fileAndPath))
+    {
+std::cout << "But the file is there according to FileExists()!\n";
+    }
+    else
+    {
+std::cout << "The file is NOT there according to FileExists()!\n";
+    }
+
     return false;
   }
   m_filename = gluefilename;
