@@ -263,7 +263,7 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
     return;
   }
 
-  int x2 = screenY - h;
+  int x2 = screenY - h - y;
   int y2 = x;
   int w2 = h;
   int h2 = w;
