@@ -22,7 +22,7 @@ struct ResearchDate
   bool m_playSingle;
   bool m_playMulti;
 
-  bool operator<(const ResearchDate& rd)
+  bool operator<(const ResearchDate& rd) const
   {
     return m_time < rd.m_time;
   }
