@@ -124,7 +124,7 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
   std::string oldRoot = File::GetRoot();
   File::SetRoot("", "/");
   GlueFile gf;
-  bool loaded = gf.OpenGlueFile(srcGlueFilePath, false);
+  bool loaded = gf.OpenGlueFile(srcGlueFilePath, true);
   File::SetRoot(oldRoot, "/");
 
   if (!loaded)
