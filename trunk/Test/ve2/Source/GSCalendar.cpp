@@ -65,34 +65,40 @@ void GSCalendar::OnActive()
   }
   else
   {
-    ResearchDate start = dates[0];
-    ResearchDate end = dates[dates.size() - 1];
-    Time startTime = start.m_time;
-    Time endTime = end.m_time;
+    Time startTime = dates.begin()->first; //start.m_time;
+    Time endTime = dates.rbegin()->first;  //end.m_time;
     cal->SetStartEndDate(startTime, endTime);
 
-    int n = dates.size();
-    for (int i = 0; i < n; i++)
+    //int n = dates.size();
+    for (ResearchDates::const_iterator it = dates.begin(); it != dates.end(); ++it)
     {
-      const ResearchDate& d = dates[i];
-      Time t = d.m_time;
+      const ResearchDate* d = it->second; //dates[i];
+      Time t = d->m_time;
     
       GuiCalendarDayCell* cell = cal->GetCell(t);
       if (cell)
       {
         cell->SetBgCol(Colour(1, 0, 0, 1));
         std::string str;
-        if (d.m_playSingle)
+        if (d->m_playSingle)
         {
-          str = "Please play single-player game.";
+          str = "Please play single-player game";
+          if (d->m_cogTest)
+          {
+            str += " and take tests";
+          }
         }
-        else if (d.m_playMulti)
+        else if (d->m_playMulti)
         {
-          str = "Please play multi-player game.";
+          str = "Please play multi-player game";
+          if (d->m_cogTest)
+          {
+            str += " and take tests";
+          }
         }
-        else if (d.m_cogTest)
+        else if (d->m_cogTest)
         {
-          str = "Please take tests only, at any time.";
+          str = "Please just take the tests";
         }
         else
         {

@@ -56,12 +56,13 @@ void GSThanks::OnActive()
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "long-text");
 
-  ResearchDates dates = TheResearchCalendar::Instance()->GetResearchDates();
+  const ResearchDates& dates = TheResearchCalendar::Instance()->GetResearchDates();
   if (!dates.empty())
   {
     int numDays = dates.size();
-    std::sort(dates.begin(), dates.end());
-    TimePeriod period = dates.rbegin()->m_time - dates.begin()->m_time;
+    // map -- sorted std::sort(dates.begin(), dates.end());
+    // This is a bit dodgy - TODO make member func of ResearchCalendar
+    TimePeriod period = dates.rbegin()->first - dates.begin()->first;
     int weeks = period.ToSeconds() / ONE_WEEK_IN_SECONDS;
 
     text->SetText("Thanks for participating in this research project! I hope you find it enjoyable.\n\n"
