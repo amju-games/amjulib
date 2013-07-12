@@ -237,7 +237,9 @@ void ReqLogin::ChooseMode()
                 CreateDummyLocalPlayer();
               }
             }
-            TheResearchCalendar::Instance()->AddResearchDate(ResearchDate(Time(dateStr), cogtest, single, multi));   
+
+            TheResearchCalendar::Instance()->AddResearchDate(
+              new ResearchDate(t, cogtest, single, multi));   
           }
           else
           {

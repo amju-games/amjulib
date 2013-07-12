@@ -15,9 +15,30 @@ const ResearchDates& ResearchCalendar::GetResearchDates() const
   return m_dates;
 }
 
-void ResearchCalendar::AddResearchDate(const ResearchDate& d)
+void ResearchCalendar::AddResearchDate(ResearchDate* d)
 {
-  m_dates.push_back(d);
+  ResearchDates::iterator it = m_dates.find(d->m_time);
+  
+  if (it == m_dates.end())
+  {
+    m_dates[d->m_time] = d;
+  }
+  else
+  {
+    std::cout << "Duplicated research date, so overwriting values...\n";
+    if (d->m_cogTest)
+    {
+      it->second->m_cogTest = true;
+    }
+    if (d->m_playMulti)
+    {
+      it->second->m_playMulti = true;
+    }
+    if (d->m_playSingle)
+    {
+      it->second->m_playSingle = true;
+    }
+  }
 }
 
 const ResearchDate* ResearchCalendar::GetToday() const
@@ -25,11 +46,11 @@ const ResearchDate* ResearchCalendar::GetToday() const
   Time today(Time::Now());
   today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
-  for (unsigned int i = 0; i < m_dates.size(); i++)
+  for (ResearchDates::const_iterator it = m_dates.begin(); it != m_dates.end(); ++it)
   {
-    if (m_dates[i].m_time == today)
+    if (it->first == today)
     {
-      return &m_dates[i];
+      return it->second;
     }
   }
 
@@ -39,27 +60,6 @@ const ResearchDate* ResearchCalendar::GetToday() const
 const ResearchDate* ResearchCalendar::GetNext() const
 {
   return 0;
-}
-
-int ResearchCalendar::GetDayOnPlanet() const
-{
-  int d = 0;
-  Time today(Time::Now());
-  today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
-
-  for (unsigned int i = 0; i < m_dates.size(); i++)
-  {
-    if (m_dates[i].m_playSingle || m_dates[i].m_playMulti)
-    {
-      d++;
-    }
-
-    if (!(m_dates[i].m_time < today)) // sigh, TODO >=
-    {
-      return d;
-    }
-  }
-  return d;
 }
 
 }

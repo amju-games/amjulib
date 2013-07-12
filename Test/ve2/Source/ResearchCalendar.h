@@ -1,7 +1,7 @@
 #ifndef RESEARCH_CALENDAR_H_INCLUDED
 #define RESEARCH_CALENDAR_H_INCLUDED
 
-#include <vector>
+#include <map>
 #include <AmjuTime.h>
 #include <Singleton.h>
 
@@ -28,7 +28,7 @@ struct ResearchDate
   }
 };
 
-typedef std::vector<ResearchDate> ResearchDates;
+typedef std::map<Time, ResearchDate*> ResearchDates;
 
 // Store dates/times of all scheduled research sessions for the study.
 // Get this from server, so we can have more than one study/overlapping etc if required.
@@ -39,10 +39,11 @@ public:
   const ResearchDates& GetResearchDates() const;
   const ResearchDate* GetToday() const; // could return zero
   const ResearchDate* GetNext() const; // could return zero
+  
+  // Get the research date for the given timestamp - could return zero
+  ResearchDate* Get(const Time&);
 
-  void AddResearchDate(const ResearchDate&);
-
-  int GetDayOnPlanet() const; // get play day number
+  void AddResearchDate(ResearchDate*);
   
 private:
   ResearchDates m_dates;
