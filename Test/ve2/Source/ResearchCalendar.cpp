@@ -1,3 +1,4 @@
+#include <iostream>
 #include <AmjuFirst.h>
 #include <TimePeriod.h>
 #include "ResearchCalendar.h"
@@ -25,7 +26,9 @@ void ResearchCalendar::AddResearchDate(ResearchDate* d)
   }
   else
   {
+#ifdef _DEBUG
     std::cout << "Duplicated research date, so overwriting values...\n";
+#endif
     if (d->m_cogTest)
     {
       it->second->m_cogTest = true;
