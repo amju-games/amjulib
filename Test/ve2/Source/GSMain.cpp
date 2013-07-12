@@ -247,52 +247,52 @@ bool GSMain::ShowObjectMenu(GameObject* obj)
   return false;
 }
 
-//static void OnChangeLookNo()
-//{
-//  // TODO Add this as an "on No" message, otherwise you get msgs shuffled with others.
-////  FirstTimeMsgThisSession("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
-//  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
-//}
-//
-//static void OnChangeLookYes()
-//{
-//  TheGS2dAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
-//  TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance());
-//  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
-//}
+static void OnChangeLookNo()
+{
+  // TODO Add this as an "on No" message, otherwise you get msgs shuffled with others.
+//  FirstTimeMsgThisSession("OK, you can change later if you like, by clicking on the pause button.", UNIQUE_MSG_ID, false);
+  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
+}
+
+static void OnChangeLookYes()
+{
+  TheGS2dAvatarMod::Instance()->SetPrevState(TheGSMain::Instance());
+  TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance());
+  FirstTimeMsgThisSession("To walk around, click on the ground where you want to go.", UNIQUE_MSG_ID, false);
+}
 
 void GSMain::Update()
 {
   GSBase::Update();
 
-  //std::string s;
-  //GameMode gm = GetGameMode();
-  //if (gm == AMJU_MODE_SINGLE)
-  //{
-  //  // TODO localise
-  //  s = "Hello, <p>! Today, you are hungry and must find food for yourself! Pick up and eat food by walking into it.";
-  //}
-  //else if (gm == AMJU_MODE_MULTI)
-  //{
-  //  s = "Hello, <p>! Today, you must feed the other players! Pick up food by walking into it, then give it to other players by walking into them.";
-  //}
-  //else if (gm == AMJU_MODE_EDIT)
-  //{
-  //  s = "Have fun in edit mode!";
-  //}
-  //else
-  //{
-  //  Assert(0); // how did we get here?
-  //}
+  std::string s;
+  GameMode gm = GetGameMode();
+  if (gm == AMJU_MODE_SINGLE)
+  {
+    // TODO localise
+    s = "Hello, <p>! Today, you are hungry and must find food for yourself! Pick up and eat food by walking into it.";
+  }
+  else if (gm == AMJU_MODE_MULTI)
+  {
+    s = "Hello, <p>! Today, you must feed the other players! Pick up food by walking into it, then give it to other players by walking into them.";
+  }
+  else if (gm == AMJU_MODE_EDIT)
+  {
+    s = "Have fun in edit mode!";
+  }
+  else
+  {
+    Assert(0); // how did we get here?
+  }
 
-  //FirstTimeMsgThisSession(
-  //  s,
-  //  UNIQUE_MSG_ID,
-  //  false);
+  FirstTimeMsgThisSession(
+    s,
+    UNIQUE_MSG_ID,
+    false);
 
-  //FirstTimeQuestionThisSession(
-  //  "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
-  //  UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
+  FirstTimeQuestionThisSession(
+    "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
+    UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
 
   // This is to nag about cog tests -- but if it's a test day, you shouldn't be
   // playing, right?
