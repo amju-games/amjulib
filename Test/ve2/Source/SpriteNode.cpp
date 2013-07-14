@@ -11,7 +11,7 @@ SpriteNode::SpriteNode(const std::string tex, int cellsX, int cellsY, float size
     Assert(0);
   }
 
-  m_sprite.SetCellTime(0.1f); // Default - change in subclass 
+  m_sprite.SetCellTime(0.2f); // Default - change in subclass 
   int c = 0; // start at cell 0
   m_sprite.SetCellRange(c, c);
   m_sprite.SetCell(c);
