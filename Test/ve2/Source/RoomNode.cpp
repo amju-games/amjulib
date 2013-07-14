@@ -47,7 +47,7 @@ void RoomNode::Draw()
 
   Vec2f size = m_room->m_tilesize;
 
-  for (int i = 0; i < 2; i++) // each tile map
+  for (int i = 0; i < Room::NUM_TILE_MAPS; i++) // each tile map
   {
     if (i > 0)
     {
@@ -63,10 +63,10 @@ void RoomNode::Draw()
       Assert(tex);
       tex->UseThisTexture();
 
-      Room::PosVec& posvec = it->second;
-      for (unsigned int i = 0; i < posvec.size(); i++)
+      Room::TileVec& tilevec = it->second;
+      for (unsigned int i = 0; i < tilevec.size(); i++)
       {
-        Vec2f pos = posvec[i];
+        Vec2f& pos = tilevec[i].m_pos;
         AmjuGL::PushMatrix();
         AmjuGL::Translate(pos.x * size.x, pos.y * -size.y, 0);
         AmjuGL::DrawTriList(m_tris);

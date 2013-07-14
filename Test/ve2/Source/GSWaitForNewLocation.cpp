@@ -18,6 +18,8 @@
 #include "Room.h"
 #include <AmjuFinal.h>
 
+//#define ANNOUNCE_ROOM_CHANGES
+
 namespace Amju
 {
 static void OnCancel()
@@ -84,6 +86,8 @@ void GSWaitForNewLocation::Update()
 
       SetRandomFoodInLocation();
 
+      // Hmm, this might clutter up the conversation too much.
+#ifdef ANNOUNCE_ROOM_CHANGES
       std::string str;
       if (GetNameForPlayer(GetLocalPlayerId(), &str))
       {
@@ -91,6 +95,7 @@ void GSWaitForNewLocation::Update()
         str += ToString(GetLocalPlayerLocation());
         TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
       }
+#endif
 
       static GSMain* gsm = TheGSMain::Instance();
       gsm->SetRoom(GetLocalPlayerLocation());

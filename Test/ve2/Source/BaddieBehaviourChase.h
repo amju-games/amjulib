@@ -8,6 +8,8 @@ namespace Amju
 class BBChase : public BaddieBehaviour
 {
 public:
+  static const char* TYPENAME;
+
   BBChase();
   virtual void Update();
   virtual bool Load(File*);

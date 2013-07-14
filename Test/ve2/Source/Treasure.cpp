@@ -99,15 +99,18 @@ void Treasure::Update()
     Matrix m;
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
+  
+    if (m_sceneNode->GetAABB())
+    {
+      m_sceneNode->GetAABB()->Set(
+        m_pos.x - XSIZE, m_pos.x + XSIZE,
+        m_pos.y,         m_pos.y + YSIZE,
+        m_pos.z - XSIZE, m_pos.z + XSIZE);
+    }
   }
-
-  if (GetAABB())
-  {
-    GetAABB()->Set(
-      m_pos.x - XSIZE, m_pos.x + XSIZE,
-      m_pos.y,         m_pos.y + YSIZE,
-      m_pos.z - XSIZE, m_pos.z + XSIZE);
-  }
+  GetAABB()->Set(
+    m_pos.x - XSIZE, m_pos.x + XSIZE,
+    m_pos.y,         m_pos.y + YSIZE,
+    m_pos.z - XSIZE, m_pos.z + XSIZE);
 }
-
 }

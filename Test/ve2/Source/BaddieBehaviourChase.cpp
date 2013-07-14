@@ -3,6 +3,15 @@
 
 namespace Amju
 {
+BaddieBehaviour* CreateBBChase()
+{
+  return new BBChase;
+}
+
+const char* BBChase::TYPENAME = "chase";
+
+bool registered = TheBBFactory::Instance()->Add(BBChase::TYPENAME, CreateBBChase);
+
 BBChase::BBChase()
 {
   m_chaseSpeed = 0;

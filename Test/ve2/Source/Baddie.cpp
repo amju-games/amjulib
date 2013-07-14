@@ -49,6 +49,11 @@ void Baddie::Update()
 {
   Ve1Object::Update();
 
+  if (m_bb)
+  {
+    m_bb->Update();
+  }
+
   // Surely this is all done in base class ???
   if (m_sceneNode)
   {
