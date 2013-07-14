@@ -115,17 +115,22 @@ std::string Time::ToStringJustDate() const
 std::string Time::ToString() const
 {
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
-#endif
 
-#ifdef GEKKO
-  localtime_r((const time_t*)&m_secs, &mytm);
-#endif
+//#ifdef MACOSX
+//  localtime_r((const time_t*)&m_secs, &mytm);
+//#endif
+//#ifdef GEKKO
+//  localtime_r((const time_t*)&m_secs, &mytm);
+//#endif
   
 #ifdef WIN32
   mytm = *(localtime((const time_t*)&m_secs));
+
+#else
+  localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
+    
   std::string t = asctime(&mytm);
   t = Replace(t, "\n", "");
   return t;
@@ -136,12 +141,15 @@ int Time::GetSecs() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
-  return mytm.tm_sec;
+
+    return mytm.tm_sec;
 }
 
 int Time::GetMins() const
@@ -149,10 +157,12 @@ int Time::GetMins() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_min;
 }
@@ -162,10 +172,12 @@ int Time::GetHours() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_hour;
 }
@@ -175,10 +187,12 @@ int Time::GetDayOfWeek() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_wday;
 }
@@ -188,10 +202,12 @@ int Time::GetDayOfMonth() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_mday;
 }
@@ -201,10 +217,12 @@ int Time::GetMonths() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_mon + 1;
 }
@@ -214,10 +232,12 @@ int Time::GetYears() const
   AMJU_CALL_STACK;
 
   tm mytm;
-#ifdef MACOSX
-  localtime_r((const time_t*)&m_secs, &mytm);
+#ifdef WIN32
+    mytm = *(localtime((const time_t*)&m_secs));
+    
 #else
-  mytm = *(localtime((const time_t*)&m_secs));
+    localtime_r((const time_t*)&m_secs, &mytm);
+    
 #endif
   return mytm.tm_year + 1900;
 }
@@ -315,5 +335,4 @@ bool Time::operator<(const Time& t) const
   return m_secs < t.m_secs;
 }
 }
-
 
