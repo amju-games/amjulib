@@ -22,8 +22,9 @@ sub make_new_player()
   my $playername = param('playername') or die "Expected playername";
   my $email = param('email') or die "Expected email";
   my $hashpw = "123"; #param('hashpw') or die "Expected hashpw";
+  my $resgroup = param('rg') or die "Expected research group";
 
-  new_player_impl($playername, $email, $hashpw);
+  new_player_impl($playername, $email, $hashpw, $resgroup);
 }
 
 

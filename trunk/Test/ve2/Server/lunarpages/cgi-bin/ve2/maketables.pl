@@ -223,9 +223,9 @@ sub create_tables()
 
   # TODO Add admin player character
 
-  new_player_impl('jay', 'jason@amju.com', '123');
-  new_player_impl('ella', 'ella@amju.com', '123');
-  new_player_impl('josh', 'josh@amju.com', '123');
+  new_player_impl('jay', 'jason@amju.com', '123', 'rg1');
+  new_player_impl('ella', 'ella@amju.com', '123', 'rg1');
+  new_player_impl('josh', 'josh@amju.com', '123', 'rg1');
 
 }
 

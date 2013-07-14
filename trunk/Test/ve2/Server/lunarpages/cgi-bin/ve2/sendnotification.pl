@@ -9,17 +9,17 @@ require "credentials.pl";
 # Send notification: $subject $message
 sub notifyProwl($$)
 {
-  my ($subject, $message) = @_;
+  # TODO timeout 
 
-  $requestURL = sprintf("https://prowlapp.com/publicapi/add?apikey=%s&application=%s&event=%s&description=%s",
-    $apikey,
-    "My%20Game",
-    $subject,
-    $message );
+#  my ($subject, $message) = @_;
 
-  my $content = get($requestURL) or die "get failed :-(";
+#  $requestURL = sprintf("https://prowlapp.com/publicapi/add?apikey=%s&application=%s&event=%s&description=%s",
+#    $apikey,
+#    "My%20Game",
+#    $subject,
+#    $message );
 
-  #print $content;
+#  my $content = get($requestURL) or die "get failed :-(";
 }
 
 1;

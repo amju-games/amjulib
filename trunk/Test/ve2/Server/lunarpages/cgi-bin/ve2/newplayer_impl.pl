@@ -6,7 +6,7 @@
 
 require "common.pl";
 
-sub new_player_impl($$$)
+sub new_player_impl($$$$)
 {
   my $playername = shift;
   $playername = lc($playername);
@@ -15,6 +15,8 @@ sub new_player_impl($$$)
   $email = lc($email);
 
   my $haspw = shift;
+
+  my $resgroup = shift;
 
   # See if the player/ip address already exists
   my $findplayersql = "select id from player where email='$email'";
@@ -34,7 +36,7 @@ sub new_player_impl($$$)
     return;
   }
 
-  my $insertsql = "insert into player (playername, email, hashpw, thumbnail, lasttime, research_group) values ('$playername', '$email', 'HASHPW', '', now(), 'a')";
+  my $insertsql = "insert into player (playername, email, hashpw, thumbnail, lasttime, research_group) values ('$playername', '$email', 'HASHPW', '', now(), '$resgroup')";
   insert($insertsql);
 
   my $querysql = "select id from player where email='$email'";
@@ -86,7 +88,7 @@ sub new_player_impl($$$)
 
   print "<br><br>Start location: ($x, $z)\n";
 
-  $sql = "insert into objectpos (`id`, `x`, `y`, `z`, `loc`) values ($objid, $x, 0, $z, $startLoc)";
+  $sql = "insert into objectstate values ($objid, 'pos', '$x,0,$z,$startLoc', now())";
   insert($sql);
 
   # Initially logged out
@@ -105,7 +107,7 @@ sub new_player_impl($$$)
   print MAIL "From: jason.colman\@port.ac.uk\n";
   print MAIL "To: $email\n";
   print MAIL "Subject: Welcome to my game!\n\n";
-  print MAIL "Dear $playername,\nThanks for volunteering to participate in my experiment.\n\nTo get started, please go to www.amju.com/mygame\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
+  print MAIL "Dear $playername,\nThanks for volunteering to participate in my experiment.\n\nTo get started, please go to www.amju.com/mygame/download.html\n\nIf you don't want to play this game, you can just ignore this email.\n\nBest wishes,\nJason Colman \n";
   close(MAIL);
 
   print "All OK, and sent email to new player.\n"; 

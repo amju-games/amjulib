@@ -10,7 +10,7 @@ require "sendemail2.pl";
 
 # This is the minimum client version which you must have to be able to log in.
 my $latestMajor = "0";
-my $latestMinor = "8";
+my $latestMinor = "9";
 my $startloc = 1;
 
 my_connect();
