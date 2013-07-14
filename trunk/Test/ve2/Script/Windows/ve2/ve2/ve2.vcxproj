@@ -173,6 +173,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Animated.cpp" />
     <ClCompile Include="..\..\..\..\Source\AttackEffect.cpp" />
     <ClCompile Include="..\..\..\..\Source\Baddie.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BaddieBehaviourChase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\BaddieBehaviourToggle.cpp" />
     <ClCompile Include="..\..\..\..\Source\BaddieNode.cpp" />
     <ClCompile Include="..\..\..\..\Source\BlinkCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Source\BroadcastConsole.cpp" />
@@ -216,6 +218,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSChoosePlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogResults.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestBase.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSCogTestHelp.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCogTestMenu.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSCopyAssets.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSDeath.cpp" />
@@ -329,6 +332,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\AttackEffect.h" />
     <ClInclude Include="..\..\..\..\Source\AvatarManager.h" />
     <ClInclude Include="..\..\..\..\Source\Baddie.h" />
+    <ClInclude Include="..\..\..\..\Source\BaddieBehaviourChase.h" />
+    <ClInclude Include="..\..\..\..\Source\BaddieBehaviourToggle.h" />
     <ClInclude Include="..\..\..\..\Source\BaddieNode.h" />
     <ClInclude Include="..\..\..\..\Source\BlinkCharacter.h" />
     <ClInclude Include="..\..\..\..\Source\BroadcastConsole.h" />
@@ -366,6 +371,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSChoosePlayer.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogResults.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestBase.h" />
+    <ClInclude Include="..\..\..\..\Source\GSCogTestHelp.h" />
     <ClInclude Include="..\..\..\..\Source\GSCogTestMenu.h" />
     <ClInclude Include="..\..\..\..\Source\GSCopyAssets.h" />
     <ClInclude Include="..\..\..\..\Source\GSDeath.h" />

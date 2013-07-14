@@ -1,10 +1,15 @@
 #ifndef BADDIE_H_INCLUDED
 #define BADDIE_H_INCLUDED
 
+#include <Factory.h>
+#include <Singleton.h>
 #include "Ve1Object.h"
+#include "SpriteNode.h"
 
 namespace Amju
 {
+class BaddieBehaviour;
+
 // BADDIE TYPE
 // Can inflict damage on local player.
 // Toggles between harmful and harmless state
@@ -26,6 +31,8 @@ public:
 
   void OnCollideBullet();
 
+  Sprite& GetSprite();
+
 protected:
   int m_damage; // damage inflicked on player on contact
   bool m_isDestructible;
@@ -36,22 +43,27 @@ protected:
   int m_maxHealth;
   int m_health;
 
-  // Chase player in harmful mode if speed > 0.
-  // (Flees player if speed < 0! -- is this useful?)
-  float m_chaseSpeed;
+  int m_points; // points player gets when destroyed
 
-  bool m_harmful; // toggles
-
-  // 0-1 (min, max) time in harmless state, 2-3 (min, max) time in harmful state
-  float m_time[4]; 
-
-  int m_cellRange[4]; // 0-1 harmless, 2-3 harmful cell range
-
-  float m_timeInState;
-  float m_maxTimeInState;
-
-  std::string m_sound[2]; // harmless/harmful state change sound filename
+  RCPtr<BaddieBehaviour> m_bb;
 };
+
+// Base class for behaviours
+class BaddieBehaviour : public RefCounted
+{
+public:
+  BaddieBehaviour() : m_baddie(0) {}
+  virtual ~BaddieBehaviour() {}
+  void SetBaddie(Baddie* baddie) { m_baddie = baddie; }
+
+  virtual void Update() = 0;
+  virtual bool Load(File*) { return true; }
+
+protected:
+  Baddie* m_baddie;
+};
+
+typedef Singleton<Factory<BaddieBehaviour> > TheBBFactory;
 }
 
 #endif

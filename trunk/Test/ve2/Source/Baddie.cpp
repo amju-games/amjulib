@@ -16,6 +16,7 @@
 #include "AttackEffect.h"
 #include "CommandFight.h"
 #include "GameConsts.h"
+#include "HeartCount.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -37,36 +38,15 @@ const char* Baddie::GetTypeName() const
 Baddie::Baddie() 
 {
   m_damage = 0;
-  m_chaseSpeed = 0;
   m_isDestructible = true;
   m_maxHealth = 1; 
   m_health = m_maxHealth;
 
-  m_harmful = false;
-  for (int i = 0; i < 4; i++)
-  {
-    m_time[i] = 0;
-    m_cellRange[i] = 0;
-  }
-  m_timeInState = 0;
-  m_maxTimeInState = 0;
+  m_points = 0;
 }
 
 void Baddie::Update()
 {
-  Player* lp = GetLocalPlayer();
-  if (m_harmful && lp)
-  {
-    Vec3f v = lp->GetPos() - m_pos;
-    v.Normalise();
-    v *= m_chaseSpeed;
-    SetVel(v);
-  }
-  else
-  {
-    SetVel(Vec3f()); // Or move more slowly??
-  }
-
   Ve1Object::Update();
 
   // Surely this is all done in base class ???
@@ -95,34 +75,13 @@ void Baddie::Update()
     //  *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
     //}
   }
+}
 
-  float dt = TheTimer::Instance()->GetDt();
-  m_timeInState += dt;
-  if (m_timeInState > m_maxTimeInState)
-  {
-    Assert(dynamic_cast<SpriteNode*>(m_sceneNode.GetPtr()));
-    Sprite* spr = ((SpriteNode*)m_sceneNode.GetPtr())->GetSprite();
-
-    m_timeInState = 0;
-    m_harmful = !m_harmful;
-    // New random time, within range for this state
-    if (m_harmful) 
-    {
-      TheSoundManager::Instance()->PlayWav(m_sound[1]);
-
-      m_maxTimeInState = Rnd(m_time[2], m_time[3]);
-      spr->SetCellRange(m_cellRange[2], m_cellRange[3]);
-      spr->SetCell(m_cellRange[2]);
-    }
-    else
-    {
-      TheSoundManager::Instance()->PlayWav(m_sound[0]);
-
-      m_maxTimeInState = Rnd(m_time[0], m_time[1]);
-      spr->SetCellRange(m_cellRange[0], m_cellRange[1]);
-      spr->SetCell(m_cellRange[1]);
-    }
-  }
+Sprite& Baddie::GetSprite()
+{
+  Assert(m_sceneNode);
+  Assert(dynamic_cast<SpriteNode*>(m_sceneNode.GetPtr()));
+  return *(((SpriteNode*)m_sceneNode.GetPtr())->GetSprite());
 }
 
 bool Baddie::Load(File* f)
@@ -156,6 +115,12 @@ bool Baddie::Load(File* f)
     f->ReportError("Expected size Vec2");
     return false;
   }
+
+  BaddieNode* bn = new BaddieNode(this, tex, cells.x, cells.y, m_size.x * 0.5f, m_size.y * 0.5f);
+  // By default we just cycle through all cells
+  bn->GetSprite()->SetCellRange(0, cells.x * cells.y);
+  SetSceneNode(bn);
+
   if (!f->GetInteger(&m_damage))
   {
     f->ReportError("Expected damage");
@@ -176,48 +141,29 @@ bool Baddie::Load(File* f)
 
   m_health = m_maxHealth;
 
-  if (!f->GetFloat(&m_chaseSpeed))
+  if (!f->GetInteger(&m_points))
   {
-    f->ReportError("Expected chase speed");
+    f->ReportError("Expected num points");
     return false;
   }
 
-  BaddieNode* bn = new BaddieNode(this, tex, cells.x, cells.y, m_size.x * 0.5f, m_size.y * 0.5f);
-
-  SetSceneNode(bn);
-
-  for (int i = 0; i < 4; i++)
+  std::string bb;
+  if (!f->GetDataLine(&bb))
   {
-    if (!f->GetFloat(&m_time[i]))
-    {
-      f->ReportError("Expected time " + ToString(i));
-      return false;
-    }
+    f->ReportError("Expected baddie behaviour type");
+    return false;
   }
 
-  for (int i = 0; i < 4; i++)
+  m_bb = TheBBFactory::Instance()->Create(bb);
+  
+  if (m_bb)
   {
-    if (!f->GetInteger(&m_cellRange[i]))
-    {
-      f->ReportError("Expected cell range " + ToString(i));
-      return false;
-    }
-  }
+    m_bb->SetBaddie(this);
 
-  m_timeInState = 0;
-  m_maxTimeInState = 0;
-
-  // Get sound filenames or <none>
-  for (int i = 0; i < 2; i++)
-  {
-    if (!f->GetDataLine(&m_sound[i]))
+    if (!m_bb->Load(f))
     {
-      f->ReportError("Expected sound " + ToString(i));
+      f->ReportError("Failed to load baddie behaviour");
       return false;
-    }
-    if (m_sound[i] == "<none>")
-    {
-      m_sound[i] = "";
     }
   }
 
@@ -283,12 +229,16 @@ void Baddie::OnCollideBullet()
   {
     OnLocationExit();
     TheGame::Instance()->EraseGameObject(GetId());
+
+    // Player gets points
+    // Add points to local player score
+    ChangePlayerCount(SCORE_KEY, m_points); 
   }
 }
 
 int Baddie::GetDamage() const
 {
-  return m_harmful ? m_damage : 0;
+  return m_damage;
 }
 }
 
