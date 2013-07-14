@@ -47,7 +47,7 @@ log2.png
 
 baddie
 // Pos -- behind so always under player
-100, -1, -100
+100, -1, -50
 // Tex
 water1.png
 // Num cells
@@ -55,7 +55,7 @@ water1.png
 // Size
 150, 150
 // Damage to player on collision
-1
+0
 // Max health: -1 == indestructible
 -1
 // Points
@@ -65,7 +65,7 @@ none
 
 baddie
 // Pos -- behind so always under player
--100, -1, 100
+-100, -1, 50
 // Tex
 tarpit1.png
 // Num cells
@@ -80,3 +80,19 @@ tarpit1.png
 0
 // Behaviour
 none
+
+treasure
+// pos
+100, 0, 100
+// tex
+diamond1.png
+// cells
+4, 1
+// points
+1000
+
+harmless
+fl1.png
+250, -1, 0
+1, 1
+15, 15
