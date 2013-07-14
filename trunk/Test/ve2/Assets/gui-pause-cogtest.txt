@@ -6,7 +6,7 @@ gui-comp
 // Name
 pause-cogtest-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -52,7 +52,7 @@ gui-button-4.png
 // Text
 show help for this test
 // Font name, size
-arial, 1.6, sx=0.7
+arial, 1.4, sx=0.5
 
 
 // element type
@@ -84,7 +84,7 @@ gui-button-4.png
 // Text
 skip this test - do it later
 // Font name, size
-arial, 1.4, sx=0.7
+arial, 1.4, sx=0.5
 
 
 // element type
