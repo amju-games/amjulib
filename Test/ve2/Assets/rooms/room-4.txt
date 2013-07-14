@@ -46,23 +46,10 @@ lava1.png
 1
 // Max health: -1 == indestructible
 -1
-// Chase speed
+// Points
 0
-// Time: harmless range
-0
-0
-// Time: harmful range
-5000
-5000
-// Cell range: harmless
-0
-0
-// Cell range: harmful
-0
-// Err, this is like end iterator, but not what we expect...?
-2
-// Sounds for harmless/harmful state change
-<none>
-<none>
+// Behaviour
+none
+
 
 

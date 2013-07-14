@@ -44,8 +44,8 @@ rock2.png
 11  0  0  0  0  0  0  0 11
 10 11 10 11 10 11 10 11 10
 
-// Destinations N, S, E, W
-3, 0, 2, 0
+// Destinations N, S, E>, W
+3, 0, 10, 0
 
 
 
