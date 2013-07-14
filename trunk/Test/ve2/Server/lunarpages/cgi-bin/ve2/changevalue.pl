@@ -28,7 +28,7 @@ sub change_value()
 
   my $change = param('change') or die "No change!!";
 
-  my $sql = "insert into objectstate values ($player_obj_id, '$key', '0', now()) on duplicate key update val=val+$change, whenchanged=now()";
+  my $sql = "insert into objectstate values ($player_obj_id, '$key', '$change', now()) on duplicate key update val=val+$change, whenchanged=now()";
 
   update_or_insert($sql);
 
