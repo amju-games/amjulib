@@ -41,3 +41,4 @@ cliff1.png
 // Destinations N, S, E, W
 0, 1, 0, 0
 
+
