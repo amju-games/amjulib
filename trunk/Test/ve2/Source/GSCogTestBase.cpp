@@ -16,17 +16,15 @@ namespace Amju
 static void OnStopTest()
 {
   // TODO Replace this:
-  OnCogTestStopPartWayThrough(); 
+//  OnCogTestStopPartWayThrough(); 
 
   // with this better menu:
 
-  /*
   static GSPauseCogTest* pct = TheGSPauseCogTest::Instance();
   static Game* game = TheGame::Instance();
 
   pct->SetPrevState(game->GetState());
   game->SetCurrentState(pct);  
-  */
 }
 
 GSCogTestBase::GSCogTestBase()
