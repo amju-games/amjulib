@@ -28,7 +28,7 @@ void GSCogTestHelp::OnActive()
 {
   GSGui::OnActive();
 
-  m_gui = LoadGui("TODO");
+  m_gui = LoadGui("gui-cogtest-help.txt");
   Assert(m_gui);
 
   // TODO Set focus element, cancel element, command handlers
