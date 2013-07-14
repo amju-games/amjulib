@@ -1,0 +1,40 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+cog-test-common-comp
+// Num children
+2
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1 
+// Text
+Help 
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+
+gui-button
+done-button
+// pos (coords are -1..1)
+-0.9, 0.95
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 1.0 
+
+
+
