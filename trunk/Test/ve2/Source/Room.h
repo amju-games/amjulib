@@ -32,8 +32,19 @@ private:
 
   Strings m_texNames;
 
-  typedef std::vector<Vec2f> PosVec;
-  typedef std::map<std::string, PosVec> TileMap;
+  // Tile-based room data.
+  // Group tiles by texture, to reduce state flipping.
+  struct Tile
+  {
+    Tile() {}
+    Tile (const Vec2f& pos, const Vec2f& size) : m_pos(pos), m_size(size) {}
+
+    Vec2f m_pos; 
+    Vec2f m_size;
+  };
+  typedef std::vector<Tile> TileVec;
+  // For each texture, a vector of positions at which to draw a tile.
+  typedef std::map<std::string, TileVec> TileMap;
 
   // Multiple tile maps:
   // Map 0: background images - do not interact
@@ -41,7 +52,8 @@ private:
 
   // Map 2: static baddies ?
   // Map 3: static food??
-  TileMap m_tilemap[2];
+  static const int NUM_TILE_MAPS = 2;
+  TileMap m_tilemap[NUM_TILE_MAPS];
 
   Vec2f m_tilesize;
   Vec2i m_gridsize;

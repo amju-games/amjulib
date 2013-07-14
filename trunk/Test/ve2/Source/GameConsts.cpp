@@ -29,5 +29,6 @@ const int BADDDIE_START_ID =   300000;
 const int BULLET_START_ID =    400000;
 const int TREASURE_START_ID =  500000;
 const int FOOD_MGR_START_ID =  600000;
+const int HARMLESS_START_ID =  700000;
 
 }

@@ -160,10 +160,10 @@ void Room::Update()
     TileMap& tm = m_tilemap[1];
     for (TileMap::iterator it = tm.begin(); it != tm.end(); ++it)
     {
-      Room::PosVec& posvec = it->second;
-      for (unsigned int i = 0; i < posvec.size(); i++)
+      Room::TileVec& tilevec = it->second;
+      for (unsigned int i = 0; i < tilevec.size(); i++)
       {
-        Vec2f& pos = posvec[i];
+        Vec2f& pos = tilevec[i].m_pos;
         AABB aabb(pos.x * m_tilesize.x, (pos.x + 1) * m_tilesize.x, 
           0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
         if (aabb.Intersects(*(p->GetAABB())))
@@ -216,7 +216,7 @@ bool Room::Load(File* f)
     return false;
   }
 
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < NUM_TILE_MAPS; i++)
   {
     if (!LoadGrid(i, f))
     {
@@ -286,10 +286,10 @@ bool Room::LoadGrid(int grid, File* f)
       std::string tex = m_texNames[t - 1];
 
       // Group all tiles with same texture
-      PosVec& posvec = m_tilemap[grid][tex];
+      TileVec& tilevec = m_tilemap[grid][tex];
       // Centre grid on origin
       Vec2f tilepos((float)x - (float)m_gridsize.x * 0.5f, (float)y - (float)m_gridsize.y * 0.5f);
-      posvec.push_back(tilepos);
+      tilevec.push_back(Tile(tilepos, Vec2f((float)m_gridsize.x, (float)m_gridsize.y)));
     }
   }
   return true;
@@ -315,7 +315,7 @@ void Room::OnLocationEntry()
   rn->Build(); // TODO Use tile data we loaded to make tiled textured quads..?
 
   // Big AABB so not culled
-  m_aabb.Set(-1000, 1000, -1000, 1000, -1000, 1000);
+  m_aabb.Set(-10000, 10000, -1000, 1000, -10000, 10000);
   *(rn->GetAABB()) = m_aabb;
 
   m_sceneNode = rn;
