@@ -161,21 +161,37 @@ void QueueEvent(Amju::Event* e)
 	Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
+void PopulateMBEvent(Amju::MouseButtonEvent* mbe, int x, int y)
+{
+  float scrX2 = float(Amju::Screen::X() / 2);
+  float scrY2 = float(Amju::Screen::Y() / 2);
+
+#ifdef LANDSCAPE
+  mbe->x = 1.0f - (float)y / scrX2;	
+  mbe->y = 1.0f - (float)x / scrY2;
+
+#else
+  mbe->x = (float)x / scrY2 - 1.0f;
+  mbe->y = 1.0f - (float)y / scrX2;
+
+#endif
+}
+
 void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 {
-	ce->controller = 0;
+  ce->controller = 0;
 
   // Rotate cursor data to screen orientation - TODO make this run time
   float scrX2 = float(Amju::Screen::X() / 2);
   float scrY2 = float(Amju::Screen::Y() / 2);
 
 #ifdef LANDSCAPE
-	ce->x = 1.0f - (float)y / scrX2;	
-	ce->y = 1.0f - (float)x / scrY2;
+  ce->x = 1.0f - (float)y / scrX2;	
+  ce->y = 1.0f - (float)x / scrY2;
 
 #else
-	ce->x = (float)x / scrY2 - 1.0f;
-	ce->y = 1.0f - (float)y / scrX2;
+  ce->x = (float)x / scrY2 - 1.0f;
+  ce->y = 1.0f - (float)y / scrX2;
 
 #endif
 }
@@ -185,15 +201,16 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 	int i = 0;
 	for (UITouch* touch in touches)
 	{
+		CGPoint touchPoint = [touch locationInView:self];
 		if (i++ == 0)
 		{
 			Amju::MouseButtonEvent* mbe = new Amju::MouseButtonEvent;
 			mbe->button = Amju::AMJU_BUTTON_MOUSE_LEFT;
 			mbe->isDown = true;
+			PopulateMBEvent(mbe, touchPoint.x, touchPoint.y);
 			QueueEvent(mbe);
 		}
 		
-		CGPoint touchPoint = [touch locationInView:self];
 		Amju::CursorEvent* ce = new Amju::CursorEvent;
 		PopulateCursorEvent(ce, touchPoint.x, touchPoint.y);
 		QueueEvent(ce);
@@ -205,11 +222,13 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 	int i = 0;
 	for (UITouch* touch in touches)
 	{
+		CGPoint touchPoint = [touch locationInView:self];
 		if (i++ == 0)
 		{
 			Amju::MouseButtonEvent* mbe = new Amju::MouseButtonEvent;
 			mbe->button = Amju::AMJU_BUTTON_MOUSE_LEFT;
 			mbe->isDown = false;
+			PopulateMBEvent(mbe, touchPoint.x, touchPoint.y);
 			QueueEvent(mbe);
 			return; // ignore other data, it this ok ?
 		}
