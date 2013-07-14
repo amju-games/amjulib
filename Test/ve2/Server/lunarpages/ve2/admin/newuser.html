@@ -12,18 +12,111 @@
 <form name="input" action="../../cgi-bin/ve2/newplayer.pl" method="get" style="font-family:Arial">
 Player name: <input type="text" name="playername" />
 Email address: <input type="text" name="email" />
+Research group: <input type="text" name="rg" />
+
 <input type="submit" value="Submit" />
 </form>
 <br>
 <br>
 <p style="font-family:Arial">
 <b>Add new research group</b>
-<form name="input" action="../../cgi-bin/ve2/add_new_research_group.pl" method="get" style="font-family:Arial">
-Group name: <input type="text" name="groupname" />
-Start date: 
+<form name="input" action="../../cgi-bin/ve2/add_new_research_group2.pl" method="get" style="font-family:Arial">
+<table>
+<tr><td>Group name:</td><td> <input type="text" name="groupname" /></td></tr>
+<tr><td>Start date (Friday):</td><td>
 <script type="text/javascript"
 src="http://www.snaphost.com/jquery/Calendar.aspx?dateFormat=yy-mm-dd"></script> 
-<br>
+</td></tr>
+
+<tr><td>Pattern length (weeks):</td><td>
+<select name="patternlength">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+</td></tr>
+
+<tr><td>Number of repetitions of pattern:</td><td>
+<select name="numreps">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+</select>
+</td></tr>
+
+<tr><td>Single player game on week:</td><td>
+<select name="singleweek">
+  <option value="0">No single player</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+</td></tr>
+
+<tr><td>Multi player game on week:</td><td>
+<select name="multiweek">
+  <option value="0">No multi player</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+</td></tr>
+
+<tr><td>Days per week, starting Mondays:</td><td>
+<select name="daysinweek">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+</select>
+</td></tr>
+
+<tr><td/><td>
+<input type="checkbox" name="cogtests" value="1" checked>Cognitive tests every Friday
+</td></tr>
+
+<tr><td/><td>
+<input type="checkbox" name="preview" value="1" checked>Preview only
+</td></tr>
+</table>
+
 <input type="submit" value="Submit" />
 </form>
 </body>

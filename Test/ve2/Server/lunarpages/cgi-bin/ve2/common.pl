@@ -51,7 +51,7 @@ sub update_or_insert($)
 {
   my $sql = shift;
   my $query = $dbh->prepare($sql) or die "Prepare failed for: '$sql'";
-  $query->execute or die "Failed to execute '$sql'";
+  $query->execute or die "Failed to execute '$sql': $DBI::errstr";
 }
 
 sub insert($)
