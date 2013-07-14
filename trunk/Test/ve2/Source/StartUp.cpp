@@ -52,6 +52,7 @@ void StartUpAfterCreateWindow()
   Randomise();
 
   Texture::SetDefaultFilter(AmjuGL::AMJU_TEXTURE_NEAREST);
+  Texture::SetDefaultWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
 
   TheGame::Instance()->SetUpdateCopy(true);
 
