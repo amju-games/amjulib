@@ -4,6 +4,7 @@
 #include <GuiFileListBox.h>
 #include <CursorManager.h>
 #include "GSGuiTest.h"
+#include <GuiChart.h>
 
 namespace Amju
 {
@@ -46,6 +47,17 @@ void GSGuiTest::OnActive()
 
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
+
+  GuiChart* chart = dynamic_cast<GuiChart*>(GetElementByName(m_gui, "MyChart"));
+  Assert(chart);
+
+  ChartData* cd = new ChartData;
+  // TODO TEMP TEST
+  for (int i = 0; i < 10; i++)
+  {
+    cd->AddRowSimple(i, rand() % 5);
+  }
+  chart->GetDataDisplay()->SetData(cd);
   
 /*
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
