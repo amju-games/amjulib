@@ -917,42 +917,41 @@ void Player::OnCollideBaddie(Baddie* baddie)
 
   // Lose some points
   int damage = baddie->GetDamage();
-  if (damage == 0)
+  if (damage != 0) // negative damage?!?!?!?!?!
   {
-    return;
+    m_health -= damage;
+
+    // Send this to server so we can see other players' health
+    TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
+
+    // Could also send a system message
+    std::string str;
+    if (GetNameForPlayer(GetId(), &str)) // TODO IS this the best way to do this?
+    {
+      if (m_health == 1)
+      {
+        str += " is in trouble!"; // TODO variety of msgs
+      }
+      else if (m_health < 1)
+      {
+        str += " died!"; // TODO variety of msgs
+      }
+      else
+      {
+        Assert(m_health > 1);
+        str += " took some damage!";
+      }
+      TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+    }
+
+    static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
+    m_hitTimer = MAX_HIT_TIME;  
+    // Check for death in update, after we have shown the effect of the hit.
+
+    // TODO This doesn't work anyway
+    // Can't go through - it may be acting as an obstacle
+    //UnCollide(this, GetOldPos(), (*baddie->GetAABB()));
   }
-
-  m_health -= damage;
-
-  // Send this to server so we can see other players' health
-  TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
-
-  // Could also send a system message
-  std::string str;
-  if (GetNameForPlayer(GetId(), &str)) // TODO IS this the best way to do this?
-  {
-    if (m_health == 1)
-    {
-      str += " is in trouble!"; // TODO variety of msgs
-    }
-    else if (m_health < 1)
-    {
-      str += " died!"; // TODO variety of msgs
-    }
-    else
-    {
-      Assert(m_health > 1);
-      str += " took some damage!";
-    }
-    TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
-  }
-
-  static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
-  m_hitTimer = MAX_HIT_TIME;  
-  // Check for death in update, after we have shown the effect of the hit.
-
-  // Can't go through - it may be acting as an obstacle
-  UnCollide(this, GetOldPos(), (*baddie->GetAABB()));
 
   // Slow down
   Vec3f vel = GetVel();
