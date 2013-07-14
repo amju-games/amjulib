@@ -47,33 +47,21 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 30, 10
 
-harmless
-sunflowers.png
-0, 0, 50
-1, 1
-400, 100
-
-harmless
-sunflowers.png
-0, 0, -50
-1, 1
-400, 100
-
+// WATER
 baddie
-0, 0, 250
+// Pos -- behind so always under player
+0, -1, 0
 // Tex
-spider2.png
+water1.png
 // Num cells
 2,1
 // Size
-20, 20
+150, 150
 // Damage to player on collision
-1
+0
 // Max health: -1 == indestructible
-1
+-1
 // Points
-5
+0
 // Behaviour
-chase
-// speed
-40
+none

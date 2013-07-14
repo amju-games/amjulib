@@ -47,3 +47,38 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 40, 20
 
+baddie
+// Pos -- behind so always under player
+100, -1, -50
+// Tex
+tarpit1.png
+// Num cells
+2,1
+// Size
+150, 150
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Behaviour
+none
+
+baddie
+// Pos -- behind so always under player
+-100, -1, 50
+// Tex
+tarpit1.png
+// Num cells
+2,1
+// Size
+150, 150
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Behaviour
+none
