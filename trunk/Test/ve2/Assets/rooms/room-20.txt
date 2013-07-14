@@ -47,3 +47,33 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 30, 10
 
+harmless
+sunflowers.png
+0, 0, 50
+1, 1
+400, 100
+
+harmless
+sunflowers.png
+0, 0, -50
+1, 1
+400, 100
+
+baddie
+0, 0, 250
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+20, 20
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Behaviour
+chase
+// speed
+40
