@@ -1,0 +1,34 @@
+// ROOM 170
+// Version
+1
+
+// type
+room
+// Num textures
+4
+// 1 - 4
+crystal1.png
+crystal2.png
+crystal3.png
+crystal4.png
+
+
+// (x, y) Size of grid
+5, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+// Obstacles grid
+2 2 0 2 2 
+4 0 0 0 4
+4 0 0 0 4
+4 0 0 0 4
+3 3 3 3 3 
+
+// Destinations N, S, E>, W<
+100, 0, 0, 0
+

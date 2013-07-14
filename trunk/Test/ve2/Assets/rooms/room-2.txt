@@ -64,23 +64,11 @@ skull2.png
 1
 // Max health
 5
-// Chase speed
-50
-// Time: harmless range
-2
-3
-// Time: harmful range
-2
-3
-// Cell range: harmless
-0
-0
-// Cell range: harmful
-0
-0
-// Sounds for harmless/harmful state change
-<none>
-<none>
+// Num points
+100
+// Behaviour
+chase
+
 
 baddie
 // Pos
@@ -94,23 +82,10 @@ spikes2.png
 // Damage to player on collision
 1
 // Max health -- -1 == indestructible
--1 
-// Chase speed
+-1
+// Points
 0
-// Time: harmless range
-2
-3
-// Time: harmful range
-2
-3
-// Cell range: harmless
-1
-1
-// Cell range: harmful
-0
-0
-// Sounds for harmless/harmful state change
-<none>
-// TODO Want Knife Shinggggg
-sound/pop.wav
+// Behaviour
+none
+
 
