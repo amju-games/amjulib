@@ -76,8 +76,8 @@ sub new_player_impl($$$$)
 #  my $sql = "insert into objectstate values ($objid, 'avatar', 'marge', now())"; 
 #  insert($sql);
 
-  # Set initial food count to zero
-  my $foodsql = "insert into objectstate values($objid, 'food', '0', now())";
+  # Set initial health
+  my $foodsql = "insert into objectstate values($objid, 'health', '3', now())";
   insert($foodsql);
  
   # Set location and pos - this relies on there being an empty square at the start location for new players
