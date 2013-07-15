@@ -6,7 +6,7 @@ gui-comp
 // Name
 paused-comp
 // Num children
-5
+4
 
 
 // Element type
@@ -32,7 +32,7 @@ gui-button
 // Element name
 options-button
 // pos (coords are -1..1)
--0.4, 0.2
+-0.4, -0.1
 // size
 0.8, 0.2
 // Image
@@ -42,20 +42,6 @@ options
 // Font name, size
 arial, 1.6
 
-// element type
-gui-button
-// Element name
-achievements-button
-// pos (coords are -1..1)
--0.4, -0.1
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-achievements
-// Font name, size
-arial, 1.6, sx=0.8
 
 
 // element type
@@ -78,7 +64,7 @@ gui-button
 // Element name
 resume-button
 // pos (coords are -1..1)
--0.4, -0.7
+-0.4, 0.5
 // size
 0.8, 0.2
 // Image
