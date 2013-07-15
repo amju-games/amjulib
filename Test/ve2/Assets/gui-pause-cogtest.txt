@@ -37,7 +37,7 @@ gui-button-4.png
 // Text
 resume test
 // Font name, size
-arial, 1.6
+arial, 1.4
 
 // element type
 gui-button
@@ -50,9 +50,9 @@ help-button
 // Image
 gui-button-4.png
 // Text
-show help for this test
+help
 // Font name, size
-arial, 1.4, sx=0.5
+arial, 1.4
 
 
 // element type
@@ -66,9 +66,9 @@ restart-button
 // Image
 gui-button-4.png
 // Text
-start test again
+restart test
 // Font name, size
-arial, 1.6, sx=0.8
+arial, 1.4
 
 
 // element type
@@ -82,9 +82,9 @@ skip-button
 // Image
 gui-button-4.png
 // Text
-skip this test - do it later
+skip test
 // Font name, size
-arial, 1.4, sx=0.5
+arial, 1.4
 
 
 // element type
@@ -98,7 +98,7 @@ quit-button
 // Image
 gui-button-4.png
 // Text
-quit doing tests
+quit tests
 // Font name, size
-arial, 1.6
+arial, 1.4
 
