@@ -12,6 +12,8 @@
 #include "GSMain.h"
 #include "GSFinishedTests.h"
 #include "GSFileUpdateCheck.h"
+#include "GSWaitForNewLocation.h"
+#include "GSStartGame.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -64,7 +66,7 @@ void OnCogTestsAllDone()
   }
   else
   {
-    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
   }
   TheGSCogTestMenu::Instance()->ResetTests();
 }
@@ -82,7 +84,7 @@ void OnCogTestStopPartWayThrough()
   else
   {
     // Go back to Main, will nag again later.
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 
     // TODO Log number of declines for research
     stops++;
@@ -124,12 +126,12 @@ void CogTestNag::Update()
     
     if (stops == 0)
     {
-      text = "I would like to make sure you are OK after the crash. So please allow me to give you some tests. Is that OK?"; 
+      text = "I would like to give you some tests. Is that OK?"; 
     }
     else
     {
       // Has already stopped tests before
-      text = "I would like to make sure you are OK. So please continue to take my tests. Can you do it now?"; 
+      text = "Please continue to take my tests. Can you do it now?"; 
     }
 
     TheLurker::Instance()->ShowYesNo(text, LURK_FG, LURK_BG,
