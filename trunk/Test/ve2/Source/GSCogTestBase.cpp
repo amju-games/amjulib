@@ -6,25 +6,44 @@
 #include <Game.h>
 #include "GSCogTestBase.h"
 #include "GSPauseCogTest.h"
+#include "GSCogTestMenu.h"
 #include "CogTestNag.h"
 #include "HeartCount.h"
 #include "GameConsts.h"
 #include <AmjuFinal.h>
 
+#define NEW_COG_PAUSE_MENU
+
 namespace Amju
 {
+static void OnStopPrac()
+{
+  GameState* gs = TheGame::Instance()->GetState();
+  GSCogTestBase* ctb = dynamic_cast<GSCogTestBase*>(gs);
+  Assert(ctb);
+  if (ctb)
+  {
+    // Finish this test, so ending practice mode
+    ctb->Finished();
+
+    ctb->ShowPauseButton(true);
+    ctb->ShowStopPracButton(false);
+  }
+}
+
 static void OnStopTest()
 {
-  // TODO Replace this:
-//  OnCogTestStopPartWayThrough(); 
-
-  // with this better menu:
+#ifdef NEW_COG_PAUSE_MENU
 
   static GSPauseCogTest* pct = TheGSPauseCogTest::Instance();
   static Game* game = TheGame::Instance();
 
   pct->SetPrevState(game->GetState());
   game->SetCurrentState(pct);  
+
+#else
+  OnCogTestStopPartWayThrough(); 
+#endif
 }
 
 GSCogTestBase::GSCogTestBase()
@@ -35,7 +54,9 @@ GSCogTestBase::GSCogTestBase()
   m_maxTime = 0;
   m_correct = 0;
   m_incorrect = 0;
+  m_showLurk = true;
 }
+
 
 void GSCogTestBase::OnActive()
 {
@@ -110,6 +131,23 @@ void GSCogTestBase::LoadCommonGui()
   GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
   done->SetCommand(Amju::OnStopTest);
   done->SetVisible(true);
+
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  GuiButton* pracButton = (GuiButton*)GetElementByName(m_gui, "stop-prac-button");
+  pracButton->SetCommand(Amju::OnStopPrac);
+  pracButton->SetVisible(isPrac);
+}
+
+void GSCogTestBase::ShowPauseButton(bool show)
+{
+  GuiButton* done = (GuiButton*)GetElementByName(m_gui, "done-button");
+  done->SetVisible(show);
+}
+
+void GSCogTestBase::ShowStopPracButton(bool show)
+{
+  GuiButton* pracButton = (GuiButton*)GetElementByName(m_gui, "stop-prac-button");
+  pracButton->SetVisible(show);
 }
 }
 
