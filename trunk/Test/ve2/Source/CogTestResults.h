@@ -57,6 +57,7 @@ public:
     m_testId(testId), m_key(key), m_val(val), m_committed(false), m_timestamp(Time::Now())
   {
     m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
+    m_localPlayerId = GetLocalPlayerId();
   }
 
   bool Load(File*);
