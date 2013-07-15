@@ -6,42 +6,43 @@ gui-comp
 // Name
 today-comp
 // Num children
-7
+8
+
+gui-button
+do-tests-button
+// pos
+-0.4, 0.2
+// size
+0.8, 0.2
+gui-button-4.png
+do tests now!
+arial, 1.4, sx=0.6
+
 
 gui-button
 view-results-button
 // pos
--0.4, 0.0
+-0.4, -0.1
 // size
 0.8, 0.2
 gui-button-4.png
 view test results
-arial, 1.5, sx=0.8
-
-//gui-button
-//view-ach-button
-//// pos
-//-0.4, -0.3
-//// size
-//0.8, 0.2
-//gui-button-4.png
-//view achievements
-//arial, 1.5, sx=0.6
+arial, 1.4, sx=0.6
 
 gui-button
 mod-avatar-button
 // pos
--0.4, -0.3
+-0.4, -0.4
 // size
 0.8, 0.2
 gui-button-4.png
 change your look
-arial, 1.5, sx=0.6
+arial, 1.4, sx=0.6
 
 gui-button
 ok-button
 // pos
--0.4, -0.6
+-0.4, -0.7
 // size
 0.8, 0.2
 gui-button-4.png
@@ -51,7 +52,7 @@ arial, 2.0
 gui-button
 play-single-button
 // pos
--0.4, -0.85
+-1.0, -0.4
 // size
 0.4, 0.1
 gui-button-4.png
@@ -61,7 +62,7 @@ arial, 0.75, sx=0.8
 gui-button
 play-multi-button
 // pos
-0.05, -0.85
+-1.0, -0.6
 // size
 0.4, 0.1
 gui-button-4.png
