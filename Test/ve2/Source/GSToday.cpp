@@ -21,11 +21,16 @@
 
 namespace Amju
 {
-static void OnTodayViewAchievements()
+static void OnDoTests()
 {
-  TheGSAchievements::Instance()->SetPrevState(TheGSToday::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSAchievements::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
+
+//static void OnTodayViewAchievements()
+//{
+//  TheGSAchievements::Instance()->SetPrevState(TheGSToday::Instance());
+//  TheGame::Instance()->SetCurrentState(TheGSAchievements::Instance());
+//}
 
 //static void OnTodayModAvatar()
 //{
@@ -148,6 +153,17 @@ void GSToday::OnActive()
   GuiButton* viewResults = (GuiButton*)GetElementByName(m_gui, "view-results-button");
   viewResults->SetCommand(OnTodayViewResults);
 
+  // Do cog tests today?
+  Time today = Time::Now();
+  today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->HaveGotAllResultsForDate(today);
+
+  if (DoCogTests() && !cogTestsAllDoneToday)
+  {
+    GuiButton* doTests = (GuiButton*)GetElementByName(m_gui, "do-tests-button");
+    doTests->SetCommand(OnDoTests);
+  }
+
   // For admin/dev, button to play game even on non-game days
   GuiButton* playSingle = (GuiButton*)GetElementByName(m_gui, "play-single-button");
   GuiButton* playMulti = (GuiButton*)GetElementByName(m_gui, "play-multi-button");
@@ -160,14 +176,10 @@ void GSToday::OnActive()
 #endif
 
   GuiText* dateText = (GuiText*)GetElementByName(m_gui, "date-text");
-  Time now = Time::Now();
-  dateText->SetText(now.ToStringJustDate()); 
+  dateText->SetText(today.ToStringJustDate()); 
 
   GuiText* text = (GuiText*)GetElementByName(m_gui, "long-text");
   std::string str;
-
-  now.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
-  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->HaveGotAllResultsForDate(now);
 
   // The cases are:
   // No game mode, and we must do test
@@ -195,8 +207,12 @@ void GSToday::OnActive()
   else if (gm == AMJU_MODE_MULTI)
   {
     // If it's a game day, go to main state.
-    str = "Today, please play the game.";
-    if (DoCogTests())
+    str = "Today, please play the game, (multi-player mode).";
+    if (cogTestsAllDoneToday)
+    {
+      str += " Thanks for doing the tests today!";
+    }
+    else if (DoCogTests())
     {
       str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
     }
@@ -209,7 +225,11 @@ void GSToday::OnActive()
   {
     // If it's a game day, go to main state.
     str = "Please play the game. Today it is a single-player game.";
-    if (DoCogTests())
+    if (cogTestsAllDoneToday)
+    {
+      str += " Thanks for doing the tests today!";
+    }
+    else if (DoCogTests())
     {
       str += "\n\nYou will be asked to take a few tests during the game. Thanks for your help!";
     }
