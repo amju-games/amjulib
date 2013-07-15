@@ -98,18 +98,26 @@ bool Result::Load(File* f)
   {
     return false;
   }
+ 
+  if (!f->GetInteger(&m_localPlayerId))
+  {
+    f->ReportError("Expected local player ID");
+    return false;
+  }
 
   return true;
 }
 
 bool Result::Save(File* f)
 {
-  f->WriteComment("// Result: sessionId/testId/key/val/committed/timestamp:");
+  f->WriteComment("// Result: sessionId/testId/key/val/committed/timestamp/localPlayerId:");
   f->Write(m_sessionId);
   f->WriteInteger(m_testId);
   f->Write(m_key);
   f->Write(m_val);
   f->WriteInteger(m_committed ? 1 : 0);
+  f->WriteInteger(m_localPlayerId);
+
   m_timestamp.Save(f);
 
   return true;

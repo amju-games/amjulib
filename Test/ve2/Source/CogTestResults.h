@@ -6,6 +6,7 @@
 #include <Singleton.h>
 #include <AmjuTime.h>
 #include "Ve1OnlineReqManager.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -49,6 +50,7 @@ public:
   Result() : m_testId(-1), m_key("none"), m_val("none"), m_committed(false), m_timestamp(Time::Now())
   {
     m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
+    m_localPlayerId = GetLocalPlayerId();
   }
 
   Result(int testId, const std::string& key, const std::string& val) :  
@@ -78,6 +80,10 @@ private:
   bool m_committed;
 
   Time m_timestamp;
+
+  // So we can easily show only the test results for the logged-in player.
+  // This is not sent to server as is implicit in session ID.
+  int m_localPlayerId; 
 };
 
 typedef std::vector<Result*> Results;
