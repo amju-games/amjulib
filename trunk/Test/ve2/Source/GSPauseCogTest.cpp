@@ -61,7 +61,10 @@ static void OnSkipThisTest()
 
 static void OnHelp()
 {
-  TheGame::Instance()->SetCurrentState(TheGSCogTestHelp::Instance());
+  GSCogTestHelp* cth = TheGSCogTestHelp::Instance();
+  
+  cth->SetPrevState(TheGSPauseCogTest::Instance());
+  TheGame::Instance()->SetCurrentState(cth);
 }
 
 static void OnRestartYes()
