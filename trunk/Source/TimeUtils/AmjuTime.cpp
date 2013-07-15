@@ -103,6 +103,11 @@ std::string Time::ToStringJustDate() const
   std::string DAY[] = { "Sunday" , "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
   int dayOfWeek = GetDayOfWeek();
+  if (dayOfWeek == -1)
+  {
+    return "<Bad time>";
+  }
+
   int dayOfMonth = GetDayOfMonth();
   int month = GetMonths() - 1; // 1-based
   int years = GetYears();
@@ -124,7 +129,7 @@ std::string Time::ToString() const
 //#endif
   
 #ifdef WIN32
-  mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
 
 #else
   localtime_r((const time_t*)&m_secs, &mytm);
@@ -142,7 +147,7 @@ int Time::GetSecs() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -158,7 +163,7 @@ int Time::GetMins() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -173,7 +178,7 @@ int Time::GetHours() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -188,8 +193,7 @@ int Time::GetDayOfWeek() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
-    
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
     
@@ -203,7 +207,7 @@ int Time::GetDayOfMonth() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -218,7 +222,7 @@ int Time::GetMonths() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -233,7 +237,7 @@ int Time::GetYears() const
 
   tm mytm;
 #ifdef WIN32
-    mytm = *(localtime((const time_t*)&m_secs));
+  _localtime32_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
