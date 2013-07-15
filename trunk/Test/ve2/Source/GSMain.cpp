@@ -294,9 +294,8 @@ void GSMain::Update()
     "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
     UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
 
-  // This is to nag about cog tests -- but if it's a test day, you shouldn't be
-  // playing, right?
-  //TheCogTestNag::Instance()->Update();
+  // This is to nag about cog tests
+  TheCogTestNag::Instance()->Update();
 
   // Disable pause button if Lurk msg showing
   GuiButton* pauseButton = (GuiButton*)m_gui->GetElementByName("pause-button");
