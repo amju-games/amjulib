@@ -250,34 +250,6 @@ void GSLetterCancellation::Update()
   TheObjectUpdater::Instance()->Update();
   UpdateHeartCount();
   UpdateTimer();
-
-  //m_timer -= TheTimer::Instance()->GetDt();
-
-  //bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
-  //// Don't do countdown if in practice mode
-  //if (!isPrac)
-  //{
-  //  GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
-  //  std::string s;
-  //  if (m_timer > 0)
-  //  {
-  //    int min = (int)(m_timer / 60.0f);
-  //    int sec = (int)(m_timer - 60.0f * min);
-  //    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
-  //  }
-  //  else
-  //  {
-  //    m_isFinished = true;
-  //    // TODO flash
-  //    s = "0:00";
-
-  //    //if (m_timer < -10.0f)
-  //    {
-  //      Finished();
-  //    }
-  //  }
-  //  timeText->SetText(s);
-  //}
 }
 
 void GSLetterCancellation::Draw()
