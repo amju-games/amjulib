@@ -3,6 +3,11 @@
 
 namespace Amju
 {
+static void OnHelpDone()
+{
+  TheGSCogTestHelp::Instance()->GoBack();
+}
+
 GSCogTestHelp::GSCogTestHelp()
 {
 }
@@ -31,7 +36,8 @@ void GSCogTestHelp::OnActive()
   m_gui = LoadGui("gui-cogtest-help.txt");
   Assert(m_gui);
 
-  // TODO Set focus element, cancel element, command handlers
+  // Set focus element, cancel element, command handlers
+  GetElementByName(m_gui, "done-button")->SetCommand(OnHelpDone);
 }
 
 } // namespace
