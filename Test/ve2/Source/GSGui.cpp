@@ -87,6 +87,7 @@ void GSGui::OnActive()
 std::cout << "Failed to load GUI bg image!\n";
     Assert(0);
   }
+  m_bgImage.GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_WRAP);
 }
 
 void GSGui::OnDeactive()
@@ -110,6 +111,8 @@ std::cout << "Failed to load cog test bg image!\n";
     Assert(0);
     return false;
   }
+  m_bgImage.GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_WRAP);
+
   return true;
 }
 
