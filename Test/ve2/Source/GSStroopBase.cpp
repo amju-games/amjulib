@@ -108,6 +108,8 @@ void GSStroopBase::ResetTest()
   m_isFinished = false;
 
   UpdateCorrectIncorrect();
+
+  SetTest(); // set first word
 }
 
 void GSStroopBase::SetTest()
@@ -142,8 +144,6 @@ void GSStroopBase::OnActive()
   LoadCommonGui();
 
   ResetTest();
-
-  SetTest(); // set first word
 }
 
 void GSStroopBase::Update()
