@@ -12,6 +12,12 @@ public:
 
   virtual void OnActive();
 
+  // called when test is over - by UpdateTimer() or by test-specific code
+  virtual void Finished() = 0; 
+
+  void ShowPauseButton(bool show);
+  void ShowStopPracButton(bool show);
+
 protected:
   // Call AFTER loading m_gui
   void LoadCommonGui();
@@ -19,9 +25,6 @@ protected:
   void UpdateTimer();
 
   void UpdateCorrectIncorrect();
-
-  // called when test is over - by UpdateTimer() or by test-specific code
-  virtual void Finished() = 0; 
 
   // Call when test complete to get points added to score
   void UpdateScore();
