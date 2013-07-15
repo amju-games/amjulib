@@ -6,7 +6,7 @@ gui-comp
 // Name
 cog-test-common-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -66,4 +66,15 @@ SCORE
 arial, 1.5, fgcol=000000, sx=0.7
 
 
-
+gui-button
+stop-prac-button
+// pos (coords are -1..1)
+-0.4, -0.8
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+stop practice
+// Font name, size
+arial, 1.4
