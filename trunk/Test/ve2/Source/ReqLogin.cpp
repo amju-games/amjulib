@@ -27,6 +27,7 @@
 #include "GSToday.h"
 #include "GSMain.h"
 #include "CogTestResults.h"
+#include "CogTestNag.h"
 #include "LogOut.h"
 #include <AmjuFinal.h>
 
@@ -208,7 +209,8 @@ void ReqLogin::ChooseMode()
             if (t == today)
             {
               // Cog tests already done today ?
-              bool gotAllResults = TheCogTestResults::Instance()->HaveGotAllResultsForDate(Time::Now());
+              int numResults = TheCogTestResults::Instance()->GetNumCompletedTestsForDate(Time::Now());
+              bool gotAllResults = (numResults == GetNumCogTests());
 
               if (gotAllResults)
               {

@@ -16,6 +16,11 @@ public:
   void Update(); 
 };
 
+// The number of cog tests for this participant on a 'test' day - 
+//  does NOT count down as tests done (so can compare with num tests
+//  done today)
+int GetNumCogTests();
+
 void OnCogTestsAllDone(); // call when all tests completed
 
 void OnCogTestStopPartWayThrough();

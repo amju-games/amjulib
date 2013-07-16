@@ -23,6 +23,11 @@ static bool nagdone = false;
 static int declines = 0;
 static int stops = 0;
 
+int GetNumCogTests()
+{
+  return 8; // TODO CONFIG -- or get from login info
+}
+
 void NagReset()
 {
   cogtesttime = 0;

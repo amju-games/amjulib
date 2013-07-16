@@ -118,7 +118,8 @@ public:
   Results GetResultsForDate(Time);
 
   // Return true if we have the expected number of test results for the given date. 
-  bool HaveGotAllResultsForDate(Time);
+////  bool HaveGotAllResultsForDate(Time);
+  int GetNumCompletedTestsForDate(Time testDate);
 
   // For the given date, return the number of results for the given test ID.
   int GetNumResults(Time, TestId);

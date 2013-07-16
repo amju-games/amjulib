@@ -188,27 +188,31 @@ int CogTestResults::GetNumResults(Time testDate, TestId id)
   return numResults;
 }
 
-bool CogTestResults::HaveGotAllResultsForDate(Time testDate)
+//bool CogTestResults::HaveGotAllResultsForDate(Time testDate)
+int CogTestResults::GetNumCompletedTestsForDate(Time testDate)
 {
+  int r = 0;
   for (int i = (int)AMJU_COG_TEST_LETTER_CAN; i < (int)AMJU_COG_TEST_MAX; i++)
   {
     bool complete = IsTestComplete(testDate, (TestId)i);
-    if (!complete)
+    if (complete)
     {
-      return false;
+      r++;
     }
   }
-  return true;
+  return r;
 }
 
 Results CogTestResults::GetResultsForTestType(TestId tid)
 {
   Results r;
 
+  int localPlayerId = GetLocalPlayerId();
+
   for (unsigned int i = 0; i < m_results.size(); i++)
   {
     Result* res = m_results[i];    
-    if (res->m_testId == tid)
+    if (res->m_testId == tid && res->m_localPlayerId == localPlayerId)
     {
       r.push_back(res);
     }
@@ -222,12 +226,14 @@ Results CogTestResults::GetResultsForDate(Time testDate)
   testDate.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
   Results r;
 
+  int localPlayerId = GetLocalPlayerId();
+
   for (unsigned int i = 0; i < m_results.size(); i++)
   {
     Result* res = m_results[i];
     Time t = res->m_timestamp;
     t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
-    if (t == testDate)
+    if (t == testDate && res->m_localPlayerId == localPlayerId)
     {
       r.push_back(res);
     }
