@@ -155,17 +155,16 @@ bool CopyFromGlueFile(const std::string& srcGlueFilePath, const std::string& des
 #ifdef FILECOPY_DEBUG
 std::cout << "File already exists: " << outFileName << "\n";
 #endif
-    Time destTime = GetFileModifiedTime(outFileName);
+      Time destTime = GetFileModifiedTime(outFileName);
 
-    if (!(destTime < glueTime))
-    {
+      if (!(destTime < glueTime))
+      {
 #ifdef FILECOPY_DEBUG
 std::cout << "  Don't copy, it's more recent.\n";
 #endif
-      doCopy = false; // more recent copy already there
+        doCopy = false; // more recent copy already there
+      }
     }
-  }
-
 
     unsigned int seekbase = 0;
     if (!gf.GetSeekBase(subfile, &seekbase))
