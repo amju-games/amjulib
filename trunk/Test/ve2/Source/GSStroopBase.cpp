@@ -126,6 +126,11 @@ void GSStroopBase::SetTest()
   {
     GuiButton* button = (GuiButton*)GetElementByName(m_gui, "button" + ToString(i + 1));
     button->SetText(WORDS[m_indices[i]]);
+
+    if (i == m_correctChoice)
+    {
+      PointPracArrow(button->GetLocalPos() + Vec2f(0.2f, -0.1f));
+    }
   }
 
   word->SetText(WORDS[m_indices[m_correctChoice]]);

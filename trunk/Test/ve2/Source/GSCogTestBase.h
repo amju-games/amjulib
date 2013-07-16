@@ -10,6 +10,7 @@ class GSCogTestBase : public GSGui
 public:
   GSCogTestBase();
 
+  virtual void Update();
   virtual void OnActive();
 
   // called when test is over - by UpdateTimer() or by test-specific code
@@ -28,6 +29,9 @@ protected:
 
   // Call when test complete to get points added to score
   void UpdateScore();
+
+  void PointPracArrow(const Vec2f& pos);
+  void ShowPracArrow(bool show);
 
 protected:
   int m_testId;

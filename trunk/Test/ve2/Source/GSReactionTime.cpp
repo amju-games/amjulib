@@ -163,9 +163,11 @@ void GSReactionTime::NextGo()
 
 void GSReactionTime::Update()
 {
-  GSGui::Update();
-  TheObjectUpdater::Instance()->Update();
+  GSCogTestBase::Update();
+  TheObjectUpdater::Instance()->Update(); //?
   UpdateHeartCount();
+
+  PointPracArrow(Vec2f(2.0f, 2.0f)); 
 
   float dt = TheTimer::Instance()->GetDt();
 
@@ -205,6 +207,7 @@ void GSReactionTime::Update()
     break;
 
   case RT_TIMING:
+    PointPracArrow(Vec2f(0.2f, -0.2f)); // TODO CONFIG
     m_reactionTime += dt;
     timeText->SetText(ToString(m_reactionTime, 2));
 
