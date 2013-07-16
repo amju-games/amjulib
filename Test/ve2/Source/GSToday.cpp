@@ -16,6 +16,7 @@
 #include "GSStartGame.h"
 #include "GS2dAvatarMod.h"
 #include "GSWaitForNewLocation.h"
+#include "CogTestNag.h"
 #include "LocalPlayer.h"
 #include <AmjuFinal.h>
 
@@ -156,7 +157,9 @@ void GSToday::OnActive()
   // Do cog tests today?
   Time today = Time::Now();
   today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
-  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->HaveGotAllResultsForDate(today);
+
+  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->
+    GetNumCompletedTestsForDate(today) == GetNumCogTests();
 
   if (DoCogTests() && !cogTestsAllDoneToday)
   {
