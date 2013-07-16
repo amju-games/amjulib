@@ -165,8 +165,9 @@ std::cout << "Oh crap, got boxed in, restarting random walk..\n";
     grid[gridSq] = true; // mark grid square as used
 
     // Convert grid coord to screen coord, with a bit of randomness
-    Vec2f posf = Vec2f(pos.x * w - 0.9f + Rnd(-0.05f, 0.05f), 
-      pos.y * h - 0.8f + Rnd(-0.05f, 0.05f));
+    float x = pos.x * w - 0.9f;
+    float y = pos.y * h - 0.7f;
+    Vec2f posf = Vec2f(x + Rnd(-0.05f, 0.05f),  y + Rnd(0, 0.05f));
 
     AddCircle(i, posf);
   }
@@ -207,6 +208,12 @@ void GSTrailMakingTest::Update()
   UpdateHeartCount();
   UpdateTimer();
   UpdateCorrectIncorrect();
+
+  Assert(m_currentCircle >= -1);
+  if (m_currentCircle + 1 < (int)m_circles.size())
+  {
+    PointPracArrow(m_circles[m_currentCircle + 1].m_pos + Vec2f(0.05f, 0.05f));
+  }
 }
 
 void GSTrailMakingTest::Draw()

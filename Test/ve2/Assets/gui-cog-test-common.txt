@@ -49,12 +49,12 @@ pause
 arial, 1.0 
 
 
-
-gui-image
-coin-img
-0.8, 1.0
-0.17, 0.2
-coin3.png
+// Looks crappy
+//gui-image
+//coin-img
+//0.8, 1.0
+//0.17, 0.2
+//coin3.png
 
 
 gui-text
@@ -78,3 +78,11 @@ gui-button-4.png
 stop practice
 // Font name, size
 arial, 1.4
+
+
+// Arrow for practice mode
+gui-image
+prac-arrow
+0, 0
+0.25, 0.3
+prac-arrow1.png

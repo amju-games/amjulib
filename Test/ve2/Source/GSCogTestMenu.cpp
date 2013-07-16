@@ -241,13 +241,13 @@ void GSCogTestMenu::OnActive()
     break;
 
   case AMJU_COG_TEST_TRAIL_MAKING:
-    str = "This is called a trail making test.";
+    str = "This is called a trail making test. Move the mouse over the numbered circles, in order, starting with 1.";
     m_func = Amju::TrailMakingTest;
     TheGSTrailMakingTest::Instance()->SetIsAlternatingVersion(false);
     break;
 
   case AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE:
-    str = "This is called a trail making test (alternating).";
+    str = "This is another trail making test. This time there are numbers and letters. Start at 1, then go to A, then go to 2, then B, then 3... and so on.";
     m_func = Amju::TrailMakingTest;
     TheGSTrailMakingTest::Instance()->SetIsAlternatingVersion(true);
     break;

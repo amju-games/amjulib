@@ -43,6 +43,8 @@ public:
 protected:
   Rect MakeRect(int i, int j);
 
+  void PointToSpecial();
+
 protected:
   // We display a grid of letters, 6 rows * 52 letters. This is defined by the research design.
   //std::vector<GuiElement*> m_letters; // Too slow!

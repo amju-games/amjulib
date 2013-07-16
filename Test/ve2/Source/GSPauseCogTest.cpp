@@ -9,6 +9,7 @@
 #include "GSTitle.h"
 #include "GSCogTestHelp.h"
 #include "GSCogTestMenu.h"
+#include "GSStartGame.h"
 #include "LurkMsg.h"
 #include <AmjuFinal.h>
 
@@ -34,7 +35,7 @@ static void OnQuitYes()
   else
   {
     // Go back to Main, will nag again later.
-    TheGame::Instance()->SetCurrentState(TheGSMain::Instance());
+    TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 
     LurkMsg lm("OK, but please finish taking the tests soon! I will ask you again later.", LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
@@ -108,9 +109,9 @@ void GSPauseCogTest::OnActive()
   m_gui = LoadGui("gui-pause-cogtest.txt");
   Assert(m_gui);
 
-  m_gui->GetElementByName("resume-button")->SetCommand(Amju::OnResumeButton);
+  m_gui->GetElementByName("resume-button")->SetCommand(Amju::OnResumeButton); // currently hidden -- tests reset when activated
   m_gui->GetElementByName("help-button")->SetCommand(Amju::OnHelp);
-  m_gui->GetElementByName("restart-button")->SetCommand(Amju::OnRestartThisTest);
+  m_gui->GetElementByName("restart-button")->SetCommand(Amju::OnRestartYes); // not OnRestartThisTest -- restarting is not optional
   m_gui->GetElementByName("skip-button")->SetCommand(Amju::OnSkipThisTest);
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitTests);
 }

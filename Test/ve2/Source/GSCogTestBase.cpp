@@ -57,6 +57,14 @@ GSCogTestBase::GSCogTestBase()
   m_showLurk = true;
 }
 
+void GSCogTestBase::Update()
+{
+  GSGui::Update();
+
+  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
+  ShowPracArrow(isPrac);
+  ShowStopPracButton(isPrac);
+}
 
 void GSCogTestBase::OnActive()
 {
@@ -132,10 +140,8 @@ void GSCogTestBase::LoadCommonGui()
   done->SetCommand(Amju::OnStopTest);
   done->SetVisible(true);
 
-  bool isPrac = TheGSCogTestMenu::Instance()->IsPrac();
   GuiButton* pracButton = (GuiButton*)GetElementByName(m_gui, "stop-prac-button");
   pracButton->SetCommand(Amju::OnStopPrac);
-  pracButton->SetVisible(isPrac);
 }
 
 void GSCogTestBase::ShowPauseButton(bool show)
@@ -148,6 +154,20 @@ void GSCogTestBase::ShowStopPracButton(bool show)
 {
   GuiButton* pracButton = (GuiButton*)GetElementByName(m_gui, "stop-prac-button");
   pracButton->SetVisible(show);
+}
+
+void GSCogTestBase::PointPracArrow(const Vec2f& pos)
+{
+  GuiElement* pracArrow = GetElementByName(m_gui, "prac-arrow");
+  Assert(pracArrow);
+  pracArrow->SetLocalPos(pos);
+}
+
+void GSCogTestBase::ShowPracArrow(bool show)
+{
+  GuiElement* pracArrow = GetElementByName(m_gui, "prac-arrow");
+  Assert(pracArrow);
+  pracArrow->SetVisible(show);
 }
 }
 

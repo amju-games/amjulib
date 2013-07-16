@@ -129,6 +129,23 @@ GSLetterCancellation::GSLetterCancellation()
   m_showLurk = true;
 }
 
+void GSLetterCancellation::PointToSpecial()
+{
+  for (int i = 0; i < 6; i++)
+  {
+    for (int j = 0; j < 52; j++)
+    {
+      if (m_specialLetter == m_letters[i][j])
+      {
+        // Found one
+        Rect r = MakeRect(i, j);
+        PointPracArrow(Vec2f(r.GetMax(0), r.GetMin(1)));
+        return;
+      }
+    }
+  }
+}
+
 Rect GSLetterCancellation::MakeRect(int i, int j)
 {
   float x = m_left + (float)j * m_hSpacing;
@@ -187,8 +204,8 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         {
           if (isPrac && m_correct == 0)
           {
-            LurkMsg lm("Yes, that's correct!", LURK_FG, LURK_BG, AMJU_TOP);
-            TheLurker::Instance()->Queue(lm);
+            //LurkMsg lm("Yes, that's correct!", LURK_FG, LURK_BG, AMJU_TOP);
+            //TheLurker::Instance()->Queue(lm);
           }
 
           TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-correct"));
@@ -203,9 +220,8 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         {
           if (isPrac && m_incorrect == 0)
           {
-            LurkMsg lm("Whoops, that one is not correct!", 
-              LURK_FG, LURK_BG, AMJU_TOP);
-            TheLurker::Instance()->Queue(lm);
+            //LurkMsg lm("Whoops, that one is not correct!",  LURK_FG, LURK_BG, AMJU_TOP);
+            //TheLurker::Instance()->Queue(lm);
           }
 
           TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-fail"));
@@ -236,6 +252,9 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
         tri.m_verts[2] = verts[3];
         m_blocks.push_back(tri);
 
+        // Point to a new letter
+        PointToSpecial();
+
         // Done
         return false;
       }
@@ -246,7 +265,7 @@ std::cout << "sel:" << m_letters[i][j] << "\n";
 
 void GSLetterCancellation::Update()
 {
-  GSGui::Update();
+  GSCogTestBase::Update();
   TheObjectUpdater::Instance()->Update();
   UpdateHeartCount();
   UpdateTimer();
@@ -476,6 +495,8 @@ std::cout << "Letters but with no special letter: " << m_noSpecial << "\n";
       m_tris[i].push_back(tris[1]);
     }
   }
+
+  PointToSpecial();
 }
 
 void GSLetterCancellation::OnDeactive()
