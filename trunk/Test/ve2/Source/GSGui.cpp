@@ -27,10 +27,20 @@ GSGui::GSGui()
 void GSGui::Update()
 {
   GSBase::Update();
+  
+  if (m_gui)
+  {
+    m_gui->SetVisible(true);
+  }
 
   if (m_showLurk)
   {
-    TheLurker::Instance()->Update();
+    static Lurker* lurker = TheLurker::Instance();
+    lurker->Update();
+    if (m_gui && lurker->IsDisplayingMsg())
+    {
+      m_gui->SetVisible(false);
+    }
   }
 }
 
@@ -156,7 +166,7 @@ void GSGui::UpdateHeartCount()
       }
       else
       {
-        text->SetText("?");
+        text->SetText("");
       }
     }
   }
