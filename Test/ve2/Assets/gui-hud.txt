@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-10
+9
 
 
 // element type
@@ -25,15 +25,16 @@ pause
 arial, 1.0 
 
 
-gui-image
-coin-img
-0.8, 1.0
-0.17, 0.2
-coin3.png
+// looks crappy
+//gui-image
+//coin-img
+//0.8, 1.0
+//0.17, 0.2
+//coin3.png
 
 gui-image
 heart-img
-0.2, 1.0
+0.2, 2.0
 0.17, 0.2
 heart16-3.png
 
@@ -56,7 +57,7 @@ arial, 0.5, fgcol=ffffff, sx=0.9, right
 
 gui-text
 health-text
--0.2, 1.0
+-0.2, 2.0
 0.4, 0.05
 // Text
 HEALTH
@@ -82,7 +83,7 @@ arial, 1.5, fgcol=ffffff, sx=0.9, left
 
 gui-text
 health-num
--0.2, 0.95
+-0.2, 1.95
 0.4, 0.15
 // Text
 HEL2
