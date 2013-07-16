@@ -311,7 +311,12 @@ void GSMain::Update()
 
   TheMsgManager::Instance()->Update();
 
-  TheGame::Instance()->UpdateGameObjects();
+  static Lurker* lurker = TheLurker::Instance();
+  lurker->Update();
+  if (!lurker->IsDisplayingMsg())
+  {
+    TheGame::Instance()->UpdateGameObjects();
+  }
 
   // TODO SAP instead
   TheCollisionManager::Instance()->InitFrame(); // TODO this should be in Game class
@@ -323,8 +328,6 @@ void GSMain::Update()
     TheBroadcastConsole::Instance()->Update();
     TheKb::Instance()->Update();
   }
-
-  TheLurker::Instance()->Update();
 
   // Update hearts and fuel cells
   GuiText* text1 = (GuiText*)GetElementByName(m_gui, "score-num");
@@ -693,6 +696,12 @@ void GSMain::OnActive()
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.
+
+  // Update once to avoid strangeness
+  if (TheLurker::Instance()->IsDisplayingMsg())
+  {
+    TheGame::Instance()->UpdateGameObjects();
+  }
 }
 
 void GSMain::OnQuitButton()
