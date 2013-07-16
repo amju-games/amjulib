@@ -30,11 +30,11 @@ start...
 // Font name, size
 arial, 2.0 
 
-
+// HIDDEN FOR NOW
 gui-button
 options-button
 // pos (coords are -1..1)
--0.4, -0.75
+-0.4, 2.75
 // size
 0.8, 0.2
 // Image

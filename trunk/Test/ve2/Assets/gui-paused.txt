@@ -26,13 +26,13 @@ arial, 1.0, bgcol=000000, fgcol=ffffff
 
 
 
-
+// HIDDEN FOR NOW
 // element type
 gui-button
 // Element name
 options-button
 // pos (coords are -1..1)
--0.4, -0.1
+-0.4, 2.1
 // size
 0.8, 0.2
 // Image
