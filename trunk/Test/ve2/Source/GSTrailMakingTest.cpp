@@ -212,7 +212,7 @@ void GSTrailMakingTest::Update()
   Assert(m_currentCircle >= -1);
   if (m_currentCircle + 1 < (int)m_circles.size())
   {
-    PointPracArrow(m_circles[m_currentCircle + 1].m_pos + Vec2f(0.05f, 0.05f));
+    PointPracArrow(m_circles[m_currentCircle + 1].m_pos + Vec2f(0.05f, -0.05f));
   }
 }
 
