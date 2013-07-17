@@ -703,7 +703,7 @@ std::cout << "Rather unexpected type of game object: " << go->GetTypeName() << "
   }
 
   // Change to waiting state: some objects required for this new location might not exist yet
-  TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance()); //TheGSWaitForNewLocation::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
 PGameObject ObjectManager::GetGameObject(int id)
