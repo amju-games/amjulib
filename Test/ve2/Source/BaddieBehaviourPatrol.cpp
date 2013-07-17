@@ -23,30 +23,59 @@ void BBPatrol::Update()
   m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
 
   Vec3f pos = m_baddie->GetPos();
-  if (pos.x < m_rect.GetMin(0))
-  {
-    pos.x = m_rect.GetMin(0);
-    m_patrolDir.x = -m_patrolDir.x;
-    m_baddie->SetPos(pos);
-  }
-  else if (pos.x > m_rect.GetMax(0))
-  {
-    pos.x = m_rect.GetMax(0);
-    m_patrolDir.x = -m_patrolDir.x;
-    m_baddie->SetPos(pos);
-  }
 
-  if (pos.y < m_rect.GetMin(1))
+  if (m_reverse)
   {
-    pos.y = m_rect.GetMin(1);
-    m_patrolDir.y = -m_patrolDir.y;
-    m_baddie->SetPos(pos);
+    if (pos.x < m_rect.GetMin(0))
+    {
+      pos.x = m_rect.GetMin(0);
+      m_patrolDir.x = -m_patrolDir.x;
+      m_baddie->SetPos(pos);
+    }
+    else if (pos.x > m_rect.GetMax(0))
+    {
+      pos.x = m_rect.GetMax(0);
+      m_patrolDir.x = -m_patrolDir.x;
+      m_baddie->SetPos(pos);
+    }
+
+    if (pos.y < m_rect.GetMin(1))
+    {
+      pos.y = m_rect.GetMin(1);
+      m_patrolDir.y = -m_patrolDir.y;
+      m_baddie->SetPos(pos);
+    }
+    else if (pos.y > m_rect.GetMax(1))
+    {
+      pos.y = m_rect.GetMax(1);
+      m_patrolDir.y = -m_patrolDir.y;
+      m_baddie->SetPos(pos);
+    }
   }
-  else if (pos.y > m_rect.GetMax(1))
+  else
   {
-    pos.y = m_rect.GetMax(1);
-    m_patrolDir.y = -m_patrolDir.y;
-    m_baddie->SetPos(pos);
+    // No reverse: wrap
+    if (pos.x < m_rect.GetMin(0))
+    {
+      pos.x = m_rect.GetMax(0);
+      m_baddie->SetPos(pos);
+    }
+    else if (pos.x > m_rect.GetMax(0))
+    {
+      pos.x = m_rect.GetMin(0);
+      m_baddie->SetPos(pos);
+    }
+
+    if (pos.y < m_rect.GetMin(1))
+    {
+      pos.y = m_rect.GetMax(1);
+      m_baddie->SetPos(pos);
+    }
+    else if (pos.y > m_rect.GetMax(1))
+    {
+      pos.y = m_rect.GetMin(1);
+      m_baddie->SetPos(pos);
+    }
   }
 }
 
