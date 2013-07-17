@@ -10,7 +10,7 @@ BaddieBehaviour* CreateBBChase()
 
 const char* BBChase::TYPENAME = "chase";
 
-bool registered = TheBBFactory::Instance()->Add(BBChase::TYPENAME, CreateBBChase);
+static bool registered = TheBBFactory::Instance()->Add(BBChase::TYPENAME, CreateBBChase);
 
 BBChase::BBChase()
 {
