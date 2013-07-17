@@ -7,6 +7,7 @@
 #include "GameConsts.h"
 #include "HeartCount.h"
 #include "SpriteNode.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -14,6 +15,11 @@ const char* Treasure::TYPENAME = "treasure";
 
 static const float XSIZE = 40.0f;
 static const float YSIZE = 50.0f;
+
+std::string MakeTreasureKey()
+{
+  return "treasure_" + ToString(GetLocalPlayerLocation());
+}
 
 GameObject* CreateTreasure()
 {
@@ -45,6 +51,10 @@ void Treasure::OnCollidePlayer(Player* p)
 
     // Add points to local player score
     ChangePlayerCount(SCORE_KEY, m_points); 
+
+    // Set key in database so this treasure cannot be collected again
+    p->SetKeyVal(MakeTreasureKey(), "y");
+    ChangePlayerCount(TREASURE_KEY, +1);
   }
 }
 
@@ -80,11 +90,18 @@ bool Treasure::Load(File* f)
     return false;
   }
 
-  SpriteNode* sn = new SpriteNode(tex, cells.x, cells.y, XSIZE * 0.5f, XSIZE * 0.5f);
+  // TODO Only if player has not collected treasure in the current room
+  //  before!
+  std::string key = MakeTreasureKey();
+  Assert(GetLocalPlayer());
+  if (!GetLocalPlayer()->Exists(key))
+  {
+    SpriteNode* sn = new SpriteNode(tex, cells.x, cells.y, XSIZE * 0.5f, XSIZE * 0.5f);
 
-  SetSceneNode(sn);
-  sn->GetSprite()->SetCellRange(0, cells.x * cells.y);
-  sn->GetSprite()->SetCell(0);
+    SetSceneNode(sn);
+    sn->GetSprite()->SetCellRange(0, cells.x * cells.y);
+    sn->GetSprite()->SetCell(0);
+  }
 
   return true;
 }

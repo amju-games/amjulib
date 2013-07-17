@@ -58,7 +58,7 @@ public:
   //void ShowDropButton(Furniture*, bool show); 
 
   void SetScore(int);
-  void SetHealth(int);
+  void SetTreasure(int);
   void SetRoom(int);
 
   void ResetHud();
