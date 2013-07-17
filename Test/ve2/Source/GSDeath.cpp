@@ -1,5 +1,6 @@
 #include <AmjuFirst.h>
 #include <Game.h>
+#include <SoundManager.h>
 #include "GSDeath.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
@@ -27,6 +28,8 @@ void GSDeath::OnActive()
   Assert(m_gui);
 
   GetLocalPlayer()->ResetHealth();
+
+  TheSoundManager::Instance()->PlayWav("sound/churchbell.wav");
 }
 
 void GSDeath::OnDeactive()
