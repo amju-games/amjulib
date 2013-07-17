@@ -6,7 +6,12 @@
 
 require "common.pl";
 
-my_connect();
+use POSIX();
+
+# No need
+#my_connect();
+
+starthere();
 
 sub showupdatedfiles();
 showupdatedfiles();
@@ -14,28 +19,65 @@ showupdatedfiles();
 
 ##### end of main function
 
-sub showupdatedfiles()
+sub doOneDir($$)
 {
-  if (check_session() == 0)
+  my $root = "../../ve2/assets/"; 
+  my $thisDir = shift;
+  my $dir = "$root/$thisDir/"; 
+
+  my $ptime = shift;
+
+  print "Root: $root  This: $thisDir  Full: $dir\n";
+
+  if (not(opendir(DIR, $dir)))
   {
+    print "Couldn't open dir $dir \n";
     return;
   }
 
+  my @dir = grep { !/^\.+$/ } readdir(DIR);
+  closedir(DIR);
+
+  foreach (@dir)
+  {  
+    my $file = "$dir/$_";
+
+    my $mtime = (stat($file))[9];            
+
+    if ($mtime > $ptime)
+    {
+
+#    print "$file Last change:\t"
+#      . POSIX::strftime("%Y%m%d", localtime($mtime))
+#      . "\n";
+
+      print "<file>$thisDir/$_</file>\n";
+    }
+  }
+
+}
+
+sub showupdatedfiles()
+{
+  # This now takes place at the start of the prog, so we are not logged in yet
+  #if (check_session() == 0)
+  #{
+  #  return;
+  #}
+
+  my $t = time();
+  print "<now>$t</now>\n";
+
   my $time = param('time') or die "Expected time since last check";
 
-  my $sql = "select filename from fileupdate where whenchanged >= FROM_UNIXTIME($time)";
-
-#  print "Query: $sql\n\n";
-
-  my $query = $dbh->prepare($sql) or die
-    "Query prepare failed for this query: $sql\n";
-
-  $query->execute;
+  my $dir = "../../ve2/assets/"; 
+#~/public_html/ve2/assets/";
 
   print "<files>\n";
-  while (my ($filename) = $query->fetchrow_array)
   {
-    print "<file>$filename</file>\n";
+    doOneDir(".", $time);
+    doOneDir("rooms", $time);
+
   }
   print "</files>\n";
 
