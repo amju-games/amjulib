@@ -177,6 +177,7 @@ bool Baddie::Load(File* f)
   {
     return false;
   }
+  */
 
   // Particle effect when attacked, etc.
   File fight;
@@ -195,7 +196,6 @@ bool Baddie::Load(File* f)
   m_effect->SetVisible(true);
 
   m_sceneNode->AddChild(m_effect.GetPtr());
-  */
 
   return true;
 }

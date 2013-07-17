@@ -5,6 +5,7 @@
 #include <Singleton.h>
 #include "Ve1Object.h"
 #include "SpriteNode.h"
+#include "AttackEffect.h"
 
 namespace Amju
 {
@@ -46,6 +47,8 @@ protected:
   int m_points; // points player gets when destroyed
 
   RCPtr<BaddieBehaviour> m_bb;
+
+  RCPtr<AttackEffect> m_effect;
 };
 
 // Base class for behaviours
