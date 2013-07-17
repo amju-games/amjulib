@@ -8,12 +8,13 @@
 #include "HeartCount.h"
 #include "SpriteNode.h"
 #include "LocalPlayer.h"
+#include "ObjectUpdater.h"
 
 namespace Amju
 {
 const char* Treasure::TYPENAME = "treasure";
 
-static const float XSIZE = 40.0f;
+static const float XSIZE = 20.0f;
 static const float YSIZE = 50.0f;
 
 std::string MakeTreasureKey()
@@ -40,20 +41,23 @@ const char* Treasure::GetTypeName() const
 
 void Treasure::OnCollidePlayer(Player* p)
 {
-  if (p->IsLocalPlayer())
+  if (m_sceneNode && p->IsLocalPlayer())
   {
     // Hide
     SetHidden(true);
 
     // Sound fx - TODO different wavs
-    static const std::string TREASURE_WAV = "woohoo.wav"; // TODO CONFIG
-    TheSoundManager::Instance()->PlayWav(TREASURE_WAV);
+    // TODO CONFIG
+    TheSoundManager::Instance()->PlayWav("cashreg.wav");
+    TheSoundManager::Instance()->PlayWav("bonus_points.wav");
 
     // Add points to local player score
     ChangePlayerCount(SCORE_KEY, m_points); 
 
     // Set key in database so this treasure cannot be collected again
-    p->SetKeyVal(MakeTreasureKey(), "y");
+    p->SetKeyVal(MakeTreasureKey(), "y"); // immediate effect
+    TheObjectUpdater::Instance()->SendUpdateReq(p->GetId(), MakeTreasureKey(), "y");
+
     ChangePlayerCount(TREASURE_KEY, +1);
   }
 }
@@ -90,11 +94,11 @@ bool Treasure::Load(File* f)
     return false;
   }
 
-  // TODO Only if player has not collected treasure in the current room
+  // Only if player has not collected treasure in the current room
   //  before!
-  std::string key = MakeTreasureKey();
-  Assert(GetLocalPlayer());
-  if (!GetLocalPlayer()->Exists(key))
+  Player* p = GetLocalPlayer();
+  // Create scene node if no local player yet OR player exists and there is no treasure key for this room 
+  if (!p || !(p->Exists(MakeTreasureKey())))
   {
     SpriteNode* sn = new SpriteNode(tex, cells.x, cells.y, XSIZE * 0.5f, XSIZE * 0.5f);
 
@@ -123,6 +127,15 @@ void Treasure::Update()
         m_pos.x - XSIZE, m_pos.x + XSIZE,
         m_pos.y,         m_pos.y + YSIZE,
         m_pos.z - XSIZE, m_pos.z + XSIZE);
+    }
+
+    // Delete scene node if we have already been collected
+    // (Extra check in case player not created yet when Load() called)
+    std::string key = MakeTreasureKey();
+    Assert(GetLocalPlayer());
+    if (GetLocalPlayer()->Exists(key))
+    {
+      m_sceneNode = 0;
     }
   }
   GetAABB()->Set(
