@@ -87,6 +87,16 @@ void BroadcastConsole::Draw()
 
 void BroadcastConsole::OnMsgRecv(const std::string& str)
 {
+  // Discard if same as last msg
+  if (!m_texts.empty())
+  {
+    if (m_texts[0]->GetText() == str)
+    {
+      std::cout << "Discarding duplicate msg\n";
+      return;
+    }
+  }
+
   GuiText* text = new GuiText;
   text->SetIsMulti(true);
   text->SetTextSize(1.0f); // TODO CONFIG
