@@ -158,21 +158,18 @@ void GSMain::SetRoom(int room)
   s_room = room;
 }
 
+static int s_numOnline = 0;
+
+void GSMain::SetNumPlayersOnline(int n)
+{
+  s_numOnline = n;
+}
+
 void GSMain::ResetHud()
 {
   s_score = 0;
   s_treasure = 0;
   s_room = 1;
-}
-
-void GSMain::SetNumPlayersOnline(int n)
-{
-  m_numPlayersOnline = n;
-
-  // Rethink this. We generate msgs a lot faster than we display them :-(
-
-  //std::string s = "Players online: " + ToString(m_numPlayersOnline);
-  //TheLurker::Instance()->Queue(LurkMsg(s, Colour(1, 1, 1, 1), Colour(0.2, 0, 0.2, 1), AMJU_BOTTOM));
 }
 
 void OnMenuClickedAway()
@@ -265,34 +262,37 @@ void GSMain::Update()
 {
   GSBase::Update();
 
-  std::string s;
-  GameMode gm = GetGameMode();
-  if (gm == AMJU_MODE_SINGLE)
+  if (m_time > 2.0f) // wait a few secs before showing msgs, to initialised positions
   {
-    // TODO localise
-    s = "Hello, <p>! Today, you are hungry and must find food for yourself! Pick up and eat food by walking into it.";
-  }
-  else if (gm == AMJU_MODE_MULTI)
-  {
-    s = "Hello, <p>! Today, you must feed the other players! Pick up food by walking into it, then give it to other players by walking into them.";
-  }
-  else if (gm == AMJU_MODE_EDIT)
-  {
-    s = "Have fun in edit mode!";
-  }
-  else
-  {
-    Assert(0); // how did we get here?
-  }
+    std::string s;
+    GameMode gm = GetGameMode();
+    if (gm == AMJU_MODE_SINGLE)
+    {
+      // TODO localise
+      s = "Hello, <p>! Today, you are hungry and must find food for yourself! Pick up and eat food by walking into it.";
+    }
+    else if (gm == AMJU_MODE_MULTI)
+    {
+      s = "Hello, <p>! Today, you must feed the other players! Pick up food by walking into it, then give it to other players by walking into them.";
+    }
+    else if (gm == AMJU_MODE_EDIT)
+    {
+      s = "Have fun in edit mode!";
+    }
+    else
+    {
+      Assert(0); // how did we get here?
+    }
 
-  FirstTimeMsgThisSession(
-    s,
-    UNIQUE_MSG_ID,
-    false);
+    FirstTimeMsgThisSession(
+      s,
+      UNIQUE_MSG_ID,
+      false);
 
-  FirstTimeQuestionThisSession(
-    "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
-    UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
+    FirstTimeQuestionThisSession(
+      "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
+      UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
+  }
 
   // This is to nag about cog tests
   TheCogTestNag::Instance()->Update();
@@ -346,6 +346,12 @@ void GSMain::Update()
   if (text3) 
   {
     text3->SetText(ToString(s_room));
+  }
+
+  GuiText* text4 = (GuiText*)GetElementByName(m_gui, "online-num");
+  if (text4) 
+  {
+    text4->SetText(ToString(s_numOnline));
   }
 }
 
@@ -696,12 +702,6 @@ void GSMain::OnActive()
 
   TheEventPoller::Instance()->AddListener(m_listener, 100); 
   // high number = low priority, so GUI button clicks etc eat the events.
-
-  // Update once to avoid strangeness
-  if (TheLurker::Instance()->IsDisplayingMsg())
-  {
-    TheGame::Instance()->UpdateGameObjects();
-  }
 }
 
 void GSMain::OnQuitButton()

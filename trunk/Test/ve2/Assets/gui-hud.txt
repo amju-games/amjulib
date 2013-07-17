@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-10
+12
 
 
 // element type
@@ -62,6 +62,14 @@ treasure-text
 TREASURE
 arial, 0.5, fgcol=ffffff, sx=0.9, right
 
+gui-text
+online-text
+0.7, 1.0
+0.3, 0.05
+// Text
+ONLINE
+arial, 0.5, fgcol=ffffff, sx=0.8, right
+
 
 
 gui-text
@@ -88,6 +96,14 @@ treasure-num
 0
 arial, 1.5, fgcol=ffffff, sx=0.9, right
 
+
+gui-text
+online-num
+0.8, 0.95
+0.2, 0.15
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.9, right
 
 
 // Quit button
