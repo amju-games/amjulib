@@ -148,7 +148,7 @@ std::cout << "No start location.\n";
     Assert(pi);
 
     // Play happy logged in sound
-    TheSoundManager::Instance()->PlayWav("Sound/button112.wav");
+    TheSoundManager::Instance()->PlayWav("sound/button112.wav");
 
     if (GetGameMode() == AMJU_MODE_EDIT)
     {

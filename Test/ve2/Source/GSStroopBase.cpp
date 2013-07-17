@@ -222,7 +222,7 @@ void GSStroopBase::Finished()
     }
     else
     {
-      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+      TheSoundManager::Instance()->PlayWav("sound/applause3.wav");
 
       str = "OK, you got " + ToString(m_correct) +
         " correct! Let's try it for real!";
@@ -243,7 +243,7 @@ void GSStroopBase::Finished()
     else
     {
       str = "Well done! You got " + ToString(m_correct) + " correct!";
-      TheSoundManager::Instance()->PlayWav("Sound/applause3.wav");
+      TheSoundManager::Instance()->PlayWav("sound/applause3.wav");
     }
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
