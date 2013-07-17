@@ -341,7 +341,12 @@ AABB* Ve1ObjectChar::GetAABB()
 
 void Ve1ObjectChar::ShowAttacked()
 {
+  Matrix m;
+  m.Translate(Vec3f(0, -50, 0)); // centre on character
+  m_effect->SetLocalTransform(m);
+
   m_effect->Start();
+  m_effect->SetVisible(true);
 }
 
 }

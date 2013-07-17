@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <AmjuGL.h>
 #include "AttackEffect.h"
 #include <AmjuFinal.h>
 
@@ -9,7 +10,15 @@ static float rnd(float f)
   return ((float)rand() / (float)RAND_MAX * 2.0f * f - f);
 }
 
-static const float PARTICLE_SPEED = 300.0f;
+static const float PARTICLE_SPEED = 50.0f;
+
+void AttackEffect::Draw()
+{
+  AmjuGL::PushMatrix();
+  AmjuGL::RotateX(-90.0f);
+  ParticleEffect2d::Draw();
+  AmjuGL::PopMatrix();
+}
 
 Vec3f AttackEffect::NewVel() const
 {

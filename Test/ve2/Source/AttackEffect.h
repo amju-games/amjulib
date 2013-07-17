@@ -11,6 +11,7 @@ public:
   virtual Vec3f NewVel() const;
   virtual float NewTime() const;
   virtual void HandleDeadParticle(Particle2d*);
+  virtual void Draw();
 };
 
 } // namespace
