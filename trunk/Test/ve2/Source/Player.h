@@ -88,6 +88,8 @@ protected:
   int m_health;
   float m_hitTimer;
   float m_flashTimer;
+
+  Colour m_damageColour;
 };
 
 bool GetNameForPlayer(int objId, std::string* r);

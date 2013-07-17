@@ -173,6 +173,21 @@ Player::Player()
   m_flashTimer = 0;
 
   ResetHealth();
+
+  // Load particle effect
+  File fight;
+  if (!fight.OpenRead("fighteffect.txt"))
+  {
+    fight.ReportError("Failed to load effect");
+    Assert(0);
+  }
+  m_effect = new AttackEffect;
+  if (!m_effect->Load(&fight))
+  {
+    fight.ReportError("Failed to load effect");
+    Assert(0);
+  }
+  m_effect->SetVisible(true);
 }
 
 int Player::GetHealth() const
@@ -242,6 +257,21 @@ bool Player::Load(File* f)
   m_maxHealth = 3; // Default until we get a new value from server
   m_health = m_maxHealth;
 
+  // Load particle effect
+  File fight;
+  if (!fight.OpenRead("fighteffect.txt"))
+  {
+    fight.ReportError("Failed to load effect");
+    return false;
+  }
+  m_effect = new AttackEffect;
+  if (!m_effect->Load(&fight))
+  {
+    fight.ReportError("Failed to load effect");
+    return false;
+  }
+  m_effect->SetVisible(true);
+
   return true; 
 
 
@@ -266,23 +296,6 @@ bool Player::Load(File* f)
   m_arrow->SetMesh(arrowMesh);
 */
 
-  // Particle effect when attacked, etc.
-  //File fight;
-  //if (!fight.OpenRead("fighteffect.txt"))
-  //{
-  //  fight.ReportError("Failed to load effect");
-  //  return false;
-  //}
-
-  //m_effect = new AttackEffect;
-  //if (!m_effect->Load(&fight))
-  //{
-  //  fight.ReportError("Failed to load effect");
-  //  return false;
-  //}
-  //m_effect->SetVisible(true);
-
-  //return true;
 }
 
 void Player::OnLocationExit()
@@ -321,6 +334,7 @@ void Player::OnLocationEntry()
     if (m_effect)
     {
       m_sceneNode->AddChild(m_effect.GetPtr());
+      m_effect->SetVisible(false);
     }
   }
 
@@ -543,7 +557,7 @@ void Player::Update()
       if (m_hitTimer > 0)
       {
         m_hitTimer -= dt;
-        col = Colour(1, 0, 0, 1);
+        col = m_damageColour; 
         if (m_hitTimer <= 0)
         {
           m_hitTimer = 0;
@@ -663,32 +677,16 @@ void Player::SetMenu(GuiMenu* menu)
 {
   if (IsLocalPlayer())
   {
-    AddMenuItem("Change look", new CommandAvatarMod);
-
-    // If carrying, drop is option
-    if (m_carrying)
-    {
-/////      AddMenuItem("Put down", new CommandPickUp(m_carrying, false));
-    }
+    // Hmm, makes it difficult to shoot baddies 
+    //AddMenuItem("Change look", new CommandAvatarMod);
   }
   else if (IsLoggedIn())
   {
-    //menu->AddChild(new GuiMenuItem("Talk to " + GetName(), new CommandTalk(this)));
-
-// No one-to-one chat
-//    AddMenuItem("Talk to " + GetName(), new CommandTalk(this));
-    /*
-    NO FIGHTING
-    AddMenuItem("FIGHT!!", new CommandFight(this));
-    */
   }
   else
   {
     // TODO put back leaving messages
     //menu->AddChild(new GuiMenuItem("Leave a message for " + GetName(), new CommandTalk(this)));
-
-// No leaving messages
-//    AddMenuItem("Leave a message for " + GetName(), new CommandTalk(this));
   }
 }
 
@@ -756,7 +754,7 @@ void Player::EatFood(Food* f)
   TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
 
   f->SetHidden(true);
-  TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
+  TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
 }
 
 void Player::OnCollidePlayer(Player* otherPlayer)
@@ -790,7 +788,7 @@ void Player::OnCollideFood(Food* f)
   if (gm == AMJU_MODE_SINGLE)
   {
     f->SetHidden(true);
-    TheSoundManager::Instance()->PlayWav("burp.wav"); // TODO
+    TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
     // Inc count of this (recipient) player on server
     ChangeObjCount(GetId(), FOOD_EATEN_KEY, +1); // for expt
     ChangeObjCount(GetId(), SCORE_KEY, +1);
@@ -820,7 +818,7 @@ void Player::OnCollideFood(Food* f)
       //FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
 
       // TODO Sound every time
-      TheSoundManager::Instance()->PlayWav("pickup.wav"); // TODO
+      TheSoundManager::Instance()->PlayWav("sound/pickup.wav"); // TODO
 
       /* Not:
       LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
@@ -852,6 +850,20 @@ void Player::OnCollideBaddie(Baddie* baddie)
   int damage = baddie->GetDamage();
   if (damage != 0) // negative damage?!?!?!?!?!
   {
+    if (damage < 0)
+    {
+      m_effect->SetColour(Colour(0, 1, 0, 1));
+      m_damageColour = Colour(0, 1, 0, 1); 
+    }
+    else
+    {
+      m_effect->SetColour(Colour(1, 0, 0, 1));
+      m_damageColour = Colour(1, 0, 0, 1); 
+    }
+
+    ShowAttacked();
+    TheSoundManager::Instance()->PlayWav("sound/gasp.wav"); 
+
     m_health -= damage;
 
     // Send this to server so we can see other players' health
