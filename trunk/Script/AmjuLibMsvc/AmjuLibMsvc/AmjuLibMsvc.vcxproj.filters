@@ -876,6 +876,9 @@
     <ClCompile Include="..\..\..\Source\FileUtils\MkDir.cpp">
       <Filter>FileUtils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadRect.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1645,6 +1648,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiFileBrowser.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadRect.h">
+      <Filter>GeomLoad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
