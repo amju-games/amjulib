@@ -184,6 +184,7 @@
     <ClCompile Include="..\..\..\Source\FileUtils\StringsFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
+    <ClCompile Include="..\..\..\Source\GeomLoad\LoadRect.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp" />
@@ -441,6 +442,7 @@
     <ClInclude Include="..\..\..\Source\FileUtils\StringsFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
     <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
+    <ClInclude Include="..\..\..\Source\GeomLoad\LoadRect.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h" />
