@@ -3,10 +3,10 @@
 
 // Effect
 // image - TODO TEMP TEST
-sparkle1.png
+wh8.png
 // size
-20.0
+1.0
 // number
-50
+20
 // max time
-2.0
+3.0
