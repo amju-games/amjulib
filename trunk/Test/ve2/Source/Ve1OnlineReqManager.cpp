@@ -174,6 +174,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
 
   // TODO Authentication, player ID, session ID, etc.
   s += "?session_id=" + m_session;
+  if (m_session.empty())
+  {
+    s += "1";
+  }
 
   return s;
 }
@@ -200,7 +204,7 @@ bool Ve1ReqManager::AddReq(RCPtr<OnlineReq> req, int maxConcurrentReqs, bool dis
   // Fail here if we are not logged in
   if (!IsLoggedIn())
   {
-#ifdef REQ_DEBUG
+#ifdef _DEBUG
 std::cout << "* Can't make request, not logged in *\n";
 #endif
 

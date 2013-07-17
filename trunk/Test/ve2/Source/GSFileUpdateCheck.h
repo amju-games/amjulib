@@ -17,12 +17,21 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  void OnSkip(); // just go to next state..?
+  void OnSkip(); // just go to next state
 
-  void OnFinishedChecking(const std::string& timestamp); // called when we have got response from server 
+  void OnFinishedChecking(const std::string& timestamp); // called when we have got final file from server 
+
+  void NextState();
+
+  void SetNumFilesToWaitFor(int n, const std::string newtimestamp);
+  void OnDownloadedFile(const std::string& filename);
 
 private:
   std::string m_timestamp;
+  std::string m_newtimestamp;
+
+  int m_numFilesToWaitFor;
+  int m_numFilesDownloaded;
 };
 typedef Singleton<GSFileUpdateCheck> TheGSFileUpdateCheck;
 } // namespace

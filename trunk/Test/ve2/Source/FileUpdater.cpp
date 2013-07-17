@@ -10,6 +10,7 @@
 #include <StringUtils.h>
 #include "GSNetError.h"
 #include "GSFileUpdateCheck.h"
+#include "Download2.h"
 #include <AmjuFinal.h>
 
 #define XML_DEBUG
@@ -38,8 +39,19 @@ std::cout << "SKIPPED FILE UPDATE CHECK, SO IGNORING SERVER RESPONSE!!\n";
 std::cout << "Found files element\n";
 #endif
 
-    // Get children - each child is of form <file>$filename</file>. Delete each file(!)
+    // Get children - each child is of form <file>$filename</file>. 
+    // Delete each file(?!) and add it to download queue.
+
     int num = p.nChildNode();
+
+    if (num == 0)
+    {
+      std::cout << "No updated files, so update check is done.\n";
+      TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp);
+      return;
+    }
+    TheGSFileUpdateCheck::Instance()->SetNumFilesToWaitFor(num, m_timestamp);
+
 std::cout << num << "children\n";
     for (int i = 0; i < num; i++)
     {
@@ -61,13 +73,20 @@ std::cout << " -- succeeded!\n";
       {
 std::cout << " -- failed!\n"; 
       }
-      // TODO and tell ObjectManager/ObjectUpdater to remove info about this file from their caches!
 
+      // Now download the file. Tell FileUpdateCheck state the filename when it's downloaded. 
+      // 
+      bool downloadOk = DownloadFile(f);
+      if (!downloadOk)
+      {
+        // uh oh. We can't do downloads, so finish.
+        Assert(0);
+        OnFailure();
+      }
     } 
     // Done - now prod ObjectManager to get new files
 std::cout << "Have finished deleting updated files, now need to download new versions!\n";
 
-    TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp);
   }
   else
   {
@@ -86,7 +105,7 @@ std::cout << "ERROR: " << res.GetErrorString() << "\n";
 std::cout << "Error from Ve1Req: " << m_errorStr << "\n";
 std::cout << "URL was: \"" << m_url << "\"\n";
 
-  TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp); // ??
+  TheGSFileUpdateCheck::Instance()->OnFinishedChecking(m_timestamp); 
 }
 
 }
