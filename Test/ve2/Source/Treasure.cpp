@@ -46,10 +46,13 @@ void Treasure::OnCollidePlayer(Player* p)
     // Hide
     SetHidden(true);
 
+    p->GetEffect()->SetColour(Colour(0.8f, 1, 1, 1));
+    p->ShowAttacked();
+
     // Sound fx - TODO different wavs
     // TODO CONFIG
-    TheSoundManager::Instance()->PlayWav("cashreg.wav");
-    TheSoundManager::Instance()->PlayWav("bonus_points.wav");
+    TheSoundManager::Instance()->PlayWav("sound/cashreg.wav");
+    TheSoundManager::Instance()->PlayWav("sound/bonus_points.wav");
 
     // Add points to local player score
     ChangePlayerCount(SCORE_KEY, m_points); 
