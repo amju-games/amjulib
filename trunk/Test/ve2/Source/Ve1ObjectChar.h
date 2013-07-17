@@ -36,6 +36,7 @@ public:
 
   // Show effect because local player wants to attack this char
   void ShowAttacked();
+  AttackEffect* GetEffect() { return m_effect; }
 
   // Set (x, z) scale for 2D characters
   void SetScale(const Vec2f& scale);
