@@ -39,8 +39,6 @@ public:
   bool OnCursorEvent(const CursorEvent&);
   bool OnMouseButtonEvent(const MouseButtonEvent&);
 
-  void SetNumPlayersOnline(int);
-
   // So chat console reduces the width of the 3D scene
   void SetViewWidth(float w);
 
@@ -60,6 +58,7 @@ public:
   void SetScore(int);
   void SetTreasure(int);
   void SetRoom(int);
+  void SetNumPlayersOnline(int);
 
   void ResetHud();
 
