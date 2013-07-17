@@ -112,10 +112,10 @@ public:
       m.TranslateKeepRotation(tr);
       AmjuGL::MultMatrix(m);
       static const float SCALE_FACTOR = 20.0f;
-      static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
+      //static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
       // World is big compared to -1..1 coords
       AmjuGL::Scale(SCALE_FACTOR, SCALE_FACTOR, 1);  
-      float x = MAX_NAME_WIDTH * -0.5f;
+      //float x = MAX_NAME_WIDTH * -0.5f;
       AmjuGL::Translate(0, 3.0f, 0); // TODO CONFIG
 
       static GuiImage* heartImg = 0;
@@ -401,78 +401,16 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
     bool isTyping = (recipId > 0);
     cc->SetPlayerIsTyping(isTyping, GetId(), recipId); 
   }
-/*
-  else if (key == "beat_up_by")
-  {
-    if (val != "0" && IsLocalPlayer())
-    {
-      TheObjectUpdater::Instance()->SendUpdateReq(GetId(), "beat_up_by", "0");
-      int oppId = ToInt(val);
-      static int prevOpp = 0;
-      Player* opp = dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(oppId).GetPtr());
-      std::string s = "You just got beat up!";
-      if (opp && !opp->GetName().empty())
-      {
-        s = "You just got beat up by " + opp->GetName();
-        if (oppId == prevOpp)
-        {
-          s += " again!";
-        }
-        else
-        {
-          s += "!";
-        }
-      }
-      prevOpp = oppId; // remember previous opponent
-
-      LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);
-      ShowAttacked();
-    }
-  }
-*/
-/*
-  else if (key == FOOD_KEY)
-  {
-    if (IsLocalPlayer())
-    {
-      int fc = ToInt(val);
-      // Lurk msg - total number of Food cells ever brought to ship
-      std::string s;
-      if (m_totalFoods != -1)
-      {
-        if (fc == 1)
-        {
-          s = "You brought a Food cell to the ship!";
-        }
-        else
-        {
-          s = "You have brought a total of " + val + " Food cells to the ship!";
-        }
-        LurkMsg lm(s, LURK_FG, LURK_BG, AMJU_CENTRE); 
-        TheLurker::Instance()->Queue(lm);
-      }
-      m_totalFoods = fc;
-
-      if (fc > 0 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_1))
-      {
-        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_1, "You brought your first Food cell back to the ship!");
-      }
-      if (fc >= 5 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_5))
-      {
-        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_5, "You brought 5 Food cells back to the ship!");
-      }
-      if (fc >= 10 && !HasWonAchievement(ACH_FOOD_CELL_TO_SHIP_10))
-      {
-        OnWinAchievement(ACH_FOOD_CELL_TO_SHIP_10, "You brought 10 Food cells back to the ship!");
-      }
-      // etc
-    }
-  }
-*/
   else if (key == LAST_MSG_SENT_KEY)
   {
     TheMsgManager::Instance()->CheckForNewMsgs();
+  }
+  else if (key == TREASURE_KEY)
+  {
+    if (IsLocalPlayer())
+    {
+      gsm->SetTreasure(ToInt(val));
+    }
   }
 }
 
@@ -530,11 +468,6 @@ void Player::Update()
   if (m_isLoggedIn)
   {
     Ve1ObjectChar::Update();
-
-    if (IsLocalPlayer())
-    {
-      TheGSMain::Instance()->SetHealth(m_health);
-    }
 
     if (m_hitTimer > 0)
     {

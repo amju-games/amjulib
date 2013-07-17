@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-9
+10
 
 
 // element type
@@ -25,12 +25,12 @@ pause
 arial, 1.0 
 
 
-// looks crappy
-//gui-image
-//coin-img
-//0.8, 1.0
-//0.17, 0.2
-//coin3.png
+gui-image
+treasure-img
+0.2, 1.0
+0.17, 0.2
+// TODO
+diamond1.png
 
 gui-image
 heart-img
@@ -57,10 +57,10 @@ arial, 0.5, fgcol=ffffff, sx=0.9, right
 
 gui-text
 health-text
--0.2, 2.0
-0.4, 0.05
+-0.3, 1.0
+0.5, 0.05
 // Text
-HEALTH
+TREASURE
 arial, 0.5, fgcol=ffffff, sx=0.9, right
 
 
@@ -82,11 +82,11 @@ RM1
 arial, 1.5, fgcol=ffffff, sx=0.9, left
 
 gui-text
-health-num
--0.2, 1.95
+treasure-num
+-0.2, 0.95
 0.4, 0.15
 // Text
-HEL2
+TREASURE
 arial, 1.5, fgcol=ffffff, sx=0.9, right
 
 

@@ -144,11 +144,11 @@ void GSMain::SetScore(int num)
   s_score = num;
 }
 
-static int s_health = 0;
+static int s_treasure = 0;
 
-void GSMain::SetHealth(int health)
+void GSMain::SetTreasure(int treasure)
 {
-  s_health = health;
+  s_treasure = treasure;
 }
 
 static int s_room = 1;
@@ -161,7 +161,7 @@ void GSMain::SetRoom(int room)
 void GSMain::ResetHud()
 {
   s_score = 0;
-  s_health = 3;
+  s_treasure = 0;
   s_room = 1;
 }
 
@@ -336,10 +336,10 @@ void GSMain::Update()
     text1->SetText(ToString(s_score));
   }
 
-  GuiText* text2 = (GuiText*)GetElementByName(m_gui, "health-num");
+  GuiText* text2 = (GuiText*)GetElementByName(m_gui, "treasure-num");
   if (text2) 
   {
-    text2->SetText(ToString(s_health));
+    text2->SetText(ToString(s_treasure));
   }
 
   GuiText* text3 = (GuiText*)GetElementByName(m_gui, "room-num");
