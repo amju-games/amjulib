@@ -138,6 +138,8 @@ void Treasure::Update()
     Assert(GetLocalPlayer());
     if (GetLocalPlayer()->Exists(key))
     {
+      // Or OnLocationExit ..?
+      SetHidden(true);
       m_sceneNode = 0;
     }
   }

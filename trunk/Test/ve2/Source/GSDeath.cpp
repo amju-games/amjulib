@@ -1,6 +1,7 @@
 #include <AmjuFirst.h>
 #include <Game.h>
 #include <SoundManager.h>
+#include <AmjuRand.h>
 #include "GSDeath.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
@@ -50,7 +51,7 @@ void GSDeath::Update()
     // Send msg to reset player
     Player* p = GetLocalPlayer();
     int destLocation = 1;
-    Vec3f destPos(0, 0, 0); // TODO Randomise
+    Vec3f destPos(Rnd(-200.0f, 200.0f), 0, Rnd(-200.0f, 200.0f)); 
     SetLocalPlayerLocation(destLocation); // sets next state
     TheObjectUpdater::Instance()->SendChangeLocationReq(p->GetId(), destPos, destLocation);
     p->SetPos(destPos);
