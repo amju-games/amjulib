@@ -41,6 +41,11 @@ std::cout << "Download req: HTTP response too short for " << m_filename << "\n";
     } 
 
     unsigned int i = 0;
+      
+#ifdef IPHONE
+    // Hummm, iOS strips header?
+      
+#else
 
 #ifdef CHECK_HTTP_RESPONSE
     // Check HTTP response code
@@ -64,6 +69,8 @@ std::cout << "  Request was: " << m_url << "\n";
     while (i < (size - 4)  && (s[i] != '\r' || s[i + 1] != '\n' || s[i + 2] != '\r' || s[i + 3] != '\n')) i++;
     i += 4;
 
+#endif // IPHONE
+      
 #ifdef DOWNLOAD_REQ_DEBUG
 std::cout << "Download req " << m_filename << ": Found start of data: " << i << "\n";
 std::cout << "Download req " << m_filename << ": Size of data: " << size - i << "\n";
