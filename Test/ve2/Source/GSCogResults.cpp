@@ -34,7 +34,7 @@ static void OnCogTestResultsOk()
 
 GSCogResults::GSCogResults()
 {
-  m_testId = AMJU_COG_TEST_LETTER_CAN;
+  m_testId = AMJU_COG_TEST_REACTION_TIME;
 }
 
 void GSCogResults::Update()
@@ -157,7 +157,7 @@ void GSCogResults::OnNext()
   m_testId++;
   if (m_testId >= AMJU_COG_TEST_MAX)
   {
-    m_testId = AMJU_COG_TEST_LETTER_CAN;
+    m_testId = AMJU_COG_TEST_STROOP_WORD; // no letter canc tests AMJU_COG_TEST_LETTER_CAN;
   }
   SetChart((TestId)m_testId);
 }
@@ -165,7 +165,7 @@ void GSCogResults::OnNext()
 void GSCogResults::OnPrev()
 {
   m_testId--;
-  if (m_testId < AMJU_COG_TEST_LETTER_CAN)
+  if (m_testId < AMJU_COG_TEST_STROOP_WORD) // no no letter canc tests AMJU_COG_TEST_LETTER_CAN
   {
     m_testId = AMJU_COG_TEST_MAX - 1;
   }
