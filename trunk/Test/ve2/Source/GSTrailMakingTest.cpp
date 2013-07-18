@@ -120,13 +120,12 @@ void GSTrailMakingTest::ResetTest()
 
   // Kind of Random walk
   // Array of bools so we don't have 2 circles overlapping
+OH_CRAP:
   bool grid[GRID_W * GRID_H];
   for (int i = 0; i < GRID_W * GRID_H; i++)
   {
     grid[i] = false;
   }
-
-OH_CRAP:
 
   // Start in the middle
   Vec2i pos(GRID_W / 2, GRID_H / 2);
