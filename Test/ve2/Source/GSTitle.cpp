@@ -25,8 +25,8 @@
 #ifdef _DEBUG
 #define SHOW_ENV_INFO
 //#define SHOW_FRAME_TIME
-#define SHOW_VERSION
 #endif
+#define SHOW_VERSION
 
 namespace Amju
 {
@@ -194,11 +194,11 @@ std::cout << "Failed to load GUI title bg image!\n";
   std::string s = "v." + ToString(VersionMajor) + "." + ToString(VersionMinor);
 #ifdef _DEBUG
   s += " DEBUG";
-#endif
+#endif // _DEBUG
   ver->SetText(s);
-#else
+#else // SHOW_VERSION
   ver->SetVisible(false);
-#endif
+#endif // SHOW_VERSION
 
 #ifdef PLAY_MUSIC
   TheSoundManager::Instance()->PlaySong(ROConfig()->GetValue("music-title", "Sound/hammers.it"));

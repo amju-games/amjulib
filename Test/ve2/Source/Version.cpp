@@ -1,6 +1,6 @@
 namespace Amju
 {
-  int  VersionMajor = 0;
-  int  VersionMinor = 9;
+  int  VersionMajor = 1;
+  int  VersionMinor = 1;
 }
 
