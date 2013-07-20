@@ -237,7 +237,10 @@ void Baddie::OnCollideBullet()
 
     // Player gets points
     // Add points to local player score
-    ChangePlayerCount(SCORE_KEY, m_points); 
+    if (m_points != 0)
+    {
+      ChangePlayerCount(SCORE_KEY, m_points); 
+    }
   }
 }
 

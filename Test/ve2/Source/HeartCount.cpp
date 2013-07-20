@@ -72,6 +72,12 @@ bool ChangePlayerCount(const std::string& key, int delta)
 
 bool ChangeObjCount(int objId, const std::string& key, int delta)
 {
+  if (delta == 0)
+  {
+std::cout << "Discarding zero change for key: " << key << " obj: " << objId << "\n";
+    return true;
+  }
+
   // Must be a server side script to avoid lost data! 
   static const int MAX_CHANGE_HEARTS = 100;
 
