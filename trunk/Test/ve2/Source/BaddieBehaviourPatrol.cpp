@@ -39,15 +39,15 @@ void BBPatrol::Update()
       m_baddie->SetPos(pos);
     }
 
-    if (pos.y < m_rect.GetMin(1))
+    if (pos.z < m_rect.GetMin(1))
     {
-      pos.y = m_rect.GetMin(1);
+      pos.z = m_rect.GetMin(1);
       m_patrolDir.y = -m_patrolDir.y;
       m_baddie->SetPos(pos);
     }
-    else if (pos.y > m_rect.GetMax(1))
+    else if (pos.z > m_rect.GetMax(1))
     {
-      pos.y = m_rect.GetMax(1);
+      pos.z = m_rect.GetMax(1);
       m_patrolDir.y = -m_patrolDir.y;
       m_baddie->SetPos(pos);
     }
@@ -66,14 +66,14 @@ void BBPatrol::Update()
       m_baddie->SetPos(pos);
     }
 
-    if (pos.y < m_rect.GetMin(1))
+    if (pos.z < m_rect.GetMin(1))
     {
-      pos.y = m_rect.GetMax(1);
+      pos.z = m_rect.GetMax(1);
       m_baddie->SetPos(pos);
     }
-    else if (pos.y > m_rect.GetMax(1))
+    else if (pos.z > m_rect.GetMax(1))
     {
-      pos.y = m_rect.GetMin(1);
+      pos.z = m_rect.GetMin(1);
       m_baddie->SetPos(pos);
     }
   }
