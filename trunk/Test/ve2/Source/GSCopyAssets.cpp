@@ -167,39 +167,42 @@ std::cout << "  Don't copy, it's more recent.\n";
       }
     }
 
-    unsigned int seekbase = 0;
-    if (!gf.GetSeekBase(subfile, &seekbase))
+    if (doCopy)
     {
-      std::cout << "Failed to find subfile " << subfile << " in glue file, but was listed in Dir!!\n";
-      Assert(0);
-      return false;
-    }
-    uint32 size = gf.GetSize(subfile);
-    unsigned char* buf = new unsigned char[size + 1];
-    gf.GetBinary(seekbase, size, buf);
+      unsigned int seekbase = 0;
+      if (!gf.GetSeekBase(subfile, &seekbase))
+      {
+        std::cout << "Failed to find subfile " << subfile << " in glue file, but was listed in Dir!!\n";
+        Assert(0);
+        return false;
+      }
+      uint32 size = gf.GetSize(subfile);
+      unsigned char* buf = new unsigned char[size + 1];
+      gf.GetBinary(seekbase, size, buf);
 
-    File outFile(false); // no version info
-    std::string outFileDir = GetFilePath(outFileName);
-    if (!MkDir(outFileDir))
-    {
-      std::cout << "MkDir failed: " << outFileDir << "\n";
-      Assert(0);
-      return false;
-    }
-    if (!outFile.OpenWrite(outFileName, 0, true, false, true))
-    {
-      std::cout << "Failed to open file " << outFileName << " for writing.\n";
-      Assert(0);
-      return false;
-    }
-    if (!outFile.WriteBinary((char*)buf, size))
-    {
-      std::cout << "Failed to write binary data to " << outFileName << ", size: " << size << "\n";
-      Assert(0);
-      return false;
-    }
-    delete [] buf; // whoops
-  }
+      File outFile(false); // no version info
+      std::string outFileDir = GetFilePath(outFileName);
+      if (!MkDir(outFileDir))
+      {
+        std::cout << "MkDir failed: " << outFileDir << "\n";
+        Assert(0);
+        return false;
+      }
+      if (!outFile.OpenWrite(outFileName, 0, true, false, true))
+      {
+        std::cout << "Failed to open file " << outFileName << " for writing.\n";
+        Assert(0);
+        return false;
+      }
+      if (!outFile.WriteBinary((char*)buf, size))
+      {
+        std::cout << "Failed to write binary data to " << outFileName << ", size: " << size << "\n";
+        Assert(0);
+        return false;
+      }
+      delete [] buf; // whoops
+    } // if doCopy
+  } // next file in glue file
   return true;
 }
 
