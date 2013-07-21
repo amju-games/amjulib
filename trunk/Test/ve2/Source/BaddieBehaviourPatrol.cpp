@@ -31,12 +31,14 @@ void BBPatrol::Update()
       pos.x = m_rect.GetMin(0);
       m_patrolDir.x = -m_patrolDir.x;
       m_baddie->SetPos(pos);
+      m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
     }
     else if (pos.x > m_rect.GetMax(0))
     {
       pos.x = m_rect.GetMax(0);
       m_patrolDir.x = -m_patrolDir.x;
       m_baddie->SetPos(pos);
+      m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
     }
 
     if (pos.z < m_rect.GetMin(1))
@@ -44,12 +46,14 @@ void BBPatrol::Update()
       pos.z = m_rect.GetMin(1);
       m_patrolDir.y = -m_patrolDir.y;
       m_baddie->SetPos(pos);
+      m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
     }
     else if (pos.z > m_rect.GetMax(1))
     {
       pos.z = m_rect.GetMax(1);
       m_patrolDir.y = -m_patrolDir.y;
       m_baddie->SetPos(pos);
+      m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
     }
   }
   else
