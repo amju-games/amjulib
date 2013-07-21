@@ -25,7 +25,6 @@ Differnt coloured spiders.
 Spikes which shoot out of holes - this is Toggle behaviour.
 
 Fire: needs a good fire sprite sheet. Could be a Toggle.
-
 Moving sheets of fire, using Patrol.
 
 Rolling barrels - Patrol.
@@ -51,6 +50,10 @@ Lava pools - in sandy/rocky locations
 
 FISH in water
 
+Blinking eyes in the dark - toggle
+ - or can use Harmless ?
+
+
 BOSSES
 ======
 
@@ -66,6 +69,12 @@ MORE "HARMLESS" DECORATION
 
 Trees, flowers, vines/creepers.
 Can hide baddies, treasure, or exits to other rooms.
+Stone paving etc should be harmless overlays, to minimise combinatorial number of tiles
+
+Can use this for water etc?
+
+
+
 
 
 

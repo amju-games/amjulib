@@ -1,76 +1,58 @@
-// ROOM 40
+// ROOM 71
 // Version
 1
 
 // type
 room
 // Num textures
-15
-// 1 - 4
-ground4-n.png
-ground4-s.png
-ground4-e.png
-ground4-w.png
-// 5 - 8
-ground4-nw.png
-ground4-ne.png
-ground4-sw.png
-ground4-se.png
-// 9-10
-ground3.png
-ground3-1.png
-// 11-12
+5
+// 1 - 5
+ground7-1.png
+ground7-2.png
+rock1.png
 rock3.png
 rock2.png
-// 13-14
-log1.png
-log2.png
-// 15
-ground4.png
 
 // (x, y) Size of grid
-7, 7
+7, 5
 // Grid of tiles - numbers are zero-based indices into texture list
 // Split so we can have >10 tiles
-5  1  1  1  1  1  6
-4  9  9  9  9  9  3
-4  9  9  9  9  9  3
-4  9  9  9  9  9  3
-4  9  9  9  9  9  3
-4  9  9  9  9  9  3
-7  2  2  2  2  2  8
+1  1  2  1  1  1  2
+1  1  1  1  2  1  1
+2  1  1  1  1  1  1
+1  1  1  2  1  1  2
+1  2  2  2  2  2  1
 // Obstacles grid
-14 13 14 13 14 13 14 
- 0  0  0  0  0  0 13
- 0  0  0  0  0  0  0
- 0  0  0  0  0  0  0
- 0  0  0  0  0  0  0
- 0  0  0  0  0  0 13
-14 13 11 12 14 12 13 
+3  4  3  4  3  5  5 
+4  0  0  0  0  0  4
+3  0  0  0  0  0  0
+4  0  0  0  0  0  3
+5  4  3  0  3  5  5 
 
 // Destinations N, S, E>, W<
-0, 0, 50, 30
+0, 70, 72, 0
 
-harmless
-maya6.png
-0, -1, 0
-1, 1
-500, 500
 
+// TREASURE
 treasure
-0, 0, 0
-diamond3.png
+// pos
+0, 0, -50
+// tex
+diamond4.png
+// cells
 4, 1
-100
+// points
+1000
 
+// Spiders 
 baddie
-300, 0, 300
+0, 0, 0
 // Tex
 spider2.png
 // Num cells
 2,1
 // Size
-20, 20
+30, 30
 // Damage to player on collision
 1
 // Max health: -1 == indestructible
@@ -78,18 +60,22 @@ spider2.png
 // Points
 5
 // Behaviour
-chase
-// speed
-40
+patrol
+// Dir
+30, 50
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
 
 baddie
--300, 0, 300
+0, 0, 0
 // Tex
 spider2.png
 // Num cells
 2,1
 // Size
-20, 20
+30, 30
 // Damage to player on collision
 1
 // Max health: -1 == indestructible
@@ -97,18 +83,22 @@ spider2.png
 // Points
 5
 // Behaviour
-chase
-// speed
-40
+patrol
+// Dir
+-20, 40
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
 
 baddie
--300, 0, -300
+0, 0, 0
 // Tex
 spider2.png
 // Num cells
 2,1
 // Size
-20, 20
+30, 30
 // Damage to player on collision
 1
 // Max health: -1 == indestructible
@@ -116,18 +106,22 @@ spider2.png
 // Points
 5
 // Behaviour
-chase
-// speed
-40
+patrol
+// Dir
+-30, -40
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
 
 baddie
-300, 0, -300
+0, 0, 0
 // Tex
 spider2.png
 // Num cells
 2,1
 // Size
-20, 20
+30, 30
 // Damage to player on collision
 1
 // Max health: -1 == indestructible
@@ -135,6 +129,10 @@ spider2.png
 // Points
 5
 // Behaviour
-chase
-// speed
-40
+patrol
+// Dir
+20, -50
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
