@@ -1,4 +1,4 @@
-// ROOM 5
+// ROOM 51
 // Version
 1
 
@@ -39,10 +39,59 @@ ground4.png
 0 10  0  11 0
 
 // Destinations N, S, E, W
-50, 0, 0, 0
+50, 52, 0, 0
 
 
-// TEST Leafcutter ant
+// BADDIES
+
+// Leafcutter ant
+baddie
+-290, 0, -150
+// Tex
+ant5-r.png
+// Num cells
+2,1
+// Size
+20,10
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+2
+// Points
+5
+// Behaviour
+patrol
+// Dir
+-50, 0
+// Rect (xmin, xmax, ymin, ymax)
+-180,180, -500, 500
+// Reverse flag
+0
+
+baddie
+-285, 0, -160
+// Tex
+ant-leaf1.png
+// Num cells
+1,1
+// Size
+20, 20
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+1
+// Points
+0
+// Behaviour
+patrol
+// Dir
+-50, 0
+// Rect (xmin, xmax, ymin, ymax)
+-180,180, -500, 500
+// Reverse flag
+0
+
+// Leafcutter ant
 baddie
 -150, 0, -50
 // Tex
@@ -91,7 +140,7 @@ patrol
 
 
 
-// TEST Leafcutter ant
+// Leafcutter ant
 baddie
 -170, 0, 50
 // Tex
@@ -138,7 +187,7 @@ patrol
 // Reverse flag
 0
 
-// TEST Leafcutter ant
+// Leafcutter ant
 baddie
 -190, 0, 150
 // Tex

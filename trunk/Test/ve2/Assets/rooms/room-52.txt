@@ -1,0 +1,55 @@
+// ROOM 52
+// Version
+1
+
+// type
+room
+// Num textures
+12
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-12
+ground3.png
+log1.png
+log2.png
+ground4.png
+
+// (x, y) Size of grid
+5, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Background grid
+5  1  1  1  6  
+4  9  9  9  3  
+4  9  9  9  3  
+7  2  2  2  8  
+0  12 12 12 0
+// Obstacles grid
+10 11 0  10 11 
+11 0  0  0  10 
+10 0  0  0  11 
+11 10 0  11 10 
+10 11 10 10 11 
+
+// Destinations N, S, E, W
+// Short cut back to 50 - nice!
+50, 0, 0, 0
+
+
+// TREASURE
+treasure
+// pos
+0, 0, 100
+// tex
+diamond5.png
+// cells
+4, 1
+// points
+1000

@@ -40,104 +40,20 @@ log2.png
  0  0  0  0  0  0  0
  0  0  0  0  0  0  0
  0  0  0  0  0  0  0
-13 11 12 11 12 13 14
+13 11 12  0 12 13 14
 
 // Destinations N, S, E>, W<
-0, 0, 60, 40
+0, 51, 60, 40
 
 
-// TEST Leafcutter ant
-baddie
-0, 0, 0
-// Tex
-ant4.png
-// Num cells
-2,1
-// Size
-15, 15
-// Damage to player on collision
-1
-// Max health: -1 == indestructible
-2
-// Points
-5
-// Behaviour
-patrol
-// Dir
-50, 0
-// Rect (xmin, xmax, ymin, ymax)
-0, 200, -50, 50
-// Reverse flag
-0
+harmless
+sunflowers.png
+0, 0, 50
+1, 1
+400, 100
 
-baddie
-3, 0, -15
-// Tex
-ant-leaf2.png
-// Num cells
-1,1
-// Size
-15, 15
-// Damage to player on collision
-0
-// Max health: -1 == indestructible
-1
-// Points
-0
-// Behaviour
-patrol
-// Dir
-50, 0
-// Rect (xmin, xmax, ymin, ymax)
-0, 200, -50, 50
-// Reverse flag
-0
-
-
-
-// TEST Leafcutter ant
-baddie
-30, 0, 30
-// Tex
-ant4.png
-// Num cells
-2,1
-// Size
-15, 15
-// Damage to player on collision
-1
-// Max health: -1 == indestructible
-2
-// Points
-5
-// Behaviour
-patrol
-// Dir
-60, 0
-// Rect (xmin, xmax, ymin, ymax)
-0, 200, -50, 50
-// Reverse flag
-0
-
-baddie
-33, 0, 15
-// Tex
-ant-leaf3.png
-// Num cells
-1,1
-// Size
-15, 15
-// Damage to player on collision
-0
-// Max health: -1 == indestructible
-1
-// Points
-0
-// Behaviour
-patrol
-// Dir
-60, 0
-// Rect (xmin, xmax, ymin, ymax)
-0, 200, -50, 50
-// Reverse flag
-0
+harmless
+sunflowers.png
+0, 0, -50
+1, 1
+400, 100

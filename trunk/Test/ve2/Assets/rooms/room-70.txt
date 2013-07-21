@@ -20,11 +20,11 @@ ground4-se.png
 ground3.png
 ground3-1.png
 // 11-12
+log1.png
+rock1.png
+// 13-14
 rock3.png
 rock2.png
-// 13-14
-log1.png
-log2.png
 // 15
 ground4.png
 
@@ -33,17 +33,35 @@ ground4.png
 // Grid of tiles - numbers are zero-based indices into texture list
 // Split so we can have >10 tiles
 5  1  1  1  1  1  6
-4  9  9  9  9  9  3
-4  9  9  9  9  9  3
+4  9  10 10 10 9  3
+4  9  10 10 10 9  3
 4  9  9  9  9  9  3
 7  2  2  2  2  2  8
 // Obstacles grid
-14 13 14 13 14 13 14 
- 0  0  0  0  0  0  0
+14 13 14  0 14 13 14 
+ 0  0 13  0 12  0  0
  0  0  0  0  0  0  0
  0  0  0  0  0  0  0
 14 13 11 12 14 12 13 
 
 // Destinations N, S, E>, W<
-0, 0, 80, 60
+71, 0, 80, 60
+
+baddie
+// Pos 
+0, 0, -100
+// Tex
+maya4.png
+// Num cells
+1,1
+// Size
+100,100
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+10
+// Points
+100
+// Behaviour
+none
 
