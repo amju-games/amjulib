@@ -2,11 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
+#ifdef AMJU_USE_ES2
+
 #include "AmjuGL-OpenGL-Base.h"
 
 namespace Amju
 {
-class AmjuGLOpenGLES : public AmjuGLOpenGLBase
+class AmjuGLOpenGLES2 : public AmjuGLOpenGLBase
 {
 public:
 	virtual void SetOrthoProjection();
@@ -36,3 +38,5 @@ public:
 	virtual void SetTextureType(AmjuGL::TextureType tt);
 };
 }
+
+#endif // AMJU_USE_ES2
