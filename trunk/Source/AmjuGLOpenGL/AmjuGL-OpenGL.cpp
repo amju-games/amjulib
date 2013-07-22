@@ -52,11 +52,43 @@ void AmjuGLOpenGL::Flip()
 #endif
 }
 
+void AmjuGLOpenGL::SetColour(float r, float g, float b, float a)
+{
+  AMJU_CALL_STACK;
+
+  glColor4f(r, g, b, a);
+}
+
+void AmjuGLOpenGL::DrawLighting(
+  const AmjuGL::LightColour& globalAmbient,
+  const AmjuGL::LightColour& lightAmbient,
+  const AmjuGL::LightColour& lightDiffuse,
+  const AmjuGL::LightColour& lightSpecular,
+  const AmjuGL::Vec3& lightPos)
+{
+  AMJU_CALL_STACK;
+
+  float gAmbient[4] = { globalAmbient.m_r, globalAmbient.m_g, globalAmbient.m_b, 1.0f };
+  float ambient[4] = { lightAmbient.m_r, lightAmbient.m_g, lightAmbient.m_b, 1.0f };
+  float diffuse[4] = { lightDiffuse.m_r, lightDiffuse.m_g, lightDiffuse.m_b, 1.0f };
+  float specular[4] = { lightSpecular.m_r, lightSpecular.m_g, lightSpecular.m_b, 1.0f };
+  float pos[4] = { lightPos.m_x, lightPos.m_y, lightPos.m_z, 0 };
+
+  glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+  glEnable(GL_LIGHT0);
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient);
+  glLightfv(GL_LIGHT0, GL_POSITION, pos);
+}
+
 void AmjuGLOpenGL::Init()
 {
   AMJU_CALL_STACK;
 
   AmjuGLOpenGLBase::Init();
+
+  glEnable(GL_COLOR_MATERIAL); 
 
   // TODO Does glew work with GLES ?
   GLenum err = glewInit();
@@ -115,6 +147,58 @@ void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, 
   gluLookAt(eyeX, eyeY, eyeZ, // origin - player coords
             x, y, z, // point in direction we want to look
             upX, upY, upZ /* 'Up' vector */);
+}
+
+static uint32 ConvertToGLFlag(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  switch (flag)
+  {
+  case AmjuGL::AMJU_LIGHTING:
+    return GL_LIGHTING;
+  case AmjuGL::AMJU_BLEND:
+    return GL_BLEND;
+  case AmjuGL::AMJU_DEPTH_READ:
+    return GL_DEPTH_TEST;
+  case AmjuGL::AMJU_TEXTURE_2D:
+    return GL_TEXTURE_2D;
+  }
+  return 0;
+}
+
+void AmjuGLOpenGL::Enable(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  if (flag == AmjuGL::AMJU_DEPTH_WRITE)
+  {
+    glDepthMask(GL_TRUE);
+    return;
+  }
+
+  uint32 glFlag = ConvertToGLFlag(flag);
+  if (glFlag)
+  {
+    glEnable(glFlag);
+  }
+}
+
+void AmjuGLOpenGL::Disable(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  if (flag == AmjuGL::AMJU_DEPTH_WRITE)
+  {
+    glDepthMask(GL_FALSE);
+    return;
+  }
+
+  uint32 glFlag = ConvertToGLFlag(flag);
+  if (glFlag)
+  {
+    glDisable(glFlag);
+  }
 }
 
 void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
@@ -189,64 +273,6 @@ void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
   //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 }
 
-/*
-void AmjuGLOpenGL::DrawQuadList(const AmjuGL::Quads& quads)
-{
-  AMJU_CALL_STACK;
-
-  int numQuads = quads.size();
-
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
-  {
-    // Don't specify tex coords if sphere map
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(quads[0].m_verts[0].m_u));
-  }
-
-  glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(quads[0].m_verts[0].m_x));
-  glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(quads[0].m_verts[0].m_nx)); 
-  glDrawArrays(GL_QUADS, 0, numQuads * 4);
-
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_VERTEX_ARRAY);
-}
-
-void AmjuGLOpenGL::DrawQuad(AmjuGL::Vert* verts)
-{
-  AMJU_CALL_STACK;
-
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-  glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(verts[0].m_x));
-  glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(verts[0].m_nx)); 
-  glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(verts[0].m_u));
-
-  glDrawArrays(GL_QUADS, 0, 4);
-
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_VERTEX_ARRAY);
-
-#ifdef USE_IMMEDIATE_MODE
-  glBegin(GL_QUADS);
-  
-  for (int i = 0; i < 4; i++)
-  {
-    glTexCoord2fv(&verts[i].m_u); 
-    glNormal3fv(&verts[i].m_nx);
-    glVertex3fv(&verts[i].m_x);
-  }
-
-  glEnd();
-#endif // USE_IMMEDIATE_MODE
-}
-*/
-
 void AmjuGLOpenGL::DrawIndexedTriList(
   const AmjuGL::Verts& verts,
   const AmjuGL::IndexedTriList& indexes)
@@ -254,6 +280,114 @@ void AmjuGLOpenGL::DrawIndexedTriList(
   AMJU_CALL_STACK;
 
   // TODO
+}
+
+void AmjuGLOpenGL::GetMatrix(AmjuGL::MatrixMode m, float result[16])
+{
+  AMJU_CALL_STACK;
+
+  switch (m)
+  {
+  case AmjuGL::AMJU_MODELVIEW_MATRIX:
+    glGetFloatv(GL_MODELVIEW_MATRIX, result);
+    return;
+  case AmjuGL::AMJU_PROJECTION_MATRIX:
+    glGetFloatv(GL_PROJECTION_MATRIX, result);
+    return;
+  case AmjuGL::AMJU_TEXTURE_MATRIX:
+    // Allowed ?
+    glGetFloatv(GL_TEXTURE_MATRIX, result);
+    return;
+  default:
+    Assert(0);
+  }
+}
+
+void AmjuGLOpenGL::SetMatrixMode(AmjuGL::MatrixMode m)
+{
+  AMJU_CALL_STACK;
+
+  switch (m)
+  {
+  case AmjuGL::AMJU_MODELVIEW_MATRIX:
+    glMatrixMode(GL_MODELVIEW);
+    return;    
+
+  case AmjuGL::AMJU_PROJECTION_MATRIX:
+    glMatrixMode(GL_PROJECTION);
+    return;
+
+  case AmjuGL::AMJU_TEXTURE_MATRIX:
+    glMatrixMode(GL_TEXTURE);
+    return;
+
+  default:
+    // TODO Assert/print error
+    break;
+  }
+}
+
+void AmjuGLOpenGL::SetIdentity()
+{
+  AMJU_CALL_STACK;
+
+  glLoadIdentity();
+}
+
+void AmjuGLOpenGL::PushMatrix()
+{
+  AMJU_CALL_STACK;
+
+  glPushMatrix();
+}
+
+void AmjuGLOpenGL::PopMatrix()
+{
+  AMJU_CALL_STACK;
+
+  glPopMatrix();
+}
+
+void AmjuGLOpenGL::Translate(float x, float y, float z)
+{
+  AMJU_CALL_STACK;
+
+  glTranslatef(x, y, z);
+}
+
+void AmjuGLOpenGL::Scale(float x, float y, float z)
+{
+  AMJU_CALL_STACK;
+
+  glScalef(x, y, z);
+}
+
+void AmjuGLOpenGL::RotateX(float degs)
+{
+  AMJU_CALL_STACK;
+
+  glRotatef(degs, 1, 0, 0);
+}
+
+void AmjuGLOpenGL::RotateY(float degs)
+{
+  AMJU_CALL_STACK;
+
+  glRotatef(degs, 0, 1, 0);
+}
+
+void AmjuGLOpenGL::RotateZ(float degs)
+{
+  AMJU_CALL_STACK;
+
+  glRotatef(degs, 0, 0, 1);
+}
+
+void AmjuGLOpenGL::MultMatrix(const float matrix[16])
+{
+  AMJU_CALL_STACK;
+
+  glMultMatrixf(matrix); 
 }
 
 void AmjuGLOpenGL::SetTextureType(AmjuGL::TextureType tt)

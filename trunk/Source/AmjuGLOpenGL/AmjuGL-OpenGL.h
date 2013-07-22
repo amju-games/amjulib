@@ -30,6 +30,18 @@ public:
   // Call when all drawing finished
   virtual void Flip();
 
+  virtual void Enable(uint32 flags);
+  virtual void Disable(uint32 flags);
+
+  virtual void SetColour(float r, float g, float b, float a = 1.0f);
+
+  virtual void DrawLighting( // fixed function pipeline lighting
+    const AmjuGL::LightColour& globalAmbient,
+    const AmjuGL::LightColour& lightAmbient,
+    const AmjuGL::LightColour& lightDiffuse,
+    const AmjuGL::LightColour& lightSpecular,
+    const AmjuGL::Vec3& lightPos);
+
   // Set up projection matrix, by specifying field-of-view and aspect ratio.
   // Near and far planes are currently hardcoded.
   virtual void SetPerspectiveProjection(
@@ -46,6 +58,29 @@ public:
   virtual void DrawIndexedTriList(
     const AmjuGL::Verts& verts,
     const AmjuGL::IndexedTriList& indexes);
+
+  virtual void SetMatrixMode(AmjuGL::MatrixMode);
+  virtual AmjuGL::MatrixMode GetMatrixMode();
+
+  // Set the current Matrix to the identity
+  virtual void SetIdentity();
+
+  // Push/pop current matrix stack
+  virtual void PushMatrix();
+  virtual void PopMatrix();
+
+  // Translate/Scale/Rotate top of current matrix stack
+  virtual void Translate(float x, float y, float z);
+
+  virtual void Scale(float x, float y, float z);
+
+  virtual void RotateX(float degs);
+  virtual void RotateY(float degs);
+  virtual void RotateZ(float degs);
+
+  virtual void GetMatrix(AmjuGL::MatrixMode, float result[16]);
+
+  virtual void MultMatrix(const float matrix[16]);
 
   virtual void SetTexture(
     AmjuGL::TextureHandle*, 

@@ -2,11 +2,14 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
+#ifdef AMJU_USE_ES2
+
 #include <AmjuFirst.h>
 #include <math.h>
 #include <AmjuGL.h>
-#include "AmjuGL-OpenGLES.h"
+#include "AmjuGL-OpenGLES.2.h"
 #include "OpenGL.h"
+#include "mipmap2d.h"
 #include <AmjuFinal.h>
 
 #define GLint int
@@ -36,6 +39,12 @@ static void __gluMakeIdentityd(GLdouble m[16])
 }
 */
 
+#ifdef AMJU_USE_ES2
+  // Functions which are sadly lacking in ES 2
+    
+    
+#endif
+    
 static void __gluMakeIdentityf(GLfloat m[16])
 {
     m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
@@ -128,22 +137,21 @@ static void  gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble cen
     glTranslatef(-eyex, -eyey, -eyez);
 }
 
-bool AmjuGLOpenGLES::CreateWindow(AmjuGLWindowInfo*)
+bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
 {
   return true;
 }
 	
-
-void AmjuGLOpenGLES::Flip()
+void AmjuGLOpenGLES2::Flip()
 {
 }	
 
-Shader* AmjuGLOpenGLES::LoadShader(const std::string& shaderFileName)
+Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
 {
   return 0;
 }
 	
-void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
+void AmjuGLOpenGLES2::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
 {
   AMJU_CALL_STACK;
 	
@@ -154,14 +162,14 @@ void AmjuGLOpenGLES::SetPerspectiveProjection(float fov, float aspectRatio, floa
   gluPerspective(fov, aspectRatio, nearDist, farDist);
 }
 
-void AmjuGLOpenGLES::SetOrthoProjection()
+void AmjuGLOpenGLES2::SetOrthoProjection()
 {
 	AMJU_CALL_STACK;
 	
 	// TODO
 }
 
-void AmjuGLOpenGLES::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
+void AmjuGLOpenGLES2::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
 {
 	AMJU_CALL_STACK;
 	
@@ -170,7 +178,7 @@ void AmjuGLOpenGLES::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y
 			  upX, upY, upZ /* 'Up' vector */);
 }
 
-void AmjuGLOpenGLES::SetTextureMode(AmjuGL::TextureType tt)
+void AmjuGLOpenGLES2::SetTextureMode(AmjuGL::TextureType tt)
 {
 	AMJU_CALL_STACK;
 	
@@ -191,7 +199,7 @@ void AmjuGLOpenGLES::SetTextureMode(AmjuGL::TextureType tt)
 	glEnable(GL_TEXTURE_2D);
 }
 
-void AmjuGLOpenGLES::SetTexture(
+void AmjuGLOpenGLES2::SetTexture(
 							  AmjuGL::TextureHandle* th, 
 							  AmjuGL::TextureType tt, 
 							  AmjuGL::TextureDepth d, 
@@ -226,14 +234,14 @@ void AmjuGLOpenGLES::SetTexture(
 	
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?
-	//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
-	//		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST); 
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST); 
 	
 	// Bad quality(?) but works if no mipmaps set up
-	glTexParameterf(GL_TEXTURE_2D, 
-					GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D,
-					GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameterf(GL_TEXTURE_2D, 
+	//				GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameterf(GL_TEXTURE_2D,
+	//				GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	// Allowed values for min filter:
 	// GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST,
@@ -269,12 +277,15 @@ void AmjuGLOpenGLES::SetTexture(
 	
 	// TODO Compressed textures -- "PVRT" formats
 	
-	/* TODO
-	 
-	// Build mipmaps 
-	if (d == AmjuGL::RGB)
+	// Build mipmaps
+#ifdef AMJU_USE_ES2
+    glGenerateMipmap(GL_TEXTURE_2D);
+#endif
+    
+    /*
+	if (d == AmjuGL::AMJU_RGB)
 	{
-		gluBuild2DMipmaps(
+		__gluBuild2DMipmaps(
 						  GL_TEXTURE_2D,
 						  GL_RGB,
 						  width,
@@ -285,7 +296,7 @@ void AmjuGLOpenGLES::SetTexture(
 	}
 	else
 	{
-		gluBuild2DMipmaps(
+		__gluBuild2DMipmaps(
 						  GL_TEXTURE_2D,
 						  GL_RGBA,
 						  width,
@@ -294,10 +305,10 @@ void AmjuGLOpenGLES::SetTexture(
 						  GL_UNSIGNED_BYTE,
 						  data);
 	}
-	 */
+    */
 }
 
-void AmjuGLOpenGLES::GetScreenshot(unsigned char* buffer, int w, int h)
+void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
 {
 	AMJU_CALL_STACK;
 
@@ -344,7 +355,7 @@ void AmjuGLOpenGLES::GetScreenshot(unsigned char* buffer, int w, int h)
 	delete [] myBuf;
 }
 
-void AmjuGLOpenGLES::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
+void AmjuGLOpenGLES2::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 {
 	AMJU_CALL_STACK;
 
@@ -352,7 +363,7 @@ void AmjuGLOpenGLES::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 	//Assert(0);
 }
 	
-void AmjuGLOpenGLES::SetTextureType(AmjuGL::TextureType tt)
+void AmjuGLOpenGLES2::SetTextureType(AmjuGL::TextureType tt)
 {
   AMJU_CALL_STACK;
     
@@ -374,5 +385,5 @@ void AmjuGLOpenGLES::SetTextureType(AmjuGL::TextureType tt)
 }
 } // namespace Amju
 
-
+#endif // AMJU_USE_ES2
 
