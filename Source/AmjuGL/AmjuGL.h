@@ -148,13 +148,6 @@ public:
   // Draw line in current colour between 2 absolute coords
   static void DrawLine(const Vec3& v1, const Vec3& v2);
 
-  // Draw quad with the 4 vertices
-//  static void DrawQuad(Vert* verts);
-  // TODO Replace with 
-
-  // Draw a list of quads - would be more efficient for e.g. font, particle quads
-//  static void DrawQuadList(const Quads& quads);
-
   // Draw list of triangles
   static void DrawTriList(const Tris& tris);
 
