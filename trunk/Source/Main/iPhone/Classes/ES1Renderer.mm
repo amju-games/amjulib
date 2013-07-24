@@ -5,7 +5,7 @@
 #include <sys/time.h> // gettimeofday, for FPS count
 #include <Game.h>
 #include <AmjuGL.h>
-#include <AmjuGL-OpenGLES.h>
+#include <AmjuGL-OpenGLES.1.h>
 #include <File.h>
 #include <SoundManager.h>
 #include <EventPoller.h>
@@ -15,6 +15,12 @@
 #include <Font.h>
 #include <ResourceManager.h>
 #include <iostream>
+
+namespace Amju
+{
+  void StartUpBeforeCreateWindow();
+  void StartUpAfterCreateWindow();
+}
 
 @implementation ES1Renderer
 
@@ -57,7 +63,7 @@ std::cout << "In init()...\n";
 			
         Amju::StartUpBeforeCreateWindow();
         
-        Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES);
+        Amju::AmjuGL::SetImpl(new Amju::AmjuGLOpenGLES1);
 
 std::cout << "Set AmjuGL impl...\n";
 
@@ -65,8 +71,6 @@ std::cout << "Set AmjuGL impl...\n";
 
 std::cout << "Called AmjuGL::Init()...\n";
 	
-        Amju::StartUpAfterCreateWindow();
-		
 std::cout << "About to call StartUp...\n";
 	
         Amju::StartUpAfterCreateWindow();
