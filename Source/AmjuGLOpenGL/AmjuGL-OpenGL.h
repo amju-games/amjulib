@@ -60,7 +60,6 @@ public:
     const AmjuGL::IndexedTriList& indexes);
 
   virtual void SetMatrixMode(AmjuGL::MatrixMode);
-  virtual AmjuGL::MatrixMode GetMatrixMode();
 
   // Set the current Matrix to the identity
   virtual void SetIdentity();
