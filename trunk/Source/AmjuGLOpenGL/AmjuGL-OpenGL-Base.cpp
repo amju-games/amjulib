@@ -32,17 +32,6 @@ void AmjuGLOpenGLBase::EndScene()
 
 }
 
-void AmjuGLOpenGLBase::DrawLighting(
-  const AmjuGL::LightColour& globalAmbient, 
-  const AmjuGL::LightColour& lightAmbient,
-  const AmjuGL::LightColour& lightDiffuse,
-  const AmjuGL::LightColour& lightSpecular,
-  const AmjuGL::Vec3& lightPos)
-{
-  AMJU_CALL_STACK;
-
-}
-
 void AmjuGLOpenGLBase::Init()
 {
   AMJU_CALL_STACK;

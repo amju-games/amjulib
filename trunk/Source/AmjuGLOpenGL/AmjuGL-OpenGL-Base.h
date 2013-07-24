@@ -42,14 +42,6 @@ public:
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
 
-  // Lighting
-  virtual void DrawLighting(
-    const AmjuGL::LightColour& globalAmbient, 
-    const AmjuGL::LightColour& lightAmbient,
-    const AmjuGL::LightColour& lightDiffuse,
-    const AmjuGL::LightColour& lightSpecular,
-    const AmjuGL::Vec3& lightPos);
-
   // True if shaders are supported on this machine
   static bool s_shaderSupport;
 
