@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifndef AMJU_USE_ES2
+#ifdef IPHONE
 
 #include "AmjuGL-OpenGL-Base.h"
 
@@ -66,7 +66,13 @@ public:
     float fov, float aspectRatio, float nearDist, float farDist);
   virtual Shader* LoadShader(const std::string& shaderFileName);
   virtual void SetTextureType(AmjuGL::TextureType tt);
+  virtual void DrawLighting(
+    const AmjuGL::LightColour& globalAmbient,
+    const AmjuGL::LightColour& lightAmbient,
+    const AmjuGL::LightColour& lightDiffuse,
+    const AmjuGL::LightColour& lightSpecular,
+    const AmjuGL::Vec3& lightPos);
 };
 }
 
-#endif // AMJU_USE_ES2
+#endif // IPHONE

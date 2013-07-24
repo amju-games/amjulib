@@ -2,14 +2,18 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef AMJU_USE_ES2
+#ifdef IPHONE
 
 #include <AmjuFirst.h>
 #include <math.h>
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+extern "C"
+{
+#include <GLKit/GLKMatrix4.h>
+}
 #include <AmjuGL.h>
 #include "AmjuGL-OpenGLES.2.h"
-#include "OpenGL.h"
-#include "mipmap2d.h"
 #include <AmjuFinal.h>
 
 #define GLint int
@@ -24,118 +28,14 @@ Amju Games source code (c) Copyright Jason Colman 2010
 
 namespace Amju
 {
+  static GLKMatrix4 s_matrices[3]; // index with AmjuGL::MatrixMode
+  static AmjuGL::MatrixMode s_matrixMode;
+    
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
 	
-/*	
-static void __gluMakeIdentityd(GLdouble m[16])
-{
-    m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
-    m[1+4*0] = 0; m[1+4*1] = 1; m[1+4*2] = 0; m[1+4*3] = 0;
-    m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
-    m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
-}
-*/
-
-#ifdef AMJU_USE_ES2
-  // Functions which are sadly lacking in ES 2
-    
-    
-#endif
-    
-static void __gluMakeIdentityf(GLfloat m[16])
-{
-    m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
-    m[1+4*0] = 0; m[1+4*1] = 1; m[1+4*2] = 0; m[1+4*3] = 0;
-    m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
-    m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
-}
-
-
-static void gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
-{
-    GLfloat m[4][4];
-    double sine, cotangent, deltaZ;
-    double radians = fovy / 2 * __glPi / 180;
-	
-    deltaZ = zFar - zNear;
-    sine = sin(radians);
-    if ((deltaZ == 0) || (sine == 0) || (aspect == 0)) {
-		return;
-    }
-    cotangent = cos(radians) / sine;
-	
-    __gluMakeIdentityf(&m[0][0]);
-    m[0][0] = cotangent / aspect;
-    m[1][1] = cotangent;
-    m[2][2] = -(zFar + zNear) / deltaZ;
-    m[2][3] = -1;
-    m[3][2] = -2 * zNear * zFar / deltaZ;
-    m[3][3] = 0;
-    glMultMatrixf(&m[0][0]);
-}
-
-static void normalize(float v[3])
-{
-    float r;
-	
-    r = sqrt( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
-    if (r == 0.0) return;
-	
-    v[0] /= r;
-    v[1] /= r;
-    v[2] /= r;
-}
-
-static void cross(float v1[3], float v2[3], float result[3])
-{
-    result[0] = v1[1]*v2[2] - v1[2]*v2[1];
-    result[1] = v1[2]*v2[0] - v1[0]*v2[2];
-    result[2] = v1[0]*v2[1] - v1[1]*v2[0];
-}
-
-static void  gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx,
-		  GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy,
-		  GLdouble upz)
-{
-    float forward[3], side[3], up[3];
-    GLfloat m[4][4];
-	
-    forward[0] = centerx - eyex;
-    forward[1] = centery - eyey;
-    forward[2] = centerz - eyez;
-	
-    up[0] = upx;
-    up[1] = upy;
-    up[2] = upz;
-	
-    normalize(forward);
-	
-    /* Side = forward x up */
-    cross(forward, up, side);
-    normalize(side);
-	
-    /* Recompute up as: up = side x forward */
-    cross(side, forward, up);
-	
-    __gluMakeIdentityf(&m[0][0]);
-    m[0][0] = side[0];
-    m[1][0] = side[1];
-    m[2][0] = side[2];
-	
-    m[0][1] = up[0];
-    m[1][1] = up[1];
-    m[2][1] = up[2];
-	
-    m[0][2] = -forward[0];
-    m[1][2] = -forward[1];
-    m[2][2] = -forward[2];
-	
-    glMultMatrixf(&m[0][0]);
-    glTranslatef(-eyex, -eyey, -eyez);
-}
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
 {
@@ -154,12 +54,11 @@ Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
 void AmjuGLOpenGLES2::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
 {
   AMJU_CALL_STACK;
-	
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-  // not: glMatrixMode(GL_PROJECTION);
 
-  AmjuGL::SetIdentity();
-  gluPerspective(fov, aspectRatio, nearDist, farDist);
+  // Expect current matrix mode to be perspective
+  s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX] = GLKMatrix4Multiply(
+    s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX],
+    GLKMatrix4MakePerspective(fov, aspectRatio, nearDist, farDist));
 }
 
 void AmjuGLOpenGLES2::SetOrthoProjection()
@@ -173,9 +72,10 @@ void AmjuGLOpenGLES2::LookAt(float eyeX, float eyeY, float eyeZ, float x, float 
 {
 	AMJU_CALL_STACK;
 	
-	gluLookAt(eyeX, eyeY, eyeZ, // origin - player coords
-			  x, y, z, // point in direction we want to look
-			  upX, upY, upZ /* 'Up' vector */);
+    // Expect current matrix mode to be mview
+    s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX] = GLKMatrix4Multiply(
+      s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX],
+      GLKMatrix4MakeLookAt(eyeX, eyeY, eyeZ, x, y, z, upX, upY, upZ));
 }
 
 void AmjuGLOpenGLES2::SetTextureMode(AmjuGL::TextureType tt)
@@ -234,8 +134,8 @@ void AmjuGLOpenGLES2::SetTexture(
 	
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST); 
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	
 	// Bad quality(?) but works if no mipmaps set up
 	//glTexParameterf(GL_TEXTURE_2D, 
@@ -247,7 +147,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST,
 	// GL_NEAREST_MIPMAP_LINEAR, GL_LINEAR_MIPMAP_LINEAR
 	
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	// Different depending on RGB or RGBA.
 	if (d == AmjuGL::AMJU_RGB)
@@ -278,34 +178,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// TODO Compressed textures -- "PVRT" formats
 	
 	// Build mipmaps
-#ifdef AMJU_USE_ES2
     glGenerateMipmap(GL_TEXTURE_2D);
-#endif
-    
-    /*
-	if (d == AmjuGL::AMJU_RGB)
-	{
-		__gluBuild2DMipmaps(
-						  GL_TEXTURE_2D,
-						  GL_RGB,
-						  width,
-						  height,
-						  GL_RGB,
-						  GL_UNSIGNED_BYTE,
-						  data);
-	}
-	else
-	{
-		__gluBuild2DMipmaps(
-						  GL_TEXTURE_2D,
-						  GL_RGBA,
-						  width,
-						  height,
-						  GL_RGBA,
-						  GL_UNSIGNED_BYTE,
-						  data);
-	}
-    */
 }
 
 void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
@@ -383,7 +256,145 @@ void AmjuGLOpenGLES2::SetTextureType(AmjuGL::TextureType tt)
   }
 */
 }
+
+static uint32 ConvertToGLFlag(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  switch (flag)
+  {
+//  case AmjuGL::AMJU_LIGHTING:
+//    return GL_LIGHTING;
+  case AmjuGL::AMJU_BLEND:
+    return GL_BLEND;
+  case AmjuGL::AMJU_DEPTH_READ:
+    return GL_DEPTH_TEST;
+  case AmjuGL::AMJU_TEXTURE_2D:
+    return GL_TEXTURE_2D;
+  }
+  return 0;
+}
+
+void AmjuGLOpenGLES2::Enable(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  if (flag == AmjuGL::AMJU_DEPTH_WRITE)
+  {
+    glDepthMask(GL_TRUE);
+    return;
+  }
+
+  uint32 glFlag = ConvertToGLFlag(flag);
+  if (glFlag)
+  {
+    glEnable(glFlag);
+  }
+}
+
+void AmjuGLOpenGLES2::Disable(uint32 flag)
+{
+  AMJU_CALL_STACK;
+
+  if (flag == AmjuGL::AMJU_DEPTH_WRITE)
+  {
+    glDepthMask(GL_FALSE);
+    return;
+  }
+
+  uint32 glFlag = ConvertToGLFlag(flag);
+  if (glFlag)
+  {
+    glDisable(glFlag);
+  }
+}
+
+void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::DrawIndexedTriList(
+  const AmjuGL::Verts& verts,
+  const AmjuGL::IndexedTriList& indexes)
+{
+  AMJU_CALL_STACK;
+
+  // TODO
+}
+
+void AmjuGLOpenGLES2::SetColour(float r, float g, float b, float a)
+{
+  AMJU_CALL_STACK;
+}
+
+
+void AmjuGLOpenGLES2::GetMatrix(AmjuGL::MatrixMode m, float result[16])
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::SetMatrixMode(AmjuGL::MatrixMode m)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::SetIdentity()
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::PushMatrix()
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::PopMatrix()
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::Translate(float x, float y, float z)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::Scale(float x, float y, float z)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::RotateX(float degs)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::RotateY(float degs)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::RotateZ(float degs)
+{
+  AMJU_CALL_STACK;
+}
+
+void AmjuGLOpenGLES2::MultMatrix(const float matrix[16])
+{
+  AMJU_CALL_STACK;
+}
+    
+void AmjuGLOpenGLES2::DrawLighting(
+  const AmjuGL::LightColour& globalAmbient,
+  const AmjuGL::LightColour& lightAmbient,
+  const AmjuGL::LightColour& lightDiffuse,
+  const AmjuGL::LightColour& lightSpecular,
+  const AmjuGL::Vec3& lightPos)
+{
+  AMJU_CALL_STACK;
+}    
+
 } // namespace Amju
 
-#endif // AMJU_USE_ES2
+#endif // IPHONE
 
