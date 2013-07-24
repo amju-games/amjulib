@@ -2,14 +2,13 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifndef AMJU_USE_ES2
+#ifdef IPHONE
 
 #include <AmjuFirst.h>
 #include <math.h>
+#include <OpenGLES/ES1/gl.h>
 #include <AmjuGL.h>
 #include "AmjuGL-OpenGLES.1.h"
-#include "OpenGL.h"
-#include "mipmap2d.h"
 #include <AmjuFinal.h>
 
 #define GLint int
@@ -616,8 +615,29 @@ void AmjuGLOpenGLES1::MultMatrix(const float matrix[16])
   glMultMatrixf(matrix); 
 }
 
+void AmjuGLOpenGLES1::DrawLighting(
+  const AmjuGL::LightColour& globalAmbient,
+  const AmjuGL::LightColour& lightAmbient,
+  const AmjuGL::LightColour& lightDiffuse,
+  const AmjuGL::LightColour& lightSpecular,
+  const AmjuGL::Vec3& lightPos)
+{
+  AMJU_CALL_STACK;
+
+  float gAmbient[4] = { globalAmbient.m_r, globalAmbient.m_g, globalAmbient.m_b, 1.0f };
+  float ambient[4] = { lightAmbient.m_r, lightAmbient.m_g, lightAmbient.m_b, 1.0f };
+  float diffuse[4] = { lightDiffuse.m_r, lightDiffuse.m_g, lightDiffuse.m_b, 1.0f };
+  float specular[4] = { lightSpecular.m_r, lightSpecular.m_g, lightSpecular.m_b, 1.0f };
+  float pos[4] = { lightPos.m_x, lightPos.m_y, lightPos.m_z, 0 };
+
+  glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+  glEnable(GL_LIGHT0);
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient);
+  glLightfv(GL_LIGHT0, GL_POSITION, pos);
+}
 } // namespace Amju
 
-#endif // AMJU_USE_ES2
-
+#endif // IPHONE
 
