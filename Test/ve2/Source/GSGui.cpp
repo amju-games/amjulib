@@ -51,6 +51,8 @@ void GSGui::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
+#ifndef AMJU_USE_ES2
+  // TODO This won't work on DX or Wii either -- TODO Fix properly
   glMatrixMode(GL_TEXTURE); // naughty!
   glPushMatrix();
   static float f = 0;
@@ -59,10 +61,14 @@ void GSGui::Draw()
 
   static float SPEED = 0.05f; // Too soon for ROConfig()->GetFloat("scope-speed");
   f += SPEED * TheTimer::Instance()->GetDt();
-  m_bgImage.Draw();  
+#endif
+  m_bgImage.Draw();
+  
+#ifndef AMJU_USE_ES2
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
-
+#endif
+  
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
@@ -133,6 +139,7 @@ void GSGui::DrawCogTestBg()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
+#ifndef AMJU_USE_ES2
   glMatrixMode(GL_TEXTURE); // naughty!
   glPushMatrix();
   static float f = 0;
@@ -143,10 +150,15 @@ void GSGui::DrawCogTestBg()
 
   static float SPEED = 0.001f; // Too soon for ROConfig()->GetFloat("scope-speed");
   f += SPEED * TheTimer::Instance()->GetDt();
-  m_bgImage.Draw();  
+#endif
+  
+  m_bgImage.Draw();
+  
+#ifndef AMJU_USE_ES2
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
-
+#endif
+  
   AmjuGL::PopAttrib();
 
   GSBase::Draw();
