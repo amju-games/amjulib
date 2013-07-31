@@ -142,6 +142,10 @@ void GSCogTestBase::LoadCommonGui()
 
   GuiButton* pracButton = (GuiButton*)GetElementByName(m_gui, "stop-prac-button");
   pracButton->SetCommand(Amju::OnStopPrac);
+
+  GuiImage* pracArrow = dynamic_cast<GuiImage*>(GetElementByName(m_gui, "prac-arrow"));
+  Assert(pracArrow);
+  pracArrow->GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NICE);
 }
 
 void GSCogTestBase::ShowPauseButton(bool show)
