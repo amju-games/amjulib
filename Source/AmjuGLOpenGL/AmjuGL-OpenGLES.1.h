@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef IPHONE
+#ifdef AMJU_IOS
 
 #include "AmjuGL-OpenGL-Base.h"
 
@@ -75,4 +75,4 @@ public:
 };
 }
 
-#endif // IPHONE
+#endif // AMJU_IOS

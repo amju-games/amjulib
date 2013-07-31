@@ -8,6 +8,7 @@
 #include "AmjuAssert.h"
 #include "OpenGL.h"
 #include <File.h>
+#include <ReportError.h>
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -26,7 +27,10 @@ GLShader::GLShader()
 GLShader::~GLShader()
 {
   AMJU_CALL_STACK;
-
+  if (m_programHandle)
+  {
+    glDeleteProgram(m_programHandle);
+  }
 }
 
 bool GLShader::Load(const std::string& shadername)
@@ -164,10 +168,10 @@ std::cout << "Link called\n";
 #endif
 
   GLint linked;
-  glGetShaderiv(m_programHandle, GL_LINK_STATUS, &linked);
+  glGetProgramiv(m_programHandle, GL_LINK_STATUS, &linked);
   if (!linked)
   {
-    glGetShaderInfoLog(m_programHandle, 2000, 0, buf);
+    glGetProgramInfoLog(m_programHandle, 2000, 0, buf);
     m_errorStr = buf;
     
 #ifdef SHADER_DEBUG
@@ -207,10 +211,12 @@ void GLShader::Set(const std::string& name, const float matrix[16])
     GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
+        ReportError("GLShader: didn't find uniform var " + name + " in shader");
+        Assert(0);
         return;
     }
 
-    glUniformMatrix4fv(loc, 16, false, matrix);
+    glUniformMatrix4fv(loc, 1, false, matrix);
 }
 
 void GLShader::Set(const std::string& name, float f)
@@ -218,7 +224,8 @@ void GLShader::Set(const std::string& name, float f)
     GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
-        return;
+        ReportError("GLShader: didn't find uniform var " + name + " in shader");
+        Assert(0);
     }
 
     glUniform1f(loc, f);
@@ -229,6 +236,8 @@ void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
     GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
+        ReportError("GLShader: didn't find uniform var " + name + " in shader");
+        Assert(0);
         return;
     }
 
@@ -240,15 +249,32 @@ void GLShader::Set(const std::string& name, const Colour& c)
     GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
     if (loc == -1)
     {
+        ReportError("GLShader: didn't find uniform var " + name + " in shader");
+        Assert(0);
         return;
     }
 
-    glUniform4fv(loc, 4, (float*)(&c));
+    glUniform4f(loc, c.m_r, c.m_g, c.m_b, c.m_a);
 }
 
-void GLShader::Set(const std::string& name, AmjuGL::TextureHandle)
+void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
 {
+  GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+  if (loc == -1)
+  {
+    ReportError("GLShader: didn't find uniform var " + name + " in shader");
+    Assert(0);
+    return;
+  }
+  
+  glUniform1i(loc, (int)t);
 }
+  
+int GLShader::GetProgHandle() const
+{
+  return m_programHandle;
+}
+  
 }
 
 #endif //  !IPHONE || AMJU_USE_ES2

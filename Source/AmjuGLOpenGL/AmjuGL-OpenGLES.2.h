@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef IPHONE
+#ifdef AMJU_IOS
 
 #include "AmjuGL-OpenGL-Base.h"
 
@@ -11,6 +11,8 @@ namespace Amju
 class AmjuGLOpenGLES2 : public AmjuGLOpenGLBase
 {
 public:
+  virtual void Init();
+  
   virtual void Enable(uint32 flags);
   virtual void Disable(uint32 flags);
 
@@ -77,5 +79,5 @@ public:
 };
 }
 
-#endif // IPHONE
+#endif // AMJU_IOS
 

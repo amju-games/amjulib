@@ -29,6 +29,8 @@ public:
   virtual void Set(const std::string& name, const Colour&);
   virtual void Set(const std::string& name, AmjuGL::TextureHandle);
 
+  int GetProgHandle() const;
+  
 private:
   uint32 m_vertexShaderHandle;
   uint32 m_fragmentShaderHandle;

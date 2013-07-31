@@ -6,14 +6,21 @@ Amju Games source code (c) Copyright Jason Colman 2010
 
 #include <AmjuFirst.h>
 #include <math.h>
+#include <stack>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 extern "C"
 {
 #include <GLKit/GLKMatrix4.h>
+#include <GLKit/GLKMatrix3.h>
+//#include <GLKit/GLKEffects.h> // can't - includes obj-c stuff  
 }
 #include <AmjuGL.h>
+#include "GLShader.h"
 #include "AmjuGL-OpenGLES.2.h"
+#include "ES2DefaultShaders.h"
+#include <DegRad.h>
+#include <ReportError.h>
 #include <AmjuFinal.h>
 
 #define GLint int
@@ -28,14 +35,40 @@ extern "C"
 
 namespace Amju
 {
-  static GLKMatrix4 s_matrices[3]; // index with AmjuGL::MatrixMode
-  static AmjuGL::MatrixMode s_matrixMode;
-    
+static GLKMatrix4 s_matrices[3]; // index with AmjuGL::MatrixMode
+static AmjuGL::MatrixMode s_matrixMode;
+  
+// Matrix stacks
+typedef std::stack<GLKMatrix4> MatrixStack;
+MatrixStack m_stacks[3];
+  
+static Colour s_colour; // current colour - pass to shader
+  
+static GLShader* s_defaultShader = 0; // TODO TEMP TEST
+  
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
 	
+void AmjuGLOpenGLES2::Init()
+{
+  AmjuGLOpenGLBase::Init();
+  
+  s_shaderSupport = true; // ES2 so shaders must be supported!
+  
+  // Create default shader
+  s_defaultShader = new GLShader;
+  std::string vertSrc = DEFAULT_VERT_SRC;
+  std::string fragSrc = DEFAULT_FRAG_SRC;
+  
+  if (!s_defaultShader->Create(vertSrc, fragSrc))
+  {
+    ReportError("Failed to create default shader for ES2: " + s_defaultShader->GetErrorString());
+    Assert(0);
+    return;
+  }
+}
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
 {
@@ -82,6 +115,7 @@ void AmjuGLOpenGLES2::SetTextureMode(AmjuGL::TextureType tt)
 {
 	AMJU_CALL_STACK;
 	
+  // TODO Do this with a different shader
 	s_tt = tt;
 	
 	if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
@@ -135,7 +169,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//_MIPMAP_LINEAR);
 	
 	// Bad quality(?) but works if no mipmaps set up
 	//glTexParameterf(GL_TEXTURE_2D, 
@@ -178,7 +212,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// TODO Compressed textures -- "PVRT" formats
 	
 	// Build mipmaps
-    glGenerateMipmap(GL_TEXTURE_2D);
+ // glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
@@ -263,8 +297,6 @@ static uint32 ConvertToGLFlag(uint32 flag)
 
   switch (flag)
   {
-//  case AmjuGL::AMJU_LIGHTING:
-//    return GL_LIGHTING;
   case AmjuGL::AMJU_BLEND:
     return GL_BLEND;
   case AmjuGL::AMJU_DEPTH_READ:
@@ -284,6 +316,11 @@ void AmjuGLOpenGLES2::Enable(uint32 flag)
     glDepthMask(GL_TRUE);
     return;
   }
+  else if (flag == AmjuGL::AMJU_LIGHTING)
+  {
+    // Set lighting flag in shader
+    return;
+  }
 
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
@@ -301,6 +338,11 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
     glDepthMask(GL_FALSE);
     return;
   }
+  else if (flag == AmjuGL::AMJU_LIGHTING)
+  {
+    // Set lighting flag in shader
+    return;
+  }
 
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
@@ -309,9 +351,79 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
   }
 }
 
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+ 
 void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
 {
+/*
+ GLfloat gCubeVertexData[216] =
+ {
+   // Data layout for each line below is:
+   // positionX, positionY, positionZ,     normalX, normalY, normalZ,
+   0.5f, -0.5f, -0.5f,        1.0f, 0.0f, 0.0f,
+   .....
+ 
+*/
+  
   AMJU_CALL_STACK;
+  
+  // TODO only change these when necessary.
+  // TODO Check for using default shader or a different one
+  GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+  GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+  
+  // Inverse transpose of modelview matrix to rotate normals
+  GLKMatrix3 _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+  // Moldeview * projection matrix for world transforms
+  GLKMatrix4 _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+  
+  glActiveTexture(GL_TEXTURE0);
+//  glBindTexture(GL_TEXTURE_2D,
+  
+  s_defaultShader->Begin();
+  s_defaultShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, _modelViewProjectionMatrix.m);
+  s_defaultShader->Set("Texture", (AmjuGL::TextureHandle)0); // glUniform1i(_textureUniform, 0);
+  s_defaultShader->Set("colour", s_colour);
+  
+  // TODO Set 3*3 normals matrix
+  
+  // TODO -  need to make this efficient. Only create new buffers when necessary.
+  int numVerts = tris.size() * 3;
+  
+  GLuint _vertexArray;
+  GLuint _vertexBuffer;
+
+  glGenVertexArraysOES(1, &_vertexArray);
+  glBindVertexArrayOES(_vertexArray);
+  
+  glGenBuffers(1, &_vertexBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW);
+  
+  const int STRIDE = sizeof(AmjuGL::Vert);
+  
+  int GLKVertexAttribPosition = glGetAttribLocation(s_defaultShader->GetProgHandle(), "position");
+  int GLKVertexAttribNormal = glGetAttribLocation(s_defaultShader->GetProgHandle(), "normal");
+  int GLKVertexAttribTexCoord0 = glGetAttribLocation(s_defaultShader->GetProgHandle(), "uv");
+  
+  glEnableVertexAttribArray(GLKVertexAttribPosition);
+  glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
+  
+  glEnableVertexAttribArray(GLKVertexAttribNormal);
+  glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
+  
+  glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+  glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
+  
+  glBindVertexArrayOES(_vertexArray);
+  
+  glDrawArrays(GL_TRIANGLES, 0, numVerts);
+  
+  glDeleteBuffers(1, &_vertexBuffer);
+  glDeleteVertexArraysOES(1, &_vertexArray);
+ 
+  s_defaultShader->End(); // Currently not requried??
+  
 }
 
 void AmjuGLOpenGLES2::DrawIndexedTriList(
@@ -326,62 +438,92 @@ void AmjuGLOpenGLES2::DrawIndexedTriList(
 void AmjuGLOpenGLES2::SetColour(float r, float g, float b, float a)
 {
   AMJU_CALL_STACK;
+  s_colour = Colour(r, g, b, a);
 }
 
 
 void AmjuGLOpenGLES2::GetMatrix(AmjuGL::MatrixMode m, float result[16])
 {
   AMJU_CALL_STACK;
+//  static GLKMatrix4 s_matrices[3]; // index with AmjuGL::MatrixMode
+//  static AmjuGL::MatrixMode s_matrixMode;
+  
+  GLKMatrix4& mat = s_matrices[m];
+  for (int i = 0; i < 16; i++)
+  {
+    result[i] = mat.m[i];
+  }
 }
 
 void AmjuGLOpenGLES2::SetMatrixMode(AmjuGL::MatrixMode m)
 {
   AMJU_CALL_STACK;
+  s_matrixMode = m;
 }
 
 void AmjuGLOpenGLES2::SetIdentity()
 {
   AMJU_CALL_STACK;
+  s_matrices[s_matrixMode] = GLKMatrix4Identity;
 }
 
 void AmjuGLOpenGLES2::PushMatrix()
 {
   AMJU_CALL_STACK;
+  m_stacks[s_matrixMode].push(s_matrices[s_matrixMode]);
 }
 
 void AmjuGLOpenGLES2::PopMatrix()
 {
   AMJU_CALL_STACK;
+  
+  MatrixStack& ms = m_stacks[s_matrixMode];
+  Assert(!ms.empty());
+  GLKMatrix4 mat = ms.top();
+  ms.pop();
+  s_matrices[s_matrixMode] = mat;
 }
 
 void AmjuGLOpenGLES2::Translate(float x, float y, float z)
 {
   AMJU_CALL_STACK;
+  
+  GLKMatrix4 mat = GLKMatrix4MakeTranslation(x, y, z);
+  s_matrices[s_matrixMode] = GLKMatrix4Multiply(s_matrices[s_matrixMode], mat);
 }
 
 void AmjuGLOpenGLES2::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
+
+  GLKMatrix4 mat = GLKMatrix4MakeScale(x, y, z);
+  s_matrices[s_matrixMode] = GLKMatrix4Multiply(s_matrices[s_matrixMode], mat);
 }
 
 void AmjuGLOpenGLES2::RotateX(float degs)
 {
   AMJU_CALL_STACK;
+
+  s_matrices[s_matrixMode] = GLKMatrix4RotateX(s_matrices[s_matrixMode], DegToRad(degs));
 }
 
 void AmjuGLOpenGLES2::RotateY(float degs)
 {
   AMJU_CALL_STACK;
+  s_matrices[s_matrixMode] = GLKMatrix4RotateY(s_matrices[s_matrixMode], DegToRad(degs));
 }
 
 void AmjuGLOpenGLES2::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
+  s_matrices[s_matrixMode] = GLKMatrix4RotateZ(s_matrices[s_matrixMode], DegToRad(degs));
 }
 
-void AmjuGLOpenGLES2::MultMatrix(const float matrix[16])
+void AmjuGLOpenGLES2::MultMatrix(const float array[16])
 {
   AMJU_CALL_STACK;
+  GLKMatrix4 mat = GLKMatrix4MakeWithArray((float*)array);
+  s_matrices[s_matrixMode] = GLKMatrix4Multiply(s_matrices[s_matrixMode], mat); 
 }
     
 void AmjuGLOpenGLES2::DrawLighting(
@@ -392,6 +534,7 @@ void AmjuGLOpenGLES2::DrawLighting(
   const AmjuGL::Vec3& lightPos)
 {
   AMJU_CALL_STACK;
+  // TODO Set uniform vars for shader
 }    
 
 } // namespace Amju

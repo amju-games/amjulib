@@ -31,7 +31,7 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #endif
 #endif // WIN32
 
-#ifdef IPHONE
+#ifdef AMJU_IOS
 
 #ifdef AMJU_USE_ES2
 #include <OpenGLES/ES2/gl.h>
@@ -41,7 +41,7 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #include <OpenGLES/ES1/gl.h>
 #endif // AMJU_USE_ES2
 
-#endif // IPHONE
+#endif // AMJU_IOS
 
 #endif // Include guard 
 
