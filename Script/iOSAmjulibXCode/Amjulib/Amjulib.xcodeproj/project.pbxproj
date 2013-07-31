@@ -40,6 +40,15 @@
 		6905671C172135A7008A0C92 /* AmjuRand.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671A172135A7008A0C92 /* AmjuRand.h */; };
 		6905671F1721B74A008A0C92 /* iOSGetDir.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671D1721B74A008A0C92 /* iOSGetDir.h */; };
 		690567201721B74A008A0C92 /* iOSGetDir.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6905671E1721B74A008A0C92 /* iOSGetDir.mm */; };
+		6905672417233FC5008A0C92 /* MkDir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905672317233FC5008A0C92 /* MkDir.cpp */; };
+		6909086D1796EE1D007EC3FB /* LoadRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6909086B1796EE1D007EC3FB /* LoadRect.cpp */; };
+		6909086E1796EE1D007EC3FB /* LoadRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 6909086C1796EE1D007EC3FB /* LoadRect.h */; };
+		6927A79B1726F92D009C9B97 /* iOSGetUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6927A7991726F92D009C9B97 /* iOSGetUrl.h */; };
+		6927A79C1726F92D009C9B97 /* iOSGetUrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */; };
+		692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */; };
+		692A8A11179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h in Headers */ = {isa = PBXBuildFile; fileRef = 692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */; };
+		692A8A12179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */; };
+		692A8A13179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h in Headers */ = {isa = PBXBuildFile; fileRef = 692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */; };
 		693D405C15AB780200B84D5C /* AmjuGL-Impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D404F15AB780200B84D5C /* AmjuGL-Impl.h */; };
 		693D405D15AB780200B84D5C /* AmjuGL-Null.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D405015AB780200B84D5C /* AmjuGL-Null.h */; };
 		693D405E15AB780200B84D5C /* AmjuGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D405115AB780200B84D5C /* AmjuGL.cpp */; };
@@ -55,8 +64,6 @@
 		693D406815AB780200B84D5C /* ShadowMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D405B15AB780200B84D5C /* ShadowMap.h */; };
 		693D407815AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D407115AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp */; };
 		693D407915AB79B200B84D5C /* AmjuGL-OpenGL-Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */; };
-		693D407A15AB79B200B84D5C /* AmjuGL-OpenGLES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D407315AB79B200B84D5C /* AmjuGL-OpenGLES.cpp */; };
-		693D407B15AB79B200B84D5C /* AmjuGL-OpenGLES.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407415AB79B200B84D5C /* AmjuGL-OpenGLES.h */; };
 		693D407C15AB79B200B84D5C /* GLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D407515AB79B200B84D5C /* GLShader.cpp */; };
 		693D407D15AB79B200B84D5C /* GLShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407615AB79B200B84D5C /* GLShader.h */; };
 		693D407E15AB79B200B84D5C /* OpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407715AB79B200B84D5C /* OpenGL.h */; };
@@ -382,7 +389,6 @@
 		693D43C515AB7CE900B84D5C /* XmlNodeInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430015AB7CE900B84D5C /* XmlNodeInterface.h */; };
 		693D43C615AB7CE900B84D5C /* XmlParser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D430115AB7CE900B84D5C /* XmlParser2.cpp */; };
 		693D43C715AB7CE900B84D5C /* XmlParser2.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430215AB7CE900B84D5C /* XmlParser2.h */; };
-		693D43C815AB7CE900B84D5C /* XmlTestMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D430315AB7CE900B84D5C /* XmlTestMain.cpp */; };
 		693D43C915AB7CE900B84D5C /* XmlUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D430415AB7CE900B84D5C /* XmlUtils.cpp */; };
 		693D43CA15AB7CE900B84D5C /* XmlUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430515AB7CE900B84D5C /* XmlUtils.h */; };
 		693D43CB15AB7CE900B84D5C /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D430715AB7CE900B84D5C /* adler32.c */; };
@@ -391,7 +397,6 @@
 		693D43CE15AB7CE900B84D5C /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430A15AB7CE900B84D5C /* crc32.h */; };
 		693D43CF15AB7CE900B84D5C /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D430B15AB7CE900B84D5C /* deflate.c */; };
 		693D43D015AB7CE900B84D5C /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D430C15AB7CE900B84D5C /* deflate.h */; };
-		693D43D115AB7CE900B84D5C /* example.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D430D15AB7CE900B84D5C /* example.c */; };
 		693D43D215AB7CE900B84D5C /* gzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D430E15AB7CE900B84D5C /* gzio.c */; };
 		693D43D315AB7CE900B84D5C /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D430F15AB7CE900B84D5C /* infback.c */; };
 		693D43D415AB7CE900B84D5C /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431015AB7CE900B84D5C /* inffast.c */; };
@@ -401,7 +406,6 @@
 		693D43D815AB7CE900B84D5C /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431415AB7CE900B84D5C /* inflate.h */; };
 		693D43D915AB7CE900B84D5C /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431515AB7CE900B84D5C /* inftrees.c */; };
 		693D43DA15AB7CE900B84D5C /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431615AB7CE900B84D5C /* inftrees.h */; };
-		693D43DB15AB7CE900B84D5C /* minigzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431715AB7CE900B84D5C /* minigzip.c */; };
 		693D43DC15AB7CE900B84D5C /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431815AB7CE900B84D5C /* trees.c */; };
 		693D43DD15AB7CE900B84D5C /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431915AB7CE900B84D5C /* trees.h */; };
 		693D43DE15AB7CE900B84D5C /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431A15AB7CE900B84D5C /* uncompr.c */; };
@@ -412,6 +416,8 @@
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
 		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
+		69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */; };
+		69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -449,6 +455,15 @@
 		6905671A172135A7008A0C92 /* AmjuRand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuRand.h; sourceTree = "<group>"; };
 		6905671D1721B74A008A0C92 /* iOSGetDir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSGetDir.h; path = ../../../Source/FileUtils/iOSGetDir.h; sourceTree = "<group>"; };
 		6905671E1721B74A008A0C92 /* iOSGetDir.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSGetDir.mm; path = ../../../Source/FileUtils/iOSGetDir.mm; sourceTree = "<group>"; };
+		6905672317233FC5008A0C92 /* MkDir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MkDir.cpp; path = ../../../Source/FileUtils/MkDir.cpp; sourceTree = "<group>"; };
+		6909086B1796EE1D007EC3FB /* LoadRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadRect.cpp; sourceTree = "<group>"; };
+		6909086C1796EE1D007EC3FB /* LoadRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadRect.h; sourceTree = "<group>"; };
+		6927A7991726F92D009C9B97 /* iOSGetUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSGetUrl.h; sourceTree = "<group>"; };
+		6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSGetUrl.mm; sourceTree = "<group>"; };
+		692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.1.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.1.cpp"; sourceTree = "<group>"; };
+		692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGLES.1.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.1.h"; sourceTree = "<group>"; };
+		692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.2.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.2.cpp"; sourceTree = "<group>"; };
+		692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGLES.2.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.2.h"; sourceTree = "<group>"; };
 		693D404F15AB780200B84D5C /* AmjuGL-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Impl.h"; path = "../../../Source/AmjuGL/AmjuGL-Impl.h"; sourceTree = SOURCE_ROOT; };
 		693D405015AB780200B84D5C /* AmjuGL-Null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Null.h"; path = "../../../Source/AmjuGL/AmjuGL-Null.h"; sourceTree = SOURCE_ROOT; };
 		693D405115AB780200B84D5C /* AmjuGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGL.cpp; path = ../../../Source/AmjuGL/AmjuGL.cpp; sourceTree = SOURCE_ROOT; };
@@ -464,8 +479,6 @@
 		693D405B15AB780200B84D5C /* ShadowMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShadowMap.h; path = ../../../Source/AmjuGL/ShadowMap.h; sourceTree = SOURCE_ROOT; };
 		693D407115AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGL-Base.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGL-Base.cpp"; sourceTree = SOURCE_ROOT; };
 		693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGL-Base.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGL-Base.h"; sourceTree = SOURCE_ROOT; };
-		693D407315AB79B200B84D5C /* AmjuGL-OpenGLES.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.cpp"; sourceTree = SOURCE_ROOT; };
-		693D407415AB79B200B84D5C /* AmjuGL-OpenGLES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGLES.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.h"; sourceTree = SOURCE_ROOT; };
 		693D407515AB79B200B84D5C /* GLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLShader.cpp; path = ../../../Source/AmjuGLOpenGL/GLShader.cpp; sourceTree = SOURCE_ROOT; };
 		693D407615AB79B200B84D5C /* GLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLShader.h; path = ../../../Source/AmjuGLOpenGL/GLShader.h; sourceTree = SOURCE_ROOT; };
 		693D407715AB79B200B84D5C /* OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGL.h; path = ../../../Source/AmjuGLOpenGL/OpenGL.h; sourceTree = SOURCE_ROOT; };
@@ -803,7 +816,6 @@
 		693D430015AB7CE900B84D5C /* XmlNodeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlNodeInterface.h; sourceTree = "<group>"; };
 		693D430115AB7CE900B84D5C /* XmlParser2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlParser2.cpp; sourceTree = "<group>"; };
 		693D430215AB7CE900B84D5C /* XmlParser2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser2.h; sourceTree = "<group>"; };
-		693D430315AB7CE900B84D5C /* XmlTestMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlTestMain.cpp; sourceTree = "<group>"; };
 		693D430415AB7CE900B84D5C /* XmlUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlUtils.cpp; sourceTree = "<group>"; };
 		693D430515AB7CE900B84D5C /* XmlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlUtils.h; sourceTree = "<group>"; };
 		693D430715AB7CE900B84D5C /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
@@ -812,7 +824,6 @@
 		693D430A15AB7CE900B84D5C /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
 		693D430B15AB7CE900B84D5C /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deflate.c; sourceTree = "<group>"; };
 		693D430C15AB7CE900B84D5C /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
-		693D430D15AB7CE900B84D5C /* example.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = example.c; sourceTree = "<group>"; };
 		693D430E15AB7CE900B84D5C /* gzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzio.c; sourceTree = "<group>"; };
 		693D430F15AB7CE900B84D5C /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infback.c; sourceTree = "<group>"; };
 		693D431015AB7CE900B84D5C /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inffast.c; sourceTree = "<group>"; };
@@ -822,7 +833,6 @@
 		693D431415AB7CE900B84D5C /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inflate.h; sourceTree = "<group>"; };
 		693D431515AB7CE900B84D5C /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
 		693D431615AB7CE900B84D5C /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inftrees.h; sourceTree = "<group>"; };
-		693D431715AB7CE900B84D5C /* minigzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minigzip.c; sourceTree = "<group>"; };
 		693D431815AB7CE900B84D5C /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trees.c; sourceTree = "<group>"; };
 		693D431915AB7CE900B84D5C /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trees.h; sourceTree = "<group>"; };
 		693D431A15AB7CE900B84D5C /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
@@ -833,6 +843,8 @@
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
+		69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ES2DefaultShaders.cpp; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.cpp; sourceTree = "<group>"; };
+		69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2DefaultShaders.h; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -942,10 +954,14 @@
 		693D407015AB796F00B84D5C /* AmjuGLOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */,
+				69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */,
+				692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */,
+				692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */,
+				692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */,
+				692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */,
 				693D407115AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp */,
 				693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */,
-				693D407315AB79B200B84D5C /* AmjuGL-OpenGLES.cpp */,
-				693D407415AB79B200B84D5C /* AmjuGL-OpenGLES.h */,
 				693D407515AB79B200B84D5C /* GLShader.cpp */,
 				693D407615AB79B200B84D5C /* GLShader.h */,
 				693D407715AB79B200B84D5C /* OpenGL.h */,
@@ -1006,6 +1022,7 @@
 		693D40AF15AB7A3C00B84D5C /* FileUtils */ = {
 			isa = PBXGroup;
 			children = (
+				6905672317233FC5008A0C92 /* MkDir.cpp */,
 				6905671D1721B74A008A0C92 /* iOSGetDir.h */,
 				6905671E1721B74A008A0C92 /* iOSGetDir.mm */,
 				6905670917213527008A0C92 /* StringsFile.cpp */,
@@ -1176,6 +1193,8 @@
 		693D419F15AB7C7D00B84D5C /* GeomLoad */ = {
 			isa = PBXGroup;
 			children = (
+				6909086B1796EE1D007EC3FB /* LoadRect.cpp */,
+				6909086C1796EE1D007EC3FB /* LoadRect.h */,
 				693D41A015AB7C7D00B84D5C /* LoadAABB.cpp */,
 				693D41A115AB7C7D00B84D5C /* LoadAABB.h */,
 				693D41A215AB7C7D00B84D5C /* LoadMatrix.cpp */,
@@ -1192,43 +1211,39 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				693D41B115AB7C9100B84D5C /* Cursor.cpp */,
+				693D41B215AB7C9100B84D5C /* Cursor.h */,
+				693D41B315AB7C9100B84D5C /* CursorManager.cpp */,
+				693D41B415AB7C9100B84D5C /* CursorManager.h */,
 				690566DF172094AF008A0C92 /* DrawBorder.cpp */,
 				690566E0172094AF008A0C92 /* DrawBorder.h */,
+				693D41B515AB7C9100B84D5C /* GuiButton.cpp */,
+				693D41B615AB7C9100B84D5C /* GuiButton.h */,
 				690566E1172094AF008A0C92 /* GuiCalendar.cpp */,
 				690566E2172094AF008A0C92 /* GuiCalendar.h */,
 				690566E3172094AF008A0C92 /* GuiChart.cpp */,
 				690566E4172094AF008A0C92 /* GuiChart.h */,
+				693D41B715AB7C9100B84D5C /* GuiCommandHandler.cpp */,
+				693D41B815AB7C9100B84D5C /* GuiCommandHandler.h */,
+				693D41B915AB7C9100B84D5C /* GuiComposite.cpp */,
+				693D41BA15AB7C9100B84D5C /* GuiComposite.h */,
 				690566E5172094AF008A0C92 /* GuiDataBarDisplay.cpp */,
 				690566E6172094AF008A0C92 /* GuiDataBarDisplay.h */,
 				690566E7172094AF008A0C92 /* GuiDataDisplay.cpp */,
 				690566E8172094AF008A0C92 /* GuiDataDisplay.h */,
 				690566E9172094AF008A0C92 /* GuiDataLineDisplay.cpp */,
 				690566EA172094AF008A0C92 /* GuiDataLineDisplay.h */,
-				690566EB172094AF008A0C92 /* GuiFileBrowser.h */,
-				690566EC172094AF008A0C92 /* GuiFileDialog.cpp */,
-				690566ED172094AF008A0C92 /* GuiFileDialog.h */,
-				690566EE172094AF008A0C92 /* GuiFileListBox.cpp */,
-				690566EF172094AF008A0C92 /* GuiFileListBox.h */,
-				690566F0172094AF008A0C92 /* GuiObjView.cpp */,
-				690566F1172094AF008A0C92 /* GuiObjView.h */,
-				690566F2172094AF008A0C92 /* GuiScroll.cpp */,
-				690566F3172094AF008A0C92 /* GuiScroll.h */,
-				693D41B115AB7C9100B84D5C /* Cursor.cpp */,
-				693D41B215AB7C9100B84D5C /* Cursor.h */,
-				693D41B315AB7C9100B84D5C /* CursorManager.cpp */,
-				693D41B415AB7C9100B84D5C /* CursorManager.h */,
-				693D41B515AB7C9100B84D5C /* GuiButton.cpp */,
-				693D41B615AB7C9100B84D5C /* GuiButton.h */,
-				693D41B715AB7C9100B84D5C /* GuiCommandHandler.cpp */,
-				693D41B815AB7C9100B84D5C /* GuiCommandHandler.h */,
-				693D41B915AB7C9100B84D5C /* GuiComposite.cpp */,
-				693D41BA15AB7C9100B84D5C /* GuiComposite.h */,
 				693D41BB15AB7C9100B84D5C /* GuiDialog.cpp */,
 				693D41BC15AB7C9100B84D5C /* GuiDialog.h */,
 				693D41BD15AB7C9100B84D5C /* GuiElement.cpp */,
 				693D41BE15AB7C9100B84D5C /* GuiElement.h */,
 				693D41BF15AB7C9100B84D5C /* GuiFactory.cpp */,
 				693D41C015AB7C9100B84D5C /* GuiFactory.h */,
+				690566EB172094AF008A0C92 /* GuiFileBrowser.h */,
+				690566EC172094AF008A0C92 /* GuiFileDialog.cpp */,
+				690566ED172094AF008A0C92 /* GuiFileDialog.h */,
+				690566EE172094AF008A0C92 /* GuiFileListBox.cpp */,
+				690566EF172094AF008A0C92 /* GuiFileListBox.h */,
 				693D41C115AB7C9100B84D5C /* GuiImage.cpp */,
 				693D41C215AB7C9100B84D5C /* GuiImage.h */,
 				693D41C315AB7C9100B84D5C /* GuiKeyboard.cpp */,
@@ -1237,8 +1252,12 @@
 				693D41C615AB7C9100B84D5C /* GuiListBox.h */,
 				693D41C715AB7C9100B84D5C /* GuiMenu.cpp */,
 				693D41C815AB7C9100B84D5C /* GuiMenu.h */,
+				690566F0172094AF008A0C92 /* GuiObjView.cpp */,
+				690566F1172094AF008A0C92 /* GuiObjView.h */,
 				693D41C915AB7C9100B84D5C /* GuiRect.cpp */,
 				693D41CA15AB7C9100B84D5C /* GuiRect.h */,
+				690566F2172094AF008A0C92 /* GuiScroll.cpp */,
+				690566F3172094AF008A0C92 /* GuiScroll.h */,
 				693D41CB15AB7C9100B84D5C /* GuiText.cpp */,
 				693D41CC15AB7C9100B84D5C /* GuiText.h */,
 				693D41CD15AB7C9100B84D5C /* GuiTextEdit.cpp */,
@@ -1341,6 +1360,8 @@
 		693D424615AB7CE900B84D5C /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6927A7991726F92D009C9B97 /* iOSGetUrl.h */,
+				6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */,
 				693D424715AB7CE900B84D5C /* ClientSocket.cpp */,
 				693D424815AB7CE900B84D5C /* ClientSocket.h */,
 				693D424915AB7CE900B84D5C /* HostInfo.cpp */,
@@ -1558,7 +1579,6 @@
 				693D430015AB7CE900B84D5C /* XmlNodeInterface.h */,
 				693D430115AB7CE900B84D5C /* XmlParser2.cpp */,
 				693D430215AB7CE900B84D5C /* XmlParser2.h */,
-				693D430315AB7CE900B84D5C /* XmlTestMain.cpp */,
 				693D430415AB7CE900B84D5C /* XmlUtils.cpp */,
 				693D430515AB7CE900B84D5C /* XmlUtils.h */,
 			);
@@ -1574,7 +1594,6 @@
 				693D430A15AB7CE900B84D5C /* crc32.h */,
 				693D430B15AB7CE900B84D5C /* deflate.c */,
 				693D430C15AB7CE900B84D5C /* deflate.h */,
-				693D430D15AB7CE900B84D5C /* example.c */,
 				693D430E15AB7CE900B84D5C /* gzio.c */,
 				693D430F15AB7CE900B84D5C /* infback.c */,
 				693D431015AB7CE900B84D5C /* inffast.c */,
@@ -1584,7 +1603,6 @@
 				693D431415AB7CE900B84D5C /* inflate.h */,
 				693D431515AB7CE900B84D5C /* inftrees.c */,
 				693D431615AB7CE900B84D5C /* inftrees.h */,
-				693D431715AB7CE900B84D5C /* minigzip.c */,
 				693D431815AB7CE900B84D5C /* trees.c */,
 				693D431915AB7CE900B84D5C /* trees.h */,
 				693D431A15AB7CE900B84D5C /* uncompr.c */,
@@ -1614,7 +1632,6 @@
 				693D406715AB780200B84D5C /* ShaderNull.h in Headers */,
 				693D406815AB780200B84D5C /* ShadowMap.h in Headers */,
 				693D407915AB79B200B84D5C /* AmjuGL-OpenGL-Base.h in Headers */,
-				693D407B15AB79B200B84D5C /* AmjuGL-OpenGLES.h in Headers */,
 				693D407D15AB79B200B84D5C /* GLShader.h in Headers */,
 				693D407E15AB79B200B84D5C /* OpenGL.h in Headers */,
 				693D408315AB79D300B84D5C /* Gpc.h in Headers */,
@@ -1813,6 +1830,11 @@
 				6905671817213583008A0C92 /* LoadTextureResource.h in Headers */,
 				6905671C172135A7008A0C92 /* AmjuRand.h in Headers */,
 				6905671F1721B74A008A0C92 /* iOSGetDir.h in Headers */,
+				6927A79B1726F92D009C9B97 /* iOSGetUrl.h in Headers */,
+				6909086E1796EE1D007EC3FB /* LoadRect.h in Headers */,
+				692A8A11179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h in Headers */,
+				692A8A13179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h in Headers */,
+				69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1874,7 +1896,6 @@
 				693D406215AB780200B84D5C /* Colour.cpp in Sources */,
 				693D406415AB780200B84D5C /* Screen.cpp in Sources */,
 				693D407815AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp in Sources */,
-				693D407A15AB79B200B84D5C /* AmjuGL-OpenGLES.cpp in Sources */,
 				693D407C15AB79B200B84D5C /* GLShader.cpp in Sources */,
 				693D408215AB79D300B84D5C /* Gpc.c in Sources */,
 				693D408D15AB79EE00B84D5C /* BruteForce.cpp in Sources */,
@@ -2033,19 +2054,16 @@
 				693D43C115AB7CE900B84D5C /* Variable.cpp in Sources */,
 				693D43C415AB7CE900B84D5C /* XmlNodeInterface.cpp in Sources */,
 				693D43C615AB7CE900B84D5C /* XmlParser2.cpp in Sources */,
-				693D43C815AB7CE900B84D5C /* XmlTestMain.cpp in Sources */,
 				693D43C915AB7CE900B84D5C /* XmlUtils.cpp in Sources */,
 				693D43CB15AB7CE900B84D5C /* adler32.c in Sources */,
 				693D43CC15AB7CE900B84D5C /* compress.c in Sources */,
 				693D43CD15AB7CE900B84D5C /* crc32.c in Sources */,
 				693D43CF15AB7CE900B84D5C /* deflate.c in Sources */,
-				693D43D115AB7CE900B84D5C /* example.c in Sources */,
 				693D43D215AB7CE900B84D5C /* gzio.c in Sources */,
 				693D43D315AB7CE900B84D5C /* infback.c in Sources */,
 				693D43D415AB7CE900B84D5C /* inffast.c in Sources */,
 				693D43D715AB7CE900B84D5C /* inflate.c in Sources */,
 				693D43D915AB7CE900B84D5C /* inftrees.c in Sources */,
-				693D43DB15AB7CE900B84D5C /* minigzip.c in Sources */,
 				693D43DC15AB7CE900B84D5C /* trees.c in Sources */,
 				693D43DE15AB7CE900B84D5C /* uncompr.c in Sources */,
 				693D43E215AB7CE900B84D5C /* zutil.c in Sources */,
@@ -2065,6 +2083,12 @@
 				6905671717213583008A0C92 /* LoadTextureResource.cpp in Sources */,
 				6905671B172135A7008A0C92 /* AmjuRand.cpp in Sources */,
 				690567201721B74A008A0C92 /* iOSGetDir.mm in Sources */,
+				6905672417233FC5008A0C92 /* MkDir.cpp in Sources */,
+				6927A79C1726F92D009C9B97 /* iOSGetUrl.mm in Sources */,
+				6909086D1796EE1D007EC3FB /* LoadRect.cpp in Sources */,
+				692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */,
+				692A8A12179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp in Sources */,
+				69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2088,6 +2112,8 @@
 					IPHONE,
 					AMJU_USE_BASS,
 					_DEBUG,
+					AMJU_IOS,
+					AMJU_USE_ES2,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
@@ -2116,6 +2142,8 @@
 					LANDSCAPE,
 					IPHONE,
 					AMJU_USE_BASS,
+					AMJU_IOS,
+					AMJU_USE_ES2,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
