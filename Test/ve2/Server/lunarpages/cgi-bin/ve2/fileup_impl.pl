@@ -43,16 +43,6 @@ sub fileup_impl($)
 
   print $query->header(); 
 
-  # Check if file already exists - if so, update DB table of updated files
-  if (-e $pathfilename)
-  {
-    # Only need to connect to DB in this case -- assume connected ?
-    my_connect();
-    my $sql = "insert into fileupdate (filename, whenchanged) values ('$filename', now()) on duplicate key update whenchanged=now()";
-    print "Updating DB: $sql\n";
-    update_or_insert($sql);
-  }
-
   my $upload_filehandle = $query->upload($name_in_form); 
   open ( UPLOADFILE, ">$pathfilename" ) or die "$!"; 
   binmode UPLOADFILE; 
