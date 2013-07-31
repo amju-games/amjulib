@@ -39,15 +39,16 @@ scope-speed  0.05
 
 // Sound
 max-vol  0.1
-music-title Sound/hammers.it
-music-menu Sound/piano.it
-sound-got-collect Sound/cashreg.wav
-sound-npc-trigger Sound/whistlehere.wav
-sound-new-lurkmsg Sound/pop.wav
-sound-new-cogtest Sound/gong.wav
-sound-rt-go  Sound/alarme.wav
-sound-cogtest-fail Sound/fail.wav
-sound-cogtest-correct Sound/bell_tinkle.wav
+music-title sound/hammers.it
+music-menu sound/piano.it
+sound-got-collect sound/cashreg.wav
+sound-npc-trigger sound/whistlehere.wav
+
+sound-new-lurkmsg sound/pop.wav
+sound-new-cogtest sound/gong.wav
+sound-rt-go  sound/alarme.wav
+sound-cogtest-fail sound/fail.wav
+sound-cogtest-correct sound/bell_tinkle.wav
 
 ve1obj-max-jump 20.0
 
