@@ -94,7 +94,7 @@ void StartUpAfterCreateWindow()
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
   TheResourceManager::Instance()->AddLoader("objb", BinaryObjLoader);
 
-  GuiButton::SetClickFilename("Sound/click.wav"); // doesn't try to load it
+  GuiButton::SetClickFilename("sound/click.wav"); // doesn't try to load it
 
   // Don't try to load any assets yet! Wait until we have copied assets as required
 
