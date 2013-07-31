@@ -42,19 +42,25 @@ sub doOneDir($$)
   {  
     my $file = "$dir/$_";
 
-    my $mtime = (stat($file))[9];            
-
-    if ($mtime > $ptime)
+    if (-d $file)
     {
+      print "$file is a directory!\n";
+    }
+    else
+    {
+      my $mtime = (stat($file))[9];            
+
+      if ($mtime > $ptime)
+      {
 
 #    print "$file Last change:\t"
 #      . POSIX::strftime("%Y%m%d", localtime($mtime))
 #      . "\n";
 
-      print "<file>$thisDir/$_</file>\n";
+        print "<file>$thisDir/$_</file>\n";
+      }
     }
   }
-
 }
 
 sub showupdatedfiles()
