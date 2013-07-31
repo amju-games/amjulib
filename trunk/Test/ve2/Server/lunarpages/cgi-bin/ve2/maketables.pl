@@ -148,23 +148,6 @@ END
   print "Created object table! $sql\n<br>\n";
 }
 
-sub create_table_fileupdate()
-{
-  my $sql = <<END;
-
-CREATE TABLE `fileupdate`
-(`filename` VARCHAR(100) NOT NULL,
-`whenchanged` TIMESTAMP NOT NULL,
-PRIMARY KEY (`filename`),
-INDEX (`whenchanged`)
-) ENGINE = MYISAM;
-END
-
-  update_or_insert($sql);
-
-  print "Created fileupdate table! $sql\n<br>\n";
-}
-
 sub create_table_location()
 {
   my $sql = <<END;
@@ -206,9 +189,6 @@ sub create_tables()
 
   drop_table("chat");
   create_table_chat();
-
-  drop_table("fileupdate");
-  create_table_fileupdate();
 
   drop_table("location");
   create_table_location();
