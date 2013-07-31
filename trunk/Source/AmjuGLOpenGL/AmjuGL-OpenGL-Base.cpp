@@ -64,8 +64,7 @@ void AmjuGLOpenGLBase::Init()
   // Try to disable blending unless expicitly required
   AmjuGL::Disable(AmjuGL::AMJU_BLEND); // So flag is reset
   
-  //AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-  //glDisable(GL_LIGHTING); // now it is
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
 }
 
 void AmjuGLOpenGLBase::InitFrame(float clearR, float clearG, float clearB)

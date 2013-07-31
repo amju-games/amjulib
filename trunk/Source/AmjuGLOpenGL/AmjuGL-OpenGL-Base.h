@@ -23,7 +23,7 @@ public:
   // Set viewport as screen coords
   virtual void Viewport(int x, int y, int w, int h);
 
-  // Call once at app startup
+  // Call once at app startup, once GL context created
   virtual void Init();
 
   // Call at start of drawing every frame.
@@ -42,14 +42,15 @@ public:
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
 
-  // True if shaders are supported on this machine
-  static bool s_shaderSupport;
-
   virtual ShadowMap* CreateShadowMap();
 
   virtual Drawable* Create(int);
 
-}; // class 
+protected:
+  friend class GLShader;
+  // True if shaders are supported on this machine
+  static bool s_shaderSupport;  
+}; // class
 } // namespace Amju
 
 #endif
