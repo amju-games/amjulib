@@ -84,6 +84,8 @@ GSStroopBase::GSStroopBase()
   {
     m_indices[i] = i;
   }
+
+  m_moveElement = 0; // Set in subclass in OnActive
 }
 
 void GSStroopBase::ResetTest()
@@ -134,6 +136,11 @@ void GSStroopBase::SetTest()
   }
 
   word->SetText(WORDS[m_indices[m_correctChoice]]);
+
+  if (m_moveElement)
+  {
+    m_moveElement->SetLocalPos(m_moveElementOriginalPos + Vec2f(-2.0f, 0));
+  }
 }
 
 void GSStroopBase::OnActive()
@@ -148,6 +155,10 @@ void GSStroopBase::OnActive()
   Assert(m_gui);
   LoadCommonGui();
 
+  m_moveElement = GetElementByName(m_gui, "word");
+  Assert(m_moveElement);
+  m_moveElementOriginalPos = m_moveElement->GetLocalPos();
+
   ResetTest();
 }
 
@@ -157,6 +168,20 @@ void GSStroopBase::Update()
 //  TheObjectUpdater::Instance()->Update(); // ???
   UpdateHeartCount();
   UpdateTimer();
+
+  Assert(m_moveElement);
+  Vec2f pos = m_moveElement->GetLocalPos();
+  if (pos.x >= m_moveElementOriginalPos.x)
+  {
+    pos.x = m_moveElementOriginalPos.x;
+  }
+  else
+  {
+    float dt = TheTimer::Instance()->GetDt();
+    const float SPEED = 10.0f;
+    pos.x += dt * SPEED;
+  }
+  m_moveElement->SetLocalPos(pos);
 }
 
 void GSStroopBase::Draw()

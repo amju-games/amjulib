@@ -32,6 +32,10 @@ protected:
   static const Colour COLOURS[NUM_WORDS];
 
   int m_indices[NUM_WORDS];
+
+  // The element we move on/off screen
+  GuiElement* m_moveElement;
+  Vec2f m_moveElementOriginalPos; // pos in gui file
 };
 }
 
