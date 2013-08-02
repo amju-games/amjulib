@@ -11,11 +11,12 @@ Amju Games source code (c) Copyright Jason Colman 2005
 #include "ResourceManager.h"
 #include "TextureSequence.h"
 #include "Vec3.h"
+#include <TriList.h>
 
 namespace Amju
 {
 class File;
-
+  
 class Font : public Resource
 {
 public:
@@ -39,6 +40,12 @@ public:
   // Get width of a string
   float GetTextWidth(const std::string& s);
 
+  // Use this to make a TriList when text changes.
+  // Use this in preference to Print*()
+  TriList* MakeTriList(float x, float y, const char* text, float scaleX);
+  
+  void BindTexture();
+  
   // Draw the text on the window. 
   // (x, y) coords are -1..1
   void Print(float x, float y, const char* text, float scaleX = 1.0f);
