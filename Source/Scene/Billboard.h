@@ -2,7 +2,8 @@
 #define BILLBOARD_H
 
 #include "SceneNode.h"
-#include "AmjuGL.h"
+#include <AmjuGL.h>
+#include <TriList.h>
 #include "Texture.h"
 
 namespace Amju
@@ -21,7 +22,8 @@ public:
 protected:
   float m_size; // side length of square billboard
   PTexture m_texture;
-  AmjuGL::Tris m_tris;
+//  AmjuGL::Tris m_tris;
+  RCPtr<TriListDynamic> m_triList;
 };
 }
 

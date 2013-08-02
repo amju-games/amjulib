@@ -2,8 +2,9 @@
 #define PARTICLE_EFFECT_2D_H
 
 #include "SceneNode.h"
-#include "AmjuGL.h"
-#include "Texture.h"
+#include <AmjuGL.h>
+#include <TriList.h>
+#include <Texture.h>
 
 namespace Amju
 {
@@ -48,7 +49,8 @@ private:
   PTexture m_texture;
   typedef std::vector<Particle2d> Particles;
   Particles m_particles;
-  AmjuGL::Tris m_tris;
+  //AmjuGL::Tris m_tris;
+  RCPtr<TriListDynamic> m_triList;
   int m_numParticles;
   // Max time for all particles - after this, HandleDeadParticle is called
   float m_maxTime;
