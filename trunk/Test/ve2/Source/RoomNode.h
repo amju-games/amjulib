@@ -2,6 +2,7 @@
 #define ROOM_NODE_H_INCLUDED
 
 #include <AmjuGL.h>
+#include <TriList.h>
 #include <SceneNode.h>
 
 namespace Amju
@@ -16,7 +17,7 @@ public:
   void Build();
 
 private:
-  AmjuGL::Tris m_tris;
+  RCPtr<TriListStatic> m_triList;
   Room* m_room;
 };
 }

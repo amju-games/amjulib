@@ -42,18 +42,20 @@ void Sprite::Draw(const Vec2f& pos, float size)
 {
   m_seq.Bind();
  
-  //AmjuGL::PushMatrix();
-
   AmjuGL::Tri t[2];
-  m_seq.MakeTris(m_cellNum, size, t, pos.x, pos.y);
+  m_seq.MakeTris(m_cellNum, size, t, 0, 0); //pos.x, pos.y);
   AmjuGL::Tris tris;
   tris.reserve(2);
   tris.push_back(t[0]);
   tris.push_back(t[1]);
+  m_triList->Set(tris); // TODO Only when cellNum changes
 
-  AmjuGL::DrawTriList(tris);  
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(pos.x, 0, pos.y);
 
-  //AmjuGL::PopMatrix();
+  AmjuGL::Draw(m_triList);
+
+  AmjuGL::PopMatrix();
 }
 
 void Sprite::Update()
@@ -84,6 +86,9 @@ bool Sprite::Load(const std::string& texFilename, int numCellsX, int numCellsY, 
     return false;
   }
   m_size = Vec2f(cellSizeX, cellSizeY);
+
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
+
   return true;
 }
 
@@ -95,11 +100,15 @@ void LayerSprite::AddLayer(const SpriteLayer& layer)
 void LayerSprite::DrawLayers(const Vec2f& pos, float size)
 {
   AmjuGL::Tri t[2];
-  m_seq.MakeTris(m_cellNum, size, t, pos.x, pos.y);
+  m_seq.MakeTris(m_cellNum, size, t, 0, 0); //pos.x, pos.y);
   AmjuGL::Tris tris;
   tris.reserve(2);
   tris.push_back(t[0]);
   tris.push_back(t[1]);
+  m_triList->Set(tris); // TODO Only when cellNum changes
+
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(pos.x, 0, pos.y);
 
   for (LayerMap::iterator it = m_map.begin(); it != m_map.end(); ++it)
   {
@@ -115,9 +124,11 @@ void LayerSprite::DrawLayers(const Vec2f& pos, float size)
  
     PushColour();
     MultColour(layer.colour);
-    AmjuGL::DrawTriList(tris);
+    AmjuGL::Draw(m_triList);
     PopColour();  
   }
+
+  AmjuGL::PopMatrix();
 }
 
 void LayerSprite::SetLayerTex(int layer, int texIndex)
