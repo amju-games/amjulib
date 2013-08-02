@@ -24,6 +24,7 @@ static void OnOKButton()
   TheGSObjMesh::Instance()->OnOKButton();
 }
 
+/*
 static void OnDoubleClick(const std::string& filename)
 {
   TheGSObjMesh::Instance()->SetFile(filename);
@@ -34,6 +35,7 @@ static void OnSingleClick(const std::string& filename)
 {
   TheGSObjMesh::Instance()->SetFile(filename);
 }
+*/
 
 static void OnCancelButton()
 {
