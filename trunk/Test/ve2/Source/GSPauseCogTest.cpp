@@ -74,10 +74,12 @@ static void OnRestartYes()
   TheGSPauseCogTest::Instance()->GoBack();
 }
 
+/*
 static void OnRestartThisTest()
 {
   TheLurker::Instance()->ShowYesNo("Are you sure you want to restart this test?", LURK_FG, LURK_BG, OnNoDoNothing, OnRestartYes);
 }
+*/
 
 GSPauseCogTest::GSPauseCogTest()
 {
