@@ -2,12 +2,12 @@
 #define SHADOW_MAP_H
 
 #include <AmjuGL.h>
-#include <Drawable.h>
+#include "DrawDecorator.h"
 
 namespace Amju
 {
 // Render using a Shadow Map
-class ShadowMap : public Drawable
+class ShadowMap : public DrawDecorator
 {
 public:
   void SetLightPos(const AmjuGL::Vec3& lp) { m_lightPos = lp; }

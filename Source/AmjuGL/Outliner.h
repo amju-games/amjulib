@@ -1,7 +1,7 @@
 #ifndef AMJU_GL_OUTLINER_H_INCLUDED
 #define AMJU_GL_OUTLINER_H_INCLUDED
 
-#include <Drawable.h>
+#include <DrawDecorator.h>
 
 namespace Amju
 {
@@ -13,7 +13,7 @@ namespace Amju
 
 // For now
 // Draws an outline around whatever is drawn
-class Outliner : public Drawable
+class Outliner : public DrawDecorator
 {
 public:
   // Pass this ID to AmjuGL::Create
