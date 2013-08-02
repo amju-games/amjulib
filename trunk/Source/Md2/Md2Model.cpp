@@ -47,6 +47,8 @@ Md2Model::Md2Model()
 {
   AMJU_CALL_STACK;
 
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
+
   // Map of animation lengths: This is used if the MD2 data
   // contains valid frame names. This allows us to have non-standard animation 
   // lengths.
@@ -772,8 +774,8 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
     }
 
     // Create a list of tris for the current command 
-    m_tris.reserve(numTris);
-    m_tris.clear();
+    AmjuGL::Tris tris;
+    tris.reserve(numTris);
 
     glcs++;
 
@@ -807,7 +809,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[even ? 0 : 1]; 
           t.m_verts[1] = prevVerts[even ? 1 : 0]; 
           t.m_verts[2] = av; 
-          m_tris.push_back(t);
+          tris.push_back(t);
         }
 
         // Shift previous values
@@ -828,7 +830,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[0]; 
           t.m_verts[1] = prevVerts[1]; 
           t.m_verts[2] = av; 
-          m_tris.push_back(t);
+          tris.push_back(t);
         }
         prevVerts[1] = av;
       }
@@ -855,7 +857,11 @@ for (int i = 0; i < numTris; i++)
 }
 */
 
-    AmjuGL::DrawTriList(m_tris);
+////    AmjuGL::DrawTriList(m_tris);
+ 
+    m_triList->Set(tris);
+    AmjuGL::Draw(m_triList);
+
   } // while (1)
 #endif // USE_MODIFIED_GL_COMMANDS
 
