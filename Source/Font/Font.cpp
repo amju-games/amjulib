@@ -184,6 +184,45 @@ float Font::GetTextWidth(const std::string& s)
   return f;
 }
 
+void Font::BindTexture()
+{
+  m_textureSequence.Bind();
+}
+
+TriList* Font::MakeTriList(float x, float y, const char* text, float scaleX)
+{
+  AMJU_CALL_STACK;
+  
+  Assert(text);
+  
+  AmjuGL::Tris tris;
+  
+  if (*text == 0)
+  {
+    // Empty string
+    return Amju::MakeTriList(tris);
+  }
+  
+  float oldSizeX = m_textureSequence.GetSizeX();
+  float sizeY = m_textureSequence.GetSizeY();
+  
+  m_textureSequence.SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
+  
+  float xOff = x;
+  float yOff = y;
+  int i = 0;
+  while (unsigned char c = text[i++])
+  {
+    AmjuGL::Tri t[2];
+    m_textureSequence.MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
+    tris.push_back(t[0]);
+    tris.push_back(t[1]);
+    xOff += GetCharacterWidth(c) * scaleX;
+  }
+  m_textureSequence.SetSize(oldSizeX, sizeY);
+  return Amju::MakeTriList(tris);
+}
+  
 void Font::Print(float x, float y, const char* text, float scaleX)
 {
   AMJU_CALL_STACK;
@@ -219,6 +258,7 @@ void Font::Print(float x, float y, const char* text, float scaleX)
     tris.push_back(t[1]);
     xOff += GetCharacterWidth(c) * scaleX;
   }
+  
   AmjuGL::DrawTriList(tris);
 
   AmjuGL::PopMatrix();
