@@ -405,6 +405,13 @@ void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
   impl->DrawLine(v1, v2);
 }
 
+void AmjuGL::Draw(Drawable* drawable)
+{
+  AMJU_CALL_STACK;
+
+  drawable->Draw();
+}
+
 void AmjuGL::GetMatrix(MatrixMode m, float result[16])
 {
   AMJU_CALL_STACK;

@@ -9,8 +9,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <string>
 #include <vector>
 #include <AmjuTypes.h>
-#include "Colour.h"
 #include "Drawable.h"
+#include "Colour.h"
 
 #ifdef CreateWindow
 #undef CreateWindow
@@ -145,6 +145,8 @@ public:
   static void SetColour(float r, float g, float b, float a = 1.0f);
   static void SetColour(const Colour& colour);
 
+  static void Draw(Drawable* drawable);
+
   // Draw line in current colour between 2 absolute coords
   static void DrawLine(const Vec3& v1, const Vec3& v2);
 
@@ -194,10 +196,6 @@ public:
   // Get the current value of the given matrix
   static void GetMatrix(MatrixMode, float result[16]);
 
-  // Set the given matrix to the given values
-  // TODO
-  //static void SetMatrix(MatrixMode, float result[16]);
-
   // Multiply the currently selected matrix by the given matrix
   static void MultMatrix(const float matrix[16]);
 
@@ -207,8 +205,7 @@ public:
   static void Enable(uint32 flags);
   static void Disable(uint32 flags);
 
-
-  // Texture management
+  // Textures
 
   // Used to refer to texture 
   typedef unsigned int TextureHandle;
@@ -271,6 +268,7 @@ public:
   static Drawable* Create(int drawableTypeId);
 
 }; // struct AmjuGL
+
 } // namespace Amju
 
 #endif
