@@ -12,9 +12,10 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <utility>
 #include <string>
 #include <vector>
-#include "RCPtr.h"
-#include "Endian.h"
-#include "AmjuGL.h"
+#include <TriList.h>
+#include <RCPtr.h>
+#include <Endian.h>
+#include <AmjuGL.h>
 
 namespace Amju
 {
@@ -240,7 +241,8 @@ protected:
 
   // Mesh data sent to AmjuGL
   // This changes every frame but by making it a member we don't keep reallocating.
-  AmjuGL::Tris m_tris;
+  //AmjuGL::Tris m_tris;
+  RCPtr<TriListDynamic> m_triList;
 };
 
 typedef RCPtr<Md2Model> PMd2Model;
