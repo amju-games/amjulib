@@ -1,7 +1,8 @@
 #include <AmjuFirst.h>
 #include "DrawRect.h"
 #include "Rect.h"
-#include "AmjuGL.h"
+#include <AmjuGL.h>
+#include <TriList.h>
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -29,7 +30,10 @@ void DrawSolidRect(const Rect& r)
   t.m_verts[2] = AmjuGL::Vert(xmin, ymax, 0, 0, 0,  0, -1, 0);
   tris.push_back(t);
 
-  AmjuGL::DrawTriList(tris);
+  static RCPtr<TriListDynamic> triList = (TriListDynamic*)
+    AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
+  triList->Set(tris);
+  AmjuGL::Draw(triList);
 }
 
 void DrawRect(const Rect& r)
