@@ -188,12 +188,7 @@ ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
 #endif
 }
 
-Drawable* AmjuGLOpenGLBase::Create(int typeId)
-{
-  // Populate this in Ctor
-  return TheDrawableFactory::Instance()->Create(typeId);
 }
 
-}
 
 

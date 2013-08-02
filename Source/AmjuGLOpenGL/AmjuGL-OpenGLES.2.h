@@ -11,6 +11,7 @@ namespace Amju
 class AmjuGLOpenGLES2 : public AmjuGLOpenGLBase
 {
 public:
+  AmjuGLOpenGLES2();
   virtual void Init();
   
   virtual void Enable(uint32 flags);
@@ -75,7 +76,9 @@ public:
     const AmjuGL::LightColour& lightAmbient,
     const AmjuGL::LightColour& lightDiffuse,
     const AmjuGL::LightColour& lightSpecular,
-    const AmjuGL::Vec3& lightPos);    
+    const AmjuGL::Vec3& lightPos);
+  
+  virtual Drawable* Create(int drawableTypeId);
 };
 }
 

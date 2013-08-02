@@ -16,6 +16,7 @@ extern "C"
 //#include <GLKit/GLKEffects.h> // can't - includes obj-c stuff  
 }
 #include <AmjuGL.h>
+#include <TriList.h>
 #include "GLShader.h"
 #include "AmjuGL-OpenGLES.2.h"
 #include "ES2DefaultShaders.h"
@@ -50,7 +51,204 @@ static GLShader* s_defaultShader = 0; // TODO TEMP TEST
 // texture coords to the graphics card.
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
-	
+
+
+static DrawableFactory s_factory;
+
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+    
+class TriListStaticES2 : public TriListStatic
+{
+public:
+  TriListStaticES2()
+  {
+    m_numVerts = 0;
+    glGenVertexArraysOES(1, &m_vertexArray);
+    glGenBuffers(1, &m_vertexBuffer);    
+  }
+ 
+  ~TriListStaticES2()
+  {
+    glDeleteBuffers(1, &m_vertexBuffer);
+    glDeleteVertexArraysOES(1, &m_vertexArray);
+  }
+
+  virtual void Draw()
+  {
+    // TODO only change these when necessary.
+    // TODO Check for using default shader or a different one
+    GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+    GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+  
+    // Inverse transpose of modelview matrix to rotate normals
+    GLKMatrix3 _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+    // Moldeview * projection matrix for world transforms
+    GLKMatrix4 _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+  
+    glActiveTexture(GL_TEXTURE0);
+  
+    s_defaultShader->Begin();
+    s_defaultShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, _modelViewProjectionMatrix.m);
+    s_defaultShader->Set("Texture", (AmjuGL::TextureHandle)0); // glUniform1i(_textureUniform, 0);
+    s_defaultShader->Set("colour", s_colour);
+
+    glBindVertexArrayOES(m_vertexArray);
+    glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    m_numVerts = tris.size() * 3;
+
+    glBindVertexArrayOES(m_vertexArray);
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW);
+
+    // This should probably go in Draw
+    const int STRIDE = sizeof(AmjuGL::Vert);
+  
+    int vertexAttribPosition = glGetAttribLocation(s_defaultShader->GetProgHandle(), "position");
+    int vertexAttribNormal = glGetAttribLocation(s_defaultShader->GetProgHandle(), "normal");
+    int vertexAttribTexCoord0 = glGetAttribLocation(s_defaultShader->GetProgHandle(), "uv");
+  
+    glEnableVertexAttribArray(vertexAttribPosition);
+    glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
+  
+    glEnableVertexAttribArray(vertexAttribNormal);
+    glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
+  
+    glEnableVertexAttribArray(vertexAttribTexCoord0);
+    glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
+
+    glBindVertexArrayOES(0);
+  }
+
+  virtual bool Init() { return true; }
+
+private:
+  GLuint m_vertexArray;
+  GLuint m_vertexBuffer;
+  int m_numVerts;
+};
+
+
+class TriListDynamicES2 : public TriListStatic
+{
+public:
+  TriListDynamicES2()
+  {
+    m_firstSet = true;
+    m_numVerts = 0;
+    glGenVertexArraysOES(1, &m_vertexArray);
+    glGenBuffers(1, &m_vertexBuffer);
+  }
+  
+  ~TriListDynamicES2()
+  {
+    glDeleteBuffers(1, &m_vertexBuffer);
+    glDeleteVertexArraysOES(1, &m_vertexArray);
+  }
+  
+  virtual void Draw()
+  {
+    // TODO only change these when necessary.
+    // TODO Check for using default shader or a different one
+    GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+    GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+    
+    // Inverse transpose of modelview matrix to rotate normals
+    GLKMatrix3 _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+    // Moldeview * projection matrix for world transforms
+    GLKMatrix4 _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    
+    glActiveTexture(GL_TEXTURE0);
+    
+    s_defaultShader->Begin();
+    s_defaultShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, _modelViewProjectionMatrix.m);
+    s_defaultShader->Set("Texture", (AmjuGL::TextureHandle)0); // glUniform1i(_textureUniform, 0);
+    s_defaultShader->Set("colour", s_colour);
+    
+    glBindVertexArrayOES(m_vertexArray);
+    glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    if (m_firstSet)
+    {
+      m_firstSet = false;
+      
+      m_numVerts = tris.size() * 3;
+      
+      glBindVertexArrayOES(m_vertexArray);
+      
+      glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+      glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW);
+      
+      // This should probably go in Draw
+      const int STRIDE = sizeof(AmjuGL::Vert);
+      
+      int vertexAttribPosition = glGetAttribLocation(s_defaultShader->GetProgHandle(), "position");
+      int vertexAttribNormal = glGetAttribLocation(s_defaultShader->GetProgHandle(), "normal");
+      int vertexAttribTexCoord0 = glGetAttribLocation(s_defaultShader->GetProgHandle(), "uv");
+      
+      glEnableVertexAttribArray(vertexAttribPosition);
+      glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
+      
+      glEnableVertexAttribArray(vertexAttribNormal);
+      glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
+      
+      glEnableVertexAttribArray(vertexAttribTexCoord0);
+      glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
+      
+      glBindVertexArrayOES(0);
+      
+    }
+    else
+    {
+      // Must have same number of tris, right?
+      Assert(tris.size() * 3 == m_numVerts);
+      
+      glBindVertexArrayOES(m_vertexArray);
+      
+      glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+      glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x));
+//      (GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW);
+
+    }
+  }
+
+  virtual bool Init() { return true; }
+
+private:
+  GLuint m_vertexArray;
+  GLuint m_vertexBuffer;
+  int m_numVerts;
+  bool m_firstSet;
+};
+
+static Drawable* MakeStaticTriList()
+{
+  return new TriListStaticES2;
+}
+
+static Drawable* MakeDynamicTriList()
+{
+  return new TriListDynamicES2;
+}
+
+AmjuGLOpenGLES2::AmjuGLOpenGLES2()
+{
+  s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
+  s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+}
+
+Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
+{
+  return s_factory.Create(drawableTypeId);
+}
+  
 void AmjuGLOpenGLES2::Init()
 {
   AmjuGLOpenGLBase::Init();
@@ -351,8 +549,6 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
   }
 }
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
- 
 void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
 {
 /*
@@ -378,7 +574,6 @@ void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
   GLKMatrix4 _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
   
   glActiveTexture(GL_TEXTURE0);
-//  glBindTexture(GL_TEXTURE_2D,
   
   s_defaultShader->Begin();
   s_defaultShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, _modelViewProjectionMatrix.m);
