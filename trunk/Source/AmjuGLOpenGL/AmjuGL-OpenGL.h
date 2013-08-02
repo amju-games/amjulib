@@ -95,6 +95,8 @@ public:
   virtual Shader* LoadShader(const std::string& shaderFileName);
 
   virtual void SetTextureType(AmjuGL::TextureType tt);
+
+  virtual Drawable* Create(int drawableTypeId);
 }; // class 
 
 } // namespace Amju

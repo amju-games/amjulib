@@ -44,8 +44,6 @@ public:
 
   virtual ShadowMap* CreateShadowMap();
 
-  virtual Drawable* Create(int);
-
 protected:
   friend class GLShader;
   // True if shaders are supported on this machine

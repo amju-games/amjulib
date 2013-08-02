@@ -12,6 +12,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #include <iostream>
 //#include "GL/glew.h"
+#include <TriList.h>
 #include "AmjuGL-OpenGL.h"
 #include "GLShader.h"
 #include "ShaderNull.h"
@@ -27,6 +28,57 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
+static DrawableFactory m_factory;
+
+class TriListStaticOpenGL : public TriListStatic
+{
+public:
+  // TODO Use display list
+  virtual void Draw()
+  {
+    AmjuGL::DrawTriList(m_tris);
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+  
+  virtual bool Init() { return true; }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+class TriListDynamicOpenGL : public TriListStatic
+{
+public:
+  virtual void Draw()
+  {
+    AmjuGL::DrawTriList(m_tris);
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+  
+  virtual bool Init() { return true; }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+static Drawable* MakeStaticTriList()
+{
+  return new TriListStaticOpenGL;
+}
+
+static Drawable* MakeDynamicTriList()
+{
+  return new TriListDynamicOpenGL;
+}
+
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
@@ -36,6 +88,14 @@ AmjuGLOpenGL::WindowCreateFunc windowCreateFunc = 0;
 AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
 {
   windowCreateFunc = f;
+
+  m_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
+  m_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+}
+
+Drawable* AmjuGLOpenGL::Create(int drawableTypeId)
+{
+  return m_factory.Create(drawableTypeId);
 }
 
 bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* wi)
