@@ -23,6 +23,8 @@ ParticleEffect2d::ParticleEffect2d()
   m_isDead = true; // ?
 
   SetBlended(true);
+
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
 }
 
 bool ParticleEffect2d::Load(File* f)
@@ -48,7 +50,7 @@ bool ParticleEffect2d::Load(File* f)
     return false;
   }
 
-  m_tris.resize(m_numParticles * 2);
+  //m_tris.resize(m_numParticles * 2);
   m_particles.resize(m_numParticles);
 
   return true;
@@ -61,11 +63,6 @@ void ParticleEffect2d::Draw()
     return;
   }
 
-  if (m_tris.empty())
-  {
-    return;
-  }
-
   // TODO Also push lighting and blend state ?
   AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_WRITE);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
@@ -74,7 +71,10 @@ void ParticleEffect2d::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
-  AmjuGL::DrawTriList(m_tris);
+
+//  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::Draw(m_triList);
+ 
   AmjuGL::PopMatrix();
   AmjuGL::PopAttrib();
 }
@@ -117,16 +117,10 @@ void ParticleEffect2d::Update()
     return;
   }
 
-  if (m_tris.empty())
-  {
-    return;
-  }
-
   float dt = TheTimer::Instance()->GetDt();
   bool isDead = true;
 
   int s = m_particles.size();
-  Assert(m_tris.size() == (unsigned int)(2 * s));
 
   for (int i = 0; i < s; i++)
   {
@@ -155,6 +149,9 @@ void ParticleEffect2d::Update()
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
 
+  AmjuGL::Tris tris;
+  tris.resize(s * 2);
+
   for (int i = 0; i < s; i++)
   {
     Particle2d& p = m_particles[i];
@@ -172,16 +169,18 @@ void ParticleEffect2d::Update()
       AmjuGL::Vert(v3.x, v3.y, v3.z,   0, 0,   0, 1, 0)
     };
 
-    AmjuGL::Tri* tri = &m_tris[i * 2];
+    AmjuGL::Tri* tri = &tris[i * 2];
     tri->m_verts[0] = verts[0];
     tri->m_verts[1] = verts[1];
     tri->m_verts[2] = verts[2];
 
-    tri = &m_tris[i * 2 + 1];
+    tri = &tris[i * 2 + 1];
     tri->m_verts[0] = verts[0];
     tri->m_verts[1] = verts[2];
     tri->m_verts[2] = verts[3];
   }
+
+  m_triList->Set(tris);
 }
 
 void ParticleEffect2d::Start()

@@ -11,6 +11,7 @@ Billboard::Billboard()
 {
   m_size = 0;
   SetBlended(true);
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
 }
 
 void Billboard::SetTexture(Texture* tex)
@@ -51,7 +52,8 @@ void Billboard::Draw()
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
 
-  m_tris.resize(2);
+  AmjuGL::Tris tris;
+  tris.resize(2);
 
   Vec3f v0 = ( up + right) * m_size;
   Vec3f v1 = ( up - right) * m_size;
@@ -66,22 +68,26 @@ void Billboard::Draw()
     AmjuGL::Vert(v3.x, v3.y, v3.z,   0, 0,   0, 1, 0)
   };
 
-  AmjuGL::Tri* tri = &m_tris[0];
+  AmjuGL::Tri* tri = &tris[0];
   tri->m_verts[0] = verts[0];
   tri->m_verts[1] = verts[1];
   tri->m_verts[2] = verts[2];
 
-  tri = &m_tris[1];
+  tri = &tris[1];
   tri->m_verts[0] = verts[0];
   tri->m_verts[1] = verts[2];
   tri->m_verts[2] = verts[3];
 
+  m_triList->Set(tris);
+ 
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE); // TODO have a member flag
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
-  AmjuGL::DrawTriList(m_tris);
+//  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::Draw(m_triList);
+
   AmjuGL::PopMatrix();
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);
 }

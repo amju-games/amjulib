@@ -5,10 +5,11 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #ifndef SHADOW_H
 #define SHADOW_H
 
-#include "AmjuGL.h"
-#include "Vec2.h"
-#include "Vec3.h"
-#include "Texture.h"
+#include <AmjuGL.h>
+#include <TriList.h>
+#include <Vec2.h>
+#include <Vec3.h>
+#include <Texture.h>
 #include "SceneNode.h"
 #include <CollisionMesh.h>
 
@@ -110,13 +111,16 @@ protected:
   // But shadow is quad, ground polys are tris, so max verts is 6?
   struct Polygon
   {
+    Polygon();
+
     void Draw();
     void AddVertex(const AmjuGL::Vert& v);
     // Call once all vertices have been added
     void Tesselate();
  
     // Tesselated
-    AmjuGL::Tris m_tris;
+//    AmjuGL::Tris m_tris;
+    RCPtr<TriListDynamic> m_triList;
 
     std::vector<AmjuGL::Vert> m_verts; // 6 max, maybe use array instead ?
  };

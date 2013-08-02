@@ -29,27 +29,37 @@ static const float HEIGHT_RANGE_UP = 100.0f;
 
 float Shadow::s_offset = 1.0f; 
 
+Shadow::Polygon::Polygon()
+{
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
+}
+
 void Shadow::Polygon::Tesselate()
 {
   AMJU_CALL_STACK;
 
   int numVerts = m_verts.size();
   const AmjuGL::Vert firstVert = m_verts[0];
+
+  AmjuGL::Tris tris;
   for (int i = 1; i < numVerts - 1; i++)
   {
     AmjuGL::Tri tri;
     tri.m_verts[0] = firstVert;
     tri.m_verts[1] = m_verts[i];
     tri.m_verts[2] = m_verts[i + 1];
-    m_tris.push_back(tri);
+    tris.push_back(tri);
   }
+
+  m_triList->Set(tris);
 }
 
 void Shadow::Polygon::Draw()
 {
   AMJU_CALL_STACK;
 
-  AmjuGL::DrawTriList(m_tris);
+//  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::Draw(m_triList);
 
 #ifdef SHADOW_DEBUG
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
