@@ -4,6 +4,7 @@
 #include <TextureSequence.h>
 #include <Vec2.h>
 #include <Colour.h>
+#include <TriList.h>
 
 namespace Amju
 {
@@ -31,6 +32,7 @@ protected:
   float m_maxCellTime;
   float m_cellTime;
   Vec2f m_size;
+  RCPtr<TriListDynamic> m_triList;
 };
 
 // Sprite composed of layers
