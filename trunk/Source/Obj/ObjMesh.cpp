@@ -63,6 +63,21 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
 
 void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
 {
+/*
+  // Clear triangle data if no coll mesh required
+  if (!pCollMesh)
+  {
+    for (Groups::iterator it = m_groups.begin();
+         it != m_groups.end();
+         ++it)
+    {
+      Group& g = it->second;
+      g.m_tris.clear();
+    }
+    return;
+  }
+*/
+
   // Iterate over groups once to count how many faces there are;
   // then iterate again to convert each one to a tri.
   // Don't add tris for groups whose material has 'no collide' flag set.
@@ -652,11 +667,12 @@ if (m_uvs.empty())
     }
     g.m_tris.push_back(t);
   }
+  g.m_triList = MakeTriList(g.m_tris);
 }
 
 void ObjMesh::DrawGroup(Group& g)
 {
-  if (g.m_tris.empty() || !g.IsVisible())
+  if (!g.IsVisible())
   {
     return;
   }
@@ -669,7 +685,8 @@ void ObjMesh::DrawGroup(Group& g)
     mat.UseThisMaterial();
   }
 
-  AmjuGL::DrawTriList(g.m_tris);
+//  AmjuGL::DrawTriList(g.m_tris);
+  AmjuGL::Draw(g.m_triList);
 }
 
 void ObjMesh::Merge(const ObjMesh& om)
@@ -711,6 +728,7 @@ void ObjMesh::Transform(const Matrix& mat)
         v.m_nz = vn.z;
       }
     }
+    g.m_triList = MakeTriList(g.m_tris);
   }
 }
 

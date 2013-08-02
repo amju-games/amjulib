@@ -7,7 +7,8 @@
 #include "Vec3.h"
 #include "Vec2.h"
 #include <AABB.h>
-#include "AmjuGL.h"
+#include <AmjuGL.h>
+#include <TriList.h>
 #include <Texture.h>
 
 namespace Amju
@@ -72,7 +73,8 @@ struct Group
   bool m_collidable;
   std::string m_name;
   std::string m_materialName; // TODO int index
-  AmjuGL::Tris m_tris;
+  AmjuGL::Tris m_tris; // argh, we need this to make collision mesh
+  RCPtr<TriListStatic> m_triList;
   AABB m_aabb;
 };
 
