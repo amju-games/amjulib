@@ -29,11 +29,6 @@ static const int MAX_LETTERS = 6 * 52; // size of grid, from Malec et al
 //static const int NUM_M = 32; // from Malec et al, number of letters in grid to find
 static const float MAX_TIME = 180.0f; // 3 mins, from Malec et al
 
-static void OnDoneButton()
-{
-  TheGSLetterCancellation::Instance()->Finished();
-}
-
 static void StartLC()
 {
   TheGSLetterCancellation::Instance()->StartTest();
