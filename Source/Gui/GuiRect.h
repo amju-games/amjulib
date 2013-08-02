@@ -3,6 +3,7 @@
 
 #include <AmjuGL.h>
 #include <Colour.h>
+#include <TriList.h>
 #include "GuiElement.h"
 
 namespace Amju
@@ -29,7 +30,8 @@ protected:
   void BuildTris();
 
 protected:
-  AmjuGL::Tris m_tris;
+//  AmjuGL::Tris m_tris;
+  RCPtr<TriListStatic> m_triList;
   float m_cornerRadius;
   Vec2f m_oldPos;
   Vec2f m_oldSize;

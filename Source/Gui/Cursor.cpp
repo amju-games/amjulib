@@ -28,17 +28,20 @@ Cursor::Cursor() : m_id(-1)
     AmjuGL::Vert(-W, -H, 0,   0, 0,   0, 1, 0)
   };
 
-  m_tris.reserve(2);
+  AmjuGL::Tris tris;
+  tris.reserve(2);
   AmjuGL::Tri tri;
   tri.m_verts[0] = verts[0];
   tri.m_verts[1] = verts[1];
   tri.m_verts[2] = verts[2];
-  m_tris.push_back(tri);
+  tris.push_back(tri);
 
   tri.m_verts[0] = verts[0];
   tri.m_verts[1] = verts[2];
   tri.m_verts[2] = verts[3];
-  m_tris.push_back(tri);
+  tris.push_back(tri);
+
+  m_triList = MakeTriList(tris);
 }
 
 const Vec2f& Cursor::GetPos() const
@@ -95,7 +98,8 @@ void Cursor::Draw()
     AmjuGL::Translate(m_pos.x + m_hotspot.x, m_pos.y + m_hotspot.y, 0);
     // Rotate cursor
     AmjuGL::RotateZ(m_rot);
-    AmjuGL::DrawTriList(m_tris);
+//    AmjuGL::DrawTriList(m_tris);
+    AmjuGL::Draw(m_triList);
     AmjuGL::PopMatrix();
   }
 }

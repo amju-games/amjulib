@@ -53,7 +53,8 @@ void GuiRect::Draw()
 
   PushColour();
   AmjuGL::SetColour(m_colour);
-  AmjuGL::DrawTriList(m_tris);
+////  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::Draw(m_triList);
   PopColour();
 }
 
@@ -61,8 +62,8 @@ void GuiRect::BuildTris()
 {
   Vec2f size = GetSize();
   Vec2f pos = GetCombinedPos();
-  
-  m_tris.clear();
+
+  AmjuGL::Tris tris;  
   AmjuGL::Tri tri;
 
   if (m_cornerRadius < 0.0001f || m_flags == 0x0f)
@@ -76,16 +77,16 @@ void GuiRect::BuildTris()
       AmjuGL::Vert(pos.x, pos.y - size.y, 0,            0.5, 0.5,   0, 1, 0)
     };
 
-    m_tris.reserve(2);
+    tris.reserve(2);
     tri.m_verts[0] = verts[0];
     tri.m_verts[1] = verts[1];
     tri.m_verts[2] = verts[2];
-    m_tris.push_back(tri);
+    tris.push_back(tri);
 
     tri.m_verts[0] = verts[0];
     tri.m_verts[1] = verts[2];
     tri.m_verts[2] = verts[3];
-    m_tris.push_back(tri);
+    tris.push_back(tri);
   }
   else
   {
@@ -148,33 +149,35 @@ void GuiRect::BuildTris()
       v[15].m_u = v[15].m_v = 0.5f;
     }
  
-    m_tris.reserve(14);
-    m_tris.push_back(AmjuGL::Tri(v[5], v[1], v[0]));
-    m_tris.push_back(AmjuGL::Tri(v[5], v[0], v[4]));
+    tris.reserve(14);
+    tris.push_back(AmjuGL::Tri(v[5], v[1], v[0]));
+    tris.push_back(AmjuGL::Tri(v[5], v[0], v[4]));
 
-    m_tris.push_back(AmjuGL::Tri(v[7], v[3], v[2]));
-    m_tris.push_back(AmjuGL::Tri(v[7], v[2], v[6]));
+    tris.push_back(AmjuGL::Tri(v[7], v[3], v[2]));
+    tris.push_back(AmjuGL::Tri(v[7], v[2], v[6]));
 
-    m_tris.push_back(AmjuGL::Tri(v[13], v[9], v[8]));
-    m_tris.push_back(AmjuGL::Tri(v[13], v[8], v[12]));
+    tris.push_back(AmjuGL::Tri(v[13], v[9], v[8]));
+    tris.push_back(AmjuGL::Tri(v[13], v[8], v[12]));
 
-    m_tris.push_back(AmjuGL::Tri(v[15], v[11], v[10]));
-    m_tris.push_back(AmjuGL::Tri(v[15], v[10], v[14]));
+    tris.push_back(AmjuGL::Tri(v[15], v[11], v[10]));
+    tris.push_back(AmjuGL::Tri(v[15], v[10], v[14]));
 
     for (int i = 0; i < 16; i++)
     {
       v[i].m_u = v[i].m_v = 0.5f;
     }
 
-    m_tris.push_back(AmjuGL::Tri(v[6], v[2], v[1]));
-    m_tris.push_back(AmjuGL::Tri(v[6], v[1], v[5]));
+    tris.push_back(AmjuGL::Tri(v[6], v[2], v[1]));
+    tris.push_back(AmjuGL::Tri(v[6], v[1], v[5]));
 
-    m_tris.push_back(AmjuGL::Tri(v[11], v[7], v[4]));
-    m_tris.push_back(AmjuGL::Tri(v[11], v[4], v[8]));
+    tris.push_back(AmjuGL::Tri(v[11], v[7], v[4]));
+    tris.push_back(AmjuGL::Tri(v[11], v[4], v[8]));
 
-    m_tris.push_back(AmjuGL::Tri(v[14], v[10], v[9]));
-    m_tris.push_back(AmjuGL::Tri(v[14], v[9], v[13]));
+    tris.push_back(AmjuGL::Tri(v[14], v[10], v[9]));
+    tris.push_back(AmjuGL::Tri(v[14], v[9], v[13]));
   }
+
+  m_triList = MakeTriList(tris);
 }
 
 bool GuiRect::Load(File* f)
