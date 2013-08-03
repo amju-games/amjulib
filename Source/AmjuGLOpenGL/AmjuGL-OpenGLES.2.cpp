@@ -340,44 +340,21 @@ void AmjuGLOpenGLES2::SetTexture(
 	AMJU_CALL_STACK;
 	
 	glGenTextures(1, (GLuint*)th);
-	
-	glBindTexture(GL_TEXTURE_2D, *th);
-	
-	glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, *th);
 	
 	int wrapmode = GL_REPEAT;
-	/*
-	bool wrap = true; // TODO
-	if (!wrap)
-	{
-		wrapmode = GL_CLAMP;
-	}
-	 */
 	
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode);
-	
-	// These modes only work if you have set up mipmaps I should expect!!!! Duh!!
-	
-	// New code: changed to use mipmaps
-
-	
+		
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//_MIPMAP_LINEAR);
-	
-	// Bad quality(?) but works if no mipmaps set up
-	//glTexParameterf(GL_TEXTURE_2D, 
-	//				GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameterf(GL_TEXTURE_2D,
-	//				GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	
 	// Allowed values for min filter:
 	// GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST,
 	// GL_NEAREST_MIPMAP_LINEAR, GL_LINEAR_MIPMAP_LINEAR
-	
-	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
 	// Different depending on RGB or RGBA.
 	if (d == AmjuGL::AMJU_RGB)
@@ -408,7 +385,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// TODO Compressed textures -- "PVRT" formats
 	
 	// Build mipmaps
- // glGenerateMipmap(GL_TEXTURE_2D);
+  glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
