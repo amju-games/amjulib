@@ -381,16 +381,6 @@ void GSMain::DoMoveRequest()
   {
     return;
   }
-
-#ifdef IPHONE
-    // This rotate is for the Unproject calls later (in PickObject and GetMouseToGroundPos).
-    // The mouse coord is rotated by the time we get here, so this rotates it back.
-    
-//    std::cout << "Before: ms.x: " << mouseScreen.x << ", ms.y: " << mouseScreen.y << "\n";
-    std::swap(mouseScreen.y, mouseScreen.x);
-    mouseScreen.x = -mouseScreen.x;
-//    std::cout << "After: ms.x: " << mouseScreen.x << ", ms.y: " << mouseScreen.y << "\n";
-#endif
         
   GameObject* selectedObj = PickObject(mouseScreen);
 
