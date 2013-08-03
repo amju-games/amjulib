@@ -13,7 +13,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <StringUtils.h> // For debug reporting state
 #include <AmjuFinal.h>
 
-//#define LANDSCAPE_DEBUG
+// NB LANDSCAPE is no longer used
 
 namespace Amju
 {
@@ -286,6 +286,11 @@ std::cout << " =>  x: " << x2 << " y: " << y2 << " w: " << w2 << " h: " << h2 <<
   {
     return;
   }
+
+#ifdef VIEWPORT_DEBUG
+std::cout << "Viewport: x: " << x << " y: " << y << " w: " << w << " h: " << h
+    << " Screen X: " << Screen::X() << " Y: " << Screen::Y() << "\n";
+#endif
 
   impl->Viewport(x, y, w, h);
 
