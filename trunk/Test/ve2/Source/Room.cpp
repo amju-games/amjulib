@@ -265,7 +265,7 @@ bool Room::LoadGrid(int grid, File* f)
       return false;
     }
     Strings strs = Split(s, ' ');
-    if (strs.size() != m_gridsize.x)
+    if ((int)strs.size() != m_gridsize.x)
     {
       f->ReportError("Grid size does not match tile data.");
       return false;
