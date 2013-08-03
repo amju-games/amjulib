@@ -1,4 +1,6 @@
 #include <AmjuFirst.h>
+#include <AmjuGL.h>
+#include <TriList.h>
 #include "GuiText.h"
 #include "Font.h"
 #include "DrawRect.h"
@@ -213,6 +215,17 @@ void GuiText::ReallyDraw()
 
 void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 {
+  int lines = m_lines.size();
+  
+  bool rebuild = false;
+  if (m_triLists.empty())
+  {
+    rebuild = true;
+  }
+  
+  Font* font = GetFont();
+  font->BindTexture();
+  
   Vec2f pos = GetCombinedPos();
 
   float y = pos.y - m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
@@ -220,10 +233,10 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
   //  when it fits ok, because it's a borderline case.
   float minY = pos.y - GetSize().y - 0.01f;
 
-  int lines = m_lines.size();
-  for (int i = m_topLine; i < lines; i++)
+  PushColour();
+  AmjuGL::SetColour(fg);
+  for (int i = 0; i < lines; i++)
   {
-    // TODO
     std::string str = m_lines[i];
 
     float x = GetCombinedPos().x;
@@ -232,11 +245,16 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
       x += GetSize().x - GetTextWidth(str);
     }
 
-    PushColour();
-    AmjuGL::SetColour(fg);
-    PrintLine(str, x, y); 
-    PopColour();
-
+    if (rebuild)
+    {
+      TriList* triList = font->MakeTriList(x, y, str.c_str(), m_scaleX);
+      m_triLists.push_back(triList);
+      Assert(m_triLists.size() == i + 1);
+    }
+    
+    Assert(m_triLists.size() > i);
+    AmjuGL::Draw(m_triLists[i]);
+    
     y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
     // TODO Make text a window so lines will be clipped
     if (y < minY)
@@ -244,6 +262,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
       break;
     }
   }
+  PopColour();
 }
 
 void GuiText::RecalcFirstLast()
@@ -311,6 +330,7 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
       {
         m_currentChar++;
         m_currentCharTime = 0;
+        m_triList = 0; // force rebuild
       }
     }
   }
@@ -324,7 +344,13 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
 void GuiText::PrintLine(const std::string& str, float x, float y)
 {
   Font* font = GetFont();
-  font->Print(x, y, str.c_str(), m_scaleX); 
+  if (!m_triList)
+  {
+    m_triList = font->MakeTriList(x, y, str.c_str(), m_scaleX);
+  }
+  
+  font->BindTexture();
+  AmjuGL::Draw(m_triList);
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
@@ -379,6 +405,9 @@ const std::string& GuiText::GetText() const
 
 void GuiText::SetText(const std::string& text)
 {
+  m_triList = 0; // force rebuild
+  m_triLists.clear();
+  
   m_text = text;
 
   if (m_isMulti)
