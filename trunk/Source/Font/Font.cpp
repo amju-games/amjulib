@@ -11,6 +11,8 @@ Amju Games source code (c) Copyright Jason Colman 2005
 #include "AmjuAssert.h"
 #include <AmjuFinal.h>
 
+//#define FONT_DEBUG
+
 namespace Amju
 {
 static const float CHAR_SIZE = 0.2f;
@@ -192,7 +194,11 @@ void Font::BindTexture()
 TriList* Font::MakeTriList(float x, float y, const char* text, float scaleX)
 {
   AMJU_CALL_STACK;
-  
+
+#ifdef FONT_DEBUG
+std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\"\n";
+#endif
+
   Assert(text);
   
   AmjuGL::Tris tris;
@@ -225,6 +231,8 @@ TriList* Font::MakeTriList(float x, float y, const char* text, float scaleX)
   
 void Font::Print(float x, float y, const char* text, float scaleX)
 {
+  Assert(0);
+
   AMJU_CALL_STACK;
 
   Assert(text);
