@@ -750,6 +750,11 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
   const Frame& nextFrame = m_frames[frame2]; 
   uint32* glcs = (uint32*)m_glCommands;
 
+  // Create a list of tris for the current command
+  // TODO Faster if this is member? (Won't keep reallocating)
+  AmjuGL::Tris tris;
+  //tris.reserve(numTris);
+    
   while (1)
   {
     // Get the command. The sign is used to flag FAN or STRIP. The abs value
@@ -757,7 +762,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
     int com = (int)(uint32(*glcs)); // already Endianzed up front
     if (com == 0)
     {
-      return;
+      break;
     }
 
     int numTris = 0;
@@ -772,10 +777,6 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
     {
       numTris = com - 1; // number of points for a strip
     }
-
-    // Create a list of tris for the current command 
-    AmjuGL::Tris tris;
-    tris.reserve(numTris);
 
     glcs++;
 
@@ -859,10 +860,11 @@ for (int i = 0; i < numTris; i++)
 
 ////    AmjuGL::DrawTriList(m_tris);
  
-    m_triList->Set(tris);
-    AmjuGL::Draw(m_triList);
-
   } // while (1)
+  
+  m_triList->Set(tris);
+  AmjuGL::Draw(m_triList);
+    
 #endif // USE_MODIFIED_GL_COMMANDS
 
 #ifdef USE_TRI_LIST
