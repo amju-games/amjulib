@@ -6,6 +6,8 @@
 #include "GuiTextEdit.h"
 #include <AmjuFinal.h>
 
+#define TEXT_EDIT_DEBUG
+
 namespace Amju
 {
 const char* GuiTextEdit::NAME = "gui-text-edit";
@@ -92,7 +94,18 @@ void GuiTextEdit::Draw()
     AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
     float startX = GetCombinedPos().x;
     float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize() * m_scaleX) + startX;
-    PrintLine("|", x, GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1); 
+
+    if (!m_triListCaret)
+    {
+      m_triListCaret = GetFont()->MakeTriList(0, 0, "|", 1.0f);
+    }
+
+    float y = GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1; 
+    
+    AmjuGL::PushMatrix();
+    AmjuGL::Translate(x, y, 0);
+    AmjuGL::Draw(m_triListCaret);
+    AmjuGL::PopMatrix();
     PopColour();
   }
 }
@@ -115,6 +128,15 @@ bool GuiTextEdit::Load(File* f)
 // TODO Move to GuiText
 void GuiTextEdit::SetText(const std::string& text)
 {
+  if (text == m_text)
+  {
+    return;
+  }
+
+  m_triList = 0; // force rebuild
+  m_triLists.clear();
+  m_triListSelection = 0;
+
   m_text = text;
   m_caret = m_text.size();
   m_selectedText = m_caret;
@@ -148,6 +170,8 @@ void GuiTextEdit::Insert(char c)
   {
     m_onChangeFunc();
   }
+  m_triList = 0; // force rebuild
+  m_triListSelection = 0;
 }
 
 int GuiTextEdit::CalcCursorPos(float mousex)
@@ -196,6 +220,7 @@ bool GuiTextEdit::OnCursorEvent(const CursorEvent& ce)
   if (s_drag && HasFocus())
   {
     m_selectedText = CalcCursorPos(ce.x);
+    m_triListSelection = 0;
       
 #ifdef TEXT_EDIT_DEBUG
 std::cout << "Selected: m_caret: " << m_caret << " m_selectedText: " << m_selectedText << ": \"";
@@ -246,6 +271,11 @@ std::cout << "GuiTextEdit Drag is now " << (s_drag ? "ON" : "OFF") << "\n";
 
   m_caret = CalcCursorPos(mbe.x);
   m_selectedText = m_caret;
+  m_triListSelection = 0;
+
+#ifdef TEXT_EDIT_DEBUG
+std::cout << "MB down, resetting selection trilist.\n";
+#endif
 
   return true; // ?
 }
@@ -350,6 +380,7 @@ std::cout << "Key event ignored by " << m_name << " as does not have focus.\n";
 std::cout << "Prev word + select\n";
 #endif
         m_caret = PrevWord(m_caret);
+        m_triListSelection = 0;
       }
       else
       {
@@ -358,6 +389,7 @@ std::cout << "Prev word\n";
 #endif
         m_caret = PrevWord(m_caret);
         m_selectedText = m_caret; 
+        m_triListSelection = 0;
       }
     }
     else if (ke.modifier & AMJU_KEY_MOD_SHIFT)
@@ -369,6 +401,7 @@ std::cout << "Prev char + select\n";
       if (m_caret > 0)
       {
         m_caret--;
+        m_triListSelection = 0;
       }
     }
     else 
@@ -381,6 +414,7 @@ std::cout << "Prev char\n";
         // Move caret left
         m_caret--;
         m_selectedText = m_caret; 
+        m_triListSelection = 0;
       }
     }
     break;
@@ -399,6 +433,7 @@ std::cout << "Prev char\n";
 std::cout << "Next word + select\n";
 #endif
         m_caret = NextWord(m_caret);
+        m_triListSelection = 0;
       }
       else 
       {
@@ -407,6 +442,7 @@ std::cout << "Next word\n";
 #endif
         m_caret = NextWord(m_caret);
         m_selectedText = m_caret; 
+        m_triListSelection = 0;
       }
     }
     else if (ke.modifier & AMJU_KEY_MOD_SHIFT)
@@ -417,6 +453,7 @@ std::cout << "Next char + select\n";
       if (m_caret < (int)m_text.size())
       {
         m_caret++;
+        m_triListSelection = 0;
       } 
     }
     else 
@@ -428,6 +465,7 @@ std::cout << "Next char\n";
       {
         m_caret++;
         m_selectedText = m_caret; 
+        m_triListSelection = 0;
       }
     }
 
@@ -460,11 +498,13 @@ std::cout << "Next char\n";
       m_text = leftStr + rightStr;
       m_caret = left;
       m_selectedText = m_caret; 
+      m_triListSelection = 0;
   
       if (m_onChangeFunc)
       {
         m_onChangeFunc();
       }
+      m_triList = 0; // force rebuild
     }
     break;
 
@@ -483,11 +523,13 @@ std::cout << "Next char\n";
       m_text = leftStr + rightStr;
       m_caret = left;
       m_selectedText = m_caret; 
+      m_triListSelection = 0;
 
       if (m_onChangeFunc)
       {
         m_onChangeFunc();
       }
+      m_triList = 0; // force rebuild
     }
     break;
 

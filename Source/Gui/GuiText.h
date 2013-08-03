@@ -69,7 +69,7 @@ protected:
   // Called twice from Draw, for drop shadow
   void ReallyDraw();
 
-  void DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg);
+  void DrawSingleLine(bool selected, int first, int last, const Colour& fg, const Colour& bg);
   void DrawMultiLine(const Colour& fg, const Colour& bg);
 
   void PrintLine(const std::string&, float x, float y);
@@ -78,6 +78,8 @@ protected:
   typedef std::vector<RCPtr<TriList> > TriLists;
   RCPtr<TriList> m_triList; // simplest case - one line only
   TriLists m_triLists; // for multi-line text
+  RCPtr<TriList> m_triListCaret; 
+  RCPtr<TriList> m_triListSelection; 
   
   std::string m_text;
   std::string m_fontName;

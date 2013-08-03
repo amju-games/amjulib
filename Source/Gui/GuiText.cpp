@@ -198,7 +198,7 @@ void GuiText::ReallyDraw()
   }
   else
   {
-    DrawSingleLine(m_first, m_last, inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
+    DrawSingleLine(false, m_first, m_last, inverse ? m_bgCol : m_fgCol, inverse ? m_fgCol : m_bgCol);
 
     // Draw selected - do draw BG
     if (m_caret != m_selectedText)
@@ -206,7 +206,7 @@ void GuiText::ReallyDraw()
       int left = std::min(m_caret, m_selectedText);
       int right = std::max(m_caret, m_selectedText);
     
-      DrawSingleLine(left, right, inverse ? m_fgCol : m_bgCol, inverse ? m_bgCol : m_fgCol);
+      DrawSingleLine(true, left, right, inverse ? m_fgCol : m_bgCol, inverse ? m_bgCol : m_fgCol);
     }
   }
 
@@ -247,14 +247,17 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 
     if (rebuild)
     {
-      TriList* triList = font->MakeTriList(x, y, str.c_str(), m_scaleX);
+      TriList* triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
       m_triLists.push_back(triList);
-      Assert(m_triLists.size() == i + 1);
+      Assert((int)m_triLists.size() == i + 1);
     }
     
-    Assert(m_triLists.size() > i);
+    Assert((int)m_triLists.size() > i);
+    AmjuGL::PushMatrix();
+    AmjuGL::Translate(x, y, 0);
     AmjuGL::Draw(m_triLists[i]);
-    
+    AmjuGL::PopMatrix();
+
     y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
     // TODO Make text a window so lines will be clipped
     if (y < minY)
@@ -270,7 +273,8 @@ void GuiText::RecalcFirstLast()
   GetFirstLast(0, &m_first, &m_last);
 }
 
-void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour& bg)
+void GuiText::DrawSingleLine(
+  bool selected, int first, int last, const Colour& fg, const Colour& bg)
 {
   // NB This is single line only, need another path for multi-line.
   // Decide on character range to draw
@@ -337,7 +341,23 @@ void GuiText::DrawSingleLine(int first, int last, const Colour& fg, const Colour
 
   PushColour();
   AmjuGL::SetColour(fg);
-  PrintLine(str, x, y);
+  
+  Font* font = GetFont();
+  if (selected && !m_triListSelection)
+  {
+    m_triListSelection = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+  }
+  else if (!selected && !m_triList)
+  {
+    m_triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+  }
+  
+  font->BindTexture();
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(x, y, 0);
+  AmjuGL::Draw(selected ? m_triListSelection : m_triList);
+  AmjuGL::PopMatrix();
+
   PopColour();
 }
 
@@ -346,11 +366,14 @@ void GuiText::PrintLine(const std::string& str, float x, float y)
   Font* font = GetFont();
   if (!m_triList)
   {
-    m_triList = font->MakeTriList(x, y, str.c_str(), m_scaleX);
+    m_triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
   }
   
   font->BindTexture();
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(x, y, 0);
   AmjuGL::Draw(m_triList);
+  AmjuGL::PopMatrix();
 }
 
 void GuiText::GetFirstLast(int line, int* first, int* last)
@@ -405,6 +428,11 @@ const std::string& GuiText::GetText() const
 
 void GuiText::SetText(const std::string& text)
 {
+  if (text == m_text)
+  {
+    return;
+  }
+
   m_triList = 0; // force rebuild
   m_triLists.clear();
   
