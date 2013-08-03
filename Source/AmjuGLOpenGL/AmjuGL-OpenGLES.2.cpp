@@ -208,8 +208,6 @@ public:
       
       glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
       glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x));
-//      (GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW);
-
     }
   }
 
@@ -236,10 +234,6 @@ AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
-
-  // TODO Create in code so not dependent on assets
-  s_defaultTex = new Texture;
-  s_defaultTex->Load("wh8.png");
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
@@ -264,6 +258,10 @@ void AmjuGLOpenGLES2::Init()
     Assert(0);
     return;
   }
+
+  // TODO Create in code so not dependent on assets
+  s_defaultTex = new Texture;
+  s_defaultTex->Load("wh8.png");
 }
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
