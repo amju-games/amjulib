@@ -13,10 +13,7 @@
 #include <AmjuGLOpenGL/AmjuGL-OpenGLES.2.h>
 #include <Events/EventPoller.h>
 #include <Game/Game.h>
-#include "../../../../Source/StartUp.h"
-
-// This fixes mouse coords
-/////#define LANDSCAPE
+#include <StartUp.h>
 
 @interface ViewController () {
 }
@@ -106,18 +103,12 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-  // TODO Why half size on iPad ?!?!?
   float w = rect.size.width;
   float h = rect.size.height;
   float s = self.view.contentScaleFactor;
 
   Amju::Screen::SetSize(w * s, h * s);
   Amju::AmjuGL::Viewport(0, 0, w * s, h * s);
-  
-#if 0
-  // Now rotation is handled for us by iOS, ?!
-  Amju::AmjuGL::SetScreenRotation(90.0f);
-#endif
   
   Amju::TheGame::Instance()->RunOneLoop();
 }
@@ -132,16 +123,8 @@ void PopulateMBEvent(Amju::MouseButtonEvent* mbe, int x, int y)
   float scrX2 = float(Amju::Screen::X() / 2);
   float scrY2 = float(Amju::Screen::Y() / 2);
 
-  
   mbe->x = (float)x / scrX2 - 1.0f;
   mbe->y = 1.0f - (float)y / scrY2;
-  
-//#ifdef LANDSCAPE
-//  mbe->x = 1.0f - (float)y / scrX2;
-//  mbe->y = 1.0f - (float)x / scrY2;
-// /
-//#else
-  
 }
 
 void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
