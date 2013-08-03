@@ -66,6 +66,8 @@ protected:
 
   CommandFunc m_onPressedDown;
 
+  GuiImage m_focusImage;
+  
   static std::string s_clickFilename;
 };
 }

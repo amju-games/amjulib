@@ -75,6 +75,10 @@ protected:
   void PrintLine(const std::string&, float x, float y);
 
 protected:
+  typedef std::vector<RCPtr<TriList> > TriLists;
+  RCPtr<TriList> m_triList; // simplest case - one line only
+  TriLists m_triLists; // for multi-line text
+  
   std::string m_text;
   std::string m_fontName;
   Just m_just;

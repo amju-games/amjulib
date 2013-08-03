@@ -226,12 +226,16 @@ void GuiButton::Draw()
     float ymax = r.GetMax(1) + BORDER;
     r.Set(xmin, xmax, ymin, ymax);
     
+    /*
     GuiImage focus(*this);
     focus.SetParent(0);
     focus.SetLocalPos(Vec2f(xmin, ymax));
     focus.SetSize(Vec2f(xmax - xmin, ymax - ymin));
     focus.Draw();
-
+     
+    TODO use m_focusImage - don't create/destroy VBO
+    */
+    
     PopColour();
   }
 
