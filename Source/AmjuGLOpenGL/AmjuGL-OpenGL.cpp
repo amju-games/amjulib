@@ -36,7 +36,10 @@ public:
   // TODO Use display list
   virtual void Draw()
   {
-    AmjuGL::DrawTriList(m_tris);
+    if (!m_tris.empty())
+    {
+      AmjuGL::DrawTriList(m_tris);
+    }
   }
 
   virtual void Set(const AmjuGL::Tris& tris)
@@ -55,7 +58,10 @@ class TriListDynamicOpenGL : public TriListStatic
 public:
   virtual void Draw()
   {
-    AmjuGL::DrawTriList(m_tris);
+    if (!m_tris.empty())
+    {
+      AmjuGL::DrawTriList(m_tris);
+    }
   }
 
   virtual void Set(const AmjuGL::Tris& tris)
