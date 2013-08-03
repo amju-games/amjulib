@@ -15,6 +15,9 @@
 #include <Game/Game.h>
 #include "../../../../Source/StartUp.h"
 
+// This fixes mouse coords
+/////#define LANDSCAPE
+
 @interface ViewController () {
 }
 @property (strong, nonatomic) EAGLContext *context;
@@ -106,8 +109,15 @@
   // TODO Why half size on iPad ?!?!?
   float w = rect.size.width;
   float h = rect.size.height;
-  Amju::Screen::SetSize(h, w); // because rotated
+  float s = self.view.contentScaleFactor;
+
+  Amju::Screen::SetSize(w * s, h * s);
+  Amju::AmjuGL::Viewport(0, 0, w * s, h * s);
+  
+#if 0
+  // Now rotation is handled for us by iOS, ?!
   Amju::AmjuGL::SetScreenRotation(90.0f);
+#endif
   
   Amju::TheGame::Instance()->RunOneLoop();
 }
@@ -121,39 +131,32 @@ void PopulateMBEvent(Amju::MouseButtonEvent* mbe, int x, int y)
 {
   float scrX2 = float(Amju::Screen::X() / 2);
   float scrY2 = float(Amju::Screen::Y() / 2);
+
   
-#ifdef LANDSCAPE
-  mbe->x = 1.0f - (float)y / scrX2;
-  mbe->y = 1.0f - (float)x / scrY2;
+  mbe->x = (float)x / scrX2 - 1.0f;
+  mbe->y = 1.0f - (float)y / scrY2;
   
-#else
-  mbe->x = (float)x / scrY2 - 1.0f;
-  mbe->y = 1.0f - (float)y / scrX2;
+//#ifdef LANDSCAPE
+//  mbe->x = 1.0f - (float)y / scrX2;
+//  mbe->y = 1.0f - (float)x / scrY2;
+// /
+//#else
   
-#endif
 }
 
 void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 {
+  Amju::MouseButtonEvent mbe;
+  PopulateMBEvent(&mbe, x, y);
   ce->controller = 0;
-  
-  // Rotate cursor data to screen orientation - TODO make this run time
-  float scrX2 = float(Amju::Screen::X() / 2);
-  float scrY2 = float(Amju::Screen::Y() / 2);
-  
-#ifdef LANDSCAPE
-  ce->x = 1.0f - (float)y / scrX2;
-  ce->y = 1.0f - (float)x / scrY2;
-  
-#else
-  ce->x = (float)x / scrY2 - 1.0f;
-  ce->y = 1.0f - (float)y / scrX2;
-  
-#endif
+  ce->x = mbe.x;
+  ce->y = mbe.y;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+  float s = self.view.contentScaleFactor;
+  
 	int i = 0;
 	for (UITouch* touch in touches)
 	{
@@ -163,18 +166,20 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 			Amju::MouseButtonEvent* mbe = new Amju::MouseButtonEvent;
 			mbe->button = Amju::AMJU_BUTTON_MOUSE_LEFT;
 			mbe->isDown = true;
-			PopulateMBEvent(mbe, touchPoint.x, touchPoint.y);
+			PopulateMBEvent(mbe, touchPoint.x * s, touchPoint.y * s);
 			QueueEvent(mbe);
 		}
 		
 		Amju::CursorEvent* ce = new Amju::CursorEvent;
-		PopulateCursorEvent(ce, touchPoint.x, touchPoint.y);
+		PopulateCursorEvent(ce, touchPoint.x * s, touchPoint.y * s);
 		QueueEvent(ce);
 	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+  float s = self.view.contentScaleFactor;
+  
 	int i = 0;
 	for (UITouch* touch in touches)
 	{
@@ -184,7 +189,7 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 			Amju::MouseButtonEvent* mbe = new Amju::MouseButtonEvent;
 			mbe->button = Amju::AMJU_BUTTON_MOUSE_LEFT;
 			mbe->isDown = false;
-			PopulateMBEvent(mbe, touchPoint.x, touchPoint.y);
+			PopulateMBEvent(mbe, touchPoint.x * s, touchPoint.y * s);
 			QueueEvent(mbe);
 			return; // ignore other data, it this ok ?
 		}
@@ -193,11 +198,13 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+  float s = self.view.contentScaleFactor;
+  
 	for (UITouch* touch in touches)
 	{
 		CGPoint touchPoint = [touch locationInView:self.view];
 		Amju::CursorEvent* ce = new Amju::CursorEvent;
-		PopulateCursorEvent(ce, touchPoint.x, touchPoint.y);
+		PopulateCursorEvent(ce, touchPoint.x * s, touchPoint.y * s);
 		QueueEvent(ce);
 	}
 }
