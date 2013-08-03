@@ -189,6 +189,7 @@
 		69FE6B7917A9166300C391F4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7817A9166300C391F4 /* CFNetwork.framework */; };
 		69FE6B7F17A9186700C391F4 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7E17A9186700C391F4 /* libbass.a */; };
 		69FE6B8117A9188100C391F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B8017A9188100C391F4 /* AudioToolbox.framework */; };
+		69FFE46517AD153900BCBABE /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 69FFE46417AD153900BCBABE /* data-iphone.glue */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -537,6 +538,7 @@
 		69FE6B7E17A9186700C391F4 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbass.a; path = "../../../../../Source/SoundBass/Bass2.4/iPhone/mp3-free/libbass.a"; sourceTree = "<group>"; };
 		69FE6B8017A9188100C391F4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		69FE6B8217A91D8F00C391F4 /* StartUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartUp.h; path = ../../../Source/StartUp.h; sourceTree = "<group>"; };
+		69FFE46417AD153900BCBABE /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../../Build/ve2/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,6 +614,7 @@
 		6908D51B17A69EC700B0BB9F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				69FFE46417AD153900BCBABE /* data-iphone.glue */,
 				6908D51C17A69EC700B0BB9F /* Hungry People-Info.plist */,
 				6908D51D17A69EC700B0BB9F /* InfoPlist.strings */,
 				6908D52017A69EC700B0BB9F /* main.m */,
@@ -1012,6 +1015,7 @@
 				6908D6EB17A69F6F00B0BB9F /* newgui.pl in Resources */,
 				6908D6EC17A69F6F00B0BB9F /* newreq.pl in Resources */,
 				6908D6ED17A69F6F00B0BB9F /* newstate.pl in Resources */,
+				69FFE46517AD153900BCBABE /* data-iphone.glue in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

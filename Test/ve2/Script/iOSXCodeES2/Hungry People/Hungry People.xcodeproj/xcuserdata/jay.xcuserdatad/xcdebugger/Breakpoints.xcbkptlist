@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.2.cpp"
-         timestampString = "397207212.182134"
+         timestampString = "397219505.932761"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "450"
-         endingLineNumber = "450"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
          landmarkName = "AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris&amp; tris)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/GSMain.cpp"
-         timestampString = "397148424.093751"
+         timestampString = "397218893.711743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "529"
-         endingLineNumber = "529"
+         startingLineNumber = "519"
+         endingLineNumber = "519"
          landmarkName = "GSMain::Draw()"
          landmarkType = "5">
       </FileBreakpoint>
