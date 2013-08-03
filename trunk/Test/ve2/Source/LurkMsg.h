@@ -98,10 +98,10 @@ private:
 
   // next/ok button for Centred text (TODO make this per-LurkMsg ?)
   //RCPtr<GuiButton> m_button; 
-   PGuiElement m_gui; // yes/no/ok buttons
-   GuiButton* m_ok;
-   GuiButton* m_yes;
-   GuiButton* m_no;
+  PGuiElement m_gui; // yes/no/ok buttons
+  GuiButton* m_ok;
+  GuiButton* m_yes;
+  GuiButton* m_no;
 };
 
 typedef Singleton<Lurker> TheLurker;
