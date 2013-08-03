@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef IPHONE
+#ifdef AMJU_IOS
 
 #include <AmjuFirst.h>
 #include <math.h>
@@ -13,7 +13,6 @@ extern "C"
 {
 #include <GLKit/GLKMatrix4.h>
 #include <GLKit/GLKMatrix3.h>
-//#include <GLKit/GLKEffects.h> // can't - includes obj-c stuff  
 }
 #include <AmjuGL.h>
 #include <TriList.h>
@@ -22,17 +21,10 @@ extern "C"
 #include "ES2DefaultShaders.h"
 #include <DegRad.h>
 #include <ReportError.h>
+#include <Texture.h>
 #include <AmjuFinal.h>
 
-#define GLint int
-#define GLfloat float
-#define GLdouble double
-#define GLboolean int
-#define GL_FALSE 0
-#define GL_TRUE 1
-#define GLAPIENTRY
-#define MEMCPY memcpy
-#define __glPi 3.14159265358979323846
+////#define LANDSCAPE
 
 namespace Amju
 {
@@ -52,6 +44,8 @@ static GLShader* s_defaultShader = 0; // TODO TEMP TEST
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
 
+// White texture for when texturing is "disabled"
+static Texture* s_defaultTex;
 
 static DrawableFactory s_factory;
 
@@ -242,6 +236,10 @@ AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+
+  // TODO Create in code so not dependent on assets
+  s_defaultTex = new Texture;
+  s_defaultTex->Load("wh8.png");
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
@@ -499,8 +497,6 @@ static uint32 ConvertToGLFlag(uint32 flag)
     return GL_BLEND;
   case AmjuGL::AMJU_DEPTH_READ:
     return GL_DEPTH_TEST;
-  case AmjuGL::AMJU_TEXTURE_2D:
-    return GL_TEXTURE_2D;
   }
   return 0;
 }
@@ -517,6 +513,12 @@ void AmjuGLOpenGLES2::Enable(uint32 flag)
   else if (flag == AmjuGL::AMJU_LIGHTING)
   {
     // Set lighting flag in shader
+    return;
+  }
+  else if (flag == AmjuGL::AMJU_TEXTURE_2D)
+  {
+    // Use white texture
+    s_defaultTex->UseThisTexture();
     return;
   }
 
@@ -541,6 +543,11 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
     // Set lighting flag in shader
     return;
   }
+  else if (flag == AmjuGL::AMJU_TEXTURE_2D)
+  {
+    // Do nothing, right?
+    return;
+  }
 
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
@@ -551,6 +558,7 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
 
 void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
 {
+  Assert(0); // Dude, use TriList
 /*
  GLfloat gCubeVertexData[216] =
  {
@@ -734,5 +742,5 @@ void AmjuGLOpenGLES2::DrawLighting(
 
 } // namespace Amju
 
-#endif // IPHONE
+#endif // AMJU_IOS
 
