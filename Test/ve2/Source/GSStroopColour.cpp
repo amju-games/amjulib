@@ -3,6 +3,7 @@
 #include <AmjuGL.h>
 #include <ReportError.h>
 #include <GuiButton.h>
+#include <GuiRect.h>
 #include <GuiText.h>
 #include <GuiComposite.h>
 #include <Game.h>
@@ -44,18 +45,30 @@ void GSStroopColour::ResetTest()
   word->SetVisible(false);
 }
 
+void GSStroopColour::OnActive()
+{
+  GSStroopBase::OnActive();
+  m_colourRect = new GuiRect;
+  m_colourRect->SetLocalPos(Vec2f(-0.5f, 0.4f));
+  m_colourRect->SetSize(Vec2f(1.0f, 0.4f));
+
+  m_moveElement = m_colourRect;
+  m_moveElementOriginalPos = m_moveElement->GetLocalPos();
+}
+
+void GSStroopColour::OnDeactive()
+{
+  GSStroopBase::OnDeactive();
+  m_colourRect = 0;
+}
+
 void GSStroopColour::Draw2d()
 {
   // Draw coloured rect
-  AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-
   PushColour();
-  Rect r(-0.5f, 0.5f, 0, 0.4f);
-  AmjuGL::SetColour(m_goodColour);
-  DrawSolidRect(r);  
+  MultColour(m_goodColour);
+  m_colourRect->Draw();  
   PopColour();
-  AmjuGL::PopAttrib();
 
   GSGui::Draw2d();
 }
