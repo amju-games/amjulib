@@ -6,6 +6,18 @@
 
 namespace Amju
 {
+std::ostream& operator<<(std::ostream& os, const ResearchDate& rd)
+{
+  return os 
+    << rd.m_time.ToStringJustDate()
+    << ": multi: "
+    << rd.m_playMulti
+    << " single: " 
+    << rd.m_playSingle
+    << " cog test: " 
+    << rd.m_cogTest;
+}
+
 void ResearchCalendar::Clear()
 {
   m_dates.clear();
@@ -27,7 +39,7 @@ void ResearchCalendar::AddResearchDate(ResearchDate* d)
   else
   {
 #ifdef _DEBUG
-    std::cout << "Duplicated research date, so overwriting values...\n";
+    std::cout << "Duplicated research date: " << *d << "\n";
 #endif
     if (d->m_cogTest)
     {
@@ -41,6 +53,9 @@ void ResearchCalendar::AddResearchDate(ResearchDate* d)
     {
       it->second->m_playSingle = true;
     }
+#ifdef _DEBUG
+    std::cout << "  now it's: " << *(it->second) << "\n";
+#endif
   }
 }
 

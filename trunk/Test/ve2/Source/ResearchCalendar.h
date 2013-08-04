@@ -26,6 +26,8 @@ struct ResearchDate
   {
     return m_time < rd.m_time;
   }
+
+  friend std::ostream& operator<<(std::ostream& os, const ResearchDate& rd);
 };
 
 typedef std::map<Time, ResearchDate*> ResearchDates;
