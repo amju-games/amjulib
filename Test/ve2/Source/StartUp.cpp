@@ -20,6 +20,7 @@
 #include "ResizeHandler.h"
 #include "JoystickToCursor.h" 
 #include "ROConfig.h"
+#include "Version.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -30,7 +31,7 @@ void ReportError(const std::string& str)
 }
 
 // Create global variable window info
-Amju::AmjuGLWindowInfo w(640, 480, false, "Hungry People - Experimental multi-player online game");
+Amju::AmjuGLWindowInfo w(640, 480, false, "Hungry People v." + ToString(VersionMajor) + "." + ToString(VersionMinor));
 
 void StartUpBeforeCreateWindow()
 {
