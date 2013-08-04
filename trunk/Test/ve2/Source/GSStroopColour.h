@@ -13,6 +13,9 @@ class GSStroopColour : public GSStroopBase
 
 public:
   virtual void Draw2d();
+  virtual void OnActive();
+  virtual void OnDeactive();
+
   void ResetTest(); 
 
 private:
@@ -20,6 +23,7 @@ private:
 
 private:
   Colour m_goodColour;
+  RCPtr<GuiElement> m_colourRect;
 };
 typedef Singleton<GSStroopColour> TheGSStroopColour;
 } // namespace
