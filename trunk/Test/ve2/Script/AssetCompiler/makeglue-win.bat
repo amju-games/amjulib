@@ -33,6 +33,7 @@ copy %GUIASSETSDIR%\*.txt %DEST_DIR%
 copy %SRC_DIR%\rooms\*  %DEST_DIR%\rooms\
 copy %SRC_DIR%\Sound\*.it  %DEST_DIR%\Sound\
 copy %SRC_DIR%\Sound\*.wav %DEST_DIR%\Sound\
+copy %SRC_DIR%\Sound\*.ogg %DEST_DIR%\Sound\
 
 cd %DEST_DIR%
 
