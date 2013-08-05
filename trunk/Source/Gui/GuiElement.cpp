@@ -159,6 +159,7 @@ PGuiElement LoadGui(const std::string& filename)
   }
   if (!gui->Load(&f))
   {
+    f.ReportError("Failed to load gui element; type: " + s);
     return 0;
   }
   TheEventPoller::Instance()->AddListener(gui);
@@ -186,12 +187,14 @@ bool GuiElement::Load(File* f)
 
   if (!LoadVec2(f, &m_localpos))
   {
+    f->ReportError("Gui element: failed to load pos");
     Assert(0);
     return false;
   }
 
   if (!LoadVec2(f, &m_size))
   {
+    f->ReportError("Gui element: failed to load size");
     Assert(0);
     return false;
   }
