@@ -91,6 +91,7 @@ bool GuiComposite::LoadChildren(File* f)
   int num = 0;
   if (!f->GetInteger(&num))
   {
+    f->ReportError("Expected num children for GUI composite.");
     Assert(0);
     return false;
   }
@@ -116,6 +117,7 @@ std::cout << "GUI composite: Child " << i << " of " << num
     e->SetParent(this);
     if (!e->Load(f))
     {
+      f->ReportError("Failed to load child of GUI composite.");
       return false;
     }
 
