@@ -18,10 +18,10 @@ void ReportError(const std::string& error)
 
 #ifdef WIN32
   MessageBoxA(0, error.c_str(), "Oh no!", MB_ICONSTOP);
-#endif
 
-#ifdef REPORT_ERRORS_TO_CONSOLE
+#else
   std::cout << error.c_str() << "\n"; 
+
 #endif
 
   // TODO Log to file if enabled
