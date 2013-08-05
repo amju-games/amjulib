@@ -52,8 +52,7 @@ void GuiRect::Draw()
   texture->UseThisTexture();
 
   PushColour();
-  AmjuGL::SetColour(m_colour);
-////  AmjuGL::DrawTriList(m_tris);
+  MultColour(m_colour);
   AmjuGL::Draw(m_triList);
   PopColour();
 }
