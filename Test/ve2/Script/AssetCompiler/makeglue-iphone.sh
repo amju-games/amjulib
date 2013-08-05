@@ -34,6 +34,7 @@ cp $GUIASSETSDIR/*.txt $DEST_DIR
 # no need to have Sound separately??
 cp $SRC_DIR/Sound/*.it $DEST_DIR/Sound/
 cp $SRC_DIR/Sound/*.wav $DEST_DIR/Sound/
+cp $SRC_DIR/Sound/*.ogg $DEST_DIR/Sound/
 
 cd $DEST_DIR
 
