@@ -1,35 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2005
-$Log: AmjuTime.cpp,v $
-Revision 1.5  2008/06/07 13:43:07  jay
-MSVC warnings
-
-Revision 1.4  2008/05/08 10:58:02  jay
-New memory management code
-
-Revision 1.3  2007/12/12 16:49:58  staff
-Windows: VC8: time_t is now a 64-bit int!
-
-Revision 1.2  2006/01/16 14:08:52  jay
-Add Time classes to trunk
-
-Revision 1.1.2.2  2005/08/31 20:06:42  Administrator
-Fix for WIN32
-
-Revision 1.1.2.1  2005/08/26 21:14:52  jay
-Added Time classes
-
-Revision 1.3  2005/02/28 20:34:22  jay
-Additions and fixes for Uptime Overlord v.1.0 release
-
-Revision 1.2  2005/01/19 10:19:58  jay
-Added MakeTime() to construct a time from days, months, etc.
-
-Revision 1.1  2005/01/09 12:34:30  jay
-New Time class - but calling the file Time.h causes problems.
-
-*/
-
 #include <AmjuFirst.h>
 #ifdef WIN32
 #define _USE_32BIT_TIME_T
@@ -337,6 +305,21 @@ bool Time::Save(File* f)
 bool Time::operator<(const Time& t) const
 {
   return m_secs < t.m_secs;
+}
+
+bool Time::operator<=(const Time& t) const
+{
+  return m_secs <= t.m_secs;
+}
+
+bool Time::operator>(const Time& t) const
+{
+  return m_secs > t.m_secs;
+}
+
+bool Time::operator>=(const Time& t) const
+{
+  return m_secs >= t.m_secs;
 }
 }
 
