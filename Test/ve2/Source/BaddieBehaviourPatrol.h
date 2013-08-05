@@ -22,6 +22,9 @@ protected:
   Rect m_rect;
   // Reverse direction when we reach the edge of the box, or wrap around to the other side?
   bool m_reverse;
+
+  // Sound on reverse or wrap
+  std::string m_sound; 
 };
 }
 
