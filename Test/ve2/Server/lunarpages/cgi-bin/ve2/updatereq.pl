@@ -6,9 +6,10 @@
 
 require "common.pl";
 
-my_connect();
-
+sub publishRecentChanges();
 sub updatestate();
+
+my_connect();
 updatestate();
 
 
@@ -22,37 +23,49 @@ sub updatestate()
   }
 
   my $key = param('key') or die "No key";
-  my $val = param('val');
+  my $val = param('val'); # could be zero!
   my $obj_id = param('obj_id') or die "No ID";
-
-  if ($key eq "pickup")
-  {
-    # Special case key:
-    # We can only pick up (take ownership) of object if there is no current owner
-    # TODO Check player strength here and any other restrictions
-    if ($val ne "0")
-    {
-      # First make sure row exists. Then update it.
-      my $sql = "insert ignore into objectstate values ($obj_id, '$key', 0, 1)";
-      insert($sql);
-      $sql = "update objectstate set val='$val', whenchanged=now() where `key`='$key' and id=$obj_id and val='0'";
-      update($sql);
-    }
-    else
-    {
-      # We can only drop the object if we are the current owner.
-      my $session_id = param('session_id') or die "No session id";
-
-      my $sql = "update objectstate set val='0', whenchanged=now() where `key`='$key' and id=$obj_id and val in (select b.obj_id FROM session as a, player as b where a.player_id=b.id and a.id=$session_id) ";
-
-      update($sql);
-    }
-    return;
-  }
 
   my $sql = "insert into objectstate values ($obj_id, '$key', '$val', now()) on duplicate key update val='$val', whenchanged=now()";
   update_or_insert($sql);
 
+  publishRecentChanges();
 }
 
+sub publishRecentChanges()
+{
+  # The idea here is that updates occur much less frequently than polling.
+  # So publish changes in a document, so we don't hit the DB so frequently.
+  # If file is locked, we would like to wait until it's unlocked.
+  # OR we just fail and don't write this time.
+
+  my $reportPeriod = 5; # seconds
+  my $sql = "SELECT id, `key`, val, UNIX_TIMESTAMP(whenchanged) FROM objectstate WHERE whenchanged >= FROM_UNIXTIME(UNIX_TIMESTAMP(now()) - $reportPeriod)";
+
+  print "Query: $sql\n\n";
+
+  my $query = $dbh->prepare($sql) or die
+    "Query prepare failed for this query: $sql\n";
+
+  $query->execute or die "Failed to execute query!?!";
+
+  # Open file
+  my $root = "../../ve2/updates"; 
+  my $filename = "$root/updates.txt";
+
+  if (!open(theFile, ">$filename"))
+  {
+    print "Failed to open file for writing: $filename\n";
+    return;
+  }
+
+  print theFile "<states>\n";
+  while (my ($id, $key, $val, $timestamp) = $query->fetchrow_array)
+  {
+    print theFile "<os> <id>$id</id> <key>$key</key> <val>$val</val> <timestamp>$timestamp</timestamp> </os>\n";
+  }
+  print theFile "</states>\n";
+
+  close(theFile);
+}
 
