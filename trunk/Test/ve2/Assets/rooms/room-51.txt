@@ -67,6 +67,8 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 baddie
 -285, 0, -160
@@ -90,6 +92,8 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 // Leafcutter ant
 baddie
@@ -114,6 +118,8 @@ patrol
 -160, 160, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 baddie
 -147, 0, -60
@@ -137,8 +143,8 @@ patrol
 -160, 160, -500, 500
 // Reverse flag
 0
-
-
+// Sound
+$$$empty
 
 // Leafcutter ant
 baddie
@@ -163,6 +169,8 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 baddie
 -165, 0, 40
@@ -186,6 +194,8 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 // Leafcutter ant
 baddie
@@ -210,6 +220,8 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
 
 baddie
 -185, 0, 140
@@ -233,3 +245,7 @@ patrol
 -180,180, -500, 500
 // Reverse flag
 0
+// Sound
+$$$empty
+
+
