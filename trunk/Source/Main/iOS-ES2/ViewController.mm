@@ -88,6 +88,8 @@
     Amju::AmjuGL::Init();
     Amju::StartUpBeforeCreateWindow();
     Amju::StartUpAfterCreateWindow();
+  
+    Amju::TheGame::Instance()->Update();  // must Update once before Draw
 }
 
 - (void)tearDownGL
@@ -99,6 +101,7 @@
 
 - (void)update
 {
+  Amju::TheGame::Instance()->Update();
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -110,12 +113,13 @@
   Amju::Screen::SetSize(w * s, h * s);
   Amju::AmjuGL::Viewport(0, 0, w * s, h * s);
   
-  Amju::TheGame::Instance()->RunOneLoop();
+  Amju::TheGame::Instance()->Draw();
+  Amju::AmjuGL::Flip();
 }
 
 void QueueEvent(Amju::Event* e)
 {
-	Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
+  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
 void PopulateMBEvent(Amju::MouseButtonEvent* mbe, int x, int y)
