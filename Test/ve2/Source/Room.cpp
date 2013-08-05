@@ -2,12 +2,14 @@
 #include <StringUtils.h>
 #include <LoadVec2.h>
 #include <AABB.h>
-#include "Room.h"
-#include "RoomNode.h"
-#include "Ve1SceneGraph.h"
+#include "GameConsts.h"
 #include "LocalPlayer.h"
 #include "ObjectUpdater.h"
+#include "Room.h"
+#include "RoomNode.h"
+#include "SoundManager.h"
 #include "UnCollide.h"
+#include "Ve1SceneGraph.h"
 
 namespace Amju
 {
@@ -182,7 +184,7 @@ void Room::Update()
 
 bool Room::Load(File* f)
 {
-  SetId(-1); // only one room exists at a time, with this fixed ID
+  SetId(THE_ROOM_ID); // only one room exists at a time, with this fixed ID
   s_room = this;
 
   int numTextures = 0;
@@ -250,6 +252,18 @@ bool Room::Load(File* f)
     f->ReportError("Room has no destinations from it");
     return false;
   }
+
+/*
+  if (!f->GetDataLine(&m_music))
+  {
+    f->ReportError("Room has no music");
+    return false;
+  }
+*/
+  // TODO TEMP
+  m_music = "sound/rainforest-ambience1.ogg"; 
+
+std::cout << "Room music: " << m_music << "\n";
 
   return true;
 }
@@ -320,6 +334,7 @@ void Room::OnLocationEntry()
 
   m_sceneNode = rn;
 
+  TheSoundManager::Instance()->PlayWav(m_music);
 }
 
 }

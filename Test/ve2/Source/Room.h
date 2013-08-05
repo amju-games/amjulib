@@ -60,6 +60,8 @@ private:
 
   // Four destination rooms to N, S, E, W
   int m_dest[4];
+
+  std::string m_music;
 };
 
 // Get the current Room object

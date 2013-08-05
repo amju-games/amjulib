@@ -15,9 +15,6 @@ const char* LAST_MSG_SENT_KEY = "last_msg_sent";
 
 const char* SCORE_KEY = "score";
 
-/*
-const char* FOOD_KEY = "Foods";
-*/
 const char* FOOD_EATEN_KEY = "food-eaten";
 const char* FOOD_RECEIVED_KEY = "food-recv";
 const char* FOOD_GIVEN_KEY = "food-given";
@@ -25,6 +22,7 @@ const char* HEALTH_KEY = "health";
 const char* TREASURE_KEY = "num-treasure";
 
 // IDs for local game objects
+const int THE_ROOM_ID  =       -1;
 const int FOOD_START_ID =      200000;
 const int BADDDIE_START_ID =   300000;
 const int BULLET_START_ID =    400000;
