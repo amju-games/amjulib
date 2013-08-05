@@ -91,6 +91,9 @@ public:
   bool Load(File*);
 
   bool operator<(const Time& t) const;
+  bool operator<=(const Time& t) const;
+  bool operator>(const Time& t) const;
+  bool operator>=(const Time& t) const;
  
 protected:
   unsigned int m_secs;
