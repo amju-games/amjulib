@@ -32,6 +32,7 @@ ObjectUpdater::ObjectUpdater() : m_timestampPos(1), m_timestampUpdate(1)
 
   m_posElapsed = 0;
   m_updateElapsed = 0;
+  m_fastUpdateElapsed = 0;
 }
 
 ObjectUpdater::~ObjectUpdater()
@@ -257,8 +258,13 @@ void ObjectUpdater::Update()
   }
 */
 
-  m_updateElapsed += TheTimer::Instance()->GetDt();
-  static const float UPDATE_PERIOD = 2.0f; // TODO CONFIG
+  float dt = TheTimer::Instance()->GetDt();
+  m_updateElapsed += dt;
+  m_fastUpdateElapsed += dt;
+
+  static const float UPDATE_PERIOD = 20.0f; // TODO CONFIG
+  static const float FAST_UPDATE_PERIOD = 0.5f; // TODO CONFIG
+
   if (m_updateElapsed > UPDATE_PERIOD) 
   {
     m_updateElapsed = 0;
@@ -267,6 +273,16 @@ void ObjectUpdater::Update()
     url += "&time=" + TimestampToString(m_timestampUpdate); 
   
     TheVe1ReqManager::Instance()->AddReq(new GetStateUpdatesReq(url));
+  }
+  else if (m_fastUpdateElapsed > FAST_UPDATE_PERIOD)
+  {
+std::cout << "FAST UPDATE CHECK\n";
+
+    // Check for updates by checking document - avoid hitting DB so much
+    m_fastUpdateElapsed = 0;
+
+    std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_FAST_STATE_UPDATES);
+    TheVe1ReqManager::Instance()->AddReq(new GetFastStateUpdatesReq(url));
   }
 
   for (PosMap::iterator it = m_posMap.begin(); it != m_posMap.end();   )

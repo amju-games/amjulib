@@ -22,6 +22,7 @@ enum Task
 
   SET_STATE,  // send a key/val to store in DB
   GET_STATE_UPDATES,  // get all key/val updates since last check
+  GET_FAST_STATE_UPDATES,  // faster method
 
   SEND_MSG,
   GET_NEW_MSGS,

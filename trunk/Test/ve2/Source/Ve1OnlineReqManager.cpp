@@ -63,7 +63,12 @@ std::string Ve1ReqManager::MakeDownloadUrl(const std::string& filename)
 
 std::string Ve1ReqManager::MakeUrl(Task t)
 {
-  // TODO CONFIG
+  if (t == GET_FAST_STATE_UPDATES)
+  {
+    std::string s = AssetUrlRoot() + "../updates/updates.txt";
+    return s;
+  }
+
   std::string s =  ScriptUrlRoot();
   
   // Add Task-specific CGI script name

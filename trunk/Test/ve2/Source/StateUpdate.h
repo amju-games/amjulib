@@ -9,8 +9,15 @@ class GetStateUpdatesReq : public Ve1Req
 {
 public:
   GetStateUpdatesReq(const std::string& url);
-
   virtual void OnSuccess();
+};
+
+class GetFastStateUpdatesReq : public Ve1Req
+{
+public:
+  GetFastStateUpdatesReq(const std::string& url);
+  virtual void HandleResult();
+  virtual void OnSuccess() {}
 };
 }
 
