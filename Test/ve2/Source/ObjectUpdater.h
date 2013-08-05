@@ -75,7 +75,9 @@ private:
   bool m_isDirty; // ?
  
   // Count elapsed time, so we only query server periodically. This gets shortcut if we call a Hint* function 
-  float m_updateElapsed;
+  float m_updateElapsed; // for less frequent DB query
+  float m_fastUpdateElapsed; // for more frequent poll of document
+
   float m_posElapsed;
 };
 

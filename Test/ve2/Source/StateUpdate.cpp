@@ -15,29 +15,13 @@
 
 namespace Amju
 {
-GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get state updates")
+static Timestamp lastFastTimestamp = 1;
+
+void QueueUpdates(PXml p)
 {
-  m_critical = false;
-}
-
-void GetStateUpdatesReq::OnSuccess()
-{
-  // Child 0 is timestamp
-  //PXml p = m_xml.getChildNode(0);
-  //Assert(SafeStrCmp(p.getName(), "now"));
-  //std::string timestamp = p.getText();
-//std::cout << "Got new state update timestamp (from server): " << timestamp << "\n";
-
-  TheObjectUpdater::Instance()->SetTimestampUpdate(m_timestamp);
-
-  PXml p = m_xml.getChildNode(1);
-  if (SafeStrCmp(p.getName(), "states"))
-  {
-#ifdef XML_DEBUG
-std::cout << "found states element\n";
-#endif
-
     int numObjs = p.nChildNode();
+
+    Timestamp maxTimestamp = lastFastTimestamp;
 
     for (int i = 0; i < numObjs; i++)
     {
@@ -50,6 +34,19 @@ std::cout << "Obj " << i << ": ";
       int id = atoi(obj.getChildNode(0).getText());
       std::string key = obj.getChildNode(1).getText();
       std::string val = obj.getChildNode(2).getText();
+      if (obj.nChildNode() > 3)
+      {
+        // Timestamp - check if we have already seen this update
+        Timestamp t = ToInt(obj.getChildNode(2).getText()); 
+        if (t <= lastFastTimestamp) 
+        {
+          continue;
+        }
+        if (maxTimestamp < t)
+        {
+          maxTimestamp = t;
+        }
+      }
 
       // TODO Sanity check ?
 
@@ -89,6 +86,54 @@ std::cout << "Got update for object " << id << " key: " << key << " val: " << va
         SetPlayerName(id, val);
       }
     }
+    lastFastTimestamp = maxTimestamp;
+}
+
+GetStateUpdatesReq::GetStateUpdatesReq(const std::string& url) : Ve1Req(url, "get state updates")
+{
+  m_critical = false;
+}
+
+GetFastStateUpdatesReq::GetFastStateUpdatesReq(const std::string& url) :
+  Ve1Req(url, "fast update")
+{
+  m_critical = false;
+}
+
+void GetFastStateUpdatesReq::HandleResult()
+{
+  std::cout << "Got response for fast update: "; // << GetResult().GetString() << "\n\n";
+
+  const HttpResult& res = GetResult();
+  if (res.GetSuccess())
+  {
+    const std::string& str = res.GetString();
+    m_xml = ParseXml(str.c_str());
+
+    PXml p = m_xml.getChildNode(0);
+   
+    QueueUpdates(p); 
+  }
+}
+
+void GetStateUpdatesReq::OnSuccess()
+{
+  // Child 0 is timestamp
+  //PXml p = m_xml.getChildNode(0);
+  //Assert(SafeStrCmp(p.getName(), "now"));
+  //std::string timestamp = p.getText();
+//std::cout << "Got new state update timestamp (from server): " << timestamp << "\n";
+
+  TheObjectUpdater::Instance()->SetTimestampUpdate(m_timestamp);
+
+  PXml p = m_xml.getChildNode(1);
+  if (SafeStrCmp(p.getName(), "states"))
+  {
+#ifdef XML_DEBUG
+std::cout << "found states element\n";
+#endif
+
+    QueueUpdates(p);
   }
   else
   {
@@ -98,4 +143,5 @@ std::cout << "Got update for object " << id << " key: " << key << " val: " << va
   }
 }
 }
+
 
