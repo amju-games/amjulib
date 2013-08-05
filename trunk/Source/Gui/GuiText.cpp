@@ -518,6 +518,11 @@ bool GuiText::LoadText(File* f)
 
   std::string fontName = "font2d/" + strs[0] + "-font.font";
   m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
+  if (!m_font)
+  {
+    f->ReportError("Failed to load font " + fontName);
+    return false;
+  }
   m_textSize = ToFloat(strs[1]);
 
   // TODO optional flags etc
