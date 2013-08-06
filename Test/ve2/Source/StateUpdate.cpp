@@ -30,7 +30,11 @@ void QueueUpdates(PXml p)
 #ifdef XML_DEBUG
 std::cout << "Obj " << i << ": ";
 #endif
-
+      if (obj.nChildNode() < 3)
+      {
+std::cout << "Expected more children in node.\n";
+        continue;
+      }
       int id = atoi(obj.getChildNode(0).getText());
       std::string key = obj.getChildNode(1).getText();
       std::string val = obj.getChildNode(2).getText();
@@ -40,6 +44,10 @@ std::cout << "Obj " << i << ": ";
         Timestamp t = ToInt(obj.getChildNode(2).getText()); 
         if (t <= lastFastTimestamp) 
         {
+#ifdef UPDATE_DEBUG
+std::cout << "This req has already been queued: id: " 
+  << id << " key: " << key << " val: " << val << "\n";
+#endif
           continue;
         }
         if (maxTimestamp < t)
@@ -102,7 +110,9 @@ GetFastStateUpdatesReq::GetFastStateUpdatesReq(const std::string& url) :
 
 void GetFastStateUpdatesReq::HandleResult()
 {
-  std::cout << "Got response for fast update: "; // << GetResult().GetString() << "\n\n";
+#ifdef FAST_UPDATE_DEBUG
+  std::cout << "Got response for fast update: "  << GetResult().GetString() << "\n";
+#endif
 
   const HttpResult& res = GetResult();
   if (res.GetSuccess())
@@ -112,7 +122,16 @@ void GetFastStateUpdatesReq::HandleResult()
 
     PXml p = m_xml.getChildNode(0);
    
-    QueueUpdates(p); 
+    if (p.nChildNode())
+    {
+      QueueUpdates(p); 
+    }
+    else
+    {
+#ifdef FAST_UPDATE_DEBUG
+std::cout << "Failed to parse response to fast update.\n";
+#endif
+    }
   }
 }
 

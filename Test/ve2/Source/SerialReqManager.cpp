@@ -30,9 +30,21 @@ int SerialReqManager::GetTotalNumResponses() const
   return m_numResponses;
 }
 
-int SerialReqManager::GetTotalNumQueued() const
+//int SerialReqManager::GetTotalNumQueued() const
+//{
+//  return m_numQueued;
+//}
+  
+Strings SerialReqManager::GetRequestNames() const
 {
-  return m_numQueued;
+  Strings strs;
+
+  for (OnlineReqs::const_iterator it = m_reqs.begin(); it != m_reqs.end(); ++it)
+  {
+    strs.push_back((*it)->GetName());
+  }
+
+  return strs;
 }
 
 void SerialReqManager::Clear()

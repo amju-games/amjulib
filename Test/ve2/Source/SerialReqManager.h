@@ -2,6 +2,7 @@
 #define SERIAL_REQ_MANAGER_H_INCLUDED
 
 #include <OnlineReqManager.h>
+#include <StringUtils.h>
 
 namespace Amju
 {
@@ -30,11 +31,16 @@ public:
 
   // Get total number of responses received
   int GetTotalNumResponses() const;
+
   // Get total number of requests queued
-  int GetTotalNumQueued() const;
+  // Seems to duplicated CountAllReqs() ???
+//  int GetTotalNumQueued() const;
 
   // Clear all requests - but any request in flight is not cancelled
   void Clear();
+
+  // For reporting, debugging etc
+  Strings GetRequestNames() const;
 
 private:
   typedef std::deque<RCPtr<OnlineReq> > OnlineReqs;
