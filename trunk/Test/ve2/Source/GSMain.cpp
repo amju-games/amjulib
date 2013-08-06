@@ -51,6 +51,7 @@
 #include "Baddie.h"
 #include <AmjuFinal.h>
 
+#define SHOW_QUEUE
 #define SHOW_NUM_ERRORS
 //#define PICK_DEBUG
 
@@ -572,6 +573,39 @@ void GSMain::Draw2d()
 
   TheLurker::Instance()->Draw();
 
+#ifdef SHOW_QUEUE
+  {
+    static GuiText t;
+    t.SetFgCol(Colour(1, 1, 1, 1));
+    t.SetIsMulti(true);
+    t.SetLocalPos(Vec2f(-1.0f, 0.8f));
+    t.SetSize(Vec2f(1.0f, 1.0f));
+    t.SetJust(GuiText::AMJU_JUST_LEFT);
+
+    static std::string old;
+    std::string s;
+    Strings strs = TheVe1ReqManager::Instance()->GetRequestNames();
+    for (Strings::iterator it = strs.begin(); it != strs.end(); ++it)
+    {
+      s += *it;
+      s += "\n";
+    }
+
+    if (!s.empty()) // ? So on screen for longer ?
+    {
+      t.SetText(s);
+    }
+    t.Draw();
+
+    s = Replace(s, "\n", " ");
+    if (old != s)
+    {
+      std::cout << "Queue: " << s << "\n";
+      old = s;
+    }
+  }
+#endif
+
 #ifdef SHOW_NUM_ERRORS
   static int showErrs = ROConfig()->GetInt("show-errors", 0);
   if (showErrs > 0)
@@ -586,7 +620,7 @@ void GSMain::Draw2d()
     t.SetSize(Vec2f(1.0f, 0.1f));
     t.SetJust(GuiText::AMJU_JUST_LEFT);
     t.SetDrawBg(true);
-    t.SetLocalPos(Vec2f(-1.0f, 1.0f));
+    t.SetLocalPos(Vec2f(-1.0f, 0.9f));
     std::string s = "Errs CR:" + ToString(critical) + " NC:" + ToString(nonCritical) + " Q: " + ToString(q);
     t.SetText(s);
     t.Draw();

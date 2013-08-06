@@ -130,6 +130,8 @@ public:
   ObjectManager();
   ~ObjectManager();
 
+  void CheckForNewObjectsNow();
+
   // Called every frame
   void Update();
 

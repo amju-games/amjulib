@@ -226,12 +226,12 @@ std::cout << "...saved ok!\n";
 
 void ObjectUpdater::HintCheckForUpdates()
 {
-  m_posElapsed = 9999.9f;
+  m_updateElapsed = 9999.9f;
 }
 
 void ObjectUpdater::HintCheckForPosUpdates()
 {
-  m_updateElapsed = 9999.9f;
+  m_posElapsed = 9999.9f;
 }
 
 void ObjectUpdater::Update()
@@ -276,7 +276,7 @@ void ObjectUpdater::Update()
   }
   else if (m_fastUpdateElapsed > FAST_UPDATE_PERIOD)
   {
-std::cout << "FAST UPDATE CHECK\n";
+//std::cout << "FAST UPDATE CHECK\n";
 
     // Check for updates by checking document - avoid hitting DB so much
     m_fastUpdateElapsed = 0;
@@ -438,7 +438,7 @@ public:
   virtual void OnSuccess()
   {
     // We have successfully updated the server. 
-    TheObjectUpdater::Instance()->HintCheckForUpdates();   
+//    TheObjectUpdater::Instance()->HintCheckForUpdates();   
 
     //CheckCollects();
   }
@@ -479,7 +479,7 @@ public:
     // TODO Prediction
 
     // It would be good to tell the Pos Updater to check now.
-    TheObjectUpdater::Instance()->HintCheckForPosUpdates();   
+    //TheObjectUpdater::Instance()->HintCheckForPosUpdates();   
   }
 
 private:

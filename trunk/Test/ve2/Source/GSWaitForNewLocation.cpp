@@ -123,6 +123,8 @@ void GSWaitForNewLocation::OnActive()
   Assert(m_gui);
   GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancel);
 
+  TheObjectManager::Instance()->CheckForNewObjectsNow();
+
   // New June 2013: don't download anything. Load game objects from file.
 
   // What's our new location?

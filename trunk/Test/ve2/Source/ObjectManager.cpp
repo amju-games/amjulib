@@ -554,7 +554,7 @@ std::cout << "FILE Q: really trying to download file: " << filename << "\n";
     }
   }
 
-  static const float OBJECT_CHECK_PERIOD = 3.0f; // seconds, TODO CONFIG
+  static const float OBJECT_CHECK_PERIOD = 30.0f; // seconds, TODO CONFIG
 
   // If it's time, get all the objects [in this region, TODO] created since the last check.
   // TODO Get list of all objects *deleted* since last check.
@@ -592,10 +592,15 @@ void ObjectManager::AddGameObject(PGameObject go)
 //  m_allGameObjects.erase(id);
 //}
 
+void ObjectManager::CheckForNewObjectsNow()
+{
+  m_elapsed = 99999; // so we update ASAP
+}
+
 void ObjectManager::Clear()
 {
   TrashMap(); //m_map.clear();
-  m_elapsed = 0;
+  m_elapsed = 99999; // so we update ASAP
   m_timestamp = "1";
   m_fileQ.clear();
   m_objects.clear();
