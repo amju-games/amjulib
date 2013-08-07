@@ -31,7 +31,6 @@ public:
   void SetTimestampUpdate(Timestamp);
 
   void HintCheckForUpdates();
-  void HintCheckForPosUpdates();
 
   // For Edit mode
   void Clear();
