@@ -77,41 +77,26 @@ void GSRigidBody::Draw()
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(1, 1, 1)); // Light direction
 
+#ifdef MAKE_BOX3_DEMO
+
   static PShadowMap sm = 0;
   if (!sm)
   {
-    sm = AmjuGL::CreateShadowMap();
+    sm = (ShadowMap*)AmjuGL::Create(ShadowMap::DRAWABLE_TYPE_ID);
     sm->SetLightPos(AmjuGL::Vec3(20, 20, 20));
     sm->Init();
     sm->SetDrawFunc(ShadowDraw);
   }
   sm->Draw();
 
-//  GetRBSceneGraph()->Draw();
-}
+#else
+  GetRBSceneGraph()->Draw();
 
-int Fps()
-{
-  static float f = 0;
-  static int oldfps = 0;
-  static int fps = 0;
-  f += TheTimer::Instance()->GetDt();
-  fps++;
-  if (f > 1.0f)
-  {
-    f -= 1.0f;
-    oldfps = fps;
-    fps = 0;
-  }
-  return oldfps;
+#endif
 }
 
 void GSRigidBody::Draw2d()
 {
-  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  Assert(font);
-  std::string fps = ToString(Fps());
-  font->Print(-1, 0.9f, fps.c_str());
 }
 
 void MakeBox2(const Vec2f& pos, float rads)
@@ -156,6 +141,10 @@ RBBox3* MakeBox3(const Vec3f& pos)
 
 void GSRigidBody::OnActive()
 {
+  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  Assert(font);
+  TheGame::Instance()->SetFrameTimeFont(font);
+
   TheRBManager::Instance()->Clear();
 
   GSBase::OnActive();
