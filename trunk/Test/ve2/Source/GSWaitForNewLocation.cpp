@@ -38,6 +38,13 @@ static void OnCancel()
 
 GSWaitForNewLocation::GSWaitForNewLocation()
 {
+  m_setStartPos = false;
+}
+ 
+void GSWaitForNewLocation::SetStartPos(const Vec3f& pos)
+{
+  m_setStartPos = true;
+  m_startPos = pos;
 }
 
 void GSWaitForNewLocation::SetLatestDownloadedFilename(const std::string& filename)
@@ -71,6 +78,12 @@ void GSWaitForNewLocation::Update()
     // ObjectUpdater deliberately ignores pos updates for the local player,
     //  so why did this ever work? Race condition?
     playerObj->SetLocation(loc);
+  
+    if (m_setStartPos)
+    {
+      playerObj->SetPos(m_startPos);
+      m_setStartPos = false;
+    }
   }
   bool playerReady = (TheGame::Instance()->GetGameObject(localPlayerId) != 0);
 

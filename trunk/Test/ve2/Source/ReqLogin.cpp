@@ -29,6 +29,7 @@
 #include "CogTestResults.h"
 #include "CogTestNag.h"
 #include "LogOut.h"
+#include "GSWaitForNewLocation.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -96,6 +97,8 @@ std::cout << "Got session ID but we don't know the object ID for the local playe
         Strings strs = Split(locStr, ',');
         if (strs.size() == 4)
         {
+          Vec3f pos(ToInt(strs[0]), ToInt(strs[1]), ToInt(strs[2]));
+          TheGSWaitForNewLocation::Instance()->SetStartPos(pos);
           loc = ToInt(strs[3]);
         }
       }
