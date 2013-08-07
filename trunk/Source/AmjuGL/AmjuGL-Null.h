@@ -65,7 +65,6 @@ public:
 
   virtual Shader* LoadShader(const std::string& shaderFileName) { return new ShaderNull; }
 
-  virtual ShadowMap* CreateShadowMap() { return 0; }
   virtual Drawable* Create(int) { return 0; }
 }; // class 
 

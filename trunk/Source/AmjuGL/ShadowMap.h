@@ -10,6 +10,7 @@ namespace Amju
 class ShadowMap : public DrawDecorator
 {
 public:
+  enum { DRAWABLE_TYPE_ID = 5 };
   void SetLightPos(const AmjuGL::Vec3& lp) { m_lightPos = lp; }
 
 protected:

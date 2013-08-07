@@ -118,8 +118,6 @@ public:
 
   virtual Shader* LoadShader(const std::string& shaderFileName) = 0;
 
-  virtual ShadowMap* CreateShadowMap() = 0;
-
   virtual Drawable* Create(int) = 0;
 }; // class 
 } // namespace Amju

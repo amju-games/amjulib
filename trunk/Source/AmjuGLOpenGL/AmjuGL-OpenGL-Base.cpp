@@ -7,9 +7,6 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <Drawable.h>
 #include "OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
-#include "ShadowMapOpenGL1.h"
-#include "ShadowMapOpenGL2.h"
-#include "ShadowMapOpenGL3.h"
 #include <AmjuAssert.h>
 #include <AmjuFinal.h>
 
@@ -165,22 +162,6 @@ void AmjuGLOpenGLBase::SetTextureFilter(AmjuGL::TextureFilter tf)
   {
     Assert(0);
   }
-}
-
-ShadowMap* AmjuGLOpenGLBase::CreateShadowMap()
-{
-#ifdef IPHONE
-  return new ShadowMapNull; // TODO
-#else
-  // TODO: create best quality impl depending on hardware capability
-  if (!glBindFramebufferEXT)
-  {
-    // Required extension not supported
-    return new ShadowMapNull;
-  }
-
-  return new ShadowMapOpenGL2;
-#endif
 }
 
 }

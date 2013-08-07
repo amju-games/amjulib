@@ -261,10 +261,10 @@ public:
 
   static Shader* LoadShader(const std::string& shaderFileName);
 
-  // Create a ShadowMap (ref counted, on heap).
-  static ShadowMap* CreateShadowMap();
-
-  // Abstract Factory: impl creates appropriate Drawable, e.g. ShadowMap, Outliner, CelShader, etc.
+  // Abstract Factory: impl creates appropriate Drawable, 
+  //  probably either TriangleListStatic or TriangleListDynamic.
+  // But can also create special drawables,
+  //  e.g. ShadowMap, Outliner, CelShader, etc.
   static Drawable* Create(int drawableTypeId);
 
 }; // struct AmjuGL

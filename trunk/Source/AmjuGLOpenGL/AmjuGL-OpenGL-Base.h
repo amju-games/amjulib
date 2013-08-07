@@ -42,8 +42,6 @@ public:
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
 
-  virtual ShadowMap* CreateShadowMap();
-
 protected:
   friend class GLShader;
   // True if shaders are supported on this machine
