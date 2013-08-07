@@ -5,6 +5,7 @@
 #############################################
 
 require "common.pl";
+require "publishchanges.pl";
 
 my_connect();
 
@@ -51,6 +52,8 @@ sub sendmsg()
 
     update($sql);
   }
+
+  publishRecentChanges();
 }
 
 
