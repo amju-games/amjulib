@@ -56,11 +56,22 @@ void Ve1Req::HandleResult()
         m_errorStr = p.getText();
         success = false;
       }
+      m_errorCode = "";
+      // Check for <errorcode>
+      if (m_xml.nChildNode() > 2)
+      {
+        p = m_xml.getChildNode(1);
+        if (SafeStrCmp(p.getName(), "errorcode"))
+        {
+          m_errorCode = p.getText();
+        }
+      }
     }
   }
   else
   {
-    m_errorStr = res.GetErrorString();
+    //m_errorStr = res.GetErrorString();
+    m_errorStr = "I don't seem to be able to go online. Is your internet connection working?";
   }
 
   if (success)
@@ -83,7 +94,7 @@ void Ve1Req::OnFailure()
   {
     s_criticalErrors++;
 
-    ShowError(m_name + ": " + m_errorStr);
+    ShowError(m_errorStr + "\n\n(Request was: " + m_name + ")");
 std::cout << "NET ERROR AND IS CRITICAL!?!: " << m_errorStr << " - request name: " << m_name << "\n";
   }
   else

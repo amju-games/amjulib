@@ -28,13 +28,9 @@ public:
   virtual void OnFailure();
 
 protected:
-  // Check if the response tells us to create collectables
-//  void CheckCollects();
-//  void CheckCollects2d();
-
-protected:
   PXml m_xml;
   std::string m_errorStr;
+  std::string m_errorCode;
   std::string m_timestamp;
   bool m_critical; // all errors are treated as critical failures ?
 
