@@ -21,7 +21,7 @@ public:
   // will not be added. 
   // Returns true if request added to queue; returns false if max number
   // of requests of this type would be exceeded.
-  bool AddReq(SharedPtr<OnlineReq>, int maxRequestsOfThisType = 1, bool discardNewNotOld = true);
+  bool AddReq(RCPtr<OnlineReq>, int maxRequestsOfThisType = 1, bool discardNewNotOld = true);
 
   // Count all queued requests
   int CountAllReqs() const;
