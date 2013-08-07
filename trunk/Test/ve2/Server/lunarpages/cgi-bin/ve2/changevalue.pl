@@ -5,6 +5,7 @@
 #############################################
 
 require "common.pl";
+require "publishchanges.pl";
 
 my_connect();
 
@@ -32,6 +33,7 @@ sub change_value()
 
   update_or_insert($sql);
 
+  publishRecentChanges();
 }
 
 
