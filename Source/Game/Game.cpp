@@ -6,9 +6,8 @@
 #include "Screen.h"
 #include <StringUtils.h>
 #include <ResourceManager.h>
-#include <Font.h>
+#include <GuiText.h>
 #include <Rect.h>
-#include <DrawRect.h>
 #ifdef WIN32
 #include <windows.h>
 #else
@@ -170,15 +169,14 @@ void Game::RunOneLoop()
     s += " fps: " + fps;
 
     // Display time per frame
-    PushColour();
-    AmjuGL::SetColour(Colour(0, 0, 0, 1));
-    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    float w = m_font->GetTextWidth(s);
-    Rect r(-1.0f, -1.0f + w, -1.0f, -0.9f);
-    DrawSolidRect(r);
-    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-    PopColour();
-    m_font->Print(-1.0f, -1.0f, s.c_str());
+    static GuiText t;
+    t.SetFont(m_font);
+    t.SetFgCol(Colour(1, 1, 1, 1));
+    t.SetLocalPos(Vec2f(-1.0f, 1.0f));
+    t.SetSize(Vec2f(1.0f, 0.1f));
+    t.SetJust(GuiText::AMJU_JUST_LEFT);
+    t.SetText(s);
+    t.Draw(); 
   }
 #endif //  SHOW_FRAME_TIME
 
