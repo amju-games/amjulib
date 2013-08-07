@@ -1,31 +1,8 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: GlueFile.h,v $
-Revision 1.4  2007/07/04 18:40:44  jay
-Merge ref-counting from AMJU_POOL branch.
-We must ref count GlueFileBinaryData so we only delete allocated data when
- there are no more copies.
-
-Revision 1.3  2006/06/27 18:16:01  jay
-Store filename, as there may now be multiple glue files.
-Del unused files: create sh script as well as .bat script
-
-Revision 1.2  2006/02/17 18:59:08  jay
-Added new GetBinary() overload. This returns an _object_ containing a
-pointer to a buffer. The buffer can be allocated by the object, which then
-owns the buffer; or, the pointer can point to memory allocated by
-something else.
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
 #ifndef AMJU_GLUE_FILE_H_INCLUDED
 #define AMJU_GLUE_FILE_H_INCLUDED
 
 #include "Common.h"
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include <fstream>
 #include <list>
 #include <map>
@@ -101,7 +78,7 @@ private:
   int m_refCount;
 };
 
-class GlueFile : public Shareable
+class GlueFile : public RefCounted
 {
 public:
   GlueFile();

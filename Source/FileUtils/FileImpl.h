@@ -6,12 +6,12 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #define FILE_IMPL_H_INCLUDED
 
 #include <string>
-#include "SharedPtr.h"
+#include <RCPtr.h>
 
 namespace Amju
 {
 // Interface for classes implementing File operations.
-class FileImpl : public Shareable
+class FileImpl : public RefCounted
 {
 public:
   virtual ~FileImpl();

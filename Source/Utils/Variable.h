@@ -11,7 +11,7 @@ Added to repository
 
 #include <string>
 #include <vector>
-#include "SharedPtr.h"
+#include "RCPtr.h"
 
 namespace Amju
 {
@@ -20,7 +20,7 @@ namespace Amju
 class Variable;
 typedef std::vector<Variable> VariableVec;
 
-class Variable : public Shareable
+class Variable : public RefCounted
 {
 public:
   enum Type 

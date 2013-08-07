@@ -7,11 +7,11 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #include <vector>
 #include "AmjuGL.h"
-#include "SharedPtr.h"
+#include "RCPtr.h"
 
 namespace Amju
 {
-class AmjuGLImpl : public Shareable
+class AmjuGLImpl : public RefCounted
 {
 public:
   virtual ~AmjuGLImpl() {}

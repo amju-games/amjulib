@@ -152,7 +152,7 @@ int OnlineReqManager::CountReqsWithName(const std::string& name)
   return count;
 }
 
-bool OnlineReqManager::AddReq(SharedPtr<OnlineReq> pReq, int maxWithThisName)
+bool OnlineReqManager::AddReq(RCPtr<OnlineReq> pReq, int maxWithThisName)
 {
   AMJU_CALL_STACK;
 

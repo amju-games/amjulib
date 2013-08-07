@@ -37,7 +37,7 @@ namespace Amju
 // mechanics are in lua scripts, but all the graphics, physics, OS interaction,
 // etc is handled by the Amju C++ engine.
 //
-class Lua : public Shareable
+class Lua : public RefCounted
 {
 public:
   // Right now lua function names are just strings. It might make more sense

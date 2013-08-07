@@ -6,14 +6,14 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #define SOUND_PLAYER_IMPL_H_INCLUDED
 
 #include <string>
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "GlueFile.h"
 
 namespace Amju
 {
 // Base class - doesn't do anything. Subclasses implement sound-playing for 
 // different platforms.
-class SoundPlayerImpl : public Shareable
+class SoundPlayerImpl : public RefCounted
 {
 public:
   // Get/Set the Glue File used by the file callbacks.
@@ -50,9 +50,9 @@ public:
   virtual void SetSongMaxVolume(float f) {}
 
 protected:
-  SharedPtr<GlueFile> m_pGlueFile;
+  RCPtr<GlueFile> m_pGlueFile;
 };
 
-typedef SharedPtr<SoundPlayerImpl> PSoundPlayerImpl;
+typedef RCPtr<SoundPlayerImpl> PSoundPlayerImpl;
 }
 #endif

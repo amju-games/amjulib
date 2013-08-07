@@ -28,9 +28,9 @@ Added to repository
 
 #include <map>
 #include "Thread.h"
-#include "RCPtr.h"
+#include <RCPtr.h>
 #include "Mutex.h"
-#include "Singleton.h"
+#include <Singleton.h>
 
 namespace Amju
 {
@@ -52,7 +52,7 @@ public:
 
 private:
   // Map thread IDs to Threads.
-  typedef std::map<int, SharedPtr<Thread> > ThreadMap;
+  typedef std::map<int, RCPtr<Thread> > ThreadMap;
   ThreadMap m_threads;
 
 private:

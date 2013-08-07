@@ -1,18 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2000-2006
-$Log: HttpReq.h,v $
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.2  2006/07/30 21:37:16  jay
-Added CreateWorker for flexibility in subclasses: DON'T call this from ctor
- or it won't be virtualised! + Can turn off mutexes if really necessary.
-
-Revision 1.1.2.1  2006/07/25 08:15:47  jay
-Added HttpReq to repository
-
-*/
-
 #ifndef HTTP_REQ_H_INCLUDED
 #define HTTP_REQ_H_INCLUDED
 
@@ -24,7 +9,7 @@ namespace Amju
 {
 // This class encapsulates an Http client request: the url, the current
 // state of the request, and the result once the request has completed. 
-class HttpReq : public Shareable
+class HttpReq : public RefCounted
 {
 public:
   // Creates a thread to handle the request.
@@ -89,7 +74,7 @@ protected:
   bool m_isFinished;
 
   // The worker thread
-  SharedPtr<Thread> m_pThread;
+  RCPtr<Thread> m_pThread;
 
   std::string m_url;
   HttpClient::HttpMethod m_method;
