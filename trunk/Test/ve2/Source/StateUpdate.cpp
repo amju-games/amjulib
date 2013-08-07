@@ -10,6 +10,7 @@
 #include "PlayerNames.h"
 #include <AmjuFinal.h>
 
+//#define POS_UPDATE_DEBUG          
 //#define UPDATE_DEBUG
 //#define XML_DEBUG
 
@@ -68,7 +69,7 @@ std::cout << "This req has already been queued: id: "
           float z = ToFloat(strs[2]);
           int loc = ToInt(strs[3]);
 
-#ifdef UPDATE_DEBUG          
+#ifdef POS_UPDATE_DEBUG          
 std::cout << "Queueing pos for object " << id << " x: " << x << " y: " << y << " z: " << z << "\n";
 #endif
 
