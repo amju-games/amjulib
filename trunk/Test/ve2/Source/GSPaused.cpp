@@ -9,6 +9,7 @@
 //§#include "LocalPlayer.h"
 #include "GSCalendar.h"
 #include "GSAchievements.h"
+#include "GS2dAvatarMod.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -24,6 +25,12 @@ namespace Amju
 //  TheGSCalendar::Instance()->SetPrevState(TheGSPaused::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSCalendar::Instance());
 //}
+
+static void OnAvatarButton()
+{
+  TheGS2dAvatarMod::Instance()->SetPrevState(TheGSPaused::Instance());
+  TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance());
+}
 
 static void OnResumeButton()
 {
@@ -76,6 +83,8 @@ void GSPaused::OnActive()
   m_gui->GetElementByName("resume-button")->SetCommand(Amju::OnResumeButton);
   m_gui->GetElementByName("options-button")->SetCommand(Amju::OnOptionsButton);
   m_gui->GetElementByName("quit-button")->SetCommand(Amju::OnQuitButton);
+  m_gui->GetElementByName("avatar-button")->SetCommand(Amju::OnAvatarButton);
+
   //m_gui->GetElementByName("reset-button")->SetEnabled(false); 
     //SetCommand(Amju::OnResetButton);
 //  m_gui->GetElementByName("calendar-button")->SetCommand(Amju::OnCalendarButton);

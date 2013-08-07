@@ -6,7 +6,7 @@ gui-comp
 // Name
 paused-comp
 // Num children
-4
+5
 
 
 // Element type
@@ -21,8 +21,6 @@ text1
 Paused
 // Font name, size
 arial, 1.0, bgcol=000000, fgcol=ffffff
-
-
 
 
 
@@ -71,6 +69,21 @@ resume-button
 gui-button-4.png
 // Text
 continue
+// Font name, size
+arial, 1.6
+
+// element type
+gui-button
+// Element name
+avatar-button
+// pos (coords are -1..1)
+-0.4, 0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+change look
 // Font name, size
 arial, 1.6
 
