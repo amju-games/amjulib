@@ -51,8 +51,8 @@
 #include "Baddie.h"
 #include <AmjuFinal.h>
 
-#define SHOW_QUEUE
-#define SHOW_NUM_ERRORS
+//#define SHOW_QUEUE
+//#define SHOW_NUM_ERRORS
 //#define PICK_DEBUG
 
 namespace Amju
