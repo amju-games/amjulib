@@ -33,7 +33,7 @@ ShadowSG* GetSG()
   static ShadowSG* sg = 0;
   if (!sg)
   {
-    ShadowMap* sm = new ShadowMapOpenGL2; 
+    ShadowMap* sm = (ShadowMap*)AmjuGL::Create(ShadowMap::DRAWABLE_TYPE_ID);
     sm->SetDrawFunc(ShadowMapDrawFunc);
     sm->Init();
     sg = new ShadowSG(sm);
@@ -98,13 +98,4 @@ void GSShadow::OnActive()
   
 }
 
-bool GSShadow::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSShadow::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace

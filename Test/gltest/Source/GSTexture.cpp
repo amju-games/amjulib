@@ -85,13 +85,4 @@ void GSTexture::OnActive()
   m_tex[1] = (Texture*)TheResourceManager::Instance()->GetRes(TEX1);
 }
 
-bool GSTexture::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSTexture::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
