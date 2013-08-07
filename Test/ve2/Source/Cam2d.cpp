@@ -24,8 +24,6 @@ void Cam2d::Update()
   {
     Vec2f size = room->GetSize() * 0.5f;
 
-std::cout << "Cam: pos.x: " << pos.x << " size.x: " << size.x << "\n";
-
     float MAX_X = 500.0f; 
     if (pos.x + size.x > MAX_X)
     {
