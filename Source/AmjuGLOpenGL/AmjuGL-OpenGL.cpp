@@ -18,6 +18,9 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShaderNull.h"
 #include "AmjuAssert.h"
 #include "OpenGL.h"
+#include "ShadowMapOpenGL1.h"
+#include "ShadowMapOpenGL2.h"
+#include "ShadowMapOpenGL3.h"
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -85,6 +88,17 @@ static Drawable* MakeDynamicTriList()
   return new TriListDynamicOpenGL;
 }
 
+static Drawable* MakeShadowMap()
+{
+  // TODO: create best quality impl depending on hardware capability
+  if (!glBindFramebufferEXT)
+  {
+    // Required extension not supported
+    return new ShadowMapNull;
+  }
+  return new ShadowMapOpenGL2;
+}
+
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
@@ -97,6 +111,7 @@ AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
 
   m_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   m_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+  m_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
 }
 
 Drawable* AmjuGLOpenGL::Create(int drawableTypeId)

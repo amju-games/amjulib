@@ -1018,10 +1018,6 @@ Shader* AmjuGLGCube::LoadShader(const std::string& )
   return new ShaderNull;
 }
 
-ShadowMap* AmjuGLGCube::CreateShadowMap()
-{
-  return new ShadowMapNull;
-}
 }
 
 

@@ -773,11 +773,6 @@ Shader* AmjuGLDX9::LoadShader(const std::string& shaderFileName)
   return s;
 }
 
-ShadowMap* AmjuGLDX9::CreateShadowMap()
-{
-  return new ShadowMapNull;
-}
-
 } // namespace
 
 #endif // AMJU_OFFER_DX9
