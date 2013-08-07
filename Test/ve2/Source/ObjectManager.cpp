@@ -530,7 +530,6 @@ std::cout << "FILE Q: really trying to download file: " << filename << "\n";
       {
         obj->Create();
         TheObjectUpdater::Instance()->HintCheckForUpdates();
-        TheObjectUpdater::Instance()->HintCheckForPosUpdates();
       }
       else if (IsLocal(assetlistname) && IsLocal(datafilename))
       {
@@ -542,7 +541,6 @@ std::cout << "FILE Q: really trying to download file: " << filename << "\n";
           // Hint to get pos/state for this object
           // Doesn't seem to help speed up Waiting screen
           TheObjectUpdater::Instance()->HintCheckForUpdates();
-          TheObjectUpdater::Instance()->HintCheckForPosUpdates();
         }
       }
     }
