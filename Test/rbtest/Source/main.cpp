@@ -25,7 +25,11 @@ namespace Amju
 // Create global variable window info 
 Amju::AmjuGLWindowInfo w(640, 480, false, "TEH AWESOM RB TEST");
 
-void StartUp()
+void StartUpBeforeCreateWindow()
+{
+}
+
+void StartUpAfterCreateWindow()
 {
   TheGame::Instance()->SetCurrentState(
 //    TheGSSpringMesh::Instance()
