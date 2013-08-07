@@ -229,11 +229,6 @@ void ObjectUpdater::HintCheckForUpdates()
   m_updateElapsed = 9999.9f;
 }
 
-void ObjectUpdater::HintCheckForPosUpdates()
-{
-  m_posElapsed = 9999.9f;
-}
-
 void ObjectUpdater::Update()
 {
 /*
