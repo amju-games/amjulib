@@ -2,6 +2,7 @@
 #define GS_WAITFORNEWLOCATION_H_INCLUDED
 
 #include <Singleton.h>
+#include <Vec3.h>
 #include "GSGui.h"
 
 namespace Amju 
@@ -24,6 +25,11 @@ public:
   // Call to show user that we are downloading stuff
   void SetLatestDownloadedFilename(const std::string& filename);
 
+  void SetStartPos(const Vec3f& pos);
+
+private:
+  Vec3f m_startPos;
+  bool m_setStartPos;
 };
 typedef Singleton<GSWaitForNewLocation> TheGSWaitForNewLocation;
 } // namespace
