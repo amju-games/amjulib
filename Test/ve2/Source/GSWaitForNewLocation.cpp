@@ -62,8 +62,23 @@ void GSWaitForNewLocation::Update()
   TheObjectManager::Instance()->Update();
   TheObjectUpdater::Instance()->Update();
 
-  //bool terrainReady = TerrainReady();
-  bool playerReady = (TheGame::Instance()->GetGameObject(GetLocalPlayerId()) != 0);
+  int localPlayerId = GetLocalPlayerId();
+  int loc = GetLocalPlayerLocation();
+  Ve1Object* playerObj = dynamic_cast<Ve1Object*>(TheObjectManager::Instance()->GetGameObject(localPlayerId).GetPtr());
+  if (playerObj)
+  {
+    playerObj->SetLocation(loc);
+  }
+  bool playerReady = (TheGame::Instance()->GetGameObject(localPlayerId) != 0);
+
+#ifdef WHY_WAIT_DEBUG
+std::cout << "Local player ID: " << localPlayerId << "\n";
+if (playerObj && !playerReady)
+{
+  std::cout << "Player object loaded but not in game!?!\n";
+}
+#endif
+
   bool editMode = GetGameMode() == AMJU_MODE_EDIT;
 
   static int showStatus = ROConfig()->GetInt("new-location-show-status", 0);
@@ -124,6 +139,7 @@ void GSWaitForNewLocation::OnActive()
   GetElementByName(m_gui, "cancel-button")->SetCommand(OnCancel);
 
   TheObjectManager::Instance()->CheckForNewObjectsNow();
+  TheObjectUpdater::Instance()->HintCheckForUpdates();
 
   // New June 2013: don't download anything. Load game objects from file.
 

@@ -137,11 +137,15 @@ std::cout << "Failed to parse response to fast update.\n";
 
 void GetStateUpdatesReq::OnSuccess()
 {
+#ifdef UPDATE_DEBUG          
+  {
   // Child 0 is timestamp
-  //PXml p = m_xml.getChildNode(0);
-  //Assert(SafeStrCmp(p.getName(), "now"));
-  //std::string timestamp = p.getText();
-//std::cout << "Got new state update timestamp (from server): " << timestamp << "\n";
+  PXml p = m_xml.getChildNode(0);
+  Assert(SafeStrCmp(p.getName(), "now"));
+  std::string timestamp = p.getText();
+std::cout << "Got new state update timestamp (from server): " << timestamp << "\n";
+  }
+#endif
 
   TheObjectUpdater::Instance()->SetTimestampUpdate(m_timestamp);
 

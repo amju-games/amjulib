@@ -82,7 +82,10 @@ void BBPatrol::Update()
 
   if (change)
   {
-    TheSoundManager::Instance()->PlayWav(m_sound);
+    if (!m_sound.empty())
+    {
+      TheSoundManager::Instance()->PlayWav(m_sound);
+    }
     m_baddie->SetPos(pos);
     m_baddie->SetVel(Vec3f(m_patrolDir.x, 0, m_patrolDir.y));
   }
