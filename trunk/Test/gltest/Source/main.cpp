@@ -11,6 +11,11 @@
 
 #endif // WIN32
 
+#ifdef MACOSX
+#define AMJU_USE_OPENGL
+#define AMJU_USE_GLUT
+#endif
+
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
@@ -23,9 +28,13 @@
 namespace Amju
 {
 // Create global variable window info 
-Amju::AmjuGLWindowInfo w(640, 480, false);
+Amju::AmjuGLWindowInfo w(640, 480, false, "AmjuGL Test");
 
-void StartUp()
+void StartUpBeforeCreateWindow()
+{
+}
+
+void StartUpAfterCreateWindow()
 {
   //TheGame::Instance()->SetCurrentState(TheGSTexture::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());

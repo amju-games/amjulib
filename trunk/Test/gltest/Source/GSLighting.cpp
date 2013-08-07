@@ -68,13 +68,4 @@ void GSLighting::OnActive()
 {
 }
 
-bool GSLighting::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSLighting::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace

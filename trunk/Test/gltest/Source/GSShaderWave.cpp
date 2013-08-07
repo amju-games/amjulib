@@ -50,13 +50,4 @@ void GSShaderWave::OnActive()
   shader = AmjuGL::LoadShader("Shaders/wavedemo");
 }
 
-bool GSShaderWave::OnCursorEvent(const CursorEvent& ce)
-{
-  return false;
-}
-
-bool GSShaderWave::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return false;
-}
 } // namespace
