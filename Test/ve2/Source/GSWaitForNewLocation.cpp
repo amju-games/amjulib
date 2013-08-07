@@ -67,6 +67,9 @@ void GSWaitForNewLocation::Update()
   Ve1Object* playerObj = dynamic_cast<Ve1Object*>(TheObjectManager::Instance()->GetGameObject(localPlayerId).GetPtr());
   if (playerObj)
   {
+    // Need to do this or we might wait forever here.
+    // ObjectUpdater deliberately ignores pos updates for the local player,
+    //  so why did this ever work? Race condition?
     playerObj->SetLocation(loc);
   }
   bool playerReady = (TheGame::Instance()->GetGameObject(localPlayerId) != 0);
