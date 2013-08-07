@@ -2,6 +2,8 @@
 #define TREASURE_H_INCLUDED
 
 #include "Ve1Object.h"
+#include "AttackEffect.h"
+#include "SpriteNode.h"
 
 namespace Amju
 {
@@ -21,6 +23,8 @@ public:
 
 private:
   int m_points;
+  RCPtr<AttackEffect> m_sparkle;
+  RCPtr<SpriteNode> m_glow;
 };
 }
 

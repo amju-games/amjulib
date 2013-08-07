@@ -103,11 +103,30 @@ bool Treasure::Load(File* f)
   // Create scene node if no local player yet OR player exists and there is no treasure key for this room 
   if (!p || !(p->Exists(MakeTreasureKey())))
   {
-    SpriteNode* sn = new SpriteNode(tex, cells.x, cells.y, XSIZE * 0.5f, XSIZE * 0.5f);
+    // Size depends on points value
+    float size = XSIZE * (float)m_points / 500.0f;
+    SpriteNode* sn = new SpriteNode(tex, cells.x, cells.y, size * 0.5f, size * 0.5f);
 
     SetSceneNode(sn);
     sn->GetSprite()->SetCellRange(0, cells.x * cells.y);
     sn->GetSprite()->SetCell(0);
+
+    m_glow = new SpriteNode("flare.png", 1, 1, size, size);
+    sn->AddChild(m_glow.GetPtr());
+
+    File f;
+    if (!f.OpenRead("fighteffect.txt"))
+    {
+      f.ReportError("Failed to load effect");
+      Assert(0);
+    }
+    m_sparkle = new AttackEffect;
+    if (!m_sparkle->Load(&f))
+    {
+      f.ReportError("Failed to load effect");
+      Assert(0);
+    }
+    sn->AddChild(m_sparkle.GetPtr());
   }
 
   return true;
@@ -123,6 +142,7 @@ void Treasure::Update()
     Matrix m;
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
+    m_glow->SetLocalTransform(m); // ??? WHY ???
   
     if (m_sceneNode->GetAABB())
     {
