@@ -9,8 +9,8 @@ require "sendnotification.pl";
 require "sendemail2.pl";
 
 # This is the minimum client version which you must have to be able to log in.
-my $latestMajor = "0";
-my $latestMinor = "9";
+my $latestMajor = "1";
+my $latestMinor = "0";
 my $startloc = 1;
 
 my_connect();
@@ -54,7 +54,7 @@ sub add_research_element($$)
   {
     print "<date>";
     print "<timestamp>$timestamp</timestamp><cogtest>$cog_test</cogtest><play>$play</play>";
-    print "</date>";
+    print "</date>\n";
   }
   print "</dates>";
 
@@ -114,7 +114,7 @@ print "Client ver: $clientver\n";
     {
       # Client too old
       my $t = time();
-      print "<now>$t</now><error>BAD_CLIENT: Sorry, it looks like you need to download the latest version of the game. There are some spiffy new features which unfortunately won't work with the version you have.</error>\n";
+      print "<now>$t</now><error>Sorry, it looks like you need to download the latest version of the game. There are some spiffy new features which unfortunately won't work with the version you have.</error><errorcode>BAD_CLIENT</errorcode>\n";
 
       sendEmail("Login: bad client", "Hi, login.pl here. $email just tried to log in but has an old client (version: $clientver).\nServer time is: $t\nBye!");
       
@@ -197,7 +197,7 @@ print "FAILED to get loc :-(\n";
     {
       print "Errr.. failed to create session?!\n";
       my $t = time();
-      print "<now>$t</now><error>BAD_SESSION: Well, this was not expected. Not at all. This could perhaps be due to the database being hammered too much. </error>\n";
+      print "<now>$t</now><error>Oh dear, an unexpected error occurred. This could perhaps be due to the database being hammered too much. </error><errorcode>BAD_SESSION</errorcode>\n";
     
       sendEmail("Login: bad session", "Hi, login.pl here. $email just tried to log in got a BAD_SESSION error! Well, bye!");
       notifyProwl("Bad session error", "BAD_SESSION error for $email!");
@@ -206,7 +206,7 @@ print "FAILED to get loc :-(\n";
   else
   {
     my $t = time();
-    print "<now>$t</now><error>BAD_EMAIL: Sorry, I didn't recognise your email address. Please could you check for spelling mistakes. Maybe you have more than one email address, and I have a different one in my database to the one you just used. If it's any consolation, Jason gets texted and emailed when this happens, so he will be on the case soon.</error>\n";
+    print "<now>$t</now><error>Sorry, I didn't recognise your email address. Please could you check for spelling mistakes. Maybe you have more than one email address, and I have a different one in my database to the one you just used. If it's any consolation, Jason gets texted and emailed when this happens, so he will be on the case soon.</error><errorcode>BAD_EMAIL</errorcode>\n";
 
     sendEmail("Login: bad email", "Hi, login.pl here. Someone just tried to log in with this email address and it wasn't found in the player table.\n$email\nServer time is: $t\nBye!");
       
