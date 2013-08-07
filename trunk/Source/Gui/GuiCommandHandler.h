@@ -34,7 +34,7 @@ protected:
   // The Gui element which owns this Command and fires it when required.
   GuiElement* m_pGui;
 };
-typedef SharedPtr<GuiCommand> PGuiCommand;
+typedef RCPtr<GuiCommand> PGuiCommand;
 
 // See Command pattern.
 class GuiCommandHandler : public NonCopyable

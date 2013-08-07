@@ -11,7 +11,7 @@ namespace Amju
 {
 void ReportError(const std::string&);
 
-SharedPtr<GlueFile> FileImplGlue::s_pGlueFile;
+RCPtr<GlueFile> FileImplGlue::s_pGlueFile;
 bool FileImplGlue::s_isReady = false;
 
 FileImplGlue::FileImplGlue()

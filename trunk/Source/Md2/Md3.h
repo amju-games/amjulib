@@ -261,7 +261,7 @@ namespace Amju
     // The file pointer
     FILE *m_FilePointer;
 
-    Amju::SharedPtr<Amju::File> m_pFile; // Amju File
+    Amju::RCPtr<Amju::File> m_pFile; // Amju File
     unsigned int m_bytesRead; // bytes read so far from above file
 
     tMd3Header				m_Header;			// The header data

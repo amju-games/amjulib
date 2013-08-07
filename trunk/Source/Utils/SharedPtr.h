@@ -6,6 +6,11 @@ Added to repository
   
 */
 
+#error Dude, use RCPtr
+
+#if 0
+
+
 #if ! defined(SCHMICKEN_SHARED_PTR_H_INCLUDED)
 #define SCHMICKEN_SHARED_PTR_H_INCLUDED
 
@@ -111,3 +116,4 @@ SharedPtr<T>::Detach(T* p)
 
 #endif 
 
+#endif // 0

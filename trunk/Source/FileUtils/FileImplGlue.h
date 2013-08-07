@@ -70,7 +70,7 @@ protected:
 
   // GlueFile isn't a Singleton - it's plausible to have more than one - but 
   // each FileImplGlue uses the same one.
-  static SharedPtr<GlueFile> s_pGlueFile;
+  static RCPtr<GlueFile> s_pGlueFile;
 
   // Store the current file position of the GlueFile.
   // This is so we can have multiple FileImplGlues, pointing to different

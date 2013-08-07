@@ -7,13 +7,13 @@ Amju Games source code (c) Copyright Jason Colman 2004
 
 #include "FileImpl.h"
 #include "Tokeniser.h"
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include <fstream>
 #include <string>
 
 namespace Amju
 {
-class File : public Shareable
+class File : public RefCounted
 {
 public:
   // Use to specify no version info to ctor.
@@ -163,7 +163,7 @@ protected:
   bool m_isBinary;
 
   // The implementation
-  SharedPtr<FileImpl> m_pImpl;
+  RCPtr<FileImpl> m_pImpl;
 
   // Output file - for saving.
   std::ofstream m_os;

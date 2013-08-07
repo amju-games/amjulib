@@ -1,31 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2000-2006
-$Log: OnlineReqManager.h,v $
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.6  2006/08/12 07:40:20  jay
-Changed AddReq() to return a bool, so we know if the max number of requests
-was exceeded.
-
-Revision 1.1.2.5  2006/08/07 20:46:11  jay
-Fix iterator-invalidation bug
-
-Revision 1.1.2.4  2006/07/30 21:38:07  jay
-Count requests on queue with a given name; limit number of requests of a
-  given name.
-
-Revision 1.1.2.3  2006/07/26 21:19:16  jay
-Pass SharedPtr, not raw ptr - seemed like a good idea but not really necessary
-
-Revision 1.1.2.2  2006/07/25 17:45:38  jay
-Fix bad call to erase; add GetName()
-
-Revision 1.1.2.1  2006/07/25 08:16:34  jay
-Added OnlineReqManager to repository
-
-*/
-
 #ifndef ONLINE_REQ_MANAGER_H_INCLUDED
 #define ONLINE_REQ_MANAGER_H_INCLUDED
 
@@ -73,7 +45,7 @@ public:
   // will not be added. 
   // Returns true if request added to queue; returns false if max number
   // of requests of this type would be exceeded.
-  bool AddReq(SharedPtr<OnlineReq>, int maxRequestsOfThisType = 1);
+  bool AddReq(RCPtr<OnlineReq>, int maxRequestsOfThisType = 1);
 
   // Return the number of requests with the given name.
   int CountReqsWithName(const std::string& name);
@@ -82,7 +54,7 @@ public:
   int CountAllReqs() const;
 
 private:
-  typedef std::deque<SharedPtr<OnlineReq> > OnlineReqs;
+  typedef std::deque<RCPtr<OnlineReq> > OnlineReqs;
   OnlineReqs m_reqs;
 };
 }
