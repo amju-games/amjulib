@@ -47,5 +47,6 @@ rock2.png
 // Destinations N, S, E>, W
 3, 0, 10, 0
 
-
+// music
+sound/rainforest.it
 

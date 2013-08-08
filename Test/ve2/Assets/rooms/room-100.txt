@@ -47,3 +47,7 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 200, 110, 90
 
+// music
+sound/rainforest.it
+
+

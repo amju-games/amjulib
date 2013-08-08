@@ -45,3 +45,7 @@ log2.png
 // Destinations N, S, E>, W<
 0, 0, 140, 120
 
+// music
+sound/rainforest.it
+
+

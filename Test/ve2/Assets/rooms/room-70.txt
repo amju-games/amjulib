@@ -47,6 +47,10 @@ ground4.png
 // Destinations N, S, E>, W<
 71, 0, 80, 60
 
+// music
+sound/rainforest.it
+
+
 baddie
 // Pos 
 0, 0, -100

@@ -42,6 +42,10 @@ ground4.png
 // Short cut back to 50 - nice!
 50, 0, 0, 0
 
+// music
+sound/rainforest.it
+
+
 
 // TREASURE
 treasure

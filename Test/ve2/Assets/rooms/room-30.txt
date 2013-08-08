@@ -47,6 +47,10 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 40, 20
 
+// music
+sound/rainforest.it
+
+
 baddie
 // Pos -- behind so always under player
 100, -1, -50
