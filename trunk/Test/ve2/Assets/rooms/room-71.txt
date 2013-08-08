@@ -32,6 +32,10 @@ rock2.png
 // Destinations N, S, E>, W<
 0, 70, 72, 0
 
+// music
+sound/rainforest.it
+
+
 
 // TREASURE
 treasure

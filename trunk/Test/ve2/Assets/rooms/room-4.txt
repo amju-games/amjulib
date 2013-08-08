@@ -31,6 +31,10 @@ steps-ew.png
 // Destinations N, S, E, W
 0, 0, 0, 2
 
+// music
+sound/rainforest.it
+
+
 
 // Lava pool
 baddie

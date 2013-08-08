@@ -47,6 +47,10 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 70, 50
 
+// music
+sound/rainforest.it
+
+
 
 // BADDIES - arrows. Harmless targets give player hint
 

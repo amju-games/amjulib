@@ -47,3 +47,59 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 90, 70
 
+// music
+sound/rainforest.it
+
+
+// Spider on thread, comes down from top of screen
+baddie
+0, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+30, 30
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Behaviour
+patrol
+// Dir
+0, 50
+// Rect (xmin, xmax, ymin, ymax)
+-50, 50, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+0, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+2, 500
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Behaviour
+patrol
+// Dir
+0, 50
+// Rect (xmin, xmax, ymin, ymax)
+-50, 50, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+

@@ -51,6 +51,10 @@ ground4.png
 // Destinations N, S, E>, W<
 0, 0, 50, 30
 
+// music
+sound/rainforest.it
+
+
 harmless
 maya6.png
 0, -1, 0

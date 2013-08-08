@@ -45,6 +45,10 @@ log2.png
 // Destinations N, S, E>, W<
 0, 51, 60, 40
 
+// music
+sound/rainforest.it
+
+
 
 harmless
 sunflowers.png

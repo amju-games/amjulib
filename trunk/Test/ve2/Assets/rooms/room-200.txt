@@ -32,3 +32,7 @@ crystal4.png
 // Destinations N, S, E>, W<
 100, 0, 0, 0
 
+// music
+sound/rainforest.it
+
+
