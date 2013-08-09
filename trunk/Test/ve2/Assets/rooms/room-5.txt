@@ -61,6 +61,8 @@ ant5.png
 2
 // Points
 5
+// Attack str
+got bitten by an ant!
 // Behaviour
 patrol
 // Dir
@@ -84,6 +86,8 @@ ant-leaf2.png
 1
 // Points
 0
+// Attack str
+$$$empty
 // Behaviour
 patrol
 // Dir
@@ -110,6 +114,8 @@ ant5.png
 2
 // Points
 5
+// Attack str
+was attacked by an ant!
 // Behaviour
 patrol
 // Dir
@@ -135,6 +141,8 @@ ant-leaf3.png
 1
 // Points
 0
+// Attack str
+$$$empty
 // Behaviour
 patrol
 // Dir
@@ -160,6 +168,8 @@ ant5-r.png
 2
 // Points
 5
+// Attack str
+was bitten by an ant!
 // Behaviour
 patrol
 // Dir
@@ -185,6 +195,8 @@ ant-leaf4.png
 1
 // Points
 0
+// Attack str
+$$$empty
 // Behaviour
 patrol
 // Dir

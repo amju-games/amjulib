@@ -70,6 +70,8 @@ skull2.png
 5
 // Num points
 100
+// Attack string
+was attacked by a ghost!
 // Behaviour
 chase
 
@@ -89,6 +91,8 @@ spikes2.png
 -1
 // Points
 0
+// Attack string
+just got skewered.
 // Behaviour
 none
 

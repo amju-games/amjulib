@@ -63,6 +63,8 @@ spider2.png
 1
 // Points
 5
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir
@@ -88,6 +90,8 @@ spider2.png
 1
 // Points
 5
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir
@@ -113,6 +117,8 @@ spider2.png
 1
 // Points
 5
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir
@@ -138,6 +144,8 @@ spider2.png
 1
 // Points
 5
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir

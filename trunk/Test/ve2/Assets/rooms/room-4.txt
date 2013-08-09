@@ -52,6 +52,8 @@ lava1.png
 -1
 // Points
 0
+// Attck str
+touched molten lava!
 // Behaviour
 none
 
