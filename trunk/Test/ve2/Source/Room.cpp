@@ -77,7 +77,8 @@ void Room::Update()
   float south = m_tilesize.y * m_gridsize.y * 0.5f;
   float north = -south;
 
-  float smallDist = 20.0f; // TODO CONFIG
+  float smallDistX = 20.0f; // TODO CONFIG
+  float smallDistY = 40.0f; // TODO CONFIG
 
   bool changeLoc = false;
   int destLocation = 0;
@@ -88,7 +89,7 @@ void Room::Update()
   if (p)
   {
     Vec3f pos = p->GetPos();
-    if (pos.x < west)
+    if (pos.x < west + smallDistX)
     {
       int w = GetDest(AMJU_ROOM_W);
       if (w)
@@ -98,10 +99,10 @@ void Room::Update()
         destLocation = w;
         destPos = pos;
         Vec2f size = GetRoomSize(w); // get size of dest room
-        destPos.x = size.x * 0.5f - smallDist; 
+        destPos.x = size.x * 0.5f - smallDistX; 
       }
     }
-    else if (pos.x > east)
+    else if (pos.x > east - smallDistX)
     {
       int e = GetDest(AMJU_ROOM_E); 
       if (e)
@@ -111,11 +112,11 @@ void Room::Update()
         destLocation = e;
         destPos = pos;
         Vec2f size = GetRoomSize(e); // get size of dest room
-        destPos.x = size.x * -0.5f + smallDist; 
+        destPos.x = size.x * -0.5f + smallDistX; 
       }
     }
 
-    if (pos.z > south) // off bottom
+    if (pos.z > south - smallDistY) // off bottom
     {
       int s = GetDest(AMJU_ROOM_S);
       if (s)
@@ -125,10 +126,10 @@ void Room::Update()
         destLocation = s;
         destPos = pos;
         Vec2f size = GetRoomSize(s); // Get size of dest room
-        destPos.z = size.y * -0.5f + smallDist; 
+        destPos.z = size.y * -0.5f + smallDistY; 
       }
     }
-    else if (pos.z < north) // up, off top of room
+    else if (pos.z < north + smallDistY) // up, off top of room
     {
       int n = GetDest(AMJU_ROOM_N); 
       if (n)
@@ -138,7 +139,7 @@ void Room::Update()
         destLocation = n;
         destPos = pos;
         Vec2f size = GetRoomSize(n); // Get size of dest room
-        destPos.z = size.y * 0.5f - smallDist; 
+        destPos.z = size.y * 0.5f - smallDistY; 
       }
     }
 
@@ -253,15 +254,13 @@ bool Room::Load(File* f)
     return false;
   }
 
-/*
   if (!f->GetDataLine(&m_music))
   {
     f->ReportError("Room has no music");
     return false;
   }
-*/
   // TODO TEMP
-  m_music = "sound/rainforest-ambience1.ogg"; 
+  //m_music = "sound/rainforest-ambience1.ogg"; 
 
 std::cout << "Room music: " << m_music << "\n";
 
