@@ -113,10 +113,7 @@ void CogTestNag::Update()
   float dt = TheTimer::Instance()->GetDt();
 
   // Trigger cog tests if scheduled and not done yet this session (well, process run)
-  //static bool cogtestsdone = false;
   static const float COG_TEST_NAG_TIME = ROConfig()->GetFloat("cog-test-nag-time", 120.0f);
-  //static const float COG_TEST_WAIT_TIME = ROConfig()->GetFloat("cog-test-wait-time", 10.0f);
-  //static float cogtesttime = COG_TEST_NAG_TIME - COG_TEST_WAIT_TIME;
 
   if (!TheLurker::Instance()->IsDisplayingMsg() &&
       !TheChatConsole::Instance()->IsActive())
