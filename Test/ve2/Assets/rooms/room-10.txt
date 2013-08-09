@@ -65,6 +65,8 @@ tarpit1.png
 -1
 // Points
 0
+// Attack string
+got stuck in a tar pit!
 // Behaviour
 none
 

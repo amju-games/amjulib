@@ -75,6 +75,8 @@ arrow2.png
 1
 // Points
 50
+// Attack str
+got shot by an arrow!
 // Behaviour
 patrol
 // Dir
@@ -107,6 +109,8 @@ arrow2.png
 1
 // Points
 50
+// Attack str
+was injured during target practice.
 // Behaviour
 patrol
 // Dir
@@ -139,6 +143,8 @@ arrow2.png
 1
 // Points
 50
+// Attack str
+was hit by an arrow!
 // Behaviour
 patrol
 // Dir

@@ -66,6 +66,8 @@ tarpit1.png
 -1
 // Points
 0
+// attack string
+got stuck in some tar.
 // Behaviour
 none
 
@@ -84,5 +86,7 @@ tarpit1.png
 -1
 // Points
 0
+// attack string
+got into a sticky situation.
 // Behaviour
 none

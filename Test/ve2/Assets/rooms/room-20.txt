@@ -67,5 +67,7 @@ water1.png
 -1
 // Points
 0
+// Attack string
+just took a dip.
 // Behaviour
 none

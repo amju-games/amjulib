@@ -50,6 +50,16 @@ ground4.png
 // music
 sound/rainforest.it
 
+// TREASURE
+treasure
+// pos
+0, 0, 100
+// tex
+diamond4.png
+// cells
+4, 1
+// points
+1000
 
 // Spider on thread, comes down from top of screen
 baddie
@@ -66,6 +76,8 @@ spider1.png
 3
 // Points
 10
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir
@@ -85,13 +97,15 @@ wh8.png
 // Num cells
 1,1
 // Size
-2, 500
+1, 500
 // Damage to player on collision
-1
+0
 // Max health: -1 == indestructible
 -1
 // Points
 0
+// Attack str
+was bitten by a spider!
 // Behaviour
 patrol
 // Dir
@@ -102,4 +116,120 @@ patrol
 1
 // Sound
 $$$empty
+
+// Spider 2
+// Spider on thread, comes down from top of screen
+baddie
+-150, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+20, 20
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 70
+// Rect (xmin, xmax, ymin, ymax)
+-150, -150, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+-150, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+1, 500
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 70
+// Rect (xmin, xmax, ymin, ymax)
+-150, -150, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Spider 3 
+// Spider on thread, comes down from top of screen
+baddie
+150, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+20, 20
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 90
+// Rect (xmin, xmax, ymin, ymax)
+150, 150, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+150, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+1, 500
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 90
+// Rect (xmin, xmax, ymin, ymax)
+150, 150, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+
+
 
