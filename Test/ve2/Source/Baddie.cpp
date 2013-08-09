@@ -82,6 +82,11 @@ void Baddie::Update()
   }
 }
 
+const std::string& Baddie::GetAttackString() const
+{
+  return m_attackString;
+}
+
 Sprite& Baddie::GetSprite()
 {
   Assert(m_sceneNode);
@@ -149,6 +154,12 @@ bool Baddie::Load(File* f)
   if (!f->GetInteger(&m_points))
   {
     f->ReportError("Expected num points");
+    return false;
+  }
+
+  if (!f->GetDataLine(&m_attackString))
+  {
+    f->ReportError("Expected baddie attack string");
     return false;
   }
 
