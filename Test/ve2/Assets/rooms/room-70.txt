@@ -66,6 +66,8 @@ maya4.png
 10
 // Points
 100
+// Attack str
+touched an evil statue!
 // Behaviour
 none
 
