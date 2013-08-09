@@ -17,7 +17,8 @@ void GSStartGame::Update()
 {
   GSGui::Update();
 
-  //TheObjectManager::Instance()->Update(); // no need, we will be out of here next frame
+  // no need, we will be out of here next frame
+  //TheObjectManager::Instance()->Update(); 
 }
 
 void GSStartGame::Draw()
@@ -34,8 +35,11 @@ void GSStartGame::OnActive()
 {
   GSGui::OnActive();
 
-  SetLocalPlayerLocation(-1); // Force reload if m_startLoc is last location
-  SetLocalPlayerLocation(m_startLoc);
-  m_startLoc = 1; // for next time TODO Should this be -1 ??
+  if (m_startLoc != -1)
+  {
+    SetLocalPlayerLocation(-1); // Force reload if m_startLoc is last location
+    SetLocalPlayerLocation(m_startLoc);
+    m_startLoc = -1; 
+  }
 }
 } // namespace
