@@ -56,6 +56,8 @@ void GSCogResults::Draw2d()
 
 void GSCogResults::SetChart(TestId test)
 {
+std::cout << "Setting chart up for " << GetTestName(test) << "\n";
+
   GuiText* testname = (GuiText*)GetElementByName(m_gui, "test-name");
   testname->SetText(GetTestName(test));
 
@@ -79,8 +81,11 @@ void GSCogResults::SetChart(TestId test)
   if (r.empty())
   {
     // TODO Hide unused GUI
+std::cout << "No test results for " << GetTestName(test) << "\n";
     return;
   }
+
+std::cout << "Got " << r.size() << " results for " << GetTestName(test) << "\n";
 
   for (unsigned int i = 0; i < r.size(); i++)
   {
@@ -91,20 +96,46 @@ void GSCogResults::SetChart(TestId test)
     // Put data into buckets for dates
     datemap[t].push_back(res);
   }
+std::cout << " .. spread over " << datemap.size() << " dates.\n";
 
   // TODO Detect and fix situations where data is missing
 
-  // Look at first date of data
-  Results& results = datemap.begin()->second;
-  int num = results.size();
-  if (num != 2 && num != 3)
+  // Look at data, to set Key of chart and find max number of data columns
+  // HACK as chart data cannot have missing values
+  typedef std::map<std::string, int> KeyValMap;
+  KeyValMap keyvalmap;
+
+  // Reverse through the results, so the last results we look at will be 
+  //  drawn first.
+  for (DateMap::reverse_iterator it = datemap.rbegin(); it != datemap.rend(); ++it)
   {
-    // Unexpected number of results :-(
+    Results& results = it->second;
+    int num = results.size();
+    
+    std::cout << "Got " << num << " results for test: "
+      << GetTestName(test) << " for date: " 
+      << datemap.begin()->first.ToStringJustDate()
+      << " :-( \n";
+
+    for (int i = 0; i < num; i++)
+    {
+      const std::string& key = results[i]->GetKey();
+      int val = ToInt(results[i]->GetVal());
+      keyvalmap[key] = val;
+    }
   }
+
   // Set key text
-  for (int i = 0; i < num; i++)
+  int k = 0;
+  for (KeyValMap::iterator it = keyvalmap.begin(); it != keyvalmap.end(); it++)
   {
-    key[i]->SetText(results[i]->GetKey());
+    key[k]->SetText(it->first);
+    k++;
+    // TODO Set this key visible
+  }
+  for ( ; k < 3; k++)
+  {
+    // Set remaining keys to invisible
   }
 
   int x = 0;
@@ -113,15 +144,44 @@ void GSCogResults::SetChart(TestId test)
     Time t = it->first;
 
     Results& r = it->second;
+    int numResults = r.size();
+    Assert(numResults > 0);
+
+std::cout << "Num results for " << GetTestName(test) 
+  << " for date " 
+  << it->first.ToStringJustDate() 
+  << ": " << numResults << "\n";
+for (Results::iterator jt = r.begin(); jt != r.end(); ++jt)
+{
+  Result* res = *jt;
+  std::cout << " key: " << res->GetKey() << " val: " << res->GetVal() << "\n";
+}
+
+    for (int i = 0; i < numResults; i++)
+    {
+      const std::string& key = r[i]->GetKey();
+      int val = ToInt(r[i]->GetVal());
+      keyvalmap[key] = val; // overwriting values, so we draw new values, or
+        // previous values where no new value
+    }
+
     ChartData::Row row;
     row.first = x;
     x++;
 
+    /*
     for (Results::iterator jt = r.begin(); jt != r.end(); ++jt)
     {
       Result* res = *jt;
 
       float f = ToInt(res->GetVal());
+      row.second.push_back((ChartData::YTYPE)f);
+    }
+    */
+
+    for (KeyValMap::iterator it = keyvalmap.begin(); it != keyvalmap.end(); ++it)
+    {
+      int f = it->second;
       row.second.push_back((ChartData::YTYPE)f);
     }
 
