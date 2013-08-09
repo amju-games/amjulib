@@ -867,26 +867,24 @@ void Player::OnCollideBaddie(Baddie* baddie)
     m_health -= damage;
 
     // Send this to server so we can see other players' health
-    TheObjectUpdater::Instance()->SendUpdateReq(GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
+    TheObjectUpdater::Instance()->SendUpdateReq(
+      GetId(), SET_KEY(HEALTH_KEY), ToString(m_health));
 
     // Could also send a system message
     std::string str;
     if (GetNameForPlayer(GetId(), &str)) // TODO IS this the best way to do this?
     {
-      if (m_health == 1)
+      if (m_health > 0)
       {
-        str += " is in trouble!"; // TODO variety of msgs
+        str += " " + baddie->GetAttackString() + " Health now: " + ToString(m_health);
       }
       else if (m_health < 1)
       {
         str += " died!"; // TODO variety of msgs
       }
-      else
-      {
-        Assert(m_health > 1);
-        str += " took some damage!";
-      }
-      TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+      
+      TheMsgManager::Instance()->SendMsg(
+        MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
     }
 
     static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG

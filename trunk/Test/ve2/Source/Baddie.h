@@ -29,6 +29,7 @@ public:
   virtual void SetMenu(GuiMenu* menu);
 
   int GetDamage() const; 
+  const std::string& GetAttackString() const;
 
   void OnCollideBullet();
 
@@ -49,6 +50,11 @@ protected:
   RCPtr<BaddieBehaviour> m_bb;
 
   RCPtr<AttackEffect> m_effect;
+
+  // String to be displayed when player loses health by touching this
+  //  baddie. Name is prepended, e.g. "George" + "was attacked by a shark!"
+  //  (code will insert space)
+  std::string m_attackString;
 };
 
 // Base class for behaviours
