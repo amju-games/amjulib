@@ -223,7 +223,12 @@ void ReqLogin::ChooseMode()
               }
               else
               {
-                // NOT all done: so if it is a cog test day, we will set doCogTests to true.
+                // NOT all done: so if it is a cog test day, 
+                //  we will set doCogTests to true.
+
+std::cout << "Cog tests not all done (" 
+  << numResults << "/" << GetNumCogTests() << ").\n";
+
                 doCogTests = cogtest;
               }
 
