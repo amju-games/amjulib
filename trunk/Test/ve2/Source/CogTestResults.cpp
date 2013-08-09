@@ -116,9 +116,8 @@ bool Result::Save(File* f)
   f->Write(m_key);
   f->Write(m_val);
   f->WriteInteger(m_committed ? 1 : 0);
-  f->WriteInteger(m_localPlayerId);
-
   m_timestamp.Save(f);
+  f->WriteInteger(m_localPlayerId);
 
   return true;
 }
