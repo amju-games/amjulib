@@ -1,6 +1,6 @@
 REM Make windows release of MY GAME ("Hungry People")
 
-set VERSION=0.9
+set VERSION=1.1
 
 cd ve2
 devenv /build "Release|Win32" ve2.sln
