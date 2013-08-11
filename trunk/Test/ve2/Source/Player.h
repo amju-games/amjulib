@@ -63,6 +63,7 @@ public:
   void ShootBaddie(Baddie* baddie);
 
   int GetHealth() const;
+  int GetMaxHealth() const;
   void ResetHealth();
 
 private:

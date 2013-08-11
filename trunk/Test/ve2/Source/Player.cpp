@@ -59,6 +59,8 @@ class PlayerNameNode : public SceneNode
 public:
   PlayerNameNode(Player* p) : m_player(p)
   {
+    m_heartScale = 1.0f;
+
     SetBlended(true);
     m_text.SetTextSize(5.0f); // TODO CONFIG
     static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
@@ -67,6 +69,12 @@ public:
     m_text.SetFgCol(Colour(1, 1, 1, 1));
     //m_text.SetInverse(true);
     //m_text.SetDrawBg(true);
+  }
+
+  virtual void Update()
+  {
+    const float HEARTBEAT = 3.0f;
+    m_heartScale += TheTimer::Instance()->GetDt() * HEARTBEAT;
   }
 
   virtual void Draw()
@@ -86,8 +94,9 @@ public:
     {
       //Assert(m_player->GetAABB());
       //DrawAABB(*(m_player->GetAABB()));
-  
-      std::string name = ToString(m_player->GetHealth()) + "  " + m_player->GetName();
+ 
+      int health = m_player->GetHealth(); 
+      std::string name = ToString(health) + "  " + m_player->GetName();
       if (!m_player->IsLoggedIn())
       {
         name += " (asleep)";
@@ -124,11 +133,23 @@ public:
       {
         heartImg = new GuiImage;
         heartImg->SetTexture((Texture*)TheResourceManager::Instance()->GetRes("heart16-red.png"));
-        heartImg->SetSize(Vec2f(HEART_SIZE, HEART_SIZE));
         heartImg->SetLocalPos(Vec2f(-HEART_SIZE, 0));
       }
+      const float HEART_SIZE_VARY = 0.1f;
+      float s = sin(m_heartScale) * HEART_SIZE_VARY + 1.0f;
+      float h = HEART_SIZE * s;
+      heartImg->SetSize(Vec2f(h, h));
+/*
+      PushColour();
+      if (health < 2)
+      {
+        MultColour(Colour(0, 0, 1, 1));
+      }
+*/
       heartImg->Draw();
-
+/*
+      PopColour();
+*/
       m_text.Draw();
 
       AmjuGL::PopMatrix();
@@ -139,6 +160,7 @@ public:
 protected:
   RCPtr<Player> m_player;
   GuiText m_text;
+  float m_heartScale;
 };  
 
 
@@ -193,6 +215,11 @@ Player::Player()
 int Player::GetHealth() const
 {
   return m_health;
+}
+
+int Player::GetMaxHealth() const
+{
+  return m_maxHealth;
 }
 
 LayerSprite& Player::GetSprite() 
@@ -874,9 +901,10 @@ void Player::OnCollideBaddie(Baddie* baddie)
     std::string str;
     if (GetNameForPlayer(GetId(), &str)) // TODO IS this the best way to do this?
     {
+      std::string attackStr = baddie->GetAttackString();
       if (m_health > 0)
       {
-        str += " " + baddie->GetAttackString() + " Health now: " + ToString(m_health);
+        str += " " + attackStr + " Health now: " + ToString(m_health);
       }
       else if (m_health < 1)
       {
