@@ -2,16 +2,15 @@
 #ifndef AMJU_INDEXED_MESH_H_INCLUDED
 #define AMJU_INDEXED_MESH_H_INCLUDED
 
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "Skin.h"
 #include "AmjuGL.h"
-//#include "TextureMethod.h"
 
 namespace Amju
 {
 class File;
 
-class IndexedMesh : public Shareable
+class IndexedMesh : public RefCounted
 {
 public:
   bool Load(File*);
@@ -39,7 +38,7 @@ private:
   //SharedPtr<TextureMethod> m_pTextureMethod;
 };
 
-typedef SharedPtr<IndexedMesh> PMesh;
+typedef RCPtr<IndexedMesh> PMesh;
 }
 
 #endif

@@ -6,7 +6,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 #define AMJU_ANIM_H_INCLUDED
 
 #include <vector>
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "KeyFrame.h"
 #include "Skeleton.h"
 
@@ -19,7 +19,7 @@ typedef std::map<int, KeyFrames> BoneKeyFrames;
 
 
 // An animation is a list of KeyFrameTimes for each bone
-class Anim : public Shareable
+class Anim : public RefCounted
 {
 public:
   Anim();
@@ -50,7 +50,7 @@ private:
   float m_animDuration;
 };
 
-typedef SharedPtr<Anim> PAnim;
+typedef RCPtr<Anim> PAnim;
 
 }
 

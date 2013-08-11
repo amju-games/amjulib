@@ -24,11 +24,11 @@ public:
 };
 
 class KeyFrame;
-typedef SharedPtr<KeyFrame> PKeyFrame;
+typedef RCPtr<KeyFrame> PKeyFrame;
 
 // Stores orientation for a bone. 
 // Animation stores list of KeyFrames for each bone.
-class KeyFrame : public Shareable
+class KeyFrame : public RefCounted
 {
 public:
   KeyFrame();

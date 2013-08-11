@@ -9,7 +9,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 // This sets up the tree structure of bones. 
 
 #include <map>
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "Bone.h"
 #include "Matrix.h"
 
@@ -18,9 +18,9 @@ namespace Amju
 class File;
 
 class Skeleton;
-typedef SharedPtr<Skeleton> PSkeleton;
+typedef RCPtr<Skeleton> PSkeleton;
 
-class Skeleton : public Shareable
+class Skeleton : public RefCounted
 {
 public:
   void CreateBoneArray(Bones* pBones) const;

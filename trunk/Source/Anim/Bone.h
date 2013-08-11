@@ -13,7 +13,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 
 #include <string>
 #include <vector>
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "Matrix.h"
 #include "Vec3.h"
 
@@ -44,7 +44,7 @@ Vec3 operator*(const Vec3& v, float f);
 class Bone;
 typedef std::vector<Bone> Bones;
 
-class Bone : public Shareable
+class Bone : public RefCounted
 {
 public:
   Bone();
