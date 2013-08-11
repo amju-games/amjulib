@@ -10,9 +10,10 @@
 #include "PlayerNames.h"
 #include <AmjuFinal.h>
 
-//#define POS_UPDATE_DEBUG          
+//#define POS_UPDATE_DEBUG
 //#define UPDATE_DEBUG
 //#define XML_DEBUG
+//#define UPDATE_DEBUG_ALREADY_QUEUED
 
 namespace Amju
 {
@@ -23,6 +24,7 @@ void QueueUpdates(PXml p)
     int numObjs = p.nChildNode();
 
     Timestamp maxTimestamp = lastFastTimestamp;
+//std::cout << "LastFastTimeStamp: " << lastFastTimestamp.ToSeconds() << "\n";
 
     for (int i = 0; i < numObjs; i++)
     {
@@ -42,10 +44,10 @@ std::cout << "Expected more children in node.\n";
       if (obj.nChildNode() > 3)
       {
         // Timestamp - check if we have already seen this update
-        Timestamp t = ToInt(obj.getChildNode(2).getText()); 
+        Timestamp t = ToInt(obj.getChildNode(3).getText()); 
         if (t <= lastFastTimestamp) 
         {
-#ifdef UPDATE_DEBUG
+#ifdef UPDATE_DEBUG_ALREADY_QUEUED
 std::cout << "This req has already been queued: id: " 
   << id << " key: " << key << " val: " << val << "\n";
 #endif
