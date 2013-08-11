@@ -444,7 +444,16 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   }
   else if (key == LAST_MSG_SENT_KEY)
   {
-    TheMsgManager::Instance()->CheckForNewMsgs();
+    if (IsLocalPlayer())
+    {
+      int id = ToInt(val);
+      static int lastId = 0;
+      if (id > lastId)
+      {
+        TheMsgManager::Instance()->CheckForNewMsgs();
+        lastId = id;
+      }
+    }
   }
   else if (key == TREASURE_KEY)
   {
