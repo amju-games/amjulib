@@ -6,13 +6,13 @@ Amju Games source code (c) Copyright Jason Colman 2000-2011
 #define SKIN_H_INCLUDED
 
 #include "BoneWeight.h"
-#include "SharedPtr.h"
+#include <RCPtr.h>
 #include "Skeleton.h"
 
 namespace Amju
 {
 // Data for an animated mesh, has the bone weightings for every vertex.
-class Skin : public Shareable
+class Skin : public RefCounted
 {
 public:
   bool Load(File*);
@@ -29,7 +29,7 @@ private:
   PSkeleton m_pSkel;
 };
 
-typedef SharedPtr<Skin> PSkin;
+typedef RCPtr<Skin> PSkin;
 }
 
 #endif
