@@ -40,7 +40,7 @@ void ReqGetNewMsgs::OnSuccess()
       timestamp = msg.getChildNode(2).getText();
       Timestamp whenSent = atoi(timestamp.c_str());
       std::string text = msg.getChildNode(3).getText();
-      text = DecodeMsg(text); ////Replace(text, "_", " "); // replace underscores with spaces -- TODO punctuation 
+      text = DecodeMsg(text); 
       int recipId = atoi(msg.getChildNode(4).getText());
 
 std::cout << "GOT NEW MSG!! ID: " << id << " sender: " << senderId << " sent: " << whenSent.ToString() << " text: " << text << "\n";
