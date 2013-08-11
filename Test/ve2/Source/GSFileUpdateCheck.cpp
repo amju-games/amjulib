@@ -28,6 +28,8 @@ GSFileUpdateCheck::GSFileUpdateCheck()
   {
     m_timestamp = "1";
   }
+std::cout << "Timestamp for file updates: " << m_timestamp << "\n";
+
   m_numFilesToWaitFor = 0;
   m_numFilesDownloaded = 0;
 }
