@@ -879,6 +879,9 @@
     <ClCompile Include="..\..\..\Source\GeomLoad\LoadRect.cpp">
       <Filter>GeomLoad</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\TriList.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1651,6 +1654,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\GeomLoad\LoadRect.h">
       <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Drawable.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\DrawDecorator.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Outliner.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\TriList.h">
+      <Filter>AmjuGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
