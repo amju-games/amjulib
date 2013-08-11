@@ -302,8 +302,6 @@ void GSMain::Update()
   GuiButton* pauseButton = (GuiButton*)m_gui->GetElementByName("pause-button");
   pauseButton->SetIsEnabled(!TheLurker::Instance()->IsDisplayingMsg());
 
-  GetVe1SceneGraph()->Update();
-
   // Make periodic checks for newly created objects
   // Just do this in GSWaitForNewLocation, right?
   TheObjectManager::Instance()->Update();
@@ -317,6 +315,7 @@ void GSMain::Update()
   if (!lurker->IsDisplayingMsg())
   {
     TheGame::Instance()->UpdateGameObjects();
+    GetVe1SceneGraph()->Update();
   }
 
   // TODO SAP instead
