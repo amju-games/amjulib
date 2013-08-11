@@ -1,9 +1,11 @@
 #include <AmjuFirst.h>
-#include "GSStartGame.h"
-#include "GSMain.h"
 #include <AmjuGL.h>
 #include <Game.h>
+#include "GSStartGame.h"
+#include "GSMain.h"
 #include "LocalPlayer.h"
+#include "ObjectManager.h"
+#include "ObjectUpdater.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -16,9 +18,6 @@ GSStartGame::GSStartGame()
 void GSStartGame::Update()
 {
   GSGui::Update();
-
-  // no need, we will be out of here next frame
-  //TheObjectManager::Instance()->Update(); 
 }
 
 void GSStartGame::Draw()
@@ -35,11 +34,11 @@ void GSStartGame::OnActive()
 {
   GSGui::OnActive();
 
+std::cout << "GSStartGame: m_startLoc is: " << m_startLoc << "\n";
+
   if (m_startLoc != -1)
   {
-    SetLocalPlayerLocation(-1); // Force reload if m_startLoc is last location
     SetLocalPlayerLocation(m_startLoc);
-    m_startLoc = -1; 
   }
 }
 } // namespace
