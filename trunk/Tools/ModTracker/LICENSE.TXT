@@ -1,0 +1,62 @@
+Software License and Limited Warranty
+
+PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE. BY INSTALLING THIS SOFTWARE YOU ACKNOWLEDGE  THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+
+SOFTWARE LICENSE
+
+The software and accompanying documentation you have acquired and any updates you may receive (collectively "Software") are protected by the copyright laws of the United States and international copyright treaties. Your possession, use or trial use (evaluation) of the Software transfers no title to the Software itself. Your use of the Software must be made in accordance with the terms of this license agreement. Olivier Lapicque and MODPlug Central "MODPlug Central" reserves all rights not specifically granted herein.
+
+"The Software" means the Software and all accompanying documentation.
+
+License
+
+MODPlug Central grants you a non-exclusive right to use the Software on as many computers at a time as you see fit.
+
+Distribution of Evaluation Copies.
+
+Notwithstanding the foregoing, MODPlug Central grants you a non-exclusive right to make and freely distribute copies of the The Software package provided you do not receive any direct payment for such distribution, any such copies are of the complete and unmodified Software package. 
+
+GENERAL TERMS
+
+Term
+
+This license will become effective on the date you accept its terms and conditions during installation of the Software and will remain in force until terminated. You may terminate this License at any time by discontinuing all use of and destroying the Software together with all copies and adaptations. You agree to destroy the original and all copies or adaptations of the Software, or to return them to MODPlug Central upon termination of this License.
+
+Entire License
+
+This License sets forth the entire understanding and License between you and MODPlug Central and may be amended only in writing signed by both parties. NO VENDOR, DISTRIBUTOR, DEALER, RETAILER, SALES PERSON OR OTHER PERSON IS AUTHORISED TO MODIFY THIS LICENSE OR TO MAKE ANY WARRANTY, REPRESENTATION OR PROMISE WHICH IS DIFFERENT THAN, OR IN ADDITION TO, THE WARRANTY, REPRESENTATIONS OR PROMISES OF THIS LICENSE.
+
+Waiver
+
+No waiver of any right under this License shall be effective unless in writing, signed by a duly AUTHORISED representative of the party to be bound. No waiver of any past or present right arising from any breach or failure to perform shall be deemed to be a waiver of any future right arising under this License.
+
+Severability
+
+If any provision in this License is invalid or unenforceable, that provision shall be construed, limited, modified or, if necessary, severed, to the extent necessary, to eliminate its invalidity or unenforceability, and the other provisions of this License shall remain unaffected.
+
+Governing Law
+
+Except as otherwise restricted by law, this License shall be governed by the laws of the United States. The parties agree that any action relating to this License shall be instituted and prosecuted in the courts of competent jurisdiction of and in the United States. You also agree that any costs incurred by you to defend any action shall be paid by you, this includes but is not limited to any air fares to the United States, accommodation, and court costs.
+
+LIMITED WARRANTY
+
+Media
+
+MODPlug Central offers no warranty on media, whether electronic or physical.
+
+Software
+
+MODPlug Central offers no warranty on the software application and does not guarantee it will work for you or for anyone else.
+
+Disclaimer
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, MODPLUG CENTRAL MAKES NO WARRANTY, REPRESENTATION OR PROMISE NOT EXPRESSLY SET FORTH IN THIS LIMITED WARRANTY. MODPLUG CENTRAL DISCLAIMS AND EXCLUDES ANY AND ALL IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE OR FITNESS FOR A PARTICULAR PURPOSE. MODPLUG CENTRAL DOES NOT WARRANT THAT THE SOFTWARE OR ASSOCIATED DOCUMENTATION WILL SATISFY YOUR REQUIREMENTS OR THAT THE SOFTWARE AND DOCUMENTATION ARE WITHOUT DEFECT OR ERROR OR THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR FREE OR THAT DEFECTS IN THE SOFTWARE WILL BE CORRECTED. Some states do not allow limitations on how long an implied warranty lasts, so the above limitation may not apply to you. This warranty gives you specific legal rights which vary from state to state.
+
+Limitation of Liability.
+
+EXCEPT AS OTHERWISE RESTRICTED BY LAW, MODPLUG CENTRAL AGGREGATE LIABILITY ARISING FROM OR RELATED TO YOUR USE OF THE SOFTWARE, ASSOCIATED DOCUMENTATION OR ANY SERVICES PROVIDED BY MODPLUG CENTRAL AND/OR ITS AGENTS IS LIMITED TO THE TOTAL OF ALL PAYMENTS MADE BY YOU FOR THE SOFTWARE AND DOCUMENTATION. NEITHER MODPLUG CENTRAL NOR ANY OF ITS LICENSORS, EMPLOYEES, OR AGENTS SHALL IN ANY CASE BE LIABLE FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, INDIRECT OR PUNITIVE DAMAGES EVEN IF ADVISED OF THE POSSIBILITY OF THOSE DAMAGES. NEITHER MODPLUG CENTRAL NOR ANY OF ITS LICENSORS, EMPLOYEES, OR AGENTS IS RESPONSIBLE FOR LOST PROFITS OR REVENUE, LOSS OF USE OF SOFTWARE, LOSS OF DATA, COSTS OF RE-CREATING LOST DATA, OR THE COST OF ANY SUBSTITUTE EQUIPMENT OR PROGRAM. 
+
+Agreement
+
+By installing the software known as The Software you have accepted and agreed to the terms and conditions of this license agreement.
+

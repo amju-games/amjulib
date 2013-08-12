@@ -1,0 +1,38 @@
+
+MODPLUG TRACKER v1.16
+(Player engine v1.46.02)
+
+MPTRACK.EXE:  Main EXE file
+MPTRACK.CNT:  ModPlug Tracker Help Index
+MPTRACK.HLP:  ModPlug Tracker Help
+FILE_ID.DIZ:  This file
+
+
+Latest additions:
+- Fixed importing instruments or samples larger than 32MB
+- Fixed DX Media Audio Effects support on Windows XP
+- Added 96kHz sample rate
+- Fixed channel mute and solo
+- Fixed loading of stereo samples in XM files.
+- Increased maximum number of samples to 1000.
+- Added support for DirectX Media Objects.
+- Fixed possible random crash when using VST Plugins
+- Increased max. mixing channels from 128 to 200.
+- Added "Estimate Song Length" function (Player menu)
+- New macro type for controlling VST effect parameters (F0F08nz for parameter n)
+- Added ability to mute and solo an individual instrument from the tree
+- Greatly improved sample editor redraw speed on P3/P4/Athlon
+- Improved Impulse Tracker keyboard preset compatibility
+- Left-clicking an instrument in the tree will select it in the pattern editor
+- Fixed MP3 bug when exporting multiple times
+- Improved MMX processing for resonant filter (improved filter stability)
+- Improved latency
+- Added highpass filter mode
+- Added beta ASIO support
+- Added option to display the end of previous and begining of next pattern
+- Faster loading of stereo samples
+- Improved resampler: slightly better SNR and now includes a downsampler.
+- New improved reverb engine with a lot more presets to choose from.
+- Pattern display can now show condensed views (hiding effects and/or volume)
+- Due to popular requests, extended filter range option now allows up to 10kHz
+- XBass now includes an automatic DC removal to avoid clipping due to DC offset
