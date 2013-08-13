@@ -208,7 +208,14 @@ void ReqLogin::ChooseMode()
             bool play = single || multi;
 
             Time t(dateStr);
+
+std::cout << "dateStr: " << dateStr
+  << " t: " << t.ToStringJustDate();
+
             t.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+
+std::cout << " rounded down: " << t.ToStringJustDate() << "\n";
+
             if (t == today)
             {
               // Cog tests already done today ?
@@ -247,6 +254,10 @@ std::cout << "Cog tests not all done ("
                 CreateDummyLocalPlayer();
               }
             }
+
+std::cout << "Got research date: " << t.ToStringJustDate() 
+  << " cogtest: " << cogtest 
+  << " single: " << single << " multi: " << multi << "\n";
 
             TheResearchCalendar::Instance()->AddResearchDate(
               new ResearchDate(t, cogtest, single, multi));   
