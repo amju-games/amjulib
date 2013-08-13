@@ -6,7 +6,7 @@ gui-comp
 // Name
 cogresults-comp
 // Num children
-12
+7
 
 
 // Element type
@@ -35,6 +35,16 @@ test-name
 // Font name, size
 arial, 1.0, fgcol=000000
 
+// Element type
+gui-window
+// Name
+cogresults-key-comp
+// pos 
+0, 0
+// size
+2, 2
+// Num children
+6
 
 // Key
 // Element type
