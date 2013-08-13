@@ -333,7 +333,7 @@ void Room::OnLocationEntry()
 
   m_sceneNode = rn;
 
-  TheSoundManager::Instance()->PlayWav(m_music);
+  TheSoundManager::Instance()->PlaySong(m_music);
 }
 
 }
