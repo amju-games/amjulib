@@ -350,19 +350,14 @@ void Player::OnLocationEntry()
   }
 */
 
-  m_nameTag = new PlayerNameNode(this);
-  if (m_sceneNode)
+  if (m_sceneNode && !m_nameTag) // so only does it first time
   {
-    if (m_nameTag)
-    {
-      m_sceneNode->AddChild(m_nameTag.GetPtr());
-    }
-
-    if (m_effect)
-    {
-      m_sceneNode->AddChild(m_effect.GetPtr());
-      m_effect->SetVisible(false);
-    }
+    m_nameTag = new PlayerNameNode(this);
+    m_sceneNode->AddChild(m_nameTag.GetPtr());
+  
+    Assert(m_effect);
+    m_sceneNode->AddChild(m_effect.GetPtr());
+    m_effect->SetVisible(false);
   }
 
   // TODO Portal should have a heading which you should face when you appear at the destination
