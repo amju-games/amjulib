@@ -913,7 +913,9 @@ void Player::OnCollideBaddie(Baddie* baddie)
       std::string attackStr = baddie->GetAttackString();
       if (m_health > 0)
       {
-        str += " " + attackStr + " Health now: " + ToString(m_health);
+        // Add health and room info for other players to help
+        str += " " + attackStr + " Health: " + ToString(m_health) + " Room: " +
+          ToString(GetLocalPlayerLocation());
       }
       else if (m_health < 1)
       {
