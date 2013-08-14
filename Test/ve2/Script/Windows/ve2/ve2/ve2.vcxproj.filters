@@ -977,6 +977,9 @@
     <ClInclude Include="..\..\..\..\Source\Download2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
@@ -990,5 +993,13 @@
     <None Include="..\..\..\..\Source\newreq.pl" />
     <None Include="..\..\..\..\Source\newstate.pl" />
     <None Include="..\..\..\..\Source\newclass.pl" />
+    <None Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ve2.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
