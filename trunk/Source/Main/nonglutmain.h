@@ -103,7 +103,7 @@ std::cout << "Just before startup...\n";
 
   Amju::AmjuGL::Init();
 
-  StartUpAfter CreateWindow();
+  StartUpAfterCreateWindow();
 
   //Amju::AmjuGL::SetScreenRotation(10.0f);
 
