@@ -491,6 +491,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1SpriteNode.h" />
     <ClInclude Include="..\..\..\..\Source\Version.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
@@ -504,6 +505,10 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve2\Windows\$(Configuration)
     <None Include="..\..\..\..\Source\newgui.pl" />
     <None Include="..\..\..\..\Source\newreq.pl" />
     <None Include="..\..\..\..\Source\newstate.pl" />
+    <None Include="icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ve2.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
