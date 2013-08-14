@@ -194,7 +194,8 @@ Player::Player()
   m_hitTimer = 0;
   m_flashTimer = 0;
 
-  ResetHealth();
+  // Whoa no!!!
+  ///ResetHealth();
 
   // Load particle effect
   File fight;
