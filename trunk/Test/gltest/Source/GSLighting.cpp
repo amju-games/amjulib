@@ -4,6 +4,7 @@
 #include <Colour.h>
 #include <Font.h>
 #include <GuiText.h>
+#include <Timer.h>
 #include "GSLighting.h"
 #include "GSEnvMap.h"
 #include "Teapot.h"
@@ -14,6 +15,7 @@ GSLighting::GSLighting()
 {
   m_name = "Lighting";
   m_nextState = TheGSEnvMap::Instance();
+  m_maxTime = 10.0f; // so awesome
 }
 
 void GSLighting::Update()
@@ -27,13 +29,17 @@ void GSLighting::Draw()
 
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
+  static float t = 0;
+  t += TheTimer::Instance()->GetDt();
+  Vec3f pos(cos(t), 1, sin(t));
+
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::DrawLighting(
     AmjuGL::LightColour(0, 0, 0),
     AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
     AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
     AmjuGL::LightColour(1, 1, 1),
-    AmjuGL::Vec3(1, 1, 1)); // Light direction
+    AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
   static float f = 0;
   f += 0.01f;
@@ -54,6 +60,15 @@ void GSLighting::Draw()
   AmjuGL::Translate(2.0f, 0, 0);
   AmjuGL::RotateY(f);
   tp.Draw();
+  AmjuGL::PopMatrix();
+
+  // Draw light source
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  static AABB lightAabb(-0.1f, 0.1f, -0.1f, 0.1f, -0.1f, 0.1f);
+  AmjuGL::PushMatrix();
+  const float dist = 5.0f;
+  AmjuGL::Translate(pos.x * dist, 1, pos.z * dist);
+  DrawSolidAABB(lightAabb); 
   AmjuGL::PopMatrix();
 }
 
