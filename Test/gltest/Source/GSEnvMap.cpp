@@ -19,14 +19,14 @@ void GSEnvMap::Update()
 
 void GSEnvMap::Draw()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
+  AmjuGL::SetClearColour(Colour(1, 0, 0, 1));
   GSBase::Draw();
 
   static Teapot tp;
 
   static Texture* tex = 
     (Texture*)TheResourceManager::Instance()->GetRes("spheremap_bar.png");
-  tex->UseThisTexture();
+//  tex->UseThisTexture();
 
   tp.Draw();
 }

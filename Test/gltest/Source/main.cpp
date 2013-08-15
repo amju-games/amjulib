@@ -5,9 +5,10 @@
 // reducing DLL dependencies
 
 // Define one of these - this chooses the API at compile time ATM
-//#define AMJU_USE_OPENGL
+#define AMJU_USE_OPENGL
+#define AMJU_USE_GLUT
 //#define AMJU_USE_DX9
-#define AMJU_USE_DX11
+//#define AMJU_USE_DX11
 
 #endif // WIN32
 
