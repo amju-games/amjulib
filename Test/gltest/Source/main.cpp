@@ -24,6 +24,7 @@
 #include "GSTexture.h"
 #include "GSShaderWave.h"
 #include "GSShadow.h"
+#include "GSEnvMap.h"
 
 namespace Amju
 {
@@ -38,7 +39,8 @@ void StartUpAfterCreateWindow()
 {
   //TheGame::Instance()->SetCurrentState(TheGSTexture::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSShadow::Instance());
+  //TheGame::Instance()->SetCurrentState(TheGSShadow::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSEnvMap::Instance());
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
 }
