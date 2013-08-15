@@ -28,7 +28,8 @@ struct Material : public RefCounted
   // Flags comprised of these values
   enum
   {
-    AMJU_MATERIAL_NO_COLLIDE = 1
+    AMJU_MATERIAL_NO_COLLIDE = 0x01,
+    AMJU_MATERIAL_SPHERE_MAP = 0x02,
   };
 
   Material();

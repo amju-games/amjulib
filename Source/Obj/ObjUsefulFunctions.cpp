@@ -80,6 +80,10 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
       Assert(current);
       current->m_texfilename = strs[1];
       current->m_texture = (Texture*)TheResourceManager::Instance()->GetRes(current->m_texfilename);
+      if (current->m_texture && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
+      {
+        current->m_texture->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
+      }
     }
     else if (strs[0] == "newmtl")
     {
@@ -105,6 +109,10 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 
       Assert(strs.size() == 2);
       current->m_flags = ToInt(strs[1]); 
+      if (current->m_texture && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
+      {
+        current->m_texture->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
+      }
     }
   }
   return true;
