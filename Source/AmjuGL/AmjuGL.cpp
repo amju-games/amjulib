@@ -653,16 +653,37 @@ void AmjuGL::SetTextureType(TextureType tt)
 {
   AMJU_CALL_STACK;
 
+  static TextureType prev = (TextureType)-1;
+  if (tt == prev)
+  {
+    return;
+  }
+  prev = tt;
+
   impl->SetTextureType(tt);
 }
 
 void AmjuGL::SetTextureMode(TextureMode tm)
 {
+  static TextureMode prev = (TextureMode)-1;
+  if (tm == prev)
+  {
+    return;
+  }
+  prev = tm;
+
   impl->SetTextureMode(tm);
 }
 
 void AmjuGL::SetTextureFilter(TextureFilter tf)
 {
+  static TextureFilter prev = (TextureFilter)-1;
+  if (tf == prev)
+  {
+    return;
+  }
+  prev = tf;
+
   impl->SetTextureFilter(tf);
 }
 
