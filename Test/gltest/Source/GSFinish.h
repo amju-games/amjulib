@@ -1,12 +1,12 @@
 #ifndef GS_FINISH_H
 #define GS_FINISH_H
 
-#include <GameState.h>
 #include <GuiElement.h>
+#include "GSBase.h"
 
 namespace Amju
 {
-class GSFinish : public GameState
+class GSFinish : public GSBase
 {
 public:
   static const char* NAME;
@@ -19,6 +19,8 @@ public:
 protected:
   PGuiElement m_gui;
 };
+
+typedef Singleton<GSFinish> TheGSFinish;
 }
 
 #endif

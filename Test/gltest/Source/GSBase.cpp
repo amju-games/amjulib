@@ -1,13 +1,26 @@
-#include "GSBase.h"
+#include <iostream>
 #include <Game.h>
 #include <Timer.h>
 #include <AmjuGL.h>
-#include <iostream>
+#include <GuiText.h>
+#include <StringUtils.h>
+#include "GSBase.h"
 
 namespace Amju
 {
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 {
+}
+
+void GSBase::Draw2d()
+{
+  static GuiText s;
+  s.SetJust(GuiText::AMJU_JUST_LEFT);
+  s.SetFgCol(Colour(1, 1, 1, 1));
+  s.SetLocalPos(Vec2f(-1, 1));
+  s.SetSize(Vec2f(1, 0.1f));
+  s.SetText(m_name + " " + ToString(m_maxTime - m_time, 1));
+  s.Draw();
 }
 
 void GSBase::Draw()
