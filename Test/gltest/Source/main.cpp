@@ -43,7 +43,7 @@ void StartUpAfterCreateWindow()
   //TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSShadow::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSEnvMap::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSObb2Test::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSLighting::Instance());
 
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
 }
