@@ -245,6 +245,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
     std::cout << "Flags: " << flags << "\n";
 #endif
+
+    if (flags & Material::AMJU_MATERIAL_SPHERE_MAP)
+    {
+      mat.m_texture->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
+    }
   }
 
   int numGroups = 0;
