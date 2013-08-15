@@ -1,21 +1,40 @@
-#include "GSObb2Test.h"
 #include <Game.h>
 #include <DrawOBB2.h>
 #include <DrawOBB3.h>
 #include <Colour.h>
 #include <AmjuGL.h>
+#include <Timer.h>
+#include "GSObb2Test.h"
+#include "GSLighting.h"
 
 namespace Amju
 {
+GSObb2Test::GSObb2Test()
+{
+  m_name = "OBB2";
+  m_nextState = TheGSLighting::Instance();
+}
+
 void GSObb2Test::Update()
 {
+  GSBase::Update();
+
   Vec2f v = m_obbs[1].GetCentre();
   v.x -= 0.001f;
   m_obbs[1].SetCentre(v);
+
+  static float rads = 0;
+  rads += TheTimer::Instance()->GetDt();
+  m_obbs[0].SetRotation(rads);
 }
 
 void GSObb2Test::Draw()
 {
+  AmjuGL::SetClearColour(Colour(0.2f, 0.2f, 0.2f, 1));
+  GSBase::Draw();
+
+/* 
+  AmjuGL::SetIdentity();
   AmjuGL::LookAt(10, 0, 0,  0, 0, 0,  0, 1, 0);
 
   static OBB3 b1(Vec3f(0, 0, 0), Vec3f(1, 0, 0), Vec3f(0, 1, 0), Vec3f(1, 2, 3));
@@ -36,11 +55,13 @@ void GSObb2Test::Draw()
   DrawOBB3(b1);
   DrawOBB3(b2);
   PopColour();
+*/
 }
 
 void GSObb2Test::Draw2d()
 {
-  /*
+  GSBase::Draw2d();
+
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
   PushColour();
@@ -56,11 +77,12 @@ void GSObb2Test::Draw2d()
 
   PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-  */
 }
 
 void GSObb2Test::OnActive()
 {
+  GSBase::OnActive();
+
   OBB2 obb1(Vec2f(0, 0), Vec2f(1, 0), Vec2f(0.2f, 0.2f));
   m_obbs.push_back(obb1);
 

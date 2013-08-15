@@ -4,18 +4,19 @@
 #include <Texture.h>
 #include <Timer.h>
 #include "GSEnvMap.h"
+#include "GSFinish.h"
 
 namespace Amju
 {
 GSEnvMap::GSEnvMap()
 {
-  //m_nextState=...
+  m_name = "Sphere mapping";
+  m_nextState = TheGSFinish::Instance();
 }
 
 void GSEnvMap::Update()
 {
-//  GSBase::Update();
-
+  GSBase::Update();
 }
 
 void GSEnvMap::Draw()
@@ -43,6 +44,7 @@ void GSEnvMap::Draw()
 
 void GSEnvMap::Draw2d()
 {
+  GSBase::Draw2d();
 }
 
 void GSEnvMap::OnActive()

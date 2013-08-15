@@ -1,18 +1,19 @@
 #ifndef GS_OBB2_H
 #define GS_OBB2_H
 
-#include <GameState.h>
 #include <vector>
 #include <OBB2.h>
 #include <Singleton.h>
+#include "GSBase.h"
 
 namespace Amju
 {
-class GSObb2Test : public GameState
+class GSObb2Test : public GSBase
 {
-public:
-  static const char* NAME;
+  GSObb2Test();
+  friend class Singleton<GSObb2Test>;
 
+public:
   virtual void Update();
   virtual void Draw();
   virtual void Draw2d();

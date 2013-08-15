@@ -1,22 +1,24 @@
-#include "GSLighting.h"
 #include <AmjuGL.h>
 #include <AABB.h>
 #include <DrawAABB.h>
 #include <Colour.h>
 #include <Font.h>
+#include <GuiText.h>
+#include "GSLighting.h"
+#include "GSEnvMap.h"
 #include "Teapot.h"
 
 namespace Amju
 {
 GSLighting::GSLighting()
 {
-  //m_nextState=...
+  m_name = "Lighting";
+  m_nextState = TheGSEnvMap::Instance();
 }
 
 void GSLighting::Update()
 {
-//  GSBase::Update();
-
+  GSBase::Update();
 }
 
 void GSLighting::Draw()
@@ -57,11 +59,7 @@ void GSLighting::Draw()
 
 void GSLighting::Draw2d()
 {
-  AmjuGL::SetColour(0, 0, 0, 1);
-  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  Assert(font);
-  font->Print(-1, -0.8f, "Lighting");
-  AmjuGL::SetColour(1, 1, 1, 1);
+  GSBase::Draw2d();
 }
 
 void GSLighting::OnActive()
