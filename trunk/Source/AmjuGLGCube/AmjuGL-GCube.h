@@ -56,7 +56,6 @@ public:
     int height, 
     uint8* data) {}
   virtual void UseTexture(AmjuGL::TextureHandle) {}
-  virtual void SetTextureMode(AmjuGL::TextureType tt) {}
   virtual void GetScreenshot(unsigned char* buffer, int w, int h) {}
   virtual void DrawLighting(
     const AmjuGL::LightColour& globalAmbient, 
@@ -65,6 +64,10 @@ public:
     const AmjuGL::LightColour& lightSpecular,
     const AmjuGL::Vec3& lightPos) {}
   virtual Shader* LoadShader(const std::string& shaderFileName) { return 0; }
+  virtual void SetTextureType(AmjuGL::TextureType tt) {}
+  virtual void SetTextureMode(AmjuGL::TextureMode tm) {}
+  virtual void SetTextureFilter(AmjuGL::TextureFilter tf) {}
+  virtual Drawable* Create(int) { return 0; }
 };
 
 class AmjuGLGCube : public AmjuGLImpl
@@ -160,7 +163,9 @@ public:
   // Call to use a Texture once set up
   virtual void UseTexture(AmjuGL::TextureHandle);
 
-  virtual void SetTextureMode(AmjuGL::TextureType tt);
+  virtual void SetTextureType(AmjuGL::TextureType tt);
+  virtual void SetTextureMode(AmjuGL::TextureMode tm);
+  virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
 
   // Copy screen into buffer  - which should be allocated by caller.
   virtual void GetScreenshot(unsigned char* buffer, int w, int h);
@@ -174,6 +179,8 @@ public:
     const AmjuGL::Vec3& lightPos);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
+
+  virtual Drawable* Create(int);
 
 private:
   int m_texId; // to get unique texture IDs

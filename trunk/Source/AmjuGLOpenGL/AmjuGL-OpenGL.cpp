@@ -31,7 +31,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
-static DrawableFactory m_factory;
+static DrawableFactory s_factory;
 
 class TriListStaticOpenGL : public TriListStatic
 {
@@ -56,7 +56,7 @@ private:
   AmjuGL::Tris m_tris;
 };
 
-class TriListDynamicOpenGL : public TriListStatic
+class TriListDynamicOpenGL : public TriListDynamic
 {
 public:
   virtual void Draw()
@@ -109,14 +109,14 @@ AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
 {
   windowCreateFunc = f;
 
-  m_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
-  m_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
-  m_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
+  s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
+  s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+  s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
 }
 
 Drawable* AmjuGLOpenGL::Create(int drawableTypeId)
 {
-  return m_factory.Create(drawableTypeId);
+  return s_factory.Create(drawableTypeId);
 }
 
 bool AmjuGLOpenGL::CreateWindow(AmjuGLWindowInfo* wi)

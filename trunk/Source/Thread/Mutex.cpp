@@ -42,9 +42,13 @@ Mutex::Mutex()
 #if defined(WIN32)
   InitializeCriticalSection(&m_crit);
 #else
+#ifdef GEKKO
+  // TODO
+#else
   m_nestCount = 0;
   pthread_mutex_init(&m_crit, 0);
   // m_owner does not need to be initialised
+#endif
 #endif
 }
 
@@ -54,7 +58,11 @@ Mutex::~Mutex()
 
 #if defined(WIN32)
 #else
+#ifdef GEKKO
+  // TODO
+#else
   pthread_mutex_destroy(&m_crit);
+#endif
 #endif
 }
 
@@ -66,7 +74,8 @@ void Mutex::Lock()
   EnterCriticalSection(&m_crit);
 
 #elif defined (GEKKO)
-  pthread_mutex_lock(&m_crit);               
+  // WTF, this used to work?!?!?!
+  // ?? pthread_mutex_lock(&m_crit);               
 
 #else
   switch (pthread_mutex_trylock(&m_crit)) 
@@ -99,7 +108,8 @@ void Mutex::Unlock()
 #if defined(WIN32)
   LeaveCriticalSection(&m_crit);
 #elif defined (GEKKO)
-    pthread_mutex_unlock(&m_crit);
+  // WTF
+  //  pthread_mutex_unlock(&m_crit);
 #else
   Assert(m_owner == pthread_self());
   Assert(m_nestCount > 0);

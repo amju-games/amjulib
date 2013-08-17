@@ -3,7 +3,11 @@
 
 #if defined(WIN32)
 #else
+#ifdef GEKKO
+// TODO
+#else
 #include <pthread.h>
+#endif
 #endif
 
 #include <RCPtr.h>
@@ -49,7 +53,11 @@ private:
 #if defined(WIN32)
   unsigned long m_threadHandle;
 #else
+#ifdef GEKKO
+  // TODO
+#else
   pthread_t m_threadHandle;
+#endif
 #endif
 
   // Count no of threads created

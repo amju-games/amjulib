@@ -8,6 +8,7 @@
 #include "EventPollerImplWii.h"
 #include "SoundWii.h"
 #include <File.h>
+#include <Pause.h>
 #endif // GEKKO
 
 #ifdef WIN32
@@ -51,7 +52,16 @@ int main(int argc, char **argv)
   std::cout << "Hello, in main!\n";
 
 #ifdef GEKKO
+#ifdef GEKKO_CONSOLE // define for console-only debugging
+  AmjuGLImpl* impl = new AmjuGLGCubeConsole;
+  impl->Init();
+  AmjuGL::SetImpl(impl);
+std::cout << "\n\n\n\n\nStarting...\n";
+
+#else
   AmjuGL::SetImpl(new AmjuGLGCube);
+#endif
+
   TheEventPoller::Instance()->SetImpl(new EventPollerImplWii);
   TheSoundManager::Instance()->SetImpl(new SoundWii);
 #endif // GEKKO
@@ -101,13 +111,15 @@ std::cout << "Just before startup...\n";
 
   Amju::AmjuGL::CreateWindow(&w);  // Before Init() for all impls
 
+std::cout << "Just before Init...\n";
   Amju::AmjuGL::Init();
 
+std::cout << "Just before startup2...\n";
   StartUpAfterCreateWindow();
 
-  //Amju::AmjuGL::SetScreenRotation(10.0f);
-
 std::cout << "Just before run...\n";
+PAUSE;
+
   TheGame::Instance()->Run();
 
   return 0;
