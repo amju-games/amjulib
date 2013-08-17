@@ -15,7 +15,11 @@ Added to repository
 #if defined(WIN32)
 #include <windows.h>
 #else
+#ifdef GEKKO
+// TODO
+#else
 #include <pthread.h>
+#endif
 #endif
 #include <Locker.h>
 
@@ -38,9 +42,13 @@ private:
 #if defined(WIN32)
   CRITICAL_SECTION m_crit;
 #else
+#ifdef GEKKO
+  // TODO
+#else
   pthread_mutex_t m_crit;
   volatile unsigned m_nestCount;
   volatile pthread_t m_owner;
+#endif
 #endif
 };
 

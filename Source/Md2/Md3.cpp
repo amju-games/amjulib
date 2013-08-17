@@ -1,5 +1,8 @@
 // Modified from www.gametutorials.com, original author Ben Humphrey, digiben@gametutorials.com
 
+#if !defined(GEKKO) && !defined(AMJU_IOS)
+// TODO Must use AmjuGL to work on Gekko/iOS
+
 #include <AmjuFirst.h>
 #include <fstream>
 #include <iostream>
@@ -1357,4 +1360,5 @@ std::cout << "LOADING MODEL: " << strFileName << "\n";
 
 } // namespace 
 
+#endif // if !defined(GEKKO) && !defined(AMJU_IOS)
 

@@ -16,8 +16,9 @@ Amju Games source code (c) Copyright Jason Colman 2009
 #include <fstream>
 #include <stdlib.h>
 
-#include "AmjuGL.h"
+#include <AmjuGL.h>
 #include <ShaderNull.h>
+#include <TriList.h>
 #include "AmjuGL-GCube.h"
 #include "TextureUtils.h"
 #include "Pause.h" // TODO TEMP TEST
@@ -28,7 +29,68 @@ Amju Games source code (c) Copyright Jason Colman 2009
 
 namespace Amju
 {
-// TODO Make all statics members
+static DrawableFactory s_factory;
+
+class TriListStaticGCube : public TriListStatic
+{
+public:
+  virtual void Draw()
+  {
+    if (!m_tris.empty())
+    {
+      AmjuGL::DrawTriList(m_tris);
+    }
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+  
+  virtual bool Init() { return true; }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+class TriListDynamicGCube : public TriListDynamic
+{
+public:
+  virtual void Draw()
+  {
+    if (!m_tris.empty())
+    {
+      AmjuGL::DrawTriList(m_tris);
+    }
+  }
+
+  virtual void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+  
+  virtual bool Init() { return true; }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+static Drawable* MakeStaticTriList()
+{
+  return new TriListStaticGCube;
+}
+
+static Drawable* MakeDynamicTriList()
+{
+  return new TriListDynamicGCube;
+}
+
+static Drawable* MakeShadowMap()
+{
+  return new ShadowMapNull;
+}
+
+// TODO Make all statics members?
 
 // Vars used for setting up screen and then for drawing
 // These should only be used internally - so we can make them static.
@@ -46,7 +108,7 @@ bool s_isOrtho = true; // true if projection is ortho, false if persp
 
 // The three matrix stacks
 // From gl2gx: mview matrix stack
-static Mtx s_mtxelements[32]; // max mview stack depth is 32 in opengl
+static Mtx s_mtxelements[32]; // max mview stack depth is 32 in GCube
 static int s_mtxcurrentelement = 0; // stack array index for mview
 
 struct ProjStackElement
@@ -112,6 +174,10 @@ void AmjuGLGCubeConsole::Flip()
 
 AmjuGLGCube::AmjuGLGCube()
 {
+  s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
+  s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+  s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
+
   m_texId = 0;
 
   static const int WIDTH = 640;
@@ -492,7 +558,7 @@ void AmjuGLGCube::DrawTriList(const AmjuGL::Tris& tris)
       {			
         const AmjuGL::Vert& v = tri.m_verts[j];
         
-        // Pos comes first, unlike OpenGL..?
+        // Pos comes first, unlike GCube..?
         GX_Position3f32(v.m_x, v.m_y, v.m_z);		
         GX_Normal3f32(v.m_nx, v.m_ny, v.m_nz);
         GX_Color4u8(r, g, b, a); // TODO Do we have to specify this for every vertex ?
@@ -520,7 +586,7 @@ void AmjuGLGCube::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
   // Start drawing lines
   GX_Begin(GX_LINES, GX_VTXFMT0, 2);		
   
-    // Pos comes first, unlike OpenGL..?
+    // Pos comes first, unlike GCube..?
     GX_Position3f32(v1.m_x, v1.m_y, v1.m_z);		
     GX_Normal3f32(1, 0, 0); // Need to specify a normal
     GX_Color4u8(r, g, b, a); // TODO Do we have to specify this for every vertex ?
@@ -775,7 +841,7 @@ void AmjuGLGCube::PushAttrib(uint32 attrib)
 
   // Push/Pop Attrib is emulated in AmjuGL -- Enable/Disable is called, 
   //  no need to use glPushAttrib/glPopAttrib.
-  // This is for consistency and also is good for OpenGL ES.
+  // This is for consistency and also is good for GCube ES.
 }
 
 void AmjuGLGCube::PopAttrib()
@@ -849,13 +915,20 @@ void AmjuGLGCube::DestroyTextureHandle(AmjuGL::TextureHandle* th)
   m_textures.erase(texId);
 }
 
-void AmjuGLGCube::SetTextureMode(AmjuGL::TextureType tt)
+void AmjuGLGCube::SetTextureType(AmjuGL::TextureType tt)
 {
-  AMJU_CALL_STACK;
-
-  s_tt = tt;
+  // TODO
 }
 
+void AmjuGLGCube::SetTextureMode(AmjuGL::TextureMode tm)
+{
+  // TODO
+}
+
+void AmjuGLGCube::SetTextureFilter(AmjuGL::TextureFilter tf)
+{
+  // TODO
+}
 
 /**
  * Convert a raw BMP (RGB, no alpha) to 4x4RGBA.
@@ -1018,6 +1091,10 @@ Shader* AmjuGLGCube::LoadShader(const std::string& )
   return new ShaderNull;
 }
 
+Drawable* AmjuGLGCube::Create(int drawableTypeId)
+{
+  return s_factory.Create(drawableTypeId);
+}
 }
 
 

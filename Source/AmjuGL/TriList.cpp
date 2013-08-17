@@ -12,8 +12,10 @@ TriListStatic* MakeTriList()
 TriListStatic* MakeTriList(const AmjuGL::Tris& tris)
 {
   TriListStatic* tls = (TriListStatic*)AmjuGL::Create(TriListStatic::DRAWABLE_TYPE_ID);
-  Assert(tls);
-  tls->Set(tris);
+  if (tls)
+  {
+    tls->Set(tris);
+  }
   return tls; 
 }
 

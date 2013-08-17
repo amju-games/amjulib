@@ -1,3 +1,6 @@
+#if !defined(GEKKO) && !defined(AMJU_IOS)
+// TODO Must use AmjuGL to work on Gekko/iOS
+
 #ifndef MD3_TYPES_H_INCLUDED
 #define MD3_TYPES_H_INCLUDED
 
@@ -148,5 +151,6 @@ namespace Amju
 } // namespace
 
 #endif 
+#endif //#if !defined(GEKKO) && !defined(AMJU_IOS)
 
 

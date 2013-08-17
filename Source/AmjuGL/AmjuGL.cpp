@@ -414,7 +414,10 @@ void AmjuGL::Draw(Drawable* drawable)
 {
   AMJU_CALL_STACK;
 
-  drawable->Draw();
+  if (drawable)
+  {
+    drawable->Draw();
+  }
 }
 
 void AmjuGL::GetMatrix(MatrixMode m, float result[16])
