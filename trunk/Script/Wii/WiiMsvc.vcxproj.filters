@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Geom">
+      <UniqueIdentifier>{aefefa5a-67d3-4df7-84b8-1b3b285e8cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SoundWii">
+      <UniqueIdentifier>{c9ef8cab-179f-45a8-ba22-9d5fd26708e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGL-GCube">
+      <UniqueIdentifier>{bd5a373d-2c48-423b-9a6e-d0c4057f783a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{e92a124b-a6e3-48b5-af21-6caacaf00de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Zlib">
+      <UniqueIdentifier>{8d7c2c21-4990-47e0-889a-a8e689dc5b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AmjuGL">
+      <UniqueIdentifier>{de7e6752-ab9c-4cf2-ab59-5be50c84186b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{59d64cc1-f65b-4ce3-9a7c-370ed6c801c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{3edb4212-1542-4bc8-9410-c1cbd79a9186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventsWii">
+      <UniqueIdentifier>{d64e6527-ea50-46fa-b569-2e0054325fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileUtils">
+      <UniqueIdentifier>{f63dd692-2267-4238-8624-cfc3e71bfb32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Font">
+      <UniqueIdentifier>{0b13af11-1d63-4a24-83d2-b6f325361e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{b7c071ba-d5c5-471a-b83d-bb1bd77fbdbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1de72fb2-c860-45a4-bcd0-fe8f1d32e706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{6f0daa3c-f459-412a-9644-e643a13f129d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{4d924b7d-e5a5-47e6-84d5-96976421e8a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{605de779-49bd-482d-816b-97e2d73e2a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image\Png">
+      <UniqueIdentifier>{cc832d16-173f-4547-9ad4-affde627400d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Localise">
+      <UniqueIdentifier>{9af57462-568b-4c20-85ee-45cb2eaf329a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Md2">
+      <UniqueIdentifier>{7a9b1334-67d6-4d9a-a232-8f5dd942e26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mem">
+      <UniqueIdentifier>{c5c878f2-e90e-475b-98be-e0c8be1d4d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj">
+      <UniqueIdentifier>{37515894-38a1-443b-ab20-48d97030c041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{74c7cbde-55c3-4405-9770-99efea8aeb24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{0e15d7e6-5524-4e24-82ed-a455b65ddc33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeUtils">
+      <UniqueIdentifier>{86a38595-598a-4e81-8b0b-763a7691eca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeomDraw">
+      <UniqueIdentifier>{4336082e-2ec6-4ecd-bbc0-521cb0e20e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeomLoad">
+      <UniqueIdentifier>{807e1e67-eaa1-4ccc-bffc-4e9df91b358c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{61580489-a441-4e3d-b02f-9cdd0e35de0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{b89c5f54-dc07-45cf-8d71-0764656ab6ac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\AABB.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Capsule.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Geometry.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Line2.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Line3.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Matrix.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Plane.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Quaternion.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Rect.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Sphere.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Tri.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\SoundWii\SoundWii.cpp">
+      <Filter>SoundWii</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGLGCube\AmjuGL-GCube.cpp">
+      <Filter>AmjuGL-GCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\AmjuAssert.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\mt19937ar-cok.c">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Pause.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\ReportError.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\SafeUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\SchAssert.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Sign.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Variable.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\adler32.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\compress.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\crc32.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\deflate.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\example.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\gzio.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\infback.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inffast.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inflate.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inftrees.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\minigzip.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\trees.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\uncompr.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\zutil.c">
+      <Filter>Utils\Zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\AmjuGLWindowInfo.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\Colour.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\Screen.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Collision\CollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Collision\CollisionMesh.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Events\EventListener.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Events\EventPoller.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Events\Mouse.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\EventsWii\EventPollerImplWii.cpp">
+      <Filter>EventsWii</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\CsvTokeniser.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Directory.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Endian.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\File.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImpl.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplGlue.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplMem.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplStd.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileSize.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\GlueFile.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\GlueFileMem.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Tokeniser.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Font\Font.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Font\TextureSequence.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Game\GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Game\GameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Sound\SoundManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiButton.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiCommandHandler.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiComposite.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiElement.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiFactory.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiImage.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiText.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\AlphaBmpLoader.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\BinaryResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\ResourceManager.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Bitmap.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Texture.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\TextureUtils.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\example.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\LoadPng.cpp">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\png.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngerror.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pnggccrd.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngget.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngmem.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngpread.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngread.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrio.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrtran.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrutil.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngset.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngtest.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngtrans.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngvcrd.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwio.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwrite.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwtran.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwutil.c">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\SavePng.cpp">
+      <Filter>Image\Png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Localise\Localise.cpp">
+      <Filter>Localise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Md2\Md2Model.cpp">
+      <Filter>Md2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Mem\AmjuMem.cpp">
+      <Filter>Mem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Mem\CallStack.cpp">
+      <Filter>Mem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Obj\ObjMesh.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Obj\ObjUsefulFunctions.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneComposite.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneGameObject.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneGraph.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneMesh.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneNode.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneNodeCamera.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\ReportError.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\SafeUtils.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\StringUtils.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\AmjuTime.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\TimePeriod.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\Timer.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\TimeRange.cpp">
+      <Filter>TimeUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawAABB.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB2.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB3.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawRect.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawSphere.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\Teapot.cpp">
+      <Filter>GeomDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadAABB.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadMatrix.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadRect.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadVec2.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadVec3.cpp">
+      <Filter>GeomLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\ClientSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HostInfo.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HttpClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HttpReq.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\OnlineReqManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\ServerSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\Socket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\SocketService.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Network\UrlUtils.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\Mutex.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\Thread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\ThreadGate.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\ThreadManager.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Md2\Md3.cpp">
+      <Filter>Md2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\AABB.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Capsule.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Geometry.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Line2.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Line3.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Matrix.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Plane.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Quaternion.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Rect.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Sphere.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Tri.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Vec2.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Vec3.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\SoundWii\SoundWii.h">
+      <Filter>SoundWii</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGLGCube\AmjuGL-GCube.h">
+      <Filter>AmjuGL-GCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\AmjuAssert.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\AmjuTypes.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Common.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\DegRad.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Factory.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\NonCopyable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Pause.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\RCPtr.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\ReportError.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\SafeUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\schassert.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\SharedPtr.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Sign.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Variable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\crc32.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\deflate.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inffast.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inffixed.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inflate.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inftrees.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\trees.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zconf.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zconf.in.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zlib.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zutil.h">
+      <Filter>Utils\Zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL-Impl.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGLWindowInfo.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\Colour.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\Screen.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Collision\CollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Collision\CollisionMesh.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Events\EventListener.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Events\EventPoller.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Events\Mouse.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\EventsWii\EventPollerImplWii.h">
+      <Filter>EventsWii</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\BinaryData.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\CsvTokeniser.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Directory.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Endian.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\File.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImpl.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplGlue.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplMem.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplStd.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileSize.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\GlueFile.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\GlueFileMem.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Tokeniser.h">
+      <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Font\Font.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Font\TextureSequence.h">
+      <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameObjectFactory.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Sound\SoundManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Sound\SoundPlayerImpl.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiButton.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiCommandHandler.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiComposite.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiElement.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiFactory.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiImage.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiText.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\AlphaBmpLoader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\BinaryResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\ResourceManager.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Bitmap.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Texture.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\TextureUtils.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\config.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\LoadPng.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\png.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\pngconf.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\SavePng.h">
+      <Filter>Image\Png</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Localise\Localise.h">
+      <Filter>Localise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Md2\Md2Model.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Md2\Md2Norms.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuFinal.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuFirst.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuMem.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\CallStack.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\MemCheck.h">
+      <Filter>Mem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Obj\ObjMesh.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Obj\ObjUsefulFunctions.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\BillBoard.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneComposite.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneGameObject.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneGraph.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneMesh.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneNode.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneNodeCamera.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\ReportError.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\SafeUtils.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\StringUtils.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\AmjuTime.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\TimePeriod.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\Timer.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\TimeRange.h">
+      <Filter>TimeUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawAABB.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB2.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB3.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawRect.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawSphere.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\Teapot.h">
+      <Filter>GeomDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadAABB.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadMatrix.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadRect.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadVec2.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadVec3.h">
+      <Filter>GeomLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\ClientSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HostInfo.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HttpClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HttpReq.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\OnlineReqManager.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\ServerSocket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\Socket.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\SocketService.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Network\UrlUtils.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Locker.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Mutex.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Thread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\ThreadGate.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\ThreadManager.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Md2\Md3.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Md2\Md3Types.h">
+      <Filter>Md2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\amjulib\Source\Localise\localise.pl">
+      <Filter>Localise</Filter>
+    </None>
+    <None Include="..\..\..\amjulib\Source\Mem\AddCallstacks.pl">
+      <Filter>Mem</Filter>
+    </None>
+    <None Include="..\..\..\amjulib\Source\Mem\AddHeaders.pl">
+      <Filter>Mem</Filter>
+    </None>
+    <None Include="Makefile" />
+  </ItemGroup>
+</Project>
