@@ -1,5 +1,3 @@
-#ifndef MACOSX
-
 #include <AmjuFirst.h>
 #include <iostream>
 
@@ -22,12 +20,13 @@
 #endif // WIN32
 
 #ifdef MACOSX
-#include <AmjuGL-OpenGL.h>
+#include <AmjuGL-Null.h>
+#include <EventPoller.h>
 #endif // MACOSX
 
 #ifdef IPHONE
 #include <AmjuGL-Null.h>
-#include <EventPollerImplGeneric.h>
+#include <EventPoller.h>
 #include <BassSoundPlayer.h>
 #endif
 
@@ -52,7 +51,7 @@ int main(int argc, char **argv)
   std::cout << "Hello, in main!\n";
 
 #ifdef GEKKO
-#ifdef GEKKO_CONSOLE // define for console-only debugging
+#ifdef AMJU_CONSOLE // define for console-only debugging
   AmjuGLImpl* impl = new AmjuGLGCubeConsole;
   impl->Init();
   AmjuGL::SetImpl(impl);
@@ -66,7 +65,22 @@ std::cout << "\n\n\n\n\nStarting...\n";
   TheSoundManager::Instance()->SetImpl(new SoundWii);
 #endif // GEKKO
 
+#ifdef MACOSX
+#ifdef AMJU_CONSOLE
+  std::cout << "Mac console build\n";
+  AmjuGL::SetImpl(new AmjuGLNull);
+  TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric);
+#else
+#error Unexpectedly, for a Mac build I'm in nonglutmain but AMJU_CONSOLE not defined!?
+#endif // AMJU_CONSOLE
+#endif // MACOSX
+
 #ifdef WIN32
+
+#ifdef AMJU_CONSOLE
+  std::cout << "Windows console build\n";
+  AmjuGL::SetImpl(new AmjuGLNull);
+#else
 
 #if !defined(AMJU_USE_OPENGL) && !defined(AMJU_USE_DX9) && !defined(AMJU_USE_DX11)
 #error Dude, ATM you must define one of AMJU_USE_OPENGL, AMJU_USE_DX9 or AMJU_USE_DX11 in your main.cpp
@@ -93,6 +107,7 @@ std::cout << "\n\n\n\n\nStarting...\n";
 #endif // AMJU_USE_DX11
 
   //TheSoundManager::Instance()->SetImpl(new BassSoundPlayer);
+#endif // AMJU_CONSOLE
 #endif // WIN32
 
 #ifdef IPHONE
@@ -118,11 +133,9 @@ std::cout << "Just before startup2...\n";
   StartUpAfterCreateWindow();
 
 std::cout << "Just before run...\n";
-PAUSE;
 
   TheGame::Instance()->Run();
 
   return 0;
 }
  
-#endif // not MACOSX 
