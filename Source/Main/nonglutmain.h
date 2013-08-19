@@ -11,6 +11,7 @@
 
 #ifdef WIN32
 #include <AmjuGLWindowInfo.h>
+#include <AmjuGL-Null.h>
 #include <AmjuGL-OpenGL.h>
 #include <AmjuGL-DX9.h>
 #include <AmjuGL-DX11.h>
@@ -80,6 +81,7 @@ std::cout << "\n\n\n\n\nStarting...\n";
 #ifdef AMJU_CONSOLE
   std::cout << "Windows console build\n";
   AmjuGL::SetImpl(new AmjuGLNull);
+  TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric);
 #else
 
 #if !defined(AMJU_USE_OPENGL) && !defined(AMJU_USE_DX9) && !defined(AMJU_USE_DX11)
