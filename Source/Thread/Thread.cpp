@@ -63,11 +63,8 @@ void* ThreadFunction(void* p)
 Thread::Thread() : m_stop(false), m_threadId(0)
 {
   AMJU_CALL_STACK;
-#ifdef GEKKO
 
-#else
-   m_threadHandle = 0;
-#endif
+  m_threadHandle = 0;
 }
 
 Thread::~Thread()
@@ -90,8 +87,7 @@ void Thread::Start()
   m_threadId = m_threadHandle;
 
 #elif defined (GEKKO)
-  // ?!?!?
-  /*
+  
   pthread_t thrHandle;
   if (!pthread_create(&thrHandle, 0, &ThreadFunction, this)) 
   {
@@ -104,7 +100,7 @@ std::cout << "FAILED TO CREATE THREAD\n";
     Assert(0);
     return;
   }
-  */
+ 
 #else
 
   pthread_t thrHandle;
