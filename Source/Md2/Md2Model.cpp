@@ -862,9 +862,12 @@ for (int i = 0; i < numTris; i++)
  
   } // while (1)
   
-  m_triList->Set(tris);
-  AmjuGL::Draw(m_triList);
-    
+  if (m_triList)
+  {
+    m_triList->Set(tris);
+    AmjuGL::Draw(m_triList);
+  }
+
 #endif // USE_MODIFIED_GL_COMMANDS
 
 #ifdef USE_TRI_LIST
