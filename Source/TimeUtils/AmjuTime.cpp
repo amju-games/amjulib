@@ -12,6 +12,8 @@
 #include <File.h>
 #include <AmjuFinal.h>
 
+//#define AMJUTIME_ROUND_DOWN_DEBUG
+
 namespace Amju
 {
 Time Time::Now()
@@ -274,11 +276,16 @@ Time& Time::RoundDown(const TimePeriod& tp)
 {
   AMJU_CALL_STACK;
 
-//std::cout << "TIME rounding DOWN " << ToString().c_str() << " to ";
+#ifdef AMJUTIME_ROUND_DOWN_DEBUG
+std::cout << "TIME rounding DOWN " << ToString().c_str() 
+  << " m_secs: " << m_secs << " tp.m_secs: " << tp.m_secs << "\n";
+#endif // AMJUTIME_ROUND_DOWN_DEBUG
 
   m_secs = tp.m_secs * (m_secs / tp.m_secs);
 
-//std::cout << ToString().c_str() << "\n";
+#ifdef AMJUTIME_ROUND_DOWN_DEBUG
+std::cout << "..m_secs now: " << m_secs << " str: " << ToString().c_str() << "\n";
+#endif // AMJUTIME_ROUND_DOWN_DEBUG
 
   return *this; 
 }
