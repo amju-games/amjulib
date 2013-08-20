@@ -4,7 +4,7 @@
 #if defined(WIN32)
 #else
 #ifdef GEKKO
-#include "pthread.h"
+#include "gekko_pthread.h"
 #else
 #include <pthread.h>
 #endif
