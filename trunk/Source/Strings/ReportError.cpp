@@ -20,7 +20,10 @@ void ReportError(const std::string& error)
   MessageBoxA(0, error.c_str(), "Oh no!", MB_ICONSTOP);
 
 #else
+
+#ifdef _DEBUG
   std::cout << error.c_str() << "\n"; 
+#endif
 
 #endif
 

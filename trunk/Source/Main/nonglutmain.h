@@ -72,7 +72,7 @@ std::cout << "\n\n\n\n\nStarting...\n";
   AmjuGL::SetImpl(new AmjuGLNull);
   TheEventPoller::Instance()->SetImpl(new EventPollerImplGeneric);
 #else
-#error Unexpectedly, for a Mac build I'm in nonglutmain but AMJU_CONSOLE not defined!?
+#error Unexpectedly, for a Mac build I r in nonglutmain but AMJU_CONSOLE not defined
 #endif // AMJU_CONSOLE
 #endif // MACOSX
 
@@ -123,18 +123,29 @@ std::cout << "\n\n\n\n\nStarting...\n";
 #endif // AMJU_CONSOLE
 #endif // IPHONE
 
-std::cout << "Just before startup...\n";
+#ifdef AMJU_CONSOLE
+  std::cout << "Just before startup...\n";
+#endif
+
   StartUpBeforeCreateWindow();
 
   Amju::AmjuGL::CreateWindow(&w);  // Before Init() for all impls
 
-std::cout << "Just before Init...\n";
+#ifdef AMJU_CONSOLE
+  std::cout << "Just before Init...\n";
+#endif
+
   Amju::AmjuGL::Init();
 
-std::cout << "Just before startup2...\n";
+#ifdef AMJU_CONSOLE
+  std::cout << "Just before startup2...\n";
+#endif
+
   StartUpAfterCreateWindow();
 
-std::cout << "Just before run...\n";
+#ifdef AMJU_CONSOLE
+  std::cout << "Just before run...\n";
+#endif
 
   TheGame::Instance()->Run();
 
