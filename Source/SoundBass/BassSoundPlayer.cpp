@@ -132,9 +132,11 @@ std::cout << "WAV length is " << wavLength << "\n";
 
   BASS_ChannelPlay(hc, FALSE);
 
+#if defined(MACOSX)|| defined(IPHONE) 
   // Set vol
-  //int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
-// TODO  BASS_ChannelSetAttribute(hc, -1, vol, -1);
+  int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
+  BASS_ChannelSetAttribute(hc, -1, vol, -1);
+#endif
 
 #ifdef BASS_DEBUG
 std::cout << "Apparently played wav ok!\n";
@@ -193,17 +195,19 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
     {
       std::string s = "BASS: Music: Can't play file: "; 
       s += songFile;
-	  int errCode = BASS_ErrorGetCode();
-	  s += " Error code: ";
-	  s += ToString(errCode);
+      int errCode = BASS_ErrorGetCode();
+      s += " Error code: ";
+      s += ToString(errCode);
       ReportError(s);
       return false;
     }
   }
 
+#if defined(MACOSX)|| defined(IPHONE) 
   // Set vol
-  //int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
-// TODO  BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
+  int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
+  BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
+#endif
 
   BASS_ChannelPlay(m_chan,FALSE);
 
@@ -240,8 +244,13 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
     return;
   }
 
-  //int newVol = (int)(f * 100.0f);
-// TODO  BASS_ChannelSetAttribute(m_chan, -1, newVol, -1);
+  int newVol = (int)(f * 100.0f);
+
+#if defined(MACOSX)|| defined(IPHONE) 
+  BASS_ChannelSetAttribute(m_chan, -1, newVol, -1);
+#else
+  BASS_SetVolume(newVol);
+#endif
 }
 
 #ifdef AMJU_USE_MIDI
