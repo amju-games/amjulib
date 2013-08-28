@@ -135,7 +135,8 @@ std::cout << "WAV length is " << wavLength << "\n";
 #if defined(MACOSX)|| defined(IPHONE) 
   // Set vol
   int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
-  BASS_ChannelSetAttribute(hc, -1, vol, -1);
+  //BASS_ChannelSetAttribute(hc, -1, vol, -1);
+  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
 #endif
 
 #ifdef BASS_DEBUG
@@ -206,7 +207,8 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
 #if defined(MACOSX)|| defined(IPHONE) 
   // Set vol
   int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
-  BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
+  //BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
+  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
 #endif
 
   BASS_ChannelPlay(m_chan,FALSE);
@@ -247,7 +249,7 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
   int newVol = (int)(f * 100.0f);
 
 #if defined(MACOSX)|| defined(IPHONE) 
-  BASS_ChannelSetAttribute(m_chan, -1, newVol, -1);
+  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
 #else
   BASS_SetVolume(newVol);
 #endif
