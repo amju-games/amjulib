@@ -43,6 +43,8 @@
 		6905672417233FC5008A0C92 /* MkDir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905672317233FC5008A0C92 /* MkDir.cpp */; };
 		6909086D1796EE1D007EC3FB /* LoadRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6909086B1796EE1D007EC3FB /* LoadRect.cpp */; };
 		6909086E1796EE1D007EC3FB /* LoadRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 6909086C1796EE1D007EC3FB /* LoadRect.h */; };
+		690E2F8017CE269F00DED7A1 /* iOSUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 690E2F7E17CE269F00DED7A1 /* iOSUtils.h */; };
+		690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 690E2F7F17CE269F00DED7A1 /* iOSUtils.mm */; };
 		6927A79B1726F92D009C9B97 /* iOSGetUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6927A7991726F92D009C9B97 /* iOSGetUrl.h */; };
 		6927A79C1726F92D009C9B97 /* iOSGetUrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */; };
 		692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */; };
@@ -418,6 +420,9 @@
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
 		69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */; };
 		69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */; };
+		69FE6BC417ABC97200C391F4 /* DrawDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6BC117ABC97200C391F4 /* DrawDecorator.h */; };
+		69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FE6BC217ABC97200C391F4 /* TriList.cpp */; };
+		69FE6BC617ABC97200C391F4 /* TriList.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6BC317ABC97200C391F4 /* TriList.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -458,6 +463,8 @@
 		6905672317233FC5008A0C92 /* MkDir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MkDir.cpp; path = ../../../Source/FileUtils/MkDir.cpp; sourceTree = "<group>"; };
 		6909086B1796EE1D007EC3FB /* LoadRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadRect.cpp; sourceTree = "<group>"; };
 		6909086C1796EE1D007EC3FB /* LoadRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadRect.h; sourceTree = "<group>"; };
+		690E2F7E17CE269F00DED7A1 /* iOSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSUtils.h; sourceTree = "<group>"; };
+		690E2F7F17CE269F00DED7A1 /* iOSUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSUtils.mm; sourceTree = "<group>"; };
 		6927A7991726F92D009C9B97 /* iOSGetUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSGetUrl.h; sourceTree = "<group>"; };
 		6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSGetUrl.mm; sourceTree = "<group>"; };
 		692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.1.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.1.cpp"; sourceTree = "<group>"; };
@@ -845,6 +852,9 @@
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
 		69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ES2DefaultShaders.cpp; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.cpp; sourceTree = "<group>"; };
 		69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2DefaultShaders.h; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.h; sourceTree = "<group>"; };
+		69FE6BC117ABC97200C391F4 /* DrawDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawDecorator.h; path = ../../../Source/AmjuGL/DrawDecorator.h; sourceTree = "<group>"; };
+		69FE6BC217ABC97200C391F4 /* TriList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TriList.cpp; path = ../../../Source/AmjuGL/TriList.cpp; sourceTree = "<group>"; };
+		69FE6BC317ABC97200C391F4 /* TriList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriList.h; path = ../../../Source/AmjuGL/TriList.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -932,6 +942,9 @@
 		693D406F15AB783A00B84D5C /* AmjuGL */ = {
 			isa = PBXGroup;
 			children = (
+				69FE6BC117ABC97200C391F4 /* DrawDecorator.h */,
+				69FE6BC217ABC97200C391F4 /* TriList.cpp */,
+				69FE6BC317ABC97200C391F4 /* TriList.h */,
 				695AD8B916B7BD8200E1E814 /* Drawable.h */,
 				695AD8BA16B7BD8200E1E814 /* Outliner.h */,
 				693D404F15AB780200B84D5C /* AmjuGL-Impl.h */,
@@ -1540,6 +1553,8 @@
 		693D42B415AB7CE900B84D5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				690E2F7E17CE269F00DED7A1 /* iOSUtils.h */,
+				690E2F7F17CE269F00DED7A1 /* iOSUtils.mm */,
 				69056719172135A7008A0C92 /* AmjuRand.cpp */,
 				6905671A172135A7008A0C92 /* AmjuRand.h */,
 				693D42B515AB7CE900B84D5C /* AmjuAssert.cpp */,
@@ -1835,6 +1850,9 @@
 				692A8A11179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h in Headers */,
 				692A8A13179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h in Headers */,
 				69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */,
+				69FE6BC417ABC97200C391F4 /* DrawDecorator.h in Headers */,
+				69FE6BC617ABC97200C391F4 /* TriList.h in Headers */,
+				690E2F8017CE269F00DED7A1 /* iOSUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2089,6 +2107,8 @@
 				692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */,
 				692A8A12179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp in Sources */,
 				69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */,
+				69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */,
+				690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2107,8 +2127,8 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Amjulib_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					LANDSCAPE,
 					IPHONE,
 					AMJU_USE_BASS,
 					_DEBUG,
@@ -2139,7 +2159,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Amjulib_Prefix.pch;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					LANDSCAPE,
 					IPHONE,
 					AMJU_USE_BASS,
 					AMJU_IOS,
