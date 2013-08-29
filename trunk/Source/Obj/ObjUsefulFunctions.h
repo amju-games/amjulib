@@ -28,8 +28,12 @@ struct Material : public RefCounted
   // Flags comprised of these values
   enum
   {
-    AMJU_MATERIAL_NO_COLLIDE = 0x01,
-    AMJU_MATERIAL_SPHERE_MAP = 0x02,
+    AMJU_MATERIAL_NO_COLLIDE         = 0x01, // 1 to ignore group in collision tests
+    AMJU_MATERIAL_SPHERE_MAP         = 0x02, // 1 for sphere mapped
+    AMJU_MATERIAL_USE_BLEND_FLAG     = 0x04, // if 1, use next flag
+    AMJU_MATERIAL_BLEND_ENABLED      = 0x08, //  ..to enable/disable blending
+    AMJU_MATERIAL_USE_LIGHTING_FLAG  = 0x10, // if 1, use next flag
+    AMJU_MATERIAL_LIGHTING_ENABLED   = 0x20, //  ..to enable/disable lighting
   };
 
   Material();

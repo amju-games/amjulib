@@ -682,6 +682,9 @@ void ObjMesh::DrawGroup(Group& g)
     return;
   }
 
+  // Material can set lighting/blending flags
+  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_BLEND);
+
   // TODO Hash, not string
   Materials::iterator it = m_materials.find(g.m_materialName);
   if (it != m_materials.end())
@@ -690,8 +693,9 @@ void ObjMesh::DrawGroup(Group& g)
     mat.UseThisMaterial();
   }
 
-//  AmjuGL::DrawTriList(g.m_tris);
   AmjuGL::Draw(g.m_triList);
+
+  AmjuGL::PopAttrib();
 }
 
 void ObjMesh::Merge(const ObjMesh& om)
