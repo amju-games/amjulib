@@ -23,11 +23,11 @@ rock2.png
 1  1  1  2  1  1  2
 1  2  2  2  2  2  1
 // Obstacles grid
-3  4  3  4  3  5  5 
+3  4  3  0  3  5  5 
 4  0  0  0  0  0  4
 3  0  0  0  0  0  4
 4  0  0  0  0  0  3
-5  4  3  0  3  5  5 
+5  4  3  4  3  5  5 
 
 // Destinations N, S, E>, W<
 72, 0, 0, 0
@@ -46,7 +46,7 @@ diamond4.png
 // cells
 4, 1
 // points
-4000
+2000
 
 // Spiders 
 baddie
