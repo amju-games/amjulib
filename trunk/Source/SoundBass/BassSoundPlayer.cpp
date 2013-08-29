@@ -136,7 +136,7 @@ std::cout << "WAV length is " << wavLength << "\n";
   // Set vol
   int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
   //BASS_ChannelSetAttribute(hc, -1, vol, -1);
-  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
+  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, vol);
 #endif
 
 #ifdef BASS_DEBUG
@@ -208,7 +208,7 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
   // Set vol
   int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
   //BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
-  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
+  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, vol);
 #endif
 
   BASS_ChannelPlay(m_chan,FALSE);
