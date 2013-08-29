@@ -128,6 +128,30 @@ void Material::UseThisMaterial()
   {
     m_texture->UseThisTexture();
   }
+
+  if ((m_flags & AMJU_MATERIAL_USE_BLEND_FLAG) != 0)
+  {
+    if ((m_flags & AMJU_MATERIAL_BLEND_ENABLED) != 0)
+    {
+      AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+    }
+    else
+    {
+      AmjuGL::Disable(AmjuGL::AMJU_BLEND);
+    }
+  }
+
+  if ((m_flags & AMJU_MATERIAL_USE_LIGHTING_FLAG) != 0)
+  {
+    if ((m_flags & AMJU_MATERIAL_LIGHTING_ENABLED) != 0)
+    {
+      AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+    }
+    else
+    {
+      AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+    }
+  }
 }
 
 // Convert a vector of four strings to a Vec3. 
