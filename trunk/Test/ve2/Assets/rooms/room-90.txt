@@ -5,7 +5,7 @@
 // type
 room
 // Num textures
-14
+15
 // 1 - 4
 ground4-n.png
 ground4-s.png
@@ -22,9 +22,10 @@ ground3-1.png
 // 11-12
 rock3.png
 rock2.png
-// 13-14
+// 13-15
 log1.png
 log2.png
+steps-ns.png
 
 // (x, y) Size of grid
 7, 5
@@ -34,18 +35,120 @@ log2.png
 4  9  9  9  9  9  3
 4 10  9  9  9  9  3
 4  9  9  9 10  9  3
-7  2  2  2  2  2  8
+7  2  2  15 2  2  8
 // Obstacles grid
 12 11 12 13 14 11 12
  0  0  0  0  0  0  0
  0  0  0  0  0  0  0
  0  0  0  0  0  0  0
-13 11 12 11 12 13 14
+13 11 12  0 12 13 14
 
 // Destinations N, S, E>, W<
-0, 0, 100, 80
+0, 91, 100, 80
 
 // music
 sound/rainforest.it
+
+
+// TREASURE
+treasure
+// pos
+0, 0, 100
+// tex
+diamond4.png
+// cells
+4, 1
+// points
+1000
+
+// Mosquitoes
+baddie
+0, 0, -50
+// Tex
+fly1.png
+// Num cells
+2,1
+// Size
+10, 10
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+10
+// Attack str
+was bitten by a mosquito!
+// Behaviour
+patrol
+// Dir
+90, 40
+// Rect (xmin, xmax, ymin, ymax)
+-150, 150, -150, 60
+// Reverse flag
+1
+// Sound - TODO buzz
+$$$empty
+
+baddie
+30, 0, 20
+fly1.png
+2,1
+10, 10
+1
+1
+10
+was bitten by a mosquito!
+patrol
+100, -220
+-170, 160, -170, 40
+1
+$$$empty
+
+baddie
+30, 0, -20
+fly1.png
+2,1
+10, 10
+1
+1
+10
+was bitten by a mosquito!
+patrol
+180, -190
+-150, 160, -160, 150
+1
+$$$empty
+
+baddie
+-30, 0, 20
+fly1.png
+2,1
+10, 10
+1
+1
+10
+was bitten by a mosquito!
+patrol
+200, 170
+-170, 180, -130, 60
+1
+$$$empty
+
+baddie
+-30, 0, 20
+fly1.png
+2,1
+10, 10
+1
+1
+10
+was bitten by a mosquito!
+patrol
+160, 180
+-140, 130, -80, 60
+1
+$$$empty
+
+
 
 
