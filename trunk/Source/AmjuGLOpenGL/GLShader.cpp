@@ -33,6 +33,34 @@ GLShader::~GLShader()
   }
 }
 
+int GLShader::GetAttribLocation(const std::string& attribName)
+{
+  Assert(m_programHandle);
+  
+  LocationMap::iterator it = m_map.find(attribName);
+  if (it != m_map.end())
+  {
+    return it->second;
+  }
+  int loc = (int)glGetAttribLocation(m_programHandle, attribName.c_str());
+  m_map[attribName] = loc;
+  return loc;
+}
+  
+int GLShader::GetUniformLocation(const std::string& uniformName)
+{
+  Assert(m_programHandle);
+
+  LocationMap::iterator it = m_map.find(uniformName);
+  if (it != m_map.end())
+  {
+    return it->second;
+  }
+  int loc = (int)glGetUniformLocation(m_programHandle, uniformName.c_str());
+  m_map[uniformName] = loc;
+  return loc;
+}
+
 bool GLShader::Load(const std::string& shadername)
 {
 #ifdef SHADER_DEBUG
@@ -205,10 +233,25 @@ void GLShader::End()
 
   glUseProgram(0);
 }
+  
+void GLShader::SetMatrix3x3(const std::string& name, const float matrix[9])
+{
+  GLint loc = GetUniformLocation(name);
+  
+  if (loc == -1)
+  {
+    ReportError("GLShader: didn't find uniform var " + name + " in shader");
+    Assert(0);
+    return;
+  }
+  
+  glUniformMatrix3fv(loc, 1, false, matrix);
+}
 
 void GLShader::Set(const std::string& name, const float matrix[16])
 {
-    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+    GLint loc = GetUniformLocation(name); 
+
     if (loc == -1)
     {
         ReportError("GLShader: didn't find uniform var " + name + " in shader");
@@ -221,7 +264,9 @@ void GLShader::Set(const std::string& name, const float matrix[16])
 
 void GLShader::Set(const std::string& name, float f)
 {
-    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+    GLint loc = GetUniformLocation(name); 
+      //glGetUniformLocation(m_programHandle, name.c_str());
+
     if (loc == -1)
     {
         ReportError("GLShader: didn't find uniform var " + name + " in shader");
@@ -233,7 +278,9 @@ void GLShader::Set(const std::string& name, float f)
 
 void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 {
-    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+    GLint loc = GetUniformLocation(name); 
+      //glGetUniformLocation(m_programHandle, name.c_str());
+
     if (loc == -1)
     {
         ReportError("GLShader: didn't find uniform var " + name + " in shader");
@@ -246,7 +293,9 @@ void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 
 void GLShader::Set(const std::string& name, const Colour& c)
 {
-    GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+    GLint loc = GetUniformLocation(name); 
+      //glGetUniformLocation(m_programHandle, name.c_str());
+
     if (loc == -1)
     {
         ReportError("GLShader: didn't find uniform var " + name + " in shader");
@@ -259,7 +308,8 @@ void GLShader::Set(const std::string& name, const Colour& c)
 
 void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
 {
-  GLint loc = glGetUniformLocation(m_programHandle, name.c_str());
+  GLint loc = GetUniformLocation(name); 
+
   if (loc == -1)
   {
     ReportError("GLShader: didn't find uniform var " + name + " in shader");
@@ -268,6 +318,20 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
   }
   
   glUniform1i(loc, (int)t);
+}
+  
+void GLShader::SetInt(const std::string& name, int i)
+{
+  GLint loc = GetUniformLocation(name);
+  
+  if (loc == -1)
+  {
+    ReportError("GLShader: didn't find uniform var " + name + " in shader");
+    Assert(0);
+    return;
+  }
+  
+  glUniform1i(loc, i);
 }
   
 int GLShader::GetProgHandle() const
