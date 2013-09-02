@@ -15,6 +15,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 // NB LANDSCAPE is no longer used
 
+//#define ENABLE_DISABLE_DEBUG
+
 namespace Amju
 {
 // Implement OpenGL-style Attribute stack in this base class.
