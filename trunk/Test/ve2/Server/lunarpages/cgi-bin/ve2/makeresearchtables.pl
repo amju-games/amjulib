@@ -62,6 +62,7 @@ CREATE TABLE `research_testresult`
 (`test_id` INT NOT NULL,
 `key` VARCHAR(30) NOT NULL,
 `val` VARCHAR(30) NOT NULL,
+PRIMARY KEY (`test_id`, `key`),
 FOREIGN KEY (`test_id`) REFERENCES research_cogtest(`id`)
 ) ENGINE = MYISAM;
 END
