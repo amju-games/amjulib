@@ -51,6 +51,17 @@ ground4.png
 sound/rainforest.it
 
 
+treasure
+// pos
+250, 0, 0
+// tex
+diamond3.png
+// cells
+4, 1
+// points
+1000
+
+
 // WATER
 baddie
 // Pos -- behind so always under player

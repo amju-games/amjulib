@@ -50,3 +50,35 @@ rock2.png
 // music
 sound/rainforest.it
 
+
+harmless
+sign-east.png
+// Pos
+250, 0, 0
+// Cells
+1, 1
+// Size
+75, 75
+
+
+harmless
+sign-east.png
+// Pos
+-250, 0, 0
+// Cells
+1, 1
+// Size
+75, 75
+
+
+treasure
+// pos
+150, 0, 0
+// tex
+diamond1.png
+// cells
+4, 1
+// points
+1000
+
+

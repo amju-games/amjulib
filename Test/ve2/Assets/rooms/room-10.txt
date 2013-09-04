@@ -70,6 +70,16 @@ got stuck in a tar pit!
 // Behaviour
 none
 
+treasure
+// pos
+150, 0, 0
+// tex
+diamond1.png
+// cells
+4, 1
+// points
+1000
+
 
 harmless
 fl1.png
