@@ -1,0 +1,37 @@
+Scene Editor
+============
+
+This is an old tool but might stil be useful if you find yourself having to edit ASCP or APZ data files...
+
+The really bad thing is there is NO UNDO for anything!
+
+File menu
+---------
+Open: opens up '.comp' files. Won't open .objs.
+Save: saves entire tree for any modified files.
+
+Tree View
+---------
+Shows composite structure.
+Right click on an element to delete etc.
+Properties lets you specify pos and rotation.
+Drag and drop works but there is no undo!
+
+2D View
+-------
+Selection: you select elements in the tree view.
+
+Shift + LMB drag: pans.
+Shift + RMB drag: zooms in and out.
+
+Ctrl + LMB: move selected.
+Ctrl + RMB: rotate selected.
+
+Positions and rotations can snap to nearest.
+(change in File|Preferences)
+
+3D View
+-------
+Shift + LMB: drag to rotate.
+Ctrl + LMB: up/down to zoom, left/right to pan.
+
