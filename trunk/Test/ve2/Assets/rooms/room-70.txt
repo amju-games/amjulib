@@ -51,6 +51,17 @@ ground4.png
 sound/rainforest.it
 
 
+treasure
+// pos
+0, 0, -200
+// tex
+diamond5.png
+// cells
+4, 1
+// points
+2000
+
+
 baddie
 // Pos 
 0, 0, -100

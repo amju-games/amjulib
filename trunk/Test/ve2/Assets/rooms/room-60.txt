@@ -51,6 +51,16 @@ ground4.png
 sound/rainforest.it
 
 
+treasure
+// pos
+0, 0, -100
+// tex
+diamond3.png
+// cells
+4, 1
+// points
+2000
+
 
 // BADDIES - arrows. Harmless targets give player hint
 

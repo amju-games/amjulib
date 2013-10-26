@@ -86,7 +86,7 @@ got spidered!
 // Behaviour
 chase
 // speed
-40
+10
 
 baddie
 -300, 0, 300
@@ -107,46 +107,5 @@ got spidered!
 // Behaviour
 chase
 // speed
-40
+10
 
-baddie
--300, 0, -300
-// Tex
-spider2.png
-// Num cells
-2,1
-// Size
-20, 20
-// Damage to player on collision
-1
-// Max health: -1 == indestructible
-1
-// Points
-5
-// Attack str
-got spidered!
-// Behaviour
-chase
-// speed
-40
-
-baddie
-300, 0, -300
-// Tex
-spider2.png
-// Num cells
-2,1
-// Size
-20, 20
-// Damage to player on collision
-1
-// Max health: -1 == indestructible
-1
-// Points
-5
-// Attack str
-got spidered!
-// Behaviour
-chase
-// speed
-40
