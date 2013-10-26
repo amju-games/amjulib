@@ -24,11 +24,6 @@ void SweepAndPrune::Clear()
     m_encounters.clear();
 }
 
-void SweepAndPrune::SetCollideFunc(CollideFunc cf)
-{
-    m_collideFunc = cf;
-}
-
 void SweepAndPrune::Update(const GameObjects& gos)
 {
     if (m_numBoxes == 0)
