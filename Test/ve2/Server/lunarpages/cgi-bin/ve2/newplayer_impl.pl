@@ -5,11 +5,12 @@
 #############################################
 
 require "common.pl";
+sub sendWelcomeEmail($$);
 
 sub new_player_impl($$$$)
 {
   my $playername = shift;
-  $playername = lc($playername);
+  ###$playername = lc($playername); # why lc ??!??!
 
   my $email = shift;
   $email = lc($email);
@@ -94,6 +95,14 @@ sub new_player_impl($$$$)
   # Initially logged out
   $sql = "insert into objectstate (`id`, `key`, `val`) values($objid, 'loggedin', 'n') on duplicate key update val='n'";
   insert($sql);
+
+  ###sendWelcomeEmail($email, $playername);
+}
+
+sub sendWelcomeEmail($$)
+{
+  my $email = shift;
+  my $playername = shift;
 
   # Send email to new player. TODO Use a template so we can easily edit this.
   # TODO Send html or text ??
