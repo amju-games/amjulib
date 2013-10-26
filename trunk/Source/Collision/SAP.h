@@ -8,20 +8,15 @@
 #include <set>
 #include <GameObject.h>
 #include <Singleton.h>
+#include "CollisionManager.h"
 
 namespace Amju
 {
-typedef bool (*CollideFunc)(GameObject*, GameObject*);
-
-class SweepAndPrune
+class SweepAndPrune : public CollisionDetector
 {
-  enum { AMJU_SAP_AXES = 3 };
-  enum { AMJU_SAP_MAX_BOXES = 1000 };
-  
-  SweepAndPrune();
-  friend class Singleton<SweepAndPrune>;
-
 public:
+  SweepAndPrune();
+
   void Update(const GameObjects& gos);
   void Clear();
   void SetCollideFunc(CollideFunc cf);
@@ -33,6 +28,9 @@ public:
 
 private:
   typedef std::pair<PGameObject, PGameObject> Encounter;
+
+  enum { AMJU_SAP_AXES = 3 };
+  enum { AMJU_SAP_MAX_BOXES = 1000 };
 
   struct Endpoint
   {
@@ -48,8 +46,6 @@ private:
   // our endpoint arrays > 2 endpoints per box per axis
 
   int m_numBoxes; // current number of boxes (== Game Objects) we have
-
-  CollideFunc m_collideFunc;
 
 private:
   void Update();

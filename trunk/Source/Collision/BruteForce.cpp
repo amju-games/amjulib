@@ -1,13 +1,17 @@
 #include <AmjuFirst.h>
+#include <Game.h>
 #include "BruteForce.h"
-#include "CollisionManager.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-void BruteForce(GameObjects* gameobjs)
+void BruteForce::Update()
 {
+  static Game* game = TheGame::Instance();
+  GameObjects* gameobjs = game->GetGameObjects();
+
   // Copy so iterator not invalidated
+  // TODO This should be a flag
   GameObjects gos(*gameobjs);
 
   for (GameObjects::iterator it = gos.begin(); it != gos.end(); ++it)
@@ -20,10 +24,8 @@ void BruteForce(GameObjects* gameobjs)
     {
       PGameObject go2 = jt->second;
 
-      AABB* aabb1 = go1->GetAABB();
-      AABB* aabb2 = go2->GetAABB();
-
-      if (aabb1 && aabb2 && aabb1->Intersects(*aabb2))
+      // The collision test is a pluggable function, so could be dynamic etc.
+      if (m_collideFunc(go1, go2))
       {
         TheCollisionManager::Instance()->HandleCollision(go1, go2);
       }

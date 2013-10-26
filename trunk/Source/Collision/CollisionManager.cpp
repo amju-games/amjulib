@@ -8,7 +8,47 @@
 
 namespace Amju
 {
-typedef void (*CollisionHandler)(GameObject*, GameObject*);
+static bool StaticAABBIntersectionTest(GameObject* go1, GameObject* go2)
+{
+  Assert(go1);
+  Assert(go2);
+  AABB* aabb1 = go1->GetAABB();
+  AABB* aabb2 = go2->GetAABB();
+  return (aabb1 && aabb2 && aabb1->Intersects(*aabb2));
+}
+
+CollisionDetector::CollisionDetector()
+{
+  m_collideFunc = StaticAABBIntersectionTest;
+}
+
+CollisionDetector::~CollisionDetector()
+{
+}
+
+void CollisionDetector::SetCollideFunc(CollideFunc cf)
+{
+  m_collideFunc = cf;
+}
+
+void CollisionManager::Update()
+{
+  if (m_cd)
+  {
+    InitFrame();
+    m_cd->Update();
+  }
+}
+
+void CollisionManager::SetCollisionDetector(CollisionDetector* cd)
+{
+  m_cd = cd;
+}
+
+CollisionDetector* CollisionManager::GetCollisionDetector()
+{
+  return m_cd;
+}
 
 bool CollisionManager::Add(
   const std::string& name1, const std::string& name2, CollisionHandler ch)
@@ -20,7 +60,8 @@ bool CollisionManager::Add(
 
 void CollisionManager::InitFrame()
 {
-  // TODO check for last contact: any pairs in m_collisionsLastFrame but NOT in m_collisionsThisFrame
+  // TODO check for last contact: any pairs in m_collisionsLastFrame but 
+  //  NOT in m_collisionsThisFrame
   //  have just left contact with each other, so we could call a handler for that.
 
   m_collisionsLastFrame = m_collisionsThisFrame;
