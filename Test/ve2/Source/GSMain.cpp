@@ -318,9 +318,7 @@ void GSMain::Update()
     GetVe1SceneGraph()->Update();
   }
 
-  // TODO SAP instead
-  TheCollisionManager::Instance()->InitFrame(); // TODO this should be in Game class
-  BruteForce(TheGame::Instance()->GetGameObjects());
+  TheCollisionManager::Instance()->Update(); // TODO this should be in Game class
 
   if (GetGameMode() == AMJU_MODE_MULTI)
   {
