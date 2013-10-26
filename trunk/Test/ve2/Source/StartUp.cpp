@@ -21,6 +21,7 @@
 #include "JoystickToCursor.h" 
 #include "ROConfig.h"
 #include "Version.h"
+#include "BruteForce.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -101,6 +102,11 @@ void StartUpAfterCreateWindow()
 
   // Create empty root node
   //ClearVe1SceneGraph();
+
+  // Set up collision system
+  // TODO SAP instead
+  CollisionDetector* bf = new BruteForce; 
+  TheCollisionManager::Instance()->SetCollisionDetector(bf);
 
   // Start with state that copies assets to Save Dir
   TheGame::Instance()->SetCurrentState(TheGSCopyAssets::Instance());
