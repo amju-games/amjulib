@@ -4,8 +4,8 @@
 PREFIX	:=	
 
 export AS		:=	$(PREFIX)as
-export CC		:=	$(PREFIX)gcc
-export CXX		:=	$(PREFIX)g++
+export CC		:=	$(PREFIX)clang
+export CXX		:=	$(PREFIX)clang++
 export AR		:=	$(PREFIX)ar
 export OBJCOPY	:=	$(PREFIX)objcopy
 
@@ -33,24 +33,6 @@ export OBJCOPY	:=	$(PREFIX)objcopy
 	@$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d $(OBJCFLAGS) -c $< -o $@ $(ERROR_FILTER)
 
 #---------------------------------------------------------------------------------
-%.o: %.s
-	@echo $(notdir $<)
-	@$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
-
-#---------------------------------------------------------------------------------
-%.o: %.S
-	@echo $(notdir $<)
-	@$(CC) -MMD -MP -MF $(DEPSDIR)/$*.d -x assembler-with-cpp $(ASFLAGS) -c $< -o $@ $(ERROR_FILTER)
-
-#---------------------------------------------------------------------------------
-# canned command sequence for binary data
-#---------------------------------------------------------------------------------
-define bin2o
-	bin2s -a 32 $< | $(AS) -o $(@)
-	echo "extern const u8" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"_end[];" > `(echo $(<F) | tr . _)`.h
-	echo "extern const u8" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"[];" >> `(echo $(<F) | tr . _)`.h
-	echo "extern const u32" `(echo $(<F) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`_size";" >> `(echo $(<F) | tr . _)`.h
-endef
 
 # j.c.
 BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
