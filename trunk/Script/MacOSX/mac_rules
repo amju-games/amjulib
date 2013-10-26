@@ -9,8 +9,3 @@
 include $(AMJULIB_MAC_SCRIPT_PATH)/base_rules
 
 
-# j.c.
-# Now in base_rules
-#BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
-#BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
-
