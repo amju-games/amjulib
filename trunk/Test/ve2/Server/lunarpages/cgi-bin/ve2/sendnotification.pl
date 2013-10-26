@@ -11,15 +11,15 @@ sub notifyProwl($$)
 {
   # TODO timeout 
 
-#  my ($subject, $message) = @_;
+  my ($subject, $message) = @_;
 
-#  $requestURL = sprintf("https://prowlapp.com/publicapi/add?apikey=%s&application=%s&event=%s&description=%s",
-#    $apikey,
-#    "My%20Game",
-#    $subject,
-#    $message );
+  $requestURL = sprintf("https://prowlapp.com/publicapi/add?apikey=%s&application=%s&event=%s&description=%s",
+    $apikey,
+    "My%20Game",
+    $subject,
+    $message );
 
-#  my $content = get($requestURL) or die "get failed :-(";
+  my $content = get($requestURL); # or die "get failed :-(";
 }
 
 1;
