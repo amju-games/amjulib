@@ -8,7 +8,7 @@ BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
 AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
-RUNDIR 		:=	../../Assets
+RUNDIR 		:=	$(BUILD)
 
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
@@ -20,7 +20,7 @@ LIBS	:= \
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
 run:
-	cp $(TARGET) $(RUNDIR); \
+	cp -R ../../Assets/*  $(RUNDIR); \
 	cd $(RUNDIR); \
 	./$(APP)
 
