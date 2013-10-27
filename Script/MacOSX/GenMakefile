@@ -89,7 +89,8 @@ CFLAGS	=  -Wall $(AMJU_MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
 CXXFLAGS	=	$(CFLAGS)
 OBJCFLAGS	=	$(CFLAGS)
 
-LDFLAGS	=	-g $(AMJU_MACHDEP) -Wl
+LDFLAGS	=	-g $(AMJU_MACHDEP) 
+# j.c. clang warning -Wl
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
