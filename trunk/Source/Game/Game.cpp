@@ -185,7 +185,7 @@ void Game::RunOneLoop()
 
 void Game::UpdateGameObjects()
 {
-  // TODO To be safe, we should copy the container of game objects, so
+  // To be safe, we should copy the container of game objects, so
   //  any updates which add or delete game objects do not invalidate the
   //  iterator. But if this is expensive, leave it to the game-specific code
   //  to sort out...
