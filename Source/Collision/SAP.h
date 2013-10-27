@@ -7,7 +7,6 @@
 
 #include <set>
 #include <GameObject.h>
-#include <Singleton.h>
 #include "CollisionManager.h"
 
 namespace Amju
@@ -17,11 +16,11 @@ class SweepAndPrune : public CollisionDetector
 public:
   SweepAndPrune();
 
-  void Update(const GameObjects& gos);
-  void Clear();
-  void SetCollideFunc(CollideFunc cf);
+  virtual void Update() override;
+  virtual void Clear() override;
 
-  // For dynamically adding/removing game objects
+  // For dynamically adding/removing game objects.
+  // TODO Do this automatically in Update
   int AddBox(GameObject* go); 
   // TODO
   //void RemoveBox(GameObject* go); 
@@ -48,7 +47,7 @@ private:
   int m_numBoxes; // current number of boxes (== Game Objects) we have
 
 private:
-  void Update();
+  void UpdateInternal();
 
   void ResolveEncounters(); 
 
@@ -56,8 +55,6 @@ private:
   void RemoveEncounter(GameObject* go1, GameObject* go2);
 
 }; // class SAP
-
-typedef Singleton<SweepAndPrune> TheSAP;
 
 } // namespace 
 
