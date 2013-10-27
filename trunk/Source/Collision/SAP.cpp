@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <Game.h>
 #include "SAP.h"
 #include "CollisionManager.h"
 #include <iostream>
@@ -14,7 +15,6 @@ namespace Amju
 
 SweepAndPrune::SweepAndPrune()
 {
-    m_collideFunc = 0;
     Clear();
 }
 
@@ -24,26 +24,28 @@ void SweepAndPrune::Clear()
     m_encounters.clear();
 }
 
-void SweepAndPrune::Update(const GameObjects& gos)
+void SweepAndPrune::Update()
 {
     if (m_numBoxes == 0)
     { 
+        const GameObjects& gos = *TheGame::Instance()->GetGameObjects();
         for (GameObjects::const_iterator it = gos.begin(); it != gos.end(); ++it)
         {
             GameObject* go = it->second;
             AddBox(go);
         }
-        // Initial sort
-        Update();
+        // Initial sort, then enounters are discarded
+        UpdateInternal();
+        m_encounters.clear(); // ? Is this correct ?
 std::cout << "******** SAP finished adding and sorting **********\n";
         return;
     }
 
-    Update();
+    UpdateInternal();
     ResolveEncounters();
 }
 
-void SweepAndPrune::Update()
+void SweepAndPrune::UpdateInternal()
 {
     // sort lists on each axis
     for (int axis = 0; axis < AMJU_SAP_AXES; axis++)
@@ -155,7 +157,7 @@ std::cout << "SAP: Handled collision between " << DESCRIBE(enc.first) << " and "
         }
         else
         {
-std::cout << "SAP: NO HANDLER for collision between " << DESCRIBE(enc.first) << " and " << DESCRIBE(enc.second) << "\n";
+std::cout << "SAP: collision between " << DESCRIBE(enc.first) << " and " << DESCRIBE(enc.second) << " not handled\n";
 
             RemoveEncounter(enc.first, enc.second); // may as well remove it
         }

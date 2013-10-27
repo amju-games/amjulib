@@ -10,14 +10,13 @@
 
 namespace Amju
 {
-// CollisionDetector:
-// Base class for types of collision detection algos, e.g. Sweep and Prune vs
-//  brute force. Create type you want and set in CollisionManager.
-
 // Type of function which returns true if the 2 game objects collided this frame.
 // Default for this function in CollisionDetector is static AABB intersection test.
 typedef bool (*CollideFunc)(GameObject*, GameObject*);
 
+// CollisionDetector:
+// Base class for types of collision detection algos, e.g. Sweep and Prune vs
+//  brute force. Create type you want (with new) and set in CollisionManager.
 class CollisionDetector : public RefCounted
 {
 public:
@@ -26,6 +25,7 @@ public:
   virtual void Clear() {} // call at end of level
   virtual void Update() = 0; // call each frame to check for collisions
 
+  // Call to set a different collision test, e.g. dynamic.
   void SetCollideFunc(CollideFunc cf);
 
 protected:
@@ -35,7 +35,7 @@ protected:
 // CollisionManager:
 // Tells the chosen collision detector to update.
 // Handles collisions between 2 objects, calling handler function if one
-//  has been registered. Double dispatch.
+//  has been registered. (Double dispatch.)
 // Currently only calls handler function on first collision, not every time
 //  -- this should be a flag so client code can choose.
 class CollisionManager : public NonCopyable
@@ -49,7 +49,7 @@ public:
   typedef void (*CollisionHandler)(GameObject*, GameObject*);
 
   // Register a collision handler function for 2 types of game object.
-  // All GameObjects have a string, which you get from GetTypeName()
+  // All GameObject types have a string ID, which you get from GetTypeName().
   // TODO Flag so we can handle collision only on first contact, 
   //  or every frame as appropriate.
   bool Add(const std::string& name1, const std::string& name2, CollisionHandler);
@@ -60,6 +60,7 @@ public:
   // Call every frame
   void Update();
 
+  // Set Collision Detection algo, e.g. Brute Force, Sweep and Prune
   void SetCollisionDetector(CollisionDetector* cd);
   CollisionDetector* GetCollisionDetector();
 
@@ -86,3 +87,4 @@ typedef Singleton<CollisionManager> TheCollisionManager;
 }
 
 #endif
+
