@@ -6597,7 +6597,8 @@ namespace Catch
 
 #ifdef __clang__
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++11-long-long"
+// j.c. next line gives warning on Mac 
+//#pragma clang diagnostic ignored "-Wc++11-long-long"
 #endif
 
 #ifdef CATCH_PLATFORM_WINDOWS
