@@ -44,7 +44,7 @@ LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 #---------------------------------------------------------------------------------
 AMJULIB = $(AMJULIB_WII_SCRIPT_PATH)/../../Build/WiiBuild/
 
-LIBS	:=	-lamju -lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
+LIBS	:=	-lamju -lmad -lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
 # j.c. extra for SoundGekko
 
 #---------------------------------------------------------------------------------
