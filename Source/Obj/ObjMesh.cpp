@@ -257,6 +257,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
   std::cout << "Supposedly " << numGroups << " groups...\n";
 #endif
+  if (numGroups > 1000)
+  {
+std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << numGroups << "...\n";
+    return false;
+  }
 
   for (int ig = 0; ig < numGroups; ig++)
   {
