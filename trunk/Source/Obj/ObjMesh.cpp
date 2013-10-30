@@ -147,6 +147,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
   std::cout << "File supposedly contains " << n << " points\n";
 #endif
+  if (n > 1000000)
+  {
+std::cout << "Suspiciously high number of points in obj mesh: " << n << "...\n";
+    return false;
+  }
 
   m_points.reserve(n);
   for (int i = 0; i < n; i++)
@@ -168,6 +173,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
   std::cout << "Contains " << n << " UVs\n";
 #endif
+  if (n > 1000000)
+  {
+std::cout << "Suspiciously high number of UVs in obj mesh: " << n << "...\n";
+    return false;
+  }
 
   m_uvs.reserve(n);
   for (int i = 0; i < n; i++)
@@ -186,6 +196,12 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
   std::cout << "Contains " << n << " normals\n";
 #endif
+  if (n > 1000000)
+  {
+std::cout << "Suspiciously high number of normals in obj mesh: " << n << "...\n";
+    return false;
+  }
+
   m_normals.reserve(n);
   for (int i = 0; i < n; i++)
   {
@@ -205,6 +221,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
 #ifdef OBJ_DEBUG
   std::cout << "Loading " << numMats << " materials..\n";
 #endif
+  if (numMats > 1000000)
+  {
+std::cout << "Suspiciously high number of materials in obj mesh: " << numMats << "...\n";
+    return false;
+  }
 
   for (int i = 0; i < numMats; i++)
   {
@@ -303,6 +324,11 @@ std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << nu
     // Load face info
     int numFaces = 0;
     f.GetInteger(&numFaces);
+    if (numFaces > 1000)
+    {
+std::cout << "Suspiciously high number of faces in obj mesh: " << numFaces << "...\n";
+      return false;
+    }
 
     m_facemap[g.m_name].reserve(numFaces);
     for (int i = 0; i < numFaces; i++)
