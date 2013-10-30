@@ -12,6 +12,14 @@
 
 using namespace Amju;
 
+namespace Amju
+{
+  void ReportError(const std::string& msg)
+  {
+    std::cout << msg << "\n";
+  }
+}
+
 int main(int argc, char** argv)
 {
   if (argc != 3)
