@@ -86,6 +86,10 @@ void key(char k, bool down)
   {
     ke->keyType = AMJU_KEY_ESC;
   }
+  else if (k == ' ')
+  {
+    ke->keyType = AMJU_KEY_SPACE;
+  }
   else
   {
 #ifdef KEY_CODE_DEBUG
