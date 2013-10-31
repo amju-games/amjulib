@@ -1,6 +1,6 @@
 //
 //  main.m
-//  Hungry People
+//  Amjulib
 //
 //  Created by Jason Colman on 29/07/2013.
 //  Copyright (c) 2013 Jason Colman. All rights reserved.
