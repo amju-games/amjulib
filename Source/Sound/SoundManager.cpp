@@ -23,7 +23,9 @@ void SoundManager::SetImpl(SoundPlayerImpl* pImpl)
 void SoundManager::SetGlueFile(GlueFile* glueFile)
 {
   if (!m_pImpl)
-  {
+  { 
+    // Trying to set glue file before setting impl won't work
+    Assert(0);
     return;
   }
 

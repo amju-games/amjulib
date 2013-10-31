@@ -158,6 +158,9 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
 
   if (GetGlueFile())
   {
+#ifdef _DEBUG
+std::cout << "BASS: using glue file.\n";
+#endif
     // Find the start of the song in the glue file; and find the length
     uint32 songPos = 0;
     if (!GetGlueFile()->GetSeekBase(songFile, &songPos))
