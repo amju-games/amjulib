@@ -1,7 +1,7 @@
 #ifndef TEAPOT_H
 #define TEAPOT_H
 
-#include <AmjuGL.h>
+#include <TriList.h>
 
 namespace Amju
 {
@@ -11,7 +11,7 @@ public:
   Teapot(float scale = 1.0f);
   void Draw();
 private:
-  AmjuGL::Tris m_tris;
+  RCPtr<TriListStatic> m_triList;
 };
 }
 
