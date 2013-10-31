@@ -1331,6 +1331,9 @@ Teapot::Teapot(float scale)
 {
     int i, numV=sizeof(strip_vertices)/sizeof(float); // numI=sizeof(strip_normals)/sizeof(float);
 
+    m_triList = (TriListStatic*)AmjuGL::Create(TriListStatic::DRAWABLE_TYPE_ID);
+    AmjuGL::Tris tris;
+
     AmjuGL::Tri t;
     int count = 0;
 
@@ -1359,14 +1362,14 @@ Teapot::Teapot(float scale)
 
           if (count > 1)
           {
-            m_tris.push_back(t);
+            tris.push_back(t);
             t.m_verts[0] = t.m_verts[1];
             t.m_verts[1] = t.m_verts[2];
             
             if ((count & 1))
             {
               // Flip winding of final triangle
-              AmjuGL::Tri& t = *(m_tris.rbegin());
+              AmjuGL::Tri& t = *(tris.rbegin());
               std::swap(t.m_verts[0], t.m_verts[1]);
             }
           }
@@ -1377,11 +1380,12 @@ Teapot::Teapot(float scale)
           count = 0;
         }
     }
+    m_triList->Set(tris);
 }
 
 void Teapot::Draw()
 {
-  AmjuGL::DrawTriList(m_tris);
+  AmjuGL::Draw(m_triList);
 }
 } // namespace
 
