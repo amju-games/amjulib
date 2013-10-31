@@ -301,7 +301,7 @@ void AmjuGLOpenGLES2::SetPerspectiveProjection(float fov, float aspectRatio, flo
   // Expect current matrix mode to be perspective
   s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX] = GLKMatrix4Multiply(
     s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX],
-    GLKMatrix4MakePerspective(fov, aspectRatio, nearDist, farDist));
+    GLKMatrix4MakePerspective(DegToRad(fov), aspectRatio, nearDist, farDist));
 }
 
 void AmjuGLOpenGLES2::SetOrthoProjection()
