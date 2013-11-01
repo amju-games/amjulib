@@ -66,6 +66,33 @@ bool RotationEvent::UpdateListener(EventListener* el)
   return el->OnRotationEvent(*this);
 }
 
+static float bb_zero_x = 0;
+static float bb_zero_y = 0;
+
+void BalanceBoardEvent::SetZeroCoords(float x, float y)
+{
+  bb_zero_x = x;
+  bb_zero_y = y;
+}
+
+BalanceBoardEvent::BalanceBoardEvent(float ux, float uy) // uncalibrated
+{
+  x = ux;
+  y = uy;
+}
+  
+// Get adjusted coord so if it's the same as the values set in SetZeroCoords,
+//  you get (0, 0).
+Vec2f BalanceBoardEvent::GetCalibratedCoord() const
+{
+  return Vec2f(x - bb_zero_x, y - bb_zero_y);
+}
+
+Vec2f BalanceBoardEvent::GetUncalibratedCoord() const
+{
+  return Vec2f(x, y);
+}
+
 bool BalanceBoardEvent::UpdateListener(EventListener* el)
 {
   return el->OnBalanceBoardEvent(*this);
