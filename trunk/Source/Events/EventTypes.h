@@ -2,6 +2,7 @@
 #define AMJU_EVENT_TYPES_H
 
 #include <string>
+#include <Vec2.h>
 
 /*
   Coords for cursor events etc use this coord system:
@@ -152,10 +153,23 @@ struct RotationEvent : public Event
 // TODO other members - needs calibration, mass ?
 struct BalanceBoardEvent : public Event
 {
+public:
+  BalanceBoardEvent(float x, float y);
+  virtual bool UpdateListener(EventListener*);
+
+  // Call to set the (x, y) values which should be treated as balanced,
+  //  i.e. calibrate balance board/tilt device.
+  static void SetZeroCoords(float x, float y);
+
+  // Get adjusted coord so if it's the same as the values set in SetZeroCoords,
+  //  you get (0, 0).
+  Vec2f GetCalibratedCoord() const;
+
+  Vec2f GetUncalibratedCoord() const;
+
+private:
   // Coords are -1..1 in x and y axes
   float x, y;
-
-  virtual bool UpdateListener(EventListener*);
 };
 
 enum TextEventType { AMJU_OOPS, AMJU_CUT, AMJU_COPY, AMJU_PASTE, AMJU_UNDO, AMJU_REDO };

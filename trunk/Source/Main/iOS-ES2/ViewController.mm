@@ -15,6 +15,11 @@
 #include <Game/Game.h>
 #include <StartUp.h>
 
+// Accelerom poll freq - j.c. - http://www.appcoda.com/ios-maze-game-tutorial-accelerometer/
+// If frequency is too high, frame rate seems to get choppy.
+// TODO Make this a setting.
+#define kUpdateInterval (1.0f / 10.0f)
+
 @interface ViewController () {
 }
 @property (strong, nonatomic) EAGLContext *context;
@@ -55,6 +60,19 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+  
+    // j.c. accelerometer - http://www.appcoda.com/ios-maze-game-tutorial-accelerometer/
+    self.motionManager = [[CMMotionManager alloc]  init];
+    self.queue         = [[NSOperationQueue alloc] init];
+  
+    self.motionManager.accelerometerUpdateInterval = kUpdateInterval;
+
+    [self.motionManager startAccelerometerUpdatesToQueue:self.queue withHandler:
+     ^(CMAccelerometerData *accelerometerData, NSError *error) {
+       [(id) self setAcceleration:accelerometerData.acceleration];
+       [self performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
+     }];
+ 
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,8 +117,37 @@
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
+void QueueEvent(Amju::Event* e)
+{
+  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
+}
+
 - (void)update
 {
+  // j.c. send accelerom events but TODO only if changed
+
+   const float kFilteringFactor = 0.1;
+   static float accel[3] = { 0, 0, 0 };
+   
+   accel[0] = self.acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
+   accel[1] = self.acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
+   accel[2] = self.acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
+   
+   // accel[0] corresponds to tilting forward/back, i.e. rotation about x-axis when in landscape mode
+   // accel[1] corresponds to z-rotation, like twisting a Wii remote
+   
+   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[1], accel[0]);
+   
+   // TODO This depends on iphone orientation
+//   be->x = accel[1];
+//   be->y = accel[0];
+   
+   #ifdef ACC_DEBUG
+   std::cout << "ACCEL: X: " << accel[0] << " Y: " << accel[1] << " Z: " << accel[2] << "\n";
+   #endif
+   
+   QueueEvent(be);
+   
   Amju::TheGame::Instance()->Update();
 }
 
@@ -115,11 +162,6 @@
   
   Amju::TheGame::Instance()->Draw();
   Amju::AmjuGL::Flip();
-}
-
-void QueueEvent(Amju::Event* e)
-{
-  Amju::TheEventPoller::Instance()->GetImpl()->QueueEvent(e);
 }
 
 void PopulateMBEvent(Amju::MouseButtonEvent* mbe, int x, int y)
@@ -200,32 +242,5 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
 {
   // TODO Don't know what to do here
 }
-
-// TODO This isn't called
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
-{
-	const float kFilteringFactor = 0.1;
-	static float accel[3] = { 0, 0, 0 };
-	
-	accel[0] = acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
-	accel[1] = acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
-	accel[2] = acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
-	
-	// accel[0] corresponds to tilting forward/back, i.e. rotation about x-axis when in landscape mode
-	// accel[1] corresponds to z-rotation, like twisting a Wii remote
-	
-	Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent;
-  
-  // TODO This depends on iphone orientation
-  be->x = accel[1];
-  be->y = accel[0];
-  
-#ifdef ACC_DEBUG
-	std::cout << "ACCEL: X: " << accel[0] << " Y: " << accel[1] << " Z: " << accel[2] << "\n";
-#endif
-  
-	QueueEvent(be);
-}
-
 
 @end
