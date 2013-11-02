@@ -12,9 +12,9 @@ static bool StaticAABBIntersectionTest(GameObject* go1, GameObject* go2)
 {
   Assert(go1);
   Assert(go2);
-  AABB* aabb1 = go1->GetAABB();
-  AABB* aabb2 = go2->GetAABB();
-  return (aabb1 && aabb2 && aabb1->Intersects(*aabb2));
+  const AABB& aabb1 = go1->GetAABB();
+  const AABB& aabb2 = go2->GetAABB();
+  return (aabb1.Intersects(aabb2));
 }
 
 CollisionDetector::CollisionDetector()

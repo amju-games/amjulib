@@ -57,12 +57,9 @@ void SweepAndPrune::UpdateInternal()
             GameObject* keyGO = m_endpoints[j][axis].m_go;
             Assert(keyGO);
 
-            const AABB* aabb = keyGO->GetAABB();
-            if (!aabb)
-            {
-                continue;
-            }
-            float keyVal = (keyType == Endpoint::AMJU_SAP_MIN) ? aabb->GetMin(axis) : aabb->GetMax(axis);
+            const AABB& aabb = keyGO->GetAABB();
+
+            float keyVal = (keyType == Endpoint::AMJU_SAP_MIN) ? aabb.GetMin(axis) : aabb.GetMax(axis);
 
             // Compare the keyval to the value one before it in the array (our comparison value) 
             //and swap places if need be. 
@@ -75,13 +72,9 @@ void SweepAndPrune::UpdateInternal()
                 GameObject* compGO = m_endpoints[i][axis].m_go;
                 Assert(compGO);
 
-                const AABB* aabb = compGO->GetAABB();
-                if (!aabb)
-                {
-                    i--; // ho ho
-                    continue;
-                }
-                float compVal = (compType == Endpoint::AMJU_SAP_MIN) ? aabb->GetMin(axis) : aabb->GetMax(axis);
+                const AABB& aabb = compGO->GetAABB();
+
+                float compVal = (compType == Endpoint::AMJU_SAP_MIN) ? aabb.GetMin(axis) : aabb.GetMax(axis);
 
                 if (compVal <= keyVal)
                 {
