@@ -34,14 +34,15 @@ public:
   const Vec3f& GetVel() const;
   const Vec3f& GetAcc() const;
 
-  // GameObjects may have a bounding box
-  virtual AABB* GetAABB() { return 0; } 
+  // GameObjects have a bounding box
+  const AABB& GetAABB() const { return m_aabb; } 
 
 protected:
   int m_id;
   Vec3f m_pos;
   Vec3f m_vel;
   Vec3f m_acc;
+  AABB m_aabb;
 };
 
 typedef RCPtr<GameObject> PGameObject;
