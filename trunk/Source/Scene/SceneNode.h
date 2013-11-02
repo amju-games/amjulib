@@ -76,7 +76,7 @@ public:
   void AddChild(PSceneNode node);
   void DelChild(PSceneNode node);
 
-  AABB* GetAABB();
+  const AABB* GetAABB() const;
   void SetAABB(const AABB&);
 
   void SetColour(const Colour& colour);

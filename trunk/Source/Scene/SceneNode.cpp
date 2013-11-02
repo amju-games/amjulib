@@ -57,7 +57,7 @@ void SceneNode::SetColour(const Colour& colour)
   m_colour = colour;
 }
 
-AABB* SceneNode::GetAABB()
+const AABB* SceneNode::GetAABB() const
 {
   return &m_aabb;
 }
@@ -83,7 +83,7 @@ void SceneNode::RecursivelyTransformAABB(const Matrix& m)
 std::cout << "Scene node transform AABB... ";
 #endif
 
-  GetAABB()->Transform(m);
+  m_aabb.Transform(m);
   unsigned int s = m_children.size();
 
 #ifdef AABB_TRANSFORM_DEBUG

@@ -43,12 +43,12 @@ SceneNode* TextMaker::MakeChar(char k, float* width)
     AABB aabb;
     cm.CalcAABB(&aabb);
     *width = aabb.GetXSize();
-    *(meshNode->GetAABB()) = aabb;
+    meshNode->SetAABB(aabb);
     wm[k] = aabb;
   }
   else
   {
-    *(meshNode->GetAABB()) = it->second;
+    meshNode->SetAABB(it->second);
     *width = it->second.GetXSize();
   }
 
@@ -77,7 +77,9 @@ SceneNode* TextMaker::MakeText(const std::string& text)
       Matrix m;
       m.Translate(Vec3f(x, 0, y));
       node->SetLocalTransform(m);
-      node->GetAABB()->Translate(Vec3f(x, 0, y));
+      AABB aabb = *node->GetAABB();
+      aabb.Translate(Vec3f(x, 0, y));
+      node->SetAABB(aabb);
 
       // Decorate node, e.g. colours, movement
       // (Decorator node must use bounding vol of node)
