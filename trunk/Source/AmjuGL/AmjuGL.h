@@ -136,7 +136,7 @@ public:
   // Set up perspective projection matrix, by specifying field-of-view 
   //  and aspect ratio, and distances to the near and far planes (> 0).
   static void SetPerspectiveProjection(
-    float fov, float aspectRatio, float near, float far);
+    float fovDegrees, float aspectRatio, float near, float far);
 
   // Set 'camera': give position of eye, target position and Up vector
   static void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ);
