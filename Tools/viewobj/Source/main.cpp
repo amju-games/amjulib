@@ -19,19 +19,30 @@
 
 #endif // WIN32
 
+#ifdef MACOSX
+#define AMJU_USE_GLUT
+#define AMJU_USE_OPENGL
+#endif
+
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
-#include "GSViewObj.h"
+#include <CursorManager.h>
+#include "GSViewObjGui.h"
 
 namespace Amju
 {
 // Create global variable window info 
 Amju::AmjuGLWindowInfo w(640, 480, false, "View OBJ");
 
-void StartUp()
+void StartUpBeforeCreateWindow()
 {
-  TheGame::Instance()->SetCurrentState(TheGSViewObj::Instance());
+}
+
+void StartUpAfterCreateWindow()
+{
+  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // hotspot position
+  TheGame::Instance()->SetCurrentState(TheGSViewObjGui::Instance());
 }
 }
 
