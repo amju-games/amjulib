@@ -37,9 +37,8 @@ gui-obj-view
 fd-obj-view
 0.8, -0.25
 0.7, 0.7
-///Users/jay/Lamp/lamp.obj
-//C:\Users\jason\Dropbox\Misc\obj_downloads\bridge\Bridge.obj
-/
+// obj file name
+$$$empty
 
 gui-button
 ok-button
