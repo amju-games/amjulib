@@ -165,6 +165,9 @@ bool GSViewObj::OnKeyEvent(const KeyEvent& ke)
     case AMJU_KEY_RIGHT:
       vel.x = -SPEED;
       break;
+
+    default:
+      break;
     } 
   }
   else
@@ -179,6 +182,9 @@ bool GSViewObj::OnKeyEvent(const KeyEvent& ke)
     case AMJU_KEY_LEFT:
     case AMJU_KEY_RIGHT:
       vel.x = 0;
+      break;
+
+    default:
       break;
     }
   }
