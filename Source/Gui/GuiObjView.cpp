@@ -30,6 +30,12 @@ bool GuiObjView::Load(File* f)
     return false;
   }
 
+  if (objFile.empty())
+  {
+    f->ReportError("Empty obj file name");
+    return true;
+  }
+  
   // Set root so we can load mtl file and textures in same dir as obj file
   std::string path = GetFilePath(objFile);
   std::string origRoot = File::GetRoot();
