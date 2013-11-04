@@ -51,8 +51,15 @@ CollisionDetector* CollisionManager::GetCollisionDetector()
 }
 
 bool CollisionManager::Add(
-  const std::string& name1, const std::string& name2, CollisionHandler ch)
+  const std::string& name1, const std::string& name2, CollisionHandler ch,bool handleFirstContactOnly)
 {
+  if (handleFirstContactOnly)
+  {
+    // Store both ways round
+    m_firstContactOnlyFlags.insert(TypeNamesPair(name1, name2));
+    m_firstContactOnlyFlags.insert(TypeNamesPair(name2, name1));
+  }
+
   TypeNamesPair tnp(name1, name2);
   m_map[tnp] = ch;
   return true;
@@ -70,24 +77,28 @@ void CollisionManager::InitFrame()
 
 bool CollisionManager::HandleCollision(GameObject* pGo1, GameObject* pGo2)
 {
-  IdPair idpair(pGo1->GetId(), pGo2->GetId());
   TypeNamesPair tnp(pGo1->GetTypeName(), pGo2->GetTypeName());
+  // Check for first contact if this has been set for this pair of types
+  if (m_firstContactOnlyFlags.count(tnp) > 0)
+  {
+    IdPair idpair(pGo1->GetId(), pGo2->GetId());
 
-  m_collisionsThisFrame.insert(idpair);
-  if (m_collisionsLastFrame.count(idpair))
-  {
+    m_collisionsThisFrame.insert(idpair);
+    if (m_collisionsLastFrame.count(idpair))
+    {
 #ifdef COLL_MGR_DEBUG_FIRST_CONTACT
-    std::cout << "COLL_MGR: Not handling collision between objs " << pGo1->GetId() << " and " << pGo2->GetId() << " as not first contact.\n";
+      std::cout << "COLL_MGR: Not handling collision between objs " << pGo1->GetId() << " and " << pGo2->GetId() << " as not first contact.\n";
 #endif
-    return false;  
-  }
-  std::swap(idpair.first, idpair.second);
-  if (m_collisionsLastFrame.count(idpair))
-  {
+      return false;  
+    }
+    std::swap(idpair.first, idpair.second);
+    if (m_collisionsLastFrame.count(idpair))
+    {
 #ifdef COLL_MGR_DEBUG_FIRST_CONTACT
-    std::cout << "COLL_MGR: Not handling collision between objs " << pGo1->GetId() << " and " << pGo2->GetId() << " as not first contact.\n";
+      std::cout << "COLL_MGR: Not handling collision between objs " << pGo1->GetId() << " and " << pGo2->GetId() << " as not first contact.\n";
 #endif
-    return false;  
+      return false;  
+    }
   }
 
   CollisionMap::iterator it = m_map.find(tnp);
