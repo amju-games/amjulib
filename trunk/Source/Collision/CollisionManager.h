@@ -36,8 +36,11 @@ protected:
 // Tells the chosen collision detector to update.
 // Handles collisions between 2 objects, calling handler function if one
 //  has been registered. (Double dispatch.)
-// Currently only calls handler function on first collision, not every time
-//  -- this should be a flag so client code can choose.
+// When you add a handler function, specify whether to only call handler function 
+//  on first collision, or every time
+static const bool AMJU_FIRST_CONTACT_ONLY = true;
+static const bool AMJU_EVERY_CONTACT = false;
+
 class CollisionManager : public NonCopyable
 {
 private:
@@ -50,9 +53,9 @@ public:
 
   // Register a collision handler function for 2 types of game object.
   // All GameObject types have a string ID, which you get from GetTypeName().
-  // TODO Flag so we can handle collision only on first contact, 
-  //  or every frame as appropriate.
-  bool Add(const std::string& name1, const std::string& name2, CollisionHandler);
+  // Flag so we can handle collision only on first contact, 
+  //  or every contacting frame as appropriate.
+  bool Add(const std::string& name1, const std::string& name2, CollisionHandler, bool handleFirstContactOnly);
 
   // Called from collision detector, so has to be public
   bool HandleCollision(GameObject*, GameObject*);
@@ -79,6 +82,10 @@ private:
   typedef std::set<IdPair> IdPairSet; 
   IdPairSet m_collisionsThisFrame;
   IdPairSet m_collisionsLastFrame;
+
+  // Flags for pairs of types which should only be notified on first contact
+  typedef std::set<TypeNamesPair> FirstContactOnlyFlags;
+  FirstContactOnlyFlags m_firstContactOnlyFlags;
 
   RCPtr<CollisionDetector> m_cd;
 };
