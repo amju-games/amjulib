@@ -18,6 +18,10 @@ public:
   const Vec3f& GetEyePos() const;
   const Vec3f& GetLookAtPos() const;
 
+  // Calc transformation matrix from view dir and up vector
+  // (like in gluLookAt)
+  Matrix GetMatrix() const;
+
 protected:
   Vec3f m_eye;
   Vec3f m_lookat;

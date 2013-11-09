@@ -43,4 +43,27 @@ void SceneNodeCamera::Draw()
     m_lookat.x, m_lookat.y, m_lookat.z,  // target
     m_up.x, m_up.y, m_up.z); // up
 }
+
+Matrix SceneNodeCamera::GetMatrix() const
+{
+  Vec3f forward = m_lookat - m_eye;
+  forward.Normalise();
+  Vec3f right = CrossProduct(forward, m_up);
+  right.Normalise();
+  Vec3f up = CrossProduct(right, forward);
+  Matrix m;
+  m.SetIdentity();
+  m[0] = right.x;
+  m[1] = right.y;
+  m[2] = right.z;
+  m[4] = up.x;
+  m[5] = up.y;
+  m[6] = up.z;
+  m[8] = forward.x;
+  m[9] = forward.y;
+  m[10] = forward.z;
+  return m;
 }
+
+}
+
