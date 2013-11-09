@@ -22,7 +22,6 @@ public:
 protected:
   float m_size; // side length of square billboard
   PTexture m_texture;
-//  AmjuGL::Tris m_tris;
   RCPtr<TriListDynamic> m_triList;
 };
 }
