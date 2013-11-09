@@ -85,7 +85,6 @@ void Billboard::Draw()
   AmjuGL::PushMatrix();
   AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
-//  AmjuGL::DrawTriList(m_tris);
   AmjuGL::Draw(m_triList);
 
   AmjuGL::PopMatrix();
