@@ -250,6 +250,46 @@ static const uint32 COLLIDABLE = 0x02;
 static const uint32 BLENDED    = 0x04;
 static const uint32 CAMERA     = 0x08;
 static const uint32 LIGHTING   = 0x10;
+static const uint32 Z_READ     = 0x20;
+static const uint32 Z_WRITE    = 0x40;
+
+bool SceneNode::IsZReadEnabled() const
+{
+  // Flag == 0 means enabled
+  return (m_flags & Z_READ) == 0;
+}
+
+bool SceneNode::IsZWriteEnabled() const
+{
+  // Flag == 0 means enabled
+  return (m_flags & Z_WRITE) == 0;
+}
+
+void SceneNode::SetIsZReadEnabled(bool b)
+{
+  // Flag == 0 means enabled
+  if (b)
+  {
+    m_flags &= ~Z_READ;
+  }
+  else
+  {
+    m_flags |= Z_READ;
+  }
+}
+
+void SceneNode::SetIsZWriteEnabled(bool b)
+{
+  // Flag == 0 means enabled
+  if (b)
+  {
+    m_flags &= ~Z_WRITE;
+  }
+  else
+  {
+    m_flags |= Z_WRITE;
+  }
+}
 
 bool SceneNode::IsLit() const
 {
