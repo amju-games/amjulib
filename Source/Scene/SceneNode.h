@@ -62,6 +62,8 @@ public:
   bool IsBlended() const; 
   bool IsCamera() const;
   bool IsLit() const;
+  bool IsZReadEnabled() const;
+  bool IsZWriteEnabled() const;
   bool ShowAABB() const;
 
   void SetVisible(bool);
@@ -69,6 +71,8 @@ public:
   void SetBlended(bool);
   void SetIsCamera(bool);
   void SetIsLit(bool);
+  void SetIsZReadEnabled(bool);
+  void SetIsZWriteEnabled(bool);
   void SetShowAABB(bool); // If called, overrides global setting
 
   static void SetGlobalShowAABB(bool);
