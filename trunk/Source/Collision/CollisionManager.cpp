@@ -3,7 +3,7 @@
 #include <iostream>
 #include <AmjuFinal.h>
 
-#define COLL_MGR_DEBUG
+//#define COLL_MGR_DEBUG
 //#define COLL_MGR_DEBUG_FIRST_CONTACT
 
 namespace Amju
