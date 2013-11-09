@@ -229,51 +229,6 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\
   return Amju::MakeTriList(tris);
 }
   
-void Font::Print(float x, float y, const char* text, float scaleX)
-{
-  Assert(0);
-
-  AMJU_CALL_STACK;
-
-  Assert(text);
-  if (*text == 0)
-  {
-    // Empty string
-    return;
-  }
-
-  float oldSizeX = m_textureSequence.GetSizeX();
-  float sizeY = m_textureSequence.GetSizeY();
-
-  m_textureSequence.SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
-
-  AmjuGL::PushMatrix();
-  AmjuGL::Translate(x, y, 0); 
-  // ..so top of character is at y-coord, not the bottom
-
-  m_textureSequence.Bind();
-
-  AmjuGL::Tris tris;
-
-  float xOff = 0;
-  float yOff = 0;
-  int i = 0;
-  while (unsigned char c = text[i++])
-  {
-    AmjuGL::Tri t[2];
-    m_textureSequence.MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
-    tris.push_back(t[0]);
-    tris.push_back(t[1]);
-    xOff += GetCharacterWidth(c) * scaleX;
-  }
-  
-  AmjuGL::DrawTriList(tris);
-
-  AmjuGL::PopMatrix();
-
-  m_textureSequence.SetSize(oldSizeX, sizeY);  
-}
-
 struct FontWidthFinder
 {
   FontWidthFinder(Font* pFont) : m_pFont(pFont) {}
