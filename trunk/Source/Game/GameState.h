@@ -1,9 +1,11 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "EventListener.h"
+
 namespace Amju
 {
-class GameState 
+class GameState : public EventListener
 {
 public:
   virtual ~GameState() {}
