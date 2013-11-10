@@ -2,6 +2,7 @@
 #include <iostream>
 #include <AmjuAssert.h>
 #include <Timer.h>
+#include <Game.h>
 #include "EventPoller.h"
 #include <AmjuFinal.h>
 
@@ -121,6 +122,17 @@ void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pList
   }
 
   int eaten = AMJU_MAX_PRIORITY + 1;
+
+  // Notify current state - which is not in the Listeners container, 
+  //  as it's a singleton
+  static Game* game = TheGame::Instance();
+  GameState* gs = game->GetState();
+  if (event->UpdateListener(gs))
+  {
+    // Eaten
+    return;
+  }
+  
   for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
   {
     if (it->first > eaten)
