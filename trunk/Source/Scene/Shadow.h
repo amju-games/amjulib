@@ -41,6 +41,9 @@ public:
   void EraseCollisionMesh(CollisionMesh*);
   void ClearCollisionMeshes();
 
+  // Recalculate the list of polys. 
+  void Recalc(); // iterates over all coll meshes
+
 protected:
   void MyDraw(
     const Vec3f& v,
@@ -50,9 +53,6 @@ protected:
   virtual void BindTexture();
 
   virtual void RecalculateVerts();
-
-  // Recalculate the list of polys. 
-  void Recalc(); // iterates over all coll meshes
 
   // Calls this, considers only one coll mesh
   virtual void RecalculateList(
