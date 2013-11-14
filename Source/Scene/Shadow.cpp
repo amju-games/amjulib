@@ -103,6 +103,7 @@ Shadow::Shadow()
   m_size = 0;
 
   SetBlended(true);
+  SetIsZWriteEnabled(false);
 }
 
 void Shadow::SetOffset(float offset)
