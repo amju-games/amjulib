@@ -17,5 +17,5 @@ void CollidePlayerFood(Player* player, Food* f)
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Player::TYPENAME, Food::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerFood);
+  Player::TYPENAME, Food::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerFood, AMJU_FIRST_CONTACT_ONLY);
 } 

@@ -20,5 +20,5 @@ void CollidePlayerBaddie(Player* player, Baddie* b)
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Player::TYPENAME, Baddie::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerBaddie);
+  Player::TYPENAME, Baddie::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerBaddie, AMJU_FIRST_CONTACT_ONLY);
 } 

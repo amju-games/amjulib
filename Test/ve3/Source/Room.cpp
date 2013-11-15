@@ -329,7 +329,7 @@ void Room::OnLocationEntry()
 
   // Big AABB so not culled
   m_aabb.Set(-10000, 10000, -1000, 1000, -10000, 10000);
-  *(rn->GetAABB()) = m_aabb;
+  rn->SetAABB(m_aabb);
 
   m_sceneNode = rn;
 

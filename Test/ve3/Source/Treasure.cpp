@@ -146,10 +146,10 @@ void Treasure::Update()
   
     if (m_sceneNode->GetAABB())
     {
-      m_sceneNode->GetAABB()->Set(
+      m_sceneNode->SetAABB(AABB(
         m_pos.x - XSIZE, m_pos.x + XSIZE,
         m_pos.y,         m_pos.y + YSIZE,
-        m_pos.z - XSIZE, m_pos.z + XSIZE);
+        m_pos.z - XSIZE, m_pos.z + XSIZE));
     }
 
     // Delete scene node if we have already been collected

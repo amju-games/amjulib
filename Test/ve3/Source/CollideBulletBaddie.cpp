@@ -21,5 +21,5 @@ void CollideBulletBaddie(Bullet* bullet, Baddie* baddie)
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Bullet::TYPENAME, Baddie::TYPENAME, (CollisionManager::CollisionHandler)CollideBulletBaddie);
+  Bullet::TYPENAME, Baddie::TYPENAME, (CollisionManager::CollisionHandler)CollideBulletBaddie, AMJU_FIRST_CONTACT_ONLY);
 } 

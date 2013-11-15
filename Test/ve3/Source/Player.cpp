@@ -580,7 +580,7 @@ void Player::Update()
   if (m_sceneNode)
   {
     // Set name tag AABB to same as Scene Node so we don't cull it by mistake
-    *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
+    m_nameTag->SetAABB(*(m_sceneNode->GetAABB()));
 
     // Set colour depending on health - only if logged in
     //if (IsLoggedIn())// ???
@@ -624,18 +624,11 @@ void Player::Update()
     GameObject* g = TheGame::Instance()->GetGameObject(m_ignorePortalId);
     if (g)
     {
-      AABB* aabb = g->GetAABB();
-      if (aabb)
+      const AABB& aabb = g->GetAABB();
+      if (!GetAABB()->Intersects(aabb))
       {
-        if (!GetAABB()->Intersects(*aabb))
-        {
-          // No longer intersecting portal
-          m_ignorePortalId = -1;
-        }
-      }
-      else
-      {
-        m_ignorePortalId = -1; // why ?
+        // No longer intersecting portal
+        m_ignorePortalId = -1;
       }
     }
     else

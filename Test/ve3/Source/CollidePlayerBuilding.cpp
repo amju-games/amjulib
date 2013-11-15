@@ -17,5 +17,5 @@ void CollidePlayerBuilding(Player* player, Building* b)
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Player::TYPENAME, Building::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerBuilding);
+  Player::TYPENAME, Building::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerBuilding, AMJU_FIRST_CONTACT_ONLY);
 } 
