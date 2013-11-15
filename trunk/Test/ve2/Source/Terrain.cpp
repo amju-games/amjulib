@@ -125,7 +125,7 @@ void Terrain::OnLocationEntry()
   tsn->UpdateBoundingVol(); // TODO just set a huge AABB
   tsn->CalcCollisionMesh();
   tsn->GetCollisionMesh()->CalcAABB(&m_aabb);
-  *(tsn->GetAABB()) = m_aabb;
+  tsn->SetAABB(m_aabb);
 
   // Add Terrain to Scene Graph
   SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);

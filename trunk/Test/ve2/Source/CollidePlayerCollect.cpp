@@ -17,5 +17,5 @@ void CollidePlayerCollect(Player* player, Collect* c)
 }
 
 static bool b1 = TheCollisionManager::Instance()->Add(
-  Player::TYPENAME, Collect::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerCollect);
+  Player::TYPENAME, Collect::TYPENAME, (CollisionManager::CollisionHandler)CollidePlayerCollect, AMJU_FIRST_CONTACT_ONLY);
 } 
