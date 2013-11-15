@@ -35,10 +35,6 @@ public:
       m_pos.z - BOXSIZE, m_pos.z + BOXSIZE
     );
   }
-  virtual AABB* GetAABB() override { return &m_aabb; }
-
-private:
-  AABB m_aabb;
 };
 const char* TestGO::TYPENAME = "testgo";
 
@@ -69,7 +65,7 @@ void CollTests()
   g_collisions = 0;
 
   // Boxes should not be intersecting
-  REQUIRE(!gos[0]->GetAABB()->Intersects(*(gos[1]->GetAABB())));
+  REQUIRE_FALSE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
 
   game->UpdateGameObjects();
   cm->Update();
@@ -79,7 +75,7 @@ void CollTests()
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 0, 0));
   game->UpdateGameObjects(); // Recalc bounding boxes
   // Now boxes intersect
-  REQUIRE(gos[0]->GetAABB()->Intersects(*(gos[1]->GetAABB())));
+  REQUIRE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
 
   // Updating collision manager should spot the collision
   cm->Update();
@@ -93,7 +89,7 @@ void CollTests()
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 0.5f * BOXSIZE, 0));
   game->UpdateGameObjects(); // Recalc bounding boxes
   // Now boxes intersect
-  REQUIRE(gos[0]->GetAABB()->Intersects(*(gos[1]->GetAABB())));
+  REQUIRE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
 
   // This collision should also be ignored
   cm->Update();
@@ -103,7 +99,7 @@ void CollTests()
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 4.0f * BOXSIZE, 0));
   game->UpdateGameObjects(); // Recalc bounding boxes
   // Now boxes do not intersect
-  REQUIRE(!gos[0]->GetAABB()->Intersects(*(gos[1]->GetAABB())));
+  REQUIRE_FALSE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
   // No collision
   cm->Update();
   REQUIRE(g_collisions == 1);
@@ -111,7 +107,7 @@ void CollTests()
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 0.5f * BOXSIZE, 0));
   game->UpdateGameObjects(); // Recalc bounding boxes
   // Now boxes intersect
-  REQUIRE(gos[0]->GetAABB()->Intersects(*(gos[1]->GetAABB())));
+  REQUIRE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
   // Now there is a new collision
   cm->Update();
   REQUIRE(g_collisions == 2);
