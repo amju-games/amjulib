@@ -1,0 +1,12 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+trail-making-comp
+// Num children
+0
+
+
+

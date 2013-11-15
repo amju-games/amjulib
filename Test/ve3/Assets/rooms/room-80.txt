@@ -1,0 +1,235 @@
+// ROOM 80
+// Version
+1
+
+// type
+room
+// Num textures
+15
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-10
+ground3.png
+ground3-1.png
+// 11-12
+rock3.png
+rock2.png
+// 13-14
+log1.png
+log2.png
+// 15
+ground4.png
+
+// (x, y) Size of grid
+7, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+5  1  1  1  1  1  6
+4  10 9  10 9  9  3
+4  10 9  9  9  9  3
+4  9  10 9  10 9  3
+7  2  2  2  2  2  8
+// Obstacles grid
+14 13 14 13 14 13 14 
+ 0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0
+14 13 11 12 14 12 13 
+
+// Destinations N, S, E>, W<
+0, 0, 90, 70
+
+// music
+sound/rainforest.it
+
+// TREASURE
+treasure
+// pos
+0, 0, 100
+// tex
+diamond4.png
+// cells
+4, 1
+// points
+1000
+
+// Spider on thread, comes down from top of screen
+baddie
+0, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+30, 30
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 50
+// Rect (xmin, xmax, ymin, ymax)
+-50, 50, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+0, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+1, 500
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 50
+// Rect (xmin, xmax, ymin, ymax)
+-50, 50, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Spider 2
+// Spider on thread, comes down from top of screen
+baddie
+-150, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+20, 20
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 70
+// Rect (xmin, xmax, ymin, ymax)
+-150, -150, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+-150, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+1, 500
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 70
+// Rect (xmin, xmax, ymin, ymax)
+-150, -150, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Spider 3 
+// Spider on thread, comes down from top of screen
+baddie
+150, 0, -50
+// Tex
+spider1.png
+// Num cells
+1,1
+// Size
+20, 20
+// Damage to player on collision
+2
+// Max health: -1 == indestructible
+3
+// Points
+10
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 90
+// Rect (xmin, xmax, ymin, ymax)
+150, 150, -300, 200
+// Reverse flag
+1
+// Sound
+$$$empty
+
+// Thread
+baddie
+150, 0, -300
+// Tex
+wh8.png
+// Num cells
+1,1
+// Size
+1, 500
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 90
+// Rect (xmin, xmax, ymin, ymax)
+150, 150, -550, -50
+// Reverse flag
+1
+// Sound
+$$$empty
+
+
+

@@ -1,0 +1,95 @@
+// TEST Leafcutter ant
+baddie
+0, 0, 0
+// Tex
+ant4.png
+// Num cells
+2,1
+// Size
+15, 15
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+2
+// Points
+5
+// Behaviour
+patrol
+// Dir
+50, 0
+// Rect (xmin, xmax, ymin, ymax)
+0, 200, -50, 50
+// Reverse flag
+0
+
+baddie
+3, 0, -15
+// Tex
+ant-leaf2.png
+// Num cells
+1,1
+// Size
+15, 15
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+1
+// Points
+0
+// Behaviour
+patrol
+// Dir
+50, 0
+// Rect (xmin, xmax, ymin, ymax)
+0, 200, -50, 50
+// Reverse flag
+0
+
+
+
+// TEST Leafcutter ant
+baddie
+30, 0, 30
+// Tex
+ant4.png
+// Num cells
+2,1
+// Size
+15, 15
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+2
+// Points
+5
+// Behaviour
+patrol
+// Dir
+60, 0
+// Rect (xmin, xmax, ymin, ymax)
+0, 200, -50, 50
+// Reverse flag
+0
+
+baddie
+33, 0, 15
+// Tex
+ant-leaf3.png
+// Num cells
+1,1
+// Size
+15, 15
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+1
+// Points
+0
+// Behaviour
+patrol
+// Dir
+60, 0
+// Rect (xmin, xmax, ymin, ymax)
+0, 200, -50, 50
+// Reverse flag
+0

@@ -1,0 +1,66 @@
+// ROOM 3
+// Version
+1
+
+// type
+room
+// Num textures
+12
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-11
+ground3.png
+rock3.png
+rock2.png
+cliff1.png
+
+// (x, y) Size of grid
+7, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+5  1  1  1  1  1  6
+4  9  9  9  9  9  3
+4  9  9  9  9  9  3
+4  9  9  9  9  9  3
+7  2  2  2  2  2  8
+// Obstacles grid
+10 11 10 11 10 11 10
+11  0  0  0  0  0 11
+10  0  0  0  0  0 10
+11  0  0  0  0  0 11
+10 11  0  0  0 11 10
+
+// Destinations N, S, E, W
+0, 1, 0, 0
+
+// music
+sound/rainforest.it
+
+
+harmless
+sign-south.png
+// Pos
+0, 0, 100
+// Cells
+1, 1
+// Size
+75, 75
+
+harmless
+sign-south.png
+// Pos
+0, 0, -100
+// Cells
+1, 1
+// Size
+75, 75
+
+

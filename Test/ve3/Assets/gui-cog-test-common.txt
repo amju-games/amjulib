@@ -1,0 +1,88 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+cog-test-common-comp
+// Num children
+6
+
+
+// Element type
+gui-text
+// Element name
+timer
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1 
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+// Element type
+gui-text
+// Element name
+correct-incorrect-text
+// pos (coords are -1..1)
+-1.0, 0.9
+// size
+2.0, 0.1 
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+done-button
+// pos (coords are -1..1)
+-0.9, 0.95
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+pause
+// Font name, size
+arial, 1.0 
+
+
+// Looks crappy
+//gui-image
+//coin-img
+//0.8, 1.0
+//0.17, 0.2
+//coin3.png
+
+
+gui-text
+score-num
+0.5, 1.0
+0.3, 0.2
+// Text
+SCORE
+arial, 1.5, fgcol=000000, sx=0.7
+
+
+gui-button
+stop-prac-button
+// pos (coords are -1..1)
+-0.4, -0.8
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+stop practice
+// Font name, size
+arial, 1.4
+
+
+// Arrow for practice mode
+gui-image
+prac-arrow
+0, 0
+0.25, 0.3
+prac-arrow1.png

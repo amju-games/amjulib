@@ -1,0 +1,40 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+choose-obj-comp
+// Num children
+3
+
+gui-file-dialog
+my-file-dialog
+// Template
+gui-file-dialog.txt
+
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1
+// Text
+Please select scene .obj
+// Font name, size
+arial, 1.0, multi, centre, fgcol=ffffff
+
+
+gui-text
+error
+// pos (coords are -1..1)
+-1.0, -0.3
+// size
+2.0, 0.1
+// Text
+(error text here)
+// Font name, size
+arial, 1.0, centre, fgcol=ffffff
+
+

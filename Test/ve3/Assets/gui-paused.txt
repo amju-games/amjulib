@@ -1,0 +1,90 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+paused-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1
+// Text
+Paused
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+
+
+// HIDDEN FOR NOW
+// element type
+gui-button
+// Element name
+options-button
+// pos (coords are -1..1)
+-0.4, 2.1
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+options
+// Font name, size
+arial, 1.6
+
+
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit game
+// Font name, size
+arial, 1.6
+
+// element type
+gui-button
+// Element name
+resume-button
+// pos (coords are -1..1)
+-0.4, 0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+continue
+// Font name, size
+arial, 1.6
+
+// element type
+gui-button
+// Element name
+avatar-button
+// pos (coords are -1..1)
+-0.4, 0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+change look
+// Font name, size
+arial, 1.6
+
+
