@@ -111,7 +111,7 @@ void Portal::Update()
 
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
-    *(m_sceneNode->GetAABB()) = m_aabb;
+    m_sceneNode->SetAABB(m_aabb);
   }
 }
 
@@ -131,7 +131,7 @@ void Portal::OnLocationEntry()
     SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
     Assert(root);
     root->AddChild(m_sceneNode);
-    *(m_sceneNode->GetAABB()) = m_aabb;
+    m_sceneNode->SetAABB(m_aabb);
   }
 }
 

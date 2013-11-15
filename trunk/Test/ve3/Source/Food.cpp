@@ -158,7 +158,7 @@ void FoodManager::Update()
 
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
-    *(m_sceneNode->GetAABB()) = m_aabb;
+    m_sceneNode->SetAABB(m_aabb);
   }
 }
 
@@ -191,7 +191,7 @@ Food::Food()
 
 bool Food::Load(File*)
 {
-  Vec3f p = GetPos();
+  //Vec3f p = GetPos();
 
   static const float XSIZE = ROConfig()->GetFloat("food-aabb-x", 40.0f);
   static const float YSIZE = ROConfig()->GetFloat("food-aabb-y", 10.0f);

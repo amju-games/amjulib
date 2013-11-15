@@ -76,10 +76,10 @@ void Harmless::Update()
     if (m_sceneNode->GetAABB())
     {
       static const float YSIZE = 10.0f; // doesn't really matter!
-      m_sceneNode->GetAABB()->Set(
+      m_sceneNode->SetAABB(AABB(
         m_pos.x - m_size.x, m_pos.x + m_size.x, // why not / 2 ??
         m_pos.y,            m_pos.y + YSIZE,
-        m_pos.z - m_size.y, m_pos.z + m_size.y);
+        m_pos.z - m_size.y, m_pos.z + m_size.y));
     }
   }
 }

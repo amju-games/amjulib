@@ -12,10 +12,10 @@ void UnCollide(GameObject* go, const Vec3f& oldPos, const AABB& aabb)
   */
 
   // Intersecton region
-  AABB ir = aabb.Intersection(*(go->GetAABB()));
+  AABB ir = aabb.Intersection(go->GetAABB());
   Vec3f goPos = go->GetPos();
 
-  AABB oldBox = *(go->GetAABB());
+  AABB oldBox = go->GetAABB();
   Vec3f move = oldPos - goPos;
   oldBox.Translate(move);
   // Oldbox should NOT be intersecting in one or more axes
