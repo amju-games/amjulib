@@ -1,0 +1,61 @@
+// ROOM 2
+// Version
+1
+
+// type
+room
+// Num textures
+4
+ground6.png
+// TODO
+rock3.png
+rock4.png
+steps-ew.png
+
+// (x, y) Size of grid
+5, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Background grid
+1  1  1  1  1 
+4  1  1  1  1 
+4  1  1  1  1 
+4  1  1  1  1 
+1  1  1  1  1 
+// Obstacles grid
+2  3  2  3  2 
+0  0  0  0  0 
+0  0  0  0  0 
+0  0  0  0  0 
+3  2  3  2  3 
+
+// Destinations N, S, E, W
+0, 0, 0, 2
+
+// music
+sound/rainforest.it
+
+
+
+// Lava pool
+baddie
+// Pos -- behind so always under player
+50, -1, 100
+// Tex
+lava1.png
+// Num cells
+2,1
+// Size
+150, 150
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attck str
+touched molten lava!
+// Behaviour
+none
+
+
+

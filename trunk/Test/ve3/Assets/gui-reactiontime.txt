@@ -1,0 +1,37 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+reaction-time-comp
+// Num children
+2
+
+// Element type
+gui-text
+// Element name
+word
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.2
+// Text
+ready...
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+// Element name
+button
+// pos (coords are -1..1)
+-0.4, 0.4
+// size
+0.8, 0.8
+// Image
+red_button.png
+// Text
+GO!
+// Font name, size
+arial, 1.5 
+

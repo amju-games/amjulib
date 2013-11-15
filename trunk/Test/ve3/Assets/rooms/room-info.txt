@@ -1,0 +1,12 @@
+Room info
+=========
+
+
+Each tile is size 100 * 100
+
+Rooms are centred on (0, 0)
+
+So a 1 * 1 room goes from -50..50 in x and z
+
+Z axis: Negative is North
+

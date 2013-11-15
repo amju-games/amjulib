@@ -1,0 +1,93 @@
+// ROOM 92
+// Version
+1
+
+// type
+room
+// Num textures
+6
+// 1 - 6
+ground4.png
+rock3.png
+rock2.png
+log1.png
+log2.png
+steps-ns.png
+
+// (x, y) Size of grid
+5, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+1  1  6  1  1 
+1  1  1  1  1 
+1  1  1  1  1 
+1  1  1  1  1 
+1  1  6  1  1 
+// Obstacles grid
+4  5  0  5  4
+5  0  0  0  5 
+4  0  0  0  4
+5  0  0  0  5 
+4  5  4  5  4
+
+// Destinations N, S, E>, W<
+91, 0, 0, 0
+
+// music
+sound/rainforest.it
+
+
+// TREASURE
+treasure
+// pos
+0, 0, 100
+// tex
+diamond4.png
+// cells
+4, 1
+// points
+2000
+
+
+baddie
+-300, 0, 300 
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+50, 50
+// Damage to player on collision
+4
+// Max health: -1 == indestructible
+5
+// Points
+20
+// Attack str
+was attacked by a tarantula!
+// Behaviour
+chase
+// speed
+16
+
+baddie
+300, 0, 300 
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+50, 50
+// Damage to player on collision
+4
+// Max health: -1 == indestructible
+5
+// Points
+20
+// Attack str
+was attacked by a tarantula!
+// Behaviour
+chase
+// speed
+20
+

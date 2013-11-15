@@ -1,0 +1,120 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+proxy-comp
+// Num children
+11
+
+
+gui-button
+use-proxy-button
+-0.5, 1.6 
+0.4, 0.1
+gui-button-4.png
+use proxy
+arial, 1.0, sx=0.8 
+
+
+gui-text
+label1
+-0.95, 0.3
+0.4, 0.1
+Proxy 
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
+
+gui-text-edit
+proxy-hostname-text
+// pos (coords are -1..1)
+-0.5, 0.3
+// size
+1.0, 0.1
+// Text
+proxy@example.com:1234
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+// Colon to show port is required 
+gui-text
+label2
+-0.95, 0.1
+0.4, 0.1
+Port
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
+
+gui-text-edit
+proxy-port-text
+// pos (coords are -1..1)
+-0.5, 0.1
+// size
+0.3, 0.1
+// Text
+12345
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text
+label3
+-0.95, -0.1
+0.45, 0.1
+User name
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
+
+gui-text-edit
+proxy-username-text
+// pos (coords are -1..1)
+-0.5, -0.1
+// size
+1.0, 0.1
+// Text
+username
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-text
+label1
+-0.95, -0.3
+0.4, 0.1
+Password
+arial, 0.8, fgcol=ffffff, bgcol=000000, left
+
+gui-text-edit
+proxy-pw-text
+// pos (coords are -1..1)
+-0.5, -0.3 
+// size
+1.0, 0.1
+// Text
+password
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=0000ff
+
+gui-button
+proxy-ok-button
+// pos (coords are -1..1)
+0.1, -0.6
+// size
+0.6, 0.15
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 1.5 
+
+gui-button
+proxy-cancel-button
+// pos (coords are -1..1)
+-0.7, -0.6
+// size
+0.6, 0.15
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 1.5 
+
+

@@ -1,0 +1,84 @@
+// ROOM 20
+// Version
+1
+
+// type
+room
+// Num textures
+15
+// 1 - 4
+ground4-n.png
+ground4-s.png
+ground4-e.png
+ground4-w.png
+// 5 - 8
+ground4-nw.png
+ground4-ne.png
+ground4-sw.png
+ground4-se.png
+// 9-10
+ground3.png
+ground3-1.png
+// 11-12
+rock3.png
+rock2.png
+// 13-14
+log1.png
+log2.png
+// 15
+ground4.png
+
+// (x, y) Size of grid
+7, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+15 15 15 15 15 15 15
+15 5  1  1  1  6  15
+15 4  9  9  9  3  15
+15 7  2  2  2  8  15
+15 15 15 15 15 15 15
+// Obstacles grid
+13 12 11 12 13 14 11
+ 0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0
+ 0  0  0  0  0  0  0
+14 13 11 12 14 12 13 
+
+// Destinations N, S, E>, W<
+0, 0, 30, 10
+
+// music
+sound/rainforest.it
+
+
+treasure
+// pos
+250, 0, 0
+// tex
+diamond3.png
+// cells
+4, 1
+// points
+1000
+
+
+// WATER
+baddie
+// Pos -- behind so always under player
+0, -1, 0
+// Tex
+water1.png
+// Num cells
+2,1
+// Size
+150, 150
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Attack string
+just took a dip.
+// Behaviour
+none

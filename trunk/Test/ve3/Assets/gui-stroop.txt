@@ -1,0 +1,81 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+stroop-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+word
+// pos (coords are -1..1)
+-1.0, 0.4
+// size
+2.0, 0.4
+// Text
+word
+// Font name, size
+arial, 3.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+// Element name
+button1
+// pos (coords are -1..1)
+-0.9, -0.3
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+choice 1
+// Font name, size
+arial, 1.0
+
+gui-button
+// Element name
+button2
+// pos (coords are -1..1)
+-0.45, -0.3
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+choice 2
+// Font name, size
+arial, 1.0
+
+gui-button
+// Element name
+button3
+// pos (coords are -1..1)
+0.05, -0.3
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+choice 3
+// Font name, size
+arial, 1.0 
+
+gui-button
+// Element name
+button4
+// pos (coords are -1..1)
+0.50, -0.3
+// size
+0.4, 0.2
+// Image
+gui-button-2.png
+// Text
+choice 4
+// Font name, size
+arial, 1.0 
+
+

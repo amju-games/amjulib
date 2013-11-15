@@ -1,0 +1,105 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+pause-cogtest-comp
+// Num children
+6
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1
+// Text
+Paused test!
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+
+// HIDDEN FOR NOW - tests restart, they don't resume
+// element type
+gui-button
+// Element name
+resume-button
+// pos (coords are -1..1)
+-0.4, 2.0
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+resume test
+// Font name, size
+arial, 1.4
+
+// HIDDEN FOR NOW -- requires work 
+// element type
+gui-button
+// Element name
+help-button
+// pos (coords are -1..1)
+-0.4, 2.0
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+help
+// Font name, size
+arial, 1.4
+
+
+// element type
+gui-button
+// Element name
+restart-button
+// pos (coords are -1..1)
+-0.4, 0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+restart test
+// Font name, size
+arial, 1.4
+
+
+// element type
+gui-button
+// Element name
+skip-button
+// pos (coords are -1..1)
+-0.4, 0.1
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+skip test
+// Font name, size
+arial, 1.4
+
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+-0.4, -0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit tests
+// Font name, size
+arial, 1.4
+

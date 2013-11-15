@@ -1,0 +1,15 @@
+// version
+1
+
+// "show" button for KB
+// NB type is fixed as a button
+// Name
+show-button
+// Pos
+-1.0, -0.7
+0.3, 0.2
+key3.png
+Show
+arial, 1.6, sx=0.5
+
+
