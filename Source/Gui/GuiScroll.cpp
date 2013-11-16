@@ -159,8 +159,10 @@ void GuiScroll::OnScrollVelEvent(const Vec2f& scrollVel)
   m_scrollVel.x = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.x));
   m_scrollVel.y = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.y));
 
+#ifdef SCROLL_DEBUG
 std::cout << "Scroll vel for " << GetName() << ": x:" << m_scrollVel.x 
   << " y: " << m_scrollVel.y << "\n"; 
+#endif
 }
 
 bool GuiScroll::Load(File* f)
