@@ -126,7 +126,9 @@ void GuiFileListBox::Refresh()
   DirEnts des;
   Dir(m_dir, &des, false);
 
+#ifdef GFLB_DEBUG
 std::cout << "GuiFileListBox: populating list, dir: " << m_dir << "\n";
+#endif
 
   for (unsigned int i = 0; i < des.size(); i++)
   {

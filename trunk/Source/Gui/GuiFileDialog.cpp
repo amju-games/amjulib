@@ -42,7 +42,9 @@ void GuiFileDialog::OnListboxClick(const std::string& fullPathAndFilename)
 
   ShowPreview();
 
+#ifdef GFD_DEBUG
 std::cout << "Listbox click: lastPath is now \"" << lastPath << "\"\n";
+#endif
 }
 
 void GuiFileDialog::OnPathChange()
@@ -57,7 +59,9 @@ void GuiFileDialog::OnPathChange()
 
   ShowPreview();
 
+#ifdef GFD_DEBUG
 std::cout << "Path change: lastPath is now \"" << lastPath << "\"\n";
+#endif
 }
 
 void GuiFileDialog::ShowPreview()

@@ -140,7 +140,7 @@ void GuiList::SetSelected(int child, bool selected)
 {
   Assert(child < GetNumChildren());
 
-#ifdef _DEBUG
+#ifdef LB_DEBUG
   GuiText* text = dynamic_cast<GuiText*>(GetChild(child));
   if (text)
   {
