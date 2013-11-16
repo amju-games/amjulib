@@ -55,7 +55,7 @@ public:
   // All GameObject types have a string ID, which you get from GetTypeName().
   // Flag so we can handle collision only on first contact, 
   //  or every contacting frame as appropriate.
-  bool Add(const std::string& name1, const std::string& name2, CollisionHandler, bool handleFirstContactOnly);
+  bool Add(const std::string& name1, const std::string& name2, CollisionHandler, bool handleFirstContactOnly = AMJU_FIRST_CONTACT_ONLY);
 
   // Called from collision detector, so has to be public
   bool HandleCollision(GameObject*, GameObject*);
