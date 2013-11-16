@@ -38,10 +38,6 @@ void GSShaderWave::Draw()
 
 void GSShaderWave::Draw2d()
 {
-  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  Assert(font);
-  AmjuGL::SetColour(0, 0, 0, 1);
-  font->Print(-1, -0.8f, "Wavedemo shader");
 }
 
 void GSShaderWave::OnActive()

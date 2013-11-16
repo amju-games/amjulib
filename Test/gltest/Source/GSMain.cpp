@@ -130,17 +130,6 @@ void GSMain::Draw()
 
 void GSMain::Draw2d()
 {
-//  AmjuGL::Viewport(0, 0, Screen::X(), Screen::Y());
-//  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-//  AmjuGL::SetIdentity();
-//  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-//  AmjuGL::SetIdentity();
-
-  static Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  Assert(font);
-  font->Print(-1, -0.8f, "Hello?");
-//  return;
-  
   PGuiElement gui = LoadGui("finish-gui.txt");
   Assert(gui);
   gui->Draw();
