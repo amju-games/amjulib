@@ -111,7 +111,7 @@ void GuiList::Draw()
     return;
   }
 
-/*
+
   // This rectangle bounds the height of the list and the widest item.
   // This is not necessarily the size of the list box, which may be bigger or smaller!
 
@@ -120,23 +120,20 @@ void GuiList::Draw()
   // Draw bg - TODO just the parts not covered by child items
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
-  AmjuGL::SetColour(0, 0, 1, 1);
+  AmjuGL::SetColour(1, 1, 1, 1);
   DrawSolidRect(r);
   PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-*/
 
   GuiComposite::Draw();
 
-/*
   // Border
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
-  AmjuGL::SetColour(1, 1, 1, 1);
+  AmjuGL::SetColour(0, 0, 0, 1);
   DrawRect(r);
   PopColour();
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-*/
 }
 
 void GuiList::SetSelected(int child, bool selected)
