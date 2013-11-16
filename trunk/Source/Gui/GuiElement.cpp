@@ -138,7 +138,7 @@ GuiElement::GuiElement()
   m_onFocusFunc = 0;
 }
 
-PGuiElement LoadGui(const std::string& filename)
+PGuiElement LoadGui(const std::string& filename, bool addAsListener)
 {
   File f;
   if (!f.OpenRead(filename))
@@ -162,7 +162,12 @@ PGuiElement LoadGui(const std::string& filename)
     f.ReportError("Failed to load gui element; type: " + s);
     return 0;
   }
-  TheEventPoller::Instance()->AddListener(gui);
+   
+  if (addAsListener)
+  {
+    TheEventPoller::Instance()->AddListener(gui);
+  }
+
   return gui;
 }
 

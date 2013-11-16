@@ -59,7 +59,7 @@ void GuiDialog::Draw()
   Rect r = GetRect(this);
   AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::SetColour(Colour(1, 0, 0, 1));
+  AmjuGL::SetColour(Colour(0.5f, 0.5f, 0.5f, 1));
   DrawSolidRect(r);
   AmjuGL::PopAttrib(); 
   

@@ -99,7 +99,7 @@ protected:
 typedef RCPtr<GuiElement> PGuiElement;
 typedef std::vector<PGuiElement> GuiElements;
 
-PGuiElement LoadGui(const std::string& filename);
+PGuiElement LoadGui(const std::string& filename, bool addAsListener = true);
 
 // Convenience function - get rectangle from pos and size of element
 Rect GetRect(GuiElement*);
