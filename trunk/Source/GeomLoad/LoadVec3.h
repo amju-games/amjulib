@@ -7,6 +7,7 @@ namespace Amju
 {
   class File;
   bool LoadVec3(File* f, Vec3f* v);
+  bool SaveVec3(File* f, const Vec3f& v);
 }
 
 #endif

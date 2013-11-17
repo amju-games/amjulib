@@ -7,6 +7,7 @@ class File;
 class AABB;
 
 bool LoadAABB(File*, AABB*);
+bool SaveAABB(File*, const AABB&);
 }
 
 #endif
