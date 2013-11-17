@@ -175,7 +175,15 @@ std::string CleanPath(const std::string& path)
     }
   }
 
+  if (s.empty())
+  {
+    s = "/";
+  }
+
+#ifdef CLEAN_PATH_DEBUG
 std::cout << "CleanPath: \"" << path << "\" => \"" << s << "\"\n";
+#endif
+
   return s;
 }
 
