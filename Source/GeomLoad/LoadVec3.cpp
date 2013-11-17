@@ -6,8 +6,26 @@
 
 namespace Amju
 {
+bool SaveVec3(File* f, const Vec3f& v)
+{
+  if (f->IsBinary())
+  {
+    return f->WriteFloat(v.x) && f->WriteFloat(v.y) && f->WriteFloat(v.z);
+  }
+  else
+  {
+    std::string str = ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z);
+    return (f->Write(str));
+  }
+}
+
 bool LoadVec3(File* f, Vec3f* v)
 {
+  if (f->IsBinary())
+  {
+    return f->GetFloat(&(v->x)) && f->GetFloat(&(v->y)) && f->GetFloat(&(v->z));
+  }
+
   std::string s;
   if (!f->GetDataLine(&s))
   {
