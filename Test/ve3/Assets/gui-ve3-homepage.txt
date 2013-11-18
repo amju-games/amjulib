@@ -1,0 +1,89 @@
+// Home page
+// version
+1
+
+// Element type
+gui-comp
+// Name
+home-page-comp
+// Num children
+5
+
+
+// Element type
+gui-text
+// Element name
+playername-text
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+Name
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+
+// element type
+gui-button
+// Element name
+change-name-button
+// pos (coords are -1..1)
+0.58, 0.95
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Change name
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+change-look-button
+// pos (coords are -1..1)
+-0.8, -0.2
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Change look
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+explore-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Explore island
+// Font name, size
+arial, 1.5, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+other-players-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Other players...
+// Font name, size
+arial, 1.5, sx=0.7
+

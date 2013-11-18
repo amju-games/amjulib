@@ -3,6 +3,7 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
+#include "Ve1SpriteNode.h"
 
 namespace Amju 
 {
@@ -17,6 +18,8 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+protected:
+  Ve1SpriteNode m_spriteNode;
 };
 typedef Singleton<GSVe3HomePage> TheGSVe3HomePage;
 } // namespace
