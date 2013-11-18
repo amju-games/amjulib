@@ -7,7 +7,7 @@ gui-comp
 // Name
 view-other-players-comp
 // Num children
-3
+5
 
 // Element type
 gui-text
@@ -53,3 +53,34 @@ Back
 arial, 2.0, sx=0.7
 
 
+
+// element type
+gui-button
+// Element name
+prev-player-button
+// pos (coords are -1..1)
+-1, -0.75
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+< More
+// Font name, size
+arial, 1.0, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+next-player-button
+// pos (coords are -1..1)
+0.6, -0.75
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+More >
+// Font name, size
+arial, 1.0, sx=0.7
