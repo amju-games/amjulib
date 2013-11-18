@@ -159,8 +159,14 @@ bool GuiButton::Load(File* f)
   m_guiText.SetName("text for button " + m_name + ": \"" + m_guiText.GetText() + "\"");
 #endif
 
-  m_guiText.SetLocalPos(GetLocalPos());
-  m_guiText.SetSize(GetSize());
+  // Button text tends to get truncated, so extend the size of the text
+  //  (TODO This might be a bug in RecalcFirstLast when font size != 1)
+  Vec2f pos = GetLocalPos();
+  Vec2f size = GetSize();
+  pos.x -= size.x * 0.25f;
+  m_guiText.SetLocalPos(pos);
+  size.x *= 1.5f; 
+  m_guiText.SetSize(size);
   m_guiText.RecalcFirstLast();
  
   m_guiText.SetParent(GetParent());
@@ -250,7 +256,7 @@ void GuiButton::Draw()
   {
     a = 0.5f;
   }
-  m_guiText.SetLocalPos(GetLocalPos());
+
   m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
   AmjuGL::PushMatrix();
