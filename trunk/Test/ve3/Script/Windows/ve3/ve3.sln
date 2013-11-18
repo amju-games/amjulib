@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "..\..\..\..\..\Script\AmjuLibMsvc\AmjuLibMsvc\AmjuLibMsvc.vcxproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ve2", "ve2\ve2.vcxproj", "{0F0D3BA9-521E-44E1-8518-EFDE33AE4CCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ve3", "ve3\ve2.vcxproj", "{0F0D3BA9-521E-44E1-8518-EFDE33AE4CCD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
 	EndProjectSection
