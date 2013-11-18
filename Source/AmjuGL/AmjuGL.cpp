@@ -685,7 +685,10 @@ void AmjuGL::SetTextureFilter(TextureFilter tf)
   static TextureFilter prev = (TextureFilter)-1;
   if (tf == prev)
   {
-    return;
+    // This gives the wrong effect, with textures smoothed that should use nearest 
+    //  - TODO small test scenario to diagnose this
+
+//    return;
   }
   prev = tf;
 
