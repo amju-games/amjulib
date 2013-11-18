@@ -146,6 +146,9 @@ public:
   // Use this in preference to the Game when the object may not be in the local player's location
   PGameObject GetGameObject(int id); 
 
+  // Get all game objects, whether or not they are in the same room as local player
+  GameObjects* GetGameObjects();
+
   // Call to change local player to new location: 
   //  objects might not be created so we wait before continuing.
   void SetLocalPlayerLocation(int newLocation);

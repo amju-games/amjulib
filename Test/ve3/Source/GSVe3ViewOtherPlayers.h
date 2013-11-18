@@ -3,9 +3,12 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
+#include "Ve1SpriteNode.h"
 
 namespace Amju 
 {
+class Player;
+
 class GSVe3ViewOtherPlayers : public GSGui
 {
   GSVe3ViewOtherPlayers();
@@ -17,6 +20,15 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void NextPlayer();
+  void PrevPlayer();
+
+private:
+  void SetPlayerSprite();
+
+private:
+  Ve1SpriteNode m_spriteNode;
+  RCPtr<Player> m_player;
 };
 typedef Singleton<GSVe3ViewOtherPlayers> TheGSVe3ViewOtherPlayers;
 } // namespace

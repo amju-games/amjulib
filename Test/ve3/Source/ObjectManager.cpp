@@ -718,6 +718,12 @@ PGameObject ObjectManager::GetGameObject(int id)
   }
   return it->second;
 }
+
+GameObjects* ObjectManager::GetGameObjects()
+{
+  return &m_allGameObjects;
+}
+
 }
 
 
