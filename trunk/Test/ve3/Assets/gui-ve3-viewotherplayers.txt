@@ -1,0 +1,55 @@
+// Home page
+// version
+1
+
+// Element type
+gui-comp
+// Name
+view-other-players-comp
+// Num children
+3
+
+// Element type
+gui-text
+// Element name
+title-bar-text
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+Other players
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+
+// Element type
+gui-text
+// Element name
+playername-text
+// pos (coords are -1..1)
+-1.0, -0.2
+// size
+1.0, 0.1
+// Text
+Name
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Back
+// Font name, size
+arial, 2.0, sx=0.7
+
+

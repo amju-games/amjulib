@@ -24,14 +24,20 @@ void GSVe3ViewOtherPlayers::Draw2d()
   GSGui::Draw2d();
 }
 
+static void OnBack()
+{
+  TheGSVe3ViewOtherPlayers::Instance()->GoBack();
+}
+
 void GSVe3ViewOtherPlayers::OnActive()
 {
   GSGui::OnActive();
 
-  m_gui = LoadGui("TODO");
+  m_gui = LoadGui("gui-ve3-viewotherplayers.txt");
   Assert(m_gui);
 
-  // TODO Set focus element, cancel element, command handlers
+  GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
+
 }
 
 } // namespace
