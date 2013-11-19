@@ -16,6 +16,7 @@ void GSVe3ViewOtherPlayers::Update()
 {
   GSGui::Update();
 
+  m_spriteNode.Update();
 }
 
 void GSVe3ViewOtherPlayers::Draw()
@@ -26,8 +27,6 @@ void GSVe3ViewOtherPlayers::Draw()
 
 void GSVe3ViewOtherPlayers::Draw2d()
 {
-  GSGui::Draw2d();
-
   // Draw player
   AmjuGL::PushMatrix();
   // Scale for 'breathing' effect..?
@@ -42,6 +41,8 @@ void GSVe3ViewOtherPlayers::Draw2d()
   m_spriteNode.Draw();
   AmjuGL::PopMatrix();
 
+  // Draw over character if necessary
+  GSGui::Draw2d();
 }
 
 static void OnBack()
@@ -99,7 +100,7 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
     GameObject* go = it->second;
     Player* p = dynamic_cast<Player*>(go);
 
-    if (p && p->GetId() > id)
+    if (p && p->GetId() < id)
     {
       m_player = p;
       break;
@@ -121,6 +122,21 @@ void GSVe3ViewOtherPlayers::SetPlayerSprite()
 
   m_spriteNode.Update();
 
+  GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
+  Assert(name);
+  name->SetText(m_player->GetName());
+}
+
+static void OnGiveFood()
+{
+}
+
+static void OnGiveTreasure()
+{
+}
+
+static void OnSeeGuestbook()
+{
 }
 
 void GSVe3ViewOtherPlayers::OnActive()
@@ -134,6 +150,11 @@ void GSVe3ViewOtherPlayers::OnActive()
   GetElementByName(m_gui, "prev-player-button")->SetCommand(OnPrevPlayer);
   GetElementByName(m_gui, "next-player-button")->SetCommand(OnNextPlayer);
 
+  GetElementByName(m_gui, "give-food-button")->SetCommand(OnGiveFood);
+  GetElementByName(m_gui, "give-treasure-button")->SetCommand(OnGiveTreasure);
+  GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeGuestbook);
+
+  // Initialise character
   NextPlayer();
 }
 

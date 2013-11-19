@@ -18,6 +18,7 @@
 #include <AmjuFinal.h>
 
 //#define OU_DEBUG
+//#define QUEUE_DEBUG
 //#define YES_USE_CACHE
 //#define POS_DEBUG
 
@@ -269,6 +270,7 @@ void ObjectUpdater::Update()
   
     TheVe1ReqManager::Instance()->AddReq(new GetStateUpdatesReq(url));
   }
+  /*
   else if (m_fastUpdateElapsed > FAST_UPDATE_PERIOD)
   {
 //std::cout << "FAST UPDATE CHECK\n";
@@ -279,6 +281,7 @@ void ObjectUpdater::Update()
     std::string url = TheVe1ReqManager::Instance()->MakeUrl(GET_FAST_STATE_UPDATES);
     TheVe1ReqManager::Instance()->AddReq(new GetFastStateUpdatesReq(url));
   }
+  */
 
   for (PosMap::iterator it = m_posMap.begin(); it != m_posMap.end();   )
   {
@@ -364,7 +367,7 @@ std::cout << "..using SetPos, not a Ve1Object\n";
   {
     int id = it->first.first;
 
-    GameObject* go = TheGame::Instance()->GetGameObject(id);
+    GameObject* go = TheObjectManager::Instance()->GetGameObject(id);
     Ve1Object* ve1Obj = dynamic_cast<Ve1Object*>(go);
     Assert(!go || (go && ve1Obj));
   
@@ -373,7 +376,7 @@ std::cout << "..using SetPos, not a Ve1Object\n";
       const std::string& key = it->first.second;
       const std::string& val = it->second; 
 
-//std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
+std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
 
       ve1Obj->SetKeyVal(key, val);
 

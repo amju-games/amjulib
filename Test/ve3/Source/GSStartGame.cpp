@@ -6,6 +6,8 @@
 #include "LocalPlayer.h"
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
+#include "GSVe3GetObjects.h"
+#include "Ve1SceneGraph.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -18,6 +20,8 @@ GSStartGame::GSStartGame()
 void GSStartGame::Update()
 {
   GSGui::Update();
+
+  TheGame::Instance()->SetCurrentState(TheGSVe3GetObjects::Instance());
 }
 
 void GSStartGame::Draw()
@@ -36,9 +40,15 @@ void GSStartGame::OnActive()
 
 std::cout << "GSStartGame: m_startLoc is: " << m_startLoc << "\n";
 
+  // As we are not setting player location, we need to initialise the scene graph root
+  ClearVe1SceneGraph();
+
   if (m_startLoc != -1)
   {
-    SetLocalPlayerLocation(m_startLoc);
+    // This call ends up changing the state to GSWaitForNewLocation, at end of
+    //  ObjectManager::SetLocalPlayerLocation
+    // -- Do it later when we "Explore"
+    //SetLocalPlayerLocation(m_startLoc);
   }
 }
 } // namespace
