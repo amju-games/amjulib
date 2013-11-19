@@ -22,12 +22,6 @@ void GSVe3HomePage::Update()
   GSGui::Update();
 
   m_spriteNode.Update();
-
-  // TODO TEMP TEST - Absolutely DON'T keep polling the server!!!!!!
-  TheObjectManager::Instance()->Update();
-
-  TheObjectUpdater::Instance()->Update();
-
 }
 
 void GSVe3HomePage::Draw()

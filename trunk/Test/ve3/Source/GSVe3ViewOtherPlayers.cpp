@@ -1,10 +1,16 @@
+#include <SoundManager.h>
 #include <AmjuGL.h>
 #include <Timer.h>
 #include <Game.h>
+#include <StringUtils.h>
 #include "GSVe3ViewOtherPlayers.h"
 #include "LayerGroup.h"
 #include "Player.h"
 #include "ObjectManager.h"
+#include "GameConsts.h"
+#include "LocalPlayer.h"
+#include "LurkMsg.h"
+#include "HeartCount.h"
 
 namespace Amju
 {
@@ -15,8 +21,8 @@ GSVe3ViewOtherPlayers::GSVe3ViewOtherPlayers()
 void GSVe3ViewOtherPlayers::Update()
 {
   GSGui::Update();
-
   m_spriteNode.Update();
+  TheLurker::Instance()->Update();
 }
 
 void GSVe3ViewOtherPlayers::Draw()
@@ -43,6 +49,7 @@ void GSVe3ViewOtherPlayers::Draw2d()
 
   // Draw over character if necessary
   GSGui::Draw2d();
+  TheLurker::Instance()->Draw(); // but cursor???
 }
 
 static void OnBack()
@@ -62,6 +69,8 @@ static void OnNextPlayer()
 
 void GSVe3ViewOtherPlayers::NextPlayer()
 {
+  Player* localPlayer = GetLocalPlayer();
+
   GameObjects* gos = TheObjectManager::Instance()->GetGameObjects();
   int id = -1;
   if (m_player)
@@ -72,6 +81,10 @@ void GSVe3ViewOtherPlayers::NextPlayer()
   {
     GameObject* go = it->second;
     Player* p = dynamic_cast<Player*>(go);
+    if (p == localPlayer)
+    {
+      continue;
+    }
 
     if (p && p->GetId() > id)
     {
@@ -99,6 +112,10 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
   {
     GameObject* go = it->second;
     Player* p = dynamic_cast<Player*>(go);
+    if (p == localPlayer)
+    {
+      continue;
+    }
 
     if (p && p->GetId() < id)
     {
@@ -125,18 +142,126 @@ void GSVe3ViewOtherPlayers::SetPlayerSprite()
   GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
   Assert(name);
   name->SetText(m_player->GetName());
+
+  // Set food, health, treasure scores for this player
+  GuiText* t = (GuiText*)GetElementByName(m_gui, "health-num");
+  Assert(t);
+  if (m_player->Exists(HEALTH_KEY))
+  {
+    t->SetText(m_player->GetVal(HEALTH_KEY));
+  }
+  else
+  {
+    t->SetText("?");
+  }
+
+  t = (GuiText*)GetElementByName(m_gui, "food-num");
+  Assert(t);
+  if (m_player->Exists(FOOD_STORED_KEY))
+  {
+    t->SetText(m_player->GetVal(FOOD_STORED_KEY));
+  }
+  else
+  {
+    t->SetText("?");
+  }
+
+  t = (GuiText*)GetElementByName(m_gui, "treasure-num");
+  Assert(t);
+  if (m_player->Exists(TREASURE_KEY))
+  {
+    t->SetText(m_player->GetVal(TREASURE_KEY));
+  }
+  else
+  {
+    t->SetText("?");
+  }
 }
 
 static void OnGiveFood()
 {
+  TheGSVe3ViewOtherPlayers::Instance()->OnGiveFood();
 }
 
 static void OnGiveTreasure()
 {
+  TheGSVe3ViewOtherPlayers::Instance()->OnGiveTreasure();
 }
 
 static void OnSeeGuestbook()
 {
+  TheGSVe3ViewOtherPlayers::Instance()->OnSeeGuestbook();
+}
+
+void GSVe3ViewOtherPlayers::OnGiveFood()
+{
+  // Check we have some
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  if (p->Exists(HEALTH_KEY))  
+  {
+    int health = ToInt(p->GetVal(HEALTH_KEY));
+    if (health < 1)
+    {
+      // Show lurk msg - can't give food!
+      LurkMsg lm("You don't have any food to give!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
+    else
+    {
+      // Decremenet local player health, add one to this other player's health
+      ChangePlayerCount(HEALTH_KEY, -1);
+      ChangeObjCount(m_player->GetId(), HEALTH_KEY, +1);
+
+      // Immediately change local copies of the data
+      p->SetKeyVal(HEALTH_KEY, ToString(health - 1));
+      m_player->SetKeyVal(HEALTH_KEY, ToString(m_player->GetHealth() + 1));
+
+      SetPlayerSprite(); // to update GUI
+
+      TheSoundManager::Instance()->PlayWav("sound/kiss.wav");
+
+      // TODO Add a message (to guestbook?) so player will know what happened
+    }
+  }
+}
+
+void GSVe3ViewOtherPlayers::OnGiveTreasure()
+{
+  // Check we have some
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  if (p->Exists(TREASURE_KEY))  
+  {
+    int tr = ToInt(p->GetVal(TREASURE_KEY));
+    if (tr < 1)
+    {
+      LurkMsg lm("You don't have any treasure to give!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
+    else
+    {
+      // Decremenet local player health, add one to this other player's health
+      ChangePlayerCount(TREASURE_KEY, -1);
+      ChangeObjCount(m_player->GetId(), TREASURE_KEY, +1);
+
+      // Immediately change local copies of the data
+      p->SetKeyVal(TREASURE_KEY, ToString(tr - 1));
+      int otherTr = ToInt(m_player->GetVal(TREASURE_KEY));
+      m_player->SetKeyVal(TREASURE_KEY, ToString(otherTr + 1));
+
+      SetPlayerSprite(); // to update GUI
+
+      TheSoundManager::Instance()->PlayWav("sound/cashreg.wav");
+
+      // TODO Add a message (to guestbook?) so player will know what happened
+    }
+  }
+}
+
+void GSVe3ViewOtherPlayers::OnSeeGuestbook()
+{
+
 }
 
 void GSVe3ViewOtherPlayers::OnActive()
@@ -150,9 +275,9 @@ void GSVe3ViewOtherPlayers::OnActive()
   GetElementByName(m_gui, "prev-player-button")->SetCommand(OnPrevPlayer);
   GetElementByName(m_gui, "next-player-button")->SetCommand(OnNextPlayer);
 
-  GetElementByName(m_gui, "give-food-button")->SetCommand(OnGiveFood);
-  GetElementByName(m_gui, "give-treasure-button")->SetCommand(OnGiveTreasure);
-  GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeGuestbook);
+  GetElementByName(m_gui, "give-food-button")->SetCommand(Amju::OnGiveFood);
+  GetElementByName(m_gui, "give-treasure-button")->SetCommand(Amju::OnGiveTreasure);
+  GetElementByName(m_gui, "see-guestbook-button")->SetCommand(Amju::OnSeeGuestbook);
 
   // Initialise character
   NextPlayer();

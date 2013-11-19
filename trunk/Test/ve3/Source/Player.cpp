@@ -815,7 +815,7 @@ void Player::OnCollideFood(Food* f)
     f->SetHidden(true);
     TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
     // Inc count of this (recipient) player on server
-    ChangeObjCount(GetId(), FOOD_EATEN_KEY, +1); // for expt
+    ChangeObjCount(GetId(), FOOD_STORED_KEY, +1); // for expt
     ChangeObjCount(GetId(), SCORE_KEY, +1);
 
     // Get some health

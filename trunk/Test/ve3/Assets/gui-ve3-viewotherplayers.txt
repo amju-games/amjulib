@@ -221,7 +221,7 @@ gui-comp
 // Name
 stats-comp
 // Num children
-10
+13
 
 // Background for stats
 gui-rect
@@ -255,17 +255,56 @@ heart-img
 0.3, 0.3
 heart16-3.png
 
+// Element type
+gui-text
+// Element name
+health-num
+// pos (coords are -1..1)
+-0.2, 0.6
+// size
+0.4, 0.2
+// Text
+99
+// Font name, size
+arial, 1.5, fgcol=ffffff, sx=0.6
+
 gui-image
 food-img
 0.3, 0.6
 0.2, 0.2
 food1.png
 
+// Element type
+gui-text
+// Element name
+food-num
+// pos (coords are -1..1)
+0.2, 0.6
+// size
+0.4, 0.2
+// Text
+88
+// Font name, size
+arial, 1.5, fgcol=ffffff, sx=0.6
+
 gui-image
 treasure-img
 0.65, 0.6
 0.2, 0.2
 diamond2.png
+
+// Element type
+gui-text
+// Element name
+treasure-num
+// pos (coords are -1..1)
+0.55, 0.6
+// size
+0.4, 0.2
+// Text
+765
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6
 
 // Element type
 gui-text
@@ -285,7 +324,7 @@ gui-text
 // Element name
 food-text
 // pos (coords are -1..1)
-0.1, 0.4
+0.2, 0.4
 // size
 0.4, 0.1
 // Text
