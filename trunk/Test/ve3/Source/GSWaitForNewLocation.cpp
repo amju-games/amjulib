@@ -113,9 +113,9 @@ if (playerObj && !playerReady)
     }
     else
     {
-      TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
+      //TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
 
-      /*
+      
       Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
       cam->Reset();
 
@@ -135,7 +135,7 @@ if (playerObj && !playerReady)
       static GSMain* gsm = TheGSMain::Instance();
       gsm->SetRoom(GetLocalPlayerLocation());
       TheGame::Instance()->SetCurrentState(gsm);
-      */
+      
     }
   }
 }

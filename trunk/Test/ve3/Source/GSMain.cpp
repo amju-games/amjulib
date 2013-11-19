@@ -49,6 +49,7 @@
 #include "BroadcastConsole.h"
 #include "Kb.h"
 #include "Baddie.h"
+#include "GSVe3HomePage.h"
 #include <AmjuFinal.h>
 
 //#define SHOW_QUEUE
@@ -59,8 +60,12 @@ namespace Amju
 {
 void OnPauseButton()
 {
+  TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
+
+/*
   TheGSPaused::Instance()->SetPrevState(TheGSMain::Instance());
   TheGame::Instance()->SetCurrentState(TheGSPaused::Instance());
+  */
 }
 
 void OnQuitButton()

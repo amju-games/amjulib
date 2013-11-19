@@ -262,6 +262,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSToday.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTodaysTask.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTrailMakingTest.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3GetObjects.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3GetObjectStates.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3HomePage.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
@@ -420,6 +422,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSToday.h" />
     <ClInclude Include="..\..\..\..\Source\GSTodaysTask.h" />
     <ClInclude Include="..\..\..\..\Source\GSTrailMakingTest.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3GetObjects.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3GetObjectStates.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3HomePage.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />

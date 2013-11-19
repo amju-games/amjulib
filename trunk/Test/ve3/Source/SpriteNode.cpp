@@ -17,6 +17,7 @@ SpriteNode::SpriteNode(const std::string tex, int cellsX, int cellsY, float size
   m_sprite.SetCell(c);
 
   SetBlended(true);
+  SetIsZReadEnabled(false);
 }
 
 void SpriteNode::Update()

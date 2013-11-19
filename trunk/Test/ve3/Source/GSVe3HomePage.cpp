@@ -9,6 +9,7 @@
 #include "LayerGroup.h"
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
+#include "GSWaitForNewLocation.h"
 
 namespace Amju
 {
@@ -19,12 +20,6 @@ GSVe3HomePage::GSVe3HomePage()
 void GSVe3HomePage::Update()
 {
   GSGui::Update();
-
-  Player* p = GetLocalPlayer();
-  Assert(p);
-  LayerGroups layerGroups; // store settings for each layer
-  layerGroups.SetFromSprite(p->GetSprite());
-  layerGroups.SetSprite(&m_spriteNode.GetSprite());
 
   m_spriteNode.Update();
 
@@ -43,8 +38,6 @@ void GSVe3HomePage::Draw()
 
 void GSVe3HomePage::Draw2d()
 {
-  GSGui::Draw2d();
-
   // Draw player
   AmjuGL::PushMatrix();
   // Scale for 'breathing' effect..?
@@ -59,6 +52,8 @@ void GSVe3HomePage::Draw2d()
   m_spriteNode.Draw();
   AmjuGL::PopMatrix();
 
+  // Draw over character if necessary
+  GSGui::Draw2d();
 }
 
 static void OnChangeName()
@@ -76,7 +71,14 @@ static void OnExplore()
 {
   GSMain* gs = TheGSMain::Instance();
   gs->SetPrevState(TheGSVe3HomePage::Instance());
-  TheGame::Instance()->SetCurrentState(gs);
+
+  // Get location for local player
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  int loc = p->GetLocation();
+  SetLocalPlayerLocation(loc);
+
+  TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
 static void OnOtherPlayers()
@@ -99,7 +101,17 @@ void GSVe3HomePage::OnActive()
   GetElementByName(m_gui, "explore-button")->SetCommand(OnExplore);
   GetElementByName(m_gui, "other-players-button")->SetCommand(OnOtherPlayers);
 
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  std::string playerName = p->GetName();
 
+  GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
+  Assert(name);
+  name->SetText(playerName);
+
+  LayerGroups layerGroups; // store settings for each layer
+  layerGroups.SetFromSprite(p->GetSprite());
+  layerGroups.SetSprite(&m_spriteNode.GetSprite());
 }
 
 } // namespace

@@ -219,7 +219,9 @@ std::cout << " ID: " << id << ": ";
 std::cout << " Type: " << type << "\n";
 #endif
 
-//std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " << assetfile << " Data file: " << datafile << " Owner: " << owner << "\n";
+#ifdef OBJECT_CHECK_DEBUG
+std::cout << "NEW OBJECT! ID: " << id << " Type: " << type << " Asset file: " << assetfile << " Data file: " << datafile << " Owner: " << owner << "\n";
+#endif
 
         TheObjectManager::Instance()->AddObject(new Object(id, owner, type, assetfile, datafile));
       }

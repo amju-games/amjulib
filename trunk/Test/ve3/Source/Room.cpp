@@ -176,7 +176,10 @@ void Room::Update()
           //vel *= 0.5f; // TODO Config
           //p->SetVel(vel); 
 
-          UnCollide(p, p->GetOldPos(), aabb);
+          // TEMP "FIX" - Uncollide is throwing player too far
+          //  (maybe because old pos is (0, 0, 0) ??
+          //
+          //UnCollide(p, p->GetOldPos(), aabb);
         }
       }
     }
