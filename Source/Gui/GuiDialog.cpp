@@ -18,6 +18,10 @@ bool GuiDialog::Load(File* f)
     return false;
   }
 
+// OK, this must have seemed like a good idea at the time but I can't
+//  now remember WHY a dialog is split into 2 files. WHY??!!
+#ifdef I_EVER_REMEMBER_WHY
+
   std::string filename;
   if (!f->GetDataLine(&filename))
   {
@@ -30,6 +34,13 @@ bool GuiDialog::Load(File* f)
   {
     return false;
   }
+
+#else
+
+  // No filename for the second file, just continue on in the same file.
+  File& f2 = *f;
+
+#endif 
 
   // Like GuiWindow::Load, but we don't want to load in the name again. This would be
   //  only a generic name in the template file, not a unique name.
