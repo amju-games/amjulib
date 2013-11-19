@@ -61,7 +61,8 @@ bool TextureSequence::Load(File* pf)
     pf->ReportError("Expected texture name.");
     return false;
   }
-  m_pTexture = (Texture*)TheResourceManager::Instance()->GetRes(texname);
+  // Not required here, done later anyway?!
+  //m_pTexture = (Texture*)TheResourceManager::Instance()->GetRes(texname);
 
   if (!pf->GetInteger(&numx))
   {
@@ -106,6 +107,8 @@ void TextureSequence::Set(Texture* pTex,
   AMJU_CALL_STACK;
 
   m_pTexture = pTex;
+  m_pTexture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP); // helps improve look of text?
+
   m_numElementsX = numElementsX;
   m_numElementsY = numElementsY;
   m_numElements = numElementsX * numElementsY;
