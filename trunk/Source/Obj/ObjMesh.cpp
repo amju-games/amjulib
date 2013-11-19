@@ -89,10 +89,18 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
     ++it)
   {
     Group& g = it->second;
-    Material& mat = m_materials[g.m_materialName];
-    if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+    if (m_materials.find(g.m_materialName) == m_materials.end())
     {
+      std::cout << "No material for group\n";
       numFaces += g.m_tris.size();
+    }
+    else
+    {
+      Material& mat = m_materials[g.m_materialName];
+      if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+      {
+        numFaces += g.m_tris.size();
+      }
     }
   }
   pCollMesh->m_tris.reserve(numFaces);
@@ -103,12 +111,15 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
   {
     Group& g = it->second;
    
-    Material& mat = m_materials[g.m_materialName];
-    if ((mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+    if (m_materials.find(g.m_materialName) != m_materials.end())
     {
-      continue;
+      Material& mat = m_materials[g.m_materialName];
+      if ((mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+      {
+        continue;
+      }
     }
-    
+
     unsigned int numTris = g.m_tris.size();
     for (unsigned int i = 0; i < numTris; i++)
     {
