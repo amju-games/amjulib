@@ -15,7 +15,8 @@ const char* LAST_MSG_SENT_KEY = "last_msg_sent";
 
 const char* SCORE_KEY = "score";
 
-const char* FOOD_EATEN_KEY = "food-eaten";
+const char* FOOD_STORED_KEY = "food-stored";
+//const char* FOOD_EATEN_KEY = "food-eaten"; // TODO not used
 const char* FOOD_RECEIVED_KEY = "food-recv";
 const char* FOOD_GIVEN_KEY = "food-given";
 const char* HEALTH_KEY = "health";

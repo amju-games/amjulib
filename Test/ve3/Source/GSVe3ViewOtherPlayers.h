@@ -23,6 +23,10 @@ public:
   void NextPlayer();
   void PrevPlayer();
 
+  void OnGiveFood();
+  void OnGiveTreasure();
+  void OnSeeGuestbook();
+
 private:
   void SetPlayerSprite();
 

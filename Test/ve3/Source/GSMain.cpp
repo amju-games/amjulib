@@ -268,6 +268,7 @@ void GSMain::Update()
 {
   GSBase::Update();
 
+  /*
   if (m_time > 2.0f) // wait a few secs before showing msgs, to initialised positions
   {
     std::string s;
@@ -299,6 +300,7 @@ void GSMain::Update()
       "Hmm... you look... a bit funny. Would you like to change the way you look ?", 
       UNIQUE_MSG_ID, OnChangeLookNo, OnChangeLookYes);
   }
+  */
 
   // This is to nag about cog tests
   TheCogTestNag::Instance()->Update();
@@ -309,11 +311,13 @@ void GSMain::Update()
 
   // Make periodic checks for newly created objects
   // Just do this in GSWaitForNewLocation, right?
+  /*
   TheObjectManager::Instance()->Update();
 
   TheObjectUpdater::Instance()->Update();
 
   TheMsgManager::Instance()->Update();
+  */
 
   static Lurker* lurker = TheLurker::Instance();
   lurker->Update();
@@ -328,7 +332,7 @@ void GSMain::Update()
   if (GetGameMode() == AMJU_MODE_MULTI)
   {
     TheChatConsole::Instance()->Update();
-    TheBroadcastConsole::Instance()->Update();
+//??    TheBroadcastConsole::Instance()->Update();
     TheKb::Instance()->Update();
   }
 
@@ -488,7 +492,11 @@ std::cout << "Sq dist to arrow pos is: " << sqDist << "\n";
         player->SetArrowPos(pos); 
         player->SetArrowVis(true);
 
+        /*
+        DON'T DO THIS IN VE3 -- it's all local, except when we leave this state DO send an update
         TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
+        */
+
         player->MoveTo(pos); // client side predict - respond immediately
       }
     }
@@ -672,6 +680,11 @@ std::cout << "Clicked off menu, so now it's invisible.\n";
 void GSMain::OnDeactive()
 {
   GSBase::OnDeactive();
+
+  // Send an update on this player's pos/location - but only this one time, when we leave this state.
+  int location = GetLocalPlayerLocation();
+  Vec3f pos = GetLocalPlayer()->GetPos();
+  TheObjectUpdater::Instance()->SendPosUpdateReq(GetLocalPlayer()->GetId(), pos, location);
 
   if (TheEventPoller::Instance()->HasListener(m_gui))
   {
