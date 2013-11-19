@@ -160,6 +160,11 @@ void Room::Update()
     // Check for collision with obstacles layer (tilemap [1])
     // (Another way could be to create an Obstacle game object for each tile,
     //  but this is linear time anyway.)
+
+    AABB a1 = *(p->GetAABB());
+    GameObject* go = p;
+    AABB a2 = (const_cast<const GameObject*>(go))->GetAABB();
+
     TileMap& tm = m_tilemap[1];
     for (TileMap::iterator it = tm.begin(); it != tm.end(); ++it)
     {
@@ -169,14 +174,17 @@ void Room::Update()
         Vec2f& pos = tilevec[i].m_pos;
         AABB aabb(pos.x * m_tilesize.x, (pos.x + 1) * m_tilesize.x, 
           0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
-        if (aabb.Intersects(*(p->GetAABB())))
+        if (aabb.Intersects(a1))
         {
           // Slow down if in contact with obstacle??
           //Vec3f vel = p->GetVel();
           //vel *= 0.5f; // TODO Config
           //p->SetVel(vel); 
 
-          UnCollide(p, p->GetOldPos(), aabb);
+          // TEMP "FIX" - Uncollide is throwing player too far
+          //  (maybe because old pos is (0, 0, 0) ??
+          //
+//          UnCollide(p, p->GetOldPos(), aabb);
         }
       }
     }
