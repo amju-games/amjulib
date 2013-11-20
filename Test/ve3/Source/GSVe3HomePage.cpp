@@ -97,6 +97,10 @@ void GSVe3HomePage::OnActive()
 
   Player* p = GetLocalPlayer();
   Assert(p);
+
+  ShowPlayer(p, m_gui);
+
+/*
   std::string playerName = p->GetName();
 
   GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
@@ -106,6 +110,7 @@ void GSVe3HomePage::OnActive()
   LayerGroups layerGroups; // store settings for each layer
   layerGroups.SetFromSprite(p->GetSprite());
   layerGroups.SetSprite(&m_spriteNode.GetSprite());
+*/
 }
 
 } // namespace

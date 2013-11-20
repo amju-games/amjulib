@@ -332,7 +332,7 @@ void GSMain::Update()
   if (GetGameMode() == AMJU_MODE_MULTI)
   {
     TheChatConsole::Instance()->Update();
-//??    TheBroadcastConsole::Instance()->Update();
+    TheBroadcastConsole::Instance()->Update();
     TheKb::Instance()->Update();
   }
 

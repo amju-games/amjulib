@@ -7,7 +7,7 @@ gui-comp
 // Name
 home-page-comp
 // Num children
-5
+6
 
 
 // Element type
@@ -87,3 +87,161 @@ Other players...
 // Font name, size
 arial, 1.5, sx=0.7
 
+
+
+// STATS
+
+// Element type
+gui-comp
+// Name
+stats-comp
+// Num children
+13
+
+// Background for stats
+gui-rect
+stats-bg
+// Pos, size
+-0.2, 0.7
+1.1, 0.7
+// Colour
+c0c0c0
+// Corner radius
+0.03
+// flags
+0
+
+// Element type
+gui-text
+// Element name
+static-text1
+// pos (coords are -1..1)
+-0.2, 0.7
+// size
+1.1, 0.1
+// Text
+This player has...
+// Font name, size
+arial, 1.0, fgcol=000000
+
+gui-image
+heart-img
+-0.2, 0.65
+0.3, 0.3
+heart16-3.png
+
+// Element type
+gui-text
+// Element name
+health-num
+// pos (coords are -1..1)
+-0.0, 0.6
+// size
+0.2, 0.2
+// Text
+99
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+gui-image
+food-img
+0.15, 0.6
+0.2, 0.2
+food1.png
+
+// Element type
+gui-text
+// Element name
+food-num
+// pos (coords are -1..1)
+0.35, 0.6
+// size
+0.2, 0.2
+// Text
+88
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+gui-image
+treasure-img
+0.5, 0.6
+0.2, 0.2
+diamond2.png
+
+// Element type
+gui-text
+// Element name
+treasure-num
+// pos (coords are -1..1)
+0.7, 0.6
+// size
+0.2, 0.2
+// Text
+765
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+health-text
+// pos (coords are -1..1)
+-0.2, 0.4
+// size
+0.4, 0.1
+// Text
+Health
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6
+
+// Element type
+gui-text
+// Element name
+food-text
+// pos (coords are -1..1)
+0.1, 0.4
+// size
+0.3, 0.1
+// Text
+Food
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, bgcol=0000ff
+
+// Element type
+gui-text
+// Element name
+treasure-text
+// pos (coords are -1..1)
+0.5, 0.4
+// size
+0.4, 0.1
+// Text
+Treasure
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6
+
+// Element type
+gui-text
+// Element name
+more-stats1-text
+// pos (coords are -1..1)
+-0.15, 0.25
+// size
+0.9, 0.1
+// Text
+ANOTHER line of stats
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+more-stats2-text
+// pos (coords are -1..1)
+-0.15, 0.15
+// size
+0.9, 0.1
+// Text
+And a final line of stats
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left

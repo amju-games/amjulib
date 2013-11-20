@@ -3,13 +3,13 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
-#include "Ve1SpriteNode.h"
+#include "Ve3ShowPlayer.h"
 
 namespace Amju 
 {
 class Player;
 
-class GSVe3ViewOtherPlayers : public GSGui
+class GSVe3ViewOtherPlayers : public GSGui, public Ve3ShowPlayer
 {
   GSVe3ViewOtherPlayers();
   friend class Singleton<GSVe3ViewOtherPlayers>;
@@ -28,10 +28,6 @@ public:
   void OnSeeGuestbook();
 
 private:
-  void SetPlayerSprite();
-
-private:
-  Ve1SpriteNode m_spriteNode;
   RCPtr<Player> m_player;
 };
 typedef Singleton<GSVe3ViewOtherPlayers> TheGSVe3ViewOtherPlayers;

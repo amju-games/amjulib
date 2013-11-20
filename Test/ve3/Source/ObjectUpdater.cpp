@@ -376,7 +376,9 @@ std::cout << "..using SetPos, not a Ve1Object\n";
       const std::string& key = it->first.second;
       const std::string& val = it->second; 
 
+#ifdef OU_DEBUG
 std::cout << "Object Updater: updating object " << id << " key: " << key << " val: " << val << "\n";
+#endif
 
       ve1Obj->SetKeyVal(key, val);
 
