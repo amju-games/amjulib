@@ -264,6 +264,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSTrailMakingTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3GetObjects.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3GetObjectStates.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3Guestbook.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3HomePage.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSWaitForNewLocation.cpp" />
@@ -271,6 +272,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSYesNo.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitProcess.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSYesNoQuitSession.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GuestbookWindow.cpp" />
     <ClCompile Include="..\..\..\..\Source\Harmless.cpp" />
     <ClCompile Include="..\..\..\..\Source\HeartCount.cpp" />
     <ClCompile Include="..\..\..\..\Source\JoystickToCursor.cpp" />
@@ -334,6 +336,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Ve1Req.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1SceneGraph.cpp" />
     <ClCompile Include="..\..\..\..\Source\Ve1SpriteNode.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Ve3ShowPlayer.cpp" />
     <ClCompile Include="..\..\..\..\Source\Version.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +427,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSTrailMakingTest.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3GetObjects.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3GetObjectStates.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3Guestbook.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3HomePage.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.h" />
     <ClInclude Include="..\..\..\..\Source\GSWaitForNewLocation.h" />
@@ -431,6 +435,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSYesNo.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNoQuitProcess.h" />
     <ClInclude Include="..\..\..\..\Source\GSYesNoQuitSession.h" />
+    <ClInclude Include="..\..\..\..\Source\GuestbookWindow.h" />
     <ClInclude Include="..\..\..\..\Source\Harmless.h" />
     <ClInclude Include="..\..\..\..\Source\HasCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\HeartCount.h" />
@@ -501,6 +506,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Ve1Req.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1SceneGraph.h" />
     <ClInclude Include="..\..\..\..\Source\Ve1SpriteNode.h" />
+    <ClInclude Include="..\..\..\..\Source\Ve3ShowPlayer.h" />
     <ClInclude Include="..\..\..\..\Source\Version.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

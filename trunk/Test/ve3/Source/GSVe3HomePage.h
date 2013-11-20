@@ -3,11 +3,11 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
-#include "Ve1SpriteNode.h"
+#include "Ve3ShowPlayer.h"
 
 namespace Amju 
 {
-class GSVe3HomePage : public GSGui
+class GSVe3HomePage : public GSGui, public Ve3ShowPlayer
 {
   GSVe3HomePage();
   friend class Singleton<GSVe3HomePage>;
@@ -19,8 +19,8 @@ public:
   virtual void OnActive();
 
 protected:
-  Ve1SpriteNode m_spriteNode;
 };
+
 typedef Singleton<GSVe3HomePage> TheGSVe3HomePage;
 } // namespace
 #endif

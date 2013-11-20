@@ -77,6 +77,7 @@ void GSVe3ViewOtherPlayers::NextPlayer()
   {
     id = m_player->GetId();
   }
+
   for (auto it = gos->begin(); it != gos->end(); ++it)
   {
     GameObject* go = it->second;
@@ -95,19 +96,22 @@ void GSVe3ViewOtherPlayers::NextPlayer()
 
   if (m_player)
   {
-    SetPlayerSprite();
+    ShowPlayer(m_player, m_gui);
   }
 }
 
 
 void GSVe3ViewOtherPlayers::PrevPlayer()
 {
+  Player* localPlayer = GetLocalPlayer();
+
   GameObjects* gos = TheObjectManager::Instance()->GetGameObjects();
   int id = -1;
   if (m_player)
   {
     id = m_player->GetId();
   }
+
   for (auto it = gos->rbegin(); it != gos->rend(); ++it)
   {
     GameObject* go = it->second;
@@ -126,55 +130,7 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
 
   if (m_player)
   {
-    SetPlayerSprite();
-  }
-}
-
-void GSVe3ViewOtherPlayers::SetPlayerSprite()
-{
-  Assert(m_player);
-  LayerGroups layerGroups; // store settings for each layer
-  layerGroups.SetFromSprite(m_player->GetSprite());
-  layerGroups.SetSprite(&m_spriteNode.GetSprite());
-
-  m_spriteNode.Update();
-
-  GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
-  Assert(name);
-  name->SetText(m_player->GetName());
-
-  // Set food, health, treasure scores for this player
-  GuiText* t = (GuiText*)GetElementByName(m_gui, "health-num");
-  Assert(t);
-  if (m_player->Exists(HEALTH_KEY))
-  {
-    t->SetText(m_player->GetVal(HEALTH_KEY));
-  }
-  else
-  {
-    t->SetText("?");
-  }
-
-  t = (GuiText*)GetElementByName(m_gui, "food-num");
-  Assert(t);
-  if (m_player->Exists(FOOD_STORED_KEY))
-  {
-    t->SetText(m_player->GetVal(FOOD_STORED_KEY));
-  }
-  else
-  {
-    t->SetText("?");
-  }
-
-  t = (GuiText*)GetElementByName(m_gui, "treasure-num");
-  Assert(t);
-  if (m_player->Exists(TREASURE_KEY))
-  {
-    t->SetText(m_player->GetVal(TREASURE_KEY));
-  }
-  else
-  {
-    t->SetText("?");
+    ShowPlayer(m_player, m_gui);
   }
 }
 
@@ -217,7 +173,7 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
       p->SetKeyVal(HEALTH_KEY, ToString(health - 1));
       m_player->SetKeyVal(HEALTH_KEY, ToString(m_player->GetHealth() + 1));
 
-      SetPlayerSprite(); // to update GUI
+      ShowPlayer(m_player, m_gui); // to update GUI
 
       TheSoundManager::Instance()->PlayWav("sound/kiss.wav");
 
@@ -250,7 +206,7 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
       int otherTr = ToInt(m_player->GetVal(TREASURE_KEY));
       m_player->SetKeyVal(TREASURE_KEY, ToString(otherTr + 1));
 
-      SetPlayerSprite(); // to update GUI
+      ShowPlayer(m_player, m_gui); // to update GUI
 
       TheSoundManager::Instance()->PlayWav("sound/cashreg.wav");
 
