@@ -201,21 +201,17 @@ void GuiMenu::Draw()
   }
 }
 
-bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GuiFloatingMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-  GuiComposite::OnMouseButtonEvent(mbe);
+  bool b = GuiMenu::OnMouseButtonEvent(mbe);
 
   if (IsVisible() &&
       mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
     Rect r = GetRect(this);
-    if (!r.IsPointIn(m_cursorPos) 
-      //&& !(GetParent() && GetRect(GetParent()).IsPointIn(m_cursorPos)) // TODO
-    )
+    if (!r.IsPointIn(m_cursorPos))
     {
-      // TODO Not if this is a fixed menu bar
-
       // Click outside menu area => hide menu
       SetVisible(false);
       // Callback for clicking off menu  
@@ -225,10 +221,20 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       }
 
       // TODO Callback for when menu is made invis
-
       return true; //  handled (for last time until made visible again)
-    }
+    } 
+  }
+  return b;
+}
 
+bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  bool b = GuiComposite::OnMouseButtonEvent(mbe);
+
+  if (IsVisible() &&
+      mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
+      mbe.isDown)
+  {
     // Clicked on an item
     if (m_selected != -1)
     {
@@ -258,20 +264,21 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     }
   }
 
-  return false; // not handled
+  // Not handled but may be handled by a child
+  return b; 
 }
 
 bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
 {
-  GuiComposite::OnCursorEvent(ce);
-
-  m_cursorPos.x = ce.x;
-  m_cursorPos.y = ce.y;
-
   if (!IsVisible())
   {
     return false; // not handled
   }
+
+  bool b = GuiComposite::OnCursorEvent(ce);
+
+  m_cursorPos.x = ce.x;
+  m_cursorPos.y = ce.y;
 
   m_selected = -1;
   if (m_children.empty())
@@ -292,7 +299,7 @@ bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
       return true; // handled
     }
   }
-  return false;
+  return b;
 }
 
 void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
