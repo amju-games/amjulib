@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <GameStateListener.h>
 #include "Game.h"
 #include "GameState.h"
 #include "EventPoller.h"
@@ -6,12 +7,22 @@
 
 namespace Amju
 {
+GameState::GameState() : 
+  m_prevState(nullptr), 
+  m_eventPriority(1),
+  m_listener(nullptr)
+{
+}
+
 void GameState::OnActive()
 {
+  m_listener = new GameStateListener(this);
+  TheEventPoller::Instance()->AddListener(m_listener);
 }
 
 void GameState::OnDeactive()
 {
+  TheEventPoller::Instance()->RemoveListener(m_listener);
 }
 
 void GameState::SetPrevState(GameState* prevState)
