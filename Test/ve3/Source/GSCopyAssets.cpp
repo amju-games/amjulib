@@ -298,6 +298,8 @@ void GSCopyAssets::Draw2d()
 
 void GSCopyAssets::OnActive()
 {
+  GSGui::OnActive();
+
   // Before loading anything, copy the files necessary to show logo or 'please wait' indicator.
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 }
