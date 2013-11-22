@@ -81,6 +81,14 @@ protected:
   // Callback when mouse click is outside menu bounds
   CommandFunc m_clickedAway;
 };
+
+// The kind of menu that moves around on screen, e.g. a right-click context menu.
+class GuiFloatingMenu : public GuiMenu
+{
+public:
+  // Hide the menu if we click off it
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+};
 }
 
 #endif
