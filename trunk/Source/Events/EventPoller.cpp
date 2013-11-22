@@ -4,6 +4,7 @@
 #include <Timer.h>
 #include <Game.h>
 #include "EventPoller.h"
+#include "GameStateListener.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -123,26 +124,24 @@ void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pList
 
   int eaten = AMJU_MAX_PRIORITY + 1;
 
-  // Notify current state - which is not in the Listeners container, 
-  //  as it's a singleton
-  static Game* game = TheGame::Instance();
-  GameState* gs = game->GetState();
-  if (event->UpdateListener(gs))
-  {
-    // Eaten
-    return;
-  }
-  
+  // For debug reporting  
+  EventListener* prevlistener = nullptr;
+
   for (Listeners::iterator it = pListeners->begin(); it != pListeners->end(); ++it)
   {
     if (it->first > eaten)
     {
       // This listener has a lower priority than a listener which ate the event
+#ifdef _DEBUG
+Assert(prevlistener);
+std::cout << "Event eaten by listener " << typeid(*prevlistener).name() << ".\n";
+#endif
       break;
     }
 
     EventListener* listener = it->second;
     Assert(listener);
+    prevlistener = listener;
 
     if (event->UpdateListener(listener))
     {
