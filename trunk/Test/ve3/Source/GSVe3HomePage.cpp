@@ -22,6 +22,7 @@ void GSVe3HomePage::Update()
   GSGui::Update();
 
   m_spriteNode.Update();
+  TheLurker::Instance()->Update();
 }
 
 void GSVe3HomePage::Draw()
@@ -48,6 +49,8 @@ void GSVe3HomePage::Draw2d()
 
   // Draw over character if necessary
   GSGui::Draw2d();
+
+  TheLurker::Instance()->Draw();
 }
 
 static void OnChangeName()
