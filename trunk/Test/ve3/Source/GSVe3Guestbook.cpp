@@ -31,7 +31,7 @@ void GSVe3Guestbook::OnActive()
   // Add GuestbookWindow type to GUI factory - but only if not already added, so use static
   //  - then gui txt file can use GuestbookWindow directly
 
-  m_gui = LoadGui("TODO");
+  m_gui = LoadGui("gui-ve3-guestbook.txt");
   Assert(m_gui);
 
 

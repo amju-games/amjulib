@@ -3,7 +3,7 @@
 export PLATFORM=iphone
 export THIS_DIR=`pwd`
 export TOP_DIR=$THIS_DIR/../../../..
-export COMPILED_ASSETS=$TOP_DIR/Build/ve2/CompiledAssets
+export COMPILED_ASSETS=$TOP_DIR/Build/ve3/CompiledAssets
 export DEST_DIR=$COMPILED_ASSETS/$PLATFORM
 export SRC_DIR=../../Assets
 export GLUE_EXE=$THIS_DIR/glue

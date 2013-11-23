@@ -10,6 +10,7 @@
 #include "ObjectManager.h"
 #include "ObjectUpdater.h"
 #include "GSWaitForNewLocation.h"
+#include "LurkMsg.h"
 
 namespace Amju
 {

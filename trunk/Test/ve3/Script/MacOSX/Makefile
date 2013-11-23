@@ -2,9 +2,9 @@ ifeq ($(strip $(AMJULIB_MAC_SCRIPT_PATH)),)
 $(error "Please set AMJULIB_MAC_SCRIPT_PATH in your environment.")
 endif
 
-VERSION		:=	0.8
+VERSION		:=	2.0
 
-APP		:=	ve2
+APP		:=	ve3
 APPNAME		:=	"Hungry People.app"
 
 BUILD		:=	../../../../Build/$(APP)/$(AMJU_BUILD_ARCH)

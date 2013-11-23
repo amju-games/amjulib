@@ -1,0 +1,41 @@
+// Guestbook 
+// version
+1
+
+// Element type
+gui-comp
+// Name
+home-page-comp
+// Num children
+2
+
+
+// Element type
+gui-text
+// Element name
+title-text
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+Your guestbook
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Back to Home Page
+// Font name, size
+arial, 1.5, sx=0.5
+
+
