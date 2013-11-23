@@ -241,7 +241,7 @@ protected:
 
   // Mesh data sent to AmjuGL
   // This changes every frame but by making it a member we don't keep reallocating.
-  //AmjuGL::Tris m_tris;
+  AmjuGL::Tris m_tris; 
   RCPtr<TriListDynamic> m_triList;
 };
 
