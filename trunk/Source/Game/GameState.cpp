@@ -14,6 +14,10 @@ GameState::GameState() :
 {
 }
 
+GameState::~GameState()
+{
+}
+
 void GameState::OnActive()
 {
   m_listener = new GameStateListener(this);
