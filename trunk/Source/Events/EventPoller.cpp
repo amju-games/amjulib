@@ -7,6 +7,8 @@
 #include "GameStateListener.h"
 #include <AmjuFinal.h>
 
+//#define EP_DEBUG
+
 namespace Amju
 {
 EventPollerImpl* EventPoller::GetImpl()
@@ -132,7 +134,7 @@ void EventPollerImpl::NotifyListenersWithPriority(Event* event, Listeners* pList
     if (it->first > eaten)
     {
       // This listener has a lower priority than a listener which ate the event
-#ifdef _DEBUG
+#ifdef EP_DEBUG
 Assert(prevlistener);
 std::cout << "Event eaten by listener " << typeid(*prevlistener).name() << ".\n";
 #endif
