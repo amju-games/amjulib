@@ -75,7 +75,7 @@ bool FileImplStd::OpenRead(const std::string& path, const std::string& filename,
 
   Assert(!m_file.is_open()); // already opened
 
-  int mode = ios::in;
+  std::ios_base::openmode mode = ios::in;
   if (isBinary)
   {
     mode |= ios::binary;
@@ -84,7 +84,7 @@ bool FileImplStd::OpenRead(const std::string& path, const std::string& filename,
 #ifdef WIN32
   m_file.open((path + filename).c_str(), mode);
 #else
-  m_file.open((path + filename).c_str(), (std::_Ios_Openmode)mode);
+  m_file.open((path + filename).c_str(), mode);
 #endif
   bool result = m_file.is_open();
 
@@ -113,7 +113,7 @@ bool FileImplStd::OpenWrite(
 
   Assert(!m_file.is_open()); // already opened
 
-  int mode = ios::out;
+  std::ios_base::openmode mode = ios::out;
   if (truncate)
   {
     mode |= ios::trunc; 
@@ -132,8 +132,8 @@ bool FileImplStd::OpenWrite(
   std::cout << "opening " << std::string(path + filename).c_str() << " for writing.\n";
 #endif
 
-#if defined(MINGW) || defined (MACOSX) || defined(IPHONE) || defined(GEKKO)
-  m_file.open((path + filename).c_str(), (std::_Ios_Openmode)mode);
+#if defined(MINGW) || defined (MACOSX) || defined(AMJU_IOS) || defined(GEKKO)
+  m_file.open((path + filename).c_str(), mode);
 #else
   m_file.open((path + filename).c_str(), mode);
 #endif

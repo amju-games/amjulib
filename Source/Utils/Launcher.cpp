@@ -22,12 +22,18 @@ Added to repository
 #ifdef WIN32
 #include <windows.h>
 #endif
+
 #ifdef MACOSX
 #include <unistd.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFUrl.h>
 #include <Carbon/Carbon.h>
 #endif
+
+#ifdef AMJU_IOS
+#include <unistd.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju
