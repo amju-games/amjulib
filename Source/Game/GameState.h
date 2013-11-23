@@ -11,7 +11,7 @@ class GameState : public EventListener
 {
 public:
   GameState();
-  virtual ~GameState() {}
+  virtual ~GameState();
 
   virtual void Update() = 0;
   virtual void Draw() = 0;
@@ -28,7 +28,7 @@ public:
 protected:
   GameState* m_prevState;
   int m_eventPriority; 
-  GameStateListener* m_listener; // forwards events to this state
+  RCPtr<GameStateListener> m_listener; // forwards events to this state
 };
 }
 
