@@ -91,6 +91,10 @@ Added to repository
 #include <Carbon/Carbon.h>
 #endif
 
+#ifdef AMJU_IOS
+#include <unistd.h>
+#endif
+
 #include <AmjuFinal.h>
 
 //#define DIRECTORY_DEBUG

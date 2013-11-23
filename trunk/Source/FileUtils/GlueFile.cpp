@@ -211,11 +211,11 @@ bool GlueFile::CreateGlueFile(const std::string gluefilename)
 {
   AMJU_CALL_STACK;
 
-  int mode = ios::out | ios::binary;
+  std::ios_base::openmode mode = ios::out | ios::binary;
 #ifdef MSVC
   m_gluefile.open(gluefilename.c_str(), mode);
 #else
-  m_gluefile.open(gluefilename.c_str(), (std::_Ios_Openmode)mode);
+  m_gluefile.open(gluefilename.c_str(), mode);
 #endif
 
   if (!m_gluefile.is_open())
@@ -236,7 +236,7 @@ bool GlueFile::SimpleOpen(const std::string gluefilename, bool read)
 {
   AMJU_CALL_STACK;
 
-  int mode = ios::binary;
+  std::ios_base::openmode mode = ios::binary;
   if (read)
   {
     mode |= ios::in;
@@ -251,7 +251,7 @@ bool GlueFile::SimpleOpen(const std::string gluefilename, bool read)
 #ifdef MSVC
   m_gluefile.open(fileAndPath.c_str(), mode);
 #else
-  m_gluefile.open(fileAndPath.c_str(), (std::_Ios_Openmode)mode);
+  m_gluefile.open(fileAndPath.c_str(), mode);
 #endif
 
   if (!m_gluefile.is_open())
