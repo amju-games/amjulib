@@ -752,9 +752,10 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
 
   // Create a list of tris for the current command
   // TODO Faster if this is member? (Won't keep reallocating)
-  AmjuGL::Tris tris;
+  //AmjuGL::Tris tris;
   //tris.reserve(numTris);
-    
+  m_tris.clear();
+  
   while (1)
   {
     // Get the command. The sign is used to flag FAN or STRIP. The abs value
@@ -791,12 +792,16 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
       glcs += 3;
       const uint32 vertexIndex = vert->vertexIndex; // Endianized up front
     
-      const Md2Vertex& vm1 = frame[vertexIndex];
-      const Md2Vertex& vm2 = nextFrame[vertexIndex];
+      const Md2Vertex& v1 = frame[vertexIndex];
+      const Md2Vertex& v2 = nextFrame[vertexIndex];
 
       // Interpolate between current and next frame, using 'between'.
-      Md2Vertex vm3;
-      Interpolate(vm1, vm2, between, &vm3);
+      //Interpolate(vm1, vm2, between, &vm3);
+      Md2Vertex vm3(
+        v1.m_pos[0] + between * (v2.m_pos[0] - v1.m_pos[0]),
+        v1.m_pos[1] + between * (v2.m_pos[1] - v1.m_pos[1]),
+        v1.m_pos[2] + between * (v2.m_pos[2] - v1.m_pos[2]), 
+        0, 1, 0 );
 
       AmjuGL::Vert av(vm3.m_pos[0], vm3.m_pos[1], vm3.m_pos[2], vert->s, vert->t,  0, 1, 0); 
 
@@ -810,7 +815,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[even ? 0 : 1]; 
           t.m_verts[1] = prevVerts[even ? 1 : 0]; 
           t.m_verts[2] = av; 
-          tris.push_back(t);
+          m_tris.push_back(t);
         }
 
         // Shift previous values
@@ -831,7 +836,7 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
           t.m_verts[0] = prevVerts[0]; 
           t.m_verts[1] = prevVerts[1]; 
           t.m_verts[2] = av; 
-          tris.push_back(t);
+          m_tris.push_back(t);
         }
         prevVerts[1] = av;
       }
@@ -858,13 +863,11 @@ for (int i = 0; i < numTris; i++)
 }
 */
 
-////    AmjuGL::DrawTriList(m_tris);
- 
   } // while (1)
   
   if (m_triList)
   {
-    m_triList->Set(tris);
+    m_triList->Set(m_tris);
     AmjuGL::Draw(m_triList);
   }
 
