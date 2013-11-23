@@ -43,7 +43,8 @@ public:
   struct Vert
   {
     Vert() {}
-    Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz);
+    Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz) :
+      m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v) {}
 
     // Order for D3D FVF
     float m_x, m_y, m_z, m_nx, m_ny, m_nz, m_u, m_v;
