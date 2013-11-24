@@ -21,6 +21,7 @@ ParticleEffect2d::ParticleEffect2d()
   m_size = 0;
   m_maxTime = 0;
   m_isDead = true; // ?
+  m_minY = 0;
 
   SetBlended(true);
 
@@ -50,10 +51,25 @@ bool ParticleEffect2d::Load(File* f)
     return false;
   }
 
-  //m_tris.resize(m_numParticles * 2);
+  m_tris.resize(m_numParticles * 2);
   m_particles.resize(m_numParticles);
 
   return true;
+}
+
+void ParticleEffect2d::Set(
+  const std::string& textureName, 
+  float size, float num, float maxTime, float minY)
+{
+  m_texture = (Texture*)TheResourceManager::Instance()->GetRes(textureName);
+  Assert(m_texture);
+  m_size = size;
+  m_numParticles = num;
+  m_maxTime = maxTime;
+  m_minY = minY;
+
+  m_tris.resize(m_numParticles * 2);
+  m_particles.resize(m_numParticles);
 }
 
 void ParticleEffect2d::Draw()
@@ -72,7 +88,6 @@ void ParticleEffect2d::Draw()
   AmjuGL::MultMatrix(m_combined); // NB combined
   m_texture->UseThisTexture();
 
-//  AmjuGL::DrawTriList(m_tris);
   AmjuGL::Draw(m_triList);
  
   AmjuGL::PopMatrix();
@@ -101,7 +116,7 @@ float ParticleEffect2d::NewTime() const
 
 void ParticleEffect2d::Recycle(Particle2d* p)
 {
-  p->m_pos = NewPos(); // was: Vec3f(m_local[12], m_local[13], m_local[14]);
+  p->m_pos = NewPos(); 
   p->m_time = NewTime();
 }
 
@@ -133,6 +148,12 @@ void ParticleEffect2d::Update()
       HandleDeadParticle(&p);
       // TODO continue ??
     }
+
+    if (p.m_pos.y < m_minY)
+    {
+      HandleMinY(&p);
+    }
+
     isDead &= p.m_isDead;
 
     p.m_vel += p.m_acc * dt;
@@ -149,8 +170,9 @@ void ParticleEffect2d::Update()
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
 
-  AmjuGL::Tris tris;
-  tris.resize(s * 2);
+  // Avoid reallocs
+  //AmjuGL::Tris tris;
+  m_tris.resize(s * 2);
 
   for (int i = 0; i < s; i++)
   {
@@ -169,18 +191,18 @@ void ParticleEffect2d::Update()
       AmjuGL::Vert(v3.x, v3.y, v3.z,   0, 0,   0, 1, 0)
     };
 
-    AmjuGL::Tri* tri = &tris[i * 2];
+    AmjuGL::Tri* tri = &m_tris[i * 2];
     tri->m_verts[0] = verts[0];
     tri->m_verts[1] = verts[1];
     tri->m_verts[2] = verts[2];
 
-    tri = &tris[i * 2 + 1];
+    tri = &m_tris[i * 2 + 1];
     tri->m_verts[0] = verts[0];
     tri->m_verts[1] = verts[2];
     tri->m_verts[2] = verts[3];
   }
 
-  m_triList->Set(tris);
+  m_triList->Set(m_tris);
 }
 
 void ParticleEffect2d::Start()

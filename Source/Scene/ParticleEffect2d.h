@@ -29,6 +29,12 @@ public:
   virtual void Draw();
   virtual void Update();
 
+  // Alternative to Load
+  void Set(const std::string& textureName, 
+    float particlesize, float numparticles, float maxTime, float minY);
+
+  void SetMinY(float minY) { m_minY = minY; }
+
   // Call to start effect
   void Start(); 
 
@@ -37,8 +43,12 @@ public:
   virtual Vec3f NewVel() const;
   virtual Vec3f NewAcc() const;
   virtual float NewTime() const;
+
   // Called when a particle time expires
   virtual void HandleDeadParticle(Particle2d*);
+
+  // Called when particle drops below min Y
+  virtual void HandleMinY(Particle2d*) {}
 
 protected:
   // Call from HandleDeadParticle to recycle 
@@ -49,12 +59,13 @@ private:
   PTexture m_texture;
   typedef std::vector<Particle2d> Particles;
   Particles m_particles;
-  //AmjuGL::Tris m_tris;
+  AmjuGL::Tris m_tris; // to avoid reallocating vector every frame
   RCPtr<TriListDynamic> m_triList;
   int m_numParticles;
   // Max time for all particles - after this, HandleDeadParticle is called
   float m_maxTime;
   float m_isDead; // if true, all particles are dead
+  float m_minY; // TODO Maybe a bounding box?
 };
 }
 
