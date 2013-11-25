@@ -38,13 +38,33 @@ protected:
   ConfigMap m_values;
 };
 
-// You can have multiple config files but there is one GameConfigFile which is used for
-//  game-global config, and is the default config file to use.
+// You can have multiple config files but there is one GameConfigFile 
+//  which is used for game-global config, and is the default 
+//  config file to use.
 class GameConfigFile : public ConfigFile
 {
 private:
   GameConfigFile() {}
   friend class Singleton<GameConfigFile>;
+
+public:
+  ~GameConfigFile() { Save(); }
+
+  // Set full path to config file at start up
+  void SetFilePath(const std::string& filepath) { m_filepath = filepath; }
+
+  bool Load()
+  {
+    return ConfigFile::Load(m_filepath, false);
+  }
+
+  bool Save()
+  {
+    return ConfigFile::Save(m_filepath, false);
+  }
+
+private:
+  std::string m_filepath;
 };
 
 typedef Singleton<GameConfigFile> TheGameConfigFile;
