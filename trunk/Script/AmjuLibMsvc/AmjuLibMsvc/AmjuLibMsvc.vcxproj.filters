@@ -882,6 +882,9 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\TriList.cpp">
       <Filter>AmjuGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Events\GameStateListener.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1666,6 +1669,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\TriList.h">
       <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Events\GameStateListener.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
