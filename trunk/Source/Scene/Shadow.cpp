@@ -222,10 +222,11 @@ void Shadow::RecalculateVerts()
 
   m_verts.clear();
 
-  const float x1 = m_oldx + m_oldsize * m_mult;
-  const float x2 = m_oldx - m_oldsize * m_mult;
-  const float z1 = m_oldz + m_oldsize * m_mult;
-  const float z2 = m_oldz - m_oldsize * m_mult;
+  Vec3f v(m_combined[12], m_combined[13], m_combined[14]);
+  const float x1 = v.x + m_oldsize * m_mult;
+  const float x2 = v.x - m_oldsize * m_mult;
+  const float z1 = v.z + m_oldsize * m_mult;
+  const float z2 = v.z - m_oldsize * m_mult;
 
   m_verts.push_back(Vec2f(x1, z1));
   m_verts.push_back(Vec2f(x1, z2));
