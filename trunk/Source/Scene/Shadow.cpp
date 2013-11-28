@@ -177,11 +177,6 @@ void Shadow::Recalc()
 
 void Shadow::Draw()
 {
-  DrawList();
-}
-
-void Shadow::Update()
-{
   if (m_size <= 0)
   {
     return;
@@ -198,6 +193,13 @@ void Shadow::Update()
     m_oldz = v.z;
     m_oldsize = m_size;
   }
+
+  DrawList();
+}
+
+void Shadow::Update()
+{
+  // Recalc in Draw, so if culled, we don't spend time recalculating
 }
 
 void Shadow::SetHeightRange(float up, float down)
@@ -223,10 +225,10 @@ void Shadow::RecalculateVerts()
   m_verts.clear();
 
   Vec3f v(m_combined[12], m_combined[13], m_combined[14]);
-  const float x1 = v.x + m_oldsize * m_mult;
-  const float x2 = v.x - m_oldsize * m_mult;
-  const float z1 = v.z + m_oldsize * m_mult;
-  const float z2 = v.z - m_oldsize * m_mult;
+  const float x1 = v.x + m_size * m_mult;
+  const float x2 = v.x - m_size * m_mult;
+  const float z1 = v.z + m_size * m_mult;
+  const float z2 = v.z - m_size * m_mult;
 
   m_verts.push_back(Vec2f(x1, z1));
   m_verts.push_back(Vec2f(x1, z2));
