@@ -232,6 +232,11 @@ std::cout << "Nope, no edge intersections!\n";
 
 void RBBox3::Update()
 {
+  // damping
+  m_angVel *= 0.99f;
+  m_torques *= 0.99f;
+  m_forces *= 0.99f;
+
   RigidBody::Update();
 
   // Update OBB

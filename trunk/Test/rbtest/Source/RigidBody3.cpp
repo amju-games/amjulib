@@ -22,7 +22,7 @@ void RigidBody::Update()
   Vec3f acc = m_forces * m_invMass;
   m_forces = Vec3f();
 
-  const Vec3f GRAVITY(0, -50.0f, 0); // TODO TEMP TEST
+  const Vec3f GRAVITY(0, -70.0f, 0); // TODO TEMP TEST
   if (m_invMass > 0)
   {
     if (!IsResting())
