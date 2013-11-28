@@ -17,7 +17,7 @@ void BaddieNode::Update()
   // Visible from player ?
   // TODO
 
-  m_aabb = *(m_baddie->GetAABB());
+  m_aabb = m_baddie->GetAABB();
 
   SpriteNode::Update();
 }

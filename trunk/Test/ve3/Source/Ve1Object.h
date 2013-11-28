@@ -77,8 +77,6 @@ public:
   // Call to set scene node, removing any old node from scene
   void SetSceneNode(SceneNode* n);
    
-  virtual AABB* GetAABB(); // overriding GameObject's impl
-
   bool IsHidden() const; // if true, object is invisible and does not interact with anything
   void SetHidden(bool);
 
@@ -121,8 +119,6 @@ protected:
 
   RCPtr<SceneNode> m_sceneNode;
   RCPtr<Shadow> m_shadow;
-
-  AABB m_aabb; 
 
   bool m_hidden; // if true, set scene node invisible
 

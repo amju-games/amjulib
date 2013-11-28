@@ -27,8 +27,6 @@ public:
 
   void OnPlayerCollision(Player* player);
 
-  AABB* GetAABB(); // could be zero if picked up, etc.
-
   virtual CollisionMesh* GetCollisionMesh();
 
 protected:
@@ -41,16 +39,6 @@ protected:
   Vec3f m_collMeshPos; 
   float m_collMeshRot;
 };
-
-//class CommandRotate : public GuiCommand
-//{
-//public:
-//  CommandRotate(Furniture* f);
-//  virtual bool Do();
-//
-//private:
-//  Furniture* m_f;
-//};
 
 }
 

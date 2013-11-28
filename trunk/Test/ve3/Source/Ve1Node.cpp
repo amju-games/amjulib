@@ -27,9 +27,8 @@ void Ve1Node::Draw()
     MultColour(Colour(0, 0, 1, 1)); // So visible, grey is not very noticeable
   }
 
-  Assert(m_obj->GetAABB());
-  DrawSolidAABB(*(m_obj->GetAABB()));
-  DrawAABB(*(m_obj->GetAABB()));
+  DrawSolidAABB(m_obj->GetAABB());
+  DrawAABB(m_obj->GetAABB());
 
   Vec2f screenpos;
   Vec3f pos = m_obj->GetPos();

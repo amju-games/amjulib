@@ -7,12 +7,13 @@ gui-comp
 // Name
 view-other-players-comp
 // Num children
-7
+6
 
+// Title bar - show this player's name
 // Element type
 gui-text
 // Element name
-title-bar-text
+playername-text
 // pos (coords are -1..1)
 -1.0, 1.0
 // size
@@ -21,20 +22,6 @@ title-bar-text
 Other players
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
-
-
-// Element type
-gui-text
-// Element name
-playername-text
-// pos (coords are -1..1)
--1.0, 0.0
-// size
-0.8, 0.1
-// Text
-Name
-// Font name, size
-arial, 1.0, fgcol=ffffff
 
 
 // element type
@@ -48,7 +35,7 @@ back-button
 // Image
 gui-button-4.png
 // Text
-Back to Home Page
+Back to my Home Page
 // Font name, size
 arial, 1.5, sx=0.5
 

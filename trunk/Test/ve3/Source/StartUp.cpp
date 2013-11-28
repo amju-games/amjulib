@@ -21,7 +21,7 @@
 #include "JoystickToCursor.h" 
 #include "ROConfig.h"
 #include "Version.h"
-#include "BruteForce.h"
+#include "Ve1BruteForce.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -105,7 +105,7 @@ void StartUpAfterCreateWindow()
 
   // Set up collision system
   // TODO SAP instead
-  CollisionDetector* bf = new BruteForce; 
+  CollisionDetector* bf = new Ve1BruteForce; 
   TheCollisionManager::Instance()->SetCollisionDetector(bf);
 
   // Start with state that copies assets to Save Dir

@@ -1,16 +1,19 @@
 #include <AmjuFirst.h>
-#include "BruteForce.h"
+#include <Game.h>
+#include "Ve1BruteForce.h"
 #include "CollisionManager.h"
 #include "Ve1Object.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-void BruteForce(GameObjects* gameobjs)
+void Ve1BruteForce::Update()
 {
+  static Game* game = TheGame::Instance();
+  GameObjects* gameobjs = game->GetGameObjects();
+
   // Copy so iterator not invalidated
-  static GameObjects gos; // static to reduce reallocs
-  gos = *gameobjs;
+  GameObjects gos(*gameobjs);
 
   for (GameObjects::iterator it = gos.begin(); it != gos.end(); ++it)
   {
@@ -36,10 +39,10 @@ void BruteForce(GameObjects* gameobjs)
         continue;
       }
 
-      AABB* aabb1 = go1->GetAABB();
-      AABB* aabb2 = go2->GetAABB();
+      const AABB& aabb1 = go1->GetAABB();
+      const AABB& aabb2 = go2->GetAABB();
 
-      if (aabb1 && aabb2 && aabb1->Intersects(*aabb2))
+      if (aabb1.Intersects(aabb2))
       {
         TheCollisionManager::Instance()->HandleCollision(go1, go2);
       }

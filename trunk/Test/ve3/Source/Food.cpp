@@ -151,7 +151,7 @@ void FoodManager::Update()
   static const float YSIZE = ROConfig()->GetFloat("food-aabb-y", 10.0f);
   static const float ZSIZE = ROConfig()->GetFloat("food-aabb-z", 40.0f);
 
-  GetAABB()->Set(
+  m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - ZSIZE, m_pos.z + ZSIZE);

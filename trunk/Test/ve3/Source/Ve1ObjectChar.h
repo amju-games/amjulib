@@ -23,8 +23,6 @@ public:
 
   virtual void MoveTo(const Vec3f& newPos);
 
-  virtual AABB* GetAABB();
-
   bool IsMoving() const;
 
   // Get where we are headed

@@ -1,11 +1,15 @@
 #ifndef BRUTE_FORCE_H_INCLUDED
 #define BRUTE_FORCE_H_INCLUDED
 
-#include <GameObject.h>
+#include <CollisionManager.h>
 
 namespace Amju
 {
-void BruteForce(GameObjects* gameObjects);
+class Ve1BruteForce : public CollisionDetector
+{
+public:
+  virtual void Update();
+};
 }
 
 #endif

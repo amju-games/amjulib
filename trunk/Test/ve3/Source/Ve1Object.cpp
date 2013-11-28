@@ -65,11 +65,6 @@ void Ve1Object::SetHidden(bool b)
   }
 }
 
-AABB* Ve1Object::GetAABB()
-{
-  return &m_aabb;
-}
-
 void Ve1Object::SetSceneNode(SceneNode* n)
 {
   // Remove any existing node from scene graph

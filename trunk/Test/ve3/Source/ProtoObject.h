@@ -14,15 +14,11 @@ public:
   ProtoObject();
   virtual const char* GetTypeName() const;
   virtual void OnLocationEntry();
-  virtual AABB* GetAABB();
   virtual void Update();
 
   // TODO Can't use SetLocation() in base class because this object is not known by ObjectManager.
   // ..so maybe change that..
   void SetProtoLocation(int loc);
-
-protected:
-  AABB m_aabb;
 };
 }
 
