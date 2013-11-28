@@ -9,6 +9,7 @@ namespace Amju
 {
 static float yrot = 0;
 
+/*
 bool GameStateListener::OnQuitEvent()
 {
   return TheGame::Instance()->OnQuitEvent();
@@ -28,12 +29,13 @@ bool GameStateListener::OnKeyEvent(const KeyEvent& ke)
 {
   return m_state->OnKeyEvent(ke);
 }
+*/
 
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f)
 {
   m_nextState = 0;
-  m_listener = new GameStateListener(this);
-  TheEventPoller::Instance()->AddListener(m_listener); // TODO use OnActive/OnDeactive
+//  m_listener = new GameStateListener(this);
+//  TheEventPoller::Instance()->AddListener(m_listener); // TODO use OnActive/OnDeactive
 }
 
 void GSBase::Draw()

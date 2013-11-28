@@ -113,16 +113,20 @@ void MakeBox2(const Vec2f& pos, float rads)
   AddToSceneGraph(rb);
 }
 
+float Rand(float min, float max)
+{
+  float d = max - min;
+  float r = (float)rand() / (float)RAND_MAX;
+  return r * d + min;
+}
+
 RBBox3* MakeBox3(const Vec3f& pos)
 {
   RBBox3* rb = new RBBox3;
   rb->SetPos(pos);
   //rb->SetSize(Vec3f(2, 2, 2));
 
-  rb->SetSize(Vec3f(
-    (float)(rand() % 2 + 1), 
-    (float)(rand() % 3 + 1),
-    (float)(rand() % 4 + 1)));
+  rb->SetSize(Vec3f(Rand(1.0f, 3.0f), Rand(1.0f, 3.0f), Rand(1.0f, 3.0f)));
   // Work out mass from volume ?
 
   Quaternion q;
