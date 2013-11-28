@@ -9,7 +9,6 @@ class BruteForce : public CollisionDetector
 {
 public:
   virtual void Update();
-  //void BruteForce(GameObjects* gameObjects);
 };
 }
 
