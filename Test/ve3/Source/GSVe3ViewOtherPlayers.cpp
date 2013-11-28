@@ -154,10 +154,10 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
   // Check we have some
   Player* p = GetLocalPlayer();
   Assert(p);
-  if (p->Exists(HEALTH_KEY))  
+  if (p->Exists(FOOD_STORED_KEY))  
   {
-    int health = ToInt(p->GetVal(HEALTH_KEY));
-    if (health < 1)
+    int food = ToInt(p->GetVal(FOOD_STORED_KEY));
+    if (food < 1)
     {
       // Show lurk msg - can't give food!
       LurkMsg lm("You don't have any food to give!", LURK_FG, LURK_BG, AMJU_CENTRE); 
@@ -165,17 +165,22 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
     }
     else
     {
-      // Decremenet local player health, add one to this other player's health
-      ChangePlayerCount(HEALTH_KEY, -1);
+      // Decremenet local player food, add one to the other player's health
+      ChangePlayerCount(FOOD_STORED_KEY, -1);
       ChangeObjCount(m_player->GetId(), HEALTH_KEY, +1);
 
-      // Immediately change local copies of the data
-      p->SetKeyVal(HEALTH_KEY, ToString(health - 1));
-      m_player->SetKeyVal(HEALTH_KEY, ToString(m_player->GetHealth() + 1));
+      // Immediately change local copies of the data - in ChangeObjCount
+//      p->SetKeyVal(HEALTH_KEY, ToString(health - 1));
+//      m_player->SetKeyVal(HEALTH_KEY, ToString(m_player->GetHealth() + 1));
 
       ShowPlayer(m_player, m_gui); // to update GUI
 
       TheSoundManager::Instance()->PlayWav("sound/kiss.wav");
+
+      std::string str = "You gave some food to " + m_player->GetName() + "!";
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+
 
       // TODO Add a message (to guestbook?) so player will know what happened
     }
@@ -202,13 +207,17 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
       ChangeObjCount(m_player->GetId(), TREASURE_KEY, +1);
 
       // Immediately change local copies of the data
-      p->SetKeyVal(TREASURE_KEY, ToString(tr - 1));
-      int otherTr = ToInt(m_player->GetVal(TREASURE_KEY));
-      m_player->SetKeyVal(TREASURE_KEY, ToString(otherTr + 1));
+//      p->SetKeyVal(TREASURE_KEY, ToString(tr - 1));
+//      int otherTr = ToInt(m_player->GetVal(TREASURE_KEY));
+//      m_player->SetKeyVal(TREASURE_KEY, ToString(otherTr + 1));
 
       ShowPlayer(m_player, m_gui); // to update GUI
 
       TheSoundManager::Instance()->PlayWav("sound/cashreg.wav");
+
+      std::string str = "You gave some treasure to " + m_player->GetName() + "!";
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
 
       // TODO Add a message (to guestbook?) so player will know what happened
     }

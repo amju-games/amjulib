@@ -19,7 +19,7 @@ public:
 
   virtual void Update()
   {
-    m_aabb = *(m_bullet->GetAABB());
+    m_aabb = m_bullet->GetAABB();
     SpriteNode::Update();
   }
 
@@ -57,13 +57,10 @@ void Bullet::Update()
     m_sceneNode->SetLocalTransform(m);
   }
 
-  if (GetAABB())
-  {
-    GetAABB()->Set(
-      m_pos.x - BULLET_SIZE, m_pos.x + BULLET_SIZE,
-      m_pos.y, m_pos.y + BULLET_SIZE,
-      m_pos.z - BULLET_SIZE, m_pos.z + BULLET_SIZE);
-  }
+  m_aabb.Set(
+    m_pos.x - BULLET_SIZE, m_pos.x + BULLET_SIZE,
+    m_pos.y, m_pos.y + BULLET_SIZE,
+    m_pos.z - BULLET_SIZE, m_pos.z + BULLET_SIZE);
 }
 
 void Bullet::Destroy()

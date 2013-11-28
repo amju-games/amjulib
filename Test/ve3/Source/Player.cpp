@@ -417,7 +417,7 @@ void Player::SetKeyVal(const std::string& key, const std::string& val)
   {
     // Set health if we are not the local player. This is so we can
     //  see the health of other players
-    if (!IsLocalPlayer())
+    //???if (!IsLocalPlayer())
     {
       m_health = ToInt(val);
     }
@@ -541,7 +541,7 @@ void Player::Update()
     float xsize = XSIZE * scale.x;
     float zsize = ZSIZE * scale.y;
 
-    GetAABB()->Set(
+    m_aabb.Set(
       m_pos.x - xsize, m_pos.x + xsize,
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - zsize, m_pos.z + zsize);
@@ -625,7 +625,7 @@ void Player::Update()
     if (g)
     {
       const AABB& aabb = g->GetAABB();
-      if (!GetAABB()->Intersects(aabb))
+      if (!GetAABB().Intersects(aabb))
       {
         // No longer intersecting portal
         m_ignorePortalId = -1;
@@ -730,6 +730,7 @@ int Player::GetFoodRecvCount()
 }
 */
 
+/*
 void Player::EatFood(Food* f)
 {
   Ve1Object* owner = f->GetOwner();
@@ -752,24 +753,6 @@ void Player::EatFood(Food* f)
 
   std::string recipName = GetPlayerName(GetId());
 
-  /*
-  // Show msg to local player
-  LurkMsg lm("You gave some food to " + recipName + "!", 
-    LURK_FG, LURK_BG, AMJU_CENTRE); 
-  TheLurker::Instance()->Queue(lm);    
-  */
-
-  /*
-  // Send message from 'the game' to this (recipient) player
-  std::string otherPlayer = GetPlayerName(owner->GetId());
-  if (otherPlayer.empty())
-  {
-    otherPlayer = "That other player";
-  }
-  // TODO no good, should be only one message however many foods are given.
-  TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, GetId(), otherPlayer + " gave you some food!");
-  */
-
   std::string otherPlayer = GetPlayerName(owner->GetId());
   if (otherPlayer.empty())
   {
@@ -781,9 +764,13 @@ void Player::EatFood(Food* f)
   f->SetHidden(true);
   TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
 }
+*/
 
 void Player::OnCollidePlayer(Player* otherPlayer)
 {
+  // Ve3: not expecting this to happen!
+  Assert(0);
+
   if (!IsLocalPlayer() && otherPlayer->IsLocalPlayer())
   {
     otherPlayer->OnCollidePlayer(this);
@@ -792,6 +779,7 @@ void Player::OnCollidePlayer(Player* otherPlayer)
 
   std::cout << "Local player collided with player " << otherPlayer->m_name << "\n";
 
+/*
   if (m_carriedFood.empty())
   {
     std::cout << "Bad luck, we don't have food to give.\n";
@@ -802,12 +790,37 @@ void Player::OnCollidePlayer(Player* otherPlayer)
   Assert(f);
   m_carriedFood.pop_back(); // it's a deque, we add with push_front
   otherPlayer->EatFood(f);
+*/
+}
+
+void OnEatNo()
+{
+  LurkMsg lm("OK, you can eat it later, or give it to someone else if you like!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+  TheLurker::Instance()->Queue(lm);    
+  // Inc player food count
+  ChangePlayerCount(FOOD_STORED_KEY, +1);
+}
+
+void OnEatYes()
+{
+  // TODO Different health points for different food types?
+  LurkMsg lm("Yum yum! You got +1 health point!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+  TheLurker::Instance()->Queue(lm);    
+
+  // TODO This must update the server but immediately update on the client
+  ChangePlayerCount(HEALTH_KEY, +1);
 }
 
 void Player::OnCollideFood(Food* f)
 {
   Assert(!f->IsHidden());
 
+  // New for VE3:
+  f->SetHidden(true);
+  // You can give this to someone, keep it, or eat it now (increasing health)
+  TheLurker::Instance()->ShowYesNo("You picked up some food! Would you like to eat it now?", LURK_FG, LURK_BG, OnEatNo, OnEatYes);
+
+/*
   // Single player mode: eat the food.
   GameMode gm = GetGameMode();
   if (gm == AMJU_MODE_SINGLE)
@@ -845,14 +858,14 @@ void Player::OnCollideFood(Food* f)
       // TODO Sound every time
       TheSoundManager::Instance()->PlayWav("sound/pickup.wav"); // TODO
 
-      /* Not:
-      LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-      */
+      // Not:
+      //LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      //TheLurker::Instance()->Queue(lm);    
       f->SetOwner(this);
       m_carriedFood.push_front(f);
     }
   }  
+*/
 
   // TODO Given and received counts
   //gsm->SetFoods(GetFoodRecvCount());    

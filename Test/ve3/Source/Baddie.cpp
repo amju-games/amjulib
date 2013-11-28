@@ -62,24 +62,17 @@ void Baddie::Update()
     m_sceneNode->SetLocalTransform(m);
   }
 
-  if (GetAABB())
-  {
-    // Make bounding box smaller to give player the benefit of the doubt
-    float x = m_size.x * 0.4f;
-    float y = m_size.y * 0.4f;
+  // Make bounding box smaller to give player the benefit of the doubt
+  float x = m_size.x * 0.4f;
+  float y = m_size.y * 0.4f;
 
-    static const float YSIZE = 50.0f;
+  static const float YSIZE = 50.0f;
 
-    GetAABB()->Set(
-      m_pos.x - x, m_pos.x + x,
-      m_pos.y, m_pos.y + YSIZE,
-      m_pos.z - y, m_pos.z + y);
+  m_aabb.Set(
+    m_pos.x - x, m_pos.x + x,
+    m_pos.y, m_pos.y + YSIZE,
+    m_pos.z - y, m_pos.z + y);
 
-    //if (m_effect)
-    //{
-    //  *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
-    //}
-  }
 }
 
 const std::string& Baddie::GetAttackString() const

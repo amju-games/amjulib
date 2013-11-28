@@ -20,16 +20,16 @@ void CollideObjectFurniture(GameObject* go1, GameObject* go2)
   */
 
   // Intersecton region
-  AABB ir = furn->GetAABB()->Intersection(*(go->GetAABB()));
+  AABB ir = furn->GetAABB().Intersection(go->GetAABB());
   Vec3f goPos = go->GetPos();
   const Vec3f& oldPos = go->GetOldPos();
 
-  AABB oldBox = *(go->GetAABB());
+  AABB oldBox = go->GetAABB();
   Vec3f move = oldPos - goPos;
   oldBox.Translate(move);
   // Oldbox should not be intersecting in one or more axes
 
-  const AABB& fBox = *(furn->GetAABB());
+  const AABB& fBox = furn->GetAABB();
 
   Vec3f penDist(
     ir.GetMax(0) - ir.GetMin(0), 

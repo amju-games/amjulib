@@ -232,7 +232,7 @@ void Ve1ObjectChar::Update()
 
     Vec2f scale = GetScale();
 
-    GetAABB()->Set(
+    m_aabb.Set(
       m_pos.x - XSIZE * scale.x * 0.5f, m_pos.x + XSIZE * scale.x * 0.5f,
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - ZSIZE * scale.y, m_pos.z + ZSIZE);
@@ -326,18 +326,18 @@ void Ve1ObjectChar::MoveTo(const Vec3f& newpos)
   sqLenLastTime = sqLen;
 }
 
-AABB* Ve1ObjectChar::GetAABB()
-{
-  if (!m_sceneNode)
-  {
-    return 0;
-  }
-
-  Assert(m_sceneNode);
-  Assert(m_sceneNode->GetAABB());
-
-  return const_cast<AABB*>(m_sceneNode->GetAABB());
-}
+//AABB* Ve1ObjectChar::GetAABB()
+//{
+//  if (!m_sceneNode)
+//  {
+//    return 0;
+//  }
+//
+//  Assert(m_sceneNode);
+//  Assert(m_sceneNode->GetAABB());
+//
+//  return const_cast<AABB*>(m_sceneNode->GetAABB());
+//}
 
 void Ve1ObjectChar::ShowAttacked()
 {

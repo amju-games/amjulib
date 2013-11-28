@@ -2,35 +2,12 @@
 #include "HeartCount.h"
 #include "LocalPlayer.h"
 #include "Ve1OnlineReqManager.h"
+#include "ObjectManager.h"
+#include "Ve1Object.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-////static const char* FOOD_KEY = "food";
-////
-////bool GetFoodCount(int* result)
-////{
-////  return GetPlayerCount(FOOD_KEY, result);
-////}
-////
-////bool ChangeFoodCount(int delta)
-////{
-////  return ChangePlayerCount(FOOD_KEY, delta);
-////}
-////
-////
-////static const char* STAMINA_KEY = "stamina";
-////
-////bool GetHeartCount(int* result)
-////{
-////  return GetPlayerCount(STAMINA_KEY, result);
-////}
-////bool ChangeHeartCount(int delta)
-////{
-////  return ChangePlayerCount(STAMINA_KEY, delta);
-////}
-
-
 bool GetPlayerCount(const std::string& key, int* result)
 {
   Player* p = GetLocalPlayer();
@@ -88,6 +65,16 @@ std::cout << "Discarding zero change for key: " << key << " obj: " << objId << "
 
   TheVe1ReqManager::Instance()->AddReq(new ReqChangeValue(url), MAX_CHANGE_HEARTS);
 
+  // Immediately change object on this local client
+  GameObject* go = TheObjectManager::Instance()->GetGameObject(objId);
+  Ve1Object* ww = dynamic_cast<Ve1Object*>(go);
+  Assert(ww);
+  int newVal = delta;
+  if (ww->Exists(key))
+  {
+    newVal = ToInt(ww->GetVal(key)) + delta;
+  }
+  ww->SetKeyVal(key, ToString(newVal));
   return true;
 }
 }

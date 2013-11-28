@@ -33,9 +33,8 @@ public:
     Vec3f pos = m_obj->GetPos();
     Project(pos, &screenpos);
 
-    Assert(m_obj->GetAABB());
-    DrawSolidAABB(*(m_obj->GetAABB()));
-    DrawAABB(*(m_obj->GetAABB()));
+    DrawSolidAABB(m_obj->GetAABB());
+    DrawAABB(m_obj->GetAABB());
 
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
@@ -96,11 +95,6 @@ ProtoObject::ProtoObject()
 //  m_sceneNode = psn;
 }
 
-AABB* ProtoObject::GetAABB()
-{
-  return &m_aabb;
-}
-
 void ProtoObject::SetProtoLocation(int loc)
 {
   m_location = loc;
@@ -112,7 +106,7 @@ void ProtoObject::Update()
 
   static const float XSIZE = 10.0f;
   static const float YSIZE = 20.0f;
-  GetAABB()->Set(
+  m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - XSIZE, m_pos.z + XSIZE);

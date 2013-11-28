@@ -163,7 +163,7 @@ void Treasure::Update()
       m_sceneNode = 0;
     }
   }
-  GetAABB()->Set(
+  m_aabb.Set(
     m_pos.x - XSIZE, m_pos.x + XSIZE,
     m_pos.y,         m_pos.y + YSIZE,
     m_pos.z - XSIZE, m_pos.z + XSIZE);

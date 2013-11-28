@@ -367,21 +367,21 @@ void Furniture::OnPlayerCollision(Player* player)
   // We might get pushed away from player, or player could move back -- depends on our "mass".
 }
 
-AABB* Furniture::GetAABB()
-{
-  if (!m_sceneNode) 
-  {
-    return 0;
-  }
-
-  if (m_pickupId != 0)
-  {
-//std::cout << *this << " is carried, so no AABB\n";
-
+//AABB* Furniture::GetAABB()
+//{
+//  if (!m_sceneNode) 
+//  {
 //    return 0;
-  }
-
-  return const_cast<AABB*>(m_sceneNode->GetAABB());
-}
+//  }
+//
+//  if (m_pickupId != 0)
+//  {
+////std::cout << *this << " is carried, so no AABB\n";
+//
+////    return 0;
+//  }
+//
+//  return const_cast<AABB*>(m_sceneNode->GetAABB());
+//}
 }
 

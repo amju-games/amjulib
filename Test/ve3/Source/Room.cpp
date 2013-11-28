@@ -169,7 +169,7 @@ void Room::Update()
         Vec2f& pos = tilevec[i].m_pos;
         AABB aabb(pos.x * m_tilesize.x, (pos.x + 1) * m_tilesize.x, 
           0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
-        if (aabb.Intersects(*(p->GetAABB())))
+        if (aabb.Intersects(p->GetAABB()))
         {
           // Slow down if in contact with obstacle??
           //Vec3f vel = p->GetVel();
