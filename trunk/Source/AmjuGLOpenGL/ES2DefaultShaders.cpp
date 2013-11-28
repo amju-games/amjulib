@@ -20,14 +20,24 @@ varying lowp vec2 uvVarying;\n\
 uniform mat4 modelViewProjectionMatrix;\n\
 uniform mat3 normalMatrix;\n\
 uniform lowp vec4 colour;\n\
+uniform lowp float useLighting;\n\
+uniform int useSphereMap;\n\
 void main()\n\
 {\n\
     vec3 eyeNormal = normalMatrix * normal;\n\
     vec3 lightPosition = vec3(1.0, 1.0, 1.0);\n\
-    vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);\n\
-    float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)));\n\
-    colorVarying = colour * nDotVP;\n\
+    float nDotVP = max(useLighting, dot(normalize(eyeNormal), normalize(lightPosition)));\n\
+    colorVarying = colour * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
+    if (useSphereMap == 1)\n\
+    {\n\
+        // sphere map\n\
+        lowp vec3 view = vec3(0, 0, 1);\n\
+        lowp vec3 r = reflect(view, normal);\n\
+        r.z += 1.0;\n\
+        r = normalize(r);\n\
+        uvVarying = r.xy * 0.5 + 0.5;\n\
+    }\n\
     gl_Position = modelViewProjectionMatrix * position;\n\
 }\
 ";
@@ -82,7 +92,10 @@ void main()\n\
 }\
 ";
   
-const char* DEFAULT_VERT_SRC = DEFAULT_VERT_SRC_PHONG;
-const char* DEFAULT_FRAG_SRC = DEFAULT_FRAG_SRC_PHONG;
+//const char* DEFAULT_VERT_SRC = DEFAULT_VERT_SRC_PHONG;
+//const char* DEFAULT_FRAG_SRC = DEFAULT_FRAG_SRC_PHONG;
+
+const char* DEFAULT_VERT_SRC = DEFAULT_VERT_SRC_GOURAUD;
+const char* DEFAULT_FRAG_SRC = DEFAULT_FRAG_SRC_GOURAUD;
 }
 
