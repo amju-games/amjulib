@@ -23,7 +23,8 @@ ConfigFile* ROConfig()
   if (!cf)
   {
     cf = new ConfigFile;
-    if (!cf->Load(s_ROConfigFilename))
+    bool NO_ROOT = false;
+    if (!cf->Load(s_ROConfigFilename, NO_ROOT))
     {
       Assert(0);
     }
