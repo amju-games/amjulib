@@ -5,8 +5,10 @@
 
 namespace Amju
 {
-// Read-only config: don't save to it, use Game Config File.
-// Could be downloaded from server.
+void SetROConfigFilename(const std::string& s);
+
+// Read-only config: don't save to it, use Game Config File for settable values.
+// This file could be downloaded from server, but is not written to by the client.
 ConfigFile* ROConfig();
 }
 

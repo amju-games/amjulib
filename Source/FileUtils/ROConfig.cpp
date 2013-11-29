@@ -5,12 +5,17 @@
 
 namespace Amju
 {
-static const char* RO_CONFIG_FILENAME = "roconfig.txt";
+static std::string s_ROConfigFilename = "roconfig.txt";
 
 //void SaveROConfig()
 //{
 //  ROConfig()->Save(RO_CONFIG_FILENAME);
 //}
+
+void SetROConfigFilename(const std::string& s)
+{
+  s_ROConfigFilename = s;
+}
 
 ConfigFile* ROConfig()
 {
@@ -18,7 +23,7 @@ ConfigFile* ROConfig()
   if (!cf)
   {
     cf = new ConfigFile;
-    if (!cf->Load(RO_CONFIG_FILENAME))
+    if (!cf->Load(s_ROConfigFilename))
     {
       Assert(0);
     }
