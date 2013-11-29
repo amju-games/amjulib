@@ -618,7 +618,11 @@ Time GetFileModifiedTime(const std::string& filename)
 {
   struct stat buf;
   stat(filename.c_str(), &buf);
+#ifdef AMJU_IOS
+  return Time((unsigned int)buf.st_mtimespec.tv_sec);
+#else
   return Time((unsigned int)buf.st_mtime);
+#endif
 }
 
 }
