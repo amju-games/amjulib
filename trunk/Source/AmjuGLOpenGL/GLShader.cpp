@@ -220,17 +220,25 @@ std::string GLShader::GetErrorString()
   return m_errorStr; 
 }
 
+static uint32 prevHandle = 0;
+
 void GLShader::Begin()
 {
   AMJU_CALL_STACK;
 
-  glUseProgram(m_programHandle);
+  // Don't call glUseProgram if we are already using it
+  if (prevHandle != m_programHandle)
+  {
+    glUseProgram(m_programHandle);
+    prevHandle = m_programHandle;
+  }
 }
 
 void GLShader::End()
 {
   AMJU_CALL_STACK;
 
+  prevHandle = 0;
   glUseProgram(0);
 }
   
