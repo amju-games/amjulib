@@ -885,6 +885,9 @@
     <ClCompile Include="..\..\..\Source\Events\GameStateListener.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\FileUtils\ROConfig.cpp">
+      <Filter>FileUtils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1672,6 +1675,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Events\GameStateListener.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\FileUtils\ROConfig.h">
+      <Filter>FileUtils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
