@@ -9,6 +9,27 @@ namespace Amju
 {
 const char* GuiDialog::NAME = "gui-dialog";
 
+GuiDialog::GuiDialog()
+{
+  m_hasTitleBar = true;
+}
+
+void GuiDialog::SetTitle(const std::string& t)
+{
+  m_title.SetBgCol(Colour(0.25f, 0.25f, 0.25f, 1));
+  m_title.SetDrawBg(true);
+  m_title.SetFgCol(Colour(1, 1, 1, 1));
+  m_title.SetTextSize(1.0f);
+  m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
+  m_title.SetSize(Vec2f(GetSize().x, 0.1f));
+  m_title.SetText(t);
+}
+
+void GuiDialog::SetHasTitleBar(bool b)
+{
+  m_hasTitleBar = b;
+}
+
 bool GuiDialog::Load(File* f)
 {
   // Read in name, then filename of layout file. Load GUI widgets from this file.
@@ -74,8 +95,12 @@ void GuiDialog::Draw()
   DrawSolidRect(r);
   AmjuGL::PopAttrib(); 
   
-
   GuiWindow::Draw();
+
+  if (m_hasTitleBar)
+  {
+    m_title.Draw();
+  }
 }
 }
 
