@@ -47,10 +47,12 @@ bool Billboard::Load(File* f)
 void Billboard::Draw()
 {
   Matrix mat;
-  mat.ModelView(); // Get Modelview matrix
-  mat = m_combined * mat;
+  mat.ModelView(); 
+  mat = m_combined * mat; // Checked - this is correct - j.c. Nov 2013
   Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
+  up.Normalise();
+  right.Normalise();
 
   AmjuGL::Tris tris;
   tris.resize(2);
