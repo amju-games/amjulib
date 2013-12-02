@@ -217,7 +217,7 @@ void SceneNode::CombineTransform()
 {
   if (m_parent)
   {
-    m_combined = m_parent->m_combined * m_local;
+    m_combined = m_local * m_parent->m_combined;
   }
   else
   {
