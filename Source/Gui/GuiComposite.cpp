@@ -98,31 +98,41 @@ bool GuiComposite::LoadChildren(File* f)
   m_children.reserve(num);
   for (int i = 0; i < num; i++)
   {
-    std::string s;
-    if (!f->GetDataLine(&s))
+    if (!LoadOneChild(f))
     {
-std::cout << "GUI composite: Child " << i << " of " << num 
-  << ": Expected more data, but have reached end of file.\n";
-      Assert(0);
       return false;
     }
-    PGuiElement e = TheGuiFactory::Instance()->Create(s);
-    if (!e)
-    {
-      f->ReportError("Failed to create GUI element of type " + s);
-      Assert(0);
-      return false;
-    }
-    Assert(e);
-    e->SetParent(this);
-    if (!e->Load(f))
-    {
-      f->ReportError("Failed to load child of GUI composite.");
-      return false;
-    }
-
-    AddChild(e); // subclasses can override this and resize etc
   }
+  return true;
+}
+
+bool GuiComposite::LoadOneChild(File* f)
+{
+  std::string s;
+  if (!f->GetDataLine(&s))
+  {
+std::cout << "GUI composite: Child "
+  << ": Expected more data, but have reached end of file.\n";
+    Assert(0);
+    return false;
+  }
+  PGuiElement e = TheGuiFactory::Instance()->Create(s);
+  if (!e)
+  {
+    f->ReportError("Failed to create GUI element of type " + s);
+    Assert(0);
+    return false;
+  }
+  Assert(e);
+  e->SetParent(this);
+  if (!e->Load(f))
+  {
+    f->ReportError("Failed to load child of GUI composite.");
+    return false;
+  }
+
+  AddChild(e); // subclasses can override this and resize etc
+ 
   return true;
 }
 

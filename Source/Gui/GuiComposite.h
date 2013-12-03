@@ -42,6 +42,7 @@ public:
 
 protected:
   bool LoadChildren(File*);
+  bool LoadOneChild(File*);
 
   GuiElements m_children;
 };
