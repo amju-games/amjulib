@@ -248,7 +248,7 @@ void AmjuGL::Viewport(int x, int y, int w, int h)
   Assert(w > 0);
   Assert(h > 0);
 //  int screenX = Screen::X();
-  int screenY = Screen::Y();
+//  int screenY = Screen::Y();
 //  Assert(w <= screenX);
 //  Assert(h <= screenY);
 
