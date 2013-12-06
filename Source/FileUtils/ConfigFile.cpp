@@ -6,6 +6,8 @@
 #include <iostream>
 #include <AmjuFinal.h>
 
+#define CONFIG_FILE_DEBUG
+
 using namespace std;
 
 namespace Amju
@@ -94,6 +96,9 @@ bool ConfigFile::Load(const std::string& filename, bool useRoot)
     // Set value in map.
     Set(key, value);
 
+#ifdef CONFIG_FILE_DEBUG
+    std::cout << "Config file load: key: " << key << " value: " << value << "\n";
+#endif
   }
   // No more tokens. This is ok, we have finished.
   return true;
