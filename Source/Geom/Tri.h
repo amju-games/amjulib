@@ -21,6 +21,8 @@ struct Tri
   void Draw();
 
   Vec3f m_verts[3];
+
+  Vec3f CalcNormal() const;
 };
 }
 

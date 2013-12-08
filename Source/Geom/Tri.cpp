@@ -21,6 +21,15 @@ void Tri::Translate(const Vec3f& v)
   }
 }
 
+Vec3f Tri::CalcNormal() const
+{
+  Vec3f v1 = m_verts[1] - m_verts[0];
+  Vec3f v2 = m_verts[2] - m_verts[0];
+  Vec3f n = CrossProduct(v1, v2);
+  n.Normalise();
+  return n;
+}
+
 void Tri::Draw()
 {
   AmjuGL::Vec3 v0(m_verts[0].x, m_verts[0].y, m_verts[0].z);
