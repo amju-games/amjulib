@@ -210,6 +210,7 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiDataDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiElastic.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
@@ -480,6 +481,7 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiDataDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataLineDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiElastic.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileBrowser.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h" />

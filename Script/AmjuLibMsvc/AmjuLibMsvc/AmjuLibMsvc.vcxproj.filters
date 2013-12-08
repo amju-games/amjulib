@@ -888,6 +888,9 @@
     <ClCompile Include="..\..\..\Source\FileUtils\ROConfig.cpp">
       <Filter>FileUtils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiElastic.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1678,6 +1681,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\FileUtils\ROConfig.h">
       <Filter>FileUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiElastic.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
