@@ -130,6 +130,13 @@ void Quaternion::SetAxisAngle(float radians, float x, float y, float z)
     m_z = float(z * s);
 }
 
+void Quaternion::GetAxisAngle(float* radians, Vec3f* axis)
+{
+  *radians = acos(m_w) * 2.0f;
+  *axis = Vec3f(m_x, m_y, m_z);
+  axis->Normalise();
+}
+
 void Quaternion::CreateFromMatrix(const Matrix& m)
 {
     //http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/

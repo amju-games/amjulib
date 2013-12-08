@@ -30,6 +30,8 @@ public:
   void SetAxisAngle(float radians, const Vec3f& axis);
   void SetAxisAngle(float radians, float x, float y, float z);
 
+  void GetAxisAngle(float* radians, Vec3f* axis);
+
   void CreateFromMatrix(const Matrix& m);
 
   static Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float between);
