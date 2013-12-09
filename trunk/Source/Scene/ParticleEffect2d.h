@@ -14,9 +14,11 @@ struct Particle2d
   Vec3f m_vel;
   Vec3f m_acc;
   float m_time;
+  float m_rot; // rotation around particle centre
+  float m_rotVel;
   bool m_isDead; // if true, this particle is dead, no longer drawn
 
-  Particle2d() : m_time(0), m_isDead(false) {}
+  Particle2d() : m_time(0), m_rot(0), m_rotVel(0), m_isDead(false) {}
 };
 
 bool operator<(const Particle2d& p1, const Particle2d& p2);
