@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <Quaternion.h>
 #include "ParticleEffect2d.h"
 #include "File.h"
 #include "ResourceManager.h"
@@ -59,7 +60,7 @@ bool ParticleEffect2d::Load(File* f)
 
 void ParticleEffect2d::Set(
   const std::string& textureName, 
-  float size, float num, float maxTime, float minY)
+  float size, int num, float maxTime, float minY)
 {
   m_texture = (Texture*)TheResourceManager::Instance()->GetRes(textureName);
   Assert(m_texture);
@@ -114,6 +115,16 @@ float ParticleEffect2d::NewTime() const
   return 0;
 }
 
+float ParticleEffect2d::NewRot() const
+{
+  return 0;
+}
+
+float ParticleEffect2d::NewRotVel() const
+{
+  return 0;
+}
+
 void ParticleEffect2d::Recycle(Particle2d* p)
 {
   p->m_pos = NewPos(); 
@@ -158,6 +169,7 @@ void ParticleEffect2d::Update()
 
     p.m_vel += p.m_acc * dt;
     p.m_pos += p.m_vel * dt; // TODO not accurate    
+    p.m_rot += p.m_rotVel * dt;
   }
   m_isDead = isDead;
 
@@ -167,8 +179,9 @@ void ParticleEffect2d::Update()
   Matrix mat;
   mat.ModelView(); // Get Modelview matrix
   mat = m_combined * mat; // also take all rotation into account
-  Vec3f up(mat[1], mat[5], mat[9]);
   Vec3f right(mat[0], mat[4], mat[8]);
+  Vec3f up(mat[1], mat[5], mat[9]);
+  Vec3f fwd(mat[2], mat[6], mat[10]);
 
   // Avoid reallocs
   //AmjuGL::Tris tris;
@@ -178,10 +191,14 @@ void ParticleEffect2d::Update()
   {
     Particle2d& p = m_particles[i];
 
-    Vec3f v0 = p.m_pos + ( up + right) * m_size;
-    Vec3f v1 = p.m_pos + ( up - right) * m_size;
-    Vec3f v2 = p.m_pos + (-up - right) * m_size;
-    Vec3f v3 = p.m_pos + (-up + right) * m_size;
+    Quaternion q(fwd, p.m_rot);
+    Vec3f upR = q.RotateVec(up);
+    Vec3f rightR = q.RotateVec(right);
+
+    Vec3f v0 = p.m_pos + ( upR + rightR) * m_size;
+    Vec3f v1 = p.m_pos + ( upR - rightR) * m_size;
+    Vec3f v2 = p.m_pos + (-upR - rightR) * m_size;
+    Vec3f v3 = p.m_pos + (-upR + rightR) * m_size;
 
     AmjuGL::Vert verts[4] = 
     {
@@ -216,6 +233,8 @@ void ParticleEffect2d::Start()
     p.m_vel = NewVel();
     p.m_acc = NewAcc();
     p.m_time = NewTime();
+    p.m_rot = NewRot();
+    p.m_rotVel = NewRotVel();
     p.m_isDead = false;
   }
 }

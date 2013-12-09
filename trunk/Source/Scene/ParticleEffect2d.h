@@ -14,8 +14,8 @@ struct Particle2d
   Vec3f m_vel;
   Vec3f m_acc;
   float m_time;
-  float m_rot; // rotation around particle centre
-  float m_rotVel;
+  float m_rot; // rotation around particle centre IN RADIANS
+  float m_rotVel; // RADIANS/SEC
   bool m_isDead; // if true, this particle is dead, no longer drawn
 
   Particle2d() : m_time(0), m_rot(0), m_rotVel(0), m_isDead(false) {}
@@ -33,7 +33,7 @@ public:
 
   // Alternative to Load
   void Set(const std::string& textureName, 
-    float particlesize, float numparticles, float maxTime, float minY);
+    float particlesize, int numparticles, float maxTime, float minY);
 
   void SetMinY(float minY) { m_minY = minY; }
 
@@ -45,6 +45,8 @@ public:
   virtual Vec3f NewVel() const;
   virtual Vec3f NewAcc() const;
   virtual float NewTime() const;
+  virtual float NewRot() const;
+  virtual float NewRotVel() const;
 
   // Called when a particle time expires
   virtual void HandleDeadParticle(Particle2d*);
