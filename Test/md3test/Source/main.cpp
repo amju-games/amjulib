@@ -106,6 +106,8 @@ void Load(const std::string& dirName)
 
 void draw()
 {
+  AmjuGL::SetClearColour(Colour(0.3f, 0.3f, 0.3f, 1));
+
   TheTimer::Instance()->Update();
 
   static bool initialised = false;
@@ -141,6 +143,8 @@ std::cout << "Creating mesh...\n";
   
   AmjuGL::InitFrame(); // 0.5f, 0.5f, 0.5f);
   AmjuGL::BeginScene();
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  AmjuGL::SetIdentity();
   AmjuGL::LookAt(0, 10.0f, 80.0f, 0, 0,0, 0, 1.0f, 0);
 
   AmjuGL::Translate(xPos, yPos, zPos);
@@ -346,6 +350,7 @@ int main(int argc, char **argv)
   AmjuGL::Init();
 
   float aspect = (float)windowX / (float)windowY;
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetPerspectiveProjection(45.0f, aspect, 1.0f, 1000.0f); 
 
   glDisable(GL_LIGHTING);
