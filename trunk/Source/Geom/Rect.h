@@ -10,6 +10,8 @@ class Rect
 public:
   Rect();
   Rect(float xmin, float xmax, float ymin, float ymax);
+  Rect(const Vec2f& corner1, const Vec2f& corner2);
+
   void Set(float xmin, float xmax, float ymin, float ymax);
 
   bool IsPointIn(const Vec2f& point) const;
