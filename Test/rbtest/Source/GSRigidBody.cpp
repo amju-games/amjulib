@@ -99,25 +99,23 @@ void GSRigidBody::Draw2d()
 {
 }
 
-void MakeBox2(const Vec2f& pos, float rads)
-{
-  RBBox2* rb = new RBBox2;
-  rb->SetPos(pos);
-  rb->SetSize(Vec2f( //(2, 2));
-    (float)(rand() % 2 + 1), 
-    (float)(rand() % 3 + 1)));
-//  float angle = (float)rand() / (float)RAND_MAX * M_PI;
-  rb->SetRot(rads);
-  TheRBManager::Instance()->AddRB(rb);
-
-  AddToSceneGraph(rb);
-}
-
 float Rand(float min, float max)
 {
   float d = max - min;
   float r = (float)rand() / (float)RAND_MAX;
   return r * d + min;
+}
+
+void MakeBox2(const Vec2f& pos, float rads)
+{
+  RBBox2* rb = new RBBox2;
+  rb->SetPos(pos);
+  rb->SetSize(Vec2f(Rand(1.0f, 3.0f), Rand(1.0f, 3.0f)));
+
+  rb->SetRot(rads);
+  TheRBManager::Instance()->AddRB(rb);
+
+  AddToSceneGraph(rb);
 }
 
 RBBox3* MakeBox3(const Vec3f& pos)
