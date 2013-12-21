@@ -15,6 +15,16 @@ Rect::Rect(float xmin, float xmax, float ymin, float ymax) :
 {
 }
 
+Rect::Rect(const Vec2f& corner1, const Vec2f& corner2)
+{
+  Set(
+    std::min(corner1.x, corner2.x),
+    std::max(corner1.x, corner2.x),
+    std::min(corner1.y, corner2.y),
+    std::max(corner1.y, corner2.y)
+  );
+}
+
 void Rect::Set(float xmin, float xmax, float ymin, float ymax)
 {
   m_xmin = xmin;
