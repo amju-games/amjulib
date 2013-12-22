@@ -41,7 +41,11 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
+#if defined(AMJU_IOS) || defined(GEKKO)
+  // No cursor required for Windows/MacOSX
   TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // hotspot position
+#endif
+
   TheGame::Instance()->SetCurrentState(TheGSViewObjGui::Instance());
 }
 }
