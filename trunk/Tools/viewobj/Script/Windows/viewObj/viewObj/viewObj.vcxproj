@@ -104,10 +104,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\GSViewObj.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSViewObjGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\GSViewObj.h" />
+    <ClInclude Include="..\..\..\..\Source\GSViewObjGui.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\Source\SDL\lib\SDL.lib" />
