@@ -40,6 +40,9 @@ public:
 
   virtual void Clear();
 
+  // Calc size from union of size of all descendents
+  void SetSizeFromChildren();
+
 protected:
   bool LoadChildren(File*);
   bool LoadOneChild(File*);
