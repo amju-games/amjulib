@@ -32,6 +32,39 @@ void EventPollerImpl::Update(Listeners* pListeners)
 
 void EventPollerImpl::QueueEvent(Event* event)
 {
+  CursorEvent* ce = dynamic_cast<CursorEvent*>(event);
+  if (ce)
+  {
+    if (ce->controller == 0)
+    {
+      static Vec2f prev(ce->x, ce->y);
+      ce->dx = ce->x - prev.x;
+      ce->dy = ce->y - prev.y;
+      prev = Vec2f(ce->x, ce->y);
+    }
+    else if (ce->controller == 1)
+    {
+      static Vec2f prev(ce->x, ce->y);
+      ce->dx = ce->x - prev.x;
+      ce->dy = ce->y - prev.y;
+      prev = Vec2f(ce->x, ce->y);
+    }
+    else if (ce->controller == 2)
+    {
+      static Vec2f prev(ce->x, ce->y);
+      ce->dx = ce->x - prev.x;
+      ce->dy = ce->y - prev.y;
+      prev = Vec2f(ce->x, ce->y);
+    }
+    else if (ce->controller == 3)
+    {
+      static Vec2f prev(ce->x, ce->y);
+      ce->dx = ce->x - prev.x;
+      ce->dy = ce->y - prev.y;
+      prev = Vec2f(ce->x, ce->y);
+    }
+  }
+
   m_q.push(event);
 }
 
