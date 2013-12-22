@@ -17,6 +17,8 @@ public:
 
   void SetTitle(const std::string&);
   void SetHasTitleBar(bool);
+  bool HasTitleBar() const;
+  GuiText* GetTitleBar();
 
 protected:
   GuiText m_title;

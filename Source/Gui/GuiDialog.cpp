@@ -23,11 +23,23 @@ void GuiDialog::SetTitle(const std::string& t)
   m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
   m_title.SetSize(Vec2f(GetSize().x, 0.1f));
   m_title.SetText(t);
+
+  m_hasTitleBar = true;
 }
 
 void GuiDialog::SetHasTitleBar(bool b)
 {
   m_hasTitleBar = b;
+}
+
+bool GuiDialog::HasTitleBar() const
+{
+  return m_hasTitleBar;
+}
+
+GuiText* GuiDialog::GetTitleBar()
+{
+  return &m_title;
 }
 
 bool GuiDialog::Load(File* f)
@@ -99,6 +111,7 @@ void GuiDialog::Draw()
 
   if (m_hasTitleBar)
   {
+    m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
     m_title.Draw();
   }
 }
