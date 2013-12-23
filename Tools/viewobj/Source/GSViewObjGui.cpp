@@ -24,7 +24,7 @@ void GSViewObjGui::Draw2d()
 
 void GSViewObjGui::OnActive()
 {
-  m_gui = LoadGui("gui-choose-obj-file.txt");
+  m_gui = LoadGui("gui-file-load-dialog.txt");
 }
 
 } // namespace
