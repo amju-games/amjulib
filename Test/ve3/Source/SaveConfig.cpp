@@ -11,6 +11,7 @@ namespace Amju
 static const char* SPECIAL_FILE_NAME = "special.cfg";
 static const char* CONFIG_FILE_NAME = "game.cfg";
 
+
 void LoadConfig()
 {
   // The "special" config file is used to set a custom server, environment, or Save Dir.
@@ -74,14 +75,17 @@ std::cout << "No special config.\n";
 #endif
 #endif
 
-  TheGameConfigFile::Instance()->Load(CONFIG_FILE_NAME);
+  GameConfigFile* gcf = TheGameConfigFile::Instance();
+  std::string filename = File::GetRoot() + CONFIG_FILE_NAME;
+  gcf->SetFilePath(filename);
+  gcf->Load();
   atexit(SaveConfig);
 }
 
 void SaveConfig()
 {
   // called on exit
-  TheGameConfigFile::Instance()->Save(CONFIG_FILE_NAME);
+  TheGameConfigFile::Instance()->Save();
 }
 }
 
