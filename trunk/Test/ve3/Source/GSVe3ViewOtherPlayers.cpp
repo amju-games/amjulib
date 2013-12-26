@@ -11,6 +11,7 @@
 #include "LocalPlayer.h"
 #include "LurkMsg.h"
 #include "HeartCount.h"
+#include "GSVe3Guestbook.h"
 
 namespace Amju
 {
@@ -78,6 +79,10 @@ void GSVe3ViewOtherPlayers::NextPlayer()
     id = m_player->GetId();
   }
 
+  // Remember first player, go to if we reach the end
+  Player* first = 0;
+  bool found = false;
+
   for (auto it = gos->begin(); it != gos->end(); ++it)
   {
     GameObject* go = it->second;
@@ -87,11 +92,22 @@ void GSVe3ViewOtherPlayers::NextPlayer()
       continue;
     }
 
+    if (p && !first)
+    {
+      first = p;
+    }
+
     if (p && p->GetId() > id)
     {
       m_player = p;
+      found = true;
       break;
     }
+  }
+
+  if (!found)
+  {
+    m_player = first; // wrap around if poss
   }
 
   if (m_player)
@@ -112,6 +128,10 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
     id = m_player->GetId();
   }
 
+  // Remember first player, go to if we reach the end
+  Player* last = 0;
+  bool found = false;
+
   for (auto it = gos->rbegin(); it != gos->rend(); ++it)
   {
     GameObject* go = it->second;
@@ -121,11 +141,22 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
       continue;
     }
 
+    if (p && !last)
+    {
+      last = p;
+    }
+
     if (p && p->GetId() < id)
     {
       m_player = p;
+      found = true;
       break;
     }
+  }
+
+  if (!found)
+  {
+    m_player = last;
   }
 
   if (m_player)
@@ -226,6 +257,9 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
 
 void GSVe3ViewOtherPlayers::OnSeeGuestbook()
 {
+  GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
+  g->SetPrevState(TheGSVe3ViewOtherPlayers::Instance());
+  TheGame::Instance()->SetCurrentState(g);
 
 }
 

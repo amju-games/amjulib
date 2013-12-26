@@ -18,7 +18,23 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
 
   GuiText* name = (GuiText*)GetElementByName(gui, "playername-text");
   Assert(name);
-  name->SetText(player->GetName());
+  std::string namestr = player->GetName();
+
+  if (player->IsLocalPlayer())
+  {
+    namestr += " (you!)";
+    name->SetFgCol(Colour(0, 0.5f, 0, 1));
+  }
+  else if (player->IsLoggedIn())
+  {
+    namestr += " - online now!";
+    name->SetFgCol(Colour(1, 0, 0, 1));
+  }
+  else
+  {
+    name->SetFgCol(Colour(0, 0, 0, 1));
+  }
+  name->SetText(namestr);
 
   // Set food, health, treasure scores for this player
   GuiText* t = (GuiText*)GetElementByName(gui, "health-num");

@@ -11,6 +11,7 @@
 #include "ObjectUpdater.h"
 #include "GSWaitForNewLocation.h"
 #include "LurkMsg.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
@@ -29,7 +30,6 @@ void GSVe3HomePage::Update()
 void GSVe3HomePage::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSVe3HomePage::Draw2d()
@@ -73,6 +73,24 @@ static void OnExplore()
   // Get location for local player
   Player* p = GetLocalPlayer();
   Assert(p);
+
+  // We can only go exploring if we have non-zero health
+  if (p->Exists(HEALTH_KEY))
+  {
+    int health = ToInt(p->GetVal(HEALTH_KEY));
+    if (health <= 0)
+    {
+      // TODO Wav
+
+      // Message - tell player how to get health
+      std::string str = "Oh dear, I am sorry! You are not healthy enough to go exploring. Eat some food to get healthy!";
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+
+      return;
+    }
+  }
+
   int loc = p->GetLocation();
   SetLocalPlayerLocation(loc);
 
@@ -85,7 +103,6 @@ static void OnOtherPlayers()
   gs->SetPrevState(TheGSVe3HomePage::Instance());
   TheGame::Instance()->SetCurrentState(gs);
 }
-
 
 void GSVe3HomePage::OnActive()
 {
@@ -103,18 +120,6 @@ void GSVe3HomePage::OnActive()
   Assert(p);
 
   ShowPlayer(p, m_gui);
-
-/*
-  std::string playerName = p->GetName();
-
-  GuiText* name = (GuiText*)GetElementByName(m_gui, "playername-text");
-  Assert(name);
-  name->SetText(playerName);
-
-  LayerGroups layerGroups; // store settings for each layer
-  layerGroups.SetFromSprite(p->GetSprite());
-  layerGroups.SetSprite(&m_spriteNode.GetSprite());
-*/
 }
 
 } // namespace
