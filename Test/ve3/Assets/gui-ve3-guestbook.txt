@@ -14,9 +14,12 @@ ve3-guestbook
 // Name
 my-guestbook
 // pos
--0.9, 0.8
+-0.9, 0.7
 // size
-1.8, 1.2
+1.8, 1.3
+// Num children
+// (TODO Don't need this ?)
+0
 
 // Element type
 gui-text
