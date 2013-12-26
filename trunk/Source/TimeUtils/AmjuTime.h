@@ -100,7 +100,9 @@ protected:
 
 };
 
-static const int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+static const int ONE_MINUTE = 60;
+static const int ONE_HOUR = ONE_MINUTE * 60;
+static const int ONE_DAY_IN_SECONDS = ONE_HOUR * 24;
 static const int ONE_WEEK_IN_SECONDS = ONE_DAY_IN_SECONDS * 7;
 
 }
