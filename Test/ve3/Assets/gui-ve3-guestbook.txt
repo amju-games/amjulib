@@ -5,10 +5,18 @@
 // Element type
 gui-comp
 // Name
-home-page-comp
+guestbook-page-comp
 // Num children
-2
+3
 
+// Type
+ve3-guestbook
+// Name
+my-guestbook
+// pos
+-0.9, 0.8
+// size
+1.8, 1.2
 
 // Element type
 gui-text
