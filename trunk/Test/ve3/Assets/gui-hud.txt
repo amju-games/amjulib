@@ -6,7 +6,7 @@ gui-comp
 // Name
 hud-comp
 // Num children
-12
+16
 
 
 // element type
@@ -25,11 +25,33 @@ pause
 arial, 1.0 
 
 
+// element type
+gui-button
+// Element name
+eat-button
+// pos (coords are -1..1)
+0.85, 0.8
+// size
+0.15, 0.07
+// Image
+gui-button-4.png
+// Text
+eat!
+// Font name, size
+arial, 0.6, sx=0.8
+
+
 gui-image
 treasure-img
-0.2, 1.0
-0.17, 0.2
+0.0, 1.0
+0.06, 0.07
 diamond2.png
+
+gui-image
+food-img
+0.8, 1.0
+0.06, 0.07
+food1.png
 
 gui-image
 heart-img
@@ -64,13 +86,19 @@ arial, 0.5, fgcol=ffffff, sx=0.9, right
 
 gui-text
 online-text
-0.7, 1.0
+0.7, 2.0
 0.3, 0.05
 // Text
 ONLINE
 arial, 0.5, fgcol=ffffff, sx=0.8, right
 
-
+gui-text
+food-text
+0.7, 1.0
+0.3, 0.05
+// Text
+FOOD
+arial, 0.5, fgcol=ffffff, sx=0.8, right
 
 gui-text
 score-num
@@ -99,6 +127,14 @@ arial, 1.5, fgcol=ffffff, sx=0.9, right
 
 gui-text
 online-num
+0.8, 1.95
+0.2, 0.15
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.9, right
+
+gui-text
+food-num
 0.8, 0.95
 0.2, 0.15
 // Text

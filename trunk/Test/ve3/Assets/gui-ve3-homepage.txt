@@ -29,7 +29,8 @@ gui-button
 // Element name
 change-name-button
 // pos (coords are -1..1)
-0.58, 0.95
+// Hidden for now
+0.58, 1.95
 // size
 0.4, 0.1
 // Image
@@ -120,7 +121,7 @@ static-text1
 // size
 1.1, 0.1
 // Text
-This player has...
+You have got:
 // Font name, size
 arial, 1.0, fgcol=000000
 
@@ -135,7 +136,7 @@ gui-text
 // Element name
 health-num
 // pos (coords are -1..1)
--0.0, 0.6
+0.05, 0.6
 // size
 0.2, 0.2
 // Text
@@ -145,7 +146,7 @@ arial, 1.5, fgcol=000000, sx=0.6, left
 
 gui-image
 food-img
-0.15, 0.6
+0.25, 0.6
 0.2, 0.2
 food1.png
 
@@ -154,7 +155,7 @@ gui-text
 // Element name
 food-num
 // pos (coords are -1..1)
-0.35, 0.6
+0.45, 0.6
 // size
 0.2, 0.2
 // Text
@@ -164,7 +165,7 @@ arial, 1.5, fgcol=000000, sx=0.6, left
 
 gui-image
 treasure-img
-0.5, 0.6
+0.6, 0.6
 0.2, 0.2
 diamond2.png
 
@@ -173,7 +174,7 @@ gui-text
 // Element name
 treasure-num
 // pos (coords are -1..1)
-0.7, 0.6
+0.8, 0.6
 // size
 0.2, 0.2
 // Text
@@ -199,13 +200,13 @@ gui-text
 // Element name
 food-text
 // pos (coords are -1..1)
-0.1, 0.4
+0.25, 0.4
 // size
 0.3, 0.1
 // Text
 Food
 // Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, bgcol=0000ff
+arial, 1.0, fgcol=000000, sx=0.6
 
 // Element type
 gui-text
