@@ -34,20 +34,27 @@ void Screen::SetSize(int x, int y)
 
 void SetViewportN(float x, float y, float w, float h)
 {
+  float screenX = (float)Screen::X();
+  float screenY = (float)Screen::Y();
+
   AmjuGL::Viewport(
-    int((x + 1.0f) * (float)Screen::X() * 0.5f), 
-    int((y + 1.0f) * (float)Screen::Y() * 0.5f), 
-    int(w * (float)Screen::X() * 0.5f),
-    int(h * (float)Screen::Y() * 0.5f));
+    int((x + 1.0f) * screenX * 0.5f), 
+    int((y + 1.0f) * screenY * 0.5f), 
+    int(w * screenX * 0.5f),
+    int(h * screenY * 0.5f));
 }
 
 void GetViewportN(float* x, float* y, float* w, float* h)
 {
   int a, b, c, d;
   AmjuGL::GetViewport(&a, &b, &c, &d);
-  *x = a / (float)Screen::X() * 2.0f - 1.0f;
-  *y = b / (float)Screen::Y() * 2.0f - 1.0f;
-  *w = c / (float)Screen::X() * 2.0f;
-  *h = d / (float)Screen::Y() * 2.0f;
+
+  float screenX = (float)Screen::X();
+  float screenY = (float)Screen::Y();
+
+  *x = a / screenX * 2.0f - 1.0f;
+  *y = b / screenY * 2.0f - 1.0f;
+  *w = c / screenX * 2.0f;
+  *h = d / screenY * 2.0f;
 }
 }
