@@ -134,7 +134,7 @@ std::cout << "No start location.\n";
     ThePlayerInfoManager::Instance()->Save();
 
     PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI(); 
-
+    Assert(pi);
     pi->PISetInt(PI_KEY("player obj id"), objId);
     pi->PISetString(PI_KEY("playername"), playername);
     pi->PISetString(PI_KEY("email"), m_email);
@@ -147,8 +147,6 @@ std::cout << "No start location.\n";
 
     // Set ID of this player object as the local player ID
     SetLocalPlayerId(objId);
-
-    Assert(pi);
 
     // Play happy logged in sound
     TheSoundManager::Instance()->PlayWav("sound/button112.wav");

@@ -3,6 +3,7 @@
 #include "GSVe3HomePage.h"
 #include "ObjectUpdater.h"
 #include "LocalPlayer.h"
+#include "MsgManager.h"
 
 namespace Amju
 {
@@ -23,6 +24,10 @@ void GSVe3GetObjectStates::Update()
     if (!playerName.empty())
     {
       std::cout << "OK, I think we can start now.\n";
+
+      // VE3: To populate guestbook etc
+      TheMsgManager::Instance()->CheckForNewMsgs();
+
       TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
     }
   }

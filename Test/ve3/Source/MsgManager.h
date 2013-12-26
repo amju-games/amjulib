@@ -13,15 +13,6 @@ namespace Amju
 class MsgManager : public NonCopyable
 {
 public:
-  void Update(); // check queue
-  void CheckForNewMsgs();  // send req to server
-
-  // Special sender/recipient codes for SendMsg()
-  static const int BROADCAST_RECIP = -2; // use as recip ID
-  static const int SYSTEM_SENDER = -3; // use as sender ID
-
-  void SendMsg(int senderId, int recipId, const std::string& msg);
-  
   struct Msg
   {
     Msg() : m_id(-1), m_senderId(-1), m_recipId(-1), m_whenSent(1)  {}
@@ -37,6 +28,20 @@ public:
     // Type, e.g. post, chat, pigeon post
   };
 
+  typedef std::multimap<Timestamp, Msg> Msgs;
+
+public:
+  void Update(); // check queue
+  void CheckForNewMsgs();  // send req to server
+
+  Msgs GetMsgsForPlayer(int recipId) const;
+
+  // Special sender/recipient codes for SendMsg()
+  static const int BROADCAST_RECIP = -2; // use as recip ID
+  static const int SYSTEM_SENDER = -3; // use as sender ID
+
+  void SendMsg(int senderId, int recipId, const std::string& msg);
+  
   void QueueMsg(const Msg& msg);
 
 private:

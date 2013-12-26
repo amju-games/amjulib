@@ -285,6 +285,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\..\Source\MouseToGroundPos.cpp" />
     <ClCompile Include="..\..\..\..\Source\MsgManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mugshot.cpp" />
     <ClCompile Include="..\..\..\..\Source\MyTextMaker.cpp" />
     <ClCompile Include="..\..\..\..\Source\Objective.cpp" />
     <ClCompile Include="..\..\..\..\Source\ObjectManager.cpp" />
@@ -320,6 +321,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\TaskTrigger.cpp" />
     <ClCompile Include="..\..\..\..\Source\Terrain.cpp" />
     <ClCompile Include="..\..\..\..\Source\TextDraw.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TimePeriodString.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\TitlePerson.cpp" />
     <ClCompile Include="..\..\..\..\Source\Treasure.cpp" />
@@ -451,6 +453,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\MouseToGroundPos.h" />
     <ClInclude Include="..\..\..\..\Source\MsgManager.h" />
     <ClInclude Include="..\..\..\..\Source\MsgNum.h" />
+    <ClInclude Include="..\..\..\..\Source\Mugshot.h" />
     <ClInclude Include="..\..\..\..\Source\MyTextMaker.h" />
     <ClInclude Include="..\..\..\..\Source\Objective.h" />
     <ClInclude Include="..\..\..\..\Source\ObjectManager.h" />
@@ -489,6 +492,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
+    <ClInclude Include="..\..\..\..\Source\TimePeriodString.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
     <ClInclude Include="..\..\..\..\Source\Treasure.h" />

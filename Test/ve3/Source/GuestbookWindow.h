@@ -24,5 +24,5 @@ public:
   GBDisplay* GetGBDisplay();
 };
 
-GuestbookWindow* CreateGuestbookWindow();
+GuiElement* CreateGuestbookWindow();
 }

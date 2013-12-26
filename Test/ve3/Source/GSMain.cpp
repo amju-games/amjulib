@@ -50,6 +50,7 @@
 #include "Kb.h"
 #include "Baddie.h"
 #include "GSVe3HomePage.h"
+#include "HeartCount.h"
 #include <AmjuFinal.h>
 
 //#define SHOW_QUEUE
@@ -58,7 +59,36 @@
 
 namespace Amju
 {
-void OnPauseButton()
+static void OnEatButton()
+{
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  if (p->Exists(FOOD_STORED_KEY))  
+  {
+    int food = ToInt(p->GetVal(FOOD_STORED_KEY));
+    if (food < 1)
+    {
+      // Show lurk msg - can't give food!
+      LurkMsg lm("You don't have any food to eat!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
+    else
+    {
+      // TODO Wavs
+      TheSoundManager::Instance()->PlayWav("sound/burp.wav");
+
+      // Decremenet local player food, add one to the local player health
+      ChangePlayerCount(FOOD_STORED_KEY, -1);
+      ChangePlayerCount(HEALTH_KEY, +1);
+
+      // TODO Different health points for different food types?
+      LurkMsg lm("Yum yum! You ate some of your food, and got +1 health point!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+      TheLurker::Instance()->Queue(lm);    
+    }
+  }
+}
+
+static void OnPauseButton()
 {
   TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
 
@@ -336,7 +366,7 @@ void GSMain::Update()
     TheKb::Instance()->Update();
   }
 
-  // Update hearts and fuel cells
+  // Update HUD
   GuiText* text1 = (GuiText*)GetElementByName(m_gui, "score-num");
   if (text1) 
   {
@@ -360,6 +390,19 @@ void GSMain::Update()
   {
     text4->SetText(ToString(s_numOnline));
   }
+
+  GuiText* text5 = (GuiText*)GetElementByName(m_gui, "food-num");
+  if (text5) 
+  {
+    Player* p = GetLocalPlayer();
+    Assert(p);
+    if (p->Exists(FOOD_STORED_KEY))  
+    {
+      std::string food = p->GetVal(FOOD_STORED_KEY);
+      text5->SetText(food);
+    }
+  }
+
 }
 
 void GSMain::DoMoveRequest()
@@ -725,6 +768,10 @@ void GSMain::OnActive()
   Assert(pauseButton); // bad gui file..?
   pauseButton->SetCommand(Amju::OnPauseButton);
   //TheEventPoller::Instance()->SetListenerPriority(pauseButton, -1); // so we don't move to the button pos
+
+  GuiElement* eatButton = m_gui->GetElementByName("eat-button");
+  Assert(eatButton); 
+  eatButton->SetCommand(Amju::OnEatButton);
 
   GuiButton* quitButton = (GuiButton*)m_gui->GetElementByName("quit-button");
   quitButton->SetCommand(Amju::OnQuitButton);
