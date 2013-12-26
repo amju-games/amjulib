@@ -1,8 +1,14 @@
+#include <GuiFactory.h>
 #include "GSVe3Guestbook.h"
-#include <AmjuGL.h>
+#include "GuestbookWindow.h"
 
 namespace Amju
 {
+static GuiElement* CreateGuestbook()
+{
+  return new GuestbookWindow;
+}
+
 GSVe3Guestbook::GSVe3Guestbook()
 {
 }
@@ -28,9 +34,9 @@ void GSVe3Guestbook::OnActive()
 {
   GSGui::OnActive();
 
-  // Add GuestbookWindow type to GUI factory - but only if not already added, so use static
+  // Add GuestbookWindow type to GUI factory 
   //  - then gui txt file can use GuestbookWindow directly
-
+  static bool addOnce = TheGuiFactory::Instance()->Add("ve3-guestbook", CreateGuestbook);
   m_gui = LoadGui("gui-ve3-guestbook.txt");
   Assert(m_gui);
 

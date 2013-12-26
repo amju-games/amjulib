@@ -1,4 +1,5 @@
 #include <GuiScroll.h>
+#include <GuiText.h>
 #include "GuestbookWindow.h"
 
 namespace Amju
@@ -19,6 +20,17 @@ void GBDisplay::Init(Player* player)
 {
   // Get messages for the current player, add GUI elements to GBDisplay
 
+  // Add one row
+  GuiComposite* comp = new GuiComposite;
+  // Add message
+  GuiText* text = new GuiText;
+  text->SetText("This is a test msg");
+  comp->AddChild(text);
+  // Set pos - y is number of rows
+  comp->SetSizeFromChildren();
+
+  AddChild(comp);
+  
 }
 
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GuiWindow.h>
+#include <GuiSCroll.h>
 
 namespace Amju
 {
@@ -10,7 +11,7 @@ class Player;
 class GBDisplay : public GuiComposite
 {
 public:
-  void GBDisplay::Init(Player* player);
+  void Init(Player* player);
 
 };
 
