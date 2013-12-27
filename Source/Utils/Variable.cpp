@@ -13,9 +13,6 @@ Added to repository
 */
 
 #include <AmjuFirst.h>
-#ifdef WIN32
-#pragma warning(disable: 4786)
-#endif
 #include "Variable.h"
 #include "StringUtils.h"
 #include "AmjuAssert.h"
