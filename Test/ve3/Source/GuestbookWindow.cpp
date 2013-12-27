@@ -128,7 +128,14 @@ void GBDisplay::Init(Player* player)
   }  
   //SetSize(size);
   SetSizeFromChildren();
-  rect->SetSize(GetSize());
+
+  // size == size2??
+
+  Vec2f size2 = GetSize();
+  rect->SetSize(size2);
+
+  GuiElement* scroll = GetParent();
+  scroll->SetSize(scroll->GetParent()->GetSize());
 }
 
 }
