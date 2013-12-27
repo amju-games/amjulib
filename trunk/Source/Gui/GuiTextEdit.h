@@ -2,6 +2,7 @@
 #define GUI_TEXT_EDIT_H
 
 #include "GuiText.h"
+#include "GuiRect.h"
 
 namespace Amju
 {
@@ -39,6 +40,7 @@ protected:
   bool m_drawCaret;
   CommandFunc m_onChangeFunc;
   bool m_isPassword; // if so, don't show characters
+  GuiRect m_rect; // focus rect
 };
 }
 

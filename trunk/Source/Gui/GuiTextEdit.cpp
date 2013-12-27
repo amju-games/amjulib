@@ -72,15 +72,14 @@ void GuiTextEdit::Draw()
     AmjuGL::SetColour(c); //inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
-    Rect r = GetRect(this);
     const float BORDER = 0.01f;
-    float xmin = r.GetMin(0) - BORDER;
-    float xmax = r.GetMax(0) + BORDER;
-    float ymin = r.GetMin(1) - BORDER;
-    float ymax = r.GetMax(1) + BORDER;
-    r.Set(xmin, xmax, ymin, ymax);
-    
-    DrawSolidRect(r);
+    m_rect.SetSize(GetSize() + Vec2f(2 * BORDER, 2 * BORDER));
+    m_rect.SetLocalPos(GetLocalPos() + Vec2f(-BORDER, BORDER));
+    m_rect.SetCornerRadius(BORDER);
+    m_rect.SetRoundCorners(0);
+    m_rect.SetColour(c);
+    m_rect.Draw();
+
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
   }
