@@ -1,7 +1,6 @@
 #include <GuiFactory.h>
 #include "GSVe3Guestbook.h"
 #include "GuestbookWindow.h"
-#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -31,6 +30,11 @@ void GSVe3Guestbook::Draw2d()
   GSGui::Draw2d();
 }
 
+void GSVe3Guestbook::SetPlayer(Player* player)
+{
+  m_player = player;
+}
+
 void GSVe3Guestbook::OnActive()
 {
   GSGui::OnActive();
@@ -41,13 +45,35 @@ void GSVe3Guestbook::OnActive()
   m_gui = LoadGui("gui-ve3-guestbook.txt");
   Assert(m_gui);
 
-  // TODO Set title - "Your guestbook" or "<player>'s guestbook"
+  // Set title - "Your guestbook" or "<player>'s guestbook"
   // Colour scheme as in other gui states
+  GuiText* name = (GuiText*)GetElementByName(m_gui, "title-text");
+  Assert(name);
+  std::string namestr;
+
+  if (m_player->IsLocalPlayer())
+  {
+    namestr = "Your guestbook";
+    name->SetFgCol(Colour(0, 0.5f, 0, 1));
+  }
+  else 
+  {
+    namestr = m_player->GetName() + "'s guestbook";
+    if (m_player->IsLoggedIn())
+    {
+      name->SetFgCol(Colour(1, 0, 0, 1));
+    }
+    else
+    {
+      name->SetFgCol(Colour(0, 0, 0, 1));
+    }
+  }
+  name->SetText(namestr);
+
 
   GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
   Assert(gw);
-  Player* player = GetLocalPlayer(); // TODO current player for this page 
-  gw->GetGBDisplay()->Init(player); 
+  gw->GetGBDisplay()->Init(m_player); 
 
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);

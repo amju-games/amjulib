@@ -3,6 +3,7 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
+#include "Player.h"
 
 namespace Amju 
 {
@@ -17,6 +18,10 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  void SetPlayer(Player*);
+
+protected:
+  RCPtr<Player> m_player;
 };
 typedef Singleton<GSVe3Guestbook> TheGSVe3Guestbook;
 } // namespace

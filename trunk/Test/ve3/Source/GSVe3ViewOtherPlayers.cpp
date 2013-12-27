@@ -259,8 +259,8 @@ void GSVe3ViewOtherPlayers::OnSeeGuestbook()
 {
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
   g->SetPrevState(TheGSVe3ViewOtherPlayers::Instance());
+  g->SetPlayer(m_player);
   TheGame::Instance()->SetCurrentState(g);
-
 }
 
 void GSVe3ViewOtherPlayers::OnActive()
@@ -279,7 +279,14 @@ void GSVe3ViewOtherPlayers::OnActive()
   GetElementByName(m_gui, "see-guestbook-button")->SetCommand(Amju::OnSeeGuestbook);
 
   // Initialise character
-  NextPlayer();
+  if (m_player)
+  {
+    ShowPlayer(m_player, m_gui);
+  }
+  else
+  {
+    NextPlayer();
+  }
 }
 
 } // namespace
