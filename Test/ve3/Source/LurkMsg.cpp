@@ -10,6 +10,8 @@
 
 namespace Amju
 {
+const int LURK_PRIORITY = -1;
+
 static const float LURK_MAX_TIME = 3.0f;
 
 // Extra border around text
@@ -289,8 +291,11 @@ static void OnLurkNo()
 
 Lurker::Lurker()
 {
-  m_gui = LoadGui("gui-lurk.txt");
+  m_gui = LoadGui("gui-lurk.txt", false);
   Assert(m_gui);
+  // TODO Add as listener when msg displayed, then remove as listner when msg
+  //  goes away
+  TheEventPoller::Instance()->AddListener(m_gui, LURK_PRIORITY);
 
   m_ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   Assert(m_ok);

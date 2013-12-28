@@ -4,6 +4,7 @@
 #include "ObjectUpdater.h"
 #include "LocalPlayer.h"
 #include "MsgManager.h"
+#include "GSVe3SinceLastTime.h"
 
 namespace Amju
 {
@@ -28,7 +29,10 @@ void GSVe3GetObjectStates::Update()
       // VE3: To populate guestbook etc
       TheMsgManager::Instance()->CheckForNewMsgs();
 
-      TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
+      GSVe3SinceLastTime* slt = TheGSVe3SinceLastTime::Instance();
+      slt->SetPrevState(TheGSVe3HomePage::Instance());
+      slt->SetPlayer(p);
+      TheGame::Instance()->SetCurrentState(slt);
     }
   }
 }

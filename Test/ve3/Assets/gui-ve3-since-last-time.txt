@@ -1,0 +1,55 @@
+// Since last time 
+// version
+1
+
+// Element type
+gui-comp
+// Name
+since-last-time-comp
+// Num children
+3
+
+
+// Type
+ve3-guestbook
+// Name
+my-guestbook
+// pos
+-0.9, 0.7
+// size
+1.8, 1.5
+// Num children
+// (TODO Don't need this ?)
+0
+
+
+
+// Element type
+gui-text
+// Element name
+title-text
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+What's been happening...
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+OK
+// Font name, size
+arial, 1.5, sx=0.5
+
+
