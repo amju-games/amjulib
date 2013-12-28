@@ -12,6 +12,7 @@
 #include "LurkMsg.h"
 #include "HeartCount.h"
 #include "GSVe3Guestbook.h"
+#include "MsgManager.h"
 
 namespace Amju
 {
@@ -212,8 +213,13 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
       LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
       TheLurker::Instance()->Queue(lm);    
 
-
-      // TODO Add a message (to guestbook?) so player will know what happened
+      // Add a message (to guestbook?) so player will know what happened
+      std::string msg = p->GetName() + " gave some food to " + m_player->GetName() + "!";
+      MsgManager* mm = TheMsgManager::Instance();
+      mm->SendMsg(p->GetId(), m_player->GetId(), msg);
+      // Also a message in our own guestbook?
+      mm->SendMsg(m_player->GetId(), p->GetId(), str);
+      // TODO Get this msg into guestbook - send a request for new msgs
     }
   }
 }
@@ -250,7 +256,13 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
       LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
       TheLurker::Instance()->Queue(lm);    
 
-      // TODO Add a message (to guestbook?) so player will know what happened
+      // Add a message (to guestbook?) so player will know what happened
+      std::string msg = p->GetName() + " gave some treasure to " + m_player->GetName() + "!";
+      MsgManager* mm = TheMsgManager::Instance();
+      mm->SendMsg(p->GetId(), m_player->GetId(), msg);
+      // Also a message in our own guestbook?
+      mm->SendMsg(m_player->GetId(), p->GetId(), str);
+      // TODO Get this msg into guestbook - send a request for new msgs
     }
   }
 }

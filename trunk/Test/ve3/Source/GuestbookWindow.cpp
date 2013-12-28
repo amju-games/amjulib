@@ -41,6 +41,8 @@ GBDisplay* GuestbookWindow::GetGBDisplay()
 // Call once when initialising GB 
 void GBDisplay::Init(Player* player)
 {
+  Clear();
+
   // BG - first so drawn under
   GuiRect* rect = new GuiRect;
   float g = 0.9f; // grey 

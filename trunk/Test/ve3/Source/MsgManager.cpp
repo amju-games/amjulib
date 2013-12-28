@@ -29,6 +29,7 @@ namespace Amju
 {
 MsgManager::MsgManager()
 {
+  m_newMsgs = false;
 }
 
 MsgManager::Msgs MsgManager::GetMsgsForPlayer(int recipId) const
@@ -55,6 +56,17 @@ void MsgManager::QueueMsg(const Msg& msg)
   }
   m_msgsRecv.insert(msg.m_id);
   m_map.insert(std::make_pair(msg.m_whenSent, msg));
+  m_newMsgs = true;
+}
+
+bool MsgManager::HasNewMsgs() const
+{
+  return m_newMsgs;
+}
+
+void MsgManager::ResetNewMsgFlag()
+{
+  m_newMsgs = false;
 }
 
 void MsgManager::CheckForNewMsgs()

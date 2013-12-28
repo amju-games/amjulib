@@ -44,6 +44,9 @@ public:
   
   void QueueMsg(const Msg& msg);
 
+  bool HasNewMsgs() const;
+  void ResetNewMsgFlag();
+
 private:
 
   friend class Singleton<MsgManager>;
@@ -58,6 +61,8 @@ private:
 
   // IDs of msgs received from server
   std::set<int> m_msgsRecv;
+
+  bool m_newMsgs;
 };
 
 std::string EncodeMsg(const std::string& plainMsg);
