@@ -270,7 +270,16 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 
 void GuiText::RecalcFirstLast()
 {
+  int first = m_first;
+  int last = m_last;
+
   GetFirstLast(0, &m_first, &m_last);
+
+  if (first != m_first || last != m_last)
+  {
+    m_triList = 0; // force rebuild
+    m_triLists.clear();
+  }
 }
 
 void GuiText::DrawSingleLine(
