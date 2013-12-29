@@ -20,6 +20,7 @@ public:
   virtual void OnActive();
 
   void SetPlayer(Player*);
+  void OnAddCommentButton();
 
 protected:
   virtual void InitGB();

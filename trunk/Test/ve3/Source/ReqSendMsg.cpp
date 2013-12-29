@@ -1,6 +1,7 @@
 #include <AmjuFirst.h>
-#include "ReqSendMsg.h"
 #include <iostream>
+#include "ReqSendMsg.h"
+#include "MsgManager.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -14,6 +15,8 @@ void ReqSendMsg::OnSuccess()
 // TODO
 std::cout << "Successfully sent msg " << m_url << "\n";
 
+  // TODO Should we check immediately?
+  TheMsgManager::Instance()->CheckForNewMsgs();
 }
 
 } // namespace

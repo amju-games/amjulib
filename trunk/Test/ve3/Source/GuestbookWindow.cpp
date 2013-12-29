@@ -98,7 +98,17 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
     bool isPastTense = true;
     std::string when = InformalTimePeriodString(period, doCapitalise, isPastTense);
 
-    std::string s = "Msg from " + senderName + " sent: " + when + "\n" + msg.m_text;
+    std::string s = "Msg from " + senderName;
+    
+    // TODO flag for this
+    int recipId = msg.m_recipId;
+    Player* recip = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(recipId).GetPtr());
+    if (recip)
+    {
+      s += " To " + recip->GetName();
+    }
+
+    s += " Sent: " + when + "\n" + msg.m_text;
     label->SetText(s);
     label->SizeToText();
 
