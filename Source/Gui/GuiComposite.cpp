@@ -6,6 +6,10 @@
 
 namespace Amju
 {
+// In a single GUI composite, all descendents have equal priority. 
+// If this flag is true, stop propagating an event once handled.
+static const bool s_stopWhenEventHandled = true; // TODO
+
 const char* GuiComposite::NAME = "gui-comp";
 
 GuiComposite::GuiComposite()
@@ -163,6 +167,10 @@ bool GuiComposite::OnCursorEvent(const CursorEvent& e)
     if (m_children[i]->OnCursorEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -177,6 +185,10 @@ bool GuiComposite::OnRotationEvent(const RotationEvent& e)
     if (m_children[i]->OnRotationEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -191,6 +203,10 @@ bool GuiComposite::OnJoyAxisEvent(const JoyAxisEvent& e)
     if (m_children[i]->OnJoyAxisEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   if (ret)
@@ -239,6 +255,10 @@ bool GuiComposite::OnButtonEvent(const ButtonEvent& e)
     if (m_children[i]->OnButtonEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -253,6 +273,10 @@ bool GuiComposite::OnMouseButtonEvent(const MouseButtonEvent& e)
     if (m_children[i]->OnMouseButtonEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -267,6 +291,10 @@ bool GuiComposite::OnDoubleClickEvent(const DoubleClickEvent& e)
     if (m_children[i]->OnDoubleClickEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -281,6 +309,10 @@ bool GuiComposite::OnBalanceBoardEvent(const BalanceBoardEvent& e)
     if (m_children[i]->OnBalanceBoardEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -295,6 +327,10 @@ bool GuiComposite::OnTextEvent(const TextEvent& e)
     if (m_children[i]->OnTextEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -309,6 +345,10 @@ bool GuiComposite::OnQuitEvent()
     if (m_children[i]->OnQuitEvent())
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -323,6 +363,10 @@ bool GuiComposite::OnResizeEvent(const ResizeEvent& e)
     if (m_children[i]->OnResizeEvent(e))
     {
       ret = true;
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   return ret;
@@ -337,6 +381,14 @@ bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
     if (m_children[i]->OnKeyEvent(ke))
     {
       ret = true;
+      // In a single GUI, all descendents have equal priority. 
+      // Stop when event first handled.
+      // Maybe this should be a flag, as perhaps sometimes we want all
+      //  descendents to get the event?
+      if (s_stopWhenEventHandled)
+      {
+        break; 
+      }
     }
   }
   if (ret)
