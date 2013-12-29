@@ -2,9 +2,15 @@
 #include "GSVe3Guestbook.h"
 #include "GuestbookWindow.h"
 #include "MsgManager.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
+static void OnAddComment()
+{
+  TheGSVe3Guestbook::Instance()->OnAddCommentButton();
+}
+
 static void OnBack()
 {
   TheGSVe3Guestbook::Instance()->GoBack();
@@ -20,7 +26,7 @@ struct ForPlayer
 
   bool operator()(const MsgManager::Msg& msg)
   {
-    return msg.m_recipId == m_playerId;
+    return true; //msg.m_recipId == m_playerId;
   }
 
   int m_playerId;
@@ -64,6 +70,23 @@ void GSVe3Guestbook::SetPlayer(Player* player)
   m_player = player;
 }
 
+void GSVe3Guestbook::OnAddCommentButton()
+{
+  GuiText* comment = (GuiText*)GetElementByName(m_gui, "guest-comment");
+  Assert(comment);
+  std::string str = comment->GetText();
+  if (str.empty())
+  {
+    return; // TODO contemptuous sound fx
+  }
+
+  int senderId = GetLocalPlayerId();
+  int recipId = m_player->GetId();
+  Assert(senderId != recipId); // how could this happen?!
+  TheMsgManager::Instance()->SendMsg(senderId, recipId, str);
+  
+}
+
 void GSVe3Guestbook::OnActive()
 {
   GSGui::OnActive();
@@ -103,6 +126,8 @@ void GSVe3Guestbook::OnActive()
 
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
+
+  GetElementByName(m_gui, "add-comment-button")->SetCommand(OnAddComment);
 }
 
 } // namespace

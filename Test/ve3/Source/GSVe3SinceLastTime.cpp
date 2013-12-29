@@ -14,22 +14,6 @@ GSVe3SinceLastTime::GSVe3SinceLastTime()
 {
 }
 
-//void GSVe3SinceLastTime::Update()
-//{
-//  GSGui::Update();
-//
-//  // Check for new msgs
-//  static MsgManager* mm = TheMsgManager::Instance();
-//  if (mm->HasNewMsgs())
-//  {
-//    mm->ResetNewMsgFlag();
-//
-//    GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
-//    Assert(gw);
-//    gw->GetGBDisplay()->Init(m_player); 
-//  }
-//}
-
 void GSVe3SinceLastTime::OnActive()
 {
   GSGui::OnActive();
