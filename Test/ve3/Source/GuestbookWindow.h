@@ -2,6 +2,7 @@
 
 #include <GuiWindow.h>
 #include <GuiSCroll.h>
+#include "MsgManager.h"
 
 namespace Amju
 {
@@ -11,8 +12,7 @@ class Player;
 class GBDisplay : public GuiComposite
 {
 public:
-  void Init(Player* player);
-
+  void Init(const MsgManager::Msgs&);
 };
 
 class GuestbookWindow : public GuiWindow

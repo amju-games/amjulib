@@ -34,7 +34,8 @@ public:
   void Update(); // check queue
   void CheckForNewMsgs();  // send req to server
 
-  Msgs GetMsgsForPlayer(int recipId) const;
+  // Return messages for which pred() is true
+  template <class Pred> Msgs GetMsgs(Pred pred) const;
 
   // Special sender/recipient codes for SendMsg()
   static const int BROADCAST_RECIP = -2; // use as recip ID
@@ -64,6 +65,21 @@ private:
 
   bool m_newMsgs;
 };
+
+template <class Pred> MsgManager::Msgs MsgManager::GetMsgs(Pred pred) const
+{
+  Msgs msgs;
+  for (Msgs::const_iterator it = m_map.begin(); it != m_map.end(); it++)
+  {
+    const Msg& msg = it->second;
+    if (pred(msg)) 
+    {
+      msgs.insert(*it);
+    }
+  }
+
+  return msgs;
+}
 
 std::string EncodeMsg(const std::string& plainMsg);
 std::string DecodeMsg(const std::string& encodedMsg);

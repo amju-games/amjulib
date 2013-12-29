@@ -1,6 +1,7 @@
 #include <GuiFactory.h>
 #include "GSVe3Guestbook.h"
 #include "GuestbookWindow.h"
+#include "MsgManager.h"
 
 namespace Amju
 {
@@ -13,10 +14,38 @@ GSVe3Guestbook::GSVe3Guestbook()
 {
 }
 
+struct ForPlayer
+{
+  ForPlayer(int playerId) : m_playerId(playerId) {}
+
+  bool operator()(const MsgManager::Msg& msg)
+  {
+    return msg.m_recipId == m_playerId;
+  }
+
+  int m_playerId;
+};
+
+void GSVe3Guestbook::InitGB()
+{
+  GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
+  Assert(gw);
+  
+  MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(ForPlayer(m_player->GetId()));
+  gw->GetGBDisplay()->Init(msgs); 
+}
+
 void GSVe3Guestbook::Update()
 {
   GSGui::Update();
 
+  // Check for new msgs
+  static MsgManager* mm = TheMsgManager::Instance();
+  if (mm->HasNewMsgs())
+  {
+    mm->ResetNewMsgFlag();
+    InitGB();
+  }
 }
 
 void GSVe3Guestbook::Draw()
@@ -70,10 +99,7 @@ void GSVe3Guestbook::OnActive()
   }
   name->SetText(namestr);
 
-
-  GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
-  Assert(gw);
-  gw->GetGBDisplay()->Init(m_player); 
+  InitGB();
 
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
