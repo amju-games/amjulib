@@ -14,36 +14,21 @@ GSVe3SinceLastTime::GSVe3SinceLastTime()
 {
 }
 
-void GSVe3SinceLastTime::Update()
-{
-  GSGui::Update();
-
-  // Check for new msgs
-  static MsgManager* mm = TheMsgManager::Instance();
-  if (mm->HasNewMsgs())
-  {
-    mm->ResetNewMsgFlag();
-
-    GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
-    Assert(gw);
-    gw->GetGBDisplay()->Init(m_player); 
-  }
-}
-
-void GSVe3SinceLastTime::Draw()
-{
-  GSGui::Draw();
-}
-
-void GSVe3SinceLastTime::Draw2d()
-{
-  GSGui::Draw2d();
-}
-
-void GSVe3SinceLastTime::SetPlayer(Player* player)
-{
-  m_player = player;
-}
+//void GSVe3SinceLastTime::Update()
+//{
+//  GSGui::Update();
+//
+//  // Check for new msgs
+//  static MsgManager* mm = TheMsgManager::Instance();
+//  if (mm->HasNewMsgs())
+//  {
+//    mm->ResetNewMsgFlag();
+//
+//    GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
+//    Assert(gw);
+//    gw->GetGBDisplay()->Init(m_player); 
+//  }
+//}
 
 void GSVe3SinceLastTime::OnActive()
 {
@@ -55,12 +40,10 @@ void GSVe3SinceLastTime::OnActive()
   m_gui = LoadGui("gui-ve3-since-last-time.txt");
   Assert(m_gui);
 
-  GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
-  Assert(gw);
-  gw->GetGBDisplay()->Init(m_player); 
-
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
+
+  InitGB();
 }
 
 } // namespace

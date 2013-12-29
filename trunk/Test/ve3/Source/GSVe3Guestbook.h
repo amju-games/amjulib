@@ -9,6 +9,7 @@ namespace Amju
 {
 class GSVe3Guestbook : public GSGui
 {
+protected:
   GSVe3Guestbook();
   friend class Singleton<GSVe3Guestbook>;
 
@@ -19,6 +20,9 @@ public:
   virtual void OnActive();
 
   void SetPlayer(Player*);
+
+protected:
+  virtual void InitGB();
 
 protected:
   RCPtr<Player> m_player;

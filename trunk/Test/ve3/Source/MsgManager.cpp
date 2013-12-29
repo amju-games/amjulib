@@ -32,21 +32,6 @@ MsgManager::MsgManager()
   m_newMsgs = false;
 }
 
-MsgManager::Msgs MsgManager::GetMsgsForPlayer(int recipId) const
-{
-  Msgs msgs;
-  for (Msgs::const_iterator it = m_map.begin(); it != m_map.end(); it++)
-  {
-    const Msg& msg = it->second;
-    if (msg.m_recipId == recipId || msg.m_recipId == BROADCAST_RECIP)
-    {
-      msgs.insert(*it);
-    }
-  }
-
-  return msgs;
-}
-
 void MsgManager::QueueMsg(const Msg& msg)
 {
   if (m_msgsRecv.count(msg.m_id) > 0)

@@ -38,8 +38,7 @@ GBDisplay* GuestbookWindow::GetGBDisplay()
   return (GBDisplay*)child;
 }
 
-// Call once when initialising GB 
-void GBDisplay::Init(Player* player)
+void GBDisplay::Init(const MsgManager::Msgs& msgs)
 {
   Clear();
 
@@ -48,9 +47,6 @@ void GBDisplay::Init(Player* player)
   float g = 0.9f; // grey 
   rect->SetColour(Colour(g, g, g, 1));
   AddChild(rect);
-
-  // Get messages for the current player, add GUI elements to GBDisplay
-  MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgsForPlayer(player->GetId());
 
   Vec2f size;
   float y = 0;
