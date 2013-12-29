@@ -13,6 +13,9 @@ class GSVe3SinceLastTime : public GSVe3Guestbook
 
 public:
   virtual void OnActive();
+
+protected:
+  virtual void InitGB() override;
 };
 typedef Singleton<GSVe3SinceLastTime> TheGSVe3SinceLastTime;
 } // namespace

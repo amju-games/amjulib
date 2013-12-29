@@ -26,7 +26,7 @@ struct ForPlayer
 
   bool operator()(const MsgManager::Msg& msg)
   {
-    return true; //msg.m_recipId == m_playerId;
+    return msg.m_recipId == m_playerId;
   }
 
   int m_playerId;

@@ -14,6 +14,28 @@ GSVe3SinceLastTime::GSVe3SinceLastTime()
 {
 }
 
+struct ForPlayerOrBroadcast
+{
+  ForPlayerOrBroadcast(int playerId) : m_playerId(playerId) {}
+
+  bool operator()(const MsgManager::Msg& msg)
+  {
+    return msg.m_recipId == m_playerId || msg.m_recipId == MsgManager::BROADCAST_RECIP;
+  }
+
+  int m_playerId;
+};
+
+void GSVe3SinceLastTime::InitGB()
+{
+  GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
+  Assert(gw);
+  
+  MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(ForPlayerOrBroadcast(m_player->GetId()));
+  gw->GetGBDisplay()->Init(msgs); 
+}
+
+
 void GSVe3SinceLastTime::OnActive()
 {
   GSGui::OnActive();
