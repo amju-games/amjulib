@@ -14,13 +14,13 @@ gui-text
 // Element name
 add-comment-help-text
 // pos (coords are -1..1)
--0.9, -0.5
+-1.0, -0.5
 // size
-1.8, 0.1
+2.0, 0.1
 // Text
-Add a comment...
+You can add a comment! Type your message below...
 // Font name, size
-arial, 0.8, bgcol=ffffff, fgcol=000000
+arial, 0.7, fgcol=ffffff
 
 // Text edit box to add a comment
 // Element type
