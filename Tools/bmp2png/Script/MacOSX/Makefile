@@ -10,6 +10,7 @@ SOURCES		:=	../../Source
 LIBS	:= \
 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
 	-framework OpenGL \
+	-framework Carbon \
 	-lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
