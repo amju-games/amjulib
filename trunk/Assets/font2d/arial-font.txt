@@ -5,7 +5,7 @@
 0.5
 
 // bitmap + alpha
-font2d/arial_round_1024_36pt.png
+font2d/arial_round_2048_64pt.png
 
 // no of chars in x
 16
@@ -16,4 +16,4 @@ font2d/arial_round_1024_36pt.png
 32
 
 // widths
-font2d/arial_round_1024_36pt_widths.txt
+font2d/arial_round_2048_64pt_widths.txt
