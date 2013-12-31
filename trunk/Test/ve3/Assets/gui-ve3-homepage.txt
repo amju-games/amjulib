@@ -97,14 +97,14 @@ gui-comp
 // Name
 stats-comp
 // Num children
-13
+14
 
 // Background for stats
 gui-rect
 stats-bg
 // Pos, size
 -0.2, 0.7
-1.1, 0.7
+1.1, 0.8
 // Colour
 c0c0c0
 // Corner radius
@@ -230,7 +230,7 @@ more-stats1-text
 // size
 0.9, 0.1
 // Text
-ANOTHER line of stats
+$$$empty
 // Font name, size
 arial, 1.0, fgcol=000000, sx=0.6, left
 
@@ -241,8 +241,21 @@ more-stats2-text
 // pos (coords are -1..1)
 -0.15, 0.15
 // size
-0.9, 0.1
+2.0, 0.1
 // Text
-And a final line of stats
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+more-stats3-text
+// pos (coords are -1..1)
+-0.15, 0.05
+// size
+2.0, 0.1
+// Text
+$$$empty
 // Font name, size
 arial, 1.0, fgcol=000000, sx=0.6, left

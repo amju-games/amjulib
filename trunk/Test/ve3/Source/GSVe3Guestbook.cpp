@@ -84,7 +84,16 @@ void GSVe3Guestbook::OnAddCommentButton()
   int recipId = m_player->GetId();
   Assert(senderId != recipId); // how could this happen?!
   TheMsgManager::Instance()->SendMsg(senderId, recipId, str);
-  
+  comment->SetText("");
+}
+
+void GSVe3Guestbook::OnDeactive()
+{
+  GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
+  if (comment)
+  {
+    m_unfinishedCommentStr = comment->GetText();
+  }
 }
 
 void GSVe3Guestbook::OnActive()
@@ -128,6 +137,12 @@ void GSVe3Guestbook::OnActive()
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
 
   GetElementByName(m_gui, "add-comment-button")->SetCommand(OnAddComment);
+
+  GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
+  if (comment)
+  {
+    comment->SetText(m_unfinishedCommentStr);
+  }
 }
 
 } // namespace

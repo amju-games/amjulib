@@ -43,7 +43,7 @@ arial, 0.6, sx=0.8
 
 gui-image
 treasure-img
--0.1, 1.0
+-0.05, 1.0
 0.06, 0.07
 diamond2.png
 
