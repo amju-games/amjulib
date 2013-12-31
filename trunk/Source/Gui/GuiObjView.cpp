@@ -32,7 +32,8 @@ bool GuiObjView::Load(File* f)
 
   if (objFile.empty())
   {
-    f->ReportError("Empty obj file name");
+    // Not an error, just not set yet
+//    f->ReportError("Empty obj file name");
     return true;
   }
   
