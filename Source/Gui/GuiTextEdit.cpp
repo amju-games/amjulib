@@ -21,6 +21,7 @@ GuiTextEdit::GuiTextEdit()
   m_drawCaret = true;
   m_onChangeFunc = 0;
   m_isPassword = false;
+  m_rect.SetParent(this);
 }
 
 void GuiTextEdit::SetOnChangeFunc(CommandFunc f)
@@ -72,9 +73,9 @@ void GuiTextEdit::Draw()
     AmjuGL::SetColour(c); //inverse ? m_fgCol : m_bgCol);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 
-    const float BORDER = 0.01f;
+    const float BORDER = 0.02f;
     m_rect.SetSize(GetSize() + Vec2f(2 * BORDER, 2 * BORDER));
-    m_rect.SetLocalPos(GetLocalPos() + Vec2f(-BORDER, BORDER));
+    m_rect.SetLocalPos(Vec2f(-BORDER, BORDER));
     m_rect.SetCornerRadius(BORDER);
     m_rect.SetRoundCorners(0);
     m_rect.SetColour(c);
