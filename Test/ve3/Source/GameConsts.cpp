@@ -21,6 +21,8 @@ const char* FOOD_RECEIVED_KEY = "food-recv";
 const char* FOOD_GIVEN_KEY = "food-given";
 const char* HEALTH_KEY = "health";
 const char* TREASURE_KEY = "num-treasure";
+const char* TREASURE_GIVEN_KEY = "treasure-given";
+const char* TREASURE_RECEIVED_KEY = "treasure-recv";
 
 // IDs for local game objects
 const int THE_ROOM_ID  =       -1;

@@ -197,6 +197,7 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   Assert(senderId != -1);
   Assert(recipId != -1);
   // For now, assume senders and recips are Players
+  /*
   if (senderId >= 0)
   {
     Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(senderId).GetPtr()));
@@ -206,6 +207,7 @@ void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
   {
     Assert(dynamic_cast<Player*>(TheGame::Instance()->GetGameObject(recipId).GetPtr()));
   }
+  */
 
   // Encode all characters in msg 
   std::string newmsg = EncodeMsg(msg); 

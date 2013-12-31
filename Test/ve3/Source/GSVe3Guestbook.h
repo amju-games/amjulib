@@ -18,6 +18,7 @@ public:
   virtual void Draw();
   virtual void Draw2d();
   virtual void OnActive();
+  virtual void OnDeactive();
 
   void SetPlayer(Player*);
   void OnAddCommentButton();
@@ -27,6 +28,7 @@ protected:
 
 protected:
   RCPtr<Player> m_player;
+  std::string m_unfinishedCommentStr;
 };
 typedef Singleton<GSVe3Guestbook> TheGSVe3Guestbook;
 } // namespace

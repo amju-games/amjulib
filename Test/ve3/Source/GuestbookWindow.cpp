@@ -139,8 +139,8 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
 
   // size == size2??
 
-  Vec2f size2 = GetSize();
-  rect->SetSize(size2);
+//  Vec2f size2 = GetSize();
+  rect->SetSize(Vec2f(100, 100)); // TODO TEMP "FIX"
 
   GuiElement* scroll = GetParent();
   scroll->SetSize(scroll->GetParent()->GetSize());

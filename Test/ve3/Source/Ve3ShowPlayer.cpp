@@ -69,6 +69,46 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   {
     t->SetText("?");
   }
+
+  t = (GuiText*)GetElementByName(gui, "more-stats1-text");
+  Assert(t);
+  if (player->Exists(SCORE_KEY))
+  {
+    t->SetText("SCORE: " + player->GetVal(SCORE_KEY));
+  }
+  else
+  {
+    t->SetText(""); // TODO
+  }
+
+  // Food given/recvd
+  t = (GuiText*)GetElementByName(gui, "more-stats2-text");
+  Assert(t);
+  std::string str;
+  if (player->Exists(FOOD_GIVEN_KEY))
+  {
+    str = "Food given: " + player->GetVal(FOOD_GIVEN_KEY) + " ";
+  }
+  if (player->Exists(FOOD_RECEIVED_KEY))
+  {
+    str += "Food received: " + player->GetVal(FOOD_RECEIVED_KEY);
+  }
+  t->SetText(str);
+
+  // Treasure given/recvd
+  t = (GuiText*)GetElementByName(gui, "more-stats3-text");
+  Assert(t);
+  str = "";
+  if (player->Exists(TREASURE_GIVEN_KEY))
+  {
+    str = "Treasure given: " + player->GetVal(TREASURE_GIVEN_KEY) + " ";
+  }
+  if (player->Exists(TREASURE_RECEIVED_KEY))
+  {
+    str += "Treasure received: " + player->GetVal(TREASURE_RECEIVED_KEY);
+  }
+  t->SetText(str);
+
 }
 
 

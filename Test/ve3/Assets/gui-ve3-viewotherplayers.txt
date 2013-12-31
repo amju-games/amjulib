@@ -87,8 +87,8 @@ actions-comp
 gui-rect
 actions-bg
 // Pos, size
--0.9, -0.1
-1.8, 0.6
+-0.9, -0.2
+1.8, 0.5
 // Colour
 c0c0c0
 // Corner radius
@@ -105,7 +105,7 @@ static-text2
 // size
 1.8, 0.1
 // Text
-What would you like to do?
+$$$empty
 // Font name, size
 arial, 1.0, fgcol=000000
 
@@ -208,14 +208,14 @@ gui-comp
 // Name
 stats-comp
 // Num children
-13
+14
 
 // Background for stats
 gui-rect
 stats-bg
 // Pos, size
 -0.2, 0.7
-1.1, 0.7
+1.1, 0.8
 // Colour
 c0c0c0
 // Corner radius
@@ -232,7 +232,7 @@ static-text1
 // size
 1.1, 0.1
 // Text
-This player has...
+This player has:
 // Font name, size
 arial, 1.0, fgcol=000000
 
@@ -247,7 +247,7 @@ gui-text
 // Element name
 health-num
 // pos (coords are -1..1)
--0.0, 0.6
+0.05, 0.6
 // size
 0.2, 0.2
 // Text
@@ -257,7 +257,7 @@ arial, 1.5, fgcol=000000, sx=0.6, left
 
 gui-image
 food-img
-0.15, 0.6
+0.25, 0.6
 0.2, 0.2
 food1.png
 
@@ -266,7 +266,7 @@ gui-text
 // Element name
 food-num
 // pos (coords are -1..1)
-0.35, 0.6
+0.45, 0.6
 // size
 0.2, 0.2
 // Text
@@ -276,7 +276,7 @@ arial, 1.5, fgcol=000000, sx=0.6, left
 
 gui-image
 treasure-img
-0.5, 0.6
+0.6, 0.6
 0.2, 0.2
 diamond2.png
 
@@ -285,7 +285,7 @@ gui-text
 // Element name
 treasure-num
 // pos (coords are -1..1)
-0.7, 0.6
+0.8, 0.6
 // size
 0.2, 0.2
 // Text
@@ -298,7 +298,7 @@ gui-text
 // Element name
 health-text
 // pos (coords are -1..1)
--0.2, 0.4
+-0.175, 0.4
 // size
 0.4, 0.1
 // Text
@@ -311,13 +311,13 @@ gui-text
 // Element name
 food-text
 // pos (coords are -1..1)
-0.1, 0.4
+0.225, 0.4
 // size
 0.3, 0.1
 // Text
 Food
 // Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, bgcol=0000ff
+arial, 1.0, fgcol=000000, sx=0.6
 
 // Element type
 gui-text
@@ -341,7 +341,7 @@ more-stats1-text
 // size
 0.9, 0.1
 // Text
-ANOTHER line of stats
+$$$empty
 // Font name, size
 arial, 1.0, fgcol=000000, sx=0.6, left
 
@@ -352,8 +352,22 @@ more-stats2-text
 // pos (coords are -1..1)
 -0.15, 0.15
 // size
-0.9, 0.1
+2.0, 0.1
 // Text
-And a final line of stats
+$$$empty
 // Font name, size
 arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+more-stats3-text
+// pos (coords are -1..1)
+-0.15, 0.05
+// size
+2.0, 0.1
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
