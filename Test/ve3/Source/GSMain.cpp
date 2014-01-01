@@ -59,7 +59,7 @@
 
 namespace Amju
 {
-static void OnEatButton()
+void OnEatButton()
 {
   Player* p = GetLocalPlayer();
   Assert(p);

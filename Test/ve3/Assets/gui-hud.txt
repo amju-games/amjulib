@@ -34,7 +34,7 @@ eat-button
 // size
 0.15, 0.07
 // Image
-gui-button-4.png
+gui-button-2.png
 // Text
 eat!
 // Font name, size

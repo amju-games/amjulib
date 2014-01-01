@@ -30,6 +30,11 @@ std::string InformalTimePeriodStringNotCapitalised(
   }
   else if (sec < ONE_DAY_IN_SECONDS)
   {
+    // Yesterday or today?
+    if (past && Time(Time::Now().ToSeconds() - sec).GetDayOfWeek() != Time::Now().GetDayOfWeek())
+    {
+      return "yesterday";
+    }
     return past ? "today" : "less than one day";
   }
   else if (sec < 2 * ONE_DAY_IN_SECONDS)

@@ -197,17 +197,13 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
     }
     else
     {
-      // Decremenet local player food, add one to the other player's health
+      // Decremenet local player food, add one to the other player's food count
       ChangePlayerCount(FOOD_STORED_KEY, -1);
-      ChangeObjCount(m_player->GetId(), HEALTH_KEY, +1);
+      ChangeObjCount(m_player->GetId(), FOOD_STORED_KEY, +1);
 
       // Also change lifetime counters
       ChangePlayerCount(FOOD_GIVEN_KEY, +1);
       ChangeObjCount(m_player->GetId(), FOOD_RECEIVED_KEY, +1);
-
-      // Immediately change local copies of the data - in ChangeObjCount
-//      p->SetKeyVal(HEALTH_KEY, ToString(health - 1));
-//      m_player->SetKeyVal(HEALTH_KEY, ToString(m_player->GetHealth() + 1));
 
       ShowPlayer(m_player, m_gui); // to update GUI
 
@@ -250,11 +246,6 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
       // Also change lifetime counters
       ChangePlayerCount(TREASURE_GIVEN_KEY, +1);
       ChangeObjCount(m_player->GetId(), TREASURE_RECEIVED_KEY, +1);
-
-      // Immediately change local copies of the data
-//      p->SetKeyVal(TREASURE_KEY, ToString(tr - 1));
-//      int otherTr = ToInt(m_player->GetVal(TREASURE_KEY));
-//      m_player->SetKeyVal(TREASURE_KEY, ToString(otherTr + 1));
 
       ShowPlayer(m_player, m_gui); // to update GUI
 
