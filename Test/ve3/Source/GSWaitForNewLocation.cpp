@@ -124,11 +124,13 @@ if (playerObj && !playerReady)
       // Hmm, this might clutter up the conversation too much.
 #ifdef ANNOUNCE_ROOM_CHANGES
       std::string str;
-      if (GetNameForPlayer(GetLocalPlayerId(), &str))
+      int id = GetLocalPlayerId();
+      if (GetNameForPlayer(id, &str))
       {
         str += " entered room "; // TODO variety of msgs
         str += ToString(GetLocalPlayerLocation());
-        TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+        // VE3: use player ID so we get mugshot
+        TheMsgManager::Instance()->SendMsg(id, MsgManager::BROADCAST_RECIP, str);
       }
 #endif
 

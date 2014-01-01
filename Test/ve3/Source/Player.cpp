@@ -715,57 +715,6 @@ void Player::SetMenu(GuiMenu* menu)
   }
 }
 
-/*
-int Player::GetFoodRecvCount()
-{
-  if (Exists(FOOD_RECEIVED_KEY))
-  {
-    std::string s = GetVal(FOOD_RECEIVED_KEY);
-    int i = ToInt(s);
-    return i;
-  }
-//std::cout << "No food recv count for player " << *this << "\n";
-//  Assert(0);
-  return 0;
-}
-*/
-
-/*
-void Player::EatFood(Food* f)
-{
-  Ve1Object* owner = f->GetOwner();
-  Assert(owner);
-  // This player is NOT the local player. Only the local player can be
-  //  the owner.
-  Assert(owner != this);
-  Assert(GetLocalPlayer() != this);
-
-  // Inc count of this (recipient) player on server
-  ChangeObjCount(GetId(), FOOD_RECEIVED_KEY, +1); // for expt
-  ChangeObjCount(GetId(), SCORE_KEY, +1);
-
-  // Inc health of recipient player
-  ChangeObjCount(GetId(), HEALTH_KEY, +1);
-
-  // Inc count of food given by the local player
-  ChangeObjCount(GetLocalPlayerId(), FOOD_GIVEN_KEY, +1); // for expt
-  ChangeObjCount(GetLocalPlayerId(), SCORE_KEY, +1);
-
-  std::string recipName = GetPlayerName(GetId());
-
-  std::string otherPlayer = GetPlayerName(owner->GetId());
-  if (otherPlayer.empty())
-  {
-    otherPlayer = "Someone";
-  }
-  std::string str = otherPlayer + " gave some food to " + recipName + "!";
-  TheMsgManager::Instance()->SendMsg(MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
-
-  f->SetHidden(true);
-  TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
-}
-*/
-
 void Player::OnCollidePlayer(Player* otherPlayer)
 {
   // Ve3: not expecting this to happen!
@@ -924,8 +873,8 @@ void Player::OnCollideBaddie(Baddie* baddie)
         str += " died!"; // TODO variety of msgs
       }
       
-      TheMsgManager::Instance()->SendMsg(
-        MsgManager::SYSTEM_SENDER, MsgManager::BROADCAST_RECIP, str);
+      // VE3: Use player ID so we see a mugshot in "what's been happening" page and guestbooks
+      TheMsgManager::Instance()->SendMsg(GetId(), MsgManager::BROADCAST_RECIP, str);
     }
 
     static const float MAX_HIT_TIME = 2.0f; // TODO CONFIG
