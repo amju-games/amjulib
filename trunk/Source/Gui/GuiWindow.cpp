@@ -76,7 +76,7 @@ void GuiWindow::Draw()
   }
   if (y + h > nvp[1] + nvp[3])
   {
-    h = nvp[3] - (y + h);
+    h = nvp[1] + nvp[3] - y;  // FIXED, was: nvp[3] - (y + h);
   }
   if (h < 0)
   {
