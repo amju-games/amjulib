@@ -96,11 +96,15 @@ void GuiScroll::Draw()
   m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
   m_scrollPos += m_scrollVel * dt;
 
-  // TODO x-axis
+  // x-axis
+  float chSizeX =  child->GetSize().x;
+  float sizeX = GetSize().x;
+  float maxx = std::max(0.0f, chSizeX - sizeX); 
+
   // Bounce or stop on end reached
-  if (m_scrollPos.x < 0)
+  if (m_scrollPos.x < -maxx)
   {
-    m_scrollPos.x = 0;
+    m_scrollPos.x = -maxx;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;
 #else
@@ -108,13 +112,10 @@ void GuiScroll::Draw()
 #endif
   }
 
-  float chSizeX =  child->GetSize().x;
-  float sizeX = GetSize().x;
-  float maxx = std::max(0.0f, chSizeX - sizeX); 
   // depends on size of child and how much space there is to display it
-  if (m_scrollPos.x > maxx)
+  if (m_scrollPos.x > 0)
   {
-    m_scrollPos.x = maxx;
+    m_scrollPos.x = 0;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;
 #else
