@@ -56,17 +56,9 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
   Assert(m_children.size() == 1);
   GuiElement* child = m_children[0];
 
-  // TODO put dx/dy in Cursor Event
-  static float oldx = ce.x;
-  static float oldy = ce.y;
-  float dx = ce.x - oldx;
-  float dy = ce.y - oldy;
-  oldx = ce.x;
-  oldy = ce.y;
-
   if (leftDrag)
   {
-    OnScrollVelEvent(Vec2f(dx * 10.0f, dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
+    OnScrollVelEvent(Vec2f(ce.dx * 10.0f, ce.dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
   }
 
   return child->OnCursorEvent(ce); 
