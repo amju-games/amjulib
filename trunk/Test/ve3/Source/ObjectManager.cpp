@@ -24,6 +24,8 @@
 #include "Useful.h"
 #include <AmjuFinal.h>
 
+#define VE3_HIDE_OTHER_PLAYERS
+
 //#define XML_DEBUG
 //#define ASSET_DEBUG
 //#define OBJECT_CHECK_DEBUG
@@ -60,7 +62,15 @@ std::cout << "***WARNING: GameObject " << *go << " already in Game container, er
     g->EraseGameObject(id);
   }
 
-  TheGame::Instance()->AddGameObject(go);
+#ifdef VE3_HIDE_OTHER_PLAYERS
+  Player* p = dynamic_cast<Player*>(go);
+  if (p && !p->IsLocalPlayer())
+  {
+    return;
+  }
+#endif
+
+  g->AddGameObject(go);
 }
 
 bool Object::Save(File* f)

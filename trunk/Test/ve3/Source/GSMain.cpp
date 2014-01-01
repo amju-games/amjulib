@@ -53,9 +53,11 @@
 #include "HeartCount.h"
 #include <AmjuFinal.h>
 
-//#define SHOW_QUEUE
-//#define SHOW_NUM_ERRORS
+#ifdef _DEBUG
+#define SHOW_QUEUE
+#define SHOW_NUM_ERRORS
 //#define PICK_DEBUG
+#endif
 
 namespace Amju
 {
@@ -644,7 +646,7 @@ void GSMain::Draw2d()
       s += "\n";
     }
 
-    if (!s.empty()) // ? So on screen for longer ?
+    //if (!s.empty()) // ? So on screen for longer ?
     {
       t.SetText(s);
     }

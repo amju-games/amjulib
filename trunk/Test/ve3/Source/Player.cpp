@@ -48,6 +48,8 @@
 #include "UnCollide.h"
 #include <AmjuFinal.h>
 
+#define VE3_HIDE_OTHER_PLAYERS
+
 namespace Amju
 {
 //static const float ARROW_XSIZE = 5.0f;
@@ -337,6 +339,14 @@ void Player::OnLocationExit()
 
 void Player::OnLocationEntry()
 {
+#ifdef VE3_HIDE_OTHER_PLAYERS
+  // VE3: only local player is visible??
+  if (!IsLocalPlayer())
+  {
+    return;
+  }
+#endif
+
   // Can't carry food across room boundary..??
   m_carriedFood.clear();
 
@@ -767,57 +777,13 @@ void Player::OnCollideFood(Food* f)
   // New for VE3:
   f->SetHidden(true);
   // You can give this to someone, keep it, or eat it now (increasing health)
-  TheLurker::Instance()->ShowYesNo("You picked up some food! Would you like to eat it now?", LURK_FG, LURK_BG, OnEatNo, OnEatYes);
+  FirstTimeQuestionThisSession(
+    "You picked up some food! Would you like to eat it now?", 
+    UNIQUE_MSG_ID,
+     OnEatNo, OnEatYes);
 
-/*
-  // Single player mode: eat the food.
-  GameMode gm = GetGameMode();
-  if (gm == AMJU_MODE_SINGLE)
-  {
-    f->SetHidden(true);
-    TheSoundManager::Instance()->PlayWav("sound/burp.wav"); // TODO
-    // Inc count of this (recipient) player on server
-    ChangeObjCount(GetId(), FOOD_STORED_KEY, +1); // for expt
-    ChangeObjCount(GetId(), SCORE_KEY, +1);
-
-    // Get some health
-    m_health++; // single player, no need to upload health, right??
-  }
-  else if (gm == AMJU_MODE_MULTI)
-  {
-    // Local player: picks up food if not currently picked up.
-    Ve1Object* owner = f->GetOwner();
-
-    if (owner == this)
-    {
-      // We are already carrying this food
-      Assert(std::find(m_carriedFood.begin(), m_carriedFood.end(), f) != m_carriedFood.end());
-      return;
-    }
-    else if (IsLocalPlayer())
-    {
-      Assert(!owner);
-
-      // Noone is carrying the food. 
-      // We pick up the food. 
-      // Only show this msg the first time around
-      // Annoying
-      //FirstTimeMsgThisSession("You picked up some food!", UNIQUE_MSG_ID, false);
-
-      // TODO Sound every time
-      TheSoundManager::Instance()->PlayWav("sound/pickup.wav"); // TODO
-
-      // Not:
-      //LurkMsg lm("You picked up some food!", LURK_FG, LURK_BG, AMJU_CENTRE); 
-      //TheLurker::Instance()->Queue(lm);    
-      f->SetOwner(this);
-      m_carriedFood.push_front(f);
-    }
-  }  
-*/
-
-  // TODO Given and received counts
-  //gsm->SetFoods(GetFoodRecvCount());    
+  // Not:
+  //TheLurker::Instance()->ShowYesNo("You picked up some food! Would you like to eat it now?", LURK_FG, LURK_BG, OnEatNo, OnEatYes);
 }
 
 void Player::OnCollideBaddie(Baddie* baddie)
