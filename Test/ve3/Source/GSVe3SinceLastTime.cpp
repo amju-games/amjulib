@@ -35,10 +35,14 @@ void GSVe3SinceLastTime::InitGB()
   gw->GetGBDisplay()->Init(msgs); 
 }
 
+void GSVe3SinceLastTime::OnDeactive()
+{
+  GSGui::OnDeactive();
+}
 
 void GSVe3SinceLastTime::OnActive()
 {
-  GSGui::OnActive();
+  GSGui::OnActive(); // NOT direct base class, GSVe3Guestbook
 
   // Add GuestbookWindow type to GUI factory 
   //  - then gui txt file can use GuestbookWindow directly

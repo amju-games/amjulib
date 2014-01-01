@@ -30,9 +30,11 @@ void GSVe3GetObjectStates::Update()
       MsgManager* mm = TheMsgManager::Instance();
       mm->CheckForNewMsgs();
       // Not sure if this is a good idea, it might generate too much noise.
+#ifndef _DEBUG
+      // Don't want all the dev logins filling up the space
       std::string msg = p->GetName() + "  logged in";
       mm->SendMsg(p->GetId(), MsgManager::BROADCAST_RECIP, msg);
-
+#endif
       GSVe3SinceLastTime* slt = TheGSVe3SinceLastTime::Instance();
       slt->SetPrevState(TheGSVe3HomePage::Instance());
       slt->SetPlayer(p);

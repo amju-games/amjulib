@@ -94,6 +94,8 @@ void GSVe3Guestbook::OnDeactive()
   {
     m_unfinishedCommentStr = comment->GetText();
   }
+
+  GSGui::OnDeactive(); // Duh, do this last as it destroys m_gui
 }
 
 void GSVe3Guestbook::OnActive()

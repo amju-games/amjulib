@@ -13,6 +13,7 @@ class GSVe3SinceLastTime : public GSVe3Guestbook
 
 public:
   virtual void OnActive();
+  virtual void OnDeactive();
 
 protected:
   virtual void InitGB() override;
