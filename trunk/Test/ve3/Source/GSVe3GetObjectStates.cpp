@@ -26,8 +26,12 @@ void GSVe3GetObjectStates::Update()
     {
       std::cout << "OK, I think we can start now.\n";
 
-      // VE3: To populate guestbook etc
-      TheMsgManager::Instance()->CheckForNewMsgs();
+      // To populate guestbook etc
+      MsgManager* mm = TheMsgManager::Instance();
+      mm->CheckForNewMsgs();
+      // Not sure if this is a good idea, it might generate too much noise.
+      std::string msg = p->GetName() + "  logged in";
+      mm->SendMsg(p->GetId(), MsgManager::BROADCAST_RECIP, msg);
 
       GSVe3SinceLastTime* slt = TheGSVe3SinceLastTime::Instance();
       slt->SetPrevState(TheGSVe3HomePage::Instance());

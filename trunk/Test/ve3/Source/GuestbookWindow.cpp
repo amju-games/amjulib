@@ -156,21 +156,15 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
     }
 
     comp->SetLocalPos(Vec2f(0, y)); 
-    y -= compsize.y;
+    y -= (compsize.y + 0.05f); // TODO CONFIG
 
     AddChild(comp);
   }  
-  //SetSize(size);
-  //SetSizeFromChildren();
-  
   Vec2f size2 = GetSize();
   size2.x = window->GetSize().x;
   size2.y = -y + 0.4f; 
   SetSize(size2);
   
-  // size == size2??
-
-//  Vec2f size2 = GetSize();
   rect->SetSize(Vec2f(100, 100)); // TODO TEMP "FIX"
 
   scroll->SetSize(window->GetSize());

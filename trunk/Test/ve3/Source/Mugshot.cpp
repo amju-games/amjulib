@@ -20,7 +20,7 @@ void Mugshot::Draw()
   AmjuGL::RotateX(90.0f); 
   Vec2f pos = GetCombinedPos();
   
-  AmjuGL::Translate(pos.x + 0.08f, 0, -pos.y + 0.15f ); //-0.8f, 0, -0.5f); // ?
+  AmjuGL::Translate(pos.x + 0.08f, 0, -pos.y + 0.15f ); 
   AmjuGL::Scale(0.004f, 1, 0.004f);
   m_spriteNode.Draw();
   AmjuGL::PopMatrix();
