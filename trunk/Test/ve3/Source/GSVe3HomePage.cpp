@@ -5,6 +5,8 @@
 #include "GSVe3ViewOtherPlayers.h"
 #include "GSMain.h"
 #include "GS2dAvatarMod.h"
+#include "GSQuitGame.h"
+#include "GSVe3Guestbook.h"
 #include "LocalPlayer.h"
 #include "LayerGroup.h"
 #include "ObjectManager.h"
@@ -15,6 +17,22 @@
 
 namespace Amju
 {
+void OnEatButton(); // in GSMain
+
+static void OnSeeMyGuestbook()
+{
+  GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
+  g->SetPrevState(TheGSVe3HomePage::Instance());
+  g->SetPlayer(GetLocalPlayer());
+  TheGame::Instance()->SetCurrentState(g);
+}
+
+static void OnQuit()
+{
+  TheGSQuitGame::Instance()->SetPrevState(TheGSVe3HomePage::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSQuitGame::Instance());
+}
+
 GSVe3HomePage::GSVe3HomePage()
 {
 }
@@ -111,10 +129,13 @@ void GSVe3HomePage::OnActive()
   m_gui = LoadGui("gui-ve3-homepage.txt");
   Assert(m_gui);
 
+  GetElementByName(m_gui, "quit-button")->SetCommand(OnQuit);
   GetElementByName(m_gui, "change-name-button")->SetCommand(OnChangeName);
   GetElementByName(m_gui, "change-look-button")->SetCommand(OnChangeLook);
   GetElementByName(m_gui, "explore-button")->SetCommand(OnExplore);
   GetElementByName(m_gui, "other-players-button")->SetCommand(OnOtherPlayers);
+  GetElementByName(m_gui, "eat-button")->SetCommand(OnEatButton);
+  GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeMyGuestbook);
 
   Player* p = GetLocalPlayer();
   Assert(p);

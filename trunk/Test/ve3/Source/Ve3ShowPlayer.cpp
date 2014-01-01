@@ -45,7 +45,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   }
   else
   {
-    t->SetText("?");
+    t->SetText("0");
   }
 
   t = (GuiText*)GetElementByName(gui, "food-num");
@@ -56,7 +56,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   }
   else
   {
-    t->SetText("?");
+    t->SetText("0");
   }
 
   t = (GuiText*)GetElementByName(gui, "treasure-num");
@@ -67,7 +67,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   }
   else
   {
-    t->SetText("?");
+    t->SetText("0");
   }
 
   t = (GuiText*)GetElementByName(gui, "more-stats1-text");
@@ -87,7 +87,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   std::string str;
   if (player->Exists(FOOD_GIVEN_KEY))
   {
-    str = "Food given: " + player->GetVal(FOOD_GIVEN_KEY) + " ";
+    str = "Food given: " + player->GetVal(FOOD_GIVEN_KEY) + "     ";
   }
   if (player->Exists(FOOD_RECEIVED_KEY))
   {
@@ -101,15 +101,12 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
   str = "";
   if (player->Exists(TREASURE_GIVEN_KEY))
   {
-    str = "Treasure given: " + player->GetVal(TREASURE_GIVEN_KEY) + " ";
+    str = "Treasure given: " + player->GetVal(TREASURE_GIVEN_KEY) + "     ";
   }
   if (player->Exists(TREASURE_RECEIVED_KEY))
   {
     str += "Treasure received: " + player->GetVal(TREASURE_RECEIVED_KEY);
   }
   t->SetText(str);
-
 }
-
-
 }

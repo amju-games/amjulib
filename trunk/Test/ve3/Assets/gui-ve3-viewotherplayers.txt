@@ -101,11 +101,11 @@ gui-text
 // Element name
 static-text2
 // pos (coords are -1..1)
--0.9, -0.1
+-0.9, -0.20
 // size
 1.8, 0.1
 // Text
-$$$empty
+What would you like to do?
 // Font name, size
 arial, 1.0, fgcol=000000
 

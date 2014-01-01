@@ -1,4 +1,5 @@
 #include <GuiFactory.h>
+#include <GuiButton.h>
 #include "GSVe3Guestbook.h"
 #include "GuestbookWindow.h"
 #include "MsgManager.h"
@@ -57,7 +58,6 @@ void GSVe3Guestbook::Update()
 void GSVe3Guestbook::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSVe3Guestbook::Draw2d()
@@ -100,10 +100,13 @@ void GSVe3Guestbook::OnActive()
 {
   GSGui::OnActive();
 
+  Assert(m_player);
+  bool isLocalPlayer = m_player->IsLocalPlayer();
+
   // Add GuestbookWindow type to GUI factory 
   //  - then gui txt file can use GuestbookWindow directly
   static bool addOnce = TheGuiFactory::Instance()->Add("ve3-guestbook", CreateGuestbookWindow);
-  m_gui = LoadGui("gui-ve3-guestbook.txt");
+  m_gui = LoadGui(isLocalPlayer ? "gui-ve3-my-guestbook.txt" : "gui-ve3-guestbook.txt");
   Assert(m_gui);
 
   // Set title - "Your guestbook" or "<player>'s guestbook"
@@ -112,7 +115,7 @@ void GSVe3Guestbook::OnActive()
   Assert(name);
   std::string namestr;
 
-  if (m_player->IsLocalPlayer())
+  if (isLocalPlayer)
   {
     namestr = "Your guestbook";
     name->SetFgCol(Colour(0, 0.5f, 0, 1));
@@ -136,7 +139,11 @@ void GSVe3Guestbook::OnActive()
   // TODO Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(OnBack);
 
-  GetElementByName(m_gui, "add-comment-button")->SetCommand(OnAddComment);
+  GuiButton* addcomment = (GuiButton*)m_gui->GetElementByName("add-comment-button");
+  if (addcomment)
+  {
+    addcomment->SetCommand(OnAddComment);
+  }
 
   GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
   if (comment)
