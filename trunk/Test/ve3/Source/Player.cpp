@@ -777,10 +777,16 @@ void Player::OnCollideFood(Food* f)
   // New for VE3:
   f->SetHidden(true);
   // You can give this to someone, keep it, or eat it now (increasing health)
-  FirstTimeQuestionThisSession(
+  if (!FirstTimeQuestionThisSession(
     "You picked up some food! Would you like to eat it now?", 
     UNIQUE_MSG_ID,
-     OnEatNo, OnEatYes);
+     OnEatNo, OnEatYes))
+  {
+    // Returned false => msg not shown, so store the food
+    // Inc player food count
+    ChangePlayerCount(FOOD_STORED_KEY, +1);
+    TheSoundManager::Instance()->PlayWav("sound/waterdrop.wav"); 
+  }
 
   // Not:
   //TheLurker::Instance()->ShowYesNo("You picked up some food! Would you like to eat it now?", LURK_FG, LURK_BG, OnEatNo, OnEatYes);
