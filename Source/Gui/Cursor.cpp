@@ -8,12 +8,10 @@
 
 namespace Amju
 {
-static const int CURSOR_PRIORITY = -2; // highest, so always responds
-
 Cursor::Cursor() : m_id(-1)
 {
   m_isActive = false;
-  TheEventPoller::Instance()->AddListener(this, CURSOR_PRIORITY);
+  TheEventPoller::Instance()->AddCursorListener(this);
 
   m_rot= 0;
 
