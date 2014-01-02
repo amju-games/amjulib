@@ -33,6 +33,8 @@ void EventPollerImpl::Update(Listeners* pListeners)
 void EventPollerImpl::QueueEvent(Event* event)
 {
   CursorEvent* ce = dynamic_cast<CursorEvent*>(event);
+
+  // Work out mouse/cursor dx/dy
   if (ce)
   {
     if (ce->controller == 0)
@@ -229,12 +231,53 @@ void EventPoller::SetImpl(EventPollerImpl* pImpl)
   m_pImpl = pImpl;
 }
 
+void EventPoller::AddCursorListener(EventListener* cursor)
+{
+  static const int CURSOR_PRIORITY = -2; // highest, so always responds
+  m_cursors.insert(std::make_pair(CURSOR_PRIORITY, cursor));
+}
+
+void EventPoller::SetModalListener(EventListener* listener)
+{
+  if (m_modalListener == listener)
+  {
+    return;
+  }
+
+#ifdef _DEBUG
+  std::cout << "Event Poller modal listener ";
+  if (listener)
+  {
+    std::cout << " SET to: " << typeid(listener).name() << "\n";
+  }
+  else
+  {
+    std::cout << "RESET\n";
+  }
+#endif
+  m_modalListener = listener;
+}
+
 void EventPoller::Update()
 {
   Assert(m_pImpl.GetPtr());
-  // Copy listeners so we can add or remove listeners in response to an event
-  Listeners copyListeners = m_listeners;
-  m_pImpl->Update(&copyListeners);
+
+  if (m_modalListener)
+  {
+    Listeners listeners = m_cursors;
+    // the only listener to get events, so priority doesn't matter
+    listeners.insert(std::make_pair(0, m_modalListener)); 
+
+    m_pImpl->Update(&listeners);
+  }
+  else
+  {
+    // Copy listeners so we can add or remove listeners in response to an event
+    Listeners copyListeners = m_listeners;
+    copyListeners.insert(m_cursors.begin(), m_cursors.end());
+    m_pImpl->Update(&copyListeners);
+  }
+
   Repeat();
 }
 }

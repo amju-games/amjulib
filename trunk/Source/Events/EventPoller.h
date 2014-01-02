@@ -46,9 +46,18 @@ public:
   // Listeners have a priority. They are notified in ascending order.
   // If a listener eats the event, listeners with a lower priority are not notified.
   void AddListener(EventListener*, int priority = 0);
+
+  // Add special listeners (cursors) which always get events but never consume them
+  void AddCursorListener(EventListener*);
+
   void RemoveListener(EventListener*);
   bool HasListener(EventListener*) const;
   void SetListenerPriority(EventListener*, int priority);
+
+  // Set a listener which will be the only listener to receive events, until this 
+  //  is cancelled by calling with nullptr as parameter
+  void SetModalListener(EventListener*);
+
   void Clear();
 
   void SetImpl(EventPollerImpl*);
@@ -59,6 +68,11 @@ public:
 private:
   PEventPollerImpl m_pImpl;
   Listeners m_listeners;
+  Listeners m_cursors;
+
+  // If non zero, this is the only listener to receive events,
+  //  except for cursors, which always get them.
+  RCPtr<EventListener> m_modalListener;
 };
 
 typedef SingletonNoDestroy<EventPoller> TheEventPoller;
