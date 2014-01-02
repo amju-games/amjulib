@@ -124,6 +124,7 @@ void LurkMsg::Update()
         (m_lurkPos == AMJU_RIGHT  && m_pos.x > m_hidePos.x) ||
         (m_lurkPos == AMJU_CENTRE && m_scale < 0.25f))
     {
+      TheEventPoller::Instance()->SetModalListener(nullptr); 
       m_state = LURK_FINISHED;
       m_scale = 0;
     }
@@ -144,6 +145,7 @@ void LurkMsg::Update()
   case LURK_FINISHED:
     m_rect->SetVisible(false);
     m_text->SetVisible(false);
+
     break;
   }
 }
@@ -291,11 +293,11 @@ static void OnLurkNo()
 
 Lurker::Lurker()
 {
-  m_gui = LoadGui("gui-lurk.txt", false);
+  m_gui = LoadGui("gui-lurk.txt", false); // don't add
   Assert(m_gui);
   // TODO Add as listener when msg displayed, then remove as listner when msg
   //  goes away
-  TheEventPoller::Instance()->AddListener(m_gui, LURK_PRIORITY);
+//  TheEventPoller::Instance()->AddListener(m_gui, LURK_PRIORITY);
 
   m_ok = (GuiButton*)GetElementByName(m_gui, "ok-button");
   Assert(m_ok);
@@ -373,6 +375,11 @@ void Lurker::Draw()
 {
   m_gui->SetVisible(false); // so inert if not displayed
 
+  if (m_qmap.empty())
+  {
+    return;
+  }
+
   for (QMap::iterator it = m_qmap.begin(); it != m_qmap.end(); ++it)
   {
     LurkMsgQ& q = it->second;
@@ -389,6 +396,7 @@ void Lurker::Draw()
       pos.x = 0;
       m_gui->SetLocalPos(pos);
       m_gui->SetVisible(true);
+      TheEventPoller::Instance()->SetModalListener(m_gui); 
 
       // Hide buttons with no command
 
