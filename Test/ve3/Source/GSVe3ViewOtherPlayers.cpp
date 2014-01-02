@@ -18,6 +18,7 @@ namespace Amju
 {
 GSVe3ViewOtherPlayers::GSVe3ViewOtherPlayers()
 {
+  m_showLurk = true;
 }
 
 void GSVe3ViewOtherPlayers::Update()
@@ -51,7 +52,6 @@ void GSVe3ViewOtherPlayers::Draw2d()
 
   // Draw over character if necessary
   GSGui::Draw2d();
-  TheLurker::Instance()->Draw(); // but cursor???
 }
 
 static void OnBack()

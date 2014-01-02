@@ -37,10 +37,14 @@ void GSGui::Update()
   {
     static Lurker* lurker = TheLurker::Instance();
     lurker->Update();
+
+    /* not necessary, now EventPoller has Modal listener
+
     if (m_gui && lurker->IsDisplayingMsg())
     {
       m_gui->SetVisible(false);
     }
+    */
   }
 }
 
