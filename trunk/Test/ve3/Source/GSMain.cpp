@@ -61,6 +61,14 @@
 
 namespace Amju
 {
+bool DoShowBroadcastConsole()
+{
+  return false; // VE3: don't poll frequently, so no broadcast console.... right...?
+
+  // TODO If we do want this enabled, it's only on for multi-player
+  //return GetGameMode() == AMJU_MODE_MULTI;
+}
+
 void OnEatButton()
 {
   Player* p = GetLocalPlayer();
@@ -362,7 +370,7 @@ void GSMain::Update()
 
   TheCollisionManager::Instance()->Update(); // TODO this should be in Game class
 
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  if (DoShowBroadcastConsole())
   {
     TheChatConsole::Instance()->Update();
     TheBroadcastConsole::Instance()->Update();
@@ -420,10 +428,10 @@ void GSMain::DoMoveRequest()
     return;
   }
   // Convert y coord
-  static BroadcastConsole* bc = TheBroadcastConsole::Instance();
   float bottom = -1.0f;
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  if (DoShowBroadcastConsole())
   {
+    static BroadcastConsole* bc = TheBroadcastConsole::Instance();
     bottom = bc->GetY();
   }
   // Transform y so +1 is at the top of the screen, -1 is where the broadcast console starts.
@@ -567,10 +575,10 @@ void GSMain::Draw()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   int width = (int)((float)Screen::X()  * m_viewportWidth);
-  static BroadcastConsole* bc = TheBroadcastConsole::Instance();
   int y = 0;
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  if (DoShowBroadcastConsole())
   {
+    static BroadcastConsole* bc = TheBroadcastConsole::Instance();
     y = (int)((bc->GetY() + 1.0f) * 0.5f * (float)Screen::Y());
   }
   AmjuGL::Viewport(0, y, width, Screen::Y() - y);
@@ -608,9 +616,9 @@ void GSMain::Draw2d()
 {
   GSBase::Draw2d();
 
-  static Kb* kb = TheKb::Instance();
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  if (DoShowBroadcastConsole())
   {
+    static Kb* kb = TheKb::Instance();
     TheBroadcastConsole::Instance()->Draw();
     kb->Draw();
     // TODO Maybe we don't need this
@@ -780,7 +788,7 @@ void GSMain::OnActive()
   //GuiButton* drop = (GuiButton*)GetElementByName(m_gui, "pickup-comp");
   //drop->SetVisible(false); // hide drop button until we pick someting up
 
-  if (GetGameMode() == AMJU_MODE_MULTI)
+  if (DoShowBroadcastConsole())
   {
     TheChatConsole::Instance()->OnActive();
     TheBroadcastConsole::Instance()->OnActive();
