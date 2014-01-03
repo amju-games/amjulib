@@ -27,7 +27,7 @@ run:
 	cp $(TARGET) $(RUNDIR); \
 	cp -R ../../Assets/* $(RUNDIR); \
 	cp -R ../../../../Assets/font2d/* $(RUNDIR)/font2d ; \
-	cp -R ../../../../Assets/gui/hand.png $(RUNDIR); \
+	cp -R ../../../../Assets/gui/*.png $(RUNDIR); \
 	cd $(RUNDIR); \
 	./$(APP)
 
