@@ -56,8 +56,6 @@ private:
   void MarkRead(const Msg& msg); // flag as read on server
 
 private:
-
-  typedef std::multimap<Timestamp, Msg> Msgs;
   Msgs m_map;
 
   // IDs of msgs received from server
