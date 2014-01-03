@@ -21,7 +21,7 @@ GameState::~GameState()
 void GameState::OnActive()
 {
   m_listener = new GameStateListener(this);
-  TheEventPoller::Instance()->AddListener(m_listener);
+  TheEventPoller::Instance()->AddListener(m_listener, m_eventPriority);
 }
 
 void GameState::OnDeactive()
