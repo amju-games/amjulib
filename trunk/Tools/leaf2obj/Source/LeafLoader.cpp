@@ -204,6 +204,7 @@ ObjMesh* LeafLoad(const std::string& filename)
       mat.Write("# j.c. convert leaf file to obj");
       mat.Write("newmtl " + matName);
       mat.Write("map_Kd " + texFilename);
+      mat.Write("Ns 1.0"); // or Maya discards materials?!!
     }
 
     of.Write("# Faces");
