@@ -81,6 +81,12 @@ void Ve1Object::Update()
   {
     GameObject::Update();
   }
+
+  // To avoid being culled?!
+  if (m_sceneNode)
+  {
+    m_sceneNode->SetAABB(GetAABB());
+  }
 }
 
 const Vec3f& Ve1Object::GetOldPos() const
