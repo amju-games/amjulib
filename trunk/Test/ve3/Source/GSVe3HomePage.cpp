@@ -19,6 +19,12 @@ namespace Amju
 {
 void OnEatButton(); // in GSMain
 
+static void OnHomepageEatButton()
+{
+  OnEatButton();
+  TheGSVe3HomePage::Instance()->RefreshGui();
+}
+
 static void OnSeeMyGuestbook()
 {
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
@@ -35,6 +41,13 @@ static void OnQuit()
 
 GSVe3HomePage::GSVe3HomePage()
 {
+}
+
+void GSVe3HomePage::RefreshGui()
+{
+  Player* p = GetLocalPlayer();
+  Assert(p);
+  ShowPlayer(p, m_gui);
 }
 
 void GSVe3HomePage::Update()
@@ -134,7 +147,7 @@ void GSVe3HomePage::OnActive()
   GetElementByName(m_gui, "change-look-button")->SetCommand(OnChangeLook);
   GetElementByName(m_gui, "explore-button")->SetCommand(OnExplore);
   GetElementByName(m_gui, "other-players-button")->SetCommand(OnOtherPlayers);
-  GetElementByName(m_gui, "eat-button")->SetCommand(OnEatButton);
+  GetElementByName(m_gui, "eat-button")->SetCommand(OnHomepageEatButton);
   GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeMyGuestbook);
 
   Player* p = GetLocalPlayer();
