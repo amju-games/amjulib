@@ -107,9 +107,10 @@ void OnQuitButton()
 
 GSMain::GSMain()
 {
+  m_eventPriority = 100; // Low pri so GUI gets events first
+
   m_moveRequest = false;
   m_yRot = 0;
-  m_listener = new GSMainListener;
   m_numPlayersOnline = 0;
 
   m_viewportWidth = 1.0f; 
@@ -742,8 +743,6 @@ void GSMain::OnDeactive()
 
   TheChatConsole::Instance()->OnDeactive();
   TheKb::Instance()->Deactivate();
-
-  TheEventPoller::Instance()->RemoveListener(m_listener);
 }
 
 void GSMain::OnActive()
@@ -787,9 +786,6 @@ void GSMain::OnActive()
     TheBroadcastConsole::Instance()->OnActive();
     TheKb::Instance()->Activate();
   }
-
-  TheEventPoller::Instance()->AddListener(m_listener, 100); 
-  // high number = low priority, so GUI button clicks etc eat the events.
 }
 
 void GSMain::OnQuitButton()
@@ -807,17 +803,7 @@ void GSMain::OnQuitButton()
 
 static bool rightButtonDown = false;
 
-bool GSMainListener::OnCursorEvent(const CursorEvent& ce)
-{
-  return TheGSMain::Instance()->OnCursorEvent(ce);
-}
-
-bool GSMainListener::OnMouseButtonEvent(const MouseButtonEvent& mbe)
-{
-  return TheGSMain::Instance()->OnMouseButtonEvent(mbe);
-}
-
-bool GSMainListener::OnKeyEvent(const KeyEvent& kb)
+bool GSMain::OnKeyEvent(const KeyEvent& kb)
 {
 #ifdef _DEBUG
   // TODO no good: broadcast edit box gets these events now.

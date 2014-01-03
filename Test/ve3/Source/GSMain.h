@@ -13,16 +13,6 @@ namespace Amju
 class GameObject;
 class Furniture;
 
-// Need this because EventPoller expects all listeners to be ref counted/on heap.
-// GameStates are singletons, not ref counted.
-class GSMainListener : public EventListener
-{
-public:
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual bool OnKeyEvent(const KeyEvent&);
-};
-
 class GSMain : public GSBase
 {
 protected:
@@ -38,6 +28,7 @@ public:
 
   bool OnCursorEvent(const CursorEvent&);
   bool OnMouseButtonEvent(const MouseButtonEvent&);
+  bool OnKeyEvent(const KeyEvent& kb);
 
   // So chat console reduces the width of the 3D scene
   void SetViewWidth(float w);
