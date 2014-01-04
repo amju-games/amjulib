@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{12E97154-C5DD-454F-88F6-3A69775AFAF5}
 AppName=Hungry People
-AppVersion=1.1
+AppVersion=2.0
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
@@ -27,7 +27,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "..\..\..\..\Build\ve2\Windows\Release\ve2.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\Build\ve3\Windows\Release\ve3.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\GLUT\glut32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\Network\curl\lib\libcurl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\..\..\Source\Network\curl\lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -38,10 +38,10 @@ Source: "..\..\..\..\Build\CompiledAssets\data-win.glue"; DestDir: "{app}\Data\"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\Hungry People"; Filename: "{app}\ve2.exe"
-Name: "{commondesktop}\Hungry People"; Filename: "{app}\ve2.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Hungry People"; Filename: "{app}\ve2.exe"; Tasks: quicklaunchicon
+Name: "{group}\Hungry People"; Filename: "{app}\ve3.exe"
+Name: "{commondesktop}\Hungry People"; Filename: "{app}\ve3.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Hungry People"; Filename: "{app}\ve3.exe"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\ve2.exe"; Description: "{cm:LaunchProgram,Hungry People}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\ve3.exe"; Description: "{cm:LaunchProgram,Hungry People}"; Flags: nowait postinstall skipifsilent
 
