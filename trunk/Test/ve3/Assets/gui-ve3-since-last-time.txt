@@ -50,6 +50,6 @@ gui-button-4.png
 // Text
 OK
 // Font name, size
-arial, 1.5, sx=0.5
+arial, 1.5, sx=0.9
 
 
