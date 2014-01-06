@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <string>
-#include <Lua.h>
+#include <AmjuLua.h>
 
 namespace Amju
 { 
