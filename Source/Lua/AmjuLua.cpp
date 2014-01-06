@@ -1,14 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2006
-$Log: Lua.cpp,v $
-Revision 1.2  2006/12/01 23:27:54  jay
-New FileImplMem, unfortunately causing many small changes
-
-Revision 1.1  2006/01/16 13:40:11  jay
-Class to wrap Lua C API
-
-*/
-
 #include <AmjuFirst.h>
 #include <iostream>
 extern "C"
@@ -49,17 +38,19 @@ std::cout << "Loading lua script " << filename << "...\n";
 #endif
 
   // TODO TEMP TEST
-  int r = //lua_dofile(m_pL, filename); 
-     luaL_loadfile(m_pL, filename);
+  int r = luaL_loadfile(m_pL, filename);
 #ifdef LUA_DEBUG
 std::cout << " ..result: " << r << "\n";
 #endif
 
+  // Need to do this before we can call any functions in the file.
+  lua_call(m_pL, 0, 0);
+
   return (r == 0);
 
 
-
-  File f(false /* no version info */, useGlue ? File::GLUE : File::STD);
+  bool NOVERSIONINFO = false;
+  File f(NOVERSIONINFO, useGlue ? File::GLUE : File::STD);
   if (!f.OpenRead(filename)) // TODO binary ? use Root Dir ?
   {
     f.ReportError("Failed to open Lua script file.");
