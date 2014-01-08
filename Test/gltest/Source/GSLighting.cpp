@@ -79,6 +79,7 @@ void GSLighting::Draw2d()
 
 void GSLighting::OnActive()
 {
+  GSBase::OnActive(); 
 }
 
 } // namespace

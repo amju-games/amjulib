@@ -49,6 +49,7 @@ void GSEnvMap::Draw2d()
 
 void GSEnvMap::OnActive()
 {
+  GSBase::OnActive();
 }
 
 bool GSEnvMap::OnCursorEvent(const CursorEvent& ce)
