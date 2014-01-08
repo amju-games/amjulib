@@ -38,19 +38,36 @@ public:
 };
 const char* TestGO::TYPENAME = "testgo";
 
-// Register collision handler
-static bool reg = TheCollisionManager::Instance()->Add(
-  TestGO::TYPENAME, TestGO::TYPENAME, HandleCollision);
+// This type will be registered differently - so we need a new type
+class TestGOEveryFrame : public TestGO
+{
+public:
+  static const char* TYPENAME;
+};
+const char* TestGOEveryFrame::TYPENAME = "testgo-every-frame";
 
-void CollTests()
+// Register collision handler
+static bool reg[] = 
+{
+  TheCollisionManager::Instance()->Add(
+    TestGO::TYPENAME, TestGO::TYPENAME, HandleCollision, AMJU_FIRST_CONTACT_ONLY),
+
+  TheCollisionManager::Instance()->Add(
+    TestGOEveryFrame::TYPENAME, TestGOEveryFrame::TYPENAME, HandleCollision, 
+    AMJU_EVERY_CONTACT)
+};
+
+template <typename T>
+void CollTests(bool handleFirstContactOnly)
 {
   Game* game = TheGame::Instance();
+  game->ClearGameObjects();
 
   const int NUM_GOS = 3;
   GameObject* gos[NUM_GOS];
   for (int i = 0; i < NUM_GOS; i++)
   {
-    TestGO* tgo = new TestGO;
+    GameObject* tgo = new T;
     gos[i] = tgo;
     tgo->SetId(i);
 
@@ -81,9 +98,16 @@ void CollTests()
   cm->Update();
   REQUIRE(g_collisions == 1);
 
-  // Second collision should be ignored
+  // Second collision should be ignored if we handle first coll only
   cm->Update();
-  REQUIRE(g_collisions == 1);
+  if (handleFirstContactOnly)
+  {
+    REQUIRE(g_collisions == 1);
+  }
+  else
+  {
+    REQUIRE(g_collisions == 2);
+  }
 
   // Change pos so still intersecting
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 0.5f * BOXSIZE, 0));
@@ -91,9 +115,16 @@ void CollTests()
   // Now boxes intersect
   REQUIRE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
 
-  // This collision should also be ignored
+  // This collision should also be ignored if we handle first coll only
   cm->Update();
-  REQUIRE(g_collisions == 1);
+  if (handleFirstContactOnly)
+  {
+    REQUIRE(g_collisions == 1);
+  }
+  else
+  {
+    REQUIRE(g_collisions == 3);
+  }
 
   // Move away so not intersecting
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 4.0f * BOXSIZE, 0));
@@ -101,8 +132,9 @@ void CollTests()
   // Now boxes do not intersect
   REQUIRE_FALSE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
   // No collision
+  int old = g_collisions;
   cm->Update();
-  REQUIRE(g_collisions == 1);
+  REQUIRE(g_collisions == old);
 
   gos[1]->SetPos(Vec3f(0.5f * BOXSIZE, 0.5f * BOXSIZE, 0));
   game->UpdateGameObjects(); // Recalc bounding boxes
@@ -110,9 +142,7 @@ void CollTests()
   REQUIRE(gos[0]->GetAABB().Intersects(gos[1]->GetAABB()));
   // Now there is a new collision
   cm->Update();
-  REQUIRE(g_collisions == 2);
-
-  game->ClearGameObjects();
+  REQUIRE(g_collisions == old + 1);
 }
 
 TEST_CASE("Collisions Using Brute Force", "") 
@@ -120,7 +150,8 @@ TEST_CASE("Collisions Using Brute Force", "")
   CollisionManager* cm = TheCollisionManager::Instance();
   cm->SetCollisionDetector(new BruteForce);
 
-  CollTests();
+  CollTests<TestGO>(AMJU_FIRST_CONTACT_ONLY);
+  CollTests<TestGOEveryFrame>(AMJU_EVERY_CONTACT);
 }
 
 TEST_CASE("Collisions Using Sweep and Prune", "") 
@@ -128,6 +159,7 @@ TEST_CASE("Collisions Using Sweep and Prune", "")
   CollisionManager* cm = TheCollisionManager::Instance();
   cm->SetCollisionDetector(new SweepAndPrune);
 
-  CollTests();
+  CollTests<TestGO>(AMJU_FIRST_CONTACT_ONLY);
+  CollTests<TestGOEveryFrame>(AMJU_EVERY_CONTACT);
 }
 
