@@ -9,8 +9,8 @@ require "sendnotification.pl";
 require "sendemail2.pl";
 
 # This is the minimum client version which you must have to be able to log in.
-my $latestMajor = "1";
-my $latestMinor = "1";
+my $latestMajor = "2";
+my $latestMinor = "0";
 my $startloc = 1;
 
 my_connect();
