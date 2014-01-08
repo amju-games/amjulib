@@ -53,6 +53,13 @@ CollisionDetector* CollisionManager::GetCollisionDetector()
 bool CollisionManager::Add(
   const std::string& name1, const std::string& name2, CollisionHandler ch,bool handleFirstContactOnly)
 {
+  TypeNamesPair tnp(name1, name2);
+
+  Assert(m_map.find(tnp) == m_map.end());
+  //  already added this pair of types!
+
+  m_map[tnp] = ch;
+
   if (handleFirstContactOnly)
   {
     // Store both ways round
@@ -60,8 +67,6 @@ bool CollisionManager::Add(
     m_firstContactOnlyFlags.insert(TypeNamesPair(name2, name1));
   }
 
-  TypeNamesPair tnp(name1, name2);
-  m_map[tnp] = ch;
   return true;
 }
 
