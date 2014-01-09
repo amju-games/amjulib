@@ -24,7 +24,7 @@ static int MyCFunc(lua_State* L)
   // TODO How do we know how many params? Maybe we have to pass num into
   //  this func.
 // eg.  Variable params = Lua::GetParams(L, 3);
-
+  
 
   // Return values
   Variable retvals;
