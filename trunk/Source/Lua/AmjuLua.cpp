@@ -2,8 +2,8 @@
 #include <iostream>
 extern "C"
 {
-#include "LuaLib-5.1.4/lualib.h"
-#include "LuaLib-5.1.4/lauxlib.h"
+#include "LuaLib-5.2.3/lualib.h"
+#include "LuaLib-5.2.3/lauxlib.h"
 }
 #include "AmjuLua.h"
 #include <File.h>
@@ -17,7 +17,7 @@ extern void ReportError(const std::string&);
 
 Lua::Lua()
 {
-  m_pL = lua_open();
+  m_pL = luaL_newstate(); // NOT lua_open()
 
   // Include all lua libraries.
   luaL_openlibs(m_pL);
@@ -43,8 +43,16 @@ std::cout << "Loading lua script " << filename << "...\n";
 std::cout << " ..result: " << r << "\n";
 #endif
 
-  // Need to do this before we can call any functions in the file.
-  lua_call(m_pL, 0, 0);
+  if (r == 0)
+  {
+    // Need to do this before we can call any functions in the file.
+    lua_call(m_pL, 0, 0);
+  }
+  else
+  {
+    const char* error = lua_tostring(m_pL, -1);
+    ReportError(error);
+  }
 
   return (r == 0);
 
@@ -148,6 +156,8 @@ std::cout << "LUA: calling function: " << funcNameStr
   else if (numRetVals == 1)
   {
     // TODO handle different return types
+
+//    lua_getresult();
     int retVal = (int)lua_tonumber(m_pL, -1);
     lua_pop(m_pL, 1);
     *pResults = retVal;

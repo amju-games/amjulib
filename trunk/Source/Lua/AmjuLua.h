@@ -12,7 +12,7 @@ Class to wrap Lua C API
 #include <string>
 extern "C"
 {
-#include "LuaLib-5.1.4/lua.h"
+#include "LuaLib-5.2.3/lua.h"
 }
 #include <RCPtr.h>
 #include <Variable.h>
