@@ -1,17 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: Variable.cpp,v $
-Revision 1.3  2008/05/18 16:04:33  jay
-MSVC update
-
-Revision 1.2  2008/05/08 10:58:08  jay
-New memory management code
-
-Revision 1.1  2004/09/08 15:43:20  jay
-Added to repository
-  
-*/
-
 #include <AmjuFirst.h>
 #include "Variable.h"
 #include "StringUtils.h"
@@ -290,7 +276,7 @@ std::string Variable::ToString() const
     return Amju::ToString(m_data.f);
 
   case VARIABLE_STRING:
-    return *(m_data.pString);
+    return "\"" + *(m_data.pString) + "\"";
 
   case VARIABLE_VECTOR:
     return VecToString();
