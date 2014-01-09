@@ -10,7 +10,7 @@ end
 
 function TestMyRegisteredFunction()
   io.write("Calling C function...\n");
-  mycfunc();  
+  return mycfunc(78, "wow!", true);  
 end
 
 --hello();
