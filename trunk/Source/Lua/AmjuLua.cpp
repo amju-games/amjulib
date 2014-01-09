@@ -2,11 +2,13 @@
 #include <iostream>
 extern "C"
 {
+#include "LuaLib-5.2.3/lua.h"
 #include "LuaLib-5.2.3/lualib.h"
 #include "LuaLib-5.2.3/lauxlib.h"
 }
 #include "AmjuLua.h"
 #include <File.h>
+#include <Variable.h>
 #include <AmjuFinal.h>
 
 #define LUA_DEBUG
@@ -14,6 +16,84 @@ extern "C"
 namespace Amju
 {
 extern void ReportError(const std::string&);
+
+// Push args onto Lua stack.
+// Used by Call() and Return() below
+// Returns no of args pushed.
+int PushLuaArgs(lua_State* L, const Variable& v)
+{
+  int numPushed = 0;
+
+  if (v.IsIntType())
+  {
+    int intArg = v.GetInt();
+    lua_pushnumber(L, intArg);
+    numPushed = 1;
+  }
+  else if (v.IsFloatType())
+  {
+    float fArg = v.GetFloat();
+    lua_pushnumber(L, fArg);
+    numPushed = 1;
+  }
+  else if (v.IsStringType())
+  {
+    const char* strArg = v.ToString().c_str();
+    lua_pushstring(L, strArg);
+    numPushed = 1;
+  }
+  else if (v.IsVectorType())
+  {
+    VariableVec vec = v.GetVector();
+    int numArgs = vec.size();
+    for (int i = 0; i < numArgs; i++)
+    {
+      const Variable& vv = vec[i];
+      numPushed += PushLuaArgs(L, vv);
+    }
+  }
+  return numPushed;
+}
+
+void Lua::Return(lua_State* L, const Variable& retVals)
+{
+  PushLuaArgs(L, retVals);
+}
+
+Variable Lua::GetParams(lua_State* L)
+{
+  int n = lua_gettop(L);    /* number of arguments */
+
+  std::cout << n << " arguments...\n";
+
+  VariableVec vv;
+  for (int i = 1; i <= n; i++)
+  {
+    int t = lua_type(L, i);
+    switch (t)
+    {
+    case LUA_TNUMBER:
+      // sigh, can't distinguish between float and int numeric types?
+      vv.push_back(Variable(float(lua_tonumber(L, i))));
+      break;
+    case LUA_TBOOLEAN:
+      vv.push_back(Variable(lua_toboolean(L, i)));
+      break;
+    case LUA_TSTRING:
+      vv.push_back(Variable(std::string(lua_tostring(L, i))));
+      break;
+      
+    case LUA_TTABLE:
+    case LUA_TNIL:
+    case LUA_TFUNCTION:
+    case LUA_TUSERDATA: 
+    case LUA_TTHREAD:
+    case LUA_TLIGHTUSERDATA:
+      Assert(0); // TODO
+    }
+  }
+  return vv;
+}
 
 Lua::Lua()
 {
@@ -77,59 +157,19 @@ bool Lua::LoadScript(const std::string& script)
   return false;
 }
 
-// Push args onto Lua stack.
-// Used by Call() below
-// Returns no of args pushed.
-int PushLuaArgs(lua_State* L, const Variable& v)
-{
-  int numPushed = 0;
-
-  if (v.IsIntType())
-  {
-    int intArg = v.GetInt();
-    lua_pushnumber(L, intArg);
-    numPushed = 1;
-  }
-  else if (v.IsFloatType())
-  {
-    float fArg = v.GetFloat();
-    lua_pushnumber(L, fArg);
-    numPushed = 1;
-  }
-  else if (v.IsStringType())
-  {
-    const char* strArg = v.ToString().c_str();
-    lua_pushstring(L, strArg);
-    numPushed = 1;
-  }
-  else if (v.IsVectorType())
-  {
-    VariableVec vec = v.GetVector();
-    int numArgs = vec.size();
-    for (int i = 0; i < numArgs; i++)
-    {
-      const Variable& vv = vec[i];
-      numPushed += PushLuaArgs(L, vv);
-    }
-  }
-  return numPushed;
-}
-
 bool Lua::Call(
   const Lua::LuaFuncName& funcName, 
   const Variable& args, 
   Variable* pResults,
   int numRetVals)
 {
-  const char* funcNameStr = funcName.c_str();
-
-  lua_getglobal(m_pL, funcNameStr);
+  lua_getglobal(m_pL, funcName.c_str());
 
   // Push each arg on to the lua stack
   int numArgs = PushLuaArgs(m_pL, args);
 
 #ifdef LUA_DEBUG
-std::cout << "LUA: calling function: " << funcNameStr 
+std::cout << "LUA: c++ calling lua function: " << funcName
   << " num args pushed: " << numArgs << "\nArgs: " 
   << args.ToString().c_str() << "\n";
 #endif

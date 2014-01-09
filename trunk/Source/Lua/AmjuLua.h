@@ -82,11 +82,19 @@ public:
   bool Register(const LuaFuncName& funcName, lua_CFunction);
  // TODO
 
+  // Get params as a Variable - this is to be called by C functions called
+  //  from lua.
+  static Variable GetParams(lua_State* L);
+
+  // Pass return values in Variable to lua - called by C function when
+  //  returning control to lua.
+  static void Return(lua_State* L, const Variable& retVals);
+
 private:
   // Uncopyable: if we pass by value we will destroy the Lua State in the
   // dtor. Alternatively we could ref count the Lua State.
-  Lua(const Lua&);
-  Lua& operator=(const Lua&);
+  Lua(const Lua&); // =delete
+  Lua& operator=(const Lua&); // =delete
 
 private:
   lua_State* m_pL;

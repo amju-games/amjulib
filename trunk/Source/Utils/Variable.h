@@ -29,7 +29,6 @@ public:
   
 
   Variable();
-  Variable(const Variable& var);
 
   Variable(bool);
   Variable(int);
@@ -51,7 +50,6 @@ public:
   bool IsStringType() const;
   bool IsVectorType() const;
 
-  Variable& operator=(const Variable& var);
   Variable& operator=(bool);
   Variable& operator=(int);
   Variable& operator=(float);
@@ -68,19 +66,19 @@ public:
   std::string ToString() const;
 
 private:
-  void Swap(Variable* pOther);
-
   std::string VecToString() const;
 
 private:
-  union Data
+  // This was a union, to save space. But for such a tiny saving, it doesn't seem worth it - 
+  //  unions are restrictive and error prone. The string and vector members would have to
+  //  be stored on the heap, making the rest of the Variable class much more complex.
+  struct Data 
   {
     bool b;
     int i;
     float f;
-    // More interesting types have to be on the heap
-    std::string* pString;
-    std::vector<Variable>* pVec;
+    std::string pString;
+    std::vector<Variable> pVec;
   };
 
   Data m_data;
