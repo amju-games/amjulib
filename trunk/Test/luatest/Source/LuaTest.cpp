@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <AmjuLua.h>
+#include <VariableGeomConvert.h>
 
 namespace Amju
 {
@@ -18,6 +19,17 @@ namespace Amju
 static int MyCFunc(lua_State* L)
 {
   std::cout << "Good god! This is MyCFunc, in C++ code!\n";
+
+  // Get parameters passed in, as Variable
+  // TODO How do we know how many params? Maybe we have to pass num into
+  //  this func.
+// eg.  Variable params = Lua::GetParams(L, 3);
+
+
+  // Return values
+  Variable retvals;
+//  Lua::Return(L, retvals);
+
   return 0;
 }
 
@@ -41,10 +53,18 @@ int main(int argc, char** argv)
   std::cout << "Loaded script ok.\n";
 
   Lua::LuaFuncName funcName = "hello";
-  Variable args;
+  
+  VariableVec vec; // bah, no uniform initialisation??
+  //{ Variable(123), Variable(456) };
+  vec.push_back(123);
+  vec.push_back(Variable(std::string("I r string")));
+  Matrix mtx;
+  vec.push_back(ToVariable(mtx));
+  Variable args(vec);
   Variable retvals;
 
-  if (!lua.Call(funcName, args, &retvals))
+  int numRetVals = 2;
+  if (!lua.Call(funcName, args, &retvals, numRetVals))
   {
     std::cout << "Failed to call function '" << funcName << "'\n";
     exit(1);
@@ -61,7 +81,8 @@ int main(int argc, char** argv)
   }
 
   funcName = "TestMyRegisteredFunction";
-  if (!lua.Call(funcName, args, &retvals))
+  numRetVals = 1;
+  if (!lua.Call(funcName, args, &retvals, numRetVals))
   {
     std::cout << "Testing registed function: failed to call function '" << funcName << "'\n";
     exit(1);

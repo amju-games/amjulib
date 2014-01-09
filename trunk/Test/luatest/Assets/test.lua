@@ -4,7 +4,8 @@
 
 function hello()
   io.write("Hello world, from ",_VERSION,"!\n");
-  return 1;
+  -- how to return multiple values, e.g. Vec3 or Matrix? - easy!!?
+  return 1, 2, 3;
 end
 
 function TestMyRegisteredFunction()
