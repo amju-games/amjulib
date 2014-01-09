@@ -27,7 +27,7 @@ SOURCES := ../../Source \
   $(AMJU)/Image/Png \
   $(AMJU)/Localise \
   $(AMJU)/Lua \
-  $(AMJU)/Lua/LuaLib-5.1.4 \
+  $(AMJU)/Lua/LuaLib-5.2.3 \
   $(AMJU)/Md2 \
   $(AMJU)/Mem \
   $(AMJU)/Network \
