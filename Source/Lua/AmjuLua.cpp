@@ -110,11 +110,9 @@ int PushLuaArgs(lua_State* L, const Variable& v)
 bool Lua::Call(
   const Lua::LuaFuncName& funcName, 
   const Variable& args, 
-  Variable* pResults)
+  Variable* pResults,
+  int numRetVals)
 {
-  // TODO We have to know the number of return vals up front.
-  int numRetVals = 1; // TODO
-
   const char* funcNameStr = funcName.c_str();
 
   lua_getglobal(m_pL, funcNameStr);
@@ -168,8 +166,9 @@ std::cout << "LUA: calling function: " << funcNameStr
   }
 
 #ifdef LUA_DEBUG
-std::cout << "LUA: function call succeeded, ret val(s): " 
-  << pResults->ToString().c_str() << "\n";
+std::cout << "LUA: function call succeeded, num ret vals: "
+  << numRetVals << ". Values: " 
+  << pResults->ToString() << "\n";
 #endif
  
   return true;

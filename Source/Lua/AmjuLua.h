@@ -65,12 +65,14 @@ public:
   // Call a lua function in the currently loaded lua script.
   // Returns true if function call succeeded; this is NOT the return value
   // of the function. Get the return value(s) in the 3rd param.
+  // We need to specify in the 4th parameter how many return values we
+  //  expect - Lua can return multiple values.
   // Pass a single parameter as a Variable; pass multiple parameters 
   // as a vector of Variables; NB 
   // VariableVec params will have to be flattened; only simple types can
   // be passed to a lua function AFAIK.
   bool Call(const LuaFuncName& funcName, const Variable& args,
-    Variable* pResults);
+    Variable* pResults, int numRetVals = 1);
 
   // Register a C function so that lua code can call it.
   // The idea is that this would be called in a subclass ctor to register
