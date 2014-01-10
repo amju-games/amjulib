@@ -18,27 +18,22 @@ namespace Amju
 //  to know what to return, how to get params, etc.
 static int MyCFunc(lua_State* L)
 {
-  std::cout << "Good god! This is MyCFunc, in C++ code!\n";
+  std::cout << "LUA: c++: function " << __FUNCTION__ << " called from lua\n";
 
   // Get parameters passed in, as Variable
   // TODO How do we know how many params? Maybe we have to pass num into
   //  this func.
   Variable params = Lua::GetParams(L);
   
-  std::cout << "I got these params: " << params.ToString() << "\n";
-
   // Return values
   VariableVec retvals;
   retvals.push_back(Variable(std::string("I'm a ret val!")));
   retvals.push_back(23);
 
   Variable ret(retvals);
-  std::cout << "Returning these vals: " << ret.ToString() << "\n";
-
-  Lua::Return(L, ret);
 
   // Return number of return vals pushed
-  return retvals.size();
+  return Lua::Return(L, ret);
 }
 
 void ReportError(const std::string& e)
@@ -48,57 +43,58 @@ void ReportError(const std::string& e)
 }
 using namespace Amju;
 
-int main(int argc, char** argv)
+bool test()
 {
+  Lua::ShowInfoMessages(true);
   Lua lua;
 
-  if (!lua.LoadScript("test.lua"))
+  if (!lua.LoadScriptFromFile("test.lua"))
   {
-    std::cout << "Failed to load lua script.\n";
-    exit(1);
+    return false;
   }
 
-  std::cout << "Loaded script ok.\n";
-
-  Lua::LuaFuncName funcName = "hello";
+  Lua::LuaFuncName funcName = "hello_ret3vals";
   
   VariableVec vec; // bah, no uniform initialisation??
   //{ Variable(123), Variable(456) };
   vec.push_back(123);
   vec.push_back(Variable(std::string("I r string")));
-  Matrix mtx;
-  vec.push_back(ToVariable(mtx));
+
+  // This works but makes output messy and hard to read
+//  Matrix mtx;
+//  vec.push_back(ToVariable(mtx));
+
   Variable args(vec);
   Variable retvals;
 
-  int numRetVals = 2;
+  int numRetVals = 3;
   if (!lua.Call(funcName, args, &retvals, numRetVals))
   {
-    std::cout << "Failed to call function '" << funcName << "'\n";
-    exit(1);
+    return false;
   }
 
-  std::cout << "Supposedly called function\n";
-
-  // Register a C++ function and get the Lua script to call it
+  // Register a C++ function and get a Lua function to call it
   if (!lua.Register("mycfunc", MyCFunc))
   {
-    // Failed to register function
-    std::cout << "Failed to register function with Lua state\n";
-    exit(1);
+    return false;
   }
 
   funcName = "TestMyRegisteredFunction";
-  numRetVals = 1;
+  numRetVals = 2; 
   if (!lua.Call(funcName, args, &retvals, numRetVals))
   {
-    std::cout << "Testing registed function: failed to call function '" << funcName << "'\n";
-    exit(1);
+    return false;
   }
 
   std::cout << "Finished.\n";
-  return 0;
+  return true;
 }
+
+int main(int argc, char** argv)
+{
+  test();
+}
+
 
 
 

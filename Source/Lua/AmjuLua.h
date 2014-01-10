@@ -46,21 +46,23 @@ public:
   // would have to pass the function objects around all the time. Hmm.
   typedef std::string LuaFuncName;
 
-public:
   Lua();
 
   // Closes the lua state member. That is why currently copying is forbidden;
   // the alternative would be to use ref counting.
   virtual ~Lua();
 
+  // Flag to see information about function calls - off by default
+  static void ShowInfoMessages(bool);
+
   // Load a lua script from a file. You can disable glue loading for user-
   // supplied scripts not in any glue file. If the glue file is enabled
   // (the default), then the current glue file will be used, if glue
   // file loading has been turned on globally.
-  bool LoadScript(const char* filename, bool enableGlue = true);
+  bool LoadScriptFromFile(const std::string& filename, bool enableGlue = true);
 
   // Load a (text) lua script from memory.
-  bool LoadScript(const std::string& script);
+  bool LoadScriptFromMem(const std::string& script);
 
   // Call a lua function in the currently loaded lua script.
   // Returns true if function call succeeded; this is NOT the return value
@@ -88,7 +90,8 @@ public:
 
   // Pass return values in Variable to lua - called by C function when
   //  returning control to lua.
-  static void Return(lua_State* L, const Variable& retVals);
+  // Returns total number of args pushed after flattening retvals.
+  static int Return(lua_State* L, const Variable& retVals);
 
 private:
   // Uncopyable: if we pass by value we will destroy the Lua State in the
@@ -98,6 +101,7 @@ private:
 
 private:
   lua_State* m_pL;
+  std::string m_filename; // for error reporting
 };
 }
 
