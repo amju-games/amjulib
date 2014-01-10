@@ -13,6 +13,19 @@
 
 namespace Amju
 {
+Variable AwesomeFunc(const Variable& params) 
+{ 
+  std::cout << "I am in AwesomeFunc!\n";
+
+  VariableVec retvals;
+  retvals.push_back(Variable(std::string("I'm the first ret val, then 23.")));
+  retvals.push_back(23);
+
+  return retvals;
+}
+// This is to put a wrapper around the above function so we can register it with lua.
+AMJU_MAKE_LUA_WRAPPER(AwesomeFunc)
+
 // Function which we register so Lua script can call it:
 // TOOD add to Amju Lua so we can more easily register functions, and don't have
 //  to know what to return, how to get params, etc.
@@ -24,6 +37,8 @@ static int MyCFunc(lua_State* L)
   // TODO How do we know how many params? Maybe we have to pass num into
   //  this func.
   Variable params = Lua::GetParams(L);
+
+
   
   // Return values
   VariableVec retvals;
@@ -45,7 +60,7 @@ using namespace Amju;
 
 bool test()
 {
-  Lua::ShowInfoMessages(true);
+  Lua::SetShowInfoMessages(true);
   Lua lua;
 
   if (!lua.LoadScriptFromFile("test.lua"))
@@ -74,7 +89,12 @@ bool test()
   }
 
   // Register a C++ function and get a Lua function to call it
-  if (!lua.Register("mycfunc", MyCFunc))
+  //if (!lua.Register("mycfunc", MyCFunc))
+  //{
+  //  return false;
+  //}
+
+  if (!lua.RegisterWrappedFunc("mycfunc", AwesomeFunc))
   {
     return false;
   }
