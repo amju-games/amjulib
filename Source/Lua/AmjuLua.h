@@ -19,6 +19,14 @@ extern "C"
 
 namespace Amju
 {
+// C++ functions used in this Lua wrapper. 
+typedef Variable (*WrappedLuaFunc)(const Variable&);
+// You write a function with the above sig. Create a wrapper function with AMJU_MAKE_LUA_WRAPPER
+// E.g. 
+// Variable AwesomeFunc(const Variable& params) { ... } 
+// AMJU_MAKE_LUA_WRAPPER(AwesomeFunc)
+
+
 // Wrapper around Lua API.
 // We want to load lua scripts, call functions in the scripts, and register
 // C functions for the scripts to call.
@@ -53,7 +61,8 @@ public:
   virtual ~Lua();
 
   // Flag to see information about function calls - off by default
-  static void ShowInfoMessages(bool);
+  static void SetShowInfoMessages(bool);
+  static bool ShowInfoMessages();
 
   // Load a lua script from a file. You can disable glue loading for user-
   // supplied scripts not in any glue file. If the glue file is enabled
@@ -81,7 +90,10 @@ public:
   // application-specific functions we want lua scripts to call.
   // Or you could choose to not subclass and just explicitly register
   // functions - e.g. when a script is loaded.
+  // Don't call this: use RegisterWrappedFunc instead, so you can use
+  //  WrappedLuaFunc sig.
   bool Register(const LuaFuncName& funcName, lua_CFunction);
+
  // TODO
 
   // Get params as a Variable - this is to be called by C functions called
@@ -103,6 +115,16 @@ private:
   lua_State* m_pL;
   std::string m_filename; // for error reporting
 };
+
+#define AMJU_MAKE_LUA_WRAPPER(fn) \
+static int fn##_wrapper(lua_State* L) \
+{ \
+  if (Lua::ShowInfoMessages()) { std::cout << "LUA: c++: function " << #fn << " called from lua\n"; } \
+  return Lua::Return(L, fn(Lua::GetParams(L))); \
+}
+
+#define RegisterWrappedFunc(name, fn) Register(name, fn##_wrapper)
+
 }
 
 #endif

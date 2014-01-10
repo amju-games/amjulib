@@ -18,7 +18,12 @@ extern void ReportError(const std::string&);
 
 static bool s_showInfo = false;
 
-void Lua::ShowInfoMessages(bool show)
+bool Lua::ShowInfoMessages()
+{
+  return s_showInfo;
+}
+
+void Lua::SetShowInfoMessages(bool show)
 {
   s_showInfo = show;
 }
