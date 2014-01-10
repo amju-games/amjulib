@@ -23,14 +23,22 @@ static int MyCFunc(lua_State* L)
   // Get parameters passed in, as Variable
   // TODO How do we know how many params? Maybe we have to pass num into
   //  this func.
-// eg.  Variable params = Lua::GetParams(L, 3);
+  Variable params = Lua::GetParams(L);
   
+  std::cout << "I got these params: " << params.ToString() << "\n";
 
   // Return values
-  Variable retvals;
-//  Lua::Return(L, retvals);
+  VariableVec retvals;
+  retvals.push_back(Variable(std::string("I'm a ret val!")));
+  retvals.push_back(23);
 
-  return 0;
+  Variable ret(retvals);
+  std::cout << "Returning these vals: " << ret.ToString() << "\n";
+
+  Lua::Return(L, ret);
+
+  // Return number of return vals pushed
+  return retvals.size();
 }
 
 void ReportError(const std::string& e)
