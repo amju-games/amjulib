@@ -1,12 +1,31 @@
 #include <ReportError.h>
 #include <Timer.h>
 #include <VariableGeomConvert.h>
+#include <File.h>
 #include "SceneLuaScript.h"
 
 namespace Amju
 {
+const char* SceneLuaScript::NAME = "scene-lua";
+
+SceneNode* SceneLuaScript::Create()
+{
+  return new SceneLuaScript;
+}
+
 SceneLuaScript::SceneLuaScript()
 {
+}
+
+bool SceneLuaScript::Load(File* f) 
+{
+  std::string filename;
+  if (!f->GetDataLine(&filename))
+  {
+    f->ReportError("Expected lua script file name.");
+    return false;
+  }
+  return LoadScript(filename);
 }
 
 void SceneLuaScript::Update() 
