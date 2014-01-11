@@ -235,9 +235,15 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
-    // Clicked on an item
-    if (m_selected != -1)
+    // Not sure if this is what we want every time - TODO check this, maybe have a flag.
+    // (Fix for lingering sub menus in AmjuWW edit mode)
+    if (m_selected == -1)
     {
+      SetVisible(false);  // Hide if clicked away
+    }
+    else
+    {
+      // Clicked on an item
       // TODO Should react on mouse up when up item == down item.
       GuiElement* child = m_children[m_selected];
       child->ExecuteCommand();
