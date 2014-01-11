@@ -119,7 +119,9 @@ void SceneGraph::DrawNode(SceneNode* p)
     PushColour();
     MultColour(p->m_colour);
 
-    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_DEPTH_READ);
+    AmjuGL::PushAttrib(AmjuGL::AMJU_DEPTH_WRITE | AmjuGL::AMJU_DEPTH_READ |
+      AmjuGL::AMJU_LIGHTING);
+
     if (p->IsZReadEnabled())
     {
       AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
@@ -136,6 +138,15 @@ void SceneGraph::DrawNode(SceneNode* p)
     {
       AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
     }
+    if (p->IsLit())
+    {
+      AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+    }
+    else
+    {
+      AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+    }
+
     p->Draw();
     AmjuGL::PopAttrib();
 
