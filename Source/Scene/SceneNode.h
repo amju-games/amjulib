@@ -106,9 +106,8 @@ protected:
   Nodes m_children;
 };
 
-typedef Singleton<Factory<SceneNode> > TheSceneNodeFactory;
-
 PSceneNode LoadScene(const std::string& filename);
+PSceneNode LoadScene(File* f);
 }
 
 #endif

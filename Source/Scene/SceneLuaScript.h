@@ -9,8 +9,13 @@ namespace Amju
 class SceneLuaScript : public SceneNode
 {
 public:
+  static const char* NAME;
+  static SceneNode* Create();
+
   SceneLuaScript();
   virtual void Update() override;
+  virtual bool Load(File*) override;
+
   bool LoadScript(const std::string& scriptFilename);
 
 protected:
