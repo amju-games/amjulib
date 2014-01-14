@@ -33,6 +33,7 @@ public:
   void Transform(const Matrix& m);
 
   bool Intersects(const AABB&) const;
+  bool Intersects(const Vec3f& point) const;
 
   float GetXSize() const;
   float GetYSize() const;

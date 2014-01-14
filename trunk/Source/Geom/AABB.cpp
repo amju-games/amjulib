@@ -129,6 +129,14 @@ bool AABB::Intersects(const AABB& b) const
     b.m_zmax > (m_zmin + SMALLEST) );
 }
 
+bool AABB::Intersects(const Vec3f& p) const
+{
+  return 
+    p.x >= m_xmin && p.x <= m_xmax &&
+    p.y >= m_ymin && p.y <= m_ymax &&
+    p.z >= m_zmin && p.z <= m_zmax;
+}
+
 void AABB::Translate(const Vec3f& v)
 {
   m_xmax += v.x;
