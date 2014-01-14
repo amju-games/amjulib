@@ -77,6 +77,11 @@ bool TriInBox(const AABB& a, const Tri& t)
 
 void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
 {
+  if (!aabb.Intersects(m_aabb))
+  {
+    return; 
+  }
+
   // Make enough space to add all our tris to the result...
   // Avoid multiple reallocations, but wastes mem
   pTris->reserve(pTris->size() + m_tris.size());
@@ -134,6 +139,12 @@ const CollisionMesh::Tris& CollisionMesh::GetAllTris() const
 
 bool CollisionMesh::GetY(const Vec2f& v, float* pY) const
 {
+  if (v.x < m_aabb.GetMin(0) || v.x > m_aabb.GetMax(0) ||
+      v.y < m_aabb.GetMin(2) || v.y > m_aabb.GetMax(2))
+  {
+    return false;
+  }
+
   //bool found = false;
   for (Tris::const_iterator it = m_tris.begin(); it != m_tris.end(); ++it)
   {
@@ -159,6 +170,12 @@ bool CollisionMesh::GetY(const Vec2f& v, float* pY) const
 
 bool CollisionMesh::GetClosestY(const Vec2f& v, float y, float* pClosestY) const
 {
+  if (v.x < m_aabb.GetMin(0) || v.x > m_aabb.GetMax(0) ||
+      v.y < m_aabb.GetMin(2) || v.y > m_aabb.GetMax(2))
+  {
+    return false;
+  }
+
   float bestDist = 99999.9f;
   float bestY = y;
   bool ok = false;
@@ -190,6 +207,12 @@ bool CollisionMesh::GetClosestY(const Vec2f& v, float y, float* pClosestY) const
 
 bool CollisionMesh::GetClosestLowerY(const Vec2f& v, float y, float* pClosestY) const
 {
+  if (v.x < m_aabb.GetMin(0) || v.x > m_aabb.GetMax(0) ||
+      v.y < m_aabb.GetMin(2) || v.y > m_aabb.GetMax(2))
+  {
+    return false;
+  }
+
   float bestDist = 99999.9f;
   float bestY = y;
   bool ok = false;
@@ -232,6 +255,8 @@ void CollisionMesh::Transform(const Matrix& m)
     Tri& t = *it;
     t.Transform(m);
   }
+  // Transform AABB
+  m_aabb.Transform(m);
 }
 
 void CollisionMesh::Translate(const Vec3f& v)
@@ -241,6 +266,8 @@ void CollisionMesh::Translate(const Vec3f& v)
     Tri& t = *it;
     t.Translate(v);
   }
+  // Translate AABB
+  m_aabb.Translate(v);
 }
 
 void CollisionMesh::Draw()
@@ -255,12 +282,16 @@ void CollisionMesh::Draw()
 void CollisionMesh::Clear()
 {
   m_tris.clear();
+  m_aabb = AABB();
 }
 
 void CollisionMesh::CalcAABB(AABB* res)
 {
+  // Stores local copy for quicker rejection in intersect tests etc
   if (m_tris.empty())
   {
+    m_aabb = AABB();
+    *res = m_aabb;
     return;
   }
 
@@ -278,6 +309,7 @@ void CollisionMesh::CalcAABB(AABB* res)
     aabb.SetIf(t.m_verts[2].x, t.m_verts[2].y, t.m_verts[2].z);
   }
   *res = aabb;
+  m_aabb = aabb;
 }
 }
 

@@ -58,6 +58,7 @@ public:
 
 private:
   Tris m_tris;
+  AABB m_aabb;
 };
 
 typedef RCPtr<CollisionMesh> PCollisionMesh;
