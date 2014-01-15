@@ -10,11 +10,37 @@
 #include <AmjuFinal.h>
 
 #ifdef _DEBUG
-//#define OBJ_DEBUG
+#define OBJ_DEBUG
 #endif
 
 namespace Amju
 {
+static bool s_showInfo = false;
+
+void ObjMesh::SetShowInfo(bool show)
+{
+  s_showInfo = show;
+}
+
+bool ObjMesh::ShowInfo()
+{
+  return s_showInfo;
+}
+
+
+static bool s_requiresTextures = true;
+
+void ObjMesh::SetRequireTextures(bool b)
+{
+  s_requiresTextures = b;
+}
+
+bool ObjMesh::RequiresTextures()
+{
+  return s_requiresTextures;
+}
+
+
 Resource* TextObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
@@ -141,9 +167,10 @@ bool ObjMesh::SaveBinary(const std::string& filename)
 
 bool ObjMesh::LoadBinary(const std::string& filename)
 {
-#ifdef OBJ_DEBUG
-  std::cout << "Loading binary obj file: " << filename << "\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Loading binary obj file: " << filename << "\n";
+  }
 
   File f(File::NO_VERSION);
   if (!f.OpenRead(filename, true /* is binary */))
@@ -155,9 +182,11 @@ bool ObjMesh::LoadBinary(const std::string& filename)
   // Points
   f.GetInteger(&n);
 
-#ifdef OBJ_DEBUG
-  std::cout << "File supposedly contains " << n << " points\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "File supposedly contains " << n << " points\n";
+  }
+
   if (n > 1000000)
   {
 std::cout << "Suspiciously high number of points in obj mesh: " << n << "...\n";
@@ -174,16 +203,19 @@ std::cout << "Suspiciously high number of points in obj mesh: " << n << "...\n";
     m_points.push_back(v);
   }
 
-#ifdef OBJ_DEBUG
-  std::cout << "Loaded " << n << " points\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Loaded " << n << " points\n";
+  }
 
   // UVs
   f.GetInteger(&n);
 
-#ifdef OBJ_DEBUG
-  std::cout << "Contains " << n << " UVs\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Contains " << n << " UVs\n";
+  }
+
   if (n > 1000000)
   {
 std::cout << "Suspiciously high number of UVs in obj mesh: " << n << "...\n";
@@ -198,15 +230,19 @@ std::cout << "Suspiciously high number of UVs in obj mesh: " << n << "...\n";
     f.GetFloat(&v.y);
     m_uvs.push_back(v);
   }
-#ifdef OBJ_DEBUG
-  std::cout << "Loaded " << n << " UVs\n";
-#endif
+
+  if (ShowInfo())
+  {
+    std::cout << "Loaded " << n << " UVs\n";
+  }
 
   // Normals
   f.GetInteger(&n);
-#ifdef OBJ_DEBUG
-  std::cout << "Contains " << n << " normals\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Contains " << n << " normals\n";
+  }
+
   if (n > 1000000)
   {
 std::cout << "Suspiciously high number of normals in obj mesh: " << n << "...\n";
@@ -222,16 +258,21 @@ std::cout << "Suspiciously high number of normals in obj mesh: " << n << "...\n"
     f.GetFloat(&v.z);
     m_normals.push_back(v);
   }
-#ifdef OBJ_DEBUG
-  std::cout << "Loaded " << n << " normals\n";
-#endif
+
+  if (ShowInfo())
+  {
+    std::cout << "Loaded " << n << " normals\n";
+  }
 
   // Load materials
   int numMats = 0;
   f.GetInteger(&numMats);
-#ifdef OBJ_DEBUG
-  std::cout << "Loading " << numMats << " materials..\n";
-#endif
+
+  if (ShowInfo())
+  {
+    std::cout << "Loading " << numMats << " materials..\n";
+  }
+
   if (numMats > 1000000)
   {
 std::cout << "Suspiciously high number of materials in obj mesh: " << numMats << "...\n";
@@ -252,33 +293,48 @@ std::cout << "Suspiciously high number of materials in obj mesh: " << numMats <<
     std::string tex;
     f.GetDataLine(&tex);
     mat.m_texfilename = tex;
-#ifdef OBJ_DEBUG
-    std::cout << "Material " << i << ": matName: " << matName << " filename: " << filename << " tex: " << tex << "\n";
-#endif
+
+    if (ShowInfo())
+    {
+      std::cout << "Material " << i << ": matName: " << matName << " filename: " << filename << " tex: " << tex << "\n";
+    }
 
     mat.m_texture = (Texture*)TheResourceManager::Instance()->GetRes(tex);
 
-    if (!mat.m_texture)  
+    if (mat.m_texture)  
     {
-#ifdef OBJ_DEBUG
-    std::cout << "FAILED TO LOAD texture " << tex << "!\n";
-#endif
-      return false;
+      if (ShowInfo())
+      {
+        std::cout << "Loaded texture " << tex << " OK!\n";
+      }
     }
-
-#ifdef OBJ_DEBUG
-    std::cout << "Loaded texture " << tex << " OK!\n";
-#endif
+    else
+    {
+      // If the texture does not load, this is OK if we are just converting formats etc, 
+      //  but not OK if we want to draw the mesh!
+      if (RequiresTextures())
+      {
+        return false;
+      }
+      else
+      {
+        if (ShowInfo())
+        {
+          std::cout << "Ignoring failed texture " << tex << "...\n";
+        }
+      }
+    }
 
     int flags = 0;
     f.GetInteger(&flags);
     mat.m_flags = (uint32)flags;
 
-#ifdef OBJ_DEBUG
-    std::cout << "Flags: " << flags << "\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Flags: " << flags << "\n";
+    }
 
-    if (flags & Material::AMJU_MATERIAL_SPHERE_MAP)
+    if ((flags & Material::AMJU_MATERIAL_SPHERE_MAP) && mat.m_texture)
     {
       mat.m_texture->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
     }
@@ -286,9 +342,11 @@ std::cout << "Suspiciously high number of materials in obj mesh: " << numMats <<
 
   int numGroups = 0;
   f.GetInteger(&numGroups); 
-#ifdef OBJ_DEBUG
-  std::cout << "Supposedly " << numGroups << " groups...\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Supposedly " << numGroups << " groups...\n";
+  }
+
   if (numGroups > 1000)
   {
 std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << numGroups << "...\n";
@@ -299,9 +357,10 @@ std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << nu
   {
     std::string groupName;
     f.GetDataLine(&groupName);
-#ifdef OBJ_DEBUG
-    std::cout << "Group " << ig << " name: " << groupName << "\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Group " << ig << " name: " << groupName << "\n";
+    }
 
     Group& g = m_groups[groupName];
     g.m_name = groupName;
@@ -313,23 +372,28 @@ std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << nu
     {
       std::string matFilename;
       f.GetDataLine(&matFilename);
-#ifdef OBJ_DEBUG
-      std::cout << "Material file: " << matFilename << "\n";
-#endif
+      if (ShowInfo())
+      {
+        std::cout << "Material file: " << matFilename << "\n";
+      }
+
       // TODO Do we need this ?
 
       std::string matName;
       f.GetDataLine(&matName);
-#ifdef OBJ_DEBUG
-      std::cout << "Material name: " << matName << "\n";
-#endif
+
+      if (ShowInfo())
+      {
+        std::cout << "Material name: " << matName << "\n";
+      }
       g.m_materialName = matName;
     }
     else
     {
-#ifdef OBJ_DEBUG
-      std::cout << "No material for this group.\n";
-#endif
+      if (ShowInfo())
+      {
+        std::cout << "No material for this group.\n";
+      }
     }
 
     // Load face info
@@ -353,9 +417,11 @@ std::cout << "Suspiciously high number of faces in obj mesh: " << numFaces << ".
       }
       m_facemap[g.m_name].push_back(face);
     }
-#ifdef OBJ_DEBUG
-    std::cout << "Loaded " << numFaces << " faces\n";
-#endif
+
+    if (ShowInfo())
+    {
+      std::cout << "Loaded " << numFaces << " faces\n";
+    }
   }
 
   MungeData();
@@ -369,9 +435,10 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     return LoadBinary(filename);
   }
 
-#ifdef OBJ_DEBUG
-  std::cout << "Loading file " << filename << " - not binary\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Loading file " << filename << " - text, not binary\n";
+  }
 
   File f(File::NO_VERSION);
   if (!f.OpenRead(filename))
@@ -423,6 +490,12 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     {
       Group& g = m_groups[currentGroup];
       Assert(!g.m_name.empty());
+
+      if (strs.size() > 4)
+      {
+        f.ReportError("Non-triangular face, taking first 3 verts only.");
+      }
+
       Face face = ToFace(strs);
       m_facemap[g.m_name].push_back(face);
     }
@@ -430,7 +503,11 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
     {
       // Switch current group - create a new group if it doesn't
       //  already exist in the map.
-      if (strs.size() == 2)
+      if (strs.size() == 1)
+      {
+        f.ReportError("No group name!");
+      }
+      else if (strs.size() == 2)
       {
         currentGroup = strs[1];
         Group& g = m_groups[currentGroup];
@@ -438,7 +515,14 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
       }
       else
       {
-        f.ReportError("Unexpected format for group");
+        f.ReportError("Info: Unexpected format for group: " + s);
+        currentGroup = strs[1];
+        for (unsigned int a = 2; a < strs.size(); a++)
+        {
+          currentGroup += strs[a];
+        }
+        Group& g = m_groups[currentGroup];
+        g.m_name = currentGroup;
       }
     }
     else if (strs[0] == "mtllib")
@@ -470,9 +554,10 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
         }
         else
         {
-#ifdef OBJ_DEBUG
-          std::cout << "Discarding material " << mat.m_name << " as no texture\n";
-#endif
+          if (ShowInfo())
+          {
+            std::cout << "Discarding material " << mat.m_name << " as no texture\n";
+          }
         }
       }
     }
@@ -492,9 +577,11 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
       }
       else
       {
-#ifdef OBJ_DEBUG
-        std::cout << "Changing material within the same group - sigh, making new group.\n";
-#endif
+        if (ShowInfo())
+        {
+          std::cout << "Changing material within the same group - sigh, making new group.\n";
+        }
+
         // Make name for group
         currentGroup = matname + "_group"; // OK if group name exists
         Group& g = m_groups[currentGroup];
@@ -506,21 +593,22 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
 
   if (m_points.empty())
   {
-#ifdef OBJ_DEBUG
-    std::cout << "No point data - failed!\n";
-#endif
-
+    if (ShowInfo())
+    {
+      std::cout << "No point data - failed!\n";
+    }
     return false;
   }
 
-#ifdef OBJ_DEBUG
-  std::cout << "Points: " << m_points.size()
-    << " UVs: " << m_uvs.size() 
-    << " Norms: " << m_normals.size()
-    << " Groups: " << m_groups.size()
-    << " Mats: " << m_materials.size()
-    << "\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Points: " << m_points.size()
+      << " UVs: " << m_uvs.size() 
+      << " Norms: " << m_normals.size()
+      << " Groups: " << m_groups.size()
+      << " Mats: " << m_materials.size()
+      << "\n";
+  }
 
   MungeData();
   return true;
@@ -541,9 +629,10 @@ const AABB& ObjMesh::GetAABB(const std::string& groupname)
 
 void ObjMesh::MungeData()
 {
-#ifdef OBJ_DEBUG
-  std::cout << "Optimising .obj data (*cough* because maya is so shit *cough*)...\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Optimising .obj data...\n";
+  }
 
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
@@ -557,10 +646,11 @@ void ObjMesh::MungeData()
     // Erase empty groups
     if (g.m_tris.empty())
     {
-#ifdef OBJ_DEBUG
-      std::cout << "Removing empty group " << g.m_name << "\n";
-#endif
-		
+      if (ShowInfo())
+      {
+        std::cout << "Removing empty group " << g.m_name << "\n";
+      }
+
 #ifdef WIN32
       it = m_groups.erase(it);
 #else
@@ -592,16 +682,18 @@ void ObjMesh::MungeData()
     }
     if (found)
     {
-#ifdef OBJ_DEBUG
-      std::cout << "KEEPING material " << matName << "\n";
-#endif
+      if (ShowInfo())
+      {
+        std::cout << "KEEPING material " << matName << "\n";
+      }
       ++it;
     }
     else
     {
-#ifdef OBJ_DEBUG
-      std::cout << "Removing unused material " << matName << "\n";
-#endif
+      if (ShowInfo())
+      {
+        std::cout << "Removing unused material " << matName << "\n";
+      }
 		
 #ifdef WIN32
       it = m_materials.erase(it);
@@ -618,9 +710,10 @@ void ObjMesh::MungeData()
   m_uvs.clear();
   m_facemap.clear();
 
-#ifdef OBJ_DEBUG
-  std::cout << "Finished\n";
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "MungeData finished.\n";
+  }
 }
 
 void ObjMesh::Draw()
@@ -659,13 +752,14 @@ void ObjMesh::BuildGroup(Group& g)
 
   unsigned int numfaces = faces.size();
 
-#ifdef OBJ_DEBUG
-std::cout << "Group " << g.m_name << " has " << numfaces << " faces.\n";
-if (m_uvs.empty())
-{
-  std::cout << "No UVs in this obj mesh!\n";
-}
-#endif
+  if (ShowInfo())
+  {
+    std::cout << "Group " << g.m_name << " has " << numfaces << " faces.\n";
+    if (m_uvs.empty())
+    {
+      std::cout << "No UVs in this obj mesh!\n";
+    }
+  }
 
   g.m_tris.reserve(numfaces);
   for (unsigned int i = 0; i < numfaces; i++)
@@ -849,9 +943,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     of.OpenWrite(filename, 0, true /* is binary */);
 
     // Save points
-#ifdef OBJ_DEBUG
-    std::cout << "Saving " << points.size() << " points\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Saving " << points.size() << " points\n";
+    }
+
     of.WriteInteger(points.size());
     for (unsigned int i = 0; i < points.size(); i++)
     {
@@ -862,9 +958,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save UVs
-#ifdef OBJ_DEBUG
-    std::cout << "Saving " << uvs.size() << " UVs\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Saving " << uvs.size() << " UVs\n";
+    }
+  
     of.WriteInteger(uvs.size());
     for (unsigned int i = 0; i < uvs.size(); i++)
     {
@@ -874,9 +972,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save normals
-#ifdef OBJ_DEBUG
-    std::cout << "Saving " << normals.size() << " normals\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Saving " << normals.size() << " normals\n";
+    }
+
     of.WriteInteger(normals.size());
     for (unsigned int i = 0; i < normals.size(); i++)
     {
@@ -887,9 +987,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save materials
-#ifdef OBJ_DEBUG
-    std::cout << "Saving " << m_materials.size() << " materials\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Saving " << m_materials.size() << " materials\n";
+    }
+
     of.WriteInteger(m_materials.size());
     for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); ++it)
     {
@@ -901,9 +1003,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
 
     // Save groups
-#ifdef OBJ_DEBUG
-    std::cout << "Saving " << groupMap.size() << " groups\n";
-#endif
+    if (ShowInfo())
+    {
+      std::cout << "Saving " << groupMap.size() << " groups\n";
+    }
+
     of.WriteInteger(groupMap.size());
     for (SaveGroupMap::iterator it = groupMap.begin();
       it != groupMap.end();
@@ -935,9 +1039,11 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
 
       // Save face info
       of.WriteInteger(sg.m_faces.size());
-#ifdef OBJ_DEBUG
-      std::cout << "Saving " << sg.m_faces.size() << " faces\n";
-#endif
+      if (ShowInfo())
+      {
+        std::cout << "Saving " << sg.m_faces.size() << " faces for group " << groupName << "\n";
+      }
+
       for (unsigned int i = 0; i < sg.m_faces.size(); i++)
       {
         Face& face = sg.m_faces[i];
@@ -959,7 +1065,7 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
   {
     File of(File::NO_VERSION);
     of.OpenWrite(filename);
-    of.Write("# j.c. saved from ObjMesh class");
+    of.Write("# Saved from Amjulib::ObjMesh");
 
     // Write all points
     of.Write("# points");

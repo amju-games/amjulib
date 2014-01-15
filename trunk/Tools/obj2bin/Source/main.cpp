@@ -28,6 +28,8 @@ int main(int argc, char** argv)
     return 1;
   }
 
+  ObjMesh::SetShowInfo(true);
+  ObjMesh::SetRequireTextures(false);
   AmjuGL::SetImpl(new Amju::AmjuGLNull);
 
   // Resource manager was changed so we don't have to create a group for
@@ -50,17 +52,27 @@ int main(int argc, char** argv)
     return -1;
   }
 
-  mesh.Save(outFilename, true /* binary */);
+  std::cout << "----------------------------------------------------------\nSaving " << 
+    inFilename << " to binary file " << outFilename << "...\n";
 
-  ObjMesh mesh2;
-  if (mesh2.Load(outFilename, true /* bin */))
+  if (mesh.Save(outFilename, true /* binary */))
   {
-    std::cout << "Probably converted OK\n";
+    std::cout << "Saved output file " << outFilename << ".. now testing it by loading it in...\n";
+    ObjMesh mesh2;
+    if (mesh2.Load(outFilename, true /* bin */))
+    {
+      std::cout << ".. Probably converted OK\n";
+    }
+    else
+    {
+      std::cout << ".. Convert failed :-(\n";
+    }
   }
   else
   {
-    std::cout << "Convert failed :-(\n";
+    std::cout << "Failed to save output file " << outFilename << "\n";
   }
 
+  std::cout << "==========================================================\n";
   return 0;
 }

@@ -35,6 +35,13 @@ public:
   const AABB& GetAABB(); // for entire mesh
   const AABB& GetAABB(const std::string& groupname); // for one group
 
+  static void SetShowInfo(bool);
+  static bool ShowInfo();
+
+  // Set flag to fail if we can't load textures specified in materials
+  static void SetRequireTextures(bool);
+  static bool RequiresTextures();
+
 private:
   bool LoadBinary(const std::string& filename);
   bool SaveBinary(const std::string& filename);

@@ -204,6 +204,7 @@ Face ToFace(const Strings& fstrs)
       std::cout << "Unexpected format for face";
       return f;
     }
+
     for (int i = 0; i < 3 /*strs.size()*/; i++)
     {
         Strings strs = Split(fstrs[i + 1], '/');
