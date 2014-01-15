@@ -10,6 +10,7 @@
 #include <MgcDist3DLinTri.h>
 // Mgc dist from point to triangle
 #include <MgcDist3DVecTri.h>
+#include <IntAABBCapsule.h>
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -98,6 +99,12 @@ void CollisionMesh::GetAllTrisInBox(const AABB& aabb, Tris* pTris) const
 
 bool CollisionMesh::Intersects(const Capsule& cap, Tris* tris) const
 {
+  // Check capsule-AABB first
+  if (!Amju::Intersects(m_aabb, cap))
+  {
+    return false;
+  }
+
   const Vec3f& p0 = cap.m_lineseg.p0;
   Vec3f dir = cap.m_lineseg.p1 - cap.m_lineseg.p0;
 
