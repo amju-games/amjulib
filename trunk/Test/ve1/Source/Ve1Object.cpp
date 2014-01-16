@@ -332,11 +332,11 @@ void Ve1Object::CreateEditNode()
       m_pos.x - XSIZE, m_pos.x + XSIZE,
       m_pos.y, m_pos.y + YSIZE,
       m_pos.z - XSIZE, m_pos.z + XSIZE);
-    *(m_sceneNode->GetAABB()) = m_aabb;
+    m_sceneNode->SetAABB(m_aabb);
 
     SceneNode* name = new Ve1NameNode(this);
     AABB aabb(-10000.0f, 10000.0f, -10000.0f, 10000.0f, -10000.0f, 10000.0f);
-    *(name->GetAABB()) = aabb;
+    name->SetAABB(aabb);
     m_sceneNode->AddChild(name);
   }
 }

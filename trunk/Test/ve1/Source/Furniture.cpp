@@ -128,7 +128,7 @@ void Furniture::Update()
       GetCollisionMesh()->Transform(m);
       GetCollisionMesh()->CalcAABB(&m_aabb);
 
-      *(m_sceneNode->GetAABB()) = m_aabb;
+      m_sceneNode->SetAABB(m_aabb);
 
       m_collMeshPos = m_pos;
       m_collMeshRot = m_dir;
@@ -162,7 +162,7 @@ bool Furniture::Load(File* f)
   sm->SetMesh(mesh);
   sm->CalcCollisionMesh();
   sm->GetCollisionMesh()->CalcAABB(&m_aabb);
-  *(sm->GetAABB()) = m_aabb;
+  sm->SetAABB(m_aabb);
 
   SetSceneNode(sm);
 
@@ -376,7 +376,7 @@ AABB* Furniture::GetAABB()
 //    return 0;
   }
 
-  return m_sceneNode->GetAABB();
+  return const_cast<AABB*>((m_sceneNode->GetAABB())); // Yikes, TODO
 }
 }
 

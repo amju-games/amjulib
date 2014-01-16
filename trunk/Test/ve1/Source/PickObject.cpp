@@ -55,8 +55,8 @@ std::cout << " Obj " << pgo->GetId() << " is not pickable.\n";
       continue;
     }
 
-    AABB* aabb = pgo->GetAABB();
-    if (aabb && Clip(lineSeg, *aabb, 0))
+    const AABB& aabb = pgo->GetAABB();
+    if (Clip(lineSeg, aabb, 0))
     {
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " IS PICKED!\n";
@@ -97,16 +97,10 @@ std::cout << " Obj " << pgo->GetId() << " AND IS CLOSEST!\n";
         selectedObj = pgo;
       }
     }
-    else if (aabb)
+    else 
     {
 #ifdef PICK_DEBUG
 std::cout << " Obj " << pgo->GetId() << " is not picked.\n";
-#endif
-    }
-    else
-    {
-#ifdef PICK_DEBUG
-std::cout << " Obj " << pgo->GetId() << " has no AABB.\n";
 #endif
     }
   }

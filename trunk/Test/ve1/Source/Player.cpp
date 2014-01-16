@@ -411,10 +411,10 @@ void Player::SetArrowPos(const Vec3f& newpos)
   m.Translate(newpos);
   m_arrow->SetLocalTransform(m);
 
-  m_arrow->GetAABB()->Set(
+  m_arrow->SetAABB(AABB(
     newpos.x - ARROW_XSIZE, newpos.x + ARROW_XSIZE,
     newpos.y, newpos.y + ARROW_YSIZE,
-    newpos.z - ARROW_XSIZE, newpos.z + ARROW_XSIZE);
+    newpos.z - ARROW_XSIZE, newpos.z + ARROW_XSIZE));
 }
 
 void Player::SetLoggedIn(bool loggedIn)
@@ -498,7 +498,7 @@ void Player::Update()
   if (m_sceneNode)
   {
     // Set shadow AABB to same as Scene Node so we don't cull it by mistake
-    *(m_nameTag->GetAABB()) = *(m_sceneNode->GetAABB());
+    m_nameTag->SetAABB(*(m_sceneNode->GetAABB()));
   }
 
   if (m_ignorePortalId != -1)
@@ -506,18 +506,11 @@ void Player::Update()
     GameObject* g = TheGame::Instance()->GetGameObject(m_ignorePortalId);
     if (g)
     {
-      AABB* aabb = g->GetAABB();
-      if (aabb)
+      const AABB& aabb = g->GetAABB();
+      if (!GetAABB()->Intersects(aabb))
       {
-        if (!GetAABB()->Intersects(*aabb))
-        {
-          // No longer intersecting portal
-          m_ignorePortalId = -1;
-        }
-      }
-      else
-      {
-        m_ignorePortalId = -1; // why ?
+        // No longer intersecting portal
+        m_ignorePortalId = -1;
       }
     }
     else
