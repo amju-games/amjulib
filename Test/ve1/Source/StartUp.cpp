@@ -38,7 +38,10 @@ void StartUpAfterCreateWindow()
   LoadConfig();
 
   SoundManager* sm = TheSoundManager::Instance();
+
+#ifdef AMJU_USE_BASS // (Turn off for Purify)
   sm->SetImpl(new BassSoundPlayer);
+#endif
 
   // Too soon, assets not copied yet!!
   // Sound can drown out text-to-speech, so max vol is lower than 1.0

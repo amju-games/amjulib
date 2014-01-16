@@ -59,7 +59,7 @@ bool Skybox::Load(File* f)
 //  sm->GetCollisionMesh()->CalcAABB(&m_aabb);
   static const float S = 1000.0f; // box size - but not critical
   m_aabb.Set(-S, S, -S, S, -S, S);
-  *(sm->GetAABB()) = m_aabb;
+  sm->SetAABB(m_aabb);
 
   SetSceneNode(sm);
 

@@ -95,7 +95,7 @@ void GSGui::OnDeactive()
 
   // Reload GUI every time we activate. 
   // (This makes it reasonable to add gui elements as listeners when they are created)
-  if (TheEventPoller::Instance()->HasListener(m_gui))
+  if (m_gui && TheEventPoller::Instance()->HasListener(m_gui))
   {
     TheEventPoller::Instance()->RemoveListener(m_gui);
   }

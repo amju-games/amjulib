@@ -49,7 +49,7 @@ void Baddie::Update()
 
     if (m_effect)
     {
-      *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
+      m_effect->SetAABB(*(m_sceneNode->GetAABB()));
     }
   }
 }

@@ -217,12 +217,12 @@ void Ve1ObjectChar::Update()
     if (m_shadow)
     {
       // Set shadow AABB to same as Scene Node so we don't cull it by mistake
-      *(m_shadow->GetAABB()) = *(m_sceneNode->GetAABB());
+      m_shadow->SetAABB(*m_sceneNode->GetAABB());
     }
 
     if (m_effect)
     {
-      *(m_effect->GetAABB()) = *(m_sceneNode->GetAABB());
+      m_effect->SetAABB(*m_sceneNode->GetAABB());
     }
 
     static const float XSIZE = ROConfig()->GetFloat("player-aabb-x", 30.0f);
@@ -332,7 +332,7 @@ AABB* Ve1ObjectChar::GetAABB()
   Assert(m_sceneNode);
   Assert(m_sceneNode->GetAABB());
 
-  return m_sceneNode->GetAABB();
+  return const_cast<AABB*>(m_sceneNode->GetAABB()); // Yikes, TODO
 }
 
 void Ve1ObjectChar::ShowAttacked()

@@ -15,6 +15,7 @@
 
 namespace Amju
 {
+/*
 std::string GetDataDir()
 {
 #ifdef WIN32_TEST_COPY_ASSETS
@@ -38,6 +39,7 @@ std::string GetDataDir()
 
   return dataDir;
 }
+*/
 
 // Check if file exists in Save Dir. If not, copies it from Data dir.
 bool CopyFileIfMissing(const std::string& filename, const std::string& srcDir, const std::string& destDir)

@@ -53,14 +53,16 @@ std::cout << "No special config.\n";
   File::SetRoot(GetSaveDir(appname) + "/Data/", "/");
 #endif
 
-  TheGameConfigFile::Instance()->Load(CONFIG_FILE_NAME);
+  GameConfigFile* gcf = TheGameConfigFile::Instance();
+  gcf->SetFilePath(CONFIG_FILE_NAME);
+  gcf->Load();
   atexit(SaveConfig);
 }
 
 void SaveConfig()
 {
   // called on exit
-  TheGameConfigFile::Instance()->Save(CONFIG_FILE_NAME);
+  TheGameConfigFile::Instance()->Save();
 }
 }
 
