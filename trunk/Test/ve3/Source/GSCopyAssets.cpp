@@ -9,8 +9,9 @@
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
 //#include "GSLogo.h"
-//#include "GSTitle.h"
-#include "GSFileUpdateCheck.h"
+// VE3 v.2.1: don't check for updates, this could go wrong - simplify!
+#include "GSTitle.h"
+//#include "GSFileUpdateCheck.h"
 #include <AmjuFinal.h>
 
 #if defined(WIN32) && defined(_DEBUG)
@@ -284,7 +285,8 @@ std::cout << "Glue file + path: " << glueFilePath << "\n";
     TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f)); // Hotspot, yuck
 
     // All copied - go to next state 
-    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
+    // VE3 v.2.1 - skip file update check
+    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
   }
 }
 

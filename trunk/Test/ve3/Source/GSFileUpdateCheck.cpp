@@ -78,9 +78,16 @@ void GSFileUpdateCheck::NextState()
 
 void GSFileUpdateCheck::OnFinishedChecking(const std::string& timestamp)
 {
-  m_timestamp = timestamp;
-  TheGameConfigFile::Instance()->Set(FILE_UPDATE_TIMESTAMP, m_timestamp);
-  SaveConfig();
+  if (!timestamp.empty() && ToInt(timestamp) > 0)
+  {
+    m_timestamp = timestamp;
+    TheGameConfigFile::Instance()->Set(FILE_UPDATE_TIMESTAMP, m_timestamp);
+    SaveConfig();
+  }
+  else
+  {
+    std::cout << "Bogus timestamp!!!!: " << timestamp << "\n";
+  }
 
   NextState();
 }
