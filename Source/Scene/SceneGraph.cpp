@@ -395,6 +395,8 @@ void SceneGraph::Update()
   UpdateNode(m_root[AMJU_OPAQUE]);
   UpdateChildren(m_root[AMJU_OPAQUE]);
 
+  m_root[AMJU_OPAQUE]->UpdateBoundingVol();
+
   if (m_root[AMJU_SKYBOX])
   {
     UpdateNode(m_root[AMJU_SKYBOX]);

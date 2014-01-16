@@ -124,29 +124,18 @@ std::cout << " child " << i << "... ";
 
 void SceneNode::UpdateBoundingVol()
 {
-  // This should be called at a leaf node. We recurse UP towards the root,
-  //  adjusting the size of the parent's boxes.
-
-  // Calc updated bounding vol for this node
-  // Our bounding box must contain the bounding box of all children.
   unsigned int s = m_children.size();
   if (s > 0)
   {
+    m_children[0]->UpdateBoundingVol();
     // Start off with b.box the same size as child zero
     m_aabb = *(m_children[0]->GetAABB());
     for (unsigned int i = 1; i < s; i++)
     {
-      // Don't do this, we are going UP the tree.
-      //m_children[i]->UpdateBoundingVol();
-
+      m_children[i]->UpdateBoundingVol();
       // Increase our box to fit the other children
       m_aabb.Union(*(m_children[i]->GetAABB()));
     }
-  }
-
-  if (m_parent)
-  {
-    m_parent->UpdateBoundingVol();
   }
 }
 

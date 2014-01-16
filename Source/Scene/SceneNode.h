@@ -36,7 +36,7 @@ public:
   virtual void CombineTransform();
 
   // TODO Rename this. Currently makes this node' AABB the union of its child AABBs.
-  virtual void UpdateBoundingVol();
+  void UpdateBoundingVol();
 
   // Transform this node's AABB by matrix m, then all children, recursively
   void RecursivelyTransformAABB(const Matrix& m);
