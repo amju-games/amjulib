@@ -903,6 +903,12 @@
     <ClCompile Include="..\..\..\Source\Scene\SceneNodeFactory.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\IntAABBCapsule.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Geom\IntAABBSphere.cpp">
+      <Filter>Geom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1714,6 +1720,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Scene\SceneNodeFactory.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\IntAABBCapsule.h">
+      <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Geom\IntAABBSphere.h">
+      <Filter>Geom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

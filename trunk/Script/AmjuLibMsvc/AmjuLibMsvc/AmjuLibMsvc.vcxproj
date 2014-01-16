@@ -189,6 +189,8 @@
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
     <ClCompile Include="..\..\..\Source\GeomLoad\LoadRect.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\IntAABBCapsule.cpp" />
+    <ClCompile Include="..\..\..\Source\Geom\IntAABBSphere.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Line3.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.cpp" />
@@ -458,6 +460,8 @@
     <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
     <ClInclude Include="..\..\..\Source\GeomLoad\LoadRect.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
+    <ClInclude Include="..\..\..\Source\Geom\IntAABBCapsule.h" />
+    <ClInclude Include="..\..\..\Source\Geom\IntAABBSphere.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MagicFMLibType.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont2DPointInPolygon.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcCont3DSphere.h" />
