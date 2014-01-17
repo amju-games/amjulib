@@ -15,7 +15,6 @@ public:
   virtual void Draw();
   virtual void Update();
   virtual bool Load(File*);
-  //virtual void UpdateBoundingVol();
 
   void SetMesh(PObjMesh mesh);
 
