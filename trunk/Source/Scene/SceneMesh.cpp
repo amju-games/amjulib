@@ -69,18 +69,4 @@ bool SceneMesh::Load(File* f)
 
   return true;
 }
-
-//void SceneMesh::UpdateBoundingVol()
-//{
-//  // Update bounding vol from mesh
-//  // TODO This is slow, it works out the bounding box for the mesh given its
-//  //  combined transform. Better to pass in an AABB if you already know it
-//  //  (e.g. GameObjects have a bounding volume)
-//  CollisionMesh cm;
-//  m_mesh->CalcCollisionMesh(&cm);
-//  cm.Transform(m_combined);
-//  cm.CalcAABB(&m_aabb);
-//
-//  // TODO Children
-//}
 }
