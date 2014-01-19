@@ -23,6 +23,11 @@ struct Tri
   Vec3f m_verts[3];
 
   Vec3f CalcNormal() const;
+  
+  Vec3f CalcCentre() const
+  {
+    return (m_verts[0] + m_verts[1] + m_verts[2]) * (1.0f / 3.0f);
+  }
 };
 }
 
