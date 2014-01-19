@@ -7,18 +7,16 @@ namespace Amju
 {
 void Tri::Transform(const Matrix& m)
 {
-  for (int i = 0; i < 3; i++)
-  {
-    m_verts[i] = m_verts[i] * m; // TODO no *= ??
-  }
+  m_verts[0] = m_verts[0] * m; // TODO no *= ??
+  m_verts[1] = m_verts[1] * m; 
+  m_verts[2] = m_verts[2] * m; 
 }
 
 void Tri::Translate(const Vec3f& v)
 {
-  for (int i = 0; i < 3; i++)
-  {
-    m_verts[i] += v;
-  }
+  m_verts[0] += v;
+  m_verts[1] += v;
+  m_verts[2] += v;
 }
 
 Vec3f Tri::CalcNormal() const

@@ -66,7 +66,10 @@ Frustum::FrustumResult Frustum::Intersects(const AABB& aabb) const
   FrustumResult res = AMJU_INSIDE;
   for (int p = 0; p < 6; p++)
   {
-    // Get "positive" and "negative" vertices for box for this plane
+    // Get "positive" and "negative" vertices for box for this plane.
+    // "The positive vertex is the vertex from the box that is further along 
+    //   the normal’s direction. The negative vertex is the opposite vertex."
+
     Vec3f pos(aabb.GetMin(0), aabb.GetMin(1), aabb.GetMin(2));
     Vec3f neg(aabb.GetMax(0), aabb.GetMax(1), aabb.GetMax(2));
 
@@ -85,6 +88,9 @@ Frustum::FrustumResult Frustum::Intersects(const AABB& aabb) const
       pos.z = aabb.GetMax(2);
       neg.z = aabb.GetMin(2);
     }
+
+    // "If the p-vertex is on the wrong side of the plane, the box can be
+    //  immediately rejected, as it falls completely outside the frustum. "
 
     float distP = frustum[p][0] * pos.x + frustum[p][1] * pos.y + frustum[p][2] * pos.z + frustum[p][3];
     if (distP < 0)

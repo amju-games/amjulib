@@ -13,6 +13,14 @@ Plane::Plane()
   m_d = 0;
 }
 
+Plane::Plane(const Vec3f& n, float d)
+{
+  m_a = n.x;
+  m_b = n.y;
+  m_c = n.z;
+  m_d = d;
+}
+
 Plane::Plane(const Tri& t)
 {
   Init(t.m_verts[0], t.m_verts[1], t.m_verts[2]);
