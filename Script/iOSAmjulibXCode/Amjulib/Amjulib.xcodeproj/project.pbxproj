@@ -11,6 +11,8 @@
 		6901A09818869D3F00D98C04 /* IntAABBCapsule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A09418869D3F00D98C04 /* IntAABBCapsule.h */; };
 		6901A09918869D3F00D98C04 /* IntAABBSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6901A09518869D3F00D98C04 /* IntAABBSphere.cpp */; };
 		6901A09A18869D3F00D98C04 /* IntAABBSphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A09618869D3F00D98C04 /* IntAABBSphere.h */; };
+		6901A12D188C3D5D00D98C04 /* IntAABBPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6901A12B188C3D5D00D98C04 /* IntAABBPlane.cpp */; };
+		6901A12E188C3D5D00D98C04 /* IntAABBPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */; };
 		690566F4172094AF008A0C92 /* DrawBorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566DF172094AF008A0C92 /* DrawBorder.cpp */; };
 		690566F5172094AF008A0C92 /* DrawBorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E0172094AF008A0C92 /* DrawBorder.h */; };
 		690566F6172094AF008A0C92 /* GuiCalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E1172094AF008A0C92 /* GuiCalendar.cpp */; };
@@ -504,6 +506,8 @@
 		6901A09418869D3F00D98C04 /* IntAABBCapsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBCapsule.h; path = ../../../Source/Geom/IntAABBCapsule.h; sourceTree = "<group>"; };
 		6901A09518869D3F00D98C04 /* IntAABBSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntAABBSphere.cpp; path = ../../../Source/Geom/IntAABBSphere.cpp; sourceTree = "<group>"; };
 		6901A09618869D3F00D98C04 /* IntAABBSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBSphere.h; path = ../../../Source/Geom/IntAABBSphere.h; sourceTree = "<group>"; };
+		6901A12B188C3D5D00D98C04 /* IntAABBPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntAABBPlane.cpp; path = ../../../Source/Geom/IntAABBPlane.cpp; sourceTree = "<group>"; };
+		6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBPlane.h; path = ../../../Source/Geom/IntAABBPlane.h; sourceTree = "<group>"; };
 		690566DF172094AF008A0C92 /* DrawBorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawBorder.cpp; sourceTree = "<group>"; };
 		690566E0172094AF008A0C92 /* DrawBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBorder.h; sourceTree = "<group>"; };
 		690566E1172094AF008A0C92 /* GuiCalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiCalendar.cpp; sourceTree = "<group>"; };
@@ -1326,6 +1330,8 @@
 		693D410215AB7C3C00B84D5C /* Geom */ = {
 			isa = PBXGroup;
 			children = (
+				6901A12B188C3D5D00D98C04 /* IntAABBPlane.cpp */,
+				6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */,
 				6901A09318869D3F00D98C04 /* IntAABBCapsule.cpp */,
 				6901A09418869D3F00D98C04 /* IntAABBCapsule.h */,
 				6901A09518869D3F00D98C04 /* IntAABBSphere.cpp */,
@@ -2029,6 +2035,7 @@
 				693D434115AB7CE900B84D5C /* ObjUsefulFunctions.h in Headers */,
 				693D434315AB7CE900B84D5C /* AlphaBmpLoader.h in Headers */,
 				693D434515AB7CE900B84D5C /* BinaryResource.h in Headers */,
+				6901A12E188C3D5D00D98C04 /* IntAABBPlane.h in Headers */,
 				693D434715AB7CE900B84D5C /* ResourceManager.h in Headers */,
 				693D434915AB7CE900B84D5C /* Billboard.h in Headers */,
 				693D434F15AB7CE900B84D5C /* SceneGraph.h in Headers */,
@@ -2253,6 +2260,7 @@
 				693D418015AB7C5300B84D5C /* Sphere.cpp in Sources */,
 				690C44FE1885C740007A505D /* ldo.c in Sources */,
 				693D418215AB7C5300B84D5C /* Tri.cpp in Sources */,
+				6901A12D188C3D5D00D98C04 /* IntAABBPlane.cpp in Sources */,
 				693D419315AB7C6800B84D5C /* DrawAABB.cpp in Sources */,
 				693D419515AB7C6800B84D5C /* DrawOBB2.cpp in Sources */,
 				693D419715AB7C6800B84D5C /* DrawOBB3.cpp in Sources */,
