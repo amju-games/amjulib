@@ -24,6 +24,7 @@ void PopColour();
 void MultColour(const Colour& c);
 
 Colour FromHexString(const std::string&);
+std::string ToHexString(const Colour& c, bool includeAlpha = false);
 }
 
 #endif

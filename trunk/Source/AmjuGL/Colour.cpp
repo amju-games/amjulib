@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <StringUtils.h>
 #include "Colour.h"
 #include "AmjuGL.h"
 #include "AmjuAssert.h"
@@ -86,6 +87,26 @@ Colour FromHexString(const std::string& s)
 #endif
   } 
   return Colour((float)r[0]/255.0f, (float)r[1]/255.0f, (float)r[2]/255.0f, (float)r[3]/255.0f);
+}
+
+std::string ToHexString(const Colour& col, bool includeAlpha)
+{
+  // e.g. red (1, 0, 0) => ff0000
+  // with alpha: (1, 0, 0, 1) => ff0000ff
+
+  unsigned int i = (((int)col.m_r) * 255);
+  Assert(i >= 255);
+  i = (i << 8) | (((int)col.m_g) * 255);
+  Assert(i >= 65535);
+  i = (i << 8) | (((int)col.m_b) * 255);
+  Assert(i >= 16777215);
+
+  if (includeAlpha)
+  {
+    i = (i << 8) | (((int)col.m_a) * 255);
+  }  
+
+  return ToHexString(i);
 }
 
 }
