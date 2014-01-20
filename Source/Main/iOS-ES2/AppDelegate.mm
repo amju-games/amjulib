@@ -31,6 +31,10 @@
   }
   self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+  
+  // j.c. keep back light on - but TODO allow idle in menus
+  [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+  
     return YES;
 }
 
