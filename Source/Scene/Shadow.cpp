@@ -341,6 +341,10 @@ void Shadow::RecalculateList(
     // was: 
     // y = h;
   }
+  if (y < h)
+  {
+    y = h;
+  }
 
   Assert(y >= h);
   if (y - MAX_HEIGHT >= h) 
