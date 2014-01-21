@@ -334,9 +334,12 @@ void Shadow::RecalculateList(
     h = y;
   }
 
-  if (y < h)
+  if (y < (h - 5.0f)) // TODO Tiny bit of wiggle room
   {
-    y = h;
+    // We are under this collMesh, so don't cast on it??
+    return; // TEMP TEST 
+    // was: 
+    // y = h;
   }
 
   Assert(y >= h);
