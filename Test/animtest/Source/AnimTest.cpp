@@ -203,7 +203,7 @@ std::cout << "Creating mesh...\n";
     }
   }
   
-  AmjuGL::InitFrame(0.5f, 0.5f, 0.5f);
+  AmjuGL::InitFrame();
   AmjuGL::BeginScene();
   AmjuGL::LookAt(0, 10.0f, 20.0f, 0, 0,0, 0, 1.0f, 0);
 
