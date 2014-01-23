@@ -173,5 +173,11 @@ AABB AABB::Intersection(const AABB& r) const
     std::max(m_zmin, r.m_zmin),
     std::min(m_zmax, r.m_zmax));
 }
+
+Vec3f AABB::CalcCentre() const
+{
+  return Vec3f((m_xmin + m_xmax) * 0.5f, (m_ymin + m_ymax) * 0.5f, (m_zmin + m_zmax) * 0.5f);
+}
+
 }
 
