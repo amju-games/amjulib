@@ -39,6 +39,8 @@ public:
   float GetYSize() const;
   float GetZSize() const;
 
+  Vec3f CalcCentre() const;
+
   // Get min and max for axis 0..2
   float GetMin(int axis) const;
   float GetMax(int axis) const;
