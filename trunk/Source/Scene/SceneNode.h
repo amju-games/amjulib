@@ -106,8 +106,6 @@ protected:
   Nodes m_children;
 };
 
-PSceneNode LoadScene(const std::string& filename);
-PSceneNode LoadScene(File* f);
 }
 
 #endif

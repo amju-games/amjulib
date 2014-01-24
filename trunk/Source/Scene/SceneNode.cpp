@@ -16,6 +16,20 @@ SceneNode* SceneNode::Create() { return new SceneNode; }
 
 PSceneNode LoadScene(const std::string& filename)
 {
+  // TODO Factory of loader types
+  if (GetFileExt(filename) == "obj")
+  {
+    ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(filename);
+    if (!mesh)
+    {
+      return nullptr;
+    }
+
+    SceneMesh* sm  = new SceneMesh;
+    sm->SetMesh(mesh);
+    return sm;
+  }
+
   File f;
   if (!f.OpenRead(filename))
   {
