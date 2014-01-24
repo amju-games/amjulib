@@ -269,6 +269,7 @@
     <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Resource\LoadMeshResource.cpp" />
     <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp" />
+    <ClCompile Include="..\..\..\Source\Scene\LoadScene.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\ParticleEffect2d.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\SceneLuaScript.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\SceneNodeFactory.cpp" />
@@ -545,6 +546,7 @@
     <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
     <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h" />
     <ClInclude Include="..\..\..\Source\Resource\LoadTextureResource.h" />
+    <ClInclude Include="..\..\..\Source\Scene\LoadScene.h" />
     <ClInclude Include="..\..\..\Source\Scene\ParticleEffect2d.h" />
     <ClInclude Include="..\..\..\Source\Scene\SceneLuaScript.h" />
     <ClInclude Include="..\..\..\Source\Scene\SceneNodeFactory.h" />

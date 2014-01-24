@@ -912,6 +912,9 @@
     <ClCompile Include="..\..\..\Source\Geom\IntAABBPlane.cpp">
       <Filter>Geom</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\LoadScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1732,6 +1735,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Geom\IntAABBPlane.h">
       <Filter>Geom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\LoadScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
