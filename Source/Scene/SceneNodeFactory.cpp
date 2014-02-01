@@ -13,8 +13,8 @@ namespace Amju
 SceneNodeFactory::SceneNodeFactory()
 {
   // Add SceneNode types to factory
-  TheSceneNodeFactory::Instance()->Add(SceneNode::NAME, &SceneNode::Create);
-  TheSceneNodeFactory::Instance()->Add(SceneMesh::NAME, &SceneMesh::Create);
-  TheSceneNodeFactory::Instance()->Add(SceneLuaScript::NAME, &SceneLuaScript::Create);
+  Add(SceneNode::NAME, &SceneNode::Create);
+  Add(SceneMesh::NAME, &SceneMesh::Create);
+  Add(SceneLuaScript::NAME, &SceneLuaScript::Create);
 }
 }
