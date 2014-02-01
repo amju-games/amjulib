@@ -721,6 +721,7 @@ void AmjuGLOpenGLES2::DrawLighting(
 {
   AMJU_CALL_STACK;
   // TODO Set uniform vars for shader
+  
 }    
 
 } // namespace Amju
