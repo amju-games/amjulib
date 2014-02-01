@@ -35,28 +35,50 @@ PSceneNode LoadScene(const std::string& filename)
 
 PSceneNode LoadScene(File* f)
 {
-  std::string s;
-  if (!f->GetDataLine(&s))
+  std::string nodeType;
+  if (!f->GetDataLine(&nodeType))
   {
-    f->ReportError("Expected scene node type");
+    f->ReportError("Expected scene node type or .obj filename");
     return 0;
   }
-  PSceneNode node = TheSceneNodeFactory::Instance()->Create(s);
-  if (!node)
+
+  PSceneNode node;
+
+  std::string ext = GetFileExt(nodeType);
+  if (ext == "obj")
   {
-    f->ReportError("Failed to create scene node of type: " + s);
-    return 0;
+    // We got a .obj filename -- load mesh and create SceneMesh node
+    ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(nodeType);
+    if (!mesh) 
+    {
+      return 0;
+    }
+
+    SceneMesh* sm  = new SceneMesh;
+    sm->SetMesh(mesh);
+
+    node = sm;
   }
-  if (!node->Load(f))
+  else
   {
-    return 0;
+    // Another type of node -- create and load
+    node = TheSceneNodeFactory::Instance()->Create(nodeType);
+    if (!node)
+    {
+      f->ReportError("Failed to create scene node of type: " + nodeType);
+      return 0;
+    }
+    if (!node->Load(f))
+    {
+      return 0;
+    }
   }
 
   // Load orientation etc
   Matrix m;
   if (!LoadMatrix(f, &m))
   {
-    f->ReportError("Failed to load transform matrix for node " + s);
+    f->ReportError("Failed to load transform matrix for node " + nodeType);
     return false;
   }
   node->SetLocalTransform(m);
