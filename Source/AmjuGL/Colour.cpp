@@ -95,11 +95,11 @@ std::string ToHexString(const Colour& col, bool includeAlpha)
   // with alpha: (1, 0, 0, 1) => ff0000ff
 
   unsigned int i = (((int)col.m_r) * 255);
-  Assert(i >= 255);
+  Assert(i <= 255);
   i = (i << 8) | (((int)col.m_g) * 255);
-  Assert(i >= 65535);
+  Assert(i <= 65535);
   i = (i << 8) | (((int)col.m_b) * 255);
-  Assert(i >= 16777215);
+  Assert(i <= 16777215);
 
   if (includeAlpha)
   {
