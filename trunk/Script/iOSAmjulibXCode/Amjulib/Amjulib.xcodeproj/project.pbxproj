@@ -13,6 +13,8 @@
 		6901A09A18869D3F00D98C04 /* IntAABBSphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A09618869D3F00D98C04 /* IntAABBSphere.h */; };
 		6901A12D188C3D5D00D98C04 /* IntAABBPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6901A12B188C3D5D00D98C04 /* IntAABBPlane.cpp */; };
 		6901A12E188C3D5D00D98C04 /* IntAABBPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */; };
+		6901A131189404EA00D98C04 /* LoadScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6901A12F189404EA00D98C04 /* LoadScene.cpp */; };
+		6901A132189404EA00D98C04 /* LoadScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A130189404EA00D98C04 /* LoadScene.h */; };
 		690566F4172094AF008A0C92 /* DrawBorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566DF172094AF008A0C92 /* DrawBorder.cpp */; };
 		690566F5172094AF008A0C92 /* DrawBorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E0172094AF008A0C92 /* DrawBorder.h */; };
 		690566F6172094AF008A0C92 /* GuiCalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E1172094AF008A0C92 /* GuiCalendar.cpp */; };
@@ -508,6 +510,8 @@
 		6901A09618869D3F00D98C04 /* IntAABBSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBSphere.h; path = ../../../Source/Geom/IntAABBSphere.h; sourceTree = "<group>"; };
 		6901A12B188C3D5D00D98C04 /* IntAABBPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IntAABBPlane.cpp; path = ../../../Source/Geom/IntAABBPlane.cpp; sourceTree = "<group>"; };
 		6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBPlane.h; path = ../../../Source/Geom/IntAABBPlane.h; sourceTree = "<group>"; };
+		6901A12F189404EA00D98C04 /* LoadScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadScene.cpp; sourceTree = "<group>"; };
+		6901A130189404EA00D98C04 /* LoadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadScene.h; sourceTree = "<group>"; };
 		690566DF172094AF008A0C92 /* DrawBorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawBorder.cpp; sourceTree = "<group>"; };
 		690566E0172094AF008A0C92 /* DrawBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBorder.h; sourceTree = "<group>"; };
 		690566E1172094AF008A0C92 /* GuiCalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiCalendar.cpp; sourceTree = "<group>"; };
@@ -1670,6 +1674,8 @@
 		693D426515AB7CE900B84D5C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				6901A12F189404EA00D98C04 /* LoadScene.cpp */,
+				6901A130189404EA00D98C04 /* LoadScene.h */,
 				690C44A51885C68B007A505D /* SceneLuaScript.cpp */,
 				690C44A61885C68B007A505D /* SceneLuaScript.h */,
 				690C44A71885C68B007A505D /* SceneNodeFactory.cpp */,
@@ -2050,6 +2056,7 @@
 				693D435C15AB7CE900B84D5C /* SoundPlayerImpl.h in Headers */,
 				693D435E15AB7CE900B84D5C /* TextToSpeech.h in Headers */,
 				693D436F15AB7CE900B84D5C /* BassSoundPlayer.h in Headers */,
+				6901A132189404EA00D98C04 /* LoadScene.h in Headers */,
 				693D437115AB7CE900B84D5C /* ReportError.h in Headers */,
 				693D437315AB7CE900B84D5C /* SafeUtils.h in Headers */,
 				693D437515AB7CE900B84D5C /* StringUtils.h in Headers */,
@@ -2310,6 +2317,7 @@
 				693D422715AB7CA700B84D5C /* pngtest.c in Sources */,
 				693D422815AB7CA700B84D5C /* pngtrans.c in Sources */,
 				693D422915AB7CA700B84D5C /* pngvcrd.c in Sources */,
+				6901A131189404EA00D98C04 /* LoadScene.cpp in Sources */,
 				693D422A15AB7CA700B84D5C /* pngwio.c in Sources */,
 				690C45171885C740007A505D /* lstring.c in Sources */,
 				693D422B15AB7CA700B84D5C /* pngwrite.c in Sources */,
