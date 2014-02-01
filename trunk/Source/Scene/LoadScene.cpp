@@ -2,6 +2,7 @@
 #include <ObjMesh.h>
 #include <ResourceManager.h>
 #include <File.h>
+#include <LoadMatrix.h>
 #include "LoadScene.h"
 #include "SceneMesh.h"
 #include "SceneNodeFactory.h"
@@ -50,6 +51,16 @@ PSceneNode LoadScene(File* f)
   {
     return 0;
   }
+
+  // Load orientation etc
+  Matrix m;
+  if (!LoadMatrix(f, &m))
+  {
+    f->ReportError("Failed to load transform matrix for node " + s);
+    return false;
+  }
+  node->SetLocalTransform(m);
+
   int numChildren = 0;
   if (!f->GetInteger(&numChildren))
   {
