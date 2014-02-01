@@ -79,7 +79,7 @@ PSceneNode LoadScene(File* f)
   if (!LoadMatrix(f, &m))
   {
     f->ReportError("Failed to load transform matrix for node " + nodeType);
-    return false;
+    return 0;
   }
   node->SetLocalTransform(m);
 
