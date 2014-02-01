@@ -25,8 +25,8 @@ uniform int useSphereMap;\n\
 void main()\n\
 {\n\
     vec3 eyeNormal = normalMatrix * normal;\n\
-    vec3 lightPosition = vec3(1.0, 1.0, 1.0);\n\
-    float nDotVP = max(useLighting, dot(normalize(eyeNormal), normalize(lightPosition)));\n\
+    vec3 lightPosition = vec3(-1.0, 1.0, 1.0);\n\
+    float nDotVP = max(useLighting, dot(normalize(eyeNormal), normalize(lightPosition)) + 0.5);\n\
     colorVarying = colour * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
     if (useSphereMap == 1)\n\
