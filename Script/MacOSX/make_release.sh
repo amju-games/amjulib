@@ -20,7 +20,7 @@ rm $INC/*
 rm $LIB/*
 
 # Copy .lib binary to lib folder
-cp ../../Build/Mac/amjulib.a $LIB/
+cp ../../Build/Mac/amjulib.a $LIB/libamju.a
 
 # Copy . headers required by client code to include folder
 cp $SRC/AmjuGL/*.h $INC
