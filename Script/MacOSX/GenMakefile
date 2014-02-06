@@ -36,47 +36,10 @@ include $(AMJULIB_MAC_SCRIPT_PATH)/mac_rules
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
 
+# SOURCES is defined in including Makefile
 
-AMJU_LIB_DIRS := \
-  $(AMJU)/AmjuGL \
-  $(AMJU)/AmjuGLOpenGL \
-  $(AMJU)/Clip \
-  $(AMJU)/Collision \
-  $(AMJU)/Community \
-  $(AMJU)/Events \
-  $(AMJU)/EventsSDL \
-  $(AMJU)/FileUtils \
-  $(AMJU)/Font \
-  $(AMJU)/Game \
-  $(AMJU)/Geom \
-  $(AMJU)/Geom/Mgc \
-  $(AMJU)/GeomDraw \
-  $(AMJU)/GeomLoad \
-  $(AMJU)/Gui \
-  $(AMJU)/Image \
-  $(AMJU)/Image/Png \
-  $(AMJU)/Localise \
-  $(AMJU)/Lua \
-  $(AMJU)/Main \
-  $(AMJU)/Md2 \
-  $(AMJU)/Mem \
-  $(AMJU)/Network \
-  $(AMJU)/Obj \
-  $(AMJU)/Resource \
-  $(AMJU)/SDL/include \
-  $(AMJU)/Scene \
-  $(AMJU)/Sound \
-  $(AMJU)/SoundBass \
-  $(AMJU)/Strings \
-  $(AMJU)/Thread \
-  $(AMJU)/TimeUtils \
-  $(AMJU)/Utils \
-  $(AMJU)/Utils/Zlib
-  
-INCLUDES	:=	$(AMJU_LIB_DIRS) 
+INCLUDES	:=	$(SOURCES) $(AMJU)/../Build/amjulib/include
 
-# Defined in including Makefile
-#SOURCES		:=	../../Source
 
 #---------------------------------------------------------------------------------
 # options for code generation
