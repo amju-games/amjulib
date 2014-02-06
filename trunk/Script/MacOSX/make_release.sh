@@ -5,9 +5,6 @@ export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS 
 # Build (release mode)
 export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
 
-make clean
-make
-
 export LIB=../../Build/amjulib/lib/
 export INC=../../Build/amjulib/include/
 export SRC=../../Source/
@@ -19,10 +16,7 @@ mkdir -p $INC
 rm $INC/*
 rm $LIB/*
 
-# Copy .lib binary to lib folder
-cp ../../Build/Mac/amjulib.a $LIB/libamju.a
-
-# Copy . headers required by client code to include folder
+# Copy headers required by client code to include folder
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
@@ -37,6 +31,7 @@ cp $SRC/Gui/*.h $INC
 cp $SRC/Image/*.h $INC
 cp $SRC/Localise/*.h $INC
 cp $SRC/Lua/*.h $INC
+cp $SRC/Mem/*.h $INC
 cp $SRC/Main/*.h $INC
 rm $INC/nonglutmain.h
 cp $SRC/Md2/Md2Model.h $INC
@@ -50,6 +45,12 @@ cp $SRC/Strings/*.h $INC
 cp $SRC/Thread/*.h $INC
 cp $SRC/TimeUtils/*.h $INC
 cp $SRC/Utils/*.h $INC
+
+#####make clean
+make
+
+# Copy .lib binary to lib folder
+cp ../../Build/Mac/amjulib.a $LIB/libamju.a
 
 # Make documentation and copy to docs folder
 
