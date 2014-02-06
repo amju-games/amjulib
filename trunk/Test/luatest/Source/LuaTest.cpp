@@ -23,33 +23,9 @@ Variable AwesomeFunc(const Variable& params)
 
   return retvals;
 }
-// This is to put a wrapper around the above function so we can register it with lua.
+// This is to put a wrapper around the above function so we can 
+//  register it with lua.
 AMJU_MAKE_LUA_WRAPPER(AwesomeFunc)
-
-// Function which we register so Lua script can call it:
-// TOOD add to Amju Lua so we can more easily register functions, and don't have
-//  to know what to return, how to get params, etc.
-static int MyCFunc(lua_State* L)
-{
-  std::cout << "LUA: c++: function " << __FUNCTION__ << " called from lua\n";
-
-  // Get parameters passed in, as Variable
-  // TODO How do we know how many params? Maybe we have to pass num into
-  //  this func.
-  Variable params = Lua::GetParams(L);
-
-
-  
-  // Return values
-  VariableVec retvals;
-  retvals.push_back(Variable(std::string("I'm a ret val!")));
-  retvals.push_back(23);
-
-  Variable ret(retvals);
-
-  // Return number of return vals pushed
-  return Lua::Return(L, ret);
-}
 
 void ReportError(const std::string& e)
 {
