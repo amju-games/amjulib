@@ -12,7 +12,7 @@ RUNDIR 		:=	$(BUILD)
 ASSETS		:=	../../Assets
 
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
+	-lamju \
 	-framework Carbon \
 	-lstdc++ -lm 
 
