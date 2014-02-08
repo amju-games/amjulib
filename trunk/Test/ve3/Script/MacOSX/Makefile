@@ -21,7 +21,7 @@ RUNDIR		:=	$(BUILD)/$(APPNAME)/Contents/MacOS
 DATADIR		:=	$(RUNDIR)/Data
 
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/$(AMJU_BUILD_ARCH)/amjulib.a \
+	-lamju \
         $(AMJULIB_MAC_SCRIPT_PATH)/../../Source/SoundBass/Bass2.4/Macosx/mp3-free/libbass.dylib \
         $(AMJULIB_MAC_SCRIPT_PATH)/../../Source/SoundBass/Bass2.4/Macosx/libbassmidi.dylib \
 	-framework OpenGL \
