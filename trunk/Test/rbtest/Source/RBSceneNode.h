@@ -9,7 +9,7 @@ namespace Amju
 class RBSceneNode : public SceneNode
 {
 public:
-  RBSceneNode(RB* rb = 0) : m_rb(rb) {}
+  RBSceneNode(RB* rb = 0) : m_rb(rb) { SetIsLit(true); }
 
   virtual void Update();
   virtual void Draw();
