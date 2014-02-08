@@ -16,7 +16,8 @@
 #include <StringUtils.h>
 #include <Timer.h>
 #include <ShadowMap.h>
- 
+
+//#define USE_SHADOWMAP
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
 
@@ -67,17 +68,9 @@ void GSRigidBody::Draw()
   //Vec3f v = camTarget->GetPos();
   //AmjuGL::LookAt(0, 10, 20,  v.x, v.y, v.z, 0, 1, 0);
 
-  // TODO Do lighting in shader
-  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+#ifdef USE_SHADOWMAP
 
-  AmjuGL::DrawLighting(
-    AmjuGL::LightColour(0, 0, 0),
-    AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
-    AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
-    AmjuGL::LightColour(1, 1, 1),
-    AmjuGL::Vec3(1, 1, 1)); // Light direction
-
-#ifdef MAKE_BOX3_DEMO
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
 
   static PShadowMap sm = 0;
   if (!sm)
@@ -90,6 +83,16 @@ void GSRigidBody::Draw()
   sm->Draw();
 
 #else
+
+  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+
+  AmjuGL::DrawLighting(
+    AmjuGL::LightColour(0, 0, 0),
+    AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
+    AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
+    AmjuGL::LightColour(1, 1, 1),
+    AmjuGL::Vec3(1, 1, 1)); // Light direction
+
   GetRBSceneGraph()->Draw();
 
 #endif
@@ -211,6 +214,8 @@ bool GSRigidBody::OnKeyEvent(const KeyEvent& ke)
   }
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '3')
   {
+std::cout << "Adding a box!\n";
+
     MakeBox3(Vec3f(3.0f, 20.0, 0));
   }
 
