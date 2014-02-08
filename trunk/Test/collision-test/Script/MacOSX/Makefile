@@ -11,7 +11,7 @@ SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
 
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
+	-lamju \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
