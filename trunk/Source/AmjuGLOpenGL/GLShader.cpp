@@ -6,7 +6,7 @@
 #include <iostream>
 #include "AmjuGL-OpenGL-Base.h"
 #include "AmjuAssert.h"
-#include "OpenGL.h"
+#include "Internal/OpenGL.h"
 #include <File.h>
 #include <ReportError.h>
 #include <AmjuFinal.h>

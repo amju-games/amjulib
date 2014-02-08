@@ -17,7 +17,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "GLShader.h"
 #include "ShaderNull.h"
 #include "AmjuAssert.h"
-#include "OpenGL.h"
+#include "Internal/OpenGL.h"
 #include "ShadowMapOpenGL1.h"
 #include "ShadowMapOpenGL2.h"
 #include "ShadowMapOpenGL3.h"
@@ -94,6 +94,7 @@ static Drawable* MakeShadowMap()
   if (!glBindFramebufferEXT)
   {
     // Required extension not supported
+    std::cout << "AmjuGL: Open GL Shadow map: not supported.\n";
     return new ShadowMapNull;
   }
   return new ShadowMapOpenGL2;

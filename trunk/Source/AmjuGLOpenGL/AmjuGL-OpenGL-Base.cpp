@@ -5,7 +5,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <AmjuFirst.h>
 #include <iostream>
 #include <Drawable.h>
-#include "OpenGL.h"
+#include "Internal/OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
 #include <AmjuAssert.h>
 #include <AmjuFinal.h>
