@@ -1,6 +1,4 @@
 #include <AmjuFirst.h>
-#define GLEW_STATIC
-#include <OpenGL.h>
 #include <ResourceManager.h>
 #include <AmjuRand.h>
 #include <Screen.h>
