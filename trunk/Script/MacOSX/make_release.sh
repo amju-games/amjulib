@@ -20,6 +20,7 @@ rm $LIB/*
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
+cp $SRC/Community/*.h $INC
 cp $SRC/Events/*.h $INC
 cp $SRC/FileUtils/*.h $INC
 cp $SRC/Font/*.h $INC
@@ -33,7 +34,6 @@ cp $SRC/Localise/*.h $INC
 cp $SRC/Lua/*.h $INC
 cp $SRC/Mem/*.h $INC
 cp $SRC/Main/*.h $INC
-rm $INC/nonglutmain.h
 cp $SRC/Md2/Md2Model.h $INC
 cp $SRC/Network/*.h $INC
 cp $SRC/Obj/*.h $INC
@@ -45,6 +45,9 @@ cp $SRC/Strings/*.h $INC
 cp $SRC/Thread/*.h $INC
 cp $SRC/TimeUtils/*.h $INC
 cp $SRC/Utils/*.h $INC
+cp $SRC/Utils/Xml/*.h $INC
+
+perl CreateHeaderFile.pl $INC > $INC/amju.h
 
 #####make clean
 make
