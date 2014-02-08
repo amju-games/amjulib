@@ -161,7 +161,7 @@ void TestOnlineReq(const std::string& url)
 void TestDownloadReq(const std::string& url, const std::string& filename)
 {
   OnlineReqManager rm;
-  DownloadReq* pReq = new DownloadReq(filename, url, HttpClient::GET, "download req");
+  DownloadReq* pReq = new DownloadReq(filename, url, HttpClient::GET, "download req", false);
   rm.AddReq(pReq);
   while (true)
   {
