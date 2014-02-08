@@ -176,7 +176,11 @@ void Game::RunOneLoop()
     t.SetSize(Vec2f(1.0f, 0.1f));
     t.SetJust(GuiText::AMJU_JUST_LEFT);
     t.SetText(s);
+    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_TEXTURE_2D);
+    AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     t.Draw(); 
+    AmjuGL::PopAttrib();
   }
 #endif //  SHOW_FRAME_TIME
 
