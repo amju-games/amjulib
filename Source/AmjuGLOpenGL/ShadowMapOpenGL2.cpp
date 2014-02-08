@@ -47,7 +47,7 @@ void loadShader()
     "{ \n"
     "    vec4 shadowCoordinateWdivide = ShadowCoord / ShadowCoord.w ; \n"
     "    // Used to lower moiré pattern and self-shadowing \n"
-    "    shadowCoordinateWdivide.z += 0.0005; \n"
+    "    shadowCoordinateWdivide.z += 0.005; \n"
     "    float distanceFromLight = texture2D(ShadowMap,shadowCoordinateWdivide.st).z; \n"
     "    float shadow = 1.0; \n"
     "    if (ShadowCoord.w > 0.0) \n"
@@ -116,7 +116,7 @@ void setupMatrices(float position_x,float position_y,float position_z,float look
 {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45, 1.0, 10, 40000); //0.1, 1000.0);
+  gluPerspective(45, 1.0, 1, 1000); //0.1, 1000.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   gluLookAt(position_x,position_y,position_z,lookAt_x,lookAt_y,lookAt_z,0,1,0);
