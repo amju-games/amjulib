@@ -1,10 +1,6 @@
 #include <AmjuFirst.h>
 #include "GSGui.h"
 #include <AmjuGL.h>
-
-#define GLEW_STATIC
-#include <OpenGL.h> // naughty, using OpenGL directly here to scroll texture
-
 #include <CursorManager.h>
 #include <Timer.h>
 #include <EventPoller.h>
