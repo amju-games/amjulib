@@ -1,21 +1,11 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2006
-$Log: Lua.h,v $
-Revision 1.1  2006/01/16 13:40:11  jay
-Class to wrap Lua C API
-
-*/
-
-#ifndef AMJU_LUA_H_INCLUDED
-#define AMJU_LUA_H_INCLUDED
+#pragma once
 
 #include <string>
-extern "C"
-{
-#include "LuaLib-5.2.3/lua.h"
-}
 #include <RCPtr.h>
 #include <Variable.h>
+
+struct lua_State;
+typedef int (*lua_CFunction)(lua_State*);
 
 namespace Amju
 {
@@ -127,5 +117,4 @@ static int fn##_wrapper(lua_State* L) \
 
 }
 
-#endif
 
