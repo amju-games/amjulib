@@ -32,6 +32,8 @@ sub MaybeAddHeaders($)
 
 print "#pragma once\n";
 
+print "// Built " . scalar localtime() . "\n";
+
 # Recursively search directories for files 
 find (\&MaybeAddHeaders, $ARGV[0]);
 
