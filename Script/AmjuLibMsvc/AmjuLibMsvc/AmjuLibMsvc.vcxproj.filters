@@ -738,9 +738,6 @@
     <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Md2\Md3.cpp">
-      <Filter>Md2</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\GuiFileListBox.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
@@ -1567,12 +1564,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h">
       <Filter>Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Md2\Md3Types.h">
-      <Filter>Md2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Md2\Md3.h">
-      <Filter>Md2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiFileListBox.h">
       <Filter>Gui</Filter>
