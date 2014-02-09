@@ -53,32 +53,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/I "../../../../../Source/Events" 
-/I "../../../../../Source/EventsWin32" 
-/I "../../../../../Source/EventsSDL" 
-/I "../../../../../Source/Utils" 
-/I "../../../../../Source/FileUtils" 
-/I "../../../../../Source/AmjuGL"  /I "../../../../../Source/Network"  /I "../../../../../Source/Thread"  /I "../../../../../Source/Community"   
-/I "../../../../../Source/AmjuGLOpenGL" 
-/I "../../../../../Source/AmjuGLDX9" 
-/I "../../../../../Source/AmjuGLDX11" 
-/I "../../../../../Source/Mem" 
-/I "../../../../../Source/Md2" 
-/I "../../../../../Source/Image" 
-/I "../../../../../Source/Geom" 
-/I "../../../../../Source/Strings" 
-/I "../../../../../Source/TimeUtils" 
-/I "../../../../../Source/Game" 
-/I "../../../../../Source/Resource" 
-/I "../../../../../Source/Scene" 
-/I "../../../../../Source/Obj"  
-/I "../../../../../Source/Collision" 
-/I "../../../../../Source/Gui" 
-/I "../../../../../Source/Font" 
-/I "../../../../../Source/Sound" 
-/I "../../../../../Source/SoundSDLMixer" 
-/I "../../../../../Source/GeomLoad" 
-/I "../../../../../Source/GeomDraw" /I "../../../../../Source/Image/Png" /I "../../../../../Source/Main" /I "../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/I "../../../../../Build/amjulib/include"
+ %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
@@ -97,10 +73,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalOptions>/I "../../../../amjulib/Source/Events" /I "../../../../amjulib/Source/EventsWin32" 
-/I "../../../../amjulib/Source/EventsSDL" 
-/I "../../../../amjulib/Source/Utils" /I "../../../../amjulib/Source/FileUtils" /I "../../../../amjulib/Source/AmjuGL" /I "../../../../amjulib/Source/AmjuGLOpenGL" 
-/I "../../../../amjulib/Source/AmjuGLDX9" /I "../../../../../Source/AmjuGLDX11" /I "../../../../amjulib/Source/Mem" /I "../../../../amjulib/Source/Md2" /I "../../../../amjulib/Source/Image" /I "../../../../amjulib/Source/Geom" /I "../../../../amjulib/Source/Strings" /I "../../../../amjulib/Source/TimeUtils" /I "../../../../amjulib/Source/Game" /I "../../../../amjulib/Source/Resource" /I "../../../../amjulib/Source/Scene" /I "../../../../amjulib/Source/Obj"  /I "../../../../amjulib/Source/Collision" /I "../../../../amjulib/Source/Gui" /I "../../../../amjulib/Source/Font" /I "../../../../amjulib/Source/Sound" /I "../../../../amjulib/Source/SoundSDLMixer" /I "../../../../amjulib/Source/GeomLoad" /I "../../../../amjulib/Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community" /I "../../../Source/Image/Png"   %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/I "../../../../../Build/amjulib/include" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
