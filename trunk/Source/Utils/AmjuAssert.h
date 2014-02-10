@@ -54,6 +54,10 @@ namespace Amju
 #define Assert(exp) (void)( (exp) || (Amju::wiiAssert(#exp, __FILE__, __LINE__), 0) )
 #endif //  GEKKO
 
+#ifdef ANDROID_NDK
+#include <assert.h>
+#define Assert assert
+#endif
 
 #endif // include guard
 
