@@ -11,6 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{900CC5AD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuGLTest", "..\..\Examples\gltest\Script\Windows\AmjuGLTest\AmjuGLTest.vcxproj", "{92E9AD60-76F7-409A-A84A-CFC52A25218E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guitest", "..\..\Examples\guitest\Script\Windows\guitest\guitest\guitest.vcxproj", "{0EB8A8D0-C471-49CA-A594-D89D086DFB71}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimTest-MsvcProj", "..\..\Examples\animtest\Script\AnimTest-MsvcProj\AnimTest\AnimTest.vcxproj", "{87E43EB2-59F5-4745-AE55-D65F32818453}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md3test", "..\..\Examples\md3test\Script\Windows\md3test\md3test\md3test.vcxproj", "{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RbTest", "..\..\Examples\rbtest\Script\Windows\RbTest\RbTest\RbTest.vcxproj", "{17F29CA3-EE20-498F-9595-7A9E0E296A7F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luatest", "..\..\Test\luatest\Script\Windows\luatest\luatest\luatest.vcxproj", "{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,11 +35,36 @@ Global
 		{92E9AD60-76F7-409A-A84A-CFC52A25218E}.Debug|Win32.Build.0 = Debug|Win32
 		{92E9AD60-76F7-409A-A84A-CFC52A25218E}.Release|Win32.ActiveCfg = Release|Win32
 		{92E9AD60-76F7-409A-A84A-CFC52A25218E}.Release|Win32.Build.0 = Release|Win32
+		{0EB8A8D0-C471-49CA-A594-D89D086DFB71}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0EB8A8D0-C471-49CA-A594-D89D086DFB71}.Debug|Win32.Build.0 = Debug|Win32
+		{0EB8A8D0-C471-49CA-A594-D89D086DFB71}.Release|Win32.ActiveCfg = Release|Win32
+		{0EB8A8D0-C471-49CA-A594-D89D086DFB71}.Release|Win32.Build.0 = Release|Win32
+		{87E43EB2-59F5-4745-AE55-D65F32818453}.Debug|Win32.ActiveCfg = Debug|Win32
+		{87E43EB2-59F5-4745-AE55-D65F32818453}.Debug|Win32.Build.0 = Debug|Win32
+		{87E43EB2-59F5-4745-AE55-D65F32818453}.Release|Win32.ActiveCfg = Release|Win32
+		{87E43EB2-59F5-4745-AE55-D65F32818453}.Release|Win32.Build.0 = Release|Win32
+		{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}.Debug|Win32.Build.0 = Debug|Win32
+		{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}.Release|Win32.ActiveCfg = Release|Win32
+		{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}.Release|Win32.Build.0 = Release|Win32
+		{17F29CA3-EE20-498F-9595-7A9E0E296A7F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17F29CA3-EE20-498F-9595-7A9E0E296A7F}.Debug|Win32.Build.0 = Debug|Win32
+		{17F29CA3-EE20-498F-9595-7A9E0E296A7F}.Release|Win32.ActiveCfg = Release|Win32
+		{17F29CA3-EE20-498F-9595-7A9E0E296A7F}.Release|Win32.Build.0 = Release|Win32
+		{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}.Debug|Win32.Build.0 = Debug|Win32
+		{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}.Release|Win32.ActiveCfg = Release|Win32
+		{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD} = {D34F3D3C-B016-4E4A-AAF8-7D329EA0127A}
 		{92E9AD60-76F7-409A-A84A-CFC52A25218E} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
+		{0EB8A8D0-C471-49CA-A594-D89D086DFB71} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
+		{87E43EB2-59F5-4745-AE55-D65F32818453} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
+		{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
+		{17F29CA3-EE20-498F-9595-7A9E0E296A7F} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
 	EndGlobalSection
 EndGlobal
