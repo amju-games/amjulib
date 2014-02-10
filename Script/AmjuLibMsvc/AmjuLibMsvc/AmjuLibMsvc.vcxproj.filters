@@ -1097,9 +1097,6 @@
     <ClInclude Include="..\..\..\Source\Mem\CallStack.h">
       <Filter>Mem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Mem\MemCheck.h">
-      <Filter>Mem</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Md2\Md2Model.h">
       <Filter>Md2</Filter>
     </ClInclude>
