@@ -638,7 +638,6 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Mem\AmjuFirst.h" />
     <ClInclude Include="..\..\..\Source\Mem\AmjuMem.h" />
     <ClInclude Include="..\..\..\Source\Mem\CallStack.h" />
-    <ClInclude Include="..\..\..\Source\Mem\MemCheck.h" />
     <ClInclude Include="..\..\..\Source\Md2\Md2Model.h" />
     <ClInclude Include="..\..\..\Source\Md2\Md2Norms.h" />
     <ClInclude Include="..\..\..\Source\Geom\AABB.h" />
