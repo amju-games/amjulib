@@ -11,13 +11,13 @@ SOURCES		:=	../../Source
 RUNDIR 		:=	../../Assets
 
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
-	-lcurses -lstdc++ -lm 
+	-lamju \
+	-framework Carbon -lcurl -lcurses -lstdc++ -lm 
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
 run:
 	cp $(TARGET) $(RUNDIR); \
 	cd $(RUNDIR); \
-	./$(APP)
+	./$(APP) localhost/index.html
 
