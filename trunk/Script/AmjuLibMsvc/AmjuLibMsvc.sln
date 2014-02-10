@@ -3,12 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "AmjuLibMsvc\AmjuLibMsvc.vcxproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuGLTest", "..\..\Test\gltest\Script\Windows\AmjuGLTest\AmjuGLTest.vcxproj", "{92E9AD60-76F7-409A-A84A-CFC52A25218E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D34F3D3C-B016-4E4A-AAF8-7D329EA0127A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{AB0A9BAE-094E-444A-A9AD-E52572C17CB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{900CC5AD-C408-4384-846A-BA99273BF49B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuGLTest", "..\..\Examples\gltest\Script\Windows\AmjuGLTest\AmjuGLTest.vcxproj", "{92E9AD60-76F7-409A-A84A-CFC52A25218E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +30,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{92E9AD60-76F7-409A-A84A-CFC52A25218E} = {D34F3D3C-B016-4E4A-AAF8-7D329EA0127A}
+		{92E9AD60-76F7-409A-A84A-CFC52A25218E} = {AB0A9BAE-094E-444A-A9AD-E52572C17CB7}
 	EndGlobalSection
 EndGlobal
