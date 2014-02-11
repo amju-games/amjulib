@@ -23,11 +23,11 @@
 //#include "main.h"
 
 #include "ShadowMapOpenGL3.h"
-#include "OpenGL.h"
+#include "Internal/OpenGL.h"
 #include <AmjuGL.h>
-#include "VECTOR3D.h"
-#include "VECTOR4D.h"
-#include "MATRIX4X4.h"
+#include "Internal/VECTOR3D.h"
+#include "Internal/VECTOR4D.h"
+#include "Internal/MATRIX4X4.h"
 #include <Screen.h>
 #include <AmjuFinal.h>
 
