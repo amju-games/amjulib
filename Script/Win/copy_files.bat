@@ -49,5 +49,5 @@ copy %SRC%\Utils\*.h %INC%\
 copy %SRC%\Utils\Xml\*.h %INC%\
 
 
-%PERL% CreateHeaderFile.pl %INC% > %INC%\amju.h
+%PERL% ..\CreateHeaderFile.pl %INC% > %INC%\amju.h
 
