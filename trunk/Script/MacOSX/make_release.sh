@@ -2,11 +2,13 @@
 export AMJU_BUILD_ARCH=Mac
 export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS -DAMJU_USE_CURL'
 
-# Build (release mode)
-export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
+export PLAT=macosx
+export VERSION=`../MakeVersionString.pl ../../Source/Version.h`
+export DEST_DIR=../../Releases/amjulib-$VERSION-$PLAT
+echo MAKING RELEASE FOR $DEST_DIR
 
-export LIB=../../Build/amjulib/lib/
-export INC=../../Build/amjulib/include/
+export LIB=$DEST_DIR/lib/
+export INC=$DEST_DIR/include/
 export SRC=../../Source/
 
 # Create release dir structure
@@ -17,6 +19,7 @@ rm $INC/*
 rm $LIB/*
 
 # Copy headers required by client code to include folder
+cp $SRC/Version.h $INC
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
@@ -49,6 +52,8 @@ cp $SRC/Utils/Xml/*.h $INC
 
 perl CreateHeaderFile.pl $INC > $INC/amju.h
 
+# Build (release mode)
+export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
 #####make clean
 make
 
