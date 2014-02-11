@@ -34,7 +34,9 @@ INCLUDES	:=	$(AMJU_LIB_DIRS) $(AMJU)/Main
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
+# j.c. workarounds for C++11 features override and nullptr
+CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) -Doverride= -Dnullptr=0 $(EXTRA_CFLAGS)
+
 CXXFLAGS	=	$(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
