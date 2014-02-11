@@ -1,5 +1,5 @@
 #include <AmjuFirst.h>
-#if !defined(IPHONE) || defined(AMJU_USE_ES2)
+#if (!defined(IPHONE) && !defined(ANDROID_NDK)) || defined(AMJU_USE_ES2)
 
 #include "GLShader.h"
 
