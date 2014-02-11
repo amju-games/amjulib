@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef AMJU_IOS
+#if defined(AMJU_IOS) 
 
 #include "AmjuGL-OpenGL-Base.h"
 
