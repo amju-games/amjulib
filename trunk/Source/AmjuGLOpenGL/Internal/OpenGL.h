@@ -43,6 +43,14 @@ Amju Games source code (c) Copyright Jason Colman 2007
 
 #endif // AMJU_IOS
 
+#ifdef ANDROID_NDK
+extern "C"
+{
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+}
+#endif
+
 #endif // Include guard 
 
 
