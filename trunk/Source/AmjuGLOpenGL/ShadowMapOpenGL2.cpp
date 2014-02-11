@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "ShadowMapOpenGL2.h"
-#include "OpenGL.h"
+#include "Internal/OpenGL.h"
 #include <stdlib.h>
 #include "GLShader.h"
 #include <math.h>
