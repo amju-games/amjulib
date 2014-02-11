@@ -440,13 +440,14 @@ copy_files.bat
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\MATRIX4X4.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\OpenGL.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\showbuffer.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR3D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR4D.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h" />
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h" />
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Drawable.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\DrawDecorator.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Outliner.h" />
@@ -590,7 +591,6 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL-Base.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\GLShader.h" />
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\OpenGL.h" />
     <ClInclude Include="..\..\..\Source\Events\EventListener.h" />
     <ClInclude Include="..\..\..\Source\Events\EventPoller.h" />
     <ClInclude Include="..\..\..\Source\Events\EventTypes.h" />

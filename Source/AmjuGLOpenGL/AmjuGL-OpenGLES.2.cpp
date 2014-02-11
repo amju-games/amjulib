@@ -2,18 +2,20 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef AMJU_IOS
+#if defined(AMJU_IOS) 
+// TODO Too much dependency on iOS, not suitable fo Android 
 
 #include <AmjuFirst.h>
 #include <math.h>
 #include <stack>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#include "Internal/OpenGL.h"
+#ifdef AMJU_IOS
 extern "C"
 {
 #include <GLKit/GLKMatrix4.h>
 #include <GLKit/GLKMatrix3.h>
 }
+#endif
 #include <AmjuGL.h>
 #include <TriList.h>
 #include "GLShader.h"

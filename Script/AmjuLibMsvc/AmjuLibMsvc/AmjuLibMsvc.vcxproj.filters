@@ -121,6 +121,9 @@
     <Filter Include="Lua\LuaLib-5.2.3">
       <UniqueIdentifier>{8895466b-75f2-4d96-915f-0d47497aca0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AmjuGLOpenGL\Internal">
+      <UniqueIdentifier>{8f69c749-88b9-4bf8-959b-b39c62cd092f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.cpp">
@@ -1001,9 +1004,6 @@
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\GLShader.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\OpenGL.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Events\EventListener.h">
       <Filter>Events</Filter>
     </ClInclude>
@@ -1457,9 +1457,6 @@
     <ClInclude Include="..\..\..\Source\TimeUtils\TimeRange.h">
       <Filter>TimeUtils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
@@ -1467,15 +1464,6 @@
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Community\DownloadReq.h">
@@ -1726,6 +1714,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Scene\LoadScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\MATRIX4X4.h">
+      <Filter>AmjuGLOpenGL\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\OpenGL.h">
+      <Filter>AmjuGLOpenGL\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\showbuffer.h">
+      <Filter>AmjuGLOpenGL\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR3D.h">
+      <Filter>AmjuGLOpenGL\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR4D.h">
+      <Filter>AmjuGLOpenGL\Internal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

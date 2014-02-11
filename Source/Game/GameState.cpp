@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 #include <AmjuFirst.h>
 #include <GameStateListener.h>
 #include "Game.h"

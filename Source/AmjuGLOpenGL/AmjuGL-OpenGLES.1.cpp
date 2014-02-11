@@ -2,11 +2,11 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-#ifdef IPHONE
+#if defined(AMJU_IOS) || defined(ANDROID_NDK)
 
 #include <AmjuFirst.h>
 #include <math.h>
-#include <OpenGLES/ES1/gl.h>
+#include "Internal/OpenGL.h"
 #include <AmjuGL.h>
 #include "AmjuGL-OpenGLES.1.h"
 #include <AmjuFinal.h>
