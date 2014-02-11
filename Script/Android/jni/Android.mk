@@ -14,6 +14,13 @@ LOCAL_CFLAGS := -DANDROID_NDK \
 # Hmm, best make include dir and <amju.h> first!
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Build/amjulib/include 
 
-LOCAL_SRC_FILES := ../../../Source/AmjuGL/AmjuGL.cpp
+# Oh noes :-(
+LOCAL_SRC_FILES := \
+	../../../Source/AmjuGL/AmjuGL.cpp \
+	../../../Source/AmjuGL/AmjuGLWindowInfo.cpp \
+	../../../Source/AmjuGL/Colour.cpp \
+	../../../Source/AmjuGL/Screen.cpp \
+	../../../Source/AmjuGL/TriList.cpp
+
 
 include $(BUILD_STATIC_LIBRARY)
