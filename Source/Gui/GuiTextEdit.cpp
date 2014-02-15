@@ -4,6 +4,9 @@
 #include <Timer.h>
 #include <DrawRect.h>
 #include "GuiTextEdit.h"
+#ifdef ANDROID_NDK
+#include <ctype.h> // isalnum
+#endif
 #include <AmjuFinal.h>
 
 #define TEXT_EDIT_DEBUG
