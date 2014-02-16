@@ -25,8 +25,9 @@ Added to repository
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
-#if defined(MACOSX) || defined(IPHONE)
-#include "sys/errno.h"
+
+#if defined(MACOSX) || defined(IPHONE) || defined(ANDROID_NDK)
+#include <sys/errno.h>
 #endif
 
 #include "Mutex.h"

@@ -42,6 +42,11 @@ Added to Uptime Overlord project
 #include <StringUtils.h>
 #include <Directory.h>
 #include <File.h>
+
+#ifdef ANDROID_NDK
+#include <ctype.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju
