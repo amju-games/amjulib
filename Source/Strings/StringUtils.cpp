@@ -52,6 +52,11 @@ Added to repository
 #include <sstream>
 #include "StringUtils.h"
 #include "AmjuAssert.h"
+
+#ifdef ANDROID_NDK
+#include <ctype.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju

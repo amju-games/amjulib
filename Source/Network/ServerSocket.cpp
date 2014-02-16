@@ -27,6 +27,17 @@ Added to repository
 #endif
 #include <AmjuFinal.h>
 
+#ifdef ANDROID_NDK
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <sys/endian.h>
+#endif
 
 namespace Amju
 {

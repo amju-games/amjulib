@@ -28,6 +28,19 @@ Added to repository
 #include <stdlib.h>
 #include <string.h>
 #endif
+
+#ifdef ANDROID_NDK
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <sys/endian.h>
+#endif
+
 #include <AmjuFinal.h>
 
 

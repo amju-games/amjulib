@@ -4,6 +4,11 @@
 #include "SceneMesh.h"
 #include "CollisionMesh.h"
 #include "AABB.h"
+
+#ifdef ANDROID_NDK
+#include <ctype.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju
