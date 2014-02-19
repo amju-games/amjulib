@@ -50,7 +50,7 @@ cp $SRC/TimeUtils/*.h $INC
 cp $SRC/Utils/*.h $INC
 cp $SRC/Utils/Xml/*.h $INC
 
-perl CreateHeaderFile.pl $INC > $INC/amju.h
+perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
 # Build (release mode)
 export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
