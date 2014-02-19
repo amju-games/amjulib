@@ -8,13 +8,11 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := amju
 
-# O no, super shit, override and nullptr not supported?!
-LOCAL_CFLAGS := -DANDROID_NDK \
-				-DPVRSDK \
-				-Doverride= \
-				-Dnullptr=0
+# override apparently not supported?
+LOCAL_CFLAGS := -std=c++0x -DANDROID_NDK \
+		-DPVRSDK \
+		-Doverride= 	
 
-# Oh, sigh
 LOCAL_C_INCLUDES := \
 	../../../Source/AmjuGL \
 	../../../Source/AmjuGLES \
@@ -43,9 +41,13 @@ LOCAL_C_INCLUDES := \
 	../../../Source/Thread \
 	../../../Source/TimeUtils \
 	../../../Source/Utils \
-	../../../Source/Utils/Mgc
+	../../../Source/Utils/Mgc \
+	../../../Source/Utils/Gpc
 
-# Oh yeah. Create list of all .cpp files in above directory list.
-LOCAL_SRC_FILES := $(foreach dir,$(LOCAL_C_INCLUDES),$(wildcard $(dir)/*.cpp))
+# Create list of all .c and .cpp files in above directory list.
+LOCAL_SRC_FILES := \
+	$(foreach dir,$(LOCAL_C_INCLUDES),$(wildcard $(dir)/*.cpp)) \
+	$(foreach dir,$(LOCAL_C_INCLUDES),$(wildcard $(dir)/*.c))
 
 include $(BUILD_STATIC_LIBRARY)
+
