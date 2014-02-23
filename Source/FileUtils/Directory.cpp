@@ -573,6 +573,7 @@ DeleteResult AmjuDeleteFile(const std::string& filename)
 #else // MSVC
 #ifdef ANDROID_NDK
   // TODO
+  Assert(0);
 #else // ANDROID_NDK
 #ifndef GEKKO
   unlink(filename.c_str()); // VC8: unlink deprecated..
