@@ -54,6 +54,10 @@ perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
 # Build (release mode)
 ####export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
+
+# debug mode
+export EXTRA_CFLAGS='-g -O0 -D_DEBUG'
+
 #####make clean
 
 cd jni
