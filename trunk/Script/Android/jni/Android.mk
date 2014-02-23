@@ -9,7 +9,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := amju
 
 # override apparently not supported?
-LOCAL_CFLAGS := -std=c++0x -DANDROID_NDK \
+LOCAL_CFLAGS := $(EXTRA_CFLAGS) \
+		-std=c++0x -DANDROID_NDK \
 		-DPVRSDK \
 		-Doverride= 	
 
