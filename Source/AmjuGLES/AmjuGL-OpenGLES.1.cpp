@@ -8,6 +8,7 @@ Amju Games source code (c) Copyright Jason Colman 2010
 #include <math.h>
 #include "Internal/OpenGL.h"
 #include <AmjuGL.h>
+#include <TriList.h>
 #include "AmjuGL-OpenGLES.1.h"
 #include <AmjuFinal.h>
 
@@ -27,23 +28,9 @@ namespace Amju
 // texture coords to the graphics card.
 // TODO Not very useful for ES - but can use to check that unsupported modes are not used
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
-	
-/*	
-static void __gluMakeIdentityd(GLdouble m[16])
-{
-    m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
-    m[1+4*0] = 0; m[1+4*1] = 1; m[1+4*2] = 0; m[1+4*3] = 0;
-    m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
-    m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
-}
-*/
 
-#ifdef AMJU_USE_ES2
-  // Functions which are sadly lacking in ES 2
-    
-    
-#endif
-    
+static DrawableFactory s_factory;
+	
 static void __gluMakeIdentityf(GLfloat m[16])
 {
     m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
@@ -51,7 +38,6 @@ static void __gluMakeIdentityf(GLfloat m[16])
     m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
     m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
 }
-
 
 static void gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
 {
@@ -134,6 +120,65 @@ static void  gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble cen
 	
     glMultMatrixf(&m[0][0]);
     glTranslatef(-eyex, -eyey, -eyez);
+}
+
+class TriListStaticES1 : public TriListStatic
+{
+public:
+  void Draw() override
+  {
+    AmjuGL::DrawTriList(m_tris);
+  }
+
+  bool Init() override {}
+
+  void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+class TriListDynamicES1 : public TriListDynamic
+{
+public:
+  void Draw() override
+  {
+    AmjuGL::DrawTriList(m_tris);
+  }
+
+  bool Init() override {}
+
+  void Set(const AmjuGL::Tris& tris)
+  {
+    m_tris = tris;
+  }
+
+private:
+  AmjuGL::Tris m_tris;
+};
+
+static Drawable* MakeStaticTriList()
+{
+  return new TriListStaticES1;
+}
+
+static Drawable* MakeDynamicTriList()
+{
+  return new TriListDynamicES1;
+}
+
+AmjuGLOpenGLES1::AmjuGLOpenGLES1()
+{
+  s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
+  s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+}
+
+Drawable* AmjuGLOpenGLES1::Create(int drawableTypeId)
+{
+  return s_factory.Create(drawableTypeId);
 }
 
 bool AmjuGLOpenGLES1::CreateWindow(AmjuGLWindowInfo*)

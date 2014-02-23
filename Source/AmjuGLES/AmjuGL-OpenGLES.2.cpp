@@ -3,6 +3,7 @@ Amju Games source code (c) Copyright Jason Colman 2010
 */
 
 #if defined(AMJU_IOS) 
+//|| defined(ANDROID_NDK)
 // TODO Too much dependency on iOS, not suitable fo Android 
 
 #include <AmjuFirst.h>
