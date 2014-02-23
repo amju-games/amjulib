@@ -17,6 +17,10 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include "Pause.h"
 #endif // GEKKO
 
+#ifdef ANDROID_NDK
+#include <ctype.h> // isalnum
+#endif
+
 #include "File.h"
 #include "FileImplStd.h"
 #include "FileImplGlue.h"
