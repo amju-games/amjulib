@@ -147,7 +147,6 @@
 		693D407915AB79B200B84D5C /* AmjuGL-OpenGL-Base.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */; };
 		693D407C15AB79B200B84D5C /* GLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D407515AB79B200B84D5C /* GLShader.cpp */; };
 		693D407D15AB79B200B84D5C /* GLShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407615AB79B200B84D5C /* GLShader.h */; };
-		693D407E15AB79B200B84D5C /* OpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D407715AB79B200B84D5C /* OpenGL.h */; };
 		693D408215AB79D300B84D5C /* Gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D408015AB79D300B84D5C /* Gpc.c */; };
 		693D408315AB79D300B84D5C /* Gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D408115AB79D300B84D5C /* Gpc.h */; };
 		693D408D15AB79EE00B84D5C /* BruteForce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D408515AB79EE00B84D5C /* BruteForce.cpp */; };
@@ -493,6 +492,10 @@
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
 		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
+		696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */; };
+		696519DA18BF5C26009A36F6 /* MATRIX4X4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */; };
+		696519DB18BF5C26009A36F6 /* VECTOR3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D818BF5C26009A36F6 /* VECTOR3D.cpp */; };
+		696519DC18BF5C26009A36F6 /* VECTOR4D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D918BF5C26009A36F6 /* VECTOR4D.cpp */; };
 		69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */; };
 		69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */; };
 		69FE6BC417ABC97200C391F4 /* DrawDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6BC117ABC97200C391F4 /* DrawDecorator.h */; };
@@ -644,7 +647,6 @@
 		693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGL-Base.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGL-Base.h"; sourceTree = SOURCE_ROOT; };
 		693D407515AB79B200B84D5C /* GLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLShader.cpp; path = ../../../Source/AmjuGLOpenGL/GLShader.cpp; sourceTree = SOURCE_ROOT; };
 		693D407615AB79B200B84D5C /* GLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLShader.h; path = ../../../Source/AmjuGLOpenGL/GLShader.h; sourceTree = SOURCE_ROOT; };
-		693D407715AB79B200B84D5C /* OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGL.h; path = ../../../Source/AmjuGLOpenGL/OpenGL.h; sourceTree = SOURCE_ROOT; };
 		693D408015AB79D300B84D5C /* Gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Gpc.c; path = ../../../Source/Clip/Gpc.c; sourceTree = SOURCE_ROOT; };
 		693D408115AB79D300B84D5C /* Gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gpc.h; path = ../../../Source/Clip/Gpc.h; sourceTree = SOURCE_ROOT; };
 		693D408515AB79EE00B84D5C /* BruteForce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BruteForce.cpp; path = ../../../Source/Collision/BruteForce.cpp; sourceTree = SOURCE_ROOT; };
@@ -1002,6 +1004,10 @@
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
+		696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGLES2Android.cpp; path = ../../../Source/AmjuGLOpenGL/AmjuGLES2Android.cpp; sourceTree = "<group>"; };
+		696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MATRIX4X4.cpp; path = ../../../Source/AmjuGLOpenGL/MATRIX4X4.cpp; sourceTree = "<group>"; };
+		696519D818BF5C26009A36F6 /* VECTOR3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VECTOR3D.cpp; path = ../../../Source/AmjuGLOpenGL/VECTOR3D.cpp; sourceTree = "<group>"; };
+		696519D918BF5C26009A36F6 /* VECTOR4D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VECTOR4D.cpp; path = ../../../Source/AmjuGLOpenGL/VECTOR4D.cpp; sourceTree = "<group>"; };
 		69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ES2DefaultShaders.cpp; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.cpp; sourceTree = "<group>"; };
 		69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2DefaultShaders.h; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.h; sourceTree = "<group>"; };
 		69FE6BC117ABC97200C391F4 /* DrawDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawDecorator.h; path = ../../../Source/AmjuGL/DrawDecorator.h; sourceTree = "<group>"; };
@@ -1196,6 +1202,10 @@
 		693D407015AB796F00B84D5C /* AmjuGLOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */,
+				696519D818BF5C26009A36F6 /* VECTOR3D.cpp */,
+				696519D918BF5C26009A36F6 /* VECTOR4D.cpp */,
+				696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */,
 				69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */,
 				69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */,
 				692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */,
@@ -1206,7 +1216,6 @@
 				693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */,
 				693D407515AB79B200B84D5C /* GLShader.cpp */,
 				693D407615AB79B200B84D5C /* GLShader.h */,
-				693D407715AB79B200B84D5C /* OpenGL.h */,
 			);
 			name = AmjuGLOpenGL;
 			sourceTree = "<group>";
@@ -1898,7 +1907,6 @@
 				693D406815AB780200B84D5C /* ShadowMap.h in Headers */,
 				693D407915AB79B200B84D5C /* AmjuGL-OpenGL-Base.h in Headers */,
 				693D407D15AB79B200B84D5C /* GLShader.h in Headers */,
-				693D407E15AB79B200B84D5C /* OpenGL.h in Headers */,
 				690C45141885C740007A505D /* lparser.h in Headers */,
 				693D408315AB79D300B84D5C /* Gpc.h in Headers */,
 				693D408E15AB79EE00B84D5C /* BruteForce.h in Headers */,
@@ -2230,6 +2238,7 @@
 				690C44AF1885C6B8007A505D /* VariableGeomConvert.cpp in Sources */,
 				693D40ED15AB7C0E00B84D5C /* TextureSequence.cpp in Sources */,
 				693D40F915AB7C2C00B84D5C /* Game.cpp in Sources */,
+				696519DA18BF5C26009A36F6 /* MATRIX4X4.cpp in Sources */,
 				693D40FB15AB7C2C00B84D5C /* GameObject.cpp in Sources */,
 				693D40FE15AB7C2C00B84D5C /* GameState.cpp in Sources */,
 				693D410015AB7C2C00B84D5C /* MessageQueue.cpp in Sources */,
@@ -2293,6 +2302,7 @@
 				690C45031885C740007A505D /* lgc.c in Sources */,
 				693D41E615AB7C9100B84D5C /* GuiListBox.cpp in Sources */,
 				693D41E815AB7C9100B84D5C /* GuiMenu.cpp in Sources */,
+				696519DB18BF5C26009A36F6 /* VECTOR3D.cpp in Sources */,
 				693D41EA15AB7C9100B84D5C /* GuiRect.cpp in Sources */,
 				693D41EC15AB7C9100B84D5C /* GuiText.cpp in Sources */,
 				693D41EE15AB7C9100B84D5C /* GuiTextEdit.cpp in Sources */,
@@ -2432,6 +2442,8 @@
 				69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */,
 				690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */,
 				69FEF54E1826827900D83578 /* ROConfig.cpp in Sources */,
+				696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */,
+				696519DC18BF5C26009A36F6 /* VECTOR4D.cpp in Sources */,
 				6911300A1840C5FE00763639 /* GameStateListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
