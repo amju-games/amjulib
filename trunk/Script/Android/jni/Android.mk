@@ -10,13 +10,15 @@ LOCAL_MODULE    := amju
 
 # override apparently not supported?
 LOCAL_CFLAGS := $(EXTRA_CFLAGS) \
-		-std=c++0x -DANDROID_NDK \
-		-DPVRSDK \
-		-Doverride= 	
+		-DAMJU_USE_ES2 \
+		-DANDROID_NDK \
+		-DPVRSDK 
+
+LOCAL_CXXFLAGS := $(LOCAL_CFLAGS) -std=c++0x -Doverride= 
 
 LOCAL_C_INCLUDES := \
 	../../../Source/AmjuGL \
-	../../../Source/AmjuGLES \
+	../../../Source/AmjuGLOpenGL \
 	../../../Source/Collision \
 	../../../Source/Community \
 	../../../Source/Events \
