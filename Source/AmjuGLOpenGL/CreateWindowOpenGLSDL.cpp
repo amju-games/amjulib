@@ -1,3 +1,5 @@
+#ifdef AMJU_USE_SDL
+
 #include <AmjuFirst.h>
 #include "AmjuGL-OpenGL.h"
 #include <SDL.h>
@@ -54,4 +56,5 @@ bool CreateWindowSDLOpenGL(AmjuGLWindowInfo* w)
 }
 }
 
+#endif // AMJU_USE_SDL
 

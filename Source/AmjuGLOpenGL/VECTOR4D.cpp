@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////	
 
 #include <AmjuFirst.h>
-#include "VECTOR4D.h"
+#include "Internal/VECTOR4D.h"
 #include <AmjuFinal.h>
 
 void VECTOR4D::RotateX(double angle)

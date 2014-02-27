@@ -1,3 +1,4 @@
+#if defined(USE_SHADOW_MAP_OPENGL_2)
 #include <AmjuFirst.h>
 #ifndef IPHONE
 
@@ -286,3 +287,4 @@ bool ShadowMapOpenGL2::Init()
 
 #endif 
 
+#endif // defined(USE_SHADOW_MAP_OPENGL_2)
