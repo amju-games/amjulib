@@ -1,4 +1,4 @@
-#ifndef IPHONE
+#if !defined(AMJU_IOS) && !defined(ANDROID_NDK)
 
 /* showbuffer.c */
 

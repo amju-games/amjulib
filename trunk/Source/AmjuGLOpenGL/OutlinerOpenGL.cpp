@@ -1,3 +1,5 @@
+#ifndef ANDROID_NDK
+
 #include <AmjuFirst.h>
 #include <AmjuGL.h>
 #include "OutlinerOpenGL.h"
@@ -35,3 +37,4 @@ void OutlinerOpenGL::Draw()
 
 }
 
+#endif // ANDROID_NDK

@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////	
 
 #include <AmjuFirst.h>
-#include "VECTOR3D.h"
+#include "Internal/VECTOR3D.h"
 #include <AmjuFinal.h>
 
 void VECTOR3D::Normalize()

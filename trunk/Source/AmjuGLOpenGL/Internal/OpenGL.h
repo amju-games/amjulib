@@ -46,8 +46,13 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #ifdef ANDROID_NDK
 extern "C"
 {
+#ifdef AMJU_USE_ES2
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#else
 #include <GLES/gl.h>
 #include <GLES/glext.h>
+#endif
 }
 #endif
 

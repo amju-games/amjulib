@@ -19,7 +19,7 @@
 
 #include <AmjuFirst.h>
 #include <memory.h>
-#include "MATRIX4X4.h"
+#include "Internal/MATRIX4X4.h"
 #include <Common.h>
 #include <AmjuFinal.h>
 
