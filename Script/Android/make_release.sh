@@ -21,7 +21,7 @@ rm $LIB/*
 # Copy headers required by client code to include folder
 cp $SRC/Version.h $INC
 cp $SRC/AmjuGL/*.h $INC
-cp $SRC/AmjuGLES/*.h $INC
+cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
 cp $SRC/Community/*.h $INC
 cp $SRC/Events/*.h $INC
