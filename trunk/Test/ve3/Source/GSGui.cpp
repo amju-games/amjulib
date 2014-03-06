@@ -11,6 +11,12 @@
 #include "LocalPlayer.h"
 #include "HeartCount.h"
 #include "GameConsts.h"
+
+#ifdef WIN32
+// TODO HACK - dependent on OpenGL 
+#include <gl/glut.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju

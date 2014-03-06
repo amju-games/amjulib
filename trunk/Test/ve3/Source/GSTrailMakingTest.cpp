@@ -14,6 +14,10 @@
 #include "CogTestResults.h"
 #include "GameConsts.h"
 #include "ROConfig.h"
+
+// TODO HACK - dependent on OpenGL for line drawing
+#include <gl/glut.h>
+
 #include <AmjuFinal.h>
 
 namespace Amju

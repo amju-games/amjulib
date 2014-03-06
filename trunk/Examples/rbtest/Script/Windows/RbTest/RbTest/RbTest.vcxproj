@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\jason\projects\amjulib\Build\amjulib\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <OutDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\rbtest\Windows\$(Configuration)\</IntDir>
   </PropertyGroup>
