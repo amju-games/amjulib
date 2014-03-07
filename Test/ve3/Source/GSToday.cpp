@@ -161,7 +161,8 @@ void GSToday::OnActive()
   bool cogTestsAllDoneToday = TheCogTestResults::Instance()->
     GetNumCompletedTestsForDate(today) == GetNumCogTests();
 
-  if (DoCogTests() && !cogTestsAllDoneToday)
+  // Always allow tests?? 
+  ////if (DoCogTests() && !cogTestsAllDoneToday)
   {
     GuiButton* doTests = (GuiButton*)GetElementByName(m_gui, "do-tests-button");
     doTests->SetCommand(OnDoTests);

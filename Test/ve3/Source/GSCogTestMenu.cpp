@@ -23,6 +23,8 @@
 #include "GSFinishedTests.h"
 #include "CogTestNag.h"
 #include "ObjectUpdater.h"
+#include "GSLonelinessScale.h"
+#include "GSSatisfactionWithLifeScale.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -89,6 +91,16 @@ static void ReactionTime()
 static void TrailMakingTest()
 {
   TheGame::Instance()->SetCurrentState(TheGSTrailMakingTest::Instance());
+}
+
+static void LonelinessScale()
+{
+  TheGame::Instance()->SetCurrentState(TheGSLonelinessScale::Instance());
+}
+
+static void SatisfactionWithLifeScale()
+{
+  TheGame::Instance()->SetCurrentState(TheGSSatisfactionWithLifeScale::Instance());
 }
 
 static void Done()
@@ -165,6 +177,10 @@ void GSCogTestMenu::OnActive()
   // TODO This could be read from the server, so each group could have a custom set of tests.
   TestId LOOKUP_TEST_ID[] = 
   {
+    // For now, do the questionnaire-style tests first
+    AMJU_COG_TEST_LONELINESS,
+    AMJU_COG_TEST_SATISFACTIONWITHLIFE,
+
     AMJU_COG_TEST_REACTION_TIME,
 //    AMJU_COG_TEST_LETTER_CAN,
 //    AMJU_COG_TEST_SYMBOL_CAN,
@@ -187,8 +203,18 @@ void GSCogTestMenu::OnActive()
 
   switch (LOOKUP_TEST_ID[m_nextTest])
   {
+  case AMJU_COG_TEST_LONELINESS:
+    str = "De Jong Gierveld test";
+    m_func = LonelinessScale;
+    break;
+
+  case AMJU_COG_TEST_SATISFACTIONWITHLIFE:
+    str = "Diener SWLS";
+    m_func = SatisfactionWithLifeScale;
+    break;
+
   case AMJU_COG_TEST_REACTION_TIME:
-    str = "OK, thanks! This first one is a reaction time test. Please press the big red button as soon as the alarm goes off!";
+    str = "This is a reaction time test. Please press the big red button as soon as the alarm goes off!";
     m_func = Amju::ReactionTime;
     break;
 

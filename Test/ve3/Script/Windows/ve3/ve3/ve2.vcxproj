@@ -234,10 +234,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSFinishedTests.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLetterCancellation.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLikertQuestions.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogin.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLoginWaiting.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogo.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSLogout.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSLonelinessScale.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMain.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSNetError.cpp" />
@@ -249,6 +251,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSProxy.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSQuitGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSReactionTime.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSSatisfactionWithLifeScale.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSScribble.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartGame.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSStartMenu.cpp" />
@@ -400,10 +403,12 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSFinishedTests.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
     <ClInclude Include="..\..\..\..\Source\GSLetterCancellation.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLikertQuestions.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogin.h" />
     <ClInclude Include="..\..\..\..\Source\GSLoginWaiting.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogo.h" />
     <ClInclude Include="..\..\..\..\Source\GSLogout.h" />
+    <ClInclude Include="..\..\..\..\Source\GSLonelinessScale.h" />
     <ClInclude Include="..\..\..\..\Source\GSMain.h" />
     <ClInclude Include="..\..\..\..\Source\GSMap.h" />
     <ClInclude Include="..\..\..\..\Source\GSNetError.h" />
@@ -415,6 +420,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSProxy.h" />
     <ClInclude Include="..\..\..\..\Source\GSQuitGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSReactionTime.h" />
+    <ClInclude Include="..\..\..\..\Source\GSSatisfactionWithLifeScale.h" />
     <ClInclude Include="..\..\..\..\Source\GSScribble.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartGame.h" />
     <ClInclude Include="..\..\..\..\Source\GSStartMenu.h" />
