@@ -26,7 +26,7 @@ public:
   bool IsPrac() const; // true if player wants a practice
   void SetIsPrac(bool);
   void DoPractice(bool b);
-  // TODO Set order of tests; set propoerties of each test
+  // TODO Set order of tests; set properties of each test
 
   // Returns true while we are doing the tests. We go back to GSMain then back to here
   //  so we can collect rewards between tests.

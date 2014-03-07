@@ -170,7 +170,8 @@ bool CogTestResults::Load()
 bool CogTestResults::IsTestComplete(Time testDate, TestId id)
 {
   int n = GetNumResults(testDate, id);
-  return n >= EXPECTED_NUM_RESULTS_FOR_TEST[(int)id];
+  int expected = EXPECTED_NUM_RESULTS_FOR_TEST[(int)id];
+  return n >= expected;
 }
 
 int CogTestResults::GetNumResults(Time testDate, TestId id)
