@@ -39,6 +39,10 @@ private:
     RT_CONTINUE, // ready to go to next test
   };
   Mode m_mode;
+
+  // Count "bad" clicks (clicks made before the stimulus was presented) - could be used to
+  //  detect attempted cheating or misunderstanding
+  int m_numBadClicks;
 };
 typedef Singleton<GSReactionTime> TheGSReactionTime;
 } // namespace

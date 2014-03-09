@@ -29,6 +29,21 @@ enum TestId
   AMJU_COG_TEST_MAX
 };
 
+const bool HAS_PRACTICE_MODE[] = 
+{
+  false, // 
+  true,  // AMJU_COG_TEST_LETTER_CAN = 1,
+  true,  // AMJU_COG_TEST_SYMBOL_CAN,
+  true,  // AMJU_COG_TEST_STROOP_WORD,
+  true,  // AMJU_COG_TEST_STROOP_COLOUR,
+  true,  // AMJU_COG_TEST_STROOP_COLOUR_WORD,
+  true,  // AMJU_COG_TEST_REACTION_TIME
+  true,  // AMJU_COG_TEST_TRAIL_MAKING   
+  true,  // AMJU_COG_TEST_TRAIL_MAKING_ALTERNATE  
+  false,  // AMJU_COG_TEST_LONELINESS
+  false,  // AMJU_COG_TEST_SATISFACTIONWITHLIFE
+};
+
 const char* GetTestName(TestId);
 
 // For each test ID above, the number of test results we expect to get.

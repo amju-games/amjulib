@@ -198,6 +198,13 @@ void GSStroopBase::OnChoiceButton(int choice)
 {
   Assert(m_correctChoice != -1);
 
+  // Send all choices to server, so we can detect lazy participants clicking on the same button
+  //  every go!
+  int num = m_correct + m_incorrect; // click number
+  Assert(m_testId != -1);
+  TheCogTestResults::Instance()->StoreResult(
+    new Result(m_testId, "choice_" + ToString(num), ToString(choice)));
+
   if (choice == m_correctChoice)
   {
     // TODO How much score improvement?

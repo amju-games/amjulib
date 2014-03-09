@@ -204,12 +204,12 @@ void GSCogTestMenu::OnActive()
   switch (LOOKUP_TEST_ID[m_nextTest])
   {
   case AMJU_COG_TEST_LONELINESS:
-    str = "De Jong Gierveld test";
+    str = "For this test, there are 6 questions. For each question, please click the button to show how much you agree.";
     m_func = LonelinessScale;
     break;
 
   case AMJU_COG_TEST_SATISFACTIONWITHLIFE:
-    str = "Diener SWLS";
+    str = "For this test, there are 5 questions. For each question, please click the button to show how much you agree.";
     m_func = SatisfactionWithLifeScale;
     break;
 
@@ -279,7 +279,7 @@ void GSCogTestMenu::OnActive()
     break;
 
   case AMJU_COG_TEST_MAX:
-    str = "Well done and thank you for doing all those tests!";
+    str = "That's the end! Well done and thank you for doing all those tests!";
     m_func = Amju::Done;
     break;
 
@@ -287,15 +287,28 @@ void GSCogTestMenu::OnActive()
     Assert(0);
   }
 
-  if (LOOKUP_TEST_ID[m_nextTest] == AMJU_COG_TEST_MAX)
+  // Look up the next test ID from m_nextTest, which is just an incrementing sequence number
+  int nextTestId = LOOKUP_TEST_ID[m_nextTest];
+
+  if (nextTestId == AMJU_COG_TEST_MAX)
   {
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::Done);
     TheLurker::Instance()->Queue(lm);
   }
   else
   {
-    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::AskPractice);
-    TheLurker::Instance()->Queue(lm);
+    if (HAS_PRACTICE_MODE[nextTestId])
+    {
+      // Ask player if she would like to practice first.
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::AskPractice);
+      TheLurker::Instance()->Queue(lm);
+    }
+    else
+    {
+      // No practice mode, so go straight to test
+      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::NoPrac);
+      TheLurker::Instance()->Queue(lm);
+    }
   }
 }
 
