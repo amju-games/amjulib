@@ -1,9 +1,11 @@
 #include "GSSatisfactionWithLifeScale.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
 GSSatisfactionWithLifeScale::GSSatisfactionWithLifeScale()
-{                            
+{
+  m_testId = AMJU_COG_TEST_SATISFACTIONWITHLIFE;
   m_guiFilename = "gui-swls.txt";
 
   // Satisfaction With Life Scale - 7 possible responses, plus option to decline.

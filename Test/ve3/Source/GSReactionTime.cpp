@@ -45,6 +45,7 @@ GSReactionTime::GSReactionTime()
   m_maxTestNum = 3;
   m_mode = RT_NOT_STARTED_YET;
   m_showLurk = true;
+  m_numBadClicks = 0;
 }
 
 void GSReactionTime::OnButton()
@@ -91,6 +92,10 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
       TheCogTestResults::Instance()->StoreResult(new Result(
         AMJU_COG_TEST_REACTION_TIME, "time" + ToString(m_testNum), ToString(rtMs)));
 
+      // Send number of bad clicks
+      TheCogTestResults::Instance()->StoreResult(new Result(
+        AMJU_COG_TEST_REACTION_TIME, "bad" + ToString(m_testNum), ToString(m_numBadClicks)));
+      
       NextGo();
     }
     }
@@ -99,6 +104,11 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
   case RT_WAITING:
     // If mouse button pressed before "GO" displayed, player might be spamming the mouse button.
     // Reset wait period - TODO sound/visual to show that mouse click is ignored.
+    TheSoundManager::Instance()->PlayWav(ROConfig()->GetValue("sound-cogtest-fail"));
+
+    // TODO Store the number of these "Bad" clicks as a result.
+    m_numBadClicks++;
+
     m_waitTime = 0;
     break;
 
@@ -117,6 +127,9 @@ void GSReactionTime::Quit()
 void GSReactionTime::NextGo()
 {
   Assert(m_mode == RT_CONTINUE);
+
+  // Bad clicks score is for each round of the test
+  m_numBadClicks = 0;
 
   m_testNum++;
   if (m_testNum == m_maxTestNum)

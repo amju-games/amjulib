@@ -1,11 +1,14 @@
 #include "GSLonelinessScale.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
 GSLonelinessScale::GSLonelinessScale()
 {
+  m_testId = AMJU_COG_TEST_LONELINESS;
   m_guiFilename = "gui-loneliness.txt";
 
+  // 5 choices + option to decline to answer
   m_numButtons = 5;
 
   // The text for these 6 Qs is from De Jong Geirveld & Van Tilberg (2006).
