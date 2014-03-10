@@ -15,8 +15,8 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include "OpenGL.h"
-#include "showbuffer.h"
+#include "Internal/OpenGL.h"
+#include "Internal/showbuffer.h"
 
 
 

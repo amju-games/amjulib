@@ -268,7 +268,9 @@ void AmjuGLOpenGLES2::Init()
   
   // TODO Create in code so not dependent on assets
   s_defaultTex = new Texture;
-  s_defaultTex->Load("wh8.png");
+  unsigned char data[] =  { 0xff, 0xff, 0xff };
+  s_defaultTex->Create(data, 1, 1, 3); // w, h, bytes per pixel
+    //Load("wh8.png");
 }
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
