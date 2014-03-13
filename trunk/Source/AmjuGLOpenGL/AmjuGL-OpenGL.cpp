@@ -97,7 +97,11 @@ static Drawable* MakeShadowMap()
     std::cout << "AmjuGL: Open GL Shadow map: not supported.\n";
     return new ShadowMapNull;
   }
+#ifdef USE_SHADOW_MAP_OPENGL_2
   return new ShadowMapOpenGL2;
+#endif
+
+  return new ShadowMapNull;
 }
 
 // Remember the current texture type. If sphere mapped, no need to send
