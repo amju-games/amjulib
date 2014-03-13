@@ -67,7 +67,7 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
 
     m_mode = RT_CONTINUE;
     GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
-    b->SetIsEnabled(false); 
+    b->SetIsEnabled(false);  // can't click it again until test reset
     b->SetText("");
       
     GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
@@ -194,6 +194,7 @@ void GSReactionTime::Update()
     break;
 
   case RT_BEFORE_TEST:
+    b->SetIsEnabled(true); // so we can detect clicks made before stimulus
     m_waitTime += dt;
     if (m_waitTime >= 3.0f) // TODO TEMP TEST
     {
@@ -271,7 +272,7 @@ void GSReactionTime::OnActive()
 
   b->SetHasFocus(true);
   b->SetShowIfFocus(false);
-  b->SetIsEnabled(false); 
+  b->SetIsEnabled(true); 
   b->SetText("");
 
   GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
@@ -294,7 +295,7 @@ void GSReactionTime::SetTest()
 {
 std::cout << "Reaction time, test number: " << m_testNum << "\n";
   GuiButton* b = (GuiButton*)GetElementByName(m_gui, "button");
-  b->SetIsEnabled(false); 
+  b->SetIsEnabled(true); // if clicked before stimulus, reset timer 
   b->SetText("");
 
   GuiText* word = (GuiText*)GetElementByName(m_gui, "word");
