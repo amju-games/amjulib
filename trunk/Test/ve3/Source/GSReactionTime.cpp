@@ -114,7 +114,8 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
 
   default:
     // TODO restart timer
-    Assert(0);
+    //Assert(0);
+    break;
   }
 }
 

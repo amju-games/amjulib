@@ -44,6 +44,8 @@ const bool HAS_PRACTICE_MODE[] =
   false,  // AMJU_COG_TEST_SATISFACTIONWITHLIFE
 };
 
+// Make sure you update the definition of this function too if 
+//  you add a new test!
 const char* GetTestName(TestId);
 
 // For each test ID above, the number of test results we expect to get.
