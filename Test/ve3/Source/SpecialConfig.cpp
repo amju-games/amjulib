@@ -11,7 +11,7 @@ static const char* DEFAULT_ENV = "ve2";
 static const char* SERVER_KEY = "server";
 static const char* ENV_KEY = "env";
 
-static const char* APP_NAME = "ve2"; // default name for Save Dir
+static const char* APP_NAME = "ve3"; // default name for Save Dir
 static const char* APP_NAME_CONFIG_KEY = "appname"; // the key in the special config file
 
 std::string GetServer()

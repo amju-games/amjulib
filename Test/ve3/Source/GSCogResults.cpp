@@ -129,13 +129,17 @@ std::cout << " .. spread over " << datemap.size() << " dates.\n";
   int k = 0;
   for (KeyValMap::iterator it = keyvalmap.begin(); it != keyvalmap.end(); it++)
   {
-    key[k]->SetText(it->first);
+    if (k < 3) // TODO we need more keys
+    {
+      key[k]->SetText(it->first);
+      key[k]->SetVisible(true);
+    }
     k++;
-    // TODO Set this key visible
   }
   for ( ; k < 3; k++)
   {
     // Set remaining keys to invisible
+    key[k]->SetVisible(false);
   }
 
   int x = 0;
