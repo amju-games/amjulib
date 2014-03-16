@@ -5,8 +5,6 @@
 
 namespace Amju
 {
-class GameStateListener;
-
 class GameState : public EventListener
 {
 public:
@@ -25,10 +23,11 @@ public:
   GameState* GetPrevState();
   void GoBack();  // return to prev state - must have been set!
 
+  int GetEventPriority() const { return m_eventPriority; }
+
 protected:
   GameState* m_prevState;
   int m_eventPriority; 
-  RCPtr<GameStateListener> m_listener; // forwards events to this state
 };
 }
 

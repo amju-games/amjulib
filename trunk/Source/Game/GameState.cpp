@@ -11,8 +11,7 @@ namespace Amju
 {
 GameState::GameState() : 
   m_prevState(nullptr), 
-  m_eventPriority(1),
-  m_listener(nullptr)
+  m_eventPriority(1)
 {
 }
 
@@ -22,13 +21,10 @@ GameState::~GameState()
 
 void GameState::OnActive()
 {
-  m_listener = new GameStateListener(this);
-  TheEventPoller::Instance()->AddListener(m_listener, m_eventPriority);
 }
 
 void GameState::OnDeactive()
 {
-  TheEventPoller::Instance()->RemoveListener(m_listener);
 }
 
 void GameState::SetPrevState(GameState* prevState)

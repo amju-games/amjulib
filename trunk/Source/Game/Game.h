@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "GameObject.h"
 #include "EventListener.h"
+#include "GameStateListener.h"
 #include "Colour.h"
 
 namespace Amju
@@ -64,6 +65,8 @@ private:
   GameState* m_currentState;
   GameState* m_pauseState;
   GameState* m_newState;
+
+  RCPtr<GameStateListener> m_listener; // forwards events to active state
 
   GameObjects m_objects;
 

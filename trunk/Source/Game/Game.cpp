@@ -247,6 +247,10 @@ void Game::UpdateState()
 std::cout << "Game::UpdateState: deactivating state: " << typeid(*m_currentState).name() << "\n";
 #endif
 
+    // Deactivating state will no longer get events
+    Assert(TheEventPoller::Instance()->HasListener(m_listener));
+    TheEventPoller::Instance()->RemoveListener(m_listener);
+
     m_currentState->OnDeactive();
   }
   else
@@ -264,8 +268,15 @@ std::cout << "Game::UpdateState: no current state to deactivate.\n";
 std::cout << "Game::UpdateState: activating new state: " << typeid(*m_currentState).name() << "\n";
 #endif
 
-  // This next line may set m_newState, so zero it first
-  // TODO Not sure why, is this old ??
+  // To avoid nasties, assume each new state does NOT have a modal listener set.
+  TheEventPoller::Instance()->SetModalListener(nullptr); 
+
+  // Add the new state as an event listener - this is better than doing it
+  //  in GameState, where subclasses can forget to call the base class impl.
+  m_listener = new GameStateListener(m_currentState);
+  TheEventPoller::Instance()->AddListener(m_listener, m_currentState->GetEventPriority());
+
+  // This next line may set m_newState, so zero it before - not after - this call!
   m_currentState->OnActive();
 }
 
