@@ -89,13 +89,13 @@ void GuiText::SetCharTime(float secs)
   m_currentChar = 0;
 }
 
-void GuiText::SetTextSize(float textSize)
+void GuiText::SetFontSize(float textSize)
 {
   m_textSize = textSize;
   RecalcFirstLast();
 }
 
-float GuiText::GetTextSize() const
+float GuiText::GetFontSize() const
 {
   return m_textSize;
 }
@@ -314,7 +314,7 @@ void GuiText::DrawSingleLine(
   case AMJU_JUST_CENTRE:
     x = GetCombinedPos().x + 0.5f * (size.x - GetTextWidth(str));
     xmin = x;
-    xmax = x + GetTextWidth(str) * GetTextSize();
+    xmax = x + GetTextWidth(str) * GetFontSize();
     break;
   }
 
@@ -325,7 +325,7 @@ void GuiText::DrawSingleLine(
     AmjuGL::SetColour(bg);
     AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
     Rect r; 
-    r.Set(xmin, xmax, y, y + CHAR_HEIGHT_FOR_SIZE_1 * GetTextSize()); // TODO
+    r.Set(xmin, xmax, y, y + CHAR_HEIGHT_FOR_SIZE_1 * GetFontSize()); // TODO
     DrawSolidRect(r);
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();

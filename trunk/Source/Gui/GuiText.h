@@ -27,8 +27,8 @@ public:
   virtual const std::string& GetText() const;
 
   // Really font size 
-  void SetTextSize(float textSize);
-  float GetTextSize() const;
+  void SetFontSize(float textSize);
+  float GetFontSize() const;
   
   // Set X scale, to squish more text into a tight squeeze, etc
   void SetScaleX(float scaleX);

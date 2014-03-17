@@ -96,14 +96,15 @@ void GuiTextEdit::Draw()
     PushColour();
     AmjuGL::SetColour(m_drawCaret ? m_fgCol : m_bgCol);
     float startX = GetCombinedPos().x;
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * GetTextSize() * m_scaleX) + startX;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, m_caret - m_first)) * 
+      GetFontSize() * m_scaleX) + startX;
 
     if (!m_triListCaret)
     {
       m_triListCaret = GetFont()->MakeTriList(0, 0, "|", 1.0f);
     }
 
-    float y = GetCombinedPos().y - GetTextSize() * CHAR_HEIGHT_FOR_SIZE_1; 
+    float y = GetCombinedPos().y - GetFontSize() * CHAR_HEIGHT_FOR_SIZE_1; 
     
     AmjuGL::PushMatrix();
     AmjuGL::Translate(x, y, 0);
@@ -194,7 +195,8 @@ int GuiTextEdit::CalcCursorPos(float mousex)
   int pos = m_caret;
   for (int i = m_first; i < m_last; i++)
   {
-    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * GetTextSize() * m_scaleX) + startX;
+    float x = (GetFont()->GetTextWidth(m_text.substr(m_first, i - m_first)) * 
+      GetFontSize() * m_scaleX) + startX;
 
     if (x > mousex)
     {
@@ -567,7 +569,8 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
   switch (m_just)
   {
   case AMJU_JUST_LEFT:
-    while ((GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) * GetTextSize() * m_scaleX) > size.x)
+    while ((GetFont()->GetTextWidth(m_text.substr(*first, *last - *first)) * 
+      GetFontSize() * m_scaleX) > size.x)
     {
       if (caret > *last)
       {
