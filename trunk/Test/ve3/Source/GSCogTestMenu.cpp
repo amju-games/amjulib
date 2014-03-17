@@ -231,7 +231,7 @@ void GSCogTestMenu::OnActive()
 
     GuiText* text = new GuiText;
     text->SetFont("font2d/symbol-font.font");
-    text->SetTextSize(4.5f); // TODO CONFIG
+    text->SetFontSize(4.5f); // TODO CONFIG
     text->SetSize(Vec2f(1.6f, 0.5f)); 
     text->SetText("S");
     text->SizeToText();

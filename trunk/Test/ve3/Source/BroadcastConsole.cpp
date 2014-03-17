@@ -99,7 +99,7 @@ void BroadcastConsole::OnMsgRecv(const std::string& str)
 
   GuiText* text = new GuiText;
   text->SetIsMulti(true);
-  text->SetTextSize(1.0f); // TODO CONFIG
+  text->SetFontSize(1.0f); // TODO CONFIG
   text->SetSize(Vec2f(2.0f, 0.1f)); // assume single line
   text->SetText(str);
   text->SizeToText();

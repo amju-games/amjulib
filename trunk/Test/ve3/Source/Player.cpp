@@ -64,7 +64,7 @@ public:
     m_heartScale = 1.0f;
 
     SetBlended(true);
-    m_text.SetTextSize(5.0f); // TODO CONFIG
+    m_text.SetFontSize(5.0f); // TODO CONFIG
     static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text
     m_text.SetSize(Vec2f(MAX_NAME_WIDTH, 1.0f));
     m_text.SetJust(GuiText::AMJU_JUST_LEFT);

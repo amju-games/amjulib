@@ -48,7 +48,7 @@ void Ve1NameNode::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
   GuiText text;
-  text.SetTextSize(5.0f); // TODO CONFIG
+  text.SetFontSize(5.0f); // TODO CONFIG
   text.SetText(ToString(*m_obj));
     
   static const float MAX_NAME_WIDTH = 4.0f; // minimise this to reduce overdraw - calc from text

@@ -52,7 +52,7 @@ public:
  
     MultColour(Colour(0, 0, 1, 1));
     GuiText text;
-    text.SetTextSize(0.5f);
+    text.SetFontSize(0.5f);
     std::string s = "Object " + ToString(m_obj->GetId()) + " " + m_obj->GetTypeName();
     text.SetText(s);
     text.SizeToText(); 
