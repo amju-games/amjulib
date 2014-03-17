@@ -80,7 +80,7 @@ void ChatConsole::Conversation::Draw()
   GuiText text;
   text.SetLocalPos(Vec2f(0.3f, 1.0f));
   text.SetSize(Vec2f(0.6f, 0.12f)); 
-  text.SetTextSize(1.0f);
+  text.SetFontSize(1.0f);
   text.SetText(cc->m_recipName);
   text.SetDrawBg(false);
   text.SetJust(GuiText::AMJU_JUST_CENTRE);
@@ -95,7 +95,7 @@ void ChatConsole::Conversation::AddText(bool sentNotRecv, const std::string& msg
   GuiText* text = new GuiText;
   text->SetIsMulti(true); // So we can see all of a long msg!
   text->SetSize(Vec2f(cc->m_size.x, cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
-  text->SetTextSize(cc->m_fontSize);
+  text->SetFontSize(cc->m_fontSize);
   text->SetText(msg);
   text->SetSize(Vec2f(cc->m_size.x, (float)text->GetNumLines() * cc->m_fontSize * GuiText::CHAR_HEIGHT_FOR_SIZE_1)); 
   text->SetDrawBg(false);

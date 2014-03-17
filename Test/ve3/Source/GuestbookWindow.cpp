@@ -103,7 +103,7 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
     label->SetName("label");
     label->SetIsMulti(true);
     label->SetFgCol(Colour(0, 0, 0, 1)); 
-    label->SetTextSize(0.7f);
+    label->SetFontSize(0.7f);
     label->SetSize(Vec2f(1.5f, 0.1f)); // horizontal size in text file - TODO get it from Window
     label->SetJust(GuiText::AMJU_JUST_LEFT);
 

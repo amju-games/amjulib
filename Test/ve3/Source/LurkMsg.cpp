@@ -197,7 +197,7 @@ void LurkMsg::Set(const std::string& str, const Colour& fgCol, const Colour& bgC
   {
     text->SetIsMulti(true);
   }
-  text->SetTextSize(1.5f); // TODO CONFIG
+  text->SetFontSize(1.5f); // TODO CONFIG
   text->SetSize(Vec2f(1.6f, 0.1f)); // assume single line
   text->SetText(str);
   text->SizeToText();
