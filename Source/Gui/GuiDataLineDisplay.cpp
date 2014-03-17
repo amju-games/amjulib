@@ -105,7 +105,7 @@ void GuiDataLineDisplay::Draw()
     float yPos = yChartPos - ySize;
     t.SetLocalPos(Vec2f(xPos - 0.5f, yPos));
     t.SetText(str);
-    t.SetTextSize(0.3f); // TODO 
+    t.SetFontSize(0.3f); // TODO 
     t.Draw();
   }
 
@@ -172,7 +172,7 @@ std::cout
        t.SetDrawBg(false);
        t.SetLocalPos(Vec2f(xPos - 0.5f, yPos + 0.1f));
        t.SetText(ToString(yVal));
-       t.SetTextSize(0.3f); // TODO 
+       t.SetFontSize(0.3f); // TODO 
        t.Draw();
 
        DataPoint dp;

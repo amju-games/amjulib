@@ -30,7 +30,7 @@ void GuiCalendar::Draw()
 
     RCPtr<GuiText> text = new GuiText;
     text->SetIsMulti(true);
-    text->SetTextSize(1.2f); // TODO CONFIG
+    text->SetFontSize(1.2f); // TODO CONFIG
     text->SetSize(Vec2f(0.8f, 0.1f)); // sets max line width
     text->SetLocalPos(m_focus->GetCombinedPos());
     text->SetText(dc->GetMainEventStr());
@@ -76,7 +76,7 @@ void GuiCalendar::AddDayColumnHeadings()
     GuiText* text = new GuiText;
     // TODO Colours
     // TODO Font
-    text->SetTextSize(0.5f); // TODO CONFIG
+    text->SetFontSize(0.5f); // TODO CONFIG
     text->SetSize(Vec2f(w, 0.1f)); // assume single line
     text->SetText(DAY[i]);
     text->SetLocalPos(Vec2f(w * (float)i, 0));
@@ -171,7 +171,7 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
     }
 
     text->SetBgCol(bg);
-    text->SetTextSize(0.5f); // TODO CONFIG
+    text->SetFontSize(0.5f); // TODO CONFIG
  
     AddChild(text);
   }
@@ -213,7 +213,7 @@ bool GuiCalendar::OnCursorEvent(const CursorEvent& ce)
 GuiCalendarDayCell::GuiCalendarDayCell(GuiCalendar* parent) : m_timestamp(0)
 {
   SetParent(parent);
-  SetTextSize(1.0f); // TODO CONFIG
+  SetFontSize(1.0f); // TODO CONFIG
   SetSize(parent->GetCellSize()); 
   SetIsMulti(true);
   SetDrawBg(true);
