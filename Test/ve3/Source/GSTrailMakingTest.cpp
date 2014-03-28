@@ -16,7 +16,13 @@
 #include "ROConfig.h"
 
 // TODO HACK - dependent on OpenGL for line drawing
+#ifdef WIN32
 #include <gl/glut.h>
+#endif
+
+#ifdef MACOSX
+#include <Glut/glut.h>
+#endif
 
 #include <AmjuFinal.h>
 
