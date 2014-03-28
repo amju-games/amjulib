@@ -2,7 +2,7 @@
 #define VE1_REQ_H_INCLUDED
 
 #include <OnlineReqManager.h>
-#include <Xml/XmlNodeInterface.h>
+#include <XmlNodeInterface.h>
 
 namespace Amju
 {

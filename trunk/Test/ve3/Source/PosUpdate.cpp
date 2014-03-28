@@ -4,8 +4,8 @@
 #include <GameObject.h>
 #include "Ve1Req.h"
 #include <iostream>
-#include <Xml/XmlParser2.h>
-#include <Xml/XmlNodeInterface.h>
+#include <XmlParser2.h>
+#include <XmlNodeInterface.h>
 #include <SafeUtils.h>
 #include <Timer.h>
 #include "Ve1OnlineReqManager.h"

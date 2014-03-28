@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <GameObject.h>
-#include <Xml/XmlNodeInterface.h>
+#include <XmlNodeInterface.h>
 #include <GuiMenu.h>
 #include <SceneNode.h>
 #include <Shadow.h>

@@ -17,6 +17,10 @@
 #include <gl/glut.h>
 #endif
 
+#ifdef MACOSX
+#include <Glut/glut.h>
+#endif
+
 #include <AmjuFinal.h>
 
 namespace Amju

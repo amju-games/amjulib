@@ -1,13 +1,17 @@
 #include <AmjuFirst.h>
 #include <Unproject.h>
+
+// TODO picking should be trivial now the game is 2D top down!!
+// What gives?!?
 // Magic Software triangle-sphere intersect test
-#include "Mgc/MgcIntr3DTriSphr.h"
+#include "../../../Source/Geom/Mgc/MgcIntr3DTriSphr.h"
 // Mgc point-in-poly test
-#include "Mgc/MgcCont2DPointInPolygon.h"
+#include "../../../Source/Geom/Mgc/MgcCont2DPointInPolygon.h"
 // Mgc distance from line to triangle
-#include "Mgc/MgcDist3DLinTri.h"
+#include "../../../Source/Geom/Mgc/MgcDist3DLinTri.h"
 // Mgc dist from point to triangle
-#include "Mgc/MgcDist3DVecTri.h"
+#include "../../../Source/Geom/Mgc/MgcDist3DVecTri.h"
+
 #include <CollisionMesh.h>
 #include <Line3.h>
 #include <Plane.h>
