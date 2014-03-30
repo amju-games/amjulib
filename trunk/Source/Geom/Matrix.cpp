@@ -112,8 +112,10 @@ bool Matrix::Inverse()
   if (Inverse(&m))
   {
     *this = m;
+    AssertValid();
     return true;
   }
+  AssertValid();
   return false;
 }
 
@@ -141,9 +143,11 @@ bool Matrix::Inverse(Matrix* pResult) const
         check = res * (*this);
         Assert(check == id);
 #endif
+        AssertValid();
         return true;
     }
 
+    AssertValid();
     return false;
 }
 
@@ -154,6 +158,16 @@ Matrix::Matrix()
   SetIdentity();
 }
 
+void Matrix::AssertValid() const
+{
+#ifdef _DEBUG
+  for (int i = 0; i < 16; i++)
+  {
+    Assert(m_e[i] == m_e[i]);
+  }
+#endif
+}
+
 void Matrix::SetIdentity()
 {
   AMJU_CALL_STACK;
@@ -162,6 +176,7 @@ void Matrix::SetIdentity()
     m_e[4] = 0; m_e[5] = 1; m_e[6] = 0; m_e[7] = 0;
     m_e[8] = 0; m_e[9] = 0; m_e[10] = 1; m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0; m_e[14] = 0; m_e[15] = 1;
+    AssertValid();
 }
 
 void Matrix::RotateX(float rads)
@@ -174,6 +189,7 @@ void Matrix::RotateX(float rads)
     m_e[4] = 0;  m_e[5] = c;     m_e[6] = s;    m_e[7] = 0;
     m_e[8] = 0;  m_e[9] = -s;    m_e[10] = c;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
+    AssertValid();
 }
 
 void Matrix::RotateY(float rads)
@@ -186,6 +202,7 @@ void Matrix::RotateY(float rads)
     m_e[4] = 0;  m_e[5] = 1;     m_e[6] = 0;    m_e[7] = 0;
     m_e[8] = s;  m_e[9] = 0;     m_e[10] = c;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
+    AssertValid();
 }
 
 void Matrix::RotateZ(float rads)
@@ -198,6 +215,7 @@ void Matrix::RotateZ(float rads)
     m_e[4] = -s; m_e[5] = c;     m_e[6] = 0;    m_e[7] = 0;
     m_e[8] = 0;  m_e[9] = 0;     m_e[10] = 1;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
+    AssertValid();
 }
 
 void Matrix::Translate(const Vec3f& v)
@@ -208,6 +226,7 @@ void Matrix::Translate(const Vec3f& v)
   m_e[4] = 0;    m_e[5] = 1;     m_e[6] = 0;    m_e[7] = 0;
   m_e[8] = 0;    m_e[9] = 0;     m_e[10] = 1;   m_e[11] = 0;
   m_e[12] = v.x; m_e[13] = v.y;  m_e[14] = v.z; m_e[15] = 1;
+  AssertValid();
 }
 
 void Matrix::TranslateKeepRotation(const Vec3f& v)
@@ -223,6 +242,7 @@ void Matrix::TranslateKeepRotation(const Vec3f& v)
   m_e[14] = v.z; 
 
   m_e[15] = 1;
+  AssertValid();
 }
 
 void Matrix::Scale(float x, float y, float z)
@@ -233,6 +253,7 @@ void Matrix::Scale(float x, float y, float z)
     m_e[4] = 0;  m_e[5] = y;  m_e[6] = 0;  m_e[7] = 0;
     m_e[8] = 0;  m_e[9] = 0;  m_e[10] = z; m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0; m_e[14] = 0; m_e[15] = 1;
+    AssertValid();
 }
 
 void Matrix::ModelView()
@@ -240,6 +261,7 @@ void Matrix::ModelView()
   AMJU_CALL_STACK;
 
   AmjuGL::GetMatrix(AmjuGL::AMJU_MODELVIEW_MATRIX, m_e);
+  AssertValid();
 }
 
 void Matrix::Projection()
@@ -247,6 +269,7 @@ void Matrix::Projection()
   AMJU_CALL_STACK;
 
   AmjuGL::GetMatrix(AmjuGL::AMJU_PROJECTION_MATRIX, m_e);
+  AssertValid();
 }
 
 Matrix& Matrix::operator*=(const Matrix& n)
@@ -276,26 +299,8 @@ Matrix& Matrix::operator*=(const Matrix& n)
   r[15] = m_e[12] * n.m_e[ 3] + m_e[13] * n.m_e[ 7] + m_e[14] * n.m_e[11] + m_e[15] * n.m_e[15];
 
   *this = r;
+  AssertValid();
   return *this;
-
-/*
-  Matrix res;
-  const Matrix& m = *this;
-
-  int nrows = 4;
-  int ncolumns = 4;
-  int nsummands = 4;
-  for (int i = 0; i < nrows; i++) {
-    for (int j = 0; j < ncolumns; j++) {
-      for (int k = 0; k < nsummands; k++) {
-        //c[i][j] = c[i][j] + a[i][k] * b[k][j];
-        res.set(i, j, res.at(i, j) + m.at(i, k) * n.at(k, j) );
-      }
-    }
-  }
-
-  *this = res;
-*/
 }
 
 Matrix operator*(const Matrix& m, const Matrix& n)
@@ -304,25 +309,8 @@ Matrix operator*(const Matrix& m, const Matrix& n)
 
   Matrix r = m;
   r *= n;
+  r.AssertValid();
   return r;
-
-/*
-  Matrix res;
-
-  int nrows = 4;
-  int ncolumns = 4;
-  int nsummands = 4;
-  for (int i = 0; i < nrows; i++) {
-    for (int j = 0; j < ncolumns; j++) {
-      for (int k = 0; k < nsummands; k++) {
-        //c[i][j] = c[i][j] + a[i][k] * b[k][j];
-        res.set(i, j, res.at(i, j) + m.at(i, k) * n.at(k, j) );
-      }
-    }
-  }
-
-  return res;
-*/
 }
 
 //Matrix operator-(const Matrix& m, const Matrix& n)
@@ -337,8 +325,9 @@ Matrix operator*(const Matrix& m, const Matrix& n)
 
 bool Matrix::operator==(const Matrix& rhs) const
 {
-  AMJU_CALL_STACK;
+    AMJU_CALL_STACK;
 
+    AssertValid();
     for (int i = 0; i < 16; i++)
     {
         // Don't use straight comparison - floats won't exactly match!
@@ -363,8 +352,9 @@ bool Matrix::operator==(const Matrix& rhs) const
 
 Vec3f operator*(const Vec3f& p, const Matrix& m)
 {
-  AMJU_CALL_STACK;
+    AMJU_CALL_STACK;
 
+    m.AssertValid();
     return Vec3f(m.m_e[0] * p.x + m.m_e[4] * p.y + m.m_e[8] * p.z + m.m_e[12],
            m.m_e[1] * p.x + m.m_e[5] * p.y + m.m_e[9] * p.z + m.m_e[13],
            m.m_e[2] * p.x + m.m_e[6] * p.y + m.m_e[10] * p.z + m.m_e[14]);
@@ -377,9 +367,11 @@ bool Matrix::Load(File* pf)
     if (!pf->GetFloat(&m_e[i]))
     {
       pf->ReportError("Matrix: failed at element " + ToString(i));
+      AssertValid();
       return false;
     }
   }
+  AssertValid();
   return true;
 }
 
@@ -409,6 +401,7 @@ Matrix Transpose(const Matrix& m)
   std::swap(r.m_e[7], r.m_e[13]);
   std::swap(r.m_e[11], r.m_e[14]);
 
+  r.AssertValid();
   return r;
 }
 
@@ -424,6 +417,7 @@ Matrix TransposeRot(const Matrix& m)
   std::swap(r.m_e[1], r.m_e[4]);
   std::swap(r.m_e[2], r.m_e[8]);
   std::swap(r.m_e[6], r.m_e[9]);
+  r.AssertValid();
   return r;
 }
 }

@@ -67,6 +67,8 @@ public:
     bool Load(File*);
     bool Save(File*);
 
+    void AssertValid() const; // check for NaNs, called at end of each fn
+
 private:
     float m_e[16];
 };
