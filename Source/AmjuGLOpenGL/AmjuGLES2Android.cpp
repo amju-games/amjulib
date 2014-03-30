@@ -5,7 +5,8 @@ Amju Games source code (c) Copyright Jason Colman 2010
 // Don't use iOS or Android-specific APIs, so should work on both.
 // Good for testing, but may not be most efficient.
 
-#if defined(AMJU_IOS) || defined(ANDROID_NDK)
+#if defined(ANDROID_NDK)
+// ||defined(AMJU_IOS)
 
 #include <AmjuFirst.h>
 #include <math.h>
