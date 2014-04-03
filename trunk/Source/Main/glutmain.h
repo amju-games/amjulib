@@ -9,6 +9,7 @@
 #include <BassSoundPlayer.h>
 #include <AmjuGLWindowInfo.h>
 #include <EventPoller.h>
+#include <StringUtils.h>
 
 // TODO include glut.h for other platforms
 #ifdef MACOSX
@@ -282,14 +283,20 @@ extern AmjuGLWindowInfo w;
 // TODO Make this a GLUT version in AmjuGLOpenGL
 bool CreateWindowGLUT(AmjuGLWindowInfo* w)
 {
-  // w is global defined in game-specific code
-  glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
-
+  bool windowed = true;
   if (w->IsFullScreen())
   {
-    // TODO glutGameMode
+    std::string str = ToString(w->GetWidth()) + "x" + ToString(w->GetHeight()) + ":32";
+	  glutGameModeString(str.c_str());
+	  // enter full screen
+	  if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))
+    {
+		  glutEnterGameMode();
+      windowed = false;
+    }    
   }
-  else
+
+  if (windowed)
   {
     // w is global defined in game-specific code
     glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
