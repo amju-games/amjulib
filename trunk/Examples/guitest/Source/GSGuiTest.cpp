@@ -20,7 +20,7 @@ void GSGuiTest::Update()
 
 void GSGuiTest::Draw()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
+  AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
   GSGui::Draw();
 }
 
@@ -48,6 +48,7 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
 
+  /*
   GuiChart* chart = dynamic_cast<GuiChart*>(GetElementByName(m_gui, "MyChart"));
   Assert(chart);
 
@@ -58,7 +59,8 @@ void GSGuiTest::OnActive()
     cd->AddRowSimple(i, rand() % 5);
   }
   chart->GetDataDisplay()->SetData(cd);
-  
+  */
+
 /*
   GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
   GetElementByName(m_gui, "edit1")->SetHasFocus(true);
