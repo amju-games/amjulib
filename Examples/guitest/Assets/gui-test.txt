@@ -6,7 +6,42 @@ gui-comp
 // Name
 gui-test-app-comp
 // Num children
-1
+2
+
+gui-text
+text1
+-0.5, 0
+0.5, 0.1
+IRArial
+arial, 1.0, sx=1.0, bgcol=ffff00, fgcol=000000, left
+
+gui-text
+text1
+0, 0
+0.5, 0.1
+IRBerlin
+berlin, 1.0, bgcol=ffff00, fgcol=000000, left
+
+gui-text
+text1
+-0.5, 0.2
+0.5, 0.1
+ABC(sx=0.5)
+arial, 1.0, sx=0.5, bgcol=ffff00, fgcol=000000, left
+
+gui-text
+text1
+-0.5, 0.4
+0.5, 0.1
+ABC(sx=2.0)
+arial, 1.0, sx=2.0, bgcol=ffff00, fgcol=000000, left
+
+gui-text
+text1
+-1.0, 0
+0.5, 0.1
+ABC
+cheri, 1.0, bgcol=ffff00, fgcol=000000, left
 
 gui-chart
 MyChart
