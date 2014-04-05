@@ -573,7 +573,7 @@ bool GuiText::LoadText(File* f)
     }
     else if (StringContains(s, "sx="))
     {
-      m_scaleX = ToFloat(s.substr(4));
+      m_scaleX = ToFloat(s.substr(3));
     }
     else
     {
