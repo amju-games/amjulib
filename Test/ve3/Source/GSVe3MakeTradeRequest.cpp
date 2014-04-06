@@ -3,6 +3,7 @@
 #include "LurkMsg.h"
 #include "LocalPlayer.h"
 #include "MsgManager.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
@@ -41,6 +42,11 @@ static void OnTradeSend()
   TheGSVe3MakeTradeRequest::Instance()->OnTradeSend();
 }
 
+static void OnTradeDoneOk()
+{
+  TheGSVe3MakeTradeRequest::Instance()->GoBack();
+}
+
 void GSVe3MakeTradeRequest::OnTradeSend()
 {
   // Make a message: add a special code to make it easier to deal with 
@@ -48,14 +54,17 @@ void GSVe3MakeTradeRequest::OnTradeSend()
 
   Player* p = GetLocalPlayer();
 
-  std::string msg = p->GetName() + " gave some food to " + m_player->GetName() + "!";
+  std::string str = p->GetName() + " asked " + m_player->GetName() + " to make a trade.";
   MsgManager* mm = TheMsgManager::Instance();
-  mm->SendMsg(p->GetId(), m_player->GetId(), msg);
+  mm->SendMsg(p->GetId(), m_player->GetId(), str); // sender, recip, msg
+
   // Also a message in our own guestbook?
-  std::string str = "You gave some food to " + m_player->GetName() + "!";
-  mm->SendMsg(m_player->GetId(), p->GetId(), str);
+  mm->SendMsg(m_player->GetId(), p->GetId(), str); // sender, recip, msg
   // TODO Get this msg into guestbook - send a request for new msgs
 
+  str = "OK, now let's wait and see what reply you get!";
+  LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeDoneOk); 
+  TheLurker::Instance()->Queue(lm);    
 }
 
 void GSVe3MakeTradeRequest::SetPlayer(Player* p)
@@ -75,17 +84,22 @@ void GSVe3MakeTradeRequest::OnActive()
   m_gui = LoadGui("gui-ve3-maketraderequest.txt");
   Assert(m_gui);
 
+  Player* p = GetLocalPlayer();
+
   Assert(m_tradeType != TRADE_NONE);
   Assert(m_player);
 
   std::string pn = m_player->GetName(); 
   GuiText* t = (GuiText*)GetElementByName(m_gui, "static-text2");
   t->SetText("You can ask " + pn + 
-    " if they want to trade some of their food for some of your treasure,"
+    " if they want to make a trade,"
     " by sending a message:");
 
   t = (GuiText*)GetElementByName(m_gui, "msg-text1");
   t->SetText("Hi, " + pn + "!");
+
+  t = (GuiText*)GetElementByName(m_gui, "msg-text6");
+  t->SetText("from " + p->GetName());
 
   t = (GuiText*)GetElementByName(m_gui, "msg-text2");
   GuiText* give = (GuiText*)GetElementByName(m_gui, "msg-text-to-give");

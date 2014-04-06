@@ -234,7 +234,7 @@ msg-text6
 // pos (coords are -1..1)
 0.0, -0.375
 // size
-0.6, 0.1
+0.9, 0.1
 // Text
 from <local player>
 // Font name, size

@@ -534,6 +534,9 @@
     <ClCompile Include="..\..\..\..\Source\GSVe3MakeTradeRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\CheckForNewMessages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Animated.h">
@@ -1062,6 +1065,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\GSVe3MakeTradeRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\CheckForNewMessages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

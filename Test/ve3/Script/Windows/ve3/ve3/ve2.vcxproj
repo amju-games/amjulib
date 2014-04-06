@@ -187,6 +187,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\Cam2d.cpp" />
     <ClCompile Include="..\..\..\..\Source\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\ChatConsole.cpp" />
+    <ClCompile Include="..\..\..\..\Source\CheckForNewMessages.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestNag.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestNpc.cpp" />
     <ClCompile Include="..\..\..\..\Source\CogTestResults.cpp" />
@@ -363,6 +364,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\Cam2d.h" />
     <ClInclude Include="..\..\..\..\Source\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\ChatConsole.h" />
+    <ClInclude Include="..\..\..\..\Source\CheckForNewMessages.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestNag.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestNpc.h" />
     <ClInclude Include="..\..\..\..\Source\CogTestResults.h" />
