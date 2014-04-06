@@ -331,7 +331,8 @@ void Shadow::RecalculateList(
   float h = 0;
   if (!collMesh.GetY(Vec2f(x, z), &h)) // TODO Must be highest
   {
-    h = y;
+    return; // ?? why not??
+//    h = y;
   }
 
   if (y < (h - 5.0f)) // TODO Tiny bit of wiggle room
