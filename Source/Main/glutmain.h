@@ -287,17 +287,23 @@ bool CreateWindowGLUT(AmjuGLWindowInfo* w)
   if (w->IsFullScreen())
   {
     std::string str = ToString(w->GetWidth()) + "x" + ToString(w->GetHeight()) + ":32";
-	  glutGameModeString(str.c_str());
-	  // enter full screen
-	  if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))
+    glutGameModeString(str.c_str());
+    // enter full screen
+    if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))
     {
-		  glutEnterGameMode();
+std::cout << "Glut entering game mode..\n";
+      glutEnterGameMode();
       windowed = false;
-    }    
+    }
+    else
+    {
+std::cout << "Glut can't enter game mode..\n";
+    }
   }
 
   if (windowed)
   {
+std::cout << "Glut creating window...\n";
     // w is global defined in game-specific code
     glutInitWindowSize(w->GetWidth(), w->GetHeight()); 
     glutCreateWindow(w->GetTitle()); 
