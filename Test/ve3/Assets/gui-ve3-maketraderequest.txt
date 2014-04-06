@@ -1,11 +1,11 @@
-// View other players page
+// Make trade request page
 // version
 1
 
 // Element type
 gui-comp
 // Name
-view-other-players-comp
+make-trade-request-comp
 // Num children
 6
 
@@ -13,15 +13,41 @@ view-other-players-comp
 // Element type
 gui-text
 // Element name
-playername-text
+static-text1
 // pos (coords are -1..1)
 -1.0, 1.0
 // size
 2.0, 0.2
 // Text
-Other players
+Make a trade!
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// Background for actions you can do
+gui-rect
+actions-bg
+// Pos, size
+-0.95, 0.75
+1.9, 1.4
+// Colour
+c0c0c0
+// Corner radius
+0.03
+// flags
+0
+
+// Element type
+gui-text
+// Element name
+static-text2
+// pos (coords are -1..1)
+-0.9, 0.7
+// size
+1.8, 0.3
+// Text
+<explanatory text>
+// Font name, size
+arial, 1.0, fgcol=000000, multi
 
 
 // element type
@@ -29,48 +55,205 @@ gui-button
 // Element name
 back-button
 // pos (coords are -1..1)
--0.4, -0.75
+-0.9, -0.75
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-Back to my Home Page
+Cancel
 // Font name, size
-arial, 1.5, sx=0.5
+arial, 1.5, sx=0.7
 
 
 
 // element type
 gui-button
 // Element name
-prev-player-button
+send-button
 // pos (coords are -1..1)
--0.9, -0.8
+0.1, -0.75
 // size
-0.4, 0.1
+0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-< Previous
+Send Message!
 // Font name, size
-arial, 1.0, sx=0.7
+arial, 1.5, sx=0.7
+
+// Element type
+gui-comp
+// Name
+make-trade-request-message-comp
+// Num children
+12
+
+// Background for message
+gui-rect
+actions-bg
+// Pos, size
+-0.8, 0.35
+1.7, 0.9
+// Colour
+ffffff
+// Corner radius
+0
+// flags
+15
 
 
-// element type
-gui-button
+// Message line 1
+// Element type
+gui-text
 // Element name
-next-player-button
+msg-text1
 // pos (coords are -1..1)
-0.5, -0.8
+-0.7, 0.3
 // size
-0.4, 0.1
-// Image
-gui-button-4.png
+1.2, 0.1
 // Text
-Next >
+Hi <player name>!
 // Font name, size
-arial, 1.0, sx=0.7
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Message line 2
+// Element type
+gui-text
+// Element name
+msg-text2
+// pos (coords are -1..1)
+-0.7, 0.2
+// size
+1.2, 0.2
+// Text
+I would like to trade some of my\n<X> for some of your <Y>.
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left, multi
+
+// Message line 3
+// Element type
+gui-text
+// Element name
+msg-text3
+// pos (coords are -1..1)
+-0.7, 0.0
+// size
+1.2, 0.1
+// Text
+I will give you
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Element type
+gui-text
+// Element name
+msg-text-to-give
+// pos (coords are -1..1)
+0.0, 0.0
+// size
+0.6, 0.1
+// Text
+food or tr
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Element type
+gui-text-edit
+// Element name
+edit-num-to-give
+// pos (coords are -1..1)
+-0.2, 0.0
+// size
+0.15, 0.1
+// Text
+3
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff, left
+
+
+// Message line 4
+// Element type
+gui-text
+// Element name
+msg-text4
+// pos (coords are -1..1)
+-0.7, -0.125
+// size
+1.2, 0.1
+// Text
+In return, I would like
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Element type
+gui-text
+// Element name
+msg-text-to-recv
+// pos (coords are -1..1)
+0.2, -0.125
+// size
+0.6, 0.1
+// Text
+food or tr
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Element type
+gui-text-edit
+// Element name
+edit-num-to-recv
+// pos (coords are -1..1)
+-0.0, -0.125
+// size
+0.15, 0.1
+// Text
+2
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff, left
+
+// Message line 5
+// Element type
+gui-text
+// Element name
+msg-text5
+// pos (coords are -1..1)
+-0.7, -0.25
+// size
+0.7, 0.1
+// Text
+How about it?
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Message line 6
+// Element type
+gui-text
+// Element name
+msg-text6
+// pos (coords are -1..1)
+0.0, -0.375
+// size
+0.6, 0.1
+// Text
+from <local player>
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, left
+
+// Element type
+gui-text-edit
+// Element name
+edit-greet
+// pos (coords are -1..1)
+-0.7, -0.375
+// size
+0.65, 0.1
+// Text
+Hugs
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff, left
+
+
 
 
 // ACTIONS
@@ -96,18 +279,6 @@ c0c0c0
 // flags
 0
 
-// Element type
-gui-text
-// Element name
-static-text2
-// pos (coords are -1..1)
--0.9, -0.20
-// size
-1.8, 0.1
-// Text
-What would you like to do?
-// Font name, size
-arial, 1.0, fgcol=000000
 
 // Element type
 gui-text
