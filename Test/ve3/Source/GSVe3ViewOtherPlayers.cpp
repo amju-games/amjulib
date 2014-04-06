@@ -187,7 +187,9 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
   // New trading mechanic: send a message to trade food for treasure
   GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
   mtr->SetPrevState(this);
-  // TODO Set up trade type
+  mtr->SetPlayer(m_player);
+  // Set up trade type
+  mtr->SetTradeType(TRADE_FOOD_FOR_TREASURE);
   TheGame::Instance()->SetCurrentState(mtr);
 
   /*
@@ -238,7 +240,9 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
   // New trading mechanic: send a message to trade food for treasure
   GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
   mtr->SetPrevState(this);
-  // TODO Set up trade type
+  mtr->SetPlayer(m_player);
+  // Set up trade type
+  mtr->SetTradeType(TRADE_TREASURE_FOR_FOOD);
   TheGame::Instance()->SetCurrentState(mtr);
 
   /*
