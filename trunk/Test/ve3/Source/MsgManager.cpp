@@ -29,7 +29,7 @@ namespace Amju
 {
 MsgManager::MsgManager()
 {
-  m_newMsgs = false;
+  m_newMsgs = 0;
 }
 
 void MsgManager::QueueMsg(const Msg& msg)
@@ -41,17 +41,17 @@ void MsgManager::QueueMsg(const Msg& msg)
   }
   m_msgsRecv.insert(msg.m_id);
   m_map.insert(std::make_pair(msg.m_whenSent, msg));
-  m_newMsgs = true;
+  m_newMsgs++;
 }
 
-bool MsgManager::HasNewMsgs() const
+int MsgManager::HasNewMsgs() const
 {
   return m_newMsgs;
 }
 
-void MsgManager::ResetNewMsgFlag()
+void MsgManager::ResetNewMsgs()
 {
-  m_newMsgs = false;
+  m_newMsgs = 0;
 }
 
 void MsgManager::CheckForNewMsgs()

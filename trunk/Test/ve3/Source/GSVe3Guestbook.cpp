@@ -50,7 +50,7 @@ void GSVe3Guestbook::Update()
   static MsgManager* mm = TheMsgManager::Instance();
   if (mm->HasNewMsgs())
   {
-    mm->ResetNewMsgFlag();
+    mm->ResetNewMsgs();
     InitGB();
   }
 }

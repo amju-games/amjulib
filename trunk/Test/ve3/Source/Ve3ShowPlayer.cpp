@@ -25,11 +25,14 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
     namestr += " (you!)";
     name->SetFgCol(Colour(0, 0.5f, 0, 1));
   }
+  /*
+  // This has never been reliable
   else if (player->IsLoggedIn())
   {
     namestr += " - online now!";
     name->SetFgCol(Colour(1, 0, 0, 1));
   }
+  */
   else
   {
     name->SetFgCol(Colour(0, 0, 0, 1));

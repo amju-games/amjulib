@@ -45,8 +45,8 @@ public:
   
   void QueueMsg(const Msg& msg);
 
-  bool HasNewMsgs() const;
-  void ResetNewMsgFlag();
+  int HasNewMsgs() const;
+  void ResetNewMsgs();
 
 private:
 
@@ -61,7 +61,7 @@ private:
   // IDs of msgs received from server
   std::set<int> m_msgsRecv;
 
-  bool m_newMsgs;
+  int m_newMsgs;
 };
 
 template <class Pred> MsgManager::Msgs MsgManager::GetMsgs(Pred pred) const
