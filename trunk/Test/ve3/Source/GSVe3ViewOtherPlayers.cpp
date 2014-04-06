@@ -13,6 +13,7 @@
 #include "HeartCount.h"
 #include "GSVe3Guestbook.h"
 #include "MsgManager.h"
+#include "GSVe3MakeTradeRequest.h"
 
 namespace Amju
 {
@@ -183,6 +184,13 @@ static void OnSeeGuestbook()
 
 void GSVe3ViewOtherPlayers::OnGiveFood()
 {
+  // New trading mechanic: send a message to trade food for treasure
+  GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
+  mtr->SetPrevState(this);
+  // TODO Set up trade type
+  TheGame::Instance()->SetCurrentState(mtr);
+
+  /*
   // Check we have some
   Player* p = GetLocalPlayer();
   Assert(p);
@@ -222,10 +230,18 @@ void GSVe3ViewOtherPlayers::OnGiveFood()
       // TODO Get this msg into guestbook - send a request for new msgs
     }
   }
+  */
 }
 
 void GSVe3ViewOtherPlayers::OnGiveTreasure()
 {
+  // New trading mechanic: send a message to trade food for treasure
+  GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
+  mtr->SetPrevState(this);
+  // TODO Set up trade type
+  TheGame::Instance()->SetCurrentState(mtr);
+
+  /*
   // Check we have some
   Player* p = GetLocalPlayer();
   Assert(p);
@@ -264,6 +280,7 @@ void GSVe3ViewOtherPlayers::OnGiveTreasure()
       // TODO Get this msg into guestbook - send a request for new msgs
     }
   }
+  */
 }
 
 void GSVe3ViewOtherPlayers::OnSeeGuestbook()
