@@ -36,12 +36,12 @@ void CheckForNewMessages()
     std::string str;
     if (msgs == 1)
     {
-      str  = "You got a new message!";
+      str  = "You got a new message!\nWould you like to read it now?";
     }
     else
     {
       Assert(msgs > 1);
-      str  = "You got some new messages!";
+      str  = "You got some new messages!\nWould you like to read them now?";
     }
 
     TheLurker::Instance()->ShowYesNo(str, LURK_FG, LURK_BG, OnNewMsgsNo, OnNewMsgsYes);    

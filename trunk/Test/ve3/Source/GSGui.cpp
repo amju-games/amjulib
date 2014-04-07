@@ -95,7 +95,20 @@ void GSGui::Draw2d()
 
   if (m_showLurk)
   {
-    TheLurker::Instance()->Draw();
+    static Lurker* lurker = TheLurker::Instance();
+    if (lurker->IsDisplayingMsg())
+    {
+      static GuiRect* rect = nullptr;
+      if (!rect)
+      {
+        rect = new GuiRect;
+        rect->SetColour(Colour(0, 0, 0.2f, 0.5f));
+        rect->SetLocalPos(Vec2f(-1, 1));
+        rect->SetSize(Vec2f(2, 2));
+      }
+      rect->Draw();
+    }
+    lurker->Draw();
   }
 
   TheCursorManager::Instance()->Draw();

@@ -1,4 +1,4 @@
-#include <GuiText.h>
+#include <GuiTextEdit.h>
 #include "GSVe3MakeTradeRequest.h"
 #include "LurkMsg.h"
 #include "LocalPlayer.h"
@@ -52,14 +52,59 @@ void GSVe3MakeTradeRequest::OnTradeSend()
   // Make a message: add a special code to make it easier to deal with 
   //  on the recving end.
 
-  Player* p = GetLocalPlayer();
+  // TODO messages need to contain the info about the trade!!!
+  GuiTextEdit* give = (GuiTextEdit*)GetElementByName(m_gui, "edit-num-to-give");
+  GuiTextEdit* recv = (GuiTextEdit*)GetElementByName(m_gui, "edit-num-to-recv");
+  GuiTextEdit* greet = (GuiTextEdit*)GetElementByName(m_gui, "edit-greet");
 
-  std::string str = p->GetName() + " asked " + m_player->GetName() + " to make a trade.";
+  int nGive = ToInt(give->GetText());
+  int nRecv = ToInt(recv->GetText());
+  // Sanity check
+  if (nGive < 1 || nRecv < 1)
+  {
+    LurkMsg lm("No way! Please check your numbers!", LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);    
+    return;
+  }
+
+  // Check you have that much
+  Player* p = GetLocalPlayer();
+  std::string lpname = p->GetName();
+
+  int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? p->GetVal(FOOD_STORED_KEY) : p->GetVal(TREASURE_KEY));
+  if (nGive > maxToGive)
+  {
+    std::string str = "You only have " + ToString(maxToGive) + ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? "food" : "treasure") + "!";
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
+    TheLurker::Instance()->Queue(lm);
+    return;
+  }
+
+  std::string pn = m_player->GetName(); 
+
+  std::string str = "Hi " + pn + "! ";
+  if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
+  {
+    str += "I would like to trade " + ToString(nGive) + " of my food for " + ToString(nRecv) + " of your treasure. How about it? " +
+      greet->GetText() + " from " + lpname;
+  }
+  else if (m_tradeType == TRADE_TREASURE_FOR_FOOD)
+  {
+    str += "I would like to trade " + ToString(nGive) + " of my treasure for " + ToString(nRecv) + " of your food. How about it? " +
+      greet->GetText() + " from " + lpname;
+  }
+  else
+  {
+    Assert(0);
+    return;
+  }
+
   MsgManager* mm = TheMsgManager::Instance();
   mm->SendMsg(p->GetId(), m_player->GetId(), str); // sender, recip, msg
 
   // Also a message in our own guestbook?
-  mm->SendMsg(m_player->GetId(), p->GetId(), str); // sender, recip, msg
+  str = "You asked " + pn + " to make a trade.";
+  mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
   // TODO Get this msg into guestbook - send a request for new msgs
 
   str = "OK, now let's wait and see what reply you get!";
