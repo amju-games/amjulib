@@ -286,6 +286,8 @@ bool CreateWindowGLUT(AmjuGLWindowInfo* w)
   bool windowed = true;
   if (w->IsFullScreen())
   {
+#ifdef GLUT_GAME_MODE_WORKS // crashes on Mac, ruins desktop on Windows
+
     std::string str = ToString(w->GetWidth()) + "x" + ToString(w->GetHeight()) + ":32";
     glutGameModeString(str.c_str());
     // enter full screen
@@ -299,6 +301,8 @@ std::cout << "Glut entering game mode..\n";
     {
 std::cout << "Glut can't enter game mode..\n";
     }
+
+#endif // GLUT_GAME_MODE_WORKS
   }
 
   if (windowed)
