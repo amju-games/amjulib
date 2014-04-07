@@ -42,6 +42,7 @@ static void OnQuit()
 
 GSVe3HomePage::GSVe3HomePage()
 {
+  m_showLurk = true;
 }
 
 void GSVe3HomePage::RefreshGui()
@@ -86,8 +87,6 @@ void GSVe3HomePage::Draw2d()
 
   // Draw over character if necessary
   GSGui::Draw2d();
-
-  TheLurker::Instance()->Draw();
 }
 
 static void OnChangeName()

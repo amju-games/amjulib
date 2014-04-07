@@ -48,6 +48,10 @@ public:
   int HasNewMsgs() const;
   void ResetNewMsgs();
 
+  // Trade messages
+  int HasNewTrades() const;
+  void ResetNewTrades(); 
+
 private:
 
   friend class Singleton<MsgManager>;
