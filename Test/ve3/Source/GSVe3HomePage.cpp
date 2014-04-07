@@ -14,6 +14,7 @@
 #include "GSWaitForNewLocation.h"
 #include "LurkMsg.h"
 #include "GameConsts.h"
+#include "CheckForNewMessages.h"
 
 namespace Amju
 {
@@ -56,6 +57,10 @@ void GSVe3HomePage::Update()
 
   m_spriteNode.Update();
   TheLurker::Instance()->Update();
+
+  // Display Lurk Msg if we have any new msgs
+  // This is not sending DB reqs to server, just checking the local queue.
+  CheckForNewMessages(); 
 }
 
 void GSVe3HomePage::Draw()
@@ -154,6 +159,10 @@ void GSVe3HomePage::OnActive()
   Assert(p);
 
   ShowPlayer(p, m_gui);
+
+  // Send req for new msgs
+  TheMsgManager::Instance()->CheckForNewMsgs();
+  CheckForNewMessages(); // display Lurk Msg if we have any new msgs
 }
 
 } // namespace
