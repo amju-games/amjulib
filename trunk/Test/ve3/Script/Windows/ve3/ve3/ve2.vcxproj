@@ -42,7 +42,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\jason\projects\amjulib\Build\amjulib\include;$(IncludePath)</IncludePath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
     <EmbedManifest>false</EmbedManifest>
