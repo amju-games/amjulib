@@ -52,7 +52,7 @@ void GSBase::Draw2d()
     static GuiText t;
     t.SetFgCol(Colour(1, 1, 1, 1));
     t.SetBgCol(Colour(0, 0, 0, 1));
-    t.SetDrawBg(true);
+    // Not:   t.SetDrawBg(true);
     t.SetFontSize(0.5f); // TODO CONFIG
     t.SetIsMulti(true);
     t.SetLocalPos(Vec2f(-1.0f, 0.8f));
