@@ -11,6 +11,11 @@ namespace Amju
 {
 PSceneNode LoadScene(const std::string& filename)
 {
+  if (filename.empty())
+  {
+    return new SceneNode;
+  }
+
   // TODO Factory of loader types
   if (GetFileExt(filename) == "obj")
   {
