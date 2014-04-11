@@ -16,8 +16,12 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-private:
+  void SetMsgId(int msgId) { m_msgId = msgId; }
 
+  void OnTradeReject();
+
+private:
+  int m_msgId;
 };
 typedef Singleton<GSVe3ShowTrade> TheGSVe3ShowTrade;
 }
