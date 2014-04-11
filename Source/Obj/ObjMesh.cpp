@@ -399,7 +399,7 @@ std::cout << "Suspiciously high number of groups in obj mesh: numGroups: " << nu
     // Load face info
     int numFaces = 0;
     f.GetInteger(&numFaces);
-    if (numFaces > 1000)
+    if (numFaces > 100000)
     {
 std::cout << "Suspiciously high number of faces in obj mesh: " << numFaces << "...\n";
       return false;
