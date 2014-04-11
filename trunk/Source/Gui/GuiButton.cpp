@@ -199,7 +199,7 @@ void GuiButton::Draw()
   if (IsMouseOver())
   {
     // TODO This is no good, the size change depends on the position of the button.
-    // Should instead rebuild tri list.
+    // Scale + Tralsate is required.
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
@@ -254,6 +254,15 @@ void GuiButton::Draw()
   {
     a = 0.5f;
   }
+
+  // TODO This would be much simpler if GuiButton was a Composite.
+  // Then we could also have layers of images, text, etc.
+  // Make sure text is positioned properly, may have been moved in code since Load
+  m_guiText.SetParent(GetParent());
+  Vec2f pos = GetLocalPos();
+  Vec2f size = GetSize();
+  pos.x -= size.x * 0.25f;
+  m_guiText.SetLocalPos(pos);
 
   m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
