@@ -1,12 +1,14 @@
 #include <AmjuFirst.h>
-#include "MsgManager.h"
 #include <iostream>
 #include <StringUtils.h>
+#include <SafeUtils.h>
 #include <Timer.h>
 #include <UrlUtils.h>
 #include <Game.h>
 #include <StringUtils.h>
 #include <TimePeriod.h>
+#include <XmlParser2.h>
+#include "MsgManager.h"
 #include "ReqSendMsg.h"
 #include "ReqGetNewMsgs.h"
 #include "GSMain.h"
@@ -27,6 +29,52 @@
 
 namespace Amju
 {
+void AddTradeInfo(std::string* msg, int giveNum, int recvNum, TradeType tt)
+{
+  std::string info = "\n<trade><give>" + ToString(giveNum) + "</give><recv>" +
+    ToString(recvNum) + "</recv><type>" + ToString((int)tt) + "</type></trade>";
+
+  *msg = *msg + info;
+}
+
+bool MsgManager::Msg::IsTrade() const
+{
+  bool b = StringContains(m_text, "<trade>");
+  return b;
+}
+    
+void MsgManager::Msg::GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt)
+{
+  Assert(IsTrade());
+
+  PXml xml = ParseXml(m_text.c_str());
+  PXml p = xml.getChildNode(0);
+  if (SafeStrCmp(p.getName(), "trade"))
+  {
+    PXml xmlGive = p.getChildNode(0);
+    if (!SafeStrCmp(xmlGive.getName(), "give"))
+    {
+      Assert(0);
+      return;
+    }
+    PXml xmlRecv = p.getChildNode(1);
+    if (!SafeStrCmp(xmlRecv.getName(), "recv"))
+    {
+      Assert(0);
+      return;
+    }
+    PXml xmlType = p.getChildNode(2);
+    if (!SafeStrCmp(xmlType.getName(), "type"))
+    {
+      Assert(0);
+      return;
+    }
+    *giveNum = ToInt(xmlGive.getText());
+    *recvNum = ToInt(xmlRecv.getText());
+    *tt = (TradeType)ToInt(xmlType.getText());
+  }
+}
+
 MsgManager::MsgManager()
 {
   m_newMsgs = 0;
@@ -42,6 +90,20 @@ void MsgManager::QueueMsg(const Msg& msg)
   m_msgsRecv.insert(msg.m_id);
   m_map.insert(std::make_pair(msg.m_whenSent, msg));
   m_newMsgs++;
+}
+
+const MsgManager::Msg* MsgManager::GetMsg(int msgId) const
+{
+  Assert(m_msgsRecv.count(msgId) > 0);
+  for (Msgs::const_iterator it = m_map.begin(); it != m_map.end(); it++)
+  {
+    const Msg& msg = it->second;
+    if (msg.m_id == msgId)
+    {
+      return &msg;
+    }
+  }
+  return 0;
 }
 
 int MsgManager::HasNewMsgs() const
@@ -160,6 +222,15 @@ void MsgManager::MarkRead(const Msg& msg)
   TheVe1ReqManager::Instance()->AddReq(new ReqMsgRead(url), 1); // TODO only need 1 ??
 }
 
+void MsgManager::SendTradeMsg(
+  int senderId, int recipId, const std::string& msg, 
+  int giveNum, int recvNum, TradeType tt)
+{
+  std::string str = msg;
+  AddTradeInfo(&str, giveNum, recvNum, tt);
+  SendMsg(senderId, recipId, str);
+}
+ 
 void MsgManager::SendMsg(int senderId, int recipId, const std::string& msg)
 {
   // How many msgs sent in total ? First message ? That's an achievement. etc.

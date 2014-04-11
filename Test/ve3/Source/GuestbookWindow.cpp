@@ -1,6 +1,8 @@
+#include <Game.h>
 #include <GuiScroll.h>
 #include <GuiText.h>
 #include <GuiRect.h>
+#include <GuiButton.h>
 #include <TimePeriod.h>
 #include "TimePeriodString.h" // TODO promote to amjulib
 #include "GuestbookWindow.h"
@@ -8,9 +10,53 @@
 #include "Player.h"
 #include "Mugshot.h"
 #include "ObjectManager.h"
+#include "GSVe3MsgReply.h"
+#include "GSVe3ShowTrade.h"
 
 namespace Amju
 {
+class ReplyTradeCommand : public GuiCommand
+{
+public:
+  ReplyTradeCommand(int msgId) : m_msgId(msgId) {}
+
+  bool Do() override
+  {
+    Game* game = TheGame::Instance();
+    GSVe3ShowTrade* st = TheGSVe3ShowTrade::Instance();
+    st->SetMsgId(m_msgId);
+    // Set state to go back to
+    st->SetPrevState(game->GetState());
+    game->SetCurrentState(st);
+
+    return false; // no undo
+  };
+
+private:
+  int m_msgId;
+};
+
+class ReplyCommand : public GuiCommand
+{
+public:
+  ReplyCommand(int msgId) : m_msgId(msgId) {}
+
+  bool Do() override
+  {
+    Game* game = TheGame::Instance();
+    GSVe3MsgReply* mr = TheGSVe3MsgReply::Instance();
+    mr->SetMsgId(m_msgId);
+    // Set state to go back to
+    mr->SetPrevState(game->GetState());
+    game->SetCurrentState(mr);
+
+    return false; // no undo
+  }
+
+private:
+  int m_msgId;
+};
+
 GuiElement* CreateGuestbookWindow()
 {
   GuestbookWindow* w = new GuestbookWindow;
@@ -139,6 +185,27 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
     label->SizeToText();
 
     comp->AddChild(label);
+
+    if (isMsg)
+    {
+      // Add reply button
+      GuiButton* reply = new GuiButton;
+      reply->OpenAndLoad("reply-button.txt"); 
+      if (msg.IsTrade())
+      {
+        reply->SetCommand(new ReplyTradeCommand(msg.m_id));
+      } 
+      else
+      {
+        reply->SetCommand(new ReplyCommand(msg.m_id));
+      }
+
+      // TODO This positions the button correctly but not the text inside!
+      reply->SetLocalPos(Vec2f(0.3f, -0.05f - label->GetSize().y));
+      
+      comp->AddChild(reply);
+    }
+
     // Set pos - y is number of rows
     comp->SetSizeFromChildren(); // ? Or work it out here
     // Set pos after size calc

@@ -2,20 +2,13 @@
 
 #include <Singleton.h>
 #include "GSGui.h"
-//#include "Ve3ShowPlayer.h"
 #include "Ve1SpriteNode.h"
 #include "Player.h"
+#include "TradeType.h"
 
 namespace Amju
 {
 class Player;
-
-enum TradeType
-{
-  TRADE_NONE,
-  TRADE_FOOD_FOR_TREASURE, 
-  TRADE_TREASURE_FOR_FOOD,
-};
 
 class GSVe3MakeTradeRequest : public GSGui
 {

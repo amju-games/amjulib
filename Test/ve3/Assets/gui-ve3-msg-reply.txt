@@ -1,13 +1,13 @@
-// Show/reply to trade page
+// Show/reply to msg page
 // version
 1
 
 // Element type
 gui-comp
 // Name
-show-trade-comp
+msg-reply-comp
 // Num children
-8
+7
 
 // Title bar 
 // Element type
@@ -19,7 +19,7 @@ static-text1
 // size
 2.0, 0.2
 // Text
-Reply to Trade
+Reply to Message
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
 
@@ -28,7 +28,7 @@ gui-rect
 actions-bg
 // Pos, size
 -0.95, 0.75
-1.9, 0.7 
+1.9, 1.4
 // Colour
 c0c0c0
 // Corner radius
@@ -58,9 +58,22 @@ static-text
 // size
 1.8, 0.1
 // Text
-What would you like to do?
+Your reply:
 // Font name, size
 arial, 1.0, fgcol=ffffff, bgcol=ff0000
+
+// Element type
+gui-text-edit
+// Element name
+reply-text
+// pos (coords are -1..1)
+-0.9, -0.05
+// size
+1.8, 0.4
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=ffffff, bgcol=000000
 
 
 // element type
@@ -68,52 +81,22 @@ gui-button
 // Element name
 back-button
 // pos (coords are -1..1)
--0.9, -0.5
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-Uhh, deal with it later
-// Font name, size
-arial, 1.5, sx=0.7
-
-
-
-// element type
-gui-button
-// Element name
-accept-button
-// pos (coords are -1..1)
-0.1, -0.5
-// size
-0.8, 0.2
-// Image
-gui-button-4.png
-// Text
-Make this trade!
-// Font name, size
-arial, 1.5, sx=0.7
-
-// element type
-gui-button
-// Element name
-reject-button
-// pos (coords are -1..1)
 -0.9, -0.75
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
-That's crazy! I refuse!
+Cancel
 // Font name, size
 arial, 1.5, sx=0.7
+
+
 
 // element type
 gui-button
 // Element name
-counter-button
+send-button
 // pos (coords are -1..1)
 0.1, -0.75
 // size
@@ -121,7 +104,7 @@ counter-button
 // Image
 gui-button-4.png
 // Text
-Make a counter offer...
+Send Reply!
 // Font name, size
 arial, 1.5, sx=0.7
 

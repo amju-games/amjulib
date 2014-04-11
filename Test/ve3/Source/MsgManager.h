@@ -6,9 +6,13 @@
 #include <map>
 #include <Singleton.h>
 #include "Timestamp.h"
+#include "TradeType.h"
 
 namespace Amju
 {
+// For trade messages, add this info (sticks it onto msg text)
+void AddTradeInfo(std::string* msg, int giveNum, int recvNum, TradeType tt);
+
 // Controls sending and receiving of chat messages
 class MsgManager : public NonCopyable
 {
@@ -26,6 +30,11 @@ public:
     int m_recipId;
     Timestamp m_whenSent;
     // Type, e.g. post, chat, pigeon post
+
+    bool IsTrade() const;
+
+    // Read trade info from a message - check it has trade info first!
+    void GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt);
   };
 
   typedef std::multimap<Timestamp, Msg> Msgs;
@@ -37,12 +46,17 @@ public:
   // Return messages for which pred() is true
   template <class Pred> Msgs GetMsgs(Pred pred) const;
 
+  const Msg* GetMsg(int msgId) const;
+  
   // Special sender/recipient codes for SendMsg()
   static const int BROADCAST_RECIP = -2; // use as recip ID
   static const int SYSTEM_SENDER = -3; // use as sender ID
 
   void SendMsg(int senderId, int recipId, const std::string& msg);
-  
+
+  // Send message proposing a trade
+  void SendTradeMsg(int senderId, int recipId, const std::string& msg, int giveNum, int recvNum, TradeType tt);
+ 
   void QueueMsg(const Msg& msg);
 
   int HasNewMsgs() const;

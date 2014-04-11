@@ -1,0 +1,15 @@
+// version
+1
+
+// Reply button for replyable messages
+// NB type is fixed as a button
+// Name
+reply-button
+// Pos
+0, 0
+0.4, 0.1
+key3.png
+Reply
+arial, 1.0, sx=0.9
+
+
