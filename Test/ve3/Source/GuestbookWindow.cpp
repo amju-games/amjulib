@@ -115,6 +115,7 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
 
     std::string senderName = "System";
     bool isMsg = true;
+
     if (senderId <= 0)
     {
       senderId = recipId;
@@ -174,11 +175,11 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
         s += " To " + recip->GetName();
       }
 
-      s += " Sent: " + when + "\n" + msg.m_text;
+      s += " Sent: " + when + "\n" + msg.GetStrippedText();
     }
     else
     {
-      s = when + "\n" + msg.m_text;
+      s = when + "\n" + msg.GetStrippedText();
     }
 
     label->SetText(s);
@@ -186,7 +187,13 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
 
     comp->AddChild(label);
 
-    if (isMsg)
+    bool canReply = isMsg;
+    if (senderId == recipId)
+    {
+      canReply = false;
+    }
+
+    if (canReply)
     {
       // Add reply button
       GuiButton* reply = new GuiButton;
