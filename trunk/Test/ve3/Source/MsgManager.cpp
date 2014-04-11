@@ -43,7 +43,12 @@ bool MsgManager::Msg::IsTrade() const
   return b;
 }
     
-void MsgManager::Msg::GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt)
+std::string MsgManager::Msg::GetStrippedText() const
+{
+  return m_text; // TODO
+}
+
+void MsgManager::Msg::GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt) const
 {
   Assert(IsTrade());
 

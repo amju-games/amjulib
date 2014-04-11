@@ -34,7 +34,9 @@ public:
     bool IsTrade() const;
 
     // Read trade info from a message - check it has trade info first!
-    void GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt);
+    void GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt) const;
+ 
+    std::string GetStrippedText() const;
   };
 
   typedef std::multimap<Timestamp, Msg> Msgs;
