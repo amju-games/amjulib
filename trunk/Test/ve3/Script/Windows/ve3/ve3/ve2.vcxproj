@@ -42,7 +42,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</IntDir>
-    <IncludePath>C:\Users\jason\projects\amjulib\Build\amjulib\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\..\..\..\Build\amjulib\include;$(IncludePath)</IncludePath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <CustomBuildBeforeTargets>Run</CustomBuildBeforeTargets>
     <EmbedManifest>false</EmbedManifest>
@@ -271,6 +271,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSVe3Guestbook.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3HomePage.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3MakeTradeRequest.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3MsgReply.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ShowTrade.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3SinceLastTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.cpp" />
@@ -320,6 +321,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\SaveConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\SceneCollisionMesh.cpp" />
     <ClCompile Include="..\..\..\..\Source\SerialReqManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\ShowMsgHelper.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpecialConfig.cpp" />
     <ClCompile Include="..\..\..\..\Source\Sprite.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpriteNode.cpp" />
@@ -443,6 +445,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSVe3Guestbook.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3HomePage.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3MakeTradeRequest.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3MsgReply.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ShowTrade.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3SinceLastTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.h" />
@@ -499,6 +502,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\SceneCollisionMesh.h" />
     <ClInclude Include="..\..\..\..\Source\SerialReqManager.h" />
     <ClInclude Include="..\..\..\..\Source\SetObjMeshCommand.h" />
+    <ClInclude Include="..\..\..\..\Source\ShowMsgHelper.h" />
     <ClInclude Include="..\..\..\..\Source\SpecialConfig.h" />
     <ClInclude Include="..\..\..\..\Source\Sprite.h" />
     <ClInclude Include="..\..\..\..\Source\SpriteNode.h" />
@@ -509,6 +513,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TimePeriodString.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
+    <ClInclude Include="..\..\..\..\Source\TradeType.h" />
     <ClInclude Include="..\..\..\..\Source\Treasure.h" />
     <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
     <ClInclude Include="..\..\..\..\Source\UnCollide.h" />
