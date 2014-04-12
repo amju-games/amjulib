@@ -19,6 +19,8 @@ public:
   void SetMsgId(int msgId) { m_msgId = msgId; }
 
   void OnTradeReject();
+  void OnTradeAccept();
+  void OnTradeCounterOffer();
 
 private:
   int m_msgId;
