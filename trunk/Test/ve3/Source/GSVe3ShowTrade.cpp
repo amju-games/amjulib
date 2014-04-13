@@ -1,12 +1,13 @@
+#include <Game.h>
 #include "GSVe3ShowTrade.h"
 #include "ShowMsgHelper.h"
 #include "Player.h"
-#include "MsgManager.h"
-#include "LocalPlayer.h"
-#include "ObjectManager.h"
 #include "LurkMsg.h"
 #include "GameConsts.h"
 #include "HeartCount.h"
+#include "MsgManager.h"
+#include "LocalPlayer.h"
+#include "GSVe3MakeTradeRequest.h"
 
 namespace Amju
 {
@@ -30,12 +31,12 @@ void GSVe3ShowTrade::OnTradeReject()
   Player* p = GetLocalPlayer();
   std::string lpname = p->GetName();
 
-  const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
-  Assert(msg);
-  Player* other = dynamic_cast<Player*>(
-    TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
+  //const MsgManager::Msg* msg = mm->GetMsg(m_msgId);
+  //Assert(msg);
+  //Player* other = dynamic_cast<Player*>(
+  //  TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
 
-  std::string othername = other->GetName();
+  std::string othername = m_otherTradePlayer->GetName();
 
   // Also a message in our own guestbook?
   // TODO Watch out - can we use "You" in a message??
@@ -45,7 +46,7 @@ void GSVe3ShowTrade::OnTradeReject()
   mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
 
   str = lpname + " rejected your offer!";
-  mm->SendMsg(p->GetId(), other->GetId(), str); // sender, recip, msg
+  mm->SendMsg(p->GetId(), m_otherPlayerId, str); // sender, recip, msg
 
   str = "OK, you rejected the trade.";
   LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
@@ -69,33 +70,35 @@ void GSVe3ShowTrade::OnTradeAccept()
   Player* p = GetLocalPlayer();
   std::string lpname = p->GetName();
 
-  const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
-  Assert(msg);
-  Player* other = dynamic_cast<Player*>(
-    TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
+  //const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
+  //Assert(msg);
+  //Player* other = dynamic_cast<Player*>(
+  //  TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
 
-  std::string othername = other->GetName();
+  //// Get trade info. Make changes to counters for local player and other
+  //int give = 0;
+  //int recv = 0;
+  //TradeType tt = TRADE_NONE;
+  //msg->GetTradeInfo(&give, &recv, &tt);
 
-  // Get trade info. Make changes to counters for local player and other
-  int give = 0;
-  int recv = 0;
-  TradeType tt = TRADE_NONE;
-  msg->GetTradeInfo(&give, &recv, &tt);
-  if (tt == TRADE_FOOD_FOR_TREASURE)
+  Assert(m_otherTradePlayer);
+  std::string othername = m_otherTradePlayer->GetName();
+
+  if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
   {
-    ChangePlayerCount(FOOD_STORED_KEY, give);
-    ChangeObjCount(other->GetId(), FOOD_STORED_KEY, -give);
+    ChangePlayerCount(FOOD_STORED_KEY, m_give);
+    ChangeObjCount(m_otherPlayerId, FOOD_STORED_KEY, -m_give);
 
-    ChangePlayerCount(TREASURE_KEY, -recv);
-    ChangeObjCount(other->GetId(), TREASURE_KEY, recv);
+    ChangePlayerCount(TREASURE_KEY, -m_recv);
+    ChangeObjCount(m_otherPlayerId, TREASURE_KEY, m_recv);
   }
-  else if (tt == TRADE_TREASURE_FOR_FOOD)
+  else if (m_tradeType == TRADE_TREASURE_FOR_FOOD)
   {
-    ChangePlayerCount(TREASURE_KEY, give);
-    ChangeObjCount(other->GetId(), TREASURE_KEY, -give);
+    ChangePlayerCount(TREASURE_KEY, m_give);
+    ChangeObjCount(m_otherPlayerId, TREASURE_KEY, -m_give);
 
-    ChangePlayerCount(FOOD_STORED_KEY, -recv);
-    ChangeObjCount(other->GetId(), FOOD_STORED_KEY, recv);
+    ChangePlayerCount(FOOD_STORED_KEY, -m_recv);
+    ChangeObjCount(m_otherPlayerId, FOOD_STORED_KEY, m_recv);
   }
   else
   {
@@ -103,11 +106,13 @@ void GSVe3ShowTrade::OnTradeAccept()
     return; // lurk msg ?
   }
 
+  // Make string description of trade for the msgs we send
+
   std::string str = "You accepted the trade offered by " + othername + "!";
   mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
 
   str = lpname + " accepted your offer!";
-  mm->SendMsg(p->GetId(), other->GetId(), str); // sender, recip, msg
+  mm->SendMsg(p->GetId(), m_otherPlayerId, str); // sender, recip, msg
 
   str = "OK, you accepted the trade!";
   LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
@@ -116,6 +121,15 @@ void GSVe3ShowTrade::OnTradeAccept()
 
 void GSVe3ShowTrade::OnTradeCounterOffer()
 {
+  // Set up MakeTradeRequest page with counter offer
+  GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
+  // as we are making a counter offer, switch the trade type!
+  mtr->SetTradeType(m_tradeType == TRADE_FOOD_FOR_TREASURE ? 
+    TRADE_TREASURE_FOR_FOOD : TRADE_FOOD_FOR_TREASURE); 
+  // .. and switch give/recv values!
+  mtr->SetGiveRecv(m_recv, m_give);
+
+  TheGame::Instance()->SetCurrentState(mtr);
 }
 
 GSVe3ShowTrade::GSVe3ShowTrade()
@@ -147,6 +161,9 @@ void GSVe3ShowTrade::OnActive()
   Assert(m_gui);
 
   Assert(m_msgId != -1);
+
+  // Get info about trade from msg
+
   ShowMsgHelper(m_msgId, m_gui);
 
   GetElementByName(m_gui, "back-button")->SetCommand(Amju::OnTradeCancel);

@@ -333,6 +333,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\TimePeriodString.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\TitlePerson.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TradeGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\Treasure.cpp" />
     <ClCompile Include="..\..\..\..\Source\UnCollide.cpp" />
     <ClCompile Include="..\..\..\..\Source\UploadNewContent.cpp" />
@@ -513,6 +514,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TimePeriodString.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
+    <ClInclude Include="..\..\..\..\Source\TradeGui.h" />
     <ClInclude Include="..\..\..\..\Source\TradeType.h" />
     <ClInclude Include="..\..\..\..\Source\Treasure.h" />
     <ClInclude Include="..\..\..\..\Source\Tutorial.h" />
