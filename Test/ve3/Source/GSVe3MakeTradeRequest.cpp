@@ -80,7 +80,7 @@ void GSVe3MakeTradeRequest::OnTradeSend()
     return;
   }
 
-  std::string pn = m_player->GetName(); 
+  std::string pn = m_otherTradePlayer->GetName(); 
 
   std::string str = "Hi " + pn + "! ";
   if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
@@ -100,7 +100,7 @@ void GSVe3MakeTradeRequest::OnTradeSend()
   }
 
   MsgManager* mm = TheMsgManager::Instance();
-  mm->SendTradeMsg(p->GetId(), m_player->GetId(), str, nGive, nRecv, m_tradeType); 
+  mm->SendTradeMsg(p->GetId(), m_otherPlayerId, str, nGive, nRecv, m_tradeType); 
     // sender, recip, msg, give num, recv num, trade type
 
   // Also a message in our own guestbook?
@@ -113,16 +113,6 @@ void GSVe3MakeTradeRequest::OnTradeSend()
   TheLurker::Instance()->Queue(lm);    
 }
 
-void GSVe3MakeTradeRequest::SetPlayer(Player* p)
-{
-  m_player = p;
-}
-
-void GSVe3MakeTradeRequest::SetTradeType(TradeType tt)
-{
-  m_tradeType = tt;
-}
-
 void GSVe3MakeTradeRequest::OnActive()
 {
   GSGui::OnActive();
@@ -133,9 +123,9 @@ void GSVe3MakeTradeRequest::OnActive()
   Player* p = GetLocalPlayer();
 
   Assert(m_tradeType != TRADE_NONE);
-  Assert(m_player);
+  Assert(m_otherTradePlayer);
 
-  std::string pn = m_player->GetName(); 
+  std::string pn = m_otherTradePlayer->GetName(); 
   GuiText* t = (GuiText*)GetElementByName(m_gui, "static-text2");
   t->SetText("You can ask " + pn + 
     " if they want to make a trade,"

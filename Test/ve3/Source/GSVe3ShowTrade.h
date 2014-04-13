@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Singleton.h>
-#include "GSGui.h"
+#include "TradeGui.h"
 
 namespace Amju
 {
-class GSVe3ShowTrade : public GSGui
+class GSVe3ShowTrade : public TradeGui
 {
   GSVe3ShowTrade();
   friend class Singleton<GSVe3ShowTrade>;
@@ -16,14 +16,11 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
-  void SetMsgId(int msgId) { m_msgId = msgId; }
-
   void OnTradeReject();
   void OnTradeAccept();
   void OnTradeCounterOffer();
 
 private:
-  int m_msgId;
 };
 typedef Singleton<GSVe3ShowTrade> TheGSVe3ShowTrade;
 }
