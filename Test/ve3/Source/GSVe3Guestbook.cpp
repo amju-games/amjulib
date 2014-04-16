@@ -38,8 +38,12 @@ void GSVe3Guestbook::InitGB()
   GuestbookWindow* gw = (GuestbookWindow*)m_gui->GetElementByName("my-guestbook");
   Assert(gw);
   
+  Assert(m_player);
+  bool isLocalPlayer = m_player->IsLocalPlayer();
+
   MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(ForPlayer(m_player->GetId()));
-  gw->GetGBDisplay()->Init(msgs); 
+  // DO show reply buttons IF this is the local player's guestbook/messages
+  gw->GetGBDisplay()->Init(msgs, isLocalPlayer); 
 }
 
 void GSVe3Guestbook::Update()
