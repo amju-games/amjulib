@@ -14,6 +14,7 @@ void TradeGui::Reset()
 {
   // Values we can sanity check later
   m_otherTradePlayer = nullptr;
+  m_otherPlayerId = -1;
   m_msgId = -1;
   m_give = -1;
   m_recv = -1;
@@ -41,7 +42,7 @@ void TradeGui::SetMsgId(int msgId)
 
 void TradeGui::SetTradeType(TradeType tt)
 {
-  Assert(m_tradeType == -1);
+  Assert(m_tradeType == TRADE_NONE);
 
   m_tradeType = tt;
 }

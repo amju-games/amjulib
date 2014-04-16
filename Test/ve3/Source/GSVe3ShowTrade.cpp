@@ -123,7 +123,11 @@ void GSVe3ShowTrade::OnTradeCounterOffer()
 {
   // Set up MakeTradeRequest page with counter offer
   GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
-  // as we are making a counter offer, switch the trade type!
+  mtr->Reset();
+  // Set ID of other player
+  mtr->SetOtherPlayer(m_otherPlayerId);
+
+  // As we are making a counter offer, switch the trade type!
   mtr->SetTradeType(m_tradeType == TRADE_FOOD_FOR_TREASURE ? 
     TRADE_TREASURE_FOR_FOOD : TRADE_FOOD_FOR_TREASURE); 
   // .. and switch give/recv values!
