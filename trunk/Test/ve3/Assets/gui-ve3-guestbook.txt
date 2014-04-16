@@ -30,7 +30,7 @@ guest-comment
 // pos (coords are -1..1)
 -0.9, -0.6
 // size
-1.4, 0.1
+1.8, 0.1
 // Text
 $$$empty
 // Font name, size
@@ -41,15 +41,15 @@ gui-button
 // Element name
 add-comment-button
 // pos (coords are -1..1)
-0.55, -0.6
+0.1, -0.75
 // size
-0.35, 0.1
+0.8, 0.2
 // Image
 gui-button-4.png
 // Text
 Add comment
 // Font name, size
-arial, 1.0, sx=0.5
+arial, 1.5, sx=1
 
 
 // After text edit box so edit box eats arrow key events first - TODO check this works
@@ -85,7 +85,7 @@ gui-button
 // Element name
 back-button
 // pos (coords are -1..1)
--0.4, -0.75
+-0.9, -0.75
 // size
 0.8, 0.2
 // Image
@@ -93,6 +93,6 @@ gui-button-4.png
 // Text
 Back
 // Font name, size
-arial, 1.5, sx=0.5
+arial, 1.5, sx=1
 
 

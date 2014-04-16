@@ -45,7 +45,20 @@ bool MsgManager::Msg::IsTrade() const
     
 std::string MsgManager::Msg::GetStrippedText() const
 {
-  return m_text; // TODO
+  // HACK: Strip final line, if it begins '<' and ends '>'
+  std::string res = m_text;
+  unsigned int i = res.find_last_of('\n');
+  if (i != std::string::npos)
+  {
+    std::string lastLine = res.substr(i);
+    Trim(&lastLine);
+    // Look for <> -- strip this last line from res?
+    if (!lastLine.empty() && lastLine.front() == '<' && lastLine.back() == '>')
+    {
+      res = res.substr(0, i);
+    }
+  }
+  return res; 
 }
 
 void MsgManager::Msg::GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt) const
