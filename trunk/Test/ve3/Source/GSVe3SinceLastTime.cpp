@@ -32,7 +32,7 @@ void GSVe3SinceLastTime::InitGB()
   Assert(gw);
   
   MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(ForPlayerOrBroadcast(m_player->GetId()));
-  gw->GetGBDisplay()->Init(msgs); 
+  gw->GetGBDisplay()->Init(msgs, true); // DO show reply buttons, right? 
 }
 
 void GSVe3SinceLastTime::OnDeactive()

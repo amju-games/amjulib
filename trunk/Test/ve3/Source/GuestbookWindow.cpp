@@ -84,7 +84,7 @@ GBDisplay* GuestbookWindow::GetGBDisplay()
   return (GBDisplay*)child;
 }
 
-void GBDisplay::Init(const MsgManager::Msgs& msgs)
+void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
 {
   Clear();
 
@@ -193,7 +193,7 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs)
       canReply = false;
     }
 
-    if (canReply)
+    if (addReplyButtons && canReply)
     {
       // Add reply button
       GuiButton* reply = new GuiButton;

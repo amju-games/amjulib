@@ -6,7 +6,13 @@ gui-comp
 // Name
 hud-comp
 // Num children
-16
+17
+
+gui-image
+background-img
+-1, 1.0
+2.0, 0.2
+hud-bg-strip.png
 
 
 // element type
