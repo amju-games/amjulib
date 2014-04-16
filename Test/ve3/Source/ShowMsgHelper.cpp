@@ -15,7 +15,7 @@ void ShowMsgHelper(int msgId, GuiElement* gui)
   // Display msg text
   GuiText* text = (GuiText*)GetElementByName(gui, "orig-msg-text");
   Assert(text);
-  text->SetText(msg->m_text);
+  text->SetText(msg->GetStrippedText());
 
   // mugshot of sender
   Player* sender = dynamic_cast<Player*>(

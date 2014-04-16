@@ -150,6 +150,7 @@ void GSVe3Guestbook::OnActive()
   GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
   if (comment)
   {
+    comment->SetHasFocus(true);
     comment->SetText(m_unfinishedCommentStr);
   }
 }

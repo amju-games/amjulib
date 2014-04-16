@@ -34,10 +34,14 @@ void TradeGui::SetMsgId(int msgId)
   MsgManager* mm = TheMsgManager::Instance();
   const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
   Assert(msg);
-  m_otherTradePlayer = dynamic_cast<Player*>(
-    TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
-  msg->GetTradeInfo(&m_give, &m_recv, &m_tradeType);
 
+  m_otherPlayerId = msg->m_senderId;
+
+  m_otherTradePlayer = dynamic_cast<Player*>(
+    TheObjectManager::Instance()->GetGameObject(m_otherPlayerId).GetPtr());
+  Assert(m_otherTradePlayer);
+
+  msg->GetTradeInfo(&m_give, &m_recv, &m_tradeType);
 }
 
 void TradeGui::SetTradeType(TradeType tt)
@@ -66,6 +70,8 @@ void TradeGui::SetOtherPlayer(int playerId)
 
   m_otherTradePlayer = dynamic_cast<Player*>(
     TheObjectManager::Instance()->GetGameObject(playerId).GetPtr());
+
+  Assert(m_otherTradePlayer);
 }
 
 }

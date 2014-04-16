@@ -132,6 +132,7 @@ void GSVe3ShowTrade::OnTradeCounterOffer()
     TRADE_TREASURE_FOR_FOOD : TRADE_FOOD_FOR_TREASURE); 
   // .. and switch give/recv values!
   mtr->SetGiveRecv(m_recv, m_give);
+  mtr->SetPrevState(GetPrevState()); // after sending counter offer, go back to our prev state
 
   TheGame::Instance()->SetCurrentState(mtr);
 }
