@@ -283,6 +283,10 @@ void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
     }
 
     unsigned int now = Time::Now().ToSeconds();
+
+std::cout << "**PI::SetCurrentPlayer: setting timestamp for " << filename 
+  << " to " << now << "\n";
+
     m_map[filename] = TimestampPlayerInfo(now, pi);
     m_currentPI = pi;
   }
@@ -294,6 +298,8 @@ void PlayerInfoManager::SetCurrentPlayer(const std::string& filename)
 
 Strings PlayerInfoManager::GetPlayerNames() const
 {
+std::cout << "** Getting player names **\n";
+
   // TODO Sort strings in order of use, most recent first, i.e. descending order
 
   typedef std::map<unsigned int, std::string, std::greater<unsigned int> > TimestampName;
@@ -303,6 +309,9 @@ Strings PlayerInfoManager::GetPlayerNames() const
   for (PIMap::const_iterator it = m_map.begin(); it != m_map.end(); ++it)
   {
     unsigned int timestamp = it->second.first;
+
+std::cout << " - Player names: adding " << it->first << " time: " << timestamp << "..\n";
+
     tn[timestamp] = it->first; 
   }
 
@@ -310,8 +319,19 @@ Strings PlayerInfoManager::GetPlayerNames() const
   Strings s;
   for (TimestampName::const_iterator it = tn.begin(); it != tn.end(); ++it)
   {
+std::cout << " - Player names: retrieving " << it->second << " time: " << it->first << "\n";
     s.push_back(it->second);
   }
+
+if (s.empty())
+{
+  std::cout << "No player names!\n";
+}
+else
+{
+  std::cout << "Most recently used player: " << s[0] << "\n";
+}
+std::cout << "** Done with player names **\n";
 
   // TODO something like
 //  std::copy(tn.begin, tn.end, std::back_inserter(s));
