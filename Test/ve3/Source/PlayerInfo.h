@@ -47,7 +47,10 @@ public:
   ~PlayerInfoManager();
 
   void SetCurrentPlayer(const std::string& playerName);
-  PlayerInfo* GetPI(); // gets current player, must be set first
+
+  // gets current player, must be set first with SetCurrentPlayer
+  PlayerInfo* GetPI(); 
+
   Strings GetPlayerNames() const; // returns list of player filenames
   int GetNumPlayerNames() const;
 
