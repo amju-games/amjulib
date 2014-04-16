@@ -50,12 +50,16 @@ void GSChoosePlayer::Draw2d()
 class ChoosePlayerCommand : public GuiCommand
 {
 public:
-  ChoosePlayerCommand(int playerNum, const std::string& email, const std::string& playername) :
-    m_playerNum(playerNum), m_email(email), m_playername(playername) { }
+  ChoosePlayerCommand(int playerNum, const std::string& playername) :
+    m_playerNum(playerNum), m_playername(playername) { }
 
   virtual bool Do()
   {
-    TheGSLoginWaiting::Instance()->SetEmail(m_email);
+    ThePlayerInfoManager::Instance()->SetCurrentPlayer(m_playername);
+    PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
+    Assert(pi);
+    std::string email = pi->PIGetString(PI_KEY("email"));
+    TheGSLoginWaiting::Instance()->SetEmail(email);
     TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
 
     return false;
@@ -63,7 +67,6 @@ public:
 
 private:
   int m_playerNum;
-  std::string m_email;
   std::string m_playername;
 };
 
@@ -105,14 +108,12 @@ std::cout << "GSChoosePlayer: Num players: " << numPlayers << "\n";
 
     if (i < numPlayers)
     {
-      ThePlayerInfoManager::Instance()->SetCurrentPlayer(players[i]);
-      PlayerInfo* pi = ThePlayerInfoManager::Instance()->GetPI();
-      Assert(pi);
-      std::string playername = pi->PIGetString(PI_KEY("playername"));
-      std::string email = pi->PIGetString(PI_KEY("email"));
+      // Get player info without touching timestamp
+      std::string playername = players[i]; 
+      std::string buttonname = Replace(playername, ".txt", "");
 
-      b->SetText(playername);
-      b->SetCommand(new ChoosePlayerCommand(i, email, playername));
+      b->SetText(buttonname);
+      b->SetCommand(new ChoosePlayerCommand(i, playername));
     }
     else if (i == numPlayers)
     {
