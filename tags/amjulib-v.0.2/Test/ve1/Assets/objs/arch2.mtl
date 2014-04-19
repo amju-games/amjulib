@@ -1,0 +1,3 @@
+# j.c. convert leaf file to obj
+newmtl arch2
+map_Kd arch.bmp

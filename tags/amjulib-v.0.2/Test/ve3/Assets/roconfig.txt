@@ -1,0 +1,110 @@
+// ro config
+// version
+1
+
+new-location-show-status 0
+
+// Change this for testing, should be 0
+cogtest-first-test 0
+
+
+// FOOD
+// ====
+num-food-per-foodmgr 3
+// Food AABB
+food-aabb-x  20
+// TODO All heights should be hardcoded now this is 2D
+food-aabb-y  10
+food-aabb-z  20
+
+// Show number of non-critical errors, critical errors, and Queue size in GSMain
+show-errors 0
+
+// Requests are serialised, so no desperate need to cap number of downloads.
+net-max-conc-downloads  100
+
+// Avatar scale
+scale-min-x 0.5
+scale-max-x 1.5
+scale-min-y 0.5
+scale-max-y 1.5
+
+// Start position on new game/reset
+start-loc    1
+// This pos should be OK in all locations
+start-pos    0,0,0
+
+// scrolling texture effect in GUI states
+scope-speed  0.05
+
+// Sound
+max-vol  0.1
+music-title sound/hammers.it
+music-menu sound/piano.it
+sound-got-collect sound/cashreg.wav
+sound-npc-trigger sound/whistlehere.wav
+
+sound-new-lurkmsg sound/pop.wav
+sound-new-cogtest sound/gong.wav
+sound-rt-go  sound/alarme.wav
+sound-cogtest-fail sound/fail.wav
+sound-cogtest-correct sound/bell_tinkle.wav
+
+ve1obj-max-jump 20.0
+
+// max distance to get context menu for object
+menu-obj-distance 500
+
+// Max distance from player you can click
+max-click-dist    2000
+
+// Time period between cog test nags
+cog-test-nag-time 120
+
+// NPCs - no longer used ?
+npc-max-follow-dist 200.0
+npc-trigger-delay 10.0
+npc-max-follow-dist  75.0
+
+
+// Camera
+// initial dist from cam to player
+cam-z           250
+// initial x rot (i.e. altitude angle)
+cam-xrot        20
+// User drag sensitivity
+cam-xrot-scale  2
+cam-yrot-scale  10
+
+// Dist in screen space to count as a camera drag
+// (Full screen width is 2)
+cam-drag_min    0.0
+
+// Dist from camera to portals before camera rotates to face (not needed if camera rotates freely)
+portal-max-dist  400
+
+// Collide with walls: push away by this much extra (multiply) so we don't slowly get through non-vertical walls 
+extra-push  1.1
+// distance to arrow destination when we consider it reached
+stop-dist  20
+
+gravity  -50
+
+// height above player where picked-up object floats
+pickup-y    60
+
+// Player AABB
+player-aabb-x  16
+player-aabb-y  10
+player-aabb-z  24
+show-aabb     n
+
+
+// View dist, which increases - player can only see objects to this dist
+player-min-view-dist 200
+
+// Broadcast chat - how many lines
+chat-max-lines    8
+
+// Cut off point for treating sloping floors as walls
+vertical-y  0.8

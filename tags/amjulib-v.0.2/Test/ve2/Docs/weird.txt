@@ -1,0 +1,91 @@
+WEIRD
+
+
+FINISH TRAIL MAKING TEST
+
+OTHER TESTS
+
+TODO Balance how much score improvement we get for giving food, for Stroop tests, etc.
+ (grep SCORE_KEY)
+
+Scoring etc:
+ - you have a SCORE which only goes up - OK
+ - you have health which can go down on contact with baddies. Replenished with food. 
+  - if health hits zero, you die - back to room 1. -- OK!
+ - bonus items to collect (treasure) 
+
+
+Baddies 
+ - static -- OK
+ - animated - have harmless/harmful state
+ - moving
+
+- general sprite-based type, or node type?
+
+
+Unravelling the mess of scores, health, stamina, persistent data, etc.
+======================================================================
+
+GSMain::SetScore() -- called by player when SCORE_KEY changes.
+
+Player collides with food:
+In single player: +1 score (SCORE_KEY). +1 FOOD_EATEN_KEY
+
+In multi player: food is given from one player to another.
+When given food: +1 score for giver and recipient. 
+ +1 FOOD_RECEIVED_KEY for recipient. +1 FOOD_GIVEN_KEY for giver.
+
+OK - improvements:
+ - immediately update score. Show score changing, e.g. font momentarily jumps
+ - show sparkly effect
+
+
+
+
+*You can throw rocks at baddies* 
+But big baddies need lots of hits, so collab.
+BUT this means shared view of baddie.
+This can work on a private per-client.
+
+
+Game start pos can be in a wall
+Food gets put in wrong place
+ - both due to Room not being centred at origin. 
+ - OK - but rooms too small. Still not sure about tile size
+
+
+Game Objects are bunched up at (0, 0)
+ - Only food now: not downloading other game objs. Set them in room file.
+  - OK, but coll det not working - fixed, pos
+
+
+Fix offsets for room-room navigation
+ - i.e. you shouldn't have to go so far off screen to exit to next room
+
+
+Implement obstacles - DONE
+
+????
+Coll det: use 2D, NOT AABBs. Don't cull in scene graph.
+
+
+
+?????
+Camera: don't always follow player, depends on distance to room edge.
+This is to avoid seeing the black space outside the room.
+(Ortho proj)
+
+
+Notifications
+ - why are they not working - OK, working now.
+ - I thought they were supposed to be turned off but they are not in login.pl or sendnotification.pl
+ ...UNSOLVED: Where did they get turned off?!!
+
+
+Locations
+ - where is loc 57 coming from??
+ - why not in Windows build??
+ - OK, was because using localhost on Mac.
+
+ STROOP - 4 buttons
+

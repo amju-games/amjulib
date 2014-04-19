@@ -1,0 +1,186 @@
+IDEAS FOR BADDIES
+=================
+Associate different baddie types with different environments.
+E.g. snakes live in Log piles.
+
+ANTS! - leafcutter ants - you have to get through gaps. Patrol behaviour.
+ - Make the ants and leaves separate for different combos. The leaves
+  don't give you damage.
+ ** Some leaves could be beneficial**
+
+Flies buzzing around in a cloud.
+Give each fly a different patrol dir and rect.
+
+Other insects - but currently baddies don't face their direction.
+
+Arrows which whizz across screen - this is also a Patrol job.
+Give a long rect - much longer than room.
+
+Spiders: start off with one big one, quite slow. 
+Many small ones is difficult to deal with, so comes in a more advanced room.
+Could be patrol or chase.
+
+Differnt coloured spiders.
+
+Spikes which shoot out of holes - this is Toggle behaviour.
+
+Fire: needs a good fire sprite sheet. Could be a Toggle.
+Moving sheets of fire, using Patrol.
+
+Rolling barrels - Patrol.
+
+Fleeing baddies give health boost
+
+Rocks - stationary - chase speed 0.
+they are baddies so can be shot, revealing new rooms. Look slightly different.
+Baddie statues.
+
+Venus fly trap - toggle
+
+Snake - patrol
+
+Spider on web thread, comes from top of screen - patrol
+
+Birds - fly up -- patrol. 
+Big birds walk across screen - patrol
+
+Bats - could swarm - chase.
+
+Lava pools - in sandy/rocky locations
+
+FISH in water
+
+Blinking eyes in the dark - toggle
+ - or can use Harmless ?
+
+
+BOSSES
+======
+
+Simply multiple baddies, but need to keep relative position. So Patrol only.
+TODO Detect when all constituent baddies have been destroyed.
+
+Spider Skull boss:
+Skull with spiders coming out of his mouth etc - patrol, so they reappear in mouth.
+
+
+MORE "HARMLESS" DECORATION
+==========================
+
+Trees, flowers, vines/creepers.
+Can hide baddies, treasure, or exits to other rooms.
+Stone paving etc should be harmless overlays, to minimise combinatorial number of tiles
+
+Can use this for water etc?
+
+
+
+
+
+
+// Skull
+// Chase speed
+//50
+// Time: harmless range
+2
+3
+// Time: harmful range
+2
+3
+// Cell range: harmless
+0
+0
+// Cell range: harmful
+0
+0
+// Sounds for harmless/harmful state change
+<none>
+<none>
+
+// Spikes
+
+// Chase speed
+0
+// Time: harmless range
+2
+3
+// Time: harmful range
+2
+3
+// Cell range: harmless
+1
+1
+// Cell range: harmful
+0
+0
+// Sounds for harmless/harmful state change
+<none>
+// TODO Want Knife Shinggggg
+sound/pop.wav
+
+
+
+// WATER
+baddie
+// Pos -- behind so always under player
+100, -1, -50
+// Tex
+water1.png
+// Num cells
+2,1
+// Size
+150, 150
+// Damage to player on collision
+0
+// Max health: -1 == indestructible
+-1
+// Points
+0
+// Behaviour
+none
+
+// TREASURE
+treasure
+// pos
+100, 0, 100
+// tex
+diamond1.png
+// cells
+4, 1
+// points
+1000
+
+
+
+harmless
+sunflowers.png
+0, 0, 50
+1, 1
+400, 100
+
+harmless
+sunflowers.png
+0, 0, -50
+1, 1
+400, 100
+
+baddie
+0, 0, 250
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+20, 20
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Behaviour
+chase
+// speed
+40
+
+

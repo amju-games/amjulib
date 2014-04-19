@@ -1,0 +1,160 @@
+// ROOM 71
+// Version
+1
+
+// type
+room
+// Num textures
+5
+// 1 - 5
+ground7-1.png
+ground7-2.png
+rock1.png
+rock3.png
+rock2.png
+
+// (x, y) Size of grid
+7, 5
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+1  1  2  1  1  1  2
+1  1  1  1  2  1  1
+2  1  1  1  1  1  1
+1  1  1  2  1  1  2
+1  2  2  2  2  2  1
+// Obstacles grid
+3  4  3  4  3  5  5 
+4  0  0  0  0  0  4
+3  0  0  0  0  0  0
+4  0  0  0  0  0  3
+5  4  3  0  3  5  5 
+
+// Destinations N, S, E>, W<
+0, 70, 72, 0
+
+// music
+sound/rainforest.it
+
+
+
+// TREASURE
+treasure
+// pos
+0, 0, -50
+// tex
+diamond4.png
+// cells
+4, 1
+// points
+1000
+
+// Spiders 
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+30, 50
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
+// Sound
+$$$empty
+
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+-20, 40
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
+// Sound
+$$$empty
+
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+-30, -40
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
+// Sound
+$$$empty
+
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+20, -50
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -150, 150
+// Reverse flag
+1
+// Sound
+$$$empty
+
+

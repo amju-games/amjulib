@@ -1,0 +1,3 @@
+# j.c. convert leaf file to obj
+newmtl gate2
+map_Kd gate2.bmp

@@ -1,0 +1,99 @@
+// ROOM 72
+// Version
+1
+
+// type
+room
+// Num textures
+5
+// 1 - 5
+ground7-1.png
+ground7-2.png
+rock1.png
+rock3.png
+rock2.png
+
+// (x, y) Size of grid
+7, 7
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+0  0  1  1  1  0  0
+0  0  2  1  1  0  0
+1  1  1  1  2  1  1
+2  1  1  1  1  1  1
+1  1  1  2  1  1  2
+0  0  2  1  2  0  0
+0  0  2  2  2  0  0
+// Obstacles grid
+0  0  3  0  4  0  0 
+0  0  4  0  3  0  0 
+4  3  5  0  4  5  3
+0  0  0  0  0  0  0
+4  3  5  0  4  5  3
+0  0  3  0  4  0  0 
+0  0  4  0  3  0  0 
+
+// Destinations N, S, E>, W<
+74, 73, 75, 71
+
+// music
+sound/rainforest.it
+
+
+
+
+// Spiders 
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+100, 0
+// Rect (xmin, xmax, ymin, ymax)
+-350,350, -150, 150
+// Reverse flag
+1
+// Sound
+$$$empty
+
+baddie
+0, 0, 0
+// Tex
+spider2.png
+// Num cells
+2,1
+// Size
+30, 30
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+5
+// Attack str
+was bitten by a spider!
+// Behaviour
+patrol
+// Dir
+0, 140
+// Rect (xmin, xmax, ymin, ymax)
+-250,250, -250, 250
+// Reverse flag
+1
+// Sound
+$$$empty
+

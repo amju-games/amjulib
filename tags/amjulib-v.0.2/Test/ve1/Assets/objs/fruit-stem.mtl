@@ -1,0 +1,4 @@
+# j.c. convert leaf file to obj
+newmtl fruit-stem
+map_Kd fruit1.bmp
+Ns 1

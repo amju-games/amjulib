@@ -1,0 +1,69 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+5
+
+
+gui-button
+quick-start-button
+-0.5, -0.2
+1.0, 0.25 
+gui-button-4.png
+quick start
+arial, 2.5 
+
+gui-button
+start-button
+// pos (coords are -1..1)
+-0.4, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+start...
+// Font name, size
+arial, 2.0 
+
+
+gui-button
+options-button
+// pos (coords are -1..1)
+-0.4, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+options...
+// Font name, size
+arial, 1.75 
+
+
+gui-button
+quit-button
+0.5, 0.8
+0.4, 0.1
+gui-button-4.png
+quit
+arial, 1.0 
+
+
+// Element type
+gui-text
+// Element name
+version
+// pos (coords are -1..1)
+-1.0, 1.0 
+// size
+0.8, 0.1
+// Text
+v.0.3 in progress
+// Font name, size
+arial, 0.75, left, bgcol=000000, fgcol=ffffff
+

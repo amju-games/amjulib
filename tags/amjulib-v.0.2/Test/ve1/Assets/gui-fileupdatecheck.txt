@@ -1,0 +1,40 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+2
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.2
+// size
+2.0, 0.1
+// Text
+Checking for updated files...
+// Font name, size
+arial, 1.0, fgcol=ffffff
+
+// Button
+// element type
+gui-button
+// Element name
+skip-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+skip
+// Font name, size
+arial, 2.0
+

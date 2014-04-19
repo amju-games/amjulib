@@ -1,0 +1,40 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+thanks-comp
+// Num children
+4
+
+gui-button
+thanks-calendar-button
+-0.9, -0.7
+0.8, 0.2
+gui-button-4.png
+view calendar
+arial, 1.5, sx=0.8
+
+gui-button
+thanks-ok-button
+0.1, -0.7
+0.8, 0.2
+gui-button-4.png
+no thanks
+arial, 1.5
+
+gui-text
+story-text
+-0.8, 0.9
+1.6, 0.2
+Thank you!
+arial, 2.0, fgcol=ffffff
+
+gui-text
+long-text
+-0.9, 0.6
+1.8, 1.2
+$$$empty
+arial, 1.0, multi, fgcol=ffffff
+

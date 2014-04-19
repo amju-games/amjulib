@@ -1,0 +1,127 @@
+// Show/reply to trade page
+// version
+1
+
+// Element type
+gui-comp
+// Name
+show-trade-comp
+// Num children
+8
+
+// Title bar 
+// Element type
+gui-text
+// Element name
+static-text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+Reply to Trade
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// Background 
+gui-rect
+actions-bg
+// Pos, size
+-0.95, 0.75
+1.9, 0.7 
+// Colour
+c0c0c0
+// Corner radius
+0.03
+// flags
+0
+
+// Element type
+gui-text
+// Element name
+orig-msg-text
+// pos (coords are -1..1)
+-0.6, 0.7
+// size
+1.5, 0.5
+// Text
+<original msg text>
+// Font name, size
+arial, 1.0, fgcol=000000, multi
+
+// Element type
+gui-text
+// Element name
+static-text
+// pos (coords are -1..1)
+-0.9, -0.1
+// size
+1.8, 0.1
+// Text
+What would you like to do?
+// Font name, size
+arial, 1.0, fgcol=ffffff, bgcol=ff0000
+
+
+// element type
+gui-button
+// Element name
+back-button
+// pos (coords are -1..1)
+-0.9, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Uhh, deal with it later
+// Font name, size
+arial, 1.5, sx=0.7
+
+
+
+// element type
+gui-button
+// Element name
+accept-button
+// pos (coords are -1..1)
+0.1, -0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Make this trade!
+// Font name, size
+arial, 1.5, sx=0.7
+
+// element type
+gui-button
+// Element name
+reject-button
+// pos (coords are -1..1)
+-0.9, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+That's crazy! I refuse!
+// Font name, size
+arial, 1.5, sx=0.7
+
+// element type
+gui-button
+// Element name
+counter-button
+// pos (coords are -1..1)
+0.1, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Make a counter offer...
+// Font name, size
+arial, 1.5, sx=0.7
+

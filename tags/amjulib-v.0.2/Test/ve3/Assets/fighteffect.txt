@@ -1,0 +1,12 @@
+// v
+1
+
+// Effect
+// image - TODO TEMP TEST
+wh8.png
+// size
+1.0
+// number
+20
+// max time
+3.0

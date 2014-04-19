@@ -1,0 +1,3 @@
+# j.c. convert leaf file to obj
+newmtl pz-gate-solid
+map_Kd black8.bmp

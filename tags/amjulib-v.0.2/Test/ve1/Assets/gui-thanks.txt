@@ -1,0 +1,70 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+thanks-comp
+// Num children
+4
+
+gui-button
+thanks-calendar-button
+-0.9, -0.7
+0.8, 0.2
+gui-button-4.png
+view calendar
+arial, 1.5, sx=0.8
+
+gui-button
+thanks-ok-button
+0.1, -0.7
+0.8, 0.2
+gui-button-4.png
+no thanks
+arial, 1.5
+
+gui-text
+story-text
+-0.8, 0.9
+1.6, 0.2
+Thank you!
+arial, 2.0, fgcol=ffffff
+
+gui-text
+long-text
+-0.9, 0.6
+1.8, 1.2
+// Ah crap. The multi flag needs to come before the text is set. So set long text in code... sigh
+Thanks for participating in this research project! I hope you find it enjoyable.\n\nYou are asked to play this game a total of 8 times, over the course of 4 weeks. I will show you a calendar of when to play.\n\nIn the game, you are asked to take some tests. This is part of the research project, and I am sorry if it's a bit boring.\n\nWould you like to see the calendar now?
+arial, 1.0, multi, fgcol=ffffff
+
+
+
+// Heart image
+gui-image
+heart-img
+0.7, 1.0
+0.2, 0.25
+heart.png
+
+// Num hearts text
+gui-text
+heart-num
+0.6, 0.9
+0.3, 0.1
+// Text
+0
+cheri, 1.0, fgcol=ffffff
+
+
+// cancel button
+gui-button
+no-prac-button
+-0.2, -1.7
+0.4, 0.1
+gui-button-4.png
+cancel
+arial, 1.0 
+
+

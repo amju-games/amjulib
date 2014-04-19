@@ -1,0 +1,24 @@
+<html>
+<head>
+
+</head>
+<body>
+<img src="../mygame.png" align=center>
+<p style="font-family:Arial">
+<br><br>
+<b>Create a new portal</b>
+<br><br>
+
+
+<form type="hidden" name="MAX_FILE_SIZE" value="500" action="../../cgi-bin/newportal.pl" style="font-family:Arial" method="post" enctype="multipart/form-data">
+Source location ID: <input type="text" name="src_id" />
+x: <input type="text" name="src_x"> y: <input type="text" name="src_y"> z: <input type="text" name="src_z">
+<br>
+Dest location ID: <input type="text" name="dest_id" />
+x: <input type="text" name="dest_x"> y: <input type="text" name="dest_y"> z: <input type="text" name="dest_z">
+<input type="submit" value="Create" /> 
+</form>
+
+</body>
+</html>
+

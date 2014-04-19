@@ -1,0 +1,3 @@
+# j.c. convert leaf file to obj
+newmtl wm2
+map_Kd wm2.bmp

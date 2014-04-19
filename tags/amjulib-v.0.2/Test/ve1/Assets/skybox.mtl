@@ -1,0 +1,4 @@
+newmtl lambert2SG
+map_Kd sky2.png
+flags 0
+Ns 1.0

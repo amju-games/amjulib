@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DCA37241265BD5100691BC1 /* GlueMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37231265BD5100691BC1 /* GlueMain.cpp */; };
+		6DCA37451265BDD400691BC1 /* CsvTokeniser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA372D1265BDD400691BC1 /* CsvTokeniser.cpp */; };
+		6DCA37461265BDD400691BC1 /* Directory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA372F1265BDD400691BC1 /* Directory.cpp */; };
+		6DCA37471265BDD400691BC1 /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37311265BDD400691BC1 /* Endian.cpp */; };
+		6DCA37481265BDD400691BC1 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37331265BDD400691BC1 /* File.cpp */; };
+		6DCA37491265BDD400691BC1 /* FileImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37351265BDD400691BC1 /* FileImpl.cpp */; };
+		6DCA374A1265BDD400691BC1 /* FileImplGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37371265BDD400691BC1 /* FileImplGlue.cpp */; };
+		6DCA374B1265BDD400691BC1 /* FileImplMem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37391265BDD400691BC1 /* FileImplMem.cpp */; };
+		6DCA374C1265BDD400691BC1 /* FileImplStd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA373B1265BDD400691BC1 /* FileImplStd.cpp */; };
+		6DCA374D1265BDD400691BC1 /* FileSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA373D1265BDD400691BC1 /* FileSize.cpp */; };
+		6DCA374E1265BDD400691BC1 /* GlueFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA373F1265BDD400691BC1 /* GlueFile.cpp */; };
+		6DCA374F1265BDD400691BC1 /* GlueFileMem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37411265BDD400691BC1 /* GlueFileMem.cpp */; };
+		6DCA37501265BDD400691BC1 /* Tokeniser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37431265BDD400691BC1 /* Tokeniser.cpp */; };
+		6DCA377E1265C0A200691BC1 /* AmjuAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37701265C0A200691BC1 /* AmjuAssert.cpp */; };
+		6DCA37811265C0A200691BC1 /* SchAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA377A1265C0A200691BC1 /* SchAssert.cpp */; };
+		6DCA37971265C18000691BC1 /* AmjuMem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37921265C18000691BC1 /* AmjuMem.cpp */; };
+		6DCA37981265C18000691BC1 /* CallStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37941265C18000691BC1 /* CallStack.cpp */; };
+		6DCA37A51265C1A700691BC1 /* SafeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37A01265C1A700691BC1 /* SafeUtils.cpp */; };
+		6DCA37A61265C1A700691BC1 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37A21265C1A700691BC1 /* StringUtils.cpp */; };
+		6DCA37AC1265C1CD00691BC1 /* Localise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA37AA1265C1CD00691BC1 /* Localise.cpp */; };
+		6DCA37CC1265C43F00691BC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCA37CB1265C43F00691BC1 /* Carbon.framework */; };
+		8DD76F6A0486A84900D96B5E /* Glue-MacOSX.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Glue-MacOSX.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* Glue-MacOSX.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6DCA37231265BD5100691BC1 /* GlueMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlueMain.cpp; path = ../../Source/GlueMain.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA372C1265BDD400691BC1 /* BinaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryData.h; sourceTree = "<group>"; };
+		6DCA372D1265BDD400691BC1 /* CsvTokeniser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CsvTokeniser.cpp; sourceTree = "<group>"; };
+		6DCA372E1265BDD400691BC1 /* CsvTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CsvTokeniser.h; sourceTree = "<group>"; };
+		6DCA372F1265BDD400691BC1 /* Directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Directory.cpp; sourceTree = "<group>"; };
+		6DCA37301265BDD400691BC1 /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Directory.h; sourceTree = "<group>"; };
+		6DCA37311265BDD400691BC1 /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Endian.cpp; sourceTree = "<group>"; };
+		6DCA37321265BDD400691BC1 /* Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
+		6DCA37331265BDD400691BC1 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
+		6DCA37341265BDD400691BC1 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
+		6DCA37351265BDD400691BC1 /* FileImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileImpl.cpp; sourceTree = "<group>"; };
+		6DCA37361265BDD400691BC1 /* FileImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileImpl.h; sourceTree = "<group>"; };
+		6DCA37371265BDD400691BC1 /* FileImplGlue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileImplGlue.cpp; sourceTree = "<group>"; };
+		6DCA37381265BDD400691BC1 /* FileImplGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileImplGlue.h; sourceTree = "<group>"; };
+		6DCA37391265BDD400691BC1 /* FileImplMem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileImplMem.cpp; sourceTree = "<group>"; };
+		6DCA373A1265BDD400691BC1 /* FileImplMem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileImplMem.h; sourceTree = "<group>"; };
+		6DCA373B1265BDD400691BC1 /* FileImplStd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileImplStd.cpp; sourceTree = "<group>"; };
+		6DCA373C1265BDD400691BC1 /* FileImplStd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileImplStd.h; sourceTree = "<group>"; };
+		6DCA373D1265BDD400691BC1 /* FileSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSize.cpp; sourceTree = "<group>"; };
+		6DCA373E1265BDD400691BC1 /* FileSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSize.h; sourceTree = "<group>"; };
+		6DCA373F1265BDD400691BC1 /* GlueFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlueFile.cpp; sourceTree = "<group>"; };
+		6DCA37401265BDD400691BC1 /* GlueFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlueFile.h; sourceTree = "<group>"; };
+		6DCA37411265BDD400691BC1 /* GlueFileMem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlueFileMem.cpp; sourceTree = "<group>"; };
+		6DCA37421265BDD400691BC1 /* GlueFileMem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlueFileMem.h; sourceTree = "<group>"; };
+		6DCA37431265BDD400691BC1 /* Tokeniser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tokeniser.cpp; sourceTree = "<group>"; };
+		6DCA37441265BDD400691BC1 /* Tokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokeniser.h; sourceTree = "<group>"; };
+		6DCA37701265C0A200691BC1 /* AmjuAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuAssert.cpp; path = ../../../../Source/Utils/AmjuAssert.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37711265C0A200691BC1 /* AmjuAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmjuAssert.h; path = ../../../../Source/Utils/AmjuAssert.h; sourceTree = SOURCE_ROOT; };
+		6DCA37721265C0A200691BC1 /* AmjuTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmjuTypes.h; path = ../../../../Source/Utils/AmjuTypes.h; sourceTree = SOURCE_ROOT; };
+		6DCA37731265C0A200691BC1 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../../../../Source/Utils/Common.h; sourceTree = SOURCE_ROOT; };
+		6DCA37741265C0A200691BC1 /* NonCopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NonCopyable.h; path = ../../../../Source/Utils/NonCopyable.h; sourceTree = SOURCE_ROOT; };
+		6DCA37751265C0A200691BC1 /* RCPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCPtr.h; path = ../../../../Source/Utils/RCPtr.h; sourceTree = SOURCE_ROOT; };
+		6DCA377A1265C0A200691BC1 /* SchAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SchAssert.cpp; path = ../../../../Source/Utils/SchAssert.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA377B1265C0A200691BC1 /* schassert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = schassert.h; path = ../../../../Source/Utils/schassert.h; sourceTree = SOURCE_ROOT; };
+		6DCA377C1265C0A200691BC1 /* SharedPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SharedPtr.h; path = ../../../../Source/Utils/SharedPtr.h; sourceTree = SOURCE_ROOT; };
+		6DCA377D1265C0A200691BC1 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../../../../Source/Utils/Singleton.h; sourceTree = SOURCE_ROOT; };
+		6DCA37901265C18000691BC1 /* AmjuFinal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmjuFinal.h; path = ../../../../Source/Mem/AmjuFinal.h; sourceTree = SOURCE_ROOT; };
+		6DCA37911265C18000691BC1 /* AmjuFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmjuFirst.h; path = ../../../../Source/Mem/AmjuFirst.h; sourceTree = SOURCE_ROOT; };
+		6DCA37921265C18000691BC1 /* AmjuMem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuMem.cpp; path = ../../../../Source/Mem/AmjuMem.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37931265C18000691BC1 /* AmjuMem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmjuMem.h; path = ../../../../Source/Mem/AmjuMem.h; sourceTree = SOURCE_ROOT; };
+		6DCA37941265C18000691BC1 /* CallStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CallStack.cpp; path = ../../../../Source/Mem/CallStack.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37951265C18000691BC1 /* CallStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallStack.h; path = ../../../../Source/Mem/CallStack.h; sourceTree = SOURCE_ROOT; };
+		6DCA37961265C18000691BC1 /* MemCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemCheck.h; path = ../../../../Source/Mem/MemCheck.h; sourceTree = SOURCE_ROOT; };
+		6DCA37A01265C1A700691BC1 /* SafeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SafeUtils.cpp; path = ../../../../Source/Strings/SafeUtils.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37A11265C1A700691BC1 /* SafeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SafeUtils.h; path = ../../../../Source/Strings/SafeUtils.h; sourceTree = SOURCE_ROOT; };
+		6DCA37A21265C1A700691BC1 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringUtils.cpp; path = ../../../../Source/Strings/StringUtils.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37A31265C1A700691BC1 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringUtils.h; path = ../../../../Source/Strings/StringUtils.h; sourceTree = SOURCE_ROOT; };
+		6DCA37AA1265C1CD00691BC1 /* Localise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Localise.cpp; path = ../../../../Source/Localise/Localise.cpp; sourceTree = SOURCE_ROOT; };
+		6DCA37AB1265C1CD00691BC1 /* Localise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Localise.h; path = ../../../../Source/Localise/Localise.h; sourceTree = SOURCE_ROOT; };
+		6DCA37CB1265C43F00691BC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		8DD76F6C0486A84900D96B5E /* Glue-MacOSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Glue-MacOSX"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* Glue-MacOSX.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = "Glue-MacOSX.1"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCA37CC1265C43F00691BC1 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* Glue-MacOSX */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				6DCA37CB1265C43F00691BC1 /* Carbon.framework */,
+			);
+			name = "Glue-MacOSX";
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA37A91265C1BB00691BC1 /* Localise */,
+				6DCA379D1265C18D00691BC1 /* StringUtils */,
+				6DCA378F1265C16A00691BC1 /* Mem */,
+				6DCA378E1265C15F00691BC1 /* Utils */,
+				6DCA372B1265BDD400691BC1 /* FileUtils */,
+				6DCA37231265BD5100691BC1 /* GlueMain.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* Glue-MacOSX */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DCA372B1265BDD400691BC1 /* FileUtils */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA372C1265BDD400691BC1 /* BinaryData.h */,
+				6DCA372D1265BDD400691BC1 /* CsvTokeniser.cpp */,
+				6DCA372E1265BDD400691BC1 /* CsvTokeniser.h */,
+				6DCA372F1265BDD400691BC1 /* Directory.cpp */,
+				6DCA37301265BDD400691BC1 /* Directory.h */,
+				6DCA37311265BDD400691BC1 /* Endian.cpp */,
+				6DCA37321265BDD400691BC1 /* Endian.h */,
+				6DCA37331265BDD400691BC1 /* File.cpp */,
+				6DCA37341265BDD400691BC1 /* File.h */,
+				6DCA37351265BDD400691BC1 /* FileImpl.cpp */,
+				6DCA37361265BDD400691BC1 /* FileImpl.h */,
+				6DCA37371265BDD400691BC1 /* FileImplGlue.cpp */,
+				6DCA37381265BDD400691BC1 /* FileImplGlue.h */,
+				6DCA37391265BDD400691BC1 /* FileImplMem.cpp */,
+				6DCA373A1265BDD400691BC1 /* FileImplMem.h */,
+				6DCA373B1265BDD400691BC1 /* FileImplStd.cpp */,
+				6DCA373C1265BDD400691BC1 /* FileImplStd.h */,
+				6DCA373D1265BDD400691BC1 /* FileSize.cpp */,
+				6DCA373E1265BDD400691BC1 /* FileSize.h */,
+				6DCA373F1265BDD400691BC1 /* GlueFile.cpp */,
+				6DCA37401265BDD400691BC1 /* GlueFile.h */,
+				6DCA37411265BDD400691BC1 /* GlueFileMem.cpp */,
+				6DCA37421265BDD400691BC1 /* GlueFileMem.h */,
+				6DCA37431265BDD400691BC1 /* Tokeniser.cpp */,
+				6DCA37441265BDD400691BC1 /* Tokeniser.h */,
+			);
+			name = FileUtils;
+			path = ../../../../Source/FileUtils;
+			sourceTree = SOURCE_ROOT;
+		};
+		6DCA378E1265C15F00691BC1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA37701265C0A200691BC1 /* AmjuAssert.cpp */,
+				6DCA37711265C0A200691BC1 /* AmjuAssert.h */,
+				6DCA37721265C0A200691BC1 /* AmjuTypes.h */,
+				6DCA37731265C0A200691BC1 /* Common.h */,
+				6DCA37741265C0A200691BC1 /* NonCopyable.h */,
+				6DCA37751265C0A200691BC1 /* RCPtr.h */,
+				6DCA377A1265C0A200691BC1 /* SchAssert.cpp */,
+				6DCA377B1265C0A200691BC1 /* schassert.h */,
+				6DCA377C1265C0A200691BC1 /* SharedPtr.h */,
+				6DCA377D1265C0A200691BC1 /* Singleton.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		6DCA378F1265C16A00691BC1 /* Mem */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA37901265C18000691BC1 /* AmjuFinal.h */,
+				6DCA37911265C18000691BC1 /* AmjuFirst.h */,
+				6DCA37921265C18000691BC1 /* AmjuMem.cpp */,
+				6DCA37931265C18000691BC1 /* AmjuMem.h */,
+				6DCA37941265C18000691BC1 /* CallStack.cpp */,
+				6DCA37951265C18000691BC1 /* CallStack.h */,
+				6DCA37961265C18000691BC1 /* MemCheck.h */,
+			);
+			name = Mem;
+			sourceTree = "<group>";
+		};
+		6DCA379D1265C18D00691BC1 /* StringUtils */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA37A01265C1A700691BC1 /* SafeUtils.cpp */,
+				6DCA37A11265C1A700691BC1 /* SafeUtils.h */,
+				6DCA37A21265C1A700691BC1 /* StringUtils.cpp */,
+				6DCA37A31265C1A700691BC1 /* StringUtils.h */,
+			);
+			name = StringUtils;
+			sourceTree = "<group>";
+		};
+		6DCA37A91265C1BB00691BC1 /* Localise */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA37AA1265C1CD00691BC1 /* Localise.cpp */,
+				6DCA37AB1265C1CD00691BC1 /* Localise.h */,
+			);
+			name = Localise;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* Glue-MacOSX.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* Glue-MacOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Glue-MacOSX" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Glue-MacOSX";
+			productInstallPath = "$(HOME)/bin";
+			productName = "Glue-MacOSX";
+			productReference = 8DD76F6C0486A84900D96B5E /* Glue-MacOSX */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Glue-MacOSX" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* Glue-MacOSX */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* Glue-MacOSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCA37241265BD5100691BC1 /* GlueMain.cpp in Sources */,
+				6DCA37451265BDD400691BC1 /* CsvTokeniser.cpp in Sources */,
+				6DCA37461265BDD400691BC1 /* Directory.cpp in Sources */,
+				6DCA37471265BDD400691BC1 /* Endian.cpp in Sources */,
+				6DCA37481265BDD400691BC1 /* File.cpp in Sources */,
+				6DCA37491265BDD400691BC1 /* FileImpl.cpp in Sources */,
+				6DCA374A1265BDD400691BC1 /* FileImplGlue.cpp in Sources */,
+				6DCA374B1265BDD400691BC1 /* FileImplMem.cpp in Sources */,
+				6DCA374C1265BDD400691BC1 /* FileImplStd.cpp in Sources */,
+				6DCA374D1265BDD400691BC1 /* FileSize.cpp in Sources */,
+				6DCA374E1265BDD400691BC1 /* GlueFile.cpp in Sources */,
+				6DCA374F1265BDD400691BC1 /* GlueFileMem.cpp in Sources */,
+				6DCA37501265BDD400691BC1 /* Tokeniser.cpp in Sources */,
+				6DCA377E1265C0A200691BC1 /* AmjuAssert.cpp in Sources */,
+				6DCA37811265C0A200691BC1 /* SchAssert.cpp in Sources */,
+				6DCA37971265C18000691BC1 /* AmjuMem.cpp in Sources */,
+				6DCA37981265C18000691BC1 /* CallStack.cpp in Sources */,
+				6DCA37A51265C1A700691BC1 /* SafeUtils.cpp in Sources */,
+				6DCA37A61265C1A700691BC1 /* StringUtils.cpp in Sources */,
+				6DCA37AC1265C1CD00691BC1 /* Localise.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "Glue-MacOSX";
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "Glue-MacOSX";
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEBUG,
+					DEBUG,
+					MACOSX,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = MACOSX;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Glue-MacOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Glue-MacOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

@@ -1,0 +1,9 @@
+// Tutorial NPC
+// Ver
+1
+// Mesh name
+amju.md2
+// 2 textures
+amju2.bmp
+amju2a.bmp
+

@@ -1,0 +1,215 @@
+// ROOM 75
+// Version
+1
+
+// type
+room
+// Num textures
+5
+// 1 - 5
+ground7-1.png
+ground7-2.png
+rock1.png
+rock3.png
+rock2.png
+
+// (x, y) Size of grid
+7, 7
+// Grid of tiles - numbers are zero-based indices into texture list
+// Split so we can have >10 tiles
+0  0  0  0  0  0  0
+0  0  0  0  0  0  0
+1  1  1  1  2  1  1
+2  1  1  1  1  1  1
+1  1  1  2  1  1  2
+0  0  0  0  0  0  0
+0  0  0  0  0  0  0
+// Obstacles grid
+0  0  0  0  0  0  0
+0  0  0  0  0  0  0
+4  3  5  3  4  5  3
+0  0  0  0  0  0  0
+4  3  5  3  4  5  3
+0  0  0  0  0  0  0
+0  0  0  0  0  0  0
+
+// Destinations N, S, E>, W<
+0, 0, 76, 72
+
+// music
+sound/rainforest.it
+
+// arrow going S
+baddie
+-100, 0, -300
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+
+
+// arrow going S
+baddie
+-50, 0, -400
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+
+
+// arrow going S
+baddie
+0, 0, -500
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+
+
+// arrow going S
+baddie
+50, 0, -600
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+
+
+
+// arrow going S
+baddie
+100, 0, -700
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+
+
+// arrow going S
+baddie
+100, 0, 700
+// Tex
+arrow2.png
+// Num cells
+1,1
+// Size
+20,80
+// Damage to player on collision
+1
+// Max health: -1 == indestructible
+1
+// Points
+50
+// Attack str
+got shot by an arrow!
+// Behaviour
+patrol
+// Dir
+0, 700
+// Rect (xmin, xmax, ymin, ymax)
+-1000,1000, -1000, 1000
+// Reverse flag
+0
+// Sound
+sound/swish.wav
+

@@ -1,0 +1,5 @@
+// Ver
+1
+charlist.txt
+sparkle1.png
+

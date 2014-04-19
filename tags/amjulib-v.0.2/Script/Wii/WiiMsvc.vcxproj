@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C7990D49-B71B-4797-A17A-A2CEE45DC3D5}</ProjectGuid>
+    <RootNamespace>WiiMsvc</RootNamespace>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../Build/$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../Build/$(Configuration)\</IntDir>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">make -r 2&gt;&amp;1 | sed -e %27s/\(.[a-zA-Z]\+\):\([0-9]\+\):/\1(\2):/%27</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">make clean</NMakeCleanCommandLine>
+    <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">boot.dol</NMakeOutput>
+    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\Source; c:\devkitpro\libogc\include; $(INCLUDES);$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">make -r 2&gt;&amp;1 | sed -e %27s/\(.[a-zA-Z]\+\):\([0-9]\+\):/\1(\2):/%27</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">make clean</NMakeCleanCommandLine>
+    <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">boot.dol</NMakeOutput>
+    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(NMakeForcedIncludes)</NMakeForcedIncludes>
+    <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(NMakeAssemblySearchPath)</NMakeAssemblySearchPath>
+    <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawAABB.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB2.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB3.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawRect.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\DrawSphere.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomDraw\Teapot.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadAABB.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadMatrix.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadRect.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadVec2.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\GeomLoad\LoadVec3.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\AABB.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Capsule.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Geometry.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Line2.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Line3.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Matrix.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Plane.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Rect.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Sphere.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Geom\Tri.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\ClientSocket.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HostInfo.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HttpClient.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\HttpReq.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\OnlineReqManager.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\ServerSocket.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\Socket.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\SocketService.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Network\UrlUtils.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\SoundWii\SoundWii.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGLGCube\AmjuGL-GCube.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\Mutex.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\Thread.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\ThreadGate.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Thread\ThreadManager.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\AmjuAssert.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\mt19937ar-cok.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Pause.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\ReportError.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\SafeUtils.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\SchAssert.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Sign.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Variable.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\adler32.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\compress.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\crc32.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\deflate.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\example.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\gzio.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\infback.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inffast.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inflate.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\minigzip.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\trees.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Utils\Zlib\zutil.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\AmjuGLWindowInfo.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\Colour.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\AmjuGL\Screen.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Collision\CollisionManager.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Collision\CollisionMesh.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Events\EventListener.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Events\EventPoller.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Events\Mouse.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\EventsWii\EventPollerImplWii.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\CsvTokeniser.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Directory.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Endian.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\File.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImpl.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplGlue.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplMem.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileImplStd.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\FileSize.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\GlueFile.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\GlueFileMem.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\FileUtils\Tokeniser.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Font\Font.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Font\TextureSequence.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Game\Game.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Game\GameObject.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Game\GameState.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Sound\SoundManager.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiButton.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiCommandHandler.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiComposite.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiElement.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiFactory.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiImage.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Gui\GuiText.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\AlphaBmpLoader.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\BinaryResource.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Resource\ResourceManager.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Bitmap.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Texture.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\TextureUtils.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\example.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\LoadPng.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\png.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngerror.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pnggccrd.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngget.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngmem.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngpread.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngread.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrio.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrtran.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngrutil.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngset.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngtest.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngtrans.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngvcrd.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwio.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwrite.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwtran.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\pngwutil.c" />
+    <ClCompile Include="..\..\..\amjulib\Source\Image\Png\SavePng.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Localise\Localise.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Md2\Md2Model.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Mem\AmjuMem.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Mem\CallStack.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Obj\ObjMesh.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Obj\ObjUsefulFunctions.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneComposite.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneGameObject.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneGraph.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneMesh.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneNode.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Scene\SceneNodeCamera.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\ReportError.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\SafeUtils.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\Strings\StringUtils.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\AmjuTime.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\TimePeriod.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\Timer.cpp" />
+    <ClCompile Include="..\..\..\amjulib\Source\TimeUtils\TimeRange.cpp" />
+    <ClCompile Include="..\..\Source\Md2\Md3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawAABB.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB2.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawOBB3.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawRect.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\DrawSphere.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomDraw\Teapot.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadAABB.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadMatrix.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadRect.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadVec2.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\GeomLoad\LoadVec3.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\AABB.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Capsule.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Geometry.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Line2.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Line3.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Matrix.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Plane.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Quaternion.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Rect.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Sphere.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Tri.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Vec2.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Geom\Vec3.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\ClientSocket.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HostInfo.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HttpClient.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\HttpReq.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\OnlineReqManager.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\ServerSocket.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\Socket.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\SocketService.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Network\UrlUtils.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\SoundWii\SoundWii.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGLGCube\AmjuGL-GCube.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Locker.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Mutex.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\Thread.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\ThreadGate.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Thread\ThreadManager.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\AmjuAssert.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\AmjuTypes.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Common.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\DegRad.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Factory.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\NonCopyable.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Pause.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\RCPtr.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\ReportError.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\SafeUtils.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\schassert.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\SharedPtr.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Sign.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Singleton.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Variable.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\crc32.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\deflate.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inffast.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inflate.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\trees.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zconf.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zconf.in.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zlib.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Utils\Zlib\zutil.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL-Impl.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGL.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\AmjuGLWindowInfo.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\Colour.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\AmjuGL\Screen.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Collision\CollisionManager.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Collision\CollisionMesh.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Events\EventListener.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Events\EventPoller.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Events\Mouse.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\EventsWii\EventPollerImplWii.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\BinaryData.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\CsvTokeniser.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Directory.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Endian.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\File.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImpl.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplGlue.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplMem.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileImplStd.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\FileSize.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\GlueFile.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\GlueFileMem.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\FileUtils\Tokeniser.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Font\Font.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Font\TextureSequence.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Game\Game.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameObject.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameObjectFactory.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Game\GameState.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Sound\SoundManager.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Sound\SoundPlayerImpl.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiButton.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiCommandHandler.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiComposite.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiElement.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiFactory.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiImage.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Gui\GuiText.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\AlphaBmpLoader.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\BinaryResource.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Resource\ResourceManager.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Bitmap.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Texture.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\TextureUtils.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\config.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\LoadPng.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\png.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\pngconf.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Image\Png\SavePng.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Localise\Localise.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Md2\Md2Model.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Md2\Md2Norms.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuFinal.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuFirst.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\AmjuMem.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\CallStack.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Mem\MemCheck.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Obj\ObjMesh.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Obj\ObjUsefulFunctions.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\BillBoard.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneComposite.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneGameObject.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneGraph.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneMesh.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneNode.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Scene\SceneNodeCamera.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\ReportError.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\SafeUtils.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\Strings\StringUtils.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\AmjuTime.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\TimePeriod.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\Timer.h" />
+    <ClInclude Include="..\..\..\amjulib\Source\TimeUtils\TimeRange.h" />
+    <ClInclude Include="..\..\Source\Md2\Md3.h" />
+    <ClInclude Include="..\..\Source\Md2\Md3Types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\amjulib\Source\Localise\localise.pl" />
+    <None Include="..\..\..\amjulib\Source\Mem\AddCallstacks.pl" />
+    <None Include="..\..\..\amjulib\Source\Mem\AddHeaders.pl" />
+    <None Include="Makefile" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

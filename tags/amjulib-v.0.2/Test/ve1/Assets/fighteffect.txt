@@ -1,0 +1,12 @@
+// v
+1
+
+// Effect
+// image - TODO TEMP TEST
+sparkle1.png
+// size
+20.0
+// number
+50
+// max time
+2.0

@@ -1,0 +1,31 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+cogtestmenu-comp
+// Num children
+1
+
+// The idea here was to show hearts during the cog tests....
+
+//// Heart image
+//gui-image
+//heart-img
+//0.8, 1.0
+//0.17, 0.2
+//coin3.png
+
+// Num hearts text
+gui-text
+score-num
+0.5, 1.0
+0.3, 0.2
+// Text
+SCORE
+arial, 1.5, fgcol=000000, sx=0.7
+
+
+
+

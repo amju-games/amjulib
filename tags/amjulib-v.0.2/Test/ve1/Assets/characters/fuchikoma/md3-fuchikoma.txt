@@ -1,0 +1,46 @@
+<14th April 2002>
+================================================================
+Model Name              : fuchikoma
+installation directory  : quake3/baseq3/md3-fuchikoma.pk3
+Author                  : FRAG COW
+Email Address           : fish_dsc@yahoo.com.uk
+Website URL		: http://davidcoen.tripod.com/
+Model description       : Personal tank with too much AI from Masamune Shiro "Ghost in the Shell" manga
+
+Other info              : Appoligies for the textures, still using mouse, code and photoshop filters. Also learnt that the texture alpha is written to the screen when a texture is rendered (so sucessive stages of a shader can use the screen alpha, that is pretty smart of ID)
+Was not bothered to spend a few hours to write out chat for the bot, so wrote some code instead, hehehhe, FRAG COW is 0x4652414720434f57, just ascii to hex...
+
+Additional Credits to   : Masamune Shiro for the concept
+gundam@btinternet.com for tutorial at http://www.planetquake.com/polycount/resources/quake3/tutorials/MAX-to-q3data/md3q3data.shtml
+
+Thanks to               : Polycount message boards
+================================================================
+* Play Information *
+
+New Sounds              : YES
+CTF Skins               : YES
+LODS			: NO
+
+
+* Construction *
+Poly Count              : 1474 // plus 72 for fake head, total 1546
+Vert Count              : 1203 // mesh split on smoothing groups, plus 42 for fake head, total 1245
+Skin Count              : 3
+Base info               : New content
+
+Software used           :  LightWave Modeler 5.5, 3D Studio Max 4, Photoshop, Interchange, q3data, quake3, goldwave, glom5 (own app for producing global and vertex colour textures)
+
+Known Bugs              : phat l33t bugz
+Build/Animation time    : about 4 days work
+
+
+* How to use this model *
+unzip and place md3-fuchikoma.pk3 in you baseq3 folder
+
+* Copyright / Permissions *
+
+QUAKE(R) and QUAKE II(R) and QUAKE III(R) are registered trademarks of
+id Software, Inc.
+
+Model for fun and education, not to be distributed for profit. Please keep intact
+

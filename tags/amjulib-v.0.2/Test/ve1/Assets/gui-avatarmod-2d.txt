@@ -1,0 +1,151 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+9
+
+
+// Buttons for avatar type 
+// element type
+gui-button
+// Element name
+layer-prev-button
+// pos (coords are -1..1)
+-1.0, 0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+< prev layer
+// Font name, size
+arial, 2.0, sx=0.8
+
+// element type
+gui-button
+// Element name
+layer-next-button
+// pos (coords are -1..1)
+0.2, 0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+next layer >
+// Font name, size
+arial, 2.0, sx=0.8
+
+
+// element type
+gui-button
+// Element name
+tex-prev-button
+// pos (coords are -1..1)
+-1.0, 0 
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+< prev tex
+// Font name, size
+arial, 2.0, sx=0.8
+
+// element type
+gui-button
+// Element name
+tex-next-button
+// pos (coords are -1..1)
+0.2, 0 
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+next tex >
+// Font name, size
+arial, 2.0, sx=0.8
+
+
+
+// element type
+gui-button
+// Element name
+col-prev-button
+// pos (coords are -1..1)
+-1.0, -0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+< prev colour
+// Font name, size
+arial, 2.0, sx=0.8
+
+// element type
+gui-button
+// Element name
+col-next-button
+// pos (coords are -1..1)
+0.2, -0.3
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+next colour >
+// Font name, size
+arial, 2.0, sx=0.8
+
+
+
+// element type
+gui-button
+// Element name
+ok-button
+// pos (coords are -1..1)
+-0.8, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+ok
+// Font name, size
+arial, 2.0 
+
+// element type
+gui-button
+// Element name
+cancel-button
+// pos (coords are -1..1)
+0.0, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+cancel
+// Font name, size
+arial, 2.0 
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.8
+// size
+2.0, 0.1
+// Text
+Modify your avatar... 
+// Font name, size
+arial, 1.0, fgcol=ffffff
+

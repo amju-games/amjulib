@@ -1,0 +1,126 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+reaction-time-comp
+// Num children
+6
+
+
+// Element type
+gui-text
+// Element name
+timer
+// pos (coords are -1..1)
+-1.0, 1.8
+// size
+2.0, 0.1 
+// Text
+Time
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000
+
+// Element type
+gui-text
+// Element name
+word
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.2
+// Text
+ready...
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+gui-button
+// Element name
+button
+// pos (coords are -1..1)
+-0.4, 0.4
+// size
+0.8, 0.8
+// Image
+red_button.png
+// Text
+GO!
+// Font name, size
+arial, 1.5 
+
+
+gui-button
+// Element name
+done-button
+// pos (coords are -1..1)
+-0.9, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+stop test
+// Font name, size
+arial, 1.0
+
+
+// Heart image
+gui-image
+heart-img
+0.6, 1.05
+0.4, 0.5
+heart.png
+
+// Num hearts text
+gui-text
+heart-num
+0.6, 0.9
+0.4, 0.2
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.7
+
+
+
+gui-text
+mytext
+// pos (coords are -1..1)
+-1.0, -0.55
+// size
+2.0, 0.2 
+// Text
+If you want to stop doing this test, please click "stop test"
+// Font name, size
+arial, 1.0, bgcol=ffffff, fgcol=000000, multi
+
+
+
+// Best time, avg etc ?
+// Element type
+gui-text
+// Element name
+score
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.1 
+// Text
+Score
+// Font name, size
+arial, 1.0, bgcol=ff0000, fgcol=ffffff
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 0.9
+// size
+2.0, 0.1
+// Text
+Reaction time test
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+

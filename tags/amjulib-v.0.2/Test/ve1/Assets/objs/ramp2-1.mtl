@@ -1,0 +1,4 @@
+newmtl crate2:lambert3SG
+map_Kd crate2.png
+flags 0
+Ns 1.0

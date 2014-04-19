@@ -1,0 +1,79 @@
+newmtl crate2:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd crate2.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl fruit2:fruit1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+map_Kd fruit1.bmp
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl fruit_stem1:fruit_stem
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+map_Kd fruit1.bmp
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl fruit_stem2:fruit_stem
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+map_Kd fruit1.bmp
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl gate2:gate2
+illum 4
+Kd 0.80 0.80 0.80
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl initialShadingGroup
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd bean4.bmp
+Ni 1.00
+newmtl lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd fruit3.bmp
+Ni 1.00
+newmtl lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd fruit4.bmp
+Ni 1.00
+newmtl lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd fruit2.bmp
+Ni 1.00
+newmtl pz_fence1:pz_fence
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.40 0.40 0.40
+Tf 1.00 1.00 1.00
+map_Kd pz-fence.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00

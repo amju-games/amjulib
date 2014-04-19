@@ -1,0 +1,134 @@
+
+14/05/2001
+================================================================
+Model Name              : Dragon Knight
+
+Model Author		: Michael "Magarnigal" Mellor
+			  email		: mmellor@bigpond.net.au
+			  homepage 	: http://mag.critical-depth.net
+
+
+Skin Authors            : Dan "Deranged" Marinelli
+			  	  
+				  -default
+				  -Gollum
+			  	  -Percy
+			  	  -Rrazzia
+				  -Sir Bruin
+			  email		: deranged@snip.net
+			  homgepage 	: http://www.3dpalette.com/deranged
+
+
+			  François-Xavier "OgroFix" Delmotte
+				  
+				  -Gorenaire
+				  -Nagafen
+				  -ctf red
+				  -ctf blue
+				  -Rallos Zek
+			  email		: ogro@planetquake.com
+			  homepage	: http://www.planetquake.com/pandemonium
+
+
+			  Jason "dark Horizon" Sallenbach
+				  
+				  -Dark Dragon
+				  -Dark Knight
+			  email		: dark_horizon_hl@hotmail.com
+			  homepage	: 
+			  
+
+			  Eyal "Shotgun" Shoham
+				  
+				  -Lazzaridus
+				  -Shotgun Knight
+			  email		: shotgun@netvision.net.il
+			  homepage	: http://www.planetquake.com/skingun/
+			
+
+			  glenn
+				  
+				  -Radaghast
+				  -Sir lokeren
+			  email		: alexin@cglenn.com
+			  homepage	: http://www.cglenn.com
+
+
+Sound Author            : Eric "Redchurch" VonRothkirch
+						
+			  email		: redchurch77@yahoo.com
+			  homepage	: 
+	
+
+Acknowledgements:	
+
+ I am deeply indebted to the great talents of Ogrofix, Deranged, Glenn, Dark Horizon, Shotgun and Redchurch for their incredible
+ contributions.  Without these guys this project would never have realised its full potential.  Thanks to all the guys on polycount 
+ for their support and comments throughout the long-winded development.  Cheers guys, its been a lotta fun!
+			  
+
+Additional Credits to   : id software, for the best games.  
+
+================================================================
+Description
+
+A gallent knight riding upon his sturdy Dragon steed.  This model is the successor to the 
+original Dragon Knight for Quake 2.  
+
+
+Other Info
+
+A cool feature of the quake3 animation system is the ability to define the length of almost any animation.  This, along with a great
+compiling tool from work, meant I was able to do nice long idling sequences and death scenes that convey much more personality and
+emotion than in previous ppms I've done.  All this extra eye candy comes at a cost though, the extra frames bloat the md3 files quite
+considerably, and even on a high end computer just a couple of these guys running around on screen can seriously slow the action down.
+
+Another point to note is that the death scenes are quite long, taking about 20-25 seconds to fully play out.  Since quake3 
+automatically skips to the final death frame once you respawn, the only way to see the entire loop is to not respawn until the 
+animation is finished.  Bots, of course, respawn instantly regardless so the death anims will always get cut short if your playing
+against bots.  I have vague plans to do a 'deathmatch friendly' version with much shorter, practical animations.  
+
+What would I have done differently?  I regret not taking more time with the uv maps, its pretty shoddy in parts and really caused the 
+skinners unnecessary grief.  You'd think I'd have learned by now :)  There are some problems with the general design of the dragon,
+particulary the front legs.  I should have thickened them up considerably to be convincingly 'load bearing', or shrunk them right down
+to t-rex like claws that don't touch the ground at all.  The middle ground they tread as they are doesn't really work.  Other than these
+few niggling issues I'm pretty happy with how the whole thing turned out.  
+
+
+
+
+
+================================================================
+* Play Information *
+
+Sounds                  : yes
+CTF Skins               : yes
+Bot support		: yes
+LOD support		: no
+
+* Construction *
+Poly Count		: 2116
+Skin Count              : 11
+Shaders			: no
+Editors used		: Lightwave 6.5, nmd3, paintshop pro, Botstudio .98
+Build/Animation time    : too long
+
+
+
+
+
+
+
+* How to use this model *
+
+unzip to your /baseq3 folder, the model should then be available from the player select menu.  
+
+***NOTE: The md3 files are exceptionally large, you may need to increase the ram allocated to quake3 in order for this model to
+	 load.  Try adding the line "+set com_hunkmegs 96" to your quake3 shortcut.  
+
+
+* Copyright / Permissions *
+
+QUAKE(R) and QUAKE III Arena(R) are registered trademarks of id Software, Inc.
+
+Contact me if you wish to use this model for anything other than its intended purpose.  

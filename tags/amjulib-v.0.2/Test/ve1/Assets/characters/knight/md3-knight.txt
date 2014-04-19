@@ -1,0 +1,41 @@
+KNIGHT for Q3A - beta release
+
+12.07.2000
+================================================================
+Accessory's Name	: Knight for Q3A
+Installation directory  : /baseq3/knight.pk3
+Author                  : Dimitrius
+Website                 : http://3d.ooi.net
+
+Accessory's description	: Truly a throwback to ancient times, the Knight comes to the Arena from the dark ages
+			  of mankind. His first few forays into battle were disastrous - clusmy and slow, 
+			  plate armor is no match for a rocket launcher. After much amusement was had at the
+			  Knight's expense, he was finally brought into the current era. Outfitted with modern
+			  body armor and a new sword, the Knight is ready to do battle in the far future.
+
+			  
+Other info              : The Knight is a model I've had laying around on my hard drive for a long time.
+			  He is an early attempt at creating a player model - so please forgive the lack of
+			  quality apparent in the skins, model, animation, and deformation.
+
+Additional Credits to   : id, Discreet, Adobe, etc. etc.
+
+================================================================
+* Construction *
+Base                    : Completed in Max 3.0 with Character Studio. Photoshop 5.5 for maps.
+Editor used             : Exported using the id exporter.
+Known Bugs              : Possible animation errors; no known bugs.
+Build/Animation time    : I lost track. Longer than it should have taken.
+
+
+* How to use this accessory *
+
+The Knight.pk3 file should be in your Q3A baseq3 directory. This readme file needs to be in the baseq3/models/players/knight directory.
+
+* Copyright / Permissions *
+
+QUAKE(R), QUAKE II(R), & QUAKEIII:ARENA(R) are registered trademarks of id Software, Inc.
+
+please, do not redistribute without permission
+
+

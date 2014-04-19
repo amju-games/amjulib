@@ -1,0 +1,46 @@
+<1st March 2002>
+================================================================
+
+Model Name            :	Marge
+Installation Directory:	baseq3\md3-marge.pk3
+Model Author          :	Frag Cow
+Skin Author           :	Frag Cow
+Email Address         :	fish_dsc@yahoo.co.uk
+Model description     : quick model
+Additional Credits to :	
+
+
+Thanks to             : gundam@btinternet.com for tutorial at http://www.planetquake.com/polycount/resources/quake3/tutorials/MAX-to-q3data/md3q3data.shtml
+viewer.cfg from Mike Cronin
+resources (sounds, quotes) taken off the web and used without permition, from the following sites
+http://www.geocities.com/Hollywood/Hills/4168/jeffsHome.html
+http://vax.wcsu.edu/~grossi002/simps/index.html
+http://simonsounds.topcities.com/main2.html#sounds1
+http://users.erols.com/jcor/simpson2.htm
+http://www.lardlad.com/lenny/sounds.shtml
+http://www.geocities.com/TelevisionCity/Set/2580/sound.html
+http://members.optushome.com.au/jmevans/
+http://balder.prohosting.com/~homer101/
+http://www.angelfire.com/mn/unsimpsons/quotes.html
+
+Authors notes         :	IP of Fox Studios, please respect this. The mesh, animation and skins made by Frag Cow.
+
+================================================================
+* Play Information *
+
+Skins                 : default, red, blue
+Bot support           : yes
+New Sounds            : yes
+CTF Skins             : red, blue
+Polycount             : 1087
+Known Bugs            : 
+
+* Construction *
+Tools(s) used         : lightwave, studio max, photoshop, qdata. Own code to generate base texture (poly colour and global illumination)
+
+* How to use this model *
+<INSTALLATION INFO>
+unzip, Put md3-marge.pk3 into your baseq3 folder
+
+* Copyright / Permissions *
+Concept and sounds are property of Fox Studios. Made for fan enjoyment and educational/ portfolio purposes. Please don't bring down the wraith of Fox by misuse. Not for comerical realease. 

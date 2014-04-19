@@ -1,0 +1,10 @@
+// simplest-vert.txt
+
+// OpenGL vertex shader
+void main()
+{
+  vec4 a = gl_Vertex;
+  //a.x *= 0.5f
+  gl_Position = gl_ModelViewProjectionMatrix * a;
+}
+

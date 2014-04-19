@@ -1,0 +1,123 @@
+Animation classes j.c. 2008
+---------------------------
+
+TODOs
+
+
+Skinning
+
+Transforming mesh is not working.
+If we use the same bone (with weight 1.0) for every vertex, the mesh does move around with the bone --> good.
+But the orientation of the mesh is wrong! --> Rotational part of transform is wrong..?
+
+If no transform, mesh is in the right place. But static of course.
+
+If we use Bone 0 to transform:
+ mesh moves forward and back with the skeleton. So the translation part of the bone transform is being correctly applied to the mesh.
+
+ But mesh is translated up to the middle of the skel (where bone0 is). And then rotated.
+
+ If we reset the rotation part of the transform: mesh is still translated up to the position of the bone. If we choose another bone, the mesh gets moved to where that bone is.
+
+...So... the problem is that we don't want to translate by the bone transform.tr, we want to translate by the DIFF between the current transform and the bind pose...?
+
+ - Try this!
+
+
+Export indexed tri list
+Exporter Progress bars
+
+Mesh import indexed tri list
+
+
+
+TODO resolve outstanding questions below.
+
+Animation Data
+Does a bone have a start and end point ?
+Or the start point of the root bone is given by the current RST 
+(got by interpolating 2 keyframes).. the end of the root bone is the start
+plus the translation part of the RST of the next bone ????
+Probably not - a bone should probably have a start and end point, which 
+would be relative to its parent..?
+The start and end  points would be transformed by the current transform for 
+the bone.
+The end point could be unnecessary, but useful to show debug skeleton.
+This data is static for the skeleton, not per AnimPlayer..?
+
+ 
+Classes for skeletal animation
+
+RST - keyframe data for one bone
+A Key frame consists of an RST for each bone, and a time ...?
+
+How do we know which bone the RST relates to ?
+The keyframe has a list of RST/bone indices. So given an array of bones,
+it updates the bone at the given index.
+
+(Can't be a pointer to a bone, because RST is shared across characters)
+
+How do we know the tree structure of the bones ?
+Each array of bones also has a tree structure - i.e. we can access bones
+as an array, or by traversing the tree.
+
+We need to load the Skeleton - i.e. the tree structure - once, and use it
+to set the bone tree structure for each AnimPlayer.
+
+
+Anim blending - 
+For one anim, we interpolate between the current and next key frame
+For two, we interp both anims, then interpolate again ? 
+
+----------------------------------------
+
+Bone Weights - done later - this is how bones are applied to vertices
+
+----------------------------------------
+
+What data is static/const, and which is per-character ?
+
+SKELETON
+Load once for each character/mesh. Can be used for many meshes, even different meshes.
+This sets up the tree structure for bones, can use names for bones.
+Then the bones themselves can have the minimum data in them, as they are
+ per-character.
+(DO we need to set the Bind Pose for the bones..? No, (interpolated)
+ keyframe data sets the bone transform - it's not cumulative.)
+
+Exporting skeleton:
+From maya: script jcExportSkel.mel
+Exported when in bind pose. Each child bone has a transform matrix, giving its
+transformation relative to its parent.
+
+Drawing skeleton:
+There are no line segs exported as part of the skeleton, but we can draw a line
+seg from a parent joint to a child joint. 
+
+KEYFRAMES
+Load each keyframe as part of an Animation.
+
+ANIM
+Set of keyframes and times
+
+BONEWEIGHTS
+A skin contains a boneweight array for every mesh vertex (vertex index)
+
+RST/Keyframe - static, can be applied to any character skeleton, or to LOD models of the same character
+
+Skin: The bone weights for each vertex are static, but relate to one mesh, not all LOD models
+So Skin can be a member of Mesh.
+
+Mesh: static, drawing it means using the static skin for the mesh, and a per-character tree of bone transforms. The bone transforms are held in an AnimPlayer, NOT the mesh, so we can draw many meshes in different poses.
+
+Animation - list of Keyframes, with a time for each keyframe - static
+
+KeyFrame - list of bone indices and a transform (as RST) for the bone
+
+Bone matrices - per character: in AnimPlayer
+Current time in anim, current anim - per char - also in AnimPlayer
+
+"AnimPlayer" class 
+Holds current and next keyframe, calls KeyFrame::Interpolate to transform a list of bones.
+Then draw the mesh, giving the list of bone transforms.
+

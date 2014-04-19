@@ -1,0 +1,6 @@
+// player data
+// ver
+1
+shadow.png
+20
+

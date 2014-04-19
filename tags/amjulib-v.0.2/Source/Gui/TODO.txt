@@ -1,0 +1,36 @@
+New gui elements to make
+========================
+
+Tab and shift-tab: elements must be in a doubly-linked list.
+
+All elements should have border which can be drawn ?
+
+Table/grid type
+
+Tree view
+
+Preview dialog should work with more file types (pluggable design)
+
+Gui design tool
+===============
+Tree view to compose composite tree
+Drag/resize box
+
+
+Text Edit bugs
+--------------
+
+Change caret pos with mouse
+
+Horiz text scrolling when caret moves from is wrong moving from right edge to left - caret should move, not the text
+
+Selection - with shift. 
+
+Movement: by word: Left + ctrl (win) or option [alt](mac)  
+
+Multi-line text edit
+
+GuiTextEdit: Selection bugs. Clicking past the end of the test should put the caret/selection point at the end.
+GuiTextEdit: caret doesn't move – need to rebuild tris?? Better if caret is separate tri list
+GuiTextEdit: cut/copy/paste/select – none of this is working [any more :-( - did copy/paste work?]
+GuiText: calc first/last doesn't take font size or scaleX into account

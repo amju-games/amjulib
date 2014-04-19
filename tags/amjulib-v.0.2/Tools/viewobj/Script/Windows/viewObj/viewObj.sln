@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "viewObj", "viewObj\viewObj.vcxproj", "{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "..\..\..\..\..\Script\AmjuLibMsvc\AmjuLibMsvc\AmjuLibMsvc.vcxproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugAssetTest|Win32 = DebugAssetTest|Win32
+		Release|Win32 = Release|Win32
+		ReleaseAssetTest|Win32 = ReleaseAssetTest|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.Debug|Win32.Build.0 = Debug|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.DebugAssetTest|Win32.ActiveCfg = Debug|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.DebugAssetTest|Win32.Build.0 = Debug|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.Release|Win32.ActiveCfg = Release|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.Release|Win32.Build.0 = Release|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.ReleaseAssetTest|Win32.ActiveCfg = Release|Win32
+		{98E30622-F5A8-4F9E-A15F-9C2FFE053D1A}.ReleaseAssetTest|Win32.Build.0 = Release|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.Debug|Win32.Build.0 = Debug|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.DebugAssetTest|Win32.ActiveCfg = DebugAssetTest|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.DebugAssetTest|Win32.Build.0 = DebugAssetTest|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.Release|Win32.ActiveCfg = Release|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.Release|Win32.Build.0 = Release|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.ReleaseAssetTest|Win32.ActiveCfg = ReleaseAssetTest|Win32
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0}.ReleaseAssetTest|Win32.Build.0 = ReleaseAssetTest|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,50 @@
+Background:
+The year is 2029. The years of darkness has fallen upon humans. The machines... once ours to control, now roam the lands seeking to terminate all humans and other life forms. Humans are now slaves to the machines.
+
+The Terminator unit model T-800, the most versatile unit in SkyNET's forces has been of interest to the Vadrigar. The machine knows no remorse, kills as programmed. It does not rest nor gets tired. It just keeps on doing what it is programmed to do. Thus, the Vadrigar snatched one unit from SkyNET, enhanced it's abilities more, giving it more flexibility which more closely match the agility of the T-1000 units.
+
+No... the gladiators in the Arena Ethernals has one more serious problem to worry about... the Terminator is here and it is one bad ass!
+
+***********************
+
+Ok ok ok.. it's lame... sue me (^_^)
+
+***********************
+
+===========================================================================================
+Model Name              : Terminator T-800 model 101
+installation directory  : Quake III Arena/baseq3
+Author                  : Alan Thum Joo Soon @ Bloodhound
+Email Address           : bloodhound@time.net.my
+Model name		: T800
+Model description       : Model of the famous Terminator from the Terminator movie
+Additional info		: Custom animation by John "Ronin{Triad}" Fisher and myself
+Additional Credits to   : 7thSwordzman for doing the skinmap and initial skin
+			  John "Ronin{Triad}" Fisher for the base animation and final skins
+			  id Software for making the best multiplayer game ever
+===========================================================================================
+* Play Information *
+
+New Sounds              : No
+CTF Skins               : Yes
+Bot files		: On the way :-D
+			  
+* Construction *
+Poly Count              : forgot :-D
+Vert Count              : errr... dunno :-)
+Skin Count              : 3
+Base                    : Re-costruction of my Terminator model for Quake2 which never got 			  released :-), so now it is kicking ass in Quake 3 Arena.. with 			  latest patch, can be used with Team Arena as well (using console
+			  to access)
+Editor used             : 3DSMax R3, Character Studio 2.2, Q3tools
+Known Bugs              : Errr.... not that I know of
+Build/Animation time    : Wooo this is long... too lazy and no time to work on it on a 				  regular basis :-D
+
+* How to use this model *
+
+Place the pk3 file into your baseq3 folder
+
+* Copyright / Permissions *
+
+QUAKE(R), QUAKE II(R), and Quake III Arena  are registered trademarks of id Software, Inc. 
+
+

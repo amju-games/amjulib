@@ -1,0 +1,16 @@
+// Context menu buttons
+// ver
+1
+
+// name (all buttons will have same name, but command set in code)
+context-button
+// pos
+0, 0
+// size
+0.6, 0.15
+// image
+gui-button-4.png
+// text
+button text
+// font
+arial, 1.0

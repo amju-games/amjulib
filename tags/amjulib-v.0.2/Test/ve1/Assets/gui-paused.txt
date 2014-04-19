@@ -1,0 +1,117 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+7
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.1
+// Text
+Paused
+// Font name, size
+arial, 1.0, bgcol=000000, fgcol=ffffff
+
+
+// element type
+gui-button
+// Element name
+reset-button
+// pos (coords are -1..1)
+-0.4, 0.8
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+reset me!
+// Font name, size
+arial, 1.6 
+
+// element type
+gui-button
+// Element name
+calendar-button
+// pos (coords are -1..1)
+-0.4, 0.5
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+calendar
+// Font name, size
+arial, 1.6 
+
+// element type
+gui-button
+// Element name
+options-button
+// pos (coords are -1..1)
+-0.4, 0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+options
+// Font name, size
+arial, 1.6
+
+// element type
+gui-button
+// Element name
+achievements-button
+// pos (coords are -1..1)
+-0.4, -0.1
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+achievements
+// Font name, size
+arial, 1.6, sx=0.8
+
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+-0.4, -0.4
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+quit game
+// Font name, size
+arial, 1.6
+
+// element type
+gui-button
+// Element name
+resume-button
+// pos (coords are -1..1)
+-0.4, -0.7
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+continue
+// Font name, size
+arial, 1.6
+
+

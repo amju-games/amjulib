@@ -1,0 +1,20 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+lettercanc-comp
+// Num children
+0
+
+
+
+
+
+
+
+
+
+
+

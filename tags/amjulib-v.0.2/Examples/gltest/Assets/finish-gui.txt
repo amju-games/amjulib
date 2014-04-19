@@ -1,0 +1,22 @@
+// GUI for final state
+// version
+1
+
+// element type
+gui-comp
+// Name
+Final state gui
+// Num children
+1
+
+gui-text
+// Name of element
+Some text
+// Pos
+-1, 0
+// Size
+1, 1
+// Localised text
+Hello, I am some localised text.\nThat's the end of the demo!
+arial, 1.5, fgcol=ffffff, multi
+

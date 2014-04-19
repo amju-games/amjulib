@@ -1,0 +1,7 @@
+// Story fragments. Each is shown in turn (no tree right now).
+
+
+Hello, <player name>! This is your space ship calling you. Do you remember what happened ? We crash landed on a planet! 
+
+
+

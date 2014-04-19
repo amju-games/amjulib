@@ -1,0 +1,156 @@
+// version
+1
+
+// Element type
+gui-comp
+// Name
+hud-comp
+// Num children
+10
+
+// Context menu - container for buttons
+gui-comp
+context-menu-holder
+// TODO Rectangle for background and cancel button
+1
+gui-comp
+context-menu
+0
+
+
+// Main HUD buttons
+
+gui-comp
+// Name
+pickup-comp
+// Num children
+2
+
+gui-button
+drop-button
+-0.85, -0.65 
+0.8, 0.2
+gui-button-4.png
+drop
+arial, 1.6 
+
+gui-button
+rotate-button
+0.05, -0.65 
+0.8, 0.2
+gui-button-4.png
+rotate
+arial, 1.6 
+
+
+// element type
+gui-button
+// Element name
+pause-button
+// pos (coords are -1..1)
+-0.9, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+pause
+// Font name, size
+arial, 1.0 
+
+// Quit button
+gui-button
+quit-button
+// pos (coords are -1..1)
+// Hidden
+0.55, 1.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+quit
+// Font name, size
+arial, 1.0 
+
+
+// Heart image
+gui-image
+heart-img
+0.6, 1.05
+0.4, 0.5
+heart.png
+
+// Num hearts text
+gui-text
+heart-num
+0.6, 0.9
+0.4, 0.2
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.9
+
+gui-text
+heart-txt
+0.6, 0.95
+0.4, 0.1
+// Text
+Health
+arial, 0.75, fgcol=ffffff, sx=0.9
+
+// Fuel image
+gui-image
+fuel-img
+0.2, 1.05
+0.4, 0.5
+fuel.png
+
+// Fuel cell text
+gui-text
+fuelcell-num
+0.2, 0.9
+0.4, 0.2
+// Text
+0
+arial, 1.5, fgcol=ffffff, sx=0.9
+
+gui-text
+fuelcell-txt
+0.2, 0.95
+0.4, 0.1
+// Text
+Fuel
+arial, 0.75, fgcol=ffffff, sx=0.9
+
+
+
+// element type
+gui-button
+// Element name
+build-button
+// pos (coords are -1..1)
+-0.45, 0.9
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+build...
+// Font name, size
+arial, 1.0 
+
+
+
+// Element type
+gui-text
+// Element name
+text1
+// pos (coords are -1..1)
+-1.0, -0.8
+// size
+2.0, 0.2
+// Text
+This is some text
+// Font name, size
+arial, 1.0, fgcol=ffffff
+
