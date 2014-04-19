@@ -74,7 +74,8 @@ void GSVe3MakeTradeRequest::OnTradeSend()
   int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? p->GetVal(FOOD_STORED_KEY) : p->GetVal(TREASURE_KEY));
   if (nGive > maxToGive)
   {
-    std::string str = "You only have " + ToString(maxToGive) + ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? "food" : "treasure") + "!";
+    std::string str = "You only have " + ToString(maxToGive) + 
+      ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " food!" : " treasure!");
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
     TheLurker::Instance()->Queue(lm);
     return;
