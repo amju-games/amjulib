@@ -12,6 +12,7 @@
 #include "ObjectManager.h"
 #include "GSVe3MsgReply.h"
 #include "GSVe3ShowTrade.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -97,6 +98,10 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
   GuiRect* rect = new GuiRect;
   float g = 0.9f; // grey 
   rect->SetColour(Colour(g, g, g, 1));
+  // round corners don't work well here - only the top left round corner is visible.
+  //rect->SetRoundCorners(0x00); 
+  //rect->SetCornerRadius(0.05f);
+
   AddChild(rect);
 
   Vec2f size;
@@ -138,7 +143,14 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
     Player* sender = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(senderId).GetPtr());
     if (sender)
     {
-      senderName = sender->GetName();
+      if (senderId == GetLocalPlayerId())
+      {
+        senderName = "you"; // NB Case, sigh
+      }
+      else
+      {
+        senderName = sender->GetName();
+      }
 
       Mugshot* m = new Mugshot;
       m->Init(sender);
@@ -164,7 +176,8 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
 
     std::string s;
     
-    if (isMsg)
+    if (isMsg && 
+        senderId != recipId) // ? It looks stupid
     {
       s = "Msg from " + senderName;
     
