@@ -13,6 +13,7 @@
 #include "GSVe3MsgReply.h"
 #include "GSVe3ShowTrade.h"
 #include "LocalPlayer.h"
+#include "TradeFlags.h"
 
 namespace Amju
 {
@@ -108,7 +109,7 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
   float y = 0;
   for (auto it = msgs.rbegin(); it != msgs.rend(); ++it) // reverse so we put latest message at top
   {
-    MsgManager::Msg msg = it->second;
+    const MsgManager::Msg& msg = it->second; 
     Time timestamp = it->first;
 
     // Add one row
@@ -204,6 +205,39 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
     if (senderId == recipId)
     {
       canReply = false;
+    }
+
+    // Add a note if this is a trade and you already responded
+    if (msg.IsTrade())
+    {
+      TradeResponse tr = GetTradeResponse(msg.m_id);
+      Assert((int)tr >= 0);
+      Assert((int)tr < 4);
+      if (tr != TRADE_REPLY_NONE)
+      {
+        static const char* STRS[] = 
+        { 
+          "ERROR", 
+          "You accepted this trade", 
+          "You rejected this trade", 
+          "You made a counter offer" 
+        };
+        canReply = false;
+        // add a gui text note
+        GuiText* responded = new GuiText;
+        responded->SetName("response");
+        responded->SetIsMulti(false);
+        responded->SetFgCol(Colour(0, 0, 0, 1)); 
+        responded->SetBgCol(Colour(1, 1, 0, 1));
+        responded->SetDrawBg(true);
+        responded->SetFontSize(0.5f);
+        responded->SetSize(Vec2f(1.0f, 0.1f)); 
+        responded->SetJust(GuiText::AMJU_JUST_LEFT);
+        responded->SetText(STRS[(int)tr]); 
+        responded->SizeToText();
+        responded->SetLocalPos(Vec2f(0.3f, -0.05f - label->GetSize().y));      
+        comp->AddChild(responded);
+      }
     }
 
     if (addReplyButtons && canReply)

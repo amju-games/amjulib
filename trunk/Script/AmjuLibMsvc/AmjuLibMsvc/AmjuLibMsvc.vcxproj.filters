@@ -915,6 +915,9 @@
     <ClCompile Include="..\..\..\Source\Scene\LoadScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiScrollBar.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1729,6 +1732,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR4D.h">
       <Filter>AmjuGLOpenGL\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiScrollBar.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

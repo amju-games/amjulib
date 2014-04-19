@@ -13,7 +13,7 @@
 #include "HeartCount.h"
 #include "GSVe3Guestbook.h"
 #include "MsgManager.h"
-#include "GSVe3MakeTradeRequest.h"
+#include "GSVe3ChooseTradeType.h"
 
 namespace Amju
 {
@@ -32,7 +32,6 @@ void GSVe3ViewOtherPlayers::Update()
 void GSVe3ViewOtherPlayers::Draw()
 {
   GSGui::Draw();
-
 }
 
 void GSVe3ViewOtherPlayers::Draw2d()
@@ -167,14 +166,9 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
   }
 }
 
-static void OnGiveFood()
+static void OnMakeATrade()
 {
-  TheGSVe3ViewOtherPlayers::Instance()->OnGiveFood();
-}
-
-static void OnGiveTreasure()
-{
-  TheGSVe3ViewOtherPlayers::Instance()->OnGiveTreasure();
+  TheGSVe3ViewOtherPlayers::Instance()->OnMakeATrade();
 }
 
 static void OnSeeGuestbook()
@@ -182,111 +176,12 @@ static void OnSeeGuestbook()
   TheGSVe3ViewOtherPlayers::Instance()->OnSeeGuestbook();
 }
 
-void GSVe3ViewOtherPlayers::OnGiveFood()
+void GSVe3ViewOtherPlayers::OnMakeATrade()
 {
-  // New trading mechanic: send a message to trade food for treasure
-  GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
-  mtr->Reset();
-  mtr->SetPrevState(this);
-  mtr->SetOtherPlayer(m_player->GetId());
-  // Set up trade type
-  mtr->SetTradeType(TRADE_FOOD_FOR_TREASURE);
-  TheGame::Instance()->SetCurrentState(mtr);
-
-  /*
-  // Check we have some
-  Player* p = GetLocalPlayer();
-  Assert(p);
-  if (p->Exists(FOOD_STORED_KEY))  
-  {
-    int food = ToInt(p->GetVal(FOOD_STORED_KEY));
-    if (food < 1)
-    {
-      // Show lurk msg - can't give food!
-      LurkMsg lm("You don't have any food to give!", LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-    }
-    else
-    {
-      // Decremenet local player food, add one to the other player's food count
-      ChangePlayerCount(FOOD_STORED_KEY, -1);
-      ChangeObjCount(m_player->GetId(), FOOD_STORED_KEY, +1);
-
-      // Also change lifetime counters
-      ChangePlayerCount(FOOD_GIVEN_KEY, +1);
-      ChangeObjCount(m_player->GetId(), FOOD_RECEIVED_KEY, +1);
-
-      ShowPlayer(m_player, m_gui); // to update GUI
-
-      TheSoundManager::Instance()->PlayWav("sound/kiss.wav");
-
-      std::string str = "You gave some food to " + m_player->GetName() + "!";
-      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-
-      // Add a message (to guestbook?) so player will know what happened
-      std::string msg = p->GetName() + " gave some food to " + m_player->GetName() + "!";
-      MsgManager* mm = TheMsgManager::Instance();
-      mm->SendMsg(p->GetId(), m_player->GetId(), msg);
-      // Also a message in our own guestbook?
-      mm->SendMsg(m_player->GetId(), p->GetId(), str);
-      // TODO Get this msg into guestbook - send a request for new msgs
-    }
-  }
-  */
-}
-
-void GSVe3ViewOtherPlayers::OnGiveTreasure()
-{
-  // New trading mechanic: send a message to trade food for treasure
-  GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
-  mtr->Reset();
-  mtr->SetPrevState(this);
-  mtr->SetOtherPlayer(m_player->GetId());
-  // Set up trade type
-  mtr->SetTradeType(TRADE_TREASURE_FOR_FOOD);
-  TheGame::Instance()->SetCurrentState(mtr);
-
-  /*
-  // Check we have some
-  Player* p = GetLocalPlayer();
-  Assert(p);
-  if (p->Exists(TREASURE_KEY))  
-  {
-    int tr = ToInt(p->GetVal(TREASURE_KEY));
-    if (tr < 1)
-    {
-      LurkMsg lm("You don't have any treasure to give!", LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-    }
-    else
-    {
-      // Decremenet local player treasure, add one to this other player's treasure
-      ChangePlayerCount(TREASURE_KEY, -1);
-      ChangeObjCount(m_player->GetId(), TREASURE_KEY, +1);
-
-      // Also change lifetime counters
-      ChangePlayerCount(TREASURE_GIVEN_KEY, +1);
-      ChangeObjCount(m_player->GetId(), TREASURE_RECEIVED_KEY, +1);
-
-      ShowPlayer(m_player, m_gui); // to update GUI
-
-      TheSoundManager::Instance()->PlayWav("sound/cashreg.wav");
-
-      std::string str = "You gave some treasure to " + m_player->GetName() + "!";
-      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE); 
-      TheLurker::Instance()->Queue(lm);    
-
-      // Add a message (to guestbook?) so player will know what happened
-      std::string msg = p->GetName() + " gave some treasure to " + m_player->GetName() + "!";
-      MsgManager* mm = TheMsgManager::Instance();
-      mm->SendMsg(p->GetId(), m_player->GetId(), msg);
-      // Also a message in our own guestbook?
-      mm->SendMsg(m_player->GetId(), p->GetId(), str);
-      // TODO Get this msg into guestbook - send a request for new msgs
-    }
-  }
-  */
+  GSVe3ChooseTradeType* ctt = TheGSVe3ChooseTradeType::Instance();
+  ctt->SetPrevState(this); // cancel -> go back here
+  ctt->SetOtherPlayer(m_player);
+  TheGame::Instance()->SetCurrentState(ctt);
 }
 
 void GSVe3ViewOtherPlayers::OnSeeGuestbook()
@@ -308,12 +203,12 @@ void GSVe3ViewOtherPlayers::OnActive()
   GetElementByName(m_gui, "prev-player-button")->SetCommand(OnPrevPlayer);
   GetElementByName(m_gui, "next-player-button")->SetCommand(OnNextPlayer);
 
-  GetElementByName(m_gui, "give-food-button")->SetCommand(Amju::OnGiveFood);
-  GetElementByName(m_gui, "give-treasure-button")->SetCommand(Amju::OnGiveTreasure);
+  GetElementByName(m_gui, "make-trade-button")->SetCommand(Amju::OnMakeATrade);
   GetElementByName(m_gui, "see-guestbook-button")->SetCommand(Amju::OnSeeGuestbook);
 
   // Initialise character
-  if (m_player)
+  if (m_player && 
+      m_player->GetId() != GetLocalPlayerId()) // could happen if you log out, then in as this player
   {
     ShowPlayer(m_player, m_gui);
   }

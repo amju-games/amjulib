@@ -8,6 +8,7 @@
 #include "MsgManager.h"
 #include "LocalPlayer.h"
 #include "GSVe3MakeTradeRequest.h"
+#include "TradeFlags.h"
 
 namespace Amju
 {
@@ -23,6 +24,14 @@ static void OnTradeReject()
 
 void GSVe3ShowTrade::OnTradeReject()
 {
+  if (GetTradeResponse(m_msgId) != TRADE_REPLY_NONE)
+  {
+    std::string str = "You already replied to this trade offer!?";
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
+    TheLurker::Instance()->Queue(lm);    
+    return;
+  }
+
   MsgManager* mm = TheMsgManager::Instance();
 
 ////  mm->SendTradeMsg(p->GetId(), m_player->GetId(), str, nGive, nRecv, m_tradeType); 
@@ -48,6 +57,8 @@ void GSVe3ShowTrade::OnTradeReject()
   str = lpname + " rejected your offer!";
   mm->SendMsg(p->GetId(), m_otherPlayerId, str); // sender, recip, msg
 
+  SetTradeResponse(m_msgId, TRADE_REPLY_REJECT);
+
   str = "OK, you rejected the trade.";
   LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
   TheLurker::Instance()->Queue(lm);    
@@ -65,6 +76,14 @@ static void OnTradeCounterOffer()
 
 void GSVe3ShowTrade::OnTradeAccept()
 {
+  if (GetTradeResponse(m_msgId) != TRADE_REPLY_NONE)
+  {
+    std::string str = "You already replied to this trade offer!?";
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
+    TheLurker::Instance()->Queue(lm);    
+    return;
+  }
+
   MsgManager* mm = TheMsgManager::Instance();
 
   Player* p = GetLocalPlayer();
@@ -106,6 +125,8 @@ void GSVe3ShowTrade::OnTradeAccept()
     return; // lurk msg ?
   }
 
+  SetTradeResponse(m_msgId, TRADE_REPLY_ACCEPT);
+
   // Make string description of trade for the msgs we send
 
   std::string str = "You accepted the trade offered by " + othername + "!";
@@ -121,6 +142,14 @@ void GSVe3ShowTrade::OnTradeAccept()
 
 void GSVe3ShowTrade::OnTradeCounterOffer()
 {
+  if (GetTradeResponse(m_msgId) != TRADE_REPLY_NONE)
+  {
+    std::string str = "You already replied to this trade offer!?";
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, OnTradeCancel); 
+    TheLurker::Instance()->Queue(lm);    
+    return;
+  }
+
   // Set up MakeTradeRequest page with counter offer
   GSVe3MakeTradeRequest* mtr = TheGSVe3MakeTradeRequest::Instance();
   mtr->Reset();
@@ -133,6 +162,8 @@ void GSVe3ShowTrade::OnTradeCounterOffer()
   // .. and switch give/recv values!
   mtr->SetGiveRecv(m_recv, m_give);
   mtr->SetPrevState(GetPrevState()); // after sending counter offer, go back to our prev state
+
+  SetTradeResponse(m_msgId, TRADE_REPLY_COUNTER);
 
   TheGame::Instance()->SetCurrentState(mtr);
 }

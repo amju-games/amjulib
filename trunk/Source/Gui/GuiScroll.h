@@ -2,6 +2,7 @@
 #define GUI_SCROLL_H_INCLUDED
 
 #include "GuiComposite.h"
+#include "GuiScrollBar.h"
 
 namespace Amju
 {
@@ -24,10 +25,14 @@ public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
+  void InitScrollBar();
+
 private:
   // Offset in x and y
   Vec2f m_scrollPos;
   Vec2f m_scrollVel; 
+
+  RCPtr<GuiScrollBar> m_scrollBar;
 };
 }
 

@@ -266,6 +266,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSToday.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTodaysTask.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSTrailMakingTest.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3ChooseTradeType.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3GetObjects.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3GetObjectStates.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3Guestbook.cpp" />
@@ -333,6 +334,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\TimePeriodString.cpp" />
     <ClCompile Include="..\..\..\..\Source\Timestamp.cpp" />
     <ClCompile Include="..\..\..\..\Source\TitlePerson.cpp" />
+    <ClCompile Include="..\..\..\..\Source\TradeFlags.cpp" />
     <ClCompile Include="..\..\..\..\Source\TradeGui.cpp" />
     <ClCompile Include="..\..\..\..\Source\Treasure.cpp" />
     <ClCompile Include="..\..\..\..\Source\UnCollide.cpp" />
@@ -441,6 +443,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSToday.h" />
     <ClInclude Include="..\..\..\..\Source\GSTodaysTask.h" />
     <ClInclude Include="..\..\..\..\Source\GSTrailMakingTest.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3ChooseTradeType.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3GetObjects.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3GetObjectStates.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3Guestbook.h" />
@@ -514,6 +517,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TimePeriodString.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
+    <ClInclude Include="..\..\..\..\Source\TradeFlags.h" />
     <ClInclude Include="..\..\..\..\Source\TradeGui.h" />
     <ClInclude Include="..\..\..\..\Source\TradeType.h" />
     <ClInclude Include="..\..\..\..\Source\Treasure.h" />

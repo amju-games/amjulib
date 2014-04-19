@@ -49,11 +49,11 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
   return false;
 }
 
-static bool leftDrag = false;
+static bool leftDrag = false; // TODO Surely this should be a member variable
 
 bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 {
-  Assert(m_children.size() == 1);
+  Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
   if (leftDrag)
@@ -66,7 +66,7 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 
 bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-  Assert(m_children.size() == 1);
+  Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
@@ -79,7 +79,7 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 void GuiScroll::Draw()
 {
-  Assert(m_children.size() == 1);
+  Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
   // Update not called. TODO
@@ -138,7 +138,7 @@ void GuiScroll::Draw()
   }
   SetLocalPos(m_scrollPos); // so combined pos for child is updated
 
-  child->Draw();
+  GuiComposite::Draw(); //child->Draw();
 }
 
 void GuiScroll::Update()
@@ -197,6 +197,19 @@ bool GuiScroll::Load(File* f)
   AddChild(e); 
 
   return true;
+}
+
+void GuiScroll::InitScrollBar()
+{
+  // Not really a problem
+//  Assert(!m_scrollBar); // already initialised
+
+  m_scrollBar = new GuiScrollBar;
+  m_scrollBar->SetSize(Vec2f(0.1f, GetSize().y)); // for vertical
+  m_scrollBar->SetLocalPos(Vec2f(0, 0)); // TODO
+  m_scrollBar->SetParent(this); // needs to be on heap?
+  m_scrollBar->Init();
+  AddChild(m_scrollBar);
 }
 
 }
