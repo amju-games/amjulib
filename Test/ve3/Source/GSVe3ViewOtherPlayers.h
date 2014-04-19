@@ -23,9 +23,8 @@ public:
   void NextPlayer();
   void PrevPlayer();
 
-  void OnGiveFood();
-  void OnGiveTreasure();
   void OnSeeGuestbook();
+  void OnMakeATrade();
 
 private:
   RCPtr<Player> m_player;

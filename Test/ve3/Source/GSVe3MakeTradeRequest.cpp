@@ -1,5 +1,7 @@
 #include <GuiTextEdit.h>
+#include <Game.h>
 #include "GSVe3MakeTradeRequest.h"
+#include "GSVe3ViewOtherPlayers.h"
 #include "LurkMsg.h"
 #include "LocalPlayer.h"
 #include "MsgManager.h"
@@ -44,7 +46,10 @@ static void OnTradeSend()
 
 static void OnTradeDoneOk()
 {
-  TheGSVe3MakeTradeRequest::Instance()->GoBack();
+  // TODO What state should we go to - View Other Players, right?
+//  TheGSVe3MakeTradeRequest::Instance()->GoBack();
+
+  TheGame::Instance()->SetCurrentState(TheGSVe3ViewOtherPlayers::Instance());
 }
 
 void GSVe3MakeTradeRequest::OnTradeSend()
