@@ -81,8 +81,7 @@ void GSVe3ShowTrade::OnTradeAccept()
   Player* p = GetLocalPlayer();
   std::string lpname = p->GetName();
 
-  // TODO Check this is the right way around!!!
-  // Check you have that much
+  // Check you have enough of the thing you are giving
   // Your max is your food count or treasure count, depending on the trade type
   int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? 
     p->GetVal(TREASURE_KEY) :  // other player wants to give food, get treasure
@@ -92,6 +91,8 @@ void GSVe3ShowTrade::OnTradeAccept()
   {
     std::string str = "You only have " + ToString(maxToGive) + 
       ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " treasure!" : " food!");
+    str += "\nYou can't make this trade right now!";
+
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::OnTradeCancel); 
     TheLurker::Instance()->Queue(lm);
     return;
@@ -100,8 +101,24 @@ void GSVe3ShowTrade::OnTradeAccept()
   Assert(m_otherTradePlayer);
   std::string othername = m_otherTradePlayer->GetName();
 
-  // TODO Check this is the right way around!!!
+  // Check the other player has enough of the thing you are recving!
+  maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? 
+    m_otherTradePlayer->GetVal(FOOD_STORED_KEY) :  // other player wants to give food, get treasure
+    m_otherTradePlayer->GetVal(TREASURE_KEY));  // other player wants to give treasure, get food
 
+  if (m_recv > maxToGive)
+  {
+    std::string str = "Oh no! " + othername + " only has " + ToString(maxToGive) + 
+      ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " food!" : " treasure!");
+    str += "\nYou can't make this trade right now!";
+
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::OnTradeCancel); 
+    TheLurker::Instance()->Queue(lm);
+    return;
+  }
+
+
+  // OK, this trade can be made!
   if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
   {
     // Local player gets food. Other player gets treasure
