@@ -74,7 +74,8 @@ void GSLikertQuestions::OnActive()
     std::string buttonName = "button" + ToString(i + 1);
     GuiElement* elem = GetElementByName(m_gui, buttonName);
     Assert(elem);
-    elem->SetCommand(new LikertButtonCommand(i));
+    // Questions giev results 1..5 for 5-choice test, with 0 for decline to answer
+    elem->SetCommand(new LikertButtonCommand(i + 1));
   }
 
   // Decline to answer button
