@@ -84,11 +84,14 @@ void GSVe3ShowTrade::OnTradeAccept()
   // TODO Check this is the right way around!!!
   // Check you have that much
   // Your max is your food count or treasure count, depending on the trade type
-  int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? p->GetVal(FOOD_STORED_KEY) : p->GetVal(TREASURE_KEY));
-  if (m_give > maxToGive)
+  int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? 
+    p->GetVal(TREASURE_KEY) :  // other player wants to give food, get treasure
+    p->GetVal(FOOD_STORED_KEY));  // other player wants to give treasure, get food
+
+  if (m_recv > maxToGive)
   {
     std::string str = "You only have " + ToString(maxToGive) + 
-      ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " food!" : " treasure!");
+      ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " treasure!" : " food!");
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::OnTradeCancel); 
     TheLurker::Instance()->Queue(lm);
     return;
@@ -101,6 +104,7 @@ void GSVe3ShowTrade::OnTradeAccept()
 
   if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
   {
+    // Local player gets food. Other player gets treasure
     ChangePlayerCount(FOOD_STORED_KEY, m_give);
     ChangeObjCount(m_otherPlayerId, FOOD_STORED_KEY, -m_give);
 
