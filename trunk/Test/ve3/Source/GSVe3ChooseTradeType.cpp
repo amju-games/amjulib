@@ -2,6 +2,8 @@
 #include "GSVe3ChooseTradeType.h"
 #include "GSVe3MakeTradeRequest.h"
 #include "LurkMsg.h"
+#include "LayerGroup.h"
+#include "LocalPlayer.h"
 
 namespace Amju
 {
@@ -42,26 +44,28 @@ void GSVe3ChooseTradeType::Draw()
 
 void GSVe3ChooseTradeType::Draw2d()
 {
+  GSGui::Draw2d();
   // TODO
 
-  /*
-  // Draw player
+  Vec2f TRANSLATE[4] = { Vec2f(-25, 0), Vec2f(75.0f, 0), Vec2f(175, 0), Vec2f(275, 0) };
+
+  // Draw players
   AmjuGL::PushMatrix();
-  // Scale for 'breathing' effect..?
+
   AmjuGL::RotateX(90.0f); 
-  static float f = 0;
-  f += TheTimer::Instance()->GetDt();
-  float s = sin(f) * 0.001f;
-  AmjuGL::Translate(-0.6f, 0, -0.4f);
-  AmjuGL::Scale(0.01f, 1, 0.01f);
-  AmjuGL::Scale(1, 1, 1.0f + s);
+  AmjuGL::Translate(-0.6f, 0, -0.3f);
+  AmjuGL::Scale(0.005f, 1, 0.005f);
 
-  m_spriteNode.Draw();
+  for (int i = 0; i < 4; i++)
+  {
+    AmjuGL::PushMatrix();
+    AmjuGL::Translate(TRANSLATE[i].x, TRANSLATE[i].y, 0);
+    m_spriteNodes[i].Draw();
+    AmjuGL::PopMatrix();
+
+    m_spriteNodes[i].Update();
+  }
   AmjuGL::PopMatrix();
-  */
-
-  // Draw over character if necessary
-  GSGui::Draw2d();
 }
 
 void GSVe3ChooseTradeType::OnActive()
@@ -75,6 +79,18 @@ void GSVe3ChooseTradeType::OnActive()
   GetElementByName(m_gui, "give-treasure-button")->SetCommand(Amju::OnGiveTreasure);
   GetElementByName(m_gui, "give-food-button")->SetCommand(Amju::OnGiveFood);
 
+  Assert(m_player); // the other player
+  Player* localPlayer = GetLocalPlayer();
+  Assert(localPlayer);
+  Player* PLAYER[4] = { m_player, localPlayer, m_player, localPlayer };
+  for (int i = 0; i < 4; i++)
+  {
+    LayerGroups layerGroups; // store settings for each layer
+    layerGroups.SetFromSprite(PLAYER[i]->GetSprite());
+    layerGroups.SetSprite(&m_spriteNodes[i].GetSprite());
+
+    m_spriteNodes[i].Update();
+  }
 }
 
 void GSVe3ChooseTradeType::OnGiveFood()
