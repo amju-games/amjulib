@@ -7,7 +7,7 @@ gui-comp
 // Name
 choose-trade-type-comp
 // Num children
-8
+13
 
 // Title bar - show this player's name
 // Element type
@@ -36,6 +36,12 @@ c0c0c0
 // flags
 0
 
+gui-image
+divider-img
+-0.01, 0.75
+0.02, 1.4
+wh8.png
+
 // Element type
 gui-text
 // Element name
@@ -49,6 +55,18 @@ You give food, and get treasure
 // Font name, size
 arial, 1.0, fgcol=000000, multi
 
+gui-image
+give-food-img
+-0.55, 0.5
+0.175, 0.2
+trade-give-food.png
+
+gui-image
+recv-treasure-img
+-0.55, 0.3
+0.175, 0.2
+trade-recv-treasure.png
+
 // Element type
 gui-text
 // Element name
@@ -61,6 +79,18 @@ static-text3
 You give treasure, and get food
 // Font name, size
 arial, 1.0, fgcol=000000, multi
+
+gui-image
+recv-food-img
+0.45, 0.5
+0.175, 0.2
+trade-recv-food.png
+
+gui-image
+give-treasure-img
+0.45, 0.3
+0.175, 0.2
+trade-give-treasure.png
 
 // Element type
 gui-text

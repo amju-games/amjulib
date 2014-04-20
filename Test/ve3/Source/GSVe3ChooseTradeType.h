@@ -2,6 +2,7 @@
 
 #include "GSGui.h"
 #include "Player.h"
+#include "Ve1SpriteNode.h"
 
 namespace Amju
 {
@@ -38,5 +39,8 @@ public:
 
 private:
   RCPtr<Player> m_player;
+
+  // Draw 2 player sprites on each side, so 4 in total
+  Ve1SpriteNode m_spriteNodes[4];
 };
 }
