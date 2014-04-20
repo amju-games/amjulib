@@ -1,0 +1,136 @@
+// Satisfaction With Life Scale (Diener et al., 1985)
+// version
+1
+
+// Element type
+gui-comp
+// Name
+swls-comp
+// Num children
+9
+
+// Element type
+gui-text
+// Element name
+instructions-text
+// pos (coords are -1..1)
+-1.0, 0.7
+// size
+2.0, 0.4
+// Text
+Do you agree with this statement:
+// Font name, size
+arial, 1.0, fgcol=000000
+
+
+// Element type
+gui-text
+// Element name
+question-text
+// pos (coords are -1..1)
+-0.7, 0.4
+// size
+1.6, 0.5
+// Text
+Question here
+// Font name, size
+arial, 1.5, fgcol=000000, multi
+
+// Element type
+gui-text
+// Element name
+instructions2-text
+// pos (coords are -1..1)
+-1.0, -.9
+// size
+2.0, 0.1
+// Text
+Please click on a button
+// Font name, size
+arial, 1.0, fgcol=000000
+
+
+gui-button
+// Element name
+button1
+// pos (coords are -1..1)
+-1.0, -0.15
+// size
+0.5, 0.15
+// Image
+gui-button-4.png
+// Text
+Strongly disagree
+// Font name, size
+arial, 1.0, sx=0.5
+
+gui-button
+// Element name
+button2
+// pos (coords are -1..1)
+-0.475, -0.15
+// size
+0.3, 0.15
+// Image
+gui-button-2.png
+// Text
+Disagree
+// Font name, size
+arial, 1.0, sx=0.5
+
+gui-button
+// Element name
+button3
+// pos (coords are -1..1)
+-0.15, -0.15
+// size
+0.3, 0.15
+// Image
+gui-button-2.png
+// Text
+Neutral
+// Font name, size
+arial, 1.0, sx=0.5
+
+
+gui-button
+// Element name
+button4
+// pos (coords are -1..1)
+0.175, -0.15
+// size
+0.3, 0.15
+// Image
+gui-button-2.png
+// Text
+Agree
+// Font name, size
+arial, 1.0, sx=0.5 
+
+gui-button
+// Element name
+button5
+// pos (coords are -1..1)
+0.5, -0.15
+// size
+0.5, 0.15
+// Image
+gui-button-4.png
+// Text
+Strongly agree
+// Font name, size
+arial, 1.0, sx=0.5
+
+gui-button
+// Element name
+button-decline
+// pos (coords are -1..1)
+-0.25, -0.6
+// size
+0.5, 0.15
+// Image
+gui-button-4.png
+// Text
+No answer
+// Font name, size
+arial, 1.0 
