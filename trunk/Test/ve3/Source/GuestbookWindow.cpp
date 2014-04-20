@@ -26,6 +26,7 @@ public:
   {
     Game* game = TheGame::Instance();
     GSVe3ShowTrade* st = TheGSVe3ShowTrade::Instance();
+    st->Reset();
     st->SetMsgId(m_msgId);
     // Set state to go back to
     st->SetPrevState(game->GetState());
@@ -218,9 +219,9 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons)
         static const char* STRS[] = 
         { 
           "ERROR", 
-          "You accepted this trade", 
-          "You rejected this trade", 
-          "You made a counter offer" 
+          "You accepted this trade!", 
+          "You rejected this trade!", 
+          "You made a counter offer!" 
         };
         canReply = false;
         // add a gui text note

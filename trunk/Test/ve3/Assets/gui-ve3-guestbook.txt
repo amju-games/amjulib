@@ -93,6 +93,6 @@ gui-button-4.png
 // Text
 Back
 // Font name, size
-arial, 1.5, sx=1
+arial, 1.5
 
 
