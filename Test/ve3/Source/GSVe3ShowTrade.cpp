@@ -33,28 +33,20 @@ void GSVe3ShowTrade::OnTradeReject()
   }
 
   MsgManager* mm = TheMsgManager::Instance();
-
-////  mm->SendTradeMsg(p->GetId(), m_player->GetId(), str, nGive, nRecv, m_tradeType); 
-    // sender, recip, msg, give num, recv num, trade type
-
   Player* p = GetLocalPlayer();
   std::string lpname = p->GetName();
-
-  //const MsgManager::Msg* msg = mm->GetMsg(m_msgId);
-  //Assert(msg);
-  //Player* other = dynamic_cast<Player*>(
-  //  TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
-
   std::string othername = m_otherTradePlayer->GetName();
 
   // Also a message in our own guestbook?
   // TODO Watch out - can we use "You" in a message??
   // (you can only if no-one else will see the msg.)
   //  Maybe use <sender> and <recip> and substitute when we display.
-  std::string str = "You rejected the trade offered by " + othername + ".";
-  mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
 
-  str = lpname + " rejected your offer!";
+  // Not required - we tag each offer as accepted/rejected/etc
+//  std::string str = "You rejected the trade offered by " + othername + ".";
+//  mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
+
+  std::string str = lpname + " rejected your offer!";
   mm->SendMsg(p->GetId(), m_otherPlayerId, str); // sender, recip, msg
 
   SetTradeResponse(m_msgId, TRADE_REPLY_REJECT);
@@ -89,19 +81,23 @@ void GSVe3ShowTrade::OnTradeAccept()
   Player* p = GetLocalPlayer();
   std::string lpname = p->GetName();
 
-  //const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
-  //Assert(msg);
-  //Player* other = dynamic_cast<Player*>(
-  //  TheObjectManager::Instance()->GetGameObject(msg->m_senderId).GetPtr());
-
-  //// Get trade info. Make changes to counters for local player and other
-  //int give = 0;
-  //int recv = 0;
-  //TradeType tt = TRADE_NONE;
-  //msg->GetTradeInfo(&give, &recv, &tt);
+  // TODO Check this is the right way around!!!
+  // Check you have that much
+  // Your max is your food count or treasure count, depending on the trade type
+  int maxToGive = ToInt((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? p->GetVal(FOOD_STORED_KEY) : p->GetVal(TREASURE_KEY));
+  if (m_give > maxToGive)
+  {
+    std::string str = "You only have " + ToString(maxToGive) + 
+      ((m_tradeType == TRADE_FOOD_FOR_TREASURE) ? " food!" : " treasure!");
+    LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE, Amju::OnTradeCancel); 
+    TheLurker::Instance()->Queue(lm);
+    return;
+  }
 
   Assert(m_otherTradePlayer);
   std::string othername = m_otherTradePlayer->GetName();
+
+  // TODO Check this is the right way around!!!
 
   if (m_tradeType == TRADE_FOOD_FOR_TREASURE)
   {
