@@ -30,12 +30,14 @@ sub showresults()
   $query->execute;
 
   my %test_names = (
-    3 => "Stroop word",
-    4 => "Stroop colour",
-    5 => "Stroop colour word",
-    6 => "Reaction time",
-    7 => "Trail making (sequential)",
-    8 => "Trail making (alternate)"
+    3  => "Stroop word",
+    4  => "Stroop colour",
+    5  => "Stroop colour word",
+    6  => "Reaction time",
+    7  => "Trail making (sequential)",
+    8  => "Trail making (alternate)",
+    9  => "DeJong Gierveld",
+    10 => "SWLS"
   );
 
   print "<table border=1>";
