@@ -53,7 +53,7 @@ std::string MsgManager::Msg::GetStrippedText() const
     std::string lastLine = res.substr(i);
     Trim(&lastLine);
     // Look for <> -- strip this last line from res?
-    if (!lastLine.empty() && lastLine.front() == '<' && lastLine.back() == '>')
+    if (!lastLine.empty() && lastLine[0] == '<' && *lastLine.rend() == '>')
     {
       res = res.substr(0, i);
     }
