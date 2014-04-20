@@ -32,7 +32,7 @@ void TradeGui::SetMsgId(int msgId)
 
   // Set trade info from msg
   MsgManager* mm = TheMsgManager::Instance();
-  const MsgManager::Msg* msg = TheMsgManager::Instance()->GetMsg(m_msgId);
+  const MsgManager::Msg* msg = mm->GetMsg(m_msgId);
   Assert(msg);
 
   m_otherPlayerId = msg->m_senderId;
