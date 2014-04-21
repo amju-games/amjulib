@@ -32,6 +32,7 @@ public:
     // Type, e.g. post, chat, pigeon post
 
     bool IsTrade() const;
+    bool IsGuestbookMsg() const;
 
     // Read trade info from a message - check it has trade info first!
     void GetTradeInfo(int* giveNum, int* recvNum, TradeType* tt) const;

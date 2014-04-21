@@ -43,6 +43,12 @@ bool MsgManager::Msg::IsTrade() const
   return b;
 }
     
+bool MsgManager::Msg::IsGuestbookMsg() const
+{
+  bool b = StringContains(m_text, "<gb>");
+  return b;
+}
+
 std::string MsgManager::Msg::GetStrippedText() const
 {
   // HACK: Strip final line, if it begins '<' and ends '>'

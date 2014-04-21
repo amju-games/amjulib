@@ -31,6 +31,16 @@ static void OnSeeMyGuestbook()
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
   g->SetPrevState(TheGSVe3HomePage::Instance());
   g->SetPlayer(GetLocalPlayer());
+  g->SetIsGuestbookOnly(true);
+  TheGame::Instance()->SetCurrentState(g);
+}
+
+static void OnSeeMyMessages()
+{
+  GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
+  g->SetPrevState(TheGSVe3HomePage::Instance());
+  g->SetPlayer(GetLocalPlayer());
+  g->SetIsGuestbookOnly(false);
   TheGame::Instance()->SetCurrentState(g);
 }
 
@@ -153,6 +163,7 @@ void GSVe3HomePage::OnActive()
   GetElementByName(m_gui, "other-players-button")->SetCommand(OnOtherPlayers);
   GetElementByName(m_gui, "eat-button")->SetCommand(OnHomepageEatButton);
   GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeMyGuestbook);
+  GetElementByName(m_gui, "see-msgs-button")->SetCommand(OnSeeMyMessages);
 
   Player* p = GetLocalPlayer();
   Assert(p);

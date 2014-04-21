@@ -1,4 +1,5 @@
 #include <Game.h>
+#include <CursorManager.h>
 #include "GSVe3ChooseTradeType.h"
 #include "GSVe3MakeTradeRequest.h"
 #include "LurkMsg.h"
@@ -66,6 +67,8 @@ void GSVe3ChooseTradeType::Draw2d()
     m_spriteNodes[i].Update();
   }
   AmjuGL::PopMatrix();
+
+  TheCursorManager::Instance()->Draw();
 }
 
 void GSVe3ChooseTradeType::OnActive()
@@ -82,7 +85,7 @@ void GSVe3ChooseTradeType::OnActive()
   Assert(m_player); // the other player
   Player* localPlayer = GetLocalPlayer();
   Assert(localPlayer);
-  Player* PLAYER[4] = { m_player, localPlayer, m_player, localPlayer };
+  Player* PLAYER[4] = { localPlayer, m_player, localPlayer, m_player };
   for (int i = 0; i < 4; i++)
   {
     LayerGroups layerGroups; // store settings for each layer

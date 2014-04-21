@@ -21,6 +21,9 @@ public:
   virtual void OnDeactive();
 
   void SetPlayer(Player*);
+  // Display Guestbook messages, or other types of message?
+  void SetIsGuestbookOnly(bool guestbookOnly);
+
   void OnAddCommentButton();
 
 protected:
@@ -29,6 +32,9 @@ protected:
 protected:
   RCPtr<Player> m_player;
   std::string m_unfinishedCommentStr;
+
+  // If true, only show <gb> msgs
+  bool m_guestbookOnly;
 };
 typedef Singleton<GSVe3Guestbook> TheGSVe3Guestbook;
 } // namespace
