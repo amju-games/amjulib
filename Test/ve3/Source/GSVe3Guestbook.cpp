@@ -19,18 +19,30 @@ static void OnBack()
 
 GSVe3Guestbook::GSVe3Guestbook()
 {
+  m_guestbookOnly = true;
+  m_showLurk = true;
 }
 
-struct ForPlayer
+void GSVe3Guestbook::SetIsGuestbookOnly(bool guestbookOnly)
 {
-  ForPlayer(int playerId) : m_playerId(playerId) {}
+  m_guestbookOnly = guestbookOnly;
+}
+
+struct GBMsgsForPlayer
+{
+  GBMsgsForPlayer(int playerId, bool gbOnly) : m_playerId(playerId), m_gbOnly(gbOnly) {}
 
   bool operator()(const MsgManager::Msg& msg)
   {
+    if (m_gbOnly)
+    {
+      return msg.IsGuestbookMsg() && msg.m_recipId == m_playerId;
+    }
     return msg.m_recipId == m_playerId;
   }
 
   int m_playerId;
+  bool m_gbOnly;
 };
 
 void GSVe3Guestbook::InitGB()
@@ -41,9 +53,13 @@ void GSVe3Guestbook::InitGB()
   Assert(m_player);
   bool isLocalPlayer = m_player->IsLocalPlayer();
 
-  MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(ForPlayer(m_player->GetId()));
+  MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(
+    GBMsgsForPlayer(m_player->GetId(), m_guestbookOnly));
+
   // DO show reply buttons IF this is the local player's guestbook/messages
-  gw->GetGBDisplay()->Init(msgs, isLocalPlayer); 
+  // (But you can't reply to guestbook msgs, you have to go to the other
+  //  player's guestbook and put a comment there.)
+  gw->GetGBDisplay()->Init(msgs, isLocalPlayer && !m_guestbookOnly); 
 }
 
 void GSVe3Guestbook::Update()
@@ -83,6 +99,8 @@ void GSVe3Guestbook::OnAddCommentButton()
   {
     return; // TODO contemptuous sound fx
   }
+  // Add GB tag so we can only list GB msgs if we want
+  str += "\n<gb>";
 
   int senderId = GetLocalPlayerId();
   int recipId = m_player->GetId();
@@ -123,11 +141,17 @@ void GSVe3Guestbook::OnActive()
 
   if (isLocalPlayer)
   {
-    namestr = "Your guestbook";
+    namestr = "Your messages";
+    if (m_guestbookOnly)
+    {
+      namestr = "Your guestbook";
+    }
     name->SetFgCol(Colour(0, 0.5f, 0, 1));
   }
   else 
   {
+    // Maybe get rid of this to simplify the game
+
     namestr = m_player->GetName() + "'s guestbook";
     if (m_player->IsLoggedIn())
     {

@@ -189,6 +189,7 @@ void GSVe3ViewOtherPlayers::OnSeeGuestbook()
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
   g->SetPrevState(TheGSVe3ViewOtherPlayers::Instance());
   g->SetPlayer(m_player);
+  g->SetIsGuestbookOnly(true);
   TheGame::Instance()->SetCurrentState(g);
 }
 
