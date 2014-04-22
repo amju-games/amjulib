@@ -71,7 +71,7 @@ void GSVe3HomePage::Update()
 
   // Display Lurk Msg if we have any new msgs
   // This is not sending DB reqs to server, just checking the local queue.
-  CheckForNewMessages(); 
+  // CheckForNewMessages(); 
 
   // Change msgs icon if we have msgs
   static MsgManager* mm = TheMsgManager::Instance();
@@ -191,7 +191,7 @@ void GSVe3HomePage::OnActive()
 
   // Send req for new msgs
   TheMsgManager::Instance()->CheckForNewMsgs();
-  CheckForNewMessages(); // display Lurk Msg if we have any new msgs
+  //CheckForNewMessages(); // display Lurk Msg if we have any new msgs
 }
 
 } // namespace
