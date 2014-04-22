@@ -54,7 +54,7 @@ perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
 # Build (release mode)
 export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
-#####make clean
+make clean
 make
 
 # Copy .lib binary to lib folder
