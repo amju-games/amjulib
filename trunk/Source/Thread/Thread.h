@@ -48,7 +48,7 @@ protected:
   bool m_stop;
 
 private:
-  unsigned int m_threadId;
+  unsigned long int m_threadId;
 
 #if defined(WIN32)
   unsigned long m_threadHandle;
