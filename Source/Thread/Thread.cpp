@@ -111,7 +111,7 @@ std::cout << "FAILED TO CREATE THREAD\n";
 
   if (!pthread_create(&thrHandle, &attr, &ThreadFunction, this)) 
   {
-      m_threadId = (int) thrHandle;
+      m_threadId = (unsigned long int) thrHandle;
       m_threadHandle = thrHandle;
   }
   else
