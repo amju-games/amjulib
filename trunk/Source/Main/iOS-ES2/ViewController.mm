@@ -135,14 +135,18 @@ void QueueEvent(Amju::Event* e)
    
    // accel[0] corresponds to tilting forward/back, i.e. rotation about x-axis when in landscape mode
    // accel[1] corresponds to z-rotation, like twisting a Wii remote
-   
-   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[1], accel[0]);
-   
+  
+   // This is for LANDSCAPE mode
+//   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[1], accel[0]);
+
+   // This is for PORTRAIT mode
+   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[0], accel[2]);
+
    // TODO This depends on iphone orientation
 //   be->x = accel[1];
 //   be->y = accel[0];
    
-   #ifdef ACC_DEBUG
+   #ifdef ACCELEROM_DEBUG
    std::cout << "ACCEL: X: " << accel[0] << " Y: " << accel[1] << " Z: " << accel[2] << "\n";
    #endif
    
