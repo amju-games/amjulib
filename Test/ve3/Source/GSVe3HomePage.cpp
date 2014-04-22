@@ -72,6 +72,25 @@ void GSVe3HomePage::Update()
   // Display Lurk Msg if we have any new msgs
   // This is not sending DB reqs to server, just checking the local queue.
   CheckForNewMessages(); 
+
+  // Change msgs icon if we have msgs
+  static MsgManager* mm = TheMsgManager::Instance();
+  static Texture* mailtextures[2] = 
+  {
+    (Texture*)TheResourceManager::Instance()->GetRes("mail1.png"),
+    (Texture*)TheResourceManager::Instance()->GetRes("mail2.png")
+  };
+
+  GuiImage* img = (GuiImage*)GetElementByName(m_gui, "mail-img"); 
+  int msgs = mm->HasNewMsgs();
+  if (msgs > 0)
+  {
+    img->SetTexture(mailtextures[1]); 
+  }
+  else
+  {
+    img->SetTexture(mailtextures[0]); 
+  }
 }
 
 void GSVe3HomePage::Draw()
