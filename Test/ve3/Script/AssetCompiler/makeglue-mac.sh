@@ -52,3 +52,5 @@ $GLUE_EXE -d $GLUE_FILE
 
 cd $THIS_DIR
 
+echo "Now don't forget to make release-glue back in the MacOSX directory!"
+
