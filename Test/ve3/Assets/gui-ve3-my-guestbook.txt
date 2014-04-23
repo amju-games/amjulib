@@ -7,7 +7,7 @@ gui-comp
 // Name
 guestbook-page-comp
 // Num children
-3
+4
 
 
 // Type
@@ -41,13 +41,29 @@ gui-button
 // Element name
 back-button
 // pos (coords are -1..1)
--0.4, -0.75
+-0.9, -0.75
 // size
 0.8, 0.2
 // Image
 gui-button-4.png
 // Text
 Back
+// Font name, size
+arial, 1.5
+
+
+// element type
+gui-button
+// Element name
+sent-msgs-button
+// pos (coords are -1..1)
+0.1, -0.75
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Sent messages
 // Font name, size
 arial, 1.5
 
