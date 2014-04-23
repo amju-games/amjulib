@@ -21,10 +21,15 @@ public:
   virtual void OnDeactive();
 
   void SetPlayer(Player*);
+
   // Display Guestbook messages, or other types of message?
   void SetIsGuestbookOnly(bool guestbookOnly);
 
+  void SetShowSentMsgs(bool sent) { m_showSentMsgs = sent; }
+ 
   void OnAddCommentButton();
+
+  void OnSentMsgs();
 
 protected:
   virtual void InitGB();
@@ -35,6 +40,9 @@ protected:
 
   // If true, only show <gb> msgs
   bool m_guestbookOnly;
+
+  // If true, only show msgs sent by player (non guestbook)
+  bool m_showSentMsgs;
 };
 typedef Singleton<GSVe3Guestbook> TheGSVe3Guestbook;
 } // namespace

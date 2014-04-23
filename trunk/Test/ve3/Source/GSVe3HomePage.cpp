@@ -32,6 +32,7 @@ static void OnSeeMyGuestbook()
   g->SetPrevState(TheGSVe3HomePage::Instance());
   g->SetPlayer(GetLocalPlayer());
   g->SetIsGuestbookOnly(true);
+  g->SetShowSentMsgs(false);
   TheGame::Instance()->SetCurrentState(g);
 }
 

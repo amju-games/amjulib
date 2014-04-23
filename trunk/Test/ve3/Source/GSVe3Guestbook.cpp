@@ -17,10 +17,23 @@ static void OnBack()
   TheGSVe3Guestbook::Instance()->GoBack();
 }
 
+static void OnSentMsgs()
+{
+  TheGSVe3Guestbook::Instance()->OnSentMsgs();
+}
+
 GSVe3Guestbook::GSVe3Guestbook()
 {
-  m_guestbookOnly = true;
   m_showLurk = true;
+  m_guestbookOnly = true;
+  m_showSentMsgs = false;
+}
+
+void GSVe3Guestbook::OnSentMsgs()
+{
+std::cout << "Flipping sent/inbox\n";
+  m_showSentMsgs = !m_showSentMsgs;
+  OnActive(); // Ok to call again???
 }
 
 void GSVe3Guestbook::SetIsGuestbookOnly(bool guestbookOnly)
@@ -30,19 +43,31 @@ void GSVe3Guestbook::SetIsGuestbookOnly(bool guestbookOnly)
 
 struct GBMsgsForPlayer
 {
-  GBMsgsForPlayer(int playerId, bool gbOnly) : m_playerId(playerId), m_gbOnly(gbOnly) {}
+  GBMsgsForPlayer(int playerId, bool gbOnly, bool showSentMsgs) :
+    m_playerId(playerId), m_gbOnly(gbOnly), m_showSent(showSentMsgs) {}
 
   bool operator()(const MsgManager::Msg& msg)
   {
+    bool b = false;
+    if (m_showSent)
+    {
+      b = msg.m_senderId == m_playerId;
+    }
+    else
+    {
+      b = msg.m_recipId == m_playerId;
+    }
+
     if (m_gbOnly)
     {
-      return msg.IsGuestbookMsg() && msg.m_recipId == m_playerId;
+      return b && msg.IsGuestbookMsg();
     }
-    return msg.m_recipId == m_playerId;
+    return b;
   }
 
   int m_playerId;
   bool m_gbOnly;
+  bool m_showSent;
 };
 
 void GSVe3Guestbook::InitGB()
@@ -54,7 +79,7 @@ void GSVe3Guestbook::InitGB()
   bool isLocalPlayer = m_player->IsLocalPlayer();
 
   MsgManager::Msgs msgs = TheMsgManager::Instance()->GetMsgs(
-    GBMsgsForPlayer(m_player->GetId(), m_guestbookOnly));
+    GBMsgsForPlayer(m_player->GetId(), m_guestbookOnly, m_showSentMsgs));
 
   // DO show reply buttons IF this is the local player's guestbook/messages
   // (But you can't reply to guestbook msgs, you have to go to the other
@@ -141,7 +166,13 @@ void GSVe3Guestbook::OnActive()
 
   if (isLocalPlayer)
   {
-    namestr = "Your messages";
+    namestr = "Your message inbox";
+    if (m_showSentMsgs)
+    {
+      namestr = "Messages sent by you";
+      Assert(!m_guestbookOnly); // can't view sent gb msgs
+    }
+
     if (m_guestbookOnly)
     {
       namestr = "Your guestbook";
@@ -153,6 +184,8 @@ void GSVe3Guestbook::OnActive()
     // Maybe get rid of this to simplify the game
 
     namestr = m_player->GetName() + "'s guestbook";
+
+    // TODO colours?? Logged in flag is not accurate
     if (m_player->IsLoggedIn())
     {
       name->SetFgCol(Colour(1, 0, 0, 1));
@@ -173,6 +206,21 @@ void GSVe3Guestbook::OnActive()
   if (addcomment)
   {
     addcomment->SetCommand(OnAddComment);
+  }
+
+  // Button to toggle betwen sent and recvd messages.
+  GuiButton* sentMsgsButton = (GuiButton*)m_gui->GetElementByName("sent-msgs-button");
+  if (sentMsgsButton)
+  {
+    sentMsgsButton->SetCommand(Amju::OnSentMsgs);
+    if (m_showSentMsgs)
+    {
+      sentMsgsButton->SetText("Show Inbox");
+    }
+    else
+    {
+      sentMsgsButton->SetText("Show sent msgs");
+    }
   }
 
   GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
