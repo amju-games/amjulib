@@ -4,6 +4,7 @@
 #include <AmjuGL.h>
 #include <TriList.h>
 #include <SceneNode.h>
+#include "Tile.h"
 
 namespace Amju
 {
@@ -12,13 +13,13 @@ class Room;
 class RoomNode : public SceneNode
 {
 public:
-  RoomNode(Room*);
+  RoomNode(const Tile& t);
   virtual void Draw();
   void Build();
 
 private:
   RCPtr<TriListStatic> m_triList;
-  Room* m_room;
+  Tile m_tile;
 };
 }
 

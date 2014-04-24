@@ -516,6 +516,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\TaskTrigger.h" />
     <ClInclude Include="..\..\..\..\Source\Terrain.h" />
     <ClInclude Include="..\..\..\..\Source\TextDraw.h" />
+    <ClInclude Include="..\..\..\..\Source\Tile.h" />
     <ClInclude Include="..\..\..\..\Source\TimePeriodString.h" />
     <ClInclude Include="..\..\..\..\Source\Timestamp.h" />
     <ClInclude Include="..\..\..\..\Source\TitlePerson.h" />
