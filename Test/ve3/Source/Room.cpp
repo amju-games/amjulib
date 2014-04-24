@@ -160,25 +160,25 @@ void Room::Update()
     // Check for collision with obstacles layer (tilemap [1])
     // (Another way could be to create an Obstacle game object for each tile,
     //  but this is linear time anyway.)
-    TileMap& tm = m_tilemap[1];
-    for (TileMap::iterator it = tm.begin(); it != tm.end(); ++it)
+    TileVec& tv = m_tiles[1];
+    for (TileVec::iterator it = tv.begin(); it != tv.end(); ++it)
     {
-      Room::TileVec& tilevec = it->second;
-      for (unsigned int i = 0; i < tilevec.size(); i++)
-      {
-        Vec2f& pos = tilevec[i].m_pos;
-        AABB aabb(pos.x * m_tilesize.x, (pos.x + 1) * m_tilesize.x, 
-          0, 10, pos.y * m_tilesize.y, (pos.y + 1) * m_tilesize.y);
-        if (aabb.Intersects(p->GetAABB()))
-        {
-          // Slow down if in contact with obstacle??
-          //Vec3f vel = p->GetVel();
-          //vel *= 0.5f; // TODO Config
-          //p->SetVel(vel); 
+      Tile& tile = *it;
+      Vec3f& pos = tile.m_pos;
+      Vec2f& size = tile.m_size;
 
-          UnCollide(p, p->GetOldPos(), aabb);
-        }
-      }
+      AABB aabb(pos.x,pos.x + size.x, 
+        0, 10, pos.y, pos.y + size.y);
+
+      if (aabb.Intersects(p->GetAABB()))
+      {
+        // Slow down if in contact with obstacle??
+        //Vec3f vel = p->GetVel();
+        //vel *= 0.5f; // TODO Config
+        //p->SetVel(vel); 
+
+        UnCollide(p, p->GetOldPos(), aabb);
+      }      
     }
   }
 }
@@ -298,11 +298,16 @@ bool Room::LoadGrid(int grid, File* f)
       }
       std::string tex = m_texNames[t - 1];
 
-      // Group all tiles with same texture
-      TileVec& tilevec = m_tilemap[grid][tex];
       // Centre grid on origin
-      Vec2f tilepos((float)x - (float)m_gridsize.x * 0.5f, (float)y - (float)m_gridsize.y * 0.5f);
-      tilevec.push_back(Tile(tilepos, Vec2f((float)m_gridsize.x, (float)m_gridsize.y)));
+      Vec3f tilepos(
+        ((float)x - (float)m_gridsize.x * 0.5f) * m_tilesize.x, 
+        ((float)y - (float)m_gridsize.y * 0.5f) * m_tilesize.y, 
+        (float)grid);
+
+      bool blend = (grid > 0);
+
+      Tile tile(tilepos, m_tilesize, Vec2i(x, y), tex, blend);
+      m_tiles[grid].push_back(tile);
     }
   }
   return true;
@@ -322,16 +327,26 @@ const char* Room::GetTypeName() const
 
 void Room::OnLocationEntry()
 {
-  RoomNode* rn = new RoomNode(this);
-  SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
-  root->AddChild(rn);
-  rn->Build(); // TODO Use tile data we loaded to make tiled textured quads..?
-
   // Big AABB so not culled
   m_aabb.Set(-10000, 10000, -1000, 1000, -10000, 10000);
-  rn->SetAABB(m_aabb);
+  // Create room node for each tile
+  for (int i = 0; i < 2; i++)
+  {
+    TileVec& tv = m_tiles[i];
+    int numTiles = tv.size();
+    for (int j = 0; j < numTiles; j++)
+    {
+      Tile& t = tv[j];
+      RoomNode* rn = new RoomNode(t);
 
-  m_sceneNode = rn;
+      SceneNode* root = GetVe1SceneGraph()->GetRootNode(SceneGraph::AMJU_OPAQUE);
+      root->AddChild(rn);
+      rn->Build(); // TODO Use tile data we loaded to make tiled textured quads..?
+      rn->SetAABB(m_aabb);
+    }
+  }
+
+////  m_sceneNode = rn;
 
   TheSoundManager::Instance()->PlaySong(m_music);
 }

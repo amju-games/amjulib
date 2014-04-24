@@ -2,6 +2,7 @@
 #define ROOM_H_INCLUDED
 
 #include "Ve1Object.h"
+#include "Tile.h"
 
 namespace Amju
 {
@@ -32,28 +33,17 @@ private:
 
   Strings m_texNames;
 
-  // Tile-based room data.
-  // Group tiles by texture, to reduce state flipping.
-  struct Tile
-  {
-    Tile() {}
-    Tile (const Vec2f& pos, const Vec2f& size) : m_pos(pos), m_size(size) {}
-
-    Vec2f m_pos; 
-    Vec2f m_size;
-  };
+  // All tiles. 
   typedef std::vector<Tile> TileVec;
-  // For each texture, a vector of positions at which to draw a tile.
-  typedef std::map<std::string, TileVec> TileMap;
+  static const int NUM_TILE_MAPS = 2;
+  TileVec m_tiles[2];
 
-  // Multiple tile maps:
+  // Multiple tile vectors:
   // Map 0: background images - do not interact
   // Map 1: obstacles: tiles which cannot be traversed
-
+  // TODO maybe:
   // Map 2: static baddies ?
   // Map 3: static food??
-  static const int NUM_TILE_MAPS = 2;
-  TileMap m_tilemap[NUM_TILE_MAPS];
 
   Vec2f m_tilesize;
   Vec2i m_gridsize;
