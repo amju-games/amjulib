@@ -42,6 +42,7 @@ static void OnSeeMyMessages()
   g->SetPrevState(TheGSVe3HomePage::Instance());
   g->SetPlayer(GetLocalPlayer());
   g->SetIsGuestbookOnly(false);
+  g->SetShowSentMsgs(false);
   TheGame::Instance()->SetCurrentState(g);
 }
 

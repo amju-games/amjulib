@@ -109,9 +109,10 @@ void GSVe3MakeTradeRequest::OnTradeSend()
   mm->SendTradeMsg(p->GetId(), m_otherPlayerId, str, nGive, nRecv, m_tradeType); 
     // sender, recip, msg, give num, recv num, trade type
 
+  // ???
   // Also a message in our own guestbook?
-  str = "You asked " + pn + " to make a trade.";
-  mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
+//  str = "You asked " + pn + " to make a trade.";
+//  mm->SendMsg(p->GetId(), p->GetId(), str); // sender, recip, msg
   // TODO Get this msg into guestbook - send a request for new msgs
 
   str = "OK, now let's wait and see what reply you get!";

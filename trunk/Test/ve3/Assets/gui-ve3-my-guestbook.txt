@@ -57,14 +57,14 @@ gui-button
 // Element name
 sent-msgs-button
 // pos (coords are -1..1)
-0.1, -0.75
+0.1, -0.8
 // size
-0.8, 0.2
+0.8, 0.15
 // Image
-gui-button-4.png
+key1.png
 // Text
-Sent messages
+Show sent messages
 // Font name, size
-arial, 1.5
+arial, 1.0, sx=0.8
 
 
