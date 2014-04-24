@@ -12,7 +12,7 @@ class Player;
 class GBDisplay : public GuiComposite
 {
 public:
-  void Init(const MsgManager::Msgs&, bool addReplyButtons);
+  void Init(const MsgManager::Msgs&, bool addReplyButtons, bool showSentMsgs);
 };
 
 class GuestbookWindow : public GuiWindow

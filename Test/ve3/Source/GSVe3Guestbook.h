@@ -29,7 +29,7 @@ public:
  
   void OnAddCommentButton();
 
-  void OnSentMsgs();
+  void OnShowSentMsgs();
 
 protected:
   virtual void InitGB();

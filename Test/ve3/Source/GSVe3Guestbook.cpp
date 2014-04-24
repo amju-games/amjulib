@@ -17,9 +17,9 @@ static void OnBack()
   TheGSVe3Guestbook::Instance()->GoBack();
 }
 
-static void OnSentMsgs()
+static void OnShowSentMsgs()
 {
-  TheGSVe3Guestbook::Instance()->OnSentMsgs();
+  TheGSVe3Guestbook::Instance()->OnShowSentMsgs();
 }
 
 GSVe3Guestbook::GSVe3Guestbook()
@@ -29,11 +29,12 @@ GSVe3Guestbook::GSVe3Guestbook()
   m_showSentMsgs = false;
 }
 
-void GSVe3Guestbook::OnSentMsgs()
+void GSVe3Guestbook::OnShowSentMsgs()
 {
 std::cout << "Flipping sent/inbox\n";
+
   m_showSentMsgs = !m_showSentMsgs;
-  OnActive(); // Ok to call again???
+  InitGB();
 }
 
 void GSVe3Guestbook::SetIsGuestbookOnly(bool guestbookOnly)
@@ -84,7 +85,65 @@ void GSVe3Guestbook::InitGB()
   // DO show reply buttons IF this is the local player's guestbook/messages
   // (But you can't reply to guestbook msgs, you have to go to the other
   //  player's guestbook and put a comment there.)
-  gw->GetGBDisplay()->Init(msgs, isLocalPlayer && !m_guestbookOnly); 
+  gw->GetGBDisplay()->Init(msgs, isLocalPlayer && !m_guestbookOnly, m_showSentMsgs); 
+
+  // Set title - "Your guestbook" or "<player>'s guestbook"
+  // Colour scheme as in other gui states
+  GuiText* name = (GuiText*)GetElementByName(m_gui, "title-text");
+  Assert(name);
+  std::string namestr;
+  if (isLocalPlayer)
+  {
+    namestr = "Your message inbox";
+    if (m_showSentMsgs)
+    {
+      namestr = "Messages sent by you";
+      Assert(!m_guestbookOnly); // can't view sent gb msgs
+    }
+
+    if (m_guestbookOnly)
+    {
+      namestr = "Your guestbook";
+    }
+    name->SetFgCol(Colour(0, 0.5f, 0, 1));
+  }
+  else 
+  {
+    // Maybe get rid of this to simplify the game
+
+    namestr = m_player->GetName() + "'s guestbook";
+
+    // TODO colours?? Logged in flag is not accurate
+    if (m_player->IsLoggedIn())
+    {
+      name->SetFgCol(Colour(1, 0, 0, 1));
+    }
+    else
+    {
+      name->SetFgCol(Colour(0, 0, 0, 1));
+    }
+  }
+  name->SetText(namestr);
+
+  // Button to toggle betwen sent and recvd messages.
+  GuiButton* sentMsgsButton = (GuiButton*)m_gui->GetElementByName("sent-msgs-button");
+  if (sentMsgsButton)
+  {
+    sentMsgsButton->SetVisible(true);
+    sentMsgsButton->SetCommand(Amju::OnShowSentMsgs);
+    if (m_showSentMsgs)
+    {
+      sentMsgsButton->SetText("Back to Inbox");
+    }
+    else
+    {
+      sentMsgsButton->SetText("Show sent messages");
+    }
+  }
+  else if (m_guestbookOnly)
+  {
+    sentMsgsButton->SetVisible(false);
+  }
 }
 
 void GSVe3Guestbook::Update()
@@ -158,45 +217,6 @@ void GSVe3Guestbook::OnActive()
   m_gui = LoadGui(isLocalPlayer ? "gui-ve3-my-guestbook.txt" : "gui-ve3-guestbook.txt");
   Assert(m_gui);
 
-  // Set title - "Your guestbook" or "<player>'s guestbook"
-  // Colour scheme as in other gui states
-  GuiText* name = (GuiText*)GetElementByName(m_gui, "title-text");
-  Assert(name);
-  std::string namestr;
-
-  if (isLocalPlayer)
-  {
-    namestr = "Your message inbox";
-    if (m_showSentMsgs)
-    {
-      namestr = "Messages sent by you";
-      Assert(!m_guestbookOnly); // can't view sent gb msgs
-    }
-
-    if (m_guestbookOnly)
-    {
-      namestr = "Your guestbook";
-    }
-    name->SetFgCol(Colour(0, 0.5f, 0, 1));
-  }
-  else 
-  {
-    // Maybe get rid of this to simplify the game
-
-    namestr = m_player->GetName() + "'s guestbook";
-
-    // TODO colours?? Logged in flag is not accurate
-    if (m_player->IsLoggedIn())
-    {
-      name->SetFgCol(Colour(1, 0, 0, 1));
-    }
-    else
-    {
-      name->SetFgCol(Colour(0, 0, 0, 1));
-    }
-  }
-  name->SetText(namestr);
-
   InitGB();
 
   // TODO Set focus element, cancel element, command handlers
@@ -206,21 +226,6 @@ void GSVe3Guestbook::OnActive()
   if (addcomment)
   {
     addcomment->SetCommand(OnAddComment);
-  }
-
-  // Button to toggle betwen sent and recvd messages.
-  GuiButton* sentMsgsButton = (GuiButton*)m_gui->GetElementByName("sent-msgs-button");
-  if (sentMsgsButton)
-  {
-    sentMsgsButton->SetCommand(Amju::OnSentMsgs);
-    if (m_showSentMsgs)
-    {
-      sentMsgsButton->SetText("Show Inbox");
-    }
-    else
-    {
-      sentMsgsButton->SetText("Show sent msgs");
-    }
   }
 
   GuiText* comment = (GuiText*)m_gui->GetElementByName("guest-comment"); // can fail
