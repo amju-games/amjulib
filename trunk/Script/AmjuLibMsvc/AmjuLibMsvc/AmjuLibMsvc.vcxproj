@@ -250,6 +250,8 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\LoadPng.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\SavePng.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.c" />
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lauxlib.c" />
@@ -374,7 +376,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Image\Texture.cpp" />
     <ClCompile Include="..\..\..\Source\Image\TextureUtils.cpp" />
     <ClCompile Include="..\..\..\Source\Image\Png\example.c" />
-    <ClCompile Include="..\..\..\Source\Image\Png\LoadPng.cpp" />
     <ClCompile Include="..\..\..\Source\Image\Png\png.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pngerror.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pnggccrd.c" />
@@ -393,7 +394,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Image\Png\pngwrite.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pngwtran.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pngwutil.c" />
-    <ClCompile Include="..\..\..\Source\Image\Png\SavePng.cpp" />
     <ClCompile Include="..\..\..\Source\TimeUtils\Timer.cpp" />
     <ClCompile Include="..\..\..\Source\Game\Game.cpp" />
     <ClCompile Include="..\..\..\Source\Game\GameObject.cpp" />
@@ -531,6 +531,8 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h" />
+    <ClInclude Include="..\..\..\Source\Image\LoadPng.h" />
+    <ClInclude Include="..\..\..\Source\Image\SavePng.h" />
     <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lauxlib.h" />
@@ -662,10 +664,8 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Image\Texture.h" />
     <ClInclude Include="..\..\..\Source\Image\TextureUtils.h" />
     <ClInclude Include="..\..\..\Source\Image\Png\config.h" />
-    <ClInclude Include="..\..\..\Source\Image\Png\LoadPng.h" />
     <ClInclude Include="..\..\..\Source\Image\Png\png.h" />
     <ClInclude Include="..\..\..\Source\Image\Png\pngconf.h" />
-    <ClInclude Include="..\..\..\Source\Image\Png\SavePng.h" />
     <ClInclude Include="..\..\..\Source\TimeUtils\Timer.h" />
     <ClInclude Include="..\..\..\Source\Game\Game.h" />
     <ClInclude Include="..\..\..\Source\Game\GameObject.h" />

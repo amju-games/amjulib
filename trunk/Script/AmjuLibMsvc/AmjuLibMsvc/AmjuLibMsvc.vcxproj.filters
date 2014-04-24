@@ -327,9 +327,6 @@
     <ClCompile Include="..\..\..\Source\Image\Png\example.c">
       <Filter>Image\Png</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Image\Png\LoadPng.cpp">
-      <Filter>Image\Png</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Image\Png\png.c">
       <Filter>Image\Png</Filter>
     </ClCompile>
@@ -382,9 +379,6 @@
       <Filter>Image\Png</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Image\Png\pngwutil.c">
-      <Filter>Image\Png</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Image\Png\SavePng.cpp">
       <Filter>Image\Png</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\TimeUtils\Timer.cpp">
@@ -918,6 +912,12 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiScrollBar.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\LoadPng.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Image\SavePng.cpp">
+      <Filter>Image</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1166,16 +1166,10 @@
     <ClInclude Include="..\..\..\Source\Image\Png\config.h">
       <Filter>Image\Png</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Image\Png\LoadPng.h">
-      <Filter>Image\Png</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Image\Png\png.h">
       <Filter>Image\Png</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Image\Png\pngconf.h">
-      <Filter>Image\Png</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Image\Png\SavePng.h">
       <Filter>Image\Png</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\TimeUtils\Timer.h">
@@ -1735,6 +1729,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiScrollBar.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\LoadPng.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Image\SavePng.h">
+      <Filter>Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
