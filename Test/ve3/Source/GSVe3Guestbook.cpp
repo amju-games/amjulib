@@ -59,11 +59,12 @@ struct GBMsgsForPlayer
       b = msg.m_recipId == m_playerId;
     }
 
+    bool isGBMsg = msg.IsGuestbookMsg();
     if (m_gbOnly)
     {
-      return b && msg.IsGuestbookMsg();
+      return b && isGBMsg;
     }
-    return b;
+    return b && !isGBMsg;
   }
 
   int m_playerId;
