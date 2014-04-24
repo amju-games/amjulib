@@ -175,6 +175,10 @@ std::string Ve1ReqManager::MakeUrl(Task t)
   case CHANGE_VALUE:
     s += "changevalue.pl";
     break;
+
+  case UPLOAD_MUGSHOT:
+    s += "img-upload.pl";
+    break;
   }
 
   // TODO Authentication, player ID, session ID, etc.
