@@ -43,6 +43,11 @@ enum Task
 
   // Research
   SEND_TEST_RESULT,
+
+  // Upload mugshot, so we have a pic on the server for each player who has
+  // logged in
+  UPLOAD_MUGSHOT,
+  
 };
 
 class Ve1ReqManager : public SerialReqManager

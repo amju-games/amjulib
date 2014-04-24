@@ -6,21 +6,23 @@
 #include <CursorManager.h>
 #include <GuiButton.h>
 #include <Timer.h>
+#include <Game.h>
 #include "GS2dAvatarMod.h"
 #include "LocalPlayer.h"
 #include "Useful.h"
 #include "ObjectUpdater.h"
 #include "ROConfig.h"
+#include "GSVe3Mug.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
-void OnOk()
+static void OnOk()
 {
   TheGS2dAvatarMod::Instance()->OnOk();
 }
 
-void OnCancel()
+static void OnCancel()
 {
   TheGS2dAvatarMod::Instance()->OnCancel();
 }
@@ -328,7 +330,10 @@ void GS2dAvatarMod::OnOk()
   // Set scale in local player
   GetLocalPlayer()->SetScale(m_scale);
 
-  GoBack();
+//  GoBack();
+  GSVe3Mug* gsmug = TheGSVe3Mug::Instance();
+  gsmug->SetPrevState(GetPrevState());
+  TheGame::Instance()->SetCurrentState(gsmug);
 }
 
 void GS2dAvatarMod::OnCancel()
