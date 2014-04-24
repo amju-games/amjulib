@@ -21,7 +21,7 @@ my $MAX_NUM_IMAGES = 1;
 sub MakeImageFilename($)
 {
   my $id = shift;
-  return $SAVE_DIR . "image-" . $id . ".png";
+  return $SAVE_DIR . "mugshot-" . $id . ".png";
 }
 
 #
