@@ -7,7 +7,7 @@ VERSION		:=	3.0
 APP		:=	ve3
 APPNAME		:=	"Hungry People.app"
 
-LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.2-macosx
+LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
 BUILD		:=	../../../../Build/$(APP)/$(AMJU_BUILD_ARCH)
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
