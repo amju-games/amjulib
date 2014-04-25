@@ -1,0 +1,446 @@
+// Home page
+// version
+1
+
+// Element type
+gui-comp
+// Name
+my-stats-page-comp
+// Num children
+6
+
+
+// Element type
+gui-text
+// Element name
+title-bar-text
+// pos (coords are -1..1)
+-1.0, 1.0
+// size
+2.0, 0.2
+// Text
+Your stats
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+
+// element type
+gui-button
+// Element name
+change-name-button
+// pos (coords are -1..1)
+// Hidden for now
+0.58, 1.95
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Change name
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+// element type
+gui-button
+// Element name
+quit-button
+// pos (coords are -1..1)
+// Hidden for now
+-0.95, 0.95
+// size
+0.2, 0.1
+// Image
+gui-button-2.png
+// Text
+Quit
+// Font name, size
+arial, 0.9, sx=0.7
+
+// element type
+gui-button
+// Element name
+change-look-button
+// pos (coords are -1..1)
+-0.8, 0.0
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Change look
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+//// element type
+//gui-button
+//// Element name
+//explore-button
+//// pos (coords are -1..1)
+//-0.4, -0.5
+//// size
+//0.8, 0.2
+//// Image
+//gui-button-4.png
+//// Text
+//Explore island
+//// Font name, size
+//arial, 1.5, sx=0.7
+
+
+//// element type
+//gui-button
+//// Element name
+//other-players-button
+//// pos (coords are -1..1)
+//-0.4, -0.75
+//// size
+//0.8, 0.2
+//// Image
+//gui-button-4.png
+//// Text
+//Other players...
+//// Font name, size
+//arial, 1.5, sx=0.7
+
+
+
+
+// ACTIONS
+
+// Element type
+gui-comp
+// Name
+actions-comp
+// Num children
+10
+
+
+// Background for actions you can do
+gui-rect
+actions-bg
+// Pos, size
+-0.9, -0.2
+1.8, 0.5
+// Colour
+c0c0c0
+// Corner radius
+0.03
+// flags
+0
+
+// Element type
+gui-text
+// Element name
+static-text2
+// pos (coords are -1..1)
+-0.9, -0.20
+// size
+1.8, 0.1
+// Text
+What would you like to do?
+// Font name, size
+arial, 1.0, fgcol=000000
+
+// Element type
+gui-text
+// Element name
+static-text3
+// pos (coords are -1..1)
+-0.8, -0.3
+// size
+1.35, 0.1
+// Text
+Explore the island?
+// Font name, size
+arial, 1.0, fgcol=000000, right
+
+// Element type
+gui-text
+// Element name
+static-text4
+// pos (coords are -1..1)
+-0.8, -0.4
+// size
+1.35, 0.1
+// Text
+See the other players?
+// Font name, size
+arial, 1.0, fgcol=000000, right
+
+// Element type
+gui-text
+// Element name
+static-text5
+// pos (coords are -1..1)
+-0.8, -0.5
+// size
+1.35, 0.1
+// Text
+See your guestbook?
+// Font name, size
+arial, 1.0, fgcol=000000, right
+
+// element type
+gui-button
+// Element name
+see-guestbook-button
+// pos (coords are -1..1)
+0.6, -0.5
+// size
+0.2, 0.1
+// Image
+key3.png
+// Text
+Yes!
+// Font name, size
+arial, 0.7, sx=0.7
+
+// Action buttons
+
+// Explore
+
+// element type
+gui-button
+// Element name
+explore-button
+// pos (coords are -1..1)
+0.6, -0.3
+// size
+0.2, 0.1
+// Image
+key3.png
+// Text
+Yes!
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+// Give treasure button
+
+// element type
+gui-button
+// Element name
+other-players-button
+// pos (coords are -1..1)
+0.6, -0.4
+// size
+0.2, 0.1
+// Image
+key3.png
+// Text
+Yes!
+// Font name, size
+arial, 0.7, sx=0.7
+
+// element type
+gui-button
+// Element name
+see-msgs-button
+// pos (coords are -1..1)
+-0.85, -0.5
+// size
+0.35, 0.1
+// Image
+key3.png
+// Text
+Messages
+// Font name, size
+arial, 0.7, sx=0.7
+
+
+gui-image
+mail-img
+-0.8, -0.25
+0.3, 0.2
+mail1.png
+
+
+
+
+// STATS
+
+// Element type
+gui-comp
+// Name
+stats-comp
+// Num children
+15
+
+// Background for stats
+gui-rect
+stats-bg
+// Pos, size
+-0.2, 0.7
+1.1, 0.8
+// Colour
+c0c0c0
+// Corner radius
+0.03
+// flags
+0
+
+// Element type
+gui-text
+// Element name
+static-text1
+// pos (coords are -1..1)
+-0.2, 0.7
+// size
+1.1, 0.1
+// Text
+You have got:
+// Font name, size
+arial, 1.0, fgcol=000000
+
+gui-image
+heart-img
+-0.2, 0.65
+0.3, 0.3
+heart16-3.png
+
+// Element type
+gui-text
+// Element name
+health-num
+// pos (coords are -1..1)
+0.05, 0.6
+// size
+0.2, 0.2
+// Text
+99
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+gui-image
+food-img
+0.25, 0.6
+0.2, 0.2
+food1.png
+
+// Element type
+gui-text
+// Element name
+food-num
+// pos (coords are -1..1)
+0.45, 0.6
+// size
+0.2, 0.2
+// Text
+88
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+gui-image
+treasure-img
+0.6, 0.6
+0.2, 0.2
+diamond2.png
+
+// Element type
+gui-text
+// Element name
+treasure-num
+// pos (coords are -1..1)
+0.8, 0.6
+// size
+0.2, 0.2
+// Text
+765
+// Font name, size
+arial, 1.5, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+health-text
+// pos (coords are -1..1)
+-0.15, 0.4
+// size
+0.4, 0.1
+// Text
+Health
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+food-text
+// pos (coords are -1..1)
+0.30, 0.4
+// size
+0.3, 0.1
+// Text
+Food
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// element type
+gui-button
+// Element name
+eat-button
+// pos (coords are -1..1)
+// Hidden for now
+0.30, 0.30
+// size
+0.15, 0.07
+// Image
+gui-button-2.png
+// Text
+Eat!
+// Font name, size
+arial, 0.8, sx=0.7
+
+// Element type
+gui-text
+// Element name
+treasure-text
+// pos (coords are -1..1)
+0.5, 0.4
+// size
+0.35, 0.1
+// Text
+Treasure
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, right
+
+// Element type
+gui-text
+// Element name
+more-stats1-text
+// pos (coords are -1..1)
+-0.15, 0.25
+// size
+0.9, 0.1
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+more-stats2-text
+// pos (coords are -1..1)
+-0.15, 0.15
+// size
+2.0, 0.1
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
+
+// Element type
+gui-text
+// Element name
+more-stats3-text
+// pos (coords are -1..1)
+-0.15, 0.05
+// size
+2.0, 0.1
+// Text
+$$$empty
+// Font name, size
+arial, 1.0, fgcol=000000, sx=0.6, left
