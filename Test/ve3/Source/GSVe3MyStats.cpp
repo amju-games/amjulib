@@ -1,6 +1,7 @@
 #include <AmjuGL.h>
 #include <Game.h>
 #include <Timer.h>
+#include <TimePeriod.h>
 #include "GSVe3MyStats.h"
 #include "GSVe3ViewOtherPlayers.h"
 #include "GSMain.h"
@@ -18,6 +19,8 @@
 #include "GSCalendar.h"
 #include "GSCogResults.h"
 #include "GSCogTestMenu.h"
+#include "CogTestResults.h"
+#include "CogTestNag.h"
 
 namespace Amju
 {
@@ -96,8 +99,20 @@ void GSVe3MyStats::OnActive()
   Assert(m_gui);
 
   GetElementByName(m_gui, "calendar-button")->SetCommand(OnCalendar);
-  GetElementByName(m_gui, "do-tests-button")->SetCommand(OnDoTests);
   GetElementByName(m_gui, "test-results-button")->SetCommand(OnTestResults);
+
+  // Disable Do Tests button if done for the day
+  Time today = Time::Now();
+  today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
+  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->
+    GetNumCompletedTestsForDate(today) == GetNumCogTests();
+
+  GuiButton* doTests = (GuiButton*)GetElementByName(m_gui, "do-tests-button");
+  doTests->SetCommand(OnDoTests);
+  if (cogTestsAllDoneToday)
+  {
+    doTests->SetIsEnabled(false); // done for today
+  }
 
   Player* p = GetLocalPlayer();
   Assert(p);

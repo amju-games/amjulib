@@ -413,11 +413,18 @@ void GSTrailMakingTest::Finished()
     {
       str = "Oh dear, you didn't get any correct! Well, I am sure you will do better next time!";
     }
-    else
+    else if (m_correct < 25)
     {
       str = "Well done! You got " + ToString(m_correct) + " correct!";
       TheSoundManager::Instance()->PlayWav("sound/applause3.wav");
     }
+    else
+    {
+      str = "Well done! You got " + ToString(m_correct) + " correct in " +
+        ToString(m_timer, 2) + " seconds!";
+      TheSoundManager::Instance()->PlayWav("sound/applause3.wav");
+    }
+
     LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lm);
 

@@ -7,7 +7,7 @@ gui-comp
 // Name
 my-stats-page-comp
 // Num children
-5
+4
 
 
 // Element type
@@ -19,7 +19,7 @@ title-bar-text
 // size
 2.0, 0.2
 // Text
-Your stats
+Your Tests
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
 
@@ -37,21 +37,7 @@ home-img
 0.1, 0.1
 home1.png
 
-// element type
-gui-button
-// Element name
-change-name-button
-// pos (coords are -1..1)
-// Hidden for now
-0.58, 1.95
-// size
-0.4, 0.1
-// Image
-gui-button-4.png
-// Text
-Change name
-// Font name, size
-arial, 0.7, sx=0.7
+
 
 
 
@@ -69,7 +55,7 @@ gui-button
 // Element name
 test-results-button
 // pos (coords are -1..1)
--0.4, -0.1
+-0.4, 0.3
 // size
 0.8, 0.2
 // Image
@@ -77,14 +63,14 @@ gui-button-4.png
 // Text
 See your test results
 // Font name, size
-arial, 1.0, sx=0.7
+arial, 1.5, sx=0.7
 
 // element type
 gui-button
 // Element name
 do-tests-button
 // pos (coords are -1..1)
--0.4, -0.4
+-0.4, 0
 // size
 0.8, 0.2
 // Image
@@ -92,14 +78,14 @@ gui-button-4.png
 // Text
 Do tests now!
 // Font name, size
-arial, 1.0, sx=0.7
+arial, 1.5, sx=0.7
 
 // element type
 gui-button
 // Element name
 calendar-button
 // pos (coords are -1..1)
--0.4, -0.7
+-0.4, -0.3
 // size
 0.8, 0.2
 // Image
@@ -107,5 +93,5 @@ gui-button-4.png
 // Text
 See the calendar
 // Font name, size
-arial, 1.0, sx=0.7
+arial, 1.5, sx=0.7
 

@@ -90,6 +90,8 @@ GSStroopBase::GSStroopBase()
 
 void GSStroopBase::ResetTest()
 {
+  m_choices = "";
+
   for (int i = 0; i < 4; i++)
   {
     GuiButton* button = (GuiButton*)GetElementByName(m_gui, "button" + ToString(i + 1));
@@ -202,8 +204,9 @@ void GSStroopBase::OnChoiceButton(int choice)
   //  every go!
   int num = m_correct + m_incorrect; // click number
   Assert(m_testId != -1);
-  TheCogTestResults::Instance()->StoreResult(
-    new Result(m_testId, "choice_" + ToString(num), ToString(choice)));
+  
+  // Sending a new result for each choice is expensive. Store the choice in a string.
+  m_choices += ToString(choice);
 
   if (choice == m_correctChoice)
   {
@@ -283,6 +286,13 @@ void GSStroopBase::Finished()
     Assert(m_testId != -1);
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
+    std::string choices = m_choices;
+    const int MAX_LENGTH = 9; // max size in DB table is 100
+    if (choices.size() > MAX_LENGTH) 
+    {
+      choices = choices.substr(0, MAX_LENGTH);
+    }
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "choices", choices));
 
     UpdateScore();
 

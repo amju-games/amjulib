@@ -60,6 +60,7 @@ void Baddie::Update()
     Matrix m;
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
+    m_sceneNode->SetAABB(m_aabb);
   }
 
   // Make bounding box smaller to give player the benefit of the doubt

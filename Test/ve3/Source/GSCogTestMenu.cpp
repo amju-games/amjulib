@@ -297,6 +297,12 @@ void GSCogTestMenu::OnActive()
   }
   else
   {
+    std::string testTitle = "This is test " + ToString(m_nextTest) + ": " + 
+      std::string(GetTestName((TestId)nextTestId));
+
+    LurkMsg lurkTitle(testTitle, LURK_FG, LURK_BG, AMJU_CENTRE);
+    TheLurker::Instance()->Queue(lurkTitle);
+
     if (HAS_PRACTICE_MODE[nextTestId])
     {
       // Ask player if she would like to practice first.

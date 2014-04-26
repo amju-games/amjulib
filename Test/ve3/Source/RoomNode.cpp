@@ -11,7 +11,7 @@ RoomNode::RoomNode(const Tile& tile) : m_tile(tile)
   {
     SetBlended(true);
   }
-  SetIsZReadEnabled(false);
+////  SetIsZReadEnabled(false);
 }
 
 void RoomNode::Build()

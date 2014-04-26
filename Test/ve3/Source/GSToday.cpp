@@ -163,9 +163,11 @@ void GSToday::OnActive()
 
   // Always allow tests?? 
   ////if (DoCogTests() && !cogTestsAllDoneToday)
+  GuiButton* doTests = (GuiButton*)GetElementByName(m_gui, "do-tests-button");
+  doTests->SetCommand(OnDoTests);
+  if (cogTestsAllDoneToday)
   {
-    GuiButton* doTests = (GuiButton*)GetElementByName(m_gui, "do-tests-button");
-    doTests->SetCommand(OnDoTests);
+    doTests->SetIsEnabled(false); // done for today
   }
 
   // For admin/dev, button to play game even on non-game days

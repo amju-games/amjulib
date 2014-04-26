@@ -274,6 +274,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClCompile Include="..\..\..\..\Source\GSVe3MakeTradeRequest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3MsgReply.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3Mug.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSVe3MyStats.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ShowTrade.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3SinceLastTime.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.cpp" />
@@ -452,6 +453,7 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
     <ClInclude Include="..\..\..\..\Source\GSVe3MakeTradeRequest.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3MsgReply.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3Mug.h" />
+    <ClInclude Include="..\..\..\..\Source\GSVe3MyStats.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ShowTrade.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3SinceLastTime.h" />
     <ClInclude Include="..\..\..\..\Source\GSVe3ViewOtherPlayers.h" />
