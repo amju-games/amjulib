@@ -218,6 +218,8 @@ void GSVe3ViewOtherPlayers::OnActive()
   {
     NextPlayer();
   }
+
+  SetHomeButton();
 }
 
 } // namespace

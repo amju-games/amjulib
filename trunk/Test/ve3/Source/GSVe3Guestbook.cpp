@@ -140,10 +140,11 @@ void GSVe3Guestbook::InitGB()
     {
       sentMsgsButton->SetText("Show sent messages");
     }
-  }
-  else if (m_guestbookOnly)
-  {
-    sentMsgsButton->SetVisible(false);
+  
+    if (m_guestbookOnly)
+    {
+      sentMsgsButton->SetVisible(false);
+    }
   }
 }
 
@@ -235,6 +236,8 @@ void GSVe3Guestbook::OnActive()
     comment->SetHasFocus(true);
     comment->SetText(m_unfinishedCommentStr);
   }
+
+  SetHomeButton();
 }
 
 } // namespace

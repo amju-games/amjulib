@@ -73,6 +73,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
     t->SetText("0");
   }
 
+#ifdef SHOW_STATS_ON_HOME_PAGE
   t = (GuiText*)GetElementByName(gui, "more-stats1-text");
   Assert(t);
   if (player->Exists(SCORE_KEY))
@@ -111,5 +112,6 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
     str += "Treasure received: " + player->GetVal(TREASURE_RECEIVED_KEY);
   }
   t->SetText(str);
+#endif 
 }
 }

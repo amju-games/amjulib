@@ -19,6 +19,9 @@ public:
   virtual void OnDeactive();
 
 protected:
+  // If GUI has a home button, set the command
+  void SetHomeButton();
+
   bool LoadCogTestBg();
   void DrawCogTestBg();
 

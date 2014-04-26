@@ -94,6 +94,8 @@ void GSVe3ChooseTradeType::OnActive()
 
     m_spriteNodes[i].Update();
   }
+
+  SetHomeButton();
 }
 
 void GSVe3ChooseTradeType::OnGiveFood()

@@ -167,6 +167,8 @@ void GSVe3MakeTradeRequest::OnActive()
 
   GetElementByName(m_gui, "back-button")->SetCommand(Amju::OnTradeCancel);
   GetElementByName(m_gui, "send-button")->SetCommand(Amju::OnTradeSend);
+
+  SetHomeButton();
 }
 
 }
