@@ -15,9 +15,32 @@
 #include "LurkMsg.h"
 #include "GameConsts.h"
 #include "CheckForNewMessages.h"
+#include "GSCalendar.h"
+#include "GSCogResults.h"
+#include "GSCogTestMenu.h"
 
 namespace Amju
 {
+static void OnTestResults()
+{
+  GSCogResults* cr = TheGSCogResults::Instance();
+  cr->SetPrevState(TheGSVe3MyStats::Instance());
+  TheGame::Instance()->SetCurrentState(cr);
+}
+
+static void OnDoTests()
+{
+  // When done, come back to home page
+  // This is broken
+  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+}
+
+static void OnCalendar()
+{
+  GSCalendar* cal = TheGSCalendar::Instance();
+  cal->SetPrevState(TheGSVe3MyStats::Instance());
+  TheGame::Instance()->SetCurrentState(cal);
+}
 
 GSVe3MyStats::GSVe3MyStats()
 {
@@ -26,9 +49,9 @@ GSVe3MyStats::GSVe3MyStats()
 
 void GSVe3MyStats::RefreshGui()
 {
-  Player* p = GetLocalPlayer();
-  Assert(p);
-  ShowPlayer(p, m_gui);
+//  Player* p = GetLocalPlayer();
+//  Assert(p);
+//  ShowPlayer(p, m_gui);
 }
 
 void GSVe3MyStats::Update()
@@ -72,12 +95,22 @@ void GSVe3MyStats::OnActive()
   m_gui = LoadGui("gui-ve3-mystats.txt");
   Assert(m_gui);
 
-  //GetElementByName(m_gui, "see-msgs-button")->SetCommand(OnSeeMyMessages);
+  GetElementByName(m_gui, "calendar-button")->SetCommand(OnCalendar);
+  GetElementByName(m_gui, "do-tests-button")->SetCommand(OnDoTests);
+  GetElementByName(m_gui, "test-results-button")->SetCommand(OnTestResults);
 
   Player* p = GetLocalPlayer();
   Assert(p);
 
-  ShowPlayer(p, m_gui);
+  //ShowPlayer(p, m_gui);
+  Player* player = GetLocalPlayer();
+  Assert(player);
+  LayerGroups layerGroups; // store settings for each layer
+  layerGroups.SetFromSprite(player->GetSprite());
+  layerGroups.SetSprite(&m_spriteNode.GetSprite());
+  //m_spriteNode.Update();
+
+  SetHomeButton();
 }
 
 } // namespace

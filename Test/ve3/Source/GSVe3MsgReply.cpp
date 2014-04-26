@@ -87,6 +87,8 @@ void GSVe3MsgReply::OnActive()
   // Set focus element, cancel element, command handlers
   GetElementByName(m_gui, "back-button")->SetCommand(Amju::OnReplyCancel);
   GetElementByName(m_gui, "send-button")->SetCommand(Amju::OnReplySend);
+
+  SetHomeButton();
 }
 
 void GSVe3MsgReply::SendReply()

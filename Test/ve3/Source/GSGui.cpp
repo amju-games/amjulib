@@ -1,10 +1,12 @@
 #include <AmjuFirst.h>
-#include "GSGui.h"
 #include <AmjuGL.h>
 #include <CursorManager.h>
 #include <Timer.h>
 #include <EventPoller.h>
 #include <GuiText.h>
+#include <Game.h>
+#include "GSGui.h"
+#include "GSVe3HomePage.h"
 #include "LurkMsg.h"
 #include "Ve1SceneGraph.h"
 #include "ROConfig.h"
@@ -206,4 +208,19 @@ void GSGui::UpdateHeartCount()
     }
   }
 }
+
+static void OnHome()
+{
+  TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
+}
+
+void GSGui::SetHomeButton()
+{
+  GuiButton* home = (GuiButton*)GetElementByName(m_gui, "home-button");
+  if (home)
+  {
+    home->SetCommand(OnHome);
+  }
+}
+
 } // namespace

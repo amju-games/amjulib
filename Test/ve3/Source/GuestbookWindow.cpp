@@ -156,8 +156,18 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons, bool sh
         senderName = sender->GetName();
       }
 
+    }
+
+    Player* mugshotPlayer = recip;
+    if (!recip || (showSentMsgs && sender))
+    {
+      mugshotPlayer = sender;
+    }
+
+    if (mugshotPlayer)
+    {
       Mugshot* m = new Mugshot;
-      m->Init(showSentMsgs ? sender : recip);
+      m->Init(mugshotPlayer);
       w->AddChild(m);
     }
 

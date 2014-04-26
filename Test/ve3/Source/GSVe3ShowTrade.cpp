@@ -224,6 +224,7 @@ void GSVe3ShowTrade::OnActive()
   GetElementByName(m_gui, "accept-button")->SetCommand(Amju::OnTradeAccept);
   GetElementByName(m_gui, "counter-button")->SetCommand(Amju::OnTradeCounterOffer);
 
+  SetHomeButton();
 }
 
 }

@@ -15,10 +15,18 @@
 #include "LurkMsg.h"
 #include "GameConsts.h"
 #include "CheckForNewMessages.h"
+#include "GSVe3MyStats.h"
 
 namespace Amju
 {
 void OnEatButton(); // in GSMain
+
+static void OnGoToStatsPage()
+{
+  GSVe3MyStats* ms = TheGSVe3MyStats::Instance();
+  ms->SetPrevState(TheGSVe3HomePage::Instance());
+  TheGame::Instance()->SetCurrentState(ms);
+}
 
 static void OnHomepageEatButton()
 {
@@ -185,6 +193,7 @@ void GSVe3HomePage::OnActive()
   GetElementByName(m_gui, "eat-button")->SetCommand(OnHomepageEatButton);
   GetElementByName(m_gui, "see-guestbook-button")->SetCommand(OnSeeMyGuestbook);
   GetElementByName(m_gui, "see-msgs-button")->SetCommand(OnSeeMyMessages);
+  GetElementByName(m_gui, "my-stats-button")->SetCommand(OnGoToStatsPage);
 
   Player* p = GetLocalPlayer();
   Assert(p);

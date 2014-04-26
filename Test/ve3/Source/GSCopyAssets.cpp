@@ -8,10 +8,8 @@
 #include <Pause.h>
 #include <CursorManager.h>
 #include "GSCopyAssets.h"
-//#include "GSLogo.h"
-// VE3 v.2.1: don't check for updates, this could go wrong - simplify!
 #include "GSTitle.h"
-//#include "GSFileUpdateCheck.h"
+#include "GSFileUpdateCheck.h"
 #include <AmjuFinal.h>
 
 #if defined(WIN32) && defined(_DEBUG)
@@ -286,7 +284,8 @@ std::cout << "Glue file + path: " << glueFilePath << "\n";
 
     // All copied - go to next state 
     // VE3 v.2.1 - skip file update check
-    TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
+    // VE3 v.3.0 - reinstated this so we can update the game world on the fly.
+    TheGame::Instance()->SetCurrentState(TheGSFileUpdateCheck::Instance());
   }
 }
 
