@@ -456,7 +456,7 @@ my-stats-button
 // Image
 gui-button-4.png
 // Text
-Go to my stats page
+Go to my tests page
 // Font name, size
 arial, 1.1, sx=0.9
 

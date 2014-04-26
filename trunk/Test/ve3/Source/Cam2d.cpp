@@ -49,7 +49,8 @@ void Cam2d::Update()
   SetLookAtPos(pos);
 
   static const float HEIGHT = ROConfig()->GetFloat("cam-z", 300.0f);
-  SetEyePos(pos + Vec3f(0, HEIGHT, 2.0f)); // TODO TEMP TEST
+  SetEyePos(pos + Vec3f(0, HEIGHT, 0)); // TODO TEMP TEST
+  SetUpVec(Vec3f(0, 0, -1));
 }
 
 void Cam2d::Reset()

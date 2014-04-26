@@ -27,7 +27,7 @@ const char* GetTestName(TestId id)
     "Trail-Making test (numbers only)",
     "Trail-Making test (letters and numbers)",
     "De Jong Gierveld Scale",
-    "Satisfaction WIth Life Scale"
+    "Satisfaction With Life Scale"
   };
   return NAMES[id];
 }

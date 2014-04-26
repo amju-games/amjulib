@@ -51,6 +51,7 @@ FoodNode::FoodNode()
   m_sprite.SetCell(c);
 
   SetBlended(true);
+  SetIsZReadEnabled(false);
 }
 
 void FoodNode::Update()

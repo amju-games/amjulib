@@ -36,6 +36,9 @@ protected:
   // The element we move on/off screen
   GuiElement* m_moveElement;
   Vec2f m_moveElementOriginalPos; // pos in gui file
+
+  // String of all button presses - sent as one result rather than loads of them.
+  std::string m_choices;
 };
 }
 
