@@ -7,7 +7,7 @@ gui-comp
 // Name
 guestbook-page-comp
 // Num children
-4
+6
 
 
 // Type
@@ -35,6 +35,20 @@ title-text
 Your guestbook
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// Home button and icon 
+gui-button
+home-button
+-0.95, 0.95
+0.2, 0.1
+gui-button-2.png
+Home
+arial, 0.9, sx=0.7
+gui-image
+home-img
+-0.72, 0.95
+0.1, 0.1
+home1.png
 
 // element type
 gui-button

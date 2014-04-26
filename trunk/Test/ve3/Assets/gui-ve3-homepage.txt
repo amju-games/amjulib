@@ -266,7 +266,7 @@ gui-comp
 // Name
 stats-comp
 // Num children
-15
+16
 
 // Background for stats
 gui-rect
@@ -444,3 +444,19 @@ more-stats3-text
 $$$empty
 // Font name, size
 arial, 1.0, fgcol=000000, sx=0.6, left
+
+// element type
+gui-button
+// Element name
+my-stats-button
+// pos (coords are -1..1)
+-0.05, 0.2
+// size
+0.8, 0.2
+// Image
+gui-button-4.png
+// Text
+Go to my stats page
+// Font name, size
+arial, 1.1, sx=0.9
+
