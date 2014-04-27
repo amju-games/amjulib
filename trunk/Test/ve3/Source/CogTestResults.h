@@ -68,13 +68,13 @@ const int EXPECTED_NUM_RESULTS_FOR_TEST[] =
 class Result
 {
 public:
-  Result() : m_testId(-1), m_key("none"), m_val("none"), m_committed(false), m_timestamp(Time::Now())
+  Result() : m_testId((TestId)-1), m_key("none"), m_val("none"), m_committed(false), m_timestamp(Time::Now())
   {
     m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
     m_localPlayerId = GetLocalPlayerId();
   }
 
-  Result(int testId, const std::string& key, const std::string& val) :  
+  Result(TestId testId, const std::string& key, const std::string& val) :  
     m_testId(testId), m_key(key), m_val(val), m_committed(false), m_timestamp(Time::Now())
   {
     m_sessionId = TheVe1ReqManager::Instance()->GetSessionId();
@@ -90,12 +90,14 @@ public:
   const std::string& GetVal() const { return m_val; }
   Time GetTimestamp() const { return m_timestamp; }
 
+  bool IsDisplayable() const;
+
 private:
   friend class CogTestResults;
   friend class ReqStoreResult;
 
   std::string m_sessionId;
-  int m_testId; 
+  TestId  m_testId; 
   std::string m_key;
   std::string m_val; 
 
@@ -132,7 +134,9 @@ public:
 
   // Returns Results for the given test type.
   // NB This will only return historical results stored locally, it doesn't pull down from server.
-  Results GetResultsForTestType(TestId);
+  // If displayableOnly flag is true, just returns the results you would want to display
+  //  in GSCogResults.
+  Results GetResultsForTestType(TestId, bool displayableOnly);
 
   // Returns Results for the given date (timestamp is rounded down).
   // NB This will only return historical results stored locally, it doesn't pull down from server.

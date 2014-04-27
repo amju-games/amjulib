@@ -25,7 +25,8 @@ static int stops = 0;
 
 int GetNumCogTests()
 {
-  return 6; // TODO CONFIG -- or get from login info
+  // 3 * stroop, RT, 2 * TM, 2 questionnaire
+  return 8; // TODO CONFIG -- or get from login info
 }
 
 void NagReset()

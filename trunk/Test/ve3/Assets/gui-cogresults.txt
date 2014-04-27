@@ -6,7 +6,7 @@ gui-comp
 // Name
 cogresults-comp
 // Num children
-12
+16
 
 
 // Element type
@@ -54,7 +54,7 @@ gui-text
 // Element name
 key2
 // pos (coords are -1..1)
--0.2, -0.6
+-0.4, -0.6
 // size
 0.5, 0.1
 // Text
@@ -67,7 +67,7 @@ gui-text
 // Element name
 key3
 // pos (coords are -1..1)
-0.5, -0.6
+0, -0.6
 // size
 0.5, 0.1
 // Text
@@ -75,44 +75,88 @@ key 3
 // Font name, size
 arial, 0.7, fgcol=000000, left
 
+// Element type
+gui-text
+// Element name
+key4
+// pos (coords are -1..1)
+0.4, -0.6
+// size
+0.5, 0.1
+// Text
+key 3
+// Font name, size
+arial, 0.7, fgcol=000000, left
+
+// Element type
+gui-text
+// Element name
+key5
+// pos (coords are -1..1)
+0.8, -0.6
+// size
+0.5, 0.1
+// Text
+key 3
+// Font name, size
+arial, 0.7, fgcol=000000, left
+
+
+
 gui-rect
 key1-img
--0.9, -0.6
-0.1, 0.1
+-0.85, -0.625
+0.05, 0.05
 // Colour
+// These colours match table in GuiDataDisplay.cpp - TODO load colours
 ff0000
 0
 15
 
 gui-rect
 key2-img
--0.3, -0.6
-0.1, 0.1
+-0.45, -0.625
+0.05, 0.05
 ffff00
 0
 15
 
 gui-rect
-key1-img
-0.4, -0.6
-0.1, 0.1
+key3-img
+-0.05, -0.625
+0.05, 0.05
 00ff00
 0
 15
 
+gui-rect
+key4-img
+0.35, -0.625
+0.05, 0.05
+00ffff
+0
+15
+
+gui-rect
+key5-img
+0.75, -0.625
+0.05, 0.05
+808000
+0
+15
 
 // element type
 gui-button
 // Element name
 ok-button
 // pos (coords are -1..1)
--0.4, -0.8
+-0.2, -0.8
 // size
-0.8, 0.2
+0.4, 0.2
 // Image
-gui-button-4.png
+gui-button-2.png
 // Text
-ok
+OK
 // Font name, size
 arial, 2.0
 
@@ -138,27 +182,27 @@ gui-button
 // Element name
 next-button
 // pos (coords are -1..1)
-0.6, -0.8
+0.4, -0.825
 // size
-0.4, 0.2
+0.6, 0.15
 // Image
-gui-button-2.png
+gui-button-4.png
 // Text
-next
+Next test
 // Font name, size
-arial, 2.0
+arial, 1.0
 
 // element type
 gui-button
 // Element name
 prev-button
 // pos (coords are -1..1)
--1.0, -0.8
+-1.0, -0.825
 // size
-0.4, 0.2
+0.6, 0.15
 // Image
-gui-button-2.png
+gui-button-4.png
 // Text
-prev
+Previous
 // Font name, size
-arial, 2.0
+arial, 1.0

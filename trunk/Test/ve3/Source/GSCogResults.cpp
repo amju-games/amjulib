@@ -56,17 +56,22 @@ void GSCogResults::Draw2d()
 
 void GSCogResults::SetChart(TestId test)
 {
+  static const int MAX_KEY = 5; // num items in Key in GUI
+
 std::cout << "Setting chart up for " << GetTestName(test) << "\n";
 
   GuiText* testname = (GuiText*)GetElementByName(m_gui, "test-name");
   testname->SetText(GetTestName(test));
 
-  GuiText* key[3] = 
+  GuiText* key[MAX_KEY];
+  GuiElement* colourSquares[MAX_KEY];
+  for (int i = 0; i < MAX_KEY; i++) 
   {
-    (GuiText*)GetElementByName(m_gui, "key1"),
-    (GuiText*)GetElementByName(m_gui, "key2"),
-    (GuiText*)GetElementByName(m_gui, "key3")
-  };
+    key[i] = (GuiText*)GetElementByName(m_gui, "key" + ToString(i + 1));
+    key[i]->SetVisible(false);
+    colourSquares[i] = GetElementByName(m_gui, "key" + ToString(i + 1) + "-img");
+    colourSquares[i]->SetVisible(false);
+  }
 
   ChartData* cd = new ChartData;
   GuiChart* chart = (GuiChart*)GetElementByName(m_gui, "results-chart");
@@ -77,7 +82,8 @@ std::cout << "Setting chart up for " << GetTestName(test) << "\n";
   DateMap datemap;
 
   // Get historical results from CogTestResults
-  Results r = TheCogTestResults::Instance()->GetResultsForTestType(test);
+  const bool DISPLAY_ONLY = true;
+  Results r = TheCogTestResults::Instance()->GetResultsForTestType(test, DISPLAY_ONLY);
   if (r.empty())
   {
     // TODO Hide unused GUI
@@ -129,20 +135,22 @@ std::cout << " .. spread over " << datemap.size() << " dates.\n";
   int k = 0;
   for (KeyValMap::iterator it = keyvalmap.begin(); it != keyvalmap.end(); it++)
   {
-    if (k < 3) // TODO we need more keys
+    if (k < 5) // TODO we need more keys
     {
       key[k]->SetText(it->first);
       key[k]->SetVisible(true);
+      colourSquares[k]->SetVisible(true);
     }
     k++;
   }
-  for ( ; k < 3; k++)
-  {
-    // Set remaining keys to invisible
-    key[k]->SetVisible(false);
-  }
+  //for ( ; k < 5; k++)
+  //{
+  //  // Set remaining keys to invisible
+  //  key[k]->SetVisible(false);
+  //}
 
   int x = 0;
+  int maxX = datemap.size();
   for (DateMap::iterator it = datemap.begin(); it != datemap.end(); ++it)
   {
     Time t = it->first;
@@ -190,7 +198,13 @@ for (Results::iterator jt = r.begin(); jt != r.end(); ++jt)
     }
 
     cd->AddRow(row);
-    cd->AddXAxisLabel(t.ToStringJustDate());
+    std::string label = "";
+    if (maxX < 5 || 
+        x == 1 || x == maxX) // first and last
+    {
+      label = t.ToStringJustDate();
+    }
+    cd->AddXAxisLabel(label);
   }
 }
 

@@ -28,6 +28,9 @@
 
 namespace Amju
 {
+// Trail-making tests have 2 min time limit
+static const float MAX_TIME = 120.0f; 
+
 static void OnReset()
 {
   TheGSTrailMakingTest::Instance()->ResetTest();
@@ -95,7 +98,6 @@ void GSTrailMakingTest::ResetTest()
   m_incorrect = 0;
   m_currentCircle = -1;
   m_isFinished = false;
-  static const float MAX_TIME = 120.0f; // TODO TEMP TEST
   m_timer = MAX_TIME;
 
   // Grid of allowable positions
@@ -421,7 +423,7 @@ void GSTrailMakingTest::Finished()
     else
     {
       str = "Well done! You got " + ToString(m_correct) + " correct in " +
-        ToString(m_timer, 2) + " seconds!";
+        TimeToString(MAX_TIME - m_timer) + "!";
       TheSoundManager::Instance()->PlayWav("sound/applause3.wav");
     }
 
@@ -430,7 +432,10 @@ void GSTrailMakingTest::Finished()
 
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
-    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(m_timer)));
+
+    // Argh, we want to store the time taken to do the test, not the time remaining.
+    // m_timer is remaining time, so store (MAX_TIME - m_timer).
+    TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "time", ToString(MAX_TIME - m_timer)));
 
     UpdateScore();
 
