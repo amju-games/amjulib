@@ -42,7 +42,7 @@ GSReactionTime::GSReactionTime()
   m_waitTime = 0; 
   m_maxWaitTime = 0; 
   m_testNum = 0; 
-  m_maxTestNum = 3;
+  m_maxTestNum = 5; // now 5 goes, to discard outliers
   m_mode = RT_NOT_STARTED_YET;
   m_showLurk = true;
   m_numBadClicks = 0;
