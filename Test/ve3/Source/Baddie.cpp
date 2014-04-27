@@ -60,7 +60,7 @@ void Baddie::Update()
     Matrix m;
     m.Translate(m_pos);
     m_sceneNode->SetLocalTransform(m);
-    m_sceneNode->SetAABB(m_aabb);
+    /////m_sceneNode->SetAABB(m_aabb);
   }
 
   // Make bounding box smaller to give player the benefit of the doubt
@@ -74,6 +74,8 @@ void Baddie::Update()
     m_pos.y, m_pos.y + YSIZE,
     m_pos.z - y, m_pos.z + y);
 
+  m_effect->SetAABB(m_aabb);
+  m_sceneNode->SetAABB(m_aabb);
 }
 
 const std::string& Baddie::GetAttackString() const
