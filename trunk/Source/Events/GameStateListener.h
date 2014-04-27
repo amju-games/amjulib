@@ -11,9 +11,7 @@ class GameState;
 // game states are singletons.
 // Create a new one each time a new game state becomes active. 
 // Remove the old listener when a game state deactivates!
-// This is done in GameState::Activate() and Deactivate(), so these base class
-//  impls should be called from subclass impls.
-
+// This is done in Game when states activate/deactivate.
 class GameStateListener : public EventListener
 {
 public:
