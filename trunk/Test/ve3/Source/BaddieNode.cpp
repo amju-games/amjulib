@@ -1,6 +1,7 @@
 #include <AmjuGL.h>
 #include <ReportError.h>
 #include <AmjuRand.h>
+#include <DrawAABB.h>
 #include "BaddieNode.h"
 #include "Baddie.h"
 
@@ -17,8 +18,14 @@ void BaddieNode::Update()
   // Visible from player ?
   // TODO
 
-  m_aabb = m_baddie->GetAABB();
+//  m_aabb = m_baddie->GetAABB();
 
   SpriteNode::Update();
 }
+
+void BaddieNode::Draw()
+{
+  SpriteNode::Draw();
+}
+
 }

@@ -15,6 +15,8 @@ public:
 
   virtual void Update();
 
+  virtual void Draw();
+
 private:
   Baddie* m_baddie;
 };
