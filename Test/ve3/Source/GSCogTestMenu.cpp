@@ -214,7 +214,7 @@ void GSCogTestMenu::OnActive()
     break;
 
   case AMJU_COG_TEST_REACTION_TIME:
-    str = "This is a reaction time test. Please press the big red button as soon as the alarm goes off!";
+    str = "Please press the big red button as soon as I say \"GO!\" and the alarm goes off!";
     m_func = Amju::ReactionTime;
     break;
 
@@ -246,21 +246,21 @@ void GSCogTestMenu::OnActive()
     break;
 
   case AMJU_COG_TEST_STROOP_COLOUR:
-    str = "This next one is called a Stroop Colour test. I will show you a coloured rectangle. Please click on the button which says the colour of the rectangle.";
+    str = "I will show you a coloured box. Please click on the button which says the colour of the box.";
     m_func = Amju::StroopColour;
     break;
 
   case AMJU_COG_TEST_STROOP_WORD:
-    str = "This is called the Stroop Word test. I will show you a word. Please click on the button which is the same as the word. Easy!";
+    str = "I will show you a word. Please click on the button which is the same as the word.";
     m_func = Amju::StroopWord;
     break;
 
   case AMJU_COG_TEST_STROOP_COLOUR_WORD:
-    {
-      str = "This is called the Stroop Colour Word test.";
-      LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
-      TheLurker::Instance()->Queue(lm);
-    }
+    //{
+    //  str = "This is called the Stroop Colour Word test.";
+    //  LurkMsg lm(str, LURK_FG, LURK_BG, AMJU_CENTRE);
+    //  TheLurker::Instance()->Queue(lm);
+    //}
     str = "I will show you a word like before. But this time, the words are coloured. "
       "You have to click the button for the colour, not the word. It's quite tricky!";
     m_func = Amju::StroopColourWord;
@@ -297,8 +297,8 @@ void GSCogTestMenu::OnActive()
   }
   else
   {
-    std::string testTitle = "This is test " + ToString(m_nextTest) + ": " + 
-      std::string(GetTestName((TestId)nextTestId));
+    std::string testTitle = "This is test " + ToString(m_nextTest + 1) + " of 7. It's called the " + 
+      std::string(GetTestName((TestId)nextTestId)) + "...";
 
     LurkMsg lurkTitle(testTitle, LURK_FG, LURK_BG, AMJU_CENTRE);
     TheLurker::Instance()->Queue(lurkTitle);

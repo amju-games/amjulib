@@ -317,7 +317,7 @@ void GSLetterCancellation::Draw2d()
 
 bool GSLetterCancellation::LoadConfig(int testId, const std::string& filename)
 {
-  m_testId = testId;
+  m_testId = (TestId)testId;
 
   File f;
   if (!f.OpenRead(filename))

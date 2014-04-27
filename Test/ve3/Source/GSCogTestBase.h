@@ -2,6 +2,7 @@
 #define GS_COG_TEST_BASE_H_INCLUDED
 
 #include "GSGui.h"
+#include "CogTestResults.h"
 
 namespace Amju
 {
@@ -33,8 +34,11 @@ protected:
   void PointPracArrow(const Vec2f& pos);
   void ShowPracArrow(bool show);
 
+  // Convert time value (secs) to string "min:sec"
+  static std::string TimeToString(float time);
+
 protected:
-  int m_testId;
+  TestId m_testId;
   float m_timer;
   float m_maxTime;
   bool m_isFinished;

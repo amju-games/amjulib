@@ -109,6 +109,12 @@ std::cout << "Reaction time result: " << m_reactionTime << "s\n";
     // TODO Store the number of these "Bad" clicks as a result.
     m_numBadClicks++;
 
+    {
+      LurkMsg lm("Please wait until I say \"GO!\", then click the button as quickly as you can!", 
+        LURK_FG, LURK_BG, AMJU_CENTRE);
+      TheLurker::Instance()->Queue(lm);
+    }
+
     m_waitTime = 0;
     break;
 

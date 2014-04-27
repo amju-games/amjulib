@@ -49,7 +49,7 @@ static void OnStopTest()
 GSCogTestBase::GSCogTestBase()
 {
   m_isFinished = false;
-  m_testId = -1;
+  m_testId = (TestId)-1;
   m_timer = 0;
   m_maxTime = 0;
   m_correct = 0;
@@ -87,29 +87,35 @@ void GSCogTestBase::UpdateScore()
   ChangePlayerCount(SCORE_KEY, m_correct); // ? 
 }
 
+std::string GSCogTestBase::TimeToString(float timer)
+{
+  std::string s;
+  if (timer > 0)
+  {
+    int min = (int)(timer / 60.0f);
+    int sec = (int)(timer - 60.0f * min);
+    s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
+  }
+  else
+  {
+    s = "0:00";
+  }
+  return s;
+}
+
 void GSCogTestBase::UpdateTimer()
 {
   m_timer -= TheTimer::Instance()->GetDt();
 
   GuiText* timeText = (GuiText*)GetElementByName(m_gui, "timer");
-  std::string s;
   if (!m_isFinished)
   {
-    if (m_timer > 0)
+    if (m_timer <= 0)
     {
-      int min = (int)(m_timer / 60.0f);
-      int sec = (int)(m_timer - 60.0f * min);
-      s = ToString(min) + ":" + (sec < 10 ? "0" : "") + ToString(sec);
-    }
-    else
-    {
-      // TODO flash
-      s = "0:00";
-
       Finished();
     }
 
-    timeText->SetText(s);
+    timeText->SetText(TimeToString(m_timer));
   }
 }
 

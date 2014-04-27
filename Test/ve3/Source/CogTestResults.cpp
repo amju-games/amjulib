@@ -62,6 +62,27 @@ private:
   Result* m_res;
 };
 
+bool Result::IsDisplayable() const
+{
+  bool b = true;
+  if ((m_testId == AMJU_COG_TEST_STROOP_WORD ||
+       m_testId == AMJU_COG_TEST_STROOP_COLOUR ||
+       m_testId == AMJU_COG_TEST_STROOP_COLOUR_WORD) &&
+       m_key.size() >= 6 &&
+       m_key.substr(0, 6)  == "choice")
+  {
+    b = false;
+  }
+  else if (m_testId == AMJU_COG_TEST_REACTION_TIME &&
+           m_key.size() >= 3 &&
+           m_key.substr(0, 3) == "bad")
+  {
+    b = false;
+  }
+
+  return b; 
+}
+
 bool Result::Load(File* f)
 {
   if (!f->GetDataLine(&m_sessionId))
@@ -70,11 +91,13 @@ bool Result::Load(File* f)
     return false;
   }
 
-  if (!f->GetInteger(&m_testId))
+  int testId = 0;
+  if (!f->GetInteger(&testId))
   {
     f->ReportError("Expected test ID in cog test result");
     return false;
   }
+  m_testId = (TestId)testId;
 
   if (!f->GetDataLine(&m_key))
   {
@@ -194,7 +217,7 @@ int CogTestResults::GetNumResults(Time testDate, TestId id)
 int CogTestResults::GetNumCompletedTestsForDate(Time testDate)
 {
   int r = 0;
-  for (int i = (int)AMJU_COG_TEST_LETTER_CAN; i < (int)AMJU_COG_TEST_MAX; i++)
+  for (int i = (int)AMJU_COG_TEST_STROOP_WORD; i < (int)AMJU_COG_TEST_MAX; i++)
   {
     bool complete = IsTestComplete(testDate, (TestId)i);
     if (complete)
@@ -205,7 +228,7 @@ int CogTestResults::GetNumCompletedTestsForDate(Time testDate)
   return r;
 }
 
-Results CogTestResults::GetResultsForTestType(TestId tid)
+Results CogTestResults::GetResultsForTestType(TestId tid, bool displayableOnly)
 {
   Results r;
 
@@ -214,7 +237,12 @@ Results CogTestResults::GetResultsForTestType(TestId tid)
   for (unsigned int i = 0; i < m_results.size(); i++)
   {
     Result* res = m_results[i];    
-    if (res->m_testId == tid && res->m_localPlayerId == localPlayerId)
+
+    // d is true if we want all results (not just displayable) or this result
+    //  is a displayable one.
+    bool d = (!displayableOnly) || (displayableOnly && res->IsDisplayable());
+
+    if (d && res->m_testId == tid && res->m_localPlayerId == localPlayerId)
     {
       r.push_back(res);
     }

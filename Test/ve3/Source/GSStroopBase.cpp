@@ -78,7 +78,7 @@ GSStroopBase::GSStroopBase()
   m_isFinished = false;
   m_showLurk = true;
 
-  m_testId = -1; // MUST SET IN SUBCLASS CTOR
+  m_testId = (TestId)-1; // MUST SET IN SUBCLASS CTOR
 
   for (int i = 0; i < NUM_WORDS; i++)
   {
@@ -287,7 +287,7 @@ void GSStroopBase::Finished()
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "correct", ToString(m_correct)));
     TheCogTestResults::Instance()->StoreResult(new Result(m_testId, "incorrect", ToString(m_incorrect)));
     std::string choices = m_choices;
-    const int MAX_LENGTH = 9; // max size in DB table is 100
+    const int MAX_LENGTH = 99; // max size in DB table is 100
     if (choices.size() > MAX_LENGTH) 
     {
       choices = choices.substr(0, MAX_LENGTH);
