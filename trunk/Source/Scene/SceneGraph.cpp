@@ -95,7 +95,22 @@ void SceneGraph::DrawAABBs(SceneNode* node)
   // Good place to work out total number of nodes because we recurse
   //  over the entire tree - no culling here.
   m_nodesTotal++;
+
+  AmjuGL::PushAttrib(
+    AmjuGL::AMJU_LIGHTING | 
+    AmjuGL::AMJU_TEXTURE_2D |
+    AmjuGL::AMJU_DEPTH_READ |
+    AmjuGL::AMJU_DEPTH_WRITE);
+
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
+
+  AmjuGL::SetColour(Colour(0.5, 0.5, 1, 1.0f));
   DrawAABB(*(node->GetAABB()));
+  AmjuGL::PopAttrib();
+
   unsigned int s = node->m_children.size();
   for (unsigned int i = 0; i < s; i++)
   {
@@ -213,7 +228,13 @@ void SceneGraph::DrawChildren(
     // TODO If a node is not visible, are all children automatically
     //  invisible too ?
 #ifdef USE_VFC
-    if (childFr != Frustum::AMJU_OUTSIDE && child->IsVisible())
+    if (childFr == Frustum::AMJU_OUTSIDE && child->IsVisible())
+    {
+#ifdef VFC_DEBUG_TEXT
+      std::cout << "Culling node " << child.GetPtr() << "\n";
+#endif
+    }
+    else if (child->IsVisible())
 #else
     if (child->IsVisible())
 #endif
@@ -302,10 +323,6 @@ void SceneGraph::Draw()
   // Don't want this either, right ?
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_WRITE);
 
-#ifdef VFC_DEBUG
-  DrawAABBs(m_root[AMJU_OPAQUE]);
-#endif 
-
   if (m_root[AMJU_SKYBOX])
   {
     // Centre on camera
@@ -342,7 +359,13 @@ void SceneGraph::Draw()
     PSceneNode sn = it->m_sceneNode; 
 
     Frustum::FrustumResult fr = m_frustum.Intersects(*(sn->GetAABB()));
-    if (fr != Frustum::AMJU_OUTSIDE)
+    if (fr == Frustum::AMJU_OUTSIDE)
+    {
+#ifdef VFC_DEBUG_TEXT
+      std::cout << "Culling node " << sn.GetPtr() << "\n";
+#endif
+    }
+    else
     {
       AmjuGL::PushMatrix();
       // Blended nodes may need to mult by their combined transform.
@@ -357,6 +380,18 @@ void SceneGraph::Draw()
 
 #ifdef VFC_DEBUG_TEXT
   std::cout << "Nodes: " << m_nodesTotal << " in frustum: " << m_nodesInFrustum  << "\n";
+#endif 
+
+#ifdef VFC_DEBUG
+  AmjuGL::PushMatrix();
+  AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+  AmjuGL::Disable(AmjuGL::AMJU_BLEND);
+  if (m_camera)
+  {
+    m_camera->Draw();
+  }
+  DrawAABBs(m_root[AMJU_OPAQUE]);
+  AmjuGL::PopMatrix();
 #endif 
 
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_WRITE);

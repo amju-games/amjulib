@@ -79,17 +79,19 @@ void SceneNode::UpdateBoundingVol()
 {
   unsigned int s = m_children.size();
   if (s > 0)
-  {
-    m_children[0]->UpdateBoundingVol();
-    // Start off with b.box the same size as child zero
-    m_aabb = *(m_children[0]->GetAABB());
-    for (unsigned int i = 1; i < s; i++)
+  {    
+    for (unsigned int i = 0; i < s; i++)
     {
       m_children[i]->UpdateBoundingVol();
-      // Increase our box to fit the other children
+      // Increase our box to fit the child
       m_aabb.Union(*(m_children[i]->GetAABB()));
     }
   }
+
+#ifdef AABB_DEBUG
+  // Zero size box? Not good, AABB not set up, culling won't work
+  Assert(m_aabb.GetXSize() != 0 || m_aabb.GetYSize() != 0 || m_aabb.GetZSize() != 0);
+#endif
 }
 
 void SceneNode::DelChild(PSceneNode node)
