@@ -7,18 +7,31 @@
 #include "GuiText.h"
 #include <AmjuFinal.h>
 
+#if defined(WIN32)
+#include <Windows.h> // sigh
+#include <gl/GL.h>
+#endif
+
 namespace Amju
 {
 const char* GuiDataLineDisplay::NAME = "data-line-display";
+
+const float DATA_POINT_FONT_SIZE = 0.5f; // TODO
+const float X_AXIS_LABEL_FONT_SIZE = 0.5f; // TODO
 
 GuiElement* CreateDataLineDisplay()
 {
   return new GuiDataLineDisplay;
 }
 
-// TODO Thickness; draw area under line
+// TODO Thickness 
+// TODO option to draw area under line
 void DrawLine(const Vec2f& v1, const Vec2f& v2)
 {
+#if defined(WIN32) 
+  // HACK to fix inconsistent widths. TODO Put in AmjuGL
+  glLineWidth(2.0f);
+#endif
   AmjuGL::DrawLine(AmjuGL::Vec3(v1.x, v1.y, 0), AmjuGL::Vec3(v2.x, v2.y, 0));
 }
 
@@ -105,7 +118,7 @@ void GuiDataLineDisplay::Draw()
     float yPos = yChartPos - ySize;
     t.SetLocalPos(Vec2f(xPos - 0.5f, yPos));
     t.SetText(str);
-    t.SetFontSize(0.3f); // TODO 
+    t.SetFontSize(X_AXIS_LABEL_FONT_SIZE); 
     t.Draw();
   }
 
@@ -172,7 +185,7 @@ std::cout
        t.SetDrawBg(false);
        t.SetLocalPos(Vec2f(xPos - 0.5f, yPos + 0.1f));
        t.SetText(ToString(yVal));
-       t.SetFontSize(0.3f); // TODO 
+       t.SetFontSize(DATA_POINT_FONT_SIZE);  
        t.Draw();
 
        DataPoint dp;

@@ -98,6 +98,7 @@ void GuiCalendar::SetStartEndDate(Time start, Time end)
   Clear();
   AddDayColumnHeadings();
 
+  // TODO Localise
   std::string MONTH[] = { "Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 
   Time today = Time::Now();
