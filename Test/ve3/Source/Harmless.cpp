@@ -77,9 +77,9 @@ void Harmless::Update()
     {
       static const float YSIZE = 10.0f; // doesn't really matter!
       m_sceneNode->SetAABB(AABB(
-        m_pos.x - m_size.x, m_pos.x + m_size.x, // why not / 2 ??
+        m_pos.x - m_size.x * 0.5f, m_pos.x + m_size.x * 0.5f, // why not / 2 ??
         m_pos.y,            m_pos.y + YSIZE,
-        m_pos.z - m_size.y, m_pos.z + m_size.y));
+        m_pos.z - m_size.y * 0.5f, m_pos.z + m_size.y * 0.5f));
     }
   }
 }
