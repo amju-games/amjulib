@@ -34,6 +34,7 @@ Added to repository
 #endif
 
 #include <iostream>
+#include <string.h>
 #include "XmlNodeInterface.h"
 #include <AmjuAssert.h>
 #include <AmjuFinal.h>
