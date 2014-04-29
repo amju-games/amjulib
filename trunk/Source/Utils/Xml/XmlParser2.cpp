@@ -93,7 +93,10 @@
                      // to have "MessageBoxA" to display error messages for openFilHelper
 #endif
 
+#ifndef GEKKO
 #include <memory.h>
+#endif
+
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
