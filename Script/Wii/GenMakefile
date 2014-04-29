@@ -35,7 +35,7 @@ INCLUDES	:=	$(AMJU_LIB_DIRS) $(AMJU)/Main
 #---------------------------------------------------------------------------------
 
 # j.c. workarounds for C++11 features override and nullptr
-CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) -Doverride= -Dnullptr=0 $(EXTRA_CFLAGS)
+CFLAGS	= -std=c++0x -g -O2 -Wall $(MACHDEP) $(INCLUDE) -Doverride= -Dnullptr=0 $(EXTRA_CFLAGS)
 
 CXXFLAGS	=	$(CFLAGS)
 
@@ -44,7 +44,7 @@ LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-AMJULIB = $(AMJULIB_WII_SCRIPT_PATH)/../../Build/WiiBuild/
+#AMJULIB = $(AMJULIB_WII_SCRIPT_PATH)/../../Build/WiiBuild/
 
 LIBS	:=	-lamju -lmad -lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
 # j.c. extra for SoundGekko
@@ -53,7 +53,7 @@ LIBS	:=	-lamju -lmad -lasnd -lfat -lwiiuse -lbte -logc -lmodplay -laesnd -lm
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= 
+#LIBDIRS	:= 
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -115,8 +115,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 # build a list of library paths
 #---------------------------------------------------------------------------------
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
-				-L$(LIBOGC_LIB) \
-				-L$(AMJULIB)
+				-L$(LIBOGC_LIB) 
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) clean

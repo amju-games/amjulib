@@ -18,6 +18,8 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Image \
   $(AMJU)/Image/Png \
   $(AMJU)/Localise \
+  $(AMJU)/Lua \
+  $(AMJU)/Lua/LuaLib-5.2.3 \
   $(AMJU)/Main \
   $(AMJU)/Md2 \
   $(AMJU)/Mem \
@@ -31,5 +33,6 @@ AMJU_LIB_DIRS := \
   $(AMJU)/Thread \
   $(AMJU)/TimeUtils \
   $(AMJU)/Utils \
+  $(AMJU)/Utils/Xml \
   $(AMJU)/Utils/Zlib
   
