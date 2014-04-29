@@ -111,7 +111,7 @@ void EventPollerImplWii::Update(Listeners* pListeners)
       }
     }
     
-    BalanceBoardEvent bbe;
+    //BalanceBoardEvent bbe;
     bool isBalanceEvent = false;
     
     if (et.type == EXP_NUNCHUK)
@@ -152,24 +152,28 @@ void EventPollerImplWii::Update(Listeners* pListeners)
 
         isBalanceEvent = true;
         // get coords between -1..1 
-        bbe.x = (float)wbx / 30.0f; //(wbx + 30) * 10;
-        bbe.y = (float)wby / 30.0f; //(wby + 30) * 8;
-        if (bbe.x > 1.0f)
+        float bbex = (float)wbx / 30.0f; //(wbx + 30) * 10;
+        float bbey = (float)wby / 30.0f; //(wby + 30) * 8;
+        if (bbex > 1.0f)
         {
-          bbe.x = 1.0f;
+          bbex = 1.0f;
         }
-        if (bbe.x < -1.0f)
+        if (bbex < -1.0f)
         {
-          bbe.x = -1.0f;
+          bbex = -1.0f;
         }
-        if (bbe.y > 1.0f)
+        if (bbey > 1.0f)
         {
-          bbe.y = 1.0f;
+          bbey = 1.0f;
         }
-        if (bbe.y < -1.0f)
+        if (bbey < -1.0f)
         {
-          bbe.y = -1.0f;
+          bbey = -1.0f;
         }
+
+        BalanceBoardEvent bbe(bbex, bbey);
+        NotifyListenersWithPriority(&bbe, pListeners);  
+
       }
     }
 
@@ -231,10 +235,10 @@ void EventPollerImplWii::Update(Listeners* pListeners)
       NotifyListenersWithPriority(&je, pListeners);  
     }
   
-    if (isBalanceEvent)
-    {
-      NotifyListenersWithPriority(&bbe, pListeners);  
-    }
+//    if (isBalanceEvent)
+//    {
+//      NotifyListenersWithPriority(&bbe, pListeners);  
+//    }
   
     if (isQuit)
     {
