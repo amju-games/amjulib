@@ -546,6 +546,10 @@
 */
 
 
+// j.c. Fix for Android, http://lua-users.org/lists/lua-l/2012-08/msg00099.html
+#if ANDROID
+#define getlocaledecpoint() '.'
+#endif
 
 #endif
 
