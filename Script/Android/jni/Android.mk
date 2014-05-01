@@ -33,6 +33,7 @@ LOCAL_C_INCLUDES := \
 	../../../Source/Image/Png \
 	../../../Source/Localise \
 	../../../Source/Lua \
+	../../../Source/Lua/LuaLib-5.2.3 \
 	../../../Source/Md2 \
 	../../../Source/Mem \
 	../../../Source/Network \
