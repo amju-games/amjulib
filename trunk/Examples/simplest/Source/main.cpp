@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#if !defined(ANDROID_NDK) && !defined(AMJU_IOS)
+#if defined(WIN32) || defined(MACOSX)
 #define AMJU_USE_OPENGL
 #define AMJU_USE_GLUT
 #include <main.h>
