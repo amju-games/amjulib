@@ -158,8 +158,10 @@ void GSToday::OnActive()
   Time today = Time::Now();
   today.RoundDown(TimePeriod(ONE_DAY_IN_SECONDS));
 
-  bool cogTestsAllDoneToday = TheCogTestResults::Instance()->
-    GetNumCompletedTestsForDate(today) == GetNumCogTests();
+  int numCompleted = TheCogTestResults::Instance()->
+    GetNumCompletedTestsForDate(today);
+  int numTodo = GetNumCogTests();
+  bool cogTestsAllDoneToday = (numCompleted == numTodo);
 
   // Always allow tests?? 
   ////if (DoCogTests() && !cogTestsAllDoneToday)
@@ -206,7 +208,8 @@ void GSToday::OnActive()
     else
     {
       // If no game day and it's not a research session, there is nothing to do.
-      str = "There is nothing for you to do today. Thank you for participating!";
+      str = "There is nothing for you to do today, but you can take the tests if you would like."
+        " Thank you for participating!";
       // TODO Get next date from the ResearchCalendar
     }
   }
