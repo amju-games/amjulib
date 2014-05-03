@@ -21,7 +21,7 @@ yes-button
 // Image
 gui-button-4.png
 // Text
-yes
+Yes
 // Font name, size
 arial, 2.0 
 
@@ -30,7 +30,7 @@ no-button
 -0.4, -0.7
 0.8, 0.2
 gui-button-4.png
-no
+No
 arial, 2.0 
 
 

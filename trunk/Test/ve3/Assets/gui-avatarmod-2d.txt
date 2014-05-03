@@ -20,7 +20,7 @@ ok-button
 // Image
 gui-button-4.png
 // Text
-ok
+OK
 // Font name, size
 arial, 2.0 
 
@@ -36,7 +36,7 @@ cancel-button
 // Image
 gui-button-4.png
 // Text
-cancel
+Cancel
 // Font name, size
 arial, 2.0 
 
@@ -68,7 +68,7 @@ layer-button-0
 -0.9, 0.9
 0.6, 0.15
 gui-button-4.png
-head+body
+Head+body
 arial, 1.5, sx=0.8
 
 gui-button
@@ -76,7 +76,7 @@ layer-button-1
 -0.9, 0.7
 0.6, 0.15
 gui-button-4.png
-hair
+Hair
 arial, 1.5, sx=0.8
 
 gui-button
@@ -84,7 +84,7 @@ layer-button-2
 -0.9, 0.5
 0.6, 0.15
 gui-button-4.png
-bottoms
+Bottoms
 arial, 1.5, sx=0.8
 
 gui-button
@@ -92,7 +92,7 @@ layer-button-3
 -0.9, 0.3
 0.6, 0.15
 gui-button-4.png
-tops
+Tops
 arial, 1.5, sx=0.8
 
 gui-button
@@ -100,7 +100,7 @@ layer-button-4
 -0.9, 0.1
 0.6, 0.15
 gui-button-4.png
-glasses
+Glasses
 arial, 1.5, sx=0.8
 
 gui-button
@@ -108,7 +108,7 @@ layer-button-5
 -0.9, -0.1
 0.6, 0.15
 gui-button-4.png
-mouth
+Mouth
 arial, 1.5, sx=0.8
 
 gui-button
@@ -116,7 +116,7 @@ layer-button-6
 -0.9, -0.3
 0.6, 0.15
 gui-button-4.png
-facial hair
+Facial hair
 arial, 1.5, sx=0.8
 
 

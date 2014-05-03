@@ -47,7 +47,7 @@ cancel-button
 -0.4, -0.65
 0.8, 0.2
 gui-button-4.png
-cancel
+Cancel
 arial, 2.0 
 
 

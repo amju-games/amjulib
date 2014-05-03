@@ -15,7 +15,7 @@ ok-button
 // size
 0.8, 0.2
 gui-button-4.png
-ok
+OK
 arial, 2.0
 
 gui-button
@@ -25,7 +25,7 @@ quit-button
 // size
 0.4, 0.1
 gui-button-4.png
-quit
+Quit
 arial, 1.0
 
 gui-text

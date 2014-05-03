@@ -15,7 +15,7 @@ ok-button
 // size
 0.8, 0.2
 gui-button-4.png
-ok
+OK
 arial, 2.0
 
 gui-button
@@ -25,7 +25,7 @@ results-button
 // size
 0.8, 0.2
 gui-button-4.png
-view results
+View results
 arial, 1.5, sx=0.7
 
 

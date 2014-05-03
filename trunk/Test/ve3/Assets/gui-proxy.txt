@@ -14,7 +14,7 @@ use-proxy-button
 -0.5, 1.6 
 0.4, 0.1
 gui-button-4.png
-use proxy
+Use proxy
 arial, 1.0, sx=0.8 
 
 
@@ -100,7 +100,7 @@ proxy-ok-button
 // Image
 gui-button-4.png
 // Text
-ok
+OK
 // Font name, size
 arial, 1.5 
 
@@ -113,7 +113,7 @@ proxy-cancel-button
 // Image
 gui-button-4.png
 // Text
-cancel
+Cancel
 // Font name, size
 arial, 1.5 
 

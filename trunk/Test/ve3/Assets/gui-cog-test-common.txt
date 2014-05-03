@@ -44,7 +44,7 @@ done-button
 // Image
 gui-button-4.png
 // Text
-pause
+Pause
 // Font name, size
 arial, 1.0 
 
@@ -75,7 +75,7 @@ stop-prac-button
 // Image
 gui-button-4.png
 // Text
-stop practice
+Stop practice
 // Font name, size
 arial, 1.4
 

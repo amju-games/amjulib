@@ -34,7 +34,7 @@ cancel-button
 // Image
 gui-button-4.png
 // Text
-don't wait
+Don't wait
 // Font name, size
 arial, 2.0, sx=0.8 
 
@@ -51,7 +51,7 @@ error-string
 // size
 2.0, 0.1
 // Text
-error
+Error
 // Font name, size
 arial, 1.0, fgcol=ffffff
 

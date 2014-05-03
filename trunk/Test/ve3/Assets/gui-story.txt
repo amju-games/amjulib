@@ -13,7 +13,7 @@ story-ok-button
 -0.4, -0.7
 0.8, 0.2
 gui-button-4.png
-ok
+OK
 arial, 1.5
 
 // Element type
@@ -54,7 +54,7 @@ no-prac-button
 -0.2, -1.7
 0.4, 0.1
 gui-button-4.png
-cancel
+Cancel
 arial, 1.0 
 
 

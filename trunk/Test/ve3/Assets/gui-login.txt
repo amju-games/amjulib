@@ -41,7 +41,7 @@ login-button
 // size
 0.8, 0.2
 gui-button-4.png
-login
+Login
 arial, 2.0 
 
 gui-button
@@ -51,6 +51,6 @@ cancel-button
 // size
 0.8, 0.2
 gui-button-4.png
-cancel
+Cancel
 arial, 2.0 
 
