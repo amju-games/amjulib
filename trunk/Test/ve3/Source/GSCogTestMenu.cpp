@@ -267,7 +267,7 @@ void GSCogTestMenu::OnActive()
     break;
 
   case AMJU_COG_TEST_TRAIL_MAKING:
-    str = "This is called a trail making test. Move the mouse over the numbered circles, in order, starting with 1.";
+    str = "Please move the mouse over the numbered circles, in order, starting with 1.";
     m_func = Amju::TrailMakingTest;
     TheGSTrailMakingTest::Instance()->SetIsAlternatingVersion(false);
     break;
@@ -297,7 +297,10 @@ void GSCogTestMenu::OnActive()
   }
   else
   {
-    std::string testTitle = "This is test " + ToString(m_nextTest + 1) + " of 7. It's called the " + 
+    int numTodo = GetNumCogTests();
+    std::string testTitle = "This is test " + ToString(m_nextTest + 1) + " of " +
+      ToString(numTodo) + 
+      ". It's called the " + 
       std::string(GetTestName((TestId)nextTestId)) + "...";
 
     LurkMsg lurkTitle(testTitle, LURK_FG, LURK_BG, AMJU_CENTRE);

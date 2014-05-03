@@ -24,8 +24,8 @@ const char* GetTestName(TestId id)
     "Stroop Colour test",
     "Stroop Colour-Word test",
     "Reaction time test",
-    "Trail-Making test (numbers only)",
-    "Trail-Making test (letters and numbers)",
+    "Trail-Making test 'A'",
+    "Trail-Making test 'B'",
     "De Jong Gierveld Scale",
     "Satisfaction With Life Scale"
   };
