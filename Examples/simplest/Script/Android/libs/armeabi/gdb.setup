@@ -1,0 +1,2 @@
+set solib-search-path /Users/jay/projects/amjulib/Examples/simplest/Script/Android/obj/local/armeabi
+directory /Users/jay/android-ndk/platforms/android-9/arch-arm/usr/include /Users/jay/projects/amjulib/Examples/simplest/Script/Android/jni ../../../Source ../../../../../../amjulib/Releases/amjulib-v.0.3-android/include /Users/jay/android-ndk/sources/cxx-stl/stlport/stlport /Users/jay/android-ndk/sources/cxx-stl//gabi++/include
