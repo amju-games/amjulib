@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{12E97154-C5DD-454F-88F6-3A69775AFAF5}
 AppName=Hungry People
-AppVersion=2.0
+AppVersion=3.0
 AppPublisher=Jason Colman
 AppPublisherURL=http://www.amju.com/
 AppSupportURL=http://www.amju.com/
