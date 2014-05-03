@@ -52,7 +52,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</OutDir>
     <IntDir>..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\..\..\..\Build\amjulib\include;$(IncludePath)</IncludePath>
     <EmbedManifest>false</EmbedManifest>
     <LibraryPath>..\..\..\..\..\..\Build\Release\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -124,33 +124,8 @@ copy /Y ..\..\special.cfg   ..\..\..\..\..\..\Build\ve3\Windows\$(Configuration)
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>AMJU_USE_CURL;AMJU_USE_BASS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/I "../../../../../../Source/Events" 
-/I "../../../../../../Source/EventsWin32" 
-/I "../../../../../../Source/EventsSDL" 
-/I "../../../../../../Source/Utils" 
-/I "../../../../../../Source/FileUtils" 
-/I "../../../../../../Source/AmjuGL"  /I "../../../../../../Source/Network"  /I "../../../../../../Source/Thread"  /I "../../../../../../Source/Community"   
-/I "../../../../../../Source/AmjuGLOpenGL" 
-/I "../../../../../../Source/AmjuGLDX9" 
-/I "../../../../../../Source/AmjuGLDX11" 
-/I "../../../../../../Source/Mem" 
-/I "../../../../../../Source/Md2" 
-/I "../../../../../../Source/Image" 
-/I "../../../../../../Source/Geom" 
-/I "../../../../../../Source/Strings" 
-/I "../../../../../../Source/TimeUtils" 
-/I "../../../../../../Source/Game" 
-/I "../../../../../../Source/Resource" 
-/I "../../../../../../Source/Scene" 
-/I "../../../../../../Source/Obj"  
-/I "../../../../../../Source/Collision" 
-/I "../../../../../../Source/Gui" 
-/I "../../../../../../Source/Font" 
-/I "../../../../../../Source/Sound" 
-/I "../../../../../../Source/SoundSDLMixer" 
-/I "../../../../../../Source/GeomLoad" 
-/I "../../../../../../Source/GeomDraw" /I "../../../../../../Source/Image/Png" /I "../../../../../../Source/Main" /I "../../../../../../Source/SoundBass"   /I "../../../../../../Source/Localise"  /I "../../../../../../Source/Lua"   %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/I "../../../../../../Source/Network"  /I "../../../../../../Source/AmjuGLOpenGL"  /I "../../../../../../Source/SoundBass" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
