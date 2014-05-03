@@ -35,7 +35,7 @@ resume-button
 // Image
 gui-button-4.png
 // Text
-resume test
+Resume test
 // Font name, size
 arial, 1.4
 
@@ -51,7 +51,7 @@ help-button
 // Image
 gui-button-4.png
 // Text
-help
+Help
 // Font name, size
 arial, 1.4
 
@@ -67,7 +67,7 @@ restart-button
 // Image
 gui-button-4.png
 // Text
-restart test
+Restart test
 // Font name, size
 arial, 1.4
 
@@ -83,7 +83,7 @@ skip-button
 // Image
 gui-button-4.png
 // Text
-skip test
+Skip test
 // Font name, size
 arial, 1.4
 
@@ -99,7 +99,7 @@ quit-button
 // Image
 gui-button-4.png
 // Text
-quit tests
+Quit tests
 // Font name, size
 arial, 1.4
 

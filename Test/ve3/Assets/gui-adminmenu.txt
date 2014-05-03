@@ -29,7 +29,7 @@ edit-button
 -0.4, 0.4
 0.8, 0.2
 gui-button-4.png
-edit mode
+Edit mode
 arial, 1.6 
 
 // Button to test cognitive tests
@@ -38,7 +38,7 @@ cog-button
 -0.4, 0.1 
 0.8, 0.2
 gui-button-4.png
-cognitive tests...
+Cognitive tests...
 arial, 1.0
 
 gui-button
@@ -46,6 +46,6 @@ cancel-button
 -0.4, -0.2
 0.8, 0.2
 gui-button-4.png
-cancel
+Cancel
 arial, 1.6
 

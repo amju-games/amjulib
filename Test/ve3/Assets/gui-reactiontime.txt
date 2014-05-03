@@ -17,7 +17,7 @@ word
 // size
 2.0, 0.2
 // Text
-ready...
+Ready...
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
 

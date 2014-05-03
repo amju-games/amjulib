@@ -15,7 +15,7 @@ ok-button
 // size
 0.8, 0.2
 gui-button-4.png
-ok
+OK
 arial, 1.5
 
 gui-text

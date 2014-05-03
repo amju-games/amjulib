@@ -26,7 +26,7 @@ start-button
 // Image
 gui-button-4.png
 // Text
-start...
+Start...
 // Font name, size
 arial, 2.0 
 
@@ -40,7 +40,7 @@ options-button
 // Image
 gui-button-4.png
 // Text
-options...
+Options...
 // Font name, size
 arial, 1.75 
 
@@ -50,7 +50,7 @@ quit-button
 0.5, 0.8
 0.4, 0.1
 gui-button-4.png
-quit
+Quit
 arial, 1.0 
 
 

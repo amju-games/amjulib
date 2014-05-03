@@ -26,7 +26,7 @@ pause-button
 // Image
 gui-button-4.png
 // Text
-pause
+Pause
 // Font name, size
 arial, 1.0 
 
@@ -42,7 +42,7 @@ eat-button
 // Image
 gui-button-2.png
 // Text
-eat!
+Eat!
 // Font name, size
 arial, 0.6, sx=0.8
 

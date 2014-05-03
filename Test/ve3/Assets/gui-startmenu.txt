@@ -14,7 +14,7 @@ guest-button
 -0.4, 0.6
 0.8, 0.2
 gui-button-4.png
-log in as guest
+Log in as guest
 arial, 1.8, sx=0.6
 
 gui-button
@@ -22,7 +22,7 @@ start-button
 -0.4, 0.3
 0.8, 0.2
 gui-button-4.png
-log in...
+Log in...
 arial, 1.8
 
 gui-button
@@ -30,7 +30,7 @@ options-button
 -0.4, 0
 0.8, 0.2
 gui-button-4.png
-options...
+Options...
 arial, 1.8 
 
 
@@ -39,7 +39,7 @@ cancel-button
 -0.4, -0.3
 0.8, 0.2
 gui-button-4.png
-cancel
+Cancel
 arial, 1.8 
 
 // TODO normally hidden
@@ -48,7 +48,7 @@ admin-button
 -0.2, -0.75
 0.4, 0.1
 gui-button-4.png
-admin...
+Admin...
 arial, 1.0 
 
 

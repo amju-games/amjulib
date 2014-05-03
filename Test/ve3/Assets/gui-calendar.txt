@@ -35,7 +35,7 @@ ok-button
 // Image
 gui-button-4.png
 // Text
-ok
+OK
 // Font name, size
 arial, 2.0
 
