@@ -22,7 +22,7 @@ public:
   void SetName(const std::string& name);
 
   virtual void MoveTo(const Vec3f& newPos);
-
+  const Vec3f& GetMoveToPos() const { return m_newPos; }
   bool IsMoving() const;
 
   // Get where we are headed

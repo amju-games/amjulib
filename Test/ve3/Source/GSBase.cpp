@@ -69,17 +69,19 @@ void GSBase::Draw2d()
     }
 
     //if (!s.empty()) // ? So on screen for longer ?
-    {
-      t.SetText(s);
-    }
-    t.Draw();
+    //{
+    //  t.SetText(s);
+    //}
 
     s = Replace(s, "\n", " ");
     if (old != s)
     {
       std::cout << "Queue: " << s << "\n";
       old = s;
+      t.SetText(s);
     }
+
+    t.Draw();
   }
 #endif
 

@@ -16,7 +16,8 @@ RoomNode::RoomNode(const Tile& tile) : m_tile(tile)
 
 void RoomNode::Build()
 {
-  Vec2f size = m_tile.m_size + Vec2f(0.01f, 0.01f);  // try to fix occasional cracks 
+  const float EXTRA = 1.0f;
+  Vec2f size = m_tile.m_size + Vec2f(EXTRA, EXTRA);  // try to fix occasional cracks 
   Vec3f pos(0, 0, 0); //// = m_tile.m_pos; 
 
   Matrix mat;

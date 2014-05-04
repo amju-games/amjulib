@@ -5,6 +5,7 @@
 #include "LurkMsg.h"
 #include "LayerGroup.h"
 #include "LocalPlayer.h"
+#include "GameConsts.h"
 
 namespace Amju
 {
@@ -96,6 +97,32 @@ void GSVe3ChooseTradeType::OnActive()
   }
 
   SetHomeButton();
+
+  // Set food and treasure counts for both players
+  Assert(dynamic_cast<GuiText*>(GetElementByName(m_gui, "food-you-text")));
+  Assert(dynamic_cast<GuiText*>(GetElementByName(m_gui, "food-other-text")));
+  Assert(dynamic_cast<GuiText*>(GetElementByName(m_gui, "treasure-you-text")));
+  Assert(dynamic_cast<GuiText*>(GetElementByName(m_gui, "treasure-other-text")));
+
+  if (localPlayer->Exists(FOOD_STORED_KEY))
+  {
+    ((GuiText*)GetElementByName(m_gui, "food-you-text"))->SetText(localPlayer->GetVal(FOOD_STORED_KEY));
+  }
+
+  if (m_player->Exists(FOOD_STORED_KEY))
+  {
+    ((GuiText*)GetElementByName(m_gui, "food-other-text"))->SetText(m_player->GetVal(FOOD_STORED_KEY));
+  }
+
+  if (localPlayer->Exists(TREASURE_KEY))
+  {
+    ((GuiText*)GetElementByName(m_gui, "treasure-you-text"))->SetText(localPlayer->GetVal(TREASURE_KEY));
+  }
+
+  if (m_player->Exists(TREASURE_KEY))
+  {
+    ((GuiText*)GetElementByName(m_gui, "treasure-other-text"))->SetText(m_player->GetVal(TREASURE_KEY));
+  }
 }
 
 void GSVe3ChooseTradeType::OnGiveFood()

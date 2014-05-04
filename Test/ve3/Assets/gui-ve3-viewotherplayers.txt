@@ -121,14 +121,14 @@ static-text2
 // Text
 What would you like to do?
 // Font name, size
-arial, 1.0, fgcol=ffffff, bgcol=ff0000
+arial, 1.0, fgcol=000000
 
 // Element type
 gui-text
 // Element name
 static-text3
 // pos (coords are -1..1)
--0.8, -0.3
+-0.8, -0.35
 // size
 1.35, 0.1
 // Text
@@ -174,7 +174,7 @@ gui-button
 //give-food-button
 make-trade-button
 // pos (coords are -1..1)
-0.6, -0.3
+0.6, -0.35
 // size
 0.2, 0.1
 // Image

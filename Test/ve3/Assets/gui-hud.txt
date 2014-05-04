@@ -76,7 +76,7 @@ arial, 0.5, fgcol=ffffff, sx=0.9, left
 
 gui-text
 score-text
-0.4, 1.0
+0.2, 1.0
 0.4, 0.05
 // Text
 SCORE
@@ -108,7 +108,7 @@ arial, 0.5, fgcol=ffffff, sx=0.8, right
 
 gui-text
 score-num
-0.4, 0.95
+0.2, 0.95
 0.4, 0.15
 // Text
 SCR0123

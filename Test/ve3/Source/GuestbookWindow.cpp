@@ -145,23 +145,27 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons, bool sh
     Player* sender = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(senderId).GetPtr());
     Player* recip = dynamic_cast<Player*>(TheObjectManager::Instance()->GetGameObject(recipId).GetPtr());
 
+    Player* mugshotPlayer = 0;
     if (sender && recip)
     {
       if (senderId == GetLocalPlayerId())
       {
         senderName = "you"; // NB Case, sigh
+        mugshotPlayer = recip;
       }
       else
       {
         senderName = sender->GetName();
+        mugshotPlayer = sender;
       }
-
     }
-
-    Player* mugshotPlayer = recip;
-    if (!recip || (showSentMsgs && sender))
+    else if (sender)
     {
       mugshotPlayer = sender;
+    }
+    else if (recip)
+    {
+      mugshotPlayer = recip;
     }
 
     if (mugshotPlayer)
@@ -253,7 +257,8 @@ void GBDisplay::Init(const MsgManager::Msgs& msgs, bool addReplyButtons, bool sh
       }
     }
 
-    if (!showSentMsgs && addReplyButtons && canReply)
+    // Can only reply to Trade requests at the moment, as Reply GUI needs so much work
+    if (!showSentMsgs && addReplyButtons && canReply && msg.IsTrade())
     {
       // Add reply button
       GuiButton* reply = new GuiButton;

@@ -117,7 +117,7 @@ std::cout << "GSChoosePlayer: Num players: " << numPlayers << "\n";
     }
     else if (i == numPlayers)
     {
-      b->SetText("new...");
+      b->SetText("New...");
       b->SetCommand(OnNewPlayer);
     } 
     else
