@@ -30,11 +30,20 @@ void GuiCalendar::Draw()
 
     RCPtr<GuiText> text = new GuiText;
     text->SetIsMulti(true);
-    text->SetFontSize(1.2f); // TODO CONFIG
+    text->SetFontSize(0.7f); // TODO CONFIG
     text->SetSize(Vec2f(0.8f, 0.1f)); // sets max line width
     text->SetLocalPos(m_focus->GetCombinedPos());
     text->SetText(dc->GetMainEventStr());
     text->SizeToText();
+
+    Vec2f pos = text->GetLocalPos();
+    Vec2f size = text->GetSize();
+    if (pos.x + size.x > 1.0f)
+    {
+      // Move to left
+      pos.x = 1.0f - size.x;
+      text->SetLocalPos(pos);
+    }
     text->SetFgCol(Colour(0, 0, 0 ,1));
     text->SetBgCol(Colour(1, 1, 1 ,1));
     text->SetDrawBg(true);
