@@ -34,7 +34,7 @@ title-text
 // Text
 Your guestbook
 // Font name, size
-arial, 2.0, bgcol=ffffff, fgcol=000000
+arial, 2.0, bgcol=ffffff, fgcol=000000, sx=0.9
 
 // Home button and icon 
 gui-button
@@ -71,11 +71,11 @@ gui-button
 // Element name
 sent-msgs-button
 // pos (coords are -1..1)
-0.1, -0.8
+0.1, -0.75
 // size
-0.8, 0.15
+0.8, 0.2
 // Image
-key1.png
+gui-button-4.png
 // Text
 Show sent messages
 // Font name, size

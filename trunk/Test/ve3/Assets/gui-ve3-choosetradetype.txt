@@ -7,7 +7,7 @@ gui-comp
 // Name
 choose-trade-type-comp
 // Num children
-13
+23
 
 // Title bar - show this player's name
 // Element type
@@ -22,6 +22,20 @@ static-text1
 Choose your trade!
 // Font name, size
 arial, 2.0, bgcol=ffffff, fgcol=000000
+
+// Home button and icon 
+gui-button
+home-button
+-0.95, 0.95
+0.2, 0.1
+gui-button-2.png
+Home
+arial, 0.9, sx=0.7
+gui-image
+home-img
+-0.72, 0.95
+0.1, 0.1
+home1.png
 
 // Background for actions you can do
 gui-rect
@@ -153,468 +167,60 @@ arial, 1.5, sx=0.7
 
 
 
-
-
-
-
-
-// Element type
-gui-comp
-// Name
-make-trade-request-message-comp
-// Num children
-12
-
-// Background for message
-gui-rect
-actions-bg
-// Pos, size
--0.8, 0.35
-1.7, 0.9
-// Colour
-ffffff
-// Corner radius
-0
-// flags
-15
-
-
-// Message line 1
-// Element type
-gui-text
-// Element name
-msg-text1
-// pos (coords are -1..1)
--0.7, 0.3
-// size
-1.2, 0.1
-// Text
-Hi <player name>!
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Message line 2
-// Element type
-gui-text
-// Element name
-msg-text2
-// pos (coords are -1..1)
--0.7, 0.2
-// size
-1.2, 0.2
-// Text
-I would like to trade some of my\n<X> for some of your <Y>.
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left, multi
-
-// Message line 3
-// Element type
-gui-text
-// Element name
-msg-text3
-// pos (coords are -1..1)
--0.7, 0.0
-// size
-1.2, 0.1
-// Text
-I will give you
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Element type
-gui-text
-// Element name
-msg-text-to-give
-// pos (coords are -1..1)
-0.0, 0.0
-// size
-0.6, 0.1
-// Text
-food or tr
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Element type
-gui-text-edit
-// Element name
-edit-num-to-give
-// pos (coords are -1..1)
--0.2, 0.0
-// size
-0.15, 0.1
-// Text
-3
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff, left
-
-
-// Message line 4
-// Element type
-gui-text
-// Element name
-msg-text4
-// pos (coords are -1..1)
--0.7, -0.125
-// size
-1.2, 0.1
-// Text
-In return, I would like
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Element type
-gui-text
-// Element name
-msg-text-to-recv
-// pos (coords are -1..1)
-0.2, -0.125
-// size
-0.6, 0.1
-// Text
-food or tr
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Element type
-gui-text-edit
-// Element name
-edit-num-to-recv
-// pos (coords are -1..1)
--0.0, -0.125
-// size
-0.15, 0.1
-// Text
-2
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff, left
-
-// Message line 5
-// Element type
-gui-text
-// Element name
-msg-text5
-// pos (coords are -1..1)
--0.7, -0.25
-// size
-0.7, 0.1
-// Text
-How about it?
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Message line 6
-// Element type
-gui-text
-// Element name
-msg-text6
-// pos (coords are -1..1)
-0.0, -0.375
-// size
-0.9, 0.1
-// Text
-from <local player>
-// Font name, size
-arial, 1.0, bgcol=ffffff, fgcol=000000, left
-
-// Element type
-gui-text-edit
-// Element name
-edit-greet
-// pos (coords are -1..1)
--0.7, -0.375
-// size
-0.65, 0.1
-// Text
-Hugs
-// Font name, size
-arial, 1.0, bgcol=000000, fgcol=ffffff, left
-
-
-
-
-// ACTIONS
-
-// Element type
-gui-comp
-// Name
-actions-comp
-// Num children
-8
-
-
-// Background for actions you can do
-gui-rect
-actions-bg
-// Pos, size
--0.9, -0.2
-1.8, 0.5
-// Colour
-c0c0c0
-// Corner radius
-0.03
-// flags
-0
-
-
-// Element type
-gui-text
-// Element name
-static-text3
-// pos (coords are -1..1)
--0.8, -0.3
-// size
-1.35, 0.1
-// Text
-Trade some of your food with this player?
-// Font name, size
-arial, 1.0, fgcol=000000, right
-
-// Element type
-gui-text
-// Element name
-static-text4
-// pos (coords are -1..1)
--0.8, -0.4
-// size
-1.35, 0.1
-// Text
-Trade some of your treasure with this player?
-// Font name, size
-arial, 1.0, fgcol=000000, right
-
-// Element type
-gui-text
-// Element name
-static-text5
-// pos (coords are -1..1)
--0.8, -0.5
-// size
-1.35, 0.1
-// Text
-See this player's guestbook?
-// Font name, size
-arial, 1.0, fgcol=000000, right
-
-// Action buttons
-
-// Give food
-
-// element type
-gui-button
-// Element name
-give-food-button
-// pos (coords are -1..1)
-0.6, -0.3
-// size
-0.2, 0.1
-// Image
-key3.png
-// Text
-Yes!
-// Font name, size
-arial, 0.7, sx=0.7
-
-
-// Give treasure button
-
-// element type
-gui-button
-// Element name
-give-treasure-button
-// pos (coords are -1..1)
-0.6, -0.4
-// size
-0.2, 0.1
-// Image
-key3.png
-// Text
-Yes!
-// Font name, size
-arial, 0.7, sx=0.7
-
-// element type
-gui-button
-// Element name
-see-guestbook-button
-// pos (coords are -1..1)
-0.6, -0.5
-// size
-0.2, 0.1
-// Image
-key3.png
-// Text
-Yes!
-// Font name, size
-arial, 0.7, sx=0.7
-
-
-// STATS
-
-// Element type
-gui-comp
-// Name
-stats-comp
-// Num children
-14
-
-// Background for stats
-gui-rect
-stats-bg
-// Pos, size
--0.2, 0.7
-1.1, 0.8
-// Colour
-c0c0c0
-// Corner radius
-0.03
-// flags
-0
-
-// Element type
-gui-text
-// Element name
-static-text1
-// pos (coords are -1..1)
--0.2, 0.7
-// size
-1.1, 0.1
-// Text
-This player has:
-// Font name, size
-arial, 1.0, fgcol=000000
+// Show food and treasure counts for both players
 
 gui-image
-heart-img
--0.2, 0.65
-0.3, 0.3
-heart16-3.png
-
-// Element type
-gui-text
-// Element name
-health-num
-// pos (coords are -1..1)
-0.05, 0.6
-// size
-0.2, 0.2
-// Text
-99
-// Font name, size
-arial, 1.5, fgcol=000000, sx=0.6, left
-
-gui-image
-food-img
-0.25, 0.6
-0.2, 0.2
+food-you-img
+-0.85, 0.1
+0.1, 0.1
 food1.png
 
-// Element type
-gui-text
-// Element name
-food-num
-// pos (coords are -1..1)
-0.45, 0.6
-// size
-0.2, 0.2
-// Text
-88
-// Font name, size
-arial, 1.5, fgcol=000000, sx=0.6, left
+gui-image
+food-other-img
+0.65, 0.1
+0.1, 0.1
+food1.png
 
 gui-image
-treasure-img
-0.6, 0.6
-0.2, 0.2
+treasure-other-img
+-0.35, 0.1
+0.1, 0.1
 diamond2.png
 
-// Element type
-gui-text
-// Element name
-treasure-num
-// pos (coords are -1..1)
-0.8, 0.6
-// size
-0.2, 0.2
-// Text
-765
-// Font name, size
-arial, 1.5, fgcol=000000, sx=0.6, left
+gui-image
+treasure-you-img
+0.15, 0.1
+0.1, 0.1
+diamond2.png
 
-// Element type
 gui-text
-// Element name
-health-text
-// pos (coords are -1..1)
--0.175, 0.4
-// size
-0.4, 0.1
-// Text
-Health
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6
-
-// Element type
-gui-text
-// Element name
-food-text
-// pos (coords are -1..1)
-0.225, 0.4
-// size
+food-you-text
+-0.75, 0.1
 0.3, 0.1
 // Text
-Food
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6
+?
+arial, 1.0, fgcol=000000, left
 
-// Element type
 gui-text
-// Element name
-treasure-text
-// pos (coords are -1..1)
-0.5, 0.4
-// size
-0.4, 0.1
+food-other-text
+0.75, 0.1
+0.3, 0.1
 // Text
-Treasure
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6
+?
+arial, 1.0, fgcol=000000, left
 
-// Element type
 gui-text
-// Element name
-more-stats1-text
-// pos (coords are -1..1)
--0.15, 0.25
-// size
-0.9, 0.1
+treasure-you-text
+0.25, 0.1
+0.3, 0.1
 // Text
-$$$empty
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, left
+?
+arial, 1.0, fgcol=000000, left
 
-// Element type
 gui-text
-// Element name
-more-stats2-text
-// pos (coords are -1..1)
--0.15, 0.15
-// size
-2.0, 0.1
+treasure-other-text
+-0.25, 0.1
+0.3, 0.1
 // Text
-$$$empty
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, left
-
-// Element type
-gui-text
-// Element name
-more-stats3-text
-// pos (coords are -1..1)
--0.15, 0.05
-// size
-2.0, 0.1
-// Text
-$$$empty
-// Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, left
-
+?
+arial, 1.0, fgcol=000000, left

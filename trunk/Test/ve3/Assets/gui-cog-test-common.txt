@@ -62,7 +62,7 @@ score-num
 0.5, 1.0
 0.3, 0.2
 // Text
-SCORE
+$$$empty
 arial, 1.5, fgcol=000000, sx=0.7
 
 
