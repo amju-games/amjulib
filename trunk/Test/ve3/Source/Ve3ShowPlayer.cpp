@@ -73,8 +73,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
     t->SetText("0");
   }
 
-#ifdef SHOW_STATS_ON_HOME_PAGE
-  t = (GuiText*)GetElementByName(gui, "more-stats1-text");
+  t = (GuiText*)GetElementByName(gui, "score-text");
   Assert(t);
   if (player->Exists(SCORE_KEY))
   {
@@ -85,6 +84,7 @@ void Ve3ShowPlayer::ShowPlayer(Player* player, GuiElement* gui)
     t->SetText(""); // TODO
   }
 
+#ifdef SHOW_STATS_ON_HOME_PAGE
   // Food given/recvd
   t = (GuiText*)GetElementByName(gui, "more-stats2-text");
   Assert(t);
