@@ -305,7 +305,7 @@ gui-text
 // Element name
 health-num
 // pos (coords are -1..1)
-0.05, 0.6
+-0.15, 0.3
 // size
 0.2, 0.2
 // Text
@@ -324,7 +324,7 @@ gui-text
 // Element name
 food-num
 // pos (coords are -1..1)
-0.45, 0.6
+0.275, 0.3
 // size
 0.2, 0.2
 // Text
@@ -343,7 +343,7 @@ gui-text
 // Element name
 treasure-num
 // pos (coords are -1..1)
-0.8, 0.6
+0.65, 0.3
 // size
 0.2, 0.2
 // Text
@@ -382,8 +382,7 @@ gui-button
 // Element name
 eat-button
 // pos (coords are -1..1)
-// Hidden for now
-0.30, 0.30
+0.30, 0.10
 // size
 0.15, 0.07
 // Image
@@ -398,13 +397,13 @@ gui-text
 // Element name
 treasure-text
 // pos (coords are -1..1)
-0.5, 0.4
+0.65, 0.4
 // size
 0.35, 0.1
 // Text
 Treasure
 // Font name, size
-arial, 1.0, fgcol=000000, sx=0.6, right
+arial, 1.0, fgcol=000000, sx=0.6, left
 
 // Element type
 gui-text
