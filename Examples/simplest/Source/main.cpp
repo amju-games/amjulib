@@ -16,6 +16,10 @@
 #include <main.h>
 #endif
 
+#ifdef GEKKO
+#include <main.h>
+#endif
+
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
 #include <EventPoller.h>
