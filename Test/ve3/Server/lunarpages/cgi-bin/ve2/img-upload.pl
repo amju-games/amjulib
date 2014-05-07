@@ -14,7 +14,7 @@ require "common.pl";
 
 # Server directory where player data is saved.
 # NB You need to manually mkdir this directory on the server.
-my $SAVE_DIR = "../../ve2/assets/"; #player-data/";
+my $SAVE_DIR = "../../ve2/mugshots/"; #player-data/";
 
 my $MAX_NUM_IMAGES = 1;
 
