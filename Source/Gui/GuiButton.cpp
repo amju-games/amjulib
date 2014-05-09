@@ -376,6 +376,12 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
   // TODO Configurable buttons, so static var/manager
   if (be.button == AMJU_BUTTON_A)
   {
+    MouseButtonEvent mbe;
+    mbe.isDown = be.isDown;
+    mbe.button = AMJU_BUTTON_MOUSE_LEFT;
+    OnMouseButtonEvent(mbe);
+
+/*
     if (be.isDown)
     {
       ClickSound();
@@ -389,6 +395,7 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
       m_isPressed = false;
       return true; // handled
     }
+*/
   }
   return false; // not handled
 }
