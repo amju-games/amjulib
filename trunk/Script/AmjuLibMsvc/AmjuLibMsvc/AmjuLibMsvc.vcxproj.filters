@@ -918,12 +918,6 @@
     <ClCompile Include="..\..\..\Source\Image\SavePng.cpp">
       <Filter>Image</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Gui\GuiCompChildSwitch.cpp">
-      <Filter>Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Gui\ShowOnMouseOver.cpp">
-      <Filter>Gui</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1741,12 +1735,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Image\SavePng.h">
       <Filter>Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Gui\ShowOnMouseOver.h">
-      <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Gui\GuiCompChildSwitch.h">
-      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
