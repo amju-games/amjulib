@@ -66,8 +66,8 @@ void GSThanks::OnActive()
     int weeks = period.ToSeconds() / ONE_WEEK_IN_SECONDS;
 
     text->SetText("Thanks for participating in this research project! I hope you find it enjoyable.\n\n"
-      "You are asked to play this game a total of " + ToString(numDays) + " times, over the course of " +
-      ToString(weeks) + " weeks. I will show you a calendar of when to play."
+      "You are asked to play this game over the course of " +
+      ToString(weeks) + " weeks. I can show you a calendar of when to play."
       "\n\nWould you like to see the calendar now?");
   }
 }
