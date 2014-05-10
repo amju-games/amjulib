@@ -291,7 +291,7 @@ void AmjuGLGCube::DrawLighting(
 	GXLightObj lobj;
 
 	lpos.x = lightPos.m_x; 
-	lpos.y = -lightPos.m_y; // looks like this is reversed - or is it all three ?? 
+	lpos.y = lightPos.m_y; 
 	lpos.z = lightPos.m_z; 
 
   // No good
