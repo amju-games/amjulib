@@ -6,7 +6,7 @@
 #include <iostream>
 #include <AmjuFinal.h>
 
-#define CONFIG_FILE_DEBUG
+//#define CONFIG_FILE_DEBUG
 
 using namespace std;
 
