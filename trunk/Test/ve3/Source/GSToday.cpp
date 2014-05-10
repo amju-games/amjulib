@@ -24,7 +24,9 @@ namespace Amju
 {
 static void OnDoTests()
 {
-  TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
+  GSCogTestMenu* gtm = TheGSCogTestMenu::Instance();
+  gtm->SetPrevState(TheGSToday::Instance());
+  TheGame::Instance()->SetCurrentState(gtm);
 }
 
 //static void OnTodayViewAchievements()
