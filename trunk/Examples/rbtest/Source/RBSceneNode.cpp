@@ -1,4 +1,4 @@
-#include <amju.h>
+#include <AmjuGL.h>
 #include "RBSceneNode.h"
 
 namespace Amju
