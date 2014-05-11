@@ -17,7 +17,7 @@
 #include <Timer.h>
 #include <ShadowMap.h>
 
-//#define USE_SHADOWMAP
+#define USE_SHADOWMAP
 #define MAKE_BOX3_DEMO
 //#define MAKE_BOX2_DEMO
 
