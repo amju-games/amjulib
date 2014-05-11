@@ -18,12 +18,12 @@
 #include "GSRigidBody.h"
 #include "GSSpringMesh.h"
 #include "GSClipTest.h"
-#include <OBB3.h>
+#include "GSRBSmash.h"
 
 namespace Amju
 {
 // Create global variable window info 
-Amju::AmjuGLWindowInfo w(640, 480, false, "TEH AWESOM RB TEST");
+Amju::AmjuGLWindowInfo w(640, 480, false, "AWESOME RB TEST");
 
 void StartUpBeforeCreateWindow()
 {
@@ -31,12 +31,7 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
-  TheGame::Instance()->SetCurrentState(
-//    TheGSSpringMesh::Instance()
-    TheGSRigidBody::Instance()
-//    TheGSClipTest::Instance()
-//    TheGSBelt::Instance()
-  );
+  TheGame::Instance()->SetCurrentState(TheGSRigidBody::Instance() );
 }
 }
 

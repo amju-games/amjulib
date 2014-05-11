@@ -310,13 +310,9 @@ std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " 
     // Each box has proj of rel velocity onto contact normal added to vel.
     // This gives reflect vector if one box is immovable
     float dp = DotProduct(relvel, contactNormal);
-//std::cout << "dp = " << dp << "\n";
+
     box1->m_vel -= frac1 * 2.0f * dp * contactNormal;
     box2->m_vel += frac2 * 2.0f * dp * contactNormal;
-
-//std::cout << "Box 1 NEW vel: " << box1->m_vel.x << ", " << box1->m_vel.y << "\n";
-//std::cout << "Box 2 NEW vel: " << box2->m_vel.x << ", " << box2->m_vel.y << "\n";
-
 
     // TODO TEMP TEST
     // Dampen the response - this happens once per collision, so not multiplied by dt etc
@@ -328,16 +324,9 @@ std::cout << "Contact point: x: " << c.m_pos.x << " y: " << c.m_pos.y << " z: " 
     //  relative to the face it penetrated.
     // i.e. Linear vel + rotational vel
 
-    // Relative rotational vel: in 2D, rotation is only CW or CCW.
-
-//std::cout << "Contact point: " << c.m_pos.x << ", " << c.m_pos.y << "\n";
-//std::cout << "Box 1 pos: " << box1->m_pos.x << ", " << box1->m_pos.y << "\n";
-//std::cout << "Box 2 pos: " << box2->m_pos.x << ", " << box2->m_pos.y << "\n";
-
-    float relSpeedMult = 0.1f; // 0.08f; // was ok before fixig dt
-    float angVelMult = 0.02f; // 0.01f;
+    float relSpeedMult = 0.1f; 
+    float angVelMult = 0.02f; 
     float mag = relSpeed * relSpeedMult; // TODO + totalAngVel * angVelMult;
-//std::cout << "Mag: " << mag << "\n";
 
     box1->AddTorque(-mag * contactNormal, c.m_pos);
     box2->AddTorque( mag * contactNormal, c.m_pos);
