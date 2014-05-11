@@ -80,6 +80,9 @@
     <ClInclude Include="..\..\..\..\Source\RBSceneNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\GSRBSmash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\GSBase.cpp">
@@ -143,6 +146,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\RBSceneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\GSRBSmash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
