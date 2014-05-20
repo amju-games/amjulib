@@ -4,9 +4,26 @@
 #include <Timer.h>
 #include "Particle.h"
 
+#ifdef AMJU_USE_GLUT
+// TODO
+#include <gl/glut.h>
+#endif
+
 namespace Amju
 {
-static const float GRAVITY = -2.0f;
+Vec3f Particle::GRAVITY;
+
+float Particle::DRAW_RADIUS = 0.5f; 
+
+void Particle::SetDrawRadius(float r)
+{
+  DRAW_RADIUS = r;
+}
+
+void Particle::SetGravity(const Vec3f& g)
+{
+  GRAVITY = g;
+}
 
 Particle::Particle()
 {
@@ -21,14 +38,21 @@ void Particle::SetInvMass(float invMass)
 
 void Particle::Draw()
 {
-  const float RADIUS = 50.0f;
   PushColour();
   if (m_invMass <= 0)
   {
       MultColour(Colour(1, 0, 0, 1));
   }
-  Sphere s(m_pos, RADIUS);
+
+#ifdef AMJU_USE_GLUT
+  glPushMatrix();
+  glTranslatef(m_pos.x, m_pos.y, m_pos.z);
+  glutSolidSphere(DRAW_RADIUS, 8, 8);
+  glPopMatrix();
+#else
+  Sphere s(m_pos, DRAW_RADIUS);
   DrawSphere(s);
+#endif
   PopColour();
 }
 
@@ -45,7 +69,7 @@ void Particle::Update()
   m_acc = m_forces * m_invMass;
   if (m_invMass > 0)
   {
-    m_acc += Vec3f(0, GRAVITY, 0);
+    m_acc += GRAVITY;
   }
 
   float dt = TheTimer::Instance()->GetDt();

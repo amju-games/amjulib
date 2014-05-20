@@ -33,8 +33,11 @@ bool Squishy::Init(ObjMesh* mesh, float k)
   CollisionMesh cm;
   mesh->CalcCollisionMesh(&cm);
   const CollisionMesh::Tris& tris = cm.GetAllTris();
-  for (const Tri& tri : tris)
+//  for (const Tri& tri : tris)
+  for (auto it = tris.begin(); it != tris.end(); ++it)
   {
+    const Tri& tri = *it;
+
     int prevParticle = -1;
     for (int i = 0; i < 3; i++)
     {
@@ -66,6 +69,14 @@ bool Squishy::Init(ObjMesh* mesh, float k)
     }
   }
 
+  for (auto it = edges.begin(); it != edges.end(); ++it)
+  {
+    const Edge& e = *it;
+    int id = CreateSpring(e.first, e.second);
+    Spring* spring = GetSpring(id);
+    // TODO k, length, etc.
+  }
+
   // Create immovable particles at verts. Connect each vert to its immovable 
   //  particle with spring. Set k value to k given as parameter.
 
@@ -74,9 +85,14 @@ bool Squishy::Init(ObjMesh* mesh, float k)
 
 void Squishy::Draw()
 {
-  m_mesh->Draw();
-
   SpringSystem::Draw();
+
+  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+  PushColour();
+  MultColour(Colour(1, 1, 1, 0.8f));
+  m_mesh->Draw();
+  PopColour();
+  AmjuGL::Disable(AmjuGL::AMJU_BLEND);
 }
 
 void Squishy::AddForce(const Vec3f& pos, const Vec3f& dir)

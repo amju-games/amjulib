@@ -25,12 +25,22 @@ public:
 
   void SetInvMass(float invMass);
 
+  static void SetDrawRadius(float r);
+  static void SetGravity(const Vec3f& g);
+
 private:
   Vec3f m_pos;
   Vec3f m_vel;
   Vec3f m_acc;
   float m_invMass;
   Vec3f m_forces; // accumulated forces added together (D'Alembert)
+
+  static float DRAW_RADIUS;
+
+  // If we want gravity, it's cheaper to just add this vector to all acceleration vecs,
+  //  rather than work out the force and add it to the sum of forces acting on the
+  //  particle.
+  static Vec3f GRAVITY;
 };
 
 typedef RCPtr<Particle> PParticle;

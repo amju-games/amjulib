@@ -26,7 +26,7 @@ void GSSoftBody::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
-  AmjuGL::LookAt(50, 0, 50,  0, 0, 0,   0, 1, 0);
+  AmjuGL::LookAt(0, 0, 30,  0, 0, 0,   0, 1, 0);
 
   Vec3f pos(1, 1, 1);
   AmjuGL::DrawLighting(
