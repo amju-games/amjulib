@@ -1,5 +1,6 @@
 #include <CollisionMesh.h>
 #include "Squishy.h"
+#include "SquishLoader.h"
 
 namespace Amju
 {
@@ -10,19 +11,28 @@ Squishy::Squishy()
   m_mesh = nullptr; // TODO TEMP TEST
 }
 
-bool Squishy::Init(ObjMesh* mesh, float k)
+bool Squishy::Init(const std::string& objFilename, float k)
 {
   // TODO TEMP TEST
-  m_mesh = mesh; // owned by resource manager
+  // This is to check the file is OK and to give a comparison with the new loading code.
+  m_mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(objFilename);
+  if (!m_mesh)
+  {
+    std::cout << "Failed to load obj mesh!\n";
+    return false;
+  }
 
-  
+  if (!SquishyLoadObj(this, objFilename))
+  {
+    return false;
+  }
 
   // Create particles at verts. Connect with springs at triangle edges.
 
   // TODO Load in obj mesh, retaining index format - ObjMesh class converts to
   //  tri list.
-
-  typedef std::map<Vec3f, int> Verts;
+/*
+  typedef std::map<Vec3f, int, Vec3Comp> Verts;
   Verts verts;
 
   typedef std::pair<int, int> Edge;
@@ -57,13 +67,14 @@ bool Squishy::Init(ObjMesh* mesh, float k)
       }
       else
       {
+        std::cout << "Vert " << iter->second << " found in map.\n";
         id = iter->second;
       }
      
       // Create edge
       if (i > 0)
       {
-        edges.insert(Edge(id, prevParticle));
+        //edges.insert(Edge(id, prevParticle));
       }
       prevParticle = id;
     }
@@ -76,6 +87,7 @@ bool Squishy::Init(ObjMesh* mesh, float k)
     Spring* spring = GetSpring(id);
     // TODO k, length, etc.
   }
+*/
 
   // Create immovable particles at verts. Connect each vert to its immovable 
   //  particle with spring. Set k value to k given as parameter.

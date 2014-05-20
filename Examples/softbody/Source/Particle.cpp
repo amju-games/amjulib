@@ -25,10 +25,16 @@ void Particle::SetGravity(const Vec3f& g)
   GRAVITY = g;
 }
 
-Particle::Particle()
+Particle::Particle(int id)
 {
+  m_id = id;
   m_invMass = 1.0f;
   ResetForces();
+}
+
+int Particle::GetId() const
+{
+  return m_id;
 }
 
 void Particle::SetInvMass(float invMass)

@@ -83,14 +83,16 @@
     <ClCompile Include="..\..\..\..\Source\Particle.cpp" />
     <ClCompile Include="..\..\..\..\Source\Spring.cpp" />
     <ClCompile Include="..\..\..\..\Source\SpringSystem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\SquishLoader.cpp" />
     <ClCompile Include="..\..\..\..\Source\Squishy.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Source\GSSoftbody.h" />
+    <ClInclude Include="..\..\..\..\Source\GSSoftBody.h" />
     <ClInclude Include="..\..\..\..\Source\ObjMeshToSpringSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Particle.h" />
     <ClInclude Include="..\..\..\..\Source\Spring.h" />
     <ClInclude Include="..\..\..\..\Source\SpringSystem.h" />
+    <ClInclude Include="..\..\..\..\Source\SquishLoader.h" />
     <ClInclude Include="..\..\..\..\Source\Squishy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

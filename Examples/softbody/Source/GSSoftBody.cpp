@@ -4,7 +4,7 @@
 
 namespace Amju
 {
-static Squishy* sq = 0; // TODO quick hack so we can easily reset
+static RCPtr<Squishy> sq = 0; // TODO quick hack so we can easily reset
 static float yrot = 0;
 static float xrot = 0;
 static bool drag = false;
@@ -18,7 +18,7 @@ void GSSoftBody::Update()
   sq->Update();
 
   // TODO TEMP TEST
-  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
+//  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
 }
 
 void GSSoftBody::Draw()
@@ -32,7 +32,7 @@ void GSSoftBody::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
-  AmjuGL::LookAt(0, 0, 30,  0, 0, 0,   0, 1, 0);
+  AmjuGL::LookAt(0, 0, 50,  0, 0, 0,   0, 1, 0);
 
   Vec3f pos(1, 1, 1);
   AmjuGL::DrawLighting(
@@ -59,15 +59,12 @@ void GSSoftBody::OnActive()
   // K value is how soft/tough
   const float K = 1.0f; // TODO
 
-  ObjMesh* mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes("bean.obj");
-  if (!mesh)
+  sq = new Squishy;
+  if (!sq->Init("crate2.obj", K))
   {
-    std::cout << "Failed to load obj mesh!\n";
+    std::cout << "Failed to initialise squishy from obj mesh!\n";
     Assert(0);
   }
-
-  sq = new Squishy;
-  sq->Init(mesh, K);
 }
 
 bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)

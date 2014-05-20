@@ -16,7 +16,8 @@ class Spring : public RefCounted
 {
 public:
   Spring();
-  Spring(Particle* p1, Particle* p2);
+  Spring(int id, Particle* p1, Particle* p2);
+  int GetId() const;
 
   void ConnectToParticles(Particle* p1, Particle* p2);
 
@@ -31,9 +32,11 @@ public:
   void SetMinLength(float minLen);
   void SetK(float k);
 
+  // 0 <= i <= 1
+  Particle* GetParticle(int i);
+
 private:
   Particle* m_particles[2];
-  // float m_K; // TODO per-spring K
 
   OBB3 m_box;
   Quaternion m_quat; // so we can easily get it
@@ -46,6 +49,8 @@ private:
   float m_minLength;
 
   float m_k; // spring constant for Hooke's Law
+
+  int m_id;
 };
 
 typedef RCPtr<Spring> PSpring;
