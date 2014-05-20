@@ -10,7 +10,8 @@ namespace Amju
 class Particle : public RefCounted
 {
 public:
-  Particle();
+  Particle(int id);
+  int GetId() const;
 
   void Draw();
   void Update();
@@ -34,6 +35,8 @@ private:
   Vec3f m_acc;
   float m_invMass;
   Vec3f m_forces; // accumulated forces added together (D'Alembert)
+
+  int m_id;
 
   static float DRAW_RADIUS;
 

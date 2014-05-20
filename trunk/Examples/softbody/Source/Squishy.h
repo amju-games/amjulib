@@ -20,11 +20,16 @@ public:
   // Make from an .obj mesh 
   // TODO Should this be some other kind of mesh, e.g. collision mesh?
   // k is spring k value, which determines the squishiness
-  bool Init(ObjMesh*, float k);
+  bool Init(const std::string& objFilename, float k);
 
   // Poke the squishy at some position with the given force
   // NB Could also be pulling, e.g. clamping?
   void AddForce(const Vec3f& pos, const Vec3f& dir);
+
+  // TODO
+  // 'Pin'/freeze a point on the squishy so it can not move - i.e. inverse mass = 0
+  //  (Find closest particle to the given position?)
+  void PinVertex(const Vec3f& pos);
 
   void Draw() override;
 

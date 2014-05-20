@@ -14,6 +14,7 @@ static const float K = 1.0f; // Default spring constant
 
 Spring::Spring()
 {
+  m_id = -1;
   m_particles[0] = 0;
   m_particles[1] = 0;
 
@@ -22,8 +23,20 @@ Spring::Spring()
   m_k = K;
 }
 
-Spring::Spring(Particle* p1, Particle* p2)
+int Spring::GetId() const
 {
+  return m_id;
+}
+
+Particle* Spring::GetParticle(int i)
+{
+  Assert(i == 0 || i == 1);
+  return m_particles[i];
+}
+
+Spring::Spring(int id, Particle* p1, Particle* p2)
+{
+  m_id = id;
   ConnectToParticles(p1, p2);
 
   m_maxLength = MAX_LEN;

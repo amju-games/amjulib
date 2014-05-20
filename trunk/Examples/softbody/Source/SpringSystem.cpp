@@ -30,15 +30,55 @@ void SpringSystem::Draw()
 
 int SpringSystem::CreateParticle()
 {
-  m_particles.push_back(new Particle);
-  return m_particles.size() - 1;
+  int n = m_particles.size();
+  m_particles.push_back(new Particle(n));
+  return n;
 }
 
 int SpringSystem::CreateSpring(int particleId1, int particleId2)
 {
-  m_springs.push_back(new Spring(GetParticle(particleId1), GetParticle(particleId2)));
-  return m_springs.size() - 1;
+  Spring* spr = GetSpring(particleId1, particleId2);
+  if (spr)
+  {
+    return spr->GetId();
+  }
+
+  int n = m_springs.size();
+  m_springs.push_back(new Spring(n, GetParticle(particleId1), GetParticle(particleId2)));
+  return n;
 }
+
+Spring* SpringSystem::GetSpring(int particleId1, int particleId2)
+{
+  for (auto it = m_springs.begin(); it != m_springs.end(); ++it)
+  {
+    Spring* spr = *it;
+    Assert(spr);
+    Particle* p1 = spr->GetParticle(0);
+    Particle* p2 = spr->GetParticle(1);
+    Assert(p1);
+    Assert(p2);
+    int id1 = p1->GetId();
+    int id2 = p2->GetId();
+    if ((id1 == particleId1 && id2 == particleId2) || (id2 == particleId1 && id1 == particleId2))
+    {
+      return spr;
+    }
+  }
+
+  return nullptr;
+}
+
+int SpringSystem::GetNumParticles() const
+{
+  return m_particles.size();
+}
+
+int SpringSystem::GetNumSprings() const
+{
+   return m_springs.size();
+}
+
 
 Particle* SpringSystem::GetParticle(int id)
 {
