@@ -4,7 +4,10 @@
 
 namespace Amju
 {
-Squishy sq;
+static Squishy* sq = 0; // TODO quick hack so we can easily reset
+static float yrot = 0;
+static float xrot = 0;
+static bool drag = false;
 
 GSSoftBody::GSSoftBody()
 {
@@ -12,7 +15,10 @@ GSSoftBody::GSSoftBody()
 
 void GSSoftBody::Update()
 {
-  sq.Update();
+  sq->Update();
+
+  // TODO TEMP TEST
+  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
 }
 
 void GSSoftBody::Draw()
@@ -37,7 +43,11 @@ void GSSoftBody::Draw()
     AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
   AmjuGL::Translate(0, -10, 0);
-  sq.Draw();
+
+  AmjuGL::RotateY(yrot);
+  AmjuGL::RotateX(xrot);
+
+  sq->Draw();
 }
 
 void GSSoftBody::Draw2d()
@@ -56,6 +66,54 @@ void GSSoftBody::OnActive()
     Assert(0);
   }
 
-  sq.Init(mesh, K);
+  sq = new Squishy;
+  sq->Init(mesh, K);
+}
+
+bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
+{
+  if (drag)
+  {
+    xrot += ce.dy * 100.0f;
+    yrot += ce.dx * 100.0f;
+  }
+
+  return false;
+}
+
+bool GSSoftBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+{
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  {
+    drag = mbe.isDown;  
+  }
+  return false;
+}
+
+bool GSSoftBody::OnKeyEvent(const KeyEvent& ke)
+{
+  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'r')
+  {
+    // Reset sim
+    OnActive();
+  }
+  /*
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
+  {
+    m_paused = !m_paused;
+  }
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '2')
+  {
+    MakeBox2(Vec2f(3.0f, 20.0), 0.3f);
+  }
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '3')
+  {
+std::cout << "Adding a box!\n";
+
+    MakeBox3(Vec3f(3.0f, 20.0, 0));
+  }
+  */
+
+  return true; // handled
 }
 }
