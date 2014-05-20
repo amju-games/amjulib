@@ -6,6 +6,8 @@
 #include <main.h>
 #include <AmjuGLWindowInfo.h>
 #include <Game.h>
+#include <ResourceManager.h>
+#include <ObjMesh.h>
 #include "GSSoftBody.h"
 
 namespace Amju
@@ -19,6 +21,9 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
+  ResourceManager* rm = TheResourceManager::Instance();
+  rm->AddLoader("obj", TextObjLoader);
+
   TheGame::Instance()->SetCurrentState(TheGSSoftBody::Instance());
 }
 }

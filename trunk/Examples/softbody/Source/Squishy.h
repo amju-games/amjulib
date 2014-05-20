@@ -1,5 +1,7 @@
 #pragma once
 
+#include <TriList.h>
+#include <ObjMesh.h>
 #include "SpringSystem.h"
 
 namespace Amju
@@ -13,6 +15,29 @@ namespace Amju
 class Squishy : public SpringSystem
 {
 public:
+  Squishy();
 
+  // Make from an .obj mesh 
+  // TODO Should this be some other kind of mesh, e.g. collision mesh?
+  // k is spring k value, which determines the squishiness
+  bool Init(ObjMesh*, float k);
+
+  // Poke the squishy at some position with the given force
+  // NB Could also be pulling, e.g. clamping?
+  void AddForce(const Vec3f& pos, const Vec3f& dir);
+
+  void Draw() override;
+
+protected:
+  // Volume of squishy when initialised
+  float m_volume;
+
+  // Dynamic because vert positions move when force applied;
+  // If cut, new tris are created and we make a new tri list.
+  RCPtr<TriListDynamic> m_trilist;
+
+
+  // TODO TEMP TEST
+  ObjMesh* m_mesh;
 };
 }
