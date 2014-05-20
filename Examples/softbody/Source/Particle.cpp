@@ -21,7 +21,7 @@ void Particle::SetInvMass(float invMass)
 
 void Particle::Draw()
 {
-  const float RADIUS = 0.1f;
+  const float RADIUS = 50.0f;
   PushColour();
   if (m_invMass <= 0)
   {
