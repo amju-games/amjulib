@@ -40,6 +40,7 @@ int SpringSystem::CreateSpring(int particleId1, int particleId2)
   Spring* spr = GetSpring(particleId1, particleId2);
   if (spr)
   {
+    std::cout << "CreateSpring: found duplicate spring.\n";
     return spr->GetId();
   }
 

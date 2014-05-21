@@ -17,8 +17,6 @@ void GSSoftBody::Update()
 {
   sq->Update();
 
-  // TODO TEMP TEST
-  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
 }
 
 void GSSoftBody::Draw()
@@ -95,11 +93,15 @@ bool GSSoftBody::OnKeyEvent(const KeyEvent& ke)
     // Reset sim
     OnActive();
   }
-  /*
+  
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
   {
-    m_paused = !m_paused;
+    // TODO TEMP TEST
+    int r = rand() % sq->GetNumParticles();
+    sq->GetParticle(r)->AddForce(Vec3f(100, 0, 0));
   }
+
+/*
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == '2')
   {
     MakeBox2(Vec2f(3.0f, 20.0), 0.3f);
