@@ -10,6 +10,7 @@ BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
+EXTRA_CFLAGS	:= 	-DAMJU_USE_GLUT
 
 LIBS	:= \
 	-lamju \
