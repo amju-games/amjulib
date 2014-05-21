@@ -18,7 +18,7 @@ void GSSoftBody::Update()
   sq->Update();
 
   // TODO TEMP TEST
-//  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
+  sq->GetParticle(0)->AddForce(Vec3f(1, 0, 0));
 }
 
 void GSSoftBody::Draw()
@@ -58,9 +58,10 @@ void GSSoftBody::OnActive()
 {
   // K value is how soft/tough
   const float K = 1.0f; // TODO
+  const std::string filename = "bean.obj"; // crate2.obj
 
   sq = new Squishy;
-  if (!sq->Init("crate2.obj", K))
+  if (!sq->Init(filename, K))
   {
     std::cout << "Failed to initialise squishy from obj mesh!\n";
     Assert(0);

@@ -5,8 +5,12 @@
 #include "Particle.h"
 
 #ifdef AMJU_USE_GLUT
-// TODO
+#ifdef WIN32
 #include <gl/glut.h>
+#endif
+#ifdef MACOSX
+#include <GLUT/glut.h>
+#endif
 #endif
 
 namespace Amju

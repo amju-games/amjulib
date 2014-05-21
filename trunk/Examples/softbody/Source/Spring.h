@@ -16,9 +16,13 @@ class Spring : public RefCounted
 {
 public:
   Spring();
+
+  // Sets natural length to distance between the particles when called
   Spring(int id, Particle* p1, Particle* p2);
+
   int GetId() const;
 
+  // Sets natural length to distance between the particles when called
   void ConnectToParticles(Particle* p1, Particle* p2);
 
   void Update();
@@ -26,6 +30,8 @@ public:
 
   void SetQuat(const Quaternion&);
   const Quaternion& GetQuat() const;
+
+  float GetNaturalLength() const;
 
   void SetNaturalLength(float len);
   void SetMaxLength(float maxLen);

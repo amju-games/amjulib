@@ -1,0 +1,26 @@
+Constraints:
+ - Try a fixed particle 'buddy' for every movable particle. The movable particle is
+connected to the fixed particle with a spring
+
+ - Try a fixed particle at the centre of mass. All the movable particles are connected
+by a spring to the fixed COM particle
+
+
+Drawing
+Make/update dynamic indexed tri strip from spring system.
+Recalc normals when particles move - we want smoothing groups, as a newly created surface 
+ (interior created by a cut) will be at right angles to original mesh.
+ - Material class
+
+
+Collisions:
+Ray cast into scene to find contact point on mesh.
+ - So build collision mesh from spring system, update when particles move
+ - Octree
+
+
+Apply a force
+Find closest particle to pick ray. (Don't need to tesselate until we cut?)
+
+
+
