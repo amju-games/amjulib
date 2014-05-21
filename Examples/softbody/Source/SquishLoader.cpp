@@ -12,11 +12,11 @@ bool ShowInfo()
   return true;
 }
 
-void MakeSpring(Squishy* sq, int p1, int p2)
+void MakeSpring(Squishy* sq, int p1, int p2, float k)
 {
   int id = sq->CreateSpring(p1, p2);
   Spring* spr = sq->GetSpring(id);
-  spr->SetK(0.1f);
+  spr->SetK(k);
 
   // We have just set the natural length of the spring.
   // Set the min and max lengths based on this.
@@ -214,6 +214,8 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
   }
 
   // Add a particle for each vertex
+  Vec3f centreOfMass;
+
   for (auto it = m_points.begin(); it != m_points.end(); ++it)
   {
     const Vec3f& v = *it;
@@ -222,20 +224,89 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
     p->SetPos(v);
     // Now what about (inv) mass of this particle?
     p->SetInvMass(1.0f); // TODO
+
+    centreOfMass += v;
   }
   
   // Add spring for triangle edges
+
+  // TODO This is SUPER inefficient.
+  // Fill up a set with all edges then make the springs -- this way we are testing
+  //  for pre-existing springs and getting quadratic complexity.
+
+  typedef std::pair<int, int> Edge;
+  typedef std::set<Edge> Edges;
+  Edges edges;
+
   for (auto it = m_facemap.begin(); it != m_facemap.end(); ++it)
   {
     const Faces& faces = it->second;
     for (auto jt = faces.begin(); jt != faces.end(); jt++)
     {
       const Face& f = *jt;
-      MakeSpring(sq, f.m_pointIndex[0], f.m_pointIndex[1]);
-      MakeSpring(sq, f.m_pointIndex[1], f.m_pointIndex[2]);
-      MakeSpring(sq, f.m_pointIndex[2], f.m_pointIndex[0]);
+
+      for (int i = 0; i < 3; i++)
+      {
+        int a = f.m_pointIndex[i];
+        int b = f.m_pointIndex[(i + 1) % 3];
+        // Only insert edge if not already there, and check for both ways
+        if (edges.count(Edge(a, b)) == 0 && edges.count(Edge(b, a)) == 0)
+        {
+          edges.insert(Edge(a, b));
+        }
+      }
+/*
+      edges.insert(Edge(f.m_pointIndex[0], f.m_pointIndex[1]));
+      edges.insert(Edge(f.m_pointIndex[1], f.m_pointIndex[2]));
+      edges.insert(Edge(f.m_pointIndex[2], f.m_pointIndex[0]));
+*/
     }
   }
+
+  const float K = 0.1f;
+  for (auto e = edges.begin(); e != edges.end(); ++e)
+  {
+    const Edge& edge = *e;
+    MakeSpring(sq, edge.first, edge.second, K);
+  }
+
+  int numPoints = m_points.size();
+
+  // Idea for constraint to keep shape/volume:
+  // Add particle at centre of mass. Add spring from here to each vertex.
+  /*
+  centreOfMass *= (1.0f / (float)numPoints);
+
+  int centreId = sq->CreateParticle();
+  Particle* centreP = sq->GetParticle(centreId); // OK this is a bit crap
+  centreP->SetPos(centreOfMass);
+
+  float k = 0.1f; // springiness of the spring to the centre
+  for (int i = 0; i < numPoints; i++)
+  {
+    Assert(i < centreId);
+    MakeSpring(sq, centreId, i, k);
+  }
+  */
+
+  // Here is another idea to keep shape: 
+  // Each movable particle has an immovable buddy, connected with a spring.
+  // Put the immovable buddy some small distance away from the movable particle,
+  //  or the distance will always be approx zero, so no spring action at all.
+  
+  for (int i = 0; i < numPoints; i++)
+  {
+    Particle* pOld = sq->GetParticle(i); 
+
+    const Vec3f& v = pOld->GetPos();
+    int idNew = sq->CreateParticle();
+    Particle* pNew = sq->GetParticle(idNew); 
+    pNew->SetPos(v + Vec3f(10, 0, 0));
+    pNew->SetInvMass(0); 
+
+    MakeSpring(sq, i, idNew, 1.0f);
+  }
+  
 
   return true;
 }

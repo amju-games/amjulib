@@ -101,6 +101,11 @@ void Spring::Update()
   // Force along this line proportional to distance
   // == Hooke's Law, springs
   float len = sqrt(v.SqLen());
+  if (len < 0.00001f) // TODO
+  {
+    return; // zero length spring, so do nothing
+  }
+
   //len = std::min(m_maxLength, len);
   v.Normalise();
 
@@ -125,7 +130,7 @@ void Spring::Update()
       m_particles[1]->Move(moveVec);
   }
 
-
+  /*
   // Set box centre and extents
   Vec3f centre = (m_particles[0]->GetPos() + m_particles[1]->GetPos()) * 0.5f;
   m_box.SetCentre(centre);
@@ -145,6 +150,7 @@ void Spring::Update()
   Vec3f zAxis = CrossProduct(xAxis, up);
   Vec3f yAxis = CrossProduct(xAxis, zAxis);
   m_box.SetAxes(xAxis, yAxis);
+  */
 
 /*
   // Twist spring
