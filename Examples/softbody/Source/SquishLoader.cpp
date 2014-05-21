@@ -12,8 +12,22 @@ bool ShowInfo()
   return true;
 }
 
+void MakeSpring(Squishy* sq, int p1, int p2)
+{
+  int id = sq->CreateSpring(p1, p2);
+  Spring* spr = sq->GetSpring(id);
+  spr->SetK(0.1f);
+
+  // We have just set the natural length of the spring.
+  // Set the min and max lengths based on this.
+  // TODO This is a property of the squishy thing
+  float natLen = spr->GetNaturalLength();
+  // TODO TEMP TEST
+  spr->SetMaxLength(natLen * 1.5f);
+  spr->SetMinLength(natLen * 0.7f);
+}
+
 bool SquishyLoadObj(Squishy* sq, const std::string& filename)
-//bool ObjMesh::Load(const std::string& filename, bool binary)
 {
   Vecs m_points;
   Vecs m_normals;
@@ -217,9 +231,9 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
     for (auto jt = faces.begin(); jt != faces.end(); jt++)
     {
       const Face& f = *jt;
-      sq->CreateSpring(f.m_pointIndex[0], f.m_pointIndex[1]);
-      sq->CreateSpring(f.m_pointIndex[1], f.m_pointIndex[2]);
-      sq->CreateSpring(f.m_pointIndex[2], f.m_pointIndex[0]);
+      MakeSpring(sq, f.m_pointIndex[0], f.m_pointIndex[1]);
+      MakeSpring(sq, f.m_pointIndex[1], f.m_pointIndex[2]);
+      MakeSpring(sq, f.m_pointIndex[2], f.m_pointIndex[0]);
     }
   }
 

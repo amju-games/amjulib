@@ -4,7 +4,12 @@
 #include <DrawOBB3.h>
 
 #ifdef AMJU_USE_GLUT
+#ifdef WIN32
 #include <gl/glut.h>
+#endif
+#ifdef MACOSX
+#include <GLUT/glut.h>
+#endif
 #endif
 
 namespace Amju
@@ -52,6 +57,10 @@ void Spring::ConnectToParticles(Particle* p1, Particle* p2)
   m_naturalLength = sqrt(m_oldVec.SqLen());
 }
 
+float Spring::GetNaturalLength() const
+{
+  return m_naturalLength;
+}
 
 void Spring::SetNaturalLength(float len)
 {
