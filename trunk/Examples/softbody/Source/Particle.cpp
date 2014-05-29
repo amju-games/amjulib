@@ -88,19 +88,12 @@ void Particle::Update()
 
   // Damping -- TODO, is dependent on scene complexity
   //m_vel *= (1.0f - dt * 2.0f); 
+  m_vel *= 0.99f; // TODO
 
   Vec3f pos = m_pos + (m_vel + oldVel) * 0.5f * dt;
   SetPos(pos);
 
   ResetForces();
-
-  // TODO TEMP TEST
-  //if (m_pos.x > -2 && m_pos.x < 2 && m_pos.z > -2 && m_pos.z < 2 && m_pos.y < -2)
-  /*if (m_pos.x > 0 && m_pos.z > 0 && m_pos.y < -2)
-  {
-      m_pos.y = -2;
-  }*/
-
 
 }
 

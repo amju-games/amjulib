@@ -1,4 +1,5 @@
 #include <ResourceManager.h>
+#include <Unproject.h>
 #include "GSSoftbody.h"
 #include "Squishy.h"
 
@@ -7,7 +8,23 @@ namespace Amju
 static RCPtr<Squishy> sq = 0; // TODO quick hack so we can easily reset
 static float yrot = 0;
 static float xrot = 0;
-static bool drag = false;
+static bool dragleft = false;
+static bool dragright = false;
+static Vec2f mousePos;
+
+enum CutMode { CUT_NONE, CUT_START, CUT_CONTINUE, CUT_END };
+static CutMode cutmode = CUT_NONE;
+
+LineSeg MouseToLineSeg(const Vec2f& mouseScreen)
+{
+  Vec3f mouseWorldNear;
+  Vec3f mouseWorldFar;
+
+  Unproject(mouseScreen, 0, &mouseWorldNear);
+  Unproject(mouseScreen, 1, &mouseWorldFar);
+
+  return LineSeg(mouseWorldNear, mouseWorldFar);
+}
 
 GSSoftBody::GSSoftBody()
 {
@@ -46,6 +63,28 @@ void GSSoftBody::Draw()
   AmjuGL::RotateX(xrot);
 
   sq->Draw();
+
+  LineSeg seg = MouseToLineSeg(mousePos);
+//    std::cout << "Mouse pos: " << mousePos.x << " " << mousePos.y << "\n";
+  switch (cutmode)
+  {
+  case CUT_START:
+    sq->StartCut(seg, 0);
+    cutmode = CUT_CONTINUE;
+    break;
+    
+  case CUT_CONTINUE:
+    sq->ContinueCut(seg, 0);
+    break;
+    
+  case CUT_END:
+    sq->EndCut(seg, 0);
+    cutmode = CUT_NONE;
+    break;
+
+  default:
+    break;
+  }
 }
 
 void GSSoftBody::Draw2d()
@@ -54,6 +93,8 @@ void GSSoftBody::Draw2d()
 
 void GSSoftBody::OnActive()
 {
+  cutmode = CUT_NONE;
+
   // K value is how soft/tough
   const float K = 1.0f; // TODO
   const std::string filename = "bean.obj"; // crate2.obj
@@ -68,7 +109,10 @@ void GSSoftBody::OnActive()
 
 bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
 {
-  if (drag)
+  mousePos.x = ce.x;
+  mousePos.y = ce.y;
+
+  if (dragright)
   {
     xrot += ce.dy * 100.0f;
     yrot += ce.dx * 100.0f;
@@ -81,7 +125,19 @@ bool GSSoftBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
   {
-    drag = mbe.isDown;  
+    dragleft = mbe.isDown;  
+    if (dragleft)
+    {
+      cutmode = CUT_START;
+    }
+    else
+    {
+      cutmode = CUT_END;
+    }
+  }
+  if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
+  {
+    dragright = mbe.isDown;  
   }
   return false;
 }
@@ -93,7 +149,8 @@ bool GSSoftBody::OnKeyEvent(const KeyEvent& ke)
     // Reset sim
     OnActive();
   }
-  
+ 
+  // TODO Modes: cut, select, clear, rotate camera, etc. 
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
   {
     // TODO TEMP TEST

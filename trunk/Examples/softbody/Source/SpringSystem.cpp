@@ -1,3 +1,4 @@
+#include <iostream>
 #include "SpringSystem.h"
 
 namespace Amju

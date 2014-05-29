@@ -1,10 +1,17 @@
 Constraints:
  - Try a fixed particle 'buddy' for every movable particle. The movable particle is
 connected to the fixed particle with a spring
+ -> Too restrictive, try lower K..?
+
 
  - Try a fixed particle at the centre of mass. All the movable particles are connected
 by a spring to the fixed COM particle
 
+
+Damping
+ - Each spring should be in parallel with a damper. Maybe this is simpler, just
+scale down each particle's velocity over time.
+-> This works but is currently framrate dependent
 
 Drawing
 Make/update dynamic indexed tri strip from spring system.
@@ -20,7 +27,38 @@ Ray cast into scene to find contact point on mesh.
 
 
 Apply a force
-Find closest particle to pick ray. (Don't need to tesselate until we cut?)
+Find closest particle to pick ray. 
+Don't need to tesselate until we cut.
+Try directly moving the particle rather than adding force.
+
+
+Select multple particles
+E.g. grab a section of the mesh and pull it.
+Rectangular prism selection (later could be a polygon you draw - tesselate into 
+ triangular prisms)
+
+Clamp particles
+ - Make them immovable. Later unclamp - make them movable again
+
+
+
+Data structure requirements
+Select a point on a triangle - so need the tris making up the mesh in a strcture 
+ like an octree for picking.
+Once we have a tri, we want to get the particles at the verts, so tris have ptrs
+ to particles
+Tris may need normals? 
+
+The tri is also drawn, but this would be an indexed tri strip, not individual tris.
+So tris also need to point to the vertices and indices in the drawing buffer.
+For drawing, tri verts need pos, UV(s), TBN etc. Not required for physics though, right?
+
+
+
+Cutting: tesselate tris involved, and add more tris for the 'wall' of the cut
+NB: nasty case if you cut an 'X' shape. We can't blindly build the wall along the
+edge of the cut, but connect it to any existing walls.
+
 
 
 

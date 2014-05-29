@@ -227,6 +227,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
 
     centreOfMass += v;
   }
+  sq->SetNumVerts(m_points.size());
   
   // Add spring for triangle edges
 
@@ -245,8 +246,12 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
     {
       const Face& f = *jt;
 
+      Squishy::Tri tri;
+
       for (int i = 0; i < 3; i++)
       {
+        tri.m_particles[i] = f.m_pointIndex[i];
+
         int a = f.m_pointIndex[i];
         int b = f.m_pointIndex[(i + 1) % 3];
         // Only insert edge if not already there, and check for both ways
@@ -255,11 +260,8 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
           edges.insert(Edge(a, b));
         }
       }
-/*
-      edges.insert(Edge(f.m_pointIndex[0], f.m_pointIndex[1]));
-      edges.insert(Edge(f.m_pointIndex[1], f.m_pointIndex[2]));
-      edges.insert(Edge(f.m_pointIndex[2], f.m_pointIndex[0]));
-*/
+
+      sq->AddTri(tri);
     }
   }
 
@@ -293,7 +295,8 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
   // Each movable particle has an immovable buddy, connected with a spring.
   // Put the immovable buddy some small distance away from the movable particle,
   //  or the distance will always be approx zero, so no spring action at all.
-  
+ 
+  const float buddyK = 1.0f; 
   for (int i = 0; i < numPoints; i++)
   {
     Particle* pOld = sq->GetParticle(i); 
@@ -304,7 +307,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
     pNew->SetPos(v + Vec3f(10, 0, 0));
     pNew->SetInvMass(0); 
 
-    MakeSpring(sq, i, idNew, 1.0f);
+    MakeSpring(sq, i, idNew, buddyK);
   }
   
 
