@@ -2,6 +2,7 @@
 
 #include <TriList.h>
 #include <ObjMesh.h>
+#include <Capsule.h>
 #include "SpringSystem.h"
 
 namespace Amju
@@ -29,20 +30,95 @@ public:
   // TODO
   // 'Pin'/freeze a point on the squishy so it can not move - i.e. inverse mass = 0
   //  (Find closest particle to the given position?)
-  void PinVertex(const Vec3f& pos);
+//  void PinVertex(const Vec3f& pos);
+
+  // Select all verts in the given capsule
+  void SelectVerts(const Capsule& cap);
+  void ClearSelection();
+  // ??? Or apply force???
+  void MoveSelectedVerts(const Vec3f& move);
+  // TODO Pin/release selection?
+  // ReleaseAll?
 
   void Draw() override;
 
+  void Update() override;
+
+  // Represents triangle in the squishy.
+  // We want to be able to select tris, exert forces on verts,
+  //  and cut tris.
+  struct Tri : public RefCounted
+  {
+    // Vertices of this tri are the 3 particles.
+    // These ints are the indexes into m_particles
+    int m_particles[3];
+
+    Vec3f m_normal; // ? Recalc when particles move
+
+    // TODO Also point to vertices in vertex buffer for updating positions we draw
+
+    // The 3 neighbours of this tri..??
+    RCPtr<Tri> m_neighbours[3];
+
+    bool m_selected;
+  };
+
+  void AddTri(const Tri& tri);
+
+  // Set the number of verts in the tri mesh
+  void SetNumVerts(int n);
+
+  // Cutting
+  // Tesselates triangles, adding more particles and springs. Adds triangles to make
+  //  'wall' of cut
+  // Line seg is formed by two points along the line given by the mouse position 
+  void StartCut(const LineSeg&, float cutDepth);
+  void ContinueCut(const LineSeg&, float cutDepth);
+  void EndCut(const LineSeg&, float cutDepth);
+
+  struct CutPoint
+  {
+    Vec3f m_pos;
+    Tri* m_tri;
+    float m_depth; // distance behind tri we should cut to
+  };
+
 protected:
+  typedef std::vector<CutPoint> CutPoints;
+  // A Cut Line is comprised of points on the mesh surface
+  typedef std::vector<CutPoint> CutLine;
+  typedef std::vector<CutLine> CutLines;
+
+  void GetCutPoints(const LineSeg& seg, CutPoints* cutpoints);
+
+  void CutInto(const CutLine& cutline);
+
   // Volume of squishy when initialised
   float m_volume;
 
   // Dynamic because vert positions move when force applied;
   // If cut, new tris are created and we make a new tri list.
-  RCPtr<TriListDynamic> m_trilist;
+  // TODO
+//  RCPtr<IndexedTriListDynamic> m_displayTrilist;
 
+  // For each particle, all the tris which share it?
 
-  // TODO TEMP TEST
-  ObjMesh* m_mesh;
+  // Store the Tris making up this squishy
+  // TODO Store in an octree or similar for efficient picking etc
+  typedef std::vector<RCPtr<Tri> > TriList;
+  TriList m_trilist;
+
+  // Smoothed normals, per-particle
+  typedef std::vector<Vec3f> Normals;
+  Normals m_normals;
+
+  // Multiple cut lines if we cut through
+  CutLines m_cutLines;
+
+  // Number of verts in mesh: some particles have a corresponding mesh vertex,
+  //  but others (centre of mass, buddies) do not. The first m_numVerts particles
+  //  should be the ones with visible mesh verts.
+  int m_numVerts;
+  bool m_drawSpringSystem;
 };
 }
