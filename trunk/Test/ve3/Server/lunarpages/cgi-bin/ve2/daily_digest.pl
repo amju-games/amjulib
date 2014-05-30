@@ -181,12 +181,12 @@ sub sendEmailToOnePlayer($$)
 sub digest()
 {
   # Get msgs relating to player.
-  my $recip = 2;
+  my $playerid = 2;
   my $time = 1;
  
   # TODO Ideally show mugshots for players but this will be incredibly time consuming to do :-(
 
-  my $sql = "SELECT id, sender, UNIX_TIMESTAMP(whensent), msg, recip FROM chat WHERE candelete = 0 and (recip = $recip or recip = -2 or sender = $recip) order by whensent desc limit 50";
+  my $sql = "SELECT id, sender, UNIX_TIMESTAMP(whensent), msg, recip FROM chat WHERE candelete = 0 and (recip = $playerid or recip = -2 or sender = $playerid) order by whensent desc limit 50";
 
   my $query = $dbh->prepare($sql) or die
     "Query prepare failed for this query: $sql\n";
@@ -205,7 +205,13 @@ sub digest()
 # mugshot???
 # Strip XML
 
-    print "<tr><td><img src='http://www.amju.com/howto1.png'></td> <td>";
+    my $mug = $sender;
+    if ($sender == $playerid)
+    {
+      $mug = $recip;
+    } 
+ 
+    print "<tr><td><img src='http://www.amju.com/ve2/assets/mugshot-$mug.png' width=64 height=64></td> <td>";
     print "MSG ID: $id SENDER: $sender SENT: $whensent MSG: $decoded RECIP: $recip\n<br>";
     print "</td></tr>";
   }
