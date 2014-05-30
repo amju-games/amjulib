@@ -79,6 +79,14 @@ END
   update_or_insert($sql);
 }
 
+# Use this instead of die to improve error msgs
+sub mydie($)
+{
+  my $t = time();
+  print "<now>$t</now><error>$_</error>\n";
+  exit(0);
+}
+
 sub my_connect2()
 {
   $dbh = DBI->connect($dsn, $username, $pass);
