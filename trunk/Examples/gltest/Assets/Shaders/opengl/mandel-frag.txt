@@ -1,0 +1,37 @@
+// mandel-frag.txt
+
+uniform float gTime;
+varying vec2 vUv;
+
+void main()
+{
+    const int maxIters = 100;
+
+    float x = vUv.x;
+    float y = vUv.y;
+
+    float z = 0.0;
+    float zi = 0.0;
+
+    float oneOverMaxIters = 1.0 / float(maxIters);
+    for (int k = 0; k < maxIters; k++)
+    {
+        /* z^2 = (a+bi)(a+bi) = a^2 + 2abi - b^2 */
+        float newz = (z * z) - (zi * zi) + x;
+        float newzi = z * zi * 2.0 + y;
+        z = newz;
+        zi = newzi;
+
+        if (((z * z) + (zi * zi)) > 4.0)
+        {
+            // Not in M. set
+
+            float s = 1.0 - float(k) * oneOverMaxIters;
+            gl_FragColor = vec4(s, s, s, 1); 
+            return;
+        }
+    }
+    // Pixel is in M. set
+    gl_FragColor = vec4(0, 0, 0, 1); 
+}
+
