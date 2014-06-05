@@ -69,7 +69,7 @@ Squishy::Squishy()
 
  // m_mesh = nullptr; // TODO TEMP TEST
   m_drawSpringSystem = true;
-  m_drawTris = false;
+  m_drawTris = true;
 
   m_numVerts = 0;
 }
