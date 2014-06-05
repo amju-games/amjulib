@@ -11,6 +11,9 @@ static float xrot = 0;
 static bool dragleft = false;
 static bool dragright = false;
 static Vec2f mousePos;
+static bool isCameraButton = false;
+static bool isZoomButton = false;
+static float zoom = 30;
 
 enum CutMode { CUT_NONE, CUT_START, CUT_CONTINUE, CUT_END };
 static CutMode cutmode = CUT_NONE;
@@ -47,7 +50,7 @@ void GSSoftBody::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
-  AmjuGL::LookAt(0, 0, 50,  0, 0, 0,   0, 1, 0);
+  AmjuGL::LookAt(0, 0, zoom,  0, 0, 0,   0, 1, 0);
 
   Vec3f pos(1, 1, 1);
   AmjuGL::DrawLighting(
@@ -57,7 +60,7 @@ void GSSoftBody::Draw()
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
-  AmjuGL::Translate(0, -10, 0);
+  AmjuGL::Translate(0, -10, 0); // fix y pos ??
 
   AmjuGL::RotateY(yrot);
   AmjuGL::RotateX(xrot);
@@ -99,6 +102,8 @@ void GSSoftBody::OnActive()
   const float K = 1.0f; // TODO
   const std::string filename = "bean.obj"; // crate2.obj
 
+  //Particle::SetGravity(Vec3f(0, -1, 0));
+
   sq = new Squishy;
   if (!sq->Init(filename, K))
   {
@@ -114,8 +119,8 @@ bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
 
   if (dragright)
   {
-    xrot += ce.dy * 100.0f;
-    yrot += ce.dx * 100.0f;
+    xrot += -ce.dy * 100.0f;
+    yrot +=  ce.dx * 100.0f;
   }
 
   return false;
@@ -123,7 +128,17 @@ bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
 
 bool GSSoftBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
-  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  bool r = isCameraButton || (mbe.button == AMJU_BUTTON_MOUSE_RIGHT);
+  bool z = isZoomButton || (mbe.button == AMJU_BUTTON_MOUSE_MIDDLE);
+
+  if (r)
+  {
+    dragright = mbe.isDown;  
+  }
+  else if (z)
+  {
+  }
+  else // left
   {
     dragleft = mbe.isDown;  
     if (dragleft)
@@ -134,10 +149,6 @@ bool GSSoftBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       cutmode = CUT_END;
     }
-  }
-  if (mbe.button == AMJU_BUTTON_MOUSE_RIGHT)
-  {
-    dragright = mbe.isDown;  
   }
   return false;
 }
@@ -150,6 +161,16 @@ bool GSSoftBody::OnKeyEvent(const KeyEvent& ke)
     OnActive();
   }
  
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'c')
+  {
+    isCameraButton = ke.keyDown;
+  }
+
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'z')
+  {
+    isZoomButton = ke.keyDown;
+  }
+
   // TODO Modes: cut, select, clear, rotate camera, etc. 
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
   {

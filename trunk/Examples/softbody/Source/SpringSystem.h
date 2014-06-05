@@ -15,8 +15,8 @@ public:
   virtual void Update();
   virtual void Draw(); // ?
 
-  // Creates a new particle - returns its ID
-  int CreateParticle();
+  // Creates a new particle - returns ptr to it (Particle has GetId())
+  Particle* CreateParticle();
 
   // Creates a new spring connecting the two particles with the given IDs.
   // Returns ID of spring
@@ -28,6 +28,12 @@ public:
 
   // Spring already exists between two particles? Returns Spring or nullptr
   Spring* GetSpring(int particleId1, int particleId2);
+
+  // Just erases the spring
+  void EraseSpring(int particleId1, int particleId2);
+
+  // Erase particle and all springs which connect to it
+  void EraseParticle(int particleId);
 
   int GetNumParticles() const;
   int GetNumSprings() const;

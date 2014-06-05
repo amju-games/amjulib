@@ -68,7 +68,8 @@ Squishy::Squishy()
   m_volume = 0;
 
  // m_mesh = nullptr; // TODO TEMP TEST
-  m_drawSpringSystem = false;
+  m_drawSpringSystem = true;
+  m_drawTris = false;
 
   m_numVerts = 0;
 }
@@ -178,6 +179,11 @@ void Squishy::ContinueCut(const LineSeg& seg, float cutDepth)
   }
 }
 
+std::ostream& operator<<(std::ostream& os, const Vec3f& v)
+{
+  return os << v.x << ", " << v.y << ", " << v.z;
+}
+
 std::ostream& operator<<(std::ostream& os, const Squishy::Tri& tri)
 {
   return os <<
@@ -189,6 +195,15 @@ std::ostream& operator<<(std::ostream& os, const Squishy::Tri& tri)
 void PrintTri(const Squishy::Tri& tri)
 {
   std::cout << tri;
+}
+
+int ThirdVert(const Squishy::Tri& tr, int e1, int e2)
+{ 
+  if (e1 != tr.m_particles[0] && e2 != tr.m_particles[0]) return tr.m_particles[0];
+  if (e1 != tr.m_particles[1] && e2 != tr.m_particles[1]) return tr.m_particles[1];
+  Assert(e1 != tr.m_particles[2]);
+  Assert(e2 != tr.m_particles[2]);
+  return tr.m_particles[2];
 }
 
 bool CommonEdge(const Squishy::Tri& tr1, const Squishy::Tri& tr2, int* v1, int* v2)
@@ -233,6 +248,8 @@ void Squishy::CutInto(const CutLine& cutline)
 {
 std::cout << "Cutting...\n";
 
+  m_edgePoints.clear();
+
   // Create a new squishy or change the existing data?
   // Changes to make:
   // Add new particles, add new springs
@@ -254,15 +271,51 @@ std::cout << "Cutting...\n";
 
   int size = cutline.size();
   CutPoint start = cutline[0];
-  
-  for (int i = 1; i < size; i++)
+
+  m_edgePoints.push_back(EdgePoint(start.m_pos, start.m_tri, Edge(-1, -1)));
+
+  // True until we create the first 'v'-shaped cut in the first tri
+  bool isFirstSeg = true; 
+
+  // IDs of particles along edge we have created as the cut goes through
+  //  the edge.
+  int edgep1 = -1;
+  int edgep2 = -1;
+
+  for (int i = 1; i < size;  i++)
   {
-    // Check point i and i+1. Same tri or different?
     const CutPoint& cp = cutline[i];
+
+    // Check point i and i+1. Same tri or different?
     if (cp.m_tri == start.m_tri)
     {
-      // Same tri. Skip this cut point
-      
+      // Same tri. Skip this cut point unless the last point
+      if (i == (size - 1))
+      {
+std::cout << "The final point!?!\n";
+        if (edgep1 != -1)
+        {
+          // Cut spans at least 2 tris - connect last 2 points on shared edge
+          //  to the final point.
+          Particle* p = CreateParticle();
+          int id = p->GetId();
+          p->SetPos(cp.m_pos);
+
+          // Connect new particle to verts of this tri, and to the points on
+          //  the last shared edge.
+          const Tri& tr = *(cp.m_tri);
+          CreateSpring(id, tr.m_particles[0]);
+          CreateSpring(id, tr.m_particles[1]);
+          CreateSpring(id, tr.m_particles[2]);
+          CreateSpring(id, edgep1);
+          CreateSpring(id, edgep2);
+        }
+        else
+        {
+          // Whole cut is on one tri
+std::cout << "Whole cut is on one tri..?!?\n";
+        }
+      }      
     }
     else
     {
@@ -280,22 +333,159 @@ std::cout << "Finding edge between 2 tris: TR1: " << *tr1 << " TR2: " << *tr2 <<
         // Same edge as last time? Skip if so
         // TODO
 
-        // Tesselate start tri
-        // Find the point on the edge where the cut line crosses it - use line3 - line3
-        //  intersection.
+        // Find the point on the edge where the cut line crosses it 
         LineSeg triEdge(GetParticle(e1)->GetPos(), GetParticle(e2)->GetPos());
         LineSeg cut(start.m_pos, cp.m_pos);
         LineSeg closest; // shortest line seg connecting the tri edge and cut segment
-        float mua, mub; // t values along segments, not used
+        float mua, mub; // t values along segments triEdge and cut
         if (Intersects(triEdge, cut, &closest, &mua, &mub))
         {
           std::cout << "Found point on tri edge!\n";
+          m_edgePoints.push_back(EdgePoint(closest.p0, cp.m_tri, Edge(e1, e2)));
+          // Make two points, close to each other
+          Vec3f dir = triEdge.p1 - triEdge.p0;
+          Vec3f p1 = triEdge.p0 + dir * (0.9f * mua); // TODO
+          Vec3f p2 = triEdge.p0 + dir * (1.1f * mua);
+          // If this is the first segment in the cut line, this is the start 
+          //  of the cut - v shaped.
+          // Connect the start point to p1 and p2. 
+          // Remove triEdge. 
+          // Tesselate the tri. 
+          // Remove old tri.
+          if (isFirstSeg)
+          {
+            isFirstSeg = false;
+std::cout << "Creating first v-shaped cut from start to first edge:\n";
+std::cout << "  Remove edge " << e1 << " - " << e2 << "\n";
+            EraseSpring(e1, e2);
+ 
+            Particle* p = CreateParticle();
+            int startid = p->GetId();
+
+            // TODO Push the new particles in the direction of the tri normal,
+            //  or the avg normal of the tri verts, scaled by some factor.
+            // This factor depends on the vert normals, as these give the
+            //  curvature of the surface we are approximating.
+            // If vert norms are same as tri norm, it's flat, so scale is zero.
+            // As vert norms diverge from tri norm, the triangle should be more 
+            //  and more curved. At 90 degs this breaks down, which could 
+            //  happen for a cut wall.
+
+            // TODO Calc normals for new verts. This is the weighted avg of
+            //  the vert normals, weighted by distance to each.
+            // (Use barycentric coords ?)
+
+            p->SetPos(start.m_pos);
+std::cout << "  Add new particle for start of cut: " << start.m_pos << ": " << startid << "\n";
+            // Connect edges from this new particle to the tri verts.
+            // This anchors the new particle and tesselates the cut tri as well.
+std::cout << "  Create edge " << e1 << " - " << startid << "\n";
+             CreateSpring(e1, startid);
+std::cout << "  Create edge " << e2 << " - " << startid << "\n";
+             CreateSpring(e2, startid);
+            // Connect the new cut point and the third tri vert (the one opposite
+            //  the edge we removed).
+            int e3 = ThirdVert(*tr1, e1, e2);
+std::cout << "  Create edge " << e3 << " - " << startid << "\n";
+             CreateSpring(e3, startid);
+ 
+            p = CreateParticle();
+            int p1id = p->GetId(); 
+            p->SetPos(p1);
+
+            p = CreateParticle();
+            int p2id = p->GetId(); 
+            p->SetPos(p2);
+
+            // store the new points on the edge. Connect to the next pair of
+            //  (or single) particle we create
+            edgep1 = p1id;
+            edgep2 = p2id;
+
+std::cout << "  Add new particles for new verts on edge: " << p1id << " and " << p2id << "\n";
+
+std::cout << "  Create edge " << startid << " - " << p1id << "\n";
+             CreateSpring(startid, p1id);
+std::cout << "  Create edge " << startid << " - " << p2id << "\n";
+             CreateSpring(startid, p2id);
+
+            // Rebuild the cut edge that we removed: connect e1 to p1,
+            //  and e2 to p2.
+std::cout << "  Create edge " << e1 << " - " << p1id << "\n";
+             CreateSpring(e1, p1id);
+std::cout << "  Create edge " << e2 << " - " << p2id << "\n";
+             CreateSpring(e2, p2id);
+          } 
+          else
+          {
+            // Remove this tri.
+
+            // This is a 'mid-cut' segment, i.e. between 2 tri edges, 
+            //  join old p1 to new p1, and old p2 to new p2.
+            // start is in the prev tri, cp is in the new tri.
+            Particle* p = CreateParticle();
+            int p1id = p->GetId(); 
+            p->SetPos(p1);
+
+            p = CreateParticle();
+            int p2id = p->GetId(); 
+            p->SetPos(p2);
+
+            // Remove old edge. Create new edge segments. Tesselate the quad.
+            EraseSpring(e1, e2);
+            // Rebuild the cut edge that we removed: connect e1 to p1,
+            //  and e2 to p2.
+std::cout << "  Create edge " << e1 << " - " << p1id << "\n";
+             CreateSpring(e1, p1id);
+std::cout << "  Create edge " << e2 << " - " << p2id << "\n";
+             CreateSpring(e2, p2id);
+
+            // Create edges across tri from prev edge to new edge
+            // TODO
+            //  They must not cross over!
+            // TODO How to sort this out? Test if the line segs cross?
+            //  They should be more or less parallel.
+
+            // Swap verts if the edges cross
+            LineSeg closest;
+            float mua, mub;
+            const Vec3f& edge1 = GetParticle(edgep1)->GetPos();
+            const Vec3f& edge2 = GetParticle(edgep2)->GetPos();
+            if (Intersects(LineSeg(edge1, p1), LineSeg(edge2, p2), &closest, &mua, &mub) &&
+                mua >= 0 && mua <= 1.0f && mub >= 0 && mub <= 1.0f)
+            {
+std::cout << "Found crossing edges, mua: " << mua << " mub: " << mub << "\n";
+              std::swap(p1id, p2id);
+            }
+
+            CreateSpring(edgep1, p1id);
+            CreateSpring(edgep2, p2id);
+
+            // store the new points on the edge. Connect to the next pair of
+            //  (or single) particle we create
+            edgep1 = p1id;
+            edgep2 = p2id;
+          }
         }
       }
 
       start = cp;
     }  
   }
+  const CutPoint& end = cutline.back();
+  m_edgePoints.push_back(EdgePoint(end.m_pos, end.m_tri, Edge(-1, -1)));
+
+/*
+  for (auto it = m_edgePoints.begin(); it != m_edgePoints.end(); ++it)
+  {
+    EdgePoint& ep = *it;
+    if (m_trilist.count(ep.m_tri))
+    {
+      m_trilist.erase(ep.m_tri);
+    }
+    ep.m_tri = nullptr;
+  }
+*/
 }
 
 void Squishy::EndCut(const LineSeg&, float cutDepth)
@@ -473,61 +663,65 @@ void Squishy::Draw()
     SpringSystem::Draw();
   }
 
-  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-  PushColour();
-  MultColour(Colour(1, 1, 1, 0.8f));
-//  m_mesh->Draw();
-
-  // TODO TEMP TEST 
-  glBegin(GL_TRIANGLES);
-
-  for (auto it = m_trilist.begin(); it != m_trilist.end(); ++it)
+  if (m_drawTris)
   {
-    Tri* tri = *it;
-
-    Particle* particle[3] = 
-    {
-      GetParticle(tri->m_particles[0]),
-      GetParticle(tri->m_particles[1]),
-      GetParticle(tri->m_particles[2])
-    };
-    Vec3f pos[3] = 
-    {
-      particle[0]->GetPos(),
-      particle[1]->GetPos(),
-      particle[2]->GetPos()
-    };
-    Vec3f normal[3] = 
-    {
-      m_normals[tri->m_particles[0]],
-      m_normals[tri->m_particles[1]],
-      m_normals[tri->m_particles[2]],
-    };
-
-    Colour col(1, 1, 1, 1);
-    if (tri->m_selected)
-    {
-      col = Colour(1, 0, 0, 1);
-    }
+    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    AmjuGL::Enable(AmjuGL::AMJU_BLEND);
     PushColour();
-    MultColour(col);
+    MultColour(Colour(1, 1, 1, 0.8f));
 
-    glNormal3f(normal[0].x, normal[0].y, normal[0].z);
-    glVertex3f(pos[0].x, pos[0].y, pos[0].z);
+    // TODO TEMP TEST 
+    glBegin(GL_TRIANGLES);
 
-    glNormal3f(normal[1].x, normal[1].y, normal[1].z);
-    glVertex3f(pos[1].x, pos[1].y, pos[1].z);
+    for (auto it = m_trilist.begin(); it != m_trilist.end(); ++it)
+    {
+      Tri* tri = *it;
 
-    glNormal3f(normal[2].x, normal[2].y, normal[2].z);
-    glVertex3f(pos[2].x, pos[2].y, pos[2].z);
+      Particle* particle[3] = 
+      {
+        GetParticle(tri->m_particles[0]),
+        GetParticle(tri->m_particles[1]),
+        GetParticle(tri->m_particles[2])
+      };
+      Vec3f pos[3] = 
+      {
+        particle[0]->GetPos(),
+        particle[1]->GetPos(),
+        particle[2]->GetPos()
+      };
+      Vec3f normal[3] = 
+      {
+        m_normals[tri->m_particles[0]],
+        m_normals[tri->m_particles[1]],
+        m_normals[tri->m_particles[2]],
+      };
+
+      Colour col(1, 1, 1, 1);
+      if (tri->m_selected)
+      {
+        col = Colour(1, 0, 0, 1);
+      }
+      PushColour();
+      MultColour(col);
+
+      glNormal3f(normal[0].x, normal[0].y, normal[0].z);
+      glVertex3f(pos[0].x, pos[0].y, pos[0].z);
+
+      glNormal3f(normal[1].x, normal[1].y, normal[1].z);
+      glVertex3f(pos[1].x, pos[1].y, pos[1].z);
+
+      glNormal3f(normal[2].x, normal[2].y, normal[2].z);
+      glVertex3f(pos[2].x, pos[2].y, pos[2].z);
+
+      PopColour();
+    }
+
+    glEnd(); 
 
     PopColour();
   }
 
-  glEnd(); 
 
-  PopColour();
   AmjuGL::Disable(AmjuGL::AMJU_BLEND);
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
@@ -547,6 +741,16 @@ void Squishy::Draw()
     } 
     glEnd();  
   }
+
+  glColor3f(1, 1, 1);
+  glBegin(GL_LINE_STRIP);
+  for (int i = 0; i < m_edgePoints.size(); i++)
+  {
+    Vec3f& v = m_edgePoints[i].m_pos; 
+    glVertex3f(v.x, v.y, v.z);
+  }
+  glEnd();
+
   PopColour();
 }
 
@@ -556,7 +760,7 @@ void Squishy::AddForce(const Vec3f& pos, const Vec3f& dir)
   
 void Squishy::AddTri(const Tri& tri)
 {
-  m_trilist.push_back(new Tri(tri));
+  m_trilist.insert(new Tri(tri));
 }
 
 }

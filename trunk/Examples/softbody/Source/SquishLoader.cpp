@@ -219,8 +219,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
   for (auto it = m_points.begin(); it != m_points.end(); ++it)
   {
     const Vec3f& v = *it;
-    int id = sq->CreateParticle();
-    Particle* p = sq->GetParticle(id); // OK this is a bit crap
+    Particle* p = sq->CreateParticle();
     p->SetPos(v);
     // Now what about (inv) mass of this particle?
     p->SetInvMass(1.0f); // TODO
@@ -272,7 +271,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
     MakeSpring(sq, edge.first, edge.second, K);
   }
 
-  int numPoints = m_points.size();
+  //int numPoints = m_points.size();
 
   // Idea for constraint to keep shape/volume:
   // Add particle at centre of mass. Add spring from here to each vertex.
@@ -295,7 +294,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
   // Each movable particle has an immovable buddy, connected with a spring.
   // Put the immovable buddy some small distance away from the movable particle,
   //  or the distance will always be approx zero, so no spring action at all.
- 
+  /* 
   const float buddyK = 1.0f; 
   for (int i = 0; i < numPoints; i++)
   {
@@ -309,7 +308,7 @@ bool SquishyLoadObj(Squishy* sq, const std::string& filename)
 
     MakeSpring(sq, i, idNew, buddyK);
   }
-  
+  */
 
   return true;
 }

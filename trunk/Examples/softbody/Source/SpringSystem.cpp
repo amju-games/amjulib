@@ -29,11 +29,12 @@ void SpringSystem::Draw()
   }
 }
 
-int SpringSystem::CreateParticle()
+Particle* SpringSystem::CreateParticle()
 {
   int n = m_particles.size();
-  m_particles.push_back(new Particle(n));
-  return n;
+  Particle* p = new Particle(n);
+  m_particles.push_back(p);
+  return p;
 }
 
 int SpringSystem::CreateSpring(int particleId1, int particleId2)
@@ -48,6 +49,19 @@ int SpringSystem::CreateSpring(int particleId1, int particleId2)
   int n = m_springs.size();
   m_springs.push_back(new Spring(n, GetParticle(particleId1), GetParticle(particleId2)));
   return n;
+}
+
+void SpringSystem::EraseSpring(int particleId1, int particleId2)
+{
+  Spring* spr = GetSpring(particleId1, particleId2);
+  if (spr)
+  {
+    m_springs.erase(std::remove(m_springs.begin(), m_springs.end(), spr), m_springs.end());
+  }
+}
+
+void SpringSystem::EraseParticle(int particleId)
+{
 }
 
 Spring* SpringSystem::GetSpring(int particleId1, int particleId2)

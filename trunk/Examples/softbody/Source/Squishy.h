@@ -105,7 +105,7 @@ protected:
 
   // Store the Tris making up this squishy
   // TODO Store in an octree or similar for efficient picking etc
-  typedef std::vector<RCPtr<Tri> > TriList;
+  typedef std::set<RCPtr<Tri> > TriList;
   TriList m_trilist;
 
   // Smoothed normals, per-particle
@@ -120,5 +120,22 @@ protected:
   //  should be the ones with visible mesh verts.
   int m_numVerts;
   bool m_drawSpringSystem;
+  bool m_drawTris;
+
+  // An edge is a pair of two ints, the IDs of the particles at the endpoints.
+  typedef std::pair<int, int> Edge;
+
+  struct EdgePoint
+  {
+    EdgePoint(const Vec3f& pos, Tri* tri, const Edge& edge) : m_pos(pos), m_tri(tri), m_edge(edge)
+    {
+    }
+
+    Vec3f m_pos;
+    Tri* m_tri;  
+    Edge m_edge;
+  };
+  typedef std::vector<EdgePoint> EdgePoints;
+  EdgePoints m_edgePoints;
 };
 }
