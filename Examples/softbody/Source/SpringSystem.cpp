@@ -54,6 +54,7 @@ int SpringSystem::CreateSpring(int particleId1, int particleId2)
 void SpringSystem::EraseSpring(int particleId1, int particleId2)
 {
   Spring* spr = GetSpring(particleId1, particleId2);
+  Assert(spr);
   if (spr)
   {
     m_springs.erase(std::remove(m_springs.begin(), m_springs.end(), spr), m_springs.end());

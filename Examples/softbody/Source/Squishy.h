@@ -49,6 +49,22 @@ public:
   //  and cut tris.
   struct Tri : public RefCounted
   {
+    Tri()
+    {
+      m_particles[0] = -1;
+      m_particles[1] = -1;
+      m_particles[2] = -1;
+      m_selected = false;
+    }
+
+    Tri(int p1, int p2, int p3)
+    {
+      m_particles[0] = p1;
+      m_particles[1] = p2;
+      m_particles[2] = p3;
+      m_selected = false;
+    }
+
     // Vertices of this tri are the 3 particles.
     // These ints are the indexes into m_particles
     int m_particles[3];
@@ -58,13 +74,13 @@ public:
     // TODO Also point to vertices in vertex buffer for updating positions we draw
 
     // The 3 neighbours of this tri..??
-    RCPtr<Tri> m_neighbours[3];
+//    RCPtr<Tri> m_neighbours[3];
 
     bool m_selected;
   };
 
   void AddTri(const Tri& tri);
-
+  
   // Set the number of verts in the tri mesh
   void SetNumVerts(int n);
 
@@ -92,6 +108,12 @@ protected:
   void GetCutPoints(const LineSeg& seg, CutPoints* cutpoints);
 
   void CutInto(const CutLine& cutline);
+
+  // Used internally to fill triangles formed by 3 springs
+  void FillTri1(const Vec3f& normal, int centre, int p1, int p2, int e1, int e2);
+  void FillTriHoles(const Vec3f& normal, const Squishy::Tri& tr, int e1, int e2, int centre);
+  void AddTriWithWinding(const Vec3f& normal, Tri tri);
+  void AddQuad(const Vec3f& normal, int p1, int p2, int p3, int p4);
 
   // Volume of squishy when initialised
   float m_volume;

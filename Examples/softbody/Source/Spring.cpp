@@ -176,12 +176,13 @@ void Spring::Draw()
 
   // Just a line for now
 
-  glLineWidth(3.0f);
+  glLineWidth(2.0f);
 
+  PushColour();
+  AmjuGL::SetColour(Colour(0, 0, 0, 1));
   Vec3f p1 = m_particles[0]->GetPos();
   Vec3f p2 = m_particles[1]->GetPos();
   AmjuGL::DrawLine(AmjuGL::Vec3(p1.x, p1.y, p1.z), AmjuGL::Vec3(p2.x, p2.y, p2.z));
-
-//  DrawOBB3(m_box);
+  PopColour();
 }
 }
