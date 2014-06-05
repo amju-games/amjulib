@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\GSSoftBody.cpp" />
+    <ClCompile Include="..\..\..\..\Source\IntersectLine3Line3.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\..\Source\Particle.cpp" />
     <ClCompile Include="..\..\..\..\Source\Spring.cpp" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\GSSoftBody.h" />
+    <ClInclude Include="..\..\..\..\Source\IntersectLine3Line3.h" />
     <ClInclude Include="..\..\..\..\Source\ObjMeshToSpringSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Particle.h" />
     <ClInclude Include="..\..\..\..\Source\Spring.h" />

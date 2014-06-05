@@ -136,14 +136,18 @@ void Squishy::StartCut(const LineSeg& seg, float cutDepth)
   float sqDepth = cutDepth * cutDepth;
 
   CutPoints cutpoints;
-  GetCutPoints(seg, &cutpoints); 
+  GetCutPoints(seg, &cutpoints);
+  if (cutpoints.empty())
+  {
+    return;
+  }
  
   // Order the tris by distance. Taking the closest tri as cut depth 0, do we 
   //  reach the next tri? If so, we are cutting through.
 
   const CutPoint& closest = cutpoints[0];
 
-  for (int i = 0; i < cutpoints.size(); i++)
+  for (int i = 0; i < (int)cutpoints.size(); i++)
   {
     CutPoint& cp = cutpoints[i];
  
@@ -244,6 +248,45 @@ std::cout << "\n";
   return false;
 }
 
+void Squishy::FillTri1(const Vec3f& normal, int centre, int p1, int p2, int e1, int e2)
+{
+  // p1 and p2 are tri verts. If there are springs connecting these 2 verts and the centre,
+  //  fill in with a triangle.
+  // If no edge from p1 to p2, there is an edge between p1-e1 and p2-e2 OR p1-e2 and p2-e1.
+
+  Assert(GetSpring(centre, p1));
+  Assert(GetSpring(centre, p2));
+  Assert(GetSpring(centre, e1));
+  Assert(GetSpring(centre, e2));
+
+  // TODO GetSpring needs to be FAST
+  if (GetSpring(p1, p2))
+  {
+    AddTriWithWinding(normal, Tri(centre, p1, p2)); 
+  }
+  else if (GetSpring(p1, e1))
+  {
+    Assert(GetSpring(p2, e2));
+    AddTriWithWinding(normal, Tri(centre, p1, e1)); 
+    AddTriWithWinding(normal, Tri(centre, p2, e2)); 
+  }
+  else
+  {
+    Assert(GetSpring(p1, e2));
+    Assert(GetSpring(p2, e1));
+    AddTriWithWinding(normal, Tri(centre, p1, e2)); 
+    AddTriWithWinding(normal, Tri(centre, p2, e1));
+  }
+}
+
+void Squishy::FillTriHoles(const Vec3f& normal, const Squishy::Tri& tr, int e1, int e2, int centre)
+{
+  // Fill holes in tr, when tri has a triangle chopped out of it, from centre to e1 to e2 back to centre. 
+  FillTri1(normal, centre, tr.m_particles[0], tr.m_particles[1], e1, e2);
+  FillTri1(normal, centre, tr.m_particles[1], tr.m_particles[2], e1, e2);
+  FillTri1(normal, centre, tr.m_particles[2], tr.m_particles[0], e1, e2);
+}
+
 void Squishy::CutInto(const CutLine& cutline)
 {
 std::cout << "Cutting...\n";
@@ -298,6 +341,7 @@ std::cout << "The final point!?!\n";
           // Cut spans at least 2 tris - connect last 2 points on shared edge
           //  to the final point.
           Particle* p = CreateParticle();
+          m_numVerts++;
           int id = p->GetId();
           p->SetPos(cp.m_pos);
 
@@ -309,6 +353,9 @@ std::cout << "The final point!?!\n";
           CreateSpring(id, tr.m_particles[2]);
           CreateSpring(id, edgep1);
           CreateSpring(id, edgep2);
+
+          // Which edge of the original tri has been cut ? Don't add a tri along that edge!
+          FillTriHoles(tr.m_normal, tr, edgep1, edgep2, id);
         }
         else
         {
@@ -360,6 +407,7 @@ std::cout << "  Remove edge " << e1 << " - " << e2 << "\n";
             EraseSpring(e1, e2);
  
             Particle* p = CreateParticle();
+            m_numVerts++;
             int startid = p->GetId();
 
             // TODO Push the new particles in the direction of the tri normal,
@@ -390,10 +438,12 @@ std::cout << "  Create edge " << e3 << " - " << startid << "\n";
              CreateSpring(e3, startid);
  
             p = CreateParticle();
+            m_numVerts++;
             int p1id = p->GetId(); 
             p->SetPos(p1);
 
             p = CreateParticle();
+            m_numVerts++;
             int p2id = p->GetId(); 
             p->SetPos(p2);
 
@@ -415,19 +465,21 @@ std::cout << "  Create edge " << e1 << " - " << p1id << "\n";
              CreateSpring(e1, p1id);
 std::cout << "  Create edge " << e2 << " - " << p2id << "\n";
              CreateSpring(e2, p2id);
+
+             FillTriHoles(tr1->m_normal, *tr1, edgep1, edgep2, startid);
           } 
           else
           {
-            // Remove this tri.
-
-            // This is a 'mid-cut' segment, i.e. between 2 tri edges, 
-            //  join old p1 to new p1, and old p2 to new p2.
+            // This is a 'mid-cut' segment, i.e. between 2 tri edges.
+            //  Join old p1 to new p1, and old p2 to new p2. These may cross, so uncross if necessary.
             // start is in the prev tri, cp is in the new tri.
             Particle* p = CreateParticle();
+            m_numVerts++;
             int p1id = p->GetId(); 
             p->SetPos(p1);
 
             p = CreateParticle();
+            m_numVerts++;
             int p2id = p->GetId(); 
             p->SetPos(p2);
 
@@ -441,11 +493,6 @@ std::cout << "  Create edge " << e2 << " - " << p2id << "\n";
              CreateSpring(e2, p2id);
 
             // Create edges across tri from prev edge to new edge
-            // TODO
-            //  They must not cross over!
-            // TODO How to sort this out? Test if the line segs cross?
-            //  They should be more or less parallel.
-
             // Swap verts if the edges cross
             LineSeg closest;
             float mua, mub;
@@ -461,6 +508,44 @@ std::cout << "Found crossing edges, mua: " << mua << " mub: " << mub << "\n";
             CreateSpring(edgep1, p1id);
             CreateSpring(edgep2, p2id);
 
+            // Fill holes: 
+            // Find out which edge is on the triangle, which is on the quad.
+            const Tri& tr = *(cp.m_tri);
+            if (GetSpring(edgep1, tr.m_particles[0]) && GetSpring(p1id, tr.m_particles[0]))
+            {
+              // edgep1 - p1id - tr.m_particles[0] is the triangle.
+              AddTriWithWinding(tr.m_normal, Tri(edgep1, p1id, tr.m_particles[0]));
+              // edgep2 - p2id -   tr.m_particles[1] - tr.m_particles[2] is a quad.
+              AddQuad(tr.m_normal, edgep2, p2id, tr.m_particles[1], tr.m_particles[2]);
+            }
+            else if (GetSpring(edgep1, tr.m_particles[1]) && GetSpring(p1id, tr.m_particles[1]))
+            {
+              AddTriWithWinding(tr.m_normal, Tri(edgep1, p1id, tr.m_particles[1]));
+              AddQuad(tr.m_normal, edgep2, p2id, tr.m_particles[0], tr.m_particles[2]);
+            }
+            else if (GetSpring(edgep1, tr.m_particles[2]) && GetSpring(p1id, tr.m_particles[2]))
+            {
+              AddTriWithWinding(tr.m_normal, Tri(edgep1, p1id, tr.m_particles[2]));
+              AddQuad(tr.m_normal, edgep2, p2id, tr.m_particles[0], tr.m_particles[1]);
+            }
+            else // edgep1 - p1id is an edge on the quad
+            if (GetSpring(edgep2, tr.m_particles[0]) && GetSpring(p2id, tr.m_particles[0]))
+            {
+              AddTriWithWinding(tr.m_normal, Tri(edgep2, p2id, tr.m_particles[0]));
+              AddQuad(tr.m_normal, edgep1, p1id, tr.m_particles[1], tr.m_particles[2]);
+            }
+            else if (GetSpring(edgep2, tr.m_particles[1]) && GetSpring(p2id, tr.m_particles[1]))
+            {
+              AddTriWithWinding(tr.m_normal, Tri(edgep2, p2id, tr.m_particles[1]));              
+              AddQuad(tr.m_normal, edgep1, p1id, tr.m_particles[0], tr.m_particles[2]);
+            }
+            else
+            {
+              Assert(GetSpring(edgep2, tr.m_particles[2]) && GetSpring(p2id, tr.m_particles[2]));
+              AddTriWithWinding(tr.m_normal, Tri(edgep2, p2id, tr.m_particles[2]));
+              AddQuad(tr.m_normal, edgep1, p1id, tr.m_particles[1], tr.m_particles[0]);
+            }
+
             // store the new points on the edge. Connect to the next pair of
             //  (or single) particle we create
             edgep1 = p1id;
@@ -475,7 +560,6 @@ std::cout << "Found crossing edges, mua: " << mua << " mub: " << mub << "\n";
   const CutPoint& end = cutline.back();
   m_edgePoints.push_back(EdgePoint(end.m_pos, end.m_tri, Edge(-1, -1)));
 
-/*
   for (auto it = m_edgePoints.begin(); it != m_edgePoints.end(); ++it)
   {
     EdgePoint& ep = *it;
@@ -485,7 +569,6 @@ std::cout << "Found crossing edges, mua: " << mua << " mub: " << mub << "\n";
     }
     ep.m_tri = nullptr;
   }
-*/
 }
 
 void Squishy::EndCut(const LineSeg&, float cutDepth)
@@ -671,6 +754,7 @@ void Squishy::Draw()
     MultColour(Colour(1, 1, 1, 0.8f));
 
     // TODO TEMP TEST 
+    glEnable(GL_CULL_FACE); 
     glBegin(GL_TRIANGLES);
 
     for (auto it = m_trilist.begin(); it != m_trilist.end(); ++it)
@@ -730,11 +814,11 @@ void Squishy::Draw()
   glPointSize(3);
   PushColour();
   MultColour(Colour(0, 1, 0, 1));
-  for (int i = 0; i < m_cutLines.size(); i++)
+  for (int i = 0; i < (int)m_cutLines.size(); i++)
   {
     glBegin(GL_POINTS);
     CutLine& cl = m_cutLines[i];
-    for (int j = 0; j < cl.size(); j++)
+    for (int j = 0; j < (int)cl.size(); j++)
     {
       CutPoint& cp = cl[j];
       glVertex3f(cp.m_pos.x, cp.m_pos.y, cp.m_pos.z);
@@ -743,6 +827,8 @@ void Squishy::Draw()
   }
 
   glColor3f(1, 1, 1);
+  // Draw simplified line ?
+  /*
   glBegin(GL_LINE_STRIP);
   for (int i = 0; i < m_edgePoints.size(); i++)
   {
@@ -750,6 +836,7 @@ void Squishy::Draw()
     glVertex3f(v.x, v.y, v.z);
   }
   glEnd();
+  */
 
   PopColour();
 }
@@ -758,9 +845,45 @@ void Squishy::AddForce(const Vec3f& pos, const Vec3f& dir)
 {
 }
   
+// p1 - p4 are verts on a quad but not necessarily in either winding order.
+// Find the topology and fill in one of the two diagonals, then fill in the holes with tris.
+void Squishy::AddQuad(const Vec3f& normal, int p1, int p2, int p3, int p4)
+{
+  if (GetSpring(p1, p2))
+  {
+    if (GetSpring(p2, p3))
+    {
+      Assert(GetSpring(p3, p4));
+      Assert(GetSpring(p4, p1));
+      CreateSpring(p1, p3); // or (p2, p4) would work. TODO Decide on best one - shortest length?
+      AddTriWithWinding(normal, Tri(p1, p2, p3)); 
+      AddTriWithWinding(normal, Tri(p1, p3, p4)); 
+    }
+  }
+}
+
 void Squishy::AddTri(const Tri& tri)
 {
   m_trilist.insert(new Tri(tri));
+}
+
+void Squishy::AddTriWithWinding(const Vec3f& normal, Tri tri)
+{
+  Assert(GetParticle(tri.m_particles[0]));
+  Assert(GetParticle(tri.m_particles[1]));
+  Assert(GetParticle(tri.m_particles[2]));
+
+  const Vec3f& p0 = GetParticle(tri.m_particles[0])->GetPos();
+  const Vec3f& p1 = GetParticle(tri.m_particles[1])->GetPos();
+  const Vec3f& p2 = GetParticle(tri.m_particles[2])->GetPos();
+
+  Vec3f triNorm = CrossProduct(p1 - p0, p2 - p0);
+  triNorm.Normalise(); // ? necessary ?
+  if (DotProduct(normal, triNorm) < 0)
+  {
+    std::swap(tri.m_particles[0], tri.m_particles[1]); // flip winding order
+  }
+  AddTri(tri);
 }
 
 }
