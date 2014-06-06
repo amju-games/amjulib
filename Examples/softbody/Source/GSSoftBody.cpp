@@ -10,6 +10,7 @@ static float yrot = 0;
 static float xrot = 0;
 static bool dragleft = false;
 static bool dragright = false;
+static bool dragmiddle = false;
 static Vec2f mousePos;
 static bool isCameraButton = false;
 static bool isZoomButton = false;
@@ -122,6 +123,11 @@ bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
     xrot += -ce.dy * 100.0f;
     yrot +=  ce.dx * 100.0f;
   }
+  
+  if (dragmiddle)
+  {
+    zoom += ce.dy * 10.0f;
+  }
 
   return false;
 }
@@ -137,6 +143,7 @@ bool GSSoftBody::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   }
   else if (z)
   {
+    dragmiddle = mbe.isDown;
   }
   else // left
   {
