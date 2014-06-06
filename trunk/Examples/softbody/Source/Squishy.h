@@ -113,6 +113,14 @@ protected:
   void FillTri1(const Vec3f& normal, int centre, int p1, int p2, int e1, int e2);
   void FillTriHoles(const Vec3f& normal, const Squishy::Tri& tr, int e1, int e2, int centre);
   void AddTriWithWinding(const Vec3f& normal, Tri tri);
+
+  // Tesselate quad and add triangles to fill the holes.
+  // p1 and p2 should be connected (asserts). p3 and p4 are the other 2 verts of a quad, so they
+  // should also be connected (asserts). 
+  // BUT we don't know about the other edges. I.e. the quad could be 
+  //   p1-p2-p3-p4-p1 
+  // OR 
+  //   p1-p2-p4-p3-p1.
   void AddQuad(const Vec3f& normal, int p1, int p2, int p3, int p4);
 
   // Volume of squishy when initialised

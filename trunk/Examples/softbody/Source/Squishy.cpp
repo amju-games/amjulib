@@ -391,8 +391,8 @@ std::cout << "Finding edge between 2 tris: TR1: " << *tr1 << " TR2: " << *tr2 <<
           m_edgePoints.push_back(EdgePoint(closest.p0, cp.m_tri, Edge(e1, e2)));
           // Make two points, close to each other
           Vec3f dir = triEdge.p1 - triEdge.p0;
-          Vec3f p1 = triEdge.p0 + dir * (0.9f * mua); // TODO
-          Vec3f p2 = triEdge.p0 + dir * (1.1f * mua);
+          Vec3f p1 = triEdge.p0 + dir * (0.95f * mua); // TODO
+          Vec3f p2 = triEdge.p0 + dir * (1.05f * mua);
           // If this is the first segment in the cut line, this is the start 
           //  of the cut - v shaped.
           // Connect the start point to p1 and p2. 
@@ -510,7 +510,7 @@ std::cout << "Found crossing edges, mua: " << mua << " mub: " << mub << "\n";
 
             // Fill holes: 
             // Find out which edge is on the triangle, which is on the quad.
-            const Tri& tr = *(cp.m_tri);
+            const Tri& tr = *(start.m_tri);
             if (GetSpring(edgep1, tr.m_particles[0]) && GetSpring(p1id, tr.m_particles[0]))
             {
               // edgep1 - p1id - tr.m_particles[0] is the triangle.
@@ -753,10 +753,9 @@ void Squishy::Draw()
     PushColour();
     MultColour(Colour(1, 1, 1, 0.8f));
 
-    // TODO TEMP TEST 
     glEnable(GL_CULL_FACE); 
-    glBegin(GL_TRIANGLES);
 
+    glBegin(GL_TRIANGLES);
     for (auto it = m_trilist.begin(); it != m_trilist.end(); ++it)
     {
       Tri* tri = *it;
@@ -849,16 +848,35 @@ void Squishy::AddForce(const Vec3f& pos, const Vec3f& dir)
 // Find the topology and fill in one of the two diagonals, then fill in the holes with tris.
 void Squishy::AddQuad(const Vec3f& normal, int p1, int p2, int p3, int p4)
 {
-  if (GetSpring(p1, p2))
+  // Tesselate quad and add triangles to fill the holes.
+  // p1 and p2 should be connected (asserts). p3 and p4 are the other 2 verts of a quad, but we
+  //  don't know about the other edges. I.e. the quad could be p1-p2-p3-p4-p1 OR p1-p2-p4-p3-p1.
+
+  Assert(GetSpring(p1, p2));
+  Assert(GetSpring(p3, p4)); // the other two verts must be connected, right?
+
+  if (GetSpring(p2, p3))
   {
-    if (GetSpring(p2, p3))
-    {
-      Assert(GetSpring(p3, p4));
-      Assert(GetSpring(p4, p1));
-      CreateSpring(p1, p3); // or (p2, p4) would work. TODO Decide on best one - shortest length?
-      AddTriWithWinding(normal, Tri(p1, p2, p3)); 
-      AddTriWithWinding(normal, Tri(p1, p3, p4)); 
-    }
+    Assert(GetSpring(p4, p1)); 
+
+    CreateSpring(p1, p3); // or (p2, p4) would work. TODO Decide on best one - shortest length?
+    
+    // p1 and p2 are connected; p2 and p3 are connected; p3 and p1 are connected
+    AddTriWithWinding(normal, Tri(p1, p2, p3)); 
+
+    // p1 and p3 are connected;  p3 and p4 are connected; p4 and p1 are connected
+    AddTriWithWinding(normal, Tri(p1, p3, p4)); 
+  }
+  else
+  {
+    Assert(GetSpring(p2, p4));
+
+    Assert(GetSpring(p3, p1));
+
+    CreateSpring(p1, p4); // or (p2, p3) would work. TODO Decide on best one - shortest length?
+
+    AddTriWithWinding(normal, Tri(p1, p2, p4)); 
+    AddTriWithWinding(normal, Tri(p1, p3, p4)); 
   }
 }
 
