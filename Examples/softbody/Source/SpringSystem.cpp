@@ -47,7 +47,16 @@ int SpringSystem::CreateSpring(int particleId1, int particleId2)
   }
 
   int n = m_springs.size();
-  m_springs.push_back(new Spring(n, GetParticle(particleId1), GetParticle(particleId2)));
+  spr = new Spring(n, GetParticle(particleId1), GetParticle(particleId2));
+  m_springs.push_back(spr);
+
+  // We have just set the natural length of the spring.
+  // Set the min and max lengths based on this.
+  // TODO This is a property of the squishy thing
+  float natLen = spr->GetNaturalLength();
+  // TODO TEMP TEST
+  spr->SetMaxLength(natLen * 1.5f);
+  spr->SetMinLength(natLen * 0.7f);
   return n;
 }
 
