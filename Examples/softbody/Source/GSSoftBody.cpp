@@ -14,7 +14,7 @@ static bool dragmiddle = false;
 static Vec2f mousePos;
 static bool isCameraButton = false;
 static bool isZoomButton = false;
-static float zoom = 30;
+static float zoom = 3000;
 
 enum CutMode { CUT_NONE, CUT_START, CUT_CONTINUE, CUT_END };
 static CutMode cutmode = CUT_NONE;
@@ -47,7 +47,7 @@ void GSSoftBody::Draw()
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
-  AmjuGL::SetPerspectiveProjection(45.0f, 1.3f, 1.0f, 1000.0f); //FOVY, ASPECT, NEAR, FAR);
+  AmjuGL::SetPerspectiveProjection(45.0f, 1.3f, 1.0f, 10000.0f); //FOVY, ASPECT, NEAR, FAR);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
@@ -101,7 +101,7 @@ void GSSoftBody::OnActive()
 
   // K value is how soft/tough
   const float K = 1.0f; // TODO
-  const std::string filename = "bean.obj"; // crate2.obj
+  const std::string filename = "teapot.obj"; //bean.obj"; // crate2.obj
 
   //Particle::SetGravity(Vec3f(0, -1, 0));
 
@@ -126,7 +126,8 @@ bool GSSoftBody::OnCursorEvent(const CursorEvent& ce)
   
   if (dragmiddle)
   {
-    zoom += ce.dy * 10.0f;
+//    zoom += ce.dy * 10.0f;
+    zoom *= (1.0f + ce.dy * 0.1f);
   }
 
   return false;
