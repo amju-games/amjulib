@@ -14,7 +14,7 @@ static bool dragmiddle = false;
 static Vec2f mousePos;
 static bool isCameraButton = false;
 static bool isZoomButton = false;
-static float zoom = 3000;
+static float zoom = 30;
 
 enum CutMode { CUT_NONE, CUT_START, CUT_CONTINUE, CUT_END };
 static CutMode cutmode = CUT_NONE;
@@ -101,7 +101,7 @@ void GSSoftBody::OnActive()
 
   // K value is how soft/tough
   const float K = 1.0f; // TODO
-  const std::string filename = "teapot.obj"; //bean.obj"; // crate2.obj
+  const std::string filename = "bean.obj"; //teapot.obj"; //bean.obj"; 
 
   //Particle::SetGravity(Vec3f(0, -1, 0));
 

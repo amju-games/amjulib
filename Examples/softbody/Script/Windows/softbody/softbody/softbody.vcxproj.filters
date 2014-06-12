@@ -39,6 +39,9 @@
     <ClCompile Include="..\..\..\..\Source\IntersectLine3Line3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\ContinuousSquishy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Particle.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\IntersectLine3Line3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\ContinuousSquishy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
