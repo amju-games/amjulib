@@ -41,7 +41,16 @@ void ContinuousSquishy::ContinueCut(const LineSeg& seg, float cutDepth)
   if (m_isCutting)
   {
     // Yes, we are cutting
+
+    // Get direction from old endpoint to new endpoint. Is this the same direction as before, or are
+    //  we changing direction?
+
+
     // Reposition the moving verts
+    Vec3f newEndPos = cutpoints[0].m_pos;
+    Particle* p = GetParticle(m_spearhead[0]);
+    Assert(p);
+    p->SetPos(newEndPos);
 //std::cout << "Cutting.... repositioning spearhead of cut..\n";
 
     // Has this vert crossed an edge?
@@ -116,8 +125,12 @@ std::cout << "Making hole!\n";
 
   int startId = AddNewParticle(start.m_pos);
   int endId = AddNewParticle(end.m_pos);
-  int midId = AddNewParticle(midpos);
+  int midId1 = AddNewParticle(midpos);
+  int midId2 = AddNewParticle(midpos);
 
+  m_spearhead[0] = endId;
+  m_spearhead[1] = midId1;
+  m_spearhead[2] = midId2;
 }
 
 }
