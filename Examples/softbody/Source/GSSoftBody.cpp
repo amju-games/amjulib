@@ -1,7 +1,7 @@
 #include <ResourceManager.h>
 #include <Unproject.h>
 #include "GSSoftbody.h"
-#include "Squishy.h"
+#include "ContinuousSquishy.h"
 
 namespace Amju
 {
@@ -105,7 +105,7 @@ void GSSoftBody::OnActive()
 
   //Particle::SetGravity(Vec3f(0, -1, 0));
 
-  sq = new Squishy;
+  sq = new ContinuousSquishy;
   if (!sq->Init(filename, K))
   {
     std::cout << "Failed to initialise squishy from obj mesh!\n";

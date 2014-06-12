@@ -88,9 +88,9 @@ public:
   // Tesselates triangles, adding more particles and springs. Adds triangles to make
   //  'wall' of cut
   // Line seg is formed by two points along the line given by the mouse position 
-  void StartCut(const LineSeg&, float cutDepth);
-  void ContinueCut(const LineSeg&, float cutDepth);
-  void EndCut(const LineSeg&, float cutDepth);
+  virtual void StartCut(const LineSeg&, float cutDepth);
+  virtual void ContinueCut(const LineSeg&, float cutDepth);
+  virtual void EndCut(const LineSeg&, float cutDepth);
 
   struct CutPoint
   {
@@ -168,4 +168,27 @@ protected:
   typedef std::vector<EdgePoint> EdgePoints;
   EdgePoints m_edgePoints;
 };
-}
+
+
+/*
+Ray-Tri Intersection
+Adapted from http://www.lighthouse3d.com/tutorials/maths/ray-triangle-intersection/
+Moller-Haines algorithm
+*/
+int rayIntersectsTriangle(
+  const Vec3f& p, const Vec3f& d, 
+  const Vec3f& v0, const Vec3f& v1, const Vec3f& v2,
+  Vec3f* intersectionPoint);
+
+std::ostream& operator<<(std::ostream& os, const Vec3f& v);
+
+std::ostream& operator<<(std::ostream& os, const Squishy::Tri& tri);
+
+void PrintTri(const Squishy::Tri& tri);
+
+int ThirdVert(const Squishy::Tri& tr, int e1, int e2);
+
+bool CommonEdge(const Squishy::Tri& tr1, const Squishy::Tri& tr2, int* v1, int* v2);
+
+} // namespace Amju
+

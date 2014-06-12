@@ -29,8 +29,9 @@ public:
   // Spring already exists between two particles? Returns Spring or nullptr
   Spring* GetSpring(int particleId1, int particleId2);
 
-  // Just erases the spring
-  void EraseSpring(int particleId1, int particleId2);
+  // Just erases the spring - returns true if spring existed and was deleted,
+  //  false if no such spring.
+  bool EraseSpring(int particleId1, int particleId2);
 
   // Erase particle and all springs which connect to it
   void EraseParticle(int particleId);
