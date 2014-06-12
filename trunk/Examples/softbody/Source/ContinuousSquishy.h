@@ -19,6 +19,10 @@ protected:
 protected:
   CutPoint m_startCutPoint;
   bool m_isCutting; // once cut started and we have moved min distance
+
+  // IDs of the 3 particles forming the leading (bleeding!) end of the cut.
+  // Element 0 is the end point, elements 1 and 2 are connected to the end point.
+  int m_spearhead[3];
 };
 }
 

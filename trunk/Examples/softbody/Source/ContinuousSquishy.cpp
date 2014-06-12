@@ -42,7 +42,7 @@ void ContinuousSquishy::ContinueCut(const LineSeg& seg, float cutDepth)
   {
     // Yes, we are cutting
     // Reposition the moving verts
-std::cout << "Cutting.... repositioning spearhead of cut..\n";
+//std::cout << "Cutting.... repositioning spearhead of cut..\n";
 
     // Has this vert crossed an edge?
 
@@ -55,7 +55,7 @@ std::cout << "Cutting.... repositioning spearhead of cut..\n";
     const CutPoint& cp = cutpoints[0];
     float sqdist = (cp.m_pos - m_startCutPoint.m_pos).SqLen();
 
-std::cout << "Sq dist: " << sqdist << "\n";
+//std::cout << "Sq dist: " << sqdist << "\n";
 
     if (sqdist > MIN_SQ_DIST_TO_START_CUTTING)
     {
@@ -113,6 +113,11 @@ std::cout << "Making hole!\n";
       midpos = cutpoints[0].m_pos;
     }
   }
+
+  int startId = AddNewParticle(start.m_pos);
+  int endId = AddNewParticle(end.m_pos);
+  int midId = AddNewParticle(midpos);
+
 }
 
 }

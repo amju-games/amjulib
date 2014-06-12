@@ -123,6 +123,9 @@ protected:
   //   p1-p2-p4-p3-p1.
   void AddQuad(const Vec3f& normal, int p1, int p2, int p3, int p4);
 
+  // Add particle at given pos, returns ID of new particle.
+  int AddNewParticle(const Vec3f& pos);
+
   // Volume of squishy when initialised
   float m_volume;
 
