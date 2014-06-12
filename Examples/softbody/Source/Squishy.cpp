@@ -287,6 +287,15 @@ void Squishy::FillTriHoles(const Vec3f& normal, const Squishy::Tri& tr, int e1, 
   FillTri1(normal, centre, tr.m_particles[2], tr.m_particles[0], e1, e2);
 }
 
+int Squishy::AddNewParticle(const Vec3f& pos)
+{
+  Particle* p = CreateParticle();
+  m_numVerts++;
+  int id = p->GetId(); 
+  p->SetPos(pos);
+  return id;
+}
+
 void Squishy::CutInto(const CutLine& cutline)
 {
 std::cout << "Cutting...\n";
