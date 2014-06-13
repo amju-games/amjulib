@@ -37,6 +37,11 @@ Particle* SpringSystem::CreateParticle()
   return p;
 }
 
+void SpringSystem::GetSprings(int particleId, SpringSet* springs)
+{
+  *springs = m_springMap[particleId];
+}
+
 int SpringSystem::CreateSpring(int particleId1, int particleId2)
 {
   Spring* spr = GetSpring(particleId1, particleId2);
@@ -49,6 +54,10 @@ int SpringSystem::CreateSpring(int particleId1, int particleId2)
   int n = m_springs.size();
   spr = new Spring(n, GetParticle(particleId1), GetParticle(particleId2));
   m_springs.push_back(spr);
+
+  // Add this spring to the map of springs connected to each particle
+  m_springMap[particleId1].insert(spr);
+  m_springMap[particleId2].insert(spr);
 
   // We have just set the natural length of the spring.
   // Set the min and max lengths based on this.
@@ -66,6 +75,10 @@ bool SpringSystem::EraseSpring(int particleId1, int particleId2)
   if (spr)
   {
     m_springs.erase(std::remove(m_springs.begin(), m_springs.end(), spr), m_springs.end());
+
+    m_springMap[particleId1].erase(spr);
+    m_springMap[particleId2].erase(spr);
+ 
     return true;
   }
   return false;
@@ -73,6 +86,8 @@ bool SpringSystem::EraseSpring(int particleId1, int particleId2)
 
 void SpringSystem::EraseParticle(int particleId)
 {
+  // TODO
+  Assert(0);
 }
 
 Spring* SpringSystem::GetSpring(int particleId1, int particleId2)

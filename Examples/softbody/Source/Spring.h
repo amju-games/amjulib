@@ -1,6 +1,7 @@
 #ifndef SPRING_H
 #define SPRING_H
 
+#include <set>
 #include <vector>
 #include <RCPtr.h>
 #include <OBB3.h>
@@ -61,6 +62,8 @@ private:
 
 typedef RCPtr<Spring> PSpring;
 typedef std::vector<PSpring> Springs;
+
+typedef std::set<PSpring> SpringSet;
 }
 
 #endif
