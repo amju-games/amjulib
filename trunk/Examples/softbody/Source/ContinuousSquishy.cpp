@@ -1,8 +1,19 @@
+#include <DegRad.h>
 #include "ContinuousSquishy.h"
 
 namespace Amju
 {
-static const float MIN_SQ_DIST_TO_START_CUTTING = 1.0f; // TODO TEMP TEST
+// TODO TEMP TEST, value depends on scale of mesh.
+// TODO Work it out based on bounding volume size maybe?
+static const float MIN_SQ_DIST_TO_START_CUTTING = 0.2f; 
+
+// When theta is larger than this, we treat the movement as a change in direction
+static const float DIR_CHANGE_THRESH_THETA_RADIANS = DegToRad(30.0f);
+static const float DIR_CHANGE_THRESH = cos(DIR_CHANGE_THRESH_THETA_RADIANS); 
+
+static const float MIN_MOVE_SQ_DIST = 0.01f;
+
+static const float HOLE_SIZE = MIN_SQ_DIST_TO_START_CUTTING * 0.5f; 
 
 ContinuousSquishy::ContinuousSquishy() : m_isCutting(false)
 {
@@ -42,33 +53,90 @@ void ContinuousSquishy::ContinueCut(const LineSeg& seg, float cutDepth)
   {
     // Yes, we are cutting
 
-    // Get direction from old endpoint to new endpoint. Is this the same direction as before, or are
-    //  we changing direction?
-
-
-    // Reposition the moving verts
     Vec3f newEndPos = cutpoints[0].m_pos;
     Particle* p = GetParticle(m_spearhead[0]);
     Assert(p);
-    p->SetPos(newEndPos);
-//std::cout << "Cutting.... repositioning spearhead of cut..\n";
+    Vec3f oldEndPos = p->GetPos();
+    // Get direction from old endpoint to new endpoint. Is this the same direction as before, or are
+    //  we changing direction?
+    Vec3f cutDir = newEndPos - oldEndPos;
+    if (cutDir.SqLen() > MIN_MOVE_SQ_DIST)
+    {
+      // Reposition the end point
+      // NOT: 
+      p->SetPos(newEndPos);
+      // We have to use Reposition so the springs are updated - right??
 
-    // Has this vert crossed an edge?
+      Vec3f cutDirNormalised = cutDir;
+      cutDirNormalised.Normalise();
 
-    // Should we check if we should change direction?
+      // Compare with previous value, m_cutDir
+      float dp = DotProduct(cutDirNormalised, m_cutDir);
+      Assert(dp <=  1.00001f); // bah, fp precision
+      Assert(dp >= -1.00001f);
+      if (dp < DIR_CHANGE_THRESH)
+      {
+std::cout << "Direction change!\n";
+        // Create new verts which are the new spearhead
+
+        // Get the perpendicular to the cut, same as when we made the hole.
+        //Vec3f perp = CrossProduct(cutpoints[0].m_tri->m_normal, cutDirNormalised);
+        //perp.Normalise();
+        //perp *= HOLE_SIZE;
+
+        // TODO Rotate spearhead to face new direction
+
+        // Don't change the spearhead particle IDs. Add new particles and connect
+        // edges between the spearheads and what they used to connect to.
+        int midId1 = AddNewParticle(GetParticle(m_spearhead[1])->GetPos()); 
+        int midId2 = AddNewParticle(GetParticle(m_spearhead[2])->GetPos()); 
+        AddEdgeAndTesselate(midId1, m_spearhead[1]);
+        AddEdgeAndTesselate(m_spearhead[2], midId2);
+      
+        // Remove old edges m_following[0] -> m_spearhead[1] and m_following[1] -> m_spearhead[2]
+        EraseSpring(m_following[0], m_spearhead[1]);
+        EraseSpring(m_following[1], m_spearhead[2]);
+        // Erasing these edges won't change topology, it just means these edges won't 
+        //  change any more.
+
+        // Add new edges from m_following[0] -> midId1 and m_following[1] -> midId2
+        AddEdgeAndTesselate(m_following[0], midId1);
+        AddEdgeAndTesselate(m_following[1], midId2);
+
+        m_following[0] = midId1;
+        m_following[1] = midId2;
+
+        // Now the new cut dir is stored for next time
+        m_cutDir = cutDirNormalised;
+      }
+      else
+      {
+        // No direction change. Reposition the other 2 spearhead verts
+        //  (we already moved the end point).
+        // NB Make sure we actually put these points the correct distance
+        //  behind the end point, not just the difference between 2 cursor
+        //  events. TODO
+        Reposition(m_spearhead[1], cutDir);
+        Reposition(m_spearhead[2], cutDir);
+
+      }
+    }
   }
   else
   {
     // Not cutting yet, the cursor has not moved far enough.
     // Get distance travelled from the start pos - large enough to start cutting?
     const CutPoint& cp = cutpoints[0];
-    float sqdist = (cp.m_pos - m_startCutPoint.m_pos).SqLen();
+    Vec3f dir = cp.m_pos - m_startCutPoint.m_pos;
+    float sqdist = dir.SqLen();
 
 //std::cout << "Sq dist: " << sqdist << "\n";
 
     if (sqdist > MIN_SQ_DIST_TO_START_CUTTING)
     {
       m_isCutting = true;
+      m_cutDir = dir;
+      m_cutDir.Normalise();
 
       // If we can start cutting, make the hexagonal hole. Remember the verts
       //  which will now move with the cursor
@@ -81,9 +149,57 @@ void ContinuousSquishy::EndCut(const LineSeg&, float cutDepth)
 {
 std::cout << "Finished!\n";
 
-  m_isCutting = false;
+  if (!m_isCutting)
+  {
+    // Make minimum size hole
+    // TODO
+  }
 
-  // Do we actually need to do anything here? :-)
+  m_isCutting = false;
+}
+
+// Move the particle given by its ID, by the change in position vector.
+// Make sure the new position is on the mesh surface.
+// If we have crossed edges, tessellate as required (this will need extra info)
+void ContinuousSquishy::Reposition(int id, const Vec3f& posChange)
+{
+  Particle* p = GetParticle(id);
+  Assert(p);
+  Vec3f pos = p->GetPos();
+  pos += posChange;
+  // TODO Make sure we are on surface.
+  // TODO Have we crossed any edges? If so, tesselate.
+  p->SetPos(pos);  
+
+  // Adjust natural/min/max lengths of springs attached to this particle!
+  // TODO
+  SpringSet ss;
+  GetSprings(id, &ss);
+  Assert(!ss.empty()); // there must be springs attached, right?
+  for (auto it = ss.begin(); it != ss.end(); ++it)
+  {
+    Spring* spr = *it;
+    Particle* p1 = spr->GetParticle(0);
+    Particle* p2 = spr->GetParticle(1);
+    Assert(p1 == p || p2 == p);
+    spr->ConnectToParticles(p1, p2); // recalcs natural len
+
+    float natLen = spr->GetNaturalLength();
+    // TODO TEMP TEST
+    spr->SetMaxLength(natLen * 1.5f);
+    spr->SetMinLength(natLen * 0.7f);
+  }
+}
+
+void ContinuousSquishy::AddEdgeAndTesselate(int startId, int endId)
+{
+  int sprId = CreateSpring(startId, endId);
+  Spring* spr = GetSpring(sprId);
+
+  float natLen = spr->GetNaturalLength();
+  // TODO TEMP TEST
+  spr->SetMaxLength(natLen * 1.5f);
+  spr->SetMinLength(natLen * 0.7f);
 }
 
 void ContinuousSquishy::MakeHole(
@@ -95,17 +211,19 @@ std::cout << "Making hole!\n";
 
   // Tessellate the tri - connect new vert to tri corners
 
-
+  Vec3f cutDir = end.m_pos - start.m_pos;
   Vec3f midpos = (start.m_pos + end.m_pos) * 0.5f;
   Tri* midTri = start.m_tri;
+  Vec3f normal = midTri->m_normal; // normal to surface at mid point of hole
   if (start.m_tri != end.m_tri)
   {
     // Find the tri on which midpos lies - cast in dir of avg normal
-    Vec3f avgNorm = (start.m_tri->m_normal + end.m_tri->m_normal) * 0.5f;
-    avgNorm.Normalise(); // really necessary?
+    normal = (start.m_tri->m_normal + end.m_tri->m_normal) * 0.5f;
+    normal.Normalise(); 
+
     static const float SEG_LENGTH = 2.0f; // How do we know how long to make the 'search' seg?
     // (We don't want to find a tri in front or behind!)
-    LineSeg seg(midpos + avgNorm * SEG_LENGTH, midpos - avgNorm * SEG_LENGTH);
+    LineSeg seg(midpos + normal * SEG_LENGTH, midpos - normal * SEG_LENGTH);
     CutPoints cutpoints;
     GetCutPoints(seg, &cutpoints);
     if (cutpoints.empty())
@@ -117,20 +235,61 @@ std::cout << "Making hole!\n";
     {
       midTri = cutpoints[0].m_tri;
       std::cout << "Found mid pos, adjusting from " << midpos << " to " << cutpoints[0].m_pos << "\n";
-      // Make sure we are tri surface, this would hopefully be a small adjustment, 
+      // Make sure we are on tri surface, this would hopefully be a small adjustment, 
       //  but depends on scale of mesh I guess.
       midpos = cutpoints[0].m_pos;
     }
   }
 
+  // Get the perpendicular to the cut - we have got the cut dir and normal, 
+  //  so cross these two.
+  // Use this to make some distance between the cut edges - although this 
+  //  introduces problems, as now the hole could contain tris.
+  // Let's assume the hole size is much smaller than the size of the tris.
+  Vec3f perp = CrossProduct(normal, cutDir);
+  perp.Normalise();
+  perp *= HOLE_SIZE;
+
   int startId = AddNewParticle(start.m_pos);
   int endId = AddNewParticle(end.m_pos);
-  int midId1 = AddNewParticle(midpos);
-  int midId2 = AddNewParticle(midpos);
+  int midId1 = AddNewParticle(midpos + perp);
+  int midId2 = AddNewParticle(midpos - perp);
 
   m_spearhead[0] = endId;
   m_spearhead[1] = midId1;
   m_spearhead[2] = midId2;
+
+  // Create the non-moving pair of the inner 4 verts.
+  // Connect to start pos, tessellating as required.
+  int midId3 = AddNewParticle(midpos + perp);
+  int midId4 = AddNewParticle(midpos - perp);
+  m_following[0] = midId3;
+  m_following[1] = midId4;
+
+  // Add edges - tesselating on one side, so we end up with a hole.
+  AddEdgeAndTesselate(startId, midId3);
+  AddEdgeAndTesselate(midId3, midId1);
+  AddEdgeAndTesselate(midId1, endId);
+  AddEdgeAndTesselate(endId, midId2);
+  AddEdgeAndTesselate(midId2, midId4);
+  AddEdgeAndTesselate(midId4, startId);
+
+/*        3  1
+          +--+
+         /    \
+  start +      + end
+         \    /
+          +--+
+          4  2 
+*/
+
+  // And now add the inside walls of the cut
+  // TODO
+
+  // TODO 
+  // And put a spring between these points, to push the cut apart. Yuck.
+  // (Maybe the start positions need some non-zero distance between them.)
+
 }
 
 }

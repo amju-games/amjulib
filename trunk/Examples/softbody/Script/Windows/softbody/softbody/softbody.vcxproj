@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\jason\projects\amjulib\Build\amjulib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\jason\projects\amjulib\Build\amjulib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\..\..\..\Build\amjulib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\..\..\..\Build\amjulib\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
