@@ -22,8 +22,7 @@ protected:
   void Reposition(int id, const Vec3f& posChange);
 
   // Add edge connecting the two particles given by their IDs.
-  // Tessellate on one side ("Left") 
-  void AddEdgeAndTesselate(int startId, int endId);
+  void AddEdge(int startId, int endId);
 
 protected:
   CutPoint m_startCutPoint;
