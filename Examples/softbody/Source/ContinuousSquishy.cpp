@@ -90,8 +90,8 @@ std::cout << "Direction change!\n";
         // edges between the spearheads and what they used to connect to.
         int midId1 = AddNewParticle(GetParticle(m_spearhead[1])->GetPos()); 
         int midId2 = AddNewParticle(GetParticle(m_spearhead[2])->GetPos()); 
-        AddEdgeAndTesselate(midId1, m_spearhead[1]);
-        AddEdgeAndTesselate(m_spearhead[2], midId2);
+        AddEdge(midId1, m_spearhead[1]);
+        AddEdge(m_spearhead[2], midId2);
       
         // Remove old edges m_following[0] -> m_spearhead[1] and m_following[1] -> m_spearhead[2]
         EraseSpring(m_following[0], m_spearhead[1]);
@@ -100,8 +100,8 @@ std::cout << "Direction change!\n";
         //  change any more.
 
         // Add new edges from m_following[0] -> midId1 and m_following[1] -> midId2
-        AddEdgeAndTesselate(m_following[0], midId1);
-        AddEdgeAndTesselate(m_following[1], midId2);
+        AddEdge(m_following[0], midId1);
+        AddEdge(m_following[1], midId2);
 
         m_following[0] = midId1;
         m_following[1] = midId2;
@@ -191,7 +191,7 @@ void ContinuousSquishy::Reposition(int id, const Vec3f& posChange)
   }
 }
 
-void ContinuousSquishy::AddEdgeAndTesselate(int startId, int endId)
+void ContinuousSquishy::AddEdge(int startId, int endId)
 {
   int sprId = CreateSpring(startId, endId);
   Spring* spr = GetSpring(sprId);
@@ -250,6 +250,16 @@ std::cout << "Making hole!\n";
   perp.Normalise();
   perp *= HOLE_SIZE;
 
+  Vec3f holeVert[6] = 
+  {
+    start.m_pos,
+    midpos + perp, // TODO also offset along cut dir
+    midpos - perp,
+    midpos + perp, // TODO also offset along cut dir
+    midpos - perp,
+    end.m_pos
+  };
+
   int startId = AddNewParticle(start.m_pos);
   int endId = AddNewParticle(end.m_pos);
   int midId1 = AddNewParticle(midpos + perp);
@@ -267,12 +277,12 @@ std::cout << "Making hole!\n";
   m_following[1] = midId4;
 
   // Add edges - tesselating on one side, so we end up with a hole.
-  AddEdgeAndTesselate(startId, midId3);
-  AddEdgeAndTesselate(midId3, midId1);
-  AddEdgeAndTesselate(midId1, endId);
-  AddEdgeAndTesselate(endId, midId2);
-  AddEdgeAndTesselate(midId2, midId4);
-  AddEdgeAndTesselate(midId4, startId);
+  AddEdge(startId, midId3);
+  AddEdge(midId3, midId1);
+  AddEdge(midId1, endId);
+  AddEdge(endId, midId2);
+  AddEdge(midId2, midId4);
+  AddEdge(midId4, startId);
 
 /*        3  1
           +--+
@@ -282,6 +292,36 @@ std::cout << "Making hole!\n";
           +--+
           4  2 
 */
+
+  // Tessellate around the hole.
+  // (We are assuming the hole is in ONE tri)
+  // For each tri vert, 
+  //   For each hole vert,
+  //     Connect these 2 verts if there is LOS between them, i.e. we don't cross
+  //     one of the hole edges.
+  LineSeg holeEdges[6] = 
+  {
+    LineSeg(holeVert[0], holeVert[1]),
+    LineSeg(holeVert[1], holeVert[2]),
+    LineSeg(holeVert[2], holeVert[3]),
+    LineSeg(holeVert[3], holeVert[4]),
+    LineSeg(holeVert[4], holeVert[5]),
+    LineSeg(holeVert[5], holeVert[0])
+  };
+  int holeVertId[6] = 
+  {
+    startId, midId3, midId1, endId, midId2, midId4
+  };
+  for (int i = 0; i < 3; i++)
+  {
+    int triVertId = midTri->m_particles[i];
+    Vec3f triVertPos = GetParticle(triVertId)->GetPos();
+
+    for (int j = 0; j < 6; j++)
+    {
+      AddEdge(triVertId, holeVertId[j]);
+    }
+  }
 
   // And now add the inside walls of the cut
   // TODO
