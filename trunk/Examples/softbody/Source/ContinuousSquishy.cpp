@@ -1,5 +1,6 @@
 #include <DegRad.h>
 #include "ContinuousSquishy.h"
+#include "IntersectLine3Line3.h"
 
 namespace Amju
 {
@@ -13,7 +14,7 @@ static const float DIR_CHANGE_THRESH = cos(DIR_CHANGE_THRESH_THETA_RADIANS);
 
 static const float MIN_MOVE_SQ_DIST = 0.01f;
 
-static const float HOLE_SIZE = MIN_SQ_DIST_TO_START_CUTTING * 0.5f; 
+static const float HOLE_SIZE = MIN_SQ_DIST_TO_START_CUTTING * 0.75f; 
 
 ContinuousSquishy::ContinuousSquishy() : m_isCutting(false)
 {
@@ -202,6 +203,23 @@ void ContinuousSquishy::AddEdge(int startId, int endId)
   spr->SetMinLength(natLen * 0.7f);
 }
 
+static bool Intersects(const LineSeg& seg1, const LineSeg& seg2)
+{
+  LineSeg closest; 
+  float mua = 0, mub = 0; // t values along segments 
+  const float MIN_MU = 0.001f;
+  const float MAX_MU = 0.999f;
+  if (Intersects(seg1, seg2, &closest, &mua, &mub))
+  {
+    if (mua > MIN_MU && mua < MAX_MU && mub > MIN_MU && mub < MAX_MU)
+    {
+std::cout << "Found intersect, mua: " << mua << " mub: " << mub << "\n";
+      return true;
+    }
+  }
+  return false;
+}
+
 void ContinuousSquishy::MakeHole(
   const ContinuousSquishy::CutPoint& start, const ContinuousSquishy::CutPoint& end)
 {
@@ -213,6 +231,9 @@ std::cout << "Making hole!\n";
 
   Vec3f cutDir = end.m_pos - start.m_pos;
   Vec3f midpos = (start.m_pos + end.m_pos) * 0.5f;
+  Vec3f cutDirNorm = cutDir;
+  cutDirNorm.Normalise();
+
   Tri* midTri = start.m_tri;
   Vec3f normal = midTri->m_normal; // normal to surface at mid point of hole
   if (start.m_tri != end.m_tri)
@@ -253,17 +274,17 @@ std::cout << "Making hole!\n";
   Vec3f holeVert[6] = 
   {
     start.m_pos,
-    midpos + perp, // TODO also offset along cut dir
-    midpos - perp,
-    midpos + perp, // TODO also offset along cut dir
-    midpos - perp,
+    midpos + perp - cutDirNorm * HOLE_SIZE, // TODO also offset along cut dir
+    midpos - perp - cutDirNorm * HOLE_SIZE,
+    midpos + perp + cutDirNorm * HOLE_SIZE, 
+    midpos - perp + cutDirNorm * HOLE_SIZE,
     end.m_pos
   };
 
-  int startId = AddNewParticle(start.m_pos);
-  int endId = AddNewParticle(end.m_pos);
-  int midId1 = AddNewParticle(midpos + perp);
-  int midId2 = AddNewParticle(midpos - perp);
+  int startId = AddNewParticle(holeVert[0]);
+  int endId = AddNewParticle(holeVert[5]);
+  int midId1 = AddNewParticle(holeVert[1]);
+  int midId2 = AddNewParticle(holeVert[2]);
 
   m_spearhead[0] = endId;
   m_spearhead[1] = midId1;
@@ -271,8 +292,8 @@ std::cout << "Making hole!\n";
 
   // Create the non-moving pair of the inner 4 verts.
   // Connect to start pos, tessellating as required.
-  int midId3 = AddNewParticle(midpos + perp);
-  int midId4 = AddNewParticle(midpos - perp);
+  int midId3 = AddNewParticle(holeVert[3]);
+  int midId4 = AddNewParticle(holeVert[4]);
   m_following[0] = midId3;
   m_following[1] = midId4;
 
@@ -319,7 +340,21 @@ std::cout << "Making hole!\n";
 
     for (int j = 0; j < 6; j++)
     {
-      AddEdge(triVertId, holeVertId[j]);
+      bool yesEdge = true;
+      // Add edge if it will not cross an edge of the hole
+      LineSeg testEdge(triVertPos, holeVert[j]);
+      for (int k = 0; k < 6; k++)
+      {
+        if (Intersects(holeEdges[k], testEdge)) 
+        {
+          yesEdge = false;
+          break;
+        }
+      }
+      if (yesEdge)
+      {
+        AddEdge(triVertId, holeVertId[j]);
+      }
     }
   }
 
