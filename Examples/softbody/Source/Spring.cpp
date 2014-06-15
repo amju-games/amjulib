@@ -117,17 +117,23 @@ void Spring::Update()
   // If max spring length exceeded, pull ends together
   if (len > m_maxLength)
   {
-      float dist = (len - m_maxLength) * 0.5f; // move each end this dist
-      Vec3f moveVec = v * dist;
-      m_particles[0]->Move(-moveVec);
-      m_particles[1]->Move(moveVec);
+std::cout << "Spring exceeds max length (" << m_maxLength << ")\n";
+
+    // TODO Take masses into account!
+    float dist = (len - m_maxLength) * 0.5f; // move each end this dist
+    Vec3f moveVec = v * dist;
+    m_particles[0]->Move(-moveVec);
+    m_particles[1]->Move(moveVec);
   }
   else if (len < m_minLength)
   {
-      float dist = (len - m_minLength) * 0.5f; // move each end this dist
-      Vec3f moveVec = v * dist;
-      m_particles[0]->Move(-moveVec);
-      m_particles[1]->Move(moveVec);
+std::cout << "Spring under min length (" << m_minLength << ")\n";
+    // TODO Take masses into account!
+
+    float dist = (len - m_minLength) * 0.5f; // move each end this dist
+    Vec3f moveVec = v * dist;
+    m_particles[0]->Move(-moveVec);
+    m_particles[1]->Move(moveVec);
   }
 
   /*

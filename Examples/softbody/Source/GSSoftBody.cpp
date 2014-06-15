@@ -14,7 +14,7 @@ static bool dragmiddle = false;
 static Vec2f mousePos;
 static bool isCameraButton = false;
 static bool isZoomButton = false;
-static float zoom = 30;
+static float zoom = 20;
 
 enum CutMode { CUT_NONE, CUT_START, CUT_CONTINUE, CUT_END };
 static CutMode cutmode = CUT_NONE;
