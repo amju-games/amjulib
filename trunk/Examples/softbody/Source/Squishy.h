@@ -78,6 +78,7 @@ public:
 
     bool m_selected;
   };
+  typedef RCPtr<Tri> PTri;
 
   void AddTri(const Tri& tri);
   
@@ -95,7 +96,7 @@ public:
   struct CutPoint
   {
     Vec3f m_pos;
-    Tri* m_tri;
+    PTri m_tri;
     float m_depth; // distance behind tri we should cut to
   };
 
@@ -165,7 +166,7 @@ protected:
     }
 
     Vec3f m_pos;
-    Tri* m_tri;  
+    PTri m_tri;  
     Edge m_edge;
   };
   typedef std::vector<EdgePoint> EdgePoints;

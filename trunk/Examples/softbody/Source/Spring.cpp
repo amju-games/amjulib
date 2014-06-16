@@ -64,12 +64,16 @@ float Spring::GetNaturalLength() const
 
 void Spring::SetNaturalLength(float len)
 {
+
     m_naturalLength = len;
 }
 
 void Spring::SetMaxLength(float maxLen)
 {
-    m_maxLength = maxLen;
+  // TODO This is currently the case when we add new verts to a cut
+  
+  //Assert(maxLen > 0);
+  m_maxLength = maxLen;
 }
 
 void Spring::SetMinLength(float minLen)
