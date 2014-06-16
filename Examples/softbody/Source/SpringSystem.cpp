@@ -7,7 +7,7 @@ void SpringSystem::Update()
 {
   for (unsigned int i = 0; i < m_springs.size(); i++)
   {
-    m_springs[i]->Update();
+//    m_springs[i]->Update();
   }
 
   for (unsigned int i = 0; i < m_particles.size(); i++)

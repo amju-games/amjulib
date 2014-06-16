@@ -17,7 +17,7 @@ namespace Amju
 {
 Vec3f Particle::GRAVITY;
 
-float Particle::DRAW_RADIUS = 0.1f; 
+float Particle::DRAW_RADIUS = 0.02f; 
 
 void Particle::SetDrawRadius(float r)
 {
