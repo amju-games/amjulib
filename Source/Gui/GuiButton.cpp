@@ -106,10 +106,12 @@ void GuiButton::OnGetFocus()
 
 void GuiButton::TextToSpeech()
 {
+#ifdef AMJU_TEXT_TO_SPEECH
   if (!m_guiText.GetText().empty())
   {
     Amju::TextToSpeech(m_guiText.GetText());
   }
+#endif
 }
 
 void GuiButton::SetOnPressedDownFunc(CommandFunc f)
