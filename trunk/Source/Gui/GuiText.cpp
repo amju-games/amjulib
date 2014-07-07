@@ -53,10 +53,12 @@ float GuiText::GetScaleX() const
 
 void GuiText::TextToSpeech()
 {
+#ifdef AMJU_TEXT_TO_SPEECH
   if (!m_text.empty())
   {
     Amju::TextToSpeech(m_text);
   }
+#endif
 }
 
 void GuiText::SizeToText()

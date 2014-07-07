@@ -1,3 +1,4 @@
+#ifdef AMJU_TEXT_TO_SPEECH
 #include <AmjuFirst.h>
 #include "TextToSpeech.h"
 
@@ -92,3 +93,5 @@ void TextToSpeech(const std::string& text)
   spinit.Speak(text);
 }
 }
+
+#endif // AMJU_TEXT_TO_SPEECH
