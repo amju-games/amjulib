@@ -84,7 +84,6 @@
   <ItemGroup>
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
-    <Library Include="..\..\..\..\..\..\..\..\..\SDL\lib\SDL.lib" />
     <Library Include="..\..\..\..\..\Build\Debug\AmjuLibMsvc.lib" />
   </ItemGroup>
   <ItemGroup>
