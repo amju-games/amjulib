@@ -307,20 +307,16 @@ int ToInt(const std::string& s)
   return atoi(s.c_str());
 }
 
-std::string Replace(
-  const std::string& s, 
-  const std::string& replaceThis, 
-  const std::string& replaceWithThis)
+std::string Replace(const std::string& str1, const std::string& oldStr, const std::string& newStr)
 {
-  std::string r(s);
-  size_t j;
-  int length = replaceThis.length();
-
-  while ((j = r.find(replaceThis)) != std::string::npos)
+  std::string str(str1);
+  size_t pos = 0;
+  while ((pos = str.find(oldStr, pos)) != std::string::npos)
   {
-    r.replace(j, length, replaceWithThis);
+    str.replace(pos, oldStr.length(), newStr);
+    pos += newStr.length();
   }
-  return r;
+  return str;
 }
 
 Strings Split(const std::string& cs, char c)
