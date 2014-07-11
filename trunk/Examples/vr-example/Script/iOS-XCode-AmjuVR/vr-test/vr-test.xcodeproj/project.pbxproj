@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		690607C1196DB79C00A8AA3E /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690607BD196DB79C00A8AA3E /* ViewController_iPad.xib */; };
+		690607C2196DB79C00A8AA3E /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690607BF196DB79C00A8AA3E /* ViewController_iPhone.xib */; };
+		690607C4196DB86900A8AA3E /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 690607C3196DB86900A8AA3E /* data-iphone.glue */; };
+		690607C6196E87F300A8AA3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690607C5196E87F300A8AA3E /* CoreLocation.framework */; };
+		690863D4196DA4B10027C0A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D3196DA4B10027C0A0 /* Foundation.framework */; };
+		690863D6196DA4B10027C0A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D5196DA4B10027C0A0 /* CoreGraphics.framework */; };
+		690863D8196DA4B10027C0A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D7196DA4B10027C0A0 /* UIKit.framework */; };
+		690863DA196DA4B10027C0A0 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D9196DA4B10027C0A0 /* GLKit.framework */; };
+		690863DC196DA4B10027C0A0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863DB196DA4B10027C0A0 /* OpenGLES.framework */; };
+		690863E2196DA4B10027C0A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 690863E0196DA4B10027C0A0 /* InfoPlist.strings */; };
+		690863EB196DA4B10027C0A0 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 690863E9196DA4B10027C0A0 /* Main_iPhone.storyboard */; };
+		690863EE196DA4B10027C0A0 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 690863EC196DA4B10027C0A0 /* Main_iPad.storyboard */; };
+		690863F0196DA4B10027C0A0 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 690863EF196DA4B10027C0A0 /* Shader.fsh */; };
+		690863F2196DA4B10027C0A0 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 690863F1196DA4B10027C0A0 /* Shader.vsh */; };
+		690863F7196DA4B10027C0A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 690863F6196DA4B10027C0A0 /* Images.xcassets */; };
+		690863FE196DA4B20027C0A0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863FD196DA4B20027C0A0 /* XCTest.framework */; };
+		690863FF196DA4B20027C0A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D3196DA4B10027C0A0 /* Foundation.framework */; };
+		69086400196DA4B20027C0A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690863D7196DA4B10027C0A0 /* UIKit.framework */; };
+		69086408196DA4B20027C0A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69086406196DA4B20027C0A0 /* InfoPlist.strings */; };
+		6908640A196DA4B20027C0A0 /* vr_testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69086409196DA4B20027C0A0 /* vr_testTests.m */; };
+		69086416196DA5480027C0A0 /* GSVr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69086413196DA5480027C0A0 /* GSVr.cpp */; };
+		69086417196DA5480027C0A0 /* Startup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69086415196DA5480027C0A0 /* Startup.cpp */; };
+		6908641D196DA5780027C0A0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69086419196DA5780027C0A0 /* AppDelegate.mm */; };
+		6908641E196DA5780027C0A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6908641A196DA5780027C0A0 /* main.m */; };
+		6908641F196DA5780027C0A0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6908641C196DA5780027C0A0 /* ViewController.mm */; };
+		69086421196DA5C10027C0A0 /* libamju.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69086420196DA5C10027C0A0 /* libamju.a */; };
+		69086423196DA5D10027C0A0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69086422196DA5D00027C0A0 /* CoreMotion.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69086401196DA4B20027C0A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 690863C8196DA4B10027C0A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 690863CF196DA4B10027C0A0;
+			remoteInfo = "vr-test";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		690607BE196DB79C00A8AA3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		690607C0196DB79C00A8AA3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		690607C3196DB86900A8AA3E /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../../Build/vr-example/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
+		690607C5196E87F300A8AA3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		690863D0196DA4B10027C0A0 /* vr-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "vr-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		690863D3196DA4B10027C0A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		690863D5196DA4B10027C0A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		690863D7196DA4B10027C0A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		690863D9196DA4B10027C0A0 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		690863DB196DA4B10027C0A0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		690863DF196DA4B10027C0A0 /* vr-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vr-test-Info.plist"; sourceTree = "<group>"; };
+		690863E1196DA4B10027C0A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		690863E5196DA4B10027C0A0 /* vr-test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vr-test-Prefix.pch"; sourceTree = "<group>"; };
+		690863EA196DA4B10027C0A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		690863ED196DA4B10027C0A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		690863EF196DA4B10027C0A0 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		690863F1196DA4B10027C0A0 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		690863F6196DA4B10027C0A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		690863FC196DA4B20027C0A0 /* vr-testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "vr-testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		690863FD196DA4B20027C0A0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		69086405196DA4B20027C0A0 /* vr-testTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vr-testTests-Info.plist"; sourceTree = "<group>"; };
+		69086407196DA4B20027C0A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		69086409196DA4B20027C0A0 /* vr_testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vr_testTests.m; sourceTree = "<group>"; };
+		69086413196DA5480027C0A0 /* GSVr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSVr.cpp; path = ../../../../Source/GSVr.cpp; sourceTree = "<group>"; };
+		69086414196DA5480027C0A0 /* GSVr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSVr.h; path = ../../../../Source/GSVr.h; sourceTree = "<group>"; };
+		69086415196DA5480027C0A0 /* Startup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Startup.cpp; path = ../../../../Source/Startup.cpp; sourceTree = "<group>"; };
+		69086418196DA5780027C0A0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "../../../../../../Source/Main/iOS-ES2/AppDelegate.h"; sourceTree = "<group>"; };
+		69086419196DA5780027C0A0 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "../../../../../../Source/Main/iOS-ES2/AppDelegate.mm"; sourceTree = "<group>"; };
+		6908641A196DA5780027C0A0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "../../../../../../Source/Main/iOS-ES2/main.m"; sourceTree = "<group>"; };
+		6908641B196DA5780027C0A0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = "../../../../../../Source/Main/iOS-ES2/ViewController.h"; sourceTree = "<group>"; };
+		6908641C196DA5780027C0A0 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = "../../../../../../Source/Main/iOS-ES2/ViewController.mm"; sourceTree = "<group>"; };
+		69086420196DA5C10027C0A0 /* libamju.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamju.a; path = "../../../../../Releases/amjulib-v.0.3-ios/lib/libamju.a"; sourceTree = "<group>"; };
+		69086422196DA5D00027C0A0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		690863CD196DA4B10027C0A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690607C6196E87F300A8AA3E /* CoreLocation.framework in Frameworks */,
+				690863DC196DA4B10027C0A0 /* OpenGLES.framework in Frameworks */,
+				69086423196DA5D10027C0A0 /* CoreMotion.framework in Frameworks */,
+				69086421196DA5C10027C0A0 /* libamju.a in Frameworks */,
+				690863D6196DA4B10027C0A0 /* CoreGraphics.framework in Frameworks */,
+				690863D8196DA4B10027C0A0 /* UIKit.framework in Frameworks */,
+				690863DA196DA4B10027C0A0 /* GLKit.framework in Frameworks */,
+				690863D4196DA4B10027C0A0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		690863F9196DA4B20027C0A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690863FE196DA4B20027C0A0 /* XCTest.framework in Frameworks */,
+				69086400196DA4B20027C0A0 /* UIKit.framework in Frameworks */,
+				690863FF196DA4B20027C0A0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		690863C7196DA4B10027C0A0 = {
+			isa = PBXGroup;
+			children = (
+				690863DD196DA4B10027C0A0 /* vr-test */,
+				69086403196DA4B20027C0A0 /* vr-testTests */,
+				690863D2196DA4B10027C0A0 /* Frameworks */,
+				690863D1196DA4B10027C0A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		690863D1196DA4B10027C0A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				690863D0196DA4B10027C0A0 /* vr-test.app */,
+				690863FC196DA4B20027C0A0 /* vr-testTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		690863D2196DA4B10027C0A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				690607C5196E87F300A8AA3E /* CoreLocation.framework */,
+				69086422196DA5D00027C0A0 /* CoreMotion.framework */,
+				69086420196DA5C10027C0A0 /* libamju.a */,
+				690863D3196DA4B10027C0A0 /* Foundation.framework */,
+				690863D5196DA4B10027C0A0 /* CoreGraphics.framework */,
+				690863D7196DA4B10027C0A0 /* UIKit.framework */,
+				690863D9196DA4B10027C0A0 /* GLKit.framework */,
+				690863DB196DA4B10027C0A0 /* OpenGLES.framework */,
+				690863FD196DA4B20027C0A0 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		690863DD196DA4B10027C0A0 /* vr-test */ = {
+			isa = PBXGroup;
+			children = (
+				69086418196DA5780027C0A0 /* AppDelegate.h */,
+				69086419196DA5780027C0A0 /* AppDelegate.mm */,
+				6908641A196DA5780027C0A0 /* main.m */,
+				6908641B196DA5780027C0A0 /* ViewController.h */,
+				6908641C196DA5780027C0A0 /* ViewController.mm */,
+				69086413196DA5480027C0A0 /* GSVr.cpp */,
+				69086414196DA5480027C0A0 /* GSVr.h */,
+				69086415196DA5480027C0A0 /* Startup.cpp */,
+				690863E9196DA4B10027C0A0 /* Main_iPhone.storyboard */,
+				690863EC196DA4B10027C0A0 /* Main_iPad.storyboard */,
+				690863EF196DA4B10027C0A0 /* Shader.fsh */,
+				690863F1196DA4B10027C0A0 /* Shader.vsh */,
+				690863F6196DA4B10027C0A0 /* Images.xcassets */,
+				690863DE196DA4B10027C0A0 /* Supporting Files */,
+			);
+			path = "vr-test";
+			sourceTree = "<group>";
+		};
+		690863DE196DA4B10027C0A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				690607C3196DB86900A8AA3E /* data-iphone.glue */,
+				690607BD196DB79C00A8AA3E /* ViewController_iPad.xib */,
+				690607BF196DB79C00A8AA3E /* ViewController_iPhone.xib */,
+				690863DF196DA4B10027C0A0 /* vr-test-Info.plist */,
+				690863E0196DA4B10027C0A0 /* InfoPlist.strings */,
+				690863E5196DA4B10027C0A0 /* vr-test-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		69086403196DA4B20027C0A0 /* vr-testTests */ = {
+			isa = PBXGroup;
+			children = (
+				69086409196DA4B20027C0A0 /* vr_testTests.m */,
+				69086404196DA4B20027C0A0 /* Supporting Files */,
+			);
+			path = "vr-testTests";
+			sourceTree = "<group>";
+		};
+		69086404196DA4B20027C0A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				69086405196DA4B20027C0A0 /* vr-testTests-Info.plist */,
+				69086406196DA4B20027C0A0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		690863CF196DA4B10027C0A0 /* vr-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6908640D196DA4B20027C0A0 /* Build configuration list for PBXNativeTarget "vr-test" */;
+			buildPhases = (
+				690863CC196DA4B10027C0A0 /* Sources */,
+				690863CD196DA4B10027C0A0 /* Frameworks */,
+				690863CE196DA4B10027C0A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "vr-test";
+			productName = "vr-test";
+			productReference = 690863D0196DA4B10027C0A0 /* vr-test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		690863FB196DA4B20027C0A0 /* vr-testTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69086410196DA4B20027C0A0 /* Build configuration list for PBXNativeTarget "vr-testTests" */;
+			buildPhases = (
+				690863F8196DA4B20027C0A0 /* Sources */,
+				690863F9196DA4B20027C0A0 /* Frameworks */,
+				690863FA196DA4B20027C0A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69086402196DA4B20027C0A0 /* PBXTargetDependency */,
+			);
+			name = "vr-testTests";
+			productName = "vr-testTests";
+			productReference = 690863FC196DA4B20027C0A0 /* vr-testTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		690863C8196DA4B10027C0A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Amju Games";
+				TargetAttributes = {
+					690863FB196DA4B20027C0A0 = {
+						TestTargetID = 690863CF196DA4B10027C0A0;
+					};
+				};
+			};
+			buildConfigurationList = 690863CB196DA4B10027C0A0 /* Build configuration list for PBXProject "vr-test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 690863C7196DA4B10027C0A0;
+			productRefGroup = 690863D1196DA4B10027C0A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				690863CF196DA4B10027C0A0 /* vr-test */,
+				690863FB196DA4B20027C0A0 /* vr-testTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		690863CE196DA4B10027C0A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690863F0196DA4B10027C0A0 /* Shader.fsh in Resources */,
+				690863EE196DA4B10027C0A0 /* Main_iPad.storyboard in Resources */,
+				690863EB196DA4B10027C0A0 /* Main_iPhone.storyboard in Resources */,
+				690607C2196DB79C00A8AA3E /* ViewController_iPhone.xib in Resources */,
+				690607C1196DB79C00A8AA3E /* ViewController_iPad.xib in Resources */,
+				690863F7196DA4B10027C0A0 /* Images.xcassets in Resources */,
+				690863E2196DA4B10027C0A0 /* InfoPlist.strings in Resources */,
+				690607C4196DB86900A8AA3E /* data-iphone.glue in Resources */,
+				690863F2196DA4B10027C0A0 /* Shader.vsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		690863FA196DA4B20027C0A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69086408196DA4B20027C0A0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		690863CC196DA4B10027C0A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6908641E196DA5780027C0A0 /* main.m in Sources */,
+				6908641F196DA5780027C0A0 /* ViewController.mm in Sources */,
+				69086417196DA5480027C0A0 /* Startup.cpp in Sources */,
+				6908641D196DA5780027C0A0 /* AppDelegate.mm in Sources */,
+				69086416196DA5480027C0A0 /* GSVr.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		690863F8196DA4B20027C0A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6908640A196DA4B20027C0A0 /* vr_testTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69086402196DA4B20027C0A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 690863CF196DA4B10027C0A0 /* vr-test */;
+			targetProxy = 69086401196DA4B20027C0A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		690607BD196DB79C00A8AA3E /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690607BE196DB79C00A8AA3E /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		690607BF196DB79C00A8AA3E /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690607C0196DB79C00A8AA3E /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		690863E0196DA4B10027C0A0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690863E1196DA4B10027C0A0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		690863E9196DA4B10027C0A0 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690863EA196DA4B10027C0A0 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		690863EC196DA4B10027C0A0 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690863ED196DA4B10027C0A0 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		69086406196DA4B20027C0A0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69086407196DA4B20027C0A0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6908640B196DA4B20027C0A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6908640C196DA4B20027C0A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6908640E196DA4B20027C0A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vr-test/vr-test-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_DEBUG,
+					AMJU_IOS,
+					IPHONE,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/include",
+				);
+				INFOPLIST_FILE = "vr-test/vr-test-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6908640F196DA4B20027C0A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vr-test/vr-test-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/include",
+				);
+				INFOPLIST_FILE = "vr-test/vr-test-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		69086411196DA4B20027C0A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/vr-test.app/vr-test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vr-test/vr-test-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "vr-testTests/vr-testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		69086412196DA4B20027C0A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/vr-test.app/vr-test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vr-test/vr-test-Prefix.pch";
+				INFOPLIST_FILE = "vr-testTests/vr-testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		690863CB196DA4B10027C0A0 /* Build configuration list for PBXProject "vr-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6908640B196DA4B20027C0A0 /* Debug */,
+				6908640C196DA4B20027C0A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6908640D196DA4B20027C0A0 /* Build configuration list for PBXNativeTarget "vr-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6908640E196DA4B20027C0A0 /* Debug */,
+				6908640F196DA4B20027C0A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69086410196DA4B20027C0A0 /* Build configuration list for PBXNativeTarget "vr-testTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69086411196DA4B20027C0A0 /* Debug */,
+				69086412196DA4B20027C0A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 690863C8196DA4B10027C0A0 /* Project object */;
+}
