@@ -11,6 +11,7 @@ extern const char* AMJU_ES2_DEFAULT_SHADER_COLOUR;
 extern const char* AMJU_ES2_DEFAULT_SHADER_TEXTURE;
 extern const char* AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING;
 extern const char* AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP;
+extern const char* AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR;
   
 // Attrib variables
 extern const char* AMJU_ES2_DEFAULT_SHADER_POSITION;

@@ -227,8 +227,13 @@ void GLShader::Begin()
   AMJU_CALL_STACK;
 
   // Don't call glUseProgram if we are already using it
-  if (prevHandle != m_programHandle)
+  // - not reliable
+  //if (prevHandle != m_programHandle)
   {
+    //std::cout << "Using shader program " << m_programHandle << "\n";
+    
+    AmjuGL::UseShader(this);
+    
     glUseProgram(m_programHandle);
     prevHandle = m_programHandle;
   }
@@ -239,6 +244,7 @@ void GLShader::End()
   AMJU_CALL_STACK;
 
   prevHandle = 0;
+  AmjuGL::UseShader(0);
   glUseProgram(0);
 }
   
