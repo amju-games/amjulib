@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined (AMJU_IOS) || defined (ANDROID_NDK)
+
 namespace Amju
 {
 class RenderDepthToTexture
@@ -19,4 +21,6 @@ public:
   bool End();
 };
 }
+
+#endif
 

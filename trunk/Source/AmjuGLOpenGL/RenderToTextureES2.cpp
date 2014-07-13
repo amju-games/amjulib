@@ -1,3 +1,5 @@
+#if defined(AMJU_IOS) || defined (ANDROID_NDK)
+
 #include <iostream>
 #include <AmjuGL.h>
 #include "RenderToTextureES2.h"
@@ -112,6 +114,8 @@ bool RenderToTextureES2::End()
   
   return true;
 }
-
 }
+
+#endif
+
 
