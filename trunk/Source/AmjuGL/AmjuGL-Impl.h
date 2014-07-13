@@ -117,6 +117,7 @@ public:
     const AmjuGL::Vec3& lightPos) = 0;
 
   virtual Shader* LoadShader(const std::string& shaderFileName) = 0;
+  virtual void UseShader(Shader*) = 0;
 
   virtual Drawable* Create(int) = 0;
 }; // class 
