@@ -93,6 +93,7 @@ public:
   virtual void GetScreenshot(unsigned char* buffer, int w, int h);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
+  virtual void UseShader(Shader*);
 
   virtual void SetTextureType(AmjuGL::TextureType tt);
 

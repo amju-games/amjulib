@@ -629,6 +629,19 @@ Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
 
   return 0;
 }
+
+void AmjuGLOpenGL::UseShader(Shader* sh)
+{
+  if (sh)
+  {
+    Assert(dynamic_cast<GLShader*>(sh));
+    glUseProgram(((GLShader*)sh)->GetProgHandle());
+  }  
+  else
+  {
+    glUseProgram(0);
+  }
+}
 }
 
 #endif // defined (WIN32) || defined (MACOSX)
