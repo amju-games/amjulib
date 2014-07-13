@@ -45,10 +45,10 @@ void StartUpAfterCreateWindow()
 {
   TheGame::Instance()->SetCurrentState(TheGSVr::Instance());
 
-  TheResourceManager::Instance()->AddLoader("font", FontLoader);
-  Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
-  Assert(font);
-  TheGame::Instance()->SetFrameTimeFont(font);
+  //TheResourceManager::Instance()->AddLoader("font", FontLoader);
+  //Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
+  //Assert(font);
+  //TheGame::Instance()->SetFrameTimeFont(font);
 }
 }
 
