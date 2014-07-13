@@ -8,11 +8,12 @@
 
 #import "ViewController.h"
 
-#include <AmjuGL/AmjuGL.h>
-#include <AmjuGL/Screen.h>
-#include <AmjuGLOpenGL/AmjuGL-OpenGLES.2.h>
-#include <Events/EventPoller.h>
-#include <Game/Game.h>
+#include <AmjuGL.h>
+#include <Screen.h>
+#include <AmjuGL-OpenGLES.2.h>
+#include <EventPoller.h>
+#include <Game.h>
+#include <DegRad.h>
 #include <StartUp.h>
 
 // Accelerom poll freq - j.c. - http://www.appcoda.com/ios-maze-game-tutorial-accelerometer/
@@ -72,7 +73,22 @@
        [(id) self setAcceleration:accelerometerData.acceleration];
        [self performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
      }];
- 
+  
+    // j.c. compass - http://www.devfright.com/how-to-use-the-iphone-digital-compass-in-your-app/
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingHeading];
+    // Not reqd here: this starts up getting actual location
+    //  [self.locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+  Amju::RotationEvent* r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_X; // TODO Sort out - this should be Y axis
+  r->degs = DegToRad(newHeading.magneticHeading) * -1.0f; 
+  QueueEvent(r);
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,8 +119,8 @@
     
     std::cout << "Set AmjuGL impl...\n";
     
-    Amju::AmjuGL::Init();
     Amju::StartUpBeforeCreateWindow();
+    Amju::AmjuGL::Init();
     Amju::StartUpAfterCreateWindow();
   
     Amju::TheGame::Instance()->Update();  // must Update once before Draw
@@ -126,32 +142,51 @@ void QueueEvent(Amju::Event* e)
 {
   // j.c. send accelerom events but TODO only if changed
 
-   const float kFilteringFactor = 0.1;
-   static float accel[3] = { 0, 0, 0 };
+  const float kFilteringFactor = 0.1;
+  static float accel[3] = { 0, 0, 0 };
    
-   accel[0] = self.acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
-   accel[1] = self.acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
-   accel[2] = self.acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
+  accel[0] = self.acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
+  accel[1] = self.acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
+  accel[2] = self.acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
    
-   // accel[0] corresponds to tilting forward/back, i.e. rotation about x-axis when in landscape mode
-   // accel[1] corresponds to z-rotation, like twisting a Wii remote
+  // accel[0] corresponds to tilting forward/back, i.e. rotation about x-axis when in landscape mode
+  // accel[1] corresponds to z-rotation, like twisting a Wii remote
   
    // This is for LANDSCAPE mode
 //   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[1], accel[0]);
 
-   // This is for PORTRAIT mode
-   Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[0], accel[2]);
+  // This is for PORTRAIT mode
+  Amju::BalanceBoardEvent* be = new Amju::BalanceBoardEvent(accel[0], accel[2]);
 
    // TODO This depends on iphone orientation
 //   be->x = accel[1];
 //   be->y = accel[0];
+  
+#ifdef ACCELEROM_DEBUG
+  std::cout << "ACCEL: X: " << accel[0] << " Y: " << accel[1] << " Z: " << accel[2] << "\n";
+#endif
    
-   #ifdef ACCELEROM_DEBUG
-   std::cout << "ACCEL: X: " << accel[0] << " Y: " << accel[1] << " Z: " << accel[2] << "\n";
-   #endif
-   
-   QueueEvent(be);
-   
+  QueueEvent(be);
+  
+  // Also queue rotation events. The axes depend on the phone orientation.
+  Amju::RotationEvent* r = 0;
+  // Y axis is taken care of by compass
+//  r = new Amju::RotationEvent;
+//  r->controller = 0;
+//  r->axis = Amju::AMJU_AXIS_X;
+//  r->degs = accel[0];
+//  QueueEvent(r);
+  r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_Y;
+  r->degs = accel[1];
+  QueueEvent(r);
+  r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_Z;
+  r->degs = accel[2];
+  QueueEvent(r);
+  
   Amju::TheGame::Instance()->Update();
 }
 
