@@ -1,6 +1,9 @@
 #include <AmjuGL.h>
 #include <Timer.h>
-#include <OpenGL/gl.h>
+#ifdef WIN32
+#include <gl/glew.h>
+#include <GL/gl.h>
+#endif
 #include <Shader.h>
 #include <Matrix.h>
 #include <ResourceManager.h>
@@ -32,10 +35,10 @@ void GSTerrain::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
-  const float NEAR = 1.0f;
-  const float FAR = 3000.0f;
+  const float NEARDIST = 1.0f; // NEAR and FAR are #defined in Windows, nice one.
+  const float FARDIST = 3000.0f;
   float aspect = 1.3f;
-  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEAR, FAR);
+  AmjuGL::SetPerspectiveProjection(FOVY, aspect, NEARDIST, FARDIST);
 
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
