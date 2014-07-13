@@ -15,7 +15,15 @@ using namespace OVR;
 namespace Amju
 {
 static ovrHmd Hmd;
-
+ovrHmdDesc HmdDesc;
+ovrEyeRenderDesc    EyeRenderDesc[2];
+Matrix4f            Projection[2];
+// Projection matrix for eye.
+Matrix4f            OrthoProjection[2];
+// Projection for 2D.
+ovrTexture          EyeTexture[2];
+Sizei               EyeRenderSize[2]; 
+// Saved render eye sizes; base for dynamic 
 
 const Vec3f ORIG_VIEW_DIR(0, 0, -1);
 const Vec3f ORIG_UP_DIR(0, 1, 0);
@@ -245,8 +253,25 @@ void GSVr::OnActive()
 {
   ovr_Initialize();
 
-Hmd = ovrHmd_Create(0);
+  Hmd = ovrHmd_Create(0);
+  if (!Hmd)
+  {
+    // If we didn't detect an Hmd, create a simulated one for debugging.
+    Hmd = ovrHmd_CreateDebug(ovrHmd_DK1);
+    //UsingDebugHmd = true;
+    if (Hmd)
+    {
+      std::cout << "Using debug HMD.\n";
+    }
+    else
+    {
+      std::cout << "Failed to create HMD.\n";
+      exit(0);
+    }
+  }
 
+  // Get more details about the HMD.
+  ovrHmd_GetDesc(Hmd, &HmdDesc);
 
   ResourceManager* rm = TheResourceManager::Instance();
   rm->AddLoader("obj", TextObjLoader);
