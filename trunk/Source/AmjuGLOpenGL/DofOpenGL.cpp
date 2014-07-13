@@ -15,6 +15,7 @@ void DofOpenGL::Draw()
 bool DofOpenGL::Init() 
 {
   //renderToTexture.Init();
+	return true;
 }
 
 }
