@@ -1,16 +1,16 @@
-#ifndef GS_SHADERWAVE_H_INCLUDED
-#define GS_SHADERWAVE_H_INCLUDED
+#pragma once
 
 #include <Singleton.h>
 #include <Shader.h>
+#include <Texture.h>
 #include "GSBase.h"
 
 namespace Amju 
 {
-class GSShaderWave : public GSBase
+class GSTerrain : public GSBase
 {
-  GSShaderWave();
-  friend class Singleton<GSShaderWave>;
+  GSTerrain();
+  friend class Singleton<GSTerrain>;
 
 public:
   virtual void Update();
@@ -20,8 +20,10 @@ public:
 
 private:
   Shader* m_shader;
-
+  Texture* m_heightmap;
+  Texture* m_diffuse;
+  Texture* m_detail;
 };
-typedef Singleton<GSShaderWave> TheGSShaderWave;
+typedef Singleton<GSTerrain> TheGSTerrain;
 } // namespace
-#endif
+

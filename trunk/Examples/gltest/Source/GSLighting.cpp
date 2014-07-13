@@ -30,7 +30,10 @@ void GSLighting::Draw()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   static float t = 0;
-  t += TheTimer::Instance()->GetDt();
+  if (!m_paused)
+  {
+    t += TheTimer::Instance()->GetDt();
+  }
   Vec3f pos(cos(t), 1, sin(t));
 
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
@@ -42,7 +45,10 @@ void GSLighting::Draw()
     AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
   static float f = 0;
-  f += 0.01f;
+  if (!m_paused)
+  {
+    f += 0.01f;
+  }
 
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
 

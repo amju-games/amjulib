@@ -2,6 +2,7 @@
 #define GRID_H
 
 #include <AmjuGL.h>
+#include <TriList.h>
 
 namespace Amju
 {
@@ -13,7 +14,7 @@ public:
   void Draw();
 
 protected:
-  AmjuGL::Tris m_tris;
+  RCPtr<TriListStatic> m_triList;
 };
 }
 
