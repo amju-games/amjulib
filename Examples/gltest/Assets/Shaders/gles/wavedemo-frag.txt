@@ -1,0 +1,11 @@
+// wavedemo-frag.txt
+
+precision highp float;
+
+varying float gY;
+
+void main()
+{
+  gl_FragColor = vec4(gY, gY+1.0, 1, 1); 
+}
+

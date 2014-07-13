@@ -1,0 +1,15 @@
+// terrain-frag.txt
+
+varying vec2 UV;
+
+uniform sampler2D diffuseSampler;
+uniform sampler2D detailSampler;
+
+void main()
+{
+  vec4 diffuse = texture2D(diffuseSampler, UV);
+  vec4 detail = texture2D(detailSampler, UV * 20.0);
+
+  gl_FragColor = vec4(detail.xyz * 0.5 + diffuse.xyz * 0.5, 1); 
+}
+

@@ -1,0 +1,19 @@
+// mandel-vert.txt
+
+precision highp float;
+
+attribute vec4 position;
+attribute vec2 uv;
+attribute vec3 normal;
+
+uniform float gTime; 
+uniform float mouseX;
+uniform float mouseY;
+varying vec2 vUv;
+
+void main()
+{
+  gl_Position = position; // no transform for mandel!
+  vec2 m = vec2(mouseX, mouseY);
+  vUv = uv * (1.0 / (gTime + 1.0)) - m;
+}
