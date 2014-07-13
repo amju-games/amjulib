@@ -3,7 +3,7 @@
 #include <aesndlib.h>
 #include <asndlib.h>
 #include <gcmodplay.h>
-#include <mp3player.h>
+//#include <mp3player.h>
 #include "SoundWii.h"
 #include <File.h>
 #include <ReportError.h>
@@ -21,12 +21,13 @@ SoundWii::SoundWii()
 {
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Creating Wii sound player.\n";
+  PAUSE;
 #endif
 
   ASND_Init();
   AESND_Init();
   MODPlay_Init(&play);
-  MP3Player_Init();
+  ////MP3Player_Init();
 }
 
 SoundWii::~SoundWii()
@@ -37,6 +38,7 @@ bool SoundWii::PlayWav(const std::string& wavFile, float volume)
 {
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Playing wav: " << wavFile << "\n";
+  PAUSE;
 #endif
 
   // Use raw sound data file, ending .snd
@@ -85,6 +87,7 @@ bool SoundWii::PlaySong(const std::string& songFile)
 {
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Attempting to play song: " << songFile << "\n";
+  PAUSE;
 #endif
 
   std::string filename = songFile;
@@ -93,12 +96,22 @@ bool SoundWii::PlaySong(const std::string& songFile)
   {
     // Find the start of the song in the glue file; and find the length
     uint32 songPos = 0;
-    if (!GetGlueFile()->GetSeekBase(filename, &songPos))
+    if (GetGlueFile()->GetSeekBase(filename, &songPos))
+    {
+#ifdef AMJU_WII_REPORT_SND
+      std::string s = "Music: YES, it's in Glue File! ";
+      s += filename;
+      s += " size: " + ToString(GetGlueFile()->GetSize(filename)) + "\n";
+      std::cout << s;
+      PAUSE
+#endif
+    }
+    else
     {
 #ifdef AMJU_WII_REPORT_SND
       std::string s = "Music: not in Glue File: ";
       s += filename;
-      ReportError(s);
+      std::cout << s << "\n";
       PAUSE
 #endif
       return false;
@@ -118,6 +131,7 @@ bool SoundWii::PlaySong(const std::string& songFile)
 
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Playing song: " << songFile << "\n";
+  PAUSE;
 #endif
     }
     else if (ext == "mp3")
@@ -127,6 +141,7 @@ bool SoundWii::PlaySong(const std::string& songFile)
 
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Playing song: " << songFile << ", song length: " << length << "\n";
+  PAUSE;
 #endif
     }
     else
@@ -139,7 +154,11 @@ bool SoundWii::PlaySong(const std::string& songFile)
 #endif
     }
   }
-
+  else
+  {
+std::cout << "\n\n\n\n\nNO MUSIC GLUE FILE!!!\n";
+Assert(0);
+  }
   return true;
 }
 
@@ -147,6 +166,7 @@ void SoundWii::StopSong()
 {
 #ifdef AMJU_WII_REPORT_SND
   std::cout << "Stopping song.\n";
+  PAUSE;
 #endif
 
   MODPlay_Stop(&play);
@@ -159,6 +179,9 @@ void SoundWii::StopSong()
   {
     MODPlay_Stop(&play);
   }
+
+  MODPlay_Stop(&play);
+
   */
   // Soung data is resource, managed by ResourceManager
   // TODO Give ResourceManager a hint that we have finished with data
