@@ -1,0 +1,1231 @@
+# dumped via libbadRDP
+
+newmtl material_1
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005CC0_fmt0x40.png
+
+newmtl material_2
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030062C0_fmt0x10.png
+#horz. mirror
+
+newmtl material_3
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005AC0_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_4
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x02019770_fmt0x10.png
+
+newmtl material_5
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030056C0_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_6
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x02018F70_fmt0x10.png
+
+newmtl material_7
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x02018D70_fmt0x40.png
+
+newmtl material_8
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x02019F70_fmt0x40.png
+
+newmtl material_9
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004EC0_fmt0x40.png
+#horz. mirror
+
+newmtl material_10
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030052C0_fmt0x40.png
+
+newmtl material_11
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005EC0_fmt0x40.png
+
+newmtl material_12
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030091E0_fmt0x10.png
+
+newmtl material_13
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300B5E0_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_14
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030087E0_fmt0x10.png
+
+newmtl material_15
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A5E0_fmt0x10.png
+
+newmtl material_16
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x02018B70_fmt0x40.png
+
+newmtl material_17
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030099E0_fmt0x10.png
+
+newmtl material_18
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A1E0_fmt0x40.png
+#horz. mirror
+
+newmtl material_19
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300BDE0_fmt0x40.png
+
+newmtl material_20
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030089E0_fmt0x10.png
+
+newmtl material_21
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300C1E0_fmt0x10.png
+
+newmtl material_22
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0201A170_fmt0x10.png
+
+newmtl material_23
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300E3C8_fmt0x10.png
+
+newmtl material_24
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300EFC8_fmt0x10.png
+
+newmtl material_25
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A7C8_fmt0x40.png
+
+newmtl material_26
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300CDC8_fmt0x10.png
+
+newmtl material_27
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300DDC8_fmt0x40.png
+
+newmtl material_28
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300DFC8_fmt0x40.png
+
+newmtl material_29
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300ABC8_fmt0x10.png
+
+newmtl material_30
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300CBC8_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_31
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009FC8_fmt0x10.png
+
+newmtl material_32
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300F7C8_fmt0x10.png
+
+newmtl material_33
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300BBC8_fmt0x10.png
+
+newmtl material_34
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030095C8_fmt0x10.png
+
+newmtl material_35
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030097C8_fmt0x10.png
+
+newmtl material_36
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300EBC8_fmt0x40.png
+
+newmtl material_37
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030022D8_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_38
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001ED8_fmt0x40.png
+
+newmtl material_39
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001AD8_fmt0x40.png
+#horz. mirror
+
+newmtl material_40
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006690_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_41
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006C90_fmt0x40.png
+
+newmtl material_42
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006890_fmt0x40.png
+
+newmtl material_43
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006290_fmt0x40.png
+#horz. mirror
+
+newmtl material_44
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005290_fmt0x10.png
+
+newmtl material_45
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005090_fmt0x10.png
+
+newmtl material_46
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005A90_fmt0x10.png
+
+newmtl material_47
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007090_fmt0x10.png
+
+newmtl material_48
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007E30_fmt0x10.png
+
+newmtl material_49
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008030_fmt0x10.png
+
+newmtl material_50
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009630_fmt0x40.png
+
+newmtl material_51
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008C30_fmt0x10.png
+
+newmtl material_52
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009A30_fmt0x40.png
+
+newmtl material_53
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009E30_fmt0x40.png
+
+newmtl material_54
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008830_fmt0x40.png
+#horz. mirror
+
+newmtl material_55
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009430_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_56
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003BA0_fmt0x10.png
+
+newmtl material_57
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004BA0_fmt0x10.png
+
+newmtl material_58
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030039A0_fmt0x10.png
+
+newmtl material_59
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005BA0_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_60
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030063A0_fmt0x40.png
+
+newmtl material_61
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030067A0_fmt0x10.png
+
+newmtl material_62
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030043A0_fmt0x10.png
+
+newmtl material_63
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030025D8_fmt0x40.png
+#horz. mirror
+
+newmtl material_64
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030029D8_fmt0x10.png
+#horz. mirror
+
+newmtl material_65
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001DD8_fmt0x10.png
+
+newmtl material_66
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001BD8_fmt0x10.png
+
+newmtl material_67
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005AB8_fmt0x10.png
+
+newmtl material_68
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030092B8_fmt0x10.png
+
+newmtl material_69
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030062B8_fmt0x10.png
+
+newmtl material_70
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030086B8_fmt0x40.png
+
+newmtl material_71
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030082B8_fmt0x40.png
+
+newmtl material_72
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008AB8_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_73
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030052B8_fmt0x10.png
+
+newmtl material_74
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006AB8_fmt0x10.png
+
+newmtl material_75
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030050B8_fmt0x10.png
+
+newmtl material_76
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007AB8_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_77
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007768_fmt0x10.png
+
+newmtl material_78
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006F68_fmt0x10.png
+
+newmtl material_79
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006768_fmt0x10.png
+
+newmtl material_80
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005F68_fmt0x10.png
+
+newmtl material_81
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004F68_fmt0x10.png
+
+newmtl material_82
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005768_fmt0x10.png
+
+newmtl material_83
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004768_fmt0x10.png
+
+newmtl material_84
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007F68_fmt0x10.png
+
+newmtl material_85
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03017098_fmt0x10.png
+
+newmtl material_86
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03011898_fmt0x10.png
+
+newmtl material_87
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03011A98_fmt0x10.png
+
+newmtl material_88
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03016A98_fmt0x40.png
+
+newmtl material_89
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03016C98_fmt0x40.png
+
+newmtl material_90
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03014498_fmt0x10.png
+
+newmtl material_91
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03012E98_fmt0x40.png
+
+newmtl material_92
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03013498_fmt0x10.png
+
+newmtl material_93
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03015898_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_94
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03015A98_fmt0x10.png
+
+newmtl material_95
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03017C98_fmt0x10.png
+
+newmtl material_96
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03012698_fmt0x10.png
+
+newmtl material_97
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03013298_fmt0x40.png
+
+newmtl material_98
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03017898_fmt0x40.png
+
+newmtl material_99
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03015498_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_100
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03012298_fmt0x40.png
+#horz. mirror
+
+newmtl material_101
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030033B8_fmt0x40.png
+
+newmtl material_102
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030027B8_fmt0x10.png
+
+newmtl material_103
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002FB8_fmt0x40.png
+
+newmtl material_104
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002778_fmt0x40.png
+#horz. mirror
+
+newmtl material_105
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001D78_fmt0x10.png
+
+newmtl material_106
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001F78_fmt0x10.png
+
+newmtl material_107
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300B3D8_fmt0x40.png
+
+newmtl material_108
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A7D8_fmt0x10.png
+
+newmtl material_109
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300AFD8_fmt0x40.png
+
+newmtl material_110
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300C3D8_fmt0x10.png
+
+newmtl material_111
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300BBD8_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_112
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300B7D8_fmt0x40.png
+
+newmtl material_113
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001E58_fmt0x40.png
+
+newmtl material_114
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03001A58_fmt0x40.png
+#horz. mirror
+
+newmtl material_115
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03000DC8_fmt0x40.png
+
+newmtl material_116
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009D70_fmt0x10.png
+
+newmtl material_117
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006F70_fmt0x10.png
+
+newmtl material_118
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006D70_fmt0x10.png
+
+newmtl material_119
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A570_fmt0x40.png
+
+newmtl material_120
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008570_fmt0x10.png
+
+newmtl material_121
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007770_fmt0x10.png
+
+newmtl material_122
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009170_fmt0x40.png
+
+newmtl material_123
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008370_fmt0x40.png
+
+newmtl material_124
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03009570_fmt0x10.png
+
+newmtl material_125
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007F70_fmt0x40.png
+#horz. mirror
+
+newmtl material_126
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300B170_fmt0x10.png
+
+newmtl material_127
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x0300A970_fmt0x10.png
+
+newmtl material_128
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008D70_fmt0x40.png
+
+newmtl material_129
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007938_fmt0x10.png
+
+newmtl material_130
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008938_fmt0x10.png
+
+newmtl material_131
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03008138_fmt0x10.png
+
+newmtl material_132
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007138_fmt0x10.png
+
+newmtl material_133
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006938_fmt0x10.png
+
+newmtl material_134
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005138_fmt0x10.png
+
+newmtl material_135
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005938_fmt0x10.png
+
+newmtl material_136
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006138_fmt0x10.png
+
+newmtl material_137
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003378_fmt0x40.png
+
+newmtl material_138
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002F78_fmt0x40.png
+#horz. mirror
+
+newmtl material_139
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002778_fmt0x10.png
+
+newmtl material_140
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003778_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_141
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003978_fmt0x40.png
+
+newmtl material_142
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002DD8_fmt0x10.png
+
+newmtl material_143
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003DD8_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_144
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030039D8_fmt0x40.png
+
+newmtl material_145
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003FD8_fmt0x40.png
+
+newmtl material_146
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030035D8_fmt0x40.png
+#horz. mirror
+
+newmtl material_147
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006508_fmt0x10.png
+
+newmtl material_148
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005D08_fmt0x10.png
+
+newmtl material_149
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005508_fmt0x10.png
+
+newmtl material_150
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004D08_fmt0x10.png
+
+newmtl material_151
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004508_fmt0x10.png
+
+newmtl material_152
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003508_fmt0x10.png
+
+newmtl material_153
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003D08_fmt0x10.png
+
+newmtl material_154
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002D08_fmt0x10.png
+
+newmtl material_155
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030074B8_fmt0x10.png
+
+newmtl material_156
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03007CB8_fmt0x10.png
+
+newmtl material_157
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004EB8_fmt0x10.png
+
+newmtl material_158
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030044B8_fmt0x10.png
+
+newmtl material_159
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030056B8_fmt0x10.png
+
+newmtl material_160
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030072B8_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_161
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005EB8_fmt0x10.png
+
+newmtl material_162
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030046B8_fmt0x10.png
+
+newmtl material_163
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030066B8_fmt0x40.png
+
+newmtl material_164
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006AB8_fmt0x10.png
+#horz. mirror/vert. mirror
+
+newmtl material_165
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030052F8_fmt0x10.png
+
+newmtl material_166
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030062F8_fmt0x10.png
+
+newmtl material_167
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005AF8_fmt0x10.png
+
+newmtl material_168
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004AF8_fmt0x10.png
+
+newmtl material_169
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030042F8_fmt0x10.png
+
+newmtl material_170
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002AF8_fmt0x10.png
+
+newmtl material_171
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030032F8_fmt0x10.png
+
+newmtl material_172
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003AF8_fmt0x10.png
+
+newmtl material_173
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006518_fmt0x10.png
+
+newmtl material_174
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005D18_fmt0x10.png
+
+newmtl material_175
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005518_fmt0x10.png
+
+newmtl material_176
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004D18_fmt0x10.png
+
+newmtl material_177
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004518_fmt0x10.png
+
+newmtl material_178
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003518_fmt0x10.png
+
+newmtl material_179
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003D18_fmt0x10.png
+
+newmtl material_180
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002D18_fmt0x10.png
+
+newmtl material_181
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004D38_fmt0x10.png
+
+newmtl material_182
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004938_fmt0x40.png
+
+newmtl material_183
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003B38_fmt0x40.png
+#horz. mirror
+
+newmtl material_184
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003F38_fmt0x40.png
+
+newmtl material_185
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004338_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_186
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004738_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_187
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030052D8_fmt0x10.png
+
+newmtl material_188
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030062D8_fmt0x10.png
+
+newmtl material_189
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005AD8_fmt0x10.png
+
+newmtl material_190
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004AD8_fmt0x10.png
+
+newmtl material_191
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030042D8_fmt0x10.png
+
+newmtl material_192
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03002AD8_fmt0x10.png
+
+newmtl material_193
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x030032D8_fmt0x10.png
+
+newmtl material_194
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03003AD8_fmt0x10.png
+
+newmtl material_195
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03006098_fmt0x10.png
+
+newmtl material_196
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005898_fmt0x10.png
+
+newmtl material_197
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005698_fmt0x40.png
+#horz. mirror/vert. mirror
+
+newmtl material_198
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03005298_fmt0x40.png
+
+newmtl material_199
+Ka 0.2000 0.2000 0.2000
+Kd 0.8000 0.8000 0.8000
+illum 1
+map_Ka texture_0x03004A98_fmt0x10.png
+
