@@ -1,12 +1,11 @@
 #include <AmjuGL.h>
-
-//#include <OpenGL/gl.h> // temp, for glFrustum - TODO create matrix by hand
-
 #include <Teapot.h>
 #include <Screen.h>
 #include <Vec3.h>
 #include <Quaternion.h>
 #include <ResourceManager.h>
+#include <File.h>
+#include <Timer.h>
 #include "GSVr.h"
 #include "OVR.h"
 
@@ -28,6 +27,18 @@ Sizei               EyeRenderSize[2];
 const Vec3f ORIG_VIEW_DIR(0, 0, -1);
 const Vec3f ORIG_UP_DIR(0, 1, 0);
   
+struct Camera
+{
+  float neardist;
+  float fardist;
+  float aperture; // fov x
+  float eyesep;
+  float fo; // WHAT IS THIS?
+  Vec3f pos, dir, up;
+};
+
+Camera theCamera;
+
 // Replace glFrustum, TODO put in AmjuGL utils
 void Frustum(float left, float right, float bottom, float top, float zNear, float zFar)
 {
@@ -68,19 +79,22 @@ GSVr::GSVr()
 
 void GSVr::Update()
 {
+  // Get Oculus Rift rotation info
+  // TODO Pass absolute time as second param?
+  // j.c.
+  ovrSensorState ss = ovrHmd_GetSensorState(Hmd, 0);
+  const ovrPoseStatef& ps = ss.Recorded; // Predicted;
+  const ovrPosef& pose = ps.Pose;
+  const ovrQuatf& oquat = pose.Orientation;
+  Amju::Quaternion q(oquat.w, oquat.x, oquat.y, oquat.z);
+  m_viewDir = q.RotateVec(ORIG_VIEW_DIR);
+  m_upDir = q.RotateVec(ORIG_UP_DIR);
+
+  float dt = TheTimer::Instance()->GetDt();
+  m_pos += m_vel * dt;
 }
 
 enum Eye { LEFT, RIGHT };
-
-struct Camera
-{
-  float neardist;
-  float fardist;
-  float aperture; // fov x
-  float eyesep;
-  float fo; // WHAT IS THIS?
-  Vec3f pos, dir, up;
-};
 
 void SetUpCamera(Eye eye, const Camera& camera)
 {
@@ -108,8 +122,8 @@ void SetUpCamera(Eye eye, const Camera& camera)
     AmjuGL::Viewport(0,0,windowwidth/2 - 2,windowheight);
     float top    =   widthdiv2;
     float bottom = - widthdiv2;
-    float left   = - aspectratio * widthdiv2 + 0.5 * camera.eyesep * camera.neardist / camera.fo;
-    float right  =   aspectratio * widthdiv2 + 0.5 * camera.eyesep * camera.neardist / camera.fo;
+    float left   = - aspectratio * widthdiv2 + 0.5f * camera.eyesep * camera.neardist / camera.fo;
+    float right  =   aspectratio * widthdiv2 + 0.5f * camera.eyesep * camera.neardist / camera.fo;
     Frustum(left,right,bottom,top,camera.neardist,camera.fardist);
     //glMatrixMode(GL_MODELVIEW);
     //glLoadIdentity();
@@ -128,8 +142,8 @@ void SetUpCamera(Eye eye, const Camera& camera)
     AmjuGL::Viewport(windowwidth/2 + 4,0,windowwidth/2 - 2,windowheight);
     float top    =   widthdiv2;
     float bottom = - widthdiv2;
-    float left   = - aspectratio * widthdiv2 - 0.5 * camera.eyesep * camera.neardist / camera.fo;
-    float right  =   aspectratio * widthdiv2 - 0.5 * camera.eyesep * camera.neardist / camera.fo;
+    float left   = - aspectratio * widthdiv2 - 0.5f * camera.eyesep * camera.neardist / camera.fo;
+    float right  =   aspectratio * widthdiv2 - 0.5f * camera.eyesep * camera.neardist / camera.fo;
     Frustum(left,right,bottom,top,camera.neardist,camera.fardist);
     //glMatrixMode(GL_MODELVIEW);
     //glLoadIdentity();
@@ -155,17 +169,16 @@ void GSVr::DrawScene()
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
-  static Teapot tp;
-  tp.Draw();
+//  static Teapot tp;
+//  tp.Draw();
   
-//  m_mesh->Draw();
+  m_mesh->Draw();
 }
 
 void GSVr::Draw()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
  
-  Camera camera;
   // TODO Set up camera
   //float neardist;
   //float fardist;
@@ -174,25 +187,99 @@ void GSVr::Draw()
   //float fo; // WHAT IS THIS?
   //Vec3f pos, dir, up;
  
-  camera.neardist = 1.0f;
-  camera.fardist = 100.0f;
-  camera.aperture = 2.0f; // TODO TEST radians
-  camera.eyesep = 5.0f; // TODO TEST
-  camera.fo = 50.0f; // ??????
-  camera.pos = Vec3f(0, 1, 5); // TODO move around
-  camera.dir = m_viewDir;
-  camera.up = m_upDir;
+  theCamera.pos = m_pos;
+  theCamera.dir = m_viewDir;
+  theCamera.up = m_upDir;
 
-  SetUpCamera(LEFT, camera);
+  SetUpCamera(LEFT, theCamera);
   DrawScene();
 
-  SetUpCamera(RIGHT, camera);
+  SetUpCamera(RIGHT, theCamera);
   DrawScene();
 
   // Restore viewport  
   const int w = Screen::X();
   const int h = Screen::Y();
   AmjuGL::Viewport(0, 0, w, h);
+}
+
+bool GSVr::OnKeyEvent(const KeyEvent& ke)
+{
+  const float WALK_SPEED = 2.0f;
+
+  if (ke.keyType == AMJU_KEY_UP)
+  {
+    if (ke.keyDown)
+    {
+      m_vel = m_viewDir * WALK_SPEED;
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_DOWN)
+  {
+    if (ke.keyDown)
+    {
+      m_vel = m_viewDir * -WALK_SPEED;
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_RIGHT)
+  {
+    if (ke.keyDown)
+    {
+      Vec3f cameraright = CrossProduct(m_viewDir, m_upDir);
+      m_vel = cameraright * WALK_SPEED;
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_LEFT)
+  {
+    if (ke.keyDown)
+    {
+      Vec3f cameraright = CrossProduct(m_viewDir, m_upDir);
+      m_vel = cameraright * -WALK_SPEED;
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'a' && ke.keyDown)
+  {
+    theCamera.fo += 2.0f; // ?
+    std::cout << "fo: " << theCamera.fo << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'd' && ke.keyDown)
+  {
+    theCamera.fo -= 2.0f; // ?
+    std::cout << "fo: " << theCamera.fo << "\n";
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'z' && ke.keyDown)
+  {
+    theCamera.eyesep += 0.2f; // ?
+    std::cout << "eyesep: " << theCamera.eyesep << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'c' && ke.keyDown)
+  {
+    theCamera.eyesep -= 0.2f; // ?
+    std::cout << "eyesep: " << theCamera.eyesep << "\n";
+  }
+
+  return true;
 }
 
 bool GSVr::OnRotationEvent(const RotationEvent& re)
@@ -266,16 +353,35 @@ void GSVr::OnActive()
     else
     {
       std::cout << "Failed to create HMD.\n";
-      exit(0);
+      Assert(0);
+	  exit(0);
     }
   }
 
   // Get more details about the HMD.
   ovrHmd_GetDesc(Hmd, &HmdDesc);
 
+  // TODO Try with/without?
+  ovrHmd_SetEnabledCaps(Hmd, ovrHmdCap_LowPersistence |
+	  ovrHmdCap_LatencyTest);
+
+  // Start the sensor which informs of the Rift's pose and motion
+  ovrHmd_StartSensor(Hmd, ovrSensorCap_Orientation |
+	  ovrSensorCap_YawCorrection |
+	  ovrSensorCap_Position, 0);
+
+
+  File::SetRoot("C:\\jay\\projects\\amjulib\\Examples\\ovr-example\\Assets\\fire_temple", "/");
   ResourceManager* rm = TheResourceManager::Instance();
   rm->AddLoader("obj", TextObjLoader);
-//  m_mesh = (ObjMesh*)rm->GetRes("model.obj");
+  m_mesh = (ObjMesh*)rm->GetRes("model.obj");
+
+  theCamera.neardist = 1.0f;
+  theCamera.fardist = 200.0f; // TODO Get size of env? Up to some max
+  theCamera.aperture = 1.0f; // TODO TEST radians
+  theCamera.eyesep = 2.5f; // TODO TEST
+  theCamera.fo = 75.0f; // ??????
+
 }
 
 } // namespace
