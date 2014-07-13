@@ -4,9 +4,10 @@ endif
 
 APP		:=	gltest
 
+LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
+#LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Build/amjulib
 BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
-AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
 
