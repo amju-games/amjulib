@@ -134,36 +134,6 @@ void GSMain::Draw2d()
   Assert(gui);
   gui->Draw();
 
-  m_tex->UseThisTexture(); 
-
-  // Draw a GUI Image
-  Vec2f pos(0, 0);
-  Vec2f size(1.0f, 0.5f);
-
-  float z = 0.5f;
-  AmjuGL::Tris tris;
-  AmjuGL::Vert verts[4] = 
-  {
-    AmjuGL::Vert(pos.x + size.x, pos.y - size.y, z,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(pos.x + size.x, pos.y, z,   1, 1,   0, 1, 0),
-    AmjuGL::Vert(pos.x, pos.y, z,   0, 1,   0, 1, 0),
-    AmjuGL::Vert(pos.x, pos.y - size.y, z,   0, 0,   0, 1, 0)
-  };
-
-  tris.clear();
-  tris.reserve(2);
-  AmjuGL::Tri tri;
-  tri.m_verts[0] = verts[0];
-  tri.m_verts[1] = verts[1];
-  tri.m_verts[2] = verts[2];
-  tris.push_back(tri);
-
-  tri.m_verts[0] = verts[0];
-  tri.m_verts[1] = verts[2];
-  tri.m_verts[2] = verts[3];
-  tris.push_back(tri);
-
-  AmjuGL::DrawTriList(tris);
 }
 
 void GSMain::OnActive()

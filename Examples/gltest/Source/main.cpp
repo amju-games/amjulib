@@ -17,35 +17,8 @@
 #define AMJU_USE_GLUT
 #endif
 
+#if !defined(AMJU_IOS) && !defined(ANDROID_NDK)
 #include <main.h>
-#include <AmjuGLWindowInfo.h>
-#include <Game.h>
-#include <Font.h>
-#include "GSLighting.h"
-#include "GSTexture.h"
-#include "GSShaderWave.h"
-#include "GSShadow.h"
-#include "GSEnvMap.h"
-#include "GSObb2Test.h"
+#endif
 
-namespace Amju
-{
-// Create global variable window info 
-Amju::AmjuGLWindowInfo w(640, 480, false, "AmjuGL Test");
-
-void StartUpBeforeCreateWindow()
-{
-}
-
-void StartUpAfterCreateWindow()
-{
-  //TheGame::Instance()->SetCurrentState(TheGSTexture::Instance());
-  //TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
-  //TheGame::Instance()->SetCurrentState(TheGSShadow::Instance());
-  //TheGame::Instance()->SetCurrentState(TheGSEnvMap::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSLighting::Instance());
-
-  TheResourceManager::Instance()->AddLoader("font", FontLoader);
-}
-}
 

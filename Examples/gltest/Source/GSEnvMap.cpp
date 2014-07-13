@@ -12,6 +12,7 @@ GSEnvMap::GSEnvMap()
 {
   m_name = "Sphere mapping";
   m_nextState = TheGSFinish::Instance();
+  m_maxTime = 100.0f;
 }
 
 void GSEnvMap::Update()

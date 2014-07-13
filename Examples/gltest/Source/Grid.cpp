@@ -8,7 +8,8 @@ Grid::Grid()
 
 void Grid::Build(int numDivs, float len)
 {
-  m_tris.reserve(numDivs * numDivs * 2);
+  AmjuGL::Tris tris;
+  tris.reserve(numDivs * numDivs * 2);
   AmjuGL::Tri t;
 
   float y = 0;
@@ -31,18 +32,19 @@ void Grid::Build(int numDivs, float len)
       t.m_verts[0] = AmjuGL::Vert(x1, y, z0, u1, v0,  0, 1, 0);
       t.m_verts[1] = AmjuGL::Vert(x0, y, z0, u0, v0,  0, 1, 0);
       t.m_verts[2] = AmjuGL::Vert(x1, y, z1, u1, v1,  0, 1, 0);
-      m_tris.push_back(t);
+      tris.push_back(t);
 
       t.m_verts[0] = AmjuGL::Vert(x1, y, z1, u1, v1,  0, 1, 0);
       t.m_verts[1] = AmjuGL::Vert(x0, y, z0, u0, v0,  0, 1, 0);
       t.m_verts[2] = AmjuGL::Vert(x0, y, z1, u0, v1,  0, 1, 0);
-      m_tris.push_back(t);
+      tris.push_back(t);
     }
   }
+  m_triList = MakeTriList(tris);
 }
 
 void Grid::Draw()
 {
-  AmjuGL::DrawTriList(m_tris);
+  m_triList->Draw();
 }
 }
