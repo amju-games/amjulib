@@ -70,7 +70,10 @@ public:
   virtual void Flip();
   virtual void SetPerspectiveProjection(
     float fov, float aspectRatio, float nearDist, float farDist);
+
   virtual Shader* LoadShader(const std::string& shaderFileName);
+  virtual void UseShader(Shader*);
+
   virtual void SetTextureType(AmjuGL::TextureType tt);
     
   virtual void DrawLighting(

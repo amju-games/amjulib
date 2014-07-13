@@ -6,34 +6,37 @@ const char* AMJU_ES2_DEFAULT_SHADER_COLOUR = "colour";
 const char* AMJU_ES2_DEFAULT_SHADER_TEXTURE = "texture";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING = "useLighting";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP = "useSphereMap";
+const char* AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR = "lightDir";
   
 const char* AMJU_ES2_DEFAULT_SHADER_POSITION = "position";
 const char* AMJU_ES2_DEFAULT_SHADER_NORMAL = "normal";
 const char* AMJU_ES2_DEFAULT_SHADER_UV = "uv";
   
 const char* DEFAULT_VERT_SRC_GOURAUD = "\
+precision highp float;\n\
 attribute vec4 position;\n\
 attribute vec3 normal;\n\
 attribute vec2 uv;\n\
-varying lowp vec4 colorVarying;\n\
-varying lowp vec2 uvVarying;\n\
+varying vec4 colorVarying;\n\
+varying vec2 uvVarying;\n\
 uniform mat4 modelViewProjectionMatrix;\n\
 uniform mat3 normalMatrix;\n\
-uniform lowp vec4 colour;\n\
-uniform lowp float useLighting;\n\
+uniform vec4 colour;\n\
+uniform float useLighting;\n\
+uniform vec3 lightDir;\n\
 uniform int useSphereMap;\n\
 void main()\n\
 {\n\
     vec3 eyeNormal = normalMatrix * normal;\n\
-    vec3 lightPosition = vec3(-1.0, 1.0, 1.0);\n\
+    vec3 lightPosition = lightDir;\n\
     float nDotVP = max(useLighting, dot(normalize(eyeNormal), normalize(lightPosition)) + 0.5);\n\
     colorVarying = colour * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
     if (useSphereMap == 1)\n\
     {\n\
         // sphere map\n\
-        lowp vec3 view = vec3(0, 0, 1);\n\
-        lowp vec3 r = reflect(view, normal);\n\
+        vec3 view = (modelViewProjectionMatrix * vec4(0, 0, 1, 1)).xyz;\n\
+        vec3 r = reflect(view, normal);\n\
         r.z += 1.0;\n\
         r = normalize(r);\n\
         uvVarying = r.xy * 0.5 + 0.5;\n\
@@ -43,8 +46,9 @@ void main()\n\
 ";
 
 const char* DEFAULT_FRAG_SRC_GOURAUD = "\
-varying lowp vec4 colorVarying;\n\
-varying lowp vec2 uvVarying;\n\
+precision highp float;\n\
+varying vec4 colorVarying;\n\
+varying vec2 uvVarying;\n\
 uniform sampler2D texture;\n\
 void main()\n\
 {\n\

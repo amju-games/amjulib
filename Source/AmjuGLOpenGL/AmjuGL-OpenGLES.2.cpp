@@ -19,9 +19,12 @@ extern "C"
 
 #include <AmjuGL.h>
 #include <TriList.h>
+#include <ShaderNull.h>
 #include "GLShader.h"
 #include "AmjuGL-OpenGLES.2.h"
 #include "ES2DefaultShaders.h"
+#include "ShadowMapES2.h"
+#include "DepthOfFieldES2.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
@@ -43,6 +46,7 @@ static GLShader* s_defaultShader;
 static GLShader* s_currentShader;
 
 static bool s_lightingEnabled = true;
+static AmjuGL::Vec3 s_lightPos(0, 0, 1);
   
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
@@ -75,29 +79,32 @@ public:
 
   virtual void Draw()
   {
-    // TODO only change these when necessary.
-    // TODO Check for using default shader or a different one
-    GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
-    GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
-  
-    // Moldeview * projection matrix for world transforms
-    GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-  
     glActiveTexture(GL_TEXTURE0);
   
     s_currentShader->Begin();
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-    if (s_lightingEnabled)
+    if (s_currentShader == s_defaultShader)
     {
-      // Inverse transpose of modelview matrix to rotate normals
-      GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-      s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
+      // TODO only change these when necessary.
+      // TODO Check for using default shader or a different one
+      GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+      GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+      
+      // Moldeview * projection matrix for world transforms
+      GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+      
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
+      if (s_lightingEnabled)
+      {
+        // Inverse transpose of modelview matrix to rotate normals
+        GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+        s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
+      }
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
+      s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
     }
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
-    s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
-
     glBindVertexArrayOES(m_vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
   }
@@ -115,9 +122,9 @@ public:
     const int STRIDE = sizeof(AmjuGL::Vert);
   
     // Use lighting shader so we get the Normal attrib variable location!
-    int vertexAttribPosition = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
-    int vertexAttribNormal = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
-    int vertexAttribTexCoord0 = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
+    int vertexAttribPosition = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
+    int vertexAttribNormal = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
+    int vertexAttribTexCoord0 = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
   
     glEnableVertexAttribArray(vertexAttribPosition);
     glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
@@ -159,28 +166,34 @@ public:
   
   virtual void Draw()
   {
-    // TODO only change these when necessary.
-    // TODO Check for using default shader or a different one
-    GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
-    GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
-    
-    // Modelview * projection matrix for world transforms
-    GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    // TODO Factor out common code!!
     
     glActiveTexture(GL_TEXTURE0);
     
     s_currentShader->Begin();
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-    if (s_lightingEnabled)
+    if (s_currentShader == s_defaultShader)
     {
-      // Inverse transpose of modelview matrix to rotate normals
-      GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-      s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
+      // TODO only change these when necessary.
+      // TODO Check for using default shader or a different one
+      GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+      GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+      
+      // Modelview * projection matrix for world transforms
+      GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+      
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
+      if (s_lightingEnabled)
+      {
+        // Inverse transpose of modelview matrix to rotate normals
+        GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+        s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
+      }
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
+      s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
     }
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
-    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
-    s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
     
     glBindVertexArrayOES(m_vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
@@ -249,10 +262,22 @@ static Drawable* MakeDynamicTriList()
   return new TriListDynamicES2;
 }
 
+static Drawable* MakeShadowMapES2()
+{
+  return new ShadowMapES2;
+}
+  
+static Drawable* MakeDepthOfFieldES2()
+{
+  return new DepthOfFieldES2;
+}
+  
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+  s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMapES2);
+  s_factory.Add(DepthOfField::DRAWABLE_TYPE_ID, MakeDepthOfFieldES2);
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
@@ -260,6 +285,18 @@ Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
   return s_factory.Create(drawableTypeId);
 }
   
+void AmjuGLOpenGLES2::UseShader(Shader* sh)
+{
+  if (sh)
+  {
+    s_currentShader = dynamic_cast<GLShader*>(sh);
+  }
+  else
+  {
+    s_currentShader = s_defaultShader;
+  }
+}
+
 void AmjuGLOpenGLES2::Init()
 {
   AmjuGLOpenGLBase::Init();
@@ -280,9 +317,10 @@ void AmjuGLOpenGLES2::Init()
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
 //  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   
-  // TODO Create in code so not dependent on assets
+  // Create in code so not dependent on assets
   s_defaultTex = new Texture;
-  s_defaultTex->Load("wh8.png");
+  unsigned char data[] =  { 0xff, 0xff, 0xff };
+  s_defaultTex->Create(data, 1, 1, 3); // w, h, bytes per pixel
 }
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
@@ -296,7 +334,20 @@ void AmjuGLOpenGLES2::Flip()
 
 Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
 {
-  return 0;
+  AMJU_CALL_STACK;
+
+  GLShader* s = new GLShader;
+  // TODO Add "ogl" to shader file name
+  // TODO Two separate files for frag and vertex
+  if (!s->Load(shaderFileName))
+  {
+    std::cout << "FAILED TO LOAD SHADER!! " << shaderFileName << "\n";
+    Assert(0);
+    
+    delete s;
+    return new ShaderNull;
+  }
+  return s;
 }
 	
 void AmjuGLOpenGLES2::SetPerspectiveProjection(float fov, float aspectRatio, float nearDist, float farDist)
@@ -441,10 +492,18 @@ void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
 
 void AmjuGLOpenGLES2::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 {
-	AMJU_CALL_STACK;
+  AMJU_CALL_STACK;
 
-	// TODO
-	//Assert(0);
+  AmjuGL::Vert v[2] =
+  {
+    AmjuGL::Vert(v1.m_x, v1.m_y, v1.m_z, 0, 0,  0, 1, 0),
+    AmjuGL::Vert(v2.m_x, v2.m_y, v2.m_z, 0, 0,  0, 1, 0)
+  };
+
+
+  // TODO!
+//  glDrawArrays(GL_LINES, 0, 2);
+
 }
 	
 void AmjuGLOpenGLES2::SetTextureType(AmjuGL::TextureType tt)
@@ -452,22 +511,6 @@ void AmjuGLOpenGLES2::SetTextureType(AmjuGL::TextureType tt)
   AMJU_CALL_STACK;
   
   s_tt = tt;
-  
-  // TODO - must use shader in ES
-/*
-  if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
-  {
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
-  }
-  else if (tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
-  {
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-    glEnable(GL_TEXTURE_GEN_S);
-    glEnable(GL_TEXTURE_GEN_T);
-  }
-*/
 }
 
 static uint32 ConvertToGLFlag(uint32 flag)
@@ -711,7 +754,7 @@ void AmjuGLOpenGLES2::DrawLighting(
 {
   AMJU_CALL_STACK;
   // TODO Set uniform vars for shader
-  
+  s_lightPos = lightPos;
 }    
 
 } // namespace Amju

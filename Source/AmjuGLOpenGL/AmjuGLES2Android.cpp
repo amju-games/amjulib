@@ -267,11 +267,10 @@ void AmjuGLOpenGLES2::Init()
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
 //  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   
-  // TODO Create in code so not dependent on assets
+  // Create in code so not dependent on assets
   s_defaultTex = new Texture;
   unsigned char data[] =  { 0xff, 0xff, 0xff };
   s_defaultTex->Create(data, 1, 1, 3); // w, h, bytes per pixel
-    //Load("wh8.png");
 }
 
 bool AmjuGLOpenGLES2::CreateWindow(AmjuGLWindowInfo*)
@@ -285,7 +284,17 @@ void AmjuGLOpenGLES2::Flip()
 
 Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
 {
-  return 0;
+  AMJU_CALL_STACK;
+
+  GLShader* s = new GLShader;
+  // TODO Add "ogl" to shader file name
+  // TODO Two separate files for frag and vertex
+  if (!s->Load(shaderFileName))
+  {
+    delete s;
+    return new ShaderNull;
+  }
+  return s;
 }
 	
 void AmjuGLOpenGLES2::SetTextureMode(AmjuGL::TextureMode tm)

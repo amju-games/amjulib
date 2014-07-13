@@ -21,6 +21,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL1.h"
 #include "ShadowMapOpenGL2.h"
 #include "ShadowMapOpenGL3.h"
+#include "DofOpenGL.h"
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -88,6 +89,13 @@ static Drawable* MakeDynamicTriList()
   return new TriListDynamicOpenGL;
 }
 
+static Drawable* MakeDof()
+{
+std::cout << "Creating DofOpenGL\n";
+
+  return new DofOpenGL;
+}
+
 static Drawable* MakeShadowMap()
 {
   // TODO: create best quality impl depending on hardware capability
@@ -98,6 +106,7 @@ static Drawable* MakeShadowMap()
     return new ShadowMapNull;
   }
 #ifdef USE_SHADOW_MAP_OPENGL_2
+  std::cout << "Creating ShadowMapOpenGL2\n";
   return new ShadowMapOpenGL2;
 #endif
 
@@ -117,6 +126,7 @@ AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
+  s_factory.Add(DepthOfField::DRAWABLE_TYPE_ID, MakeDof);
 }
 
 Drawable* AmjuGLOpenGL::Create(int drawableTypeId)
