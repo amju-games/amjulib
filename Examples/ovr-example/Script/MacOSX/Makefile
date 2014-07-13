@@ -4,7 +4,7 @@ endif
 
 APP		:=	ovr-example
 
-LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.4-macosx
+LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
 #LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Build/amjulib
 BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
@@ -23,7 +23,9 @@ LIBS	:= \
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
 run:
-	cp -R ../../Assets/* $(RUNDIR); \
+	mkdir -p $(RUNDIR)/font2d; \
+	cp ../../Assets/*.png $(RUNDIR)/font2d; \
+	cp ../../Assets/*.txt $(RUNDIR)/font2d; \
 	cd $(RUNDIR); \
 	./$(APP)
 
