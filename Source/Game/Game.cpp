@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "EventPoller.h"
 #include "Screen.h"
+#include <MessageQueue.h>
 #include <StringUtils.h>
 #include <ResourceManager.h>
 #include <GuiText.h>
@@ -58,6 +59,7 @@ void Game::Update()
 
   TheTimer::Instance()->Update();
   TheEventPoller::Instance()->Update();
+  TheMessageQueue::Instance()->Update();
 
   GetState()->Update();
 }

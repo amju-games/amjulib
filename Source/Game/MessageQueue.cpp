@@ -1,15 +1,24 @@
 #include <AmjuFirst.h>
-#include "MessageQueue.h"
 #include <Timer.h>
+#include <Mutex.h>
+#include "MessageQueue.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
+void MessageQueue::SetTime(float seconds)
+{
+  MutexLocker lock(m_mutex);
+  m_time = seconds; 
+}
+
 void MessageQueue::Update()
 {
+  MutexLocker lock(m_mutex);
+
   // Update current time
-//  float dt = TheTimer::Instance()->GetDt();
-//  m_time += dt;
+  float dt = TheTimer::Instance()->GetDt();
+  m_time += dt;
 
   // Execute all messages whose timestamps have expired
   while (!m_q.empty())
@@ -30,6 +39,7 @@ void MessageQueue::Update()
 
 void MessageQueue::Add(PMessage m)
 {
+  MutexLocker lock(m_mutex);
   m_q.insert(m);
 }
 
