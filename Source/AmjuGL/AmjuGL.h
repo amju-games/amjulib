@@ -261,6 +261,7 @@ public:
     const Vec3& lightPos);
 
   static Shader* LoadShader(const std::string& shaderFileName);
+  static void UseShader(Shader*);
 
   // Abstract Factory: impl creates appropriate Drawable, 
   //  probably either TriangleListStatic or TriangleListDynamic.
