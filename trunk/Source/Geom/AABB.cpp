@@ -6,6 +6,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2009
 #ifdef _DEBUG
 #include <iostream>
 #endif
+#include <algorithm>
 #include "AABB.h"
 #include "Matrix.h"
 #include "AmjuAssert.h"
