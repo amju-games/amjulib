@@ -1,0 +1,16 @@
+// terrain-vert.txt
+
+varying vec2 UV;
+uniform sampler2D heightSampler;
+
+void main()
+{
+  vec4 a = gl_Vertex;
+  vec2 st = vec2((a.x + 10.0) / 20.0, (a.z + 10.0) / 20.0);
+  float texel = texture2D(heightSampler, st).r;
+  a.y = (0.5 - texel) * 2.0;
+
+  UV = st;
+ 
+  gl_Position = gl_ModelViewProjectionMatrix * a;
+}

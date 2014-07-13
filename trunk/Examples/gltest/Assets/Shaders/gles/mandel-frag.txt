@@ -1,5 +1,7 @@
 // mandel-frag.txt
 
+precision highp float;
+
 uniform float gTime;
 uniform float maxIters;
 varying vec2 vUv;

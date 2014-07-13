@@ -17,6 +17,6 @@ Some text
 // Size
 1, 1
 // Localised text
-Hello, I am some localised text.\nThat's the end of the demo!
+That's the end of the demo!
 arial, 1.5, fgcol=ffffff, multi
 
