@@ -3,18 +3,18 @@
 
 namespace Amju
 {
-static RenderToTextureES2 renderToTexture;
+//static RenderToTextureES2 renderToTexture;
 
 void DofOpenGL::Draw()
 {
-  renderToTexture.Start();
+  //renderToTexture.Start();
   m_drawFunc();
-  renderToTexture.End();
+  //renderToTexture.End();
 }
 
 bool DofOpenGL::Init() 
 {
-  renderToTexture.Init();
+  //renderToTexture.Init();
 }
 
 }

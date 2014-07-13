@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined (AMJU_IOS) || defined (ANDROID_NDK)
+
 #include <DepthOfField.h>
 #include <TriList.h>
 
@@ -20,4 +22,6 @@ private:
 
 };
 }
+
+#endif
 

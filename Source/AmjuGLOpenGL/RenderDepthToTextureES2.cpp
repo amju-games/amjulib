@@ -1,3 +1,5 @@
+#if defined (AMJU_IOS) || defined (ANDROID_NDK)
+
 #include <iostream>
 #include <AmjuGL.h>
 #include "RenderToTextureES2.h"
@@ -66,7 +68,8 @@ bool Init(int w, int h)
 
   return true;
 }
-
-
 }
+
+#endif
+
 

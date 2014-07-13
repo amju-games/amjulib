@@ -1,3 +1,5 @@
+#if defined (AMJU_IOS) || defined (ANDROID_NDK)
+
 #include <Vec2.h>
 #include <Screen.h>
 #include "DepthOfFieldES2.h"
@@ -65,6 +67,7 @@ bool DepthOfFieldES2::Init()
   
   return renderToTexture.Init(1024, 1024);
 }
-
 }
+
+#endif
 

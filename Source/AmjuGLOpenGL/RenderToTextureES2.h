@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(AMJU_IOS) || defined (ANDROID_NDK)
+
 #include "Internal/OpenGL.h"
 
 namespace Amju
@@ -29,4 +31,6 @@ private:
   int m_width, m_height; // pixels - size of texture to which we render
 };
 }
+
+#endif
 
