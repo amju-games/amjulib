@@ -918,6 +918,9 @@
     <ClCompile Include="..\..\..\Source\Image\SavePng.cpp">
       <Filter>Image</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1735,6 +1738,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Image\SavePng.h">
       <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
