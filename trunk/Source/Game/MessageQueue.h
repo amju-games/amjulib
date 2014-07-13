@@ -5,13 +5,12 @@
 #include <Singleton.h>
 #include <RCPtr.h>
 #include <AmjuTime.h>
+#include <Mutex.h>
 
 namespace Amju
 {
 // Time for Messages: may be adjusted to compensate for server lag etc.
-class MsgTime : public Time
-{
-};
+typedef Time MsgTime;
 
 struct Message : public RefCounted
 {
@@ -30,14 +29,21 @@ bool operator<(const PMessage& m1, const PMessage& m2)
 }
 
 
-// Priority queue of messages. Messages are executed when the current time reaches the
+// Priority queue of messages. 
+// Messages are executed when the current time reaches the
 //  timestamp for a message, allowing for timed messages.
-// TODO MT-safe version or flag
 class MessageQueue : public NonCopyable
 {
 public:
+  // Call from main thread once per frame
   void Update();
+
+  // Can be called from main thread or other threads
   void Add(PMessage); 
+
+  // Call to set the game time - can be seconds since server started, 
+  //  just needs to be the same across all hosts.
+  void SetTime(float seconds);
 
 protected:
   // Priority queue: could be implemented as a Heap, Set, std::priority_queue...
@@ -45,8 +51,13 @@ protected:
   Queue m_q;
   
   // Current time
-  MsgTime m_time;
+  float m_time;
+
+  // Thread safe: Add() can be called from other threads. 
+  Mutex m_mutex;
 };
+
+typedef Singleton<MessageQueue> TheMessageQueue;
 }
 
 #endif
