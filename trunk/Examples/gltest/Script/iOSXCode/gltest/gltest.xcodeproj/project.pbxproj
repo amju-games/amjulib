@@ -1,0 +1,655 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		69054D20191FF6CF00FDC6BA /* libamju.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69054D1F191FF6CF00FDC6BA /* libamju.a */; };
+		6920144E191F51AC0054C44D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6920144D191F51AC0054C44D /* Foundation.framework */; };
+		69201450191F51AC0054C44D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6920144F191F51AC0054C44D /* CoreGraphics.framework */; };
+		69201452191F51AC0054C44D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69201451191F51AC0054C44D /* UIKit.framework */; };
+		69201454191F51AC0054C44D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69201453191F51AC0054C44D /* GLKit.framework */; };
+		69201456191F51AC0054C44D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69201455191F51AC0054C44D /* OpenGLES.framework */; };
+		6920145C191F51AC0054C44D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6920145A191F51AC0054C44D /* InfoPlist.strings */; };
+		69201471191F51AC0054C44D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69201470191F51AC0054C44D /* Images.xcassets */; };
+		69201478191F51AC0054C44D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69201477191F51AC0054C44D /* XCTest.framework */; };
+		69201479191F51AC0054C44D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6920144D191F51AC0054C44D /* Foundation.framework */; };
+		6920147A191F51AC0054C44D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69201451191F51AC0054C44D /* UIKit.framework */; };
+		69201482191F51AC0054C44D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69201480191F51AC0054C44D /* InfoPlist.strings */; };
+		69201484191F51AC0054C44D /* gltestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69201483191F51AC0054C44D /* gltestTests.m */; };
+		692014A1191F52340054C44D /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6920148D191F52340054C44D /* Grid.cpp */; };
+		692014A2191F52340054C44D /* GSBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6920148F191F52340054C44D /* GSBase.cpp */; };
+		692014A3191F52340054C44D /* GSEnvMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69201491191F52340054C44D /* GSEnvMap.cpp */; };
+		692014A4191F52340054C44D /* GSFinish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69201493191F52340054C44D /* GSFinish.cpp */; };
+		692014A5191F52340054C44D /* GSLighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69201495191F52340054C44D /* GSLighting.cpp */; };
+		692014A6191F52340054C44D /* GSMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69201497191F52340054C44D /* GSMain.cpp */; };
+		692014A7191F52340054C44D /* GSObb2Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69201499191F52340054C44D /* GSObb2Test.cpp */; };
+		692014A8191F52340054C44D /* GSShaderWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6920149B191F52340054C44D /* GSShaderWave.cpp */; };
+		692014A9191F52340054C44D /* GSShadow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6920149D191F52340054C44D /* GSShadow.cpp */; };
+		692014AA191F52340054C44D /* GSTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6920149F191F52340054C44D /* GSTexture.cpp */; };
+		692014B0191F525B0054C44D /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 692014AC191F525B0054C44D /* AppDelegate.mm */; };
+		692014B1191F525B0054C44D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 692014AD191F525B0054C44D /* main.m */; };
+		692014B2191F525B0054C44D /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 692014AF191F525B0054C44D /* ViewController.mm */; };
+		692014B6191F53D20054C44D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692014B5191F53D20054C44D /* CoreMotion.framework */; };
+		692014BA191F54E40054C44D /* Startup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692014B9191F54E40054C44D /* Startup.cpp */; };
+		692014BF191F6D170054C44D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692014BB191F6D170054C44D /* Main_iPad.storyboard */; };
+		692014C0191F6D170054C44D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692014BD191F6D170054C44D /* Main_iPhone.storyboard */; };
+		692014C5191F6D880054C44D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692014C1191F6D880054C44D /* ViewController_iPad.xib */; };
+		692014C6191F6D880054C44D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692014C3191F6D880054C44D /* ViewController_iPhone.xib */; };
+		692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692014CA191FCDF40054C44D /* GSMandel.cpp */; };
+		69201503191FE6940054C44D /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 69201502191FE6940054C44D /* data-iphone.glue */; };
+		697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6920147B191F51AC0054C44D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69201442191F51AC0054C44D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69201449191F51AC0054C44D;
+			remoteInfo = gltest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		69054D1F191FF6CF00FDC6BA /* libamju.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamju.a; path = "../../../../../Releases/amjulib-v.0.3-ios/lib/libamju.a"; sourceTree = "<group>"; };
+		6920144A191F51AC0054C44D /* gltest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gltest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6920144D191F51AC0054C44D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6920144F191F51AC0054C44D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		69201451191F51AC0054C44D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		69201453191F51AC0054C44D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		69201455191F51AC0054C44D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		69201459191F51AC0054C44D /* gltest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gltest-Info.plist"; sourceTree = "<group>"; };
+		6920145B191F51AC0054C44D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6920145F191F51AC0054C44D /* gltest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gltest-Prefix.pch"; sourceTree = "<group>"; };
+		69201470191F51AC0054C44D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		69201476191F51AC0054C44D /* gltestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gltestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69201477191F51AC0054C44D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6920147F191F51AC0054C44D /* gltestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gltestTests-Info.plist"; sourceTree = "<group>"; };
+		69201481191F51AC0054C44D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		69201483191F51AC0054C44D /* gltestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gltestTests.m; sourceTree = "<group>"; };
+		6920148D191F52340054C44D /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Grid.cpp; path = ../../../../Source/Grid.cpp; sourceTree = "<group>"; };
+		6920148E191F52340054C44D /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = ../../../../Source/Grid.h; sourceTree = "<group>"; };
+		6920148F191F52340054C44D /* GSBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSBase.cpp; path = ../../../../Source/GSBase.cpp; sourceTree = "<group>"; };
+		69201490191F52340054C44D /* GSBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSBase.h; path = ../../../../Source/GSBase.h; sourceTree = "<group>"; };
+		69201491191F52340054C44D /* GSEnvMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSEnvMap.cpp; path = ../../../../Source/GSEnvMap.cpp; sourceTree = "<group>"; };
+		69201492191F52340054C44D /* GSEnvMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSEnvMap.h; path = ../../../../Source/GSEnvMap.h; sourceTree = "<group>"; };
+		69201493191F52340054C44D /* GSFinish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSFinish.cpp; path = ../../../../Source/GSFinish.cpp; sourceTree = "<group>"; };
+		69201494191F52340054C44D /* GSFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSFinish.h; path = ../../../../Source/GSFinish.h; sourceTree = "<group>"; };
+		69201495191F52340054C44D /* GSLighting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSLighting.cpp; path = ../../../../Source/GSLighting.cpp; sourceTree = "<group>"; };
+		69201496191F52340054C44D /* GSLighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSLighting.h; path = ../../../../Source/GSLighting.h; sourceTree = "<group>"; };
+		69201497191F52340054C44D /* GSMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSMain.cpp; path = ../../../../Source/GSMain.cpp; sourceTree = "<group>"; };
+		69201498191F52340054C44D /* GSMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSMain.h; path = ../../../../Source/GSMain.h; sourceTree = "<group>"; };
+		69201499191F52340054C44D /* GSObb2Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSObb2Test.cpp; path = ../../../../Source/GSObb2Test.cpp; sourceTree = "<group>"; };
+		6920149A191F52340054C44D /* GSObb2Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSObb2Test.h; path = ../../../../Source/GSObb2Test.h; sourceTree = "<group>"; };
+		6920149B191F52340054C44D /* GSShaderWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSShaderWave.cpp; path = ../../../../Source/GSShaderWave.cpp; sourceTree = "<group>"; };
+		6920149C191F52340054C44D /* GSShaderWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSShaderWave.h; path = ../../../../Source/GSShaderWave.h; sourceTree = "<group>"; };
+		6920149D191F52340054C44D /* GSShadow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSShadow.cpp; path = ../../../../Source/GSShadow.cpp; sourceTree = "<group>"; };
+		6920149E191F52340054C44D /* GSShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSShadow.h; path = ../../../../Source/GSShadow.h; sourceTree = "<group>"; };
+		6920149F191F52340054C44D /* GSTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSTexture.cpp; path = ../../../../Source/GSTexture.cpp; sourceTree = "<group>"; };
+		692014A0191F52340054C44D /* GSTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSTexture.h; path = ../../../../Source/GSTexture.h; sourceTree = "<group>"; };
+		692014AB191F525B0054C44D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "../../../../../../Source/Main/iOS-ES2/AppDelegate.h"; sourceTree = "<group>"; };
+		692014AC191F525B0054C44D /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "../../../../../../Source/Main/iOS-ES2/AppDelegate.mm"; sourceTree = "<group>"; };
+		692014AD191F525B0054C44D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "../../../../../../Source/Main/iOS-ES2/main.m"; sourceTree = "<group>"; };
+		692014AE191F525B0054C44D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = "../../../../../../Source/Main/iOS-ES2/ViewController.h"; sourceTree = "<group>"; };
+		692014AF191F525B0054C44D /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = "../../../../../../Source/Main/iOS-ES2/ViewController.mm"; sourceTree = "<group>"; };
+		692014B3191F53B70054C44D /* libamju.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamju.a; path = "../../../../../Releases/amjulib-v.0.2-ios/lib/libamju.a"; sourceTree = "<group>"; };
+		692014B5191F53D20054C44D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		692014B9191F54E40054C44D /* Startup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Startup.cpp; path = ../../../../Source/Startup.cpp; sourceTree = "<group>"; };
+		692014BC191F6D170054C44D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		692014BE191F6D170054C44D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		692014C2191F6D880054C44D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		692014C4191F6D880054C44D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		692014CA191FCDF40054C44D /* GSMandel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSMandel.cpp; path = ../../../../Source/GSMandel.cpp; sourceTree = "<group>"; };
+		692014CB191FCDF40054C44D /* GSMandel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSMandel.h; path = ../../../../Source/GSMandel.h; sourceTree = "<group>"; };
+		69201502191FE6940054C44D /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../Build/gltest/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
+		697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSDepthOfField.cpp; path = ../../../../Source/GSDepthOfField.cpp; sourceTree = "<group>"; };
+		697F5AEC19572AF50020A72E /* GSDepthOfField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSDepthOfField.h; path = ../../../../Source/GSDepthOfField.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69201447191F51AC0054C44D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69054D20191FF6CF00FDC6BA /* libamju.a in Frameworks */,
+				692014B6191F53D20054C44D /* CoreMotion.framework in Frameworks */,
+				69201456191F51AC0054C44D /* OpenGLES.framework in Frameworks */,
+				69201450191F51AC0054C44D /* CoreGraphics.framework in Frameworks */,
+				69201452191F51AC0054C44D /* UIKit.framework in Frameworks */,
+				69201454191F51AC0054C44D /* GLKit.framework in Frameworks */,
+				6920144E191F51AC0054C44D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69201473191F51AC0054C44D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69201478191F51AC0054C44D /* XCTest.framework in Frameworks */,
+				6920147A191F51AC0054C44D /* UIKit.framework in Frameworks */,
+				69201479191F51AC0054C44D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69201441191F51AC0054C44D = {
+			isa = PBXGroup;
+			children = (
+				692014CD191FCE0B0054C44D /* Assets */,
+				69201457191F51AC0054C44D /* gltest */,
+				6920147D191F51AC0054C44D /* gltestTests */,
+				6920144C191F51AC0054C44D /* Frameworks */,
+				6920144B191F51AC0054C44D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6920144B191F51AC0054C44D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6920144A191F51AC0054C44D /* gltest.app */,
+				69201476191F51AC0054C44D /* gltestTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6920144C191F51AC0054C44D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69054D1F191FF6CF00FDC6BA /* libamju.a */,
+				692014B5191F53D20054C44D /* CoreMotion.framework */,
+				692014B3191F53B70054C44D /* libamju.a */,
+				6920144D191F51AC0054C44D /* Foundation.framework */,
+				6920144F191F51AC0054C44D /* CoreGraphics.framework */,
+				69201451191F51AC0054C44D /* UIKit.framework */,
+				69201453191F51AC0054C44D /* GLKit.framework */,
+				69201455191F51AC0054C44D /* OpenGLES.framework */,
+				69201477191F51AC0054C44D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69201457191F51AC0054C44D /* gltest */ = {
+			isa = PBXGroup;
+			children = (
+				697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */,
+				697F5AEC19572AF50020A72E /* GSDepthOfField.h */,
+				692014CA191FCDF40054C44D /* GSMandel.cpp */,
+				692014CB191FCDF40054C44D /* GSMandel.h */,
+				692014B9191F54E40054C44D /* Startup.cpp */,
+				692014AB191F525B0054C44D /* AppDelegate.h */,
+				692014AC191F525B0054C44D /* AppDelegate.mm */,
+				692014AD191F525B0054C44D /* main.m */,
+				692014AE191F525B0054C44D /* ViewController.h */,
+				692014AF191F525B0054C44D /* ViewController.mm */,
+				6920148D191F52340054C44D /* Grid.cpp */,
+				6920148E191F52340054C44D /* Grid.h */,
+				6920148F191F52340054C44D /* GSBase.cpp */,
+				69201490191F52340054C44D /* GSBase.h */,
+				69201491191F52340054C44D /* GSEnvMap.cpp */,
+				69201492191F52340054C44D /* GSEnvMap.h */,
+				69201493191F52340054C44D /* GSFinish.cpp */,
+				69201494191F52340054C44D /* GSFinish.h */,
+				69201495191F52340054C44D /* GSLighting.cpp */,
+				69201496191F52340054C44D /* GSLighting.h */,
+				69201497191F52340054C44D /* GSMain.cpp */,
+				69201498191F52340054C44D /* GSMain.h */,
+				69201499191F52340054C44D /* GSObb2Test.cpp */,
+				6920149A191F52340054C44D /* GSObb2Test.h */,
+				6920149B191F52340054C44D /* GSShaderWave.cpp */,
+				6920149C191F52340054C44D /* GSShaderWave.h */,
+				6920149D191F52340054C44D /* GSShadow.cpp */,
+				6920149E191F52340054C44D /* GSShadow.h */,
+				6920149F191F52340054C44D /* GSTexture.cpp */,
+				692014A0191F52340054C44D /* GSTexture.h */,
+				69201470191F51AC0054C44D /* Images.xcassets */,
+				69201458191F51AC0054C44D /* Supporting Files */,
+			);
+			path = gltest;
+			sourceTree = "<group>";
+		};
+		69201458191F51AC0054C44D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				692014C1191F6D880054C44D /* ViewController_iPad.xib */,
+				692014C3191F6D880054C44D /* ViewController_iPhone.xib */,
+				692014BB191F6D170054C44D /* Main_iPad.storyboard */,
+				692014BD191F6D170054C44D /* Main_iPhone.storyboard */,
+				69201459191F51AC0054C44D /* gltest-Info.plist */,
+				6920145A191F51AC0054C44D /* InfoPlist.strings */,
+				6920145F191F51AC0054C44D /* gltest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6920147D191F51AC0054C44D /* gltestTests */ = {
+			isa = PBXGroup;
+			children = (
+				69201483191F51AC0054C44D /* gltestTests.m */,
+				6920147E191F51AC0054C44D /* Supporting Files */,
+			);
+			path = gltestTests;
+			sourceTree = "<group>";
+		};
+		6920147E191F51AC0054C44D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6920147F191F51AC0054C44D /* gltestTests-Info.plist */,
+				69201480191F51AC0054C44D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		692014CD191FCE0B0054C44D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				69201502191FE6940054C44D /* data-iphone.glue */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69201449191F51AC0054C44D /* gltest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69201487191F51AC0054C44D /* Build configuration list for PBXNativeTarget "gltest" */;
+			buildPhases = (
+				69201446191F51AC0054C44D /* Sources */,
+				69201447191F51AC0054C44D /* Frameworks */,
+				69201448191F51AC0054C44D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gltest;
+			productName = gltest;
+			productReference = 6920144A191F51AC0054C44D /* gltest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		69201475191F51AC0054C44D /* gltestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6920148A191F51AC0054C44D /* Build configuration list for PBXNativeTarget "gltestTests" */;
+			buildPhases = (
+				69201472191F51AC0054C44D /* Sources */,
+				69201473191F51AC0054C44D /* Frameworks */,
+				69201474191F51AC0054C44D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6920147C191F51AC0054C44D /* PBXTargetDependency */,
+			);
+			name = gltestTests;
+			productName = gltestTests;
+			productReference = 69201476191F51AC0054C44D /* gltestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69201442191F51AC0054C44D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Amju Games";
+				TargetAttributes = {
+					69201449191F51AC0054C44D = {
+						DevelopmentTeam = SDLRPX9288;
+					};
+					69201475191F51AC0054C44D = {
+						TestTargetID = 69201449191F51AC0054C44D;
+					};
+				};
+			};
+			buildConfigurationList = 69201445191F51AC0054C44D /* Build configuration list for PBXProject "gltest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69201441191F51AC0054C44D;
+			productRefGroup = 6920144B191F51AC0054C44D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69201449191F51AC0054C44D /* gltest */,
+				69201475191F51AC0054C44D /* gltestTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69201448191F51AC0054C44D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				692014C0191F6D170054C44D /* Main_iPhone.storyboard in Resources */,
+				692014BF191F6D170054C44D /* Main_iPad.storyboard in Resources */,
+				69201471191F51AC0054C44D /* Images.xcassets in Resources */,
+				692014C5191F6D880054C44D /* ViewController_iPad.xib in Resources */,
+				6920145C191F51AC0054C44D /* InfoPlist.strings in Resources */,
+				69201503191FE6940054C44D /* data-iphone.glue in Resources */,
+				692014C6191F6D880054C44D /* ViewController_iPhone.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69201474191F51AC0054C44D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69201482191F51AC0054C44D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69201446191F51AC0054C44D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				692014B1191F525B0054C44D /* main.m in Sources */,
+				692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */,
+				692014A9191F52340054C44D /* GSShadow.cpp in Sources */,
+				692014A1191F52340054C44D /* Grid.cpp in Sources */,
+				692014B2191F525B0054C44D /* ViewController.mm in Sources */,
+				692014A8191F52340054C44D /* GSShaderWave.cpp in Sources */,
+				692014A3191F52340054C44D /* GSEnvMap.cpp in Sources */,
+				692014A4191F52340054C44D /* GSFinish.cpp in Sources */,
+				692014A2191F52340054C44D /* GSBase.cpp in Sources */,
+				692014A5191F52340054C44D /* GSLighting.cpp in Sources */,
+				692014BA191F54E40054C44D /* Startup.cpp in Sources */,
+				697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */,
+				692014A7191F52340054C44D /* GSObb2Test.cpp in Sources */,
+				692014A6191F52340054C44D /* GSMain.cpp in Sources */,
+				692014B0191F525B0054C44D /* AppDelegate.mm in Sources */,
+				692014AA191F52340054C44D /* GSTexture.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69201472191F51AC0054C44D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69201484191F51AC0054C44D /* gltestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6920147C191F51AC0054C44D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69201449191F51AC0054C44D /* gltest */;
+			targetProxy = 6920147B191F51AC0054C44D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6920145A191F51AC0054C44D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6920145B191F51AC0054C44D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		69201480191F51AC0054C44D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69201481191F51AC0054C44D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		692014BB191F6D170054C44D /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				692014BC191F6D170054C44D /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		692014BD191F6D170054C44D /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				692014BE191F6D170054C44D /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		692014C1191F6D880054C44D /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				692014C2191F6D880054C44D /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		692014C3191F6D880054C44D /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				692014C4191F6D880054C44D /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69201485191F51AC0054C44D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		69201486191F51AC0054C44D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		69201488191F51AC0054C44D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gltest/gltest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					AMJU_IOS,
+					_DEBUG,
+					IPHONE,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
+				);
+				INFOPLIST_FILE = "gltest/gltest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		69201489191F51AC0054C44D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gltest/gltest-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
+				);
+				INFOPLIST_FILE = "gltest/gltest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6920148B191F51AC0054C44D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gltest.app/gltest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gltest/gltest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "gltestTests/gltestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6920148C191F51AC0054C44D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/gltest.app/gltest";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "gltest/gltest-Prefix.pch";
+				INFOPLIST_FILE = "gltestTests/gltestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69201445191F51AC0054C44D /* Build configuration list for PBXProject "gltest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69201485191F51AC0054C44D /* Debug */,
+				69201486191F51AC0054C44D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69201487191F51AC0054C44D /* Build configuration list for PBXNativeTarget "gltest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69201488191F51AC0054C44D /* Debug */,
+				69201489191F51AC0054C44D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6920148A191F51AC0054C44D /* Build configuration list for PBXNativeTarget "gltestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6920148B191F51AC0054C44D /* Debug */,
+				6920148C191F51AC0054C44D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69201442191F51AC0054C44D /* Project object */;
+}
