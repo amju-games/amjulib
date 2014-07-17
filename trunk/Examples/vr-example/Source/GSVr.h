@@ -19,6 +19,8 @@ public:
   virtual void OnActive();
   
   virtual bool OnRotationEvent(const RotationEvent&) override;
+  // Movement - TODO use messages
+  virtual bool OnKeyEvent(const KeyEvent&) override;
 
 private:
   void DrawScene();
@@ -26,6 +28,9 @@ private:
   Vec3f m_viewDir;
   Vec3f m_upDir;
   
+  Vec3f m_pos;
+  Vec3f m_vel;
+
   ObjMesh* m_mesh;
 };
 typedef Singleton<GSVr> TheGSVr;
