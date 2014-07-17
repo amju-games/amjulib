@@ -23,7 +23,7 @@ struct Message : public RefCounted
 
 typedef RCPtr<Message> PMessage;
 
-bool operator<(const PMessage& m1, const PMessage& m2)
+inline bool operator<(const PMessage& m1, const PMessage& m2)
 {
   return (m1->m_time < m2->m_time);
 }
