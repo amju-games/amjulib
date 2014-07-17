@@ -68,6 +68,25 @@ struct Camera
   Vec3f pos, dir, up;
 };
 
+void SetViewport(Eye eye, float vpX, float vpY)
+{
+  const int windowwidth = Screen::X();
+  const int windowheight = Screen::Y();
+
+  if (eye == LEFT)
+  {
+    AmjuGL::Viewport(0 + vpX, 0 + vpY,
+      windowwidth/2 - vpX - 2,
+      windowheight - vpY * 2);
+  }
+  else
+  {
+    AmjuGL::Viewport(windowwidth/2 + 4, 0 + vpY,
+      windowwidth/2 - 2 - vpX, 
+      windowheight - vpY * 2);
+  }
+}
+
 void SetUpCamera(Eye eye, const Camera& camera)
 {
   // http://paulbourke.net/stereographics/stereorender/
@@ -88,10 +107,12 @@ void SetUpCamera(Eye eye, const Camera& camera)
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
 
+  SetViewport(eye, 80, 40);
+
   if (eye == LEFT)
   {
     // Left eye
-    AmjuGL::Viewport(0,0,windowwidth/2 - 2,windowheight);
+////    AmjuGL::Viewport(0,0,windowwidth/2 - 2,windowheight);
     float top    =   widthdiv2;
     float bottom = - widthdiv2;
     float left   = - aspectratio * widthdiv2 + 0.5 * camera.eyesep * camera.neardist / camera.fo;
@@ -111,7 +132,7 @@ void SetUpCamera(Eye eye, const Camera& camera)
   {
     // Right eye
     // For side by side stereo
-    AmjuGL::Viewport(windowwidth/2 + 4,0,windowwidth/2 - 2,windowheight);
+////    AmjuGL::Viewport(windowwidth/2 + 4,0,windowwidth/2 - 2,windowheight);
     float top    =   widthdiv2;
     float bottom = - widthdiv2;
     float left   = - aspectratio * widthdiv2 - 0.5 * camera.eyesep * camera.neardist / camera.fo;
