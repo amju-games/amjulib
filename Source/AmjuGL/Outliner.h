@@ -17,7 +17,7 @@ class Outliner : public DrawDecorator
 {
 public:
   // Pass this ID to AmjuGL::Create
-  static const int TYPE_ID = 2;
+  enum { DRAWABLE_TYPE_ID = 2 };
 
   // TODO Set line width, colour, etc
 
