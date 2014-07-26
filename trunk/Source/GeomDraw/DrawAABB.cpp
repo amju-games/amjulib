@@ -9,7 +9,12 @@ namespace Amju
 void DrawSolidAABB(const AABB& a)
 {
   AMJU_CALL_STACK;
+  RCPtr<TriList> triList = MakeAABBTriList(a);
+  triList->Draw();
+}
 
+TriList* MakeAABBTriList(const AABB& a)
+{
   float xmin = a.GetMin(0);
   float ymin = a.GetMin(1);
   float zmin = a.GetMin(2);
@@ -88,7 +93,7 @@ void DrawSolidAABB(const AABB& a)
   t.m_verts[2] = AmjuGL::Vert(xmin, ymax, zmin, 1, 0,  -1, 0, 0);
   tris.push_back(t);
 
-  AmjuGL::DrawTriList(tris);
+  return MakeTriList(tris);
 }
 
 void DrawAABB(const AABB& a)
