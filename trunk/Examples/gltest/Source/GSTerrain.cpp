@@ -1,9 +1,15 @@
 #include <AmjuGL.h>
 #include <Timer.h>
+
 #ifdef WIN32
 #include <gl/glew.h>
 #include <GL/gl.h>
 #endif
+
+#ifdef MACOSX
+#include <OpenGL/gl.h>
+#endif
+
 #include <Shader.h>
 #include <Matrix.h>
 #include <ResourceManager.h>
