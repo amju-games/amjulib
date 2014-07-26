@@ -2,16 +2,16 @@
 
 #include <AmjuGL.h>
 #include <DrawDecorator.h>
+#include <FullScreenPostProcess.h>
 
 namespace Amju
 {
-class DepthOfField : public DrawDecorator
+// Create one of these directly, not through AmjuGL::Create
+class DepthOfField : public DrawDecorator, public FullScreenPostProcess
 {
 public:
-  enum { DRAWABLE_TYPE_ID = 6 };
-
-  virtual bool Init() { return true; }
-  virtual void Draw() { m_drawFunc(); }
+  virtual bool Init();
+  virtual void Draw();
 };
 }
 
