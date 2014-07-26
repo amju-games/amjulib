@@ -21,7 +21,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL1.h"
 #include "ShadowMapOpenGL2.h"
 #include "ShadowMapOpenGL3.h"
-#include "DofOpenGL.h"
+#include "RenderToTextureOpenGL.h"
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -89,15 +89,16 @@ static Drawable* MakeDynamicTriList()
   return new TriListDynamicOpenGL;
 }
 
-static Drawable* MakeDof()
+static Drawable* MakeRenderToTexture()
 {
-std::cout << "Creating DofOpenGL\n";
+std::cout << "Creating RenderToTexture OpenGL\n";
 
-  return new DofOpenGL;
+  return new RenderToTextureOpenGL;
 }
 
 static Drawable* MakeShadowMap()
 {
+#ifdef WIN32
   // TODO: create best quality impl depending on hardware capability
   if (!glBindFramebufferEXT)
   {
@@ -105,6 +106,8 @@ static Drawable* MakeShadowMap()
     std::cout << "AmjuGL: Open GL Shadow map: not supported.\n";
     return new ShadowMapNull;
   }
+#endif
+
 #ifdef USE_SHADOW_MAP_OPENGL_2
   std::cout << "Creating ShadowMapOpenGL2\n";
   return new ShadowMapOpenGL2;
@@ -126,7 +129,7 @@ AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
-  s_factory.Add(DepthOfField::DRAWABLE_TYPE_ID, MakeDof);
+  s_factory.Add(RenderToTexture::DRAWABLE_TYPE_ID, MakeRenderToTexture);
 }
 
 Drawable* AmjuGLOpenGL::Create(int drawableTypeId)
@@ -186,13 +189,18 @@ void AmjuGLOpenGL::Init()
 
   glEnable(GL_COLOR_MATERIAL); 
 
-  // TODO Does glew work with GLES ?
+#ifdef MACOSX
+  s_shaderSupport = true;
+#endif
+
+#ifdef WIN32
   GLenum err = glewInit();
   if (GLEW_OK != err)
   {
     // failed to initialize GLEW!
     std::cout << "Failed to initialise GLEW!\n";
   }
+
 #ifdef SHADER_DEBUG
   std::cout << "Using GLEW Version: " << glewGetString(GLEW_VERSION) << "\n";
 #endif
@@ -224,6 +232,7 @@ std::cout << "GLSL " << sVersion << " is supported.\n";
 std::cout << "GLSL is NOT SUPPORTED :-(\n";
 #endif
   }
+#endif
 }
 
 void AmjuGLOpenGL::SetPerspectiveProjection(
@@ -622,8 +631,9 @@ Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
   // TODO Two separate files for frag and vertex
   if (!s->Load(shaderFileName))
   {
+    //ReportError("Failed to load shader " + shaderFileName);
     delete s;
-    return new ShaderNull;
+    return 0; //new ShaderNull;
   }
   return s;
 

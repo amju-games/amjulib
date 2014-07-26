@@ -70,6 +70,7 @@ std::cout << "Loading shader: " << shadername << "\n";
   if (!AmjuGLOpenGLBase::s_shaderSupport)
   {
     m_errorStr = "GLSL not supported";
+    ReportError("GLSL not supported\n");
     return false;
   }
 

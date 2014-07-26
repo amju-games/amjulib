@@ -1,17 +1,15 @@
 #pragma once
 
-#if defined(AMJU_IOS) || defined (ANDROID_NDK)
-
 #include <RenderToTexture.h>
 #include "Internal/OpenGL.h"
 
 namespace Amju
 {
-class RenderToTextureES2 : public RenderToTexture
+class RenderToTextureOpenGL : public RenderToTexture
 {
 public:
-  RenderToTextureES2();
-  ~RenderToTextureES2();
+  RenderToTextureOpenGL();
+  ~RenderToTextureOpenGL();
 
   // Create texture render target
   bool Init() override;
@@ -32,5 +30,4 @@ private:
 };
 }
 
-#endif
 
