@@ -9,7 +9,7 @@ Amju Games source code (c) Copyright Jason Colman 2007
 // Mac OpenGL diectory.
 
 #if defined(MACOSX)
-#include "GL/glew.h"
+//#include "GL/glew.h"
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/glext.h>

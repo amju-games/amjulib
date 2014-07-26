@@ -24,7 +24,7 @@ extern "C"
 #include "AmjuGL-OpenGLES.2.h"
 #include "ES2DefaultShaders.h"
 #include "ShadowMapES2.h"
-#include "DepthOfFieldES2.h"
+#include "RenderToTextureES2.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
@@ -266,18 +266,18 @@ static Drawable* MakeShadowMapES2()
 {
   return new ShadowMapES2;
 }
-  
-static Drawable* MakeDepthOfFieldES2()
+
+static Drawable* MakeRenderToTextureES2()
 {
-  return new DepthOfFieldES2;
+  return new RenderToTextureES2;
 }
-  
+
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMapES2);
-  s_factory.Add(DepthOfField::DRAWABLE_TYPE_ID, MakeDepthOfFieldES2);
+  s_factory.Add(RenderToTexture::DRAWABLE_TYPE_ID, MakeRenderToTextureES2);
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
