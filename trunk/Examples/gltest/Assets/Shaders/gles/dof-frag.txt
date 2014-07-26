@@ -1,0 +1,14 @@
+// dof-frag.txt
+
+precision highp float;
+
+varying vec2 vUv;
+uniform sampler2D diffuseSampler;
+
+void main()
+{
+//  vec4 diffuse = texture2D(diffuseSampler, vUv);
+  gl_FragColor = vec4(vUv.x, vUv.y, 0, 1); //diffuse;
+}
+
+
