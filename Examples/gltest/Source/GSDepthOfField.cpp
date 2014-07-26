@@ -1,15 +1,12 @@
 #include <AmjuGL.h>
 #include <Teapot.h>
 #include <Shader.h>
-#include <DepthOfField.h>
 #include <Vec3.h>
 #include "GSDepthOfField.h"
 #include "GSShadow.h"
 
 namespace Amju
 {
-static DepthOfField* dof;
-
 GSDepthOfField::GSDepthOfField()
 {
   m_name = "Depth Of Field";
@@ -24,6 +21,8 @@ void GSDepthOfField::Update()
 
 static void DrawScene()
 {
+  AmjuGL::UseShader(0);
+
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D); // not textured
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
   
@@ -77,26 +76,36 @@ static void DrawScene()
 
 void GSDepthOfField::Draw()
 {
+  m_dof->Draw();
+
+  AmjuGL::UseShader(0);
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
-  
-  dof->Draw();
-//  DrawScene();
 }
 
 void GSDepthOfField::Draw2d()
 {
   GSBase::Draw2d();
-
 }
 
 void GSDepthOfField::OnActive()
 {
   GSBase::OnActive();
 
-  dof = dynamic_cast<DepthOfField*>(AmjuGL::Create(DepthOfField::DRAWABLE_TYPE_ID));
-  Assert(dof);
-  dof->SetDrawFunc(DrawScene);
-  dof->Init();
+  m_dof = new DepthOfField;
+  m_dof->SetDrawFunc(DrawScene);
+  if (!m_dof->Init())
+  {
+    std::cout << "Failed to init dof.\n";
+    Assert(0);
+  }
+
+  Shader* sh = AmjuGL::LoadShader("Shaders/" + GetShaderDir() + "/dof");
+  Assert(sh);
+
+std::cout << "Loaded shader for DOF post process effect\n";
+
+  sh->Set("diffuseSampler", (AmjuGL::TextureHandle)0);
+  m_dof->SetPostProcessShader(sh);
 }
 
 } // namespace

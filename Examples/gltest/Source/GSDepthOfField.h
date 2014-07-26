@@ -2,6 +2,7 @@
 
 #include <Singleton.h>
 #include <TriList.h>
+#include <DepthOfField.h>
 #include "GSBase.h"
 
 namespace Amju 
@@ -18,7 +19,7 @@ public:
   virtual void OnActive();
 
 private:
-  RCPtr<TriListStatic> m_triList;
+  RCPtr<DepthOfField> m_dof;
 };
 typedef Singleton<GSDepthOfField> TheGSDepthOfField;
 } // namespace
