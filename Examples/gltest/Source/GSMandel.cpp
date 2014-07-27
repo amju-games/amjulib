@@ -75,7 +75,7 @@ void GSMandel::OnActive()
 {
   GSBase::OnActive();
 
-  shader = AmjuGL::LoadShader("Shaders/" + GetShaderDir() + "/mandel");
+  shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/mandel");
   shader->Begin();
   
   // Make a rectangle in screen space 

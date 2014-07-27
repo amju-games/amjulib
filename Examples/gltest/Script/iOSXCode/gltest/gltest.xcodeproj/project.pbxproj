@@ -41,6 +41,7 @@
 		692014C6191F6D880054C44D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692014C3191F6D880054C44D /* ViewController_iPhone.xib */; };
 		692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692014CA191FCDF40054C44D /* GSMandel.cpp */; };
 		69201503191FE6940054C44D /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 69201502191FE6940054C44D /* data-iphone.glue */; };
+		692F34BB197A74930040C9C3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692F34BA197A74930040C9C3 /* CoreLocation.framework */; };
 		697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		692014CA191FCDF40054C44D /* GSMandel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSMandel.cpp; path = ../../../../Source/GSMandel.cpp; sourceTree = "<group>"; };
 		692014CB191FCDF40054C44D /* GSMandel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSMandel.h; path = ../../../../Source/GSMandel.h; sourceTree = "<group>"; };
 		69201502191FE6940054C44D /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../Build/gltest/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
+		692F34BA197A74930040C9C3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSDepthOfField.cpp; path = ../../../../Source/GSDepthOfField.cpp; sourceTree = "<group>"; };
 		697F5AEC19572AF50020A72E /* GSDepthOfField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSDepthOfField.h; path = ../../../../Source/GSDepthOfField.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692F34BB197A74930040C9C3 /* CoreLocation.framework in Frameworks */,
 				69054D20191FF6CF00FDC6BA /* libamju.a in Frameworks */,
 				692014B6191F53D20054C44D /* CoreMotion.framework in Frameworks */,
 				69201456191F51AC0054C44D /* OpenGLES.framework in Frameworks */,
@@ -161,6 +164,7 @@
 		6920144C191F51AC0054C44D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				692F34BA197A74930040C9C3 /* CoreLocation.framework */,
 				69054D1F191FF6CF00FDC6BA /* libamju.a */,
 				692014B5191F53D20054C44D /* CoreMotion.framework */,
 				692014B3191F53B70054C44D /* libamju.a */,
