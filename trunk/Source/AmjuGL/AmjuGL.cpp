@@ -744,5 +744,17 @@ Drawable* AmjuGL::Create(int drawableTypeId)
   return impl->Create(drawableTypeId);
 }
 
+std::string AmjuGL::GetShaderDir()
+{
+  // TODO Use impl v function
+
+#ifdef AMJU_IOS
+  return "gles";
+#endif
+
+  return "opengl";
+
+  // TODO DX9, DX11
+}
 }
 
