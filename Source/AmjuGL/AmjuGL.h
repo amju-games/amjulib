@@ -261,7 +261,13 @@ public:
     const Vec3& lightPos);
 
   static Shader* LoadShader(const std::string& shaderFileName);
+
+  // Pass in nullptr to reset to default shader or use no shader 
+  // (for OpenGL, ES1, DX9)
   static void UseShader(Shader*);
+
+  // Get subdirectory for shader files for the current impl
+  static std::string GetShaderDir();
 
   // Abstract Factory: impl creates appropriate Drawable, 
   //  probably either TriangleListStatic or TriangleListDynamic.
