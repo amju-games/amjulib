@@ -4,6 +4,7 @@
 #include <Singleton.h>
 #include <GameState.h>
 #include <ObjMesh.h>
+#include "BarrelDist.h"
 
 namespace Amju 
 {
@@ -32,6 +33,8 @@ private:
   Vec3f m_vel;
 
   ObjMesh* m_mesh;
+
+  BarrelDist m_barrel;
 };
 typedef Singleton<GSVr> TheGSVr;
 } // namespace

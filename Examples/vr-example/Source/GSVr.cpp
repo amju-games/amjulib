@@ -7,6 +7,7 @@
 #include <File.h>
 #include <Timer.h>
 #include <DegRad.h>
+#include <ReportError.h>
 #include "GSVr.h"
 
 #include <OVR.h>
@@ -105,13 +106,13 @@ void SetViewport(Eye eye, float vpX, float vpY)
     if (eye == LEFT)
     {
         AmjuGL::Viewport(0 + vpX, 0 + vpY,
-            windowwidth / 2 - vpX - 2,
+            windowwidth / 2 - vpX,
             windowheight - vpY * 2);
     }
     else
     {
-        AmjuGL::Viewport(windowwidth / 2 + 4, 0 + vpY,
-            windowwidth / 2 - 2 - vpX,
+        AmjuGL::Viewport(windowwidth / 2, 0 + vpY,
+            windowwidth / 2 - vpX,
             windowheight - vpY * 2);
     }
 }
@@ -210,7 +211,8 @@ void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
   }
 }
 
-void GSVr::DrawScene()
+static ObjMesh* theMesh = 0;
+void DrawScene()
 {
   Vec3f pos(1, 1, 1);
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
@@ -225,17 +227,13 @@ void GSVr::DrawScene()
   static Teapot tp;
   tp.Draw();
   
-  m_mesh->Draw();
+  theMesh->Draw();
 }
 
-void GSVr::Draw()
+void DrawBothEyes()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
  
-  theCamera.pos = m_pos;
-  theCamera.dir = m_viewDir;
-  theCamera.up = m_upDir;
-
   if (symmetrical)
   {
       SetUpCameraSymmetric(LEFT, theCamera);
@@ -257,6 +255,19 @@ void GSVr::Draw()
   const int w = Screen::X();
   const int h = Screen::Y();
   AmjuGL::Viewport(0, 0, w, h);
+}
+
+void GSVr::Draw()
+{
+  theMesh = m_mesh;
+
+  theCamera.pos = m_pos;
+  theCamera.dir = m_viewDir;
+  theCamera.up = m_upDir;
+
+  m_barrel.Draw();
+  AmjuGL::UseShader(0);
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 }
 
 bool GSVr::OnKeyEvent(const KeyEvent& ke)
@@ -435,7 +446,7 @@ bool InitOVR()
     hmd = ovrHmd_Create(0);
     if (!hmd)
     {
-        MessageBoxA(NULL, "Oculus Rift not detected.", "", MB_OK);
+        ReportError("Oculus Rift not detected.");
         return false;
     }
 
@@ -443,7 +454,7 @@ bool InitOVR()
     ovrHmd_GetDesc(hmd, &hmdDesc);
     if (hmdDesc.DisplayDeviceName[0] == '\0')
     {
-        MessageBoxA(NULL, "Rift detected, display not enabled.", "", MB_OK);
+        ReportError("Rift detected, display not enabled.");
         return false;
     }
 
@@ -460,9 +471,14 @@ bool InitOVR()
 
 void GSVr::OnActive()
 {
+  // TODO Run time switch?
 //  InitOVR();
 
+#ifdef WIN32
+  // TODO TEMP TEST
   File::SetRoot("C:\\jay\\projects\\amjulib\\Examples\\ovr-example\\Assets\\fire_temple", "/");
+#endif
+
   ResourceManager* rm = TheResourceManager::Instance();
   rm->AddLoader("obj", TextObjLoader);
   m_mesh = (ObjMesh*)rm->GetRes("model.obj");
@@ -474,6 +490,11 @@ void GSVr::OnActive()
   theCamera.eyesep = INITIAL_EYESEP; // TODO TEST
   theCamera.fo = 75.0f; 
 
+  m_pos.y = 10;
+
+  // Set up barrel dist post process effect
+  m_barrel.SetDrawFunc(DrawBothEyes);
+  m_barrel.Init();
 }
 
 } // namespace
