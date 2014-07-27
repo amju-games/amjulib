@@ -99,7 +99,7 @@ void GSDepthOfField::OnActive()
     Assert(0);
   }
 
-  Shader* sh = AmjuGL::LoadShader("Shaders/" + GetShaderDir() + "/dof");
+  Shader* sh = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/dof");
   Assert(sh);
 
 std::cout << "Loaded shader for DOF post process effect\n";

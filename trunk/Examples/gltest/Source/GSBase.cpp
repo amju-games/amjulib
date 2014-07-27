@@ -14,17 +14,6 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
 }
 
-std::string GSBase::GetShaderDir() const
-{
-#ifdef AMJU_IOS 
-  return "gles";
-#endif
-
-  return "opengl";
-
-  // TODO DX9, DX11
-}
-
 void GSBase::OnActive() 
 {
   m_time = 0;

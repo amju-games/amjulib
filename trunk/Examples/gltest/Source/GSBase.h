@@ -18,9 +18,6 @@ public:
   virtual bool OnKeyEvent(const KeyEvent&) override;
 
 protected:
-  std::string GetShaderDir() const;
-
-protected:
   float m_time;
   float m_maxTime;
   GSBase* m_nextState;
