@@ -2,12 +2,20 @@
 
 varying vec2 UV;
 uniform sampler2D diffuseSampler;
+uniform sampler2D depthSampler;
 
 void main()
 {
-  vec4 diffuse1 = texture2D(diffuseSampler, UV + vec2(0.005, 0.005));
-  vec4 diffuse2 = texture2D(diffuseSampler, UV);
-//  vec4 diffuse = vec4(UV.x, UV.y, 1, 1);
-  gl_FragColor = diffuse1 * 0.5 + diffuse2 * 0.5;
+  if (UV.x < 0.5)
+  {
+    vec4 diffuse1 = texture2D(diffuseSampler, UV);
+    gl_FragColor = diffuse1;
+  }
+  else
+  {
+    vec4 depth = texture2D(depthSampler, UV);
+    gl_FragColor = depth;
+  }
+  return;
 }
 
