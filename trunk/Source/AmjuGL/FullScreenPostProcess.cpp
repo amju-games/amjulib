@@ -12,15 +12,15 @@ void FullScreenPostProcess::DrawFullScreenQuad()
 {
   Assert(m_triList);
   
-  if (m_renderToTexture)
-  {
-    m_renderToTexture->UseThisTexture();
-  }
-  
   // Use post-process shader
   if (m_postProcessShader)
   {
     AmjuGL::UseShader(m_postProcessShader);
+  }
+  
+  if (m_renderToTexture)
+  {
+    m_renderToTexture->UseThisTexture();
   }
   
   // TODO push/pop

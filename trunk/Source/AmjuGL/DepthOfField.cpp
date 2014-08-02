@@ -35,6 +35,10 @@ std::cout << "Created render to texture OK in depth of field\n";
 //  int h = Screen::Y();
   m_renderToTexture->SetSize(512, 512); // TODO
 
+  m_renderToTexture->SetRenderFlags(
+    RenderToTexture::AMJU_RENDER_DEPTH |
+    RenderToTexture::AMJU_RENDER_COLOUR);
+
   return m_renderToTexture->Init(); 
 }
 }
