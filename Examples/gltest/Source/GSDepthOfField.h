@@ -20,6 +20,7 @@ public:
 
 private:
   RCPtr<DepthOfField> m_dof;
+  Shader* m_shader;
 };
 typedef Singleton<GSDepthOfField> TheGSDepthOfField;
 } // namespace

@@ -4,6 +4,25 @@ varying vec2 UV;
 uniform sampler2D diffuseSampler;
 uniform sampler2D depthSampler;
 
+#if 1
+
+uniform float focus;
+
+void main()
+{
+  vec4 depth = texture2D(depthSampler, UV);
+  float d = (depth.r - focus) * 0.01;
+
+  vec4 diffuse1 = texture2D(diffuseSampler, UV + vec2(-d, -d));
+  vec4 diffuse2 = texture2D(diffuseSampler, UV + vec2( d,  d));
+  vec4 diffuse3 = texture2D(diffuseSampler, UV + vec2(-d,  d));
+  vec4 diffuse4 = texture2D(diffuseSampler, UV + vec2( d, -d));
+
+  gl_FragColor = diffuse1 * 0.25 + diffuse2 * 0.25 + diffuse3 * 0.25 + diffuse4 * 0.25;
+}
+
+#else
+
 void main()
 {
   if (UV.x < 0.5)
@@ -18,4 +37,6 @@ void main()
   }
   return;
 }
+
+#endif
 
