@@ -10,6 +10,12 @@ RenderToTexture::RenderToTexture()
   m_vpY = 0;
   m_vpW = -1;
   m_vpH = -1;
+  m_renderFlags = AMJU_RENDER_COLOUR;
+}
+
+void RenderToTexture::SetRenderFlags(int renderFlags)
+{
+  m_renderFlags = renderFlags;
 }
 
 void RenderToTexture::SetSize(int w, int h)
