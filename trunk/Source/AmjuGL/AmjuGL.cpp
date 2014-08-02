@@ -214,6 +214,11 @@ void AmjuGL::SetClearColour(const Colour& col)
   clearCol = col;
 }
 
+const Colour& AmjuGL::GetClearColour()
+{
+  return clearCol;
+}
+
 void AmjuGL::InitFrame()
 {
   AMJU_CALL_STACK;

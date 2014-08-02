@@ -132,6 +132,8 @@ public:
   // Specify clear colour
   static void SetClearColour(const Colour& col);
 
+  static const Colour& GetClearColour();
+
   static void InitFrame();
 
   // Set up perspective projection matrix, by specifying field-of-view 
