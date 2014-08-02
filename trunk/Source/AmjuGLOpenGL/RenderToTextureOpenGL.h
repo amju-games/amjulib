@@ -23,9 +23,14 @@ public:
   
   void UseThisTexture() override;
 
-private:
+protected:
+  bool InitDepth();
+  bool InitColour();
+  bool InitDepthColour();
+
+protected:
   GLuint m_framebuffer;
-  GLuint m_tex;
+  GLuint m_tex[2]; // 0 is colour, 1 is depth
   GLint m_old_fbo;
 };
 }
