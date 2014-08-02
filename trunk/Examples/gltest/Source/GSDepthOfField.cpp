@@ -2,6 +2,7 @@
 #include <Teapot.h>
 #include <Shader.h>
 #include <Vec3.h>
+#include <Timer.h>
 #include "GSDepthOfField.h"
 #include "GSShadow.h"
 
@@ -12,6 +13,7 @@ GSDepthOfField::GSDepthOfField()
   m_name = "Depth Of Field";
   m_nextState = TheGSShadow::Instance();
   m_maxTime = 200.0f;
+  m_shader = 0;
 }
 
 void GSDepthOfField::Update()
@@ -76,6 +78,13 @@ static void DrawScene()
 
 void GSDepthOfField::Draw()
 {
+  AmjuGL::UseShader(m_shader);
+  float dt = TheTimer::Instance()->GetDt();
+  static float t = 0;
+  t += dt;
+  float focus = (sin(t * 0.25f) + 1.0f) * 0.5f;
+  m_shader->Set("focus", focus);
+
   m_dof->Draw();
 
   AmjuGL::UseShader(0);
@@ -99,16 +108,16 @@ void GSDepthOfField::OnActive()
     Assert(0);
   }
 
-  Shader* sh = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/dof");
-  Assert(sh);
+  m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/dof");
+  Assert(m_shader);
 
 std::cout << "Loaded shader for DOF post process effect\n";
 
-  AmjuGL::UseShader(sh);
-  sh->Set("diffuseSampler", (AmjuGL::TextureHandle)0);
-  sh->Set("depthSampler", (AmjuGL::TextureHandle)1);
+  AmjuGL::UseShader(m_shader);
+  m_shader->Set("diffuseSampler", (AmjuGL::TextureHandle)0);
+  m_shader->Set("depthSampler", (AmjuGL::TextureHandle)1);
 
-  m_dof->SetPostProcessShader(sh);
+  m_dof->SetPostProcessShader(m_shader);
 }
 
 } // namespace
