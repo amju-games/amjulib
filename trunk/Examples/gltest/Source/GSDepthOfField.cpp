@@ -104,7 +104,10 @@ void GSDepthOfField::OnActive()
 
 std::cout << "Loaded shader for DOF post process effect\n";
 
+  AmjuGL::UseShader(sh);
   sh->Set("diffuseSampler", (AmjuGL::TextureHandle)0);
+  sh->Set("depthSampler", (AmjuGL::TextureHandle)1);
+
   m_dof->SetPostProcessShader(sh);
 }
 
