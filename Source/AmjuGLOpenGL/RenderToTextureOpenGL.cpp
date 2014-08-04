@@ -68,12 +68,14 @@ bool RenderToTextureOpenGL::InitDepth()
   glBindTexture(GL_TEXTURE_2D, 0);
 
   // we won't bind a color texture with the currently binded FBO
+#ifndef AMJU_IOS
   glDrawBuffer(GL_NONE);
   glReadBuffer(GL_NONE);
-
+#endif
+  
   // attach the texture to FBO depth attachment point
-  glFramebufferTexture2DEXT(
-    GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,GL_TEXTURE_2D, m_tex[1], 0);
+  glFramebufferTexture2D(
+    GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D, m_tex[1], 0);
 
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_tex[1], 0);
   return true;
@@ -92,11 +94,11 @@ bool RenderToTextureOpenGL::InitDepthColour()
                  GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0);
     
   // attach the texture to FBO color attachment point
-  glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT,
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_TEXTURE_2D, m_tex[0], 0);
     
   // Attach the texture to FBO depth attachment point  
-  glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, 
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
                               GL_TEXTURE_2D, m_tex[1], 0);
 
   return true;
