@@ -25,6 +25,7 @@ extern "C"
 #include "ES2DefaultShaders.h"
 #include "ShadowMapES2.h"
 #include "RenderToTextureES2.h"
+#include "RenderToTextureOpenGL.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
@@ -269,7 +270,7 @@ static Drawable* MakeShadowMapES2()
 
 static Drawable* MakeRenderToTextureES2()
 {
-  return new RenderToTextureES2;
+  return new RenderToTextureOpenGL;
 }
 
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
