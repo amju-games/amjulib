@@ -11,6 +11,13 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
+void CheckOpenGLError(const char* stmt, const char* fname, int line);
+
+#define GL_CHECK(stmt) do { \
+stmt; \
+CheckOpenGLError(#stmt, __FILE__, __LINE__); \
+} while (0)
+  
 class AmjuGLOpenGLBase : public AmjuGLImpl
 {
 public:
