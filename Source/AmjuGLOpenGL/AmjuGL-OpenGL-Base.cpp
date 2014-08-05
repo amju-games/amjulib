@@ -15,6 +15,17 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
+void CheckOpenGLError(const char* stmt, const char* fname, int line)
+{
+  GLenum err = glGetError();
+  if (err != GL_NO_ERROR)
+  {
+    std::cout << "OpenGL error " << err << " at " << fname << ": " << line <<
+      " for: " << stmt << "\n";
+    Assert(0);
+  }
+}
+  
 bool AmjuGLOpenGLBase::s_shaderSupport = false;
 
 void AmjuGLOpenGLBase::BeginScene()
