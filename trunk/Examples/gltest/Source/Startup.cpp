@@ -6,6 +6,7 @@
 #include <File.h>
 #include <FileImplGlue.h>
 #include <GlueFileMem.h>
+#include <ObjMesh.h>
 #include "GSLighting.h"
 #include "GSTexture.h"
 #include "GSShaderWave.h"
@@ -62,7 +63,10 @@ void StartUpAfterCreateWindow()
 //  TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSLighting::Instance());
 
-  TheResourceManager::Instance()->AddLoader("font", FontLoader);
+  ResourceManager* rm = TheResourceManager::Instance();
+  rm->AddLoader("obj", TextObjLoader);
+  rm->AddLoader("font", FontLoader);
+
   Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
   Assert(font);
   TheGame::Instance()->SetFrameTimeFont(font);
