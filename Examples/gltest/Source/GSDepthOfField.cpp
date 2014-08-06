@@ -3,11 +3,15 @@
 #include <Shader.h>
 #include <Vec3.h>
 #include <Timer.h>
+#include <ResourceManager.h>
+#include <ObjMesh.h>
 #include "GSDepthOfField.h"
 #include "GSShadow.h"
 
 namespace Amju
 {
+static ObjMesh* bunny = 0;
+
 GSDepthOfField::GSDepthOfField()
 {
   m_name = "Depth Of Field";
@@ -50,27 +54,33 @@ static void DrawScene()
   float d = 3.0f;
 
   AmjuGL::LookAt(3, 5, 12,  3, 0, 0,  0, 1, 0);
-  static Teapot tp;
+  //static Teapot tp;
   AmjuGL::SetColour(Colour(0.2, 0.2, 1, 1));
   AmjuGL::PushMatrix();
-  tp.Draw();
+  //tp.Draw();
+  bunny->Draw();
 
   AmjuGL::SetColour(Colour(1, 0, 0, 1));
   AmjuGL::PushMatrix();
   AmjuGL::Translate(d, 0, d);
-  tp.Draw();
+  //tp.Draw();
+  bunny->Draw();
+
   AmjuGL::SetColour(Colour(1, 0, 1, 1));
   AmjuGL::Translate(d, 0, d);
-  tp.Draw();
+  //tp.Draw();
+  bunny->Draw();
   AmjuGL::PopMatrix();
 
   AmjuGL::SetColour(Colour(0, 1, 0, 1));
   AmjuGL::PushMatrix();
   AmjuGL::Translate(-d, 0, -d);
-  tp.Draw();
+  //tp.Draw();
+  bunny->Draw();
   AmjuGL::SetColour(Colour(1, 1, 0, 1));
   AmjuGL::Translate(-d, 0, -d);
-  tp.Draw();
+  //tp.Draw();
+  bunny->Draw();
   AmjuGL::PopMatrix();
 
   AmjuGL::PopMatrix();
@@ -82,7 +92,7 @@ void GSDepthOfField::Draw()
   float dt = TheTimer::Instance()->GetDt();
   static float t = 0;
   t += dt;
-  float focus = (sin(t * 0.25f) + 1.0f) * 0.5f;
+  float focus = (sinf(t * 0.25f) + 1.0f) * 0.5f;
   m_shader->Set("focus", focus);
 
   m_dof->Draw();
@@ -118,6 +128,8 @@ std::cout << "Loaded shader for DOF post process effect\n";
   m_shader->Set("depthSampler", (AmjuGL::TextureHandle)1);
 
   m_dof->SetPostProcessShader(m_shader);
+
+  bunny = (ObjMesh*)TheResourceManager::Instance()->GetRes("bunny_with_normals.obj");
 }
 
 } // namespace

@@ -14,6 +14,7 @@ mkdir -p $DEST_DIR
 mkdir -p $DEST_DIR/font2d/
 mkdir -p $DEST_DIR/Shaders/gles
 
+cp $SRC_DIR/*.obj $DEST_DIR
 cp $SRC_DIR/*.png $DEST_DIR
 cp $SRC_DIR/*.txt $DEST_DIR
 cp $SRC_DIR/Shaders/gles/*.txt $DEST_DIR/Shaders/gles
@@ -25,7 +26,7 @@ cd $DEST_DIR
 # Create empty glue file
 $GLUE_EXE -c $GLUE_FILE
 
-for f in *.txt *.png font2d/* Shaders/gles/*
+for f in *.txt *.png *.obj font2d/* Shaders/gles/*
 do
     echo "Adding file: " $f
     $GLUE_EXE -a $GLUE_FILE $f

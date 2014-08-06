@@ -6,10 +6,11 @@ attribute vec4 position;
 attribute vec2 uv;
 attribute vec3 normal;
 
-varying vec2 vUv;
+varying vec2 UV;
 
 void main()
 {
-  gl_Position = position; 
-  vUv = uv;
+  UV = uv;
+  gl_Position = position; // no transform required, screen space quad
 }
+
