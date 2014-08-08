@@ -1,0 +1,78 @@
+// bogus_ssao-frag.txt
+
+varying vec2 UV;
+uniform sampler2D diffuseSampler;
+
+#define USE_COSINE
+
+#define M_PI 3.1415926535897932384626433832795
+
+// Sample radius around current UV point
+const float RADIUS = 0.001;
+
+// Max depth difference we consider for occlusion
+//  -- if depth diff is greater, there is no occlusion
+const float MAX_DIFF = 0.01;
+
+// http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
+float rand(vec2 co)
+{
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float depthDiffFunc(float d1, float d2)
+{
+  // Calc Value between 0 and 1, 1 means no occlusion 
+  float diff = abs(d1 - d2);
+#ifdef USE_COSINE
+
+  diff = min(diff, MAX_DIFF);
+  diff = diff / MAX_DIFF * 2.0 * M_PI;
+  float f = cos(diff);
+
+#endif
+
+#ifdef USE_SINE
+  float f = 1.0;
+  if (diff > 0.0)
+  {
+    diff = min(diff, MAX_DIFF);
+    // Now diff is between 0 and MAX_DIFF. Scale so between 0 and 2 pi
+    diff = diff / MAX_DIFF * 2.0;
+    f = sin(diff);
+  }
+#endif
+ 
+  return f;
+}
+
+void main()
+{
+  // Depth at the current UV point
+  float d = texture2D(diffuseSampler, UV).r;
+
+  float f = 0.0; // total
+
+  for (int i = 0; i < 4; i++)
+  {
+    // Get Depth at random point on circle around current UV point
+    // (within as well as on radius?)
+
+    // If we just sample above/below/left/right we get horrible artifacts
+ 
+    // Get random angle between 0 and 2 pi
+    float r = rand(UV + vec2(f, 0.0));
+    float theta = r * 2.0 * M_PI; 
+
+    vec2 circPos = vec2(cos(theta), sin(theta)) * RADIUS;
+    // Get depth at pos on circle
+    float d1 = texture2D(diffuseSampler, UV + circPos).r;
+
+    f += depthDiffFunc(d, d1);
+  }
+
+  f *= 0.25; // 4 samples
+
+  gl_FragColor = vec4(f, f, f, 1.0);
+}
+
