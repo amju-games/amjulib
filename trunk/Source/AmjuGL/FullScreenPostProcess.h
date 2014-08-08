@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-// Mixin class for post process effects
+// (Mixin?) class for post process effects
 class FullScreenPostProcess
 {
 public:
@@ -16,7 +16,9 @@ public:
   bool InitFullScreenQuad();
 
   RenderToTexture* GetRenderTarget() { return m_renderToTexture; }
+  void SetRenderTarget(RenderToTexture* rt) { m_renderToTexture = rt; }
 
+  Shader* GetPostProcessShader() { return m_postProcessShader; }
   void SetPostProcessShader(Shader* sh) { m_postProcessShader = sh; }
   
 protected:

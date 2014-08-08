@@ -31,9 +31,9 @@ bool DepthOfField::Init()
   }
 
 std::cout << "Created render to texture OK in depth of field\n"; 
-//  int w = Screen::X();
-//  int h = Screen::Y();
-  m_renderToTexture->SetSize(512, 512); // TODO
+  int w = Screen::X();
+  int h = Screen::Y();
+  m_renderToTexture->SetSize(w, h); 
 
   m_renderToTexture->SetRenderFlags(
     RenderToTexture::AMJU_RENDER_DEPTH |
