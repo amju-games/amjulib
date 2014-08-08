@@ -6,6 +6,9 @@
 
 namespace Amju
 {
+// Use this for render to texture etc
+void DrawBunnyScene();
+
 class GSBase : public GameState
 {
 public:

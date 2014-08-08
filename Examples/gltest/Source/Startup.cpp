@@ -18,6 +18,7 @@
 #include "GSTerrain.h"
 #include "GSBarrel.h"
 #include "GSPatchwork.h"
+#include "GSInitialise.h"
 
 #ifdef AMJU_IOS
 #define GLUE_FILE "data-iphone.glue"
@@ -54,11 +55,10 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
+  TheGame::Instance()->SetCurrentState(TheGSInitialise::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSPatchwork::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSBarrel::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSTerrain::Instance());
-//  TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
-  TheGame::Instance()->SetCurrentState(TheGSDepthOfField::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSMandel::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSShaderWave::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSLighting::Instance());
