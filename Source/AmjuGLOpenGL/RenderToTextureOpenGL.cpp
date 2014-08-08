@@ -34,15 +34,22 @@ RenderToTextureOpenGL::~RenderToTextureOpenGL()
 void RenderToTextureOpenGL::UseThisTexture()
 {
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, 0));
+
+#if !defined(AMJU_USE_ES2)  
   GL_CHECK(glEnable(GL_TEXTURE_2D));
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-  
+#endif
+
   if (m_renderFlags == AMJU_RENDER_DEPTH)
   {
+    // Only 1 texture, so use texture0, right?
+    //GL_CHECK(glActiveTexture(GL_TEXTURE1));
+    GL_CHECK(glActiveTexture(GL_TEXTURE0));
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[1]));
   }
   else if (m_renderFlags == AMJU_RENDER_COLOUR)
   {
+    GL_CHECK(glActiveTexture(GL_TEXTURE0));
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
   }
   else
@@ -66,10 +73,15 @@ bool RenderToTextureOpenGL::InitDepth()
   GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
     m_width, m_height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, 0));
 
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
 
   // we won't bind a color texture with the currently binded FBO
-#ifndef AMJU_IOS
+#ifndef AMJU_USE_ES2
   GL_CHECK(glDrawBuffer(GL_NONE));
   GL_CHECK(glReadBuffer(GL_NONE));
 #endif
@@ -85,6 +97,17 @@ bool RenderToTextureOpenGL::InitDepth()
 
 bool RenderToTextureOpenGL::InitDepthColour()
 {
+
+  for (int i = 0; i < 2; i++)
+  {
+    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[i]));
+
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  }
+
   // parameters for color buffer texture
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
   GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0,
@@ -113,12 +136,17 @@ bool RenderToTextureOpenGL::InitColour()
 
   // Give an empty image to OpenGL ( the last "0" )
   GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-    m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL));
+    m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, NULL));
+
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
   GLuint depthRenderbuffer;
   GL_CHECK(glGenRenderbuffers(1, &depthRenderbuffer));
   GL_CHECK(glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer));
-  GL_CHECK(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_width, m_height));
+  GL_CHECK(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, m_width, m_height));
   GL_CHECK(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
     GL_RENDERBUFFER, depthRenderbuffer));
 
@@ -137,6 +165,7 @@ bool RenderToTextureOpenGL::Init()
   // create the texture
   GL_CHECK(glGenTextures(2, m_tex));
 
+/*
   for (int i = 0; i < 2; i++)
   {
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[i]));
@@ -146,6 +175,7 @@ bool RenderToTextureOpenGL::Init()
     GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
     GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
   }
+*/
 
   if (m_renderFlags == AMJU_RENDER_DEPTH)
   { 
@@ -175,8 +205,11 @@ bool RenderToTextureOpenGL::Begin()
 {
   AmjuGL::GetViewport(&m_vpX, &m_vpY, &m_vpW, &m_vpH);
   AmjuGL::Viewport(0, 0, m_width, m_height); // same as size in Init
-    
+  
+#if !defined(AMJU_USE_ES2)  
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, 0));
+#endif
+
   GL_CHECK(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_old_fbo));
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer));
 
