@@ -270,7 +270,7 @@ static Drawable* MakeShadowMapES2()
 
 static Drawable* MakeRenderToTextureES2()
 {
-  return new RenderToTextureOpenGL;
+  return new RenderToTextureES2;
 }
 
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()

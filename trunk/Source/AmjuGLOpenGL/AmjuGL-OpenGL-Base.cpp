@@ -20,9 +20,26 @@ void CheckOpenGLError(const char* stmt, const char* fname, int line)
   GLenum err = glGetError();
   if (err != GL_NO_ERROR)
   {
-    std::cout << "OpenGL error " << err << " at " << fname << ": " << line <<
+    std::string str;
+    if (err == GL_INVALID_ENUM) str = "GL_INVALID_ENUM";
+    else if (err == GL_INVALID_VALUE) str = "GL_INVALID_VALUE";
+    else if (err == GL_INVALID_OPERATION) str = "GL_INVALID_OPERATION";
+#ifdef GL_STACK_OVERFLOW
+    else if (err == GL_STACK_OVERFLOW) str = "GL_STACK_OVERFLOW";
+#endif
+#ifdef GL_STACK_UNDERFLOW
+    else if (err == GL_STACK_UNDERFLOW) str = "GL_STACK_UNDERFLOW";
+#endif
+    else if (err == GL_OUT_OF_MEMORY) str = "GL_OUT_OF_MEMORY";
+    else if (err == GL_INVALID_FRAMEBUFFER_OPERATION) str = "GL_INVALID_FRAMEBUFFER_OPERATION";
+#ifdef GL_TABLE_TOO_LARGE
+    else if (err == GL_TABLE_TOO_LARGE) str = "GL_TABLE_TOO_LARGE";
+#endif
+    else str = "Unknown error!";
+
+    std::cout << "OpenGL error " << str << " (" << err << ") at " << fname << ": " << line <<
       " for: " << stmt << "\n";
-    Assert(0);
+//    Assert(0);
   }
 }
   
