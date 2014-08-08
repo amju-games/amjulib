@@ -1,0 +1,11 @@
+// dof-frag.txt
+
+varying vec2 UV;
+uniform sampler2D diffuseSampler;
+
+void main()
+{
+  vec4 diffuse1 = texture2D(diffuseSampler, UV);
+  gl_FragColor = diffuse1;
+}
+

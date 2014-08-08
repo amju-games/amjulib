@@ -1,0 +1,10 @@
+// rendertexture-vert.txt
+
+varying vec2 UV;
+
+void main()
+{
+  UV = gl_MultiTexCoord0.st;
+  gl_Position = gl_Vertex;
+}
+
