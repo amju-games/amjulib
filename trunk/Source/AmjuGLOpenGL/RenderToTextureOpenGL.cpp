@@ -35,10 +35,8 @@ void RenderToTextureOpenGL::UseThisTexture()
 {
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 
-#if !defined(AMJU_USE_ES2)  
   GL_CHECK(glEnable(GL_TEXTURE_2D));
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-#endif
 
   if (m_renderFlags == AMJU_RENDER_DEPTH)
   {
