@@ -219,17 +219,17 @@ static ObjMesh* theMesh = 0;
 void DrawScene()
 {
   Vec3f pos(1, 1, 1);
-  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
-  
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING); // mesh normals are no good 
+/*
   AmjuGL::DrawLighting(
     AmjuGL::LightColour(0, 0, 0),
     AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
     AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
     AmjuGL::LightColour(1, 1, 1),
     AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
-
   static Teapot tp;
   tp.Draw();
+ */
   
   theMesh->Draw();
 }
