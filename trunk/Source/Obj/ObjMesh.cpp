@@ -654,9 +654,10 @@ void ObjMesh::MungeData()
 #ifdef WIN32
       it = m_groups.erase(it);
 #else
-      // See http://stackoverflow.com/questions/52714/stl-vector-vs-map-erase
+      auto jt = it;
+      ++jt;
       m_groups.erase(it);
-      ++it;
+      it = jt;
 #endif
     }
     else
