@@ -15,11 +15,6 @@ void BarrelDist::Draw()
 
 bool BarrelDist::Init()
 {
-  if (!InitFullScreenQuad())
-  {
-    return false;
-  }
-
   Drawable* dr = AmjuGL::Create(RenderToTexture::DRAWABLE_TYPE_ID);
   Assert(dr);
 
@@ -27,7 +22,7 @@ bool BarrelDist::Init()
  
   if (!m_renderToTexture)
   {
-    std::cout << "Failed to create RenderToTexture in DepthOfField::Init()!\n";
+    std::cout << "Failed to create RenderToTexture in BarrelDist::Init()!\n";
     return false;
   }
 
@@ -35,6 +30,8 @@ std::cout << "Created render to texture OK in barrel dist\n";
   int w = Screen::X();
   int h = Screen::Y();
   m_renderToTexture->SetSize(w, h);
+
+  m_renderToTexture->SetRenderFlags(RenderToTexture::AMJU_RENDER_COLOUR);
 
   if (!m_renderToTexture->Init())
   {
@@ -54,6 +51,12 @@ std::cout << "Loaded shader for barrel distortion effect OK\n";
   sh->Set("diffuseSampler", (AmjuGL::TextureHandle)0);
 
   SetPostProcessShader(sh);
+
+  if (!InitFullScreenQuad())
+  {
+std::cout << "Failed to init full screen quad.\n";
+    return false;
+  }
 
   return true;
 }
