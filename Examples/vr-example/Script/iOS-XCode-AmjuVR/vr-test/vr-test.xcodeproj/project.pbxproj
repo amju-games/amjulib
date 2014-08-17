@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6904342719A0B6280091EC91 /* BarrelDist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6904342519A0B6280091EC91 /* BarrelDist.cpp */; };
 		690607C1196DB79C00A8AA3E /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690607BD196DB79C00A8AA3E /* ViewController_iPad.xib */; };
 		690607C2196DB79C00A8AA3E /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690607BF196DB79C00A8AA3E /* ViewController_iPhone.xib */; };
 		690607C4196DB86900A8AA3E /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 690607C3196DB86900A8AA3E /* data-iphone.glue */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6904342519A0B6280091EC91 /* BarrelDist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BarrelDist.cpp; path = ../../../../Source/BarrelDist.cpp; sourceTree = "<group>"; };
+		6904342619A0B6280091EC91 /* BarrelDist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarrelDist.h; path = ../../../../Source/BarrelDist.h; sourceTree = "<group>"; };
 		690607BE196DB79C00A8AA3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		690607C0196DB79C00A8AA3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		690607C3196DB86900A8AA3E /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../../Build/vr-example/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 		690863DD196DA4B10027C0A0 /* vr-test */ = {
 			isa = PBXGroup;
 			children = (
+				6904342519A0B6280091EC91 /* BarrelDist.cpp */,
+				6904342619A0B6280091EC91 /* BarrelDist.h */,
 				69086418196DA5780027C0A0 /* AppDelegate.h */,
 				69086419196DA5780027C0A0 /* AppDelegate.mm */,
 				6908641A196DA5780027C0A0 /* main.m */,
@@ -304,6 +309,7 @@
 				6908641E196DA5780027C0A0 /* main.m in Sources */,
 				6908641F196DA5780027C0A0 /* ViewController.mm in Sources */,
 				69086417196DA5480027C0A0 /* Startup.cpp in Sources */,
+				6904342719A0B6280091EC91 /* BarrelDist.cpp in Sources */,
 				6908641D196DA5780027C0A0 /* AppDelegate.mm in Sources */,
 				69086416196DA5480027C0A0 /* GSVr.cpp in Sources */,
 			);
@@ -469,12 +475,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/include",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
 				);
 				INFOPLIST_FILE = "vr-test/vr-test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/lib",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -492,12 +498,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/include",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
 				);
 				INFOPLIST_FILE = "vr-test/vr-test-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.3-ios/lib",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

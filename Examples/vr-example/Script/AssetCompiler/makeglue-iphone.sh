@@ -13,10 +13,11 @@ rm -rf $DEST_DIR
 mkdir -p $DEST_DIR
 mkdir -p $DEST_DIR/font2d/
 mkdir -p $DEST_DIR/fire_temple
+mkdir -p $DEST_DIR/Shaders/gles
 
 cp $SRC_DIR/*.png $DEST_DIR
 cp $SRC_DIR/*.txt $DEST_DIR
-#cp $SRC_DIR/Shaders/gles/*.txt $DEST_DIR/Shaders/gles
+cp $SRC_DIR/Shaders/gles/*.txt $DEST_DIR/Shaders/gles
 
 cp $SRC_DIR/fire_temple/*.png $DEST_DIR/
 cp $SRC_DIR/fire_temple/*.mtl $DEST_DIR/
@@ -30,7 +31,7 @@ cd $DEST_DIR
 # Create empty glue file
 $GLUE_EXE -c $GLUE_FILE
 
-for f in *.txt *.png font2d/* *.mtl *.obj
+for f in *.txt *.png font2d/* *.mtl *.obj Shaders/gles/*
 do
     echo "Adding file: " $f
     $GLUE_EXE -a $GLUE_FILE $f
