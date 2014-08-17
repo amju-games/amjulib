@@ -43,6 +43,10 @@ void FullScreenPostProcess::DrawFullScreenQuad()
 
 bool FullScreenPostProcess::InitFullScreenQuad()
 {
+  // To set up attrib variables
+  Assert(m_postProcessShader);
+  AmjuGL::UseShader(m_postProcessShader);
+
   // Make a rectangle in screen space
   Vec2f pos(-1.0f, 1.0f);
   Vec2f size(2.0f, 2.0f);

@@ -34,6 +34,10 @@ public:
   //  or 2 textures if both are set in SetRenderFlags.
   virtual void UseThisTexture() = 0;
 
+  // Show the off-screen render target as an on-screen quad, for
+  //  debugging
+  virtual void DebugDraw() {}
+
 protected:
   int m_width, m_height; // pixels - size of texture to which we render
   

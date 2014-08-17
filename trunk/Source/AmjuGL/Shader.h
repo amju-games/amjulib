@@ -28,6 +28,11 @@ public:
   virtual void Set(const std::string& name, const AmjuGL::Vec3&) = 0;
   virtual void Set(const std::string& name, const Colour&) = 0;
   virtual void Set(const std::string& name, AmjuGL::TextureHandle) = 0;
+  virtual void SetMatrix3x3(const std::string& name, const float matrix[9]) = 0;
+  virtual void SetInt(const std::string& name, int i) = 0;
+  
+  virtual void UseThisShader() = 0;
+  
 };
 }
 
