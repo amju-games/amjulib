@@ -20,18 +20,20 @@ public:
   std::string GetErrorString();
 
   // Start using the shader
-  void Begin();
+  void Begin() override;
   // Finish using the shader
-  void End();
+  void End() override;
 
-  virtual void SetMatrix3x3(const std::string& name, const float matrix[9]);
-  virtual void Set(const std::string& name, const float matrix[16]);
-  virtual void Set(const std::string& name, float f);
-  virtual void Set(const std::string& name, const AmjuGL::Vec3&);
-  virtual void Set(const std::string& name, const Colour&);
-  virtual void Set(const std::string& name, AmjuGL::TextureHandle);
-  virtual void SetInt(const std::string& name, int i);
+  virtual void SetMatrix3x3(const std::string& name, const float matrix[9]) override;
+  virtual void Set(const std::string& name, const float matrix[16]) override;
+  virtual void Set(const std::string& name, float f) override;
+  virtual void Set(const std::string& name, const AmjuGL::Vec3&) override;
+  virtual void Set(const std::string& name, const Colour&) override;
+  virtual void Set(const std::string& name, AmjuGL::TextureHandle) override;
+  virtual void SetInt(const std::string& name, int i) override;
 
+  virtual void UseThisShader() override;
+  
   int GetProgHandle() const;
   
   int GetUniformLocation(const std::string& uniformName);

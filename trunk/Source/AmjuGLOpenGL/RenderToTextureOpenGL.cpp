@@ -1,5 +1,6 @@
 #include <iostream>
 #include <AmjuGL.h>
+#include <Screen.h>
 #include <AmjuGL-OpenGL-Base.h>
 #include "Internal/OpenGL.h"
 #include "RenderToTextureOpenGL.h"
@@ -88,14 +89,15 @@ bool RenderToTextureOpenGL::InitDepth()
   GL_CHECK(glFramebufferTexture2D(
     GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D, m_tex[1], 0));
 
-  GL_CHECK(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-    GL_TEXTURE_2D, m_tex[1], 0));
+  // NOT required
+//  GL_CHECK(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+//    GL_TEXTURE_2D, m_tex[1], 0));
+  
   return true;
 }
 
 bool RenderToTextureOpenGL::InitDepthColour()
 {
-
   for (int i = 0; i < 2; i++)
   {
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[i]));
@@ -163,18 +165,6 @@ bool RenderToTextureOpenGL::Init()
   // create the texture
   GL_CHECK(glGenTextures(2, m_tex));
 
-/*
-  for (int i = 0; i < 2; i++)
-  {
-    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[i]));
-
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-  }
-*/
-
   if (m_renderFlags == AMJU_RENDER_DEPTH)
   { 
     InitDepth();
@@ -225,5 +215,30 @@ bool RenderToTextureOpenGL::End()
   
   return true;
 }
+
+void RenderToTextureOpenGL::DebugDraw()
+{
+#ifndef AMJU_USE_ES2
+  glUseProgram(0); // back to fixed function
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(-Screen::X()/2, Screen::X()/2, -Screen::Y()/2, Screen::Y()/2,1,20);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  glColor4f(1,1,1,1);
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, m_tex[1]);
+  glEnable(GL_TEXTURE_2D);
+  glTranslated(0,0,-1);
+  glBegin(GL_QUADS);
+  glTexCoord2d(0,0);glVertex3f(0,0,0);
+  glTexCoord2d(1,0);glVertex3f(Screen::X()/2,0,0);
+  glTexCoord2d(1,1);glVertex3f(Screen::X()/2,Screen::Y()/2,0);
+  glTexCoord2d(0,1);glVertex3f(0,Screen::Y()/2,0);
+  glEnd();
+  //glDisable(GL_TEXTURE_2D);
+#endif
+}
+
 }
 

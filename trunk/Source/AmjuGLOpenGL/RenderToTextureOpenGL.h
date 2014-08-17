@@ -23,6 +23,8 @@ public:
   
   void UseThisTexture() override;
 
+  void DebugDraw() override;
+
 protected:
   bool InitDepth();
   bool InitColour();

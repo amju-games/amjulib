@@ -21,6 +21,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL1.h"
 #include "ShadowMapOpenGL2.h"
 #include "ShadowMapOpenGL3.h"
+#include "ShadowMapOpenGL.h"
 #include "RenderToTextureOpenGL.h"
 #include <AmjuFinal.h>
 
@@ -98,6 +99,8 @@ std::cout << "Creating RenderToTexture OpenGL\n";
 
 static Drawable* MakeShadowMap()
 {
+  return new ShadowMapOpenGL;
+
 #ifdef WIN32
   // TODO: create best quality impl depending on hardware capability
   if (!glBindFramebufferEXT)
