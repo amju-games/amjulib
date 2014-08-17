@@ -234,10 +234,13 @@ void GLShader::Begin()
     //std::cout << "Using shader program " << m_programHandle << "\n";
     
     AmjuGL::UseShader(this);
-    
-    glUseProgram(m_programHandle);
-    prevHandle = m_programHandle;
   }
+}
+
+void GLShader::UseThisShader()
+{
+  glUseProgram(m_programHandle);
+  prevHandle = m_programHandle;
 }
 
 void GLShader::End()

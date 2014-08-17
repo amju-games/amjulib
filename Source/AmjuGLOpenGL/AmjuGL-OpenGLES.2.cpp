@@ -25,7 +25,8 @@ extern "C"
 #include "ES2DefaultShaders.h"
 #include "ShadowMapES2.h"
 #include "RenderToTextureES2.h"
-#include "RenderToTextureOpenGL.h"
+//#include "RenderToTextureOpenGL.h"
+#include "ShadowMapOpenGL.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
@@ -265,7 +266,7 @@ static Drawable* MakeDynamicTriList()
 
 static Drawable* MakeShadowMapES2()
 {
-  return new ShadowMapES2;
+  return new ShadowMapOpenGL;
 }
 
 static Drawable* MakeRenderToTextureES2()
@@ -296,6 +297,7 @@ void AmjuGLOpenGLES2::UseShader(Shader* sh)
   {
     s_currentShader = s_defaultShader;
   }
+  s_currentShader->UseThisShader();
 }
 
 void AmjuGLOpenGLES2::Init()
@@ -346,7 +348,7 @@ Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
     Assert(0);
     
     delete s;
-    return new ShaderNull;
+    return nullptr; // new ShaderNull;
   }
   return s;
 }
