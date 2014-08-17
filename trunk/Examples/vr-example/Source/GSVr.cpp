@@ -10,13 +10,17 @@
 #include <ReportError.h>
 #include "GSVr.h"
 
+#ifdef AMJU_USE_OVR
 #include <OVR.h>
 using namespace OVR;
+#endif // AMJU_USE_OVR
 
 namespace Amju
 {
+#ifdef AMJU_USE_OVR
 static ovrHmd hmd;
 ovrHmdDesc hmdDesc;
+#endif // AMJU_USE_OVR
 
 bool symmetrical = true;
 
@@ -439,7 +443,8 @@ void GSVr::Draw2d()
 {
 }
 
-bool InitOVR()
+#ifdef AMJU_USE_OVR
+static bool InitOVR()
 {
     ovr_Initialize();
 
@@ -468,12 +473,15 @@ bool InitOVR()
 
     return true;
 }
+#endif // AMJU_USE_OVR
 
 void GSVr::OnActive()
 {
+#ifdef AMJU_USE_OVR
   // TODO Run time switch?
-//  InitOVR();
-
+  InitOVR();
+#endif
+  
 #ifdef WIN32
   // TODO TEMP TEST
   File::SetRoot("C:\\jay\\projects\\amjulib\\Examples\\ovr-example\\Assets\\fire_temple", "/");
