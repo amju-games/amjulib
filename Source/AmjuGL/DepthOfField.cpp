@@ -6,10 +6,16 @@ namespace Amju
 void DepthOfField::Draw()
 {
   m_renderToTexture->Begin();
+  AmjuGL::UseShader(0); // default shader, required for ES2 - or use a different shader
+ 
   m_drawFunc();
   m_renderToTexture->End();
   
   DrawFullScreenQuad();
+
+  AmjuGL::UseShader(0);
+  AmjuGL::UseTexture(0); // ?
+
 }
 
 bool DepthOfField::Init()
