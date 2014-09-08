@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 #############################################
-## REPORT TEST RESULTS BY PLAYER
-## Creates .csv files for each player
+## WRITE CSV FILES FOR TEST RESULTS BY PLAYER
+##  THIS IS FOR 2013 EXPERIMENT
 #############################################
 
 require "common.pl";
@@ -15,9 +15,7 @@ my_connect();
     5  => "Stroop colour word",
     6  => "Reaction time",
     7  => "Trail making (sequential)",
-    8  => "Trail making (alternate)",
-    9  => "DeJong Gierveld",
-    10 => "SWLS"
+    8  => "Trail making (alternate)"
   );
 
 print "<p style=\"font-family:Arial\">";
@@ -80,7 +78,7 @@ sub show_headings_forplayerfordate_test($$$$)
   my $date = shift;
   my $test_type = shift;
 
-  my $sql = "SELECT DISTINCT rt.`key`  FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and rct.test_type=$test_type and s.start > '2014-05-01' order by rt.`key`";
+  my $sql = "SELECT DISTINCT rt.`key`  FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and rct.test_type=$test_type and s.start >= '2013-08-23' and s.start <= '2013-09-27' order by rt.`key`";
 
   #print "Query: $sql\n\n";
   if (not $dbh) { print "Oh no, dbh is undefined!?!?!\n"; }
@@ -148,7 +146,7 @@ sub showresultsforplayerbydate_testtype($$)
   my $player_id = shift;
   my $test_type = shift;
  
-  my $sql = "SELECT count(DISTINCT s.start) FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and s.start > '2014-05-01' order by s.start";
+  my $sql = "SELECT count(DISTINCT s.start) FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and s.start >= '2013-08-23' and s.start <= '2013-09-27' order by s.start";
   my $query = $dbh->prepare($sql) or die "Query prepare failed for this query: $sql\n";
   $query->execute;
   my($count) = $query->fetchrow_array or die "Couldn't run query: $sql";
@@ -158,7 +156,7 @@ sub showresultsforplayerbydate_testtype($$)
     return;
   } 
 
-  $sql = "SELECT DISTINCT s.start FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and s.start > '2014-05-01' order by s.start";
+  $sql = "SELECT DISTINCT s.start FROM `research_cogtest` as rct, research_testresult as rt, session as s, player as p where p.id=$player_id and rct.session_id=s.id and s.player_id=p.id and rct.id=rt.test_id and s.start >= '2013-08-23' and s.start <= '2013-09-27' order by s.start";
 
   #print "Query: $sql\n\n";
 
@@ -167,7 +165,7 @@ sub showresultsforplayerbydate_testtype($$)
   $query->execute;
 
   # public_html/ve2/results
-  my $dir = "../../ve2/results/";
+  my $dir = "../../ve2/results/2013/";
   my $filename = $dir . "player-$player_id-test-$test_type.csv";
 
   open (OUTFILE, ">$filename") or die "Failed to open output file $filename";
@@ -202,7 +200,7 @@ sub showresults()
   {
     print "Player ID: $player_id Name: $playername Email: $email<br>\n";
 
-    for (my $i = 3; $i <= 10; $i++)
+    for (my $i = 3; $i <= 8; $i++)
     {
       showresultsforplayerbydate_testtype($player_id, $i);
     }
