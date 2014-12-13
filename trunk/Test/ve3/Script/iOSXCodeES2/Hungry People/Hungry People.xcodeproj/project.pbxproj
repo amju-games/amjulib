@@ -184,10 +184,10 @@
 		6908D71F17A69F6F00B0BB9F /* Ve1SceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6908D67917A69F6F00B0BB9F /* Ve1SceneGraph.cpp */; };
 		6908D72017A69F6F00B0BB9F /* Ve1SpriteNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6908D67B17A69F6F00B0BB9F /* Ve1SpriteNode.cpp */; };
 		6908D72117A69F6F00B0BB9F /* Version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6908D67D17A69F6F00B0BB9F /* Version.cpp */; };
-		69FE6B7517A915DC00C391F4 /* libAmjulib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7417A915DC00C391F4 /* libAmjulib.a */; };
+		692014C7191F79A20054C44D /* libamju.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6920143F191F4B910054C44D /* libamju.a */; };
+		692014C8191F7A410054C44D /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7E17A9186700C391F4 /* libbass.a */; };
+		692014C9191F7A9E0054C44D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7817A9166300C391F4 /* CFNetwork.framework */; };
 		69FE6B7717A9164F00C391F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7617A9164F00C391F4 /* SystemConfiguration.framework */; };
-		69FE6B7917A9166300C391F4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7817A9166300C391F4 /* CFNetwork.framework */; };
-		69FE6B7F17A9186700C391F4 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B7E17A9186700C391F4 /* libbass.a */; };
 		69FE6B8117A9188100C391F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FE6B8017A9188100C391F4 /* AudioToolbox.framework */; };
 		69FFE46517AD153900BCBABE /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 69FFE46417AD153900BCBABE /* data-iphone.glue */; };
 /* End PBXBuildFile section */
@@ -532,6 +532,7 @@
 		6908D67C17A69F6F00B0BB9F /* Ve1SpriteNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ve1SpriteNode.h; path = ../../../Source/Ve1SpriteNode.h; sourceTree = "<group>"; };
 		6908D67D17A69F6F00B0BB9F /* Version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Version.cpp; path = ../../../Source/Version.cpp; sourceTree = "<group>"; };
 		6908D67E17A69F6F00B0BB9F /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Version.h; path = ../../../Source/Version.h; sourceTree = "<group>"; };
+		6920143F191F4B910054C44D /* libamju.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libamju.a; path = "../../../../../Releases/amjulib-v.0.2-ios/lib/libamju.a"; sourceTree = "<group>"; };
 		69FE6B7417A915DC00C391F4 /* libAmjulib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAmjulib.a; path = "../../../../../Build/iOSAmjulibXCode/Amjulib/build/Debug-iphoneos/libAmjulib.a"; sourceTree = "<group>"; };
 		69FE6B7617A9164F00C391F4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		69FE6B7817A9166300C391F4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -546,11 +547,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692014C7191F79A20054C44D /* libamju.a in Frameworks */,
+				692014C8191F7A410054C44D /* libbass.a in Frameworks */,
+				692014C9191F7A9E0054C44D /* CFNetwork.framework in Frameworks */,
 				69FE6B8117A9188100C391F4 /* AudioToolbox.framework in Frameworks */,
-				69FE6B7F17A9186700C391F4 /* libbass.a in Frameworks */,
-				69FE6B7917A9166300C391F4 /* CFNetwork.framework in Frameworks */,
 				69FE6B7717A9164F00C391F4 /* SystemConfiguration.framework in Frameworks */,
-				69FE6B7517A915DC00C391F4 /* libAmjulib.a in Frameworks */,
 				6908D51117A69EC700B0BB9F /* UIKit.framework in Frameworks */,
 				6908D51317A69EC700B0BB9F /* Foundation.framework in Frameworks */,
 				6908D51517A69EC700B0BB9F /* CoreGraphics.framework in Frameworks */,
@@ -583,6 +584,7 @@
 		6908D50F17A69EC700B0BB9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6920143F191F4B910054C44D /* libamju.a */,
 				69FE6B8017A9188100C391F4 /* AudioToolbox.framework */,
 				69FE6B7E17A9186700C391F4 /* libbass.a */,
 				69FE6B7817A9166300C391F4 /* CFNetwork.framework */,
@@ -1281,6 +1283,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hungry People/Hungry People-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1294,12 +1297,13 @@
 				INFOPLIST_FILE = "Hungry People/Hungry People-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../Build/iOSAmjulibXCode/Amjulib/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../../../../../Source/SoundBass/Bass2.4/iPhone/mp3-free\"",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.2-ios/lib",
+					"/Users/jay/projects/amjulib/Source/SoundBass/Bass2.4/iPhone/mp3-free",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYMROOT = /Users/jay/projects/amjulib/build/ve2/iOSES2/;
+				SYMROOT = /Users/jay/projects/amjulib/build/ve3/iOSES2/;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1308,6 +1312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hungry People/Hungry People-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1320,12 +1325,13 @@
 				INFOPLIST_FILE = "Hungry People/Hungry People-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../Build/iOSAmjulibXCode/Amjulib/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../../../../../Source/SoundBass/Bass2.4/iPhone/mp3-free\"",
+					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.2-ios/lib",
+					"/Users/jay/projects/amjulib/Source/SoundBass/Bass2.4/iPhone/mp3-free",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYMROOT = /Users/jay/projects/amjulib/build/ve2/iOSES2/;
+				SYMROOT = /Users/jay/projects/amjulib/build/ve3/iOSES2/;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

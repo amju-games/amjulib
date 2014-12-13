@@ -4,7 +4,7 @@
 namespace Amju
 {
 // unique IDs for hardcoded messages
-#define UNIQUE_MSG_ID MsgNum((int)(__FILE__) + __LINE__)
+#define UNIQUE_MSG_ID MsgNum((long int)(__FILE__) + __LINE__)
 }
 
 #endif

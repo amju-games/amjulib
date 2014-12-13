@@ -214,6 +214,7 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
   // TODO Don't know what to do here
 }
 
+#ifdef NO_NEED_FOR ACCELEROM
 // TODO This isn't called
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {
@@ -239,6 +240,6 @@ void PopulateCursorEvent(Amju::CursorEvent* ce, int x, int y)
   
 	QueueEvent(be);
 }
-
+#endif
 
 @end
