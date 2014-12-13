@@ -50,6 +50,8 @@ void GSShaderWave::Draw2d()
 
 void GSShaderWave::OnActive()
 {
+  GSBase::OnActive();
+
   m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/wavedemo");
   m_shader->Begin(); // so we find attrib var locations when we build tri list:
   grid.Build(200, 20.0f);

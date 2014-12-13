@@ -42,6 +42,11 @@
 		692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692014CA191FCDF40054C44D /* GSMandel.cpp */; };
 		69201503191FE6940054C44D /* data-iphone.glue in Resources */ = {isa = PBXBuildFile; fileRef = 69201502191FE6940054C44D /* data-iphone.glue */; };
 		692F34BB197A74930040C9C3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692F34BA197A74930040C9C3 /* CoreLocation.framework */; };
+		6966CC971991FFF8005992E5 /* GSInitialise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966CC951991FFF8005992E5 /* GSInitialise.cpp */; };
+		6966CC9A19934891005992E5 /* GSRenderColourToTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966CC9819934891005992E5 /* GSRenderColourToTexture.cpp */; };
+		6966D0A419979737005992E5 /* GSBogusSSAO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966D09E19979737005992E5 /* GSBogusSSAO.cpp */; };
+		6966D0A519979737005992E5 /* GSRenderDepthToTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966D0A019979737005992E5 /* GSRenderDepthToTexture.cpp */; };
+		6966D0A619979737005992E5 /* GSRenderTextureBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966D0A219979737005992E5 /* GSRenderTextureBase.cpp */; };
 		697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +113,16 @@
 		692014CB191FCDF40054C44D /* GSMandel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSMandel.h; path = ../../../../Source/GSMandel.h; sourceTree = "<group>"; };
 		69201502191FE6940054C44D /* data-iphone.glue */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-iphone.glue"; path = "../../../../../Build/gltest/CompiledAssets/data-iphone.glue"; sourceTree = "<group>"; };
 		692F34BA197A74930040C9C3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6966CC951991FFF8005992E5 /* GSInitialise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSInitialise.cpp; path = ../../../../Source/GSInitialise.cpp; sourceTree = "<group>"; };
+		6966CC961991FFF8005992E5 /* GSInitialise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSInitialise.h; path = ../../../../Source/GSInitialise.h; sourceTree = "<group>"; };
+		6966CC9819934891005992E5 /* GSRenderColourToTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSRenderColourToTexture.cpp; path = ../../../../Source/GSRenderColourToTexture.cpp; sourceTree = "<group>"; };
+		6966CC9919934891005992E5 /* GSRenderColourToTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSRenderColourToTexture.h; path = ../../../../Source/GSRenderColourToTexture.h; sourceTree = "<group>"; };
+		6966D09E19979737005992E5 /* GSBogusSSAO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSBogusSSAO.cpp; path = ../../../../Source/GSBogusSSAO.cpp; sourceTree = "<group>"; };
+		6966D09F19979737005992E5 /* GSBogusSSAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSBogusSSAO.h; path = ../../../../Source/GSBogusSSAO.h; sourceTree = "<group>"; };
+		6966D0A019979737005992E5 /* GSRenderDepthToTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSRenderDepthToTexture.cpp; path = ../../../../Source/GSRenderDepthToTexture.cpp; sourceTree = "<group>"; };
+		6966D0A119979737005992E5 /* GSRenderDepthToTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSRenderDepthToTexture.h; path = ../../../../Source/GSRenderDepthToTexture.h; sourceTree = "<group>"; };
+		6966D0A219979737005992E5 /* GSRenderTextureBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSRenderTextureBase.cpp; path = ../../../../Source/GSRenderTextureBase.cpp; sourceTree = "<group>"; };
+		6966D0A319979737005992E5 /* GSRenderTextureBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSRenderTextureBase.h; path = ../../../../Source/GSRenderTextureBase.h; sourceTree = "<group>"; };
 		697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSDepthOfField.cpp; path = ../../../../Source/GSDepthOfField.cpp; sourceTree = "<group>"; };
 		697F5AEC19572AF50020A72E /* GSDepthOfField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSDepthOfField.h; path = ../../../../Source/GSDepthOfField.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,30 +196,36 @@
 		69201457191F51AC0054C44D /* gltest */ = {
 			isa = PBXGroup;
 			children = (
-				697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */,
-				697F5AEC19572AF50020A72E /* GSDepthOfField.h */,
-				692014CA191FCDF40054C44D /* GSMandel.cpp */,
-				692014CB191FCDF40054C44D /* GSMandel.h */,
-				692014B9191F54E40054C44D /* Startup.cpp */,
 				692014AB191F525B0054C44D /* AppDelegate.h */,
 				692014AC191F525B0054C44D /* AppDelegate.mm */,
-				692014AD191F525B0054C44D /* main.m */,
-				692014AE191F525B0054C44D /* ViewController.h */,
-				692014AF191F525B0054C44D /* ViewController.mm */,
 				6920148D191F52340054C44D /* Grid.cpp */,
 				6920148E191F52340054C44D /* Grid.h */,
 				6920148F191F52340054C44D /* GSBase.cpp */,
 				69201490191F52340054C44D /* GSBase.h */,
+				6966D09E19979737005992E5 /* GSBogusSSAO.cpp */,
+				6966D09F19979737005992E5 /* GSBogusSSAO.h */,
+				697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */,
+				697F5AEC19572AF50020A72E /* GSDepthOfField.h */,
 				69201491191F52340054C44D /* GSEnvMap.cpp */,
 				69201492191F52340054C44D /* GSEnvMap.h */,
 				69201493191F52340054C44D /* GSFinish.cpp */,
 				69201494191F52340054C44D /* GSFinish.h */,
+				6966CC951991FFF8005992E5 /* GSInitialise.cpp */,
+				6966CC961991FFF8005992E5 /* GSInitialise.h */,
 				69201495191F52340054C44D /* GSLighting.cpp */,
 				69201496191F52340054C44D /* GSLighting.h */,
 				69201497191F52340054C44D /* GSMain.cpp */,
 				69201498191F52340054C44D /* GSMain.h */,
+				692014CA191FCDF40054C44D /* GSMandel.cpp */,
+				692014CB191FCDF40054C44D /* GSMandel.h */,
 				69201499191F52340054C44D /* GSObb2Test.cpp */,
 				6920149A191F52340054C44D /* GSObb2Test.h */,
+				6966CC9819934891005992E5 /* GSRenderColourToTexture.cpp */,
+				6966CC9919934891005992E5 /* GSRenderColourToTexture.h */,
+				6966D0A019979737005992E5 /* GSRenderDepthToTexture.cpp */,
+				6966D0A119979737005992E5 /* GSRenderDepthToTexture.h */,
+				6966D0A219979737005992E5 /* GSRenderTextureBase.cpp */,
+				6966D0A319979737005992E5 /* GSRenderTextureBase.h */,
 				6920149B191F52340054C44D /* GSShaderWave.cpp */,
 				6920149C191F52340054C44D /* GSShaderWave.h */,
 				6920149D191F52340054C44D /* GSShadow.cpp */,
@@ -212,7 +233,11 @@
 				6920149F191F52340054C44D /* GSTexture.cpp */,
 				692014A0191F52340054C44D /* GSTexture.h */,
 				69201470191F51AC0054C44D /* Images.xcassets */,
+				692014AD191F525B0054C44D /* main.m */,
+				692014B9191F54E40054C44D /* Startup.cpp */,
 				69201458191F51AC0054C44D /* Supporting Files */,
+				692014AE191F525B0054C44D /* ViewController.h */,
+				692014AF191F525B0054C44D /* ViewController.mm */,
 			);
 			path = gltest;
 			sourceTree = "<group>";
@@ -365,16 +390,21 @@
 				692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */,
 				692014A9191F52340054C44D /* GSShadow.cpp in Sources */,
 				692014A1191F52340054C44D /* Grid.cpp in Sources */,
+				6966CC9A19934891005992E5 /* GSRenderColourToTexture.cpp in Sources */,
 				692014B2191F525B0054C44D /* ViewController.mm in Sources */,
+				6966D0A519979737005992E5 /* GSRenderDepthToTexture.cpp in Sources */,
 				692014A8191F52340054C44D /* GSShaderWave.cpp in Sources */,
+				6966D0A419979737005992E5 /* GSBogusSSAO.cpp in Sources */,
 				692014A3191F52340054C44D /* GSEnvMap.cpp in Sources */,
 				692014A4191F52340054C44D /* GSFinish.cpp in Sources */,
+				6966D0A619979737005992E5 /* GSRenderTextureBase.cpp in Sources */,
 				692014A2191F52340054C44D /* GSBase.cpp in Sources */,
 				692014A5191F52340054C44D /* GSLighting.cpp in Sources */,
 				692014BA191F54E40054C44D /* Startup.cpp in Sources */,
 				697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */,
 				692014A7191F52340054C44D /* GSObb2Test.cpp in Sources */,
 				692014A6191F52340054C44D /* GSMain.cpp in Sources */,
+				6966CC971991FFF8005992E5 /* GSInitialise.cpp in Sources */,
 				692014B0191F525B0054C44D /* AppDelegate.mm in Sources */,
 				692014AA191F52340054C44D /* GSTexture.cpp in Sources */,
 			);

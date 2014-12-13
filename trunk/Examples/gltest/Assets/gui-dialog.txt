@@ -1,0 +1,46 @@
+// Dialog for GL test states
+// version 
+1
+gui-dialog
+// name
+dialog
+// pos
+-0.8, 0.6
+// size
+0.5, 1.0
+
+// num children
+2
+// child 1
+
+// Element type
+gui-text
+// Element name
+playername-text
+// pos (coords are -1..1)
+0, 0
+// size
+2.0, 0.2
+// Text
+Name
+// Font name, size
+arial, 2.0, bgcol=ffffff, fgcol=000000
+
+
+// element type
+gui-button
+// Element name
+change-name-button
+// pos (coords are -1..1)
+// Hidden for now
+0.58, 0.95
+// size
+0.4, 0.1
+// Image
+wh8.png
+// Text
+Change name
+// Font name, size
+arial, 0.7, sx=0.7
+
+

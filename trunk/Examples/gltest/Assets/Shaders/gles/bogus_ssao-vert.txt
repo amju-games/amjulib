@@ -1,10 +1,10 @@
-// rendertexture-vert.txt
+// bogus_ssao-vert.txt
 
 precision highp float;
 
 attribute vec4 position;
-attribute vec3 normal;
 attribute vec2 uv;
+attribute vec3 normal;
 
 varying vec2 UV;
 

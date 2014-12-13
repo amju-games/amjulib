@@ -1,0 +1,12 @@
+// shadowpass2-frag.txt
+
+precision highp float;
+
+uniform sampler2D depthSampler;
+
+void main()
+{
+  vec4 diffuse1 = texture2D(depthSampler, vec2(0, 0));
+  gl_FragColor = diffuse1 * 0.001 + vec4(1, 0, 0, 1);
+}
+

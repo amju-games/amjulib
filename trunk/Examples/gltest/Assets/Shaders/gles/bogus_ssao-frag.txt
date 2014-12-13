@@ -1,8 +1,11 @@
 // bogus_ssao-frag.txt
 
+precision highp float;
+
 varying vec2 UV;
 uniform sampler2D diffuseSampler;
 
+#define USE_REGULAR_SAMPLES
 #define USE_COSINE
 
 #define M_PI 3.1415926535897932384626433832795
@@ -14,7 +17,7 @@ const float RADIUS = 0.001;
 //  -- if depth diff is greater, there is no occlusion
 const float MAX_DIFF = 0.02;
 
-const int NUM_SAMPLES = 8;
+const int NUM_SAMPLES = 2;
 
 // http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
 float rand(vec2 co)
@@ -61,12 +64,28 @@ void main()
     // (within as well as on radius?)
 
     // If we just sample above/below/left/right we get horrible artifacts
+#ifdef USE_REGULAR_SAMPLES
+
+    vec2 SAMPLES[4];
+    SAMPLES[0] = vec2(0, 1);
+    SAMPLES[1] = vec2(1, 0);
+    SAMPLES[2] = vec2(0, -1);
+    SAMPLES[3] = vec2(-1, 0);
+    vec2 circPos = SAMPLES[i] * RADIUS;
+
+#else
+
+    // Random sample on circle - expensive
+    // TODO use look up texture to get random sample
  
     // Get random angle between 0 and 2 pi
     float r = rand(UV + vec2(f, 0.0));
     float theta = r * 2.0 * M_PI; 
 
     vec2 circPos = vec2(cos(theta), sin(theta)) * RADIUS;
+
+#endif
+
     // Get depth at pos on circle
     float d1 = texture2D(diffuseSampler, UV + circPos).r;
 

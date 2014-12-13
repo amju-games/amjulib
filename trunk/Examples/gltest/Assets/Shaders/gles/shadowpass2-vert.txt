@@ -1,0 +1,14 @@
+// shadowpass2-vert.txt
+
+precision highp float;
+
+attribute vec4 position;
+attribute vec2 uv;
+attribute vec3 normal;
+
+uniform mat4 modelViewProjectionMatrix;
+
+void main()
+{
+  gl_Position = modelViewProjectionMatrix * position;
+}
