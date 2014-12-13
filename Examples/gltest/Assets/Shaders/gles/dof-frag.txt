@@ -6,7 +6,7 @@ varying vec2 UV;
 uniform sampler2D diffuseSampler;
 uniform sampler2D depthSampler;
 
-#if 0 
+#if 1 
 
 uniform float focus;
 

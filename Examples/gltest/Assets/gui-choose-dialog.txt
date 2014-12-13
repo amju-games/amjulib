@@ -1,0 +1,65 @@
+// Gui properties dialog
+// Ver
+1
+
+gui-dialog
+my_properties_dialog
+
+//  pos, size
+-0.8, 0.5
+1.55, 1.2
+
+
+// Children
+// Num children
+3
+
+//   .. each child
+
+gui-list-box
+// Name
+choose-list-box
+// Pos, size
+0.05, -0.25
+0.7, 0.7
+
+
+gui-button
+ok-button
+// pos 
+0.1, -1.05
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+OK
+// Font name, size
+arial, 0.75 
+
+gui-button
+cancel-button
+// pos 
+1.1, -1.05
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Cancel
+// Font name, size
+arial, 0.75 
+
+
+
+// TODO
+// The message 
+gui-text
+message-text
+0.05, -0.1
+1.45, 0.4
+// Text
+Message
+// Font name, size
+arial, 1.0, left, multi, bgcol=ffffff, fgcol=000000
+

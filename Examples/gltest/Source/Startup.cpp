@@ -1,5 +1,6 @@
 #include <iostream>
 #include <AmjuGLWindowInfo.h>
+#include <CursorManager.h>
 #include <Game.h>
 #include <Font.h>
 #include <Directory.h>
@@ -70,6 +71,8 @@ void StartUpAfterCreateWindow()
   Font* font = (Font*)TheResourceManager::Instance()->GetRes("font2d/arial-font.font");
   Assert(font);
   TheGame::Instance()->SetFrameTimeFont(font);
+
+  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
 }
 }
 

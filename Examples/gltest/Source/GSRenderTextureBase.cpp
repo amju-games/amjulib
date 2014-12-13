@@ -1,5 +1,7 @@
 #include <Teapot.h>
 #include <AmjuGL.h>
+#include <RenderToTexture.h> 
+#include <Camera.h>
 #include "GSRenderTextureBase.h"
 #include "GSDepthOfField.h"
 
@@ -19,6 +21,13 @@ void GSRenderTextureBase::Draw()
   RenderToTexture* rt = m_fs.GetRenderTarget();
   rt->Begin();
   AmjuGL::UseShader(0); // default shader, required for ES2 - or use a different shader
+
+  Camera viewCam;
+  viewCam.SetPos(Vec3f(0, 5, 20));
+  viewCam.SetDir(Vec3f(0, -5, -20));
+  viewCam.SetNearFar(5.0f, 30.0f);
+  viewCam.Draw();
+
   DrawBunnyScene();
   rt->End();  
   
@@ -27,6 +36,8 @@ void GSRenderTextureBase::Draw()
   AmjuGL::UseShader(0);
   AmjuGL::UseTexture(0); // ?
   AmjuGL::SetClearColour(Colour(0, 0, 0.5f, 1));
+
+  rt->DebugDraw(); // TODO TEMP TEST
 }
 
 void GSRenderTextureBase::Draw2d()
@@ -36,6 +47,8 @@ void GSRenderTextureBase::Draw2d()
 
 void GSRenderTextureBase::OnActive()
 {
+  GSBase::OnActive();
+
   RenderToTexture* rt = dynamic_cast<RenderToTexture*>(
     AmjuGL::Create(RenderToTexture::DRAWABLE_TYPE_ID));
 

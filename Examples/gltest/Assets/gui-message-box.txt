@@ -1,0 +1,76 @@
+// Gui file dialog
+// Ver
+1
+
+gui-dialog
+my_message_box
+
+// Dialogs were split into 2 files, but I can't remember why
+//  this seemed like a good idea.
+//gui-message-box-layout.txt
+
+//  pos, size
+-0.8, 0.5
+1.55, 1.2
+
+
+// Children
+// Num children
+4
+
+//   .. each child
+
+
+// The message 
+gui-text
+message-text
+0.05, -0.1
+1.45, 0.4
+// Text
+Message
+// Font name, size
+arial, 1.0, left, multi, bgcol=ffffff, fgcol=000000
+
+
+
+gui-button
+ok-button
+// pos 
+0.1, -1.05
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+OK
+// Font name, size
+arial, 0.75 
+
+gui-button
+no-button
+// pos 
+0.6, -1.05
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+No
+// Font name, size
+arial, 0.75 
+
+gui-button
+cancel-button
+// pos 
+1.1, -1.05
+// size
+0.4, 0.1
+// Image
+gui-button-4.png
+// Text
+Cancel
+// Font name, size
+arial, 0.75 
+
+
+

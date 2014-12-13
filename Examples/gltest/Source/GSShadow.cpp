@@ -12,6 +12,8 @@
 
 namespace Amju
 {
+Shader* shaderPass2 = 0;
+  
 class ShadowSG : public SceneGraph
 {
   ShadowMap* m_shadowMap; // TODO RCPtr ?
@@ -23,9 +25,12 @@ public:
   {
     Assert(m_shadowMap);
 
-    m_shadowMap->SetLightPos(AmjuGL::Vec3(lp.x, lp.y, lp.z));
+//    m_shadowMap->SetLightPos(AmjuGL::Vec3(lp.x, lp.y, lp.z));
+
 
     m_shadowMap->Draw();
+
+    AmjuGL::UseShader(0);
   }
 };
 
@@ -38,7 +43,23 @@ ShadowSG* GetSG()
   {
     ShadowMap* sm = (ShadowMap*)AmjuGL::Create(ShadowMap::DRAWABLE_TYPE_ID);
     sm->SetDrawFunc(ShadowMapDrawFunc);
+    shaderPass2 = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/shadowpass2");
+    shaderPass2->Begin(); // so we find attrib var locations when we build tri list:
+    sm->SetShader(shaderPass2);
     sm->Init();
+
+    Camera lightCam;
+    lightCam.SetPos(Vec3f(10, 10, 0));
+    lightCam.SetDir(Vec3f(-1, -1, 0));
+    lightCam.SetNearFar(1.0f, 50.0f);
+    sm->SetLight(lightCam);
+
+    Camera viewCam;
+    viewCam.SetPos(Vec3f(0, 2, 20));
+    viewCam.SetDir(Vec3f(0, -1, -10));
+    viewCam.SetNearFar(1.0f, 50.0f);
+    sm->SetCamera(viewCam);
+
     sg = new ShadowSG(sm);
   }
 
@@ -58,16 +79,21 @@ public:
   {
    // SetIsLit(true);
 
-    static OBB3 obb;
-    obb.SetExtents(Vec3f(10, 1, 10));
-    obb.SetCentre(Vec3f(0, -2.0f, 0));
+//    static OBB3 obb;
+//    obb.SetExtents(Vec3f(10, 1, 10));
+//    obb.SetCentre(Vec3f(0, -2.0f, 0));
 
-    AmjuGL::SetColour(Colour(1, 0, 0, 1));
+//    AmjuGL::SetColour(Colour(1, 0, 0, 1));
 //    DrawSolidOBB3(obb);
 
-    static Teapot tp;
+    static Teapot* tp = 0;
+    if (!tp)
+    {
+      AmjuGL::UseShader(shaderPass2);
+      tp = new Teapot;
+    }
     AmjuGL::SetColour(Colour(1, 1, 0, 1));
-    tp.Draw();
+    tp->Draw();
   }
 };
 
@@ -75,7 +101,7 @@ GSShadow::GSShadow()
 {
   m_name = "Shadow map";
   m_nextState = TheGSMandel::Instance();
-  m_maxTime = 5.0f; // so awesome
+  m_maxTime = 500.0f; 
 }
 
 void GSShadow::Update()
@@ -88,13 +114,13 @@ void GSShadow::Draw()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
 
-  GSBase::Draw();
+////  GSBase::Draw();
 
   float dt = TheTimer::Instance()->GetDt();
 
   // MV matrix is set up
   static float r = 0;
-//  r += 20.0f * dt;
+  r += 20.0f * dt;
   AmjuGL::RotateY(r);
 
   static float s = 0;
