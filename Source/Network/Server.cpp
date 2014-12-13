@@ -90,9 +90,5 @@ bool Server::Start(int port)
   return true;
 }
  
-void Server::Update()
-{
-  // Check message queue for msgs which should be executed now
-}
 }
 
