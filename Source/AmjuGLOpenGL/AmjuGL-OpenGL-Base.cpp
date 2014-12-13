@@ -79,13 +79,13 @@ void AmjuGLOpenGLBase::Init()
   //glMatrixMode(GL_MODELVIEW);
   //glLoadIdentity();
 
-  glEnable(GL_CULL_FACE);
-  glCullFace(GL_BACK);
+  GL_CHECK(glEnable(GL_CULL_FACE));
+  GL_CHECK(glCullFace(GL_BACK));
 
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
   //glEnable(GL_COLOR_MATERIAL);
 
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  GL_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
   // Try to disable blending unless expicitly required
   AmjuGL::Disable(AmjuGL::AMJU_BLEND); // So flag is reset
   
@@ -98,13 +98,13 @@ void AmjuGLOpenGLBase::InitFrame(float clearR, float clearG, float clearB)
 
   // Do GL initialisation before we draw the frame.
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
-  glClearColor(clearR, clearG, clearB, 1.0f);
+  GL_CHECK(glClearColor(clearR, clearG, clearB, 1.0f));
 
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  GL_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-  glCullFace(GL_BACK);
-  glEnable(GL_CULL_FACE);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  GL_CHECK(glCullFace(GL_BACK));
+  GL_CHECK(glEnable(GL_CULL_FACE));
+  GL_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
   AmjuGL::Disable(AmjuGL::AMJU_BLEND); // only enabled where necessary
   // NB Must use AmjuGL::Disable so flags are set consistently!
 
@@ -120,7 +120,7 @@ void AmjuGLOpenGLBase::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
-  glViewport(x, y, w, h);
+  GL_CHECK(glViewport(x, y, w, h));
 }
 
 void AmjuGLOpenGLBase::PushAttrib(uint32 attrib)
@@ -146,27 +146,27 @@ void AmjuGLOpenGLBase::DestroyTextureHandle(AmjuGL::TextureHandle* th)
     Assert(0);
   }
 
-  glDeleteTextures(1, (GLuint*)th);
+  GL_CHECK(glDeleteTextures(1, (GLuint*)th));
 }
 
 void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
 {
   AMJU_CALL_STACK;
 
-  glBindTexture(GL_TEXTURE_2D, t);
+  GL_CHECK(glBindTexture(GL_TEXTURE_2D, t));
 }
 
 void AmjuGLOpenGLBase::SetTextureMode(AmjuGL::TextureMode tm)
 {
   if (tm == AmjuGL::AMJU_TEXTURE_WRAP)
   {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
   }
   else if (tm == AmjuGL::AMJU_TEXTURE_CLAMP)
   {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
   }
   else
   {
@@ -178,13 +178,13 @@ void AmjuGLOpenGLBase::SetTextureFilter(AmjuGL::TextureFilter tf)
 {
   if (tf == AmjuGL::AMJU_TEXTURE_NICE)
   {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
   }
   else if (tf == AmjuGL::AMJU_TEXTURE_NEAREST)
   {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
   }
   else
   {
