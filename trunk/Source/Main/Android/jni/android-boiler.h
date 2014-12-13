@@ -100,6 +100,8 @@ FUNCTION_NAME_NATIVE_INIT(COMPANY, APPNAME)
     // Thanks: http://stackoverflow.com/questions/17705109/how-to-debug-c-c-code-ndk-in-eclipse
     usleep(5000 * 1000);
 
+    __android_log_print(ANDROID_LOG_INFO, "jc", "In native init!");
+
     AmjuGL::SetImpl(new AmjuGLOpenGLES2);
     AmjuGL::Init();
 

@@ -123,7 +123,9 @@
     Amju::AmjuGL::Init();
     Amju::StartUpAfterCreateWindow();
   
-    Amju::TheGame::Instance()->Update();  // must Update once before Draw
+    // TODO TEMP TEST - landscape
+////    Amju::Screen::SetSize(self.view.bounds.size.height, self.view.bounds.size.width);
+////    Amju::TheGame::Instance()->Update();  // must Update once before Draw -- why
 }
 
 - (void)tearDownGL
@@ -192,6 +194,9 @@ void QueueEvent(Amju::Event* e)
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
+  static int count = 0;
+  count++;
+  
   float w = rect.size.width;
   float h = rect.size.height;
   float s = self.view.contentScaleFactor;
@@ -199,7 +204,10 @@ void QueueEvent(Amju::Event* e)
   Amju::Screen::SetSize(w * s, h * s);
   Amju::AmjuGL::Viewport(0, 0, w * s, h * s);
   
-  Amju::TheGame::Instance()->Draw();
+  if (count > 1)
+  {
+    Amju::TheGame::Instance()->Draw();
+  }
   Amju::AmjuGL::Flip();
 }
 
