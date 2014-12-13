@@ -18,8 +18,6 @@ public:
 
   bool Start(int port);
  
-  void Update();
-
 private:
   Mutex m_mutex;
   Clients m_clients;
