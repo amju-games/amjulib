@@ -158,7 +158,7 @@ void AmjuGLOpenGL::SetColour(float r, float g, float b, float a)
 {
   AMJU_CALL_STACK;
 
-  glColor4f(r, g, b, a);
+  GL_CHECK(glColor4f(r, g, b, a));
 }
 
 void AmjuGLOpenGL::DrawLighting(
@@ -176,12 +176,12 @@ void AmjuGLOpenGL::DrawLighting(
   float specular[4] = { lightSpecular.m_r, lightSpecular.m_g, lightSpecular.m_b, 1.0f };
   float pos[4] = { lightPos.m_x, lightPos.m_y, lightPos.m_z, 0 };
 
-  glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-  glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-  glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-  glEnable(GL_LIGHT0);
-  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient);
-  glLightfv(GL_LIGHT0, GL_POSITION, pos);
+  GL_CHECK(glLightfv(GL_LIGHT0, GL_AMBIENT, ambient));
+  GL_CHECK(glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse));
+  GL_CHECK(glLightfv(GL_LIGHT0, GL_SPECULAR, specular));
+  GL_CHECK(glEnable(GL_LIGHT0));
+  GL_CHECK(glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient));
+  GL_CHECK(glLightfv(GL_LIGHT0, GL_POSITION, pos));
 }
 
 void AmjuGLOpenGL::Init()
@@ -190,7 +190,7 @@ void AmjuGLOpenGL::Init()
 
   AmjuGLOpenGLBase::Init();
 
-  glEnable(GL_COLOR_MATERIAL); 
+  GL_CHECK(glEnable(GL_COLOR_MATERIAL)); 
 
 #ifdef MACOSX
   s_shaderSupport = true;
