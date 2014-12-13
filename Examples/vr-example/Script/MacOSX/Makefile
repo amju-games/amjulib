@@ -9,6 +9,7 @@ BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
+CFLAGS		+= 	-D AMJU_USE_OVR
 
 LIBS	:= \
 	-lamju \
