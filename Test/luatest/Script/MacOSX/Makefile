@@ -4,9 +4,10 @@ endif
 
 APP		:=	luatest
 
+LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
+
 BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
-AMJU      	:= 	../../../../Source
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
 ASSETS		:=	../../Assets

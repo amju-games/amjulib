@@ -10,7 +10,11 @@ end
 
 function TestMyRegisteredFunction()
   io.write("lua: Calling C function...\n");
-  return mycfunc(78, "wow!", true);  
+  t = {}
+  t["x"] = 1
+  t["y"] = 2
+  t["z"] = 3
+  return mycfunc(t, 78, "wow!", true);  
 end
 
 --hello();
