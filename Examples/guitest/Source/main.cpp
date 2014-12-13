@@ -20,6 +20,8 @@
 #include <GuiElement.h>
 #include <ObjMesh.h>
 #include "GSGuiTest.h"
+#include "GSGuiEditTest.h"
+#include "GSGuiEdit.h"
 
 namespace Amju
 {
@@ -37,11 +39,11 @@ void StartUpBeforeCreateWindow()
 
 void StartUpAfterCreateWindow()
 {
-//  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
   TheResourceManager::Instance()->AddLoader("obj", TextObjLoader);
 
-  TheGame::Instance()->SetCurrentState(TheGSGuiTest::Instance());
+  TheGame::Instance()->SetCurrentState(TheGSGuiEditTest::Instance());
 
   GuiElement::SetGlobalScale(1.0f);
 }
