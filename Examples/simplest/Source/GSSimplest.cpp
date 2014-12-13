@@ -1,4 +1,5 @@
 #include <AmjuGL.h>
+#include <Timer.h>
 #include <Teapot.h>
 #include "GSSimplest.h"
 
@@ -23,7 +24,13 @@ void GSSimplest::Draw()
     AmjuGL::Vec3(1, 1, 1));
 
   static Teapot tp;
-  AmjuGL::SetColour(1, 0.7f, 0);
+  AmjuGL::SetColour(1, 1, 0);
+
+  static float rot = 0;
+  float dt = TheTimer::Instance()->GetDt();
+  rot += 100.0f * dt;
+  AmjuGL::RotateY(rot);
+
   tp.Draw();
 }
 }
