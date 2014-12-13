@@ -281,7 +281,11 @@ void GSTrailMakingTest::Draw2d()
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
   AmjuGL::SetColour(Colour(0, 0, 0, 1));
+  
+#if defined(MACOSX) || defined(WIN32)
   glLineWidth(3); // ? Make AmjuGL func
+#endif
+  
   for (int i = 1; i <= m_currentCircle; i++)
   {
     Vec2f pos[2] = { m_circles[i - 1].m_pos, m_circles[i].m_pos };
