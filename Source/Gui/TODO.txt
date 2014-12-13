@@ -21,22 +21,24 @@ Text Edit bugs
 --------------
 
 Can't select final 2 chars with mouse??
+ - need to set brkpt in msvc
 
-Change caret pos with mouse - seems to be OK, but doesn't feel very accurate.
-
+OK? - Change caret pos with mouse - seems to be OK, but doesn't feel very accurate.
 
 
 Horiz text scrolling when caret moves from is wrong moving from right edge to left - caret should move, not the text
 
-Selection - with shift.  - seems to work OK
+OK? Selection - with shift.  - seems to work OK
 
-Movement: by word: Left + ctrl (win) or option [alt](mac) - seems to work OK
+OK? Movement: by word: Left + ctrl (win) or option [alt](mac) - seems to work OK
 
 Multi-line text edit:
  vector of single-line text edits??? -- i.e. GuiTextEdit is always only single line.
 
 
 GuiTextEdit: Selection bugs. Clicking past the end of the test should put the caret/selection point at the end.
+ - related to not being able to select final 2 wiht mouse?
+ 
 OK? - GuiTextEdit: caret doesn't move – need to rebuild tris?? Better if caret is separate tri list
 GuiTextEdit: cut/copy/paste/select – none of this is working [any more :-( - did copy/paste work?]
 GuiText: calc first/last doesn't take font size or scaleX into account

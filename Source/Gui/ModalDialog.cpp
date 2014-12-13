@@ -63,6 +63,14 @@ void Dialog::SetTitle(const std::string& title)
 void Dialog::SetGuiFilename(const std::string& filename)
 {
   m_guiFilename = filename;
+  
+  // Load immediately - don't wait for OnActive. This is so we can immediately
+  //  set up GUI elements.
+  m_gui = LoadGui(m_guiFilename, false); // don't add as listener 
+  Assert(m_gui);
+  // GUI should get events through this game state's handler functions
+  //  - don't automatically add to EventPoller
+
 }
 
 int Dialog::GetResult() const
@@ -108,7 +116,8 @@ std::cout << "This dialog: " << m_guiFilename << " is activating...\n";
 
   GameState::OnActive();
 
-  m_gui = LoadGui(m_guiFilename, false); // don't add as listener 
+  // Should already have loaded in SetGuiFilename
+  //  m_gui = LoadGui(m_guiFilename, false); // don't add as listener 
   Assert(m_gui);
   // GUI should get events through this game state's handler functions
   //  - don't automatically add to EventPoller
