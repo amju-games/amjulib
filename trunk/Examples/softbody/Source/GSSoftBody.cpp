@@ -105,7 +105,7 @@ void GSSoftBody::OnActive()
 
   //Particle::SetGravity(Vec3f(0, -1, 0));
 
-  sq = new ContinuousSquishy;
+  sq = new Squishy; //ContinuousSquishy;
   if (!sq->Init(filename, K))
   {
     std::cout << "Failed to initialise squishy from obj mesh!\n";
