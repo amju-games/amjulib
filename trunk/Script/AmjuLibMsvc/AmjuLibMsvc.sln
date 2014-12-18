@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuLibMsvc", "AmjuLibMsvc\AmjuLibMsvc.vcxproj", "{93920D98-6C4D-43A6-8579-AA7200EC11D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D34F3D3C-B016-4E4A-AAF8-7D329EA0127A}"
@@ -10,16 +12,34 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{900CC5AD-C408-4384-846A-BA99273BF49B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AmjuGLTest", "..\..\Examples\gltest\Script\Windows\AmjuGLTest\AmjuGLTest.vcxproj", "{92E9AD60-76F7-409A-A84A-CFC52A25218E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guitest", "..\..\Examples\guitest\Script\Windows\guitest\guitest\guitest.vcxproj", "{0EB8A8D0-C471-49CA-A594-D89D086DFB71}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimTest-MsvcProj", "..\..\Examples\animtest\Script\AnimTest-MsvcProj\AnimTest\AnimTest.vcxproj", "{87E43EB2-59F5-4745-AE55-D65F32818453}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md3test", "..\..\Examples\md3test\Script\Windows\md3test\md3test\md3test.vcxproj", "{93BF06B8-5E12-4D28-BA0F-37989A0A3D8C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RbTest", "..\..\Examples\rbtest\Script\Windows\RbTest\RbTest\RbTest.vcxproj", "{17F29CA3-EE20-498F-9595-7A9E0E296A7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luatest", "..\..\Test\luatest\Script\Windows\luatest\luatest\luatest.vcxproj", "{FFE55655-4F6B-4DE0-AF3B-D29ED3B4A0BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93920D98-6C4D-43A6-8579-AA7200EC11D0} = {93920D98-6C4D-43A6-8579-AA7200EC11D0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

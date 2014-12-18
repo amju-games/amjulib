@@ -240,9 +240,6 @@
     <ClCompile Include="..\..\..\Source\Utils\Zlib\deflate.c">
       <Filter>Utils\Zlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\Zlib\example.c">
-      <Filter>Utils\Zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Zlib\gzio.c">
       <Filter>Utils\Zlib</Filter>
     </ClCompile>
@@ -323,9 +320,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Image\TextureUtils.cpp">
       <Filter>Image</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Image\Png\example.c">
-      <Filter>Image\Png</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Image\Png\png.c">
       <Filter>Image\Png</Filter>
@@ -917,6 +911,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Image\SavePng.cpp">
       <Filter>Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Game\MessageQueue.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
@@ -1738,6 +1735,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Image\SavePng.h">
       <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Game\MessageQueue.h">
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h">
       <Filter>AmjuGLOpenGL</Filter>

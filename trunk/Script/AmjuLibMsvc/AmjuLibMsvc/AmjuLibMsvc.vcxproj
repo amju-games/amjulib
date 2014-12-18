@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="DebugAssetTest|Win32">
       <Configuration>DebugAssetTest</Configuration>
@@ -27,19 +27,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,9 +88,9 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL"  /I "../../../Source/AmjuGLOpenGL/Internal" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Gui" /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip"  /I "../../../Source/SDL/include" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL"  /I "../../../Source/AmjuGLOpenGL/Internal" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Gui" /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip"  /I "../../../Source/SDL/include" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Include" /I "../../../3rdPartyLibs/OculusSDK/Samples/CommonSrc" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Src" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>USE_SHADOW_MAP_OPENGL_2;AMJU_USE_SDL;AMJU_USE_CURL;AMJU_USE_BASS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AMJU_OFFER_OPENGL_OVR;USE_SHADOW_MAP_OPENGL_2;AMJU_USE_SDL;AMJU_USE_CURL;AMJU_USE_BASS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -102,7 +106,7 @@
 mkdir %LIB%
 
 del /Q %LIB%\*
-copy ..\..\..\Build\Debug\AmjuLibMsvc.lib %LIB%\amju.lib
+copy ..\..\..\Build\Debug\AmjuLibMsvc.lib %LIB%\amju_vc13.lib
 
 cd ..\..\Win 
 copy_files.bat
@@ -172,6 +176,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
@@ -211,6 +216,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\FileUtils\ROConfig.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\StringsFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Tokeniser.cpp" />
+    <ClCompile Include="..\..\..\Source\Game\MessageQueue.cpp" />
     <ClCompile Include="..\..\..\Source\GeomDraw\Teapot.cpp" />
     <ClCompile Include="..\..\..\Source\GeomLoad\LoadRect.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\ClipLineSegBox.cpp" />
@@ -347,7 +353,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Utils\Zlib\compress.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\crc32.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\deflate.c" />
-    <ClCompile Include="..\..\..\Source\Utils\Zlib\example.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\gzio.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\infback.c" />
     <ClCompile Include="..\..\..\Source\Utils\Zlib\inffast.c" />
@@ -375,7 +380,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Image\Bitmap.cpp" />
     <ClCompile Include="..\..\..\Source\Image\Texture.cpp" />
     <ClCompile Include="..\..\..\Source\Image\TextureUtils.cpp" />
-    <ClCompile Include="..\..\..\Source\Image\Png\example.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\png.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pngerror.c" />
     <ClCompile Include="..\..\..\Source\Image\Png\pnggccrd.c" />
@@ -441,6 +445,7 @@ copy_files.bat
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\MATRIX4X4.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\OpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\showbuffer.h" />
@@ -485,6 +490,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\FileUtils\ROConfig.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\StringsFile.h" />
     <ClInclude Include="..\..\..\Source\FileUtils\Tokeniser.h" />
+    <ClInclude Include="..\..\..\Source\Game\MessageQueue.h" />
     <ClInclude Include="..\..\..\Source\GeomDraw\Teapot.h" />
     <ClInclude Include="..\..\..\Source\GeomLoad\LoadRect.h" />
     <ClInclude Include="..\..\..\Source\Geom\ClipLineSegBox.h" />
