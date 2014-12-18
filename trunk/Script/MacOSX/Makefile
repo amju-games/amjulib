@@ -10,6 +10,7 @@ AMJU      := ../../../amjulib/Source
 SOURCES := ../../Source \
   $(AMJU)/AmjuGL \
   $(AMJU)/AmjuGLOpenGL \
+  $(AMJU)/Anim \
   $(AMJU)/Clip \
   $(AMJU)/Collision \
   $(AMJU)/Community \
