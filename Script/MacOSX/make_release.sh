@@ -1,6 +1,6 @@
 # Make release of amjulib for MacOSX
 export AMJU_BUILD_ARCH=Mac
-export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS -DAMJU_USE_CURL'
+export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS -DAMJU_USE_CURL -DUSE_SHADOW_MAP_OPENGL_2'
 
 export PLAT=macosx
 export VERSION=`../MakeVersionString.pl ../../Source/Version.h`
@@ -20,6 +20,7 @@ rm $LIB/*
 
 # Copy headers required by client code to include folder
 cp $SRC/Version.h $INC
+cp $SRC/Anim/*.h $INC
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
