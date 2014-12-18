@@ -7,12 +7,32 @@
 #include <StringUtils.h>
 #include <ObjMesh.h>
 #include "GSBase.h"
+#include "StateList.h"
 
 namespace Amju
 {
 static ChooserDialog chooser;
 
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
+
+// Callback when choice made
+static void OnChooserFinished(Dialog* dlg)
+{
+  chooser.Choose();
+}
+
+void ChooserDialog::Choose()
+{
+  GuiElement* elem = m_gui->GetElementByName("choose-list-box");
+  Assert(elem);
+  GuiListBox* listbox = dynamic_cast<GuiListBox*>(elem);
+  Assert(listbox);
+  GuiList* list = listbox->GetList();
+
+  int i = list->GetSelectedItem();
+ 
+  std::cout << "Selected item: " << i << "\n"; 
+}
 
 void ChooserDialog::Add(const std::string& choice)
 {
@@ -27,6 +47,15 @@ void ChooserDialog::Add(const std::string& choice)
   list->AddItem(text); 
 }
 
+void ChooserDialog::Populate()
+{
+  const StateList& statelist = GetStateList();
+  for (auto it = statelist.begin(); it != statelist.end(); ++it)
+  { 
+    Add(it->first);
+  }
+}
+
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
 }
@@ -39,11 +68,8 @@ void GSBase::OnActive()
 
   chooser.SetGuiFilename("gui-choose-dialog.txt");
   chooser.SetTitle("Choose scene");
-    
-  chooser.Add("Hello");
-  chooser.Add("I R ");
-  chooser.Add("what");
-
+  chooser.Populate();
+  chooser.SetFinishCallback(OnChooserFinished);
 }
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
