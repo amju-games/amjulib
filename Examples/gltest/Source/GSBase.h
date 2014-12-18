@@ -16,7 +16,10 @@ class ChooserDialog : public Dialog
 public:
   virtual void GetDataFromGui() override {}
   virtual void SetDataToGui() override {}
+  void Populate(); // add names of all states in statelist
+  void Choose();
 
+private:
   void Add(const std::string& choice);
 };
 

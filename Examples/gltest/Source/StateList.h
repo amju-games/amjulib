@@ -1,11 +1,15 @@
 #pragma once
 
+#include <map>
+#include "GSBase.h"
+
 namespace Amju
 {
-class StateList
-{
-};
+typedef std::map<std::string, GSBase*> StateList;
 
-typedef Singleton<StateList> TheStateList;
+const StateList& GetStateList();
+
+void AddState(const std::string& name, GSBase* state);
+
 }
 
