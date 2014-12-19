@@ -1,6 +1,7 @@
+#include <iostream>
+#include <Locker.h>
 #include "ServerSocket.h"
 #include "Server.h"
-#include <Locker.h>
 
 namespace Amju
 {
