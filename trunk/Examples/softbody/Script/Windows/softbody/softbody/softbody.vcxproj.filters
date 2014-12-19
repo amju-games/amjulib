@@ -72,4 +72,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\Build\amjulib\lib\amju_vc13.lib" />
+    <Library Include="..\..\..\..\..\..\Source\GLUT\glut32.lib" />
+  </ItemGroup>
 </Project>

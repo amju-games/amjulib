@@ -106,6 +106,7 @@
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
     <Library Include="..\..\..\..\..\Build\Debug\AmjuLibMsvc.lib" />
+    <Library Include="..\..\..\..\..\Source\GLUT\glut32.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\newstate.pl" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,10 +20,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -49,7 +51,7 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\jay\projects\amjulib\Source\AmjuGLOpenGL;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -105,30 +107,38 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Grid.cpp" />
     <ClCompile Include="..\..\..\Source\GSBase.cpp" />
+    <ClCompile Include="..\..\..\Source\GSDepthOfField.cpp" />
     <ClCompile Include="..\..\..\Source\GSEnvMap.cpp" />
     <ClCompile Include="..\..\..\Source\GSFinish.cpp" />
     <ClCompile Include="..\..\..\Source\GSLighting.cpp" />
     <ClCompile Include="..\..\..\Source\GSMain.cpp" />
+    <ClCompile Include="..\..\..\Source\GSMandel.cpp" />
     <ClCompile Include="..\..\..\Source\GSObb2Test.cpp" />
     <ClCompile Include="..\..\..\Source\GSShaderWave.cpp" />
     <ClCompile Include="..\..\..\Source\GSShadow.cpp" />
+    <ClCompile Include="..\..\..\Source\GSTerrain.cpp" />
     <ClCompile Include="..\..\..\Source\GSTexture.cpp" />
     <ClCompile Include="..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\Source\Startup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Grid.h" />
     <ClInclude Include="..\..\..\Source\GSBase.h" />
+    <ClInclude Include="..\..\..\Source\GSDepthOfField.h" />
     <ClInclude Include="..\..\..\Source\GSEnvMap.h" />
     <ClInclude Include="..\..\..\Source\GSFinish.h" />
     <ClInclude Include="..\..\..\Source\GSLighting.h" />
     <ClInclude Include="..\..\..\Source\GSMain.h" />
+    <ClInclude Include="..\..\..\Source\GSMandel.h" />
     <ClInclude Include="..\..\..\Source\GSObb2Test.h" />
     <ClInclude Include="..\..\..\Source\GSShaderWave.h" />
     <ClInclude Include="..\..\..\Source\GSShadow.h" />
+    <ClInclude Include="..\..\..\Source\GSTerrain.h" />
     <ClInclude Include="..\..\..\Source\GSTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\Build\Debug\AmjuLibMsvc.lib" />
+    <Library Include="..\..\..\..\..\Source\GLUT\glut32.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
   </ItemGroup>
