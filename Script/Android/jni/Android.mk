@@ -10,6 +10,7 @@ LOCAL_MODULE    := amju
 
 # override apparently not supported?
 LOCAL_CFLAGS := $(EXTRA_CFLAGS) \
+		-DNDK_DEBUG=1 \
 		-DAMJU_USE_ES2 \
 		-DANDROID_NDK \
 		-DPVRSDK 
