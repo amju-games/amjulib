@@ -8,6 +8,7 @@
 #include "GSLighting.h"
 #include "GSEnvMap.h"
 #include "Teapot.h"
+#include "Tweakable.h"
 
 namespace Amju
 {
@@ -16,6 +17,13 @@ GSLighting::GSLighting()
   m_name = "Lighting";
   m_nextState = TheGSEnvMap::Instance();
   m_maxTime = 10.0f; // so awesome
+}
+
+void GSLighting::SetUpTweakMenu() 
+{
+  CreateTweakMenu();
+  AddTweakable(m_dlg, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_dlg, new TweakableFloat("Another test", nullptr, 0, 1));
 }
 
 void GSLighting::Update()

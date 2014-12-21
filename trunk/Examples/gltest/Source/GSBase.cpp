@@ -8,6 +8,7 @@
 #include <ObjMesh.h>
 #include "GSBase.h"
 #include "StateList.h"
+#include "Tweakable.h"
 
 namespace Amju
 {
@@ -32,6 +33,8 @@ void ChooserDialog::Choose()
   int i = list->GetSelectedItem();
  
   std::cout << "Selected item: " << i << "\n"; 
+  GSBase* gs = GetState(i);
+  TheGame::Instance()->SetCurrentState(gs);
 }
 
 void ChooserDialog::Add(const std::string& choice)
@@ -60,11 +63,18 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
 }
 
+void GSBase::CreateTweakMenu()
+{
+  m_dlg = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
+  Assert(m_dlg);
+  m_dlg->SetTitle(m_name);
+}
+
 void GSBase::OnActive() 
 {
   m_time = 0;
-//  m_dlg = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
-//  Assert(m_dlg);
+
+  SetUpTweakMenu();
 
   chooser.SetGuiFilename("gui-choose-dialog.txt");
   chooser.SetTitle("Choose scene");
@@ -79,7 +89,6 @@ bool GSBase::OnKeyEvent(const KeyEvent& ke)
     std::cout << "Choose scene menu\n";
 
     DoModalDialog(&chooser);
-
   }
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'r')
   {
@@ -106,10 +115,13 @@ void GSBase::Draw2d()
 //  s.SetDrawBg(true);
   s.SetLocalPos(Vec2f(-1, 0.9f));
   s.SetSize(Vec2f(2, 0.1f));
-  s.SetText(KEYS + m_name + " " + ToString(m_maxTime - m_time, 1));
+  s.SetText(m_name + " " + KEYS);
   s.Draw();
 
-//  m_dlg->Draw();
+  if (m_dlg)
+  {
+    m_dlg->Draw();
+  }
 }
 
 void GSBase::Draw()
@@ -137,6 +149,9 @@ void GSBase::Update()
 
   float dt = TheTimer::Instance()->GetDt();
   m_time += dt;
+
+  /* Now we have a menu we don't need to do this
+     But it could be good for a "play all" option
   if (m_time >= m_maxTime)
   {
     m_time = 0;
@@ -147,6 +162,7 @@ void GSBase::Update()
     }
     TheGame::Instance()->SetCurrentState(m_nextState);
   }
+  */
 }
 
 void DrawBunnyScene()
