@@ -12,6 +12,37 @@ const char* GuiDialog::NAME = "gui-dialog";
 GuiDialog::GuiDialog()
 {
   m_hasTitleBar = true;
+  m_drag = false;
+}
+
+bool GuiDialog::OnCursorEvent(const CursorEvent& e)
+{
+  if (m_drag)
+  {
+    Vec2f pos = GetLocalPos();
+    pos += Vec2f(e.dx, e.dy);
+    SetLocalPos(pos);
+    return true; // ??
+  }
+
+  return GuiWindow::OnCursorEvent(e);
+}
+
+bool GuiDialog::OnMouseButtonEvent(const MouseButtonEvent& e)
+{
+  // Check if title bar clicked
+  m_drag = false;
+  if (HasTitleBar() && e.isDown)
+  {
+    if (GetRect(GetTitleBar()).IsPointIn(Vec2f(e.x, e.y)))
+    {
+      std::cout << "Title bar clicked!\n";
+      m_drag = true;
+      return true; // right?
+    }
+  }
+
+  return GuiWindow::OnMouseButtonEvent(e);
 }
 
 void GuiDialog::SetTitle(const std::string& t)
@@ -23,6 +54,7 @@ void GuiDialog::SetTitle(const std::string& t)
   m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
   m_title.SetSize(Vec2f(GetSize().x, 0.1f));
   m_title.SetText(t);
+  m_title.SetDrawBorder(true);
 
   m_hasTitleBar = true;
 }

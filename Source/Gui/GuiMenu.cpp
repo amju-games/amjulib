@@ -217,7 +217,7 @@ bool GuiFloatingMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       // Callback for clicking off menu  
       if (m_clickedAway)
       {
-        m_clickedAway();
+        m_clickedAway(this);
       }
 
       // TODO Callback for when menu is made invis

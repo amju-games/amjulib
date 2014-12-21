@@ -14,6 +14,7 @@ const char* GuiWindow::NAME = "gui-window";
 
 bool GuiWindow::Load(File* f)
 {
+  m_drawBorder = true;
   // Load name, pos, size
   if (!GuiElement::Load(f))
   {
@@ -29,11 +30,7 @@ void GuiWindow::Draw()
     return;
   }
 
-//#ifdef WINDOW_DEBUG
-  // TODO make this a flag
-  // Border
-  DrawBorder(this, Colour(1, 1, 1, 1));
-//#endif
+  GuiElement::Draw();
 
   int vp[4];
   AmjuGL::GetViewport(&vp[0], &vp[1], &vp[2], &vp[3]);

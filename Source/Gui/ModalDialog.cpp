@@ -14,7 +14,7 @@ void DoModalDialog(Dialog* dlg)
   game->SetCurrentState(dlg); 
 }
 
-static void DialogOnOk()
+static void DialogOnOk(GuiElement*)
 {
   Game* game = TheGame::Instance();
   GameState* s = game->GetState();
@@ -26,7 +26,7 @@ static void DialogOnOk()
   dlg->Close();
 }
 
-static void DialogOnNo()
+static void DialogOnNo(GuiElement*)
 {
   Game* game = TheGame::Instance();
   GameState* s = game->GetState();
@@ -37,7 +37,7 @@ static void DialogOnNo()
   dlg->Close();
 }
 
-static void DialogOnCancel()
+static void DialogOnCancel(GuiElement*)
 {
   Game* game = TheGame::Instance();
   GameState* s = game->GetState();
@@ -195,12 +195,12 @@ bool Dialog::OnCursorEvent(const CursorEvent& e)
 { 
   Assert(m_gui);
 
-  if (m_drag)
-  {
-    Vec2f pos = m_gui->GetLocalPos();
-    pos += Vec2f(e.dx, e.dy);
-    m_gui->SetLocalPos(pos);
-  }
+//  if (m_drag)
+//  {
+//    Vec2f pos = m_gui->GetLocalPos();
+//    pos += Vec2f(e.dx, e.dy);
+//    m_gui->SetLocalPos(pos);
+//  }
 
   m_gui->OnCursorEvent(e);
   return true; 
@@ -232,16 +232,16 @@ bool Dialog::OnMouseButtonEvent(const MouseButtonEvent& e)
   Assert(m_gui);
 
   // Check if title bar clicked
-  m_drag = false;
-  GuiDialog* dlg = dynamic_cast<GuiDialog*>(m_gui.GetPtr());
-  if (dlg->HasTitleBar() && e.isDown)
-  {
-    if (GetRect(dlg->GetTitleBar()).IsPointIn(Vec2f(e.x, e.y)))
-    {
-      std::cout << "Title bar clicked!\n";
-      m_drag = true;
-    }
-  }
+//  m_drag = false;
+//  GuiDialog* dlg = dynamic_cast<GuiDialog*>(m_gui.GetPtr());
+//  if (dlg->HasTitleBar() && e.isDown)
+//  {
+//    if (GetRect(dlg->GetTitleBar()).IsPointIn(Vec2f(e.x, e.y)))
+//    {
+//      std::cout << "Title bar clicked!\n";
+//      m_drag = true;
+//    }
+//  }
 
   m_gui->OnMouseButtonEvent(e);
   return true; 

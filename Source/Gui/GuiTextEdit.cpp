@@ -172,7 +172,7 @@ void GuiTextEdit::Insert(char c)
   
   if (m_onChangeFunc)
   {
-    m_onChangeFunc();
+    m_onChangeFunc(this);
   }
   m_triList = 0; // force rebuild
   m_triListSelection = 0;
@@ -507,7 +507,7 @@ std::cout << "Next char\n";
   
       if (m_onChangeFunc)
       {
-        m_onChangeFunc();
+        m_onChangeFunc(this);
       }
       m_triList = 0; // force rebuild
     }
@@ -532,7 +532,7 @@ std::cout << "Next char\n";
 
       if (m_onChangeFunc)
       {
-        m_onChangeFunc();
+        m_onChangeFunc(this);
       }
       m_triList = 0; // force rebuild
     }
