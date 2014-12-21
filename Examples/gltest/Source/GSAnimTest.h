@@ -1,15 +1,15 @@
-#ifndef GS_INITIALISE_H_INCLUDED
-#define GS_INITIALISE_H_INCLUDED
+#ifndef GS_ANIMTEST_H_INCLUDED
+#define GS_ANIMTEST_H_INCLUDED
 
 #include <Singleton.h>
 #include "GSBase.h"
 
 namespace Amju 
 {
-class GSInitialise : public GSBase
+class GSAnimTest : public GSBase
 {
-  GSInitialise();
-  friend class Singleton<GSInitialise>;
+  GSAnimTest();
+  friend class Singleton<GSAnimTest>;
 
 public:
   virtual void Update();
@@ -19,9 +19,7 @@ public:
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  
-  virtual void SetUpTweakMenu() override {}
 };
-typedef Singleton<GSInitialise> TheGSInitialise;
+typedef Singleton<GSAnimTest> TheGSAnimTest;
 } // namespace
 #endif

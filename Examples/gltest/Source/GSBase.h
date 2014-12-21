@@ -34,6 +34,12 @@ public:
 
   virtual bool OnKeyEvent(const KeyEvent&) override;
 
+  // Override to set up tweak menu. Call CreateTweakMenu in your overriden function first.
+  virtual void SetUpTweakMenu() {}
+
+protected:
+  void CreateTweakMenu();
+
 protected:
   float m_time;
   float m_maxTime;
@@ -41,7 +47,7 @@ protected:
   std::string m_name;
   bool m_paused;
 
-//  RCPtr<GuiDialog> m_dlg;
+  RCPtr<GuiDialog> m_dlg;
 };
 }
 

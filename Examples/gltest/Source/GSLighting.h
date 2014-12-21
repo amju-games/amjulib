@@ -17,6 +17,7 @@ public:
   virtual void Draw2d();
   virtual void OnActive();
 
+  virtual void SetUpTweakMenu() override;
 };
 typedef Singleton<GSLighting> TheGSLighting;
 } // namespace
