@@ -12,8 +12,11 @@ public:
   static const char* NAME;
  
   GuiDialog();
-  virtual void Draw();
-  virtual bool Load(File*);
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
+
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&) override;
+  virtual bool OnCursorEvent(const CursorEvent&) override; 
 
   void SetTitle(const std::string&);
   void SetHasTitleBar(bool);
@@ -23,6 +26,7 @@ public:
 protected:
   GuiText m_title;
   bool m_hasTitleBar;
+  bool m_drag; // we can position the dialog box by dragging the title bar
 };
 }
 

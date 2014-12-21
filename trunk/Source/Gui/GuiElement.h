@@ -10,7 +10,7 @@
 
 namespace Amju
 {
-typedef void (*CommandFunc)();
+typedef void (*CommandFunc)(GuiElement*);
 
 class GuiElement : public EventListener
 {
@@ -69,6 +69,8 @@ public:
   // For elements containing text, say the text.
   virtual void TextToSpeech() {}
 
+  void SetDrawBorder(bool draw) { m_drawBorder = draw; }
+ 
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -94,6 +96,8 @@ protected:
   GuiElement* m_parent; // parent element, may be 0
 
   CommandFunc m_onFocusFunc; // called when this element gets the focus
+
+  bool m_drawBorder;
 };
 
 typedef RCPtr<GuiElement> PGuiElement;

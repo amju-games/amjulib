@@ -123,7 +123,7 @@ void GuiButton::OnPressedDown()
 {
   if (m_onPressedDown)
   {
-    m_onPressedDown();
+    m_onPressedDown(this);
   }
 }
 

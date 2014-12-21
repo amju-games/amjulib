@@ -27,7 +27,7 @@ void OnListboxClick(const std::string& fullPathAndFilename)
   lastFileDialog->OnListboxClick(fullPathAndFilename);
 }
 
-void OnPathChange()
+void OnPathChange(GuiElement*)
 {
   Assert(lastFileDialog);
   lastFileDialog->OnPathChange();

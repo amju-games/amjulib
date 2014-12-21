@@ -1,4 +1,6 @@
 #include <AmjuFirst.h>
+#include <Colour.h>
+#include "DrawBorder.h"
 #include "GuiElement.h"
 #include "GuiFactory.h"
 #include "StringUtils.h"
@@ -13,6 +15,15 @@ namespace Amju
 static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
+
+
+void GuiElement::Draw()
+{
+  if (IsVisible() && m_drawBorder)
+  {
+    DrawBorder(this, Colour(1, 1, 1, 1));
+  }
+}
 
 void GuiElement::SetHasFocus(bool f)
 {
@@ -46,7 +57,7 @@ else
     OnGetFocus();
     if (m_onFocusFunc)
     {
-      m_onFocusFunc();
+      m_onFocusFunc(this);
     }
 
     if (IsTextToSpeechEnabled())
@@ -136,6 +147,7 @@ GuiElement::GuiElement()
   m_isSelected = false;
   m_commandFunc = 0;
   m_onFocusFunc = 0;
+  m_drawBorder = false;
 }
 
 PGuiElement LoadGui(const std::string& filename, bool addAsListener)
@@ -248,7 +260,7 @@ void GuiElement::ExecuteCommand()
   if (m_commandFunc)
   {
     Assert(!m_pCommand);
-    m_commandFunc();
+    m_commandFunc(this);
   }
   else
   {
