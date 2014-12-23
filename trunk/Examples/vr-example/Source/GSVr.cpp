@@ -1,4 +1,7 @@
 #include <AmjuGL.h>
+#include <Camera.h>
+#include <DegRad.h>
+#include <GLUtils.h>
 #include <Teapot.h>
 #include <Screen.h>
 #include <Vec3.h>
@@ -6,8 +9,8 @@
 #include <ResourceManager.h>
 #include <File.h>
 #include <Timer.h>
-#include <DegRad.h>
 #include <ReportError.h>
+#include <StereoDraw.h>
 #include "GSVr.h"
 
 #ifdef AMJU_USE_OVR
@@ -22,17 +25,18 @@ static ovrHmd hmd;
 ovrHmdDesc hmdDesc;
 #endif // AMJU_USE_OVR
 
-bool symmetrical = true;
+static bool symmetrical = true;
 
-float vpXOffset = 0.08;
-float vpYOffset = 0.04;
+static float vpXOffset = 0.08;
+static float vpYOffset = 0.04;
 
 // Fire temple scale
-const float INITIAL_EYESEP = 0.35f;
+static const float INITIAL_EYESEP = 0.35f;
 
-const Vec3f ORIG_VIEW_DIR(0, 0, -1);
-const Vec3f ORIG_UP_DIR(0, 1, 0);
-  
+static const Vec3f ORIG_VIEW_DIR(0, 0, -1);
+static const Vec3f ORIG_UP_DIR(0, 1, 0);
+
+/*  
 struct Camera
 {
   float neardist;
@@ -42,37 +46,9 @@ struct Camera
   float fo; // WHAT IS THIS?
   Vec3f pos, dir, up;
 };
+*/
 
 Camera theCamera;
-
-// Replace glFrustum, TODO put in AmjuGL utils
-void Frustum(float left, float right, float bottom, float top, float zNear, float zFar)
-{
-  // Column major matrix
-  float m[16];
-  // See man glFrustum :-)
-  m[0] = 2.0f * zNear / (right - left);
-  m[1] = 0;
-  m[2] = 0;
-  m[3] = 0;
-  
-  m[4] = 0;
-  m[5] = 2 * zNear / (top - bottom);
-  m[6] = 0;
-  m[7] = 0;
-
-  m[8] = (right + left) / (right - left);
-  m[9] = (top + bottom) / (top - bottom);
-  m[10] = - (zFar + zNear) / (zFar - zNear);
-  m[11] = -1;
-  
-  m[12] = 0;
-  m[13] = 0;
-  m[14] = - (2.0f * zFar * zNear) / (zFar - zNear);
-  m[15] = 0;
-
-  AmjuGL::MultMatrix(m);
-}
 
 GSVr::GSVr()
 {
@@ -100,174 +76,30 @@ void GSVr::Update()
   m_pos += m_vel * dt;
 }
 
-enum Eye { LEFT, RIGHT };
-
-void SetViewport(Eye eye, float vpX, float vpY)
-{
-    const int windowwidth = Screen::X();
-    const int windowheight = Screen::Y();
-
-    if (eye == LEFT)
-    {
-        AmjuGL::Viewport(0 + vpX, 0 + vpY,
-            windowwidth / 2 - vpX,
-            windowheight - vpY * 2);
-    }
-    else
-    {
-        AmjuGL::Viewport(windowwidth / 2, 0 + vpY,
-            windowwidth / 2 - vpX,
-            windowheight - vpY * 2);
-    }
-}
-
-void SetUpCameraSymmetric(Eye eye, const Camera& camera)
-{
-    const int windowwidth = Screen::X();
-    const int windowheight = Screen::Y();
-
-    float aspectratio = (float)windowwidth / (float)windowheight / 2.0f;
-    // Dividing by 2 for side-by-side stereo
-
-    Vec3f cameraright = CrossProduct(camera.dir, camera.up);  // Each unit vectors
-    cameraright *= camera.eyesep / 2.0f;
-
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-    AmjuGL::SetIdentity();
-    AmjuGL::SetPerspectiveProjection(RadToDeg(camera.aperture) / aspectratio, aspectratio,
-        camera.neardist, camera.fardist);
-
-    SetViewport(eye, vpXOffset * windowwidth, vpYOffset * windowheight);
-
-    if (eye == LEFT)
-    {
-        AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-        AmjuGL::SetIdentity();
-        AmjuGL::LookAt(camera.pos.x - cameraright.x, camera.pos.y - cameraright.y, camera.pos.z - cameraright.z,
-            camera.pos.x - cameraright.x + camera.dir.x,
-            camera.pos.y - cameraright.y + camera.dir.y,
-            camera.pos.z - cameraright.z + camera.dir.z,
-            camera.up.x, camera.up.y, camera.up.z);
-    }
-    else
-    {
-        AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-        AmjuGL::SetIdentity();
-        AmjuGL::LookAt(camera.pos.x + cameraright.x, camera.pos.y + cameraright.y, camera.pos.z + cameraright.z,
-            camera.pos.x + cameraright.x + camera.dir.x,
-            camera.pos.y + cameraright.y + camera.dir.y,
-            camera.pos.z + cameraright.z + camera.dir.z,
-            camera.up.x, camera.up.y, camera.up.z);
-    }
-}
-
-void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
-{
-  // http://paulbourke.net/stereographics/stereorender/
-
-  const int windowwidth = Screen::X();
-  const int windowheight = Screen::Y();
-
-  float aspectratio = (float)windowwidth / (float)windowheight / 2.0f;         
-  // Dividing by 2 for side-by-side stereo
-
-  float widthdiv2   = camera.neardist * tan(camera.aperture / 2.0f); 
-  // aperture in radians
-  Vec3f cameraright = CrossProduct(camera.dir,camera.up);  // Each unit vectors
-  cameraright *= camera.eyesep / 2.0f;
-
-  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
-  AmjuGL::SetIdentity();
-
-  SetViewport(eye, vpXOffset * windowwidth, vpYOffset * windowheight);
-
-  if (eye == LEFT)
-  {
-    float top    =   widthdiv2;
-    float bottom = - widthdiv2;
-    float left   = - aspectratio * widthdiv2 + 0.5f * camera.eyesep * camera.neardist / camera.fo;
-    float right  =   aspectratio * widthdiv2 + 0.5f * camera.eyesep * camera.neardist / camera.fo;
-    Frustum(left,right,bottom,top,camera.neardist,camera.fardist);
-
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-    AmjuGL::SetIdentity();
-    AmjuGL::LookAt(camera.pos.x - cameraright.x,camera.pos.y - cameraright.y,camera.pos.z - cameraright.z,
-            camera.pos.x - cameraright.x + camera.dir.x,
-            camera.pos.y - cameraright.y + camera.dir.y,
-            camera.pos.z - cameraright.z + camera.dir.z,
-            camera.up.x,camera.up.y,camera.up.z);
-  }
-  else
-  {
-    float top    =   widthdiv2;
-    float bottom = - widthdiv2;
-    float left   = - aspectratio * widthdiv2 - 0.5f * camera.eyesep * camera.neardist / camera.fo;
-    float right  =   aspectratio * widthdiv2 - 0.5f * camera.eyesep * camera.neardist / camera.fo;
-    Frustum(left,right,bottom,top,camera.neardist,camera.fardist);
-
-    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
-    AmjuGL::SetIdentity();
-    AmjuGL::LookAt(camera.pos.x + cameraright.x,camera.pos.y + cameraright.y,camera.pos.z + cameraright.z,
-            camera.pos.x + cameraright.x + camera.dir.x,
-            camera.pos.y + cameraright.y + camera.dir.y,
-            camera.pos.z + cameraright.z + camera.dir.z,
-            camera.up.x,camera.up.y,camera.up.z); 
-  }
-}
-
 static ObjMesh* theMesh = 0;
 void DrawScene()
 {
   Vec3f pos(1, 1, 1);
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING); // mesh normals are no good 
-/*
-  AmjuGL::DrawLighting(
-    AmjuGL::LightColour(0, 0, 0),
-    AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
-    AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
-    AmjuGL::LightColour(1, 1, 1),
-    AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
-  static Teapot tp;
-  tp.Draw();
- */
   
   theMesh->Draw();
 }
 
-void DrawBothEyes()
+void DrawStereo()
 {
-  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
- 
-  if (symmetrical)
-  {
-      SetUpCameraSymmetric(LEFT, theCamera);
-      DrawScene();
-
-      SetUpCameraSymmetric(RIGHT, theCamera);
-      DrawScene();
-  }
-  else
-  {
-      SetUpCameraAsymmetric(LEFT, theCamera);
-      DrawScene();
-
-      SetUpCameraAsymmetric(RIGHT, theCamera);
-      DrawScene();
-  }
-
-  // Restore viewport  
-  const int w = Screen::X();
-  const int h = Screen::Y();
-  AmjuGL::Viewport(0, 0, w, h);
+  static StereoDraw sd;
+  sd.SetCamera(theCamera);
+  sd.SetDrawFunc(DrawScene);
+  sd.Draw();
 }
 
 void GSVr::Draw()
 {
   theMesh = m_mesh;
 
-  theCamera.pos = m_pos;
-  theCamera.dir = m_viewDir;
-  theCamera.up = m_upDir;
+  theCamera.m_pos = m_pos;
+  theCamera.m_dir = m_viewDir;
+  theCamera.m_up = m_upDir;
 
   m_barrel.Draw();
   AmjuGL::UseShader(0);
@@ -331,29 +163,29 @@ bool GSVr::OnKeyEvent(const KeyEvent& ke)
   // Focal distance
   if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'a' && ke.keyDown)
   {
-    theCamera.fo += 2.0f; // ?
-    std::cout << "fo: " << theCamera.fo << "\n";
+    theCamera.m_fo += 2.0f; // ?
+    std::cout << "fo: " << theCamera.m_fo << "\n";
   }
   else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'd' && ke.keyDown)
   {
-    theCamera.fo -= 2.0f; // ?
-    std::cout << "fo: " << theCamera.fo << "\n";
+    theCamera.m_fo -= 2.0f; // ?
+    std::cout << "fo: " << theCamera.m_fo << "\n";
   }
 
   // Eye sep
   if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'z' && ke.keyDown)
   {
-    theCamera.eyesep += 0.01f; // ?
-    std::cout << "eyesep: " << theCamera.eyesep << "\n";
+    theCamera.m_eyeSep += 0.01f; // ?
+    std::cout << "eyesep: " << theCamera.m_eyeSep << "\n";
   }
   else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'c' && ke.keyDown)
   {
-    theCamera.eyesep -= 0.01f; // ?
-    if (theCamera.eyesep < 0)
+    theCamera.m_eyeSep -= 0.01f; // ?
+    if (theCamera.m_eyeSep < 0)
     {
-        theCamera.eyesep = 0;
+        theCamera.m_eyeSep = 0;
     }
-    std::cout << "eyesep: " << theCamera.eyesep << "\n";
+    std::cout << "eyesep: " << theCamera.m_eyeSep << "\n";
   }
 
   // Symmetrical/asymmetrical
@@ -492,16 +324,16 @@ void GSVr::OnActive()
   m_mesh = (ObjMesh*)rm->GetRes("model.obj");
   Assert(m_mesh);
 
-  theCamera.neardist = 1.0f;
-  theCamera.fardist = 200.0f; // TODO Get size of env? Up to some max
-  theCamera.aperture = 1.0f; // TODO TEST radians
-  theCamera.eyesep = INITIAL_EYESEP; // TODO TEST
-  theCamera.fo = 75.0f; 
+  theCamera.m_neardist = 1.0f;
+  theCamera.m_fardist = 200.0f; // TODO Get size of env? Up to some max
+  theCamera.m_fovy = 1.0f; // TODO TEST radians
+  theCamera.m_eyeSep = INITIAL_EYESEP; // TODO TEST
+  theCamera.m_fo = 75.0f; 
 
   m_pos.y = 10;
 
   // Set up barrel dist post process effect
-  m_barrel.SetDrawFunc(DrawBothEyes);
+  m_barrel.SetDrawFunc(DrawStereo);
   m_barrel.Init();
 }
 
