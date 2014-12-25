@@ -38,6 +38,9 @@ void GSTerrain::DrawScene()
 
   /// NOT: GSBase::Draw();
 
+  DrawHelp(); // draw cam
+
+/*
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
@@ -50,6 +53,8 @@ void GSTerrain::DrawScene()
   AmjuGL::SetIdentity();
 
   AmjuGL::LookAt(0, 2.4, 4.0,  0, 0, -10.0,  0, 1, 0);
+*/
+
   m_shader->Begin();
 
 

@@ -8,11 +8,15 @@
 #include <ObjMesh.h>
 #include <StereoDraw.h>
 #include "GSBase.h"
+#include "OvrHeadTracker.h"
 #include "StateList.h"
 #include "Tweakable.h"
 
 namespace Amju
 {
+static const Vec3f ORIG_VIEW_DIR(0, 0, -1);
+static const Vec3f ORIG_UP_DIR(0, 1, 0);
+
 static ChooserDialog chooser;
 
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
@@ -92,6 +96,10 @@ void GSBase::OnActive()
   chooser.SetTitle("Choose scene");
   chooser.Populate();
   chooser.SetFinishCallback(OnChooserFinished);
+ 
+  m_camera.m_pos = Vec3f(0, 5, 10); 
+  m_camera.m_dir = ORIG_VIEW_DIR;
+  m_camera.m_up = ORIG_UP_DIR;
 }
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
@@ -143,7 +151,7 @@ void GSBase::Draw()
   depth++;
 
   static StereoDraw sd; // TODO one per state?
-  // TODO Camera per state.
+  sd.SetCamera(m_camera);
   sd.SetIsStereo(true);
   sd.SetDrawFunc(DrawCurrentState);
   sd.Draw();
@@ -153,6 +161,9 @@ void GSBase::Draw()
 
 void GSBase::DrawHelp()
 {
+  m_camera.Draw();
+
+/*
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   const float FOVY = 60.0f;
@@ -165,10 +176,25 @@ void GSBase::DrawHelp()
   AmjuGL::SetIdentity();
 
   AmjuGL::LookAt(0, 5, 10,  0, 0, 0,  0, 1, 0);
+*/
 }
 
 void GSBase::Update()
 {
+  static OvrHeadTracker ht;
+  static bool first = true;
+  if (first)
+  {
+    first = false;
+    ht.Init();
+  }
+  Quaternion q;
+  if (ht.Update(&q))
+  {
+    m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
+    m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
+  }
+
   if (m_paused)
   {
     return;
