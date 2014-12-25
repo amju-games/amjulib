@@ -13,7 +13,7 @@ private:
   friend class Singleton<GSShadow2>;
 
 public:
-  void Draw() override;
+  void DrawScene() override;
   void OnActive() override;
 
 private:

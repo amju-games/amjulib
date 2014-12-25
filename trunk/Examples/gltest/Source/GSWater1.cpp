@@ -22,10 +22,10 @@ void GSWater1::Update()
   GSBase::Update();
 }
 
-void GSWater1::Draw()
+void GSWater1::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.5f, 1, 1, 1));
-  GSBase::Draw();
+  DrawHelp();
 
   m_shader->Begin();
   Matrix mv;

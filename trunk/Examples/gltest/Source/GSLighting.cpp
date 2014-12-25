@@ -31,9 +31,9 @@ void GSLighting::Update()
   GSBase::Update();
 }
 
-void GSLighting::Draw()
+void GSLighting::DrawScene()
 {
-  GSBase::Draw();
+  DrawHelp();
 
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 

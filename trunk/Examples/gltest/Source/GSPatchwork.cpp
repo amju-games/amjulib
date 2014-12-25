@@ -16,7 +16,7 @@ void GSPatchwork::Update()
 
 }
 
-void GSPatchwork::Draw()
+void GSPatchwork::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.5f, 1, 1, 1));
 

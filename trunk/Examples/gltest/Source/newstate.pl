@@ -32,7 +32,7 @@ class $class : public GSBase\
 \
 public:\
   virtual void Update();\
-  virtual void Draw();\
+  virtual void DrawScene();\
   virtual void Draw2d();\
   virtual void OnActive();\
 \
@@ -62,9 +62,8 @@ void " . $scope . "Update()\
 \
 }\
 \
-void " . $scope . "Draw()\
+void " . $scope . "DrawScene()\
 {\
-  GSBase::Draw();\
 \
 }\
 \

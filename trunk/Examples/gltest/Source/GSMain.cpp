@@ -28,9 +28,9 @@ void GSMain::Update()
 {
 }
 
-void GSMain::Draw()
+void GSMain::DrawScene()
 {
-  GSBase::Draw();
+  GSBase::DrawHelp();
 
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 

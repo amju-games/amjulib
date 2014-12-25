@@ -49,9 +49,8 @@ void GSInitialise::Update()
   TheGame::Instance()->SetCurrentState(m_nextState);
 }
 
-void GSInitialise::Draw()
+void GSInitialise::DrawScene()
 {
-  GSBase::Draw();
 }
 
 void GSInitialise::Draw2d()

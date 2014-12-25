@@ -16,7 +16,7 @@ void GSRenderTextureBase::Update()
   GSBase::Update();
 }
 
-void GSRenderTextureBase::Draw()
+void GSRenderTextureBase::DrawScene()
 {
   RenderToTexture* rt = m_fs.GetRenderTarget();
   rt->Begin();

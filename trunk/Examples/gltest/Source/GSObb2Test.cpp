@@ -28,10 +28,10 @@ void GSObb2Test::Update()
   m_obbs[0].SetRotation(rads);
 }
 
-void GSObb2Test::Draw()
+void GSObb2Test::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.2f, 0.2f, 0.2f, 1));
-  GSBase::Draw();
+  GSBase::DrawHelp();
 
 /* 
   AmjuGL::SetIdentity();

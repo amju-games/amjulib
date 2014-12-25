@@ -6,6 +6,7 @@
 #include <GuiListBox.h>
 #include <StringUtils.h>
 #include <ObjMesh.h>
+#include <StereoDraw.h>
 #include "GSBase.h"
 #include "StateList.h"
 #include "Tweakable.h"
@@ -56,6 +57,17 @@ void ChooserDialog::Populate()
   for (auto it = statelist.begin(); it != statelist.end(); ++it)
   { 
     Add(it->first);
+  }
+}
+
+void DrawCurrentState()
+{
+  GameState* s = TheGame::Instance()->GetState();
+  GSBase* b = dynamic_cast<GSBase*>(s);
+  
+  if (b)
+  {
+    b->DrawScene();
   }
 }
 
@@ -124,7 +136,22 @@ void GSBase::Draw2d()
   }
 }
 
+static int depth = 0;
 void GSBase::Draw()
+{
+  Assert(depth == 0);
+  depth++;
+
+  static StereoDraw sd; // TODO one per state?
+  // TODO Camera per state.
+  sd.SetIsStereo(true);
+  sd.SetDrawFunc(DrawCurrentState);
+  sd.Draw();
+
+  depth--;
+}
+
+void GSBase::DrawHelp()
 {
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();

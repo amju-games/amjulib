@@ -26,7 +26,7 @@ void GSShadow2::OnActive()
   //m_secondPassShader->Begin(); // so we find attrib var locations when we build tri list:
 }
 
-void GSShadow2::Draw()
+void GSShadow2::DrawScene()
 {
   Camera lightCam;
   lightCam.SetPos(Vec3f(10, 10, 0));

@@ -7,7 +7,7 @@ void GSFinish::Update()
 {
 }
 
-void GSFinish::Draw()
+void GSFinish::DrawScene()
 {
 }
 
