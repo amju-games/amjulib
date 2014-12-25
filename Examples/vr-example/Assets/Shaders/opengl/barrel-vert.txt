@@ -1,4 +1,4 @@
-// dof-vert.txt
+// barrel-vert.txt
 
 varying vec2 UV;
 
