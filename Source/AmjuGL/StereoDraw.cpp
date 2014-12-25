@@ -7,6 +7,11 @@
 
 namespace Amju
 {
+StereoDraw::StereoDraw()
+{
+  m_isStereo = true;
+}
+
 /*
 // TODO TEMP TEST - use Camera in Camera.h
 struct Camera
@@ -160,6 +165,12 @@ void StereoDraw::Draw()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 
   Assert(m_drawFunc);
+
+  if (!m_isStereo)
+  {
+    m_drawFunc();
+    return;
+  }
 
   if (symmetrical)
   {
