@@ -1,4 +1,4 @@
-// dof-frag.txt
+// barrel-frag.txt
 
 varying vec2 UV;
 uniform sampler2D diffuseSampler;
