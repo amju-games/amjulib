@@ -110,7 +110,7 @@ void GSShadow::Update()
 }
 
 
-void GSShadow::Draw()
+void GSShadow::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 1, 1));
 

@@ -32,7 +32,7 @@ void GSTerrain::Update()
   GSBase::Update();
 }
 
-void GSTerrain::Draw()
+void GSTerrain::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.5f, 1, 1, 1));
 

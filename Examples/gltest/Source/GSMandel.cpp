@@ -1,6 +1,7 @@
 #include <AmjuGL.h>
 #include <Vec2.h>
 #include <DrawAABB.h>
+#include <ObjMesh.h>
 #include <ResourceManager.h>
 #include <Shader.h>
 #include "GSMandel.h"
@@ -44,10 +45,27 @@ void GSMandel::Update()
    GSBase::Update();
 }
 
-void GSMandel::Draw()
+void GSMandel::DrawScene()
 {
-  GSBase::Draw();
-  AmjuGL::SetClearColour(Colour(1, 1, 0, 1));
+//  DrawHelp();
+  AmjuGL::SetClearColour(Colour(1, 1, 1, 1));
+
+  static ObjMesh* sphere = 
+    (ObjMesh*)TheResourceManager::Instance()->GetRes("mandel_sphere.obj");
+
+  shader->Begin();
+
+  float t = m_time; // * m_time * m_time; // ?
+  shader->Set("gTime", t);
+  shader->Set("mouseX", mousepos.x);
+  shader->Set("mouseY", mousepos.y);
+  float mi = 100 + 10 * m_time * m_time;
+//std::cout << mi << "\n";
+  shader->Set("maxIters", mi);
+
+  sphere->Draw();
+
+  shader->End();
 }
 
 void GSMandel::Draw2d()
@@ -56,19 +74,9 @@ void GSMandel::Draw2d()
 
   AmjuGL::Disable(AmjuGL::AMJU_BLEND);
   
-  shader->Begin();
-
-  float t = m_time * m_time * m_time; // ?
-  shader->Set("gTime", t);
-  shader->Set("mouseX", mousepos.x);
-  shader->Set("mouseY", mousepos.y);
-  float mi = 100 + 10 * m_time * m_time;
-//std::cout << mi << "\n";
-  shader->Set("maxIters", mi);
   
-  m_triList->Draw();
+//  m_triList->Draw();
 
-  shader->End();
 }
 
 void GSMandel::OnActive()

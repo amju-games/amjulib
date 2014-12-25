@@ -9,12 +9,12 @@ static const float VERTICAL_SPACE = 0.02f;
 void AddTweakable(GuiDialog* dialog, Tweakable* tweak)
 {
   // TODO Position
-  float y = 0; // ?
+  float y = -VERTICAL_SPACE; // ?
   int i = dialog->GetNumChildren();
   if (i > 0)
   {
     GuiElement* child = dialog->GetChild(i - 1);
-    y = child->GetLocalPos().y - child->GetSize().y - VERTICAL_SPACE;
+    y = child->GetLocalPos().y - child->GetSize().y - VERTICAL_SPACE * 2.0f;
   }
   
   Vec2f pos = tweak->GetLocalPos();
@@ -27,7 +27,7 @@ void AddTweakable(GuiDialog* dialog, Tweakable* tweak)
 void Tweakable::SetLabel(const std::string& label)
 {
   GuiText* text = new GuiText;
-  text->SetFontSize(0.5f);
+  //text->SetFontSize(0.5f);
   text->SetSize(Vec2f(1.0f, 0.1f));
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   text->SetText(label);
@@ -38,7 +38,7 @@ void Tweakable::SetLabel(const std::string& label)
 void Tweakable::AddEditBox()
 {
   GuiTextEdit* text = new GuiTextEdit;
-  text->SetFontSize(0.5f);
+  //text->SetFontSize(0.5f);
   text->SetSize(Vec2f(0.3f, 0.1f));
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   text->SetText("value");

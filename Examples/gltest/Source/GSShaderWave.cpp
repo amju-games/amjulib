@@ -22,10 +22,10 @@ void GSShaderWave::Update()
   GSBase::Update();
 }
 
-void GSShaderWave::Draw()
+void GSShaderWave::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.5f, 1, 1, 1));
-  GSBase::Draw();
+  DrawHelp();
 
   m_shader->Begin();
   Matrix mv;

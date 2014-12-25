@@ -14,7 +14,7 @@ class GSEnvMap : public GSBase
 
 public:
   virtual void Update();
-  virtual void Draw();
+  virtual void DrawScene();
   virtual void Draw2d();
   virtual void OnActive();
 

@@ -23,9 +23,9 @@ void GSTexture::Update()
   GSBase::Update();
 }
 
-void GSTexture::Draw()
+void GSTexture::DrawScene()
 {
-  GSBase::Draw();
+  DrawHelp();
   AmjuGL::SetClearColour(Colour(1, 0, 0, 1));
 
   m_tex[0]->UseThisTexture();

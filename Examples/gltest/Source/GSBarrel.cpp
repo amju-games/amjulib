@@ -14,13 +14,9 @@ void GSBarrel::Update()
 
 }
 
-void GSBarrel::Draw()
+void GSBarrel::DrawScene()
 {
-  GSBase::Draw();
-
 //  renderToTexture.Begin();
-
-  
 }
 
 void GSBarrel::Draw2d()

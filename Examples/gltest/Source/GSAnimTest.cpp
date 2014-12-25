@@ -183,10 +183,8 @@ std::cout << "Creating mesh...\n";
 
 }
 
-void GSAnimTest::Draw()
+void GSAnimTest::DrawScene()
 {
-  GSBase::Draw();
-
   draw();
 }
 

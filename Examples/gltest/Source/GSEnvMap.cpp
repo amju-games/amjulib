@@ -20,10 +20,10 @@ void GSEnvMap::Update()
   GSBase::Update();
 }
 
-void GSEnvMap::Draw()
+void GSEnvMap::DrawScene()
 {
   AmjuGL::SetClearColour(Colour(0.2f, 0.2f, 0.2f, 1));
-  GSBase::Draw();
+  GSBase::DrawHelp();
 
   static Teapot tp;
 

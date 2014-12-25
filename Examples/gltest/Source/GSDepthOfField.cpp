@@ -24,7 +24,7 @@ void GSDepthOfField::Update()
   GSBase::Update();
 }
 
-void GSDepthOfField::Draw()
+void GSDepthOfField::DrawScene()
 {
   AmjuGL::UseShader(m_shader);
   float dt = TheTimer::Instance()->GetDt();

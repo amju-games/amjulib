@@ -37,7 +37,11 @@ public:
   // Override to set up tweak menu. Call CreateTweakMenu in your overriden function first.
   virtual void SetUpTweakMenu() {}
 
+  // Do the drawing here, NOT in Draw(): this is so we can draw in stereo if required.
+  virtual void DrawScene() = 0;
+ 
 protected:
+  void DrawHelp(); // set matrices, probably will be using Camera instead
   void CreateTweakMenu();
 
 protected:

@@ -12,7 +12,7 @@ public:
   static const char* NAME;
 
   virtual void Update();
-  virtual void Draw();
+  virtual void DrawScene();
   virtual void Draw2d();
   virtual void OnActive();
 

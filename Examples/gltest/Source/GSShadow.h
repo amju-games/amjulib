@@ -13,7 +13,7 @@ class GSShadow : public GSBase
 
 public:
   virtual void Update();
-  virtual void Draw();
+  virtual void DrawScene() override;
   virtual void Draw2d();
   virtual void OnActive();
 
