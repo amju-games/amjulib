@@ -25,6 +25,7 @@ rm $LIB/*
 cp $SRC/Version.h $INC
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
+cp $SRC/Anim/*.h $INC
 cp $SRC/Collision/*.h $INC
 cp $SRC/Community/*.h $INC
 cp $SRC/Events/*.h $INC
