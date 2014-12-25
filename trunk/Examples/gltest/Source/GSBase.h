@@ -2,6 +2,7 @@
 #define GS_BASE_H
 
 #include <string>
+#include <Camera.h>
 #include <GameState.h>
 #include <GuiDialog.h>
 #include <ModalDialog.h>
@@ -52,6 +53,7 @@ protected:
   bool m_paused;
 
   RCPtr<GuiDialog> m_dlg;
+  Camera m_camera;
 };
 }
 
