@@ -43,6 +43,8 @@ bool OvrHeadTracker::Init()
         ovrSensorCap_YawCorrection |
         ovrSensorCap_Position, 0);
 
+    m_initialisedOk = true;
+
     first = false;  
   }
 
@@ -54,16 +56,17 @@ bool OvrHeadTracker::Init()
 bool OvrHeadTracker::Update(Quaternion* q)
 {
 #ifdef AMJU_USE_OVR
-
-  // Get Oculus Rift rotation info
-  // TODO Pass absolute time as second param?
-  ovrSensorState ss = ovrHmd_GetSensorState(hmd, 0);
-  const ovrPoseStatef& ps = ss.Recorded; // Predicted;
-  const ovrPosef& pose = ps.Pose;
-  const ovrQuatf& oquat = pose.Orientation;
-  *q = Quaternion(oquat.w, oquat.x, oquat.y, oquat.z);
-  return true;
-
+  if (m_initialisedOk)
+  {
+    // Get Oculus Rift rotation info
+    // TODO Pass absolute time as second param?
+    ovrSensorState ss = ovrHmd_GetSensorState(hmd, 0);
+    const ovrPoseStatef& ps = ss.Recorded; // Predicted;
+    const ovrPosef& pose = ps.Pose;
+    const ovrQuatf& oquat = pose.Orientation;
+    *q = Quaternion(oquat.w, oquat.x, oquat.y, oquat.z);
+    return true;
+  }
 #endif
 
   return false;
