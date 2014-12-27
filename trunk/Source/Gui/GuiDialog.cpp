@@ -8,11 +8,15 @@
 namespace Amju
 {
 const char* GuiDialog::NAME = "gui-dialog";
+const Colour DEFAULT_BG_COLOUR(0.5f, 0.5f, 0.5f, 0.5f);
+const Colour DEFAULT_TITLE_COLOUR(0.1f, 0.1f, 0.1f, 0.5f);
 
 GuiDialog::GuiDialog()
 {
   m_hasTitleBar = true;
   m_drag = false;
+  m_bgColour = DEFAULT_BG_COLOUR;
+  m_titleColour = DEFAULT_TITLE_COLOUR;
 }
 
 bool GuiDialog::OnCursorEvent(const CursorEvent& e)
@@ -135,7 +139,7 @@ void GuiDialog::Draw()
   Rect r = GetRect(this);
   AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  AmjuGL::SetColour(Colour(0.5f, 0.5f, 0.5f, 1));
+  AmjuGL::SetColour(m_bgColour);
   DrawSolidRect(r);
   AmjuGL::PopAttrib(); 
   
@@ -143,6 +147,7 @@ void GuiDialog::Draw()
 
   if (m_hasTitleBar)
   {
+    m_title.SetBgCol(m_titleColour);
     m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
     m_title.Draw();
   }
