@@ -22,11 +22,15 @@ public:
   void SetHasTitleBar(bool);
   bool HasTitleBar() const;
   GuiText* GetTitleBar();
+  void SetTitleBarColour(const Colour& c) { m_titleColour = c; }
+  void SetBgColour(const Colour& c) { m_bgColour = c; }
 
 protected:
   GuiText m_title;
   bool m_hasTitleBar;
   bool m_drag; // we can position the dialog box by dragging the title bar
+  Colour m_bgColour;
+  Colour m_titleColour;
 };
 }
 
