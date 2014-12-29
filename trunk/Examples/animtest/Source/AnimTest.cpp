@@ -378,7 +378,7 @@ void mousemove(int x, int y)
 
 int main(int argc, char **argv)
 {
-  AmjuGL::SetImpl(new AmjuGLOpenGL);
+  AmjuGL::SetImpl(new AmjuGLOpenGL(nullptr)); // no window create function required as we are creating glut window directly
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
