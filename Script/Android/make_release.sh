@@ -18,7 +18,6 @@ rm $LIB/*
 
 # Copy headers required by client code to include folder
 cp $SRC/Version.h $INC
-cp $SRC/Main/Android/jni/android-boiler.h $INC
 cp $SRC/AmjuGL/*.h $INC
 cp $SRC/AmjuGLOpenGL/*.h $INC
 cp $SRC/Collision/*.h $INC
@@ -51,15 +50,17 @@ cp $SRC/Utils/Xml/*.h $INC
 
 perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
+# AFTER creating amju.h, so we don't get multiple copies
+cp $SRC/Main/Android/jni/android-boiler.h $INC
+
 # Build (release mode)
 ####export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
 
 # debug mode
 export EXTRA_CFLAGS='-g -O0 -D_DEBUG'
 
-#####make clean
-
 cd jni
+$NDK/ndk-build clean
 $NDK/ndk-build
 cd ..
 # TODO move buid products to Build directory
