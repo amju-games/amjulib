@@ -25,6 +25,7 @@ void MessageQueue::Update()
   {
     PMessage pm =  *(m_q.begin());
 
+	// TODO Comparing timestamp with process elapsed time as a float??
     if (pm->m_time < m_time)
     {
       pm->Execute();

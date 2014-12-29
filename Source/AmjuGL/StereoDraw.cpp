@@ -29,8 +29,8 @@ Camera theCamera;
 
 bool symmetrical = true;
 
-float vpXOffset = 0.08;
-float vpYOffset = 0.04;
+float vpXOffset = 0.08f;
+float vpYOffset = 0.04f;
 
 enum Eye { LEFT, RIGHT };
 

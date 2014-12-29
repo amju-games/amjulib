@@ -1,10 +1,10 @@
 #include <AmjuGL.h>
 #include <Timer.h>
 
-#ifdef WIN32
-#include <gl/glew.h>
-#include <GL/gl.h>
-#endif
+//#ifdef WIN32
+//#include <gl/glew.h>
+//#include <GL/gl.h>
+//#endif
 
 #ifdef MACOSX
 #include <OpenGL/gl.h>
@@ -60,6 +60,9 @@ void GSTerrain::DrawScene()
 
   // TODO AmjuGL SetActiveTexture() ....?
   // Or UseThisTexture() has tex unit ID ?
+  // TODO It's a property of the shader, no?
+  // More like a property of the material, which we don't currently have...
+  /*
   glActiveTexture(GL_TEXTURE0);
   m_shader->Set("heightSampler", (AmjuGL::TextureHandle)0);
   m_heightmap->UseThisTexture();
@@ -71,6 +74,7 @@ void GSTerrain::DrawScene()
   glActiveTexture(GL_TEXTURE2);
   m_shader->Set("detailSampler", (AmjuGL::TextureHandle)2);
   m_detail->UseThisTexture();
+  */
 
   static float angle = 0;
   angle += TheTimer::Instance()->GetDt() * 4.0f;
@@ -89,7 +93,10 @@ void GSTerrain::DrawScene()
   grid.Draw();
   m_shader->End();
 
+  /*
+  // TODO
   glActiveTexture(GL_TEXTURE0);
+  */
 }
 
 void GSTerrain::Draw2d()

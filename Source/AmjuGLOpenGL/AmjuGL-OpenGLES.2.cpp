@@ -3,7 +3,6 @@ Amju Games source code (c) Copyright Jason Colman 2010
 */
 
 #if defined(AMJU_IOS) 
-//&& defined(AMJU_USE_GLKIT)
 
 #include <AmjuFirst.h>
 #include <math.h>

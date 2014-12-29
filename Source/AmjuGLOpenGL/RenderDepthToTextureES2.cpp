@@ -1,4 +1,5 @@
 #if defined (AMJU_IOS) || defined (ANDROID_NDK)
+//|| defined(AMJU_USE_ES2)
 
 #include <iostream>
 #include <AmjuGL.h>

@@ -17,8 +17,21 @@
 #define AMJU_USE_GLUT
 #endif
 
-#if !defined(AMJU_IOS) && !defined(ANDROID_NDK)
+#if !defined(AMJU_IOS) && !defined(ANDROID_NDK) && !defined(AMJU_USE_ES2)
 #include <main.h>
+#endif
+
+#if defined(WIN32)
+#if defined(AMJU_USE_ES2)
+// TODO: Win main which creates EGL surface. See PowerVR example etc.
+#pragma comment(lib, "../../../../../Build/ES2Debug/AmjuLibMsvc.lib")
+#else
+#ifdef _DEBUG
+#pragma comment(lib, "../../../../../Build/Debug/AmjuLibMsvc.lib")
+#else
+#pragma comment(lib, "../../../../../Build/Release/AmjuLibMsvc.lib")
+#endif // _DEBUG
+#endif // AMJU_USE_ES2
 #endif
 
 

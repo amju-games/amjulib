@@ -1,5 +1,5 @@
 #include <AmjuFirst.h>
-#if defined(MACOSX) || defined(WIN32)
+#if (defined(MACOSX) || defined(WIN32)) && !defined(AMJU_USE_ES2) 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //	Shadow Mapping Tutorial

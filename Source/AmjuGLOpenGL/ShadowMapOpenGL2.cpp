@@ -1,4 +1,4 @@
-#if defined(USE_SHADOW_MAP_OPENGL_2)
+#if defined(USE_SHADOW_MAP_OPENGL_2) && !defined(AMJU_USE_ES2)
 #include <AmjuFirst.h>
 #ifndef IPHONE
 
