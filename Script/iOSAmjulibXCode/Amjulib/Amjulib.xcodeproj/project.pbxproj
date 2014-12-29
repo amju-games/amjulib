@@ -15,6 +15,10 @@
 		6901A12E188C3D5D00D98C04 /* IntAABBPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */; };
 		6901A131189404EA00D98C04 /* LoadScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6901A12F189404EA00D98C04 /* LoadScene.cpp */; };
 		6901A132189404EA00D98C04 /* LoadScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 6901A130189404EA00D98C04 /* LoadScene.h */; };
+		690483DB199B38CE00420BCB /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690483D9199B38CE00420BCB /* Camera.cpp */; };
+		690483DC199B38CE00420BCB /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 690483DA199B38CE00420BCB /* Camera.h */; };
+		690483E5199BE68D00420BCB /* ShadowMapOpenGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690483E3199BE68D00420BCB /* ShadowMapOpenGL.cpp */; };
+		690483E6199BE68D00420BCB /* ShadowMapOpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 690483E4199BE68D00420BCB /* ShadowMapOpenGL.h */; };
 		690566F4172094AF008A0C92 /* DrawBorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566DF172094AF008A0C92 /* DrawBorder.cpp */; };
 		690566F5172094AF008A0C92 /* DrawBorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 690566E0172094AF008A0C92 /* DrawBorder.h */; };
 		690566F6172094AF008A0C92 /* GuiCalendar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690566E1172094AF008A0C92 /* GuiCalendar.cpp */; };
@@ -49,8 +53,14 @@
 		6905671F1721B74A008A0C92 /* iOSGetDir.h in Headers */ = {isa = PBXBuildFile; fileRef = 6905671D1721B74A008A0C92 /* iOSGetDir.h */; };
 		690567201721B74A008A0C92 /* iOSGetDir.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6905671E1721B74A008A0C92 /* iOSGetDir.mm */; };
 		6905672417233FC5008A0C92 /* MkDir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6905672317233FC5008A0C92 /* MkDir.cpp */; };
+		690863C5195F07200027C0A0 /* RenderToTextureES2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690863C3195F07200027C0A0 /* RenderToTextureES2.cpp */; };
+		690863C6195F07200027C0A0 /* RenderToTextureES2.h in Headers */ = {isa = PBXBuildFile; fileRef = 690863C4195F07200027C0A0 /* RenderToTextureES2.h */; };
 		6909086D1796EE1D007EC3FB /* LoadRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6909086B1796EE1D007EC3FB /* LoadRect.cpp */; };
 		6909086E1796EE1D007EC3FB /* LoadRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 6909086C1796EE1D007EC3FB /* LoadRect.h */; };
+		690AD486191FEB4F008EFC78 /* LoadPng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690AD482191FEB4F008EFC78 /* LoadPng.cpp */; };
+		690AD487191FEB4F008EFC78 /* LoadPng.h in Headers */ = {isa = PBXBuildFile; fileRef = 690AD483191FEB4F008EFC78 /* LoadPng.h */; };
+		690AD488191FEB4F008EFC78 /* SavePng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690AD484191FEB4F008EFC78 /* SavePng.cpp */; };
+		690AD489191FEB4F008EFC78 /* SavePng.h in Headers */ = {isa = PBXBuildFile; fileRef = 690AD485191FEB4F008EFC78 /* SavePng.h */; };
 		690C44A3187610A2007A505D /* ModalDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690C44A1187610A2007A505D /* ModalDialog.cpp */; };
 		690C44A4187610A2007A505D /* ModalDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 690C44A2187610A2007A505D /* ModalDialog.h */; };
 		690C44A91885C68B007A505D /* SceneLuaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 690C44A51885C68B007A505D /* SceneLuaScript.cpp */; };
@@ -130,6 +140,11 @@
 		692A8A11179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h in Headers */ = {isa = PBXBuildFile; fileRef = 692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */; };
 		692A8A12179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */; };
 		692A8A13179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h in Headers */ = {isa = PBXBuildFile; fileRef = 692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */; };
+		692F34C0197A838C0040C9C3 /* FullScreenPostProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692F34BC197A838C0040C9C3 /* FullScreenPostProcess.cpp */; };
+		692F34C1197A838C0040C9C3 /* FullScreenPostProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 692F34BD197A838C0040C9C3 /* FullScreenPostProcess.h */; };
+		692F34C2197A838C0040C9C3 /* RenderToTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692F34BE197A838C0040C9C3 /* RenderToTexture.cpp */; };
+		692F34C3197A838C0040C9C3 /* RenderToTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 692F34BF197A838C0040C9C3 /* RenderToTexture.h */; };
+		692F34C5197A89EB0040C9C3 /* DepthOfField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692F34C4197A89EB0040C9C3 /* DepthOfField.cpp */; };
 		693D405C15AB780200B84D5C /* AmjuGL-Impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D404F15AB780200B84D5C /* AmjuGL-Impl.h */; };
 		693D405D15AB780200B84D5C /* AmjuGL-Null.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D405015AB780200B84D5C /* AmjuGL-Null.h */; };
 		693D405E15AB780200B84D5C /* AmjuGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D405115AB780200B84D5C /* AmjuGL.cpp */; };
@@ -326,8 +341,6 @@
 		693D421515AB7CA700B84D5C /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D41F415AB7CA700B84D5C /* Bitmap.h */; };
 		693D421615AB7CA700B84D5C /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D41F615AB7CA700B84D5C /* config.h */; };
 		693D421715AB7CA700B84D5C /* example.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D41F715AB7CA700B84D5C /* example.c */; };
-		693D421815AB7CA700B84D5C /* LoadPng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D41F815AB7CA700B84D5C /* LoadPng.cpp */; };
-		693D421915AB7CA700B84D5C /* LoadPng.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D41F915AB7CA700B84D5C /* LoadPng.h */; };
 		693D421A15AB7CA700B84D5C /* png.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D41FA15AB7CA700B84D5C /* png.c */; };
 		693D421B15AB7CA700B84D5C /* png.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D41FB15AB7CA700B84D5C /* png.h */; };
 		693D421C15AB7CA700B84D5C /* pngconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D41FC15AB7CA700B84D5C /* pngconf.h */; };
@@ -348,8 +361,6 @@
 		693D422B15AB7CA700B84D5C /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D420B15AB7CA700B84D5C /* pngwrite.c */; };
 		693D422C15AB7CA700B84D5C /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D420C15AB7CA700B84D5C /* pngwtran.c */; };
 		693D422D15AB7CA700B84D5C /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D420D15AB7CA700B84D5C /* pngwutil.c */; };
-		693D422E15AB7CA700B84D5C /* SavePng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D420E15AB7CA700B84D5C /* SavePng.cpp */; };
-		693D422F15AB7CA700B84D5C /* SavePng.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D420F15AB7CA700B84D5C /* SavePng.h */; };
 		693D423015AB7CA700B84D5C /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D421015AB7CA700B84D5C /* Texture.cpp */; };
 		693D423115AB7CA700B84D5C /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D421115AB7CA700B84D5C /* Texture.h */; };
 		693D423215AB7CA700B84D5C /* TextureUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D421215AB7CA700B84D5C /* TextureUtils.cpp */; };
@@ -496,6 +507,11 @@
 		696519DA18BF5C26009A36F6 /* MATRIX4X4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */; };
 		696519DB18BF5C26009A36F6 /* VECTOR3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D818BF5C26009A36F6 /* VECTOR3D.cpp */; };
 		696519DC18BF5C26009A36F6 /* VECTOR4D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D918BF5C26009A36F6 /* VECTOR4D.cpp */; };
+		6966CC91198F6BB2005992E5 /* RenderToTextureOpenGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966CC8F198F6BB2005992E5 /* RenderToTextureOpenGL.cpp */; };
+		6966CC92198F6BB2005992E5 /* RenderToTextureOpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 6966CC90198F6BB2005992E5 /* RenderToTextureOpenGL.h */; };
+		697F5AE9195727270020A72E /* ShadowMapES2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 697F5AE7195727270020A72E /* ShadowMapES2.cpp */; };
+		697F5AEA195727270020A72E /* ShadowMapES2.h in Headers */ = {isa = PBXBuildFile; fileRef = 697F5AE8195727270020A72E /* ShadowMapES2.h */; };
+		697F5AF319572EB70020A72E /* DepthOfField.h in Headers */ = {isa = PBXBuildFile; fileRef = 697F5AF219572EB70020A72E /* DepthOfField.h */; };
 		69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */; };
 		69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */; };
 		69FE6BC417ABC97200C391F4 /* DrawDecorator.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6BC117ABC97200C391F4 /* DrawDecorator.h */; };
@@ -515,6 +531,10 @@
 		6901A12C188C3D5D00D98C04 /* IntAABBPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntAABBPlane.h; path = ../../../Source/Geom/IntAABBPlane.h; sourceTree = "<group>"; };
 		6901A12F189404EA00D98C04 /* LoadScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadScene.cpp; sourceTree = "<group>"; };
 		6901A130189404EA00D98C04 /* LoadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadScene.h; sourceTree = "<group>"; };
+		690483D9199B38CE00420BCB /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../../../Source/AmjuGL/Camera.cpp; sourceTree = "<group>"; };
+		690483DA199B38CE00420BCB /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../../../Source/AmjuGL/Camera.h; sourceTree = "<group>"; };
+		690483E3199BE68D00420BCB /* ShadowMapOpenGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShadowMapOpenGL.cpp; path = ../../../Source/AmjuGLOpenGL/ShadowMapOpenGL.cpp; sourceTree = "<group>"; };
+		690483E4199BE68D00420BCB /* ShadowMapOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShadowMapOpenGL.h; path = ../../../Source/AmjuGLOpenGL/ShadowMapOpenGL.h; sourceTree = "<group>"; };
 		690566DF172094AF008A0C92 /* DrawBorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawBorder.cpp; sourceTree = "<group>"; };
 		690566E0172094AF008A0C92 /* DrawBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBorder.h; sourceTree = "<group>"; };
 		690566E1172094AF008A0C92 /* GuiCalendar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiCalendar.cpp; sourceTree = "<group>"; };
@@ -549,8 +569,14 @@
 		6905671D1721B74A008A0C92 /* iOSGetDir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOSGetDir.h; path = ../../../Source/FileUtils/iOSGetDir.h; sourceTree = "<group>"; };
 		6905671E1721B74A008A0C92 /* iOSGetDir.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOSGetDir.mm; path = ../../../Source/FileUtils/iOSGetDir.mm; sourceTree = "<group>"; };
 		6905672317233FC5008A0C92 /* MkDir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MkDir.cpp; path = ../../../Source/FileUtils/MkDir.cpp; sourceTree = "<group>"; };
+		690863C3195F07200027C0A0 /* RenderToTextureES2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderToTextureES2.cpp; path = ../../../Source/AmjuGLOpenGL/RenderToTextureES2.cpp; sourceTree = "<group>"; };
+		690863C4195F07200027C0A0 /* RenderToTextureES2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderToTextureES2.h; path = ../../../Source/AmjuGLOpenGL/RenderToTextureES2.h; sourceTree = "<group>"; };
 		6909086B1796EE1D007EC3FB /* LoadRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadRect.cpp; sourceTree = "<group>"; };
 		6909086C1796EE1D007EC3FB /* LoadRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadRect.h; sourceTree = "<group>"; };
+		690AD482191FEB4F008EFC78 /* LoadPng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadPng.cpp; sourceTree = "<group>"; };
+		690AD483191FEB4F008EFC78 /* LoadPng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadPng.h; sourceTree = "<group>"; };
+		690AD484191FEB4F008EFC78 /* SavePng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SavePng.cpp; sourceTree = "<group>"; };
+		690AD485191FEB4F008EFC78 /* SavePng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePng.h; sourceTree = "<group>"; };
 		690C44A1187610A2007A505D /* ModalDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModalDialog.cpp; sourceTree = "<group>"; };
 		690C44A2187610A2007A505D /* ModalDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalDialog.h; sourceTree = "<group>"; };
 		690C44A51885C68B007A505D /* SceneLuaScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneLuaScript.cpp; sourceTree = "<group>"; };
@@ -630,6 +656,11 @@
 		692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGLES.1.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.1.h"; sourceTree = "<group>"; };
 		692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.2.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.2.cpp"; sourceTree = "<group>"; };
 		692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-OpenGLES.2.h"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.2.h"; sourceTree = "<group>"; };
+		692F34BC197A838C0040C9C3 /* FullScreenPostProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FullScreenPostProcess.cpp; path = ../../../Source/AmjuGL/FullScreenPostProcess.cpp; sourceTree = "<group>"; };
+		692F34BD197A838C0040C9C3 /* FullScreenPostProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FullScreenPostProcess.h; path = ../../../Source/AmjuGL/FullScreenPostProcess.h; sourceTree = "<group>"; };
+		692F34BE197A838C0040C9C3 /* RenderToTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderToTexture.cpp; path = ../../../Source/AmjuGL/RenderToTexture.cpp; sourceTree = "<group>"; };
+		692F34BF197A838C0040C9C3 /* RenderToTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderToTexture.h; path = ../../../Source/AmjuGL/RenderToTexture.h; sourceTree = "<group>"; };
+		692F34C4197A89EB0040C9C3 /* DepthOfField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthOfField.cpp; path = ../../../Source/AmjuGL/DepthOfField.cpp; sourceTree = "<group>"; };
 		693D404F15AB780200B84D5C /* AmjuGL-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Impl.h"; path = "../../../Source/AmjuGL/AmjuGL-Impl.h"; sourceTree = SOURCE_ROOT; };
 		693D405015AB780200B84D5C /* AmjuGL-Null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AmjuGL-Null.h"; path = "../../../Source/AmjuGL/AmjuGL-Null.h"; sourceTree = SOURCE_ROOT; };
 		693D405115AB780200B84D5C /* AmjuGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGL.cpp; path = ../../../Source/AmjuGL/AmjuGL.cpp; sourceTree = SOURCE_ROOT; };
@@ -835,8 +866,6 @@
 		693D41F415AB7CA700B84D5C /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
 		693D41F615AB7CA700B84D5C /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		693D41F715AB7CA700B84D5C /* example.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = example.c; sourceTree = "<group>"; };
-		693D41F815AB7CA700B84D5C /* LoadPng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadPng.cpp; sourceTree = "<group>"; };
-		693D41F915AB7CA700B84D5C /* LoadPng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadPng.h; sourceTree = "<group>"; };
 		693D41FA15AB7CA700B84D5C /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
 		693D41FB15AB7CA700B84D5C /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
 		693D41FC15AB7CA700B84D5C /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
@@ -857,8 +886,6 @@
 		693D420B15AB7CA700B84D5C /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
 		693D420C15AB7CA700B84D5C /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
 		693D420D15AB7CA700B84D5C /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
-		693D420E15AB7CA700B84D5C /* SavePng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SavePng.cpp; sourceTree = "<group>"; };
-		693D420F15AB7CA700B84D5C /* SavePng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePng.h; sourceTree = "<group>"; };
 		693D421015AB7CA700B84D5C /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		693D421115AB7CA700B84D5C /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		693D421215AB7CA700B84D5C /* TextureUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureUtils.cpp; sourceTree = "<group>"; };
@@ -1008,6 +1035,11 @@
 		696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MATRIX4X4.cpp; path = ../../../Source/AmjuGLOpenGL/MATRIX4X4.cpp; sourceTree = "<group>"; };
 		696519D818BF5C26009A36F6 /* VECTOR3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VECTOR3D.cpp; path = ../../../Source/AmjuGLOpenGL/VECTOR3D.cpp; sourceTree = "<group>"; };
 		696519D918BF5C26009A36F6 /* VECTOR4D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VECTOR4D.cpp; path = ../../../Source/AmjuGLOpenGL/VECTOR4D.cpp; sourceTree = "<group>"; };
+		6966CC8F198F6BB2005992E5 /* RenderToTextureOpenGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderToTextureOpenGL.cpp; path = ../../../Source/AmjuGLOpenGL/RenderToTextureOpenGL.cpp; sourceTree = "<group>"; };
+		6966CC90198F6BB2005992E5 /* RenderToTextureOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderToTextureOpenGL.h; path = ../../../Source/AmjuGLOpenGL/RenderToTextureOpenGL.h; sourceTree = "<group>"; };
+		697F5AE7195727270020A72E /* ShadowMapES2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShadowMapES2.cpp; path = ../../../Source/AmjuGLOpenGL/ShadowMapES2.cpp; sourceTree = "<group>"; };
+		697F5AE8195727270020A72E /* ShadowMapES2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShadowMapES2.h; path = ../../../Source/AmjuGLOpenGL/ShadowMapES2.h; sourceTree = "<group>"; };
+		697F5AF219572EB70020A72E /* DepthOfField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DepthOfField.h; path = ../../../Source/AmjuGL/DepthOfField.h; sourceTree = "<group>"; };
 		69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ES2DefaultShaders.cpp; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.cpp; sourceTree = "<group>"; };
 		69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2DefaultShaders.h; path = ../../../Source/AmjuGLOpenGL/ES2DefaultShaders.h; sourceTree = "<group>"; };
 		69FE6BC117ABC97200C391F4 /* DrawDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawDecorator.h; path = ../../../Source/AmjuGL/DrawDecorator.h; sourceTree = "<group>"; };
@@ -1177,6 +1209,14 @@
 		693D406F15AB783A00B84D5C /* AmjuGL */ = {
 			isa = PBXGroup;
 			children = (
+				690483D9199B38CE00420BCB /* Camera.cpp */,
+				690483DA199B38CE00420BCB /* Camera.h */,
+				692F34BC197A838C0040C9C3 /* FullScreenPostProcess.cpp */,
+				692F34BD197A838C0040C9C3 /* FullScreenPostProcess.h */,
+				692F34BE197A838C0040C9C3 /* RenderToTexture.cpp */,
+				692F34BF197A838C0040C9C3 /* RenderToTexture.h */,
+				692F34C4197A89EB0040C9C3 /* DepthOfField.cpp */,
+				697F5AF219572EB70020A72E /* DepthOfField.h */,
 				69FE6BC117ABC97200C391F4 /* DrawDecorator.h */,
 				69FE6BC217ABC97200C391F4 /* TriList.cpp */,
 				69FE6BC317ABC97200C391F4 /* TriList.h */,
@@ -1202,6 +1242,14 @@
 		693D407015AB796F00B84D5C /* AmjuGLOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				690483E3199BE68D00420BCB /* ShadowMapOpenGL.cpp */,
+				690483E4199BE68D00420BCB /* ShadowMapOpenGL.h */,
+				6966CC8F198F6BB2005992E5 /* RenderToTextureOpenGL.cpp */,
+				6966CC90198F6BB2005992E5 /* RenderToTextureOpenGL.h */,
+				690863C3195F07200027C0A0 /* RenderToTextureES2.cpp */,
+				690863C4195F07200027C0A0 /* RenderToTextureES2.h */,
+				697F5AE7195727270020A72E /* ShadowMapES2.cpp */,
+				697F5AE8195727270020A72E /* ShadowMapES2.h */,
 				696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */,
 				696519D818BF5C26009A36F6 /* VECTOR3D.cpp */,
 				696519D918BF5C26009A36F6 /* VECTOR4D.cpp */,
@@ -1538,6 +1586,10 @@
 		693D41F215AB7CA700B84D5C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				690AD482191FEB4F008EFC78 /* LoadPng.cpp */,
+				690AD483191FEB4F008EFC78 /* LoadPng.h */,
+				690AD484191FEB4F008EFC78 /* SavePng.cpp */,
+				690AD485191FEB4F008EFC78 /* SavePng.h */,
 				693D41F315AB7CA700B84D5C /* Bitmap.cpp */,
 				693D41F415AB7CA700B84D5C /* Bitmap.h */,
 				693D41F515AB7CA700B84D5C /* Png */,
@@ -1555,8 +1607,6 @@
 			children = (
 				693D41F615AB7CA700B84D5C /* config.h */,
 				693D41F715AB7CA700B84D5C /* example.c */,
-				693D41F815AB7CA700B84D5C /* LoadPng.cpp */,
-				693D41F915AB7CA700B84D5C /* LoadPng.h */,
 				693D41FA15AB7CA700B84D5C /* png.c */,
 				693D41FB15AB7CA700B84D5C /* png.h */,
 				693D41FC15AB7CA700B84D5C /* pngconf.h */,
@@ -1577,8 +1627,6 @@
 				693D420B15AB7CA700B84D5C /* pngwrite.c */,
 				693D420C15AB7CA700B84D5C /* pngwtran.c */,
 				693D420D15AB7CA700B84D5C /* pngwutil.c */,
-				693D420E15AB7CA700B84D5C /* SavePng.cpp */,
-				693D420F15AB7CA700B84D5C /* SavePng.h */,
 			);
 			path = Png;
 			sourceTree = "<group>";
@@ -1905,6 +1953,7 @@
 				693D406715AB780200B84D5C /* ShaderNull.h in Headers */,
 				690C45181885C740007A505D /* lstring.h in Headers */,
 				693D406815AB780200B84D5C /* ShadowMap.h in Headers */,
+				690863C6195F07200027C0A0 /* RenderToTextureES2.h in Headers */,
 				693D407915AB79B200B84D5C /* AmjuGL-OpenGL-Base.h in Headers */,
 				693D407D15AB79B200B84D5C /* GLShader.h in Headers */,
 				690C45141885C740007A505D /* lparser.h in Headers */,
@@ -1929,6 +1978,7 @@
 				693D40D515AB7A5600B84D5C /* File.h in Headers */,
 				693D40D715AB7A5600B84D5C /* FileImpl.h in Headers */,
 				693D40D915AB7A5600B84D5C /* FileImplGlue.h in Headers */,
+				692F34C1197A838C0040C9C3 /* FullScreenPostProcess.h in Headers */,
 				693D40DB15AB7A5600B84D5C /* FileImplMem.h in Headers */,
 				693D40DD15AB7A5600B84D5C /* FileImplStd.h in Headers */,
 				693D40DF15AB7A5600B84D5C /* FileSize.h in Headers */,
@@ -1940,6 +1990,7 @@
 				693D40E515AB7A5600B84D5C /* Tokeniser.h in Headers */,
 				693D40EC15AB7C0E00B84D5C /* Font.h in Headers */,
 				693D40EE15AB7C0E00B84D5C /* TextureSequence.h in Headers */,
+				690AD487191FEB4F008EFC78 /* LoadPng.h in Headers */,
 				693D40FA15AB7C2C00B84D5C /* Game.h in Headers */,
 				693D40FC15AB7C2C00B84D5C /* GameObject.h in Headers */,
 				693D40FD15AB7C2C00B84D5C /* GameObjectFactory.h in Headers */,
@@ -1959,6 +2010,7 @@
 				693D415B15AB7C5300B84D5C /* MgcCont2DPointInPolygon.h in Headers */,
 				690C450F1885C740007A505D /* lobject.h in Headers */,
 				693D415D15AB7C5300B84D5C /* MgcCont3DSphere.h in Headers */,
+				697F5AF319572EB70020A72E /* DepthOfField.h in Headers */,
 				693D415F15AB7C5300B84D5C /* MgcDist3DLinLin.h in Headers */,
 				690C44A4187610A2007A505D /* ModalDialog.h in Headers */,
 				693D416115AB7C5300B84D5C /* MgcDist3DLinTri.h in Headers */,
@@ -2009,10 +2061,12 @@
 				693D41DD15AB7C9100B84D5C /* GuiDialog.h in Headers */,
 				693D41DF15AB7C9100B84D5C /* GuiElement.h in Headers */,
 				693D41E115AB7C9100B84D5C /* GuiFactory.h in Headers */,
+				692F34C3197A838C0040C9C3 /* RenderToTexture.h in Headers */,
 				693D41E315AB7C9100B84D5C /* GuiImage.h in Headers */,
 				693D41E515AB7C9100B84D5C /* GuiKeyboard.h in Headers */,
 				693D41E715AB7C9100B84D5C /* GuiListBox.h in Headers */,
 				693D41E915AB7C9100B84D5C /* GuiMenu.h in Headers */,
+				697F5AEA195727270020A72E /* ShadowMapES2.h in Headers */,
 				693D41EB15AB7C9100B84D5C /* GuiRect.h in Headers */,
 				690C45201885C740007A505D /* lua.hpp in Headers */,
 				693D41ED15AB7C9100B84D5C /* GuiText.h in Headers */,
@@ -2020,10 +2074,8 @@
 				693D41F115AB7C9100B84D5C /* GuiWindow.h in Headers */,
 				693D421515AB7CA700B84D5C /* Bitmap.h in Headers */,
 				693D421615AB7CA700B84D5C /* config.h in Headers */,
-				693D421915AB7CA700B84D5C /* LoadPng.h in Headers */,
 				693D421B15AB7CA700B84D5C /* png.h in Headers */,
 				693D421C15AB7CA700B84D5C /* pngconf.h in Headers */,
-				693D422F15AB7CA700B84D5C /* SavePng.h in Headers */,
 				693D423115AB7CA700B84D5C /* Texture.h in Headers */,
 				693D423315AB7CA700B84D5C /* TextureUtils.h in Headers */,
 				693D432115AB7CE900B84D5C /* Localise.h in Headers */,
@@ -2077,6 +2129,7 @@
 				693D438215AB7CE900B84D5C /* TimePeriod.h in Headers */,
 				693D438415AB7CE900B84D5C /* Timer.h in Headers */,
 				693D438615AB7CE900B84D5C /* TimeRange.h in Headers */,
+				690483E6199BE68D00420BCB /* ShadowMapOpenGL.h in Headers */,
 				693D438815AB7CE900B84D5C /* AmjuAssert.h in Headers */,
 				693D438A15AB7CE900B84D5C /* AmjuSleep.h in Headers */,
 				693D438B15AB7CE900B84D5C /* AmjuTypes.h in Headers */,
@@ -2119,6 +2172,7 @@
 				690566FB172094AF008A0C92 /* GuiDataBarDisplay.h in Headers */,
 				690566FD172094AF008A0C92 /* GuiDataDisplay.h in Headers */,
 				690566FF172094AF008A0C92 /* GuiDataLineDisplay.h in Headers */,
+				6966CC92198F6BB2005992E5 /* RenderToTextureOpenGL.h in Headers */,
 				69056700172094AF008A0C92 /* GuiFileBrowser.h in Headers */,
 				690C44F71885C740007A505D /* lcode.h in Headers */,
 				69056702172094AF008A0C92 /* GuiFileDialog.h in Headers */,
@@ -2143,6 +2197,8 @@
 				690E2F8017CE269F00DED7A1 /* iOSUtils.h in Headers */,
 				69FEF54F1826827900D83578 /* ROConfig.h in Headers */,
 				69112FFC1840BF8100763639 /* GameStateListener.h in Headers */,
+				690AD489191FEB4F008EFC78 /* SavePng.h in Headers */,
+				690483DC199B38CE00420BCB /* Camera.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2200,6 +2256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				693D405E15AB780200B84D5C /* AmjuGL.cpp in Sources */,
+				690483E5199BE68D00420BCB /* ShadowMapOpenGL.cpp in Sources */,
 				693D406015AB780200B84D5C /* AmjuGLWindowInfo.cpp in Sources */,
 				693D406215AB780200B84D5C /* Colour.cpp in Sources */,
 				693D406415AB780200B84D5C /* Screen.cpp in Sources */,
@@ -2218,6 +2275,7 @@
 				693D40A915AB7A3600B84D5C /* EventPoller.cpp in Sources */,
 				693D40AB15AB7A3600B84D5C /* EventTypes.cpp in Sources */,
 				693D40AD15AB7A3600B84D5C /* Mouse.cpp in Sources */,
+				692F34C5197A89EB0040C9C3 /* DepthOfField.cpp in Sources */,
 				693D40CC15AB7A5600B84D5C /* ConfigFile.cpp in Sources */,
 				693D40CE15AB7A5600B84D5C /* CsvTokeniser.cpp in Sources */,
 				693D40D015AB7A5600B84D5C /* Directory.cpp in Sources */,
@@ -2245,6 +2303,7 @@
 				693D414915AB7C5300B84D5C /* AABB.cpp in Sources */,
 				691136A5184F4FA60046C951 /* GuiElastic.cpp in Sources */,
 				693D414B15AB7C5300B84D5C /* Capsule.cpp in Sources */,
+				692F34C0197A838C0040C9C3 /* FullScreenPostProcess.cpp in Sources */,
 				693D414D15AB7C5300B84D5C /* ClipLineSegBox.cpp in Sources */,
 				693D414F15AB7C5300B84D5C /* Frustum.cpp in Sources */,
 				693D415115AB7C5300B84D5C /* Geometry.cpp in Sources */,
@@ -2277,6 +2336,7 @@
 				690C44FE1885C740007A505D /* ldo.c in Sources */,
 				693D418215AB7C5300B84D5C /* Tri.cpp in Sources */,
 				6901A12D188C3D5D00D98C04 /* IntAABBPlane.cpp in Sources */,
+				690863C5195F07200027C0A0 /* RenderToTextureES2.cpp in Sources */,
 				693D419315AB7C6800B84D5C /* DrawAABB.cpp in Sources */,
 				693D419515AB7C6800B84D5C /* DrawOBB2.cpp in Sources */,
 				693D419715AB7C6800B84D5C /* DrawOBB3.cpp in Sources */,
@@ -2309,7 +2369,6 @@
 				693D41F015AB7C9100B84D5C /* GuiWindow.cpp in Sources */,
 				693D421415AB7CA700B84D5C /* Bitmap.cpp in Sources */,
 				693D421715AB7CA700B84D5C /* example.c in Sources */,
-				693D421815AB7CA700B84D5C /* LoadPng.cpp in Sources */,
 				693D421A15AB7CA700B84D5C /* png.c in Sources */,
 				693D421D15AB7CA700B84D5C /* pngerror.c in Sources */,
 				693D421E15AB7CA700B84D5C /* pnggccrd.c in Sources */,
@@ -2326,6 +2385,7 @@
 				693D422615AB7CA700B84D5C /* pngset.c in Sources */,
 				693D422715AB7CA700B84D5C /* pngtest.c in Sources */,
 				693D422815AB7CA700B84D5C /* pngtrans.c in Sources */,
+				690AD488191FEB4F008EFC78 /* SavePng.cpp in Sources */,
 				693D422915AB7CA700B84D5C /* pngvcrd.c in Sources */,
 				6901A131189404EA00D98C04 /* LoadScene.cpp in Sources */,
 				693D422A15AB7CA700B84D5C /* pngwio.c in Sources */,
@@ -2333,7 +2393,6 @@
 				693D422B15AB7CA700B84D5C /* pngwrite.c in Sources */,
 				693D422C15AB7CA700B84D5C /* pngwtran.c in Sources */,
 				693D422D15AB7CA700B84D5C /* pngwutil.c in Sources */,
-				693D422E15AB7CA700B84D5C /* SavePng.cpp in Sources */,
 				693D423015AB7CA700B84D5C /* Texture.cpp in Sources */,
 				693D423215AB7CA700B84D5C /* TextureUtils.cpp in Sources */,
 				693D432015AB7CE900B84D5C /* Localise.cpp in Sources */,
@@ -2376,6 +2435,7 @@
 				693D437215AB7CE900B84D5C /* SafeUtils.cpp in Sources */,
 				693D437415AB7CE900B84D5C /* StringUtils.cpp in Sources */,
 				690C45061885C740007A505D /* liolib.c in Sources */,
+				690AD486191FEB4F008EFC78 /* LoadPng.cpp in Sources */,
 				693D437715AB7CE900B84D5C /* Mutex.cpp in Sources */,
 				690C44F91885C740007A505D /* lctype.c in Sources */,
 				693D437915AB7CE900B84D5C /* Thread.cpp in Sources */,
@@ -2387,10 +2447,12 @@
 				693D438315AB7CE900B84D5C /* Timer.cpp in Sources */,
 				690C45001885C740007A505D /* ldump.c in Sources */,
 				690C451D1885C740007A505D /* ltm.c in Sources */,
+				690483DB199B38CE00420BCB /* Camera.cpp in Sources */,
 				693D438515AB7CE900B84D5C /* TimeRange.cpp in Sources */,
 				693D438715AB7CE900B84D5C /* AmjuAssert.cpp in Sources */,
 				693D438915AB7CE900B84D5C /* AmjuSleep.cpp in Sources */,
 				693D439315AB7CE900B84D5C /* Launcher.cpp in Sources */,
+				6966CC91198F6BB2005992E5 /* RenderToTextureOpenGL.cpp in Sources */,
 				693D43B215AB7CE900B84D5C /* mt19937ar-cok.c in Sources */,
 				693D43B415AB7CE900B84D5C /* Pause.cpp in Sources */,
 				693D43B815AB7CE900B84D5C /* Sign.cpp in Sources */,
@@ -2438,6 +2500,8 @@
 				692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */,
 				692A8A12179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp in Sources */,
 				6901A09918869D3F00D98C04 /* IntAABBSphere.cpp in Sources */,
+				697F5AE9195727270020A72E /* ShadowMapES2.cpp in Sources */,
+				692F34C2197A838C0040C9C3 /* RenderToTexture.cpp in Sources */,
 				69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */,
 				69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */,
 				690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */,
@@ -2522,11 +2586,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LANDSCAPE,
 					IPHONE,
+					AMJU_IOS,
+					_DEBUG,
+					AMJU_USE_ES2,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SYMROOT = ../../../Build/ioS/build/Debug;
@@ -2542,10 +2609,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					AMJU_IOS,
 					IPHONE,
+					LANDSCAPE,
+					AMJU_USE_ES2,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SYMROOT = ../../../Build/ioS/build/Release;
