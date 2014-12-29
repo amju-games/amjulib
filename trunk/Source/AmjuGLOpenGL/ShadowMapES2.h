@@ -1,7 +1,8 @@
 #pragma once
 
-#if defined(AMJU_IOS) || defined(ANDROID_NDK)
-#include "ShadowMap.h"
+#if defined (AMJU_IOS) || defined (ANDROID_NDK) || defined(AMJU_USE_ES2)
+
+ #include "ShadowMap.h"
 
 namespace Amju
 {

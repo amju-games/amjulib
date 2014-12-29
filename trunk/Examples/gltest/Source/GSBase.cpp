@@ -251,7 +251,7 @@ void DrawBunnyScene()
 
   float d = 3.0f;
 
-  AmjuGL::SetColour(Colour(0.2, 0.2, 1, 1));
+  AmjuGL::SetColour(Colour(0.2f, 0.2f, 1, 1));
   bunny->Draw();
 
   AmjuGL::SetColour(Colour(1, 0, 0, 1));

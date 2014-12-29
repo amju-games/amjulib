@@ -4,4 +4,8 @@
     <LocalDebuggerWorkingDirectory>..\..\..\Assets</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">
+    <LocalDebuggerWorkingDirectory>..\..\..\Assets</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

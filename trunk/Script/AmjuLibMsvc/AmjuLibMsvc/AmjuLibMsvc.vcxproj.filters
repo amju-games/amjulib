@@ -918,6 +918,42 @@
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGLES2Android.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\Camera.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\StereoDraw.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\DepthOfField.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\FullScreenPostProcess.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\GLUtils.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1740,6 +1776,39 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Camera.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\StereoDraw.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\DepthOfField.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\FullScreenPostProcess.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\GLUtils.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
   </ItemGroup>

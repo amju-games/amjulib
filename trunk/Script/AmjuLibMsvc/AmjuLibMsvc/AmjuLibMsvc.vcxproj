@@ -9,6 +9,10 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="ES2Debug|Win32">
+      <Configuration>ES2Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseAssetTest|Win32">
       <Configuration>ReleaseAssetTest</Configuration>
       <Platform>Win32</Platform>
@@ -45,6 +49,11 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -60,11 +69,16 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
@@ -75,8 +89,11 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" />
@@ -85,6 +102,7 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,6 +125,34 @@ mkdir %LIB%
 
 del /Q %LIB%\*
 copy ..\..\..\Build\Debug\AmjuLibMsvc.lib %LIB%\amju_vc13.lib
+
+cd ..\..\Win 
+copy_files.bat
+
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL"  /I "../../../Source/AmjuGLOpenGL/Internal" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Gui" /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip"  /I "../../../Source/SDL/include" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Include" /I "../../../3rdPartyLibs/OculusSDK/Samples/CommonSrc" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Src" /I "../../../3rdPartyLibs/ES2/ES2Windows/PowerVR" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>AMJU_USE_ES2;AMJU_OFFER_OPENGL_OVR;USE_SHADOW_MAP_OPENGL_2;AMJU_USE_SDL;AMJU_USE_CURL;AMJU_USE_BASS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>set LIB=..\..\..\Build\amjulib\lib\
+
+mkdir %LIB%
+
+del /Q %LIB%\*
+copy ..\..\..\Build\ES2Debug\AmjuLibMsvc.lib %LIB%\AmjuLibMsvc.lib
 
 cd ..\..\Win 
 copy_files.bat
@@ -175,15 +221,27 @@ copy_files.bat
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLDX11\DX11Shader.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGLES2Android.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\Camera.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\DepthOfField.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\FullScreenPostProcess.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\GLUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\StereoDraw.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\TriList.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\AnimManager.cpp" />
@@ -322,6 +380,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\GLShader.cpp" />
@@ -445,19 +504,30 @@ copy_files.bat
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\MATRIX4X4.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\OpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\showbuffer.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR3D.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR4D.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Camera.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\DepthOfField.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Drawable.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\DrawDecorator.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\FullScreenPostProcess.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\GLUtils.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Outliner.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\ShadowMap.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\StereoDraw.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\TriList.h" />
     <ClInclude Include="..\..\..\Source\Anim\Anim.h" />
     <ClInclude Include="..\..\..\Source\Anim\AnimManager.h" />

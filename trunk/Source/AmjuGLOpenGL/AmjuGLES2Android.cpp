@@ -2,10 +2,12 @@
 Amju Games source code (c) Copyright Jason Colman 2010
 */
 
-// Don't use iOS or Android-specific APIs, so should work on both.
+// This implementation of AmjuGLOpenGLES2 doesn't use 
+//  iOS or Android-specific APIs, so should work on both.
+// Also should work on Windows or Mac with ES2 layer (PowerVR, Mali).
 // Good for testing, but may not be most efficient.
 
-#if defined(ANDROID_NDK)
+#if defined(AMJU_USE_ES2)
 // ||defined(AMJU_IOS)
 
 #include <AmjuFirst.h>
@@ -18,10 +20,16 @@ Amju Games source code (c) Copyright Jason Colman 2010
 #include "GLShader.h"
 #include "AmjuGL-OpenGLES.2.h"
 #include "ES2DefaultShaders.h"
+#include "ShadowMapES2.h"
+#include "RenderToTextureES2.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
 #include <AmjuFinal.h>
+
+#ifndef int32_t
+typedef int int32_t;
+#endif
 
 namespace Amju
 {
@@ -236,10 +244,22 @@ static Drawable* MakeDynamicTriList()
   return new TriListDynamicES2;
 }
 
+static Drawable* MakeShadowMapES2()
+{
+	return new ShadowMapES2;
+}
+
+static Drawable* MakeRenderToTextureES2()
+{
+	return new RenderToTextureES2;
+}
+
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
+  s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMapES2);
+  s_factory.Add(RenderToTexture::DRAWABLE_TYPE_ID, MakeRenderToTextureES2);
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
@@ -292,7 +312,7 @@ Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
   if (!s->Load(shaderFileName))
   {
     delete s;
-    return new ShaderNull;
+    return nullptr;
   }
   return s;
 }
@@ -318,8 +338,8 @@ void AmjuGLOpenGLES2::SetTexture(
 	
 	int wrapmode = GL_REPEAT;
 	
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode);
 		
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?

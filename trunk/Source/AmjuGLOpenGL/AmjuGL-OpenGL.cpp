@@ -3,7 +3,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 */
 
 #include <AmjuFirst.h>
-#if defined (WIN32) || defined (MACOSX)
+#if (defined (WIN32) || defined (MACOSX)) && !defined(AMJU_USE_ES2)
 
 #ifdef WIN32
 #pragma comment(lib, "opengl32.lib")

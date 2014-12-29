@@ -17,6 +17,7 @@ copy %SRC%\AmjuGL\*.h %INC%\
 copy %SRC%\AmjuGLDX9\*.h %INC%\
 copy %SRC%\AmjuGLDX11\*.h %INC%\
 copy %SRC%\AmjuGLOpenGL\*.h %INC%\
+copy %SRC%\Anim\*.h %INC%\
 copy %SRC%\Collision\*.h %INC%\
 copy %SRC%\Community\*.h %INC%\
 copy %SRC%\Events\*.h %INC%\

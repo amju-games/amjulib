@@ -19,6 +19,14 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #endif // MACOSX
 
 #ifdef WIN32
+
+#ifdef AMJU_USE_ES2
+
+// Windows ES2 emulation
+#include <GLES2/gl2.h>
+
+#else // AMJU_USE_ES2
+
 #include <windows.h>
 #ifndef GLEW_STATIC
 #error Dude, define GLEW_STATIC in the project settings.
@@ -28,7 +36,8 @@ Amju Games source code (c) Copyright Jason Colman 2007
 #include <GL/glu.h>
 #ifdef AMJU_USE_GLUT
 #include <gl/glut.h>
-#endif
+#endif // AMJU_USE_GLUT
+#endif // AMJU_USE_ES2
 #endif // WIN32
 
 #ifdef AMJU_IOS
