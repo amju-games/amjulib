@@ -1,3 +1,5 @@
+#ifndef AMJU_USE_ES2
+
 #include "ShadowMapOpenGL.h"
 #include "RenderToTextureOpenGL.h"
 
@@ -57,3 +59,5 @@ void ShadowMapOpenGL::Draw()
 }
 
 }
+
+#endif // AMJU_USE_ES2

@@ -229,7 +229,9 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.cpp" />
@@ -514,7 +516,9 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\VECTOR4D.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderDepthToTextureES2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureES2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapES2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
