@@ -74,7 +74,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/I "../../../../../Build/amjulib/include"
+      <AdditionalOptions>/I "../../../../../Build/amjulib/include" /I "../../../../../3rdPartyLibs/LibOVR-0.3.2/Win/Include"
  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -94,10 +94,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/I "../../../../../Build/amjulib/include"
+      <AdditionalOptions>/I "../../../../../Build/amjulib/include" /I "../../../../../3rdPartyLibs/LibOVR-0.3.2/Win/Include"
  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>AMJU_USE_ES2;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AMJU_USE_OVR;AMJU_USE_ES2;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -208,6 +208,7 @@
     <ClInclude Include="..\..\..\Source\Tweakable.h" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="..\..\..\..\..\3rdPartyLibs\LibOVR-0.3.2\Win\Lib\Win32\VS2013\libovrd.lib" />
     <Library Include="..\..\..\..\..\Source\GLUT\glut32.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />

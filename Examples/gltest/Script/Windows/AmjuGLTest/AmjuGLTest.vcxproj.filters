@@ -202,6 +202,7 @@
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bass.lib" />
     <Library Include="..\..\..\..\..\Source\SoundBass\Bass2.3\Win\bassmidi.lib" />
     <Library Include="..\..\..\..\..\Source\GLUT\glut32.lib" />
+    <Library Include="..\..\..\..\..\3rdPartyLibs\LibOVR-0.3.2\Win\Lib\Win32\VS2013\libovrd.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\newstate.pl" />

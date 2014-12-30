@@ -954,6 +954,12 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1809,6 +1815,12 @@
       <Filter>AmjuGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,9 @@
+#ifndef AMJU_USE_ES2
+
 #include <iostream>
 #include <AmjuGL.h>
 #include <Screen.h>
-#include <AmjuGL-OpenGL-Base.h>
+#include "AmjuGL-OpenGL-Base.h"
 #include "Internal/OpenGL.h"
 #include "RenderToTextureOpenGL.h"
 
@@ -242,3 +244,4 @@ void RenderToTextureOpenGL::DebugDraw()
 
 }
 
+#endif // AMJU_USE_ES2
