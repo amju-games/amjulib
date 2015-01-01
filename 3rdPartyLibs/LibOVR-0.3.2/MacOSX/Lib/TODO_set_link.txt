@@ -1,0 +1,2 @@
+ln -s MacOS/Debug/libovr.a libovr.a
+
