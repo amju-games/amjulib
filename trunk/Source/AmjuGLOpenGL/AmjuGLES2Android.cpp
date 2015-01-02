@@ -302,6 +302,19 @@ void AmjuGLOpenGLES2::Flip()
 {
 }	
 
+void AmjuGLOpenGLES2::UseShader(Shader* sh)
+{
+    if (sh)
+    {
+        s_currentShader = dynamic_cast<GLShader*>(sh);
+    }
+    else
+    {
+        s_currentShader = s_defaultShader;
+    }
+    s_currentShader->UseThisShader();
+}    
+    
 Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
 {
   AMJU_CALL_STACK;
