@@ -52,11 +52,20 @@ void StartUpBeforeCreateWindow()
     ReportError("Failed to open data glue file");
   }
 #endif
+    
+#ifdef MACOSX
+  std::string dataDir = GetDataDir();
+  dataDir += "../Assets/";
+  dataDir = CleanPath(dataDir);
+  std::cout << "Data Dir: " << dataDir << "\n";
+  File::SetRoot(dataDir, "/");
+#endif
 }
 
 void StartUpAfterCreateWindow()
 {
   TheGame::Instance()->SetCurrentState(TheGSInitialise::Instance());
+    
 //  TheGame::Instance()->SetCurrentState(TheGSPatchwork::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSBarrel::Instance());
 //  TheGame::Instance()->SetCurrentState(TheGSTerrain::Instance());
@@ -73,6 +82,8 @@ void StartUpAfterCreateWindow()
   TheGame::Instance()->SetFrameTimeFont(font);
 
   TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+
+  TheGame::Instance()->Update();
 }
 }
 
