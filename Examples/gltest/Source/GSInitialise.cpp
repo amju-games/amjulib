@@ -20,8 +20,8 @@ namespace Amju
 {
 GSInitialise::GSInitialise()
 {
-  m_nextState = TheGSShadow2::Instance();
-  m_maxTime = 0.1f;
+  m_nextState = TheGSLighting::Instance();
+//  m_maxTime = 0.1f;
 }
 
 void GSInitialise::OnActive()

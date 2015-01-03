@@ -66,9 +66,7 @@ void draw()
 
   if (!initialised)
   {
-#ifdef _DEBUG
 std::cout << "Creating mesh...\n";
-#endif
 
     TheAnimManager::Instance()->SetUpAnimPlayer(&animPlayer, ASSETS + MESH_FILE, ASSETS + SKIN_FILE, ASSETS + SKEL_FILE);
 
