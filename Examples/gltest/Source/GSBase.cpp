@@ -8,14 +8,15 @@
 #include <ObjMesh.h>
 #include <StereoDraw.h>
 #include "GSBase.h"
+#include "MouseHeadTracker.h"
 #include "OvrHeadTracker.h"
 #include "StateList.h"
 #include "Tweakable.h"
 
 namespace Amju
 {
-static const Vec3f ORIG_VIEW_DIR(0, 0, -1);
-static const Vec3f ORIG_UP_DIR(0, 1, 0);
+static Vec3f ORIG_VIEW_DIR(0, 0, -1);
+static Vec3f ORIG_UP_DIR(0, 1, 0);
 
 static ChooserDialog chooser;
 
@@ -98,7 +99,9 @@ void GSBase::OnActive()
   chooser.SetFinishCallback(OnChooserFinished);
  
   m_camera.m_pos = Vec3f(0, 5, 10); 
+  ORIG_VIEW_DIR = Normalise(-m_camera.m_pos);
   m_camera.m_dir = ORIG_VIEW_DIR;
+  //ORIG_UP_DIR = Normalise(CrossProduct(ORIG_VIEW_DIR, Vec3f(0, 1, 0)));
   m_camera.m_up = ORIG_UP_DIR;
 }
 
@@ -181,15 +184,22 @@ void GSBase::DrawHelp()
 
 void GSBase::Update()
 {
+  static MouseHeadTracker* mht = new MouseHeadTracker; // on heap because it's an event listener
   static OvrHeadTracker ht;
   static bool first = true;
   if (first)
   {
     first = false;
+    mht->Init();
     ht.Init();
   }
   Quaternion q;
   if (ht.Update(&q))
+  {
+    m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
+    m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
+  }
+  else if (mht->Update(&q))
   {
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
