@@ -4,7 +4,8 @@ Amju Games source code (c) Copyright Jason Colman 2000-2008
 
 #include <AmjuFirst.h>
 #include "AnimManager.h"
-#include "File.h"
+#include <File.h>
+#include <StringUtils.h>
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -119,7 +120,9 @@ bool AnimManager::LoadAnim(const std::string& animName, const std::string& skelN
   {
     return false;
   }
-  m_anims[animName] = pAnim;
+
+  std::string animNameNoPath = StripPath(animName);
+  m_anims[animNameNoPath] = pAnim;
   return true;
 }
 
