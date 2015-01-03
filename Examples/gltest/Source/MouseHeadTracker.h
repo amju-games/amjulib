@@ -16,6 +16,8 @@ public:
 
   virtual bool OnCursorEvent(const CursorEvent&) override;
 
+  void Reset();
+
 private:
   Quaternion m_quat;
 };
