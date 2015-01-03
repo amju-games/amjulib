@@ -169,6 +169,7 @@
     <ClCompile Include="..\..\..\Source\GSTexture.cpp" />
     <ClCompile Include="..\..\..\Source\GSWater1.cpp" />
     <ClCompile Include="..\..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\..\Source\MouseHeadTracker.cpp" />
     <ClCompile Include="..\..\..\Source\OvrHeadTracker.cpp" />
     <ClCompile Include="..\..\..\Source\Patchwork.cpp" />
     <ClCompile Include="..\..\..\Source\Startup.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="..\..\..\Source\GSTerrain.h" />
     <ClInclude Include="..\..\..\Source\GSTexture.h" />
     <ClInclude Include="..\..\..\Source\GSWater1.h" />
+    <ClInclude Include="..\..\..\Source\MouseHeadTracker.h" />
     <ClInclude Include="..\..\..\Source\OvrHeadTracker.h" />
     <ClInclude Include="..\..\..\Source\Patchwork.h" />
     <ClInclude Include="..\..\..\Source\StateList.h" />

@@ -41,7 +41,7 @@ static bool showSkel = true;
 static bool showMesh = true;
 static bool xray = false;
 static float dt = 0.001f; // Mac default dt 
-static bool paused = true;
+static bool paused = false;
 static bool lighting = true;
 static bool textured = true;
 static bool stepping = false; // if true, step to next keyframe (1/24 sec)
@@ -104,9 +104,7 @@ std::cout << "Creating mesh...\n";
     }
   }
   
-  AmjuGL::InitFrame();
-  AmjuGL::BeginScene();
-  AmjuGL::LookAt(0, 10.0f, 20.0f, 0, 0,0, 0, 1.0f, 0);
+//  AmjuGL::LookAt(0, 10.0f, 20.0f, 0, 0,0, 0, 1.0f, 0);
 
   AmjuGL::Translate(xPos, yPos, 0);
 
@@ -177,12 +175,13 @@ std::cout << "Creating mesh...\n";
 //  glEnable(GL_TEXTURE_2D);
 //  glEnable(GL_DEPTH_TEST);
 
-  AmjuGL::EndScene();
 
 }
 
 void GSAnimTest::DrawScene()
 {
+  DrawHelp();
+
   draw();
 }
 
