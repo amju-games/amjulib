@@ -3,13 +3,19 @@
 
 namespace Amju
 {
-  static const float CONVERT_MOUSE_DX_TO_RADIANS = 0.2f;
-  static const float CONVERT_MOUSE_DY_TO_RADIANS = 0.2f;
+  static const float CONVERT_MOUSE_DX_TO_RADIANS = 0.5f;
+  static const float CONVERT_MOUSE_DY_TO_RADIANS = 0.5f;
 
   bool MouseHeadTracker::Init()
   {
     TheEventPoller::Instance()->AddListener(this);
     return true;
+  }
+
+  void MouseHeadTracker::Reset()
+  {
+    // Reset rotations
+    m_quat = Quaternion();
   }
 
   bool MouseHeadTracker::Update(Quaternion* q)

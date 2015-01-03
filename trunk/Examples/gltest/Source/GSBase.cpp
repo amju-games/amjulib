@@ -18,6 +18,8 @@ namespace Amju
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
 
+static RCPtr<MouseHeadTracker> mht = new MouseHeadTracker; // on heap because it's an event listener
+
 static ChooserDialog chooser;
 
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
@@ -103,6 +105,8 @@ void GSBase::OnActive()
   m_camera.m_dir = ORIG_VIEW_DIR;
   //ORIG_UP_DIR = Normalise(CrossProduct(ORIG_VIEW_DIR, Vec3f(0, 1, 0)));
   m_camera.m_up = ORIG_UP_DIR;
+
+  mht->Reset();
 }
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
@@ -184,7 +188,6 @@ void GSBase::DrawHelp()
 
 void GSBase::Update()
 {
-  static MouseHeadTracker* mht = new MouseHeadTracker; // on heap because it's an event listener
   static OvrHeadTracker ht;
   static bool first = true;
   if (first)
