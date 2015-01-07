@@ -229,7 +229,9 @@ void QueueEvent(Amju::Event* e)
   CMDeviceMotion *deviceMotion = motionManager.deviceMotion;
   CMAttitude *attitude = deviceMotion.attitude;
     
-  if (referenceAttitude != nil) [attitude multiplyByInverseOfAttitude:referenceAttitude];
+  // With this turned off, the direction you start off in is looking in the default
+  //  camera dir, so I think it's better
+//  if (referenceAttitude != nil) [attitude multiplyByInverseOfAttitude:referenceAttitude];
 
   // TODO Quaternion would be preferable
   // Queue rotation events. The axes depend on the phone orientation.
