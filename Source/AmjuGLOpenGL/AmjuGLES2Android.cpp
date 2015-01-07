@@ -7,8 +7,7 @@ Amju Games source code (c) Copyright Jason Colman 2010
 // Also should work on Windows or Mac with ES2 layer (PowerVR, Mali).
 // Good for testing, but may not be most efficient.
 
-#if defined(AMJU_USE_ES2)
-// ||defined(AMJU_IOS)
+#if defined(AMJU_USE_ES2) && !defined(AMJU_IOS)
 
 #include <AmjuFirst.h>
 #include <math.h>

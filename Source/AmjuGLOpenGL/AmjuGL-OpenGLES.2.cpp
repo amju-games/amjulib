@@ -265,7 +265,7 @@ static Drawable* MakeDynamicTriList()
 
 static Drawable* MakeShadowMapES2()
 {
-  return new ShadowMapOpenGL;
+  return new ShadowMapES2;
 }
 
 static Drawable* MakeRenderToTextureES2()
