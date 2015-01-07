@@ -194,7 +194,7 @@ void AmjuGL::Init()
   impl->Init();
 	
 #ifndef IPHONE	
-  Viewport(0, 0, Screen::X(), Screen::Y());
+//  Viewport(0, 0, Screen::X(), Screen::Y());
 #endif
 }
 
