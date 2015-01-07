@@ -53,7 +53,8 @@ void StartUpBeforeCreateWindow()
   }
 #endif
     
-#ifdef MACOSX
+#if defined(XCODE) && defined(MACOSX)
+  // TODO XCode only
   std::string dataDir = GetDataDir();
   dataDir += "../Assets/";
   dataDir = CleanPath(dataDir);

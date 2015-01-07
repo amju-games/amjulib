@@ -34,6 +34,7 @@ public:
   virtual void OnActive() override;
 
   virtual bool OnKeyEvent(const KeyEvent&) override;
+  virtual bool OnRotationEvent(const RotationEvent&) override;
 
   // Override to set up tweak menu. Call CreateTweakMenu in your overriden function first.
   virtual void SetUpTweakMenu() {}

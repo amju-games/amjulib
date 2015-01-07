@@ -1,25 +1,33 @@
 #include <iostream>
-#include <Game.h>
-#include <Timer.h>
 #include <AmjuGL.h>
+#include <DegRad.h>
+#include <Game.h>
 #include <GuiText.h>
 #include <GuiListBox.h>
-#include <StringUtils.h>
 #include <ObjMesh.h>
+#include <Quaternion.h>
+#include <StringUtils.h>
 #include <StereoDraw.h>
+#include <Timer.h>
 #include "GSBase.h"
-#include "MouseHeadTracker.h"
-#include "OvrHeadTracker.h"
 #include "StateList.h"
 #include "Tweakable.h"
+
+#if defined(WIN32) || defined(MAXOSX)
+#include "MouseHeadTracker.h"
+#include "OvrHeadTracker.h"
+#endif
+
 
 namespace Amju
 {
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
 
+#if defined(WIN32) || defined(MAXOSX)
 static RCPtr<MouseHeadTracker> mht = new MouseHeadTracker; // on heap because it's an event listener
-
+#endif
+    
 static ChooserDialog chooser;
 
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
@@ -106,7 +114,9 @@ void GSBase::OnActive()
   //ORIG_UP_DIR = Normalise(CrossProduct(ORIG_VIEW_DIR, Vec3f(0, 1, 0)));
   m_camera.m_up = ORIG_UP_DIR;
 
+#if defined(WIN32) || defined(MAXOSX)
   mht->Reset();
+#endif
 }
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
@@ -186,8 +196,40 @@ void GSBase::DrawHelp()
 */
 }
 
+bool GSBase::OnRotationEvent(const RotationEvent& re)
+{
+    // TODO this sucks - much better if we had another kind of RotationEvent
+    //  containing a quaternion.
+    
+    static Quaternion q[3];
+    switch (re.axis)
+    {
+    case  AMJU_AXIS_X:
+        // Concat a rotation about the x axis
+        q[0] = Quaternion(Vec3f(1, 0, 0), DegToRad(re.degs));
+        break;
+            
+    case  AMJU_AXIS_Y:
+        // Concat a rotation about the x axis
+        q[1] = Quaternion(Vec3f(0, 1, 0), DegToRad(re.degs));
+        break;
+
+    case  AMJU_AXIS_Z:
+        // Concat a rotation about the x axis
+        q[2] = Quaternion(Vec3f(0, 0, 1), DegToRad(re.degs));
+        break;
+    }
+    
+    Quaternion combined = q[0] * q[1] * q[2];
+    m_camera.m_dir = combined.RotateVec(ORIG_VIEW_DIR);
+    m_camera.m_up = combined.RotateVec(ORIG_UP_DIR);
+
+    return false; // not consumed?
+}
+    
 void GSBase::Update()
 {
+#if defined(WIN32) || defined(MAXOSX)
   static OvrHeadTracker ht;
   static bool first = true;
   if (first)
@@ -207,6 +249,7 @@ void GSBase::Update()
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
   }
+#endif // #if defined(WIN32) || defined(MAXOSX)
 
   if (m_paused)
   {
