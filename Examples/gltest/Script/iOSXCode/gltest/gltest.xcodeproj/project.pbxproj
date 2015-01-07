@@ -48,6 +48,17 @@
 		6966D0A519979737005992E5 /* GSRenderDepthToTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966D0A019979737005992E5 /* GSRenderDepthToTexture.cpp */; };
 		6966D0A619979737005992E5 /* GSRenderTextureBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6966D0A219979737005992E5 /* GSRenderTextureBase.cpp */; };
 		697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */; };
+		715D2E691A598D1900AECA96 /* BarrelDist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E531A598D1900AECA96 /* BarrelDist.cpp */; };
+		715D2E6A1A598D1900AECA96 /* GSAnimTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E551A598D1900AECA96 /* GSAnimTest.cpp */; };
+		715D2E6B1A598D1900AECA96 /* GSBarrel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E571A598D1900AECA96 /* GSBarrel.cpp */; };
+		715D2E6C1A598D1900AECA96 /* GSPatchwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E591A598D1900AECA96 /* GSPatchwork.cpp */; };
+		715D2E6D1A598D1900AECA96 /* GSShadow2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E5B1A598D1900AECA96 /* GSShadow2.cpp */; };
+		715D2E6E1A598D1900AECA96 /* GSTerrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E5D1A598D1900AECA96 /* GSTerrain.cpp */; };
+		715D2E6F1A598D1900AECA96 /* GSWater1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E5F1A598D1900AECA96 /* GSWater1.cpp */; };
+		715D2E701A598D1900AECA96 /* Patchwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E611A598D1900AECA96 /* Patchwork.cpp */; };
+		715D2E711A598D1900AECA96 /* StateList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E631A598D1900AECA96 /* StateList.cpp */; };
+		715D2E721A598D1900AECA96 /* TerrainPatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E651A598D1900AECA96 /* TerrainPatch.cpp */; };
+		715D2E731A598D1900AECA96 /* Tweakable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 715D2E671A598D1900AECA96 /* Tweakable.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +136,28 @@
 		6966D0A319979737005992E5 /* GSRenderTextureBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSRenderTextureBase.h; path = ../../../../Source/GSRenderTextureBase.h; sourceTree = "<group>"; };
 		697F5AEB19572AF50020A72E /* GSDepthOfField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSDepthOfField.cpp; path = ../../../../Source/GSDepthOfField.cpp; sourceTree = "<group>"; };
 		697F5AEC19572AF50020A72E /* GSDepthOfField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSDepthOfField.h; path = ../../../../Source/GSDepthOfField.h; sourceTree = "<group>"; };
+		715D2E531A598D1900AECA96 /* BarrelDist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BarrelDist.cpp; path = ../../../../Source/BarrelDist.cpp; sourceTree = "<group>"; };
+		715D2E541A598D1900AECA96 /* BarrelDist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarrelDist.h; path = ../../../../Source/BarrelDist.h; sourceTree = "<group>"; };
+		715D2E551A598D1900AECA96 /* GSAnimTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSAnimTest.cpp; path = ../../../../Source/GSAnimTest.cpp; sourceTree = "<group>"; };
+		715D2E561A598D1900AECA96 /* GSAnimTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSAnimTest.h; path = ../../../../Source/GSAnimTest.h; sourceTree = "<group>"; };
+		715D2E571A598D1900AECA96 /* GSBarrel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSBarrel.cpp; path = ../../../../Source/GSBarrel.cpp; sourceTree = "<group>"; };
+		715D2E581A598D1900AECA96 /* GSBarrel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSBarrel.h; path = ../../../../Source/GSBarrel.h; sourceTree = "<group>"; };
+		715D2E591A598D1900AECA96 /* GSPatchwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSPatchwork.cpp; path = ../../../../Source/GSPatchwork.cpp; sourceTree = "<group>"; };
+		715D2E5A1A598D1900AECA96 /* GSPatchwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSPatchwork.h; path = ../../../../Source/GSPatchwork.h; sourceTree = "<group>"; };
+		715D2E5B1A598D1900AECA96 /* GSShadow2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSShadow2.cpp; path = ../../../../Source/GSShadow2.cpp; sourceTree = "<group>"; };
+		715D2E5C1A598D1900AECA96 /* GSShadow2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSShadow2.h; path = ../../../../Source/GSShadow2.h; sourceTree = "<group>"; };
+		715D2E5D1A598D1900AECA96 /* GSTerrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSTerrain.cpp; path = ../../../../Source/GSTerrain.cpp; sourceTree = "<group>"; };
+		715D2E5E1A598D1900AECA96 /* GSTerrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSTerrain.h; path = ../../../../Source/GSTerrain.h; sourceTree = "<group>"; };
+		715D2E5F1A598D1900AECA96 /* GSWater1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GSWater1.cpp; path = ../../../../Source/GSWater1.cpp; sourceTree = "<group>"; };
+		715D2E601A598D1900AECA96 /* GSWater1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GSWater1.h; path = ../../../../Source/GSWater1.h; sourceTree = "<group>"; };
+		715D2E611A598D1900AECA96 /* Patchwork.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Patchwork.cpp; path = ../../../../Source/Patchwork.cpp; sourceTree = "<group>"; };
+		715D2E621A598D1900AECA96 /* Patchwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patchwork.h; path = ../../../../Source/Patchwork.h; sourceTree = "<group>"; };
+		715D2E631A598D1900AECA96 /* StateList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StateList.cpp; path = ../../../../Source/StateList.cpp; sourceTree = "<group>"; };
+		715D2E641A598D1900AECA96 /* StateList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StateList.h; path = ../../../../Source/StateList.h; sourceTree = "<group>"; };
+		715D2E651A598D1900AECA96 /* TerrainPatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TerrainPatch.cpp; path = ../../../../Source/TerrainPatch.cpp; sourceTree = "<group>"; };
+		715D2E661A598D1900AECA96 /* TerrainPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerrainPatch.h; path = ../../../../Source/TerrainPatch.h; sourceTree = "<group>"; };
+		715D2E671A598D1900AECA96 /* Tweakable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tweakable.cpp; path = ../../../../Source/Tweakable.cpp; sourceTree = "<group>"; };
+		715D2E681A598D1900AECA96 /* Tweakable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tweakable.h; path = ../../../../Source/Tweakable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,8 +231,14 @@
 			children = (
 				692014AB191F525B0054C44D /* AppDelegate.h */,
 				692014AC191F525B0054C44D /* AppDelegate.mm */,
+				715D2E531A598D1900AECA96 /* BarrelDist.cpp */,
+				715D2E541A598D1900AECA96 /* BarrelDist.h */,
 				6920148D191F52340054C44D /* Grid.cpp */,
 				6920148E191F52340054C44D /* Grid.h */,
+				715D2E551A598D1900AECA96 /* GSAnimTest.cpp */,
+				715D2E561A598D1900AECA96 /* GSAnimTest.h */,
+				715D2E571A598D1900AECA96 /* GSBarrel.cpp */,
+				715D2E581A598D1900AECA96 /* GSBarrel.h */,
 				6920148F191F52340054C44D /* GSBase.cpp */,
 				69201490191F52340054C44D /* GSBase.h */,
 				6966D09E19979737005992E5 /* GSBogusSSAO.cpp */,
@@ -220,6 +259,8 @@
 				692014CB191FCDF40054C44D /* GSMandel.h */,
 				69201499191F52340054C44D /* GSObb2Test.cpp */,
 				6920149A191F52340054C44D /* GSObb2Test.h */,
+				715D2E591A598D1900AECA96 /* GSPatchwork.cpp */,
+				715D2E5A1A598D1900AECA96 /* GSPatchwork.h */,
 				6966CC9819934891005992E5 /* GSRenderColourToTexture.cpp */,
 				6966CC9919934891005992E5 /* GSRenderColourToTexture.h */,
 				6966D0A019979737005992E5 /* GSRenderDepthToTexture.cpp */,
@@ -230,12 +271,26 @@
 				6920149C191F52340054C44D /* GSShaderWave.h */,
 				6920149D191F52340054C44D /* GSShadow.cpp */,
 				6920149E191F52340054C44D /* GSShadow.h */,
+				715D2E5B1A598D1900AECA96 /* GSShadow2.cpp */,
+				715D2E5C1A598D1900AECA96 /* GSShadow2.h */,
+				715D2E5D1A598D1900AECA96 /* GSTerrain.cpp */,
+				715D2E5E1A598D1900AECA96 /* GSTerrain.h */,
 				6920149F191F52340054C44D /* GSTexture.cpp */,
 				692014A0191F52340054C44D /* GSTexture.h */,
+				715D2E5F1A598D1900AECA96 /* GSWater1.cpp */,
+				715D2E601A598D1900AECA96 /* GSWater1.h */,
 				69201470191F51AC0054C44D /* Images.xcassets */,
 				692014AD191F525B0054C44D /* main.m */,
+				715D2E611A598D1900AECA96 /* Patchwork.cpp */,
+				715D2E621A598D1900AECA96 /* Patchwork.h */,
 				692014B9191F54E40054C44D /* Startup.cpp */,
+				715D2E631A598D1900AECA96 /* StateList.cpp */,
+				715D2E641A598D1900AECA96 /* StateList.h */,
 				69201458191F51AC0054C44D /* Supporting Files */,
+				715D2E651A598D1900AECA96 /* TerrainPatch.cpp */,
+				715D2E661A598D1900AECA96 /* TerrainPatch.h */,
+				715D2E671A598D1900AECA96 /* Tweakable.cpp */,
+				715D2E681A598D1900AECA96 /* Tweakable.h */,
 				692014AE191F525B0054C44D /* ViewController.h */,
 				692014AF191F525B0054C44D /* ViewController.mm */,
 			);
@@ -386,15 +441,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				715D2E6C1A598D1900AECA96 /* GSPatchwork.cpp in Sources */,
 				692014B1191F525B0054C44D /* main.m in Sources */,
+				715D2E6D1A598D1900AECA96 /* GSShadow2.cpp in Sources */,
+				715D2E691A598D1900AECA96 /* BarrelDist.cpp in Sources */,
 				692014CC191FCDF40054C44D /* GSMandel.cpp in Sources */,
 				692014A9191F52340054C44D /* GSShadow.cpp in Sources */,
 				692014A1191F52340054C44D /* Grid.cpp in Sources */,
 				6966CC9A19934891005992E5 /* GSRenderColourToTexture.cpp in Sources */,
 				692014B2191F525B0054C44D /* ViewController.mm in Sources */,
+				715D2E6A1A598D1900AECA96 /* GSAnimTest.cpp in Sources */,
 				6966D0A519979737005992E5 /* GSRenderDepthToTexture.cpp in Sources */,
+				715D2E6F1A598D1900AECA96 /* GSWater1.cpp in Sources */,
 				692014A8191F52340054C44D /* GSShaderWave.cpp in Sources */,
 				6966D0A419979737005992E5 /* GSBogusSSAO.cpp in Sources */,
+				715D2E731A598D1900AECA96 /* Tweakable.cpp in Sources */,
+				715D2E721A598D1900AECA96 /* TerrainPatch.cpp in Sources */,
 				692014A3191F52340054C44D /* GSEnvMap.cpp in Sources */,
 				692014A4191F52340054C44D /* GSFinish.cpp in Sources */,
 				6966D0A619979737005992E5 /* GSRenderTextureBase.cpp in Sources */,
@@ -403,10 +465,14 @@
 				692014BA191F54E40054C44D /* Startup.cpp in Sources */,
 				697F5AED19572AF50020A72E /* GSDepthOfField.cpp in Sources */,
 				692014A7191F52340054C44D /* GSObb2Test.cpp in Sources */,
+				715D2E6E1A598D1900AECA96 /* GSTerrain.cpp in Sources */,
+				715D2E701A598D1900AECA96 /* Patchwork.cpp in Sources */,
 				692014A6191F52340054C44D /* GSMain.cpp in Sources */,
 				6966CC971991FFF8005992E5 /* GSInitialise.cpp in Sources */,
 				692014B0191F525B0054C44D /* AppDelegate.mm in Sources */,
 				692014AA191F52340054C44D /* GSTexture.cpp in Sources */,
+				715D2E6B1A598D1900AECA96 /* GSBarrel.cpp in Sources */,
+				715D2E711A598D1900AECA96 /* StateList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,17 +634,18 @@
 					AMJU_IOS,
 					_DEBUG,
 					IPHONE,
+					AMJU_USE_ES2,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
+					"../../../../../Releases/amjulib-v.0.5-ios/include",
 				);
 				INFOPLIST_FILE = "gltest/gltest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
+					"../../../../../Releases/amjulib-v.0.5-ios/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -596,16 +663,21 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gltest/gltest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AMJU_IOS,
+					IPHONE,
+					AMJU_USE_ES2,
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/include",
+					"../../../../../Releases/amjulib-v.0.5-ios/include",
 				);
 				INFOPLIST_FILE = "gltest/gltest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/jay/projects/amjulib/Releases/amjulib-v.0.4-ios/lib",
+					"../../../../../Releases/amjulib-v.0.5-ios/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
