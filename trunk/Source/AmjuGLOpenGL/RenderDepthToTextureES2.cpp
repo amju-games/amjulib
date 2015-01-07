@@ -1,4 +1,7 @@
-#if defined (AMJU_IOS) || defined (ANDROID_NDK)
+#if 0
+// What's going on here? This doesn't work, it's just copied from somewhere???
+
+//defined (AMJU_IOS) || defined (ANDROID_NDK)
 //|| defined(AMJU_USE_ES2)
 
 #include <iostream>
