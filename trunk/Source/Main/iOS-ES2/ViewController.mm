@@ -16,10 +16,21 @@
 #include <DegRad.h>
 #include <StartUp.h>
 
+#define AMJU_USE_GYRO
+
+#ifdef AMJU_USE_GYRO
+// http://stackoverflow.com/questions/3245733/apple-gyroscope-sample-code
+// https://developer.apple.com/library/ios/documentation/CoreMotion/Reference/CMAttitude_Class/index.html#//apple_ref/occ/instp/CMAttitude/roll
+static CMMotionManager *motionManager = nullptr;
+static CMAttitude *referenceAttitude = nullptr;
+#endif // AMJU_USE_GYRO
+
+#ifdef AMJU_USE_ACCELEROMETER
 // Accelerom poll freq - j.c. - http://www.appcoda.com/ios-maze-game-tutorial-accelerometer/
 // If frequency is too high, frame rate seems to get choppy.
 // TODO Make this a setting.
 #define kUpdateInterval (1.0f / 10.0f)
+#endif // AMJU_USE_ACCELEROMETER
 
 @interface ViewController () {
 }
@@ -46,6 +57,15 @@
     [super dealloc];
 }
 
+#ifdef AMJU_USE_GYRO
+-(void) enableMotion{
+    CMDeviceMotion *deviceMotion = motionManager.deviceMotion;
+    CMAttitude *attitude = deviceMotion.attitude;
+    referenceAttitude = [attitude retain];
+    [motionManager startDeviceMotionUpdates];
+}
+#endif // AMJU_USE_GYRO
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,7 +81,15 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    
+#ifdef AMJU_USE_GYRO
+    motionManager = [[CMMotionManager alloc] init];
+    referenceAttitude = nil;
+    [self enableMotion];
+#endif // AMJU_USE_GYRO
   
+#ifdef AMJU_USE_ACCELEROMETER
+
     // j.c. accelerometer - http://www.appcoda.com/ios-maze-game-tutorial-accelerometer/
     self.motionManager = [[CMMotionManager alloc]  init];
     self.queue         = [[NSOperationQueue alloc] init];
@@ -73,13 +101,17 @@
        [(id) self setAcceleration:accelerometerData.acceleration];
        [self performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
      }];
+#endif // AMJU_USE_ACCELEROMETER
   
+#ifdef AMJU_USE_COMPASS
+    
     // j.c. compass - http://www.devfright.com/how-to-use-the-iphone-digital-compass-in-your-app/
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingHeading];
     // Not reqd here: this starts up getting actual location
     //  [self.locationManager startUpdatingLocation];
+#endif // AMJU_USE_COMPASS
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
@@ -142,6 +174,8 @@ void QueueEvent(Amju::Event* e)
 
 - (void)update
 {
+#ifdef AMJU_USE_ACCELEROMETER
+
   // j.c. send accelerom events but TODO only if changed
 
   const float kFilteringFactor = 0.1;
@@ -188,7 +222,39 @@ void QueueEvent(Amju::Event* e)
   r->axis = Amju::AMJU_AXIS_Z;
   r->degs = accel[2];
   QueueEvent(r);
-  
+
+#endif // AMJU_USE_ACCELEROMETER
+    
+#ifdef AMJU_USE_GYRO
+  CMDeviceMotion *deviceMotion = motionManager.deviceMotion;
+  CMAttitude *attitude = deviceMotion.attitude;
+    
+  if (referenceAttitude != nil) [attitude multiplyByInverseOfAttitude:referenceAttitude];
+
+  // TODO Quaternion would be preferable
+  // Queue rotation events. The axes depend on the phone orientation.
+  Amju::RotationEvent* r = 0;
+    
+  r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_X;
+  r->degs = RadToDeg(attitude.roll) - 90.0f;
+  QueueEvent(r);
+    
+  r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_Y;
+  r->degs = RadToDeg(attitude.yaw);
+  QueueEvent(r);
+    
+  r = new Amju::RotationEvent;
+  r->controller = 0;
+  r->axis = Amju::AMJU_AXIS_Z;
+  r->degs = RadToDeg(attitude.pitch);
+  QueueEvent(r);
+    
+#endif
+
   Amju::TheGame::Instance()->Update();
 }
 
