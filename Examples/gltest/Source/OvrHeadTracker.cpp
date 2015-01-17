@@ -50,7 +50,7 @@ bool OvrHeadTracker::Init()
 
 #endif
 
-  return true;
+  return false;
 }
 
 bool OvrHeadTracker::Update(Quaternion* q)

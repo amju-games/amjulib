@@ -13,7 +13,7 @@
 #include "StateList.h"
 #include "Tweakable.h"
 
-#if defined(WIN32) || defined(MAXOSX)
+#if defined(WIN32) || defined(MACOSX)
 #include "MouseHeadTracker.h"
 #include "OvrHeadTracker.h"
 #endif
@@ -21,10 +21,14 @@
 
 namespace Amju
 {
+// Set to true if we detect OVR. Also we want to set to true if in Cardboard mode,
+//  or we just want to test.
+static bool isStereo = false;
+
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
 
-#if defined(WIN32) || defined(MAXOSX)
+#if defined(WIN32) || defined(MACOSX)
 static RCPtr<MouseHeadTracker> mht = new MouseHeadTracker; // on heap because it's an event listener
 #endif
     
@@ -114,7 +118,7 @@ void GSBase::OnActive()
   //ORIG_UP_DIR = Normalise(CrossProduct(ORIG_VIEW_DIR, Vec3f(0, 1, 0)));
   m_camera.m_up = ORIG_UP_DIR;
 
-#if defined(WIN32) || defined(MAXOSX)
+#if defined(WIN32) || defined(MACOSX)
   mht->Reset();
 #endif
 }
@@ -169,7 +173,7 @@ void GSBase::Draw()
 
   static StereoDraw sd; // TODO one per state?
   sd.SetCamera(m_camera);
-  sd.SetIsStereo(true);
+  sd.SetIsStereo(isStereo);
   sd.SetDrawFunc(DrawCurrentState);
   sd.Draw();
 
@@ -229,14 +233,18 @@ bool GSBase::OnRotationEvent(const RotationEvent& re)
     
 void GSBase::Update()
 {
-#if defined(WIN32) || defined(MAXOSX)
+#if defined(WIN32) || defined(MACOSX)
   static OvrHeadTracker ht;
   static bool first = true;
   if (first)
   {
     first = false;
+    if (ht.Init())
+    {
+std::cout << "Found OVR, setting stereo on.\n";
+      isStereo = true;
+    }
     mht->Init();
-    ht.Init();
   }
   Quaternion q;
   if (ht.Update(&q))
@@ -249,7 +257,7 @@ void GSBase::Update()
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
   }
-#endif // #if defined(WIN32) || defined(MAXOSX)
+#endif // #if defined(WIN32) || defined(MACOSX)
 
   if (m_paused)
   {
