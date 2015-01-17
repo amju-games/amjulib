@@ -9,6 +9,7 @@
 #include "Internal/OpenGL.h"
 #include <File.h>
 #include <ReportError.h>
+#include <StringUtils.h>
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -61,6 +62,75 @@ int GLShader::GetUniformLocation(const std::string& uniformName)
   return loc;
 }
 
+// Recursive file load, allowing for #includes
+// -------------------------------------------
+struct FileLine
+{ 
+  FileLine() : m_lineNum(-1) {}
+  FileLine(const std::string& text, const std::string& filename, int lineNum) : 
+    m_text(text), m_filename(filename), m_lineNum(lineNum) {}
+ 
+  std::string m_text;
+  std::string m_filename;
+  int m_lineNum;
+};
+typedef std::vector<FileLine> FileLineVec;
+
+std::string ToString(const FileLineVec& vec)
+{
+  std::string res;
+  for (int i = 0; i < vec.size(); i++)
+  {
+    const FileLine& fl = vec[i];
+    res += fl.m_text + "\n";
+  }
+  return res;
+}
+
+bool LoadFileWithIncludes(const std::string& path, const std::string& filename, FileLineVec* result)
+{
+  File file(File::NO_VERSION);
+  if (!file.OpenRead(path + filename))
+  {
+    std::string badInclude;
+    if (!result->empty())
+    {
+      const FileLine& fl = result->back();
+      badInclude = " (included from " + fl.m_filename + ": " + ToString(fl.m_lineNum) + ")";
+    }
+    file.ReportError("Failed to open file" + badInclude);
+    return false;
+  }
+  
+  std::string s;
+  const bool NO_TRIM = false;
+  int lineNum = 1; // line numbers start at one
+  while (file.GetDataLine(&s, NO_TRIM))
+  {
+    if (StringContains(s, "#include"))
+    {
+      const std::string includefilename = s.substr(9);
+std::cout << "Including file \"" << includefilename << "\"\n";
+      bool ok = LoadFileWithIncludes(path, includefilename, result);
+      if (!ok)
+      {
+        return false;
+      }
+    }
+    else
+    {
+      result->push_back(FileLine(s, filename, lineNum));
+    }
+    lineNum++;
+  }
+  return true;
+}
+
+bool LoadShaderFile(const std::string filename, FileLineVec* vec)
+{
+  return LoadFileWithIncludes(GetFilePath(filename) + "/", StripPath(filename), vec);
+}
+
 bool GLShader::Load(const std::string& shadername)
 {
 #ifdef SHADER_DEBUG
@@ -74,34 +144,23 @@ std::cout << "Loading shader: " << shadername << "\n";
     return false;
   }
 
-  // TODO Load files, pass strings to Create()
-  File fragFile(File::NO_VERSION);
-  if (!fragFile.OpenRead(shadername + "-frag.txt"))
+  // Load files, pass strings to Create()
+  // TODO No good, we want the file/line number info
+  FileLineVec frag;
+  if (!LoadShaderFile(shadername + "-frag.txt", &frag))
   {
-    fragFile.ReportError("Failed to open fragment shader file");
+    ReportError("Failed to load fragment shader file");
     return false;
   }
-  std::string fragText;
-  std::string s;
-  const bool NO_TRIM = false;
-  while (fragFile.GetDataLine(&s, NO_TRIM))
-  {
-    fragText += s;
-    fragText += "\n";
-  }
+  std::string fragText = ToString(frag);
 
-  File vertFile(File::NO_VERSION);
-  if (!vertFile.OpenRead(shadername + "-vert.txt"))
+  FileLineVec vert;
+  if (!LoadShaderFile(shadername + "-vert.txt", &vert))
   {
-    vertFile.ReportError("Failed to open vertex shader file");
+    ReportError("Failed to load vertex shader file");
     return false;
   }
-  std::string vertText;
-  while (vertFile.GetDataLine(&s, NO_TRIM))
-  {
-    vertText += s;
-    vertText += "\n";
-  }
+  std::string vertText = ToString(vert);
 
   return Create(vertText, fragText);
 }
