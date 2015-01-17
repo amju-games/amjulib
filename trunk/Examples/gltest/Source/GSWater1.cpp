@@ -39,6 +39,8 @@ void GSWater1::DrawScene()
   shaderTime += 0.01f;
   m_shader->Set("gTime", shaderTime);
 
+  AmjuGL::SetIsWireFrameMode(true);
+
   grid.Draw();
   m_shader->End();
 }
@@ -52,9 +54,9 @@ void GSWater1::OnActive()
 {
   GSBase::OnActive();
 
-  m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/wavedemo");
+  m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/water1");
   m_shader->Begin(); // so we find attrib var locations when we build tri list:
-  grid.Build(200, 20.0f);
+  grid.Build(50, 20.0f);
 }
 
 } // namespace
