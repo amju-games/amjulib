@@ -1,9 +1,16 @@
 // wavedemo-frag.txt
 
 varying float gY;
+varying vec3 vNormal;
 
 void main()
 {
-  gl_FragColor = vec4(gY, gY, 0, 1); 
+//  vec3 lightdir = vec3(10.0, 0.0, 0.0);
+
+//  float nDotL = max(0.0, dot(normalize(vNormal), lightdir));
+//  gl_FragColor = vec4(nDotL, nDotL, 1.0, 1.0); 
+
+  vec3 normColour = normalize(vNormal) * 0.5 + 0.5;
+  gl_FragColor = vec4(normColour, 1.0); 
 }
 
