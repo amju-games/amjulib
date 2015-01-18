@@ -3,6 +3,7 @@
 
 #include <AmjuGL.h>
 #include <TriList.h>
+#include <Vec3.h>
 
 namespace Amju
 {
@@ -14,10 +15,18 @@ class Grid
 public:
   Grid();
   void Build(int numDivisions, float len, HeightFunc hf = 0);
+  void Rebuild(HeightFunc hf);
   void Draw();
 
 protected:
-  RCPtr<TriListStatic> m_triList;
+  void RecalcNormals(HeightFunc hf);
+
+protected:
+  RCPtr<TriListDynamic> m_triList;
+  AmjuGL::Tris m_tris;
+  std::vector<Vec3f> m_normals;
+  int m_numDivisions;
+  float m_sideLength;
 };
 }
 
