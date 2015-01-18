@@ -3,38 +3,47 @@
 
 namespace Amju
 {
-Grid::Grid()
+Grid::Grid() : m_numDivisions(0), m_sideLength(0)
 {
 }
 
 void Grid::Build(int numDivs, float len, HeightFunc hf)
 {
-  AmjuGL::Tris tris;
-  tris.reserve(numDivs * numDivs * 2);
-  AmjuGL::Tri t;
+  m_numDivisions = numDivs;
+  m_sideLength = len;
+  m_tris.reserve(m_numDivisions * m_numDivisions * 2);
+  m_triList = (TriListDynamic*)AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID);
+  Rebuild(hf);
+}
 
-  // Calc normals first
-  std::vector<Vec3f> normals;
+void Grid::RecalcNormals(HeightFunc hf)
+{
   if (hf)
   {
-    int numNormals = (numDivs + 1) * (numDivs + 1);
-std::cout << "Num Divs: " << numDivs << ", num normals: " << numNormals << "\n";
-    normals.resize(numNormals);
+    int numNormals = (m_numDivisions + 1) * (m_numDivisions + 1);
+//std::cout << "Num Divs: " << m_numDivisions << ", num normals: " << numNormals << "\n";
 
-    for (int i = 0; i < numDivs; i++)
+    // Zero all normals
+    m_normals.resize(numNormals);
+    for (int i = 0; i < numNormals; i++)
     {
-      float u0 = (float)i / (float)numDivs;
-      float u1 = (float)(i + 1) / (float)numDivs;
+      m_normals[i] = Vec3f();
+    }
 
-      for (int j = 0; j < numDivs; j++)
+    for (int i = 0; i < m_numDivisions; i++)
+    {
+      float u0 = (float)i / (float)m_numDivisions;
+      float u1 = (float)(i + 1) / (float)m_numDivisions;
+
+      for (int j = 0; j < m_numDivisions; j++)
       {
-        float v0 = (float)j / (float)numDivs;
-        float v1 = (float)(j + 1) / (float)numDivs;
+        float v0 = (float)j / (float)m_numDivisions;
+        float v1 = (float)(j + 1) / (float)m_numDivisions;
 
-        float x0 = (u0 - 0.5f) * len;
-        float x1 = (u1 - 0.5f) * len;
-        float z0 = (v0 - 0.5f) * len;
-        float z1 = (v1 - 0.5f) * len;
+        float x0 = (u0 - 0.5f) * m_sideLength;
+        float x1 = (u1 - 0.5f) * m_sideLength;
+        float z0 = (v0 - 0.5f) * m_sideLength;
+        float z1 = (v1 - 0.5f) * m_sideLength;
         float y[4] = 
         {
           hf(x1, z0),
@@ -54,40 +63,49 @@ std::cout << "Num Divs: " << numDivs << ", num normals: " << numNormals << "\n";
         Vec3f n2 = CrossProduct(p[1] - p[2], p[3] - p[2]);
         n2.Normalise();
 
-std::cout << "n1: " << n1.x << ", " << n1.y << ", " << n1.z << "\n";
-std::cout << "n2: " << n2.x << ", " << n2.y << ", " << n2.z << "\n";
+//std::cout << "n1: " << n1.x << ", " << n1.y << ", " << n1.z << "\n";
+//std::cout << "n2: " << n2.x << ", " << n2.y << ", " << n2.z << "\n";
 
-        normals[(i + 1) * numDivs + j]     += n1;
-        normals[ i      * numDivs + j]     += n1;
-        normals[(i + 1) * numDivs + j + 1] += n1;
+        m_normals[(i + 1) * m_numDivisions + j]     += n1;
+        m_normals[ i      * m_numDivisions + j]     += n1;
+        m_normals[(i + 1) * m_numDivisions + j + 1] += n1;
 
-        normals[ i      * numDivs + j]     += n2;
-        normals[(i + 1) * numDivs + j + 1] += n2;
-        normals[ i      * numDivs + j + 1] += n2;
+        m_normals[ i      * m_numDivisions + j]     += n2;
+        m_normals[(i + 1) * m_numDivisions + j + 1] += n2;
+        m_normals[ i      * m_numDivisions + j + 1] += n2;
       }
     }
-    Assert(normals.size() == numNormals);
+    Assert(m_normals.size() == numNormals);
     for (int i = 0; i < numNormals; i++)
     {
-std::cout << "normal " << i << ": " << normals[i].x << ", " << normals[i].y << ", " << normals[i].z << "\n";
-//      normals[i].Normalise();
+//std::cout << "normal " << i << ": " << m_normals[i].x << ", " << m_normals[i].y << ", " << m_normals[i].z << "\n";
+//      m_normals[i].Normalise();
     }
   }
+}
 
-  for (int i = 0; i < numDivs; i++)
+void Grid::Rebuild(HeightFunc hf)
+{
+  // Calc normals first
+  RecalcNormals(hf); // TODO this is weird, why are we doing it like this
+
+  AmjuGL::Tri t;
+  m_tris.clear();
+
+  for (int i = 0; i < m_numDivisions; i++)
   {
-    float u0 = (float)i / (float)numDivs;
-    float u1 = (float)(i + 1) / (float)numDivs;
+    float u0 = (float)i / (float)m_numDivisions;
+    float u1 = (float)(i + 1) / (float)m_numDivisions;
 
-    for (int j = 0; j < numDivs; j++)
+    for (int j = 0; j < m_numDivisions; j++)
     {
-      float v0 = (float)j / (float)numDivs;
-      float v1 = (float)(j + 1) / (float)numDivs;
+      float v0 = (float)j / (float)m_numDivisions;
+      float v1 = (float)(j + 1) / (float)m_numDivisions;
 
-      float x0 = (u0 - 0.5f) * len;
-      float x1 = (u1 - 0.5f) * len;
-      float z0 = (v0 - 0.5f) * len;
-      float z1 = (v1 - 0.5f) * len;
+      float x0 = (u0 - 0.5f) * m_sideLength;
+      float x1 = (u1 - 0.5f) * m_sideLength;
+      float z0 = (v0 - 0.5f) * m_sideLength;
+      float z1 = (v1 - 0.5f) * m_sideLength;
 
       float y[4] = { 0 };
       if (hf)
@@ -108,23 +126,25 @@ std::cout << "normal " << i << ": " << normals[i].x << ", " << normals[i].y << "
 
       if (hf)
       {
-        n[0] = normals[(i + 1) * numDivs + j];
-        n[1] = normals[ i      * numDivs + j];
-        n[2] = normals[(i + 1) * numDivs + j + 1];
-        n[3] = normals[ i      * numDivs + j + 1];
+        n[0] = m_normals[(i + 1) * m_numDivisions + j];
+        n[1] = m_normals[ i      * m_numDivisions + j];
+        n[2] = m_normals[(i + 1) * m_numDivisions + j + 1];
+        n[3] = m_normals[ i      * m_numDivisions + j + 1];
       }
       t.m_verts[0] = AmjuGL::Vert(x1, y[0], z0, u1, v0,  n[0].x, n[0].y, n[0].z);
       t.m_verts[1] = AmjuGL::Vert(x0, y[1], z0, u0, v0,  n[1].x, n[1].y, n[1].z);
       t.m_verts[2] = AmjuGL::Vert(x1, y[2], z1, u1, v1,  n[2].x, n[2].y, n[2].z);
-      tris.push_back(t);
+      m_tris.push_back(t);
+
 
       t.m_verts[0] = AmjuGL::Vert(x1, y[2], z1, u1, v1,  n[2].x, n[2].y, n[2].z);
       t.m_verts[1] = AmjuGL::Vert(x0, y[1], z0, u0, v0,  n[1].x, n[1].y, n[1].z);
       t.m_verts[2] = AmjuGL::Vert(x0, y[3], z1, u0, v1,  n[3].x, n[3].y, n[3].z);
-      tris.push_back(t);
+      m_tris.push_back(t);
     }
   }
-  m_triList = MakeTriList(tris);
+
+  m_triList->Set(m_tris);
 }
 
 void Grid::Draw()

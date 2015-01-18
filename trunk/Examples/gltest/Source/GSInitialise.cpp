@@ -20,7 +20,8 @@ namespace Amju
 {
 GSInitialise::GSInitialise()
 {
-  m_nextState = TheGSLighting::Instance();
+  // TODO Serialise last choice in config
+  m_nextState = TheGSWater1::Instance();
 //  m_maxTime = 0.1f;
 }
 
@@ -28,7 +29,7 @@ void GSInitialise::OnActive()
 {
   GSBase::OnActive();
 
-  AddState("Water", TheGSWater1::Instance());
+  AddState("Water1", TheGSWater1::Instance());
   AddState("Anim", TheGSAnimTest::Instance());
   AddState("Patchwork", TheGSPatchwork::Instance());
   AddState("Barrel distortion", TheGSBarrel::Instance());
