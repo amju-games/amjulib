@@ -141,11 +141,6 @@ void GSShadow::OnActive()
   
 }
 
-void GSShadow::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 /*
 void GSShadow::Draw()
 {

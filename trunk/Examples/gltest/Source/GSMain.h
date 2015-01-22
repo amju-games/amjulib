@@ -17,7 +17,6 @@ public:
   // GameState overrides
   virtual void Update();
   virtual void DrawScene();
-  virtual void Draw2d();
   virtual void OnActive();
 
   // EventListener overrides

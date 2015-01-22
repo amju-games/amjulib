@@ -2,10 +2,12 @@
 #include <Shader.h>
 #include <Font.h>
 #include <Matrix.h>
+#include <Timer.h>
 #include "Grid.h"
 #include "GSWater1.h"
 #include "GSLighting.h"
 #include "simplexnoise.h"
+#include "Tweakable.h"
 
 namespace Amju
 {
@@ -14,14 +16,23 @@ static float shaderTime = 0;
 
 static float Water1HeightFunc(float x, float z)
 {
-  return 0.7f * raw_noise_2d(x * 0.2f + shaderTime, z * 0.2f);
+  float a = raw_noise_2d(x * 0.2f + shaderTime, z * 0.2f);
+  float b = raw_noise_2d(x * 0.2f, z * 0.2f + shaderTime);
+  return 0.3 * (a + b);
 }
 
 GSWater1::GSWater1()
 {
   m_name = "Water 1";
+  m_description = "Simplex noise. Updating position and normals on the CPU.";
   m_nextState = TheGSLighting::Instance();
   m_maxTime = 7.0f; 
+}
+  
+void GSWater1::SetUpTweakMenu() 
+{
+  CreateTweakMenu();
+  AddTweakable(m_dlg, new TweakableFloat("Float test", nullptr, 0, 1));
 }
 
 void GSWater1::Update()
@@ -32,8 +43,12 @@ void GSWater1::Update()
   //  and tangents. 
   // TODO How to do this in shader???
 
-  shaderTime += 0.001f;
-  grid.Rebuild(Water1HeightFunc); 
+  if (!m_paused) 
+  {
+    float dt = TheTimer::Instance()->GetDt();
+    shaderTime += dt;
+    grid.Rebuild(Water1HeightFunc); 
+  }
 }
 
 void GSWater1::DrawScene()
@@ -55,11 +70,6 @@ void GSWater1::DrawScene()
 
   grid.Draw();
   m_shader->End();
-}
-
-void GSWater1::Draw2d()
-{
-  GSBase::Draw2d();
 }
 
 void GSWater1::OnActive()

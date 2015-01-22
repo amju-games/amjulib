@@ -23,7 +23,7 @@ namespace Amju
 {
 // Set to true if we detect OVR. Also we want to set to true if in Cardboard mode,
 //  or we just want to test.
-static bool isStereo = false;
+static bool isStereo = true;
 
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
@@ -87,11 +87,23 @@ void DrawCurrentState()
   if (b)
   {
     b->DrawScene();
+
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::SetIdentity();
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::SetIdentity();
+    AmjuGL::UseShader(nullptr);
+    AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
+    AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+    AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+
+    b->DrawScene2d();
   }
 }
 
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
+  m_mouseLook = false;
 }
 
 void GSBase::CreateTweakMenu()
@@ -121,6 +133,22 @@ void GSBase::OnActive()
 #if defined(WIN32) || defined(MACOSX)
   mht->Reset();
 #endif
+
+  // Set up GUI text: name and description etc.
+  for (int i = 0; i < 2; i++)
+  {
+    m_guiText[i].SetJust(GuiText::AMJU_JUST_LEFT);
+    m_guiText[i].SetFgCol(Colour(1, 1, 1, 1));
+    m_guiText[i].SetBgCol(Colour(0, 0, 0, 0.7));
+    m_guiText[i].SetDrawBg(true);
+    m_guiText[i].SetLocalPos(Vec2f(-1, 0.9f - 0.1f * (float)i));
+  }
+  m_guiText[0].SetSize(Vec2f(2, 0.1f));
+  m_guiText[0].SetText(m_name + " " + KEYS);
+  m_guiText[1].SetIsMulti(true);
+  m_guiText[1].SetSize(Vec2f(2, 0.21f));
+  m_guiText[1].SetFontSize(0.7f);
+  m_guiText[1].SetText(m_description);
 }
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
@@ -147,17 +175,12 @@ bool GSBase::OnKeyEvent(const KeyEvent& ke)
   return false;
 }
  
-void GSBase::Draw2d()
+void GSBase::DrawScene2d()
 {
-  static GuiText s;
-  s.SetJust(GuiText::AMJU_JUST_LEFT);
-  s.SetFgCol(Colour(0.5f, 0.5f, 0.5f, 1));
-  s.SetBgCol(Colour(0, 0, 0, 1));
-//  s.SetDrawBg(true);
-  s.SetLocalPos(Vec2f(-1, 0.9f));
-  s.SetSize(Vec2f(2, 0.1f));
-  s.SetText(m_name + " " + KEYS);
-  s.Draw();
+  for (int i = 0; i < 2; i++)
+  {
+    m_guiText[i].Draw();
+  }
 
   if (m_dlg)
   {
@@ -178,6 +201,10 @@ void GSBase::Draw()
   sd.Draw();
 
   depth--;
+}
+
+void GSBase::Draw2d()
+{
 }
 
 void GSBase::DrawHelp()
@@ -252,7 +279,7 @@ std::cout << "Found OVR, setting stereo on.\n";
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
   }
-  else if (mht->Update(&q))
+  else if (m_mouseLook && mht->Update(&q))
   {
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);

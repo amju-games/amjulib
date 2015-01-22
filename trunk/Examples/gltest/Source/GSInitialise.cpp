@@ -54,11 +54,6 @@ void GSInitialise::DrawScene()
 {
 }
 
-void GSInitialise::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 bool GSInitialise::OnCursorEvent(const CursorEvent& ce)
 {
   return false;

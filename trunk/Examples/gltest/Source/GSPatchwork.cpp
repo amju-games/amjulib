@@ -38,10 +38,6 @@ void GSPatchwork::DrawScene()
   patchwork.Draw();
 }
 
-void GSPatchwork::Draw2d()
-{
-}
-
 void GSPatchwork::OnActive()
 {
   patchwork.Init();

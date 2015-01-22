@@ -128,14 +128,6 @@ void GSMain::DrawScene()
   shader->End();
 }
 
-void GSMain::Draw2d()
-{
-  PGuiElement gui = LoadGui("finish-gui.txt");
-  Assert(gui);
-  gui->Draw();
-
-}
-
 void GSMain::OnActive()
 {
 	TheResourceManager::Instance()->AddLoader("bmpa", BmpALoader);

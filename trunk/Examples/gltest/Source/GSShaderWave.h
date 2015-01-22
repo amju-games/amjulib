@@ -15,7 +15,6 @@ class GSShaderWave : public GSBase
 public:
   virtual void Update();
   virtual void DrawScene();
-  virtual void Draw2d();
   virtual void OnActive();
 
 private:

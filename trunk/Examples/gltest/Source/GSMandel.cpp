@@ -68,17 +68,6 @@ void GSMandel::DrawScene()
   shader->End();
 }
 
-void GSMandel::Draw2d()
-{
-  GSBase::Draw2d();
-
-  AmjuGL::Disable(AmjuGL::AMJU_BLEND);
-  
-  
-//  m_triList->Draw();
-
-}
-
 void GSMandel::OnActive()
 {
   GSBase::OnActive();

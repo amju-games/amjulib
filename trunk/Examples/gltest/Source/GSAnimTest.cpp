@@ -185,10 +185,6 @@ void GSAnimTest::DrawScene()
   draw();
 }
 
-void GSAnimTest::Draw2d()
-{
-}
-
 void GSAnimTest::OnActive()
 {
 }

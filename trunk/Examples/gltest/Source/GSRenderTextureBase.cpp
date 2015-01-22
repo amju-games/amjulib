@@ -40,11 +40,6 @@ void GSRenderTextureBase::DrawScene()
   rt->DebugDraw(); // TODO TEMP TEST
 }
 
-void GSRenderTextureBase::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSRenderTextureBase::OnActive()
 {
   GSBase::OnActive();
