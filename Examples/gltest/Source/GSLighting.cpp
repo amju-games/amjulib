@@ -86,11 +86,6 @@ void GSLighting::DrawScene()
   AmjuGL::PopMatrix();
 }
 
-void GSLighting::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSLighting::OnActive()
 {
   GSBase::OnActive(); 

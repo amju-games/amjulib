@@ -19,10 +19,6 @@ void GSBarrel::DrawScene()
 //  renderToTexture.Begin();
 }
 
-void GSBarrel::Draw2d()
-{
-}
-
 void GSBarrel::OnActive()
 {
 }

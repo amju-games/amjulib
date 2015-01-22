@@ -14,8 +14,8 @@ class GSWater1 : public GSBase
 public:
   virtual void Update();
   virtual void DrawScene();
-  virtual void Draw2d();
   virtual void OnActive();
+  virtual void SetUpTweakMenu() override;
 
 private:
   Shader* m_shader;

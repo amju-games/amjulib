@@ -43,11 +43,6 @@ void GSEnvMap::DrawScene()
   AmjuGL::PopMatrix();
 }
 
-void GSEnvMap::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSEnvMap::OnActive()
 {
   GSBase::OnActive();

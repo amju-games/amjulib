@@ -43,11 +43,6 @@ void GSShaderWave::DrawScene()
   m_shader->End();
 }
 
-void GSShaderWave::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSShaderWave::OnActive()
 {
   GSBase::OnActive();

@@ -40,11 +40,6 @@ void GSDepthOfField::DrawScene()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
 }
 
-void GSDepthOfField::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSDepthOfField::OnActive()
 {
   GSBase::OnActive();

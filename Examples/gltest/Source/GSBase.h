@@ -41,6 +41,7 @@ public:
 
   // Do the drawing here, NOT in Draw(): this is so we can draw in stereo if required.
   virtual void DrawScene() = 0;
+  virtual void DrawScene2d();
  
 protected:
   void DrawHelp(); // set matrices, probably will be using Camera instead
@@ -51,7 +52,10 @@ protected:
   float m_maxTime;
   GSBase* m_nextState;
   std::string m_name;
+  std::string m_description;
+  GuiText m_guiText[2];
   bool m_paused;
+  bool m_mouseLook;
 
   RCPtr<GuiDialog> m_dlg;
   Camera m_camera;

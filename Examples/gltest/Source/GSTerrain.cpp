@@ -99,11 +99,6 @@ void GSTerrain::DrawScene()
   */
 }
 
-void GSTerrain::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSTerrain::OnActive()
 {
   m_heightmap = (Texture*)TheResourceManager::Instance()->GetRes("terrain/heightmap.png");

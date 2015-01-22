@@ -41,11 +41,6 @@ void GSTexture::DrawScene()
   DrawSolidAABB(aabb);
 }
 
-void GSTexture::Draw2d()
-{
-  GSBase::Draw2d();
-}
-
 void GSTexture::OnActive()
 {
   GSBase::OnActive();

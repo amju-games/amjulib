@@ -58,7 +58,7 @@ void GSObb2Test::DrawScene()
 */
 }
 
-void GSObb2Test::Draw2d()
+void GSObb2Test::DrawScene2d()
 {
   GSBase::Draw2d();
 
