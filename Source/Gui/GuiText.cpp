@@ -320,6 +320,7 @@ void GuiText::DrawSingleLine(
     break;
   }
 
+/*
   // TODO Isn't this already done in ReallyDraw() ?
   if (m_drawBg)
   {
@@ -332,6 +333,7 @@ void GuiText::DrawSingleLine(
     AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
     PopColour();
   }
+*/
 
   if (m_charTime > 0)
   {
@@ -486,7 +488,7 @@ void GuiText::SetIsMulti(bool multi)
 float GuiText::GetTextWidth(const std::string& text)
 {
   float textWidth = GetFont()->GetTextWidth(text);
-  return textWidth * m_scaleX;
+  return textWidth * m_scaleX * m_textSize;
 }
 
 bool GuiText::Load(File* f)
