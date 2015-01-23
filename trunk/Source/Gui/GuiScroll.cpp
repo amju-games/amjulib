@@ -118,6 +118,8 @@ void GuiScroll::Draw()
   // Y axis
   if (m_scrollPos.y < 0)
   {
+std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
+
     m_scrollPos.y = 0;
 #ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
@@ -127,8 +129,13 @@ void GuiScroll::Draw()
   }
   
   float maxy = std::max(0.0f, child->GetSize().y - GetSize().y); // depends on size of child and how much space there is to display it
+
+std::cout << "Scroll: m_scrollPos.y: " << m_scrollPos.y << " Size.y: " << GetSize().y << " Child->Size.y: " << child->GetSize().y << " maxy=" << maxy << "\n";
+
   if (m_scrollPos.y > maxy)
   {
+std::cout << "Hit maxy (" << maxy << "), stopping.\n";
+
     m_scrollPos.y = maxy;
 #ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
