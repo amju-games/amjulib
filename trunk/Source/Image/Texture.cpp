@@ -143,13 +143,13 @@ void Texture::Create(unsigned char* data, int w, int h, int bytesPerPixel)
   m_height = h;
 }
 
-void Texture::UseThisTexture()
+void Texture::UseThisTexture(int textureUnitId)
 {
   // Will be false if using console only for debugging
 //  Assert(m_texId != (AmjuGL::TextureHandle)-1);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
-  AmjuGL::UseTexture(m_texId);
+  AmjuGL::UseTexture(m_texId, textureUnitId);
 
   AmjuGL::SetTextureFilter(m_filter); // nicest or nearest
   AmjuGL::SetTextureType(m_textureType); // env map or UV coords

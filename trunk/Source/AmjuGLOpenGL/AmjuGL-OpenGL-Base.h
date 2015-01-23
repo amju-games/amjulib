@@ -44,7 +44,7 @@ public:
   virtual void DestroyTextureHandle(AmjuGL::TextureHandle*);
 
   // Call to use a Texture once set up
-  virtual void UseTexture(AmjuGL::TextureHandle);
+  virtual void UseTexture(AmjuGL::TextureHandle, int textureUnitId);
 
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf);

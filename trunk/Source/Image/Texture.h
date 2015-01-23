@@ -13,7 +13,7 @@ public:
   ~Texture();
   bool Load(const std::string& filename);
   void Create(unsigned char* data, int w, int h, int bytesPerPixel);
-  void UseThisTexture();
+  void UseThisTexture(int textureUnitId = 0);
   int GetWidth() const;
   int GetHeight() const;
   

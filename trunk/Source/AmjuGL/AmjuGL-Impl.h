@@ -99,7 +99,7 @@ public:
     uint8* data) = 0;
 
   // Call to use a Texture once set up
-  virtual void UseTexture(AmjuGL::TextureHandle) = 0;
+  virtual void UseTexture(AmjuGL::TextureHandle, int textureUnitId) = 0;
 
   virtual void SetTextureType(AmjuGL::TextureType tt) = 0;
   virtual void SetTextureMode(AmjuGL::TextureMode tm) = 0;
