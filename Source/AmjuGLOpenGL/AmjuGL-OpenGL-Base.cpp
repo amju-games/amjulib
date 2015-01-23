@@ -156,10 +156,11 @@ void AmjuGLOpenGLBase::DestroyTextureHandle(AmjuGL::TextureHandle* th)
   GL_CHECK(glDeleteTextures(1, (GLuint*)th));
 }
 
-void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t)
+void AmjuGLOpenGLBase::UseTexture(AmjuGL::TextureHandle t, int textureUnitId)
 {
   AMJU_CALL_STACK;
 
+  GL_CHECK(glActiveTexture(GL_TEXTURE0 + textureUnitId));
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, t));
 }
 

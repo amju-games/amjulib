@@ -235,7 +235,7 @@ public:
     uint8* data);
 
   // Call to use a Texture once set up
-  static void UseTexture(TextureHandle);
+  static void UseTexture(TextureHandle th, int textureUnitId = 0);
 
   static void SetTextureType(TextureType tt);
   static void SetTextureMode(TextureMode tm);

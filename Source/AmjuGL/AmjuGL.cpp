@@ -710,18 +710,11 @@ void AmjuGL::SetTexture(
   impl->SetTexture(th, tt, d, width, height, data);
 }
 
-void AmjuGL::UseTexture(TextureHandle t)
+void AmjuGL::UseTexture(TextureHandle t, int textureUnitId)
 {
   AMJU_CALL_STACK;
 
-  static TextureHandle prev = -1;
-  if (prev == t)
-  {
-    return;
-  }
-  prev = t;
-
-  impl->UseTexture(t);
+  impl->UseTexture(t, textureUnitId);
 }
 
 void AmjuGL::GetScreenshot(unsigned char* buffer, int w, int h)
