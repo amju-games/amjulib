@@ -103,7 +103,7 @@ void DrawCurrentState()
 
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
-  m_mouseLook = false;
+  m_mouseLook = true;
 }
 
 void GSBase::CreateTweakMenu()
@@ -119,9 +119,11 @@ void GSBase::OnActive()
 
   SetUpTweakMenu();
 
-  chooser.SetGuiFilename("gui-choose-dialog.txt");
-  chooser.SetTitle("Choose scene");
-  chooser.Populate();
+  m_chooser = dynamic_cast<GuiDialog*>(LoadGui("gui-choose-dialog.txt").GetPtr());
+  Assert(m_chooser);
+//  chooser.SetGuiFilename("gui-choose-dialog.txt");
+  m_chooser->SetTitle("Choose scene");
+//  Populate(m_chooser);
   chooser.SetFinishCallback(OnChooserFinished);
  
   m_camera.m_pos = Vec3f(0, 5, 10); 
@@ -185,6 +187,11 @@ void GSBase::DrawScene2d()
   if (m_dlg)
   {
     m_dlg->Draw();
+  }
+
+  if (m_chooser)
+  {
+    m_chooser->Draw();
   }
 }
 

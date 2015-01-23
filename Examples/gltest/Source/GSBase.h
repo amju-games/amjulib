@@ -57,7 +57,12 @@ protected:
   bool m_paused;
   bool m_mouseLook;
 
+  // Tweak dialog
   RCPtr<GuiDialog> m_dlg;
+
+  // Choose state dialog
+  RCPtr<GuiDialog> m_chooser;
+
   Camera m_camera;
 };
 }
