@@ -70,6 +70,9 @@ void GSWater1::DrawScene()
 
   grid.Draw();
   m_shader->End();
+
+  AmjuGL::UseShader(nullptr);
+  m_skybox->Draw();
 }
 
 void GSWater1::OnActive()
@@ -79,6 +82,9 @@ void GSWater1::OnActive()
   m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/water1");
   m_shader->Begin(); // so we find attrib var locations when we build tri list:
   grid.Build(50, 20.0f, Water1HeightFunc);
+  
+  m_skybox = (ObjMesh*)TheResourceManager::Instance()->GetRes("skybox/skybox.obj");
+  Assert(m_skybox);
 }
 
 } // namespace

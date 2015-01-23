@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ObjMesh.h>
 #include <Singleton.h>
 #include <Shader.h>
 #include "GSBase.h"
@@ -19,7 +20,7 @@ public:
 
 private:
   Shader* m_shader;
-
+  RCPtr<ObjMesh> m_skybox;
 };
 typedef Singleton<GSWater1> TheGSWater1;
 } // namespace
