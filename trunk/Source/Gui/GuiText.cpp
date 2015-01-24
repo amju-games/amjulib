@@ -244,7 +244,13 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
     float x = GetCombinedPos().x;
     if (m_just == AMJU_JUST_RIGHT)
     {
-      x += GetSize().x - GetTextWidth(str);
+      x += GetSize().x - GetTextWidth(str) / m_textSize;
+    }
+    else if (m_just == AMJU_JUST_CENTRE)
+    {
+      float tw = GetTextWidth(str) / m_textSize;
+      float sx = GetSize().x;
+      x += (sx - tw) * 0.5f;
     }
 
     if (rebuild)
