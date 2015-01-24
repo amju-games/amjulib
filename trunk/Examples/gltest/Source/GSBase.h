@@ -32,6 +32,7 @@ public:
   virtual void Draw() override; // Set up proj and mview matrices
   virtual void Draw2d() override;
   virtual void OnActive() override;
+  virtual void OnDeactive() override;
 
   virtual bool OnKeyEvent(const KeyEvent&) override;
   virtual bool OnRotationEvent(const RotationEvent&) override;
@@ -43,6 +44,9 @@ public:
   virtual void DrawScene() = 0;
   virtual void DrawScene2d();
  
+  void OnTweakButton();
+  void OnChooseButton();
+
 protected:
   void DrawHelp(); // set matrices, probably will be using Camera instead
   void CreateTweakMenu();
@@ -56,9 +60,14 @@ protected:
   GuiText m_guiText[2];
   bool m_paused;
   bool m_mouseLook;
+  bool m_showTweak;
+  bool m_showChoose;
+
+  // Menu buttons
+  RCPtr<GuiElement> m_menuButtons;
 
   // Tweak dialog
-  RCPtr<GuiDialog> m_dlg;
+  RCPtr<GuiDialog> m_tweaker;
 
   // Choose state dialog
   RCPtr<GuiDialog> m_chooser;
