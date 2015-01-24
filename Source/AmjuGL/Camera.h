@@ -30,5 +30,7 @@ public:
 
   // For stereo
   float m_eyeSep;
+  float m_vpXOffset; // viewport X offset, for setting IPD
+  float m_vpYOffset;
 };
 }
