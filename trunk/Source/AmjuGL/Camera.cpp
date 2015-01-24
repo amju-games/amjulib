@@ -14,6 +14,9 @@ Camera::Camera()
 
   m_up = Vec3f(0, 1, 0);
   m_dir = Vec3f(0, 0, 1);
+
+  m_vpXOffset = 0.08f;
+  m_vpYOffset = 0.04f;
 }
 
 void Camera::Draw()

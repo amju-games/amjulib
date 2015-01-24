@@ -29,9 +29,6 @@ Camera theCamera;
 
 bool symmetrical = true;
 
-float vpXOffset = 0.08f;
-float vpYOffset = 0.04f;
-
 enum Eye { LEFT, RIGHT };
 
 void SetViewport(Eye eye, float vpX, float vpY)
@@ -69,7 +66,7 @@ void SetUpCameraSymmetric(Eye eye, const Camera& camera)
     AmjuGL::SetPerspectiveProjection(RadToDeg(camera.m_fovy), aspectratio,
         camera.m_neardist, camera.m_fardist);
 
-    SetViewport(eye, vpXOffset * windowwidth, vpYOffset * windowheight);
+    SetViewport(eye, camera.m_vpXOffset * windowwidth, camera.m_vpYOffset * windowheight);
 
     if (eye == LEFT)
     {
@@ -118,7 +115,7 @@ void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
 
-  SetViewport(eye, vpXOffset * windowwidth, vpYOffset * windowheight);
+  SetViewport(eye, camera.m_vpXOffset * windowwidth, camera.m_vpYOffset * windowheight);
 
   if (eye == LEFT)
   {   
