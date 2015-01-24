@@ -1,0 +1,40 @@
+// Gui menu buttons
+// Ver
+1
+
+gui-comp
+my-menu-buttons
+2
+
+gui-button
+choose-button
+// pos 
+0.6, 1
+// size
+0.35, 0.1
+// Image
+gui-button-4.png
+// Text
+Choose
+// Font name, size
+arial, 1.0 
+
+gui-button
+tweak-button
+// pos 
+0.2, 1
+// size
+0.35, 0.1
+// Image
+gui-button-4.png
+// Text
+Tweak
+// Font name, size
+arial, 1.0 
+
+
+
+
+
+
+

@@ -1,7 +1,10 @@
 #include <iostream>
 #include <AmjuGL.h>
+#include <CursorManager.h>
 #include <DegRad.h>
+#include <EventPoller.h>
 #include <Game.h>
+#include <GuiButton.h>
 #include <GuiText.h>
 #include <GuiListBox.h>
 #include <ObjMesh.h>
@@ -35,6 +38,26 @@ static RCPtr<MouseHeadTracker> mht = new MouseHeadTracker; // on heap because it
 static ChooserDialog chooser;
 
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
+
+static void OnChoose(GuiElement*)
+{
+  GameState* s = TheGame::Instance()->GetState();
+  GSBase* b = dynamic_cast<GSBase*>(s);
+  if (b)
+  {
+    b->OnChooseButton();
+  }
+}
+
+static void OnTweak(GuiElement*)
+{
+  GameState* s = TheGame::Instance()->GetState();
+  GSBase* b = dynamic_cast<GSBase*>(s);
+  if (b)
+  {
+    b->OnTweakButton();
+  }
+}
 
 // Callback when choice made
 static void OnChooserFinished(Dialog* dlg)
@@ -86,6 +109,7 @@ void DrawCurrentState()
   
   if (b)
   {
+    AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
     b->DrawScene();
 
     AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
@@ -104,18 +128,48 @@ void DrawCurrentState()
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
   m_mouseLook = true;
+  m_showTweak = false;
+  m_showChoose = false;
 }
 
 void GSBase::CreateTweakMenu()
 {
-  m_dlg = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
-  Assert(m_dlg);
-  m_dlg->SetTitle(m_name);
+  m_tweaker = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
+  Assert(m_tweaker);
+  m_tweaker->SetTitle(m_name);
+}
+
+void GSBase::OnTweakButton()
+{
+  m_showTweak = !m_showTweak;
+}
+
+void GSBase::OnChooseButton()
+{
+  m_showChoose = !m_showChoose;
+}
+
+void GSBase::OnDeactive()
+{
+  TheEventPoller::Instance()->RemoveListener(m_menuButtons);
+  m_menuButtons = nullptr;
+
+  TheEventPoller::Instance()->RemoveListener(m_chooser);
+  m_chooser = nullptr;
 }
 
 void GSBase::OnActive() 
 {
   m_time = 0;
+  m_showTweak = false;
+  m_showChoose = false;
+
+  m_menuButtons = LoadGui("gui-menu-buttons.txt");
+  Assert(m_menuButtons);
+  GuiButton* choose = (GuiButton*)m_menuButtons->GetElementByName("choose-button");
+  choose->SetCommand(OnChoose);
+  GuiButton* tweak = (GuiButton*)m_menuButtons->GetElementByName("tweak-button");
+  tweak->SetCommand(OnTweak);
 
   SetUpTweakMenu();
 
@@ -139,11 +193,11 @@ void GSBase::OnActive()
   // Set up GUI text: name and description etc.
   for (int i = 0; i < 2; i++)
   {
-    m_guiText[i].SetJust(GuiText::AMJU_JUST_LEFT);
     m_guiText[i].SetFgCol(Colour(1, 1, 1, 1));
-    m_guiText[i].SetBgCol(Colour(0, 0, 0, 0.7));
+    m_guiText[i].SetBgCol(Colour(0, 0, 0, 0.7f));
     m_guiText[i].SetDrawBg(true);
     m_guiText[i].SetLocalPos(Vec2f(-1, 0.9f - 0.1f * (float)i));
+    m_guiText[i].SetJust(GuiText::AMJU_JUST_CENTRE);
   }
   m_guiText[0].SetSize(Vec2f(2, 0.1f));
   m_guiText[0].SetText(m_name + " " + KEYS);
@@ -184,15 +238,19 @@ void GSBase::DrawScene2d()
     m_guiText[i].Draw();
   }
 
-  if (m_dlg)
+  if (m_showTweak && m_tweaker)
   {
-    m_dlg->Draw();
+    m_tweaker->Draw();
   }
 
-  if (m_chooser)
+  if (m_showChoose && m_chooser)
   {
     m_chooser->Draw();
   }
+
+  m_menuButtons->Draw();
+
+  TheCursorManager::Instance()->Draw();
 }
 
 static int depth = 0;
