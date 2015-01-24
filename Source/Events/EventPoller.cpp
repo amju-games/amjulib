@@ -11,6 +11,11 @@
 
 namespace Amju
 {
+static float s_cursorScaleX = 1;
+static float s_cursorScaleY = 1;
+static float s_cursorTranslateX = 0;
+static float s_cursorTranslateY = 0;
+
 EventPollerImpl* EventPoller::GetImpl()
 {
   Assert(m_pImpl.GetPtr());
@@ -37,6 +42,9 @@ void EventPollerImpl::QueueEvent(Event* event)
   // Work out mouse/cursor dx/dy
   if (ce)
   {
+    ce->x = ce->x * s_cursorScaleX + s_cursorTranslateX;
+    ce->y = ce->y * s_cursorScaleY + s_cursorTranslateY;
+
     if (ce->controller == 0)
     {
       static Vec2f prev(ce->x, ce->y);
@@ -280,4 +288,13 @@ void EventPoller::Update()
 
   Repeat();
 }
+
+void EventPoller::SetCursorTransform(float scaleX, float scaleY, float translateX, float translateY)
+{
+  s_cursorScaleX = scaleX;
+  s_cursorScaleY = scaleY;
+  s_cursorTranslateX = translateX;
+  s_cursorTranslateY = translateY;
+}
+
 }
