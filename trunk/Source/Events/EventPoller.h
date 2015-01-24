@@ -65,6 +65,10 @@ public:
 
   void Update();
   
+  // Transform for cursor events, so the range (-1..1) is not mapped to the entire
+  //  screen width and height.
+  void SetCursorTransform(float scaleX, float scaleY, float translateX, float translateY);
+
 private:
   PEventPollerImpl m_pImpl;
   Listeners m_listeners;
