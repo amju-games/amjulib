@@ -172,6 +172,8 @@
     <ClCompile Include="..\..\..\Source\MouseHeadTracker.cpp" />
     <ClCompile Include="..\..\..\Source\OvrHeadTracker.cpp" />
     <ClCompile Include="..\..\..\Source\Patchwork.cpp" />
+    <ClCompile Include="..\..\..\Source\simplexnoise.cpp" />
+    <ClCompile Include="..\..\..\Source\simplextextures.cpp" />
     <ClCompile Include="..\..\..\Source\Startup.cpp" />
     <ClCompile Include="..\..\..\Source\StateList.cpp" />
     <ClCompile Include="..\..\..\Source\TerrainPatch.cpp" />
@@ -205,6 +207,8 @@
     <ClInclude Include="..\..\..\Source\MouseHeadTracker.h" />
     <ClInclude Include="..\..\..\Source\OvrHeadTracker.h" />
     <ClInclude Include="..\..\..\Source\Patchwork.h" />
+    <ClInclude Include="..\..\..\Source\simplexnoise.h" />
+    <ClInclude Include="..\..\..\Source\simplextextures.h" />
     <ClInclude Include="..\..\..\Source\StateList.h" />
     <ClInclude Include="..\..\..\Source\TerrainPatch.h" />
     <ClInclude Include="..\..\..\Source\Tweakable.h" />
