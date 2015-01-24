@@ -143,7 +143,8 @@ void GuiDialog::Draw()
   DrawSolidRect(r);
   AmjuGL::PopAttrib(); 
   
-  GuiWindow::Draw();
+  //GuiWindow::Draw();
+  GuiComposite::Draw();
 
   if (m_hasTitleBar)
   {
