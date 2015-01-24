@@ -18,7 +18,7 @@ static float Water1HeightFunc(float x, float z)
 {
   float a = raw_noise_2d(x * 0.2f + shaderTime, z * 0.2f);
   float b = raw_noise_2d(x * 0.2f, z * 0.2f + shaderTime);
-  return 0.3 * (a + b);
+  return 0.3f * (a + b);
 }
 
 GSWater1::GSWater1()
@@ -32,7 +32,7 @@ GSWater1::GSWater1()
 void GSWater1::SetUpTweakMenu() 
 {
   CreateTweakMenu();
-  AddTweakable(m_dlg, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
 }
 
 void GSWater1::Update()
