@@ -22,8 +22,8 @@ GSLighting::GSLighting()
 void GSLighting::SetUpTweakMenu() 
 {
   CreateTweakMenu();
-  AddTweakable(m_dlg, new TweakableFloat("Float test", nullptr, 0, 1));
-  AddTweakable(m_dlg, new TweakableFloat("Another test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableFloat("Another test", nullptr, 0, 1));
 }
 
 void GSLighting::Update()
