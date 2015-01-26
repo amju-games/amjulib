@@ -26,7 +26,7 @@ namespace Amju
 {
 // Set to true if we detect OVR. Also we want to set to true if in Cardboard mode,
 //  or we just want to test.
-static bool isStereo = true;
+static bool isStereo = false;
 
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
@@ -181,6 +181,7 @@ void GSBase::OnActive()
   chooser.SetFinishCallback(OnChooserFinished);
  
   m_camera.m_pos = Vec3f(0, 5, 10); 
+  m_camera.m_fardist = 4000.0f;
   ORIG_VIEW_DIR = Normalise(-m_camera.m_pos);
   m_camera.m_dir = ORIG_VIEW_DIR;
   //ORIG_UP_DIR = Normalise(CrossProduct(ORIG_VIEW_DIR, Vec3f(0, 1, 0)));
