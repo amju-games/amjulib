@@ -3,7 +3,7 @@
 1
 
 gui-dialog
-my_properties_dialog
+choose_dialog
 
 //  pos, size
 -0.8, 0.5

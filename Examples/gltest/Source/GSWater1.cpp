@@ -68,6 +68,8 @@ void GSWater1::DrawScene()
 
 //  AmjuGL::SetIsWireFrameMode(true);
 
+  m_sphereMap->UseThisTexture();
+
   grid.Draw();
   m_shader->End();
 
@@ -85,6 +87,9 @@ void GSWater1::OnActive()
   
   m_skybox = (ObjMesh*)TheResourceManager::Instance()->GetRes("skybox/skybox.obj");
   Assert(m_skybox);
+
+  m_sphereMap = (Texture*)TheResourceManager::Instance()->GetRes("spheremap_bar.png");
+  Assert(m_sphereMap);
 }
 
 } // namespace

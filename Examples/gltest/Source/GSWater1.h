@@ -21,6 +21,7 @@ public:
 private:
   Shader* m_shader;
   RCPtr<ObjMesh> m_skybox;
+  RCPtr<Texture> m_sphereMap;
 };
 typedef Singleton<GSWater1> TheGSWater1;
 } // namespace
