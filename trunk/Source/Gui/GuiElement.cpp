@@ -142,12 +142,13 @@ std::cout << "Unexpected: no node named \"" << nodeName << "\" in GUI tree with 
 
 GuiElement::GuiElement()
 {
-  m_parent = 0;
+  m_parent = nullptr;
   m_isVisible = true;
   m_isSelected = false;
-  m_commandFunc = 0;
-  m_onFocusFunc = 0;
+  m_commandFunc = nullptr;
+  m_onFocusFunc = nullptr;
   m_drawBorder = false;
+  m_userData = nullptr;
 }
 
 PGuiElement LoadGui(const std::string& filename, bool addAsListener)

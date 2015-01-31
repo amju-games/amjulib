@@ -13,10 +13,23 @@ void GuiCheck::ExecuteCommand()
   GuiButton::ExecuteCommand();
 
   m_value = !m_value;
+
+  SetTexture(m_value ? m_checkedTex : m_uncheckedTex);
+
   if (m_changeValueFunc)
   {
     m_changeValueFunc(this, m_value);
   }
+}
+
+bool GuiCheck::IsEnabled() const
+{
+    //if (!m_onPressedDown && !m_pCommand && !m_commandFunc)
+    //{
+    //    return false;
+    //}
+
+    return m_isEnabled;
 }
 
 void GuiCheck::Set(Texture* checkedTex, Texture* uncheckedTex)

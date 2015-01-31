@@ -29,7 +29,7 @@ bool GuiDialog::OnCursorEvent(const CursorEvent& e)
     return true; // ??
   }
 
-  return GuiWindow::OnCursorEvent(e);
+  return GuiComposite::OnCursorEvent(e);
 }
 
 bool GuiDialog::OnMouseButtonEvent(const MouseButtonEvent& e)
@@ -46,7 +46,7 @@ bool GuiDialog::OnMouseButtonEvent(const MouseButtonEvent& e)
     }
   }
 
-  return GuiWindow::OnMouseButtonEvent(e);
+  return GuiComposite::OnMouseButtonEvent(e);
 }
 
 void GuiDialog::SetTitle(const std::string& t)

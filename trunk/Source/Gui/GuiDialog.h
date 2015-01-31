@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-class GuiDialog : public GuiWindow
+class GuiDialog : public GuiComposite
 {
 public:
   static const char* NAME;

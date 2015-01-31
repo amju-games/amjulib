@@ -72,6 +72,10 @@ public:
 
   void SetDrawBorder(bool draw) { m_drawBorder = draw; }
  
+  // Set arbitrary data for use in client callbacks etc
+  void SetUserData(void* data) { m_userData = data; }
+  void* GetUserData() { return m_userData; }
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -99,6 +103,8 @@ protected:
   CommandFunc m_onFocusFunc; // called when this element gets the focus
 
   bool m_drawBorder;
+
+  void* m_userData;
 };
 
 typedef RCPtr<GuiElement> PGuiElement;

@@ -43,13 +43,13 @@ public:
   bool IsCancelButton() const;
   void SetIsCancelButton(bool isCancelButton);
 
-  bool IsEnabled() const;
+  virtual bool IsEnabled() const;
   void SetIsEnabled(bool);
 
   void SetOnPressedDownFunc(CommandFunc f);
   static void SetClickFilename(const std::string& clickFilename);
 
-private:
+protected:
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
   void OnPressedDown();
