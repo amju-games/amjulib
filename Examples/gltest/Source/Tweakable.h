@@ -24,6 +24,7 @@ class TweakableBool : public Tweakable
 {
 public:
   TweakableBool(const std::string& label, bool* var);
+  void SetVar(bool b) { *m_var = b; }
 
 protected:
   bool* m_var;

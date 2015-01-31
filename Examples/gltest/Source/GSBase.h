@@ -62,7 +62,6 @@ protected:
   std::string m_description;
   GuiText m_guiText[2];
   bool m_paused;
-  bool m_mouseLook;
   bool m_showTweak;
   bool m_showChoose;
 
@@ -76,6 +75,9 @@ protected:
   RCPtr<GuiDialog> m_chooser;
 
   Camera m_camera;
+
+  static bool s_isStereo;
+  static bool s_mouseLook;
 };
 }
 

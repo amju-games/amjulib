@@ -27,12 +27,16 @@ GSWater1::GSWater1()
   m_description = "Simplex noise. Updating position and normals on the CPU.";
   m_nextState = TheGSLighting::Instance();
   m_maxTime = 7.0f; 
+  m_isWireframe = false;
 }
   
 void GSWater1::SetUpTweakMenu() 
 {
   CreateTweakMenu();
-  AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
+  //AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableBool("Stereo", &s_isStereo));
+  AddTweakable(m_tweaker, new TweakableBool("Wireframe", &m_isWireframe));
+  AddTweakable(m_tweaker, new TweakableBool("Mouse look", &s_mouseLook));
 }
 
 void GSWater1::Update()
@@ -69,12 +73,14 @@ void GSWater1::DrawScene()
 
 //  m_shader->Set("gTime", shaderTime);
 
-//  AmjuGL::SetIsWireFrameMode(true);
+  AmjuGL::SetIsWireFrameMode(m_isWireframe);
 
   m_spheremap->UseThisTexture();
 
   grid.Draw();
   m_shader->End();
+
+  AmjuGL::SetIsWireFrameMode(false);
 
   AmjuGL::UseShader(nullptr);
   m_skybox->Draw();
