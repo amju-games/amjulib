@@ -18,7 +18,7 @@ static float Water1HeightFunc(float x, float z)
 {
   float a = raw_noise_2d(x * 0.2f + shaderTime, z * 0.2f);
   float b = raw_noise_2d(x * 0.2f, z * 0.2f + shaderTime);
-  return 0.3f * (a + b);
+  return 0.05f * (a + b);
 }
 
 GSWater1::GSWater1()
@@ -63,12 +63,15 @@ void GSWater1::DrawScene()
   proj.Projection();
   Matrix mat = mv * proj;
   m_shader->Set("modelViewProjectionMatrix", mat);
+ 
+  AmjuGL::Vec3 eye(m_camera.m_pos.x, m_camera.m_pos.y, m_camera.m_pos.z);
+  m_shader->Set("eyePos", eye); 
 
 //  m_shader->Set("gTime", shaderTime);
 
 //  AmjuGL::SetIsWireFrameMode(true);
 
-  m_sphereMap->UseThisTexture();
+  m_spheremap->UseThisTexture();
 
   grid.Draw();
   m_shader->End();
@@ -88,8 +91,31 @@ void GSWater1::OnActive()
   m_skybox = (ObjMesh*)TheResourceManager::Instance()->GetRes("skybox/skybox.obj");
   Assert(m_skybox);
 
-  m_sphereMap = (Texture*)TheResourceManager::Instance()->GetRes("spheremap_bar.png");
-  Assert(m_sphereMap);
+  m_spheremap = (Texture*)TheResourceManager::Instance()->GetRes("spheremap_bar.png");
+  Assert(m_spheremap);
+
+  m_cubemap = (Cubemap*)AmjuGL::Create(Cubemap::DRAWABLE_TYPE_ID);
+
+  // Cubemap textures:
+  // +x (right)
+  // -x (left)
+  // +z (front)
+  // -z (back)
+  // +y (top)
+  // -y (bottom)
+  const std::string TEXTURE_NAMES[6] = 
+  {
+    "skybox/Right.png",
+    "skybox/Left.png",
+    "skybox/Front.png",
+    "skybox/Back.png",
+    "skybox/Top.png",
+    "skybox/Bottom.png",
+  };
+  m_cubemap->SetTextureNames(TEXTURE_NAMES);
+  m_cubemap->SetTextureUnitId(0); // TODO Depends where texture unit is in Shader
+  bool cubemapOk = m_cubemap->Init();
+  Assert(cubemapOk);
 }
 
 } // namespace

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Cubemap.h>
 #include <ObjMesh.h>
 #include <Singleton.h>
 #include <Shader.h>
@@ -21,7 +22,8 @@ public:
 private:
   Shader* m_shader;
   RCPtr<ObjMesh> m_skybox;
-  RCPtr<Texture> m_sphereMap;
+  RCPtr<Texture> m_spheremap; // this may not be required with cube mapping
+  RCPtr<Cubemap> m_cubemap;
 };
 typedef Singleton<GSWater1> TheGSWater1;
 } // namespace

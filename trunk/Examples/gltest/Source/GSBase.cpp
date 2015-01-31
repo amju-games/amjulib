@@ -5,6 +5,7 @@
 #include <EventPoller.h>
 #include <Game.h>
 #include <GuiButton.h>
+#include <GuiCheck.h>
 #include <GuiText.h>
 #include <GuiListBox.h>
 #include <ObjMesh.h>
@@ -130,6 +131,11 @@ GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
   m_mouseLook = true;
   m_showTweak = false;
   m_showChoose = false;
+}
+
+void GSBase::SetStereo(bool stereo)
+{
+  isStereo = stereo;
 }
 
 void GSBase::CreateTweakMenu()

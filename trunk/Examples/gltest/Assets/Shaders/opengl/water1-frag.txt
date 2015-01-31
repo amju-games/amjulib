@@ -1,11 +1,13 @@
 // wavedemo-frag.txt
 
 uniform mat4 modelViewProjectionMatrix;
+uniform vec3 eyePos;
 
-varying float gY;
 varying vec3 vNormal;
+varying vec3 fragPos;
 
-uniform sampler2D spheremapSampler;
+//uniform sampler2D spheremapSampler;
+uniform samplerCube cubemapSampler;
 
 void main()
 {
@@ -20,13 +22,19 @@ void main()
   normColour.b = 1.0;
 
   // sphere map
-  vec3 view = (modelViewProjectionMatrix * vec4(0, 0, 1, 1)).xyz;
-  vec3 r = reflect(view, unitNormal);
-  r.z += 1.0;
-  r = normalize(r);
-  vec2 uv = r.xy * 0.5 + 0.5;
-  vec4 reflectColour = texture2D(spheremapSampler, uv);
+//  vec3 view = (modelViewProjectionMatrix * vec4(0, 0, 1, 1)).xyz;
+//  vec3 r = reflect(view, unitNormal);
+//  r.z += 1.0;
+//  r = normalize(r);
+//  vec2 uv = r.xy * 0.5 + 0.5;
+//  //vec4 reflectColour = texture2D(spheremapSampler, uv);
 
-  gl_FragColor = vec4(normColour, 1.0) * 0.9 + reflectColour * 0.1; 
+  // Cube map
+  vec3 viewVec = fragPos.xyz - eyePos;
+  vec3 eyeRef = reflect(viewVec, unitNormal);
+  vec4 reflectColour = textureCube(cubemapSampler, eyeRef);
+
+  //gl_FragColor = vec4(normColour, 1.0) * 0.9 + reflectColour * 0.1; 
+  gl_FragColor = vec4(normColour, 1.0) * 0.1 + reflectColour * 0.9; 
 }
 
