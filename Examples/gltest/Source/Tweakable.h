@@ -14,10 +14,20 @@ public:
 protected:
   void SetLabel(const std::string& label);
   void AddEditBox();  
+  void AddCheckBox();
 };
 
 // Convenience: add a tweakable to the given GUI dialog
 void AddTweakable(GuiDialog* dialog, Tweakable* tweak);
+
+class TweakableBool : public Tweakable
+{
+public:
+  TweakableBool(const std::string& label, bool* var);
+
+protected:
+  bool* m_var;
+};
 
 // Or templates?
 class TweakableFloat : public Tweakable

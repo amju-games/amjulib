@@ -1,6 +1,7 @@
-#include "Tweakable.h"
+#include <GuiCheck.h>
 #include <GuiText.h>
 #include <GuiTextEdit.h>
+#include "Tweakable.h"
 
 namespace Amju
 {
@@ -35,6 +36,17 @@ void Tweakable::SetLabel(const std::string& label)
   AddChild(text);
 }
 
+void Tweakable::AddCheckBox()
+{
+  GuiCheck* check = new GuiCheck;
+  check->SetSize(Vec2f(0.1f, 0.1f));
+  check->SetLocalPos(Vec2f(0.3, 0));
+  Texture* checked = (Texture*)TheResourceManager::Instance()->GetRes("checked.png");
+  Texture* unchecked = (Texture*)TheResourceManager::Instance()->GetRes("unchecked.png");
+  check->Set(checked, unchecked);
+  AddChild(check);
+}
+
 void Tweakable::AddEditBox()
 {
   GuiTextEdit* text = new GuiTextEdit;
@@ -44,6 +56,13 @@ void Tweakable::AddEditBox()
   text->SetText("value");
   text->SetLocalPos(Vec2f(0.3, 0));
   AddChild(text);
+}
+
+TweakableBool::TweakableBool(const std::string& label, bool* var)
+{
+  SetLabel(label);
+  AddCheckBox();
+  SetSizeFromChildren();
 }
 
 TweakableFloat::TweakableFloat(const std::string& label, float* var, float min, float max) :

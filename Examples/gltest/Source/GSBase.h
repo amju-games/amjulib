@@ -43,9 +43,12 @@ public:
   // Do the drawing here, NOT in Draw(): this is so we can draw in stereo if required.
   virtual void DrawScene() = 0;
   virtual void DrawScene2d();
- 
+
+  // Public as called from callbacks 
   void OnTweakButton();
   void OnChooseButton();
+
+  void SetStereo(bool stereo);
 
 protected:
   void DrawHelp(); // set matrices, probably will be using Camera instead
