@@ -960,6 +960,12 @@
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CubemapOpenGL.cpp">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiCheck.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1822,6 +1828,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL.h">
       <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\Cubemap.h">
+      <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\CubemapOpenGL.h">
+      <Filter>AmjuGLOpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiCheck.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -224,6 +224,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\AmjuGLES2Android.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CreateWindowOpenGLSDL.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\CubemapOpenGL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\MATRIX4X4.cpp" />
@@ -300,6 +301,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiCalendar.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiChart.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiCheck.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataBarDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp" />
@@ -507,6 +509,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\AmjuGL-DX11.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLDX11\DX11Shader.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\AmjuGL-OpenGLES.2.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\CubemapOpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\DofOpenGL.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ES2DefaultShaders.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\Internal\MATRIX4X4.h" />
@@ -523,6 +526,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Camera.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Cubemap.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\DepthOfField.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Drawable.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\DrawDecorator.h" />
@@ -594,6 +598,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiCalendar.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiChart.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiCheck.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataBarDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataLineDisplay.h" />
