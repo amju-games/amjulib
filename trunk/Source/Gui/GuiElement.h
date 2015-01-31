@@ -39,7 +39,8 @@ public:
   //  non-undoable action
   void SetCommand(PGuiCommand pCommand);
   void SetCommand(CommandFunc commandFunc);
-  void ExecuteCommand();
+  // Called when we should execute the command set from one of the above
+  virtual void ExecuteCommand();
 
   void SetLocalPos(const Vec2f&);
   Vec2f GetLocalPos() const;
