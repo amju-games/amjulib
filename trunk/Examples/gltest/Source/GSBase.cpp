@@ -27,7 +27,8 @@ namespace Amju
 {
 // Set to true if we detect OVR. Also we want to set to true if in Cardboard mode,
 //  or we just want to test.
-static bool isStereo = false;
+bool GSBase::s_isStereo = false;
+bool GSBase::s_mouseLook = false;
 
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
@@ -128,14 +129,13 @@ void DrawCurrentState()
 
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
-  m_mouseLook = true;
   m_showTweak = false;
   m_showChoose = false;
 }
 
 void GSBase::SetStereo(bool stereo)
 {
-  isStereo = stereo;
+  s_isStereo = stereo;
 }
 
 void GSBase::CreateTweakMenu()
@@ -268,7 +268,7 @@ void GSBase::Draw()
 
   static StereoDraw sd; // TODO one per state?
   sd.SetCamera(m_camera);
-  sd.SetIsStereo(isStereo);
+  sd.SetIsStereo(s_isStereo);
   sd.SetDrawFunc(DrawCurrentState);
   sd.Draw();
 
@@ -341,7 +341,7 @@ void GSBase::Update()
     if (ht.Init())
     {
 std::cout << "Found OVR, setting stereo on.\n";
-      isStereo = true;
+      s_isStereo = true;
     }
     mht->Init();
   }
@@ -351,7 +351,7 @@ std::cout << "Found OVR, setting stereo on.\n";
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);
   }
-  else if (m_mouseLook && mht->Update(&q))
+  else if (s_mouseLook && mht->Update(&q))
   {
     m_camera.m_dir = q.RotateVec(ORIG_VIEW_DIR);
     m_camera.m_up = q.RotateVec(ORIG_UP_DIR);

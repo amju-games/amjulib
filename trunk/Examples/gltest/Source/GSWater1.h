@@ -24,6 +24,7 @@ private:
   RCPtr<ObjMesh> m_skybox;
   RCPtr<Texture> m_spheremap; // this may not be required with cube mapping
   RCPtr<Cubemap> m_cubemap;
+  bool m_isWireframe;
 };
 typedef Singleton<GSWater1> TheGSWater1;
 } // namespace

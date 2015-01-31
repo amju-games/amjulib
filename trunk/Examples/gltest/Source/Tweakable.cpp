@@ -28,22 +28,33 @@ void AddTweakable(GuiDialog* dialog, Tweakable* tweak)
 void Tweakable::SetLabel(const std::string& label)
 {
   GuiText* text = new GuiText;
-  //text->SetFontSize(0.5f);
-  text->SetSize(Vec2f(1.0f, 0.1f));
+  text->SetFontSize(0.5f);
+  text->SetFgCol(Colour(1, 1, 1, 1)); 
+  text->SetSize(Vec2f(0.5f, 0.05f));
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   text->SetText(label);
-  text->SetLocalPos(Vec2f(0, 0));
+  text->SetLocalPos(Vec2f(0.05f, 0));
   AddChild(text);
+}
+
+static void OnCheckbox(GuiCheck* check, bool value)
+{
+  TweakableBool* tweak = (TweakableBool*)check->GetUserData();
+  tweak->SetVar(value);
+  // TODO Call callback on Tweakable that value has changed..?
 }
 
 void Tweakable::AddCheckBox()
 {
   GuiCheck* check = new GuiCheck;
-  check->SetSize(Vec2f(0.1f, 0.1f));
-  check->SetLocalPos(Vec2f(0.3, 0));
+  check->SetSize(Vec2f(0.045f, 0.05f));
+  check->SetLocalPos(Vec2f(0.3f, 0));
   Texture* checked = (Texture*)TheResourceManager::Instance()->GetRes("checked.png");
   Texture* unchecked = (Texture*)TheResourceManager::Instance()->GetRes("unchecked.png");
   check->Set(checked, unchecked);
+  check->SetValue(false);
+  check->SetUserData(this);
+  check->SetOnChangeValue(OnCheckbox);
   AddChild(check);
 }
 
@@ -60,6 +71,7 @@ void Tweakable::AddEditBox()
 
 TweakableBool::TweakableBool(const std::string& label, bool* var)
 {
+  m_var = var;
   SetLabel(label);
   AddCheckBox();
   SetSizeFromChildren();
