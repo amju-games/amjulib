@@ -11,6 +11,13 @@ public:
   
   Cubemap() : m_textureUnitId(0) {}
 
+  // Set texture filenames for cubemap. Order is:
+  // +x (right)
+  // -x (left)
+  // +z (front)
+  // -z (back)
+  // +y (top)
+  // -y (bottom)
   void SetTextureNames(const std::string str[6])
   {
     for (int i = 0; i < 6; i++) m_textureNames[i] = str[i];

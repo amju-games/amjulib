@@ -23,6 +23,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL3.h"
 #include "ShadowMapOpenGL.h"
 #include "RenderToTextureOpenGL.h"
+#include "CubemapOpenGL.h"
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -119,6 +120,11 @@ static Drawable* MakeShadowMap()
   return new ShadowMapNull;
 }
 
+static Drawable* MakeCubemap()
+{
+  return new CubemapOpenGL;
+}
+
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
 static AmjuGL::TextureType s_tt = AmjuGL::AMJU_TEXTURE_REGULAR;
@@ -133,6 +139,7 @@ AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMap);
   s_factory.Add(RenderToTexture::DRAWABLE_TYPE_ID, MakeRenderToTexture);
+  s_factory.Add(Cubemap::DRAWABLE_TYPE_ID, MakeCubemap);
 }
 
 Drawable* AmjuGLOpenGL::Create(int drawableTypeId)
