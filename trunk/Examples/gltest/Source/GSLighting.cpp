@@ -19,7 +19,7 @@ GSLighting::GSLighting()
   m_maxTime = 10.0f; // so awesome
 }
 
-void GSLighting::SetUpTweakMenu() 
+void GSLighting::CreateTweakMenu() 
 {
   CreateTweakMenu();
   AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));

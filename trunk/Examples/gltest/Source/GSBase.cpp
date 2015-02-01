@@ -152,7 +152,7 @@ void GSBase::SetStereo(bool stereo)
 {
   s_isStereo = stereo;
 }
-
+  
 void GSBase::CreateTweakMenu()
 {
   m_tweaker = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
@@ -198,7 +198,7 @@ void GSBase::OnActive()
   GuiButton* tweak = (GuiButton*)m_menuButtons->GetElementByName("tweak-button");
   tweak->SetCommand(OnTweak);
 
-  SetUpTweakMenu();
+  CreateTweakMenu();
 
   m_chooser = dynamic_cast<GuiDialog*>(LoadGui("gui-choose-dialog.txt").GetPtr());
   Assert(m_chooser);

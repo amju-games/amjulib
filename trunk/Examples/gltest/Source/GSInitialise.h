@@ -19,7 +19,7 @@ public:
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
   
-  virtual void SetUpTweakMenu() override {}
+  virtual void CreateTweakMenu() override {}
 };
 typedef Singleton<GSInitialise> TheGSInitialise;
 } // namespace

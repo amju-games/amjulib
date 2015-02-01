@@ -38,8 +38,8 @@ public:
   virtual bool OnKeyEvent(const KeyEvent&) override;
   virtual bool OnRotationEvent(const RotationEvent&) override;
 
-  // Override to set up tweak menu. Call CreateTweakMenu in your overriden function first.
-  virtual void SetUpTweakMenu() {}
+  // Override to set up tweak menu. Call base impl CreateTweakMenu in your overriden function first.
+  virtual void CreateTweakMenu();
 
   // Do the drawing here, NOT in Draw(): this is so we can draw in stereo if required.
   virtual void DrawScene() = 0;
@@ -53,7 +53,6 @@ public:
 
 protected:
   void DrawHelp(); // set matrices, probably will be using Camera instead
-  void CreateTweakMenu();
 
 protected:
   float m_time;

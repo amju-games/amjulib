@@ -30,9 +30,9 @@ GSWater1::GSWater1()
   m_isWireframe = false;
 }
   
-void GSWater1::SetUpTweakMenu() 
+void GSWater1::CreateTweakMenu() 
 {
-  CreateTweakMenu();
+  GSBase::CreateTweakMenu();
   AddTweakable(m_tweaker, new TweakableBool("Wireframe", &m_isWireframe));
 }
 
