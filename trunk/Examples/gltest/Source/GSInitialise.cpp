@@ -9,7 +9,7 @@
 #include "GSShadow2.h"
 #include "GSShaderWave.h"
 #include "GSPatchwork.h"
-#include "GSBarrel.h"
+#include "GSFireTemple.h"
 #include "GSTerrain.h"
 #include "GSMandel.h"
 #include "GSLighting.h"
@@ -21,7 +21,7 @@ namespace Amju
 GSInitialise::GSInitialise()
 {
   // TODO Serialise last choice in config
-  m_nextState = TheGSWater1::Instance();
+  m_nextState = TheGSFireTemple::Instance();
 //  m_maxTime = 0.1f;
 }
 
@@ -29,10 +29,10 @@ void GSInitialise::OnActive()
 {
   GSBase::OnActive();
 
+  AddState("Fire Temple", TheGSFireTemple::Instance());
   AddState("Water1", TheGSWater1::Instance());
   AddState("Anim", TheGSAnimTest::Instance());
   AddState("Patchwork", TheGSPatchwork::Instance());
-  AddState("Barrel distortion", TheGSBarrel::Instance());
   AddState("Terrain", TheGSTerrain::Instance());
   AddState("Mandelbrot shader", TheGSMandel::Instance());
   AddState("Lighting", TheGSLighting::Instance());
