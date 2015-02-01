@@ -1,0 +1,26 @@
+// water1-vert.txt
+
+//#include noise2D.glsl
+
+uniform mat4 modelViewProjectionMatrix;
+uniform float gTime; // don't initialise!
+
+varying vec3 vNormal;
+varying vec3 fragPos;
+
+void main()
+{
+  vec4 a = gl_Vertex;
+  fragPos = a.xyz;
+
+  //vec2 p = vec2(a.x + gTime * 1.0, a.z + gTime * 0.5);
+  //float n = snoise(p * 0.4);
+  //a.y = 0.1 * n;
+  //a.x += 0.15 * n;
+
+  //gY = 0.0; //a.y;
+
+  vNormal = gl_Normal;
+
+  gl_Position = modelViewProjectionMatrix * a;
+}
