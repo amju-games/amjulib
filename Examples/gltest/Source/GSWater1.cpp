@@ -33,10 +33,7 @@ GSWater1::GSWater1()
 void GSWater1::SetUpTweakMenu() 
 {
   CreateTweakMenu();
-  //AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
-  AddTweakable(m_tweaker, new TweakableBool("Stereo", &s_isStereo));
   AddTweakable(m_tweaker, new TweakableBool("Wireframe", &m_isWireframe));
-  AddTweakable(m_tweaker, new TweakableBool("Mouse look", &s_mouseLook));
 }
 
 void GSWater1::Update()
@@ -57,7 +54,7 @@ void GSWater1::Update()
 
 void GSWater1::DrawScene()
 {
-  AmjuGL::SetClearColour(Colour(0.5f, 1, 1, 1));
+  AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
   DrawHelp();
 
   m_shader->Begin();
