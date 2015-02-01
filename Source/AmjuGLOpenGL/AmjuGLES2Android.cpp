@@ -21,6 +21,7 @@ Amju Games source code (c) Copyright Jason Colman 2010
 #include "ES2DefaultShaders.h"
 #include "ShadowMapES2.h"
 #include "RenderToTextureES2.h"
+#include "CubemapOpenGL.h"
 #include <DegRad.h>
 #include <ReportError.h>
 #include <Texture.h>
@@ -253,12 +254,18 @@ static Drawable* MakeRenderToTextureES2()
 	return new RenderToTextureES2;
 }
 
+static Drawable* MakeCubemap()
+{
+	return new CubemapOpenGL;
+}
+
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMapES2);
   s_factory.Add(RenderToTexture::DRAWABLE_TYPE_ID, MakeRenderToTextureES2);
+  s_factory.Add(Cubemap::DRAWABLE_TYPE_ID, MakeCubemap);
 }
 
 Drawable* AmjuGLOpenGLES2::Create(int drawableTypeId)
