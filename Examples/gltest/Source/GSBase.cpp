@@ -25,10 +25,15 @@
 
 namespace Amju
 {
+// Draws in stereo or mono depending on flag.
+// Calls DrawCurrentState() below.
+static StereoDraw sd; 
+
 // Set to true if we detect OVR. Also we want to set to true if in Cardboard mode,
 //  or we just want to test.
 bool GSBase::s_isStereo = false;
 bool GSBase::s_mouseLook = false;
+bool GSBase::s_enableBarrel = false;
 
 static Vec3f ORIG_VIEW_DIR(0, 0, -1);
 static Vec3f ORIG_UP_DIR(0, 1, 0);
@@ -104,7 +109,8 @@ void ChooserDialog::Populate()
   }
 }
 
-void DrawCurrentState()
+// Called by stereo draw
+static void DrawCurrentState()
 {
   GameState* s = TheGame::Instance()->GetState();
   GSBase* b = dynamic_cast<GSBase*>(s);
@@ -127,10 +133,19 @@ void DrawCurrentState()
   }
 }
 
+// Called by barrel distortion if enabled, otherwise by the current state Draw().
+static void DrawStereo()
+{
+  sd.Draw();
+}
+
 GSBase::GSBase() : m_time(0), m_maxTime(5.0f), m_paused(false)
 {
   m_showTweak = false;
   m_showChoose = false;
+
+  // We just need to do this once -- it could be a StereoDraw ctor parameter 
+  sd.SetDrawFunc(DrawCurrentState);
 }
 
 void GSBase::SetStereo(bool stereo)
@@ -143,6 +158,12 @@ void GSBase::CreateTweakMenu()
   m_tweaker = dynamic_cast<GuiDialog*>(LoadGui("gui-dialog.txt").GetPtr());
   Assert(m_tweaker);
   m_tweaker->SetTitle(m_name);
+
+  // Common tweakables
+  //AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableBool("Stereo", &s_isStereo));
+  AddTweakable(m_tweaker, new TweakableBool("Barrel", &s_enableBarrel));
+  AddTweakable(m_tweaker, new TweakableBool("Mouse look", &s_mouseLook));
 }
 
 void GSBase::OnTweakButton()
@@ -196,6 +217,13 @@ void GSBase::OnActive()
 #if defined(WIN32) || defined(MACOSX)
   mht->Reset();
 #endif
+
+  // Set up barrel dist post process effect
+  m_barrel.SetDrawFunc(DrawStereo);
+  m_barrel.Init();
+
+  // Set camera for stereo draw object
+  sd.SetCamera(m_camera);
 
   // Set up GUI text: name and description etc.
   for (int i = 0; i < 2; i++)
@@ -263,14 +291,19 @@ void GSBase::DrawScene2d()
 static int depth = 0;
 void GSBase::Draw()
 {
+  // Set stereo flag. 
+  sd.SetIsStereo(s_isStereo);
+
+  if (s_enableBarrel)
+  {
+    m_barrel.Draw();
+    return;
+  }
+
   Assert(depth == 0);
   depth++;
 
-  static StereoDraw sd; // TODO one per state?
-  sd.SetCamera(m_camera);
-  sd.SetIsStereo(s_isStereo);
-  sd.SetDrawFunc(DrawCurrentState);
-  sd.Draw();
+  DrawStereo();
 
   depth--;
 }

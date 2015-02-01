@@ -6,6 +6,7 @@
 #include <GameState.h>
 #include <GuiDialog.h>
 #include <ModalDialog.h>
+#include "BarrelDist.h"
 
 namespace Amju
 {
@@ -74,9 +75,12 @@ protected:
   // Choose state dialog
   RCPtr<GuiDialog> m_chooser;
 
+  BarrelDist m_barrel;
+
   Camera m_camera;
 
   static bool s_isStereo;
+  static bool s_enableBarrel;
   static bool s_mouseLook;
 };
 }
