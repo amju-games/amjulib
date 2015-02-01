@@ -22,6 +22,8 @@ GSFireTemple::GSFireTemple()
 
 void GSFireTemple::Update()
 {
+  GSBase::Update();
+
   float dt = TheTimer::Instance()->GetDt();
   m_pos += m_vel * dt;
 }
@@ -156,6 +158,8 @@ bool GSFireTemple::OnKeyEvent(const KeyEvent& ke)
 
 void GSFireTemple::OnActive()
 {
+  GSBase::OnActive();
+
 #ifdef WIN32
   // TODO TEMP TEST
   File::SetRoot("C:\\jay\\projects\\amjulib\\Examples\\ovr-example\\Assets\\fire_temple", "/");

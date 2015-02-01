@@ -17,7 +17,7 @@ public:
   virtual void Update();
   virtual void DrawScene();
   virtual void OnActive();
-  virtual void SetUpTweakMenu() override;
+  virtual void CreateTweakMenu() override;
 
 private:
   Shader* m_shader;
