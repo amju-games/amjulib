@@ -1,0 +1,80 @@
+// barrel-frag.txt
+
+varying vec2 UV;
+uniform sampler2D diffuseSampler;
+
+//void main()
+//{
+//  vec4 diffuse1 = texture2D(diffuseSampler, UV + vec2(0.005, 0.005));
+//  vec4 diffuse2 = texture2D(diffuseSampler, UV);
+//  gl_FragColor = diffuse1 * 0.5 + diffuse2 * 0.5;
+//}
+
+// From http://www.geeks3d.com/20140213/glsl-shader-library-fish-eye-and-dome-and-barrel-distortion-post-processing-filters/2/
+
+//uniform sampler2D tex0;
+//varying vec4 Vertex_UV;
+const float PI = 3.1415926535;
+//uniform float BarrelPower;
+const float BarrelPower = 1.1;
+const float maxR = 0.85;
+
+// Distance from centre of screen to centre of barrel effect, which 
+//  should be where your eyes are, right?
+// Should be maxR / 2 ??
+const float eyeD = 0.4;
+ 
+vec2 Distort(vec2 p)
+{
+    float theta  = atan(p.y, p.x);
+    float radius = length(p);
+    radius = pow(radius, BarrelPower);
+    p.x = radius * cos(theta);
+    p.y = radius * sin(theta);
+    return 0.5 * (p + 1.0);
+}
+
+vec2 DistortFrom(vec2 p, vec2 centre)
+{
+    vec2 pc = p - centre;
+
+    float theta  = atan(pc.y, pc.x);
+    float radius = length(pc);
+    radius = pow(radius, BarrelPower);
+    p.x = centre.x + radius * cos(theta);
+    p.y = centre.y + radius * sin(theta);
+
+    // Convert to 0..1 range
+    return 0.5 * (p + 1.0);
+}
+
+void main()
+{
+  // (0, 0) is screen centre
+  vec2 xy = 2.0 * UV - 1.0;
+  float d = length(xy - vec2(eyeD, 0));
+  if (xy.x > 0.0 && d < maxR)
+  {
+    // Right hand
+    vec2 uv = DistortFrom(xy, vec2(eyeD, 0));
+    uv.x = max(uv.x, 0.5); // Don't stray into left hand side
+    vec4 c = texture2D(diffuseSampler, uv);
+    gl_FragColor = c;
+    return;
+  }
+  else
+  {
+    d = length(xy - vec2(-0.5, 0));
+    if (xy.x < 0.0 && d < maxR)
+    {
+      vec2 uv = DistortFrom(xy, vec2(-eyeD, 0));
+      uv.x = min(uv.x, 0.5); // Don't stray into right hand side
+      vec4 c = texture2D(diffuseSampler, uv);
+      gl_FragColor = c;
+      return;
+    }
+  }
+  gl_FragColor = vec4(0, 0, 0, 1);
+}
+
+
