@@ -17,7 +17,6 @@
 #include "GSDepthOfField.h"
 #include "GSMandel.h"
 #include "GSTerrain.h"
-#include "GSBarrel.h"
 #include "GSPatchwork.h"
 #include "GSInitialise.h"
 
