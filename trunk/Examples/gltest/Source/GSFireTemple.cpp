@@ -160,11 +160,6 @@ void GSFireTemple::OnActive()
 {
   GSBase::OnActive();
 
-#ifdef WIN32
-  // TODO TEMP TEST
-  File::SetRoot("C:\\jay\\projects\\amjulib\\Examples\\ovr-example\\Assets\\fire_temple", "/");
-#endif
-
   ResourceManager* rm = TheResourceManager::Instance();
   rm->AddLoader("obj", TextObjLoader);
   m_mesh = (ObjMesh*)rm->GetRes("fire_temple/model.obj");
