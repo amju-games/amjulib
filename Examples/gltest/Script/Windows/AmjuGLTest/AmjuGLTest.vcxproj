@@ -147,12 +147,12 @@
     <ClCompile Include="..\..\..\Source\BarrelDist.cpp" />
     <ClCompile Include="..\..\..\Source\Grid.cpp" />
     <ClCompile Include="..\..\..\Source\GSAnimTest.cpp" />
-    <ClCompile Include="..\..\..\Source\GSBarrel.cpp" />
     <ClCompile Include="..\..\..\Source\GSBase.cpp" />
     <ClCompile Include="..\..\..\Source\GSBogusSSAO.cpp" />
     <ClCompile Include="..\..\..\Source\GSDepthOfField.cpp" />
     <ClCompile Include="..\..\..\Source\GSEnvMap.cpp" />
     <ClCompile Include="..\..\..\Source\GSFinish.cpp" />
+    <ClCompile Include="..\..\..\Source\GSFireTemple.cpp" />
     <ClCompile Include="..\..\..\Source\GSInitialise.cpp" />
     <ClCompile Include="..\..\..\Source\GSLighting.cpp" />
     <ClCompile Include="..\..\..\Source\GSMain.cpp" />
@@ -183,12 +183,12 @@
     <ClInclude Include="..\..\..\Source\BarrelDist.h" />
     <ClInclude Include="..\..\..\Source\Grid.h" />
     <ClInclude Include="..\..\..\Source\GSAnimTest.h" />
-    <ClInclude Include="..\..\..\Source\GSBarrel.h" />
     <ClInclude Include="..\..\..\Source\GSBase.h" />
     <ClInclude Include="..\..\..\Source\GSBogusSSAO.h" />
     <ClInclude Include="..\..\..\Source\GSDepthOfField.h" />
     <ClInclude Include="..\..\..\Source\GSEnvMap.h" />
     <ClInclude Include="..\..\..\Source\GSFinish.h" />
+    <ClInclude Include="..\..\..\Source\GSFireTemple.h" />
     <ClInclude Include="..\..\..\Source\GSInitialise.h" />
     <ClInclude Include="..\..\..\Source\GSLighting.h" />
     <ClInclude Include="..\..\..\Source\GSMain.h" />
