@@ -48,6 +48,7 @@ public:
   // Public as called from callbacks 
   void OnTweakButton();
   void OnChooseButton();
+  void OnChooseOk();
 
   void SetStereo(bool stereo);
 
