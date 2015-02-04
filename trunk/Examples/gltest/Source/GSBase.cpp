@@ -42,8 +42,6 @@ static Vec3f ORIG_UP_DIR(0, 1, 0);
 static RCPtr<MouseHeadTracker> mht = new MouseHeadTracker; // on heap because it's an event listener
 #endif
     
-static ChooserDialog chooser;
-
 static const std::string KEYS = "[P]ause [S]kip [R]eset ";
 
 static void OnChoose(GuiElement*)
@@ -67,14 +65,19 @@ static void OnTweak(GuiElement*)
 }
 
 // Callback when choice made
-static void OnChooserFinished(Dialog* dlg)
+static void OnChooserFinished(GuiElement*)
 {
-  chooser.Choose();
+  GameState* s = TheGame::Instance()->GetState();
+  GSBase* b = dynamic_cast<GSBase*>(s);
+  if (b)
+  {
+    b->OnChooseOk();
+  }
 }
 
-void ChooserDialog::Choose()
+void GSBase::OnChooseOk()
 {
-  GuiElement* elem = m_gui->GetElementByName("choose-list-box");
+  GuiElement* elem = m_chooser->GetElementByName("choose-list-box");
   Assert(elem);
   GuiListBox* listbox = dynamic_cast<GuiListBox*>(elem);
   Assert(listbox);
@@ -87,9 +90,9 @@ void ChooserDialog::Choose()
   TheGame::Instance()->SetCurrentState(gs);
 }
 
-void ChooserDialog::Add(const std::string& choice)
+void Add(GuiDialog* dlg, const std::string& choice)
 {
-  GuiElement* elem = m_gui->GetElementByName("choose-list-box");
+  GuiElement* elem = dlg->GetElementByName("choose-list-box");
   Assert(elem);
   GuiListBox* listbox = dynamic_cast<GuiListBox*>(elem);
   Assert(listbox);
@@ -100,12 +103,12 @@ void ChooserDialog::Add(const std::string& choice)
   list->AddItem(text); 
 }
 
-void ChooserDialog::Populate()
+void Populate(GuiDialog* dlg)
 {
   const StateList& statelist = GetStateList();
   for (auto it = statelist.begin(); it != statelist.end(); ++it)
   { 
-    Add(it->first);
+    Add(dlg, it->first);
   }
 }
 
@@ -204,8 +207,10 @@ void GSBase::OnActive()
   Assert(m_chooser);
 //  chooser.SetGuiFilename("gui-choose-dialog.txt");
   m_chooser->SetTitle("Choose scene");
-//  Populate(m_chooser);
-  chooser.SetFinishCallback(OnChooserFinished);
+  Populate(m_chooser);
+//  chooser.SetFinishCallback(OnChooserFinished);
+  GuiElement* elem = m_chooser->GetElementByName("ok-button");
+  elem->SetCommand(OnChooserFinished);
  
   m_camera.m_pos = Vec3f(0, 5, 10); 
   m_camera.m_fardist = 4000.0f;
@@ -248,7 +253,8 @@ bool GSBase::OnKeyEvent(const KeyEvent& ke)
   {
     std::cout << "Choose scene menu\n";
 
-    DoModalDialog(&chooser);
+    //DoModalDialog(&chooser);
+    m_showChoose = true;
   }
   else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'r')
   {
