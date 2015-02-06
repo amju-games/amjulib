@@ -21,7 +21,7 @@ namespace Amju
 GSInitialise::GSInitialise()
 {
   // TODO Serialise last choice in config
-  m_nextState = TheGSFireTemple::Instance();
+  m_nextState = TheGSWater1::Instance();
 //  m_maxTime = 0.1f;
 }
 
