@@ -49,6 +49,7 @@ public:
   void OnTweakButton();
   void OnChooseButton();
   void OnChooseOk();
+  void OnChooseCancel();
 
   void SetStereo(bool stereo);
 

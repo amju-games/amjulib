@@ -1,4 +1,5 @@
 #include <GuiCheck.h>
+#include <GuiSlider.h>
 #include <GuiText.h>
 #include <GuiTextEdit.h>
 #include "Tweakable.h"
@@ -60,6 +61,15 @@ void Tweakable::AddCheckBox()
 
 void Tweakable::AddEditBox()
 {
+  GuiSlider* slider = new GuiSlider;
+  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("corner.png");
+  slider->SetTexture(tex);
+  slider->SetSize(Vec2f(0.1f, 0.1f));
+  slider->SetLocalPos(Vec2f(0.3, 0));
+//  slider->SetXRange(); // TODO rel to local pos?
+  AddChild(slider);
+  return;
+
   GuiTextEdit* text = new GuiTextEdit;
   //text->SetFontSize(0.5f);
   text->SetSize(Vec2f(0.3f, 0.1f));

@@ -65,7 +65,7 @@ static void OnTweak(GuiElement*)
 }
 
 // Callback when choice made
-static void OnChooserFinished(GuiElement*)
+static void OnChooseDlgOk(GuiElement*)
 {
   GameState* s = TheGame::Instance()->GetState();
   GSBase* b = dynamic_cast<GSBase*>(s);
@@ -73,6 +73,21 @@ static void OnChooserFinished(GuiElement*)
   {
     b->OnChooseOk();
   }
+}
+
+static void OnChooseDlgCancel(GuiElement*)
+{
+  GameState* s = TheGame::Instance()->GetState();
+  GSBase* b = dynamic_cast<GSBase*>(s);
+  if (b)
+  {
+    b->OnChooseCancel();
+  }
+}
+
+void GSBase::OnChooseCancel()
+{
+  m_showChoose = false;
 }
 
 void GSBase::OnChooseOk()
@@ -163,7 +178,7 @@ void GSBase::CreateTweakMenu()
   m_tweaker->SetTitle(m_name);
 
   // Common tweakables
-  //AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
+  AddTweakable(m_tweaker, new TweakableFloat("Float test", nullptr, 0, 1));
   AddTweakable(m_tweaker, new TweakableBool("Stereo", &s_isStereo));
   AddTweakable(m_tweaker, new TweakableBool("Barrel", &s_enableBarrel));
   AddTweakable(m_tweaker, new TweakableBool("Mouse look", &s_mouseLook));
@@ -210,7 +225,11 @@ void GSBase::OnActive()
   Populate(m_chooser);
 //  chooser.SetFinishCallback(OnChooserFinished);
   GuiElement* elem = m_chooser->GetElementByName("ok-button");
-  elem->SetCommand(OnChooserFinished);
+  Assert(elem);
+  elem->SetCommand(OnChooseDlgOk);
+  elem = m_chooser->GetElementByName("cancel-button");
+  Assert(elem);
+  elem->SetCommand(OnChooseDlgCancel);
  
   m_camera.m_pos = Vec3f(0, 5, 10); 
   m_camera.m_fardist = 4000.0f;

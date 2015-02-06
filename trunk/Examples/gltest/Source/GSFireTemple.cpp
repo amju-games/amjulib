@@ -18,6 +18,8 @@ namespace Amju
 GSFireTemple::GSFireTemple()
 {
   m_mesh = nullptr;
+  m_name = "Fire Temple";
+  m_description = "Zelda OOT Fire Temple";
 }
 
 void GSFireTemple::Update()
