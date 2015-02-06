@@ -966,6 +966,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiCheck.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiSlider.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1836,6 +1839,9 @@
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiCheck.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiSlider.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

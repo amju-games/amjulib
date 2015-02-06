@@ -19,6 +19,8 @@ public:
 
   void SetXRange(float minX, float maxX) { m_minX = minX; m_maxX = maxX; }
 
+  GuiImage* GetBgImage() { return &m_bg; }
+
 protected:
   float m_minX;
   float m_maxX;

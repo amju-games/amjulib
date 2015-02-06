@@ -62,12 +62,17 @@ void Tweakable::AddCheckBox()
 void Tweakable::AddEditBox()
 {
   GuiSlider* slider = new GuiSlider;
-  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("corner.png");
+  Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("slider.png");
   slider->SetTexture(tex);
-  slider->SetSize(Vec2f(0.1f, 0.1f));
-  slider->SetLocalPos(Vec2f(0.3, 0));
-//  slider->SetXRange(); // TODO rel to local pos?
+  slider->SetSize(Vec2f(0.05f, 0.05f));
+  slider->SetLocalPos(Vec2f(0.3f, 0));
+  slider->SetXRange(0.3f, 0.6f); // TODO rel to local pos?
   AddChild(slider);
+
+  slider->GetBgImage()->SetLocalPos(Vec2f(0.3f, 0));
+  slider->GetBgImage()->SetSize(Vec2f(0.3f, 0.05f));
+  tex = (Texture*)TheResourceManager::Instance()->GetRes("slider_bg.png");
+  slider->GetBgImage()->SetTexture(tex);
   return;
 
   GuiTextEdit* text = new GuiTextEdit;

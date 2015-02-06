@@ -29,8 +29,8 @@ bool GuiSlider::IsEnabled() const
 
 void GuiSlider::Draw() 
 {
-  // TODO Draw bg
-
+  m_bg.SetParent(GetParent());
+  m_bg.Draw();
   GuiButton::Draw();
 }
 
@@ -45,6 +45,14 @@ std::cout << "Moving slider! x: " << ce.x << ", dx: " << ce.dx << "\n";
 
     Vec2f pos = GetLocalPos();
     pos.x += ce.dx;
+    if (pos.x > m_maxX)
+    {
+        pos.x = m_maxX;
+    }
+    if (pos.x < m_minX)
+    {
+        pos.x = m_minX;
+    }
     SetLocalPos(pos);
   }
 
