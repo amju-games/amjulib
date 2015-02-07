@@ -14,7 +14,7 @@ public:
 protected:
   void SetLabel(const std::string& label);
   void AddEditBox();  
-  void AddCheckBox();
+  void AddCheckBox(bool initialValue);
 };
 
 // Convenience: add a tweakable to the given GUI dialog

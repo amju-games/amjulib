@@ -45,7 +45,7 @@ static void OnCheckbox(GuiCheck* check, bool value)
   // TODO Call callback on Tweakable that value has changed..?
 }
 
-void Tweakable::AddCheckBox()
+void Tweakable::AddCheckBox(bool initialValue)
 {
   GuiCheck* check = new GuiCheck;
   check->SetSize(Vec2f(0.045f, 0.05f));
@@ -53,7 +53,7 @@ void Tweakable::AddCheckBox()
   Texture* checked = (Texture*)TheResourceManager::Instance()->GetRes("checked.png");
   Texture* unchecked = (Texture*)TheResourceManager::Instance()->GetRes("unchecked.png");
   check->Set(checked, unchecked);
-  check->SetValue(false);
+  check->SetValue(initialValue);
   check->SetUserData(this);
   check->SetOnChangeValue(OnCheckbox);
   AddChild(check);
@@ -88,7 +88,7 @@ TweakableBool::TweakableBool(const std::string& label, bool* var)
 {
   m_var = var;
   SetLabel(label);
-  AddCheckBox();
+  AddCheckBox(*var);
   SetSizeFromChildren();
 }
 
