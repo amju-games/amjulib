@@ -5,6 +5,7 @@
 #include <Singleton.h>
 #include <Shader.h>
 #include "GSBase.h"
+#include "Grid.h"
 
 namespace Amju 
 {
@@ -20,11 +21,22 @@ public:
   virtual void CreateTweakMenu() override;
 
 private:
-  Shader* m_shader;
+  Grid m_gridWater;
+  Shader* m_shaderWater;
   RCPtr<ObjMesh> m_skybox;
   RCPtr<Texture> m_spheremap; // this may not be required with cube mapping
   RCPtr<Cubemap> m_cubemap;
-  bool m_isWireframe;
+  Shader* m_shaderTerrain;
+  Texture* m_heightmapTerrain;
+  Texture* m_diffuseTerrain;
+  Texture* m_detailTerrain;
+  Grid m_gridTerrain;
+  int m_gridSizeWater;
+  int m_gridSizeTerrain;
+  bool m_drawWater;
+  bool m_drawTerrain;
+  bool m_isWireframeWater;
+  bool m_isWireframeTerrain;
 };
 typedef Singleton<GSWater1> TheGSWater1;
 } // namespace

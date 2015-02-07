@@ -11,7 +11,6 @@
 
 namespace Amju
 {
-static Grid grid;
 static float shaderTime = 0;
 
 static float Water1HeightFunc(float x, float z)
@@ -27,13 +26,21 @@ GSWater1::GSWater1()
   m_description = "Simplex noise. Updating position and normals on the CPU.";
   m_nextState = TheGSLighting::Instance();
   m_maxTime = 7.0f; 
-  m_isWireframe = false;
+  m_gridSizeWater = 20;
+  m_gridSizeTerrain = 20;
+  m_drawWater = true;
+  m_drawTerrain = true;
+  m_isWireframeWater = false;
+  m_isWireframeTerrain = false;
 }
   
 void GSWater1::CreateTweakMenu() 
 {
   GSBase::CreateTweakMenu();
-  AddTweakable(m_tweaker, new TweakableBool("Wireframe", &m_isWireframe));
+  AddTweakable(m_tweaker, new TweakableBool("Draw water", &m_drawWater));
+  AddTweakable(m_tweaker, new TweakableBool("Draw terrain", &m_drawTerrain));
+  AddTweakable(m_tweaker, new TweakableBool("Water wireframe", &m_isWireframeWater));
+  AddTweakable(m_tweaker, new TweakableBool("Terrain wireframe", &m_isWireframeTerrain));
 }
 
 void GSWater1::Update()
@@ -42,13 +49,14 @@ void GSWater1::Update()
 
   // Calc heights in software, not in shader: this is so we can recalc normals 
   //  and tangents. 
-  // TODO How to do this in shader???
+  // OR do it in the shader: we can get the heights of neighbour verts and calc
+  //  normals in the shader. Tangents are easy for a grid.
 
   if (!m_paused) 
   {
     float dt = TheTimer::Instance()->GetDt();
     shaderTime += dt;
-    grid.Rebuild(Water1HeightFunc); 
+    m_gridWater.Rebuild(Water1HeightFunc); 
   }
 }
 
@@ -57,25 +65,58 @@ void GSWater1::DrawScene()
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
   DrawHelp();
 
-  m_shader->Begin();
+  static float angle = 0;
+  angle += TheTimer::Instance()->GetDt() * 4.0f;
+  AmjuGL::RotateY(angle);
+
+  // Required for ES, and we use in desktop OpenGL shaders for consistency
   Matrix mv;
   mv.ModelView();
   Matrix proj;
   proj.Projection();
   Matrix mat = mv * proj;
-  m_shader->Set("modelViewProjectionMatrix", mat);
+
+  if (m_drawTerrain)
+  {
+    m_shaderTerrain->Begin();
+    // Draw terrain
+    m_shaderTerrain->Set("heightSampler", (AmjuGL::TextureHandle)0);
+    m_heightmapTerrain->UseThisTexture(0);
+
+    m_shaderTerrain->Set("diffuseSampler", (AmjuGL::TextureHandle)1);
+    m_diffuseTerrain->UseThisTexture(1);
+
+    m_shaderTerrain->Set("detailSampler", (AmjuGL::TextureHandle)2);
+    m_detailTerrain->UseThisTexture(2);
+
+    m_shaderTerrain->Set("modelViewProjectionMatrix", mat);
+
+    AmjuGL::SetIsWireFrameMode(m_isWireframeTerrain);
+    m_gridTerrain.Draw();
+    m_shaderTerrain->End();
+  }
+
+  if (m_drawWater)
+  {
+    m_shaderWater->Begin();
+    m_shaderWater->Set("modelViewProjectionMatrix", mat);
  
-  AmjuGL::Vec3 eye(m_camera.m_pos.x, m_camera.m_pos.y, m_camera.m_pos.z);
-  m_shader->Set("eyePos", eye); 
+    AmjuGL::Vec3 eye(m_camera.m_pos.x, m_camera.m_pos.y, m_camera.m_pos.z);
+    m_shaderWater->Set("eyePos", eye); 
 
 //  m_shader->Set("gTime", shaderTime);
 
-  AmjuGL::SetIsWireFrameMode(m_isWireframe);
+    AmjuGL::SetIsWireFrameMode(m_isWireframeWater);
 
-  m_spheremap->UseThisTexture();
+// TODO switch
+//    m_spheremap->UseThisTexture(0);
 
-  grid.Draw();
-  m_shader->End();
+    m_shaderWater->Set("cubemapSampler", (AmjuGL::TextureHandle)0);
+    m_cubemap->Draw();
+
+    m_gridWater.Draw();
+    m_shaderWater->End();
+  }
 
   AmjuGL::SetIsWireFrameMode(false);
 
@@ -87,9 +128,23 @@ void GSWater1::OnActive()
 {
   GSBase::OnActive();
 
-  m_shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/water1");
-  m_shader->Begin(); // so we find attrib var locations when we build tri list:
-  grid.Build(50, 20.0f, Water1HeightFunc);
+  m_heightmapTerrain = (Texture*)TheResourceManager::Instance()->GetRes("terrain/heightmap.png");
+  Assert(m_heightmapTerrain);
+
+  m_diffuseTerrain = (Texture*)TheResourceManager::Instance()->GetRes("terrain/diffuse.png");
+  Assert(m_diffuseTerrain);
+
+  m_detailTerrain = (Texture*)TheResourceManager::Instance()->GetRes("terrain/detail.png");
+  Assert(m_detailTerrain);
+
+  m_shaderTerrain = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/terrain");
+  m_shaderTerrain->Begin(); // so we find attrib var locations when we build tri list:
+  m_gridTerrain.Build(m_gridSizeTerrain, 20.0f);
+  m_shaderTerrain->End();
+
+  m_shaderWater = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/water1");
+  m_shaderWater->Begin(); // so we find attrib var locations when we build tri list:
+  m_gridWater.Build(m_gridSizeWater, 20.0f, Water1HeightFunc);
   
   m_skybox = (ObjMesh*)TheResourceManager::Instance()->GetRes("skybox/skybox.obj");
   Assert(m_skybox);

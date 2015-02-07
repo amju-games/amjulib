@@ -62,19 +62,19 @@ void GSTerrain::DrawScene()
   // Or UseThisTexture() has tex unit ID ?
   // TODO It's a property of the shader, no?
   // More like a property of the material, which we don't currently have...
-  /*
-  glActiveTexture(GL_TEXTURE0);
+  
+//  glActiveTexture(GL_TEXTURE0);
   m_shader->Set("heightSampler", (AmjuGL::TextureHandle)0);
-  m_heightmap->UseThisTexture();
+  m_heightmap->UseThisTexture(0);
 
-  glActiveTexture(GL_TEXTURE1);
+//  glActiveTexture(GL_TEXTURE1);
   m_shader->Set("diffuseSampler", (AmjuGL::TextureHandle)1);
-  m_diffuse->UseThisTexture();
+  m_diffuse->UseThisTexture(1);
 
-  glActiveTexture(GL_TEXTURE2);
+//  glActiveTexture(GL_TEXTURE2);
   m_shader->Set("detailSampler", (AmjuGL::TextureHandle)2);
-  m_detail->UseThisTexture();
-  */
+  m_detail->UseThisTexture(2);
+  
 
   static float angle = 0;
   angle += TheTimer::Instance()->GetDt() * 4.0f;
@@ -101,6 +101,8 @@ void GSTerrain::DrawScene()
 
 void GSTerrain::OnActive()
 {
+  GSBase::OnActive();
+
   m_heightmap = (Texture*)TheResourceManager::Instance()->GetRes("terrain/heightmap.png");
   Assert(m_heightmap);
 
