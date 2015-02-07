@@ -80,6 +80,8 @@ protected:
 
   Camera m_camera;
 
+  Vec3f m_vel;
+
   static bool s_isStereo;
   static bool s_enableBarrel;
   static bool s_mouseLook;
