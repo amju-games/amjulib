@@ -259,7 +259,7 @@ void GSBase::OnActive()
     m_guiText[i].SetJust(GuiText::AMJU_JUST_CENTRE);
   }
   m_guiText[0].SetSize(Vec2f(2, 0.1f));
-  m_guiText[0].SetText(m_name + " " + KEYS);
+  m_guiText[0].SetText(m_name);
   m_guiText[1].SetIsMulti(true);
   m_guiText[1].SetSize(Vec2f(2, 0.21f));
   m_guiText[1].SetFontSize(0.7f);
@@ -268,23 +268,145 @@ void GSBase::OnActive()
 
 bool GSBase::OnKeyEvent(const KeyEvent& ke)
 {
-  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'c')
+  const float WALK_SPEED = 2.0f;
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key =='w')
+  {
+std::cout << "UP key event\n";
+    if (ke.keyDown)
+    {
+      m_vel = m_camera.m_dir * WALK_SPEED;
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 's')
+  {
+    if (ke.keyDown)
+    {
+      m_vel = m_camera.m_dir * -WALK_SPEED;
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'd')
+  {
+    if (ke.keyDown)
+    {
+      Vec3f cameraright = CrossProduct(m_camera.m_dir, m_camera.m_up);
+      m_vel = cameraright * WALK_SPEED;
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'a')
+  {
+    if (ke.keyDown)
+    {
+      Vec3f cameraright = CrossProduct(m_camera.m_dir, m_camera.m_up);
+      m_vel = cameraright * -WALK_SPEED;
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+    else
+    {
+      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
+std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+    }
+  }
+
+  // Focal distance
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'z' && ke.keyDown)
+  {
+    m_camera.m_fo += 2.0f; // ?
+    std::cout << "fo: " << m_camera.m_fo << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'x' && ke.keyDown)
+  {
+    m_camera.m_fo -= 2.0f; // ?
+    std::cout << "fo: " << m_camera.m_fo << "\n";
+  }
+
+  // Eye sep
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'c' && ke.keyDown)
+  {
+    m_camera.m_eyeSep += 0.01f; // ?
+    std::cout << "eyesep: " << m_camera.m_eyeSep << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'v' && ke.keyDown)
+  {
+    m_camera.m_eyeSep -= 0.01f; // ?
+    if (m_camera.m_eyeSep < 0)
+    {
+        m_camera.m_eyeSep = 0;
+    }
+    std::cout << "eyesep: " << m_camera.m_eyeSep << "\n";
+  }
+
+  // TODO Make syummetical a settable member of StereoDraw
+/*
+  // Symmetrical/asymmetrical
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 's' && ke.keyDown)
+  {
+      symmetrical = !symmetrical;
+      std::cout << "Now using " << (symmetrical ? "symmetrical" : "asymmetrical") << " frusta.\n";
+  }
+*/
+
+  // VIEWPORT OFFSET
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'b' && ke.keyDown)
+  {
+      m_camera.m_vpXOffset += 0.01f;
+      std::cout << "VP X offset: " << m_camera.m_vpXOffset << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'n' && ke.keyDown)
+  {
+      m_camera.m_vpXOffset -= 0.01f;
+      std::cout << "VP X offset: " << m_camera.m_vpXOffset << "\n";
+  }
+
+  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'k' && ke.keyDown)
+  {
+      m_camera.m_vpYOffset += 0.01f;
+      std::cout << "VP Y offset: " << m_camera.m_vpYOffset << "\n";
+  }
+  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'l' && ke.keyDown)
+  {
+      m_camera.m_vpYOffset -= 0.01f;
+      std::cout << "VP Y offset: " << m_camera.m_vpYOffset << "\n";
+  }
+ 
+  if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'g')
   {
     std::cout << "Choose scene menu\n";
 
     //DoModalDialog(&chooser);
     m_showChoose = true;
   }
-  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'r')
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'h')
   {
     std::cout << "Reset!\n";
     OnActive();
   }
-  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'p')
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'j')
   {
     m_paused = !m_paused;
   }
-  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 's')
+  else if (ke.keyDown && ke.keyType == AMJU_KEY_CHAR && ke.key == 'k')
   {
     m_time = m_maxTime;
   }
@@ -423,6 +545,8 @@ std::cout << "Found OVR, setting stereo on.\n";
 
   float dt = TheTimer::Instance()->GetDt();
   m_time += dt;
+
+  m_camera.m_pos += m_vel * dt;
 
   /* Now we have a menu we don't need to do this
      But it could be good for a "play all" option
