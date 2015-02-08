@@ -10,6 +10,11 @@ GuiCheck::GuiCheck() : m_checkedTex(nullptr), m_uncheckedTex(nullptr), m_changeV
 
 void GuiCheck::ExecuteCommand() 
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   GuiButton::ExecuteCommand();
 
   m_value = !m_value;
