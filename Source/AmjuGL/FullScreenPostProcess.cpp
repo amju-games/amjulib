@@ -12,7 +12,7 @@ void FullScreenPostProcess::DrawFullScreenQuad()
 {
   Assert(m_triList);
   Assert(m_postProcessShader);
-  Assert(m_renderToTexture);
+  //Assert(m_renderToTexture);
   
   // Use post-process shader
   if (m_postProcessShader)
