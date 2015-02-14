@@ -13,6 +13,7 @@
 #include "GSTerrain.h"
 #include "GSMandel.h"
 #include "GSLighting.h"
+#include "GSRayTrace.h"
 #include "GSWater1.h"
 #include "StateList.h"
 
@@ -21,7 +22,7 @@ namespace Amju
 GSInitialise::GSInitialise()
 {
   // TODO Serialise last choice in config
-  m_nextState = TheGSWater1::Instance();
+  m_nextState = TheGSRayTrace::Instance();
 //  m_maxTime = 0.1f;
 }
 
@@ -29,6 +30,7 @@ void GSInitialise::OnActive()
 {
   GSBase::OnActive();
 
+  AddState("Ray Trace", TheGSRayTrace::Instance());
   AddState("Fire Temple", TheGSFireTemple::Instance());
   AddState("Water1", TheGSWater1::Instance());
   AddState("Anim", TheGSAnimTest::Instance());

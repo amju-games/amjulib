@@ -31,13 +31,13 @@ class $class : public GSBase\
   friend class Singleton<$class>;\
 \
 public:\
-  virtual void Update();\
-  virtual void DrawScene();\
-  virtual void Draw2d();\
-  virtual void OnActive();\
+  virtual void Update() override;\
+  virtual void DrawScene() override;\
+  virtual void CreateTweakMenu() override;
+  virtual void OnActive() override;\
 \
-  virtual bool OnCursorEvent(const CursorEvent&);\
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);\
+  virtual bool OnCursorEvent(const CursorEvent&) override;\
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&) override;\
 };\
 typedef Singleton<$class> The$class;\
 } // namespace\
@@ -67,12 +67,14 @@ void " . $scope . "DrawScene()\
 \
 }\
 \
-void " . $scope . "Draw2d()\
+void " . $scope . "CreateTweakMenu()\
 {\
+  GSBase::CreateTweakMenu();\
 }\
 \
 void " . $scope . "OnActive()\
 {\
+  GSBase::OnActive();\
 }\
 \
 bool " . $scope . "OnCursorEvent(const CursorEvent& ce)\

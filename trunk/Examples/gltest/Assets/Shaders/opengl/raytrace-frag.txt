@@ -1,0 +1,12 @@
+// raytrace-frag.txt
+
+varying vec2 vUv;
+
+void main()
+{
+    float x = vUv.x;
+    float y = vUv.y;
+
+    gl_FragColor = vec4(x, y, 0, 1); 
+}
+
