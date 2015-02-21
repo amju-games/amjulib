@@ -49,6 +49,9 @@ public:
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf);
 
+  // TODO can do this in ES?
+  virtual void UpdateTexture(const AmjuGL::TextureHandle th, int x, int y, int w, int h, const uint8* data);
+ 
 protected:
   friend class GLShader;
   // True if shaders are supported on this machine

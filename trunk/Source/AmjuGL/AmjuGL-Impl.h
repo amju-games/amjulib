@@ -98,6 +98,8 @@ public:
     int height, 
     uint8* data) = 0;
 
+  virtual void UpdateTexture(const AmjuGL::TextureHandle th, int x, int y, int w, int h, const uint8* data) = 0;
+
   // Call to use a Texture once set up
   virtual void UseTexture(AmjuGL::TextureHandle, int textureUnitId) = 0;
 
