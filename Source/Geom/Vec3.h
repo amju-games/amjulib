@@ -69,12 +69,14 @@ struct Vec3
 
   void Normalise()
   {
-    AssertValid();
-    float n = 1.0f / sqrt(SqLen());
-    x *= n;
-    y *= n;
-    z *= n;
-    AssertValid();
+      AssertValid();
+      float s = SqLen();
+      if (s == 0) return;
+      float n = 1.0f / sqrt(s);
+      x *= n;
+      y *= n;
+      z *= n;
+      AssertValid();
   }
 };
 
