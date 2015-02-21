@@ -1,0 +1,1674 @@
+newmtl model:material_1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_7
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x02019770_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_9
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_11
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x02018F70_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_13
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x02018D70_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_15
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x02019F70_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_17
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_19
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_21
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_23
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_25
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_27
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_29
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_31
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x02018B70_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_33
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_35
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_37
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_39
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0201A170_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_41
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_43
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_45
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_47
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_49
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_51
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_53
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_55
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_57
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_59
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_61
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_63
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_65
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_67
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_69
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_71
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_73
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_75
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_77
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_79
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_81
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_83
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_85
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_87
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_89
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_91
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_93
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_95
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_97
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_99
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_101
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_103
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_105
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_107
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_109
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_111
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_113
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_115
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_117
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_119
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_121
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_123
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_125
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_127
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_129
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_131
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_133
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_135
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_137
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_139
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_141
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_143
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_145
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_147
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_149
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_151
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_153
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_155
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_157
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_159
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_161
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_163
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_165
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_167
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_169
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_171
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_173
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_175
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_177
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_179
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_181
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_183
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_185
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_187
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_189
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_191
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_193
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_195
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_197
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_199
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_201
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_203
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_205
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_207
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_209
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_211
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_213
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_215
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_217
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_219
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_221
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_223
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_225
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03008570_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_227
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_229
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_231
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_233
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03009570_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_235
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_237
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_239
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_241
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_243
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_245
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_247
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_249
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_251
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_253
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_255
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_257
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_259
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_261
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_263
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_265
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_267
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_269
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_271
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_273
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_275
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_277
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_279
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_281
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_283
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_285
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_287
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_289
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_291
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_293
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_295
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_297
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_299
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_301
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_303
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_305
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_307
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_309
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_311
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_313
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_315
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_317
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_319
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_321
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_323
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_325
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_327
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_329
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_331
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_333
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_335
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_337
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_339
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_341
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_343
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_345
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_347
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_349
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_351
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_353
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_355
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_357
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_359
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_361
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_363
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_365
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_367
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_369
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00
+newmtl model:material_371
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+Ni 1.00
+Ks 0.30 0.30 0.30
+Ns 1.00

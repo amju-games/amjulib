@@ -220,10 +220,8 @@ void GSBase::OnActive()
 
   m_chooser = dynamic_cast<GuiDialog*>(LoadGui("gui-choose-dialog.txt").GetPtr());
   Assert(m_chooser);
-//  chooser.SetGuiFilename("gui-choose-dialog.txt");
   m_chooser->SetTitle("Choose scene");
   Populate(m_chooser);
-//  chooser.SetFinishCallback(OnChooserFinished);
   GuiElement* elem = m_chooser->GetElementByName("ok-button");
   Assert(elem);
   elem->SetCommand(OnChooseDlgOk);
