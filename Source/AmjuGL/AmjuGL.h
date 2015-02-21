@@ -234,6 +234,9 @@ public:
     int height, 
     uint8* data);
 
+  // Update rectangular region of an existing texture, e.g. glTexSubImage2D in OpenGL.
+  static void UpdateTexture(const TextureHandle th, int x, int y, int w, int h, const uint8* data);
+
   // Call to use a Texture once set up
   static void UseTexture(TextureHandle th, int textureUnitId = 0);
 

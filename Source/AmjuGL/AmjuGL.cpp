@@ -710,6 +710,13 @@ void AmjuGL::SetTexture(
   impl->SetTexture(th, tt, d, width, height, data);
 }
 
+void AmjuGL::UpdateTexture(const TextureHandle th, int x, int y, int w, int h, const uint8* data)
+{
+  AMJU_CALL_STACK;
+
+  impl->UpdateTexture(th, x, y, w, h, data);
+}
+
 void AmjuGL::UseTexture(TextureHandle t, int textureUnitId)
 {
   AMJU_CALL_STACK;

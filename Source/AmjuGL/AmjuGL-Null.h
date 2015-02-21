@@ -51,6 +51,7 @@ public:
   { 
     *th = 1; // Give texture handle a valid value, it is checked
   }
+  virtual void UpdateTexture(const TextureHandle th, int x, int y, int w, int h, const uint8* data) {}
   virtual void UseTexture(AmjuGL::TextureHandle, int) {}
   virtual void SetTextureType(AmjuGL::TextureType) {}
   virtual void SetTextureMode(AmjuGL::TextureMode) {}
