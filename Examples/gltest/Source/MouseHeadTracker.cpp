@@ -3,8 +3,8 @@
 
 namespace Amju
 {
-  static const float CONVERT_MOUSE_DX_TO_RADIANS = 0.5f;
-  static const float CONVERT_MOUSE_DY_TO_RADIANS = 0.5f;
+  static const float CONVERT_MOUSE_DX_TO_RADIANS = 1.0f;
+  static const float CONVERT_MOUSE_DY_TO_RADIANS = 1.0f;
 
   bool MouseHeadTracker::Init()
   {
@@ -28,9 +28,9 @@ namespace Amju
   {
     const Vec3f Y_AXIS(0, 1, 0);
     const Vec3f X_AXIS(1, 0, 0);
-    Quaternion xRot(Y_AXIS, (float)ce.dx * CONVERT_MOUSE_DX_TO_RADIANS);
-    Quaternion yRot(X_AXIS, (float)ce.dy * CONVERT_MOUSE_DY_TO_RADIANS);
-    m_quat = xRot * yRot * m_quat;
+    Quaternion xRot(Y_AXIS, (float)ce.dx * -CONVERT_MOUSE_DX_TO_RADIANS);
+    Quaternion yRot(X_AXIS, (float)ce.dy *  CONVERT_MOUSE_DY_TO_RADIANS);
+    m_quat = xRot * m_quat;
 
     return false; // don't consume event
   }

@@ -28,11 +28,30 @@ void GSFireTemple::Update()
 
   float dt = TheTimer::Instance()->GetDt();
   m_pos += m_vel * dt;
+
 }
 
 void GSFireTemple::DrawScene()
 {
   DrawHelp(); 
+
+  float dt = TheTimer::Instance()->GetDt();
+
+  static float t = 0;
+  if (!m_paused)
+  {
+      t += dt;
+  }
+  Vec3f pos(cos(t), 1, sin(t));
+
+  AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::DrawLighting(
+      AmjuGL::LightColour(0, 0, 0),
+      AmjuGL::LightColour(0.2f, 0.2f, 0.2f), // Ambient light colour
+      AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
+      AmjuGL::LightColour(1, 1, 1),
+      AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
+
   m_mesh->Draw();
 }
 
@@ -42,120 +61,7 @@ bool GSFireTemple::OnKeyEvent(const KeyEvent& ke)
   {
     return true;
   }
-
-/*
-  const float WALK_SPEED = 2.0f;
-
-  if (ke.keyType == AMJU_KEY_UP)
-  {
-    if (ke.keyDown)
-    {
-      m_vel = m_viewDir * WALK_SPEED;
-    }
-    else
-    {
-      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-    }
-  }
-
-  if (ke.keyType == AMJU_KEY_DOWN)
-  {
-    if (ke.keyDown)
-    {
-      m_vel = m_viewDir * -WALK_SPEED;
-    }
-    else
-    {
-      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-    }
-  }
-
-  if (ke.keyType == AMJU_KEY_RIGHT)
-  {
-    if (ke.keyDown)
-    {
-      Vec3f cameraright = CrossProduct(m_viewDir, m_upDir);
-      m_vel = cameraright * WALK_SPEED;
-    }
-    else
-    {
-      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-    }
-  }
-
-  if (ke.keyType == AMJU_KEY_LEFT)
-  {
-    if (ke.keyDown)
-    {
-      Vec3f cameraright = CrossProduct(m_viewDir, m_upDir);
-      m_vel = cameraright * -WALK_SPEED;
-    }
-    else
-    {
-      m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-    }
-  }
-
-  // Focal distance
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'a' && ke.keyDown)
-  {
-    theCamera.m_fo += 2.0f; // ?
-    std::cout << "fo: " << theCamera.m_fo << "\n";
-  }
-  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'd' && ke.keyDown)
-  {
-    theCamera.m_fo -= 2.0f; // ?
-    std::cout << "fo: " << theCamera.m_fo << "\n";
-  }
-
-  // Eye sep
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'z' && ke.keyDown)
-  {
-    theCamera.m_eyeSep += 0.01f; // ?
-    std::cout << "eyesep: " << theCamera.m_eyeSep << "\n";
-  }
-  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'c' && ke.keyDown)
-  {
-    theCamera.m_eyeSep -= 0.01f; // ?
-    if (theCamera.m_eyeSep < 0)
-    {
-        theCamera.m_eyeSep = 0;
-    }
-    std::cout << "eyesep: " << theCamera.m_eyeSep << "\n";
-  }
-
-  // Symmetrical/asymmetrical
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 's' && ke.keyDown)
-  {
-      symmetrical = !symmetrical;
-      std::cout << "Now using " << (symmetrical ? "symmetrical" : "asymmetrical") << " frusta.\n";
-  }
-
-  // VIEWPORT OFFSET
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'o' && ke.keyDown)
-  {
-      vpXOffset += 0.01f;
-      std::cout << "VP X offset: " << vpXOffset << "\n";
-  }
-  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'p' && ke.keyDown)
-  {
-      vpXOffset -= 0.01f;
-      std::cout << "VP X offset: " << vpXOffset << "\n";
-  }
-
-  if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'k' && ke.keyDown)
-  {
-      vpYOffset += 0.01f;
-      std::cout << "VP Y offset: " << vpYOffset << "\n";
-  }
-  else if (ke.keyType == AMJU_KEY_CHAR && ke.key == 'l' && ke.keyDown)
-  {
-      vpYOffset -= 0.01f;
-      std::cout << "VP Y offset: " << vpYOffset << "\n";
-  }
-*/
-
-  return true;
+  return false;
 }
 
 void GSFireTemple::OnActive()

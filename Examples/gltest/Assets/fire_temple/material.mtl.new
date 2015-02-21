@@ -6,14 +6,14 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_Kd texture_0x03003978_fmt0x40.png
 newmtl material_2
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+map_Kd texture_0x030029D8_fmt0x10.png
 #horz. mirror
 
 newmtl material_3
@@ -22,7 +22,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_4
@@ -31,14 +31,14 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x02019770_fmt0x10.png
+map_Kd texture_0x02019770_fmt0x10.png
 newmtl material_5
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_Kd texture_0x03004338_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_6
@@ -47,28 +47,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x02018F70_fmt0x10.png
+map_Kd texture_0x02018F70_fmt0x10.png
 newmtl material_7
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x02018D70_fmt0x40.png
+map_Kd texture_0x02018D70_fmt0x40.png
 newmtl material_8
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x02019F70_fmt0x40.png
+map_Kd texture_0x02019F70_fmt0x40.png
 newmtl material_9
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+map_Kd texture_0x03004EC0_fmt0x40.png
 #horz. mirror
 
 newmtl material_10
@@ -77,28 +77,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_11
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_12
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_Kd texture_0x03003BA0_fmt0x10.png
 newmtl material_13
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_Kd texture_0x03005BA0_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_14
@@ -107,35 +107,35 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_Kd texture_0x030039A0_fmt0x10.png
 newmtl material_15
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+map_Kd texture_0x03004BA0_fmt0x10.png
 newmtl material_16
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x02018B70_fmt0x40.png
+map_Kd texture_0x02018B70_fmt0x40.png
 newmtl material_17
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_Kd texture_0x030043A0_fmt0x10.png
 newmtl material_18
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+map_Kd texture_0x03004EC0_fmt0x40.png
 #horz. mirror
 
 newmtl material_19
@@ -144,84 +144,84 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_20
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_Kd texture_0x03002778_fmt0x10.png
 newmtl material_21
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_22
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0201A170_fmt0x10.png
+map_Kd texture_0x0201A170_fmt0x10.png
 newmtl material_23
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_24
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_25
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_26
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+map_Kd texture_0x0300CDC8_fmt0x10.png
 newmtl material_27
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_Kd texture_0x03003978_fmt0x40.png
 newmtl material_28
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_29
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+map_Kd texture_0x0300ABC8_fmt0x10.png
 newmtl material_30
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_31
@@ -230,49 +230,49 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_32
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_33
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+map_Kd texture_0x0300BBC8_fmt0x10.png
 newmtl material_34
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_35
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_36
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_Kd texture_0x03009E30_fmt0x40.png
 newmtl material_37
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_38
@@ -281,14 +281,14 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_39
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_40
@@ -297,7 +297,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_41
@@ -306,21 +306,21 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_42
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_43
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_44
@@ -329,77 +329,77 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_Kd texture_0x03003BA0_fmt0x10.png
 newmtl material_45
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_46
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_47
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_48
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_49
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_50
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_51
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_52
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_53
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_Kd texture_0x03009E30_fmt0x40.png
 newmtl material_54
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_55
@@ -408,7 +408,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_56
@@ -417,28 +417,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_Kd texture_0x03003BA0_fmt0x10.png
 newmtl material_57
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+map_Kd texture_0x03004BA0_fmt0x10.png
 newmtl material_58
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_Kd texture_0x030039A0_fmt0x10.png
 newmtl material_59
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_Kd texture_0x03005BA0_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_60
@@ -447,28 +447,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_61
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_62
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_Kd texture_0x030043A0_fmt0x10.png
 newmtl material_63
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_64
@@ -477,7 +477,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+map_Kd texture_0x030029D8_fmt0x10.png
 #horz. mirror
 
 newmtl material_65
@@ -486,56 +486,56 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_66
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_67
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_Kd texture_0x030043A0_fmt0x10.png
 newmtl material_68
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_69
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_70
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_71
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_72
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+map_Kd texture_0x03008AB8_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_73
@@ -544,28 +544,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_Kd texture_0x03003BA0_fmt0x10.png
 newmtl material_74
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_Kd texture_0x03005BA0_fmt0x10.png
 newmtl material_75
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_Kd texture_0x030039A0_fmt0x10.png
 newmtl material_76
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_Kd texture_0x03005BA0_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_77
@@ -574,119 +574,119 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_78
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_79
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_80
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_81
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_82
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_83
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_84
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_85
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_86
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_87
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_88
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_Kd texture_0x03003978_fmt0x40.png
 newmtl material_89
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_90
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+map_Kd texture_0x0300BBC8_fmt0x10.png
 newmtl material_91
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_92
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+map_Kd texture_0x0300ABC8_fmt0x10.png
 newmtl material_93
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_94
@@ -695,42 +695,42 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+map_Kd texture_0x0300CDC8_fmt0x10.png
 newmtl material_95
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_96
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_97
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+map_Kd texture_0x03008370_fmt0x40.png
 newmtl material_98
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_Kd texture_0x03009E30_fmt0x40.png
 newmtl material_99
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_Kd texture_0x03004338_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_100
@@ -739,7 +739,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_101
@@ -748,28 +748,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_102
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_103
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_104
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_105
@@ -778,49 +778,49 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_106
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_107
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_108
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
 newmtl material_109
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_110
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_111
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+map_Kd texture_0x03008AB8_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_112
@@ -829,21 +829,21 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_113
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_114
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_115
@@ -852,77 +852,77 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_116
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_117
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_118
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_119
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_Kd texture_0x03009E30_fmt0x40.png
 newmtl material_120
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03008570_fmt0x10.png
+map_Kd texture_0x03008570_fmt0x10.png
 newmtl material_121
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_Kd texture_0x030043A0_fmt0x10.png
 newmtl material_122
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_Kd texture_0x030033B8_fmt0x40.png
 newmtl material_123
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+map_Kd texture_0x03008370_fmt0x40.png
 newmtl material_124
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03009570_fmt0x10.png
+map_Kd texture_0x03009570_fmt0x10.png
 newmtl material_125
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_126
@@ -931,91 +931,91 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_127
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_128
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_129
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_130
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_131
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_132
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_133
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_134
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_135
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_136
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_137
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_138
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_139
@@ -1024,14 +1024,14 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_Kd texture_0x03002778_fmt0x10.png
 newmtl material_140
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_141
@@ -1040,21 +1040,21 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_Kd texture_0x03003978_fmt0x40.png
 newmtl material_142
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_Kd texture_0x03002778_fmt0x10.png
 newmtl material_143
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_144
@@ -1063,21 +1063,21 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_145
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_Kd texture_0x03003978_fmt0x40.png
 newmtl material_146
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_147
@@ -1086,98 +1086,98 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_148
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_149
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_150
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_151
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_152
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_153
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_154
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_155
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005898_fmt0x10.png
+map_Kd texture_0x03005898_fmt0x10.png
 newmtl material_156
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_157
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_Kd texture_0x03003BA0_fmt0x10.png
 newmtl material_158
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_Kd texture_0x03001BD8_fmt0x10.png
 newmtl material_159
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_Kd texture_0x03001DD8_fmt0x10.png
 newmtl material_160
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_161
@@ -1186,28 +1186,28 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_Kd texture_0x030043A0_fmt0x10.png
 newmtl material_162
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_Kd texture_0x03002778_fmt0x10.png
 newmtl material_163
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_164
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_Kd texture_0x03005BA0_fmt0x10.png
 #horz. mirror/vert. mirror
 
 newmtl material_165
@@ -1216,133 +1216,133 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_166
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_167
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_168
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_169
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_170
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_171
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_172
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_173
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_174
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_175
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_176
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_177
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_178
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_179
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_180
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_181
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_182
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_Kd texture_0x03000DC8_fmt0x40.png
 newmtl material_183
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_Kd texture_0x03001A58_fmt0x40.png
 #horz. mirror
 
 newmtl material_184
@@ -1351,14 +1351,14 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_185
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_Kd texture_0x03004338_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_186
@@ -1367,7 +1367,7 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_187
@@ -1376,77 +1376,77 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_Kd texture_0x030052D8_fmt0x10.png
 newmtl material_188
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_Kd texture_0x030062D8_fmt0x10.png
 newmtl material_189
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_Kd texture_0x03005AD8_fmt0x10.png
 newmtl material_190
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_Kd texture_0x03004AD8_fmt0x10.png
 newmtl material_191
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_Kd texture_0x030042D8_fmt0x10.png
 newmtl material_192
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_Kd texture_0x03002AD8_fmt0x10.png
 newmtl material_193
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_Kd texture_0x030032D8_fmt0x10.png
 newmtl material_194
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_Kd texture_0x03003AD8_fmt0x10.png
 newmtl material_195
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03004D38_fmt0x10.png
+map_Kd texture_0x03004D38_fmt0x10.png
 newmtl material_196
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03005898_fmt0x10.png
+map_Kd texture_0x03005898_fmt0x10.png
 newmtl material_197
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_Kd texture_0x030022D8_fmt0x40.png
 #horz. mirror/vert. mirror
 
 newmtl material_198
@@ -1455,11 +1455,11 @@ Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_Kd texture_0x03001ED8_fmt0x40.png
 newmtl material_199
 Ns 1.0
 Ns 1.0
 Ka 0.2000 0.2000 0.2000
 Kd 0.8000 0.8000 0.8000
 illum 1
-map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_Kd texture_0x030027B8_fmt0x10.png
