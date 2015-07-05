@@ -64,16 +64,19 @@ GSVr::GSVr()
 void GSVr::Update()
 {
 #ifdef AMJU_USE_OVR
-  // Get Oculus Rift rotation info
-  // TODO Pass absolute time as second param?
-  // j.c.
-  ovrSensorState ss = ovrHmd_GetSensorState(hmd, 0);
-  const ovrPoseStatef& ps = ss.Recorded; // Predicted;
-  const ovrPosef& pose = ps.Pose;
-  const ovrQuatf& oquat = pose.Orientation;
-  Amju::Quaternion q(oquat.w, oquat.x, oquat.y, oquat.z);
-  m_viewDir = q.RotateVec(ORIG_VIEW_DIR);
-  m_upDir = q.RotateVec(ORIG_UP_DIR);
+  if (hmd)
+  {
+    // Get Oculus Rift rotation info
+    // TODO Pass absolute time as second param?
+    // j.c.
+    ovrSensorState ss = ovrHmd_GetSensorState(hmd, 0);
+    const ovrPoseStatef& ps = ss.Recorded; // Predicted;
+    const ovrPosef& pose = ps.Pose;
+    const ovrQuatf& oquat = pose.Orientation;
+    Amju::Quaternion q(oquat.w, oquat.x, oquat.y, oquat.z);
+    m_viewDir = q.RotateVec(ORIG_VIEW_DIR);
+    m_upDir = q.RotateVec(ORIG_UP_DIR);
+  }
 #endif
 
   float dt = TheTimer::Instance()->GetDt();
@@ -105,9 +108,9 @@ void GSVr::Draw()
   theCamera.m_dir = m_viewDir;
   theCamera.m_up = m_upDir;
 
-  //m_barrel.Draw();
+  m_barrel.Draw();
 
-  DrawStereo();
+  //DrawStereo();
 
   AmjuGL::UseShader(0);
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
