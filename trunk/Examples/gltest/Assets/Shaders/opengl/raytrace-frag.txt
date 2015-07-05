@@ -2,10 +2,23 @@
 
 varying vec2 vUv;
 
+struct ray
+{
+  vec3 origin;
+  vec3 direction;
+  float length;
+};
+
 void main()
 {
-    float x = vUv.x;
-    float y = vUv.y;
+//    float x = vUv.x;
+//    float y = vUv.y;
+
+    float x = gl_FragCoord.x / 640.0;
+    float y = gl_FragCoord.y / 480.0;
+
+    // Test if ray from (x, y) intersects sphere
+
 
     gl_FragColor = vec4(x, y, 0, 1); 
 }
