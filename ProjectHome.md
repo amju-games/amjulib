@@ -1,0 +1,1 @@
+A cross platform C++ library for writing 3D games. Currently supports Windows, Mac OS X, iPhone/iPad, and Wii homebrew.
