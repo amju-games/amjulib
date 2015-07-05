@@ -1,4 +1,5 @@
 #include <AmjuGL.h>
+#include <Billboard.h>
 #include <Camera.h>
 #include <DegRad.h>
 #include <GLUtils.h>
@@ -11,6 +12,7 @@
 #include <Timer.h>
 #include <ReportError.h>
 #include <StereoDraw.h>
+#include "FireTexture.h"
 #include "GSFireTemple.h"
 
 namespace Amju
@@ -35,6 +37,18 @@ void GSFireTemple::DrawScene()
 {
   DrawHelp(); 
 
+  static FireTexture ft;
+  static Billboard bb;
+  static bool first = true;
+  if (first)
+  {
+    first = false;
+    ft.Init();
+
+    bb.SetTexture(ft.GetTexture());
+    bb.SetSize(10.0f);
+  }
+
   float dt = TheTimer::Instance()->GetDt();
 
   static float t = 0;
@@ -53,6 +67,11 @@ void GSFireTemple::DrawScene()
       AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
   m_mesh->Draw();
+
+  ft.Update();
+
+  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+  bb.Draw();
 }
 
 bool GSFireTemple::OnKeyEvent(const KeyEvent& ke)
