@@ -5,7 +5,7 @@ endif
 APP		:=	rbtest
 
 BUILD		:=	../../../../Build/$(APP)/Mac
-LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
+LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.5-macosx
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
