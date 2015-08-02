@@ -5,6 +5,8 @@ namespace Amju
 {
 GSRayTrace::GSRayTrace()
 {
+  m_name = "GPU Ray tracing";
+  m_description = "Ray tracing in fragment shader.";
   //m_nextState=...
 }
 

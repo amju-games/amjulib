@@ -9,17 +9,135 @@ struct ray
   float length;
 };
 
+struct sphere
+{
+  vec3 centre;
+  float radius;
+};
+
+
+// TODO How to pass distance along ray back to the caller, when we are using
+//  ret val for yes/no
+bool rayIntersectsSphere(in ray r, in sphere s, out float distance)
+{
+    vec3 p = r.origin;
+    vec3 c = s.centre;
+    vec3 vpc = c - p;
+
+
+    float r2 = s.radius * s.radius;
+
+    if (dot(vpc, r.direction) < 0.0) // when the sphere is behind the origin p
+    {
+        // note that this case may be dismissed if it is
+        // considered that p is outside the sphere
+        if (dot(vpc, vpc) > r2)
+        {
+            // there is no intersection
+            return false;
+        }
+        else
+        {
+            // p is on or in the sphere
+            distance = 0.0;
+            return true;
+        }
+    }
+    else // center of sphere projects on the ray
+    {
+        // pc = projection of c on the line
+        vec3 pc = p + dot(r.direction, c - p) * r.direction;
+
+        vec3 c_minus_pc = c - pc;
+        if (dot(c_minus_pc, c_minus_pc) > r2)
+        {
+            // there is no intersection
+            return false;
+        }
+        else
+        {
+            // distance from pc to i1
+            // dist = sqrt(s.radius ^ 2 - | pc - c | ^ 2)
+            vec3 pc_minus_c = pc - c;
+            float dist = sqrt(r2 - dot(pc_minus_c, pc_minus_c));
+
+            float di1 = 0.0;
+            if (dot(vpc, vpc) > r2) // origin is outside sphere
+            {
+                //di1 = | pc - p | -dist
+                di1 = length(pc - p) - dist;
+            }
+            else // origin is inside sphere
+            {
+                //di1 = | pc - p | +dist
+                di1 = length(pc - p) + dist;
+            }
+            //intersection = p + d * di1
+            distance = di1;
+            return true;
+        }
+    }
+    return true;
+} 
+
 void main()
 {
-//    float x = vUv.x;
-//    float y = vUv.y;
+    int NUM_SPHERES = 2;
+    sphere spheres[2]; 
+    
+    spheres[0].centre = vec3(0.25, 0.25, 10.0);
+    spheres[0].radius = 0.2;
+    spheres[1].centre = vec3(0.75, 0.75, 10.0);
+    spheres[1].radius = 0.2;
 
-    float x = gl_FragCoord.x / 640.0;
-    float y = gl_FragCoord.y / 480.0;
+    float x = vUv.x;
+    float y = vUv.y;
 
     // Test if ray from (x, y) intersects sphere
+    ray r;
+    r.origin = vec3(x, y, 0.0);
+    r.direction = vec3(0.0, 0.0, 1.0);
+    r.length = 1000.0;
 
+    float bestDist = 99999.9;
+    vec3 normal;
+    bool foundIntersection = false;
+    int sphereFound = 0;
+    for (int i = 0; i < NUM_SPHERES; i++)
+    {
+      float d = 0.0;
+      if (rayIntersectsSphere(r, spheres[i], d) && d < bestDist && d > 1.0)
+      {
+        foundIntersection = true;
+        sphereFound = i;
+        bestDist = d;
+        // Work out normal on sphere at intersection point
+        vec3 intersect = r.origin + r.direction * d;
+        normal = intersect - spheres[i].centre;
+      }
+    }
 
-    gl_FragColor = vec4(x, y, 0, 1); 
+    if (foundIntersection)
+    {
+      normalize(normal);
+      const vec3 ambient = vec3(0.3, 0.3, 0.3);
+
+      if (sphereFound == 0)
+      {
+        const vec3 lightdir = vec3(1, 1, -1);
+        normalize(lightdir);
+        float nDotL = max(0.0, dot(normal, lightdir));
+        gl_FragColor.rgb = vec3(nDotL, 0.0, 0.0) + ambient;
+      }
+      else
+      {
+        gl_FragColor.rgb = vec3(0.0, 0.0, 1.0) + ambient; 
+      }
+    }
+    else
+    {
+      gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); 
+    }
+    gl_FragColor.a = 1.0;
 }
 
