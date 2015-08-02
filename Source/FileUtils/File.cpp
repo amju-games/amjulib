@@ -423,24 +423,35 @@ bool File::GetDataLine(string* pResult, bool trim)
   AMJU_CALL_STACK;
 
   std::string str;
-  do 
+
+  if (trim)
+  {
+    do 
+    {
+      if (!GetLine(&str))
+      {
+        return false;
+      }
+      // Strip whitespace from beginning and end of the string.
+      if (trim)
+      {
+        Trim(&str);
+      }
+    } while (IsComment(str) && More());
+    
+    // Blank lines are skipped, so we need a special code for an empty string.
+    //  ($$$ is used for localised strings.)
+    if (str == "$$$empty")
+    {
+      str = "";
+    }
+  }
+  else
   {
     if (!GetLine(&str))
     {
       return false;
     }
-    // Strip whitespace from beginning and end of the string.
-    if (trim)
-    {
-      Trim(&str);
-    }
-  } while (IsComment(str) && More());
-    
-  // Blank lines are skipped, so we need a special code for an empty string.
-  //  ($$$ is used for localised strings.)
-  if (str == "$$$empty")
-  {
-    str = "";
   }
 
   *pResult = str;
