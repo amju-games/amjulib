@@ -275,6 +275,11 @@ bool GuiList::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   if (mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
+    // Stop scrolling, no?
+    GuiScroll* scroll = dynamic_cast<GuiScroll*>(GetParent());
+    Assert(scroll);
+    scroll->StopScrolling();
+
     // Check each item
     int selected = -1;
     for (unsigned int i = 0; i < m_children.size(); i++)

@@ -152,6 +152,11 @@ void GuiScroll::Update()
 {
 }
 
+void GuiScroll::StopScrolling()
+{
+  m_scrollVel = Vec2f(0, 0);
+}
+
 void GuiScroll::OnScrollVelEvent(const Vec2f& scrollVel)
 {
   m_scrollVel += scrollVel;
