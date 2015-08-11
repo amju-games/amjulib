@@ -130,11 +130,11 @@ std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
   
   float maxy = std::max(0.0f, child->GetSize().y - GetSize().y); // depends on size of child and how much space there is to display it
 
-std::cout << "Scroll: m_scrollPos.y: " << m_scrollPos.y << " Size.y: " << GetSize().y << " Child->Size.y: " << child->GetSize().y << " maxy=" << maxy << "\n";
+//std::cout << "Scroll: m_scrollPos.y: " << m_scrollPos.y << " Size.y: " << GetSize().y << " Child->Size.y: " << child->GetSize().y << " maxy=" << maxy << "\n";
 
   if (m_scrollPos.y > maxy)
   {
-std::cout << "Hit maxy (" << maxy << "), stopping.\n";
+std::cout << "Hit maxy (" << maxy << "), stopping. My height: " << GetSize().y << "  Child height: " << child->GetSize().y << "\n";
 
     m_scrollPos.y = maxy;
 #ifdef BOUNCE
