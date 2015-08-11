@@ -109,7 +109,8 @@ bool LoadFileWithIncludes(const std::string& path, const std::string& filename, 
   {
     if (StringContains(s, "#include"))
     {
-      const std::string includefilename = s.substr(9);
+      Strings strs = Split(s, ' ');
+      const std::string includefilename = strs.back();
 std::cout << "Including file \"" << includefilename << "\"\n";
       bool ok = LoadFileWithIncludes(path, includefilename, result);
       if (!ok)
