@@ -45,8 +45,15 @@ void GSFireTemple::DrawScene()
     first = false;
     ft.Init();
 
+    //Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("hand.png");
+
     bb.SetTexture(ft.GetTexture());
-    bb.SetSize(10.0f);
+    bb.SetSize(1.0f);
+    Vec3f pos(0, 8, 0);
+    Matrix m;
+    m.Translate(pos);
+    bb.SetLocalTransform(m);
+    bb.CombineTransform();
   }
 
   float dt = TheTimer::Instance()->GetDt();
