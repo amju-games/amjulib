@@ -65,7 +65,9 @@ bool GuiListBox::Load(File* f)
 //  GetScroll()->SetLocalPos(GetCombinedPos());
   GetScroll()->SetSize(GetSize()); // TODO do we need this ?
 //  GetList()->SetLocalPos(GetCombinedPos());
-  GetList()->SetSize(GetSize());
+
+  // Don't:
+  //  GetList()->SetSize(GetSize());
 
   return true;
 }
