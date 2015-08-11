@@ -64,10 +64,11 @@ void Billboard::Draw()
 
   AmjuGL::Vert verts[4] = 
   {
-    AmjuGL::Vert(v0.x, v0.y, v0.z,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(v1.x, v1.y, v1.z,   1, 1,   0, 1, 0),
-    AmjuGL::Vert(v2.x, v2.y, v2.z,   0, 1,   0, 1, 0),
-    AmjuGL::Vert(v3.x, v3.y, v3.z,   0, 0,   0, 1, 0)
+    // x, y, z, u, v, nx, ny, nz  
+    AmjuGL::Vert(v0.x, v0.y, v0.z,   1, 1,   0, 1, 0), 
+    AmjuGL::Vert(v1.x, v1.y, v1.z,   0, 1,   0, 1, 0),
+    AmjuGL::Vert(v2.x, v2.y, v2.z,   0, 0,   0, 1, 0),
+    AmjuGL::Vert(v3.x, v3.y, v3.z,   1, 0,   0, 1, 0)
   };
 
   AmjuGL::Tri* tri = &tris[0];
