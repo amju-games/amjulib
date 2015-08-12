@@ -2,6 +2,7 @@
 #define GS_RAYTRACE_H_INCLUDED
 
 #include <Singleton.h>
+#include <Texture.h>
 #include "GSBase.h"
 
 namespace Amju 
@@ -22,6 +23,7 @@ public:
 
 private:
   FullScreenPostProcess m_fspp;
+  Texture m_tex;
 };
 typedef Singleton<GSRayTrace> TheGSRayTrace;
 } // namespace
