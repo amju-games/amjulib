@@ -1,5 +1,11 @@
 // raytrace-frag.txt
 
+// Texture encoding scene description
+uniform sampler2D scene;
+
+const int NUM_ROWS = 8;
+const int NUM_PIXELS_PER_ROW = 8;
+
 varying vec2 vUv;
 
 // TODO Have a material type, embed in each of the geom types
@@ -148,7 +154,8 @@ bool rayIntersectsSphere(in ray r, in sphere s, out float distance)
     return true;
 } 
 
-void main()
+// For test/demo, draw scene comprised of hardcoded spheres
+void drawSphereScene(in ray r)
 {
     int NUM_SPHERES = 2;
     sphere spheres[2]; 
@@ -157,28 +164,6 @@ void main()
     spheres[0].radius = 0.2;
     spheres[1].centre = vec3(0.75, 0.75, 10.0);
     spheres[1].radius = 0.2;
-
-    tri t;
-    t.v[0] = vec3(0.1, 0.1, 1.0);
-    t.v[1] = vec3(0.3, 0.1, 1.0);
-    t.v[2] = vec3(0.1, 0.3, 1.0);
-
-    float x = vUv.x;
-    float y = vUv.y;
-
-    // Test if ray from (x, y) intersects sphere
-    ray r;
-    r.origin = vec3(x, y, 0.0);
-    r.direction = vec3(0.0, 0.0, 1.0);
-    r.length = 1000.0;
-
-    vec3 intersectionPoint;
-    float tResult;
-    if (rayIntersectsTri(r, t, intersectionPoint, tResult))
-    {
-      gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-      return;
-    }
 
     float bestDist = 99999.9;
     vec3 normal;
@@ -212,13 +197,84 @@ void main()
       }
       else
       {
-        gl_FragColor.rgb = vec3(0.0, 0.0, 1.0) + ambient; 
+        gl_FragColor.rgb = vec3(0.0, 0.0, 1.0) + ambient;
       }
     }
     else
     {
-      gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); 
+      gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
     }
+    gl_FragColor.a = 1.0;
+}
+
+void drawTriScene(in ray r)
+{
+    tri t;
+    t.v[0] = vec3(0.1, 0.1, 1.0);
+    t.v[1] = vec3(0.3, 0.1, 1.0);
+    t.v[2] = vec3(0.1, 0.3, 1.0);
+
+    vec3 intersectionPoint;
+    float tResult;
+    if (rayIntersectsTri(r, t, intersectionPoint, tResult))
+    {
+      gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+      return;
+    }
+
+}
+
+void drawTextureScene(in ray r)
+{
+    // Texture rows are meshes. Each row encodes triangle data
+    float du = 1.0 / float(NUM_PIXELS_PER_ROW);
+    float dv = 1.0 / float(NUM_ROWS);
+
+    float v = 0.99;
+    for (int row = 0; row < 1; row++)
+    {
+        float u = 0.001;
+        for (int col = 0; col < 1; col++)
+        {
+            // Get tri: 3 texels
+            vec4 v0 = texture2D(scene, vec2(u, v));
+            u += du;
+            vec4 v1 = texture2D(scene, vec2(u, v));
+            u += du;
+            vec4 v2 = texture2D(scene, vec2(u, v));
+            u += du;
+            tri t;
+            t.v[0] = v0.xyz;
+            t.v[1] = v1.xyz;
+            t.v[2] = v2.xyz;
+           
+            vec3 intersectionPoint;
+            float tResult;
+             
+            if (rayIntersectsTri(r, t, intersectionPoint, tResult))
+            {
+                gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+                return;
+            }
+        }
+    }
+    gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+}
+
+void main()
+{
+    float x = vUv.x;
+    float y = vUv.y;
+
+    ray r;
+    r.origin = vec3(x, y, 0.0);
+    r.direction = vec3(0.0, 0.0, 1.0);
+    r.length = 1000.0;
+
+    //drawSphereScene(r);
+//    drawTextureScene(r);
+
+    gl_FragColor = texture2D(scene, vec2(x, y));
     gl_FragColor.a = 1.0;
 }
 
