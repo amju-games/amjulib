@@ -12,7 +12,7 @@
 #include <StringUtils.h>
 #include <AmjuFinal.h>
 
-#define SHADER_DEBUG
+//#define SHADER_DEBUG
 
 namespace Amju
 {
@@ -210,9 +210,9 @@ std::cout << "Set shader source\n";
     glGetShaderInfoLog(m_vertexShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
-#ifdef SHADER_DEBUG
+//#ifdef SHADER_DEBUG
 std::cout << "Vertex Shader Compile error: " << buf << "\n";
-#endif
+//#endif
     return false;
   }
 #ifdef SHADER_DEBUG
@@ -227,9 +227,9 @@ std::cout << "Compiled vertex shader\n";
     glGetShaderInfoLog(m_fragmentShaderHandle, 2000, 0, buf);
     m_errorStr = buf;
 
-#ifdef SHADER_DEBUG
+//#ifdef SHADER_DEBUG
 std::cout << "Fragment Shader Compile error: " << buf << "\n";
-#endif
+//#endif
     return false;
   }        
 
@@ -263,9 +263,9 @@ std::cout << "Link called\n";
     glGetProgramInfoLog(m_programHandle, 2000, 0, buf);
     m_errorStr = buf;
     
-#ifdef SHADER_DEBUG
+//#ifdef SHADER_DEBUG
 std::cout << "Shader Link error: " << buf << "\n";
-#endif
+//#endif
     return false; 
   }        
 
