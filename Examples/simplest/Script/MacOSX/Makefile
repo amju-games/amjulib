@@ -6,7 +6,7 @@ APP		:=	simplest
 
 BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
-LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
+LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.5-macosx
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
 
