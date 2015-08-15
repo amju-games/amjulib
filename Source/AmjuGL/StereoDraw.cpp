@@ -123,7 +123,7 @@ void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
     float bottom = - widthdiv2;
     float left   = - aspectratio * widthdiv2 + 0.5f * camera.m_eyeSep * camera.m_neardist / camera.m_fo;
     float right  =   aspectratio * widthdiv2 + 0.5f * camera.m_eyeSep * camera.m_neardist / camera.m_fo;
-    Frustum(left, right, bottom, top, camera.m_neardist, camera.m_fardist);
+    MultFrustum(left, right, bottom, top, camera.m_neardist, camera.m_fardist);
 
     AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
     AmjuGL::SetIdentity();
@@ -142,7 +142,7 @@ void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
     float bottom = - widthdiv2;
     float left   = - aspectratio * widthdiv2 - 0.5f * camera.m_eyeSep * camera.m_neardist / camera.m_fo;
     float right  =   aspectratio * widthdiv2 - 0.5f * camera.m_eyeSep * camera.m_neardist / camera.m_fo;
-    Frustum(left, right, bottom, top, camera.m_neardist, camera.m_fardist);
+    MultFrustum(left, right, bottom, top, camera.m_neardist, camera.m_fardist);
 
     AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
     AmjuGL::SetIdentity();
@@ -157,6 +157,30 @@ void SetUpCameraAsymmetric(Eye eye, const Camera& camera)
   }
 }
 
+void SetUpCameraMono(const Camera& camera)
+{
+    const int windowwidth = Screen::X();
+    const int windowheight = Screen::Y();
+    float aspectratio = (float)windowwidth / (float)windowheight;
+
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+    AmjuGL::SetIdentity();
+    AmjuGL::SetPerspectiveProjection(RadToDeg(camera.m_fovy), aspectratio,
+        camera.m_neardist, camera.m_fardist);
+
+    AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+    AmjuGL::SetIdentity();
+    Vec3f cameraright = CrossProduct(camera.m_dir, camera.m_up);  
+    AmjuGL::LookAt(
+            camera.m_pos.x + cameraright.x,
+            camera.m_pos.y + cameraright.y,
+            camera.m_pos.z + cameraright.z,
+            camera.m_pos.x + cameraright.x + camera.m_dir.x,
+            camera.m_pos.y + cameraright.y + camera.m_dir.y,
+            camera.m_pos.z + cameraright.z + camera.m_dir.z,
+            camera.m_up.x,camera.m_up.y,camera.m_up.z);
+}
+
 void StereoDraw::Draw()
 {
   AmjuGL::SetClearColour(Colour(0, 0, 0, 1));
@@ -165,6 +189,7 @@ void StereoDraw::Draw()
 
   if (!m_isStereo)
   {
+    SetUpCameraMono(m_camera);
     m_drawFunc();
     return;
   }

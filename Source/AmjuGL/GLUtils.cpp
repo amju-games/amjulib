@@ -3,7 +3,7 @@
 
 namespace Amju
 {
-void Frustum(float left, float right, float bottom, float top, float zNear, float zFar)
+void MultFrustum(float left, float right, float bottom, float top, float zNear, float zFar)
 {
   // Column major matrix
   float m[16];
