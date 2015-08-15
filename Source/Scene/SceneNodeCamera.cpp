@@ -10,6 +10,13 @@ SceneNodeCamera::SceneNodeCamera()
   m_up = Vec3f(0, 1, 0);
 }
 
+void SceneNodeCamera::SetFromCamera(const Camera& c)
+{
+  SetEyePos(c.m_pos);
+  SetLookAtPos(c.m_pos + c.m_dir);
+  SetUpVec(c.m_up);
+}
+
 const Vec3f& SceneNodeCamera::GetEyePos() const
 {
   return m_eye;

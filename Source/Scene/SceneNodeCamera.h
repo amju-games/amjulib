@@ -1,6 +1,7 @@
 #ifndef SCENE_NODE_CAMERA_H
 #define SCENE_NODE_CAMERA_H
 
+#include <Camera.h> // in AmjuGL
 #include "SceneNode.h"
 
 namespace Amju
@@ -14,6 +15,8 @@ public:
   void SetEyePos(const Vec3f&);
   void SetLookAtPos(const Vec3f&);
   void SetUpVec(const Vec3f&);
+
+  void SetFromCamera(const Camera& c);
 
   const Vec3f& GetEyePos() const;
   const Vec3f& GetLookAtPos() const;
