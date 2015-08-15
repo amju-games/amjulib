@@ -33,6 +33,7 @@ class $class : public GSBase\
 public:\
   virtual void Update() override;\
   virtual void DrawScene() override;\
+  virtual void DrawScene2d() override;\
   virtual void CreateTweakMenu() override;
   virtual void OnActive() override;\
 \
@@ -63,6 +64,11 @@ void " . $scope . "Update()\
 }\
 \
 void " . $scope . "DrawScene()\
+{\
+\
+}\
+\
+void " . $scope . "DrawScene2d()\
 {\
 \
 }\

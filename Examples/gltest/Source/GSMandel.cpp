@@ -63,7 +63,9 @@ void GSMandel::DrawScene()
 //std::cout << mi << "\n";
   shader->Set("maxIters", mi);
 
-  sphere->Draw();
+//  sphere->Draw();
+
+  AmjuGL::Draw(m_triList);
 
   shader->End();
 }

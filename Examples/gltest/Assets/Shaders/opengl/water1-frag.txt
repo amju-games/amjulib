@@ -1,4 +1,4 @@
-// wavedemo-frag.txt
+// water1-frag.txt
 
 uniform mat4 modelViewProjectionMatrix;
 uniform vec3 eyePos;
