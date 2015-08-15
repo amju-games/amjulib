@@ -1,0 +1,56 @@
+// Fire temple level
+// Version 
+1
+
+// Num Game Objects
+5
+
+templemesh
+// ID
+10
+fire_temple/model.obj
+
+firetexture
+// ID
+100
+
+fire
+// ID
+101
+// pos
+0, 9, -2 
+// size 
+1.0
+// firetexture ID
+100
+// mask - TODO
+
+fire
+// ID
+102
+// pos
+2, 9, -2 
+// size 
+1.0
+// firetexture ID
+100
+// mask - TODO
+
+fire
+// ID
+103
+// pos
+-2, 9, -2 
+// size 
+1.0
+// firetexture ID
+100
+// mask - TODO
+
+
+
+
+
+
+
+

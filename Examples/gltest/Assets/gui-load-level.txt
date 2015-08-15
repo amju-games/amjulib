@@ -1,0 +1,41 @@
+// splash screen gui
+// version
+1
+
+// Element type
+gui-comp
+// Name
+loadlevel-comp
+// Num children
+1
+
+
+// Element type
+gui-comp
+// Name
+progressbar
+// Num children
+2
+
+
+// Element type
+gui-image
+// Element name
+bar
+// pos (coords are -1..1)
+-0.46, -0.52
+// size
+0.95, 0.076
+// Image - ext is resource name
+wh8.png
+
+// Element type
+gui-image
+// Element name
+bg
+// pos (coords are -1..1)
+-0.5, -0.5
+// size
+1.0, 0.125
+// Image - ext is resource name
+progress.png

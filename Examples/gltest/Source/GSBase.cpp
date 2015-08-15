@@ -270,16 +270,16 @@ bool GSBase::OnKeyEvent(const KeyEvent& ke)
 
   if (ke.keyType == AMJU_KEY_CHAR && ke.key =='w')
   {
-std::cout << "UP key event\n";
+//std::cout << "UP key event\n";
     if (ke.keyDown)
     {
       m_vel = m_camera.m_dir * WALK_SPEED;
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
     else
     {
       m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
   }
 
@@ -288,12 +288,12 @@ std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\
     if (ke.keyDown)
     {
       m_vel = m_camera.m_dir * -WALK_SPEED;
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
     else
     {
       m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
   }
 
@@ -303,12 +303,12 @@ std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\
     {
       Vec3f cameraright = CrossProduct(m_camera.m_dir, m_camera.m_up);
       m_vel = cameraright * WALK_SPEED;
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
     else
     {
       m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
   }
 
@@ -318,12 +318,12 @@ std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\
     {
       Vec3f cameraright = CrossProduct(m_camera.m_dir, m_camera.m_up);
       m_vel = cameraright * -WALK_SPEED;
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
     else
     {
       m_vel = Vec3f(0, 0, 0); // TODO decelerate to a stop?
-std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
+//std::cout << "Cam vel: " << m_vel.x << ", " << m_vel.y << ", " << m_vel.z  << "\n";
     }
   }
 

@@ -24,6 +24,8 @@ private:
   Vec3f m_vel;
 
   ObjMesh* m_mesh;
+
+  bool m_loadedOk;
 };
 typedef Singleton<GSFireTemple> TheGSFireTemple;
 } // namespace

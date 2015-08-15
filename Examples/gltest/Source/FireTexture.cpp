@@ -1,11 +1,91 @@
 #include "AmjuFirst.h"
 #include <iostream>
+#include <Billboard.h>
+#include <File.h>
 #include "FireTexture.h"
+#include <Game.h>
+#include <LoadVec3.h>
+#include "MySceneGraph.h"
+#include <SceneGraph.h>
 #include <Timer.h>
 #include "AmjuFinal.h"
 
 namespace Amju
 {
+static const float FIRE_UPDATE_TIME = 0.05f;
+
+Fire::Fire()
+{
+   m_firetex = nullptr;
+}
+
+const char* Fire::NAME = "fire";
+
+const char* Fire::GetTypeName() const 
+{
+  return NAME;
+}
+
+SceneGraph* Fire::GetSceneGraph() 
+{
+  return Amju::GetSceneGraph();
+}
+
+bool Fire::Load(File* f)
+{
+  if (!GameObject::Load(f))
+    return false;
+
+  Billboard* bb = new Billboard;
+
+  // Pos, size, fire tex
+  Vec3f pos;
+  if (!LoadVec3(f, &pos))
+  {
+    f->ReportError("Expected fire pos");
+    return false;
+  }
+  Matrix mat;
+  mat.Translate(pos);
+  bb->SetLocalTransform(mat);
+
+  float size = 0;
+  if (!f->GetFloat(&size))
+  {
+    f->ReportError("Expected fire size");
+    return false;
+  }
+  bb->SetSize(size);
+
+  int fireTexId = -1;
+  if (!f->GetInteger(&fireTexId))
+  {
+    f->ReportError("Expected fire texture ID");
+    return false;
+  }
+//std::cout << "Fire tex ID: " << fireTexId << "\n";
+ 
+  GameObject* go = TheGame::Instance()->GetGameObject(fireTexId);
+  Assert(go);
+  FireTexture* ft = dynamic_cast<FireTexture*>(go);
+  Assert(ft);
+  bb->SetTexture(ft->GetTexture());
+
+  // Add to scene graph
+  m_sceneNode = bb;
+  AddSceneNodeToGraph();
+
+  return true;
+}
+ 
+void Fire::Update() 
+{
+  // ?
+}
+
+
+const char* FireTexture::NAME = "firetexture";
+
 FireTexture::FireTexture()
 {
   AMJU_CALL_STACK;
@@ -15,6 +95,12 @@ FireTexture::FireTexture()
     src[i] = 0;
   }  
 
+  Init();
+}
+
+const char* FireTexture::GetTypeName() const
+{
+  return NAME; 
 }
 
 bool FireTexture::Init()
@@ -39,13 +125,13 @@ void FireTexture::Update()
   static float time = 0;
   float dt = TheTimer::Instance()->GetDt();
   time +=dt;
-  if (time < 0.1f)
+  if (time < FIRE_UPDATE_TIME)
   {
     return;
   }
   time = 0;
 
-  const int BORDER = 8;
+  const int BORDER = FIRE_SIZE / 8;
   for (int j = 0; j < FIRE_SIZE; j++)
   {
     if (j < BORDER || j >= FIRE_SIZE - BORDER)
@@ -55,8 +141,12 @@ void FireTexture::Update()
     }
     else
     {
+      uint8 r = (uint8)(rand()%256);  
+      uint8 r1 = (uint8)(rand()%256);  
+#ifdef OLD
       uint8 r = (uint8)((rand()%128) + 128);  
       uint8 r1 = (uint8)((rand()%128) + 128);  
+#endif
       src[j] = r;
       src[j + FIRE_SIZE] = r1;
     }
@@ -88,11 +178,12 @@ void FireTexture::Update()
 
 // This works for all platforms except wii?
 #ifndef GEKKO
+    // NOT Wii
     uint32 alpha = ((uint32)dst[i]) << 24; //data[i] & 0xff000000; // ENDIAN
-    uint32 res = 0x00ff00ff | alpha; // ENDIAN
-
+    uint32 res = 0x00ffffff | alpha; // ENDIAN
 
 #else
+    // Wii
     uint32 alpha = 0x000000c0; // data[i] & 0x000000ff; // ENDIAN
     uint32 res = 0xffffff00 | alpha; // ENDIAN
 #endif
@@ -102,19 +193,6 @@ void FireTexture::Update()
   }
   m_tex.UseThisTexture();
   AmjuGL::UpdateTexture(m_tex.GetId(), 0, 0, FIRE_SIZE, FIRE_SIZE, (const uint8*)data);
-
-/*
-  m_pTexture->Bind();
-  glTexSubImage2D(GL_TEXTURE_2D, 
-                  0, 
-                  0, 
-                  0, 
-                  FIRE_SIZE, 
-                  FIRE_SIZE, 
-                  GL_RGBA, 
-                  GL_UNSIGNED_BYTE, 
-                  m_pTexture->GetData());
-*/
 }
 }
 

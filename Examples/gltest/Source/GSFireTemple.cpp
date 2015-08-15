@@ -1,25 +1,25 @@
 #include <AmjuGL.h>
-#include <Billboard.h>
 #include <Camera.h>
 #include <DegRad.h>
-#include <GLUtils.h>
-#include <Teapot.h>
-#include <Screen.h>
-#include <Vec3.h>
-#include <Quaternion.h>
-#include <ResourceManager.h>
 #include <File.h>
-#include <Timer.h>
-#include <ReportError.h>
-#include <StereoDraw.h>
-#include "FireTexture.h"
+#include <Game.h>
+#include <GLUtils.h>
 #include "GSFireTemple.h"
+#include "GSLoadLevel.h"
+#include "MySceneGraph.h"
+#include <ResourceManager.h>
+#include <StereoDraw.h>
+#include <Timer.h>
+
+// Hmm, maybe move all assets including this to Assets/firetemple/ subdir
+#define FIRE_TEMPLE_LEVEL "level-firetemple.txt"
 
 namespace Amju
 {
 GSFireTemple::GSFireTemple()
 {
   m_mesh = nullptr;
+  m_loadedOk = false;
   m_name = "Fire Temple";
   m_description = "Zelda OOT Fire Temple";
 }
@@ -31,21 +31,28 @@ void GSFireTemple::Update()
   float dt = TheTimer::Instance()->GetDt();
   m_pos += m_vel * dt;
 
+  TheGame::Instance()->UpdateGameObjects();
+//  GetSceneGraph()->Update();
 }
 
 void GSFireTemple::DrawScene()
 {
-  DrawHelp(); 
+  //DrawHelp(); 
 
+  if (!m_loadedOk)
+    return;
+
+  GetSceneGraph()->GetCamera()->SetFromCamera(m_camera);
+  GetSceneGraph()->Draw();
+
+/*
   static FireTexture ft;
   static Billboard bb;
   static bool first = true;
   if (first)
   {
     first = false;
-    ft.Init();
-
-    //Texture* tex = (Texture*)TheResourceManager::Instance()->GetRes("hand.png");
+    //ft.Init();
 
     bb.SetTexture(ft.GetTexture());
     bb.SetSize(1.0f);
@@ -55,6 +62,7 @@ void GSFireTemple::DrawScene()
     bb.SetLocalTransform(m);
     bb.CombineTransform();
   }
+*/
 
   float dt = TheTimer::Instance()->GetDt();
 
@@ -73,12 +81,21 @@ void GSFireTemple::DrawScene()
       AmjuGL::LightColour(1, 1, 1),
       AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
 
-  m_mesh->Draw();
+  ////m_mesh->Draw();
 
-  ft.Update();
+  // Draw axes
+  AmjuGL::SetColour(Colour(1, 1, 1, 1));
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
+  AmjuGL::DrawLine(AmjuGL::Vec3(-1000, 8, 0), AmjuGL::Vec3(1000, 8, 0));
+  AmjuGL::DrawLine(AmjuGL::Vec3(0, -1000, 0), AmjuGL::Vec3(0, 1000, 0));
+  AmjuGL::DrawLine(AmjuGL::Vec3(0, 0, -1000), AmjuGL::Vec3(0, 0, 10000));
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
-  AmjuGL::Enable(AmjuGL::AMJU_BLEND);
-  bb.Draw();
+  ////ft.Update();
+
+  ////AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+  ////bb.Draw();
 }
 
 bool GSFireTemple::OnKeyEvent(const KeyEvent& ke)
@@ -94,6 +111,18 @@ void GSFireTemple::OnActive()
 {
   GSBase::OnActive();
 
+  m_loadedOk = false;
+  GSLoadLevel* LL = TheGSLoadLevel::Instance();
+  if (LL->GetLastLoadedLevel() != FIRE_TEMPLE_LEVEL)
+  {
+    LL->SetLevelFile(FIRE_TEMPLE_LEVEL);
+    LL->SetPrevState(this);
+    TheGame::Instance()->SetCurrentState(LL);
+    return;
+  }
+  m_loadedOk = true;
+
+  // TODO This will also be a game object?
   ResourceManager* rm = TheResourceManager::Instance();
   rm->AddLoader("obj", TextObjLoader);
   m_mesh = (ObjMesh*)rm->GetRes("fire_temple/model.obj");
@@ -105,7 +134,7 @@ void GSFireTemple::OnActive()
 //  theCamera.m_eyeSep = INITIAL_EYESEP; // TODO TEST
 //  theCamera.m_fo = 75.0f; 
 
-  m_camera.m_pos.y = 10;
+  m_camera.m_pos.y = 0;
 
   // Set up barrel dist post process effect
 //  m_barrel.SetDrawFunc(DrawStereo);
