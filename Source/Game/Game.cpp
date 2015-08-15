@@ -164,8 +164,12 @@ void Game::RunOneLoop()
     gettimeofday(&tafter, 0);
     double draw = tafter.tv_sec - mid.tv_sec + (tafter.tv_usec - mid.tv_usec) * 1e-6;
     double update = mid.tv_sec - tbefore.tv_sec + (mid.tv_usec - tbefore.tv_usec) * 1e-6;
-    std::string s = "Draw: " + ToString((int)(draw * 1000.0f)) +
-      " update: " + ToString((int)(update * 1000.0f));
+    int idraw = (int)(draw * 1000.0f);
+    int iupdate = (int)(update * 1000.0f);
+    std::string s = std::string("Draw: ") + 
+      std::string((idraw < 10 ? "0" : "")) + ToString(idraw) +
+      std::string("ms update: ") + std::string((iupdate < 10 ? "0" : "")) + 
+      ToString(iupdate) + "ms";
 #endif
 
     s += " fps: " + fps;
@@ -173,9 +177,10 @@ void Game::RunOneLoop()
     // Display time per frame
     static GuiText t;
     t.SetFont(m_font);
+    t.SetScaleX(0.7f);
     t.SetFgCol(Colour(1, 1, 1, 1));
     t.SetLocalPos(Vec2f(-1.0f, 1.0f));
-    t.SetSize(Vec2f(1.0f, 0.1f));
+    t.SetSize(Vec2f(2.0f, 0.1f));
     t.SetJust(GuiText::AMJU_JUST_LEFT);
     t.SetText(s);
     AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_TEXTURE_2D);
