@@ -66,12 +66,15 @@ public:
   // Override this to create objects which aren't registered.
   T* Create(const S& name)
   {
-    FactoryFunction f = m_map[name];
+    auto it = m_map.find(name);
+    if (it == m_map.end())
+      return nullptr;
+    
+    FactoryFunction f = it->second;
     if (f)
-    {
       return f();
-    }
-    return 0;
+    
+    return nullptr;
   }
 
   struct Pusher
