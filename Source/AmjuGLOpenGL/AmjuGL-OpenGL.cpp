@@ -14,6 +14,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 //#include "GL/glew.h"
 #include <TriList.h>
 #include "AmjuGL-OpenGL.h"
+#include <CalcTangents.h>
 #include "GLShader.h"
 #include "ShaderNull.h"
 #include "AmjuAssert.h"
@@ -27,19 +28,19 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
-//#define USE_IMMEDIATE_MODE
 //#define OPENGL_SHOW_INFO
 
 #undef CreateWindow
 
 namespace Amju
 {
+static GLShader* s_shader = nullptr;
+
 static DrawableFactory s_factory;
 
 class TriListStaticOpenGL : public TriListStatic
 {
 public:
-  // TODO Use display list
   virtual void Draw()
   {
     if (!m_tris.empty())
@@ -54,6 +55,11 @@ public:
   }
   
   virtual bool Init() { return true; }
+
+  void CalcTangents() override
+  {
+    Amju::CalcTangents(m_tris);
+  }
 
 private:
   AmjuGL::Tris m_tris;
@@ -76,6 +82,11 @@ public:
   }
   
   virtual bool Init() { return true; }
+
+  void CalcTangents() override
+  {
+    Amju::CalcTangents(m_tris);
+  }
 
 private:
   AmjuGL::Tris m_tris;
@@ -317,60 +328,81 @@ void AmjuGLOpenGL::Disable(uint32 flag)
 void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 {
   AMJU_CALL_STACK;
-
   int numTris = tris.size();
 
-#ifndef USE_IMMEDIATE_MODE
-
-  // Format is different for DX9 verts and OpenGL verts 
-  // So we can't do
-  //glInterleavedArrays(GL_T2F_N3F_V3F, sizeof(AmjuGL::Vert), &tris[0]);
-  //glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
-
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
+  if (s_shader)
   {
-    // Don't specify tex coords if sphere map
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_u));
+    // Try to use attribute variables
+
+    // Setup
+    int aPosition = s_shader->GetAttribLocation("position");
+    int aNormal   = s_shader->GetAttribLocation("normal");
+    int aUV   = s_shader->GetAttribLocation("uv");
+    int tan = s_shader->GetAttribLocation("tangent");
+
+    if (aPosition > -1)
+    {
+        GL_CHECK(glEnableVertexAttribArray(aPosition));
+        GL_CHECK(glVertexAttribPointer(aPosition, 3, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_x));
+    }
+
+    if (aNormal > -1)
+    {
+        GL_CHECK(glEnableVertexAttribArray(aNormal));
+        GL_CHECK(glVertexAttribPointer(aNormal, 3, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_nx));
+    }
+
+    if (aUV > -1)
+    {
+        GL_CHECK(glEnableVertexAttribArray(aUV));
+        GL_CHECK(glVertexAttribPointer(aUV, 2, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_u));
+    }
+
+    if (tan > -1)
+    {
+        GL_CHECK(glEnableVertexAttribArray(tan));
+        GL_CHECK(glVertexAttribPointer(tan, 3, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_tanx));
+    }
+
+    // Draw
+    glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
+
+    // Cleanup
+    if ((int)aPosition >= 0)
+        GL_CHECK(glDisableVertexAttribArray(aPosition));
+
+    if ((int)aNormal >= 0)
+        GL_CHECK(glDisableVertexAttribArray(aNormal));
+
+    if ((int)aUV >= 0)
+        GL_CHECK(glDisableVertexAttribArray(aUV));
+
+    if ((int)tan >= 0)
+        GL_CHECK(glDisableVertexAttribArray(tan));
   }
-
-  glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x));
-  glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)); 
-
-  glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
-
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  glDisableClientState(GL_NORMAL_ARRAY);
-  glDisableClientState(GL_VERTEX_ARRAY);
-
-#else // USE_IMMEDIATE_MODE
-
-  glBegin(GL_TRIANGLES);
-  for (int i = 0; i < numTris; i++)
+  else
   {
-      const AmjuGL::Tri& tri = tris[i];
-      for (int j = 0; j < 3; j++)
-      {
-        const AmjuGL::Vert& vert = tri.m_verts[j];
+    // Fixed function - TODO deprecate
 
-        // Apparently this is wrong for some vertices.
-#ifdef LEAFDATA_DEBUG
-std::cout << "LD2: " << m_name.c_str()
-  << " Tri:" << i << " vert:" << j
-  << " u:" << vert.m_u << " v:" << vert.m_v
-  << "\n";
-#endif
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
+    {
+      // Don't specify tex coords if sphere map
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+      glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_u));
+    }
 
-        // NB Order of these calls in important!
-        glTexCoord2f(vert.m_u, vert.m_v);
-        glNormal3fv(&vert.m_nx);
-        glVertex3fv(&vert.m_x);
-      }
+    glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x));
+    glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)); 
+
+    glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
+
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
   }
-  glEnd();
-#endif // USE_IMMEDIATE_MODE
 }
 
 void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
@@ -652,15 +684,17 @@ Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
 
 void AmjuGLOpenGL::UseShader(Shader* sh)
 {
+  GLShader* glshader = dynamic_cast<GLShader*>(sh);
   if (sh)
   {
-    Assert(dynamic_cast<GLShader*>(sh));
-    glUseProgram(((GLShader*)sh)->GetProgHandle());
+    Assert(glshader);
+    glUseProgram(glshader->GetProgHandle());
   }  
   else
   {
     glUseProgram(0);
   }
+  s_shader = glshader;
 }
 }
 

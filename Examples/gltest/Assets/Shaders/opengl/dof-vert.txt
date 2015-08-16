@@ -1,10 +1,13 @@
 // dof-vert.txt
 
+attribute vec4 position;
+attribute vec2 uv;
+
 varying vec2 UV;
 
 void main()
 {
-  UV = gl_MultiTexCoord0.st;
-  gl_Position = gl_Vertex;
+  UV = uv; 
+  gl_Position = position; 
 }
 

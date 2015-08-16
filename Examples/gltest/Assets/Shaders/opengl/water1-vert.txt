@@ -2,15 +2,20 @@
 
 //#include noise2D.glsl
 
+attribute vec4 position;
+attribute vec2 uv;
+attribute vec3 normal;
+
 uniform mat4 modelViewProjectionMatrix;
-uniform float gTime; // don't initialise!
+
+uniform float gTime; 
 
 varying vec3 vNormal;
 varying vec3 fragPos;
 
 void main()
 {
-  vec4 a = gl_Vertex;
+  vec4 a = position; 
   fragPos = a.xyz;
 
   //vec2 p = vec2(a.x + gTime * 1.0, a.z + gTime * 0.5);
@@ -20,7 +25,7 @@ void main()
 
   //gY = 0.0; //a.y;
 
-  vNormal = gl_Normal;
+  vNormal = normal; //gl_Normal;
 
   gl_Position = modelViewProjectionMatrix * a;
 }

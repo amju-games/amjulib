@@ -1,5 +1,8 @@
 // mandel-vert.txt
 
+attribute vec4 position;
+attribute vec2 uv;
+
 uniform float gTime; 
 uniform float mouseX;
 uniform float mouseY;
@@ -7,7 +10,7 @@ varying vec2 vUv;
 
 void main()
 {
-  gl_Position = ftransform(); 
+  gl_Position = position; 
   vec2 m = vec2(mouseX, mouseY);
-  vUv = gl_MultiTexCoord0.xy / gTime - m;
+  vUv = uv / gTime - m;
 }

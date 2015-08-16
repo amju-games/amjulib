@@ -1,8 +1,12 @@
 // wavedemo-vert.txt
-//#version 120
+
+attribute vec4 position;
+attribute vec2 uv;
+attribute vec3 normal;
 
 uniform mat4 modelViewProjectionMatrix;
-uniform float gTime; // don't initialise!
+uniform float gTime; 
+
 varying float gY;
 
 float GetWaveHeight(float x, float z)
@@ -30,9 +34,8 @@ float GetWaveHeight(float x, float z)
 
 void main()
 {
-  vec4 a = gl_Vertex;
+  vec4 a = position; 
   a.y = GetWaveHeight(a.x, a.z);
   gY = a.y;
-  ////gl_Position = gl_ModelViewProjectionMatrix * a;
   gl_Position = modelViewProjectionMatrix * a;
 }
