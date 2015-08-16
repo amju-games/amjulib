@@ -40,19 +40,17 @@ public:
   };
 
   // Vertex: (x, y, z) abs coord, (u, v) texture coord and normal.
+  // Now with added tangents!
   struct Vert
   {
     Vert() {}
-    Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz) :
-      m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v) {}
+    Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz, float tanx = 1.0f, float tany = 0.0f, float tanz = 0.0f) :
+      m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v), m_tanx(tanx), m_tany(tany), m_tanz(tanz) {}
 
-    // Order for D3D FVF
-    float m_x, m_y, m_z, m_nx, m_ny, m_nz, m_u, m_v;
-
-    // We need this format for GL interleaved arrays, i.e. GL_T2F_N3F_V3F
-    //float m_u, m_v,  m_nx, m_ny, m_nz,  m_x, m_y, m_z;
+    float m_x, m_y, m_z, m_nx, m_ny, m_nz, m_u, m_v, m_tanx, m_tany, m_tanz;
   };
   typedef std::vector<Vert> Verts;
+
 
   struct Vec3
   {
@@ -168,7 +166,6 @@ public:
 #endif
 
   // Set current matrix stack
-  // TODO Can we use Texture matrix in GL ES/D3D ?
   enum MatrixMode 
   { 
     AMJU_MATRIX_NOTSETYET  = -1, 

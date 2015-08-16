@@ -8,6 +8,7 @@ namespace Amju
 class TriList : public Drawable
 {
 public:
+  virtual void CalcTangents() {}
 };
 
 class TriListStatic : public TriList

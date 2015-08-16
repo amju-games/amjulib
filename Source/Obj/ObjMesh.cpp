@@ -810,6 +810,7 @@ void ObjMesh::BuildGroup(Group& g)
     g.m_tris.push_back(t);
   }
   g.m_triList = MakeTriList(g.m_tris);
+  g.m_triList->CalcTangents();
 }
 
 void ObjMesh::DrawGroup(Group& g)
@@ -875,6 +876,7 @@ void ObjMesh::Transform(const Matrix& mat)
       }
     }
     g.m_triList = MakeTriList(g.m_tris);
+    g.m_triList->CalcTangents();
   }
 }
 
