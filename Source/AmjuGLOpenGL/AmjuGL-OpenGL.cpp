@@ -25,6 +25,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 #include "ShadowMapOpenGL.h"
 #include "RenderToTextureOpenGL.h"
 #include "CubemapOpenGL.h"
+#include <Matrix.h> // TODO TEMP TEST
 #include <AmjuFinal.h>
 
 #define SHADER_DEBUG
@@ -333,6 +334,32 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
   if (s_shader)
   {
     // Try to use attribute variables
+
+    // TODO TEMP TEST
+    int uMatrix = s_shader->GetUniformLocation("modelViewProjectionMatrix");
+    if (uMatrix > -1)
+    {
+      Matrix mv;
+      mv.ModelView();
+      Matrix proj;
+      proj.Projection();
+      Matrix mat = mv * proj;
+      s_shader->Set("modelViewProjectionMatrix", mat);
+   
+      int uNormalMatrix = s_shader->GetUniformLocation("normalMatrix");
+      if (uNormalMatrix > -1)
+      {
+        // Inverse transpose of modelview matrix to rotate normals
+        // TODO
+        float normalMatrix[9] = 
+        {
+          mat[0], mat[1], mat[2],
+          mat[4], mat[5], mat[6],
+          mat[8], mat[9], mat[10],
+        };
+        s_shader->SetMatrix3x3("normalMatrix", normalMatrix);
+      }
+    }
 
     // Setup
     int aPosition = s_shader->GetAttribLocation("position");
