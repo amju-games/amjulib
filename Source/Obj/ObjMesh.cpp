@@ -13,6 +13,9 @@
 #define OBJ_DEBUG
 #endif
 
+// Empty string for texture and shader names which are not set
+#define EMPTY_STRING "$EMPTY$"
+
 namespace Amju
 {
 static bool s_showInfo = false;
@@ -76,13 +79,15 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
   // Bypass Res Manager so we don't cache the file, we want to reload it.
   ObjMesh* mesh = new ObjMesh;
   bool loaded = mesh->Load(objFile, binary);
+
+  // After loading, revert to original file root
+  File::SetRoot(origRoot, "/");
+
   if (!loaded)
   {
     delete mesh;
     mesh = 0;
   }
-  // After loading, revert to original file root
-  File::SetRoot(origRoot, "/");
 
   return mesh;
 }
@@ -290,39 +295,52 @@ std::cout << "Suspiciously high number of materials in obj mesh: " << numMats <<
     f.GetDataLine(&filename);
     mat.m_filename = filename;
 
-    std::string tex;
-    f.GetDataLine(&tex);
-    mat.m_texfilename = tex;
+    // TODO Cube map
 
-    if (ShowInfo())
+    for (int i = 0; i < Material::MAX_TEXTURES; i++)
     {
-      std::cout << "Material " << i << ": matName: " << matName << " filename: " << filename << " tex: " << tex << "\n";
-    }
+      std::string tex;
+      f.GetDataLine(&tex);
+      mat.m_texfilename[i] = tex;
 
-    mat.m_texture = (Texture*)TheResourceManager::Instance()->GetRes(tex);
-
-    if (mat.m_texture)  
-    {
       if (ShowInfo())
       {
-        std::cout << "Loaded texture " << tex << " OK!\n";
+        std::cout << "Material " << i << ": matName: " << matName << " texture filename: " << filename << " tex " << i << ": " << tex << "\n";
       }
-    }
-    else
-    {
-      // If the texture does not load, this is OK if we are just converting formats etc, 
-      //  but not OK if we want to draw the mesh!
-      if (RequiresTextures())
+    
+      if (tex != EMPTY_STRING)
       {
-        return false;
-      }
-      else
-      {
-        if (ShowInfo())
+        mat.m_texture[i] = (Texture*)TheResourceManager::Instance()->GetRes(tex);
+
+        if (mat.m_texture)  
         {
-          std::cout << "Ignoring failed texture " << tex << "...\n";
+          if (ShowInfo())
+          {  
+            std::cout << "Loaded texture " << tex << " OK!\n";
+          }
+        }
+        else
+        {
+          // If the texture does not load, this is OK if we are just converting formats etc, 
+          //  but not OK if we want to draw the mesh!
+          if (RequiresTextures())
+          {
+            return false;
+          }
+          else if (ShowInfo())
+          {
+            std::cout << "Ignoring failed texture " << tex << "...\n";
+          }
         }
       }
+    }
+
+    std::string shader;
+    f.GetDataLine(&shader);
+    mat.m_shaderName = shader;
+    if (shader != EMPTY_STRING)
+    {
+      mat.m_shader = AmjuGL::LoadShader(shader);
     }
 
     int flags = 0;
@@ -334,9 +352,9 @@ std::cout << "Suspiciously high number of materials in obj mesh: " << numMats <<
       std::cout << "Flags: " << flags << "\n";
     }
 
-    if ((flags & Material::AMJU_MATERIAL_SPHERE_MAP) && mat.m_texture)
+    if ((flags & Material::AMJU_MATERIAL_SPHERE_MAP) && mat.m_texture[0])
     {
-      mat.m_texture->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
+      mat.m_texture[0]->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
     }
   }
 
@@ -548,7 +566,7 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
 
         Assert(!mat.m_name.empty());
         // Only add if texture specified 
-        if (!mat.m_texfilename.empty())
+        if (!mat.m_texfilename[0].empty())
         {
           m_materials[mat.m_name] = mat;
         }
@@ -1001,7 +1019,18 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
       Material& mat = it->second;
       of.Write(mat.m_name);
       of.Write(mat.m_filename);
-      of.Write(mat.m_texfilename);
+      for (int i = 0; i < Material::MAX_TEXTURES; i++)
+      {
+        if (mat.m_texfilename[i].empty())
+          of.Write(EMPTY_STRING);
+        else 
+          of.Write(mat.m_texfilename[i]);
+      }
+      if (mat.m_shaderName.empty())
+        of.Write(EMPTY_STRING);
+      else
+        of.Write(mat.m_shaderName);
+
       of.WriteInteger((int)mat.m_flags);
     }
 

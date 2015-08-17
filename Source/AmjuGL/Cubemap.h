@@ -23,6 +23,8 @@ public:
     for (int i = 0; i < 6; i++) m_textureNames[i] = str[i];
   }
 
+  const std::string& GetTextureName(int i) const { return m_textureNames[i]; }
+
   void SetTextureUnitId(int t) { m_textureUnitId = t; }
 
 protected:

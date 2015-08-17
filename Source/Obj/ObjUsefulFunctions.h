@@ -10,44 +10,12 @@
 #include <AmjuGL.h>
 #include <TriList.h>
 #include <Texture.h>
+#include "Material.h"
 
 namespace Amju
 {
 // Useful types
 // ------------
-
-// TODO Own header - Image dir ?
-struct Material : public RefCounted
-{
-  std::string m_name;
-  std::string m_filename;
-
-  std::string m_texfilename;
-  PTexture m_texture;
-  uint32 m_flags;
-  // Flags comprised of these values
-  enum
-  {
-    AMJU_MATERIAL_NO_COLLIDE         = 0x01, // 1 to ignore group in collision tests
-    AMJU_MATERIAL_SPHERE_MAP         = 0x02, // 1 for sphere mapped
-    AMJU_MATERIAL_USE_BLEND_FLAG     = 0x04, // if 1, use next flag
-    AMJU_MATERIAL_BLEND_ENABLED      = 0x08, //  ..to enable/disable blending
-    AMJU_MATERIAL_USE_LIGHTING_FLAG  = 0x10, // if 1, use next flag
-    AMJU_MATERIAL_LIGHTING_ENABLED   = 0x20, //  ..to enable/disable lighting
-  };
-
-  Material();
-  void UseThisMaterial();
-};
-  
-typedef std::vector<RCPtr<Material> > MaterialVec;
-
-bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats);
-
-// Save a bunch of materials - could be to multiple files. Will overwrite these files.
-// This is text .obj mode, because binary mode has materials in the same file as the
-//  mesh.
-bool SaveMtlFiles(const MaterialVec& mats);
 
 // Face type - assumes all faces are triangles,
 //  so is most efficient.
