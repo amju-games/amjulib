@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <math.h>
 #include "Teapot.h"
 #include <AmjuFinal.h>
 
@@ -88,7 +89,7 @@ namespace Amju
 
 /* 530 vertices */
 
-const int numVertices = 530;
+//const int numVertices = 530;
 const float vertices[530*3] =  {
 2.1f, 3.6f, 0.0f, 
 2.071f, 3.711f, 0.0f, 
@@ -624,7 +625,7 @@ const float vertices[530*3] =  {
 
 
 /* 530 normals */
-const int numNormals = 530;
+//const int numNormals = 530;
 const float normals[530*3] = {
 0.0486f, -0.9986f, 0.0168f, 
 0.9976f, -0.0678f, -0.0008f, 
@@ -1350,12 +1351,17 @@ Teapot::Teapot(float scale)
             c = 2;
           }
           // Scale/translate verts here
+
+          // Calc UV coords from x, y, z
+          float u = (float)(atan2(vertices[vidx * 3 + 0], vertices[vidx * 3 + 2]) / M_PI);
+          float v = vertices[vidx * 3 + 1] * 0.5f - 1.0f;
+
           t.m_verts[c] = AmjuGL::Vert(
             vertices[vidx*3+0] * 0.5f * scale,
             vertices[vidx*3+1] * 0.5f * scale - 1.0f * scale,
             vertices[vidx*3+2] * 0.5f * scale, 
-            0, 
-            0,  
+            u, 
+            v,  
             normals[nidx*3+0], 
             normals[nidx*3+1], 
             normals[nidx*3+2]);
@@ -1381,6 +1387,7 @@ Teapot::Teapot(float scale)
         }
     }
     m_triList->Set(tris);
+    m_triList->CalcTangents();
 }
 
 void Teapot::Draw()
