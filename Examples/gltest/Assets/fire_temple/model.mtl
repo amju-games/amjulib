@@ -4,6 +4,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_1 fire_temple/texture_0x03003978_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -13,6 +15,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+map_1 fire_temple/texture_0x030029D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -22,6 +26,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -31,6 +37,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x02019770_fmt0x10.png
+map_1 fire_temple/texture_0x02019770_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -40,6 +48,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_1 fire_temple/texture_0x03004338_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -49,6 +59,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x02018F70_fmt0x10.png
+map_1 fire_temple/texture_0x02018F70_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -58,6 +70,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x02018D70_fmt0x40.png
+map_1 fire_temple/texture_0x02018D70_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -67,6 +81,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x02019F70_fmt0x40.png
+map_1 fire_temple/texture_0x02019F70_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -76,6 +92,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+map_1 fire_temple/texture_0x03004EC0_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -85,6 +103,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -94,6 +114,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -103,6 +125,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03003BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -112,6 +136,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03005BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -121,6 +147,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_1 fire_temple/texture_0x030039A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -130,6 +158,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03004BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -139,6 +169,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x02018B70_fmt0x40.png
+map_1 fire_temple/texture_0x02018B70_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -148,6 +180,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_1 fire_temple/texture_0x030043A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -157,6 +191,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004EC0_fmt0x40.png
+map_1 fire_temple/texture_0x03004EC0_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -166,6 +202,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -175,6 +213,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0201A170_fmt0x10.png
+map_1 fire_temple/texture_0x0201A170_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -184,6 +224,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -193,6 +235,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -202,6 +246,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300CDC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -211,6 +257,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_1 fire_temple/texture_0x03003978_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -220,6 +268,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -229,6 +279,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300ABC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -238,6 +290,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -247,6 +301,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -256,6 +312,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -265,6 +323,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300BBC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -274,6 +334,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -283,6 +345,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -292,6 +356,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_1 fire_temple/texture_0x03009E30_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -301,6 +367,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -310,6 +378,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -319,6 +389,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -328,6 +400,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -337,6 +411,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -346,6 +422,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -355,6 +433,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -364,6 +444,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03003BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -373,6 +455,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -382,6 +466,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -391,6 +477,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -400,6 +488,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -409,6 +499,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -418,6 +510,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -427,6 +521,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -436,6 +532,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -445,6 +543,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_1 fire_temple/texture_0x03009E30_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -454,6 +554,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -463,6 +565,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -472,6 +576,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03003BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -481,6 +587,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03004BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -490,6 +598,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_1 fire_temple/texture_0x030039A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -499,6 +609,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03005BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -508,6 +620,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -517,6 +631,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_1 fire_temple/texture_0x030043A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -526,6 +642,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -535,6 +653,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030029D8_fmt0x10.png
+map_1 fire_temple/texture_0x030029D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -544,6 +664,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -553,6 +675,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -562,6 +686,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_1 fire_temple/texture_0x030043A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -571,6 +697,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -580,6 +708,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -589,6 +719,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -598,6 +730,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+map_1 fire_temple/texture_0x03008AB8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -607,6 +741,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03003BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -616,6 +752,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03005BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -625,6 +763,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030039A0_fmt0x10.png
+map_1 fire_temple/texture_0x030039A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -634,6 +774,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03005BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -643,6 +785,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -652,6 +796,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -661,6 +807,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -670,6 +818,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -679,6 +829,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -688,6 +840,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -697,6 +851,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -706,6 +862,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -715,6 +873,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -724,6 +884,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -733,6 +895,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_1 fire_temple/texture_0x03003978_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -742,6 +906,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -751,6 +917,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300BBC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300BBC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -760,6 +928,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -769,6 +939,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300ABC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300ABC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -778,6 +950,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -787,6 +961,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x0300CDC8_fmt0x10.png
+map_1 fire_temple/texture_0x0300CDC8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -796,6 +972,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -805,6 +983,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -814,6 +994,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+map_1 fire_temple/texture_0x03008370_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -823,6 +1005,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_1 fire_temple/texture_0x03009E30_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -832,6 +1016,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_1 fire_temple/texture_0x03004338_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -841,6 +1027,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -850,6 +1038,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -859,6 +1049,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -868,6 +1060,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -877,6 +1071,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -886,6 +1082,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -895,6 +1093,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -904,6 +1104,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -913,6 +1115,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -922,6 +1126,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -931,6 +1137,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -940,6 +1148,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03008AB8_fmt0x10.png
+map_1 fire_temple/texture_0x03008AB8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -949,6 +1159,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -958,6 +1170,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -967,6 +1181,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -976,6 +1192,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -985,6 +1203,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -994,6 +1214,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1003,6 +1225,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03009E30_fmt0x40.png
+map_1 fire_temple/texture_0x03009E30_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1012,6 +1236,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03008570_fmt0x10.png
+map_1 fire_temple/texture_0x03008570_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1021,6 +1247,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030043A0_fmt0x10.png
+map_1 fire_temple/texture_0x030043A0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1030,6 +1258,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030033B8_fmt0x40.png
+map_1 fire_temple/texture_0x030033B8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1039,6 +1269,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03008370_fmt0x40.png
+map_1 fire_temple/texture_0x03008370_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1048,6 +1280,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03009570_fmt0x10.png
+map_1 fire_temple/texture_0x03009570_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1057,6 +1291,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1066,6 +1302,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1075,6 +1313,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1084,6 +1324,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1093,6 +1335,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1102,6 +1346,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1111,6 +1357,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1120,6 +1368,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1129,6 +1379,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1138,6 +1390,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1147,6 +1401,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1156,6 +1412,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1165,6 +1423,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1174,6 +1434,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1183,6 +1445,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_1 fire_temple/texture_0x03002778_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1192,6 +1456,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1201,6 +1467,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_1 fire_temple/texture_0x03003978_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1210,6 +1478,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_1 fire_temple/texture_0x03002778_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1219,6 +1489,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1228,6 +1500,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1237,6 +1511,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003978_fmt0x40.png
+map_1 fire_temple/texture_0x03003978_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1246,6 +1522,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1255,6 +1533,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1264,6 +1544,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1273,6 +1555,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1282,6 +1566,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1291,6 +1577,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1300,6 +1588,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1309,6 +1599,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1318,6 +1610,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1327,6 +1621,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03003BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1336,6 +1632,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001BD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001BD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1345,6 +1643,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001DD8_fmt0x10.png
+map_1 fire_temple/texture_0x03001DD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1354,6 +1654,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1363,6 +1665,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002778_fmt0x10.png
+map_1 fire_temple/texture_0x03002778_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1372,6 +1676,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1381,6 +1687,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005BA0_fmt0x10.png
+map_1 fire_temple/texture_0x03005BA0_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1390,6 +1698,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1399,6 +1709,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1408,6 +1720,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1417,6 +1731,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1426,6 +1742,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1435,6 +1753,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1444,6 +1764,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1453,6 +1775,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1462,6 +1786,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1471,6 +1797,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1480,6 +1808,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1489,6 +1819,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1498,6 +1830,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1507,6 +1841,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1516,6 +1852,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1525,6 +1863,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1534,6 +1874,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03000DC8_fmt0x40.png
+map_1 fire_temple/texture_0x03000DC8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1543,6 +1885,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001A58_fmt0x40.png
+map_1 fire_temple/texture_0x03001A58_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1552,6 +1896,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1561,6 +1907,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004338_fmt0x40.png
+map_1 fire_temple/texture_0x03004338_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1570,6 +1918,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1579,6 +1929,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030052D8_fmt0x10.png
+map_1 fire_temple/texture_0x030052D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1588,6 +1940,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030062D8_fmt0x10.png
+map_1 fire_temple/texture_0x030062D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1597,6 +1951,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03005AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03005AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1606,6 +1962,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03004AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03004AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1615,6 +1973,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030042D8_fmt0x10.png
+map_1 fire_temple/texture_0x030042D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1624,6 +1984,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03002AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03002AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1633,6 +1995,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030032D8_fmt0x10.png
+map_1 fire_temple/texture_0x030032D8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1642,6 +2006,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03003AD8_fmt0x10.png
+map_1 fire_temple/texture_0x03003AD8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1651,6 +2017,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030022D8_fmt0x40.png
+map_1 fire_temple/texture_0x030022D8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1660,6 +2028,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x03001ED8_fmt0x40.png
+map_1 fire_temple/texture_0x03001ED8_fmt0x40_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
@@ -1669,6 +2039,8 @@ Kd 0.00 0.00 0.00
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
 map_Kd fire_temple/texture_0x030027B8_fmt0x10.png
+map_1 fire_temple/texture_0x030027B8_fmt0x10_normal.png
+shader fire_temple/normal-mapped
 Ni 1.00
 Ks 0.30 0.30 0.30
 Ns 1.00
