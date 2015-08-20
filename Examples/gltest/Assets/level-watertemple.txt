@@ -1,0 +1,12 @@
+// Water temple level
+// Version 
+1
+
+// Num Game Objects
+1
+
+templemesh
+// ID
+10
+water_temple/model.obj
+

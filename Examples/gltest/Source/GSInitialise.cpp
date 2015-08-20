@@ -1,20 +1,24 @@
 #include <Game.h>
 #include "GSAnimTest.h"
-#include "GSInitialise.h"
-#include "GSDepthOfField.h"
 #include "GSBogusSSAO.h"
 #include "GSDepthOfField.h"
+#include "GSDepthOfField.h"
+#include "GSEnvMap.h"
+#include "GSFireTemple.h"
+#include "GSInitialise.h"
+#include "GSLighting.h"
+#include "GSMandel.h"
+#include "GSNormalMap.h"
 #include "GSRenderColourToTexture.h"
 #include "GSRenderDepthToTexture.h"
 #include "GSShadow2.h"
 #include "GSShaderWave.h"
 #include "GSPatchwork.h"
-#include "GSFireTemple.h"
 #include "GSTerrain.h"
-#include "GSMandel.h"
-#include "GSLighting.h"
 #include "GSRayTrace.h"
 #include "GSWater1.h"
+#include "GSWaterTemple.h"
+
 #include "StateList.h"
 
 namespace Amju
@@ -30,8 +34,11 @@ void GSInitialise::OnActive()
 {
   GSBase::OnActive();
 
+  AddState("Teapot - Normal map", TheGSNormalMap::Instance());
+  AddState("Teapot - Env map", TheGSEnvMap::Instance());
   AddState("Ray Trace", TheGSRayTrace::Instance());
-  AddState("Fire Temple", TheGSFireTemple::Instance());
+  AddState("Zelda Fire Temple", TheGSFireTemple::Instance());
+  AddState("Zelda Water Temple", TheGSWaterTemple::Instance());
   AddState("Water1", TheGSWater1::Instance());
   AddState("Anim", TheGSAnimTest::Instance());
   AddState("Patchwork", TheGSPatchwork::Instance());
