@@ -32,6 +32,7 @@ bool TempleMesh::Load(File* f)
     return false;
   }
 
+  m_sceneNode->SetIsLit(true);
   AddSceneNodeToGraph();
 
   return true;

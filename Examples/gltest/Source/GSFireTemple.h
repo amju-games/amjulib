@@ -1,12 +1,11 @@
 #pragma once
 
 #include <Singleton.h>
-#include <ObjMesh.h>
-#include "GSBase.h"
+#include "GSTemple.h"
 
 namespace Amju 
 {
-class GSFireTemple : public GSBase
+class GSFireTemple : public GSTemple
 {
   GSFireTemple();
   friend class Singleton<GSFireTemple>;
@@ -23,9 +22,6 @@ private:
   Vec3f m_pos;
   Vec3f m_vel;
 
-  ObjMesh* m_mesh;
-
-  bool m_loadedOk;
 };
 typedef Singleton<GSFireTemple> TheGSFireTemple;
 } // namespace
