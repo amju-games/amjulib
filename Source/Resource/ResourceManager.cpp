@@ -13,6 +13,12 @@
 
 namespace Amju
 {
+Resource* ShaderLoader(const std::string& resName)
+{
+  // Remove ".shader" from name, as we append "-vert" and "-frag" etc
+  return (Resource*)AmjuGL::LoadShader(GetFileNoExt(resName));
+}
+
 // Loader for image files
 Resource* ImageLoader(const std::string& resName)
 {
@@ -51,6 +57,7 @@ ResourceManager::ResourceManager()
   AddLoader("bmp", ImageLoader);
   AddLoader("md2", Md2Loader);
   AddLoader("font", FontLoader);
+  AddLoader("shader", ShaderLoader);
 }
 
 bool ResourceManager::AddLoader(const std::string& fileExt, Loader loader)

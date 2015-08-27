@@ -159,6 +159,7 @@ bool RenderToTextureOpenGL::InitColour()
 
 bool RenderToTextureOpenGL::Init()
 {
+  // This line gives GL errors!!
   GL_CHECK(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_old_fbo));
   
   GL_CHECK(glGenFramebuffers(1, &m_framebuffer));

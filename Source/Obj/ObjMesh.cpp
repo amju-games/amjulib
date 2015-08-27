@@ -77,6 +77,7 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
   std::string objFile = StripPath(pathFile);
 
   // Bypass Res Manager so we don't cache the file, we want to reload it.
+  // ??? This should be a flag ???
   ObjMesh* mesh = new ObjMesh;
   bool loaded = mesh->Load(objFile, binary);
 

@@ -59,6 +59,8 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 
   Material* current = 0;
 
+  auto rm = TheResourceManager::Instance();
+
   while (true)
   {
     std::string s;
@@ -86,7 +88,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 
       Assert(current);
       current->m_texfilename[0] = strs[1];
-      current->m_texture[0] = (Texture*)TheResourceManager::Instance()->GetRes(current->m_texfilename[0]);
+      current->m_texture[0] = (Texture*)rm->GetRes(current->m_texfilename[0]);
       if (current->m_texture[0] && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
       {
         current->m_texture[0]->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
@@ -96,15 +98,15 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
     {
       std::string sm = strs[0].substr(4);
       int m = ToInt(sm);
-std::cout << "Material: found '" << s << "', that is texture map " << m <<  ", right?\n"; 
+//std::cout << "Material: found '" << s << "', that is texture map " << m <<  ", right?\n"; 
       current->m_texfilename[m] = strs[1];
-      current->m_texture[m] = (Texture*)TheResourceManager::Instance()->GetRes(current->m_texfilename[m]);
+      current->m_texture[m] = (Texture*)rm->GetRes(current->m_texfilename[m]);
     }
     else if (strs[0] == "shader")
     {
-std::cout << "Material: found shader " << strs[1] << "\n";
+//std::cout << "Material: found shader " << strs[1] << "\n";
       current->m_shaderName = strs[1];
-      current->m_shader = AmjuGL::LoadShader(current->m_shaderName);
+      current->m_shader = (Shader*)rm->GetRes(current->m_shaderName + ".shader");
     }
     else if (strs[0] == "newmtl")
     {
