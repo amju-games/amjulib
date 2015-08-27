@@ -34,7 +34,7 @@ GLShader::~GLShader()
   }
 }
 
-int GLShader::GetAttribLocation(const std::string& attribName)
+int GLShader::FindAttribLocation(const std::string& attribName)
 {
   Assert(m_programHandle);
   
@@ -48,7 +48,7 @@ int GLShader::GetAttribLocation(const std::string& attribName)
   return loc;
 }
   
-int GLShader::GetUniformLocation(const std::string& uniformName)
+int GLShader::FindUniformLocation(const std::string& uniformName)
 {
   Assert(m_programHandle);
 
@@ -62,20 +62,6 @@ int GLShader::GetUniformLocation(const std::string& uniformName)
   return loc;
 }
 
-// Recursive file load, allowing for #includes
-// -------------------------------------------
-struct FileLine
-{ 
-  FileLine() : m_lineNum(-1) {}
-  FileLine(const std::string& text, const std::string& filename, int lineNum) : 
-    m_text(text), m_filename(filename), m_lineNum(lineNum) {}
- 
-  std::string m_text;
-  std::string m_filename;
-  int m_lineNum;
-};
-typedef std::vector<FileLine> FileLineVec;
-
 std::string ToString(const FileLineVec& vec)
 {
   std::string res;
@@ -87,7 +73,7 @@ std::string ToString(const FileLineVec& vec)
   return res;
 }
 
-bool LoadFileWithIncludes(const std::string& path, const std::string& filename, FileLineVec* result)
+bool GLShader::LoadFileWithIncludes(const std::string& path, const std::string& filename, FileLineVec* result)
 {
   File file(File::NO_VERSION);
   if (!file.OpenRead(path + filename))
@@ -107,7 +93,26 @@ bool LoadFileWithIncludes(const std::string& path, const std::string& filename, 
   int lineNum = 1; // line numbers start at one
   while (file.GetDataLine(&s, NO_TRIM))
   {
-    if (StringContains(s, "#include"))
+    // Uniform types are given by lines of form: #uniform <type> <name> 
+    if (StringContains(s, "#uniform"))
+    {
+      Strings strs = Split(s, ' ');
+      if (strs.size() < 3)
+      {
+        file.ReportError("#uniform directive too short, should be #uniform <type> <name>");
+        return false;
+      }
+      Uniform* u = TheUniformFactory::Instance()->Create(strs[1]);
+      if (!u)
+      {
+        file.ReportError("#uniform directive: failed to create uniform of type '" + strs[1] + "'");
+        return false;
+      }
+      u->SetName(strs[2]);
+      AddUniform(u);
+std::cout << "Shader: #uniform directive '" << s << "' OK\n";
+    }
+    else if (StringContains(s, "#include"))
     {
       Strings strs = Split(s, ' ');
       const std::string includefilename = strs.back();
@@ -127,7 +132,7 @@ std::cout << "Including file \"" << includefilename << "\"\n";
   return true;
 }
 
-bool LoadShaderFile(const std::string filename, FileLineVec* vec)
+bool GLShader::LoadShaderFile(const std::string filename, FileLineVec* vec)
 {
   return LoadFileWithIncludes(GetFilePath(filename) + "/", StripPath(filename), vec);
 }
@@ -301,6 +306,8 @@ void GLShader::UseThisShader()
 {
   glUseProgram(m_programHandle);
   prevHandle = m_programHandle;
+
+  SetVariables(); // set uniforms & attribs
 }
 
 void GLShader::End()
@@ -314,7 +321,7 @@ void GLShader::End()
   
 void GLShader::SetMatrix3x3(const std::string& name, const float matrix[9])
 {
-  GLint loc = GetUniformLocation(name);
+  GLint loc = FindUniformLocation(name);
   
   if (loc == -1)
   {
@@ -328,7 +335,7 @@ void GLShader::SetMatrix3x3(const std::string& name, const float matrix[9])
 
 void GLShader::Set(const std::string& name, const float matrix[16])
 {
-    GLint loc = GetUniformLocation(name); 
+    GLint loc = FindUniformLocation(name); 
 
     if (loc == -1)
     {
@@ -342,7 +349,7 @@ void GLShader::Set(const std::string& name, const float matrix[16])
 
 void GLShader::Set(const std::string& name, float f)
 {
-    GLint loc = GetUniformLocation(name); 
+    GLint loc = FindUniformLocation(name); 
       //glGetUniformLocation(m_programHandle, name.c_str());
 
     if (loc == -1)
@@ -356,7 +363,7 @@ void GLShader::Set(const std::string& name, float f)
 
 void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 {
-    GLint loc = GetUniformLocation(name); 
+    GLint loc = FindUniformLocation(name); 
       //glGetUniformLocation(m_programHandle, name.c_str());
 
     if (loc == -1)
@@ -371,7 +378,7 @@ void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
 
 void GLShader::Set(const std::string& name, const Colour& c)
 {
-    GLint loc = GetUniformLocation(name); 
+    GLint loc = FindUniformLocation(name); 
       //glGetUniformLocation(m_programHandle, name.c_str());
 
     if (loc == -1)
@@ -386,7 +393,7 @@ void GLShader::Set(const std::string& name, const Colour& c)
 
 void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
 {
-  GLint loc = GetUniformLocation(name); 
+  GLint loc = FindUniformLocation(name); 
 
   if (loc == -1)
   {
@@ -400,7 +407,7 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
   
 void GLShader::SetInt(const std::string& name, int i)
 {
-  GLint loc = GetUniformLocation(name);
+  GLint loc = FindUniformLocation(name);
   
   if (loc == -1)
   {

@@ -7,6 +7,20 @@
 
 namespace Amju
 {
+// Recursive file load, allowing for #includes
+// -------------------------------------------
+struct FileLine
+{ 
+  FileLine() : m_lineNum(-1) {}
+  FileLine(const std::string& text, const std::string& filename, int lineNum) : 
+    m_text(text), m_filename(filename), m_lineNum(lineNum) {}
+ 
+  std::string m_text;
+  std::string m_filename;
+  int m_lineNum;
+};
+typedef std::vector<FileLine> FileLineVec;
+
 class GLShader : public Shader
 {
 public:
@@ -36,8 +50,12 @@ public:
   
   int GetProgHandle() const;
   
-  int GetUniformLocation(const std::string& uniformName);
-  int GetAttribLocation(const std::string& attribName);
+  int FindUniformLocation(const std::string& uniformName) override;
+  int FindAttribLocation(const std::string& attribName) override;
+
+private:
+  bool LoadShaderFile(const std::string filename, FileLineVec* vec);
+  bool LoadFileWithIncludes(const std::string& path, const std::string& filename, FileLineVec* result);
 
 private:
   uint32 m_vertexShaderHandle;

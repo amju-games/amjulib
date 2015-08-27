@@ -336,7 +336,7 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     // Try to use attribute variables
 
     // TODO TEMP TEST
-    int uMatrix = s_shader->GetUniformLocation("modelViewProjectionMatrix");
+    int uMatrix = s_shader->FindUniformLocation("modelViewProjectionMatrix");
     if (uMatrix > -1)
     {
       Matrix mv;
@@ -346,7 +346,7 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
       Matrix mat = mv * proj;
       s_shader->Set("modelViewProjectionMatrix", mat);
    
-      int uNormalMatrix = s_shader->GetUniformLocation("normalMatrix");
+      int uNormalMatrix = s_shader->FindUniformLocation("normalMatrix");
       if (uNormalMatrix > -1)
       {
         // Inverse transpose of modelview matrix to rotate normals
@@ -362,10 +362,10 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     }
 
     // Setup
-    int aPosition = s_shader->GetAttribLocation("position");
-    int aNormal   = s_shader->GetAttribLocation("normal");
-    int aUV   = s_shader->GetAttribLocation("uv");
-    int tan = s_shader->GetAttribLocation("tangent");
+    int aPosition = s_shader->FindAttribLocation("position");
+    int aNormal   = s_shader->FindAttribLocation("normal");
+    int aUV   = s_shader->FindAttribLocation("uv");
+    int tan = s_shader->FindAttribLocation("tangent");
 
     if (aPosition > -1)
     {
@@ -715,7 +715,8 @@ void AmjuGLOpenGL::UseShader(Shader* sh)
   if (sh)
   {
     Assert(glshader);
-    glUseProgram(glshader->GetProgHandle());
+    ////glUseProgram(glshader->GetProgHandle());
+    sh->UseThisShader();
   }  
   else
   {
