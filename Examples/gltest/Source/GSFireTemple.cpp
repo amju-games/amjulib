@@ -16,10 +16,11 @@
 
 namespace Amju
 {
+static AmjuGL::Vec3 s_lightDir;
+
 GSFireTemple::GSFireTemple()
 {
   m_levelFilename = FIRE_TEMPLE_LEVEL;
-  m_loadedOk = false;
   m_name = "Fire Temple";
   m_description = "Zelda OOT Fire Temple";
 }
@@ -47,8 +48,9 @@ void GSFireTemple::DrawScene()
   {
       t += dt;
   }
-  Vec3f pos(cos(t), 1, sin(t));
+  s_lightDir = AmjuGL::Vec3(cos(t), -1.0f, sin(t));
 
+/*
   AmjuGL::Enable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::DrawLighting(
       AmjuGL::LightColour(0, 0, 0),
@@ -56,6 +58,7 @@ void GSFireTemple::DrawScene()
       AmjuGL::LightColour(1, 1, 1), // Diffuse light colour
       AmjuGL::LightColour(1, 1, 1),
       AmjuGL::Vec3(pos.x, pos.y, pos.z)); // Light direction
+*/
 
 /*
   // Draw axes
@@ -78,8 +81,25 @@ bool GSFireTemple::OnKeyEvent(const KeyEvent& ke)
   return false;
 }
 
+class UniformLightDir : public Uniform
+{
+public:
+  void SetUniform() override
+  {
+    // TODO use Set* function with location, not name
+//std::cout << "Setting uniform " << m_name << " to vec3(" << s_lightDir.m_x << ", " << s_lightDir.m_y << ", " << s_lightDir.m_z << ")\n";
+    m_shader->Set(m_name, s_lightDir);
+  }
+};
+
+template<class T>
+Uniform* CreateUniform() { return new T; }
+
 void GSFireTemple::OnActive()
 {
+  // Register special uniforms before loading shader
+  TheUniformFactory::Instance()->Add("UniformLightDir", CreateUniform<UniformLightDir>);
+
   GSTemple::OnActive();
 
 }

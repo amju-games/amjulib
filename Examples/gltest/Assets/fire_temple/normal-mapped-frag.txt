@@ -1,10 +1,14 @@
 // Normal map frag shader
 
+// List uniforms with this directive, and c++ will create objects which sets their values
+#uniform UniformLightDir lightDir
+
 varying vec2 vUV;
 varying vec3 vNormal;
 varying vec3 vTangent;
 
 uniform vec4 colour;
+uniform vec3 lightDir;
 
 uniform sampler2D diffuseMap;
 uniform sampler2D normalMap;
@@ -28,8 +32,6 @@ vec3 CalcBumpedNormal()
 void main()
 {
     vec3 normal = CalcBumpedNormal();
-
-    vec3 lightDir = vec3(1.0, -1.0, 1.0);
 
     float nDotL = max(0.0, dot(normal, normalize(lightDir)));
     nDotL += 0.3;
