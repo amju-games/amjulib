@@ -51,6 +51,11 @@ public:
 typedef Singleton<Factory<Uniform> > TheUniformFactory;
 typedef Singleton<Factory<Attribute> > TheAttribFactory;
 
+// Convenience templates to make Creation functions for above factories
+template<class T> Uniform* CreateUniform() { return new T; }
+template<class T> Attribute* CreateAttribute() { return new T; }
+
+
 class Shader : public Resource
 {
 public:
