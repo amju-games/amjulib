@@ -19,6 +19,8 @@ bool CubemapOpenGL::Init()
   GL_CHECK(glGenTextures(1, &texture));
 
   GL_CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, texture));
+  m_texId = texture;
+
   GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_REPEAT));
   GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_REPEAT));
   GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
@@ -52,7 +54,9 @@ bool CubemapOpenGL::Init()
 
 void CubemapOpenGL::Draw() 
 {
-  GL_CHECK(glActiveTexture(m_textureUnitId));
+//std::cout << "CubemapOpenGL::Draw():  m_textureUnitId: " << m_textureUnitId << "\n";
+//std::cout << "CubemapOpenGL::Draw():  m_texId: " << m_texId << "\n";
+  GL_CHECK(glActiveTexture(GL_TEXTURE0 + m_textureUnitId));
   GL_CHECK(glBindTexture(GL_TEXTURE_CUBE_MAP, m_texId));
 }
 
