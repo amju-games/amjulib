@@ -8,5 +8,11 @@ SceneGraph* GetSceneGraph()
   return &sg;
 }
 
+void ResetSceneGraph()
+{
+  GetSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
+  GetSceneGraph()->SetCamera(new SceneNodeCamera);
+}
+
 }
 

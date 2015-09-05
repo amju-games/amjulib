@@ -5,5 +5,7 @@
 namespace Amju
 {
 SceneGraph* GetSceneGraph();
+
+void ResetSceneGraph();
 }
 

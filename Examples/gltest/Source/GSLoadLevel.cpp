@@ -116,8 +116,7 @@ void GSLoadLevel::OnActive()
   TheGame::Instance()->ClearGameObjects();
 
   // Create a root for the game scene graph
-  GetSceneGraph()->SetRootNode(SceneGraph::AMJU_OPAQUE, new SceneNode);
-  GetSceneGraph()->SetCamera(new SceneNodeCamera);
+  ResetSceneGraph(); // convenience func in MySceneGraph
 
   // Open file
   bool HAS_VERSION_INFO = true;
