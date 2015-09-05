@@ -1,14 +1,13 @@
 #ifndef BILLBOARD_H
 #define BILLBOARD_H
 
-#include "SceneNode.h"
-#include <AmjuGL.h>
-#include <TriList.h>
-#include "Texture.h"
+#include "SceneNodeProcMesh.h"
 
 namespace Amju
 {
-class Billboard : public SceneNode
+// Currently recalcs mesh on CPU.
+// TODO Recalc vertec positions in shader.
+class Billboard : public SceneNodeProcMesh
 {
 public:
   Billboard();
@@ -21,8 +20,6 @@ public:
 
 protected:
   float m_size; // side length of square billboard
-  PTexture m_texture;
-  RCPtr<TriListDynamic> m_triList;
 };
 }
 
