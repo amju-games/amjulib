@@ -92,9 +92,6 @@ public:
   }
 };
 
-template<class T>
-Uniform* CreateUniform() { return new T; }
-
 void GSFireTemple::OnActive()
 {
   // Register special uniforms before loading shader
