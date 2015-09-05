@@ -17,6 +17,7 @@
 #include "GSTerrain.h"
 #include "GSRayTrace.h"
 #include "GSWater1.h"
+#include "GSWater2.h"
 #include "GSWaterTemple.h"
 
 #include "StateList.h"
@@ -40,6 +41,7 @@ void GSInitialise::OnActive()
   AddState("Zelda Fire Temple", TheGSFireTemple::Instance());
   AddState("Zelda Water Temple", TheGSWaterTemple::Instance());
   AddState("Water1", TheGSWater1::Instance());
+  AddState("Water2", TheGSWater2::Instance());
   AddState("Anim", TheGSAnimTest::Instance());
   AddState("Patchwork", TheGSPatchwork::Instance());
   AddState("Terrain", TheGSTerrain::Instance());
