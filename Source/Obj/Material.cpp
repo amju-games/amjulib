@@ -156,14 +156,14 @@ void Material::UseThisMaterial()
   {
     if (m_texture[i])
     {
-      // TODO Set unit ID
+      // Setting texture unit ID and binding
       m_texture[i]->UseThisTexture(i);
     }
   }
 
   if (m_cubemap)
   {
-    // TODO
+    m_cubemap->Draw(); 
   }
 
   if ((m_flags & AMJU_MATERIAL_USE_BLEND_FLAG) != 0)
