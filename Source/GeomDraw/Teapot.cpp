@@ -1,4 +1,7 @@
 #include <AmjuFirst.h>
+#ifdef WIN32
+#define _USE_MATH_DEFINES
+#endif
 #include <math.h>
 #include "Teapot.h"
 #include <AmjuFinal.h>
