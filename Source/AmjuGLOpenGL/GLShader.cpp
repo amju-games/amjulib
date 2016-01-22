@@ -65,7 +65,7 @@ int GLShader::FindUniformLocation(const std::string& uniformName)
 std::string ToString(const FileLineVec& vec)
 {
   std::string res;
-  for (int i = 0; i < vec.size(); i++)
+  for (unsigned int i = 0; i < vec.size(); i++)
   {
     const FileLine& fl = vec[i];
     res += fl.m_text + "\n";
