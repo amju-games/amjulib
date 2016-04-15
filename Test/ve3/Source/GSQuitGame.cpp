@@ -9,19 +9,19 @@
 
 namespace Amju
 {
-static void OnQuitSession()
+static void OnQuitSession(GuiElement*)
 {
 //  SendLogOut();
   TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
   TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());
 }
 
-static void OnQuitProcess()
+static void OnQuitProcess(GuiElement*)
 {
   exit(0);
 }
 
-static void OnCancel()
+static void OnCancel(GuiElement*)
 {
   TheGSQuitGame::Instance()->GoBack();
 }

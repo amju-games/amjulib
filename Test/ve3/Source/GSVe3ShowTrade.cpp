@@ -12,12 +12,12 @@
 
 namespace Amju
 {
-static void OnTradeCancel()
+static void OnTradeCancel(GuiElement*)
 {
   TheGSVe3ShowTrade::Instance()->GoBack();
 }
 
-static void OnTradeReject()
+static void OnTradeReject(GuiElement*)
 {
   TheGSVe3ShowTrade::Instance()->OnTradeReject();
 }
@@ -56,12 +56,12 @@ void GSVe3ShowTrade::OnTradeReject()
   TheLurker::Instance()->Queue(lm);    
 }
 
-static void OnTradeAccept()
+static void OnTradeAccept(GuiElement*)
 {
   TheGSVe3ShowTrade::Instance()->OnTradeAccept();
 }
 
-static void OnTradeCounterOffer()
+static void OnTradeCounterOffer(GuiElement*)
 {
   TheGSVe3ShowTrade::Instance()->OnTradeCounterOffer();
 }

@@ -25,7 +25,7 @@ namespace Amju
 {
 static const float MAX_TIME = 45.0f; // from Malec et al
 
-static void OnReset()
+static void OnReset(GuiElement*)
 {
   GameState* gs = TheGame::Instance()->GetState();
   GSStroopBase* sb = dynamic_cast<GSStroopBase*>(gs);

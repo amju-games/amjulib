@@ -37,26 +37,26 @@ void KbSetLayout(KbLayout layout)
   TheKb::Instance()->SetPages(strs); // loads first one
 }
 
-void OnNextPage()
+void OnNextPage(GuiElement*)
 {
   static Kb* kb = TheKb::Instance();
   kb->OnNextPage();
 }
 
-void OnPrevPage()
+void OnPrevPage(GuiElement*)
 {
   static Kb* kb = TheKb::Instance();
   kb->OnPrevPage();
 }
 
-void OnShow()
+void OnShow(GuiElement*)
 {
   static Kb* kb = TheKb::Instance();
   kb->SetEnabled(true);
   kb->Activate();
 }
 
-void OnHide()
+void OnHide(GuiElement*)
 {
   static Kb* kb = TheKb::Instance();
   kb->Deactivate(); // Not SetEnabled(false), so we get the hiding animation. Right??

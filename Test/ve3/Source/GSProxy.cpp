@@ -14,7 +14,7 @@ static const char* PROXY_PORT_KEY = "proxy_port";
 static const char* PROXY_USER_KEY = "proxy_user";
 static const char* PROXY_PW_KEY = "proxy_pw";
 
-static void OnUseProxy()
+static void OnUseProxy(GuiElement*)
 {
 }
 
@@ -30,12 +30,12 @@ void SetProxy()
   HttpClient::SetProxy(serverStr, portNum, userStr, pwStr);
 }
 
-static void OnProxyOkButton()
+static void OnProxyOkButton(GuiElement*)
 {
   TheGSProxy::Instance()->OnOk();
 }
 
-static void OnProxyCancelButton()
+static void OnProxyCancelButton(GuiElement*)
 {
   TheGSProxy::Instance()->GoBack(); 
 }

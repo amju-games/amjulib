@@ -26,12 +26,12 @@ void ShowError(const std::string& errorStr, GameState* prevState)
   TheGame::Instance()->SetCurrentState(gs);
 }
 
-void OnErrorOk()
+void OnErrorOk(GuiElement*)
 {
   TheGSNetError::Instance()->GoBack();
 }
 
-void OnErrorQuit()
+void OnErrorQuit(GuiElement*)
 {
   static GSYesNoQuitProcess* gs = TheGSYesNoQuitProcess::Instance();
   gs->SetPrevState(TheGSNetError::Instance()->GetPrevState());

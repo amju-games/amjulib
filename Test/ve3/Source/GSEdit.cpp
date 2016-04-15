@@ -32,7 +32,7 @@
 
 namespace Amju
 {
-void OnDone()
+void OnDone(GuiElement*)
 {
   // TODO Or pause menu ?
   TheGSQuitGame::Instance()->SetPrevState(TheGSEdit::Instance());
@@ -360,32 +360,32 @@ void GSEdit::Draw2d()
   TheCursorManager::Instance()->Draw();
 }
 
-void OnChooseLocOk()
+void OnChooseLocOk(GuiElement*)
 {
   TheGSEdit::Instance()->GoToSelectedLocation();
 }
 
-void OnChooseLocCancel()
+void OnChooseLocCancel(GuiElement*)
 {
   TheGSEdit::Instance()->ShowLocationList(false);
 }
 
-void OnChangeProperty()
+void OnChangeProperty(GuiElement*)
 {
   TheGSEdit::Instance()->ShowChangeProperty(true);
 }
 
-void OnCancelProperty()
+void OnCancelProperty(GuiElement*)
 {
   TheGSEdit::Instance()->ShowPropertyList(false);
 }
 
-void OnPropertySet()
+void OnPropertySet(GuiElement*)
 {
   TheGSEdit::Instance()->OnPropertySet();
 }
 
-void OnPropertySetCancel()
+void OnPropertySetCancel(GuiElement*)
 {
   TheGSEdit::Instance()->ShowChangeProperty(false);
 }
@@ -648,19 +648,19 @@ bool GSEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   return false;
 }
 
-void OnNewLocation()
+void OnNewLocation(GuiElement*)
 {
   TheGSNewLocation::Instance()->SetMode(GSNewLocation::AMJU_ADD_NEW);
   TheGame::Instance()->SetCurrentState(TheGSNewLocation::Instance());
 }
 
-void OnEditLocation()
+void OnEditLocation(GuiElement*)
 {
   TheGSNewLocation::Instance()->SetMode(GSNewLocation::AMJU_EDIT);
   TheGame::Instance()->SetCurrentState(TheGSNewLocation::Instance());
 }
 
-void OnGotoLocation()
+void OnGotoLocation(GuiElement*)
 {
   TheGSEdit::Instance()->ChooseLocation();
 }
@@ -778,7 +778,7 @@ private:
 };
 
 static int delId = -1;
-static void OnDelYes()
+static void OnDelYes(GuiElement*)
 {
   static Game* g = TheGame::Instance();
   if (g->GetGameObject(delId))
@@ -793,7 +793,7 @@ static void OnDelYes()
   SendDelReq(delId);
 }
 
-static void OnDelNo()
+static void OnDelNo(GuiElement*)
 {
 }
 

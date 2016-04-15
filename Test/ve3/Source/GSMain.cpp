@@ -27,7 +27,7 @@
 #include <SoundManager.h>
 #include "GSNetError.h"
 #include "GameMode.h"
-#include "Camera.h"
+#include "MyCamera.h"
 #include "PickObject.h"
 #include "ChatConsole.h"
 #include "MouseToGroundPos.h"
@@ -67,7 +67,7 @@ bool DoShowBroadcastConsole()
   //return GetGameMode() == AMJU_MODE_MULTI;
 }
 
-void OnEatButton()
+void OnEatButton(GuiElement*)
 {
   Player* p = GetLocalPlayer();
   Assert(p);
@@ -96,7 +96,7 @@ void OnEatButton()
   }
 }
 
-static void OnPauseButton()
+static void OnPauseButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
 
@@ -106,7 +106,7 @@ static void OnPauseButton()
   */
 }
 
-void OnQuitButton()
+void OnQuitButton(GuiElement*)
 {
   TheGSMain::Instance()->OnQuitButton();
 }
@@ -217,7 +217,7 @@ void GSMain::ResetHud()
   s_room = 1;
 }
 
-void OnMenuClickedAway()
+void OnMenuClickedAway(GuiElement*)
 {
   TheGSMain::Instance()->OnMenuClickedAway();
 }
@@ -591,7 +591,8 @@ void GSMain::Draw()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
+  MyCamera* cam = dynamic_cast<MyCamera*>(GetVe1SceneGraph()->GetCamera().GetPtr());
+  Assert(cam);
   cam->SetTarget(GetLocalPlayer()); // could be 0
 
   GetVe1SceneGraph()->Draw();

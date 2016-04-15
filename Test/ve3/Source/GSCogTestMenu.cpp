@@ -41,69 +41,69 @@ static void OnCancelButton()
 }
 */
 
-static void NoPrac()
+static void NoPrac(GuiElement*)
 {
   TheGSCogTestMenu::Instance()->DoPractice(false);
 }
 
-static void YesPrac()
+static void YesPrac(GuiElement*)
 {
   TheGSCogTestMenu::Instance()->DoPractice(true);
 }
 
-static void AskPractice()
+static void AskPractice(GuiElement*)
 {
   TheGSCogTestMenu::Instance()->AskPractice();
 }
 
-static void LetterSigmaTest()
+static void LetterSigmaTest(GuiElement*)
 {
   TheGSLetterCancellation::Instance()->LoadConfig(AMJU_COG_TEST_SYMBOL_CAN, "letter-cancel-sigma.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation::Instance());
 }
 
-static void LetterMTest()
+static void LetterMTest(GuiElement*)
 {
   TheGSLetterCancellation::Instance()->LoadConfig(AMJU_COG_TEST_LETTER_CAN, "letter-cancel-m.txt");
   TheGame::Instance()->SetCurrentState(TheGSLetterCancellation::Instance());
 }
 
-static void StroopWord()
+static void StroopWord(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSStroopWord::Instance());
 }
 
-static void StroopColour()
+static void StroopColour(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSStroopColour::Instance());
 }
 
-static void StroopColourWord()
+static void StroopColourWord(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSStroopColourWord::Instance());
 }
 
-static void ReactionTime()
+static void ReactionTime(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSReactionTime::Instance());
 }
 
-static void TrailMakingTest()
+static void TrailMakingTest(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSTrailMakingTest::Instance());
 }
 
-static void LonelinessScale()
+static void LonelinessScale(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSLonelinessScale::Instance());
 }
 
-static void SatisfactionWithLifeScale()
+static void SatisfactionWithLifeScale(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSSatisfactionWithLifeScale::Instance());
 }
 
-static void Done()
+static void Done(GuiElement*)
 {
   OnCogTestsAllDone();
 }
@@ -343,7 +343,7 @@ void GSCogTestMenu::DoPractice(bool b)
   {
     SetIsPrac(b);
   }
-  m_func();
+  m_func(nullptr);
 }
 
 } // namespace

@@ -209,7 +209,7 @@ void GSGui::UpdateHeartCount()
   }
 }
 
-static void OnHome()
+static void OnHome(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
 }

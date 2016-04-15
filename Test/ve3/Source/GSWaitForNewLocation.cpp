@@ -11,7 +11,7 @@
 #include "LocalPlayer.h"
 #include "GSPaused.h"
 #include "Ve1SceneGraph.h"
-#include "Camera.h"
+#include "MyCamera.h"
 #include "Food.h"
 #include "ROConfig.h"
 #include "LoadLevel.h"
@@ -23,7 +23,7 @@
 
 namespace Amju
 {
-static void OnCancel()
+static void OnCancel(GuiElement*)
 {
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
@@ -116,7 +116,8 @@ if (playerObj && !playerReady)
       //TheGame::Instance()->SetCurrentState(TheGSVe3HomePage::Instance());
 
       
-      Camera* cam = (Camera*)GetVe1SceneGraph()->GetCamera().GetPtr();
+      MyCamera* cam = dynamic_cast<MyCamera*>(GetVe1SceneGraph()->GetCamera().GetPtr());
+      Assert(cam);
       cam->Reset();
 
       SetRandomFoodInLocation();

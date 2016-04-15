@@ -169,7 +169,7 @@ void LurkMsg::DoOk()
 {
   if (m_onOk)
   {
-    m_onOk();
+    m_onOk(nullptr);
   }
 }
 
@@ -177,7 +177,7 @@ void LurkMsg::DoYes()
 {
   if (m_onYes)
   {
-    m_onYes();
+    m_onYes(nullptr);
   }
 }
 
@@ -185,7 +185,7 @@ void LurkMsg::DoNo()
 {
   if (m_onNo)
   {
-    m_onNo();
+    m_onNo(nullptr);
   }
 }
 
@@ -276,17 +276,17 @@ void LurkMsg::Set(GuiText* text, const Colour& fgCol, const Colour& bgCol, LurkP
   m_rect->SetLocalPos(m_hidePos - 0.5f * Vec2f(EXTRA.x, -EXTRA.y)); 
 }
 
-static void OnLurkOk()
+static void OnLurkOk(GuiElement*)
 {
   TheLurker::Instance()->OnLurkOk();
 }
 
-static void OnLurkYes()
+static void OnLurkYes(GuiElement*)
 {
   TheLurker::Instance()->OnLurkYes();
 }
 
-static void OnLurkNo()
+static void OnLurkNo(GuiElement*)
 {
   TheLurker::Instance()->OnLurkNo();
 }

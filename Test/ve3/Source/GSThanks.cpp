@@ -10,12 +10,12 @@
 
 namespace Amju
 {
-static void OnThanksOk()
+static void OnThanksOk(GuiElement*)
 {
   TheGSThanks::Instance()->GoBack();
 }
 
-static void OnThanksCal()
+static void OnThanksCal(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSCalendar::Instance());
 }

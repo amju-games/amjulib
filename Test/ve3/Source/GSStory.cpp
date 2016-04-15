@@ -11,7 +11,7 @@ namespace Amju
 {
 static const char* STORY_NUM_KEY = "story_num";
 
-void OnStoryReadOk()
+void OnStoryReadOk(GuiElement*)
 {
   TheGSStory::Instance()->OnReadOk();
 }

@@ -37,12 +37,12 @@ void NagReset()
   stops = 0;
 }
 
-void OnYesCogTests()
+void OnYesCogTests(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
-void OnDeclineCogTests()
+void OnDeclineCogTests(GuiElement*)
 {
   // TODO Log number of declines for research
   declines++;

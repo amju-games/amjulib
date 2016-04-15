@@ -7,12 +7,12 @@
 
 namespace Amju
 {
-static void OnOKEdit()
+static void OnOKEdit(GuiElement*)
 {
   TheGSEditLocation::Instance()->OnOKButton();
 }
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   // Go back to prev state
   TheGame::Instance()->SetCurrentState(TheGSEdit::Instance());

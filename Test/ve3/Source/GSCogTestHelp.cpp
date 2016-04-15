@@ -3,7 +3,7 @@
 
 namespace Amju
 {
-static void OnHelpDone()
+static void OnHelpDone(GuiElement*)
 {
   TheGSCogTestHelp::Instance()->GoBack();
 }

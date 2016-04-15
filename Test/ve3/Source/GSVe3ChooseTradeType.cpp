@@ -9,17 +9,17 @@
 
 namespace Amju
 {
-static void OnBack()
+static void OnBack(GuiElement*)
 {
   TheGSVe3ChooseTradeType::Instance()->GoBack();
 }
 
-static void OnGiveFood()
+static void OnGiveFood(GuiElement*)
 {
   TheGSVe3ChooseTradeType::Instance()->OnGiveFood();
 }
 
-static void OnGiveTreasure()
+static void OnGiveTreasure(GuiElement*)
 {
   TheGSVe3ChooseTradeType::Instance()->OnGiveTreasure();
 }

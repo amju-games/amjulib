@@ -13,12 +13,12 @@ namespace Amju
 {
 static std::string lastEmail = "";
 
-static void OnLoginButton()
+static void OnLoginButton(GuiElement*)
 {
   TheGSLogin::Instance()->OnLoginButton();
 }
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
@@ -56,7 +56,7 @@ void GSLogin::Draw2d()
   GSGui::Draw2d();
 }
 
-void OnLoginChar()
+void OnLoginChar(GuiElement*)
 {
   TheGSLogin::Instance()->OnLoginChar();
 }
@@ -67,7 +67,7 @@ void GSLogin::OnLoginChar()
   std::string s = text->GetText();
   bool b = (s.find('@') != std::string::npos && s.find('.') != std::string::npos);
   GuiButton* login = (GuiButton*)GetElementByName(m_gui, "login-button");
-  if (b)
+  if (true) //b)
   {
 #ifdef EMAIL_DEBUG
 std::cout << "Email is ok, enable login button.\n";

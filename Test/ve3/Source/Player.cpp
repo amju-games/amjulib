@@ -752,7 +752,7 @@ void Player::OnCollidePlayer(Player* otherPlayer)
 */
 }
 
-void OnEatNo()
+void OnEatNo(GuiElement*)
 {
   LurkMsg lm("OK, you can eat it later, or give it to someone else if you like!", LURK_FG, LURK_BG, AMJU_CENTRE); 
   TheLurker::Instance()->Queue(lm);    
@@ -760,7 +760,7 @@ void OnEatNo()
   ChangePlayerCount(FOOD_STORED_KEY, +1);
 }
 
-void OnEatYes()
+void OnEatYes(GuiElement*)
 {
   // TODO Different health points for different food types?
   LurkMsg lm("Yum yum! You got +1 health point!", LURK_FG, LURK_BG, AMJU_CENTRE); 

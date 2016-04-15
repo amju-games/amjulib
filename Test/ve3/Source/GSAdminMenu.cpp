@@ -11,18 +11,18 @@
 
 namespace Amju
 {
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSStartMenu::Instance());
 }
 
-static void OnEditButton()
+static void OnEditButton(GuiElement*)
 {
   SetGameMode(AMJU_MODE_EDIT);
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
-static void OnCogTestButton()
+static void OnCogTestButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }

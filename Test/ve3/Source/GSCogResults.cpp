@@ -8,17 +8,17 @@
 
 namespace Amju
 {
-static void OnNext()
+static void OnNext(GuiElement*)
 {
   TheGSCogResults::Instance()->OnNext();
 }
 
-static void OnPrev()
+static void OnPrev(GuiElement*)
 {
   TheGSCogResults::Instance()->OnPrev();
 }
 
-static void OnCogTestResultsOk()
+static void OnCogTestResultsOk(GuiElement*)
 {
   // TODO does this work from anywhere ??
   static GSCogResults* cr = TheGSCogResults::Instance();

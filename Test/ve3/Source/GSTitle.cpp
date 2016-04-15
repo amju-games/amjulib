@@ -30,7 +30,7 @@
 
 namespace Amju
 {
-static void OnQuickStartButton()
+static void OnQuickStartButton(GuiElement*)
 {
   SetGameMode(AMJU_MODE_NONE);
   static PlayerInfoManager* pim = ThePlayerInfoManager::Instance();
@@ -41,13 +41,13 @@ static void OnQuickStartButton()
   TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
 }
 
-static void OnOptionsButton()
+static void OnOptionsButton(GuiElement*)
 {
   TheGSOptions::Instance()->SetPrevState(TheGSTitle::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 
-static void OnStartButton()
+static void OnStartButton(GuiElement*)
 {
   // If no players, go straight to log in screen
   if (ThePlayerInfoManager::Instance()->GetNumPlayerNames() == 0)
@@ -64,7 +64,7 @@ static void OnStartButton()
   //Fade(TheGSStartMenu::Instance(), 2.0f);
 }
 
-static void OnQuitButton()
+static void OnQuitButton(GuiElement*)
 {
   // No Confirm from Title screen
   exit(0);

@@ -17,39 +17,39 @@
 
 namespace Amju
 {
-static void OnOk()
+static void OnOk(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnOk();
 }
 
-static void OnCancel()
+static void OnCancel(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnCancel();
 }
 
 static const float SCALE = 0.1f; // scale increments
 
-void OnShorter()
+void OnShorter(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnScale(Vec2f(0, -SCALE));
 }
 
-void OnTaller()
+void OnTaller(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnScale(Vec2f(0, +SCALE));
 }
 
-void OnThinner()
+void OnThinner(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnScale(Vec2f(-SCALE, 0));
 }
 
-void OnFatter()
+void OnFatter(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnScale(Vec2f(+SCALE, 0));
 }
 
-void OnBlank()
+void OnBlank(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->OnBlank();
 }

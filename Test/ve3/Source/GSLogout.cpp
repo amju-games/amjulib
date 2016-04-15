@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-static void OnLogoutCancel()
+static void OnLogoutCancel(GuiElement*)
 {
   TheGSLogout::Instance()->GoBack();
 }

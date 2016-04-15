@@ -41,6 +41,7 @@ ReqLogin::ReqLogin(const std::string& url, const std::string& email) : Ve1Req(ur
 void ReqLogin::OnFailure()
 {
   ShowError("Couldn't log in. " + m_errorStr, TheGSTitle::Instance());
+std::cout << "URL: " << m_url << "\n\n\n";
 }
 
 void ReqLogin::OnSuccess()

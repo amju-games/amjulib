@@ -20,12 +20,12 @@ namespace Amju
 {
 static Colour RECIP_COLOUR(0.5f, 0, 0.5f, 1);
 
-static void OnChatSendButton()
+static void OnChatSendButton(GuiElement*)
 {
   TheChatConsole::Instance()->OnChatSend();
 }
 
-static void OnChatCancelButton()
+static void OnChatCancelButton(GuiElement*)
 {
   TheChatConsole::Instance()->OnChatCancel();
 }
@@ -289,7 +289,7 @@ std::cout << "This player: " << typerId << " is not typing anything.\n";
   }
 }
 
-void OnTyping()
+void OnTyping(GuiElement*)
 {
 std::cout << "Typing!!\n";
   TheChatConsole::Instance()->OnTyping();

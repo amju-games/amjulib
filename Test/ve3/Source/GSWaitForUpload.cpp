@@ -7,7 +7,7 @@
 
 namespace Amju
 {
-static void OnCancel()
+static void OnCancel(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSEdit::Instance());
 }

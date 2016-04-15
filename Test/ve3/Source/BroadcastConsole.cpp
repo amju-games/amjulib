@@ -9,7 +9,7 @@
 
 namespace Amju
 {
-static void OnEnter()
+static void OnEnter(GuiElement*)
 {
   TheBroadcastConsole::Instance()->OnEnter();
 }

@@ -34,17 +34,17 @@ void GSVe3MakeTradeRequest::Draw2d()
   GSGui::Draw2d();
 }
 
-static void OnTradeCancel()
+static void OnTradeCancel(GuiElement*)
 {
   TheGSVe3MakeTradeRequest::Instance()->GoBack();
 }
 
-static void OnTradeSend()
+static void OnTradeSend(GuiElement*)
 {
   TheGSVe3MakeTradeRequest::Instance()->OnTradeSend();
 }
 
-static void OnTradeDoneOk()
+static void OnTradeDoneOk(GuiElement*)
 {
   // TODO What state should we go to - View Other Players, right?
 //  TheGSVe3MakeTradeRequest::Instance()->GoBack();

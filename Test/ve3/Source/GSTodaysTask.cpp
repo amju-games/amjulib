@@ -10,7 +10,7 @@
 
 namespace Amju
 {
-static void OnTodaysTaskOk()
+static void OnTodaysTaskOk(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }

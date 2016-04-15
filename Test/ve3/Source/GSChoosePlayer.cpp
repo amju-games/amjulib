@@ -16,12 +16,12 @@
 
 namespace Amju
 {
-static void OnNewPlayer()
+static void OnNewPlayer(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSLogin::Instance());
 }
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
@@ -81,7 +81,7 @@ void GSChoosePlayer::OnActive()
   {
 std::cout << "GSChoosePlayer: no existing player names.\n";
 
-    OnNewPlayer();
+    OnNewPlayer(nullptr);
     return;
   }
 

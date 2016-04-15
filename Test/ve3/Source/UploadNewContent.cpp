@@ -103,9 +103,9 @@ std::cout << "Material: " << m->m_name << ", " << m->m_filename << " tex: " << m
     {
       strs.insert(path + "/" + m->m_filename);
     }
-    if (!m->m_texfilename.empty())
+    if (!m->m_texfilename[0].empty())
     {
-      strs.insert(path + "/" + m->m_texfilename);
+      strs.insert(path + "/" + m->m_texfilename[0]);
     }
   }
   

@@ -7,7 +7,7 @@ VERSION		:=	3.0
 APP		:=	ve3
 APPNAME		:=	"Hungry People.app"
 
-LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.3-macosx
+LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.5-macosx
 BUILD		:=	../../../../Build/$(APP)/$(AMJU_BUILD_ARCH)
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
@@ -17,7 +17,7 @@ GUIASSETSDIR 	:=	../../../../Assets/gui
 # These are the shared font assets, not just for this project
 FONT2D		:=	../../../../Assets/font2d
 FONT3D		:=	../../../../Assets/font3d
-RUNDIR		:=	$(BUILD)/$(APPNAME)/Contents/MacOS
+RUNDIR		:=	$(BUILD)/$(APPNAME)/Contents/MacOS/
 DATADIR		:=	$(RUNDIR)/Data
 
 LIB_BASS_MIDI	:=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Source/SoundBass/Bass2.4/Macosx/libbassmidi.dylib 

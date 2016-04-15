@@ -14,7 +14,7 @@
 
 namespace Amju
 {
-static void OnBack()
+static void OnBack(GuiElement*)
 {
   TheGSOptions::Instance()->SaveToConfig();
 
@@ -31,19 +31,19 @@ static void OnFullscreen()
 }
 */
 
-static void OnInternet()
+static void OnInternet(GuiElement*)
 {
   TheGSProxy::Instance()->SetPrevState(TheGSOptions::Instance());
   TheGame::Instance()->SetCurrentState(TheGSProxy::Instance()); 
   // TODO Other internet options, with proxy settings as one page.
 }
 
-static void OnKeyboard()
+static void OnKeyboard(GuiElement*)
 {
   TheGSOptions::Instance()->OnKeyboard();
 }
 
-static void OnAvatar()
+static void OnAvatar(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->SetPrevState(TheGSOptions::Instance());
   TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance()); 

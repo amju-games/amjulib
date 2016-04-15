@@ -21,17 +21,17 @@
 
 namespace Amju
 {
-static void OnButton()
+static void OnButton(GuiElement*)
 {
   TheGSReactionTime::Instance()->OnButton();
 }
 
-static void NextGo()
+static void NextGo(GuiElement*)
 {
   TheGSReactionTime::Instance()->NextGo();
 }
 
-void StartRT()
+void StartRT(GuiElement*)
 {
   TheGSReactionTime::Instance()->SetTest();
 }

@@ -31,7 +31,7 @@ namespace Amju
 // Trail-making tests have 2 min time limit
 static const float MAX_TIME = 120.0f; 
 
-static void OnReset()
+static void OnReset(GuiElement*)
 {
   TheGSTrailMakingTest::Instance()->ResetTest();
 }

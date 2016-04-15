@@ -1,6 +1,6 @@
 #include <AmjuFirst.h>
 #include "Ve1SceneGraph.h"
-#include "Camera.h"
+#include "MyCamera.h"
 #include "Cam2d.h"
 #include "Useful.h"
 #include "GameMode.h"
@@ -40,7 +40,7 @@ void ClearVe1SceneGraph()
 #ifdef CAM_2D
   if (GetGameMode() == AMJU_MODE_EDIT)
   {
-    sg->SetCamera(new Camera);
+    sg->SetCamera(new MyCamera);
   }
   else
   {

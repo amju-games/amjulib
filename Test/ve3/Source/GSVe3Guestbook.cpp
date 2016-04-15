@@ -7,17 +7,17 @@
 
 namespace Amju
 {
-static void OnAddComment()
+static void OnAddComment(GuiElement*)
 {
   TheGSVe3Guestbook::Instance()->OnAddCommentButton();
 }
 
-static void OnBack()
+static void OnBack(GuiElement*)
 {
   TheGSVe3Guestbook::Instance()->GoBack();
 }
 
-static void OnShowSentMsgs()
+static void OnShowSentMsgs(GuiElement*)
 {
   TheGSVe3Guestbook::Instance()->OnShowSentMsgs();
 }

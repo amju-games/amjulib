@@ -8,12 +8,12 @@
 
 namespace Amju
 {
-static void OnNewMsgsNo()
+static void OnNewMsgsNo(GuiElement*)
 {
   // ?
 }
 
-static void OnNewMsgsYes()
+static void OnNewMsgsYes(GuiElement*)
 {
   static Game* game = TheGame::Instance();
   static GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();

@@ -19,7 +19,7 @@ namespace Amju
 {
 static const char* MESH_PATH_KEY = "last_mesh_path";
 
-static void OnOKButton()
+static void OnOKButton(GuiElement*)
 {
   TheGSObjMesh::Instance()->OnOKButton();
 }
@@ -37,7 +37,7 @@ static void OnSingleClick(const std::string& filename)
 }
 */
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSEdit::Instance());
 }

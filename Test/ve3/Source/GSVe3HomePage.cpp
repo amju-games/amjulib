@@ -19,22 +19,22 @@
 
 namespace Amju
 {
-void OnEatButton(); // in GSMain
+void OnEatButton(GuiElement*); // in GSMain
 
-static void OnGoToStatsPage()
+static void OnGoToStatsPage(GuiElement*)
 {
   GSVe3MyStats* ms = TheGSVe3MyStats::Instance();
   ms->SetPrevState(TheGSVe3HomePage::Instance());
   TheGame::Instance()->SetCurrentState(ms);
 }
 
-static void OnHomepageEatButton()
+static void OnHomepageEatButton(GuiElement*)
 {
-  OnEatButton();
+  OnEatButton(nullptr);
   TheGSVe3HomePage::Instance()->RefreshGui();
 }
 
-static void OnSeeMyGuestbook()
+static void OnSeeMyGuestbook(GuiElement*)
 {
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
   g->SetPrevState(TheGSVe3HomePage::Instance());
@@ -44,7 +44,7 @@ static void OnSeeMyGuestbook()
   TheGame::Instance()->SetCurrentState(g);
 }
 
-static void OnSeeMyMessages()
+static void OnSeeMyMessages(GuiElement*)
 {
   GSVe3Guestbook* g = TheGSVe3Guestbook::Instance();
   g->SetPrevState(TheGSVe3HomePage::Instance());
@@ -54,7 +54,7 @@ static void OnSeeMyMessages()
   TheGame::Instance()->SetCurrentState(g);
 }
 
-static void OnQuit()
+static void OnQuit(GuiElement*)
 {
   TheGSQuitGame::Instance()->SetPrevState(TheGSVe3HomePage::Instance());
   TheGame::Instance()->SetCurrentState(TheGSQuitGame::Instance());
@@ -128,18 +128,18 @@ void GSVe3HomePage::Draw2d()
   GSGui::Draw2d();
 }
 
-static void OnChangeName()
+static void OnChangeName(GuiElement*)
 {
 }
 
-static void OnChangeLook()
+static void OnChangeLook(GuiElement*)
 {
   GS2dAvatarMod* gs = TheGS2dAvatarMod::Instance();
   gs->SetPrevState(TheGSVe3HomePage::Instance());
   TheGame::Instance()->SetCurrentState(gs);
 }
 
-static void OnExplore()
+static void OnExplore(GuiElement*)
 {
   GSMain* gs = TheGSMain::Instance();
   gs->SetPrevState(TheGSVe3HomePage::Instance());
@@ -171,7 +171,7 @@ static void OnExplore()
   TheGame::Instance()->SetCurrentState(TheGSWaitForNewLocation::Instance());
 }
 
-static void OnOtherPlayers()
+static void OnOtherPlayers(GuiElement*)
 {
   GSVe3ViewOtherPlayers* gs = TheGSVe3ViewOtherPlayers::Instance();
   gs->SetPrevState(TheGSVe3HomePage::Instance());

@@ -6,7 +6,7 @@
 
 namespace Amju
 {
-static void OnAchievementsOk()
+static void OnAchievementsOk(GuiElement*)
 {
   TheGSAchievements::Instance()->GoBack();
 }

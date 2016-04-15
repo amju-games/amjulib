@@ -15,30 +15,30 @@
 
 namespace Amju
 {
-static void OnOptionsButton()
+static void OnOptionsButton(GuiElement*)
 {
   // Set back state!!
   TheGSOptions::Instance()->SetPrevState(TheGSStartMenu::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 
-static void OnGuestButton()
+static void OnGuestButton(GuiElement*)
 {
   TheGSLoginWaiting::Instance()->SetEmail("guest");
   TheGame::Instance()->SetCurrentState(TheGSLoginWaiting::Instance());
 }
 
-static void OnStartButton()
+static void OnStartButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSChoosePlayer::Instance());
 }
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }
 
-static void OnAdminButton()
+static void OnAdminButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSAdminMenu::Instance());
 }

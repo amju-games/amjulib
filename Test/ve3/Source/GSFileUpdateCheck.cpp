@@ -16,7 +16,7 @@ namespace Amju
 {
 static const char* FILE_UPDATE_TIMESTAMP = "file_update_time";
 
-void OnSkip()
+void OnSkip(GuiElement*)
 {
   TheGSFileUpdateCheck::Instance()->OnSkip();
 }

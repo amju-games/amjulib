@@ -16,7 +16,7 @@
 
 namespace Amju
 {
-static void OnStopPrac()
+static void OnStopPrac(GuiElement*)
 {
   GameState* gs = TheGame::Instance()->GetState();
   GSCogTestBase* ctb = dynamic_cast<GSCogTestBase*>(gs);
@@ -31,7 +31,7 @@ static void OnStopPrac()
   }
 }
 
-static void OnStopTest()
+static void OnStopTest(GuiElement*)
 {
 #ifdef NEW_COG_PAUSE_MENU
 

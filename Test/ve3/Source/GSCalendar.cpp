@@ -9,7 +9,7 @@
 
 namespace Amju
 {
-static void OnCalOk()
+static void OnCalOk(GuiElement*)
 {
   TheGSCalendar::Instance()->GoBack();
 }

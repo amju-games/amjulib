@@ -15,15 +15,15 @@
 
 namespace Amju
 {
-static void OnNoDoNothing() {}
+static void OnNoDoNothing(GuiElement*) {}
 
-static void OnResumeButton()
+static void OnResumeButton(GuiElement*)
 {
   // TODO This may well restart the test, if OnActive resets the test.
   TheGSPauseCogTest::Instance()->GoBack();
 }
 
-static void OnQuitYes()
+static void OnQuitYes(GuiElement*)
 {
   GameMode gm = GetGameMode();
   if (gm == AMJU_MODE_NO_GAME || gm == AMJU_MODE_NONE)
@@ -42,12 +42,12 @@ static void OnQuitYes()
   }
 }
 
-static void OnQuitTests()
+static void OnQuitTests(GuiElement*)
 {
   TheLurker::Instance()->ShowYesNo("Are you sure you want to quit doing the tests?", LURK_FG, LURK_BG, OnNoDoNothing, OnQuitYes);
 }
 
-static void OnSkipYes()
+static void OnSkipYes(GuiElement*)
 {
   GSCogTestMenu* ctm = TheGSCogTestMenu::Instance();
   ctm->AdvanceToNextTest();
@@ -55,12 +55,12 @@ static void OnSkipYes()
   TheGame::Instance()->SetCurrentState(ctm); 
 }
 
-static void OnSkipThisTest()
+static void OnSkipThisTest(GuiElement*)
 {
   TheLurker::Instance()->ShowYesNo("Are you sure you want to skip this test?", LURK_FG, LURK_BG, OnNoDoNothing, OnSkipYes);
 }
 
-static void OnHelp()
+static void OnHelp(GuiElement*)
 {
   GSCogTestHelp* cth = TheGSCogTestHelp::Instance();
   
@@ -68,7 +68,7 @@ static void OnHelp()
   TheGame::Instance()->SetCurrentState(cth);
 }
 
-static void OnRestartYes()
+static void OnRestartYes(GuiElement*)
 {
   // TODO This *shouldn't* restart the test - TODO fix this
   TheGSPauseCogTest::Instance()->GoBack();

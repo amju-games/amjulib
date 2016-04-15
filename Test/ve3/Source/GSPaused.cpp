@@ -26,24 +26,24 @@ namespace Amju
 //  TheGame::Instance()->SetCurrentState(TheGSCalendar::Instance());
 //}
 
-static void OnAvatarButton()
+static void OnAvatarButton(GuiElement*)
 {
   TheGS2dAvatarMod::Instance()->SetPrevState(TheGSPaused::Instance());
   TheGame::Instance()->SetCurrentState(TheGS2dAvatarMod::Instance());
 }
 
-static void OnResumeButton()
+static void OnResumeButton(GuiElement*)
 {
   TheGSPaused::Instance()->GoBack();
 }
 
-static void OnOptionsButton()
+static void OnOptionsButton(GuiElement*)
 {
   TheGSOptions::Instance()->SetPrevState(TheGSPaused::Instance());
   TheGame::Instance()->SetCurrentState(TheGSOptions::Instance());
 }
 
-static void OnQuitButton()
+static void OnQuitButton(GuiElement*)
 {
   //TheGSYesNoQuitProcess::Instance()->SetPrevState(TheGSMain::Instance());
   //TheGame::Instance()->SetCurrentState(TheGSYesNoQuitProcess::Instance());

@@ -10,12 +10,12 @@
 
 namespace Amju
 {
-static void OnReplyCancel()
+static void OnReplyCancel(GuiElement*)
 {
   TheGSVe3MsgReply::Instance()->GoBack();
 }
 
-static void OnReplySend()
+static void OnReplySend(GuiElement*)
 {
   TheGSVe3MsgReply::Instance()->SendReply();
 }

@@ -5,7 +5,7 @@
 
 namespace Amju
 {
-static void OnBack()
+static void OnBack(GuiElement*)
 {
   TheGSVe3SinceLastTime::Instance()->GoBack();
 }

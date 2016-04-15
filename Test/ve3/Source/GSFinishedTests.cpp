@@ -10,13 +10,13 @@
 
 namespace Amju
 {
-static void OnResults()
+static void OnResults(GuiElement*)
 {
   TheGSCogResults::Instance()->SetPrevState(TheGSFinishedTests::Instance());
   TheGame::Instance()->SetCurrentState(TheGSCogResults::Instance());
 }
 
-static void OnFinishedTestsOk()
+static void OnFinishedTestsOk(GuiElement*)
 {
   TheGSLogout::Instance()->SetPrevState(TheGSTitle::Instance());
   TheGame::Instance()->SetCurrentState(TheGSLogout::Instance());

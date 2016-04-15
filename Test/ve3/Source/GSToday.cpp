@@ -22,7 +22,7 @@
 
 namespace Amju
 {
-static void OnDoTests()
+static void OnDoTests(GuiElement*)
 {
   GSCogTestMenu* gtm = TheGSCogTestMenu::Instance();
   gtm->SetPrevState(TheGSToday::Instance());
@@ -54,25 +54,25 @@ static void OnDoTests()
 //  }
 //}
 
-static void OnTodayViewResults()
+static void OnTodayViewResults(GuiElement*)
 {
   TheGSCogResults::Instance()->SetPrevState(TheGSToday::Instance());
   TheGame::Instance()->SetCurrentState(TheGSCogResults::Instance());
 }
 
-static void OnTodayPlaySingle()
+static void OnTodayPlaySingle(GuiElement*)
 {
   SetGameMode(AMJU_MODE_SINGLE);
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
-static void OnTodayPlayMulti()
+static void OnTodayPlayMulti(GuiElement*)
 {
   SetGameMode(AMJU_MODE_MULTI);
   TheGame::Instance()->SetCurrentState(TheGSStartGame::Instance());
 }
 
-static void OnTodayOk()
+static void OnTodayOk(GuiElement*)
 {
   GameState* state = 0;
 

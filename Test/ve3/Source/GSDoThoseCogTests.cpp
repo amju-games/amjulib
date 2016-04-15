@@ -8,12 +8,12 @@
 
 namespace Amju
 {
-static void OnDoCogTestsOk()
+static void OnDoCogTestsOk(GuiElement*)
 {
   TheGSDoThoseCogTests::Instance()->GoBack();
 }
 
-static void OnDoCogTestsQuit()
+static void OnDoCogTestsQuit(GuiElement*)
 {
   TheGSQuitGame::Instance()->SetPrevState(TheGSDoThoseCogTests::Instance());
   TheGame::Instance()->SetCurrentState(TheGSQuitGame::Instance());

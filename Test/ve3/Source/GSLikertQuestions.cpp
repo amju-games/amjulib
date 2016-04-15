@@ -43,7 +43,7 @@ void GSLikertQuestions::OnChoiceButton(int choice)
   std::cout << "Got choice: " << choice << "\n";
   // TODO Save and go to next Q. If no more Qs, return to menu state
 
-  Assert(m_testId != -1);
+  //Assert(m_testId != -1);
   TheCogTestResults::Instance()->StoreResult(
     new Result(m_testId, "q_" + ToString(m_currentQuestion), ToString(choice)));
 

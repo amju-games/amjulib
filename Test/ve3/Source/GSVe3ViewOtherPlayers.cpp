@@ -54,17 +54,17 @@ void GSVe3ViewOtherPlayers::Draw2d()
   GSGui::Draw2d();
 }
 
-static void OnBack()
+static void OnBack(GuiElement*)
 {
   TheGSVe3ViewOtherPlayers::Instance()->GoBack();
 }
 
-static void OnPrevPlayer()
+static void OnPrevPlayer(GuiElement*)
 {
   TheGSVe3ViewOtherPlayers::Instance()->PrevPlayer();
 }
 
-static void OnNextPlayer()
+static void OnNextPlayer(GuiElement*)
 {
   TheGSVe3ViewOtherPlayers::Instance()->NextPlayer();
 }
@@ -166,12 +166,12 @@ void GSVe3ViewOtherPlayers::PrevPlayer()
   }
 }
 
-static void OnMakeATrade()
+static void OnMakeATrade(GuiElement*)
 {
   TheGSVe3ViewOtherPlayers::Instance()->OnMakeATrade();
 }
 
-static void OnSeeGuestbook()
+static void OnSeeGuestbook(GuiElement*)
 {
   TheGSVe3ViewOtherPlayers::Instance()->OnSeeGuestbook();
 }

@@ -7,14 +7,14 @@
 
 namespace Amju
 {
-static void OnYes()
+static void OnYes(GuiElement*)
 {
   GSYesNo* yn = dynamic_cast<GSYesNo*>(TheGame::Instance()->GetState());
   Assert(yn);
   yn->OnYes();
 }
 
-static void OnNo()
+static void OnNo(GuiElement*)
 {
   GSYesNo* yn = dynamic_cast<GSYesNo*>(TheGame::Instance()->GetState());
   Assert(yn);

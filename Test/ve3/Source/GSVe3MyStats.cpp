@@ -24,21 +24,21 @@
 
 namespace Amju
 {
-static void OnTestResults()
+static void OnTestResults(GuiElement*)
 {
   GSCogResults* cr = TheGSCogResults::Instance();
   cr->SetPrevState(TheGSVe3MyStats::Instance());
   TheGame::Instance()->SetCurrentState(cr);
 }
 
-static void OnDoTests()
+static void OnDoTests(GuiElement*)
 {
   // When done, come back to home page
   // This is broken
   TheGame::Instance()->SetCurrentState(TheGSCogTestMenu::Instance());
 }
 
-static void OnCalendar()
+static void OnCalendar(GuiElement*)
 {
   GSCalendar* cal = TheGSCalendar::Instance();
   cal->SetPrevState(TheGSVe3MyStats::Instance());

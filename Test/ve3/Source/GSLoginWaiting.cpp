@@ -10,7 +10,7 @@
 
 namespace Amju
 {
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   TheGame::Instance()->SetCurrentState(TheGSTitle::Instance());
 }

@@ -25,7 +25,7 @@ namespace Amju
 {
 static const char* LOCATION_PATH_KEY = "last_location_mesh_path";
 
-static void OnOKNew()
+static void OnOKNew(GuiElement*)
 {
   TheGSNewLocation::Instance()->OnOKButton();
 }
@@ -205,9 +205,9 @@ std::cout << "Material: " << m->m_name << ", " << m->m_filename << " tex: " << m
     {
       m_strs.insert(path + "/" + m->m_filename);
     }
-    if (!m->m_texfilename.empty())
+    if (!m->m_texfilename[0].empty())
     {
-      m_strs.insert(path + "/" + m->m_texfilename);
+      m_strs.insert(path + "/" + m->m_texfilename[0]);
     }
   }
 
@@ -358,7 +358,7 @@ std::cout << "OnLocationCreated called ok! Now going to this location: " << id <
   SetLocalPlayerLocation(id);
 }
 
-static void OnCancelButton()
+static void OnCancelButton(GuiElement*)
 {
   // Go back to prev state
   TheGame::Instance()->SetCurrentState(TheGSEdit::Instance()); 
