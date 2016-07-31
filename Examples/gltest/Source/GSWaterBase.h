@@ -14,9 +14,9 @@ protected:
   GSWaterBase();
 
 public:
-  virtual void Update();
-  virtual void DrawScene();
-  virtual void OnActive();
+  virtual void Update() override;
+  virtual void DrawScene() override;
+  virtual void OnActive() override;
   virtual void CreateTweakMenu() override;
 
 protected:

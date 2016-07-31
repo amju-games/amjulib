@@ -12,12 +12,12 @@ protected:
   GSRenderTextureBase();
 
 public:
-  virtual void Update();
+  virtual void Update() override;
   virtual void DrawScene() override;
-  virtual void OnActive();
+  virtual void OnActive() override;
 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnCursorEvent(const CursorEvent&) override;
+  virtual bool OnMouseButtonEvent(const MouseButtonEvent&) override;
 
 protected:
   FullScreenPostProcess m_fs;

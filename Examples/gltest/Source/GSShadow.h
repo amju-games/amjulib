@@ -12,9 +12,9 @@ class GSShadow : public GSBase
   friend class Singleton<GSShadow>;
 
 public:
-  virtual void Update();
+  virtual void Update() override;
   virtual void DrawScene() override;
-  virtual void OnActive();
+  virtual void OnActive() override;
 
 };
 typedef Singleton<GSShadow> TheGSShadow;
