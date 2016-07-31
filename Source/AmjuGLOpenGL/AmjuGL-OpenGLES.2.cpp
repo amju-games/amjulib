@@ -123,9 +123,9 @@ public:
     const int STRIDE = sizeof(AmjuGL::Vert);
   
     // Use lighting shader so we get the Normal attrib variable location!
-    int vertexAttribPosition = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
-    int vertexAttribNormal = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
-    int vertexAttribTexCoord0 = s_currentShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
+    int vertexAttribPosition = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
+    int vertexAttribNormal = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
+    int vertexAttribTexCoord0 = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
   
     glEnableVertexAttribArray(vertexAttribPosition);
     glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
@@ -216,9 +216,9 @@ public:
       // This should probably go in Draw
       const int STRIDE = sizeof(AmjuGL::Vert);
       
-      int vertexAttribPosition = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
-      int vertexAttribNormal = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
-      int vertexAttribTexCoord0 = s_defaultShader->GetAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
+      int vertexAttribPosition = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
+      int vertexAttribNormal = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
+      int vertexAttribTexCoord0 = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
       
       glEnableVertexAttribArray(vertexAttribPosition);
       glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));

@@ -519,6 +519,9 @@
 		69FE6BC617ABC97200C391F4 /* TriList.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FE6BC317ABC97200C391F4 /* TriList.h */; };
 		69FEF54E1826827900D83578 /* ROConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FEF54C1826827900D83578 /* ROConfig.cpp */; };
 		69FEF54F1826827900D83578 /* ROConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FEF54D1826827900D83578 /* ROConfig.h */; };
+		71D22B5B1D4E4DA400012DB8 /* Cubemap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B5A1D4E4DA400012DB8 /* Cubemap.h */; };
+		71D22B5E1D4E4E6600012DB8 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B5C1D4E4E6600012DB8 /* Material.cpp */; };
+		71D22B5F1D4E4E6600012DB8 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B5D1D4E4E6600012DB8 /* Material.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -1047,6 +1050,9 @@
 		69FE6BC317ABC97200C391F4 /* TriList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriList.h; path = ../../../Source/AmjuGL/TriList.h; sourceTree = "<group>"; };
 		69FEF54C1826827900D83578 /* ROConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ROConfig.cpp; path = ../../../Source/FileUtils/ROConfig.cpp; sourceTree = "<group>"; };
 		69FEF54D1826827900D83578 /* ROConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ROConfig.h; path = ../../../Source/FileUtils/ROConfig.h; sourceTree = "<group>"; };
+		71D22B5A1D4E4DA400012DB8 /* Cubemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cubemap.h; path = ../../../Source/AmjuGL/Cubemap.h; sourceTree = "<group>"; };
+		71D22B5C1D4E4E6600012DB8 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		71D22B5D1D4E4E6600012DB8 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1209,32 +1215,33 @@
 		693D406F15AB783A00B84D5C /* AmjuGL */ = {
 			isa = PBXGroup;
 			children = (
-				690483D9199B38CE00420BCB /* Camera.cpp */,
-				690483DA199B38CE00420BCB /* Camera.h */,
-				692F34BC197A838C0040C9C3 /* FullScreenPostProcess.cpp */,
-				692F34BD197A838C0040C9C3 /* FullScreenPostProcess.h */,
-				692F34BE197A838C0040C9C3 /* RenderToTexture.cpp */,
-				692F34BF197A838C0040C9C3 /* RenderToTexture.h */,
-				692F34C4197A89EB0040C9C3 /* DepthOfField.cpp */,
-				697F5AF219572EB70020A72E /* DepthOfField.h */,
-				69FE6BC117ABC97200C391F4 /* DrawDecorator.h */,
-				69FE6BC217ABC97200C391F4 /* TriList.cpp */,
-				69FE6BC317ABC97200C391F4 /* TriList.h */,
-				695AD8B916B7BD8200E1E814 /* Drawable.h */,
-				695AD8BA16B7BD8200E1E814 /* Outliner.h */,
 				693D404F15AB780200B84D5C /* AmjuGL-Impl.h */,
 				693D405015AB780200B84D5C /* AmjuGL-Null.h */,
 				693D405115AB780200B84D5C /* AmjuGL.cpp */,
 				693D405215AB780200B84D5C /* AmjuGL.h */,
 				693D405315AB780200B84D5C /* AmjuGLWindowInfo.cpp */,
 				693D405415AB780200B84D5C /* AmjuGLWindowInfo.h */,
+				690483D9199B38CE00420BCB /* Camera.cpp */,
+				690483DA199B38CE00420BCB /* Camera.h */,
 				693D405515AB780200B84D5C /* Colour.cpp */,
 				693D405615AB780200B84D5C /* Colour.h */,
+				71D22B5A1D4E4DA400012DB8 /* Cubemap.h */,
+				692F34C4197A89EB0040C9C3 /* DepthOfField.cpp */,
+				697F5AF219572EB70020A72E /* DepthOfField.h */,
+				695AD8B916B7BD8200E1E814 /* Drawable.h */,
+				69FE6BC117ABC97200C391F4 /* DrawDecorator.h */,
+				692F34BC197A838C0040C9C3 /* FullScreenPostProcess.cpp */,
+				692F34BD197A838C0040C9C3 /* FullScreenPostProcess.h */,
+				695AD8BA16B7BD8200E1E814 /* Outliner.h */,
+				692F34BE197A838C0040C9C3 /* RenderToTexture.cpp */,
+				692F34BF197A838C0040C9C3 /* RenderToTexture.h */,
 				693D405715AB780200B84D5C /* Screen.cpp */,
 				693D405815AB780200B84D5C /* Screen.h */,
 				693D405915AB780200B84D5C /* Shader.h */,
 				693D405A15AB780200B84D5C /* ShaderNull.h */,
 				693D405B15AB780200B84D5C /* ShadowMap.h */,
+				69FE6BC217ABC97200C391F4 /* TriList.cpp */,
+				69FE6BC317ABC97200C391F4 /* TriList.h */,
 			);
 			name = AmjuGL;
 			sourceTree = "<group>";
@@ -1701,6 +1708,8 @@
 		693D425915AB7CE900B84D5C /* Obj */ = {
 			isa = PBXGroup;
 			children = (
+				71D22B5C1D4E4E6600012DB8 /* Material.cpp */,
+				71D22B5D1D4E4E6600012DB8 /* Material.h */,
 				693D425A15AB7CE900B84D5C /* ObjMesh.cpp */,
 				693D425B15AB7CE900B84D5C /* ObjMesh.h */,
 				693D425C15AB7CE900B84D5C /* ObjUsefulFunctions.cpp */,
@@ -1960,6 +1969,7 @@
 				693D408315AB79D300B84D5C /* Gpc.h in Headers */,
 				693D408E15AB79EE00B84D5C /* BruteForce.h in Headers */,
 				690C45161885C740007A505D /* lstate.h in Headers */,
+				71D22B5B1D4E4DA400012DB8 /* Cubemap.h in Headers */,
 				693D409015AB79EE00B84D5C /* CollisionManager.h in Headers */,
 				693D409215AB79EE00B84D5C /* CollisionMesh.h in Headers */,
 				693D409415AB79EE00B84D5C /* SAP.h in Headers */,
@@ -2179,6 +2189,7 @@
 				69056704172094AF008A0C92 /* GuiFileListBox.h in Headers */,
 				690C45091885C740007A505D /* llimits.h in Headers */,
 				69056706172094AF008A0C92 /* GuiObjView.h in Headers */,
+				71D22B5F1D4E4E6600012DB8 /* Material.h in Headers */,
 				69056708172094AF008A0C92 /* GuiScroll.h in Headers */,
 				6905670C17213527008A0C92 /* StringsFile.h in Headers */,
 				690567101721354F008A0C92 /* ParticleEffect2d.h in Headers */,
@@ -2338,6 +2349,7 @@
 				6901A12D188C3D5D00D98C04 /* IntAABBPlane.cpp in Sources */,
 				690863C5195F07200027C0A0 /* RenderToTextureES2.cpp in Sources */,
 				693D419315AB7C6800B84D5C /* DrawAABB.cpp in Sources */,
+				71D22B5E1D4E4E6600012DB8 /* Material.cpp in Sources */,
 				693D419515AB7C6800B84D5C /* DrawOBB2.cpp in Sources */,
 				693D419715AB7C6800B84D5C /* DrawOBB3.cpp in Sources */,
 				693D419915AB7C6800B84D5C /* DrawRect.cpp in Sources */,
