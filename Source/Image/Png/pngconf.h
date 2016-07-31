@@ -19,6 +19,9 @@
 
 #define PNG_1_2_X
 
+// j.c. Amjulib 0.5 iOS
+#define PNG_NO_ASSEMBLER_CODE
+
 /* 
  * PNG_USER_CONFIG has to be defined on the compiler command line. This
  * includes the resource compiler for Windows DLL configurations.
