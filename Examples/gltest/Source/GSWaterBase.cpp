@@ -91,7 +91,9 @@ void GSWaterBase::DrawScene()
 
     m_shaderTerrain->Set("modelViewProjectionMatrix", mat);
 
+#ifdef _DEBUG
     AmjuGL::SetIsWireFrameMode(m_isWireframeTerrain);
+#endif
     m_gridTerrain.Draw();
     m_shaderTerrain->End();
   }
@@ -106,7 +108,9 @@ void GSWaterBase::DrawScene()
 
 //  m_shader->Set("gTime", shaderTime);
 
+#ifdef _DEBUG
     AmjuGL::SetIsWireFrameMode(m_isWireframeWater);
+#endif
 
 // TODO switch
 //    m_spheremap->UseThisTexture(0);
@@ -118,7 +122,9 @@ void GSWaterBase::DrawScene()
     m_shaderWater->End();
   }
 
+#ifdef _DEBUG
   AmjuGL::SetIsWireFrameMode(false);
+#endif
 
   AmjuGL::UseShader(nullptr);
   m_skybox->Draw();
