@@ -51,7 +51,7 @@ public:
   { 
     *th = 1; // Give texture handle a valid value, it is checked
   }
-  virtual void UpdateTexture(const TextureHandle th, int x, int y, int w, int h, const uint8* data) {}
+  virtual void UpdateTexture(const AmjuGL::TextureHandle th, int x, int y, int w, int h, const uint8* data) {}
   virtual void UseTexture(AmjuGL::TextureHandle, int) {}
   virtual void SetTextureType(AmjuGL::TextureType) {}
   virtual void SetTextureMode(AmjuGL::TextureMode) {}
@@ -65,6 +65,7 @@ public:
     const AmjuGL::Vec3& lightPos) {}
 
   virtual Shader* LoadShader(const std::string& shaderFileName) { return new ShaderNull; }
+  virtual void UseShader(Shader*) {}
 
   virtual Drawable* Create(int) { return 0; }
 }; // class 

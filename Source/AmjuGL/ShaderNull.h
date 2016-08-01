@@ -13,11 +13,16 @@ public:
   virtual void Begin() {}
   virtual void End() {}
 
-  virtual void Set(const std::string& name, const float matrix[16]) {};
-  virtual void Set(const std::string& name, float f) {};
-  virtual void Set(const std::string& name, const AmjuGL::Vec3&) {};
-  virtual void Set(const std::string& name, const Colour&) {};
-  virtual void Set(const std::string& name, AmjuGL::TextureHandle) {};
+  virtual void Set(const std::string& name, const float matrix[16]) override {}
+  virtual void Set(const std::string& name, float f) override {}
+  virtual void Set(const std::string& name, const AmjuGL::Vec3&) override {}
+  virtual void Set(const std::string& name, const Colour&) override {}
+  virtual void Set(const std::string& name, AmjuGL::TextureHandle) override {}
+  virtual void SetMatrix3x3(const std::string& name, const float matrix[9]) override {}
+  virtual void SetInt(const std::string& name, int i) override {}
+  virtual void UseThisShader() override {} 
+  virtual int FindUniformLocation(const std::string& uniformName) override {} 
+  virtual int FindAttribLocation(const std::string& attribName) override {}
 };
 }
 
