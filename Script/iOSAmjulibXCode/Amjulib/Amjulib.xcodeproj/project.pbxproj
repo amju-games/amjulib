@@ -522,6 +522,19 @@
 		71D22B5B1D4E4DA400012DB8 /* Cubemap.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B5A1D4E4DA400012DB8 /* Cubemap.h */; };
 		71D22B5E1D4E4E6600012DB8 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B5C1D4E4E6600012DB8 /* Material.cpp */; };
 		71D22B5F1D4E4E6600012DB8 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B5D1D4E4E6600012DB8 /* Material.h */; };
+		71D22B671D4F388200012DB8 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B661D4F388200012DB8 /* Shader.cpp */; };
+		71D22B6E1D4F38B300012DB8 /* CubemapOpenGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B681D4F38B300012DB8 /* CubemapOpenGL.cpp */; };
+		71D22B6F1D4F38B300012DB8 /* CubemapOpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B691D4F38B300012DB8 /* CubemapOpenGL.h */; };
+		71D22B701D4F38B300012DB8 /* DofOpenGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B6A1D4F38B300012DB8 /* DofOpenGL.cpp */; };
+		71D22B711D4F38B300012DB8 /* DofOpenGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B6B1D4F38B300012DB8 /* DofOpenGL.h */; };
+		71D22B721D4F38B300012DB8 /* RenderDepthToTextureES2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B6C1D4F38B300012DB8 /* RenderDepthToTextureES2.cpp */; };
+		71D22B731D4F38B300012DB8 /* RenderDepthToTextureES2.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B6D1D4F38B300012DB8 /* RenderDepthToTextureES2.h */; };
+		71D22B7A1D4F38E100012DB8 /* GuiCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B741D4F38E100012DB8 /* GuiCheck.cpp */; };
+		71D22B7B1D4F38E100012DB8 /* GuiCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B751D4F38E100012DB8 /* GuiCheck.h */; };
+		71D22B7C1D4F38E100012DB8 /* GuiScrollBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B761D4F38E100012DB8 /* GuiScrollBar.cpp */; };
+		71D22B7D1D4F38E100012DB8 /* GuiScrollBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B771D4F38E100012DB8 /* GuiScrollBar.h */; };
+		71D22B7E1D4F38E100012DB8 /* GuiSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B781D4F38E100012DB8 /* GuiSlider.cpp */; };
+		71D22B7F1D4F38E100012DB8 /* GuiSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B791D4F38E100012DB8 /* GuiSlider.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -1053,6 +1066,19 @@
 		71D22B5A1D4E4DA400012DB8 /* Cubemap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cubemap.h; path = ../../../Source/AmjuGL/Cubemap.h; sourceTree = "<group>"; };
 		71D22B5C1D4E4E6600012DB8 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		71D22B5D1D4E4E6600012DB8 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		71D22B661D4F388200012DB8 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = ../../../Source/AmjuGL/Shader.cpp; sourceTree = "<group>"; };
+		71D22B681D4F38B300012DB8 /* CubemapOpenGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CubemapOpenGL.cpp; path = ../../../Source/AmjuGLOpenGL/CubemapOpenGL.cpp; sourceTree = "<group>"; };
+		71D22B691D4F38B300012DB8 /* CubemapOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CubemapOpenGL.h; path = ../../../Source/AmjuGLOpenGL/CubemapOpenGL.h; sourceTree = "<group>"; };
+		71D22B6A1D4F38B300012DB8 /* DofOpenGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DofOpenGL.cpp; path = ../../../Source/AmjuGLOpenGL/DofOpenGL.cpp; sourceTree = "<group>"; };
+		71D22B6B1D4F38B300012DB8 /* DofOpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DofOpenGL.h; path = ../../../Source/AmjuGLOpenGL/DofOpenGL.h; sourceTree = "<group>"; };
+		71D22B6C1D4F38B300012DB8 /* RenderDepthToTextureES2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderDepthToTextureES2.cpp; path = ../../../Source/AmjuGLOpenGL/RenderDepthToTextureES2.cpp; sourceTree = "<group>"; };
+		71D22B6D1D4F38B300012DB8 /* RenderDepthToTextureES2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderDepthToTextureES2.h; path = ../../../Source/AmjuGLOpenGL/RenderDepthToTextureES2.h; sourceTree = "<group>"; };
+		71D22B741D4F38E100012DB8 /* GuiCheck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiCheck.cpp; sourceTree = "<group>"; };
+		71D22B751D4F38E100012DB8 /* GuiCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiCheck.h; sourceTree = "<group>"; };
+		71D22B761D4F38E100012DB8 /* GuiScrollBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiScrollBar.cpp; sourceTree = "<group>"; };
+		71D22B771D4F38E100012DB8 /* GuiScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiScrollBar.h; sourceTree = "<group>"; };
+		71D22B781D4F38E100012DB8 /* GuiSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiSlider.cpp; sourceTree = "<group>"; };
+		71D22B791D4F38E100012DB8 /* GuiSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiSlider.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1237,6 +1263,7 @@
 				692F34BF197A838C0040C9C3 /* RenderToTexture.h */,
 				693D405715AB780200B84D5C /* Screen.cpp */,
 				693D405815AB780200B84D5C /* Screen.h */,
+				71D22B661D4F388200012DB8 /* Shader.cpp */,
 				693D405915AB780200B84D5C /* Shader.h */,
 				693D405A15AB780200B84D5C /* ShaderNull.h */,
 				693D405B15AB780200B84D5C /* ShadowMap.h */,
@@ -1249,28 +1276,34 @@
 		693D407015AB796F00B84D5C /* AmjuGLOpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				690483E3199BE68D00420BCB /* ShadowMapOpenGL.cpp */,
-				690483E4199BE68D00420BCB /* ShadowMapOpenGL.h */,
-				6966CC8F198F6BB2005992E5 /* RenderToTextureOpenGL.cpp */,
-				6966CC90198F6BB2005992E5 /* RenderToTextureOpenGL.h */,
-				690863C3195F07200027C0A0 /* RenderToTextureES2.cpp */,
-				690863C4195F07200027C0A0 /* RenderToTextureES2.h */,
-				697F5AE7195727270020A72E /* ShadowMapES2.cpp */,
-				697F5AE8195727270020A72E /* ShadowMapES2.h */,
-				696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */,
-				696519D818BF5C26009A36F6 /* VECTOR3D.cpp */,
-				696519D918BF5C26009A36F6 /* VECTOR4D.cpp */,
-				696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */,
-				69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */,
-				69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */,
+				693D407115AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp */,
+				693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */,
 				692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */,
 				692A8A0D179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h */,
 				692A8A0E179DBD6000F2B602 /* AmjuGL-OpenGLES.2.cpp */,
 				692A8A0F179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h */,
-				693D407115AB79B200B84D5C /* AmjuGL-OpenGL-Base.cpp */,
-				693D407215AB79B200B84D5C /* AmjuGL-OpenGL-Base.h */,
+				696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */,
+				71D22B681D4F38B300012DB8 /* CubemapOpenGL.cpp */,
+				71D22B691D4F38B300012DB8 /* CubemapOpenGL.h */,
+				71D22B6A1D4F38B300012DB8 /* DofOpenGL.cpp */,
+				71D22B6B1D4F38B300012DB8 /* DofOpenGL.h */,
+				69FE6B8317A9385F00C391F4 /* ES2DefaultShaders.cpp */,
+				69FE6B8417A9386000C391F4 /* ES2DefaultShaders.h */,
 				693D407515AB79B200B84D5C /* GLShader.cpp */,
 				693D407615AB79B200B84D5C /* GLShader.h */,
+				696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */,
+				71D22B6C1D4F38B300012DB8 /* RenderDepthToTextureES2.cpp */,
+				71D22B6D1D4F38B300012DB8 /* RenderDepthToTextureES2.h */,
+				690863C3195F07200027C0A0 /* RenderToTextureES2.cpp */,
+				690863C4195F07200027C0A0 /* RenderToTextureES2.h */,
+				6966CC8F198F6BB2005992E5 /* RenderToTextureOpenGL.cpp */,
+				6966CC90198F6BB2005992E5 /* RenderToTextureOpenGL.h */,
+				697F5AE7195727270020A72E /* ShadowMapES2.cpp */,
+				697F5AE8195727270020A72E /* ShadowMapES2.h */,
+				690483E3199BE68D00420BCB /* ShadowMapOpenGL.cpp */,
+				690483E4199BE68D00420BCB /* ShadowMapOpenGL.h */,
+				696519D818BF5C26009A36F6 /* VECTOR3D.cpp */,
+				696519D918BF5C26009A36F6 /* VECTOR4D.cpp */,
 			);
 			name = AmjuGLOpenGL;
 			sourceTree = "<group>";
@@ -1527,10 +1560,6 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
-				690C44A1187610A2007A505D /* ModalDialog.cpp */,
-				690C44A2187610A2007A505D /* ModalDialog.h */,
-				691136A3184F4FA60046C951 /* GuiElastic.cpp */,
-				691136A4184F4FA60046C951 /* GuiElastic.h */,
 				693D41B115AB7C9100B84D5C /* Cursor.cpp */,
 				693D41B215AB7C9100B84D5C /* Cursor.h */,
 				693D41B315AB7C9100B84D5C /* CursorManager.cpp */,
@@ -1543,6 +1572,8 @@
 				690566E2172094AF008A0C92 /* GuiCalendar.h */,
 				690566E3172094AF008A0C92 /* GuiChart.cpp */,
 				690566E4172094AF008A0C92 /* GuiChart.h */,
+				71D22B741D4F38E100012DB8 /* GuiCheck.cpp */,
+				71D22B751D4F38E100012DB8 /* GuiCheck.h */,
 				693D41B715AB7C9100B84D5C /* GuiCommandHandler.cpp */,
 				693D41B815AB7C9100B84D5C /* GuiCommandHandler.h */,
 				693D41B915AB7C9100B84D5C /* GuiComposite.cpp */,
@@ -1555,6 +1586,8 @@
 				690566EA172094AF008A0C92 /* GuiDataLineDisplay.h */,
 				693D41BB15AB7C9100B84D5C /* GuiDialog.cpp */,
 				693D41BC15AB7C9100B84D5C /* GuiDialog.h */,
+				691136A3184F4FA60046C951 /* GuiElastic.cpp */,
+				691136A4184F4FA60046C951 /* GuiElastic.h */,
 				693D41BD15AB7C9100B84D5C /* GuiElement.cpp */,
 				693D41BE15AB7C9100B84D5C /* GuiElement.h */,
 				693D41BF15AB7C9100B84D5C /* GuiFactory.cpp */,
@@ -1578,12 +1611,18 @@
 				693D41CA15AB7C9100B84D5C /* GuiRect.h */,
 				690566F2172094AF008A0C92 /* GuiScroll.cpp */,
 				690566F3172094AF008A0C92 /* GuiScroll.h */,
+				71D22B761D4F38E100012DB8 /* GuiScrollBar.cpp */,
+				71D22B771D4F38E100012DB8 /* GuiScrollBar.h */,
+				71D22B781D4F38E100012DB8 /* GuiSlider.cpp */,
+				71D22B791D4F38E100012DB8 /* GuiSlider.h */,
 				693D41CB15AB7C9100B84D5C /* GuiText.cpp */,
 				693D41CC15AB7C9100B84D5C /* GuiText.h */,
 				693D41CD15AB7C9100B84D5C /* GuiTextEdit.cpp */,
 				693D41CE15AB7C9100B84D5C /* GuiTextEdit.h */,
 				693D41CF15AB7C9100B84D5C /* GuiWindow.cpp */,
 				693D41D015AB7C9100B84D5C /* GuiWindow.h */,
+				690C44A1187610A2007A505D /* ModalDialog.cpp */,
+				690C44A2187610A2007A505D /* ModalDialog.h */,
 				693D41D115AB7C9100B84D5C /* TODO.txt */,
 			);
 			name = Gui;
@@ -1958,6 +1997,7 @@
 				693D406315AB780200B84D5C /* Colour.h in Headers */,
 				693D406515AB780200B84D5C /* Screen.h in Headers */,
 				693D406615AB780200B84D5C /* Shader.h in Headers */,
+				71D22B731D4F38B300012DB8 /* RenderDepthToTextureES2.h in Headers */,
 				690C451F1885C740007A505D /* lua.h in Headers */,
 				693D406715AB780200B84D5C /* ShaderNull.h in Headers */,
 				690C45181885C740007A505D /* lstring.h in Headers */,
@@ -1980,6 +2020,7 @@
 				693D40AA15AB7A3600B84D5C /* EventPoller.h in Headers */,
 				693D40AC15AB7A3600B84D5C /* EventTypes.h in Headers */,
 				693D40AE15AB7A3600B84D5C /* Mouse.h in Headers */,
+				71D22B6F1D4F38B300012DB8 /* CubemapOpenGL.h in Headers */,
 				693D40CB15AB7A5600B84D5C /* BinaryData.h in Headers */,
 				693D40CD15AB7A5600B84D5C /* ConfigFile.h in Headers */,
 				693D40CF15AB7A5600B84D5C /* CsvTokeniser.h in Headers */,
@@ -2087,6 +2128,7 @@
 				693D421B15AB7CA700B84D5C /* png.h in Headers */,
 				693D421C15AB7CA700B84D5C /* pngconf.h in Headers */,
 				693D423115AB7CA700B84D5C /* Texture.h in Headers */,
+				71D22B7F1D4F38E100012DB8 /* GuiSlider.h in Headers */,
 				693D423315AB7CA700B84D5C /* TextureUtils.h in Headers */,
 				693D432115AB7CE900B84D5C /* Localise.h in Headers */,
 				693D432315AB7CE900B84D5C /* Md2Model.h in Headers */,
@@ -2202,12 +2244,15 @@
 				6909086E1796EE1D007EC3FB /* LoadRect.h in Headers */,
 				692A8A11179DBD6000F2B602 /* AmjuGL-OpenGLES.1.h in Headers */,
 				692A8A13179DBD6000F2B602 /* AmjuGL-OpenGLES.2.h in Headers */,
+				71D22B711D4F38B300012DB8 /* DofOpenGL.h in Headers */,
 				69FE6B8617A9386000C391F4 /* ES2DefaultShaders.h in Headers */,
 				69FE6BC417ABC97200C391F4 /* DrawDecorator.h in Headers */,
 				69FE6BC617ABC97200C391F4 /* TriList.h in Headers */,
 				690E2F8017CE269F00DED7A1 /* iOSUtils.h in Headers */,
+				71D22B7B1D4F38E100012DB8 /* GuiCheck.h in Headers */,
 				69FEF54F1826827900D83578 /* ROConfig.h in Headers */,
 				69112FFC1840BF8100763639 /* GameStateListener.h in Headers */,
+				71D22B7D1D4F38E100012DB8 /* GuiScrollBar.h in Headers */,
 				690AD489191FEB4F008EFC78 /* SavePng.h in Headers */,
 				690483DC199B38CE00420BCB /* Camera.h in Headers */,
 			);
@@ -2280,6 +2325,7 @@
 				693D408F15AB79EE00B84D5C /* CollisionManager.cpp in Sources */,
 				693D409115AB79EE00B84D5C /* CollisionMesh.cpp in Sources */,
 				693D409315AB79EE00B84D5C /* SAP.cpp in Sources */,
+				71D22B7E1D4F38E100012DB8 /* GuiSlider.cpp in Sources */,
 				693D409A15AB7A1B00B84D5C /* DownloadReq.cpp in Sources */,
 				693D409C15AB7A1B00B84D5C /* Screenshot.cpp in Sources */,
 				693D40A715AB7A3600B84D5C /* EventListener.cpp in Sources */,
@@ -2298,6 +2344,7 @@
 				693D40DA15AB7A5600B84D5C /* FileImplMem.cpp in Sources */,
 				693D40DC15AB7A5600B84D5C /* FileImplStd.cpp in Sources */,
 				693D40DE15AB7A5600B84D5C /* FileSize.cpp in Sources */,
+				71D22B7A1D4F38E100012DB8 /* GuiCheck.cpp in Sources */,
 				693D40E015AB7A5600B84D5C /* GlueFile.cpp in Sources */,
 				690C45271885C740007A505D /* lzio.c in Sources */,
 				693D40E215AB7A5600B84D5C /* GlueFileMem.cpp in Sources */,
@@ -2353,6 +2400,7 @@
 				693D419515AB7C6800B84D5C /* DrawOBB2.cpp in Sources */,
 				693D419715AB7C6800B84D5C /* DrawOBB3.cpp in Sources */,
 				693D419915AB7C6800B84D5C /* DrawRect.cpp in Sources */,
+				71D22B721D4F38B300012DB8 /* RenderDepthToTextureES2.cpp in Sources */,
 				693D419B15AB7C6800B84D5C /* DrawSphere.cpp in Sources */,
 				690C44F61885C740007A505D /* lcode.c in Sources */,
 				693D419D15AB7C6800B84D5C /* Teapot.cpp in Sources */,
@@ -2388,6 +2436,7 @@
 				693D422015AB7CA700B84D5C /* pngmem.c in Sources */,
 				690C451C1885C740007A505D /* ltablib.c in Sources */,
 				693D422115AB7CA700B84D5C /* pngpread.c in Sources */,
+				71D22B6E1D4F38B300012DB8 /* CubemapOpenGL.cpp in Sources */,
 				693D422215AB7CA700B84D5C /* pngread.c in Sources */,
 				690C450D1885C740007A505D /* loadlib.c in Sources */,
 				693D422315AB7CA700B84D5C /* pngrio.c in Sources */,
@@ -2404,6 +2453,7 @@
 				690C45171885C740007A505D /* lstring.c in Sources */,
 				693D422B15AB7CA700B84D5C /* pngwrite.c in Sources */,
 				693D422C15AB7CA700B84D5C /* pngwtran.c in Sources */,
+				71D22B7C1D4F38E100012DB8 /* GuiScrollBar.cpp in Sources */,
 				693D422D15AB7CA700B84D5C /* pngwutil.c in Sources */,
 				693D423015AB7CA700B84D5C /* Texture.cpp in Sources */,
 				693D423215AB7CA700B84D5C /* TextureUtils.cpp in Sources */,
@@ -2476,6 +2526,8 @@
 				693D43C915AB7CE900B84D5C /* XmlUtils.cpp in Sources */,
 				693D43CB15AB7CE900B84D5C /* adler32.c in Sources */,
 				693D43CC15AB7CE900B84D5C /* compress.c in Sources */,
+				71D22B671D4F388200012DB8 /* Shader.cpp in Sources */,
+				71D22B701D4F38B300012DB8 /* DofOpenGL.cpp in Sources */,
 				693D43CD15AB7CE900B84D5C /* crc32.c in Sources */,
 				693D43CF15AB7CE900B84D5C /* deflate.c in Sources */,
 				693D43D215AB7CE900B84D5C /* gzio.c in Sources */,
