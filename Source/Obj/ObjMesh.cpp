@@ -313,7 +313,7 @@ std::cout << "Suspiciously high number of materials in obj mesh: " << numMats <<
       {
         mat.m_texture[i] = (Texture*)TheResourceManager::Instance()->GetRes(tex);
 
-        if (mat.m_texture)  
+        if (mat.m_texture[i])  
         {
           if (ShowInfo())
           {  
@@ -829,7 +829,10 @@ void ObjMesh::BuildGroup(Group& g)
     g.m_tris.push_back(t);
   }
   g.m_triList = MakeTriList(g.m_tris);
-  g.m_triList->CalcTangents();
+  if (g.m_triList)
+  {
+    g.m_triList->CalcTangents(); 
+  }
 }
 
 void ObjMesh::DrawGroup(Group& g)

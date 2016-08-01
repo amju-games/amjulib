@@ -8,8 +8,10 @@ AMJU      	:= ../../../../Source
 SOURCES		:=	../../Source
 RUNDIR		:=	../../TestData
 
+LIBDIRS         :=      $(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.5-macosx  $(AMJULIB_MAC_SCRIPT_PATH)/../../3rdPartyLibs/LibOVR-0.3.2/MacOSX
+
 LIBS	:= \
-	$(AMJULIB_MAC_SCRIPT_PATH)/../../Build/Mac/amjulib.a \
+	-lamju \
 	-framework Carbon \
 	-framework OpenGL \
 	-lstdc++ -lm 

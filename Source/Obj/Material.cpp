@@ -132,7 +132,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
 
       Assert(strs.size() == 2);
       current->m_flags = ToInt(strs[1]);
-      if (current->m_texture && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
+      if (current->m_texture[0] && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
       {
         current->m_texture[0]->SetTextureType(AmjuGL::AMJU_TEXTURE_SPHERE_MAP);
       }
