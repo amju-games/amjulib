@@ -174,13 +174,15 @@ bool GuiButton::Load(File* f)
  
   m_guiText.SetParent(GetParent());
 
+#if defined(WIN32) || defined(MACOSX)
   // Check for initial mouse over
   Rect rect = GetRect(this); 
   if (TheCursorManager::Instance()->IsCursorIn(rect))
   {
     SetIsMouseOver(true);
   }
- 
+#endif
+    
   return true;
 }
 
