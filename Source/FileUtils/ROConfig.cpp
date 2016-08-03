@@ -24,18 +24,12 @@ ConfigFile* ROConfig()
   {
     cf = new ConfigFile;
     bool NO_ROOT = false;
-#if defined(WIN32) || defined(MACOSX) || defined(GEKKO)
+
     if (!cf->Load(s_ROConfigFilename, NO_ROOT))
     {
       Assert(0);
     }
-#else
-    // Read from glue file
-    if (!cf->Load("roconfig.txt", NO_ROOT))
-    {
-      Assert(0);
-    }
-#endif
+
     // Duh, it's read only
     //atexit(SaveROConfig);
   }
