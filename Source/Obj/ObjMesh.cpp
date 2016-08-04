@@ -715,12 +715,7 @@ void ObjMesh::MungeData()
         std::cout << "Removing unused material " << matName << "\n";
       }
 		
-#ifdef WIN32
       it = m_materials.erase(it);
-#else
-      m_materials.erase(it);
-      ++it;
-#endif
     }
   }
 
