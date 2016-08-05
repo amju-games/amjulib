@@ -17,7 +17,8 @@ namespace Amju
 {
 static const float CHAR_SIZE = 0.2f;
 static const float HORIZONTAL_SPACING = CHAR_SIZE; // ??
-
+static const int NUM_CHAR_WIDTHS = 256;
+  
 Resource* FontLoader(const std::string& fontName)
 {
   // Font name is e.g. "cheri.font"
@@ -43,6 +44,7 @@ Resource* FontLoader(const std::string& fontName)
 Font::Font(const std::string& name) : m_name(name)
 {
   AMJU_CALL_STACK;
+  m_charWidths.resize(NUM_CHAR_WIDTHS);
 }
 
 Font::~Font()
@@ -140,7 +142,7 @@ bool Font::Load(File* pf)
     width /= MAX_WIDTH;
     width *= HORIZONTAL_SPACING;
 
-    m_charWidths[(char)code] = width;
+    m_charWidths[code] = width;
   }
 
 #ifdef FONT_DEBUG
