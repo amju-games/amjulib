@@ -112,7 +112,7 @@ public:
 
   virtual void Set(const AmjuGL::Tris& tris)
   {
-    m_numVerts = tris.size() * 3;
+    m_numVerts = static_cast<int>(tris.size() * 3);
 
     glBindVertexArrayOES(m_vertexArray);
 
@@ -206,7 +206,7 @@ public:
     {
       m_firstSet = false;
       
-      m_numVerts = tris.size() * 3;
+      m_numVerts = static_cast<int>(tris.size() * 3);
       
       glBindVertexArrayOES(m_vertexArray);
       

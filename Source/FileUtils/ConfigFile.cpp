@@ -179,7 +179,7 @@ int ConfigFile::GetChecksum() const
   for (ConfigMap::const_iterator it = m_values.begin(); it != m_values.end(); ++it)
   {
     const std::string& s = it->second;
-    int size = s.size();
+    int size = static_cast<int>(s.size());
     for (int i = 0; i < size; i++)
     {
       t += (i + 1) * (int)s[i];

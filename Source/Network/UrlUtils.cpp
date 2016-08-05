@@ -208,7 +208,7 @@ int GetPortFromUrl(const std::string& url)
 std::string GetDataFromUrl(const std::string& url)
 {
   // Strip characters before the first '?'
-  unsigned int f = url.find("?");
+  std::string::size_type f = url.find("?");
   if (f == std::string::npos)
   {
     return ""; // no data
@@ -218,7 +218,7 @@ std::string GetDataFromUrl(const std::string& url)
 
 std::string StripDataFromUrl(const std::string& url)
 {
-  unsigned int f = url.find("?");
+  std::string::size_type f = url.find("?");
   if (f == std::string::npos)
   {
     return url; // no data

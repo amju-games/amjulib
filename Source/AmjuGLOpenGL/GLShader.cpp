@@ -193,8 +193,8 @@ std::cout << "Vertex Shader source:\n" << vertexSource.c_str()
 std::cout << "Created shader handles\n";
 #endif
 
-  const GLint vlength = vertexSource.size();
-  const GLint flength = fragmentSource.size();
+  const GLint vlength = static_cast<GLint>(vertexSource.size());
+  const GLint flength = static_cast<GLint>(fragmentSource.size());
   const char* vStr = vertexSource.c_str();
   const char* fStr = fragmentSource.c_str();
   glShaderSource(m_vertexShaderHandle, 1, &vStr, &vlength);

@@ -76,7 +76,7 @@ void MultColour(const Colour& c)
 Colour FromHexString(const std::string& s) 
 {
   int r[4] = { 0xff, 0xff, 0xff, 0xff };
-  int size = s.size();
+  int size = static_cast<int>(s.size());
   Assert(size == 6 || size == 8); 
   for (int i = size - 2, j = size / 2 - 1; i >= 0; i -= 2, j--)
   {
