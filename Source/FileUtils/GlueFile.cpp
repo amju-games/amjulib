@@ -608,17 +608,22 @@ std::cout << "GLUE FILE: Write table: writing size of file \"" << it->c_str() <<
   return true;  
 }
 
-bool GlueFile::Dir(vector<string>* pResult)
+bool GlueFile::Dir(vector<string>* pResult) const
 {
   AMJU_CALL_STACK;
 
   // Table was read when GlueFile was opened.
-  for (FileList::iterator it = m_filenames.begin(); it != m_filenames.end(); ++it)
+  for (FileList::const_iterator it = m_filenames.begin(); it != m_filenames.end(); ++it)
   {
     pResult->push_back(*it);
   }
   return true;
 }
 
+bool GlueFile::FileExists(const std::string& subfilename) const
+{
+  AMJU_CALL_STACK;
+  return (m_table.find(subfilename) != m_table.end());
+}
 }
 
