@@ -319,10 +319,13 @@ void GuiText::DrawSingleLine(
   case AMJU_JUST_RIGHT:
     x = GetCombinedPos().x + size.x - GetTextWidth(str);
     break;
+      
   case AMJU_JUST_CENTRE:
-    x = GetCombinedPos().x + 0.5f * (size.x - GetTextWidth(str));
+    // divide by font size required to fix centering, but TODO: why??
+    float w = GetTextWidth(str) / GetFontSize();
+    x = GetCombinedPos().x + 0.5f * (size.x - w);
     xmin = x;
-    xmax = x + GetTextWidth(str) * GetFontSize();
+    xmax = x + w * GetFontSize();
     break;
   }
 
