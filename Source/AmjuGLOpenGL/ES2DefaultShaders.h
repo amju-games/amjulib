@@ -6,12 +6,14 @@ namespace Amju
 // Shader source text for basic rendering.
 // Uniform variables
 extern const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX;
+extern const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX;
 extern const char* AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX;
 extern const char* AMJU_ES2_DEFAULT_SHADER_COLOUR;
 extern const char* AMJU_ES2_DEFAULT_SHADER_TEXTURE;
 extern const char* AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING;
 extern const char* AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP;
 extern const char* AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR;
+extern const char* AMJU_ES2_DEFAULT_SHADER_EYE_POS;
   
 // Attrib variables
 extern const char* AMJU_ES2_DEFAULT_SHADER_POSITION;

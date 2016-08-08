@@ -1,12 +1,14 @@
 namespace Amju
 {
 const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX = "modelViewProjectionMatrix";
+const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX = "modelViewMatrix";
 const char* AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX = "normalMatrix";
 const char* AMJU_ES2_DEFAULT_SHADER_COLOUR = "colour";
 const char* AMJU_ES2_DEFAULT_SHADER_TEXTURE = "texture";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING = "useLighting";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP = "useSphereMap";
 const char* AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR = "lightDir";
+const char* AMJU_ES2_DEFAULT_SHADER_EYE_POS = "eyePos";
   
 const char* AMJU_ES2_DEFAULT_SHADER_POSITION = "position";
 const char* AMJU_ES2_DEFAULT_SHADER_NORMAL = "normal";
@@ -20,23 +22,26 @@ attribute vec2 uv;\n\
 varying vec4 colorVarying;\n\
 varying vec2 uvVarying;\n\
 uniform mat4 modelViewProjectionMatrix;\n\
+uniform mat4 modelViewMatrix;\n\
 uniform mat3 normalMatrix;\n\
 uniform vec4 colour;\n\
 uniform float useLighting;\n\
 uniform vec3 lightDir;\n\
 uniform int useSphereMap;\n\
+uniform vec3 eyePos;\n\
 void main()\n\
 {\n\
-    vec3 eyeNormal = normalMatrix * normal;\n\
+    vec3 eyeNormal = normalize(normalMatrix * normal);\n\
     vec3 lightPosition = lightDir;\n\
-    float nDotVP = max(useLighting, dot(normalize(eyeNormal), normalize(lightPosition)) + 0.5);\n\
+    float nDotVP = max(useLighting, dot(eyeNormal, normalize(lightPosition)) + 0.5);\n\
     colorVarying = colour * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
     if (useSphereMap == 1)\n\
     {\n\
         // sphere map\n\
-        vec3 view = (modelViewProjectionMatrix * vec4(0, 0, 1, 1)).xyz;\n\
-        vec3 r = reflect(view, normal);\n\
+        vec3 wPos = (modelViewMatrix * position).xyz;\n\
+        vec3 u = normalize(eyePos - wPos);\n\
+        vec3 r = reflect(u, eyeNormal);\n\
         r.z += 1.0;\n\
         r = normalize(r);\n\
         uvVarying = r.xy * 0.5 + 0.5;\n\

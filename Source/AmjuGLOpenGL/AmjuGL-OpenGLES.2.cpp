@@ -48,6 +48,7 @@ static GLShader* s_currentShader;
 
 static bool s_lightingEnabled = true;
 static AmjuGL::Vec3 s_lightPos(0, 0, 1);
+static AmjuGL::Vec3 s_eyePos(0, 0, 1);
   
 // Remember the current texture type. If sphere mapped, no need to send
 // texture coords to the graphics card.
@@ -90,11 +91,12 @@ public:
       GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
       GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
       
-      // Moldeview * projection matrix for world transforms
+      // Moldelview * projection matrix for world transforms
       GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
       
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-      if (s_lightingEnabled)
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX, modelViewMatrix.m);
+      if (s_lightingEnabled || s_tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
       {
         // Inverse transpose of modelview matrix to rotate normals
         GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
@@ -105,6 +107,7 @@ public:
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
       s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
     }
     glBindVertexArrayOES(m_vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
@@ -183,7 +186,8 @@ public:
       GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
       
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-      if (s_lightingEnabled)
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX, modelViewMatrix.m);
+      if (s_lightingEnabled || s_tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
       {
         // Inverse transpose of modelview matrix to rotate normals
         GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
@@ -194,6 +198,7 @@ public:
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
       s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
     }
     
     glBindVertexArrayOES(m_vertexArray);
@@ -379,10 +384,12 @@ void AmjuGLOpenGLES2::LookAt(float eyeX, float eyeY, float eyeZ, float x, float 
 {
 	AMJU_CALL_STACK;
 	
-    // Expect current matrix mode to be mview
-    s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX] = GLKMatrix4Multiply(
-      s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX],
-      GLKMatrix4MakeLookAt(eyeX, eyeY, eyeZ, x, y, z, upX, upY, upZ));
+  s_eyePos = AmjuGL::Vec3(eyeX, eyeY, eyeZ);
+  
+  // Expect current matrix mode to be mview
+  s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX] = GLKMatrix4Multiply(
+    s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX],
+    GLKMatrix4MakeLookAt(eyeX, eyeY, eyeZ, x, y, z, upX, upY, upZ));
 }
 
 void AmjuGLOpenGLES2::SetTextureMode(AmjuGL::TextureMode tm)
