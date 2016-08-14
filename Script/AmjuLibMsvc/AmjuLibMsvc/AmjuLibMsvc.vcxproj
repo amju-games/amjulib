@@ -239,11 +239,13 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\CalcTangents.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\Camera.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\DepthOfField.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\FullScreenPostProcess.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\GLUtils.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\Shader.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\StereoDraw.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\TriList.cpp" />
     <ClCompile Include="..\..\..\Source\Anim\Anim.cpp" />
@@ -363,6 +365,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Network\Socket.cpp" />
     <ClCompile Include="..\..\..\Source\Network\SocketService.cpp" />
     <ClCompile Include="..\..\..\Source\Network\UrlUtils.cpp" />
+    <ClCompile Include="..\..\..\Source\Obj\Material.cpp" />
     <ClCompile Include="..\..\..\Source\Resource\LoadMeshResource.cpp" />
     <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\LoadScene.cpp" />
@@ -526,6 +529,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\CalcTangents.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Camera.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Cubemap.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\DepthOfField.h" />
@@ -658,6 +662,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Network\Socket.h" />
     <ClInclude Include="..\..\..\Source\Network\SocketService.h" />
     <ClInclude Include="..\..\..\Source\Network\UrlUtils.h" />
+    <ClInclude Include="..\..\..\Source\Obj\Material.h" />
     <ClInclude Include="..\..\..\Source\Resource\LoadMeshResource.h" />
     <ClInclude Include="..\..\..\Source\Resource\LoadTextureResource.h" />
     <ClInclude Include="..\..\..\Source\Scene\LoadScene.h" />

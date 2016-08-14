@@ -969,6 +969,15 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiSlider.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Obj\Material.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\CalcTangents.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\Shader.cpp">
+      <Filter>AmjuGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1843,6 +1852,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiSlider.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Obj\Material.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\CalcTangents.h">
+      <Filter>AmjuGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
