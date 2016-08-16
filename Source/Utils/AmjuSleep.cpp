@@ -4,16 +4,18 @@
 #include <Windows.h>
 #endif
 
-#ifdef MACOSX
+#if defined(MACOSX) || defined(AMJU_IOS)
 #include <unistd.h>
-#include <AmjuFinal.h>
 #endif
+
+#include <AmjuFinal.h>
 
 namespace Amju
 {
 void SleepMs(int ms)
 {
-#ifdef MACOSX
+  // TODO And probably GEKKO etc
+#if defined(MACOSX) || defined(AMJU_IOS)
   useconds_t usecs = ms * 1000;
   usleep(usecs);
 #endif
