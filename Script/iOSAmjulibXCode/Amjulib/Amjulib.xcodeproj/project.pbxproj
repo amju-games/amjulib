@@ -464,7 +464,6 @@
 		693D43B415AB7CE900B84D5C /* Pause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42EC15AB7CE900B84D5C /* Pause.cpp */; };
 		693D43B515AB7CE900B84D5C /* Pause.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42ED15AB7CE900B84D5C /* Pause.h */; };
 		693D43B615AB7CE900B84D5C /* RCPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42EE15AB7CE900B84D5C /* RCPtr.h */; };
-		693D43B715AB7CE900B84D5C /* SharedPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42EF15AB7CE900B84D5C /* SharedPtr.h */; };
 		693D43B815AB7CE900B84D5C /* Sign.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42F015AB7CE900B84D5C /* Sign.cpp */; };
 		693D43B915AB7CE900B84D5C /* Sign.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42F115AB7CE900B84D5C /* Sign.h */; };
 		693D43BA15AB7CE900B84D5C /* Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42F215AB7CE900B84D5C /* Singleton.h */; };
@@ -1008,7 +1007,6 @@
 		693D42EC15AB7CE900B84D5C /* Pause.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pause.cpp; sourceTree = "<group>"; };
 		693D42ED15AB7CE900B84D5C /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pause.h; sourceTree = "<group>"; };
 		693D42EE15AB7CE900B84D5C /* RCPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPtr.h; sourceTree = "<group>"; };
-		693D42EF15AB7CE900B84D5C /* SharedPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPtr.h; sourceTree = "<group>"; };
 		693D42F015AB7CE900B84D5C /* Sign.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sign.cpp; sourceTree = "<group>"; };
 		693D42F115AB7CE900B84D5C /* Sign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign.h; sourceTree = "<group>"; };
 		693D42F215AB7CE900B84D5C /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
@@ -1363,13 +1361,6 @@
 		693D40AF15AB7A3C00B84D5C /* FileUtils */ = {
 			isa = PBXGroup;
 			children = (
-				69FEF54C1826827900D83578 /* ROConfig.cpp */,
-				69FEF54D1826827900D83578 /* ROConfig.h */,
-				6905672317233FC5008A0C92 /* MkDir.cpp */,
-				6905671D1721B74A008A0C92 /* iOSGetDir.h */,
-				6905671E1721B74A008A0C92 /* iOSGetDir.mm */,
-				6905670917213527008A0C92 /* StringsFile.cpp */,
-				6905670A17213527008A0C92 /* StringsFile.h */,
 				693D40B015AB7A5600B84D5C /* BinaryData.h */,
 				693D40B115AB7A5600B84D5C /* ConfigFile.cpp */,
 				693D40B215AB7A5600B84D5C /* ConfigFile.h */,
@@ -1395,6 +1386,13 @@
 				693D40C615AB7A5600B84D5C /* GlueFile.h */,
 				693D40C715AB7A5600B84D5C /* GlueFileMem.cpp */,
 				693D40C815AB7A5600B84D5C /* GlueFileMem.h */,
+				6905671D1721B74A008A0C92 /* iOSGetDir.h */,
+				6905671E1721B74A008A0C92 /* iOSGetDir.mm */,
+				6905672317233FC5008A0C92 /* MkDir.cpp */,
+				69FEF54C1826827900D83578 /* ROConfig.cpp */,
+				69FEF54D1826827900D83578 /* ROConfig.h */,
+				6905670917213527008A0C92 /* StringsFile.cpp */,
+				6905670A17213527008A0C92 /* StringsFile.h */,
 				693D40C915AB7A5600B84D5C /* Tokeniser.cpp */,
 				693D40CA15AB7A5600B84D5C /* Tokeniser.h */,
 			);
@@ -1903,20 +1901,18 @@
 		693D42B415AB7CE900B84D5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				690C44AD1885C6B8007A505D /* VariableGeomConvert.cpp */,
-				690C44AE1885C6B8007A505D /* VariableGeomConvert.h */,
-				690E2F7E17CE269F00DED7A1 /* iOSUtils.h */,
-				690E2F7F17CE269F00DED7A1 /* iOSUtils.mm */,
-				69056719172135A7008A0C92 /* AmjuRand.cpp */,
-				6905671A172135A7008A0C92 /* AmjuRand.h */,
 				693D42B515AB7CE900B84D5C /* AmjuAssert.cpp */,
 				693D42B615AB7CE900B84D5C /* AmjuAssert.h */,
+				69056719172135A7008A0C92 /* AmjuRand.cpp */,
+				6905671A172135A7008A0C92 /* AmjuRand.h */,
 				693D42B715AB7CE900B84D5C /* AmjuSleep.cpp */,
 				693D42B815AB7CE900B84D5C /* AmjuSleep.h */,
 				693D42B915AB7CE900B84D5C /* AmjuTypes.h */,
 				693D42BA15AB7CE900B84D5C /* Common.h */,
 				693D42BB15AB7CE900B84D5C /* DegRad.h */,
 				693D42BD15AB7CE900B84D5C /* Factory.h */,
+				690E2F7E17CE269F00DED7A1 /* iOSUtils.h */,
+				690E2F7F17CE269F00DED7A1 /* iOSUtils.mm */,
 				693D42C215AB7CE900B84D5C /* Launcher.cpp */,
 				693D42C315AB7CE900B84D5C /* Launcher.h */,
 				693D42EA15AB7CE900B84D5C /* mt19937ar-cok.c */,
@@ -1924,7 +1920,6 @@
 				693D42EC15AB7CE900B84D5C /* Pause.cpp */,
 				693D42ED15AB7CE900B84D5C /* Pause.h */,
 				693D42EE15AB7CE900B84D5C /* RCPtr.h */,
-				693D42EF15AB7CE900B84D5C /* SharedPtr.h */,
 				693D42F015AB7CE900B84D5C /* Sign.cpp */,
 				693D42F115AB7CE900B84D5C /* Sign.h */,
 				693D42F215AB7CE900B84D5C /* Singleton.h */,
@@ -1932,6 +1927,8 @@
 				693D42F915AB7CE900B84D5C /* Unproject.h */,
 				693D42FA15AB7CE900B84D5C /* Variable.cpp */,
 				693D42FB15AB7CE900B84D5C /* Variable.h */,
+				690C44AD1885C6B8007A505D /* VariableGeomConvert.cpp */,
+				690C44AE1885C6B8007A505D /* VariableGeomConvert.h */,
 				693D42FC15AB7CE900B84D5C /* Xml */,
 				693D430615AB7CE900B84D5C /* Zlib */,
 			);
@@ -2192,7 +2189,6 @@
 				693D43B315AB7CE900B84D5C /* NonCopyable.h in Headers */,
 				693D43B515AB7CE900B84D5C /* Pause.h in Headers */,
 				693D43B615AB7CE900B84D5C /* RCPtr.h in Headers */,
-				693D43B715AB7CE900B84D5C /* SharedPtr.h in Headers */,
 				693D43B915AB7CE900B84D5C /* Sign.h in Headers */,
 				693D43BA15AB7CE900B84D5C /* Singleton.h in Headers */,
 				690C44F31885C740007A505D /* lauxlib.h in Headers */,
