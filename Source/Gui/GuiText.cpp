@@ -443,7 +443,7 @@ struct WidthFinder
   GuiText* m_guiText;
 };
 
-const std::string& GuiText::GetText() const
+std::string GuiText::GetText() const
 {
   return m_text;
 }

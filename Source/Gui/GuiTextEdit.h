@@ -6,7 +6,14 @@
 
 namespace Amju
 {
-class GuiTextEdit : public GuiText
+class IGuiTextEdit
+{
+public:
+  virtual void SetText(const std::string& text) = 0;
+  virtual std::string GetText() const = 0;
+};
+  
+class GuiTextEdit : public IGuiTextEdit, public GuiText
 {
 public:
   static const char* NAME;
@@ -20,7 +27,8 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
   virtual void SetText(const std::string&);
-
+  virtual std::string GetText() const { return GuiText::GetText(); }
+  
   void Insert(char);
 
   // Set callback which is called whenever text is changed (e.g. a new char is typed)

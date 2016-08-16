@@ -1,5 +1,6 @@
 #include <AmjuFirst.h>
 #include <Colour.h>
+#include <Screen.h>
 #include "DrawBorder.h"
 #include "GuiElement.h"
 #include "GuiFactory.h"
@@ -15,8 +16,14 @@ namespace Amju
 static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
+static float s_aspectRatioScaleFactor = 1.0f;
 
-
+void GuiElement::SetAspectRatioScaleFactor(float sf)
+{
+  Assert(sf > 0);
+  s_aspectRatioScaleFactor = sf;
+}
+  
 void GuiElement::Draw()
 {
   if (IsVisible() && m_drawBorder)
@@ -203,19 +210,23 @@ bool GuiElement::Load(File* f)
     return false;
   }
 
-  if (!LoadVec2(f, &m_localpos))
+  Vec2f pos;
+  if (!LoadVec2(f, &pos))
   {
     f->ReportError("Gui element: failed to load pos");
     Assert(0);
     return false;
   }
+  SetLocalPos(pos);
 
-  if (!LoadVec2(f, &m_size))
+  Vec2f size;
+  if (!LoadVec2(f, &size))
   {
     f->ReportError("Gui element: failed to load size");
     Assert(0);
     return false;
   }
+  SetSize(size);
 
   Assert(m_size.x > 0);
   Assert(m_size.y > 0);
@@ -281,6 +292,7 @@ GuiElement* GuiElement::GetElementByName(const std::string& name)
 void GuiElement::SetLocalPos(const Vec2f& v)
 {
   m_localpos = v;
+  m_localpos.y *= s_aspectRatioScaleFactor;
 }
 
 Vec2f GuiElement::GetLocalPos() const
@@ -305,6 +317,7 @@ Vec2f GuiElement::GetCombinedPos() const
 void GuiElement::SetSize(const Vec2f& v)
 {
   m_size = v;
+  m_size.y *= s_aspectRatioScaleFactor;
 }
 
 Vec2f GuiElement::GetSize() const
