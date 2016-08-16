@@ -6,7 +6,13 @@
 namespace Amju
 {
 const char* GuiElastic::NAME = "elastic";
+float GuiElastic::s_elasticVel = 3.0f; // a reasonable default value
 
+void GuiElastic::SetElasticVel(float vel)
+{
+  s_elasticVel = vel;
+}
+  
 GuiElastic::GuiElastic() : m_bounceX(0), m_bounceY(0)
 {
 }
