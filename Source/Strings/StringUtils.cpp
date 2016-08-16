@@ -251,7 +251,7 @@ std::string Remove(const std::string& s, char c)
   return r;
 }
 
-std::string ToHexString(unsigned int i)
+std::string ToHexString(int i)
 {
   char buf[50];
   sprintf(buf, "%02x", i);

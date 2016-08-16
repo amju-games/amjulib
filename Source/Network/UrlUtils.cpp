@@ -73,7 +73,7 @@ std::string ToUrlFormat(const std::string& s)
   std::string r;
   for (unsigned int i = 0; i < s.length(); i++)
   {
-    char c = s[i];
+    unsigned char c = s[i];
 
     if (IsUrlPrintable(c))
     {
@@ -83,7 +83,7 @@ std::string ToUrlFormat(const std::string& s)
     {
       // Replace c with e.g.  %20 - i.e. '%' followed by c in hex.
       r += std::string(1, '%');
-      r += ToHexString((unsigned int)c);
+      r += ToHexString(c);
     }
   }
   return r;
