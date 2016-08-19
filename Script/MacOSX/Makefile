@@ -46,7 +46,7 @@ SOURCES := ../../Source \
   $(AMJU)/Utils/Zlib
 
 # TODO Make this an env var
-#EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG 
+EXTRA_CFLAGS	:= 	-g -O0 -D_DEBUG -DAMJU_USE_BASS
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
   
