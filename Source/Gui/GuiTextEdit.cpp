@@ -22,12 +22,11 @@ GuiTextEdit::GuiTextEdit()
   m_drawBg = true;
   m_caretTimer = 0;
   m_drawCaret = true;
-  m_onChangeFunc = 0;
   m_isPassword = false;
   m_rect.SetParent(this);
 }
 
-void GuiTextEdit::SetOnChangeFunc(CommandFunc f)
+void IGuiTextEdit::SetOnChangeFunc(CommandFunc f)
 {
   m_onChangeFunc = f;
 }
