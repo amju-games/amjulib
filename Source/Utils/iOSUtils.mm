@@ -1,5 +1,8 @@
 #ifdef AMJU_IOS
+
+#include <sys/time.h>
 #import <UIKit/UIKit.h>
+#include "AmjuHash.h"
 #include "iOSUtils.h"
 
 namespace Amju
@@ -11,12 +14,20 @@ iOSDeviceType GetDeviceType()
 
   return t;
 }
-
-void GetDeviceInfo(std::string* deviceId, std::string* deviceUserName, std::string* model, std::string* osVersion)
+  
+void GetDeviceInfo(int* deviceId, std::string* deviceUserName, std::string* model, std::string* osVersion)
 {
   if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
   {
-    *deviceId = [[[[UIDevice currentDevice] identifierForVendor] UUIDString] UTF8String];
+    NSString* deviceIdStr = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    *deviceId = static_cast<int>(HashString([deviceIdStr UTF8String]));
+  }
+  else
+  {
+    // Get current time usecs
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    *deviceId = static_cast<int>(time.tv_usec);
   }
 
   *deviceUserName = [[[UIDevice currentDevice] name] UTF8String];
