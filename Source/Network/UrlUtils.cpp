@@ -278,5 +278,34 @@ std::cout << "FileContentToUrl:  success!\n";
 #endif
   return true;
 }
+
+std::string EncodeStr(const std::string& plainMsg)
+{
+  std::string result;
+  
+  int s = static_cast<int>(plainMsg.size());
+  for (int i = 0; i < s; i++)
+  {
+    unsigned char c = plainMsg[i];
+    result += ToHexString(c);
+  }
+  
+  return result;
+}
+
+std::string DecodeStr(const std::string& encodedMsg)
+{
+  std::string result;
+  
+  int s = static_cast<int>(encodedMsg.size());
+  for (int i = 0; i < s; i += 2)
+  {
+    std::string hex = encodedMsg.substr(i, 2);
+    int n = UIntFromHexString(hex);
+    result += std::string(1, (char)n);
+  }
+  
+  return result;
+}
 }
 
