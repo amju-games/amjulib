@@ -16,14 +16,7 @@ namespace Amju
 static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
-static float s_aspectRatioScaleFactor = 1.0f;
 
-void GuiElement::SetAspectRatioScaleFactor(float sf)
-{
-  Assert(sf > 0);
-  s_aspectRatioScaleFactor = sf;
-}
-  
 void GuiElement::Draw()
 {
   if (IsVisible() && m_drawBorder)
@@ -292,7 +285,6 @@ GuiElement* GuiElement::GetElementByName(const std::string& name)
 void GuiElement::SetLocalPos(const Vec2f& v)
 {
   m_localpos = v;
-  m_localpos.y *= s_aspectRatioScaleFactor;
 }
 
 Vec2f GuiElement::GetLocalPos() const
@@ -317,7 +309,6 @@ Vec2f GuiElement::GetCombinedPos() const
 void GuiElement::SetSize(const Vec2f& v)
 {
   m_size = v;
-  m_size.y *= s_aspectRatioScaleFactor;
 }
 
 Vec2f GuiElement::GetSize() const
