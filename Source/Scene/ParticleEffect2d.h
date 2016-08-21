@@ -16,9 +16,10 @@ struct Particle2d
   float m_time;
   float m_rot; // rotation around particle centre IN RADIANS
   float m_rotVel; // RADIANS/SEC
+  int m_id;
   bool m_isDead; // if true, this particle is dead, no longer drawn
 
-  Particle2d() : m_time(0), m_rot(0), m_rotVel(0), m_isDead(false) {}
+  Particle2d();
 };
 
 bool operator<(const Particle2d& p1, const Particle2d& p2);
@@ -58,6 +59,9 @@ protected:
   // Call from HandleDeadParticle to recycle 
   void Recycle(Particle2d*);
 
+  // Called for each particle for each update
+  virtual void UpdateParticle(Particle2d* p, float dt);
+  
 private:
   float m_size; // side length of square billboards
   PTexture m_texture;

@@ -10,6 +10,12 @@
 
 namespace Amju
 {
+Particle2d::Particle2d() : m_time(0), m_rot(0), m_rotVel(0), m_isDead(false)
+{
+  static int s_id = 0;
+  m_id = s_id++;
+}
+  
 bool operator<(const Particle2d& p1, const Particle2d& p2)
 {
   // This is only ok because we know the camera is looking parallel to z axis
@@ -125,6 +131,11 @@ float ParticleEffect2d::NewRotVel() const
   return 0;
 }
 
+void ParticleEffect2d::UpdateParticle(Particle2d* p, float dt)
+{
+  p->m_time += dt;
+}
+  
 void ParticleEffect2d::Recycle(Particle2d* p)
 {
   p->m_pos = NewPos(); 
@@ -152,6 +163,8 @@ void ParticleEffect2d::Update()
   {
     Particle2d& p = m_particles[i];
 
+    UpdateParticle(&p, dt);
+    
     // Update time - dead ?
     p.m_time += dt;
     if (p.m_time > m_maxTime)
