@@ -534,6 +534,8 @@
 		71D22B7D1D4F38E100012DB8 /* GuiScrollBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B771D4F38E100012DB8 /* GuiScrollBar.h */; };
 		71D22B7E1D4F38E100012DB8 /* GuiSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22B781D4F38E100012DB8 /* GuiSlider.cpp */; };
 		71D22B7F1D4F38E100012DB8 /* GuiSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22B791D4F38E100012DB8 /* GuiSlider.h */; };
+		71D22BFB1D65872200012DB8 /* AmjuHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22BF91D65872200012DB8 /* AmjuHash.cpp */; };
+		71D22BFC1D65872300012DB8 /* AmjuHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22BFA1D65872200012DB8 /* AmjuHash.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -1077,6 +1079,8 @@
 		71D22B771D4F38E100012DB8 /* GuiScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiScrollBar.h; sourceTree = "<group>"; };
 		71D22B781D4F38E100012DB8 /* GuiSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiSlider.cpp; sourceTree = "<group>"; };
 		71D22B791D4F38E100012DB8 /* GuiSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiSlider.h; sourceTree = "<group>"; };
+		71D22BF91D65872200012DB8 /* AmjuHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmjuHash.cpp; sourceTree = "<group>"; };
+		71D22BFA1D65872200012DB8 /* AmjuHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuHash.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libAmjulib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAmjulib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1901,6 +1905,8 @@
 		693D42B415AB7CE900B84D5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				71D22BF91D65872200012DB8 /* AmjuHash.cpp */,
+				71D22BFA1D65872200012DB8 /* AmjuHash.h */,
 				693D42B515AB7CE900B84D5C /* AmjuAssert.cpp */,
 				693D42B615AB7CE900B84D5C /* AmjuAssert.h */,
 				69056719172135A7008A0C92 /* AmjuRand.cpp */,
@@ -2213,6 +2219,7 @@
 				690C44B51885C6F8007A505D /* AmjuLua.h in Headers */,
 				690C45241885C740007A505D /* lundump.h in Headers */,
 				695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */,
+				71D22BFC1D65872300012DB8 /* AmjuHash.h in Headers */,
 				695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */,
 				690566F5172094AF008A0C92 /* DrawBorder.h in Headers */,
 				690566F7172094AF008A0C92 /* GuiCalendar.h in Headers */,
@@ -2402,6 +2409,7 @@
 				693D419D15AB7C6800B84D5C /* Teapot.cpp in Sources */,
 				693D41A815AB7C7D00B84D5C /* LoadAABB.cpp in Sources */,
 				693D41AA15AB7C7D00B84D5C /* LoadMatrix.cpp in Sources */,
+				71D22BFB1D65872200012DB8 /* AmjuHash.cpp in Sources */,
 				693D41AC15AB7C7D00B84D5C /* LoadVec2.cpp in Sources */,
 				693D41AE15AB7C7D00B84D5C /* LoadVec3.cpp in Sources */,
 				693D41D215AB7C9100B84D5C /* Cursor.cpp in Sources */,
