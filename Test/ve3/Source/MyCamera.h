@@ -19,10 +19,10 @@ public:
 
 };
 
-class Camera : public SceneNodeCamera
+class MyCamera : public SceneNodeCamera
 {
 public:
-  Camera();
+  MyCamera();
 
   void SetTarget(Ve1Object* g) { m_target = g; }
   virtual void Update();

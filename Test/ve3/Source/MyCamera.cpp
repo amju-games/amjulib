@@ -3,7 +3,7 @@
 #include <Game.h>
 #include <DegRad.h>
 #include <Timer.h>
-#include "Camera.h"
+#include "MyCamera.h"
 #include "Portal.h"
 #include "ROConfig.h"
 #include "GameMode.h"
@@ -26,14 +26,14 @@ static bool camKey = true;
 static Vec3f posNoTarget;
 static Vec3f posOffset;
 
-Camera::Camera() : m_target(0)
+MyCamera::MyCamera() : m_target(0)
 {
   Reset();
 
   m_control = new CameraControl;
 }
 
-void Camera::Reset()
+void MyCamera::Reset()
 {
   // TODO Load settings, make configurable from server
   static const float CAM_Z = ROConfig()->GetFloat("cam-z");
@@ -62,7 +62,7 @@ void Camera::Reset()
   }
 }
 
-void Camera::Update()
+void MyCamera::Update()
 {
   //float dt = TheTimer::Instance()->GetDt();
   Vec3f pos;
@@ -227,7 +227,7 @@ bool CameraControl::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     if (camKey)
     {
 #ifdef CAM_DEBUG
-std::cout << "Camera handling mouse button event\n";
+std::cout << "MyCamera handling mouse button event\n";
 #endif
       return false;
     }
@@ -238,7 +238,7 @@ std::cout << "Camera handling mouse button event\n";
     if (camKey)
     {
 #ifdef CAM_DEBUG
-std::cout << "Camera handling mouse button event\n";
+std::cout << "MyCamera handling mouse button event\n";
 #endif
       return true;
     }
@@ -249,7 +249,7 @@ std::cout << "Camera handling mouse button event\n";
     if (camKey)
     {
 #ifdef CAM_DEBUG
-std::cout << "Camera handling mouse button event\n";
+std::cout << "MyCamera handling mouse button event\n";
 #endif
       return true;
     }

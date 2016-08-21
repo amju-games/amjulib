@@ -9,6 +9,8 @@ require "credentials.pl";
 # Send notification: $subject $message
 sub notifyProwl($$)
 {
+  return; # 14 April 2016 this gives Internal Server Error
+
   # TODO timeout 
 
   my ($subject, $message) = @_;

@@ -16,7 +16,7 @@ showsessions();
 
 sub showsessions()
 {
-  my $sql = "select s.id, player_id, start, expires, expires-start, playername, email from session as s, player as p where s.player_id=p.id order by s.id DESC limit 0, 40";
+  my $sql = "select s.id, player_id, start, expires, expires-start, playername, email from session as s, player as p where s.player_id=p.id order by s.id DESC";
 
 #  print "Query: $sql\n\n";
 
