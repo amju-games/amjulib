@@ -1,0 +1,13 @@
+// rollingball-vert.txt
+// (same for any shader where everything happens in frag shader)
+
+attribute vec4 position;
+attribute vec2 uv;
+
+varying vec2 vUv;
+
+void main()
+{
+  gl_Position = position; 
+  vUv = uv; 
+}

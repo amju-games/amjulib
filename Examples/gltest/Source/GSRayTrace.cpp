@@ -39,7 +39,7 @@ void GSRayTrace::OnActive()
 {
   GSBase::OnActive();
 
-  Shader* shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/raytrace");
+  Shader* shader = AmjuGL::LoadShader("Shaders/" + AmjuGL::GetShaderDir() + "/rollingball");
   m_fspp.SetPostProcessShader(shader);
   m_fspp.InitFullScreenQuad();
 

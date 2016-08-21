@@ -1,10 +1,4 @@
-// raytrace-frag.txt
-
-// Texture encoding scene description
-uniform sampler2D scene;
-
-const int NUM_ROWS = 8;
-const int NUM_PIXELS_PER_ROW = 8;
+// rollingball-frag.txt
 
 varying vec2 vUv;
 
@@ -14,6 +8,12 @@ struct material
 {
   float reflectivity;
   vec3 diffuse;
+};
+
+struct plane
+{
+  vec3 n;
+  float d;
 };
 
 struct ray
@@ -29,10 +29,29 @@ struct sphere
   float radius;
 };
 
+// Doubt I'll need this
 struct tri
 {
   vec3 v[3];
 };
+
+bool rayintersectPlane(in ray r, in plane pl, out float dist)
+{
+    float denom = dot(pl.n, r.direction);
+    if (abs(denom) > 0.0001) // your favorite epsilon
+    {
+        float t = dot((pl.d * pl.n - r.origin), pl.n) / denom;
+        if (t >= 0.0)
+        {
+            dist = t;
+            //*intersectionPoint = origin + direction * t;
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 /*
 Ray-Tri Intersection
@@ -157,13 +176,23 @@ bool rayIntersectsSphere(in ray r, in sphere s, out float distance)
 // For test/demo, draw scene comprised of hardcoded spheres
 void drawSphereScene(in ray r)
 {
-    int NUM_SPHERES = 2;
-    sphere spheres[2]; 
-    
+    int NUM_SPHERES = 1;
+    sphere spheres[1]; 
+   
+    // TODO roll around in circle 
     spheres[0].centre = vec3(0.25, 0.25, 10.0);
     spheres[0].radius = 0.2;
-    spheres[1].centre = vec3(0.75, 0.75, 10.0);
-    spheres[1].radius = 0.2;
+
+    plane pl;
+    pl.n = vec3(0.0, 1.0, 0.0);
+    pl.d = 0.0;
+    float dist;
+
+    if (rayintersectPlane(r, pl, dist))
+    {
+        gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+        return;
+    }
 
     float bestDist = 99999.9;
     vec3 normal;
@@ -207,91 +236,28 @@ void drawSphereScene(in ray r)
     gl_FragColor.a = 1.0;
 }
 
-void drawTriScene(in ray r)
-{
-    tri t;
-    t.v[0] = vec3(0.1, 0.1, 1.0);
-    t.v[1] = vec3(0.3, 0.1, 1.0);
-    t.v[2] = vec3(0.1, 0.3, 1.0);
-
-    vec3 intersectionPoint;
-    float tResult;
-    if (rayIntersectsTri(r, t, intersectionPoint, tResult))
-    {
-      gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-      return;
-    }
-
-}
-
-void drawTextureScene(in ray r)
-{
-    // Texture rows are meshes. Each row encodes triangle data
-    float du = 1.0 / float(NUM_PIXELS_PER_ROW);
-    float dv = 1.0 / float(NUM_ROWS);
-
-    float v = 0.99;
-    for (int row = 0; row < 1; row++)
-    {
-        float u = 0.001;
-        for (int col = 0; col < 1; col++)
-        {
-            // Get tri: 3 texels
-            vec4 v0 = texture2D(scene, vec2(u, v));
-            u += du;
-            vec4 v1 = texture2D(scene, vec2(u, v));
-            u += du;
-            vec4 v2 = texture2D(scene, vec2(u, v));
-            u += du;
-            tri t;
-            t.v[0] = v0.xyz;
-            t.v[1] = v1.xyz;
-            t.v[2] = v2.xyz;
-           
-            vec3 intersectionPoint;
-            float tResult;
-             
-            if (rayIntersectsTri(r, t, intersectionPoint, tResult))
-            {
-                gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-                return;
-            }
-        }
-    }
-    gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
-}
-
 void main()
 {
-    float x = vUv.x * 2.0 - 1.0;
-    float y = vUv.y * 2.0 - 1.0;
-   
-    // Conic 
-    const float CONIC_FOV = 1.01;
-    vec3 dir = vec3(x * CONIC_FOV, y * CONIC_FOV, 0.0);
+    float x = vUv.x;
+    float y = vUv.y;
 
-    if (y < 0)
-    {
-        // Downward facing - will hit ground
-        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-    }
-    else
-    {
-        // Sky
-        gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
-    }
-
-/*
     ray r;
     r.origin = vec3(x, y, 0.0);
-    r.direction = vec3(0.0, 0.0, 1.0);
+//    r.direction = vec3(0.0, 0.0, 1.0);
     r.length = 1000.0;
 
-    drawSphereScene(r);
-//    drawTextureScene(r);
+    // Conic
+    const float CENTRE_X = 0.5; 
+    const float CENTRE_Y = 0.5;
+    // TODO work out what scale should be for a desired fov
+    float scale = 0.0005;
+    vec3 dir = vec3((x - CENTRE_X) * scale, (y - CENTRE_Y) * scale, 1.0);
+//    ray r(vec(x, y, 0), dir.normalised(), 1000);
+    r.direction = normalize(dir);
 
-    //gl_FragColor = texture2D(scene, vec2(x, y));
+
+    drawSphereScene(r);
+
     gl_FragColor.a = 1.0;
-*/
 }
 
