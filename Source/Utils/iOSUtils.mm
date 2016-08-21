@@ -1,6 +1,7 @@
 #ifdef AMJU_IOS
 
 #include <sys/time.h>
+#import <sys/utsname.h> // import it in your header or implementation file.
 #import <UIKit/UIKit.h>
 #include "AmjuHash.h"
 #include "iOSUtils.h"
@@ -32,7 +33,13 @@ void GetDeviceInfo(int* deviceId, std::string* deviceUserName, std::string* mode
 
   *deviceUserName = [[[UIDevice currentDevice] name] UTF8String];
   
-  *model = [[[UIDevice currentDevice] model] UTF8String];
+  // Better, more detailed model name
+  //  http://stackoverflow.com/questions/11197509/ios-how-to-get-device-make-and-model
+  struct utsname systemInfo;
+  uname(&systemInfo);
+  NSString* betterModelName = [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+  *model = [betterModelName UTF8String];
 
   *osVersion = [[[UIDevice currentDevice] systemVersion] UTF8String];
 }
