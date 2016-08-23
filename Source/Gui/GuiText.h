@@ -12,6 +12,7 @@ namespace Amju
 class IGuiText
 {
 public:
+  virtual ~IGuiText() {}
   virtual void SetText(const std::string& text) = 0;
   virtual std::string GetText() const = 0;
 };

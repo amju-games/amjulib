@@ -58,7 +58,7 @@ public:
   static void SetTextToSpeechEnabled(bool);
   static bool IsTextToSpeechEnabled();
 
-  void SetVisible(bool isVis);
+  virtual void SetVisible(bool isVis);
   bool IsVisible() const;
 
   void SetName(const std::string& name);

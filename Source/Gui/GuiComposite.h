@@ -43,6 +43,9 @@ public:
   // Calc size from union of size of all descendents
   void SetSizeFromChildren();
 
+  // Set visibility for self and children
+  virtual void SetVisible(bool isVis);
+  
 protected:
   bool LoadChildren(File*);
   bool LoadOneChild(File*);

@@ -61,6 +61,15 @@ void GuiComposite::AddChild(GuiElement* elem)
   m_children.push_back(elem);
 }
 
+void GuiComposite::SetVisible(bool isVis)
+{
+  GuiElement::SetVisible(isVis);
+  for (auto ch : m_children)
+  {
+    ch->SetVisible(isVis);
+  }
+}
+
 void GuiComposite::Draw()
 {
   if (!IsVisible())
