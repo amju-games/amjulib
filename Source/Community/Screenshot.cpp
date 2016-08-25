@@ -41,7 +41,7 @@ void SaveScreenshot(const std::string& filename, int s)
 
   // NB Must do this in main thread with GL context
   ////glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, mem);
-  AmjuGL::GetScreenshot(mem, w, h);
+  AmjuGL::GetScreenshot(mem, 0, 0, w, h);
 
   // TODO Save in a separate thread 
 

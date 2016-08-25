@@ -243,7 +243,7 @@ public:
 
   // Copy screen into buffer  - which should be allocated by caller.
   // Format of data is RGB888
-  static void GetScreenshot(unsigned char* buffer, int w, int h);
+  static void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h);
 
   // Lighting
 

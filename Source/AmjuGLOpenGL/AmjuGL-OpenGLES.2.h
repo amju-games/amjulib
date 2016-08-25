@@ -63,7 +63,7 @@ public:
 	
   virtual void SetTextureMode(AmjuGL::TextureMode tm);
 	
-  virtual void GetScreenshot(unsigned char* buffer, int w, int h);
+  virtual void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h);
 	
   virtual bool CreateWindow(AmjuGLWindowInfo*);
 

@@ -458,12 +458,12 @@ void AmjuGLOpenGLES2::SetTexture(
   glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int w, int h)
+void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
 {
 	AMJU_CALL_STACK;
 
 	unsigned char* myBuf = new unsigned char[4 * w * h];
-	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, myBuf);
+	glReadPixels(x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, myBuf);
 	
 #ifdef LANDSCAPE
 	// Convert RGBA to RGB and rotate 90 degs - But TODO How to make sure it's the right way up ?

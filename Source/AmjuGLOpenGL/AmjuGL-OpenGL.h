@@ -90,7 +90,7 @@ public:
     uint8* data);
 
   // Copy screen into buffer  - which should be allocated by caller.
-  virtual void GetScreenshot(unsigned char* buffer, int w, int h);
+  virtual void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
   virtual void UseShader(Shader*);

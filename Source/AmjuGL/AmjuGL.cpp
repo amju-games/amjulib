@@ -724,11 +724,11 @@ void AmjuGL::UseTexture(TextureHandle t, int textureUnitId)
   impl->UseTexture(t, textureUnitId);
 }
 
-void AmjuGL::GetScreenshot(unsigned char* buffer, int w, int h)
+void AmjuGL::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
-  impl->GetScreenshot(buffer, w, h);
+  impl->GetScreenshot(buffer, x, y, w, h);
 }
 
 Shader* AmjuGL::LoadShader(const std::string& shaderFileName)

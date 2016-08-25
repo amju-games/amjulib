@@ -684,11 +684,11 @@ void AmjuGLOpenGL::SetTexture(
   }
 }
 
-void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int w, int h)
+void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
 
-  glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, buffer);
+  glReadPixels(x, y, w, h, GL_RGB, GL_UNSIGNED_BYTE, buffer);
 }
 
 Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)

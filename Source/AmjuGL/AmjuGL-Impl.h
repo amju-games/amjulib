@@ -108,7 +108,7 @@ public:
   virtual void SetTextureFilter(AmjuGL::TextureFilter tf) = 0;
 
   // Copy screen into buffer  - which should be allocated by caller.
-  virtual void GetScreenshot(unsigned char* buffer, int w, int h) = 0;
+  virtual void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h) = 0;
 
   // Lighting
   virtual void DrawLighting(
