@@ -61,15 +61,23 @@ void GuiComposite::AddChild(GuiElement* elem)
   m_children.push_back(elem);
 }
 
-void GuiComposite::SetVisible(bool isVis)
+void GuiComposite::SetAncestorsVisible(bool ancestorVis)
 {
-  GuiElement::SetVisible(isVis);
+  if (GetParent())
+  {
+    m_ancestorsAreVisible = ancestorVis & GetParent()->IsVisible();
+  }
+  else
+  {
+    m_ancestorsAreVisible = ancestorVis;
+  }
+  
   for (auto ch : m_children)
   {
-    ch->SetVisible(isVis);
+    ch->SetAncestorsVisible(m_ancestorsAreVisible);
   }
 }
-
+  
 void GuiComposite::Draw()
 {
   if (!IsVisible())

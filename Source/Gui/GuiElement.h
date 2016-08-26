@@ -76,6 +76,9 @@ public:
   void SetUserData(void* data) { m_userData = data; }
   void* GetUserData() { return m_userData; }
 
+  // Conceptually protected:
+  virtual void SetAncestorsVisible(bool ancestorVis);
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -105,6 +108,9 @@ protected:
   bool m_drawBorder;
 
   void* m_userData;
+
+  // True if all ancestors up to root are visible
+  bool m_ancestorsAreVisible;
 };
 
 typedef RCPtr<GuiElement> PGuiElement;

@@ -17,6 +17,28 @@ static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
 
+GuiElement::GuiElement()
+{
+  m_parent = nullptr;
+  m_isVisible = true;
+  m_isSelected = false;
+  m_commandFunc = nullptr;
+  m_onFocusFunc = nullptr;
+  m_drawBorder = false;
+  m_userData = nullptr;
+  m_ancestorsAreVisible = true;
+}
+
+GuiElement::~GuiElement()
+{
+  // TODO Subclasses should remove themselves - just make sure we are deleted here
+  //TheEventPoller::Instance()->RemoveListener(this);
+  //Assert(!TheEventPoller::Instance()->HasListener(this));
+  // removed in EventListener dtor, so not removed yet.
+  
+  //  std::cout << "Deleting GuiElement " << m_name << "\n";
+}
+
 void GuiElement::Draw()
 {
   if (IsVisible() && m_drawBorder)
@@ -140,17 +162,6 @@ std::cout << "Unexpected: no node named \"" << nodeName << "\" in GUI tree with 
   return elem;
 }
 
-GuiElement::GuiElement()
-{
-  m_parent = nullptr;
-  m_isVisible = true;
-  m_isSelected = false;
-  m_commandFunc = nullptr;
-  m_onFocusFunc = nullptr;
-  m_drawBorder = false;
-  m_userData = nullptr;
-}
-
 PGuiElement LoadGui(const std::string& filename, bool addAsListener)
 {
   File f;
@@ -182,16 +193,6 @@ PGuiElement LoadGui(const std::string& filename, bool addAsListener)
   }
 
   return gui;
-}
-
-GuiElement::~GuiElement()
-{
-  // TODO Subclasses should remove themselves - just make sure we are deleted here
-  //TheEventPoller::Instance()->RemoveListener(this); 
-  //Assert(!TheEventPoller::Instance()->HasListener(this));
-  // removed in EventListener dtor, so not removed yet.
-
-//  std::cout << "Deleting GuiElement " << m_name << "\n";
 }
 
 bool GuiElement::Load(File* f)
@@ -319,20 +320,16 @@ Vec2f GuiElement::GetSize() const
 void GuiElement::SetVisible(bool isVis)
 {
   m_isVisible = isVis;
+  SetAncestorsVisible(isVis);
 }
 
+void GuiElement::SetAncestorsVisible(bool ancestorVis)
+{
+  m_ancestorsAreVisible = ancestorVis;
+}
+  
 bool GuiElement::IsVisible() const
 {
-  if (!m_isVisible)
-  {
-    return false;
-  }
-
-  if (const_cast<GuiElement*>(this)->GetParent())
-  {
-    return (const_cast<GuiElement*>(this))->GetParent()->IsVisible();
-  }
-
-  return true;
+  return m_isVisible && m_ancestorsAreVisible;
 }
 }
