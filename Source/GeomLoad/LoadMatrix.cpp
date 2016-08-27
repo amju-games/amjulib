@@ -20,7 +20,13 @@ bool LoadMatrix(File* f, Matrix* m)
     return true;
   }
   std::vector<std::string> strs = Split(s, ',');
-  Assert(strs.size() == 16);
+  
+  if (strs.size() != 16)
+  {
+    f->ReportError("Expected line of 16 matrix elements (or \"I\") here.");
+    return false;
+  }
+  
   for (int i = 0; i < 16; i++)
   {
     (*m)[i] = (float)atof(strs[i].c_str());
