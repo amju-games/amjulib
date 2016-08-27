@@ -21,7 +21,7 @@ public:
 
   void Draw();
 
-  void CalcCollisionMesh(CollisionMesh* pCollMesh);
+  void CalcCollisionMesh(CollisionMesh* pCollMesh) const;
 
   // Add groups in om to collection of groups in this mesh
   void Merge(const ObjMesh& om);

@@ -93,7 +93,7 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
   return mesh;
 }
 
-void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
+void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
 {
 /*
   // Clear triangle data if no coll mesh required
@@ -116,11 +116,11 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
   pCollMesh->m_tris.clear();
 
   int numFaces = 0;
-  for (Groups::iterator it = m_groups.begin();
+  for (auto it = m_groups.begin();
     it != m_groups.end();
     ++it)
   {
-    Group& g = it->second;
+    const Group& g = it->second;
     if (m_materials.find(g.m_materialName) == m_materials.end())
     {
       std::cout << "No material for group\n";
@@ -128,24 +128,29 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
     }
     else
     {
-      Material& mat = m_materials[g.m_materialName];
-      if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+      auto j = m_materials.find(g.m_materialName);
+      if (j != m_materials.end())
       {
-        numFaces += g.m_tris.size();
+        const Material& mat = j->second;
+        if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
+        {
+          numFaces += g.m_tris.size();
+        }
       }
     }
   }
   pCollMesh->m_tris.reserve(numFaces);
 
-  for (Groups::iterator it = m_groups.begin();
+  for (auto it = m_groups.begin();
     it != m_groups.end();
     ++it)
   {
-    Group& g = it->second;
+    const Group& g = it->second;
    
-    if (m_materials.find(g.m_materialName) != m_materials.end())
+    auto j = m_materials.find(g.m_materialName);
+    if (j != m_materials.end())
     {
-      Material& mat = m_materials[g.m_materialName];
+      const Material& mat = j->second;
       if ((mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
       {
         continue;
@@ -155,7 +160,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh)
     unsigned int numTris = g.m_tris.size();
     for (unsigned int i = 0; i < numTris; i++)
     {
-      AmjuGL::Tri& tri = g.m_tris[i];
+      const AmjuGL::Tri& tri = g.m_tris[i];
       Tri t(
         Vec3f(tri.m_verts[0].m_x, tri.m_verts[0].m_y, tri.m_verts[0].m_z),
         Vec3f(tri.m_verts[1].m_x, tri.m_verts[1].m_y, tri.m_verts[1].m_z),
