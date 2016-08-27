@@ -1,41 +1,6 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: StringUtils.cpp,v $
-Revision 1.10  2008/05/08 10:58:06  jay
-New memory management code
-
-Revision 1.9  2008/03/21 19:52:38  jay
-MSVC fix
-
-Revision 1.8  2008/03/18 09:25:45  jay
-Move Filter() function to StringUtils
-
-Revision 1.7  2006/12/10 12:10:32  jay
-Trim: check for newlines
-
-Revision 1.6  2006/12/03 21:27:58  jay
-Pad one-digit hex number
-
-Revision 1.5  2006/10/11 00:21:34  Administrator
-MSVC fix
-
-Revision 1.4  2006/10/09 20:26:52  jay
-Add InsertCommas()
-
-Revision 1.3  2006/09/17 23:00:40  Administrator
-Big APZ weekend changes
-
-Revision 1.1.10.2  2006/07/27 08:43:52  jay
-Add ToHexString()
-
-Revision 1.1.10.1  2005/05/09 05:54:20  jay
-Added ToString(float) with parameter for no of decimal digits
-
-Revision 1.1  2004/09/08 15:43:20  jay
-Added to repository
-  
+Amju Games source code (c) Copyright Jason Colman 2004-2016
 */
-
 
 #include <AmjuFirst.h>
 #ifdef WIN32
@@ -45,22 +10,68 @@ Added to repository
 #endif // WIN32
 
 #include <algorithm> // remove()
-#include <functional> // for MSVC
-#include <iostream>
-#include <string.h> // strlen()
-#include <stdio.h> // sprintf()
-#include <sstream>
-#include "StringUtils.h"
-#include "AmjuAssert.h"
 
 #ifdef ANDROID_NDK
 #include <ctype.h>
 #endif
 
+#include <functional> // for MSVC
+#include <iostream>
+#include <string.h> // strlen()
+#include <stdio.h> // sprintf()
+#include <sstream>
+
+#include <AmjuAssert.h>
+#include "StringUtils.h"
+
 #include <AmjuFinal.h>
 
 namespace Amju
 {
+// Correctly truncate utf-8 string
+// Based on: http://trinitum.org/wp/how-to-truncate-utf8-string/
+std::string TruncateUtf8String(const std::string& str, int maxSize)
+{
+  size_t len = str.length();
+  if (len <= maxSize)
+  {
+    return str;
+  }
+  
+  std::string res = str;
+  
+  if (res[maxSize] & 128)
+  {
+    // Is multibyte char: look for first byte and return substring up to but not including this
+    //  first byte.
+    if (res[maxSize] & 64)
+    {
+      res = res.substr(0, maxSize);
+    }
+    else if (res[maxSize - 1] & 64)
+    {
+      res = res.substr(0, maxSize - 1);
+    }
+    else if (res[maxSize - 2] & 64)
+    {
+      res = res.substr(0, maxSize - 2);
+    }
+    else
+    {
+      res = res.substr(0, maxSize - 3);
+    }
+  }
+  else
+  {
+    // Not a mutibyte char: just truncate.
+    res = res.substr(0, maxSize);
+  }
+  
+  size_t newlen = res.length();
+  Assert(newlen <= maxSize);
+  return res;
+}
+
 struct Remover : public std::unary_function<std::string, bool>
 {
   Remover(const std::string s) : m_s(s) {}

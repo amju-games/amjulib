@@ -11,6 +11,8 @@ Amju Games source code (c) Copyright Jason Colman 2004-2009
 
 namespace Amju
 {
+std::string TruncateUtf8String(const std::string& str, int maxSize);
+
 // Helper: strips off any path info from a filename.
 std::string StripPath(const std::string& s);
 std::string StripPath(const std::string& s, const std::string& slashChar);
