@@ -16,12 +16,31 @@ public:
   virtual void Update();
   virtual bool Load(File*);
 
+  virtual void CalcCollisionMesh(CollisionMesh* pCollMesh) const override;
+  
   void SetMesh(PObjMesh mesh);
+  const ObjMesh* GetMesh() const;
 
 protected:
   // The mesh data - this is a Resource, so is held by the ResourceManager.
   // Multiple leaves can share the same mesh.
   PObjMesh m_mesh;
+};
+  
+// Obj mesh consisting of a single group and no material, with a separate material which is
+//  used when we draw the mesh.
+class SceneMeshMaterial : public SceneMesh
+{
+public:
+  static const char* NAME;
+  
+  virtual bool Load(File*);
+  virtual void Draw();
+  
+  void SetMaterial(const Material& m);
+  
+protected:
+  Material m_material;
 };
 }
 

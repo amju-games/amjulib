@@ -15,6 +15,7 @@ class File;
 class SceneNode;
 typedef RCPtr<SceneNode> PSceneNode;
 class SceneGraph;
+class CollisionMesh;
 
 // This Scene Graph is based on the design in "Game Coding Complete".
 // This base class has children - not Composite pattern.
@@ -56,7 +57,6 @@ public:
   const Matrix& GetLocalTransform() const;
   const Matrix& GetCombinedTransform() const;
 
-
   bool IsVisible() const;
   bool IsCollidable() const;
   bool IsBlended() const; 
@@ -82,6 +82,9 @@ public:
 
   const AABB* GetAABB() const;
   void SetAABB(const AABB&);
+
+  // Calculates the collision mesh for the node, setting the result in the given collision mesh.
+  virtual void CalcCollisionMesh(CollisionMesh* pCollMesh) const {}
 
   void SetColour(const Colour& colour);
 

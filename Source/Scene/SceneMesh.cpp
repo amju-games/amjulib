@@ -19,6 +19,11 @@ void SceneMesh::SetMesh(PObjMesh mesh)
   m_mesh = mesh;
 }
 
+const ObjMesh* SceneMesh::GetMesh() const
+{
+  return m_mesh;
+}
+
 void SceneMesh::Draw()
 {
   AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING);
@@ -68,5 +73,71 @@ bool SceneMesh::Load(File* f)
   }
 
   return true;
+}
+  
+void SceneMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
+{
+  Assert(m_mesh);
+  Assert(pCollMesh);
+  m_mesh->CalcCollisionMesh(pCollMesh);
+}
+
+ 
+// TODO Separate file
+const char* SceneMeshMaterial::NAME = "scene-mesh-material";
+    
+bool SceneMeshMaterial::Load(File* f)
+{
+  // Load mesh name, then material name
+  std::string meshFileName;
+  if (!f->GetDataLine(&meshFileName))
+  {
+    f->ReportError("Expected .obj filename");
+    return false;
+  }
+  
+  m_mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFileName);
+  if (!m_mesh)
+  {
+    return false;
+  }
+  
+  // Material
+  std::string materialFileName;
+  if (!f->GetDataLine(&materialFileName))
+  {
+    f->ReportError("Expected material filename");
+    return false;
+  }
+  
+  MaterialVec matvec;
+  if (!LoadMtlFile(materialFileName, &matvec))
+  {
+    f->ReportError("Failed to load material filename: " + materialFileName);
+    return false;
+  }
+  
+  if (matvec.empty())
+  {
+    f->ReportError("No materials in file: " + materialFileName);
+    return false;
+  }
+  
+  // Should be only one material
+  SetMaterial(*matvec[0]);
+  
+  return true;
+}
+
+void SceneMeshMaterial::Draw()
+{
+  // This will work best for meshes with a single group and no material specified.
+  m_material.UseThisMaterial();
+  SceneMesh::Draw();
+}
+  
+void SceneMeshMaterial::SetMaterial(const Material& m)
+{
+  m_material = m;
 }
 }

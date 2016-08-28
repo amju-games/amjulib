@@ -15,6 +15,7 @@ SceneNodeFactory::SceneNodeFactory()
   // Add SceneNode types to factory
   Add(SceneNode::NAME, &SceneNode::Create);
   Add(SceneMesh::NAME, &SceneMesh::Create);
+  Add(SceneMeshMaterial::NAME, []() -> SceneNode* { return new SceneMeshMaterial;} );
   Add(SceneLuaScript::NAME, &SceneLuaScript::Create);
 }
 }

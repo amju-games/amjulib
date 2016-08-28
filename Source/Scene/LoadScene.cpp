@@ -73,12 +73,17 @@ PSceneNode LoadScene(File* f)
       f->ReportError("Failed to create scene node of type: " + nodeType);
       return 0;
     }
+    
     if (!node->Load(f))
     {
       return 0;
     }
   }
 
+  return node;
+
+  // TODO This stuff belongs in node-subtype Load() overrides
+  /*
   // Load orientation etc
   Matrix m;
   if (!LoadMatrix(f, &m))
@@ -105,6 +110,7 @@ PSceneNode LoadScene(File* f)
     node->AddChild(child);
   }
   return node;
+  */
 }
 
 }
