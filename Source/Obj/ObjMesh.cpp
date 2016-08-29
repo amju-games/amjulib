@@ -123,7 +123,9 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
     const Group& g = it->second;
     if (m_materials.find(g.m_materialName) == m_materials.end())
     {
+#ifdef NO_MATERIAL_DEBUG
       std::cout << "No material for group\n";
+#endif
       numFaces += g.m_tris.size();
     }
     else
