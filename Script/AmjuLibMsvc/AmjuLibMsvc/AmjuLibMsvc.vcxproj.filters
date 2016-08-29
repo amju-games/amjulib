@@ -978,6 +978,9 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\Shader.cpp">
       <Filter>AmjuGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\AmjuHash.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1858,6 +1861,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\CalcTangents.h">
       <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\AmjuHash.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
