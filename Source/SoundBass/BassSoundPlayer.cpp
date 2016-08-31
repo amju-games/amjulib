@@ -9,7 +9,7 @@ Amju Games source code (c) Copyright Jason Colman 2006
 #include "BassSoundPlayer.h"
 #include <SoundManager.h>
 #include "StringUtils.h"
-#if defined(MACOSX)|| defined(IPHONE) 
+#if defined(MACOSX)|| defined(AMJU_IOS)
 #include "Bass2.4/Macosx/bass.h"
 #include "Bass2.4/Macosx/bassmidi.h"
 #endif
@@ -132,7 +132,7 @@ std::cout << "WAV length is " << wavLength << "\n";
 
   BASS_ChannelPlay(hc, FALSE);
 
-#if defined(MACOSX)|| defined(IPHONE) 
+#if defined(MACOSX)|| defined(AMJU_IOS)
   // Set vol
   int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
   //BASS_ChannelSetAttribute(hc, -1, vol, -1);
@@ -207,7 +207,7 @@ std::cout << "BASS: using glue file.\n";
     }
   }
 
-#if defined(MACOSX)|| defined(IPHONE) 
+#if defined(MACOSX)|| defined(AMJU_IOS)
   // Set vol
   int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
   //BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
@@ -215,10 +215,25 @@ std::cout << "BASS: using glue file.\n";
 #endif
 
   BASS_ChannelPlay(m_chan,FALSE);
+  
+#ifdef USE_REVERB
+  // Set some reverb..?
+  int REVERB_PRIORITY = 1;
+  auto fxHandle = BASS_ChannelSetFX(m_chan, BASS_FX_DX8_REVERB, REVERB_PRIORITY);
+  float REVERB_IN_GAIN = 0.0f;
+  float REVERB_MIX = -0.5f;
+  float REVERB_TIME_MS = 200.0f;
+  float REVERB_HR_REVERB_TIME_RATIO = 0.1f;
+  BASS_DX8_REVERB reverbParams { REVERB_IN_GAIN, REVERB_MIX, REVERB_TIME_MS, REVERB_HR_REVERB_TIME_RATIO };
+  BASS_FXSetParameters(fxHandle, &reverbParams);
+#endif
 
 #ifdef BASS_DEBUG
 std::cout << "BASS: new song: " << songFile.c_str() << " chan: " << m_chan << "\n";
 #endif
+
+  // Remember song filename, so we can restart if necessary
+  m_lastSongName = songFile;
 
   return true;
 }
@@ -233,7 +248,9 @@ void BassSoundPlayer::StopSong()
 #ifdef BASS_DEBUG
 std::cout << "BASS: Stopping song on channel " << m_chan << "\n";
 #endif
-  BASS_ChannelStop(m_chan); 
+  BASS_ChannelStop(m_chan);
+  
+  m_lastSongName.clear();
 }
 
 void BassSoundPlayer::Update()
@@ -251,10 +268,17 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 
   int newVol = (int)(f * 100.0f);
 
-#if defined(MACOSX)|| defined(IPHONE) 
+#if defined(MACOSX)|| defined(AMJU_IOS) 
   BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
 #else
   BASS_SetVolume(newVol);
+#endif
+
+#ifdef AMJU_IOS
+  if (newVol > 0 && !m_lastSongName.empty())
+  {
+    PlaySong(m_lastSongName);
+  }
 #endif
 }
 

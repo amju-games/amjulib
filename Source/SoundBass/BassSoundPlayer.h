@@ -29,6 +29,8 @@ public:
 #endif // AMJU_USE_MIDI
     
 private:
+  std::string m_lastSongName;
+
   // Channel for current song
   unsigned long m_chan;
 };
