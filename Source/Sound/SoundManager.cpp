@@ -154,4 +154,35 @@ float SoundManager::GetSongMaxVolume() const
 { 
   return m_maxSongVol; 
 }
+
+bool SoundManager::MidiSetSoundFont(const char* soundfont)
+{
+  if (!m_pImpl)
+  {
+    return false;
+  }
+
+  return m_pImpl->MidiSetSoundFont(soundfont);
+}
+
+bool SoundManager::MidiNoteOn(int note)
+{
+  if (!m_pImpl)
+  {
+    return false;
+  }
+
+  return m_pImpl->MidiNoteOn(note);
+}
+
+bool SoundManager::MidiNoteOff(int note)
+{
+  if (!m_pImpl)
+  {
+    return false;
+  }
+
+  return m_pImpl->MidiNoteOff(note);
+}
+
 }
