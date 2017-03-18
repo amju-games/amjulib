@@ -10,11 +10,10 @@ BUILD		:=	../../../../Build/$(APP)/Mac
 TARGET		:=	$(BUILD)/$(APP)
 SOURCES		:=	../../Source
 RUNDIR 		:=	$(BUILD)
-EXTRA_CFLAGS	+=	-DAMJU_USE_OVR
+#EXTRA_CFLAGS	+=	-DAMJU_USE_OVR
 
 LIBS	:= \
 	-lamju \
-	-lovr \
 	-framework OpenGL \
 	-framework GLUT \
 	-framework Carbon \
@@ -23,6 +22,7 @@ LIBS	:= \
 	-framework CoreVideo \
 	-framework ApplicationServices \
 	-lstdc++ -lm 
+#	-lovr
 
 include $(AMJULIB_MAC_SCRIPT_PATH)/GenMakefile
 
