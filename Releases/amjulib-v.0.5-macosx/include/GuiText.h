@@ -9,22 +9,29 @@
 
 namespace Amju
 {
-class GuiText : public GuiElement
+class IGuiText
+{
+public:
+  virtual void SetText(const std::string& text) = 0;
+  virtual std::string GetText() const = 0;
+};
+  
+class GuiText : public IGuiText, public GuiElement
 {
 public:
   static const char* NAME;
   static const float CHAR_HEIGHT_FOR_SIZE_1;
 
   GuiText();
-  virtual void Draw();  
-  virtual bool Load(File*); 
-  virtual void TextToSpeech();
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
+  virtual void TextToSpeech() override;
 
   // Load just the text info (not name, size, etc)
   bool LoadText(File*);
 
-  virtual void SetText(const std::string& text);
-  virtual const std::string& GetText() const;
+  virtual void SetText(const std::string& text) override;
+  virtual std::string GetText() const override;
 
   // Really font size 
   void SetFontSize(float textSize);

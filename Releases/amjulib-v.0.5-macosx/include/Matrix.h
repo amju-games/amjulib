@@ -9,7 +9,7 @@ Amju Games source code (c) Copyright Jason Colman 2004-2009
 
 namespace Amju
 {
-class File;
+class File; // TODO Move to GeomLoad
 
 class Matrix
 {

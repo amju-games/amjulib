@@ -42,7 +42,7 @@ std::string ToString(int i);
 std::string ToString(unsigned int i);
 
 // Convert int to hex string
-std::string ToHexString(unsigned int i);
+std::string ToHexString(int i);
 unsigned int UIntFromHexString(const std::string& s);
 
 // Convert float to string

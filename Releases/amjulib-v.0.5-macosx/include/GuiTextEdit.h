@@ -6,7 +6,25 @@
 
 namespace Amju
 {
-class GuiTextEdit : public GuiText
+// Interface for different flavours of text edit controls
+class IGuiTextEdit
+{
+public:
+  IGuiTextEdit() : m_onChangeFunc(nullptr) {}
+  virtual ~IGuiTextEdit() {}
+  
+  virtual void SetText(const std::string& text) = 0;
+  virtual std::string GetText() const = 0;
+  
+  // Set callback which is called whenever text is changed (e.g. a new char is typed)
+  void SetOnChangeFunc(CommandFunc onCharFunc);
+  
+protected:
+  CommandFunc m_onChangeFunc;
+  
+};
+  
+class GuiTextEdit : public IGuiTextEdit, public GuiText
 {
 public:
   static const char* NAME;
@@ -20,11 +38,9 @@ public:
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
 
   virtual void SetText(const std::string&);
-
+  virtual std::string GetText() const { return GuiText::GetText(); }
+  
   void Insert(char);
-
-  // Set callback which is called whenever text is changed (e.g. a new char is typed)
-  void SetOnChangeFunc(CommandFunc onCharFunc);
 
   void SetIsPassword(bool isPassword);
   bool IsPassword() const;
@@ -38,7 +54,6 @@ protected:
 protected:
   float m_caretTimer;
   bool m_drawCaret;
-  CommandFunc m_onChangeFunc;
   bool m_isPassword; // if so, don't show characters
   GuiRect m_rect; // focus rect
 };

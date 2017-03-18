@@ -59,7 +59,7 @@ protected:
   std::string m_name;
   TextureSequence m_textureSequence;
   float m_size;
-  std::map<char, float> m_charWidths; 
+  std::vector<float> m_charWidths;
   // The first character in the texture sequence - usually 0 for a 256-
   //  character font, or 32 if the font starts at space.
   int m_startChar;

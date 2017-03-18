@@ -53,6 +53,11 @@ public:
   static void SetGlobalScale(float f);
   static float GetGlobalScale();
 
+  // Call to adjust aspect ratio if screen is not 640/480
+  // Depends on landscape/portrait orientation, so we need to set this when orientation
+  //  changes.
+  static void SetAspectRatioScaleFactor(float sf);
+  
   // Text to speech: if enabled, text-based elements speak when they 
   //  get focus. Also they should have a "speak" button.
   static void SetTextToSpeechEnabled(bool);

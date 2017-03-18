@@ -10,8 +10,8 @@ class ShaderNull : public Shader
 public:
   virtual bool Load(const std::string&) { return true; }
 
-  virtual void Begin() {}
-  virtual void End() {}
+  virtual void Begin() override {}
+  virtual void End() override {}
 
   virtual void Set(const std::string& name, const float matrix[16]) override {}
   virtual void Set(const std::string& name, float f) override {}
@@ -21,8 +21,8 @@ public:
   virtual void SetMatrix3x3(const std::string& name, const float matrix[9]) override {}
   virtual void SetInt(const std::string& name, int i) override {}
   virtual void UseThisShader() override {} 
-  virtual int FindUniformLocation(const std::string& uniformName) override {} 
-  virtual int FindAttribLocation(const std::string& attribName) override {}
+  virtual int FindUniformLocation(const std::string& uniformName) override { return -1; }
+  virtual int FindAttribLocation(const std::string& attribName) override { return -1; }
 };
 }
 

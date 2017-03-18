@@ -52,6 +52,11 @@ std::string StripDataFromUrl(const std::string& url);
 // Load contents of file, convert to string to append to URL for a POST.
 // NB File path is absolute, no file root is prepended.
 bool FileContentToUrl(const std::string& filename, std::string* result);
+  
+// Convert to/from 'encoded' form of string. This is the same as URL format, but without
+//  the % signs. E.g. Encode(" ") -> "20"; Decode("20") -> " "
+std::string EncodeStr(const std::string& plainMsg);
+std::string DecodeStr(const std::string& encodedMsg);
 }
 
 #endif

@@ -1,5 +1,5 @@
 #pragma once
-// Built Sun Jul 31 14:00:34 2016
+// Built Sat Dec 24 08:56:03 2016
 #include <AABB.h>
 #include <AlphaBmpLoader.h>
 #include <amju.h>
@@ -14,6 +14,7 @@
 #include <AmjuGL-OpenGLES.2.h>
 #include <AmjuGL.h>
 #include <AmjuGLWindowInfo.h>
+#include <AmjuHash.h>
 #include <AmjuLua.h>
 #include <AmjuMem.h>
 #include <AmjuRand.h>

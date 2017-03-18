@@ -22,8 +22,8 @@ namespace Amju
 GlueFile format
 
 At the start of the GlueFile, the number of sub-files and the position of a table
-is stored. The table lists the sub-file names (name only; no paths are allowed 
-in GlueFiles). Also in the table is the size of the sub-file.
+is stored. The table lists the sub-file names (paths are allowed: they are treated as
+part of the subfile name). Also in the table is the size of the sub-file.
 The table is at the end of the GlueFile, after all the sub-files.
     
 <uint32> Number of files in archive
@@ -98,11 +98,17 @@ public:
   // NB Could the filename have a path prepended ?
   bool AddItem(const std::string& filename);
 
+  // For quick fixes, patch a subfile in the glue file.
+  // This means adding the new version to the end of the glue file. The previous version of the
+  //  subfile is still in the glue file, but not easily accessible any more.
   bool PatchItem(const std::string& filename);
 
   // Gets listing of sub-files in the GlueFile.
   // Inserts the sub-file names into the given vector.
-  bool Dir(std::vector<std::string>* pResult);
+  bool Dir(std::vector<std::string>* pResult) const;
+
+  // Return true if given filename exists in the gluefile table.
+  bool FileExists(const std::string& subfilename) const;
 
   // Get the start position of a Glued file. To seek to a position in 
   // the glued file, seek to the position plus the value returned from
