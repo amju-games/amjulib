@@ -91,7 +91,7 @@ void GSWaterBase::DrawScene()
 
     m_shaderTerrain->Set("modelViewProjectionMatrix", mat);
 
-#ifdef _DEBUG
+#ifdef WIREFRAME_DEBUG
     AmjuGL::SetIsWireFrameMode(m_isWireframeTerrain);
 #endif
     m_gridTerrain.Draw();
@@ -108,7 +108,7 @@ void GSWaterBase::DrawScene()
 
 //  m_shader->Set("gTime", shaderTime);
 
-#ifdef _DEBUG
+#ifdef WIREFRAME_DEBUG
     AmjuGL::SetIsWireFrameMode(m_isWireframeWater);
 #endif
 
@@ -122,7 +122,7 @@ void GSWaterBase::DrawScene()
     m_shaderWater->End();
   }
 
-#ifdef _DEBUG
+#ifdef WIREFRAME_DEBUG
   AmjuGL::SetIsWireFrameMode(false);
 #endif
 
