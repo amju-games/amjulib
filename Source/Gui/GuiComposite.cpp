@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <AmjuFirst.h>
 #include <EventPoller.h>
 #include "GuiComposite.h"
@@ -61,6 +62,19 @@ void GuiComposite::AddChild(GuiElement* elem)
   m_children.push_back(elem);
 }
 
+void GuiComposite::BringChildToFront(GuiElement* elem)
+{
+  PGuiElement incRefCount(elem);
+
+  m_children.push_back(elem);
+
+  auto it = std::find(m_children.begin(), m_children.end(), elem);
+  if (it != m_children.end())
+  {
+    m_children.erase(it);
+  }
+}
+
 void GuiComposite::SetAncestorsVisible(bool ancestorVis)
 {
   if (GetParent())
@@ -78,6 +92,14 @@ void GuiComposite::SetAncestorsVisible(bool ancestorVis)
   }
 }
   
+void GuiComposite::Update()
+{
+  for (unsigned int i = 0; i < m_children.size(); i++)
+  {
+    m_children[i]->Update();
+  }
+}
+
 void GuiComposite::Draw()
 {
   if (!IsVisible())

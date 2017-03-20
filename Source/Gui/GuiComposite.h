@@ -17,6 +17,7 @@ public:
   virtual void Draw() override;
   virtual bool Load(File*) override;
   virtual GuiElement* GetElementByName(const std::string& name) override;
+  virtual void Update() override;
 
   // Up/Down to set focus to prev/next child
   virtual bool OnKeyEvent(const KeyEvent&) override;
@@ -37,6 +38,8 @@ public:
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
   virtual void AddChild(GuiElement*);
+
+  void BringChildToFront(GuiElement*);
 
   virtual void Clear();
 

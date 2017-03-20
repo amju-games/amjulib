@@ -18,7 +18,7 @@ public:
   GuiElement();
   virtual ~GuiElement();
   virtual void Draw() = 0;
-  virtual void Update() {} // ?
+  virtual void Update() {} 
   virtual bool Load(File*); // Load pos and size
   bool OpenAndLoad(const std::string& filename);
 
