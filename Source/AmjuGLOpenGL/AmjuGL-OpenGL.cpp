@@ -265,6 +265,14 @@ void AmjuGLOpenGL::SetPerspectiveProjection(
   gluPerspective(fov, aspectRatio, nearDist, farDist);
 }
 
+void AmjuGLOpenGL::SetOrthoProjection(
+  float left, float right, float top, float bottom, float nearDist, float farDist)
+{
+  AMJU_CALL_STACK;
+
+  glOrtho(left, right, bottom, top, nearDist, farDist);
+}
+
 void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
 {
   AMJU_CALL_STACK;

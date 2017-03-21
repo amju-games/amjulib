@@ -42,6 +42,9 @@ public:
   virtual void SetPerspectiveProjection(
     float fov, float aspectRatio, float nearDist, float farDist) = 0;
 
+  virtual void SetOrthoProjection(
+    float left, float right, float top, float bottom, float near, float far) = 0;
+
   // Set 'camera': give position of eye, target position and Up vector
   virtual void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ) = 0;
 

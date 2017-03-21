@@ -18,6 +18,8 @@ public:
   virtual void InitFrame(float clearR, float clearG, float clearB) {}
   virtual void SetPerspectiveProjection(
     float fov, float aspectRatio, float nearDist, float farDist) {}
+  virtual void SetOrthoProjection(
+    float left, float right, float top, float bottom, float near, float far) {}
   virtual void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ) {}
   virtual void SetColour(float r, float g, float b, float a = 1.0f) {}
   virtual void DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2) {}

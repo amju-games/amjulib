@@ -238,6 +238,15 @@ void AmjuGL::SetPerspectiveProjection(
   impl->SetPerspectiveProjection(fov, aspectRatio, nearDist, farDist);
 }
 
+
+void AmjuGL::SetOrthoProjection(
+  float left, float right, float top, float bottom, float near, float far)
+{
+  AMJU_CALL_STACK;
+
+  impl->SetOrthoProjection(left, right, top, bottom, near, far);
+}
+
 void AmjuGL::GetViewport(int* x, int* y, int* w, int* h)
 {
   *x = viewport[0];

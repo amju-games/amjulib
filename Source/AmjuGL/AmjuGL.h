@@ -139,6 +139,9 @@ public:
   static void SetPerspectiveProjection(
     float fovDegrees, float aspectRatio, float near, float far);
 
+  static void SetOrthoProjection(
+    float left, float right, float top, float bottom, float near, float far);
+
   // Set 'camera': give position of eye, target position and Up vector
   static void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ);
 
