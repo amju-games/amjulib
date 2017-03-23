@@ -22,6 +22,7 @@
 #include "GuiDataLineDisplay.h"
 #include "GuiElastic.h"
 #include "GuiSlider.h"
+#include "GuiDecInclude.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -40,6 +41,7 @@ GuiElement* CreateRect() { return new GuiRect; }
 GuiElement* CreateScroll() { return new GuiScroll; }
 GuiElement* CreateElastic() { return new GuiElastic; }
 GuiElement* CreateSlider() { return new GuiSlider; }
+GuiElement* CreateGuiDecInclude() { return new GuiDecInclude; }
 
 GuiFactory::GuiFactory()
 {
@@ -64,5 +66,6 @@ GuiFactory::GuiFactory()
   Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
   Add(GuiElastic::NAME, &CreateElastic);
   Add(GuiSlider::NAME, &CreateSlider);
+  Add(GuiDecInclude::NAME, &CreateGuiDecInclude);
 }
 }

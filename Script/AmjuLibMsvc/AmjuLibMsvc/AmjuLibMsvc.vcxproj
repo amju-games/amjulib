@@ -119,17 +119,8 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <PostBuildEvent>
-      <Command>set LIB=..\..\..\Build\amjulib\lib\
-
-mkdir %LIB%
-
-del /Q %LIB%\*
-copy ..\..\..\Build\Debug\AmjuLibMsvc.lib %LIB%\amju_vc13.lib
-
-cd ..\..\Win 
-copy_files.bat
-
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">
@@ -307,6 +298,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiDataBarDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataDisplay.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDataLineDisplay.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecInclude.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiElastic.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiFileDialog.cpp" />
@@ -608,6 +600,8 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiDataBarDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataDisplay.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDataLineDisplay.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecInclude.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecorator.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiElastic.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiFileBrowser.h" />
