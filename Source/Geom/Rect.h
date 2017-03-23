@@ -14,6 +14,9 @@ public:
 
   void Set(float xmin, float xmax, float ymin, float ymax);
 
+  // Enlarge the box to contain (x, y) if necessary.
+  void SetIf(float x, float y);
+
   bool IsPointIn(const Vec2f& point) const;
   bool Intersects(const Rect& rect) const;
   Rect CalcIntersectRegion(const Rect& rect) const;

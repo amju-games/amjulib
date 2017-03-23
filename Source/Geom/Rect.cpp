@@ -33,6 +33,15 @@ void Rect::Set(float xmin, float xmax, float ymin, float ymax)
   m_ymax = ymax;
 }
 
+void Rect::SetIf(float x, float y)
+{
+  if (x < m_xmin) m_xmin = x;
+  if (x > m_xmax) m_xmax = x;
+
+  if (y < m_ymin) m_ymin = y;
+  if (y > m_ymax) m_ymax = y;
+}
+
 void Rect::Translate(float x, float y)
 {
   m_xmin += x;

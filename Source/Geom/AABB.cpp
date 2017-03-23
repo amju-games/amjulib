@@ -180,5 +180,17 @@ Vec3f AABB::CalcCentre() const
   return Vec3f((m_xmin + m_xmax) * 0.5f, (m_ymin + m_ymax) * 0.5f, (m_zmin + m_zmax) * 0.5f);
 }
 
+void AABB::GetCorners(Vec3f corners[8]) const
+{
+  corners[0] = Vec3f(m_xmin, m_ymin, m_zmin);
+  corners[1] = Vec3f(m_xmin, m_ymin, m_zmax);
+  corners[2] = Vec3f(m_xmin, m_ymax, m_zmin);
+  corners[3] = Vec3f(m_xmin, m_ymax, m_zmax);
+  corners[4] = Vec3f(m_xmax, m_ymin, m_zmin);
+  corners[5] = Vec3f(m_xmax, m_ymin, m_zmax);
+  corners[6] = Vec3f(m_xmax, m_ymax, m_zmin);
+  corners[7] = Vec3f(m_xmax, m_ymax, m_zmax);
+}
+
 }
 
