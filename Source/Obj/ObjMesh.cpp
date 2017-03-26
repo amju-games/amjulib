@@ -660,14 +660,15 @@ void ObjMesh::MungeData()
     std::cout << "Optimising .obj data...\n";
   }
 
+  const float BIG = 99999.9f;
+  m_aabb.Set(BIG, -BIG, BIG, -BIG, BIG, -BIG);
+
   for (Groups::iterator it = m_groups.begin();
     it != m_groups.end();
     /* increment in body */)
   {
     Group& g = it->second;
     BuildGroup(g);
-
-    m_aabb.Union(g.m_aabb);
 
     // Erase empty groups
     if (g.m_tris.empty())
@@ -688,6 +689,7 @@ void ObjMesh::MungeData()
     }
     else
     {
+      m_aabb.Union(g.m_aabb);
       ++it;
     }
   }
@@ -783,6 +785,9 @@ void ObjMesh::BuildGroup(Group& g)
     }
   }
 
+  const float BIG = 99999.9f;
+  g.m_aabb.Set(BIG, -BIG, BIG, -BIG, BIG, -BIG);
+
   g.m_tris.reserve(numfaces);
   for (unsigned int i = 0; i < numfaces; i++)
   {
@@ -826,7 +831,7 @@ void ObjMesh::BuildGroup(Group& g)
       t.m_verts[j].m_y = vP.y;
       t.m_verts[j].m_z = vP.z;
 
-      m_aabb.SetIf(vP.x, vP.y, vP.z);
+      g.m_aabb.SetIf(vP.x, vP.y, vP.z);
     }
     g.m_tris.push_back(t);
   }
