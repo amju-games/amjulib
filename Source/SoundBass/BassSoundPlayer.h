@@ -2,8 +2,7 @@
 Amju Games source code (c) Copyright Jason Colman 2006
 */
 
-// Music theory test
-#define AMJU_USE_MIDI
+#define AMJU_USE_BASS_MIDI
 #define AMJU_USE_BASS
 
 #ifdef AMJU_USE_BASS 
@@ -26,11 +25,11 @@ public:
   virtual void Update();
   virtual void SetSongMaxVolume(float);
 
-#ifdef AMJU_USE_MIDI
+#ifdef AMJU_USE_BASS_MIDI
   virtual bool MidiSetSoundFont(const char* soundfont) override;
   virtual bool MidiNoteOn(int note) override;
   virtual bool MidiNoteOff(int note) override;
-#endif // AMJU_USE_MIDI
+#endif // AMJU_USE_BASS_MIDI
     
 private:
   std::string m_lastSongName;

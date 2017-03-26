@@ -282,7 +282,7 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 #endif
 }
 
-#ifdef AMJU_USE_MIDI
+#ifdef AMJU_USE_BASS_MIDI
 static HSTREAM str = 0;
 bool BassSoundPlayer::MidiSetSoundFont(const char* soundfont)
 {
@@ -320,7 +320,7 @@ bool BassSoundPlayer::MidiNoteOn(int note)
 {
   // 60 is middle C
   // 127 is max volume
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(60 + note,127));
+  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(note,127));
 
   return true;
 }
@@ -328,11 +328,11 @@ bool BassSoundPlayer::MidiNoteOn(int note)
 bool BassSoundPlayer::MidiNoteOff(int note)
 {
 	//BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTESOFF /* JC - was NOTEOFF */,60 + note);
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(60 + note,0));
+  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(note,0));
 
   return true;
 }
-#endif // AMJU_USE_MIDI
+#endif // AMJU_USE_BASS_MIDI
 }
 #endif // AMJU_USE_BASS
 
