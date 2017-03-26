@@ -40,14 +40,23 @@ public:
   };
 
   // Vertex: (x, y, z) abs coord, (u, v) texture coord and normal.
-  // Now with added tangents!
+  // Now with added tangents and vertex colours!
   struct Vert
   {
     Vert() {}
     Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz, float tanx = 1.0f, float tany = 0.0f, float tanz = 0.0f) :
       m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v), m_tanx(tanx), m_tany(tany), m_tanz(tanz) {}
 
+    void SetColour(float r, float g, float b, float a = 1.0f)
+    {
+      m_r = r;
+      m_g = g;
+      m_b = b;
+      m_a = a;
+    }
+    
     float m_x, m_y, m_z, m_nx, m_ny, m_nz, m_u, m_v, m_tanx, m_tany, m_tanz;
+    float m_r = 1.0f, m_g = 1.0f, m_b = 1.0f, m_a = 1.0f;
   };
   typedef std::vector<Vert> Verts;
 
