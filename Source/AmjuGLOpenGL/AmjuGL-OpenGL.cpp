@@ -421,6 +421,7 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
     if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
     {
       // Don't specify tex coords if sphere map
@@ -431,9 +432,12 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x));
     glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)); 
 
+    glColorPointer(4, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_r));
+
     glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
 
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
 
