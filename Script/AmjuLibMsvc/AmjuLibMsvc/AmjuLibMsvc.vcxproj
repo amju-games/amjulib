@@ -13,6 +13,10 @@
       <Configuration>ES2Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="GTest|Win32">
+      <Configuration>GTest</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="ReleaseAssetTest|Win32">
       <Configuration>ReleaseAssetTest</Configuration>
       <Platform>Win32</Platform>
@@ -49,6 +53,11 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -69,6 +78,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -76,8 +88,10 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Build\$(Configuration)\</IntDir>
@@ -89,10 +103,13 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'" />
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'" />
@@ -102,9 +119,29 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">C:\SDL\include;C:\Program Files\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL"  /I "../../../Source/AmjuGLOpenGL/Internal" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Gui" /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip"  /I "../../../Source/SDL/include" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Include" /I "../../../3rdPartyLibs/OculusSDK/Samples/CommonSrc" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Src" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>AMJU_OFFER_OPENGL_OVR;USE_SHADOW_MAP_OPENGL_2;AMJU_USE_SDL;AMJU_USE_CURL;AMJU_USE_BASS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">
     <ClCompile>
       <AdditionalOptions>/D "MSVC" /D "GLEW_STATIC" /I "../../../Source/Mem" /I "../../../Source/Utils" /I "../../../Source/Utils/Zlib" /I "../../../Source/AmjuGL"  /I "../../../Source/AmjuGLOpenGL/Internal" /I "../../../Source/FileUtils" /I "../../../Source/Strings"  /I "../../../Source/Gui" /I "../../../Source/Localise" /I "../../../Source/Events" /I "../../../Source/Geom"  /I "../../../Source/Geom/Mgc" /I "../../../Source/TimeUtils" /I "../../../Source/Game" /I "../../../Source/Resource" /I "../../../Source/Scene"  /I "../../../Source/Md2" /I "../../../Source/Image" /I "../../../Source/Image/Png" /I "../../../Source/Obj"  /I "../../../Source/Collision" /I "../../../Source/Sound" /I "../../../Source/SoundSDLMixer" /I "../../../Source/Font" /I "../../../Source/GeomLoad" /I "../../../Source/GeomDraw"  /I "../../../Source/Network"  /I "../../../Source/Thread"  /I "../../../Source/Community"   /I "../../../Source/Lua"   /I "../../../Source/Clip"  /I "../../../Source/SDL/include" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Include" /I "../../../3rdPartyLibs/OculusSDK/Samples/CommonSrc" /I "../../../3rdPartyLibs/OculusSDK/LibOVR/Src" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
@@ -380,6 +417,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\glew.c">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='DebugAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='GTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='ES2Debug|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='ReleaseAssetTest|Win32'">/I "../../Mem" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
