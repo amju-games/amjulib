@@ -103,7 +103,7 @@ public:
         s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
       }
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM, s_colour);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
       s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
@@ -129,7 +129,8 @@ public:
     int vertexAttribPosition = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
     int vertexAttribNormal = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
     int vertexAttribTexCoord0 = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
-  
+    int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
+    
     glEnableVertexAttribArray(vertexAttribPosition);
     glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
   
@@ -139,6 +140,9 @@ public:
     glEnableVertexAttribArray(vertexAttribTexCoord0);
     glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
 
+    glEnableVertexAttribArray(vertexAttribColour);
+    glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44));
+    
     glBindVertexArrayOES(0);
   }
 
@@ -194,7 +198,7 @@ public:
         s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
       }
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR, s_colour);
+      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM, s_colour);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
       s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
@@ -224,7 +228,8 @@ public:
       int vertexAttribPosition = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
       int vertexAttribNormal = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
       int vertexAttribTexCoord0 = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
-      
+      int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
+
       glEnableVertexAttribArray(vertexAttribPosition);
       glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
       
@@ -234,6 +239,9 @@ public:
       glEnableVertexAttribArray(vertexAttribTexCoord0);
       glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
       
+      glEnableVertexAttribArray(vertexAttribColour);
+      glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44));
+
       glBindVertexArrayOES(0);
       
     }

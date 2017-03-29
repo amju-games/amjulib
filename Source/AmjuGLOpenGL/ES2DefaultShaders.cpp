@@ -3,7 +3,8 @@ namespace Amju
 const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX = "modelViewProjectionMatrix";
 const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX = "modelViewMatrix";
 const char* AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX = "normalMatrix";
-const char* AMJU_ES2_DEFAULT_SHADER_COLOUR = "colour";
+const char* AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB = "colourAttrib";
+const char* AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM = "colourUniform";
 const char* AMJU_ES2_DEFAULT_SHADER_TEXTURE = "texture";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING = "useLighting";
 const char* AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP = "useSphereMap";
@@ -19,12 +20,13 @@ precision highp float;\n\
 attribute vec4 position;\n\
 attribute vec3 normal;\n\
 attribute vec2 uv;\n\
+attribute vec4 colourAttrib;\n\
 varying vec4 colorVarying;\n\
 varying vec2 uvVarying;\n\
 uniform mat4 modelViewProjectionMatrix;\n\
 uniform mat4 modelViewMatrix;\n\
 uniform mat3 normalMatrix;\n\
-uniform vec4 colour;\n\
+uniform vec4 colourUniform;\n\
 uniform float useLighting;\n\
 uniform vec3 lightDir;\n\
 uniform int useSphereMap;\n\
@@ -34,7 +36,8 @@ void main()\n\
     vec3 eyeNormal = normalize(normalMatrix * normal);\n\
     vec3 lightPosition = lightDir;\n\
     float nDotVP = max(useLighting, dot(eyeNormal, normalize(lightPosition)) + 0.5);\n\
-    colorVarying = colour * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
+    vec4 col = colourUniform * colourAttrib;\n\
+    colorVarying = col * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
     if (useSphereMap == 1)\n\
     {\n\
@@ -65,14 +68,18 @@ const char* DEFAULT_VERT_SRC_PHONG = "\
 attribute vec4 position;\n\
 attribute vec3 normal;\n\
 attribute vec2 uv;\n\
+attribute vec4 colourAttrib;\n\
+varying vec4 colorVarying;\n\
 varying lowp vec3 normalVarying;\n\
 varying lowp vec2 uvVarying;\n\
 uniform mat4 modelViewProjectionMatrix;\n\
 uniform mat3 normalMatrix;\n\
 uniform int useSphereMap;\n\
+uniform lowp vec4 colourUniform;\n\
 void main()\n\
 {\n\
     normalVarying = normalMatrix * normal;\n\
+    colorVarying = colourUniform * colourAttrib;\n\
     uvVarying = uv;\n\
     if (useSphereMap == 1)\n\
     {\n\
@@ -90,14 +97,14 @@ void main()\n\
 const char* DEFAULT_FRAG_SRC_PHONG = "\
 varying lowp vec3 normalVarying;\n\
 varying lowp vec2 uvVarying;\n\
+varying vec4 colorVarying;\n\
 uniform sampler2D texture;\n\
-uniform lowp vec4 colour;\n\
 uniform lowp float useLighting;\n\
 void main()\n\
 {\n\
     lowp vec3 lightPosition = vec3(1.0, 1.0, 1.0);\n\
     lowp float nDotVP = max(0.0, dot(normalize(normalVarying), normalize(lightPosition)));\n\
-    gl_FragColor = colour * max(nDotVP + 0.4, useLighting) * texture2D(texture, uvVarying);\n\
+    gl_FragColor = colorVarying * max(nDotVP + 0.4, useLighting) * texture2D(texture, uvVarying);\n\
 }\
 ";
   
