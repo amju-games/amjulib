@@ -421,7 +421,6 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
     if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
     {
       // Don't specify tex coords if sphere map
@@ -432,7 +431,12 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x));
     glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)); 
 
+#ifdef VERTEX_COLOURS
+    // TODO This overwrites the current colour, so we must implement as a shader, where
+    //  we can combine a uniform colour for the tri list, with per-vertex colours.
+    glEnableClientState(GL_COLOR_ARRAY);
     glColorPointer(4, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_r));
+#endif
 
     glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
 
