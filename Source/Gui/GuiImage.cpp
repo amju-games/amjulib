@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <Screen.h>
 #include "GuiImage.h"
 #include "ResourceManager.h"
 #include <AmjuFinal.h>
@@ -24,7 +25,6 @@ void GuiImage::Draw()
   Assert(m_texture);
   m_texture->UseThisTexture();
 
-//  AmjuGL::DrawTriList(m_tris);
   AmjuGL::Draw(m_triList);
 }
 
@@ -76,6 +76,11 @@ bool GuiImage::Load(File* f)
   {
     return false;
   }
+
+  // Adjust height so aspect ratio is that of the image
+  float screenAspect = (float)Screen::X() / (float)Screen::Y();
+  float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
+  m_size.y = m_size.x * imageAspectInv * screenAspect;
 
   return true;
 }
