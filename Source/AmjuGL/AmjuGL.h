@@ -84,6 +84,14 @@ public:
       m_verts[2] = v2;
     }
  
+    // Convenience function to set the colour of all 3 vertices
+    void SetColour(float r, float g, float b, float a = 1.0f)
+    {
+      m_verts[0].SetColour(r, g, b, a);
+      m_verts[1].SetColour(r, g, b, a);
+      m_verts[2].SetColour(r, g, b, a);
+    }
+
     Vert m_verts[3];
   };
 
