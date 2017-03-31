@@ -8,6 +8,14 @@ namespace Amju
 {
 const char* GuiRect::NAME = "gui-rect";
 
+std::string GuiRect::s_cornerImageFilename = "corner.png";
+
+void GuiRect::SetCornerImage(const std::string &cornerImageFilename)
+{
+  s_cornerImageFilename = cornerImageFilename;
+}
+
+
 GuiRect::GuiRect()
 {
   m_cornerRadius = 0;
@@ -37,7 +45,7 @@ void GuiRect::Draw()
   }
 
   // Get corner texture sequence/font
-  static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes("corner.png"); // TODO CONFIG
+  static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes(s_cornerImageFilename); 
 
   // Draw tri list - rebuild if we have changed
 
@@ -80,11 +88,13 @@ void GuiRect::BuildTris()
     tri.m_verts[0] = verts[0];
     tri.m_verts[1] = verts[1];
     tri.m_verts[2] = verts[2];
+    tri.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
     tris.push_back(tri);
 
     tri.m_verts[0] = verts[0];
     tri.m_verts[1] = verts[2];
     tri.m_verts[2] = verts[3];
+    tri.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
     tris.push_back(tri);
   }
   else
@@ -174,6 +184,11 @@ void GuiRect::BuildTris()
 
     tris.push_back(AmjuGL::Tri(v[14], v[10], v[9]));
     tris.push_back(AmjuGL::Tri(v[14], v[9], v[13]));
+
+    for (auto& t : tris)
+    {
+      t.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
+    }
   }
 
   m_triList = MakeTriList(tris);
