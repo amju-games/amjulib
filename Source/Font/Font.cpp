@@ -6,9 +6,10 @@ Amju Games source code (c) Copyright Jason Colman 2005
 #include <algorithm>
 #include <iostream>
 #include "Font.h"
-#include "File.h"
-#include "StringUtils.h"
-#include "AmjuAssert.h"
+#include <File.h>
+#include <Screen.h>
+#include <StringUtils.h>
+#include <AmjuAssert.h>
 #include <AmjuFinal.h>
 
 //#define FONT_DEBUG
@@ -172,6 +173,7 @@ float Font::GetCharacterWidth(char c)
 
   float f = m_charWidths[c];
   f *= m_size;
+
   return f;
 }
 
@@ -185,6 +187,11 @@ float Font::GetTextWidth(const std::string& s)
   {
     f += GetCharacterWidth(s[i]);
   }
+
+  // Screen aspect ratio compensation
+  float aspect = (float)Screen::Y() / (float)Screen::X();
+  f *= aspect;
+
   return f;
 }
 
@@ -214,6 +221,10 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\
   float oldSizeX = m_textureSequence.GetSizeX();
   float sizeY = m_textureSequence.GetSizeY();
   
+  // Screen aspect ratio compensation
+  float aspect = (float)Screen::Y() / (float)Screen::X();
+  scaleX *= aspect;
+
   m_textureSequence.SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
   
   float xOff = x;
