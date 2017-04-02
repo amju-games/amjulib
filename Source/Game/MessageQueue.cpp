@@ -6,10 +6,20 @@
 
 namespace Amju
 {
+float SecondsFromNow(float seconds)
+{
+  return TheMessageQueue::Instance()->GetTime() + seconds;
+}
+
 void MessageQueue::SetTime(float seconds)
 {
   MutexLocker lock(m_mutex);
   m_time = seconds; 
+}
+
+float MessageQueue::GetTime() const
+{
+  return m_time;
 }
 
 void MessageQueue::Update()
@@ -25,7 +35,6 @@ void MessageQueue::Update()
   {
     PMessage pm =  *(m_q.begin());
 
-	// TODO Comparing timestamp with process elapsed time as a float??
     if (pm->m_time < m_time)
     {
       pm->Execute();
