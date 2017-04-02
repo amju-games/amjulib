@@ -270,11 +270,13 @@ void GuiButton::Draw()
 
   m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
-  AmjuGL::PushMatrix();
-  AmjuGL::Translate(0, 0.01f, 0);
-  m_guiText.SetFgCol(Colour(0, 0, 0, a));
-  m_guiText.Draw();
-  AmjuGL::PopMatrix();
+
+  // TODO CONFIG
+  //AmjuGL::PushMatrix();
+  //AmjuGL::Translate(0, 0.01f, 0);
+  //m_guiText.SetFgCol(Colour(0, 0, 0, a));
+  //m_guiText.Draw();
+  //AmjuGL::PopMatrix();
 
   AmjuGL::PopMatrix();
 }
