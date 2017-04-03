@@ -23,6 +23,7 @@
 #include "GuiElastic.h"
 #include "GuiSlider.h"
 #include "GuiDecInclude.h"
+#include "GuiDecRotate.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -42,6 +43,9 @@ GuiElement* CreateScroll() { return new GuiScroll; }
 GuiElement* CreateElastic() { return new GuiElastic; }
 GuiElement* CreateSlider() { return new GuiSlider; }
 GuiElement* CreateGuiDecInclude() { return new GuiDecInclude; }
+
+template <class T>
+GuiElement* CreateT() { return new T; }
 
 GuiFactory::GuiFactory()
 {
@@ -67,5 +71,6 @@ GuiFactory::GuiFactory()
   Add(GuiElastic::NAME, &CreateElastic);
   Add(GuiSlider::NAME, &CreateSlider);
   Add(GuiDecInclude::NAME, &CreateGuiDecInclude);
+  Add(GuiDecRotate::NAME, &CreateT<GuiDecRotate>);
 }
 }

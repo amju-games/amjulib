@@ -48,7 +48,7 @@ std::cout << "Elastic: " << m_name << " vel: " << m_vel.x << ", " << m_vel.y << 
   return true;
 }
 
-void GuiElastic::Draw()
+void GuiElastic::Update()
 {
   float dt = TheTimer::Instance()->GetDt();
   m_vel += m_acc * dt;
@@ -102,8 +102,6 @@ std::cout << "Elastic: " << m_name << " bounce in Y..\n";
       }
     }
   }
-
-  GuiComposite::Draw();
 }
 }
 
