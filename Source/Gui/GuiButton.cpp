@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <DrawRect.h>
 #include <Timer.h>
 #include <TextToSpeech.h>
 #include "CursorManager.h"
@@ -174,6 +175,11 @@ bool GuiButton::Load(File* f)
  
   m_guiText.SetParent(GetParent());
 
+  // Use text BG colour to tint the button image, but don't draw a text background, which is a
+  //  solid rectangle.
+  SetButtonColour(m_guiText.GetBgCol());
+  m_guiText.SetDrawBg(false);
+
 #if defined(WIN32) || defined(MACOSX)
   // Check for initial mouse over
   Rect rect = GetRect(this); 
@@ -277,6 +283,17 @@ void GuiButton::Draw()
   //m_guiText.SetFgCol(Colour(0, 0, 0, a));
   //m_guiText.Draw();
   //AmjuGL::PopMatrix();
+
+
+  // Draw bounding rect
+  AmjuGL::SetIdentity();
+  Rect r = GetRect(this);
+  PushColour();
+  AmjuGL::SetColour(Colour(0, 0, 0, 1));
+  AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+  DrawRect(r);
+  AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  PopColour();
 
   AmjuGL::PopMatrix();
 }

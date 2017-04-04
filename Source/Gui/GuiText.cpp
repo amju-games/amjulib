@@ -606,4 +606,15 @@ bool GuiText::LoadText(File* f)
   RecalcFirstLast();
   return true;
 }
+
+const Colour& GuiText::GetFgCol() const
+{
+  return m_fgCol;
+}
+
+const Colour& GuiText::GetBgCol() const
+{
+  return m_bgCol;
+}
+
 }

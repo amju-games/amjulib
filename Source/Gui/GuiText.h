@@ -55,6 +55,8 @@ public:
   void SetDrawBg(bool drawBg);
   void SetFgCol(const Colour& col);
   void SetBgCol(const Colour& col);
+  const Colour& GetFgCol() const;
+  const Colour& GetBgCol() const;
 
   enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
 
