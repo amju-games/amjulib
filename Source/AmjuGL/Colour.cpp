@@ -109,4 +109,13 @@ std::string ToHexString(const Colour& col, bool includeAlpha)
   return ToHexString(i);
 }
 
+Colour Interpolate(const Colour& c1, const Colour& c2, float t)
+{
+  return Colour(
+    c1.m_r + t * (c2.m_r - c1.m_r),
+    c1.m_g + t * (c2.m_g - c1.m_g),
+    c1.m_b + t * (c2.m_b - c1.m_b),
+    c1.m_a + t * (c2.m_a - c1.m_a));
+}
+
 }
