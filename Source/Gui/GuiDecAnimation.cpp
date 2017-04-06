@@ -6,6 +6,8 @@
 
 namespace Amju
 {
+  const char* GuiDecAnimation::NAME = "animation";
+
 GuiDecAnimation::LoopType GuiDecAnimation::GetLoopTypeFromString(const std::string& s)
 {
   static const std::map<std::string, LoopType> LOOP_TYPES = 
@@ -16,6 +18,18 @@ GuiDecAnimation::LoopType GuiDecAnimation::GetLoopTypeFromString(const std::stri
   };
   auto it = LOOP_TYPES.find(s);
   Assert(it != LOOP_TYPES.end());
+  return it->second;
+}
+
+GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::string& s)
+{
+  static const std::map<std::string, EaseType> EASE_TYPES =
+  {
+    { "linear", EaseType::EASE_TYPE_LINEAR },
+    { "step", EaseType::EASE_TYPE_STEP },
+  };
+  auto it = EASE_TYPES.find(s);
+  Assert(it != EASE_TYPES.end());
   return it->second;
 }
 
@@ -38,11 +52,20 @@ bool GuiDecAnimation::Load(File* f)
     return false;
   }
 
-  // Get animation type
   std::string line;
+
+  // Get easing function - TODO, only linear supported ATM
   if (!f->GetDataLine(&line))
   {
-    f->ReportError("Expected animation type");
+    f->ReportError("Expected easing function");
+    return false;
+  }
+  m_easeType = GetEaseTypeFromString(line);
+
+  // Get loop type
+  if (!f->GetDataLine(&line))
+  {
+    f->ReportError("Expected loop type");
     return false;
   }
   m_loopType = GetLoopTypeFromString(line);
@@ -68,14 +91,27 @@ void GuiDecAnimation::Update()
   // Update current time
   float dt = TheTimer::Instance()->GetDt();
   CalcUpdate(dt);
+
+  // Animate descendants
+  m_children[0]->Animate(m_value);
+
+  // Update descendants
+  m_children[0]->Update();
 }
 
 void GuiDecAnimation::CalcUpdate(float dt)
 {
-  m_time += dt;
+  m_time += dt * m_timeMultiplier;
 
-  // Linear curve TODO other types
-  m_value = m_time / m_cycleTime;
+  switch (m_easeType)
+  {
+  case EaseType::EASE_TYPE_LINEAR:
+    m_value = m_time / m_cycleTime;
+    break;
+  case EaseType::EASE_TYPE_STEP:
+    m_value = (m_time > m_cycleTime) ? 1.f : 0.f;
+    break;
+  }
 
   if (m_time > m_cycleTime)
   {
@@ -101,6 +137,15 @@ void GuiDecAnimation::CalcUpdate(float dt)
       break;
     }
   }
+}
+
+void GuiDecAnimation::Animate(float animValue)
+{
+  // This means the parent animation affects how fast this animation progresses.
+  m_timeMultiplier = animValue;
+
+  // We don't call Animate on our child here, because we do it in Update(),
+  //  with our animated value.
 }
 
 void GuiDecAnimation::SetIsPaused(bool isPaused)

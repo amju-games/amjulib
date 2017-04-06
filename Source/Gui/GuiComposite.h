@@ -49,9 +49,16 @@ public:
   // Set visibility for self and children
   virtual void SetAncestorsVisible(bool ancestorVis) override;
   
+  // Pass animation value on to all children
+  virtual void Animate(float animValue) override;
+
 protected:
   bool LoadChildren(File*);
   bool LoadOneChild(File*);
+
+  // Called by Animate, and can also be used by subclasses (e.g. decorators), 
+  //  to pass the animation value down the tree.
+  void AnimateChildren(float animValue);
   
   GuiElements m_children;
 };

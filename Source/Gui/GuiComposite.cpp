@@ -494,4 +494,17 @@ bool GuiComposite::SetFocusNextChild()
   return false;
 }
 
+void GuiComposite::Animate(float animValue)
+{
+  AnimateChildren(animValue);
+}
+
+void GuiComposite::AnimateChildren(float animValue)
+{
+  for (auto ch : m_children)
+  {
+    ch->Animate(animValue);
+  }
+}
+
 }

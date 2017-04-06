@@ -79,6 +79,12 @@ public:
   // Conceptually protected:
   virtual void SetAncestorsVisible(bool ancestorVis);
 
+  // Animation: this animation value varies between 0..1, set by an animating parent.
+  // Override this to change a property like colour, position, rotation, etc.
+  // When overriding this function in a composite/decorator, call the base class version 
+  //  to pass the animation value down the tree to all descendants.
+  virtual void Animate(float animValue) {}
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
