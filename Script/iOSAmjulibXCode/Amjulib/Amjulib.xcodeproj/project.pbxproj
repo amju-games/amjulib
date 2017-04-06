@@ -500,6 +500,10 @@
 		693D43E115AB7CE900B84D5C /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431D15AB7CE900B84D5C /* zlib.h */; };
 		693D43E215AB7CE900B84D5C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431E15AB7CE900B84D5C /* zutil.c */; };
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
+		6959E2D81E958E1F00E251A9 /* GuiDecAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */; };
+		6959E2D91E958E1F00E251A9 /* GuiDecAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */; };
+		6959E2DA1E958E1F00E251A9 /* GuiDecRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */; };
+		6959E2DB1E958E1F00E251A9 /* GuiDecRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2D71E958E1F00E251A9 /* GuiDecRotate.h */; };
 		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
 		696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */; };
@@ -1048,6 +1052,10 @@
 		693D431D15AB7CE900B84D5C /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		693D431E15AB7CE900B84D5C /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecAnimation.cpp; sourceTree = "<group>"; };
+		6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecAnimation.h; sourceTree = "<group>"; };
+		6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecRotate.cpp; sourceTree = "<group>"; };
+		6959E2D71E958E1F00E251A9 /* GuiDecRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecRotate.h; sourceTree = "<group>"; };
 		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
 		696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGLES2Android.cpp; path = ../../../Source/AmjuGLOpenGL/AmjuGLES2Android.cpp; sourceTree = "<group>"; };
@@ -1568,6 +1576,10 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */,
+				6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */,
+				6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */,
+				6959E2D71E958E1F00E251A9 /* GuiDecRotate.h */,
 				693D41B115AB7C9100B84D5C /* Cursor.cpp */,
 				693D41B215AB7C9100B84D5C /* Cursor.h */,
 				693D41B315AB7C9100B84D5C /* CursorManager.cpp */,
@@ -2021,6 +2033,7 @@
 				693D408315AB79D300B84D5C /* Gpc.h in Headers */,
 				693D408E15AB79EE00B84D5C /* BruteForce.h in Headers */,
 				690C45161885C740007A505D /* lstate.h in Headers */,
+				6959E2D91E958E1F00E251A9 /* GuiDecAnimation.h in Headers */,
 				71D22B5B1D4E4DA400012DB8 /* Cubemap.h in Headers */,
 				693D409015AB79EE00B84D5C /* CollisionManager.h in Headers */,
 				693D409215AB79EE00B84D5C /* CollisionMesh.h in Headers */,
@@ -2188,6 +2201,7 @@
 				693D437515AB7CE900B84D5C /* StringUtils.h in Headers */,
 				693D437615AB7CE900B84D5C /* Locker.h in Headers */,
 				693D437815AB7CE900B84D5C /* Mutex.h in Headers */,
+				6959E2DB1E958E1F00E251A9 /* GuiDecRotate.h in Headers */,
 				693D437A15AB7CE900B84D5C /* Thread.h in Headers */,
 				693D437C15AB7CE900B84D5C /* ThreadGate.h in Headers */,
 				693D437E15AB7CE900B84D5C /* ThreadManager.h in Headers */,
@@ -2489,6 +2503,7 @@
 				693D433815AB7CE900B84D5C /* Socket.cpp in Sources */,
 				693D433A15AB7CE900B84D5C /* SocketService.cpp in Sources */,
 				693D433C15AB7CE900B84D5C /* UrlUtils.cpp in Sources */,
+				6959E2D81E958E1F00E251A9 /* GuiDecAnimation.cpp in Sources */,
 				693D433E15AB7CE900B84D5C /* ObjMesh.cpp in Sources */,
 				693D434015AB7CE900B84D5C /* ObjUsefulFunctions.cpp in Sources */,
 				693D434215AB7CE900B84D5C /* AlphaBmpLoader.cpp in Sources */,
@@ -2585,6 +2600,7 @@
 				69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */,
 				69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */,
 				690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */,
+				6959E2DA1E958E1F00E251A9 /* GuiDecRotate.cpp in Sources */,
 				69FEF54E1826827900D83578 /* ROConfig.cpp in Sources */,
 				696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */,
 				696519DC18BF5C26009A36F6 /* VECTOR4D.cpp in Sources */,
