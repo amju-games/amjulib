@@ -990,6 +990,12 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiDecRotate.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecTranslate.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecColour.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1884,6 +1890,12 @@
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiDecRotate.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecTranslate.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecColour.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

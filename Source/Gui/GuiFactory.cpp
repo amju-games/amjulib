@@ -24,6 +24,9 @@
 #include "GuiSlider.h"
 #include "GuiDecInclude.h"
 #include "GuiDecRotate.h"
+#include "GuiDecTranslate.h"
+#include "GuiDecColour.h"
+#include "GuiDecAnimation.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -70,7 +73,10 @@ GuiFactory::GuiFactory()
   Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
   Add(GuiElastic::NAME, &CreateElastic);
   Add(GuiSlider::NAME, &CreateSlider);
-  Add(GuiDecInclude::NAME, &CreateGuiDecInclude);
+  Add(GuiDecInclude::NAME, &CreateT<GuiDecInclude>);
   Add(GuiDecRotate::NAME, &CreateT<GuiDecRotate>);
+  Add(GuiDecTranslate::NAME, &CreateT<GuiDecTranslate>);
+  Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
+  Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
 }
 }
