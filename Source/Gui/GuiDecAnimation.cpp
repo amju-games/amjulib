@@ -21,12 +21,24 @@ GuiDecAnimation::LoopType GuiDecAnimation::GetLoopTypeFromString(const std::stri
   return it->second;
 }
 
-GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::string& s)
+GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::string& cs, bool& reverse)
 {
+  std::string s(cs);
+  // Check for "reverse-" at front of string
+  reverse = false;
+  static const std::string REVERSE = "reverse-";
+
+  if (s.compare(0, REVERSE.length(), REVERSE) == 0)
+  {
+    s = s.substr(REVERSE.length());
+    reverse = true;
+  }
+
   static const std::map<std::string, EaseType> EASE_TYPES =
   {
     { "linear", EaseType::EASE_TYPE_LINEAR },
     { "step", EaseType::EASE_TYPE_STEP },
+    { "delay", EaseType::EASE_TYPE_STEP },
   };
   auto it = EASE_TYPES.find(s);
   Assert(it != EASE_TYPES.end());
@@ -60,7 +72,7 @@ bool GuiDecAnimation::Load(File* f)
     f->ReportError("Expected easing function");
     return false;
   }
-  m_easeType = GetEaseTypeFromString(line);
+  m_easeType = GetEaseTypeFromString(line, m_reverse);
 
   // Get loop type
   if (!f->GetDataLine(&line))
@@ -93,7 +105,7 @@ void GuiDecAnimation::Update()
   CalcUpdate(dt);
 
   // Animate descendants
-  m_children[0]->Animate(m_value);
+  m_children[0]->Animate(m_reverse ? 1.f - m_value : m_value);
 
   // Update descendants
   m_children[0]->Update();

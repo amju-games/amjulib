@@ -60,7 +60,7 @@ public:
 
   static LoopType GetLoopTypeFromString(const std::string& s);
 
-  static EaseType GetEaseTypeFromString(const std::string& s);
+  static EaseType GetEaseTypeFromString(const std::string& s, bool& reverse);
 
 protected:
 
@@ -84,5 +84,7 @@ protected:
   // Set by parent calling the Animate function, so we can chain animations to get
   //  delays etc.
   float m_timeMultiplier = 1.0f;
+
+  bool m_reverse = false;
 };
 }
