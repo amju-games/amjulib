@@ -236,7 +236,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
   float minY = pos.y - GetSize().y - 0.01f;
 
   PushColour();
-  AmjuGL::SetColour(fg);
+  MultColour(fg);
   for (int i = 0; i < lines; i++)
   {
     std::string str = m_lines[i];
@@ -362,7 +362,7 @@ void GuiText::DrawSingleLine(
   }
 
   PushColour();
-  AmjuGL::SetColour(fg);
+  MultColour(fg);
   
   Font* font = GetFont();
   if (selected && !m_triListSelection)

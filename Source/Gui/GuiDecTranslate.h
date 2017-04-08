@@ -8,18 +8,20 @@
 namespace Amju
 {
 // * GuiDecTranslate *
-// Decorator which translates child
+// Decorator which translates child. This can be animated: we can specify 2 positions, and
+//  use an animation decorator to control interpolation between them.
+// If two positions are given, separate them with semicolon.
 class GuiDecTranslate : public GuiDecorator
 {
 public:
   static const char* NAME;
 
   virtual bool Load(File*) override;
-  // Can't we just set the translation in Load?
-//  virtual void Draw() override;
 
-//private:
-//  float m_angleDegs = 0;
+  virtual void Animate(float animValue) override;
+
+private:
+  Vec2f m_positions[2];
 };
 }
 

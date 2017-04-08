@@ -8,53 +8,53 @@
 
 namespace Amju
 {
-  const char* GuiDecColour::NAME = "colour";
+const char* GuiDecColour::NAME = "colour";
 
-  bool GuiDecColour::Load(File* f)
+bool GuiDecColour::Load(File* f)
+{
+  std::string s;
+  if (!f->GetDataLine(&s))
   {
-    std::string s;
-    if (!f->GetDataLine(&s))
-    {
-      f->ReportError("Expected colour info");
-      return false;
-    }
-
-    // 2 colours or one?
-    Strings strs = Split(s, ',');
-    Assert(!strs.empty());
-    m_colour[0] = FromHexString(strs[0]);
-    if (strs.size() == 1)
-    {
-      m_colour[1] = m_colour[0];
-    }
-    else
-    {
-      m_colour[1] = FromHexString(strs[1]);
-    }
-    m_interpolatedColour = m_colour[0];
-
-    return GuiDecorator::Load(f);
+    f->ReportError("Expected colour info");
+    return false;
   }
 
-  void GuiDecColour::Draw()
+  // 2 colours or one?
+  Strings strs = Split(s, ',');
+  Assert(!strs.empty());
+  m_colour[0] = FromHexString(strs[0]);
+  if (strs.size() == 1)
   {
-    PushColour();
-    MultColour(m_interpolatedColour);
-
-    GuiDecorator::Draw();
-
-    PopColour();
+    m_colour[1] = m_colour[0];
   }
-
-  void GuiDecColour::Animate(float animValue)
+  else
   {
-    m_interpolatedColour = Interpolate(m_colour[0], m_colour[1], animValue);
-
-    AnimateChildren(animValue);
+    m_colour[1] = FromHexString(strs[1]);
   }
+  m_interpolatedColour = m_colour[0];
 
-  void GuiDecColour::SetColour(const Colour& col, int zeroOrOne)
-  {
-    m_colour[zeroOrOne] = col;
-  }
+  return GuiDecorator::Load(f);
+}
+
+void GuiDecColour::Draw()
+{
+  PushColour();
+  MultColour(m_interpolatedColour);
+
+  GuiDecorator::Draw();
+
+  PopColour();
+}
+
+void GuiDecColour::Animate(float animValue)
+{
+  m_interpolatedColour = Interpolate(m_colour[0], m_colour[1], animValue);
+
+  AnimateChildren(animValue);
+}
+
+void GuiDecColour::SetColour(const Colour& col, int zeroOrOne)
+{
+  m_colour[zeroOrOne] = col;
+}
 }
