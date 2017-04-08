@@ -16,9 +16,11 @@ public:
 
   virtual bool Load(File*) override;
   virtual void Draw() override;
+  virtual void Animate(float animValue) override;
 
 private:
-  float m_angleDegs = 0;
+  float m_angle[2];
+  float m_interpAngle = 0;
 };
 }
 
