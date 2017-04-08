@@ -507,4 +507,11 @@ void GuiComposite::AnimateChildren(float animValue)
   }
 }
 
+void GuiComposite::ResetAnimation()
+{
+  for (auto ch : m_children)
+  {
+    ch->ResetAnimation();
+  }
+}
 }

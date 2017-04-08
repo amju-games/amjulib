@@ -160,6 +160,12 @@ void GuiDecAnimation::Animate(float animValue)
   //  with our animated value.
 }
 
+void GuiDecAnimation::ResetAnimation()
+{
+  m_time = 0;
+  GuiComposite::ResetAnimation();
+}
+
 void GuiDecAnimation::SetIsPaused(bool isPaused)
 {
   m_isPaused = isPaused;

@@ -29,6 +29,9 @@ public:
   //  could do more complicated things.
   virtual void Animate(float animValue) override;
 
+  // Reset time to zero. Pass message down to descendants.
+  virtual void ResetAnimation() override;
+
   // Made redundant as we can call Animate(0) to pause, but hey
   void SetIsPaused(bool isPaused);
   bool IsPaused() const;

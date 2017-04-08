@@ -52,6 +52,10 @@ public:
   // Pass animation value on to all children
   virtual void Animate(float animValue) override;
 
+  // Pass reset message on to all children.
+  // Subclasses should call this to pass the messsage down.
+  virtual void ResetAnimation() override;
+
 protected:
   bool LoadChildren(File*);
   bool LoadOneChild(File*);

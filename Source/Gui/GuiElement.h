@@ -85,6 +85,9 @@ public:
   //  to pass the animation value down the tree to all descendants.
   virtual void Animate(float animValue) {}
 
+  // Reset animation time to zero. Composite/decorators must pass this along to children.
+  virtual void ResetAnimation() {}
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)

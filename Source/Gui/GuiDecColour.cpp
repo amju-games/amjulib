@@ -49,6 +49,8 @@ namespace Amju
   void GuiDecColour::Animate(float animValue)
   {
     m_interpolatedColour = Interpolate(m_colour[0], m_colour[1], animValue);
+
+    AnimateChildren(animValue);
   }
 
   void GuiDecColour::SetColour(const Colour& col, int zeroOrOne)
