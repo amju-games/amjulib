@@ -47,8 +47,6 @@ void GuiDecRotate::Animate(float animValue)
 {
   m_interpAngle = m_angle[0] + (m_angle[1] - m_angle[0]) * animValue;
 
-  std::cout << "Interp angle: " << m_interpAngle << "\n";
-
   AnimateChildren(animValue);
 }
 }

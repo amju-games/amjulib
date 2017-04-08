@@ -376,6 +376,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiDecColour.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecInclude.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecRotate.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecScale.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecTranslate.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiElastic.cpp" />
@@ -685,6 +686,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiDecInclude.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecorator.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecRotate.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecScale.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecTranslate.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiElastic.h" />

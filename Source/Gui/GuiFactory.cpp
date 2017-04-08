@@ -24,6 +24,7 @@
 #include "GuiSlider.h"
 #include "GuiDecInclude.h"
 #include "GuiDecRotate.h"
+#include "GuiDecScale.h"
 #include "GuiDecTranslate.h"
 #include "GuiDecColour.h"
 #include "GuiDecAnimation.h"
@@ -78,5 +79,6 @@ GuiFactory::GuiFactory()
   Add(GuiDecTranslate::NAME, &CreateT<GuiDecTranslate>);
   Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
+  Add(GuiDecScale::NAME, &CreateT<GuiDecScale>);
 }
 }

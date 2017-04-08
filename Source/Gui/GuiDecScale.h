@@ -7,19 +7,20 @@
 
 namespace Amju
 {
-// * GuiDecTranslate *
-// Decorator which translates child. This can be animated: we can specify 2 positions, and
+// * GuiDecScale *
+// Decorator which scales child. This can be animated: we can specify 2 scales, and
 //  use an animation decorator to control interpolation between them.
-// If two positions are given, separate them with semicolon.
-class GuiDecTranslate : public GuiDecorator
+// If two scales are given, separate them with semicolon.
+class GuiDecScale : public GuiDecorator
 {
 public:
   static const char* NAME;
   virtual bool Load(File*) override;
   virtual void Animate(float animValue) override;
+  virtual void Draw() override;
 
 private:
-  Vec2f m_positions[2];
+  Vec2f m_scale[2];
+  Vec2f m_interpScale;
 };
 }
-
