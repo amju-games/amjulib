@@ -140,11 +140,11 @@ void GuiDecAnimation::CalcUpdate(float dt)
       if (m_time > 2.0f * m_cycleTime)
       {
         m_time -= 2.0f * m_cycleTime;
-        m_value -= 1.0f;
+        m_value -= 2.0f;
       }
       else
       {
-        m_value = 1.0f - m_value;
+        m_value = 2.0f - m_value;
       }
       break;
     }
