@@ -27,7 +27,9 @@ public:
   virtual bool OnResizeEvent(const ResizeEvent&) { return false; }
 };
 
-typedef RCPtr<EventListener> PEventListener;
+// Not reference counted. This would give us a chicken and egg problem when we want to 
+//  delete a listener and have it removed from the Event Poller.
+typedef EventListener* PEventListener;
 
 // Map of priority to EventListener. Listeners are notified in ascending priority order.
 // If a listener eats an event, no listeners with a lower priority are notified.

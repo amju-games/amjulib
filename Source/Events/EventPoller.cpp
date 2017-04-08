@@ -219,7 +219,7 @@ void EventPoller::RemoveListener(EventListener* pListener)
       return;
     }
   }
-  Assert(0); // listener not found
+  //Assert(0); // listener not found
 }
 
 bool EventPoller::HasListener(EventListener* pListener) const
