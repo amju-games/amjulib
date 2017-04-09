@@ -33,7 +33,14 @@ bool GuiDecColour::Load(File* f)
   }
   m_interpolatedColour = m_colour[0];
 
-  return GuiDecorator::Load(f);
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
+  SetName("colour-" + m_children[0]->GetName());
+
+  return true;
 }
 
 void GuiDecColour::Draw()

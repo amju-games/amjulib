@@ -32,7 +32,14 @@ bool GuiDecTranslate::Load(File* f)
   }
   SetLocalPos(m_positions[0]);
 
-  return GuiDecorator::Load(f);
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
+  SetName("translate-" + m_children[0]->GetName());
+
+  return true;
 }
 
 void GuiDecTranslate::Animate(float animValue)

@@ -53,6 +53,11 @@ void GuiDecAnimation::SetLoopType(LoopType loopType)
   m_loopType = loopType;
 }
 
+void GuiDecAnimation::SetEaseType(EaseType easeType)
+{
+  m_easeType = easeType;
+}
+
 void GuiDecAnimation::SetCycleTime(float cycleTime)
 {
   m_cycleTime = cycleTime;
@@ -60,6 +65,13 @@ void GuiDecAnimation::SetCycleTime(float cycleTime)
 
 bool GuiDecAnimation::Load(File* f)
 {
+  // Animations need names so we can get to them in code
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected animation name");
+    return false;
+  }
+
   std::string line;
 
   // Get loop type
@@ -92,8 +104,6 @@ bool GuiDecAnimation::Load(File* f)
   {
     return false;
   }
-
-  SetName("anim-for-" + m_children[0]->GetName());
 
   return true;
 }

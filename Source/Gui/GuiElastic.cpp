@@ -102,6 +102,9 @@ std::cout << "Elastic: " << m_name << " bounce in Y..\n";
       }
     }
   }
+
+  // Update descendants
+  GuiComposite::Update();
 }
 }
 

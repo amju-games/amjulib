@@ -32,7 +32,14 @@ bool GuiDecRotate::Load(File* f)
   }
   m_interpAngle = m_angle[0];
 
-  return GuiDecorator::Load(f);
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
+  SetName("rotate-" + m_children[0]->GetName());
+
+  return true;
 }
 
 void GuiDecRotate::Draw()

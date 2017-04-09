@@ -26,6 +26,13 @@ bool GuiDecInclude::Load(File* f)
     return false;
   }
 
-  return LoadOneChild(&childFile);
+  if (!GuiDecorator::Load(&childFile))
+  {
+    return false;
+  }
+
+  SetName("include-" + path);
+
+  return true;
 }
 }

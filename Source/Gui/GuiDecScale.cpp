@@ -32,7 +32,15 @@ bool GuiDecScale::Load(File* f)
     ToVec2(strs[1], &m_scale[1]);
   }
   m_interpScale = m_scale[0];
-  return GuiDecorator::Load(f);
+
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
+  SetName("scale-" + m_children[0]->GetName());
+
+  return true;
 }
 
 void GuiDecScale::Draw()

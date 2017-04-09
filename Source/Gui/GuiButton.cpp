@@ -254,7 +254,7 @@ void GuiButton::Draw()
   }
 
   PushColour();
-  AmjuGL::SetColour(m_buttonColour);
+  MultColour(m_buttonColour);
   GuiImage::Draw();
   PopColour();
 
