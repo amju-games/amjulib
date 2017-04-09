@@ -504,6 +504,10 @@
 		6959E2D91E958E1F00E251A9 /* GuiDecAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */; };
 		6959E2DA1E958E1F00E251A9 /* GuiDecRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */; };
 		6959E2DB1E958E1F00E251A9 /* GuiDecRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2D71E958E1F00E251A9 /* GuiDecRotate.h */; };
+		6959E2E01E97F6B400E251A9 /* GuiDecColour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2DC1E97F6B400E251A9 /* GuiDecColour.cpp */; };
+		6959E2E11E97F6B400E251A9 /* GuiDecColour.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2DD1E97F6B400E251A9 /* GuiDecColour.h */; };
+		6959E2E21E97F6B400E251A9 /* GuiDecTranslate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2DE1E97F6B400E251A9 /* GuiDecTranslate.cpp */; };
+		6959E2E31E97F6B400E251A9 /* GuiDecTranslate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2DF1E97F6B400E251A9 /* GuiDecTranslate.h */; };
 		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
 		696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */; };
@@ -1056,6 +1060,10 @@
 		6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecAnimation.h; sourceTree = "<group>"; };
 		6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecRotate.cpp; sourceTree = "<group>"; };
 		6959E2D71E958E1F00E251A9 /* GuiDecRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecRotate.h; sourceTree = "<group>"; };
+		6959E2DC1E97F6B400E251A9 /* GuiDecColour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecColour.cpp; sourceTree = "<group>"; };
+		6959E2DD1E97F6B400E251A9 /* GuiDecColour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecColour.h; sourceTree = "<group>"; };
+		6959E2DE1E97F6B400E251A9 /* GuiDecTranslate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecTranslate.cpp; sourceTree = "<group>"; };
+		6959E2DF1E97F6B400E251A9 /* GuiDecTranslate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecTranslate.h; sourceTree = "<group>"; };
 		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
 		696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGLES2Android.cpp; path = ../../../Source/AmjuGLOpenGL/AmjuGLES2Android.cpp; sourceTree = "<group>"; };
@@ -1576,6 +1584,10 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				6959E2DC1E97F6B400E251A9 /* GuiDecColour.cpp */,
+				6959E2DD1E97F6B400E251A9 /* GuiDecColour.h */,
+				6959E2DE1E97F6B400E251A9 /* GuiDecTranslate.cpp */,
+				6959E2DF1E97F6B400E251A9 /* GuiDecTranslate.h */,
 				6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */,
 				6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */,
 				6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */,
@@ -2131,6 +2143,7 @@
 				693D41D315AB7C9100B84D5C /* Cursor.h in Headers */,
 				693D41D515AB7C9100B84D5C /* CursorManager.h in Headers */,
 				693D41D715AB7C9100B84D5C /* GuiButton.h in Headers */,
+				6959E2E31E97F6B400E251A9 /* GuiDecTranslate.h in Headers */,
 				693D41D915AB7C9100B84D5C /* GuiCommandHandler.h in Headers */,
 				693D41DB15AB7C9100B84D5C /* GuiComposite.h in Headers */,
 				690C45081885C740007A505D /* llex.h in Headers */,
@@ -2218,6 +2231,7 @@
 				693D438F15AB7CE900B84D5C /* Factory.h in Headers */,
 				693D439415AB7CE900B84D5C /* Launcher.h in Headers */,
 				693D43B315AB7CE900B84D5C /* NonCopyable.h in Headers */,
+				6959E2E11E97F6B400E251A9 /* GuiDecColour.h in Headers */,
 				693D43B515AB7CE900B84D5C /* Pause.h in Headers */,
 				693D43B615AB7CE900B84D5C /* RCPtr.h in Headers */,
 				693D43B915AB7CE900B84D5C /* Sign.h in Headers */,
@@ -2386,6 +2400,7 @@
 				696519DA18BF5C26009A36F6 /* MATRIX4X4.cpp in Sources */,
 				693D40FB15AB7C2C00B84D5C /* GameObject.cpp in Sources */,
 				693D40FE15AB7C2C00B84D5C /* GameState.cpp in Sources */,
+				6959E2E01E97F6B400E251A9 /* GuiDecColour.cpp in Sources */,
 				693D410015AB7C2C00B84D5C /* MessageQueue.cpp in Sources */,
 				693D414915AB7C5300B84D5C /* AABB.cpp in Sources */,
 				691136A5184F4FA60046C951 /* GuiElastic.cpp in Sources */,
@@ -2597,6 +2612,7 @@
 				6901A09918869D3F00D98C04 /* IntAABBSphere.cpp in Sources */,
 				697F5AE9195727270020A72E /* ShadowMapES2.cpp in Sources */,
 				692F34C2197A838C0040C9C3 /* RenderToTexture.cpp in Sources */,
+				6959E2E21E97F6B400E251A9 /* GuiDecTranslate.cpp in Sources */,
 				69FE6B8517A9386000C391F4 /* ES2DefaultShaders.cpp in Sources */,
 				69FE6BC517ABC97200C391F4 /* TriList.cpp in Sources */,
 				690E2F8117CE269F00DED7A1 /* iOSUtils.mm in Sources */,
