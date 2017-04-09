@@ -1,8 +1,6 @@
 // * Amjulib *
 // (c) Copyright 2000-2017 Jason Colman
 
-#pragma once
-
 #include <StringUtils.h>
 #include "GuiDecColour.h"
 
