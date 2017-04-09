@@ -20,7 +20,7 @@ public:
   virtual void Draw() override;
   virtual void Animate(float animValue) override;
 
-  void SetColour(const Colour&, int zeroOrOne);
+  void SetColour(const Colour&, int zeroOrOne = 0);
 
 protected:
   Colour m_colour[2];

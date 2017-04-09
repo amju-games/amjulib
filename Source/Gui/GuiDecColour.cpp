@@ -63,5 +63,6 @@ void GuiDecColour::Animate(float animValue)
 void GuiDecColour::SetColour(const Colour& col, int zeroOrOne)
 {
   m_colour[zeroOrOne] = col;
+  m_interpolatedColour = col; // ??
 }
 }
