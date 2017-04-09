@@ -4,11 +4,12 @@
 // Designed to get game configuration
 #include <map>
 #include <string>
+#include <RCPtr.h>
 #include <Singleton.h>
 
 namespace Amju
 {
-class ConfigFile : public NonCopyable
+class ConfigFile : public NonCopyable, public RefCounted
 {
 public:
   ConfigFile();
