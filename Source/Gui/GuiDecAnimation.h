@@ -42,6 +42,7 @@ public:
 
   enum class LoopType
   {
+    LOOP_TYPE_CONST,
     LOOP_TYPE_ONE_SHOT,
     LOOP_TYPE_REPEAT,
     LOOP_TYPE_MIRROR_REPEAT
@@ -51,6 +52,8 @@ public:
 
   enum class EaseType
   {
+    EASE_TYPE_ZERO,
+    EASE_TYPE_ONE,
     EASE_TYPE_LINEAR,
     EASE_TYPE_STEP,
   };

@@ -12,6 +12,7 @@ GuiDecAnimation::LoopType GuiDecAnimation::GetLoopTypeFromString(const std::stri
 {
   static const std::map<std::string, LoopType> LOOP_TYPES = 
   {
+    { "const", LoopType::LOOP_TYPE_CONST },
     { "one-shot", LoopType::LOOP_TYPE_ONE_SHOT },
     { "repeat", LoopType::LOOP_TYPE_REPEAT },
     { "mirror-repeat", LoopType::LOOP_TYPE_MIRROR_REPEAT },
@@ -39,6 +40,8 @@ GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::stri
     { "linear", EaseType::EASE_TYPE_LINEAR },
     { "step", EaseType::EASE_TYPE_STEP },
     { "delay", EaseType::EASE_TYPE_STEP },
+    { "zero", EaseType::EASE_TYPE_ZERO },
+    { "one", EaseType::EASE_TYPE_ONE },
   };
   auto it = EASE_TYPES.find(s);
   Assert(it != EASE_TYPES.end());
@@ -57,22 +60,7 @@ void GuiDecAnimation::SetCycleTime(float cycleTime)
 
 bool GuiDecAnimation::Load(File* f)
 {
-  // Get cycle time
-  if (!f->GetFloat(&m_cycleTime))
-  {
-    f->ReportError("Expected animation cycle time");
-    return false;
-  }
-
   std::string line;
-
-  // Get easing function - TODO, only linear supported ATM
-  if (!f->GetDataLine(&line))
-  {
-    f->ReportError("Expected easing function");
-    return false;
-  }
-  m_easeType = GetEaseTypeFromString(line, m_reverse);
 
   // Get loop type
   if (!f->GetDataLine(&line))
@@ -82,10 +70,32 @@ bool GuiDecAnimation::Load(File* f)
   }
   m_loopType = GetLoopTypeFromString(line);
 
-  // Initially paused?
-  // Use another decorator around this one to set that kind of state???
+  // Get cycle time, except not for a const anim
+  if (m_loopType != LoopType::LOOP_TYPE_CONST)
+  {
+    if (!f->GetFloat(&m_cycleTime))
+    {
+      f->ReportError("Expected animation cycle time");
+      return false;
+    }
+  }
 
-  return GuiDecorator::Load(f);
+  // Get easing function
+  if (!f->GetDataLine(&line))
+  {
+    f->ReportError("Expected easing function");
+    return false;
+  }
+  m_easeType = GetEaseTypeFromString(line, m_reverse);
+
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
+  SetName("anim-for-" + m_children[0]->GetName());
+
+  return true;
 }
 
 void GuiDecAnimation::Update()
@@ -117,6 +127,12 @@ void GuiDecAnimation::CalcUpdate(float dt)
 
   switch (m_easeType)
   {
+  case EaseType::EASE_TYPE_ZERO:
+    m_value = 0;
+    break;
+  case EaseType::EASE_TYPE_ONE:
+    m_value = 1;
+    break;
   case EaseType::EASE_TYPE_LINEAR:
     m_value = m_time / m_cycleTime;
     break;
@@ -129,6 +145,9 @@ void GuiDecAnimation::CalcUpdate(float dt)
   {
     switch (m_loopType)
     {
+    case LoopType::LOOP_TYPE_CONST:
+      // Don't care, value doesn't depend on time
+      break;
     case LoopType::LOOP_TYPE_ONE_SHOT:
       m_value = 1.0f;
       break;
