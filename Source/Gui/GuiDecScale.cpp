@@ -67,16 +67,6 @@ void GuiDecScale::Update()
   m_children[0]->SetSize(size);
 }
 
-void GuiDecScale::Draw()
-{
-  GuiDecorator::Draw();
-
-  ////AmjuGL::PushMatrix();
-  ////AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1.f);
-  ////GuiDecorator::Draw();
-  ////AmjuGL::PopMatrix();
-}
-
 void GuiDecScale::Animate(float animValue)
 {
   m_interpScale = m_scale[0] + (m_scale[1] - m_scale[0]) * animValue;

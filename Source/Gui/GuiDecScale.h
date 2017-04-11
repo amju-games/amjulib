@@ -17,7 +17,6 @@ public:
   static const char* NAME;
   virtual bool Load(File*) override;
   virtual void Animate(float animValue) override;
-  virtual void Draw() override;
   virtual void Update() override;
 
 private:
