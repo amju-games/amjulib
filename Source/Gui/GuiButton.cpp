@@ -258,12 +258,12 @@ void GuiButton::Draw()
   GuiImage::Draw();
   PopColour();
 
-  //PushColour();
   float a = 1.0f;
-  if (!IsEnabled())
-  {
-    a = 0.5f;
-  }
+  // Do this explicitly if you want the button greyed out
+  //if (!IsEnabled())
+  //{
+  //  a = 0.5f;
+  //}
 
   // TODO This would be much simpler if GuiButton was a Composite.
   // Then we could also have layers of images, text, etc.
