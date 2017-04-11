@@ -8,3 +8,5 @@ Script/AmjuLibMsvc/AmjuLibMsvc.v12.suo
 Test/ve3/Script/Windows/ve3/ve3.opensdf
 Test/ve3/Script/Windows/ve3/ve3.sdf
 Test/ve3/Script/Windows/ve3/ve3.v12.suo
+Tools/obj2bin/Script/Obj2Bin-MsvcProj/Obj2Bin-MsvcProj.opensdf
+Tools/obj2bin/Script/Obj2Bin-MsvcProj/Obj2Bin-MsvcProj.sdf
