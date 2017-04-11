@@ -70,6 +70,8 @@ public:
   virtual void UseShader(Shader*) {}
 
   virtual Drawable* Create(int) { return 0; }
+  virtual void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h) {}
+
 }; // class 
 
 }
