@@ -15,7 +15,7 @@ bool GuiDecScale::Load(File* f)
   std::string s;
   if (!f->GetDataLine(&s))
   {
-    f->ReportError("Expected position for scale decorator");
+    f->ReportError("Expected scale (1 or 2) for scale decorator");
     return false;
   }
 
@@ -33,22 +33,48 @@ bool GuiDecScale::Load(File* f)
   }
   m_interpScale = m_scale[0];
 
+  // Pivot point
+  if (!f->GetDataLine(&s))
+  {
+    f->ReportError("Expected pivot point for scale decorator");
+    return false;
+  }
+  ToVec2(s, &m_pivot);
+
   if (!GuiDecorator::Load(f))
   {
     return false;
   }
+
+  m_origChildSize = m_children[0]->GetSize();
 
   SetName("scale-" + m_children[0]->GetName());
 
   return true;
 }
 
+void GuiDecScale::Update()
+{
+  Vec2f pos = m_children[0]->GetLocalPos();
+
+  // With this one, pivot of (0, 0) is the centre
+  pos -= Vec2f(m_origChildSize.x * 0.5f * m_interpScale.x * (1.0f + m_pivot.x), -m_origChildSize.y * 0.5f * m_interpScale.y * (1.0f + m_pivot.y));
+
+//  pos -= Vec2f(m_origChildSize.x *  m_interpScale.x * (1.0f - m_pivot.x), -m_origChildSize.y *  m_interpScale.y * (1.0f + m_pivot.y));
+  SetLocalPos(pos);
+
+  Vec2f size(m_origChildSize.x * m_interpScale.x, m_origChildSize.y * m_interpScale.y);
+  m_children[0]->SetSize(size);
+}
+
 void GuiDecScale::Draw()
 {
-  AmjuGL::PushMatrix();
-  AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1.f);
   GuiDecorator::Draw();
-  AmjuGL::PopMatrix();
+
+  ////AmjuGL::PushMatrix();
+  ////AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1.f);
+  ////GuiDecorator::Draw();
+  ////AmjuGL::PopMatrix();
 }
 
 void GuiDecScale::Animate(float animValue)

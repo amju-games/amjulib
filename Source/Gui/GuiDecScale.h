@@ -18,9 +18,12 @@ public:
   virtual bool Load(File*) override;
   virtual void Animate(float animValue) override;
   virtual void Draw() override;
+  virtual void Update() override;
 
 private:
   Vec2f m_scale[2];
   Vec2f m_interpScale;
+  Vec2f m_pivot;
+  Vec2f m_origChildSize;
 };
 }
