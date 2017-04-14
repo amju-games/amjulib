@@ -284,7 +284,7 @@ void GuiButton::Draw()
   //m_guiText.Draw();
   //AmjuGL::PopMatrix();
 
-
+#ifdef DRAW_BOUNDING_RECT
   // Draw bounding rect
   AmjuGL::SetIdentity();
   Rect r = GetRect(this);
@@ -294,6 +294,7 @@ void GuiButton::Draw()
   DrawRect(r);
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
   PopColour();
+#endif // DRAW_BOUNDING_RECT
 
   AmjuGL::PopMatrix();
 }
