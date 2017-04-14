@@ -258,13 +258,6 @@ void GuiButton::Draw()
   GuiImage::Draw();
   PopColour();
 
-  float a = 1.0f;
-  // Do this explicitly if you want the button greyed out
-  //if (!IsEnabled())
-  //{
-  //  a = 0.5f;
-  //}
-
   // TODO This would be much simpler if GuiButton was a Composite.
   // Then we could also have layers of images, text, etc.
   // Make sure text is positioned properly, may have been moved in code since Load
@@ -274,15 +267,7 @@ void GuiButton::Draw()
   pos.x -= size.x * 0.25f;
   m_guiText.SetLocalPos(pos);
 
-  m_guiText.SetFgCol(Colour(m_textColour.m_r, m_textColour.m_g, m_textColour.m_b, a));
   m_guiText.Draw();
-
-  // TODO CONFIG
-  //AmjuGL::PushMatrix();
-  //AmjuGL::Translate(0, 0.01f, 0);
-  //m_guiText.SetFgCol(Colour(0, 0, 0, a));
-  //m_guiText.Draw();
-  //AmjuGL::PopMatrix();
 
 #ifdef DRAW_BOUNDING_RECT
   // Draw bounding rect
@@ -432,7 +417,7 @@ void GuiButton::SetText(const std::string& text)
 
 void GuiButton::SetTextColour(const Colour& col)
 {
-  m_textColour = col;
+  m_guiText.SetFgCol(col);
 }
 
 void GuiButton::SetButtonColour(const Colour& col)

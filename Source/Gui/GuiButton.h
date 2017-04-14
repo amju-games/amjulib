@@ -56,7 +56,6 @@ protected:
 
 protected:
   GuiText m_guiText;
-  Colour m_textColour;
   Colour m_buttonColour;
 
   bool m_isMouseOver; // Draw bigger
