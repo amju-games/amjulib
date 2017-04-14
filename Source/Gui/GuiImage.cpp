@@ -1,5 +1,6 @@
 #include <AmjuFirst.h>
 #include <Screen.h>
+#include <StringUtils.h>
 #include "GuiImage.h"
 #include "ResourceManager.h"
 #include <AmjuFinal.h>
@@ -71,16 +72,32 @@ bool GuiImage::Load(File* f)
     return false;
   }
 
-  m_texture = (Texture*)TheResourceManager::Instance()->GetRes(s);
+  // Check for extra attributes after the texture path
+  Strings strs = Split(s, ',');
+  Assert(!strs.empty());
+  bool stretch = false;
+  int n = static_cast<int>(strs.size());
+  for (int i = 1; i < n; i++)
+  {
+    if (strs[i] == "stretch")
+    {
+      stretch = true;
+    }
+  }
+
+  m_texture = (Texture*)TheResourceManager::Instance()->GetRes(strs[0]);
   if (!m_texture)
   {
     return false;
   }
 
-  // Adjust height so aspect ratio is that of the image
-  float screenAspect = (float)Screen::X() / (float)Screen::Y();
-  float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
-  m_size.y = m_size.x * imageAspectInv * screenAspect;
+  // Adjust height so aspect ratio is that of the image, unless we want to stretch the image.
+  if (!stretch)
+  {
+    float screenAspect = (float)Screen::X() / (float)Screen::Y();
+    float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
+    m_size.y = m_size.x * imageAspectInv * screenAspect;
+  }
 
   return true;
 }
