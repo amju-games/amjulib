@@ -333,6 +333,11 @@ void AmjuGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float 
             upX, upY, upZ /* 'Up' vector */);
 }
 
+const Colour& AmjuGL::GetColour()
+{
+  return s_colour;
+}
+  
 void AmjuGL::SetColour(float r, float g, float b, float a)
 {
   AMJU_CALL_STACK;

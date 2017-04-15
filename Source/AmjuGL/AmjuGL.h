@@ -165,6 +165,7 @@ public:
   // Set the current colour
   static void SetColour(float r, float g, float b, float a = 1.0f);
   static void SetColour(const Colour& colour);
+  static const Colour& GetColour();
 
   static void Draw(Drawable* drawable);
 
