@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <AmjuGL.h>
 #include <DrawRect.h>
 #include <Timer.h>
 #include <TextToSpeech.h>
@@ -227,12 +228,12 @@ void GuiButton::Draw()
       float dt = TheTimer::Instance()->GetDt();
       t += dt;
       float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      Colour c(s, s, 1, 1);
-      AmjuGL::SetColour(c); 
+      Colour c(s, s, s, 1);
+      MultColour(c);
     }
     else
     {
-      AmjuGL::SetColour(Colour(1, 0, 0, 1));
+      MultColour(Colour(1, 0, 0, 1));
     }
 
     Rect r = GetRect(this);
@@ -256,6 +257,12 @@ void GuiButton::Draw()
   PushColour();
   MultColour(m_buttonColour);
   GuiImage::Draw();
+  
+  // Get the combined colour for this button - disable if less than 50% alpha
+  const Colour& col = AmjuGL::GetColour();
+  bool enabled = col.m_a > 0.5f;
+  SetIsEnabled(enabled);
+  
   PopColour();
 
   // TODO This would be much simpler if GuiButton was a Composite.
