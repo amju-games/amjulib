@@ -48,6 +48,16 @@ GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::stri
   return it->second;
 }
 
+void GuiDecAnimation::SetIsReversed(bool reverse)
+{
+  m_reverse = reverse;
+}
+
+bool GuiDecAnimation::IsReversed() const
+{
+  return m_reverse;
+}
+
 void GuiDecAnimation::SetLoopType(LoopType loopType)
 {
   m_loopType = loopType;

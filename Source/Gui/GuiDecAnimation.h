@@ -58,6 +58,9 @@ public:
     EASE_TYPE_STEP,
   };
 
+  void SetIsReversed(bool reverse);
+  bool IsReversed() const;
+  
   void SetEaseType(EaseType easeType);
 
   void SetCycleTime(float cycleTime);
