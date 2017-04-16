@@ -68,6 +68,8 @@ protected:
   GuiImage m_focusImage;
   
   static std::string s_clickFilename;
+  
+  Colour m_combinedColour; // combined colour of this button and all ancestors
 };
 }
 

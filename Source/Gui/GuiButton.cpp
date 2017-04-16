@@ -46,6 +46,12 @@ bool GuiButton::IsEnabled() const
     return false;
   }
 
+  // Get the combined colour for this button - disable if less than 50% alpha
+  if (m_combinedColour.m_a < 0.5f)
+  {
+    return false;
+  }
+  
   return m_isEnabled;
 }
 
@@ -258,10 +264,8 @@ void GuiButton::Draw()
   MultColour(m_buttonColour);
   GuiImage::Draw();
   
-  // Get the combined colour for this button - disable if less than 50% alpha
-  const Colour& col = AmjuGL::GetColour();
-  bool enabled = col.m_a > 0.5f;
-  SetIsEnabled(enabled);
+  // Get the combined colour for this button - so we can disable in IsEnabled
+  m_combinedColour = AmjuGL::GetColour();
   
   PopColour();
 
