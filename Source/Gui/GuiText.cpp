@@ -468,6 +468,9 @@ void GuiText::SetText(const std::string& text)
 
   if (m_isMulti)
   {
+    // Replace the string "\n" with newline character
+    m_text = Replace(m_text, "\\n", "\n");
+
     m_lines = WordWrap(m_text, GetSize().x / m_textSize, WidthFinder(this));
   }
 
