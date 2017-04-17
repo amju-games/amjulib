@@ -1,6 +1,10 @@
 // * Amjulib *
 // (c) Copyright 2000-2017 Jason Colman
 
+#ifdef WIN32
+#define _USE_MATH_DEFINES
+#endif
+#include <math.h>
 #include <Timer.h>
 #include "GuiDecAnimation.h"
 
@@ -39,9 +43,10 @@ GuiDecAnimation::EaseType GuiDecAnimation::GetEaseTypeFromString(const std::stri
   {
     { "linear", EaseType::EASE_TYPE_LINEAR },
     { "step", EaseType::EASE_TYPE_STEP },
-    { "delay", EaseType::EASE_TYPE_STEP },
     { "zero", EaseType::EASE_TYPE_ZERO },
     { "one", EaseType::EASE_TYPE_ONE },
+    { "ease-in-out", EaseType::EASE_TYPE_IN_OUT },
+    { "ease-in-out-elastic", EaseType::EASE_TYPE_IN_OUT_ELASTIC },
   };
   auto it = EASE_TYPES.find(s);
   Assert(it != EASE_TYPES.end());
@@ -141,9 +146,27 @@ void GuiDecAnimation::Update()
   m_children[0]->Update();
 }
 
+static float EaseInOut(float t)
+{
+  // TODO I think this one would work with mirror repeat, TODO test that thought.
+  // https://github.com/warrenm/AHEasing/blob/master/AHEasing/easing.c
+  return 0.5f * (1.f - cosf((float)(t * M_PI)));
+
+  // https://math.stackexchange.com/questions/121720/ease-in-out-function
+//  return (t * t) / (t * t +  (1.f - t) * (1.f - t));
+}
+
+static float EaseInOutElastic(float t)
+{
+  return t; // TODO
+}
+
 void GuiDecAnimation::CalcUpdate(float dt)
 {
   m_time += dt * m_timeMultiplier;
+
+  // Varies 0..1 
+  float t = m_time / m_cycleTime;
 
   switch (m_easeType)
   {
@@ -154,10 +177,16 @@ void GuiDecAnimation::CalcUpdate(float dt)
     m_value = 1;
     break;
   case EaseType::EASE_TYPE_LINEAR:
-    m_value = m_time / m_cycleTime;
+    m_value = t;
     break;
   case EaseType::EASE_TYPE_STEP:
     m_value = (m_time > m_cycleTime) ? 1.f : 0.f;
+    break;
+  case EaseType::EASE_TYPE_IN_OUT:
+    m_value = EaseInOut(t);
+    break;
+  case EaseType::EASE_TYPE_IN_OUT_ELASTIC:
+    m_value = EaseInOutElastic(t);
     break;
   }
 
@@ -176,6 +205,7 @@ void GuiDecAnimation::CalcUpdate(float dt)
       m_value -= 1.0f;
       break;
     case LoopType::LOOP_TYPE_MIRROR_REPEAT:
+      // Pobably only works with step and linear
       if (m_time > 2.0f * m_cycleTime)
       {
         m_time -= 2.0f * m_cycleTime;

@@ -56,6 +56,8 @@ public:
     EASE_TYPE_ONE,
     EASE_TYPE_LINEAR,
     EASE_TYPE_STEP,
+    EASE_TYPE_IN_OUT,
+    EASE_TYPE_IN_OUT_ELASTIC,
   };
 
   void SetIsReversed(bool reverse);
