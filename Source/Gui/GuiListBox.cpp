@@ -143,7 +143,7 @@ void GuiList::SetSelected(int child, bool selected)
   Assert(child < GetNumChildren());
 
 #ifdef LB_DEBUG
-  GuiText* text = dynamic_cast<GuiText*>(GetChild(child));
+  IGuiText* text = dynamic_cast<IGuiText*>(GetChild(child));
   if (text)
   {
     std::cout << "List box " << m_name << ": " << text->GetText() << (selected ? " selected" : " UNselected") << "\n";
