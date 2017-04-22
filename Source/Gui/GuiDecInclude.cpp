@@ -18,10 +18,10 @@ bool GuiDecInclude::Load(File* f)
   }
 
   std::string path = GetFilePath(f->GetName());
-  childFilename = path + "/" + childFilename;
+  std::string pathAndChildFilename = path + "/" + childFilename;
 
   File childFile;
-  if (!childFile.OpenRead(childFilename))
+  if (!childFile.OpenRead(pathAndChildFilename))
   {
     return false;
   }
@@ -31,7 +31,7 @@ bool GuiDecInclude::Load(File* f)
     return false;
   }
 
-  SetName("include-" + path);
+  SetName("include-" + childFilename);
 
   return true;
 }
