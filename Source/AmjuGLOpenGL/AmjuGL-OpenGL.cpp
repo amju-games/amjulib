@@ -116,7 +116,7 @@ static Drawable* MakeShadowMap()
 
 #ifdef WIN32
   // TODO: create best quality impl depending on hardware capability
-  if (!glBindFramebufferEXT)
+  if (!glBindFramebufferEXT) // check fn exists
   {
     // Required extension not supported
     std::cout << "AmjuGL: Open GL Shadow map: not supported.\n";
@@ -270,7 +270,7 @@ void AmjuGLOpenGL::SetOrthoProjection(
 {
   AMJU_CALL_STACK;
 
-  glOrtho(left, right, bottom, top, nearDist, farDist);
+  GL_CHECK(glOrtho(left, right, bottom, top, nearDist, farDist));
 }
 
 void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
@@ -306,14 +306,14 @@ void AmjuGLOpenGL::Enable(uint32 flag)
 
   if (flag == AmjuGL::AMJU_DEPTH_WRITE)
   {
-    glDepthMask(GL_TRUE);
+    GL_CHECK(glDepthMask(GL_TRUE));
     return;
   }
 
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
   {
-    glEnable(glFlag);
+    GL_CHECK(glEnable(glFlag));
   }
 }
 
@@ -323,14 +323,14 @@ void AmjuGLOpenGL::Disable(uint32 flag)
 
   if (flag == AmjuGL::AMJU_DEPTH_WRITE)
   {
-    glDepthMask(GL_FALSE);
+    GL_CHECK(glDepthMask(GL_FALSE));
     return;
   }
 
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
   {
-    glDisable(glFlag);
+    GL_CHECK(glDisable(glFlag));
   }
 }
 
@@ -400,7 +400,7 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     }
 
     // Draw
-    glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
+    GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, numTris * 3));
 
     // Cleanup
     if ((int)aPosition >= 0)
@@ -419,32 +419,31 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
   {
     // Fixed function - TODO deprecate
 
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
+    GL_CHECK(glEnableClientState(GL_VERTEX_ARRAY));
+    GL_CHECK(glEnableClientState(GL_NORMAL_ARRAY));
     if (s_tt == AmjuGL::AMJU_TEXTURE_REGULAR)
     {
       // Don't specify tex coords if sphere map
-      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-      glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_u));
+      GL_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+      GL_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_u)));
     }
 
-    glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x));
-    glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)); 
+    GL_CHECK(glVertexPointer(3, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_x)));
+    GL_CHECK(glNormalPointer(GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_nx)));
 
 #ifdef VERTEX_COLOURS
     // TODO This overwrites the current colour, so we must implement as a shader, where
     //  we can combine a uniform colour for the tri list, with per-vertex colours.
-    glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(4, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_r));
+    GL_CHECK(glEnableClientState(GL_COLOR_ARRAY));
+    GL_CHECK(glColorPointer(4, GL_FLOAT, sizeof(AmjuGL::Vert), &(tris[0].m_verts[0].m_r)));
 #endif
 
-    glDrawArrays(GL_TRIANGLES, 0, numTris * 3);
+    GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, numTris * 3));
 
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
-
+    GL_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+    GL_CHECK(glDisableClientState(GL_COLOR_ARRAY));
+    GL_CHECK(glDisableClientState(GL_NORMAL_ARRAY));
+    GL_CHECK(glDisableClientState(GL_VERTEX_ARRAY));
   }
 }
 
@@ -454,10 +453,10 @@ void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 
   // Disable texturing while drawing line ?
   //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  glBegin(GL_LINES);
-  glVertex3f(v1.m_x, v1.m_y, v1.m_z);
-  glVertex3f(v2.m_x, v2.m_y, v2.m_z);
-  glEnd();
+  GL_CHECK(glBegin(GL_LINES));
+  GL_CHECK(glVertex3f(v1.m_x, v1.m_y, v1.m_z));
+  GL_CHECK(glVertex3f(v2.m_x, v2.m_y, v2.m_z));
+  GL_CHECK(glEnd());
   //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 }
 
@@ -498,15 +497,15 @@ void AmjuGLOpenGL::SetMatrixMode(AmjuGL::MatrixMode m)
   switch (m)
   {
   case AmjuGL::AMJU_MODELVIEW_MATRIX:
-    glMatrixMode(GL_MODELVIEW);
+    GL_CHECK(glMatrixMode(GL_MODELVIEW));
     return;    
 
   case AmjuGL::AMJU_PROJECTION_MATRIX:
-    glMatrixMode(GL_PROJECTION);
+    GL_CHECK(glMatrixMode(GL_PROJECTION));
     return;
 
   case AmjuGL::AMJU_TEXTURE_MATRIX:
-    glMatrixMode(GL_TEXTURE);
+    GL_CHECK(glMatrixMode(GL_TEXTURE));
     return;
 
   default:
@@ -519,63 +518,63 @@ void AmjuGLOpenGL::SetIdentity()
 {
   AMJU_CALL_STACK;
 
-  glLoadIdentity();
+  GL_CHECK(glLoadIdentity());
 }
 
 void AmjuGLOpenGL::PushMatrix()
 {
   AMJU_CALL_STACK;
 
-  glPushMatrix();
+  GL_CHECK(glPushMatrix());
 }
 
 void AmjuGLOpenGL::PopMatrix()
 {
   AMJU_CALL_STACK;
 
-  glPopMatrix();
+  GL_CHECK(glPopMatrix());
 }
 
 void AmjuGLOpenGL::Translate(float x, float y, float z)
 {
   AMJU_CALL_STACK;
 
-  glTranslatef(x, y, z);
+  GL_CHECK(glTranslatef(x, y, z));
 }
 
 void AmjuGLOpenGL::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
 
-  glScalef(x, y, z);
+  GL_CHECK(glScalef(x, y, z));
 }
 
 void AmjuGLOpenGL::RotateX(float degs)
 {
   AMJU_CALL_STACK;
 
-  glRotatef(degs, 1, 0, 0);
+  GL_CHECK(glRotatef(degs, 1, 0, 0));
 }
 
 void AmjuGLOpenGL::RotateY(float degs)
 {
   AMJU_CALL_STACK;
 
-  glRotatef(degs, 0, 1, 0);
+  GL_CHECK(glRotatef(degs, 0, 1, 0));
 }
 
 void AmjuGLOpenGL::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
 
-  glRotatef(degs, 0, 0, 1);
+  GL_CHECK(glRotatef(degs, 0, 0, 1));
 }
 
 void AmjuGLOpenGL::MultMatrix(const float matrix[16])
 {
   AMJU_CALL_STACK;
 
-  glMultMatrixf(matrix); 
+  GL_CHECK(glMultMatrixf(matrix)); 
 }
 
 void AmjuGLOpenGL::SetTextureType(AmjuGL::TextureType tt)
@@ -586,15 +585,15 @@ void AmjuGLOpenGL::SetTextureType(AmjuGL::TextureType tt)
 
   if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
   {
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
+    GL_CHECK(glDisable(GL_TEXTURE_GEN_S));
+    GL_CHECK(glDisable(GL_TEXTURE_GEN_T));
   }
   else if (tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
   {
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-    glEnable(GL_TEXTURE_GEN_S);
-    glEnable(GL_TEXTURE_GEN_T);
+    GL_CHECK(glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP));
+    GL_CHECK(glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP));
+    GL_CHECK(glEnable(GL_TEXTURE_GEN_S));
+    GL_CHECK(glEnable(GL_TEXTURE_GEN_T));
   }
 }
 
@@ -608,12 +607,12 @@ void AmjuGLOpenGL::SetTexture(
 {
   AMJU_CALL_STACK;
 
-  glGenTextures(1, (GLuint*)th);
-  glBindTexture(GL_TEXTURE_2D, *th);
+  GL_CHECK(glGenTextures(1, (GLuint*)th));
+  GL_CHECK(glBindTexture(GL_TEXTURE_2D, *th));
 
   bool wrap = true; // TODO
 
-  glEnable(GL_TEXTURE_2D);
+  GL_CHECK(glEnable(GL_TEXTURE_2D));
 
   int wrapmode = GL_REPEAT;
   if (!wrap)
@@ -621,38 +620,17 @@ void AmjuGLOpenGL::SetTexture(
     wrapmode = GL_CLAMP;
   }
 
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode);
-  // New code: changed to use mipmaps
-  //  GL_LINEAR_MIPMAP_LINEAR is supposedly the smoothest-looking.
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 
-  // Allowed values for min filter:
-  // GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST,
-  // GL_NEAREST_MIPMAP_LINEAR, GL_LINEAR_MIPMAP_LINEAR
-/*
-  Don't need this
-  if (tt == AmjuGL::AMJU_TEXTURE_REGULAR)
-  {
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
-  }
-  else if (tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
-  {
-    // (Why) do we need to copy this when using the texture ?
-    glEnable(GL_TEXTURE_GEN_S);
-    glEnable(GL_TEXTURE_GEN_T);
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-  }
-*/
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+  GL_CHECK(glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE));
 
   // Different depending on AMJU_RGB or RGBA.
   if (d == AmjuGL::AMJU_RGB)
   {
-      glTexImage2D(GL_TEXTURE_2D,
+      GL_CHECK(glTexImage2D(GL_TEXTURE_2D,
         0,
         GL_RGB, // or 3 works
         width,
@@ -660,11 +638,11 @@ void AmjuGLOpenGL::SetTexture(
         0,
         GL_RGB,
         GL_UNSIGNED_BYTE,
-        data);
+        data));
   }
   else //if (d == RGBA)
   {
-      glTexImage2D(GL_TEXTURE_2D,
+      GL_CHECK(glTexImage2D(GL_TEXTURE_2D,
         0,
         GL_RGBA, // or 4 works // four components, not 3 - i.e., RGBA.
         width,
@@ -672,31 +650,31 @@ void AmjuGLOpenGL::SetTexture(
         0,
         GL_RGBA, // not just AMJU_RGB.
         GL_UNSIGNED_BYTE,
-        data);
+        data));
   }
 
   // Build mipmaps 
   if (d == AmjuGL::AMJU_RGB)
   {
-    gluBuild2DMipmaps(
+    GL_CHECK(gluBuild2DMipmaps(
       GL_TEXTURE_2D,
       GL_RGB,
       width,
       height,
       GL_RGB,
       GL_UNSIGNED_BYTE,
-      data);
+      data));
   }
   else
   {
-    gluBuild2DMipmaps(
+    GL_CHECK(gluBuild2DMipmaps(
       GL_TEXTURE_2D,
       GL_RGBA,
       width,
       height,
       GL_RGBA,
       GL_UNSIGNED_BYTE,
-      data);
+      data));
   }
 }
 
@@ -704,7 +682,7 @@ void AmjuGLOpenGL::GetScreenshot(unsigned char* buffer, int x, int y, int w, int
 {
   AMJU_CALL_STACK;
 
-  glReadPixels(x, y, w, h, GL_RGB, GL_UNSIGNED_BYTE, buffer);
+  GL_CHECK(glReadPixels(x, y, w, h, GL_RGB, GL_UNSIGNED_BYTE, buffer));
 }
 
 Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
@@ -736,7 +714,7 @@ void AmjuGLOpenGL::UseShader(Shader* sh)
   }  
   else
   {
-    glUseProgram(0);
+    GL_CHECK(glUseProgram(0));
   }
   s_shader = glshader;
 }
