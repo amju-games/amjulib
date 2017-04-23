@@ -32,53 +32,38 @@
 
 namespace Amju
 {
-GuiElement* CreateGuiButton() { return new GuiButton; }
-GuiElement* CreateGuiCheck() { return new GuiCheck; }
-GuiElement* CreateGuiImage() { return new GuiImage; }
-GuiElement* CreateGuiText() { return new GuiText; }
-GuiElement* CreateGuiTextEdit() { return new GuiTextEdit; }
-GuiElement* CreateGuiComposite() { return new GuiComposite; }
-GuiElement* CreateWindow() { return new GuiWindow; }
-GuiElement* CreateKb() { return new GuiKeyboard; }
-GuiElement* CreateMenu() { return new GuiMenu; }
-GuiElement* CreateDialog() { return new GuiDialog; }
-GuiElement* CreateRect() { return new GuiRect; }
-GuiElement* CreateScroll() { return new GuiScroll; }
-GuiElement* CreateElastic() { return new GuiElastic; }
-GuiElement* CreateSlider() { return new GuiSlider; }
-GuiElement* CreateGuiDecInclude() { return new GuiDecInclude; }
-
 template <class T>
 GuiElement* CreateT() { return new T; }
 
 GuiFactory::GuiFactory()
 {
-  Add(GuiButton::NAME, &CreateGuiButton);
-  Add(GuiCheck::NAME, &CreateGuiCheck);
-  Add(GuiImage::NAME, &CreateGuiImage);
-  Add(GuiText::NAME, &CreateGuiText);
-  Add(GuiTextEdit::NAME, &CreateGuiTextEdit);
-  Add(GuiComposite::NAME, &CreateGuiComposite);
-  Add(GuiListBox::NAME, &CreateListBox);
-  Add(GuiWindow::NAME, &CreateWindow);
-  Add(GuiKeyboard::NAME, &CreateKb);
-  Add(GuiMenu::NAME, &CreateMenu);
-  Add(GuiDialog::NAME, &CreateDialog);
-  Add(GuiRect::NAME, &CreateRect);
-  Add(GuiFileListBox::NAME, &CreateFileListBox);
-  Add(GuiScroll::NAME, &CreateScroll);
-  Add(GuiFileDialog::NAME, &CreateFileDialog);
-  Add(GuiObjView::NAME, &CreateObjView);
-  Add(GuiCalendar::NAME, &CreateCalendar);
-  Add(GuiChart::NAME, &CreateChart);
-  Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
-  Add(GuiElastic::NAME, &CreateElastic);
-  Add(GuiSlider::NAME, &CreateSlider);
+  Add(GuiButton::NAME, &CreateT<GuiButton>);
+  Add(GuiCheck::NAME, &CreateT<GuiCheck>);
+  Add(GuiImage::NAME, &CreateT<GuiImage>);
+  Add(GuiText::NAME, &CreateT<GuiText>);
+  Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
+  Add(GuiComposite::NAME, &CreateT<GuiComposite>);
+  Add(GuiWindow::NAME, &CreateT<GuiWindow>);
+  Add(GuiKeyboard::NAME, &CreateT<GuiKeyboard>);
+  Add(GuiMenu::NAME, &CreateT<GuiMenu>);
+  Add(GuiDialog::NAME, &CreateT<GuiDialog>);
+  Add(GuiRect::NAME, &CreateT<GuiRect>);
+  Add(GuiScroll::NAME, &CreateT<GuiScroll>);
+  Add(GuiElastic::NAME, &CreateT<GuiElastic>);
+  Add(GuiSlider::NAME, &CreateT<GuiSlider>);
   Add(GuiDecInclude::NAME, &CreateT<GuiDecInclude>);
   Add(GuiDecRotate::NAME, &CreateT<GuiDecRotate>);
   Add(GuiDecTranslate::NAME, &CreateT<GuiDecTranslate>);
   Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
   Add(GuiDecScale::NAME, &CreateT<GuiDecScale>);
+
+  Add(GuiListBox::NAME, &CreateListBox);
+  Add(GuiFileListBox::NAME, &CreateFileListBox);
+  Add(GuiFileDialog::NAME, &CreateFileDialog);
+  Add(GuiObjView::NAME, &CreateObjView);
+  Add(GuiCalendar::NAME, &CreateCalendar);
+  Add(GuiChart::NAME, &CreateChart);
+  Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
 }
 }
