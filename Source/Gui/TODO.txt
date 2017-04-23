@@ -1,6 +1,8 @@
 New gui elements to make
 ========================
 
+Scissor region: this is what GuiWindow is supposed to do? So maybe just fix the internal impl.
+
 Tab and shift-tab: elements must be in a doubly-linked list.
 
 All elements should have border which can be drawn ?
