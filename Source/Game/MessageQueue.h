@@ -24,7 +24,7 @@ struct Message : public RefCounted
   virtual void Execute() = 0;
 
   // Timestamp: the time at which this Message should be Executed. 
-  float m_time;
+  float m_time = 0;
 };
 
 typedef RCPtr<Message> PMessage;
