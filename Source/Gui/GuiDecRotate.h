@@ -8,7 +8,9 @@
 namespace Amju
 {
 // * GuiDecRotate *
-// Decorator which rotates child
+// Decorator which rotates child. One or 2 angles can be specified - if
+//  two, animation interpolates between the two.
+// Angles are in degrees.
 class GuiDecRotate : public GuiDecorator
 {
 public:

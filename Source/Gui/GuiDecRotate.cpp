@@ -18,7 +18,7 @@ bool GuiDecRotate::Load(File* f)
     return false;
   }
 
-  // 2 colours or one?
+  // 2 angles or one? (degrees)
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
   m_angle[0] = ToFloat(strs[0]);
