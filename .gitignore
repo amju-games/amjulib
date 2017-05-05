@@ -12,3 +12,5 @@ Tools/obj2bin/Script/Obj2Bin-MsvcProj/Obj2Bin-MsvcProj.opensdf
 Tools/obj2bin/Script/Obj2Bin-MsvcProj/Obj2Bin-MsvcProj.sdf
 Examples/gltest/Script/Windows/AmjuGLTest/AmjuGLTest.opensdf
 Examples/gltest/Script/Windows/AmjuGLTest/AmjuGLTest.sdf
+Examples/gltest/Script/Windows/AmjuGLTest/.vs/
+*.suo
