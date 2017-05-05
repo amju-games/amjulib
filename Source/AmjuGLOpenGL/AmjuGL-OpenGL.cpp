@@ -36,6 +36,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 namespace Amju
 {
 static GLShader* s_shader = nullptr;
+static Colour s_colour; // current colour - pass to shader
 
 static DrawableFactory s_factory;
 
@@ -178,6 +179,7 @@ void AmjuGLOpenGL::SetColour(float r, float g, float b, float a)
   AMJU_CALL_STACK;
 
   GL_CHECK(glColor4f(r, g, b, a));
+  s_colour = Colour(r, g, b, a);
 }
 
 void AmjuGLOpenGL::DrawLighting(
@@ -369,11 +371,18 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
       }
     }
 
+    int uColour = s_shader->FindUniformLocation("colourUniform");
+    if (uColour > -1)
+    {
+      s_shader->Set("colourUniform", s_colour);
+    }
+
     // Setup
     int aPosition = s_shader->FindAttribLocation("position");
     int aNormal   = s_shader->FindAttribLocation("normal");
     int aUV   = s_shader->FindAttribLocation("uv");
     int tan = s_shader->FindAttribLocation("tangent");
+    int colour = s_shader->FindAttribLocation("colour");
 
     if (aPosition > -1)
     {
@@ -399,6 +408,12 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
         GL_CHECK(glVertexAttribPointer(tan, 3, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_tanx));
     }
 
+    if (colour > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(colour));
+      GL_CHECK(glVertexAttribPointer(colour, 4, GL_FLOAT, false, sizeof(AmjuGL::Vert), &tris[0].m_verts[0].m_r));
+    }
+
     // Draw
     GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, numTris * 3));
 
@@ -414,6 +429,10 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 
     if ((int)tan >= 0)
         GL_CHECK(glDisableVertexAttribArray(tan));
+
+    if ((int)colour >= 0)
+      GL_CHECK(glDisableVertexAttribArray(colour));
+
   }
   else
   {
