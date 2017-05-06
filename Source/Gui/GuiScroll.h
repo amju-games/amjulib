@@ -32,6 +32,7 @@ private:
   // Offset in x and y
   Vec2f m_scrollPos;
   Vec2f m_scrollVel; 
+  Vec2f m_extents;
 
   RCPtr<GuiScrollBar> m_scrollBar;
 };

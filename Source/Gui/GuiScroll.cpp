@@ -1,6 +1,7 @@
 #include <AmjuFirst.h>
 #include <algorithm>
 #include <AmjuGL.h>
+#include <LoadVec2.h>
 #include <Timer.h>
 #include "GuiScroll.h"
 #include "GuiFactory.h"
@@ -79,24 +80,26 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 void GuiScroll::Draw()
 {
-  Assert(m_children.size() >= 1);
+  GuiComposite::Draw(); //child->Draw();
+}
+
+void GuiScroll::Update()
+{
+  GuiComposite::Update();
+
+  Assert(m_children.size() == 1);
   GuiElement* child = m_children[0];
 
-  // Update not called. TODO
   float dt = TheTimer::Instance()->GetDt();
   static const float DECEL = 0.5f; // TODO
   m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
   m_scrollPos += m_scrollVel * dt;
 
   // x-axis
-  float chSizeX =  child->GetSize().x;
-  float sizeX = GetSize().x;
-  float maxx = std::max(0.0f, chSizeX - sizeX); 
-
   // Bounce or stop on end reached
-  if (m_scrollPos.x < -maxx)
+  if (m_scrollPos.x < -m_extents.x)
   {
-    m_scrollPos.x = -maxx;
+    m_scrollPos.x = -m_extents.x;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;
 #else
@@ -116,11 +119,14 @@ void GuiScroll::Draw()
   }
 
   // Y axis
-  if (m_scrollPos.y < 0)
+  float miny = std::min(0.f, m_extents.y);
+  float maxy = std::max(0.f, m_extents.y);
+
+  if (m_scrollPos.y < miny)
   {
 std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
 
-    m_scrollPos.y = 0;
+    m_scrollPos.y = miny;
 #ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
 #else
@@ -128,14 +134,8 @@ std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
 #endif
   }
   
-  float maxy = std::max(0.0f, child->GetSize().y - GetSize().y); // depends on size of child and how much space there is to display it
-
-//std::cout << "Scroll: m_scrollPos.y: " << m_scrollPos.y << " Size.y: " << GetSize().y << " Child->Size.y: " << child->GetSize().y << " maxy=" << maxy << "\n";
-
   if (m_scrollPos.y > maxy)
   {
-std::cout << "Hit maxy (" << maxy << "), stopping. My height: " << GetSize().y << "  Child height: " << child->GetSize().y << "\n";
-
     m_scrollPos.y = maxy;
 #ifdef BOUNCE
     m_scrollVel.y = -0.25f * m_scrollVel.y;
@@ -144,12 +144,6 @@ std::cout << "Hit maxy (" << maxy << "), stopping. My height: " << GetSize().y <
 #endif
   }
   SetLocalPos(m_scrollPos); // so combined pos for child is updated
-
-  GuiComposite::Draw(); //child->Draw();
-}
-
-void GuiScroll::Update()
-{
 }
 
 void GuiScroll::StopScrolling()
@@ -175,6 +169,7 @@ std::cout << "Scroll vel for " << GetName() << ": x:" << m_scrollVel.x
 
 bool GuiScroll::Load(File* f)
 {
+  // TODO do we want to name scroller? Probably yes, so we can reset it
   std::string name;
   if (!f->GetDataLine(&name))
   {
@@ -184,31 +179,23 @@ bool GuiScroll::Load(File* f)
   }
   SetName(name);
 
-  // One child (decorator)
-  // No pos and size, so not using base class impl
-  m_children.reserve(1);
-  std::string s;
-  if (!f->GetDataLine(&s))
+  // Initial position
+  if (!LoadVec2(f, &m_scrollPos))
   {
-    f->ReportError("Expected child type for GUI Scroll");
-    return false;
-  }
-  PGuiElement e = TheGuiFactory::Instance()->Create(s);
-  if (!e)
-  {
-    f->ReportError("Failed to create GUI element of type " + s);
-    return false;
-  }
-  Assert(e);
-  e->SetParent(this);
-  if (!e->Load(f))
-  {
+    f->ReportError("Gui scroll: expected initial pos");
+    Assert(0);
     return false;
   }
 
-  AddChild(e); 
+  // Extents
+  if (!LoadVec2(f, &m_extents))
+  {
+    f->ReportError("Gui scroll: expected extents");
+    Assert(0);
+    return false;
+  }
 
-  return true;
+  return LoadOneChild(f);
 }
 
 void GuiScroll::InitScrollBar()
