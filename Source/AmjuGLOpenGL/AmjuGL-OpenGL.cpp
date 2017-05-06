@@ -470,13 +470,16 @@ void AmjuGLOpenGL::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 {
   AMJU_CALL_STACK;
 
-  // Disable texturing while drawing line ?
-  //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-  GL_CHECK(glBegin(GL_LINES));
-  GL_CHECK(glVertex3f(v1.m_x, v1.m_y, v1.m_z));
-  GL_CHECK(glVertex3f(v2.m_x, v2.m_y, v2.m_z));
-  GL_CHECK(glEnd());
-  //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  if (!s_shader)
+  {
+    // Disable texturing while drawing line ?
+    //AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
+    GL_CHECK(glBegin(GL_LINES));
+    GL_CHECK(glVertex3f(v1.m_x, v1.m_y, v1.m_z));
+    GL_CHECK(glVertex3f(v2.m_x, v2.m_y, v2.m_z));
+    GL_CHECK(glEnd());
+    //AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
+  }
 }
 
 void AmjuGLOpenGL::DrawIndexedTriList(
