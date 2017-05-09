@@ -221,7 +221,6 @@ void GuiButton::Draw()
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
 
-
   if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus) 
     ///// || HasFocus()) // TODO just one
   {
@@ -461,5 +460,15 @@ void GuiButton::SetIsMouseOver(bool m)
 bool GuiButton::IsPressed() const
 {
   return m_isPressed;
+}
+
+const Colour& GuiButton::GetTextColour() const
+{
+  return m_guiText.GetFgCol();
+}
+
+const Colour& GuiButton::GetButtonColour() const
+{
+  return m_buttonColour;
 }
 }

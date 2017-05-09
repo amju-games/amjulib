@@ -31,7 +31,9 @@ public:
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);
+  const Colour& GetTextColour() const;
   void SetButtonColour(const Colour& col);
+  const Colour& GetButtonColour() const;
 
   bool IsMouseOver() const;
   bool IsPressed() const;
