@@ -51,6 +51,13 @@ struct Vec2
     return *this;
   }
 
+  Vec2& operator*=(const Vec2& v)
+  {
+    x *= v.x;
+    y *= v.y;
+    return *this;
+  }
+
   void Normalise()
   {
     float n = 1.0f / sqrt(SqLen());
@@ -98,6 +105,14 @@ Vec2<T> operator*(T f, const Vec2<T>& v1)
 {
   Vec2<T> v = v1;
   v *= f;
+  return v;
+}
+
+template <class T>
+Vec2<T> operator*(const Vec2<T>& v1, const Vec2<T>& v2)
+{
+  Vec2<T> v = v1;
+  v *= v2;
   return v;
 }
 
