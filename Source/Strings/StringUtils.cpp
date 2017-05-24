@@ -218,6 +218,13 @@ void Trim(std::string* ps)
   }
 }
 
+std::string Trim(const std::string& cs)
+{
+  std::string s(cs);
+  Trim(&s);
+  return s;
+}
+
 std::string GetFileExt(const std::string& f)
 {
   size_t pos = f.rfind(".");

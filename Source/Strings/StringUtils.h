@@ -19,6 +19,7 @@ std::string StripPath(const std::string& s, const std::string& slashChar);
 
 // Helper: trim spaces off beginning and end of string.
 void Trim(std::string* pStr);
+std::string Trim(const std::string& s);
 
 // Get the extension (letters following final dot) of a filename.
 std::string GetFileExt(const std::string& filename);
