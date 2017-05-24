@@ -233,7 +233,7 @@ void GuiButton::Draw()
       float dt = TheTimer::Instance()->GetDt();
       t += dt;
       float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      Colour c(s, s, s, 1);
+      Colour c = m_focusColour * Colour(s, s, s, 1);
       MultColour(c);
     }
     else
@@ -470,5 +470,15 @@ const Colour& GuiButton::GetTextColour() const
 const Colour& GuiButton::GetButtonColour() const
 {
   return m_buttonColour;
+}
+
+void GuiButton::SetFocusColour(const Colour& col)
+{
+  m_focusColour = col;
+}
+
+const Colour& GuiButton::GetFocusColour() const
+{
+  return m_focusColour;
 }
 }
