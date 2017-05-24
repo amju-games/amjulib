@@ -751,10 +751,18 @@ Shader* AmjuGL::LoadShader(const std::string& shaderFileName)
   return impl->LoadShader(shaderFileName);
 }
 
+static Shader* s_currentShader = nullptr;
+
 void AmjuGL::UseShader(Shader* sh)
 {
   AMJU_CALL_STACK;
+  s_currentShader = sh;
   impl->UseShader(sh);
+}
+
+Shader* AmjuGL::GetCurrentShader()
+{
+  return s_currentShader;
 }
 
 Drawable* AmjuGL::Create(int drawableTypeId)

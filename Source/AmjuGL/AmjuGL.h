@@ -289,6 +289,8 @@ public:
   // (for OpenGL, ES1, DX9)
   static void UseShader(Shader*);
 
+  static Shader* GetCurrentShader();
+
   // Get subdirectory for shader files for the current impl
   static std::string GetShaderDir();
 
