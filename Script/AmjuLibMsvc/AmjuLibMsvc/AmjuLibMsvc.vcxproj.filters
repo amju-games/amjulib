@@ -951,9 +951,6 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\GLUtils.cpp">
       <Filter>AmjuGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.cpp">
       <Filter>AmjuGLOpenGL</Filter>
     </ClCompile>
@@ -1001,6 +998,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\GuiDecShader.cpp">
       <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp">
+      <Filter>AmjuGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1856,9 +1856,6 @@
     <ClInclude Include="..\..\..\Source\AmjuGL\GLUtils.h">
       <Filter>AmjuGL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h">
-      <Filter>AmjuGLOpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\RenderToTextureOpenGL.h">
       <Filter>AmjuGLOpenGL</Filter>
     </ClInclude>
@@ -1909,6 +1906,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiDecShader.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h">
+      <Filter>AmjuGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
