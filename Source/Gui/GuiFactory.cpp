@@ -28,6 +28,7 @@
 #include "GuiDecTranslate.h"
 #include "GuiDecColour.h"
 #include "GuiDecAnimation.h"
+#include "GuiDecShader.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -57,6 +58,7 @@ GuiFactory::GuiFactory()
   Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
   Add(GuiDecScale::NAME, &CreateT<GuiDecScale>);
+  Add(GuiDecShader::NAME, &CreateT<GuiDecShader>);
 
   Add(GuiListBox::NAME, &CreateListBox);
   Add(GuiFileListBox::NAME, &CreateFileListBox);
