@@ -41,19 +41,8 @@ void RenderToTextureOpenGL::UseThisTexture()
   GL_CHECK(glEnable(GL_TEXTURE_2D));
   AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
 
-  if (m_renderFlags == AMJU_RENDER_DEPTH)
-  {
-    // Only 1 texture, so use texture0, right?
-    //GL_CHECK(glActiveTexture(GL_TEXTURE1));
-    GL_CHECK(glActiveTexture(GL_TEXTURE0));
-    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[1]));
-  }
-  else if (m_renderFlags == AMJU_RENDER_COLOUR)
-  {
-    GL_CHECK(glActiveTexture(GL_TEXTURE0));
-    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
-  }
-  else
+  if ((m_renderFlags & AMJU_RENDER_DEPTH ) &&
+      (m_renderFlags & AMJU_RENDER_COLOUR))
   {
     // Depth and colour buffers
     GL_CHECK(glActiveTexture(GL_TEXTURE0));
@@ -63,6 +52,18 @@ void RenderToTextureOpenGL::UseThisTexture()
     GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[1]));
 
     GL_CHECK(glActiveTexture(GL_TEXTURE0));
+  }
+  else if (m_renderFlags & AMJU_RENDER_DEPTH)
+  {
+    // Only 1 texture, so use texture0, right?
+    //GL_CHECK(glActiveTexture(GL_TEXTURE1));
+    GL_CHECK(glActiveTexture(GL_TEXTURE0));
+    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[1]));
+  }
+  else // if (m_renderFlags & AMJU_RENDER_COLOUR)
+  {
+    GL_CHECK(glActiveTexture(GL_TEXTURE0));
+    GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
   }
 }
   
@@ -112,21 +113,26 @@ bool RenderToTextureOpenGL::InitDepthColour()
 
   // parameters for color buffer texture
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
-  GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0,
-                 GL_RGB, GL_UNSIGNED_BYTE, 0));
+  int format = GL_RGB;
+  if (m_renderFlags & AMJU_ALPHA_FLAG)
+  {
+    format = GL_RGBA;
+  }
+  GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, format, m_width, m_height, 0,
+    format, GL_UNSIGNED_BYTE, 0));
 
   // parameters for depth texture
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[1]));
   GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_width, m_height, 0,
-                 GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, 0));
+    GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, 0));
     
   // attach the texture to FBO color attachment point
   GL_CHECK(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                              GL_TEXTURE_2D, m_tex[0], 0));
-    
+    GL_TEXTURE_2D, m_tex[0], 0));
+
   // Attach the texture to FBO depth attachment point  
   GL_CHECK(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-                              GL_TEXTURE_2D, m_tex[1], 0));
+    GL_TEXTURE_2D, m_tex[1], 0));
 
   return true;
 }
@@ -137,8 +143,13 @@ bool RenderToTextureOpenGL::InitColour()
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, m_tex[0]));
 
   // Give an empty image to OpenGL ( the last "0" )
-  GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-    m_width, m_height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, NULL));
+  int format = GL_RGB;
+  if (m_renderFlags & AMJU_ALPHA_FLAG)
+  {
+    format = GL_RGBA;
+  }
+  GL_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, format,
+    m_width, m_height, 0, format, GL_UNSIGNED_BYTE, NULL));
 
   GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
   GL_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
@@ -161,24 +172,25 @@ bool RenderToTextureOpenGL::Init()
 {
   // This line gives GL errors!!
   GL_CHECK(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_old_fbo));
-  
+
   GL_CHECK(glGenFramebuffers(1, &m_framebuffer));
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer));
 
   // create the texture
   GL_CHECK(glGenTextures(2, m_tex));
 
-  if (m_renderFlags == AMJU_RENDER_DEPTH)
+  if ((m_renderFlags & AMJU_RENDER_DEPTH) &&
+    (m_renderFlags & AMJU_RENDER_COLOUR))
+  {
+    InitDepthColour();
+  }
+  else if (m_renderFlags & AMJU_RENDER_DEPTH)
   { 
     InitDepth();
   }
-  else if (m_renderFlags == AMJU_RENDER_COLOUR)
+  else // if (m_renderFlags & AMJU_RENDER_COLOUR)
   {
     InitColour();
-  }
-  else
-  {
-    InitDepthColour();
   }
   
   GLuint status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -205,7 +217,7 @@ bool RenderToTextureOpenGL::Begin()
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer));
 
   const Colour& c = AmjuGL::GetClearColour();
-  GL_CHECK(glClearColor(c.m_r, c.m_g, c.m_b, 1));
+  GL_CHECK(glClearColor(c.m_r, c.m_g, c.m_b, 0.5f));
   GL_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
   
   return true;

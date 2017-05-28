@@ -13,7 +13,9 @@ public:
 
   // Set what to render, depth and/or colour. Default value is AMJU_RENDER_COLOUR
   static const int AMJU_RENDER_COLOUR = 0x01;
-  static const int AMJU_RENDER_DEPTH = 0x02; 
+  static const int AMJU_RENDER_COLOUR_WITH_ALPHA = 0x05;
+  static const int AMJU_RENDER_DEPTH = 0x02;
+  static const int AMJU_ALPHA_FLAG = 0x04;
   void SetRenderFlags(int renderFlags);
 
   void SetSize(int w, int h);
