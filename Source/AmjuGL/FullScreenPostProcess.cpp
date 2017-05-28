@@ -11,7 +11,7 @@ FullScreenPostProcess::FullScreenPostProcess()
 void FullScreenPostProcess::DrawFullScreenQuad()
 {
   Assert(m_triList);
-  Assert(m_postProcessShader);
+  //Assert(m_postProcessShader);
   //Assert(m_renderToTexture);
   
   // Use post-process shader
@@ -43,9 +43,9 @@ void FullScreenPostProcess::DrawFullScreenQuad()
 
 bool FullScreenPostProcess::InitFullScreenQuad()
 {
-  // To set up attrib variables
-  Assert(m_postProcessShader);
-  AmjuGL::UseShader(m_postProcessShader);
+  // To set up attrib variables ????
+//  Assert(m_postProcessShader);
+//  AmjuGL::UseShader(m_postProcessShader);
 
   // Make a rectangle in screen space
   Vec2f pos(-1.0f, 1.0f);
