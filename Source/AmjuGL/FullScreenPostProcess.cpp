@@ -6,6 +6,8 @@ namespace Amju
 {
 FullScreenPostProcess::FullScreenPostProcess()
 {
+  m_pos = Vec2f(-1.0f, 1.0f);
+  m_size = Vec2f(2.0f, 2.0f);
 }
   
 void FullScreenPostProcess::DrawFullScreenQuad()
@@ -41,6 +43,12 @@ void FullScreenPostProcess::DrawFullScreenQuad()
   }
 }
 
+void FullScreenPostProcess::SetRect(const Vec2f& pos, const Vec2f& size)
+{
+  m_pos = pos;
+  m_size = size;
+}
+  
 bool FullScreenPostProcess::InitFullScreenQuad()
 {
   // To set up attrib variables ????
@@ -48,9 +56,6 @@ bool FullScreenPostProcess::InitFullScreenQuad()
 //  AmjuGL::UseShader(m_postProcessShader);
 
   // Make a rectangle in screen space
-  Vec2f pos(-1.0f, 1.0f);
-  Vec2f size(2.0f, 2.0f);
-  
   float z = 0.5f;
   AmjuGL::Tris tris;
   const float U_MIN = 0;
@@ -59,10 +64,10 @@ bool FullScreenPostProcess::InitFullScreenQuad()
   const float V_MIN = 0;
   AmjuGL::Vert verts[4] =
   {
-    AmjuGL::Vert(pos.x + size.x, pos.y - size.y, z,   U_MAX, V_MIN,   0, 1, 0),
-    AmjuGL::Vert(pos.x + size.x, pos.y,          z,   U_MAX, V_MAX,   0, 1, 0),
-    AmjuGL::Vert(pos.x,          pos.y,          z,   U_MIN, V_MAX,   0, 1, 0),
-    AmjuGL::Vert(pos.x,          pos.y - size.y, z,   U_MIN, V_MIN,   0, 1, 0)
+    AmjuGL::Vert(m_pos.x + m_size.x, m_pos.y - m_size.y, z,   U_MAX, V_MIN,   0, 1, 0),
+    AmjuGL::Vert(m_pos.x + m_size.x, m_pos.y,            z,   U_MAX, V_MAX,   0, 1, 0),
+    AmjuGL::Vert(m_pos.x,            m_pos.y,            z,   U_MIN, V_MAX,   0, 1, 0),
+    AmjuGL::Vert(m_pos.x,            m_pos.y - m_size.y, z,   U_MIN, V_MIN,   0, 1, 0)
   };
   
   tris.clear();
