@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Colour.h"
 #include "Drawable.h"
 
 namespace Amju
@@ -19,6 +20,8 @@ public:
   void SetRenderFlags(int renderFlags);
 
   void SetSize(int w, int h);
+
+  void SetClearColour(const Colour& cc);
 
   // Draw scene between Begin() and End() calls. Then you can use the texture.
   // Switch to texture render target
@@ -47,6 +50,8 @@ protected:
   int m_vpX, m_vpY, m_vpW, m_vpH;
 
   int m_renderFlags;
+
+  Colour m_clearCol;
 };
 }
 

@@ -23,5 +23,11 @@ void RenderToTexture::SetSize(int w, int h)
   m_width = w;
   m_height = h;
 }
+
+void RenderToTexture::SetClearColour(const Colour& cc)
+{
+  m_clearCol = cc;
+}
+
 }
 
