@@ -134,6 +134,8 @@
 		6911300A1840C5FE00763639 /* GameStateListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 691130091840C5FE00763639 /* GameStateListener.cpp */; };
 		691136A5184F4FA60046C951 /* GuiElastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 691136A3184F4FA60046C951 /* GuiElastic.cpp */; };
 		691136A6184F4FA60046C951 /* GuiElastic.h in Headers */ = {isa = PBXBuildFile; fileRef = 691136A4184F4FA60046C951 /* GuiElastic.h */; };
+		69189C261EE3484E004DF2CD /* GuiDecShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69189C241EE3484E004DF2CD /* GuiDecShader.cpp */; };
+		69189C271EE3484E004DF2CD /* GuiDecShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 69189C251EE3484E004DF2CD /* GuiDecShader.h */; };
 		6927A79B1726F92D009C9B97 /* iOSGetUrl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6927A7991726F92D009C9B97 /* iOSGetUrl.h */; };
 		6927A79C1726F92D009C9B97 /* iOSGetUrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */; };
 		692A8A10179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */; };
@@ -680,6 +682,8 @@
 		691130091840C5FE00763639 /* GameStateListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameStateListener.cpp; path = ../../../Source/Events/GameStateListener.cpp; sourceTree = "<group>"; };
 		691136A3184F4FA60046C951 /* GuiElastic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiElastic.cpp; sourceTree = "<group>"; };
 		691136A4184F4FA60046C951 /* GuiElastic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiElastic.h; sourceTree = "<group>"; };
+		69189C241EE3484E004DF2CD /* GuiDecShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecShader.cpp; sourceTree = "<group>"; };
+		69189C251EE3484E004DF2CD /* GuiDecShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecShader.h; sourceTree = "<group>"; };
 		6927A7991726F92D009C9B97 /* iOSGetUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSGetUrl.h; sourceTree = "<group>"; };
 		6927A79A1726F92D009C9B97 /* iOSGetUrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSGetUrl.mm; sourceTree = "<group>"; };
 		692A8A0C179DBD6000F2B602 /* AmjuGL-OpenGLES.1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AmjuGL-OpenGLES.1.cpp"; path = "../../../Source/AmjuGLOpenGL/AmjuGL-OpenGLES.1.cpp"; sourceTree = "<group>"; };
@@ -1588,6 +1592,8 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				69189C241EE3484E004DF2CD /* GuiDecShader.cpp */,
+				69189C251EE3484E004DF2CD /* GuiDecShader.h */,
 				6959E2F01E9ACE7700E251A9 /* GuiDecScale.cpp */,
 				6959E2F11E9ACE7700E251A9 /* GuiDecScale.h */,
 				6959E2DC1E97F6B400E251A9 /* GuiDecColour.cpp */,
@@ -2151,6 +2157,7 @@
 				693D41D515AB7C9100B84D5C /* CursorManager.h in Headers */,
 				693D41D715AB7C9100B84D5C /* GuiButton.h in Headers */,
 				6959E2E31E97F6B400E251A9 /* GuiDecTranslate.h in Headers */,
+				69189C271EE3484E004DF2CD /* GuiDecShader.h in Headers */,
 				693D41D915AB7C9100B84D5C /* GuiCommandHandler.h in Headers */,
 				693D41DB15AB7C9100B84D5C /* GuiComposite.h in Headers */,
 				690C45081885C740007A505D /* llex.h in Headers */,
@@ -2453,6 +2460,7 @@
 				693D419915AB7C6800B84D5C /* DrawRect.cpp in Sources */,
 				71D22B721D4F38B300012DB8 /* RenderDepthToTextureES2.cpp in Sources */,
 				693D419B15AB7C6800B84D5C /* DrawSphere.cpp in Sources */,
+				69189C261EE3484E004DF2CD /* GuiDecShader.cpp in Sources */,
 				690C44F61885C740007A505D /* lcode.c in Sources */,
 				693D419D15AB7C6800B84D5C /* Teapot.cpp in Sources */,
 				693D41A815AB7C7D00B84D5C /* LoadAABB.cpp in Sources */,
