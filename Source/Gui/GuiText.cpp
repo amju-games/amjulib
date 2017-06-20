@@ -347,7 +347,7 @@ void GuiText::DrawSingleLine(
   if (m_charTime > 0)
   {
     // Gradually reveal text
-    if (m_currentChar < last)
+    if (m_currentChar <= last)
     {
       str = str.substr(0, m_currentChar);
 
@@ -596,6 +596,12 @@ bool GuiText::LoadText(File* f)
     else if (StringContains(s, "sx="))
     {
       m_scaleX = ToFloat(s.substr(3));
+    }
+    else if (StringContains(s, "reveal="))
+    {
+      // Arg is seconds to reveal each character in text
+      float t = ToFloat(s.substr(7));
+      SetCharTime(t);
     }
     else
     {
