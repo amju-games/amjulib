@@ -560,6 +560,7 @@ bool ObjMesh::Load(const std::string& filename, bool binary)
       }
 
       std::string mtlfilename = strs[1];
+      mtlfilename = GetFilePath(filename) + "/" + mtlfilename;
       MaterialVec mats;
       if (!LoadMtlFile(mtlfilename, &mats))
       {

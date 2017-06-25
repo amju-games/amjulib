@@ -57,6 +57,12 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
     return false;
   }
 
+  std::string path = GetFilePath(mtlfilename);
+  if (!path.empty())
+  {
+    path += "/"; // make sure there is a final slash, but NOT for empty path!
+  }
+
   Material* current = 0;
 
   auto rm = TheResourceManager::Instance();
@@ -87,7 +93,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
       }
 
       Assert(current);
-      current->m_texfilename[0] = strs[1];
+      current->m_texfilename[0] = path + strs[1];
       current->m_texture[0] = (Texture*)rm->GetRes(current->m_texfilename[0]);
       if (current->m_texture[0] && (current->m_flags & Material::AMJU_MATERIAL_SPHERE_MAP))
       {
@@ -99,7 +105,7 @@ bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats)
       std::string sm = strs[0].substr(4);
       int m = ToInt(sm);
 //std::cout << "Material: found '" << s << "', that is texture map " << m <<  ", right?\n"; 
-      current->m_texfilename[m] = strs[1];
+      current->m_texfilename[m] = path + strs[1];
       current->m_texture[m] = (Texture*)rm->GetRes(current->m_texfilename[m]);
     }
     else if (strs[0] == "shader")
