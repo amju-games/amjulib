@@ -32,6 +32,22 @@ void SceneNode::SetColour(const Colour& colour)
   m_colour = colour;
 }
 
+void SceneNode::SetMaterial(PSceneNodeMaterial material)
+{
+  m_material = material;
+
+  // Set a uniform for each texture/colour/value in the shader
+  // TODO
+}
+
+void SceneNode::DrawMaterial()
+{
+  if (m_material)
+  {
+    m_material->Draw();
+  }
+}
+
 const AABB* SceneNode::GetAABB() const
 {
   return &m_aabb;

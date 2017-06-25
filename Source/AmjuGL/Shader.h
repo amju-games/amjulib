@@ -106,6 +106,8 @@ protected:
   AttributeVec m_attribs;
   UniformVec m_uniforms;
 };
+
+using PShader = RCPtr<Shader>;
 }
 
 #endif

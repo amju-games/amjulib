@@ -8,6 +8,7 @@
 #include "Singleton.h"
 #include "AABB.h"
 #include "Colour.h"
+#include "SceneNodeMaterial.h"
 
 namespace Amju
 {
@@ -88,12 +89,16 @@ public:
 
   void SetColour(const Colour& colour);
 
+  void SetMaterial(PSceneNodeMaterial material);
+
 protected:
   // Subclasses call this
   bool LoadMatrix(File* f);
 
   // ? SceneGraph calls this ?
   bool LoadChildren(File* f);
+
+  void DrawMaterial();
 
 protected:
   friend class SceneGraph; // ???
@@ -107,6 +112,8 @@ protected:
 
   typedef std::vector<PSceneNode> Nodes;
   Nodes m_children;
+
+  PSceneNodeMaterial m_material;
 };
 
 }

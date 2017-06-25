@@ -1002,6 +1002,9 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\RenderToTexture.cpp">
       <Filter>AmjuGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Scene\SceneNodeMaterial.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1909,6 +1912,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\RenderToTexture.h">
       <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Scene\SceneNodeMaterial.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
