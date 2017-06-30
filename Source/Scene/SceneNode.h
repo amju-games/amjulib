@@ -91,6 +91,10 @@ public:
 
   void SetMaterial(PSceneNodeMaterial material);
 
+  const std::string& GetName() const;
+
+  SceneNode* GetNodeByName(const std::string& name);
+
 protected:
   // Subclasses call this
   bool LoadMatrix(File* f);
@@ -114,6 +118,8 @@ protected:
   Nodes m_children;
 
   PSceneNodeMaterial m_material;
+
+  std::string m_name; // so we can get nodes by name (like Gui elements)
 };
 
 }

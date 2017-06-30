@@ -27,6 +27,11 @@ SceneNode::SceneNode()
   SetIsLit(false);
 }
 
+const std::string& SceneNode::GetName() const
+{
+  return m_name;
+}
+
 void SceneNode::SetColour(const Colour& colour)
 {
   m_colour = colour;
@@ -153,15 +158,49 @@ bool SceneNode::LoadChildren(File* f)
     std::string s;
     f->GetDataLine(&s); 
     PSceneNode p = TheSceneNodeFactory::Instance()->Create(s);
-    Assert(p);
-    p->Load(f);
+    if (!p)
+    {
+      f->ReportError("Failed to create scene node of type '" + s + "'");
+      Assert(0);
+    }
+
+    if (!p->Load(f))
+    {
+      f->ReportError("Failed to load child of scene node");
+      Assert(0);
+      return false;
+    }
+
     m_children.push_back(p);
   }
   return true;
 }
 
+SceneNode* SceneNode::GetNodeByName(const std::string& name)
+{
+  if (GetName() == name)
+  {
+    return this;
+  }
+  for (auto ch : m_children)
+  {
+    SceneNode* node = ch->GetNodeByName(name);
+    if (node)
+    {
+      return node;
+    }
+  }
+  return nullptr;
+}
+
 bool SceneNode::Load(File* f)
 {
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected scene node name");
+    return false;
+  }
+
   if (!LoadMatrix(f))
   {
     return false;

@@ -9,8 +9,11 @@ namespace Amju
 class SceneNodeCamera : public SceneNode
 {
 public:
+  static const char* NAME;
+
   SceneNodeCamera();
-  virtual void Draw();
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
 
   void SetEyePos(const Vec3f&);
   void SetLookAtPos(const Vec3f&);

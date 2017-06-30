@@ -1,10 +1,14 @@
 #include <AmjuFirst.h>
-#include "SceneNodeCamera.h"
 #include "AmjuGL.h"
+#include "File.h"
+#include "LoadVec3.h"
+#include "SceneNodeCamera.h"
 #include <AmjuFinal.h>
 
 namespace Amju
 {
+const char* SceneNodeCamera::NAME = "camera";
+
 SceneNodeCamera::SceneNodeCamera()
 {
   m_up = Vec3f(0, 1, 0);
@@ -15,6 +19,34 @@ void SceneNodeCamera::SetFromCamera(const Camera& c)
   SetEyePos(c.m_pos);
   SetLookAtPos(c.m_pos + c.m_dir);
   SetUpVec(c.m_up);
+}
+
+bool SceneNodeCamera::Load(File* f)
+{
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected scene node name");
+    return false;
+  }
+
+  if (!LoadVec3(f, &m_eye))
+  {
+    f->ReportError("Failed to load eye pos for camera node");
+    return false;
+  }
+
+  if (!LoadVec3(f, &m_lookat))
+  {
+    f->ReportError("Failed to load look at (target) pos for camera node");
+    return false;
+  }
+
+  if (!LoadChildren(f))
+  {
+    return false;
+  }
+
+  return true;
 }
 
 const Vec3f& SceneNodeCamera::GetEyePos() const

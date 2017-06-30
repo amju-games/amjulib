@@ -50,10 +50,17 @@ void SceneMesh::Update()
 
 bool SceneMesh::Load(File* f)
 {
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected scene node name");
+    return false;
+  }
+
   if (!SceneNode::LoadMatrix(f))
   {
     return false;
   }
+
   std::string s;
   if (!f->GetDataLine(&s))
   {
