@@ -304,6 +304,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\showbuffer.c" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR3D.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGLOpenGL\VECTOR4D.cpp" />
+    <ClCompile Include="..\..\..\Source\AmjuGL\Animator.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\CalcTangents.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\Camera.cpp" />
     <ClCompile Include="..\..\..\Source\AmjuGL\DepthOfField.cpp" />
@@ -605,6 +606,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL1.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL2.h" />
     <ClInclude Include="..\..\..\Source\AmjuGLOpenGL\ShadowMapOpenGL3.h" />
+    <ClInclude Include="..\..\..\Source\AmjuGL\Animator.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\CalcTangents.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Camera.h" />
     <ClInclude Include="..\..\..\Source\AmjuGL\Cubemap.h" />
