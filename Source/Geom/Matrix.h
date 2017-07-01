@@ -21,24 +21,24 @@ public:
     operator const float*() const { return m_e; }
 
     // Sets the matrix to the identity matrix.
-    void SetIdentity();
+    Matrix& SetIdentity();
 
     // Load the current OpenGL modelview matrix into this matrix.
-    void ModelView();
+    Matrix& ModelView();
 
     // Load the current OpenGL projection matrix into this matrix.
-    void Projection();
+    Matrix& Projection();
 
     // These functions set the matrix values in order to perform the 
     // transformation.  
-    void RotateX(float xradians);
-    void RotateY(float yradians);
-    void RotateZ(float zradians);
+    Matrix& RotateX(float xradians);
+    Matrix& RotateY(float yradians);
+    Matrix& RotateZ(float zradians);
 
-    void Translate(const Vec3f&); // Trashes any existing rotation
-    void TranslateKeepRotation(const Vec3f& v); // Retains any rotation
+    Matrix& Translate(const Vec3f&); // Trashes any existing rotation
+    Matrix& TranslateKeepRotation(const Vec3f& v); // Retains any rotation
 
-    void Scale(float x, float y, float z);
+    Matrix& Scale(float x, float y, float z);
 
     // Matrix inversion.
     // Sets the matrix pointed to by pResult to be the inverse of the

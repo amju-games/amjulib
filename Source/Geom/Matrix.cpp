@@ -168,7 +168,7 @@ void Matrix::AssertValid() const
 #endif
 }
 
-void Matrix::SetIdentity()
+Matrix& Matrix::SetIdentity()
 {
   AMJU_CALL_STACK;
 
@@ -177,9 +177,10 @@ void Matrix::SetIdentity()
     m_e[8] = 0; m_e[9] = 0; m_e[10] = 1; m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0; m_e[14] = 0; m_e[15] = 1;
     AssertValid();
+    return *this;
 }
 
-void Matrix::RotateX(float rads)
+Matrix& Matrix::RotateX(float rads)
 {
   AMJU_CALL_STACK;
 
@@ -190,9 +191,10 @@ void Matrix::RotateX(float rads)
     m_e[8] = 0;  m_e[9] = -s;    m_e[10] = c;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
     AssertValid();
+    return *this;
 }
 
-void Matrix::RotateY(float rads)
+Matrix& Matrix::RotateY(float rads)
 {
   AMJU_CALL_STACK;
 
@@ -203,9 +205,10 @@ void Matrix::RotateY(float rads)
     m_e[8] = s;  m_e[9] = 0;     m_e[10] = c;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
     AssertValid();
+    return *this;
 }
 
-void Matrix::RotateZ(float rads)
+Matrix& Matrix::RotateZ(float rads)
 {
   AMJU_CALL_STACK;
 
@@ -216,9 +219,10 @@ void Matrix::RotateZ(float rads)
     m_e[8] = 0;  m_e[9] = 0;     m_e[10] = 1;   m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0;    m_e[14] = 0;   m_e[15] = 1;
     AssertValid();
+    return *this;
 }
 
-void Matrix::Translate(const Vec3f& v)
+Matrix& Matrix::Translate(const Vec3f& v)
 {
   AMJU_CALL_STACK;
 
@@ -227,9 +231,10 @@ void Matrix::Translate(const Vec3f& v)
   m_e[8] = 0;    m_e[9] = 0;     m_e[10] = 1;   m_e[11] = 0;
   m_e[12] = v.x; m_e[13] = v.y;  m_e[14] = v.z; m_e[15] = 1;
   AssertValid();
+  return *this;
 }
 
-void Matrix::TranslateKeepRotation(const Vec3f& v)
+Matrix& Matrix::TranslateKeepRotation(const Vec3f& v)
 {
   AMJU_CALL_STACK;
 
@@ -243,9 +248,10 @@ void Matrix::TranslateKeepRotation(const Vec3f& v)
 
   m_e[15] = 1;
   AssertValid();
+  return *this;
 }
 
-void Matrix::Scale(float x, float y, float z)
+Matrix& Matrix::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
 
@@ -254,22 +260,25 @@ void Matrix::Scale(float x, float y, float z)
     m_e[8] = 0;  m_e[9] = 0;  m_e[10] = z; m_e[11] = 0;
     m_e[12] = 0; m_e[13] = 0; m_e[14] = 0; m_e[15] = 1;
     AssertValid();
+    return *this;
 }
 
-void Matrix::ModelView()
+Matrix& Matrix::ModelView()
 {
   AMJU_CALL_STACK;
 
   AmjuGL::GetMatrix(AmjuGL::AMJU_MODELVIEW_MATRIX, m_e);
   AssertValid();
+  return *this;
 }
 
-void Matrix::Projection()
+Matrix& Matrix::Projection()
 {
   AMJU_CALL_STACK;
 
   AmjuGL::GetMatrix(AmjuGL::AMJU_PROJECTION_MATRIX, m_e);
   AssertValid();
+  return *this;
 }
 
 Matrix& Matrix::operator*=(const Matrix& n)
