@@ -30,6 +30,11 @@ bool GuiDecShader::Load(File* f)
     return false;
   }
 
+  if (!GuiDecorator::Load(f))
+  {
+    return false;
+  }
+
   return true;
 }
 
