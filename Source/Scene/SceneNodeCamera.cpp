@@ -1,8 +1,9 @@
 #include <AmjuFirst.h>
-#include "AmjuGL.h"
+#include <AmjuGL.h>
 #include "File.h"
 #include "LoadVec3.h"
 #include "SceneNodeCamera.h"
+#include "StringUtils.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -41,6 +42,29 @@ bool SceneNodeCamera::Load(File* f)
     return false;
   }
 
+  if (!LoadVec3(f, &m_up))
+  {
+    f->ReportError("Failed to load up vector for camera node");
+    return false;
+  }
+
+  std::string s;
+  if (!f->GetDataLine(&s))
+  {
+    f->ReportError("Expected projection params (fov, aspect, near, far) for camera node");
+    return false;
+  }
+  Strings strs = Split(s, ',');
+  if (strs.size() != 4)
+  {
+    f->ReportError("Expected projection params (fov, aspect, near, far) for camera node");
+    return false;
+  }
+  for (int i = 0; i < 4; i++)
+  {
+    m_perspective[i] = ToFloat(strs[i]);
+  }
+
   if (!LoadChildren(f))
   {
     return false;
@@ -76,6 +100,14 @@ void SceneNodeCamera::SetUpVec(const Vec3f& up)
 
 void SceneNodeCamera::Draw()
 {
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+  AmjuGL::SetIdentity();
+  AmjuGL::SetPerspectiveProjection(
+    m_perspective[0], m_perspective[1], m_perspective[2], m_perspective[3]);
+
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
+  AmjuGL::SetIdentity();
+  // TODO Not sure this comment makes sense
   // Don't set Identity - camera can be attached to something; multiple cameras..?
   AmjuGL::LookAt(
     m_eye.x, m_eye.y, m_eye.z,  // eye
