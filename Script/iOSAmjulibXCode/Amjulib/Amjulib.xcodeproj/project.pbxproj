@@ -502,6 +502,8 @@
 		693D43E115AB7CE900B84D5C /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431D15AB7CE900B84D5C /* zlib.h */; };
 		693D43E215AB7CE900B84D5C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431E15AB7CE900B84D5C /* zutil.c */; };
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
+		6951CF1D1F0B938B00140095 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6951CF1B1F0B938B00140095 /* Animator.cpp */; };
+		6951CF1E1F0B938B00140095 /* Animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6951CF1C1F0B938B00140095 /* Animator.h */; };
 		6959E2D81E958E1F00E251A9 /* GuiDecAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */; };
 		6959E2D91E958E1F00E251A9 /* GuiDecAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */; };
 		6959E2DA1E958E1F00E251A9 /* GuiDecRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */; };
@@ -1062,6 +1064,8 @@
 		693D431D15AB7CE900B84D5C /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		693D431E15AB7CE900B84D5C /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		6951CF1B1F0B938B00140095 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animator.cpp; path = ../../../Source/AmjuGL/Animator.cpp; sourceTree = "<group>"; };
+		6951CF1C1F0B938B00140095 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = ../../../Source/AmjuGL/Animator.h; sourceTree = "<group>"; };
 		6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecAnimation.cpp; sourceTree = "<group>"; };
 		6959E2D51E958E1F00E251A9 /* GuiDecAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecAnimation.h; sourceTree = "<group>"; };
 		6959E2D61E958E1F00E251A9 /* GuiDecRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecRotate.cpp; sourceTree = "<group>"; };
@@ -1273,6 +1277,8 @@
 		693D406F15AB783A00B84D5C /* AmjuGL */ = {
 			isa = PBXGroup;
 			children = (
+				6951CF1B1F0B938B00140095 /* Animator.cpp */,
+				6951CF1C1F0B938B00140095 /* Animator.h */,
 				693D404F15AB780200B84D5C /* AmjuGL-Impl.h */,
 				693D405015AB780200B84D5C /* AmjuGL-Null.h */,
 				693D405115AB780200B84D5C /* AmjuGL.cpp */,
@@ -2082,6 +2088,7 @@
 				692F34C1197A838C0040C9C3 /* FullScreenPostProcess.h in Headers */,
 				693D40DB15AB7A5600B84D5C /* FileImplMem.h in Headers */,
 				693D40DD15AB7A5600B84D5C /* FileImplStd.h in Headers */,
+				6951CF1E1F0B938B00140095 /* Animator.h in Headers */,
 				693D40DF15AB7A5600B84D5C /* FileSize.h in Headers */,
 				690C45211885C740007A505D /* luaconf.h in Headers */,
 				693D40E115AB7A5600B84D5C /* GlueFile.h in Headers */,
@@ -2369,6 +2376,7 @@
 			files = (
 				693D405E15AB780200B84D5C /* AmjuGL.cpp in Sources */,
 				690483E5199BE68D00420BCB /* ShadowMapOpenGL.cpp in Sources */,
+				6951CF1D1F0B938B00140095 /* Animator.cpp in Sources */,
 				693D406015AB780200B84D5C /* AmjuGLWindowInfo.cpp in Sources */,
 				693D406215AB780200B84D5C /* Colour.cpp in Sources */,
 				693D406415AB780200B84D5C /* Screen.cpp in Sources */,
