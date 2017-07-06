@@ -516,6 +516,8 @@
 		6959E2F31E9ACE7700E251A9 /* GuiDecScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 6959E2F11E9ACE7700E251A9 /* GuiDecScale.h */; };
 		695AD8BB16B7BD8200E1E814 /* Drawable.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8B916B7BD8200E1E814 /* Drawable.h */; };
 		695AD8BC16B7BD8200E1E814 /* Outliner.h in Headers */ = {isa = PBXBuildFile; fileRef = 695AD8BA16B7BD8200E1E814 /* Outliner.h */; };
+		6964BB491F0C4DB400CD0E43 /* SceneNodeMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6964BB471F0C4DB400CD0E43 /* SceneNodeMaterial.cpp */; };
+		6964BB4A1F0C4DB400CD0E43 /* SceneNodeMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 6964BB481F0C4DB400CD0E43 /* SceneNodeMaterial.h */; };
 		696519D618BF58A5009A36F6 /* AmjuGLES2Android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */; };
 		696519DA18BF5C26009A36F6 /* MATRIX4X4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */; };
 		696519DB18BF5C26009A36F6 /* VECTOR3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 696519D818BF5C26009A36F6 /* VECTOR3D.cpp */; };
@@ -1078,6 +1080,8 @@
 		6959E2F11E9ACE7700E251A9 /* GuiDecScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecScale.h; sourceTree = "<group>"; };
 		695AD8B916B7BD8200E1E814 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = ../../../Source/AmjuGL/Drawable.h; sourceTree = "<group>"; };
 		695AD8BA16B7BD8200E1E814 /* Outliner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Outliner.h; path = ../../../Source/AmjuGL/Outliner.h; sourceTree = "<group>"; };
+		6964BB471F0C4DB400CD0E43 /* SceneNodeMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNodeMaterial.cpp; sourceTree = "<group>"; };
+		6964BB481F0C4DB400CD0E43 /* SceneNodeMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneNodeMaterial.h; sourceTree = "<group>"; };
 		696519D518BF58A5009A36F6 /* AmjuGLES2Android.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmjuGLES2Android.cpp; path = ../../../Source/AmjuGLOpenGL/AmjuGLES2Android.cpp; sourceTree = "<group>"; };
 		696519D718BF5C26009A36F6 /* MATRIX4X4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MATRIX4X4.cpp; path = ../../../Source/AmjuGLOpenGL/MATRIX4X4.cpp; sourceTree = "<group>"; };
 		696519D818BF5C26009A36F6 /* VECTOR3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VECTOR3D.cpp; path = ../../../Source/AmjuGLOpenGL/VECTOR3D.cpp; sourceTree = "<group>"; };
@@ -1832,6 +1836,8 @@
 		693D426515AB7CE900B84D5C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				6964BB471F0C4DB400CD0E43 /* SceneNodeMaterial.cpp */,
+				6964BB481F0C4DB400CD0E43 /* SceneNodeMaterial.h */,
 				6901A12F189404EA00D98C04 /* LoadScene.cpp */,
 				6901A130189404EA00D98C04 /* LoadScene.h */,
 				690C44A51885C68B007A505D /* SceneLuaScript.cpp */,
@@ -2071,6 +2077,7 @@
 				693D409415AB79EE00B84D5C /* SAP.h in Headers */,
 				693D409B15AB7A1B00B84D5C /* DownloadReq.h in Headers */,
 				693D409D15AB7A1B00B84D5C /* Screenshot.h in Headers */,
+				6964BB4A1F0C4DB400CD0E43 /* SceneNodeMaterial.h in Headers */,
 				693D40A815AB7A3600B84D5C /* EventListener.h in Headers */,
 				690C451E1885C740007A505D /* ltm.h in Headers */,
 				693D40AA15AB7A3600B84D5C /* EventPoller.h in Headers */,
@@ -2479,6 +2486,7 @@
 				693D41D215AB7C9100B84D5C /* Cursor.cpp in Sources */,
 				693D41D415AB7C9100B84D5C /* CursorManager.cpp in Sources */,
 				693D41D615AB7C9100B84D5C /* GuiButton.cpp in Sources */,
+				6964BB491F0C4DB400CD0E43 /* SceneNodeMaterial.cpp in Sources */,
 				693D41D815AB7C9100B84D5C /* GuiCommandHandler.cpp in Sources */,
 				690C44F41885C740007A505D /* lbaselib.c in Sources */,
 				693D41DA15AB7C9100B84D5C /* GuiComposite.cpp in Sources */,
