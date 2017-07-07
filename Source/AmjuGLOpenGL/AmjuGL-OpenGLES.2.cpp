@@ -69,19 +69,19 @@ public:
   TriListStaticES2()
   {
     m_numVerts = 0;
-    glGenVertexArraysOES(1, &m_vertexArray);
-    glGenBuffers(1, &m_vertexBuffer);    
+    GL_CHECK(glGenVertexArraysOES(1, &m_vertexArray));
+    GL_CHECK(glGenBuffers(1, &m_vertexBuffer));
   }
  
   ~TriListStaticES2()
   {
-    glDeleteBuffers(1, &m_vertexBuffer);
-    glDeleteVertexArraysOES(1, &m_vertexArray);
+    GL_CHECK(glDeleteBuffers(1, &m_vertexBuffer));
+    GL_CHECK(glDeleteVertexArraysOES(1, &m_vertexArray));
   }
 
   virtual void Draw()
   {
-    glActiveTexture(GL_TEXTURE0);
+    GL_CHECK(glActiveTexture(GL_TEXTURE0)); // TODO why
   
     s_currentShader->Begin();
     if (s_currentShader == s_defaultShader)
@@ -109,18 +109,18 @@ public:
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
     }
-    glBindVertexArrayOES(m_vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
+    GL_CHECK(glBindVertexArrayOES(m_vertexArray));
+    GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, m_numVerts));
   }
 
   virtual void Set(const AmjuGL::Tris& tris)
   {
     m_numVerts = static_cast<int>(tris.size() * 3);
 
-    glBindVertexArrayOES(m_vertexArray);
+    GL_CHECK(glBindVertexArrayOES(m_vertexArray));
 
-    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW);
+    GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
+    GL_CHECK(glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW));
 
     // This should probably go in Draw
     const int STRIDE = sizeof(AmjuGL::Vert);
@@ -130,20 +130,29 @@ public:
     int vertexAttribNormal = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
     int vertexAttribTexCoord0 = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
     int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
-    
-    glEnableVertexAttribArray(vertexAttribPosition);
-    glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
+    		
+    GL_CHECK(glEnableVertexAttribArray(vertexAttribPosition));
+    GL_CHECK(glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0)));
   
-    glEnableVertexAttribArray(vertexAttribNormal);
-    glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
-  
-    glEnableVertexAttribArray(vertexAttribTexCoord0);
-    glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
-
-    glEnableVertexAttribArray(vertexAttribColour);
-    glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44));
+    if (vertexAttribNormal > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribNormal));
+      GL_CHECK(glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12)));
+    }
     
-    glBindVertexArrayOES(0);
+    if (vertexAttribTexCoord0 > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribTexCoord0));
+      GL_CHECK(glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24)));
+    }
+    
+    if (vertexAttribColour > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribColour));
+      GL_CHECK(glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44)));
+    }
+    
+    GL_CHECK(glBindVertexArrayOES(0));
   }
 
   virtual bool Init() { return true; }
@@ -162,21 +171,21 @@ public:
   {
     m_firstSet = true;
     m_numVerts = 0;
-    glGenVertexArraysOES(1, &m_vertexArray);
-    glGenBuffers(1, &m_vertexBuffer);
+    GL_CHECK(glGenVertexArraysOES(1, &m_vertexArray));
+    GL_CHECK(glGenBuffers(1, &m_vertexBuffer));
   }
   
   ~TriListDynamicES2()
   {
-    glDeleteBuffers(1, &m_vertexBuffer);
-    glDeleteVertexArraysOES(1, &m_vertexArray);
+    GL_CHECK(glDeleteBuffers(1, &m_vertexBuffer));
+    GL_CHECK(glDeleteVertexArraysOES(1, &m_vertexArray));
   }
   
   virtual void Draw()
   {
     // TODO Factor out common code!!
     
-    glActiveTexture(GL_TEXTURE0);
+    GL_CHECK(glActiveTexture(GL_TEXTURE0)); // TODO why
     
     s_currentShader->Begin();
     if (s_currentShader == s_defaultShader)
@@ -205,8 +214,8 @@ public:
       s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
     }
     
-    glBindVertexArrayOES(m_vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, m_numVerts);
+    GL_CHECK(glBindVertexArrayOES(m_vertexArray));
+    GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, m_numVerts));
   }
 
   virtual void Set(const AmjuGL::Tris& tris)
@@ -217,10 +226,10 @@ public:
       
       m_numVerts = static_cast<int>(tris.size() * 3);
       
-      glBindVertexArrayOES(m_vertexArray);
+      GL_CHECK(glBindVertexArrayOES(m_vertexArray));
       
-      glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-      glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW);
+      GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
+      GL_CHECK(glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW));
       
       // This should probably go in Draw
       const int STRIDE = sizeof(AmjuGL::Vert);
@@ -230,19 +239,19 @@ public:
       int vertexAttribTexCoord0 = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
       int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
 
-      glEnableVertexAttribArray(vertexAttribPosition);
-      glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribPosition));
+      GL_CHECK(glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0)));
       
-      glEnableVertexAttribArray(vertexAttribNormal);
-      glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribNormal));
+      GL_CHECK(glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12)));
       
-      glEnableVertexAttribArray(vertexAttribTexCoord0);
-      glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribTexCoord0));
+      GL_CHECK(glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24)));
       
-      glEnableVertexAttribArray(vertexAttribColour);
-      glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44));
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribColour));
+      GL_CHECK(glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44)));
 
-      glBindVertexArrayOES(0);
+      GL_CHECK(glBindVertexArrayOES(0));
       
     }
     else
@@ -250,10 +259,10 @@ public:
       // Must have same number of tris, right?
       Assert(tris.size() * 3 == m_numVerts);
       
-      glBindVertexArrayOES(m_vertexArray);
+      GL_CHECK(glBindVertexArrayOES(m_vertexArray));
       
-      glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-      glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x));
+      GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
+      GL_CHECK(glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x)));
     }
   }
 
@@ -420,18 +429,18 @@ void AmjuGLOpenGLES2::SetTexture(
 {
 	AMJU_CALL_STACK;
 	
-	glGenTextures(1, (GLuint*)th);
-  glBindTexture(GL_TEXTURE_2D, *th);
+	GL_CHECK(glGenTextures(1, (GLuint*)th));
+  GL_CHECK(glBindTexture(GL_TEXTURE_2D, *th));
 	
 	int wrapmode = GL_REPEAT;
 	
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode);
+	GL_CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapmode));
+	GL_CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapmode));
 		
 	// Mipmapping/filtering: these settings are recommended.
 	// Use this - but requires mipmaps to be created ?
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  GL_CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  GL_CHECK(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 	
 	// Allowed values for min filter:
 	// GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST,
@@ -440,7 +449,7 @@ void AmjuGLOpenGLES2::SetTexture(
 	// Different depending on RGB or RGBA.
 	if (d == AmjuGL::AMJU_RGB)
 	{
-		glTexImage2D(GL_TEXTURE_2D,
+		GL_CHECK(glTexImage2D(GL_TEXTURE_2D,
 					 0,
 					 GL_RGB,
 					 width,
@@ -448,11 +457,11 @@ void AmjuGLOpenGLES2::SetTexture(
 					 0,
 					 GL_RGB,
 					 GL_UNSIGNED_BYTE,
-					 data);
+					 data));
 	}
 	else //if (d == RGBA)
 	{
-		glTexImage2D(GL_TEXTURE_2D,
+		GL_CHECK(glTexImage2D(GL_TEXTURE_2D,
 					 0,
 					 GL_RGBA, // four components, not 3 - i.e., RGBA.
 					 width,
@@ -460,13 +469,13 @@ void AmjuGLOpenGLES2::SetTexture(
 					 0,
 					 GL_RGBA, // not just RGB.
 					 GL_UNSIGNED_BYTE,
-					 data);
+					 data));
 	}
 	
 	// TODO Compressed textures -- "PVRT" formats
 	
 	// Build mipmaps
-  glGenerateMipmap(GL_TEXTURE_2D);
+  GL_CHECK(glGenerateMipmap(GL_TEXTURE_2D));
 }
 
 void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
@@ -474,7 +483,7 @@ void AmjuGLOpenGLES2::GetScreenshot(unsigned char* buffer, int x, int y, int w, 
 	AMJU_CALL_STACK;
 
 	unsigned char* myBuf = new unsigned char[4 * w * h];
-	glReadPixels(x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, myBuf);
+	GL_CHECK(glReadPixels(x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, myBuf));
 	
 #ifdef LANDSCAPE
 	// Convert RGBA to RGB and rotate 90 degs - But TODO How to make sure it's the right way up ?
@@ -559,7 +568,7 @@ void AmjuGLOpenGLES2::Enable(uint32 flag)
 
   if (flag == AmjuGL::AMJU_DEPTH_WRITE)
   {
-    glDepthMask(GL_TRUE);
+    GL_CHECK(glDepthMask(GL_TRUE));
     return;
   }
   else if (flag == AmjuGL::AMJU_LIGHTING)
@@ -577,7 +586,7 @@ void AmjuGLOpenGLES2::Enable(uint32 flag)
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
   {
-    glEnable(glFlag);
+    GL_CHECK(glEnable(glFlag));
   }
 }
 
@@ -587,7 +596,7 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
 
   if (flag == AmjuGL::AMJU_DEPTH_WRITE)
   {
-    glDepthMask(GL_FALSE);
+    GL_CHECK(glDepthMask(GL_FALSE));
     return;
   }
   else if (flag == AmjuGL::AMJU_LIGHTING)
@@ -606,7 +615,7 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
   uint32 glFlag = ConvertToGLFlag(flag);
   if (glFlag)
   {
-    glDisable(glFlag);
+    GL_CHECK(glDisable(glFlag));
   }
 }
 

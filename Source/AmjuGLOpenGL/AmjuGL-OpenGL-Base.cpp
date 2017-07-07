@@ -148,7 +148,7 @@ void AmjuGLOpenGLBase::UpdateTexture(const AmjuGL::TextureHandle th,
   AMJU_CALL_STACK;
 
   GL_CHECK(glBindTexture(GL_TEXTURE_2D, th));
-  glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
+  GL_CHECK(glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data));
 }
 
 void AmjuGLOpenGLBase::DestroyTextureHandle(AmjuGL::TextureHandle* th)
