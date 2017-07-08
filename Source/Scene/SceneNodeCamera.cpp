@@ -8,7 +8,9 @@
 
 namespace Amju
 {
-const char* SceneNodeCamera::NAME = "camera";
+const char* SceneNodeCameraPersp::NAME = "camera-persp";
+
+const char* SceneNodeCameraOrtho::NAME = "camera-ortho";
 
 SceneNodeCamera::SceneNodeCamera()
 {
@@ -47,6 +49,15 @@ bool SceneNodeCamera::Load(File* f)
     f->ReportError("Failed to load up vector for camera node");
     return false;
   }
+  return true;
+}
+
+bool SceneNodeCameraPersp::Load(File* f)
+{
+  if (!SceneNodeCamera::Load(f))
+  {
+    return false;
+  }
 
   std::string s;
   if (!f->GetDataLine(&s))
@@ -63,6 +74,38 @@ bool SceneNodeCamera::Load(File* f)
   for (int i = 0; i < 4; i++)
   {
     m_perspective[i] = ToFloat(strs[i]);
+  }
+
+  if (!LoadChildren(f))
+  {
+    return false;
+  }
+
+  return true;
+}
+
+bool SceneNodeCameraOrtho::Load(File* f)
+{
+  if (!SceneNodeCamera::Load(f))
+  {
+    return false;
+  }
+
+  std::string s;
+  if (!f->GetDataLine(&s))
+  {
+    f->ReportError("Expected ortho params (left, right, top, bottom, near, far) for camera node");
+    return false;
+  }
+  Strings strs = Split(s, ',');
+  if (strs.size() != 6)
+  {
+    f->ReportError("Expected ortho params(left, right, top, bottom, near, far) for camera node");
+    return false;
+  }
+  for (int i = 0; i < 6; i++)
+  {
+    m_ortho[i] = ToFloat(strs[i]);
   }
 
   if (!LoadChildren(f))
@@ -98,13 +141,28 @@ void SceneNodeCamera::SetUpVec(const Vec3f& up)
   m_up = up;
 }
 
-void SceneNodeCamera::Draw()
+void SceneNodeCameraPersp::Draw()
 {
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
   AmjuGL::SetIdentity();
   AmjuGL::SetPerspectiveProjection(
     m_perspective[0], m_perspective[1], m_perspective[2], m_perspective[3]);
 
+  SceneNodeCamera::Draw();
+}
+
+void SceneNodeCameraOrtho::Draw()
+{
+  AmjuGL::SetMatrixMode(AmjuGL::AMJU_PROJECTION_MATRIX);
+  AmjuGL::SetIdentity();
+  AmjuGL::SetOrthoProjection(
+    m_ortho[0], m_ortho[1], m_ortho[2], m_ortho[3], m_ortho[4], m_ortho[5]);
+
+  SceneNodeCamera::Draw();
+}
+
+void SceneNodeCamera::Draw()
+{
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
   // TODO Not sure this comment makes sense

@@ -16,7 +16,8 @@ SceneNodeFactory::SceneNodeFactory()
   Add(SceneNode::NAME, &SceneNode::Create);
   Add(SceneMesh::NAME, &SceneMesh::Create);
   Add(SceneMeshMaterial::NAME, []() -> SceneNode* { return new SceneMeshMaterial;} );
-  Add(SceneNodeCamera::NAME, []() -> SceneNode* { return new SceneNodeCamera; });
+  Add(SceneNodeCameraPersp::NAME, []() -> SceneNode* { return new SceneNodeCameraPersp; });
+  Add(SceneNodeCameraOrtho::NAME, []() -> SceneNode* { return new SceneNodeCameraOrtho; });
   Add(SceneLuaScript::NAME, &SceneLuaScript::Create);
 }
 }

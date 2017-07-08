@@ -6,14 +6,12 @@
 
 namespace Amju
 {
+// * SceneNodeCamera *
+// Base class for perspective and ortho cameras
 class SceneNodeCamera : public SceneNode
 {
 public:
-  static const char* NAME;
-
   SceneNodeCamera();
-  virtual void Draw() override;
-  virtual bool Load(File*) override;
 
   void SetEyePos(const Vec3f&);
   void SetLookAtPos(const Vec3f&);
@@ -28,12 +26,38 @@ public:
   // (like in gluLookAt)
   Matrix GetMatrix() const;
 
+  virtual bool Load(File*) override = 0;
+  virtual void Draw() override = 0;
+
 protected:
   Vec3f m_eye;
   Vec3f m_lookat;
   Vec3f m_up;
+};
+
+class SceneNodeCameraPersp : public SceneNodeCamera
+{
+public:
+  static const char* NAME;
+
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
+
+private:
   // fovy, aspect, near, far
   float m_perspective[4];
+};
+
+class SceneNodeCameraOrtho : public SceneNodeCamera
+{
+public:
+  static const char* NAME;
+
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
+
+private:
+  float m_ortho[6];
 };
 
 typedef RCPtr<SceneNodeCamera> PSceneNodeCamera;
