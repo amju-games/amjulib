@@ -52,6 +52,22 @@ bool SceneNodeCamera::Load(File* f)
   return true;
 }
 
+SceneNodeCameraPersp::SceneNodeCameraPersp()
+{
+  m_perspective[0] = 45.0f; // fov
+  m_perspective[1] = 1.0f; // aspect
+  m_perspective[2] = 1.0f; // near
+  m_perspective[3] = 1000.0f; // far
+}
+
+void SceneNodeCameraPersp::SetPerspParams(float fovy, float aspect, float nearDist, float farDist)
+{
+  m_perspective[0] = fovy;
+  m_perspective[1] = aspect;
+  m_perspective[2] = nearDist;
+  m_perspective[3] = farDist;
+}
+
 bool SceneNodeCameraPersp::Load(File* f)
 {
   if (!SceneNodeCamera::Load(f))

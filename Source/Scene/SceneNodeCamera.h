@@ -7,6 +7,7 @@
 namespace Amju
 {
 // * SceneNodeCamera *
+// Look-at camera, i.e. sets modelview matrix, but not projection matrix.
 // Base class for perspective and ortho cameras
 class SceneNodeCamera : public SceneNode
 {
@@ -26,8 +27,8 @@ public:
   // (like in gluLookAt)
   Matrix GetMatrix() const;
 
-  virtual bool Load(File*) override = 0;
-  virtual void Draw() override = 0;
+  virtual bool Load(File*) override;
+  virtual void Draw() override;
 
 protected:
   Vec3f m_eye;
@@ -40,8 +41,11 @@ class SceneNodeCameraPersp : public SceneNodeCamera
 public:
   static const char* NAME;
 
+  SceneNodeCameraPersp();
   virtual void Draw() override;
   virtual bool Load(File*) override;
+
+  void SetPerspParams(float fovy, float aspeect, float nearDist, float farDist);
 
 private:
   // fovy, aspect, near, far
