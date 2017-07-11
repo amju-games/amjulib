@@ -1,12 +1,16 @@
-#ifndef GUI_IMAGE_H
-#define GUI_IMAGE_H
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
 
+#pragma once
+
+#include <GuiElement.h>
+#include <Texture.h>
 #include <TriList.h>
-#include "GuiElement.h"
-#include "Texture.h"
 
 namespace Amju
 {
+// * GuiImage *
+// Part of Gui class hierarchy, displays 2D screen space GUI image.
 class GuiImage : public GuiElement
 {
 public:
@@ -23,11 +27,6 @@ private:
 
 protected:
   PTexture m_texture;
-//  AmjuGL::Tris m_tris;
   RCPtr<TriListStatic> m_triList;
-  Vec2f m_oldPos;
-  Vec2f m_oldSize;
 };
 }
-
-#endif

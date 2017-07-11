@@ -1,17 +1,29 @@
-#ifndef GUI_ELEMENT_H
-#define GUI_ELEMENT_H
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
+
+#pragma once
 
 #include <vector>
-#include "EventListener.h"
-#include "Vec2.h"
-#include "File.h"
-#include "GuiCommandHandler.h"
-#include "Rect.h"
+#include <EventListener.h>
+#include <File.h>
+#include <GuiCommandHandler.h>
+#include <Rect.h>
+#include <Vec2.h>
 
 namespace Amju
 {
+// Command function type.
+// Gui Elements which respond to user events can call this kind of
+//  function, to implement a lightweight action.
+// For undoable commands, or commands requiring more data, there is the 
+//  more heavyweight GuiCommand class.
 typedef void (*CommandFunc)(GuiElement*);
 
+// * GuiElement *
+// Base class for GUI classes. Subclasses represent specific kinds of
+//  GUI widgets. 
+// GUI elements are held in a tree structure. We are using the Composite
+//  and Decorator Design Patterns for this.
 class GuiElement : public EventListener
 {
 public:
@@ -99,7 +111,6 @@ protected:
      (-1, -1) +--------------+ (1, -1)
   */
   Vec2f m_localpos;
-//? Or calc on fly? //  Vec2f m_combinedPos;
 
   Vec2f m_size;
   std::string m_name;
@@ -122,6 +133,7 @@ protected:
   bool m_ancestorsAreVisible;
 };
 
+// Convenience typedefs
 typedef RCPtr<GuiElement> PGuiElement;
 typedef std::vector<PGuiElement> GuiElements;
 
@@ -130,8 +142,8 @@ PGuiElement LoadGui(const std::string& filename, bool addAsListener = true);
 // Convenience function - get rectangle from pos and size of element
 Rect GetRect(GuiElement*);
 
-// Prefer this function, as it can alert when no such element exists
+// Recursively search a GUI tree to find a named element.
+// Prefer this function over the member function, as it can alert when no 
+//  such element exists.
 GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName);
 }
-
-#endif

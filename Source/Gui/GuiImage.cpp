@@ -1,8 +1,11 @@
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
+
 #include <AmjuFirst.h>
+#include <GuiImage.h>
+#include <ResourceManager.h>
 #include <Screen.h>
 #include <StringUtils.h>
-#include "GuiImage.h"
-#include "ResourceManager.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -16,17 +19,21 @@ void GuiImage::Draw()
     return;
   }
 
-  if (GetCombinedPos() != m_oldPos || GetSize() != m_oldSize)
+  if (!m_triList)
   {
     BuildTris();
-    m_oldPos = GetCombinedPos();
-    m_oldSize = GetSize();
   }
 
   Assert(m_texture);
   m_texture->UseThisTexture();
 
+  AmjuGL::PushMatrix();
+  const Vec2f& pos = GetCombinedPos();
+  const Vec2f& size = GetSize();
+  AmjuGL::Translate(pos.x, pos.y, 0);
+  AmjuGL::Scale(size.x, size.y, 1);
   AmjuGL::Draw(m_triList);
+  AmjuGL::PopMatrix();
 }
 
 void GuiImage::BuildTris()
@@ -36,10 +43,10 @@ void GuiImage::BuildTris()
 
   AmjuGL::Vert verts[4] = 
   {
-    AmjuGL::Vert(pos.x + size.x, pos.y - size.y, 0,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(pos.x + size.x, pos.y, 0,   1, 1,   0, 1, 0),
-    AmjuGL::Vert(pos.x, pos.y, 0,   0, 1,   0, 1, 0),
-    AmjuGL::Vert(pos.x, pos.y - size.y, 0,   0, 0,   0, 1, 0)
+    AmjuGL::Vert(1, -1, 0,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
+    AmjuGL::Vert(1,  0, 0,   1, 1,   0, 1, 0),
+    AmjuGL::Vert(0,  0, 0,   0, 1,   0, 1, 0),
+    AmjuGL::Vert(0, -1, 0,   0, 0,   0, 1, 0)
   };
 
   AmjuGL::Tris tris;

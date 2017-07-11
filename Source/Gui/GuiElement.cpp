@@ -1,12 +1,15 @@
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
+
 #include <AmjuFirst.h>
 #include <Colour.h>
+#include <DrawBorder.h>
+#include <EventPoller.h>
+#include <GuiElement.h>
+#include <GuiFactory.h>
+#include <LoadVec2.h>
 #include <Screen.h>
-#include "DrawBorder.h"
-#include "GuiElement.h"
-#include "GuiFactory.h"
-#include "StringUtils.h"
-#include "EventPoller.h"
-#include "LoadVec2.h"
+#include <StringUtils.h>
 #include <AmjuFinal.h>
 
 #define ENABLE_FOCUS_ELEMENT
