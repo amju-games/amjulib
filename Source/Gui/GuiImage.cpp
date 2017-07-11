@@ -27,9 +27,10 @@ void GuiImage::Draw()
   Assert(m_texture);
   m_texture->UseThisTexture();
 
-  AmjuGL::PushMatrix();
   const Vec2f& pos = GetCombinedPos();
   const Vec2f& size = GetSize();
+
+  AmjuGL::PushMatrix();
   AmjuGL::Translate(pos.x, pos.y, 0);
   AmjuGL::Scale(size.x, size.y, 1);
   AmjuGL::Draw(m_triList);
@@ -38,9 +39,6 @@ void GuiImage::Draw()
 
 void GuiImage::BuildTris()
 {
-  Vec2f size = GetSize();
-  Vec2f pos = GetCombinedPos();
-
   AmjuGL::Vert verts[4] = 
   {
     AmjuGL::Vert(1, -1, 0,   1, 0,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
