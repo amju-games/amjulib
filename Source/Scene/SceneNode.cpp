@@ -24,7 +24,7 @@ SceneNode::SceneNode()
   SetVisible(true);
   SetIsCamera(false);
   SetCollidable(true);
-  SetIsLit(false);
+  SetIsLit(true);
 }
 
 const std::string& SceneNode::GetName() const
@@ -96,14 +96,14 @@ std::cout << " child " << i << "... ";
   } 
 }
 
-void SceneNode::UpdateBoundingVol()
+void SceneNode::CalcBoundingVol()
 {
   unsigned int s = m_children.size();
   if (s > 0)
   {    
     for (unsigned int i = 0; i < s; i++)
     {
-      m_children[i]->UpdateBoundingVol();
+      m_children[i]->CalcBoundingVol();
       // Increase our box to fit the child
       m_aabb.Union(*(m_children[i]->GetAABB()));
     }
@@ -273,6 +273,19 @@ static const uint32 CAMERA     = 0x08;
 static const uint32 LIGHTING   = 0x10;
 static const uint32 Z_READ     = 0x20;
 static const uint32 Z_WRITE    = 0x40;
+static const uint32 SHOW_AABB  = 0x80;
+
+void SceneNode::SetOrClear(bool setNotClear, uint32 flag)
+{
+  if (setNotClear)
+  {
+    m_flags |= flag;
+  }
+  else
+  {
+    m_flags &= ~flag;
+  }
+}
 
 bool SceneNode::IsZReadEnabled() const
 {
@@ -289,27 +302,18 @@ bool SceneNode::IsZWriteEnabled() const
 void SceneNode::SetIsZReadEnabled(bool b)
 {
   // Flag == 0 means enabled
-  if (b)
-  {
-    m_flags &= ~Z_READ;
-  }
-  else
-  {
-    m_flags |= Z_READ;
-  }
+  SetOrClear(!b, Z_READ);
 }
 
 void SceneNode::SetIsZWriteEnabled(bool b)
 {
   // Flag == 0 means enabled
-  if (b)
-  {
-    m_flags &= ~Z_WRITE;
-  }
-  else
-  {
-    m_flags |= Z_WRITE;
-  }
+  SetOrClear(!b, Z_WRITE);
+}
+
+void SceneNode::SetShowAABB(bool b)
+{
+  SetOrClear(b, SHOW_AABB);
 }
 
 bool SceneNode::IsLit() const
@@ -319,14 +323,7 @@ bool SceneNode::IsLit() const
 
 void SceneNode::SetIsLit(bool b)
 {
-  if (b)
-  {
-    m_flags |= LIGHTING;
-  }
-  else
-  {
-    m_flags &= ~LIGHTING;
-  }
+  SetOrClear(b, LIGHTING);
 }
 
 bool SceneNode::IsVisible() const
@@ -351,49 +348,21 @@ bool SceneNode::IsCamera() const
 
 void SceneNode::SetVisible(bool b)
 {
-  if (b)
-  {
-    m_flags |= VISIBLE;
-  }
-  else
-  {
-    m_flags &= ~VISIBLE;
-  }
+  SetOrClear(b, VISIBLE);
 }
 
 void SceneNode::SetCollidable(bool b)
 {
-  if (b)
-  {
-    m_flags |= COLLIDABLE;
-  }
-  else
-  {
-    m_flags &= ~COLLIDABLE;
-  }
+  SetOrClear(b, COLLIDABLE);
 }
 
 void SceneNode::SetBlended(bool b)
 {
-  if (b)
-  {
-    m_flags |= BLENDED;
-  }
-  else
-  {
-    m_flags &= ~BLENDED;
-  }
+  SetOrClear(b, BLENDED);
 }
 
 void SceneNode::SetIsCamera(bool b)
 {
-  if (b)
-  {
-    m_flags |= CAMERA;
-  }
-  else
-  {
-    m_flags &= ~CAMERA;
-  }
+  SetOrClear(b, CAMERA);
 }
 }

@@ -17,6 +17,10 @@ SceneNode* SceneMesh::Create() { return new SceneMesh; }
 void SceneMesh::SetMesh(PObjMesh mesh)
 {
   m_mesh = mesh;
+  m_aabb = mesh->GetAABB();
+  CombineTransform();
+  m_aabb.Transform(GetCombinedTransform());
+  SetShowAABB(true);
 }
 
 const ObjMesh* SceneMesh::GetMesh() const
@@ -40,7 +44,6 @@ void SceneMesh::Draw()
   AmjuGL::MultMatrix(m_local);
   m_mesh->Draw();
   AmjuGL::PopMatrix();
-
   AmjuGL::PopAttrib();
 }
 
@@ -66,11 +69,12 @@ bool SceneMesh::Load(File* f)
   {
     return false;
   }
-  m_mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(s);
-  if (!m_mesh)
+  PObjMesh mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(s);
+  if (!mesh)
   {
     return false;
   }
+  SetMesh(mesh);
 
   // TODO Should a mesh node be able to have children ? 
   // I guess so..

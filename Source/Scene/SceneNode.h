@@ -37,8 +37,10 @@ public:
 
   virtual void CombineTransform();
 
-  // TODO Rename this. Currently makes this node' AABB the union of its child AABBs.
-  void UpdateBoundingVol();
+  // Combine descendant AABBs to make a BVH. Depends on AABB being set elsewhere,
+  //  and then RecursivelyTransformAABB called on tree. I.e. AABBs are in world
+  //  space here.
+  void CalcBoundingVol();
 
   // Transform this node's AABB by matrix m, then all children, recursively
   void RecursivelyTransformAABB(const Matrix& m);
@@ -103,6 +105,8 @@ protected:
   bool LoadChildren(File* f);
 
   void DrawMaterial();
+
+  void SetOrClear(bool setNotClear, uint32 flag);
 
 protected:
   friend class SceneGraph; // ???

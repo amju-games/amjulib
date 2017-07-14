@@ -103,7 +103,7 @@ SceneNode* TextMaker::MakeText(const std::string& text)
 
   // Makes this AABB union of child AABBs, need better name.
   // Also make this recursive 
-  comp->UpdateBoundingVol();
+  comp->CalcBoundingVol();
 
   // Do this after comp AABB is properly set
   comp->RecursivelyTransformAABB(m);
