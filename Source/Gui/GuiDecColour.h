@@ -9,8 +9,8 @@
 namespace Amju
 {
 // * GuiDecColour *
-// Decorator which sets colour for descendants. The colour can be animated,
-//  by interpolating between two colours.
+// Decorator which modulates the current colour for descendants. 
+// The colour can be animated, by interpolating between two colours.
 class GuiDecColour : public GuiDecorator
 {
 public:
@@ -26,4 +26,8 @@ protected:
   Colour m_colour[2];
   Colour m_interpolatedColour;
 };
+
+// TODO also a colour SETTER, so we can reset the current colour in the tree.
+// This would be useful if e.g. you fade out the whole tree but have some
+//  elements you don't want to fade.
 }

@@ -16,8 +16,8 @@ class GuiDecScale : public GuiDecorator
 public:
   static const char* NAME;
   virtual bool Load(File*) override;
+  virtual void Draw() override;
   virtual void Animate(float animValue) override;
-  virtual void Update() override;
 
 private:
   Vec2f m_scale[2];

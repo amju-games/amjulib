@@ -53,18 +53,12 @@ bool GuiDecScale::Load(File* f)
   return true;
 }
 
-void GuiDecScale::Update()
+void GuiDecScale::Draw()
 {
-  Vec2f pos = m_children[0]->GetLocalPos();
-
-  // With this one, pivot of (0, 0) is the centre
-  pos -= Vec2f(m_origChildSize.x * 0.5f * m_interpScale.x * (1.0f + m_pivot.x), -m_origChildSize.y * 0.5f * m_interpScale.y * (1.0f + m_pivot.y));
-
-//  pos -= Vec2f(m_origChildSize.x *  m_interpScale.x * (1.0f - m_pivot.x), -m_origChildSize.y *  m_interpScale.y * (1.0f + m_pivot.y));
-  SetLocalPos(pos);
-
-  Vec2f size(m_origChildSize.x * m_interpScale.x, m_origChildSize.y * m_interpScale.y);
-  m_children[0]->SetSize(size);
+  AmjuGL::PushMatrix();
+  AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1);
+  GuiDecorator::Draw();
+  AmjuGL::PopMatrix();
 }
 
 void GuiDecScale::Animate(float animValue)

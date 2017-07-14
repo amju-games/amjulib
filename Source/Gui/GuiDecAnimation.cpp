@@ -53,8 +53,6 @@ void GuiDecAnimation::Update()
   m_children[0]->Update();
 }
 
-
-
 void GuiDecAnimation::Animate(float animValue)
 {
   // This means the parent animation affects how fast this animation progresses.
