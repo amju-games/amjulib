@@ -1133,9 +1133,6 @@
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\Sign.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -1921,6 +1918,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\AmjuGL\Animator.h">
       <Filter>AmjuGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\Lerp.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -795,10 +795,10 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Utils\DegRad.h" />
     <ClInclude Include="..\..\..\Source\Utils\Factory.h" />
     <ClInclude Include="..\..\..\Source\Utils\Launcher.h" />
+    <ClInclude Include="..\..\..\Source\Utils\Lerp.h" />
     <ClInclude Include="..\..\..\Source\Utils\NonCopyable.h" />
     <ClInclude Include="..\..\..\Source\Utils\Pause.h" />
     <ClInclude Include="..\..\..\Source\Utils\RCPtr.h" />
-    <ClInclude Include="..\..\..\Source\Utils\SharedPtr.h" />
     <ClInclude Include="..\..\..\Source\Utils\Sign.h" />
     <ClInclude Include="..\..\..\Source\Utils\Singleton.h" />
     <ClInclude Include="..\..\..\Source\Utils\Unproject.h" />
