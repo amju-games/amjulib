@@ -37,9 +37,6 @@ public:
   void SetIsPaused(bool isPaused);
   bool IsPaused() const;
 
-  // Called from Update, and can be called separately for testing.
-  // dt is multiplied by m_timeMultiplier in this function.
-
 protected:
 
   bool m_isPaused = false;
