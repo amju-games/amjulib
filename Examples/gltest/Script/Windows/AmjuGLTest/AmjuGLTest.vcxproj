@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\BarrelDist.cpp" />
+    <ClCompile Include="..\..\..\Source\FireTexture.cpp" />
     <ClCompile Include="..\..\..\Source\Grid.cpp" />
     <ClCompile Include="..\..\..\Source\GSAnimTest.cpp" />
     <ClCompile Include="..\..\..\Source\GSBase.cpp" />
@@ -155,32 +156,47 @@
     <ClCompile Include="..\..\..\Source\GSFireTemple.cpp" />
     <ClCompile Include="..\..\..\Source\GSInitialise.cpp" />
     <ClCompile Include="..\..\..\Source\GSLighting.cpp" />
+    <ClCompile Include="..\..\..\Source\GSLoadLevel.cpp" />
     <ClCompile Include="..\..\..\Source\GSMain.cpp" />
     <ClCompile Include="..\..\..\Source\GSMandel.cpp" />
+    <ClCompile Include="..\..\..\Source\GSNormalMap.cpp" />
     <ClCompile Include="..\..\..\Source\GSObb2Test.cpp" />
     <ClCompile Include="..\..\..\Source\GSPatchwork.cpp" />
+    <ClCompile Include="..\..\..\Source\GSRayTrace.cpp" />
     <ClCompile Include="..\..\..\Source\GSRenderColourToTexture.cpp" />
     <ClCompile Include="..\..\..\Source\GSRenderDepthToTexture.cpp" />
     <ClCompile Include="..\..\..\Source\GSRenderTextureBase.cpp" />
     <ClCompile Include="..\..\..\Source\GSShaderWave.cpp" />
     <ClCompile Include="..\..\..\Source\GSShadow.cpp" />
     <ClCompile Include="..\..\..\Source\GSShadow2.cpp" />
+    <ClCompile Include="..\..\..\Source\GSTeapotBase.cpp" />
+    <ClCompile Include="..\..\..\Source\GSTemple.cpp" />
     <ClCompile Include="..\..\..\Source\GSTerrain.cpp" />
     <ClCompile Include="..\..\..\Source\GSTexture.cpp" />
     <ClCompile Include="..\..\..\Source\GSWater1.cpp" />
+    <ClCompile Include="..\..\..\Source\GSWater2.cpp" />
+    <ClCompile Include="..\..\..\Source\GSWaterBase.cpp" />
+    <ClCompile Include="..\..\..\Source\GSWaterTemple.cpp" />
+    <ClCompile Include="..\..\..\Source\Init.cpp" />
     <ClCompile Include="..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\Source\MouseHeadTracker.cpp" />
+    <ClCompile Include="..\..\..\Source\MySceneGraph.cpp" />
     <ClCompile Include="..\..\..\Source\OvrHeadTracker.cpp" />
     <ClCompile Include="..\..\..\Source\Patchwork.cpp" />
+    <ClCompile Include="..\..\..\Source\SceneNodeGrid.cpp" />
+    <ClCompile Include="..\..\..\Source\SceneNodeProcMesh.cpp" />
     <ClCompile Include="..\..\..\Source\simplexnoise.cpp" />
     <ClCompile Include="..\..\..\Source\simplextextures.cpp" />
     <ClCompile Include="..\..\..\Source\Startup.cpp" />
     <ClCompile Include="..\..\..\Source\StateList.cpp" />
+    <ClCompile Include="..\..\..\Source\TempleMesh.cpp" />
     <ClCompile Include="..\..\..\Source\TerrainPatch.cpp" />
     <ClCompile Include="..\..\..\Source\Tweakable.cpp" />
+    <ClCompile Include="..\..\..\Source\WithSceneNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\BarrelDist.h" />
+    <ClInclude Include="..\..\..\Source\FireTexture.h" />
     <ClInclude Include="..\..\..\Source\Grid.h" />
     <ClInclude Include="..\..\..\Source\GSAnimTest.h" />
     <ClInclude Include="..\..\..\Source\GSBase.h" />
@@ -191,27 +207,41 @@
     <ClInclude Include="..\..\..\Source\GSFireTemple.h" />
     <ClInclude Include="..\..\..\Source\GSInitialise.h" />
     <ClInclude Include="..\..\..\Source\GSLighting.h" />
+    <ClInclude Include="..\..\..\Source\GSLoadLevel.h" />
     <ClInclude Include="..\..\..\Source\GSMain.h" />
     <ClInclude Include="..\..\..\Source\GSMandel.h" />
+    <ClInclude Include="..\..\..\Source\GSNormalMap.h" />
     <ClInclude Include="..\..\..\Source\GSObb2Test.h" />
     <ClInclude Include="..\..\..\Source\GSPatchwork.h" />
+    <ClInclude Include="..\..\..\Source\GSRayTrace.h" />
     <ClInclude Include="..\..\..\Source\GSRenderColourToTexture.h" />
     <ClInclude Include="..\..\..\Source\GSRenderDepthToTexture.h" />
     <ClInclude Include="..\..\..\Source\GSRenderTextureBase.h" />
     <ClInclude Include="..\..\..\Source\GSShaderWave.h" />
     <ClInclude Include="..\..\..\Source\GSShadow.h" />
     <ClInclude Include="..\..\..\Source\GSShadow2.h" />
+    <ClInclude Include="..\..\..\Source\GSTeapotBase.h" />
+    <ClInclude Include="..\..\..\Source\GSTemple.h" />
     <ClInclude Include="..\..\..\Source\GSTerrain.h" />
     <ClInclude Include="..\..\..\Source\GSTexture.h" />
     <ClInclude Include="..\..\..\Source\GSWater1.h" />
+    <ClInclude Include="..\..\..\Source\GSWater2.h" />
+    <ClInclude Include="..\..\..\Source\GSWaterBase.h" />
+    <ClInclude Include="..\..\..\Source\GSWaterTemple.h" />
+    <ClInclude Include="..\..\..\Source\Init.h" />
     <ClInclude Include="..\..\..\Source\MouseHeadTracker.h" />
+    <ClInclude Include="..\..\..\Source\MySceneGraph.h" />
     <ClInclude Include="..\..\..\Source\OvrHeadTracker.h" />
     <ClInclude Include="..\..\..\Source\Patchwork.h" />
+    <ClInclude Include="..\..\..\Source\SceneNodeGrid.h" />
+    <ClInclude Include="..\..\..\Source\SceneNodeProcMesh.h" />
     <ClInclude Include="..\..\..\Source\simplexnoise.h" />
     <ClInclude Include="..\..\..\Source\simplextextures.h" />
     <ClInclude Include="..\..\..\Source\StateList.h" />
+    <ClInclude Include="..\..\..\Source\TempleMesh.h" />
     <ClInclude Include="..\..\..\Source\TerrainPatch.h" />
     <ClInclude Include="..\..\..\Source\Tweakable.h" />
+    <ClInclude Include="..\..\..\Source\WithSceneNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\3rdPartyLibs\LibOVR-0.3.2\Win\Lib\Win32\VS2013\libovrd.lib" />

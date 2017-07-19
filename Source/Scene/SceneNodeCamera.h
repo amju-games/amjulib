@@ -1,6 +1,7 @@
 #ifndef SCENE_NODE_CAMERA_H
 #define SCENE_NODE_CAMERA_H
 
+#include <array>
 #include <Camera.h> // in AmjuGL
 #include "SceneNode.h"
 
@@ -49,7 +50,8 @@ public:
 
 private:
   // fovy, aspect, near, far
-  float m_perspective[4];
+  //float m_perspective[4];
+  std::array<float, 4> m_perspective;
 };
 
 class SceneNodeCameraOrtho : public SceneNodeCamera
@@ -61,7 +63,8 @@ public:
   virtual bool Load(File*) override;
 
 private:
-  float m_ortho[6];
+  //float m_ortho[6];
+  std::array<float, 6> m_ortho;
 };
 
 typedef RCPtr<SceneNodeCamera> PSceneNodeCamera;
