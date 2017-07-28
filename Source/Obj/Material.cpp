@@ -197,5 +197,24 @@ void Material::UseThisMaterial()
   }
 }
 
+bool Material::HasFlagSet(uint32 flag) const
+{
+  return  m_flags & flag;
+}
+
+bool Material::IsBlended() const
+{
+  if (   HasFlagSet(AMJU_MATERIAL_USE_BLEND_FLAG)
+      && HasFlagSet(AMJU_MATERIAL_BLEND_ENABLED))
+  {
+    return true;
+  }
+  // Check for alpha channel in diffuse texture
+  if (m_texture[0] && m_texture[0]->GetBytesPerPixel() == 4)
+  {
+    return true; // texture has alpha channel
+  }
+  return false;
+}
 }
 

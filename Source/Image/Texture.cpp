@@ -74,6 +74,11 @@ int Texture::GetHeight() const
   return m_height;
 }
 
+int Texture::GetBytesPerPixel() const
+{
+  return m_bytesPerPixel;
+}
+
 bool Texture::Load(const std::string& filename)
 {
   unsigned int w = 0;
@@ -141,6 +146,7 @@ void Texture::Create(unsigned char* data, int w, int h, int bytesPerPixel)
   AmjuGL::SetTexture(&m_texId, AmjuGL::AMJU_TEXTURE_REGULAR, td, w, h, data);
   m_width = w;
   m_height = h;
+  m_bytesPerPixel = bytesPerPixel;
 }
 
 void Texture::UseThisTexture(int textureUnitId)

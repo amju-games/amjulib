@@ -52,6 +52,8 @@ struct Material : public RefCounted
 
   Material();
   void UseThisMaterial();
+  bool HasFlagSet(uint32 flag) const;
+  bool IsBlended() const;
 };
 
 using PMaterial = RCPtr<Material>;
