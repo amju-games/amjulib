@@ -299,9 +299,6 @@ void SceneGraph::Draw()
 
   Assert(m_root[AMJU_OPAQUE]);
 
-  // TODO We only need a stack, this is overkill I think.
-  m_root[AMJU_OPAQUE]->CombineTransform();
-
   SceneNode* node = m_root[AMJU_OPAQUE];
   Assert(node);
   Frustum::FrustumResult fr = m_frustum.Intersects(*(node->GetAABB()));
@@ -429,6 +426,8 @@ void SceneGraph::Update()
   Assert(m_root[AMJU_OPAQUE]);
   UpdateNode(m_root[AMJU_OPAQUE]);
   UpdateChildren(m_root[AMJU_OPAQUE]);
+
+  m_root[AMJU_OPAQUE]->CombineTransform();
 
   m_root[AMJU_OPAQUE]->CalcBoundingVol();
 

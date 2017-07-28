@@ -54,7 +54,9 @@ struct Material : public RefCounted
   void UseThisMaterial();
 };
 
-typedef std::vector<RCPtr<Material> > MaterialVec;
+using PMaterial = RCPtr<Material>;
+
+using MaterialVec = std::vector<PMaterial>;
 
 bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats);
 

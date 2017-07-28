@@ -16,7 +16,9 @@ SceneNode* SceneNode::Create() { return new SceneNode; }
 
 SceneNode::SceneNode()
 {
-  m_parent = 0;
+  // AABB is initially empty, not a point at origin (so union won't include origin)
+  const float M = 999999.9f;
+  m_aabb.Set(M, -M, M, -M, M, -M);
 
   // Set flags to most common values
   m_flags = 0;
@@ -27,6 +29,11 @@ SceneNode::SceneNode()
   SetIsLit(true);
 }
 
+void SceneNode::SetName(const std::string& name)
+{
+  m_name = name;
+}
+
 const std::string& SceneNode::GetName() const
 {
   return m_name;
@@ -35,22 +42,6 @@ const std::string& SceneNode::GetName() const
 void SceneNode::SetColour(const Colour& colour)
 {
   m_colour = colour;
-}
-
-void SceneNode::SetMaterial(PSceneNodeMaterial material)
-{
-  m_material = material;
-
-  // Set a uniform for each texture/colour/value in the shader
-  // TODO
-}
-
-void SceneNode::DrawMaterial()
-{
-  if (m_material)
-  {
-    m_material->Draw();
-  }
 }
 
 const AABB* SceneNode::GetAABB() const
@@ -171,7 +162,7 @@ bool SceneNode::LoadChildren(File* f)
       return false;
     }
 
-    m_children.push_back(p);
+    AddChild(p);
   }
   return true;
 }

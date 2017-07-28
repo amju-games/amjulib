@@ -8,7 +8,6 @@
 #include "Singleton.h"
 #include "AABB.h"
 #include "Colour.h"
-#include "SceneNodeMaterial.h"
 
 namespace Amju
 {
@@ -40,9 +39,10 @@ public:
   // Combine descendant AABBs to make a BVH. Depends on AABB being set elsewhere,
   //  and then RecursivelyTransformAABB called on tree. I.e. AABBs are in world
   //  space here.
-  void CalcBoundingVol();
+  virtual void CalcBoundingVol();
 
   // Transform this node's AABB by matrix m, then all children, recursively
+  // TODO CHECK IF THIS IS USED ANYWHERE, IT LOOKS WRONG
   void RecursivelyTransformAABB(const Matrix& m);
 
   virtual void BeforeDraw() {}
@@ -91,9 +91,8 @@ public:
 
   void SetColour(const Colour& colour);
 
-  void SetMaterial(PSceneNodeMaterial material);
-
   const std::string& GetName() const;
+  void SetName(const std::string& name);
 
   SceneNode* GetNodeByName(const std::string& name);
 
@@ -104,8 +103,6 @@ protected:
   // ? SceneGraph calls this ?
   bool LoadChildren(File* f);
 
-  void DrawMaterial();
-
   void SetOrClear(bool setNotClear, uint32 flag);
 
 protected:
@@ -113,15 +110,13 @@ protected:
 
   Matrix m_local;
   Matrix m_combined;
-  SceneNode* m_parent;
+  SceneNode* m_parent = nullptr;
   AABB m_aabb;
   uint32 m_flags;
   Colour m_colour;
 
   typedef std::vector<PSceneNode> Nodes;
   Nodes m_children;
-
-  PSceneNodeMaterial m_material;
 
   std::string m_name; // so we can get nodes by name (like Gui elements)
 };

@@ -18,6 +18,8 @@ public:
 
   virtual void CalcCollisionMesh(CollisionMesh* pCollMesh) const override;
   
+  virtual void CalcBoundingVol() override;
+
   void SetMesh(PObjMesh mesh);
   const ObjMesh* GetMesh() const;
 

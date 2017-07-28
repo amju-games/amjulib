@@ -93,7 +93,15 @@ void SceneMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
   m_mesh->CalcCollisionMesh(pCollMesh);
 }
 
- 
+void SceneMesh::CalcBoundingVol()
+{
+  Assert(m_mesh);
+  // Transform mesh local AABB into world space
+  m_aabb = m_mesh->GetAABB();
+  m_aabb.Transform(GetCombinedTransform());
+  SceneNode::CalcBoundingVol(); // union aabb with descendants' AABBs
+}
+
 // TODO Separate file
 const char* SceneMeshMaterial::NAME = "scene-mesh-material";
     
@@ -107,12 +115,15 @@ bool SceneMeshMaterial::Load(File* f)
     return false;
   }
   
-  m_mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFileName);
-  if (!m_mesh)
+  PObjMesh mesh = (ObjMesh*)TheResourceManager::Instance()->GetRes(meshFileName);
+  if (!mesh)
   {
     return false;
   }
-  
+  SetMesh(mesh);
+
+  SetName("SceneMeshMaterial: " + meshFileName);
+
   // Material
   std::string materialFileName;
   if (!f->GetDataLine(&materialFileName))

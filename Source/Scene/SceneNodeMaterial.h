@@ -3,27 +3,24 @@
 
 #pragma once
 
-#include <Texture.h>
-#include <Shader.h>
+#include <Material.h>
+#include <SceneNode.h>
 
 namespace Amju
 {
 // * SceneNodeMaterial *
-// Material which is set on a SceneNode.
-// Materials contain multiple textures, colours and float values, and a shader.
-// The textures and colours etc are used by the shader.
-class SceneNodeMaterial : public RefCounted
+// Scene node which sets a material.
+class SceneNodeMaterial : public SceneNode
 {
 public:
-  void SetTexture(PTexture tex); // basic: just diffuse
-  void SetTexture(PTexture tex, int index, const std::string& uniformName);
-  void SetShader(PShader shader);
+  void SetMaterial(PMaterial material); 
 
+  virtual bool Load(File*) override;
   // Use this material. Special materials can subclass if required.
-  virtual void Draw();
+  virtual void Draw() override;
 
 protected:
-  PTexture m_tex;
+  PMaterial m_material;
 };
 
 using PSceneNodeMaterial = RCPtr<SceneNodeMaterial>;
