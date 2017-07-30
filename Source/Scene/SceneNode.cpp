@@ -26,7 +26,6 @@ SceneNode::SceneNode()
   SetVisible(true);
   SetIsCamera(false);
   SetCollidable(true);
-  SetIsLit(true);
 }
 
 void SceneNode::SetName(const std::string& name)
