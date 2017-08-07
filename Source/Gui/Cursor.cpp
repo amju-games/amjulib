@@ -47,13 +47,13 @@ const Vec2f& Cursor::GetPos() const
   return m_pos;
 }
 
-bool Cursor::Load(int id, const Vec2f& hotspot)
+bool Cursor::Load(const std::string& imageResource, int id, const Vec2f& hotspot)
 {
   m_id = id;
   m_hotspot = hotspot;
 
   // TODO CONFIG
-  m_pTex = (Texture*)TheResourceManager::Instance()->GetRes("hand.png");
+  m_pTex = (Texture*)TheResourceManager::Instance()->GetRes(imageResource);
   Assert(m_pTex);
   return true;
 }

@@ -32,12 +32,12 @@ bool CursorManager::IsCursorIn(const Rect& rect, int* cursorIndex) const
   return false;
 }
 
-bool CursorManager::Load(const Vec2f& hotspot)
+bool CursorManager::Load(const std::string& imageResource, const Vec2f& hotspot)
 {
   for (int i = 0; i < NUM_CURSORS; i++)
   {
     m_cursors[i] = new Cursor;
-    if (!m_cursors[i]->Load(i, hotspot))
+    if (!m_cursors[i]->Load(imageResource, i, hotspot))
     {
       return false;
     }
