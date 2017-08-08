@@ -185,6 +185,7 @@ bool GuiButton::Load(File* f)
   // Use text BG colour to tint the button image, but don't draw a text background, which is a
   //  solid rectangle.
   SetButtonColour(m_guiText.GetBgCol());
+  SetFocusColour(m_guiText.GetBgCol());
   m_guiText.SetDrawBg(false);
 
 #if defined(WIN32) || defined(MACOSX)
@@ -233,7 +234,7 @@ void GuiButton::Draw()
       float dt = TheTimer::Instance()->GetDt();
       t += dt;
       float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      Colour c = m_focusColour * Colour(s, s, s, 1);
+      Colour c = Interpolate(m_focusColour, Colour(1, 1, 1, 1), s);
       MultColour(c);
     }
     else
