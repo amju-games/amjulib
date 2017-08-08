@@ -24,6 +24,10 @@ public:
   const ObjMesh* GetMesh() const;
 
 protected:
+  // Check materials for any which require blending - set flag on this node.
+  void SetBlendFlag();
+
+protected:
   // The mesh data - this is a Resource, so is held by the ResourceManager.
   // Multiple leaves can share the same mesh.
   PObjMesh m_mesh;

@@ -51,6 +51,21 @@ void SceneMesh::Update()
 {
 }
 
+void SceneMesh::SetBlendFlag()
+{
+  Assert(m_mesh);
+  MaterialVec vec;
+  m_mesh->GetMaterials(&vec);
+  for (const PMaterial& mat : vec)
+  {
+    if (mat->IsBlended())
+    {
+      SetBlended(true);
+      return;
+    }
+  }
+}
+
 bool SceneMesh::Load(File* f)
 {
   if (!f->GetDataLine(&m_name))
@@ -75,6 +90,7 @@ bool SceneMesh::Load(File* f)
     return false;
   }
   SetMesh(mesh);
+  SetBlendFlag();
 
   // TODO Should a mesh node be able to have children ? 
   // I guess so..
@@ -161,5 +177,6 @@ void SceneMeshMaterial::Draw()
 void SceneMeshMaterial::SetMaterial(const Material& m)
 {
   m_material = m;
+  SetBlended(m_material.IsBlended());
 }
 }
