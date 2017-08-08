@@ -1,27 +1,5 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: Factory.h,v $
-Revision 1.6  2008/06/07 13:41:57  jay
-MSVC rightly complains that we need <algorithm>
-
-Revision 1.5  2008/05/09 18:03:10  jay
-Work around gcc compile error, where iterator type not recognised
-
-Revision 1.4  2007/09/02 09:14:13  jay
-Temp fix for code which doesn't compile on Mac - luckily it's only needed
-for Scene Ed. The compile error is no help, and it compiles OK in MSVC.
-GCC doesn't like the map iterator declaration.
-
-Revision 1.3  2007/08/29 22:21:30  jay
-Add extra template for Key type; add function to list all Keys
-
-Revision 1.2  2006/09/10 22:42:58  jay
-Make Create() virtual
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
-*/
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
 
 #ifndef FACTORY_H_INCLUDED
 #define FACTORY_H_INCLUDED
