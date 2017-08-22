@@ -56,6 +56,9 @@ public:
   // Subclasses should call this to pass the messsage down.
   virtual void ResetAnimation() override;
 
+  // Called when animation loops. Composite/decorators must pass this along to children.
+  virtual void OnResetAnimation() override;
+
 protected:
   bool LoadChildren(File*);
   bool LoadOneChild(File*);

@@ -128,6 +128,11 @@ static float EaseInOutElastic(float t)
   return t; // TODO
 }
 
+bool Animator::DidReset() const
+{
+  return m_didReset;
+}
+
 void Animator::CalcUpdate(float dt)
 {
   m_time += dt * m_timeMultiplier;
@@ -157,8 +162,10 @@ void Animator::CalcUpdate(float dt)
     break;
   }
 
+  m_didReset = false;
   if (m_time > m_cycleTime)
   {
+    m_didReset = true;
     switch (m_loopType)
     {
     case LoopType::LOOP_TYPE_CONST:

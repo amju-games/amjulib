@@ -21,6 +21,9 @@ public:
 
   void CalcUpdate(float dt);
 
+  // Returns true if the last call to CalcUpdate caused the animation to reset
+  bool DidReset() const;
+
   enum class LoopType
   {
     LOOP_TYPE_CONST,
@@ -76,6 +79,8 @@ protected:
   float m_timeMultiplier = 1.0f;
 
   bool m_reverse = false;
+
+  bool m_didReset = false;
 };
 }
 

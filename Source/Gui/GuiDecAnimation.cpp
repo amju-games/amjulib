@@ -46,6 +46,11 @@ void GuiDecAnimation::Update()
   float dt = TheTimer::Instance()->GetDt();
   Animator::CalcUpdate(dt);
 
+  if (Animator::DidReset())
+  {
+    OnResetAnimation();
+  }
+
   // Animate descendants
   m_children[0]->Animate(m_reverse ? 1.f - m_value : m_value);
 
@@ -66,6 +71,8 @@ void GuiDecAnimation::ResetAnimation()
 {
   m_time = 0;
   GuiComposite::ResetAnimation();
+
+  OnResetAnimation();
 }
 
 void GuiDecAnimation::SetIsPaused(bool isPaused)

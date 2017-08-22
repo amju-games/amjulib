@@ -100,6 +100,9 @@ public:
   // Reset animation time to zero. Composite/decorators must pass this along to children.
   virtual void ResetAnimation() {}
 
+  // Called when animation loops. Composite/decorators must pass this along to children.
+  virtual void OnResetAnimation() {}
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)

@@ -514,4 +514,13 @@ void GuiComposite::ResetAnimation()
     ch->ResetAnimation();
   }
 }
+
+void GuiComposite::OnResetAnimation()
+{
+  for (auto ch : m_children)
+  {
+    ch->OnResetAnimation();
+  }
+}
+
 }
