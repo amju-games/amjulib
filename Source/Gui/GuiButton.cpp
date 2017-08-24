@@ -244,10 +244,12 @@ void GuiButton::Draw()
 
     Rect r = GetRect(this);
     float BORDER = 0.025f; // TODO configurable
-    float xmin = r.GetMin(0) - BORDER;
-    float xmax = r.GetMax(0) + BORDER;
-    float ymin = r.GetMin(1) - BORDER;
-    float ymax = r.GetMax(1) + BORDER;
+    float bh = BORDER;
+    float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
+    float xmin = r.GetMin(0) - bw;
+    float xmax = r.GetMax(0) + bw;
+    float ymin = r.GetMin(1) - bh;
+    float ymax = r.GetMax(1) + bh;
     r.Set(xmin, xmax, ymin, ymax);
     
     m_focusImage.SetParent(0);
