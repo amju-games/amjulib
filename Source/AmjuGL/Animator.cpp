@@ -165,7 +165,6 @@ void Animator::CalcUpdate(float dt)
   m_didReset = false;
   if (m_time > m_cycleTime)
   {
-    m_didReset = true;
     switch (m_loopType)
     {
     case LoopType::LOOP_TYPE_CONST:
@@ -175,6 +174,8 @@ void Animator::CalcUpdate(float dt)
       m_value = 1.0f;
       break;
     case LoopType::LOOP_TYPE_REPEAT:
+      m_didReset = true;
+
       m_time -= m_cycleTime;
       m_value -= 1.0f;
       break;
@@ -182,6 +183,8 @@ void Animator::CalcUpdate(float dt)
       // Pobably only works with step and linear
       if (m_time > 2.0f * m_cycleTime)
       {
+        m_didReset = true;
+
         m_time -= 2.0f * m_cycleTime;
         m_value -= 2.0f;
       }
