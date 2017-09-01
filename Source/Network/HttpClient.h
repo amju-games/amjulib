@@ -46,8 +46,13 @@ public:
   const unsigned char* GetData() const;
   unsigned int Size() const;
 
+  // Return true if we got a reponse - but that's not to say it was a success..
   bool GetSuccess() const;
   std::string GetErrorString() const;
+
+  // Get HTTP code, e.g. 404 for not found, 200 for OK, etc.
+  // Returns 0 if no code can be found in the response.
+  int GetHttpResponseCode() const;
 
 private:
   std::string m_data;

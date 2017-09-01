@@ -70,6 +70,16 @@ std::string HttpResult::GetErrorString() const
   return m_errorStr;
 }
 
+int HttpResult::GetHttpResponseCode() const
+{
+  Strings strs = Split(GetString(), ' ');
+  if (strs.size() > 2)
+  {
+    int httpCode = ToInt(strs[1]);
+    return httpCode;
+  }
+  return 0;
+}
 
 static std::string s_proxyName;
 static int s_proxyPort = -1;
