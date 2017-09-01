@@ -6,6 +6,7 @@
 namespace Amju
 {
 static std::string s_ROConfigFilename = "roconfig.txt";
+static const bool NO_ROOT = false;
 
 //void SaveROConfig()
 //{
@@ -23,7 +24,6 @@ ConfigFile* ROConfig()
   if (!cf)
   {
     cf = new ConfigFile;
-    bool NO_ROOT = false;
 
     if (!cf->Load(s_ROConfigFilename, NO_ROOT))
     {
@@ -36,4 +36,13 @@ ConfigFile* ROConfig()
   return cf;
 }
 
+void ReloadROConfig()
+{
+  ConfigFile* ro = ROConfig();
+  ro->Clear();
+  if (!ro->Load(s_ROConfigFilename, NO_ROOT))
+  {
+    Assert(0);
+  }
+}
 }
