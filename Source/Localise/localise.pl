@@ -79,6 +79,33 @@ sub MaybeLocalise($)
   }
 }
 
+# * AddToStringTable *
+# Add string only if it does not already exist in the string table.
+# Return the ID of the string.
+sub AddToStringTable($)
+{
+  my $strToAdd = shift;
+  print "Adding string $strToAdd to table.. ";
+
+  my @keys = sort { $a <=> $b } keys %stringHash;
+  foreach my $key (@keys)
+  {
+    my $value = $stringHash{$key};
+    if ($value eq $strToAdd)
+    {
+      print "already exists! ID: $key\n";
+      return $key;
+    }
+  }
+  
+  my $id = $highestId;
+  $stringHash{$highestId} = $strToAdd;
+  $highestId++;
+
+  print "adding, ID: $id\n";
+  return $id;
+}
+
 sub LocaliseFile($)
 {
   # Read file to localise
@@ -105,7 +132,7 @@ sub LocaliseFile($)
   foreach my $line (@linesToLocalise)
   {
     chomp($line);
-    print "Considering line: '$line'\n";
+    #print "Considering line: '$line'\n";
 
     # Look for strings to localise
     # NB Question mark: non-greedy match, in case there is more than one
@@ -119,12 +146,13 @@ sub LocaliseFile($)
       my $newString = $1; # first group, i.e. the (.*) in match above
       print "New string: $newString\n";
 
-      $stringHash{$highestId} = $newString;
+      ####$stringHash{$highestId} = $newString;
+      my $id = AddToStringTable($newString);
 
       # Allocate new ID
       my $localised = $line;
-      $localised =~ s/@@@.*/\/\/ $newString\n\$\$\$$highestId/;
-      $highestId++;
+      $localised =~ s/@@@.*/\/\/ $newString\n\$\$\$$id/;
+      ###$highestId++;
       print "Localised: $localised\n";
 
       $linesToLocalise[$lineNum] = $localised;
@@ -141,11 +169,12 @@ sub LocaliseFile($)
       my $after = $3;
       print "Found substr to localise: $newString\n";
 
-      $stringHash{$highestId} = $newString;
+      ###$stringHash{$highestId} = $newString;
+      my $id = AddToStringTable($newString);
 
       # Replace second group with localise code
-      my $localised = "$before=\$\$\$$highestId=$after"; 
-      $highestId++;
+      my $localised = "$before=\$\$\$$id=$after"; 
+      ###$highestId++;
       print "Localised: $localised\n";
       $line = $localised;
 
@@ -159,11 +188,12 @@ sub LocaliseFile($)
       my $before = $1;
       my $newString = $2; # second group, i.e. the (.*?) in match above
 
-      $stringHash{$highestId} = $newString;
+      ###$stringHash{$highestId} = $newString;
+      my $id = AddToStringTable($newString);
 
       # Allocate new ID
-      my $localised = "$before=\$\$\$$highestId";
-      $highestId++;
+      my $localised = "$before=\$\$\$$id";
+      ###$highestId++;
       print "Localised: $localised\n";
 
       $linesToLocalise[$lineNum] = $localised;
@@ -179,12 +209,13 @@ sub LocaliseFile($)
       my $newString = $1; # first group, i.e. the (.*) in match above
       print "New string: $newString\n";
 
-      $stringHash{$highestId} = $newString;
+      ###$stringHash{$highestId} = $newString;
+      my $id = AddToStringTable($newString);
 
       # Allocate new ID
       my $localised = $line;
-      $localised =~ s/\"@@@.*?\"/\"\$\$\$$highestId\" \/\* $newString \*\//;
-      $highestId++;
+      $localised =~ s/\"@@@.*?\"/\"\$\$\$$id\" \/\* $newString \*\//;
+      ###$highestId++;
       print "Localised: $localised\n";
 
       $linesToLocalise[$lineNum] = $localised;
