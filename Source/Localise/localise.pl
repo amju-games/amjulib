@@ -105,6 +105,7 @@ sub LocaliseFile($)
   foreach my $line (@linesToLocalise)
   {
     chomp($line);
+    print "Considering line: '$line'\n";
 
     # Look for strings to localise
     # NB Question mark: non-greedy match, in case there is more than one
@@ -130,7 +131,48 @@ sub LocaliseFile($)
       $wasChanged = 1;
     }
 
+    # Dictionary-style text files, where a string following = should be localised.
+    # There could be more than one such string on a line, e.g. a =@@@b =@@@c
+    while ($line =~ /^(.*?)=@@@(.*?)=(.*)$/)
+    {
+      # Add the new string to the string table.
+      my $before = $1;
+      my $newString = $2; # SECOND group, i.e. the SECOND (.*?) in match above
+      my $after = $3;
+      print "Found substr to localise: $newString\n";
+
+      $stringHash{$highestId} = $newString;
+
+      # Replace second group with localise code
+      my $localised = "$before=\$\$\$$highestId=$after"; 
+      $highestId++;
+      print "Localised: $localised\n";
+      $line = $localised;
+
+      $linesToLocalise[$lineNum] = $localised;
+      $wasChanged = 1;
+    }
+
+    # Handle final =@@@  in a dictionary line
+    if ($line =~ /(.*)=@@@(.*?)$/)
+    {
+      my $before = $1;
+      my $newString = $2; # second group, i.e. the (.*?) in match above
+
+      $stringHash{$highestId} = $newString;
+
+      # Allocate new ID
+      my $localised = "$before=\$\$\$$highestId";
+      $highestId++;
+      print "Localised: $localised\n";
+
+      $linesToLocalise[$lineNum] = $localised;
+      $wasChanged = 1;
+    }
+
+
     # C code, where the line may contain one or more strings in quotes
+    # TODO How come this while loop terminates if it doesn't change $line?????
     while ($line =~ /\"@@@(.*?)\"/)
     {
       # Add the new string to the string table.
