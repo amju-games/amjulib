@@ -37,8 +37,8 @@ void MessageQueue::Update()
 
     if (pm->m_time < m_time)
     {
-      pm->Execute();
       m_q.erase(m_q.begin());
+      pm->Execute();
     }
     else
     {
