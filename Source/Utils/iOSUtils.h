@@ -7,6 +7,8 @@
 
 namespace Amju
 {
+std::string GetDevicePreferredLanguage();
+  
 enum iOSDeviceType { AMJU_IPAD, AMJU_IPHONE };
 iOSDeviceType GetDeviceType();
 

@@ -8,6 +8,15 @@
 
 namespace Amju
 {
+std::string GetDevicePreferredLanguage()
+{
+  // https://stackoverflow.com/questions/3910244/getting-current-device-language-in-ios
+  
+  NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+  std::string s([language UTF8String]);
+  return s;
+}
+  
 iOSDeviceType GetDeviceType()
 {
   static iOSDeviceType t = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ?
