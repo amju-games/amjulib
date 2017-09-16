@@ -71,15 +71,10 @@ void GuiText::SizeToText()
     {
       float w = GetTextWidth(m_lines[i]);
       longest = std::max(longest, w);
-
-      //if (size > longest)
-      //{
-      //  longest = size;
-      //}
     }
 
     Vec2f size(
-      longest * m_textSize, //?? * m_scaleX, 
+      longest, 
       (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
 
     SetSize(size);
