@@ -1,14 +1,15 @@
 #include <AmjuFirst.h>
+#include <algorithm>
 #include <AmjuGL.h>
-#include <TriList.h>
-#include "GuiText.h"
-#include "Font.h"
-#include "DrawRect.h"
 #include <Colour.h>
+#include "DrawBorder.h"
+#include "DrawRect.h"
+#include "Font.h"
+#include "GuiText.h"
 #include <StringUtils.h>
 #include <Timer.h>
 #include <TextToSpeech.h>
-#include "DrawBorder.h"
+#include <TriList.h>
 #include <AmjuFinal.h>
 
 //#define TEXT_RECT_DEBUG
@@ -68,13 +69,19 @@ void GuiText::SizeToText()
     float longest = 0;
     for (unsigned int i = 0; i < m_lines.size(); i++)
     {
-      float size = GetTextWidth(m_lines[i]) * m_textSize;
-      if (size > longest)
-      {
-        longest = size;
-      }
+      float w = GetTextWidth(m_lines[i]);
+      longest = std::max(longest, w);
+
+      //if (size > longest)
+      //{
+      //  longest = size;
+      //}
     }
-    Vec2f size(longest, (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
+
+    Vec2f size(
+      longest * m_textSize, //?? * m_scaleX, 
+      (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
+
     SetSize(size);
   }
   else
@@ -471,7 +478,8 @@ void GuiText::SetText(const std::string& text)
     // Replace the string "\n" with newline character
     m_text = Replace(m_text, "\\n", "\n");
 
-    m_lines = WordWrap(m_text, GetSize().x / m_textSize, WidthFinder(this));
+    float availWidth = GetSize().x;
+    m_lines = WordWrap(m_text, availWidth, WidthFinder(this));
   }
 
   m_currentChar = 0;
