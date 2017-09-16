@@ -243,7 +243,7 @@ void GuiButton::Draw()
     }
 
     Rect r = GetRect(this);
-    float BORDER = 0.025f; // TODO configurable
+    float BORDER = 0.05f; // TODO configurable
     float bh = BORDER;
     float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
     float xmin = r.GetMin(0) - bw;
