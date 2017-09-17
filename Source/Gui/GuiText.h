@@ -42,7 +42,11 @@ public:
   void SetScaleX(float scaleX);
   float GetScaleX() const;
 
-  void SizeToText(); // changes size to accomodate text
+  // Calc size for SizeToText, but don't actually resize
+  Vec2f CalcSizeToText() const;
+
+  // Change size to fit text exactly
+  void SizeToText();
 
   // Call to decide which bits of the text fit in the bounding rect
   void RecalcFirstLast();
@@ -74,7 +78,7 @@ protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
 
   friend struct WidthFinder;
-  float GetTextWidth(const std::string& text);
+  float GetTextWidth(const std::string& text) const;
 
   // Called twice from Draw, for drop shadow
   void ReallyDraw();

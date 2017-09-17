@@ -19,7 +19,7 @@ namespace Amju
 const char* GuiText::NAME = "gui-text";
 
 // I.e. character at font size 1 takes up 1/20th of the screen height
-const float GuiText::CHAR_HEIGHT_FOR_SIZE_1 = 0.1f; 
+const float GuiText::CHAR_HEIGHT_FOR_SIZE_1 = 0.1f;
 
 GuiText::GuiText()
 {
@@ -62,7 +62,7 @@ void GuiText::TextToSpeech()
 #endif
 }
 
-void GuiText::SizeToText()
+Vec2f GuiText::CalcSizeToText() const
 {
   if (IsMulti())
   {
@@ -74,16 +74,21 @@ void GuiText::SizeToText()
     }
 
     Vec2f size(
-      longest, 
-      (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
+      longest,
+      (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize);
 
-    SetSize(size);
+    return size;
   }
   else
   {
-    Vec2f size(GetTextWidth(m_text) * m_textSize, CHAR_HEIGHT_FOR_SIZE_1 * m_textSize); 
-    SetSize(size);
+    Vec2f size(GetTextWidth(m_text), CHAR_HEIGHT_FOR_SIZE_1 * m_textSize);
+    return size;
   }
+}
+
+void GuiText::SizeToText()
+{
+  SetSize(CalcSizeToText());
 }
 
 void GuiText::SetCharTime(float secs)
@@ -506,9 +511,9 @@ void GuiText::SetIsMulti(bool multi)
   RecalcFirstLast();
 }
 
-float GuiText::GetTextWidth(const std::string& text)
+float GuiText::GetTextWidth(const std::string& text) const
 {
-  float textWidth = GetFont()->GetTextWidth(text);
+  float textWidth = const_cast<GuiText*>(this)->GetFont()->GetTextWidth(text);
   return textWidth * m_scaleX * m_textSize;
 }
 
