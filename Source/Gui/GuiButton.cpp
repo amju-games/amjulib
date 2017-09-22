@@ -234,7 +234,8 @@ void GuiButton::Draw()
       float dt = TheTimer::Instance()->GetDt();
       t += dt;
       float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      Colour c = Interpolate(m_focusColour, Colour(1, 1, 1, 1), s);
+      Colour fg = m_guiText.GetFgCol();
+      Colour c = Interpolate(m_focusColour, fg, s);
       MultColour(c);
     }
     else
