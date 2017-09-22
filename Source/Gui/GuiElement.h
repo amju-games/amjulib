@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <functional>
 #include <vector>
 #include <EventListener.h>
 #include <File.h>
@@ -17,7 +18,7 @@ namespace Amju
 //  function, to implement a lightweight action.
 // For undoable commands, or commands requiring more data, there is the 
 //  more heavyweight GuiCommand class.
-typedef void (*CommandFunc)(GuiElement*);
+using CommandFunc = std::function<void(GuiElement*)>;
 
 // * GuiElement *
 // Base class for GUI classes. Subclasses represent specific kinds of
