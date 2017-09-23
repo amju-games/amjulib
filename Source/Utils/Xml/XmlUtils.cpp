@@ -17,7 +17,7 @@ Added to repository
 #pragma warning(disable: 4786)
 #endif
 
-#include "XMLUtils.h"
+#include "XmlUtils.h"
 #include <string>
 #include <vector>
 #include <stdlib.h>

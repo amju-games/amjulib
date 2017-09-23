@@ -12,9 +12,9 @@ public:
   static const char* NAME;
   static SceneNode* Create();
 
-  virtual void Draw();
-  virtual void Update();
-  virtual bool Load(File*);
+  virtual void Draw() override;
+  virtual void Update() override;
+  virtual bool Load(File*) override;
 
   virtual void CalcCollisionMesh(CollisionMesh* pCollMesh) const override;
   

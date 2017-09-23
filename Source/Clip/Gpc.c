@@ -45,7 +45,7 @@ Copyright: (C) 1997-1999, Advanced Interfaces Group,
 #endif// WIN32
 
 
-#include "gpc.h"
+#include "Gpc.h"
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>

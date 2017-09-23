@@ -132,7 +132,7 @@ Strings WordWrap(std::string ss, float maxW, WIDTH_FINDER t)
       else
       {
         // Search backwards in s until we find the last space.
-        for (int i = s.size() - 1; i >= 0; i--)
+        for (int i = static_cast<int>(s.size()) - 1; i >= 0; i--)
         {
           if (s[i] == ' ')
           {

@@ -51,10 +51,10 @@ void GuiScrollBar::SetInnerRect()
   // Set the position and size of m_bar
   if (m_isVertical)
   {
-    Vec2f pos = GetLocalPos(); // pos.y is top
+    //Vec2f pos = GetLocalPos(); // pos.y is top
     Vec2f size = GetSize();
     float w = size.x;
-    float h = m_scrollPropVisible * size.y;
+    //float h = m_scrollPropVisible * size.y;
 //    float x = pos.x;
 //    float y = pos.y - m_scrollPos * size.y;
     m_bar->SetSize(Vec2f(w, 0.1f)); //h));

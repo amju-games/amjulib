@@ -253,7 +253,7 @@ bool File::Write(const std::string& text)
 
   if (m_isBinary)
   {
-    WriteBinary(text.c_str(), text.length());
+    WriteBinary(text.c_str(), static_cast<int>(text.length()));
     WriteBinary("\0", 1);
 
     //m_os.write(text.c_str(), text.length());
@@ -261,7 +261,7 @@ bool File::Write(const std::string& text)
   }
   else
   {
-    WriteBinary(text.c_str(), text.length());
+    WriteBinary(text.c_str(), static_cast<int>(text.length()));
     WriteBinary("\n", 1); 
 
     //m_os << text.c_str() << endl;
@@ -480,7 +480,7 @@ bool File::GetInteger(int* pResult)
 #if defined(_DEBUG) || defined(SCENE_EDITOR)
   // Check this is an integer - i.e. is a sequence of digits.
   int s = 0;
-  int len = str.size();
+  std::string::size_type len = str.size();
   Assert(len > 0); // GetDataLine() should not return an empty line
   // Leading minus sign is ok, as long as it is followed by a number.
   if (str[0] == '-')

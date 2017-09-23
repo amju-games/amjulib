@@ -88,7 +88,7 @@ void GuiScroll::Update()
   GuiComposite::Update();
 
   Assert(m_children.size() == 1);
-  GuiElement* child = m_children[0];
+  //GuiElement* child = m_children[0];
 
   float dt = TheTimer::Instance()->GetDt();
   static const float DECEL = 0.5f; // TODO

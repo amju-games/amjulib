@@ -529,11 +529,11 @@ void AmjuGLOpenGLES2::DrawLine(const AmjuGL::Vec3& v1, const AmjuGL::Vec3& v2)
 {
   AMJU_CALL_STACK;
 
-  AmjuGL::Vert v[2] =
-  {
-    AmjuGL::Vert(v1.m_x, v1.m_y, v1.m_z, 0, 0,  0, 1, 0),
-    AmjuGL::Vert(v2.m_x, v2.m_y, v2.m_z, 0, 0,  0, 1, 0)
-  };
+//  AmjuGL::Vert v[2] =
+//  {
+//    AmjuGL::Vert(v1.m_x, v1.m_y, v1.m_z, 0, 0,  0, 1, 0),
+//    AmjuGL::Vert(v2.m_x, v2.m_y, v2.m_z, 0, 0,  0, 1, 0)
+//  };
 
 
   // TODO!
