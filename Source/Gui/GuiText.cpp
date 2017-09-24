@@ -237,7 +237,14 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
   
   Vec2f pos = GetCombinedPos();
 
-  float y = pos.y - m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
+  float y = pos.y -m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
+
+  if (true /* vertically centred */)
+  {
+    float yoff = GetSize().y - lines * m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
+    y -= yoff * 0.5f;
+  }
+
   // The extra fudge factor here is so we don't discard the last line
   //  when it fits ok, because it's a borderline case.
   float minY = pos.y - GetSize().y - 0.01f;
