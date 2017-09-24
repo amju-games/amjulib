@@ -56,7 +56,9 @@ bool GuiDecScale::Load(File* f)
 void GuiDecScale::Draw()
 {
   AmjuGL::PushMatrix();
+  AmjuGL::Translate(m_pivot.x, m_pivot.y, 0);
   AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1);
+  AmjuGL::Translate(-m_pivot.x, -m_pivot.y, 0);
   GuiDecorator::Draw();
   AmjuGL::PopMatrix();
 }
