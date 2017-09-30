@@ -6,6 +6,12 @@
 
 namespace Amju
 {
+Rect EmptyRect()
+{
+  const float F = 99999.9f;
+  return Rect(F, -F, F, -F);
+}
+
 Rect::Rect() : m_xmin(0), m_xmax(0), m_ymin(0), m_ymax(0)
 {
 }
@@ -42,12 +48,31 @@ void Rect::SetIf(float x, float y)
   if (y > m_ymax) m_ymax = y;
 }
 
+void Rect::Union(const Rect& r)
+{
+  SetIf(r.m_xmax, r.m_ymax);
+  SetIf(r.m_xmin, r.m_ymin);
+}
+
 void Rect::Translate(float x, float y)
 {
   m_xmin += x;
   m_xmax += x;
   m_ymin += y;
   m_ymax += y;
+}
+
+void Rect::Scale(float x, float y)
+{
+  m_xmin *= x;
+  m_xmax *= x;
+  m_ymin *= y;
+  m_ymax *= y;
+}
+
+Vec2f Rect::GetSize() const
+{
+  return Vec2f(m_xmax - m_xmin, m_ymax - m_ymin);
 }
 
 float Rect::GetMin(int axis) const

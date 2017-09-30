@@ -46,6 +46,8 @@ public:
   // Calc size from union of size of all descendents
   void SetSizeFromChildren();
 
+  virtual Rect CalcRect() const override;
+
   // Set visibility for self and children
   virtual void SetAncestorsVisible(bool ancestorVis) override;
   

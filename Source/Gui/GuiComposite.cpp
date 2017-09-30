@@ -25,9 +25,8 @@ GuiComposite::~GuiComposite()
 void GuiComposite::SetSizeFromChildren()
 {
   Vec2f size;
-  for (unsigned int i = 0; i < m_children.size(); i++)
+  for (GuiElement* child : m_children) //unsigned int i = 0; i < m_children.size(); i++)
   {
-    GuiElement* child = m_children[i];
     Vec2f chSize = child->GetSize();
     Vec2f chPos = child->GetCombinedPos();
     chPos.x = fabs(chPos.x); // any offset increases size?? Is this right?? TODO
@@ -38,6 +37,16 @@ void GuiComposite::SetSizeFromChildren()
     size.y = std::max(size.y, chSize.y);
   }
   SetSize(size);
+}
+
+Rect GuiComposite::CalcRect() const
+{
+  Rect r(EmptyRect());
+  for (GuiElement* child : m_children)
+  {
+    r.Union(child->CalcRect());
+  }
+  return r;
 }
 
 int GuiComposite::GetNumChildren() const
@@ -148,8 +157,6 @@ bool GuiComposite::Load(File* f)
   {
     return false;
   }
-
-  SetSizeFromChildren();
 
   return true;
 }

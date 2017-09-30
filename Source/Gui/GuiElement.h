@@ -62,6 +62,9 @@ public:
   void SetSize(const Vec2f&);
   Vec2f GetSize() const;
 
+  // Calculate bounding rectangle
+  virtual Rect CalcRect() const;
+
   // Scale factor so entire GUI can be zoomed in for accessibility
   static void SetGlobalScale(float f);
   static float GetGlobalScale();

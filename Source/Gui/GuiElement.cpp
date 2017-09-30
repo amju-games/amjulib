@@ -140,12 +140,17 @@ bool GuiElement::IsTextToSpeechEnabled()
   return textToSpeechEnabled;
 }
 
-Rect GetRect(GuiElement* elem)
+Rect GuiElement::CalcRect() const
 {
-  Vec2f pos = elem->GetCombinedPos();
-  Vec2f size = elem->GetSize();
+  Vec2f pos = GetCombinedPos();
+  Vec2f size = GetSize();
 
   return Rect(pos.x, pos.x + size.x, pos.y - size.y, pos.y);
+}
+
+Rect GetRect(GuiElement* elem)
+{
+  return elem->CalcRect();
 }
 
 GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName)
