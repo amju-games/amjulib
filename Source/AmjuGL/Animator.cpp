@@ -133,6 +133,11 @@ bool Animator::DidReset() const
   return m_didReset;
 }
 
+void Animator::SetOnCompleteCallback(AnimCallback cb)
+{
+  m_onComplete = cb;
+}
+
 void Animator::CalcUpdate(float dt)
 {
   m_time += dt * m_timeMultiplier;
@@ -172,6 +177,11 @@ void Animator::CalcUpdate(float dt)
       break;
     case LoopType::LOOP_TYPE_ONE_SHOT:
       m_value = 1.0f;
+      // Anim has completed - call callback if there is one
+      if (m_onComplete)
+      {
+        m_onComplete(this);
+      }
       break;
     case LoopType::LOOP_TYPE_REPEAT:
       m_didReset = true;

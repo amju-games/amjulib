@@ -3,11 +3,17 @@
 
 #pragma once
 
+#include <functional>
 #include <string>
 
 namespace Amju
 {
+class Animator;
 class File;
+
+// * AnimCallback *
+// Function type for calalback when anim completes, etc.
+using AnimCallback = std::function<void(Animator*)>;
 
 // * Animator *
 // Mixin class which calculates animation curves.
@@ -23,6 +29,10 @@ public:
 
   // Returns true if the last call to CalcUpdate caused the animation to reset
   bool DidReset() const;
+
+  // Set a callback function which will be called when the anim completes.
+  // Only applies to one-shot anims.
+  void SetOnCompleteCallback(AnimCallback cb);
 
   enum class LoopType
   {
@@ -81,6 +91,9 @@ protected:
   bool m_reverse = false;
 
   bool m_didReset = false;
+
+  // Call when anim completes
+  AnimCallback m_onComplete;
 };
 }
 
