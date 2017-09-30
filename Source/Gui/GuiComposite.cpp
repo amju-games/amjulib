@@ -144,7 +144,14 @@ bool GuiComposite::Load(File* f)
   SetName(name);
 
   // No pos and size, so not using base class impl
-  return LoadChildren(f);
+  if (!LoadChildren(f))
+  {
+    return false;
+  }
+
+  SetSizeFromChildren();
+
+  return true;
 }
 
 bool GuiComposite::LoadChildren(File* f)
