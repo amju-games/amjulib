@@ -4,7 +4,7 @@ export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS 
 
 export PLAT=macosx
 export VERSION=`../MakeVersionString.pl ../../Source/Version.h`
-export DEST_DIR=../../Releases/amjulib-$VERSION-$PLAT
+export DEST_DIR=../../Build/Releases/amjulib-$VERSION-$PLAT
 echo MAKING RELEASE FOR $DEST_DIR
 
 export LIB=$DEST_DIR/lib/
@@ -15,8 +15,8 @@ export SRC=../../Source/
 mkdir -p $LIB
 mkdir -p $INC
 
-rm $INC/*
-rm $LIB/*
+#rm $INC/*
+#rm $LIB/*
 
 # Copy headers required by client code to include folder
 cp $SRC/Version.h $INC
@@ -54,8 +54,8 @@ cp $SRC/Utils/Xml/*.h $INC
 perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
 # Build (release mode)
-export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
-make clean
+#export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
+#make clean
 make
 
 # Copy .lib binary to lib folder
