@@ -1,46 +1,5 @@
 /*
 Amju Games source code (c) Copyright Jason Colman 2004
-$Log: FileImplStd.cpp,v $
-Revision 1.12  2008/05/18 16:04:26  jay
-MSVC update
-
-Revision 1.11  2008/05/08 10:58:04  jay
-New memory management code
-
-Revision 1.10  2007/12/13 10:14:39  jay
-TODO Mac get size of an open file
-
-Revision 1.9  2007/11/28 23:21:09  jay
-Add Assert, commented out for now though
-
-Revision 1.8  2007/11/26 22:01:31  jay
-Add implementation for GetBinaryFileSize
-
-Revision 1.7  2007/02/10 14:55:13  jay
-Return accurate number of bytes read
-
-Revision 1.6  2006/12/30 16:21:27  jay
-Debug output
-
-Revision 1.5  2006/12/01 23:28:04  jay
-New FileImplMem, unfortunately causing many small changes
-
-Revision 1.4  2006/09/15 12:48:24  Administrator
-Fixes to get PetZoo+SceneEditor to build on Windows/MSVC
-
-Revision 1.3  2006/05/17 08:41:57  jay
-Merge improvements from Pool: chmod +ugow; new tokenising function
-
-Revision 1.1.10.2  2006/05/15 08:18:41  jay
-Chmod files when opened for reading or writing so they can be written
-to by everyone.
-
-Revision 1.1.10.1  2006/01/20 13:45:13  jay
-Gcc 4.0 fix: no need for conditional compile
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-
 */
 
 #include <AmjuFirst.h>
@@ -176,12 +135,7 @@ bool FileImplStd::GetLine(std::string* pResult)
     return false;
   }
 
-  // TODO beware! max line length is 1000!
-  char buf[1000];
-  int buflen = 1000;
-
-  m_file.getline(buf, buflen);
-  *pResult = buf;
+  std::getline(m_file, *pResult);
 
   // Chop off the last character if it happens to be char(13). This is ok for windows
   // but not unix.
