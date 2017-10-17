@@ -13,7 +13,7 @@ namespace Amju
 // The default behaviour is to call Animate() on the child, passing in the 
 //  animation value, which changes over time, between 0..1. So this class
 //  can be used as is, or can be subclassed.
-class GuiDecAnimation: public GuiDecorator, public Animator
+class GuiDecAnimation : public GuiDecorator, public Animator
 {
 public:
   static const char* NAME;
