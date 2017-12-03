@@ -85,9 +85,6 @@
     <Filter Include="AmjuGLDX9">
       <UniqueIdentifier>{5da3cad9-508e-4581-88a9-d9410f21c7f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EventsSDL">
-      <UniqueIdentifier>{1f414350-7957-4b81-9e34-81d271584ef6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SoundBass">
       <UniqueIdentifier>{a3ecd12a-3812-4d41-8895-5cd80246da7a}</UniqueIdentifier>
     </Filter>
@@ -123,6 +120,9 @@
     </Filter>
     <Filter Include="AmjuGLOpenGL\Internal">
       <UniqueIdentifier>{8f69c749-88b9-4bf8-959b-b39c62cd092f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventsWin32\EventsSDL">
+      <UniqueIdentifier>{1f414350-7957-4b81-9e34-81d271584ef6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -499,7 +499,7 @@
       <Filter>AmjuGLDX9</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.cpp">
-      <Filter>EventsSDL</Filter>
+      <Filter>EventsWin32\EventsSDL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\SoundBass\BassSoundPlayer.cpp">
       <Filter>SoundBass</Filter>
@@ -1386,7 +1386,7 @@
       <Filter>AmjuGLDX9</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\EventsSDL\EventPollerImplSDL.h">
-      <Filter>EventsSDL</Filter>
+      <Filter>EventsWin32\EventsSDL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\SoundBass\BassSoundPlayer.h">
       <Filter>SoundBass</Filter>
