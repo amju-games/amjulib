@@ -27,6 +27,8 @@ bool operator<(const Particle2d& p1, const Particle2d& p2);
 class ParticleEffect2d : public SceneNode
 {
 public:
+  static const char* NAME;
+
   ParticleEffect2d();
   virtual bool Load(File*);
   virtual void Draw();

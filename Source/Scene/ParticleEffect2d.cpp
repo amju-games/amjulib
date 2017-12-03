@@ -10,6 +10,8 @@
 
 namespace Amju
 {
+const char* ParticleEffect2d::NAME = "particles";
+
 Particle2d::Particle2d() : m_time(0), m_rot(0), m_rotVel(0), m_isDead(false)
 {
   static int s_id = 0;
@@ -37,7 +39,14 @@ ParticleEffect2d::ParticleEffect2d()
 
 bool ParticleEffect2d::Load(File* f)
 {
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected scene node name");
+    return false;
+  }
+
   m_texture = LoadTextureResource(f);
+  Assert(m_texture);
 
   // TODO Random sizes
   // TODO Also rotate, with random rot vel

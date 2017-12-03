@@ -1,3 +1,4 @@
+#include "ParticleEffect2d.h"
 #include "SceneLuaScript.h"
 #include "SceneMesh.h"
 #include "SceneNode.h"
@@ -5,7 +6,6 @@
 #include "SceneNodeFactory.h"
 // TODO
 //#include "Billboard.h"
-//#include "ParticleEffect2d.h"
 //#include "Shadow.h"
 
 namespace Amju
@@ -13,6 +13,7 @@ namespace Amju
 SceneNodeFactory::SceneNodeFactory()
 {
   // Add SceneNode types to factory
+  Add(ParticleEffect2d::NAME, []() -> SceneNode* { return new ParticleEffect2d;} );
   Add(SceneNode::NAME, &SceneNode::Create);
   Add(SceneMesh::NAME, &SceneMesh::Create);
   Add(SceneMeshMaterial::NAME, []() -> SceneNode* { return new SceneMeshMaterial;} );
