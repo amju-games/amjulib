@@ -1,13 +1,14 @@
 #ifndef SCENE_GRAPH_H
 #define SCENE_GRAPH_H
 
+#include <RCPtr.h>
 #include "SceneNode.h"
 #include "SceneNodeCamera.h"
 #include "Frustum.h"
 
 namespace Amju
 {
-class SceneGraph : public NonCopyable
+class SceneGraph : public NonCopyable, public RefCounted
 {
 public:
   SceneGraph();
