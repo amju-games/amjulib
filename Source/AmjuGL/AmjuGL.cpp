@@ -86,7 +86,7 @@ static const char* FlagStr(uint32 f)
 #endif
 
 // TODO just use sprintf, to remove dep on StringUtils
-static std::ostream& ReportMatrix(float m[16], std::ostream& os)
+static std::ostream& ReportMatrix(const float m[16], std::ostream& os)
 {
   for (int i = 0; i < 4; i++)
   {
