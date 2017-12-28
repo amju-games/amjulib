@@ -157,7 +157,7 @@ void TextureSequence::MakeTris(int element, float size, AmjuGL::Tri tris[2], flo
   float sizeX = m_sizex * size;
   float sizeY = m_sizey * size;
 
-  const float Z = 0.5f;
+  const float Z = 0.0f;
   AmjuGL::Vert v[4] =
   {
     AmjuGL::Vert(xOff,         yOff,         Z,  x,      1.0f - y - dy,     0, 1.0f, 0),
