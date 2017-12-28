@@ -120,8 +120,8 @@ Resource* ResourceManager::GetRes(const std::string& resName)
 #ifdef RES_DEBUG
   bool found = false;
   for (ResGroupMap::iterator it = m_groups.begin();
-       it != m_groups.end();
-       ++it)
+    it != m_groups.end();
+    ++it)
   {
     ResGroup& rg = it->second;
     ResGroup::ResourceNames::iterator jt = rg.m_resNames.find(resName);
@@ -138,12 +138,17 @@ Resource* ResourceManager::GetRes(const std::string& resName)
   }
 #endif
 
-  PResource res = m_resources[resName];
-  if (res == 0)
+  PResource res;
+  auto it = m_resources.find(resName);
+  if (it == m_resources.end())
   {
     // Not loaded yet, so load now
     res = LoadRes(resName);
     m_resources[resName] = res;
+  }
+  else
+  {
+    res = it->second;
   }
   return res;
 }
