@@ -1,12 +1,13 @@
 #ifndef TEXTURE_H_INCLUDED
 #define TEXTURE_H_INCLUDED
 
-#include "RCPtr.h"
 #include "AmjuGL.h"
+#include "RCPtr.h"
+#include "ResourceManager.h"
 
 namespace Amju
 {
-class Texture : public RefCounted
+class Texture : public Resource
 {
 public:
   Texture();
