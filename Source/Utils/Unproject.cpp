@@ -9,7 +9,7 @@ namespace Amju
 {
 void MultiplyMatrices4by4OpenGL_FLOAT(float *result, float *matrix1, float *matrix2);
 void MultiplyMatrixByVector4by4OpenGL_FLOAT(float *resultvector, const float *matrix, const float *pvector);
-int glhInvertMatrixf2(float *m, float *out);
+int glhInvertMatrixf2(const float *m, float *out);
 
 int glhUnProjectf(float winx, float winy, float winz, float *modelview, float *projection, int *viewport, float *objectCoordinate)
 {
@@ -160,7 +160,7 @@ void MultiplyMatrixByVector4by4OpenGL_FLOAT(float *resultvector, const float *ma
 #define MAT(m,r,c) (m)[(c)*4+(r)]
 
 //This code comes directly from GLU except that it is for float
-int glhInvertMatrixf2(float *m, float *out)
+int glhInvertMatrixf2(const float *m, float *out)
 {
   float wtmp[4][8];
   float m0, m1, m2, m3, s;
