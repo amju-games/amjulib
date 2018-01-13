@@ -38,6 +38,14 @@ bool ConfigFile::Save(const std::string& filename, bool useRoot)
 {
   AMJU_CALL_STACK;
 
+  if (!m_isDirty)
+  {
+#ifdef CONFIG_FILE_DEBUG
+    std::cout << "Config file: saving: no need, no unsaved data.\n";
+#endif
+    return true;
+  }
+
   File f(true, File::STD); // No glue, TODO MEM ?
   if (!f.OpenWrite(filename, File::CURRENT_VERSION, NOT_BINARY, useRoot))
   {
@@ -55,6 +63,7 @@ bool ConfigFile::Save(const std::string& filename, bool useRoot)
     std::cout << "Config file: saving: " << s.c_str() << std::endl;
 #endif
   }
+  m_isDirty = false;
   return true;
 }
 
@@ -156,7 +165,14 @@ void ConfigFile::Set(const std::string& key, const std::string& value)
 
   if (!key.empty())
   {
-    m_values[key] = value;
+    auto it = m_values.find(key);
+    // Only set value and dirty flag if value is new or different
+    if (   it == m_values.end()
+        || value != it->second)
+    {
+      m_values[key] = value;
+      m_isDirty = true;
+    }
   }
 }
  

@@ -37,6 +37,7 @@ public:
 protected:
   typedef std::map<std::string, std::string> ConfigMap;
   ConfigMap m_values;
+  bool m_isDirty = false;
 };
 
 // You can have multiple config files but there is one GameConfigFile 
