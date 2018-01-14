@@ -142,28 +142,57 @@ int TextureSequence::GetNumElements() const
   return m_numElements;
 }
 
+void TextureSequence::GetElementInAtlas(
+  int element, // the element index, e.g. a character code, from ' ' to 'z' etc. Can be >255 for unicode
+  float& x, float& y, // position offset (would be zero if all elements are equal size)
+  float& w, float& h, // size of glyph in relation to entire atlas
+  float& u0, float& v0, // top left UV coord
+  float& u1, float& v1 // bottom right UV coord
+)
+{
+  x = 0;
+  y = 0; // As each element is the same size, there is no position offset for any element
+
+  // Size of elements in x and y in UV space
+  float usize = 1.0f / (float)m_numElementsX;
+  float vsize = 1.0f / (float)m_numElementsY;
+  w = 1.f; // usize;
+  h = 1.f; // vsize;
+
+  u0 = float(element % m_numElementsX) * usize;
+  v0 = float(element / m_numElementsX) * vsize;
+
+  u1 = u0 + usize;
+  v1 = v0 + vsize;
+}
+
 void TextureSequence::MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff)
 {
   AMJU_CALL_STACK;
 
   Assert(m_pTexture);
 
-  float dx = 1.0f / (float)m_numElementsX;
-  float dy = 1.0f / (float)m_numElementsY;
-    
-  float x = float(element % m_numElementsX) * dx;
-  float y = float(element / m_numElementsX) * dy; // yes this is correct
+  // Find element UV region and (x, y) position offset. 
+  float x = 0;
+  float y = 0;
+  float w = 0;
+  float h = 0;
+  float u0 = 0;
+  float v0 = 0;
+  float u1 = 0;
+  float v1 = 0;
+  GetElementInAtlas(element, x, y, w, h, u0, v0, u1, v1);
 
-  float sizeX = m_sizex * size;
-  float sizeY = m_sizey * size;
+  float sizeX = m_sizex * size * w;
+  float sizeY = m_sizey * size * h;
 
   const float Z = 0.0f;
   AmjuGL::Vert v[4] =
   {
-    AmjuGL::Vert(xOff,         yOff,         Z,  x,      1.0f - y - dy,     0, 1.0f, 0),
-    AmjuGL::Vert(xOff + sizeX, yOff,         Z,  x + dx, 1.0f - y - dy,     0, 1.0f, 0),
-    AmjuGL::Vert(xOff + sizeX, yOff + sizeY, Z,  x + dx, 1.0f - y,          0, 1.0f, 0),
-    AmjuGL::Vert(xOff,         yOff + sizeY, Z,  x,      1.0f - y,          0, 1.0f, 0)
+    AmjuGL::Vert(xOff + x,         yOff + y,         Z,  u0, 1.0f - v1,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x + sizeX, yOff + y,         Z,  u1, 1.0f - v1,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x + sizeX, yOff + y + sizeY, Z,  u1, 1.0f - v0,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x,         yOff + y + sizeY, Z,  u0, 1.0f - v0,     0, 1.0f, 0)
   };
 
   tris[0].m_verts[0] = v[0];

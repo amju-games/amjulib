@@ -1008,6 +1008,9 @@
     <ClCompile Include="..\..\..\Source\AmjuGL\Animator.cpp">
       <Filter>AmjuGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Font\BmFont.cpp">
+      <Filter>Font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1921,6 +1924,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\Lerp.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Font\BmFont.h">
+      <Filter>Font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

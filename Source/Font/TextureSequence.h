@@ -16,12 +16,12 @@ class TextureSequence : public RefCounted
 {
 public:
   TextureSequence();
-  ~TextureSequence();
+  virtual ~TextureSequence();
 
-  bool Load(File* );
+  virtual bool Load(File*);
 
   bool Load(
-    const std::string& texturename, 
+    const std::string& texturename,
     int numElementsX, int numElementsY,
     float sizeX, float sizeY);
 
@@ -36,7 +36,7 @@ public:
   // Bind the texture. Doing this once up front instead of every call to
   // Draw() may be more efficient.
   void Bind();
-  
+
   int GetTextureWidth();
   int GetTextureHeight();
 
@@ -48,12 +48,30 @@ public:
   Texture* GetTexture() { return m_pTexture; }
 
 protected:
+  // Override this for packed atlases. This default impl assumes a grid of fixed-size
+  //  elements in the atlas.
+  virtual void GetElementInAtlas(
+    int ch, // the element index, e.g. a character code, from ' ' to 'z' etc. Can be >255 for unicode
+    float& x, float& y, // position offset (would be zero if all elements are equal size)
+    float& w, float& h, // size of glyph in relation to entire atlas
+    float& u0, float& v0, // top left UV coord
+    float& u1, float& v1 // bottom right UV coord
+  );
+
+protected:
   PTexture m_pTexture; 
   int m_numElements;
+
+  // Scale factor in x and y ... not much use?
   float m_sizex, m_sizey;
+
   // Number of elements in the texture in x and y axes
+  // Only makes sense for a grid of fixed-size cells, e.g. a character atlas created
+  //  with Bitmap Font Builder, but not a packed atlas, e.g. created with BMFont.
+  // Also does make sense for a sprite sheet, again of fixed-size cells.
   int m_numElementsX, m_numElementsY;
 };
+
 }
 
 #endif
