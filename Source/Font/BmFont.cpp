@@ -23,6 +23,12 @@ bool BmFontTextureSequence::LoadBmFont(const std::string& filename)
 
 namespace
 {
+// These consts are to get the BMFont to look the same as a grid-style font.
+
+const float SCALE = 0.004f; // Hopefully not related to font size, but might be
+
+const float GLYPH_FATNESS = 1.5f; // not related to particular font or size, right?
+
 int ParseCharCountLine(const Strings& strs)
 {
   // Found count line
@@ -108,6 +114,68 @@ bool ParseCharLine(
 }
 } // anon namespace
 
+bool BmFontTextureSequence::ParsePageLine(const Strings& strs, const std::string& path)
+{
+  if (strs.size() < 2)
+  {
+    ReportError("Unexpected: no info in 'page' line!");
+    return false;
+  }
+ 
+  int numPairs = strs.size();
+  int texId = -1;
+  for (int j = 1; j < numPairs; j++)
+  {
+    // Each element in strs should be in form <a>=<b>. Split into key and value.
+    Strings strs2 = Split(strs[j], '=');
+    if (strs2.empty())
+    {
+      ReportError("Unexpected format for 'page' line");
+      return false;
+    }
+    else if (strs2.size() > 2)
+    {
+      ReportError("Unexpected format for 'page' line: " + strs2[0]);
+      return false;
+    }
+
+    if (strs2[0] == "id")
+    {
+      texId = ToInt(strs2[1]);
+    }
+    else if (strs2[0] == "file")
+    {
+      // Remove quotes
+      std::string texFilename = Replace(strs2[1], "\"", "");
+      
+      // Prepend path of this file to get full path to texture 
+      m_pTexture = (Texture*)TheResourceManager::Instance()->GetRes(path + texFilename);
+    }
+  }
+  if (texId == -1)
+  {
+    ReportError("No ID for 'page' line");
+    return false;
+  }
+  else if (texId > 0)
+  {
+    ReportError("Multiple pages not supported");
+    return false;
+  }
+ 
+  return true;
+}
+
+bool BmFontTextureSequence::ParseInfoLine(const Strings& strs)
+{
+  if (strs.size() < 2)
+  {
+    ReportError("Unexpected: no info in 'info' line!");
+    return false;
+  }
+  return true;
+}
+
 bool BmFontTextureSequence::Load(File* f)
 {
   int numChars = 0;
@@ -115,15 +183,35 @@ bool BmFontTextureSequence::Load(File* f)
   while (f->GetDataLine(&line))
   {
     Strings strs = Split(line, ' ');
-    if (!strs.empty() && strs[0] == "chars")
+    if (!strs.empty())
     {
-      numChars = ParseCharCountLine(strs);
-      if (numChars == 0)
+      if (strs[0] == "chars")
       {
-        ReportError("Unexpected format, expected 'chars count=<n>");
-        return false;
+        numChars = ParseCharCountLine(strs);
+        if (numChars == 0)
+        {
+          f->ReportError("Unexpected format, expected 'chars count=<n>");
+          return false;
+        }
+        break;
       }
-      break;
+      else if (strs[0] == "page")
+      {
+        std::string path = GetFilePath(f->GetName()) + "/";
+        if (!ParsePageLine(strs, path))
+        {
+          f->ReportError("Unexpected format in 'page' line");
+          return false;
+        }
+      }
+      else if (strs[0] == "info")
+      {
+        if (!ParseInfoLine(strs))
+        {
+          f->ReportError("Unexpected format in 'info' line");
+          return false;
+        }
+      }
     }
   }
 
@@ -185,10 +273,6 @@ void BmFontTextureSequence::GetElementInAtlas(
 
   // These consts are to get the BMFont to look the same as a grid-style font.
 
-  const float SCALE = 0.004f; // Hopefully not related to font size, but might be
-
-  const float GLYPH_FATNESS = 1.5f; // not related to particular font or size, right?
-
   // This is to compensate for right-shift in bitmap fonts, TODO remove and fix
   //  visual bugs introduced as a result, e.g. note stems not lining up
   const float X_OFFSET = 0.07f; 
@@ -205,6 +289,53 @@ void BmFontTextureSequence::GetElementInAtlas(
   v0 = bmc.v0;
   u1 = bmc.u1;
   v1 = bmc.v1;
+}
+
+float BmFontTextureSequence::GetCharWidth(int element) const
+{
+  auto it = m_elements.find(element);
+  if (it == m_elements.end())
+  {
+    ReportError("Bad BMFont element: " + ToString(element));
+    Assert(0);
+    return 0;
+  }
+  const BmChar& bmc = it->second;
+  float w = bmc.w * SCALE * GLYPH_FATNESS;
+  return w;
+}
+
+BmFont::BmFont(const std::string& name) : Font(name)
+{
+}
+
+bool BmFont::Load(const std::string& filename)
+{
+  return false;
+}
+
+bool BmFont::Load(File* f)
+{
+  std::string bmfontFilename;
+  if (!f->GetDataLine(&bmfontFilename))
+  {
+    f->ReportError("Expected bmfont filename");
+    return false;
+  }
+  BmFontTextureSequence* bm = new BmFontTextureSequence;
+  m_textureSequence = bm;
+  if (!bm->LoadBmFont(bmfontFilename))
+  {
+    f->ReportError("Failed to load bmfont file");
+    return false;
+  }
+  return true;
+}
+
+float BmFont::GetCharacterWidth(int c)
+{
+  BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
+  return bm->GetCharWidth(c);
 }
 
 }

@@ -7,6 +7,7 @@
 // Packed bitmap font, created using BMFont tool.
 
 #include <unordered_map>
+#include <StringUtils.h>
 #include "Font.h"
 
 namespace Amju
@@ -17,10 +18,12 @@ class BmFontTextureSequence : public TextureSequence
 {
 public:
   // Load texture sequence from file
-  bool Load(File*);
+  bool Load(File*) override;
 
   // Load BMFont description from file
   bool LoadBmFont(const std::string& filename);
+
+  float GetCharWidth(int element) const;
 
   struct BmChar
   {
@@ -59,6 +62,12 @@ protected:
 
   bool LoadChars(File* f, int numChars);
 
+  // Parse 'page' line, which has texture filename. Path is the path
+  //  from file root to where the texture file lives.
+  bool ParsePageLine(const Strings& strs, const std::string& path);
+
+  bool ParseInfoLine(const Strings& strs);
+
 private:
   // We expect a sparse array for, e.g. Chinese characters.
   std::unordered_map<int, BmChar> m_elements;
@@ -69,7 +78,11 @@ private:
 class BmFont : public Font
 {
 public:
+  BmFont(const std::string& name);
 
+  bool Load(const std::string& filename);
+  bool Load(File*) override;
+  float GetCharacterWidth(int c) override;
 };
 }
 

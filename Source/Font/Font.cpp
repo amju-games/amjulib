@@ -5,6 +5,7 @@ Amju Games source code (c) Copyright Jason Colman 2005
 #include <AmjuFirst.h>
 #include <algorithm>
 #include <iostream>
+#include "BmFont.h"
 #include "Font.h"
 #include <File.h>
 #include <Screen.h>
@@ -16,24 +17,43 @@ Amju Games source code (c) Copyright Jason Colman 2005
 
 namespace Amju
 {
-static const float CHAR_SIZE = 0.2f;
-static const float HORIZONTAL_SPACING = CHAR_SIZE; // ??
-static const int NUM_CHAR_WIDTHS = 256;
+namespace 
+{
+const float CHAR_SIZE = 0.2f;
+const float HORIZONTAL_SPACING = CHAR_SIZE; // ??
+const int NUM_CHAR_WIDTHS = 256;
+
+// For font files with this version number, we expect a BMFont to be
+//  specified.
+const int BM_FONT_FILE_VERSION_NUMBER = 2;
+} // anon namespace
   
 Resource* FontLoader(const std::string& fontName)
 {
   // Font name is e.g. "cheri.font"
   // The ".font" is so the ResourceManager knows what loader to use - it doesn't
   //  have to be the file extension.
-  // TODO Overload GetRes so you can specify the loader ?
   std::string fontFilename = GetFileNoExt(fontName) + ".txt";
-  Font* font = new Font(StripPath(fontFilename));
   File file;
   if (!file.OpenRead(fontFilename))
   {
     Assert(0);
     return 0;
   }
+
+  // Is this a BM font or an old-style fixed-width font?
+  // We use the file version to decide.
+  Font* font = nullptr;
+  // TODO Factory<int, Font>?
+  if (file.GetVersion() == BM_FONT_FILE_VERSION_NUMBER)
+  {
+    font = new BmFont(StripPath(fontFilename));
+  }
+  else
+  {
+    font = new Font(StripPath(fontFilename));
+  }
+
   if (!font->Load(&file))
   {
     Assert(0);
@@ -85,14 +105,15 @@ bool Font::Load(File* pf)
     return false;
   }
 
-  bool b = m_textureSequence.Load(
+  m_textureSequence = new TextureSequence;
+  bool b = m_textureSequence->Load(
     bm, xchars, ychars, CHAR_SIZE, CHAR_SIZE);
   if (!b)
   {
     pf->ReportError("Failed to load texture sequence for font");
     return false;
   }
-  m_textureSequence.GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NICE);
+  m_textureSequence->GetTexture()->SetFilter(AmjuGL::AMJU_TEXTURE_NICE);
 
   // Get start character - usually something like 0 or 32.
   if (!pf->GetInteger(&m_startChar))
@@ -125,7 +146,7 @@ bool Font::Load(File* pf)
   f.GetDataLine(&line); // get [<section>]
   // Now get lines of format <char code>=<width>
   // Width is font bitmap width/num chars
-  const float MAX_WIDTH = (float)m_textureSequence.GetTextureWidth() / 
+  const float MAX_WIDTH = (float)m_textureSequence->GetTextureWidth() / 
     (float)xchars;
 
   // We expect 256 character widths.
@@ -167,7 +188,7 @@ void Font::SetSize(float s)
   m_size = s;
 }
 
-float Font::GetCharacterWidth(char c)
+float Font::GetCharacterWidth(int c)
 {
   AMJU_CALL_STACK;
 
@@ -197,7 +218,7 @@ float Font::GetTextWidth(const std::string& s)
 
 void Font::BindTexture()
 {
-  m_textureSequence.Bind();
+  m_textureSequence->Bind();
 }
 
 TriList* Font::MakeTriList(float x, float y, const char* text, float scaleX)
@@ -218,14 +239,14 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\
     return Amju::MakeTriList(tris);
   }
   
-  float oldSizeX = m_textureSequence.GetSizeX();
-  float sizeY = m_textureSequence.GetSizeY();
+  float oldSizeX = m_textureSequence->GetSizeX();
+  float sizeY = m_textureSequence->GetSizeY();
   
   // Screen aspect ratio compensation
   float aspect = (float)Screen::Y() / (float)Screen::X();
   scaleX *= aspect;
 
-  m_textureSequence.SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
+  m_textureSequence->SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
   
   float xOff = x;
   float yOff = y;
@@ -233,12 +254,12 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\
   while (unsigned char c = text[i++])
   {
     AmjuGL::Tri t[2];
-    m_textureSequence.MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
+    m_textureSequence->MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
     tris.push_back(t[0]);
     tris.push_back(t[1]);
     xOff += GetCharacterWidth(c) * scaleX;
   }
-  m_textureSequence.SetSize(oldSizeX, sizeY);
+  m_textureSequence->SetSize(oldSizeX, sizeY);
   return Amju::MakeTriList(tris);
 }
   
