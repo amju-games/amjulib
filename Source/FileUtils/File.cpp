@@ -140,6 +140,14 @@ bool File::ReadVersion()
   return true;
 }
 
+int File::GetVersion() const
+{
+  Assert(IsOpen());
+  // TODO Report error if we try to get version from file which does
+  //  not specify version?
+  return m_version;
+}
+
 bool File::IsOpen() const
 {
   return m_isOpen;
