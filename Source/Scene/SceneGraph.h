@@ -8,7 +8,7 @@
 
 namespace Amju
 {
-class SceneGraph : public NonCopyable, public RefCounted
+class SceneGraph : public NonCopyable ////////, public RefCounted
 {
 public:
   SceneGraph();
