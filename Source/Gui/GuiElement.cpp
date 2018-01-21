@@ -242,6 +242,7 @@ void GuiElement::SetCommand(PGuiCommand pCommand)
 {
   Assert(!m_commandFunc);
   m_pCommand = pCommand;
+  m_pCommand->SetGuiElement(this);
 }
 
 void GuiElement::SetCommand(CommandFunc commandFunc)
