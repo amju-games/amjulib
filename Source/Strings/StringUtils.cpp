@@ -28,6 +28,56 @@ Amju Games source code (c) Copyright Jason Colman 2004-2016
 
 namespace Amju
 {
+WString Utf8ToWString(const std::string& coded)
+{
+  // Adapted from
+  // stackoverflow.com/questions/18534494/convert-from-utf-8-to-unicode-c
+  WString result;
+  int i = 0;
+
+  while (i < coded.size()) 
+  {
+    int charcode = 0;
+    int t = (unsigned char)coded[i];
+    i++;
+    if (t < 128)
+    {
+      result.push_back(t);
+    }
+    else
+    {
+      int high_bit_mask = (1 << 6) -1;
+      int high_bit_shift = 0;
+      int total_bits = 0;
+      const int other_bits = 6;
+      while ((t & 0xC0) == 0xC0)
+      {
+        t <<= 1;
+        t &= 0xff;
+        total_bits += 6;
+        high_bit_mask >>= 1; 
+        high_bit_shift++;
+        charcode <<= other_bits;
+        if (i >= coded.size())
+        {
+          // Ill-formed utf8
+          // TODO Assert
+          charcode = 0;
+        }
+        else
+        {
+          int t2 = (unsigned char)coded[i];
+          charcode |= t2 & ((1 << other_bits)-1);
+          i++;
+        }
+      } 
+      charcode |= ((t >> high_bit_shift) & high_bit_mask) << total_bits;
+      result.push_back(charcode);
+    }
+  }
+  return result;
+}
+
 // Correctly truncate utf-8 string
 // Based on: http://trinitum.org/wp/how-to-truncate-utf8-string/
 std::string TruncateUtf8String(const std::string& str, int maxSize)

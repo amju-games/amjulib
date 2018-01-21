@@ -11,6 +11,10 @@ Amju Games source code (c) Copyright Jason Colman 2004-2009
 
 namespace Amju
 {
+// Convert utf-8 encoded string to vector of Unicode code points
+using WString = std::vector<int>;
+WString Utf8ToWString(const std::string& utf8);
+
 std::string TruncateUtf8String(const std::string& str, int maxSize);
 
 // Helper: strips off any path info from a filename.
