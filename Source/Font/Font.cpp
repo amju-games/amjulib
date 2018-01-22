@@ -202,11 +202,13 @@ float Font::GetTextWidth(const std::string& s)
 {
   AMJU_CALL_STACK;
 
+  // Convert utf-8 to code points
+  WString wstring = Utf8ToWString(s);
+
   float f = 0;
-  int chars = s.size();
-  for (int i = 0; i < chars; i++)
+  for (int i : wstring)
   {
-    f += GetCharacterWidth(s[i]);
+    f += GetCharacterWidth(i);
   }
 
   // Screen aspect ratio compensation
@@ -221,19 +223,17 @@ void Font::BindTexture()
   m_textureSequence->Bind();
 }
 
-TriList* Font::MakeTriList(float x, float y, const char* text, float scaleX)
+TriList* Font::MakeTriList(float x, float y, const std::string& utf8Text, float scaleX)
 {
   AMJU_CALL_STACK;
 
 #ifdef FONT_DEBUG
-std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\"\n";
+std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text << "\"\n";
 #endif
 
-  Assert(text);
-  
   AmjuGL::Tris tris;
   
-  if (*text == 0)
+  if (utf8Text.empty())
   {
     // Empty string
     return Amju::MakeTriList(tris);
@@ -250,11 +250,13 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << text << "\
   
   float xOff = x;
   float yOff = y;
-  int i = 0;
-  while (unsigned char c = text[i++])
+
+  WString wstring = Utf8ToWString(utf8Text);
+
+  for (int c : wstring)
   {
     AmjuGL::Tri t[2];
-    m_textureSequence->MakeTris(c - (char)m_startChar, m_size, t, xOff, yOff);
+    m_textureSequence->MakeTris(c - m_startChar, m_size, t, xOff, yOff);
     tris.push_back(t[0]);
     tris.push_back(t[1]);
     xOff += GetCharacterWidth(c) * scaleX;

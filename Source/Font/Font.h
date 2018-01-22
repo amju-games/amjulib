@@ -42,10 +42,13 @@ public:
 
   // Use this to make a TriList when text changes.
   // Use this in preference to Print*()
-  TriList* MakeTriList(float x, float y, const char* textUtf8, float scaleX);
+  TriList* MakeTriList(float x, float y, const std::string& textUtf8, float scaleX);
   
   void BindTexture();
-  
+ 
+private:
+  // Deprecated
+ 
   // Draw the text on the window. 
   // (x, y) coords are -1..1
   // TODO Why char*, why not string
@@ -65,7 +68,7 @@ protected:
   std::vector<float> m_charWidths;
   // The first character in the texture sequence - usually 0 for a 256-
   //  character font, or 32 if the font starts at space.
-  int m_startChar;
+  int m_startChar = 0;
 };
 
 typedef RCPtr<Font> PFont;
