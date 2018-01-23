@@ -502,6 +502,8 @@
 		693D43E115AB7CE900B84D5C /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431D15AB7CE900B84D5C /* zlib.h */; };
 		693D43E215AB7CE900B84D5C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 693D431E15AB7CE900B84D5C /* zutil.c */; };
 		693D43E315AB7CE900B84D5C /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D431F15AB7CE900B84D5C /* zutil.h */; };
+		69451953201736B6001C188B /* BmFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 69451951201736B6001C188B /* BmFont.h */; };
+		69451954201736B6001C188B /* BmFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69451952201736B6001C188B /* BmFont.cpp */; };
 		6951CF1D1F0B938B00140095 /* Animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6951CF1B1F0B938B00140095 /* Animator.cpp */; };
 		6951CF1E1F0B938B00140095 /* Animator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6951CF1C1F0B938B00140095 /* Animator.h */; };
 		6959E2D81E958E1F00E251A9 /* GuiDecAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */; };
@@ -1066,6 +1068,8 @@
 		693D431D15AB7CE900B84D5C /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		693D431E15AB7CE900B84D5C /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
 		693D431F15AB7CE900B84D5C /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
+		69451951201736B6001C188B /* BmFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BmFont.h; path = ../../../Source/Font/BmFont.h; sourceTree = "<group>"; };
+		69451952201736B6001C188B /* BmFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BmFont.cpp; path = ../../../Source/Font/BmFont.cpp; sourceTree = "<group>"; };
 		6951CF1B1F0B938B00140095 /* Animator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animator.cpp; path = ../../../Source/AmjuGL/Animator.cpp; sourceTree = "<group>"; };
 		6951CF1C1F0B938B00140095 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = ../../../Source/AmjuGL/Animator.h; sourceTree = "<group>"; };
 		6959E2D41E958E1F00E251A9 /* GuiDecAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecAnimation.cpp; sourceTree = "<group>"; };
@@ -1446,6 +1450,8 @@
 		693D40E615AB7A6900B84D5C /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				69451952201736B6001C188B /* BmFont.cpp */,
+				69451951201736B6001C188B /* BmFont.h */,
 				693D40E715AB7C0E00B84D5C /* Font.cpp */,
 				693D40E815AB7C0E00B84D5C /* Font.h */,
 				693D40E915AB7C0E00B84D5C /* TextureSequence.cpp */,
@@ -2167,6 +2173,7 @@
 				693D41AB15AB7C7D00B84D5C /* LoadMatrix.h in Headers */,
 				693D41AD15AB7C7D00B84D5C /* LoadVec2.h in Headers */,
 				693D41AF15AB7C7D00B84D5C /* LoadVec3.h in Headers */,
+				69451953201736B6001C188B /* BmFont.h in Headers */,
 				693D41D315AB7C9100B84D5C /* Cursor.h in Headers */,
 				693D41D515AB7C9100B84D5C /* CursorManager.h in Headers */,
 				693D41D715AB7C9100B84D5C /* GuiButton.h in Headers */,
@@ -2575,6 +2582,7 @@
 				693D437215AB7CE900B84D5C /* SafeUtils.cpp in Sources */,
 				693D437415AB7CE900B84D5C /* StringUtils.cpp in Sources */,
 				690C45061885C740007A505D /* liolib.c in Sources */,
+				69451954201736B6001C188B /* BmFont.cpp in Sources */,
 				690AD486191FEB4F008EFC78 /* LoadPng.cpp in Sources */,
 				693D437715AB7CE900B84D5C /* Mutex.cpp in Sources */,
 				690C44F91885C740007A505D /* lctype.c in Sources */,
