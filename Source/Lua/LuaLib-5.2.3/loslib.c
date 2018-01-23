@@ -78,6 +78,11 @@
 
 
 static int os_execute (lua_State *L) {
+  
+#ifdef AMJU_IOS
+  // system() is not available
+  return 1;
+#else
   const char *cmd = luaL_optstring(L, 1, NULL);
   int stat = system(cmd);
   if (cmd != NULL)
@@ -86,6 +91,7 @@ static int os_execute (lua_State *L) {
     lua_pushboolean(L, stat);  /* true if there is a shell */
     return 1;
   }
+#endif // AMJU_IOS
 }
 
 
