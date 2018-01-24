@@ -192,6 +192,12 @@ float Font::GetCharacterWidth(int c)
 {
   AMJU_CALL_STACK;
 
+  Assert(c >= 0);
+  if (c >= m_charWidths.size())
+  {
+    return 0;
+  }
+
   float f = m_charWidths[c];
   f *= m_size;
 

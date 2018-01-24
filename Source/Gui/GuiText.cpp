@@ -477,8 +477,8 @@ void GuiText::SetText(const std::string& text)
   // Remove chars we can't display, which is anything with top bit set. This removes all 
   //  non-ascii unicode characters.
   // The way we display emojis etc is to use a native text view, e.g. GuiTextIos
-  m_text.erase(std::remove_if(m_text.begin(), m_text.end(), [](char c){ return (c & 0x80) != 0; }),
-    m_text.end());
+  //m_text.erase(std::remove_if(m_text.begin(), m_text.end(), [](char c){ return (c & 0x80) != 0; }),
+  //  m_text.end());
 
   if (m_isMulti)
   {
