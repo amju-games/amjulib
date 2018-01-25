@@ -17,6 +17,9 @@ WString Utf8ToWString(const std::string& utf8);
 
 std::string TruncateUtf8String(const std::string& str, int maxSize);
 
+// Convert escape sequences to single chars. E.g. "\x80" is replaced with (char)128.
+std::string ReplaceUtf8EscapedChars(const std::string& utf8);
+
 // Helper: strips off any path info from a filename.
 std::string StripPath(const std::string& s);
 std::string StripPath(const std::string& s, const std::string& slashChar);

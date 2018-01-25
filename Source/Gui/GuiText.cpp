@@ -462,8 +462,11 @@ std::string GuiText::GetText() const
   return m_text;
 }
 
-void GuiText::SetText(const std::string& text)
+void GuiText::SetText(const std::string& escapedText)
 {
+  // Convert escape sequences
+  std::string text = ReplaceUtf8EscapedChars(escapedText);
+
   if (text == m_text)
   {
     return;

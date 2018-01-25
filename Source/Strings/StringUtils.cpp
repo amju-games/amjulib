@@ -78,6 +78,33 @@ WString Utf8ToWString(const std::string& coded)
   return result;
 }
 
+std::string ReplaceUtf8EscapedChars(const std::string& utf8)
+{
+  std::string res;
+  int len = utf8.length();
+  int i = 0;
+  for ( ; i < len - 3; i++)
+  {
+    // Look for sequence of 4 chars starting "\x"
+    if (utf8[i] == '\\' && utf8[i + 1] == 'x')
+    {
+      std::string hex = utf8.substr(i + 2, 2);
+      char c = static_cast<char>(UIntFromHexString(hex));
+      res.append(&c, 1);
+      i += 3;
+    }
+    else
+    {
+      res.append(&utf8[i], 1);
+    }
+  }
+  for (; i < len; i++)
+  {
+    res.append(&utf8[i], 1);
+  }
+  return res;
+}
+
 // Correctly truncate utf-8 string
 // Based on: http://trinitum.org/wp/how-to-truncate-utf8-string/
 std::string TruncateUtf8String(const std::string& str, int maxSize)
