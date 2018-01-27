@@ -485,6 +485,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Utils\AmjuHash.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuRand.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\AmjuSleep.cpp" />
+    <ClCompile Include="..\..\..\Source\Utils\DeviceInfo.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
@@ -796,6 +797,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Utils\AmjuTypes.h" />
     <ClInclude Include="..\..\..\Source\Utils\Common.h" />
     <ClInclude Include="..\..\..\Source\Utils\DegRad.h" />
+    <ClInclude Include="..\..\..\Source\Utils\DeviceInfo.h" />
     <ClInclude Include="..\..\..\Source\Utils\Factory.h" />
     <ClInclude Include="..\..\..\Source\Utils\Launcher.h" />
     <ClInclude Include="..\..\..\Source\Utils\Lerp.h" />

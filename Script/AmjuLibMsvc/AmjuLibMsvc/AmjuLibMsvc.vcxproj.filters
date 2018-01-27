@@ -1011,6 +1011,9 @@
     <ClCompile Include="..\..\..\Source\Font\BmFont.cpp">
       <Filter>Font</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Utils\DeviceInfo.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1927,6 +1930,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Font\BmFont.h">
       <Filter>Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\DeviceInfo.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
