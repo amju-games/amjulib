@@ -43,6 +43,13 @@ bool GuiDecColour::Load(File* f)
 
 void GuiDecColour::Draw()
 {
+  // Don't draw if completely transparent. This lets us use this decorator
+  //  as a visibility switch without overdraw cost.
+  if (m_interpolatedColour.m_a < .0001f)
+  {
+    return;
+  }
+
   PushColour();
   MultColour(m_interpolatedColour);
 
