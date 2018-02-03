@@ -35,8 +35,9 @@ void main()\n\
 {\n\
     vec3 eyeNormal = normalize(normalMatrix * normal);\n\
     vec3 lightPosition = lightDir;\n\
-    float nDotVP = max(useLighting, dot(eyeNormal, normalize(lightPosition)) + 0.5);\n\
-    nDotVP = clamp(nDotVP, 0.0, 1.0);\n\
+    float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)) + 0.5);\n\
+    nDotVP += useLighting;\n\
+    nDotVP = max(0.0, min(1.0, nDotVP));\n\
     vec4 col = colourUniform * colourAttrib;\n\
     colorVarying = col * vec4(nDotVP, nDotVP, nDotVP, 1.0);\n\
     uvVarying = uv;\n\
