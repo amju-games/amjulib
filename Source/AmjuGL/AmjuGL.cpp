@@ -78,6 +78,8 @@ static const char* FlagStr(uint32 f)
     return "Tex2d";
   case AmjuGL::AMJU_DEPTH_WRITE:
     return "ZWrite";
+  case AmjuGL::AMJU_CULLING:
+    return "Culling";
   default:
     Assert(0);
   }
@@ -103,6 +105,7 @@ std::ostream& AmjuGL::ReportState(std::ostream& os)
      << "ZWrite: " << (currentFlags & AMJU_DEPTH_WRITE ? "E" : "D") << "  "
      << "Blend: " << (currentFlags & AMJU_BLEND ? "E" : "D") << "  "
      << "Tex2D: " << (currentFlags & AMJU_TEXTURE_2D ? "E" : "D") << "  "
+     << "Culling: " << (currentFlags & AMJU_CULLING ? "E" : "D") << "  "
      << "\n";
      
   os << "Colour: ";
@@ -608,7 +611,8 @@ void AmjuGL::PopAttrib()
     AmjuGL::AMJU_LIGHTING,
     AmjuGL::AMJU_BLEND,
     AmjuGL::AMJU_TEXTURE_2D,
-    AmjuGL::AMJU_DEPTH_WRITE
+    AmjuGL::AMJU_DEPTH_WRITE,
+    AmjuGL::AMJU_CULLING,
   };
   
   for (unsigned int i = 0; i < sizeof(flagsToCheck) / sizeof(uint32); i++)

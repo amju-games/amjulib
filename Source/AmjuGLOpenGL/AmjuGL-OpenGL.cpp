@@ -298,6 +298,8 @@ static uint32 ConvertToGLFlag(uint32 flag)
     return GL_DEPTH_TEST;
   case AmjuGL::AMJU_TEXTURE_2D:
     return GL_TEXTURE_2D;
+  case AmjuGL::AMJU_CULLING:
+    return GL_CULL_FACE;
   }
   return 0;
 }

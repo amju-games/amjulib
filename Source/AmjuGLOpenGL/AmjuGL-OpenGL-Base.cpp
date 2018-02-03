@@ -86,7 +86,7 @@ void AmjuGLOpenGLBase::Init()
   //glMatrixMode(GL_MODELVIEW);
   //glLoadIdentity();
 
-  GL_CHECK(glEnable(GL_CULL_FACE));
+  AmjuGL::Enable(AmjuGL::AMJU_CULLING);
   GL_CHECK(glCullFace(GL_BACK));
 
   AmjuGL::Enable(AmjuGL::AMJU_DEPTH_READ);
@@ -110,7 +110,7 @@ void AmjuGLOpenGLBase::InitFrame(float clearR, float clearG, float clearB)
   GL_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
   GL_CHECK(glCullFace(GL_BACK));
-  GL_CHECK(glEnable(GL_CULL_FACE));
+  AmjuGL::Enable(AmjuGL::AMJU_CULLING);
   GL_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
   AmjuGL::Disable(AmjuGL::AMJU_BLEND); // only enabled where necessary
   // NB Must use AmjuGL::Disable so flags are set consistently!

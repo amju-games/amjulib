@@ -91,6 +91,12 @@ void Game::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
   AmjuGL::Enable(AmjuGL::AMJU_BLEND);
 
+  // Turn off back face culling: for 2D GUI, everything should be
+  //  front-facing, so we don't gain anything by having it on. 
+  //  But turning it off lets us scale by negative numbers, to 
+  //  flip/mirror 2D elements.
+  AmjuGL::Disable(AmjuGL::AMJU_CULLING);
+
   GetState()->Draw2d();
 
   AmjuGL::EndScene();		

@@ -30,13 +30,15 @@ public:
 
   static std::ostream& ReportState(std::ostream&);
 
+  // Flags for enable/disable
   enum Flags
   {
     AMJU_DEPTH_READ  = 0x0001,
     AMJU_LIGHTING    = 0x0002,
     AMJU_BLEND       = 0x0004,
     AMJU_TEXTURE_2D  = 0x0008,
-    AMJU_DEPTH_WRITE = 0x0010
+    AMJU_DEPTH_WRITE = 0x0010,
+    AMJU_CULLING     = 0x0020,
   };
 
   // Vertex: (x, y, z) abs coord, (u, v) texture coord and normal.
