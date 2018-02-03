@@ -4,6 +4,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 #include <AmjuFirst.h>
 #include <iostream>
+#include <thread>
 #include <Drawable.h>
 #include "Internal/OpenGL.h"
 #include "AmjuGL-OpenGL-Base.h"
@@ -15,8 +16,20 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 
 namespace Amju
 {
+namespace
+{
+  std::thread::id s_glThreadId;
+}
+  
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
+  if (std::this_thread::get_id() != s_glThreadId)
+  {
+    std::cout << "This GL call is on a different thread to the one set in Init: "
+      << fname << ": " << line << " for: " << stmt << "\n";
+    Assert(0);
+  }
+  
   GLenum err = glGetError();
   if (err != GL_NO_ERROR)
   {
@@ -24,7 +37,7 @@ void CheckOpenGLError(const char* stmt, const char* fname, int line)
     if (err == GL_INVALID_ENUM) str = "GL_INVALID_ENUM";
     else if (err == GL_INVALID_VALUE) str = "GL_INVALID_VALUE";
     else if (err == GL_INVALID_OPERATION) str = "GL_INVALID_OPERATION";
-	else if (err == GL_OUT_OF_MEMORY) str = "GL_OUT_OF_MEMORY";
+    else if (err == GL_OUT_OF_MEMORY) str = "GL_OUT_OF_MEMORY";
 
 #ifdef GL_STACK_OVERFLOW
     else if (err == GL_STACK_OVERFLOW) str = "GL_STACK_OVERFLOW";
@@ -68,6 +81,9 @@ void AmjuGLOpenGLBase::Init()
 {
   AMJU_CALL_STACK;
 
+  // Remember the thread we call this function - all GL calls should happen on
+  //  this same thread. We check this in GL_CHECK.
+  s_glThreadId = std::this_thread::get_id();
   
 #ifdef _DEBUG
   const unsigned char* version = glGetString(GL_VERSION);
