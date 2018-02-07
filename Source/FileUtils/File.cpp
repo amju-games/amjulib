@@ -421,7 +421,7 @@ bool File::GetLocalisedString(std::string* pResult)
     return false;
   }
 
-  Lookup(pResult);
+  *pResult = LookupMulti(*pResult);
 
   return true;
 }
