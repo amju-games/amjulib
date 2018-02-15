@@ -18,6 +18,8 @@ public:
   virtual bool Load(File*) override;
   virtual void Animate(float animValue) override;
 
+  void SetTranslation(const Vec2f&, int zeroOrOne = 0);
+
 private:
   Vec2f m_positions[2];
 };

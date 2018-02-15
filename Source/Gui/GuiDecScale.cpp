@@ -53,6 +53,17 @@ bool GuiDecScale::Load(File* f)
   return true;
 }
 
+void GuiDecScale::SetScale(const Vec2f& scale, int zeroOrOne)
+{
+  m_scale[zeroOrOne] = scale;
+  m_interpScale = scale;
+}
+
+void GuiDecScale::SetPivot(const Vec2f& pivot)
+{
+  m_pivot = pivot;
+}
+
 void GuiDecScale::Draw()
 {
   AmjuGL::PushMatrix();

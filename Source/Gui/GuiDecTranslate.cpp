@@ -42,6 +42,12 @@ bool GuiDecTranslate::Load(File* f)
   return true;
 }
 
+void GuiDecTranslate::SetTranslation(const Vec2f& tr, int zeroOrOne)
+{
+  m_positions[zeroOrOne] = tr;
+  SetLocalPos(tr);
+}
+
 void GuiDecTranslate::Animate(float animValue)
 {
   Vec2f interp = m_positions[0] + (m_positions[1] - m_positions[0]) * animValue;
