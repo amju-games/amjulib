@@ -13,6 +13,11 @@ public:
   Texture();
   ~Texture();
   bool Load(const std::string& filename);
+
+  // Return filename if loaded successfully, else empty string if not loaded
+  //  or set up in code rather than from a file.
+  const std::string& GetFilename() const;
+
   void Create(unsigned char* data, int w, int h, int bytesPerPixel);
   void UseThisTexture(int textureUnitId = 0);
   int GetWidth() const;
@@ -41,9 +46,7 @@ private:
   static AmjuGL::TextureMode s_defaultWrapMode;
   // Default type is always UV
 
-#ifdef _DEBUG
-  std::string m_name;
-#endif
+  std::string m_filename;
 };
 
 typedef RCPtr<Texture> PTexture;
