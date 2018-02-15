@@ -1,27 +1,11 @@
 #include <AmjuFirst.h>
-#include "GuiFactory.h"
 #include "GuiButton.h"
-#include "GuiCheck.h"
-#include "GuiImage.h"
-#include "GuiText.h"
-#include "GuiTextEdit.h"
-#include "GuiComposite.h"
-#include "GuiListBox.h"
-#include "GuiFileListBox.h"
-#include "GuiWindow.h"
-#include "GuiKeyboard.h"
-#include "GuiMenu.h"
-#include "GuiDialog.h"
-#include "GuiRect.h"
-#include "GuiScroll.h"
-#include "GuiFileDialog.h"
-#include "GuiObjView.h"
 #include "GuiCalendar.h"
-#include "GuiDataBarDisplay.h"
 #include "GuiChart.h"
+#include "GuiCheck.h"
+#include "GuiComposite.h"
+#include "GuiDataBarDisplay.h"
 #include "GuiDataLineDisplay.h"
-#include "GuiElastic.h"
-#include "GuiSlider.h"
 #include "GuiDecInclude.h"
 #include "GuiDecRotate.h"
 #include "GuiDecScale.h"
@@ -29,6 +13,23 @@
 #include "GuiDecColour.h"
 #include "GuiDecAnimation.h"
 #include "GuiDecShader.h"
+#include "GuiDialog.h"
+#include "GuiElastic.h"
+#include "GuiFactory.h"
+#include "GuiFileDialog.h"
+#include "GuiFileListBox.h"
+#include "GuiImage.h"
+#include "GuiKeyboard.h"
+#include "GuiListBox.h"
+#include "GuiMenu.h"
+#include "GuiObjView.h"
+#include "GuiRect.h"
+#include "GuiText.h"
+#include "GuiTextEdit.h"
+#include "GuiScroll.h"
+#include "GuiSlider.h"
+#include "GuiSprite.h"
+#include "GuiWindow.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -59,6 +60,7 @@ GuiFactory::GuiFactory()
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
   Add(GuiDecScale::NAME, &CreateT<GuiDecScale>);
   Add(GuiDecShader::NAME, &CreateT<GuiDecShader>);
+  Add(GuiSprite::NAME, &CreateT<GuiSprite>);
 
   Add(GuiListBox::NAME, &CreateListBox);
   Add(GuiFileListBox::NAME, &CreateFileListBox);
