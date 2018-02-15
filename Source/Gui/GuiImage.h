@@ -23,7 +23,10 @@ public:
   Texture* GetTexture();
 
 private:
-  void BuildTris();
+  // Build (2 element) tri list to draw the textured quad.
+  // NB this is super inefficient: GuiSprite batches draw calls better,
+  //  especially if the images are all in one atlas.
+  virtual void BuildTris();
 
 protected:
   PTexture m_texture;

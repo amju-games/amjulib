@@ -80,13 +80,22 @@ bool GuiImage::Load(File* f)
   // Check for extra attributes after the texture path
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
+
   bool stretch = false;
+  AmjuGL::TextureFilter tf = AmjuGL::AMJU_TEXTURE_NICE;
+
   int n = static_cast<int>(strs.size());
   for (int i = 1; i < n; i++)
   {
     if (strs[i] == "stretch")
     {
       stretch = true;
+    }
+
+    if (strs[i] == "nearest")
+    {
+      // use nearest filtering, not nicest
+      tf = AmjuGL::AMJU_TEXTURE_NEAREST;
     }
   }
 
@@ -103,6 +112,8 @@ bool GuiImage::Load(File* f)
     float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
     m_size.y = m_size.x * imageAspectInv * screenAspect;
   }
+
+  m_texture->SetFilter(tf);
 
   return true;
 }
