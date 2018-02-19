@@ -55,15 +55,18 @@ void GuiSprite::BuildTris()
 {
   float du = 1.f / static_cast<float>(m_numCellsXY.x);
   float dv = 1.f / static_cast<float>(m_numCellsXY.y);
-  float u = du * static_cast<float>(m_cell % m_numCellsXY.x);
-  float v = dv * static_cast<float>(m_cell / m_numCellsXY.x); // x, not y
+  float u0 = du * static_cast<float>(m_cell % m_numCellsXY.x);
+  float v0 = dv * static_cast<float>(m_cell / m_numCellsXY.x); // x, not y
+  float u1 = u0 + du;
+  float v1 = v0 + dv;
 
+  const float Z = 0;
   AmjuGL::Vert verts[4] =
   {
-    AmjuGL::Vert(1, -1, 0,   u + du, v - dv,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(1,  0, 0,   u + du, v,   0, 1, 0),
-    AmjuGL::Vert(0,  0, 0,   u,      v,   0, 1, 0),
-    AmjuGL::Vert(0, -1, 0,   u,      v - dv,   0, 1, 0)
+    AmjuGL::Vert(1, -1, Z,   u1, 1.f - v1,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
+    AmjuGL::Vert(1,  0, Z,   u1, 1.f - v0,   0, 1, 0),
+    AmjuGL::Vert(0,  0, Z,   u0, 1.f - v0,   0, 1, 0),
+    AmjuGL::Vert(0, -1, Z,   u0, 1.f - v1,   0, 1, 0)
   };
 
   AmjuGL::Tris tris;
@@ -88,6 +91,9 @@ bool GuiSprite::Load(File* f)
   {
     return false;
   }
+
+  // TODO TEMP TEST - does this make any difference when image is mipmapped?
+  m_texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
 
   m_texHash = HashString(m_texture->GetFilename());
 
