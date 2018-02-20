@@ -79,11 +79,6 @@ int Texture::GetBytesPerPixel() const
   return m_bytesPerPixel;
 }
 
-const std::string& Texture::GetFilename() const
-{
-  return m_filename;
-}
-
 bool Texture::Load(const std::string& filename)
 {
   unsigned int w = 0;
@@ -133,8 +128,6 @@ bool Texture::Load(const std::string& filename)
 #else
   delete [] data;
 #endif
-
-  m_filename = filename;
 
   return true;
 }

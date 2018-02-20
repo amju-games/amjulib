@@ -95,7 +95,9 @@ bool GuiSprite::Load(File* f)
   // TODO TEMP TEST - does this make any difference when image is mipmapped?
   m_texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
 
-  m_texHash = HashString(m_texture->GetFilename());
+  // Hash the texture resource name, so we can group all sprites using the same
+  //  texture.
+  m_texHash = HashString(m_texture->GetResName());
 
   // Get sprite sheet layout info
   if (!LoadVec2(f, &m_numCellsXY))

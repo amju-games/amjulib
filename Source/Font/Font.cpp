@@ -57,9 +57,21 @@ Resource* FontLoader(const std::string& fontName)
   if (!font->Load(&file))
   {
     Assert(0);
-    return 0;
+    return nullptr;
   }
   return font;
+}
+
+bool Font::Load(const std::string& resName)
+{
+  std::string fontFilename = GetFileNoExt(resName) + ".txt";
+  File file;
+  if (!file.OpenRead(fontFilename))
+  {
+    Assert(0);
+    return nullptr;
+  }
+  return Load(&file);
 }
 
 Font::Font(const std::string& name) : m_name(name)

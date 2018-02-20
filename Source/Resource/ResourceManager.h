@@ -9,8 +9,33 @@
 
 namespace Amju
 {
+// * Resource *
+// An asset loaded from file, e.g. a texture, shader, mesh, etc.
 class Resource : public RefCounted
 {
+public:
+  virtual bool Load(const std::string& resName) = 0;
+
+  // Implement reloading for the Resource type.
+  // Hopefully this is as simple as Load(m_resourceName) but you might
+  //  need to specialise it, especially for GL types.
+  virtual void Reload();
+
+  // We will call this when first loading the resource, so subclasses don't
+  //  need to do this.
+  void SetResName(const std::string& resName);
+
+  // Return res name if loaded successfully, else empty string if not loaded
+  //  or set up in code rather than from a file.
+  const std::string& GetResName() const;
+
+protected:
+  // Store the resource name we used to first load the resource. This is so
+  //  we can reload later if required (probably only for development).
+  // It's a 'resource name' rather than filename because resource types can
+  //  make a different file name from the resource name. E.g. font resource
+  //  names end with '.font', but the actual filename ends '.txt'.
+  std::string m_resourceName;
 };
 typedef RCPtr<Resource> PResource;
 
@@ -44,10 +69,13 @@ public:
   Resource* GetRes(const std::string& resName);
 
   // Dump info
-  void Dump();
+  void DebugPrint();
 
   // Clear all cached resources
   void Clear();
+
+  // Reload all resources
+  void Reload();
 
 private:
   Resource* LoadRes(const std::string& resName);

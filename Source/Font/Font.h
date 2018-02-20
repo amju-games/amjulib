@@ -23,6 +23,8 @@ public:
   Font(const std::string& name);
   ~Font();
 
+  virtual bool Load(const std::string& resName) override;
+
   // Load font data from a file. 
   // I.e. point size, texture file names, etc.
   virtual bool Load(File*);
@@ -52,12 +54,12 @@ private:
   // Draw the text on the window. 
   // (x, y) coords are -1..1
   // TODO Why char*, why not string
-  void Print(float x, float y, const char* textUtf8, float scaleX = 1.0f);
+  //void Print(float x, float y, const char* textUtf8, float scaleX = 1.0f);
 
-  // Draw text in world space as a series of billboards.
-  // The billboards can always be standing up, or facing the camera.
-  void PrintWorld(const Vec3f& v, 
-    float size, const char* text, bool up = false, bool depthTest = false);
+  //// Draw text in world space as a series of billboards.
+  //// The billboards can always be standing up, or facing the camera.
+  //void PrintWorld(const Vec3f& v, 
+  //  float size, const char* text, bool up = false, bool depthTest = false);
 
 protected:
   std::string m_name;

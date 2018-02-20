@@ -47,11 +47,11 @@ bool ObjMesh::RequiresTextures()
 Resource* TextObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
-  if (!obj->Load(resName, 
-    false /* text */ ))
+  obj->SetIsBinary(false);
+  if (!obj->Load(resName))
   {
     //Assert(0);
-    return 0;
+    return nullptr;
   }
   return obj;
 }
@@ -59,11 +59,11 @@ Resource* TextObjLoader(const std::string& resName)
 Resource* BinaryObjLoader(const std::string& resName)
 {
   ObjMesh* obj = new ObjMesh;
-  if (!obj->Load(resName, 
-    true /* binary */ ))
+  obj->SetIsBinary(true);
+  if (!obj->Load(resName))
   {
     //Assert(0);
-    return 0;
+    return nullptr;
   }
   return obj;
 }
@@ -79,7 +79,8 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
   // Bypass Res Manager so we don't cache the file, we want to reload it.
   // ??? This should be a flag ???
   ObjMesh* mesh = new ObjMesh;
-  bool loaded = mesh->Load(objFile, binary);
+  mesh->SetIsBinary(binary);
+  bool loaded = mesh->Load(objFile);
 
   // After loading, revert to original file root
   File::SetRoot(origRoot, "/");
@@ -87,7 +88,7 @@ ObjMesh* LoadObjMesh(const std::string& pathFile, bool binary)
   if (!loaded)
   {
     delete mesh;
-    mesh = 0;
+    mesh = nullptr;
   }
 
   return mesh;
@@ -454,9 +455,14 @@ std::cout << "Suspiciously high number of faces in obj mesh: " << numFaces << ".
   return true;
 }
 
-bool ObjMesh::Load(const std::string& filename, bool binary)
+void ObjMesh::SetIsBinary(bool isBinary)
 {
-  if (binary)
+  m_isBinary = isBinary;
+}
+
+bool ObjMesh::Load(const std::string& filename)
+{
+  if (m_isBinary)
   {
     return LoadBinary(filename);
   }
@@ -911,7 +917,7 @@ void ObjMesh::Transform(const Matrix& mat)
   }
 }
 
-bool ObjMesh::Save(const std::string& filename, bool binary)
+bool ObjMesh::Save(const std::string& filename)
 {
   typedef std::map<Vec3f, int> Vec3Map;
   Vec3Map pointMap;
@@ -971,7 +977,7 @@ bool ObjMesh::Save(const std::string& filename, bool binary)
     }
   }
 
-  if (binary)
+  if (m_isBinary)
   {
     File of(File::NO_VERSION);
     of.OpenWrite(filename, 0, true /* is binary */);

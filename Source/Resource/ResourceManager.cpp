@@ -50,6 +50,22 @@ Resource* Md2Loader(const std::string& resName)
   return (Resource*)pModel;
 }
 
+void Resource::Reload()
+{
+  bool res = Load(m_resourceName);
+  Assert(res); // should succeed, assuming the original Load did so.
+}
+
+void Resource::SetResName(const std::string& resName)
+{
+  m_resourceName = resName;
+}
+
+const std::string& Resource::GetResName() const
+{
+  return m_resourceName;
+}
+
 ResourceManager::ResourceManager()
 {
   AddLoader("tga", ImageLoader);
@@ -168,6 +184,9 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
 
   Assert(jt != m_loaders.end());
   Loader myLoader = jt->second;
+
+  std::cout << "Loading resource: '" << resName << "'.\n";
+
   Resource* r = myLoader(resName);
   //Assert(r);
 #ifdef _DEBUG
@@ -177,10 +196,22 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   }
 #endif
 
+  r->SetResName(resName); // for reloading
   return r;
 }
 
-void ResourceManager::Dump()
+void ResourceManager::Reload()
+{
+  std::cout << "Reloading resources ";
+  for (auto& p : m_resources)
+  {
+    std::cout << ".";
+    p.second->Reload();
+  }
+  std::cout << " Reloaded resources.\n";
+}
+
+void ResourceManager::DebugPrint()
 {
   std::cout << "======================================================================"
     "\nResource Manager: Groups: " << m_groups.size() << "\n";
