@@ -56,13 +56,6 @@ public:
   // Return a value for the 'initialisation trick'
   bool AddLoader(const std::string& fileExt, Loader);
 
-  // Load a Resource Group
-  // This is a list of Resources which will be loaded on demand.
-  bool LoadResourceGroup(const std::string& resourceGroupFileName);
-
-  // Free up all resources in the named group
-  void FreeResourceGroup(const std::string& resourceGroupFileName);
-
   // Get a resource - the extension is used to decide which Loader 
   //  to use. The named resource may not have been loaded yet -- 
   //  in which case we load it now. 
@@ -89,18 +82,6 @@ private:
   //  required (i.e. GetRes called).
   typedef std::map<std::string, PResource> Resources;
   Resources m_resources;
-
-  // Resource Group - has set of resource names.
-  struct ResGroup
-  {
-    std::string m_name;
-    typedef std::set<std::string> ResourceNames;
-    ResourceNames m_resNames;
-  };
-  
-  // Map of resource group name to resource group
-  typedef std::map<std::string, ResGroup> ResGroupMap;
-  ResGroupMap m_groups;
 };
 }
 
