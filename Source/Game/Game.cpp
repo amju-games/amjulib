@@ -167,7 +167,12 @@ void Game::RunOneLoop()
 #ifdef WIN32
     unsigned long draw = GetTickCount() - mid;
     unsigned long update = mid - start;
-    std::string s = "Draw: " + ToString((unsigned int)draw) + " update: " + ToString((unsigned int)update);
+    std::string s = std::string("Draw: ") + 
+      (draw < 10 ? "0" : "") +
+      ToString((unsigned int)draw) +
+      " update: " + 
+      (update < 10 ? "0" : "") +
+      ToString((unsigned int)update);
 
 #else
     timeval tafter;
@@ -187,8 +192,9 @@ void Game::RunOneLoop()
     // Display time per frame
     static GuiText t;
     t.SetFont(m_font);
+    t.SetFontSize(2.f);
     t.SetScaleX(0.7f);
-    t.SetFgCol(Colour(1, 1, 1, 1));
+    t.SetFgCol(Colour(1, 0, 1, 1));
     t.SetLocalPos(Vec2f(-1.0f, 1.0f));
     t.SetSize(Vec2f(2.0f, 0.1f));
     t.SetJust(GuiText::AMJU_JUST_LEFT);
