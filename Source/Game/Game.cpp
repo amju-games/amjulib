@@ -7,6 +7,7 @@
 #include <MessageQueue.h>
 #include <StringUtils.h>
 #include <ResourceManager.h>
+#include <GuiSprite.h>
 #include <GuiText.h>
 #include <Rect.h>
 #ifdef WIN32
@@ -98,6 +99,9 @@ void Game::Draw()
   AmjuGL::Disable(AmjuGL::AMJU_CULLING);
 
   GetState()->Draw2d();
+  // Draw call optimisation: all sprites using the same texture (i.e. atlas)
+  //  are bunched into one draw call. Problem that this affects the draw order? D:
+  GuiSprite::DrawAllSprites();
 
   AmjuGL::EndScene();		
 }

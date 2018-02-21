@@ -4,6 +4,7 @@
 #pragma once
 
 #include <GuiImage.h>
+#include <Matrix.h>
 
 namespace Amju
 {
@@ -40,7 +41,9 @@ private:
   void AddThis();
   void RemoveThis();
 
-  void BuildTris() override;
+  // Add the 2 tris comprising this sprite quad to the given tris.
+  // This is used to bunch up all quads using the same texture into one draw call.
+  void AddToTrilist(AmjuGL::Tris& tris);
 
 protected:
   // Map hash of image filename to all sprites using that image.
@@ -62,5 +65,8 @@ protected:
 
   // Hash of texture filename. 
   unsigned int m_texHash = 0;
+
+  Matrix m_combinedTransform; // combined modelview transform
+  Colour m_combinedColour;
 };
 }

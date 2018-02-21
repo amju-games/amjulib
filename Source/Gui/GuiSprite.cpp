@@ -20,8 +20,17 @@ GuiSprite::~GuiSprite()
 
 void GuiSprite::Draw()
 {
-  // TODO just for now. 
-  GuiImage::Draw();
+  // Store current state of transform and colour, which we use later when
+  //  we draw the batch of all tris using the current texture.
+  // TODO At some point, we will need to store other stuff, e.g. current shader.
+  const Vec2f& pos = GetCombinedPos();
+  const Vec2f& size = GetSize();
+  AmjuGL::PushMatrix();
+  AmjuGL::Translate(pos.x, pos.y, 0);
+  AmjuGL::Scale(size.x, size.y, 1);
+  m_combinedTransform.ModelView();
+  m_combinedColour = AmjuGL::GetColour();
+  AmjuGL::PopMatrix();
 }
 
 void GuiSprite::Animate(float animValue)
@@ -44,45 +53,46 @@ void GuiSprite::Animate(float animValue)
 
 void GuiSprite::SetCell(int cell)
 {
-  if (cell != m_cell)
-  {
-    m_cell = cell;
-    BuildTris();
-  }
+  m_cell = cell;
 }
 
-void GuiSprite::BuildTris()
+void GuiSprite::AddToTrilist(AmjuGL::Tris& tris)
 {
   float du = 1.f / static_cast<float>(m_numCellsXY.x);
   float dv = 1.f / static_cast<float>(m_numCellsXY.y);
   float u0 = du * static_cast<float>(m_cell % m_numCellsXY.x);
-  float v0 = dv * static_cast<float>(m_cell / m_numCellsXY.x); // x, not y
+  float v0 = 1.f - dv * static_cast<float>(m_cell / m_numCellsXY.x); // x, not y
   float u1 = u0 + du;
-  float v1 = v0 + dv;
+  float v1 = v0 - dv;
 
   const float Z = 0;
-  AmjuGL::Vert verts[4] =
+  // Corners: a unit square, transformed by whatever the current state of
+  //  the modelview matrix was when Draw was called.
+  Vec3f v[4] = 
   {
-    AmjuGL::Vert(1, -1, Z,   u1, 1.f - v1,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
-    AmjuGL::Vert(1,  0, Z,   u1, 1.f - v0,   0, 1, 0),
-    AmjuGL::Vert(0,  0, Z,   u0, 1.f - v0,   0, 1, 0),
-    AmjuGL::Vert(0, -1, Z,   u0, 1.f - v1,   0, 1, 0)
+    Vec3f(1, -1, Z) * m_combinedTransform,
+    Vec3f(1,  0, Z) * m_combinedTransform,
+    Vec3f(0,  0, Z) * m_combinedTransform,
+    Vec3f(0, -1, Z) * m_combinedTransform,
   };
 
-  AmjuGL::Tris tris;
-  tris.reserve(2);
+  AmjuGL::Vert verts[4] =
+  {
+    AmjuGL::Vert(v[0].x, v[0].y, v[0].z,   u1, v1,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
+    AmjuGL::Vert(v[1].x, v[1].y, v[1].z,   u1, v0,   0, 1, 0),
+    AmjuGL::Vert(v[2].x, v[2].y, v[2].z,   u0, v0,   0, 1, 0),
+    AmjuGL::Vert(v[3].x, v[3].y, v[3].z,   u0, v1,   0, 1, 0)
+  };
+
   AmjuGL::Tri tri;
-  tri.m_verts[0] = verts[0];
-  tri.m_verts[1] = verts[1];
-  tri.m_verts[2] = verts[2];
+  tri.Set(verts[0], verts[1], verts[2]);
+  // Set the vertex colours to the colour which was current when Draw was called
+  tri.SetColour(m_combinedColour.m_r, m_combinedColour.m_g, m_combinedColour.m_b, m_combinedColour.m_a);
   tris.push_back(tri);
 
-  tri.m_verts[0] = verts[0];
-  tri.m_verts[1] = verts[2];
-  tri.m_verts[2] = verts[3];
+  tri.Set(verts[0], verts[2], verts[3]);
+  tri.SetColour(m_combinedColour.m_r, m_combinedColour.m_g, m_combinedColour.m_b, m_combinedColour.m_a);
   tris.push_back(tri);
-
-  m_triList = MakeTriList(tris);
 }
 
 bool GuiSprite::Load(File* f)
@@ -132,16 +142,66 @@ bool GuiSprite::Load(File* f)
 
 void GuiSprite::DrawAllSprites()
 {
+  // Vector of Tri Lists: one tri list is used to draw all the sprites which use
+  //  the same texture, so we minimise draw calls.
+  // NB To my surprise, making these vecs static annhililated the frame rate!
+  std::vector<AmjuGL::Tris> tris;
+  // Vector of textures: each texture corresponds to a separate tri list.
+  std::vector<Texture*> textures;
+  int numLists = s_sprites.size();
+  tris.resize(numLists);
+  textures.resize(numLists);
+
+  // First: get all the tris from each sprite into the right tri list.
+  int i = 0;
+  // Iterate over ALL sprites
   for (auto& p : s_sprites)
   {
+    // vec contains only sprites using the same texture.
     auto& vec = p.second;
-    // Update a trilist from the quad in each element of vec.
+    if (vec.empty())
+    {
+      i++;
+      continue; // Hmm, should prune this node?
+    }
+    textures[i] = vec[0]->GetTexture(); // get the texture used by all sprites in this vec
+    // Add the quad for each sprite to the current tri list
+    for (GuiSprite* sprite : vec)
+    {
+      sprite->AddToTrilist(tris[i]);
+    }
+    i++;
+  }
+
+  // TriLists: don't create each time.
+  // Making this guy static does not kill frame rate, and is slightly better
+  //  than non-static
+  static std::vector<RCPtr<TriListDynamic>> triLists;
+  while (triLists.size() < numLists)
+  {
+    triLists.push_back((TriListDynamic*)
+      AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID));
+  }
+
+  // Second: draw each tri list, setting the texture once for the tri list.
+  // TODO We should also sort by shader. For now, we assume it's the same 
+  //  shader for all sprites.
+  for (int i = 0; i < numLists; i++)
+  {
+    textures[i]->UseThisTexture();
+    triLists[i]->Set(tris[i]);
+    triLists[i]->Draw();
   }
 }
 
 void GuiSprite::AddThis()
 {
-  s_sprites[m_texHash].push_back(this);
+  auto& vec = s_sprites[m_texHash];
+  // Only add once! Could happen when reloading.
+  if (std::find(vec.begin(), vec.end(), this) == vec.end())
+  {
+    s_sprites[m_texHash].push_back(this);
+  }
 }
 
 void GuiSprite::RemoveThis()
