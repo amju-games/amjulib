@@ -129,7 +129,7 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
 
 void ResourceManager::Reload()
 {
-  std::cout << "Reloading resources...";
+  std::cout << "Reloading resources...\n";
   for (auto& p : m_resources)
   {
     std::cout << p.first << "\n";
