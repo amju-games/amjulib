@@ -58,6 +58,11 @@ static int initCalled = 0;
 static int initFrameCalled = 0;
 static int flipCalled = 0;
 
+// Number of draw calls this frame
+static int numDrawCalls = 0;
+// Number of draw calss last frame - report this one 
+static int numDrawCallsLastFrame = 0;
+
 static std::ostream& ReportCol(const Colour& c, std::ostream& os)
 {
   return os << "R: " << c.m_r << " G: " << c.m_g << " B: " << c.m_b << " A: " << c.m_a;
@@ -122,6 +127,8 @@ std::ostream& AmjuGL::ReportState(std::ostream& os)
  
   os << "Viewport: " << viewport[0] << " " << viewport[1] << " " << viewport[2] << " " << viewport[3] << "\n";
 
+  os << "Draw calls last frame: " << numDrawCallsLastFrame << "\n";
+
   return os;
 }
 
@@ -145,6 +152,9 @@ void AmjuGL::BeginScene()
     Assert(s_matrixStackSize[i] == 0);
   }
 #endif
+
+  numDrawCallsLastFrame = numDrawCalls;
+  numDrawCalls = 0;
 
   impl->BeginScene();
 }
@@ -422,6 +432,8 @@ void AmjuGL::DrawTriList(const Tris& tris)
 #endif
 
   impl->DrawTriList(tris);
+
+  numDrawCalls++;
 }
 
 void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
@@ -429,6 +441,8 @@ void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
   AMJU_CALL_STACK;
 
   impl->DrawLine(v1, v2);
+
+  numDrawCalls++;
 }
 
 void AmjuGL::Draw(Drawable* drawable)
