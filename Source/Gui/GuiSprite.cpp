@@ -36,7 +36,7 @@ void GuiSprite::Draw()
 void GuiSprite::Animate(float animValue)
 {
   // Going forward, add 1 because max cell is part of the anim sequence.
-  int d = 1;
+  float d = 0.99f;
   if (m_maxCell < m_minCell)
   {
     // TODO
@@ -45,7 +45,7 @@ void GuiSprite::Animate(float animValue)
   }
   int cell = static_cast<int>(Lerp(
     static_cast<float>(m_minCell), 
-    static_cast<float>(m_maxCell + d), 
+    static_cast<float>(m_maxCell) + d, 
     animValue));
 
   SetCell(cell);
