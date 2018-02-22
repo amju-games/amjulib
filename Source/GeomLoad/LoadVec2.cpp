@@ -6,6 +6,19 @@
 
 namespace Amju
 {
+bool ToVec2(const std::string& s, Vec2i* v)
+{
+  std::vector<std::string> strs = Split(s, ',');
+  if (strs.size() != 2)
+  {
+    return false;
+  }
+
+  v->x = atoi(strs[0].c_str());
+  v->y = atoi(strs[1].c_str());
+  return true;
+}
+
 bool ToVec2(const std::string& s, Vec2f* v)
 {
   std::vector<std::string> strs = Split(s, ',');
