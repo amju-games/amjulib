@@ -188,6 +188,12 @@ void GuiSprite::DrawAllSprites()
   //  shader for all sprites.
   for (int i = 0; i < numLists; i++)
   {
+    if (!textures[i])
+    {
+      // In practice this happens when there are no sprites to draw, so there
+      //  are empty vecs in s_sprites.
+      continue;
+    }
     textures[i]->UseThisTexture();
     triLists[i]->Set(tris[i]);
     triLists[i]->Draw();
