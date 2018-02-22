@@ -51,6 +51,13 @@ void GuiSprite::Animate(float animValue)
   SetCell(cell);
 }
 
+void GuiSprite::SetCellRange(int minCell, int maxCell)
+{
+  m_minCell = minCell;
+  m_cell = minCell;
+  m_maxCell = maxCell;
+}
+
 void GuiSprite::SetCell(int cell)
 {
   m_cell = cell;
@@ -58,6 +65,11 @@ void GuiSprite::SetCell(int cell)
 
 void GuiSprite::AddToTrilist(AmjuGL::Tris& tris)
 {
+  if (!IsVisible())
+  {
+    return;
+  }
+
   float du = 1.f / static_cast<float>(m_numCellsXY.x);
   float dv = 1.f / static_cast<float>(m_numCellsXY.y);
   float u0 = du * static_cast<float>(m_cell % m_numCellsXY.x);
