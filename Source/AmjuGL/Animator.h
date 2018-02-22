@@ -12,7 +12,7 @@ class Animator;
 class File;
 
 // * AnimCallback *
-// Function type for calalback when anim completes, etc.
+// Function type for callback when anim completes, etc.
 using AnimCallback = std::function<void(Animator*)>;
 
 // * Animator *
@@ -52,6 +52,7 @@ public:
     EASE_TYPE_STEP,
     EASE_TYPE_IN_OUT,
     EASE_TYPE_IN_OUT_ELASTIC,
+    EASE_TYPE_SINE,
   };
 
   void SetIsReversed(bool reverse);

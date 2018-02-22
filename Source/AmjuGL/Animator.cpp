@@ -82,6 +82,7 @@ Animator::EaseType Animator::GetEaseTypeFromString(const std::string& cs, bool& 
     { "one", EaseType::EASE_TYPE_ONE },
     { "ease-in-out", EaseType::EASE_TYPE_IN_OUT },
     { "ease-in-out-elastic", EaseType::EASE_TYPE_IN_OUT_ELASTIC },
+    { "sine", EaseType::EASE_TYPE_SINE },
   };
   auto it = EASE_TYPES.find(s);
   Assert(it != EASE_TYPES.end());
@@ -155,6 +156,11 @@ void Animator::CalcUpdate(float dt)
     break;
   case EaseType::EASE_TYPE_LINEAR:
     m_value = t;
+    break;
+  case EaseType::EASE_TYPE_SINE:
+    // Sine wave: scale up t to between 0 and 2 pi. 
+    // Transform result from -1..1 to 0..1
+    m_value = (sinf(t * 2.f * static_cast<float>(M_PI)) + 1.f) * .5f;
     break;
   case EaseType::EASE_TYPE_STEP:
     m_value = (m_time > m_cycleTime) ? 1.f : 0.f;
