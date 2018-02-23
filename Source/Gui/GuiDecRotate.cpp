@@ -2,6 +2,7 @@
 // (c) Copyright 2000-2017 Jason Colman
 
 #include <AmjuGL.h>
+#include <LoadVec2.h>
 #include <StringUtils.h>
 #include "GuiDecRotate.h"
 
@@ -32,6 +33,14 @@ bool GuiDecRotate::Load(File* f)
   }
   m_interpAngle = m_angle[0];
 
+  // Pivot point
+  if (!f->GetDataLine(&s))
+  {
+    f->ReportError("Expected pivot point for rotate decorator");
+    return false;
+  }
+  ToVec2(s, &m_pivot);
+
   if (!GuiDecorator::Load(f))
   {
     return false;
@@ -44,8 +53,16 @@ bool GuiDecRotate::Load(File* f)
 
 void GuiDecRotate::Draw()
 {
+  Vec2f childSize = m_children[0]->GetSize();
+
+  // Convert relative pivot to absolute coord. 
+  // E.g. (.5, .5) should be the centre of the element.
+  Vec2f pos = m_children[0]->GetCombinedPos();
+  Vec2f pivot = Vec2f(pos.x + m_pivot.x * childSize.x, pos.y - m_pivot.y * childSize.y);
   AmjuGL::PushMatrix();
+  AmjuGL::Translate(pivot.x, pivot.y, 0);
   AmjuGL::RotateZ(m_interpAngle);
+  AmjuGL::Translate(-pivot.x, -pivot.y, 0);
   GuiDecorator::Draw();
   AmjuGL::PopMatrix();
 }
@@ -56,5 +73,17 @@ void GuiDecRotate::Animate(float animValue)
 
   AnimateChildren(animValue);
 }
+
+void GuiDecRotate::SetRotation(float angle, int zeroOrOne)
+{
+  m_angle[zeroOrOne] = angle;
+  m_interpAngle = angle;
+}
+
+void GuiDecRotate::SetPivot(const Vec2f& pivot)
+{
+  m_pivot = pivot;
+}
+
 }
 

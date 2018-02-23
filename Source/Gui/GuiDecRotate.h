@@ -20,9 +20,13 @@ public:
   virtual void Draw() override;
   virtual void Animate(float animValue) override;
 
+  void SetRotation(float angle, int zeroOrOne = 0);
+  void SetPivot(const Vec2f& pivot);
+
 private:
   float m_angle[2];
   float m_interpAngle = 0;
+  Vec2f m_pivot;
 };
 }
 
