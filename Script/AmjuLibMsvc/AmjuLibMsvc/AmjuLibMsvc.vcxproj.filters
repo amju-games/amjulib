@@ -1017,6 +1017,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiSprite.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\Batched.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1938,6 +1941,9 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiSprite.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\Batched.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

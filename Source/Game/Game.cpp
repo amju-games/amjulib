@@ -7,7 +7,7 @@
 #include <MessageQueue.h>
 #include <StringUtils.h>
 #include <ResourceManager.h>
-#include <GuiSprite.h>
+#include <Batched.h>
 #include <GuiText.h>
 #include <Rect.h>
 #ifdef WIN32
@@ -98,10 +98,11 @@ void Game::Draw()
   //  flip/mirror 2D elements.
   AmjuGL::Disable(AmjuGL::AMJU_CULLING);
 
+  // Batched::Init() ?
   GetState()->Draw2d();
   // Draw call optimisation: all sprites using the same texture (i.e. atlas)
   //  are bunched into one draw call. Problem that this affects the draw order? D:
-  GuiSprite::DrawAllSprites();
+  Batched::DrawAll();
 
   AmjuGL::EndScene();		
 }

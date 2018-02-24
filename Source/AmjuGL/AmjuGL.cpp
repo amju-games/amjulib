@@ -442,7 +442,8 @@ void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
 
   impl->DrawLine(v1, v2);
 
-  numDrawCalls++;
+  // Count these separately
+//  numDrawCalls++;
 }
 
 void AmjuGL::Draw(Drawable* drawable)

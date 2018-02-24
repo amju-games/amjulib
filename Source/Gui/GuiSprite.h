@@ -3,8 +3,8 @@
 
 #pragma once
 
+#include <Batched.h>
 #include <GuiImage.h>
-#include <Matrix.h>
 
 namespace Amju
 {
@@ -17,19 +17,14 @@ namespace Amju
 // TODO Not sure if we need to inherit from GuiImage -- but could be a good thing,
 //  as perhaps we can replace Images with Sprites without affecting a lot of
 //  other code.
-class GuiSprite : public GuiImage
+class GuiSprite : public GuiImage, public Batched
 {
 public:
   static const char* NAME;
 
-  ~GuiSprite();
-
   void Draw() override;
   bool Load(File*) override;
   void Animate(float animValue) override;
-
-  // Call this to draw all GuiSprites in as few draw calls as poss.
-  static void DrawAllSprites();
 
   // So we can set up sprites programmatically
   void SetCell(int cell);
@@ -37,24 +32,15 @@ public:
   void SetNumCells(int cellsX, int cellsY);
 
 private:
-  // Add/remove from map
-  void AddThis();
-  void RemoveThis();
-
   // Add the 2 tris comprising this sprite quad to the given tris.
   // This is used to bunch up all quads using the same texture into one draw call.
-  void AddToTrilist(AmjuGL::Tris& tris);
+  void AddToTrilist(AmjuGL::Tris& tris) override;
+
+  Texture* GetTexture() override;
 
 protected:
-  // Map hash of image filename to all sprites using that image.
-  // This lets us draw all GuiSprites in as few draw calls as possible.
-
-  // NB NOT RC Ptrs in this vector, as this will give a cyclic dep.
-  using SpriteSheetMap = std::map<unsigned int, std::vector<GuiSprite*>>;
-  static SpriteSheetMap s_sprites;
-
-  // Number of cells in x and y (We set this per Gui Sprite, not for the image.
-  //  This lets us have different grid sizes on the same image.)
+  // Number of cells in x and y (We set this per GuiSprite, not for the image.
+  //  This lets us have different notional grid sizes on the same image.)
   Vec2i m_numCellsXY;
   // Current cell (left to right, then top to bottom)
   int m_cell = 0;
@@ -62,11 +48,5 @@ protected:
   //  cells to animate through.
   int m_minCell = 0;
   int m_maxCell = 0;
-
-  // Hash of texture filename. 
-  unsigned int m_texHash = 0;
-
-  Matrix m_combinedTransform; // combined modelview transform
-  Colour m_combinedColour;
 };
 }

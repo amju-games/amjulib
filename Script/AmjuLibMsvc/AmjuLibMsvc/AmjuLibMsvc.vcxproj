@@ -366,6 +366,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcMath.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\Batched.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
@@ -681,6 +682,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcTriangle3.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
+    <ClInclude Include="..\..\..\Source\Gui\Batched.h" />
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
