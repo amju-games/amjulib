@@ -5,6 +5,7 @@
 
 #include <AmjuGL.h>
 #include <Matrix.h>
+#include "GuiElement.h"
 
 namespace Amju
 {
@@ -26,9 +27,8 @@ public:
   virtual void Draw() = 0;
 
 protected:
-  // Add/remove from map
-  void AddThis(); // call on successful load
-  void RemoveThis(); // called in dtor, or you can call earlier
+  // Add to map of elements to batch draw
+  void AddToBatch(); // call in Draw() override
 
   // In draw call, don't actually draw, but set up matrix, colour, etc.
   // Then when we call AddToTrilist(), add all the tris making up this
@@ -57,6 +57,17 @@ protected:
 
   // Hash of texture atlas filename. 
   unsigned int m_texHash = 0;
+};
 
+// * GuiFlush *
+// Gui type which calls Batched::DrawAll. I.e. it flushes all batched elements.
+// This can be used to force a draw order, in the absence of a more drastic
+//  rewrite.
+class GuiFlush : public GuiElement
+{
+public:
+  static const char* NAME;
+  void Draw() override;
+  bool Load(File*) { return true; }
 };
 }

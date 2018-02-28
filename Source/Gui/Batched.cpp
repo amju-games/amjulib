@@ -11,10 +11,9 @@ Batched::AtlasMap Batched::s_atlases;
 
 Batched::~Batched()
 {
-  RemoveThis();
 }
 
-void Batched::AddThis()
+void Batched::AddToBatch()
 {
   auto& vec = s_atlases[m_texHash];
   // Only add once! Could happen when reloading.
@@ -22,12 +21,6 @@ void Batched::AddThis()
   {
     s_atlases[m_texHash].push_back(this);
   }
-}
-
-void Batched::RemoveThis()
-{
-  auto& vec = s_atlases[m_texHash];
-  vec.erase(std::remove(vec.begin(), vec.end(), this), vec.end());
 }
 
 void Batched::DrawAll()
@@ -89,6 +82,17 @@ void Batched::DrawAll()
     triLists[i]->Set(tris[i]);
     triLists[i]->Draw();
   }
+
+  s_atlases.clear();
+}
+
+// ----------------------------------------------------------------------------
+
+const char* GuiFlush::NAME = "flush";
+
+void GuiFlush::Draw()
+{
+  Batched::DrawAll();
 }
 
 }

@@ -18,6 +18,9 @@ Texture* GuiSprite::GetTexture()
 
 void GuiSprite::Draw()
 {
+  // Add to batch of stuff to draw
+  AddToBatch();
+
   // Store current state of transform and colour, which we use later when
   //  we draw the batch of all tris using the current texture.
   // TODO At some point, we will need to store other stuff, e.g. current shader.
@@ -146,7 +149,6 @@ bool GuiSprite::Load(File* f)
     m_maxCell = ToInt(strs[1]);
   }
 
-  AddThis();
   return true;
 }
 
