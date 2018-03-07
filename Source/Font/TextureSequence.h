@@ -31,7 +31,7 @@ public:
 
   int GetNumElements() const;
 
-  void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff);
+  void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff, bool isItalic);
 
   // Bind the texture. Doing this once up front instead of every call to
   // Draw() may be more efficient.

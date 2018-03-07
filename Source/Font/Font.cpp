@@ -205,7 +205,7 @@ float Font::GetCharacterWidth(int c)
   AMJU_CALL_STACK;
 
   Assert(c >= 0);
-  if (c >= m_charWidths.size())
+  if (c >= static_cast<int>(m_charWidths.size()))
   {
     return 0;
   }
@@ -274,7 +274,8 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text <
   for (int c : wstring)
   {
     AmjuGL::Tri t[2];
-    m_textureSequence->MakeTris(c - m_startChar, m_size, t, xOff, yOff);
+    const bool NO_ITALIC = false;
+    m_textureSequence->MakeTris(c - m_startChar, m_size, t, xOff, yOff, NO_ITALIC);
     tris.push_back(t[0]);
     tris.push_back(t[1]);
     xOff += GetCharacterWidth(c) * scaleX;

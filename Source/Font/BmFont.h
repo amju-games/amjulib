@@ -12,7 +12,7 @@
 
 namespace Amju
 {
-// * BmFontTextureSequence *s
+// * BmFontTextureSequence *
 // For fonts packed sensibly into an atlas, rather than in a uniform grid (i.e. using BMFont).
 class BmFontTextureSequence : public TextureSequence
 {

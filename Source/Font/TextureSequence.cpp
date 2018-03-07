@@ -166,7 +166,9 @@ void TextureSequence::GetElementInAtlas(
   v1 = v0 + vsize;
 }
 
-void TextureSequence::MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff)
+void TextureSequence::MakeTris(
+  int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff,
+  bool isItalic)
 {
   AMJU_CALL_STACK;
 
@@ -187,14 +189,16 @@ void TextureSequence::MakeTris(int element, float size, AmjuGL::Tri tris[2], flo
   float sizeY = m_sizey * size * h;
   x *= m_sizex * size;
   y *= m_sizey * size;
+  const float ITALIC_TOP_X_OFFSET = sizeX * 0.2f;
+  float italic = isItalic ? ITALIC_TOP_X_OFFSET : 0;
 
   const float Z = 0.0f;
   AmjuGL::Vert v[4] =
   {
-    AmjuGL::Vert(xOff + x,         yOff + y,         Z,  u0, 1.0f - v1,     0, 1.0f, 0),
-    AmjuGL::Vert(xOff + x + sizeX, yOff + y,         Z,  u1, 1.0f - v1,     0, 1.0f, 0),
-    AmjuGL::Vert(xOff + x + sizeX, yOff + y + sizeY, Z,  u1, 1.0f - v0,     0, 1.0f, 0),
-    AmjuGL::Vert(xOff + x,         yOff + y + sizeY, Z,  u0, 1.0f - v0,     0, 1.0f, 0)
+    AmjuGL::Vert(xOff + x,                  yOff + y,         Z,  u0, 1.0f - v1,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x + sizeX,          yOff + y,         Z,  u1, 1.0f - v1,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x + sizeX + italic, yOff + y + sizeY, Z,  u1, 1.0f - v0,     0, 1.0f, 0),
+    AmjuGL::Vert(xOff + x + italic,         yOff + y + sizeY, Z,  u0, 1.0f - v0,     0, 1.0f, 0)
   };
 
   tris[0].m_verts[0] = v[0];
