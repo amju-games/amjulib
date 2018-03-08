@@ -464,8 +464,16 @@ std::string GuiText::GetText() const
 
 void GuiText::SetText(const std::string& escapedText)
 {
+  // Replace special codes for italics etc
+  const char* ITALICS_ON = "\x01"; // match codes in Font
+  const char* ITALICS_OFF = "\x02";
+
+  std::string text;
+  text = Replace(escapedText, "<i>", ITALICS_ON);
+  text = Replace(text, "</i>", ITALICS_OFF);
+
   // Convert escape sequences
-  std::string text = ReplaceUtf8EscapedChars(escapedText);
+  text = ReplaceUtf8EscapedChars(text);
 
   if (text == m_text)
   {

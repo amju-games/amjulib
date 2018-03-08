@@ -26,6 +26,10 @@ const int NUM_CHAR_WIDTHS = 256;
 // For font files with this version number, we expect a BMFont to be
 //  specified.
 const int BM_FONT_FILE_VERSION_NUMBER = 2;
+
+// Special characters to turn italics etc on and off
+const int ITALIC_ON_CHAR = 1;
+const int ITALIC_OFF_CHAR = 2;
 } // anon namespace
   
 Resource* FontLoader(const std::string& fontName)
@@ -205,6 +209,12 @@ float Font::GetCharacterWidth(int c)
   AMJU_CALL_STACK;
 
   Assert(c >= 0);
+
+  if (c == ITALIC_ON_CHAR || c == ITALIC_OFF_CHAR)
+  {
+    return 0;
+  }
+
   if (c >= static_cast<int>(m_charWidths.size()))
   {
     return 0;
@@ -271,14 +281,25 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text <
 
   WString wstring = Utf8ToWString(utf8Text);
 
+  bool italic = false;
   for (int c : wstring)
   {
-    AmjuGL::Tri t[2];
-    const bool NO_ITALIC = false;
-    m_textureSequence->MakeTris(c - m_startChar, m_size, t, xOff, yOff, NO_ITALIC);
-    tris.push_back(t[0]);
-    tris.push_back(t[1]);
-    xOff += GetCharacterWidth(c) * scaleX;
+    if (c == ITALIC_ON_CHAR)
+    {
+      italic = true;
+    }
+    else if (c == ITALIC_OFF_CHAR)
+    {
+      italic = false;
+    }
+    else
+    {
+      AmjuGL::Tri t[2];
+      m_textureSequence->MakeTris(c - m_startChar, m_size, t, xOff, yOff, italic);
+      tris.push_back(t[0]);
+      tris.push_back(t[1]);
+      xOff += GetCharacterWidth(c) * scaleX;
+    }
   }
   m_textureSequence->SetSize(oldSizeX, sizeY);
   return Amju::MakeTriList(tris);
