@@ -30,6 +30,14 @@ public:
 
   static std::ostream& ReportState(std::ostream&);
 
+  // Stats for which we can get a report result
+  enum ReportStat
+  {
+    AMJU_NUM_DRAW_CALLS,
+  };
+
+  static int GetReportStat(ReportStat rs);
+
   // Flags for enable/disable
   enum Flags
   {

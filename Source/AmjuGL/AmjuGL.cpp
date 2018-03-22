@@ -132,6 +132,17 @@ std::ostream& AmjuGL::ReportState(std::ostream& os)
   return os;
 }
 
+int AmjuGL::GetReportStat(AmjuGL::ReportStat rs)
+{
+  switch (rs)
+  {
+  case AMJU_NUM_DRAW_CALLS:
+    return numDrawCallsLastFrame;
+  }
+  Assert(0);
+  return 0;
+}
+
 // TODO Track usage, number of state changes per frame, etc
 
 
