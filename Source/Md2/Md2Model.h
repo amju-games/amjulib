@@ -12,10 +12,11 @@ Amju Games source code (c) Copyright Jason Colman 2004
 #include <utility>
 #include <string>
 #include <vector>
-#include <TriList.h>
-#include <RCPtr.h>
-#include <Endian.h>
 #include <AmjuGL.h>
+#include <Endian.h>
+#include <RCPtr.h>
+#include <ResourceManager.h>
+#include <TriList.h>
 
 namespace Amju
 {
@@ -24,7 +25,7 @@ class File;
 // Loads and draws a Quake2 (.MD2) model.
 // This mesh is shared between GameObjects and so this class can't store
 // per-object state, like the current frame, next frame, etc.
-class Md2Model : public RefCounted
+class Md2Model : public Resource
 {
 public:
   Md2Model();
