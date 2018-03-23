@@ -27,7 +27,7 @@ public:
   GLShader();
   ~GLShader();
 
-  virtual bool Load(const std::string& filenamePrefix);
+  virtual bool Load(const std::string& filenamePrefix) override;
   
   bool Create(const std::string& vertexSource, const std::string& fragmentSource);
 

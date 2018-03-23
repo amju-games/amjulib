@@ -68,6 +68,6 @@ class GuiFlush : public GuiElement
 public:
   static const char* NAME;
   void Draw() override;
-  bool Load(File*) { return true; }
+  bool Load(File*) override { return true; }
 };
 }
