@@ -3,7 +3,7 @@
 #include <AmjuTypes.h>
 #include <GameObject.h>
 #include <Texture.h>
-#include <WithSceneNode.h>
+#include "WithSceneNode.h"
 
 namespace Amju
 {

@@ -2,7 +2,7 @@
 #define GS_WATER2_H_INCLUDED
 
 #include "GSBase.h"
-#include <SceneNodeGrid.h>
+#include "SceneNodeGrid.h"
 #include <Singleton.h>
 
 namespace Amju 

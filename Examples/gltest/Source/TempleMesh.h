@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GameObject.h>
-#include <WithSceneNode.h>
+#include "WithSceneNode.h"
 
 namespace Amju
 {
