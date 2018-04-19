@@ -43,7 +43,7 @@ void GSGuiTest::OnActive()
 {
   GSGui::OnActive();
 
-  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+//  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
 
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
@@ -82,7 +82,7 @@ bool GSGuiTest::OnCursorEvent(const CursorEvent& ce)
   return false;
 }
 
-void OnChoice()
+void OnChoice(GuiElement*)
 {
   std::cout << "Menu choice selected!\n";
 }

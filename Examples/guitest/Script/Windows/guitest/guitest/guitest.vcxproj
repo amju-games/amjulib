@@ -115,12 +115,18 @@ xcopy /Y /S  ..\..\..\..\..\..\Assets\font2d\*  ..\..\..\..\..\..\Build\guitest\
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\DragBox.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGui.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSGuiEdit.cpp" />
+    <ClCompile Include="..\..\..\..\Source\GSGuiEditTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\GSGuiTest.cpp" />
     <ClCompile Include="..\..\..\..\Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\DragBox.h" />
     <ClInclude Include="..\..\..\..\Source\GSGui.h" />
+    <ClInclude Include="..\..\..\..\Source\GSGuiEdit.h" />
+    <ClInclude Include="..\..\..\..\Source\GSGuiEditTest.h" />
     <ClInclude Include="..\..\..\..\Source\GSGuiTest.h" />
   </ItemGroup>
   <ItemGroup>

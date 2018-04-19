@@ -77,7 +77,7 @@ void StartUpAfterCreateWindow()
   Assert(font);
   TheGame::Instance()->SetFrameTimeFont(font);
 
-  TheCursorManager::Instance()->Load(Vec2f(0.025f, -0.08f));
+  TheCursorManager::Instance()->Load("hand.png", Vec2f(0.025f, -0.08f));
 
   TheGame::Instance()->Update();
 }

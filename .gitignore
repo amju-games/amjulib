@@ -14,3 +14,6 @@ Examples/gltest/Script/Windows/AmjuGLTest/AmjuGLTest.opensdf
 Examples/gltest/Script/Windows/AmjuGLTest/AmjuGLTest.sdf
 Examples/gltest/Script/Windows/AmjuGLTest/.vs/
 *.suo
+Examples/guitest/Script/Windows/guitest/.vs/
+Examples/rbtest/Script/Windows/RbTest/.vs/
+*.jbf
