@@ -48,6 +48,11 @@ void GuiDecTranslate::SetTranslation(const Vec2f& tr, int zeroOrOne)
   SetLocalPos(tr);
 }
 
+const Vec2f& GuiDecTranslate::GetTranslation(int zeroOrOne) const
+{
+  return m_positions[zeroOrOne];
+}
+
 void GuiDecTranslate::Animate(float animValue)
 {
   Vec2f interp = m_positions[0] + (m_positions[1] - m_positions[0]) * animValue;
