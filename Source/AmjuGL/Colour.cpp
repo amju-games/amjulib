@@ -94,19 +94,23 @@ std::string ToHexString(const Colour& col, bool includeAlpha)
   // e.g. red (1, 0, 0) => ff0000
   // with alpha: (1, 0, 0, 1) => ff0000ff
 
-  unsigned int i = (((int)col.m_r) * 255);
+  unsigned int i = static_cast<unsigned int>(col.m_r * 255);
   Assert(i <= 255);
-  i = (i << 8) | (((int)col.m_g) * 255);
-  Assert(i <= 65535);
-  i = (i << 8) | (((int)col.m_b) * 255);
-  Assert(i <= 16777215);
+  std::string s = ToHexString(i);
+
+  i = static_cast<unsigned int>(col.m_g * 255);
+  s += ToHexString(i);
+
+  i = static_cast<unsigned int>(col.m_b * 255);
+  s += ToHexString(i);
 
   if (includeAlpha)
   {
-    i = (i << 8) | (((int)col.m_a) * 255);
-  }  
+    i = static_cast<unsigned int>(col.m_a * 255);
+    s += ToHexString(i);
+  }
 
-  return ToHexString(i);
+  return s;
 }
 
 Colour Interpolate(const Colour& c1, const Colour& c2, float t)
