@@ -33,7 +33,7 @@ void GSPatchwork::DrawScene()
   AmjuGL::SetMatrixMode(AmjuGL::AMJU_MODELVIEW_MATRIX);
   AmjuGL::SetIdentity();
 
-  AmjuGL::LookAt(0, 2.4, 4.0,  0, 0, -10.0,  0, 1, 0);
+  AmjuGL::LookAt(0, 2.4f, 4.0f,  0, 0, -10.0f,  0, 1, 0);
   
   patchwork.Draw();
 }

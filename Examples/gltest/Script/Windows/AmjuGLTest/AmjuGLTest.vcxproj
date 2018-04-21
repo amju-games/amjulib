@@ -74,8 +74,36 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/I "../../../../../Build/amjulib/include" /I "../../../../../3rdPartyLibs/LibOVR-0.3.2/Win/Include"
- %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/I "../../../../../3rdPartyLibs/LibOVR-0.3.2/Win/Include"
+/I "../../../../../Source/Events" 
+/I "../../../../../Source/Anim" 
+/I "../../../../../Source/EventsWin32" 
+/I "../../../../../Source/EventsSDL" 
+/I "../../../../../Source/FileUtils" 
+/I "../../../../../Source/Localise" 
+/I "../../../../../Source/AmjuGL" 
+/I "../../../../../Source/AmjuGLOpenGL" 
+/I "../../../../../Source/AmjuGLDX9" /I "../../../../Source/AmjuGLDX11" 
+/I "../../../../../Source/Mem" 
+/I "../../../../../Source/Md2" 
+/I "../../../../../Source/Image" 
+/I "../../../../../Source/Geom" 
+/I "../../../../../Source/Strings" 
+/I "../../../../../Source/TimeUtils" 
+/I "../../../../../Source/Game" 
+/I "../../../../../Source/Resource" 
+/I "../../../../../Source/Scene" 
+/I "../../../../../Source/Obj"  
+/I "../../../../../Source/Collision" 
+/I "../../../../../Source/Gui" 
+/I "../../../../../Source/Font" 
+/I "../../../../../Source/Sound" 
+/I "../../../../../Source/SoundBass" 
+/I "../../../../../Source/GeomLoad" 
+/I "../../../../../Source/GeomDraw"
+/I "../../../../../Source/Utils" 
+/I "../../../../../Source/Main" 
+/I "../../../../../Source/Network"  /I "../../../../../Source/Thread" %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>

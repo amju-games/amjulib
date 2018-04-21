@@ -1,6 +1,6 @@
 #include <AmjuGL.h>
 #include <AmjuGL-OpenGL.h>
-#include <AnimPlayer.h>
+#include "AnimPlayer.h"
 #include "IndexedMesh.h"
 #include "Skeleton.h"
 #include "Skin.h"

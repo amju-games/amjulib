@@ -80,7 +80,7 @@ void Tweakable::AddEditBox()
   text->SetSize(Vec2f(0.3f, 0.1f));
   text->SetJust(GuiText::AMJU_JUST_LEFT);
   text->SetText("value");
-  text->SetLocalPos(Vec2f(0.3, 0));
+  text->SetLocalPos(Vec2f(0.3f, 0));
   AddChild(text);
 }
 

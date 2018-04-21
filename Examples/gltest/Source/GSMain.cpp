@@ -132,7 +132,7 @@ void GSMain::OnActive()
 {
 	TheResourceManager::Instance()->AddLoader("bmpa", BmpALoader);
   TheResourceManager::Instance()->AddLoader("font", FontLoader);
-  TheResourceManager::Instance()->LoadResourceGroup("2dtext-group");
+////  TheResourceManager::Instance()->LoadResourceGroup("2dtext-group");
 
 //  TheGame::Instance()->SetCurrentState(GSFinish::NAME); 
 
