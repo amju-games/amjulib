@@ -64,6 +64,16 @@ void GuiDecScale::SetPivot(const Vec2f& pivot)
   m_pivot = pivot;
 }
 
+const Vec2f& GuiDecScale::GetScale(int zeroOrOne) const
+{
+  return m_scale[zeroOrOne];
+}
+
+const Vec2f& GuiDecScale::GetPivot() const
+{
+  return m_pivot;
+}
+
 void GuiDecScale::Draw()
 {
   AmjuGL::PushMatrix();

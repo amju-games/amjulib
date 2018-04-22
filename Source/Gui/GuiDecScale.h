@@ -19,6 +19,9 @@ public:
   virtual void Draw() override;
   virtual void Animate(float animValue) override;
 
+  const Vec2f& GetScale(int zeroOrOne = 0) const;
+  const Vec2f& GetPivot() const;
+
   void SetScale(const Vec2f& scale, int zeroOrOne = 0);
   void SetPivot(const Vec2f& pivot);
 
