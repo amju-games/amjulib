@@ -52,8 +52,26 @@ void GuiSprite::Animate(float animValue)
   SetCell(cell);
 }
 
+void GuiSprite::Normalise(int& cell) const
+{
+  const int maxCells = m_numCellsXY.x * m_numCellsXY.y;
+  if (cell < 0)
+  {
+    cell += maxCells;
+  }
+  Assert(cell >= 0);
+  if (cell >= maxCells)
+  {
+    cell -= maxCells;
+  }
+  Assert(cell < maxCells);
+}
+
 void GuiSprite::SetCellRange(int minCell, int maxCell)
 {
+  Normalise(minCell);
+  Normalise(maxCell);
+
   m_minCell = minCell;
   m_cell = minCell;
   m_maxCell = maxCell;
@@ -61,6 +79,8 @@ void GuiSprite::SetCellRange(int minCell, int maxCell)
 
 void GuiSprite::SetCell(int cell)
 {
+  Normalise(cell);
+
   m_cell = cell;
 }
 

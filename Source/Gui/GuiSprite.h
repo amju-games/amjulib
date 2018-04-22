@@ -31,12 +31,17 @@ public:
   void SetCellRange(int minCell, int maxCell);
   void SetNumCells(int cellsX, int cellsY);
 
+  int GetCell() const { return m_cell; }
+
 private:
   // Add the 2 tris comprising this sprite quad to the given tris.
   // This is used to bunch up all quads using the same texture into one draw call.
   void AddToTrilist(AmjuGL::Tris& tris) override;
 
   Texture* GetTexture() override;
+
+  // Make sure cell is within 0..max number of cells
+  void Normalise(int& cell) const;
 
 protected:
   // Number of cells in x and y (We set this per GuiSprite, not for the image.
