@@ -57,6 +57,45 @@ void draw()
   glutPostRedisplay();
 }
 
+void queueTextEvent(unsigned char k)
+{
+  TextEvent* te = nullptr;
+
+  // Really bizarre: for ctrl+<c>, k is 1..26, for letter keys..!?
+  // Is this Windows GLUT only?
+  const unsigned int A = 1;
+  const unsigned int C = 3;
+  const unsigned int V = 22;
+  const unsigned int X = 24;
+  const unsigned int Y = 25;
+  const unsigned int Z = 26;
+
+  switch (k)
+  {
+  case C:
+    te = new TextEvent;
+    te->type = AMJU_COPY;
+    break;
+  case X:
+    te = new TextEvent;
+    te->type = AMJU_CUT;
+    break;
+  case V:
+    te = new TextEvent;
+    te->type = AMJU_PASTE;
+    break;
+  case A:
+    te = new TextEvent;
+    te->type = AMJU_SELECT_ALL;
+    break;
+  }
+
+  if (te)
+  {
+    QueueEvent(te);
+  }
+}
+
 void key(char k, bool down)
 {
   KeyEvent* ke = new KeyEvent;  
@@ -106,7 +145,15 @@ std::cout << "Got key " << (down ? "DOWN" : "UP") << " event, char is : " << k <
 
 void keydown(unsigned char k, int, int)
 {
-  key(k, true);
+  if (glutGetModifiers() == GLUT_ACTIVE_CTRL)
+  {
+    // Control + key, so check for special events like cut, copy, paste.
+    queueTextEvent(k);
+  }
+  else
+  {
+    key(k, true);
+  }
 }
 
 void keyup(unsigned char k, int, int)

@@ -1,5 +1,7 @@
-#include <AmjuFirst.h>
 #include <iostream>
+
+#include <AmjuFirst.h>
+#include <AmjuClipboard.h>
 #include <EventPoller.h>
 #include <Timer.h>
 #include <DrawRect.h>
@@ -606,5 +608,23 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
   default:
     Assert(0);
   }
+}
+
+bool GuiTextEdit::OnTextEvent(const TextEvent& te)
+{
+  switch (te.type)
+  {
+  case AMJU_SELECT_ALL:
+    m_caret = m_text.size();
+    m_selectedText = 0;
+    m_triListSelection = nullptr;
+    return true;
+
+  case AMJU_COPY:
+    CopyToClipboard(m_text); // TODO Selection
+    return true;
+  }
+
+  return false;
 }
 }

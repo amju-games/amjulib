@@ -172,7 +172,7 @@ private:
   float x, y;
 };
 
-enum TextEventType { AMJU_OOPS, AMJU_CUT, AMJU_COPY, AMJU_PASTE, AMJU_UNDO, AMJU_REDO };
+enum TextEventType { AMJU_OOPS, AMJU_CUT, AMJU_COPY, AMJU_PASTE, AMJU_UNDO, AMJU_REDO, AMJU_SELECT_ALL };
 struct TextEvent : public Event
 {
   TextEvent() : type(AMJU_OOPS), clipboard(0) {}

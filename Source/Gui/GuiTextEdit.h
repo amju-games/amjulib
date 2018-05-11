@@ -36,6 +36,7 @@ public:
   virtual bool OnKeyEvent(const KeyEvent&); 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  virtual bool OnTextEvent(const TextEvent&) override;
 
   virtual void SetText(const std::string&);
   virtual std::string GetText() const { return GuiText::GetText(); }
