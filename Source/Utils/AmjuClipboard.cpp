@@ -1,9 +1,9 @@
 // * Amjulib *
 // (c) Copyright 2018 Jason Colman
 
-#pragma once
-
+#ifdef WIN32
 #include <Windows.h>
+#endif
 #include "AmjuClipboard.h"
 
 namespace Amju
