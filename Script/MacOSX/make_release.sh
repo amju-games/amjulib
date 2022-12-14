@@ -2,6 +2,8 @@
 export AMJU_BUILD_ARCH=Mac
 export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS -DAMJU_USE_CURL -DUSE_SHADOW_MAP_OPENGL_2'
 
+export AMJULIB_MAC_SCRIPT_PATH=`pwd`
+
 export PLAT=macosx
 export VERSION=`../MakeVersionString.pl ../../Source/Version.h`
 export DEST_DIR=../../Build/Releases/amjulib-$VERSION-$PLAT
