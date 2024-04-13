@@ -412,16 +412,25 @@ bool File::IsComment(std::string str)
   return (str.substr(0, 2) == "//");
 }
 
-bool File::GetLocalisedString(std::string* pResult)
+bool File::GetLocalisedString(std::string* pResultLocalisedString, std::string* pResultPreLocalisedString)
 {
   AMJU_CALL_STACK;
 
-  if (!GetDataLine(pResult))
+  // Read the coded text from this file: e.g. "Hello $$$1".
+  // "Coded" because it has codes which will be looked up in string table.
+  std::string dataLine;
+  if (!GetDataLine(&dataLine))
   {
     return false;
   }
 
-  *pResult = LookupMulti(*pResult);
+  // Look up localised string in string table for current language.
+  *pResultLocalisedString = LookupMulti(dataLine);
+
+  if (pResultPreLocalisedString)
+  {
+    *pResultPreLocalisedString = dataLine;
+  }
 
   return true;
 }
@@ -500,7 +509,7 @@ bool File::GetInteger(int* pResult)
       return false;
     }
   }
-  for (int i = s; i < len; i++)
+  for (int i = s; i < static_cast<int>(len); i++)
   {
     if (!isdigit(str[i]))
     {

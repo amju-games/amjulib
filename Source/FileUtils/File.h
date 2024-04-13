@@ -114,7 +114,9 @@ public:
   // Strings beginning @@@ are to be localised.
   // Strings of the format $$$<id> have been localised
   // Other strings are not localised.
-  bool GetLocalisedString(std::string* pResult);
+  // The optional "pre-localised" string result is the string with $$$<id> codes, i.e.
+  //  before looking up in string table.
+  bool GetLocalisedString(std::string* pResultLocalisedString, std::string* pResultPreLocalisedString = nullptr);
  
   // GetInteger gets the next data line and treats it as an integer,
   // or for binary mode, treats the next sizeof(int) bytes as an int.
