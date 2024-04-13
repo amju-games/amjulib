@@ -14,13 +14,47 @@ struct Line2
   // Equality: two lines are equal if they share the same points. 
   bool operator==(const Line2& rhs) const;
 
-  float Length() const;
+  float SqLength() const
+  {
+    return (pt1 - pt2).SqLen();
+  }
+
+  // Point to LineSeg
+  float SqDist(const Vec2<T>& q) const
+  {
+    Vec2<T> m(pt2 - pt1);
+    const float mDotM = DotProduct(m, m);
+    const float EPSILON = 0.000001f;
+    if (fabs(mDotM) < EPSILON)
+    {
+      // Line seg is very short 
+      return (q - pt1).SqLen();
+    }
+    const float t = DotProduct(m, (q - pt1)) / mDotM;
+    if (t < 0)
+    {
+      return (q - pt1).SqLen();
+    }
+    else if (t > 1.0f)
+    {
+      return (q - pt2).SqLen();
+    }
+    else
+    {
+      const Vec2 p = pt1 + t * m;
+      return (q - p).SqLen();
+    }
+  }
+
+  // Linear interpolation, get point along Line, t=0 gives p0, t=1 gives p1
+//  Vec3f GetPoint(float t) const;
+
 };
 
 // Returns true if the two given lines intersect. In this case *pResult is set
 // to the intersection point.
 template <typename T>
-bool Intersects(const Line2<T>& line1, const Line2<T>& line2, Vec2<T>* pResult)
+bool Intersects(const Line2<T>& line1, const Line2<T>& line2, Vec2<T>* pResult, float smallest = 0.0001f)
 {
   const float Ax = line1.pt1.x;
   const float Ay = line1.pt1.y;
@@ -34,7 +68,7 @@ bool Intersects(const Line2<T>& line1, const Line2<T>& line2, Vec2<T>* pResult)
   // Denominator
   float d = (Bx - Ax) * (Dy - Cy) - (By - Ay) * (Dx - Cx);
 
-  if (fabs(d) < SMALLEST)
+  if (fabs(d) < smallest)
   {
     // Parallel
     return false;

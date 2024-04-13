@@ -12,14 +12,14 @@ Vec3f LineSeg::GetPoint(float t) const
 float LineSeg::SqDist(const Vec3f& q) const
 {
   Vec3f m(p1 - p0);
-  float mDotM = DotProduct(m, m);
+  const float mDotM = DotProduct(m, m);
   const float EPSILON = 0.000001f;
   if (fabs(mDotM) < EPSILON)
   {
     // Line seg is very short 
     return (q - p0).SqLen();
   }
-  float t = DotProduct(m, (q - p0)) / mDotM;
+  const float t = DotProduct(m, (q - p0)) / mDotM;
   if (t < 0)
   {
     return (q - p0).SqLen();
@@ -30,7 +30,7 @@ float LineSeg::SqDist(const Vec3f& q) const
   }
   else
   {
-    Vec3f p = p0 + t * m;
+    const Vec3f p = p0 + t * m;
     return (q - p).SqLen();
   }
 }
