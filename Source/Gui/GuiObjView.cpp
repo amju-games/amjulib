@@ -69,6 +69,7 @@ bool GuiObjView::Load(File* f)
   return true;
 }
 
+const char* GuiObj::NAME = "gui-obj";
 
 GuiObj::GuiObj()
 {

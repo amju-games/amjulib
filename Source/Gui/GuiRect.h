@@ -12,6 +12,7 @@ class GuiRect : public GuiElement
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
   GuiRect();
   virtual void Draw();

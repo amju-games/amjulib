@@ -63,6 +63,28 @@ void GuiImage::BuildTris()
   m_triList = MakeTriList(tris);
 }
 
+bool GuiImage::Save(File* f)
+{
+  if (!GuiElement::Save(f))
+  {
+    return false;
+  }
+  std::string s = m_textureName;
+  if (m_stretch)
+  {
+    s += ", stretch";
+  }
+  if (m_nearest)
+  {
+    s += ", nearest";
+  }
+  if (!f->Write(s))
+  {
+    return false;
+  }
+  return true;
+}
+
 bool GuiImage::Load(File* f)
 {
   if (!GuiElement::Load(f))
@@ -81,7 +103,8 @@ bool GuiImage::Load(File* f)
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
 
-  bool stretch = false;
+  m_nearest = false;
+  m_stretch = false;
   AmjuGL::TextureFilter tf = AmjuGL::AMJU_TEXTURE_NICE;
 
   int n = static_cast<int>(strs.size());
@@ -89,27 +112,29 @@ bool GuiImage::Load(File* f)
   {
     if (strs[i] == "stretch")
     {
-      stretch = true;
+      m_stretch = true;
     }
 
     if (strs[i] == "nearest")
     {
       // use nearest filtering, not nicest
+      m_nearest = true;
       tf = AmjuGL::AMJU_TEXTURE_NEAREST;
     }
   }
 
-  m_texture = (Texture*)TheResourceManager::Instance()->GetRes(strs[0]);
+  m_textureName = strs[0];
+  m_texture = (Texture*)TheResourceManager::Instance()->GetRes(m_textureName);
   if (!m_texture)
   {
     return false;
   }
 
   // Adjust height so aspect ratio is that of the image, unless we want to stretch the image.
-  if (!stretch)
+  if (!m_stretch)
   {
-    float screenAspect = (float)Screen::X() / (float)Screen::Y();
-    float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
+    const float screenAspect = (float)Screen::X() / (float)Screen::Y();
+    const float imageAspectInv = (float)m_texture->GetHeight() / (float)m_texture->GetWidth();
     m_size.y = m_size.x * imageAspectInv * screenAspect;
   }
 

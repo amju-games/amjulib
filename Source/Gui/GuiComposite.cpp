@@ -141,6 +141,41 @@ GuiElement* GuiComposite::GetElementByName(const std::string& name)
   return 0;
 }
 
+bool GuiComposite::Save(File* f)
+{
+  if (!f->Write(NAME))
+  {
+    return false;
+  }
+  if (!f->Write(GetName()))
+  {
+    return false;
+  }
+  if (!f->WriteComment("// Num children"))
+  {
+    return false;
+  }
+  int n = GetNumChildren();
+  if (!f->WriteInteger(n))
+  {
+    return false;
+  }
+  for (int i = 0; i < n; i++)
+  {
+    auto child = GetChild(i);
+    if (!f->WriteComment("// child " + std::to_string(i) + " of " + GetName()))
+    {
+      return false;
+    }
+    if (!child->Save(f))
+    {
+      return false;
+    }
+  }
+  f->WriteComment("// end of " + GetName());
+  return true;
+}
+
 bool GuiComposite::Load(File* f)
 {
   std::string name;

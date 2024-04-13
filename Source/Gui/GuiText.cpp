@@ -23,7 +23,8 @@ const float GuiText::CHAR_HEIGHT_FOR_SIZE_1 = 0.1f;
 
 GuiText::GuiText()
 {
-  m_fontName = "font2d/arial-font.font";
+  m_fontName = "arial";
+  m_fontPathFilename = "font2d/arial-font.font";
   m_just = AMJU_JUST_CENTRE;
   m_inverse = false;
   m_drawBg = false;
@@ -139,7 +140,7 @@ Font* GuiText::GetFont()
 {
   if (!m_font)
   {
-    m_font = (Font*)TheResourceManager::Instance()->GetRes(m_fontName);
+    m_font = (Font*)TheResourceManager::Instance()->GetRes(m_fontPathFilename);
   }
 
   Assert(m_font);
@@ -153,7 +154,7 @@ void GuiText::SetFont(Font* font)
 
 void GuiText::SetFont(const std::string& fontName)
 {
-  m_fontName = fontName;
+  m_fontPathFilename = fontName;
   GetFont();
 }
 
@@ -535,6 +536,23 @@ float GuiText::GetTextWidth(const std::string& text) const
   return textWidth * m_scaleX * m_textSize;
 }
 
+bool GuiText::Save(File* f)
+{
+  if (!f->Write(NAME))
+  {
+    return false;
+  }
+  if (!GuiElement::Save(f))
+  {
+    return false;
+  }
+  if (!SaveText(f))
+  {
+    return false;
+  }
+  return true;
+}
+
 bool GuiText::Load(File* f)
 {
   if (!GuiElement::Load(f))
@@ -544,16 +562,41 @@ bool GuiText::Load(File* f)
   return LoadText(f);
 }
 
+bool GuiText::SaveText(File* f)
+{
+  if (!f->Write(m_preLocalisedText))
+  {
+    return false;
+  }
+  // TODO
+  std::string s = m_fontName + ", " + std::to_string(m_textSize);
+  if (m_inverse)
+  {
+    s += ", inv";
+  }
+  if (m_isMulti)
+  {
+    s += ", multi";
+  }
+  // TODO bgCol, fgCol, scale, justification
+  if (!f->Write(s))
+  {
+    return false;
+  }
+
+  return true;
+}
+
 bool GuiText::LoadText(File* f)
 {
   std::string text;
-  if (!f->GetLocalisedString(&text))
+  if (!f->GetLocalisedString(&text, &m_preLocalisedText))
   {
     f->ReportError("GUI Text: Expected localised string");
     return false;
   }
 
-  // Special code for empty string is $$$epty -- see File::GetDataLine() 
+  // Special code for empty string is $$$empty -- see File::GetDataLine() 
   //  - because an actual empty string will be ignored
 
   std::string s;
@@ -573,11 +616,12 @@ bool GuiText::LoadText(File* f)
   }
   Assert(size >= 2);
 
-  std::string fontName = "font2d/" + strs[0] + "-font.font";
-  m_font = (Font*)TheResourceManager::Instance()->GetRes(fontName);
+  m_fontName = strs[0];
+  std::string fontPathFilename = "font2d/" + m_fontName + "-font.font";
+  m_font = (Font*)TheResourceManager::Instance()->GetRes(fontPathFilename);
   if (!m_font)
   {
-    f->ReportError("Failed to load font " + fontName);
+    f->ReportError("Failed to load font " + fontPathFilename);
     return false;
   }
   m_textSize = ToFloat(strs[1]);

@@ -15,9 +15,11 @@ class GuiImage : public GuiElement
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
-  virtual void Draw();
-  virtual bool Load(File*);
+  virtual void Draw() override;
+  virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
 
   void SetTexture(Texture* tex);
   Texture* GetTexture();
@@ -31,5 +33,14 @@ private:
 protected:
   PTexture m_texture;
   RCPtr<TriListStatic> m_triList;
+
+  std::string m_textureName;
+
+  // If true, image is stretched to the element dimensions; if false, we modify the height to 
+  //  preserve the image aspect ratio.
+  bool m_stretch = false; 
+
+  // If true, use 'nearest' texture filtering, as opposed to 'nicest', the default.
+  bool m_nearest = false;
 };
 }

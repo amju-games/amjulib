@@ -22,6 +22,9 @@ public:
 class GuiObj : public GuiElement
 {
 public:
+  static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
+
   GuiObj();
 
   virtual void Draw();

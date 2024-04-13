@@ -13,6 +13,8 @@
 
 namespace Amju
 {
+class GuiEdit;
+
 // Command function type.
 // Gui Elements which respond to user events can call this kind of
 //  function, to implement a lightweight action.
@@ -30,9 +32,17 @@ class GuiElement : public EventListener
 public:
   GuiElement();
   virtual ~GuiElement();
+
+  virtual std::string GetTypeName() const = 0;
+
   virtual void Draw() = 0;
   virtual void Update() {} 
   virtual bool Load(File*); // Load pos and size
+  virtual bool Save(File*);
+
+  // Create a GuiElement editor object which lets us edit this node.
+  virtual GuiEdit* CreateEditor();
+
   bool OpenAndLoad(const std::string& filename);
 
   virtual GuiElement* GetElementByName(const std::string& name);

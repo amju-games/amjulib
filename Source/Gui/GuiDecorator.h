@@ -13,6 +13,8 @@ class GuiDecorator : public GuiComposite
 {
 public:
   virtual bool Load(File* f) override { return LoadOneChild(f); }
+  
+  GuiElement* GetChild() { return GuiComposite::GetChild(0); }
 };
 }
 

@@ -10,12 +10,14 @@ class GuiComposite : public GuiElement
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
   GuiComposite();
   virtual ~GuiComposite();
 
   virtual void Draw() override;
   virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
   virtual GuiElement* GetElementByName(const std::string& name) override;
   virtual void Update() override;
 

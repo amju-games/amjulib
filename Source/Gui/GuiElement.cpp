@@ -5,6 +5,7 @@
 #include <Colour.h>
 #include <DrawBorder.h>
 #include <EventPoller.h>
+#include <GuiEdit.h>
 #include <GuiElement.h>
 #include <GuiFactory.h>
 #include <LoadVec2.h>
@@ -34,6 +35,11 @@ GuiElement::GuiElement()
 
 GuiElement::~GuiElement()
 {
+}
+
+GuiEdit* GuiElement::CreateEditor()
+{
+  return new GuiEdit;
 }
 
 void GuiElement::Draw()
@@ -199,6 +205,41 @@ PGuiElement LoadGui(const std::string& filename, bool addAsListener)
 #endif
 
   return gui;
+}
+
+static std::string ToString(const Vec2f& v)
+{
+  return std::to_string(v.x) + ", " + std::to_string(v.y);
+}
+
+bool GuiElement::Save(File* f)
+{
+  if (!f->Write(GetTypeName()))
+  {
+    std::cout << "Gui Save: Failed to write typename '" << GetTypeName() << "' to file.\n";
+    Assert(false);
+    return false;
+  }
+
+  if (!f->Write(GetName()))
+  {
+    std::cout << "Gui Save: Failed to write name '" << GetName() << "' to file.\n";
+    Assert(false);
+    return false;
+  }
+  if (!f->Write(ToString(GetLocalPos())))
+  {
+    std::cout << "Gui Save: Failed to write local pos to file.\n";
+    Assert(false);
+    return false;
+  }
+  if (!f->Write(ToString(GetSize())))
+  {
+    std::cout << "Gui Save: Failed to write size to file.\n";
+    Assert(false);
+    return false;
+  }
+  return true;
 }
 
 bool GuiElement::Load(File* f)

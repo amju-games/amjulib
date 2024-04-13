@@ -149,6 +149,23 @@ void GuiButton::SetClickFilename(const std::string& clickFilename)
   s_clickFilename = clickFilename;
 }
 
+bool GuiButton::Save(File* f)
+{
+  if (!f->Write(NAME))
+  {
+    return false;
+  }
+  if (!GuiImage::Save(f))
+  {
+    return false;
+  }
+  if (!m_guiText.SaveText(f))
+  {
+    return false;
+  }
+  return true;
+}
+
 bool GuiButton::Load(File* f)
 {
   if (!GuiImage::Load(f))

@@ -8,7 +8,9 @@ namespace Amju
 class GuiDataLineDisplay : public GuiDataDisplay
 {
 public:
-  static const char* NAME;  
+  static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
+
   virtual void Draw();
   virtual bool Load(File*);
 

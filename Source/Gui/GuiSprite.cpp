@@ -128,6 +128,11 @@ void GuiSprite::AddToTrilist(AmjuGL::Tris& tris)
   tris.push_back(tri);
 }
 
+bool GuiSprite::Save(File* f)
+{
+  return false;
+}
+
 bool GuiSprite::Load(File* f)
 {
   if (!GuiImage::Load(f))

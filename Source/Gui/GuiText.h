@@ -21,15 +21,19 @@ class GuiText : public IGuiText, public GuiElement
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
+
   static const float CHAR_HEIGHT_FOR_SIZE_1;
 
   GuiText();
   virtual void Draw() override;
   virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
   virtual void TextToSpeech() override;
 
   // Load just the text info (not name, size, etc)
   bool LoadText(File*);
+  bool SaveText(File*);
 
   virtual void SetText(const std::string& text) override;
   virtual std::string GetText() const override;
@@ -95,7 +99,9 @@ protected:
   RCPtr<TriList> m_triListCaret; 
   RCPtr<TriList> m_triListSelection; 
   
-  std::string m_text;
+  std::string m_text; // Text after localisation look up 
+  std::string m_preLocalisedText; // Text before look up, so containing $$$ codes
+  std::string m_fontPathFilename;
   std::string m_fontName;
   Just m_just;
   bool m_inverse;

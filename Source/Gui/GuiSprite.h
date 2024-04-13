@@ -24,6 +24,7 @@ public:
 
   void Draw() override;
   bool Load(File*) override;
+  bool Save(File*) override;
   void Animate(float animValue) override;
 
   // So we can set up sprites programmatically

@@ -18,6 +18,7 @@ public:
 
   // GuiElement overrides
   virtual bool Load(File*); 
+  virtual bool Save(File*);
   virtual void Draw();
   virtual void OnGetFocus();
   virtual void TextToSpeech();
