@@ -1023,6 +1023,9 @@
     <ClCompile Include="..\..\..\Source\Utils\AmjuClipboard.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiEdit.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1951,6 +1954,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Utils\AmjuClipboard.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiEdit.h">
+      <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
