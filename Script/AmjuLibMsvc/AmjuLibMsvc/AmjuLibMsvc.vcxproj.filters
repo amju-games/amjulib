@@ -216,7 +216,7 @@
     <ClCompile Include="..\..\..\Source\Utils\AmjuAssert.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\mt19937ar-cok.c">
+    <ClCompile Include="..\..\..\Source\Utils\MT19937.c">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp">
@@ -1957,6 +1957,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiEdit.h">
       <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\MT19937.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
