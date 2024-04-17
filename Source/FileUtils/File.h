@@ -47,10 +47,10 @@ public:
   static std::string GetRoot() { return s_root; }
 
   // Get current line number. Only valid for text files.
-  int GetLine() const { return m_currentLine; }
+  int GetLineNumber() const { return m_currentLine; }
 
   // Get filename.
-  const std::string& GetName() const { return m_filename; }
+  const std::string& GetFileName() const { return m_filename; }
 
   // Get version of open file - will assert if file not open.
   // Returns -1 if version not specified in file.

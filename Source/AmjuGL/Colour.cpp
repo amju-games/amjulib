@@ -47,6 +47,20 @@ Colour operator*(const Colour& c1, const Colour& c2)
   return c;
 }
 
+bool operator==(const Colour& rhs, const Colour& lhs)
+{
+  return
+    rhs.m_a == lhs.m_a &&
+    rhs.m_r == lhs.m_r &&
+    rhs.m_g == lhs.m_g &&
+    rhs.m_b == lhs.m_b; 
+}
+
+bool operator!=(const Colour& rhs, const Colour& lhs)
+{
+  return !(rhs == lhs);
+}
+
 static const int MAX_COLOUR_STACK = 64;
 static Colour s_colourStack[MAX_COLOUR_STACK];
 static int s_current = 0;

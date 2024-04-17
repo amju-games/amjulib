@@ -212,7 +212,7 @@ static std::string ToString(const Vec2f& v)
   return std::to_string(v.x) + ", " + std::to_string(v.y);
 }
 
-bool GuiElement::Save(File* f)
+bool GuiElement::SaveTypeAndName(File* f)
 {
   if (!f->Write(GetTypeName()))
   {
@@ -227,6 +227,11 @@ bool GuiElement::Save(File* f)
     Assert(false);
     return false;
   }
+  return true;
+}
+
+bool GuiElement::SavePosAndSize(File* f)
+{
   if (!f->Write(ToString(GetLocalPos())))
   {
     std::cout << "Gui Save: Failed to write local pos to file.\n";
@@ -240,6 +245,16 @@ bool GuiElement::Save(File* f)
     return false;
   }
   return true;
+}
+
+bool GuiElement::Save(File* f)
+{
+  if (!SaveTypeAndName(f))
+  {
+    return false;
+  }
+
+  return SavePosAndSize(f);
 }
 
 bool GuiElement::Load(File* f)

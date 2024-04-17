@@ -102,6 +102,13 @@ public:
       m_verts[2].SetColour(r, g, b, a);
     }
 
+    void SetColour(const Colour& c)
+    {
+      m_verts[0].SetColour(c.m_r, c.m_g, c.m_b, c.m_a);
+      m_verts[1].SetColour(c.m_r, c.m_g, c.m_b, c.m_a);
+      m_verts[2].SetColour(c.m_r, c.m_g, c.m_b, c.m_a);
+    }
+
     Vert m_verts[3];
   };
 

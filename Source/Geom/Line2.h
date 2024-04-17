@@ -41,7 +41,7 @@ struct Line2
     }
     else
     {
-      const Vec2 p = pt1 + t * m;
+      const Vec2<float> p = pt1 + t * m;
       return (q - p).SqLen();
     }
   }

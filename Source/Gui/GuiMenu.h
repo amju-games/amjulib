@@ -23,12 +23,19 @@ public:
 
   virtual void Draw();
 
+  virtual void OnRightClickMenuItem(GuiElement* elem);
+
+  void SetRightClickCommand(CommandFunc command);
+  void SetRightClickCommand(PGuiCommand command);
+
 protected:
   void Init(const std::string&);
+  CommandFunc m_rightClickCommandFunc;
+  PGuiCommand m_rightClickCommand;
 };
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;
 
-
+// For nested menus
 class GuiNestMenuItem : public GuiMenuItem
 {
 public:

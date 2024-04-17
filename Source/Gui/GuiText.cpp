@@ -564,6 +564,10 @@ bool GuiText::Load(File* f)
 
 bool GuiText::SaveText(File* f)
 {
+  if (!f->WriteComment("// \"" + m_text + "\""))
+  {
+    return false;
+  }
   if (!f->Write(m_preLocalisedText))
   {
     return false;
@@ -579,6 +583,17 @@ bool GuiText::SaveText(File* f)
     s += ", multi";
   }
   // TODO bgCol, fgCol, scale, justification
+  s += ", fgcol=" + ToHexString(m_fgCol);
+  s += ", bgcol=" + ToHexString(m_bgCol);
+  s += ", sx=" + ToString(m_scaleX);
+
+  static const std::map<Just, std::string> JUST_MAP = { 
+    {AMJU_JUST_LEFT, "left"},
+    {AMJU_JUST_RIGHT, "right"},
+    {AMJU_JUST_CENTRE, "centre"}
+  };
+  s += ", " + JUST_MAP.at(m_just);
+
   if (!f->Write(s))
   {
     return false;

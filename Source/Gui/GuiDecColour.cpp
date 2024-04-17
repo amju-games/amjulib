@@ -8,6 +8,24 @@ namespace Amju
 {
 const char* GuiDecColour::NAME = "colour";
 
+bool GuiDecColour::Save(File* f)
+{
+  std::string s = ToHexString(m_colour[0]);
+  if (m_colour[0] != m_colour[1])
+  {
+    s += "; " + ToHexString(m_colour[1]);
+  }
+  if (!f->Write(GetTypeName()))
+  {
+    return false;
+  }
+  if (!f->Write(s))
+  {
+    return false;
+  }
+  return GetChild()->Save(f);
+}
+
 bool GuiDecColour::Load(File* f)
 {
   std::string s;

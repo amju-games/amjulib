@@ -23,7 +23,8 @@ class Animator
 public:
   virtual ~Animator() = default;
 
-  bool Load(File*);
+  virtual bool Load(File*);
+  virtual bool Save(File*);
 
   void CalcUpdate(float dt);
 

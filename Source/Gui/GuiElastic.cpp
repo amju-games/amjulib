@@ -17,6 +17,21 @@ GuiElastic::GuiElastic() : m_bounceX(0), m_bounceY(0)
 {
 }
 
+bool GuiElastic::Save(File* f)
+{
+  if (!f->Write(GetTypeName()))
+  {
+    return false;
+  }
+  if (!f->Write(ToString(m_offsetPos)))
+  {
+    std::cout << "GuiElastic Save: Failed to write offset pos to file.\n";
+    Assert(false);
+    return false;
+  }
+  return GetChild()->Save(f);
+}
+
 bool GuiElastic::Load(File* f)
 {
   // Load pos offset, which is reduced to (0, 0);
@@ -25,16 +40,15 @@ bool GuiElastic::Load(File* f)
     f->ReportError("Expected elastic offset");
     return false;
   }
+  m_offsetPos = m_localpos;
 
   if (!LoadOneChild(f))
   {
     return false;
   }
 
-  GuiElement* child = GetChild(0);
-
   // Name: create one for convenience in gui file
-  std::string name = "elastic_for_" + child->GetName();
+  std::string name = "elastic_for_" + GetChild()->GetName();
   SetName(name);
 
   const float VEL_MULT = 5.0f; // TODO
@@ -50,7 +64,7 @@ std::cout << "Elastic: " << m_name << " vel: " << m_vel.x << ", " << m_vel.y << 
 
 void GuiElastic::Update()
 {
-  float dt = TheTimer::Instance()->GetDt();
+  const float dt = TheTimer::Instance()->GetDt();
   m_vel += m_acc * dt;
   m_localpos += m_vel * dt;
   const float DAMP = 0.25f; // TODO

@@ -15,8 +15,10 @@ class GuiDecColour : public GuiDecorator
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
   virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
   virtual void Draw() override;
   virtual void Animate(float animValue) override;
 

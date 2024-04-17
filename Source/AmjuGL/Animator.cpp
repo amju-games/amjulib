@@ -14,6 +14,40 @@
 
 namespace Amju
 {
+bool Animator::Save(File* f)
+{
+  static const std::map<LoopType, std::string> LOOP_TYPES =
+  {
+    { LoopType::LOOP_TYPE_CONST, "const" },
+    { LoopType::LOOP_TYPE_ONE_SHOT, "one-shot" },
+    { LoopType::LOOP_TYPE_REPEAT, "repeat" },
+    { LoopType::LOOP_TYPE_MIRROR_REPEAT, "mirror-repeat" },
+  };
+  if (!f->Write(LOOP_TYPES.at(m_loopType)))
+  {
+    return false;
+  }
+  if (m_loopType != LoopType::LOOP_TYPE_CONST)
+  {
+    f->WriteComment("// cycle time");
+    f->WriteFloat(m_cycleTime);
+  }
+  f->WriteComment("// easing function");
+  std::string s = m_reverse ? "reverse-" : "";
+  static const std::map<EaseType, std::string> EASE_TYPES =
+  {
+    { EaseType::EASE_TYPE_LINEAR, "linear" },
+    { EaseType::EASE_TYPE_STEP, "step" },
+    { EaseType::EASE_TYPE_ZERO, "zero" },
+    { EaseType::EASE_TYPE_ONE, "one" },
+    { EaseType::EASE_TYPE_IN_OUT, "ease-in-out" },
+    { EaseType::EASE_TYPE_IN_OUT_ELASTIC, "ease-in-out-elastic" },
+    { EaseType::EASE_TYPE_SINE, "sine" },
+  };
+  s += EASE_TYPES.at(m_easeType);
+  return f->Write(s);
+}
+
 bool Animator::Load(File* f)
 {
   std::string line;
@@ -56,9 +90,7 @@ Animator::LoopType Animator::GetLoopTypeFromString(const std::string& s)
     { "repeat", LoopType::LOOP_TYPE_REPEAT },
     { "mirror-repeat", LoopType::LOOP_TYPE_MIRROR_REPEAT },
   };
-  auto it = LOOP_TYPES.find(s);
-  Assert(it != LOOP_TYPES.end());
-  return it->second;
+  return LOOP_TYPES.at(s);
 }
 
 Animator::EaseType Animator::GetEaseTypeFromString(const std::string& cs, bool& reverse)

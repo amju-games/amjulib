@@ -23,11 +23,13 @@
 #include "GuiListBox.h"
 #include "GuiMenu.h"
 #include "GuiObjView.h"
+#include "GuiPoly.h"
 #include "GuiRect.h"
 #include "GuiText.h"
 #include "GuiTextEdit.h"
 #include "GuiScroll.h"
 #include "GuiSlider.h"
+#include "GuiSpline.h"
 #include "GuiSprite.h"
 #include "GuiWindow.h"
 #include <AmjuFinal.h>
@@ -54,14 +56,16 @@ GuiFactory::GuiFactory()
   Add(GuiFlush::NAME, &CreateT<GuiFlush>);
   Add(GuiImage::NAME, &CreateT<GuiImage>);
   Add(GuiKeyboard::NAME, &CreateT<GuiKeyboard>);
+  Add(GuiMenu::NAME, &CreateT<GuiMenu>);
+  Add(GuiPoly::NAME, &CreateT<GuiPoly>);
   Add(GuiText::NAME, &CreateT<GuiText>);
   Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
   Add(GuiWindow::NAME, &CreateT<GuiWindow>);
-  Add(GuiMenu::NAME, &CreateT<GuiMenu>);
   Add(GuiRect::NAME, &CreateT<GuiRect>);
   Add(GuiScroll::NAME, &CreateT<GuiScroll>);
   Add(GuiSlider::NAME, &CreateT<GuiSlider>);
   Add(GuiSprite::NAME, &CreateT<GuiSprite>);
+  Add(GuiSpline::NAME, &CreateT<GuiSpline>);
 
   Add(GuiListBox::NAME, &CreateListBox);
   Add(GuiFileListBox::NAME, &CreateFileListBox);

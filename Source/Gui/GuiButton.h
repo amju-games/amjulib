@@ -12,6 +12,7 @@ class GuiButton : public GuiImage
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
   GuiButton();
   ~GuiButton();

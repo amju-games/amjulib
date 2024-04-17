@@ -8,6 +8,19 @@ namespace Amju
 {
 const char* GuiDecAnimation::NAME = "animation";
 
+bool GuiDecAnimation::Save(File* f)
+{
+  if (!SaveTypeAndName(f))
+  {
+    return false;
+  }
+  if (!Animator::Save(f))
+  {
+    return false;
+  }
+  return GetChild()->Save(f);
+}
+
 bool GuiDecAnimation::Load(File* f)
 {
   // Animations need names so we can get to them in code
@@ -52,10 +65,10 @@ void GuiDecAnimation::Update()
   }
 
   // Animate descendants
-  m_children[0]->Animate(m_reverse ? 1.f - m_value : m_value);
+  GetChild()->Animate(m_reverse ? 1.f - m_value : m_value);
 
   // Update descendants
-  m_children[0]->Update();
+  GetChild()->Update();
 }
 
 void GuiDecAnimation::Animate(float animValue)

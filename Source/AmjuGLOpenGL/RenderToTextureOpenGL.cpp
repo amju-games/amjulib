@@ -246,10 +246,17 @@ void RenderToTextureOpenGL::DebugDraw()
   glEnable(GL_TEXTURE_2D);
   glTranslated(0,0,-1);
   glBegin(GL_QUADS);
-  glTexCoord2d(0,0);glVertex3f(0,0,0);
-  glTexCoord2d(1,0);glVertex3f(Screen::X()/2,0,0);
-  glTexCoord2d(1,1);glVertex3f(Screen::X()/2,Screen::Y()/2,0);
-  glTexCoord2d(0,1);glVertex3f(0,Screen::Y()/2,0);
+  glTexCoord2d(0,0);
+  glVertex3f(0,0,0);
+
+  glTexCoord2d(1,0);
+  glVertex3f(static_cast<GLfloat>(Screen::X()/2),0,0);
+
+  glTexCoord2d(1,1);
+  glVertex3f(static_cast<GLfloat>(Screen::X()/2), static_cast<GLfloat>(Screen::Y()/2),0);
+
+  glTexCoord2d(0,1);
+  glVertex3f(0, static_cast<GLfloat>(Screen::Y()/2),0);
   glEnd();
   //glDisable(GL_TEXTURE_2D);
 #endif

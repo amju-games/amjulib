@@ -216,7 +216,7 @@ void File::ReportError(const string& error)
   AMJU_CALL_STACK;
 
   // Add filename and line number to error message.
-  string newError = GetName() + ", Line " + ToString(GetLine()) + ": " + error;
+  string newError = GetFileName() + ", Line " + ToString(GetLineNumber()) + ": " + error;
   Amju::ReportError(newError);
 }
 

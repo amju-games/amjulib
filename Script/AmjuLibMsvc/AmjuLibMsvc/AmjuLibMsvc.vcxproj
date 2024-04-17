@@ -379,6 +379,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimation.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecColour.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecInclude.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecorator.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecRotate.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecScale.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecShader.cpp" />
@@ -391,10 +392,13 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiListBox.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiObjView.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiPoly.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiPolyEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiScroll.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiScrollBar.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiSlider.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiSpline.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiSprite.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
@@ -711,10 +715,13 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiKeyboard.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiListBox.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiObjView.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiPoly.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiPolyEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiRect.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiScroll.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiScrollBar.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiSlider.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiSpline.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiSprite.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />

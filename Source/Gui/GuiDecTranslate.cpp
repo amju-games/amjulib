@@ -9,6 +9,24 @@ namespace Amju
 {
 const char* GuiDecTranslate::NAME = "translate";
 
+bool GuiDecTranslate::Save(File* f)
+{
+  std::string s = ToString(m_positions[0]);
+  if (m_positions[0] != m_positions[1])
+  {
+    s += "; " + ToString(m_positions[1]);
+  }
+  if (!f->Write(GetTypeName()))
+  {
+    return false;
+  }
+  if (!f->Write(s))
+  {
+    return false;
+  }
+  return GetChild()->Save(f);
+}
+
 bool GuiDecTranslate::Load(File* f)
 {
   std::string s;

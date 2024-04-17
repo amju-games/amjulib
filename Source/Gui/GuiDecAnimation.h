@@ -17,6 +17,7 @@ class GuiDecAnimation : public GuiDecorator, public Animator
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
 
   // Subclasses should call this to update m_time and m_value.
   // By default, m_value is used to set the animated property.
@@ -24,6 +25,7 @@ public:
 
   // Subclasses should call this to load animation time, loop type, etc.
   virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
 
   // Store animValue as time multiplier. I.e. the input to this object affects
   //  how fast this animation progresses. This can be used to make delays, and

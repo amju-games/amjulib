@@ -39,8 +39,18 @@ public:
 
   int GetNumChildren() const;
   GuiElement* GetChild(int i);
-  virtual void AddChild(GuiElement*);
+  const GuiElement* GetChild(int i) const;
 
+  // For GUI editing
+  virtual void AddChild(GuiElement*);
+  void DeleteChild(int index);
+  void InsertChild(int index, GuiElement*);
+
+  // Find the index of the given child in m_children, or -1 if not a child.
+  int FindChildIndex(GuiElement* child) const;
+
+  // Move child to the back of the children, which means it is visually at the
+  //  front, as we draw in simple index order.
   void BringChildToFront(GuiElement*);
 
   virtual void Clear();

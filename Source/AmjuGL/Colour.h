@@ -16,6 +16,9 @@ struct Colour
   float m_r, m_g, m_b, m_a;
 };
 
+bool operator==(const Colour& rhs, const Colour& lhs);
+bool operator!=(const Colour& rhs, const Colour& lhs);
+
 Colour operator*(const Colour& c1, const Colour& c2);
 
 Colour Interpolate(const Colour& c1, const Colour& c2, float t);

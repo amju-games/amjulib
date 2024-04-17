@@ -59,6 +59,12 @@ void GuiComposite::Clear()
   m_children.clear();
 }
 
+const GuiElement* GuiComposite::GetChild(int i) const
+{
+  Assert(i < GetNumChildren());
+  return m_children[(unsigned int)i];
+}
+
 GuiElement* GuiComposite::GetChild(int i)
 {
   Assert(i < GetNumChildren());
@@ -69,6 +75,35 @@ void GuiComposite::AddChild(GuiElement* elem)
 {
   elem->SetParent(this);
   m_children.push_back(elem);
+}
+
+void GuiComposite::DeleteChild(int index)
+{
+  Assert(!m_children.empty());
+  Assert(index >= 0);
+  Assert(index < static_cast<int>(m_children.size()));
+  m_children.erase(m_children.begin() + index);
+}
+
+void GuiComposite::InsertChild(int index, GuiElement* elem)
+{
+  Assert(index >= 0);
+  Assert(index <= static_cast<int>(m_children.size()));
+  m_children.insert(m_children.begin() + index, elem);
+}
+
+int GuiComposite::FindChildIndex(GuiElement* childToFind) const
+{
+  const int n = GetNumChildren();
+  for (int i = 0; i < n; i++)
+  {
+    const GuiElement* child = GetChild(i);
+    if (child == childToFind)
+    {
+      return i;
+    }
+  }
+  return -1;
 }
 
 void GuiComposite::BringChildToFront(GuiElement* elem)
@@ -143,11 +178,7 @@ GuiElement* GuiComposite::GetElementByName(const std::string& name)
 
 bool GuiComposite::Save(File* f)
 {
-  if (!f->Write(NAME))
-  {
-    return false;
-  }
-  if (!f->Write(GetName()))
+  if (!SaveTypeAndName(f))
   {
     return false;
   }

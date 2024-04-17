@@ -15,7 +15,11 @@ class GuiDecTranslate : public GuiDecorator
 {
 public:
   static const char* NAME;
+  std::string GetTypeName() const override { return NAME; }
+
   virtual bool Load(File*) override;
+  virtual bool Save(File*) override;
+
   virtual void Animate(float animValue) override;
 
   void SetTranslation(const Vec2f&, int zeroOrOne = 0);

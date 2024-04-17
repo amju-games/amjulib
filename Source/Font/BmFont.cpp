@@ -197,7 +197,7 @@ bool BmFontTextureSequence::Load(File* f)
       }
       else if (strs[0] == "page")
       {
-        std::string path = GetFilePath(f->GetName()) + "/";
+        std::string path = GetFilePath(f->GetFileName()) + "/";
         if (!ParsePageLine(strs, path))
         {
           f->ReportError("Unexpected format in 'page' line");

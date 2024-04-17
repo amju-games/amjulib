@@ -59,10 +59,10 @@ void GuiRect::Draw()
   Assert(texture);
   texture->UseThisTexture();
 
-  PushColour();
-  MultColour(m_colour);
+//  PushColour();
+//  MultColour(m_colour);
   AmjuGL::Draw(m_triList);
-  PopColour();
+//  PopColour();
 }
 
 void GuiRect::BuildTris()
@@ -72,6 +72,7 @@ void GuiRect::BuildTris()
 
   AmjuGL::Tris tris;  
   AmjuGL::Tri tri;
+  tri.SetColour(m_colour);
 
   if (m_cornerRadius < 0.0001f || m_flags == 0x0f)
   {
@@ -85,16 +86,10 @@ void GuiRect::BuildTris()
     };
 
     tris.reserve(2);
-    tri.m_verts[0] = verts[0];
-    tri.m_verts[1] = verts[1];
-    tri.m_verts[2] = verts[2];
-    tri.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
+    tri.Set(verts[0], verts[1], verts[2]);
     tris.push_back(tri);
 
-    tri.m_verts[0] = verts[0];
-    tri.m_verts[1] = verts[2];
-    tri.m_verts[2] = verts[3];
-    tri.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
+    tri.Set(verts[0], verts[2], verts[3]);
     tris.push_back(tri);
   }
   else
@@ -187,7 +182,7 @@ void GuiRect::BuildTris()
 
     for (auto& t : tris)
     {
-      t.SetColour(m_colour.m_r, m_colour.m_g, m_colour.m_b, m_colour.m_a);
+      t.SetColour(m_colour);
     }
   }
 

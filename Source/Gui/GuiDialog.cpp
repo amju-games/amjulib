@@ -35,8 +35,11 @@ bool GuiDialog::OnCursorEvent(const CursorEvent& e)
 bool GuiDialog::OnMouseButtonEvent(const MouseButtonEvent& e)
 {
   // Check if title bar clicked
-  m_drag = false;
-  if (HasTitleBar() && e.isDown)
+  if (m_drag && !e.isDown && e.button == AMJU_BUTTON_MOUSE_LEFT)
+  {
+    m_drag = false;
+  }
+  if (HasTitleBar() && e.isDown && e.button == AMJU_BUTTON_MOUSE_LEFT)
   {
     if (GetRect(GetTitleBar()).IsPointIn(Vec2f(e.x, e.y)))
     {
@@ -134,8 +137,8 @@ bool GuiDialog::Load(File* f)
 
 void GuiDialog::Draw()
 {
-  // TODO Tiled background
-  // Draw bg - TODO colour, texture ? Rounded corners etc ?
+  PushColour();
+
   Rect r = GetRect(this);
   AmjuGL::PushAttrib(AmjuGL::AMJU_TEXTURE_2D);
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
@@ -152,6 +155,8 @@ void GuiDialog::Draw()
     m_title.SetLocalPos(GetLocalPos() + Vec2f(0, 0.1f));
     m_title.Draw();
   }
+
+  PopColour();
 }
 }
 

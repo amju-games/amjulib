@@ -12,9 +12,10 @@ namespace Amju
 class GuiDecorator : public GuiComposite
 {
 public:
-  virtual bool Load(File* f) override { return LoadOneChild(f); }
-  
-  GuiElement* GetChild() { return GuiComposite::GetChild(0); }
+  bool Load(File* f) override;
+  bool Save(File* f) override;
+
+  GuiElement* GetChild();
 };
 }
 

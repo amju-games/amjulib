@@ -118,6 +118,10 @@ public:
   virtual void OnResetAnimation() {}
 
 protected:
+  bool SaveTypeAndName(File* f);
+  bool SavePosAndSize(File* f);
+
+protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
   /*

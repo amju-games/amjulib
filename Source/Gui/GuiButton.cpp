@@ -151,11 +151,11 @@ void GuiButton::SetClickFilename(const std::string& clickFilename)
 
 bool GuiButton::Save(File* f)
 {
-  if (!f->Write(NAME))
+  if (!GuiElement::Save(f))
   {
     return false;
   }
-  if (!GuiImage::Save(f))
+  if (!SaveImageInfo(f))
   {
     return false;
   }

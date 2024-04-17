@@ -243,7 +243,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     }
     else
     {
-      // Clicked on an item
+      // Left Clicked on an item
       // TODO Should react on mouse up when up item == down item.
       GuiElement* child = m_children[m_selected];
       child->ExecuteCommand();
@@ -268,6 +268,29 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     {
       return true;
     }
+  }
+
+  if (IsVisible() &&
+    mbe.button == AMJU_BUTTON_MOUSE_RIGHT &&
+    !mbe.isDown)
+  {
+    if (m_selected > -1)
+    {
+      GuiElement* child = m_children[m_selected];
+      GuiMenuItem* menuItem = dynamic_cast<GuiMenuItem*>(child);
+      if (menuItem)
+      {
+        menuItem->OnRightClickMenuItem(menuItem);
+      }
+      return true;
+    }
+  }
+  if (IsVisible() &&
+    mbe.button == AMJU_BUTTON_MOUSE_RIGHT &&
+    mbe.isDown &&
+    m_selected > -1)
+  {
+    return true;
   }
 
   // Not handled but may be handled by a child
@@ -337,8 +360,28 @@ void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite
   SetSize(thisSize);
 }
 
-//void GuiMenu::Clear()
-//{
-//   m_items.clear();
-//}
+void GuiMenuItem::OnRightClickMenuItem(GuiElement* elem)
+{
+  if (m_rightClickCommand)
+  {
+    m_rightClickCommand->SetGuiElement(elem);
+    m_rightClickCommand->Do();
+  }
+  else if (m_rightClickCommandFunc)
+  {
+    m_rightClickCommandFunc(elem);
+  }
+}
+
+void GuiMenuItem::SetRightClickCommand(CommandFunc command)
+{
+  m_rightClickCommandFunc = command;
+  m_rightClickCommand = nullptr;
+}
+
+void GuiMenuItem::SetRightClickCommand(PGuiCommand command)
+{
+  m_rightClickCommand = command;
+  m_rightClickCommandFunc = nullptr;
+}
 }

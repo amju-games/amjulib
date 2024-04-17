@@ -69,6 +69,11 @@ bool GuiImage::Save(File* f)
   {
     return false;
   }
+  return SaveImageInfo(f);
+}
+
+bool GuiImage::SaveImageInfo(File* f)
+{
   std::string s = m_textureName;
   if (m_stretch)
   {
