@@ -15,6 +15,9 @@ class GuiDecShader : public GuiDecorator
 {
 public:
   static const char* NAME;
+
+  GuiDecShader* Clone() override { return new GuiDecShader(*this); }
+
   virtual bool Load(File*) override;
   virtual void Animate(float animValue) override;
   virtual void Draw() override;

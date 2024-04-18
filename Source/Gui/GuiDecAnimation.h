@@ -19,6 +19,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiDecAnimation* Clone() override { return new GuiDecAnimation(*this); }
+
   // Subclasses should call this to update m_time and m_value.
   // By default, m_value is used to set the animated property.
   virtual void Update() override;

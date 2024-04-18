@@ -31,6 +31,8 @@ public:
 
   GuiTextEdit();
 
+  GuiTextEdit* Clone() override { return new GuiTextEdit(*this); }
+
   virtual void Draw(); // Adds focus border and caret
   virtual bool Load(File*); 
   virtual bool OnKeyEvent(const KeyEvent&); 

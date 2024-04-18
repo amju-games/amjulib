@@ -23,6 +23,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiText* Clone() override { return new GuiText(*this); }
+
   static const float CHAR_HEIGHT_FOR_SIZE_1;
 
   GuiText();

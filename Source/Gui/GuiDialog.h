@@ -15,6 +15,8 @@ public:
   virtual void Draw() override;
   virtual bool Load(File*) override;
 
+  GuiDialog* Clone() override { return new GuiDialog(*this); }
+
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&) override;
   virtual bool OnCursorEvent(const CursorEvent&) override; 
 

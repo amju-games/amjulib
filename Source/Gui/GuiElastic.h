@@ -11,6 +11,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiElastic* Clone() override { return new GuiElastic(*this); }
+
   GuiElastic();
   virtual bool Load(File*);
   virtual bool Save(File*);

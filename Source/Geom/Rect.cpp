@@ -75,6 +75,11 @@ Vec2f Rect::GetSize() const
   return Vec2f(m_xmax - m_xmin, m_ymax - m_ymin);
 }
 
+Vec2f Rect::GetCentre() const
+{
+  return Vec2f((m_xmax + m_xmin) * .5f, (m_ymax + m_ymin) * .5f);
+}
+
 float Rect::GetMin(int axis) const
 {
   Assert(axis < 2);

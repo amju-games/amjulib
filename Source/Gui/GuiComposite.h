@@ -13,7 +13,10 @@ public:
   std::string GetTypeName() const override { return NAME; }
 
   GuiComposite();
+  GuiComposite(const GuiComposite&);
   virtual ~GuiComposite();
+
+  GuiComposite* Clone() override { return new GuiComposite(*this); }
 
   virtual void Draw() override;
   virtual bool Load(File*) override;

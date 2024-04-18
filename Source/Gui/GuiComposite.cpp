@@ -17,6 +17,15 @@ GuiComposite::GuiComposite()
 {
 }
 
+GuiComposite::GuiComposite(const GuiComposite& comp) : GuiElement(comp)
+{
+  // Deep copy children
+  for (const auto& ch : comp.m_children)
+  {
+    m_children.push_back(ch->Clone());
+  }
+}
+
 GuiComposite::~GuiComposite()
 {
   Clear(); // to find crash
@@ -89,6 +98,7 @@ void GuiComposite::InsertChild(int index, GuiElement* elem)
 {
   Assert(index >= 0);
   Assert(index <= static_cast<int>(m_children.size()));
+  elem->SetParent(this);
   m_children.insert(m_children.begin() + index, elem);
 }
 

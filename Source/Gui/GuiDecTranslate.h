@@ -17,6 +17,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiDecTranslate* Clone() override { return new GuiDecTranslate(*this); }
+
   virtual bool Load(File*) override;
   virtual bool Save(File*) override;
 

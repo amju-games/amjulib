@@ -33,6 +33,23 @@ GuiElement::GuiElement()
   m_ancestorsAreVisible = true;
 }
 
+GuiElement::GuiElement(const GuiElement& e)
+{
+  // Set name to something hopefully unique. So unfortunately we have to set all the members.
+  m_name = e.m_name + "-1";
+  m_parent = e.m_parent;
+  m_isVisible = e.m_isVisible;
+  m_isSelected = e.m_isSelected;
+  m_commandFunc = e.m_commandFunc;
+  m_onFocusFunc = e.m_onFocusFunc;
+  m_drawBorder = e.m_drawBorder;
+  m_userData = nullptr; // Hmm
+  m_ancestorsAreVisible = e.m_ancestorsAreVisible;
+  m_localpos = e.m_localpos;
+  m_size = e.m_size;
+
+}
+
 GuiElement::~GuiElement()
 {
 }
@@ -257,6 +274,19 @@ bool GuiElement::Save(File* f)
   return SavePosAndSize(f);
 }
 
+bool GuiElement::LoadPos(File* f)
+{
+  Vec2f pos;
+  if (!LoadVec2(f, &pos))
+  {
+    f->ReportError("Gui element: failed to load pos");
+    Assert(0);
+    return false;
+  }
+  SetLocalPos(pos);
+  return true;
+}
+
 bool GuiElement::Load(File* f)
 {
   if (!f->GetDataLine(&m_name))
@@ -266,14 +296,10 @@ bool GuiElement::Load(File* f)
     return false;
   }
 
-  Vec2f pos;
-  if (!LoadVec2(f, &pos))
+  if (!LoadPos(f))
   {
-    f->ReportError("Gui element: failed to load pos");
-    Assert(0);
     return false;
   }
-  SetLocalPos(pos);
 
   Vec2f size;
   if (!LoadVec2(f, &size))

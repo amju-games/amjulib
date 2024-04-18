@@ -14,6 +14,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiRect* Clone() override { return new GuiRect(*this); }
+
   GuiRect();
   virtual void Draw();
   virtual bool Load(File*);

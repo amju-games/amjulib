@@ -32,6 +32,8 @@ public:
   float GetMin(int axis) const;
   float GetMax(int axis) const;
 
+  Vec2f GetCentre() const;
+
 private:
   float m_xmin, m_xmax, m_ymin, m_ymax;
 };

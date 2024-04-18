@@ -32,6 +32,8 @@ public:
   bool IsLoop() const;
   void SetIsLoop(bool isLoop);
 
+  Rect CalcRect() const override;
+
   enum class Style
   {
     FILLED = 1,
@@ -42,6 +44,8 @@ public:
   void SetStyle(Style s);
   bool IsFilled() const;
   bool IsOutline() const;
+
+  void CreateEditorDefault() override;
 
 protected:
   virtual bool LoadPoints(File*);
@@ -54,16 +58,16 @@ protected:
   virtual std::string CreateAttribString() const;
 
   virtual void BuildTriList();
-  virtual void BuildOutlineTriList() = 0;
-  virtual void BuildFilledTriList() = 0;
+  virtual AmjuGL::Tris BuildOutlineTriList() = 0;
+  virtual AmjuGL::Tris BuildFilledTriList() = 0;
 
   RCPtr<TriListStatic> m_triList;
   ControlPoints m_controlPoints; // corners or control points for a spline
   bool m_isLoop = true; // True for filled polys, can be false for outline polys and splines
-  Colour m_filledColour;
-  Colour m_outlineColour;
+  Colour m_filledColour{ 1, 0, 0, 1 };
+  Colour m_outlineColour{ 0, 1, 1, 1 };
   Style m_style = Style::FILLED_AND_OUTLINE;
-  float m_cornerRadius = 0.f;
+  float m_cornerRadius = 0.1f;
 };
 
 class GuiPoly : public IGuiPoly
@@ -71,9 +75,11 @@ class GuiPoly : public IGuiPoly
 public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
+  
+  GuiPoly* Clone() override { return new GuiPoly(*this); }
 
 protected:
-  void BuildFilledTriList() override;
-  void BuildOutlineTriList() override;
+  AmjuGL::Tris BuildFilledTriList() override;
+  AmjuGL::Tris BuildOutlineTriList() override;
 };
 }

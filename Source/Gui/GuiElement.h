@@ -31,9 +31,12 @@ class GuiElement : public EventListener
 {
 public:
   GuiElement();
+  GuiElement(const GuiElement&);
   virtual ~GuiElement();
 
   virtual std::string GetTypeName() const = 0;
+
+  virtual GuiElement* Clone() { return nullptr; }
 
   virtual void Draw() = 0;
   virtual void Update() {} 
@@ -42,6 +45,11 @@ public:
 
   // Create a GuiElement editor object which lets us edit this node.
   virtual GuiEdit* CreateEditor();
+
+  // Called by editor mode to populate default data for a new node.
+  // In a game, we don't need to do this because we will load elements 
+  //  from a file, so we don't do this in the ctor.
+  virtual void CreateEditorDefault() {}
 
   bool OpenAndLoad(const std::string& filename);
 
@@ -120,6 +128,7 @@ public:
 protected:
   bool SaveTypeAndName(File* f);
   bool SavePosAndSize(File* f);
+  bool LoadPos(File* f);
 
 protected:
   // Pos is top-left of element

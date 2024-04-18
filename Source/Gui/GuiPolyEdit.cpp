@@ -14,7 +14,12 @@ void GuiPolyEdit::RecalcGrabberPositions()
 {
   m_grabbers.clear();
 
-  const Vec2f pos; // = GetPoly()->GetCombinedPos();
+  // Central grabber, to reposition
+  const Rect r = GetPoly()->CalcRect();
+  const Vec2f q(r.GetCentre());
+  m_grabbers.push_back(Rect(q.x - GRAB_SIZE_X, q.x + GRAB_SIZE_X, q.y - GRAB_SIZE_Y, q.y + GRAB_SIZE_Y));
+
+  const Vec2f pos = GetPoly()->GetCombinedPos();
 
   const auto& points = GetPoly()->GetControlPoints();
   for (const auto& p : points)
@@ -26,11 +31,19 @@ void GuiPolyEdit::RecalcGrabberPositions()
 
 void GuiPolyEdit::HandleDragGrabber(const Vec2f& deltaPos)
 {
-  auto& points = GetPoly()->GetControlPoints();
-  Assert(m_selectedGrabberIndex >= 0);
-  Assert(m_selectedGrabberIndex < static_cast<int>(points.size()));
-  Vec2f& p = points[m_selectedGrabberIndex];
-  p += deltaPos;
+  if (m_selectedGrabberIndex == 0)
+  {
+    // Central grabber
+    GetPoly()->SetLocalPos(GetPoly()->GetLocalPos() + deltaPos);
+  }
+  else
+  {
+    auto& points = GetPoly()->GetControlPoints();
+    Assert(m_selectedGrabberIndex >= 0);
+    Assert(m_selectedGrabberIndex <= static_cast<int>(points.size()));
+    Vec2f& p = points[m_selectedGrabberIndex - 1];
+    p += deltaPos;
+  }
 
   RecalcGrabberPositions();
   GetPoly()->OnControlPointsChanged();
@@ -48,6 +61,13 @@ void GuiPolyEdit::Draw()
 {
   GuiEdit::Draw();
 
+  const auto& points = GetPoly()->GetControlPoints();
+  int n = static_cast<int>(points.size());
+  if (n < 2)
+  {
+    return; // can't draw
+  }
+
   AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
   PushColour();
   AmjuGL::SetColour(Colour(0, 0, 1, 1));
@@ -59,10 +79,8 @@ void GuiPolyEdit::Draw()
 
 
   // Draw lines between control points, so we can see order
-  const Vec2f pos;// = GetPoly()->GetCombinedPos();
+  const Vec2f pos = GetPoly()->GetCombinedPos();
 
-  const auto& points = GetPoly()->GetControlPoints();
-  int n = static_cast<int>(points.size());
   for (int i = 1; i < n; i++)
   {
     const Vec2f q0 = points[i - 1] + pos;
@@ -98,7 +116,7 @@ bool GuiPolyEdit::CreateNewControlPoint(const MouseButtonEvent& mbe)
   // See if we clicked on a line seg between two control points.
   const float MIN_SQ_DIST = 0.002f;
   const Vec2f p(mbe.x, mbe.y);
-  const Vec2f pointsOffset; // = GetPoly()->GetParent()->GetCombinedPos();
+  const Vec2f pointsOffset = GetPoly()->GetCombinedPos();
   auto& points = GetPoly()->GetControlPoints();
   for (int i = 1; i < static_cast<int>(points.size()); i++)
   {

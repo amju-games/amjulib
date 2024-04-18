@@ -35,12 +35,34 @@ static Vec2f CatmullRomSpline(float t, Vec2f p1, Vec2f p2, Vec2f p3, Vec2f p4)
   return v;
 }
 
-void GuiSpline::BuildFilledTriList()
+AmjuGL::Tris GuiSpline::BuildFilledTriList()
 {
+  AmjuGL::Tris tris;
+  AmjuGL::Tri t;
 
+  constexpr float Z = 0.5f;
+  constexpr float U = 0.5f;
+  constexpr float V = 0.5f;
+
+  const int n = m_points.size() - 1;
+  Assert(n > 0);
+  for (int i = 1; i < n; i++)
+  {
+    AmjuGL::Vert verts[3] =
+    {
+      AmjuGL::Vert(m_points[0].x,     m_points[0].y,     Z, U, V, 0, 1.0f, 0),
+      AmjuGL::Vert(m_points[i].x,     m_points[i].y,     Z, U, V, 0, 1.0f, 0),
+      AmjuGL::Vert(m_points[i + 1].x, m_points[i + 1].y, Z, U, V, 0, 1.0f, 0),
+    };
+
+    t.Set(verts[0], verts[1], verts[2]);
+    t.SetColour(m_filledColour);
+    tris.push_back(t);
+  }
+  return tris;
 }
 
-void GuiSpline::BuildOutlineTriList()
+AmjuGL::Tris GuiSpline::BuildOutlineTriList()
 {
   AmjuGL::Tris tris;
 
@@ -135,72 +157,13 @@ void GuiSpline::BuildOutlineTriList()
     tris.push_back(t[0]);
     tris.push_back(t[1]);
   }
-  m_triList = Amju::MakeTriList(tris);
+  return tris;
 }
 
 void GuiSpline::SetWidths(float w1, float w2)
 {
   m_startWidth = w1;
   m_endWidth = w2;
-}
-
-bool GuiSpline::Save(File* f)
-{
-  if (!GuiElement::SaveTypeAndName(f))
-  {
-    return false;
-  }
-  // NOT saving pos and size
-  if (!f->WriteFloat(m_startWidth))
-  {
-    return false;
-  }
-  if (!f->WriteFloat(m_endWidth))
-  {
-    return false;
-  }
-
-  if (!f->Write(CreateAttribString()))
-  {
-    return false;
-  }
-
-  return SavePoints(f);
-
-  return true;
-}
-
-bool GuiSpline::Load(File* f)
-{
-  m_isLoop = false; 
-
-  if (!f->GetDataLine(&m_name))
-  {
-    f->ReportError("Spline: expected name");
-    Assert(0);
-    return false;
-  }
-
-  // NOT saving pos and size
-
-  // Attribs
-  std::string attribs;
-  if (!f->GetDataLine(&attribs))
-  {
-    f->ReportError("Spline: Expected attribs string.");
-    return false;
-  }
-  ParseAttribString(attribs);
-
-  // We don't read the control points from a separate file any more.
-  if (!LoadPoints(f))
-  {
-    return false;
-  }
-
-  OnControlPointsChanged();
-
-  return true;
 }
 
 bool GuiSpline::ParseOneAttrib(const Strings& strs)
@@ -229,15 +192,6 @@ std::string GuiSpline::CreateAttribString() const
   return s;
 } 
 
-bool GuiSpline::LoadPoints(File* f)
-{
-  if (!IGuiPoly::LoadPoints(f))
-  {
-    return false;
-  }
-  return true;
-}
-
 void GuiSpline::MakeInBetweenPoints()
 {
   // Make in between points from control points
@@ -258,6 +212,8 @@ void GuiSpline::MakeInBetweenPoints()
     controlPoints.push_back(controlPoints.back());
   }
 
+  const Vec2f pos = GetCombinedPos();
+
   const int n = controlPoints.size() - 3;
   for (int i = 0; i < n; i++)
   {
@@ -274,7 +230,7 @@ void GuiSpline::MakeInBetweenPoints()
         m_totalLength += sqrtf((v - m_points.back()).SqLen());
       }
 
-      m_points.push_back(v);
+      m_points.push_back(v + pos);
 
       t += 0.04f; // TODO 
     }

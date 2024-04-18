@@ -16,6 +16,8 @@ class GuiDecRotate : public GuiDecorator
 public:
   static const char* NAME;
 
+  GuiDecRotate* Clone() override { return new GuiDecRotate(*this); }
+
   virtual bool Load(File*) override;
   virtual void Draw() override;
   virtual void Animate(float animValue) override;

@@ -19,8 +19,7 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
-  bool Load(File*) override;
-  bool Save(File*) override;
+  GuiSpline* Clone() override { return new GuiSpline(*this); }
 
   void Animate(float animValue) override;
 
@@ -29,18 +28,17 @@ public:
   void SetWidths(float w1, float w2);
 
 protected:
-  void Reset();
+  void Reset(); // Reset animation
+
   void MakeInBetweenPoints();
-  bool LoadPoints(File*) override;
-  void BuildFilledTriList() override;
-  void BuildOutlineTriList() override;
+  AmjuGL::Tris BuildFilledTriList() override;
+  AmjuGL::Tris BuildOutlineTriList() override;
 
   std::string CreateAttribString() const override;
   bool ParseOneAttrib(const Strings& strs) override;
 
 protected:
-  // A line drawing is a sequence of points.
-  // We fill in the gaps between control points with a Catmull-Rom spline.
+  // All points, after we interpolate between the control points with a Catmull-Rom spline.
   std::vector<Vec2f> m_points;
 
   // Total length of all segments 
@@ -50,10 +48,6 @@ protected:
 
   float m_startWidth = 0.03f;
   float m_endWidth = 0.01f;
-
-  // A circle, which we use to draw rounded ends of line seg sequences.
-  // TODO Get rid; we can create a polygonal rounded end if we want
-  //PTexture m_texture;
 };
 }
 

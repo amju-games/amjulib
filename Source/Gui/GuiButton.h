@@ -14,6 +14,8 @@ public:
   static const char* NAME;
   std::string GetTypeName() const override { return NAME; }
 
+  GuiButton* Clone() override { return new GuiButton(*this); }
+
   GuiButton();
   ~GuiButton();
 
