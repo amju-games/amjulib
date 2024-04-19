@@ -19,15 +19,17 @@ public:
 
   GuiDecColour* Clone() override { return new GuiDecColour(*this); }
 
-  virtual bool Load(File*) override;
-  virtual bool Save(File*) override;
-  virtual void Draw() override;
-  virtual void Animate(float animValue) override;
+  bool Load(File*) override;
+  bool Save(File*) override;
+  void Draw() override;
+  void Animate(float animValue) override;
 
-  void SetColour(const Colour&, int zeroOrOne = 0);
+  // Second colour: when we animate we interpolate between the two colours.
+  void SetSecondColour(const Colour&);
+  Colour GetColour() const;
 
 protected:
-  Colour m_colour[2];
+  Colour m_secondColour;
   Colour m_interpolatedColour;
 };
 

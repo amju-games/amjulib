@@ -72,7 +72,8 @@ protected:
   // TODO Move these up the hierarchy, so we can batch tri lists of as many
   //  GUI elements as poss.
   Vec2f m_previousCombinedPos;
-  Vec2f m_previousSize; // Combined?
+  Vec2f m_previousCombinedSize;
+  Colour m_previousCombinedColour;
 };
 
 class GuiPoly : public IGuiPoly

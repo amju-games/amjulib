@@ -381,7 +381,7 @@ Vec2f GuiElement::GetLocalPos() const
 
 Vec2f GuiElement::GetCombinedPos() const
 {
-  GuiElement* parent = (const_cast<GuiElement*>(this))->GetParent();
+  const GuiElement* parent = GetParent();
 
   if (parent)
   {
@@ -393,6 +393,30 @@ Vec2f GuiElement::GetCombinedPos() const
   }
 }
 
+void GuiElement::SetColour(const Colour& colour)
+{
+  m_colour = colour;
+}
+
+Colour GuiElement::GetColour() const
+{
+  return m_colour;
+}
+
+Colour GuiElement::GetCombinedColour() const
+{
+  const GuiElement* parent = GetParent();
+
+  if (parent)
+  {
+    return GetColour() * parent->GetCombinedColour();
+  }
+  else
+  {
+    return GetColour();
+  }
+}
+
 void GuiElement::SetSize(const Vec2f& v)
 {
   m_size = v;
@@ -401,6 +425,20 @@ void GuiElement::SetSize(const Vec2f& v)
 Vec2f GuiElement::GetSize() const
 {
   return m_size * GetGlobalScale();
+}
+
+Vec2f GuiElement::GetCombinedSize() const
+{
+  const GuiElement* parent = GetParent();
+
+  if (parent)
+  {
+    return m_size * GetGlobalScale() * parent->GetCombinedSize();
+  }
+  else
+  {
+    return m_size * GetGlobalScale();
+  }
 }
 
 void GuiElement::SetVisible(bool isVis)

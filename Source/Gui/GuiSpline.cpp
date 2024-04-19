@@ -44,6 +44,9 @@ AmjuGL::Tris GuiSpline::BuildFilledTriList()
   constexpr float U = 0.5f;
   constexpr float V = 0.5f;
 
+  // We use the combined pos when we create the in-between points, it's not missing.
+  const Colour colour = m_filledColour * GetCombinedColour();
+
   const int n = m_points.size() - 1;
   Assert(n > 0);
   for (int i = 1; i < n; i++)
@@ -56,7 +59,7 @@ AmjuGL::Tris GuiSpline::BuildFilledTriList()
     };
 
     t.Set(verts[0], verts[1], verts[2]);
-    t.SetColour(m_filledColour);
+    t.SetColour(colour);
     tris.push_back(t);
   }
   return tris;
@@ -75,6 +78,8 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
   const float v0 = 0;
   const float v1 = 1;
   float totalLength = 0;
+
+  const Colour colour = m_outlineColour * GetCombinedColour();
 
   for (int i = 1; i < m_index; i++)
   {
@@ -151,8 +156,8 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
         
     t[0].Set(verts[0], verts[1], verts[2]);
     t[1].Set(verts[0], verts[2], verts[3]);
-    t[0].SetColour(m_outlineColour);
-    t[1].SetColour(m_outlineColour);
+    t[0].SetColour(colour);
+    t[1].SetColour(colour);
 
     tris.push_back(t[0]);
     tris.push_back(t[1]);

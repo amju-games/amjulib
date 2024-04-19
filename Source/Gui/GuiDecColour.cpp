@@ -10,10 +10,10 @@ const char* GuiDecColour::NAME = "colour";
 
 bool GuiDecColour::Save(File* f)
 {
-  std::string s = ToHexString(m_colour[0]);
-  if (m_colour[0] != m_colour[1])
+  std::string s = ToHexString(m_colour);
+  if (m_colour != m_secondColour)
   {
-    s += "; " + ToHexString(m_colour[1]);
+    s += "; " + ToHexString(m_secondColour);
   }
   if (!f->Write(GetTypeName()))
   {
@@ -38,16 +38,16 @@ bool GuiDecColour::Load(File* f)
   // 2 colours or one?
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
-  m_colour[0] = FromHexString(strs[0]);
+  m_colour = FromHexString(strs[0]);
   if (strs.size() == 1)
   {
-    m_colour[1] = m_colour[0];
+    m_secondColour = m_colour;
   }
   else
   {
-    m_colour[1] = FromHexString(strs[1]);
+    m_secondColour = FromHexString(strs[1]);
   }
-  m_interpolatedColour = m_colour[0];
+  m_interpolatedColour = m_colour;
 
   if (!GuiDecorator::Load(f))
   {
@@ -78,14 +78,19 @@ void GuiDecColour::Draw()
 
 void GuiDecColour::Animate(float animValue)
 {
-  m_interpolatedColour = Interpolate(m_colour[0], m_colour[1], animValue);
+  m_interpolatedColour = Interpolate(m_colour, m_secondColour, animValue);
 
   AnimateChildren(animValue);
 }
 
-void GuiDecColour::SetColour(const Colour& col, int zeroOrOne)
+void GuiDecColour::SetSecondColour(const Colour& colour)
 {
-  m_colour[zeroOrOne] = col;
-  m_interpolatedColour = col; // ??
+  m_secondColour = colour;
 }
+
+Colour GuiDecColour::GetColour() const
+{
+  return m_interpolatedColour;
+}
+
 }

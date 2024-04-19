@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <vector>
+#include <Colour.h>
 #include <EventListener.h>
 #include <File.h>
 #include <GuiCommandHandler.h>
@@ -77,8 +78,13 @@ public:
   Vec2f GetLocalPos() const;
   Vec2f GetCombinedPos() const;
 
+  void SetColour(const Colour&);
+  virtual Colour GetColour() const; // virtual to allow for colour interpolation etc
+  Colour GetCombinedColour() const;
+
   void SetSize(const Vec2f&);
   Vec2f GetSize() const;
+  Vec2f GetCombinedSize() const;
 
   // Calculate bounding rectangle
   virtual Rect CalcRect() const;
@@ -100,6 +106,7 @@ public:
 
   void SetParent(GuiElement* parent) { m_parent = parent; }
   GuiElement* GetParent() { return m_parent; }
+  const GuiElement* GetParent() const { return m_parent; }
 
   // For elements containing text, say the text.
   virtual void TextToSpeech() {}
@@ -144,6 +151,9 @@ protected:
 
   Vec2f m_size;
   std::string m_name;
+
+  Colour m_colour;
+
   bool m_isVisible; // TODO Use flags if more 
   bool m_isSelected;
 

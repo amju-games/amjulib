@@ -82,12 +82,16 @@ void IGuiPoly::Draw()
   texture->UseThisTexture();
 
   Vec2f combinedPos = GetCombinedPos();
-  Vec2f combinedSize = GetSize(); // TODO should be combined size, so scale decorators work
+  Vec2f combinedSize = GetCombinedSize();
+  Colour combinedColour = GetCombinedColour();
   if (m_previousCombinedPos != combinedPos ||
-      m_previousSize != combinedSize)
+    m_previousCombinedSize != combinedSize ||
+    m_previousCombinedColour != combinedColour)
   {
     m_previousCombinedPos = combinedPos;
-    m_previousSize = combinedSize;
+    m_previousCombinedSize = combinedSize;
+    m_previousCombinedColour = combinedColour;
+
     BuildTriList();
   }
 
@@ -342,6 +346,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   }
 
   const Vec2f pos = GetCombinedPos();
+  const Colour colour = m_outlineColour * GetCombinedColour();
 
   constexpr float Z = .5f;
   constexpr float U = .5f;
@@ -393,10 +398,10 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
     };
 
     t.Set(verts[0], verts[1], verts[2]);
-    t.SetColour(m_outlineColour);
+    t.SetColour(colour);
     tris.push_back(t);
     t.Set(verts[0], verts[2], verts[3]);
-    t.SetColour(m_outlineColour);
+    t.SetColour(colour);
     tris.push_back(t);
   }
   if (IsLoop())
@@ -441,7 +446,8 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
   constexpr float U = 0.5f;
   constexpr float V = 0.5f;
 
-  Vec2f pos = GetCombinedPos();
+  const Vec2f pos = GetCombinedPos();
+  const Colour colour = m_filledColour * GetCombinedColour();
 
   const int n = m_controlPoints.size() - 1;
   Assert(n > 0);
@@ -455,7 +461,7 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
     };
 
     t.Set(verts[0], verts[1], verts[2]);
-    t.SetColour(m_filledColour);
+    t.SetColour(colour);
     tris.push_back(t);
   }
   return tris;
