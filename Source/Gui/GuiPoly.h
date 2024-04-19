@@ -68,6 +68,11 @@ protected:
   Colour m_outlineColour{ 0, 1, 1, 1 };
   Style m_style = Style::FILLED_AND_OUTLINE;
   float m_cornerRadius = 0.1f;
+
+  // TODO Move these up the hierarchy, so we can batch tri lists of as many
+  //  GUI elements as poss.
+  Vec2f m_previousCombinedPos;
+  Vec2f m_previousSize; // Combined?
 };
 
 class GuiPoly : public IGuiPoly

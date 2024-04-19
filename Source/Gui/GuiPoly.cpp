@@ -66,7 +66,7 @@ void IGuiPoly::SetOutlineColour(const Colour& colour)
   BuildOutlineTriList();
 }
 
-void IGuiPoly::Draw() 
+void IGuiPoly::Draw()
 {
   if (!IsVisible())
   {
@@ -78,8 +78,18 @@ void IGuiPoly::Draw()
   // TODO Set once before drawing all batched Polys
   static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes("Image/circle.png");
   Assert(texture);
-  texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP); 
+  texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
   texture->UseThisTexture();
+
+  Vec2f combinedPos = GetCombinedPos();
+  Vec2f combinedSize = GetSize(); // TODO should be combined size, so scale decorators work
+  if (m_previousCombinedPos != combinedPos ||
+      m_previousSize != combinedSize)
+  {
+    m_previousCombinedPos = combinedPos;
+    m_previousSize = combinedSize;
+    BuildTriList();
+  }
 
   AmjuGL::Draw(m_triList);
 }
