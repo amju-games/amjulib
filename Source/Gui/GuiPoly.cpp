@@ -82,14 +82,14 @@ void IGuiPoly::Draw()
   texture->UseThisTexture();
 
   Vec2f combinedPos = GetCombinedPos();
-  Vec2f combinedSize = GetCombinedSize();
+  Vec2f combinedScale = GetCombinedScale();
   Colour combinedColour = GetCombinedColour();
   if (m_previousCombinedPos != combinedPos ||
-    m_previousCombinedSize != combinedSize ||
+    m_previousCombinedScale != combinedScale ||
     m_previousCombinedColour != combinedColour)
   {
     m_previousCombinedPos = combinedPos;
-    m_previousCombinedSize = combinedSize;
+    m_previousCombinedScale = combinedScale;
     m_previousCombinedColour = combinedColour;
 
     BuildTriList();
@@ -346,6 +346,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   }
 
   const Vec2f pos = GetCombinedPos();
+  const Vec2f scale = GetCombinedScale();
   const Colour colour = m_outlineColour * GetCombinedColour();
 
   constexpr float Z = .5f;
@@ -362,8 +363,8 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   {
     // Get direction for this segment, and perpendicular direction, so we can make an 
     //  oriented rectangle (actually trapezium, as width can vary).
-    const Vec2f& p0 = pos + m_controlPoints[i - 1];
-    const Vec2f& p1 = pos + m_controlPoints[i];
+    const Vec2f& p0 = pos + scale * m_controlPoints[i - 1];
+    const Vec2f& p1 = pos + scale * m_controlPoints[i];
     const Vec2f dir = p1 - p0;
     Vec3f dir3(dir.x, dir.y, 0);
     dir3.Normalise();
@@ -406,8 +407,8 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   }
   if (IsLoop())
   {
-    const Vec2f& p0 = pos + m_controlPoints[n - 1];
-    const Vec2f& p1 = pos + m_controlPoints[0];
+    const Vec2f& p0 = pos + scale * m_controlPoints[n - 1];
+    const Vec2f& p1 = pos + scale * m_controlPoints[0];
     const Vec2f dir = p1 - p0;
     Vec3f dir3(dir.x, dir.y, 0);
     dir3.Normalise();
@@ -447,6 +448,7 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
   constexpr float V = 0.5f;
 
   const Vec2f pos = GetCombinedPos();
+  const Vec2f scale = GetCombinedScale();
   const Colour colour = m_filledColour * GetCombinedColour();
 
   const int n = m_controlPoints.size() - 1;
@@ -455,9 +457,9 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
   {
     AmjuGL::Vert verts[3] =
     {
-      AmjuGL::Vert(pos.x + m_controlPoints[0].x,     pos.y + m_controlPoints[0].y,     Z, U, V, 0, 1.0f, 0),
-      AmjuGL::Vert(pos.x + m_controlPoints[i].x,     pos.y + m_controlPoints[i].y,     Z, U, V, 0, 1.0f, 0),
-      AmjuGL::Vert(pos.x + m_controlPoints[i + 1].x, pos.y + m_controlPoints[i + 1].y, Z, U, V, 0, 1.0f, 0),
+      AmjuGL::Vert(pos.x + scale.x * m_controlPoints[0].x,     pos.y + scale.y * m_controlPoints[0].y,     Z, U, V, 0, 1.0f, 0),
+      AmjuGL::Vert(pos.x + scale.x * m_controlPoints[i].x,     pos.y + scale.y * m_controlPoints[i].y,     Z, U, V, 0, 1.0f, 0),
+      AmjuGL::Vert(pos.x + scale.x * m_controlPoints[i + 1].x, pos.y + scale.y * m_controlPoints[i + 1].y, Z, U, V, 0, 1.0f, 0),
     };
 
     t.Set(verts[0], verts[1], verts[2]);

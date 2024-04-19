@@ -84,7 +84,10 @@ public:
 
   void SetSize(const Vec2f&);
   Vec2f GetSize() const;
-  Vec2f GetCombinedSize() const;
+
+  void SetScale(const Vec2f&);
+  virtual Vec2f GetScale() const;
+  Vec2f GetCombinedScale() const;
 
   // Calculate bounding rectangle
   virtual Rect CalcRect() const;
@@ -149,7 +152,12 @@ protected:
   */
   Vec2f m_localpos;
 
+  // Used for width and height of rectangular elements, e.g. Images.
   Vec2f m_size;
+
+  // Size multiplier
+  Vec2f m_scale;
+
   std::string m_name;
 
   Colour m_colour;

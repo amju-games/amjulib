@@ -23,6 +23,7 @@ static bool textToSpeechEnabled = true;
 
 GuiElement::GuiElement()
 {
+  m_scale = { 1, 1 };
   m_parent = nullptr;
   m_isVisible = true;
   m_isSelected = false;
@@ -47,7 +48,7 @@ GuiElement::GuiElement(const GuiElement& e)
   m_ancestorsAreVisible = e.m_ancestorsAreVisible;
   m_localpos = e.m_localpos;
   m_size = e.m_size;
-
+  m_scale = e.m_scale;
 }
 
 GuiElement::~GuiElement()
@@ -141,16 +142,6 @@ bool GuiElement::HasFocus() const
 void GuiElement::SetOnFocusFunc(CommandFunc f)
 {
   m_onFocusFunc = f;
-}
-
-void GuiElement::SetGlobalScale(float f)
-{
-  globalScale = f;
-}
-
-float GuiElement::GetGlobalScale()
-{
-  return globalScale;
 }
 
 void GuiElement::SetTextToSpeechEnabled(bool t)
@@ -427,17 +418,37 @@ Vec2f GuiElement::GetSize() const
   return m_size * GetGlobalScale();
 }
 
-Vec2f GuiElement::GetCombinedSize() const
+void GuiElement::SetGlobalScale(float f)
+{
+  globalScale = f;
+}
+
+float GuiElement::GetGlobalScale()
+{
+  return globalScale;
+}
+
+void GuiElement::SetScale(const Vec2f& scale)
+{
+  m_scale = scale;
+}
+
+Vec2f GuiElement::GetScale() const
+{
+  return m_scale;
+}
+
+Vec2f GuiElement::GetCombinedScale() const
 {
   const GuiElement* parent = GetParent();
 
   if (parent)
   {
-    return m_size * GetGlobalScale() * parent->GetCombinedSize();
+    return m_scale * GetGlobalScale() * parent->GetCombinedScale();
   }
   else
   {
-    return m_size * GetGlobalScale();
+    return m_scale * GetGlobalScale();
   }
 }
 

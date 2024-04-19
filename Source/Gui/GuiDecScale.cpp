@@ -10,6 +10,24 @@ namespace Amju
 {
 const char* GuiDecScale::NAME = "scale";
 
+bool GuiDecScale::Save(File* f)
+{
+  std::string s = ToString(m_scale);
+  if (m_scale != m_secondScale)
+  {
+    s += "; " + ToString(m_secondScale);
+  }
+  if (!f->Write(GetTypeName()))
+  {
+    return false;
+  }
+  if (!f->Write(s))
+  {
+    return false;
+  }
+  return GetChild()->Save(f);
+}
+
 bool GuiDecScale::Load(File* f)
 {
   std::string s;
@@ -22,16 +40,16 @@ bool GuiDecScale::Load(File* f)
   Strings strs = Split(s, ';');
   Assert(!strs.empty());
 
-  ToVec2(strs[0], &m_scale[0]);
+  ToVec2(strs[0], &m_scale);
   if (strs.size() == 1)
   {
-    m_scale[1] = m_scale[0];
+    m_secondScale = m_scale;
   }
   else
   {
-    ToVec2(strs[1], &m_scale[1]);
+    ToVec2(strs[1], &m_secondScale);
   }
-  m_interpScale = m_scale[0];
+  m_interpScale = m_scale;
 
   // Pivot point
   if (!f->GetDataLine(&s))
@@ -53,10 +71,9 @@ bool GuiDecScale::Load(File* f)
   return true;
 }
 
-void GuiDecScale::SetScale(const Vec2f& scale, int zeroOrOne)
+void GuiDecScale::SetSecondScale(const Vec2f& scale)
 {
-  m_scale[zeroOrOne] = scale;
-  m_interpScale = scale;
+  m_secondScale = scale;
 }
 
 void GuiDecScale::SetPivot(const Vec2f& pivot)
@@ -64,9 +81,9 @@ void GuiDecScale::SetPivot(const Vec2f& pivot)
   m_pivot = pivot;
 }
 
-const Vec2f& GuiDecScale::GetScale(int zeroOrOne) const
+Vec2f GuiDecScale::GetScale() const
 {
-  return m_scale[zeroOrOne];
+  return m_interpScale;
 }
 
 const Vec2f& GuiDecScale::GetPivot() const
@@ -91,7 +108,7 @@ void GuiDecScale::Draw()
 
 void GuiDecScale::Animate(float animValue)
 {
-  m_interpScale = m_scale[0] + (m_scale[1] - m_scale[0]) * animValue;
+  m_interpScale = m_scale + (m_secondScale - m_scale) * animValue;
 
   AnimateChildren(animValue);
 }

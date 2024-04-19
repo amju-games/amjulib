@@ -72,7 +72,7 @@ protected:
   // TODO Move these up the hierarchy, so we can batch tri lists of as many
   //  GUI elements as poss.
   Vec2f m_previousCombinedPos;
-  Vec2f m_previousCombinedSize;
+  Vec2f m_previousCombinedScale;
   Colour m_previousCombinedColour;
 };
 

@@ -15,18 +15,23 @@ class GuiDecScale : public GuiDecorator
 {
 public:
   static const char* NAME;
-  virtual bool Load(File*) override;
-  virtual void Draw() override;
-  virtual void Animate(float animValue) override;
+  std::string GetTypeName() const override { return NAME; }
 
-  const Vec2f& GetScale(int zeroOrOne = 0) const;
+  GuiDecScale* Clone() override { return new GuiDecScale(*this); }
+
+  bool Load(File*) override;
+  bool Save(File*) override;
+  void Draw() override;
+  void Animate(float animValue) override;
+
   const Vec2f& GetPivot() const;
+  Vec2f GetScale() const override;
 
-  void SetScale(const Vec2f& scale, int zeroOrOne = 0);
+  void SetSecondScale(const Vec2f& scale); // For animation, we interpolate between two scale factors.
   void SetPivot(const Vec2f& pivot);
 
 private:
-  Vec2f m_scale[2];
+  Vec2f m_secondScale;
   Vec2f m_interpScale;
   Vec2f m_pivot;
   Vec2f m_origChildSize;

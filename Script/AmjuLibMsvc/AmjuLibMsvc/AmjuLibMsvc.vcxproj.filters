@@ -1679,9 +1679,6 @@
     <ClInclude Include="..\..\..\Source\FileUtils\StringsFile.h">
       <Filter>FileUtils</Filter>
     </ClInclude>
-    <ClInclude Include="GuiCalendar.h">
-      <Filter>Gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h">
       <Filter>Gui</Filter>
     </ClInclude>
