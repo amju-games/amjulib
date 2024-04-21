@@ -50,14 +50,12 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
   return false;
 }
 
-static bool leftDrag = false; // TODO Surely this should be a member variable
-
 bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 {
   Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
-  if (leftDrag)
+  if (m_leftDrag)
   {
     OnScrollVelEvent(Vec2f(ce.dx * 10.0f, ce.dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
   }
@@ -70,9 +68,17 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
-  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT)
+  if (mbe.button == AMJU_BUTTON_MOUSE_LEFT) 
   {
-    leftDrag = mbe.isDown;
+    if (mbe.isDown)
+    {
+      Rect r = GetRect(this);
+      m_leftDrag = r.IsPointIn(Vec2f(mbe.x, mbe.y));
+    }
+    else
+    {
+      m_leftDrag = false;
+    }
   }
 
   return child->OnMouseButtonEvent(mbe); 
@@ -203,12 +209,19 @@ void GuiScroll::InitScrollBar()
   // Not really a problem
 //  Assert(!m_scrollBar); // already initialised
 
+  // TODO This doesn't work!!!
   m_scrollBar = new GuiScrollBar;
   m_scrollBar->SetSize(Vec2f(0.1f, GetSize().y)); // for vertical
   m_scrollBar->SetLocalPos(Vec2f(0, 0)); // TODO
   m_scrollBar->SetParent(this); // needs to be on heap?
   m_scrollBar->Init();
   AddChild(m_scrollBar);
+}
+
+void GuiScroll::SetExtents(const Vec2f& extents)
+{
+  m_extents = extents;
+ // SetSize(extents);
 }
 
 }

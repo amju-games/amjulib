@@ -22,6 +22,8 @@ public:
   void OnScrollVelEvent(const Vec2f& scrollVel);
   void StopScrolling(); // set velocity to zero
 
+  void SetExtents(const Vec2f& extents);
+
   virtual bool OnKeyEvent(const KeyEvent&); 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
@@ -32,7 +34,12 @@ private:
   // Offset in x and y
   Vec2f m_scrollPos;
   Vec2f m_scrollVel; 
+
+  // Amount by which we are allowed to scroll in x and y
+  // TODO Why not use size?
   Vec2f m_extents;
+
+  bool m_leftDrag = false;
 
   RCPtr<GuiScrollBar> m_scrollBar;
 };

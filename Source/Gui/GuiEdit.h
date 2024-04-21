@@ -5,6 +5,7 @@
 
 namespace Amju
 {
+// * GuiEdit *
 // This node type lets you edit the child GUI element.
 class GuiEdit : public GuiDecorator
 {
@@ -18,7 +19,11 @@ public:
   bool OnMouseButtonEvent(const MouseButtonEvent&) override;
   bool OnCursorEvent(const CursorEvent&) override;
 
-  void SetChild(GuiElement* child);
+  // Hmm, how to do properties
+//  GuiDialog* CreatePropertiesDialog();
+  //OnPropertiesDialogClosed();
+
+  void SetChild(GuiElement* child); // Special behaviour: don't set `this` as parent
 
   virtual void RecalcGrabberPositions();
 

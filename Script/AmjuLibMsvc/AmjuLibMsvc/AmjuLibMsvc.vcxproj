@@ -403,6 +403,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiPropertiesDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Image\LoadPng.cpp" />
     <ClCompile Include="..\..\..\Source\Image\SavePng.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
@@ -726,6 +727,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiPropertiesDialog.h" />
     <ClInclude Include="..\..\..\Source\Image\LoadPng.h" />
     <ClInclude Include="..\..\..\Source\Image\SavePng.h" />
     <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />

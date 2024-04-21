@@ -162,7 +162,7 @@ void GuiMenu::Draw()
 
   AmjuGL::Disable(AmjuGL::AMJU_DEPTH_READ);
 
-  Vec2f pos; //(m_pos); // calc pos of each item
+  Vec2f pos;
 
   for (unsigned int i = 0; i < m_children.size(); i++)
   {
@@ -239,7 +239,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     // (Fix for lingering sub menus in AmjuWW edit mode)
     if (m_selected == -1)
     {
-      SetVisible(false);  // Hide if clicked away
+////      SetVisible(false);  // Hide if clicked away
     }
     else
     {
@@ -252,7 +252,7 @@ bool GuiMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
       bool hideOnSelection = (dynamic_cast<GuiNestMenuItem*>(child) == 0);
       if (hideOnSelection)
       {
-        SetVisible(false); 
+////        SetVisible(false); 
       }
       return true; // handled
     }
