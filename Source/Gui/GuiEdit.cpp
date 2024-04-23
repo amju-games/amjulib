@@ -8,7 +8,6 @@ const char* GuiEdit::NAME = "gui-edit";
 
 GuiEdit::GuiEdit()
 {
-  m_selectedGrabberIndex = -1;
   m_grabbers.clear();
   m_mouseButtonIsDown = false;
 }
@@ -27,57 +26,75 @@ void GuiEdit::Draw()
   DrawGrabbers();
 }
 
+void GuiEdit::SelectGrabbersInRect(const Rect& r)
+{
+  m_selectedGrabberIndices.clear();
+  const int n = m_grabbers.size();
+  for (int i = 0; i < n; i++)
+  {
+    const Rect& q = m_grabbers[i];
+    if (q.Intersects(r))
+    {
+      m_selectedGrabberIndices.insert(i);
+    }
+  }
+}
+
 void GuiEdit::HandleDragGrabber(const Vec2f& d)
 {
   // Logic for standard, rectangular shape with corner grabbers.
   Vec2f pos = GetChild()->GetLocalPos();
   Vec2f size = GetChild()->GetSize();
-  if (m_selectedGrabberIndex == 0) // Bottom left dragged
+
+  for (int selected : m_selectedGrabberIndices)
   {
-    pos.x += d.x;
-    size.x -= d.x;
-    size.y -= d.y;
-  }
-  else if (m_selectedGrabberIndex == 1) // Bottom right
-  {
-    size.x += d.x;
-    size.y -= d.y;
-  }
-  else if (m_selectedGrabberIndex == 2) // Top right
-  {
-    pos.y += d.y;
-    size.x += d.x;
-    size.y += d.y;
-  }
-  else if (m_selectedGrabberIndex == 3) // Top left
-  {
-    pos.x += d.x;
-    pos.y += d.y;
-    size.x -= d.x;
-    size.y += d.y;
-  }
-  else if (m_selectedGrabberIndex == 4) // Bottom mid
-  {
-    size.y -= d.y;
-  }
-  else if (m_selectedGrabberIndex == 5) // Right mid
-  {
-    size.x += d.x;
-  }
-  else if (m_selectedGrabberIndex == 6) // Top mid
-  {
-    pos.y += d.y;
-    size.y += d.y;
-  }
-  else if (m_selectedGrabberIndex == 7) // Left mid
-  {
-    pos.x += d.x;
-    size.x -= d.x;
-  }
-  else if (m_selectedGrabberIndex == 8) // Centre
-  {
-    pos.x += d.x;
-    pos.y += d.y;
+    if (selected == 0) // Bottom left dragged
+    {
+      pos.x += d.x;
+      size.x -= d.x;
+      size.y -= d.y;
+    }
+    else if (selected == 1) // Bottom right
+    {
+      size.x += d.x;
+      size.y -= d.y;
+    }
+    else if (selected == 2) // Top right
+    {
+      pos.y += d.y;
+      size.x += d.x;
+      size.y += d.y;
+    }
+    else if (selected == 3) // Top left
+    {
+      pos.x += d.x;
+      pos.y += d.y;
+      size.x -= d.x;
+      size.y += d.y;
+    }
+    else if (selected == 4) // Bottom mid
+    {
+      size.y -= d.y;
+    }
+    else if (selected == 5) // Right mid
+    {
+      size.x += d.x;
+    }
+    else if (selected == 6) // Top mid
+    {
+      pos.y += d.y;
+      size.y += d.y;
+    }
+    else if (selected == 7) // Left mid
+    {
+      pos.x += d.x;
+      size.x -= d.x;
+    }
+    else if (selected == 8) // Centre
+    {
+      pos.x += d.x;
+      pos.y += d.y;
+    }
   }
 
   GetChild()->SetLocalPos(pos);
@@ -128,13 +145,13 @@ void GuiEdit::DrawGrabbers()
   {
     const Rect& r = m_grabbers[i];
     AmjuGL::SetColour(Colour(0, 0, 1, 1));
+    if (m_selectedGrabberIndices.count(i)) // TODO contains
+    {
+      AmjuGL::SetColour(Colour(1, 0, 1, 1));
+    }
     if (m_highlightedGrabber == i)
     {
       AmjuGL::SetColour(Colour(0, 1, 1, 1));
-    }
-    if (m_selectedGrabberIndex == i)
-    {
-      AmjuGL::SetColour(Colour(1, 0, 1, 1));
     }
     DrawSolidRect(r);
   }
@@ -153,20 +170,31 @@ bool GuiEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     mbe.isDown)
   {
     // Check for grabbing a control point/corner
-    m_selectedGrabberIndex = GetGrabberUnderCursor(Vec2f(mbe.x, mbe.y));
-    if (m_selectedGrabberIndex != -1)
+    int selectedGrabberIndex = GetGrabberUnderCursor(Vec2f(mbe.x, mbe.y));
+    if (selectedGrabberIndex == -1)
     {
+      // Clicked away from any selection
+      // Unselect previously selected
+      //m_grabbers.clear();
+      //m_selectedGrabberIndices.clear();
+    }
+    else if (m_selectedGrabberIndices.count(selectedGrabberIndex))
+    {
+      return true; // Clicked on already selected grabber: that's ok, right? You want to drag a multi selection.
+    }
+    else
+    {
+      // Made a new selection
+      m_selectedGrabberIndices.clear();
+      m_selectedGrabberIndices.insert(selectedGrabberIndex);
       return true;
     }
-
-    // Unselect previously selected
-    m_grabbers.clear();
   }
   else if (mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
     !mbe.isDown)
   {
-    // Has grabber moved? Save new position, as an undoable Command.
-    m_selectedGrabberIndex = -1;
+    // TODO Has grabber moved? Save new position, as an undoable Command.
+    //m_selectedGrabberIndex = -1;
     return true;
   }
 
@@ -175,16 +203,31 @@ bool GuiEdit::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 
 bool GuiEdit::OnCursorEvent(const CursorEvent& ce)
 {
-  if (m_selectedGrabberIndex == -1)
+  //std::cout << "Editor for " << GetChild()->GetName() 
+  //  << ": highlighted grabber: " << m_highlightedGrabber 
+  //  << ": mouse button is: " << (m_mouseButtonIsDown ? "down" : "up")
+  //  << "\n";
+
+  if (m_mouseButtonIsDown)
   {
-    // Search grabbers, highlight if we mouse over it
-    m_highlightedGrabber = GetGrabberUnderCursor(Vec2f(ce.x, ce.y));
+    if (m_highlightedGrabber == -1)
+    {
+      m_highlightedGrabber = GetGrabberUnderCursor(Vec2f(ce.x, ce.y));
+    }
+
+    if (m_highlightedGrabber != -1 ||
+      !m_selectedGrabberIndices.empty())
+    {
+      HandleDragGrabber(Vec2f(ce.dx, ce.dy));
+      return true;
+    }
   }
   else
   {
-    HandleDragGrabber(Vec2f(ce.dx, ce.dy));
-    return true;
+    // We can highlight another grabber 
+    m_highlightedGrabber = GetGrabberUnderCursor(Vec2f(ce.x, ce.y));
   }
+
   return false;
 }
 

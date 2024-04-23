@@ -33,10 +33,10 @@ Rect::Rect(const Vec2f& corner1, const Vec2f& corner2)
 
 void Rect::Set(float xmin, float xmax, float ymin, float ymax)
 {
-  m_xmin = xmin;
-  m_xmax = xmax;
-  m_ymin = ymin;
-  m_ymax = ymax;
+  m_xmin = std::min(xmin, xmax);
+  m_xmax = std::max(xmin, xmax);
+  m_ymin = std::min(ymin, ymax);
+  m_ymax = std::max(ymin, ymax);
 }
 
 void Rect::SetIf(float x, float y)
@@ -103,14 +103,18 @@ bool Rect::IsPointIn(const Vec2f& point) const
     point.y <= m_ymax);
 }
 
-/*
-bool Rect::Intersects(const Rect& rect) const
+bool Rect::Intersects(const Rect& r) const
 {
+  return
+    m_xmax >= r.m_xmin &&
+    m_xmin <= r.m_xmax &&
+    m_ymax >= r.m_ymin &&
+    m_ymin <= r.m_ymax;
 }
-*/
 
 Rect Rect::CalcIntersectRegion(const Rect& r) const
 {
+  Assert(Intersects(r));
   return Rect(
     std::max(m_xmin, r.m_xmin),
     std::min(m_xmax, r.m_xmax),

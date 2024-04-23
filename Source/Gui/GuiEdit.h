@@ -1,6 +1,8 @@
+// * Amjulib * (c) Copyright 2024 Juliet Colman
 
 #pragma once
 
+#include <set>
 #include "GuiDecorator.h"
 
 namespace Amju
@@ -27,6 +29,8 @@ public:
 
   virtual void RecalcGrabberPositions();
 
+  void SelectGrabbersInRect(const Rect& r);
+
 protected:
   void DrawGrabbers();
 
@@ -39,7 +43,10 @@ protected:
 protected:
   using Grabbers = std::vector<Rect>;
   Grabbers m_grabbers;
-  int m_selectedGrabberIndex = -1;
+
+  // Set of indices of selected grabbers.
+  std::set<int> m_selectedGrabberIndices;
+
   int m_highlightedGrabber = -1; // Highlight grabber if under mouse cursor
   bool m_mouseButtonIsDown = false;
 

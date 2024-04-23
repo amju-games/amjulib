@@ -31,7 +31,7 @@ void GuiPolyEdit::RecalcGrabberPositions()
 
 void GuiPolyEdit::HandleDragGrabber(const Vec2f& deltaPos)
 {
-  if (m_selectedGrabberIndex == 0)
+  if (m_highlightedGrabber == 0)
   {
     // Central grabber
     GetPoly()->SetLocalPos(GetPoly()->GetLocalPos() + deltaPos);
@@ -39,10 +39,15 @@ void GuiPolyEdit::HandleDragGrabber(const Vec2f& deltaPos)
   else
   {
     auto& points = GetPoly()->GetControlPoints();
-    Assert(m_selectedGrabberIndex >= 0);
-    Assert(m_selectedGrabberIndex <= static_cast<int>(points.size()));
-    Vec2f& p = points[m_selectedGrabberIndex - 1];
-    p += deltaPos;
+    const int n = points.size();
+    for (int i = 1; i <= n; i++)
+    {
+      if (m_selectedGrabberIndices.count(i))
+      {
+        Vec2f& p = points[i - 1];
+        p += deltaPos;
+      }
+    }
   }
 
   RecalcGrabberPositions();
