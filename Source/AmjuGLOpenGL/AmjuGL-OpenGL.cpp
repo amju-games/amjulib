@@ -36,7 +36,7 @@ Amju Games source code (c) Copyright Jason Colman 2000-2007
 namespace Amju
 {
 static GLShader* s_shader = nullptr;
-static Colour s_colour; // current colour - pass to shader
+static Colour s_openGlColour; // current colour - pass to shader
 
 static DrawableFactory s_factory;
 
@@ -179,7 +179,7 @@ void AmjuGLOpenGL::SetColour(float r, float g, float b, float a)
   AMJU_CALL_STACK;
 
   GL_CHECK(glColor4f(r, g, b, a));
-  s_colour = Colour(r, g, b, a);
+  s_openGlColour = Colour(r, g, b, a);
 }
 
 void AmjuGLOpenGL::DrawLighting(
@@ -376,7 +376,7 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
     int uColour = s_shader->FindUniformLocation("colourUniform");
     if (uColour > -1)
     {
-      s_shader->Set("colourUniform", s_colour);
+      s_shader->Set("colourUniform", s_openGlColour);
     }
 
     // Setup
