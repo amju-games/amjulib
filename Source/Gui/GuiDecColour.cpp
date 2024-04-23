@@ -13,7 +13,7 @@ bool GuiDecColour::Save(File* f)
   std::string s = ToHexString(m_colour);
   if (m_colour != m_secondColour)
   {
-    s += "; " + ToHexString(m_secondColour);
+    s += ", " + ToHexString(m_secondColour);
   }
   if (!f->Write(GetTypeName()))
   {
@@ -68,6 +68,7 @@ void GuiDecColour::Draw()
     return;
   }
 
+  // TODO Don't do this, use vertex colours: BATCH!
   PushColour();
   MultColour(m_interpolatedColour);
 

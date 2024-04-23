@@ -95,7 +95,12 @@ void IGuiPoly::Draw()
     BuildTriList();
   }
 
+  //// TODO TEMP TEST: as we are going to batch these, we don't use the current AmjuGL colour,
+  ////  we set vertex colours.
+  //PushColour();
+  AmjuGL::SetColour(1, 1, 1, 1);
   AmjuGL::Draw(m_triList);
+  //PopColour();
 }
 
 void IGuiPoly::AddControlPoint(const Vec2f& p)
@@ -428,10 +433,10 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
     };
 
     t.Set(verts[0], verts[1], verts[2]);
-    t.SetColour(m_outlineColour);
+    t.SetColour(colour);
     tris.push_back(t);
     t.Set(verts[0], verts[2], verts[3]);
-    t.SetColour(m_outlineColour);
+    t.SetColour(colour);
     tris.push_back(t);
   }
 

@@ -25,6 +25,15 @@ bool GuiDecScale::Save(File* f)
   {
     return false;
   }
+  if (!f->WriteComment("// pivot point"))
+  {
+    return false;
+  }
+  if (!f->Write(ToString(m_pivot)))
+  {
+    return false;
+  }
+
   return GetChild()->Save(f);
 }
 

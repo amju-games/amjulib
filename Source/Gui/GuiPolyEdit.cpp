@@ -103,8 +103,13 @@ void GuiPolyEdit::Draw()
 
 void GuiPolyEdit::DeleteHighlightedControlPoint()
 {
+  if (m_highlightedGrabber == 0)
+  {
+    return;
+  }
+
   auto& points = GetPoly()->GetControlPoints();
-  Assert(m_highlightedGrabber >= 0);
+  Assert(m_highlightedGrabber > 0);
   Assert(m_highlightedGrabber <= static_cast<int>(points.size()));
   points.erase(points.begin() + m_highlightedGrabber - 1); // because grabber 0 is centre
   RecalcGrabberPositions();
