@@ -11,7 +11,7 @@ ASSETSDIR1 	:=	../../Assets
 ASSETSDIR2 	:=	../../../../Assets/gui
 RUNDIR		:=	$(BUILD)
 
-LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.2-macosx
+LIBDIRS   	:= 	$(AMJULIB_MAC_SCRIPT_PATH)/../../Releases/amjulib-v.0.5-macosx
 
 LIBS	:= \
 	-lamju \

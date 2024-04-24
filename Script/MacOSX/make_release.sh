@@ -1,12 +1,12 @@
 # Make release of amjulib for MacOSX
 export AMJU_BUILD_ARCH=Mac
-export AMJU_MACHDEP='-DMACOSX -DXP_MACOSX -DAMJU_USE_BASS -DAMJU_USE_CURL -DUSE_SHADOW_MAP_OPENGL_2'
+export AMJU_MACHDEP='-DMACOSX -DXP_MACOSX -DAMJU_USE_BASS_MIDI -DAMJU_USE_BASS -DAMJU_USE_CURL -DUSE_SHADOW_MAP_OPENGL_2'
 
 export AMJULIB_MAC_SCRIPT_PATH=`pwd`
 
 export PLAT=macosx
 export VERSION=`../MakeVersionString.pl ../../Source/Version.h`
-export DEST_DIR=../../Build/Releases/amjulib-$VERSION-$PLAT
+export DEST_DIR=../../Releases/amjulib-$VERSION-$PLAT
 echo MAKING RELEASE FOR $DEST_DIR
 
 export LIB=$DEST_DIR/lib/
@@ -17,8 +17,8 @@ export SRC=../../Source/
 mkdir -p $LIB
 mkdir -p $INC
 
-#rm $INC/*
-#rm $LIB/*
+rm $INC/*
+rm $LIB/*
 
 # Copy headers required by client code to include folder
 cp $SRC/Version.h $INC
@@ -57,7 +57,7 @@ perl ../CreateHeaderFile.pl $INC > $INC/amju.h
 
 # Build (release mode)
 #export EXTRA_CFLAGS='-g -O2 -DNDEBUG'
-#make clean
+make clean
 make
 
 # Copy .lib binary to lib folder

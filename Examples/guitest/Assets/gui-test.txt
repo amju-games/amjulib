@@ -6,7 +6,7 @@ gui-comp
 // Name
 gui-test-app-comp
 // Num children
-2
+15
 
 gui-text
 text1
@@ -52,14 +52,6 @@ data-line-display
 MyLineDisplay
 0, 0
 0.8, 0.6
-
-
-gui-file-dialog
-// Name
-my-file-dialog
-// Layout File - code will expect specific Gui objects with hardcoded names
-gui-file-dialog.txt
-// TODO pos ?
 
 
 // Nested window test
