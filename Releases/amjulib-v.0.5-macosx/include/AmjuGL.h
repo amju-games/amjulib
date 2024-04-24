@@ -30,24 +30,43 @@ public:
 
   static std::ostream& ReportState(std::ostream&);
 
+  // Stats for which we can get a report result
+  enum ReportStat
+  {
+    AMJU_NUM_DRAW_CALLS,
+  };
+
+  static int GetReportStat(ReportStat rs);
+
+  // Flags for enable/disable
   enum Flags
   {
     AMJU_DEPTH_READ  = 0x0001,
     AMJU_LIGHTING    = 0x0002,
     AMJU_BLEND       = 0x0004,
     AMJU_TEXTURE_2D  = 0x0008,
-    AMJU_DEPTH_WRITE = 0x0010
+    AMJU_DEPTH_WRITE = 0x0010,
+    AMJU_CULLING     = 0x0020,
   };
 
   // Vertex: (x, y, z) abs coord, (u, v) texture coord and normal.
-  // Now with added tangents!
+  // Now with added tangents and vertex colours!
   struct Vert
   {
     Vert() {}
     Vert(float x, float y, float z, float u, float v, float nx, float ny, float nz, float tanx = 1.0f, float tany = 0.0f, float tanz = 0.0f) :
       m_x(x), m_y(y), m_z(z), m_nx(nx), m_ny(ny), m_nz(nz), m_u(u), m_v(v), m_tanx(tanx), m_tany(tany), m_tanz(tanz) {}
 
+    void SetColour(float r, float g, float b, float a = 1.0f)
+    {
+      m_r = r;
+      m_g = g;
+      m_b = b;
+      m_a = a;
+    }
+    
     float m_x, m_y, m_z, m_nx, m_ny, m_nz, m_u, m_v, m_tanx, m_tany, m_tanz;
+    float m_r = 1.0f, m_g = 1.0f, m_b = 1.0f, m_a = 1.0f;
   };
   typedef std::vector<Vert> Verts;
 
@@ -75,6 +94,14 @@ public:
       m_verts[2] = v2;
     }
  
+    // Convenience function to set the colour of all 3 vertices
+    void SetColour(float r, float g, float b, float a = 1.0f)
+    {
+      m_verts[0].SetColour(r, g, b, a);
+      m_verts[1].SetColour(r, g, b, a);
+      m_verts[2].SetColour(r, g, b, a);
+    }
+
     Vert m_verts[3];
   };
 
@@ -139,12 +166,16 @@ public:
   static void SetPerspectiveProjection(
     float fovDegrees, float aspectRatio, float near, float far);
 
+  static void SetOrthoProjection(
+    float left, float right, float top, float bottom, float near, float far);
+
   // Set 'camera': give position of eye, target position and Up vector
   static void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ);
 
   // Set the current colour
   static void SetColour(float r, float g, float b, float a = 1.0f);
   static void SetColour(const Colour& colour);
+  static const Colour& GetColour();
 
   static void Draw(Drawable* drawable);
 
@@ -243,7 +274,7 @@ public:
 
   // Copy screen into buffer  - which should be allocated by caller.
   // Format of data is RGB888
-  static void GetScreenshot(unsigned char* buffer, int w, int h);
+  static void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h);
 
   // Lighting
 
@@ -267,6 +298,8 @@ public:
   // Pass in nullptr to reset to default shader or use no shader 
   // (for OpenGL, ES1, DX9)
   static void UseShader(Shader*);
+
+  static Shader* GetCurrentShader();
 
   // Get subdirectory for shader files for the current impl
   static std::string GetShaderDir();

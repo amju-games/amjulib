@@ -52,9 +52,13 @@ struct Material : public RefCounted
 
   Material();
   void UseThisMaterial();
+  bool HasFlagSet(uint32 flag) const;
+  bool IsBlended() const;
 };
 
-typedef std::vector<RCPtr<Material> > MaterialVec;
+using PMaterial = RCPtr<Material>;
+
+using MaterialVec = std::vector<PMaterial>;
 
 bool LoadMtlFile(const std::string& mtlfilename, MaterialVec* mats);
 

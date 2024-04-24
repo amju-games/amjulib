@@ -12,6 +12,7 @@ namespace Amju
 class IGuiText
 {
 public:
+  virtual ~IGuiText() {}
   virtual void SetText(const std::string& text) = 0;
   virtual std::string GetText() const = 0;
 };
@@ -41,7 +42,11 @@ public:
   void SetScaleX(float scaleX);
   float GetScaleX() const;
 
-  void SizeToText(); // changes size to accomodate text
+  // Calc size for SizeToText, but don't actually resize
+  Vec2f CalcSizeToText() const;
+
+  // Change size to fit text exactly
+  void SizeToText();
 
   // Call to decide which bits of the text fit in the bounding rect
   void RecalcFirstLast();
@@ -54,6 +59,8 @@ public:
   void SetDrawBg(bool drawBg);
   void SetFgCol(const Colour& col);
   void SetBgCol(const Colour& col);
+  const Colour& GetFgCol() const;
+  const Colour& GetBgCol() const;
 
   enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
 
@@ -71,7 +78,7 @@ protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
 
   friend struct WidthFinder;
-  float GetTextWidth(const std::string& text);
+  float GetTextWidth(const std::string& text) const;
 
   // Called twice from Draw, for drop shadow
   void ReallyDraw();

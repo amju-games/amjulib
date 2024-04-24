@@ -1,6 +1,7 @@
 #ifndef MESSAGE_QUEUE_H_INCLUDED
 #define MESSAGE_QUEUE_H_INCLUDED
 
+#include <functional>
 #include <set>
 #include <Singleton.h>
 #include <RCPtr.h>
@@ -9,16 +10,21 @@
 
 namespace Amju
 {
-// Time for Messages: may be adjusted to compensate for server lag etc.
-typedef Time MsgTime;
+// Get current message queue time and add on the given delay. The result
+//  can be used to set a message which will execute after the delay has
+//  elapsed.
+float SecondsFromNow(float seconds);
 
 struct Message : public RefCounted
 {
+  Message() = default;
+  Message(float t) : m_time(t) {}
+
   virtual ~Message() {}
   virtual void Execute() = 0;
 
-  // Timestamp: the time at which this Message should be Executed
-  MsgTime m_time;
+  // Timestamp: the time at which this Message should be Executed. 
+  float m_time = 0;
 };
 
 typedef RCPtr<Message> PMessage;
@@ -27,6 +33,20 @@ inline bool operator<(const PMessage& m1, const PMessage& m2)
 {
   return (m1->m_time < m2->m_time);
 }
+
+// * FuncMsg *
+// Message type which calls a function when it is Executed.
+struct FuncMsg : public Message
+{
+  FuncMsg(std::function<void()> f, float t) : Message(t), m_func(f) {}
+
+  virtual void Execute() override
+  {
+    m_func();
+  }
+
+  std::function<void()> m_func;
+};
 
 
 // Priority queue of messages. 
@@ -45,13 +65,15 @@ public:
   //  just needs to be the same across all hosts.
   void SetTime(float seconds);
 
+  float GetTime() const;
+
 protected:
   // Priority queue: could be implemented as a Heap, Set, std::priority_queue...
   typedef std::set<PMessage> Queue;
   Queue m_q;
   
   // Current time
-  float m_time;
+  float m_time = 0;
 
   // Thread safe: Add() can be called from other threads. 
   Mutex m_mutex;

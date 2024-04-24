@@ -2,6 +2,7 @@
 
 #include <TriList.h>
 #include <Shader.h>
+#include <Vec2.h>
 #include "RenderToTexture.h"
 
 namespace Amju
@@ -21,6 +22,8 @@ public:
   Shader* GetPostProcessShader() { return m_postProcessShader; }
   void SetPostProcessShader(Shader* sh) { m_postProcessShader = sh; }
   
+  void SetRect(const Vec2f& pos, const Vec2f& size);
+  
 protected:
   // Full screen quad 
   RCPtr<TriListStatic> m_triList;
@@ -28,6 +31,9 @@ protected:
   RCPtr<RenderToTexture> m_renderToTexture;
   
   RCPtr<Shader> m_postProcessShader;
+  
+  Vec2f m_pos; // default: (-1, 1)
+  Vec2f m_size; // default: (2, 2)
 };
 }
 

@@ -1,26 +1,3 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: TextureSequence.h,v $
-Revision 1.6  2007/11/13 21:33:13  jay
-Remove all OpenGL calls from game code
-
-Revision 1.5  2006/11/29 23:01:37  jay
-Print text in world space, for PetZoo pet names.
-
-Revision 1.4  2006/03/10 19:20:28  jay
-Add Set functions
-
-Revision 1.3  2006/02/17 19:01:46  jay
-New size parameter added to Draw(). Use this rather than glScale.
-
-Revision 1.2  2004/10/17 18:38:33  jay
-Load from File; store size
-
-Revision 1.1  2004/09/08 15:42:59  jay
-Added to repository
-  
-*/
-
 #if !defined(TEXTURE_SEQUENCE_H_INCLUDED)
 #define TEXTURE_SEQUENCE_H_INCLUDED
 
@@ -39,12 +16,12 @@ class TextureSequence : public RefCounted
 {
 public:
   TextureSequence();
-  ~TextureSequence();
+  virtual ~TextureSequence();
 
-  bool Load(File* );
+  virtual bool Load(File*);
 
   bool Load(
-    const std::string& texturename, 
+    const std::string& texturename,
     int numElementsX, int numElementsY,
     float sizeX, float sizeY);
 
@@ -54,12 +31,12 @@ public:
 
   int GetNumElements() const;
 
-  void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff);
+  void MakeTris(int element, float size, AmjuGL::Tri tris[2], float xOff, float yOff, bool isItalic);
 
   // Bind the texture. Doing this once up front instead of every call to
   // Draw() may be more efficient.
   void Bind();
-  
+
   int GetTextureWidth();
   int GetTextureHeight();
 
@@ -71,12 +48,30 @@ public:
   Texture* GetTexture() { return m_pTexture; }
 
 protected:
+  // Override this for packed atlases. This default impl assumes a grid of fixed-size
+  //  elements in the atlas.
+  virtual void GetElementInAtlas(
+    int ch, // the element index, e.g. a character code, from ' ' to 'z' etc. Can be >255 for unicode
+    float& x, float& y, // position offset (would be zero if all elements are equal size)
+    float& w, float& h, // size of glyph in relation to entire atlas
+    float& u0, float& v0, // top left UV coord
+    float& u1, float& v1 // bottom right UV coord
+  );
+
+protected:
   PTexture m_pTexture; 
   int m_numElements;
+
+  // Scale factor in x and y ... not much use?
   float m_sizex, m_sizey;
+
   // Number of elements in the texture in x and y axes
+  // Only makes sense for a grid of fixed-size cells, e.g. a character atlas created
+  //  with Bitmap Font Builder, but not a packed atlas, e.g. created with BMFont.
+  // Also does make sense for a sprite sheet, again of fixed-size cells.
   int m_numElementsX, m_numElementsY;
 };
+
 }
 
 #endif

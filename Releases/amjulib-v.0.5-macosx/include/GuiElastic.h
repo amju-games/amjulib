@@ -11,7 +11,7 @@ public:
   static const char* NAME;
   GuiElastic();
   virtual bool Load(File*);
-  virtual void Draw(); // update offset
+  virtual void Update(); 
 
   // Set the velocity at which we move from the offset to final position.
   // This applies to all elastics.

@@ -18,6 +18,8 @@ struct Colour
 
 Colour operator*(const Colour& c1, const Colour& c2);
 
+Colour Interpolate(const Colour& c1, const Colour& c2, float t);
+
 // Colour stack
 void PushColour();
 void PopColour();

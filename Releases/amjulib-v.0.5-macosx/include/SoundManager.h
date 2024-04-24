@@ -52,6 +52,11 @@ public:
   float GetWavMaxVolume() const;
   float GetSongMaxVolume() const;
 
+  // MIDI functions
+  bool MidiSetSoundFont(const char* soundfont);
+  bool MidiNoteOn(int note);
+  bool MidiNoteOff(int note);
+
 private:
   PSoundPlayerImpl m_pImpl;
 

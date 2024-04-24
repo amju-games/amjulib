@@ -1,12 +1,16 @@
-#ifndef GUI_IMAGE_H
-#define GUI_IMAGE_H
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
 
+#pragma once
+
+#include <GuiElement.h>
+#include <Texture.h>
 #include <TriList.h>
-#include "GuiElement.h"
-#include "Texture.h"
 
 namespace Amju
 {
+// * GuiImage *
+// Part of Gui class hierarchy, displays 2D screen space GUI image.
 class GuiImage : public GuiElement
 {
 public:
@@ -19,15 +23,13 @@ public:
   Texture* GetTexture();
 
 private:
-  void BuildTris();
+  // Build (2 element) tri list to draw the textured quad.
+  // NB this is super inefficient: GuiSprite batches draw calls better,
+  //  especially if the images are all in one atlas.
+  virtual void BuildTris();
 
 protected:
   PTexture m_texture;
-//  AmjuGL::Tris m_tris;
   RCPtr<TriListStatic> m_triList;
-  Vec2f m_oldPos;
-  Vec2f m_oldSize;
 };
 }
-
-#endif

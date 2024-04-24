@@ -1,21 +1,24 @@
 #ifndef TEXTURE_H_INCLUDED
 #define TEXTURE_H_INCLUDED
 
-#include "RCPtr.h"
 #include "AmjuGL.h"
+#include "RCPtr.h"
+#include "ResourceManager.h"
 
 namespace Amju
 {
-class Texture : public RefCounted
+class Texture : public Resource
 {
 public:
   Texture();
   ~Texture();
-  bool Load(const std::string& filename);
+  bool Load(const std::string& filename) override;
+
   void Create(unsigned char* data, int w, int h, int bytesPerPixel);
   void UseThisTexture(int textureUnitId = 0);
   int GetWidth() const;
   int GetHeight() const;
+  int GetBytesPerPixel() const;
   
   AmjuGL::TextureHandle GetId() const;
 
@@ -27,9 +30,10 @@ public:
   static void SetDefaultWrapMode(AmjuGL::TextureMode);
 
 private:
-  AmjuGL::TextureHandle m_texId;
-  int m_width;
-  int m_height;
+  AmjuGL::TextureHandle m_texId = -1;
+  int m_width = 0;
+  int m_height = 0;
+  int m_bytesPerPixel = 0;
   AmjuGL::TextureFilter m_filter;
   AmjuGL::TextureMode m_wrapMode;
   AmjuGL::TextureType m_textureType;
@@ -37,10 +41,6 @@ private:
   static AmjuGL::TextureFilter s_defaultFilter;
   static AmjuGL::TextureMode s_defaultWrapMode;
   // Default type is always UV
-
-#ifdef _DEBUG
-  std::string m_name;
-#endif
 };
 
 typedef RCPtr<Texture> PTexture;

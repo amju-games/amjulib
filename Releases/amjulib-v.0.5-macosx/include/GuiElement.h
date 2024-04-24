@@ -1,24 +1,37 @@
-#ifndef GUI_ELEMENT_H
-#define GUI_ELEMENT_H
+// Amjulib - cross platform game engine
+// (c) Copyright Jason Colman 2000-2017
 
+#pragma once
+
+#include <functional>
 #include <vector>
-#include "EventListener.h"
-#include "Vec2.h"
-#include "File.h"
-#include "GuiCommandHandler.h"
-#include "Rect.h"
+#include <EventListener.h>
+#include <File.h>
+#include <GuiCommandHandler.h>
+#include <Rect.h>
+#include <Vec2.h>
 
 namespace Amju
 {
-typedef void (*CommandFunc)(GuiElement*);
+// Command function type.
+// Gui Elements which respond to user events can call this kind of
+//  function, to implement a lightweight action.
+// For undoable commands, or commands requiring more data, there is the 
+//  more heavyweight GuiCommand class.
+using CommandFunc = std::function<void(GuiElement*)>;
 
+// * GuiElement *
+// Base class for GUI classes. Subclasses represent specific kinds of
+//  GUI widgets. 
+// GUI elements are held in a tree structure. We are using the Composite
+//  and Decorator Design Patterns for this.
 class GuiElement : public EventListener
 {
 public:
   GuiElement();
   virtual ~GuiElement();
   virtual void Draw() = 0;
-  virtual void Update() {} // ?
+  virtual void Update() {} 
   virtual bool Load(File*); // Load pos and size
   bool OpenAndLoad(const std::string& filename);
 
@@ -49,21 +62,19 @@ public:
   void SetSize(const Vec2f&);
   Vec2f GetSize() const;
 
+  // Calculate bounding rectangle
+  virtual Rect CalcRect() const;
+
   // Scale factor so entire GUI can be zoomed in for accessibility
   static void SetGlobalScale(float f);
   static float GetGlobalScale();
 
-  // Call to adjust aspect ratio if screen is not 640/480
-  // Depends on landscape/portrait orientation, so we need to set this when orientation
-  //  changes.
-  static void SetAspectRatioScaleFactor(float sf);
-  
   // Text to speech: if enabled, text-based elements speak when they 
   //  get focus. Also they should have a "speak" button.
   static void SetTextToSpeechEnabled(bool);
   static bool IsTextToSpeechEnabled();
 
-  void SetVisible(bool isVis);
+  virtual void SetVisible(bool isVis);
   bool IsVisible() const;
 
   void SetName(const std::string& name);
@@ -81,6 +92,21 @@ public:
   void SetUserData(void* data) { m_userData = data; }
   void* GetUserData() { return m_userData; }
 
+  // Conceptually protected:
+  virtual void SetAncestorsVisible(bool ancestorVis);
+
+  // Animation: this animation value varies between 0..1, set by an animating parent.
+  // Override this to change a property like colour, position, rotation, etc.
+  // When overriding this function in a composite/decorator, call the base class version 
+  //  to pass the animation value down the tree to all descendants.
+  virtual void Animate(float animValue) {}
+
+  // Reset animation time to zero. Composite/decorators must pass this along to children.
+  virtual void ResetAnimation() {}
+
+  // Called when animation loops. Composite/decorators must pass this along to children.
+  virtual void OnResetAnimation() {}
+
 protected:
   // Pos is top-left of element
   // Screen is (-1, -1)..(1, 1)
@@ -92,7 +118,6 @@ protected:
      (-1, -1) +--------------+ (1, -1)
   */
   Vec2f m_localpos;
-//? Or calc on fly? //  Vec2f m_combinedPos;
 
   Vec2f m_size;
   std::string m_name;
@@ -110,8 +135,12 @@ protected:
   bool m_drawBorder;
 
   void* m_userData;
+
+  // True if all ancestors up to root are visible
+  bool m_ancestorsAreVisible;
 };
 
+// Convenience typedefs
 typedef RCPtr<GuiElement> PGuiElement;
 typedef std::vector<PGuiElement> GuiElements;
 
@@ -120,8 +149,8 @@ PGuiElement LoadGui(const std::string& filename, bool addAsListener = true);
 // Convenience function - get rectangle from pos and size of element
 Rect GetRect(GuiElement*);
 
-// Prefer this function, as it can alert when no such element exists
+// Recursively search a GUI tree to find a named element.
+// Prefer this function over the member function, as it can alert when no 
+//  such element exists.
 GuiElement* GetElementByName(GuiElement* root, const std::string& nodeName);
 }
-
-#endif

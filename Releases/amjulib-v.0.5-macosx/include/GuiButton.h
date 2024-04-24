@@ -31,7 +31,11 @@ public:
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);
+  const Colour& GetTextColour() const;
   void SetButtonColour(const Colour& col);
+  const Colour& GetButtonColour() const;
+  void SetFocusColour(const Colour& col);
+  const Colour& GetFocusColour() const;
 
   bool IsMouseOver() const;
   bool IsPressed() const;
@@ -56,8 +60,8 @@ protected:
 
 protected:
   GuiText m_guiText;
-  Colour m_textColour;
   Colour m_buttonColour;
+  Colour m_focusColour;
 
   bool m_isMouseOver; // Draw bigger
   bool m_isPressed; // Draw offset right/down
@@ -69,6 +73,8 @@ protected:
   GuiImage m_focusImage;
   
   static std::string s_clickFilename;
+  
+  Colour m_combinedColour; // combined colour of this button and all ancestors
 };
 }
 

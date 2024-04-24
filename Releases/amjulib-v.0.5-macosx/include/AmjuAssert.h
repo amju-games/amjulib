@@ -40,7 +40,7 @@ namespace Amju
 #endif // _DEBUG
 #endif // WIN32
 
-#if defined(MACOSX) || defined(IPHONE) 
+#if defined(MACOSX) || defined(IPHONE) || defined(AMJU_IOS)
 #include <assert.h>
 #define Assert assert
 #endif // MACOSX or IPHONE

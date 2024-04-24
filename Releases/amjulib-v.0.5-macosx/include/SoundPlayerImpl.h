@@ -49,6 +49,11 @@ public:
   // Set volume for songs, between 1.0 (full volume) and 0 (silent) 
   virtual void SetSongMaxVolume(float f) {}
 
+  // MIDI functions
+  virtual bool MidiSetSoundFont(const char* soundfont) { return false; }
+  virtual bool MidiNoteOn(int note) { return false; }
+  virtual bool MidiNoteOff(int note) { return false; }
+
 protected:
   RCPtr<GlueFile> m_pGlueFile;
 };

@@ -11,12 +11,22 @@ Amju Games source code (c) Copyright Jason Colman 2004-2009
 
 namespace Amju
 {
+// Convert utf-8 encoded string to vector of Unicode code points
+using WString = std::vector<int>;
+WString Utf8ToWString(const std::string& utf8);
+
+std::string TruncateUtf8String(const std::string& str, int maxSize);
+
+// Convert escape sequences to single chars. E.g. "\x80" is replaced with (char)128.
+std::string ReplaceUtf8EscapedChars(const std::string& utf8);
+
 // Helper: strips off any path info from a filename.
 std::string StripPath(const std::string& s);
 std::string StripPath(const std::string& s, const std::string& slashChar);
 
 // Helper: trim spaces off beginning and end of string.
 void Trim(std::string* pStr);
+std::string Trim(const std::string& s);
 
 // Get the extension (letters following final dot) of a filename.
 std::string GetFileExt(const std::string& filename);
@@ -129,7 +139,7 @@ Strings WordWrap(std::string ss, float maxW, WIDTH_FINDER t)
       else
       {
         // Search backwards in s until we find the last space.
-        for (int i = s.size() - 1; i >= 0; i--)
+        for (int i = static_cast<int>(s.size()) - 1; i >= 0; i--)
         {
           if (s[i] == ' ')
           {

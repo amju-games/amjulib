@@ -14,7 +14,7 @@ private:
   friend class Singleton<CursorManager>;
 
 public:
-  bool Load(const Vec2f& hotspot);
+  bool Load(const std::string& imageResource, const Vec2f& hotspot);
   void Draw();
   void Update();
   Cursor* GetCursor(int i);

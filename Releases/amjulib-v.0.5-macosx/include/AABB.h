@@ -55,6 +55,8 @@ public:
   // Calc intersection between two boxes
   AABB Intersection(const AABB&) const;
 
+  void GetCorners(Vec3f corners[8]) const;
+
 private:
   float m_xmin, m_xmax, m_ymin, m_ymax, m_zmin, m_zmax;
 };

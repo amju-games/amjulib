@@ -1,23 +1,15 @@
-#ifndef AMJU_LERP_H_INCLUDED
-#define AMJU_LERP_H_INCLUDED
+// * Amjulib *
+// (c) Copyright 2000-2017 Jason Colman
 
-// Linear Interpolation for any type which supports 
-// operator+, operator- and operator*
-
-#include "AmjuAssert.h"
+#pragma once
 
 namespace Amju
 {
-template <class T>
-T Lerp(const T& t1, const T& t2, float between)
+// * Lerp *
+// Linear interpolation template function
+template <typename T>
+T Lerp(const T& t0, const T& t1, float f)
 {
-  Assert(between >= 0);
-  Assert(between <= 1.0f);
-
-  return t1 + (t2 - t1) * between;
+  return t0 + f * (t1 - t0);
 }
-
 }
-
-#endif
-

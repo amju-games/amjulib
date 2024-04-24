@@ -22,13 +22,15 @@ public:
   virtual void Update();
   virtual void SetSongMaxVolume(float);
 
-#ifdef AMJU_USE_MIDI
-  void MidiSetSoundFont(const char* soundfont);
-  void MidiNoteOn(int note);
-  void MidiNoteOff(int note);
-#endif // AMJU_USE_MIDI
+#ifdef AMJU_USE_BASS_MIDI
+  virtual bool MidiSetSoundFont(const char* soundfont) override;
+  virtual bool MidiNoteOn(int note) override;
+  virtual bool MidiNoteOff(int note) override;
+#endif // AMJU_USE_BASS_MIDI
     
 private:
+  std::string m_lastSongName;
+
   // Channel for current song
   unsigned long m_chan;
 };

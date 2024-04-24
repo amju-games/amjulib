@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Colour.h"
 #include "Drawable.h"
 
 namespace Amju
@@ -13,10 +14,14 @@ public:
 
   // Set what to render, depth and/or colour. Default value is AMJU_RENDER_COLOUR
   static const int AMJU_RENDER_COLOUR = 0x01;
-  static const int AMJU_RENDER_DEPTH = 0x02; 
+  static const int AMJU_RENDER_COLOUR_WITH_ALPHA = 0x05;
+  static const int AMJU_RENDER_DEPTH = 0x02;
+  static const int AMJU_ALPHA_FLAG = 0x04;
   void SetRenderFlags(int renderFlags);
 
   void SetSize(int w, int h);
+
+  void SetClearColour(const Colour& cc);
 
   // Draw scene between Begin() and End() calls. Then you can use the texture.
   // Switch to texture render target
@@ -45,6 +50,8 @@ protected:
   int m_vpX, m_vpY, m_vpW, m_vpH;
 
   int m_renderFlags;
+
+  Colour m_clearCol;
 };
 }
 

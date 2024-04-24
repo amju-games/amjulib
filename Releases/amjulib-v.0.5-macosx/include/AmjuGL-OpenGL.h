@@ -47,6 +47,9 @@ public:
   virtual void SetPerspectiveProjection(
     float fov, float aspectRatio, float near, float far);
 
+  virtual void SetOrthoProjection(
+    float left, float right, float top, float bottom, float near, float far);
+
   // Set 'camera': give position of eye, target position and Up vector
   virtual void LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ);
 
@@ -90,7 +93,7 @@ public:
     uint8* data);
 
   // Copy screen into buffer  - which should be allocated by caller.
-  virtual void GetScreenshot(unsigned char* buffer, int w, int h);
+  virtual void GetScreenshot(unsigned char* buffer, int x, int y, int w, int h);
 
   virtual Shader* LoadShader(const std::string& shaderFileName);
   virtual void UseShader(Shader*);

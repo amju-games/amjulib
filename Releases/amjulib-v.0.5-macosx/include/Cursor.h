@@ -16,7 +16,7 @@ public:
   virtual bool OnCursorEvent(const CursorEvent& ce);  
   virtual bool OnRotationEvent(const RotationEvent&);
   
-  bool Load(int id, const Vec2f& hotspot);
+  bool Load(const std::string& imageResource, int id, const Vec2f& hotspot);
   void Draw();
 
   const Vec2f& GetPos() const;

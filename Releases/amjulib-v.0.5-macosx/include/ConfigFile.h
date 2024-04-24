@@ -4,11 +4,12 @@
 // Designed to get game configuration
 #include <map>
 #include <string>
+#include <RCPtr.h>
 #include <Singleton.h>
 
 namespace Amju
 {
-class ConfigFile : public NonCopyable
+class ConfigFile : public NonCopyable, public RefCounted
 {
 public:
   ConfigFile();
@@ -36,6 +37,7 @@ public:
 protected:
   typedef std::map<std::string, std::string> ConfigMap;
   ConfigMap m_values;
+  bool m_isDirty = false;
 };
 
 // You can have multiple config files but there is one GameConfigFile 

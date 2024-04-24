@@ -26,11 +26,14 @@ public:
   void SetCornerRadius(float);
   void SetColour(const Colour& colour);
 
+  static void SetCornerImage(const std::string &cornerImageFilename);
+
 protected:
   void BuildTris();
 
 protected:
-//  AmjuGL::Tris m_tris;
+  static std::string s_cornerImageFilename;
+
   RCPtr<TriListStatic> m_triList;
   float m_cornerRadius;
   Vec2f m_oldPos;

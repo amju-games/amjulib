@@ -62,6 +62,7 @@ private:
   {
     if (m_ptr) 
     {
+      Assert(m_ptr->m_shareable_refcount >= 0);
       ++(m_ptr->m_shareable_refcount);
     }
   }
@@ -70,6 +71,7 @@ private:
   {
     if (p) 
     {
+      Assert(p->m_shareable_refcount > 0);
       if (--(p->m_shareable_refcount) == 0)
       {
         delete p;

@@ -13,15 +13,19 @@ class Matrix;
 class ObjMesh : public Resource
 {
 public:
-  bool Load(const std::string& filename, bool binary = false);
-  bool Save(const std::string& filename, bool binary = false);
+  // Set to true to load or save data as a binary file (faster, smaller).
+  // Set to false to load or save a text format file (human readable).
+  void SetIsBinary(bool isBinary);
+
+  bool Load(const std::string& filename) override;
+  bool Save(const std::string& filename);
 
   // Transform all vertices by the given matrix
   void Transform(const Matrix& m);
 
   void Draw();
 
-  void CalcCollisionMesh(CollisionMesh* pCollMesh);
+  void CalcCollisionMesh(CollisionMesh* pCollMesh) const;
 
   // Add groups in om to collection of groups in this mesh
   void Merge(const ObjMesh& om);
@@ -61,6 +65,8 @@ private:
   Materials m_materials;
 
   AABB m_aabb; // union of all group AABBs
+
+  bool m_isBinary = false;
 
 private:
   void DrawGroup(Group& g);
