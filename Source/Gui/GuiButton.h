@@ -20,18 +20,18 @@ public:
   ~GuiButton();
 
   // GuiElement overrides
-  virtual bool Load(File*); 
-  virtual bool Save(File*);
-  virtual void Draw();
-  virtual void OnGetFocus();
-  virtual void TextToSpeech();
+  bool Load(File*) override; 
+  bool Save(File*) override;
+  void Draw() override;
+  void OnGetFocus() override;
+  void TextToSpeech() override;
 
   // EventListener overrides - respond to mouse/cursor movement
   //  and button presses
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual bool OnButtonEvent(const ButtonEvent&);
-  virtual bool OnKeyEvent(const KeyEvent&); // Enter triggers if this is the focus button
+  bool OnCursorEvent(const CursorEvent&) override;
+  bool OnMouseButtonEvent(const MouseButtonEvent&) override;
+  bool OnButtonEvent(const ButtonEvent&) override;
+  bool OnKeyEvent(const KeyEvent&) override; // Enter triggers if this is the focus button
 
   void SetText(const std::string& text);
   void SetTextColour(const Colour& col);

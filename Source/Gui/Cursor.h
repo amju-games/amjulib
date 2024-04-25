@@ -13,8 +13,8 @@ class Cursor : public EventListener
 public:
   Cursor();
   
-  virtual bool OnCursorEvent(const CursorEvent& ce);  
-  virtual bool OnRotationEvent(const RotationEvent&);
+  bool OnCursorEvent(const CursorEvent& ce) override;  
+  bool OnRotationEvent(const RotationEvent&) override;
   
   bool Load(const std::string& imageResource, int id, const Vec2f& hotspot);
   void Draw();

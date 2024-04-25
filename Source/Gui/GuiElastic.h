@@ -14,9 +14,9 @@ public:
   GuiElastic* Clone() override { return new GuiElastic(*this); }
 
   GuiElastic();
-  virtual bool Load(File*);
-  virtual bool Save(File*);
-  virtual void Update();
+  bool Load(File*) override;
+  bool Save(File*) override;
+  void Update() override;
 
   // Set the velocity at which we move from the offset to final position.
   // This applies to all elastics.

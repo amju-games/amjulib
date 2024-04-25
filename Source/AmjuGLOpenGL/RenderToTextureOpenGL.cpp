@@ -216,7 +216,6 @@ bool RenderToTextureOpenGL::Begin()
   GL_CHECK(glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_old_fbo));
   GL_CHECK(glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer));
 
-  const Colour& c = AmjuGL::GetClearColour();
   GL_CHECK(glClearColor(m_clearCol.m_r, m_clearCol.m_g, m_clearCol.m_b, m_clearCol.m_a));
   GL_CHECK(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
   

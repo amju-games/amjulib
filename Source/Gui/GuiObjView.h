@@ -15,7 +15,7 @@ class GuiObjView : public GuiWindow
 public:
   static const char* NAME;
 
-  virtual bool Load(File*);
+  bool Load(File*) override;
   void SetObjMesh(ObjMesh*);
 };
 
@@ -27,9 +27,10 @@ public:
 
   GuiObj();
 
-  virtual void Draw();
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual bool OnCursorEvent(const CursorEvent&);
+  void Draw() override;
+  bool OnMouseButtonEvent(const MouseButtonEvent&) override;
+  bool OnCursorEvent(const CursorEvent&) override;
+
   void SetObjMesh(ObjMesh*);
   
 private:

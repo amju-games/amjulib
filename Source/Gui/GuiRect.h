@@ -17,8 +17,8 @@ public:
   GuiRect* Clone() override { return new GuiRect(*this); }
 
   GuiRect();
-  virtual void Draw();
-  virtual bool Load(File*);
+  void Draw() override;
+  bool Load(File*) override;
 
   enum
   {

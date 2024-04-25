@@ -73,7 +73,7 @@ bool Font::Load(const std::string& resName)
   if (!file.OpenRead(fontFilename))
   {
     Assert(0);
-    return nullptr;
+    return false;
   }
   return Load(&file);
 }

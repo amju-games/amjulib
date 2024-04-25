@@ -43,7 +43,7 @@ static DrawableFactory s_factory;
 class TriListStaticOpenGL : public TriListStatic
 {
 public:
-  virtual void Draw()
+  void Draw() override
   {
     if (!m_tris.empty())
     {
@@ -51,12 +51,12 @@ public:
     }
   }
 
-  virtual void Set(const AmjuGL::Tris& tris)
+  void Set(const AmjuGL::Tris& tris) override
   {
     m_tris = tris;
   }
   
-  virtual bool Init() { return true; }
+  bool Init() override { return true; }
 
   void CalcTangents() override
   {
@@ -70,7 +70,7 @@ private:
 class TriListDynamicOpenGL : public TriListDynamic
 {
 public:
-  virtual void Draw()
+  void Draw() override
   {
     if (!m_tris.empty())
     {
@@ -78,12 +78,12 @@ public:
     }
   }
 
-  virtual void Set(const AmjuGL::Tris& tris)
+  void Set(const AmjuGL::Tris& tris) override
   {
     m_tris = tris;
   }
   
-  virtual bool Init() { return true; }
+  bool Init() override { return true; }
 
   void CalcTangents() override
   {

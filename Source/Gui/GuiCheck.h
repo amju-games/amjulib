@@ -17,7 +17,7 @@ public:
   static const char* NAME;
  
   GuiCheck();
-  virtual bool IsEnabled() const override;
+  bool IsEnabled() const override;
 
   void Set(Texture* checkedTex, Texture* uncheckedTex);
   void SetValue(bool b);

@@ -16,16 +16,16 @@ public:
   BassSoundPlayer();
   ~BassSoundPlayer();
 
-  virtual bool PlayWav(const std::string& wavFile, float volume = 1.0f);
-  virtual bool PlaySong(const std::string& songFile);
-  virtual void StopSong();
-  virtual void Update();
-  virtual void SetSongMaxVolume(float);
+  bool PlayWav(const std::string& wavFile, float volume = 1.0f) override;
+  bool PlaySong(const std::string& songFile) override;
+  void StopSong() override;
+  void Update() override;
+  void SetSongMaxVolume(float) override;
 
 #ifdef AMJU_USE_BASS_MIDI
-  virtual bool MidiSetSoundFont(const char* soundfont) override;
-  virtual bool MidiNoteOn(int note) override;
-  virtual bool MidiNoteOff(int note) override;
+  bool MidiSetSoundFont(const char* soundfont) override;
+  bool MidiNoteOn(int note) override;
+  bool MidiNoteOff(int note) override;
 #endif // AMJU_USE_BASS_MIDI
     
 private:

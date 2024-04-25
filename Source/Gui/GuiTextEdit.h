@@ -33,15 +33,14 @@ public:
 
   GuiTextEdit* Clone() override { return new GuiTextEdit(*this); }
 
-  virtual void Draw(); // Adds focus border and caret
-  virtual bool Load(File*); 
-  virtual bool OnKeyEvent(const KeyEvent&); 
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
-  virtual bool OnTextEvent(const TextEvent&) override;
-
-  virtual void SetText(const std::string&);
-  virtual std::string GetText() const { return GuiText::GetText(); }
+  void Draw() override; // Adds focus border and caret
+  bool Load(File*) override; 
+  bool OnKeyEvent(const KeyEvent&) override; 
+  bool OnCursorEvent(const CursorEvent&) override;
+  bool OnMouseButtonEvent(const MouseButtonEvent&) override;
+  bool OnTextEvent(const TextEvent&) override;
+  void SetText(const std::string&) override;
+  std::string GetText() const override { return GuiText::GetText(); }
   
   void Insert(char);
 
@@ -49,7 +48,7 @@ public:
   bool IsPassword() const;
 
 protected:
-  virtual void GetFirstLast(int line, int* first, int* last); 
+  void GetFirstLast(int line, int* first, int* last) override; 
   int CalcCursorPos(float mouseX);
   int NextWord(int); // for caret/selection movement
   int PrevWord(int);

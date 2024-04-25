@@ -19,9 +19,9 @@ public:
 
   GuiImage* Clone() override { return new GuiImage(*this); }
 
-  virtual void Draw() override;
-  virtual bool Load(File*) override;
-  virtual bool Save(File*) override;
+  void Draw() override;
+  bool Load(File*) override;
+  bool Save(File*) override;
 
   void SetTexture(Texture* tex);
   Texture* GetTexture();
