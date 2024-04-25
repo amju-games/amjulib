@@ -1,11 +1,7 @@
 #include <AmjuFirst.h>
 #include "GuiButton.h"
-#include "GuiCalendar.h"
-#include "GuiChart.h"
 #include "GuiCheck.h"
 #include "GuiComposite.h"
-#include "GuiDataBarDisplay.h"
-#include "GuiDataLineDisplay.h"
 #include "GuiDecInclude.h"
 #include "GuiDecRotate.h"
 #include "GuiDecScale.h"
@@ -53,10 +49,14 @@ GuiFactory::GuiFactory()
   Add(GuiDecTranslate::NAME, &CreateT<GuiDecTranslate>);
   Add(GuiDialog::NAME, &CreateT<GuiDialog>);
   Add(GuiElastic::NAME, &CreateT<GuiElastic>);
+  Add(GuiFileDialog::NAME, &CreateFileDialog);
+  Add(GuiFileListBox::NAME, &CreateFileListBox);
   Add(GuiFlush::NAME, &CreateT<GuiFlush>);
   Add(GuiImage::NAME, &CreateT<GuiImage>);
   Add(GuiKeyboard::NAME, &CreateT<GuiKeyboard>);
+  Add(GuiListBox::NAME, &CreateListBox);
   Add(GuiMenu::NAME, &CreateT<GuiMenu>);
+  Add(GuiObjView::NAME, &CreateObjView);
   Add(GuiPoly::NAME, &CreateT<GuiPoly>);
   Add(GuiText::NAME, &CreateT<GuiText>);
   Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
@@ -66,13 +66,5 @@ GuiFactory::GuiFactory()
   Add(GuiSlider::NAME, &CreateT<GuiSlider>);
   Add(GuiSprite::NAME, &CreateT<GuiSprite>);
   Add(GuiSpline::NAME, &CreateT<GuiSpline>);
-
-  Add(GuiListBox::NAME, &CreateListBox);
-  Add(GuiFileListBox::NAME, &CreateFileListBox);
-  Add(GuiFileDialog::NAME, &CreateFileDialog);
-  Add(GuiObjView::NAME, &CreateObjView);
-  Add(GuiCalendar::NAME, &CreateCalendar);
-  Add(GuiChart::NAME, &CreateChart);
-  Add(GuiDataLineDisplay::NAME, &CreateDataLineDisplay);
 }
 }
