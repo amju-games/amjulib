@@ -725,6 +725,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiSpline.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiSprite.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiTreeView.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiPropertiesDialog.h" />

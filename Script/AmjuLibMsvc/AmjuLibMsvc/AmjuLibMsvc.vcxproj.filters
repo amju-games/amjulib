@@ -1985,6 +1985,9 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiPropertiesDialog.h">
       <Filter>Gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiTreeView.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">

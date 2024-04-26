@@ -2,9 +2,9 @@
 #define GUI_MENU_H
 
 #include <vector>
+#include "GuiDecorator.h"
 #include "GuiElement.h"
 #include "GuiText.h"
-#include "GuiComposite.h"
 
 namespace Amju
 {
@@ -12,31 +12,42 @@ class GuiMenu;
 typedef RCPtr<GuiMenu> PGuiMenu;
 
 
-class GuiMenuItem : public GuiText // ?????
+class GuiMenuItem : public GuiDecorator
 {
 public:
-  // Size not specified - defaults to width of text when all displayed
-  //  in one line
-  GuiMenuItem(const std::string& text);
-  GuiMenuItem(const std::string& text, CommandFunc commandFunc);
-  GuiMenuItem(const std::string& text, PGuiCommand commandFunc);
-
-  virtual void Draw();
-
   virtual void OnRightClickMenuItem(GuiElement* elem);
 
   void SetRightClickCommand(CommandFunc command);
   void SetRightClickCommand(PGuiCommand command);
 
+  void SetHighlighted(bool yesHighlighted);
+
+  void Draw() override;
+
 protected:
-  void Init(const std::string&);
   CommandFunc m_rightClickCommandFunc;
   PGuiCommand m_rightClickCommand;
+};
+
+class GuiTextMenuItem : public GuiMenuItem
+{
+public:
+  // Size not specified - defaults to width of text when all displayed
+  //  in one line
+  GuiTextMenuItem(const std::string& text);
+  GuiTextMenuItem(const std::string& text, CommandFunc commandFunc);
+  GuiTextMenuItem(const std::string& text, PGuiCommand commandFunc);
+
+  void Draw() override;
+
+protected:
+  void Init(const std::string&);
+  virtual GuiText* CreateTextChild();
 };
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;
 
 // For nested menus
-class GuiNestMenuItem : public GuiMenuItem
+class GuiNestMenuItem : public GuiTextMenuItem
 {
 public:
   GuiNestMenuItem(const std::string& text, GuiMenu* childMenu);
@@ -77,9 +88,13 @@ public:
   void SetOnClickedAwayFunc(CommandFunc);
 
 protected:
-//  typedef std::vector<PGuiMenuItem> Items;
-//  Items m_items;
-  int m_selected; // index in m_items or -1
+  // Selected menu item: index into vector of children, or -1 if no selection.
+  int m_selected = -1; 
+
+  // Highlight: index into vector of children.
+  // Show cursor is over item, but don't select it unless left-clicked.
+  int m_highlighted = -1; 
+
   Vec2f m_cursorPos; // last position passed into OnCursorEvent
 
 //  PGuiMenu m_childMenu; // ?

@@ -10,44 +10,66 @@ namespace Amju
 {
 const char* GuiMenu::NAME = "gui-menu";
 
-GuiMenuItem::GuiMenuItem(const std::string& text)
+void GuiMenuItem::Draw()
+{
+  GetChild()->SetSelected(IsSelected());
+
+  // GuiMenu::Draw has correctly set the size of this item, but as we are a wrapper 
+  //  around the "real" text element (or could be an image, etc), set the size of the
+  //  child to the same size as this.
+  GetChild()->SetSize(GetSize());
+
+  GuiDecorator::Draw();
+}
+
+GuiTextMenuItem::GuiTextMenuItem(const std::string& text)
 {
   Init(text);
 }
 
-void GuiMenuItem::Init(const std::string& text)
+void GuiTextMenuItem::Init(const std::string& text)
 {
-  SetText(text);
-  SetDrawBg(true);
-  //std::swap(m_bgCol, m_fgCol); // becase draw BG inverts???
+  SetName(text);
 
-  SetJust(AMJU_JUST_LEFT);
+  GuiText* guiText = CreateTextChild();
+  guiText->SetText(text);
+  guiText->SetDrawBg(true);
 
-  SizeToText();
-  RecalcFirstLast();
+  guiText->SetJust(GuiText::AMJU_JUST_LEFT);
+
+  guiText->SizeToText();
+  SetSize(guiText->GetSize());
+  guiText->RecalcFirstLast();
+  AddChild(guiText);
 }
 
-GuiMenuItem::GuiMenuItem(const std::string& text, CommandFunc commandFunc)
+GuiTextMenuItem::GuiTextMenuItem(const std::string& text, CommandFunc commandFunc)
 {
   Init(text);
   SetCommand(commandFunc);
 }
 
-GuiMenuItem::GuiMenuItem(const std::string& text, PGuiCommand command)
+GuiTextMenuItem::GuiTextMenuItem(const std::string& text, PGuiCommand command)
 {
   Init(text);
   SetCommand(command);
 }
   
-void GuiMenuItem::Draw()
+GuiText* GuiTextMenuItem::CreateTextChild()
+{
+  return new GuiText;
+}
+
+void GuiTextMenuItem::Draw()
 {
   if (!IsVisible())
   {
     return;
   }
+  
+  // TODO Set colours for highlighted/selected text.
 
-  // If selected, reverse colours
-  GuiText::Draw();
+  GuiMenuItem::Draw();
 }
 
 struct NestedMenuCommand : public GuiCommand
@@ -97,7 +119,7 @@ struct NestedMenuCommand : public GuiCommand
 };
 
 GuiNestMenuItem::GuiNestMenuItem(const std::string& text, GuiMenu* childMenu) :
-  GuiMenuItem(text)
+  GuiTextMenuItem(text)
 {
   m_childMenu = childMenu;
   m_childMenu->SetVisible(false);
@@ -166,12 +188,12 @@ void GuiMenu::Draw()
 
   for (unsigned int i = 0; i < m_children.size(); i++)
   {
-    bool isSel = (m_selected == (int)i);
+    bool isSelected = (m_selected == static_cast<int>(i));
+
     GuiElement* item = m_children[i];
 
-    // Highlight selected item
-////    ((GuiText*)item)->SetInverse(isSel); // TODO what if Items are not Text ?
-    item->SetSelected(isSel);
+    // Invert selected item
+    item->SetSelected(isSelected);
 
     Vec2f size = item->GetSize();
     if (m_isVertical)
