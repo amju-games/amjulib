@@ -16,12 +16,6 @@ namespace Amju
 {
 const char* GuiSpline::NAME = "spline";
 
-void GuiSpline::Reset()
-{
-  m_triList = nullptr;
-  m_index = 0;
-}
-
 static Vec2f CatmullRomSpline(float t, Vec2f p1, Vec2f p2, Vec2f p3, Vec2f p4)
 {
   const float t2 = t*t;

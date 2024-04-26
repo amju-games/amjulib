@@ -19,7 +19,7 @@ void Batched::AddToBatch()
   // Only add once! Could happen when reloading.
   if (std::find(vec.begin(), vec.end(), this) == vec.end())
   {
-    s_atlases[m_texHash].push_back(this);
+    vec.push_back(this);
   }
 }
 

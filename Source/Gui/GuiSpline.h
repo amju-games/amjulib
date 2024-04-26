@@ -28,8 +28,6 @@ public:
   void SetWidths(float w1, float w2);
 
 protected:
-  void Reset(); // Reset animation
-
   void MakeInBetweenPoints();
   AmjuGL::Tris BuildFilledTriList() override;
   AmjuGL::Tris BuildOutlineTriList() override;

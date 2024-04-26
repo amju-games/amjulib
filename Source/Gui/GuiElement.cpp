@@ -444,11 +444,11 @@ Vec2f GuiElement::GetCombinedScale() const
 
   if (parent)
   {
-    return m_scale * GetGlobalScale() * parent->GetCombinedScale();
+    return GetScale() * GetGlobalScale() * parent->GetCombinedScale();
   }
   else
   {
-    return m_scale * GetGlobalScale();
+    return GetScale() * GetGlobalScale();
   }
 }
 

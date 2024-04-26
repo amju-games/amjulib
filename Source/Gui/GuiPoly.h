@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Batched.h>
 #include <Colour.h>
 #include <StringUtils.h>
 #include <TriList.h>
@@ -7,7 +8,7 @@
 
 namespace Amju
 {
-class IGuiPoly : public GuiElement
+class IGuiPoly : public GuiElement, public Batched
 {
 public:
   void Draw() override;
@@ -47,6 +48,10 @@ public:
 
   void CreateEditorDefault() override;
 
+  // Implement batching
+  void AddToTrilist(AmjuGL::Tris& tris) override;
+  Texture* GetTexture() override;
+
 protected:
   virtual bool LoadPoints(File*);
   virtual bool SavePoints(File*);
@@ -61,7 +66,8 @@ protected:
   virtual AmjuGL::Tris BuildOutlineTriList() = 0;
   virtual AmjuGL::Tris BuildFilledTriList() = 0;
 
-  RCPtr<TriListStatic> m_triList;
+  AmjuGL::Tris m_tris; // TODO Move up class hierarchy
+
   ControlPoints m_controlPoints; // corners or control points for a spline
   bool m_isLoop = true; // True for filled polys, can be false for outline polys and splines
   Colour m_filledColour{ 1, 0, 0, 1 };

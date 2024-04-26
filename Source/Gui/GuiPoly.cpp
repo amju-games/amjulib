@@ -21,6 +21,19 @@ void IGuiPoly::CreateEditorDefault()
   OnControlPointsChanged();
 }
 
+void IGuiPoly::AddToTrilist(AmjuGL::Tris& tris)
+{
+  tris.insert(tris.end(), m_tris.begin(), m_tris.end());
+}
+
+Texture* IGuiPoly::GetTexture()
+{
+  static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes("Image/circle.png");
+  Assert(texture);
+  texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
+  return texture;
+}
+
 bool IGuiPoly::IsLoop() const 
 { 
   return m_isLoop; 
@@ -73,17 +86,13 @@ void IGuiPoly::Draw()
     return;
   }
 
-  // TODO use circle texture, draw rounded corners.
-  // We need a white texture, disabling textures doesn't work right now, needs a different shader.
-  // TODO Set once before drawing all batched Polys
-  static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes("Image/circle.png");
-  Assert(texture);
-  texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
-  texture->UseThisTexture();
+  AddToBatch();
 
-  Vec2f combinedPos = GetCombinedPos();
-  Vec2f combinedScale = GetCombinedScale();
-  Colour combinedColour = GetCombinedColour();
+  // TODO using circle texture, draw rounded corners?
+
+  const Vec2f combinedPos = GetCombinedPos();
+  const Vec2f combinedScale = GetCombinedScale();
+  const Colour combinedColour = GetCombinedColour();
   if (m_previousCombinedPos != combinedPos ||
     m_previousCombinedScale != combinedScale ||
     m_previousCombinedColour != combinedColour)
@@ -94,13 +103,6 @@ void IGuiPoly::Draw()
 
     BuildTriList();
   }
-
-  //// TODO TEMP TEST: as we are going to batch these, we don't use the current AmjuGL colour,
-  ////  we set vertex colours.
-  //PushColour();
-  AmjuGL::SetColour(1, 1, 1, 1);
-  AmjuGL::Draw(m_triList);
-  //PopColour();
 }
 
 void IGuiPoly::AddControlPoint(const Vec2f& p)
@@ -324,18 +326,17 @@ void IGuiPoly::SetStyle(Style s)
 
 void IGuiPoly::BuildTriList()
 {
-  AmjuGL::Tris tris;
+  m_tris.clear();
 
   if (IsFilled())
   {
-    tris = BuildFilledTriList();
+    m_tris = BuildFilledTriList();
   }
   if (IsOutline())
   {
     AmjuGL::Tris moreTris = BuildOutlineTriList();
-    tris.insert(tris.end(), moreTris.begin(), moreTris.end());
+    m_tris.insert(m_tris.end(), moreTris.begin(), moreTris.end());
   }
-  m_triList = Amju::MakeTriList(tris);
 }
 
 const char* GuiPoly::NAME = "poly";
@@ -344,7 +345,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
 {
   AmjuGL::Tris tris;
 
-  int n = m_controlPoints.size();
+  const int n = m_controlPoints.size();
   if (n < 2)
   {
     return tris;
