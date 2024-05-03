@@ -67,9 +67,10 @@ class GuiFlush : public GuiElement
 {
 public:
   static const char* NAME;
+  GuiFlush();
   std::string GetTypeName() const override { return NAME; }
-
   void Draw() override;
   bool Load(File*) override { return true; }
+  bool Save(File*) override;
 };
 }

@@ -90,9 +90,19 @@ void Batched::DrawAll()
 
 const char* GuiFlush::NAME = "flush";
 
+GuiFlush::GuiFlush()
+{
+  // Set a name for editor mode
+  SetName(GetTypeName()); // unusual but we won't want to access this node by name, right?
+}
+
 void GuiFlush::Draw()
 {
   Batched::DrawAll();
 }
 
+bool GuiFlush::Save(File* f)
+{
+  return f->Write(GetTypeName());
+}
 }

@@ -87,6 +87,7 @@ void GuiDecColour::Animate(float animValue)
 void GuiDecColour::SetSecondColour(const Colour& colour)
 {
   m_secondColour = colour;
+  m_interpolatedColour = m_secondColour;
 }
 
 Colour GuiDecColour::GetColour() const

@@ -64,7 +64,7 @@ private:
 protected:
   std::string m_name;
   RCPtr<TextureSequence> m_textureSequence;
-  float m_size;
+  float m_size = 1.f;
   // Char widths: OK to be a vector for fixed-size-grid font.
   // Int index so allows >255 characters.
   std::vector<float> m_charWidths;
