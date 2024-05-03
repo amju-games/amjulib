@@ -150,6 +150,7 @@ bool BmFontTextureSequence::ParsePageLine(const Strings& strs, const std::string
       
       // Prepend path of this file to get full path to texture 
       m_pTexture = (Texture*)TheResourceManager::Instance()->GetRes(path + texFilename);
+      SetSize(.1f,.1f); // TODO Just a test -- should this be the texture size??
     }
   }
   if (texId == -1)
@@ -335,7 +336,9 @@ bool BmFont::Load(File* f)
 float BmFont::GetCharacterWidth(int c)
 {
   BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
-  return bm->GetCharWidth(c);
+  float w = bm->GetCharWidth(c);
+  w *= .25f; // TODO TEMP TEST: does this depend on texture width?
+  return w;
 }
 
 }
