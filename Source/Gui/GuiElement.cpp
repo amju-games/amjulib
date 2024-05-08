@@ -60,6 +60,22 @@ GuiEdit* GuiElement::CreateEditor()
   return new GuiEdit;
 }
 
+GuiPropertyMap GuiElement::GetProperties() const
+{
+  return GuiPropertyMap {
+    {"name", MakeProperty(m_name) },
+    {"localpos", MakeProperty(m_localpos)},
+    {"size", MakeProperty(m_size)},
+  };
+}
+
+void GuiElement::SetProperties(const GuiPropertyMap& properties)
+{
+  m_name = Get<std::string>(properties, "name"); 
+  m_localpos = Get<Vec2f>(properties, "localpos");
+  m_size = Get<Vec2f>(properties, "size"); 
+}
+
 void GuiElement::Draw()
 {
   if (IsVisible() && m_drawBorder)

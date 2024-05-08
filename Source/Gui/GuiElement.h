@@ -9,6 +9,7 @@
 #include <EventListener.h>
 #include <File.h>
 #include <GuiCommandHandler.h>
+#include <GuiProperty.h>
 #include <Rect.h>
 #include <Vec2.h>
 
@@ -134,6 +135,12 @@ public:
 
   // Called when animation loops. Composite/decorators must pass this along to children.
   virtual void OnResetAnimation() {}
+
+  // For GUI Editing: return the properties for this element.
+  // Subclasses should get their base class property map, then add their
+  //  subclass-specific properties, and return the whole lot.
+  virtual GuiPropertyMap GetProperties() const;
+  virtual void SetProperties(const GuiPropertyMap& properties);
 
 protected:
   bool SaveTypeAndName(File* f);

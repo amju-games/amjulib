@@ -189,6 +189,25 @@ bool IGuiPoly::ParseOneAttrib(const Strings& s2)
   return true;
 }
 
+GuiPropertyMap IGuiPoly::GetProperties() const
+{
+  return Combine(GuiElement::GetProperties(), GuiPropertyMap {
+    {"loop", MakeProperty(m_isLoop)},
+    {"style", MakeProperty(m_style)},
+    {"outlinecolour", MakeProperty(m_outlineColour)},
+    {"fillcolour", MakeProperty(m_filledColour)},
+  });
+}
+
+void IGuiPoly::SetProperties(const GuiPropertyMap& properties)
+{
+  GuiElement::SetProperties(properties);
+  m_isLoop = Get<bool>(properties, "loop");
+  m_style = Get<Style>(properties, "style");
+  m_outlineColour = Get<Colour>(properties, "outlinecolour");
+  m_filledColour = Get<Colour>(properties, "fillcolour");
+}
+
 std::string IGuiPoly::CreateAttribString() const
 {
   std::string s = "style=" + ToString(static_cast<int>(m_style));

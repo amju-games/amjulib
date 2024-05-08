@@ -1,3 +1,5 @@
+// *Amjulib* Copyright (c) Juliet Colman 2024
+
 #pragma once
 
 #include <Batched.h>
@@ -14,6 +16,8 @@ public:
   void Draw() override;
   bool Load(File*) override;
   bool Save(File*) override;
+  GuiPropertyMap GetProperties() const override;
+  void SetProperties(const GuiPropertyMap& properties) override;
 
   void SetFilledColour(const Colour& colour);
   const Colour& GetFilledColour() const;
@@ -69,7 +73,7 @@ protected:
   AmjuGL::Tris m_tris; // TODO Move up class hierarchy
 
   ControlPoints m_controlPoints; // corners or control points for a spline
-  bool m_isLoop = true; // True for filled polys, can be false for outline polys and splines
+  bool m_isLoop = false; // True for filled polys, can be false for outline polys and splines
   Colour m_filledColour{ 1, 0, 0, 1 };
   Colour m_outlineColour{ 0, 1, 1, 1 };
   Style m_style = Style::FILLED_AND_OUTLINE;

@@ -389,6 +389,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiObjView.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiPoly.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiPolyEdit.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiProperty.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiRect.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiScroll.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiScrollBar.cpp" />
@@ -708,6 +709,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiObjView.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiPoly.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiPolyEdit.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiProperty.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiRect.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiScroll.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiScrollBar.h" />
