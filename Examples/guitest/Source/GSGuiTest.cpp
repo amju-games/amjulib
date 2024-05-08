@@ -4,7 +4,6 @@
 #include <GuiFileListBox.h>
 #include <CursorManager.h>
 #include "GSGuiTest.h"
-#include <GuiChart.h>
 
 namespace Amju
 {
@@ -48,33 +47,6 @@ void GSGuiTest::OnActive()
   m_gui = LoadGui("gui-test.txt");
   Assert(m_gui);
 
-  /*
-  GuiChart* chart = dynamic_cast<GuiChart*>(GetElementByName(m_gui, "MyChart"));
-  Assert(chart);
-
-  ChartData* cd = new ChartData;
-  // TODO TEMP TEST
-  for (int i = 0; i < 10; i++)
-  {
-    cd->AddRowSimple(i, rand() % 5);
-  }
-  chart->GetDataDisplay()->SetData(cd);
-  */
-
-/*
-  GetElementByName(m_gui, "ok-button")->SetCommand(OnOK);
-  GetElementByName(m_gui, "edit1")->SetHasFocus(true);
-
-  GuiListBox* listbox = dynamic_cast<GuiListBox*>(GetElementByName(m_gui, "listbox"));
-  Assert(listbox);
-  for (int i = 0; i < 10; i++)
-  {
-    GuiText* t = new GuiText;
-    t->SetText("List item " + ToString(i));
-   
-    listbox->AddItem(t);
-  }
-*/
 }
 
 bool GSGuiTest::OnCursorEvent(const CursorEvent& ce)
