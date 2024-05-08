@@ -1,9 +1,10 @@
 #include <AmjuFirst.h>
-#include "GuiMenu.h"
 #include <AmjuGL.h>
 #include <Colour.h>
 #include <DrawRect.h>
 #include <EventPoller.h>
+#include "GuiMenu.h"
+#include "GuiTextEdit.h"
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -70,6 +71,38 @@ void GuiTextMenuItem::Draw()
   // TODO Set colours for highlighted/selected text.
 
   GuiMenuItem::Draw();
+}
+
+static void OnEnterKeyOnTextEditMenuItem(GuiElement* elem)
+{
+  GuiTextEdit* textEdit = dynamic_cast<GuiTextEdit*>(elem);
+  Assert(textEdit);
+  textEdit->SetHasFocus(false);
+  TheEventPoller::Instance()->RemoveListener(textEdit);
+}
+
+static void OnClickTextEditMenuItem(GuiElement* elem)
+{
+  GuiMenuItem* menuItem = dynamic_cast<GuiMenuItem*>(elem);
+  Assert(menuItem);
+  GuiElement* child = menuItem->GetChild();
+  Assert(child);
+  GuiTextEdit* textEdit = dynamic_cast<GuiTextEdit*>(child);
+  Assert(textEdit);
+  textEdit->SetHasFocus(true);
+  TheEventPoller::Instance()->AddListener(textEdit);
+  textEdit->SetCommand(OnEnterKeyOnTextEditMenuItem);
+}
+
+GuiTextEditMenuItem::GuiTextEditMenuItem(const std::string& text) 
+{
+  Init(text); // watch out for v function calls in ctor
+  SetCommand(OnClickTextEditMenuItem);
+}
+
+GuiText* GuiTextEditMenuItem::CreateTextChild()
+{
+  return new GuiTextEdit;
 }
 
 struct NestedMenuCommand : public GuiCommand
@@ -152,7 +185,8 @@ bool GuiNestMenuItem::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (m_childMenu) 
   {
-    return m_childMenu->OnMouseButtonEvent(mbe);
+    bool b = m_childMenu->OnMouseButtonEvent(mbe);
+    return b;
   }
   return false;
 }
@@ -227,7 +261,8 @@ bool GuiFloatingMenu::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   bool b = GuiMenu::OnMouseButtonEvent(mbe);
 
-  if (IsVisible() &&
+  if (!b &&
+      IsVisible() &&
       mbe.button == AMJU_BUTTON_MOUSE_LEFT &&
       mbe.isDown)
   {
@@ -350,7 +385,22 @@ bool GuiMenu::OnCursorEvent(const CursorEvent& ce)
       return true; // handled
     }
   }
+
+  //if (b)
+  //{
+  //  HideChildren(); // Not sure, but if we are on this menu, we should hide submenus?
+  //}
+
   return b;
+}
+
+void GuiMenu::HideChildren()
+{
+  int n = GetNumChildren();
+  for (int i = 0; i < n; i++)
+  {
+    GetChild(i)->SetVisible(false);
+  }
 }
 
 void GuiMenu::AddChild(GuiElement* pItem) // overrides GuiComposite

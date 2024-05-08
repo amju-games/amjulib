@@ -34,6 +34,9 @@ class GuiTextMenuItem : public GuiMenuItem
 public:
   // Size not specified - defaults to width of text when all displayed
   //  in one line
+
+  GuiTextMenuItem() = default;
+
   GuiTextMenuItem(const std::string& text);
   GuiTextMenuItem(const std::string& text, CommandFunc commandFunc);
   GuiTextMenuItem(const std::string& text, PGuiCommand commandFunc);
@@ -44,6 +47,17 @@ protected:
   void Init(const std::string&);
   virtual GuiText* CreateTextChild();
 };
+
+class GuiTextEditMenuItem : public GuiTextMenuItem
+{
+public:
+  GuiTextEditMenuItem(const std::string& text);
+
+protected:
+  GuiText* CreateTextChild() override;
+
+};
+
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;
 
 // For nested menus
@@ -74,18 +88,21 @@ public:
   void SetIsVertical(bool isVertical) { m_isVertical = isVertical; } 
   bool IsVertical() const { return m_isVertical; }
 
-  virtual void Draw();  
+  void Draw() override;  
 
-  virtual void AddChild(GuiElement* pItem);
+  void AddChild(GuiElement* pItem) override;
   //void Clear();
   // TODO Add Insert, Remove items: call GuiComposite funcs
 
   // Adjust selected item when cursor moves
-  virtual bool OnCursorEvent(const CursorEvent&);
-  virtual bool OnMouseButtonEvent(const MouseButtonEvent&);
+  bool OnCursorEvent(const CursorEvent&) override;
+  bool OnMouseButtonEvent(const MouseButtonEvent&) override;
 
   // Set callback for when mouse is clicked away from menu
   void SetOnClickedAwayFunc(CommandFunc);
+
+protected:
+  void HideChildren();
 
 protected:
   // Selected menu item: index into vector of children, or -1 if no selection.
