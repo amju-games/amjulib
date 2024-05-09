@@ -43,6 +43,8 @@ public:
 
   void Draw() override;
 
+  std::string GetText();
+
 protected:
   void Init(const std::string&);
   virtual GuiText* CreateTextChild();
@@ -52,10 +54,12 @@ class GuiTextEditMenuItem : public GuiTextMenuItem
 {
 public:
   GuiTextEditMenuItem(const std::string& text);
+  void SetOnTextChangedCommand(CommandFunc onChanged);
+  void OnTextChanged();
 
 protected:
   GuiText* CreateTextChild() override;
-
+  CommandFunc m_onTextChangedCommand;
 };
 
 typedef RCPtr<GuiMenuItem> PGuiMenuItem;
@@ -67,7 +71,7 @@ public:
   GuiNestMenuItem(const std::string& text, GuiMenu* childMenu);
 
   virtual void Draw();
-  GuiMenu* GetChild() { return m_childMenu; }
+  GuiMenu* GetChild() { return m_childMenu; } // TODO don't need this, (and it hides non-v func): m_childMenu should be the child of this decorator.
 
   virtual bool OnCursorEvent(const CursorEvent&);
   virtual bool OnMouseButtonEvent(const MouseButtonEvent&);

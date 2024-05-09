@@ -55,7 +55,16 @@ GuiTextMenuItem::GuiTextMenuItem(const std::string& text, PGuiCommand command)
   Init(text);
   SetCommand(command);
 }
-  
+ 
+std::string GuiTextMenuItem::GetText()
+{
+  GuiElement* child = GetChild();
+  Assert(child);
+  GuiText* textElem = dynamic_cast<GuiText*>(child);
+  Assert(textElem);
+  return textElem->GetText();
+}
+
 GuiText* GuiTextMenuItem::CreateTextChild()
 {
   return new GuiText;
@@ -79,6 +88,11 @@ static void OnEnterKeyOnTextEditMenuItem(GuiElement* elem)
   Assert(textEdit);
   textEdit->SetHasFocus(false);
   TheEventPoller::Instance()->RemoveListener(textEdit);
+  auto parent = textEdit->GetParent();
+  Assert(parent);
+  GuiTextEditMenuItem* textEditMenuItem = dynamic_cast<GuiTextEditMenuItem*>(parent);
+  Assert(textEditMenuItem);
+  textEditMenuItem->OnTextChanged();
 }
 
 static void OnClickTextEditMenuItem(GuiElement* elem)
@@ -103,6 +117,17 @@ GuiTextEditMenuItem::GuiTextEditMenuItem(const std::string& text)
 GuiText* GuiTextEditMenuItem::CreateTextChild()
 {
   return new GuiTextEdit;
+}
+
+void GuiTextEditMenuItem::SetOnTextChangedCommand(CommandFunc onChanged)
+{
+  m_onTextChangedCommand = onChanged;
+}
+
+void GuiTextEditMenuItem::OnTextChanged()
+{
+  Assert(m_onTextChangedCommand);
+  m_onTextChangedCommand(this);
 }
 
 struct NestedMenuCommand : public GuiCommand

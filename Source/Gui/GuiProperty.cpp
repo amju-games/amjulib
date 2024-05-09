@@ -10,4 +10,9 @@ GuiPropertyMap Combine(const GuiPropertyMap& map1, const GuiPropertyMap& map2)
   result.insert(map2.begin(), map2.end());
   return result;
 }
+
+std::string MakeProperty(const std::string& s)
+{
+  return s;
+}
 }

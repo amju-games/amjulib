@@ -8,6 +8,7 @@
 #include <GuiEdit.h>
 #include <GuiElement.h>
 #include <GuiFactory.h>
+#include <GuiPropertyHelpers.h>
 #include <LoadVec2.h>
 #include <Screen.h>
 #include <StringUtils.h>
@@ -72,8 +73,8 @@ GuiPropertyMap GuiElement::GetProperties() const
 void GuiElement::SetProperties(const GuiPropertyMap& properties)
 {
   m_name = Get<std::string>(properties, "name"); 
-  m_localpos = Get<Vec2f>(properties, "localpos");
-  m_size = Get<Vec2f>(properties, "size"); 
+  m_localpos = Amju::GetVec2(properties, "localpos");
+  m_size = Amju::GetVec2(properties, "size");
 }
 
 void GuiElement::Draw()

@@ -5,6 +5,7 @@
 #include <Vec3.h>
 #include "GuiPoly.h"
 #include "GuiPolyEdit.h"
+#include <GuiPropertyHelpers.h>
 #include <AmjuFinal.h>
 
 namespace Amju
@@ -193,19 +194,25 @@ GuiPropertyMap IGuiPoly::GetProperties() const
 {
   return Combine(GuiElement::GetProperties(), GuiPropertyMap {
     {"loop", MakeProperty(m_isLoop)},
-    {"style", MakeProperty(m_style)},
+    {"style", MakeEnumProperty(m_style)},
     {"outlinecolour", MakeProperty(m_outlineColour)},
     {"fillcolour", MakeProperty(m_filledColour)},
+    {"radius", MakeProperty(m_cornerRadius)},
   });
 }
 
 void IGuiPoly::SetProperties(const GuiPropertyMap& properties)
 {
   GuiElement::SetProperties(properties);
+
   m_isLoop = Get<bool>(properties, "loop");
-  m_style = Get<Style>(properties, "style");
-  m_outlineColour = Get<Colour>(properties, "outlinecolour");
-  m_filledColour = Get<Colour>(properties, "fillcolour");
+  m_style = GetEnum<Style>(properties, "style");
+  m_outlineColour = Amju::GetColour(properties, "outlinecolour");
+  m_filledColour = Amju::GetColour(properties, "fillcolour");
+  m_cornerRadius = Get<float>(properties, "radius");
+
+  BuildTriList(); // TODO only do this in leaf subclasses once all properties set, or we do this multiple times
+  // TODO Also, BuildTriList should be declared in the root base class, all leaf classes should implement it.
 }
 
 std::string IGuiPoly::CreateAttribString() const

@@ -1029,6 +1029,9 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiProperty.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiPropertyHelpers.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1962,6 +1965,9 @@
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiProperty.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiPropertyHelpers.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>
