@@ -22,11 +22,15 @@ public:
 
   void SetHighlighted(bool yesHighlighted);
 
+  void SetEnabled(bool enable) { m_isEnabled = enable; }
+  bool IsEnabled() const { return m_isEnabled; }
+
   void Draw() override;
 
 protected:
   CommandFunc m_rightClickCommandFunc;
   PGuiCommand m_rightClickCommand;
+  bool m_isEnabled;
 };
 
 class GuiTextMenuItem : public GuiMenuItem

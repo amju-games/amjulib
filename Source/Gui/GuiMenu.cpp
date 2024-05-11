@@ -20,7 +20,10 @@ void GuiMenuItem::Draw()
   //  child to the same size as this.
   GetChild()->SetSize(GetSize());
 
+  PushColour();
+  MultColour(IsEnabled() ? Colour(1, 1, 1, 1) : Colour(1, 1, 1, .5f));
   GuiDecorator::Draw();
+  PopColour();
 }
 
 GuiTextMenuItem::GuiTextMenuItem(const std::string& text)
