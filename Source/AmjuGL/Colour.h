@@ -1,6 +1,7 @@
 #ifndef AMJU_COLOUR_H
 #define AMJU_COLOUR_H
 
+#include <optional>
 #include <string>
 
 namespace Amju
@@ -28,7 +29,8 @@ void PushColour();
 void PopColour();
 void MultColour(const Colour& c);
 
-Colour FromHexString(const std::string&);
+std::optional<Colour> FromHexString(const std::string&);
+
 std::string ToHexString(const Colour& c, bool includeAlpha = false);
 }
 

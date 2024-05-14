@@ -80,6 +80,12 @@ public:
   void SetCharTime(float secs);
 
 protected:
+  // Handle single-string attribute when loading (and potentially when setting properties)
+  bool HandleAttrib(const std::string& s);
+
+  // Handle key=value pair when loading (and potentially when setting properties)
+  bool HandleAttrib(const std::string& key, const std::string& value);
+
   // calc first and last char to draw in line
   virtual void GetFirstLast(int line, int* first, int* last); 
 

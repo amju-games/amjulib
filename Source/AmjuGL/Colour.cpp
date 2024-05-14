@@ -87,15 +87,26 @@ void MultColour(const Colour& c)
   s_colour.Use();
 }
 
-Colour FromHexString(const std::string& s) 
+std::optional<Colour> FromHexString(const std::string& s)
 {
   int r[4] = { 0xff, 0xff, 0xff, 0xff };
-  int size = static_cast<int>(s.size());
-  Assert(size == 6 || size == 8); 
+  const int size = static_cast<int>(s.size());
+
+  if (size != 6 && size != 8)
+  {
+    return std::nullopt;
+  }
+
+  // TODO This is garbage, why is it going backwards???
+  // Maybe scanf overwrites the string?
   for (int i = size - 2, j = size / 2 - 1; i >= 0; i -= 2, j--)
   {
 #ifdef WIN32
-    sscanf_s(s.substr(i, 2).c_str(), "%X", &r[j]);
+    int converted = sscanf_s(s.substr(i, 2).c_str(), "%X", &r[j]);
+    if (converted == 0)
+    {
+      return std::nullopt;
+    }
 #else
     sscanf(s.substr(i, 2).c_str(), "%X", &r[j]);
 #endif

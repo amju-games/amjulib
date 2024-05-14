@@ -203,7 +203,15 @@ bool GuiRect::Load(File* f)
     f->ReportError("Expected gui rect colour");
     return false;
   }
-  m_colour = FromHexString(colour);
+  auto optionalColour = FromHexString(colour);
+  if (optionalColour)
+  {
+    m_colour = *optionalColour;
+  }
+  else
+  {
+    return false;
+  }
  
   // Corner radius
   if (!f->GetFloat(&m_cornerRadius))

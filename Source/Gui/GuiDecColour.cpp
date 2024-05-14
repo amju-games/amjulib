@@ -38,14 +38,31 @@ bool GuiDecColour::Load(File* f)
   // 2 colours or one?
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
-  m_colour = FromHexString(strs[0]);
+  auto optionalColour = FromHexString(strs[0]);
+  if (optionalColour)
+  {
+    m_colour = *optionalColour;
+  }
+  else
+  {
+    return false;
+  }
+
   if (strs.size() == 1)
   {
     m_secondColour = m_colour;
   }
   else
   {
-    m_secondColour = FromHexString(strs[1]);
+    auto optionalColour = FromHexString(strs[1]);
+    if (optionalColour)
+    {
+      m_secondColour = *optionalColour;
+    }
+    else
+    {
+      return false;
+    }
   }
   m_interpolatedColour = m_colour;
 

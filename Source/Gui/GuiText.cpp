@@ -641,56 +641,20 @@ bool GuiText::LoadText(File* f)
   }
   m_textSize = ToFloat(strs[1]);
 
-  // TODO optional flags etc
+  // Optional flags and attributes 
   for (int i = 2; i < size; i++)
   {
     std::string s = strs[i];
     Trim(&s);
+    // Each attrib can be a single token or a pair of strings split by '='
+    auto attrib = Split(s, '=');
 
-    if (s == "inv")
+    bool ok = (attrib.size() == 1 && HandleAttrib(strs[0])) ||
+      (attrib.size() == 2 && HandleAttrib(strs[0], strs[1]));
+
+    if (!ok)
     {
-      m_inverse = true;
-    }
-    else if (s == "left")
-    {
-      m_just = AMJU_JUST_LEFT;
-    }
-    else if (s == "right")
-    {
-      m_just = AMJU_JUST_RIGHT;
-    }
-    else if (s == "centre")
-    {
-      m_just = AMJU_JUST_CENTRE;
-    }
-    else if (s == "multi")
-    {
-      SetIsMulti(true);
-    }
-    else if (StringContains(s, "bgcol="))
-    {
-      std::string c = s.substr(6); // colour code should start at 6th char
-      m_bgCol = FromHexString(c);
-      m_drawBg = true;
-    }
-    else if (StringContains(s, "fgcol="))
-    {
-      std::string c = s.substr(6); // colour code should start at 6th char
-      m_fgCol = FromHexString(c);
-    }
-    else if (StringContains(s, "sx="))
-    {
-      m_scaleX = ToFloat(s.substr(3));
-    }
-    else if (StringContains(s, "reveal="))
-    {
-      // Arg is seconds to reveal each character in text
-      float t = ToFloat(s.substr(7));
-      SetCharTime(t);
-    }
-    else
-    {
-      f->ReportError("Unexpected option: " + s);
+      f->ReportError("Unexpected GUI text attrib: " + s);
       return false;
     }
   }
@@ -699,6 +663,80 @@ bool GuiText::LoadText(File* f)
 
   RecalcFirstLast();
   return true;
+}
+
+bool GuiText::HandleAttrib(const std::string& s)
+{
+  if (s == "inv")
+  {
+    m_inverse = true;
+    return true;
+  }
+  else if (s == "left")
+  {
+    m_just = AMJU_JUST_LEFT;
+    return true;
+  }
+  else if (s == "right")
+  {
+    m_just = AMJU_JUST_RIGHT;
+    return true;
+  }
+  else if (s == "centre")
+  {
+    m_just = AMJU_JUST_CENTRE;
+    return true;
+  }
+  else if (s == "multi")
+  {
+    SetIsMulti(true);
+    return true;
+  }
+  return false;
+}
+
+bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
+{
+  if (key == "bgcol")
+  {
+    auto optionalColour = FromHexString(value);
+    if (optionalColour)
+    {
+      m_bgCol = *optionalColour;
+      m_drawBg = true;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  else if (key == "fgcol")
+  {
+    auto optionalColour = FromHexString(value);
+    if (optionalColour)
+    {
+      m_fgCol = *optionalColour;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  else if (key == "sx")
+  {
+    m_scaleX = ToFloat(value);
+    return true;
+  }
+  else if (key == "reveal")
+  {
+    // Arg is seconds to reveal each character in text
+    float t = ToFloat(value);
+    SetCharTime(t);
+    return true;
+  }
+  return false;
 }
 
 const Colour& GuiText::GetFgCol() const

@@ -18,7 +18,9 @@ std::string MakeProperty(const Colour& colour)
 Colour GetColour(const GuiPropertyMap& map, const std::string& name)
 {
   const std::string& value = map.at(name);
-  return FromHexString(value);
+  auto optionalColour = FromHexString(value);
+  Assert(optionalColour);
+  return *optionalColour;
 }
 
 Vec2f GetVec2(const GuiPropertyMap& map, const std::string& name)

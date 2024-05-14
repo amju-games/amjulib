@@ -162,30 +162,48 @@ bool IGuiPoly::ParseAttribString(const std::string& attribStr)
   return true;
 }
 
-bool IGuiPoly::ParseOneAttrib(const Strings& s2)
+bool IGuiPoly::ParseOneAttrib(const Strings& strs)
 {
-  if (s2.size() == 1)
+  if (strs.size() == 1)
   {
-    if (s2[0] == "loop")
+    if (strs[0] == "loop")
     {
       m_isLoop = true;
     }
   }
-  else if (s2[0] == "style")
+  else if (strs[0] == "style")
   {
-    m_style = static_cast<Style>(ToInt(s2[1]));
+    m_style = static_cast<Style>(ToInt(strs[1]));
   }
-  else if (s2[0] == "outCol")
+  else if (strs[0] == "outCol")
   {
-    m_outlineColour = FromHexString(s2[1]);
+    auto optionalColour = FromHexString(strs[1]);
+    if (optionalColour)
+    {
+      m_outlineColour = *optionalColour;
+    }
+    else
+    {
+      Assert(false); // bad colour string
+      return false;
+    }
   }
-  else if (s2[0] == "fillCol")
+  else if (strs[0] == "fillCol")
   {
-    m_filledColour = FromHexString(s2[1]);
+    auto optionalColour = FromHexString(strs[1]);
+    if (optionalColour)
+    {
+      m_filledColour = *optionalColour;
+    }
+    else
+    {
+      Assert(false); // bad colour string
+      return false;
+    }
   }
-  else if (s2[0] == "radius")
+  else if (strs[0] == "radius")
   {
-    m_cornerRadius = ToFloat(s2[1]);
+    m_cornerRadius = ToFloat(strs[1]);
   }
   return true;
 }
