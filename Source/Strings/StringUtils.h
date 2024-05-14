@@ -84,17 +84,6 @@ bool StringContains(const std::string& container, const std::string& substr);
 typedef std::vector<std::string> Strings;
 Strings Split(const std::string& text, char split_char);
 
-// Convenience function which filters entries from the given vector of
-// strings.
-// If include is true, only strings which contain the given
-// substring are retained.
-// If include is false, strings which contain the given substring
-// are filtered out.
-void Filter(
-  std::vector<std::string>* pResult,
-  const std::string& substr,
-  bool include = true);
-
 
 // Insert commas into a number string
 // Adds a comma between every third digit, e.g. 12345 => 12,345 etc.

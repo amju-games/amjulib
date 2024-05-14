@@ -149,43 +149,6 @@ std::string TruncateUtf8String(const std::string& str, int maxSize)
   return res;
 }
 
-struct Remover : public std::unary_function<std::string, bool>
-{
-  Remover(const std::string s) : m_s(s) {}
-  bool operator()(const std::string& s) const
-  {
-  AMJU_CALL_STACK;
-
-    return s.find(m_s) == std::string::npos;
-  }
-  std::string m_s;
-};
-
-void Filter(
-  std::vector<std::string>* pResult,
-  const std::string& substr,
-  bool include)
-{
-  AMJU_CALL_STACK;
-
-  if (include)
-  {
-    pResult->erase(
-      std::remove_if(pResult->begin(), pResult->end(), Remover(substr)),
-      pResult->end()
-    );
-  }
-  else
-  {
-    pResult->erase(
-      std::remove_if(pResult->begin(), pResult->end(),
-        std::unary_negate<Remover>(substr)),
-      pResult->end()
-    ); 
-  }
-}
-
-
 bool StringContains(const std::string& container, const std::string& substr)
 {
   AMJU_CALL_STACK;
