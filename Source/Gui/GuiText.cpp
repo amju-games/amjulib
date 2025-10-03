@@ -649,8 +649,8 @@ bool GuiText::LoadText(File* f)
     // Each attrib can be a single token or a pair of strings split by '='
     auto attrib = Split(s, '=');
 
-    bool ok = (attrib.size() == 1 && HandleAttrib(strs[0])) ||
-      (attrib.size() == 2 && HandleAttrib(strs[0], strs[1]));
+    bool ok = (attrib.size() == 1 && HandleAttrib(attrib[0])) ||
+      (attrib.size() == 2 && HandleAttrib(attrib[0], attrib[1]));
 
     if (!ok)
     {
