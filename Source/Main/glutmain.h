@@ -3,12 +3,13 @@
 #include <iostream>
 
 #include <AmjuGL-OpenGL.h>
-#include <Screen.h>
-#include <Game.h>
-#include <SoundManager.h>
-#include <BassSoundPlayer.h>
 #include <AmjuGLWindowInfo.h>
+#include <BassSoundPlayer.h>
+#include <CommandLineArgs.h>
 #include <EventPoller.h>
+#include <Game.h>
+#include <Screen.h>
+#include <SoundManager.h>
 #include <StringUtils.h>
 
 // TODO include glut.h for other platforms
@@ -398,6 +399,8 @@ int main(int argc, char **argv)
 {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
+
+  SetCommandLineArgs({argc, argv});
 
   TheEventPoller::Instance()->SetImpl(new EventPollerImpl); 
 
