@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2006
+Amju Games source code (c) Copyright Juliet Colman 2006
 */
 
 #include <AmjuFirst.h>

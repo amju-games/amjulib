@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2000-2009
+Amju Games source code (c) Copyright Juliet Colman 2000-2009
 */
 
 #ifndef AMJU_AABB_H

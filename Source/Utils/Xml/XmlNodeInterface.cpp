@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: XmlNodeInterface.cpp,v $
 Revision 1.5  2008/05/08 10:58:11  jay
 New memory management code

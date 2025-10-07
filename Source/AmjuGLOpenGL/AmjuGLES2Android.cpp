@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2010
+Amju Games source code (c) Copyright Juliet Colman 2010
 */
 
 // This implementation of AmjuGLOpenGLES2 doesn't use 

@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004-2009
+Amju Games source code (c) Copyright Juliet Colman 2004-2009
 */
 
 #ifndef STRING_UTILS_H_INCLUDED

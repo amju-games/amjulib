@@ -1,5 +1,5 @@
 // * Amjulib *
-// (c) Copyright 2018 Jason Colman
+// (c) Copyright 2018 Juliet Colman
 
 #if defined(MACOSX) || defined(WIN32)
 

@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2005
+Amju Games source code (c) Copyright Juliet Colman 2005
 $Log: TimeRange.cpp,v $
 Revision 1.4  2008/06/07 13:42:59  jay
 MSVC warnings

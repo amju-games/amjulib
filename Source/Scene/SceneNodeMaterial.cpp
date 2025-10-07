@@ -1,5 +1,5 @@
 // * Amjulib *
-// (c) Copyright 2017 Jason Colman
+// (c) Copyright 2017 Juliet Colman
 
 #include "SceneNodeMaterial.h"
 

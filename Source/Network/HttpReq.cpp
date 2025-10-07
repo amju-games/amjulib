@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2000-2006
+Amju Games source code (c) Copyright Juliet Colman 2000-2006
 $Log: HttpReq.cpp,v $
 Revision 1.5  2008/05/18 16:04:26  jay
 MSVC update

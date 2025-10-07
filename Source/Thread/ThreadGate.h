@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2005
+Amju Games source code (c) Copyright Juliet Colman 2005
 $Log: ThreadGate.h,v $
 Revision 1.2  2006/10/27 22:23:44  jay
 Merge improvements from Pool, for HTTP online stuff.

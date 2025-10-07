@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: GlueFileMem.h,v $
 Revision 1.2  2006/02/17 18:59:08  jay
 Added new GetBinary() overload. This returns an _object_ containing a

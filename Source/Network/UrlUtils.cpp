@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: UrlUtils.cpp,v $
 Revision 1.8  2008/05/18 16:04:32  jay
 MSVC update

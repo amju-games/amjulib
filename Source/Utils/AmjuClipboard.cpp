@@ -1,5 +1,5 @@
 // * Amjulib *
-// (c) Copyright 2018 Jason Colman
+// (c) Copyright 2018 Juliet Colman
 
 #ifdef WIN32
 #include <Windows.h>

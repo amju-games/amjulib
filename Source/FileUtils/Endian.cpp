@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: Endian.cpp,v $
 Revision 1.4  2008/05/18 16:04:25  jay
 MSVC update

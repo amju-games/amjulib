@@ -1,5 +1,5 @@
 // Amjulib - cross platform game engine
-// (c) Copyright Jason Colman 2000-2017
+// (c) Copyright Juliet Colman 2000-2017
 
 #include <File.h>
 #include <ReportError.h>

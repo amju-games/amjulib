@@ -1,5 +1,5 @@
 // * Amjulib *
-// (c) Copyright 2000-2017 Jason Colman
+// (c) Copyright 2000-2017 Juliet Colman
 
 #ifdef WIN32
 #define _USE_MATH_DEFINES

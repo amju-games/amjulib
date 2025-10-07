@@ -1,5 +1,5 @@
 // Amjulib - cross platform game engine
-// (c) Copyright Jason Colman 2000-2018
+// (c) Copyright Juliet Colman 2000-2018
 
 #include <Texture.h>
 #include <TriList.h>

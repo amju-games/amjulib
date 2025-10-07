@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: UrlUtils.h,v $
 Revision 1.5  2007/01/03 09:05:05  jay
 Add Overrides ofToUrlFormat

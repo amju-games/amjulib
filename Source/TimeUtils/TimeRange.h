@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2005
+Amju Games source code (c) Copyright Juliet Colman 2005
 $Log: TimeRange.h,v $
 Revision 1.2  2006/01/16 14:08:52  jay
 Add Time classes to trunk

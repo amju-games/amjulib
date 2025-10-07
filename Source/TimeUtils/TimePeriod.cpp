@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2005
+Amju Games source code (c) Copyright Juliet Colman 2005
 $Log: TimePeriod.cpp,v $
 Revision 1.4  2008/05/18 16:04:31  jay
 MSVC update

@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: Directory.h,v $
 Revision 1.5  2008/03/18 09:25:45  jay
 Move Filter() function to StringUtils

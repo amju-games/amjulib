@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: HttpClient.h,v $
 Revision 1.3  2007/01/01 21:52:14  jay
 Don't format URL/params, in case client code has already done so.

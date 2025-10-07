@@ -1,5 +1,5 @@
 /*
-Amju Games source code (c) Copyright Jason Colman 2004
+Amju Games source code (c) Copyright Juliet Colman 2004
 $Log: SocketService.h,v $
 Revision 1.1  2004/09/08 15:43:20  jay
 Added to repository
