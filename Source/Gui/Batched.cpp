@@ -57,10 +57,8 @@ void Batched::DrawAll()
     i++;
   }
 
-  // TriLists: don't create each time.
-  // Making this guy static does not kill frame rate, and is slightly better
-  //  than non-static
-  static std::vector<RCPtr<TriListDynamic>> triLists;
+  std::vector<RCPtr<TriListDynamic>> triLists;
+  
   while (triLists.size() < numLists)
   {
     triLists.push_back((TriListDynamic*)
