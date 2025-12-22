@@ -80,8 +80,14 @@ WString Utf8ToWString(const std::string& coded)
 
 std::string ReplaceUtf8EscapedChars(const std::string& utf8)
 {
+  auto len = utf8.length();
+  if (len < 4)
+  {
+    // There can't be any 4-byte sequences
+    return utf8;
+  }
+  
   std::string res;
-  int len = utf8.length();
   int i = 0;
   for ( ; i < len - 3; i++)
   {
@@ -413,7 +419,7 @@ std::string InsertCommas(const char* numStr)
 {
    std::string resultStr;
 
-   int s = strlen(numStr);
+   auto s = strlen(numStr);
    int c = s % 3;
    if (c == 0)
    {
