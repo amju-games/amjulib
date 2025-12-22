@@ -1,6 +1,6 @@
+#include <iostream>
 #include "ObjMesh.h"
 #include "AmjuGL-Null.h"
-#include <iostream>
 
 #ifdef WIN32
 #ifdef _DEBUG
@@ -32,10 +32,6 @@ int main(int argc, char** argv)
   ObjMesh::SetRequireTextures(false);
   AmjuGL::SetImpl(new Amju::AmjuGLNull);
 
-  // Resource manager was changed so we don't have to create a group for
-  //  every obj we want to load.
-//	TheResourceManager::Instance()->LoadResourceGroup("crate2-group");
-
   std::string inFilename = argv[1]; 
   std::string outFilename = argv[2]; 
 
@@ -46,7 +42,8 @@ int main(int argc, char** argv)
   }
 
   ObjMesh mesh;
-  if (!mesh.Load(inFilename, false /* not bin */))
+  mesh.SetIsBinary(false);
+  if (!mesh.Load(inFilename))
   {
     std::cout << "Failed to load OBJ: " << inFilename << "\n";
     return -1;
@@ -55,11 +52,13 @@ int main(int argc, char** argv)
   std::cout << "----------------------------------------------------------\nSaving " << 
     inFilename << " to binary file " << outFilename << "...\n";
 
-  if (mesh.Save(outFilename, true /* binary */))
+  mesh.SetIsBinary(true);
+  if (mesh.Save(outFilename))
   {
     std::cout << "Saved output file " << outFilename << ".. now testing it by loading it in...\n";
     ObjMesh mesh2;
-    if (mesh2.Load(outFilename, true /* bin */))
+    mesh2.SetIsBinary(true);
+    if (mesh2.Load(outFilename))
     {
       std::cout << ".. Probably converted OK\n";
     }
