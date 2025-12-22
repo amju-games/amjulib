@@ -17,3 +17,5 @@ Examples/gltest/Script/Windows/AmjuGLTest/.vs/
 Examples/guitest/Script/Windows/guitest/.vs/
 Examples/rbtest/Script/Windows/RbTest/.vs/
 *.jbf
+Tools/obj2bin/TestData/obj2bin
+Tools/obj2bin/TestData/test_output.objb
