@@ -26,14 +26,14 @@ Added to repository
 namespace Amju
 {
 // If Mac on Intel, no swapping is required.
-#if defined(WIN32) || defined(__i386__) || defined(IPHONE)
+#if defined(WIN32) || defined(__i386__)
 int16 Endian(int16 i) { return i; }
 uint16 Endian(uint16 u) { return u; }
 int32 Endian(int32 i) { return i; }
 uint32 Endian(uint32 u) { return u; }
 float32 Endian(float32 f) { return f; }
 #else
-
+// For iOS, we need to swap byte order.
 int16 Endian(int16 i) 
 {
   AMJU_CALL_STACK;
