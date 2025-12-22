@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <GuiPoly.h>
+#include "GuiPoly.h"
 #include <Texture.h>
 #include <TriList.h>
 

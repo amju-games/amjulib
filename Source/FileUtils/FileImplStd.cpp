@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Juliet Colman 2004
 */
 
-#include <AmjuFirst.h>
+#include "AmjuFirst.h"
 #ifdef WIN32
 #pragma warning(disable: 4786)
 #endif
@@ -13,7 +13,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 #endif
 
 #include "FileImplStd.h"
-#include <AmjuFinal.h>
+#include "AmjuFinal.h"
 
 using namespace std;
 namespace Amju

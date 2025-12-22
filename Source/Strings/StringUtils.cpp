@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Juliet Colman 2004-2016
 */
 
-#include <AmjuFirst.h>
+#include "AmjuFirst.h"
 #ifdef WIN32
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -21,10 +21,10 @@ Amju Games source code (c) Copyright Juliet Colman 2004-2016
 #include <stdio.h> // sprintf()
 #include <sstream>
 
-#include <AmjuAssert.h>
+#include "AmjuAssert.h"
 #include "StringUtils.h"
 
-#include <AmjuFinal.h>
+#include "AmjuFinal.h"
 
 namespace Amju
 {

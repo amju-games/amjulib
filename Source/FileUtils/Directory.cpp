@@ -55,7 +55,7 @@ Added to repository
   
 */
 
-#include <AmjuFirst.h>
+#include "AmjuFirst.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 

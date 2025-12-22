@@ -9,7 +9,7 @@
 #include <EventListener.h>
 #include <File.h>
 #include <GuiCommandHandler.h>
-#include <GuiProperty.h>
+#include "GuiProperty.h"
 #include <Rect.h>
 #include <Vec2.h>
 

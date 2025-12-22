@@ -2,7 +2,7 @@
 Amju Games source code (c) Copyright Juliet Colman 2004
 */
 
-#include <AmjuFirst.h>
+#include "AmjuFirst.h"
 #include <iostream>
 
 #ifdef MACOSX
@@ -29,7 +29,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 #include "StringUtils.h"
 #include "Localise.h"
 #include "AmjuAssert.h"
-#include <AmjuFinal.h>
+#include "AmjuFinal.h"
 
 using namespace std;
 

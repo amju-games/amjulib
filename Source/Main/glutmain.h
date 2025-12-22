@@ -68,8 +68,8 @@ void queueTextEvent(unsigned char k)
   const unsigned int C = 3;
   const unsigned int V = 22;
   const unsigned int X = 24;
-  const unsigned int Y = 25;
-  const unsigned int Z = 26;
+  [[maybe_unused]]const unsigned int Y = 25;
+  [[maybe_unused]]const unsigned int Z = 26;
 
   switch (k)
   {

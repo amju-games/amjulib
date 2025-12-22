@@ -1,14 +1,14 @@
 #ifndef AMJU_GLUE_FILE_H_INCLUDED
 #define AMJU_GLUE_FILE_H_INCLUDED
 
-#include "Common.h"
-#include <RCPtr.h>
 #include <fstream>
 #include <list>
 #include <map>
 #include <string>
 #include <utility> // pair
 #include <vector>
+#include "Common.h"
+#include "RCPtr.h"
 
 namespace Amju
 {

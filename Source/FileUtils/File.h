@@ -7,7 +7,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 
 #include "FileImpl.h"
 #include "Tokeniser.h"
-#include <RCPtr.h>
+#include "RCPtr.h"
 #include <fstream>
 #include <string>
 

@@ -6,7 +6,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 #define FILE_IMPL_H_INCLUDED
 
 #include <string>
-#include <RCPtr.h>
+#include "RCPtr.h"
 
 namespace Amju
 {

@@ -5,10 +5,10 @@
 #include <Colour.h>
 #include <DrawBorder.h>
 #include <EventPoller.h>
-#include <GuiEdit.h>
+#include "GuiEdit.h"
 #include <GuiElement.h>
 #include <GuiFactory.h>
-#include <GuiPropertyHelpers.h>
+#include "GuiPropertyHelpers.h"
 #include <LoadVec2.h>
 #include <Screen.h>
 #include <StringUtils.h>

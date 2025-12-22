@@ -26,7 +26,7 @@ public:
 
   // Second colour: when we animate we interpolate between the two colours.
   void SetSecondColour(const Colour&);
-  Colour GetColour() const;
+  Colour GetColour() const override;
 
 protected:
   Colour m_secondColour;

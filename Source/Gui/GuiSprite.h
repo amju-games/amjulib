@@ -41,7 +41,7 @@ private:
 
   Texture* GetTexture() override;
 
-  // Make sure cell is within 0..max number of cells
+  // After this call, cell will be within 0..max number of cells.
   void Normalise(int& cell) const;
 
 protected:
