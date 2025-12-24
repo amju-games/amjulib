@@ -3,7 +3,7 @@
 #  maybe you want a special build
 
 export AMJU_BUILD_ARCH=Mac
-export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS -DAMJU_USE_CURL'
+export AMJU_MACHDEP='-arch i386 -DMACOSX -DXP_MACOSX -D__i386__ -DAMJU_USE_BASS_MIDI -DAMJU_USE_BASS -DAMJU_USE_CURL'
 
 export PLAT=macosx
 export VERSION=`../MakeVersionString.pl ../../Source/Version.h`

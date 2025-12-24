@@ -50,7 +50,7 @@ public:
   virtual void SetSongMaxVolume(float f) {}
 
   // MIDI functions
-  virtual bool MidiSetSoundFont(const char* soundfont) { return false; }
+  virtual bool MidiSetSoundFont(const std::string& soundFontFile) { return false; }
   virtual bool MidiNoteOn(int note) { return false; }
   virtual bool MidiNoteOff(int note) { return false; }
 

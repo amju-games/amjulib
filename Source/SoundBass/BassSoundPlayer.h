@@ -23,7 +23,7 @@ public:
   void SetSongMaxVolume(float) override;
 
 #ifdef AMJU_USE_BASS_MIDI
-  bool MidiSetSoundFont(const char* soundfont) override;
+  bool MidiSetSoundFont(const std::string& soundFontFile) override;
   bool MidiNoteOn(int note) override;
   bool MidiNoteOff(int note) override;
 #endif // AMJU_USE_BASS_MIDI

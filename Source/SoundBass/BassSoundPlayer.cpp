@@ -284,34 +284,40 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 
 #ifdef AMJU_USE_BASS_MIDI
 static HSTREAM str = 0;
-bool BassSoundPlayer::MidiSetSoundFont(const char* soundfont)
+bool BassSoundPlayer::MidiSetSoundFont(const std::string& soundfont)
 {
+std::cout << "Setting sound font....\n";
+  // create a MIDI stream 
+  str = BASS_MIDI_StreamCreate(16, BASS_SAMPLE_FLOAT, 0);
+
   BASS_MIDI_FONT font;
-  font.font=BASS_MIDI_FontInit(soundfont,0);
+  font.font=BASS_MIDI_FontInit(soundfont.c_str(), 0);
   if (font.font) 
   { 
     font.preset=-1; // all presets
     font.bank=0; // default bank(s)
     BASS_MIDI_StreamSetFonts(0,&font,1); // make it the default
+    BASS_MIDI_StreamSetFonts(str,&font,1); // apply to current stream too
+
+    std::cout << "Sound font seems to have been set ok.\n";
   }
   else
   {
-#ifdef _DEBUG
+//#ifdef _DEBUG
     std::cout << "Failed to load soundfont: " << soundfont << "\n";
-#endif
+    std::cout << BASS_ErrorGetCode() << "\n";
+//#endif
     return false;
   }
 
-	/* 10ms update period */
-	BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD,10);
+  // 10ms update period 
+  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD,10);
 
-	BASS_SetConfig(BASS_CONFIG_BUFFER, 64); 
+  BASS_SetConfig(BASS_CONFIG_BUFFER, 64); 
   // 500 default; we want to decrease latency but not
   //  break up the sound
 
-	/* create a MIDI stream */
-	str=BASS_MIDI_StreamCreate(1 /* JC - num channels ? */, 0,44100);
-	BASS_ChannelPlay(str,FALSE);
+  BASS_ChannelPlay(str, FALSE);
 
   return true;
 }
@@ -320,7 +326,7 @@ bool BassSoundPlayer::MidiNoteOn(int note)
 {
   // 60 is middle C
   // 127 is max volume
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(note,127));
+  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKEWORD(note,127));
 
   return true;
 }
@@ -328,7 +334,7 @@ bool BassSoundPlayer::MidiNoteOn(int note)
 bool BassSoundPlayer::MidiNoteOff(int note)
 {
 	//BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTESOFF /* JC - was NOTEOFF */,60 + note);
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKELONG(note,0));
+  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKEWORD(note,0));
 
   return true;
 }
