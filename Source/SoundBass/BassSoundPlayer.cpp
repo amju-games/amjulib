@@ -287,8 +287,12 @@ static HSTREAM str = 0;
 bool BassSoundPlayer::MidiSetSoundFont(const std::string& soundfont)
 {
 std::cout << "Setting sound font....\n";
-  // create a MIDI stream 
-  str = BASS_MIDI_StreamCreate(16, BASS_SAMPLE_FLOAT, 0);
+  // create a MIDI stream - No FX to reduce latency. 
+  str = BASS_MIDI_StreamCreate(16, BASS_SAMPLE_FLOAT | BASS_MIDI_NOFX, 0);
+#ifdef MACOSX
+  // Attempting to reduce latency...
+  BASS_ChannelSetAttribute(str, BASS_ATTRIB_NOBUFFER, 1);
+#endif
 
   BASS_MIDI_FONT font;
   font.font=BASS_MIDI_FontInit(soundfont.c_str(), 0);
