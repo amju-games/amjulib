@@ -186,7 +186,6 @@
 		693D40CF15AB7A5600B84D5C /* CsvTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D40B415AB7A5600B84D5C /* CsvTokeniser.h */; };
 		693D40D015AB7A5600B84D5C /* Directory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D40B515AB7A5600B84D5C /* Directory.cpp */; };
 		693D40D115AB7A5600B84D5C /* Directory.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D40B615AB7A5600B84D5C /* Directory.h */; };
-		693D40D215AB7A5600B84D5C /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D40B715AB7A5600B84D5C /* Endian.cpp */; };
 		693D40D315AB7A5600B84D5C /* Endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D40B815AB7A5600B84D5C /* Endian.h */; };
 		693D40D415AB7A5600B84D5C /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D40B915AB7A5600B84D5C /* File.cpp */; };
 		693D40D515AB7A5600B84D5C /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D40BA15AB7A5600B84D5C /* File.h */; };
@@ -758,7 +757,6 @@
 		693D40B415AB7A5600B84D5C /* CsvTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CsvTokeniser.h; path = ../../../Source/FileUtils/CsvTokeniser.h; sourceTree = SOURCE_ROOT; };
 		693D40B515AB7A5600B84D5C /* Directory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = Directory.cpp; path = ../../../Source/FileUtils/Directory.cpp; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		693D40B615AB7A5600B84D5C /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = Directory.h; path = ../../../Source/FileUtils/Directory.h; sourceTree = SOURCE_ROOT; tabWidth = 2; };
-		693D40B715AB7A5600B84D5C /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Endian.cpp; path = ../../../Source/FileUtils/Endian.cpp; sourceTree = SOURCE_ROOT; };
 		693D40B815AB7A5600B84D5C /* Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Endian.h; path = ../../../Source/FileUtils/Endian.h; sourceTree = SOURCE_ROOT; };
 		693D40B915AB7A5600B84D5C /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = ../../../Source/FileUtils/File.cpp; sourceTree = SOURCE_ROOT; };
 		693D40BA15AB7A5600B84D5C /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = ../../../Source/FileUtils/File.h; sourceTree = SOURCE_ROOT; };
@@ -1452,7 +1450,6 @@
 				693D40B415AB7A5600B84D5C /* CsvTokeniser.h */,
 				693D40B515AB7A5600B84D5C /* Directory.cpp */,
 				693D40B615AB7A5600B84D5C /* Directory.h */,
-				693D40B715AB7A5600B84D5C /* Endian.cpp */,
 				693D40B815AB7A5600B84D5C /* Endian.h */,
 				693D40B915AB7A5600B84D5C /* File.cpp */,
 				693D40BA15AB7A5600B84D5C /* File.h */,
@@ -2481,7 +2478,6 @@
 				693D40CE15AB7A5600B84D5C /* CsvTokeniser.cpp in Sources */,
 				693D40D015AB7A5600B84D5C /* Directory.cpp in Sources */,
 				690C44FC1885C740007A505D /* ldebug.c in Sources */,
-				693D40D215AB7A5600B84D5C /* Endian.cpp in Sources */,
 				693D40D415AB7A5600B84D5C /* File.cpp in Sources */,
 				693D40D615AB7A5600B84D5C /* FileImpl.cpp in Sources */,
 				693D40D815AB7A5600B84D5C /* FileImplGlue.cpp in Sources */,
