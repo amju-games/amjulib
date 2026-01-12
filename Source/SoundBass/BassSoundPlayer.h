@@ -19,6 +19,10 @@ public:
   bool PlayWav(const std::string& wavFile, float volume = 1.0f) override;
   bool PlaySong(const std::string& songFile) override;
   void StopSong() override;
+  void PauseSong() override;
+  void ResumeSong() override;
+  void SetSongSeekPosition(float seconds) override;
+
   void Update() override;
   void SetSongMaxVolume(float) override;
 

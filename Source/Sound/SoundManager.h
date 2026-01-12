@@ -38,6 +38,16 @@ public:
   // being played anyway. 
   void StopSong();
 
+  // Pause the song currently being played.
+  void PauseSong();
+
+  // Resume the song if it was paused.
+  void ResumeSong();
+
+  // Set position (time, in seconds) from which to play current song.
+  // So it's possible to e.g. pause, seek, and resume from an earlier point.
+  void SetSongSeekPosition(float seconds);
+
   // Call this every time round the game loop. This is so we can tell the
   // Engine when a sound has finished: it allows us to call the 
   // Callback by polling if we are unable to do it any other way.

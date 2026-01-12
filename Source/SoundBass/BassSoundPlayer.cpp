@@ -42,6 +42,15 @@ std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
     return;
   }
 
+  // These next two settings are intended to reduce latency.
+  // Reduce the global playback buffer (default is 500ms)
+  // 100ms is a safe "low" value; 30-50ms is "pro" territory.
+  BASS_SetConfig(BASS_CONFIG_BUFFER, 100);
+
+  // Reduce the update period (how often BASS checks if the buffer needs more data)
+  // Default is 100ms. Lowering this to 10ms-20ms helps responsiveness.
+  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD, 20);
+
   // setup output - default device
   if (!BASS_Init(-1,44100,0,0,NULL))
   {
@@ -172,13 +181,14 @@ std::cout << "BASS: using glue file.\n";
     uint32 length = GetGlueFile()->GetSize(songFile);
 
     // Use GlueFileBinaryData to get the data without copying it
+    // BASS_MUSIC_PRESCAN is there so we can seek to a position.
     GlueFileBinaryData data = GetGlueFile()->GetBinary(songPos, length);
     if (!(m_chan=BASS_MusicLoad(
       TRUE, // mem ?
       data.GetBuffer(), // start of song data 
       0, // offset
       length, // length
-      BASS_SAMPLE_LOOP|BASS_MUSIC_SURROUND, 
+      BASS_SAMPLE_LOOP | BASS_MUSIC_SURROUND | BASS_MUSIC_PRESCAN, 
       0)))  // sample rate - 0 => use default value
     {
       std::string s = "BASS: Music: Can't play song from Glue file: "; 
@@ -189,12 +199,13 @@ std::cout << "BASS: using glue file.\n";
   }
   else
   {
+    // BASS_MUSIC_PRESCAN is there so we can seek to a position.
     if (!(m_chan=BASS_MusicLoad(
       FALSE, // mem ?
       (File::GetRoot() + songFile).c_str(), // file
       0, // offset
       0, // length
-      BASS_SAMPLE_LOOP|BASS_MUSIC_SURROUND, 
+      BASS_SAMPLE_LOOP | BASS_MUSIC_SURROUND | BASS_MUSIC_PRESCAN, 
       0)))  // sample rate - 0 => use default value
     {
       std::string s = "BASS: Music: Can't play file: "; 
@@ -253,6 +264,40 @@ std::cout << "BASS: Stopping song on channel " << m_chan << "\n";
   m_lastSongName.clear();
 }
 
+void BassSoundPlayer::PauseSong() 
+{
+  if (m_chan == (unsigned int)-1)
+  {
+    return;
+  }
+
+  BASS_ChannelPause(m_chan);
+}
+
+void BassSoundPlayer::ResumeSong() 
+{
+  if (m_chan == (unsigned int)-1)
+  {
+    return;
+  }
+
+  BASS_ChannelPlay(m_chan, FALSE);
+}
+
+void BassSoundPlayer::SetSongSeekPosition(float seconds)
+{
+  if (m_chan == (unsigned int)-1)
+  {
+    return;
+  }
+
+  // Convert seconds to a byte position
+  QWORD bytes = BASS_ChannelSeconds2Bytes(m_chan, seconds); 
+
+  // Set the position
+  BASS_ChannelSetPosition(m_chan, bytes, BASS_POS_BYTE);
+}
+
 void BassSoundPlayer::Update()
 {
 }
@@ -286,7 +331,7 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 static HSTREAM str = 0;
 bool BassSoundPlayer::MidiSetSoundFont(const std::string& soundfont)
 {
-std::cout << "Setting sound font....\n";
+std::cout << "Setting sound font: " << soundfont << "\n";
   // create a MIDI stream - No FX to reduce latency. 
   str = BASS_MIDI_StreamCreate(16, BASS_SAMPLE_FLOAT | BASS_MIDI_NOFX, 0);
 #ifdef MACOSX
@@ -315,9 +360,9 @@ std::cout << "Setting sound font....\n";
   }
 
   // 10ms update period 
-  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD,10);
+//  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD,10);
 
-  BASS_SetConfig(BASS_CONFIG_BUFFER, 64); 
+//  BASS_SetConfig(BASS_CONFIG_BUFFER, 64); 
   // 500 default; we want to decrease latency but not
   //  break up the sound
 

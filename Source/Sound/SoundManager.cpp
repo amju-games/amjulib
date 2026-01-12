@@ -111,6 +111,30 @@ void SoundManager::StopSong()
   m_song = "";
 }
 
+void SoundManager::PauseSong()
+{
+  if (m_pImpl)
+  {
+    m_pImpl->PauseSong();
+  }
+}
+
+void SoundManager::ResumeSong()
+{
+  if (m_pImpl)
+  {
+    m_pImpl->ResumeSong();
+  }
+}
+
+void SoundManager::SetSongSeekPosition(float seconds)
+{
+  if (m_pImpl)
+  {
+    m_pImpl->SetSongSeekPosition(seconds);
+  }
+}
+
 void SoundManager::Update()
 {
   if (!m_pImpl)
