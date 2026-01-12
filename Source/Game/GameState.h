@@ -19,6 +19,9 @@ public:
   virtual void OnActive();
   virtual void OnDeactive();
 
+  // Called if game is paused, e.g. phone call
+  virtual void OnPauseGame() {}
+
   void SetPrevState(GameState* prev);
   GameState* GetPrevState();
   void GoBack();  // return to prev state - must have been set!

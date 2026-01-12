@@ -53,10 +53,12 @@ public:
   // Functions commonly used by Game States
   void UpdateGameObjects();
 
-  // Set a font to display frame time
-  void SetFrameTimeFont(Font*);
-
+  // If true, copy m_objects and iterate over the copy in Update().
+  // You would do this if updating objects could add or delete items
+  //  from the container.
   void SetUpdateCopy(bool);
+
+  const std::string& GetFrameStats() const;
 
 private:
   void UpdateState(); // go to new state if set
@@ -70,7 +72,9 @@ private:
 
   GameObjects m_objects;
 
-  Font* m_font;
+  // String which game states can display, to get info about frame time,
+  //  draw calls, etc.
+  std::string m_frameStats;
 
   // If true, copy m_objects and iterate over the copy in Update().
   // You would do this if updating objects could add or delete items

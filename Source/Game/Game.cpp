@@ -27,7 +27,6 @@ Game::Game()
   m_currentState = 0;
   m_pauseState = 0;
   m_newState = 0;
-  m_font = 0;
   m_updateCopy = false;
 }
 
@@ -36,13 +35,10 @@ void Game::SetUpdateCopy(bool uc)
   m_updateCopy = uc;
 }
 
-void Game::SetFrameTimeFont(Font* f)
-{
-  m_font = f;
-}
-
 void Game::PauseGame()
 {
+  GetState()->OnPauseGame();
+
   if (m_pauseState)
   {
     SetCurrentState(m_pauseState);
@@ -163,8 +159,6 @@ void Game::RunOneLoop()
   Draw();
 
 #ifdef SHOW_FRAME_TIME
-  if (m_font)
-  {
 #ifdef WIN32
     unsigned long draw = GetTickCount() - mid;
     unsigned long update = mid - start;
@@ -191,25 +185,15 @@ void Game::RunOneLoop()
     s += " fps: " + fps;
     s += " Draw calls: " + std::to_string(AmjuGL::GetReportStat(AmjuGL::AMJU_NUM_DRAW_CALLS));
 
-    // Display time per frame
-    static GuiText t;
-    t.SetFont(m_font);
-    t.SetFontSize(2.f);
-    t.SetScaleX(0.7f);
-    t.SetFgCol(Colour(1, 0, 1, 1));
-    t.SetLocalPos(Vec2f(-1.0f, 1.0f));
-    t.SetSize(Vec2f(2.0f, 0.1f));
-    t.SetJust(GuiText::AMJU_JUST_LEFT);
-    t.SetText(s);
-    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_TEXTURE_2D);
-    AmjuGL::Disable(AmjuGL::AMJU_LIGHTING);
-    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-    t.Draw(); 
-    AmjuGL::PopAttrib();
-  }
+    m_frameStats = s;
 #endif //  SHOW_FRAME_TIME
 
   AmjuGL::Flip(); 
+}
+
+const std::string& Game::GetFrameStats() const
+{
+  return m_frameStats;
 }
 
 void Game::UpdateGameObjects()
