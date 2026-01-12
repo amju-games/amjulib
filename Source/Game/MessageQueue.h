@@ -65,7 +65,11 @@ public:
   //  just needs to be the same across all hosts.
   void SetTime(float seconds);
 
+  // Get the current game time 
   float GetTime() const;
+
+  // Call to wipe out all messages in the queue.
+  void Clear();
 
 protected:
   // Priority queue: could be implemented as a Heap, Set, std::priority_queue...

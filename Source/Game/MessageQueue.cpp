@@ -22,6 +22,12 @@ float MessageQueue::GetTime() const
   return m_time;
 }
 
+void MessageQueue::Clear()
+{
+  MutexLocker lock(m_mutex);
+  m_q.clear();
+}
+
 void MessageQueue::Update()
 {
   MutexLocker lock(m_mutex);
