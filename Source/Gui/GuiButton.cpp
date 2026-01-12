@@ -371,6 +371,10 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   {
     if (mbe.isDown)
     {
+      // Point in button rectangle ?
+      Rect r = GetRect(this);
+      SetIsMouseOver(r.IsPointIn(Vec2f(mbe.x, mbe.y)));
+    
       m_isPressed = IsMouseOver();
       if (m_isPressed)
       {
@@ -384,7 +388,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
     }
     else
     {
-#ifdef IPHONE
+#ifdef AMJU_IOS
         if (IsMouseOver())
 #else
       if (IsMouseOver() && m_isPressed) // Only execute if we are on button when we release
