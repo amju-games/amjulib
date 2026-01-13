@@ -502,7 +502,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Utils\Launcher.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\MT19937.c" />
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp" />
-    <ClCompile Include="..\..\..\Source\Utils\Sign.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Unproject.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\Variable.cpp" />
     <ClCompile Include="..\..\..\Source\Utils\VariableGeomConvert.cpp" />

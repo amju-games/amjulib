@@ -219,9 +219,6 @@
     <ClCompile Include="..\..\..\Source\Utils\Pause.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Utils\Sign.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Utils\Variable.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
