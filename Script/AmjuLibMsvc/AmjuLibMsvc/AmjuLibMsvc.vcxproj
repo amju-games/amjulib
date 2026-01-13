@@ -340,7 +340,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\FileUtils\ConfigFile.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\CsvTokeniser.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp" />
-    <ClCompile Include="..\..\..\Source\FileUtils\Endian.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\File.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\FileImpl.cpp" />
     <ClCompile Include="..\..\..\Source\FileUtils\FileImplGlue.cpp" />

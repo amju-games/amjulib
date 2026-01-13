@@ -135,9 +135,6 @@
     <ClCompile Include="..\..\..\Source\FileUtils\Directory.cpp">
       <Filter>FileUtils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\FileUtils\Endian.cpp">
-      <Filter>FileUtils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\FileUtils\File.cpp">
       <Filter>FileUtils</Filter>
     </ClCompile>
