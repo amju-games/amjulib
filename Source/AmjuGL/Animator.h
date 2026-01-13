@@ -63,6 +63,12 @@ public:
 
   void SetCycleTime(float cycleTime);
 
+  // Get the current anim time value
+  float GetAnimTimeSeconds() const;
+
+  // Set the anim time value
+  void SetAnimTimeSeconds(float seconds);
+
   // Conceptually protected but public for testing:
 
   static LoopType GetLoopTypeFromString(const std::string& s);

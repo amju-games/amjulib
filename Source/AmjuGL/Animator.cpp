@@ -146,6 +146,16 @@ void Animator::SetCycleTime(float cycleTime)
   m_cycleTime = cycleTime;
 }
 
+float Animator::GetAnimTimeSeconds() const
+{
+  return m_time;
+}
+
+void Animator::SetAnimTimeSeconds(float seconds)
+{
+  m_time = seconds;
+}
+
 static float EaseInOut(float t)
 {
   // TODO I think this one would work with mirror repeat, TODO test that thought.
