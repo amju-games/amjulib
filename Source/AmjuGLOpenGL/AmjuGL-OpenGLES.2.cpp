@@ -31,6 +31,10 @@ extern "C"
 #include <Texture.h>
 #include <AmjuFinal.h>
 
+#ifndef GL_SILENCE_DEPRECATION
+#define GL_SILENCE_DEPRECATION
+#endif
+
 namespace Amju
 {
 static GLKMatrix4 s_matrices[3]; // index with AmjuGL::MatrixMode

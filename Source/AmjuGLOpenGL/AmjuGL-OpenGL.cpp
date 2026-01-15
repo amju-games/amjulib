@@ -28,6 +28,10 @@ Amju Games source code (c) Copyright Juliet Colman 2000-2007
 #include <Matrix.h> // TODO TEMP TEST
 #include <AmjuFinal.h>
 
+#ifndef GL_SILENCE_DEPRECATION
+#define GL_SILENCE_DEPRECATION
+#endif
+
 #define SHADER_DEBUG
 //#define OPENGL_SHOW_INFO
 

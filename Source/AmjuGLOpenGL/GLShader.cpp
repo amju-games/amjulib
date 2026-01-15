@@ -12,6 +12,10 @@
 #include <StringUtils.h>
 #include <AmjuFinal.h>
 
+#ifndef GL_SILENCE_DEPRECATION
+#define GL_SILENCE_DEPRECATION
+#endif
+
 //#define SHADER_DEBUG
 
 namespace Amju
