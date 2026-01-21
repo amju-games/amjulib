@@ -1,10 +1,13 @@
+// Amjulib (c) Juliet Colman 2000-2026
+#pragma once
+
 namespace Amju
 {
 void StartUpBeforeCreateWindow();
 void StartUpAfterCreateWindow();
 }
 
-#ifdef IPHONE
+#ifdef AMJU_IOS
 
 #ifdef AMJU_CONSOLE
 #include <nonglutmain.h>
@@ -16,7 +19,7 @@ void StartUpAfterCreateWindow();
 #include "iPhone/main.mm"
 
 #endif // AMJU_CONSOLE
-#else // IPHONE
+#else // AMJU_IOS
 
 #ifdef AMJU_CONSOLE
 #include <nonglutmain.h>
@@ -30,5 +33,5 @@ void StartUpAfterCreateWindow();
 
 #endif // AMJU_CONSOLE
 
-#endif // IPHONE
+#endif // AMJU_IOS
 
