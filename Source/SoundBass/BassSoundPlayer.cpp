@@ -14,8 +14,8 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 #include "Bass2.4/Macosx/bassmidi.h"
 #endif
 #ifdef WIN32
-#include "Bass2.3/Win/bass.h"
-#include "Bass2.3/Win/bassmidi.h"
+#include "Bass2.4/Win/bass.h"
+#include "Bass2.4/Win/bassmidi.h"
 #endif
 #include <StringUtils.h>
 #include <File.h>
@@ -311,9 +311,9 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
     return;
   }
 
-  int newVol = (int)(f * 100.0f);
+  float newVol = f * 100.0f;
 
-#if defined(MACOSX)|| defined(AMJU_IOS) 
+#if defined(MACOSX)|| defined(AMJU_IOS) || defined(WIN32)
   BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
 #else
   BASS_SetVolume(newVol);
