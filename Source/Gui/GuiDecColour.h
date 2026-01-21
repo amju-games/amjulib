@@ -31,6 +31,21 @@ public:
 protected:
   Colour m_secondColour;
   Colour m_interpolatedColour;
+  // Mode: what we do with the interpolated colour.
+  // If DEC_COLOUR_MULT, we multiply the interpolated colour by the prevailing ancestor colour.
+  // This is the default mode.
+  // If DEC_COLOUR_RESET, we set the colour, ignoring ancestor colour. This gives a way
+  //  to reset the colour in a gui tree, as requested below.
+  // To set this mode, include "reset" in the colour string.
+  // If DEC_COLOUR_ADD, we add the interpolated colour to the prevailing ancestor colour.
+  // To set this mode, include "add" in the colour string.
+  enum Mode
+  {
+    DEC_COLOUR_MULT,
+    DEC_COLOUR_RESET,
+    DEC_COLOUR_ADD
+  };
+  Mode m_mode = DEC_COLOUR_MULT;
 };
 
 // TODO also a colour SETTER, so we can reset the current colour in the tree.

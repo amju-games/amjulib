@@ -35,6 +35,15 @@ Colour& Colour::operator*=(const Colour& c)
   return *this;
 }
 
+Colour& Colour::operator+=(const Colour& c)
+{
+  m_r = std::clamp(m_r + c.m_r, 0.f, 1.f);
+  m_g = std::clamp(m_g + c.m_g, 0.f, 1.f);
+  m_b = std::clamp(m_b + c.m_b, 0.f, 1.f);
+  m_a = std::clamp(m_a + c.m_a, 0.f, 1.f);
+  return *this;
+}
+
 void Colour::Use()
 {
   AmjuGL::SetColour(m_r, m_g, m_b, m_a);
@@ -84,6 +93,18 @@ void PopColour()
 void MultColour(const Colour& c)
 {
   s_colour *= c;
+  s_colour.Use();
+}
+
+void AddColour(const Colour& c)
+{
+  s_colour += c;
+  s_colour.Use();
+}
+
+void SetColour(const Colour& c)
+{
+  s_colour = c;
   s_colour.Use();
 }
 

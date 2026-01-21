@@ -12,6 +12,8 @@ struct Colour
   Colour(float r, float g, float b, float a);
   void Set(float r, float g, float b, float a);
   Colour& operator*=(const Colour& c);
+  // Adds colours; clamps all components between 0..1
+  Colour& operator+=(const Colour& c);
   void Use();
 
   float m_r, m_g, m_b, m_a;
@@ -28,6 +30,8 @@ Colour Interpolate(const Colour& c1, const Colour& c2, float t);
 void PushColour();
 void PopColour();
 void MultColour(const Colour& c);
+void AddColour(const Colour& c);
+void SetColour(const Colour& c);
 
 std::optional<Colour> FromHexString(const std::string&);
 
