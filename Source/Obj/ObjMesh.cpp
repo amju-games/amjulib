@@ -857,20 +857,24 @@ void ObjMesh::DrawGroup(Group& g)
     return;
   }
 
-  // Material can set lighting/blending flags
-  AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_BLEND);
-
   // TODO Hash, not string
   Materials::iterator it = m_materials.find(g.m_materialName);
   if (it != m_materials.end())
   {
+    // Material can set lighting/blending flags.
+    // Don't do the push/pop unnecessarily.
+    AmjuGL::PushAttrib(AmjuGL::AMJU_LIGHTING | AmjuGL::AMJU_BLEND);
+
     Material& mat = it->second;
     mat.UseThisMaterial();
   }
 
   AmjuGL::Draw(g.m_triList);
 
-  AmjuGL::PopAttrib();
+  if (it != m_materials.end())
+  {
+    AmjuGL::PopAttrib();
+  }
 }
 
 void ObjMesh::Merge(const ObjMesh& om)
