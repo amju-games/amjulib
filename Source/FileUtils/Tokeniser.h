@@ -1,9 +1,5 @@
 /*
 Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Tokeniser.h,v $
-Revision 1.1  2004/09/08 15:43:20  jay
-Added to repository
-  
 */
 
 #if !defined(TOKENISER_H_INCLUDED)
