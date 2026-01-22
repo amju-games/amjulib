@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <Colour.h>
+#include "ColourMode.h"
 #include "GuiDecorator.h"
 
 namespace Amju
@@ -11,7 +11,7 @@ namespace Amju
 // * GuiDecColour *
 // Decorator which modulates the current colour for descendants. 
 // The colour can be animated, by interpolating between two colours.
-class GuiDecColour : public GuiDecorator
+class GuiDecColour : public GuiDecorator, public ColourMode
 {
 public:
   static const char* NAME;
@@ -31,24 +31,6 @@ public:
 protected:
   Colour m_secondColour;
   Colour m_interpolatedColour;
-  // Mode: what we do with the interpolated colour.
-  // If DEC_COLOUR_MULT, we multiply the interpolated colour by the prevailing ancestor colour.
-  // This is the default mode.
-  // If DEC_COLOUR_RESET, we set the colour, ignoring ancestor colour. This gives a way
-  //  to reset the colour in a gui tree, as requested below.
-  // To set this mode, include "reset" in the colour string.
-  // If DEC_COLOUR_ADD, we add the interpolated colour to the prevailing ancestor colour.
-  // To set this mode, include "add" in the colour string.
-  enum Mode
-  {
-    DEC_COLOUR_MULT,
-    DEC_COLOUR_RESET,
-    DEC_COLOUR_ADD
-  };
-  Mode m_mode = DEC_COLOUR_MULT;
 };
-
-// TODO also a colour SETTER, so we can reset the current colour in the tree.
-// This would be useful if e.g. you fade out the whole tree but have some
-//  elements you don't want to fade.
 }
+

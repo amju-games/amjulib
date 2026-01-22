@@ -1,7 +1,6 @@
 // * Amjulib *
-// (c) Copyright 2000-2017 Juliet Colman
+// (c) Copyright 2000-2026 Juliet Colman
 
-#include <StringUtils.h>
 #include "GuiDecColour.h"
 
 namespace Amju
@@ -19,7 +18,7 @@ bool GuiDecColour::Save(File* f)
   {
     return false;
   }
-  if (!f->Write(s))
+  if (!f->Write(s + ColourMode::GetStringFromMode()))
   {
     return false;
   }
@@ -35,29 +34,11 @@ bool GuiDecColour::Load(File* f)
     return false;
   }
 
-  // Allow this string to be "clean" - TODO think of better name.
-  // If "clean", we set the colour on our child, we don't multiply by the 
-  // ancestor colour.
-  
   // 2 colours or one?
   Strings strs = Split(s, ',');
   Assert(!strs.empty());
 
-  // Check for "reset" string, to set instead of multiplying colour.
-  auto it = std::find(strs.begin(), strs.end(), "reset");
-  if (it != strs.end())
-  {
-    m_mode = DEC_COLOUR_RESET;
-    strs.erase(it); // remove to simplify parsing below
-  }
-
-  // Check for "add" string, to set additive mode.
-  it = std::find(strs.begin(), strs.end(), "add");
-  if (it != strs.end())
-  {
-    m_mode = DEC_COLOUR_ADD;
-    strs.erase(it); // remove to simplify parsing below
-  }
+  SetModeFromStrings(strs); // ColourMode mixin base class
 
   auto optionalColour = FromHexString(strs[0]);
   if (optionalColour)
@@ -110,25 +91,8 @@ void GuiDecColour::Draw()
 
   // TODO Don't do this, use vertex colours: BATCH!
   PushColour();
-
-  // Reset colour or multiply ancestor colour
-  switch (m_mode)
-  {
-  case Amju::GuiDecColour::DEC_COLOUR_MULT:
-    MultColour(m_interpolatedColour);
-    break;
-  case Amju::GuiDecColour::DEC_COLOUR_RESET:
-    Amju::SetColour(m_interpolatedColour);
-    break;
-  case Amju::GuiDecColour::DEC_COLOUR_ADD:
-    AddColour(m_interpolatedColour);
-    break;
-  default:
-    break;
-  }
-
+  ColourMode::DrawColour(m_interpolatedColour);
   GuiDecorator::Draw();
-
   PopColour();
 }
 
