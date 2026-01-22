@@ -1,6 +1,6 @@
 #ifdef AMJU_USE_GLUT
 
-#ifdef (MACOSX) || defined(AMJU_IOS)
+#if defined(MACOSX) || defined(AMJU_IOS)
 #define GL_SILENCE_DEPRECATION
 #endif
 
