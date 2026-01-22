@@ -37,7 +37,7 @@ export OBJCOPY	:=	$(PREFIX)objcopy
 # j.c.
 BUILDEXE = @$(LD)  $^ $(LDFLAGS) $(LIBPATHS) $(LIBS) -o $@
 
-BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -static -o $@
+BUILDSTATICLIB = echo "Building " $@; rm -rf $@; libtool -no_warning_for_no_symbols -static -o $@
 
 
 
