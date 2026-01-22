@@ -1,3 +1,5 @@
+#define GL_SILENCE_DEPRECATION
+
 #include <LoadPng.h>
 #include <StringUtils.h>
 #include "Internal/OpenGL.h"
