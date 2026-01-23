@@ -73,9 +73,9 @@ bool GuiDecScale::Load(File* f)
     return false;
   }
 
-  m_origChildSize = m_children[0]->GetSize();
+  m_origChildSize = GetChild()->GetSize();
 
-  SetName("scale-" + m_children[0]->GetName());
+  SetName("scale-" + GetChild()->GetName());
 
   return true;
 }
@@ -106,7 +106,7 @@ void GuiDecScale::Draw()
 
   // Convert relative pivot to absolute coord. 
   // E.g. (.5, .5) should be the centre of the element.
-  Vec2f pos = m_children[0]->GetCombinedPos(); 
+  Vec2f pos = GetChild()->GetCombinedPos(); 
   Vec2f pivot = Vec2f(pos.x + m_pivot.x * m_origChildSize.x, pos.y - m_pivot.y * m_origChildSize.y);
   AmjuGL::Translate(pivot.x, pivot.y, 0);
   AmjuGL::Scale(m_interpScale.x, m_interpScale.y, 1);

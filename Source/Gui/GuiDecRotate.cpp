@@ -46,18 +46,18 @@ bool GuiDecRotate::Load(File* f)
     return false;
   }
 
-  SetName("rotate-" + m_children[0]->GetName());
+  SetName("rotate-" + GetChild()->GetName());
 
   return true;
 }
 
 void GuiDecRotate::Draw()
 {
-  Vec2f childSize = m_children[0]->GetSize();
+  Vec2f childSize = GetChild()->GetSize();
 
   // Convert relative pivot to absolute coord. 
   // E.g. (.5, .5) should be the centre of the element.
-  Vec2f pos = m_children[0]->GetCombinedPos();
+  Vec2f pos = GetChild()->GetCombinedPos();
   Vec2f pivot = Vec2f(pos.x + m_pivot.x * childSize.x, pos.y - m_pivot.y * childSize.y);
   AmjuGL::PushMatrix();
   AmjuGL::Translate(pivot.x, pivot.y, 0);

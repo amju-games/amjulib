@@ -55,7 +55,7 @@ bool GuiDecTranslate::Load(File* f)
     return false;
   }
 
-  SetName("translate-" + m_children[0]->GetName());
+  SetName("translate-" + GetChild()->GetName());
 
   return true;
 }

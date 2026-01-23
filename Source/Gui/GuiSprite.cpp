@@ -54,6 +54,8 @@ void GuiSprite::Animate(float animValue)
 
 void GuiSprite::Normalise(int& cell) const
 {
+  // TODO Use % and write some tests
+
   const int maxCells = m_numCellsXY.x * m_numCellsXY.y;
   if (cell < 0)
   {
