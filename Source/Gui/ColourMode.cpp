@@ -16,6 +16,7 @@ std::string ColourMode::GetStringFromMode() const
   case DEC_COLOUR_ADD:
     return ", add";
   }
+  return "";
 }
 
 void ColourMode::SetModeFromStrings(Strings& strs)

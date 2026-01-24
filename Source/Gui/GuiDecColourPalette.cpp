@@ -6,16 +6,26 @@
 
 namespace Amju
 {
-const char* GuiDecColourPalette::NAME;
+const char* GuiDecColourPalette::NAME = "colour-palette";
 
-std::vector<Colour> RgbaToColourVec(
+static Colour FromBytes(unsigned char* bytes)
+{
+  return Colour(
+    static_cast<float>(bytes[0]) / 255.0f,
+    static_cast<float>(bytes[1]) / 255.0f,
+    static_cast<float>(bytes[2]) / 255.0f,
+    static_cast<float>(bytes[3]) / 255.0f);
+}
+
+static std::vector<Colour> RgbaToColourVec(
   std::vector<unsigned char>::iterator first,
   std::vector<unsigned char>::iterator last)
 {
   std::vector<Colour> vec;
   while (first != last)
   {
-    Colour c(*first++, *first++, *first++, *first++);
+    Colour c = FromBytes(&(*first));
+    first += 4;
     vec.push_back(c);
   }
   return vec;
@@ -41,8 +51,6 @@ bool GuiDecColourPalette::Load(File* f)
   //  into a vector.
   int w = 0;
   int h = 0;
-std::cout << "GuiDecColourPalette: loading palette: " << m_paletteFilename << "\n";
-
   std::vector<unsigned char> data;
   if (!LoadPng(m_paletteFilename, data, w, h))
   {
@@ -61,11 +69,9 @@ std::cout << "GuiDecColourPalette: loading palette: " << m_paletteFilename << "\
   auto end = data.begin();
   std::advance(end, w * 4);
   // Convert range of raw RGBA bytes to vec of Colours
-std::cout << "Convert to vec of colours....\n";
-
   m_palette = RgbaToColourVec(data.begin(), end);
-std::cout << "OK! Converted to vec of colours.\n";
-  return true;
+
+  return GuiDecorator::LoadOneChild(f);
 }
 
 bool GuiDecColourPalette::Save(File* f)

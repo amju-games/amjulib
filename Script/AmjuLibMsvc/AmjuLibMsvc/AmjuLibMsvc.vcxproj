@@ -373,12 +373,15 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector2.cpp" />
     <ClCompile Include="..\..\..\Source\Geom\Mgc\MgcVector3.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Batched.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\ColourMode.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\Cursor.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\CursorManager.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiCheck.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimation.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecChoose.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecColour.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecColourPalette.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecInclude.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecorator.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecRotate.cpp" />
@@ -408,6 +411,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiPropertiesDialog.cpp" />
     <ClCompile Include="..\..\..\Source\Image\LoadPng.cpp" />
+    <ClCompile Include="..\..\..\Source\Image\lodepng.cpp" />
     <ClCompile Include="..\..\..\Source\Image\SavePng.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp" />
     <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.c" />
@@ -693,12 +697,15 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector2.h" />
     <ClInclude Include="..\..\..\Source\Geom\Mgc\MgcVector3.h" />
     <ClInclude Include="..\..\..\Source\Gui\Batched.h" />
+    <ClInclude Include="..\..\..\Source\Gui\ColourMode.h" />
     <ClInclude Include="..\..\..\Source\Gui\Cursor.h" />
     <ClInclude Include="..\..\..\Source\Gui\CursorManager.h" />
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiCheck.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecAnimation.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecChoose.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecColour.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecColourPalette.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecInclude.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecorator.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecRotate.h" />
@@ -730,6 +737,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiPropertiesDialog.h" />
     <ClInclude Include="..\..\..\Source\Image\LoadPng.h" />
+    <ClInclude Include="..\..\..\Source\Image\lodepng.h" />
     <ClInclude Include="..\..\..\Source\Image\SavePng.h" />
     <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h" />
     <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.h" />
