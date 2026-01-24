@@ -1,7 +1,10 @@
 #include <AmjuFirst.h>
 #include "LoadPng.h"
-#include "png.h"
+#include "lodepng.h" // 3rd party
+#include "png.h" // 3rd party
 #include <File.h>
+#include <FileImplGlue.h>
+#include <GlueFile.h>
 #include <ReportError.h>
 #include <StringUtils.h>
 #include <AmjuFinal.h>
@@ -10,6 +13,61 @@
 
 namespace Amju
 {
+// C++ png loader, prefer this to the C interface.
+bool LoadPng(
+  const std::string& filename, 
+  std::vector<unsigned char>& data,
+  int& width,
+  int& height)
+{
+  unsigned int w = 0;
+  unsigned int h = 0;
+  unsigned int nError = 0;
+
+  auto gf = FileImplGlue::GetGlueFile();
+  if (gf)
+  {
+    // Find the start and length of the png file in the glue file
+    uint32 pos = 0;
+    if (!gf->GetSeekBase(filename, &pos))
+    {   
+      std::string s = "Png: not in Glue File: " + filename;
+      ReportError(s);
+      return false;
+    }   
+    uint32 filesize = gf->GetSize(filename);
+
+    // Use GlueFileBinaryData to get the data without copying it
+    GlueFileBinaryData binarydata = gf->GetBinary(pos, filesize);
+
+    nError = lodepng::decode(
+      data,
+      w,
+      h,
+      binarydata.GetBuffer(),
+      filesize); 
+  }
+  else
+  {
+    // Non-gluefile
+    nError = lodepng::decode(data, w, h, filename);
+  }
+
+  if (nError != 0)
+  {
+    ReportError(std::string("Failed to load png, ") + lodepng_error_text(nError));
+    return false;
+  }
+
+  Assert(data.size() == w * h * 4);
+
+  width = w;
+  height = h;
+  return true;
+}
+
+// Version using libpng follows
+// ----------------------------
 static void ReadFunc(png_structp png, png_bytep data, png_size_t size)
 {
   File* f = (File*)png_get_io_ptr(png); 

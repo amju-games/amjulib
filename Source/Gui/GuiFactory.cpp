@@ -2,13 +2,14 @@
 #include "GuiButton.h"
 #include "GuiCheck.h"
 #include "GuiComposite.h"
+#include "GuiDecAnimation.h"
+#include "GuiDecColour.h"
+#include "GuiDecColourPalette.h"
 #include "GuiDecInclude.h"
 #include "GuiDecRotate.h"
 #include "GuiDecScale.h"
-#include "GuiDecTranslate.h"
-#include "GuiDecColour.h"
-#include "GuiDecAnimation.h"
 #include "GuiDecShader.h"
+#include "GuiDecTranslate.h"
 #include "GuiDialog.h"
 #include "GuiElastic.h"
 #include "GuiFactory.h"
@@ -21,12 +22,12 @@
 #include "GuiObjView.h"
 #include "GuiPoly.h"
 #include "GuiRect.h"
-#include "GuiText.h"
-#include "GuiTextEdit.h"
 #include "GuiScroll.h"
 #include "GuiSlider.h"
 #include "GuiSpline.h"
 #include "GuiSprite.h"
+#include "GuiText.h"
+#include "GuiTextEdit.h"
 #include "GuiWindow.h"
 #include <AmjuFinal.h>
 
@@ -42,6 +43,7 @@ GuiFactory::GuiFactory()
   Add(GuiComposite::NAME, &CreateT<GuiComposite>);
   Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
+  Add(GuiDecColourPalette::NAME, &CreateT<GuiDecColourPalette>);
   Add(GuiDecInclude::NAME, &CreateT<GuiDecInclude>);
   Add(GuiDecRotate::NAME, &CreateT<GuiDecRotate>);
   Add(GuiDecScale::NAME, &CreateT<GuiDecScale>);
