@@ -60,13 +60,13 @@ GuiFactory::GuiFactory()
   Add(GuiMenu::NAME, &CreateT<GuiMenu>);
   Add(GuiObjView::NAME, &CreateObjView);
   Add(GuiPoly::NAME, &CreateT<GuiPoly>);
-  Add(GuiText::NAME, &CreateT<GuiText>);
-  Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
-  Add(GuiWindow::NAME, &CreateT<GuiWindow>);
   Add(GuiRect::NAME, &CreateT<GuiRect>);
   Add(GuiScroll::NAME, &CreateT<GuiScroll>);
   Add(GuiSlider::NAME, &CreateT<GuiSlider>);
   Add(GuiSprite::NAME, &CreateT<GuiSprite>);
   Add(GuiSpline::NAME, &CreateT<GuiSpline>);
+  Add(GuiText::NAME, &CreateT<GuiText>);
+  Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
+  Add(GuiWindow::NAME, &CreateT<GuiWindow>);
 }
 }
