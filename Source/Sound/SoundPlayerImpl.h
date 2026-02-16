@@ -61,7 +61,7 @@ public:
 
   // MIDI functions
   virtual bool MidiSetSoundFont(const std::string& soundFontFile) { return false; }
-  virtual bool MidiNoteOn(int note) { return false; }
+  virtual bool MidiNoteOn(int note, int velocity) { return false; }
   virtual bool MidiNoteOff(int note) { return false; }
 
 protected:

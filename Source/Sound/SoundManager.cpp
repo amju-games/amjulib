@@ -189,14 +189,14 @@ bool SoundManager::MidiSetSoundFont(const char* soundfont)
   return m_pImpl->MidiSetSoundFont(soundfont);
 }
 
-bool SoundManager::MidiNoteOn(int note)
+bool SoundManager::MidiNoteOn(int note, int velocity)
 {
   if (!m_pImpl)
   {
     return false;
   }
 
-  return m_pImpl->MidiNoteOn(note);
+  return m_pImpl->MidiNoteOn(note, velocity);
 }
 
 bool SoundManager::MidiNoteOff(int note)

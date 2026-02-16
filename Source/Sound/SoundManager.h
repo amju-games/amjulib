@@ -64,7 +64,7 @@ public:
 
   // MIDI functions
   bool MidiSetSoundFont(const char* soundfont);
-  bool MidiNoteOn(int note);
+  bool MidiNoteOn(int note, int velocity);
   bool MidiNoteOff(int note);
 
 private:

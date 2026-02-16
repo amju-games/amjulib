@@ -366,25 +366,20 @@ std::cout << "Setting sound font: " << soundfont << "\n";
   // 500 default; we want to decrease latency but not
   //  break up the sound
 
-  BASS_ChannelPlay(str, FALSE);
+  BASS_ChannelPlay(str, FALSE /* don't restart the channel */);
 
   return true;
 }
 
-bool BassSoundPlayer::MidiNoteOn(int note)
+bool BassSoundPlayer::MidiNoteOn(int note, int velocity)
 {
-  // 60 is middle C
-  // 127 is max volume
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKEWORD(note,127));
-
+  BASS_MIDI_StreamEvent(str, 0, MIDI_EVENT_NOTE, MAKEWORD(note, velocity));
   return true;
 }
 
 bool BassSoundPlayer::MidiNoteOff(int note)
 {
-	//BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTESOFF /* JC - was NOTEOFF */,60 + note);
-  BASS_MIDI_StreamEvent(str,0,MIDI_EVENT_NOTE,MAKEWORD(note,0));
-
+  BASS_MIDI_StreamEvent(str, 0, MIDI_EVENT_NOTE, MAKEWORD(note, 0));
   return true;
 }
 #endif // AMJU_USE_BASS_MIDI

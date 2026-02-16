@@ -28,7 +28,7 @@ public:
 
 #ifdef AMJU_USE_BASS_MIDI
   bool MidiSetSoundFont(const std::string& soundFontFile) override;
-  bool MidiNoteOn(int note) override;
+  bool MidiNoteOn(int note, int velocity) override;
   bool MidiNoteOff(int note) override;
 #endif // AMJU_USE_BASS_MIDI
     
