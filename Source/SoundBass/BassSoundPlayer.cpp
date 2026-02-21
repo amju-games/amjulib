@@ -25,6 +25,16 @@ namespace Amju
 {
 void ReportError(const std::string&);
 
+static void ReportBassError(const std::string& filename)
+{
+  std::string s = "BASS: Music: Can't play file: "; 
+  s += filename;
+  int errCode = BASS_ErrorGetCode();
+  s += " Error code: ";
+  s += ToString(errCode);
+  ReportError(s);
+}
+
 BassSoundPlayer::BassSoundPlayer()
 {
   m_chan = (DWORD)-1; 
@@ -165,6 +175,11 @@ std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
   // If Glue File is set, use it to load song into memory.
   // Else use file.
 
+  auto extension = GetFileExt(songFile);
+  // Currently expecting song file to be a .it file, or a .ogg file.
+  // .mod files are treated like .it files.
+  bool isItFile = (extension == "it" || extension == "mod");
+
   if (GetGlueFile())
   {
 #ifdef _DEBUG
@@ -177,43 +192,71 @@ std::cout << "BASS: using glue file.\n";
       std::string s = "BASS: Music: not in Glue File: ";
       s += songFile;
       ReportError(s);
+      return false;
     }
-    uint32 length = GetGlueFile()->GetSize(songFile);
 
     // Use GlueFileBinaryData to get the data without copying it
-    // BASS_MUSIC_PRESCAN is there so we can seek to a position.
+    uint32 length = GetGlueFile()->GetSize(songFile);
     GlueFileBinaryData data = GetGlueFile()->GetBinary(songPos, length);
-    if (!(m_chan=BASS_MusicLoad(
-      TRUE, // mem ?
-      data.GetBuffer(), // start of song data 
+
+    if (isItFile)
+    {
+      if (!(m_chan = BASS_MusicLoad(
+        TRUE, // mem ?
+        data.GetBuffer(), // start of song data 
+        0, // offset
+        length, // length
+        BASS_SAMPLE_LOOP | BASS_MUSIC_SURROUND | BASS_MUSIC_PRESCAN, 
+        // BASS_MUSIC_PRESCAN is there so we can seek to a position.
+        // NB BASS_SAMPLE_LOOP is looping the song! Should be a param!
+        0)))  // sample rate - 0 => use default value
+      {
+        ReportBassError(songFile + " (in glue file)");
+        return false;
+      }
+    }
+    else
+    {
+      // .Ogg file
+      if (!(m_chan = BASS_StreamCreateFile(
+        TRUE, 
+        data.GetBuffer(), // start of song data 
+        0, // offset
+        length, // length
+        0))) // flags
+      {
+        ReportBassError(songFile + " (in glue file)");
+        return false;
+      }
+    }
+  }
+  else if (isItFile)
+  {
+    // BASS_MUSIC_PRESCAN is there so we can seek to a position.
+    if (!(m_chan = BASS_MusicLoad(
+      FALSE, // mem ?
+      (File::GetRoot() + songFile).c_str(), // file
       0, // offset
-      length, // length
+      0, // length
+      // NB BASS_SAMPLE_LOOP is looping the song! Should be a param!
       BASS_SAMPLE_LOOP | BASS_MUSIC_SURROUND | BASS_MUSIC_PRESCAN, 
       0)))  // sample rate - 0 => use default value
     {
-      std::string s = "BASS: Music: Can't play song from Glue file: "; 
-      s += songFile;
-      ReportError(s);
+      ReportBassError(songFile);
       return false;
     }
   }
   else
   {
-    // BASS_MUSIC_PRESCAN is there so we can seek to a position.
-    if (!(m_chan=BASS_MusicLoad(
-      FALSE, // mem ?
+    // .Ogg file
+    if (!(m_chan = BASS_StreamCreateFile(
+      FALSE, // file, not mem?
       (File::GetRoot() + songFile).c_str(), // file
       0, // offset
       0, // length
-      BASS_SAMPLE_LOOP | BASS_MUSIC_SURROUND | BASS_MUSIC_PRESCAN, 
-      0)))  // sample rate - 0 => use default value
+      0))) // flags
     {
-      std::string s = "BASS: Music: Can't play file: "; 
-      s += songFile;
-      int errCode = BASS_ErrorGetCode();
-      s += " Error code: ";
-      s += ToString(errCode);
-      ReportError(s);
+      ReportBassError(songFile);
       return false;
     }
   }
@@ -221,11 +264,10 @@ std::cout << "BASS: using glue file.\n";
 #if defined(MACOSX)|| defined(AMJU_IOS)
   // Set vol
   int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
-  //BASS_ChannelSetAttribute(m_chan, -1, vol, -1);
   BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, vol);
 #endif
 
-  BASS_ChannelPlay(m_chan,FALSE);
+  BASS_ChannelPlay(m_chan, FALSE);
   
 #ifdef USE_REVERB
   // Set some reverb..?
