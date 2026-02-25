@@ -23,6 +23,11 @@ public:
   void ResumeSong() override;
   void SetSongSeekPosition(float seconds) override;
 
+  // Preload song to reduce latency later on
+  bool Preload(const std::string& songFile) override;
+  // Clear preloaded songs when possible to reduce mem usage
+  void ClearPreloadedSongs() override;
+
   void Update() override;
   void SetSongMaxVolume(float) override;
 
@@ -31,7 +36,10 @@ public:
   bool MidiNoteOn(int note, int velocity) override;
   bool MidiNoteOff(int note) override;
 #endif // AMJU_USE_BASS_MIDI
-    
+   
+private:
+  unsigned int LoadSong(const std::string& songFile);
+ 
 private:
   std::string m_lastSongName;
 

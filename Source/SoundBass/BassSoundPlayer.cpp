@@ -21,8 +21,13 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 #include <File.h>
 #include <AmjuFinal.h>
 
+#define BASS_DEBUG
+
 namespace Amju
 {
+// For preloading: map song names to preloaded streams
+static std::map<const std::string, unsigned int> s_preloaded;
+
 void ReportError(const std::string&);
 
 static void ReportBassError(const std::string& filename)
@@ -39,7 +44,7 @@ BassSoundPlayer::BassSoundPlayer()
 {
   m_chan = (DWORD)-1; 
 
-  // check that BASS 2.3 was loaded
+  // check that expected version was loaded
   unsigned long ver = BASS_GetVersion();
 #ifdef BASS_DEBUG
 std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
@@ -61,8 +66,8 @@ std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
   // Default is 100ms. Lowering this to 10ms-20ms helps responsiveness.
   BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD, 20);
 
-  // setup output - default device
-  if (!BASS_Init(-1,44100,0,0,NULL))
+  // Setup output - default device
+  if (!BASS_Init(-1, 44100, 0, 0, NULL))
   {
     ReportError("BASS: Can't initialize device");
   }
@@ -165,44 +170,43 @@ std::cout << "Apparently played wav ok!\n";
   return true;
 }
 
-bool BassSoundPlayer::PlaySong(const std::string& songFile)
+unsigned int BassSoundPlayer::LoadSong(const std::string& songFile)
 {
-  // Play song even if song vol is currently zero - it may be turned up.
+  unsigned int res = 0;
 
-#ifdef _DEBUG
-std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
-#endif
   // If Glue File is set, use it to load song into memory.
   // Else use file.
 
+  // The Bass load function is different for some music file types.
   auto extension = GetFileExt(songFile);
+
   // Currently expecting song file to be a .it file, or a .ogg file.
   // .mod files are treated like .it files.
+  // .mp3, m4a files are treated like .oggs.
   bool isItFile = (extension == "it" || extension == "mod");
 
+  // Loading song from Glue file, or file system?
   if (GetGlueFile())
   {
 #ifdef _DEBUG
 std::cout << "BASS: using glue file.\n";
 #endif
-    // Find the start of the song in the glue file; and find the length
+    // Find the start of the song in the glue file, and find the length
     uint32 songPos = 0;
     if (!GetGlueFile()->GetSeekBase(songFile, &songPos))
     {
-      std::string s = "BASS: Music: not in Glue File: ";
-      s += songFile;
-      ReportError(s);
-      return false;
+      ReportError("BASS: Music: not in Glue File: " + songFile);
+      return 0;
     }
 
     // Use GlueFileBinaryData to get the data without copying it
     uint32 length = GetGlueFile()->GetSize(songFile);
     GlueFileBinaryData data = GetGlueFile()->GetBinary(songPos, length);
 
-    if (isItFile)
+    if (isItFile) // .it?
     {
-      if (!(m_chan = BASS_MusicLoad(
-        TRUE, // mem ?
+      if (!(res = BASS_MusicLoad(
+        TRUE, // in memory ?
         data.GetBuffer(), // start of song data 
         0, // offset
         length, // length
@@ -212,28 +216,26 @@ std::cout << "BASS: using glue file.\n";
         0)))  // sample rate - 0 => use default value
       {
         ReportBassError(songFile + " (in glue file)");
-        return false;
       }
     }
     else
     {
-      // .Ogg file
-      if (!(m_chan = BASS_StreamCreateFile(
-        TRUE, 
+      // .ogg file, in Glue file.
+      if (!(res = BASS_StreamCreateFile(
+        TRUE,  // in memory
         data.GetBuffer(), // start of song data 
         0, // offset
         length, // length
         0))) // flags
       {
         ReportBassError(songFile + " (in glue file)");
-        return false;
       }
     }
   }
   else if (isItFile)
   {
     // BASS_MUSIC_PRESCAN is there so we can seek to a position.
-    if (!(m_chan = BASS_MusicLoad(
+    if (!(res = BASS_MusicLoad(
       FALSE, // mem ?
       (File::GetRoot() + songFile).c_str(), // file
       0, // offset
@@ -243,13 +245,12 @@ std::cout << "BASS: using glue file.\n";
       0)))  // sample rate - 0 => use default value
     {
       ReportBassError(songFile);
-      return false;
     }
   }
   else
   {
     // .Ogg file
-    if (!(m_chan = BASS_StreamCreateFile(
+    if (!(res = BASS_StreamCreateFile(
       FALSE, // file, not mem?
       (File::GetRoot() + songFile).c_str(), // file
       0, // offset
@@ -257,13 +258,76 @@ std::cout << "BASS: using glue file.\n";
       0))) // flags
     {
       ReportBassError(songFile);
-      return false;
     }
+  }
+
+  return res;
+}
+
+bool BassSoundPlayer::Preload(const std::string& songFile)
+{
+std::cout << "Preloading " << songFile << "... ";
+
+  auto it = s_preloaded.find(songFile);
+  if (it != s_preloaded.end()) 
+  {
+std::cout << " already loaded!\n";
+    return true;
+  }
+
+std::cout << "\n";
+  auto stream = LoadSong(songFile);
+  if (stream == 0) 
+  {
+std::cout << "Preload failed :( \n";
+    return false;
+  }
+    
+  s_preloaded[songFile] = stream;
+std::cout << ".. preloaded ok!\n";
+  return true; 
+}
+
+void BassSoundPlayer::ClearPreloadedSongs()
+{
+  for (const auto& [name, stream] : s_preloaded)
+  {
+    BASS_StreamFree(stream);
+  }
+  s_preloaded.clear();
+}
+
+bool BassSoundPlayer::PlaySong(const std::string& songFile)
+{
+  // Stop old song, don't free the stream tho
+  StopSong();
+
+  // Play song even if song vol is currently zero - it may be turned up.
+
+#ifdef _DEBUG
+std::cout << "BASS: playing new song: " << songFile.c_str() << "\n";
+#endif
+
+  auto it = s_preloaded.find(songFile);
+  if (it == s_preloaded.end())
+  {
+std::cout << " ..not preloaded, loading now...\n";
+    m_chan = LoadSong(songFile);
+    if (m_chan != 0)
+    {
+      s_preloaded[songFile] = m_chan;
+    }
+  }
+  else
+  {
+std::cout << " ..song already preloaded!\n";
+    m_chan = it->second;
   }
 
 #if defined(MACOSX)|| defined(AMJU_IOS)
   // Set vol
-  int vol = (int)(TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
+  int vol = static_cast<int>
+    (TheSoundManager::Instance()->GetSongMaxVolume() * 100.0f);
   BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, vol);
 #endif
 
@@ -302,7 +366,13 @@ void BassSoundPlayer::StopSong()
 std::cout << "BASS: Stopping song on channel " << m_chan << "\n";
 #endif
   BASS_ChannelStop(m_chan);
-  
+
+  // Don't free the stream, we keep it in the preloaded pool.
+  //BASS_StreamFree(m_chan);
+
+  // But this is ok - should it be zero tho?
+  m_chan = -1;
+ 
   m_lastSongName.clear();
 }
 
@@ -355,13 +425,10 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 
   float newVol = f * 100.0f;
 
-#if defined(MACOSX)|| defined(AMJU_IOS) || defined(WIN32)
   BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, newVol);
-#else
-  BASS_SetVolume(newVol);
-#endif
 
 #ifdef AMJU_IOS
+  // TODO Is this necessary?
   if (newVol > 0 && !m_lastSongName.empty())
   {
     PlaySong(m_lastSongName);

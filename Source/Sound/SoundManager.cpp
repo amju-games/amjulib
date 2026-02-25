@@ -100,6 +100,26 @@ bool SoundManager::PlaySong(const std::string& songFile)
   return true;
 }
 
+bool SoundManager::Preload(const std::string& songFile)
+{
+  if (!m_pImpl)
+  {
+    return false;
+  }
+
+  return m_pImpl->Preload(songFile);
+}
+
+void SoundManager::ClearPreloadedSongs()
+{
+  if (!m_pImpl)
+  {
+    return;
+  }
+
+  return m_pImpl->ClearPreloadedSongs();
+}
+
 void SoundManager::StopSong()
 {
   if (!m_pImpl)

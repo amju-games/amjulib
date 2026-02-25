@@ -30,9 +30,14 @@ public:
   bool PlayWav(const std::string& wavFile, float volume = 1.0f);
 
   // Play a song file. Return immediately, with false if file can't be played.
-  // Song files are expected to be MOD/S3M etc format.
-  // MIDI is currently NOT supported.
+  // Song files are expected to be .it (or .mod) or .ogg format.
   bool PlaySong(const std::string& songFile);
+
+  // Preload song to reduce latency later on.
+  bool Preload(const std::string& songFile);
+
+  // Clear preloaded songs
+  void ClearPreloadedSongs();
 
   // Stop playing the current song. This should be ok to call if the file wasn't
   // being played anyway. 

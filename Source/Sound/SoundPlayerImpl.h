@@ -34,6 +34,12 @@ public:
   // MIDI is currently NOT supported.
   virtual bool PlaySong(const std::string& songFile) { return true; }
 
+  // Preload song to reduce latency later on.
+  virtual bool Preload(const std::string& songFile) { return true; }
+
+  // Clear pool of preloaded songs
+  virtual void ClearPreloadedSongs() {}
+
   // Stop playing the current song. This should be ok to call if the file wasn't
   // being played anyway. 
   virtual void StopSong() {}
