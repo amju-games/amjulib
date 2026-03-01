@@ -457,7 +457,6 @@
 		693D43B415AB7CE900B84D5C /* Pause.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42EC15AB7CE900B84D5C /* Pause.cpp */; };
 		693D43B515AB7CE900B84D5C /* Pause.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42ED15AB7CE900B84D5C /* Pause.h */; };
 		693D43B615AB7CE900B84D5C /* RCPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42EE15AB7CE900B84D5C /* RCPtr.h */; };
-		693D43B815AB7CE900B84D5C /* Sign.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42F015AB7CE900B84D5C /* Sign.cpp */; };
 		693D43B915AB7CE900B84D5C /* Sign.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42F115AB7CE900B84D5C /* Sign.h */; };
 		693D43BA15AB7CE900B84D5C /* Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 693D42F215AB7CE900B84D5C /* Singleton.h */; };
 		693D43BF15AB7CE900B84D5C /* Unproject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 693D42F815AB7CE900B84D5C /* Unproject.cpp */; };
@@ -551,6 +550,16 @@
 		71D22BFB1D65872200012DB8 /* AmjuHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22BF91D65872200012DB8 /* AmjuHash.cpp */; };
 		71D22BFC1D65872300012DB8 /* AmjuHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22BFA1D65872200012DB8 /* AmjuHash.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		C51421182F5357330009EB23 /* lodepng.h in Headers */ = {isa = PBXBuildFile; fileRef = C51421162F5357330009EB23 /* lodepng.h */; };
+		C51421192F5357330009EB23 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C51421172F5357330009EB23 /* lodepng.cpp */; };
+		C51421222F53576B0009EB23 /* ColourMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C514211A2F53576A0009EB23 /* ColourMode.cpp */; };
+		C51421232F53576B0009EB23 /* GuiDecChoose.h in Headers */ = {isa = PBXBuildFile; fileRef = C514211B2F53576B0009EB23 /* GuiDecChoose.h */; };
+		C51421242F53576B0009EB23 /* GuiDecColourPalette.h in Headers */ = {isa = PBXBuildFile; fileRef = C514211C2F53576B0009EB23 /* GuiDecColourPalette.h */; };
+		C51421252F53576B0009EB23 /* GuiDecAnimRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C514211D2F53576B0009EB23 /* GuiDecAnimRandom.cpp */; };
+		C51421262F53576B0009EB23 /* GuiDecAnimRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = C514211E2F53576B0009EB23 /* GuiDecAnimRandom.h */; };
+		C51421272F53576B0009EB23 /* GuiDecChoose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C514211F2F53576B0009EB23 /* GuiDecChoose.cpp */; };
+		C51421282F53576B0009EB23 /* GuiDecColourPalette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C51421202F53576B0009EB23 /* GuiDecColourPalette.cpp */; };
+		C51421292F53576B0009EB23 /* ColourMode.h in Headers */ = {isa = PBXBuildFile; fileRef = C51421212F53576B0009EB23 /* ColourMode.h */; };
 		C56DAD1F2EF2D06E00739D75 /* GuiProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = C56DAD0F2EF2D06D00739D75 /* GuiProperty.h */; };
 		C56DAD202EF2D06E00739D75 /* GuiSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C56DAD102EF2D06D00739D75 /* GuiSpline.cpp */; };
 		C56DAD212EF2D06E00739D75 /* GuiPropertyHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = C56DAD112EF2D06D00739D75 /* GuiPropertyHelpers.h */; };
@@ -1040,7 +1049,6 @@
 		693D42EC15AB7CE900B84D5C /* Pause.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pause.cpp; sourceTree = "<group>"; };
 		693D42ED15AB7CE900B84D5C /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pause.h; sourceTree = "<group>"; };
 		693D42EE15AB7CE900B84D5C /* RCPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPtr.h; sourceTree = "<group>"; };
-		693D42F015AB7CE900B84D5C /* Sign.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sign.cpp; sourceTree = "<group>"; };
 		693D42F115AB7CE900B84D5C /* Sign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign.h; sourceTree = "<group>"; };
 		693D42F215AB7CE900B84D5C /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		693D42F815AB7CE900B84D5C /* Unproject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Unproject.cpp; sourceTree = "<group>"; };
@@ -1134,6 +1142,16 @@
 		71D22BF91D65872200012DB8 /* AmjuHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmjuHash.cpp; sourceTree = "<group>"; };
 		71D22BFA1D65872200012DB8 /* AmjuHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuHash.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C51421162F5357330009EB23 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
+		C51421172F5357330009EB23 /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
+		C514211A2F53576A0009EB23 /* ColourMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColourMode.cpp; sourceTree = "<group>"; };
+		C514211B2F53576B0009EB23 /* GuiDecChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecChoose.h; sourceTree = "<group>"; };
+		C514211C2F53576B0009EB23 /* GuiDecColourPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecColourPalette.h; sourceTree = "<group>"; };
+		C514211D2F53576B0009EB23 /* GuiDecAnimRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecAnimRandom.cpp; sourceTree = "<group>"; };
+		C514211E2F53576B0009EB23 /* GuiDecAnimRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiDecAnimRandom.h; sourceTree = "<group>"; };
+		C514211F2F53576B0009EB23 /* GuiDecChoose.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecChoose.cpp; sourceTree = "<group>"; };
+		C51421202F53576B0009EB23 /* GuiDecColourPalette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiDecColourPalette.cpp; sourceTree = "<group>"; };
+		C51421212F53576B0009EB23 /* ColourMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourMode.h; sourceTree = "<group>"; };
 		C56DAD0F2EF2D06D00739D75 /* GuiProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiProperty.h; sourceTree = "<group>"; };
 		C56DAD102EF2D06D00739D75 /* GuiSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiSpline.cpp; sourceTree = "<group>"; };
 		C56DAD112EF2D06D00739D75 /* GuiPropertyHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiPropertyHelpers.h; sourceTree = "<group>"; };
@@ -1641,6 +1659,14 @@
 		693D41B015AB7C9100B84D5C /* Gui */ = {
 			isa = PBXGroup;
 			children = (
+				C514211A2F53576A0009EB23 /* ColourMode.cpp */,
+				C51421212F53576B0009EB23 /* ColourMode.h */,
+				C514211D2F53576B0009EB23 /* GuiDecAnimRandom.cpp */,
+				C514211E2F53576B0009EB23 /* GuiDecAnimRandom.h */,
+				C514211F2F53576B0009EB23 /* GuiDecChoose.cpp */,
+				C514211B2F53576B0009EB23 /* GuiDecChoose.h */,
+				C51421202F53576B0009EB23 /* GuiDecColourPalette.cpp */,
+				C514211C2F53576B0009EB23 /* GuiDecColourPalette.h */,
 				C56DAD132EF2D06D00739D75 /* GuiDecorator.cpp */,
 				C56DAD122EF2D06D00739D75 /* GuiEdit.cpp */,
 				C56DAD1B2EF2D06D00739D75 /* GuiEdit.h */,
@@ -1738,6 +1764,8 @@
 		693D41F215AB7CA700B84D5C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				C51421172F5357330009EB23 /* lodepng.cpp */,
+				C51421162F5357330009EB23 /* lodepng.h */,
 				690AD482191FEB4F008EFC78 /* LoadPng.cpp */,
 				690AD483191FEB4F008EFC78 /* LoadPng.h */,
 				690AD484191FEB4F008EFC78 /* SavePng.cpp */,
@@ -2040,7 +2068,6 @@
 				693D42EC15AB7CE900B84D5C /* Pause.cpp */,
 				693D42ED15AB7CE900B84D5C /* Pause.h */,
 				693D42EE15AB7CE900B84D5C /* RCPtr.h */,
-				693D42F015AB7CE900B84D5C /* Sign.cpp */,
 				693D42F115AB7CE900B84D5C /* Sign.h */,
 				693D42F215AB7CE900B84D5C /* Singleton.h */,
 				693D42F815AB7CE900B84D5C /* Unproject.cpp */,
@@ -2146,6 +2173,7 @@
 				71D22B6F1D4F38B300012DB8 /* CubemapOpenGL.h in Headers */,
 				693D40CB15AB7A5600B84D5C /* BinaryData.h in Headers */,
 				693D40CD15AB7A5600B84D5C /* ConfigFile.h in Headers */,
+				C51421182F5357330009EB23 /* lodepng.h in Headers */,
 				693D40CF15AB7A5600B84D5C /* CsvTokeniser.h in Headers */,
 				693D40D115AB7A5600B84D5C /* Directory.h in Headers */,
 				693D40D315AB7A5600B84D5C /* Endian.h in Headers */,
@@ -2214,6 +2242,7 @@
 				693D417D15AB7C5300B84D5C /* Quaternion.h in Headers */,
 				693D417F15AB7C5300B84D5C /* Rect.h in Headers */,
 				693D418115AB7C5300B84D5C /* Sphere.h in Headers */,
+				C51421262F53576B0009EB23 /* GuiDecAnimRandom.h in Headers */,
 				C5CC4DB72EF1C247007C4508 /* MT19937.h in Headers */,
 				693D418315AB7C5300B84D5C /* Tri.h in Headers */,
 				690C45221885C740007A505D /* lualib.h in Headers */,
@@ -2251,6 +2280,7 @@
 				693D41E515AB7C9100B84D5C /* GuiKeyboard.h in Headers */,
 				693D41E715AB7C9100B84D5C /* GuiListBox.h in Headers */,
 				693D41E915AB7C9100B84D5C /* GuiMenu.h in Headers */,
+				C51421232F53576B0009EB23 /* GuiDecChoose.h in Headers */,
 				697F5AEA195727270020A72E /* ShadowMapES2.h in Headers */,
 				693D41EB15AB7C9100B84D5C /* GuiRect.h in Headers */,
 				690C45201885C740007A505D /* lua.hpp in Headers */,
@@ -2390,7 +2420,9 @@
 				71D22B7B1D4F38E100012DB8 /* GuiCheck.h in Headers */,
 				69FEF54F1826827900D83578 /* ROConfig.h in Headers */,
 				69112FFC1840BF8100763639 /* GameStateListener.h in Headers */,
+				C51421292F53576B0009EB23 /* ColourMode.h in Headers */,
 				71D22B7D1D4F38E100012DB8 /* GuiScrollBar.h in Headers */,
+				C51421242F53576B0009EB23 /* GuiDecColourPalette.h in Headers */,
 				690AD489191FEB4F008EFC78 /* SavePng.h in Headers */,
 				690483DC199B38CE00420BCB /* Camera.h in Headers */,
 			);
@@ -2506,6 +2538,7 @@
 				693D414B15AB7C5300B84D5C /* Capsule.cpp in Sources */,
 				692F34C0197A838C0040C9C3 /* FullScreenPostProcess.cpp in Sources */,
 				693D414D15AB7C5300B84D5C /* ClipLineSegBox.cpp in Sources */,
+				C51421282F53576B0009EB23 /* GuiDecColourPalette.cpp in Sources */,
 				693D414F15AB7C5300B84D5C /* Frustum.cpp in Sources */,
 				693D415115AB7C5300B84D5C /* Geometry.cpp in Sources */,
 				C56DAD222EF2D06E00739D75 /* GuiEdit.cpp in Sources */,
@@ -2632,6 +2665,7 @@
 				693D434215AB7CE900B84D5C /* AlphaBmpLoader.cpp in Sources */,
 				693D434415AB7CE900B84D5C /* BinaryResource.cpp in Sources */,
 				693D434615AB7CE900B84D5C /* ResourceManager.cpp in Sources */,
+				C51421252F53576B0009EB23 /* GuiDecAnimRandom.cpp in Sources */,
 				6901A09718869D3F00D98C04 /* IntAABBCapsule.cpp in Sources */,
 				693D434815AB7CE900B84D5C /* Billboard.cpp in Sources */,
 				693D434E15AB7CE900B84D5C /* SceneGraph.cpp in Sources */,
@@ -2659,6 +2693,7 @@
 				693D437715AB7CE900B84D5C /* Mutex.cpp in Sources */,
 				690C44F91885C740007A505D /* lctype.c in Sources */,
 				693D437915AB7CE900B84D5C /* Thread.cpp in Sources */,
+				C51421222F53576B0009EB23 /* ColourMode.cpp in Sources */,
 				690C44FB1885C740007A505D /* ldblib.c in Sources */,
 				693D437B15AB7CE900B84D5C /* ThreadGate.cpp in Sources */,
 				693D437D15AB7CE900B84D5C /* ThreadManager.cpp in Sources */,
@@ -2674,7 +2709,6 @@
 				693D439315AB7CE900B84D5C /* Launcher.cpp in Sources */,
 				6966CC91198F6BB2005992E5 /* RenderToTextureOpenGL.cpp in Sources */,
 				693D43B415AB7CE900B84D5C /* Pause.cpp in Sources */,
-				693D43B815AB7CE900B84D5C /* Sign.cpp in Sources */,
 				693D43BF15AB7CE900B84D5C /* Unproject.cpp in Sources */,
 				693D43C115AB7CE900B84D5C /* Variable.cpp in Sources */,
 				693D43C415AB7CE900B84D5C /* XmlNodeInterface.cpp in Sources */,
@@ -2688,6 +2722,7 @@
 				71D22B701D4F38B300012DB8 /* DofOpenGL.cpp in Sources */,
 				693D43CD15AB7CE900B84D5C /* crc32.c in Sources */,
 				693D43CF15AB7CE900B84D5C /* deflate.c in Sources */,
+				C51421192F5357330009EB23 /* lodepng.cpp in Sources */,
 				693D43D215AB7CE900B84D5C /* gzio.c in Sources */,
 				693D43D315AB7CE900B84D5C /* infback.c in Sources */,
 				693D43D415AB7CE900B84D5C /* inffast.c in Sources */,
@@ -2703,6 +2738,7 @@
 				690C450E1885C740007A505D /* lobject.c in Sources */,
 				C5CC4DBB2EF1C247007C4508 /* AmjuClipboard.cpp in Sources */,
 				69056701172094AF008A0C92 /* GuiFileDialog.cpp in Sources */,
+				C51421272F53576B0009EB23 /* GuiDecChoose.cpp in Sources */,
 				69056703172094AF008A0C92 /* GuiFileListBox.cpp in Sources */,
 				69056705172094AF008A0C92 /* GuiObjView.cpp in Sources */,
 				69056707172094AF008A0C92 /* GuiScroll.cpp in Sources */,
