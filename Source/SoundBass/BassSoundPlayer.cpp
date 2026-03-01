@@ -64,7 +64,7 @@ std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
 
   // Reduce the update period (how often BASS checks if the buffer needs more data)
   // Default is 100ms. Lowering this to 10ms-20ms helps responsiveness.
-  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD, 20);
+  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD, 10);
 
   // Setup output - default device
   if (!BASS_Init(-1, 44100, 0, 0, NULL))
@@ -408,6 +408,19 @@ void BassSoundPlayer::SetSongSeekPosition(float seconds)
 
   // Set the position
   BASS_ChannelSetPosition(m_chan, bytes, BASS_POS_BYTE);
+}
+
+float BassSoundPlayer::GetSongElapsedTimeSeconds() const
+{
+  if (m_chan == (unsigned int)-1) return 0.f;
+  
+  // Get the current position in bytes
+  QWORD bytePos = BASS_ChannelGetPosition(m_chan, BASS_POS_BYTE);
+
+  // Convert bytes to seconds
+  double currentSeconds = BASS_ChannelBytes2Seconds(m_chan, bytePos);
+
+  return static_cast<float>(currentSeconds);
 }
 
 void BassSoundPlayer::Update()

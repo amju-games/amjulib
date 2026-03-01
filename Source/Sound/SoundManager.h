@@ -53,6 +53,9 @@ public:
   // So it's possible to e.g. pause, seek, and resume from an earlier point.
   void SetSongSeekPosition(float seconds);
 
+  // Get the elapsed time (seconds) for the currently playing song.
+  float GetSongElapsedTimeSeconds() const;
+
   // Call this every time round the game loop. This is so we can tell the
   // Engine when a sound has finished: it allows us to call the 
   // Callback by polling if we are unable to do it any other way.

@@ -155,6 +155,16 @@ void SoundManager::SetSongSeekPosition(float seconds)
   }
 }
 
+float SoundManager::GetSongElapsedTimeSeconds() const 
+{ 
+  if (!m_pImpl)
+  {
+    return 0.f;
+  }
+
+  return m_pImpl->GetSongElapsedTimeSeconds();
+}
+
 void SoundManager::Update()
 {
   if (!m_pImpl)

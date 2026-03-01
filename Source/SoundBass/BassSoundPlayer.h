@@ -22,6 +22,7 @@ public:
   void PauseSong() override;
   void ResumeSong() override;
   void SetSongSeekPosition(float seconds) override;
+  float GetSongElapsedTimeSeconds() const override;
 
   // Preload song to reduce latency later on
   bool Preload(const std::string& songFile) override;
