@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <optional>
 #include "GuiDecColour.h"
 
 namespace Amju
@@ -29,5 +30,10 @@ protected:
   std::vector<Colour> m_palette;
   std::string m_paletteFilename; // image filename for saving.
 };
+
+// Returns a vector colours, sampled from image file.
+// Returns std::nullopt if load fails.
+std::optional<std::vector<Colour>> ImageToColourVec(const std::string& imageFilename);
+
 }
 

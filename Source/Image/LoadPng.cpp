@@ -50,7 +50,7 @@ bool LoadPng(
   else
   {
     // Non-gluefile
-    nError = lodepng::decode(data, w, h, filename);
+    nError = lodepng::decode(data, w, h, File::GetRoot() + filename);
   }
 
   if (nError != 0)

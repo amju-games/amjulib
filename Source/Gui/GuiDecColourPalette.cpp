@@ -6,6 +6,8 @@
 
 namespace Amju
 {
+void ReportError(const std::string& str);
+
 const char* GuiDecColourPalette::NAME = "colour-palette";
 
 static Colour FromBytes(unsigned char* bytes)
@@ -47,31 +49,40 @@ bool GuiDecColourPalette::Load(File* f)
 
   m_paletteFilename = strs[0];
 
-  // Load the texture and convert its colours along the top row
+  auto optPalette = ImageToColourVec(m_paletteFilename);
+  if (!optPalette) return false;
+
+  m_palette = *optPalette;
+
+  return GuiDecorator::LoadOneChild(f);
+}
+
+std::optional<std::vector<Colour>> ImageToColourVec(const std::string& imageFilename)
+{
+  // Load image and convert its colours along the top row
   //  into a vector.
   int w = 0;
   int h = 0;
   std::vector<unsigned char> data;
-  if (!LoadPng(m_paletteFilename, data, w, h))
+  if (!LoadPng(imageFilename, data, w, h))
   {
-    f->ReportError("Failed to load palette: " + m_paletteFilename);
-    return false;
+    ReportError("Failed to load palette: " + imageFilename);
+    return std::nullopt;
   }
   if (w == 0 || h == 0)
   {
-    f->ReportError("Bad image size? " + m_paletteFilename);
-    return false;
+    ReportError("Bad image size? " + imageFilename);
+    return std::nullopt;
   }
   if (h > 1)
   {
-    f->ReportError("Only 0th row will be sampled: " + m_paletteFilename);
+    ReportError("Only 0th row will be sampled: " + imageFilename);
+    // not a fatal error
   }
   auto end = data.begin();
   std::advance(end, w * 4);
   // Convert range of raw RGBA bytes to vec of Colours
-  m_palette = RgbaToColourVec(data.begin(), end);
-
-  return GuiDecorator::LoadOneChild(f);
+  return RgbaToColourVec(data.begin(), end);
 }
 
 bool GuiDecColourPalette::Save(File* f)
