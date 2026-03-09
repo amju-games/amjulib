@@ -21,7 +21,7 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 #include <File.h>
 #include <AmjuFinal.h>
 
-#define BASS_DEBUG
+//#define BASS_DEBUG
 
 namespace Amju
 {
