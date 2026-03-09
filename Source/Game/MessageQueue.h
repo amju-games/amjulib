@@ -73,7 +73,7 @@ public:
 
 protected:
   // Priority queue: could be implemented as a Heap, Set, std::priority_queue...
-  typedef std::set<PMessage> Queue;
+  typedef std::multiset<PMessage> Queue;
   Queue m_q;
   
   // Current time
