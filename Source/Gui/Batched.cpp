@@ -1,6 +1,7 @@
 // Amjulib - cross platform game engine
-// (c) Copyright Juliet Colman 2000-2018
+// (c) Copyright Juliet Colman 2000-2026
 
+#include <AmjuHash.h>
 #include <Texture.h>
 #include <TriList.h>
 #include "Batched.h"
@@ -13,10 +14,20 @@ Batched::~Batched()
 {
 }
 
+int Batched::GetTexHash()
+{
+  if (m_texHash == 0)
+  {
+    m_texHash = HashString(GetTexture()->GetResName());
+  }
+  return m_texHash;
+}
+
 void Batched::AddToBatch()
 {
-  auto& vec = s_atlases[m_texHash];
-  // Only add once! Could happen when reloading.
+  auto& vec = s_atlases[GetTexHash()];
+  // Only add once! E.g. on successful load. Calling in Draw() is really
+  //  inefficient.
   if (std::find(vec.begin(), vec.end(), this) == vec.end())
   {
     vec.push_back(this);

@@ -4,8 +4,8 @@
 #include <AmjuHash.h>
 #include <Lerp.h>
 #include <LoadVec2.h>
-#include <GuiSprite.h>
 #include <StringUtils.h>
+#include "GuiSprite.h"
 
 namespace Amju
 {
@@ -18,9 +18,6 @@ Texture* GuiSprite::GetTexture()
 
 void GuiSprite::Draw()
 {
-  // Add to batch of stuff to draw
-  AddToBatch();
-
   // Store current state of transform and colour, which we use later when
   //  we draw the batch of all tris using the current texture.
   // TODO At some point, we will need to store other stuff, e.g. current shader.
@@ -145,10 +142,6 @@ bool GuiSprite::Load(File* f)
   // TODO TEMP TEST - does this make any difference when image is mipmapped?
   m_texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
 
-  // Hash the texture resource name, so we can group all sprites using the same
-  //  texture.
-  m_texHash = HashString(m_texture->GetResName());
-
   // Get sprite sheet layout info
   if (!LoadVec2(f, &m_numCellsXY))
   {
@@ -175,6 +168,11 @@ bool GuiSprite::Load(File* f)
   {
     m_maxCell = ToInt(strs[1]);
   }
+
+  // This type is batched: all elements of this type are drawn in one
+  //  big tri list. 
+  // This call adds this object to the list of elements which are batched.
+  AddToBatch();
 
   return true;
 }

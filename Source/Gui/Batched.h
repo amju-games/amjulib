@@ -28,7 +28,8 @@ public:
 
 protected:
   // Add to map of elements to batch draw
-  void AddToBatch(); // call in Draw() override
+  void AddToBatch(); // call in Load() just before return true at the end.
+    // Can call in Draw() but then we search for it every frame. 
 
   // In draw call, don't actually draw, but set up matrix, colour, etc.
   // Then when we call AddToTrilist(), add all the tris making up this
@@ -37,6 +38,9 @@ protected:
   virtual void AddToTrilist(AmjuGL::Tris& tris) = 0;
 
   virtual Texture* GetTexture() = 0;
+
+private:
+  int GetTexHash(); // used in AddToBatch only
 
 protected:
   // Map hash of image filename to all elements using that image.
@@ -55,7 +59,9 @@ protected:
   Matrix m_combinedTransform; // combined modelview transform
   Colour m_combinedColour;
 
+private:
   // Hash of texture atlas filename. 
+  // Used in GetTexHash only.
   unsigned int m_texHash = 0;
 };
 
