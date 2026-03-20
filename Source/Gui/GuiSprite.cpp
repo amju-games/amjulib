@@ -18,6 +18,8 @@ Texture* GuiSprite::GetTexture()
 
 void GuiSprite::Draw()
 {
+  AddToBatch();
+
   // Store current state of transform and colour, which we use later when
   //  we draw the batch of all tris using the current texture.
   // TODO At some point, we will need to store other stuff, e.g. current shader.
@@ -172,7 +174,7 @@ bool GuiSprite::Load(File* f)
   // This type is batched: all elements of this type are drawn in one
   //  big tri list. 
   // This call adds this object to the list of elements which are batched.
-  AddToBatch();
+//  AddToBatch();
 
   return true;
 }

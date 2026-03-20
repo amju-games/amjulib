@@ -61,9 +61,9 @@ void Batched::DrawAll()
     textures[i] = vec[0]->GetTexture(); // get the texture used by all elements in this vec
 
     // Add the tris for each element to the current tri list batch
-    for (Batched* sprite : vec)
+    for (Batched* batched : vec)
     {
-      sprite->AddToTrilist(tris[i]);
+      batched->AddToTrilist(tris[i]);
     }
     i++;
   }
@@ -92,6 +92,9 @@ void Batched::DrawAll()
     triLists[i]->Draw();
   }
 
+  // Oh no: while we do this, we have to call AddToBatch every frame, for every batched
+  //  GUI element. Much better to call once for each element, e.g. on successful load,
+  //  but then we will need to be careful to clear this map when we reload the GUI.
   s_atlases.clear();
 }
 
