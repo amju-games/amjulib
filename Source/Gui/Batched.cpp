@@ -28,10 +28,20 @@ void Batched::AddToBatch()
   auto& vec = s_atlases[GetTexHash()];
   // Only add once! E.g. on successful load. Calling in Draw() is really
   //  inefficient.
-  if (std::find(vec.begin(), vec.end(), this) == vec.end())
+  // Assuming we only add each element once before trashing the vec, we can
+  //  just check in debug mode, and not check in release mode:
+#ifdef _DEBUG
+  if (std::find(vec.begin(), vec.end(), this) != vec.end())
   {
-    vec.push_back(this);
+    // This means the same batched gui element is being added more than once.
+    // E.g. it is added in Load and in Draw? Currently we call AddToBatch in
+    //  Draw(), then clear the vector after drawing the batch.
+    Assert(0);
   }
+#endif // _DEBUG
+
+  // No existing copy in the vec, so add it.
+  vec.push_back(this);
 }
 
 void Batched::DrawAll()
