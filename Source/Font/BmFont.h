@@ -25,6 +25,8 @@ public:
 
   float GetCharWidth(int element) const;
 
+  void SetGlyphFatness(float fatness) { m_glyphFatness = fatness; }
+
   struct BmChar
   {
     enum class Channel
@@ -71,6 +73,9 @@ protected:
 private:
   // We expect a sparse array for, e.g. Chinese characters.
   std::unordered_map<int, BmChar> m_elements;
+
+  // Adjust x-scale of characters to look good.
+  float m_glyphFatness = 1.f;
 };
 
 // * BmFont *

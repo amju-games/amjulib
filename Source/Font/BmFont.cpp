@@ -27,8 +27,6 @@ namespace
 
 const float SCALE = 0.004f; // Hopefully not related to font size, but might be
 
-const float GLYPH_FATNESS = 1.5f; // not related to particular font or size, right?
-
 int ParseCharCountLine(const Strings& strs)
 {
   // Found count line
@@ -101,7 +99,7 @@ bool ParseCharLine(
     }
     else if (strs2[0] == "xadvance")
     {
-      bmc.xadvance = ToFloat(strs2[1]);
+      bmc.xadvance = ToFloat(strs2[1]) / texW;
     }
   }
   
@@ -282,7 +280,7 @@ void BmFontTextureSequence::GetElementInAtlas(
   //  where the base line is, from top to bottom of glyph, or something like that.
   const float Y_OFFSET = 1.005f;
 
-  w = bmc.w * SCALE * GLYPH_FATNESS;
+  w = bmc.w * SCALE * m_glyphFatness;
   h = bmc.h * SCALE;
   x = bmc.x * SCALE + X_OFFSET;
   y = Y_OFFSET -h - bmc.y * SCALE;
@@ -302,7 +300,7 @@ float BmFontTextureSequence::GetCharWidth(int element) const
     return 0;
   }
   const BmChar& bmc = it->second;
-  float w = bmc.w * SCALE * GLYPH_FATNESS;
+  float w = bmc.xadvance * m_glyphFatness;
   return w;
 }
 
@@ -336,8 +334,8 @@ bool BmFont::Load(File* f)
 float BmFont::GetCharacterWidth(int c)
 {
   BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
-  float w = bm->GetCharWidth(c);
-  w *= .25f; // TODO TEMP TEST: does this depend on texture width?
+  float w = bm->GetCharWidth(c) * m_size;
+  w *= .74f; // Squish up glyphs a bit
   return w;
 }
 
