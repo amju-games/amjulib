@@ -43,24 +43,10 @@ public:
   float GetTextWidth(const std::string& stringUtf8);
 
   // Use this to make a TriList when text changes.
-  // Use this in preference to Print*()
   TriList* MakeTriList(float x, float y, const std::string& textUtf8, float scaleX);
   
   void BindTexture();
  
-private:
-  // Deprecated
- 
-  // Draw the text on the window. 
-  // (x, y) coords are -1..1
-  // TODO Why char*, why not string
-  //void Print(float x, float y, const char* textUtf8, float scaleX = 1.0f);
-
-  //// Draw text in world space as a series of billboards.
-  //// The billboards can always be standing up, or facing the camera.
-  //void PrintWorld(const Vec3f& v, 
-  //  float size, const char* text, bool up = false, bool depthTest = false);
-
 protected:
   std::string m_name;
   RCPtr<TextureSequence> m_textureSequence;
@@ -71,6 +57,7 @@ protected:
   // The first character in the texture sequence - usually 0 for a 256-
   //  character font, or 32 if the font starts at space.
   int m_startChar = 0;
+  float m_yOffset = 0; // position adjustment in y so BM font matches grid based font
 };
 
 typedef RCPtr<Font> PFont;

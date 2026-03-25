@@ -277,7 +277,7 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text <
   m_textureSequence->SetSize(oldSizeX * scaleX, sizeY);  // TODO TEMP TEST
   
   float xOff = x;
-  float yOff = y;
+  float yOff = y + m_yOffset;
 
   WString wstring = Utf8ToWString(utf8Text);
 

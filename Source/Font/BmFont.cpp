@@ -325,9 +325,17 @@ bool BmFont::Load(File* f)
   m_textureSequence = bm;
   if (!bm->LoadBmFont(bmfontFilename))
   {
-    f->ReportError("Failed to load bmfont file");
+    f->ReportError("Failed to load bmfont file.");
     return false;
   }
+
+  // Get Y-offset to match olde grid-based font
+  if (!f->GetFloat(&m_yOffset))
+  {
+    f->ReportError("Expected y offset for BM font.");
+    return false;
+  }
+
   return true;
 }
 
@@ -335,8 +343,8 @@ float BmFont::GetCharacterWidth(int c)
 {
   BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
   float w = bm->GetCharWidth(c) * m_size;
-  w *= .74f; // Squish up glyphs a bit
+  const float BMFONT_SQUISH = .75f; // Squish up glyphs a bit
+  w *= BMFONT_SQUISH;
   return w;
 }
-
 }
