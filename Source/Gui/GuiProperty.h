@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <unordered_map>
+#include <Vec3.h>
 
 namespace Amju
 {
@@ -27,6 +28,12 @@ template<typename T>
 std::string MakeProperty(const T& t)
 {
   return std::to_string(t);
+}
+
+template<typename T>
+std::string MakeProperty(const Vec3<T>& v)
+{
+  return ToString(v);
 }
 
 // Convenience function: make property to store in a GuiPropertyMap

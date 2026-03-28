@@ -23,10 +23,10 @@ public:
   static void SetElasticVel(float vel);
   
 protected:
-  Vec2f m_offsetPos; // localpos starts here, moves to (0, 0)
-  Vec2f m_acc;
-  Vec2f m_vel;
-  Vec2f m_origVel;
+  Vec3f m_offsetPos; // localpos starts here, moves to (0, 0)
+  Vec3f m_acc;
+  Vec3f m_vel;
+  Vec3f m_origVel;
   int m_bounceX, m_bounceY;
   static float s_elasticVel;
 };

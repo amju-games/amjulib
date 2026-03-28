@@ -1,5 +1,6 @@
-// * Amjulib * Copyright (c) Juliet Colman 2024
+// * Amjulib * Copyright (c) Juliet Colman 2026
 
+#include <LoadVec3.h>
 #include "GuiPropertyHelpers.h"
 
 namespace Amju
@@ -34,4 +35,14 @@ Vec2f GetVec2(const GuiPropertyMap& map, const std::string& name)
   return v;
 }
 
+Vec3f GetVec3(const GuiPropertyMap& map, const std::string& name)
+{
+  const std::string& value = map.at(name);
+  Vec3f v;
+  if (!ToVec3(value, &v))
+  {
+    Assert(false);
+  }
+  return v;
+}
 }

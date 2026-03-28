@@ -1,5 +1,5 @@
 // Amjulib - cross platform game engine
-// (c) Copyright Juliet Colman 2000-2017
+// (c) Copyright Juliet Colman 2000-2026
 
 #pragma once
 
@@ -12,6 +12,7 @@
 #include "GuiProperty.h"
 #include <Rect.h>
 #include <Vec2.h>
+#include <Vec3.h>
 
 namespace Amju
 {
@@ -76,6 +77,7 @@ public:
   virtual void ExecuteCommand();
 
   void SetLocalPos(const Vec2f&);
+  void SetLocalPos(const Vec3f&);
   Vec2f GetLocalPos() const;
   Vec2f GetCombinedPos() const;
 
@@ -157,7 +159,8 @@ protected:
               |              |
      (-1, -1) +--------------+ (1, -1)
   */
-  Vec2f m_localpos;
+  // Vec3!! z-coord is used for z-ordering batched elements.
+  Vec3f m_localpos;
 
   // Used for width and height of rectangular elements, e.g. Images.
   Vec2f m_size;

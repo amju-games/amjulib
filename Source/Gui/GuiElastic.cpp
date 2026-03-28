@@ -1,6 +1,6 @@
 #include <Timer.h>
 #include <Sign.h>
-#include <LoadVec2.h>
+#include <LoadVec3.h>
 #include "GuiElastic.h"
 
 namespace Amju
@@ -35,7 +35,7 @@ bool GuiElastic::Save(File* f)
 bool GuiElastic::Load(File* f)
 {
   // Load pos offset, which is reduced to (0, 0);
-  if (!LoadVec2(f, &m_localpos))
+  if (!LoadPos(f))
   {
     f->ReportError("Expected elastic offset");
     return false;

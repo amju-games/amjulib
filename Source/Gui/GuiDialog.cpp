@@ -120,7 +120,7 @@ bool GuiDialog::Load(File* f)
   //{
   //  return false;
   //}
-  if (!LoadVec2(&f2, &m_localpos))
+  if (!LoadPos(&f2))
   {
     Assert(0);
     return false;

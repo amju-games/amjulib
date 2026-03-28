@@ -10,6 +10,7 @@
 #include <GuiFactory.h>
 #include "GuiPropertyHelpers.h"
 #include <LoadVec2.h>
+#include <LoadVec3.h>
 #include <Screen.h>
 #include <StringUtils.h>
 #include <AmjuFinal.h>
@@ -73,7 +74,7 @@ GuiPropertyMap GuiElement::GetProperties() const
 void GuiElement::SetProperties(const GuiPropertyMap& properties)
 {
   m_name = Get<std::string>(properties, "name"); 
-  m_localpos = Amju::GetVec2(properties, "localpos");
+  m_localpos = Amju::GetVec3(properties, "localpos");
   m_size = Amju::GetVec2(properties, "size");
 }
 
@@ -284,14 +285,14 @@ bool GuiElement::Save(File* f)
 
 bool GuiElement::LoadPos(File* f)
 {
-  Vec2f pos;
-  if (!LoadVec2(f, &pos))
+  // Position is a vec2, or, optionally, a vec3.
+  // Z defaults to 0.
+  if (!LoadVec3OptionalZ(f, &m_localpos))
   {
-    f->ReportError("Gui element: failed to load pos");
-    Assert(0);
+    f->ReportError("Expected position line.");
     return false;
   }
-  SetLocalPos(pos);
+
   return true;
 }
 
@@ -377,14 +378,19 @@ GuiElement* GuiElement::GetElementByName(const std::string& name)
   return 0;
 }
 
-void GuiElement::SetLocalPos(const Vec2f& v)
+void GuiElement::SetLocalPos(const Vec3f& v)
 {
   m_localpos = v;
 }
 
+void GuiElement::SetLocalPos(const Vec2f& v)
+{
+  m_localpos = Vec3f(v.x, v.y, 0);
+}
+
 Vec2f GuiElement::GetLocalPos() const
 {
-  return m_localpos * GetGlobalScale();
+  return Vec2f(m_localpos.x, m_localpos.y) * GetGlobalScale();
 }
 
 Vec2f GuiElement::GetCombinedPos() const

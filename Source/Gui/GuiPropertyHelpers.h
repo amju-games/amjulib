@@ -12,6 +12,9 @@ namespace Amju
 // Convenience function: get value of the named Vec2f property in the given map
 Vec2f GetVec2(const GuiPropertyMap& map, const std::string& name);
 
+// Same for Vec3
+Vec3f GetVec3(const GuiPropertyMap& map, const std::string& name);
+
 // Convenience function: get value of the named Colour property in the given map
 Colour GetColour(const GuiPropertyMap& map, const std::string& name);
 

@@ -6,6 +6,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004-2009
 #define STRING_UTILS_H_INCLUDED
 
 #include <algorithm>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -84,11 +85,26 @@ bool StringContains(const std::string& container, const std::string& substr);
 typedef std::vector<std::string> Strings;
 Strings Split(const std::string& text, char split_char);
 
+// Like Split, but splits a string into a vector of T.
+// So Split is the same as SplitIntoVec<std::string>, but more efficient.
+template <typename T = int>
+std::vector<T> SplitIntoVec(const std::string& str, char splitChar = ',')
+{
+  const auto strs = Split(str, splitChar);
+  std::vector<T> res;
+  for (const auto& s : strs)
+  {
+    std::istringstream is(s);
+    T t;
+    is >> t;
+    res.push_back(t);
+  }
+  return res;
+}
 
 // Insert commas into a number string
 // Adds a comma between every third digit, e.g. 12345 => 12,345 etc.
 std::string InsertCommas(const char* numStr);
-
 
 // Word Wrap
 // WIDTH_FINDER must support float operator() (const std::string&)
