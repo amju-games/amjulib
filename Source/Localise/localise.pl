@@ -27,7 +27,7 @@ use strict;
 # -----------------
 #
 my $stringTable = $ARGV[0];
-open(STRINGTABLE, $stringTable) or die "No string table specified";
+open(STRINGTABLE, $stringTable) or die "No string table specified or can't open it.";
 
 # Hash of IDs to strings
 my %stringHash;
@@ -72,7 +72,7 @@ find (\&MaybeLocalise, $ARGV[1]);
 
 sub MaybeLocalise($)
 {
-  if ((/\.cpp/) or (/\.amju2/) or (/\.txt/))
+  if ((/\.cpp/) or (/\.csv/) or (/\.txt/))
   {
     print "LOCALISING FILE: $_\n";
     LocaliseFile($_);
@@ -106,158 +106,58 @@ sub AddToStringTable($)
   return $id;
 }
 
+# Read file to localise
+# ---------------------
+#
+# For each line of file, look for all occurrences of @@@<string>
+# Add each string found to the string table
+# Replace string with $$$<id>
 sub LocaliseFile($)
 {
-  # Read file to localise
-  # ---------------------
-  #
-  # For each line of file, look for all occurrences of @@@<string>
-  # Add each string found to the string table
-  # Replace string with $$$<id>
+    my $fileToLocalise = shift;
+    
+    unless (open(IN, '<', $fileToLocalise)) {
+        print "Error: Could not open $fileToLocalise\n";
+        return;
+    }
+    my @lines = <IN>;
+    close(IN);
 
-  my $fileToLocalise = shift; 
-  if (!open(LOCALISE_THIS, $fileToLocalise))
-  {
-    print "Can't open specified file to localise: $fileToLocalise\n";
-    return;
-  }
+    my $wasChanged = 0;
 
-  my @linesToLocalise = <LOCALISE_THIS>;
-  close (LOCALISE_THIS);
-
-  # Check each line of the file for @@@ strings.
- 
-  my $lineNum = 0;
-  my $wasChanged = 0;
-  foreach my $line (@linesToLocalise)
-  {
-    chomp($line);
-    #print "Considering line: '$line'\n";
-
-    # Look for strings to localise
-    # NB Question mark: non-greedy match, in case there is more than one
-    # string on a line.
-    # TODO This won't handle escaped quotes in strings. 
-
-    # Text files where entire line is a string
-    if ($line =~ /^@@@(.*)$/)
-    {
-      # Add the new string to the string table.
-      my $newString = $1; # first group, i.e. the (.*) in match above
-      print "New string: $newString\n";
-
-      ####$stringHash{$highestId} = $newString;
-      my $id = AddToStringTable($newString);
-
-      # Allocate new ID
-      my $localised = $line;
-      $localised =~ s/@@@.*/\/\/ $newString\n\$\$\$$id/;
-      ###$highestId++;
-      print "Localised: $localised\n";
-
-      $linesToLocalise[$lineNum] = $localised;
-      $wasChanged = 1;
+    foreach my $line (@lines) {
+        # Match @@@ followed by 1 or more characters that are NOT tabs or newlines
+        # The /g handles multiple cells on the same line
+        if ($line =~ s/@@@([^\t\n\r]+)/
+            my $str = $1;
+            my $id = AddToStringTable($str);
+            print "  -> Found string: '$str' (Assigned ID: $id)\n";
+            "\$\$\$$id"; # Replacement string
+        /ge) {
+            $wasChanged = 1;
+        }
     }
 
-    # Dictionary-style text files, where a string following = should be localised.
-    # There could be more than one such string on a line, e.g. a =@@@b =@@@c
-    while ($line =~ /^(.*?)=@@@(.*?)=(.*)$/)
-    {
-      # Add the new string to the string table.
-      my $before = $1;
-      my $newString = $2; # SECOND group, i.e. the SECOND (.*?) in match above
-      my $after = $3;
-      print "Found substr to localise: $newString\n";
-
-      ###$stringHash{$highestId} = $newString;
-      my $id = AddToStringTable($newString);
-
-      # Replace second group with localise code
-      my $localised = "$before=\$\$\$$id=$after"; 
-      ###$highestId++;
-      print "Localised: $localised\n";
-      $line = $localised;
-
-      $linesToLocalise[$lineNum] = $localised;
-      $wasChanged = 1;
+    if (!$wasChanged) {
+        print "No @@@ strings found in $fileToLocalise\n";
+        return;
     }
 
-    # Handle final =@@@  in a dictionary line
-    if ($line =~ /(.*)=@@@(.*?)$/)
-    {
-      my $before = $1;
-      my $newString = $2; # second group, i.e. the (.*?) in match above
-
-      ###$stringHash{$highestId} = $newString;
-      my $id = AddToStringTable($newString);
-
-      # Allocate new ID
-      my $localised = "$before=\$\$\$$id";
-      ###$highestId++;
-      print "Localised: $localised\n";
-
-      $linesToLocalise[$lineNum] = $localised;
-      $wasChanged = 1;
+    # Output logic
+    if ($ARGV[2] eq "nowrite") {
+        print "\n--- PREVIEW: $fileToLocalise ---\n";
+        print @lines; 
+        print "\n--- END PREVIEW ---\n";
     }
-
-
-    # C code, where the line may contain one or more strings in quotes
-    # TODO How come this while loop terminates if it doesn't change $line?????
-    while ($line =~ /\"@@@(.*?)\"/)
-    {
-      # Add the new string to the string table.
-      my $newString = $1; # first group, i.e. the (.*) in match above
-      print "New string: $newString\n";
-
-      ###$stringHash{$highestId} = $newString;
-      my $id = AddToStringTable($newString);
-
-      # Allocate new ID
-      my $localised = $line;
-      $localised =~ s/\"@@@.*?\"/\"\$\$\$$id\" \/\* $newString \*\//;
-      ###$highestId++;
-      print "Localised: $localised\n";
-
-      $linesToLocalise[$lineNum] = $localised;
-      $wasChanged = 1;
+    else {
+        print "WRITING: $fileToLocalise\n";
+        open(OUT, '>', $fileToLocalise) or die "Cannot write to $fileToLocalise: $!";
+        print OUT @lines;
+        close(OUT);
     }
-
-    $lineNum++;
-  }
-
-  if (!$wasChanged)
-  {
-    print "No change to this file\n";
-    return;
-  }
-
-
-  # Print new verison of file 
-  # -------------------------
-  #
-  print "\n\nNEW FILE:\n";
-  foreach my $line (@linesToLocalise)
-  {
-    print "$line\n";
-  }
-  print "\n\n";
-
-  if ($ARGV[2] eq "nowrite")
-  {
-    return;
-  }
-
-  print "WRITING OUTPUT TO FILE $fileToLocalise\n";
-
-  # Print localised lines to file
-  open(LOCALISE_THIS, ">$fileToLocalise");
-  foreach my $line (@linesToLocalise)
-  {
-    print LOCALISE_THIS "$line\n";
-  }
-  close (LOCALISE_THIS);
-
 }
+
+
 
 # Print string table for checking
 # -------------------------------

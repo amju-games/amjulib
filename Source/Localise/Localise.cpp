@@ -151,6 +151,11 @@ std::string Lookup(const std::string& s)
 
 std::string Localise::GetString(int id)
 {
+  if (id == 0)
+  {
+    return "";
+  }
+
   StringTable::iterator it = s_strings.find(id);
   if (it == s_strings.end())
   {
