@@ -18,7 +18,7 @@ Texture* GuiSprite::GetTexture()
 
 void GuiSprite::Draw()
 {
-  AddToBatch();
+  AddToBatch(this);
 
   // Store current state of transform and colour, which we use later when
   //  we draw the batch of all tris using the current texture.

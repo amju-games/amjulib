@@ -749,4 +749,9 @@ const Colour& GuiText::GetBgCol() const
   return m_bgCol;
 }
 
+Texture* GuiText::GetTexture()
+{
+  return nullptr; // TODO
 }
+}
+

@@ -490,4 +490,9 @@ bool GuiElement::IsVisible() const
 {
   return m_isVisible && m_ancestorsAreVisible;
 }
+
+int GuiElement::GetBatchZ() const
+{
+  return std::round(m_localpos.z * 1000.f);
+}
 }

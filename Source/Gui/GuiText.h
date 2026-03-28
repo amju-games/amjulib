@@ -33,6 +33,8 @@ public:
   virtual bool Save(File*) override;
   virtual void TextToSpeech() override;
 
+  Texture* GetTexture() override;
+
   // Load just the text info (not name, size, etc)
   bool LoadText(File*);
   bool SaveText(File*);

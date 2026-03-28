@@ -17,6 +17,7 @@
 namespace Amju
 {
 class GuiEdit;
+class Texture;
 
 // Command function type.
 // Gui Elements which respond to user events can call this kind of
@@ -143,6 +144,14 @@ public:
   //  subclass-specific properties, and return the whole lot.
   virtual GuiPropertyMap GetProperties() const;
   virtual void SetProperties(const GuiPropertyMap& properties);
+
+  // Batched subclasses will need to override this.
+  // This default implementation returns nullptr!
+  virtual Texture* GetTexture() { return nullptr; }
+
+  // Prob doesn't need overriding: converts z-coord to an int, for
+  //  layers of batches.
+  virtual int GetBatchZ() const;
 
 protected:
   bool SaveTypeAndName(File* f);

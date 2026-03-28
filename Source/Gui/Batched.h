@@ -28,8 +28,8 @@ public:
 
 protected:
   // Add to map of elements to batch draw
-  void AddToBatch(); // call in Load() just before return true at the end.
-    // Can call in Draw() but then we search for it every frame. 
+  // In use: AddToBatch(this) from Draw() (and don't actually draw)
+  void AddToBatch(GuiElement*); 
 
   // In draw call, don't actually draw, but set up matrix, colour, etc.
   // Then when we call AddToTrilist(), add all the tris making up this
@@ -37,22 +37,22 @@ protected:
   //  each vertex.
   virtual void AddToTrilist(AmjuGL::Tris& tris) = 0;
 
-  virtual Texture* GetTexture() = 0;
+private:
+  int GetTexHash(GuiElement*); // used in AddToBatch only
 
 private:
-  int GetTexHash(); // used in AddToBatch only
-
-protected:
   // Map hash of image filename to all elements using that image.
   // This lets us draw all elements in as few draw calls as possible.
+  using FilenameHash = unsigned int;
 
   // NB NOT RC Ptrs in this vector, as this will give a cyclic dep.
-  using AtlasMap = std::map<unsigned int, std::vector<Batched*>>;
+  using TextureToBatchMap = std::map<FilenameHash, std::vector<Batched*>>;
+  // Sort batches by ascending z-coord. 
+  // Z-coords are converted to ints for easy comparison.
+  using AtlasMap = std::map<int, TextureToBatchMap>;
   static AtlasMap s_atlases;
 
-  // TODO Also we want to be able to set the draw order for the 
-  //  batched elements, i.e. each atlas has a z-depth.
-
+protected:
   // Store current state of transform, colour, etc in Draw() override,
   //  then use this to set the vertices of the tris you add to the
   //  triangle batch in AddToTrilist.

@@ -70,6 +70,7 @@ protected:
   virtual AmjuGL::Tris BuildOutlineTriList() = 0;
   virtual AmjuGL::Tris BuildFilledTriList() = 0;
 
+protected:
   AmjuGL::Tris m_tris; // TODO Move up class hierarchy
 
   ControlPoints m_controlPoints; // corners or control points for a spline

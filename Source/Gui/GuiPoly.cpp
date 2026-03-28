@@ -88,7 +88,7 @@ void IGuiPoly::Draw()
   }
 
   // TODO using circle texture, draw rounded corners?
-  AddToBatch();
+  AddToBatch(this);
 
   const Vec2f combinedPos = GetCombinedPos();
   const Vec2f combinedScale = GetCombinedScale();

@@ -14,20 +14,27 @@ Batched::~Batched()
 {
 }
 
-int Batched::GetTexHash()
+int Batched::GetTexHash(GuiElement* elem)
 {
+  Assert(elem);
   if (m_texHash == 0)
   {
-    m_texHash = HashString(GetTexture()->GetResName());
+    auto tex = elem->GetTexture();
+    if (tex)
+    {
+      // I think we'll just use Texture* as the key in future
+      m_texHash = HashString(tex->GetResName());
+    }
   }
   return m_texHash;
 }
 
-void Batched::AddToBatch()
+void Batched::AddToBatch(GuiElement* elem)
 {
-  auto& vec = s_atlases[GetTexHash()];
-  // Only add once! E.g. on successful load. Calling in Draw() is really
-  //  inefficient.
+  Assert(elem);
+  auto& batchesAtThisZ = s_atlases[elem->GetBatchZ()];
+  auto& vec = batchesAtThisZ[GetTexHash(elem)];
+
   // Assuming we only add each element once before trashing the vec, we can
   //  just check in debug mode, and not check in release mode:
 #ifdef _DEBUG
@@ -44,6 +51,56 @@ void Batched::AddToBatch()
   vec.push_back(this);
 }
 
+void Batched::DrawAll()
+{
+  // For each z layer
+  for (const auto& [z, batches] : s_atlases)
+  {
+    // For each texture
+    for (const auto& [textureHash, batch] : batches)
+    {
+      if (batch.empty())
+      {
+        continue;
+      }
+
+      // Tris is a big list of all the triangles from all the elements
+      //  in batch.
+      AmjuGL::Tris tris;
+      for (Batched* b : batch)
+      {
+        // b is one batched GUi element.
+        b->AddToTrilist(tris); 
+      }
+
+      // Every element in batch has the same texture, so just grab the
+      //  first one to set the texture.
+      // Hmm maybe we should store the texture pointer, rather than hash
+      //  of name then.
+      auto tex = dynamic_cast<GuiElement*>(batch[0])->GetTexture();
+      if (tex)
+      {
+        tex->UseThisTexture();
+      }
+
+      // Create a dynamic trilist and assign the tris.
+      // TODO investigate if we could create these just once.
+      RCPtr<TriListDynamic> triList = dynamic_cast<TriListDynamic*>(
+        AmjuGL::Create(TriListDynamic::DRAWABLE_TYPE_ID));
+
+      // Draw the tris
+      triList->Set(tris);
+      triList->Draw();
+    }
+  }
+
+  // So, we have to build up the whole structure every frame.
+  // There has to be a better way but this way everything is dynamic,
+  //  at least..
+  s_atlases.clear();
+}
+
+/*
 void Batched::DrawAll()
 {
   // Vector of Tri Lists: one tri list is used to draw all the sprites which use
@@ -107,6 +164,7 @@ void Batched::DrawAll()
   //  but then we will need to be careful to clear this map when we reload the GUI.
   s_atlases.clear();
 }
+*/
 
 // ----------------------------------------------------------------------------
 

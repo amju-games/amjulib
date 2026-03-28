@@ -24,7 +24,7 @@ public:
   bool Save(File*) override;
 
   void SetTexture(Texture* tex);
-  Texture* GetTexture();
+  Texture* GetTexture() override;
 
 protected:
   // Just write the image filename and other attributes
