@@ -270,7 +270,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 
     if (rebuild)
     {
-      TriList* triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+      TriList* triList = Amju::MakeTriList(font->MakeTriList(0, 0, str.c_str(), m_scaleX));
       m_triLists.push_back(triList);
       Assert((int)m_triLists.size() == i + 1);
     }
@@ -382,11 +382,11 @@ void GuiText::DrawSingleLine(
   Font* font = GetFont();
   if (selected && !m_triListSelection)
   {
-    m_triListSelection = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+    m_triListSelection = Amju::MakeTriList(font->MakeTriList(0, 0, str.c_str(), m_scaleX));
   }
   else if (!selected && !m_triList)
   {
-    m_triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+    m_triList = Amju::MakeTriList(font->MakeTriList(0, 0, str.c_str(), m_scaleX));
   }
   
   font->BindTexture();
@@ -403,7 +403,7 @@ void GuiText::PrintLine(const std::string& str, float x, float y)
   Font* font = GetFont();
   if (!m_triList)
   {
-    m_triList = font->MakeTriList(0, 0, str.c_str(), m_scaleX);
+    m_triList = Amju::MakeTriList(font->MakeTriList(0, 0, str.c_str(), m_scaleX));
   }
   
   font->BindTexture();

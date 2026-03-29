@@ -37,13 +37,13 @@ public:
   void SetSize(float size);
 
   // Get width of one character (unicode code point)
-  virtual float GetCharacterWidth(int c);
+  virtual float GetCharacterWidth(int c) const;
 
   // Get width of a string
-  float GetTextWidth(const std::string& stringUtf8);
+  float GetTextWidth(const std::string& stringUtf8) const;
 
   // Use this to make a TriList when text changes.
-  TriList* MakeTriList(float x, float y, const std::string& textUtf8, float scaleX);
+  AmjuGL::Tris MakeTriList(float x, float y, const std::string& textUtf8, float scaleX) const;
   
   void BindTexture();
  

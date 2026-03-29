@@ -102,7 +102,7 @@ void GuiTextEdit::Draw()
 
     if (!m_triListCaret)
     {
-      m_triListCaret = GetFont()->MakeTriList(0, 0, "|", 1.0f);
+      m_triListCaret = Amju::MakeTriList(GetFont()->MakeTriList(0, 0, "|", 1.0f));
     }
 
     float y = GetCombinedPos().y - GetFontSize() * CHAR_HEIGHT_FOR_SIZE_1; 
@@ -623,6 +623,9 @@ bool GuiTextEdit::OnTextEvent(const TextEvent& te)
   case AMJU_COPY:
     CopyToClipboard(m_text); // TODO Selection
     return true;
+
+  default:
+    return false;
   }
 
   return false;

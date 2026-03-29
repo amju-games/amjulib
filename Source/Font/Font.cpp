@@ -204,7 +204,7 @@ void Font::SetSize(float s)
   m_size = s;
 }
 
-float Font::GetCharacterWidth(int c)
+float Font::GetCharacterWidth(int c) const
 {
   AMJU_CALL_STACK;
 
@@ -226,7 +226,7 @@ float Font::GetCharacterWidth(int c)
   return f;
 }
 
-float Font::GetTextWidth(const std::string& s)
+float Font::GetTextWidth(const std::string& s) const
 {
   AMJU_CALL_STACK;
 
@@ -251,7 +251,7 @@ void Font::BindTexture()
   m_textureSequence->Bind();
 }
 
-TriList* Font::MakeTriList(float x, float y, const std::string& utf8Text, float scaleX)
+AmjuGL::Tris Font::MakeTriList(float x, float y, const std::string& utf8Text, float scaleX) const
 {
   AMJU_CALL_STACK;
 
@@ -264,7 +264,7 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text <
   if (utf8Text.empty())
   {
     // Empty string
-    return Amju::MakeTriList(tris);
+    return tris;
   }
   
   float oldSizeX = m_textureSequence->GetSizeX();
@@ -302,7 +302,7 @@ std::cout << "Font::MakeTriList: x: " << x << " y: " << y << " \"" << utf8Text <
     }
   }
   m_textureSequence->SetSize(oldSizeX, sizeY);
-  return Amju::MakeTriList(tris);
+  return tris;
 }
   
 struct FontWidthFinder
