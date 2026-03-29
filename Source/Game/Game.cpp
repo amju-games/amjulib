@@ -8,7 +8,6 @@
 #include <StringUtils.h>
 #include <ResourceManager.h>
 #include <Batched.h>
-#include <GuiText.h>
 #include <Rect.h>
 #ifdef WIN32
 #include <windows.h>
@@ -323,3 +322,4 @@ GameObjects* Game::GetGameObjects()
   return &m_objects;
 }
 }
+

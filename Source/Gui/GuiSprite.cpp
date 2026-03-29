@@ -39,7 +39,6 @@ void GuiSprite::Animate(float animValue)
   float d = 0.99f;
   if (m_maxCell < m_minCell)
   {
-    // TODO
     // TODO If maxCell < minCell, we should do d = -1 ?
     // Doesn't quite work.
   }
@@ -102,7 +101,7 @@ void GuiSprite::AddToTrilist(AmjuGL::Tris& tris)
   const float Z = 0;
   // Corners: a unit square, transformed by whatever the current state of
   //  the modelview matrix was when Draw was called.
-  Vec3f v[4] = 
+  const Vec3f v[4] = 
   {
     Vec3f(1, -1, Z) * m_combinedTransform,
     Vec3f(1,  0, Z) * m_combinedTransform,
@@ -110,7 +109,7 @@ void GuiSprite::AddToTrilist(AmjuGL::Tris& tris)
     Vec3f(0, -1, Z) * m_combinedTransform,
   };
 
-  AmjuGL::Vert verts[4] =
+  const AmjuGL::Vert verts[4] =
   {
     AmjuGL::Vert(v[0].x, v[0].y, v[0].z,   u1, v1,   0, 1, 0), // x, y, z, u, v, nx, ny, nz  
     AmjuGL::Vert(v[1].x, v[1].y, v[1].z,   u1, v0,   0, 1, 0),
@@ -171,12 +170,7 @@ bool GuiSprite::Load(File* f)
     m_maxCell = ToInt(strs[1]);
   }
 
-  // This type is batched: all elements of this type are drawn in one
-  //  big tri list. 
-  // This call adds this object to the list of elements which are batched.
-//  AddToBatch();
-
   return true;
 }
-
 }
+
