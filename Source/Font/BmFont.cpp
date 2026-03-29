@@ -301,6 +301,8 @@ float BmFontTextureSequence::GetCharWidth(int element) const
   }
   const BmChar& bmc = it->second;
   float w = bmc.xadvance * m_glyphFatness;
+  // Squish up glyphs a bit as required
+  w *= m_advance;
   return w;
 }
 
@@ -336,15 +338,29 @@ bool BmFont::Load(File* f)
     return false;
   }
 
+  float advance = 1.f;
+  if (!f->GetFloat(&advance))
+  {
+    f->ReportError("Expected x advance value for BM font.");
+    return false;
+  }
+  bm->SetAdvance(advance);
+
+  float fatness = 1.f;
+  if (!f->GetFloat(&fatness))
+  {
+    f->ReportError("Expected glyph fatness value for BM font.");
+    return false;
+  }
+  bm->SetGlyphFatness(fatness);
+  
   return true;
 }
 
-float BmFont::GetCharacterWidth(int c)
+float BmFont::GetCharacterWidth(int c) const
 {
-  BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
+  const BmFontTextureSequence* bm = (BmFontTextureSequence*)m_textureSequence.GetPtr();
   float w = bm->GetCharWidth(c) * m_size;
-  const float BMFONT_SQUISH = .75f; // Squish up glyphs a bit
-  w *= BMFONT_SQUISH;
   return w;
 }
 }

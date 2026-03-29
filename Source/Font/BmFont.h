@@ -13,7 +13,7 @@
 namespace Amju
 {
 // * BmFontTextureSequence *
-// For fonts packed sensibly into an atlas, rather than in a uniform grid (i.e. using BMFont).
+// For fonts packed sensibly into an atlas, (i.e. using BMFont).
 class BmFontTextureSequence : public TextureSequence
 {
 public:
@@ -23,9 +23,14 @@ public:
   // Load BMFont description from file
   bool LoadBmFont(const std::string& filename);
 
+  // Get width for the given glyph code.
   float GetCharWidth(int element) const;
 
+  // Set fatness, if glyphs look too thin or too fat.
   void SetGlyphFatness(float fatness) { m_glyphFatness = fatness; }
+
+  // Set multiplier for x advance, i.e. the spacing between glyphs.
+  void SetAdvance(float advance) { m_advance = advance; }
 
   struct BmChar
   {
@@ -71,11 +76,15 @@ protected:
   bool ParseInfoLine(const Strings& strs);
 
 private:
-  // We expect a sparse array for, e.g. Chinese characters.
+  // Map char code to glyph data.
+  // Map, not vector: so char codes need not be contiguous.
   std::unordered_map<int, BmChar> m_elements;
 
   // Adjust x-scale of characters to look good.
   float m_glyphFatness = 1.f;
+
+  // Scale x-advance to get a nice spacing between glyphs
+  float m_advance = 1.f;
 };
 
 // * BmFont *
@@ -87,7 +96,7 @@ public:
 
   bool Load(const std::string& filename) override;
   bool Load(File*) override;
-  float GetCharacterWidth(int c) override;
+  float GetCharacterWidth(int c) const override;
 };
 }
 
