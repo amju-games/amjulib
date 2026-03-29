@@ -16,6 +16,15 @@
 
 namespace Amju
 {
+bool GuiText::Load(File* f)
+{
+  if (!GuiElement::Load(f))
+  {
+    return false;
+  }
+  return LoadText(f);
+}
+
 const char* GuiText::NAME = "gui-text";
 
 // I.e. character at font size 1 takes up 1/20th of the screen height
@@ -458,12 +467,7 @@ struct WidthFinder
   GuiText* m_guiText;
 };
 
-std::string GuiText::GetText() const
-{
-  return m_text;
-}
-
-void GuiText::SetText(const std::string& escapedText)
+std::string GuiTextBase::ReplaceEscaped(const std::string& escapedText)
 {
   // Replace special codes for italics etc
   const char* ITALICS_ON = "\x01"; // match codes in Font
@@ -473,30 +477,31 @@ void GuiText::SetText(const std::string& escapedText)
   text = Replace(escapedText, "<i>", ITALICS_ON);
   text = Replace(text, "</i>", ITALICS_OFF);
 
+  // Replace the string "\n" with newline character
+  text = Replace(text, "\\n", "\n");
+
   // Convert escape sequences
   text = ReplaceUtf8EscapedChars(text);
+
+  return text;
+}
+
+void GuiText::SetText(const std::string& escapedText)
+{
+  auto text = ReplaceEscaped(escapedText);
 
   if (text == m_text)
   {
     return;
   }
 
-  m_triList = 0; // force rebuild
-  m_triLists.clear();
-  
   m_text = text;
 
-  // Remove chars we can't display, which is anything with top bit set. This removes all 
-  //  non-ascii unicode characters.
-  // The way we display emojis etc is to use a native text view, e.g. GuiTextIos
-  //m_text.erase(std::remove_if(m_text.begin(), m_text.end(), [](char c){ return (c & 0x80) != 0; }),
-  //  m_text.end());
+  m_triList = 0; // force rebuild
+  m_triLists.clear();
 
   if (m_isMulti)
   {
-    // Replace the string "\n" with newline character
-    m_text = Replace(m_text, "\\n", "\n");
-
     float availWidth = GetSize().x;
     m_lines = WordWrap(m_text, availWidth, WidthFinder(this));
   }
@@ -553,15 +558,6 @@ bool GuiText::Save(File* f)
   return true;
 }
 
-bool GuiText::Load(File* f)
-{
-  if (!GuiElement::Load(f))
-  {
-    return false;
-  }
-  return LoadText(f);
-}
-
 bool GuiText::SaveText(File* f)
 {
   if (!f->WriteComment("// \"" + m_text + "\""))
@@ -602,18 +598,8 @@ bool GuiText::SaveText(File* f)
   return true;
 }
 
-bool GuiText::LoadText(File* f)
+bool GuiTextBase::ParseFontInfoLine(File* f)
 {
-  std::string text;
-  if (!f->GetLocalisedString(&text, &m_preLocalisedText))
-  {
-    f->ReportError("GUI Text: Expected localised string");
-    return false;
-  }
-
-  // Special code for empty string is $$$empty -- see File::GetDataLine() 
-  //  - because an actual empty string will be ignored
-
   std::string s;
   // TODO Flags for multiline/word wrap
   // font name, font size, etc
@@ -623,6 +609,7 @@ bool GuiText::LoadText(File* f)
     f->ReportError("Expected font info");
     return false;
   }
+
   Strings strs = Split(s, ',');
   int size = strs.size();
   if (size < 2)
@@ -657,6 +644,25 @@ bool GuiText::LoadText(File* f)
       f->ReportError("Unexpected GUI text attrib: " + s);
       return false;
     }
+  }
+  return true;
+}
+
+bool GuiText::LoadText(File* f)
+{
+  std::string text;
+  if (!f->GetLocalisedString(&text, &m_preLocalisedText))
+  {
+    f->ReportError("GUI Text: Expected localised string");
+    return false;
+  }
+  
+  // Special code for empty string is $$$empty -- see File::GetDataLine() 
+  //  - because an actual empty string will be ignored
+
+  if (!ParseFontInfoLine(f))
+  {
+    return false;
   }
 
   SetText(text);

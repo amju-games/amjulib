@@ -27,6 +27,7 @@
 #include "GuiSpline.h"
 #include "GuiSprite.h"
 #include "GuiText.h"
+#include "GuiText2.h"
 #include "GuiTextEdit.h"
 #include "GuiWindow.h"
 #include <AmjuFinal.h>
@@ -66,6 +67,7 @@ GuiFactory::GuiFactory()
   Add(GuiSprite::NAME, &CreateT<GuiSprite>);
   Add(GuiSpline::NAME, &CreateT<GuiSpline>);
   Add(GuiText::NAME, &CreateT<GuiText>);
+  Add(GuiText2::NAME, &CreateT<GuiText2>);
   Add(GuiTextEdit::NAME, &CreateT<GuiTextEdit>);
   Add(GuiWindow::NAME, &CreateT<GuiWindow>);
 }

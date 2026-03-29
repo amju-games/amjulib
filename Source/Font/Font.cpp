@@ -246,6 +246,11 @@ float Font::GetTextWidth(const std::string& s) const
   return f;
 }
 
+PTexture Font::GetTexture()
+{
+  return m_textureSequence->GetTexture();
+}
+
 void Font::BindTexture()
 {
   m_textureSequence->Bind();

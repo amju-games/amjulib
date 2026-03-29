@@ -46,6 +46,8 @@ public:
   AmjuGL::Tris MakeTriList(float x, float y, const std::string& textUtf8, float scaleX) const;
   
   void BindTexture();
+
+  PTexture GetTexture();
  
 protected:
   std::string m_name;

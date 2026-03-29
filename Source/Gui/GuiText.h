@@ -16,8 +16,41 @@ public:
   virtual void SetText(const std::string& text) = 0;
   virtual std::string GetText() const = 0;
 };
-  
-class GuiText : public IGuiText, public GuiElement
+
+// ** GuiTextBase **
+// Useful members for text subclasses
+class GuiTextBase : public IGuiText, public GuiElement
+{
+public:
+  enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
+
+  std::string GetText() const override { return m_text; }
+
+protected:
+  bool ParseFontInfoLine(File* f);
+
+  // Handle single-string attribute when loading 
+  //  (and potentially when setting properties)
+  virtual bool HandleAttrib(const std::string& s) = 0;
+
+  // Handle key=value pair when loading 
+  //  (and potentially when setting properties)
+  virtual bool HandleAttrib(const std::string& key, const std::string& value) = 0;
+
+  // Replace special chars and utf-8 sequences 
+  std::string ReplaceEscaped(const std::string& escapedText);
+
+protected:
+  std::string m_text; // Text after localisation look up 
+  std::string m_preLocalisedText; // Text before look up, so containing $$$ codes
+  std::string m_fontPathFilename;
+  std::string m_fontName;
+  PFont m_font;
+  Just m_just;
+  float m_textSize; // "point" size
+};
+ 
+class GuiText : public GuiTextBase
 {
 public:
   static const char* NAME;
@@ -40,7 +73,8 @@ public:
   bool SaveText(File*);
 
   virtual void SetText(const std::string& text) override;
-  virtual std::string GetText() const override;
+
+  void SetJust(Just j);
 
   // Really font size 
   void SetFontSize(float textSize);
@@ -70,9 +104,6 @@ public:
   const Colour& GetFgCol() const;
   const Colour& GetBgCol() const;
 
-  enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
-
-  void SetJust(Just j);
   void SetIsMulti(bool); // Multi line ?
   bool IsMulti() const;
 
@@ -83,10 +114,10 @@ public:
 
 protected:
   // Handle single-string attribute when loading (and potentially when setting properties)
-  bool HandleAttrib(const std::string& s);
+  bool HandleAttrib(const std::string& s) override;
 
   // Handle key=value pair when loading (and potentially when setting properties)
-  bool HandleAttrib(const std::string& key, const std::string& value);
+  bool HandleAttrib(const std::string& key, const std::string& value) override;
 
   // calc first and last char to draw in line
   virtual void GetFirstLast(int line, int* first, int* last); 
@@ -109,15 +140,8 @@ protected:
   RCPtr<TriList> m_triListCaret; 
   RCPtr<TriList> m_triListSelection; 
   
-  std::string m_text; // Text after localisation look up 
-  std::string m_preLocalisedText; // Text before look up, so containing $$$ codes
-  std::string m_fontPathFilename;
-  std::string m_fontName;
-  Just m_just;
   bool m_inverse;
   bool m_drawBg;
-  PFont m_font;
-  float m_textSize;
   Colour m_bgCol;
   Colour m_fgCol;
 
