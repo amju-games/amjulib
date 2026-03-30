@@ -198,6 +198,11 @@ protected:
 
   // True if all ancestors up to root are visible
   bool m_ancestorsAreVisible;
+
+  // If true, give cloned elements a unique name
+  //  (the algo needs doing for that).
+  // If false, a cloned element has the same name as its original.
+  static bool s_giveCloneUniqueName;
 };
 
 // Convenience typedefs

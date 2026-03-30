@@ -23,6 +23,11 @@ static RCPtr<GuiElement> focusElement = 0;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
 
+// If true, give cloned elements a unique name
+//  (the algo needs doing for that).
+// If false, a cloned element has the same name as its original.
+bool GuiElement::s_giveCloneUniqueName = false;
+
 GuiElement::GuiElement()
 {
   m_scale = { 1, 1 };
@@ -38,8 +43,18 @@ GuiElement::GuiElement()
 
 GuiElement::GuiElement(const GuiElement& e)
 {
-  // Set name to something hopefully unique. So unfortunately we have to set all the members.
-  m_name = e.m_name + "-1";
+  // We might want to set the name of this new element to 
+  //  something hopefully unique. So unfortunately we have 
+  //  to set all the members.
+  if (s_giveCloneUniqueName)
+  {
+    m_name = e.m_name + "-1"; // yes, the uniqueness algo needs some work
+  }
+  else
+  {
+    m_name = e.m_name;
+  }
+
   m_parent = e.m_parent;
   m_isVisible = e.m_isVisible;
   m_isSelected = e.m_isSelected;
