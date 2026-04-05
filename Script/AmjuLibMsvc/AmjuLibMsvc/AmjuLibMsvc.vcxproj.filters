@@ -1041,6 +1041,9 @@
     <ClCompile Include="..\..\..\Source\Gui\ColourMode.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiText2.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1992,6 +1995,9 @@
       <Filter>Image</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\ColourMode.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiText2.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

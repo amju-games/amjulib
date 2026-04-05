@@ -406,6 +406,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\GuiSlider.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiSpline.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiSprite.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiText2.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiTextEdit.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiWindow.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp" />
@@ -731,6 +732,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\GuiSlider.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiSpline.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiSprite.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiText2.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTextEdit.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiTreeView.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiWindow.h" />
