@@ -67,13 +67,13 @@ bool ConfigFile::Save(const std::string& filename, bool useRoot)
   return true;
 }
 
-bool ConfigFile::Load(const std::string& filename, bool useRoot)
+bool ConfigFile::Load(const std::string& filename, bool useRoot, File::Impl impl)
 {
   AMJU_CALL_STACK;
 
   // Ctor args: arg 1 (true) => has version info
-  // arg2 (false) => don't use Glue File implementation.
-  File f(true, File::STD);
+  // arg2 => use filesystem file if STD; if GLUE, looks for glue file first.
+  File f(true, impl);
 
   if (!f.OpenRead(filename, NOT_BINARY, useRoot))
   {

@@ -4,6 +4,7 @@
 // Designed to get game configuration
 #include <map>
 #include <string>
+#include <File.h>
 #include <RCPtr.h>
 #include <Singleton.h>
 
@@ -14,8 +15,10 @@ class ConfigFile : public NonCopyable, public RefCounted
 public:
   ConfigFile();
 
-  bool Load(const std::string& filename, bool useRoot = true);
+  bool Load(const std::string& filename, bool useRoot = true, File::Impl impl = File::STD);
   bool Save(const std::string& filename, bool useRoot = true);
+
+  bool Load(File& f, bool useRoot = true);
 
   // Returns default if key does not exist
   std::string GetValue(const std::string& key, const std::string& defaultVal = "") const;
