@@ -25,7 +25,7 @@ namespace
 {
 // These consts are to get the BMFont to look the same as a grid-style font.
 
-const float SCALE = 0.004f; // Hopefully not related to font size, but might be
+  const float SCALE = 8; // 0.004f; // Hopefully not related to font size, but might be
 
 int ParseCharCountLine(const Strings& strs)
 {
@@ -80,22 +80,22 @@ bool ParseCharLine(
     else if (strs2[0] == "width")
     {
       float w = ToFloat(strs2[1]);
-      bmc.w = w;
+      bmc.w = w / texW;
       bmc.u1 = bmc.u0 + w / texW;
     }
     else if (strs2[0] == "height")
     {
       float h = ToFloat(strs2[1]);
-      bmc.h = h;
+      bmc.h = h / texH;
       bmc.v1 = bmc.v0 + h / texH;
     }
     else if (strs2[0] == "xoffset")
     {
-      bmc.x = ToFloat(strs2[1]);
+      bmc.x = ToFloat(strs2[1]) / texW;
     }
     else if (strs2[0] == "yoffset")
     {
-      bmc.y = ToFloat(strs2[1]);
+      bmc.y = ToFloat(strs2[1]) / texH;
     }
     else if (strs2[0] == "xadvance")
     {
@@ -220,8 +220,8 @@ bool BmFontTextureSequence::Load(File* f)
 bool BmFontTextureSequence::LoadChars(File* f, int numChars)
 {
   Assert(m_pTexture);
-  float texW = static_cast<float>(m_pTexture->GetWidth());
-  float texH = static_cast<float>(m_pTexture->GetHeight());
+  const float texW = static_cast<float>(m_pTexture->GetWidth());
+  const float texH = static_cast<float>(m_pTexture->GetHeight());
 
   for (int i = 0; i < numChars; i++)
   {
