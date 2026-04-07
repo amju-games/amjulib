@@ -23,6 +23,7 @@ public:
   void StopScrolling(); // set velocity to zero
 
   void SetExtents(const Vec2f& extents);
+  void SetTabStopSize(const Vec2f& tabStopSize) { m_tabStopSize = tabStopSize; }
 
   virtual bool OnKeyEvent(const KeyEvent&); 
   virtual bool OnCursorEvent(const CursorEvent&);
@@ -30,7 +31,12 @@ public:
 
   void InitScrollBar();
 
-private:
+  static void SetTabStopSoundFilename(const std::string& s) { s_tabStopSoundFilename = s; }
+
+protected:
+  void PlayTabStopSound(int tabStopNum) const;
+
+protected:
   // Offset in x and y
   Vec2f m_scrollPos;
   Vec2f m_scrollVel; 
@@ -42,6 +48,12 @@ private:
   bool m_leftDrag = false;
 
   RCPtr<GuiScrollBar> m_scrollBar;
+
+  // "tab stops" - as scroller passes a multiple of a tab stop, we slow down, and stop if below
+  //  the lowest speed. We can also click when we pass a tab stop.
+  Vec2f m_tabStopSize;
+
+  static std::string s_tabStopSoundFilename;
 };
 }
 

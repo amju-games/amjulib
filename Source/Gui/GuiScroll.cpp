@@ -2,14 +2,20 @@
 #include <algorithm>
 #include <AmjuGL.h>
 #include <LoadVec2.h>
+#include <SoundManager.h>
 #include <Timer.h>
 #include "GuiScroll.h"
 #include "GuiFactory.h"
 #include <AmjuFinal.h>
 
+// Bounce doesn't work yet
+//#define BOUNCE
+
 namespace Amju
 {
 const char* GuiScroll::NAME = "gui-scroll";
+
+std::string GuiScroll::s_tabStopSoundFilename;
 
 void GuiScroll::Reset()
 {
@@ -89,6 +95,20 @@ void GuiScroll::Draw()
   GuiComposite::Draw(); //child->Draw();
 }
 
+void GuiScroll::PlayTabStopSound(int tabNum) const
+{
+  // Prevent repeats?
+  static int prevTabNum = -1;
+  if (tabNum == prevTabNum) return;
+  prevTabNum = tabNum;
+
+  if (!s_tabStopSoundFilename.empty())
+  {
+    static SoundManager* s = TheSoundManager::Instance();
+    s->PlayWav(s_tabStopSoundFilename);
+  }
+}
+
 void GuiScroll::Update()
 {
   GuiComposite::Update();
@@ -96,15 +116,46 @@ void GuiScroll::Update()
   Assert(m_children.size() == 1);
   //GuiElement* child = m_children[0];
 
-  float dt = TheTimer::Instance()->GetDt();
-  static const float DECEL = 0.5f; // TODO
-  m_scrollVel *= std::max(0.0f, (1.0f - DECEL * dt));
+  const float dt = TheTimer::Instance()->GetDt();
+  static const float DECEL = 0.25f; // TODO
+  const float DECEL_MIN = 0.7f;
+  m_scrollVel *= std::max(DECEL_MIN, (1.0f - DECEL * dt));
+
+  auto oldScrollPos(m_scrollPos);
   m_scrollPos += m_scrollVel * dt;
+
+  // Check for tab stop in x..
+  if (m_tabStopSize.x > 0)
+  {
+    const int oldTabNum = static_cast<int>(oldScrollPos.x / m_tabStopSize.x);
+    const int newTabNum = static_cast<int>(m_scrollPos.x / m_tabStopSize.x);
+    if (oldTabNum != newTabNum)
+    {
+      // We hit a tab stop - play click wav if required
+      //PlayTabStopSound(newTabNum);
+
+      const float MIN_VEL = 2.f;
+      const float TAB_STOP_VEL_MULT = 0.25f;
+
+      if (std::abs(m_scrollVel.x) <= MIN_VEL)
+      {
+        // Fix position and stop
+        // Oh no this doesn't work: m_scrollPos.x = newTabNum * m_tabStopSize.x;
+        m_scrollVel.x = 0;
+      }
+      else
+      {
+        m_scrollVel *= TAB_STOP_VEL_MULT;
+      }
+    }
+  }
 
   // x-axis
   // Bounce or stop on end reached
   if (m_scrollPos.x < -m_extents.x)
   {
+//    PlayTabStopSound();
+
     m_scrollPos.x = -m_extents.x;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;
@@ -116,6 +167,8 @@ void GuiScroll::Update()
   // depends on size of child and how much space there is to display it
   if (m_scrollPos.x > 0)
   {
+//    PlayTabStopSound();
+
     m_scrollPos.x = 0;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;
@@ -130,7 +183,7 @@ void GuiScroll::Update()
 
   if (m_scrollPos.y < miny)
   {
-std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
+//std::cout << "Scroll: hit m_scrollPos.y = 0, stopping.\n";
 
     m_scrollPos.y = miny;
 #ifdef BOUNCE
@@ -221,7 +274,7 @@ void GuiScroll::InitScrollBar()
 void GuiScroll::SetExtents(const Vec2f& extents)
 {
   m_extents = extents;
- // SetSize(extents);
+ // SetSize(extents); // ?
 }
 
 }
