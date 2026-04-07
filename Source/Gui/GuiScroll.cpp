@@ -10,6 +10,7 @@
 
 // Bounce doesn't work yet
 //#define BOUNCE
+//#define SCROLL_DEBUG
 
 namespace Amju
 {
@@ -58,12 +59,16 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
 
 bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 {
+  // Unfortunately, dx and dy are not reliable on all platforms
+  Vec2f delta(Vec2f(ce.x, ce.y) - m_lastCursorPos);
+  m_lastCursorPos = Vec2f(ce.x, ce.y);
+  
   Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 
   if (m_leftDrag)
   {
-    OnScrollVelEvent(Vec2f(ce.dx * 10.0f, ce.dy * 10.0f)); // TODO TEMP TEST x/y scroll flags
+    OnScrollVelEvent(Vec2f(delta.x * 10.0f, delta.y * 10.0f)); // TODO TEMP TEST x/y scroll flags
   }
 
   return child->OnCursorEvent(ce); 
@@ -71,6 +76,8 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 
 bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
+  m_lastCursorPos = Vec2f(mbe.x, mbe.y);
+  
   Assert(m_children.size() >= 1);
   GuiElement* child = m_children[0];
 

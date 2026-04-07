@@ -54,6 +54,9 @@ protected:
   Vec2f m_tabStopSize;
 
   static std::string s_tabStopSoundFilename;
+  
+  // Used to get (dx, dy), as cursor pos delta isn't reliable.
+  Vec2f m_lastCursorPos;
 };
 }
 
