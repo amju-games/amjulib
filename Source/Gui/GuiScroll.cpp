@@ -104,15 +104,50 @@ void GuiScroll::Draw()
 
 void GuiScroll::PlayTabStopSound(int tabNum) const
 {
-  // Prevent repeats?
-  static int prevTabNum = -1;
-  if (tabNum == prevTabNum) return;
-  prevTabNum = tabNum;
+  // prevent repeats?
+  //static int prevtabnum = -1;
+  //if (tabNum == prevtabnum) return;
+  //prevtabnum = tabNum;
 
   if (!s_tabStopSoundFilename.empty())
   {
     static SoundManager* s = TheSoundManager::Instance();
     s->PlayWav(s_tabStopSoundFilename);
+  }
+}
+
+void GuiScroll::UpdateForTabStops()
+{
+  const float STOPPING_DISTANCE = 0.008f;
+  const float STOPPING_VEL = 0.2f;
+  const float SPEED_BUMP_MULT = 0.6f;
+
+  // Calc the closest tab stop to the current pos
+  int closestTabNum = static_cast<int>(std::round(m_scrollPos.x / m_tabStopSize.x));
+  float closestTabStop = m_tabStopSize.x * closestTabNum;
+  // Within stopping distance, with low velocity, we click into place.
+  float dist = std::abs(m_scrollPos.x - closestTabStop);
+  
+  // Don't do speedbump if being dragged
+  if (   dist < STOPPING_DISTANCE 
+      && !m_leftDrag 
+      && std::abs(m_scrollVel.x) > 0) 
+  {
+    // Speed bump: reduce vel
+    m_scrollVel.x *= SPEED_BUMP_MULT;
+
+    if (std::abs(m_scrollVel.x) < STOPPING_VEL)
+    {
+      m_scrollPos.x = closestTabStop;
+      m_scrollVel.x = 0;
+      if (closestTabNum != m_lastTabStop)
+      {
+        // We have hit a tap stop and stopped: call the callback if it exists.
+        if (m_tabStopCallback) m_tabStopCallback(this, closestTabNum);
+        m_lastTabStop = closestTabNum;
+        PlayTabStopSound(closestTabNum);
+      }
+    }
   }
 }
 
@@ -128,40 +163,19 @@ void GuiScroll::Update()
   const float DECEL_MIN = 0.7f;
   m_scrollVel *= std::max(DECEL_MIN, (1.0f - DECEL * dt));
 
-  auto oldScrollPos(m_scrollPos);
   m_scrollPos += m_scrollVel * dt;
 
   // Check for tab stop in x..
   if (m_tabStopSize.x > 0)
   {
-    const int oldTabNum = static_cast<int>(oldScrollPos.x / m_tabStopSize.x);
-    const int newTabNum = static_cast<int>(m_scrollPos.x / m_tabStopSize.x);
-    if (oldTabNum != newTabNum)
-    {
-      // We hit a tab stop - play click wav if required
-      //PlayTabStopSound(newTabNum);
-
-      const float MIN_VEL = 2.f;
-      const float TAB_STOP_VEL_MULT = 0.25f;
-
-      if (std::abs(m_scrollVel.x) <= MIN_VEL)
-      {
-        // Fix position and stop
-        // Oh no this doesn't work: m_scrollPos.x = newTabNum * m_tabStopSize.x;
-        m_scrollVel.x = 0;
-      }
-      else
-      {
-        m_scrollVel *= TAB_STOP_VEL_MULT;
-      }
-    }
+    UpdateForTabStops();
   }
 
   // x-axis
   // Bounce or stop on end reached
   if (m_scrollPos.x < -m_extents.x)
   {
-//    PlayTabStopSound();
+    //if (m_tabStopCallback) m_tabStopCallback(this, 0);
 
     m_scrollPos.x = -m_extents.x;
 #ifdef BOUNCE
@@ -174,8 +188,6 @@ void GuiScroll::Update()
   // depends on size of child and how much space there is to display it
   if (m_scrollPos.x > 0)
   {
-//    PlayTabStopSound();
-
     m_scrollPos.x = 0;
 #ifdef BOUNCE
     m_scrollVel.x = -0.25f * m_scrollVel.x;

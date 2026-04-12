@@ -1,6 +1,7 @@
 #ifndef GUI_SCROLL_H_INCLUDED
 #define GUI_SCROLL_H_INCLUDED
 
+#include <functional>
 #include "GuiComposite.h"
 #include "GuiScrollBar.h"
 
@@ -24,6 +25,8 @@ public:
 
   void SetExtents(const Vec2f& extents);
   void SetTabStopSize(const Vec2f& tabStopSize) { m_tabStopSize = tabStopSize; }
+  using TabStopCallback = std::function<void(GuiElement* thisScroller, int tabStop)>;
+  void SetTabStopCallback(TabStopCallback tscb) { m_tabStopCallback = tscb; }
 
   virtual bool OnKeyEvent(const KeyEvent&); 
   virtual bool OnCursorEvent(const CursorEvent&);
@@ -35,6 +38,8 @@ public:
 
 protected:
   void PlayTabStopSound(int tabStopNum) const;
+
+  void UpdateForTabStops();
 
 protected:
   // Offset in x and y
@@ -54,7 +59,10 @@ protected:
   Vec2f m_tabStopSize;
 
   static std::string s_tabStopSoundFilename;
-  
+
+  TabStopCallback m_tabStopCallback; // called when we hit a tabstop
+  int m_lastTabStop = -1; // keep track of most recent tab stop we hit
+
   // Used to get (dx, dy), as cursor pos delta isn't reliable.
   Vec2f m_lastCursorPos;
 };
