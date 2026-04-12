@@ -135,7 +135,7 @@ void GuiText::SetDrawBg(bool drawBg)
   m_drawBg = drawBg;
 }
 
-void GuiText::SetFgCol(const Colour& col)
+void GuiTextBase::SetFgCol(const Colour& col)
 {
   m_fgCol = col;
 }
@@ -145,7 +145,7 @@ void GuiText::SetBgCol(const Colour& col)
   m_bgCol = col;
 }
 
-Font* GuiText::GetFont()
+Font* GuiTextBase::GetFont()
 {
   if (!m_font)
   {
@@ -156,12 +156,12 @@ Font* GuiText::GetFont()
   return m_font;
 }
 
-void GuiText::SetFont(Font* font)
+void GuiTextBase::SetFont(Font* font)
 {
   m_font = font;
 }
 
-void GuiText::SetFont(const std::string& fontName)
+void GuiTextBase::SetFont(const std::string& fontName)
 {
   m_fontPathFilename = fontName;
   GetFont();
@@ -512,18 +512,25 @@ void GuiText::SetText(const std::string& escapedText)
   RecalcFirstLast();
 }
 
-bool GuiText::IsMulti() const
+bool GuiTextBase::IsMulti() const
 {
   return m_isMulti;
 }
 
-int GuiText::GetNumLines() const
+int GuiTextBase::GetNumLines() const
 {
   if (IsMulti())
   {
     return m_lines.size();
   }
   return 1; 
+}
+
+void GuiTextBase::SetIsMulti(bool multi)
+{
+  if (multi == m_isMulti) return;
+  m_isMulti = multi;
+  SetText(m_text);
 }
 
 void GuiText::SetIsMulti(bool multi)
@@ -671,14 +678,9 @@ bool GuiText::LoadText(File* f)
   return true;
 }
 
-bool GuiText::HandleAttrib(const std::string& s)
+bool GuiTextBase::HandleAttrib(const std::string& s)
 {
-  if (s == "inv")
-  {
-    m_inverse = true;
-    return true;
-  }
-  else if (s == "left")
+  if (s == "left")
   {
     m_just = AMJU_JUST_LEFT;
     return true;
@@ -688,7 +690,7 @@ bool GuiText::HandleAttrib(const std::string& s)
     m_just = AMJU_JUST_RIGHT;
     return true;
   }
-  else if (s == "centre")
+  else if (s == "centre") 
   {
     m_just = AMJU_JUST_CENTRE;
     return true;
@@ -696,6 +698,23 @@ bool GuiText::HandleAttrib(const std::string& s)
   else if (s == "multi")
   {
     SetIsMulti(true);
+    return true;
+  }
+  return false;
+}
+
+bool GuiTextBase::HandleAttrib(const std::string& key, const std::string& value)
+{
+  return false;
+}
+
+bool GuiText::HandleAttrib(const std::string& s)
+{
+  if (GuiTextBase::HandleAttrib(s)) return true;
+
+  if (s == "inv")
+  {
+    m_inverse = true;
     return true;
   }
   return false;
@@ -745,7 +764,7 @@ bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
   return false;
 }
 
-const Colour& GuiText::GetFgCol() const
+const Colour& GuiTextBase::GetFgCol() const
 {
   return m_fgCol;
 }

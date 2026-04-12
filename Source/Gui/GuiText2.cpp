@@ -21,7 +21,7 @@ void GuiText2::Draw()
   AmjuGL::Translate(pos.x, pos.y, 0); 
   AmjuGL::Scale(size.x, size.y, 1); 
   m_combinedTransform.ModelView();
-  m_combinedColour = AmjuGL::GetColour();
+  m_combinedColour = AmjuGL::GetColour() * m_fgCol;
   AmjuGL::PopMatrix();
 
   BuildTriList();
@@ -33,10 +33,30 @@ void GuiText2::BuildTriList()
 
   const Vec2f& pos = GetCombinedPos();
 
-  float oldSize = m_font->GetSize();
+  const float oldSize = m_font->GetSize();
   m_font->SetSize(m_textSize * oldSize);
+  std::string str = m_text; // split for multi-line
 
-  m_tris = m_font->MakeTriList(pos.x, pos.y, m_text.c_str(), 1.f);
+  Vec2f size = GetSize();
+  float x = 0; // left edge of text, calculated below depending on justification
+  switch (m_just)
+  {
+  case AMJU_JUST_LEFT:
+    x = pos.x;
+    break;
+
+  case AMJU_JUST_RIGHT:
+    x = pos.x + size.x - GetTextWidth(str);
+    break;
+
+  case AMJU_JUST_CENTRE:
+    // divide by font size required to fix centering, but TODO: why??
+    const float w = GetTextWidth(str) / m_textSize;
+    x = pos.x + 0.5f * (size.x - w);
+    break;
+  }
+
+  m_tris = m_font->MakeTriList(x, pos.y, m_text.c_str(), 1.f);
   for (auto& t : m_tris)
   {
     t.SetColour(m_combinedColour);
@@ -72,19 +92,51 @@ bool GuiText2::Load(File* f)
 
 bool GuiText2::HandleAttrib(const std::string& s) 
 {
-  return true;
+  if (GuiTextBase::HandleAttrib(s)) return true;
+  return false;
 }
 
 bool GuiText2::HandleAttrib(const std::string& key, const std::string& value)
 {
-  return true;
+  if (GuiTextBase::HandleAttrib(key, value)) return true;
+
+  if (key == "fgcol")
+  {
+    auto optionalColour = FromHexString(value);
+    if (optionalColour)
+    {
+      m_fgCol = *optionalColour;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  return false;
 }
+
+struct WidthFinder2
+{
+  WidthFinder2(GuiText2* g) : m_guiText(g) {}
+  float operator()(const std::string& s)
+  {
+    return m_guiText->GetTextWidth(s);
+  }
+  GuiText2* m_guiText;
+};
 
 void GuiText2::SetText(const std::string& text)
 {
   auto t = ReplaceEscaped(text);
   if (t == m_text) return;
   m_text = t;
+
+  if (m_isMulti)
+  {
+    const float availWidth = GetSize().x;
+    m_lines = WordWrap(m_text, availWidth, WidthFinder2(this));
+  }
 
   m_tris.clear(); // to rebuild
 }
@@ -98,5 +150,10 @@ void GuiText2::AddToTrilist(AmjuGL::Tris& tris)
 {
   tris.insert(tris.end(), m_tris.begin(), m_tris.end());
 }
-}
 
+float GuiText2::GetTextWidth(const std::string& text) const
+{
+  const float textWidth = const_cast<GuiText2*>(this)->GetFont()->GetTextWidth(text);
+  return textWidth * m_textSize;
+}
+}

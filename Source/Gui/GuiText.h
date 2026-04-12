@@ -9,6 +9,8 @@
 
 namespace Amju
 {
+// This interface is so we can include platform-specific text widgets,
+//  where get/set text is the only operation we can be sure of.
 class IGuiText
 {
 public:
@@ -18,7 +20,7 @@ public:
 };
 
 // ** GuiTextBase **
-// Useful members for text subclasses
+// Useful members for GuiElement text-based subclasses
 class GuiTextBase : public IGuiText, public GuiElement
 {
 public:
@@ -26,16 +28,31 @@ public:
 
   std::string GetText() const override { return m_text; }
 
+  virtual void SetJust(Just j) { m_just = j; }
+
+  Font* GetFont();
+  void SetFont(Font*);
+  void SetFont(const std::string& fontName);
+
+  virtual void SetIsMulti(bool multi); // Set to true for multi-line text
+  bool IsMulti() const;
+  int GetNumLines() const;
+
+  void SetFgCol(const Colour& col);
+  const Colour& GetFgCol() const;
+
 protected:
   bool ParseFontInfoLine(File* f);
 
   // Handle single-string attribute when loading 
   //  (and potentially when setting properties)
-  virtual bool HandleAttrib(const std::string& s) = 0;
+  // Overridden impls: call this first, then handle more specific attribs if not
+  //  handled by this impl (i.e. false is returned).
+  virtual bool HandleAttrib(const std::string& s);
 
   // Handle key=value pair when loading 
   //  (and potentially when setting properties)
-  virtual bool HandleAttrib(const std::string& key, const std::string& value) = 0;
+  virtual bool HandleAttrib(const std::string& key, const std::string& value);
 
   // Replace special chars and utf-8 sequences 
   std::string ReplaceEscaped(const std::string& escapedText);
@@ -46,8 +63,11 @@ protected:
   std::string m_fontPathFilename;
   std::string m_fontName;
   PFont m_font;
-  Just m_just;
-  float m_textSize; // "point" size
+  Just m_just = AMJU_JUST_LEFT;
+  float m_textSize = 1.f; // "point" size
+  bool m_isMulti = false; // true for multi-line text
+  Strings m_lines; // for multi-line text, this is m_text split into lines
+  Colour m_fgCol; // 'foreground colour', i.e. colour of the text
 };
  
 class GuiText : public GuiTextBase
@@ -74,12 +94,14 @@ public:
 
   virtual void SetText(const std::string& text) override;
 
-  void SetJust(Just j);
+  void SetJust(Just j) override;
 
   // Really font size 
   void SetFontSize(float textSize);
   float GetFontSize() const;
   
+  void SetIsMulti(bool) override; // Set to true for multi-line text
+
   // Set X scale, to squish more text into a tight squeeze, etc
   void SetScaleX(float scaleX);
   float GetScaleX() const;
@@ -93,21 +115,10 @@ public:
   // Call to decide which bits of the text fit in the bounding rect
   void RecalcFirstLast();
 
-  Font* GetFont();
-  void SetFont(Font*);
-  void SetFont(const std::string& fontName);
-
   void SetInverse(bool inv);
   void SetDrawBg(bool drawBg);
-  void SetFgCol(const Colour& col);
   void SetBgCol(const Colour& col);
-  const Colour& GetFgCol() const;
   const Colour& GetBgCol() const;
-
-  void SetIsMulti(bool); // Multi line ?
-  bool IsMulti() const;
-
-  int GetNumLines() const;
 
   // For text which is revealed a char at a time, this is the period for each char
   void SetCharTime(float secs);
@@ -143,14 +154,11 @@ protected:
   bool m_inverse;
   bool m_drawBg;
   Colour m_bgCol;
-  Colour m_fgCol;
 
   float m_charTime; // time to wait between drawing chars
   float m_currentCharTime; // show one more char when we reach m_charTime
   int m_currentChar; // index of final char to draw
 
-  bool m_isMulti;
-  Strings m_lines; // for multi-line text boxes, split the text into lines
   int m_topLine; // first line displayed
 
   // First and last chars drawn in line (single line only)

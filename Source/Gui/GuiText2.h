@@ -25,6 +25,8 @@ public:
 
   void SetText(const std::string& text) override; // IGuiText
 
+  float GetTextWidth(const std::string& text) const; // public for Width Finder
+
 protected:
   void BuildTriList();
 
@@ -33,7 +35,6 @@ protected:
   
 protected:
   AmjuGL::Tris m_tris;
-  Strings m_strings;
 };
 }
  
