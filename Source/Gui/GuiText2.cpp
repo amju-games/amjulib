@@ -29,7 +29,7 @@ void GuiText2::Draw()
 
 void GuiText2::BuildTriList()
 {
-  //m_tris.clear(); // required for multi line I expect
+  m_tris.clear(); // required for multi-line
 
   const Vec2f& pos = GetCombinedPos();
 
@@ -37,7 +37,27 @@ void GuiText2::BuildTriList()
   m_font->SetSize(m_textSize * oldSize);
   std::string str = m_text; // split for multi-line
 
-  Vec2f size = GetSize();
+  if (m_isMulti)
+  {
+    Vec2f p(pos);
+    for (const auto& s : m_lines)
+    {
+      BuildTriListForLine(s, p);
+      p.y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1; // +ve Y is UP
+    }
+  }
+  else
+  {
+    BuildTriListForLine(m_text, pos);
+  }
+
+  m_font->SetSize(oldSize);
+}
+
+void GuiText2::BuildTriListForLine(const std::string& str, const Vec2f& pos)
+{
+  const Vec2f& size = GetSize();
+
   float x = 0; // left edge of text, calculated below depending on justification
   switch (m_just)
   {
@@ -50,19 +70,17 @@ void GuiText2::BuildTriList()
     break;
 
   case AMJU_JUST_CENTRE:
-    // divide by font size required to fix centering, but TODO: why??
-    const float w = GetTextWidth(str) / m_textSize;
+    const float w = GetTextWidth(str);
     x = pos.x + 0.5f * (size.x - w);
     break;
   }
 
-  m_tris = m_font->MakeTriList(x, pos.y, m_text.c_str(), 1.f);
-  for (auto& t : m_tris)
+  auto tris = m_font->MakeTriList(x, pos.y, str.c_str(), 1.f);
+  for (auto& t : tris)
   {
     t.SetColour(m_combinedColour);
   }
-
-  m_font->SetSize(oldSize);
+  m_tris.insert(m_tris.end(), tris.begin(), tris.end());
 }
 
 bool GuiText2::Load(File* f) 
@@ -116,16 +134,6 @@ bool GuiText2::HandleAttrib(const std::string& key, const std::string& value)
   return false;
 }
 
-struct WidthFinder2
-{
-  WidthFinder2(GuiText2* g) : m_guiText(g) {}
-  float operator()(const std::string& s)
-  {
-    return m_guiText->GetTextWidth(s);
-  }
-  GuiText2* m_guiText;
-};
-
 void GuiText2::SetText(const std::string& text)
 {
   auto t = ReplaceEscaped(text);
@@ -154,6 +162,6 @@ void GuiText2::AddToTrilist(AmjuGL::Tris& tris)
 float GuiText2::GetTextWidth(const std::string& text) const
 {
   const float textWidth = const_cast<GuiText2*>(this)->GetFont()->GetTextWidth(text);
-  return textWidth * m_textSize;
+  return textWidth;
 }
 }

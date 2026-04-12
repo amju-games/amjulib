@@ -30,11 +30,23 @@ public:
 protected:
   void BuildTriList();
 
+  void BuildTriListForLine(const std::string& str, const Vec2f& pos);
+
   bool HandleAttrib(const std::string& s) override; 
   bool HandleAttrib(const std::string& key, const std::string& value) override; 
   
 protected:
   AmjuGL::Tris m_tris;
+
+  struct WidthFinder2
+  {
+    WidthFinder2(GuiText2* g) : m_guiText(g) {}
+    float operator()(const std::string& s)
+    {
+      return m_guiText->GetTextWidth(s) * m_guiText->m_textSize;
+    }
+    GuiText2* m_guiText;
+  };
 };
 }
  

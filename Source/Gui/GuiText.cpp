@@ -27,9 +27,6 @@ bool GuiText::Load(File* f)
 
 const char* GuiText::NAME = "gui-text";
 
-// I.e. character at font size 1 takes up 1/20th of the screen height
-const float GuiText::CHAR_HEIGHT_FOR_SIZE_1 = 0.1f;
-
 GuiText::GuiText()
 {
   m_fontName = "arial";

@@ -26,6 +26,9 @@ class GuiTextBase : public IGuiText, public GuiElement
 public:
   enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
 
+  // I.e. character at font size 1 takes up 1/20th of the screen height
+  static constexpr float CHAR_HEIGHT_FOR_SIZE_1 = .1f;
+
   std::string GetText() const override { return m_text; }
 
   virtual void SetJust(Just j) { m_just = j; }
@@ -77,8 +80,6 @@ public:
   std::string GetTypeName() const override { return NAME; }
 
   GuiText* Clone() override { return new GuiText(*this); }
-
-  static const float CHAR_HEIGHT_FOR_SIZE_1;
 
   GuiText();
   virtual void Draw() override;
