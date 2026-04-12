@@ -23,10 +23,18 @@ public:
   void OnScrollVelEvent(const Vec2f& scrollVel);
   void StopScrolling(); // set velocity to zero
 
+  // Set range of movement
   void SetExtents(const Vec2f& extents);
+
+  // Set distance between tab stops
   void SetTabStopSize(const Vec2f& tabStopSize) { m_tabStopSize = tabStopSize; }
+
+  // Set callback for when we lock onto a tab stop if required
   using TabStopCallback = std::function<void(GuiElement* thisScroller, int tabStop)>;
   void SetTabStopCallback(TabStopCallback tscb) { m_tabStopCallback = tscb; }
+
+  // Set position at a specific tabstop, i.e. a multiple of tab stop size.
+  void SetTabStop(int tabStop);
 
   virtual bool OnKeyEvent(const KeyEvent&); 
   virtual bool OnCursorEvent(const CursorEvent&);

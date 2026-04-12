@@ -116,6 +116,13 @@ void GuiScroll::PlayTabStopSound(int tabNum) const
   }
 }
 
+void GuiScroll::SetTabStop(int tabStop)
+{
+  m_lastTabStop = tabStop;
+  float closestTabStop = m_tabStopSize.x * tabStop;
+  m_scrollPos.x = closestTabStop;
+}
+
 void GuiScroll::UpdateForTabStops()
 {
   const float STOPPING_DISTANCE = 0.008f;
