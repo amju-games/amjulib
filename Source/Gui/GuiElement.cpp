@@ -241,7 +241,7 @@ PGuiElement LoadGui(const std::string& filename, bool addAsListener)
     TheEventPoller::Instance()->AddListener(gui);
   }
 
-#ifdef _DEBUG
+#ifdef GUI_LOAD_DEBUG
   std::cout << "Loaded GUI: " << filename << "\n";
 #endif
 
