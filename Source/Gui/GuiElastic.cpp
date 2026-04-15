@@ -1,6 +1,10 @@
-#include <Timer.h>
-#include <Sign.h>
+#ifdef ELASTIC_DEBUG
+#include <iostream>
+#endif
+
 #include <LoadVec3.h>
+#include <Sign.h>
+#include <Timer.h>
 #include "GuiElastic.h"
 
 namespace Amju
@@ -25,7 +29,9 @@ bool GuiElastic::Save(File* f)
   }
   if (!f->Write(ToString(m_offsetPos)))
   {
+#ifdef ELASTIC_DEBUG
     std::cout << "GuiElastic Save: Failed to write offset pos to file.\n";
+#endif
     Assert(false);
     return false;
   }
