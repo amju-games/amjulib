@@ -39,5 +39,18 @@ void Shader::SetVariables()
   }
 }
 
+static std::vector<PShader> s_shaderVec;
+
+void PushShader()
+{
+  s_shaderVec.push_back(AmjuGL::GetCurrentShader());
+}
+
+void PopShader()
+{
+  auto shader = s_shaderVec.back();
+  s_shaderVec.pop_back();
+  AmjuGL::UseShader(shader);
+}
 }
 

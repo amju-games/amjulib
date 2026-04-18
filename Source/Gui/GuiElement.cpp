@@ -508,6 +508,6 @@ bool GuiElement::IsVisible() const
 
 int GuiElement::GetBatchZ() const
 {
-  return std::round(m_localpos.z * 1000.f);
+  return static_cast<int>(std::round(m_localpos.z * 1000.f));
 }
 }

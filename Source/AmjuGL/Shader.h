@@ -108,6 +108,10 @@ protected:
 };
 
 using PShader = RCPtr<Shader>;
+
+void PushShader();
+
+void PopShader();
 }
 
 #endif
