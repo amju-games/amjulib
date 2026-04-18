@@ -801,9 +801,14 @@ void Md2Model::DrawFrames(int frame1, int frame2, float between)
         v1.m_pos[0] + between * (v2.m_pos[0] - v1.m_pos[0]),
         v1.m_pos[1] + between * (v2.m_pos[1] - v1.m_pos[1]),
         v1.m_pos[2] + between * (v2.m_pos[2] - v1.m_pos[2]), 
-        0, 1, 0 );
+        v1.m_normal[0] + between * (v2.m_normal[0] - v1.m_normal[0]), 
+        v1.m_normal[1] + between * (v2.m_normal[1] - v1.m_normal[1]),
+        v1.m_normal[2] + between * (v2.m_normal[2] - v1.m_normal[2]));
 
-      AmjuGL::Vert av(vm3.m_pos[0], vm3.m_pos[1], vm3.m_pos[2], vert->s, vert->t,  0, 1, 0); 
+      AmjuGL::Vert av(
+        vm3.m_pos[0], vm3.m_pos[1], vm3.m_pos[2], 
+        vert->s, vert->t,  
+        vm3.m_normal[0], vm3.m_normal[1], vm3.m_normal[2]);
 
       if (isStrip)
       {

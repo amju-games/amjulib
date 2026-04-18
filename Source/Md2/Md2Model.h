@@ -169,7 +169,6 @@ protected:
     int vertexIndex;
   };
 
-  // TODO Get rid of normals
   struct Md2Vertex
   {
     Md2Vertex() {}
