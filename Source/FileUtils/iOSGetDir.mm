@@ -4,14 +4,26 @@
 
 std::string iOSGetDataDir()
 {
+  NSString *bundlePath = [[NSBundle mainBundle] resourcePath];
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  // Use a sub-enumerator to look inside all folders
+  NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtPath:bundlePath];
+  
+  NSLog(@"--- START BUNDLE SCAN ---");
+  NSString *filePath;
+  while ((filePath = [enumerator nextObject])) {
+    NSLog(@"FILE FOUND: %@", filePath);
+  }
+  NSLog(@"--- END BUNDLE SCAN ---");
+  
   // Get path to data files
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+  NSString *filePath2 = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
 
   // Convert NSString to char* From http://forums.macrumors.com/showthread.php?t=494103
   //NSString *foo = @"your text here";
   //const char *bar = [foo UTF8String];
 
-  const char* cFilePath = [filePath UTF8String];
+  const char* cFilePath = [filePath2 UTF8String];
   return Amju::GetFilePath(cFilePath) + "/";
 }
 
