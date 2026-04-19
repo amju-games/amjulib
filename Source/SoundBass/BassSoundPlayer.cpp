@@ -449,7 +449,7 @@ void BassSoundPlayer::SetSongMaxVolume(float f)
 #endif
 }
 
-#ifdef AMJU_USE_BASS_MIDI
+//#ifdef AMJU_USE_BASS_MIDI
 static HSTREAM str = 0;
 bool BassSoundPlayer::MidiSetSoundFont(const std::string& soundfont)
 {
@@ -504,7 +504,6 @@ bool BassSoundPlayer::MidiNoteOff(int note)
   BASS_MIDI_StreamEvent(str, 0, MIDI_EVENT_NOTE, MAKEWORD(note, 0));
   return true;
 }
-#endif // AMJU_USE_BASS_MIDI
+//#endif // AMJU_USE_BASS_MIDI
 }
 #endif // AMJU_USE_BASS
-

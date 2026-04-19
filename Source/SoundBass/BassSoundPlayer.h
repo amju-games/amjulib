@@ -2,9 +2,9 @@
 Amju Games source code (c) Copyright Juliet Colman 2006
 */
 
+#pragma once
+
 #ifdef AMJU_USE_BASS 
-#ifndef AMAJU_BASS_SOUND_PLAYER_H_INCLUDED
-#define AMAJU_BASS_SOUND_PLAYER_H_INCLUDED
 
 #include <SoundPlayerImpl.h>
 
@@ -32,11 +32,11 @@ public:
   void Update() override;
   void SetSongMaxVolume(float) override;
 
-#ifdef AMJU_USE_BASS_MIDI
+//#ifdef AMJU_USE_BASS_MIDI
   bool MidiSetSoundFont(const std::string& soundFontFile) override;
   bool MidiNoteOn(int note, int velocity) override;
   bool MidiNoteOff(int note) override;
-#endif // AMJU_USE_BASS_MIDI
+//#endif // AMJU_USE_BASS_MIDI
    
 private:
   unsigned int LoadSong(const std::string& songFile);
@@ -49,6 +49,4 @@ private:
 };
 }
 
-#endif
 #endif // AMJU_USE_BASS
-
