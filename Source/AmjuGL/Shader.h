@@ -61,6 +61,8 @@ class Shader : public Resource
 public:
   virtual ~Shader() {}
 
+  void UseThisShader() { AmjuGL::UseShader(this); }
+
   // TODO Allow multiple techniques ?
   virtual void Begin() = 0;
   virtual void End() = 0;
@@ -89,7 +91,7 @@ public:
 
   // Do API-specific code to enable this shader. Call SetVariables to set
   //  values for uniforms and attribs.
-  virtual void UseThisShader() = 0;
+  virtual void EnableThisShader_ONLY_CALL_FROM_AMJUGL() = 0;
  
   void AddAttribute(Attribute* av);
   void AddUniform(Uniform* uv); 

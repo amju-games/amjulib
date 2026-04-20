@@ -46,7 +46,7 @@ public:
   virtual void Set(const std::string& name, AmjuGL::TextureHandle) override;
   virtual void SetInt(const std::string& name, int i) override;
 
-  virtual void UseThisShader() override;
+  virtual void EnableThisShader_ONLY_CALL_FROM_AMJUGL() override;
   
   int GetProgHandle() const;
   

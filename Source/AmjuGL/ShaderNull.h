@@ -20,7 +20,7 @@ public:
   void Set(const std::string& name, AmjuGL::TextureHandle) override {}
   void SetMatrix3x3(const std::string& name, const float matrix[9]) override {}
   void SetInt(const std::string& name, int i) override {}
-  void UseThisShader() override {} 
+  void EnableThisShader_ONLY_CALL_FROM_AMJUGL() override {} 
   int FindUniformLocation(const std::string& uniformName) override { return -1; }
   int FindAttribLocation(const std::string& attribName) override { return -1; }
 };

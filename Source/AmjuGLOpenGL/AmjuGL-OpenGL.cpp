@@ -735,12 +735,11 @@ Shader* AmjuGLOpenGL::LoadShader(const std::string& shaderFileName)
 
 void AmjuGLOpenGL::UseShader(Shader* sh)
 {
-  GLShader* glshader = dynamic_cast<GLShader*>(sh);
+  GLShader* glshader = dynamic_cast<GLShader*>(sh); // just to sanity check
   if (sh)
   {
-    Assert(glshader);
-    ////glUseProgram(glshader->GetProgHandle());
-    sh->UseThisShader();
+    Assert(glshader); // the sanity check, if sh is non-null.
+    sh->EnableThisShader_ONLY_CALL_FROM_AMJUGL();
   }  
   else
   {

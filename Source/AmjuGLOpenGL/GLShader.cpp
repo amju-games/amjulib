@@ -306,7 +306,7 @@ void GLShader::Begin()
   }
 }
 
-void GLShader::UseThisShader()
+void GLShader::EnableThisShader_ONLY_CALL_FROM_AMJUGL()
 {
   glUseProgram(m_programHandle);
   prevHandle = m_programHandle;

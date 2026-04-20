@@ -318,7 +318,7 @@ void AmjuGLOpenGLES2::UseShader(Shader* sh)
     {
         s_currentShader = s_defaultShader;
     }
-    s_currentShader->UseThisShader();
+    s_currentShader->EnableThisShader_ONLY_CALL_FROM_AMJUGL();
 }    
     
 Shader* AmjuGLOpenGLES2::LoadShader(const std::string& shaderFileName)
