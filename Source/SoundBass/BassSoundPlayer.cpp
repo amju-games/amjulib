@@ -6,17 +6,14 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 
 #ifdef AMJU_USE_BASS
 #include <iostream>
+
+// These two files are copied from 3rdPartyLibs/Bass/.. to this dir.
+#include "bass.h"
+#include "bassmidi.h"
+
 #include "BassSoundPlayer.h"
 #include <SoundManager.h>
 #include "StringUtils.h"
-#if defined(MACOSX)|| defined(AMJU_IOS)
-#include "Bass2.4/Macosx/bass.h"
-#include "Bass2.4/Macosx/bassmidi.h"
-#endif
-#ifdef WIN32
-#include "Bass2.4/Win/bass.h"
-#include "Bass2.4/Win/bassmidi.h"
-#endif
 #include <StringUtils.h>
 #include <File.h>
 #include <AmjuFinal.h>
@@ -45,10 +42,9 @@ BassSoundPlayer::BassSoundPlayer()
   m_chan = (DWORD)-1; 
 
   // check that expected version was loaded
-  unsigned long ver = BASS_GetVersion();
-#ifdef BASS_DEBUG
-std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
-#endif
+  auto ver = BASS_GetVersion();
+  std::cout << "BASS version: " << ToHexString(ver).c_str() << "\n";
+  std::cout << "BASSMIDI version: " << ToHexString(BASS_MIDI_GetVersion()) << "\n";
 
   if (HIWORD(ver) != BASSVERSION) 
   {
@@ -467,26 +463,16 @@ std::cout << "Setting sound font: " << soundfont << "\n";
   { 
     font.preset=-1; // all presets
     font.bank=0; // default bank(s)
-    BASS_MIDI_StreamSetFonts(0,&font,1); // make it the default
     BASS_MIDI_StreamSetFonts(str,&font,1); // apply to current stream too
 
     std::cout << "Sound font seems to have been set ok.\n";
   }
   else
   {
-//#ifdef _DEBUG
     std::cout << "Failed to load soundfont: " << soundfont << "\n";
     std::cout << BASS_ErrorGetCode() << "\n";
-//#endif
     return false;
   }
-
-  // 10ms update period 
-//  BASS_SetConfig(BASS_CONFIG_UPDATEPERIOD,10);
-
-//  BASS_SetConfig(BASS_CONFIG_BUFFER, 64); 
-  // 500 default; we want to decrease latency but not
-  //  break up the sound
 
   BASS_ChannelPlay(str, FALSE /* don't restart the channel */);
 
