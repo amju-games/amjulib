@@ -7,7 +7,7 @@ DOWNLOAD NEW VERSION
  - Use full version number as directory name
 
 HEADERS
- - Copy bass.lib and bassmidi.lib to <amjulib>/Source/SoundBass. 
+ - Copy bass.h and bassmidi.h to <amjulib>/Source/SoundBass. 
 
 LINKING
  - Mac: Copy dylibs from here to game dir. 
@@ -15,5 +15,9 @@ LINKING
 	 - We also need to strip off the 'quarantine' flags on the libs 
  - iOS: add the xcprojects to the iOS project in xcode.
 	 - R-click on Frameworks, Add files to ..
+ - MSVC: in Solution Explorer, expand Libs sub-tree. Delete bass.lib and bassmidi.lib,
+         and re-add (R-click -> Add -> Existing Items) the more recent versions in amjulib/3rdPartyLibs.
+         (Surprisingly, that seems to be it - what about the DLLs? The versions displayed in the console
+          are correct, so I am not sure how it is working.)
 
 
