@@ -1964,36 +1964,12 @@
 		693D427E15AB7CE900B84D5C /* SoundBass */ = {
 			isa = PBXGroup;
 			children = (
-				693D428C15AB7CE900B84D5C /* Bass2.4 */,
 				693D429815AB7CE900B84D5C /* BassSoundPlayer.cpp */,
 				693D429915AB7CE900B84D5C /* BassSoundPlayer.h */,
 			);
 			name = SoundBass;
 			path = ../../../Source/SoundBass;
 			sourceTree = SOURCE_ROOT;
-		};
-		693D428C15AB7CE900B84D5C /* Bass2.4 */ = {
-			isa = PBXGroup;
-			children = (
-				693D428D15AB7CE900B84D5C /* iPhone */,
-			);
-			path = Bass2.4;
-			sourceTree = "<group>";
-		};
-		693D428D15AB7CE900B84D5C /* iPhone */ = {
-			isa = PBXGroup;
-			children = (
-				693D428F15AB7CE900B84D5C /* mp3-free */,
-			);
-			path = iPhone;
-			sourceTree = "<group>";
-		};
-		693D428F15AB7CE900B84D5C /* mp3-free */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "mp3-free";
-			sourceTree = "<group>";
 		};
 		693D429A15AB7CE900B84D5C /* Strings */ = {
 			isa = PBXGroup;

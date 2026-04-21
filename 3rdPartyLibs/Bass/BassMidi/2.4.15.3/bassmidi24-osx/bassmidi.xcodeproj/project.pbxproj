@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C254F6D24BFA2F400E5137E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F6C24BFA2F400E5137E /* AppDelegate.m */; };
+		3C254F7024BFA2F400E5137E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F6F24BFA2F400E5137E /* ViewController.m */; };
+		3C254F7524BFA2F500E5137E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C254F7324BFA2F500E5137E /* Main.storyboard */; };
+		3C254F7824BFA2F500E5137E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F7724BFA2F500E5137E /* main.m */; };
+		3C254F8524BFA40D00E5137E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F8424BFA40D00E5137E /* AppDelegate.m */; };
+		3C254F8824BFA40D00E5137E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F8724BFA40D00E5137E /* ViewController.m */; };
+		3C254F8D24BFA40E00E5137E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C254F8B24BFA40E00E5137E /* Main.storyboard */; };
+		3C254F9024BFA40E00E5137E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C254F8F24BFA40E00E5137E /* main.m */; };
+		3C254FD424BFB5EA00E5137E /* libbassmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; };
+		3C254FD524BFB5EA00E5137E /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; };
+		3C254FD624BFB60A00E5137E /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; };
+		3C254FD724BFB60A00E5137E /* libbassmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; };
+		3C254FD824BFB60C00E5137E /* libbass.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3C254FD924BFB60C00E5137E /* libbassmidi.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3C254FDB24BFB61100E5137E /* libbass.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3C254FDC24BFB61100E5137E /* libbassmidi.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3C254FDF24BFBD6B00E5137E /* sf2pack.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C254FDE24BFBD6B00E5137E /* sf2pack.c */; };
+		3C254FE024BFBDA600E5137E /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; };
+		3C254FE124BFBDA600E5137E /* libbassmidi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; };
+		3CE9717D2AC590DE00F32DDD /* libbass.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD324BFB5EA00E5137E /* libbass.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3CE9717F2AC590E000F32DDD /* libbassmidi.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3C254F5924BFA2AC00E5137E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		3C254FDA24BFB60C00E5137E /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3C254FD924BFB60C00E5137E /* libbassmidi.dylib in Embed Libraries */,
+				3C254FD824BFB60C00E5137E /* libbass.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254FDD24BFB61100E5137E /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3C254FDC24BFB61100E5137E /* libbassmidi.dylib in Embed Libraries */,
+				3C254FDB24BFB61100E5137E /* libbass.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CE9717E2AC590DE00F32DDD /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				3CE9717F2AC590E000F32DDD /* libbassmidi.dylib in Embed Libraries */,
+				3CE9717D2AC590DE00F32DDD /* libbass.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3C254F5B24BFA2AC00E5137E /* sf2pack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sf2pack; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C254F6924BFA2F400E5137E /* synth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = synth.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C254F6B24BFA2F400E5137E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3C254F6C24BFA2F400E5137E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3C254F6E24BFA2F400E5137E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3C254F6F24BFA2F400E5137E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3C254F7424BFA2F500E5137E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C254F7624BFA2F500E5137E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C254F7724BFA2F500E5137E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C254F8124BFA40D00E5137E /* miditest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miditest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C254F8324BFA40D00E5137E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3C254F8424BFA40D00E5137E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3C254F8624BFA40D00E5137E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3C254F8724BFA40D00E5137E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3C254F8C24BFA40E00E5137E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C254F8E24BFA40E00E5137E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C254F8F24BFA40E00E5137E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbassmidi.dylib; sourceTree = "<group>"; };
+		3C254FD324BFB5EA00E5137E /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbass.dylib; sourceTree = "<group>"; };
+		3C254FDE24BFBD6B00E5137E /* sf2pack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sf2pack.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C254F5824BFA2AC00E5137E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254FE024BFBDA600E5137E /* libbass.dylib in Frameworks */,
+				3C254FE124BFBDA600E5137E /* libbassmidi.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254F6624BFA2F400E5137E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254FD424BFB5EA00E5137E /* libbassmidi.dylib in Frameworks */,
+				3C254FD524BFB5EA00E5137E /* libbass.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254F7E24BFA40D00E5137E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254FD624BFB60A00E5137E /* libbass.dylib in Frameworks */,
+				3C254FD724BFB60A00E5137E /* libbassmidi.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C254F5224BFA2AC00E5137E = {
+			isa = PBXGroup;
+			children = (
+				3C254F5D24BFA2AC00E5137E /* sf2pack */,
+				3C254F6A24BFA2F400E5137E /* synth */,
+				3C254F8224BFA40D00E5137E /* miditest */,
+				3C254F5C24BFA2AC00E5137E /* Products */,
+				3C254FCE24BFB5BE00E5137E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3C254F5C24BFA2AC00E5137E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C254F5B24BFA2AC00E5137E /* sf2pack */,
+				3C254F6924BFA2F400E5137E /* synth.app */,
+				3C254F8124BFA40D00E5137E /* miditest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C254F5D24BFA2AC00E5137E /* sf2pack */ = {
+			isa = PBXGroup;
+			children = (
+				3C254FDE24BFBD6B00E5137E /* sf2pack.c */,
+			);
+			path = sf2pack;
+			sourceTree = "<group>";
+		};
+		3C254F6A24BFA2F400E5137E /* synth */ = {
+			isa = PBXGroup;
+			children = (
+				3C254F6B24BFA2F400E5137E /* AppDelegate.h */,
+				3C254F6C24BFA2F400E5137E /* AppDelegate.m */,
+				3C254F6E24BFA2F400E5137E /* ViewController.h */,
+				3C254F6F24BFA2F400E5137E /* ViewController.m */,
+				3C254F7324BFA2F500E5137E /* Main.storyboard */,
+				3C254F7624BFA2F500E5137E /* Info.plist */,
+				3C254F7724BFA2F500E5137E /* main.m */,
+			);
+			path = synth;
+			sourceTree = "<group>";
+		};
+		3C254F8224BFA40D00E5137E /* miditest */ = {
+			isa = PBXGroup;
+			children = (
+				3C254F8324BFA40D00E5137E /* AppDelegate.h */,
+				3C254F8424BFA40D00E5137E /* AppDelegate.m */,
+				3C254F8624BFA40D00E5137E /* ViewController.h */,
+				3C254F8724BFA40D00E5137E /* ViewController.m */,
+				3C254F8B24BFA40E00E5137E /* Main.storyboard */,
+				3C254F8E24BFA40E00E5137E /* Info.plist */,
+				3C254F8F24BFA40E00E5137E /* main.m */,
+			);
+			path = miditest;
+			sourceTree = "<group>";
+		};
+		3C254FCE24BFB5BE00E5137E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C254FD324BFB5EA00E5137E /* libbass.dylib */,
+				3C254FD224BFB5EA00E5137E /* libbassmidi.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3C254F5A24BFA2AC00E5137E /* sf2pack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C254F6224BFA2AC00E5137E /* Build configuration list for PBXNativeTarget "sf2pack" */;
+			buildPhases = (
+				3C254F5724BFA2AC00E5137E /* Sources */,
+				3C254F5824BFA2AC00E5137E /* Frameworks */,
+				3C254F5924BFA2AC00E5137E /* CopyFiles */,
+				3CE9717E2AC590DE00F32DDD /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sf2pack;
+			productName = sf2pack;
+			productReference = 3C254F5B24BFA2AC00E5137E /* sf2pack */;
+			productType = "com.apple.product-type.tool";
+		};
+		3C254F6824BFA2F400E5137E /* synth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C254F7A24BFA2F500E5137E /* Build configuration list for PBXNativeTarget "synth" */;
+			buildPhases = (
+				3C254F6524BFA2F400E5137E /* Sources */,
+				3C254F6624BFA2F400E5137E /* Frameworks */,
+				3C254F6724BFA2F400E5137E /* Resources */,
+				3C254FDD24BFB61100E5137E /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = synth;
+			productName = synth;
+			productReference = 3C254F6924BFA2F400E5137E /* synth.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3C254F8024BFA40D00E5137E /* miditest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C254F9224BFA40E00E5137E /* Build configuration list for PBXNativeTarget "miditest" */;
+			buildPhases = (
+				3C254F7D24BFA40D00E5137E /* Sources */,
+				3C254F7E24BFA40D00E5137E /* Frameworks */,
+				3C254F7F24BFA40D00E5137E /* Resources */,
+				3C254FDA24BFB60C00E5137E /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = miditest;
+			productName = miditest;
+			productReference = 3C254F8124BFA40D00E5137E /* miditest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3C254F5324BFA2AC00E5137E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				TargetAttributes = {
+					3C254F5A24BFA2AC00E5137E = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+					};
+					3C254F6824BFA2F400E5137E = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+					};
+					3C254F8024BFA40D00E5137E = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3C254F5624BFA2AC00E5137E /* Build configuration list for PBXProject "bassmidi" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3C254F5224BFA2AC00E5137E;
+			productRefGroup = 3C254F5C24BFA2AC00E5137E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C254F5A24BFA2AC00E5137E /* sf2pack */,
+				3C254F6824BFA2F400E5137E /* synth */,
+				3C254F8024BFA40D00E5137E /* miditest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3C254F6724BFA2F400E5137E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254F7524BFA2F500E5137E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254F7F24BFA40D00E5137E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254F8D24BFA40E00E5137E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C254F5724BFA2AC00E5137E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254FDF24BFBD6B00E5137E /* sf2pack.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254F6524BFA2F400E5137E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254F7024BFA2F400E5137E /* ViewController.m in Sources */,
+				3C254F7824BFA2F500E5137E /* main.m in Sources */,
+				3C254F6D24BFA2F400E5137E /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C254F7D24BFA40D00E5137E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C254F8824BFA40D00E5137E /* ViewController.m in Sources */,
+				3C254F9024BFA40E00E5137E /* main.m in Sources */,
+				3C254F8524BFA40D00E5137E /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3C254F7324BFA2F500E5137E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C254F7424BFA2F500E5137E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3C254F8B24BFA40E00E5137E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C254F8C24BFA40E00E5137E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3C254F6024BFA2AC00E5137E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = .;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3C254F6124BFA2AC00E5137E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = .;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3C254F6324BFA2AC00E5137E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3C254F6424BFA2AC00E5137E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3C254F7B24BFA2F500E5137E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = synth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.synth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3C254F7C24BFA2F500E5137E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = synth/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.synth;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3C254F9324BFA40E00E5137E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = miditest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.miditest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3C254F9424BFA40E00E5137E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = miditest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.miditest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3C254F5624BFA2AC00E5137E /* Build configuration list for PBXProject "bassmidi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C254F6024BFA2AC00E5137E /* Debug */,
+				3C254F6124BFA2AC00E5137E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C254F6224BFA2AC00E5137E /* Build configuration list for PBXNativeTarget "sf2pack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C254F6324BFA2AC00E5137E /* Debug */,
+				3C254F6424BFA2AC00E5137E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C254F7A24BFA2F500E5137E /* Build configuration list for PBXNativeTarget "synth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C254F7B24BFA2F500E5137E /* Debug */,
+				3C254F7C24BFA2F500E5137E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C254F9224BFA40E00E5137E /* Build configuration list for PBXNativeTarget "miditest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C254F9324BFA40E00E5137E /* Debug */,
+				3C254F9424BFA40E00E5137E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3C254F5324BFA2AC00E5137E /* Project object */;
+}

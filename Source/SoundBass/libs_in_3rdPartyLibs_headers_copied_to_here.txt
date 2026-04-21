@@ -1,0 +1,19 @@
+Like the filename says..?!
+
+DOWNLOAD NEW VERSION
+ - Suggest it's better to do it for all platforms at once.
+ - Bass libs downloaded from un4seen go in <amjulib>/3rPartyLibs/Bass.
+ - BassMidi goes in its own subfolder
+ - Use full version number as directory name
+
+HEADERS
+ - Copy bass.lib and bassmidi.lib to <amjulib>/Source/SoundBass. 
+
+LINKING
+ - Mac: Copy dylibs from here to game dir. 
+	 - We then need to set up the LD_LIBRARY_PATH or similar
+	 - We also need to strip off the 'quarantine' flags on the libs 
+ - iOS: add the xcprojects to the iOS project in xcode.
+	 - R-click on Frameworks, Add files to ..
+
+
