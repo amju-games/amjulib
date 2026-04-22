@@ -88,6 +88,8 @@ Resource* ResourceManager::GetRes(const std::string& resName)
   {
     // Not loaded yet, so load now
     res = LoadRes(resName);
+    if (!res)
+      return nullptr;
     m_resources[resName] = res;
   }
   else
@@ -115,13 +117,13 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   std::cout << "Loading resource: '" << resName << "'.\n";
 
   Resource* r = myLoader(resName);
-  //Assert(r);
-#ifdef _DEBUG
   if (!r)
   {
+#ifdef _DEBUG
     std::cout << "Failed to load resource: " << resName << "\n";
-  }
 #endif
+    return nullptr;
+  }
 
   r->SetResName(resName); // for reloading
   return r;
