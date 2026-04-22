@@ -44,6 +44,32 @@ public:
 
   static void SetTabStopSoundFilename(const std::string& s) { s_tabStopSoundFilename = s; }
 
+  // Scroll behaviour constants
+  void SetScrollVelMultiplier(float);
+  void SetCanScrollInX(bool);
+  void SetCanScrollInY(bool);
+  void SetScrollRect(const Rect&);
+  void SetStoppingDistance(float);
+  void SetStoppingVel(float);
+  void SetSpeedBumpMult(float);
+  void SetDeceleration(float);
+  void SetMinDeceleration(float);
+  void SetMaxScrollVel(float);
+
+  float GetScrollVelMultiplier() const;
+  bool CanScrollInX() const;
+  bool CanScrollInY() const;
+
+  // Start position of scroll must be in this screen-space rect to register.
+  // (Not subject to any transform - just a const rect, in screen space coords.)
+  const Rect& GetScrollRect() const;
+  float GetStoppingDistance() const;
+  float GetStoppingVel() const;
+  float GetSpeedBumpMult() const;
+  float GetDeceleration() const;
+  float GetMinDeceleration() const;
+  float GetMaxScrollVel() const;
+
 protected:
   void PlayTabStopSound(int tabStopNum) const;
 
@@ -73,6 +99,17 @@ protected:
 
   // Used to get (dx, dy), as cursor pos delta isn't reliable.
   Vec2f m_lastCursorPos;
+
+  float m_scrollVelMultiplier = 10.f;
+  bool m_canScrollInX = true;
+  bool m_canScrollInY = true;
+  Rect m_scrollRect = Rect(-1.f, 1.f, -1.f, 1.f);
+  float m_stoppingDistance = 0.01f;
+  float m_stoppingVel = 0.2f;
+  float m_speedBumpMult = 0.6f;
+  float m_deceleration = 0.25f;
+  float m_minDeceleration = 0.7f;
+  float m_maxScrollVel = 4.f;
 };
 }
 

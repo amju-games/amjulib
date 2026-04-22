@@ -68,7 +68,15 @@ bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 
   if (m_leftDrag)
   {
-    OnScrollVelEvent(Vec2f(delta.x * 10.0f, delta.y * 10.0f)); // TODO TEMP TEST x/y scroll flags
+    float scrollVelMultiplier = GetScrollVelMultiplier();
+    if (CanScrollInX())
+    {
+      OnScrollVelEvent(Vec2f(delta.x * scrollVelMultiplier, 0));
+    }
+    if (CanScrollInY())
+    {
+      OnScrollVelEvent(Vec2f(0, delta.y * scrollVelMultiplier)); 
+    }
   }
 
   return child->OnCursorEvent(ce); 
@@ -85,7 +93,7 @@ bool GuiScroll::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   {
     if (mbe.isDown)
     {
-      Rect r = GetRect(this);
+      const Rect& r = GetScrollRect();
       m_leftDrag = r.IsPointIn(Vec2f(mbe.x, mbe.y));
     }
     else
@@ -125,25 +133,25 @@ void GuiScroll::SetTabStop(int tabStop)
 
 void GuiScroll::UpdateForTabStops()
 {
-  const float STOPPING_DISTANCE = 0.008f;
-  const float STOPPING_VEL = 0.2f;
-  const float SPEED_BUMP_MULT = 0.6f;
+  const float stoppingDistance = GetStoppingDistance(); // 0.008f;
+  const float stoppingVel = GetStoppingVel();  // 0.2f;
+  const float speedBumpMult = GetSpeedBumpMult(); // 0.6f;
 
   // Calc the closest tab stop to the current pos
-  int closestTabNum = static_cast<int>(std::round(m_scrollPos.x / m_tabStopSize.x));
-  float closestTabStop = m_tabStopSize.x * closestTabNum;
+  const int closestTabNum = static_cast<int>(std::round(m_scrollPos.x / m_tabStopSize.x));
+  const float closestTabStop = m_tabStopSize.x * closestTabNum;
   // Within stopping distance, with low velocity, we click into place.
-  float dist = std::abs(m_scrollPos.x - closestTabStop);
+  const float dist = std::abs(m_scrollPos.x - closestTabStop);
   
   // Don't do speedbump if being dragged
-  if (   dist < STOPPING_DISTANCE 
+  if (   dist < stoppingDistance 
       && !m_leftDrag 
       && std::abs(m_scrollVel.x) > 0) 
   {
     // Speed bump: reduce vel
-    m_scrollVel.x *= SPEED_BUMP_MULT;
+    m_scrollVel.x *= speedBumpMult;
 
-    if (std::abs(m_scrollVel.x) < STOPPING_VEL)
+    if (std::abs(m_scrollVel.x) < stoppingVel)
     {
       m_scrollPos.x = closestTabStop;
       m_scrollVel.x = 0;
@@ -166,9 +174,9 @@ void GuiScroll::Update()
   //GuiElement* child = m_children[0];
 
   const float dt = TheTimer::Instance()->GetDt();
-  static const float DECEL = 0.25f; // TODO
-  const float DECEL_MIN = 0.7f;
-  m_scrollVel *= std::max(DECEL_MIN, (1.0f - DECEL * dt));
+  const float decel = GetDeceleration(); // 0.25f; // TODO
+  const float minimumDeceleration = GetMinDeceleration(); // 0.7f;
+  m_scrollVel *= std::max(minimumDeceleration, (1.0f - decel * dt));
 
   m_scrollPos += m_scrollVel * dt;
 
@@ -203,9 +211,9 @@ void GuiScroll::Update()
 #endif
   }
 
-  // Y axis
-  float miny = std::min(0.f, m_extents.y);
-  float maxy = std::max(0.f, m_extents.y);
+  // Y axis -- TODO Tab stops!
+  const float miny = std::min(0.f, m_extents.y);
+  const float maxy = std::max(0.f, m_extents.y);
 
   if (m_scrollPos.y < miny)
   {
@@ -240,11 +248,11 @@ void GuiScroll::OnScrollVelEvent(const Vec2f& scrollVel)
 {
   m_scrollVel += scrollVel;
 
-  const float MAX_SCROLL_VEL = 4.0f; // TODO
+  const float maxScrollVel = GetMaxScrollVel(); // 4.0f; // TODO
 
   // Enforce min/max
-  m_scrollVel.x = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.x));
-  m_scrollVel.y = std::max(-MAX_SCROLL_VEL, std::min(MAX_SCROLL_VEL, m_scrollVel.y));
+  m_scrollVel.x = std::max(-maxScrollVel, std::min(maxScrollVel, m_scrollVel.x));
+  m_scrollVel.y = std::max(-maxScrollVel, std::min(maxScrollVel, m_scrollVel.y));
 
 #ifdef SCROLL_DEBUG
 std::cout << "Scroll vel for " << GetName() << ": x:" << m_scrollVel.x 
@@ -303,6 +311,103 @@ void GuiScroll::SetExtents(const Vec2f& extents)
  // SetSize(extents); // ?
 }
 
+void GuiScroll::SetScrollVelMultiplier(float f)
+{
+  m_scrollVelMultiplier = f;
 }
 
+void GuiScroll::SetCanScrollInX(bool b)
+{
+  m_canScrollInX = b;
+}
 
+void GuiScroll::SetCanScrollInY(bool b)
+{
+  m_canScrollInY = b;
+}
+
+void GuiScroll::SetScrollRect(const Rect& r)
+{
+  m_scrollRect = r;
+}
+
+void GuiScroll::SetStoppingDistance(float f)
+{
+  m_stoppingDistance = f;
+}
+
+void GuiScroll::SetStoppingVel(float f)
+{
+  m_stoppingVel = f;
+}
+
+void GuiScroll::SetSpeedBumpMult(float f)
+{
+  m_speedBumpMult = f;
+}
+
+void GuiScroll::SetDeceleration(float f)
+{
+  m_deceleration = f;
+}
+
+void GuiScroll::SetMinDeceleration(float f)
+{
+  m_minDeceleration = f;
+}
+
+void GuiScroll::SetMaxScrollVel(float f)
+{
+  m_maxScrollVel = f;
+}
+
+float GuiScroll::GetScrollVelMultiplier() const
+{
+  return m_scrollVelMultiplier;
+}
+
+bool GuiScroll::CanScrollInX() const
+{
+  return m_canScrollInX;
+}
+
+bool GuiScroll::CanScrollInY() const
+{
+  return m_canScrollInY;
+}
+
+const Rect& GuiScroll::GetScrollRect() const
+{
+  return m_scrollRect;
+}
+
+float GuiScroll::GetStoppingDistance() const
+{
+  return m_stoppingDistance;
+}
+
+float GuiScroll::GetStoppingVel() const
+{
+  return m_stoppingVel;
+}
+
+float GuiScroll::GetSpeedBumpMult() const
+{
+  return m_speedBumpMult;
+}
+
+float GuiScroll::GetDeceleration() const
+{
+  return m_deceleration;
+}
+
+float GuiScroll::GetMinDeceleration() const
+{
+  return m_minDeceleration;
+}
+
+float GuiScroll::GetMaxScrollVel() const
+{
+  return m_maxScrollVel;
+}
+}
