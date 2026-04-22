@@ -10,7 +10,6 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 #pragma warning(disable: 4305) // double to float truncation
 #endif
 
-//#define USE_GL_COMMANDS
 #define USE_MODIFIED_GL_COMMANDS
 //#define USE_TRI_LIST
 
@@ -27,10 +26,7 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 #include "StringUtils.h"
 #include "Vec3.h"
 #include "AmjuAssert.h"
-#ifdef USE_GL_COMMANDS
-#include "OpenGL.h"
 #include <AmjuFinal.h>
-#endif
 
 using namespace std;
 
@@ -370,7 +366,7 @@ bool Md2Model::Load(File* pfile)
 
   unsigned int i = 0;
 
-#ifdef LOAD_TRIANGLES
+#ifdef USE_TRI_LIST
   // Read triangles.
   // (We only need them if we create our own normals.)
   // We need these to save this object back to a file, too.
@@ -396,9 +392,9 @@ bool Md2Model::Load(File* pfile)
     tri.Endianize();
     m_triangles.push_back(tri);
   }
-#endif // LOAD_TRIANGLES
+#endif // USE_TRI_LIST
 
-#if defined(USE_GL_COMMANDS) || defined(USE_MODIFIED_GL_COMMANDS)
+#if defined(USE_MODIFIED_GL_COMMANDS)
   // Read OpenGL commands
   // This section of the file contains 4 * filehead.num_glcmds bytes.
   // Seek to start of openGL commands
@@ -415,7 +411,7 @@ bool Md2Model::Load(File* pfile)
     ReportError("Error while reading GL Commands.");
     return false;
   }
-#endif // USE_GL_COMMANDS/USE_MODIFIED_GL_COMMANDS
+#endif // USE_MODIFIED_GL_COMMANDS
 
   // Read frames
   // Seek to start of frames
@@ -552,7 +548,7 @@ bool Md2Model::Load(File* pfile)
     StoreNewFrame(previousFrameName, startFrame, i);
   }
 
-#if defined(USE_GL_COMMANDS) || defined(USE_MODIFIED_GL_COMMANDS)
+#if defined(USE_MODIFIED_GL_COMMANDS)
   EndianizeGlCommands();
 #endif
 
@@ -563,6 +559,7 @@ bool Md2Model::Load(File* pfile)
   ConvertUVs();
 
 // Load UVs - not neccesary ?
+#define LOAD_UVS
 #ifdef LOAD_UVS
   // Seek to start of UVs
   uint32 uvPos = Endian(uint32(filehead.ofs_st));
@@ -574,7 +571,7 @@ bool Md2Model::Load(File* pfile)
   dstvert_t* uvshorts = new dstvert_t[numVertices];
   Assert(uvshorts);
   // Load ST coords
-//  int uvBytesRead = f.GetBinary(sizeof(dstvert_t) * numVertices, (unsigned char*)uvshorts);
+  int uvBytesRead = f.GetBinary(sizeof(dstvert_t) * numVertices, (unsigned char*)uvshorts);
 
 //#define FIND_MAX_UV
 
@@ -608,11 +605,6 @@ bool Md2Model::Load(File* pfile)
 #ifndef FIND_MAX_UV
     uvshorts[i].Endianize();
 #endif
-
-// TODO TEMP TEST
-std::cout << "uvshorts[i].s = " << uvshorts[i].s 
-  << ", uvshorts[i].t = " << uvshorts[i].t 
-  << "\n";
   
     Assert(uvshorts[i].s >= 0);
     Assert(uvshorts[i].s <= maxU);
@@ -918,64 +910,16 @@ for (int i = 0; i < numTris; i++)
     const Md2UV& uv3 = m_uvs[tri.index_st[2]];
  
     AmjuGL::Tri t; 
-	// TODO TEMP TEST try using normals
     t.m_verts[0] = AmjuGL::Vert(v1.m_pos[0], v1.m_pos[1], v1.m_pos[2], uv1.m_uv[0], uv1.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); 
-    t.m_verts[1] = AmjuGL::Vert(v2.m_pos[0], v2.m_pos[1], v2.m_pos[2], uv2.m_uv[0], uv2.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); // TODO
-    t.m_verts[2] = AmjuGL::Vert(v3.m_pos[0], v3.m_pos[1], v3.m_pos[2], uv3.m_uv[0], uv3.m_uv[1],  v1.m_normal[0], v1.m_normal[1], v1.m_normal[2]); 
-    m_tris.push_back(t);
+    t.m_verts[1] = AmjuGL::Vert(v2.m_pos[0], v2.m_pos[1], v2.m_pos[2], uv2.m_uv[0], uv2.m_uv[1],  v2.m_normal[0], v2.m_normal[1], v2.m_normal[2]); 
+    t.m_verts[2] = AmjuGL::Vert(v3.m_pos[0], v3.m_pos[1], v3.m_pos[2], uv3.m_uv[0], uv3.m_uv[1],  v3.m_normal[0], v3.m_normal[1], v3.m_normal[2]); 
+    m_tris.emplace_back(t);
   }
 
-  AmjuGL::SetTextureMode(AmjuGL::AMJU_TEXTURE_REGULAR);
   AmjuGL::DrawTriList(m_tris);
 
   delete [] iv; // clean up newed array
 #endif // USE_TRI_LIST
-
-#ifdef USE_GL_COMMANDS
-  // NB Uses raw OpenGL functions!
-  AmjuGL::SetTextureMode(AmjuGL::AMJU_TEXTURE_REGULAR);
-  const Frame& frame = m_frames[frame1];
-  const Frame& nextFrame = m_frames[frame2]; 
-  uint32* glcs = (uint32*)m_glCommands;
-
-    while (1)
-    {
-      // Get the command. The sign is used to flag FAN or STRIP. The abs value
-      // is the number of vertices in the fan or strip.
-      int com = (int)(uint32(*glcs)); // already Endianzed up front
-      if (com == 0)
-      {
-        return;
-      }
-
-      if (com < 0)
-      {
-        com = -com;
-        glBegin(GL_TRIANGLE_FAN);
-      }
-      else
-      {
-        glBegin(GL_TRIANGLE_STRIP);
-      }
-      glcs++;
-      for (int i=0; i < com; i++)
-      {
-        glCommandVertex_t *vert = (glCommandVertex_t*)glcs;
-        glcs += 3;
-        const uint32 vertexIndex = vert->vertexIndex; // Endianized up front
-      
-        const Md2Vertex& vm1 = frame[vertexIndex];
-        const Md2Vertex& vm2 = nextFrame[vertexIndex];
-
-        // Interpolate between current and next frame, using 'between'.
-        Md2Vertex vm3;
-        Interpolate(vm1, vm2, between, &vm3);
-        glTexCoord2f(vert->s, vert->t); // Endianized up front 
-        glVertex3fv((float*)vm3.m_pos);
-      }
-      glEnd();
-    }
-#endif // USE_GL_COMMANDS
 }
 
 void Md2Model::EndianizeGlCommands()
@@ -1042,12 +986,10 @@ void Md2Model::Interpolate(
   pResult->m_pos[2] = v1.m_pos[2] * d1 + v2.m_pos[2] * d;
 #endif
 
-/*
   // Lighting is disabled for MD2 characters, because it looks terrible, at least
   // for areas of flat colour. So we don't need to bother interpolating normals.
   pResult->m_normal[0] = v1.m_normal[0]; // + d * (v2.m_normal[0] - v1.m_normal[0]);
   pResult->m_normal[1] = v1.m_normal[1]; // + d * (v2.m_normal[1] - v1.m_normal[1]);
   pResult->m_normal[2] = v1.m_normal[2]; // + d * (v2.m_normal[2] - v1.m_normal[2]);
-*/
 }
 }
