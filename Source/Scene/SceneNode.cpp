@@ -355,4 +355,37 @@ void SceneNode::SetIsCamera(bool b)
 {
   SetOrClear(b, CAMERA);
 }
+
+// * SceneNodeColour *
+const char* SceneNodeColour::NAME = "colour";
+
+bool SceneNodeColour::Load(File* f)
+{
+  if (!f->GetDataLine(&m_name))
+  {
+    f->ReportError("Expected scene node name");
+    return false;
+  }
+
+  std::string colour;
+  if (!f->GetDataLine(&colour))
+  {
+    f->ReportError("Expected colour for SceneNodeColour");
+    return false;
+  }
+  auto optColour = FromHexString(colour);
+  if (!optColour)
+  {
+    f->ReportError("Bad colour string for SceneNodeColour");
+    return false;
+  }
+  SetColour(*optColour);
+
+  if (!LoadChildren(f))
+  {
+    return false;
+  }
+
+  return true;
+}
 }

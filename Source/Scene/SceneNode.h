@@ -121,6 +121,15 @@ protected:
   std::string m_name; // so we can get nodes by name (like Gui elements)
 };
 
+// * SceneNodeColour *
+// Loads a colour; applied to descendants in SceneGraph::Draw. 
+// No matrix; no VFC should be applied.
+class SceneNodeColour : public SceneNode
+{
+public:
+  static const char* NAME;
+  bool Load(File*) override;
+};
 }
 
 #endif

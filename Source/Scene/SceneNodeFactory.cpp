@@ -20,5 +20,6 @@ SceneNodeFactory::SceneNodeFactory()
   Add(SceneNodeCameraPersp::NAME, []() -> SceneNode* { return new SceneNodeCameraPersp; });
   Add(SceneNodeCameraOrtho::NAME, []() -> SceneNode* { return new SceneNodeCameraOrtho; });
   Add(SceneLuaScript::NAME, &SceneLuaScript::Create);
+  Add(SceneNodeColour::NAME, []() -> SceneNode* { return new SceneNodeColour; });
 }
 }
