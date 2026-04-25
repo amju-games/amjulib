@@ -122,7 +122,7 @@ bool GuiTextEdit::Load(File* f)
     return false;
   }
 // TODO Move to GuiText
-  m_caret = m_text.size();
+  m_caret = static_cast<unsigned int>(m_text.size());
   m_selectedText = m_caret;
 
   RecalcFirstLast();
@@ -143,7 +143,7 @@ void GuiTextEdit::SetText(const std::string& text)
   m_triListSelection = 0;
 
   m_text = text;
-  m_caret = m_text.size();
+  m_caret = static_cast<int>(m_text.size());
   m_selectedText = m_caret;
   RecalcFirstLast();
 }
@@ -558,7 +558,7 @@ std::cout << "Unexpected key type: " << ke.keyType << " key: '" << ke.key << "' 
 void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
 {
   *first = 0;
-  *last = m_text.size();
+  *last = static_cast<int>(m_text.size());
   int caret = m_caret;
   if (m_drawCaret)
   {
@@ -593,7 +593,7 @@ void GuiTextEdit::GetFirstLast(int line, int* first, int* last)
 
     if (*last > (int)m_text.size())
     {
-      *last = m_text.size();
+      *last = static_cast<int>(m_text.size());
     }
     Assert(*last <= (int)m_text.size());
     Assert(*first >= 0);
@@ -615,7 +615,7 @@ bool GuiTextEdit::OnTextEvent(const TextEvent& te)
   switch (te.type)
   {
   case AMJU_SELECT_ALL:
-    m_caret = m_text.size();
+    m_caret = static_cast<int>(m_text.size());
     m_selectedText = 0;
     m_triListSelection = nullptr;
     return true;

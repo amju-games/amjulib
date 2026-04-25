@@ -50,8 +50,8 @@ bool ParseCharLine(
   int& element,
   float texW, float texH)
 {
-  int numPairs = strs.size();
-  for (int j = 1; j < numPairs; j++)
+  const auto numPairs = strs.size();
+  for (auto j = 1; j < numPairs; j++)
   {
     // Each element in strs should be in form <a>=<b>. Split into key and value.
     Strings strs2 = Split(strs[j], '=');
@@ -120,9 +120,9 @@ bool BmFontTextureSequence::ParsePageLine(const Strings& strs, const std::string
     return false;
   }
  
-  int numPairs = strs.size();
+  const auto numPairs = strs.size();
   int texId = -1;
-  for (int j = 1; j < numPairs; j++)
+  for (auto j = 1; j < numPairs; j++)
   {
     // Each element in strs should be in form <a>=<b>. Split into key and value.
     Strings strs2 = Split(strs[j], '=');

@@ -29,7 +29,7 @@ unsigned int FileSize(const char* filename)
 
   auto s = buf.st_size;
 
-  return s;
+  return static_cast<unsigned int>(s);
 }
 }
 

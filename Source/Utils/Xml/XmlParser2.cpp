@@ -327,7 +327,7 @@ char myIsTextUnicode(const void *b, int len) { return FALSE; }
         }
     #else
         FILE *_tfopen(XMLCSTR filename,XMLCSTR mode) { return fopen(filename,mode); }
-        int _tcslen(XMLCSTR c)   { return strlen(c); }
+        auto _tcslen(XMLCSTR c)   { return strlen(c); }
 
 #ifdef WIN32 // j.c.
         int _tcsnicmp(XMLCSTR c1, XMLCSTR c2, int l) { return _strnicmp(c1,c2,l);}

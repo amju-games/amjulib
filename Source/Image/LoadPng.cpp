@@ -71,7 +71,7 @@ bool LoadPng(
 static void ReadFunc(png_structp png, png_bytep data, png_size_t size)
 {
   File* f = (File*)png_get_io_ptr(png); 
-  unsigned int bytesRead = f->GetBinary(size, data);
+  auto bytesRead = f->GetBinary(size, data);
   if (bytesRead != size)
   { 
     std::string err = "Read failed! bytesRead: " + ToString(bytesRead) + " size: " + ToString((unsigned int)size);
@@ -123,11 +123,11 @@ unsigned char* LoadPng(
 
   /* At this point you have read the entire image */
 
-  unsigned int width = png_ptr->width;
-  *pWidth = width;
+  auto width = png_ptr->width;
+  *pWidth = static_cast<unsigned int>(width);
 
-  unsigned int height = png_ptr->height;
-  *pHeight = height;
+  auto height = png_ptr->height;
+  *pHeight = static_cast<unsigned int>(height);
 
   unsigned int bpp = png_ptr->pixel_depth >> 3;
   *bytesPerPixel = bpp;

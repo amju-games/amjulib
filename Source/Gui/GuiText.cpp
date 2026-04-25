@@ -231,7 +231,7 @@ void GuiText::ReallyDraw()
 
 void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 {
-  int lines = m_lines.size();
+  auto lines = m_lines.size();
   
   bool rebuild = false;
   if (m_triLists.empty())
@@ -258,7 +258,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 
   PushColour();
   MultColour(fg);
-  for (int i = 0; i < lines; i++)
+  for (auto i = 0; i < lines; i++)
   {
     std::string str = m_lines[i];
 
@@ -422,7 +422,7 @@ void GuiText::PrintLine(const std::string& str, float x, float y)
 void GuiText::GetFirstLast(int line, int* first, int* last)
 {
   *first = 0;
-  *last = m_text.size();
+  *last = static_cast<int>(m_text.size());
   Vec2f size = GetSize();
 
   switch (m_just)
@@ -518,7 +518,7 @@ int GuiTextBase::GetNumLines() const
 {
   if (IsMulti())
   {
-    return m_lines.size();
+    return static_cast<int>(m_lines.size());
   }
   return 1; 
 }
@@ -615,7 +615,7 @@ bool GuiTextBase::ParseFontInfoLine(File* f)
   }
 
   Strings strs = Split(s, ',');
-  int size = strs.size();
+  auto size = strs.size();
   if (size < 2)
   {
     f->ReportError("Unexpected font info: " + s);
@@ -633,7 +633,7 @@ bool GuiTextBase::ParseFontInfoLine(File* f)
   m_textSize = ToFloat(strs[1]);
 
   // Optional flags and attributes 
-  for (int i = 2; i < size; i++)
+  for (auto i = 2; i < size; i++)
   {
     std::string s = strs[i];
     Trim(&s);

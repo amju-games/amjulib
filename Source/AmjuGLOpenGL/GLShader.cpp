@@ -34,7 +34,7 @@ GLShader::~GLShader()
   AMJU_CALL_STACK;
   if (m_programHandle)
   {
-    glDeleteProgram(m_programHandle);
+    GL_CHECK(glDeleteProgram(m_programHandle));
   }
 }
 
@@ -201,8 +201,8 @@ std::cout << "Created shader handles\n";
   const GLint flength = static_cast<GLint>(fragmentSource.size());
   const char* vStr = vertexSource.c_str();
   const char* fStr = fragmentSource.c_str();
-  glShaderSource(m_vertexShaderHandle, 1, &vStr, &vlength);
-  glShaderSource(m_fragmentShaderHandle, 1, &fStr, &flength);
+  GL_CHECK(glShaderSource(m_vertexShaderHandle, 1, &vStr, &vlength));
+  GL_CHECK(glShaderSource(m_fragmentShaderHandle, 1, &fStr, &flength));
 
 #ifdef SHADER_DEBUG
 std::cout << "Set shader source\n";
@@ -211,12 +211,12 @@ std::cout << "Set shader source\n";
   GLint compiled = 0;
   GLchar buf[2000]; // error string buffer
 
-  glCompileShader(m_vertexShaderHandle);
+  GL_CHECK(glCompileShader(m_vertexShaderHandle));
 
-  glGetShaderiv(m_vertexShaderHandle, GL_COMPILE_STATUS, &compiled);
+  GL_CHECK(glGetShaderiv(m_vertexShaderHandle, GL_COMPILE_STATUS, &compiled));
   if (!compiled)
   {
-    glGetShaderInfoLog(m_vertexShaderHandle, 2000, 0, buf);
+    GL_CHECK(glGetShaderInfoLog(m_vertexShaderHandle, 2000, 0, buf));
     m_errorStr = buf;
 
 //#ifdef SHADER_DEBUG
@@ -228,12 +228,12 @@ std::cout << "Vertex Shader Compile error: " << buf << "\n";
 std::cout << "Compiled vertex shader\n";
 #endif
 
-  glCompileShader(m_fragmentShaderHandle);
+  GL_CHECK(glCompileShader(m_fragmentShaderHandle));
   
-  glGetShaderiv(m_fragmentShaderHandle, GL_COMPILE_STATUS, &compiled);
+  GL_CHECK(glGetShaderiv(m_fragmentShaderHandle, GL_COMPILE_STATUS, &compiled));
   if (!compiled)
   {
-    glGetShaderInfoLog(m_fragmentShaderHandle, 2000, 0, buf);
+    GL_CHECK(glGetShaderInfoLog(m_fragmentShaderHandle, 2000, 0, buf));
     m_errorStr = buf;
 
 //#ifdef SHADER_DEBUG
@@ -252,24 +252,24 @@ std::cout << "Compiled fragment shader\n";
 std::cout << "Created program\n";
 #endif
 
-  glAttachShader(m_programHandle, m_vertexShaderHandle);
-  glAttachShader(m_programHandle, m_fragmentShaderHandle);
+  GL_CHECK(glAttachShader(m_programHandle, m_vertexShaderHandle));
+  GL_CHECK(glAttachShader(m_programHandle, m_fragmentShaderHandle));
 
 #ifdef SHADER_DEBUG
 std::cout << "Attached shaders to program\n";
 #endif
 
-  glLinkProgram(m_programHandle);
+  GL_CHECK(glLinkProgram(m_programHandle));
 
 #ifdef SHADER_DEBUG
 std::cout << "Link called\n";
 #endif
 
   GLint linked;
-  glGetProgramiv(m_programHandle, GL_LINK_STATUS, &linked);
+  GL_CHECK(glGetProgramiv(m_programHandle, GL_LINK_STATUS, &linked));
   if (!linked)
   {
-    glGetProgramInfoLog(m_programHandle, 2000, 0, buf);
+    GL_CHECK(glGetProgramInfoLog(m_programHandle, 2000, 0, buf));
     m_errorStr = buf;
     
 //#ifdef SHADER_DEBUG
@@ -308,7 +308,7 @@ void GLShader::Begin()
 
 void GLShader::EnableThisShader_ONLY_CALL_FROM_AMJUGL()
 {
-  glUseProgram(m_programHandle);
+  GL_CHECK(glUseProgram(m_programHandle));
   prevHandle = m_programHandle;
 
   SetVariables(); // set uniforms & attribs
@@ -320,7 +320,7 @@ void GLShader::End()
 
   prevHandle = 0;
   AmjuGL::UseShader(0);
-  glUseProgram(0);
+  GL_CHECK(glUseProgram(0));
 }
 
 void GLShader::SetMatrix3x3(int loc, const float matrix[9])
@@ -369,7 +369,7 @@ void GLShader::SetMatrix3x3(const std::string& name, const float matrix[9])
     return;
   }
   
-  glUniformMatrix3fv(loc, 1, false, matrix);
+  GL_CHECK(glUniformMatrix3fv(loc, 1, false, matrix));
 }
 
 void GLShader::Set(const std::string& name, const float matrix[16])
@@ -383,7 +383,7 @@ void GLShader::Set(const std::string& name, const float matrix[16])
         return;
     }
 
-    glUniformMatrix4fv(loc, 1, false, matrix);
+    GL_CHECK(glUniformMatrix4fv(loc, 1, false, matrix));
 }
 
 void GLShader::Set(const std::string& name, float f)
@@ -397,7 +397,7 @@ void GLShader::Set(const std::string& name, float f)
         Assert(0);
     }
 
-    glUniform1f(loc, f);
+    GL_CHECK(glUniform1f(loc, f));
 }
 
 void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
@@ -412,7 +412,7 @@ void GLShader::Set(const std::string& name, const AmjuGL::Vec3& v)
         return;
     }
 
-    glUniform3f(loc, v.m_x, v.m_y, v.m_z);
+    GL_CHECK(glUniform3f(loc, v.m_x, v.m_y, v.m_z));
 }
 
 void GLShader::Set(const std::string& name, const Colour& c)
@@ -427,7 +427,7 @@ void GLShader::Set(const std::string& name, const Colour& c)
         return;
     }
 
-    glUniform4f(loc, c.m_r, c.m_g, c.m_b, c.m_a);
+    GL_CHECK(glUniform4f(loc, c.m_r, c.m_g, c.m_b, c.m_a));
 }
 
 void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
@@ -441,7 +441,7 @@ void GLShader::Set(const std::string& name, AmjuGL::TextureHandle t)
     return;
   }
   
-  glUniform1i(loc, (int)t);
+  GL_CHECK(glUniform1i(loc, (int)t));
 }
   
 void GLShader::SetInt(const std::string& name, int i)
@@ -455,7 +455,7 @@ void GLShader::SetInt(const std::string& name, int i)
     return;
   }
   
-  glUniform1i(loc, i);
+  GL_CHECK(glUniform1i(loc, i));
 }
   
 int GLShader::GetProgHandle() const

@@ -145,7 +145,7 @@ void Thread::Stop()
 
 unsigned int Thread::GetThreadId() const
 {
-  return m_threadId;
+  return static_cast<unsigned int>(m_threadId);
 }
 }
 

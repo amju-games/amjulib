@@ -115,7 +115,7 @@ bool Socket::WriteString(const std::string& s)
   AMJU_CALL_STACK;
 
   // Prepend char data with string length.
-  int n = s.size();
+  int n = static_cast<int>(s.size());
   if (!WriteInteger(n))
   {
     return false;
@@ -127,7 +127,7 @@ bool Socket::WriteRawString(const std::string& s)
 {
   AMJU_CALL_STACK;
 
-  int n = s.size();
+  int n = static_cast<int>(s.size());
   return (WriteData(s.c_str(), n) == n);
 }
 
@@ -200,7 +200,7 @@ bool Socket::GetRawString(std::string* p)
 
   static const int n = 4096; // was too big
   char buf[n+1];
-  int br = 0;
+  auto br = 0;
 #if defined(WIN32)
   br = recv(m_socket,buf,n, 0);
 #elif defined (GEKKO)
@@ -255,7 +255,7 @@ int Socket::ReadData(char* buf, int n)
   AMJU_CALL_STACK;
 
   int bcount = 0; /* counts bytes read */
-  int br = 0;     /* bytes read this pass */
+  auto br = 0;     /* bytes read this pass */
 
   while (bcount < n) 
   {

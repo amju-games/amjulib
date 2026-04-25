@@ -160,7 +160,7 @@ int Md2Model::GetNumAnimations() const
 {
   AMJU_CALL_STACK;
 
-  return m_animationMap.size();
+  return static_cast<int>(m_animationMap.size());
 }
 
 int Md2Model::GetAnimationSize(Md2Model::Animation a) const
@@ -281,7 +281,7 @@ bool Md2Model::Save(const std::string& filename)
 
   m_name = filename;
 
-  uint32 numTris = m_triangles.size();
+  uint32 numTris = static_cast<uint32>(m_triangles.size());
   // position of tris is after header.
   uint32 triPos = sizeof(dmdl_t);
 
@@ -571,7 +571,7 @@ bool Md2Model::Load(File* pfile)
   dstvert_t* uvshorts = new dstvert_t[numVertices];
   Assert(uvshorts);
   // Load ST coords
-  int uvBytesRead = f.GetBinary(sizeof(dstvert_t) * numVertices, (unsigned char*)uvshorts);
+  [[maybe_unused]]int uvBytesRead = f.GetBinary(sizeof(dstvert_t) * numVertices, (unsigned char*)uvshorts);
 
 //#define FIND_MAX_UV
 

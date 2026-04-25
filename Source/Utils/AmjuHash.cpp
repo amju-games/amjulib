@@ -4,7 +4,7 @@ namespace Amju
 {
 unsigned int HashString(const std::string& str)
 {
-  return std::hash<std::string>{}(str);
+  return static_cast<unsigned int>(std::hash<std::string>{}(str));
 
 #ifdef OLD_SKOOL
   unsigned int hash = 5381;

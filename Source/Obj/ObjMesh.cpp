@@ -160,8 +160,8 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
       }
     }
 
-    unsigned int numTris = g.m_tris.size();
-    for (unsigned int i = 0; i < numTris; i++)
+    const auto numTris = g.m_tris.size();
+    for (auto i = 0; i < numTris; i++)
     {
       const AmjuGL::Tri& tri = g.m_tris[i];
       Tri t(
@@ -782,7 +782,7 @@ void ObjMesh::BuildGroup(Group& g)
   // Only need to build Tris once - this kind of mesh is not animated!
   Faces& faces = m_facemap[g.m_name];
 
-  unsigned int numfaces = faces.size();
+  const auto numfaces = faces.size();
 
   if (ShowInfo())
   {
@@ -797,7 +797,7 @@ void ObjMesh::BuildGroup(Group& g)
   g.m_aabb.Set(BIG, -BIG, BIG, -BIG, BIG, -BIG);
 
   g.m_tris.reserve(numfaces);
-  for (unsigned int i = 0; i < numfaces; i++)
+  for (auto i = 0; i < numfaces; i++)
   {
     const Face& f = faces[i];
     AmjuGL::Tri t;
@@ -957,19 +957,19 @@ bool ObjMesh::Save(const std::string& filename)
         Vec3f p(v.m_x, v.m_y, v.m_z);
         if (pointMap.find(p) == pointMap.end())
         {
-          pointMap[p] = points.size() + 1; // 1-based
+          pointMap[p] = static_cast<int>(points.size()) + 1; // 1-based
           points.push_back(p);
         }
         Vec3f vn(v.m_nx, v.m_ny, v.m_nz);
         if (normalMap.find(vn) == normalMap.end())
         {
-          normalMap[vn] = normals.size() + 1;
+          normalMap[vn] = static_cast<int>(normals.size()) + 1;
           normals.push_back(vn);
         }
         Vec2f vt(v.m_u, v.m_v);
         if (uvMap.find(vt) == uvMap.end())
         {
-          uvMap[vt] = uvs.size() + 1;
+          uvMap[vt] = static_cast<int>(uvs.size()) + 1;
           uvs.push_back(vt);
         }
 
@@ -992,7 +992,7 @@ bool ObjMesh::Save(const std::string& filename)
       std::cout << "Saving " << points.size() << " points\n";
     }
 
-    of.WriteInteger(points.size());
+    of.WriteInteger(static_cast<int>(points.size()));
     for (unsigned int i = 0; i < points.size(); i++)
     {
       const Vec3f& v = points[i];
@@ -1007,7 +1007,7 @@ bool ObjMesh::Save(const std::string& filename)
       std::cout << "Saving " << uvs.size() << " UVs\n";
     }
   
-    of.WriteInteger(uvs.size());
+    of.WriteInteger(static_cast<int>(uvs.size()));
     for (unsigned int i = 0; i < uvs.size(); i++)
     {
       const Vec2f& v = uvs[i];
@@ -1021,7 +1021,7 @@ bool ObjMesh::Save(const std::string& filename)
       std::cout << "Saving " << normals.size() << " normals\n";
     }
 
-    of.WriteInteger(normals.size());
+    of.WriteInteger(static_cast<int>(normals.size()));
     for (unsigned int i = 0; i < normals.size(); i++)
     {
       const Vec3f& v = normals[i];
@@ -1036,7 +1036,7 @@ bool ObjMesh::Save(const std::string& filename)
       std::cout << "Saving " << m_materials.size() << " materials\n";
     }
 
-    of.WriteInteger(m_materials.size());
+    of.WriteInteger(static_cast<int>(m_materials.size()));
     for (Materials::iterator it = m_materials.begin(); it != m_materials.end(); ++it)
     {
       Material& mat = it->second;
@@ -1063,7 +1063,7 @@ bool ObjMesh::Save(const std::string& filename)
       std::cout << "Saving " << groupMap.size() << " groups\n";
     }
 
-    of.WriteInteger(groupMap.size());
+    of.WriteInteger(static_cast<int>(groupMap.size()));
     for (SaveGroupMap::iterator it = groupMap.begin();
       it != groupMap.end();
       ++it)
@@ -1093,7 +1093,7 @@ bool ObjMesh::Save(const std::string& filename)
       }
 
       // Save face info
-      of.WriteInteger(sg.m_faces.size());
+      of.WriteInteger(static_cast<int>(sg.m_faces.size()));
       if (ShowInfo())
       {
         std::cout << "Saving " << sg.m_faces.size() << " faces for group " << groupName << "\n";

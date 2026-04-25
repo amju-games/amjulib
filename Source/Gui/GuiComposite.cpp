@@ -60,7 +60,7 @@ Rect GuiComposite::CalcRect() const
 
 int GuiComposite::GetNumChildren() const
 {
-  return m_children.size();
+  return static_cast<int>(m_children.size());
 }
 
 void GuiComposite::Clear()
@@ -289,8 +289,8 @@ bool GuiComposite::LoadOneChild(File* f)
 bool GuiComposite::OnCursorEvent(const CursorEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnCursorEvent(e))
     {
@@ -307,8 +307,8 @@ bool GuiComposite::OnCursorEvent(const CursorEvent& e)
 bool GuiComposite::OnRotationEvent(const RotationEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnRotationEvent(e))
     {
@@ -325,8 +325,8 @@ bool GuiComposite::OnRotationEvent(const RotationEvent& e)
 bool GuiComposite::OnJoyAxisEvent(const JoyAxisEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnJoyAxisEvent(e))
     {
@@ -377,8 +377,8 @@ bool GuiComposite::OnJoyAxisEvent(const JoyAxisEvent& e)
 bool GuiComposite::OnButtonEvent(const ButtonEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnButtonEvent(e))
     {
@@ -395,8 +395,8 @@ bool GuiComposite::OnButtonEvent(const ButtonEvent& e)
 bool GuiComposite::OnMouseButtonEvent(const MouseButtonEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnMouseButtonEvent(e))
     {
@@ -413,8 +413,8 @@ bool GuiComposite::OnMouseButtonEvent(const MouseButtonEvent& e)
 bool GuiComposite::OnDoubleClickEvent(const DoubleClickEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnDoubleClickEvent(e))
     {
@@ -431,8 +431,8 @@ bool GuiComposite::OnDoubleClickEvent(const DoubleClickEvent& e)
 bool GuiComposite::OnBalanceBoardEvent(const BalanceBoardEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnBalanceBoardEvent(e))
     {
@@ -449,8 +449,8 @@ bool GuiComposite::OnBalanceBoardEvent(const BalanceBoardEvent& e)
 bool GuiComposite::OnTextEvent(const TextEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnTextEvent(e))
     {
@@ -467,8 +467,8 @@ bool GuiComposite::OnTextEvent(const TextEvent& e)
 bool GuiComposite::OnQuitEvent()
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnQuitEvent())
     {
@@ -485,8 +485,8 @@ bool GuiComposite::OnQuitEvent()
 bool GuiComposite::OnResizeEvent(const ResizeEvent& e)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnResizeEvent(e))
     {
@@ -503,8 +503,8 @@ bool GuiComposite::OnResizeEvent(const ResizeEvent& e)
 bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
 {
   bool ret = false;
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->OnKeyEvent(ke))
     {
@@ -549,15 +549,15 @@ bool GuiComposite::OnKeyEvent(const KeyEvent& ke)
 
 bool GuiComposite::SetFocusPrevChild()
 {
-  int s = m_children.size();
-  for (int i = 0; i < s; i++)
+  auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     if (m_children[i]->HasFocus())
     {
       int next = i - 1; 
       if (next == -1)
       {
-        next = m_children.size() - 1;
+        next = static_cast<int>(m_children.size() - 1);
       }
       m_children[next]->SetHasFocus(true);
       return true;

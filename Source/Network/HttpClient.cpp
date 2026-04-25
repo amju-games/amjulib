@@ -45,7 +45,7 @@ void HttpResult::SetErrorString(const std::string& errorStr)
 
 unsigned int HttpResult::Size() const
 {
-  return m_data.size();
+  return static_cast<unsigned int>(m_data.size());
 }
 
 const unsigned char* HttpResult::GetData() const

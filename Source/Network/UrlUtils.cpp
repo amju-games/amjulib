@@ -92,8 +92,8 @@ std::string ToUrlFormat(const std::string& s)
 std::string ToUrlFormat(const BinaryData& d)
 {
   std::string r;
-  const int size = d.size();
-  for (int i = 0; i < size; i++)
+  const auto size = d.size();
+  for (auto i = 0; i < size; i++)
   {
     unsigned char c = d[i];
     if (IsUrlPrintable(c))

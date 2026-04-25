@@ -29,8 +29,8 @@ void GuiEdit::Draw()
 void GuiEdit::SelectGrabbersInRect(const Rect& r)
 {
   m_selectedGrabberIndices.clear();
-  const int n = m_grabbers.size();
-  for (int i = 0; i < n; i++)
+  const auto n = m_grabbers.size();
+  for (auto i = 0; i < n; i++)
   {
     const Rect& q = m_grabbers[i];
     if (q.Intersects(r))

@@ -1,4 +1,10 @@
+#ifndef GL_SILENCE_DEPRECATION
 #define GL_SILENCE_DEPRECATION
+#endif
+
+#ifndef GLES_SILENCE_DEPRECATION
+#define GLES_SILENCE_DEPRECATION
+#endif
 
 #include <LoadPng.h>
 #include <StringUtils.h>

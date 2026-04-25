@@ -134,7 +134,7 @@ int OnlineReqManager::CountAllReqs() const
 {
   AMJU_CALL_STACK;
 
-  return m_reqs.size();
+  return static_cast<int>(m_reqs.size());
 }
 
 int OnlineReqManager::CountReqsWithName(const std::string& name)

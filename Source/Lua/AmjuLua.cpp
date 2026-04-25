@@ -61,8 +61,8 @@ static int PushLuaArgs(lua_State* L, const Variable& v)
   else if (v.IsVectorType())
   {
     VariableVec vec = v.GetVector();
-    int numArgs = vec.size();
-    for (int i = 0; i < numArgs; i++)
+    const auto numArgs = vec.size();
+    for (auto i = 0; i < numArgs; i++)
     {
       const Variable& vv = vec[i];
       numPushed += PushLuaArgs(L, vv);
@@ -176,7 +176,7 @@ bool Lua::LoadScriptFromFile(const std::string& filename, bool useGlue)
 
   return (r == 0);
 
-
+/*
   // TODO use Amju::File
   bool NOVERSIONINFO = false;
   File f(NOVERSIONINFO, useGlue ? File::GLUE : File::STD);
@@ -187,9 +187,9 @@ bool Lua::LoadScriptFromFile(const std::string& filename, bool useGlue)
   }
   // Load the whole file into memory if not a glue file.
   // If a glue file, it's in memory already, but we need the start and length.
-
-
+ 
   return false;
+*/
 }
 
 bool Lua::LoadScriptFromMem(const std::string& script)

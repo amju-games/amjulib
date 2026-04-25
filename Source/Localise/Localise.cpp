@@ -85,7 +85,7 @@ std::string LookupMulti(
 std::cout << "Found $$$ at pos " << f << "\n";
 #endif
 
-    int end = f + 3;
+    auto end = f + 3;
     // Get the position of the character following the int.
     while (isdigit(s[end]))
     {

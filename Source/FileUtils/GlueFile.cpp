@@ -354,7 +354,7 @@ bool GlueFile::AddItem(const std::string& filename)
     return false;
   }
 
-  uint32 subfilesize = buf.st_size;
+  uint32 subfilesize = static_cast<uint32>(buf.st_size);
 
   // Open the new sub-file for reading.
   ifstream subfile;
@@ -562,7 +562,7 @@ bool GlueFile::WriteTable()
   AMJU_CALL_STACK;
 
   // Write the number of files.
-  uint32 numFiles = m_table.size();
+  uint32 numFiles = static_cast<uint32>(m_table.size());
   numFiles = Endian(numFiles);
   m_gluefile.seekg(0);
   m_gluefile.write((char*)&numFiles, sizeof(uint32));
@@ -578,7 +578,7 @@ bool GlueFile::WriteTable()
   for (FileList::iterator it = m_filenames.begin(); it != m_filenames.end(); ++it)
   {
     // Get the length of the sub-file name.
-    uint32 subfilenamelen = it->length();
+    uint32 subfilenamelen = static_cast<uint32>(it->length());
     uint32 endiansubfilenamelen = Endian(subfilenamelen);
 
 #ifdef GLUE_FILE_DEBUG

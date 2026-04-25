@@ -1,5 +1,13 @@
 #if defined (AMJU_IOS) || defined (ANDROID_NDK) || defined(AMJU_USE_ES2)
 
+#ifndef GL_SILENCE_DEPRECATION
+#define GL_SILENCE_DEPRECATION
+#endif
+
+#ifndef GLES_SILENCE_DEPRECATION
+#define GLES_SILENCE_DEPRECATION
+#endif
+
 #include <iostream>
 #include <AmjuGL.h>
 #include "RenderToTextureES2.h"

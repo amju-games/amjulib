@@ -109,7 +109,7 @@ unsigned int FileImplMem::GetBinary(unsigned int maxbytes, unsigned char* pBuffe
   unsigned int bytes = maxbytes;
   if (bytes > m_data.size() - m_index)
   {
-    bytes = m_data.size() - m_index;
+    bytes = static_cast<int>(m_data.size()) - m_index;
   } 
   for (unsigned int i = 0; i < bytes; i++)
   {
@@ -128,7 +128,7 @@ void FileImplMem::BinarySeek(unsigned int pos)
 
 unsigned int FileImplMem::GetBinaryFileSize()
 {
-  return m_data.size();
+  return static_cast<unsigned int>(m_data.size());
 }
 
 bool FileImplMem::WriteBinary(const char* c, int numBytes)
@@ -160,8 +160,8 @@ void FileImplMem::SetData(const std::string& s)
 
   m_data.clear();
   m_data.reserve(s.size());
-  unsigned int size = s.size();
-  for (unsigned int i = 0; i < size; i++)
+  auto size = s.size();
+  for (auto i = 0; i < size; i++)
   {
     m_data.push_back(s[i]);
   }

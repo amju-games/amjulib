@@ -50,7 +50,7 @@ int SingleThreadManager::GetThreadCount() const
   AMJU_CALL_STACK;
 
   MutexLocker lock(m_mutex);
-  return m_threads.size();
+  return static_cast<int>(m_threads.size());
 }
 }
 

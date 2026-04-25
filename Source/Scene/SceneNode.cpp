@@ -70,13 +70,13 @@ std::cout << "Scene node transform AABB... ";
 #endif
 
   m_aabb.Transform(m);
-  unsigned int s = m_children.size();
+  const auto s = m_children.size();
 
 #ifdef AABB_TRANSFORM_DEBUG
 std::cout << s << " children... ";
 #endif
 
-  for (unsigned int i = 0; i < s; i++)
+  for (auto i = 0; i < s; i++)
   {
 #ifdef AABB_TRANSFORM_DEBUG
 std::cout << " child " << i << "... ";
@@ -88,10 +88,10 @@ std::cout << " child " << i << "... ";
 
 void SceneNode::CalcBoundingVol()
 {
-  unsigned int s = m_children.size();
+  const auto s = m_children.size();
   if (s > 0)
   {    
-    for (unsigned int i = 0; i < s; i++)
+    for (auto i = 0; i < s; i++)
     {
       m_children[i]->CalcBoundingVol();
       // Increase our box to fit the child
@@ -235,8 +235,8 @@ void SceneNode::CombineTransform()
     m_combined = m_local;
   }
 
-  unsigned int s = m_children.size();
-  for (unsigned int i = 0; i < s; i++)
+  const auto s = m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     m_children[i]->CombineTransform();
   }

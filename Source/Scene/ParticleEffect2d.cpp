@@ -100,9 +100,9 @@ void ParticleEffect2d::Draw()
   float dt = TheTimer::Instance()->GetDt();
   bool isDead = true;
 
-  int s = m_particles.size();
+  const auto s = m_particles.size();
 
-  for (int i = 0; i < s; i++)
+  for (auto i = 0; i < s; i++)
   {
     Particle2d& p = m_particles[i];
 

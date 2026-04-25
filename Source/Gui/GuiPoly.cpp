@@ -314,7 +314,7 @@ bool IGuiPoly::LoadPoints(File* f)
   {
     // Split line
     Strings strs = Split(line, ',');
-    const int n = strs.size();
+    const auto n = strs.size();
     if (n != 2)
     {
       // So a string such as 'end' signals the end of the points list.
@@ -389,7 +389,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
 {
   AmjuGL::Tris tris;
 
-  const int n = m_controlPoints.size();
+  const auto n = m_controlPoints.size();
   if (n < 2)
   {
     return tris;
@@ -409,7 +409,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   // Points of rectangle for segment, declared here so we shift the points, joining
   //  all the rectangles.
   Vec2f p[4];
-  for (int i = 1; i < n; i++)
+  for (auto i = 1; i < n; i++)
   {
     // Get direction for this segment, and perpendicular direction, so we can make an 
     //  oriented rectangle (actually trapezium, as width can vary).
@@ -501,9 +501,9 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
   const Vec2f scale = GetCombinedScale();
   const Colour colour = m_filledColour * GetCombinedColour();
 
-  const int n = m_controlPoints.size() - 1;
+  const auto n = m_controlPoints.size() - 1;
   Assert(n > 0);
-  for (int i = 1; i < n; i++)
+  for (auto i = 1; i < n; i++)
   {
     AmjuGL::Vert verts[3] =
     {

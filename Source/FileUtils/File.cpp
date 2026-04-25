@@ -317,7 +317,7 @@ bool File::WriteInteger(int i)
   else
   {
     std::string s = ToString(i) + "\n";
-    WriteBinary(s.c_str(), s.length());
+    WriteBinary(s.c_str(), static_cast<int>(s.length()));
 
     //m_os << i << endl;
 
@@ -342,7 +342,7 @@ bool File::WriteFloat(float f)
   else
   {
     std::string s = ToString(f) + "\n";
-    WriteBinary(s.c_str(), s.length());
+    WriteBinary(s.c_str(), static_cast<int>(s.length()));
     
     //m_os << f << endl;   
 

@@ -244,16 +244,16 @@ std::string Variable::VecToString() const
     return "<empty list>";
   }
 
-  const int size = m_data.pVec.size();
+  const int size = static_cast<int>(m_data.pVec.size());
 
   std::string res = "list [";
   res += Amju::ToString(size);
   res += "]: (";
 
-  for (int i = 0; i < (int)size; i++)
+  for (auto i = 0; i < size; i++)
   {
     res += m_data.pVec[i].ToString();
-    if (i < (int)size - 1)
+    if (i < size - 1)
     {
       res += ", ";
     }

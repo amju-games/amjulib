@@ -111,8 +111,8 @@ void SceneGraph::DrawAABBs(SceneNode* node)
   DrawAABB(*(node->GetAABB()));
   AmjuGL::PopAttrib();
 
-  unsigned int s = node->m_children.size();
-  for (unsigned int i = 0; i < s; i++)
+  const auto s = node->m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     SceneNode* child = node->m_children[i];
     DrawAABBs(child);
@@ -205,8 +205,8 @@ void SceneGraph::DrawChildren(
   PushColour();
   MultColour(node->m_colour);
 
-  unsigned int s = node->m_children.size();
-  for (unsigned int i = 0; i < s; i++)
+  const auto s = node->m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     PSceneNode& child = node->m_children[i];
     if (!child->IsVisible())
@@ -409,8 +409,8 @@ void SceneGraph::UpdateChildren(SceneNode* node)
     return;
   }
 
-  unsigned int s = node->m_children.size();
-  for (unsigned int i = 0; i < s; i++)
+  const auto s = node->m_children.size();
+  for (auto i = 0; i < s; i++)
   {
     PSceneNode& child = node->m_children[i];
     UpdateNode(child);

@@ -156,7 +156,7 @@ std::cout << "WAV length is " << wavLength << "\n";
   // Set vol
   int vol = (int)(volume * TheSoundManager::Instance()->GetWavMaxVolume() * 100.0f);
   //BASS_ChannelSetAttribute(hc, -1, vol, -1);
-  BASS_ChannelSetAttribute(m_chan, BASS_ATTRIB_VOL, vol);
+  BASS_ChannelSetAttribute(static_cast<DWORD>(m_chan), BASS_ATTRIB_VOL, vol);
 #endif
 
 #ifdef BASS_DEBUG
@@ -311,7 +311,7 @@ std::cout << " ..not preloaded, loading now...\n";
     m_chan = LoadSong(songFile);
     if (m_chan != 0)
     {
-      s_preloaded[songFile] = m_chan;
+      s_preloaded[songFile] = static_cast<unsigned int>(m_chan);
     }
   }
   else

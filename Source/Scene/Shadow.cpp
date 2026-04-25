@@ -38,11 +38,11 @@ void Shadow::Polygon::Tesselate()
 {
   AMJU_CALL_STACK;
 
-  int numVerts = m_verts.size();
+  const auto numVerts = m_verts.size();
   const AmjuGL::Vert firstVert = m_verts[0];
 
   AmjuGL::Tris tris;
-  for (int i = 1; i < numVerts - 1; i++)
+  for (auto i = 1; i < numVerts - 1; i++)
   {
     AmjuGL::Tri tri;
     tri.m_verts[0] = firstVert;
@@ -240,7 +240,7 @@ int Shadow::GetNumShadowVerts()
 {
   AMJU_CALL_STACK;
 
-  return m_verts.size();
+  return static_cast<int>(m_verts.size());
 }
 
 float Shadow::GetShadowX(int index)
