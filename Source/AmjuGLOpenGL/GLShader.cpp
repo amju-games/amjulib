@@ -1,6 +1,10 @@
 #include <AmjuFirst.h>
 #if (!defined(AMJU_IOS) && !defined(ANDROID_NDK)) || defined(AMJU_USE_ES2)
 
+#ifndef GLES_SILENCE_DEPRECATION
+#define GLES_SILENCE_DEPRECATION
+#endif
+
 #include "GLShader.h"
 
 #include <iostream>
@@ -11,10 +15,6 @@
 #include <ReportError.h>
 #include <StringUtils.h>
 #include <AmjuFinal.h>
-
-#ifndef GL_SILENCE_DEPRECATION
-#define GL_SILENCE_DEPRECATION
-#endif
 
 //#define SHADER_DEBUG
 
@@ -322,7 +322,42 @@ void GLShader::End()
   AmjuGL::UseShader(0);
   glUseProgram(0);
 }
-  
+
+void GLShader::SetMatrix3x3(int loc, const float matrix[9])
+{
+  GL_CHECK(glUniformMatrix3fv(loc, 1, false, matrix));
+}
+
+void GLShader::Set(int loc, const float matrix[16])
+{
+  GL_CHECK(glUniformMatrix4fv(loc, 1, false, matrix));
+}
+
+void GLShader::Set(int loc, float f)
+{
+  GL_CHECK(glUniform1f(loc, f));
+}
+
+void GLShader::Set(int loc, const AmjuGL::Vec3& v)
+{
+  GL_CHECK(glUniform3f(loc, v.m_x, v.m_y, v.m_z));
+}
+
+void GLShader::Set(int loc, const Colour& c)
+{
+  GL_CHECK(glUniform4f(loc, c.m_r, c.m_g, c.m_b, c.m_a));
+}
+
+void GLShader::Set(int loc, AmjuGL::TextureHandle t)
+{
+  GL_CHECK(glUniform1i(loc, (int)t));
+}
+
+void GLShader::SetInt(int loc, int i)
+{
+  GL_CHECK(glUniform1i(loc, i));
+}
+
 void GLShader::SetMatrix3x3(const std::string& name, const float matrix[9])
 {
   GLint loc = FindUniformLocation(name);

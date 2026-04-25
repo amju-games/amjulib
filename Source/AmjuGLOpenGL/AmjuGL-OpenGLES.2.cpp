@@ -2,7 +2,11 @@
 Amju Games source code (c) Copyright Juliet Colman 2010
 */
 
-#if defined(AMJU_IOS) 
+#if defined(AMJU_IOS)
+
+#ifndef GLES_SILENCE_DEPRECATION
+#define GLES_SILENCE_DEPRECATION
+#endif
 
 #include <AmjuFirst.h>
 #include <math.h>
@@ -67,7 +71,122 @@ static DrawableFactory s_factory;
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
     
-class TriListStaticES2 : public TriListStatic
+// Reusable functions for Static and Dynamic tri lists
+class ESTriListMixin
+{
+protected:
+  // Uniform locations
+  int m_uniformLocModelviewProjectionMatrix = -1;
+  int m_uniformLocModelviewMatrix = -1;
+  int m_uniformLocNormalMatrix = -1;
+  int m_uniformLocTexture = -1;
+  int m_uniformLocColour = -1;
+  int m_uniformLocLightDir = -1;
+  int m_uniformLocEyePos = -1;
+
+  void FindStandardUniforms()
+  {
+    m_uniformLocModelviewProjectionMatrix = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX);
+    m_uniformLocModelviewMatrix = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX);
+    m_uniformLocNormalMatrix = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX);
+    m_uniformLocTexture = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_TEXTURE);
+    m_uniformLocColour = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM);
+    m_uniformLocLightDir = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR);
+    m_uniformLocEyePos = s_currentShader->FindUniformLocation(AMJU_ES2_DEFAULT_SHADER_EYE_POS);
+  }
+  
+  void SetStandardUniforms()
+  {
+    // If the custom shader has any of the same uniforms as the default, set them here, so
+    //  client code doesn't need to set them.
+    
+    const GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
+    const GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
+    
+    if (m_uniformLocModelviewProjectionMatrix != -1)
+    {
+      // Modelview * projection matrix for world transforms
+      GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+      s_currentShader->Set(m_uniformLocModelviewProjectionMatrix, modelViewProjectionMatrix.m);
+    }
+    
+    if (m_uniformLocModelviewMatrix != -1)
+    {
+      s_currentShader->Set(m_uniformLocModelviewMatrix, modelViewMatrix.m);
+    }
+    
+    if (m_uniformLocNormalMatrix != -1)
+    {
+      GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+      s_currentShader->SetMatrix3x3(m_uniformLocNormalMatrix, normalMatrix.m);
+    }
+    
+    if (m_uniformLocTexture != -1)
+    {
+      s_currentShader->Set(m_uniformLocTexture, (AmjuGL::TextureHandle)0);
+    }
+    
+    if (m_uniformLocColour != -1)
+    {
+      s_currentShader->Set(m_uniformLocColour, s_colour);
+    }
+    
+    if (m_uniformLocLightDir != -1)
+    {
+      s_currentShader->Set(m_uniformLocLightDir, s_lightPos); // dir/pos depends on w coord I think
+    }
+    
+    if (m_uniformLocEyePos != -1)
+    {
+      s_currentShader->Set(m_uniformLocEyePos, s_eyePos);
+    }
+  }
+  
+  void SetUniformsForDefaultShader()
+  {
+    // TODO We could dispense with the checks as we 'know' the uniforms exist in here.
+    SetStandardUniforms();
+    
+    // Used in general-purpose default shader but you wouldn't have these in a custom shader.
+    // TODO Find locations once up front
+    s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
+    s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
+  }
+  
+  void SetAttribData()
+  {
+    const int STRIDE = sizeof(AmjuGL::Vert);
+    
+    // Use lighting shader so we get the Normal attrib variable location!
+    int vertexAttribPosition = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
+    int vertexAttribNormal = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
+    int vertexAttribTexCoord0 = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
+    int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
+    
+    GL_CHECK(glEnableVertexAttribArray(vertexAttribPosition));
+    GL_CHECK(glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0)));
+    
+    if (vertexAttribNormal > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribNormal));
+      GL_CHECK(glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12)));
+    }
+    
+    if (vertexAttribTexCoord0 > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribTexCoord0));
+      GL_CHECK(glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24)));
+    }
+    
+    if (vertexAttribColour > -1)
+    {
+      GL_CHECK(glEnableVertexAttribArray(vertexAttribColour));
+      GL_CHECK(glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44)));
+    }
+  }
+};
+
+class TriListStaticES2 : public TriListStatic, public ESTriListMixin
 {
 public:
   TriListStaticES2()
@@ -90,28 +209,11 @@ public:
     s_currentShader->Begin();
     if (s_currentShader == s_defaultShader)
     {
-      // TODO only change these when necessary.
-      // TODO Check for using default shader or a different one
-      GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
-      GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
-      
-      // Moldelview * projection matrix for world transforms
-      GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-      
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX, modelViewMatrix.m);
-      if (s_lightingEnabled || s_tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
-      {
-        // Inverse transpose of modelview matrix to rotate normals
-        GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-        s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
-      }
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM, s_colour);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
-      s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
+      SetUniformsForDefaultShader();
+    }
+    else
+    {
+      SetStandardUniforms();
     }
     GL_CHECK(glBindVertexArrayOES(m_vertexArray));
     GL_CHECK(glDrawArrays(GL_TRIANGLES, 0, m_numVerts));
@@ -122,40 +224,10 @@ public:
     m_numVerts = static_cast<int>(tris.size() * 3);
 
     GL_CHECK(glBindVertexArrayOES(m_vertexArray));
-
     GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
     GL_CHECK(glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW));
-
-    // This should probably go in Draw
-    const int STRIDE = sizeof(AmjuGL::Vert);
-  
-    // Use lighting shader so we get the Normal attrib variable location!
-    int vertexAttribPosition = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
-    int vertexAttribNormal = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
-    int vertexAttribTexCoord0 = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
-    int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
-    		
-    GL_CHECK(glEnableVertexAttribArray(vertexAttribPosition));
-    GL_CHECK(glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0)));
-  
-    if (vertexAttribNormal > -1)
-    {
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribNormal));
-      GL_CHECK(glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12)));
-    }
-    
-    if (vertexAttribTexCoord0 > -1)
-    {
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribTexCoord0));
-      GL_CHECK(glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24)));
-    }
-    
-    if (vertexAttribColour > -1)
-    {
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribColour));
-      GL_CHECK(glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44)));
-    }
-    
+    FindStandardUniforms();
+    SetAttribData();
     GL_CHECK(glBindVertexArrayOES(0));
   }
 
@@ -168,7 +240,7 @@ private:
 };
 
 
-class TriListDynamicES2 : public TriListDynamic
+class TriListDynamicES2 : public TriListDynamic, public ESTriListMixin
 {
 public:
   TriListDynamicES2()
@@ -187,35 +259,16 @@ public:
   
   virtual void Draw()
   {
-    // TODO Factor out common code!!
-    
     GL_CHECK(glActiveTexture(GL_TEXTURE0)); // TODO why
     
     s_currentShader->Begin();
     if (s_currentShader == s_defaultShader)
     {
-      // TODO only change these when necessary.
-      // TODO Check for using default shader or a different one
-      GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
-      GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
-      
-      // Modelview * projection matrix for world transforms
-      GLKMatrix4 modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-      
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, modelViewProjectionMatrix.m);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEW_MATRIX, modelViewMatrix.m);
-      if (s_lightingEnabled || s_tt == AmjuGL::AMJU_TEXTURE_SPHERE_MAP)
-      {
-        // Inverse transpose of modelview matrix to rotate normals
-        GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-        s_currentShader->SetMatrix3x3(AMJU_ES2_DEFAULT_SHADER_NORMAL_MATRIX, normalMatrix.m);
-      }
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_TEXTURE, (AmjuGL::TextureHandle)0);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_COLOUR_UNIFORM, s_colour);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_USE_LIGHTING, (float)(s_lightingEnabled ? 0 : 1));
-      s_currentShader->SetInt(AMJU_ES2_DEFAULT_SHADER_USE_SPHEREMAP, (int)s_tt);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_LIGHT_DIR, s_lightPos);
-      s_currentShader->Set(AMJU_ES2_DEFAULT_SHADER_EYE_POS, s_eyePos);
+      SetUniformsForDefaultShader();
+    }
+    else
+    {
+      SetStandardUniforms();
     }
     
     GL_CHECK(glBindVertexArrayOES(m_vertexArray));
@@ -227,44 +280,23 @@ public:
     if (m_firstSet)
     {
       m_firstSet = false;
-      
       m_numVerts = static_cast<int>(tris.size() * 3);
       
       GL_CHECK(glBindVertexArrayOES(m_vertexArray));
-      
       GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
       GL_CHECK(glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x), GL_DYNAMIC_DRAW));
-      
-      // This should probably go in Draw
-      const int STRIDE = sizeof(AmjuGL::Vert);
-      
-      int vertexAttribPosition = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_POSITION);
-      int vertexAttribNormal = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_NORMAL);
-      int vertexAttribTexCoord0 = s_defaultShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_UV);
-      int vertexAttribColour = s_currentShader->FindAttribLocation(AMJU_ES2_DEFAULT_SHADER_COLOUR_ATTRIB);
-
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribPosition));
-      GL_CHECK(glVertexAttribPointer(vertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0)));
-      
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribNormal));
-      GL_CHECK(glVertexAttribPointer(vertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12)));
-      
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribTexCoord0));
-      GL_CHECK(glVertexAttribPointer(vertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24)));
-      
-      GL_CHECK(glEnableVertexAttribArray(vertexAttribColour));
-      GL_CHECK(glVertexAttribPointer(vertexAttribColour, 4, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(44)));
-
+      // Find uniform locations for common uniforms.
+      FindStandardUniforms();
+      SetAttribData();
       GL_CHECK(glBindVertexArrayOES(0));
-      
     }
     else
     {
+      // Not first time calling Set
       // Must have same number of tris, right?
       Assert(tris.size() * 3 == m_numVerts);
       
       GL_CHECK(glBindVertexArrayOES(m_vertexArray));
-      
       GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer));
       GL_CHECK(glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(AmjuGL::Vert) * m_numVerts, &(tris[0].m_verts[0].m_x)));
     }
@@ -627,66 +659,7 @@ void AmjuGLOpenGLES2::Disable(uint32 flag)
 
 void AmjuGLOpenGLES2::DrawTriList(const AmjuGL::Tris& tris)
 {
-  Assert(0); // Dude, use TriList
-/*
-  AMJU_CALL_STACK;
-  
-  // TODO only change these when necessary.
-  // TODO Check for using default shader or a different one
-  GLKMatrix4& projectionMatrix = s_matrices[AmjuGL::AMJU_PROJECTION_MATRIX];
-  GLKMatrix4& modelViewMatrix = s_matrices[AmjuGL::AMJU_MODELVIEW_MATRIX];
-  
-  // Inverse transpose of modelview matrix to rotate normals
-  GLKMatrix3 _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-  // Moldeview * projection matrix for world transforms
-  GLKMatrix4 _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-  
-  glActiveTexture(GL_TEXTURE0);
-  
-  s_defaultShader->Begin();
-  s_defaultShader->Set(AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX, _modelViewProjectionMatrix.m);
-  s_defaultShader->Set("Texture", (AmjuGL::TextureHandle)0); // glUniform1i(_textureUniform, 0);
-  s_defaultShader->Set("colour", s_colour);
-  
-  // TODO Set 3*3 normals matrix
-  
-  // TODO -  need to make this efficient. Only create new buffers when necessary.
-  int numVerts = tris.size() * 3;
-  
-  GLuint _vertexArray;
-  GLuint _vertexBuffer;
-
-  glGenVertexArraysOES(1, &_vertexArray);
-  glBindVertexArrayOES(_vertexArray);
-  
-  glGenBuffers(1, &_vertexBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(AmjuGL::Vert) * numVerts, &(tris[0].m_verts[0].m_x), GL_STATIC_DRAW);
-  
-  const int STRIDE = sizeof(AmjuGL::Vert);
-  
-  int GLKVertexAttribPosition = glGetAttribLocation(s_defaultShader->GetProgHandle(), "position");
-  int GLKVertexAttribNormal = glGetAttribLocation(s_defaultShader->GetProgHandle(), "normal");
-  int GLKVertexAttribTexCoord0 = glGetAttribLocation(s_defaultShader->GetProgHandle(), "uv");
-  
-  glEnableVertexAttribArray(GLKVertexAttribPosition);
-  glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(0));
-  
-  glEnableVertexAttribArray(GLKVertexAttribNormal);
-  glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(12));
-  
-  glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-  glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, STRIDE, BUFFER_OFFSET(24));
-  
-  glBindVertexArrayOES(_vertexArray);
-  
-  glDrawArrays(GL_TRIANGLES, 0, numVerts);
-  
-  glDeleteBuffers(1, &_vertexBuffer);
-  glDeleteVertexArraysOES(1, &_vertexArray);
- 
-  s_defaultShader->End(); // Currently not requried??
-*/
+  Assert(0); // Use TriList
 }
 
 void AmjuGLOpenGLES2::DrawIndexedTriList(

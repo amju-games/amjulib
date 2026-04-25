@@ -2,6 +2,14 @@
 Amju Games source code (c) Copyright Juliet Colman 2000-2007
 */
 
+#ifndef GL_SILENCE_DEPRECATION
+#define GL_SILENCE_DEPRECATION
+#endif
+
+#ifndef GLES_SILENCE_DEPRECATION
+#define GLES_SILENCE_DEPRECATION
+#endif
+
 #include <AmjuFirst.h>
 #include <iostream>
 #include <thread>
@@ -10,10 +18,6 @@ Amju Games source code (c) Copyright Juliet Colman 2000-2007
 #include "AmjuGL-OpenGL-Base.h"
 #include <AmjuAssert.h>
 #include <AmjuFinal.h>
-
-#ifndef GL_SILENCE_DEPRECATION
-#define GL_SILENCE_DEPRECATION
-#endif
 
 //#define SHADER_DEBUG
 //#define OPENGL_SHOW_INFO
@@ -63,7 +67,7 @@ void CheckOpenGLError(const char* stmt, const char* fname, int line)
 
     std::cout << "OpenGL error " << str << " (" << err << ") at " << fname << ": " << line <<
       " for: " << stmt << "\n";
-//    Assert(0);
+    Assert(0);
   }
 }
   

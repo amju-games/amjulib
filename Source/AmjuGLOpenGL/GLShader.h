@@ -38,13 +38,22 @@ public:
   // Finish using the shader
   void End() override;
 
-  virtual void SetMatrix3x3(const std::string& name, const float matrix[9]) override;
-  virtual void Set(const std::string& name, const float matrix[16]) override;
-  virtual void Set(const std::string& name, float f) override;
-  virtual void Set(const std::string& name, const AmjuGL::Vec3&) override;
-  virtual void Set(const std::string& name, const Colour&) override;
-  virtual void Set(const std::string& name, AmjuGL::TextureHandle) override;
-  virtual void SetInt(const std::string& name, int i) override;
+  void SetMatrix3x3(const std::string& name, const float matrix[9]) override;
+  void Set(const std::string& name, const float matrix[16]) override;
+  void Set(const std::string& name, float f) override;
+  void Set(const std::string& name, const AmjuGL::Vec3&) override;
+  void Set(const std::string& name, const Colour&) override;
+  void Set(const std::string& name, AmjuGL::TextureHandle) override;
+  void SetInt(const std::string& name, int i) override;
+
+  // Set uniforms using uniform location
+  void SetMatrix3x3(int loc, const float matrix[9]);
+  void Set(int loc, const float matrix[16]);
+  void Set(int loc, float f);
+  void Set(int loc, const AmjuGL::Vec3& v);
+  void Set(int loc, const Colour& c);
+  void Set(int loc, AmjuGL::TextureHandle t);
+  void SetInt(int loc, int i);
 
   virtual void EnableThisShader_ONLY_CALL_FROM_AMJUGL() override;
   
