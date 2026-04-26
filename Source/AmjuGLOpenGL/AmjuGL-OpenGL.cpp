@@ -11,7 +11,6 @@ Amju Games source code (c) Copyright Juliet Colman 2000-2007
 #endif
 
 #include <iostream>
-//#include "GL/glew.h"
 #include <TriList.h>
 #include "AmjuGL-OpenGL.h"
 #include <CalcTangents.h>
@@ -41,6 +40,8 @@ namespace Amju
 {
 static GLShader* s_shader = nullptr;
 static Colour s_openGlColour; // current colour - pass to shader
+static AmjuGL::Vec3 s_lightPos(0, 0, 1); // light pos - for shaders
+static AmjuGL::Vec3 s_eyePos(0, 0, 1); // eye pos - for shaders
 
 static DrawableFactory s_factory;
 
@@ -207,6 +208,8 @@ void AmjuGLOpenGL::DrawLighting(
   GL_CHECK(glEnable(GL_LIGHT0));
   GL_CHECK(glLightModelfv(GL_LIGHT_MODEL_AMBIENT, gAmbient));
   GL_CHECK(glLightfv(GL_LIGHT0, GL_POSITION, pos));
+
+  s_lightPos = lightPos;
 }
 
 void AmjuGLOpenGL::Init()
@@ -283,6 +286,8 @@ void AmjuGLOpenGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, 
 {
   AMJU_CALL_STACK;
 
+  s_eyePos = AmjuGL::Vec3(eyeX, eyeY, eyeZ);
+
   gluLookAt(eyeX, eyeY, eyeZ, // origin - player coords
             x, y, z, // point in direction we want to look
             upX, upY, upZ /* 'Up' vector */);
@@ -349,10 +354,10 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 
   if (s_shader)
   {
-    // Try to use attribute variables
+    // Try to use the same uniform variables as the ES default shader.
+    // TODO optimise this
 
-    // TODO TEMP TEST
-    int uMatrix = s_shader->FindUniformLocation("modelViewProjectionMatrix");
+    const int uMatrix = s_shader->FindUniformLocation("modelViewProjectionMatrix");
     if (uMatrix > -1)
     {
       Matrix mv;
@@ -362,12 +367,12 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
       Matrix mat = mv * proj;
       s_shader->Set("modelViewProjectionMatrix", mat);
    
-      int uNormalMatrix = s_shader->FindUniformLocation("normalMatrix");
+      const int uNormalMatrix = s_shader->FindUniformLocation("normalMatrix");
       if (uNormalMatrix > -1)
       {
         // Inverse transpose of modelview matrix to rotate normals
-        // TODO
-        float normalMatrix[9] = 
+        // TODO this isn't doing inv transpose
+        const float normalMatrix[9] = 
         {
           mat[0], mat[1], mat[2],
           mat[4], mat[5], mat[6],
@@ -377,18 +382,38 @@ void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
       }
     }
 
-    int uColour = s_shader->FindUniformLocation("colourUniform");
+    const int uniformLocModelViewMatrix = s_shader->FindUniformLocation("modelViewMatrix");
+    if (uniformLocModelViewMatrix != -1)
+    {
+      Matrix mv;
+      mv.ModelView();
+      s_shader->Set(uniformLocModelViewMatrix, mv);
+    }
+
+    const int uColour = s_shader->FindUniformLocation("colourUniform");
     if (uColour > -1)
     {
       s_shader->Set("colourUniform", s_openGlColour);
     }
 
-    // Setup
-    int aPosition = s_shader->FindAttribLocation("position");
-    int aNormal   = s_shader->FindAttribLocation("normal");
-    int aUV   = s_shader->FindAttribLocation("uv");
-    int tan = s_shader->FindAttribLocation("tangent");
-    int colour = s_shader->FindAttribLocation("colour");
+    const int uniformLocLightDir = s_shader->FindUniformLocation("lightPos");
+    if (uniformLocLightDir != -1)
+    {
+      s_shader->Set(uniformLocLightDir, s_lightPos); // dir/pos depends on w coord I think
+    }
+
+    const int uniformLocEyePos = s_shader->FindUniformLocation("eyePos");
+    if (uniformLocEyePos != -1)
+    {
+      s_shader->Set(uniformLocEyePos, s_eyePos);
+    }
+
+    // Setup attributes
+    const int aPosition = s_shader->FindAttribLocation("position");
+    const int aNormal   = s_shader->FindAttribLocation("normal");
+    const int aUV   = s_shader->FindAttribLocation("uv");
+    const int tan = s_shader->FindAttribLocation("tangent");
+    const int colour = s_shader->FindAttribLocation("colour");
 
     if (aPosition > -1)
     {
