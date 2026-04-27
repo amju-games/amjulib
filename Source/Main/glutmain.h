@@ -23,6 +23,11 @@
 #endif
 #ifdef WIN32
 #include <gl/glut.h>
+
+// Set desired FPS
+const int TARGET_FPS = 60;
+const int FRAME_DELAY = 1000 / TARGET_FPS; // Milliseconds per frame
+
 #endif
 
 #include <AmjuFinal.h>
@@ -48,6 +53,18 @@ void resize(int x, int y)
   QueueEvent(e);
 }
 
+// Throttle frame rate, which was running as fast as poss on windows.
+// Redisplay, then set a timer to call this function again
+//  after a delay.
+void timer(int value) 
+{
+  // Force a screen redraw
+  glutPostRedisplay();
+
+  // Reschedule the timer to call this function again in FRAME_DELAY ms
+  glutTimerFunc(FRAME_DELAY, timer, 0);
+}
+
 void draw()
 {
   TheGame::Instance()->RunOneLoop();
@@ -57,10 +74,8 @@ void draw()
 #endif
 
 #ifndef WIN32
-  glutSwapBuffers(); // ?
+  glutSwapBuffers(); 
 #endif
-
-  glutPostRedisplay();
 }
 
 void queueTextEvent(unsigned char k)
@@ -382,8 +397,6 @@ std::cout << "Glut creating window...\n";
   glutMotionFunc(mousemove);
   glutPassiveMotionFunc(mousemove);
 
-  glutIdleFunc(draw);
-
   int js = glutDeviceGet(GLUT_HAS_JOYSTICK);
   if (js != 0)
   {
@@ -422,6 +435,9 @@ int main(int argc, char **argv)
 
   // Can't do this, glutMainLoop is in charge
   //TheGame::Instance()->Run();
+
+  // Initial call to the timer function
+  glutTimerFunc(FRAME_DELAY, timer, 0);
 
   glutMainLoop();
 
