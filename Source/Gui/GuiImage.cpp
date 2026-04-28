@@ -96,7 +96,15 @@ bool GuiImage::Load(File* f)
   {
     return false;
   }
+  if (!LoadImageInfo(f))
+  {
+    return false;
+  }
+  return true;
+}
 
+bool GuiImage::LoadImageInfo(File* f)
+{
   std::string s;
   if (!f->GetDataLine(&s))
   {

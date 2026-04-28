@@ -39,6 +39,16 @@ GuiButton::~GuiButton()
   // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
 }
 
+void GuiButton::SetTexture(Texture* tex) 
+{ 
+  m_image.SetTexture(tex); 
+}
+
+Texture* GuiButton::GetTexture()
+{
+  return m_image.GetTexture();
+}
+
 bool GuiButton::IsEnabled() const
 {
   if (!m_onPressedDown && !m_pCommand && !m_commandFunc)
@@ -155,7 +165,7 @@ bool GuiButton::Save(File* f)
   {
     return false;
   }
-  if (!SaveImageInfo(f))
+  if (!m_image.SaveImageInfo(f))
   {
     return false;
   }
@@ -168,13 +178,25 @@ bool GuiButton::Save(File* f)
 
 bool GuiButton::Load(File* f)
 {
-  if (!GuiImage::Load(f))
+  if (!GuiElement::Load(f))
   {
     return false;
   }
+
+  // Set image size from overall size, as we don't load image size.
+  m_image.SetSize(GetSize());
+  if (!m_image.LoadImageInfo(f))
+  {
+    return false;
+  }
+  // Save stretched image size back into overall size
+  SetSize(m_image.GetSize());
+
+  m_focusImage = m_image.Clone();
+
   // Button textures don't wrap
   GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
-  m_focusImage.SetTexture(GetTexture());
+  //m_focusImage->SetTexture(GetTexture());
 
   // Load text
   if (!m_guiText.LoadText(f))
@@ -185,6 +207,7 @@ bool GuiButton::Load(File* f)
 #ifdef _DEBUG
   // For debugging, set name
   m_guiText.SetName("text for button " + m_name + ": \"" + m_guiText.GetText() + "\"");
+  m_focusImage->SetName("focus image for button " + m_name);
 #endif
 
   // Button text tends to get truncated, so extend the size of the text
@@ -224,6 +247,9 @@ void GuiButton::Draw()
     return;
   }
 
+  // TODO This might not work for GuiSprites
+  m_image.SetLocalPos(GetCombinedPos());
+
   AmjuGL::PushMatrix();
   if (m_isPressed)
   {
@@ -234,25 +260,23 @@ void GuiButton::Draw()
   if (IsMouseOver())
   {
     // TODO This is no good, the size change depends on the position of the button.
-    // Scale + Tralsate is required.
+    // Scale + Translate is required.
     static const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
 
   if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus) 
-    ///// || HasFocus()) // TODO just one
   {
     // Draw border
-    // TODO Could be image - allow flexible way to give GUIs themes
-    static float t = 0;
+    static float t = 0; // TODO I guess this is ok if only one button can have focus
     PushColour();
     if (IsFocusButton())
     {
-      float dt = TheTimer::Instance()->GetDt();
+      const float dt = TheTimer::Instance()->GetDt();
       t += dt;
-      float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      Colour fg = m_guiText.GetFgCol();
-      Colour c = Interpolate(m_focusColour, fg, s);
+      const float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
+      const Colour fg = m_guiText.GetFgCol();
+      const Colour c = Interpolate(m_focusColour, fg, s);
       MultColour(c);
     }
     else
@@ -260,29 +284,29 @@ void GuiButton::Draw()
       MultColour(Colour(1, 0, 0, 1));
     }
 
-    Rect r = GetRect(this);
-    float BORDER = 0.05f; // TODO configurable
-    float bh = BORDER;
-    float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
-    float xmin = r.GetMin(0) - bw;
-    float xmax = r.GetMax(0) + bw;
-    float ymin = r.GetMin(1) - bh;
-    float ymax = r.GetMax(1) + bh;
+    Rect r = GetRect(&m_image);
+    const float BORDER = 0.05f; // TODO configurable
+    const float bh = BORDER;
+    const float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
+    const float xmin = r.GetMin(0) - bw;
+    const float xmax = r.GetMax(0) + bw;
+    const float ymin = r.GetMin(1) - bh;
+    const float ymax = r.GetMax(1) + bh;
     r.Set(xmin, xmax, ymin, ymax);
     
-    m_focusImage.SetParent(0);
-    m_focusImage.SetLocalPos(Vec2f(xmin, ymax));
-    m_focusImage.SetSize(Vec2f(xmax - xmin, ymax - ymin));
-    m_focusImage.Draw();
+    m_focusImage->SetParent(nullptr);
+    m_focusImage->SetLocalPos(Vec2f(xmin, ymax));
+    m_focusImage->SetSize(Vec2f(xmax - xmin, ymax - ymin));
+    m_focusImage->Draw();
      
-//    TODO use m_focusImage - don't create/destroy VBO
-    
     PopColour();
   }
 
   PushColour();
   MultColour(m_buttonColour);
-  GuiImage::Draw();
+
+  // TODO Does this work with GuiSprite?
+  m_image.Draw();
   
   // Get the combined colour for this button - so we can disable in IsEnabled
   m_combinedColour = AmjuGL::GetColour();
@@ -321,8 +345,6 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   {
     return false;
   }
-
-  // TODO Adjust for cursor hot spot - dependency on Cursor Manager ??
 
   // Point in button rectangle ?
   Rect r = GetRect(this);

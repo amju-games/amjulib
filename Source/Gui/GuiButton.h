@@ -8,7 +8,7 @@
 
 namespace Amju
 {
-class GuiButton : public GuiImage
+class GuiButton : public GuiElement
 {
 public:
   static const char* NAME;
@@ -41,6 +41,9 @@ public:
   void SetFocusColour(const Colour& col);
   const Colour& GetFocusColour() const;
 
+  void SetTexture(Texture*);
+  Texture* GetTexture() override;
+
   bool IsMouseOver() const;
   bool IsPressed() const;
 
@@ -63,6 +66,7 @@ protected:
   void OnPressedDown();
 
 protected:
+  GuiImage m_image; // TODO make RCPtr<GuiImage> so we can swap in a GuiSprite
   GuiText m_guiText;
   Colour m_buttonColour;
   Colour m_focusColour;
@@ -74,7 +78,7 @@ protected:
 
   CommandFunc m_onPressedDown;
 
-  GuiImage m_focusImage;
+  RCPtr<GuiImage> m_focusImage;
   
   static std::string s_clickFilename;
   

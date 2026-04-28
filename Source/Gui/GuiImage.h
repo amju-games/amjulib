@@ -23,13 +23,17 @@ public:
   bool Load(File*) override;
   bool Save(File*) override;
 
+  // Load the image info, but not the name, pos, size.
+  // This makes it possible to embed an image in another gui type.
+  virtual bool LoadImageInfo(File*);
+
   void SetTexture(Texture* tex);
   Texture* GetTexture() override;
 
-protected:
   // Just write the image filename and other attributes
   bool SaveImageInfo(File* f);
 
+protected:
   // Build (2 element) tri list to draw the textured quad.
   // NB this is super inefficient: GuiSprite batches draw calls better,
   //  especially if the images are all in one atlas.

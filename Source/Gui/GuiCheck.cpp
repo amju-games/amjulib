@@ -19,7 +19,7 @@ void GuiCheck::ExecuteCommand()
 
   m_value = !m_value;
 
-  SetTexture(m_value ? m_checkedTex : m_uncheckedTex);
+  m_image.SetTexture(m_value ? m_checkedTex : m_uncheckedTex);
 
   if (m_changeValueFunc)
   {
@@ -48,7 +48,7 @@ void GuiCheck::SetValue(bool b)
   m_value = b; 
   // TODO call callback?
 
-  SetTexture(m_value ? m_checkedTex : m_uncheckedTex);
+  m_image.SetTexture(m_value ? m_checkedTex : m_uncheckedTex);
 }
 
 void GuiCheck::Draw()
@@ -68,7 +68,7 @@ void GuiCheck::Draw()
   }
   MultColour(Colour(1, 1, 1, a));
 
-  GuiImage::Draw();
+  m_image.Draw();
 
   PopColour();
 }
