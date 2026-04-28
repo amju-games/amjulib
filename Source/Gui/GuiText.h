@@ -26,7 +26,9 @@ class GuiTextBase : public IGuiText, public GuiElement
 public:
   enum Just { AMJU_JUST_LEFT, AMJU_JUST_RIGHT, AMJU_JUST_CENTRE };
 
-  // I.e. character at font size 1 takes up 1/20th of the screen height
+  // Set the scale for fonts.
+  // A character at font size 1 takes up 1/20th of the screen height.
+  // (1/20 because entire height is -1..1, i.e. distance of 2)
   static constexpr float CHAR_HEIGHT_FOR_SIZE_1 = .1f;
 
   std::string GetText() const override { return m_text; }
@@ -41,8 +43,20 @@ public:
   bool IsMulti() const;
   int GetNumLines() const;
 
+  // Foreground colour - i.e. colour of text glyphs
   void SetFgCol(const Colour& col);
   const Colour& GetFgCol() const;
+  // Background colour - i.e. colour behind the text
+  void SetBgCol(const Colour& col);
+  const Colour& GetBgCol() const;
+
+  bool Load(File*) override;
+  bool Save(File*) override;
+
+  // Load type-specific info
+  virtual bool LoadTextInfo(File*) { return true; }
+  // Save type-specific info
+  virtual bool SaveTextInfo(File*) { return true; }
 
 protected:
   bool ParseFontInfoLine(File* f);
@@ -70,7 +84,8 @@ protected:
   float m_textSize = 1.f; // "point" size
   bool m_isMulti = false; // true for multi-line text
   Strings m_lines; // for multi-line text, this is m_text split into lines
-  Colour m_fgCol; // 'foreground colour', i.e. colour of the text
+  Colour m_fgCol; // foreground colour, i.e. colour of the text
+  Colour m_bgCol; // background colour
 };
  
 class GuiText : public GuiTextBase
@@ -83,15 +98,14 @@ public:
 
   GuiText();
   virtual void Draw() override;
-  virtual bool Load(File*) override;
-  virtual bool Save(File*) override;
   virtual void TextToSpeech() override;
 
   Texture* GetTexture() override;
 
-  // Load just the text info (not name, size, etc)
-  bool LoadText(File*);
-  bool SaveText(File*);
+  // Load just the text info (not name, size, etc., which is loaded in
+  //  GuiElement::Load.)
+  bool LoadTextInfo(File*) override;
+  bool SaveTextInfo(File*) override;
 
   virtual void SetText(const std::string& text) override;
 
@@ -118,8 +132,6 @@ public:
 
   void SetInverse(bool inv);
   void SetDrawBg(bool drawBg);
-  void SetBgCol(const Colour& col);
-  const Colour& GetBgCol() const;
 
   // For text which is revealed a char at a time, this is the period for each char
   void SetCharTime(float secs);
@@ -154,7 +166,6 @@ protected:
   
   bool m_inverse;
   bool m_drawBg;
-  Colour m_bgCol;
 
   float m_charTime; // time to wait between drawing chars
   float m_currentCharTime; // show one more char when we reach m_charTime

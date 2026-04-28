@@ -169,7 +169,7 @@ bool GuiButton::Save(File* f)
   {
     return false;
   }
-  if (!m_guiText.SaveText(f))
+  if (!m_guiText.SaveTextInfo(f))
   {
     return false;
   }
@@ -195,38 +195,37 @@ bool GuiButton::Load(File* f)
   m_focusImage = m_image.Clone();
 
   // Button textures don't wrap
+  // (Probably not worth worrying about)
   GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
-  //m_focusImage->SetTexture(GetTexture());
+
+  // Button text tends to get truncated, so extend the size of the text
+//  (TODO This might be a bug in RecalcFirstLast when font size != 1)
+  Vec2f pos = GetLocalPos();
+  Vec2f size = GetSize();
+  pos.x -= size.x * 0.25f;
+  m_guiText.SetLocalPos(pos);
+  size.x *= 1.5f;
+  m_guiText.SetSize(size);
 
   // Load text
-  if (!m_guiText.LoadText(f))
+  if (!m_guiText.LoadTextInfo(f))
   {
     return false;
   }
 
 #ifdef _DEBUG
-  // For debugging, set name
+  // For debugging, set names of member elements
   m_guiText.SetName("text for button " + m_name + ": \"" + m_guiText.GetText() + "\"");
   m_focusImage->SetName("focus image for button " + m_name);
+  m_image.SetName("image for button " + m_name);
 #endif
 
-  // Button text tends to get truncated, so extend the size of the text
-  //  (TODO This might be a bug in RecalcFirstLast when font size != 1)
-  Vec2f pos = GetLocalPos();
-  Vec2f size = GetSize();
-  pos.x -= size.x * 0.25f;
-  m_guiText.SetLocalPos(pos);
-  size.x *= 1.5f; 
-  m_guiText.SetSize(size);
-  m_guiText.RecalcFirstLast();
- 
   m_guiText.SetParent(GetParent());
 
   // Use text BG colour to tint the button image, but don't draw a text background, which is a
   //  solid rectangle.
   SetButtonColour(m_guiText.GetBgCol());
   SetFocusColour(m_guiText.GetBgCol());
-  m_guiText.SetDrawBg(false);
 
 #if defined(WIN32) || defined(MACOSX)
   // Check for initial mouse over
@@ -240,34 +239,11 @@ bool GuiButton::Load(File* f)
   return true;
 }
 
-void GuiButton::Draw()
+void GuiButton::DrawFocus()
 {
-  if (!IsVisible())
+  if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus)
   {
-    return;
-  }
-
-  // TODO This might not work for GuiSprites
-  m_image.SetLocalPos(GetCombinedPos());
-
-  AmjuGL::PushMatrix();
-  if (m_isPressed)
-  {
-    static const float PRESSED_OFFSET = 0.01f;
-    AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
-  }
-
-  if (IsMouseOver())
-  {
-    // TODO This is no good, the size change depends on the position of the button.
-    // Scale + Translate is required.
-    static const float SCALE = 1.01f;
-    AmjuGL::Scale(SCALE, SCALE, 1.0f);
-  }
-
-  if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus) 
-  {
-    // Draw border
+    // Draw flashing focus border
     static float t = 0; // TODO I guess this is ok if only one button can have focus
     PushColour();
     if (IsFocusButton())
@@ -293,17 +269,45 @@ void GuiButton::Draw()
     const float ymin = r.GetMin(1) - bh;
     const float ymax = r.GetMax(1) + bh;
     r.Set(xmin, xmax, ymin, ymax);
-    
+
     m_focusImage->SetParent(nullptr);
     m_focusImage->SetLocalPos(Vec2f(xmin, ymax));
     m_focusImage->SetSize(Vec2f(xmax - xmin, ymax - ymin));
     m_focusImage->Draw();
-     
+
     PopColour();
   }
+}
+
+void GuiButton::Draw()
+{
+  if (!IsVisible())
+  {
+    return;
+  }
+
+  AmjuGL::PushMatrix();
+  if (m_isPressed)
+  {
+    static const float PRESSED_OFFSET = 0.01f;
+    AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
+  }
+
+  if (IsMouseOver())
+  {
+    // TODO This is no good, the size change depends on the position of the button.
+    // Scale + Translate is required.
+    static const float SCALE = 1.01f;
+    AmjuGL::Scale(SCALE, SCALE, 1.0f);
+  }
+
+  DrawFocus(); // flashing border
 
   PushColour();
   MultColour(m_buttonColour);
+
+  // TODO This might not work for GuiSprites
+  m_image.SetLocalPos(GetCombinedPos());
 
   // TODO Does this work with GuiSprite?
   m_image.Draw();
@@ -468,7 +472,6 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
 
 void GuiButton::SetText(const std::string& text)
 {
-  //m_text = text;
   m_guiText.SetText(text);
 }
 

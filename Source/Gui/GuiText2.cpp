@@ -83,13 +83,53 @@ void GuiText2::BuildTriListForLine(const std::string& str, const Vec2f& pos)
   m_tris.insert(m_tris.end(), tris.begin(), tris.end());
 }
 
-bool GuiText2::Load(File* f) 
+bool GuiText2::Load(File* f)
 {
   if (!GuiElement::Load(f))
   {
     return false;
   }
+  return LoadTextInfo(f);
+}
 
+bool GuiText2::SaveTextInfo(File* f)
+{
+  // TODO Factor out common code
+  if (!f->WriteComment("// \"" + m_text + "\""))
+  {
+    return false;
+  }
+  if (!f->Write(m_preLocalisedText))
+  {
+    return false;
+  }
+  // TODO
+  std::string s = m_fontName + ", " + std::to_string(m_textSize);
+  if (m_isMulti)
+  {
+    s += ", multi";
+  }
+  // TODO bgCol, fgCol, scale, justification
+  s += ", fgcol=" + ToHexString(m_fgCol);
+  s += ", bgcol=" + ToHexString(m_bgCol);
+
+  static const std::map<Just, std::string> JUST_MAP = {
+    {AMJU_JUST_LEFT, "left"},
+    {AMJU_JUST_RIGHT, "right"},
+    {AMJU_JUST_CENTRE, "centre"}
+  };
+  s += ", " + JUST_MAP.at(m_just);
+
+  if (!f->Write(s))
+  {
+    return false;
+  }
+
+  return true;
+}
+
+bool GuiText2::LoadTextInfo(File* f)
+{
   std::string text;
   if (!f->GetLocalisedString(&text, &m_preLocalisedText))
   {
@@ -117,20 +157,6 @@ bool GuiText2::HandleAttrib(const std::string& s)
 bool GuiText2::HandleAttrib(const std::string& key, const std::string& value)
 {
   if (GuiTextBase::HandleAttrib(key, value)) return true;
-
-  if (key == "fgcol")
-  {
-    auto optionalColour = FromHexString(value);
-    if (optionalColour)
-    {
-      m_fgCol = *optionalColour;
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
   return false;
 }
 

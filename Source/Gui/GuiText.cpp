@@ -16,13 +16,13 @@
 
 namespace Amju
 {
-bool GuiText::Load(File* f)
+bool GuiTextBase::Load(File* f)
 {
   if (!GuiElement::Load(f))
   {
     return false;
   }
-  return LoadText(f);
+  return LoadTextInfo(f);
 }
 
 const char* GuiText::NAME = "gui-text";
@@ -137,7 +137,7 @@ void GuiTextBase::SetFgCol(const Colour& col)
   m_fgCol = col;
 }
 
-void GuiText::SetBgCol(const Colour& col)
+void GuiTextBase::SetBgCol(const Colour& col)
 {
   m_bgCol = col;
 }
@@ -231,7 +231,7 @@ void GuiText::ReallyDraw()
 
 void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 {
-  auto lines = m_lines.size();
+  int lines = static_cast<int>(m_lines.size());
   
   bool rebuild = false;
   if (m_triLists.empty())
@@ -545,9 +545,9 @@ float GuiText::GetTextWidth(const std::string& text) const
   return textWidth * m_scaleX * m_textSize;
 }
 
-bool GuiText::Save(File* f)
+bool GuiTextBase::Save(File* f)
 {
-  if (!f->Write(NAME))
+  if (!f->Write(GetTypeName()))
   {
     return false;
   }
@@ -555,14 +555,14 @@ bool GuiText::Save(File* f)
   {
     return false;
   }
-  if (!SaveText(f))
+  if (!SaveTextInfo(f))
   {
     return false;
   }
   return true;
 }
 
-bool GuiText::SaveText(File* f)
+bool GuiText::SaveTextInfo(File* f)
 {
   if (!f->WriteComment("// \"" + m_text + "\""))
   {
@@ -615,7 +615,7 @@ bool GuiTextBase::ParseFontInfoLine(File* f)
   }
 
   Strings strs = Split(s, ',');
-  auto size = strs.size();
+  int size = static_cast<int>(strs.size());
   if (size < 2)
   {
     f->ReportError("Unexpected font info: " + s);
@@ -652,7 +652,7 @@ bool GuiTextBase::ParseFontInfoLine(File* f)
   return true;
 }
 
-bool GuiText::LoadText(File* f)
+bool GuiText::LoadTextInfo(File* f)
 {
   std::string text;
   if (!f->GetLocalisedString(&text, &m_preLocalisedText))
@@ -702,30 +702,12 @@ bool GuiTextBase::HandleAttrib(const std::string& s)
 
 bool GuiTextBase::HandleAttrib(const std::string& key, const std::string& value)
 {
-  return false;
-}
-
-bool GuiText::HandleAttrib(const std::string& s)
-{
-  if (GuiTextBase::HandleAttrib(s)) return true;
-
-  if (s == "inv")
-  {
-    m_inverse = true;
-    return true;
-  }
-  return false;
-}
-
-bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
-{
   if (key == "bgcol")
   {
     auto optionalColour = FromHexString(value);
     if (optionalColour)
     {
       m_bgCol = *optionalColour;
-      m_drawBg = true;
       return true;
     }
     else
@@ -746,6 +728,38 @@ bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
       return false;
     }
   }
+  return false;
+}
+
+bool GuiText::HandleAttrib(const std::string& s)
+{
+  if (GuiTextBase::HandleAttrib(s)) return true;
+
+  if (s == "inv")
+  {
+    m_inverse = true;
+    return true;
+  }
+  return false;
+}
+
+bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
+{
+  // Special case handling of "bgcol"
+  if (key == "bgcol")
+  {
+    auto optionalColour = FromHexString(value);
+    if (optionalColour)
+    {
+      m_bgCol = *optionalColour;
+      m_drawBg = true;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
   else if (key == "sx")
   {
     m_scaleX = ToFloat(value);
@@ -754,8 +768,13 @@ bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
   else if (key == "reveal")
   {
     // Arg is seconds to reveal each character in text
-    float t = ToFloat(value);
+    const float t = ToFloat(value);
     SetCharTime(t);
+    return true;
+  }
+  // After the type-specific block because of special case handling of "bgcol".
+  if (GuiTextBase::HandleAttrib(key, value))
+  {
     return true;
   }
   return false;
@@ -766,7 +785,7 @@ const Colour& GuiTextBase::GetFgCol() const
   return m_fgCol;
 }
 
-const Colour& GuiText::GetBgCol() const
+const Colour& GuiTextBase::GetBgCol() const
 {
   return m_bgCol;
 }

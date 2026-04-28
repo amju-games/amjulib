@@ -19,6 +19,10 @@ public:
 
   virtual void Draw() override;
   virtual bool Load(File*) override;
+  // Load just the text info (not name, size, etc., which is loaded in
+  //  GuiElement::Load.)
+  bool LoadTextInfo(File*) override;
+  bool SaveTextInfo(File*) override;
 
   Texture* GetTexture() override; // for Batched
   void AddToTrilist(AmjuGL::Tris& tris) override; // for Batched

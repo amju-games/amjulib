@@ -3,6 +3,7 @@
 
 #include "GuiImage.h"
 #include "GuiText.h"
+#include "GuiText2.h"
 #include "Font.h"
 #include "Colour.h"
 
@@ -61,6 +62,7 @@ public:
   static void SetClickFilename(const std::string& clickFilename);
 
 protected:
+  void DrawFocus();
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
   void OnPressedDown();
