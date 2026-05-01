@@ -183,6 +183,7 @@ void Game::RunOneLoop()
 
     s += " fps: " + fps;
     s += " Draw calls: " + std::to_string(AmjuGL::GetReportStat(AmjuGL::AMJU_NUM_DRAW_CALLS));
+    s += " Tris: " + std::to_string(AmjuGL::GetReportStat(AmjuGL::AMJU_NUM_TRIS));
 
     m_frameStats = s;
 #endif //  SHOW_FRAME_TIME
