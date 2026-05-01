@@ -13,11 +13,20 @@ namespace Amju
 {
 void CheckOpenGLError(const char* stmt, const char* fname, int line);
 
+#ifdef _DEBUG
+
 #define GL_CHECK(stmt) do { \
 stmt; \
 CheckOpenGLError(#stmt, __FILE__, __LINE__); \
 } while (0)
-  
+
+#else
+
+// Release: don't check GL calls
+#define GL_CHECK(stmt) stmt;
+
+#endif
+
 class AmjuGLOpenGLBase : public AmjuGLImpl
 {
 public:
