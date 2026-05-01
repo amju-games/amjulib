@@ -27,12 +27,16 @@ void IGuiPoly::AddToTrilist(AmjuGL::Tris& tris)
   tris.insert(tris.end(), m_tris.begin(), m_tris.end());
 }
 
+std::string IGuiPoly::s_outlineTextureName;
+
+void IGuiPoly::SetPolyOutlineTextureName(const std::string& resName)
+{
+  s_outlineTextureName = resName;
+}
+
 Texture* IGuiPoly::GetTexture()
 {
-  static Texture* texture = (Texture*)TheResourceManager::Instance()->GetRes("Image/circle.png");
-  Assert(texture);
-  texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
-  return texture;
+  return m_texture;
 }
 
 bool IGuiPoly::IsLoop() const 
@@ -87,7 +91,6 @@ void IGuiPoly::Draw()
     return;
   }
 
-  // TODO using circle texture, draw rounded corners?
   AddToBatch(this);
 
   const Vec2f combinedPos = GetCombinedPos();
@@ -281,7 +284,25 @@ bool IGuiPoly::Load(File* f)
     return false;
   }
   OnControlPointsChanged();
-//  AddToBatch();
+
+  if (s_outlineTextureName.empty())
+  {
+    f->ReportError("Please set texture name, by calling IGuiPoly::SetPolyOutlineTextureName.");
+    return false;
+  }
+
+  auto res = TheResourceManager::Instance()->GetRes(s_outlineTextureName);
+  if (!res)
+  {
+    f->ReportError("Bad global poly texture name: " + s_outlineTextureName);
+    return false;
+  }
+
+  m_texture = dynamic_cast<Texture*>(res);
+  Assert(m_texture); // resource should be a texture!
+  // Doesn't do much good with mipmapping.
+  m_texture->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
+
   return true;
 }
 
