@@ -63,6 +63,11 @@ static int numDrawCalls = 0;
 // Number of draw calss last frame - report this one 
 static int numDrawCallsLastFrame = 0;
 
+// Ongoing count of tris drawn this frame
+static int numTris = 0;
+// Number of tris drawn last frame - this is reported
+static int numTrisLastFrame = 0;
+
 static std::ostream& ReportCol(const Colour& c, std::ostream& os)
 {
   return os << "R: " << c.m_r << " G: " << c.m_g << " B: " << c.m_b << " A: " << c.m_a;
@@ -128,6 +133,7 @@ std::ostream& AmjuGL::ReportState(std::ostream& os)
   os << "Viewport: " << viewport[0] << " " << viewport[1] << " " << viewport[2] << " " << viewport[3] << "\n";
 
   os << "Draw calls last frame: " << numDrawCallsLastFrame << "\n";
+  os << "Num tris last frame: " << numTrisLastFrame << "\n";
 
   return os;
 }
@@ -138,6 +144,9 @@ int AmjuGL::GetReportStat(AmjuGL::ReportStat rs)
   {
   case AMJU_NUM_DRAW_CALLS:
     return numDrawCallsLastFrame;
+      
+  case AMJU_NUM_TRIS:
+    return numTrisLastFrame;
   }
   Assert(0);
   return 0;
@@ -167,6 +176,9 @@ void AmjuGL::BeginScene()
   numDrawCallsLastFrame = numDrawCalls;
   numDrawCalls = 0;
 
+  numTrisLastFrame = numTris;
+  numTris = 0;
+  
   impl->BeginScene();
 }
 
@@ -445,6 +457,7 @@ void AmjuGL::DrawTriList(const Tris& tris)
   impl->DrawTriList(tris);
 
   numDrawCalls++;
+  numTris += tris.size();
 }
 
 void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)

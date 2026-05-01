@@ -34,6 +34,7 @@ public:
   enum ReportStat
   {
     AMJU_NUM_DRAW_CALLS,
+    AMJU_NUM_TRIS,
   };
 
   static int GetReportStat(ReportStat rs);
