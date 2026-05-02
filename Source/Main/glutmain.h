@@ -1,7 +1,9 @@
 #ifdef AMJU_USE_GLUT
 
 #if defined(MACOSX) || defined(AMJU_IOS)
+#ifndef GL_SILENCE_DEPRECATION
 #define GL_SILENCE_DEPRECATION
+#endif
 #endif
 
 #include <AmjuFirst.h>
