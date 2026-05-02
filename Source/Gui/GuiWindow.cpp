@@ -134,8 +134,8 @@ bool GuiWindow::OnDoubleClickEvent(const DoubleClickEvent& e)
   }
 
   bool ret = false;
-  auto s = m_children.size();
-  for (auto i = 0; i < s; i++)
+  const int s = static_cast<int>(m_children.size());
+  for (int i = 0; i < s; i++)
   {
     if (m_children[i]->OnDoubleClickEvent(e))
     {
@@ -154,8 +154,8 @@ bool GuiWindow::OnMouseButtonEvent(const MouseButtonEvent& e)
   }
 
   bool ret = false;
-  auto s = m_children.size();
-  for (auto i = 0; i < s; i++)
+  const int s = static_cast<int>(m_children.size());
+  for (int i = 0; i < s; i++)
   {
     if (m_children[i]->OnMouseButtonEvent(e))
     {
@@ -175,8 +175,8 @@ bool GuiWindow::OnCursorEvent(const CursorEvent& e)
 //  }
 
   bool ret = false;
-  auto s = m_children.size();
-  for (auto i = 0; i < s; i++)
+  const int s = static_cast<int>(m_children.size());
+  for (int i = 0; i < s; i++)
   {
     if (m_children[i]->OnCursorEvent(e))
     {

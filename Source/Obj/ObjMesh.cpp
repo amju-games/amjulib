@@ -160,8 +160,8 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
       }
     }
 
-    const auto numTris = g.m_tris.size();
-    for (auto i = 0; i < numTris; i++)
+    const int numTris = static_cast<int>(g.m_tris.size());
+    for (int i = 0; i < numTris; i++)
     {
       const AmjuGL::Tri& tri = g.m_tris[i];
       Tri t(
@@ -782,7 +782,7 @@ void ObjMesh::BuildGroup(Group& g)
   // Only need to build Tris once - this kind of mesh is not animated!
   Faces& faces = m_facemap[g.m_name];
 
-  const auto numfaces = faces.size();
+  const int numfaces = static_cast<int>(faces.size());
 
   if (ShowInfo())
   {
@@ -797,7 +797,7 @@ void ObjMesh::BuildGroup(Group& g)
   g.m_aabb.Set(BIG, -BIG, BIG, -BIG, BIG, -BIG);
 
   g.m_tris.reserve(numfaces);
-  for (auto i = 0; i < numfaces; i++)
+  for (int i = 0; i < numfaces; i++)
   {
     const Face& f = faces[i];
     AmjuGL::Tri t;

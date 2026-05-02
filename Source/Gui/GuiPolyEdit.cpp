@@ -39,8 +39,8 @@ void GuiPolyEdit::HandleDragGrabber(const Vec2f& deltaPos)
   else
   {
     auto& points = GetPoly()->GetControlPoints();
-    const auto n = points.size();
-    for (auto i = 1; i <= n; i++)
+    const int n = static_cast<int>(points.size());
+    for (int i = 1; i <= n; i++)
     {
       if (m_selectedGrabberIndices.count(i))
       {

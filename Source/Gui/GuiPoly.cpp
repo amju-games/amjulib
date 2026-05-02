@@ -410,7 +410,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
 {
   AmjuGL::Tris tris;
 
-  const auto n = m_controlPoints.size();
+  const int n = static_cast<int>(m_controlPoints.size());
   if (n < 2)
   {
     return tris;
@@ -430,7 +430,7 @@ AmjuGL::Tris GuiPoly::BuildOutlineTriList()
   // Points of rectangle for segment, declared here so we shift the points, joining
   //  all the rectangles.
   Vec2f p[4];
-  for (auto i = 1; i < n; i++)
+  for (int i = 1; i < n; i++)
   {
     // Get direction for this segment, and perpendicular direction, so we can make an 
     //  oriented rectangle (actually trapezium, as width can vary).
@@ -522,9 +522,9 @@ AmjuGL::Tris GuiPoly::BuildFilledTriList()
   const Vec2f scale = GetCombinedScale();
   const Colour colour = m_filledColour * GetCombinedColour();
 
-  const auto n = m_controlPoints.size() - 1;
+  const int n = static_cast<int>(m_controlPoints.size()) - 1;
   Assert(n > 0);
-  for (auto i = 1; i < n; i++)
+  for (int i = 1; i < n; i++)
   {
     AmjuGL::Vert verts[3] =
     {

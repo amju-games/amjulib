@@ -41,9 +41,9 @@ AmjuGL::Tris GuiSpline::BuildFilledTriList()
   // We use the combined pos when we create the in-between points, it's not missing.
   const Colour colour = m_filledColour * GetCombinedColour();
 
-  const auto n = m_points.size() - 1;
+  const int n = static_cast<int>(m_points.size()) - 1;
   Assert(n > 0);
-  for (auto i = 1; i < n; i++)
+  for (int i = 1; i < n; i++)
   {
     AmjuGL::Vert verts[3] =
     {
@@ -213,8 +213,8 @@ void GuiSpline::MakeInBetweenPoints()
 
   const Vec2f pos = GetCombinedPos();
 
-  const auto n = controlPoints.size() - 3;
-  for (auto i = 0; i < n; i++)
+  const int n = static_cast<int>(controlPoints.size()) - 3;
+  for (int i = 0; i < n; i++)
   {
     float t = 0;
     while (t < 1.0f)

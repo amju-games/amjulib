@@ -72,7 +72,7 @@ struct Vec3
       AssertValid();
       float s = SqLen();
       if (s == 0) return;
-      float n = 1.0f / sqrt(s);
+      float n = 1.0f / static_cast<float>(sqrt(s));
       x *= n;
       y *= n;
       z *= n;

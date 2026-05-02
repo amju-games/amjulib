@@ -38,15 +38,15 @@ void SetViewport(Eye eye, float vpX, float vpY)
 
     if (eye == LEFT)
     {
-        AmjuGL::Viewport(0 + vpX, 0 + vpY,
-            windowwidth / 2 - vpX,
-            windowheight - vpY * 2);
+        AmjuGL::Viewport(0 + static_cast<int>(vpX), 0 + static_cast<int>(vpY),
+            windowwidth / 2 - static_cast<int>(vpX),
+            windowheight - static_cast<int>(vpY) * 2);
     }
     else
     {
-        AmjuGL::Viewport(windowwidth / 2, 0 + vpY,
-            windowwidth / 2 - vpX,
-            windowheight - vpY * 2);
+        AmjuGL::Viewport(windowwidth / 2, 0 + static_cast<int>(vpY),
+            windowwidth / 2 - static_cast<int>(vpX),
+            windowheight - static_cast<int>(vpY) * 2);
     }
 }
 

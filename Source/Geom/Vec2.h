@@ -60,7 +60,7 @@ struct Vec2
 
   void Normalise()
   {
-    float n = 1.0f / sqrt(SqLen());
+    float n = 1.0f / static_cast<float>(sqrt(SqLen()));
     x *= n;
     y *= n;
   }

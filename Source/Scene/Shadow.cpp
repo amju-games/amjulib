@@ -38,11 +38,11 @@ void Shadow::Polygon::Tesselate()
 {
   AMJU_CALL_STACK;
 
-  const auto numVerts = m_verts.size();
+  const int numVerts = static_cast<int>(m_verts.size());
   const AmjuGL::Vert firstVert = m_verts[0];
 
   AmjuGL::Tris tris;
-  for (auto i = 1; i < numVerts - 1; i++)
+  for (int i = 1; i < numVerts - 1; i++)
   {
     AmjuGL::Tri tri;
     tri.m_verts[0] = firstVert;
