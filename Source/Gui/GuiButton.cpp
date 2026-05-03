@@ -225,6 +225,7 @@ bool GuiButton::Load(File* f)
   // Use text BG colour to tint the button image, but don't draw a text background, which is a
   //  solid rectangle.
   SetButtonColour(m_guiText.GetBgCol());
+  m_guiText.SetDrawBg(false);
   SetFocusColour(m_guiText.GetBgCol());
 
 #if defined(WIN32) || defined(MACOSX)
