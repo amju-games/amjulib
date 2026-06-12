@@ -37,7 +37,6 @@ cp $SRC/GeomLoad/*.h $INC
 cp $SRC/Gui/*.h $INC
 cp $SRC/Image/*.h $INC
 cp $SRC/Localise/*.h $INC
-cp $SRC/Lua/*.h $INC
 cp $SRC/Mem/*.h $INC
 cp $SRC/Main/*.h $INC
 cp $SRC/Md2/Md2Model.h $INC
