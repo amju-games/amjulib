@@ -25,16 +25,13 @@
 #endif
 #ifdef WIN32
 #include <gl/glut.h>
-
-// Set desired FPS
-const int TARGET_FPS = 60;
-const int FRAME_DELAY = 1000 / TARGET_FPS; // Milliseconds per frame
-
 #endif
 
 #include <AmjuFinal.h>
 
-//#define KEY_CODE_DEBUG
+// Set desired FPS
+const int TARGET_FPS = 60;
+const int FRAME_DELAY = 1000 / TARGET_FPS; // Milliseconds per frame
 
 using namespace Amju;
 
@@ -155,10 +152,6 @@ void key(char k, bool down)
   }
   else
   {
-#ifdef KEY_CODE_DEBUG
-std::cout << "Got key " << (down ? "DOWN" : "UP") << " event, char is : " << k << " (" << (int)k << ")\n";
-#endif
-
     ke->keyType = AMJU_KEY_CHAR;
     ke->key = k;
   }
