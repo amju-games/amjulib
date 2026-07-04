@@ -169,7 +169,7 @@ void GuiText2::SetText(const std::string& text)
   if (m_isMulti)
   {
     const float availWidth = GetSize().x;
-    m_lines = WordWrap(m_text, availWidth, WidthFinder2(this));
+    m_lines = WordWrap(m_text, availWidth, WidthFinder(this));
   }
 
   m_tris.clear(); // to rebuild

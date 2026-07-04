@@ -46,7 +46,6 @@ GuiText::GuiText()
   m_last = 0;
   m_caret = 0;
   m_selectedText = 0;
-  m_scaleX = 1.0f;
 }
 
 void GuiText::SetScaleX(float scaleX)
@@ -69,7 +68,7 @@ void GuiText::TextToSpeech()
 #endif
 }
 
-Vec2f GuiText::CalcSizeToText() const
+Vec2f GuiTextBase::CalcSizeToText() const
 {
   if (IsMulti())
   {
@@ -93,7 +92,7 @@ Vec2f GuiText::CalcSizeToText() const
   }
 }
 
-void GuiText::SizeToText()
+void GuiTextBase::SizeToText()
 {
   SetSize(CalcSizeToText());
 }
@@ -454,16 +453,6 @@ void GuiText::GetFirstLast(int line, int* first, int* last)
   }
 }
 
-struct WidthFinder
-{
-  WidthFinder(GuiText* g) : m_guiText(g) {}
-  float operator()(const std::string& s)
-  {
-    return m_guiText->GetTextWidth(s);
-  }
-  GuiText* m_guiText;
-};
-
 std::string GuiTextBase::ReplaceEscaped(const std::string& escapedText)
 {
   // Replace special codes for italics etc
@@ -539,9 +528,9 @@ void GuiText::SetIsMulti(bool multi)
   RecalcFirstLast();
 }
 
-float GuiText::GetTextWidth(const std::string& text) const
+float GuiTextBase::GetTextWidth(const std::string& text) const
 {
-  float textWidth = const_cast<GuiText*>(this)->GetFont()->GetTextWidth(text);
+  float textWidth = const_cast<GuiTextBase*>(this)->GetFont()->GetTextWidth(text);
   return textWidth * m_scaleX * m_textSize;
 }
 

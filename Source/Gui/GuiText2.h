@@ -41,16 +41,6 @@ protected:
   
 protected:
   AmjuGL::Tris m_tris;
-
-  struct WidthFinder2
-  {
-    WidthFinder2(GuiText2* g) : m_guiText(g) {}
-    float operator()(const std::string& s)
-    {
-      return m_guiText->GetTextWidth(s) * m_guiText->m_textSize;
-    }
-    GuiText2* m_guiText;
-  };
 };
 }
  

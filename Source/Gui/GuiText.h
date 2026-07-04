@@ -58,6 +58,24 @@ public:
   // Save type-specific info
   virtual bool SaveTextInfo(File*) { return true; }
 
+  // Change size to fit text exactly
+  void SizeToText();
+  // Calc size for SizeToText, but don't actually resize
+  Vec2f CalcSizeToText() const; 
+
+  // Get width of given text using currently set font and size.
+  float GetTextWidth(const std::string& text) const;
+
+  struct WidthFinder
+  {
+    WidthFinder(GuiTextBase* g) : m_guiText(g) {}
+    float operator()(const std::string& s)
+    {
+      return m_guiText->GetTextWidth(s);
+    }
+    GuiTextBase* m_guiText;
+  };
+
 protected:
   bool ParseFontInfoLine(File* f);
 
@@ -86,6 +104,7 @@ protected:
   Strings m_lines; // for multi-line text, this is m_text split into lines
   Colour m_fgCol; // foreground colour, i.e. colour of the text
   Colour m_bgCol; // background colour
+  float m_scaleX = 1.f; // horizontal squish factor
 };
  
 class GuiText : public GuiTextBase
@@ -121,12 +140,6 @@ public:
   void SetScaleX(float scaleX);
   float GetScaleX() const;
 
-  // Calc size for SizeToText, but don't actually resize
-  Vec2f CalcSizeToText() const;
-
-  // Change size to fit text exactly
-  void SizeToText();
-
   // Call to decide which bits of the text fit in the bounding rect
   void RecalcFirstLast();
 
@@ -147,7 +160,6 @@ protected:
   virtual void GetFirstLast(int line, int* first, int* last); 
 
   friend struct WidthFinder;
-  float GetTextWidth(const std::string& text) const;
 
   // Called twice from Draw, for drop shadow
   void ReallyDraw();
@@ -179,8 +191,6 @@ protected:
 
   int m_caret; // index of caret: 0 means at left
   int m_selectedText; // index of other end of selected text (poss before or after caret)
-
-  float m_scaleX;
 };
 }
 
