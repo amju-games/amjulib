@@ -3,6 +3,8 @@
 #include "GuiCheck.h"
 #include "GuiComposite.h"
 #include "GuiDecAnimation.h"
+#include "GuiDecAnimRandom.h"
+#include "GuiDecChoose.h"
 #include "GuiDecColour.h"
 #include "GuiDecColourPalette.h"
 #include "GuiDecInclude.h"
@@ -43,6 +45,8 @@ GuiFactory::GuiFactory()
   Add(GuiCheck::NAME, &CreateT<GuiCheck>);
   Add(GuiComposite::NAME, &CreateT<GuiComposite>);
   Add(GuiDecAnimation::NAME, &CreateT<GuiDecAnimation>);
+  Add(GuiDecAnimRandom::NAME, &CreateT<GuiDecAnimRandom>);
+  Add(GuiDecChoose::NAME, &CreateT<GuiDecChoose>);
   Add(GuiDecColour::NAME, &CreateT<GuiDecColour>);
   Add(GuiDecColourPalette::NAME, &CreateT<GuiDecColourPalette>);
   Add(GuiDecInclude::NAME, &CreateT<GuiDecInclude>);
