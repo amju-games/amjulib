@@ -23,10 +23,15 @@
 use File::Find;
 use strict;
 
+# Parse Arguments
+my $stringTable = $ARGV[0];
+my $searchPath  = $ARGV[1];
+my $mode        = $ARGV[2] || ''; 
+
+
 # Read string table
 # -----------------
 #
-my $stringTable = $ARGV[0];
 open(STRINGTABLE, $stringTable) or die "No string table specified or can't open it.";
 
 # Hash of IDs to strings
@@ -68,11 +73,17 @@ while ( my ($key, $value) = each(%stringHash) )
 
 
 # Search directories for files to localise
-find (\&MaybeLocalise, $ARGV[1]);
+find (\&MaybeLocalise, $searchPath);
 
 sub MaybeLocalise($)
 {
-  if ((/\.cpp/) or (/\.csv/) or (/\.txt/))
+  if (/\.cpp/)
+  {
+    print "LOCALISING FILE: $_\n";
+    LocaliseCppFile($_);
+  }
+
+  elsif ((/\.csv/) or (/\.txt/))
   {
     print "LOCALISING FILE: $_\n";
     LocaliseFile($_);
@@ -106,8 +117,8 @@ sub AddToStringTable($)
   return $id;
 }
 
-# Read file to localise
-# ---------------------
+# Localise a txt or csv file
+# --------------------------
 #
 # For each line of file, look for all occurrences of @@@<string>
 # Add each string found to the string table
@@ -144,7 +155,7 @@ sub LocaliseFile($)
     }
 
     # Output logic
-    if ($ARGV[2] eq "nowrite") {
+    if ($mode eq "nowrite") {
         print "\n--- PREVIEW: $fileToLocalise ---\n";
         print @lines; 
         print "\n--- END PREVIEW ---\n";
@@ -157,6 +168,42 @@ sub LocaliseFile($)
     }
 }
 
+# Localise a cpp file
+# -------------------
+#
+sub LocaliseCppFile {
+    my $fileToLocalise = shift;
+       
+    unless (open(IN, '<', $fileToLocalise)) {
+        print "Error: Could not open $fileToLocalise\n";
+        return;
+    }   
+    my @lines = <IN>;
+    close(IN);
+
+    my $wasChanged = 0;
+
+    foreach my $line (@lines) {
+        if ($line =~ s/\"@@@([^\"]+)\"/'"$$$' . AddToStringTable($1) . '"'/ge) {
+            $wasChanged = 1;
+        }   
+    }   
+
+    return unless $wasChanged;
+
+    print "Found and processed strings in: $fileToLocalise\n";
+
+    if ($mode eq "nowrite") {
+        print "--- PREVIEW FOR $fileToLocalise ---\n";
+        print @lines; 
+        print "--- END PREVIEW ---\n";
+    }   
+    else {
+        open(OUT, '>', $fileToLocalise) or die "Cannot write to $fileToLocalise: $!";
+        print OUT @lines;
+        close(OUT);
+    }       
+}
 
 
 # Print string table for checking
@@ -174,7 +221,7 @@ foreach my $key (@keys)
 #
 # Quit now if "nowrite" specified
 #
-if ($ARGV[2] eq "nowrite")
+if ($mode eq "nowrite")
 {
   exit(0);
 }
