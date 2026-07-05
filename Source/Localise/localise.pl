@@ -79,13 +79,13 @@ sub MaybeLocalise($)
 {
   if (/\.cpp/)
   {
-    print "LOCALISING FILE: $_\n";
+    #print "LOCALISING FILE: $_\n";
     LocaliseCppFile($_);
   }
 
   elsif ((/\.csv/) or (/\.txt/))
   {
-    print "LOCALISING FILE: $_\n";
+    #print "LOCALISING FILE: $_\n";
     LocaliseFile($_);
   }
 }
@@ -184,7 +184,11 @@ sub LocaliseCppFile {
     my $wasChanged = 0;
 
     foreach my $line (@lines) {
-        if ($line =~ s/\"@@@([^\"]+)\"/'"$$$' . AddToStringTable($1) . '"'/ge) {
+        if ($line =~ s/\"@@@([^\"]+)\"/'"$$$' . 
+          AddToStringTable($1) . 
+          '"' . 
+          Comment($1) /ge) 
+        {
             $wasChanged = 1;
         }   
     }   
@@ -203,6 +207,13 @@ sub LocaliseCppFile {
         print OUT @lines;
         close(OUT);
     }       
+}
+
+# Generate a C-style comment from the given string
+sub Comment($)
+{
+  my $localisedString = shift;
+  return "/*" . $localisedString . "*/";
 }
 
 
