@@ -1,0 +1,6 @@
+// Hi, I'm a text file
+@@@This is a string
+This is a non-localised string
+123
+4.0
+

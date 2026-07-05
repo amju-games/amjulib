@@ -1,0 +1,8 @@
+// en.txt - example string table
+// version
+1
+// number of strings
+2
+1=The Swan
+2=From The Carnival of the Animals
+
