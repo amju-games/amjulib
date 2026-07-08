@@ -310,11 +310,6 @@ BmFont::BmFont(const std::string& name) : Font(name)
 {
 }
 
-bool BmFont::Load(const std::string& filename)
-{
-  return false;
-}
-
 bool BmFont::Load(File* f)
 {
   std::string bmfontFilename;

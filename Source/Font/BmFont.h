@@ -94,7 +94,6 @@ class BmFont : public Font
 public:
   BmFont(const std::string& name);
 
-  bool Load(const std::string& filename) override;
   bool Load(File*) override;
   float GetCharacterWidth(int c) const override;
 };
