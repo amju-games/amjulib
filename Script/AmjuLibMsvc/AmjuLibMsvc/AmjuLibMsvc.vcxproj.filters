@@ -759,9 +759,6 @@
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Scene\SceneLuaScript.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Scene\SceneNodeFactory.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -937,6 +934,9 @@
       <Filter>Gui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\GuiText2.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimRandom.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1616,9 +1616,6 @@
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h">
       <Filter>Gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Scene\SceneLuaScript.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Scene\SceneNodeFactory.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -1815,6 +1812,9 @@
       <Filter>Gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiText2.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecAnimRandom.h">
       <Filter>Gui</Filter>
     </ClInclude>
   </ItemGroup>

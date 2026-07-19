@@ -379,6 +379,7 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Gui\DrawBorder.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiCheck.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimation.cpp" />
+    <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimRandom.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecChoose.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecColour.cpp" />
     <ClCompile Include="..\..\..\Source\Gui\GuiDecColourPalette.cpp" />
@@ -428,7 +429,6 @@ copy_files.bat
     <ClCompile Include="..\..\..\Source\Resource\LoadTextureResource.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\LoadScene.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\ParticleEffect2d.cpp" />
-    <ClCompile Include="..\..\..\Source\Scene\SceneLuaScript.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\SceneNodeFactory.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\SceneNodeMaterial.cpp" />
     <ClCompile Include="..\..\..\Source\Scene\Shadow.cpp" />
@@ -671,6 +671,7 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Gui\DrawBorder.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiCheck.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecAnimation.h" />
+    <ClInclude Include="..\..\..\Source\Gui\GuiDecAnimRandom.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecChoose.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecColour.h" />
     <ClInclude Include="..\..\..\Source\Gui\GuiDecColourPalette.h" />
@@ -725,7 +726,6 @@ copy_files.bat
     <ClInclude Include="..\..\..\Source\Resource\LoadTextureResource.h" />
     <ClInclude Include="..\..\..\Source\Scene\LoadScene.h" />
     <ClInclude Include="..\..\..\Source\Scene\ParticleEffect2d.h" />
-    <ClInclude Include="..\..\..\Source\Scene\SceneLuaScript.h" />
     <ClInclude Include="..\..\..\Source\Scene\SceneNodeFactory.h" />
     <ClInclude Include="..\..\..\Source\Scene\SceneNodeMaterial.h" />
     <ClInclude Include="..\..\..\Source\Scene\Shadow.h" />
