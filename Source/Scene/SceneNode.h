@@ -82,6 +82,8 @@ public:
 
   void AddChild(PSceneNode node);
   void DelChild(PSceneNode node);
+  int GetNumChildren() const;
+  const PSceneNode GetChild(int i) const;
 
   const AABB* GetAABB() const;
   void SetAABB(const AABB&);

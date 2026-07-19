@@ -129,6 +129,17 @@ void SceneNode::AddChild(PSceneNode node)
   m_children.push_back(node);
 }
 
+int SceneNode::GetNumChildren() const
+{
+  return static_cast<int>(m_children.size());
+}
+
+const PSceneNode SceneNode::GetChild(int i) const
+{
+  Assert(i < GetNumChildren());
+  return m_children[i];
+}
+
 bool SceneNode::LoadMatrix(File* f)
 {
   // Load local transform matrix
