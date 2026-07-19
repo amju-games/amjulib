@@ -52,7 +52,7 @@ CFLAGS	=  -Wall $(AMJU_MACHDEP) $(INCLUDE) $(EXTRA_CFLAGS)
 CXXFLAGS	=	$(CFLAGS)
 OBJCFLAGS	=	$(CFLAGS)
 
-LDFLAGS	=	-g $(AMJU_MACHDEP) 
+LDFLAGS	=	-glldb $(AMJU_MACHDEP) 
 # j.c. clang warning -Wl
 
 #---------------------------------------------------------------------------------
