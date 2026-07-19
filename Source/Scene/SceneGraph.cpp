@@ -241,8 +241,13 @@ void SceneGraph::DrawChildren(
     {
       if (child->IsBlended())
       {
-        // Add to blend list
-        AddBlendNode(child);
+        // ** HACK **
+        // Draw with blending turned on
+        // This is a quick hack until we have a proper multi-pass renderer
+        //AddBlendNode(child);
+        AmjuGL::Enable(AmjuGL::AMJU_BLEND);
+        DrawNode(child);
+        AmjuGL::Disable(AmjuGL::AMJU_BLEND);
       }
       else
       {
