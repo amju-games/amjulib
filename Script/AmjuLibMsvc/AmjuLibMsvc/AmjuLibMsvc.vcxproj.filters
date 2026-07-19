@@ -112,12 +112,6 @@
     <Filter Include="Main">
       <UniqueIdentifier>{4c00bbb9-066c-4927-9363-6e749a98ea90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lua">
-      <UniqueIdentifier>{871de3b8-52af-456b-9ab0-6243f419c13c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lua\LuaLib-5.2.3">
-      <UniqueIdentifier>{8895466b-75f2-4d96-915f-0d47497aca0a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AmjuGLOpenGL\Internal">
       <UniqueIdentifier>{8f69c749-88b9-4bf8-959b-b39c62cd092f}</UniqueIdentifier>
     </Filter>
@@ -705,9 +699,6 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiKeyboard.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\AmjuLua.cpp">
-      <Filter>Lua</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\GuiDialog.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
@@ -767,102 +758,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Gui\ModalDialog.cpp">
       <Filter>Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lauxlib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lbaselib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lbitlib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lcode.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lcorolib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lctype.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldblib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldebug.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldo.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldump.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lfunc.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lgc.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\linit.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\liolib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\llex.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lmathlib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lmem.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\loadlib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lobject.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lopcodes.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\loslib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lparser.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lstate.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lstring.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lstrlib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ltable.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ltablib.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\ltm.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lundump.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lvm.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Source\Lua\LuaLib-5.2.3\lzio.c">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Scene\SceneLuaScript.cpp">
       <Filter>Scene</Filter>
@@ -1655,9 +1550,6 @@
     <ClInclude Include="..\..\..\Source\Gui\GuiDialog.h">
       <Filter>Gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\AmjuLua.h">
-      <Filter>Lua</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\GuiRect.h">
       <Filter>Gui</Filter>
     </ClInclude>
@@ -1723,81 +1615,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Gui\ModalDialog.h">
       <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lapi.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lauxlib.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lcode.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lctype.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldebug.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\ldo.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lfunc.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lgc.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\llex.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\llimits.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lmem.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lobject.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lopcodes.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lparser.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lstate.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lstring.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\ltable.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\ltm.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lua.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lua.hpp">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\luaconf.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lualib.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lundump.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lvm.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Lua\LuaLib-5.2.3\lzio.h">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Scene\SceneLuaScript.h">
       <Filter>Scene</Filter>
@@ -2031,9 +1848,6 @@
     </None>
     <None Include="..\..\..\Source\Gui\TODO.txt">
       <Filter>Gui</Filter>
-    </None>
-    <None Include="..\..\..\Source\Lua\LuaLib-5.2.3\Makefile">
-      <Filter>Lua\LuaLib-5.2.3</Filter>
     </None>
   </ItemGroup>
 </Project>
