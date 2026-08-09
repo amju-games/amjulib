@@ -16,7 +16,7 @@ void GuiText2::Draw()
   // Store current state of transform and colour, which we use later when
   //  we draw the batch of all tris using the current texture.
   const Vec2f& pos = GetCombinedPos();
-  const Vec2f& size = GetSize();
+  const Vec2f& size = GetSize() * GetCombinedScale();
   AmjuGL::PushMatrix();
   AmjuGL::Translate(pos.x, pos.y, 0); 
   AmjuGL::Scale(size.x, size.y, 1); 
