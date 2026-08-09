@@ -42,8 +42,6 @@ public:
   bool IsPaused() const;
 
 protected:
-
   bool m_isPaused = false;
-
 };
 }

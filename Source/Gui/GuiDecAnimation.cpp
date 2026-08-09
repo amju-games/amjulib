@@ -50,18 +50,16 @@ void GuiDecAnimation::Update()
     return;
   }
 
-  if (IsPaused())
+  if (!IsPaused())
   {
-    return;
-  }
+    // Update current time
+    float dt = TheTimer::Instance()->GetDt();
+    Animator::CalcUpdate(dt);
 
-  // Update current time
-  float dt = TheTimer::Instance()->GetDt();
-  Animator::CalcUpdate(dt);
-
-  if (Animator::DidReset())
-  {
-    OnResetAnimation();
+    if (Animator::DidReset())
+    {
+      OnResetAnimation();
+    }
   }
 
   // Animate descendants
