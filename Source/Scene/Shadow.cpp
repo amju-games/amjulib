@@ -15,8 +15,8 @@ Amju Games source code (c) Copyright Juliet Colman 2009
 extern "C"
 {
 #include <gpc.h> // Polygon clipping code - it's in C.
-#include <AmjuFinal.h>
 }
+#include <AmjuFinal.h>
 
 //#define SHADOW_DEBUG
 
