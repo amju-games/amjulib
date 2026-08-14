@@ -21,13 +21,12 @@ int RandomInt(int n);
 // i.e. [0, n)
 // RandomInt above is a good choice!
 template<class RandomIt, class RandomFunc>
-void RandomShuffle(RandomIt first, RandomIt last, RandomFunc r)
+void RandomShuffle(RandomIt first, RandomIt last, RandomFunc r = RandomInt)
 {
   typename std::iterator_traits<RandomIt>::difference_type i, n;
   n = last - first;
   for (i = n - 1; i > 0; --i) {
-    using std::swap;
-    swap(first[i], first[r(i + 1)]);
+    std::swap(first[i], first[r(i + 1)]);
   }
 }
 
