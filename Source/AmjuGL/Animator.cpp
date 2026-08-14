@@ -146,6 +146,11 @@ void Animator::SetCycleTime(float cycleTime)
   m_cycleTime = cycleTime;
 }
 
+float Animator::GetCycleTime() const
+{
+  return m_cycleTime;
+}
+
 float Animator::GetAnimTimeSeconds() const
 {
   return m_time;
@@ -186,7 +191,7 @@ void Animator::CalcUpdate(float dt)
   m_time += dt * m_timeMultiplier;
 
   // Varies 0..1 
-  float t = m_time / m_cycleTime;
+  const float t = m_time / m_cycleTime;
 
   switch (m_easeType)
   {

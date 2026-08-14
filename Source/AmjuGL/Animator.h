@@ -61,6 +61,12 @@ public:
 
   void SetEaseType(EaseType easeType);
 
+  // For repeating anims, get the time for a full cycle of this animation.
+  // For one shot anims, it's not a cycle, it's the total time before
+  //  the anim finishes.
+  // For constant value anims, returns value set at construction.
+  float GetCycleTime() const;
+
   void SetCycleTime(float cycleTime);
 
   // Get the current anim time value
