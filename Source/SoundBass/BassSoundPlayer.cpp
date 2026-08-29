@@ -13,7 +13,6 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 
 #include "BassSoundPlayer.h"
 #include <SoundManager.h>
-#include "StringUtils.h"
 #include <StringUtils.h>
 #include <File.h>
 #include <AmjuFinal.h>

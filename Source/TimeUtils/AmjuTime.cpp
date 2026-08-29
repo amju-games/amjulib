@@ -1,6 +1,8 @@
 #include <AmjuFirst.h>
+
 #ifdef WIN32
-#define _USE_32BIT_TIME_T
+// Can't use this for x64!
+//#define _USE_32BIT_TIME_T
 #endif
 
 #include <iostream>
@@ -99,7 +101,7 @@ std::string Time::ToString() const
 //#endif
   
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
 
 #else
   localtime_r((const time_t*)&m_secs, &mytm);
@@ -117,7 +119,7 @@ int Time::GetSecs() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -133,7 +135,7 @@ int Time::GetMins() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -148,7 +150,7 @@ int Time::GetHours() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -163,7 +165,7 @@ int Time::GetDayOfWeek() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
     
@@ -177,7 +179,7 @@ int Time::GetDayOfMonth() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -192,7 +194,7 @@ int Time::GetMonths() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
@@ -207,7 +209,7 @@ int Time::GetYears() const
 
   tm mytm;
 #ifdef WIN32
-  _localtime32_s(&mytm, (const time_t*)&m_secs);
+  localtime_s(&mytm, (const time_t*)&m_secs);
     
 #else
     localtime_r((const time_t*)&m_secs, &mytm);
