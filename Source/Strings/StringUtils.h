@@ -82,8 +82,10 @@ bool StringContains(const std::string& container, const std::string& substr);
 
 // Split a string into a vector of substrings. 
 // split_char is not included in the substrings.
+// If shouldTrim is true, whitespace is chopped off the start and end of 
+//  the strings in the result. Set to false if splitting by whitespace!
 typedef std::vector<std::string> Strings;
-Strings Split(const std::string& text, char split_char);
+Strings Split(const std::string& text, char split_char, bool shouldTrim = true);
 
 // Like Split, but splits a string into a vector of T.
 // So Split is the same as SplitIntoVec<std::string>, but more efficient.
@@ -114,7 +116,8 @@ Strings WordWrap(std::string ss, float maxW, WIDTH_FINDER t)
 {
   // Start off by splitting by newlines in s. Then we word wrap the strings.
   ss = Remove(ss, '\r');
-  Strings longStrs = Split(ss, '\n');
+  const bool NO_TRIM = false; // don't trim whitespace, we use it to split.
+  Strings longStrs = Split(ss, '\n', NO_TRIM);
   Strings strs;
 
   for (Strings::iterator it = longStrs.begin(); it != longStrs.end(); ++it)

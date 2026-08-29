@@ -383,7 +383,7 @@ std::string Replace(const std::string& str1, const std::string& oldStr, const st
   return str;
 }
 
-Strings Split(const std::string& cs, char c)
+Strings Split(const std::string& cs, char c, bool shouldTrim)
 {
   Strings r;
   std::string s(cs);
@@ -409,7 +409,10 @@ Strings Split(const std::string& cs, char c)
 #endif 
       r.push_back(s.substr(0, i));
       s = s.substr(i + 1);
-      Trim(&s); // Allow whitespace, get rid of it here
+      if (shouldTrim)
+      {
+        Trim(&s); // This can be too aggressive, chopping all newlines
+      }
     }
   }
   return r;
