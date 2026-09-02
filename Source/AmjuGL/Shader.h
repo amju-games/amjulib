@@ -111,9 +111,15 @@ protected:
 
 using PShader = RCPtr<Shader>;
 
+// ** PushShader / PopShader **
+// Push/pop behaviour, like PushMatrix etc.
 void PushShader();
 
 void PopShader();
+
+// ** ClearShaderStack **
+// Call in shutdown sequence to avoid crash on exit!
+void ClearShaderStack();
 }
 
 #endif

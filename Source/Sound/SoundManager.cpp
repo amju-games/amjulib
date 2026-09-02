@@ -11,8 +11,13 @@ SoundManager::SoundManager()
   m_maxSongVol = 1.0f;
 }
 
-SoundManager::~SoundManager()
+void SoundManager::ShutDown()
 {
+  if (m_pImpl)
+  {
+    m_pImpl->ShutDown();
+  }
+  m_pImpl = nullptr;
 }
 
 void SoundManager::SetImpl(SoundPlayerImpl* pImpl)

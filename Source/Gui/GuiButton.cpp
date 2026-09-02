@@ -22,8 +22,10 @@ std::string GuiButton::s_clickFilename;
 
 const char* GuiButton::NAME = "gui-button";
 
-static RCPtr<GuiButton> focusButton = 0;
-static RCPtr<GuiButton> cancelButton = 0;
+// I think this is a crazy way of essentially implementing
+//  "m_isFocusButton" :)
+static GuiButton* focusButton = nullptr;
+static GuiButton* cancelButton = nullptr;
 
 GuiButton::GuiButton()
 {
@@ -149,7 +151,7 @@ void GuiButton::ClickSound() const
 { 
   if (!s_clickFilename.empty())
   {
-    static SoundManager* s = TheSoundManager::Instance();
+    SoundManager* s = TheSoundManager::Instance();
     s->PlayWav(s_clickFilename);
   }
 }
@@ -290,7 +292,7 @@ void GuiButton::Draw()
   AmjuGL::PushMatrix();
   if (m_isPressed)
   {
-    static const float PRESSED_OFFSET = 0.01f;
+    const float PRESSED_OFFSET = 0.01f;
     AmjuGL::Translate(PRESSED_OFFSET, -PRESSED_OFFSET, 0);
   }
 
@@ -298,7 +300,7 @@ void GuiButton::Draw()
   {
     // TODO This is no good, the size change depends on the position of the button.
     // Scale + Translate is required.
-    static const float SCALE = 1.01f;
+    const float SCALE = 1.01f;
     AmjuGL::Scale(SCALE, SCALE, 1.0f);
   }
 

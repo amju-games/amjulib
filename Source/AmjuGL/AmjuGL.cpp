@@ -2,15 +2,19 @@
 Amju Games source code (c) Copyright Juliet Colman 2000-2007
 */
 
-#include <AmjuFirst.h>
+#include <iostream>
 #include <stack>
+
+#include <AmjuFirst.h>
+#include <StringUtils.h> // For debug reporting state
+
 #include "AmjuGL.h"
 #include "AmjuGL-Impl.h"
 #include "AmjuGLWindowInfo.h"
-#include "Screen.h"
 #include "Colour.h"
-#include <iostream>
-#include <StringUtils.h> // For debug reporting state
+#include "Screen.h"
+#include "Shader.h"
+
 #include <AmjuFinal.h>
 
 // NB LANDSCAPE is no longer used
@@ -25,6 +29,7 @@ static AttribStack attribStack;
 static uint32 currentFlags = 0;
 
 // Not RCPtr - we don't want to destroy the impl before cleaning up all textures etc!
+// Explicitly deleted in Destroy().
 AmjuGLImpl* impl = 0;
 
 #ifdef _DEBUG
@@ -162,6 +167,18 @@ void AmjuGL::SetImpl(AmjuGLImpl* i)
   impl = i;
 }
 
+void AmjuGL::Destroy()
+{
+  if (impl)
+  {
+    ClearShaderStack();
+
+    impl->Destroy();
+    delete impl;
+    impl = nullptr;
+  }
+}
+
 void AmjuGL::BeginScene()
 {
   AMJU_CALL_STACK;
@@ -273,7 +290,6 @@ void AmjuGL::SetPerspectiveProjection(
 
   impl->SetPerspectiveProjection(fov, aspectRatio, nearDist, farDist);
 }
-
 
 void AmjuGL::SetOrthoProjection(
   float left, float right, float top, float bottom, float near, float far)

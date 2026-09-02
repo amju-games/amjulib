@@ -19,7 +19,7 @@
 
 namespace Amju
 {
-static RCPtr<GuiElement> focusElement = 0;
+static GuiElement* focusElement = nullptr;
 static float globalScale = 1.0f;
 static bool textToSpeechEnabled = true;
 
@@ -161,7 +161,7 @@ else
 
     if (focusElement == this)
     {
-      focusElement = 0;
+      focusElement = nullptr;
     }
   }
 #endif // ENABLE_FOCUS_ELEMENT

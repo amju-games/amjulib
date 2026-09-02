@@ -1,10 +1,10 @@
 #ifndef SOUND_MANAGER_H
 #define SOUND_MANAGER_H
 
-#include <Singleton.h>
-#include <NonCopyable.h>
-#include "SoundPlayerImpl.h"
 #include <GlueFile.h>
+#include <NonCopyable.h>
+#include <Singleton.h>
+#include "SoundPlayerImpl.h"
 
 namespace Amju
 {
@@ -15,9 +15,14 @@ private:
   friend class Singleton<SoundManager>;
 
 public:
-  ~SoundManager();
+  // Explicitly stop audio library and free resources: we can't
+  //  rely on destruction order with all these Singletons :|
+  void ShutDown();
 
-  void SetImpl(SoundPlayerImpl*);
+  // Call in start up sequence: set implementation.
+  // OWNERSHIP: we have a ref-counted pointer to impl, which we reset in
+  //  Shutdown().
+  void SetImpl(SoundPlayerImpl* impl);
 
   // Get/Set the Glue File used by the file callbacks.
   // This lets us set a different Glue File to the one used for the bulk

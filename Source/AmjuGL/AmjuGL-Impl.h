@@ -19,6 +19,9 @@ public:
   // Call once at app startup
   virtual void Init() = 0;
 
+  // Call in shutdown sequence after all graphics resources have been destroyed.
+  virtual void Destroy() {}
+
   // Call to create window
   virtual bool CreateWindow(AmjuGLWindowInfo*) = 0;
 

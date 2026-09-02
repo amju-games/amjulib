@@ -23,10 +23,20 @@ class AmjuGLWindowInfo;
 class Shader;
 class ShadowMap;
 
+// ** AmjuGL **
+// Wrapper around a graphics API implementation. 
+// This wrapper is intended to provide a simple, portable, 
+//  OpenGL - like interface to the underlying API.
 struct AmjuGL
 {
 public:
-  static void SetImpl(AmjuGLImpl*);
+  // Set implementation: OpenGL, DX, etc.
+  // OWNERSHIP: passes to AmjuGL.
+  // We delete the impl in Destroy(); impl should be allocated with new.
+  static void SetImpl(AmjuGLImpl* impl);
+
+  // Tell impl to destroy resources then deletes the impl.
+  static void Destroy();
 
   static std::ostream& ReportState(std::ostream&);
 

@@ -39,17 +39,23 @@ void Shader::SetVariables()
   }
 }
 
-static std::vector<PShader> s_shaderVec;
+// STACK of shaders for push/pop behaviour.
+static std::vector<PShader> s_shaderStack;
+
+void ClearShaderStack()
+{
+  s_shaderStack.clear();
+}
 
 void PushShader()
 {
-  s_shaderVec.push_back(AmjuGL::GetCurrentShader());
+  s_shaderStack.push_back(AmjuGL::GetCurrentShader());
 }
 
 void PopShader()
 {
-  auto shader = s_shaderVec.back();
-  s_shaderVec.pop_back();
+  auto shader = s_shaderStack.back();
+  s_shaderStack.pop_back();
   AmjuGL::UseShader(shader);
 }
 }

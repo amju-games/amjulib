@@ -11,8 +11,8 @@ Amju Games source code (c) Copyright Juliet Colman 2004
 
 namespace Amju
 {
-// Base class - doesn't do anything. Subclasses implement sound-playing for 
-// different platforms.
+// Interface for sound player implementations. Subclasses implement
+//  sound-playing for different platforms.
 class SoundPlayerImpl : public RefCounted
 {
 public:
@@ -22,8 +22,12 @@ public:
   void SetGlueFile(GlueFile* glueFile) { m_pGlueFile = glueFile; }
   GlueFile* GetGlueFile() { return m_pGlueFile.GetPtr(); }
 
-  SoundPlayerImpl() {}
-  virtual ~SoundPlayerImpl() {}
+  SoundPlayerImpl() = default;
+  virtual ~SoundPlayerImpl() = default;
+
+  // Explicitly stop audio library and free resources: we can't
+  //  rely on destruction order with all these Singletons :|
+  virtual void ShutDown() = 0;
 
   // Play a .WAV file. Return immediately, with false if sound can't be played.
   // volume parameter should vary between 0 (silent) and 1.0 (full volume).

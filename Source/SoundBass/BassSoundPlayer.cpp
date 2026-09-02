@@ -12,9 +12,10 @@ Amju Games source code (c) Copyright Juliet Colman 2006
 #include "bassmidi.h"
 
 #include "BassSoundPlayer.h"
+#include <DoOnce.h>
+#include <File.h>
 #include <SoundManager.h>
 #include <StringUtils.h>
-#include <File.h>
 #include <AmjuFinal.h>
 
 //#define BASS_DEBUG
@@ -70,11 +71,24 @@ BassSoundPlayer::BassSoundPlayer()
   SetSongMaxVolume(1.0f);
 }
 
+void BassSoundPlayer::ShutDown()
+{
+  // Stop audio, shut down BASS and free resources: we do this here
+  //  rather than the dtor so we control where this happens in the shutdown
+  //  sequence.
+  do_once
+  {
+    std::cout << "Shutting down BASS..\n";
+    BASS_Stop();
+    BASS_Free();
+    std::cout << "..BASS shut down ok.\n";
+  }
+}
+
 BassSoundPlayer::~BassSoundPlayer()
 {
   // TODO Shut down to avoid stuttering or clicks
   // This seems to cause a crash, so best avoided
-  //BASS_Free();
 }
 
 bool BassSoundPlayer::PlayWav(const std::string& wavFile, float volume)

@@ -16,6 +16,7 @@ public:
   BassSoundPlayer();
   ~BassSoundPlayer();
 
+  void ShutDown() override;
   bool PlayWav(const std::string& wavFile, float volume = 1.0f) override;
   bool PlaySong(const std::string& songFile) override;
   void StopSong() override;
