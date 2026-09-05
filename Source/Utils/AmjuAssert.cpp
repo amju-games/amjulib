@@ -87,10 +87,7 @@ void winAssert(const void* exp, const void* file, unsigned line)
     << line
     << std::endl;
 
-  __asm
-  {
-    int 3 // break
-  }
+  __debugbreak();
 }
 #endif // _DEBUG & WIN32
 
