@@ -30,7 +30,20 @@ static uint32 currentFlags = 0;
 
 // Not RCPtr - we don't want to destroy the impl before cleaning up all textures etc!
 // Explicitly deleted in Destroy().
-AmjuGLImpl* impl = 0;
+static AmjuGLImpl* impl = 0;
+
+// Test for impl and return if already destroyed
+#define IMPL_CHECK if (ImplCheckFails()) return;
+
+bool ImplCheckFails()
+{
+  if (impl == nullptr)
+  {
+    std::cout << "ERROR: AmjuGL impl already destroyed!\n";
+    return true; // Fail
+  }
+  return false; // No fail
+}
 
 #ifdef _DEBUG
 // Store the size of the matrix stack for each matrix mode.
@@ -169,7 +182,7 @@ void AmjuGL::SetImpl(AmjuGLImpl* i)
 
 void AmjuGL::Destroy()
 {
-  if (impl)
+  if (impl) // ok to call multiple times
   {
     ClearShaderStack();
 
@@ -182,6 +195,7 @@ void AmjuGL::Destroy()
 void AmjuGL::BeginScene()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
 #ifdef _DEBUG
   for (int i = 0; i < 3; i++)
@@ -202,6 +216,7 @@ void AmjuGL::BeginScene()
 void AmjuGL::EndScene()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
 #ifdef _DEBUG
   for (int i = 0; i < 3; i++)
@@ -216,6 +231,7 @@ void AmjuGL::EndScene()
 void AmjuGL::Flip()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   initFrameCalled = 0; // Reset for next frame
   flipCalled++; 
@@ -232,6 +248,7 @@ void AmjuGL::DrawLighting(
   const AmjuGL::Vec3& lightPos)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->DrawLighting(globalAmbient, lightAmbient, lightDiffuse, lightSpecular, lightPos);
 }
@@ -239,6 +256,8 @@ void AmjuGL::DrawLighting(
 void AmjuGL::Init()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
+
   initCalled++;
   Assert(initCalled == 1);
 
@@ -254,7 +273,8 @@ void AmjuGL::Init()
 bool AmjuGL::CreateWindow(AmjuGLWindowInfo* w)
 {
   AMJU_CALL_STACK;
-  
+  if (ImplCheckFails()) return false;
+
   Assert(initCalled == 0);
 
   Screen::SetSize(w->GetWidth(), w->GetHeight());
@@ -275,6 +295,8 @@ const Colour& AmjuGL::GetClearColour()
 void AmjuGL::InitFrame()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
+
   Assert(initCalled == 1);
   initFrameCalled++;
   Assert(initFrameCalled == 1);
@@ -287,6 +309,7 @@ void AmjuGL::SetPerspectiveProjection(
   float fov, float aspectRatio, float nearDist, float farDist)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->SetPerspectiveProjection(fov, aspectRatio, nearDist, farDist);
 }
@@ -295,6 +318,7 @@ void AmjuGL::SetOrthoProjection(
   float left, float right, float top, float bottom, float near, float far)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->SetOrthoProjection(left, right, top, bottom, near, far);
 }
@@ -310,6 +334,7 @@ void AmjuGL::GetViewport(int* x, int* y, int* w, int* h)
 void AmjuGL::Viewport(int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   Assert(w >= 0);
   Assert(h >= 0);
@@ -379,6 +404,7 @@ std::cout << "Viewport: x: " << x << " y: " << y << " w: " << w << " h: " << h
 void AmjuGL::LookAt(float eyeX, float eyeY, float eyeZ, float x, float y, float z, float upX, float upY, float upZ)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->LookAt(eyeX, eyeY, eyeZ, // origin - player coords
             x, y, z, // point in direction we want to look
@@ -393,6 +419,7 @@ const Colour& AmjuGL::GetColour()
 void AmjuGL::SetColour(float r, float g, float b, float a)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   s_colour = Colour(r, g, b, a); // for reporting
   impl->SetColour(r, g, b, a);
@@ -429,7 +456,7 @@ void AmjuGL::DrawIndexedTriList(
   // TODO  - AmjuGL implementation
 
   Tris tris;
-  int numTris = indexes.m_indexes.size();
+  int numTris = static_cast<int>(indexes.m_indexes.size());
   tris.resize(numTris);
   for (int i = 0; i < numTris; i++)
   {
@@ -449,6 +476,7 @@ void AmjuGL::DrawIndexedTriList(
 void AmjuGL::DrawTriList(const Tris& tris)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   Assert(!tris.empty());
 
@@ -473,12 +501,13 @@ void AmjuGL::DrawTriList(const Tris& tris)
   impl->DrawTriList(tris);
 
   numDrawCalls++;
-  numTris += tris.size();
+  numTris += static_cast<int>(tris.size());
 }
 
 void AmjuGL::DrawLine(const Vec3& v1, const Vec3& v2)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->DrawLine(v1, v2);
 
@@ -499,6 +528,7 @@ void AmjuGL::Draw(Drawable* drawable)
 void AmjuGL::GetMatrix(MatrixMode m, float result[16])
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->GetMatrix(m, result);
 }
@@ -506,6 +536,7 @@ void AmjuGL::GetMatrix(MatrixMode m, float result[16])
 void AmjuGL::MultMatrix(const float matrix[16])
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->MultMatrix(matrix);
 }
@@ -518,6 +549,7 @@ AmjuGL::MatrixMode AmjuGL::GetMatrixMode()
 void AmjuGL::SetMatrixMode(MatrixMode m)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   if (s_currentMatrix == m)
   {
@@ -544,6 +576,7 @@ float AmjuGL::GetScreenRotation()
 void AmjuGL::SetIdentity()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->SetIdentity();
 
@@ -557,6 +590,7 @@ void AmjuGL::SetIdentity()
 void AmjuGL::PushMatrix()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   Assert(s_currentMatrix != AMJU_MATRIX_NOTSETYET);
 
@@ -582,6 +616,7 @@ void AmjuGL::PushMatrix()
 void AmjuGL::PopMatrix()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   Assert(s_currentMatrix != AMJU_MATRIX_NOTSETYET);
 
@@ -608,6 +643,7 @@ void AmjuGL::PopMatrix()
 void AmjuGL::Translate(float x, float y, float z)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->Translate(x, y, z);
 }
@@ -615,6 +651,7 @@ void AmjuGL::Translate(float x, float y, float z)
 void AmjuGL::Scale(float x, float y, float z)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->Scale(x, y, z);
 }
@@ -622,6 +659,7 @@ void AmjuGL::Scale(float x, float y, float z)
 void AmjuGL::RotateX(float degs)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->RotateX(degs);
 }
@@ -629,6 +667,7 @@ void AmjuGL::RotateX(float degs)
 void AmjuGL::RotateY(float degs)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->RotateY(degs);
 }
@@ -636,6 +675,7 @@ void AmjuGL::RotateY(float degs)
 void AmjuGL::RotateZ(float degs)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->RotateZ(degs);
 }
@@ -643,6 +683,7 @@ void AmjuGL::RotateZ(float degs)
 void AmjuGL::PushAttrib(uint32 attrib)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   attribStack.push(currentFlags);
 
@@ -652,6 +693,7 @@ void AmjuGL::PushAttrib(uint32 attrib)
 void AmjuGL::PopAttrib()
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   Assert(!attribStack.empty());
   
@@ -707,6 +749,7 @@ std::cout << "Enable: Flag " << FlagStr(flags) << " enabled\n";
 void AmjuGL::Disable(uint32 flags)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   if (!(currentFlags & flags))
   {
@@ -725,6 +768,7 @@ std::cout << "Disable: Flag " << FlagStr(flags) << " disabled\n";
 void AmjuGL::DestroyTextureHandle(TextureHandle* th)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->DestroyTextureHandle(th);
 }
@@ -732,6 +776,7 @@ void AmjuGL::DestroyTextureHandle(TextureHandle* th)
 void AmjuGL::SetTextureType(TextureType tt)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   static TextureType prev = (TextureType)-1;
   if (tt == prev)
@@ -745,6 +790,8 @@ void AmjuGL::SetTextureType(TextureType tt)
 
 void AmjuGL::SetTextureMode(TextureMode tm)
 {
+  IMPL_CHECK;
+
   static TextureMode prev = (TextureMode)-1;
   if (tm == prev)
   {
@@ -757,6 +804,8 @@ void AmjuGL::SetTextureMode(TextureMode tm)
 
 void AmjuGL::SetTextureFilter(TextureFilter tf)
 {
+  IMPL_CHECK;
+
   static TextureFilter prev = (TextureFilter)-1;
   if (tf == prev)
   {
@@ -779,6 +828,7 @@ void AmjuGL::SetTexture(
   uint8* data)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->SetTexture(th, tt, d, width, height, data);
 }
@@ -786,6 +836,7 @@ void AmjuGL::SetTexture(
 void AmjuGL::UpdateTexture(const TextureHandle th, int x, int y, int w, int h, const uint8* data)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->UpdateTexture(th, x, y, w, h, data);
 }
@@ -793,6 +844,7 @@ void AmjuGL::UpdateTexture(const TextureHandle th, int x, int y, int w, int h, c
 void AmjuGL::UseTexture(TextureHandle t, int textureUnitId)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->UseTexture(t, textureUnitId);
 }
@@ -800,6 +852,7 @@ void AmjuGL::UseTexture(TextureHandle t, int textureUnitId)
 void AmjuGL::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
 
   impl->GetScreenshot(buffer, x, y, w, h);
 }
@@ -807,6 +860,8 @@ void AmjuGL::GetScreenshot(unsigned char* buffer, int x, int y, int w, int h)
 Shader* AmjuGL::LoadShader(const std::string& shaderFileName)
 {
   AMJU_CALL_STACK;
+  if (ImplCheckFails()) return nullptr;
+
   return impl->LoadShader(shaderFileName);
 }
 
@@ -815,6 +870,8 @@ static Shader* s_currentShader = nullptr;
 void AmjuGL::UseShader(Shader* sh)
 {
   AMJU_CALL_STACK;
+  IMPL_CHECK;
+
   s_currentShader = sh;
   impl->UseShader(sh);
 }
@@ -827,6 +884,8 @@ Shader* AmjuGL::GetCurrentShader()
 Drawable* AmjuGL::Create(int drawableTypeId)
 {
   AMJU_CALL_STACK;
+  if (ImplCheckFails()) return nullptr;
+
   return impl->Create(drawableTypeId);
 }
 
