@@ -7,7 +7,7 @@ void CalcTangents(AmjuGL::Tris& tris)
 {
     // Modified from  http://www.terathon.com/code/tangent.html
 
-    int triangleCount = tris.size();
+    int triangleCount = static_cast<int>(tris.size());
     int vertexCount = triangleCount * 3;
     Vec3f *tan1 = new Vec3f[vertexCount * 2];
     Vec3f *tan2 = tan1 + vertexCount;

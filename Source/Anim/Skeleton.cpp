@@ -13,7 +13,7 @@ namespace Amju
 {
 int Skeleton::GetNumBones() const
 {
-  return m_boneNames.size();
+  return static_cast<int>(m_boneNames.size());
 }
 
 void Skeleton::CreateBoneArray(Bones* pBones) const
@@ -41,7 +41,7 @@ std::cout << "  Creating Bone " << i << "...\n";
     // So bone starts in bind pose transform until a new transform is set. 
     b.SetTransform(boneName.m_matrix);
 
-    int numChildren = boneName.m_childIds.size();
+    int numChildren = static_cast<int>(boneName.m_childIds.size());
 #ifdef SKEL_DEBUG
 std::cout << "  This bone has " << numChildren << " children\n";
 #endif

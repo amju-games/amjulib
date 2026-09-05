@@ -83,7 +83,7 @@ void Thread::Start()
 
 #if defined(WIN32)
 
-  m_threadHandle = _beginthread(&ThreadFunction, 0, this);
+  m_threadHandle = static_cast<unsigned long>(_beginthread(&ThreadFunction, 0, this));
   m_threadId = m_threadHandle;
 
 #elif defined (GEKKO)

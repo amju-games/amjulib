@@ -34,7 +34,7 @@ bool BinaryResource::Load(const std::string& filename)
   m_data.resize(size);
 
   // copy the file into the buffer:
-  const auto result = f.GetBinary(size, &m_data[0]);
+  const auto result = f.GetBinary(static_cast<unsigned int>(size), &m_data[0]);
   if (result != size) 
   { 
     perror ("Error reading file"); 

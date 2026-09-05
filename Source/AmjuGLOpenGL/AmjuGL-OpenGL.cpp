@@ -350,7 +350,7 @@ void AmjuGLOpenGL::Disable(uint32 flag)
 void AmjuGLOpenGL::DrawTriList(const AmjuGL::Tris& tris)
 {
   AMJU_CALL_STACK;
-  int numTris = tris.size();
+  int numTris = static_cast<int>(tris.size());
 
   if (s_shader)
   {

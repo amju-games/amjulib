@@ -23,10 +23,11 @@ int RandomInt(int n);
 template<class RandomIt, class RandomFunc>
 void RandomShuffle(RandomIt first, RandomIt last, RandomFunc r = RandomInt)
 {
-  typename std::iterator_traits<RandomIt>::difference_type i, n;
+  using Dt = std::iterator_traits<RandomIt>::difference_type;
+  Dt i, n;
   n = last - first;
   for (i = n - 1; i > 0; --i) {
-    std::swap(first[i], first[r(i + 1)]);
+    std::swap(first[i], first[static_cast<Dt>(r(static_cast<int>(i + 1)))]);
   }
 }
 

@@ -1,6 +1,7 @@
 // * Amjulib *
 // (c) Copyright 2000-2026 Juliet Colman
 
+#include <algorithm>
 #include "GuiDecChoose.h"
 
 namespace Amju

@@ -289,7 +289,7 @@ bool GuiComposite::LoadOneChild(File* f)
 bool GuiComposite::OnCursorEvent(const CursorEvent& e)
 {
   bool ret = false;
-  const int s = m_children.size();
+  const int s = static_cast<int>(m_children.size());
   for (int i = 0; i < s; i++)
   {
     if (m_children[i]->OnCursorEvent(e))

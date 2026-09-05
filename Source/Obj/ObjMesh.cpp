@@ -127,7 +127,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
 #ifdef NO_MATERIAL_DEBUG
       std::cout << "No material for group\n";
 #endif
-      numFaces += g.m_tris.size();
+      numFaces += static_cast<int>(g.m_tris.size());
     }
     else
     {
@@ -137,7 +137,7 @@ void ObjMesh::CalcCollisionMesh(CollisionMesh* pCollMesh) const
         const Material& mat = j->second;
         if (!(mat.m_flags & Material::AMJU_MATERIAL_NO_COLLIDE) || !g.IsCollidable())
         {
-          numFaces += g.m_tris.size();
+          numFaces += static_cast<int>(g.m_tris.size());
         }
       }
     }

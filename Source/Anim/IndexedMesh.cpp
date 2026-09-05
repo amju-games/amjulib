@@ -171,7 +171,7 @@ static void DrawIndexedTriList(
   // TODO  - AmjuGL implementation
 
   AmjuGL::Tris tris;
-  int numTris = indexes.m_indexes.size();
+  int numTris = static_cast<int>(indexes.m_indexes.size());
   tris.resize(numTris);
   for (int i = 0; i < numTris; i++)
   {
@@ -215,7 +215,7 @@ void IndexedMesh::Draw(Bone* boneArray)
     // Transform verts
     AmjuGL::Verts verts(m_verts);
 
-    int numVerts = verts.size();
+    int numVerts = static_cast<int>(verts.size());
     for (int i = 0; i < numVerts; i++)
     {
       // For this vertex, get the bone indexes amd weights

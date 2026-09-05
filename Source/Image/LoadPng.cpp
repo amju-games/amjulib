@@ -71,7 +71,7 @@ bool LoadPng(
 static void ReadFunc(png_structp png, png_bytep data, png_size_t size)
 {
   File* f = (File*)png_get_io_ptr(png); 
-  auto bytesRead = f->GetBinary(size, data);
+  auto bytesRead = f->GetBinary(static_cast<unsigned int>(size), data);
   if (bytesRead != size)
   { 
     std::string err = "Read failed! bytesRead: " + ToString(bytesRead) + " size: " + ToString((unsigned int)size);
