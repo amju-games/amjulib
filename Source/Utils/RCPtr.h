@@ -76,6 +76,7 @@ private:
       Assert(m_ptr->m_shareable_refcount > 0);
       if (--(m_ptr->m_shareable_refcount) == 0)
       {
+        Assert(m_ptr->m_weakcount == 0);
         delete m_ptr;
       } 
     }
@@ -91,6 +92,8 @@ public:
   WeakPtr(const WeakPtr& src) : m_ptr(src.m_ptr) { IncWeakCount(); }
 
   ~WeakPtr() { DecWeakCount(); }
+
+  void Reset() { DecWeakCount(); m_ptr = nullptr; }
 
   WeakPtr& operator=(const WeakPtr& src)
   {
@@ -109,6 +112,7 @@ public:
 
 private:
   T* m_ptr = nullptr;
+
   void IncWeakCount()
   {
     if (m_ptr)
