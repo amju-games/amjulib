@@ -23,7 +23,7 @@ int RandomInt(int n);
 template<class RandomIt, class RandomFunc>
 void RandomShuffle(RandomIt first, RandomIt last, RandomFunc r = RandomInt)
 {
-  using Dt = std::iterator_traits<RandomIt>::difference_type;
+  using Dt = typename std::iterator_traits<RandomIt>::difference_type;
   Dt i, n;
   n = last - first;
   for (i = n - 1; i > 0; --i) {
