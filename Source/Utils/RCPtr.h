@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <algorithm> // swap
 #include "AmjuAssert.h"
 
 namespace Amju 
