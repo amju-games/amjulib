@@ -1,21 +1,15 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2009
-*/
+// ** AMJULIB **
+// Cross-platform game library
+// (c) Copyright 2000-2026 Juliet Colman
 
-#ifndef AMJU_ASSERT_H_INCLUDED
-#define AMJU_ASSERT_H_INCLUDED
+#pragma once
 
-#if defined(WIN32)
-
-#include <iostream>
-
+#ifdef WIN32
 // This is to highlight uses of built-in assert, which we don't want.
 #if defined(assert)
 #undef assert
 #define assert(exp) ?????
 #endif // assert
-
-#undef Assert
 
 #if defined(_DEBUG)
 namespace Amju
@@ -30,10 +24,10 @@ namespace Amju
   // the GLUT version of the executable.
 
   void winAssert(const void* b, const void*, unsigned);
-  
 }
 // NB We use upper-case 'A' to avoid accidentally using the built-in 
 // assert - it's very easy to do!
+#undef Assert
 #define Assert(exp) (void)( (exp) || (Amju::winAssert(#exp, __FILE__, __LINE__), 0) )
 #else
 #define Assert(exp) ((void)0)
@@ -59,5 +53,14 @@ namespace Amju
 #define Assert assert
 #endif
 
-#endif // include guard
+// If we are running Catch2 tests rather than a game exe, change
+//  Assert behaviour so we can catch it in tests.
+#ifdef CATCH
+#undef Assert
+static int s_assertCounter = 0;
+static inline void IncAssertCounter() { ++s_assertCounter; }
+static inline int GetAssertCounter() { return s_assertCounter; }
+static inline void ResetAssertCounter() { s_assertCounter = 0; }
+#define Assert(exp) (void)( (exp) || (IncAssertCounter(), 0))
+#endif // CATCH
 
