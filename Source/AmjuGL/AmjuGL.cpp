@@ -862,7 +862,7 @@ Shader* AmjuGL::LoadShader(const std::string& shaderFileName)
   AMJU_CALL_STACK;
   if (ImplCheckFails()) return nullptr;
 
-  return impl->LoadShader(shaderFileName);
+  return impl->LoadShader(GetShaderDir() + shaderFileName);
 }
 
 static Shader* s_currentShader = nullptr;
@@ -889,17 +889,18 @@ Drawable* AmjuGL::Create(int drawableTypeId)
   return impl->Create(drawableTypeId);
 }
 
+static std::string s_shaderPrefixDir;
+
+void AmjuGL::SetShaderPrefixDir(const std::string prefixDir)
+{
+  s_shaderPrefixDir = prefixDir;
+}
+
 std::string AmjuGL::GetShaderDir()
 {
-  // TODO Use impl v function
+  if (ImplCheckFails()) return "";
 
-#ifdef AMJU_IOS
-  return "gles";
-#endif
-
-  return "opengl";
-
-  // TODO DX9, DX11
+  return s_shaderPrefixDir + "/" + impl->GetShaderDir() + "/";
 }
 }
 

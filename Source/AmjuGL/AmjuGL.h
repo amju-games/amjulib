@@ -319,7 +319,12 @@ public:
 
   static Shader* GetCurrentShader();
 
-  // Get subdirectory for shader files for the current impl
+  // We prefix the given string if required to locate the dir
+  //  for all shaders for a game.
+  // NB No trailing slash.
+  static void SetShaderPrefixDir(const std::string prefixDir);
+
+  // Get subdirectory for shader files for the current impl.
   static std::string GetShaderDir();
 
   // Abstract Factory: impl creates appropriate Drawable, 

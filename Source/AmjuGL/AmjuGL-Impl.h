@@ -127,7 +127,17 @@ public:
   virtual Shader* LoadShader(const std::string& shaderFileName) = 0;
   virtual void UseShader(Shader*) = 0;
 
+  // Subclasses set m_shaderDir in ctor.
+  // NB Just the dir, with no trailing slash.
+  std::string GetShaderDir() const { return m_shaderDir; } 
+
   virtual Drawable* Create(int) = 0;
+
+protected:
+  // Platform-specific shader dir.
+  // Subclasses set this in ctor.
+  // NB Just the dir, with no trailing slash.
+  std::string m_shaderDir;
 }; // class 
 } // namespace Amju
 

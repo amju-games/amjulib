@@ -338,6 +338,8 @@ static Drawable* MakeCubemap()
 
 AmjuGLOpenGLES2::AmjuGLOpenGLES2()
 {
+  m_shaderDir = "gles";
+
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
   s_factory.Add(TriListDynamic::DRAWABLE_TYPE_ID, MakeDynamicTriList);
   s_factory.Add(ShadowMap::DRAWABLE_TYPE_ID, MakeShadowMapES2);

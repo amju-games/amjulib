@@ -151,6 +151,8 @@ AmjuGLOpenGL::WindowCreateFunc windowCreateFunc = 0;
 
 AmjuGLOpenGL::AmjuGLOpenGL(AmjuGLOpenGL::WindowCreateFunc f)
 {
+  m_shaderDir = "opengl";
+
   windowCreateFunc = f;
 
   s_factory.Add(TriListStatic::DRAWABLE_TYPE_ID, MakeStaticTriList);
