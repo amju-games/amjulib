@@ -1,6 +1,6 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2009
-*/
+// ** AMJULIB **
+// Cross-platform game library
+// (c) Copyright 2000-2026 Juliet Colman
 
 #pragma once
 
@@ -33,15 +33,20 @@ protected:
   }
 };
 
+template <class T> class WeakPtr;
+
 template <class T>
 class RCPtr 
 {
 public:
   RCPtr() : m_ptr(0) {}
-  RCPtr(T * pNew) : m_ptr(pNew) { Attach(); }
-  RCPtr(const RCPtr & src) : m_ptr(src.m_ptr) { Attach(); }
+  RCPtr(T * pNew) : m_ptr(pNew) { IncRefCount(); }
+  RCPtr(const RCPtr& src) : m_ptr(src.m_ptr) { IncRefCount(); }
+  RCPtr(const WeakPtr<T>& src) : m_ptr(src.GetPtr()) { IncRefCount(); }
 
-  ~RCPtr() { Detach(); }
+  ~RCPtr() { DecRefCount(); }
+
+  void Reset() { DecRefCount(); m_ptr = nullptr; }
 
   RCPtr& operator=(const RCPtr& src) 
   {
@@ -60,7 +65,7 @@ public:
 
 private:
   T* m_ptr;
-  void Attach()
+  void IncRefCount()
   {
     if (m_ptr) 
     {
@@ -69,7 +74,7 @@ private:
     }
   }
 
-  void Detach()
+  void DecRefCount()
   {
     if (m_ptr) 
     {
@@ -90,6 +95,7 @@ public:
   WeakPtr() = default;
   WeakPtr(T* pNew) : m_ptr(pNew) { IncWeakCount(); }
   WeakPtr(const WeakPtr& src) : m_ptr(src.m_ptr) { IncWeakCount(); }
+  WeakPtr(const RCPtr<T>& src) : m_ptr(src.GetPtr()) { IncWeakCount(); }
 
   ~WeakPtr() { DecWeakCount(); }
 
