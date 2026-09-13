@@ -1,4 +1,5 @@
 #include <AmjuFirst.h>
+#include <cmath>
 #include "OBB2.h"
 #include <Vec3.h>
 #include <Plane.h>
@@ -24,8 +25,8 @@ void OBB2::SetCentre(const Vec2f& centre)
 
 void OBB2::SetRotation(float rads)
 {
-  float c = cos(rads);
-  float s = sin(rads);
+  const float c = std::cos(rads);
+  const float s = std::sin(rads);
 
   m_axes[0] = Vec2f( c, s);
   m_axes[1] = Vec2f(-s, c);
