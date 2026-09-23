@@ -33,25 +33,29 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
     return false;
   }
 
+  const float SCROLL_VEL = 100.f;
+  const float L_VEL = m_reverseLeftRight ? SCROLL_VEL : -SCROLL_VEL;
+  const float R_VEL = -L_VEL;
+
   // Respond on key down event, right..?
   if (e.keyType == AMJU_KEY_UP && e.keyDown)
   {
-    OnScrollVelEvent(Vec2f(0, -1.0f));
+    OnScrollVelEvent(Vec2f(0, -SCROLL_VEL));
     return true;
   }
   else if (e.keyType == AMJU_KEY_DOWN && e.keyDown)
   {
-    OnScrollVelEvent(Vec2f(0, 1.0f));
+    OnScrollVelEvent(Vec2f(0, SCROLL_VEL));
     return true;
   }
   if (e.keyType == AMJU_KEY_LEFT && e.keyDown)
   {
-    OnScrollVelEvent(Vec2f(-1.0f, 0));
+    OnScrollVelEvent(Vec2f(L_VEL, 0));
     return true;
   }
   else if (e.keyType == AMJU_KEY_RIGHT && e.keyDown)
   {
-    OnScrollVelEvent(Vec2f(1.0f, 0));
+    OnScrollVelEvent(Vec2f(R_VEL, 0));
     return true;
   }
   return false;
@@ -59,6 +63,9 @@ bool GuiScroll::OnKeyEvent(const KeyEvent& e)
 
 bool GuiScroll::OnCursorEvent(const CursorEvent& ce)
 {
+  if (m_disableCursorControl)
+    return false;
+
   // Unfortunately, dx and dy are not reliable on all platforms
   Vec2f delta(Vec2f(ce.x, ce.y) - m_lastCursorPos);
   m_lastCursorPos = Vec2f(ce.x, ce.y);

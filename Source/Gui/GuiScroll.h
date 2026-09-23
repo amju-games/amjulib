@@ -44,6 +44,9 @@ public:
 
   static void SetTabStopSoundFilename(const std::string& s) { s_tabStopSoundFilename = s; }
 
+  void SetReverseLeftRight(bool reverse) { m_reverseLeftRight = reverse; }
+  void SetDisableCursorControl(bool disable) { m_disableCursorControl = disable; }
+
   // Scroll behaviour constants
   void SetScrollVelMultiplier(float);
   void SetCanScrollInX(bool);
@@ -110,6 +113,8 @@ protected:
   float m_deceleration = 0.25f;
   float m_minDeceleration = 0.7f;
   float m_maxScrollVel = 4.f;
+  bool m_reverseLeftRight = false;
+  bool m_disableCursorControl = false;
 };
 }
 
