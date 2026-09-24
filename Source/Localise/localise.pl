@@ -193,7 +193,11 @@ sub LocaliseCppFile {
         }   
     }   
 
-    return unless $wasChanged;
+    if (!$wasChanged) 
+    {
+        print "No @@@ strings found in $fileToLocalise\n";
+        return;
+    }
 
     print "Found and processed strings in: $fileToLocalise\n";
 
