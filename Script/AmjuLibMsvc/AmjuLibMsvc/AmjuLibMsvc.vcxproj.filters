@@ -1820,6 +1820,9 @@
     <ClInclude Include="..\..\..\Source\Utils\DoOnce.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\Utils\FunctionFactory.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">
