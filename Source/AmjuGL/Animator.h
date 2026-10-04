@@ -49,6 +49,7 @@ public:
   {
     EASE_TYPE_ZERO,
     EASE_TYPE_ONE,
+    EASE_TYPE_SET, // set in client code with SetValue(), so not updated by us.
     EASE_TYPE_LINEAR,
     EASE_TYPE_STEP,
     EASE_TYPE_IN_OUT,
@@ -64,7 +65,7 @@ public:
   // For repeating anims, get the time for a full cycle of this animation.
   // For one shot anims, it's not a cycle, it's the total time before
   //  the anim finishes.
-  // For constant value anims, returns value set at construction.
+  // For constant value anims, returns last set cycle time.
   float GetCycleTime() const;
 
   void SetCycleTime(float cycleTime);
@@ -74,6 +75,13 @@ public:
 
   // Set the anim time value
   void SetAnimTimeSeconds(float seconds);
+
+  // Set value, 0..1. This will be overwritten in the next update,
+  //  except for const loop types. 
+  // The use case is for const anims that control, say, a chooser 
+  //  decorator, where the set value won't be overwritten and can
+  //  be used by the thing we are animating.
+  void SetValue(float value);
 
   // Conceptually protected but public for testing:
 

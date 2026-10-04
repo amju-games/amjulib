@@ -5,6 +5,7 @@
 #define _USE_MATH_DEFINES
 #endif
 
+#include <algorithm>
 #include <cmath>
 #include <map>
 #include <string>
@@ -40,6 +41,7 @@ bool Animator::Save(File* f)
     { EaseType::EASE_TYPE_STEP, "step" },
     { EaseType::EASE_TYPE_ZERO, "zero" },
     { EaseType::EASE_TYPE_ONE, "one" },
+    { EaseType::EASE_TYPE_SET, "set" },
     { EaseType::EASE_TYPE_IN_OUT, "ease-in-out" },
     { EaseType::EASE_TYPE_IN_OUT_ELASTIC, "ease-in-out-elastic" },
     { EaseType::EASE_TYPE_SINE, "sine" },
@@ -112,6 +114,7 @@ Animator::EaseType Animator::GetEaseTypeFromString(const std::string& cs, bool& 
     { "step", EaseType::EASE_TYPE_STEP },
     { "zero", EaseType::EASE_TYPE_ZERO },
     { "one", EaseType::EASE_TYPE_ONE },
+    { "set", EaseType::EASE_TYPE_SET },
     { "ease-in-out", EaseType::EASE_TYPE_IN_OUT },
     { "ease-in-out-elastic", EaseType::EASE_TYPE_IN_OUT_ELASTIC },
     { "sine", EaseType::EASE_TYPE_SINE },
@@ -161,6 +164,11 @@ void Animator::SetAnimTimeSeconds(float seconds)
   m_time = seconds;
 }
 
+void Animator::SetValue(float value)
+{
+  m_value = std::clamp(value, 0.f, 1.f);
+}
+
 static float EaseInOut(float t)
 {
   // TODO I think this one would work with mirror repeat, TODO test that thought.
@@ -195,6 +203,10 @@ void Animator::CalcUpdate(float dt)
 
   switch (m_easeType)
   {
+  case EaseType::EASE_TYPE_SET:
+    // Value is set in code: we don't want to overwrite it.
+    break;
+
   case EaseType::EASE_TYPE_ZERO:
     m_value = 0;
     break;
