@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <string>
+#include "FunctionFactory.h"
 
 namespace Amju
 {
@@ -21,6 +22,10 @@ using AnimCallback = std::function<void(Animator*)>;
 class Animator
 {
 public:
+  using EaseFunc = std::function<float(float)>;
+  using EaseFactory = FunctionFactory<EaseFunc>;
+
+  Animator();
   virtual ~Animator() = default;
 
   virtual bool Load(File*);
@@ -45,22 +50,15 @@ public:
 
   void SetLoopType(LoopType loopType);
 
-  enum class EaseType
-  {
-    EASE_TYPE_ZERO,
-    EASE_TYPE_ONE,
-    EASE_TYPE_SET, // set in client code with SetValue(), so not updated by us.
-    EASE_TYPE_LINEAR,
-    EASE_TYPE_STEP,
-    EASE_TYPE_IN_OUT,
-    EASE_TYPE_IN_OUT_ELASTIC,
-    EASE_TYPE_SINE,
-  };
-
   void SetIsReversed(bool reverse);
   bool IsReversed() const;
 
-  void SetEaseType(EaseType easeType);
+  // Set the easing function by name. Will fetch from the global EaseFactory.
+  void SetEaseName(const std::string& easeName);
+  const std::string& GetEaseName() const;
+
+  // Access the global factory to register new easing functions at runtime
+  static EaseFactory& GetEaseFactory();
 
   // For repeating anims, get the time for a full cycle of this animation.
   // For one shot anims, it's not a cycle, it's the total time before
@@ -84,16 +82,14 @@ public:
   void SetValue(float value);
 
   // Conceptually protected but public for testing:
-
   static LoopType GetLoopTypeFromString(const std::string& s);
-
-  static EaseType GetEaseTypeFromString(const std::string& s, bool& reverse);
 
 protected:
 
   LoopType m_loopType = LoopType::LOOP_TYPE_ONE_SHOT;
 
-  EaseType m_easeType = EaseType::EASE_TYPE_LINEAR;
+  std::string m_easeName;
+  EaseFunc m_easeFunc;
 
   // Current elapsed time; does not update if element is invisible
   //  or paused
