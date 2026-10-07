@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef PARTICLE_EFFECT_2D_H
 #define PARTICLE_EFFECT_2D_H
 

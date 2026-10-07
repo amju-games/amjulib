@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef SHADOW_MAP_OPENGL_1_H
 #define SHADOW_MAP_OPENGL_1_H
 

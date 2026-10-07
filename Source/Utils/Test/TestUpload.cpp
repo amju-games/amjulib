@@ -1,9 +1,7 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2000-2006
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-// Test harness: Upload a .png file
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)

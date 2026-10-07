@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef CREATE_TEXT_H
 #define CREATE_TEXT_H
 

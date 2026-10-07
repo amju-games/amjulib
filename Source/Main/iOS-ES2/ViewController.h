@@ -1,11 +1,5 @@
-//
-//  ViewController.h
-//  Amjulib
-//
-//  Created by Jason Colman on 29/07/2013.
-//  Copyright (c) 2013 Jason Colman. All rights reserved.
-//
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import <CoreMotion/CoreMotion.h>

@@ -1,15 +1,3 @@
-/* deflate.h -- internal compression state
- * Copyright (C) 1995-2004 Jean-loup Gailly
- * For conditions of distribution and use, see copyright notice in zlib.h
- */
-
-/* WARNING: this file should *not* be used by applications. It is
-   part of the implementation of the compression library and is
-   subject to change. Applications should only use zlib.h.
- */
-
-/* @(#) $Id: deflate.h,v 1.1 2006/12/30 16:18:16 jay Exp $ */
-
 #ifndef DEFLATE_H
 #define DEFLATE_H
 

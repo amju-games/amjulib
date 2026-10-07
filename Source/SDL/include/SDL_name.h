@@ -1,4 +1,5 @@
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef _SDLname_h_
 #define _SDLname_h_
 

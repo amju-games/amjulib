@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef AMJU_GAME_H
 #define AMJU_GAME_H
 

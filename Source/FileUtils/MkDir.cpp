@@ -1,5 +1,7 @@
-// From http://stackoverflow.com/questions/10402499/mkdir-c-function
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <iostream>
 #include <sstream>
 #include <sys/stat.h>

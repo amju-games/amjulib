@@ -1,14 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: FileImplStd.h,v $
-Revision 1.2  2006/12/01 23:28:04  jay
-New FileImplMem, unfortunately causing many small changes
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(FILE_IMPL_STD_H_INCLUDED)
 #define FILE_IMPL_STD_H_INCLUDED
 

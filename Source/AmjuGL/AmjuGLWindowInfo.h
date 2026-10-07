@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef AMJUGL_WINDOW_INFO_H
 #define AMJUGL_WINDOW_INFO_H
 

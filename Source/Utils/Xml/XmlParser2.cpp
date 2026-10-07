@@ -1,76 +1,7 @@
-/**
- ****************************************************************************
- * <P> XML.c - implementation file for basic XML parser written in ANSI C++
- * for portability. It works by using recursion and a node tree for breaking
- * down the elements of an XML document.  </P>
- *
- * @version     V2.27
- * @author      Frank Vanden Berghen
- *
- * NOTE:
- *
- *   If you add "#define STRICT_PARSING", on the first line of this file
- *   the parser will see the following XML-stream:
- *      <a><b>some text</b><b>other text    </a>
- *   as an error. Otherwise, this tring will be equivalent to:
- *      <a><b>some text</b><b>other text</b></a>
- *
- * NOTE:
- *
- *   If you add "#define APPROXIMATE_PARSING" on the first line of this file
- *   the parser will see the following XML-stream:
- *     <data name="n1">
- *     <data name="n2">
- *     <data name="n3" />
- *   as equivalent to the following XML-stream:
- *     <data name="n1" />
- *     <data name="n2" />
- *     <data name="n3" />
- *   This can be useful for badly-formed XML-streams but prevent the use
- *   of the following XML-stream (problem is: tags at contiguous levels
- *   have the same names):
- *     <data name="n1">
- *        <data name="n2">
- *            <data name="n3" />
- *        </data>
- *     </data>
- *
- * NOTE:
- *
- *   If you add "#define _XMLPARSER_NO_MESSAGEBOX_" on the first line of this file
- *   the "openFileHelper" function will always display error messages inside the
- *   console instead of inside a message-box-window. Message-box-windows are
- *   available on windows 9x/NT/2000/XP/Vista only.
- *
- * BSD license:
- * Copyright (c) 2002, Frank Vanden Berghen
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Frank Vanden Berghen nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- ****************************************************************************
- */
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)

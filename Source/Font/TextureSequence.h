@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #if !defined(TEXTURE_SEQUENCE_H_INCLUDED)
 #define TEXTURE_SEQUENCE_H_INCLUDED
 

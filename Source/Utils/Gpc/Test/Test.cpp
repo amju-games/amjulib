@@ -1,17 +1,7 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2004
-$Log: Test.cpp,v $
-Revision 1.2  2008/05/08 10:58:08  jay
-New memory management code
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.1  2004/09/08 15:43:21  jay
-Added to repository
-  
-*/
-
-// Test.cpp
-// Test the polygon clipping library.
-
+#include "precomp.h" // first include
 extern "C"
 {
 #include <AmjuFirst.h>

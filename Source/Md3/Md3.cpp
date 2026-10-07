@@ -1,5 +1,7 @@
-// Modified from www.gametutorials.com, original author Ben Humphrey, digiben@gametutorials.com
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #if !defined(GEKKO) && !defined(AMJU_IOS)
 // TODO Must use AmjuGL to work on Gekko/iOS
 

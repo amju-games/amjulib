@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004-2009
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef MATRIX_H_INCLUDED
 #define MATRIX_H_INCLUDED
 

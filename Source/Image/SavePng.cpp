@@ -1,7 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2006
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)

@@ -1,23 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2005
-$Log: AmjuTime.h,v $
-Revision 1.2  2006/01/16 14:08:52  jay
-Add Time classes to trunk
-
-Revision 1.1.2.1  2005/08/26 21:14:52  jay
-Added Time classes
-
-Revision 1.3  2005/02/28 20:34:22  jay
-Additions and fixes for Uptime Overlord v.1.0 release
-
-Revision 1.2  2005/01/19 10:19:58  jay
-Added MakeTime() to construct a time from days, months, etc.
-
-Revision 1.1  2005/01/09 12:34:30  jay
-New Time class - but calling the file Time.h causes problems.
-
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef AMJU_TIME_H_INCLUDED
 #define AMJU_TIME_H_INCLUDED
 

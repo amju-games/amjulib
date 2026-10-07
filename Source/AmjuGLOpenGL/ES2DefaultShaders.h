@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef ES2_DEFAULT_SHADERS_H_INCLUDED
 #define ES2_DEFAULT_SHADERS_H_INCLUDED
 

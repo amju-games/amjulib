@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifdef GEKKO
 // From http://wiibrew.org/wiki/Pthread
 

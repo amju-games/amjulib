@@ -1,21 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2005
-$Log: ThreadGate.h,v $
-Revision 1.2  2006/10/27 22:23:44  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.1  2006/07/25 08:17:20  jay
-Copied ThreadGate over from Uptime - currently Mac only
-
-Revision 1.2  2005/02/28 20:34:23  jay
-Additions and fixes for Uptime Overlord v.1.0 release
-
-Revision 1.1  2005/01/19 10:22:59  jay
-Added ThreadGate: allows a thread to block until the gate is opened
-by another thread.
-
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef THREAD_GATE_H_INCLUDED
 #define THREAD_GATE_H_INCLUDED
 

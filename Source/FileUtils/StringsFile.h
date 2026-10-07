@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef STRINGS_FILE_H_INCLUDED
 #define STRINGS_FILE_H_INCLUDED
 

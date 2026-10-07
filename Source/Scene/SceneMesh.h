@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef SCENE_MESH_H
 #define SCENE_MESH_H
 

@@ -1,59 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Directory.cpp,v $
-Revision 1.17  2008/05/18 16:04:23  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.16  2008/05/08 10:58:03  jay
-New memory management code
-
-Revision 1.15  2008/03/18 09:25:45  jay
-Move Filter() function to StringUtils
-
-Revision 1.14  2007/12/28 22:53:58  jay
-Fixes for makelevelbin and makeleafbin following AmjuGL refactor
-
-Revision 1.13  2007/12/12 16:51:43  staff
-Windows: VC8: fixes for deprecated mkdir and unlink
-
-Revision 1.12  2007/10/22 21:04:32  jay
-Added some debug error msgs for when mkdir fails
-
-Revision 1.11  2007/10/21 22:54:56  jay
-mkdir error msgs
-
-Revision 1.10  2007/02/02 14:00:39  Administrator
-Mingw GCC fix
-
-Revision 1.9  2007/01/23 23:42:26  Administrator
-Windows fix: use common application data dir
-
-Revision 1.8  2007/01/08 21:45:12  Administrator
-Windows Save Dir: ony use Data dir in release mode, so we don't get
-rubbish in the Data folder which could get glued into data.glue
-
-Revision 1.7  2007/01/05 22:52:04  jay
-Win: just use Data dir as Save dir
-
-Revision 1.6  2006/10/28 22:31:59  Administrator
-Add delete file function
-
-Revision 1.5  2006/09/15 08:37:39  Administrator
-Win compile fix
-
-Revision 1.4  2006/09/08 21:49:09  jay
-Added FileExists()
-
-Revision 1.3  2006/06/27 18:11:56  jay
-Debug cout on chmod
-
-Revision 1.2  2006/01/16 13:32:57  jay
-Mac save dir is now in /Users/Shared, not user-specific
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
-*/
+#include "precomp.h" // first include
 
 #include "AmjuFirst.h"
 #include <sys/types.h>
@@ -629,6 +577,4 @@ Time GetFileModifiedTime(const std::string& filename)
   return Time((unsigned int)buf.st_mtime);
 #endif
 }
-
 }
-

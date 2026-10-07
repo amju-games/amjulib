@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef OBJ_MESH_H_INCLUDED
 #define OBJ_MESH_H_INCLUDED
 

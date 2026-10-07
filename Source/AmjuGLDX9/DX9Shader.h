@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifdef AMJU_OFFER_DX9
 
 #ifndef DX9_SHADER_H

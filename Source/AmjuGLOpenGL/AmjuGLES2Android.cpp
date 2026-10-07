@@ -1,12 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2010
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-// This implementation of AmjuGLOpenGLES2 doesn't use 
-//  iOS or Android-specific APIs, so should work on both.
-// Also should work on Windows or Mac with ES2 layer (PowerVR, Mali).
-// Good for testing, but may not be most efficient.
-
+#include "precomp.h" // first include
 #if defined(AMJU_USE_ES2) && !defined(AMJU_IOS)
 
 #include <AmjuFirst.h>

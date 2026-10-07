@@ -1,20 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2005
-$Log: TimeRange.h,v $
-Revision 1.2  2006/01/16 14:08:52  jay
-Add Time classes to trunk
-
-Revision 1.1.2.1  2005/08/26 21:14:52  jay
-Added Time classes
-
-Revision 1.2  2005/01/09 12:37:03  jay
-Additions to make class more useable
-
-Revision 1.1  2005/01/03 11:08:55  jay
-Added to Uptime Overlord project
-
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef TIME_RANGE_H_INCLUDED
 #define TIME_RANGE_H_INCLUDED
 

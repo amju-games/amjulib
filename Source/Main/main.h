@@ -1,4 +1,5 @@
-// Amjulib (c) Juliet Colman 2000-2026
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 namespace Amju

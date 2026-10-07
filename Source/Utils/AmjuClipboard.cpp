@@ -1,6 +1,7 @@
-// * Amjulib *
-// (c) Copyright 2018 Juliet Colman
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #ifdef WIN32
 #include <Windows.h>
 #endif

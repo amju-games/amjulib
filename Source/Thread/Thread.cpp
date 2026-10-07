@@ -1,33 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Thread.cpp,v $
-Revision 1.3  2008/05/08 10:58:07  jay
-New memory management code
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.10.1  2006/07/25 08:13:02  jay
-Copied latest code from Uptime
-
-Revision 1.4  2005/02/28 20:34:23  jay
-Additions and fixes for Uptime Overlord v.1.0 release
-
-Revision 1.3  2005/01/19 10:40:50  jay
-Added stop flag
-
-Revision 1.2  2005/01/09 12:29:45  jay
-Added static count for diagnosis
-
-Revision 1.1  2005/01/03 11:08:54  jay
-Added to Uptime Overlord project
-
-Revision 1.1  2004/09/08 15:43:20  jay
-Added to repository
-  
-*/
-
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #include <iostream>
 #include "Thread.h"

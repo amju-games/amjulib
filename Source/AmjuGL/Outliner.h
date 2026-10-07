@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef AMJU_GL_OUTLINER_H_INCLUDED
 #define AMJU_GL_OUTLINER_H_INCLUDED
 

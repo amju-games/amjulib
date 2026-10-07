@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2006
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 #ifdef AMJU_USE_BASS 

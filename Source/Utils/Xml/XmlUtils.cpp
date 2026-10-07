@@ -1,17 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: XmlUtils.cpp,v $
-Revision 1.3  2008/05/08 10:58:12  jay
-New memory management code
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.2  2007/11/10 22:01:58  jay
-Fixes for new LeafData2
-
-Revision 1.1  2004/09/08 15:43:24  jay
-Added to repository
-  
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef MSVC
 #pragma warning(disable: 4786)

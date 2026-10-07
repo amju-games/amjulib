@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2007
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef REPORT_ERROR_H_INCLUDED
 #define REPORT_ERROR_H_INCLUDED
 

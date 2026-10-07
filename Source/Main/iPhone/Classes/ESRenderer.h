@@ -1,11 +1,5 @@
-//
-//  ESRenderer.h
-//  Untitled
-//
-//  Created by Student on 05/08/2010.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
-//
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #import <QuartzCore/QuartzCore.h>
 
 #import <OpenGLES/EAGL.h>

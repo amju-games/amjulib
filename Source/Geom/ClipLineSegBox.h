@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef CLIP_LINE_SEG_BOX_H
 #define CLIP_LINE_SEG_BOX_H
 

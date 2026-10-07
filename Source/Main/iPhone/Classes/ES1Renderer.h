@@ -1,11 +1,5 @@
-//
-//  ES1Renderer.h
-//  Untitled
-//
-//  Created by Student on 05/08/2010.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
-//
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #import "ESRenderer.h"
 
 #import <OpenGLES/ES1/gl.h>

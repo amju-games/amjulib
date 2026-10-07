@@ -1,14 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Mutex.h,v $
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
-// Some threading code adapted from "Portable Thread Synchronization Using C++"
-// http://world.std.com/~jimf/papers/c++sync/c++sync.html
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined MUTEX_H_INCLUDED
 #define MUTEX_H_INCLUDED
 

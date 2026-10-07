@@ -1,11 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Bitmap.h,v $
-Revision 1.1  2004/09/08 15:43:17  jay
-Added to repository
-  
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef BITMAP_H_INCLUDED
 #define BITMAP_H_INCLUDED
 

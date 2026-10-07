@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef AMJU_HOST_INFO_H
 #define AMJU_HOST_INFO_H
 

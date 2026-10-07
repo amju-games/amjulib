@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef DOWNLOAD_REQ_H_INCLUDED
 #define DOWNLOAD_REQ_H_INCLUDED
 

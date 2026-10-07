@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef SOUND_MANAGER_H
 #define SOUND_MANAGER_H
 

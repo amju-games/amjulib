@@ -1,6 +1,7 @@
-// * Amjula music theory *
-// (c) Copyright 2024 Juliet Colman
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #ifdef WIN32
 #define _USE_MATH_DEFINES
 #endif

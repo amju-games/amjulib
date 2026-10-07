@@ -1,7 +1,5 @@
-/* config.h.  Generated from config.h.in by configure.  */
-/* config.h.in.  Generated from configure.ac by autoheader.  */
-
-/* Define to 1 if you have the <dlfcn.h> header file. */
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */

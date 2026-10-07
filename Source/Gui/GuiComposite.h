@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef GUI_COMPOSITE_H
 #define GUI_COMPOSITE_H
 

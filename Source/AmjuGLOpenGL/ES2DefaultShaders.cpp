@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 namespace Amju
 {
 const char* AMJU_ES2_DEFAULT_SHADER_MODELVIEWPROJECTION_MATRIX = "modelViewProjectionMatrix";

@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef RESOURCE_FILE_H
 #define RESOURCE_FILE_H
 

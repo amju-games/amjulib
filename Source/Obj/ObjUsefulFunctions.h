@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef OBJ_USEFUL_FUNCTIONS_H
 #define OBJ_USEFUL_FUNCTIONS_H
 

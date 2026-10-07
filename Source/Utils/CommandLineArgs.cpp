@@ -1,5 +1,7 @@
-// Amjulib - (c) Juliet Colman 2025
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include "CommandLineArgs.h"
 
 namespace Amju

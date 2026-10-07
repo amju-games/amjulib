@@ -1,9 +1,5 @@
-/*
- * This file based on Power VR  OpenGL ES 2.0 HelloAPI Tutorial
- *  Copyright (c) Imagination Technologies Limited.
- */
-
-// j.c. - Win Main function etc for windows programs using OpenGL ES2
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
  
 #ifdef UNICODE
 #undef UNICODE

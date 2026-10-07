@@ -1,6 +1,5 @@
-// * Amjulib *
-// (c) Copyright 2000-2017 Juliet Colman
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 #include <functional>

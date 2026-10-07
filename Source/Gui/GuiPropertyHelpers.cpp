@@ -1,5 +1,7 @@
-// * Amjulib * Copyright (c) Juliet Colman 2026
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <LoadVec3.h>
 #include "GuiPropertyHelpers.h"
 

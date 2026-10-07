@@ -1,26 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: GlueFileMem.cpp,v $
-Revision 1.5  2008/05/08 10:58:04  jay
-New memory management code
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.4  2006/06/27 18:16:39  jay
-Report filename in error msgs, as there may be multiple glue files
-
-Revision 1.3  2006/06/17 13:40:05  jay
-Debug print
-
-Revision 1.2  2006/02/17 18:59:08  jay
-Added new GetBinary() overload. This returns an _object_ containing a
-pointer to a buffer. The buffer can be allocated by the object, which then
-owns the buffer; or, the pointer can point to memory allocated by
-something else.
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
+#include "precomp.h" // first include
 #include "AmjuFirst.h"
 #if defined(WIN32)
 #pragma warning(disable: 4786)

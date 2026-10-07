@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef DRAW_OBB3_H
 #define DRAW_OBB3_H
 

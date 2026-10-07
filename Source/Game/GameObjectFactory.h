@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef GAME_OBJECT_FACTORY_H
 #define GAME_OBJECT_FACTORY_H
 

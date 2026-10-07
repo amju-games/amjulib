@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #ifdef AMJU_USE_SDL
 
 #include <AmjuFirst.h>

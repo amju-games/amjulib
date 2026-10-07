@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #include <DegRad.h>
 #include <Vec3.h>
 #include "AmjuGL.h"

@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef STARTUP_H_INCLUDED
 #define STARTUP_H_INCLUDED
 

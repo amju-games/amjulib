@@ -1,11 +1,5 @@
-//
-//  iPhoneAppDelegate.h
-//  iPhone
-//
-//  Created by Qantm on 12/07/2010.
-//  Copyright Qantm 2010. All rights reserved.
-//
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #import <UIKit/UIKit.h>
 
 @class EAGLView;

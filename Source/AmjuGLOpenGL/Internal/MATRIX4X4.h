@@ -1,22 +1,5 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//	MATRIX4X4.h
-//	Class declaration for a 4x4 matrix
-//	Downloaded from: www.paulsprojects.net
-//	Created:	20th July 2002
-//	Updated:	19th August 2002	-	Corrected 2nd SetPerspective for n!=1.0f
-//				26th September 2002	-	Added nudge to prevent artifacts with infinite far plane
-//									-	Improved speed
-//				7th November 2002	-	Added Affine Inverse functions
-//									-	Changed constructors
-//									-	Added special cases for row3 = (0, 0, 0, 1)
-//				17th December 2002	-	Converted from radians to degrees for consistency
-//										with OpenGL. Should have been done a long time ago...
-//
-//	Copyright (c) 2006, Paul Baker
-//	Distributed under the New BSD Licence. (See accompanying file License.txt or copy at
-//	http://www.paulsprojects.net/NewBSDLicense.txt)
-//////////////////////////////////////////////////////////////////////////////////////////	
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef MATRIX4X4_H
 #define MATRIX4X4_H
 

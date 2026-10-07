@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2009
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef AMJU_GL_GCUBE_INCLUDED
 #define AMJU_GL_GCUBE_INCLUDED
 

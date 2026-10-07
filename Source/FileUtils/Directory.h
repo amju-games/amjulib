@@ -1,23 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Directory.h,v $
-Revision 1.5  2008/03/18 09:25:45  jay
-Move Filter() function to StringUtils
-
-Revision 1.4  2007/02/02 14:00:39  Administrator
-Mingw GCC fix
-
-Revision 1.3  2006/10/28 22:32:00  Administrator
-Add delete file function
-
-Revision 1.2  2006/09/08 21:49:09  jay
-Added FileExists()
-
-Revision 1.1  2004/09/08 15:43:18  jay
-Added to repository
-  
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(AMJU_DIRECTORY_H_INCLUDED)
 #define AMJU_DIRECTORY_H_INCLUDED
 

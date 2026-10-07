@@ -1,39 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2006
-$Log: HttpReq.cpp,v $
-Revision 1.5  2008/05/18 16:04:26  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.4  2008/05/08 10:58:05  jay
-New memory management code
-
-Revision 1.3  2007/10/22 20:57:27  jay
-Turn off debug printing the entire URL
-
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.6  2006/08/27 19:19:07  jay
-Turn on threads
-
-Revision 1.1.2.5  2006/08/12 07:40:56  jay
-Add #ifdef to debug output
-
-Revision 1.1.2.4  2006/08/07 20:45:18  jay
-Disable threads with NO_THREADS, for debugging.
-
-Revision 1.1.2.3  2006/07/30 21:37:16  jay
-Added CreateWorker for flexibility in subclasses: DON'T call this from ctor
- or it won't be virtualised! + Can turn off mutexes if really necessary.
-
-Revision 1.1.2.2  2006/07/26 21:22:51  jay
-More debug info
-
-Revision 1.1.2.1  2006/07/25 08:15:47  jay
-Added HttpReq to repository
-
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)

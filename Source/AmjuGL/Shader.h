@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef AMJU_SHADER_H
 #define AMJU_SHADER_H
 

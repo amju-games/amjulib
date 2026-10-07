@@ -1,9 +1,11 @@
-// * Amjulib *
-// (c) Copyright 2000-2017 Juliet Colman
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
 #ifdef WIN32
 #define _USE_MATH_DEFINES
 #endif
+
+#include "precomp.h" // first include
 
 #include <algorithm>
 #include <cmath>

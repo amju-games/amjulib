@@ -1,7 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004-2009
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef MSVC
 #define _USE_MATH_DEFINES

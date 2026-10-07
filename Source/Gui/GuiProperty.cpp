@@ -1,5 +1,7 @@
-// *Amjulib* Copyright (c) Juliet Colman 2024
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include "GuiProperty.h"
 
 namespace Amju

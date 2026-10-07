@@ -1,40 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2006
-$Log: OnlineReqManager.cpp,v $
-Revision 1.5  2008/05/18 16:04:29  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.4  2008/05/08 10:58:05  jay
-New memory management code
-
-Revision 1.3  2007/10/22 20:57:54  jay
-Don't debug print the entire URL
-
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.6  2006/08/12 07:40:20  jay
-Changed AddReq() to return a bool, so we know if the max number of requests
-was exceeded.
-
-Revision 1.1.2.5  2006/08/07 20:46:11  jay
-Fix iterator-invalidation bug
-
-Revision 1.1.2.4  2006/07/30 21:38:07  jay
-Count requests on queue with a given name; limit number of requests of a
-  given name.
-
-Revision 1.1.2.3  2006/07/26 21:19:16  jay
-Pass SharedPtr, not raw ptr - seemed like a good idea but not really necessary
-
-Revision 1.1.2.2  2006/07/25 17:45:38  jay
-Fix bad call to erase; add GetName()
-
-Revision 1.1.2.1  2006/07/25 08:16:34  jay
-Added OnlineReqManager to repository
-
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #include <set>
 #include <iostream>

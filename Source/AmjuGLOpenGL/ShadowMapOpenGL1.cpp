@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #include <AmjuFirst.h>
 #if defined(USE_SHADOW_MAP_OPENGL_1)
 

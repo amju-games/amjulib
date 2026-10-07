@@ -1,15 +1,5 @@
-/* showbuffer. h*/
-
-/*
- * Copy the depth buffer to the color buffer as a grayscale image.
- * Useful for inspecting the depth buffer values.
- *
- * This program is in the public domain.
- *
- * Brian Paul   November 4, 1998
- */
-
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef SHOWBUFFER_H
 #define SHOWBUFFER_H
 

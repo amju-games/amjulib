@@ -1,17 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Locker.h,v $
-Revision 1.2  2006/10/27 22:23:43  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.10.1  2006/07/25 08:11:48  jay
-Fix for worst, most stupid logic bug ever. This never worked before this fix.
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
- 
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(SCHMICKEN_LOCKER_H_INCLUDED)
 #define SCHMICKEN_LOCKER_H_INCLUDED
 

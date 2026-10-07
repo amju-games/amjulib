@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef SCENE_NODE_CAMERA_H
 #define SCENE_NODE_CAMERA_H
 

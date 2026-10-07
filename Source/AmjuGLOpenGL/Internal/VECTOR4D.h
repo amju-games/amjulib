@@ -1,18 +1,5 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//	VECTOR4D.h
-//	Class declaration for a 4d vector
-//	Downloaded from: www.paulsprojects.net
-//	Created:	20th July 2002
-//	Modified:	8th November 2002	-	Changed Constructor layout
-//									-	Some speed Improvements
-//									-	Corrected Lerp
-//				7th January 2003	-	Added QuadraticInterpolate
-//
-//	Copyright (c) 2006, Paul Baker
-//	Distributed under the New BSD Licence. (See accompanying file License.txt or copy at
-//	http://www.paulsprojects.net/NewBSDLicense.txt)
-//////////////////////////////////////////////////////////////////////////////////////////	
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef VECTOR4D_H
 #define VECTOR4D_H
 

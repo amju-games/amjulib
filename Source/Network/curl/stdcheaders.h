@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef __STDC_HEADERS_H
 #define __STDC_HEADERS_H
 /***************************************************************************

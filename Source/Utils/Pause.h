@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef PAUSE_H_INCLUDED
 #define PAUSE_H_INCLUDED
 

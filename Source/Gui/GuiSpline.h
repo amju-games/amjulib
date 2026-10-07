@@ -1,6 +1,5 @@
-// * Amjula music theory *
-// (c) Copyright 2024 Juliet Colman
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 #include <FunctionFactory.h>

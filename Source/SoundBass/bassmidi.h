@@ -1,10 +1,5 @@
-/*
-	BASSMIDI 2.4 C/C++ header file
-	Copyright (c) 2006-2025 Un4seen Developments Ltd.
-
-	See the BASSMIDI.CHM file for more detailed documentation
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef BASSMIDI_H
 #define BASSMIDI_H
 

@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef WIN_SCREEN_H
 #define WIN_SCREEN_H
 

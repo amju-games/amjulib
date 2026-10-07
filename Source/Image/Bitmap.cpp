@@ -1,29 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Bitmap.cpp,v $
-Revision 1.5  2008/05/08 10:58:03  jay
-New memory management code
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.4  2006/12/30 16:21:16  jay
-Fix Save() endianness
-
-Revision 1.3  2006/12/01 23:28:03  jay
-New FileImplMem, unfortunately causing many small changes
-
-Revision 1.2  2006/01/16 13:32:20  jay
-Merge fix from pool
-
-Revision 1.1.10.1  2005/05/08 17:29:24  jay
-Add <iostream> - new gcc version
-
-Revision 1.1  2004/09/08 15:43:17  jay
-Added to repository
-  
-*/
-
-// This source code originally written by JASON COLMAN 2000-2003. 
-// You may use it as you wish, at your own risk!  jason@amju.com.
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #if defined(WIN32)
 #pragma warning(disable: 4786)

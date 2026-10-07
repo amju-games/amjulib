@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #include "Material.h"
 #include <ResourceManager.h>
 #include <StringUtils.h>

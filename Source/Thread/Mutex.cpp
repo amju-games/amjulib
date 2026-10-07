@@ -1,26 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Mutex.cpp,v $
-Revision 1.4  2008/05/18 16:04:28  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.3  2008/05/08 10:58:05  jay
-New memory management code
-
-Revision 1.2  2006/01/20 12:48:24  jay
-Gcc 4.0 fix: need to include sys/errno.h for EBUSY
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
-// This source code originally written by JASON COLMAN 2000-2003. 
-// You may use it as you wish, at your own risk!  jason@amju.com.
-
-// Some threading code adapted from "Portable Thread Synchronization Using C++"
-// http://world.std.com/~jimf/papers/c++sync/c++sync.html
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)

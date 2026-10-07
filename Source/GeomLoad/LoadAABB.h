@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef LOAD_AABB_H
 #define LOAD_AABB_H
 

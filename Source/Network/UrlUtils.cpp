@@ -1,38 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: UrlUtils.cpp,v $
-Revision 1.8  2008/05/18 16:04:32  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.7  2008/05/08 10:58:08  jay
-New memory management code
-
-Revision 1.6  2007/01/13 16:19:58  jay
-Fix for uploading binary data: convert ALL characters to hex-encoded format.
-
-Revision 1.5  2007/01/03 09:05:04  jay
-Add Overrides ofToUrlFormat
-
-Revision 1.4  2006/12/04 21:49:38  jay
-Added funcs to strip data from URL
-
-Revision 1.3  2006/10/27 22:23:44  jay
-Merge improvements from Pool, for HTTP online stuff.
-
-Revision 1.1.2.2  2006/07/27 08:42:46  jay
-Added ToUrlFormat(), to correctly format all characters in a URL.
-
-Revision 1.1.2.1  2005/10/21 17:51:59  jay
-All URL-manipulation functions moved here; copied over from Uptime Overlord.
-
-Revision 1.2  2005/02/28 20:34:24  jay
-Additions and fixes for Uptime Overlord v.1.0 release
-
-Revision 1.1  2005/01/03 11:08:55  jay
-Added to Uptime Overlord project
-
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)

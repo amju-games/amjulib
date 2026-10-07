@@ -1,4 +1,5 @@
-// Amjulib - (c) Juliet Colman 2025
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 // Command line args - set by main function where possible,

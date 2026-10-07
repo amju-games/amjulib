@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #if 0
 // What's going on here? This doesn't work, it's just copied from somewhere???
 

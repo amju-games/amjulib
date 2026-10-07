@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef SOUND_PLAYER_IMPL_H_INCLUDED
 #define SOUND_PLAYER_IMPL_H_INCLUDED
 

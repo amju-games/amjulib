@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef SHADER_NULL_H
 #define SHADER_NULL_H
 

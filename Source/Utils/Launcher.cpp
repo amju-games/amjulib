@@ -1,26 +1,14 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: Launcher.cpp,v $
-Revision 1.4  2008/05/18 16:04:27  jay
-MSVC update
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.3  2008/05/08 10:58:05  jay
-New memory management code
-
-Revision 1.2  2007/03/29 18:46:18  jay
-Watch out for non-english encoding
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #include "Launcher.h"
 #include <iostream>
 
 #ifdef WIN32
 #include <windows.h>
+#include <shellapi.h>
 #endif
 
 #ifdef MACOSX
@@ -58,8 +46,8 @@ bool LaunchURL(const char* url)
   AMJU_CALL_STACK;
 
 #ifdef WIN32
-  int r =  (int)ShellExecuteA(0, "open", url, "", "", 1);
-  return (r > 32);
+  auto r = (ShellExecuteA(0, "open", url, "", "", 1));
+  return (reinterpret_cast<int>(r) > 32);
 
 #else 
 

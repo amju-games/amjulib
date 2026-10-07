@@ -1,8 +1,14 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #include <AmjuFirst.h>
 #include "Timer.h"
 
 #if defined(WIN32)
 #include <windows.h>
+#include <timeapi.h>
 #pragma comment(lib, "winmm.lib")
 #endif // WIN32 
 

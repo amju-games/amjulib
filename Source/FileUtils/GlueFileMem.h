@@ -1,17 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: GlueFileMem.h,v $
-Revision 1.2  2006/02/17 18:59:08  jay
-Added new GetBinary() overload. This returns an _object_ containing a
-pointer to a buffer. The buffer can be allocated by the object, which then
-owns the buffer; or, the pointer can point to memory allocated by
-something else.
-
-Revision 1.1  2004/09/08 15:43:19  jay
-Added to repository
-  
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(GLUE_FILE_MEM_H_INCLUDED)
 #define GLUE_FILE_MEM_H_INCLUDED
 

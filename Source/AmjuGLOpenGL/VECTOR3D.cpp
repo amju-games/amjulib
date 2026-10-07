@@ -1,18 +1,7 @@
-//////////////////////////////////////////////////////////////////////////////////////////
-//	VECTOR3D.cpp
-//	Function definitions for 3d vector class
-//	Downloaded from: www.paulsprojects.net
-//	Created:	20th July 2002
-//	Modified:	8th November 2002	-	Changed Constructor layout
-//									-	Some speed Improvements
-//									-	Corrected Lerp
-//				17th December 2002	-	Converted from radians to degrees
-//
-//	Copyright (c) 2006, Paul Baker
-//	Distributed under the New BSD Licence. (See accompanying file License.txt or copy at
-//	http://www.paulsprojects.net/NewBSDLicense.txt)
-//////////////////////////////////////////////////////////////////////////////////////////	
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #include "Internal/VECTOR3D.h"
 #include <AmjuFinal.h>

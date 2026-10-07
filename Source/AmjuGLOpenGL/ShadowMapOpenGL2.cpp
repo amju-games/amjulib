@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #if defined(USE_SHADOW_MAP_OPENGL_2) && !defined(AMJU_USE_ES2)
 #include <AmjuFirst.h>
 #ifndef IPHONE

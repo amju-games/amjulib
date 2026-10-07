@@ -1,7 +1,7 @@
-/*
-Amju Games source code (c) Copyright Jason Colman 2010
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #if defined(AMJU_USE_ES1) && (defined(AMJU_IOS) || defined(ANDROID_NDK))
 
 #include <AmjuFirst.h>

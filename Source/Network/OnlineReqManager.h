@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef ONLINE_REQ_MANAGER_H_INCLUDED
 #define ONLINE_REQ_MANAGER_H_INCLUDED
 

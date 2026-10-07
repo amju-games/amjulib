@@ -1,10 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-*/
-
-// The MD2 loading and drawing code is a rewrite of a demo 
-// found on www.flipcode.com.
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #ifndef MD2_MODEL_H_INCLUDED
 #define MD2_MODEL_H_INCLUDED
 

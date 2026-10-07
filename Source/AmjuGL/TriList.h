@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef TRI_LIST_H_INCLUDED
 #define TRI_LIST_H_INCLUDED
 

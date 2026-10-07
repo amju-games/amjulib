@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef __CURL_EASY_H
 #define __CURL_EASY_H
 /***************************************************************************

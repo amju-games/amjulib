@@ -1,7 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(SINGLETON_T_H_INCLUDED)
 #define SINGLETON_T_H_INCLUDED
 

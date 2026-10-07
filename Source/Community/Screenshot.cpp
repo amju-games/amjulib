@@ -1,11 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2006
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-
-// Save .bmp for test/comparison -- blue and red are reversed though :-(
-//#define SAVE_AS_BMP
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #include <iostream>
 

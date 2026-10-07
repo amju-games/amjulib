@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #if !defined(COMMON_H_INCLUDED)
 #define COMMON_H_INCLUDED
 

@@ -1,6 +1,5 @@
-// Amjulib - cross platform game engine
-// (c) Copyright Juliet Colman 2000-2018
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #pragma once
 
 #include <Batched.h>

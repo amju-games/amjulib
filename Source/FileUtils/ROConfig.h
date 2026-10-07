@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef R_O_CONFIG_H_INCLUDED
 #define R_O_CONFIG_H_INCLUDED
 

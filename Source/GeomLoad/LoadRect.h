@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef LOAD_RECT_H_INCLUDED
 #define LOAD_RECT_H_INCLUDED
 

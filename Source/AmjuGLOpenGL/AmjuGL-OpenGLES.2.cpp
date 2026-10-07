@@ -1,7 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2010
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #if defined(AMJU_IOS)
 
 #ifndef GLES_SILENCE_DEPRECATION

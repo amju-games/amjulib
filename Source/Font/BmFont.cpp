@@ -1,6 +1,7 @@
-// Amjulib - cross platform game engine
-// (c) Copyright Juliet Colman 2000-2017
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
+#include "precomp.h" // first include
 #include <File.h>
 #include <ReportError.h>
 #include <StringUtils.h>

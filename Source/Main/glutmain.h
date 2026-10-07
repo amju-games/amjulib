@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifdef AMJU_USE_GLUT
 
 #if defined(MACOSX) || defined(AMJU_IOS)

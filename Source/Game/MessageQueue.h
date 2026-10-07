@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef MESSAGE_QUEUE_H_INCLUDED
 #define MESSAGE_QUEUE_H_INCLUDED
 

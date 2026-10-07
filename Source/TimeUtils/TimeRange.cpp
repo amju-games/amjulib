@@ -1,29 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2005
-$Log: TimeRange.cpp,v $
-Revision 1.4  2008/06/07 13:42:59  jay
-MSVC warnings
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-Revision 1.3  2008/05/08 10:58:07  jay
-New memory management code
-
-Revision 1.2  2006/01/16 14:08:52  jay
-Add Time classes to trunk
-
-Revision 1.1.2.2  2005/08/31 22:44:56  Administrator
-MSVC compile fixes
-
-Revision 1.1.2.1  2005/08/26 21:14:52  jay
-Added Time classes
-
-Revision 1.2  2005/01/09 12:37:03  jay
-Additions to make class more useable
-
-Revision 1.1  2005/01/03 11:08:55  jay
-Added to Uptime Overlord project
-
-*/
-
+#include "precomp.h" // first include
 #include <AmjuFirst.h>
 #ifdef WIN32
 #pragma warning(disable: 4786)

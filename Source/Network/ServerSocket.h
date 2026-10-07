@@ -1,11 +1,5 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2004
-$Log: ServerSocket.h,v $
-Revision 1.1  2004/09/08 15:43:20  jay
-Added to repository
-  
-*/
-
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 #if !defined(SCHMICKEN_SERVER_SOCKET_H_INCLUDED)
 #define SCHMICKEN_SERVER_SOCKET_H_INCLUDED
 

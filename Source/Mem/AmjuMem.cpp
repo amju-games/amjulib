@@ -1,10 +1,7 @@
-/*
-Amju Games source code (c) Copyright Juliet Colman 2000-2008
-*/
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
 
-// NB Bad idea to use #include "AmjuFirst.h", #include "AmjuFinal.h", or
-//  AMJU_CALL_STACK here.
-
+#include "precomp.h" // first include
 #include "AmjuMem.h"
 
 #if defined(USE_AMJU_DEBUG_NEW) //&& defined(MACOSX)

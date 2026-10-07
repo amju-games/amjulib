@@ -1,3 +1,8 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
+#include "precomp.h" // first include
+
 #if defined (AMJU_IOS) || defined (ANDROID_NDK) || defined(AMJU_USE_ES2)
 
 #ifndef GL_SILENCE_DEPRECATION

@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef RESOURCE_MANAGER_H_INCLUDED
 #define RESOURCE_MANAGER_H_INCLUDED
 

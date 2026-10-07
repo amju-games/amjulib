@@ -1,3 +1,6 @@
+// * AMJULIB *
+// (c) Copyright Juliet Colman 2000-2026
+
 #ifndef COLLISION_MESH_H
 #define COLLISION_MESH_H
 
