@@ -5,6 +5,7 @@
 #define _USE_MATH_DEFINES
 #endif
 #include <cmath>
+#include <DoOnce.h>
 #include <GuiFactory.h>
 #include <ResourceManager.h>
 #include <StringUtils.h>
@@ -12,21 +13,88 @@
 #include <Vec3.h>
 #include "GuiSpline.h"
 
+namespace
+{
+  using namespace Amju;
+
+  // Safely calculate knot values
+  static float GetKnotTime(float t_prev, Vec2f p_prev, Vec2f p_curr, float alpha)
+  {
+    float dx = p_curr.x - p_prev.x;
+    float dy = p_curr.y - p_prev.y;
+    float sq_dist = dx * dx + dy * dy;
+
+    // If the points are identical, the interval is exactly 0
+    if (sq_dist < 1e-7f) return t_prev;
+
+    return t_prev + std::pow(sq_dist, alpha * 0.5f);
+  }
+
+  // Zero-safe linear interpolation helper for Barry-Goldman steps
+  static Vec2f SafeLerp(Vec2f a, Vec2f b, float t_start, float t_end, float global_t)
+  {
+    float denominator = t_end - t_start;
+    // If time span is zero, the control points are overlapping: return one of them safely.
+    if (std::abs(denominator) < 1e-7f) return a;
+
+    return a * ((t_end - global_t) / denominator) + b * ((global_t - t_start) / denominator);
+  }
+
+  static Vec2f CatmullRomSpline(float t, Vec2f p1, Vec2f p2, Vec2f p3, Vec2f p4, float alpha = 0.5f)
+  {
+    float t1 = 0.0f;
+    float t2 = GetKnotTime(t1, p1, p2, alpha);
+    float t3 = GetKnotTime(t2, p2, p3, alpha);
+    float t4 = GetKnotTime(t3, p3, p4, alpha);
+
+    // If the core segment between p2 and p3 has zero length, it's just a single static point
+    if (std::abs(t3 - t2) < 1e-7f) return p2;
+
+    // Map input t (0.0 to 1.0) into the global curve time
+    float global_t = t2 + t * (t3 - t2);
+
+    // 1st level blending (Safe from t1==t2, t2==t3, t3==t4)
+    Vec2f a1 = SafeLerp(p1, p2, t1, t2, global_t);
+    Vec2f a2 = SafeLerp(p2, p3, t2, t3, global_t);
+    Vec2f a3 = SafeLerp(p3, p4, t3, t4, global_t);
+
+    // 2nd level blending (Safe from wide duplicate spans like t1==t3)
+    Vec2f b1 = SafeLerp(a1, a2, t1, t3, global_t);
+    Vec2f b2 = SafeLerp(a2, a3, t2, t4, global_t);
+
+    // Final blending (We already checked t3 - t2 != 0 above, so this is guaranteed safe)
+    return SafeLerp(b1, b2, t2, t3, global_t);
+  }
+}
+
 namespace Amju
 {
 const char* GuiSpline::NAME = "spline";
 
-static Vec2f CatmullRomSpline(float t, Vec2f p1, Vec2f p2, Vec2f p3, Vec2f p4)
+FunctionFactory<GuiSpline::WidthFunc> GuiSpline::s_widthFuncFactory;
+
+GuiSpline::WidthFunc GuiSpline::WidthFuncFactoryCreate(std::string& str)
 {
-  const float t2 = t*t;
-  const float t3 = t*t*t;
-  Vec2f v; // Interpolated point
+  auto wf = s_widthFuncFactory.Create(str);
+  if (wf) return wf;
+  str.clear();
+  return nullptr;
+}
 
-  /* Catmull Rom spline Calculation */
-  v.x = ((-t3 + 2 * t2 - t)*(p1.x) + (3 * t3 - 5 * t2 + 2)*(p2.x) + (-3 * t3 + 4 * t2 + t)* (p3.x) + (t3 - t2)*(p4.x)) / 2;
-  v.y = ((-t3 + 2 * t2 - t)*(p1.y) + (3 * t3 - 5 * t2 + 2)*(p2.y) + (-3 * t3 + 4 * t2 + t)* (p3.y) + (t3 - t2)*(p4.y)) / 2;
+bool GuiSpline::AddWidthFunc(const std::string& str, WidthFunc f)
+{
+  return s_widthFuncFactory.Add(str, f); 
+}
 
-  return v;
+GuiSpline::GuiSpline()
+{
+  do_once
+  {
+    AddWidthFunc("music", MusicCurveWidthFunc);
+    AddWidthFunc("lerp", LerpWidthFunc);
+    AddWidthFunc("log", LogWidthFunc);
+    AddWidthFunc("exp", ExpWidthFunc);
+  }
 }
 
 AmjuGL::Tris GuiSpline::BuildFilledTriList()
@@ -63,6 +131,9 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
 {
   AmjuGL::Tris tris;
 
+  // Don't call this if no points!
+//  Assert(m_totalLength > 0);
+
   // Points of rectangle for segment, declared here so we shift the points, joining
   //  all the rectangles.
   Vec2f p[4];
@@ -71,7 +142,7 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
   float u1 = 0.f;
   const float v0 = 0;
   const float v1 = 1;
-  float totalLength = 0;
+  float accLength = 0;
 
   const Colour colour = m_outlineColour * GetCombinedColour();
 
@@ -89,18 +160,20 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
     perp3.Normalise();
     Vec2f perp(perp3.x, perp3.y);
 
-    // Calc line width here: either linear interp between start and end...
-#ifdef LINE_WIDTH_LINEAR
-    // d is proportion of length covered, 0..1
-    float d = static_cast<float>(i) / static_cast<float>(m_points.size());
-#endif
+    accLength += segLength;
 
-    // For music score curves, thickest in middle. So d varies from 0 at the ends to
-    //  1 half way.
-    float d = sin(static_cast<float>(i) / static_cast<float>(m_points.size()) * static_cast<float>(M_PI));
-    d *= d;
-
-    float w = m_startWidth + (m_endWidth - m_startWidth) * d; 
+    // Calc width of line at this point along it
+    float w = 1.f;
+    if (m_widthFunc)
+    {
+      const float t = accLength / m_totalLength;
+      w = m_widthFunc(t, m_startWidth, m_endWidth);
+    }
+    else
+    {
+      const float t = accLength / m_totalLength;
+      w = DefaultWidthFunction(t, m_startWidth, m_endWidth);
+    }
 
     if (i == 1)
     {
@@ -121,16 +194,15 @@ AmjuGL::Tris GuiSpline::BuildOutlineTriList()
       // Shift, and calc new U coord below
       u0 = u1;
     }
-    totalLength += segLength;
     // Calculate next u-coord
     // TODO Short strokes may break this?
-    if (totalLength < m_totalLength * 0.5f)
+    if (accLength < m_totalLength * 0.5f)
     {
-      u1 = std::min(0.5f, totalLength / w * 0.33f);
+      u1 = std::min(0.5f, accLength / w * 0.33f);
     }
     else
     {
-      float a = m_totalLength - totalLength;
+      float a = m_totalLength - accLength;
       if (a < (w * 1.5f))
       {
         u1 = (1.f - a / (w * 1.5f)) * 0.5f + 0.5f;
@@ -179,6 +251,23 @@ bool GuiSpline::ParseOneAttrib(const Strings& strs)
       m_endWidth = ToFloat(strs[1]);
       return true;
     }
+    else if (strs[0] == "width_func")
+    {
+      m_widthFuncName = strs[1];
+      m_widthFunc = WidthFuncFactoryCreate(m_widthFuncName);
+      return true;
+    }
+    else if (strs[0] == "alpha")
+    {
+      m_alpha = ToFloat(strs[1]);
+      return true;
+    }
+    else if (strs[0] == "num_points")
+    {
+      m_numPoints = ToInt(strs[1]);
+      return true;
+    }
+    
   }
   return IGuiPoly::ParseOneAttrib(strs);
 }
@@ -188,6 +277,12 @@ std::string GuiSpline::CreateAttribString() const
   std::string s = IGuiPoly::CreateAttribString();
   s += ", w0=" + ToString(m_startWidth);
   s += ", w1=" + ToString(m_endWidth);
+  s += ", alpha=" + ToString(m_alpha);
+  s += ", num_points=" + ToString(m_numPoints);
+  if (!m_widthFuncName.empty())
+  {
+    s += ", width_func=" + m_widthFuncName;
+  }
   return s;
 } 
 
@@ -213,13 +308,27 @@ void GuiSpline::MakeInBetweenPoints()
 
   const Vec2f pos = GetCombinedPos();
 
+  float tInc = 5;
+  if (m_numPoints > 0)
+  {
+    tInc = 1.f / static_cast<float>(m_numPoints);
+  }
+
   const int n = static_cast<int>(controlPoints.size()) - 3;
   for (int i = 0; i < n; i++)
   {
     float t = 0;
     while (t < 1.0f)
     {
-      Vec2f v = CatmullRomSpline(t, controlPoints[i], controlPoints[i + 1], controlPoints[i + 2], controlPoints[i + 3]);
+      Vec2f v = CatmullRomSpline(t, 
+        controlPoints[i], 
+        controlPoints[i + 1], 
+        controlPoints[i + 2], 
+        controlPoints[i + 3], 
+        m_alpha);
+
+      // We should probably get combined size here, IF we want control points
+      //  to be scalable.
 //      v.x *= m_size.x;
 //      v.y *= m_size.y;
 
@@ -231,7 +340,7 @@ void GuiSpline::MakeInBetweenPoints()
 
       m_points.push_back(v + pos);
 
-      t += 0.04f; // TODO 
+      t += tInc; 
     }
   }
 }
