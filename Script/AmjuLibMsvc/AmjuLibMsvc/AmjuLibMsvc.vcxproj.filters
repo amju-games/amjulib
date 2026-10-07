@@ -939,6 +939,7 @@
     <ClCompile Include="..\..\..\Source\Gui\GuiDecAnimRandom.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\precomp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\EventsWin32\EventPollerImplWin32.h">
@@ -1823,6 +1824,7 @@
     <ClInclude Include="..\..\..\Source\Utils\FunctionFactory.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Source\precomp.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Source\Anim\anim-notes.txt">
