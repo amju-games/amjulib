@@ -43,7 +43,11 @@ GuiButton::GuiButton()
 
 GuiButton::~GuiButton()
 {
-  // Done in Listener dtor TheEventPoller::Instance()->RemoveListener(this); 
+  // Done in Listener dtor:
+  // TheEventPoller::Instance()->RemoveListener(this); 
+
+  if (this == focusButton) focusButton = nullptr;
+  if (this == cancelButton) cancelButton = nullptr;
 }
 
 void GuiButton::SetTexture(Texture* tex) 
