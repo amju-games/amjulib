@@ -380,7 +380,7 @@ std::string GetDesktopDir()
       s = "/";
     }
   }
-  return s;
+  return s + "/";
 #endif
 
 #ifdef MACOSX
