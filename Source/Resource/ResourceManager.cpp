@@ -14,6 +14,8 @@
 #include <iostream>
 #include <AmjuFinal.h>
 
+//#define RESOURCE_LOAD_DEBUG
+
 namespace Amju
 {
 Resource* ShaderLoader(const std::string& resName)
@@ -119,7 +121,9 @@ Resource* ResourceManager::LoadRes(const std::string& resName)
   Assert(jt != m_loaders.end());
   Loader myLoader = jt->second;
 
+#ifdef RESOURCE_LOAD_DEBUG
   std::cout << "Loading resource: '" << resName << "'.\n";
+#endif
 
   Resource* r = myLoader(resName);
   if (!r)
