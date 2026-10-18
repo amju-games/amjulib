@@ -518,6 +518,7 @@
 		C56DAD2E2EF2D06E00739D75 /* GuiPoly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C56DAD1E2EF2D06E00739D75 /* GuiPoly.cpp */; };
 		C57FDAB92F7C4DAE00CF8CAF /* GuiText2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C57FDAB72F7C4DAE00CF8CAF /* GuiText2.cpp */; };
 		C57FDABA2F7C4DAE00CF8CAF /* GuiText2.h in Headers */ = {isa = PBXBuildFile; fileRef = C57FDAB82F7C4DAE00CF8CAF /* GuiText2.h */; };
+		C5AF782B3073A26900F8A1C5 /* FunctionFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = C5AF782A3073A26900F8A1C5 /* FunctionFactory.h */; };
 		C5CC4DB52EF1C247007C4508 /* CommandLineArgs.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CC4DAD2EF1C246007C4508 /* CommandLineArgs.h */; };
 		C5CC4DB62EF1C247007C4508 /* DeviceInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5CC4DAE2EF1C246007C4508 /* DeviceInfo.cpp */; };
 		C5CC4DB72EF1C247007C4508 /* MT19937.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CC4DAF2EF1C247007C4508 /* MT19937.h */; };
@@ -1052,6 +1053,7 @@
 		C56DAD1E2EF2D06E00739D75 /* GuiPoly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiPoly.cpp; sourceTree = "<group>"; };
 		C57FDAB72F7C4DAE00CF8CAF /* GuiText2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiText2.cpp; sourceTree = "<group>"; };
 		C57FDAB82F7C4DAE00CF8CAF /* GuiText2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiText2.h; sourceTree = "<group>"; };
+		C5AF782A3073A26900F8A1C5 /* FunctionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionFactory.h; sourceTree = "<group>"; };
 		C5CC4DAD2EF1C246007C4508 /* CommandLineArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandLineArgs.h; sourceTree = "<group>"; };
 		C5CC4DAE2EF1C246007C4508 /* DeviceInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeviceInfo.cpp; sourceTree = "<group>"; };
 		C5CC4DAF2EF1C247007C4508 /* MT19937.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MT19937.h; sourceTree = "<group>"; };
@@ -1824,6 +1826,7 @@
 		693D42B415AB7CE900B84D5C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C5AF782A3073A26900F8A1C5 /* FunctionFactory.h */,
 				C542D807305A89F3008C0186 /* DoOnce.h */,
 				C5CC4DB32EF1C247007C4508 /* AmjuClipboard.cpp */,
 				C5CC4DB02EF1C247007C4508 /* AmjuClipboard.h */,
@@ -2048,6 +2051,7 @@
 				692F34C3197A838C0040C9C3 /* RenderToTexture.h in Headers */,
 				693D41E315AB7C9100B84D5C /* GuiImage.h in Headers */,
 				693D41E515AB7C9100B84D5C /* GuiKeyboard.h in Headers */,
+				C5AF782B3073A26900F8A1C5 /* FunctionFactory.h in Headers */,
 				693D41E715AB7C9100B84D5C /* GuiListBox.h in Headers */,
 				693D41E915AB7C9100B84D5C /* GuiMenu.h in Headers */,
 				C51421232F53576B0009EB23 /* GuiDecChoose.h in Headers */,
