@@ -72,6 +72,8 @@ public:
 
   void OnControlPointsChanged() override;
 
+  Rect CalcRect() const override;
+
   void SetWidths(float w1, float w2);
 
   // Width function: specifies how the width varies with parametric t (0..1).
@@ -86,6 +88,9 @@ public:
 
   // Add a new WidthFunc to our tiny factory.
   static bool AddWidthFunc(const std::string& str, WidthFunc f);
+
+  void SetNumInterpPoints(int n) { m_numPoints = n; }
+  int GetNumInterpPoints() const { return m_numPoints; }
 
 protected:
   void MakeInBetweenPoints();

@@ -287,6 +287,32 @@ std::string GuiSpline::CreateAttribString() const
   return s;
 } 
 
+Rect GuiSpline::CalcRect() const
+{
+  Rect r = EmptyRect();
+  if (m_controlPoints.empty()) return r;
+
+  // Find min and max for X
+  auto xExtremes = std::minmax_element(
+    m_controlPoints.begin(), m_controlPoints.end(), [](const Vec2f& lhs, const Vec2f& rhs) 
+    {
+      return lhs.x < rhs.x;
+    });
+
+  // Find min and max for Y
+  auto yExtremes = std::minmax_element(
+    m_controlPoints.begin(), m_controlPoints.end(), [](const Vec2f& lhs, const Vec2f& rhs) 
+    {
+      return lhs.y < rhs.y;
+    });
+
+  // Extract corners (Axis-Aligned Bounding Box)
+  Vec2f bottomLeft = { xExtremes.first->x,  yExtremes.first->y };
+  Vec2f topRight = { xExtremes.second->x, yExtremes.second->y };
+
+  return Rect(bottomLeft, topRight);
+}
+
 void GuiSpline::MakeInBetweenPoints()
 {
   // Make in between points from control points
