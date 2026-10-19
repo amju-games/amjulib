@@ -489,6 +489,8 @@
 		71D22BFB1D65872200012DB8 /* AmjuHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71D22BF91D65872200012DB8 /* AmjuHash.cpp */; };
 		71D22BFC1D65872300012DB8 /* AmjuHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 71D22BFA1D65872200012DB8 /* AmjuHash.h */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		C50ABA2E3086083B00352249 /* precomp.h in Headers */ = {isa = PBXBuildFile; fileRef = C50ABA2C3086083B00352249 /* precomp.h */; };
+		C50ABA2F3086083B00352249 /* precomp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C50ABA2D3086083B00352249 /* precomp.cpp */; };
 		C51421182F5357330009EB23 /* lodepng.h in Headers */ = {isa = PBXBuildFile; fileRef = C51421162F5357330009EB23 /* lodepng.h */; };
 		C51421192F5357330009EB23 /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C51421172F5357330009EB23 /* lodepng.cpp */; };
 		C51421222F53576B0009EB23 /* ColourMode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C514211A2F53576A0009EB23 /* ColourMode.cpp */; };
@@ -1024,6 +1026,8 @@
 		71D22BF91D65872200012DB8 /* AmjuHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmjuHash.cpp; sourceTree = "<group>"; };
 		71D22BFA1D65872200012DB8 /* AmjuHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmjuHash.h; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C50ABA2C3086083B00352249 /* precomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = precomp.h; path = ../../../Source/precomp.h; sourceTree = "<group>"; };
+		C50ABA2D3086083B00352249 /* precomp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = precomp.cpp; path = ../../../Source/precomp.cpp; sourceTree = "<group>"; };
 		C51421162F5357330009EB23 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
 		C51421172F5357330009EB23 /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
 		C514211A2F53576A0009EB23 /* ColourMode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColourMode.cpp; sourceTree = "<group>"; };
@@ -1114,6 +1118,8 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C50ABA2D3086083B00352249 /* precomp.cpp */,
+				C50ABA2C3086083B00352249 /* precomp.h */,
 				693D406F15AB783A00B84D5C /* AmjuGL */,
 				693D407015AB796F00B84D5C /* AmjuGLOpenGL */,
 				693D407F15AB79BF00B84D5C /* Clip */,
@@ -2029,6 +2035,7 @@
 				693D419A15AB7C6800B84D5C /* DrawRect.h in Headers */,
 				693D419C15AB7C6800B84D5C /* DrawSphere.h in Headers */,
 				6901A09818869D3F00D98C04 /* IntAABBCapsule.h in Headers */,
+				C50ABA2E3086083B00352249 /* precomp.h in Headers */,
 				693D419E15AB7C6800B84D5C /* Teapot.h in Headers */,
 				693D41A915AB7C7D00B84D5C /* LoadAABB.h in Headers */,
 				C56DAD242EF2D06E00739D75 /* GuiTreeView.h in Headers */,
@@ -2269,6 +2276,7 @@
 				693D40AB15AB7A3600B84D5C /* EventTypes.cpp in Sources */,
 				693D40AD15AB7A3600B84D5C /* Mouse.cpp in Sources */,
 				692F34C5197A89EB0040C9C3 /* DepthOfField.cpp in Sources */,
+				C50ABA2F3086083B00352249 /* precomp.cpp in Sources */,
 				693D40CC15AB7A5600B84D5C /* ConfigFile.cpp in Sources */,
 				693D40CE15AB7A5600B84D5C /* CsvTokeniser.cpp in Sources */,
 				693D40D015AB7A5600B84D5C /* Directory.cpp in Sources */,
