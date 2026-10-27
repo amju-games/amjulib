@@ -401,7 +401,7 @@ void GuiElement::SetLocalPos(const Vec3f& v)
 
 void GuiElement::SetLocalPos(const Vec2f& v)
 {
-  m_localpos = Vec3f(v.x, v.y, 0);
+  m_localpos = Vec3f(v.x, v.y, m_localpos.z);
 }
 
 Vec2f GuiElement::GetLocalPos() const
