@@ -132,36 +132,31 @@ float ConfigFile::GetFloat(const std::string& key, float defaultVal) const
 {
   AMJU_CALL_STACK;
 
-  ConfigMap::const_iterator it = m_values.find(key);
-  if (it == m_values.end())
-  {
-    return defaultVal;
-  }
-  return ToFloat(it->second.c_str());
+  if (!Exists(key)) return defaultVal;
+  return ToFloat(GetValue(key));
 }
 
 int ConfigFile::GetInt(const std::string& key, int defaultVal) const
 {
   AMJU_CALL_STACK;
 
-  ConfigMap::const_iterator it = m_values.find(key);
-  if (it == m_values.end())
-  {
-    return defaultVal;
-  }
-  return ToInt(it->second.c_str());
+  if (!Exists(key)) return defaultVal;
+  return ToInt(GetValue(key));
 }
 
 bool ConfigFile::Exists(const std::string& key) const
 {
   AMJU_CALL_STACK;
 
+  return m_values.contains(key);
+  /*
   ConfigMap::const_iterator it = m_values.find(key);
   if (it == m_values.end())
   {
     return false;
   }
   return true;
+  */
 }
 
 void ConfigFile::Set(const std::string& key, const std::string& value)

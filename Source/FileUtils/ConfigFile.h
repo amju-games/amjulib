@@ -17,6 +17,7 @@ class ConfigFile : public NonCopyable, public RefCounted
 {
 public:
   ConfigFile();
+  virtual ~ConfigFile() = default;
 
   bool Load(const std::string& filename, bool useRoot = true, File::Impl impl = File::STD);
   bool Save(const std::string& filename, bool useRoot = true);
@@ -24,17 +25,19 @@ public:
   bool Load(File& f, bool useRoot = true);
 
   // Returns default if key does not exist
-  std::string GetValue(const std::string& key, const std::string& defaultVal = "") const;
+  virtual std::string GetValue(const std::string& key, const std::string& defaultVal = "") const;
   float GetFloat(const std::string& key, float defaultVal = 0) const;
   int GetInt(const std::string& key, int defaultVal = 0) const;
 
-  bool Exists(const std::string& key) const;
+  // Returns true if key exists in the map.
+  virtual bool Exists(const std::string& key) const;
 
-  void Set(const std::string& key, const std::string& value);
+  virtual void Set(const std::string& key, const std::string& value);
   void SetFloat(const std::string& key, float value);
   void SetInt(const std::string& key, int value);
 
-  void Erase(const std::string& key);
+  // Erase key/value pair for given value.
+  virtual void Erase(const std::string& key);
 
   void Clear();
 
