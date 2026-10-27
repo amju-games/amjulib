@@ -36,6 +36,9 @@ public:
 
   std::string GetText() const override { return m_text; }
 
+  // Get text string before lookup
+  const std::string& GetPreLocalisedText() const { return m_preLocalisedText; }
+
   virtual void SetJust(Just j) { m_just = j; }
 
   Font* GetFont();
@@ -65,6 +68,9 @@ public:
   void SizeToText();
   // Calc size for SizeToText, but don't actually resize
   Vec2f CalcSizeToText() const; 
+
+  // Calc height of any one line (font size * vertical spacing, etc)
+  float CalcLineHeight() const;
 
   // Get width of given text using currently set font and size.
   float GetTextWidth(const std::string& text) const;

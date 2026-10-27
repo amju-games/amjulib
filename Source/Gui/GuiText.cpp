@@ -73,8 +73,14 @@ void GuiText::TextToSpeech()
 #endif
 }
 
+float GuiTextBase::CalcLineHeight() const
+{
+  return CHAR_HEIGHT_FOR_SIZE_1 * m_textSize;
+}
+
 Vec2f GuiTextBase::CalcSizeToText() const
 {
+  float lineH = CalcLineHeight();
   if (IsMulti())
   {
     float longest = 0;
@@ -86,13 +92,13 @@ Vec2f GuiTextBase::CalcSizeToText() const
 
     Vec2f size(
       longest,
-      (float)(m_lines.size()) * CHAR_HEIGHT_FOR_SIZE_1 * m_textSize);
+      (float)(m_lines.size()) * lineH);
 
     return size;
   }
   else
   {
-    Vec2f size(GetTextWidth(m_text), CHAR_HEIGHT_FOR_SIZE_1 * m_textSize);
+    Vec2f size(GetTextWidth(m_text), lineH);
     return size;
   }
 }
