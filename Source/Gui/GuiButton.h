@@ -48,6 +48,8 @@ public:
   void SetTexture(Texture*);
   Texture* GetTexture() override;
 
+  GuiTextBase& GetGuiText() { return m_guiText; }
+
   bool IsMouseOver() const;
   bool IsPressed() const;
 
