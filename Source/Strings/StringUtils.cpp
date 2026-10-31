@@ -254,11 +254,11 @@ void Trim(std::string* ps)
   AMJU_CALL_STACK;
 
   Assert(ps);
-  while (!ps->empty() && std::isspace(ps->at(0)))
+  while (!ps->empty() && (ps->at(0) == ' ' || ps->at(0) == '\r' || ps->at(0) == '\n' ) )
   {
     *ps = ps->substr(1);
   }
-  while (!ps->empty() && std::isspace(ps->at(ps->size() - 1)))
+  while (!ps->empty() && (ps->at(ps->size() - 1) == ' ' || ps->at(ps->size() - 1) == '\r' || ps->at(ps->size() - 1) == '\n') )
   {
     *ps = ps->substr(0, ps->size() - 1);
   }
