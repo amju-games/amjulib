@@ -85,7 +85,7 @@ public:
   virtual Colour GetColour() const; // virtual to allow for colour interpolation etc
   Colour GetCombinedColour() const;
 
-  void SetSize(const Vec2f&);
+  virtual void SetSize(const Vec2f&);
   Vec2f GetSize() const;
 
   void SetScale(const Vec2f&);

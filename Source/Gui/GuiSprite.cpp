@@ -134,9 +134,9 @@ bool GuiSprite::Save(File* f)
   return false;
 }
 
-bool GuiSprite::Load(File* f)
+bool GuiSprite::LoadImageInfo(File* f)
 {
-  if (!GuiImage::Load(f))
+  if (!GuiImage::LoadImageInfo(f))
   {
     return false;
   }

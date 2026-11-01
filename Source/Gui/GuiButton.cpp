@@ -23,16 +23,39 @@
 
 namespace Amju
 {
-std::string GuiButton::s_clickFilename;
-
-const char* GuiButton::NAME = "gui-button";
-
-// I think this is a crazy way of essentially implementing
-//  "m_isFocusButton" :)
-static GuiButton* focusButton = nullptr;
-static GuiButton* cancelButton = nullptr;
-
 GuiButton::GuiButton()
+{
+  m_image = new GuiImage;
+  m_guiText = new GuiText;
+}
+
+void GuiButton::AdjustTextPos()
+{
+  // TODO This would be much simpler if GuiButtonBase was a Composite.
+  // Then we could also have layers of images, text, etc.
+  // Make sure text is positioned properly, may have been moved in code since Load
+  Vec2f pos = GetLocalPos();
+  Vec2f size = GetSize();
+  pos.x -= size.x * 0.25f;
+  m_guiText->SetLocalPos(pos);
+}
+
+void GuiButton::AdjustTextSize()
+{
+  // Button text tends to get truncated, so extend the size of the text
+//  (TODO This might be a bug in RecalcFirstLast when font size != 1)
+  Vec2f size = GetSize();
+  size.x *= 1.5f;
+  m_guiText->SetSize(size);
+}
+
+std::string GuiButtonBase::s_clickFilename;
+
+// Focus and Cancel buttons
+static GuiButtonBase* focusButton = nullptr;
+static GuiButtonBase* cancelButton = nullptr;
+
+GuiButtonBase::GuiButtonBase()
 {
   m_isMouseOver = false;
   m_isPressed = false;
@@ -41,7 +64,7 @@ GuiButton::GuiButton()
   m_onPressedDown = 0;
 }
 
-GuiButton::~GuiButton()
+GuiButtonBase::~GuiButtonBase()
 {
   // Done in Listener dtor:
   // TheEventPoller::Instance()->RemoveListener(this); 
@@ -50,17 +73,17 @@ GuiButton::~GuiButton()
   if (this == cancelButton) cancelButton = nullptr;
 }
 
-void GuiButton::SetTexture(Texture* tex) 
+void GuiButtonBase::SetTexture(Texture* tex) 
 { 
-  m_image.SetTexture(tex); 
+  m_image->SetTexture(tex); 
 }
 
-Texture* GuiButton::GetTexture()
+Texture* GuiButtonBase::GetTexture()
 {
-  return m_image.GetTexture();
+  return m_image->GetTexture();
 }
 
-bool GuiButton::IsEnabled() const
+bool GuiButtonBase::IsEnabled() const
 {
   if (!m_onPressedDown && !m_pCommand && !m_commandFunc)
   {
@@ -76,17 +99,17 @@ bool GuiButton::IsEnabled() const
   return m_isEnabled;
 }
 
-void GuiButton::SetIsEnabled(bool b)
+void GuiButtonBase::SetIsEnabled(bool b)
 {
   m_isEnabled = b;
 }
 
-bool GuiButton::IsCancelButton() const
+bool GuiButtonBase::IsCancelButton() const
 {
   return (cancelButton == this);
 }
 
-void GuiButton::SetIsCancelButton(bool isCancelButton)
+void GuiButtonBase::SetIsCancelButton(bool isCancelButton)
 {
 #ifdef ENABLE_FOCUS_BUTTON
 
@@ -102,12 +125,12 @@ void GuiButton::SetIsCancelButton(bool isCancelButton)
 #endif // ENABLE_FOCUS_BUTTON
 }
 
-bool GuiButton::IsFocusButton() const
+bool GuiButtonBase::IsFocusButton() const
 {
   return (focusButton == this);
 }
 
-void GuiButton::SetIsFocusButton(bool isFocusButton)
+void GuiButtonBase::SetIsFocusButton(bool isFocusButton)
 {
 #ifdef ENABLE_FOCUS_BUTTON
 
@@ -123,17 +146,17 @@ void GuiButton::SetIsFocusButton(bool isFocusButton)
 #endif //ENABLE_FOCUS_BUTTON
 }
 
-void GuiButton::SetShowIfFocus(bool s)
+void GuiButtonBase::SetShowIfFocus(bool s)
 {
   m_showIfFocus = s;
 }
 
-void GuiButton::OnGetFocus()
+void GuiButtonBase::OnGetFocus()
 {
   SetIsFocusButton(true);
 }
 
-void GuiButton::TextToSpeech()
+void GuiButtonBase::TextToSpeech()
 {
 #ifdef AMJU_TEXT_TO_SPEECH
   if (!m_guiText.GetText().empty())
@@ -143,12 +166,12 @@ void GuiButton::TextToSpeech()
 #endif
 }
 
-void GuiButton::SetOnPressedDownFunc(CommandFunc f)
+void GuiButtonBase::SetOnPressedDownFunc(CommandFunc f)
 {
   m_onPressedDown = f;
 }
 
-void GuiButton::OnPressedDown()
+void GuiButtonBase::OnPressedDown()
 {
   if (m_onPressedDown)
   {
@@ -156,7 +179,7 @@ void GuiButton::OnPressedDown()
   }
 }
 
-void GuiButton::ClickSound() const
+void GuiButtonBase::ClickSound() const
 { 
   if (!s_clickFilename.empty())
   {
@@ -165,29 +188,29 @@ void GuiButton::ClickSound() const
   }
 }
 
-void GuiButton::SetClickFilename(const std::string& clickFilename)
+void GuiButtonBase::SetClickFilename(const std::string& clickFilename)
 {
   s_clickFilename = clickFilename;
 }
 
-bool GuiButton::Save(File* f)
+bool GuiButtonBase::Save(File* f)
 {
   if (!GuiElement::Save(f))
   {
     return false;
   }
-  if (!m_image.SaveImageInfo(f))
+  if (!m_image->SaveImageInfo(f))
   {
     return false;
   }
-  if (!m_guiText.SaveTextInfo(f))
+  if (!m_guiText->SaveTextInfo(f))
   {
     return false;
   }
   return true;
 }
 
-bool GuiButton::Load(File* f)
+bool GuiButtonBase::Load(File* f)
 {
   if (!GuiElement::Load(f))
   {
@@ -195,49 +218,51 @@ bool GuiButton::Load(File* f)
   }
 
   // Set image size from overall size, as we don't load image size.
-  m_image.SetSize(GetSize());
-  if (!m_image.LoadImageInfo(f))
+  m_image->SetSize(GetSize());
+  if (!m_image->LoadImageInfo(f))
   {
     return false;
   }
   // Save stretched image size back into overall size
-  SetSize(m_image.GetSize());
+  SetSize(m_image->GetSize());
 
-  m_focusImage = m_image.Clone();
+  m_focusImage = m_image->Clone();
 
   // Button textures don't wrap
   // (Probably not worth worrying about)
   GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
 
-  // Button text tends to get truncated, so extend the size of the text
-//  (TODO This might be a bug in RecalcFirstLast when font size != 1)
-  Vec2f pos = GetLocalPos();
-  Vec2f size = GetSize();
-  pos.x -= size.x * 0.25f;
-  m_guiText.SetLocalPos(pos);
-  size.x *= 1.5f;
-  m_guiText.SetSize(size);
+  AdjustTextPos();
+  AdjustTextSize();
+  //Vec2f pos = GetLocalPos();
+  //Vec2f size = GetSize();
+  //pos.x -= size.x * 0.25f;
+  //m_guiText->SetLocalPos(pos);
+  //size.x *= 1.5f;
+  //m_guiText->SetSize(size);
 
   // Load text
-  if (!m_guiText.LoadTextInfo(f))
+  if (!m_guiText->LoadTextInfo(f))
   {
     return false;
   }
 
 #ifdef _DEBUG
   // For debugging, set names of member elements
-  m_guiText.SetName("text for button " + m_name + ": \"" + m_guiText.GetText() + "\"");
+  m_guiText->SetName("text for button " + m_name + ": \"" + m_guiText->GetText() + "\"");
   m_focusImage->SetName("focus image for button " + m_name);
-  m_image.SetName("image for button " + m_name);
+  m_image->SetName("image for button " + m_name);
 #endif
 
-  m_guiText.SetParent(GetParent());
+  m_guiText->SetParent(GetParent()); // s/b this, no??
+//?  m_image->SetParent(this); //GetParent());
 
   // Use text BG colour to tint the button image, but don't draw a text background, which is a
   //  solid rectangle.
-  SetButtonColour(m_guiText.GetBgCol());
-  m_guiText.SetDrawBg(false);
-  SetFocusColour(m_guiText.GetBgCol());
+  SetButtonColour(m_guiText->GetBgCol());
+  // Doesn't exist in GuiTextBase... deprecated and false anyway tho, right?
+  //m_guiText->SetDrawBg(false);
+  SetFocusColour(m_guiText->GetBgCol());
 
 #if defined(WIN32) || defined(MACOSX)
   // Check for initial mouse over
@@ -251,7 +276,7 @@ bool GuiButton::Load(File* f)
   return true;
 }
 
-void GuiButton::DrawFocus()
+void GuiButtonBase::DrawFocus()
 {
   if ((IsFocusButton() || IsCancelButton()) && m_showIfFocus)
   {
@@ -263,7 +288,7 @@ void GuiButton::DrawFocus()
       const float dt = TheTimer::Instance()->GetDt();
       t += dt;
       const float s = (sin(t * 5.0f) + 1.0f) * 0.5f;
-      const Colour fg = m_guiText.GetFgCol();
+      const Colour fg = m_guiText->GetFgCol();
       const Colour c = Interpolate(m_focusColour, fg, s);
       MultColour(c);
     }
@@ -272,7 +297,7 @@ void GuiButton::DrawFocus()
       MultColour(Colour(1, 0, 0, 1));
     }
 
-    Rect r = GetRect(&m_image);
+    Rect r = GetRect(m_image);
     const float BORDER = 0.05f; // TODO configurable
     const float bh = BORDER;
     const float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
@@ -291,7 +316,7 @@ void GuiButton::DrawFocus()
   }
 }
 
-void GuiButton::Draw()
+void GuiButtonBase::Draw()
 {
   if (!IsVisible())
   {
@@ -319,26 +344,19 @@ void GuiButton::Draw()
   MultColour(m_buttonColour);
 
   // TODO This might not work for GuiSprites
-  m_image.SetLocalPos(GetCombinedPos());
+  m_image->SetLocalPos(GetCombinedPos());
 
   // TODO Does this work with GuiSprite?
-  m_image.Draw();
+  m_image->Draw();
   
   // Get the combined colour for this button - so we can disable in IsEnabled
   m_combinedColour = AmjuGL::GetColour();
   
   PopColour();
 
-  // TODO This would be much simpler if GuiButton was a Composite.
-  // Then we could also have layers of images, text, etc.
-  // Make sure text is positioned properly, may have been moved in code since Load
-  m_guiText.SetParent(GetParent());
-  Vec2f pos = GetLocalPos();
-  Vec2f size = GetSize();
-  pos.x -= size.x * 0.25f;
-  m_guiText.SetLocalPos(pos);
+  AdjustTextPos(); //??? just do this once in load, no?
 
-  m_guiText.Draw();
+  m_guiText->Draw();
 
 #ifdef DRAW_BOUNDING_RECT
   // Draw bounding rect
@@ -355,7 +373,7 @@ void GuiButton::Draw()
   AmjuGL::PopMatrix();
 }
 
-bool GuiButton::OnCursorEvent(const CursorEvent& ce)
+bool GuiButtonBase::OnCursorEvent(const CursorEvent& ce)
 {
   if (!IsVisible() ||!IsEnabled())
   {
@@ -372,7 +390,7 @@ bool GuiButton::OnCursorEvent(const CursorEvent& ce)
   return false;
 }
 
-bool GuiButton::OnKeyEvent(const KeyEvent& ke)
+bool GuiButtonBase::OnKeyEvent(const KeyEvent& ke)
 {
   if (!IsVisible() ||!IsEnabled())
   {
@@ -396,7 +414,7 @@ bool GuiButton::OnKeyEvent(const KeyEvent& ke)
   return false;
 }
 
-bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
+bool GuiButtonBase::OnMouseButtonEvent(const MouseButtonEvent& mbe)
 {
   if (!IsVisible() ||!IsEnabled())
   {
@@ -448,7 +466,7 @@ bool GuiButton::OnMouseButtonEvent(const MouseButtonEvent& mbe)
   return false; // not handled
 }
 
-bool GuiButton::OnButtonEvent(const ButtonEvent& be)
+bool GuiButtonBase::OnButtonEvent(const ButtonEvent& be)
 {
   if (!IsVisible() ||!IsEnabled())
   {
@@ -482,27 +500,27 @@ bool GuiButton::OnButtonEvent(const ButtonEvent& be)
   return false; // not handled
 }
 
-void GuiButton::SetText(const std::string& text)
+void GuiButtonBase::SetText(const std::string& text)
 {
-  m_guiText.SetText(text);
+  m_guiText->SetText(text);
 }
 
-void GuiButton::SetTextColour(const Colour& col)
+void GuiButtonBase::SetTextColour(const Colour& col)
 {
-  m_guiText.SetFgCol(col);
+  m_guiText->SetFgCol(col);
 }
 
-void GuiButton::SetButtonColour(const Colour& col)
+void GuiButtonBase::SetButtonColour(const Colour& col)
 {
   m_buttonColour = col;
 }
 
-bool GuiButton::IsMouseOver() const
+bool GuiButtonBase::IsMouseOver() const
 {
   return m_isMouseOver;
 }
 
-void GuiButton::SetIsMouseOver(bool m)
+void GuiButtonBase::SetIsMouseOver(bool m)
 {
   if (m && !m_isMouseOver)
   {
@@ -519,28 +537,33 @@ void GuiButton::SetIsMouseOver(bool m)
   */
 }
 
-bool GuiButton::IsPressed() const
+bool GuiButtonBase::IsPressed() const
 {
   return m_isPressed;
 }
 
-const Colour& GuiButton::GetTextColour() const
+const Colour& GuiButtonBase::GetTextColour() const
 {
-  return m_guiText.GetFgCol();
+  return m_guiText->GetFgCol();
 }
 
-const Colour& GuiButton::GetButtonColour() const
+const Colour& GuiButtonBase::GetButtonColour() const
 {
   return m_buttonColour;
 }
 
-void GuiButton::SetFocusColour(const Colour& col)
+void GuiButtonBase::SetFocusColour(const Colour& col)
 {
   m_focusColour = col;
 }
 
-const Colour& GuiButton::GetFocusColour() const
+const Colour& GuiButtonBase::GetFocusColour() const
 {
   return m_focusColour;
+}
+
+WeakPtr<GuiTextBase> GuiButtonBase::GetGuiText()
+{
+  return m_guiText;
 }
 }

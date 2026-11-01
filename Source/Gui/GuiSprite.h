@@ -22,9 +22,11 @@ public:
   static const char* NAME;
 
   void Draw() override;
-  bool Load(File*) override;
   bool Save(File*) override;
   void Animate(float animValue) override;
+
+  // Within Load, load just the image info.
+  bool LoadImageInfo(File*) override;
 
   // So we can set up sprites programmatically
   void SetCell(int cell);

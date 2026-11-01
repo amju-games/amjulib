@@ -12,16 +12,11 @@
 
 namespace Amju
 {
-class GuiButton : public GuiElement
+class GuiButtonBase : public GuiElement
 {
 public:
-  static const char* NAME;
-  std::string GetTypeName() const override { return NAME; }
-
-  GuiButton* Clone() override { return new GuiButton(*this); }
-
-  GuiButton();
-  ~GuiButton();
+  GuiButtonBase();
+  ~GuiButtonBase();
 
   // GuiElement overrides
   bool Load(File*) override; 
@@ -48,7 +43,7 @@ public:
   void SetTexture(Texture*);
   Texture* GetTexture() override;
 
-  GuiTextBase& GetGuiText() { return m_guiText; }
+  WeakPtr<GuiTextBase> GetGuiText();
 
   bool IsMouseOver() const;
   bool IsPressed() const;
@@ -67,14 +62,17 @@ public:
   static void SetClickFilename(const std::string& clickFilename);
 
 protected:
+  virtual void AdjustTextPos() {}
+  virtual void AdjustTextSize() {}
+
   void DrawFocus();
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
   void OnPressedDown();
 
 protected:
-  GuiImage m_image; // TODO make RCPtr<GuiImage> so we can swap in a GuiSprite
-  GuiText m_guiText;
+  RCPtr<GuiImage> m_image; //  RCPtr<GuiImage> so we can swap in a GuiSprite
+  RCPtr<GuiTextBase> m_guiText; // And RCPtr<GuiTextBase> so we can swap in a Text2
   Colour m_buttonColour;
   Colour m_focusColour;
 
@@ -90,6 +88,19 @@ protected:
   static std::string s_clickFilename;
   
   Colour m_combinedColour; // combined colour of this button and all ancestors
+};
+
+class GuiButton : public GuiButtonBase
+{
+public:
+  static constexpr const char* NAME = "gui-button";
+  std::string GetTypeName() const override { return NAME; }
+
+  GuiButton();
+  GuiButton* Clone() override { return new GuiButton(*this); }
+
+  void AdjustTextPos() override;
+  void AdjustTextSize() override;
 };
 }
 
