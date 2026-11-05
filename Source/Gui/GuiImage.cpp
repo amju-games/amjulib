@@ -141,6 +141,7 @@ bool GuiImage::LoadImageInfo(File* f)
   m_texture = (Texture*)TheResourceManager::Instance()->GetRes(m_textureName);
   if (!m_texture)
   {
+    f->ReportError("Bad image name?: \"" + m_textureName + "\"");
     return false;
   }
 

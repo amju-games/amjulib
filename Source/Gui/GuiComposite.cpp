@@ -228,7 +228,6 @@ bool GuiComposite::Load(File* f)
   if (!f->GetDataLine(&name))
   {
     f->ReportError("Gui comp: expected name");
-    Assert(0);
     return false;
   }
   SetName(name);
@@ -248,7 +247,6 @@ bool GuiComposite::LoadChildren(File* f)
   if (!f->GetInteger(&num))
   {
     f->ReportError("Expected num children for GUI composite.");
-    Assert(0);
     return false;
   }
   m_children.reserve(num);
@@ -268,14 +266,12 @@ bool GuiComposite::LoadOneChild(File* f)
   if (!f->GetDataLine(&s))
   {
     f->ReportError("GUI composite: LoadOneChild: Expected more data, but have reached end of file.");
-    Assert(0);
     return false;
   }
   PGuiElement e = TheGuiFactory::Instance()->Create(s);
   if (!e)
   {
     f->ReportError("Failed to create GUI element of type " + s);
-    Assert(0);
     return false;
   }
   Assert(e);
