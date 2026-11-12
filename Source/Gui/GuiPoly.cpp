@@ -44,6 +44,11 @@ Texture* IGuiPoly::GetTexture()
   return m_texture;
 }
 
+void IGuiPoly::SetTexture(RCPtr<Texture> tex)
+{
+  m_texture = tex;
+}
+
 bool IGuiPoly::IsLoop() const 
 { 
   return m_isLoop; 

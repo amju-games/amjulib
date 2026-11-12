@@ -56,7 +56,10 @@ public:
   void AddToTrilist(AmjuGL::Tris& tris) override;
   Texture* GetTexture() override;
 
-  // Texture for all poly outlines is the same. 
+  // Optionally, set texture per-poly.
+  void SetTexture(RCPtr<Texture> tex);
+
+  // Texture for all poly outlines is the same by default. 
   // Set the resource name for the texture, which we then load
   //  for each poly.
   static void SetPolyOutlineTextureName(const std::string& resName);
@@ -94,6 +97,7 @@ protected:
   static std::string s_outlineTextureName;
   RCPtr<Texture> m_texture; // every poly has pointer to same texture, which 
     // lets us trash all the resources and reload ok.
+  // Or override texture with SetTexture().
 };
 
 class GuiPoly : public IGuiPoly
