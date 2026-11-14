@@ -61,10 +61,10 @@ public:
   void SetOnPressedDownFunc(CommandFunc f);
   static void SetClickFilename(const std::string& clickFilename);
 
-protected:
   virtual void AdjustTextPos() {}
   virtual void AdjustTextSize() {}
 
+protected:
   void DrawFocus();
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
