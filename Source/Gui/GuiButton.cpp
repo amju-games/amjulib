@@ -226,8 +226,6 @@ bool GuiButtonBase::Load(File* f)
   // Save stretched image size back into overall size
   SetSize(m_image->GetSize());
 
-  m_focusImage = m_image->Clone();
-
   // Button textures don't wrap
   // (Probably not worth worrying about)
   GetTexture()->SetWrapMode(AmjuGL::AMJU_TEXTURE_CLAMP);
@@ -247,13 +245,6 @@ bool GuiButtonBase::Load(File* f)
     return false;
   }
 
-#ifdef _DEBUG
-  // For debugging, set names of member elements
-  m_guiText->SetName("text for button " + m_name + ": \"" + m_guiText->GetText() + "\"");
-  m_focusImage->SetName("focus image for button " + m_name);
-  m_image->SetName("image for button " + m_name);
-#endif
-
   m_guiText->SetParent(GetParent()); // s/b this, no??
 //?  m_image->SetParent(this); //GetParent());
 
@@ -262,6 +253,10 @@ bool GuiButtonBase::Load(File* f)
   SetButtonColour(m_guiText->GetBgCol());
   // Doesn't exist in GuiTextBase... deprecated and false anyway tho, right?
   //m_guiText->SetDrawBg(false);
+
+  // Set up focus image, using standard image as a template.
+  InitFocusImage();
+
   SetFocusColour(m_guiText->GetBgCol());
 
 #if defined(WIN32) || defined(MACOSX)
@@ -271,6 +266,12 @@ bool GuiButtonBase::Load(File* f)
   {
     SetIsMouseOver(true);
   }
+#endif
+
+#ifdef _DEBUG
+  // For debugging, set names of member elements
+  m_guiText->SetName("text for button " + m_name + ": \"" + m_guiText->GetText() + "\"");
+  m_image->SetName("image for button " + m_name);
 #endif
     
   return true;
@@ -297,23 +298,46 @@ void GuiButtonBase::DrawFocus()
       MultColour(Colour(1, 0, 0, 1));
     }
 
-    Rect r = GetRect(m_image);
-    const float BORDER = 0.05f; // TODO configurable
-    const float bh = BORDER;
-    const float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
-    const float xmin = r.GetMin(0) - bw;
-    const float xmax = r.GetMax(0) + bw;
-    const float ymin = r.GetMin(1) - bh;
-    const float ymax = r.GetMax(1) + bh;
-    r.Set(xmin, xmax, ymin, ymax);
-
-    m_focusImage->SetParent(nullptr);
-    m_focusImage->SetLocalPos(Vec2f(xmin, ymax));
-    m_focusImage->SetSize(Vec2f(xmax - xmin, ymax - ymin));
+    SetFocusImagePosSize();
     m_focusImage->Draw();
 
     PopColour();
   }
+}
+
+void GuiButtonBase::SetFocusImagePosSize()
+{
+  // Set up focus image size and position.
+  // For an image: increase size, and move so that larger image
+  //  is centred on the button image.
+  // This would work for a sprite cell too, but for a patch, we 
+  //  would want to set the corner sizes.
+
+  Rect r = GetRect(m_image);
+  const float BORDER = 0.05f; // TODO make this configurable
+  const float bh = BORDER;
+  // Use aspect ratio to get a uniform-looking size increase
+  const float bw = BORDER * static_cast<float>(Screen::Y()) / static_cast<float>(Screen::X());
+  const float xmin = r.GetMin(0) - bw;
+  const float xmax = r.GetMax(0) + bw;
+  const float ymin = r.GetMin(1) - bh;
+  const float ymax = r.GetMax(1) + bh;
+  r.Set(xmin, xmax, ymin, ymax);
+
+  m_focusImage->SetLocalPos(Vec2f(xmin, ymax));
+  m_focusImage->SetSize(Vec2f(xmax - xmin, ymax - ymin));
+}
+
+void GuiButtonBase::InitFocusImage()
+{
+  m_focusImage = m_image->Clone();
+
+  m_focusImage->SetParent(nullptr);
+
+#ifdef _DEBUG
+  // For debugging, set name
+  m_focusImage->SetName("focus image for button " + m_name);
+#endif
 }
 
 void GuiButtonBase::Draw()

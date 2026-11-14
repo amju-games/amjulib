@@ -65,6 +65,12 @@ public:
   virtual void AdjustTextSize() {}
 
 protected:
+  // Set up focus image using standard image as a template.
+  virtual void InitFocusImage();
+ 
+  // Set focus image pos/size before draw
+  virtual void SetFocusImagePosSize();
+
   void DrawFocus();
   void ClickSound() const; // TODO in GuiElement ?
   void SetIsMouseOver(bool);
