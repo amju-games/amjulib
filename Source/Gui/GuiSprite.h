@@ -21,6 +21,8 @@ class GuiSprite : public GuiImage, public Batched
 public:
   static const char* NAME;
 
+  GuiSprite* Clone() override { return new GuiSprite(*this); }
+
   void Draw() override;
   bool Save(File*) override;
   void Animate(float animValue) override;
