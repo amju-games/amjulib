@@ -38,20 +38,9 @@ void GuiText2::BuildTriList()
 
   const Vec2f& pos = GetCombinedPos();
 
-  // Adjust Y to vertically centre
   Vec2f p(pos);
-  const Vec2f& size = GetSize() * GetCombinedScale();
-  int numLines = 1;
-  if (m_isMulti) numLines = static_cast<int>(m_lines.size());
-  // pos.y is bottom?
-  // +ve Y is UP
-  p.y += 
-    //size.y * .5f +
-    static_cast<float>(numLines) * .5f * CalcLineHeight();
-
   const float oldSize = m_font->GetSize();
   m_font->SetSize(m_textSize * oldSize);
-  std::string str = m_text; // split for multi-line
 
   if (m_isMulti)
   {

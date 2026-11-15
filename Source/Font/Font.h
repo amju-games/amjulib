@@ -26,7 +26,11 @@ public:
   // Load font data from a file. 
   // I.e. point size, texture file names, etc.
   virtual bool Load(File*);
-   
+  
+  // Get a line of text, parse it for setting attributes on this font.
+  // Better than having each new attribute as a separate line, right?
+  bool LoadExtraInfo(File*);
+
   // Get "point size" of font (it's a relative size rather than an
   //  absolute point size) 
   float GetSize() const;
@@ -46,6 +50,9 @@ public:
   void BindTexture();
 
   PTexture GetTexture();
+
+  // Get the line spacing scale factor, set when we load the font.
+  float GetYSpacing() const { return m_ySpacing; }
  
 protected:
   std::string m_name;
@@ -58,6 +65,7 @@ protected:
   //  character font, or 32 if the font starts at space.
   int m_startChar = 0;
   float m_yOffset = 0; // position adjustment in y so BM font matches grid based font
+  float m_ySpacing = 1.f; // scales spacing between lines
 };
 
 typedef RCPtr<Font> PFont;

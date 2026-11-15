@@ -183,10 +183,48 @@ bool Font::Load(File* pf)
     m_charWidths[code] = width;
   }
 
+  if (!LoadExtraInfo(pf)) return false;
+
 #ifdef FONT_DEBUG
 std::cout << "FONT: Successfully loaded " << m_name.c_str() << "\n";
 #endif
 
+  return true;
+}
+
+bool Font::LoadExtraInfo(File* f)
+{
+  // Load one data line, parse for new attributes.
+  // If there is no line, that's ok, it means no attribs set.
+  std::string line;
+  if (!f->GetDataLine(&line)) return true;
+
+  Strings strs = Split(line, ',');
+
+  // Optional flags and attributes 
+  int size = static_cast<int>(strs.size());
+  for (int i = 0; i < size; i++)
+  {
+    std::string s = strs[i];
+    Trim(&s);
+    // Each attrib can be a single token or a pair of strings split by '='
+    auto attrib = Split(s, '=');
+    // TODO refactor as this gets more interesting.
+    bool ok = true;
+    if (attrib.size() == 2)
+    {
+      if (attrib[0] == "spY")
+      {
+        m_ySpacing = ToFloat(attrib[1]);
+        if (m_ySpacing == 0) ok = false;
+      }
+    }
+    if (!ok)
+    {
+      f->ReportError("Unexpected font attrib: " + s);
+      return false;
+    }
+  }
   return true;
 }
 

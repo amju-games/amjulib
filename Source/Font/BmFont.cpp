@@ -349,6 +349,9 @@ bool BmFont::Load(File* f)
     return false;
   }
   bm->SetGlyphFatness(fatness);
+
+  // Extra info: line spacing, and more in future.
+  if (!LoadExtraInfo(f)) return false;
   
   return true;
 }

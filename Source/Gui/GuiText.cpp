@@ -76,13 +76,11 @@ void GuiText::TextToSpeech()
 float GuiTextBase::CalcLineHeight() const
 {
   // m_spacingY: scales gaps between lines.
-  return CHAR_HEIGHT_FOR_SIZE_1 * m_textSize * 
-    m_spacingY;
-
-  // TODO 
   // Font has the same kind of attribute, so we can specify once for
   //  the font, then override for individual text.
-  //   *  GetFont()->GetVerticalSpacing();
+  return CHAR_HEIGHT_FOR_SIZE_1 * m_textSize *
+    m_spacingY *
+    m_font->GetYSpacing();
 }
 
 Vec2f GuiTextBase::CalcSizeToText() const
