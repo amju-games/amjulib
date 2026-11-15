@@ -41,7 +41,10 @@ void Game::SetUpdateCopy(bool uc)
 
 void Game::PauseGame()
 {
-  GetState()->OnPauseGame();
+  if (m_currentState) // avoid Assert in GetState
+  {
+    m_currentState->OnPauseGame();
+  }
 
   if (m_pauseState)
   {
