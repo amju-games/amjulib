@@ -114,6 +114,7 @@ protected:
   Colour m_fgCol; // foreground colour, i.e. colour of the text
   Colour m_bgCol; // background colour
   float m_scaleX = 1.f; // horizontal squish factor
+  float m_spacingY = 1.f; // scales spacing between lines
 };
  
 class GuiText : public GuiTextBase
@@ -177,6 +178,9 @@ protected:
   void DrawMultiLine(const Colour& fg, const Colour& bg);
 
   void PrintLine(const std::string&, float x, float y);
+
+  float CalcYToCentreVerticallySingleLine();
+  float CalcYToCentreVerticallyMultiLine();
 
 protected:
   typedef std::vector<RCPtr<TriList> > TriLists;

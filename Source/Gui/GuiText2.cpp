@@ -38,22 +38,32 @@ void GuiText2::BuildTriList()
 
   const Vec2f& pos = GetCombinedPos();
 
+  // Adjust Y to vertically centre
+  Vec2f p(pos);
+  const Vec2f& size = GetSize() * GetCombinedScale();
+  int numLines = 1;
+  if (m_isMulti) numLines = static_cast<int>(m_lines.size());
+  // pos.y is bottom?
+  // +ve Y is UP
+  p.y += 
+    //size.y * .5f +
+    static_cast<float>(numLines) * .5f * CalcLineHeight();
+
   const float oldSize = m_font->GetSize();
   m_font->SetSize(m_textSize * oldSize);
   std::string str = m_text; // split for multi-line
 
   if (m_isMulti)
   {
-    Vec2f p(pos);
     for (const auto& s : m_lines)
     {
       BuildTriListForLine(s, p);
-      p.y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1; // +ve Y is UP
+      p.y -= CalcLineHeight(); // +ve Y is UP
     }
   }
   else
   {
-    BuildTriListForLine(m_text, pos);
+    BuildTriListForLine(m_text, p);
   }
 
   m_font->SetSize(oldSize);
@@ -80,7 +90,7 @@ void GuiText2::BuildTriListForLine(const std::string& str, const Vec2f& pos)
     break;
   }
 
-  auto tris = m_font->MakeTriList(x, pos.y, str.c_str(), 1.f);
+  auto tris = m_font->MakeTriList(x, pos.y, str.c_str(), m_scaleX);
   for (auto& t : tris)
   {
     t.SetColour(m_combinedColour);
@@ -192,7 +202,8 @@ void GuiText2::AddToTrilist(AmjuGL::Tris& tris)
 
 float GuiText2::GetTextWidth(const std::string& text) const
 {
-  const float textWidth = const_cast<GuiText2*>(this)->GetFont()->GetTextWidth(text);
+  float textWidth = const_cast<GuiText2*>(this)->GetFont()->GetTextWidth(text);
+  textWidth *= m_scaleX;
   return textWidth;
 }
 }

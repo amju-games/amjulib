@@ -75,7 +75,14 @@ void GuiText::TextToSpeech()
 
 float GuiTextBase::CalcLineHeight() const
 {
-  return CHAR_HEIGHT_FOR_SIZE_1 * m_textSize;
+  // m_spacingY: scales gaps between lines.
+  return CHAR_HEIGHT_FOR_SIZE_1 * m_textSize * 
+    m_spacingY;
+
+  // TODO 
+  // Font has the same kind of attribute, so we can specify once for
+  //  the font, then override for individual text.
+  //   *  GetFont()->GetVerticalSpacing();
 }
 
 Vec2f GuiTextBase::CalcSizeToText() const
@@ -239,6 +246,16 @@ void GuiText::ReallyDraw()
   font->SetSize(oldSize);
 }
 
+float GuiText::CalcYToCentreVerticallyMultiLine()
+{
+  const Vec2f& pos = GetCombinedPos();
+  const int lines = static_cast<int>(m_lines.size());
+  float y = pos.y - CalcLineHeight();
+  float yoff = GetSize().y - lines * CalcLineHeight();
+  y -= yoff * 0.5f;
+  return y;
+}
+
 void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
 {
   int lines = static_cast<int>(m_lines.size());
@@ -254,13 +271,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
   
   Vec2f pos = GetCombinedPos();
 
-  float y = pos.y -m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
-
-  if (true /* vertically centred */)
-  {
-    float yoff = GetSize().y - lines * m_textSize * CHAR_HEIGHT_FOR_SIZE_1;
-    y -= yoff * 0.5f;
-  }
+  float y = CalcYToCentreVerticallyMultiLine();
 
   // The extra fudge factor here is so we don't discard the last line
   //  when it fits ok, because it's a borderline case.
@@ -297,7 +308,7 @@ void GuiText::DrawMultiLine(const Colour& fg, const Colour& bg)
     AmjuGL::Draw(m_triLists[i]);
     AmjuGL::PopMatrix();
 
-    y -= m_textSize * CHAR_HEIGHT_FOR_SIZE_1;  
+    y -= CalcLineHeight();
     // TODO Make text a window so lines will be clipped
     if (y < minY)
     {
@@ -321,6 +332,12 @@ void GuiText::RecalcFirstLast()
   }
 }
 
+float GuiText::CalcYToCentreVerticallySingleLine()
+{
+  const Vec2f& pos = GetCombinedPos();
+  return pos.y - GetSize().y * 0.5f - CalcLineHeight() * 0.5f;
+}
+
 void GuiText::DrawSingleLine(
   bool selected, int first, int last, const Colour& fg, const Colour& bg)
 {
@@ -329,9 +346,8 @@ void GuiText::DrawSingleLine(
   std::string str = m_text.substr(first, last - first);
   //Trim(&str); ?
 
-  Vec2f pos = GetCombinedPos();
   // Centre the text vertically
-  float y = pos.y - GetSize().y * 0.5f - m_textSize * 0.5f * CHAR_HEIGHT_FOR_SIZE_1;
+  float y = CalcYToCentreVerticallySingleLine();
 
   float x = 0; // text x pos
   float xmin = 0; // bounding rect min and max x
@@ -359,21 +375,6 @@ void GuiText::DrawSingleLine(
     xmax = x + w * GetFontSize();
     break;
   }
-
-/*
-  // TODO Isn't this already done in ReallyDraw() ?
-  if (m_drawBg)
-  {
-    PushColour();
-    AmjuGL::SetColour(bg);
-    AmjuGL::Disable(AmjuGL::AMJU_TEXTURE_2D);
-    Rect r; 
-    r.Set(xmin, xmax, y, y + CHAR_HEIGHT_FOR_SIZE_1 * GetFontSize()); // TODO
-    DrawSolidRect(r);
-    AmjuGL::Enable(AmjuGL::AMJU_TEXTURE_2D);
-    PopColour();
-  }
-*/
 
   if (m_charTime > 0)
   {
@@ -700,7 +701,8 @@ bool GuiTextBase::HandleAttrib(const std::string& s)
   return false;
 }
 
-bool GuiTextBase::HandleAttrib(const std::string& key, const std::string& value)
+bool GuiTextBase::HandleAttrib(
+  const std::string& key, const std::string& value)
 {
   if (key == "bgcol")
   {
@@ -728,6 +730,17 @@ bool GuiTextBase::HandleAttrib(const std::string& key, const std::string& value)
       return false;
     }
   }
+  else if (key == "sx")
+  {
+    m_scaleX = ToFloat(value);
+    return true;
+  }
+  else if (key == "spY")
+  {
+    m_spacingY = ToFloat(value);
+    return true;
+  }
+
   return false;
 }
 
@@ -759,11 +772,6 @@ bool GuiText::HandleAttrib(const std::string& key, const std::string& value)
     {
       return false;
     }
-  }
-  else if (key == "sx")
-  {
-    m_scaleX = ToFloat(value);
-    return true;
   }
   else if (key == "reveal")
   {
